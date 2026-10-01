@@ -1,0 +1,96 @@
+[
+  {
+    "variant": "Size=xl, Color=Brand, Theme=Light circle",
+    "instanceId": "1102:5346",
+    "componentId": "1027:7111",
+    "size": {
+      "x": 28,
+      "y": 28
+    },
+    "overrides": [
+      {
+        "id": "1102:5346",
+        "overriddenFields": [
+          "height",
+          "preserveRatio",
+          "width"
+        ]
+      },
+      {
+        "id": "I1102:5346;1027:6187",
+        "overriddenFields": [
+          "strokeWeight",
+          "strokes"
+        ]
+      }
+    ],
+    "vector": {
+      "id": "I1102:5346;1027:6187",
+      "name": "Icon",
+      "size": {
+        "x": 21,
+        "y": 23.33333396911621
+      },
+      "strokeWeight": 2.3333332538604736,
+      "strokes": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0.49640899896621704,
+            "g": 0.33841174840927124,
+            "b": 0.849823534488678,
+            "a": 1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "variant": "Size=xs, Color=Brand, Theme=Light circle",
+    "instanceId": "1102:5352",
+    "componentId": "1027:7111",
+    "size": {
+      "x": 12,
+      "y": 12
+    },
+    "overrides": [
+      {
+        "id": "1102:5352",
+        "overriddenFields": [
+          "height",
+          "preserveRatio",
+          "width"
+        ]
+      },
+      {
+        "id": "I1102:5352;1027:6187",
+        "overriddenFields": [
+          "strokeWeight",
+          "strokes"
+        ]
+      }
+    ],
+    "vector": {
+      "id": "I1102:5352;1027:6187",
+      "name": "Icon",
+      "size": {
+        "x": 9,
+        "y": 10
+      },
+      "strokeWeight": 1,
+      "strokes": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0.49640899896621704,
+            "g": 0.33841174840927124,
+            "b": 0.849823534488678,
+            "a": 1
+          }
+        }
+      ]
+    }
+  }
+]

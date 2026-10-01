@@ -449,6 +449,13 @@ reg("shape", "stroked-paths", [
   "shape.strokePath.viewport.y",
 ]);
 
+reg("shape", "native-lines", [
+  "shape.line", "shape.line.length", "shape.line.transform", "shape.line.cap", "shape.line.align",
+  "shape.line.source", "shape.line.source.nodeId", "shape.line.source.parentId",
+  "shape.line.observedSources", "shape.line.observedSources.nodeId", "shape.line.observedSources.parentId",
+  "shape.line.observedSources.variantName", "shape.line.observedSources.transform",
+]);
+
 // --- Composition -----------------------------------------------------------
 reg("composition", "slots", [
   "part.slot",

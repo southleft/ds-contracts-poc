@@ -1,4 +1,4 @@
-/** Original open centerline geometry, never an outlined stroke silhouette.
+/** Original centerline centerline geometry, never an outlined stroke silhouette.
  * The viewport is the captured SCALE/SCALE parent basis. Painting in that
  * coordinate system avoids CSS layout quantization of fractional path boxes. */
 export interface StrokedPath {
@@ -24,7 +24,7 @@ export function strokedPathDimensionOk(value: unknown): boolean {
 export function strokedPathIssue(data: string): string | undefined {
   if (typeof data !== 'string' || data.length === 0 || data.length > 65536)
     return 'stroked-path-size';
-  const token = /[MLCQ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  const token = /[MLCQHVZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
   let at = 0;
   const tokens: Array<string | number> = [];
   while (at < data.length) {
@@ -39,7 +39,7 @@ export function strokedPathIssue(data: string): string | undefined {
     const match = token.exec(data);
     if (!match) return 'stroked-path-command-or-character';
     const value = match[0];
-    if (/^[MLCQ]$/.test(value)) tokens.push(value);
+    if (/^[MLCQHVZ]$/.test(value)) tokens.push(value);
     else {
       const number = Number(value);
       if (!Number.isFinite(number) || Math.abs(number) > 1e6) return 'stroked-path-coordinate';
@@ -48,20 +48,27 @@ export function strokedPathIssue(data: string): string | undefined {
     if (tokens.length > 16384) return 'stroked-path-complexity';
     at = token.lastIndex;
   }
-  let moved = false, drawn = false;
+  let moved = false, drawn = false, subpathDrawn = false;
   for (let i = 0; i < tokens.length;) {
     const command = tokens[i++];
     if (typeof command !== 'string') return 'stroked-path-missing-command';
     if (command === 'M') {
-      if (moved) return 'stroked-path-multiple-subpaths';
-      moved = true;
+      if (moved && !subpathDrawn) return 'stroked-path-empty-subpath';
+      moved = true; subpathDrawn = false;
     } else if (!moved) return 'stroked-path-missing-move';
+    if (command === 'Z') {
+      if (typeof tokens[i] === 'number') return 'stroked-path-arity';
+      if (!subpathDrawn) return 'stroked-path-empty';
+      moved = false;
+      continue;
+    }
     const start = i;
     while (i < tokens.length && typeof tokens[i] === 'number') i++;
-    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : command === 'H' || command === 'V' ? 1 : 2;
     if (count === 0 || count % arity !== 0) return 'stroked-path-arity';
-    if (command !== 'M' || count > 2) drawn = true;
+    if (command !== 'M' || count > 2) { drawn = true; subpathDrawn = true; }
   }
+  if (moved && !subpathDrawn) return 'stroked-path-empty-subpath';
   return drawn ? undefined : 'stroked-path-empty';
 }
 
@@ -88,8 +95,8 @@ export function strokedPathGeometryIssue(shape: { width: number; height: number;
  * Called only after the grammar check; the declared box must match the
  * centerline in Figma's local origin, allowing only float32 representation. */
 function strokedPathBounds(data: string) {
-  const tokens = data.match(/[MLCQ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!;
-  let x = 0, y = 0, minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  const tokens = data.match(/[MLCQHVZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!;
+  let x = 0, y = 0, startX = 0, startY = 0, minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   const include = (px: number, py: number) => { minX = Math.min(minX, px); minY = Math.min(minY, py); maxX = Math.max(maxX, px); maxY = Math.max(maxY, py); };
   const extrema = (p: number[]) => {
     if (p.length === 3) {
@@ -111,14 +118,19 @@ function strokedPathBounds(data: string) {
   };
   for (let i = 0; i < tokens.length;) {
     const command = tokens[i++]!;
-    const arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
-    while (i < tokens.length && !/^[MLCQ]$/.test(tokens[i]!)) {
+    if (command === 'Z') { x = startX; y = startY; include(x, y); continue; }
+    const arity = command === 'C' ? 6 : command === 'Q' ? 4 : command === 'H' || command === 'V' ? 1 : 2;
+    let firstMove = command === 'M';
+    while (i < tokens.length && !/^[MLCQHVZ]$/.test(tokens[i]!)) {
       const args = tokens.slice(i, i += arity).map(Number);
       if (command === 'C' || command === 'Q') {
         const xs = [x, ...args.filter((_, k) => k % 2 === 0)], ys = [y, ...args.filter((_, k) => k % 2 === 1)];
         for (const t of [...extrema(xs), ...extrema(ys)]) if (t > 0 && t < 1) include(value(xs, t), value(ys, t));
       }
-      x = args[args.length - 2]!; y = args[args.length - 1]!; include(x, y);
+      if (command === 'H') x = args[0]!;
+      else if (command === 'V') y = args[0]!;
+      else { x = args[args.length - 2]!; y = args[args.length - 1]!; }
+      if (firstMove) { startX = x; startY = y; firstMove = false; } include(x, y);
     }
   }
   return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };

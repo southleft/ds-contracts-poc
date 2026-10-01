@@ -1,3 +1,5 @@
+import {nativeLineIssue, filledPathIssue} from '../scripts/contract-schema.js';
+import { allocateFigmaPropertyNames } from './figma-names.js';
 import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
 import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {observedInstanceGroups, observedInstanceIdentity, staticInstanceContent} from './observed-instance-content.js';
@@ -481,8 +483,15 @@ class EveryIcon extends Map<string, string> {
   }
 }
 
-function refereeViolations(contract: Contract, stubs: readonly Contract[]): string[] | null {
+function refereeViolations(contract: Contract, stubs: readonly Contract[], imported?: ReadonlyMap<string, MinimalChildContract>): string[] | null {
   const scope = new Map<string, Contract>([[contract.id, contract], ...stubs.map((s) => [s.id, s] as const)]);
+  // Full imported contracts supply the dependencies their slot defaults reference.
+  // Minimal caller slices and mismatched IDs cannot satisfy this scope.
+  for (const [id, candidate] of imported ?? []) {
+    if (scope.has(id)) continue;
+    const parsed = ContractSchema.safeParse(candidate);
+    if (parsed.success && parsed.data.id === id) scope.set(id, parsed.data);
+  }
   let selfContained = true;
   const walk = (node: unknown): void => {
     if (node === null || typeof node !== 'object') return;
@@ -2324,6 +2333,9 @@ interface Ctx {
    *  see registerTextProp. Empty for a set this pipeline did not draw, which
    *  is exactly when canonicalising is the right answer. */
   propNames?: Record<string, string>;
+  /** Source spelling allocation, separate from authored pipeline stamps. */
+  allocatedPropNames: Record<string, string>;
+  instanceInputNames: ReadonlyMap<string, Record<string, string>>;
   mint?: MintCapture;
   /** Exact fails closed on text-style identity gaps; reviewable notes. */
   projectionMode: 'exact' | 'reviewable-inversion';
@@ -3088,6 +3100,7 @@ const centeredOutlineOffset = (n: DumpNode): number =>
     : n.strokeAlign === 'CENTER' ? -n.strokeWeight / 2 : -n.strokeWeight;
 
 function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
+  if (m.occ.every(o => o.node.shape?.kind === 'line')) return 'border'; // native line paint, not a border box
   const aligns = drawnStrokeAligns(m);
   // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
@@ -4363,7 +4376,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     (ctx.presenceVariants ?? ctx.totalVariants).some((v) => axisValuesOf(v)[axis.property] === value);
   const withShape = m.occ.filter((o) => o.node.shape !== undefined);
   if (withShape.length === 0) return;
-  if (withShape.some((o) => ['path', 'stroked-path'].includes(o.node.shape!.kind)) && withShape.length !== m.occ.length) {
+  if (withShape.some((o) => ['path', 'stroked-path', 'line'].includes(o.node.shape!.kind)) && withShape.length !== m.occ.length) {
     ctx.notes.push(`${where}: ${withShape.some(o => o.node.shape!.kind === 'stroked-path') ? 'stroked-path' : 'filled-path'}-incomplete-capture — geometry not carried for partially captured paths`);
     return;
   }
@@ -4390,6 +4403,24 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   const first = shapes[0].sh;
+  if (first.kind === 'line') {
+    const signature = (sh: typeof first) => sh.line && JSON.stringify({ length: sh.line.length,
+      basis: sh.line.transform.map(row => row.slice(0,2)), cap: sh.line.cap, align: sh.line.align });
+    if (shapes.some(s => !s.sh.line || nativeLineIssue(s.sh.line) || s.sh.height !== 0 || s.sh.width !== s.sh.line.length) ||
+        new Set(shapes.map(s => signature(s.sh))).size !== 1) {
+      ctx.notes.push(`${where}: native-line-incomplete-or-varying-geometry — original capture retained in dump; no geometry frozen across incompatible variants`);
+      return;
+    }
+    if (m.occ.some(o => o.node.shape!.line!.cap !== 'NONE' && typeof o.node.strokeWeight === 'number' && o.node.strokeWeight > o.node.shape!.line!.length)) {
+      ctx.notes.push(`${where}: native-line-short-cap-unqualified — capped stroke is longer than the native line; observed geometry retained without inventing a paint rule`);
+      return;
+    }
+    const observedSources = shapes.flatMap(s => s.sh.line!.source ? [{ ...s.sh.line!.source,
+      variantName: s.variant, transform: s.sh.line!.transform }] : []);
+    part.shape = { kind: 'line', width: first.width, height: 0, line: { ...first.line!, observedSources } };
+    ctx.notes.push(`${where}: native zero-height LINE and complete affine basis carried; original source identities and each captured placement retained`);
+    return;
+  }
   if (first.kind === 'stroked-path') {
     const geometry = (sh: typeof first) => ({ kind: sh.kind, width: sh.width, height: sh.height, strokePath: sh.strokePath });
     if (shapes.some(s => strokedPathGeometryIssue(s.sh) || s.sh.rotation || s.sh.paths || s.sh.arc || s.sh.sides || s.sh.x !== undefined || s.sh.constraints) ||
@@ -6344,16 +6375,36 @@ function carryClip(
     );
     return;
   }
-  if (!ctx.drawnByThisPipeline) {
+  if (!ctx.drawnByThisPipeline && ctx.projectionMode === 'exact') {
     ctx.notes.push(
       `${where}: clipsContent is true in ${span} (dump v1.20) on a set this pipeline did not draw — Figma's own frame default is ALSO true, so an authored clip and an untouched default are byte-identical here; overflow NOT inverted (a blanket carry would mint a fact nobody wrote) — NAMED; declare overflow: hidden on this part if the clip is intended (review)`,
     // @door propose.clip-foreign-set-ambiguous
     );
     return;
   }
+  if (clipping.length !== m.occ.length && ctx.projectionMode === 'reviewable-inversion') {
+    const rows = m.occ.map(o => ({variant:o.variant,value:o.node.clipsContent === true ? 'hidden' : 'visible'}));
+    for (const axis of ctx.axes) {
+      if (isBooleanAxis(axis)) continue; // Truthy-only conditions cannot represent both boolean planes.
+      const byValue = new Map<string,string>();
+      let fits = true;
+      for (const row of rows) {
+        const value = axisValuesOf(row.variant)[axis.property];
+        if (value === undefined || (byValue.has(value) && byValue.get(value) !== row.value)) {fits=false;break;}
+        byValue.set(value,row.value);
+      }
+      if (!fits || new Set(byValue.values()).size !== 2 || axis.values.some(value => !byValue.has(value))) continue;
+      fenceSparseInference(ctx.axes, `overflow@${where}`, rows);
+      const stylesWhen = (holder.stylesWhen as Array<Record<string,unknown>> | undefined) ?? [];
+      for (const value of axis.values) stylesWhen.push({prop:axis.propName,equals:axisValue(axis,value),styles:{overflow:byValue.get(value)}});
+      holder.stylesWhen = stylesWhen;
+      ctx.notes.push(`${where}: observed clipsContent differs as a pure function of enum axis "${axis.property}" — carried as conditional overflow hidden/visible, including both observed planes; observed fidelity does not assert authored intent (review)`);
+      return;
+    }
+  }
   if (clipping.length !== m.occ.length) {
     ctx.notes.push(
-      `${where}: clipsContent differs across variants (true in ${span}, dump v1.20) — overflow is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+      `${where}: clipsContent differs across variants (true in ${span}, dump v1.20) — no complete enum-axis clipping correlation was proven; NAMED, not proposed (review)`,
     );
     // @door propose.clip-mixed-refused
     return;
@@ -6363,7 +6414,7 @@ function carryClip(
   if (declared['overflow-y'] === undefined) declared['overflow-y'] = 'hidden';
   holder.declared = declared;
   ctx.notes.push(
-    `${where}: clipsContent drawn in every variant on a set this pipeline drew (the emitter writes the flag explicitly, true only from a declared overflow) — carried as declared overflow-x: hidden; overflow-y: hidden (dump v1.20; FC-OVERFLOW-CLIP-LOST read leg)`,
+    `${where}: clipsContent observed in every variant — carried as declared overflow-x: hidden; overflow-y: hidden. This preserves observed paint clipping, including a native default; no authorship or design-intent claim is made.`,
   );
 }
 
@@ -8895,7 +8946,36 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
  *  part's content to it — and the two drifting apart emits a contract whose
  *  own anatomy references a prop that does not exist. */
 function textPropName(ctx: Ctx, property: string): string {
-  return ctx.propNames?.[property] ?? canonicalPropName(property);
+  return ctx.propNames?.[property] ?? ctx.allocatedPropNames[property] ?? canonicalPropName(property);
+}
+
+/** Component-property namespaces are collected before tree traversal. An
+ * unresolved child's first caller and its eventual stub see the SAME complete
+ * set of observed spellings, including keys absent from an early occurrence. */
+function instanceInputNames(roots: readonly DumpNode[], groups: ReadonlyMap<string, readonly DumpNode[]>): Map<string, Record<string, string>> {
+  const properties = new Map<string, Set<string>>();
+  const collect = (identity: string, node: DumpNode): void => {
+    const names = properties.get(identity) ?? new Set<string>();
+    for (const key of Object.keys(node.componentProperties ?? {})) names.add(key.split('#')[0]!);
+    properties.set(identity, names);
+  };
+  for (const [identity, uses] of groups) for (const node of uses) collect(identity, node);
+  const visit = (node: DumpNode): void => {
+    if (node.type === 'INSTANCE') {
+      collect(observedInstanceIdentity(node) ?? `name:${node.instanceOf ?? node.name}`, node);
+      return;
+    }
+    for (const child of node.children ?? []) visit(child);
+  };
+  roots.forEach(visit);
+  return new Map([...properties].map(([identity, names]) => [identity, allocateFigmaPropertyNames([...names])]));
+}
+function instanceInputName(ctx: Ctx, instanceOf: string, property: string, keys?: {setKey?: string; key?: string}): string {
+  const identity = keys?.setKey ? `set:${keys.setKey}` : keys?.key ? `main:${keys.key}` : `name:${instanceOf}`;
+  return ctx.instanceInputNames.get(identity)?.[property] ?? canonicalPropName(property);
+}
+function allocatedInputName(ctx: Ctx, property: string): string {
+  return ctx.propNames?.[property] ?? ctx.allocatedPropNames[property] ?? canonicalPropName(property);
 }
 
 function registerTextProp(
@@ -8994,7 +9074,7 @@ function resolveTextOverrideDemand(
   const collectDrawn = (m: Merged): void => {
     for (const o of m.occ) {
       const p = o.node.propRefs?.characters;
-      if (p) taken.add(canonicalPropName(p));
+      if (p) taken.add(textPropName(ctx, p));
     }
     for (const c of m.children) collectDrawn(c);
   };
@@ -9145,13 +9225,13 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
           `${where}: per-item boolean "${bare}" does not map through ${mapping.id}'s bindings as a boolean prop — not carried as a field; verify the child contract is current (P9)`,
         );
       } else {
-        claimField(mappingProp?.name ?? canonicalPropName(bare), 'boolean', rawKey, bare);
+        claimField(mappingProp?.name ?? instanceInputName(ctx, instanceOf, bare, keys), 'boolean', rawKey, bare);
       }
       continue;
     }
     const textCertain = mapping ? mappingProp?.type === 'text' : rawKey.includes('#');
     if (textCertain) {
-      claimField(mappingProp?.name ?? canonicalPropName(bare), 'text', rawKey, bare);
+      claimField(mappingProp?.name ?? instanceInputName(ctx, instanceOf, bare, keys), 'text', rawKey, bare);
     } else if (!varying) {
       constantKeys.push(rawKey);
     } else if (mapping && mappingProp?.type && typeof mappingProp.type === 'object' &&
@@ -9352,20 +9432,78 @@ function directDrawingChild(node: DumpNode, childId: string, ctx: Ctx) {
   if (resolution.id !== childId || resolution.mechanism !== 'key' || !ctx.fileKey ||
       anchor.fileKey !== ctx.fileKey || !anchor.nodeId || !anchor.componentSetKey ||
       child.props.some(p=>p.bindings.figma.kind==='VARIANT') || paths.length !== 1 ||
-      paths[0].shape?.kind !== 'path' || !paths[0].shape.parentViewport) return undefined;
-  return {child, anchor, path: paths[0], viewport: paths[0].shape.parentViewport};
+      !(paths[0].shape?.kind === 'path' && paths[0].shape.parentViewport || paths[0].shape?.kind === 'stroked-path' && paths[0].shape.strokePath)) return undefined;
+  return {child, anchor, path: paths[0], viewport: paths[0].shape!.kind === 'stroked-path' ? paths[0].shape!.strokePath!.viewport : paths[0].shape!.parentViewport!};
+}
+
+/** Provisional drawing shared only after the complete identity census agrees.
+ * Paint remains a usage fact and is never taken from the first host. */
+function observedVectorDrawing(node: DumpNode, ctx: Ctx) {
+  const key = observedInstanceIdentity(node), uses = key ? ctx.instanceContentGroups.get(key) : undefined;
+  if (!uses?.length || uses.length > 256 || !uses.some(use => canonicalJson(use) === canonicalJson(node))) return undefined;
+  let signature: string | undefined;
+  for (const use of uses) {
+    const o = use.instanceVectorContent, sh = o?.shape, box = use.bbox;
+    if (!o || !sh || !box || sh.kind !== 'path' || sh.paths?.length !== 1 ||
+        !Number.isFinite(box.width) || !Number.isFinite(box.height) || box.width <= 0 || box.height <= 0 ||
+        !Number.isFinite(sh.width) || !Number.isFinite(sh.height) || sh.width <= 0 || sh.height <= 0 ||
+        !Number.isFinite(sh.x) || !Number.isFinite(sh.y) || sh.x! < 0 || sh.y! < 0 ||
+        sh.x! + sh.width > box.width || sh.y! + sh.height > box.height ||
+        sh.rotation || sh.constraints || sh.strokePath || sh.arc || sh.sides || sh.line ||
+        sh.paths.some(p => filledPathIssue(p.data) || !['NONZERO','EVENODD'].includes(p.windingRule)) ||
+        !o.paint.hex || !/^[0-9a-fA-F]{6}$/.test(o.paint.hex) ||
+        (o.paint.alpha !== undefined && (!Number.isFinite(o.paint.alpha) || o.paint.alpha < 0 || o.paint.alpha > 1)) ||
+        !o.source.length || o.source.length > 8 || o.source[0]!.key !== use.instanceKey ||
+        o.source.some(source => !source.nodeId || !source.componentId || !source.key) ||
+        use.propRefs?.mainComponent !== undefined || Object.values(use.componentProperties ?? {}).some(v => typeof v !== 'string')) return undefined;
+    const coordinates = sh.paths[0]!.data.match(/[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)?.map(Number);
+    if (!coordinates?.length || coordinates.some((value, index) =>
+        !Number.isFinite(value) || value < 0 || value > (index % 2 === 0 ? sh.width : sh.height))) return undefined;
+    const next = canonicalJson({shape:sh,box,source:o.source.map(({componentId,key})=>({componentId,key})),
+      props:use.componentProperties});
+    if (signature !== undefined && signature !== next) return undefined;
+    signature = next;
+  }
+  const observation = node.instanceVectorContent!, sh = observation.shape, box = node.bbox!;
+  const root = { literals: {width:`${box.width}px`,height:`${box.height}px`,color:paintCssHex(observation.paint)},
+    declared:{position:'relative'}, overridable:['color'], parts:{glyph:{
+      shape:{kind:'path',width:sh.width,height:sh.height,paths:sh.paths},
+      declared:{position:'absolute'},
+      literals:{'background-color':'currentColor',left:`${sh.x}px`,top:`${sh.y}px`},
+    }} };
+  return {observation,root};
 }
 
 function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
+  const observed = observedVectorDrawing(node, ctx);
+  if (observed) {
+    const child = ctx.contractsById?.get(childId) as unknown as {anatomy?:{root?:Record<string,unknown>}} | undefined;
+    const root = child?.anatomy?.root;
+    if (ctx.stubs.has(childId) || (Array.isArray(root?.overridable) && root.overridable.includes('color') && canonicalJson(root.parts) === canonicalJson(observed.root.parts) &&
+        canonicalJson(root.declared) === canonicalJson(observed.root.declared) &&
+        canonicalJson((root.literals as Record<string,unknown>)?.width) === canonicalJson(observed.root.literals.width) &&
+        canonicalJson((root.literals as Record<string,unknown>)?.height) === canonicalJson(observed.root.literals.height)))
+      return observed.observation.paint;
+  }
   const d = directDrawingChild(node, childId, ctx);
   const h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
-  const target = h?.solidFillTarget;
+  const stroked = d?.path.shape?.kind === 'stroked-path';
+  const target = stroked ? h?.solidStrokeTarget : h?.solidFillTarget;
+  const paint = stroked ? h?.stroke : h?.fill;
   if (!d || !d.child.anatomy.root.overridable?.includes('color') ||
-      d.path.literals?.['background-color'] !== 'currentColor' ||
-      !h || h.fields.length !== 1 || h.fields[0] !== 'fills' || !h.fill?.hex || !target ||
+      d.path.literals?.[stroked ? 'border-color' : 'background-color'] !== 'currentColor' ||
+      !h || (stroked ? h.fields.some(f => !['strokes','strokeWeight'].includes(f)) || !h.fields.includes('strokes') : h.fields.length !== 1 || h.fields[0] !== 'fills') || !paint?.hex || !target ||
       target.componentId !== d.anchor.nodeId || target.instancePath.length !== 0 ||
       JSON.stringify(target.childPath) !== '[0]') return undefined;
-  return h.fill;
+  return paint;
+}
+
+function directInstanceStrokeWidth(node: DumpNode, childId: string, ctx: Ctx) {
+  const d = directDrawingChild(node, childId, ctx), h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
+  if (!d || d.path.shape?.kind !== 'stroked-path' || !d.child.anatomy.root.overridable?.includes('stroke-width') ||
+      d.path.literals?.['border-width'] !== 'inherit' || !directInstanceInk(node, childId, ctx) ||
+      !h?.fields.includes('strokeWeight') || !Number.isFinite(h.strokeWeight) || h.strokeWeight! <= 0) return undefined;
+  return h.strokeWeight;
 }
 
 /** The same exact drawing proves its SCALE/SCALE path follows the instance
@@ -9744,7 +9882,7 @@ function buildPartFromEvidence(
     // display name (renaming the layer renames the property, live probe 2b),
     // so `m.name` is the property and the part's slot name canonicalizes from
     // it exactly as the INSTANCE_SWAP path canonicalizes its property.
-    const nativeSlot: Record<string, unknown> = { name: canonicalPropName(m.name) };
+    const nativeSlot: Record<string, unknown> = { name: allocatedInputName(ctx, m.name) };
     applySlotAccepts(nativeSlot, m.name, ctx, where, true, first(m.occ, (n) => n.propRefs?.slotContentId));
     // The slot's DRAWN CHILDREN are its design-time content (instances
     // inherit them; resetSlot returns to them) — the native spelling of what
@@ -9868,7 +10006,7 @@ function buildPartFromEvidence(
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
       // just without wrapper geometry (not the generator's shape — note it).
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
-      const bareSlot: Record<string, unknown> = { name: canonicalPropName(swapProperty) };
+      const bareSlot: Record<string, unknown> = { name: allocatedInputName(ctx, swapProperty) };
       applySlotAccepts(bareSlot, swapProperty, ctx, where);
       applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where);
       part.slot = bareSlot;
@@ -10266,8 +10404,9 @@ function buildPartFromEvidence(
         ctx.notes.push(`${where}: direct-instance-size-not-carried \u2014 requires an identity-qualified square box on every occurrence and a child declaring size; review`);
       }
     }
-    if (ctx.mint && id) {
-      const paints = m.occ.map(o=>directInstanceInk(o.node,id,ctx));
+    if (ctx.mint) {
+      const inkId = String(component.id);
+      const paints = m.occ.map(o=>directInstanceInk(o.node,inkId,ctx));
       if (paints.length && paints.every(Boolean)) {
         const prior = ctx.mint.refOverrides.find(r=>r.component===component);
         const target = prior?.target ?? {};
@@ -10275,6 +10414,13 @@ function buildPartFromEvidence(
         if (!prior) ctx.mint.refOverrides.push({component,target});
         ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
         ctx.notes.push(`${where}: identity-qualified direct-instance ink carried through the child's declared color override`);
+        const weights = m.occ.map(o=>directInstanceStrokeWidth(o.node,inkId,ctx));
+        if (weights.every(w=>w!==undefined)) {
+          mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
+          ctx.notes.push(`${where}: identity-qualified direct-instance stroke weights carried without deriving them from the box resize`);
+        } else if (m.occ.some(o=>o.node.hostOverrides?.some(h=>h.fields.includes('strokeWeight')))) {
+          ctx.notes.push(`${where}: direct-instance-stroke-weight-not-carried — every observed owner and uniform weight must be qualified; review`);
+        }
       }
     }
     part.component = component;
@@ -10412,7 +10558,7 @@ function buildPartFromEvidence(
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
     nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
-    const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
+    const slot: Record<string, unknown> = { name: allocatedInputName(ctx, soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
     const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -10495,7 +10641,7 @@ function buildPartFromEvidence(
  *  a pre-v1.1 dump) and recovers nothing — the base-instance promotion pass
  *  may still hand a default over later. */
 function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string, m?: Merged) {
-  const name = canonicalPropName(property);
+  const name = allocatedInputName(ctx, property);
   if (!ctx.boolProps.some((b) => b.property === property)) {
     // dump v1.5: the BOOLEAN property definition's defaultValue is CAPTURED
     // evidence — it wins over the hidden-pattern inference (field case:
@@ -10661,7 +10807,7 @@ function canonicalizeInstanceProps(
     // through VERBATIM (camel-canonicalizing "Label" into "label" would
     // rewrite drawn content).
     const isTextKey = property.includes('#') && typeof value === 'string';
-    out[canonicalPropName(property.split('#')[0])] =
+    out[instanceInputName(ctx, instanceOf, property.split('#')[0]!, keys)] =
       typeof value === 'string' && !isTextKey ? camel(value) : value;
   }
   if (child && mapped === Object.keys(applied).length) {
@@ -10775,7 +10921,7 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx, 
   }
   for (const key of keys) {
     const property = key.split('#')[0];
-    const name = canonicalPropName(property);
+    const name = allocatedInputName(ctx, property);
     const values = captures.map((c) => c.properties[key]).filter((v) => v !== undefined);
     const value = values[0];
     const distinct = [...new Set(values.map((v) => String(v)))];
@@ -11301,7 +11447,13 @@ function buildChildStub(
   ctx: Ctx,
   fileKey: string | null,
 ): { contract: Record<string, unknown>; geometry: ReturnType<typeof stubGeometry>; observedContent: boolean } {
-  const observedContent = observedStubContent(capture, ctx);
+  const vector = capture.instances?.length ? observedVectorDrawing(capture.instances[0]!, ctx) : undefined;
+  const vectorRef = `{imported.stub-${capture.id.split('.').slice(1).join('-')}.root.color}`;
+  const vectorValue = vector ? paintCssHex(vector.observation.paint) : '';
+  const vectorRoot = vector ? {...vector.root, literals:{width:vector.root.literals.width,height:vector.root.literals.height},tokens:{color:vectorRef}} : undefined;
+  const observedContent = vectorRoot ? {root:vectorRoot as Record<string,unknown>,geometry:{tokens:{},tree:{imported:{[`stub-${capture.id.split('.').slice(1).join('-')}`]:{root:{color:{$value:vectorValue,$type:'color'}}}}},count:1,entries:[{ref:vectorRef,value:vectorValue,usageSites:[`stub ${capture.id} observed vector color`]}]},applied:capture.applied} : observedStubContent(capture, ctx);
+  if (!vector && capture.instances?.some(n => n.instanceVectorContent)) ctx.notes.push(`stub ${capture.id}: observed-vector-content-refused:incomplete-or-conflicting-census — geometry and ink remain unqualified`);
+  if (vector) ctx.notes.push(`stub ${capture.id}: observed vector geometry agrees across the complete identity census; each host carries its independently observed ink through color. Complete child API and unobserved variants remain unknown.`);
   const observed = new Map<string, { suffixed: boolean; values: Array<string | boolean> }>();
   for (const applied of observedContent?.applied ?? capture.applied) {
     for (const [key, value] of Object.entries(applied)) {
@@ -11312,8 +11464,9 @@ function buildChildStub(
     }
   }
   const props: Array<Record<string, unknown>> = [];
+  const stubNames = allocateFigmaPropertyNames([...observed.keys()]);
   for (const [property, { suffixed, values }] of observed) {
-    const name = canonicalPropName(property);
+    const name = ctx.instanceInputNames.get(capture.setKey ? `set:${capture.setKey}` : capture.observed[0]?.instanceKey ? `main:${capture.observed[0].instanceKey}` : `name:${capture.instanceOf}`)?.[property] ?? stubNames[property] ?? canonicalPropName(property);
     const v0 = values[0];
     if (typeof v0 === 'boolean') {
       props.push({
@@ -11552,6 +11705,24 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
         `${where}: root ${dim} is FILL in every variant (the sizing mode spells it FIXED; the drawn ${[...new Set(withBox.map((o) => o.node.bbox![dim]))].join('/')}px is the CONTAINER's measure) — fluid, NOT minted as a root ${dim}; the component fills its host${dim === 'width' && (rootTokens['max-width'] !== undefined || merged.occ.some((o) => typeof o.node.maxWidth === 'number')) ? ' up to the carried max-width' : ''}`,
       );
       continue;
+    }
+    // A HUG frame with exclusively out-of-flow visible children retains an
+    // observed canvas extent, while CSS fit-content excludes those children.
+    // Preserve that extent as a minimum, retaining the HUG sizing mode and
+    // allowing future in-flow content to grow. Ordinary content-bearing HUG
+    // frames keep their existing behavior; explicit minima remain authoritative.
+    const minAxis = dim === 'width' ? 'min-width' : 'min-height';
+    const emptyFlowHug = (o: Occ): boolean => {
+      const children = (o.node.children ?? []).filter((child) => child.hidden !== true);
+      return !fixedAxis(o, dim) && children.length > 0 && children.every((child) => child.abs !== undefined);
+    };
+    if (withBox.some(emptyFlowHug) && rootTokens[minAxis] === undefined &&
+        (root.literals as Record<string, string> | undefined)?.[minAxis] === undefined) {
+      mintObservation(ctx, rootTokens, where, minAxis, 'px', withBox.map((o) => ({
+        variant: o.variant,
+        value: emptyFlowHug(o) ? Math.round(o.node.bbox![dim] * 100) / 100 : 0,
+      })));
+      ctx.notes.push(`${where}: ${minAxis} carries the observed extent of HUG planes with exclusively absolute visible children; CSS content sizing excludes those children. HUG remains content-sized and ordinary in-flow planes receive a zero minimum.`);
     }
     // GAP-CLOSING ROUND 6 — A HUG AXIS IS A FACT, NOT A NUMBER.
     //
@@ -12781,13 +12952,25 @@ function proposeFromDumpFenced(
   // exact mode). Stripped here, on a private clone, BY NAME per node.
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
+  const allocatedPropNames = (set as {propNames?: unknown}).propNames || (set as {semantics?: unknown}).semantics || set.statePreviewAxis || readStampedContractId(set)
+    ? Object.create(null) as Record<string, string>
+    : allocateFigmaPropertyNames(Object.keys(set.propertyDefinitions ?? {}).map(name => name.split('#')[0]!));
+  const authoredPropNames: Record<string, string> = Object.create(null);
+  const rawPropNames = (set as {propNames?: unknown}).propNames;
+  if (rawPropNames !== null && typeof rawPropNames === 'object' && !Array.isArray(rawPropNames)) {
+    for (const [property, name] of Object.entries(rawPropNames)) {
+      if (property && typeof name === 'string' && name) authoredPropNames[property] = name;
+    }
+  }
+  const proposalInputNames = Object.assign(Object.create(null), allocatedPropNames, authoredPropNames) as Record<string, string>;
+  const nameOptions = { propertyNames: proposalInputNames };
   const typedAxes = readCodeValueAxes(set);
   const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
     ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
   /** The verdict on the set AS DRAWN, against the full Cartesian. */
-  const cartesianProjection = validateExactVariantProjection(set);
+  const cartesianProjection = validateExactVariantProjection(set, undefined, nameOptions);
   // DECLARED ABSENT VARIANTS (bindings.figma.absentVariants). A designer's set
   // whose rows are a STRICT SUBSET of the product — every row valid, none
   // duplicated, none outside the product — is not refused for being ragged:
@@ -12831,7 +13014,7 @@ function proposeFromDumpFenced(
   const absentVariants = pipelineDrew
     ? scopedAbsentVariants(set, opts.contractsById)
     : ragged && stampsObservable
-      ? deriveAbsentVariants(set)
+      ? deriveAbsentVariants(set, proposalInputNames)
       : null;
   // MEANING BOUNDS on declaring by rows (docs/23 §D.40), read from the ragged
   // refusal's own counts BEFORE any product is materialised. A declaration
@@ -12854,7 +13037,7 @@ function proposeFromDumpFenced(
       throw new ExactProjectionError('EXACT_MATRIX_RAGGED', `${counts?.message ?? ''} ${why}`.trim(), cartesianProjection);
     }
   }
-  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
+  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set, proposalInputNames) !== null) {
     throw new ExactProjectionError(
       'EXACT_MATRIX_RAGGED',
       cartesianProjection.refusals[0]?.message ?? 'Source matrix is ragged.',
@@ -12865,7 +13048,7 @@ function proposeFromDumpFenced(
   const sourceProjection =
     absentVariants === null
       ? cartesianProjection
-      : validateExactVariantProjection(set, undefined, { absentVariants });
+      : validateExactVariantProjection(set, undefined, { ...nameOptions, absentVariants });
   if (absentVariants !== null) sparseFence = { absent: absentVariants, ambiguous: new Map() };
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
@@ -13163,6 +13346,7 @@ function proposeFromDumpFenced(
   }
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
+  for (const axis of axes) axis.propName = proposalInputNames[axis.property] ?? axis.propName;
   for (const mapped of typedAxes) {
     const axis = axes.find(a => a.property === mapped.property);
     if (!axis) throw Error(`FIGMA_CODE_VALUES_PROJECTION_UNSUPPORTED:${mapped.property}`);
@@ -13235,6 +13419,8 @@ function proposeFromDumpFenced(
 
   const ctx: Ctx = {
     instanceContentGroups: opts.instanceContentGroups ?? observedInstanceGroups(set.variants),
+    instanceInputNames: instanceInputNames(set.variants, opts.instanceContentGroups ?? observedInstanceGroups(set.variants)),
+    allocatedPropNames,
     setName: set.setName,
     axes,
     totalVariants: variantNames,
@@ -13274,15 +13460,7 @@ function proposeFromDumpFenced(
         (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
         stampedContractId,
     ),
-    ...(() => {
-      const raw = (set as { propNames?: unknown }).propNames;
-      if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return {};
-      const map: Record<string, string> = {};
-      for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
-        if (typeof k === 'string' && typeof v === 'string' && k && v) map[k] = v;
-      }
-      return Object.keys(map).length > 0 ? { propNames: map } : {};
-    })(),
+    ...(Object.keys(authoredPropNames).length > 0 ? {propNames: authoredPropNames} : {}),
     projectionMode,
     mint: opts.mintUnbound
       ? {
@@ -13321,6 +13499,9 @@ function proposeFromDumpFenced(
   };
 
   ctx.notes.push(...preNotes);
+  for (const [property, name] of Object.entries(allocatedPropNames)) ctx.notes.push(
+    `property-input-name-allocation: "${property}" shares a normalized spelling with another independent property — code input "${name}"; original design spelling, kind, defaults and references retained`,
+  );
 
   // Base-instance flattening runs PRE-merge, per variant, on a private clone
   // (a caller's dump is never mutated): each variant wrapping an instance of
@@ -13663,7 +13844,7 @@ function proposeFromDumpFenced(
   // component's main content — name `children` (the code-side default slot).
   const defaultSlot = ctx.slots.find((s) => !s.optional);
   for (const s of ctx.slots) {
-    const name = s === defaultSlot ? 'children' : canonicalPropName(s.property);
+    const name = s === defaultSlot ? 'children' : allocatedInputName(ctx, s.property);
     const slot = s.part.slot as Record<string, unknown>;
     slot.name = name;
     if (pascal(name) !== s.property) slot.bindings = { figma: { property: s.property } };
@@ -14209,7 +14390,7 @@ function proposeFromDumpFenced(
   // Opt-in with the instance-override ledger — the option-less path is
   // byte-identical.
   const scalableDrawing = Object.values(root.parts ?? {}).length > 0 &&
-    Object.values(root.parts ?? {}).every((part: any) => part.shape?.kind === 'path' && part.shape.parentViewport);
+    Object.values(root.parts ?? {}).every((part: any) => (part.shape?.kind === 'path' && part.shape.parentViewport || part.shape?.kind === 'stroked-path' && part.shape.strokePath));
   const singleInkPart = scalableDrawing && Object.values(root.parts ?? {}).length === 1
     ? Object.values(root.parts as Record<string, any>)[0] : undefined;
   if (singleInkPart?.tokens?.['background-color'] && !singleInkPart.states && !singleInkPart.tokensByProp &&
@@ -14218,6 +14399,13 @@ function proposeFromDumpFenced(
     delete singleInkPart.tokens['background-color'];
     singleInkPart.literals = {...singleInkPart.literals, 'background-color':'currentColor'};
   }
+  if (singleInkPart?.shape?.kind === 'stroked-path' && singleInkPart.tokens?.['border-color'] && singleInkPart.tokens?.['border-width'] &&
+      !singleInkPart.states && !singleInkPart.tokensByProp && !singleInkPart.statesByProp && !singleInkPart.literalsByProp && !singleInkPart.stylesWhen) {
+    ((root.tokens ??= {}) as Record<string,string>).color = singleInkPart.tokens['border-color'];
+    (root.tokens as Record<string,string>)['stroke-width'] = singleInkPart.tokens['border-width'];
+    delete singleInkPart.tokens['border-color']; delete singleInkPart.tokens['border-width'];
+    singleInkPart.literals = { ...singleInkPart.literals, 'border-color':'currentColor', 'border-width':'inherit' };
+  }
   if (ctx.instanceOverrides || scalableDrawing) {
     const rt = (root.tokens ?? {}) as Record<string, string>;
     const declaredOv: string[] = [];
@@ -14225,7 +14413,8 @@ function proposeFromDumpFenced(
       declaredOv.push('background-image');
     }
     if (typeof rt['width'] === 'string' && typeof rt['height'] === 'string') declaredOv.push('size');
-    if (singleInkPart?.literals?.['background-color'] === 'currentColor' && typeof rt.color === 'string') declaredOv.push('color');
+    if ((singleInkPart?.literals?.['background-color'] === 'currentColor' || singleInkPart?.literals?.['border-color'] === 'currentColor') && typeof rt.color === 'string') declaredOv.push('color');
+    if (singleInkPart?.literals?.['border-width'] === 'inherit' && typeof rt['stroke-width'] === 'string') declaredOv.push('stroke-width');
     if (declaredOv.length > 0) {
       root.overridable = declaredOv;
       ctx.notes.push(
@@ -14611,7 +14800,7 @@ function proposeFromDumpFenced(
   // contract the referee has never seen — a projected designer state axis — and
   // the general case is named, with its count, not silently widened.
   if (projectionMode === 'exact' && designerStateAxis !== null) {
-    const violations = refereeViolations(parsedContract, parsedStubs);
+    const violations = refereeViolations(parsedContract, parsedStubs, opts.contractsById);
     if (violations !== null && violations.length > 0) throw new ProposalRefereeError(set.setName, violations);
   }
   if (projectionMode === 'exact') {
@@ -14619,7 +14808,7 @@ function proposeFromDumpFenced(
       validateExactVariantProjection(
         set,
         exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
-        absentVariants === null ? {} : { absentVariants },
+        absentVariants === null ? nameOptions : { ...nameOptions, absentVariants },
       ),
       'verified-exact',
     );
@@ -14627,7 +14816,7 @@ function proposeFromDumpFenced(
     const returned = validateExactVariantProjection(
       set,
       exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
-      absentVariants === null ? {} : { absentVariants },
+      absentVariants === null ? nameOptions : { ...nameOptions, absentVariants },
     );
     projection =
       returned.status === 'verified-exact'

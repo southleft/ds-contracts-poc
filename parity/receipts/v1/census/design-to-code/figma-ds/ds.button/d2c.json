@@ -373,7 +373,7 @@
     "wc/ds-button-icon.demo.html": "71ca11e0a588a953352d30d35d12b54255b3dbffc208ddc7a745b3ac0df64262",
     "wc/ds-button-icon.custom-elements.json": "607b3ff5fddf9931c0ab803bedbfacd66f13133e8dfee5883cd28d6d55e4847b",
     "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
-    "wc/ds-button-contract.css.ts": "fff92bedfcfd3d1b59f8fc1a2229815e5e054dd8ad84c37ec64391ed2e79075a",
+    "wc/ds-button-contract.css.ts": "104561372b1be4cbf4169d09746c621c65c107e4353d714ec1a3a7c907f216fb",
     "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
     "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c",
     "wc/ds-button-icon-default-sm.ts": "f701ebbd91c9ed405cb3461d2211a34b35e0160013a6d0e876b0761461db6edd",
@@ -381,7 +381,7 @@
     "wc/ds-button-icon-default-sm.demo.html": "5aca1316a94aef4e11f440bf7bc1757838211551586db9d256897f34a0b59ffd",
     "wc/ds-button-icon-default-sm.custom-elements.json": "46b1cc47f0b4ec7b98fdaadba767fa0ed2eeab3e48f5fb1b744379ee65d01201",
     "wc/ds-button-group.ts": "950538ef9991360eb18dcef3c5e39e25ed6b0483898f7307504e80f2d31d52fd",
-    "wc/ds-button-group.css.ts": "1684dd5a785e4f94fa19c9011106b82555d919b1c022690e0b162fd9fa611aa8",
+    "wc/ds-button-group.css.ts": "90932ebdb7f830e986276c518113f65c7d3d097d96c4973d3058fe164e8e6016",
     "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
     "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
   },

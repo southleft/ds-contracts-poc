@@ -1328,75 +1328,21 @@
           "additionalProperties": false
         },
         "shape": {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "type": "string",
-              "enum": [
-                "polygon",
-                "ellipse",
-                "rect",
-                "path",
-                "stroked-path"
-              ]
-            },
-            "parentViewport": {
+          "anyOf": [
+            {
               "type": "object",
               "properties": {
-                "width": {
-                  "type": "number",
-                  "exclusiveMinimum": 0
-                },
-                "height": {
-                  "type": "number",
-                  "exclusiveMinimum": 0
-                },
-                "x": {
-                  "type": "number"
-                },
-                "y": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "width",
-                "height",
-                "x",
-                "y"
-              ],
-              "additionalProperties": false
-            },
-            "strokePath": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 65536,
-                  "pattern": "^[MLCQ0-9eE+., \\t\\r\\n-]+$"
-                },
-                "cap": {
+                "kind": {
                   "type": "string",
                   "enum": [
-                    "NONE",
-                    "ROUND",
-                    "SQUARE"
+                    "polygon",
+                    "ellipse",
+                    "rect",
+                    "path",
+                    "stroked-path"
                   ]
                 },
-                "join": {
-                  "type": "string",
-                  "enum": [
-                    "MITER",
-                    "ROUND",
-                    "BEVEL"
-                  ]
-                },
-                "miterLimit": {
-                  "type": "number",
-                  "minimum": 1,
-                  "maximum": 1000
-                },
-                "viewport": {
+                "parentViewport": {
                   "type": "object",
                   "properties": {
                     "width": {
@@ -1421,156 +1367,612 @@
                     "y"
                   ],
                   "additionalProperties": false
-                }
-              },
-              "required": [
-                "data",
-                "cap",
-                "join",
-                "miterLimit",
-                "viewport"
-              ],
-              "additionalProperties": false
-            },
-            "paths": {
-              "minItems": 1,
-              "maxItems": 1,
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 65536,
-                    "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
-                  },
-                  "windingRule": {
-                    "type": "string",
-                    "enum": [
-                      "NONZERO",
-                      "EVENODD"
-                    ]
-                  }
                 },
-                "required": [
-                  "data",
-                  "windingRule"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "pathsByProp": {
-              "type": "object",
-              "properties": {
-                "prop": {
-                  "type": "string"
-                },
-                "map": {
+                "strokePath": {
                   "type": "object",
-                  "propertyNames": {
-                    "type": "string"
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 65536,
+                      "pattern": "^[MLCQHVZ0-9eE+., \\t\\r\\n-]+$"
+                    },
+                    "cap": {
+                      "type": "string",
+                      "enum": [
+                        "NONE",
+                        "ROUND",
+                        "SQUARE"
+                      ]
+                    },
+                    "join": {
+                      "type": "string",
+                      "enum": [
+                        "MITER",
+                        "ROUND",
+                        "BEVEL"
+                      ]
+                    },
+                    "miterLimit": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 1000
+                    },
+                    "viewport": {
+                      "type": "object",
+                      "properties": {
+                        "width": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "height": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "width",
+                        "height",
+                        "x",
+                        "y"
+                      ],
+                      "additionalProperties": false
+                    }
                   },
-                  "additionalProperties": {
+                  "required": [
+                    "data",
+                    "cap",
+                    "join",
+                    "miterLimit",
+                    "viewport"
+                  ],
+                  "additionalProperties": false
+                },
+                "paths": {
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "type": "array",
+                  "items": {
                     "type": "object",
                     "properties": {
-                      "width": {
-                        "type": "number",
-                        "exclusiveMinimum": 0
+                      "data": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 65536,
+                        "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
                       },
-                      "height": {
-                        "type": "number",
-                        "exclusiveMinimum": 0
-                      },
-                      "paths": {
-                        "minItems": 1,
-                        "maxItems": 1,
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "data": {
-                              "type": "string",
-                              "minLength": 1,
-                              "maxLength": 65536,
-                              "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
-                            },
-                            "windingRule": {
-                              "type": "string",
-                              "enum": [
-                                "NONZERO",
-                                "EVENODD"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "data",
-                            "windingRule"
-                          ],
-                          "additionalProperties": false
-                        }
+                      "windingRule": {
+                        "type": "string",
+                        "enum": [
+                          "NONZERO",
+                          "EVENODD"
+                        ]
                       }
                     },
                     "required": [
-                      "width",
-                      "height",
-                      "paths"
+                      "data",
+                      "windingRule"
                     ],
                     "additionalProperties": false
                   }
+                },
+                "pathsByProp": {
+                  "type": "object",
+                  "properties": {
+                    "prop": {
+                      "type": "string"
+                    },
+                    "map": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "height": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "paths": {
+                            "minItems": 1,
+                            "maxItems": 1,
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 65536,
+                                  "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                                },
+                                "windingRule": {
+                                  "type": "string",
+                                  "enum": [
+                                    "NONZERO",
+                                    "EVENODD"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "data",
+                                "windingRule"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "required": [
+                          "width",
+                          "height",
+                          "paths"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "prop",
+                    "map"
+                  ],
+                  "additionalProperties": false
+                },
+                "sides": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 9007199254740991
+                },
+                "width": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "rotation": {
+                  "type": "number"
+                },
+                "arc": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "number"
+                    },
+                    "end": {
+                      "type": "number"
+                    },
+                    "innerRadius": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "start",
+                    "end",
+                    "innerRadius"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
-                "prop",
-                "map"
+                "kind",
+                "width",
+                "height"
               ],
               "additionalProperties": false
             },
-            "sides": {
-              "type": "integer",
-              "minimum": 3,
-              "maximum": 9007199254740991
-            },
-            "width": {
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "height": {
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "rotation": {
-              "type": "number"
-            },
-            "arc": {
+            {
               "type": "object",
               "properties": {
-                "start": {
+                "parentViewport": {
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "height": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "width",
+                    "height",
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                },
+                "strokePath": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 65536,
+                      "pattern": "^[MLCQHVZ0-9eE+., \\t\\r\\n-]+$"
+                    },
+                    "cap": {
+                      "type": "string",
+                      "enum": [
+                        "NONE",
+                        "ROUND",
+                        "SQUARE"
+                      ]
+                    },
+                    "join": {
+                      "type": "string",
+                      "enum": [
+                        "MITER",
+                        "ROUND",
+                        "BEVEL"
+                      ]
+                    },
+                    "miterLimit": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 1000
+                    },
+                    "viewport": {
+                      "type": "object",
+                      "properties": {
+                        "width": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "height": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "width",
+                        "height",
+                        "x",
+                        "y"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "cap",
+                    "join",
+                    "miterLimit",
+                    "viewport"
+                  ],
+                  "additionalProperties": false
+                },
+                "paths": {
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 65536,
+                        "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                      },
+                      "windingRule": {
+                        "type": "string",
+                        "enum": [
+                          "NONZERO",
+                          "EVENODD"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data",
+                      "windingRule"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "pathsByProp": {
+                  "type": "object",
+                  "properties": {
+                    "prop": {
+                      "type": "string"
+                    },
+                    "map": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "height": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "paths": {
+                            "minItems": 1,
+                            "maxItems": 1,
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 65536,
+                                  "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                                },
+                                "windingRule": {
+                                  "type": "string",
+                                  "enum": [
+                                    "NONZERO",
+                                    "EVENODD"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "data",
+                                "windingRule"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "required": [
+                          "width",
+                          "height",
+                          "paths"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "prop",
+                    "map"
+                  ],
+                  "additionalProperties": false
+                },
+                "sides": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 9007199254740991
+                },
+                "rotation": {
                   "type": "number"
                 },
-                "end": {
-                  "type": "number"
+                "arc": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "number"
+                    },
+                    "end": {
+                      "type": "number"
+                    },
+                    "innerRadius": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "start",
+                    "end",
+                    "innerRadius"
+                  ],
+                  "additionalProperties": false
                 },
-                "innerRadius": {
+                "kind": {
+                  "type": "string",
+                  "const": "line"
+                },
+                "width": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1
+                  "exclusiveMinimum": 0
+                },
+                "height": {
+                  "type": "number",
+                  "const": 0
+                },
+                "line": {
+                  "type": "object",
+                  "properties": {
+                    "length": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "transform": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "number"
+                            }
+                          ],
+                          "additionalItems": false,
+                          "minItems": 3,
+                          "maxItems": 3
+                        },
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "number"
+                            }
+                          ],
+                          "additionalItems": false,
+                          "minItems": 3,
+                          "maxItems": 3
+                        }
+                      ],
+                      "additionalItems": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "cap": {
+                      "type": "string",
+                      "enum": [
+                        "NONE",
+                        "ROUND",
+                        "SQUARE"
+                      ]
+                    },
+                    "align": {
+                      "type": "string",
+                      "enum": [
+                        "INSIDE",
+                        "CENTER",
+                        "OUTSIDE"
+                      ]
+                    },
+                    "source": {
+                      "type": "object",
+                      "properties": {
+                        "nodeId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "parentId": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "nodeId"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "observedSources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nodeId": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "parentId": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "variantName": {
+                            "type": "string"
+                          },
+                          "transform": {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "array",
+                                "items": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "number"
+                                  }
+                                ],
+                                "additionalItems": false,
+                                "minItems": 3,
+                                "maxItems": 3
+                              },
+                              {
+                                "type": "array",
+                                "items": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "number"
+                                  }
+                                ],
+                                "additionalItems": false,
+                                "minItems": 3,
+                                "maxItems": 3
+                              }
+                            ],
+                            "additionalItems": false,
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        },
+                        "required": [
+                          "nodeId",
+                          "variantName",
+                          "transform"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "length",
+                    "transform",
+                    "cap",
+                    "align"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
-                "start",
-                "end",
-                "innerRadius"
+                "kind",
+                "width",
+                "height",
+                "line"
               ],
               "additionalProperties": false
             }
-          },
-          "required": [
-            "kind",
-            "width",
-            "height"
-          ],
-          "additionalProperties": false
+          ]
         },
         "tokens": {
           "type": "object",

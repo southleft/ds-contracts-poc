@@ -1,0 +1,2892 @@
+{
+  "_provenance": {
+    "fileKey": "KPx3BgDXIJxd94zIGbQxjB",
+    "extractedAt": "2026-10-01",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.44) for design→contract proposal.",
+    "dumpVersion": "1.44",
+    "captureGaps": [
+      "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
+      "image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box",
+      "layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line"
+    ],
+    "stampsObservable": true,
+    "closure": {
+      "rule": "follow-instances",
+      "cap": 64,
+      "requested": [
+        {
+          "nodeId": "40:170",
+          "name": "Field",
+          "type": "COMPONENT_SET"
+        }
+      ],
+      "pulled": [
+        {
+          "nodeId": "2009:2377",
+          "name": "search",
+          "type": "COMPONENT",
+          "round": 1,
+          "referencedBy": [
+            "Field",
+            "Input"
+          ]
+        },
+        {
+          "nodeId": "15:10",
+          "name": "Input",
+          "type": "COMPONENT_SET",
+          "round": 1,
+          "referencedBy": [
+            "Field"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "cycles": []
+    },
+    "variables": {
+      "status": "unavailable",
+      "cause": "scope",
+      "httpStatus": 403,
+      "message": "Figma refused /variables/local: your personal access token does not carry the `file_variables:read` scope (HTTP 403). The import continues with resolved values; variable names stay unresolved. If figma.com → Settings → Security → Personal access tokens offers \"Variables: read\", mint a token with it and re-run. Figma may offer that scope only on some plans; this project has not verified which.",
+      "fix": "regenerate the token with file_variables:read"
+    }
+  },
+  "search": {
+    "setName": "search",
+    "type": "COMPONENT",
+    "nodeId": "2009:2377",
+    "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+    "variants": [
+      {
+        "name": "search",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 24,
+          "height": 24
+        },
+        "clipsContent": true,
+        "children": [
+          {
+            "name": "Vector",
+            "type": "VECTOR",
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "shape": {
+              "kind": "path",
+              "width": 20.000194549560547,
+              "height": 19.999950408935547,
+              "paths": [
+                {
+                  "data": "M9 2C5.13401 2 2 5.13401 2 9C2 12.866 5.13401 16 9 16C12.866 16 16 12.866 16 9C16 5.13401 12.866 2 9 2ZM0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 11.125 17.2636 13.0779 16.032 14.6175L19.7073 18.2928C20.0978 18.6834 20.0978 19.3165 19.7073 19.7071C19.3168 20.0976 18.6836 20.0976 18.2931 19.7071L14.6178 16.0318C13.0781 17.2635 11.1251 18 9 18C4.02944 18 0 13.9706 0 9Z",
+                  "windingRule": "EVENODD"
+                }
+              ],
+              "x": 2,
+              "y": 2,
+              "right": 1.9998054504394531,
+              "bottom": 2.000049591064453,
+              "constraints": {
+                "horizontal": "SCALE",
+                "vertical": "SCALE"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "Input": {
+    "setName": "Input",
+    "type": "COMPONENT_SET",
+    "nodeId": "15:10",
+    "key": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+    "description": "A native input element. 1:1 with base-ui.com input hero: 10rem × 2rem, padding 0 0.5rem, 1px ink border, sharp corners, placeholder neutral-500 (dark: neutral-400). Focus: 2px ink ring, outline-offset −1px.",
+    "documentationLinks": [
+      {
+        "uri": "https://base-ui.com/react/components/input"
+      }
+    ],
+    "propertyDefinitions": {
+      "Text#15:0": {
+        "type": "TEXT",
+        "defaultValue": "Name"
+      },
+      "Icon#2015:16": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "2009:2377",
+        "preferredValues": []
+      },
+      "State": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Focus"
+        ]
+      },
+      "Value": {
+        "type": "VARIANT",
+        "defaultValue": "Placeholder",
+        "variantOptions": [
+          "Placeholder",
+          "Filled"
+        ]
+      },
+      "Icon": {
+        "type": "VARIANT",
+        "defaultValue": "no-icon",
+        "variantOptions": [
+          "icon-left",
+          "icon-right",
+          "no-icon"
+        ]
+      }
+    },
+    "swapPreferredValues": {
+      "Icon": []
+    },
+    "variants": [
+      {
+        "name": "State=Default, Value=Placeholder, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Default",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Default, Value=Filled, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Default",
+          "Value": "Filled"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Placeholder, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Focus",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Filled, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Focus",
+          "Value": "Filled"
+        }
+      },
+      {
+        "name": "State=Default, Value=Placeholder, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1020;2009:2378",
+                  "instanceId": "2015:1020",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          },
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Default",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Default, Value=Placeholder, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1024;2009:2378",
+                  "instanceId": "2015:1024",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Default",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Default, Value=Filled, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1028;2009:2378",
+                  "instanceId": "2015:1028",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          },
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Default",
+          "Value": "Filled"
+        }
+      },
+      {
+        "name": "State=Default, Value=Filled, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1032;2009:2378",
+                  "instanceId": "2015:1032",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Default",
+          "Value": "Filled"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Placeholder, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1036;2009:2378",
+                  "instanceId": "2015:1036",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          },
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Focus",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Placeholder, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "737373"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1040;2009:2378",
+                  "instanceId": "2015:1040",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Focus",
+          "Value": "Placeholder"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Filled, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1044;2009:2378",
+                  "instanceId": "2015:1044",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          },
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Focus",
+          "Value": "Filled"
+        }
+      },
+      {
+        "name": "State=Focus, Value=Filled, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "CENTER",
+          "spacing": 8,
+          "padding": [
+            0,
+            8,
+            0,
+            8
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "0a0a0a"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 2,
+        "strokesIncludedInLayout": false,
+        "children": [
+          {
+            "name": "Name",
+            "type": "TEXT",
+            "fillWidth": true,
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "HEIGHT",
+              "letterSpacing": 0,
+              "style": "Body",
+              "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Text"
+            }
+          },
+          {
+            "name": "Icon",
+            "type": "INSTANCE",
+            "clipsContent": true,
+            "propRefs": {
+              "mainComponent": "Icon"
+            },
+            "instanceOf": "search",
+            "instanceKey": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8",
+            "hostOverrides": [
+              {
+                "path": "Vector",
+                "fields": [
+                  "fills"
+                ],
+                "fill": {
+                  "hex": "737373"
+                },
+                "solidFillTarget": {
+                  "nodeId": "I2015:1048;2009:2378",
+                  "instanceId": "2015:1048",
+                  "componentId": "2009:2377",
+                  "instancePath": [],
+                  "childPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Focus",
+          "Value": "Filled"
+        }
+      }
+    ]
+  },
+  "Field": {
+    "setName": "Field",
+    "type": "COMPONENT_SET",
+    "nodeId": "40:170",
+    "key": "36c96881a98522cc7a3ee569aa842ce1727e828a",
+    "description": "Form field pattern: Label (bold) + Control + Description / Error. 1:1 with base-ui.com field hero: column gap 0.25rem, max-width 16rem, error text red-700 (dark: red-400).",
+    "documentationLinks": [
+      {
+        "uri": "https://base-ui.com/react/components/field"
+      }
+    ],
+    "propertyDefinitions": {
+      "Label#40:4": {
+        "type": "TEXT",
+        "defaultValue": "Name"
+      },
+      "State": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Error"
+        ]
+      },
+      "Icon": {
+        "type": "VARIANT",
+        "defaultValue": "no-icon",
+        "variantOptions": [
+          "no-icon",
+          "icon-left",
+          "icon-right"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "a86680fe28336def1fc1949510ef8fa28c9750ff",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "no-icon"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            },
+            "instanceContent": {
+              "root": {
+                "name": "Input",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    8,
+                    0,
+                    8
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "FIXED"
+                },
+                "fill": {
+                  "hex": "ffffff"
+                },
+                "stroke": {
+                  "hex": "0a0a0a"
+                },
+                "strokeAlign": "INSIDE",
+                "strokeWeight": 1,
+                "strokesIncludedInLayout": false,
+                "children": [
+                  {
+                    "name": "Name",
+                    "type": "TEXT",
+                    "fillWidth": true,
+                    "text": {
+                      "characters": "Required",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "lineHeight": 20,
+                      "fontFamily": "Inter",
+                      "textAlign": "LEFT",
+                      "textAutoResize": "HEIGHT",
+                      "letterSpacing": 0,
+                      "style": "Body",
+                      "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+                    },
+                    "fill": {
+                      "hex": "737373"
+                    },
+                    "propRefs": {
+                      "characters": "Text"
+                    }
+                  }
+                ]
+              },
+              "propertyTypes": {
+                "Icon#2015:16": "INSTANCE_SWAP",
+                "Text#15:0": "TEXT",
+                "State": "VARIANT",
+                "Value": "VARIANT",
+                "Icon": "VARIANT"
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "type": "TEXT",
+            "text": {
+              "characters": "Visible on your profile",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "525252"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Default"
+        }
+      },
+      {
+        "name": "State=Error, Icon=no-icon",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "a86680fe28336def1fc1949510ef8fa28c9750ff",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "no-icon"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            },
+            "instanceContent": {
+              "root": {
+                "name": "Input",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "CENTER",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    8,
+                    0,
+                    8
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "FIXED"
+                },
+                "fill": {
+                  "hex": "ffffff"
+                },
+                "stroke": {
+                  "hex": "0a0a0a"
+                },
+                "strokeAlign": "INSIDE",
+                "strokeWeight": 1,
+                "strokesIncludedInLayout": false,
+                "children": [
+                  {
+                    "name": "Name",
+                    "type": "TEXT",
+                    "fillWidth": true,
+                    "text": {
+                      "characters": "Required",
+                      "fontSize": 14,
+                      "fontStyle": "Regular",
+                      "lineHeight": 20,
+                      "fontFamily": "Inter",
+                      "textAlign": "LEFT",
+                      "textAutoResize": "HEIGHT",
+                      "letterSpacing": 0,
+                      "style": "Body",
+                      "styleKey": "4f873f654808004d5659d6c4357bab70eb6008ff"
+                    },
+                    "fill": {
+                      "hex": "737373"
+                    },
+                    "propRefs": {
+                      "characters": "Text"
+                    }
+                  }
+                ]
+              },
+              "propertyTypes": {
+                "Icon#2015:16": "INSTANCE_SWAP",
+                "Text#15:0": "TEXT",
+                "State": "VARIANT",
+                "Value": "VARIANT",
+                "Icon": "VARIANT"
+              }
+            }
+          },
+          {
+            "name": "Error",
+            "type": "TEXT",
+            "text": {
+              "characters": "Please enter your name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "c10007"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "no-icon",
+          "State": "Error"
+        }
+      },
+      {
+        "name": "State=Default, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "0ea2c437fcd9193ec66992b27bec2b6a9a6b219f",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "icon-left"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "observedInstances": [
+                  {
+                    "nodeId": "I2046:1015;2015:1020",
+                    "path": [
+                      0
+                    ],
+                    "componentId": "2009:2377",
+                    "size": {
+                      "width": 16,
+                      "height": 16
+                    },
+                    "parentSize": {
+                      "width": 160,
+                      "height": 32
+                    },
+                    "relativeTransform": [
+                      [
+                        1,
+                        0,
+                        8
+                      ],
+                      [
+                        0,
+                        1,
+                        8
+                      ]
+                    ],
+                    "constraints": {
+                      "horizontal": "LEFT",
+                      "vertical": "TOP"
+                    }
+                  }
+                ],
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            }
+          },
+          {
+            "name": "Description",
+            "type": "TEXT",
+            "text": {
+              "characters": "Visible on your profile",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "525252"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Default"
+        }
+      },
+      {
+        "name": "State=Error, Icon=icon-left",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "0ea2c437fcd9193ec66992b27bec2b6a9a6b219f",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "icon-left"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "observedInstances": [
+                  {
+                    "nodeId": "I2046:1023;2015:1020",
+                    "path": [
+                      0
+                    ],
+                    "componentId": "2009:2377",
+                    "size": {
+                      "width": 16,
+                      "height": 16
+                    },
+                    "parentSize": {
+                      "width": 160,
+                      "height": 32
+                    },
+                    "relativeTransform": [
+                      [
+                        1,
+                        0,
+                        8
+                      ],
+                      [
+                        0,
+                        1,
+                        8
+                      ]
+                    ],
+                    "constraints": {
+                      "horizontal": "LEFT",
+                      "vertical": "TOP"
+                    }
+                  }
+                ],
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            }
+          },
+          {
+            "name": "Error",
+            "type": "TEXT",
+            "text": {
+              "characters": "Please enter your name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "c10007"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-left",
+          "State": "Error"
+        }
+      },
+      {
+        "name": "State=Default, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "8c049c3eadc4382591cc40f3e1885154c48dcda7",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "icon-right"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "observedInstances": [
+                  {
+                    "nodeId": "I2046:1031;2015:1024",
+                    "path": [
+                      1
+                    ],
+                    "componentId": "2009:2377",
+                    "size": {
+                      "width": 16,
+                      "height": 16
+                    },
+                    "parentSize": {
+                      "width": 160,
+                      "height": 32
+                    },
+                    "relativeTransform": [
+                      [
+                        1,
+                        0,
+                        136
+                      ],
+                      [
+                        0,
+                        1,
+                        8
+                      ]
+                    ],
+                    "constraints": {
+                      "horizontal": "LEFT",
+                      "vertical": "TOP"
+                    }
+                  }
+                ],
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            }
+          },
+          {
+            "name": "Description",
+            "type": "TEXT",
+            "text": {
+              "characters": "Visible on your profile",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "525252"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Default"
+        }
+      },
+      {
+        "name": "State=Error, Icon=icon-right",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 160,
+          "height": 80
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 4,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Name",
+              "fontSize": 14,
+              "fontStyle": "Bold",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "0a0a0a"
+            },
+            "propRefs": {
+              "characters": "Label"
+            }
+          },
+          {
+            "name": "Input",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 8,
+              "padding": [
+                0,
+                8,
+                0,
+                8
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "stroke": {
+              "hex": "0a0a0a"
+            },
+            "strokeAlign": "INSIDE",
+            "strokeWeight": 1,
+            "strokesIncludedInLayout": false,
+            "instanceOf": "Input",
+            "instanceKey": "8c049c3eadc4382591cc40f3e1885154c48dcda7",
+            "instanceSetKey": "ca530f3f3716ad3f47ef457e58b2ac556aaa6461",
+            "componentProperties": {
+              "Text#15:0": "Required",
+              "State": "Default",
+              "Value": "Placeholder",
+              "Icon": "icon-right"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "2009:2377",
+                "observedInstances": [
+                  {
+                    "nodeId": "I2046:1039;2015:1024",
+                    "path": [
+                      1
+                    ],
+                    "componentId": "2009:2377",
+                    "size": {
+                      "width": 16,
+                      "height": 16
+                    },
+                    "parentSize": {
+                      "width": 160,
+                      "height": 32
+                    },
+                    "relativeTransform": [
+                      [
+                        1,
+                        0,
+                        136
+                      ],
+                      [
+                        0,
+                        1,
+                        8
+                      ]
+                    ],
+                    "constraints": {
+                      "horizontal": "LEFT",
+                      "vertical": "TOP"
+                    }
+                  }
+                ],
+                "name": "search",
+                "key": "b5e5b1f4482874a61c24c4fa64f23bd06bf6bcc8"
+              }
+            },
+            "bbox": {
+              "width": 160,
+              "height": 32
+            }
+          },
+          {
+            "name": "Error",
+            "type": "TEXT",
+            "text": {
+              "characters": "Please enter your name",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "lineHeight": 20,
+              "fontFamily": "Inter",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
+              "letterSpacing": 0
+            },
+            "fill": {
+              "hex": "c10007"
+            }
+          }
+        ],
+        "variantProperties": {
+          "Icon": "icon-right",
+          "State": "Error"
+        }
+      }
+    ]
+  },
+  "_degradations": [
+    {
+      "code": "variables-unavailable",
+      "nodePath": "file:KPx3BgDXIJxd94zIGbQxjB",
+      "message": "/v1/files/:key/variables/local refused with HTTP 403: the token lacks the file_variables:read scope (NOT a plan limit — the same token reads the file). FIX: regenerate the token with file_variables:read and re-run. Until then every variable binding on this dump is a resolved literal (see the variable-unresolved rows) and no variable name survives"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "search:search/Vector",
+      "message": "fill: variable id VariableID:7:9 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=no-icon/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=no-icon/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=no-icon/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=no-icon/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-left/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Placeholder, Icon=icon-right/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-left/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Default, Value=Filled, Icon=icon-right/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-left/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Placeholder, Icon=icon-right/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-left/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right",
+      "message": "stroke: variable id VariableID:7:22 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right/Name",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Input:State=Focus, Value=Filled, Icon=icon-right/Icon/Vector",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Input/[observed content]/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=no-icon/Description",
+      "message": "fill: variable id VariableID:7:4 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Input/[observed content]/Name",
+      "message": "fill: variable id VariableID:7:5 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=no-icon/Error",
+      "message": "fill: variable id VariableID:7:6 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-left/Description",
+      "message": "fill: variable id VariableID:7:4 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-left/Error",
+      "message": "fill: variable id VariableID:7:6 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Default, Icon=icon-right/Description",
+      "message": "fill: variable id VariableID:7:4 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right",
+      "message": "itemSpacing: variable id VariableID:7:31 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Label",
+      "message": "fill: variable id VariableID:7:3 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "itemSpacing: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "paddingLeft: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "paddingRight: variable id VariableID:7:33 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "height: variable id VariableID:7:44 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "fill: variable id VariableID:7:11 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Input",
+      "message": "stroke: variable id VariableID:7:19 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Field:State=Error, Icon=icon-right/Error",
+      "message": "fill: variable id VariableID:7:6 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    }
+  ]
+}

@@ -288,6 +288,9 @@ export interface DumpHostOverride {
   path: string;
   fields: string[];
   fill?: DumpPaint;
+  stroke?: DumpPaint;
+  strokeWeight?: number;
+  solidStrokeTarget?: { nodeId: string; instanceId: string; componentId: string; instancePath: number[]; childPath: number[] };
   /** Exact paint owner, captured only for a VECTOR with one visible normal
    * SOLID fill. The nearest instance's actual main identity and numeric
    * child path disambiguate duplicate layer names and nested swaps. This
@@ -342,7 +345,9 @@ export interface DumpShape {
    *  ABSOLUTE (field case: Untitled UI slider/progress tracks, which
    *  collapsed to 0×0 with only fill+radius surviving). Inside auto-layout
    *  an unrotated rect still returns no shape (existing channels carry it). */
-  kind: 'polygon' | 'ellipse' | 'rect' | 'path' | 'stroked-path';
+  kind: 'polygon' | 'ellipse' | 'rect' | 'path' | 'stroked-path' | 'line';
+  /** Native zero-height LINE, exact unit-axis affine transform and identity. */
+  line?: import('../../packages/schema/src/native-line.js').NativeLineGeometry & { source?: { nodeId: string; parentId?: string } };
   /** Plugin capture only: original open centerline and SCALE parent basis. */
   strokePath?: StrokedPath;
   paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
@@ -697,6 +702,12 @@ export interface DumpNode {
    * main component, its complete API, or evidence of an unobserved variant.
    * Readers must check every observed use before sharing a static fallback. */
   instanceContent?: { root: DumpNode; propertyTypes: Record<string, string> };
+  /** Fully observed vector appearance at this usage; never a remote main API. */
+  instanceVectorContent?: {
+    source: Array<{nodeId:string;componentId:string;key:string}>;
+    shape: DumpShape;
+    paint: DumpPaint;
+  };
   children?: DumpNode[];
 }
 

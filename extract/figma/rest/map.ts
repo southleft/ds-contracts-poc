@@ -1,3 +1,6 @@
+import { strokeSvgGeometry } from './stroke-svg.js';
+import { observeInstanceVector } from './observed-vector.js';
+import { nativeLineIssue, type NativeLineGeometry } from '../../../packages/schema/src/native-line.js';
 import { filledPathIssue } from '../../../scripts/contract-schema.js';
 /**
  * REST → dump v1: map a Figma REST API nodes response onto the Plugin-API
@@ -352,6 +355,8 @@ export interface RestNode {
   rotation?: number;
   strokeAlign?: string;
   strokeDashes?: number[];
+  strokeCap?: string;
+  strokeJoin?: string;
   individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
   /** Auto-layout frames only. REST OMITS the default (`false`) — measured on
    *  the committed census responses: every frame this pipeline generated
@@ -372,6 +377,7 @@ export interface RestNode {
 
 /** GetFileNodesResponse (api_types.ts), trimmed. */
 export interface RestNodesResponse {
+  version?: string;
   name?: string;
   nodes: Record<
     string,
@@ -490,6 +496,7 @@ export type MapDegradationCode =
   | 'blend-mode-unsupported'
   | 'rotation-unsupported'
   | 'vector-geometry-unsupported'
+  | 'native-line-unsupported'
   | 'vector-mask-unsupported'
   // 'min-max-size-unsupported' retired in dump v1.4: literal min/max sizing
   // is CARRIED (minWidth/minHeight/maxWidth/maxHeight style facts) instead
@@ -542,6 +549,8 @@ export interface MapReport {
 }
 
 export interface MapOptions {
+  /** Frozen, version-pinned SVG observations; originals remain capture evidence. */
+  strokeSvgSources?: { fileKey: string; version: string; svgByNodeId: Record<string, string> };
   /** GET /v1/files/:key/variables/local response (needs a token with the
    *  `file_variables:read` scope — NOT a plan tier; see VariablesUnavailable).
    *  Absent → bound facts degrade to resolved literals, each named in the
@@ -649,6 +658,7 @@ function normalizeConstraints(
 }
 
 interface Ctx {
+  strokeSvgSources?: Record<string, string>;
   varNameById: Map<string, string>;
   /** The full variables response, indexed — present only when the caller
    *  passed one; drives the `_variables` capture (values per mode). */
@@ -1397,6 +1407,28 @@ const restRotationToCssDeg = (rad: number | undefined): number =>
  * parent box. The polygon side count is not on the REST surface — absent
  * means not captured (the plugin dump carries pointCount).
  */
+function mapStrokeSvgShape(node: RestNode, parent: RestNode | null | undefined, svg: string): { shape: DumpShape } | { issue: string } {
+  const identity = (t: number[][] | undefined) => t?.length === 2 && t.every(r => r.length === 3 && r.every(Number.isFinite)) &&
+    t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1;
+  const strokes = node.strokes?.filter(p => p.visible !== false) ?? [], paint = strokes[0];
+  if (!parent || !['FRAME', 'COMPONENT'].includes(parent.type) || parent.layoutMode && parent.layoutMode !== 'NONE' ||
+      !identity(parent.relativeTransform) || !identity(node.relativeTransform) ||
+      !parent.size || !node.size || node.constraints?.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE' ||
+      ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => Number((parent as unknown as Record<string, unknown>)[k] ?? 0) !== 0) ||
+      parent.strokes?.some(p => p.visible !== false) || node.fills?.some(p => p.visible !== false) || node.effects?.some(p => p.visible !== false) ||
+      node.isMask || node.strokeAlign !== 'CENTER' || node.strokeDashes?.length || node.cornerRadius || node.children?.length ||
+      strokes.length !== 1 || !paint || paint.type !== 'SOLID' || !paint.color ||
+      paint.blendMode && paint.blendMode !== 'NORMAL' || node.blendMode && !['NORMAL', 'PASS_THROUGH'].includes(node.blendMode) || (paint.opacity ?? 1) !== 1 || (paint.color.a ?? 1) !== 1 ||
+      !['NONE', 'ROUND', 'SQUARE'].includes(node.strokeCap ?? '') || !['MITER', 'ROUND', 'BEVEL'].includes(node.strokeJoin ?? '') ||
+      !Number.isFinite(node.strokeWeight) || node.strokeWeight! <= 0)
+    return { issue: 'stroke-svg-native-context-unqualified' };
+  const color = '#' + [paint.color.r, paint.color.g, paint.color.b].map(v => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
+  return strokeSvgGeometry(svg, { nodeId: node.id, width: node.size.x, height: node.size.y,
+    strokeWeight: node.strokeWeight!, strokeColor: color, cap: node.strokeCap as 'NONE' | 'ROUND' | 'SQUARE',
+    join: node.strokeJoin as 'MITER' | 'ROUND' | 'BEVEL', viewport: { width: parent.size.x, height: parent.size.y,
+      x: node.relativeTransform![0]![2]!, y: node.relativeTransform![1]![2]! } });
+}
+
 function mapShape(
   node: RestNode,
   ctx: Ctx,
@@ -1404,7 +1436,31 @@ function mapShape(
   parentBox: { x: number; y: number; width: number; height: number } | null,
   parent?: RestNode | null,
 ): DumpShape | undefined {
+  if (node.type === 'LINE') {
+    const width = node.size?.x, height = node.size?.y, transform = node.relativeTransform;
+    const line = { length: width, transform, cap: node.strokeCap ?? 'NONE', align: node.strokeAlign } as NativeLineGeometry;
+    let issue = nativeLineIssue(line);
+    if (!issue && height !== 0) issue = 'native-line-logical-height-invalid';
+    if (!issue && (parent?.type === 'GROUP' || parent?.type === 'BOOLEAN_OPERATION')) issue = 'native-line-parent-basis-unresolved';
+    if (!issue && node.isMask) issue = 'native-line-mask-unsupported';
+    if (!issue && node.strokeDashes?.length) issue = 'native-line-dashes-unsupported';
+    if (!issue && line.cap !== 'NONE' && typeof node.strokeWeight === 'number' && node.strokeWeight > line.length) issue = 'native-line-short-cap-unqualified';
+    if (issue) {
+      ctx.report.degradations.push({ code: 'native-line-unsupported', nodePath, message: issue });
+      return undefined;
+    }
+    const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
+    return { kind: 'line', width: width!, height: 0, ...(constraints ? { constraints } : {}), line: { ...line,
+      transform: line.transform.map(row => [...row]) as NativeLineGeometry['transform'],
+      source: { nodeId: node.id, ...(parent ? { parentId: parent.id } : {}) } } };
+  }
   if (node.type === 'VECTOR') {
+    const svg = ctx.strokeSvgSources?.[node.id];
+    if (svg) {
+      const captured = mapStrokeSvgShape(node, parent, svg);
+      if ('shape' in captured) return captured.shape;
+      ctx.report.degradations.push({ code: 'vector-geometry-unsupported', nodePath, message: captured.issue });
+    }
     const paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
     const fills = node.fills?.filter((p) => p.visible !== false) ?? [];
     const t = node.relativeTransform;
@@ -1716,13 +1772,13 @@ function indexSubtree(root: RestNode, cap = 200): Map<string, { node: RestNode; 
 
 /** A display path is useful for notes, but cannot authorize a paint override.
  * Follow source identities and reset the numeric path at each instance. */
-function solidFillTarget(root: RestNode, targetId: string): DumpHostOverride['solidFillTarget'] {
+function solidFillTarget(root: RestNode, targetId: string, plane: 'fill' | 'stroke' = 'fill'): DumpHostOverride['solidFillTarget'] {
   let count = 0, incomplete = false;
   const matches: NonNullable<DumpHostOverride['solidFillTarget']>[] = [];
   const visit = (node: RestNode, owner: RestNode, path: number[], depth: number, instancePath: number[], absolutePath: number[]) => {
     if (++count > 200 || depth > 32) { incomplete = true; return; }
     if (node.id === targetId) {
-      const paints = node.fills?.filter(p => p.visible !== false);
+      const paints = (plane === 'fill' ? node.fills : node.strokes)?.filter(p => p.visible !== false);
       if (node.type === 'VECTOR' && paints?.length === 1 && paints[0].type === 'SOLID' &&
           (!paints[0].blendMode || paints[0].blendMode === 'NORMAL') && owner.type === 'INSTANCE' && owner.componentId)
         matches.push({nodeId:node.id,instanceId:owner.id,componentId:owner.componentId,instancePath,childPath:path});
@@ -2122,6 +2178,11 @@ function mapNode(
               if (target) h.solidFillTarget = target;
             }
           }
+          if (fields.includes('strokes')) {
+            const stroke = mapPaint(hit.node.strokes, ctx, `${nodePath}/${path}`, 'stroke');
+            if (stroke) { h.stroke = stroke; const target = solidFillTarget(node, o.id, 'stroke'); if (target) h.solidStrokeTarget = target; }
+          }
+          if (fields.includes('strokeWeight') && Number.isFinite(hit.node.strokeWeight) && hit.node.strokeWeight! > 0) h.strokeWeight = hit.node.strokeWeight;
           hostOverrides.push(h);
         }
       }
@@ -2161,6 +2222,13 @@ function mapNode(
         root,
         propertyTypes: Object.fromEntries(Object.entries(node.componentProperties ?? {}).map(([key, value]) => [key, value.type])),
       };
+    }
+    if (out.propRefs?.mainComponent === undefined) {
+      const observed = observeInstanceVector(node, ctx.components);
+      if (observed) {
+        const paint = mapPaint(observed.vector.fills, ctx, `${nodePath}/[observed vector]`, 'fill');
+        if (paint) out.instanceVectorContent = {source:observed.source,shape:observed.shape,paint};
+      }
     }
     return out; // referenced identity and observed content remain separate
   }
@@ -2267,6 +2335,10 @@ function variablesCaptureGap(u: VariablesUnavailable | undefined): string {
 
 export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOptions = {}): MapResult {
   const report: MapReport = { fileName: nodesResponse.name, sets: [], degradations: [], notes: [] };
+  if (options.strokeSvgSources && options.strokeSvgSources.version !== nodesResponse.version)
+    report.notes.push('stroke-svg-source-version-mismatch — supplied centerlines not used');
+  if (options.strokeSvgSources && options.strokeSvgSources.fileKey !== options.fileKey)
+    report.notes.push('stroke-svg-source-file-mismatch — supplied centerlines not used');
 
   const varNameById = new Map<string, string>();
   const variablesById = new Map<string, RestLocalVariable>();
@@ -2352,6 +2424,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     indexNames(doc);
     const ctx: Ctx = {
       varNameById,
+      ...(options.strokeSvgSources && options.strokeSvgSources.version === nodesResponse.version && options.strokeSvgSources.fileKey === options.fileKey ? { strokeSvgSources: options.strokeSvgSources.svgByNodeId } : {}),
       ...(variablesIndex ? { variables: variablesIndex } : {}),
       ...(variablesUnavailable ? { variablesUnavailable } : {}),
       captured,

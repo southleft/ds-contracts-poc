@@ -514,6 +514,7 @@ export async function followInstances(
   return {
     response: {
       ...(first.name !== undefined ? { name: first.name } : {}),
+      ...(first.version !== undefined ? { version: first.version } : {}),
       nodes,
     },
     closure,

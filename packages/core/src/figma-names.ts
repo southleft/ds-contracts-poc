@@ -25,3 +25,28 @@ export const canonicalPropName = (property: string): string => {
   const name = camel(bare.replace(/[^A-Za-z0-9 _-]+/g, " ").trim());
   return /^[a-z]/.test(name) ? name : `p${name}`;
 };
+
+/** Allocate only colliding source spellings. Names already accepted by the
+ * converter remain unchanged; a later natural name cannot be overwritten by
+ * an allocated suffix. Sorting makes source traversal order irrelevant.
+ * Original design spellings remain the keys and are never merged. */
+export function allocateFigmaPropertyNames(properties: readonly string[]): Record<string, string> {
+  const groups = new Map<string, string[]>();
+  for (const property of [...new Set(properties)].sort()) {
+    const base = canonicalPropName(property);
+    const group = groups.get(base) ?? [];
+    group.push(property); groups.set(base, group);
+  }
+  const taken = new Set(groups.keys());
+  const aliases: Record<string, string> = Object.create(null);
+  for (const [base, group] of [...groups.entries()].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) {
+    if (group.length < 2) continue;
+    let ordinal = 1;
+    for (const property of group) {
+      let name: string;
+      do { name = `${base}${ordinal++}`; } while (taken.has(name));
+      taken.add(name); aliases[property] = name;
+    }
+  }
+  return aliases;
+}

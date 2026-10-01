@@ -291,6 +291,9 @@ export const EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096;
 export interface ExactProjectionOptions {
   /** `bindings.figma.absentVariants` in Figma terms. Absent → full Cartesian. */
   absentVariants?: unknown;
+  /** Actual names allocated by the proposer, held to the same injectivity
+   * guard. This changes no source property, option, tuple, or matrix bound. */
+  propertyNames?: Readonly<Record<string, string>>;
 }
 
 const absentVariantTuples = (
@@ -332,12 +335,13 @@ const absentVariantTuples = (
  *  the validator itself still refuses every undeclared ragged source. */
 export function deriveAbsentVariants(
   set: ExactDumpSet,
+  propertyNames: Readonly<Record<string, string>> = {},
 ): AbsentVariantTuple[] | null {
   if (set.type === "COMPONENT") return null;
   if (!isRecord(set.propertyDefinitions)) return null;
   if (set.statePreviewAxis !== undefined && set.statePreviewAxis !== null)
     return null;
-  const { axes, refusals } = readAxes(set.propertyDefinitions);
+  const { axes, refusals } = readAxes(set.propertyDefinitions, propertyNames);
   if (refusals.length > 0 || axes.length === 0) return null;
   const source = checkRows(set.variants, axes, "source", false);
   if (source.refusals.length > 0 || source.tuples.length === 0) return null;
@@ -387,6 +391,7 @@ const canonicalCollisions = (
 
 const readAxes = (
   definitions: Record<string, ExactPropertyDefinition | unknown>,
+  propertyNames: Readonly<Record<string, string>> = {},
 ): { axes: Axis[]; refusals: ExactProjectionRefusal[] } => {
   const axes: Axis[] = [];
   const refusals: ExactProjectionRefusal[] = [];
@@ -397,14 +402,25 @@ const readAxes = (
     )
     .sort();
 
-  for (const sources of canonicalCollisions(variantNames, canonicalPropName)) {
+  const codeName = (name: string): string =>
+    Object.hasOwn(propertyNames, name)
+      ? propertyNames[name]!
+      : canonicalPropName(name);
+  for (const name of variantNames) {
+    if (typeof codeName(name) !== "string" || !codeName(name))
+      refusals.push(
+        definitionRefusal(
+          `Allocated name for ${JSON.stringify(name)} must be a nonempty code input.`,
+        ),
+      );
+  }
+  if (refusals.length > 0) return { axes, refusals };
+  for (const sources of canonicalCollisions(variantNames, codeName)) {
     refusals.push({
       code: "EXACT_PROPERTY_CANONICAL_COLLISION",
       message: `Variant properties ${sources
         .map((source) => JSON.stringify(source))
-        .join(
-          ", ",
-        )} canonicalize to ${JSON.stringify(canonicalPropName(sources[0]))}.`,
+        .join(", ")} canonicalize to ${JSON.stringify(codeName(sources[0]))}.`,
       tuples: sources,
     });
   }
@@ -619,7 +635,10 @@ export function validateExactVariantProjection(
     definitions = set.propertyDefinitions;
   }
 
-  const { axes, refusals: definitionRefusals } = readAxes(definitions);
+  const { axes, refusals: definitionRefusals } = readAxes(
+    definitions,
+    options.propertyNames,
+  );
   if (definitionRefusals.length > 0) return refused(definitionRefusals);
   const standaloneWithoutAxes = standalone && axes.length === 0;
   if (axes.length === 0 && !standaloneWithoutAxes) {

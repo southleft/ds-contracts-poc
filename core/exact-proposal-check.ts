@@ -201,9 +201,9 @@ const collision: DumpSet = {
   ],
 };
 check(
-  "canonical property collision refuses with its stable validator code",
+  "allocating independent property names does not excuse a ragged source matrix",
   refusalCode(() => proposeFromDump(collision, baseOpts)) ===
-    "EXACT_PROPERTY_CANONICAL_COLLISION",
+    "EXACT_MATRIX_RAGGED",
 );
 
 console.log("\n3. Semantic ambiguity");
