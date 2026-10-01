@@ -8,6 +8,8 @@ import { asMinimalChildContract, proposeFromDump } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { reactEmitter, reactInlineEmitter } from './emitter.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
+import { allocateFigmaPropertyNames } from './figma-names.js';
+import { validateExactVariantProjection } from './exact-projection.js';
 import { lowerUnsetProposal } from './figma-unset.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
@@ -201,7 +203,8 @@ test('optional boolean and enum identities retain omitted, false and true withou
 
 test('ordinary boolean identity forwards a typed value across renamed parent and child props', () => {
   const result = propose(fixture(false));
-  assert.deepEqual(result.ref.props, { lit: '{power}' });
+  assert.deepEqual(result.ref.props, { lit: '{active}' });
+  assert.equal(result.contract.props[0].name, 'active', 'the retained parent name owns the binding');
 });
 
 function enumToBooleanFixture() {
@@ -529,4 +532,136 @@ test('different declared samples for one shared input remain separate compilable
   assert.match(stories, /<Sample/);
   assert.match(stories, /<Indicator/);
   assert.equal(JSON.stringify(f.contract), before);
+});
+
+
+test('source input allocation is injective, traversal independent, and reserves existing names', () => {
+  const properties = ['Label?', 'Label', 'label1', 'Tone', 'iconBefore', '↳ <Icon> before'];
+  const names = allocateFigmaPropertyNames(properties);
+  assert.deepEqual(names, allocateFigmaPropertyNames([...properties].reverse()));
+  assert.equal(names.Tone, undefined);
+  assert.equal(names.label1, undefined);
+  assert.notEqual(names.Label, 'label1');
+  assert.notEqual(names['Label?'], 'label1');
+  assert.notEqual(names.Label, names['Label?']);
+  assert.notEqual(names.iconBefore, names['↳ <Icon> before']);
+  assert.equal(Object.getPrototypeOf(names), null);
+});
+
+function independentInputFixture(): DumpSet {
+  return {
+    setName: 'IndependentInputs', type: 'COMPONENT',
+    propertyDefinitions: {
+      'Label#10:1': {type: 'TEXT', defaultValue: 'Original label'},
+      'Label?#10:2': {type: 'BOOLEAN', defaultValue: true},
+    },
+    boolDefaults: {'Label?': true},
+    variants: [{name: 'IndependentInputs', type: 'COMPONENT', children: [{
+      name: 'Caption', type: 'TEXT', propRefs: {characters: 'Label', visible: 'Label?'},
+      text: {characters: 'Original label', fontFamily: 'Inter', fontSize: 14, fontStyle: 'Regular'},
+    }]}],
+  };
+}
+
+test('text and visibility retain separate source bindings and independently update in both React emitters', async t => {
+  const set = independentInputFixture(), before = JSON.stringify(set);
+  const proposed = proposeFromDump(set, {corpus, contractIdByName: new Map(), hiddenCaptured: true});
+  const contract = ContractSchema.parse(proposed.contract);
+  const label = contract.props.find(p => p.bindings.figma.property === 'Label')!;
+  const visible = contract.props.find(p => p.bindings.figma.property === 'Label?')!;
+  assert.equal(label.type, 'text'); assert.equal(visible.type, 'boolean');
+  assert.notEqual(label.name, visible.name);
+  assert.equal(label.default, 'Original label'); assert.equal(visible.default, true);
+  assert.equal(label.bindings.code.prop, label.name); assert.equal(visible.bindings.code.prop, visible.name);
+  assert.equal(JSON.stringify(set), before);
+  const ctx = {contracts: new Map([[contract.id, contract]]),
+    tokens: {primitives: {}, semantic: {}, light: {}, dark: {}, brands: {default: {}}},
+    icons: new Map<string, string>(), mode: 'light' as const};
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const files = emitter.emit(contract, ctx);
+    assert.deepEqual(generatedTypeErrors(contract.name, files[0].contents), []);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, contract.name, files[0].contents, files.find(f => f.path.endsWith('.css'))?.contents);
+      await render({[label.name]: 'Caller label', [visible.name]: true});
+      assert.equal(await page.getByText('Caller label', {exact: true}).count(), 1);
+      await render({[label.name]: 'Hidden replacement', [visible.name]: false});
+      assert.equal(await page.getByText('Hidden replacement', {exact: true}).count(), 0);
+      await render({[label.name]: 'Visible replacement', [visible.name]: true});
+      assert.equal(await page.getByText('Visible replacement', {exact: true}).count(), 1);
+    } finally {await page.close();}
+  }
+});
+
+test('distinct axes keep every original tuple while allocated names remain checked', () => {
+  const set: DumpSet = {setName: 'IndependentAxes', type: 'COMPONENT_SET', propertyDefinitions: {
+    '<Extra': {type: 'VARIANT', defaultValue: 'Left', variantOptions: ['Left', 'Right']},
+    'Extra>': {type: 'VARIANT', defaultValue: 'Top', variantOptions: ['Top', 'Bottom']},
+  }, variants: ['Left', 'Right'].flatMap(left => ['Top', 'Bottom'].map(top => ({
+    name: `<Extra=${left}, Extra>=${top}`, type: 'COMPONENT', variantProperties: {'<Extra': left, 'Extra>': top},
+  })))};
+  const original = JSON.stringify(set);
+  const result = proposeFromDump(set, {corpus, contractIdByName: new Map()});
+  assert.equal(result.projection.status, 'verified-exact');
+  const contract = ContractSchema.parse(result.contract);
+  assert.equal(new Set(contract.props.map(p => p.name)).size, 2);
+  assert.deepEqual(contract.props.map(p => p.bindings.figma.property).sort(), ['<Extra', 'Extra>']);
+  assert.equal(JSON.stringify(set), original);
+  const duplicatedNames = validateExactVariantProjection(set, undefined, {propertyNames: {'<Extra': 'same', 'Extra>': 'same'}});
+  assert.equal(duplicatedNames.status, 'refused');
+  if (duplicatedNames.status === 'refused') assert.equal(duplicatedNames.code, 'EXACT_PROPERTY_CANONICAL_COLLISION');
+  const incomplete = structuredClone(set); incomplete.variants.pop();
+  assert.throws(() => proposeFromDump(incomplete, {corpus, contractIdByName: new Map()}), error => (error as {code?: string}).code === 'EXACT_MATRIX_RAGGED');
+});
+
+
+test('retained Figma property names preserve independent text and visibility APIs on readback', () => {
+  const set = independentInputFixture();
+  const first = ContractSchema.parse(proposeFromDump(set, {corpus, contractIdByName: new Map(), hiddenCaptured: true}).contract);
+  const names = Object.fromEntries(first.props.map(p => [p.bindings.figma.property!, p.name]));
+  const stamped = {...set, propNames: names};
+  const before = JSON.stringify(stamped);
+  const second = ContractSchema.parse(proposeFromDump(stamped, {corpus, contractIdByName: new Map(), hiddenCaptured: true}).contract);
+  assert.deepEqual(second.props.map(p => [p.name, p.type, p.default, p.bindings.figma.property]),
+    first.props.map(p => [p.name, p.type, p.default, p.bindings.figma.property]));
+  assert.equal(JSON.stringify(stamped), before);
+});
+
+test('retained axis names survive readback without relaxing exact matrix checks', () => {
+  const set: DumpSet = {setName: 'StampedAxes', type: 'COMPONENT_SET' as const, propNames: {'<Extra': 'extra1', 'Extra>': 'extra2'},
+    propertyDefinitions: {
+      '<Extra': {type: 'VARIANT', defaultValue: 'Left', variantOptions: ['Left', 'Right']},
+      'Extra>': {type: 'VARIANT', defaultValue: 'Top', variantOptions: ['Top', 'Bottom']},
+    }, variants: ['Left', 'Right'].flatMap(left => ['Top', 'Bottom'].map(top => ({
+      name: `<Extra=${left}, Extra>=${top}`, type: 'COMPONENT', variantProperties: {'<Extra': left, 'Extra>': top},
+    })))};
+  const result = proposeFromDump(set, {corpus, contractIdByName: new Map()});
+  assert.equal(result.projection.status, 'verified-exact');
+  assert.deepEqual(ContractSchema.parse(result.contract).props.map(p => p.name).sort(), ['extra1', 'extra2']);
+  const bad = {...set, propNames: {'<Extra': 'same', 'Extra>': 'same'}};
+  assert.throws(() => proposeFromDump(bad, {corpus, contractIdByName: new Map()}), error => (error as {code?: string}).code === 'EXACT_PROPERTY_CANONICAL_COLLISION');
+  const ragged = structuredClone(set); ragged.variants.pop();
+  assert.throws(() => proposeFromDump(ragged, {corpus, contractIdByName: new Map()}), error => (error as {code?: string}).code === 'EXACT_MATRIX_RAGGED');
+});
+
+test('an unresolved child uses one complete input namespace across partial callers', () => {
+  const set: DumpSet = {setName: 'PartialCallers', type: 'COMPONENT', propertyDefinitions: {}, variants: [{
+    name: 'PartialCallers', type: 'COMPONENT', children: [
+      {name: 'First', type: 'INSTANCE', instanceOf: 'UnknownChild', instanceSetKey: 'unknown-key', componentProperties: {'Label#1:1': 'First label'}},
+      {name: 'Second', type: 'INSTANCE', instanceOf: 'UnknownChild', instanceSetKey: 'unknown-key', componentProperties: {'Label#1:1': 'Second label', 'Label?#1:2': true}},
+    ],
+  }]};
+  const before = JSON.stringify(set);
+  const proposed = proposeFromDump(set, {corpus, contractIdByName: new Map(), mintUnbound: true});
+  const contract = ContractSchema.parse(proposed.contract);
+  const stub = ContractSchema.parse(proposed.childStubs![0]);
+  const label = stub.props.find(p => p.bindings.figma.property === 'Label')!;
+  const visible = stub.props.find(p => p.bindings.figma.property === 'Label?')!;
+  assert(label); assert(visible); assert.notEqual(label.name, visible.name);
+  const callers = walkAnatomy(contract).filter(row => row.part.component?.id === stub.id).map(row => row.part.component!);
+  assert.equal(callers.length, 2);
+  assert.deepEqual(callers[0].props, {[label.name]: 'First label'});
+  assert.deepEqual(callers[1].props, {[label.name]: 'Second label', [visible.name]: true});
+  assert.equal(JSON.stringify(set), before);
 });

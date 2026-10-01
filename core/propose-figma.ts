@@ -1,3 +1,4 @@
+import { allocateFigmaPropertyNames } from './figma-names.js';
 import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
 import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {observedInstanceGroups, observedInstanceIdentity, staticInstanceContent} from './observed-instance-content.js';
@@ -2324,6 +2325,9 @@ interface Ctx {
    *  see registerTextProp. Empty for a set this pipeline did not draw, which
    *  is exactly when canonicalising is the right answer. */
   propNames?: Record<string, string>;
+  /** Source spelling allocation, separate from authored pipeline stamps. */
+  allocatedPropNames: Record<string, string>;
+  instanceInputNames: ReadonlyMap<string, Record<string, string>>;
   mint?: MintCapture;
   /** Exact fails closed on text-style identity gaps; reviewable notes. */
   projectionMode: 'exact' | 'reviewable-inversion';
@@ -8895,7 +8899,36 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
  *  part's content to it — and the two drifting apart emits a contract whose
  *  own anatomy references a prop that does not exist. */
 function textPropName(ctx: Ctx, property: string): string {
-  return ctx.propNames?.[property] ?? canonicalPropName(property);
+  return ctx.propNames?.[property] ?? ctx.allocatedPropNames[property] ?? canonicalPropName(property);
+}
+
+/** Component-property namespaces are collected before tree traversal. An
+ * unresolved child's first caller and its eventual stub see the SAME complete
+ * set of observed spellings, including keys absent from an early occurrence. */
+function instanceInputNames(roots: readonly DumpNode[], groups: ReadonlyMap<string, readonly DumpNode[]>): Map<string, Record<string, string>> {
+  const properties = new Map<string, Set<string>>();
+  const collect = (identity: string, node: DumpNode): void => {
+    const names = properties.get(identity) ?? new Set<string>();
+    for (const key of Object.keys(node.componentProperties ?? {})) names.add(key.split('#')[0]!);
+    properties.set(identity, names);
+  };
+  for (const [identity, uses] of groups) for (const node of uses) collect(identity, node);
+  const visit = (node: DumpNode): void => {
+    if (node.type === 'INSTANCE') {
+      collect(observedInstanceIdentity(node) ?? `name:${node.instanceOf ?? node.name}`, node);
+      return;
+    }
+    for (const child of node.children ?? []) visit(child);
+  };
+  roots.forEach(visit);
+  return new Map([...properties].map(([identity, names]) => [identity, allocateFigmaPropertyNames([...names])]));
+}
+function instanceInputName(ctx: Ctx, instanceOf: string, property: string, keys?: {setKey?: string; key?: string}): string {
+  const identity = keys?.setKey ? `set:${keys.setKey}` : keys?.key ? `main:${keys.key}` : `name:${instanceOf}`;
+  return ctx.instanceInputNames.get(identity)?.[property] ?? canonicalPropName(property);
+}
+function allocatedInputName(ctx: Ctx, property: string): string {
+  return ctx.propNames?.[property] ?? ctx.allocatedPropNames[property] ?? canonicalPropName(property);
 }
 
 function registerTextProp(
@@ -8994,7 +9027,7 @@ function resolveTextOverrideDemand(
   const collectDrawn = (m: Merged): void => {
     for (const o of m.occ) {
       const p = o.node.propRefs?.characters;
-      if (p) taken.add(canonicalPropName(p));
+      if (p) taken.add(textPropName(ctx, p));
     }
     for (const c of m.children) collectDrawn(c);
   };
@@ -9145,13 +9178,13 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
           `${where}: per-item boolean "${bare}" does not map through ${mapping.id}'s bindings as a boolean prop — not carried as a field; verify the child contract is current (P9)`,
         );
       } else {
-        claimField(mappingProp?.name ?? canonicalPropName(bare), 'boolean', rawKey, bare);
+        claimField(mappingProp?.name ?? instanceInputName(ctx, instanceOf, bare, keys), 'boolean', rawKey, bare);
       }
       continue;
     }
     const textCertain = mapping ? mappingProp?.type === 'text' : rawKey.includes('#');
     if (textCertain) {
-      claimField(mappingProp?.name ?? canonicalPropName(bare), 'text', rawKey, bare);
+      claimField(mappingProp?.name ?? instanceInputName(ctx, instanceOf, bare, keys), 'text', rawKey, bare);
     } else if (!varying) {
       constantKeys.push(rawKey);
     } else if (mapping && mappingProp?.type && typeof mappingProp.type === 'object' &&
@@ -9744,7 +9777,7 @@ function buildPartFromEvidence(
     // display name (renaming the layer renames the property, live probe 2b),
     // so `m.name` is the property and the part's slot name canonicalizes from
     // it exactly as the INSTANCE_SWAP path canonicalizes its property.
-    const nativeSlot: Record<string, unknown> = { name: canonicalPropName(m.name) };
+    const nativeSlot: Record<string, unknown> = { name: allocatedInputName(ctx, m.name) };
     applySlotAccepts(nativeSlot, m.name, ctx, where, true, first(m.occ, (n) => n.propRefs?.slotContentId));
     // The slot's DRAWN CHILDREN are its design-time content (instances
     // inherit them; resetSlot returns to them) — the native spelling of what
@@ -9868,7 +9901,7 @@ function buildPartFromEvidence(
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
       // just without wrapper geometry (not the generator's shape — note it).
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
-      const bareSlot: Record<string, unknown> = { name: canonicalPropName(swapProperty) };
+      const bareSlot: Record<string, unknown> = { name: allocatedInputName(ctx, swapProperty) };
       applySlotAccepts(bareSlot, swapProperty, ctx, where);
       applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where);
       part.slot = bareSlot;
@@ -10412,7 +10445,7 @@ function buildPartFromEvidence(
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
     nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
-    const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
+    const slot: Record<string, unknown> = { name: allocatedInputName(ctx, soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
     const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -10495,7 +10528,7 @@ function buildPartFromEvidence(
  *  a pre-v1.1 dump) and recovers nothing — the base-instance promotion pass
  *  may still hand a default over later. */
 function applyVisibleBinding(part: Record<string, unknown>, property: string, ctx: Ctx, where: string, m?: Merged) {
-  const name = canonicalPropName(property);
+  const name = allocatedInputName(ctx, property);
   if (!ctx.boolProps.some((b) => b.property === property)) {
     // dump v1.5: the BOOLEAN property definition's defaultValue is CAPTURED
     // evidence — it wins over the hidden-pattern inference (field case:
@@ -10661,7 +10694,7 @@ function canonicalizeInstanceProps(
     // through VERBATIM (camel-canonicalizing "Label" into "label" would
     // rewrite drawn content).
     const isTextKey = property.includes('#') && typeof value === 'string';
-    out[canonicalPropName(property.split('#')[0])] =
+    out[instanceInputName(ctx, instanceOf, property.split('#')[0]!, keys)] =
       typeof value === 'string' && !isTextKey ? camel(value) : value;
   }
   if (child && mapped === Object.keys(applied).length) {
@@ -10775,7 +10808,7 @@ function promoteBaseInstanceCaptures(captures: BaseInstanceCapture[], ctx: Ctx, 
   }
   for (const key of keys) {
     const property = key.split('#')[0];
-    const name = canonicalPropName(property);
+    const name = allocatedInputName(ctx, property);
     const values = captures.map((c) => c.properties[key]).filter((v) => v !== undefined);
     const value = values[0];
     const distinct = [...new Set(values.map((v) => String(v)))];
@@ -11312,8 +11345,9 @@ function buildChildStub(
     }
   }
   const props: Array<Record<string, unknown>> = [];
+  const stubNames = allocateFigmaPropertyNames([...observed.keys()]);
   for (const [property, { suffixed, values }] of observed) {
-    const name = canonicalPropName(property);
+    const name = ctx.instanceInputNames.get(capture.setKey ? `set:${capture.setKey}` : capture.observed[0]?.instanceKey ? `main:${capture.observed[0].instanceKey}` : `name:${capture.instanceOf}`)?.[property] ?? stubNames[property] ?? canonicalPropName(property);
     const v0 = values[0];
     if (typeof v0 === 'boolean') {
       props.push({
@@ -12781,13 +12815,25 @@ function proposeFromDumpFenced(
   // exact mode). Stripped here, on a private clone, BY NAME per node.
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
+  const allocatedPropNames = (set as {propNames?: unknown}).propNames || (set as {semantics?: unknown}).semantics || set.statePreviewAxis || readStampedContractId(set)
+    ? Object.create(null) as Record<string, string>
+    : allocateFigmaPropertyNames(Object.keys(set.propertyDefinitions ?? {}).map(name => name.split('#')[0]!));
+  const authoredPropNames: Record<string, string> = Object.create(null);
+  const rawPropNames = (set as {propNames?: unknown}).propNames;
+  if (rawPropNames !== null && typeof rawPropNames === 'object' && !Array.isArray(rawPropNames)) {
+    for (const [property, name] of Object.entries(rawPropNames)) {
+      if (property && typeof name === 'string' && name) authoredPropNames[property] = name;
+    }
+  }
+  const proposalInputNames = Object.assign(Object.create(null), allocatedPropNames, authoredPropNames) as Record<string, string>;
+  const nameOptions = { propertyNames: proposalInputNames };
   const typedAxes = readCodeValueAxes(set);
   const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
     ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
   /** The verdict on the set AS DRAWN, against the full Cartesian. */
-  const cartesianProjection = validateExactVariantProjection(set);
+  const cartesianProjection = validateExactVariantProjection(set, undefined, nameOptions);
   // DECLARED ABSENT VARIANTS (bindings.figma.absentVariants). A designer's set
   // whose rows are a STRICT SUBSET of the product — every row valid, none
   // duplicated, none outside the product — is not refused for being ragged:
@@ -12831,7 +12877,7 @@ function proposeFromDumpFenced(
   const absentVariants = pipelineDrew
     ? scopedAbsentVariants(set, opts.contractsById)
     : ragged && stampsObservable
-      ? deriveAbsentVariants(set)
+      ? deriveAbsentVariants(set, proposalInputNames)
       : null;
   // MEANING BOUNDS on declaring by rows (docs/23 §D.40), read from the ragged
   // refusal's own counts BEFORE any product is materialised. A declaration
@@ -12854,7 +12900,7 @@ function proposeFromDumpFenced(
       throw new ExactProjectionError('EXACT_MATRIX_RAGGED', `${counts?.message ?? ''} ${why}`.trim(), cartesianProjection);
     }
   }
-  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
+  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set, proposalInputNames) !== null) {
     throw new ExactProjectionError(
       'EXACT_MATRIX_RAGGED',
       cartesianProjection.refusals[0]?.message ?? 'Source matrix is ragged.',
@@ -12865,7 +12911,7 @@ function proposeFromDumpFenced(
   const sourceProjection =
     absentVariants === null
       ? cartesianProjection
-      : validateExactVariantProjection(set, undefined, { absentVariants });
+      : validateExactVariantProjection(set, undefined, { ...nameOptions, absentVariants });
   if (absentVariants !== null) sparseFence = { absent: absentVariants, ambiguous: new Map() };
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
@@ -13163,6 +13209,7 @@ function proposeFromDumpFenced(
   }
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
+  for (const axis of axes) axis.propName = proposalInputNames[axis.property] ?? axis.propName;
   for (const mapped of typedAxes) {
     const axis = axes.find(a => a.property === mapped.property);
     if (!axis) throw Error(`FIGMA_CODE_VALUES_PROJECTION_UNSUPPORTED:${mapped.property}`);
@@ -13235,6 +13282,8 @@ function proposeFromDumpFenced(
 
   const ctx: Ctx = {
     instanceContentGroups: opts.instanceContentGroups ?? observedInstanceGroups(set.variants),
+    instanceInputNames: instanceInputNames(set.variants, opts.instanceContentGroups ?? observedInstanceGroups(set.variants)),
+    allocatedPropNames,
     setName: set.setName,
     axes,
     totalVariants: variantNames,
@@ -13274,15 +13323,7 @@ function proposeFromDumpFenced(
         (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
         stampedContractId,
     ),
-    ...(() => {
-      const raw = (set as { propNames?: unknown }).propNames;
-      if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return {};
-      const map: Record<string, string> = {};
-      for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
-        if (typeof k === 'string' && typeof v === 'string' && k && v) map[k] = v;
-      }
-      return Object.keys(map).length > 0 ? { propNames: map } : {};
-    })(),
+    ...(Object.keys(authoredPropNames).length > 0 ? {propNames: authoredPropNames} : {}),
     projectionMode,
     mint: opts.mintUnbound
       ? {
@@ -13321,6 +13362,9 @@ function proposeFromDumpFenced(
   };
 
   ctx.notes.push(...preNotes);
+  for (const [property, name] of Object.entries(allocatedPropNames)) ctx.notes.push(
+    `property-input-name-allocation: "${property}" shares a normalized spelling with another independent property — code input "${name}"; original design spelling, kind, defaults and references retained`,
+  );
 
   // Base-instance flattening runs PRE-merge, per variant, on a private clone
   // (a caller's dump is never mutated): each variant wrapping an instance of
@@ -13663,7 +13707,7 @@ function proposeFromDumpFenced(
   // component's main content — name `children` (the code-side default slot).
   const defaultSlot = ctx.slots.find((s) => !s.optional);
   for (const s of ctx.slots) {
-    const name = s === defaultSlot ? 'children' : canonicalPropName(s.property);
+    const name = s === defaultSlot ? 'children' : allocatedInputName(ctx, s.property);
     const slot = s.part.slot as Record<string, unknown>;
     slot.name = name;
     if (pascal(name) !== s.property) slot.bindings = { figma: { property: s.property } };
@@ -14619,7 +14663,7 @@ function proposeFromDumpFenced(
       validateExactVariantProjection(
         set,
         exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
-        absentVariants === null ? {} : { absentVariants },
+        absentVariants === null ? nameOptions : { ...nameOptions, absentVariants },
       ),
       'verified-exact',
     );
@@ -14627,7 +14671,7 @@ function proposeFromDumpFenced(
     const returned = validateExactVariantProjection(
       set,
       exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
-      absentVariants === null ? {} : { absentVariants },
+      absentVariants === null ? nameOptions : { ...nameOptions, absentVariants },
     );
     projection =
       returned.status === 'verified-exact'
