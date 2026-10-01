@@ -1214,6 +1214,292 @@
           ],
           "additionalProperties": false
         },
+        "absoluteGeometry": {
+          "type": "object",
+          "properties": {
+            "box": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "height": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "right": {
+                  "type": "number"
+                },
+                "bottom": {
+                  "type": "number"
+                },
+                "constraints": {
+                  "type": "object",
+                  "properties": {
+                    "horizontal": {
+                      "type": "string",
+                      "enum": [
+                        "LEFT",
+                        "RIGHT",
+                        "CENTER",
+                        "STRETCH",
+                        "SCALE"
+                      ]
+                    },
+                    "vertical": {
+                      "type": "string",
+                      "enum": [
+                        "TOP",
+                        "BOTTOM",
+                        "CENTER",
+                        "STRETCH",
+                        "SCALE"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "horizontal",
+                    "vertical"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "width",
+                "height",
+                "right",
+                "bottom",
+                "constraints"
+              ],
+              "additionalProperties": false
+            },
+            "parent": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "width",
+                "height"
+              ],
+              "additionalProperties": false
+            },
+            "border": {
+              "type": "object",
+              "properties": {
+                "left": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "right": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "top": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "bottom": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "left",
+                "right",
+                "top",
+                "bottom"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "box",
+            "parent",
+            "border"
+          ],
+          "additionalProperties": false
+        },
+        "absoluteGeometryByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "geometry": {
+                    "type": "object",
+                    "properties": {
+                      "box": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "width": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "right": {
+                            "type": "number"
+                          },
+                          "bottom": {
+                            "type": "number"
+                          },
+                          "constraints": {
+                            "type": "object",
+                            "properties": {
+                              "horizontal": {
+                                "type": "string",
+                                "enum": [
+                                  "LEFT",
+                                  "RIGHT",
+                                  "CENTER",
+                                  "STRETCH",
+                                  "SCALE"
+                                ]
+                              },
+                              "vertical": {
+                                "type": "string",
+                                "enum": [
+                                  "TOP",
+                                  "BOTTOM",
+                                  "CENTER",
+                                  "STRETCH",
+                                  "SCALE"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "horizontal",
+                              "vertical"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "width",
+                          "height",
+                          "right",
+                          "bottom",
+                          "constraints"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "parent": {
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "height": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          }
+                        },
+                        "required": [
+                          "width",
+                          "height"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "border": {
+                        "type": "object",
+                        "properties": {
+                          "left": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "right": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "top": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "bottom": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "left",
+                          "right",
+                          "top",
+                          "bottom"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "box",
+                      "parent",
+                      "border"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "values",
+                  "geometry"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "layoutByProp": {
           "type": "object",
           "properties": {
