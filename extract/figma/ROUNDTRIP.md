@@ -7,7 +7,7 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 | Component | MATCHED | CANVAS-ABSENT | MISMATCH | Verdict |
 |---|---|---|---|---|
 | Badge | 11 | 4 | 0 | ✅ zero mismatch |
-| Switch | 37 | 13 | 0 | ✅ zero mismatch |
+| Switch | 38 | 12 | 0 | ✅ zero mismatch |
 | Card | 35 | 14 | 0 | ✅ zero mismatch |
 
 ## Badge
@@ -25,11 +25,11 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 
 ## Switch
 
-### MATCHED (37)
+### MATCHED (38)
 
-`id` · `name` · `prop value` · `prop label` · `prop description` · `part root child order` · `part root layout` · `part root gap` · `part root/track child order` · `part root/track layout` · `part root/track width` · `part root/track height` · `part root/track background-color` · `part root/track border-radius` · `part root/track padding-inline` · `part root/track padding-block` · `part root/track/spacerStart layout` · `part root/track/spacerStart visibleWhen` · `part root/track/thumb layout` · `part root/track/thumb width` · `part root/track/thumb height` · `part root/track/thumb background-color` · `part root/track/thumb border-radius` · `part root/track/spacerEnd layout` · `part root/track/spacerEnd visibleWhen` · `part root/textCol child order` · `part root/textCol layout` · `part root/textCol gap` · `part root/textCol/labelText layout` · `part root/textCol/labelText content` · `part root/textCol/descriptionText layout` · `part root/textCol/descriptionText content` · `text root/textCol/labelText color (effective)` · `text root/textCol/labelText font-size (effective)` · `text root/textCol/descriptionText color (effective)` · `text root/textCol/descriptionText font-size (effective)` · `text root/textCol/descriptionText font-weight (effective)`
+`id` · `name` · `prop value` · `prop label` · `prop description` · `part root child order` · `part root layout` · `part root gap` · `part root/track child order` · `part root/track layout` · `part root/track width` · `part root/track height` · `part root/track background-color` · `part root/track border-radius` · `part root/track padding-inline` · `part root/track padding-block` · `part root/track/spacerStart layout` · `part root/track/spacerStart visibleWhen` · `part root/track/thumb layout` · `part root/track/thumb width` · `part root/track/thumb height` · `part root/track/thumb background-color` · `part root/track/thumb border-radius` · `part root/track/spacerEnd layout` · `part root/track/spacerEnd visibleWhen` · `part root/textCol child order` · `part root/textCol layout` · `part root/textCol gap` · `part root/textCol/labelText layout` · `part root/textCol/labelText content` · `part root/textCol/descriptionText layout` · `part root/textCol/descriptionText content` · `text root/textCol/labelText color (effective)` · `text root/textCol/labelText font-size (effective)` · `text root/textCol/labelText font-weight (effective)` · `text root/textCol/descriptionText color (effective)` · `text root/textCol/descriptionText font-size (effective)` · `text root/textCol/descriptionText font-weight (effective)`
 
-### CANVAS-ABSENT (13) — declared fidelity limits
+### CANVAS-ABSENT (12) — declared fidelity limits
 
 - `semantics` — element/role are not drawn on the canvas ({"element":"label"})
 - `a11y` — accessibility requirements are not canvas-recoverable
@@ -41,7 +41,6 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 - `part root/track/thumb element` — host element ("span") is not drawn on the canvas
 - `part root/textCol/labelText element` — host element ("span") is not drawn on the canvas
 - `part root/textCol/descriptionText element` — host element ("span") is not drawn on the canvas
-- `text root/textCol/labelText font-weight (effective)` — {font.control.weight} resolves to the runtime text default (Medium) — canvas-indistinguishable from no weight token
 - `text root/textCol/labelText font-family (effective)` — {font.control.family} — the canvas renders Inter regardless (documented fidelity scope)
 - `text root/textCol/descriptionText font-family (effective)` — {font.control.family} — the canvas renders Inter regardless (documented fidelity scope)
 
@@ -53,7 +52,7 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 
 ### MATCHED (35)
 
-`id` · `name` · `prop title` · `part root child order` · `part root layout` · `part root background-color` · `part root border-color` · `part root border-width` · `part root border-radius` · `part root max-width` · `part root/header child order` · `part root/header layout` · `part root/header gap` · `part root/header padding-inline` · `part root/header padding-block` · `part root/header/avatar layout` · `part root/header/avatar component id` · `part root/header/title layout` · `part root/header/title content` · `part root/body layout` · `part root/body gap` · `part root/body padding-inline` · `part root/body padding-block` · `part root/body slot name` · `part root/body slot figmaProperty` · `part root/footer layout` · `part root/footer gap` · `part root/footer padding-inline` · `part root/footer padding-block` · `part root/footer optional` · `part root/footer slot name` · `part root/footer slot figmaProperty` · `text root/header/title color (effective)` · `text root/header/title font-size (effective)` · `text root/header/title font-weight (effective)`
+`id` · `name` · `prop title` · `part root child order` · `part root layout` · `part root background-color` · `part root border-color` · `part root border-width` · `part root border-radius` · `part root max-width` · `part root/header child order` · `part root/header layout` · `part root/header gap` · `part root/header padding-inline` · `part root/header padding-block` · `part root/header/avatar layout` · `part root/header/avatar component id` · `part root/header/title layout` · `part root/header/title content` · `part root/body layout` · `part root/body gap` · `part root/body padding-inline` · `part root/body padding-block` · `part root/body slot name` · `part root/body slot bindings.figma.property` · `part root/footer layout` · `part root/footer gap` · `part root/footer padding-inline` · `part root/footer padding-block` · `part root/footer optional` · `part root/footer slot name` · `part root/footer slot bindings.figma.property` · `text root/header/title color (effective)` · `text root/header/title font-size (effective)` · `text root/header/title font-weight (effective)`
 
 ### CANVAS-ABSENT (14) — declared fidelity limits
 

@@ -1,0 +1,34 @@
+{
+  "theme": {
+    "color": {
+      "background": {
+        "neutral-default": {
+          "$value": "#1d1d1a",
+          "$type": "color"
+        },
+        "transparent-default": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      }
+    },
+    "space": {
+      "xxs": {
+        "$value": "4px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 3,
+      "skipped": [
+        {
+          "name": "theme/border/radius/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        }
+      ]
+    }
+  }
+}

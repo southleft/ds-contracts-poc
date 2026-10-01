@@ -1,0 +1,30 @@
+{
+  "imported": {
+    "link": {
+      "link-text": {
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        }
+      },
+      "state-disabled": {
+        "opacity": {
+          "$value": "0.4000000059604645",
+          "$type": "number"
+        }
+      }
+    },
+    "stub-icon": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

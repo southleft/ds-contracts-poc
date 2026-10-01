@@ -6695,7 +6695,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
         `${where}: the weight token differs across variants (${stampedWeight.map((w) => `"${w}"`).join(', ')}) — one text node carries one font-weight binding, so it is NAMED, not proposed; review`,
       );
     }
-    if (observed !== 'Medium') {
+    if (tokens['font-weight'] === undefined) {
       weightRef = weightTokenRef(ctx, observed);
       if (weightRef) tokens['font-weight'] = weightRef;
       else {
@@ -6705,7 +6705,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
       }
     }
     mintTextChannels(m, tokens, byProp, ctx, where, {
-      weight: observed !== 'Medium' && weightRef === undefined,
+      weight: weightRef === undefined,
       preservePerValue,
     });
     return tokens;
@@ -6763,9 +6763,9 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   }
   if (style) {
     tokens['font-size'] = `{${style.tokenPath}}`;
-    // Medium is the runtimes' text default: a weight token resolving to it is
-    // canvas-indistinguishable from no weight token (declared fidelity limit).
-    if (style.weightPath && style.fontStyle !== 'Medium') {
+    // Carry the style's weight on this part; React text otherwise inherits
+    // its parent's weight, which may differ from the captured Medium face.
+    if (style.weightPath) {
       tokens['font-weight'] = `{${style.weightPath}}`;
     }
     if ((t.fontStyle ?? 'Medium') !== style.fontStyle) {

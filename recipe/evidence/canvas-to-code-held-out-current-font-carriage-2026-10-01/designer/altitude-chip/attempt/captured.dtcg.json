@@ -1,0 +1,108 @@
+{
+  "theme": {
+    "border": {
+      "radius": {
+        "pill": {
+          "$value": "999px",
+          "$type": "dimension"
+        }
+      },
+      "width": {
+        "md": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "color": {
+      "background": {
+        "neutral-strong": {
+          "$value": "#3c3c35",
+          "$type": "color"
+        },
+        "primary-default": {
+          "$value": "#8ea6ff",
+          "$type": "color"
+        },
+        "secondary-default": {
+          "$value": "#f1f0ea",
+          "$type": "color"
+        },
+        "transparent-default": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      },
+      "border": {
+        "neutral-default": {
+          "$value": "#3c3c35",
+          "$type": "color"
+        }
+      },
+      "content": {
+        "neutral-default": {
+          "$value": "#f1f0ea",
+          "$type": "color"
+        },
+        "primary-weak": {
+          "$value": "#0e1834",
+          "$type": "color"
+        },
+        "secondary-weak": {
+          "$value": "#1d1d1a",
+          "$type": "color"
+        }
+      },
+      "focus-ring": {
+        "$value": "#8ea6ff",
+        "$type": "color"
+      }
+    },
+    "size": {
+      "control-sm": {
+        "$value": "32px",
+        "$type": "dimension"
+      }
+    },
+    "space": {
+      "sm": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "xs": {
+        "$value": "8px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "typography": {
+    "font-size": {
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      }
+    },
+    "line-height": {
+      "20": {
+        "$value": "20px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 16,
+      "skipped": [
+        {
+          "name": "theme/border/radius/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        },
+        {
+          "name": "theme/border/width/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        }
+      ]
+    }
+  }
+}

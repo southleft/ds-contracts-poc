@@ -2968,6 +2968,24 @@ function applyLiterals(
         if (c) li().strokeColor = c;
         break;
       }
+      case 'font-weight': {
+        // Preserve a local token binding; validateContract names collisions.
+        if (tokens?.['font-weight'] !== undefined) {
+          literalMiss(spec, cssProp, value, 'a token binds the same channel');
+          break;
+        }
+        const weight = Number(value);
+        const face = FONT_STYLE_BY_WEIGHT[weight];
+        if (!/^(?:[1-9]\d*(?:\.\d+)?|0\.\d+)$/.test(value) ||
+            weight < 1 || weight > 1000 || face === undefined) {
+          literalMiss(spec, cssProp, value, 'no exact native face for this literal weight');
+          break;
+        }
+        next.fontStyle = face;
+        // This child literal replaces the inherited binding as well as its face.
+        next.fontWeightVar = undefined;
+        break;
+      }
       case 'letter-spacing': { const n = litPx(spec, cssProp, value); if (n !== undefined) next.letterSpacing = n; break; }
       // Beta spike (carry, don't drop): a literal node opacity — the token
       // case's literal twin (node opacity, never a bound variable). A token

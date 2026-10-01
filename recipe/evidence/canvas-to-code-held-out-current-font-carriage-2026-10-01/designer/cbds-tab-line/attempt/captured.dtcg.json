@@ -1,0 +1,19 @@
+{
+  "spacing": {
+    "100": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "050": {
+      "$value": "4px",
+      "$type": "dimension"
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 2,
+      "skipped": []
+    }
+  }
+}
