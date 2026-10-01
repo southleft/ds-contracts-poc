@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { proposeFromDump, type MinimalChildContract } from './propose-figma.js';
+import { proposeFromDump, proposeBatchFromDump, dumpCapturesEffects, type MinimalChildContract } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { tokenInventoryFromJson } from './index.js';
 import { emitReact } from './emit-react.js';
@@ -124,4 +124,68 @@ test('effect binding metadata alone does not invent a visual hover override', ()
     const root = rootOf(result), part = onPart ? root.parts!.surface : root;
     assert.equal(part.states?.hover?.['box-shadow'], undefined);
   }
+});
+
+
+test('effect absence requires positive capture provenance and respects effect read limits',()=>{
+ const rest={note:'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.44)',dumpVersion:'1.44'};
+ assert.equal(dumpCapturesEffects(rest),true);
+ assert.equal(dumpCapturesEffects({note:'Node-tree dump (extract/figma/dump.plugin.js, dump v1.48)',dumpVersion:'1.48'}),true);
+ for(const provenance of [undefined,{}, {dumpVersion:'1.44',note:'hand-authored'}, {...rest,dumpVersion:'1.1'}, {...rest,dumpVersion:'garbage'}, {...rest,captureGaps:['visible effects not captured']}, {...rest,captureGaps:['shadow read failed']}, {...rest,captureGaps:{}}, {...rest,captureGaps:[null]}])
+  assert.equal(dumpCapturesEffects(provenance as never),false,JSON.stringify(provenance));
+ const set=specimen([[],[inner(),drop()]]);
+ for(const capturing of [false,true]) {
+  const dump={_provenance:capturing?rest:{dumpVersion:'1.44',note:'unknown producer'},Surface:set};
+  const batch=proposeBatchFromDump(dump as never,{corpus,contractIdByName:new Map(),fileKey:null,projectionMode:'reviewable-inversion',mintUnbound:true,stampsObservable:true});
+  assert.ok(batch);
+  const serialized=JSON.stringify(batch);
+  assert.equal(serialized.includes('observed empty stack(s) carried as box-shadow none'),capturing);
+ }
+});
+
+test('captured empty and ordered shadow stacks survive enum changes at root and nested parts',()=>{
+ for(const onPart of [false,true]) {
+  const result=propose(specimen([[],[inner(),drop()]],onPart),{effectsCaptured:true});
+  const contract=ContractSchema.parse(result.contract),tokens=result.mintedTokens!.tree;
+  assert.ok(result.notes.some(n=>n.includes('observed empty stack(s) carried as box-shadow none')));
+  const output=emitReact(contract,{tokens:tokenInventoryFromJson([tokens]),icons:new Map(),contracts:new Map([[contract.id,contract]])});
+  assert.match(output.css,/box-shadow:/);
+  const engine=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const compiled=engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+  assert.equal(compiled.variants.length,2);
+  const stacks=compiled.variants.map(v=>(onPart?v.spec.children!.find(n=>n.name==='surface')!:v.spec).effectStack??[]);
+  assert.deepEqual(stacks.map(stack=>stack.length),[0,2]);
+  assert.equal(stacks[1][0].inner,true);assert.equal(stacks[1][1].inner,undefined);
+ }
+});
+
+test('positive effect capture does not carry a partial unsupported stack or alter hover projection',()=>{
+ for(const onPart of [false,true]) {
+  const bad=propose(specimen([[],[inner(),{type:'BACKGROUND_BLUR',radius:2}]],onPart),{effectsCaptured:true});
+  const root=rootOf(bad),part=onPart?root.parts!.surface:root;
+  assert.equal(part.tokens?.['box-shadow'],undefined);
+  assert.ok(bad.notes.some(n=>n.includes('channel NAMED, not proposed')));
+  const hover=propose(specimen([[],[inner(),drop()]],onPart,true),{effectsCaptured:true,projectionMode:'exact'});
+  const hroot=rootOf(hover),hpart=onPart?hroot.parts!.surface:hroot;
+  assert.equal(hpart.tokens?.['box-shadow'],undefined);
+  assert.match(String(valueOf(hover,hpart.states?.hover?.['box-shadow'])),/^inset /);
+  assert.ok(!ContractSchema.parse(hover.contract).props.some(p=>p.name==='state'));
+ }
+});
+
+
+test('captured empty stacks retain a complete two-axis shadow domain without borrowing another row',()=>{
+ const set=specimen([[],[inner()],[drop()],[inner(),drop()]]);
+ const tuples=[['small','bare'],['small','glow'],['large','bare'],['large','glow']];
+ set.propertyDefinitions={Size:{type:'VARIANT',defaultValue:'small',variantOptions:['small','large']},Tone:{type:'VARIANT',defaultValue:'bare',variantOptions:['bare','glow']}};
+ set.variants=set.variants.map((v,i)=>({...v,name:`Size=${tuples[i][0]}, Tone=${tuples[i][1]}`,variantProperties:{Size:tuples[i][0],Tone:tuples[i][1]}}));
+ const result=propose(set,{effectsCaptured:true,projectionMode:'exact'}),contract=ContractSchema.parse(result.contract);
+ const engine=createFigmaEngine({tokens:{primitives:result.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+ const compiled=engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+ assert.equal(compiled.variants.length,4);
+ const rows=compiled.variants.map(v=>({name:v.name,stack:v.spec.effectStack??(v.spec.dropShadow?[{...v.spec.dropShadow,inner:undefined}]:[])}));
+ assert.deepEqual(rows.map(r=>r.stack.length),[0,1,1,2]);
+ assert.equal(rows[1].stack[0].inner,true);
+ assert.equal(rows[2].stack[0].inner,undefined);
+ assert.deepEqual(rows[3].stack.map(e=>Boolean(e.inner)),[true,false]);
 });

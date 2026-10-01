@@ -194,6 +194,18 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
   return /dump v1\.[1-9]/.test(prov.note ?? '');
 };
 
+/** An omitted visible stack means none only when a known producer captured
+ * this channel. Legacy/unknown dumps and explicit effect capture gaps keep
+ * absence unqualified; the source dump itself is never rewritten. */
+export const dumpCapturesEffects = (prov?: {note?: string; dumpVersion?: string; captureGaps?: unknown} | null): boolean => {
+  if (!prov || !/extract\/figma\/(dump\.plugin\.js|rest\/map\.ts)/.test(prov.note ?? '')) return false;
+  const version = prov.dumpVersion !== undefined ? /^1\.(\d+)$/.exec(prov.dumpVersion) : /dump v1\.(\d+)\b/.exec(prov.note ?? '');
+  if (!version || Number(version[1]) < 2) return false;
+  if (prov.captureGaps !== undefined && !Array.isArray(prov.captureGaps)) return false;
+  if (Array.isArray(prov.captureGaps) && prov.captureGaps.some(gap => typeof gap !== 'string' || /effect|shadow/i.test(gap))) return false;
+  return true;
+};
+
 /** WERE THE `ds_contracts/*` STAMPS OBSERVABLE to the reader that produced
  *  this dump? A POSITIVE fact, never inferred from their absence on a set —
  *  "no stamp" only means "a designer drew this" when the reader could have seen
@@ -2276,6 +2288,8 @@ interface Ctx {
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
+  /** Positive reader evidence for omitted visible effect stacks. */
+  effectsCaptured?: boolean;
   /** Captured-variable resolved values (dump v1.4 `_variables`), dot-path →
    *  CSS value ("bg.brand.default" → "#0e61ba") — the default/consuming
    *  mode's values, exactly the captured-token layer's entries. Used ONLY to
@@ -3975,10 +3989,10 @@ const recoverAuthoredBoxShadow = (
  *  drawing was wrong. Inner shadows now use CSS inset with exact captured
  *  numeric values; mixed inner/drop stacks preserve their captured order.
  *  Anything else — blurs, malformed shadows,
- *  partial presence across variants (a node shadowed in some variants and
- *  bare in others: "absent" would have to be read as `none`, which no
- *  observation states) — is still a NAMED note carrying the effect types: the
- *  channel never drops silently. The canvas preview has no box-shadow
+ *  partial presence without positive producer capture evidence — stays a
+ *  NAMED note carrying the effect types. A known capturing producer can
+ *  carry the observed empty stacks as none through the same mint classifier;
+ *  unknown absence never becomes a CSS value. The canvas preview has no box-shadow
  *  projection in v1; that limit is named here at proposal (the minted
  *  preamble also skips shadow-typed leaves). */
 /** dump v1.31 — the two effect facts beside the effect GEOMETRY, named
@@ -4055,14 +4069,19 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
     ) {
       // @door propose.effect-state-preview-shadow
       return;
-    // @door propose.effect-non-dropshadow-refused
     }
-    ctx.notes.push(
-      `${where}: visible effect(s) [${kinds.join(', ')}] — only supported DROP_SHADOW / INNER_SHADOW stacks present in every variant map to box-shadow; inner stacks require complete finite geometry and color; channel NAMED, not proposed`,
-    );
-    return;
+    const capturedEmptyStacks = ctx.effectsCaptured === true && m.occ.every(o =>
+      (o.node.effects?.length ?? 0) === 0 || observedShadowStack(o.node.effects) !== undefined);
+    if (!capturedEmptyStacks) {
+      // @door propose.effect-non-dropshadow-refused
+      ctx.notes.push(
+        `${where}: visible effect(s) [${kinds.join(', ')}] — only supported DROP_SHADOW / INNER_SHADOW stacks present in every variant map to box-shadow; inner stacks require complete finite geometry and color; channel NAMED, not proposed`,
+      );
+      return;
+    }
+    ctx.notes.push(`${where}: the reader captured visible effects; ${withoutFx.length}/${m.occ.length} observed empty stack(s) carried as box-shadow none, not inferred from an unknown reader`);
   }
-  const occ = m.occ.map(o => ({ variant: o.variant, value: observedShadowStack(o.node.effects)! }));
+  const occ = m.occ.map(o => ({ variant: o.variant, value: observedShadowStack(o.node.effects) ?? 'none' }));
   const depth = Math.max(...m.occ.map((o) => (o.node.effects ?? []).length));
   reportUnbound(ctx, where, 'effects', occ[0].value);
   const authoredShadow = authoredPartAt(ctx, partPathOf(where))?.tokens?.['box-shadow'];
@@ -11720,7 +11739,7 @@ function observedStubContent(capture: StubCapture, ctx: Ctx):
       node.type = 'COMPONENT';
       const projected = proposeFromDump({setName: name, type: 'COMPONENT', propertyDefinitions: {}, variants: [node]}, {
         corpus: ctx.corpus, contractIdByName: new Map(), mintUnbound: !!ctx.mint,
-        hiddenCaptured: ctx.hiddenCaptured, capturedValues: ctx.capturedValues,
+        hiddenCaptured: ctx.hiddenCaptured, effectsCaptured: ctx.effectsCaptured, capturedValues: ctx.capturedValues,
         capturedPaintModeConflicts: ctx.capturedPaintModeConflicts, projectionMode: 'exact',
       });
       if ((projected.contract.props as unknown[]).length || (projected.contract.states as unknown[]).length ||
@@ -13171,6 +13190,8 @@ function proposeFromDumpFenced(
      *  default-variant → boolean default TRUE inference; default false
      *  (absence stays "not captured", nothing invented). */
     hiddenCaptured?: boolean;
+    /** The producer read visible effects; omission means an empty stack. */
+    effectsCaptured?: boolean;
     /** Captured-variable resolved values, dot-path → CSS value — build from
      *  the dump's `_variables` via capturedTokensFromDump (the batch entry
      *  does this automatically). Only consumed with `mintUnbound: true`: it
@@ -13731,6 +13752,7 @@ function proposeFromDumpFenced(
     propertyDefinitions: set.propertyDefinitions,
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     hiddenCaptured: opts.hiddenCaptured,
+    effectsCaptured: opts.effectsCaptured,
     capturedValues: opts.capturedValues,
     capturedPaintModeConflicts: opts.capturedPaintModeConflicts,
     iconAssets: opts.iconAssets,
@@ -15372,6 +15394,7 @@ export function proposeBatchFromDump(
     stampsObservable:
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
+    effectsCaptured: opts.effectsCaptured ?? dumpCapturesEffects((dump as { _provenance?: Parameters<typeof dumpCapturesEffects>[0] })._provenance),
     capturedValues,
     capturedPaintModeConflicts,
     contractIdByName,
