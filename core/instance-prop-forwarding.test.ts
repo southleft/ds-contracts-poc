@@ -97,16 +97,25 @@ test('caller size requires one complete observed instance and a scalable target;
   const f=make(),before=JSON.stringify([...f.scope]),first=sizeRef(f);
   assert(first.ref);assert.equal(JSON.stringify([...f.scope]),before);
   assert(first.result.mintedTokens?.entries.some(e=>e.value==='7.25px'));
+  const nested=make();
+  for(const v of nested.set.variants){const row=v.children![0].fixedSwaps!.Payload.observedInstances![0];
+    row.path=[0,0,0];row.relativeTransform=[[1,0,-0.3717],[0,1,0.000167]];
+    row.constraints={horizontal:'CENTER',vertical:'CENTER'};row.parentSize={width:13.2531,height:13.999};row.size={width:14,height:14};}
+  const nestedBefore=JSON.stringify([...nested.scope]),nestedResult=sizeRef(nested);
+  assert(nestedResult.ref,'local resize is independent of ancestor placement and constraints');
+  assert(nestedResult.result.mintedTokens?.entries.some(e=>e.value==='14px'));
+  assert.equal(JSON.stringify([...nested.scope]),nestedBefore,'shared main/default stays unchanged');
+
   const mutations:Array<(f:ReturnType<typeof make>)=>void>=[
     f=>{delete f.target.anatomy.root.overridable;},
     f=>{delete f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances;},
     f=>{const a=f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances!;a.push(structuredClone(a[0]));},
     f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].componentId='other';},
-    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].path=[1];},
+    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].path=[-1];},
     f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].size!.height=7.2501;},
-    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].parentSize!.width=8;},
-    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].relativeTransform![0][2]=1;},
-    f=>{delete f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].constraints;},
+    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].size!.width=NaN;},
+    f=>{f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].relativeTransform![0][0]=0.5;},
+    f=>{delete f.set.variants[0].children![0].fixedSwaps!.Payload.observedInstances![0].relativeTransform;},
   ];
   for(const mutate of mutations){const changed=make();mutate(changed);assert.equal(sizeRef(changed).ref,undefined,String(mutate));}
 });

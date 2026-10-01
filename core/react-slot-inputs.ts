@@ -1,4 +1,5 @@
-import type { Contract } from '../scripts/contract-schema.js';
+import { literalTextJsx } from './root-content.js';
+import { slotsOf, type Contract, type Slot } from '../scripts/contract-schema.js';
 import { namedSlots } from '../packages/core/src/anatomy.js';
 
 /** Caller inputs are keyed by slot.name. Several physical parts may consume
@@ -14,4 +15,27 @@ export function reactSlotInputs(contract: Contract): Array<{ name: string; descr
     if (part.description && !input.descriptions.includes(part.description)) input.descriptions.push(part.description);
   }
   return [...inputs.values()];
+}
+
+
+export function reactDefaultSlotDependencies(contract: Contract, byId: Map<string, Contract>): string[] {
+  return [...new Set(slotsOf(contract).flatMap(({slot}) => slot.renderDefault
+    ? (slot.defaultContent ?? []).map(item => {
+      const dep = byId.get(item.id);
+      if (!dep) throw new Error(`SLOT_DEFAULT_DEPENDENCY_MISSING: ${item.id}`);
+      return dep.name;
+    }) : []))];
+}
+
+/** Samples remain samples unless the contract explicitly opts into a default. */
+export function reactSlotExpression(slot: Slot, byId: Map<string, Contract>, attributes: (dep: Contract, props: Record<string, string | boolean>) => string): string {
+  const input = slot.name;
+  if (!slot.renderDefault) return input;
+  const fallback = (slot.defaultContent ?? []).map(item => {
+    const dep = byId.get(item.id);
+    if (!dep) throw new Error(`SLOT_DEFAULT_DEPENDENCY_MISSING: ${item.id}`);
+    const attrs = attributes(dep, item.props ?? {});
+    return item.text === undefined ? `<${dep.name}${attrs} />` : `<${dep.name}${attrs}>${literalTextJsx(item.text)}</${dep.name}>`;
+  }).join('');
+  return `${input} === undefined ? <>${fallback}</> : ${input}`;
 }

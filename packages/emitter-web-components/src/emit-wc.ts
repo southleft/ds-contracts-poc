@@ -574,7 +574,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     for (const sw of part.stylesWhen ?? []) {
       const prop = contract.props.find((pr) => pr.name === sw.prop);
       if (!prop) continue;
-      const base = isEnum(prop) ? rootWithEnum(sw.prop, sw.equals ?? '') : rootWithBool(sw.prop);
+      const base = isEnum(prop) ? rootWithEnum(sw.prop, sw.equals ?? '') : sw.equals === 'false' ? `${ROOT_SEL}${ROOT_SEL}:where([data-dsc-false-${attrOf(sw.prop)}])` : rootWithBool(sw.prop);
       const selector = isRoot ? base : `${base} ${partSelector}`;
       rule(selector, Object.entries(sw.styles).map(([kk, v]) => `${kk}: ${v}`));
     }
@@ -1249,6 +1249,8 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   for (const p of bools) {
     const e = acc(p.name);
     const a = attrOf(p.name);
+    if (walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false')))
+      rootAttrs += `\${${e} === false ? ' data-dsc-false-${a}="true"' : ''}`;
     if (p.name === 'disabled') {
       if (supportsDisabledExpr === 'true') rootAttrs += `\${${e} ? ' disabled' : ''}`;
       else if (supportsDisabledExpr === 'false') rootAttrs += `\${${e} ? ' data-${a}=""' : ''}`;
@@ -1642,6 +1644,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     if (c.selection) throw new Error(`WEB_COMPONENT_SELECTION_UNSUPPORTED:${c.id}: selection behavior is implemented for React`);
     if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
     for (const w of walkAnatomy(c)) {
+      if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
       if (w.part.absolutePlacement || w.part.absolutePlacementByCombination) throw new Error('WEB_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       if (w.part.component?.initialProps) throw new Error('WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component?.statePreview !== undefined) throw new Error('WEB_COMPONENT_STATE_PREVIEW_UNSUPPORTED: component statePreview (docs/23 §D.164) is implemented for React');

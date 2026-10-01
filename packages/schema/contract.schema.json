@@ -2493,6 +2493,10 @@
                 ],
                 "additionalProperties": false
               }
+            },
+            "renderDefault": {
+              "type": "boolean",
+              "const": true
             }
           },
           "required": [

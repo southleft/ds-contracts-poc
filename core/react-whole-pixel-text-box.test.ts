@@ -573,3 +573,33 @@ test('MEASURED a contract style axis stays an enum without a duplicate HTML styl
     });
   }finally{await browser.close();}
 });
+
+
+test('explicit runtime slot defaults render on omission and preserve caller replacement or clearing on both React surfaces', async () => {
+  const child=contract({text:'Default glyph'});child.id='probe.slot-default-child';child.name='SlotDefaultChild';
+  const leading=contract({text:'Leading glyph'});leading.id='probe.slot-leading-child';leading.name='SlotLeadingChild';
+  const parent=contract({slot:{name:'children',renderDefault:true,defaultContent:[{id:child.id}]}});
+  parent.anatomy.root.parts!.leading={slot:{name:'leading',renderDefault:true,defaultContent:[{id:leading.id}]}};
+  parent.anatomy.root.parts!.sample={slot:{name:'sample',defaultContent:[{id:child.id}]}};
+  const contracts=new Map([[parent.id,parent],[child.id,child],[leading.id,leading]]);const icons=new Map<string,string>();
+  const browser=await chromium.launch({headless:true});
+  try{for(const surface of ['module','inline']){
+    const emit=(c:Contract)=>surface==='inline'?{...emitReactInline(c,{contracts,icons,tokens}),css:''}:emitReact(c,{contracts,icons,tokens:tokenInventoryFromJson([tokens.primitives]),tokenValues:tokens});
+    const out=emit(parent),dep=emit(child),namedDep=emit(leading);
+    assert.deepEqual(generatedTypeErrors(parent.name,out.tsx,{SlotDefaultChild:dep.tsx,SlotLeadingChild:namedDep.tsx}),[]);
+    const page=await browser.newPage();
+    try{const render=await mountGenerated(page,parent.name,out.tsx,out.css,{SlotDefaultChild:dep,SlotLeadingChild:namedDep});
+      const text=()=>page.locator('#root').textContent();
+      assert.equal(await text(),'Default glyphLeading glyph','samples without explicit runtime declaration stay absent');
+      await render({children:'Caller content',leading:'Named content'});assert.equal(await text(),'Caller contentNamed content');
+      for(const value of [null,false,'']){await render({children:value,leading:value});assert.equal(await text(),'','caller clears without fallback');}
+      await render({children:0,leading:0});assert.equal(await text(),'00');
+      await render({});assert.equal(await text(),'Default glyphLeading glyph','omission restores defaults');
+    }finally{await page.close();}
+  }}finally{await browser.close();}
+});
+
+test('explicit runtime slot default without content is a named validation refusal',()=>{
+  const c=contract({slot:{name:'children',renderDefault:true}});
+  assert.match(errorsOf(c),/SLOT_RUNTIME_DEFAULT_EMPTY/);
+});

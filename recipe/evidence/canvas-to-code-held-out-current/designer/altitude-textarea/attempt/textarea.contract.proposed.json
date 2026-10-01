@@ -82,6 +82,23 @@
           "literals": {
             "width": "100%"
           },
+          "literalsByCombination": [
+            {
+              "props": [
+                "state"
+              ],
+              "rows": [
+                {
+                  "values": [
+                    "hover"
+                  ],
+                  "literals": {
+                    "height": "96px"
+                  }
+                }
+              ]
+            }
+          ],
           "parts": {
             "alCTextareaInput": {
               "tokensByProp": {
@@ -104,6 +121,47 @@
                   }
                 }
               },
+              "literalsByCombination": [
+                {
+                  "props": [
+                    "state"
+                  ],
+                  "rows": [
+                    {
+                      "values": [
+                        "focus"
+                      ],
+                      "literals": {
+                        "height": "96px"
+                      }
+                    },
+                    {
+                      "values": [
+                        "active"
+                      ],
+                      "literals": {
+                        "height": "96px"
+                      }
+                    },
+                    {
+                      "values": [
+                        "error"
+                      ],
+                      "literals": {
+                        "height": "96px"
+                      }
+                    },
+                    {
+                      "values": [
+                        "disabled"
+                      ],
+                      "literals": {
+                        "height": "96px"
+                      }
+                    }
+                  ]
+                }
+              ],
               "tokens": {
                 "background-color": "{theme.color.background.neutral-default}",
                 "border-color": "{theme.color.border.neutral-default}",

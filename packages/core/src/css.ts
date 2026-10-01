@@ -90,7 +90,7 @@ function stylesWhenRules(contract: Contract, partName: string, part: Part, isRoo
       base = `.${sw.prop}-${sw.equals}`;
     } else {
       const dataName = prop.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-      base = prop.name === 'disabled' ? `.root${reactRootDisabledSelector(contract)}` : `.root[data-${dataName}]`;
+      base = sw.equals === 'false' ? `.root[data-dsc-false-${dataName}]` : prop.name === 'disabled' ? `.root${reactRootDisabledSelector(contract)}` : `.root[data-${dataName}]`;
     }
     const selector = isRootPart ? base : `${base} .${cssIdentifier(partName)}`;
     const decls = Object.entries(sw.styles)

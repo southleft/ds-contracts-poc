@@ -593,6 +593,12 @@ export interface DumpNode {
    *  axes carry (a rotated box carries only when BOTH axes are FIXED).
    *  Absence in older dumps means not captured, never "no size". */
   fixedSize?: { width?: number; height?: number };
+  /** Authored instance usage sizing inside auto-layout. Local dimensions are
+   * recorded only for explicit FIXED axes; bbox is not sizing authority. */
+  instanceSizing?: {
+    horizontal?: 'FIXED' | 'HUG' | 'FILL'; vertical?: 'FIXED' | 'HUG' | 'FILL';
+    width?: number; height?: number;
+  };
   /** First visible SOLID fill found in an INSTANCE's subtree (dump v1.7,
    *  additive) — the stub-paint channel: a child stub with observed geometry
    *  but no paint rendered invisible (field case: Untitled UI Badge's _Dot,

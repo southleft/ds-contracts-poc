@@ -1804,7 +1804,7 @@ export const STYLES_WHEN_ALLOWED = new Set([
  *  visibility is bindable). */
 export const StylesWhenSchema = z.strictObject({
   prop: z.string(),
-  /** Required for enum props; omit for booleans (truthy). */
+  /** Required for enums; booleans omit for true or explicitly use "true"/"false". */
   equals: z.string().optional(),
   /** CSS property → literal value. Keys must be in STYLES_WHEN_ALLOWED. */
   styles: z.record(z.string(), z.string()),
@@ -2154,6 +2154,11 @@ export const SlotSchema = z.strictObject({
    *  INSTANCE_SWAP; it renders its content directly (no swap property) until
    *  the native SLOT property migration. */
   defaultContent: z.array(SlotContentItemSchema).optional(),
+  /** Explicit runtime default, used only when the caller omits this slot.
+   * null, false and empty text remain deliberate caller replacements.
+   * When the slot part has child parts, those matching default-content
+   * instances carry its usage-specific fallback anatomy. */
+  renderDefault: z.literal(true).optional(),
 });
 
 /** A fixed instance of another contract, embedded in this component. */

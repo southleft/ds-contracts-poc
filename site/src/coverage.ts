@@ -472,6 +472,7 @@ reg("composition", "slots", [
 ]);
 reg("composition", "default-content", [
   "slot.defaultContent",
+  "slot.renderDefault",
   "slotContent.id",
   "slotContent.props",
   "slotContent.text",

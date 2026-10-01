@@ -1,7 +1,7 @@
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
-import { reactSlotInputs } from './react-slot-inputs.js';
+import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies } from './react-slot-inputs.js';
 import { reactSelectionPlan } from './react-selection.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
@@ -870,7 +870,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const styles = Object.fromEntries(Object.entries(sw.styles).map(([kk, v]) => [camel(kk), v]));
       const cond = isEnum(prop)
         ? `${codePropOf(sw.prop)} === '${sw.equals}'`
-        : codePropOf(sw.prop);
+        : sw.equals === 'false' ? `${codePropOf(sw.prop)} === false` : codePropOf(sw.prop);
       out.push(`...(${cond} ? ${JSON.stringify(styles)} : {})`);
     }
     return out;
@@ -919,13 +919,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
   }
 
-  const deps = [
+  const deps = [...new Set([
     ...new Set(
       walkAnatomy(contract)
         .filter((w) => w.part.component)
         .map((w) => ctx.contracts.get(w.part.component!.id)!.name),
     ),
-  ];
+    ...reactDefaultSlotDependencies(contract, ctx.contracts),
+  ])];
 
   const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
     const parts: string[] = [];
@@ -1066,9 +1067,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.slot) {
       const el = part.element ?? 'div';
-      const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
+      const expr = part.slot.renderDefault && part.parts
+        ? `${part.slot.name} === undefined ? <>${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('')}</> : ${part.slot.name}`
+        : reactSlotExpression(part.slot, ctx.contracts, depAttrString);
       const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
-      return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
+      return part.optional ? `{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
       const el = part.element ?? 'span';
@@ -1147,6 +1150,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     elementAttrs.push(`disabled={${codePropOf('disabled')}}`);
   }
   for (const p of bools) {
+    if (walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false'))) {
+      const falseName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      elementAttrs.push(`data-dsc-false-${falseName}={${p.bindings.code.prop} === false || undefined}`);
+    }
     if (p.name === 'disabled' && nativeDisabled) continue;
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);

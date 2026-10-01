@@ -74,6 +74,10 @@
   width: 100%;
 }
 
+.root:where(.state-hover) .alCTextareaContainer {
+  height: 96px;
+}
+
 .state-default .alCTextareaContainer {
   flex: 1 1 0px;
   min-width: 0;
@@ -128,6 +132,22 @@
 
 .state-disabled .alCTextareaInput {
   border-color: var(--theme-color-content-neutral-default);
+}
+
+.root:where(.state-focus) .alCTextareaInput {
+  height: 96px;
+}
+
+.root:where(.state-active) .alCTextareaInput {
+  height: 96px;
+}
+
+.root:where(.state-error) .alCTextareaInput {
+  height: 96px;
+}
+
+.root:where(.state-disabled) .alCTextareaInput {
+  height: 96px;
 }
 
 .state-default .alCTextareaInput {

@@ -71,3 +71,5 @@ and explicit carry note. Accounting counts, all subject dispositions, and the
 20 Radio alignment residuals are unchanged. The root-only accounting harness
 does not newly qualify that nested frame visually. Frozen examinations and
 platform-specific ledger overlays remain unchanged.
+
+The current engine also preserves the captured 96 px FIXED height of Textarea's container in Hover and its input in Focus, Active, Error and Disabled. A fresh full designer replay changes only these two derived contract/CSS files. Every disposition, ledger, source inventory and platform overlay is unchanged. This remains accounting evidence, not visual qualification.
