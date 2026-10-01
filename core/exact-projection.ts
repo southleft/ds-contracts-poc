@@ -402,10 +402,17 @@ const readAxes = (
     )
     .sort();
 
-  const codeName = (name: string): string => Object.hasOwn(propertyNames, name) ? propertyNames[name]! : canonicalPropName(name);
+  const codeName = (name: string): string =>
+    Object.hasOwn(propertyNames, name)
+      ? propertyNames[name]!
+      : canonicalPropName(name);
   for (const name of variantNames) {
-    if (typeof codeName(name) !== 'string' || !codeName(name))
-      refusals.push(definitionRefusal(`Allocated name for ${JSON.stringify(name)} must be a nonempty code input.`));
+    if (typeof codeName(name) !== "string" || !codeName(name))
+      refusals.push(
+        definitionRefusal(
+          `Allocated name for ${JSON.stringify(name)} must be a nonempty code input.`,
+        ),
+      );
   }
   if (refusals.length > 0) return { axes, refusals };
   for (const sources of canonicalCollisions(variantNames, codeName)) {
@@ -413,9 +420,7 @@ const readAxes = (
       code: "EXACT_PROPERTY_CANONICAL_COLLISION",
       message: `Variant properties ${sources
         .map((source) => JSON.stringify(source))
-        .join(
-          ", ",
-        )} canonicalize to ${JSON.stringify(codeName(sources[0]))}.`,
+        .join(", ")} canonicalize to ${JSON.stringify(codeName(sources[0]))}.`,
       tuples: sources,
     });
   }
@@ -630,7 +635,10 @@ export function validateExactVariantProjection(
     definitions = set.propertyDefinitions;
   }
 
-  const { axes, refusals: definitionRefusals } = readAxes(definitions, options.propertyNames);
+  const { axes, refusals: definitionRefusals } = readAxes(
+    definitions,
+    options.propertyNames,
+  );
   if (definitionRefusals.length > 0) return refused(definitionRefusals);
   const standaloneWithoutAxes = standalone && axes.length === 0;
   if (axes.length === 0 && !standaloneWithoutAxes) {
