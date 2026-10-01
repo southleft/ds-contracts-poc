@@ -35,6 +35,9 @@ export interface ReactCohort {
   /** Only a declared cohort: the `./`-relative modules its cases mount. The
    * build resolves each to a source file that the witnesses must pin. */
   mountedModules?: readonly string[];
+  /** Exact exports selected by validated declared mounts. Host-only metadata
+   * derived from the pinned declaration, never component body authority. */
+  mountedExports?: readonly {module:string;export:string}[];
   /** Host-authenticated source repair provenance. Absent on historical cohorts.
    * The expected source inventory excludes these private evidence files. */
   witnessSuccession?: {revision:string;cohortRevision:string;evidenceFiles:Readonly<Record<string,string>>;
@@ -395,6 +398,8 @@ export function parseReactCases(bytes: Buffer | string, file = reactCasesFile): 
     negativeCaseIds: cases.filter((c) => c.negativeControl).map((c) => c.id),
     declaration: { file, sha256 },
     mountedModules: [...new Set(cases.flatMap((c) => components(c.mount)).map((c) => c.module).filter((m) => m.startsWith("./")))].sort(),
+    mountedExports: [...new Map(cases.flatMap(c=>components(c.mount))
+      .map(c=>[JSON.stringify([c.module,c.export]),c])).values()],
   };
 }
 

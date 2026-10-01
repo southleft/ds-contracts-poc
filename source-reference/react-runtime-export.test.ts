@@ -4,7 +4,7 @@ import {mkdtempSync,writeFileSync,readFileSync,rmSync,symlinkSync,realpathSync} 
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {readReactRuntimeExport,observeReactRuntimeDependencies} from './react-runtime-export.js';
+import {readReactRuntimeExport,observeReactRuntimeDependencies,observeReactRuntimeMounts} from './react-runtime-export.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
@@ -124,4 +124,48 @@ createRoot(document.getElementById('root')).render(element);`,resolveDir:process
       else{assert.deepEqual(result.problems,[]);assert.equal(result.components.length,1);assert.deepEqual(result.components[0].roots,['']);}
     }finally{await page.close();}
   }}finally{await browser.close();}
+});
+
+const emptyRuntimeProgram=():ReactSourceProgram=>({version:1,status:'observed',acceptedContract:null,
+  typescriptVersion:'test',readerOptions:{},compatibilityNotes:[],files:{},problems:[],components:[]});
+
+test('declared public mounts bootstrap only witnessed executable identities with unresolved native semantics',t=>{
+  const r=fixture(t,{'public.mjs':'export {Original as Badge} from "implementation";',
+    'impl.mjs':'export const Original=(()=>{throw Error("must not execute")})();',
+    'incidental.mjs':'export const Unselected=1;'},[['public.mjs','implementation','impl.mjs']]);
+  const reference={...r,cohort:{declared:true,mountedExports:[{module:'public-controls',export:'Badge'},
+    {module:'public-controls',export:'Badge'},{module:'./incidental.mjs',export:'Unselected'}]},
+    runtimeEntryImports:[{specifier:'public-controls',file:path.join(r.sourceRoot,'public.mjs')},
+      {specifier:'unselected-package',file:path.join(r.sourceRoot,'incidental.mjs')}]};
+  const source=emptyRuntimeProgram(),before=JSON.stringify(source),observed=observeReactRuntimeMounts(reference,source);
+  assert.equal(JSON.stringify(source),before);assert.equal(observed.observations.length,2);
+  assert(observed.observations.every(o=>o.result.status==='resolved'&&!o.result.runtimeVerified&&o.result.acceptedContract===null));
+  assert.equal(observed.program.components.length,1);
+  const c=observed.program.components[0];assert.equal(c.module,'impl.mjs');assert.equal(c.exportName,'Original');
+  assert.equal(c.implementation,'unresolved');assert.equal(c.root.kind,'unresolved');assert.equal(c.children.kind,'unresolved');
+  assert.deepEqual(c.props,[]);assert(c.problems.includes('runtime-export-binding-only'));
+  assert.deepEqual(Object.keys(observed.program.files).sort(),[path.join(r.sourceRoot,'impl.mjs'),path.join(r.sourceRoot,'public.mjs')].sort());
+  assert.equal(observeReactRuntimeMounts({...reference,cohort:{...reference.cohort,declared:false}},source).program.components.length,0);
+});
+
+test('declared runtime mounts refuse missing and ambiguous original entry edges, ignoring dependency importer edges',t=>{
+  const r=fixture(t,{'public.mjs':'export const Badge=1;','other.mjs':'export const Badge=2;'},[['other.mjs','public-controls','public.mjs']]);
+  const reference={...r,cohort:{declared:true,mountedExports:[{module:'public-controls',export:'Badge'}]}};
+  const source=emptyRuntimeProgram();
+  refusal(observeReactRuntimeMounts(reference,source).observations[0].result,'runtime-export-entry-edge-unwitnessed');
+  const runtimeEntryImports=['public.mjs','other.mjs'].map(file=>({specifier:'public-controls',file:path.join(r.sourceRoot,file)}));
+  const ambiguous=observeReactRuntimeMounts({...reference,runtimeEntryImports},source);
+  refusal(ambiguous.observations[0].result,'runtime-export-entry-edge-ambiguous');assert.equal(ambiguous.program.components.length,0);
+});
+
+test('declared runtime mount routes retain executable-source and changed-byte refusals',t=>{
+  const r=fixture(t,{'public.mjs':'export const Badge=1;','types.d.ts':'export declare const Badge:number;'});
+  const reference={...r,cohort:{declared:true,mountedExports:[{module:'public-controls',export:'Badge'}]},
+    runtimeEntryImports:[{specifier:'public-controls',file:path.join(r.sourceRoot,'types.d.ts')}]};
+  const source=emptyRuntimeProgram();
+  refusal(observeReactRuntimeMounts(reference,source).observations[0].result,'runtime-export-nonexecutable-source');
+  reference.runtimeEntryImports[0].file=path.join(r.sourceRoot,'public.mjs');
+  writeFileSync(reference.runtimeEntryImports[0].file,'export const Badge=2;');
+  const changed=observeReactRuntimeMounts(reference,source);
+  refusal(changed.observations[0].result,'runtime-export-source-not-witnessed-or-changed');assert.equal(changed.program.components.length,0);
 });

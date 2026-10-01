@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {observeReactRuntimeMounts} from "./react-runtime-export.js";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { once } from "node:events";
@@ -20,6 +21,7 @@ import {
   parseReactCases,
   reactCasesFile,
   reactInitialCaseEntry,
+  reactCohortWitnessSnapshot,
 } from "./react-cohort.js";
 import { reactReferenceEntry } from "./react-reference-cases.js";
 import {
@@ -762,4 +764,31 @@ test("missing built-in inputs and unreadable declared inputs still refuse", asyn
     symlinkSync(path.join(root, "missing-target.css"), path.join(root, "capture-input.css"));
     await assert.rejects(buildReactReference(root), /ENOENT/);
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('validated public mount selections carry original build edges without changing source reference identity',async t=>{
+  const {root,put}=fixture();t.after(()=>rmSync(root,{recursive:true,force:true}));
+  put('node_modules/public-controls/package.json','{"name":"public-controls","type":"module","exports":"./index.js"}');
+  put('node_modules/public-controls/index.js','export {Badge} from "./badge.js";');
+  put('node_modules/public-controls/badge.js',"import React from 'react';export const Badge=React.forwardRef((props,ref)=>React.createElement('span',{...props,ref}));");
+  const d=declaration();
+  d.cases[0].mount.children![0]={module:'public-controls',export:'Badge',children:[hostileText]} as any;
+  d.cases[1].mount={module:'public-controls',export:'Badge',children:['New']} as any;
+  put(reactCasesFile,JSON.stringify(d));
+  const reference=await buildReactReference(root),historical=await buildReactReference(root,{...reference.cohort,mountedExports:undefined});
+  assert.equal(reference.id,historical.id);assert.deepEqual(reference.files,historical.files);
+  assert.equal(reference.javascript,historical.javascript);assert.equal(reference.css,historical.css);
+  assert.deepEqual(reactCohortWitnessSnapshot(reference.cohort),reactCohortWitnessSnapshot(historical.cohort));
+  assert.deepEqual(reference.cohort.mountedExports,[{module:'public-controls',export:'Badge'},
+    {module:'./src/components/ui/avatar',export:'Avatar'}]);
+  const selected=reference.runtimeEntryImports!.filter(e=>e.specifier==='public-controls');assert.equal(selected.length,1);
+  assert.equal(selected[0].file,path.join(reference.sourceRoot,'node_modules/public-controls/index.js'));
+  assert.equal(reference.files[selected[0].file],sha(readFileSync(selected[0].file)));
+  assert(!Object.hasOwn(reference.files,path.join(reference.sourceRoot,'react-reference.tsx')));
+  const program:ReactSourceProgram={version:1,status:'observed',acceptedContract:null,typescriptVersion:'test',
+    readerOptions:{},compatibilityNotes:[],files:{},problems:[],components:[]};
+  const observed=observeReactRuntimeMounts(reference,program);assert.equal(observed.program.components.length,1);
+  assert.equal(observed.program.components[0].module,'node_modules/public-controls/badge.js');
+  assert.equal(observed.program.components[0].root.kind,'unresolved');assert.deepEqual(observed.program.components[0].props,[]);
+  assert(reactReferenceUnchanged(reference));
 });

@@ -90,6 +90,10 @@ export interface ReactReference {
   /** Host-only executable import resolution from this exact build. A checker
    * declaration path alone cannot identify a runtime helper implementation. */
   runtimeImports?: readonly HelperRuntimeImport[];
+  /** Resolved import edges from the original generated mount entry. This
+   * selection metadata is carried from that build without rebuilding it,
+   * adding a synthetic source file or changing reference identity. */
+  runtimeEntryImports?: readonly {specifier:string;file:string}[];
 }
 
 /** Retain the historical src selection and add explicitly mounted JSX from
@@ -213,6 +217,12 @@ export async function buildReactReference(
     css,
     cohort,
     sourceRoot,
+    ...(cohort.declared && entry===cohort.entry ? {runtimeEntryImports:
+      (output.metafile!.inputs["react-reference.tsx"]?.imports ?? []).flatMap(edge=>{
+        const file=path.resolve(sourceRoot,edge.path);
+        return !edge.external && edge.original && Object.hasOwn(files,file)
+          ? [{specifier:edge.original,file}] : [];
+      })} : {}),
     runtimeImports: Object.entries(output.metafile!.inputs).flatMap(([input, value]) => {
       const importer = path.resolve(sourceRoot, input);
       if (!Object.hasOwn(files, importer)) return [];

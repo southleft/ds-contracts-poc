@@ -8,6 +8,7 @@ interface RuntimeReference {
   sourceRoot: string;
   files: Readonly<Record<string,string>>;
   runtimeImports?: readonly {importer:string;specifier:string;file:string}[];
+  runtimeEntryImports?: readonly {specifier:string;file:string}[];
 }
 export interface ReactRuntimeExportDefinition {
   module: string;
@@ -175,6 +176,48 @@ export function observeReactRuntimeDependencies(reference:RuntimeReference,sourc
         problems:['runtime-export-binding-only','runtime-export-body-unmodeled'],
       });
     }
+  }
+  return {program,observations};
+}
+
+/** Bootstrap observation identities for explicitly declared public mounts.
+ * Only the original build's entry edge and witnessed ESM route select an
+ * executable binding. Unrelated dependencies are not selected. Root, props,
+ * children and implementation remain unresolved; no native body is authorized.
+ * Relative workspace mounts retain their existing typed source reader. */
+export function observeReactRuntimeMounts(reference:RuntimeReference & {
+  cohort?: {declared:boolean;mountedExports?:readonly {module:string;export:string}[]};
+},source:ReactSourceProgram){
+  const program=structuredClone(source);
+  const observations:Array<{declaredMount:{module:string;export:string};result:ReactRuntimeExport}>=[];
+  if(!reference.cohort?.declared)return {program,observations};
+  const root=realpathSync(reference.sourceRoot);
+  for(const mount of reference.cohort.mountedExports??[]){
+    if(mount.module.startsWith('./'))continue;
+    const targets=[...new Set((reference.runtimeEntryImports??[])
+      .filter(e=>e.specifier===mount.module).map(e=>e.file))];
+    const result:ReactRuntimeExport=targets.length===1
+      ? readReactRuntimeExport(reference,path.relative(root,targets[0]),[mount.export])
+      : {version:1,acceptedContract:null,runtimeVerified:false,files:{},route:[],status:'refused',
+        reason:targets.length?'runtime-export-entry-edge-ambiguous':'runtime-export-entry-edge-unwitnessed'};
+    observations.push({declaredMount:{...mount},result});
+    if(result.status!=='resolved')continue;
+    const d=result.definition,existing=program.components.filter(c=>
+      c.module===d.module&&c.exportName===d.exportName);
+    if(existing.length){
+      if(existing.some(c=>c.sourceSha256!==d.sourceSha256||c.span.start!==d.span.start||c.span.end!==d.span.end))
+        throw Error('react-runtime-mount-source-changed');
+      continue;
+    }
+    for(const [file,hash] of Object.entries(result.files)){
+      if(program.files[file]&&program.files[file]!==hash)throw Error('react-runtime-mount-source-changed');
+      program.files[file]=hash;
+    }
+    program.components.push({name:d.bindingName??d.exportName,exportName:d.exportName,module:d.module,
+      sourceSha256:d.sourceSha256,span:d.span,implementation:'unresolved',props:[],
+      root:{kind:'unresolved',reason:'runtime-export-body-unmodeled'},markers:[],defaults:{},forwardedProps:[],
+      children:{kind:'unresolved',reason:'runtime-export-body-unmodeled'},componentReferences:[],
+      problems:['runtime-export-binding-only','runtime-export-body-unmodeled']});
   }
   return {program,observations};
 }
