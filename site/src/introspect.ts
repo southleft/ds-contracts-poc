@@ -162,13 +162,33 @@ export interface FieldInfo {
   defaultValue?: unknown;
 }
 
-/** The fields of an object schema, with rendered type strings. */
+/** Object members retain their own optionality; a union is not an object schema. */
+function objectMembers(s: AnySchema): AnySchema[] {
+  const schema = resolveLazy(unwrap(s).schema);
+  if (defType(schema) === 'union') return ((def(schema).options as AnySchema[]) ?? []).flatMap(objectMembers);
+  return shapeOf(schema) ? [schema] : [];
+}
+
+/** Resolve a documented field from all object members without inventing a runtime shape. */
+export function fieldSchema(s: AnySchema, name: string): AnySchema {
+  const members = objectMembers(s);
+  const values = [...new Set(members.flatMap(member => shapeOf(member)?.[name] ? [shapeOf(member)![name]!] : []))];
+  if (!values.length) throw new Error(`fieldSchema: no field ${name}`);
+  return values.length === 1 ? values[0]! : z.union(values as [AnySchema, AnySchema, ...AnySchema[]]);
+}
+
+/** Fields present in any object member, marking fields absent from another member optional. */
 export function fieldsOf(s: AnySchema): FieldInfo[] {
-  const shape = shapeOf(s);
-  if (!shape) throw new Error(`fieldsOf: schema has no shape (type ${defType(s)})`);
-  return Object.entries(shape).map(([name, v]) => {
-    const { optional, defaultValue } = unwrap(v);
-    return { name, type: typeText(v), optional, defaultValue };
+  const members = objectMembers(s);
+  if (!members.length) throw new Error(`fieldsOf: schema has no shape (type ${defType(s)})`);
+  const names = [...new Set(members.flatMap(member => Object.keys(shapeOf(member)!)))];
+  return names.map(name => {
+    const values = members.map(member => shapeOf(member)![name]);
+    const present = values.filter((v): v is AnySchema => v !== undefined);
+    const defaults = present.map(v => unwrap(v).defaultValue);
+    return { name, type: [...new Set(present.map(v => typeText(v)))].join(' | '),
+      optional: present.length !== members.length || present.some(v => unwrap(v).optional),
+      defaultValue: defaults.every(value => Object.is(value, defaults[0])) ? defaults[0] : undefined };
   });
 }
 
@@ -234,6 +254,10 @@ function walkBranches(prefix: string, s: AnySchema, out: Set<string>, depth: num
     // Scalar-only unions (prop.default: string | boolean | number) are one
     // branch: the field key itself.
     const options = (d.options as AnySchema[]) ?? [];
+    if (depth === 0) {
+      for (const option of options) walkBranches(prefix, option, out, 0);
+      return;
+    }
     const structural = options.some((o) => defType(unwrap(o).schema) === 'object');
     if (structural) {
       for (const o of options) out.add(`${prefix}.${unionBranchLabel(o)}`);

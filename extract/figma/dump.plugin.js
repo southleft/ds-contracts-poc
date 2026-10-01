@@ -345,7 +345,7 @@ function filledPathIssue(data) {
 function strokedPathIssue(data) {
   if (typeof data !== 'string' || data.length === 0 || data.length > 65536)
     return 'stroked-path-size';
-  const token = /[MLCQ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  const token = /[MLCQHVZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
   let at = 0;
   const tokens = [];
   while (at < data.length) {
@@ -360,7 +360,7 @@ function strokedPathIssue(data) {
     const match = token.exec(data);
     if (!match) return 'stroked-path-command-or-character';
     const value = match[0];
-    if (/^[MLCQ]$/.test(value)) tokens.push(value);
+    if (/^[MLCQHVZ]$/.test(value)) tokens.push(value);
     else {
       const number = Number(value);
       if (!Number.isFinite(number) || Math.abs(number) > 1e6) return 'stroked-path-coordinate';
@@ -369,22 +369,30 @@ function strokedPathIssue(data) {
     if (tokens.length > 16384) return 'stroked-path-complexity';
     at = token.lastIndex;
   }
-  let moved = false, drawn = false;
+  let moved = false, drawn = false, subpathDrawn = false;
   for (let i = 0; i < tokens.length;) {
     const command = tokens[i++];
     if (typeof command !== 'string') return 'stroked-path-missing-command';
     if (command === 'M') {
-      if (moved) return 'stroked-path-multiple-subpaths';
-      moved = true;
+      if (moved && !subpathDrawn) return 'stroked-path-empty-subpath';
+      moved = true; subpathDrawn = false;
     } else if (!moved) return 'stroked-path-missing-move';
+    if (command === 'Z') {
+      if (typeof tokens[i] === 'number') return 'stroked-path-arity';
+      if (!subpathDrawn) return 'stroked-path-empty';
+      moved = false;
+      continue;
+    }
     const start = i;
     while (i < tokens.length && typeof tokens[i] === 'number') i++;
-    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : command === 'H' || command === 'V' ? 1 : 2;
     if (count === 0 || count % arity !== 0) return 'stroked-path-arity';
-    if (command !== 'M' || count > 2) drawn = true;
+    if (command !== 'M' || count > 2) { drawn = true; subpathDrawn = true; }
   }
+  if (moved && !subpathDrawn) return 'stroked-path-empty-subpath';
   return drawn ? undefined : 'stroked-path-empty';
 }
+
 
 function dumpStrokedPath(node, parent) {
   const paths = node.vectorPaths, t = node.relativeTransform, network = node.vectorNetwork;
@@ -420,7 +428,36 @@ function dumpStrokedPath(node, parent) {
   } };
 }
 
+function nativeLineIssue(line) {
+  if (!Number.isFinite(line.length) || line.length <= 0) return 'native-line-length-invalid';
+  if (!Array.isArray(line.transform) || line.transform.length !== 2 ||
+      line.transform.some(row => !Array.isArray(row) || row.length !== 3 || row.some(value => !Number.isFinite(value))))
+    return 'native-line-transform-invalid';
+  const [[a, c], [b, d]] = line.transform;
+  if (Math.abs(Math.hypot(a, b) - 1) > 1e-6 || Math.abs(Math.hypot(c, d) - 1) > 1e-6)
+    return 'native-line-transform-scale-unsupported';
+  if (Math.abs(a * d - b * c) < 1e-6) return 'native-line-transform-collapsed';
+  if (!['NONE', 'ROUND', 'SQUARE'].includes(line.cap)) return 'native-line-cap-unsupported';
+  if (!['INSIDE', 'CENTER', 'OUTSIDE'].includes(line.align)) return 'native-line-alignment-invalid';
+}
+function dumpNativeLine(node, parent) {
+  const line = { length: node.width, transform: node.relativeTransform, cap: node.strokeCap, align: node.strokeAlign };
+  let issue = nativeLineIssue(line);
+  if (!issue && node.height !== 0) issue = 'native-line-logical-height-invalid';
+  if (!issue && parent && (parent.type === 'GROUP' || parent.type === 'BOOLEAN_OPERATION')) issue = 'native-line-parent-basis-unresolved';
+  if (!issue && node.isMask) issue = 'native-line-mask-unsupported';
+  if (!issue && node.dashPattern && node.dashPattern.length) issue = 'native-line-dashes-unsupported';
+  if (!issue && line.cap !== 'NONE' && typeof node.strokeWeight === 'number' && node.strokeWeight > line.length) issue = 'native-line-short-cap-unqualified';
+  if (issue) return null;
+  const source = typeof node.id === 'string' ? { nodeId: node.id } : undefined;
+  if (source && parent && typeof parent.id === 'string') source.parentId = parent.id;
+  const constraints = node.constraints && { horizontal: CONSTRAINT_H[node.constraints.horizontal], vertical: CONSTRAINT_V[node.constraints.vertical] };
+  return { kind: 'line', width: node.width, height: 0, ...(constraints && constraints.horizontal && constraints.vertical ? { constraints } : {}), line: { ...line,
+    transform: line.transform.map(row => row.slice()), ...(source ? { source } : {}) } };
+}
+
 function dumpShape(node, parent) {
+  if (node.type === 'LINE') return dumpNativeLine(node, parent);
   if (node.type === 'VECTOR') {
     const stroked = dumpStrokedPath(node, parent);
     if (stroked) return stroked;
@@ -854,9 +891,10 @@ async function dumpSwapInstances(root, property) {
   return found;
 }
 
-async function dumpSolidFillTarget(root, target) {
-  if (!target || target.type !== 'VECTOR' || !Array.isArray(target.fills)) return undefined;
-  const paints = target.fills.filter(function (p) { return p.visible !== false; });
+async function dumpSolidFillTarget(root, target, plane) {
+  const observed = target && (plane === 'stroke' ? target.strokes : target.fills);
+  if (!target || target.type !== 'VECTOR' || !Array.isArray(observed)) return undefined;
+  const paints = observed.filter(function (p) { return p.visible !== false; });
   if (paints.length !== 1 || paints[0].type !== 'SOLID' || (paints[0].blendMode && paints[0].blendMode !== 'NORMAL')) return undefined;
   const childPath = [], instancePath = [];
   let node = target, owner, depth = 0;
@@ -1710,6 +1748,15 @@ async function dumpNode(node, nodePath, parent) {
               }
             }
           }
+          if (h.fields.indexOf('strokes') >= 0 && Array.isArray(n.strokes)) {
+            const paint = await dumpPaint(n.strokes, null, 'stroke', n);
+            if (paint) {
+              h.stroke = paint;
+              try { const target = await dumpSolidFillTarget(node,n,'stroke'); if (target) h.solidStrokeTarget = target; }
+              catch (_) { degrade('host-paint-target-unavailable', nodePath, 'the overridden stroke main identity could not be read'); }
+            }
+          }
+          if (h.fields.indexOf('strokeWeight') >= 0 && Number.isFinite(n.strokeWeight) && n.strokeWeight > 0) h.strokeWeight = n.strokeWeight;
           hostOverrides.push(h);
           located++;
         }

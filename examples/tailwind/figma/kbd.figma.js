@@ -674,6 +674,7 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {

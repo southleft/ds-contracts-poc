@@ -1,5 +1,5 @@
 import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
-import { strokedPathSvg } from '../scripts/contract-schema.js';
+import { strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactSlotInputs } from './react-slot-inputs.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
@@ -643,6 +643,8 @@ export function generateTsx(
   const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
   const renderPart = (partName: string, part: Part): string => {
+    if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
+      `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
       `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
     if (part.icon) {

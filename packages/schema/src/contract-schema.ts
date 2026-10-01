@@ -1,3 +1,5 @@
+import {nativeLineIssue,nativeLineFootprint} from './native-line.js';
+export * from './native-line.js';
 /**
  * The contract schema — the shape of the single source of truth. (v2)
  *
@@ -1731,6 +1733,7 @@ export const REF_OVERRIDE_CHANNELS: Record<
     css: ["background-color"],
     note: "per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.",
   },
+  "stroke-width": { css: ["stroke-width"], note: "Observed uniform centerline weight on an identity-qualified single-stroke drawing instance." },
   color: {
     css: ["color"],
     note: "per-instance GLYPH INK (gap-closing round 8; dump v1.7 instancePrimaryFill, stroke- or fill-shaped, observed on the nested instance node). The twin of background-color for a vector child: an exported glyph whose whole drawing is ONE ink draws `currentColor`, its own contract binds that ink as `color`, and a host that draws the same glyph in its own ink sets this channel. A glyph with two or more distinct inks is refused by the single-ink test (examples/untitled-ui/glyph-ink.mts) and never reaches this channel — one custom property cannot honestly serve two paints.",
@@ -1839,7 +1842,7 @@ const FilledGeometrySchema = z.strictObject({
   paths: z.array(FilledPathSchema).length(1),
 });
 const StrokedPathSchema = z.strictObject({
-  data: z.string().min(1).max(65536).regex(/^[MLCQ0-9eE+., \t\r\n-]+$/),
+  data: z.string().min(1).max(65536).regex(/^[MLCQHVZ0-9eE+., \t\r\n-]+$/),
   cap: z.enum(['NONE', 'ROUND', 'SQUARE']),
   join: z.enum(['MITER', 'ROUND', 'BEVEL']),
   miterLimit: z.number().min(1).max(1000),
@@ -1849,7 +1852,7 @@ const StrokedPathSchema = z.strictObject({
     x: z.number(), y: z.number(),
   }),
 });
-export const ShapeSchema = z.strictObject({
+const NonLineShapeSchema = z.strictObject({
   kind: z.enum(["polygon", "ellipse", "rect", "path", "stroked-path"]),
   /** Captured SCALE/SCALE relation to an unpadded free parent. Path bytes
    * remain in their own drawing viewport; these are the parent coordinates. */
@@ -1889,6 +1892,34 @@ export const ShapeSchema = z.strictObject({
     })
     .optional(),
 });
+
+const NativeLineSchema = z.strictObject({
+  length: z.number().positive(),
+  transform: z.tuple([
+    z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
+    z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
+  ]),
+  cap: z.enum(['NONE', 'ROUND', 'SQUARE']),
+  align: z.enum(['INSIDE', 'CENTER', 'OUTSIDE']),
+  source: z.strictObject({ nodeId: z.string().min(1), parentId: z.string().min(1).optional() }).optional(),
+  observedSources: z.array(z.strictObject({
+    nodeId: z.string().min(1), parentId: z.string().min(1).optional(), variantName: z.string(),
+    transform: z.tuple([z.tuple([z.number().finite(),z.number().finite(),z.number().finite()]),z.tuple([z.number().finite(),z.number().finite(),z.number().finite()])]),
+  })).optional(),
+}).superRefine((line, ctx) => {
+  const issue = nativeLineIssue(line);
+  if (issue) ctx.addIssue({ code: 'custom', message: issue });
+});
+const NativeLineShapeSchema = NonLineShapeSchema.omit({kind:true,width:true,height:true}).extend({
+  kind: z.literal('line'), width: z.number().positive(), height: z.literal(0), line: NativeLineSchema,
+}).superRefine((shape, ctx) => {
+  if (shape.width !== shape.line.length) ctx.addIssue({code:'custom',message:'native-line-length-mismatch'});
+  for (const key of ['rotation','arc','paths','pathsByProp','strokePath','sides','parentViewport'] as const)
+    if (shape[key] !== undefined) ctx.addIssue({code:'custom',path:[key],message:'native-line-conflicting-geometry'});
+});
+/** Native LINE is a separate zero-height branch. All existing shape sizes
+ * remain positive in runtime validation and exported JSON Schema. */
+export const ShapeSchema = z.union([NonLineShapeSchema, NativeLineShapeSchema]);
 
 /** Vertex list for a regular n-gon inscribed in its box, as CSS clip-path
  *  percentages — vertex 0 at the top center, matching Figma's
@@ -1997,6 +2028,10 @@ export function borderStyleDecls(
  *  count renders the Figma default (3) — the proposer NAMES that assumption
  *  in its notes. */
 export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
+  if (shape.kind === 'line') {
+    const box=nativeLineFootprint(shape.line);
+    return [`width: ${box.width}px`, `height: ${box.height}px`, 'display: block', 'overflow: visible', 'flex-shrink: 0'];
+  }
   if (shape.kind === 'stroked-path') return [
     'position: absolute', 'left: 0', 'top: 0', 'width: 100%', 'height: 100%',
     'display: block', 'overflow: visible', 'flex-shrink: 0',
@@ -3826,13 +3861,14 @@ export function lowerFilledPathVariants(contract: Contract): Contract {
  * identities; an SVG stroke paints those channels without a CSS border box. */
 export function lowerStrokedPathPaint(contract: Contract): Contract {
   let changed = false;
-  const paint = (map: Record<string, string>) => Object.fromEntries(Object.entries(map).flatMap(([key, value]) =>
-    key === 'border-style' ? [] : [[key === 'border-color' ? 'stroke' : key === 'border-width' ? 'stroke-width' : key, value]]));
-  const maps = (map: Record<string, Record<string, string>>) => Object.fromEntries(Object.entries(map).map(([key, value]) => [key, paint(value)]));
+  const project = (map: Record<string, string>, line: boolean) => Object.fromEntries(Object.entries(map).flatMap(([key, value]) =>
+    key === 'border-style' ? [] : [[key === 'border-color' ? 'stroke' : key === 'border-width' ? (line ? '--native-line-stroke-width' : 'stroke-width') : key, value]]));
   const visit = (part: Part): Part => {
     const children = part.parts && Object.fromEntries(Object.entries(part.parts).map(([key, value]) => [key, visit(value)]));
-    if (part.shape?.kind !== 'stroked-path') return children ? { ...part, parts: children } : part;
+    if (part.shape?.kind !== 'stroked-path' && part.shape?.kind !== 'line') return children ? { ...part, parts: children } : part;
     changed = true;
+    const paint = (map: Record<string,string>) => project(map, part.shape!.kind === 'line');
+    const maps = (map: Record<string,Record<string,string>>) => Object.fromEntries(Object.entries(map).map(([key,value])=>[key,paint(value)]));
     const by = part.tokensByProp;
     return { ...part, ...(children ? { parts: children } : {}),
       ...(part.tokens ? { tokens: paint(part.tokens) } : {}),

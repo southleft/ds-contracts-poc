@@ -52,6 +52,7 @@ function main(): Promise<void> {
 
   let refusal: VariablesRefusal | undefined;
   return importFromUrl(url, token, {
+    captureStrokeSvg: true,
     ...(target ? { target } : {}),
     ...(closure ? { closure: true } : {}),
     onVariablesUnavailable: (info) => {

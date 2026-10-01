@@ -46,7 +46,7 @@ import {
   REPO_URL,
   type Provenance,
 } from "../html.js";
-import { fieldsOf, resolveLazy, unwrap, typeText } from "../introspect.js";
+import { fieldsOf, fieldSchema, resolveLazy, unwrap, typeText } from "../introspect.js";
 import {
   SPEC_PAGES,
   pageMeta,
@@ -1126,9 +1126,9 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "shape",
       "Shape parts",
       ["generated", "curated"],
-      `<p>A leaf decor part with explicit intrinsic geometry: polygon by side count, ellipse, rect, a <a href="#filled-paths">closed filled path</a>, or an <a href="#stroked-paths">open stroked path</a>. Parametric shapes carry CSS-clockwise rotation. Fill uses the existing <code>tokens.background-color</code> or literal channel, placement uses <code>stylesWhen</code>, and visibility uses <code>visibleWhen</code>. Open stroked paths have the separate paint and placement rules below.</p>` +
+      `<p>A leaf decor part with explicit intrinsic geometry: polygon by side count, ellipse, rect, a <a href="#filled-paths">closed filled path</a>, an <a href="#stroked-paths">open stroked path</a>, or a <a href="#native-lines">native zero-height line</a>. Parametric shapes carry CSS-clockwise rotation. Fill uses the existing <code>tokens.background-color</code> or literal channel, placement uses <code>stylesWhen</code>, and visibility uses <code>visibleWhen</code>. Open stroked paths have the separate paint and placement rules below.</p>` +
         fieldList(ShapeSchema as AnySchema, {
-          kind: "polygon | ellipse | rect | path | stroked-path.",
+          kind: "polygon | ellipse | rect | path | stroked-path | line.",
           strokePath: 'Original open centerline and parent coordinate basis — see <a href="#stroked-paths">stroked paths</a>.',
           paths: 'Closed filled-path geometry — see <a href="#filled-paths">filled paths</a>.',
           pathsByProp: 'Complete enum-conditioned path geometry — see <a href="#filled-paths">filled paths</a>.',
@@ -1136,7 +1136,8 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           sides:
             "Polygon point count, ≥ 3. A polygon with no captured side count renders the canvas default (3) — and the proposer names that assumption in its notes.",
           width: "Intrinsic (pre-rotation) width, px.",
-          height: "Intrinsic (pre-rotation) height, px.",
+          height: "Intrinsic (pre-rotation) height, px. Exactly zero for native line; positive for other shapes.",
+          line: 'Native length, affine transform and cap/alignment — see <a href="#native-lines">native lines</a>.',
           rotation: "CSS-clockwise degrees. Omit for 0.",
           arc: 'Ellipse-only partial sweep — see <a href="#arc">ellipse arcs</a>.',
         }) +
@@ -1161,7 +1162,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           pathsByProp: "A prop name and map of enum values to complete width, height and paths geometry.",
           parentViewport: "Fixed parent dimensions and the drawing's local origin before caller resizing.",
         }, { only: ["paths", "pathsByProp", "parentViewport"] }) +
-        fieldList(unwrap((ShapeSchema.shape as unknown as Record<string, AnySchema>).parentViewport).schema, {
+        fieldList(unwrap(fieldSchema(ShapeSchema, "parentViewport")).schema, {
           width: "Positive parent width in pixels at capture time.",
           height: "Positive parent height in pixels at capture time.",
           x: "Drawing origin on the parent's horizontal axis, in pixels.",
@@ -1188,8 +1189,8 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "stroked-paths",
       "Open stroked paths",
       ["generated", "curated"],
-      `<p><code>kind: "stroked-path"</code> requires <code>strokePath</code>. It retains one original open centerline with absolute <code>M</code>, <code>L</code>, <code>C</code> or <code>Q</code> commands. Shape width and height are the positive intrinsic centerline bounds, starting at local (0, 0); polynomial extrema must agree exactly or as float32 values. Path data is limited to 65,536 characters and 16,384 command/number tokens. Coordinates, dimensions and offsets have absolute values no greater than 1,000,000.</p>` +
-        fieldList(unwrap((ShapeSchema.shape as unknown as Record<string, AnySchema>).strokePath).schema, {
+      `<p><code>kind: "stroked-path"</code> requires <code>strokePath</code>. It retains one original open centerline with absolute <code>M</code>, <code>L</code>, <code>H</code>, <code>V</code>, <code>C</code> or <code>Q</code> commands. Native output expands H/V into equivalent line segments without changing the centerline. Shape width and height are the positive intrinsic centerline bounds, starting at local (0, 0); polynomial extrema must agree exactly or as float32 values. Path data is limited to 65,536 characters and 16,384 command/number tokens. Coordinates, dimensions and offsets have absolute values no greater than 1,000,000.</p>` +
+        fieldList(unwrap(fieldSchema(ShapeSchema, "strokePath")).schema, {
           data: "One open subpath. Additional coordinate groups follow the command's usual SVG meaning.",
           cap: "NONE (SVG butt), ROUND or SQUARE, uniform across the path.",
           join: "MITER, ROUND or BEVEL, uniform across the path.",
@@ -1198,7 +1199,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         }) +
         `<p><code>viewport.width</code> and <code>viewport.height</code> match the parent’s fixed dimensions. <code>viewport.x</code> and <code>viewport.y</code> retain fractional path placement. The parent must be a non-root part with <code>declared.position: "relative"</code>, fixed pixel width and height, and only stroked-path children using the same basis. It cannot carry flow layout, padding, other content or dynamic dimensions.</p>` +
         `<p>Paint uses <code>border-color</code> and a positive pixel <code>border-width</code> in tokens or literals. Code projects them to SVG stroke paint and width inside a full-parent viewport, preserving fractional placement. Native output creates an editable VECTOR with CENTER stroke alignment, original cap/join, paint and weight bindings, and SCALE/SCALE constraints. Resizing the parent scales geometry while stroke width remains constant. Figma may normalize curve serialization on readback.</p>` +
-        `<p class="section-note">Validation refuses unsupported contract geometry and paint by name. The capture reader reports unsupported native features as degradations; they are not a supported stroked-path projection.</p><ul class="refusals"><li>Closed or multiple subpaths, relative commands, arcs, XML, malformed numbers, or mismatched intrinsic bounds.</li><li>Variable geometry, conflicting shape fields, semantic content, inherited paint, nonpositive or relative stroke widths.</li><li>Masks, effects, dashed or variable-width strokes, rotated/skewed axes, unsupported per-vertex properties, or a clipped/padded/flowing parent.</li><li>REST capture cannot supply this original centerline; supported capture uses the canonical plugin reader.</li></ul>` +
+        `<p class="section-note">Validation refuses unsupported contract geometry and paint by name. The capture reader reports unsupported native features as degradations; they are not a supported stroked-path projection.</p><ul class="refusals"><li>Closed or multiple subpaths, relative commands, arcs, XML, malformed numbers, or mismatched intrinsic bounds.</li><li>Variable geometry, conflicting shape fields, semantic content, inherited paint, nonpositive or relative stroke widths.</li><li>Masks, effects, dashed or variable-width strokes, rotated/skewed axes, unsupported per-vertex properties, or a clipped/padded/flowing parent.</li><li>REST node capture alone cannot supply this original centerline. The URL importer additionally requests a version-pinned SVG export and admits one open path only when its numeric source node ID, exported basis, stroke paint, weight, cap and join agree with the node response. Expanded stroke silhouettes and mismatched export bases remain named refusals; the canonical plugin reader also supports the bounded centerline class.</li></ul>` +
         illustrativeExample(PartSchema, {
           declared: { position: "relative" },
           literals: { width: "20px", height: "16px" },
@@ -1212,13 +1213,34 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         fidelity(`<p>Bounded application evidence covers a twelve-appearance three-state React return and three path geometries at three native/browser sizes under the unchanged 5% image limit. Complete V1, native path-edit reconciliation and original React source repair remain unqualified. See <a href="${REPO_URL}/blob/main/docs/23-known-limitations.md#d84-open-stroked-paths-retain-their-centerline-and-parent-viewport">limitation D.84</a> and the current acceptance ledger.</p>`),
     ),
     section(
+      "native-lines",
+      "Native zero-height lines",
+      ["generated", "curated"],
+      `<p><code>kind: "line"</code> retains Figma’s zero-height LINE geometry. Shape width equals the positive <code>line.length</code>; shape height is exactly zero. Other shape classes keep their positive width and height requirements. The 2×3 affine transform preserves the observed orientation, reflection and placement. Its basis vectors must have unit length and a nonzero determinant; scaling and collapse refuse.</p>` +
+        fieldList(unwrap(fieldSchema(ShapeSchema, "line")).schema, {
+          length: "Positive native line length, pixels; equal to shape.width.",
+          transform: "Two rows of three finite numbers. Translation remains source placement; stroke paint does not replace the layout box.",
+          cap: "NONE, ROUND or SQUARE. Capped paint with a stroke weight greater than the line length refuses.",
+          align: "INSIDE, CENTER or OUTSIDE, retained from native capture.",
+          source: "Original node ID and optional parent ID, when captured.",
+          observedSources: "Original node/parent IDs, variant names and transforms for the complete observed geometry census.",
+        }) +
+        `<p>Paint uses the existing border-color and pixel border-width channels. Code renders SVG paint inside the transformed layout footprint; native generation creates an editable LINE with its original cap, alignment and affine basis. Paint bounds remain separate from layout dimensions. Rotation, paths, arcs, parentViewport and other competing geometry fields refuse on a line. Source IDs document captured observations and do not qualify an unseen variant.</p>` +
+        illustrativeExample(PartSchema, {
+          shape: {kind: "line", width: 20, height: 0, line: {
+            length: 20, transform: [[1,0,0],[0,1,0]], cap: "NONE", align: "CENTER"}},
+          literals: {"border-color": "#334455", "border-width": "1px"},
+        }, "Schema-validated native line example; not a fidelity acceptance receipt.") +
+        fidelity(`<p>Bounded native/browser evidence verifies the supported caps and independent stroke weights. The original40 regression measures a development sample; full204, unseen-kit generalization and independent React-to-Figma qualification remain separate requirements.</p>`),
+    ),
+    section(
       "arc",
       "Ellipse arcs",
       ["generated", "curated"],
       `<p><code>shape.arc</code> — partial-sweep geometry for an <strong>ellipse</strong> shape (a spinner’s three-quarter ring, a donut gauge), carried as Figma Plugin-API <strong>ArcData radians, verbatim</strong>: 0 at 3 o’clock, increasing clockwise on screen. Ellipse-only vocabulary, and carried only when the sweep is <em>partial</em> (&lt;&nbsp;2π) and constant across variants — a full sweep is the plain ellipse, and an axis-varying sweep rides per-value <code>stylesWhen</code> <code>mask</code> rules instead (the rotation discipline).</p>` +
         fieldList(
           unwrap(
-            (ShapeSchema.shape as unknown as Record<string, AnySchema>).arc,
+            fieldSchema(ShapeSchema, "arc"),
           ).schema,
           {
             start:

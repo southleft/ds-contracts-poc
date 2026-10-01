@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {mapRestToDump,type RestNode} from './map.js';
 import type {DumpSet,DumpHostOverride} from '../types.js';
 const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8');
-const readPlugin=vm.runInNewContext(source.slice(source.indexOf('async function dumpSolidFillTarget('),source.indexOf('async function dumpNode('))+';dumpSolidFillTarget') as (root:any,target:any)=>Promise<DumpHostOverride['solidFillTarget']>;
+const readPlugin=vm.runInNewContext(source.slice(source.indexOf('async function dumpSolidFillTarget('),source.indexOf('async function dumpNode('))+';dumpSolidFillTarget') as (root:any,target:any,plane?:'stroke')=>Promise<DumpHostOverride['solidFillTarget']>;
 const vector=(id:string):RestNode=>({id,name:'Same name',type:'VECTOR',fills:[{type:'SOLID',color:{r:.5,g:.25,b:0,a:1}}]});
 const fixture=():RestNode=>({id:'1:1',name:'Host',type:'INSTANCE',componentId:'main:host',children:[
  vector('2:1'),{id:'2:2',name:'Same name',type:'INSTANCE',componentId:'main:selected',children:[{id:'3:1',name:'Same name',type:'FRAME',children:[vector('4:1')]}]},
@@ -36,4 +36,21 @@ test('plugin refuses detached or foreign descendants and propagates unreadable m
  const p=pluginTree(fixture()),leaf=p.children[0];assert.equal(await readPlugin(p,pluginTree(vector('x'))),undefined);
  leaf.parent.children=[];assert.equal(await readPlugin(p,leaf),undefined);
  const q=pluginTree(fixture());q.getMainComponentAsync=async()=>{throw Error('unavailable');};await assert.rejects(()=>readPlugin(q,q.children[0]),/unavailable/);
+});
+
+
+test('stroke overrides carry independent uniform weight and exact paint-owner identity on both readers',async()=>{
+ const r=fixture();
+ for(const [i,n] of [r.children![0],r.children![1].children![0].children![0]].entries()) {
+  n.fills=[];n.strokes=[{type:'SOLID',blendMode:'NORMAL',color:{r:.5,g:.25,b:0,a:1}}];n.strokeWeight=i+1;
+  r.overrides![i].overriddenFields=['strokes','strokeWeight'];
+ }
+ const rows=readRest(r),p=pluginTree(r);
+ assert.deepEqual(rows.map(h=>h.strokeWeight),[1,2]);
+ assert.deepEqual(rows.map(h=>h.stroke?.hex),['804000','804000']);
+ assert.deepEqual(plain(await readPlugin(p,p.children[0],'stroke')),rows[0].solidStrokeTarget);
+ assert.deepEqual(plain(await readPlugin(p,p.children[1].children[0].children[0],'stroke')),rows[1].solidStrokeTarget);
+ const changed=structuredClone(r);changed.children![0].strokes!.push({...changed.children![0].strokes![0]});
+ assert.equal(readRest(changed)[0].solidStrokeTarget,undefined);
+ assert.equal(await readPlugin(pluginTree(changed),pluginTree(changed).children[0],'stroke'),undefined);
 });

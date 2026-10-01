@@ -1,0 +1,20 @@
+{
+  "origin": "Independently observed synthetic native cap/alignment fixtures in owner-authorized evaluation file; native LINE writer readback base/thin exports",
+  "cases": 9,
+  "capWeights": [
+    7,
+    3
+  ],
+  "figmaFileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+  "nativeWriterComponents": {
+    "base": "20:3382",
+    "thin": "20:3392"
+  },
+  "qualification": "Native primitive regression fixtures only; not kit or never-seen qualification",
+  "sha256": {
+    "caps-rest.json": "dc0ba5ccb17f68edbee0a26c34e745813df9dc391e6a30fb4f1cfbf50c5e79d8",
+    "caps-write.json": "79b815a39383805c291cf183976561441f262a80202f13d34f267b45d817e8c4",
+    "base.png": "46b0671835b5f0eb07e36604777d72e61e348ad5ebdc5d73ee3e602af60630f7",
+    "thin.png": "d706d816533f611d7ada9570e3b6f2db252c339eaad31cadc5646744ed0d802d"
+  }
+}

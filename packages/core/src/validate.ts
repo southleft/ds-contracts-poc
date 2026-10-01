@@ -1014,15 +1014,15 @@ export function validateContract(
               key === 'border-style' && value !== 'solid' || key === 'position' && value !== 'absolute' ||
               key === 'display' && !['block', 'none'].includes(value))
             errors.push(`${contract.id}: ${name}: stroked-path-unsupported-channel:${key}`);
-          if (key === 'border-width' && !value.startsWith('{') && !strokedPathDimensionOk(value))
+          if (key === 'border-width' && !value.startsWith('{') && !strokedPathDimensionOk(value) && !(value === 'inherit' && contract.anatomy.root.overridable?.includes('stroke-width') && contract.anatomy.root.tokens?.['stroke-width'] && p.length === 2 && Object.keys(contract.anatomy.root.parts ?? {}).length === 1))
             errors.push(`${contract.id}: ${name}: stroked-path-width-unsupported`);
-          if (key === 'border-color' && ['inherit', 'currentColor'].includes(value))
+          if (key === 'border-color' && ['inherit', 'currentColor'].includes(value) && !(value === 'currentColor' && contract.anatomy.root.overridable?.includes('color') && contract.anatomy.root.tokens?.color && p.length === 2 && Object.keys(contract.anatomy.root.parts ?? {}).length === 1))
             errors.push(`${contract.id}: ${name}: stroked-path-inherited-paint-unsupported`);
         }
         if (!['border-color', 'border-width'].every(key => key in (part.tokens ?? {}) || key in (part.literals ?? {})))
           errors.push(`${contract.id}: ${name}: stroked-path-paint-or-width-missing`);
         const parent = walkAnatomy(contract).find(w => w.path.length === p.length - 1 && w.path.every((key, i) => key === p[i]))?.part;
-        if (!parent || p.length < 3 || parent.declared?.position !== 'relative' || parent.layout || parent.layoutByProp || parent.shape ||
+        if (!parent || p.length < 2 || parent.declared?.position !== 'relative' || parent.layout || parent.layoutByProp || parent.shape ||
             parent.element || parent.attrs || parent.animation || parent.overlay || parent.placement || parent.repeat || parent.slot || parent.component ||
             parent.content || parent.text !== undefined || parent.textByProp || parent.icon || parent.meter || parent.textAutoResize || parent.hugsBelowMaxWidth || parent.textOutOfBox || parent.strokesIncludedInLayout !== undefined ||
             Object.values(parent.parts ?? {}).some(child => child.shape?.kind !== 'stroked-path') ||
@@ -1036,8 +1036,13 @@ export function validateContract(
             ...(parent.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
             ...literalsByCombinationRecords(parent),
             ...(parent.stylesWhen ?? []).map(rule => rule.styles)];
+          for (const map of [...baseMaps, ...dynamicMaps]) {
+            if (map && ('overflow-x' in map || 'overflow-y' in map) && map['overflow-x'] !== map['overflow-y'])
+              errors.push(`${contract.id}: ${name}: stroked-path-parent-clip-axes-unqualified`);
+          }
           for (const map of [...baseMaps, ...dynamicMaps]) for (const [key, value] of Object.entries(map ?? {})) {
-            if (!['width', 'height', 'opacity', 'position', 'display'].includes(key) ||
+            if (!['width', 'height', 'opacity', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y', 'color', 'stroke-width'].includes(key) ||
+                ['overflow', 'overflow-x', 'overflow-y'].includes(key) && !['visible', 'hidden'].includes(value) ||
                 key === 'position' && value !== 'relative' || key === 'display' && !['block', 'none'].includes(value) ||
                 map && dynamicMaps.includes(map) && ['width', 'height'].includes(key))
               errors.push(`${contract.id}: ${name}: stroked-path-parent-channel-unsupported:${key}`);

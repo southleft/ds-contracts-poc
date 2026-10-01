@@ -301,3 +301,20 @@ test('a parent-set BOOLEAN state selects the child State preview on its pins and
   const data = engine.compileComponentData(parent, scope);
   assert.ok(JSON.stringify(data).includes('draws its State previews only at Tone=Plain'), 'the undrawn large cell is named');
 });
+
+
+test('native filled-path color overrides do not require a resize viewport', () => {
+  const {child,parent,primitives,aliased}=stateContracts();
+  const drawing=Object.values(child.anatomy.root.parts!)[0]!;
+  delete drawing.shape!.parentViewport;
+  drawing.literals={...drawing.literals,left:'3px',top:'3px'};
+  child.anatomy.root.overridable=['color'];
+  for (const {part} of walkAnatomy(parent)) if (part.component?.overrides) delete part.component.overrides.size;
+  const engine=createFigmaEngine({tokens:{primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const data=engine.compileComponentData(parent,new Map([[child.id,child],[parent.id,parent]]));
+  const inks:any[]=[];const visit=(v:any)=>{if(!v||typeof v!=='object')return;if(v.instanceInk)inks.push(v.instanceInk);Object.values(v).forEach(visit);};visit(data);
+  assert.ok(inks.length>0);assert.ok(inks.every(i=>i.writeProtocol==='attached-v1'&&i.paintKind===undefined));
+  const script=engine.buildComponentScript(parent,new Map([[child.id,child],[parent.id,parent]]));
+  assert.match(script,/filled-path-instance-ink-tree-mismatch/);
+  assert.equal(script.includes('per-instance override \"color\"'),false);
+});

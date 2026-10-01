@@ -107,6 +107,8 @@ export interface ClientOptions {
   /** Injectable for tests / non-browser runtimes. Defaults to global fetch. */
   fetchImpl?: FetchLike;
   apiBase?: string;
+  /** Pin dependent reads to the first source response's version. */
+  version?: string;
   /**
    * ONLY an injected transport (`fetchImpl`) or a non-default `apiBase` reads
    * this. `importFromUrl` records `_provenance.stampsObservable` — "a
@@ -208,7 +210,9 @@ export async function fetchNodes(
   // statePreviewAxis + the per-TEXT fontWeightVar/lineHeightVar token names).
   // Without it a REST dump of a stamped set forgets its own identity and
   // exact-mode proposal is impossible on this route.
-  return (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared&geometry=paths`, token, opts)) as RestNodesResponse;
+  const response = (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared&geometry=paths${opts.version ? `&version=${encodeURIComponent(opts.version)}` : ''}`, token, opts)) as RestNodesResponse;
+  if (opts.version && response.version !== opts.version) throw Error('figma-dependent-source-version-mismatch');
+  return response;
 }
 
 /**
@@ -349,6 +353,7 @@ export async function fetchVariables(
 }
 
 interface RestFileResponse {
+  version?: string;
   name?: string;
   document?: RestNode;
   components?: Record<string, { name: string; componentSetId?: string; key?: string }>;
@@ -365,6 +370,8 @@ export async function fetchFile(fileKey: string, token: string, opts: ClientOpti
 // ---------------------------------------------------------------------------
 
 export interface ImportOptions extends ClientOptions {
+  /** Acquire original, version-pinned centerline exports at capture time. */
+  captureStrokeSvg?: boolean;
   /** Set/component name to map when the URL has no node-id (or to filter). */
   target?: string;
   /**
@@ -388,6 +395,47 @@ const findSets = (node: RestNode, out: RestNode[] = []): RestNode[] => {
   for (const child of node.children ?? []) findSets(child, out);
   return out;
 };
+
+/** Read only the vectors the mapper reaches. Instance internals are supplied
+ * by their own followed component definition, so no per-variant duplicate export. */
+async function captureStrokeSvgs(fileKey: string, response: RestNodesResponse, token: string, opts: ClientOptions) {
+  const ids = new Set<string>();
+  const collect = (node: RestNode) => {
+    if (node.type === 'INSTANCE') return;
+    if (node.type === 'VECTOR' && !(node.fills ?? []).some(p => p.visible !== false) &&
+        (node.strokes ?? []).filter(p => p.visible !== false).length === 1) ids.add(node.id);
+    for (const child of node.children ?? []) collect(child);
+  };
+  for (const entry of Object.values(response.nodes)) if (entry) collect(entry.document);
+  const requested = [...ids].sort(), refusals: string[] = [], svgByNodeId: Record<string, string> = {};
+  if (!requested.length) return { requested, refusals };
+  if (!response.version) return { requested, refusals: ['stroke-svg-source-version-unobserved — no centerline export requested'] };
+  for (let at = 0; at < requested.length; at += 30) {
+    const batch = requested.slice(at, at + 30);
+    let images: Record<string, string | null>;
+    try {
+      const query = new URLSearchParams({ ids: batch.join(','), format: 'svg', svg_include_node_id: 'true',
+        svg_simplify_stroke: 'true', use_absolute_bounds: 'true', version: response.version });
+      const exported = await get(`/v1/images/${fileKey}?${query}`, token, opts) as { images?: Record<string, string | null> };
+      images = exported.images ?? {};
+    } catch {
+      refusals.push(...batch.map(id => `stroke-svg-export-unavailable:${id}`)); continue;
+    }
+    for (const id of batch) {
+      try {
+        const url = images[id];
+        if (!url || new URL(url).protocol !== 'https:') throw Error('unavailable');
+        // Asset requests deliberately carry no Figma token.
+        const asset = await (opts.fetchImpl ?? globalThis.fetch)(url);
+        if (!asset.ok) throw Error('unavailable');
+        const svg = await asset.text();
+        if (svg.length > 70000) throw Error('size');
+        svgByNodeId[id] = svg;
+      } catch { refusals.push(`stroke-svg-asset-unavailable:${id}`); }
+    }
+  }
+  return { requested, refusals, sources: { fileKey, version: response.version, svgByNodeId } };
+}
 
 /**
  * The whole no-plugin path: parse the URL, pull the component set, tolerate
@@ -423,15 +471,22 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
   };
 
   const withClosure = async (first: RestNodesResponse, requestedIds: string[]): Promise<MapResult> => {
-    if (!opts.closure) return mapRestToDump(first, mapOptions);
-    const cap = typeof opts.closure === 'object' && opts.closure.cap !== undefined ? opts.closure.cap : CLOSURE_SET_CAP;
-    const { response, closure } = await followInstances(
-      first,
-      requestedIds,
-      (ids) => fetchNodes(parsed.fileKey, ids, token, opts),
-      { cap },
-    );
-    return mapRestToDump(response, { ...mapOptions, closure });
+    let response = first;
+    let closure: DumpClosure | undefined;
+    if (opts.closure) {
+      const cap = typeof opts.closure === 'object' && opts.closure.cap !== undefined ? opts.closure.cap : CLOSURE_SET_CAP;
+      const followed = await followInstances(first, requestedIds,
+        ids => fetchNodes(parsed.fileKey, ids, token, { ...opts, ...(first.version ? { version: first.version } : {}) }), { cap });
+      response = followed.response; closure = followed.closure;
+    }
+    const captured = opts.captureStrokeSvg ? await captureStrokeSvgs(parsed.fileKey, response, token, opts) : undefined;
+    const mapped = mapRestToDump(response, { ...mapOptions, ...(closure ? { closure } : {}),
+      ...(captured?.sources ? { strokeSvgSources: captured.sources } : {}) });
+    if (captured) {
+      mapped.report.notes.push(...captured.refusals);
+      Object.assign(mapped.dump._provenance!, { strokeSvgCapture: captured });
+    }
+    return mapped;
   };
 
   if (parsed.nodeId) {
@@ -453,6 +508,7 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
   }
   const synthesized: RestNodesResponse = {
     name: file.name,
+    ...(file.version ? { version: file.version } : {}),
     nodes: Object.fromEntries(
       sets.map((s) => [
         s.id,

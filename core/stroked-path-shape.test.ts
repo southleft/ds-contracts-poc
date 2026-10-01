@@ -34,18 +34,18 @@ const plugin = readFileSync(new URL('../extract/figma/dump.plugin.js', import.me
 const start = plugin.indexOf('function strokedPathIssue('), end = plugin.indexOf('function dumpShape(', start);
 const reader = vm.runInNewContext(`${plugin.slice(start, end)}; ({ issue: strokedPathIssue, shape: dumpStrokedPath })`);
 
-test('open path parser agrees with canonical capture and rejects malformed or unsafe geometry', () => {
-  for (const path of [data, 'M0\t0L5\r\n8L10 2', 'M0,0 3,4 8,2', 'M0 0C1 -2 3 9 10 2Q12 1 9 4', 'M0 0L1e-3 2']) {
+test('centerline path parser agrees with canonical capture and rejects malformed or unsafe geometry', () => {
+  for (const path of [data, 'M0\t0L5\r\n8L10 2', 'M0,0 3,4 8,2', 'M0 0C1 -2 3 9 10 2Q12 1 9 4', 'M0 0L1e-3 2', 'M0 0L1 1M2 3L4 5', 'M0 0H1V2', 'M0 0H10V8H0Z', 'M0 0L1 1ZM2 2L3 3']) {
     assert.equal(strokedPathIssue(path), undefined); assert.equal(reader.issue(path), undefined);
   }
-  for (const path of ['M0\u00a00L5\u00a08L10\u00a02', 'M0\u000b0L5\u000b8L10\u000b2', 'M0\u000c0L5\u000c8L10\u000c2', 'M0\u20280L5\u20288L10\u20282', '', 'M0 0', 'M0 0Z', 'M0 0L1', 'L0 0L1 2', 'M0 0L1 1M2 3L4 5', 'M0 0A1 2 0 0 0 3 4', 'm0 0l1 1', 'M0 0H1V2', 'M0 0L1e999 2', 'M0 0L1000001 2', 'M0,,0L1 2', 'M0 0L1,2,', 'M0 0L1 2<script>', 'M0 0L1 2" onload="x']) {
+  for (const path of ['M0\u00a00L5\u00a08L10\u00a02', 'M0\u000b0L5\u000b8L10\u000b2', 'M0\u000c0L5\u000c8L10\u000c2', 'M0\u20280L5\u20288L10\u20282', '', 'M0 0', 'M0 0Z', 'M0 0L1', 'L0 0L1 2', 'M0 0A1 2 0 0 0 3 4', 'm0 0l1 1', 'M0 0L1 1M2 2', 'M0 0M1 1L2 2', 'M0 0L1 1ZZ', 'M0 0L1e999 2', 'M0 0L1000001 2', 'M0,,0L1 2', 'M0 0L1,2,', 'M0 0L1 2<script>', 'M0 0L1 2" onload="x']) {
     assert.ok(strokedPathIssue(path), path); assert.equal(reader.issue(path), strokedPathIssue(path));
     assert.throws(() => strokedPathSvg({ ...shape(), strokePath: { ...shape().strokePath, data: path } }));
   }
   assert.ok(strokedPathGeometryIssue({ ...shape(), strokePath: { ...shape().strokePath, viewport: { width: 0, height: 16, x: 0, y: 0 } } }));
   for (const path of ['M1 1L6 9L11 3', 'M0 0C0 80 10 0 10 8', 'M0 0L10 9'])
     assert.equal(strokedPathGeometryIssue({ ...shape(), strokePath: { ...shape().strokePath, data: path } }), 'stroked-path-bounds-mismatch');
-  for (const path of ['M0 0C0 8 10 0 10 8L5 4', 'M0 0Q0 8 10 8'])
+  for (const path of ['M0 0C0 8 10 0 10 8L5 4', 'M0 0Q0 8 10 8', 'M0 0H10V8H0Z', 'M0 0H10M0 8H10'])
     assert.equal(strokedPathGeometryIssue({ ...shape(), strokePath: { ...shape().strokePath, data: path } }), undefined);
 });
 

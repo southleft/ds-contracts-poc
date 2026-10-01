@@ -1,5 +1,5 @@
 import {hasComponentGrow} from '../scripts/contract-schema.js';
-import { lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
+import { lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
 import {selectedSampleKey} from '../packages/core/src/selection.js';
 /**
@@ -1088,6 +1088,7 @@ function renderComponentHtml(
     const panel = selection?.panels.find(panel => panel.part === name);
     if (panel && panel.value !== selected) return '';
     const cls = `${k}__${name}`;
+    if (part.shape?.kind === 'line') return `${pad}<span class="${cls}" aria-hidden="true">${nativeLineSvg(part.shape)}</span>`;
     if (part.shape?.kind === 'stroked-path') return `${pad}<span class="${cls}" aria-hidden="true">${strokedPathSvg(part.shape)}</span>`;
     // Content-model honesty: HTML parsers drop anything but <option>/<optgroup>
     // inside a <select>, so a content/text part with NO authored element

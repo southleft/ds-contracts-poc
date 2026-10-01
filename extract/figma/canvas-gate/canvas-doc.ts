@@ -1,4 +1,4 @@
-import { strokedPathSvg, shapeCssDecls } from '../../../scripts/contract-schema.js';
+import { strokedPathSvg, shapeCssDecls, nativeLineSvg } from '../../../scripts/contract-schema.js';
 import { filledPathMask } from '../../../scripts/contract-schema.js';
 /**
  * CANVAS SIDE — the playground canvas-preview renderer, vendored headless.
@@ -329,7 +329,11 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
       .map(d => d.replace(/^border-color:/, 'stroke:').replace(/^border-width:/, 'stroke-width:'));
     return [...shapeCssDecls(sh), ...paint].join('; ');
   }
-  const d = [`width: ${sh.width}px`, `height: ${sh.height}px`, 'flex-shrink: 0'];
+  const d = sh.kind === 'line' ? shapeCssDecls(sh) : [`width: ${sh.width}px`, `height: ${sh.height}px`, 'flex-shrink: 0'];
+  if (sh.kind === 'line' && spec.lits?.strokeColor) {
+    const c = spec.lits.strokeColor;
+    d.push(`stroke: rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${c.a ?? 1})`);
+  }
   if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
   if (sh.kind === 'ellipse') d.push('border-radius: 50%');
   if (sh.kind === 'path' && sh.paths) d.push(`mask: ${filledPathMask({ ...sh, paths: sh.paths })}`);
@@ -360,7 +364,7 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   }
   if (sh.rotation) transform.push(`rotate(${sh.rotation}deg)`);
   if (transform.length > 0) d.push(`transform: ${transform.join(' ')}`);
-  return d.join('; ');
+  return (sh.kind === 'line' ? d.filter(value => !value.startsWith('border-style:')).map(value => value.replace(/^border-color:/, 'stroke:').replace(/^border-width:/, '--native-line-stroke-width:')) : d).join('; ');
 }
 
 function renderNode(
@@ -373,7 +377,7 @@ function renderNode(
 
   if (spec.type === 'shape') {
     const style = [shapeStyle(spec, ctx), extraStyle].filter(Boolean).join('; ');
-    return `<div style="${style}">${spec.shape?.kind === 'stroked-path' ? strokedPathSvg(spec.shape) : ''}</div>`;
+    return `<div style="${style}">${spec.shape?.kind === 'line' ? nativeLineSvg(spec.shape) : spec.shape?.kind === 'stroked-path' ? strokedPathSvg(spec.shape) : ''}</div>`;
   }
 
   if (spec.type === 'svg') {

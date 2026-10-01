@@ -1,5 +1,5 @@
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
-import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
+import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactSlotInputs } from './react-slot-inputs.js';
 import { reactSelectionPlan } from './react-selection.js';
@@ -205,6 +205,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   }
 
   contract = lowerStrokedPathPaint(lowerFilledPathVariants(contract));
+  const nativeLineStyleType = walkAnatomy(contract).some(({part}) => part.shape?.kind === 'line')
+    ? "CSSProperties & { '--native-line-stroke-width'?: string | number }" : 'CSSProperties';
   const mode = ctx.mode ?? 'light';
   const primitives = flattenTokens(ctx.tokens.primitives);
   const semantic = flattenTokens(ctx.tokens.semantic);
@@ -220,9 +222,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const scalableOverrideRefs = (part: Part): Record<string,string> => {
     const root = part.component && ctx.contracts.get(part.component.id)?.anatomy.root;
     const paths = Object.values(root?.parts ?? {});
-    if (!root || !paths.length || !paths.every(child=>child.shape?.kind==='path' && child.shape.parentViewport)) return {};
+    if (!root || !paths.length || !paths.every(child=>child.shape?.kind==='path' && child.shape.parentViewport || child.shape?.kind==='stroked-path' && child.shape.strokePath)) return {};
     return Object.fromEntries(Object.entries(part.component?.overrides ?? {}).filter(([channel]) =>
-      root.overridable?.includes(channel) && (channel==='size' || channel==='color' && paths.length===1 && paths[0].literals?.['background-color']==='currentColor')));
+      root.overridable?.includes(channel) && (channel==='size' || channel==='color' && paths.length===1 && (paths[0].literals?.['background-color']==='currentColor' || paths[0].literals?.['border-color']==='currentColor') || channel==='stroke-width' && paths.length===1 && paths[0].literals?.['border-width']==='inherit')));
   };
   const hasScalableOverrides = (part: Part) => Object.keys(scalableOverrideRefs(part)).length > 0;
 
@@ -269,13 +271,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     JSON.stringify(row.values),Object.fromEntries(Object.entries(row.tokens).map(([channel,ref])=>
       [camel(channel),resolveValue(stripBraces(ref))]))
   ])));
-  const jointConst=jointTables.length?`\nconst J: Array<Record<string, CSSProperties>> = ${JSON.stringify(jointStyles,null,2)};\n`:'';
+  const jointConst=jointTables.length?`\nconst J: Array<Record<string, ${nativeLineStyleType}>> = ${JSON.stringify(jointStyles,null,2)};\n`:'';
   const placementTables = walkAnatomy(contract).filter(row => row.part.absolutePlacementByCombination)
     .map(row => ({name: row.name, table: row.part.absolutePlacementByCombination!}));
   const placementStyles = Object.fromEntries(placementTables.map(({name, table}) => [name,
     Object.fromEntries(table.rows.map(row => [JSON.stringify(row.values),
       {position: 'absolute', left: row.left, top: row.top, right: 'auto', bottom: 'auto'}]))]));
-  const placementConst = placementTables.length ? `\nconst PL: Record<string, Record<string, CSSProperties>> = ${JSON.stringify(placementStyles,null,2)};\n` : '';
+  const placementConst = placementTables.length ? `\nconst PL: Record<string, Record<string, ${nativeLineStyleType}>> = ${JSON.stringify(placementStyles,null,2)};\n` : '';
   const partVariantProps = new Map<string, Set<string>>();
   const addVariant = (prop: string, value: string, partName: string, decls: StyleRecord) => {
     const key = `${prop}-${value}`;
@@ -622,7 +624,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       for (const [channel,ref] of Object.entries(scalableOverrideRefs(part))) {
         const path = stripBraces(ref), axes = placeholdersIn(path);
         const values = (resolved: string): StyleRecord => channel==='size'
-          ? {width:resolveValue(resolved),height:resolveValue(resolved)} : {color:resolveValue(resolved)};
+          ? {width:resolveValue(resolved),height:resolveValue(resolved)} : channel==='stroke-width' ? {strokeWidth:resolveValue(resolved)} : {color:resolveValue(resolved)};
         if (!axes.length) baseStyles[partName] = {...baseStyles[partName],...values(path)};
         else {
           const expand = (i: number, resolved: string, selection: [string,string][]) => {
@@ -971,6 +973,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
   const renderPart = (partName: string, part: Part): string => {
+    if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
+      `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
       `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
     if (part.icon) {
@@ -1178,7 +1182,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
   const styleType = walkAnatomy(contract).some(({ part }) => needsWholePixelTextRun(part))
-    ? `CSSProperties & { '--_dsc-text-box-tracking'?: string }` : 'CSSProperties';
+    ? `${nativeLineStyleType} & { '--_dsc-text-box-tracking'?: string }` : nativeLineStyleType;
   const variantFlat: Record<string, StyleRecord> = {};
   for (const [key, parts] of Object.entries({ ...variantStyles, ...variantPairStyles })) {
     for (const [partName, decls] of Object.entries(parts)) {
