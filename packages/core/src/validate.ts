@@ -245,6 +245,14 @@ export function validateContract(
         }
       }
     }
+    if (part.slot?.renderDefault && !part.slot.defaultContent?.length)
+      errors.push(`${contract.id}: SLOT_RUNTIME_DEFAULT_EMPTY:${part.slot.name}: an explicit runtime default needs declared content`);
+    if (part.slot?.renderDefault && part.parts) {
+      const parts=Object.values(part.parts), items=part.slot.defaultContent ?? [];
+      if (parts.length !== items.length || parts.some((p,i)=>!p.component || p.component.id !== items[i]?.id ||
+          JSON.stringify(p.component.props ?? {}) !== JSON.stringify(items[i]?.props ?? {}) || p.component.text !== items[i]?.text))
+        errors.push(`${contract.id}: SLOT_RUNTIME_DEFAULT_ANATOMY_MISMATCH:${part.slot.name}: fallback anatomy must match the declared content identity, props and text`);
+    }
     for (const item of part.slot?.defaultContent ?? []) {
       const dep = byId.get(item.id);
       if (!dep) {
@@ -969,8 +977,8 @@ export function validateContract(
           errors.push(`${contract.id}: part "${name}" stylesWhen.equals "${sw.equals}" is not a value of prop "${sw.prop}"`);
         }
       } else if (swProp.type === 'boolean') {
-        if (sw.equals !== undefined) {
-          errors.push(`${contract.id}: part "${name}" stylesWhen on boolean prop "${sw.prop}" must omit "equals"`);
+        if (sw.equals !== undefined && sw.equals !== 'true' && sw.equals !== 'false') {
+          errors.push(`${contract.id}: part "${name}" stylesWhen on boolean prop "${sw.prop}" equals must be "true" or "false"`);
         }
       } else {
         errors.push(`${contract.id}: part "${name}" stylesWhen prop "${sw.prop}" must be a boolean or enum prop`);
@@ -1065,7 +1073,9 @@ export function validateContract(
                 child.shape.parentViewport?.width !== basis.width || child.shape.parentViewport?.height !== basis.height))
             errors.push(`${contract.id}: ${name}: filled-path-parent-basis-unsupported`);
           for (const map of [parent?.tokens, parent?.literals, parent?.declared]) for (const [key, value] of Object.entries(map ?? {})) {
-            if (!['width', 'height', 'color', 'position', 'display'].includes(key) || key === 'position' && value !== 'relative' ||
+            if (!['width', 'height', 'color', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y'].includes(key) ||
+                ['overflow', 'overflow-x', 'overflow-y'].includes(key) && !['hidden', 'clip', 'visible'].includes(value) ||
+                key === 'position' && value !== 'relative' ||
                 key === 'display' && value !== 'block' || ['width', 'height'].includes(key) && !value.startsWith('{') && !strokedPathDimensionOk(value))
               errors.push(`${contract.id}: ${name}: filled-path-parent-channel-unsupported:${key}`);
           }

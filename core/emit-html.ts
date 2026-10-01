@@ -621,18 +621,18 @@ function componentCss(contract: Contract): string[] {
   }
   // stylesWhen on the root (literal CSS behind a boolean data attribute or
   // an enum modifier class).
-  const condBase = (propName: string): string | null => {
+  const condBase = (propName: string, equals?: string): string | null => {
     const prop = contract.props.find((pr) => pr.name === propName);
     if (!prop) return null;
     if (isEnum(prop)) return null; // handled per-call with equals
     const dataName = propName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-    return `${rootCls}[data-${dataName}]`;
+    return equals === 'false' ? `${rootCls}[data-dsc-false-${dataName}]` : `${rootCls}[data-${dataName}]`;
   };
   const emitStylesWhen = (part: Part, partSelector: string, isRoot: boolean) => {
     for (const sw of part.stylesWhen ?? []) {
       const prop = contract.props.find((pr) => pr.name === sw.prop);
       if (!prop) continue;
-      const base = isEnum(prop) ? enumCls(sw.prop, sw.equals ?? '') : condBase(sw.prop)!;
+      const base = isEnum(prop) ? enumCls(sw.prop, sw.equals ?? '') : condBase(sw.prop, sw.equals)!;
       const selector = isRoot ? base : `${base} ${partSelector}`;
       rule(selector, Object.entries(sw.styles).map(([kk, v]) => `${kk}: ${v}`));
     }
@@ -1347,6 +1347,10 @@ function renderComponentHtml(
   }
   const supportsDisabled = HTML_SUPPORTS_DISABLED.includes(el);
   for (const p of boolProps(contract)) {
+    if (state.bools[p.name] === false && walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false'))) {
+      const falseName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      attrs.push(`data-dsc-false-${falseName}="true"`);
+    }
     if (!state.bools[p.name]) continue;
     if (p.name === 'disabled' && supportsDisabled) { attrs.push('disabled'); continue; }
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -1426,6 +1430,7 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
     if (seen.has(c.id)) return;
     seen.add(c.id);
     for (const w of walkAnatomy(c)) {
+      if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');
       if (w.part.component) collectCss(ctx.contracts.get(w.part.component.id)!);

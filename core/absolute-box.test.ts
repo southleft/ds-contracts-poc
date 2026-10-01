@@ -159,3 +159,58 @@ test('a four-inset content overlay uses the CSS padding edge in browser and nati
   assert.deepEqual(await page.locator('#root > *').evaluate(root=>{const r=root.getBoundingClientRect(),b=root.children[0].getBoundingClientRect();return {x:b.x-r.x,y:b.y-r.y};}),{x:1,y:35});
  } finally {await browser.close();}
 });
+
+test('explicit false-side placement agrees in both React surfaces and native variants', async () => {
+  const contract = ContractSchema.parse({id:'check.false-placement',name:'FalsePlacement',version:'0.1.0',status:'draft',
+    description:'False-side placement probe',semantics:{element:'div'},states:[],
+    props:[{name:'selected',type:'boolean',default:false,bindings:{code:{prop:'selected'},figma:{kind:'VARIANT',property:'Selected',values:{false:'False',true:'True'}}}}],
+    anatomy:{root:{layout:{display:'flex'},declared:{position:'relative'},literals:{width:'40px',height:'40px'},parts:{
+      floating:{attrs:{'data-probe':'floating'},text:'X',literals:{width:'8px',height:'8px',left:'7.25px',top:'8.125px'},
+        stylesWhen:[{prop:'selected',equals:'false',styles:{position:'absolute'}}]},
+    }}},bindings:{code:{anchors:{importPath:'./FalsePlacement',export:'FalsePlacement'}},figma:{anchors:{fileKey:'fixture',componentSetKey:'false-placement'}}}});
+  const scope=new Map([[contract.id,contract]]);
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const compiled=engine.compileComponentData(contract,scope);
+  for(const variant of compiled.variants){
+    const floating=variant.spec.children!.find(n=>n.name==='floating')!;
+    assert(floating);
+    if(variant.name==='Selected=False')assert.deepEqual(floating.absolute,{h:'MIN',v:'MIN',left:7.25,top:8.125});
+    else assert.equal(floating.absolute,undefined);
+  }
+  for (const defaultValue of [false,true,undefined]) {
+    const nativeBoolean = structuredClone(contract);
+    nativeBoolean.props[0].bindings.figma = {kind:'BOOLEAN',property:'Selected'};
+    if(defaultValue === undefined) delete nativeBoolean.props[0].default;
+    else nativeBoolean.props[0].default = defaultValue;
+    const variant = engine.compileComponentData(nativeBoolean,new Map([[nativeBoolean.id,nativeBoolean]])).variants[0];
+    const floating = variant.spec.children!.find(n=>n.name==='floating')!;
+    assert.equal(floating.absolute !== undefined,defaultValue === false,'native BOOLEAN default plane');
+  }
+  const browser=await chromium.launch();
+  try{
+    for(const emitter of [emitReact,emitReactInline]){
+      const page=await browser.newPage();
+      try{
+        const generated = emitter === emitReact ? emitReact(contract,{contracts:scope,icons:new Map(),tokens:new Set()})
+          : {...emitReactInline(contract,{contracts:scope,icons:new Map(),tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}}}),css:''};
+        await mountGenerated(page,contract.name,generated.tsx,generated.css);
+        const render = (props: Record<string,boolean>) => page.evaluate(props => (window as any).renderSubject(props), props);
+        for(const selected of [false,true,false]){
+          await render({selected});
+          assert.equal(await page.locator('[data-probe="floating"]').evaluate(el=>getComputedStyle(el).position),selected?'static':'absolute',emitter.name);
+        }
+        // An optional boolean's absence is distinct from explicit false.
+        const optional=structuredClone(contract);delete optional.props[0].default;
+        const optionalScope = new Map([[optional.id,optional]]);
+        const optionalGenerated = emitter === emitReact ? emitReact(optional,{contracts:optionalScope,icons:new Map(),tokens:new Set()})
+          : {...emitReactInline(optional,{contracts:optionalScope,icons:new Map(),tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}}}),css:''};
+        await mountGenerated(page,optional.name,optionalGenerated.tsx,optionalGenerated.css);
+        const renderOptional = (props: Record<string,boolean>) => page.evaluate(props => (window as any).renderSubject(props), props);
+        await renderOptional({});
+        assert.equal(await page.locator('[data-probe="floating"]').evaluate(el=>getComputedStyle(el).position),'static');
+        await renderOptional({selected:false});
+        assert.equal(await page.locator('[data-probe="floating"]').evaluate(el=>getComputedStyle(el).position),'absolute');
+      }finally{await page.close();}
+    }
+  }finally{await browser.close();}
+});

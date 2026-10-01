@@ -1,7 +1,7 @@
 import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
-import { reactSlotInputs } from './react-slot-inputs.js';
+import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies } from './react-slot-inputs.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
@@ -299,7 +299,7 @@ export function generateTsx(
     contract.props.find((p) => p.name === propName)?.default === undefined
       ? `${codePropOf(propName)} === undefined ? ${absent} : ${expression}`
       : expression;
-  const deps = [
+  const deps = [...new Set([
     ...new Set(
       walkAnatomy(contract)
         .filter((w) => w.part.component)
@@ -314,7 +314,8 @@ export function generateTsx(
           return dep.name;
         }),
     ),
-  ];
+    ...reactDefaultSlotDependencies(contract, byId),
+  ])];
   // PROP-NAME COLLISIONS (core/prop-collision.ts): a prop named like a DOM
   // attribute React types on the root (`content`, `title`, `hidden`…) is
   // OMITTED from the base attrs type — the contract's prop wins — and named
@@ -539,6 +540,10 @@ export function generateTsx(
     elementAttrs.push(`disabled={${codePropOf('disabled')}}`);
   }
   for (const p of bools) {
+    if (walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false'))) {
+      const falseName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+      elementAttrs.push(`data-dsc-false-${falseName}={${p.bindings.code.prop} === false || undefined}`);
+    }
     if (p.name === 'disabled' && nativeDisabled) continue;
     // data-* attributes must be lowercase — kebab-case the prop name
     // (camelCase data attrs trigger React DOM warnings).
@@ -737,9 +742,11 @@ export function generateTsx(
     }
     if (part.slot) {
       const el = part.element ?? 'div';
-      const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
+      const expr = part.slot.renderDefault && part.parts
+        ? `${part.slot.name} === undefined ? <>${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('')}</> : ${part.slot.name}`
+        : reactSlotExpression(part.slot, byId, depAttrString);
       const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
-      return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
+      return part.optional ? `{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
       const el = part.element ?? 'span';

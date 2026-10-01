@@ -1314,12 +1314,15 @@ export function mergeOrders(sequences: string[][]): string[] {
  *  start icon and an end icon both drawn as "Icon" merge as TWO children —
  *  merging by bare name would silently collapse them into one (field case:
  *  Eventz Button, whose startIcon/endIcon instances share the name "Icon"). */
-const siblingKeys = (children: DumpNode[]): string[] => {
+const siblingKeys = (children: DumpNode[], semanticNames: ReadonlySet<string> = new Set()): string[] => {
   const counts = new Map<string, number>();
   return children.map((c) => {
-    const n = counts.get(c.name) ?? 0;
-    counts.set(c.name, n + 1);
-    return n === 0 ? c.name : `${c.name}\u0000${n}`;
+    const binding = semanticNames.has(c.name) ? c.propRefs!.mainComponent! : undefined;
+    const identity = binding === undefined ? c.name : `${c.name}\u0000swap:${binding}`;
+    const n = counts.get(identity) ?? 0;
+    counts.set(identity, n + 1);
+    return binding === undefined ? (n === 0 ? c.name : `${c.name}\u0000${n}`)
+      : `${c.name}\u0000${n}\u0000swap:${binding}`;
   });
 };
 
@@ -1346,7 +1349,7 @@ function foldWrapperUnion(
   notes: string[],
   where: string,
 ): void {
-  const keyOf = (n: DumpNode): string => `${n.name} ${n.type}`;
+  const keyOf = (n: DumpNode): string => `${n.name}\0${n.type}`;
   interface Candidate {
     type: string;
     firstNode: DumpNode;
@@ -1431,7 +1434,19 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
   const childrenOf = new Map<Occ, DumpNode[]>();
   for (const o of occ) childrenOf.set(o, o.node.children ?? []);
   if (occ.length > 1) foldWrapperUnion(occ, childrenOf, notes, where);
-  const sequences = occ.map((o) => siblingKeys(childrenOf.get(o)!));
+  const allChildren = [...childrenOf.values()].flat();
+  const semanticNames = new Set<string>();
+  for (const childName of new Set(allChildren.map(child => child.name))) {
+    const peers = allChildren.filter(child => child.name === childName);
+    const duplicated = [...childrenOf.values()].some(children => children.filter(child => child.name === childName).length > 1);
+    if (duplicated && peers.every(child => child.type === 'INSTANCE' && typeof child.propRefs?.mainComponent === 'string' && child.propRefs.mainComponent.length > 0) &&
+        new Set(peers.map(child => child.propRefs!.mainComponent)).size > 1) semanticNames.add(childName);
+  }
+  const keyedChildren = new Map(occ.map(o => {
+    const children = childrenOf.get(o)!;
+    return [o, new Map(siblingKeys(children, semanticNames).map((key, i) => [key, children[i]!]))] as const;
+  }));
+  const sequences = occ.map(o => [...keyedChildren.get(o)!.keys()]);
   const order = mergeOrders(sequences);
   const nameCount = new Map<string, number>();
   for (const key of order) {
@@ -1443,7 +1458,7 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
     const ord = ordStr ? Number(ordStr) : 0;
     const childOcc: Occ[] = [];
     for (const o of occ) {
-      const child = childrenOf.get(o)!.filter((c) => c.name === childName)[ord];
+      const child = keyedChildren.get(o)!.get(childKey);
       if (child) childOcc.push({ variant: o.variant, node: child, parent: { node: o.node, occurrences: occ } });
     }
     // Duplicated sibling names need distinct merged names (they become note
@@ -2555,9 +2570,10 @@ function placeLiteralTable(
   obs: MintObservation & { target: Record<string, string> },
   table: MintedLiteralTable,
   unsetProps: ReadonlySet<string>,
+  observedHolder?: Record<string, unknown>,
 ): { carried: true } | { carried: false; why: string } {
   const channel = obs.cssProperty;
-  const holder = mint.attach.find((a) => a.tokens === obs.target)?.holder;
+  const holder = observedHolder ?? mint.attach.find((a) => a.tokens === obs.target)?.holder;
   if (!holder) return { carried: false, why: 'the channel is not a part\'s base styling (a state plane, an instance override or stub geometry)' };
   if (holder.component !== undefined) return { carried: false, why: 'the part is a component instance (the child contract owns its styling)' };
   if (!LITERAL_COMBINATION_CHANNELS.has(channel)) return { carried: false, why: `"${channel}" is not a literal channel` };
@@ -3723,9 +3739,20 @@ function invertNodeOpacity(
         return;
       }
       if (whenTrue.size === 1 && whenTrue.has(1) && whenFalse.size === 1 && !whenFalse.has(1)) {
-        ctx.notes.push(
-          `${where}: node opacity ${[...whenFalse][0]} rides the FALSE side of boolean axis "${axis.property}" — stylesWhen cannot express negation; not proposed, review`,
-        );
+        fenceSparseInference(ctx.axes, `opacity@${where}`, occ);
+        // Compound literals can represent both boolean planes without changing
+        // the caller's visibility or removing a transparent box from flow.
+        const tables = (holder.literalsByCombination as LiteralTableField | undefined) ?? [];
+        if (!literalTableCarries(holder, 'opacity') && tokens.opacity === undefined) {
+          tables.push({ props: [axis.propName], rows: [
+            { values: ['false'], literals: { opacity: String([...whenFalse][0]) } },
+            { values: ['true'], literals: { opacity: '1' } },
+          ] });
+          holder.literalsByCombination = tables;
+          ctx.notes.push(`${where}: node opacity on both BOOLEAN planes of "${axis.property}" carried as measured compound literals; transparent nodes retain their layout occupancy`);
+        } else {
+          ctx.notes.push(`${where}: false-side node opacity conflicts with an existing opacity carrier — not proposed, review`);
+        }
         return;
       }
     }
@@ -4487,7 +4514,8 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     const scaled = m.occ.map(o => {
       const sh = o.node.shape!, parent = o.parent?.node, box = parent?.bbox;
       if (!parent || !box || !Number.isFinite(box.width) || !Number.isFinite(box.height) || box.width <= 0 || box.height <= 0 ||
-          Object.keys(parent).some(key => !['name', 'type', 'bbox', 'children', 'hidden'].includes(key)) ||
+          Object.keys(parent).some(key => !['name', 'type', 'bbox', 'children', 'hidden', 'clipsContent'].includes(key)) ||
+          (parent.clipsContent !== undefined && typeof parent.clipsContent !== 'boolean') ||
           !parent.children?.length || parent.children.some(child => child.shape?.kind !== 'path' ||
             child.shape.constraints?.horizontal !== 'SCALE' || child.shape.constraints?.vertical !== 'SCALE') ||
           sh.constraints?.horizontal !== 'SCALE' || sh.constraints?.vertical !== 'SCALE' || sh.rotation ||
@@ -4865,7 +4893,33 @@ function drawnAxisOf(o: Occ, dim: 'width' | 'height', depth = 0): number | undef
   return inner > 0 ? inner : undefined;
 }
 
-function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { tokens: Record<string, string> }): void {
+/** A swap instance's sizing belongs to its usage wrapper. Never resize the
+ * child contract or reinterpret an observed bbox as an authored FIXED size. */
+function carryInstanceSlotSizing(m: Merged, part: Record<string, unknown>, tokens: Record<string,string>, ctx: Ctx, where: string): void {
+  if (!ctx.mint || !part.slot || !m.occ.some(o => o.node.instanceSizing)) return;
+  for (const [dim,axis] of [['width','horizontal'],['height','vertical']] as const) {
+    if (tokens[dim] !== undefined || m.occ.some(o => o.node.bound?.[dim])) continue;
+    const sizes = m.occ.map(o => o.node.instanceSizing);
+    if (!sizes.some(s => s?.[axis] === 'FIXED')) continue;
+    if (sizes.every(s => s?.[axis] === 'FIXED' && typeof s[dim] === 'number' && Number.isFinite(s[dim]) && s[dim]! >= 0)) {
+      mintObservation(ctx,tokens,where,dim,'px',m.occ.map(o=>({variant:o.variant,value:o.node.instanceSizing![dim]!})),`${where}|instance-fixed-${dim}`);
+    } else {
+      ctx.notes.push(`${where}: instance FIXED ${dim} is mixed with HUG/FILL or missing authored local dimensions — no uniform wrapper size inferred`);
+    }
+  }
+  // Absolute planes do not participate in flex layout. Every in-flow plane
+  // needs explicit FIXED sizing on its own parent's main axis to disable shrink.
+  const flowing = m.occ.filter(o => !absBoxOf(o.node));
+  if (flowing.length && flowing.every(o => {
+    const mode=o.parent?.node.layout?.mode;
+    const axis=mode==='HORIZONTAL'?'horizontal':mode==='VERTICAL'?'vertical':undefined;
+    const dim=mode==='HORIZONTAL'?'width':mode==='VERTICAL'?'height':undefined;
+    return axis && dim && o.node.instanceSizing?.[axis]==='FIXED' && typeof o.node.instanceSizing[dim]==='number' && Number.isFinite(o.node.instanceSizing[dim]) && o.node.instanceSizing[dim]!>=0;
+  }) && tokens['flex-shrink']===undefined)
+    mintObservation(ctx,tokens,where,'flex-shrink','number',m.occ.map(o=>({variant:o.variant,value:0})),`${where}|instance-fixed-shrink`);
+}
+
+function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { tokens: Record<string, string>; part: Record<string, unknown> }): void {
   const dims: string[] = [];
   const carried: string[] = [];
   for (const dim of ['width', 'height'] as const) {
@@ -4925,6 +4979,39 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { to
       const distinct = [...new Set(values)];
       carried.push(`${dim} (FIXED in ${m.occ.length}/${m.occ.length} variant occurrence(s); drawn ${distinct.slice(0, 8).join('/')}${distinct.length > 8 ? '/…' : ''}px)`);
       continue;
+    }
+    // Mixed FIXED/HUG/FILL modes cannot mint one dimension for every row.
+    // Carry exact local FIXED observations under their complete axis tuples;
+    // no matching row leaves the existing responsive styling untouched.
+    if (carry && ctx.mint && fixedIn.length < m.occ.length && ctx.mint.axes.length > 0 &&
+        !m.occ.some(o => o.node.layout?.mode === 'GRID') &&
+        !ctx.mint.observations.some(o => o.target === carry.tokens && o.cssProperty === dim)) {
+      const fixedRows = new Set(fixedIn);
+      const cells = new Map<string, {values:string[]; value?:string}>();
+      let complete = true;
+      for (const o of m.occ) {
+        const axes = ctx.mint.axisValuesByVariant.get(o.variant);
+        const tuple = ctx.mint.axes.map(a => axes?.[a.propName]);
+        const size = fixedRows.has(o) ? o.node.fixedSize?.[dim] : undefined;
+        if (tuple.some((value,i) => value === undefined || !ctx.mint!.axes[i].values.includes(value)) ||
+            fixedRows.has(o) && (size === undefined || !Number.isFinite(size) || size < 0)) { complete = false; break; }
+        const value = fixedRows.has(o) ? `${size}px` : undefined;
+        const key = JSON.stringify(tuple), prior = cells.get(key);
+        if (prior && prior.value !== value) { complete = false; break; }
+        cells.set(key, {values:tuple as string[],value});
+      }
+      if (complete) {
+        const table: MintedLiteralTable = {props:ctx.mint.axes.map(a => a.propName),
+          rows:[...cells.values()].filter((c):c is {values:string[];value:string} => c.value !== undefined)};
+        const obs: MintObservation & {target:Record<string,string>} = {nodePath:where,part:partPathOf(where),
+          cssProperty:dim,kind:'px',target:carry.tokens,
+          occurrences:fixedIn.map(o => ({variant:o.variant,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)!,value:o.node.fixedSize![dim]!}))};
+        const placed = placeLiteralTable(ctx.mint,obs,table,new Set(ctx.axes.filter(a => a.omitted).map(a => a.propName)),carry.part);
+        if (placed.carried) {
+          ctx.notes.push(`${where} ${dim}: CARRIED AS SCOPED FIXED GEOMETRY in ${table.rows.length} observed combinations; HUG/FILL rows keep their existing styling; no undrawn dimension inferred`);
+          continue;
+        }
+      }
     }
     const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
     // The variants where the same child FILLS instead are named beside the
@@ -5071,9 +5158,35 @@ function carryAbsPlacement(
   };
   const withBox = boxes.filter((b) => b.box !== undefined);
   if (withBox.length !== boxes.length) {
-    return ledger(
-      `captured on ${withBox.length}/${boxes.length} variant(s) only (a per-variant in-flow/absolute identity mix has no single spelling)`,
-    );
+    // A mixed slot usage keeps its caller-sized in-flow box. Only captured
+    // absolute observations receive offsets; an in-flow plane gets no size.
+    if (!part.slot || opts.size === true) return ledger('mixed placement requires a caller-sized slot wrapper');
+    if (m.occ.some(o => !absBoxOf(o.node) && !['HORIZONTAL', 'VERTICAL'].includes(o.parent?.node.layout?.mode ?? '')))
+      return ledger('an occurrence without absolute geometry has no captured auto-layout parent');
+    for (const axis of ctx.axes) {
+      const byValue = new Map<string, boolean>();
+      let fits = true;
+      for (const o of m.occ) {
+        const value = axisValuesOf(o.variant)[axis.property];
+        const absolute = absBoxOf(o.node) !== undefined;
+        if (value === undefined || (byValue.has(value) && byValue.get(value) !== absolute)) { fits = false; break; }
+        byValue.set(value, absolute);
+      }
+      if (!fits || !axis.values.every(value => byValue.has(value))) continue;
+      fenceSparseInference(ctx.axes, `slot-placement@${where}`, m.occ.map(o => ({variant:o.variant,value:absBoxOf(o.node) ? 'absolute' : 'in-flow'})));
+      const subset = {...m, occ: m.occ.filter(o => absBoxOf(o.node) !== undefined)};
+      if (!carryAbsPlacement(subset, part, tokens, ctx, where, opts)) return false;
+      const declared = part.declared as Record<string, string>;
+      delete declared.position;
+      if (!Object.keys(declared).length) delete part.declared;
+      const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+      for (const value of axis.values) if (byValue.get(value))
+        stylesWhen.push({prop:axis.propName,equals:axisValue(axis,value),styles:{position:'absolute'}});
+      part.stylesWhen = stylesWhen;
+      ctx.notes.push(`${where}: absolute/in-flow slot usage is a complete function of "${axis.property}"; measured offsets apply only on its absolute planes, and in-flow planes keep caller content sizing`);
+      return true;
+    }
+    return ledger('absolute/in-flow slot usage is not a complete function of one declared axis');
   }
   // A wrapper-union SYNTHETIC clone is not an observation: its abs box was
   // copied from another variant's real wrapper, and its members' offsets mix
@@ -5291,9 +5404,8 @@ function wrapPositionedRefPart(
   if (m.occ.every((o) => absBoxOf(o.node) === undefined)) return built;
   // @door propose.abs-on-slot-part
   if (built.slot) {
-    ctx.notes.push(
-      `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SLOT part — slot parts refuse styling (the consumer owns the content box) and a positioned slot wrapper is not carried this round; ledgered by name, the slot renders in flow`,
-    );
+    const slotTokens = (built.tokens as Record<string, string> | undefined) ?? {};
+    if (carryAbsPlacement(m, built, slotTokens, ctx, where)) attachTokens(ctx, built, slotTokens);
     return built;
   }
   const wrapper: Record<string, unknown> = {};
@@ -6855,6 +6967,33 @@ function carryPartialCrossAxisFill(
   );
   // @door propose.cross-axis-fill-partial-refused
   if (!fit) {
+    // Compound literals retain a drawn FILL even when no single enum axis
+    // explains it. No row is invented for an undrawn tuple or a non-FILL.
+    if (ctx.mint && ctx.mint.axes.length &&
+        fillingOcc.every(o => parentModes.crossDefiniteByVariant?.get(o.variant) === true) &&
+        !m.occ.some(o => o.node.fixedSize?.[dim] !== undefined || o.node.bound?.[dim] !== undefined) &&
+        !((part.literalsByProp as Array<{map:Record<string,Record<string,string>>}> | undefined) ?? []).some(e => Object.values(e.map).some(v => dim in v))) {
+      const cells = new Map<string,{values:string[];fills:boolean}>();
+      let complete = true;
+      for (const o of m.occ) {
+        const axes = ctx.mint.axisValuesByVariant.get(o.variant);
+        const tuple = ctx.mint.axes.map(axis => axes?.[axis.propName]);
+        const fills = o.node[fillField] === true;
+        if (tuple.some((value,i) => value === undefined || !ctx.mint!.axes[i].values.includes(value))) { complete=false;break; }
+        const key=JSON.stringify(tuple), prior=cells.get(key);
+        if (prior && prior.fills !== fills) { complete=false;break; }
+        cells.set(key,{values:tuple as string[],fills});
+      }
+      if (complete) {
+        const table:MintedLiteralTable={props:ctx.mint.axes.map(axis=>axis.propName),rows:[...cells.values()].filter(c=>c.fills).map(c=>({values:c.values,value:'100%'}))};
+        const obs:MintObservation & {target:Record<string,string>}={nodePath:where,part:partPathOf(where),cssProperty:dim,kind:'px',target:(part.tokens as Record<string,string>|undefined)??{},occurrences:[]};
+        const placed=placeLiteralTable(ctx.mint,obs,table,new Set(ctx.axes.filter(axis=>axis.omitted).map(axis=>axis.propName)),part);
+        if (placed.carried) {
+          ctx.notes.push(`${drawn} — carried as 100% on ${table.rows.length} explicitly observed compound tuples with definite parents; non-FILL and undrawn tuples get no size literal`);
+          return;
+        }
+      }
+    }
     ctx.notes.push(
       `${drawn}, and "fills / does not fill" is not a pure function of ONE declared enum axis with full value coverage (it splits across two axes, an axis value fills in some occurrences and not others, a declared value was never observed, or the only fitting axis is boolean — literalsByProp is enum-keyed) — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
     );
@@ -8797,6 +8936,18 @@ function applySlotDefaultContent(
     if (Object.keys(canonical).length > 0) item.props = canonical;
   }
   slot.defaultContent = [item];
+  // A runtime default requires the actual declared swap default and a linked
+  // child identity. A provisional envelope or arbitrary observed choice is
+  // sample content only; neither proves the property's default.
+  const definition = Object.entries(ctx.propertyDefinitions ?? {}).find(([name]) => name.split('#')[0] === property)?.[1];
+  const child = contentId ? ctx.contractsById?.get(contentId) : undefined;
+  const defaultNode = child?.bindings?.figma?.anchors?.nodeId;
+  if (!provisional && definition?.type === 'INSTANCE_SWAP' && typeof defaultNode === 'string' &&
+      definition.defaultValue === defaultNode && contentInstance.occ.every(o => o.node.instanceOf === instanceOf)) {
+    slot.renderDefault = true;
+    ctx.notes.push(`${where}: declared INSTANCE_SWAP default ${defaultNode} is linked to ${contentId}; explicit runtime slot default carried, caller omission only`);
+  }
+
   ctx.notes.push(
     provisional
       ? `${where}: slot "${property}" design-time content "${instanceOf}" proposed as defaultContent [${contentId}] — a STUB rendering the OBSERVED geometry only (dump v1.5 bbox + primary paint; PROVISIONAL — import the real child set to replace it)`
@@ -9161,7 +9312,7 @@ function repeatRunAt(children: Merged[], i: number, ctx: Ctx): Merged[] | null {
     Object.keys(first(m.occ, (n) => n.componentProperties) ?? {})
       .map((k) => k.split('#')[0])
       .sort()
-      .join(' ');
+      .join('\0');
   const shape = shapeOf(children[i]);
   const identityOf = (m: Merged): string | undefined => {
     const identities = new Set(m.occ.map(occurrence => observedInstanceIdentity(occurrence.node) ?? ''));
@@ -9474,6 +9625,14 @@ function observedVectorDrawing(node: DumpNode, ctx: Ctx) {
   return {observation,root};
 }
 
+/** The typed target was captured only for a normal SOLID-painted VECTOR.
+ * Historical text/style metadata cannot change this vector's geometry or ink;
+ * every live drawing override other than fills remains a refusal. */
+function directFilledPaintFields(fields: string[]) {
+  const inert = new Set(['fontSize','letterSpacing','lineHeightPercent','lineHeightPercentFontSize','lineHeightPx','inheritFillStyleId']);
+  return fields.includes('fills') && fields.every(field => field === 'fills' || inert.has(field));
+}
+
 function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
   const observed = observedVectorDrawing(node, ctx);
   if (observed) {
@@ -9492,7 +9651,7 @@ function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
   const paint = stroked ? h?.stroke : h?.fill;
   if (!d || !d.child.anatomy.root.overridable?.includes('color') ||
       d.path.literals?.[stroked ? 'border-color' : 'background-color'] !== 'currentColor' ||
-      !h || (stroked ? h.fields.some(f => !['strokes','strokeWeight'].includes(f)) || !h.fields.includes('strokes') : h.fields.length !== 1 || h.fields[0] !== 'fills') || !paint?.hex || !target ||
+      !h || (stroked ? h.fields.some(f => !['strokes','strokeWeight'].includes(f)) || !h.fields.includes('strokes') : !directFilledPaintFields(h.fields)) || !paint?.hex || !target ||
       target.componentId !== d.anchor.nodeId || target.instancePath.length !== 0 ||
       JSON.stringify(target.childPath) !== '[0]') return undefined;
   return paint;
@@ -9516,6 +9675,22 @@ function directInstanceSize(node: DumpNode, childId: string, ctx: Ctx) {
       d.viewport.width !== d.viewport.height || !Number.isFinite(box.width) || box.width <= 0 ||
       box.width !== box.height || node.children?.length) return undefined;
   return {observed: box.width, main: d.viewport.width};
+}
+
+/** Usage-specific default content stays ordinary caller-owned anatomy.
+ * That reuses the existing component override vocabulary on every emitter,
+ * instead of baking host ink into the shared child's main/default. */
+function carrySlotDefaultInk(m: Merged, part: Record<string,unknown>, slot: Record<string,unknown>, ctx:Ctx, where:string, selfKey:string) {
+  const items = slot.defaultContent as Array<{id:string;props?:Record<string,string|boolean>;text?:string}> | undefined;
+  if (!ctx.mint || !slot.renderDefault || part.parts || items?.length !== 1) return;
+  const item=items[0], paints=m.occ.map(o=>directInstanceInk(o.node,item.id,ctx));
+  if (!paints.every(Boolean)) return;
+  const component:Record<string,unknown>={...item}, target:Record<string,string>={};
+  mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
+  ctx.mint.refOverrides.push({component,target});
+  part.parts={[partKey('defaultContent',ctx,`${where}/defaultContent`,selfKey)]:{component}};
+  ctx.notes=ctx.notes.filter(n=>!(n.includes('host override(s)') && (n.startsWith(`${where}:`) || n.startsWith(`${where}/${m.name}:`))));
+  ctx.notes.push(`${where}: exact typed VECTOR caller paint carried on omitted-slot default anatomy; linked main ink and explicit caller content are unchanged`);
 }
 
 function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
@@ -9579,18 +9754,19 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
   const observations = swaps.map(s => s?.observedInstances);
   const sizes = observations.map(rows => rows?.length === 1 ? rows[0] : undefined);
   if (ctx.mint && target.data.anatomy.root?.overridable?.includes('size') && sizes.every(row => row &&
-      row.componentId === firstSwap.id && row.path.length === 1 && row.path[0] === 0 &&
-      JSON.stringify(row.relativeTransform) === '[[1,0,0],[0,1,0]]' &&
-      row.constraints?.horizontal === 'SCALE' && row.constraints.vertical === 'SCALE' &&
-      row.size && Number.isFinite(row.size.width) && row.size.width > 0 && row.size.width === row.size.height &&
-      row.parentSize?.width === row.size.width && row.parentSize.height === row.size.height)) {
+      row.componentId === firstSwap.id && Array.isArray(row.path) && row.path.length > 0 && row.path.length <= 8 &&
+      row.path.every(index => Number.isSafeInteger(index) && index >= 0) &&
+      row.relativeTransform?.length === 2 && row.relativeTransform.every(axis => axis.length === 3 && axis.every(Number.isFinite)) &&
+      row.relativeTransform[0][0] === 1 && row.relativeTransform[0][1] === 0 &&
+      row.relativeTransform[1][0] === 0 && row.relativeTransform[1][1] === 1 &&
+      row.size && Number.isFinite(row.size.width) && row.size.width > 0 && row.size.width === row.size.height)) {
     const target: Record<string, string> = {};
     mintObservation(ctx, target, `${where}.selectedContent`, 'size', 'px',
       m.occ.map((o, i) => ({ variant: o.variant, value: sizes[i]!.size!.width })));
     ctx.mint.refOverrides.push({component:selected, target});
-    ctx.notes.push(`${where}: selected caller content retains its observed square size through the child's declared scalable drawing`);
+    ctx.notes.push(`${where}: selected caller content retains its captured local square size through the child's declared scalable drawing; ancestor placement remains separate`);
   } else if (observations.some(rows => rows?.length)) {
-    ctx.notes.push(`${where}: fixed-swap-caller-size-not-carried — requires one identity-matched square SCALE/SCALE instance at the origin and an overridable child; review`);
+    ctx.notes.push(`${where}: fixed-swap-caller-size-not-carried — requires one identity-matched local square instance with an unrotated unit transform, a valid descendant path, and an overridable scalable child; review`);
   }
   const inkParts = Object.values(target.data.anatomy.root.parts ?? {});
   if (ctx.mint && target.data.anatomy.root?.overridable?.includes('color') && inkParts.length === 1 &&
@@ -9840,7 +10016,7 @@ function buildPartFromEvidence(
       // The synthetic `property` is the node path: unique within the set (so
       // registerTextProp's dedup holds) and never emitted — a figmaless prop
       // binds kind NONE, which the schema requires to carry no property.
-      registerTextProp(ctx, ` textOverride:${where}`, characters, promoted);
+      registerTextProp(ctx, `\0textOverride:${where}`, characters, promoted);
       const entry = ctx.textProps.find((t) => t.name === promoted);
       if (entry) entry.figmaless = true;
       part.content = { prop: promoted };
@@ -9963,7 +10139,7 @@ function buildPartFromEvidence(
     carryCrossAxisFill(m, parentMode, part, ctx, where);
     invertNodeOpacity(m, part, slotTokens, ctx, where);
     invertNodeEffects(m, slotTokens, ctx, where);
-    nameFixedChildGeometry(m, ctx, where, { tokens: slotTokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
+    nameFixedChildGeometry(m, ctx, where, { tokens: slotTokens, part }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     attachTokens(ctx, part, slotTokens);
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility
@@ -10010,6 +10186,12 @@ function buildPartFromEvidence(
       applySlotAccepts(bareSlot, swapProperty, ctx, where);
       applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where);
       part.slot = bareSlot;
+      carrySlotDefaultInk(m, part, bareSlot, ctx, where, selfKey);
+      // Opacity belongs to this usage wrapper, not the swapped child's root.
+      const slotTokens: Record<string, string> = {};
+      invertNodeOpacity(m, part, slotTokens, ctx, where);
+      carryInstanceSlotSizing(m, part, slotTokens, ctx, where);
+      attachTokens(ctx, part, slotTokens);
       // Same visibility conventions as the wrapper-frame slot path: the
       // "Show <Property>" convention marks the slot optional; any other
       // BOOLEAN visibility binding becomes a real boolean prop driving the
@@ -10557,7 +10739,7 @@ function buildPartFromEvidence(
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
-    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt
     const slot: Record<string, unknown> = { name: allocatedInputName(ctx, soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -10580,7 +10762,7 @@ function buildPartFromEvidence(
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
     carryCrossAxisFill(m, parentMode, part, ctx, where); // dump v1.31
     carryAspectRatio(m, part, ctx, where); // dump v1.31
-    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -10604,7 +10786,7 @@ function buildPartFromEvidence(
   // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
-  nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
+  nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
   attachTokens(ctx, part, tokens);
   carryGridAxisSizing(m, part, ctx, where, tokens); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -14391,6 +14573,15 @@ function proposeFromDumpFenced(
   // byte-identical.
   const scalableDrawing = Object.values(root.parts ?? {}).length > 0 &&
     Object.values(root.parts ?? {}).every((part: any) => (part.shape?.kind === 'path' && part.shape.parentViewport || part.shape?.kind === 'stroked-path' && part.shape.strokePath));
+  // A pure scalable drawing has a known free viewport. Its observed clipping
+  // is independent of whether Figma supplied that flag as a default; preserve
+  // the drawn boundary without claiming authored intent. Other foreign clips
+  // keep carryClip's exact-mode refusal.
+  if (scalableDrawing && merged.occ.every(o => o.node.clipsContent === true)) {
+    root.declared = {...(root.declared as Record<string,string> | undefined), 'overflow-x':'hidden', 'overflow-y':'hidden'};
+    ctx.notes = ctx.notes.filter(n => !(n.startsWith('root: clipsContent is true') && n.includes('on a set this pipeline did not draw')));
+    ctx.notes.push('root: pure SCALE drawing retains its observed free-viewport clipping; no authorship or design-intent claim');
+  }
   const singleInkPart = scalableDrawing && Object.values(root.parts ?? {}).length === 1
     ? Object.values(root.parts as Record<string, any>)[0] : undefined;
   if (singleInkPart?.tokens?.['background-color'] && !singleInkPart.states && !singleInkPart.tokensByProp &&

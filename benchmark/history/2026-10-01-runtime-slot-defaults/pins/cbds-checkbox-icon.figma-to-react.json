@@ -2,7 +2,7 @@
   "id": "cbds-checkbox-icon.figma-to-react",
   "version": 1,
   "inputSha256": "8ec3c1a1533cbddcfe72b0ce9f0c7b3cd8871edd403f0b403705b49d742c6234",
-  "requestSha256": "f73479b0c42075500dab7ca63b354dd22dbf0cfa582cd6e3fddc504c3cdb8a93",
+  "requestSha256": "816990eaa5aabf557927eeb770c9d8230630cd19cdc24749ba7ae90cc7c625bb",
   "rootId": "ds.checkbox",
   "generated": {
     "CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
@@ -15,7 +15,7 @@
     "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
     "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
-    "Icon/Icon.tsx": "1a57abf52d08cc10827fef4a81eb2d04fe716d5512ada9068b7b8ca07ac254f5",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
     "MinusSquare/MinusSquare.tsx": "5b14d238d633d8916302f061cb74f1b9a9590789d519c8921e26416780eee8ae",
@@ -32,7 +32,7 @@
     "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
     "tokens.css": "860f97f8acfaab78aebc8dc5a3265da72462dbb615e8cefc6ef1fb1783160448"
   },
-  "generatedSha256": "44f74179ca9753d6fead2fa013d5d378e3a0f6f5295db9c5acec0ca91a14f0f5",
+  "generatedSha256": "009e16be91fc70e03a220585d7f7b318e5494e18d006eb3b06c390faeedcb736",
   "entries": {
     "package/dist/Checkbox/Checkbox.d.ts": "fbd25bae2199259886b7da0041d439459bcc1cc73555d0e64b1d5a0bfa64c494",
     "package/dist/Checkbox/Checkbox.js": "11c0795de18385a2bfef18c35b6455bc4f978feb0d43270626c3059854b60ff4",
@@ -50,7 +50,7 @@
     "package/dist/CheckSquare/index.d.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
     "package/dist/CheckSquare/index.js": "eda8c7c3dbe8cfb9e9cf4d08940fffe4b4318a354729c0027d51b9529c07a19f",
     "package/dist/Icon/Icon.d.ts": "e1ac7a8becc47fa0b5c3bc38fe6950f85d895ee403a33023d00253a415d579bd",
-    "package/dist/Icon/Icon.js": "7cc1c9739b971764e289e020f4a75968e2006b43625db9f6ec12e51e4e2b575d",
+    "package/dist/Icon/Icon.js": "eef8bb90c17636a89611d64db4dfb5bf0cf83ef01e8677e99b44b68f958dd1b3",
     "package/dist/Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
     "package/dist/Icon/index.d.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "package/dist/Icon/index.js": "465d07da3a00a078ab05eb2ff3a0d952657f4b4981b84ff28598c0b95996f5a1",
@@ -80,15 +80,15 @@
     "package/package.json": "a3173b5f900e9e39e3571696563fe93f549ee2e3530047e55161190f4f1f93fd",
     "package/README.md": "ebb06674886896eace2a334ed054eb2ef63764766774db9a516335713800e078"
   },
-  "entriesSha256": "af7471340c11ef69bd87e1d9469838ea68733301159ee452c5cc75aec9e96243",
+  "entriesSha256": "20eb6e2a4c95d196fbbc2a6ddb860d218310044c03049b765e48be418955a44d",
   "recordedOn": "darwin-arm64",
   "fidelity": {
-    "receipt": "benchmark/receipts/cbds-checkbox-icon.figma-to-react/runtime-slot-defaults-2026-10-01.json",
-    "receiptSha256": "42c4c9f766e4680b99fde2c357679526e027844fc2fcaa1c00ea462139ac8f13",
-    "generatedSha256": "44f74179ca9753d6fead2fa013d5d378e3a0f6f5295db9c5acec0ca91a14f0f5",
+    "receipt": "benchmark/receipts/cbds-checkbox-icon.figma-to-react/receipt.json",
+    "receiptSha256": "c30aac5f0559855bdb35baa72140e26a219a5f0b27e887b8b89f0e63a8c94d9a",
+    "generatedSha256": "009e16be91fc70e03a220585d7f7b318e5494e18d006eb3b06c390faeedcb736",
     "component": "CheckboxIcon",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-10-01",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "selection-unchecked_size-large_error-false",

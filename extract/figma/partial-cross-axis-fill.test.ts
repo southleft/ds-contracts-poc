@@ -34,7 +34,7 @@ const propose = (rootMode: Mode, cells: Cell[]) => {
   const set = (mappedSet.dump as unknown as Record<string, DumpSet>).Tabs;
   return proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: { paint: { a: { $type: 'color', $value: '#ffffff' } } }, semantic: {}, light: {}, brandDefault: {} }), contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
 };
-type Part = Record<string, unknown> & { parts?: Record<string, Part> };
+type Part = Record<string, unknown> & { parts?: Record<string, Part>; literalsByCombination?: Array<{ props: string[]; rows: Array<{ values: Array<string | boolean | number>; literals: Record<string, string> }> }> };
 const headerOf = (result: { contract: unknown }) => (result.contract as { anatomy: { root: Part } }).anatomy.root.parts!.header;
 const emit = (contract: unknown) => {
   const inventory = new Set(Array.from(JSON.stringify(contract).matchAll(/\{([a-z0-9.-]+)\}/gi), m => m[1]));
@@ -44,7 +44,6 @@ const emit = (contract: unknown) => {
   return { css, tsx: generateTsx(contract as never, new Map(), new Map(), css) };
 };
 const INERT = /axis-inert \(ledgered, not a throw\): [^\n]*\bvariant\b/;
-const NAMED = /header: drawn FILL-(width|height) under a (COLUMN|ROW) parent in \d\/\d variant occurrence\(s\) only, and "fills \/ does not fill" is not a pure function of ONE declared enum axis[^]*NAMED, not carried/;
 
 test('a FILL-width that follows one enum axis rides literalsByProp as width: 100% on the filling value only', () => {
   const result = propose('VERTICAL', [{ name: 'Variant=Default' }, { name: 'Variant=Stretch', header: true }]);
@@ -95,33 +94,49 @@ test('a FILL drawn in EVERY variant uses a base relation without changing siblin
   for (const result of [width, height]) assert.ok(!result.notes.some(n => /variant occurrence\(s\) only/.test(n)));
 });
 
-test('anything less correlated stays NAMED with nothing proposed', () => {
-  const refused = (cells: Cell[], why: string) => {
-    const result = propose('VERTICAL', cells);
-    const header = headerOf(result);
-    assert.equal(header.literalsByProp, undefined, why);
-    assert.equal(header.literals, undefined, why);
-    assert.ok(result.notes.some(n => NAMED.test(n)), why);
-    assert.doesNotMatch(emit(result.contract).css, /width: 100%/, why);
-  };
-  refused([
-    { name: 'Size=S, Variant=Default' }, { name: 'Size=S, Variant=Stretch' },
-    { name: 'Size=L, Variant=Default' }, { name: 'Size=L, Variant=Stretch', header: true },
-  ], 'a two-axis split: it fills only where Size=L AND Variant=Stretch');
-  refused([
-    { name: 'Size=S, Variant=Default', header: true }, { name: 'Size=S, Variant=Stretch' },
-    { name: 'Size=L, Variant=Default' }, { name: 'Size=L, Variant=Stretch', header: true },
-  ], 'uncorrelated: every value of both axes fills in one occurrence and not in another');
+test('complete multi-axis FILL follows only the observed tuples', () => {
+  const matrices: Array<{ cells: Cell[]; fills: string[] }> = [
+    { cells: [
+      { name: 'Size=S, Variant=Default' }, { name: 'Size=S, Variant=Stretch' },
+      { name: 'Size=L, Variant=Default' }, { name: 'Size=L, Variant=Stretch', header: true },
+    ], fills: ['l/stretch'] },
+    { cells: [
+      { name: 'Size=S, Variant=Default', header: true }, { name: 'Size=S, Variant=Stretch' },
+      { name: 'Size=L, Variant=Default' }, { name: 'Size=L, Variant=Stretch', header: true },
+    ], fills: ['s/default', 'l/stretch'] },
+  ];
+  for (const { cells, fills } of matrices) {
+    const result = propose('VERTICAL', cells), header = headerOf(result);
+    assert.equal(header.literalsByProp, undefined, 'neither individual axis explains this relation');
+    assert.equal(header.literals, undefined, 'non-FILL tuples must not acquire a base width');
+    const tables = header.literalsByCombination!.filter(table => table.rows.some(row => row.literals.width === '100%'));
+    assert.equal(tables.length, 1);
+    const table = tables[0];
+    assert.deepEqual(new Set(table.props), new Set(['size', 'variant']));
+    const carried = table.rows.filter(row => row.literals.width === '100%').map(row =>
+      row.values[table.props.indexOf('size')] + '/' + row.values[table.props.indexOf('variant')]);
+    assert.deepEqual(new Set(carried), new Set(fills), 'only the source tuples that draw FILL receive width');
+    assert.match(emit(result.contract).css, /width: 100%/);
+  }
+});
 
-  // Partial coverage: the header is absent from Variant=Wide, so the axis value
-  // "Wide" was never observed for it and the split is not known there.
+test('partial part presence carries only observed FILL and excludes the absent variant', () => {
+  // Wide has no header. Presence and sizing must each retain their observed domain.
   const set = restSet('VERTICAL', [{ name: 'Variant=Default' }, { name: 'Variant=Stretch', header: true }, { name: 'Variant=Wide' }]);
   set.children[2].children = set.children[2].children.slice(1);
   const dump = (mapRestToDump({ name: 'fixture', nodes: { '1:1': { document: set } } } as never).dump as unknown as Record<string, DumpSet>).Tabs;
   const partial = proposeFromDump(dump, { corpus: tokenCorpusFromJson({ primitives: { paint: { a: { $type: 'color', $value: '#ffffff' } } }, semantic: {}, light: {}, brandDefault: {} }), contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
   const header = headerOf(partial);
   assert.equal(header.literalsByProp, undefined);
-  assert.ok(partial.notes.some(n => NAMED.test(n)));
+  assert.equal(header.literals, undefined);
+  assert.deepEqual(header.visibleWhen, { prop: 'variant', equals: ['default', 'stretch'] });
+  assert.deepEqual(header.literalsByCombination, [{ props: ['variant'], rows: [{ values: ['stretch'], literals: { width: '100%' } }] }]);
+  const { css, tsx } = emit(partial.contract);
+  assert.match(css, /\.root:where\(\.variant-stretch\) \.header \{\s*width: 100%;\s*\}/);
+  assert.doesNotMatch(css, /variant-(?:default|wide)[^}]*width: 100%/);
+  assert.match(tsx, /default/);
+  assert.match(tsx, /stretch/);
+  assert.ok(partial.notes.some(n => /non-FILL and undrawn tuples get no size literal/.test(n)));
 });
 
 test('the primary-axis twin uses variant grow without replacing sibling widths with 100%', () => {

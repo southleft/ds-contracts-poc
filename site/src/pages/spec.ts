@@ -1303,6 +1303,8 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
               "Per-surface slot bindings (schema 17): <code>bindings.figma.property</code> is the canvas property name, default PascalCase(name) — the slot-level twin of a prop’s <code>bindings.figma.property</code>. An explicit <code>bindings.figma.textTemplate: true</code> supports one hidden, empty native TEXT in an unconstrained root children slot. The scoped native writer requires bound size, weight, line height and color, and invariant family, slant, tracking, case and alignment. Verified direct caller text may edit this template while inheriting the selected main’s token aliases. It adds no default React content. Unscoped generation, nested content, stateful/composed templates, main updates and comparison recovery refuse this marker. The application does not infer it; an application journey, clean consumers and fidelity remain unqualified.",
             defaultContent:
               'See <a href="#default-content">default content</a>.',
+            renderDefault:
+              "Opt in to rendering defaultContent when the React slot input is undefined. Explicit null, false, empty text, zero, and caller content suppress this fallback. Matching child parts may carry usage-specific component overrides for the fallback; their identities, props, and text must match defaultContent. This does not rewrite the referenced main component. Native generation renders that matching anatomy once; HTML and Web Components explicitly refuse matching runtime-default anatomy until supported.",
           },
           { skip: ["figmaProperty"] },
         ) +
@@ -1314,7 +1316,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "default-content",
       "Slot default content",
       ["generated", "curated"],
-      `<p>Design-time sample content: renders as instances inside the slot on the canvas and as the sample in code stories — never baked into the generated component itself. Items must be drawn from <code>accepts</code> when accepts is present. A slot whose default content has <em>multiple</em> items is a multi-child slot — inexpressible as a canvas instance-swap, so it renders its content directly until the native slot-property migration.</p>` +
+      `<p>Design-time sample content: renders as instances inside the slot on the canvas and as the sample in code stories. By default it is not baked into the React component. Set <code>renderDefault: true</code> to use it only when the caller omits the slot input; explicit clearing and caller content take precedence. Items must be drawn from <code>accepts</code> when accepts is present. A slot whose default content has <em>multiple</em> items is a multi-child slot — inexpressible as a canvas instance-swap, so it renders its content directly until the native slot-property migration.</p>` +
         fieldList(SlotContentItemSchema as AnySchema, {
           id: "A contract id from <code>accepts</code>.",
           props: "Fixed prop values, spelled canonically.",

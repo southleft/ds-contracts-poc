@@ -1966,6 +1966,25 @@ function mapNode(
     if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
+  // Fixed auto-layout children have an authored local extent too. Keep each
+  // explicitly FIXED axis; HUG/FILL and rotated bounding boxes are not evidence.
+  if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE' &&
+      parentAutoLayout && (node.layoutMode === 'HORIZONTAL' || node.layoutMode === 'VERTICAL') &&
+      node.layoutPositioning !== 'ABSOLUTE' && (node.rotation === undefined || node.rotation === 0) && node.size) {
+    const fixed: NonNullable<DumpNode['fixedSize']> = {};
+    const {x:width,y:height} = node.size;
+    if (node.layoutSizingHorizontal === 'FIXED' && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (node.layoutSizingVertical === 'FIXED' && Number.isFinite(height) && height >= 0) fixed.height = height;
+    if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
+  }
+  if (node.type === 'INSTANCE' && parentAutoLayout && (node.rotation === undefined || node.rotation === 0)) {
+    const sizing: NonNullable<DumpNode['instanceSizing']> = {};
+    if (node.layoutSizingHorizontal !== undefined) sizing.horizontal = node.layoutSizingHorizontal;
+    if (node.layoutSizingVertical !== undefined) sizing.vertical = node.layoutSizingVertical;
+    if (sizing.horizontal === 'FIXED' && node.size && Number.isFinite(node.size.x) && node.size.x >= 0) sizing.width = node.size.x;
+    if (sizing.vertical === 'FIXED' && node.size && Number.isFinite(node.size.y) && node.size.y >= 0) sizing.height = node.size.y;
+    if (Object.keys(sizing).length) out.instanceSizing = sizing;
+  }
   nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
   // dump v1.4: literal min/max sizing carries as style facts (a drawn
   // minHeight 44 is a tap-target fact) — previously a named degradation.

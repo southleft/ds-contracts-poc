@@ -4815,6 +4815,18 @@ function partToSpec(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec {
+  // Explicit boolean conditions distinguish an omitted defaultless input
+  // from false. A non-variant BOOLEAN control contributes its authored
+  // default to this canvas still frame, just as truthy opacity already does.
+  if ((part.stylesWhen ?? []).some(rule => rule.equals === 'false' || rule.equals === 'true')) {
+    const defaults: Record<string, string> = {};
+    for (const rule of part.stylesWhen ?? []) {
+      const prop = contract.props.find(p => p.name === rule.prop);
+      if (prop?.type === 'boolean' && typeof prop.default === 'boolean' && subst[prop.name] === undefined)
+        defaults[prop.name] = String(prop.default);
+    }
+    if (Object.keys(defaults).length) subst = {...defaults, ...subst};
+  }
   const spec = partToSpecInner(name, part, contract, byId, ctx, subst);
   // v7 overlay: stamped on whatever node kind the part compiled to; the
   // runtime applies it after the node is appended (layoutPositioning
@@ -5189,7 +5201,9 @@ function partToSpecInner(
     };
     const description = slotPropertyDescription(part.slot);
     if (description) spec.slotDescription = description;
-    if ((part.slot.defaultContent?.length ?? 0) > 0) {
+    if (part.slot.renderDefault && part.parts) {
+      spec.children = Object.entries(part.parts).flatMap(([childName, child]) => partToSpecs(childName, child, contract, byId, ctx, subst));
+    } else if ((part.slot.defaultContent?.length ?? 0) > 0) {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {
         const dep = byId.get(item.id)!;
         return {
@@ -8417,7 +8431,8 @@ function buildSyncScript(
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
-  const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined ||
+    x.type === 'slot' && (x.children ?? []).some(child => child.instanceInk !== undefined || child.instanceStrokeWeight !== undefined)));
   const hasInstanceInk = featureDatas.some(d => dataSome(d, x => x.instanceInk !== undefined || x.instanceStrokeWeight !== undefined));
   // bindings.figma.absentVariants: the "still holds a declared-absent variant"
   // receipt on the skip path is emitted only for a script that carries such a

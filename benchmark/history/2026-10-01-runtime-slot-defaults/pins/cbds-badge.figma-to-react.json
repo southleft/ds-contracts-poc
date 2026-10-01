@@ -2,14 +2,14 @@
   "id": "cbds-badge.figma-to-react",
   "version": 1,
   "inputSha256": "d55ac5450324e83fdaf4ba99f9c6b2cc3fc8b34459852f060b7c838ec5ee5941",
-  "requestSha256": "eefb90601988876ca01a9d94661a81df97d7919233df86025bfb9b185fb4171c",
+  "requestSha256": "8a5efb92e4414bae5df9f0649012d84840f64260947059d7c479ce68ad3d5ae3",
   "rootId": "ds.badge",
   "generated": {
     "Badge/Badge.module.css": "87c3960e51cdd1a7286b1f1c6ce6cb9ca9656837a2d7405222af13096b16e93c",
     "Badge/Badge.tsx": "e1768e3038b1c0a6691a0abe4027c52557c9e74882e159a1666d956a12d54ba4",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
-    "Icon/Icon.tsx": "1a57abf52d08cc10827fef4a81eb2d04fe716d5512ada9068b7b8ca07ac254f5",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
     "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
@@ -17,7 +17,7 @@
     "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
     "tokens.css": "347735cecc303c8f5b86a2f7f4506c92995bffd04fe9a39154e9897a39486091"
   },
-  "generatedSha256": "363553d7cab4c3e7ddc0dff1d32821a08a80c3f3d1d03e2a9d75762892305830",
+  "generatedSha256": "bf010fa7b542e78e9342e3b33346a112dda7230fa9ae8334de1a3b92ec876a6f",
   "entries": {
     "package/dist/Badge/Badge.d.ts": "16f842c131df30d09bf2e69a52312f06386ad7423fa51649879f37b6eda0c0c7",
     "package/dist/Badge/Badge.js": "718940ba03b651b803c62a1868a62b1c004ea9d22d4e22aa439e0a48081dd3a0",
@@ -25,7 +25,7 @@
     "package/dist/Badge/index.d.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "package/dist/Badge/index.js": "ffa73a3203235dfb94e1b06554675da916643f946dfc761facfce0f98cd3b600",
     "package/dist/Icon/Icon.d.ts": "e1ac7a8becc47fa0b5c3bc38fe6950f85d895ee403a33023d00253a415d579bd",
-    "package/dist/Icon/Icon.js": "7cc1c9739b971764e289e020f4a75968e2006b43625db9f6ec12e51e4e2b575d",
+    "package/dist/Icon/Icon.js": "eef8bb90c17636a89611d64db4dfb5bf0cf83ef01e8677e99b44b68f958dd1b3",
     "package/dist/Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
     "package/dist/Icon/index.d.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "package/dist/Icon/index.js": "465d07da3a00a078ab05eb2ff3a0d952657f4b4981b84ff28598c0b95996f5a1",
@@ -40,15 +40,15 @@
     "package/package.json": "ed6a043853bb81f92c887c1183139f8662a595896f1bcc25564b6aa148930177",
     "package/README.md": "c12b8295e3116d8b0d89b16a6bd58cf1d193937f7d2fb2c52459d9ae2d0fdaf3"
   },
-  "entriesSha256": "a9b6c4c9d23a4af9cd406f5f084570e1d4adeeddb31c22c132b05b054550a35d",
+  "entriesSha256": "b71d40cdd2bf5f83ccd8a23be34f040cb7ff6b1ce049411c702597c44bca6681",
   "recordedOn": "darwin-arm64",
   "fidelity": {
-    "receipt": "benchmark/receipts/cbds-badge.figma-to-react/runtime-slot-defaults-2026-10-01.json",
-    "receiptSha256": "36f8ce309ed7ef58d47ad1129dd0670bf69b9d19e58b880e0592109106e212fe",
-    "generatedSha256": "363553d7cab4c3e7ddc0dff1d32821a08a80c3f3d1d03e2a9d75762892305830",
+    "receipt": "benchmark/receipts/cbds-badge.figma-to-react/receipt.json",
+    "receiptSha256": "92511ef4e88036530b87b6c22a504e3a77c816792738f1200cc4ff2be65b1c3f",
+    "generatedSha256": "bf010fa7b542e78e9342e3b33346a112dda7230fa9ae8334de1a3b92ec876a6f",
     "component": "Badge",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-10-01",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "type-brand_style-fill_size-large_rounded-false",

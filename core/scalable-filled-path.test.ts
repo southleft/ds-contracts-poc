@@ -125,3 +125,29 @@ test('single-ink path callers recolor through both React surfaces while their ma
     }finally{await page.close();}
   }}finally{await browser.close();}
 });
+
+
+test('clipped free-parent viewport preserves SCALE geometry without admitting scrolling or layout', async () => {
+  const {proposeFromDump} = await import('./propose-figma.js');
+  const {tokenCorpusFromJson} = await import('./token-corpus.js');
+  const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+  const dump:any={setName:'ClippedGlyph',type:'COMPONENT',nodeId:'1:1',key:'glyph-key',variants:[{name:'ClippedGlyph',type:'COMPONENT',bbox:{width:24,height:24},clipsContent:true,children:[{name:'ink',type:'VECTOR',fill:{hex:'123456'},shape:{kind:'path',width:12,height:8,x:3,y:4,constraints:{horizontal:'SCALE',vertical:'SCALE'},paths:[{data:'M0 0L12 0L6 8Z',windingRule:'NONZERO'}]}}]}]};
+  const read=(d:any,projectionMode:'exact'|'reviewable-inversion'='reviewable-inversion')=>proposeFromDump(d,{corpus,contractIdByName:new Map(),mintUnbound:true,fileKey:'fixture',projectionMode});
+  const result=read(dump),c=ContractSchema.parse(result.contract);
+  assert.deepEqual(c.anatomy.root.parts!.ink.shape!.parentViewport,{width:24,height:24,x:3,y:4});
+  assert.equal(c.anatomy.root.declared!['overflow-x'],'hidden');
+  assert.equal(c.anatomy.root.declared!['overflow-y'],'hidden');
+  assert.deepEqual(errors(c),[]);
+  assert(c.anatomy.root.overridable?.includes('size'));
+  const engine=createFigmaEngine({tokens:{primitives:result.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const spec=engine.compileComponentData(c,new Map([[c.id,c]])).variants[0].spec;
+  assert.equal(spec.scalablePathParent,true);assert.equal(spec.clipsContent,true);
+  for(const value of ['hidden','clip','visible']){const f=fixture().glyph;f.anatomy.root.declared!['overflow-x']=value;assert.deepEqual(errors(f),[]);}
+  for(const value of ['auto','scroll']){const f=fixture().glyph;f.anatomy.root.declared!['overflow-y']=value;assert(errors(f).some(e=>e.includes('filled-path-parent-channel-unsupported:overflow-y')));}
+  const exact=ContractSchema.parse(read(dump,'exact').contract);
+  assert.deepEqual(exact.anatomy.root.parts!.ink.shape!.parentViewport,{width:24,height:24,x:3,y:4});
+  assert.equal(exact.anatomy.root.declared!['overflow-x'],'hidden','pure viewport clip is an observed drawing fact in exact projection');
+  for(const change of [(d:any)=>{d.variants[0].layout={mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0]};},(d:any)=>{d.variants[0].children[0].shape.constraints.horizontal='CENTER';},(d:any)=>{d.variants[0].fill={hex:'abcdef'};}]){
+    const d=structuredClone(dump);change(d);assert.equal(ContractSchema.parse(read(d).contract).anatomy.root.parts!.ink.shape!.parentViewport,undefined);
+  }
+});

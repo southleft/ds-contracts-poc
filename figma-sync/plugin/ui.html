@@ -3133,6 +3133,26 @@ async function dumpNode(node, nodePath, parent) {
     if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
+  // Explicit fixed extents on auto-layout children are authored dimensions,
+  // not inferred HUG/FILL sizes. Refuse rotated bounding-box substitution.
+  if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE'
+      && parentAutoLayout && (node.layoutMode === 'HORIZONTAL' || node.layoutMode === 'VERTICAL')
+      && node.layoutPositioning !== 'ABSOLUTE' && (node.rotation === undefined || node.rotation === 0)
+      && typeof node.width === 'number' && typeof node.height === 'number') {
+    const fixed = {}, {width,height} = node;
+    if (node.layoutSizingHorizontal === 'FIXED' && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (node.layoutSizingVertical === 'FIXED' && Number.isFinite(height) && height >= 0) fixed.height = height;
+    if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
+  }
+
+  if (node.type === 'INSTANCE' && parentAutoLayout && (node.rotation === undefined || node.rotation === 0)) {
+    const sizing = {};
+    if (['FIXED','HUG','FILL'].includes(node.layoutSizingHorizontal)) sizing.horizontal = node.layoutSizingHorizontal;
+    if (['FIXED','HUG','FILL'].includes(node.layoutSizingVertical)) sizing.vertical = node.layoutSizingVertical;
+    if (sizing.horizontal === 'FIXED' && Number.isFinite(node.width) && node.width >= 0) sizing.width = node.width;
+    if (sizing.vertical === 'FIXED' && Number.isFinite(node.height) && node.height >= 0) sizing.height = node.height;
+    if (Object.keys(sizing).length) out.instanceSizing = sizing;
+  }
 
   // dump v1.7: INSTANCE primary fill — the stub-paint gap: a stub with
   // observed geometry but no paint renders invisible. Read-only subtree walk,

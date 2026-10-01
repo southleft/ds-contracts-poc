@@ -10,6 +10,8 @@ import { reactEmitter, reactInlineEmitter } from './emitter.js';
 import { mountGenerated } from './react-test-runtime.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { createFigmaEngine } from './emit-figma-script.js';
+import { emitHtml } from './emit-html.js';
+import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
@@ -317,4 +319,48 @@ test('native filled-path color overrides do not require a resize viewport', () =
   const script=engine.buildComponentScript(parent,new Map([[child.id,child],[parent.id,parent]]));
   assert.match(script,/filled-path-instance-ink-tree-mismatch/);
   assert.equal(script.includes('per-instance override \"color\"'),false);
+});
+
+
+test('typed vector ink follows slot fallback anatomy, caller clearing and native attached instances', async()=>{
+ const f=drawingFixture();
+ f.set.propertyDefinitions!.Icon={type:'INSTANCE_SWAP',defaultValue:'50:1'};
+ for(let i=0;i<2;i++){const n=f.mark(i);n.propRefs={mainComponent:'Icon'};
+  n.hostOverrides![0].fields.push('fontSize','letterSpacing','lineHeightPercent','lineHeightPercentFontSize','lineHeightPx','inheritFillStyleId');}
+ const original=JSON.stringify([...f.scope]),result=f.read(),parent=result.contract;
+ const slot=walkAnatomy(parent).find(p=>p.part.slot)?.part;assert(slot?.slot?.renderDefault);
+ const fallback=Object.values(slot!.parts??{})[0]?.component;assert.equal(fallback?.id,f.child.id);assert(fallback?.overrides?.color);
+ assert.equal(JSON.stringify([...f.scope]),original,'caller paint does not rewrite main/default');
+ const tree={primitives:{drawing:{size:{$type:'dimension',$value:'24px'},ink:{$type:'color',$value:'#123456'}},...result.result.mintedTokens!.tree},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const scope=new Map([[f.child.id,f.child],[parent.id,parent]]),ctx={tokens:tree,icons:new Map<string,string>(),contracts:scope};
+ assert.throws(()=>emitHtml(parent,{...ctx,tokens:new Set<string>()}),/SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html/);
+ assert.throws(()=>emitWebComponent(parent,{...ctx,tokens:new Set<string>()}),/SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components/);
+ const engine=createFigmaEngine(ctx);const data=engine.compileComponentData(parent,scope);
+ const all=(n:any):any[]=>[n,...(n.children??[]).flatMap(all)];
+ for(const v of data.variants){const slotSpec=all(v.spec).find(n=>n.type==='slot');assert.equal(slotSpec.slotDefault,undefined,'fallback anatomy is not duplicated as a native sample');assert.equal(slotSpec.children.length,1);assert.equal(slotSpec.children[0].instanceInk.writeProtocol,'attached-v1');}
+ const script=engine.buildComponentScript(parent,scope);assert(script.indexOf('if (parent && !spec.callerSlotProperty) parent.appendChild(node)')<script.indexOf('if (spec.instanceInk || spec.instanceStrokeWeight)'));
+ const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ (host.figma as unknown as {createVector:()=>unknown}).createVector=()=>{const node=(host.figma as unknown as {createRectangle:()=>Record<string,unknown>}).createRectangle();Object.assign(node,{type:'VECTOR',isMask:false,blendMode:'PASS_THROUGH',vectorPaths:[]});return node;};
+ const run=(source:string)=>vm.runInContext(`(async()=>{${source}\n})()`,context);
+ await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));
+ const main=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===f.child.id)!;
+ const snapshot=()=>JSON.stringify(main.findAll().map(n=>[n.id,n.type,n.width,n.height,n.fills??null]));const before=snapshot();
+ await run(script);assert.equal(snapshot(),before,'native fallback paint preserves the main component');
+ const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
+ const nativeInks=owner.children!.map(v=>{const instance=v.findOne(n=>n.type==='INSTANCE')!;assert(instance, v.name);const vector=instance.findOne(n=>n.type==='VECTOR')!;assert(vector,v.name);return JSON.stringify(vector.fills);});
+ assert.equal(new Set(nativeInks).size,2,'native variants carry both caller paints');
+ const browser=await chromium.launch();
+ try{for(const emitter of [reactEmitter,reactInlineEmitter]){const parentFiles=emitter.emit(parent,ctx),childFiles=emitter.emit(f.child,ctx),page=await browser.newPage();
+  try{const render=await mountGenerated(page,parent.name,parentFiles[0].contents,parentFiles.find(x=>x.path.endsWith('.css'))?.contents,{Glyph:{tsx:childFiles[0].contents,css:childFiles.find(x=>x.path.endsWith('.css'))?.contents}});
+   await page.addStyleTag({content:':root{--drawing-size:24px;--drawing-ink:#123456;'+result.result.mintedTokens!.entries.map(e=>'--'+e.ref.slice(1,-1).replaceAll('.','-')+':'+e.value).join(';')+'}'});
+   const ink=()=>page.evaluate(()=>{const el=[...document.querySelectorAll('#root *')].find(el=>getComputedStyle(el).maskImage!=='none');return el?getComputedStyle(el).backgroundColor:null;});
+   await render({size:'small'});assert.equal(await ink(),'rgb(181, 24, 51)',emitter.name);
+   await render({size:'large'});assert.equal(await ink(),'rgb(14, 97, 186)',emitter.name);
+   for(const children of [null,false,'',0,'Caller']){await render({children});assert.equal(await ink(),null,'explicit caller content/clearing suppresses fallback');}
+   await render({size:'small'});assert.equal(await ink(),'rgb(181, 24, 51)');
+   const own=await browser.newPage();try{await mountGenerated(own,f.child.name,childFiles[0].contents,childFiles.find(x=>x.path.endsWith('.css'))?.contents);await own.addStyleTag({content:':root{--drawing-size:24px;--drawing-ink:#123456}'});assert.equal(await own.evaluate(()=>getComputedStyle([...document.querySelectorAll('#root *')].find(e=>getComputedStyle(e).maskImage!=='none')!).backgroundColor),'rgb(18, 52, 86)');}finally{await own.close();}
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+ for(const bad of ['opacity','vectorPaths','relativeTransform']){const clone=structuredClone(f.set);clone.variants[0].children![0].hostOverrides![0].fields.push(bad);const r=proposeFromDump(clone,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Glyph',f.child.id]]),contractIdByKey:new Map([['glyph-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});const c=ContractSchema.parse(r.contract);assert.equal(walkAnatomy(c).find(p=>p.part.slot)?.part.parts,undefined,bad);}
+ const wrong=structuredClone(parent);Object.values(walkAnatomy(wrong).find(p=>p.part.slot)!.part.parts!)[0].component!.id='foreign';const errors:string[]=[];validateContract(wrong,scope,errors,new Map());assert(errors.some(e=>e.includes('SLOT_RUNTIME_DEFAULT_ANATOMY_MISMATCH')));
 });
