@@ -20,6 +20,8 @@ const DEFAULT_OUTPUT = path.join(ROOT, "dist", "release-candidate");
 const PACKAGES = [
   {
     directory: "packages/schema",
+    // Reviewed 2026-10-01: contract-schema imports the pure native LINE domain;
+    // its runtime and declaration must accompany installed schema validation.
     // Reviewed 2026-08-23 for schema 17: dist/migrate.* (the v16 → v17 codemod) ships.
     // Reviewed 2026-08-25 for schema 19 (REQUIRED FACTS): dist/archetype.* ships.
     // It is the archetype vocabulary itself — the 20 classes plus `none`, the
@@ -45,6 +47,8 @@ const PACKAGES = [
       "dist/index.js",
       "dist/migrate.d.ts",
       "dist/migrate.js",
+      "dist/native-line.d.ts",
+      "dist/native-line.js",
       "dist/stroked-path.d.ts",
       "dist/stroked-path.js",
       "dist/validate.d.ts",
