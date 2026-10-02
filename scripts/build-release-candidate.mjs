@@ -20,6 +20,8 @@ const DEFAULT_OUTPUT = path.join(ROOT, "dist", "release-candidate");
 const PACKAGES = [
   {
     directory: "packages/schema",
+    // Reviewed 2026-10-01: schema validation and both emitters import the pure
+    // absolute-geometry domain. Its runtime and declaration are public dependencies.
     // Reviewed 2026-10-01: contract-schema imports the pure native LINE domain;
     // its runtime and declaration must accompany installed schema validation.
     // Reviewed 2026-08-23 for schema 17: dist/migrate.* (the v16 → v17 codemod) ships.
@@ -37,6 +39,8 @@ const PACKAGES = [
     expected: [
       "README.md",
       "contract.schema.json",
+      "dist/absolute-geometry.d.ts",
+      "dist/absolute-geometry.js",
       "dist/archetype.d.ts",
       "dist/archetype.js",
       "dist/contract-schema.d.ts",
