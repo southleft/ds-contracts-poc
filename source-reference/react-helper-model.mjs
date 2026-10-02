@@ -428,7 +428,22 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       const imported = raw?.declarations?.find(
         (d) => ts.isImportClause(d) || ts.isImportSpecifier(d),
       );
-      if (imported && (!decl || decl.getSourceFile().isDeclarationFile)) {
+      let executableEdge;
+      if (imported) {
+        let imp = imported;
+        while (imp && !ts.isImportDeclaration(imp)) imp = imp.parent;
+        if (imp && ts.isStringLiteral(imp.moduleSpecifier))
+          executableEdge = resolution.find(
+            r => r.importer === realpathSync(imp.getSourceFile().fileName) &&
+              r.specifier === imp.moduleSpecifier.text,
+          );
+      }
+      // A checker may bind a CommonJS default to a nested executable function.
+      // Load the original witnessed module instead of jumping past its setup.
+      if (imported && ts.isImportClause(imported) && imported.name && !executableEdge)
+        throw new Refused("executable-import-unresolved", n);
+      if (imported && (!decl || decl.getSourceFile().isDeclarationFile ||
+          (ts.isImportClause(imported) && imported.name && executableEdge?.format === "cjs"))) {
         let imp = imported;
         while (imp && !ts.isImportDeclaration(imp)) imp = imp.parent;
         if (!imp || !ts.isStringLiteral(imp.moduleSpecifier))

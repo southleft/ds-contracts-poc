@@ -16,6 +16,8 @@ export interface HelperRuntimeImport {
   importer: string;
   specifier: string;
   file: string;
+  /** Host-only format from the original bundler's resolved input. */
+  format?: "cjs" | "esm";
 }
 export type HelperRuntimeValue =
   | { kind: "literal"; type: string; value?: HelperPrimitive }
