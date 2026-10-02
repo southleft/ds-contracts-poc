@@ -9693,6 +9693,45 @@ function carrySlotDefaultInk(m: Merged, part: Record<string,unknown>, slot: Reco
   ctx.notes.push(`${where}: exact typed VECTOR caller paint carried on omitted-slot default anatomy; linked main ink and explicit caller content are unchanged`);
 }
 
+/** A wrapper owns its box; omitted caller content owns its observed presence
+ * and the linked drawing's usage size. Both stay ordinary anatomy, so explicit
+ * caller content and clearing bypass the fallback without resizing the main. */
+function carryWrappedSlotDefault(wrapper: Merged, content: Merged, part: Record<string, unknown>, slot: Record<string, unknown>, ctx: Ctx, where: string, selfKey: string) {
+  const items = slot.defaultContent as Array<{id: string; props?: Record<string, string | boolean>; text?: string}> | undefined;
+  if (!ctx.mint || !slot.renderDefault || items?.length !== 1) return;
+  const previous = ctx.presenceVariants;
+  const domain = previous ?? ctx.totalVariants;
+  if (part.visibleWhen || domain.every(v => wrapper.occ.some(o => o.variant === v)))
+    ctx.presenceVariants = wrapper.occ.map(o => o.variant).filter(v => domain.includes(v));
+  let gate: Record<string, unknown> | undefined;
+  try { gate = visibilityFromPresence(content, ctx, `${where}/${content.name}`); }
+  finally { ctx.presenceVariants = previous; }
+  if (gate === OMIT_PART) {
+    delete slot.renderDefault;
+    ctx.notes.push(`${where}: slot-default-presence-not-carried — no exact gate explains observed child absence; runtime fallback refused, sample content retained`);
+    return;
+  }
+  carrySlotDefaultInk(content, part, slot, ctx, where, selfKey);
+  const item = items[0];
+  const sizes = content.occ.map(o => directInstanceSize(o.node, item.id, ctx));
+  const sized = sizes.length > 0 && sizes.every(Boolean) && sizes.some(s => s!.observed !== s!.main);
+  if (!gate && !sized) return;
+  const parts = (part.parts as Record<string, Record<string, unknown>> | undefined) ?? {};
+  const key = Object.keys(parts)[0] ?? partKey('defaultContent', ctx, `${where}/defaultContent`, selfKey);
+  const fallback = parts[key] ?? {component: {...item}};
+  if (gate) fallback.visibleWhen = gate;
+  if (sized) {
+    const component = fallback.component as Record<string, unknown>;
+    const existing = ctx.mint.refOverrides.find(r => r.component === component);
+    const target = existing?.target ?? {};
+    mintObservation(ctx, target, `${where}/${content.name}`, 'size', 'px', content.occ.map((o, i) => ({variant: o.variant, value: sizes[i]!.observed})));
+    if (!existing) ctx.mint.refOverrides.push({component, target});
+  }
+  parts[key] = fallback;
+  part.parts = parts;
+  ctx.notes.push(`${where}: omitted-slot default keeps observed child presence and identity-qualified drawing size on caller anatomy; explicit slot input and linked main are unchanged`);
+}
+
 function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
   occ:Array<{variant:string;value:string}>,state?:string,partKey?:string) {
   if(!ctx.mint)return;
@@ -10740,6 +10779,7 @@ function buildPartFromEvidence(
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
     nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt
+    mintFixedSize(m, part, tokens, ctx, where);
     const slot: Record<string, unknown> = { name: allocatedInputName(ctx, soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -10749,8 +10789,10 @@ function buildPartFromEvidence(
     else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
     part.slot = slot;
     ctx.slots.push({ part, property: soleSwap, optional });
-    carryClip(m, part, ctx, where, { carry: false, owner: 'slot part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
+    carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
+    if (part.declared && !part.element) part.element = 'div'; // explicit FRAME wrapper owns carried clipping
     if (visibleWhen) part.visibleWhen = visibleWhen;
+    carryWrappedSlotDefault(m, soleChild, part, slot, ctx, where, selfKey);
     return part;
   }
 

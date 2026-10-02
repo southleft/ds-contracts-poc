@@ -5220,7 +5220,7 @@ function partToSpecInner(
     const description = slotPropertyDescription(part.slot);
     if (description) spec.slotDescription = description;
     if (part.slot.renderDefault && part.parts) {
-      spec.children = Object.entries(part.parts).flatMap(([childName, child]) => partToSpecs(childName, child, contract, byId, ctx, subst));
+      spec.children = variantParts(part.parts, subst).flatMap(([childName, child]) => partToSpecs(childName, child, contract, byId, ctx, subst));
     } else if ((part.slot.defaultContent?.length ?? 0) > 0) {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {
         const dep = byId.get(item.id)!;
