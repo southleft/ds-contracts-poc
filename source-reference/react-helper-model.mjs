@@ -1394,6 +1394,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         const a = this.scalar(l, n),
           b = this.scalar(r, n);
         switch (op) {
+          // scalar() excludes object and opaque coercion before JavaScript's
+          // primitive equality rules can run; no user conversion hook executes.
+          case ts.SyntaxKind.EqualsEqualsToken:
+            return a == b;
+          case ts.SyntaxKind.ExclamationEqualsToken:
+            return a != b;
           case ts.SyntaxKind.EqualsEqualsEqualsToken:
             return a === b;
           case ts.SyntaxKind.ExclamationEqualsEqualsToken:
