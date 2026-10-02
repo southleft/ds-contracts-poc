@@ -1,3 +1,4 @@
+import {normalizeAbsoluteGeometry} from '@ds-contracts/schema';
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
@@ -272,11 +273,15 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       [camel(channel),resolveValue(stripBraces(ref))]))
   ])));
   const jointConst=jointTables.length?`\nconst J: Array<Record<string, ${nativeLineStyleType}>> = ${JSON.stringify(jointStyles,null,2)};\n`:'';
-  const placementTables = walkAnatomy(contract).filter(row => row.part.absolutePlacementByCombination)
-    .map(row => ({name: row.name, table: row.part.absolutePlacementByCombination!}));
-  const placementStyles = Object.fromEntries(placementTables.map(({name, table}) => [name,
-    Object.fromEntries(table.rows.map(row => [JSON.stringify(row.values),
-      {position: 'absolute', left: row.left, top: row.top, right: 'auto', bottom: 'auto'}]))]));
+  const placementTables = walkAnatomy(contract).flatMap(({name,part}) => {
+    const table = part.absoluteGeometryByCombination ?? part.absolutePlacementByCombination;
+    return table ? [{name,props:table.props,styles:Object.fromEntries(table.rows.map(row=>[
+      JSON.stringify(row.values),'geometry' in row
+        ? Object.fromEntries(Object.entries(normalizeAbsoluteGeometry(row.geometry).css).map(([key,value])=>[camel(key),value]))
+        : {position:'absolute',left:row.left,top:row.top,right:'auto',bottom:'auto'},
+    ]))}] : [];
+  });
+  const placementStyles = Object.fromEntries(placementTables.map(({name,styles})=>[name,styles]));
   const placementConst = placementTables.length ? `\nconst PL: Record<string, Record<string, ${nativeLineStyleType}>> = ${JSON.stringify(placementStyles,null,2)};\n` : '';
   const partVariantProps = new Map<string, Set<string>>();
   const addVariant = (prop: string, value: string, partName: string, decls: StyleRecord) => {
@@ -640,6 +645,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // the sole "root"; multi-root: each of dialog/backdrop/… (each gets the
     // root layout treatment). Byte-identical for single-root.
     compilePart(partName, part, p.length === 1);
+    if (part.absoluteGeometry) baseStyles[partName] = {...baseStyles[partName],
+      ...Object.fromEntries(Object.entries(normalizeAbsoluteGeometry(part.absoluteGeometry).css).map(([key,value])=>[camel(key),value]))};
   }
   // A2 grid: style entries the anatomy walk cannot produce — EMPTY areas'
   // placeholder elements (G4's dual-slot convention: the placement is
@@ -843,7 +850,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     const placement = placementTables.find(row => row.name === partName);
     if (placement) {
-      const values = placement.table.props.map(prop => `${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(', ');
+      const values = placement.props.map(prop => `${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(', ');
       pieces.push(`...PL[${JSON.stringify(partName)}][JSON.stringify([${values}])]`);
     }
     pieces.push(...extra);

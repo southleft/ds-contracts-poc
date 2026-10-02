@@ -5,10 +5,10 @@
   "nodeId": "53:4618",
   "mode": "reviewable-inversion",
   "variantCount": 1,
-  "contractSha256": "be97a13812e42982018f7d39ce8f95366eee98d5c0c9c87c004d2b3cb5ca3444",
+  "contractSha256": "826cf8bc16719557bb3b6cd0effda757caea1de2298b21d2da8c87f3ef83cace",
   "carriage": {
-    "carried": 11,
-    "named": 13,
+    "carried": 12,
+    "named": 12,
     "silent": 0
   },
   "silentRows": [],
@@ -84,8 +84,8 @@
       0
     ],
     "layoutPositioning=ABSOLUTE": [
-      0,
       1,
+      0,
       0
     ],
     "vector geometry": [
@@ -127,12 +127,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Image/Image.module.css": "636cf492955be9f647a7f74025f5ac1a2b7f66d25ba476a595cb2fad04a3faed",
+    "react/Image/Image.module.css": "d81b8627b4216dc0a4e194ea88851d0a5cdfbf38e3d9fbb33b72ee2ca381b2be",
     "react/Image/Image.stories.tsx": "801a16b5148a0861de91bc958a6c51716cea3c4af0f1a52cfb33b55f8855907b",
     "react/Image/Image.tsx": "40cb504c892d4869a684acb5280fe91f83eead5678bb12628cce949efdc2bc4a",
     "react/Image/index.ts": "977fc22315de6b799603d19e4bcfa3f725d8af82ba0b909d87b4019986ce06f6",
     "wc/ds-image.ts": "4438b26e9b5e15a8867b13b0474be58a295f90444860967b2a9c6a612993013c",
-    "wc/ds-image.css.ts": "022cc42e9021880d1990e6fa9a8b1dd1dfbf994edd60d82d282bf197c99c15d5",
+    "wc/ds-image.css.ts": "59733a63aa41f9692085c1d3a5f67631461f776709536111209994c6e5ac47f1",
     "wc/ds-image.demo.html": "b361a7b3f9afa180e1e80670a856cd299d4aebd005c699d9be44a65b093ecbf6",
     "wc/ds-image.custom-elements.json": "21a572be4f8d6efe69634be9a0b4be57750283164f8e0cce1e1210ec2fd4457f"
   },

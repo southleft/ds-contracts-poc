@@ -1,4 +1,5 @@
 import {nativeLineIssue,nativeLineFootprint} from './native-line.js';
+import {normalizeAbsoluteGeometry} from './absolute-geometry.js';
 export * from './native-line.js';
 /**
  * The contract schema — the shape of the single source of truth. (v2)
@@ -705,6 +706,46 @@ export const AbsolutePlacementByCombinationSchema = z.strictObject({
     left: z.number().finite(),
     top: z.number().finite(),
   })).min(1),
+});
+
+/** A measured child rectangle and its parent's captured border-box basis.
+ * Both surfaces resolve the same carrier; CSS border compensation is explicit.
+ * Synthetic or independently bound dimensions are not admissible evidence. */
+export const AbsoluteGeometrySchema = z.strictObject({
+  box: z.strictObject({
+    x: z.number().finite(), y: z.number().finite(),
+    width: z.number().finite().nonnegative(), height: z.number().finite().nonnegative(),
+    right: z.number().finite(), bottom: z.number().finite(),
+    constraints: z.strictObject({
+      horizontal: z.enum(['LEFT', 'RIGHT', 'CENTER', 'STRETCH', 'SCALE']),
+      vertical: z.enum(['TOP', 'BOTTOM', 'CENTER', 'STRETCH', 'SCALE']),
+    }),
+  }),
+  parent: z.strictObject({width: z.number().finite().positive(), height: z.number().finite().positive()}),
+  border: z.strictObject({
+    left: z.number().finite().nonnegative(), right: z.number().finite().nonnegative(),
+    top: z.number().finite().nonnegative(), bottom: z.number().finite().nonnegative(),
+  }),
+}).superRefine((geometry, ctx) => {
+  try { normalizeAbsoluteGeometry(geometry); }
+  catch (error) { ctx.addIssue({code: 'custom', message: String((error as Error).message)}); }
+});
+export const AbsoluteGeometryByCombinationSchema = z.strictObject({
+  props: z.array(z.string().min(1)).min(1),
+  rows: z.array(z.strictObject({
+    values: z.array(z.string().nullable()).min(1), geometry: AbsoluteGeometrySchema,
+  })).min(1),
+}).superRefine((table, ctx) => {
+  if (new Set(table.props).size !== table.props.length)
+    ctx.addIssue({code:'custom', path:['props'], message:'absolute-geometry-duplicate-axis'});
+  const seen = new Set<string>();
+  table.rows.forEach((row, i) => {
+    if (row.values.length !== table.props.length)
+      ctx.addIssue({code:'custom', path:['rows',i,'values'], message:'absolute-geometry-tuple-arity'});
+    const key = JSON.stringify(row.values);
+    if (seen.has(key)) ctx.addIssue({code:'custom', path:['rows',i,'values'], message:'absolute-geometry-duplicate-tuple'});
+    seen.add(key);
+  });
 });
 
 /** v17 (the hover-plane round) — an interaction state whose binding is ALSO a
@@ -2253,6 +2294,9 @@ export interface Part {
   /** Parent-owned fixed CSS pixel offsets for an ordinary component root. */
   absolutePlacement?: { left: number; top: number };
   absolutePlacementByCombination?: z.infer<typeof AbsolutePlacementByCombinationSchema>;
+  /** Captured ordinary-child geometry, separate from component-root offsets. */
+  absoluteGeometry?: z.infer<typeof AbsoluteGeometrySchema>;
+  absoluteGeometryByCombination?: z.infer<typeof AbsoluteGeometryByCombinationSchema>;
   /** v7: per-enum-value layout overrides merged over `layout`. */
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
   /** v7: conditional literal styles (code-side; canvas fidelity limit). */
@@ -2756,6 +2800,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     placement: GridPlacementSchema.optional(),
     absolutePlacement: z.strictObject({left: z.number().finite(), top: z.number().finite()}).optional(),
     absolutePlacementByCombination: AbsolutePlacementByCombinationSchema.optional(),
+    absoluteGeometry: AbsoluteGeometrySchema.optional(),
+    absoluteGeometryByCombination: AbsoluteGeometryByCombinationSchema.optional(),
     /** v7. */
     layoutByProp: LayoutByPropSchema.optional(),
     /** v7. */
@@ -2849,7 +2895,13 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
      *  empty object supplies an empty Fragment; omission leaves children unset. Other
      *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
-  }).superRefine(validateGridPart),
+  }).superRefine(validateGridPart).superRefine((part, ctx) => {
+    if (!(part.absoluteGeometry || part.absoluteGeometryByCombination)) return;
+    if (part.absoluteGeometry && part.absoluteGeometryByCombination)
+      ctx.addIssue({code:'custom', message:'absolute-geometry-multiple-carriers'});
+    if (part.absolutePlacement || part.absolutePlacementByCombination || part.placement || part.overlay)
+      ctx.addIssue({code:'custom', message:'absolute-geometry-competing-placement'});
+  }),
 );
 
 /** v6: the interaction SURFACE, declared — never the implementation.
@@ -3211,6 +3263,33 @@ export const ContractSchema = z.strictObject({
   for (const alias of omittedCodeBindingConflicts(c, omissionAliases)) {
     ctx.addIssue({ code: 'custom', path: ['props'], message: `omitted-plane code binding "${alias}" collides with another prop, slot, event or generated event binding` });
   }
+  // Placement tables describe every plane of their named finite axes. A
+  // missing row cannot inherit a different rectangle or an explicit false.
+  const visitGeometry = (part: Part, path: Array<string | number>, nested: boolean) => {
+    if ((part.absoluteGeometry || part.absoluteGeometryByCombination) && !nested)
+      ctx.addIssue({code:'custom', path, message:'absolute-geometry-requires-parent'});
+    const table = part.absoluteGeometryByCombination;
+    if (table) {
+      const axes = absentVariantAxes(c);
+      const domains = table.props.map(name => {
+        const axis = axes.find(axis => axis.prop.name === name);
+        if (!axis) ctx.addIssue({code:'custom', path:[...path,'absoluteGeometryByCombination','props'], message:`absolute-geometry-axis-unqualified: ${name}`});
+        return axis?.options.map(value => value === null ? null : String(value));
+      });
+      const seen = new Set(table.rows.map(row => JSON.stringify(row.values)));
+      for (const [i,row] of table.rows.entries()) row.values.forEach((value,j) => {
+        if (domains[j] && !domains[j]!.includes(value))
+          ctx.addIssue({code:'custom', path:[...path,'absoluteGeometryByCombination','rows',i,'values',j], message:'absolute-geometry-axis-value-unqualified'});
+      });
+      // Validate completeness by count after domain/duplicate/arity checks;
+      // avoid expanding a potentially large Cartesian product.
+      if (domains.every(domain => domain !== undefined) &&
+          seen.size !== domains.reduce((count,domain) => count * domain!.length,1))
+        ctx.addIssue({code:'custom', path:[...path,'absoluteGeometryByCombination','rows'], message:'absolute-geometry-combination-incomplete'});
+    }
+    for (const [key,child] of Object.entries(part.parts ?? {})) visitGeometry(child,[...path,'parts',key],true);
+  };
+  for (const [name,part] of Object.entries(c.anatomy)) visitGeometry(part,['anatomy',name],false);
   // G8 — the ROOT half of the definite-axis referee. A top-level anatomy part
   // has no parent cell to define its box, so a grid root always states both
   // axes (the nested half runs from each part's own child sweep).
@@ -3289,6 +3368,16 @@ export function resolveComponentPlacement(part: Part, subst: Record<string, stri
   const row = table.rows.find(row => table.props.every((prop, i) => row.values[i] === (Object.hasOwn(subst, prop) ? subst[prop] : null)));
   if (!row) throw Error('component-absolute-placement-combination-unavailable');
   return { left: row.left, top: row.top };
+}
+
+/** Resolve a captured plane without substituting omission or another axis value. */
+export function resolveAbsoluteGeometry(part: Part, subst: Record<string, string>): Part['absoluteGeometry'] {
+  const table = part.absoluteGeometryByCombination;
+  if (!table) return part.absoluteGeometry;
+  const row = table.rows.find(row => table.props.every((prop,i) =>
+    row.values[i] === (Object.hasOwn(subst,prop) ? subst[prop] : null)));
+  if (!row) throw Error('absolute-geometry-combination-unavailable');
+  return row.geometry;
 }
 
 /** The token record a part carries under one concrete variant combo:

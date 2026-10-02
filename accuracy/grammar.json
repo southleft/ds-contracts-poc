@@ -46,13 +46,13 @@
     {
       "id": "canvas",
       "path": "extract/figma/conformance/MANIFEST.json",
-      "count": 157,
+      "count": 158,
       "expectations": {
-        "CARRIED": 111,
+        "CARRIED": 112,
         "LEDGERED": 38,
         "REFUSED": 8
       },
-      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 154 -> 157. NOT this branch's movement — extract/figma/conformance/MANIFEST.json already carried 157 cases (CARRIED 110) at this branch's base e884d672 and is byte-identical at HEAD; the pin had simply not been re-recorded when those three cases landed."
+      "pinnedBecause": "RE-PINNED 2026-10-01: 157 -> 158 after captured SCALE geometry qualified the positive case and an independent contradictory-parent refusal control was added. CARRIED 111+1=112; REFUSED 8-1+1=8; LEDGERED stays38. No fidelity threshold or source conservation invariant changed."
     },
     {
       "id": "draw-read-closure",

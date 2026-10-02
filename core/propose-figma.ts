@@ -1,3 +1,4 @@
+import {AbsoluteGeometrySchema, normalizeAbsoluteGeometry, type Part} from '@ds-contracts/schema';
 import {nativeLineIssue, filledPathIssue} from '../scripts/contract-schema.js';
 import { allocateFigmaPropertyNames } from './figma-names.js';
 import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
@@ -4873,6 +4874,22 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
 function drawnAxisOf(o: Occ, dim: 'width' | 'height', depth = 0): number | undefined {
   if (o.node.bbox) return o.node.bbox[dim];
   if (typeof o.node.fixedSize?.[dim] === 'number') return o.node.fixedSize[dim];
+  // Both dump producers record far insets against the measured parent box.
+  // A real absolute child therefore witnesses that parent's drawn extent.
+  // Only explicit FIXED non-FILL axes may turn it into a sizing carrier.
+  const own = o.node.layout;
+  const fill = dim === 'width' ? o.node.fillWidth : o.node.fillHeight;
+  const fixed = own && (own.mode === 'HORIZONTAL' || own.mode === 'VERTICAL') &&
+    ((dim === 'width') === (own.mode === 'HORIZONTAL') ? own.primarySizing : own.counterSizing) === 'FIXED';
+  if (fixed && !fill && !(o.node as {__synthetic?:boolean}).__synthetic) {
+    const boxes=(o.node.children ?? []).filter(child=>!(child as {__synthetic?:boolean}).__synthetic)
+      .map(child=>absBoxOf(child)).filter((box):box is AbsBox=>box!==undefined);
+    if (boxes.some(box=>Object.values(box.constraints ?? {}).includes('SCALE'))) {
+      const extents=boxes.map(box=>dim==='width'?box.x+box.width+box.right:box.y+box.height+box.bottom);
+      if(extents.length && extents.every(value=>Number.isFinite(value) && value>0 && Math.abs(value-extents[0])<=.05))
+        return extents[0];
+    }
+  }
   const parent = o.parent?.node;
   const l = parent?.layout;
   if (!parent || !l || depth > 16 || (l.mode !== 'HORIZONTAL' && l.mode !== 'VERTICAL') || l.wrap) return undefined;
@@ -4992,7 +5009,7 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { to
       for (const o of m.occ) {
         const axes = ctx.mint.axisValuesByVariant.get(o.variant);
         const tuple = ctx.mint.axes.map(a => axes?.[a.propName]);
-        const size = fixedRows.has(o) ? o.node.fixedSize?.[dim] : undefined;
+        const size = fixedRows.has(o) ? drawnAxisOf(o,dim) : undefined;
         if (tuple.some((value,i) => value === undefined || !ctx.mint!.axes[i].values.includes(value)) ||
             fixedRows.has(o) && (size === undefined || !Number.isFinite(size) || size < 0)) { complete = false; break; }
         const value = fixedRows.has(o) ? `${size}px` : undefined;
@@ -5005,7 +5022,7 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { to
           rows:[...cells.values()].filter((c):c is {values:string[];value:string} => c.value !== undefined)};
         const obs: MintObservation & {target:Record<string,string>} = {nodePath:where,part:partPathOf(where),
           cssProperty:dim,kind:'px',target:carry.tokens,
-          occurrences:fixedIn.map(o => ({variant:o.variant,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)!,value:o.node.fixedSize![dim]!}))};
+          occurrences:fixedIn.map(o => ({variant:o.variant,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)!,value:drawnAxisOf(o,dim)!}))};
         const placed = placeLiteralTable(ctx.mint,obs,table,new Set(ctx.axes.filter(a => a.omitted).map(a => a.propName)),carry.part);
         if (placed.carried) {
           ctx.notes.push(`${where} ${dim}: CARRIED AS SCOPED FIXED GEOMETRY in ${table.rows.length} observed combinations; HUG/FILL rows keep their existing styling; no undrawn dimension inferred`);
@@ -5036,6 +5053,7 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { to
 }
 
 function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  if (part.absoluteGeometry || part.absoluteGeometryByCombination) return;
   const withFixed = m.occ.filter((o) => o.node.fixedSize !== undefined);
   if (withFixed.length === 0) return;
   // A producer that writes `fixedSize` on an AUTO-LAYOUT node (the plugin
@@ -5136,6 +5154,52 @@ const absBoxOf = (n: DumpNode): AbsBox | undefined => {
   return undefined;
 };
 
+/** Preserve observed SCALE geometry instead of minting a guessed fixed box.
+ * The inset sum is the captured parent extent (both dump producers derive
+ * far edges from that measured parent); independent extents must agree. */
+function carryCapturedAbsoluteGeometry(m: Merged, part: Record<string,unknown>, tokens: Record<string,string>, ctx: Ctx, opts: {text?:boolean;size?:boolean}): string | undefined {
+  if (opts.size !== true || opts.text || part.component || part.slot && !part.element)
+    return 'absolute-geometry-host-unproven';
+  if (part.layoutByProp || (part.layout as {grow?:boolean}|undefined)?.grow || part.shape || part.overlay || part.placement)
+    return 'absolute-geometry-competing-placement';
+  if (['width','height'].some(dim => tokens[dim] || m.occ.some(o=>o.node.bound?.[dim])))
+    return 'absolute-placement-bound-size-needs-owner';
+  const rows: Array<{values:Array<string|null>;geometry:NonNullable<Part['absoluteGeometry']>}> = [];
+  const seen=new Map<string,string>();
+  for(const o of m.occ){
+    if ((o.node as {__synthetic?:boolean}).__synthetic || (o.parent?.node as {__synthetic?:boolean}|undefined)?.__synthetic)
+      return 'absolute-placement-synthetic-observation';
+    const raw=absBoxOf(o.node);
+    if(!raw?.constraints || !o.parent)return 'absolute-placement-parent-or-constraints-unqualified';
+    const parent={width:raw.x+raw.width+raw.right,height:raw.y+raw.height+raw.bottom};
+    for(const dim of ['width','height'] as const){
+      const independentlyCaptured=o.parent.node.bbox?.[dim] ?? o.parent.node.fixedSize?.[dim];
+      if(independentlyCaptured!==undefined && Math.abs(independentlyCaptured-parent[dim])>.05)
+        return 'absolute-placement-parent-inconsistent';
+    }
+    const parsed=AbsoluteGeometrySchema.safeParse({box:raw,parent,border:parentCssBorderInsets(o,ctx)});
+    if(!parsed.success)return parsed.error.issues[0].message;
+    normalizeAbsoluteGeometry(parsed.data);
+    const labels=axisValuesOf(o.variant),values=ctx.axes.map(axis=>{
+      const label=labels[axis.property];
+      return axis.omitted?.unsetValue===label?null:axisValue(axis,label??'');
+    });
+    if(ctx.axes.some((axis,i)=>!axis.values.includes(labels[axis.property]) || values[i]===''))
+      return 'absolute-geometry-axis-value-unqualified';
+    const key=JSON.stringify(values),value=JSON.stringify(parsed.data);
+    if(seen.has(key) && seen.get(key)!==value)return 'absolute-geometry-duplicate-plane-conflict';
+    if(!seen.has(key)){seen.set(key,value);rows.push({values,geometry:parsed.data});}
+  }
+  if(!rows.length)return 'absolute-geometry-observation-unavailable';
+  if(new Set(rows.map(row=>JSON.stringify(row.geometry))).size===1){
+    part.absoluteGeometry=rows[0].geometry;
+    return;
+  }
+  if(!ctx.axes.length || rows.length!==ctx.axes.reduce((n,axis)=>n*axis.values.length,1))
+    return 'absolute-geometry-combination-incomplete';
+  part.absoluteGeometryByCombination={props:ctx.axes.map(axis=>axis.propName),rows};
+}
+
 function carryAbsPlacement(
   m: Merged,
   part: Record<string, unknown>,
@@ -5197,6 +5261,16 @@ function carryAbsPlacement(
     return ledger(
       'the box rides a wrapper-union SYNTHETIC clone (a clone is not an observation) — the wrapper stays a pass-through in-flow box',
     );
+  }
+  const hasScale = m.occ.some(o=>Object.values(absBoxOf(o.node)?.constraints ?? {}).includes('SCALE'));
+  if (hasScale) {
+    const refusal=carryCapturedAbsoluteGeometry(m,part,tokens,ctx,opts);
+    if(refusal){
+      const constraint=m.occ.map(o=>absBoxOf(o.node)?.constraints).find(c=>c && Object.values(c).includes('SCALE'));
+      return ledger(`constraint ${constraint?.horizontal ?? 'unknown'}×${constraint?.vertical ?? 'unknown'} has no carried offset spelling for this observation — SCALE resizes the box PROPORTIONALLY with its parent, so qualified captured parent geometry is required; ${refusal}`);
+    }
+    ctx.notes.push(`${where}: absolute placement carried through captured geometry with its measured parent basis and each source constraint; both React and native Figma resolve the same carrier. Authored spacing and transforms are not inferred from the rectangle`);
+    return true;
   }
   if (!ctx.mint) return ledger('minting is off — the per-variant px offsets have no carrier');
   // THE ABSENT-CONSTRAINTS ASSUMPTION, NAMED. `?? 'LEFT'` / `?? 'TOP'` is a
@@ -5446,15 +5520,16 @@ function declareRelativeIfPositionedChildren(
   // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE).
   const positioned = Object.values(parts).some((p) => {
     const rec = p as {
+      absoluteGeometry?: unknown; absoluteGeometryByCombination?: unknown;
       declared?: Record<string, string>;
       stylesWhen?: Array<{ styles?: Record<string, string> }>;
     };
     return (
-      rec.declared?.position === 'absolute' ||
+      Boolean(rec.absoluteGeometry || rec.absoluteGeometryByCombination) || rec.declared?.position === 'absolute' ||
       (rec.stylesWhen ?? []).some((sw) => sw.styles?.['position'] === 'absolute')
     );
   });
-  if (!positioned) return;
+  if (!positioned || holder.absoluteGeometry || holder.absoluteGeometryByCombination) return;
   if (m && m.occ.some((o) => (o.node as { __synthetic?: boolean }).__synthetic === true)) return;
   const declared = (holder.declared as Record<string, string> | undefined) ?? {};
   if (declared.position === undefined) declared.position = 'relative';

@@ -3858,7 +3858,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       for (const line of [
         '✔ STRETCH pins BOTH edges on both axes (left+right / top+bottom)',
         '✔ a STRETCHED axis bakes NO width/height (a size would freeze the resize the constraint expresses)',
-        '✔ SCALE is REFUSED BY NAME, and the reason says why CSS cannot spell it',
+        '✔ qualified SCALE carries the exact measured box and parent basis',
+        '✔ CSS retains proportional offsets and extents',
+        '✔ native resizing retains the same source proportions',
+        '✔ inconsistent measured parent is REFUSED BY NAME',
+        '✔ a refused SCALE part has neither a carrier nor partial offsets',
         '✔ the LEFT×TOP assumption is NAMED (it used to be silent)',
         '✔ geometry is UNCHANGED (top-left + baked size) — naming the assumption moves no corpus',
         '✔ an EXPLICIT LEFT×TOP emits no assumption note (the note tracks the missing field, not the value)',
@@ -3874,7 +3878,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
       console.log(
-        'constraints-reach-the-decision: dump v1.13 spells all FIVE ConstraintType values, so STRETCH/SCALE stop being dropped at capture. STRETCH is CARRIED as both edges with no baked size (CSS left+right — the box tracks its parent, which a frozen width destroyed); SCALE keeps its named refusal (CSS has no proportional resize on a positioned box); an ABSENT field keeps today\'s LEFT×TOP geometry — no corpus moves — but the ASSUMPTION IS NAMED. NAMED LIMITS: (1) a dump already taken cannot be repaired — of 811 absBoxOf-visible boxes in the committed corpora, 352 carry no constraints field and need a RE-CAPTURE at v1.13+ before a STRETCH box can be told from a real top-left pin; (2) a STRETCH axis whose size is ALREADY BOUND is a contradiction, so the design\'s binding wins and the stretch is refused on that axis, BY NAME; (3) with STRETCH now reaching the mixed-constraint check, a set mixing STRETCH with another value refuses the whole placement rather than carrying a wrong one — correct, but a behaviour no committed corpus can exercise until a re-capture exists.',
+        'constraints-reach-the-decision: dump v1.13 spells all FIVE ConstraintType values, so STRETCH/SCALE stop being dropped at capture. STRETCH is CARRIED as both edges with no baked size (CSS left+right — the box tracks its parent, which a frozen width destroyed); SCALE carries its measured box and parent basis, with proportional offsets and extents verified in CSS and native resizing. An inconsistent basis is refused by name with no partial placement. An ABSENT field keeps today\'s LEFT×TOP geometry — no corpus moves — but the ASSUMPTION IS NAMED. NAMED LIMITS: (1) a dump already taken cannot be repaired — of 811 absBoxOf-visible boxes in the committed corpora, 352 carry no constraints field and need a RE-CAPTURE at v1.13+ before a STRETCH box can be told from a real top-left pin; (2) a STRETCH axis whose size is ALREADY BOUND is a contradiction, so the design\'s binding wins and the stretch is refused on that axis, BY NAME; (3) with STRETCH now reaching the mixed-constraint check, a set mixing STRETCH with another value refuses the whole placement rather than carrying a wrong one — correct, but a behaviour no committed corpus can exercise until a re-capture exists.',
       );
     },
   },

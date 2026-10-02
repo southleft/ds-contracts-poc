@@ -700,11 +700,30 @@
   {
    "id": "placement-constraints-scale",
    "construct": "an ABSOLUTE child whose constraints are SCALE x SCALE",
-   "expect": "REFUSED",
-   "why": "SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow",
+   "expect": "CARRIED",
+   "why": "Measured SCALE placement follows the source box proportions relative to its captured parent basis; the exact carrier must retain both source constraints and extents.",
    "check": {
-    "note": "constraint SCALE.SCALE has no carried offset spelling",
+    "carried": [
+     "\"absoluteGeometry\":\\{\"box\":\\{\"x\":10,\"y\":10,\"width\":16,\"height\":16,\"right\":94,\"bottom\":14,\"constraints\":\\{\"horizontal\":\"SCALE\",\"vertical\":\"SCALE\"\\}\\},\"parent\":\\{\"width\":120,\"height\":40\\}"
+    ],
+    "note": "absolute placement carried through captured geometry",
     "absent": [
+     "imported\\.case\\.a\\.left",
+     "imported\\.case\\.a\\.right"
+    ]
+   },
+   "status": "green"
+  },
+  {
+   "id": "placement-constraints-scale-unqualified-parent",
+   "construct": "SCALE child whose independently captured parent extent contradicts its measured inset sum",
+   "expect": "REFUSED",
+   "why": "An inconsistent source basis cannot justify proportional placement; refuse rather than inventing a parent extent.",
+   "check": {
+    "note": "absolute-placement-parent-inconsistent",
+    "absent": [
+     "\"absoluteGeometry\"",
+     "\"absoluteGeometryByCombination\"",
      "imported\\.case\\.a\\.left",
      "imported\\.case\\.a\\.right"
     ]
