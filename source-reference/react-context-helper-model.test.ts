@@ -32,6 +32,37 @@ function prepare(dir:string,text:string){
  return {text,file,reference,helper,calls,reads,native,execute};
 }
 const body=`const Context=scope?.[scopeName]?.[index]||BaseContext;const value=React.useContext(Context);if(value)return value;if(fallback!==void 0)return fallback;if(optional)return void 0;throw new Error('missing provider');`;
+test('sequence expressions preserve assignment order and the final context identity',()=>{
+ fixture('read',`let step=0;const Context=(step=1,step=step+1,BaseContext);const value=React.useContext(Context);if(step!==2)throw new Error('sequence order changed');return (step=step+1,value);`,f=>{
+  const value={label:'original'},model=modelReactContextHelperInput(f.reference,f.helper,[scalar('Consumer'),scalar(undefined)],f.reads(['BaseContext','React']),f.native(value));
+  assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+  assert.deepEqual(model.output,{kind:'context-value',value:7});
+  assert.equal(model.nativeCalls.length,1);assert.equal(model.runtimeVerified,false);assert.equal(model.acceptedContract,null);
+  assert.equal(f.execute(value),value);
+ });
+});
+test('sequence expressions cannot discard a refused left operand',()=>{
+ fixture('read',`const Context=(new Proxy({},{}),BaseContext);return React.useContext(Context);`,f=>{
+  const model=modelReactContextHelperInput(f.reference,f.helper,[scalar('Consumer'),scalar(undefined)],f.reads(['BaseContext','React']),f.native({label:'original'}));
+  assert.equal(model.status,'refused');
+ });
+});
+test('primitive loose equality follows original JavaScript coercion without granting runtime authority',()=>{
+ for(const expression of ["'0' == 0","'' == 0","'1' == true","null == void 0","'text' != 0","false != void 0","'7' == 7","false == 0"]){
+  fixture('read',`const Context=BaseContext;const value=React.useContext(Context);if(!(${expression}))throw new Error('primitive comparison changed');return value;`,f=>{
+   const value={label:'original'},model=modelReactContextHelperInput(f.reference,f.helper,[scalar('Consumer'),scalar(undefined)],f.reads(['BaseContext','React']),f.native(value));
+   assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+   assert.deepEqual(model.output,{kind:'context-value',value:7});assert.equal(f.execute(value),value);
+   assert.equal(model.runtimeVerified,false);assert.equal(model.acceptedContract,null);
+  });
+ }
+});
+test('loose equality still refuses object coercion before reading a conversion hook',()=>{
+ fixture('read',`const candidate={valueOf:()=>{throw new Error('conversion hook must not execute');}};const compared=candidate=='1';return React.useContext(BaseContext);`,f=>{
+  const model=modelReactContextHelperInput(f.reference,f.helper,[scalar('Consumer'),scalar(undefined)],f.reads(['React','BaseContext']),f.native({label:'original'}));
+  assert.equal(model.status,'refused');if(model.status==='refused')assert.equal(model.reason,'object-coercion-unproved');
+ });
+});
 test('source context helper paths consume only reached closure reads and preserve native context value identity',()=>{
  for(const name of ['read','useSettings'])fixture(name,body,f=>{
   const value={checked:true,label:'active'},args=[scalar('Consumer'),scalar(undefined)],reads=f.reads(['BaseContext','React']);

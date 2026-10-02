@@ -81,7 +81,7 @@ test('helper native guard refuses substituted globals, method objects and iterat
   } finally {await browser.close();}
 });
 
-test('helper modeling follows the original bundler runtime edge rather than a package declaration', async () => {
+for(const mode of ['declaration','executable'] as const)test(`helper modeling follows the original bundler runtime edge with ${mode} checker resolution`, async () => {
   const dir=realpathSync(mkdtempSync(path.join(tmpdir(),'react-helper-runtime-edge-')));
   try {
     mkdirSync(path.join(dir,'node_modules','formatter'),{recursive:true});
@@ -90,9 +90,10 @@ test('helper modeling follows the original bundler runtime edge rather than a pa
     writeFileSync(path.join(dir,'package-lock.json'),'{}');
     writeFileSync(path.join(dir,'style.css'),'button {color: black}');
     writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,jsx:'react',target:'ES2022',module:'ESNext',moduleResolution:'Bundler',skipLibCheck:true,paths:{react:[path.resolve('node_modules/@types/react/index.d.ts')]}}}));
-    writeFileSync(path.join(dir,'node_modules/formatter/package.json'),JSON.stringify({name:'formatter',exports:{'.':{types:'./index.d.ts',default:'./index.cjs'}}}));
-    writeFileSync(path.join(dir,'node_modules/formatter/index.d.ts'),'export default function format(input:{className?:string}):string;');
-    const runtime=path.join(dir,'node_modules/formatter/index.cjs');
+    const runtimeName=mode==='declaration'?'index.cjs':'index.js';
+    writeFileSync(path.join(dir,'node_modules/formatter/package.json'),JSON.stringify({name:'formatter',exports:{'.':{...(mode==='declaration'?{types:'./index.d.ts'}:{}),default:'./'+runtimeName}}}));
+    if(mode==='declaration')writeFileSync(path.join(dir,'node_modules/formatter/index.d.ts'),'export default function format(input:{className?:string}):string;');
+    const runtime=path.join(dir,'node_modules/formatter',runtimeName);
     writeFileSync(runtime,`(function(){
 var prefix='base';
 function inner(input){return prefix+(input.className||'');}
@@ -122,12 +123,12 @@ export function Control(props:Input){const {children,...rest}=normalize(props);r
     const prefix=result.runtimeBindings.bindings.find(b=>b.name==='prefix')!;
     const imported=result.runtimeBindings.bindings.find(b=>b.declarationKind==='ImportClause')!;
     assert.ok(inner&&prefix&&imported,'manifest includes the executable default import and CJS closed state');
-    assert.throws(()=>instrumentReactHelperSource(readFileSync(runtime,'utf8')+'\n','node_modules/formatter/index.cjs',plan),/source-changed/);
+    assert.throws(()=>instrumentReactHelperSource(readFileSync(runtime,'utf8')+'\n','node_modules/formatter/'+runtimeName,plan),/source-changed/);
     const bundled=await build({stdin:{contents:`import {Control} from './control';import format from 'formatter';
 globalThis.fixtureRun=()=>Control({children:'Original',className:'caller'});
 globalThis.fixtureSwap=next=>format.swap(next);globalThis.fixturePrefix=next=>format.setPrefix(next);`,loader:'tsx',resolveDir:dir},
       bundle:true,write:false,format:'iife',jsx:'transform',define:{'process.env.NODE_ENV':'"development"'},
-      plugins:[{name:'registered-helper-bindings',setup(builder){builder.onLoad({filter:/\.(tsx|cjs)$/},args=>({
+      plugins:[{name:'registered-helper-bindings',setup(builder){builder.onLoad({filter:/\.(tsx|cjs|js)$/},args=>({
         contents:instrumentReactHelperSource(readFileSync(args.path,'utf8'),path.relative(dir,args.path),plan),
         loader:args.path.endsWith('.tsx')?'tsx':'js',resolveDir:path.dirname(args.path),
       }));}}]});

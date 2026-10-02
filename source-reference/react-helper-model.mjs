@@ -428,7 +428,22 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       const imported = raw?.declarations?.find(
         (d) => ts.isImportClause(d) || ts.isImportSpecifier(d),
       );
-      if (imported && (!decl || decl.getSourceFile().isDeclarationFile)) {
+      let executableEdge;
+      if (imported) {
+        let imp = imported;
+        while (imp && !ts.isImportDeclaration(imp)) imp = imp.parent;
+        if (imp && ts.isStringLiteral(imp.moduleSpecifier))
+          executableEdge = resolution.find(
+            r => r.importer === realpathSync(imp.getSourceFile().fileName) &&
+              r.specifier === imp.moduleSpecifier.text,
+          );
+      }
+      // A checker may bind a CommonJS default to a nested executable function.
+      // Load the original witnessed module instead of jumping past its setup.
+      if (imported && ts.isImportClause(imported) && imported.name && !executableEdge)
+        throw new Refused("executable-import-unresolved", n);
+      if (imported && (!decl || decl.getSourceFile().isDeclarationFile ||
+          (ts.isImportClause(imported) && imported.name && executableEdge?.format === "cjs"))) {
         let imp = imported;
         while (imp && !ts.isImportDeclaration(imp)) imp = imp.parent;
         if (!imp || !ts.isStringLiteral(imp.moduleSpecifier))
@@ -1333,6 +1348,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       }
       if (ts.isBinaryExpression(n)) {
         const op = n.operatorToken.kind;
+        if (op === ts.SyntaxKind.CommaToken) {
+          // The left operand still runs every modeled effect and refusal. Its
+          // value is discarded without coercion; the right keeps its identity.
+          this.expr(n.left, env);
+          return this.expr(n.right, env);
+        }
         if (op === ts.SyntaxKind.EqualsToken)
           return this.ref(n.left, env).set(this.expr(n.right, env));
         if (op === ts.SyntaxKind.AmpersandAmpersandToken) {
@@ -1388,6 +1409,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         const a = this.scalar(l, n),
           b = this.scalar(r, n);
         switch (op) {
+          // scalar() excludes object and opaque coercion before JavaScript's
+          // primitive equality rules can run; no user conversion hook executes.
+          case ts.SyntaxKind.EqualsEqualsToken:
+            return a == b;
+          case ts.SyntaxKind.ExclamationEqualsToken:
+            return a != b;
           case ts.SyntaxKind.EqualsEqualsEqualsToken:
             return a === b;
           case ts.SyntaxKind.ExclamationEqualsEqualsToken:

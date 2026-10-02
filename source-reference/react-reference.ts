@@ -229,7 +229,9 @@ export async function buildReactReference(
       return value.imports.flatMap(edge => {
         const file = path.resolve(sourceRoot, edge.path);
         return !edge.external && edge.original && Object.hasOwn(files, file)
-          ? [{ importer, specifier: edge.original, file }] : [];
+          ? [{ importer, specifier: edge.original, file,
+            ...(output.metafile!.inputs[edge.path]?.format
+              ? {format:output.metafile!.inputs[edge.path].format} : {}) }] : [];
       });
     }),
     ...(cohort.declared ? { mountedSourceFiles: (cohort.mountedModules ?? [])
