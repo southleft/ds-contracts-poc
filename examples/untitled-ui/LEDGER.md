@@ -15,7 +15,7 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **157/157** green, 0 pinned red — 111 constructs expected CARRIED, 8 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **158/158** green, 0 pinned red — 112 constructs expected CARRIED, 8 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 46 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 157 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **111 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 158 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **112 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -57,7 +57,7 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Min/max sizing | 1 | `minmax-size` |
 | Deep part nesting | 1 | `nest-three-deep` |
 | Node opacity | 1 | `opacity-node` |
-| Absolute placement and constraints | 3 | `placement-abs-frame` `placement-fixedsize-inflow` `placement-xy-none-layout` |
+| Absolute placement and constraints | 4 | `placement-abs-frame` `placement-constraints-scale` `placement-fixedsize-inflow` `placement-xy-none-layout` |
 | Corner radii | 2 | `radius-uniform-bound` `radius-uniform-literal` |
 | `rest-*` | 8 | `rest-documentation-links-carried` `rest-layout-sizing-vertical-fill` `rest-set-description-carried` `rest-slot-interior-auto-layout` `rest-slot-primary-axis-fill` `rest-stamped-identity-carried` `rest-text-align-center` `rest-variables-captured` |
 | Drawn geometry (ellipse, polygon, arc, rotated rect, vector) | 8 | `shape-arc-donut` `shape-arc-full` `shape-arc-partial` `shape-ellipse` `shape-polygon` `shape-polygon-no-sides` `shape-rect-abs` `shape-rotated-rect` |
@@ -171,7 +171,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 | `effect-text-shadow` | REFUSED | inversion-side | a drop shadow on a TEXT node | a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed |
 | `grid-implicit-tracks` | REFUSED | inversion-side | a child anchored at row 1 of a grid that declares ONE row track — the occupancy the canvas absorbs by rewriting the declaration | P9, the lossy edge: when occupied cells exceed the declared track lists the declaration and the occupancy disagree, and carrying either would be a fact the contract never made. Refused BY NAME (grid-implicit-tracks) with no track or placement leaking |
 | `instance-name-key-contradict` | REFUSED | inversion-side | an instance named like an in-scope contract whose key CONTRADICTS that contract's anchor | a foreign kit's Badge must not link to ds.badge on name coincidence - the link is refused BY NAME and an honest stub (suffixed id) takes its place |
-| `placement-constraints-scale` | REFUSED | inversion-side | an ABSOLUTE child whose constraints are SCALE x SCALE | SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow |
+| `placement-constraints-scale-unqualified-parent` | REFUSED | inversion-side | SCALE child whose independently captured parent extent contradicts its measured inset sum | An inconsistent source basis cannot justify proportional placement; refuse rather than inventing a parent extent. |
 | `slot-preferred-unresolvable` | REFUSED | inversion-side | preferredValues naming a key with NO in-scope contract | unresolvable keys are named, never guessed into ids - accepts stays unauthored |
 
 ### 3.4 The paste door — CLOSED for two rounds, now OPEN
@@ -243,7 +243,7 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ### 5.1 The pinned reds
 
-NONE. All 157 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
+NONE. All 158 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -298,7 +298,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 157 case(s): 157 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 158 case(s): 158 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -323,7 +323,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `be5381c0fe9e` | 281,726 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `a8d187f78ef7` | 674,806 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `f73b7aa3df69` | 113,673 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `3e63cbb08129` | 114,544 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 
