@@ -34,8 +34,8 @@
  *      axis, which is exactly CSS `left + right` (or `top + bottom`) with NO
  *      size — the box tracks its parent. A baked width would freeze the very
  *      resize the constraint expresses.
- *   2. SCALE is REFUSED BY NAME. It resizes the box PROPORTIONALLY with its
- *      parent and CSS has no equivalent on a positioned element.
+ *   2. SCALE is carried through captured geometry when its measured parent
+ *      basis qualifies. Inconsistent parent measurements refuse BY NAME.
  *   3. An ABSENT field still reads as LEFT×TOP — unchanged geometry, so no
  *      corpus moves — but the ASSUMPTION IS NOW NAMED instead of silent.
  *
@@ -46,6 +46,7 @@
  *
  * Node shell over pure core functions. Reads the repo; writes nothing.
  */
+import { normalizeAbsoluteGeometry, resolveNativeAbsoluteGeometry } from "@ds-contracts/schema";
 import { proposeFromDump } from "../../core/propose-figma.js";
 import { loadTokenCorpus } from "./tokens.js";
 
@@ -123,24 +124,34 @@ check(
 );
 
 // ---------------------------------------------------------------------------
-// 2. SCALE — refused BY NAME (CSS has no proportional resize on a positioned box)
+// 2. SCALE — exact captured basis carries; inconsistent basis refuses
 // ---------------------------------------------------------------------------
 
 console.log("\nSCALE × SCALE");
 const SC = { horizontal: "SCALE", vertical: "SCALE" };
-const scaled = proposeFromDump(
-  setOf([variant("A", SC), variant("B", SC)]),
-  opts,
-);
-check(
-  "SCALE is REFUSED BY NAME, and the reason says why CSS cannot spell it",
-  scaled.notes.some((n) => n.includes("SCALE resizes the box PROPORTIONALLY")),
-);
-check(
-  "a refused SCALE part renders IN FLOW (no half-carried absolute box)",
-  ring(scaled).tokens?.left === undefined &&
-    ring(scaled).tokens?.right === undefined,
-);
+const scaled = proposeFromDump(setOf([variant("A", SC), variant("B", SC)]), opts);
+const geometry = ring(scaled).absoluteGeometry;
+check("qualified SCALE carries the exact measured box and parent basis",
+  Object.entries({x:12,y:12,right:12,bottom:12,width:216,height:216}).every(([key,value])=>geometry?.box?.[key]===value) &&
+  geometry?.box?.constraints?.horizontal===SC.horizontal && geometry?.box?.constraints?.vertical===SC.vertical &&
+  geometry?.parent?.width === 240 && geometry?.parent?.height === 240);
+check("the qualified carrier is named, without a refusal",
+  scaled.notes.some(n=>n.includes("absolute placement carried through captured geometry")) &&
+  !scaled.notes.some(n=>n.includes("absolute placement captured") && n.includes("NOT carried")));
+if (geometry) {
+  const css = normalizeAbsoluteGeometry(geometry).css;
+  const resized = resolveNativeAbsoluteGeometry(geometry,{width:480,height:120});
+  check("CSS retains proportional offsets and extents",css.left==='5%' && css.top==='5%' && css.width==='90%' && css.height==='90%');
+  check("native resizing retains the same source proportions",resized.x===24 && resized.y===6 && resized.width===432 && resized.height===108);
+} else check("SCALE normalization requires an actual captured carrier",false);
+const inconsistent = [variant("A", SC), variant("B", SC)] as any[];
+inconsistent.forEach(v=>v.bbox.width=241);
+const refused = proposeFromDump(setOf(inconsistent),opts);
+check("inconsistent measured parent is REFUSED BY NAME",
+  refused.notes.some(n=>n.includes("absolute-placement-parent-inconsistent")));
+check("a refused SCALE part has neither a carrier nor partial offsets",
+  ring(refused).absoluteGeometry===undefined && ring(refused).absoluteGeometryByCombination===undefined &&
+  ring(refused).tokens?.left===undefined && ring(refused).tokens?.right===undefined);
 
 // ---------------------------------------------------------------------------
 // 3. ABSENT — geometry unchanged, assumption NAMED

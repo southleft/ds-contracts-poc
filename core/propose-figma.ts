@@ -5265,7 +5265,10 @@ function carryAbsPlacement(
   const hasScale = m.occ.some(o=>Object.values(absBoxOf(o.node)?.constraints ?? {}).includes('SCALE'));
   if (hasScale) {
     const refusal=carryCapturedAbsoluteGeometry(m,part,tokens,ctx,opts);
-    if(refusal)return ledger(refusal);
+    if(refusal){
+      const constraint=m.occ.map(o=>absBoxOf(o.node)?.constraints).find(c=>c && Object.values(c).includes('SCALE'));
+      return ledger(`constraint ${constraint?.horizontal ?? 'unknown'}×${constraint?.vertical ?? 'unknown'} has no carried offset spelling for this observation — SCALE resizes the box PROPORTIONALLY with its parent, so qualified captured parent geometry is required; ${refusal}`);
+    }
     ctx.notes.push(`${where}: absolute placement carried through captured geometry with its measured parent basis and each source constraint; both React and native Figma resolve the same carrier. Authored spacing and transforms are not inferred from the rectangle`);
     return true;
   }
