@@ -162,6 +162,8 @@ test('bound ancestors and captured instance text refuse instead of silently assi
  const instance=structuredClone(dump.Checkbox),icon=instance.variants[0].children.find((node:any)=>node.type==='INSTANCE');
  icon.children=[{name:'child-owned label',type:'TEXT',text:{characters:'Checkbox label'},propRefs:{characters:'text'}}];
  assert.throws(()=>sourceTextControlPlan(instance),/instance-text-ownership-unqualified/);
+ icon.children[0].text.characters='';
+ assert.throws(()=>sourceTextControlPlan(instance),/instance-text-ownership-unqualified/);
  const defaultMismatch=structuredClone(dump.Checkbox);defaultMismatch.variants[0].children.find((node:any)=>node.type==='TEXT').hidden=true;
  assert.throws(()=>sourceTextControlPlan(defaultMismatch),/visibility-default-unqualified/);
 });
@@ -190,5 +192,25 @@ test('a failed public observation restores the scoped override before propagatin
  const failingPage={async evaluate(_fn:any,arg:any){if(arg)invoked.push(arg.props);},locator(){return{async innerText(){throw Error('observation disconnected');}};}} as any;
  await assert.rejects(probeSourceTextControls(failingPage,plan,cells,bindings),/observation disconnected/);
  assert.deepEqual(invoked,[{},null]);
+ assert.equal(JSON.stringify(dump),before);
+});
+
+
+test('public native property identities and distinct code inputs cannot borrow another source control',async()=>{
+ const missingPage={evaluate(){throw Error('must refuse before touching page');}} as any;
+ const bindings=[{type:'text',bindings:{figma:{kind:'TEXT',property:'text'},code:{prop:'caption'}}},{type:'boolean',bindings:{figma:{kind:'BOOLEAN',property:'label'},code:{prop:'showCaption'}}}];
+ for(const index of [0,1]){
+  const wrong=structuredClone(bindings);wrong[index].bindings.figma.property+='#999:999';
+  await assert.rejects(probeSourceTextControls(missingPage,plan,cells,wrong),/public-input-identity-mismatch/);
+ }
+ const duplicate=structuredClone(bindings);duplicate[1].bindings.code.prop='caption';
+ await assert.rejects(probeSourceTextControls(missingPage,plan,cells,duplicate),/public-input-code-alias-ambiguous:caption/);
+ const malformed=structuredClone(bindings);malformed[0].bindings.code.prop='   ';
+ await assert.rejects(probeSourceTextControls(missingPage,plan,cells,malformed),/public-input-missing:text/);
+ const exact=structuredClone(bindings);exact[0].bindings.figma.property='text#272:2';exact[1].bindings.figma.property='label#272:1';
+ let active:any=null;const invoked:any[]=[];
+ const fakePage={async evaluate(_fn:any,arg:any){if(arg){active=arg.props;invoked.push(active);}},locator(selector:string){const key=selector.match(/data-cell="([^"]+)"/)![1];return{async innerText(){const text=active?.caption,show=active?.showCaption;const scenario=text===undefined?show===false?'off':show===true?'on':'defaults':text===''?'emptyText':show===false?'changedTextOff':show===true?'changedTextOn':'changedText';const output=observed('react',scenario)[key];return typeof text==='string'&&text!==''?output.replaceAll('Changed consumer',text):output;}};}} as any;
+ const result=await probeSourceTextControls(fakePage,plan,cells,exact);
+ assert(result.passed);assert.equal(result.scenarios.length,7);assert(result.scenarios.every(row=>row.rows.length===20));assert.equal(invoked.at(-1),null);
  assert.equal(JSON.stringify(dump),before);
 });

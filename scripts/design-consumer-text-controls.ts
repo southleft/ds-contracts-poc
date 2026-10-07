@@ -11,6 +11,7 @@ export interface SourceTextLeaf {
 export interface SourceTextControlPlan {
   rule: 'source-owned-text-controls-v1';
   textProperties: string[];
+  propertyIdentities: Record<string, string>;
   booleanDefaults: Record<string, boolean>;
   variants: Array<{name: string; nodeId: string | null; leaves: SourceTextLeaf[]}>;
 }
@@ -41,7 +42,7 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
   const sourceIds=new Set<string>();
   const hasOwnedText = (node:any):boolean => node?.type !== 'INSTANCE' &&
     (node?.type === 'TEXT' || (node?.children ?? []).some(hasOwnedText));
-  const hasInstanceText = (node:any):boolean => node?.type === 'TEXT' && typeof node.text?.characters === 'string' && !!normalized(node.text.characters) ||
+  const hasInstanceText = (node:any):boolean => node?.type === 'TEXT' ||
     (node?.children ?? []).some(hasInstanceText);
   const referencedText = new Set<string>(), booleanDefaults: Record<string, boolean> = {};
   const names = new Set<string>();
@@ -99,7 +100,8 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
     if ([...ownersByText.values()].some(owners=>owners.size>1)) refuse(`text-owner-ambiguous:${variant.name}`);
     return {name: variant.name, nodeId: typeof variant.nodeId === 'string' ? variant.nodeId : null, leaves};
   });
-  return {rule: 'source-owned-text-controls-v1', textProperties: [...referencedText].sort(), booleanDefaults, variants};
+  return {rule: 'source-owned-text-controls-v1', textProperties: [...referencedText].sort(),
+    propertyIdentities: Object.fromEntries(definitionNames), booleanDefaults, variants};
 }
 
 /** Bounded correction for observed mixed ownership of the same drawn text.
@@ -176,8 +178,12 @@ export async function probeSourceTextControls(page: Page, plan: SourceTextContro
     const kind = plan.textProperties.includes(property) ? 'TEXT' : 'BOOLEAN';
     const matches = bindings.filter(input => input.bindings?.figma?.kind === kind &&
       typeof input.bindings.figma.property === 'string' && propertyName(input.bindings.figma.property) === property);
-    if (matches.length !== 1 || matches[0].type !== (kind === 'TEXT' ? 'text' : 'boolean') || !matches[0].bindings?.code?.prop) refuse(`public-input-missing:${property}`);
-    inputNames[property] = matches[0].bindings!.code!.prop!;
+    if (matches.length !== 1 || matches[0].type !== (kind === 'TEXT' ? 'text' : 'boolean')) refuse(`public-input-missing:${property}`);
+    const raw=matches[0].bindings!.figma!.property!,code=matches[0].bindings?.code?.prop;
+    if (propertyName(raw) !== raw && plan.propertyIdentities[property] !== raw) refuse(`public-input-identity-mismatch:${raw}`);
+    if (typeof code !== 'string' || !code.trim()) refuse(`public-input-missing:${property}`);
+    if (Object.values(inputNames).includes(code)) refuse(`public-input-code-alias-ambiguous:${code}`);
+    inputNames[property] = code;
   }
   const scenarios: Array<{name: string; overrides: Record<string, string | boolean>}> = [{name:'defaults',overrides:{}}];
   for (const property of plan.textProperties) {
