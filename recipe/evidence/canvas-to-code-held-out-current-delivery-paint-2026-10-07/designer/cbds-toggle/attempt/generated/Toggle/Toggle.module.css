@@ -1,0 +1,117 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/toggle.contract.json (ds.toggle v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--spacing-100);
+  width: fit-content;
+  height: fit-content;
+}
+
+.alignment-left {
+}
+
+.size-large {
+}
+
+.root:where(.alignment-left.size-large) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.alignment-right {
+}
+
+.root:where(.alignment-right.size-large) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.size-small {
+}
+
+.root:where(.alignment-left.size-small) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.toggleLabel {
+  color: var(--text-primary);
+  font-weight: var(--imported-toggle-toggle-label-font-weight);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.size-large .toggleLabel {
+  font-size: var(--imported-toggle-toggle-label-font-size-large);
+}
+
+.size-small .toggleLabel {
+  font-size: var(--imported-toggle-toggle-label-font-size-small);
+}
+
+.size-large .toggleLabel {
+  line-height: var(--imported-toggle-toggle-label-line-height-large);
+}
+
+.size-small .toggleLabel {
+  line-height: var(--imported-toggle-toggle-label-line-height-small);
+}
+
+.root[data-disabled] .toggleLabel {
+  color: var(--text-disabled);
+}
+.root {
+  isolation: isolate;
+}
+.root > .toggleIcon {
+  z-index: 1;
+}
+.root > .toggleLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large > .toggleIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large > .toggleLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small > .toggleIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small > .toggleLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-large > .toggleIcon {
+  z-index: 2;
+}
+.root.alignment-right.size-large > .toggleLabel {
+  z-index: 1;
+}
+.root.alignment-right.size-small > .toggleIcon {
+  z-index: 2;
+}
+.root.alignment-right.size-small > .toggleLabel {
+  z-index: 1;
+}

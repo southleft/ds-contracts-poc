@@ -5,7 +5,7 @@
   "nodeId": "53:1161",
   "mode": "reviewable-inversion",
   "variantCount": 1,
-  "contractSha256": "72eadf5e31a686c8ee25880b6bbc07ab0abc69cc4e14349144a34542f16bcbed",
+  "contractSha256": "a2ff9525c27410964aa8dfe3828399f0a80c426e84e5f2907a761fad5a311b08",
   "carriage": {
     "carried": 25,
     "named": 16,
@@ -183,8 +183,8 @@
   ],
   "generatedFiles": {
     "react/Section/Section.module.css": "8614fd5f06f6826f4efa3cd70434759691d98139bcfc594937e5b5185c08edfa",
-    "react/Section/Section.stories.tsx": "83c67b3a2c33e4bc8f3e7a9dfe9151bb323a51488774133c25f5e2bbdedda5c3",
-    "react/Section/Section.tsx": "75ca862b094e7071f5f66933bcbc1851f66bd4cab28de415cdd313fb6b41d951",
+    "react/Section/Section.stories.tsx": "7dff61740d9dc3907a17a9a928054fce985151578eaab873ce7fce275555b58d",
+    "react/Section/Section.tsx": "3e28762372b8cbcfd477004deb2d11ba869bfb08fdadf8862f2c30073fb11ec5",
     "react/Section/index.ts": "db0bfe93063e840f05b0bccfabfc617040f78e5f5f22136a280da81c2ed6e633",
     "wc/ds-section-header.ts": "96b58ae939e95f43445ef6fb7c4673120a15cecb8c2558df47af31a85127311c",
     "wc/ds-section-header.css.ts": "e8eb8576e94ea3b5c52e8e8b3557b9a2e45c883e85089e7e4fd92c731b246f41",
@@ -197,7 +197,7 @@
     "wc/ds-section.ts": "0180bbb189fd84e7607d838b5ce4106cdddc70670025e15c252aa4a5989e5c06",
     "wc/ds-section.css.ts": "f72282b4ed07a7368db9904fda7d54c05d03167b0effa7e5b974b701ae8e12ad",
     "wc/ds-section.demo.html": "9308b85578f42bd2d93cc6b3235387cc728e908b9f9cd0b1b7f0a1f0a07caa4a",
-    "wc/ds-section.custom-elements.json": "c655fc9239ecc0656ce5ba1a208b0632f577e2f22b2fda33976ca5af82abc1bc"
+    "wc/ds-section.custom-elements.json": "2155ae96df5aac9ff11f5e89d36f0056ef15d0b6a9806422dc74b841676639bc"
   },
-  "notesCount": 56
+  "notesCount": 67
 }

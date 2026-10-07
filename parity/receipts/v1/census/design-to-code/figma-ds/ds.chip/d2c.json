@@ -301,7 +301,7 @@
     }
   ],
   "generatedFiles": {
-    "react/Chip/Chip.module.css": "af552ba269eeaea3d954d2c1b25abe08397b942acf68a85ff1f5634e152de899",
+    "react/Chip/Chip.module.css": "fb6d57e698cd0e879a53ec4ead07681dab7daf06310512f3f9202103814a3bdd",
     "react/Chip/Chip.stories.tsx": "ca61fdee0da6fe61d3cad01750f571e0fbdc9e8be80b0d2f4ce40aa8c83be0ff",
     "react/Chip/Chip.tsx": "3e05e5d4946c65cb2c81bd143e7a34c45d08aec4a892227afcf0b946bd167e97",
     "react/Chip/index.ts": "746419f2d2117cbcc865908573d71d3f7cd68faf21931422456e4200c760fa7b",

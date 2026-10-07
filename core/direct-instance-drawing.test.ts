@@ -595,3 +595,23 @@ test('an observed empty vector fill clears only its exact child instance and res
  }}finally{await browser.close();}
  h.solidFillTarget!.instanceId='foreign';assert.equal(f.read().overrides?.color,undefined);
 });
+
+
+test('WC preserves equivalent ordered slot fallback anatomy and refuses additional facts', async () => {
+ const make=(name:string,root:unknown)=>ContractSchema.parse({id:`test.${name.toLowerCase()}`,name,version:'1.0.0',status:'draft',description:'Slot fallback compatibility',semantics:{element:'div'},props:[],states:[],anatomy:{root},bindings:{code:{anchors:{importPath:`./${name}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+ const child=make('FallbackChild',{parts:{label:{text:'Fallback'}}});
+ const call={id:child.id};
+ const parent=make('FallbackParent',{parts:{body:{slot:{name:'children',renderDefault:true,defaultContent:[call]},parts:{one:{component:call}}}}});
+ const ctx={contracts:new Map([[child.id,child],[parent.id,parent]]),tokens:new Set<string>(),icons:new Map<string,string>()};
+ const actual=emitWebComponent(parent,ctx);
+ const legacy=structuredClone(parent);delete legacy.anatomy.root.parts!.body.parts;
+ const expected=emitWebComponent(legacy,ctx);
+ assert.equal(actual.element,expected.element,'existing slot rendering remains byte-identical');
+ assert.equal(actual.stylesheet,expected.stylesheet,'equivalent fallback adds no styling differences');
+ for(const change of [
+  (p:any)=>{p.parts.one.literals={width:'20px'};},
+  (p:any)=>{p.parts.one.component.text='Different';},
+  (p:any)=>{p.parts.two={component:call};},
+  (p:any)=>{p.parts.one.component.overrides={color:'#ff0000'};},
+ ]){const altered=structuredClone(parent);change(altered.anatomy.root.parts!.body);assert.throws(()=>emitWebComponent(altered,ctx),/SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components/);}
+});

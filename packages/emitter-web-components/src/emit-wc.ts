@@ -65,7 +65,7 @@ import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '
  *   a11y.contrast is a review gate, not a rendering fact (no emitter
  *   renders it) — named here, not silently dropped.
  */
-import { refuseRetainedRuntime,jointTokenCss } from '@ds-contracts/core';
+import { canonicalJson,refuseRetainedRuntime,jointTokenCss } from '@ds-contracts/core';
 import {
   borderStyleDecls,
   isNativeCheckablePart,
@@ -1671,6 +1671,17 @@ function generateManifest(contract: Contract): string {
 // emitWebComponent
 // ---------------------------------------------------------------------------
 
+// The React importer can retain the same slot fallback twice: as editable
+// anatomy and as legacy defaultContent. Existing WC fallback rendering is
+// lossless only when every ordered child is exactly that component invocation.
+function hasEquivalentSlotFallback(part: Part): boolean {
+  const children = Object.values(part.parts ?? {});
+  const defaults = part.slot?.defaultContent ?? [];
+  return children.length === defaults.length && children.every((child, index) =>
+    Object.keys(child).length === 1 && child.component !== undefined &&
+    canonicalJson(child.component) === canonicalJson(defaults[index]));
+}
+
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
   refuseInstanceRootInputTarget(contract,ctx.contracts,'web-components');
   if (contract.props.some(p => p.bindings.code.initial)) throw new Error('WEB_COMPONENT_INITIAL_CODE_BINDING_UNSUPPORTED');
@@ -1683,7 +1694,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     childPaintOrderPlans(c,ctx.contracts);
     for (const w of walkAnatomy(c)) {
 
-      if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
+      if (w.part.slot?.renderDefault && w.part.parts && !hasEquivalentSlotFallback(w.part)) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
       if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
       if (w.part.presenceByCombination && !singleBooleanPresence(c,w.part)) throw new Error('WEB_COMPONENT_PRESENCE_COMBINATION_UNSUPPORTED');
       if (w.part.shape?.arc?.cap) throw new Error('WEB_COMPONENT_ELLIPSE_ARC_CAP_UNSUPPORTED');

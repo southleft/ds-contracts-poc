@@ -39,7 +39,7 @@ import { portableGzipSync } from "./portable-gzip.js";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const CURRENT_HELD_OUT_ROOT =
-  "recipe/evidence/canvas-to-code-held-out-current-delivery-2026-10-07";
+  "recipe/evidence/canvas-to-code-held-out-current-delivery-paint-2026-10-07";
 export const COHORTS = ["scratch", "designer"] as const;
 export type Cohort = (typeof COHORTS)[number];
 type Stage =

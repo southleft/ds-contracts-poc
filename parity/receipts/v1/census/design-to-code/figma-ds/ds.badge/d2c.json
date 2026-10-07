@@ -261,7 +261,7 @@
     }
   ],
   "generatedFiles": {
-    "react/Badge/Badge.module.css": "e91948476200169965fb127226c64cd170e7e91a5a2bab769d7318c080ca56e2",
+    "react/Badge/Badge.module.css": "64ea94b3112d8831eac7d30f8ce45457f56a29dcb3e765a8a768ddb3285f371f",
     "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
     "react/Badge/Badge.tsx": "75f0d2fd45b2025c8de748ea149ab82a658d48795b6c909c6782c1121bf0705a",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",

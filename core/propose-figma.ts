@@ -11603,7 +11603,7 @@ function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,whe
       holder.layoutByCombination={props:axes.map(a=>a.propName),rows:[...seen.values()]};
     }
   }
-  ctx.notes.push(`${where}: captured child paint order carried independently of flow order and CSS positioning`);
+  ctx.notes.push(`${where}: captured child paint order carried independently of flow order and CSS positioning (itemReverseZIndex)`);
 }
 
 function carryRotatedFlowRatio(m:Merged,holder:Record<string,unknown>,ctx:Ctx,where:string):boolean {
