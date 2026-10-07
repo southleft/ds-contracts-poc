@@ -12218,7 +12218,11 @@ function buildPart(
   const visibilityRef = part && visibilityRefs.length > 0 && new Set(visibilityRefs).size === 1 &&
     (m.type !== 'TEXT' || m.occ.every(o => o.node.propRefs?.visible === visibilityRefs[0]))
     ? visibilityRefs[0] : undefined;
-  if (part && visibilityRef) {
+  // A recognized optional-slot control already belongs to the slot API.
+  // Do not promote it again as an independent Boolean visibility gate.
+  const slotVisibility = part?.optional === true && ctx.slots.some(slot =>
+    slot.part === part && slot.optional && visibilityRef === `Show ${slot.property}`);
+  if (part && visibilityRef && !slotVisibility) {
     const bindingName = allocatedInputName(ctx, visibilityRef);
     const presence = (observedPresence === OMIT_PART ? undefined : observedPresence ?? part.visibleWhen) as Part['visibleWhen'];
     const axis = presence && ctx.axes.find(a => a.propName === presence.prop && !isBooleanAxis(a));

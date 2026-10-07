@@ -105,3 +105,20 @@ test('a Boolean-controlled swap keeps the same named caller input with or withou
   }
  }
 });
+
+test('optional slot convention is not reintroduced as an independent Boolean',async()=>{
+ const {proposeFromDump}=await import('./propose-figma.js');
+ const {loadTokenCorpus}=await import('../extract/figma/tokens.js');
+ const {readFileSync}=await import('node:fs');
+ const dump=JSON.parse(readFileSync('extract/figma/fixtures/main-file-dumps.json','utf8')).Card;
+ const options={projectionMode:'reviewable-inversion' as const,corpus:loadTokenCorpus(process.cwd()),contractIdByName:new Map([['Avatar','ds.avatar'],['Slot','ds.slot']])};
+ const proposed=proposeFromDump(dump,options).contract as any;
+ assert.equal(proposed.anatomy.root.parts.footer.optional,true);
+ assert.equal(proposed.anatomy.root.parts.footer.visibleWhen,undefined);
+ assert.equal(proposed.props.some((p:any)=>p.name==='showActions'),false);
+ const independent=structuredClone(dump);
+ for(const variant of independent.variants)variant.children.find((n:any)=>n.name==='footer').propRefs.visible='Enabled';
+ const explicit=proposeFromDump(independent,options).contract as any;
+ assert.deepEqual(explicit.anatomy.root.parts.footer.visibleWhen,{prop:'enabled'});
+ assert(explicit.props.some((p:any)=>p.name==='enabled'));
+});

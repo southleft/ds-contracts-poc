@@ -417,7 +417,7 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         ) +
         replayedBlock(
           replays.repeatProp,
-          "arrayOf prop proposed at build time by the import engine (core/propose-figma) from the committed owner’s-kit fixture extract/figma/gauntlet/fixtures/pattern-repeat-collection-navigation-header.dump.json",
+          "Current importer replay of the navigation-header fixture: independent menu visibility controls are retained when a repeat cannot preserve them",
         ),
     ),
     section(
@@ -1487,7 +1487,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         ]) +
         replayedBlock(
           replays.repeatPart,
-          "proposed at build time by the import engine from the committed owner’s-kit capture — five drawn menu items collapse to one template with the varying boolean carried per item",
+          "Current navigation-header replay: repeat inference or its named limit, with the independently controlled menu parts preserved",
         ),
     ),
   ].join("");
