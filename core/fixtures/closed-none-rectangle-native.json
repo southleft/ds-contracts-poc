@@ -1,0 +1,16 @@
+{
+  "scope": "Generic Scratch closed NONE rectangle native PNG control; no kit or reverse scoreboard credit",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "nodeId": "399:3",
+  "paths": [
+    {
+      "windingRule": "NONE",
+      "data": "M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z"
+    }
+  ],
+  "width": 161,
+  "height": 10,
+  "pngSHA256": "f642754a07324ecd72fd3f30d2535684e51443b44b214bbd74af9d9dfbe09769",
+  "readbackRegions": [],
+  "nativeOtherWindingPNGsIdentical": true
+}

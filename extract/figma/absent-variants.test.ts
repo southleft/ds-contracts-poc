@@ -18,15 +18,22 @@ import {
   dumpStampsObservable,
   proposeBatchFromDump,
   proposeFromDump,
+  proposeDeclaredDrawnCandidate,
   SparseMatrixInferenceError,
   ExactProjectionError,
 } from '../../core/propose-figma.js';
 import { deriveAbsentVariants, EXACT_ABSENT_VARIANTS_MAX_PRODUCT, validateExactVariantProjection, type ExactDumpSet } from '../../core/exact-projection.js';
 import { compareContracts } from './roundtrip.js';
+import { verifyFigmaDrawnDomain } from '../../core/figma-drawn-variants.js';
 import { createFigmaEngine } from '../../core/emit-figma-script.js';
+import { emitWebComponent } from '../../packages/emitter-web-components/src/emit-wc.js';
+import { chromium } from 'playwright-core';
+import { mountGenerated, generatedTypeErrors } from '../../core/react-test-runtime.js';
+import { emitReactInline } from '../../core/emit-react-inline.js';
+import { emitHtml } from '../../core/emit-html.js';
 import { emitReact, validateContract } from '../../core/emit-react.js';
 import { tokenCorpusFromJson } from '../../core/token-corpus.js';
-import { ABSENT_VARIANTS_MAX_PRODUCT, absentVariantIssues, ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { ABSENT_VARIANTS_MAX_PRODUCT, absentVariantIssues, drawnVariantIssues, drawnGeometryTupleKeys, ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import type { DumpSet } from './types.js';
 
 // ---------------------------------------------------------------------------
@@ -452,7 +459,7 @@ test('stamps observable is a POSITIVE reader fact: the plugin reader always, RES
   assert.equal(told._provenance.stampsObservable, true);
   const { stampsObservable: _dropped, ...rest } = told._provenance;
   assert.deepEqual(rest, bare._provenance, 'the one key is the only difference');
-  assert.equal(bare._provenance.dumpVersion, '1.44', 'a provenance fact, not a grammar change');
+  assert.equal(bare._provenance.dumpVersion, '1.63', 'current REST producer carries inherited instance padding as well as explicitly empty fills');
 });
 
 test('the SAME pipeline-written set that lost a variant refuses whether or not the REST response carried sharedPluginData', () => {
@@ -646,4 +653,354 @@ test('every fenced call-site category refuses BY ITS OWN NAME on a confounded se
       `${knob} → ${label}`,
     );
   }
+});
+
+// Positive domain authoring is separate from a canvas-only absence list.
+const positiveTuples = [
+  { tone: 'a', size: 's', flag: false },
+  { tone: 'a', size: 'l', flag: true },
+  { tone: 'b', size: 's', flag: false },
+  { tone: 'c', size: 's', flag: false },
+];
+const positiveSeed = (tuples: unknown = positiveTuples, patch?: (c: Record<string, any>) => void) => seed(undefined, c => { c.bindings.figma.drawnVariants = tuples; patch?.(c); });
+test('positive tuple domain: schema preserves majority-undrawn complete typed tuples', () => {
+  const contract = positiveSeed();
+  assert.deepEqual(contract.bindings.figma.drawnVariants, positiveTuples);
+  assert.deepEqual(drawnVariantIssues(contract), []);
+});
+test('positive tuple domain: schema refuses malformed, duplicate, unordered, missing-default and erased-option declarations', () => {
+  for (const [tuples, code] of [
+    [[], /drawnVariants/],
+    [[{ tone: 'a', size: 's' }], /drawn-variants-incomplete/],
+    [[...positiveTuples, positiveTuples[0]], /drawn-variants-duplicate/],
+    [[...positiveTuples].reverse(), /drawn-variants-order/],
+    [positiveTuples.slice(1), /drawn-variants-default-undrawn/],
+    [positiveTuples.slice(0, -1), /drawn-variants-erased-option/],
+    [[...positiveTuples, { tone: 'z', size: 'l', flag: true }], /drawn-variants-invalid-option/],
+    [[...positiveTuples, { tone: 'a', size: 's', flag: 'false' }], /drawn-variants-invalid-option/],
+    [[...positiveTuples, { tone: 'a', size: 's', flag: false, quiet: true }], /drawn-variants-unknown-axis/],
+    [Array(4097).fill(positiveTuples[0]), /drawnVariants/],
+  ] as const) assert.throws(() => positiveSeed(tuples), code);
+});
+test('positive tuple domain: schema refuses incompatible shapes and unqualified default/omission semantics', () => {
+  assert.throws(() => positiveSeed(positiveTuples, c => { c.bindings.figma.absentVariants = [CL_TRUE]; }), /drawn-variants-with-absent-variants/);
+  assert.throws(() => positiveSeed(positiveTuples, c => { c.bindings.figma.statePreviews = true; }), /drawn-variants-with-state-previews/);
+  assert.throws(() => positiveSeed(positiveTuples, c => { c.bindings.figma.representation = 'native'; }), /drawn-variants-native-representation/);
+  assert.throws(() => positiveSeed(positiveTuples, c => { delete c.props[0].default; }), /drawn-variants-explicit-default-required/);
+  assert.throws(() => positiveSeed(positiveTuples, c => { c.props[0].bindings.figma.unsetValue = 'Unset'; }), /drawn-variants-unset-axis-not-qualified/);
+});
+test('positive tuple domain: key order does not change the accepted domain', () => {
+  assert.deepEqual(drawnVariantIssues(positiveSeed(positiveTuples.map(tuple => ({ flag: tuple.flag, size: tuple.size, tone: tuple.tone })))), []);
+});
+test('positive tuple domain: unqualified validation callers remain closed', () => {
+  const c = positiveSeed(), errors: string[] = [];
+  validateContract(c, new Map([[c.id, c]]), errors, new Map());
+  assert.ok(errors.some(error => error.includes('drawn-variants-surfaces-unqualified')));
+});
+
+test('positive tuple domain: React and Figma enforce the domain while HTML and Web Components remain closed', () => {
+  const contract = positiveSeed(), contracts = new Map([[contract.id, contract]]), icons = new Map<string, string>();
+  const tokens = { primitives, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const cssContext = { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts, icons };
+  assert.match(emitReact(contract, cssContext).tsx, /DRAWN_VARIANT_UNDECLARED/);
+  assert.match(emitReactInline(contract, { tokens, contracts, icons }).tsx, /DRAWN_VARIANT_UNDECLARED/);
+  assert.throws(() => emitHtml(contract, cssContext), /drawn-variants-surfaces-unqualified/);
+  assert.throws(() => emitWebComponent(contract, cssContext), /drawn-variants-surfaces-unqualified/);
+  assert.doesNotThrow(() => engine.buildComponentScript(contract, contracts));
+});
+
+test('positive tuple domain: actual generated React accepts every declared row and defaults, rejects undeclared/invalid/null/string-boolean inputs before painting', async () => {
+  const browser = await chromium.launch();
+  try {
+    const c = positiveSeed(), scope = new Map([[c.id, c]]), icons = new Map<string, string>();
+    const tokens = { primitives, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+    const emitted = [emitReact(c, { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts: scope, icons }), emitReactInline(c, { tokens, contracts: scope, icons })];
+    for (const generated of emitted) {
+      assert.deepEqual(generatedTypeErrors(c.name, generated.tsx), []);
+      const page = await browser.newPage();
+      const render = await mountGenerated(page, c.name, generated.tsx, 'css' in generated && typeof generated.css === 'string' ? generated.css : '');
+      for (const props of [{}, ...positiveTuples]) { await render(props); assert.equal(await page.locator('#root').textContent(), 'Tag'); }
+      await page.close();
+      for (const props of [
+        { tone: 'a', size: 's', flag: true },
+        { tone: 'b', size: 'l', flag: false },
+        { tone: 'invalid' }, { tone: null }, { size: null }, { flag: null }, { flag: 'false' },
+      ]) {
+        const bad = await browser.newPage();
+        await mountGenerated(bad, c.name, generated.tsx, 'css' in generated && typeof generated.css === 'string' ? generated.css : '');
+        const result = await bad.evaluate(props => {
+          let failure: any;
+          window.addEventListener('error', event => { failure = event.error; event.preventDefault(); });
+          try { (window as any).renderSubject(props); } catch (error) { failure = error; }
+          return { refused: failure !== undefined, code: failure?.code, message: failure?.message };
+        }, props);
+        assert.equal(result.refused, true, JSON.stringify(props));
+        assert.equal(result.code, 'DRAWN_VARIANT_UNDECLARED');
+        assert.equal(await bad.locator('#root').textContent(), '');
+        await bad.close();
+      }
+    }
+  } finally { await browser.close(); }
+});
+
+test('positive tuple domain: canonical mapped code values and authored aliases cannot shadow the generated guard', async () => {
+  const browser = await chromium.launch();
+  try {
+    const c = positiveSeed(positiveTuples, raw => {
+      raw.props[0].bindings.code = { prop: 'values', values: { a: 1, b: 2, c: 3 } };
+      raw.props[1].bindings.code.prop = 'tuple';
+      raw.props[2].bindings.code.prop = 'axis';
+      raw.props[3].bindings.code.prop = 'globalThis';
+    });
+    const scope = new Map([[c.id, c]]), icons = new Map<string, string>(), tokens = { primitives, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+    for (const generated of [emitReact(c, { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts: scope, icons }), emitReactInline(c, { tokens, contracts: scope, icons })]) {
+      assert.deepEqual(generatedTypeErrors(c.name, generated.tsx), []);
+      const page = await browser.newPage(), render = await mountGenerated(page, c.name, generated.tsx, 'css' in generated && typeof generated.css === 'string' ? generated.css : '');
+      await render({ values: 2, tuple: 's', axis: false });
+      assert.equal(await page.locator('#root').textContent(), 'Tag');
+      const result = await page.evaluate(() => {
+        let failure: any;
+        window.addEventListener('error', event => { failure = event.error; event.preventDefault(); });
+        try { (window as any).renderSubject({ values: 2, tuple: 'l', axis: true }); } catch (error) { failure = error; }
+        return failure?.code === 'DRAWN_VARIANT_UNDECLARED';
+      });
+      assert.equal(result, true);
+      await page.close();
+    }
+  } finally { await browser.close(); }
+});
+
+test('positive tuple domain: guard reads resolved uncontrolled state and refuses an interaction that leaves the domain', async () => {
+  const browser = await chromium.launch();
+  try {
+    const c = positiveSeed(positiveTuples, raw => {
+      raw.semantics = { element: 'button', role: 'checkbox', roleException: 'Declared button-backed toggle.' };
+      raw.props[0].bindings.code.initial = { prop: 'defaultTone', default: 'a' };
+      raw.events = [{ name: 'change', trigger: 'root', toggles: { prop: 'tone', between: ['a', 'b'], aria: 'checked' }, bindings: { code: { prop: 'onToneChange', argument: 'next-value' } } }];
+    });
+    const scope = new Map([[c.id, c]]), icons = new Map<string, string>(), tokens = { primitives, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+    for (const generated of [emitReact(c, { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts: scope, icons }), emitReactInline(c, { tokens, contracts: scope, icons })]) {
+      assert.deepEqual(generatedTypeErrors(c.name, generated.tsx), []);
+      const page = await browser.newPage(), render = await mountGenerated(page, c.name, generated.tsx, 'css' in generated && typeof generated.css === 'string' ? generated.css : '');
+      await page.addStyleTag({ content: ':root{--paint-a:#cc0000;--paint-b:#00aa00;--paint-c:#0000cc;--space-s:8px;--space-l:16px}' });
+      await render({ key: 'initial-b', defaultTone: 'b', size: 's', flag: false });
+      assert.equal(await page.locator('#root > button').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(0, 170, 0)');
+      await page.locator('#root > button').click();
+      await page.waitForFunction(() => getComputedStyle(document.querySelector('#root > button')!).backgroundColor === 'rgb(204, 0, 0)');
+      await page.evaluate(() => {
+        window.addEventListener('error', event => { (window as any).drawnFailure = event.error?.code; event.preventDefault(); });
+      });
+      await render({ key: 'controlled-a', tone: 'a', size: 'l', flag: true });
+      // Controlled props remain authoritative: the click does not replace tone.
+      await page.locator('#root > button').click();
+      assert.equal(await page.locator('#root').textContent(), 'Tag');
+      // Recreate the actual generated component with an uncontrolled initial a.
+      const bad = await browser.newPage(), renderBad = await mountGenerated(bad, c.name, generated.tsx, 'css' in generated && typeof generated.css === 'string' ? generated.css : '');
+      await bad.evaluate(() => { window.addEventListener('error', event => { (window as any).drawnFailure = event.error?.code; event.preventDefault(); }); });
+      await renderBad({ key: 'uncontrolled-a', defaultTone: 'a', size: 'l', flag: true });
+      await bad.locator('#root > button').click();
+      await bad.waitForFunction(() => (window as any).drawnFailure === 'DRAWN_VARIANT_UNDECLARED');
+      assert.equal(await bad.locator('#root').textContent(), '');
+      await bad.close(); await page.close();
+    }
+  } finally { await browser.close(); }
+});
+
+test('positive tuple domain: retained runtime cannot opt into a generated React guard it does not execute', () => {
+  const c = positiveSeed(positiveTuples, raw => {
+    raw.bindings.code.runtime = { version: 1, kind: 'custom-element', artifactRevision: 'sha256:' + 'a'.repeat(64), interfaceRevision: 'sha256:' + 'b'.repeat(64), bindingRevision: 'sha256:' + 'c'.repeat(64) };
+  });
+  const errors: string[] = [];
+  validateContract(c, new Map([[c.id, c]]), errors, new Map(), { drawnVariants: 'react-runtime' });
+  assert.ok(errors.some(error => error.includes('drawn-variants-surfaces-unqualified')));
+  assert.throws(() => emitReact(c, { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts: new Map([[c.id, c]]), icons: new Map() }), /drawn-variants-surfaces-unqualified/);
+});
+
+test('positive domain writer: exactly declared rows, default first, actual plugin capture and independently scoped proof', async () => {
+  const c = positiveSeed(positiveTuples, raw => { raw.props[0].default = 'b'; });
+  const data = engine.compileComponentData(c, new Map([[c.id, c]]));
+  assert.equal(data.variants.length, 4);
+  assert.equal(data.variants[0].name, 'Tone=B, Size=S, Flag=False');
+  assert.deepEqual(data.drawnVariants, positiveTuples, 'canonical declaration order is preserved separately from canvas default order');
+  const live = await canvas(), node = await live.write(c), dump = await live.read(node);
+  assert.equal(dump.variants.length, 4);
+  assert.deepEqual(dump.drawnVariants, positiveTuples);
+  assert.equal(verifyFigmaDrawnDomain(c, dump).status, 'source-matrix-verified');
+  assert.equal(verifyFigmaDrawnDomain(c, dump, dump.variants).status, 'verified-exact');
+  assert.equal((await live.sync(c)).results[0].reason, 'unchanged');
+  const changed = structuredClone(dump); changed.variants.pop();
+  assert.equal(verifyFigmaDrawnDomain(c, changed).status, 'refused');
+  const extra = structuredClone(dump); extra.variants.push({ ...extra.variants[0], variantProperties: { Tone: 'C', Size: 'L', Flag: 'True' } });
+  assert.equal(verifyFigmaDrawnDomain(c, extra).status, 'refused');
+  const duplicate = structuredClone(dump); duplicate.variants.push(structuredClone(duplicate.variants[0]));
+  assert.equal(verifyFigmaDrawnDomain(c, duplicate).status, 'refused');
+  assert.equal(verifyFigmaDrawnDomain(c, dump, changed.variants).status, 'refused');
+  for (const drawnVariants of [undefined, 'broken-json', positiveTuples.slice(1), [...positiveTuples].reverse()])
+    assert.throws(() => verifyFigmaDrawnDomain(c, { ...dump, drawnVariants }), /STAMP_MISMATCH/);
+  assert.throws(() => verifyFigmaDrawnDomain(c, { ...dump, contractId: 'another.component' }), /IDENTITY_MISMATCH/);
+  const wrongDefault = structuredClone(dump); wrongDefault.propertyDefinitions!.Tone.defaultValue = 'A';
+  assert.throws(() => verifyFigmaDrawnDomain(c, wrongDefault), /DEFAULT_MISMATCH/);
+  assert.throws(() => verifyFigmaDrawnDomain(seed(undefined), dump), /DECLARATION_REQUIRED/);
+  // The production importer remains closed; the raw stamp does not promote a proposal.
+  assert.throws(() => proposeFromDump(dump, { corpus: writerCorpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true, stampsObservable: true }), /drawn-domain-import-unqualified/);
+});
+
+test('positive domain writer: refuses extra/duplicate/missing existing rows before changing stamps or children', async () => {
+  const live = await canvas(), c = positiveSeed(), node = await live.write(c);
+  const mutable = node as CanvasNode & { setSharedPluginData(ns: string, key: string, value: string): void };
+  const victim = node.children[0], name = victim.name;
+  mutable.setSharedPluginData('ds_contracts', 'drawnVariants', 'must remain unchanged');
+  victim.name = 'Tone=C, Size=L, Flag=True';
+  await assert.rejects(live.sync(c), /FIGMA_DRAWN_DOMAIN_EXTRA_OR_DUPLICATE_VARIANT/);
+  assert.equal(mutable.getSharedPluginData('ds_contracts', 'drawnVariants'), 'must remain unchanged');
+  assert.equal(node.children.length, 4);
+  victim.name = node.children[1].name;
+  await assert.rejects(live.sync(c), /FIGMA_DRAWN_DOMAIN_EXTRA_OR_DUPLICATE_VARIANT/);
+  victim.name = name;
+  (node.children[3] as CanvasNode & { remove(): void }).remove();
+  await assert.rejects(live.sync(c), /FIGMA_DRAWN_DOMAIN_MISSING_VARIANT/);
+  assert.equal(mutable.getSharedPluginData('ds_contracts', 'drawnVariants'), 'must remain unchanged');
+  assert.equal(node.children.length, 3);
+});
+
+test('positive domain child selections: fixed and parent-mapped undeclared rows refuse at compile', () => {
+  const child = positiveSeed();
+  const parent = (props: Record<string, string | boolean>, mapped = false): Contract => ContractSchema.parse({
+    id: 'check.domain-host', name: 'DomainHost', version: '0.1.0', status: 'draft', description: 'Domain selection host',
+    props: mapped ? [enumProp('tone', 'Tone', ['a', 'b', 'c'])] : [], states: [], semantics: { element: 'div' },
+    anatomy: { root: { layout: { display: 'flex' }, parts: { tag: { component: { id: child.id, props } } } } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'check/domain-host', export: 'DomainHost' } } },
+  });
+  const build = (p: Contract) => engine.buildComponentScript(p, new Map([[p.id, p], [child.id, child]]));
+  assert.doesNotThrow(() => build(parent({ tone: 'a', size: 'l', flag: true })));
+  assert.doesNotThrow(() => build(parent({ tone: 'c' })));
+  assert.throws(() => build(parent({ tone: 'c', size: 'l', flag: true })), /FIGMA_COMPONENT_REF_UNDRAWN_VARIANT/);
+  assert.throws(() => build(parent({ tone: '{tone}', size: 'l', flag: true }, true)), /FIGMA_COMPONENT_REF_UNDRAWN_VARIANT/);
+});
+
+test('positive domain raw capture: plugin and REST preserve valid and malformed stamps without granting authority', async () => {
+  const live = await canvas(), c = positiveSeed(), node = await live.write(c);
+  (node as CanvasNode & { setSharedPluginData(ns: string, key: string, value: string): void }).setSharedPluginData('ds_contracts', 'drawnVariants', '{broken');
+  assert.equal((await live.read(node)).drawnVariants, '{broken');
+  for (const stamp of [JSON.stringify(positiveTuples), '{broken']) {
+    const response = { name: 'fixture', nodes: { '1:1': { document: { id: '1:1', name: 'Domain', type: 'COMPONENT_SET', children: [], sharedPluginData: { ds_contracts: { drawnVariants: stamp } } } } } };
+    const dump = mapRestToDump(response as never, { stampsObservable: true }).dump as unknown as Record<string, DumpSet>;
+    assert.deepEqual(dump.Domain.drawnVariants, stamp === '{broken' ? stamp : positiveTuples);
+  }
+});
+
+test('positive domain inverse stays closed even for a full product, missing stamp or malformed observation', async () => {
+  const all = ['a', 'b', 'c'].flatMap(tone => ['s', 'l'].flatMap(size => [false, true].map(flag => ({ tone, size, flag }))));
+  const c = positiveSeed(all), live = await canvas(), dump = await live.read(await live.write(c));
+  assert.equal(validateExactVariantProjection(dump).status, 'source-matrix-verified');
+  const opts = { corpus: writerCorpus, contractIdByName: new Map([[c.name, c.id]]), contractsById: new Map([[c.id, c as never]]), fileKey: null, projectionMode: 'exact' as const, mintUnbound: true, stampsObservable: true };
+  assert.throws(() => proposeFromDump(dump, opts), /drawn-domain-import-unqualified/);
+  const absent = { ...dump }; delete absent.drawnVariants;
+  assert.throws(() => proposeFromDump(absent, opts), /drawn-domain-import-unqualified/);
+  for (const drawnVariants of ['broken', null, [], all])
+    assert.throws(() => proposeFromDump({ ...dump, drawnVariants }, { ...opts, contractsById: undefined }), /drawn-domain-import-unqualified/);
+  const { contractId: _dropped, ...unstamped } = absent;
+  assert.throws(() => proposeFromDump(unstamped, opts), /drawn-domain-import-unqualified/);
+});
+
+test('positive domain writer: twenty binary axes emit and lay out only twenty-one declared rows, not a million grid cells', async () => {
+  const names = Array.from({ length: 20 }, (_, i) => `axis${i}`);
+  const defaults = Object.fromEntries(names.map(name => [name, 'off']));
+  const domain = [defaults, ...[...names].reverse().map(name => ({ ...defaults, [name]: 'on' }))];
+  const c = positiveSeed(domain, raw => {
+    raw.props = names.map((name, i) => enumProp(name, `Axis${i}`, ['off', 'on']));
+    raw.anatomy.root = { layout: { display: 'flex' }, text: 'Finite domain' };
+  });
+  const data = engine.compileComponentData(c, new Map([[c.id, c]]));
+  assert.equal(data.variants.length, 21);
+  assert.ok(data.variants.every(v => v.col < 5 && v.row < 5));
+  const live = await canvas(), dump = await live.read(await live.write(c));
+  assert.equal(dump.variants.length, 21);
+  assert.equal(verifyFigmaDrawnDomain(c, dump, dump.variants).status, 'verified-exact');
+});
+
+const domainGeometry = (x = 0) => ({
+  box: { x, y: 10, width: 20, height: 20, right: 80 - x, bottom: 70, constraints: { horizontal: 'LEFT', vertical: 'TOP' } },
+  parent: { width: 100, height: 100 }, border: { left: 0, right: 0, top: 0, bottom: 0 },
+});
+const geometrySeed = (props: string[], values: Array<Array<string | null>>, visibleWhen?: Record<string, unknown>) => positiveSeed(positiveTuples, raw => {
+  raw.anatomy.root = { literals: { width: '100px', height: '100px' }, parts: {
+    item: { ...(visibleWhen ? { visibleWhen } : {}), absoluteGeometryByCombination: { props, rows: values.map((values, i) => ({ values, geometry: domainGeometry(i * 5) })) } },
+  } };
+});
+
+test('positive geometry domain: covers exactly reachable tuples, rejecting missing, invented, duplicate and nested missing observations', () => {
+  const values = positiveTuples.map(tuple => [tuple.tone, tuple.size, String(tuple.flag)]);
+  assert.doesNotThrow(() => geometrySeed(['tone', 'size', 'flag'], values));
+  assert.throws(() => geometrySeed(['tone', 'size', 'flag'], values.slice(1)), /absolute-geometry-drawn-domain-incomplete/);
+  assert.throws(() => geometrySeed(['tone', 'size', 'flag'], [...values, ['c', 'l', 'true']]), /absolute-geometry-drawn-domain-incomplete/);
+  assert.throws(() => geometrySeed(['tone', 'size', 'flag'], [...values, values[0]]), /absolute-geometry-duplicate-tuple/);
+  assert.throws(() => geometrySeed(['tone', 'size', 'flag'], [['a', 's']]), /absolute-geometry-tuple-arity/);
+  const c = geometrySeed(['tone', 'size', 'flag'], values);
+  const raw = structuredClone(c) as any;
+  raw.anatomy.root.parts.item.parts = { nested: { absoluteGeometryByCombination: { props: ['tone', 'size', 'flag'], rows: values.slice(1).map(values => ({ values, geometry: domainGeometry() })) } } };
+  assert.throws(() => ContractSchema.parse(raw), /absolute-geometry-drawn-domain-incomplete/, 'outer tables cannot skip nested validation');
+  delete raw.bindings.figma.drawnVariants; delete raw.anatomy.root.parts.item.parts;
+  assert.throws(() => ContractSchema.parse(raw), /absolute-geometry-combination-incomplete/, 'no declaration retains the Cartesian rule');
+});
+
+test('positive geometry domain: subset-axis projections deduplicate; visibility on an external enum or boolean filters complete tuples before projection', () => {
+  const c = geometrySeed(['size'], [['s'], ['l']]);
+  assert.deepEqual([...drawnGeometryTupleKeys(c, ['size'])!].sort(), ['["l"]', '["s"]']);
+  assert.throws(() => geometrySeed(['size'], [['s']]), /absolute-geometry-drawn-domain-incomplete/, 'projecting fewer axes cannot erase a reachable row');
+  assert.doesNotThrow(() => geometrySeed(['size'], [['s']], { prop: 'tone', equals: ['b', 'c'] }));
+  assert.throws(() => geometrySeed(['size'], [['s'], ['l']], { prop: 'tone', equals: ['b', 'c'] }), /absolute-geometry-drawn-domain-incomplete/);
+  assert.doesNotThrow(() => geometrySeed(['size'], [['l']], { prop: 'flag' }));
+  assert.throws(() => geometrySeed(['size'], [['s'], ['l']], { prop: 'flag' }), /absolute-geometry-drawn-domain-incomplete/);
+  assert.equal(drawnGeometryTupleKeys(seed(undefined), ['size']), null);
+});
+
+const unmarkCandidateFixture = (dump: DumpSet): DumpSet => {
+  const source = structuredClone(dump);
+  for (const key of ['contractId', 'propNames', 'semantics', 'version', 'drawnVariants', 'codeValueAxes', 'unsetVariantAxes', 'statePreviewAxis']) delete (source as unknown as Record<string, unknown>)[key];
+  return source;
+};
+const candidateOpts = { corpus: writerCorpus, contractIdByName: new Map<string, string>(), fileKey: null, projectionMode: 'exact' as const, mintUnbound: true, stampsObservable: true, hiddenCaptured: true };
+const positiveCanvasDeclaration = positiveTuples.map(tuple => ({ Tone: tuple.tone.toUpperCase(), Size: tuple.size.toUpperCase(), Flag: tuple.flag ? 'True' : 'False' }));
+
+test('positive inverse inspection: preserves complete API and defaults, supplied declaration and input bytes; public import stays closed', async () => {
+  const c = positiveSeed(positiveTuples, raw => { raw.props[0].default = 'b'; });
+  const live = await canvas(), source = unmarkCandidateFixture(await live.read(await live.write(c))), before = JSON.stringify(source);
+  const candidate = proposeDeclaredDrawnCandidate(source, candidateOpts, positiveCanvasDeclaration);
+  assert.equal(candidate.acceptedContract, null);
+  assert.equal(candidate.proposal.projection.status, 'verified-exact');
+  const contract = ContractSchema.parse(candidate.proposal.contract);
+  const tupleKeys = (rows: Array<Record<string, string | boolean | null>>) => rows.map(tuple => JSON.stringify([tuple.tone, tuple.size, tuple.flag])).sort();
+  assert.deepEqual(tupleKeys(contract.bindings.figma.drawnVariants!), tupleKeys(positiveTuples));
+  assert.equal(contract.props.find(prop => prop.name === 'tone')?.default, 'b');
+  assert.equal(JSON.stringify(source), before);
+  assert.throws(() => proposeFromDump(source, candidateOpts), /sparse-matrix-mostly-undrawn/, 'inspection does not change the public route or leak its domain fence');
+  const scope = new Map([contract, ...(candidate.proposal.childStubs ?? []).map(stub => ContractSchema.parse(stub))].map(c => [c.id, c]));
+  const generated = emitReactInline(contract, { tokens: { primitives: { ...primitives, ...(candidate.proposal.mintedTokens?.tree ?? {}) }, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, contracts: scope, icons: new Map() });
+  assert.deepEqual(generatedTypeErrors(contract.name, generated.tsx), []);
+  assert.match(generated.tsx, /DRAWN_VARIANT_UNDECLARED/);
+});
+
+test('positive inverse inspection: observation/marked-source/bad-declaration guards reject before inversion', async () => {
+  const live = await canvas(), marked = await live.read(await live.write(positiveSeed())), source = unmarkCandidateFixture(marked);
+  assert.throws(() => proposeDeclaredDrawnCandidate(source, { ...candidateOpts, stampsObservable: false }, positiveCanvasDeclaration), /source-observation-unqualified/);
+  assert.throws(() => proposeDeclaredDrawnCandidate(source, { ...candidateOpts, projectionMode: 'reviewable-inversion' }, positiveCanvasDeclaration), /source-observation-unqualified/);
+  assert.throws(() => proposeDeclaredDrawnCandidate(marked, candidateOpts, positiveCanvasDeclaration), /source-marked/);
+  for (const declaration of [undefined, [], positiveCanvasDeclaration.slice(1), [...positiveCanvasDeclaration, positiveCanvasDeclaration[0]], [...positiveCanvasDeclaration, { Tone: 'C', Size: 'L', Flag: 'True' }]])
+    assert.throws(() => proposeDeclaredDrawnCandidate(source, candidateOpts, declaration));
+});
+
+test('positive inverse inspection: state-named source axis remains an API axis; no state or mode promotion erases reachable rows', async () => {
+  const c = positiveSeed(positiveTuples, raw => {
+    raw.props[0].bindings.figma.property = 'State';
+    raw.props[0].bindings.figma.values = { a: 'Default', b: 'Hover', c: 'Pressed' };
+  });
+  const live = await canvas(), source = unmarkCandidateFixture(await live.read(await live.write(c)));
+  const declaration = positiveCanvasDeclaration.map(tuple => ({ State: ({ A: 'Default', B: 'Hover', C: 'Pressed' } as Record<string, string>)[tuple.Tone], Size: tuple.Size, Flag: tuple.Flag }));
+  const candidate = proposeDeclaredDrawnCandidate(source, candidateOpts, declaration), contract = ContractSchema.parse(candidate.proposal.contract);
+  assert.deepEqual(contract.states, []);
+  assert.equal(contract.bindings.figma.drawnVariants!.length, 4);
+  const prop = contract.props.find(prop => prop.bindings.figma.property === 'State')!;
+  assert.deepEqual(prop.type, { enum: ['default', 'hover', 'pressed'] });
+  assert.equal(candidate.acceptedContract, null);
 });

@@ -25,7 +25,7 @@ export const MetadataListItem = forwardRef<HTMLDivElement, MetadataListItemProps
     const classes = [styles.root, className].filter(Boolean).join(' ');
     return (
       <div ref={ref} className={classes} {...rest}>
-        {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+        <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
         <span className={styles.labelText}>{label}</span>
         <span className={styles.valueText}>{value}</span>
       </div>

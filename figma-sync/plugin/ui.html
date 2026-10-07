@@ -2139,6 +2139,106 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
+// Raw local geometry; never replace it with a rotated absolute bounding box.
+function observeLocalGeometry(nodeId,parentId,transform,width,height,parentWidth,parentHeight) {
+ if(typeof nodeId!=='string'||!nodeId||typeof parentId!=='string'||!parentId||nodeId===parentId||
+    !Array.isArray(transform)||transform.length!==2||!transform.every(row=>Array.isArray(row)&&row.length===3&&row.every(n=>typeof n==='number'&&Number.isFinite(n)))||
+    ![width,height,parentWidth,parentHeight].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>0))return undefined;
+ return {nodeId,parentId,transform:transform.map(row=>[...row]),localSize:{width,height},parentSize:{width:parentWidth,height:parentHeight}};
+}
+
+// Some readable standalone definitions have no page parent but report remote=false.
+// Capture only the observed definition, corroborated by an independent ID lookup.
+async function captureDetachedMainSnapshot(node, captureFileKey, lookup) {
+  const valid = n => n && n.type === 'COMPONENT' && n.remote === false &&
+    n.removed === false && n.parent === null && typeof n.id === 'string' && !!n.id &&
+    typeof n.key === 'string' && /^[0-9a-f]{40}$/i.test(n.key) && Array.isArray(n.children) &&
+    Number.isFinite(n.width) && n.width > 0 && Number.isFinite(n.height) && n.height > 0 &&
+    !Object.keys(n.variantProperties || {}).length;
+  if (!valid(node) || typeof captureFileKey !== 'string' || !captureFileKey)
+    throw new Error('DEPENDENCY_CAPTURE_DETACHED_SNAPSHOT_UNQUALIFIED');
+  const direct = await lookup(node.id);
+  if (!valid(direct) || direct.id !== node.id || direct.key !== node.key)
+    throw new Error('DEPENDENCY_CAPTURE_DETACHED_SNAPSHOT_LOOKUP_MISMATCH');
+  return {kind:'detached-main-snapshot',captureFileKey,componentKey:node.key,nodeId:node.id,
+    lookup:{nodeId:direct.id,componentKey:direct.key}};
+}
+
+// A readable detached remote main is a snapshot in the consuming file, not
+// authority over its original library. Variant fragments cannot establish a
+// remote set's missing API domain and therefore remain refused.
+function captureRemoteMainSnapshot(node, captureFileKey) {
+  if (!node || node.type !== 'COMPONENT' || node.remote !== true || node.parent !== null ||
+      typeof captureFileKey !== 'string' || !captureFileKey ||
+      typeof node.key !== 'string' || !/^[0-9a-f]{40}$/i.test(node.key) ||
+      typeof node.id !== 'string' || !node.id || !Array.isArray(node.children) ||
+      !Number.isFinite(node.width) || node.width <= 0 || !Number.isFinite(node.height) || node.height <= 0 ||
+      Object.keys(node.variantProperties || {}).length)
+    throw new Error('DEPENDENCY_CAPTURE_REMOTE_SNAPSHOT_UNQUALIFIED');
+  return {kind:'remote-main-snapshot',captureFileKey,componentKey:node.key,nodeId:node.id};
+}
+
+function captureRemoteSetSnapshot(node, captureFileKey) {
+  const fail = (reason, detail = '') => { throw new Error('DEPENDENCY_CAPTURE_REMOTE_SET_SNAPSHOT_UNQUALIFIED: ' + (node && node.name || '<unnamed>') + ' (' + (node && node.id || '<unknown>') + '): ' + reason + (detail ? ' — ' + detail : '')); };
+  const key = value => typeof value === 'string' && /^[0-9a-f]{40}$/i.test(value);
+  if (!node || node.type !== 'COMPONENT_SET' || node.remote !== true || node.parent !== null ||
+      !captureFileKey || !key(node.key) || !node.id || !Array.isArray(node.children)) fail('set-identity');
+  const axes = Object.entries(node.componentPropertyDefinitions || {}).filter(([,d]) => d.type === 'VARIANT');
+  if (!axes.length || axes.some(([,d]) => !Array.isArray(d.variantOptions) || !d.variantOptions.length ||
+      new Set(d.variantOptions).size !== d.variantOptions.length)) fail('variant-domain');
+  const count = axes.reduce((n,[,d]) => n*d.variantOptions.length,1);
+  if (count > 4096 || count !== node.children.length) fail('domain-cardinality', 'declared=' + count + ', observed=' + node.children.length);
+  const tuples = new Set(), ids = new Set(), keys = new Set();
+  const variants = node.children.map(n => {
+    const values = n.variantProperties || {};
+    if (n.type !== 'COMPONENT' || n.remote !== true || n.parent !== node || !n.id || !key(n.key) ||
+        !Array.isArray(n.children) || !Number.isFinite(n.width) || n.width <= 0 || !Number.isFinite(n.height) || n.height <= 0 ||
+        Object.keys(values).length !== axes.length || axes.some(([name,d]) => !d.variantOptions.includes(values[name]))) fail('variant-identity-or-domain', n.id || '<unknown>');
+    const tuple = JSON.stringify(axes.map(([name]) => values[name]));
+    if (tuples.has(tuple) || ids.has(n.id) || keys.has(n.key)) fail('duplicate-variant', n.id);
+    tuples.add(tuple); ids.add(n.id); keys.add(n.key);
+    return {nodeId:n.id,componentKey:n.key,values:{...values}};
+  });
+  return {kind:'remote-set-snapshot',captureFileKey,componentKey:node.key,nodeId:node.id,variants};
+}
+
+function observeInstanceGeometry(nodeId, componentId, transform, width, height) {
+  if (typeof nodeId !== 'string' || !nodeId || typeof componentId !== 'string' || !componentId ||
+      !Array.isArray(transform) || transform.length !== 2 ||
+      !transform.every(row => Array.isArray(row) && row.length === 3 && row.every(value => typeof value === 'number' && Number.isFinite(value))) ||
+      typeof width !== 'number' || !Number.isFinite(width) || width <= 0 ||
+      typeof height !== 'number' || !Number.isFinite(height) || height <= 0) return undefined;
+  return {nodeId, componentId, transform: transform.map(row => [...row]), localSize: {width, height}};
+}
+
+// A mixed aggregate may still have one font over the entire character range.
+// Prove coverage and identical complete FontName records; never borrow a sibling
+// face or choose the first run of genuinely mixed typography.
+function observedTextFont(node) {
+  if (node.fontName !== figma.mixed) return node.fontName;
+  if (!node.characters || typeof node.getStyledTextSegments !== 'function') return undefined;
+  try {
+    const segments = node.getStyledTextSegments(['fontName']);
+    if (!Array.isArray(segments) || !segments.length) return undefined;
+    const canonical = value => value && typeof value === 'object' && !Array.isArray(value)
+      ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+    let end = 0, font, key;
+    for (const segment of segments) {
+      const name = segment.fontName;
+      if (segment.start !== end || !Number.isInteger(segment.end) || segment.end <= end || segment.end > node.characters.length ||
+          segment.characters !== node.characters.slice(segment.start, segment.end) ||
+          !name || typeof name.family !== 'string' || !name.family.trim() || typeof name.style !== 'string' || !name.style.trim()) return undefined;
+      const next = JSON.stringify(canonical(name));
+      if (key !== undefined && next !== key) return undefined;
+      font = name; key = next; end = segment.end;
+    }
+    return end === node.characters.length ? font : undefined;
+  } catch (_) { return undefined; }
+}
+
+const previousInvisibleChildFlag = figma.skipInvisibleInstanceChildren;
+try {
+figma.skipInvisibleInstanceChildren = false;
 // Design-side ANATOMY dump — the canonical node-tree capture.
 // v1.48 carries PERCENT line heights as drawn pixels (+ lineHeightUnit PERCENT /
 // AUTO) and textDecoration UNDERLINE / STRIKETHROUGH, in the spelling of the
@@ -2223,6 +2323,9 @@
 //                      (mode NAME → resolved value per mode) — the channel
 //                      §3 theme-mode promotion resolves through.
 //   cornerRadius       literal uniform radius (bound radii appear in `bound`)
+//   sourceFillComposition exact native MULTIPLY paint and independent variable ID;
+// v1.54: sourceNormalFillComposition exact NORMAL peers for mixed-composition cells;
+//                      unsupported composition remains a named proposal refusal.
 //   fill / stroke      first visible solid paint: { var: name } when bound,
 //                      { hex: "rrggbb" } when raw, plus { alpha } when the
 //                      paint's effective opacity < 1 (dump v1.1) — raw paints
@@ -2483,6 +2586,91 @@ function filledPathIssue(data) {
   if (!subpaths) return 'filled-path-empty';
 }
 
+"use strict";
+"use strict";
+/** NONE is carried only for one convex, closed straight-sided contour.
+ * Figma fills this contour even with no vector regions; all fill rules agree
+ * on its interior. Preserve NONE for native creation and exact readback.
+ * No curve, hole, overlap, coordinate rounding or winding inference. */
+function filledPathsIssue(paths) {
+    if (!Array.isArray(paths) || paths.length === 0 || paths.length > 32)
+        return 'filled-path-count';
+    for (const path of paths) {
+        if (!path || typeof path !== 'object' || typeof path.data !== 'string' || typeof path.windingRule !== 'string')
+            return 'filled-path-invalid-region';
+        const issue = filledPathIssue(path.data);
+        if (issue)
+            return issue;
+        if (path.windingRule === 'NONZERO' || path.windingRule === 'EVENODD')
+            continue;
+        if (path.windingRule !== 'NONE')
+            return 'filled-path-winding-rule';
+        if (paths.length !== 1)
+            return 'filled-path-none-multiple-contours';
+        const tokens = path.data.match(/[MLCQZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g);
+        const commands = tokens.filter(token => /^[MLCQZ]$/.test(token));
+        if (commands[0] !== 'M' || commands[commands.length - 1] !== 'Z' ||
+            commands.filter(command => command === 'M').length !== 1 ||
+            commands.filter(command => command === 'Z').length !== 1 ||
+            commands.some(command => command !== 'M' && command !== 'L' && command !== 'Z'))
+            return 'filled-path-none-contour-unqualified';
+        const numbers = tokens.filter(token => !/^[MLCQZ]$/.test(token)).map(Number);
+        // Native endpoints are float32. Refuse conversion that would alter them.
+        if (numbers.some(number => Math.fround(number) !== number))
+            return 'filled-path-none-coordinate-unqualified';
+        const points = [];
+        for (let at = 0; at < numbers.length; at += 2)
+            points.push([numbers[at], numbers[at + 1]]);
+        const same = (a, b) => a[0] === b[0] && a[1] === b[1];
+        if (points.length > 1 && same(points[0], points[points.length - 1]))
+            points.pop();
+        if (points.length < 3 || points.length > 256)
+            return 'filled-path-none-point-count';
+        if (new Set(points.map(point => JSON.stringify(point))).size !== points.length)
+            return 'filled-path-none-repeated-point';
+        // A float32 product has at most 48 significant bits and is exact in a
+        // double. Bounds above keep all six products away from overflow/underflow.
+        // Accumulate the expanded determinant with error-free TwoSum operations;
+        // its highest nonzero term gives the exact sign, without BigInt (which
+        // is absent in Figma's plugin sandbox) or a geometric epsilon.
+        const orientation = (a, b, c) => {
+            let expansion = [];
+            for (const term of [b[0] * c[1], -b[1] * c[0], b[1] * a[0], -b[0] * a[1], a[1] * c[0], -a[0] * c[1]]) {
+                const next = [];
+                let carry = term;
+                for (const component of expansion) {
+                    const sum = component + carry;
+                    const virtualCarry = sum - component;
+                    const error = (component - (sum - virtualCarry)) + (carry - virtualCarry);
+                    if (error !== 0)
+                        next.push(error);
+                    carry = sum;
+                }
+                if (carry !== 0)
+                    next.push(carry);
+                expansion = next;
+            }
+            const highest = expansion[expansion.length - 1] ?? 0;
+            return highest === 0 ? 0 : highest > 0 ? 1 : -1;
+        };
+        let direction = 0;
+        // Every other vertex must lie strictly on the same side of every edge.
+        // This proves convexity and excludes stars, crossings and degenerate edges.
+        for (let i = 0; i < points.length; i++) {
+            const a = points[i], b = points[(i + 1) % points.length];
+            for (let j = 0; j < points.length; j++) {
+                if (j === i || j === (i + 1) % points.length)
+                    continue;
+                const sign = orientation(a, b, points[j]);
+                if (sign === 0 || (direction !== 0 && direction !== sign))
+                    return 'filled-path-none-convexity-unqualified';
+                direction = sign;
+            }
+        }
+    }
+    return undefined;
+}
+
 function strokedPathIssue(data) {
   if (typeof data !== 'string' || data.length === 0 || data.length > 65536)
     return 'stroked-path-size';
@@ -2542,7 +2730,7 @@ function dumpStrokedPath(node, parent) {
   const identity = value => Array.isArray(value) && value.length === 2 && value.every(row => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)) &&
     value[0][0] === 1 && value[0][1] === 0 && value[1][0] === 0 && value[1][1] === 1;
   if (!parent || parent.type !== 'FRAME' || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
-      ![parent.width, parent.height, node.width, node.height].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) ||
+      ![parent.width, parent.height, node.width].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) || !Number.isFinite(node.height) || node.height < 0 || node.height > 1e6 ||
       ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
       !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false ||
       !identity(t) || Math.abs(t[0][2]) > 1e6 || Math.abs(t[1][2]) > 1e6 ||
@@ -2556,7 +2744,7 @@ function dumpStrokedPath(node, parent) {
       node.variableWidthStrokeProperties != null && (node.variableWidthStrokeProperties.widthProfile !== 'UNIFORM' || !Array.isArray(node.variableWidthStrokeProperties.variableWidthPoints) || node.variableWidthStrokeProperties.variableWidthPoints.length) ||
       node.complexStrokeProperties != null && node.complexStrokeProperties.type !== 'BASIC' ||
       Object.keys(node.boundVariables || {}).some(k => !['strokes', 'strokeWeight'].includes(k)) ||
-      !node.constraints || node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE' ||
+      !node.constraints || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.horizontal) || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.vertical) ||
       !Array.isArray(paths) || paths.length !== 1 || paths[0].windingRule !== 'NONE' || strokedPathIssue(paths[0].data) ||
       !network || !Array.isArray(network.vertices) || !network.vertices.length ||
       (network.regions || []).length || network.vertices.some(v =>
@@ -2565,6 +2753,7 @@ function dumpStrokedPath(node, parent) {
         v.cornerRadius !== undefined && v.cornerRadius !== 0)) return null;
   return { kind: 'stroked-path', width: node.width, height: node.height, strokePath: {
     data: paths[0].data, cap: node.strokeCap, join: node.strokeJoin, miterLimit: node.strokeMiterLimit,
+    ...(node.height === 0 && (node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE') ? { constraints: { horizontal: node.constraints.horizontal, vertical: node.constraints.vertical } } : {}),
     viewport: { width: parent.width, height: parent.height, x: t[0][2], y: t[1][2] },
   } };
 }
@@ -2597,6 +2786,26 @@ function dumpNativeLine(node, parent) {
     transform: line.transform.map(row => row.slice()), ...(source ? { source } : {}) } };
 }
 
+// Native API supplies strokeMiterLimit directly; never infer it from REST angles.
+function dumpInsideMaskStroke(node) {
+  const bound = (value) => !!value && typeof value === 'object' && Object.keys(value).length > 0;
+  const strokes = Array.isArray(node.strokes) ? node.strokes.filter(p => p.visible !== false) : [];
+  const p = strokes[0], color = p && p.color;
+  if (node.type !== 'VECTOR' || node.isMask !== true || node.maskType !== 'ALPHA' || node.strokeAlign !== 'INSIDE' ||
+      strokes.length !== 1 || !p || p.type !== 'SOLID' || !color || (p.opacity ?? 1) !== 1 || (color.a ?? 1) !== 1 ||
+      p.blendMode && p.blendMode !== 'NORMAL' || (node.opacity ?? 1) !== 1 ||
+      node.blendMode && !['NORMAL','PASS_THROUGH'].includes(node.blendMode) ||
+      !Array.isArray(node.fills) || node.fills.some(p => p.visible !== false || bound(p.boundVariables)) ||
+      (node.effects || []).some(p => p.visible !== false) || (node.dashPattern || []).length || node.children?.length ||
+      bound(node.boundVariables) || bound(p.boundVariables) ||
+      !Number.isFinite(node.strokeWeight) || node.strokeWeight <= 0 || node.strokeWeight > 1e6 ||
+      !['NONE','ROUND','SQUARE'].includes(node.strokeCap) || !['MITER','ROUND','BEVEL'].includes(node.strokeJoin) ||
+      !Number.isFinite(node.strokeMiterLimit) || node.strokeMiterLimit < 1 || node.strokeMiterLimit > 1000 ||
+      ![color.r,color.g,color.b].every(v => Number.isFinite(v) && v >= 0 && v <= 1)) return null;
+  return {align:'INSIDE',weight:node.strokeWeight,color:{r:color.r,g:color.g,b:color.b},
+    cap:node.strokeCap,join:node.strokeJoin,miterLimit:node.strokeMiterLimit};
+}
+
 function dumpShape(node, parent) {
   if (node.type === 'LINE') return dumpNativeLine(node, parent);
   if (node.type === 'VECTOR') {
@@ -2605,17 +2814,21 @@ function dumpShape(node, parent) {
     const paths = node.vectorPaths;
     const fills = Array.isArray(node.fills) ? node.fills.filter((p) => p.visible !== false) : [];
     const t = node.relativeTransform;
-    const readable = (node.isMask === undefined || node.isMask === false) &&
+    const maskStroke = dumpInsideMaskStroke(node);
+    const readable = (node.isMask === undefined || node.isMask === false || node.isMask === true && ['ALPHA','VECTOR'].includes(node.maskType)) &&
       Number.isFinite(node.width) && node.width > 0 && Number.isFinite(node.height) && node.height > 0 &&
-      Array.isArray(paths) && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
+      Array.isArray(paths) && paths.length > 0 && paths.length <= 32 && !filledPathsIssue(paths) &&
       t && t.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
-      t[0][0] === 1 && t[0][1] === 0 && t[1][0] === 0 && t[1][1] === 1 &&
-      fills.length === 1 && fills[0].type === 'SOLID' &&
+      ((t[0][0] === 1 && t[0][1] === 0 && t[1][0] === 0 && t[1][1] === 1) ||
+        parent?.type === 'GROUP' && !node.isMask && !maskStroke &&
+        Number.isFinite(t[0][0] * t[1][1] - t[0][1] * t[1][0]) && t[0][0] * t[1][1] - t[0][1] * t[1][0] !== 0) &&
+      (maskStroke || fills.length === 1 && fills[0].type === 'SOLID') &&
       (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
       (node.cornerRadius === undefined || node.cornerRadius === 0) &&
-      !(node.strokes || []).some((p) => p.visible !== false) && !(node.effects || []).some((p) => p.visible !== false);
+      (maskStroke || !(node.strokes || []).some((p) => p.visible !== false)) && !(node.effects || []).some((p) => p.visible !== false) && !node.children?.length;
     if (!readable) return null;
     const shape = { kind: 'path', width: node.width, height: node.height, paths: paths.map((p) => ({ data: p.data, windingRule: p.windingRule })) };
+    if (t[0][0] !== 1 || t[0][1] !== 0 || t[1][0] !== 0 || t[1][1] !== 1) shape.affineTransform = t.map(row => row.slice());
     const parentAuto = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
     if (parent && (node.layoutPositioning === 'ABSOLUTE' || !parentAuto)) {
       shape.x = t[0][2]; shape.y = t[1][2];
@@ -2641,7 +2854,7 @@ function dumpShape(node, parent) {
   const shape = { kind, width: round2(node.width), height: round2(node.height) };
   if ((node.type === 'REGULAR_POLYGON' || node.type === 'POLYGON') && typeof node.pointCount === 'number') shape.sides = node.pointCount;
   if (node.type === 'ELLIPSE' && node.arcData && (Math.abs(node.arcData.endingAngle - node.arcData.startingAngle) < Math.PI * 2 - 1e-6 || node.arcData.innerRadius > 0)) {
-    shape.arc = { start: round2(node.arcData.startingAngle), end: round2(node.arcData.endingAngle), innerRadius: round2(node.arcData.innerRadius) };
+    shape.arc = { start: round2(node.arcData.startingAngle), end: round2(node.arcData.endingAngle), innerRadius: round2(node.arcData.innerRadius), ...(["NONE", "ROUND", "SQUARE"].includes(node.strokeCap) ? {cap: node.strokeCap} : {}) };
   }
   if (rotation !== 0) shape.rotation = rotation;
   const box = node.absoluteBoundingBox;
@@ -2901,6 +3114,11 @@ const readTemplateVariableGraph = async (set) => {
 const dumpPaint = async (paints, nodePath, field, consumer) => {
   if (!Array.isArray(paints)) return null; // figma.mixed
   const visibles = paints.filter((x) => x.visible !== false);
+  const composed = field === 'stroke' ? SolidFillCapture.composeNormalSolidStrokePaints(paints) : undefined;
+  if (composed) {
+    if (nodePath) degrade('stroke-stack-resolved', nodePath, visibles.length + ' NORMAL solid stroke paints composed as a provisional literal; individual paint layers and their variable bindings are not recreated');
+    return composed;
+  }
   const p = visibles.find((x) => x.type === 'SOLID');
   if (!p) {
     if (visibles.length > 0 && nodePath) {
@@ -2920,6 +3138,10 @@ const dumpPaint = async (paints, nodePath, field, consumer) => {
   }
   return withAlpha({ hex: rgbToHex(p.color) });
 };
+
+// BEGIN SHARED SOLID FILL OBSERVATION
+"use strict";var SolidFillCapture=(()=>{var a=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var b=Object.getOwnPropertyNames;var m=Object.prototype.hasOwnProperty;var y=(t,r)=>{for(var s in r)a(t,s,{get:r[s],enumerable:!0})},g=(t,r,s,o)=>{if(r&&typeof r=="object"||typeof r=="function")for(let i of b(r))!m.call(t,i)&&i!==s&&a(t,i,{get:()=>r[i],enumerable:!(o=p(r,i))||o.enumerable});return t};var M=t=>g(a({},"__esModule",{value:!0}),t);var h={};y(h,{composeNormalSolidStrokePaints:()=>S,observeSolidFillComposition:()=>A});function A(t,r=!1){if(!Array.isArray(t))return;let s=t.filter(n=>n&&n.visible!==!1);if(!s.length||!r&&!s.some(n=>n.blendMode!==void 0&&n.blendMode!=="NORMAL"))return;if(s.length!==1||s[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let o=s[0],i=o.color,e=o.blendMode===void 0?"NORMAL":o.blendMode;if(e!=="MULTIPLY"&&e!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let l=n=>typeof n=="number"&&Number.isFinite(n)&&n>=0&&n<=1&&Math.fround(n)===n,u=o.opacity===void 0?1:o.opacity;if(!i||![i.r,i.g,i.b,u].every(l)||i.a!==void 0&&i.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let d=o.boundVariables?.color;return d!==void 0&&(!d||d.type!=="VARIABLE_ALIAS"||typeof d.id!="string"||!d.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:i.r,g:i.g,b:i.b},opacity:u,blendMode:e},...d?{variableId:d.id}:{}}}function S(t){if(!Array.isArray(t))return;let r=t.filter(e=>e&&e.visible!==!1);if(r.length<2)return;let s=e=>typeof e=="number"&&Number.isFinite(e)&&e>=0&&e<=1,o=0,i=[0,0,0];for(let e of r){let l=e.color,u=e.opacity??1,d=l?.a??1;if(e.type!=="SOLID"||e.blendMode!==void 0&&e.blendMode!=="NORMAL"||!l||![l.r,l.g,l.b,u,d].every(s))return;let n=u*d;i=i.map((f,c)=>[l.r,l.g,l.b][c]*n+f*(1-n)),o=n+o*(1-n)}return{hex:i.map(e=>Math.round((o?e/o:0)*255).toString(16).padStart(2,"0")).join(""),...o<1?{alpha:o}:{}}}return M(h);})();
+// END SHARED SOLID FILL OBSERVATION
 
 const round4 = (v) => Math.round(v * 10000) / 10000;
 
@@ -2997,6 +3219,37 @@ const dumpFillStack = async (node, nodePath) => {
   return { fill, gradient };
 };
 
+// Preserve nested property selections as occurrence evidence, not a promoted API.
+async function dumpNestedInstanceProperties(root, node) {
+  if (root.type !== 'INSTANCE' || node.type !== 'INSTANCE' || root === node) return undefined;
+  const path = [];
+  for (let current = node; current !== root; current = current.parent) {
+    if (!current || !current.parent || !Array.isArray(current.parent.children) || path.length >= 8) return undefined;
+    const index = current.parent.children.indexOf(current);
+    if (index < 0) return undefined;
+    path.unshift(index);
+  }
+  const owner = await root.getMainComponentAsync(), main = await node.getMainComponentAsync();
+  if (!root.id || !node.id || !owner || !owner.id || !owner.key || !main || !main.id || !main.key) return undefined;
+  const properties = {};
+  for (const [name, definition] of Object.entries(node.componentProperties || {})) {
+    const type = definition.type, value = definition.value;
+    if (!['VARIANT','TEXT','BOOLEAN','INSTANCE_SWAP'].includes(type) ||
+        (type === 'BOOLEAN' ? typeof value !== 'boolean' : typeof value !== 'string')) return undefined;
+    const property = {type, value};
+    if (type === 'INSTANCE_SWAP') {
+      const selected = await figma.getNodeByIdAsync(value);
+      if (!selected || selected.type !== 'COMPONENT' || !selected.id || !selected.key) return undefined;
+      property.selected = {nodeId:selected.id,componentKey:selected.key};
+    }
+    properties[name] = property;
+  }
+  return {ownerId:root.id,ownerComponentId:owner.id,ownerComponentKey:owner.key,
+    nodeId:node.id,componentId:main.id,componentKey:main.key,
+    ...(main.parent && main.parent.type === 'COMPONENT_SET' ? {componentSetKey:main.parent.key} : {}),
+    path,properties};
+}
+
 async function dumpSwapInstances(root, property) {
   if (!('children' in root)) return undefined;
   const found = [];
@@ -3033,10 +3286,17 @@ async function dumpSwapInstances(root, property) {
 }
 
 async function dumpSolidFillTarget(root, target, plane) {
-  const observed = target && (plane === 'stroke' ? target.strokes : target.fills);
-  if (!target || target.type !== 'VECTOR' || !Array.isArray(observed)) return undefined;
-  const paints = observed.filter(function (p) { return p.visible !== false; });
-  if (paints.length !== 1 || paints[0].type !== 'SOLID' || (paints[0].blendMode && paints[0].blendMode !== 'NORMAL')) return undefined;
+  if (plane === 'text-characters') {
+    if (!target || target.type !== 'TEXT' || typeof target.characters !== 'string') return undefined;
+  } else if (plane === 'visibility') {
+    if (!target || typeof target.visible !== 'boolean') return undefined;
+  } else {
+    const observed = target && (plane === 'stroke' ? target.strokes : target.fills);
+    if (!target || (plane === 'shape-fill' ? !['FRAME','RECTANGLE','ELLIPSE'].includes(target.type) : target.type !== (plane === 'text-fill' ? 'TEXT' : 'VECTOR')) || !Array.isArray(observed)) return undefined;
+    const paints = observed.filter(function (p) { return p.visible !== false; });
+    if (!((plane === 'shape-fill' || plane === undefined) && observed.length === 0) &&
+        (paints.length !== 1 || paints[0].type !== 'SOLID' || (paints[0].blendMode && paints[0].blendMode !== 'NORMAL'))) return undefined;
+  }
   const childPath = [], instancePath = [];
   let node = target, owner, depth = 0;
   while (node && node.id !== root.id) {
@@ -3052,8 +3312,227 @@ async function dumpSolidFillTarget(root, target, plane) {
   return main ? {nodeId:target.id,instanceId:owner.id,componentId:main.id,instancePath:instancePath,childPath:childPath} : undefined;
 }
 
+// Raw geometry evidence, not permission to ignore a stroke. Figma exposes
+// centered outlines even for INSIDE/OUTSIDE: alignment and fill mask must travel.
+function dumpHostVectorStrokeGeometry(node, target) {
+  if (!target || node.type !== 'VECTOR') return undefined;
+  const paths = function(value) {
+    if (!Array.isArray(value) || !value.length || value.length > 64) throw Error('path-count');
+    const result = value.map(function(p) { return {data:p.data,windingRule:p.windingRule}; });
+    if (result.some(function(p) { return typeof p.data !== 'string' || p.data.length > 100000; }) || filledPathsIssue(result)) throw Error('path-grammar');
+    return result;
+  };
+  const transform = node.relativeTransform;
+  if (!Array.isArray(transform) || transform.length !== 2 || transform.some(function(row) {return !Array.isArray(row) || row.length !== 3 || row.some(function(v) {return !Number.isFinite(v);});}) ||
+      !Number.isFinite(node.width) || node.width <= 0 || !Number.isFinite(node.height) || node.height <= 0 ||
+      !Number.isFinite(node.strokeWeight) || node.strokeWeight <= 0 || !['INSIDE','CENTER','OUTSIDE'].includes(node.strokeAlign) ||
+      !Number.isFinite(node.strokeMiterLimit) || node.strokeMiterLimit < 1 || node.strokeMiterLimit > 1000 ||
+      !['MITER','ROUND','BEVEL'].includes(node.strokeJoin) || !['NONE','ROUND','SQUARE'].includes(node.strokeCap) ||
+      !Number.isFinite(node.opacity) || node.opacity < 0 || node.opacity > 1 || !Array.isArray(node.dashPattern) || node.dashPattern.some(function(v) {return !Number.isFinite(v) || v < 0;})) throw Error('geometry-facts');
+  return {target:target,width:node.width,height:node.height,relativeTransform:transform.map(function(row){return row.slice();}),
+    fillGeometry:paths(node.fillGeometry),centeredStrokeGeometry:paths(node.strokeGeometry),strokeAlign:node.strokeAlign,
+    strokeWeight:node.strokeWeight,strokeJoin:node.strokeJoin,strokeCap:node.strokeCap,strokeMiterLimit:node.strokeMiterLimit,dashPattern:node.dashPattern.slice(),
+    opacity:node.opacity,blendMode:node.blendMode,effects:JSON.parse(JSON.stringify(node.effects))};
+}
+
+// Native usage drawings: identity and ancestor visibility remain observations, not authored APIs.
+/** Capture one actual usage, never an inferred main-component API.
+ * Caller controls and restores skipInvisibleInstanceChildren for a whole
+ * snapshot; this helper does not change file or reader state. */
+async function captureNativeInstanceVectorInput(root) {
+  if (!root || root.type !== 'INSTANCE') return {status:'not-instance'};
+  if (figma.skipInvisibleInstanceChildren !== false)
+    return {status:'refused',reason:'native-instance-children-elided'};
+  const components = new Map(), ancestry = [];
+  for (let parent=root.parent, depth=0;parent && parent.type !== 'PAGE' && parent.type !== 'DOCUMENT';parent=parent.parent) {
+    if (++depth>64) return {status:'refused',reason:'native-instance-ancestry-cap'};
+    ancestry.push({nodeId:parent.id,type:parent.type,visible:parent.visible});
+  }
+  async function read(node,depth) {
+    if (depth>8 || !['INSTANCE','FRAME','GROUP','VECTOR'].includes(node.type))
+      throw Error('native-instance-wrapper-unsupported');
+    const out={id:node.id,name:node.name,type:node.type,size:{x:node.width,y:node.height},
+      relativeTransform:node.relativeTransform,visible:node.visible,isMask:node.isMask,
+      opacity:node.opacity,blendMode:node.blendMode,
+      fills:JSON.parse(JSON.stringify('fills' in node ? node.fills : [])),strokes:JSON.parse(JSON.stringify('strokes' in node ? node.strokes : [])),
+      effects:JSON.parse(JSON.stringify(node.effects))};
+    if ('clipsContent' in node) out.clipsContent=node.clipsContent;
+    if ('cornerRadius' in node) {
+      if(typeof node.cornerRadius!=='number')throw Error('native-instance-mixed-corner-radius');
+      out.cornerRadius=node.cornerRadius;
+    }
+    if(node.type==='INSTANCE') {
+      const main=await node.getMainComponentAsync();
+      if(!main||!main.key)throw Error('native-instance-main-identity-unavailable');
+      out.componentId=main.id;components.set(main.id,{key:main.key});
+      out.componentProperties=JSON.parse(JSON.stringify(node.componentProperties));
+    }
+    if(node.type==='VECTOR') out.fillGeometry=node.vectorPaths.map(p=>({path:p.data,windingRule:p.windingRule}));
+    else {
+      if(node.children.length!==1)throw Error('native-instance-single-child-required');
+      out.children=[await read(node.children[0],depth+1)];
+    }
+    return out;
+  }
+  try{return {status:'captured',root:await read(root,0),components:[...components],ancestry,
+    effectiveVisible:root.visible!==false&&ancestry.every(p=>p.visible!==false)};}
+  catch(error){return {status:'refused',reason:String(error.message||error),nodeId:root.id,ancestry};}
+}
+
+function neutralVectorWrapperPaint(paint) {
+  const opacity = paint.opacity ?? 1;
+  const alpha = paint.color?.a ?? 1;
+  return paint.type === "SOLID" && paint.blendMode === "MULTIPLY" && paint.color?.r === 1 && paint.color.g === 1 && paint.color.b === 1 && Number.isFinite(opacity) && opacity >= 0 && opacity <= 1 && Number.isFinite(alpha) && alpha >= 0 && alpha <= 1 && (opacity === 0 || alpha === 0);
+}
+function observeInstanceVector(root, components, refuse = () => undefined) {
+  if (root.type !== "INSTANCE" || !root.size || root.size.x <= 0 || root.size.y <= 0) return;
+  const source = [];
+  const wrappers = [];
+  let node = root, x = 0, y = 0, depth = 0;
+  const visible = (rows) => (rows ?? []).filter((p) => p.visible !== false);
+  while (node.type !== "VECTOR") {
+    if (++depth > 8 || !["INSTANCE", "FRAME", "GROUP"].includes(node.type) || node !== root && node.visible === false || node.isMask || node.opacity !== void 0 && node.opacity !== 1 || !["NORMAL", "PASS_THROUGH", void 0].includes(node.blendMode) || visible(node.strokes).length || visible(node.effects).length || (node.cornerRadius ?? 0) !== 0 || node.rectangleCornerRadii?.some((v) => v !== 0) || !node.size || !Number.isFinite(node.size.x) || !Number.isFinite(node.size.y) || node.size.x <= 0 || node.size.y <= 0 || node.children?.length !== 1 || Object.values(node.componentProperties ?? {}).some((p) => !["VARIANT", "INSTANCE_SWAP"].includes(p.type))) return;
+    if (visible(node.fills).some((paint) => !neutralVectorWrapperPaint(paint)))
+      return refuse("native-instance-wrapper-paint-unqualified");
+    if (node.type === "INSTANCE") {
+      const key = node.componentId ? components.get(node.componentId)?.key : void 0;
+      if (!node.componentId || !key || !node.id) return;
+      source.push({ nodeId: node.id, componentId: node.componentId, key });
+    }
+    wrappers.push({ x, y, width: node.size.x, height: node.size.y });
+    node = node.children[0];
+    const t = node.relativeTransform;
+    if (t?.length !== 2 || t.some((r) => r.length !== 3 || r.some((v) => !Number.isFinite(v))) || t[0][0] !== 1 || t[0][1] !== 0 || t[1][0] !== 0 || t[1][1] !== 1) return;
+    x += t[0][2];
+    y += t[1][2];
+  }
+  const paths = node.fillGeometry;
+  const fills = visible(node.fills);
+  if (node.visible === false || node.isMask || node.opacity !== void 0 && node.opacity !== 1 || !["NORMAL", "PASS_THROUGH", void 0].includes(node.blendMode) || !node.size || !Number.isFinite(node.size.x) || !Number.isFinite(node.size.y) || node.size.x <= 0 || node.size.y <= 0 || node.children?.length || visible(node.strokes).length || visible(node.effects).length || fills.length !== 1 || fills[0].type !== "SOLID" || !paths?.length || paths.length > 32) return;
+  const pathIssue = filledPathsIssue(paths.map(p => ({data:p.path,windingRule:p.windingRule})));
+  if (pathIssue) return refuse("native-instance-" + pathIssue);
+  const coordinates = paths.flatMap((p) => p.path.match(/[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g).map(Number));
+  if (coordinates.some((n, i) => !Number.isFinite(n) || wrappers.some((w) => {
+    const value = n + (i % 2 === 0 ? x : y), start = i % 2 === 0 ? w.x : w.y, extent = i % 2 === 0 ? w.width : w.height;
+    return value < start || value > start + extent;
+  }))) return;
+  if (wrappers.some((w) => x < w.x || y < w.y || x + node.size.x > w.x + w.width || y + node.size.y > w.y + w.height)) return;
+  return { source, vector: node, shape: {
+    kind: "path",
+    width: node.size.x,
+    height: node.size.y,
+    x,
+    y,
+    right: root.size.x - x - node.size.x,
+    bottom: root.size.y - y - node.size.y,
+    paths: paths.map((p) => ({ data: p.path, windingRule: p.windingRule })),
+    parentViewport: { width: root.size.x, height: root.size.y }
+  } };
+}
+
+// --- NATIVE GROUP AND IMAGE FACTS (start) ----------------------------------
+// GROUP/BOOLEAN_OPERATION relativeTransform is relative to the containing
+// frame, not the direct parent. Preserve both identities and original affine
+// bases; a later projection must qualify them before choosing a CSS owner.
+// Rotated auto-layout allocations are not axis-aligned fixed-size boxes.
+// Preserve local inputs and their parent coordinate basis for later lowering.
+function dumpNativeFlowGeometry(node) {
+  const parent=node.parent, matrix=node.relativeTransform;
+  if(node.type!=='FRAME'||!['HORIZONTAL','VERTICAL'].includes(node.layoutMode)||
+    !parent||!['HORIZONTAL','VERTICAL'].includes(parent.layoutMode)||node.layoutPositioning==='ABSOLUTE')return;
+  if(!Array.isArray(matrix)||matrix.length!==2||matrix.some(r=>!Array.isArray(r)||r.length!==3||r.some(v=>!Number.isFinite(v))))return;
+  if(matrix[0][0]===1&&matrix[0][1]===0&&matrix[1][0]===0&&matrix[1][1]===1)return;
+  if(!node.id||!parent.id||![node.width,node.height,parent.width,parent.height].every(v=>Number.isFinite(v)&&v>=0)||
+    !['FIXED','HUG','FILL'].includes(node.layoutSizingHorizontal)||!['FIXED','HUG','FILL'].includes(node.layoutSizingVertical)||
+    !['FIXED','AUTO'].includes(node.primaryAxisSizingMode)||!['FIXED','AUTO'].includes(node.counterAxisSizingMode)||
+    !Number.isFinite(node.layoutGrow)||!['INHERIT','STRETCH'].includes(node.layoutAlign))return;
+  return {nodeId:node.id,parentId:parent.id,localSize:{width:node.width,height:node.height},
+    parentSize:{width:parent.width,height:parent.height},relativeTransform:matrix.map(r=>r.slice()),
+    sizing:{horizontal:node.layoutSizingHorizontal,vertical:node.layoutSizingVertical},
+    primarySizing:node.primaryAxisSizingMode,counterSizing:node.counterAxisSizingMode,
+    layoutGrow:node.layoutGrow,layoutAlign:node.layoutAlign};
+}
+
+function dumpNativeContainerPlane(node) {
+  if (node.type !== 'GROUP' && node.parent?.type !== 'GROUP') return;
+  let container = node.parent, depth = 0;
+  while (container && ['GROUP', 'BOOLEAN_OPERATION'].includes(container.type)) {
+    if (++depth > 32) return { nodeId: node.id, issue: 'native-container-depth-unqualified' };
+    container = container.parent;
+  }
+  if (!container || !['FRAME', 'COMPONENT', 'INSTANCE'].includes(container.type))
+    return { nodeId: node.id, issue: 'native-container-missing' };
+  const matrix = value => Array.isArray(value) ? value.map(row => Array.isArray(row) ? row.slice() : row) : value;
+  return { nodeId: node.id, parentId: node.parent?.id, containerId: container.id,
+    containerType: container.type, size: { width: node.width, height: node.height },
+    containerSize: { width: container.width, height: container.height },
+    relativeTransform: matrix(node.relativeTransform), absoluteTransform: matrix(node.absoluteTransform),
+    containerAbsoluteTransform: matrix(container.absoluteTransform),
+    ...(node.constraints !== undefined ? { constraints: { ...node.constraints } } : {}) };
+}
+// Capture every visible IMAGE paint at its original stack index. CROP/FIT/TILE
+// facts are not FILL/cover; no image bytes or CSS equivalence are implied.
+function dumpNativeImagePaints(node) {
+  if (!Array.isArray(node.fills)) return;
+  const paints = [];
+  node.fills.forEach((paint, index) => {
+    if (paint.type !== 'IMAGE' || paint.visible === false) return;
+    const out = { index };
+    for (const field of ['imageHash', 'scaleMode', 'imageTransform', 'rotation', 'scalingFactor', 'opacity', 'blendMode', 'filters']) {
+      if (paint[field] !== undefined) out[field] = JSON.parse(JSON.stringify(paint[field]));
+    }
+    paints.push(out);
+  });
+  return paints.length ? paints : undefined;
+}
+// Original bytes, deduplicated by native hash. No rendered-node screenshot,
+// crop rewrite, image decoding, or image-dimension lookup is involved.
+const nativeImageAssets = Object.create(null);
+const nativeImageAssetPromises = new Map();
+let nativeImageAssetBytes = 0;
+async function captureNativeImageAsset(hash) {
+  if (typeof hash !== 'string' || !hash) return;
+  if (nativeImageAssetPromises.has(hash)) return nativeImageAssetPromises.get(hash);
+  const pending = (async () => {
+    try {
+      const image = figma.getImageByHash(hash);
+      if (!image) throw Error('native-image-unavailable');
+      const bytes = await image.getBytesAsync();
+      if (!bytes.length || bytes.length > 8 * 1024 * 1024 || nativeImageAssetBytes + bytes.length > 32 * 1024 * 1024)
+        throw Error('native-image-byte-budget-unqualified');
+      const starts = values => values.every((v, i) => bytes[i] === v);
+      const mimeType = starts([137,80,78,71,13,10,26,10]) ? 'image/png'
+        : starts([255,216,255]) ? 'image/jpeg'
+        : starts([71,73,70,56]) ? 'image/gif'
+        : starts([82,73,70,70]) && bytes[8] === 87 && bytes[9] === 69 && bytes[10] === 66 && bytes[11] === 80 ? 'image/webp' : undefined;
+      if (!mimeType) throw Error('native-image-format-unqualified');
+      nativeImageAssetBytes += bytes.length;
+      nativeImageAssets[hash] = {imageHash: hash, mimeType, byteLength: bytes.length, base64: figma.base64Encode(bytes)};
+    } catch (error) {
+      nativeImageAssets[hash] = {imageHash: hash, refused: String(error && error.message || error)};
+    }
+  })();
+  nativeImageAssetPromises.set(hash, pending);
+  return pending;
+}
+// --- NATIVE GROUP AND IMAGE FACTS (end) ------------------------------------
+
 async function dumpNode(node, nodePath, parent) {
-  const out = { name: node.name, type: node.type };
+  const out = { name: node.name, type: node.type, nodeId: node.id };
+  const localGeometry=observeLocalGeometry(node.id,parent && parent.id,node.relativeTransform,node.width,node.height,parent && parent.width,parent && parent.height);
+  if(localGeometry)out.localGeometry=localGeometry;
+  if (node.type === 'COMPONENT' && typeof node.key === 'string' && node.key) out.componentKey = node.key;
+  const nativeFlowGeometry = dumpNativeFlowGeometry(node);
+  if (nativeFlowGeometry) out.nativeFlowGeometry = nativeFlowGeometry;
+  const nativeContainerPlane = dumpNativeContainerPlane(node);
+  if (nativeContainerPlane) out.nativeContainerPlane = nativeContainerPlane;
+  const imagePaints = dumpNativeImagePaints(node);
+  if (imagePaints) {
+    out.imagePaints = imagePaints;
+    for (const paint of imagePaints) await captureNativeImageAsset(paint.imageHash);
+  }
+  if (node.isMask === true) out.mask = typeof node.maskType === 'string'
+    ? { type: node.maskType, ...(dumpInsideMaskStroke(node) ? {stroke:dumpInsideMaskStroke(node)} : {}) } : {};
   const selectionIdentity = node.getSharedPluginData('ds_contracts', 'selectionIdentity');
   if (selectionIdentity) { try { out.selectionIdentity = JSON.parse(selectionIdentity); } catch (_) { out.selectionIdentity = selectionIdentity; } }
 
@@ -3082,7 +3561,7 @@ async function dumpNode(node, nodePath, parent) {
 
   // dump v1.3 (#42): parametric decor geometry is CARRIED (rotation rides it).
   const shape = dumpShape(node, parent);
-  if (node.type === 'VECTOR' && node.isMask !== undefined && node.isMask !== false) {
+  if (node.type === 'VECTOR' && node.isMask !== undefined && node.isMask !== false && !shape) {
     degrade('vector-mask-unsupported', nodePath, 'A vector mask changes subsequent siblings; its geometry cannot be carried as an ordinary filled path. Mask composition is not recovered.');
   }
   if (shape) out.shape = shape;
@@ -3236,7 +3715,8 @@ async function dumpNode(node, nodePath, parent) {
   if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' (CSS mix-blend-mode) has no dump v1 projection — node renders as NORMAL');
   }
-  if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+  // Instances are checked after their independent matrix capture below.
+  if (!shape && node.type !== 'INSTANCE' && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' (CSS transform: rotate()) has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
   if (VECTOR_TYPES.indexOf(node.type) >= 0 && !shape) {
@@ -3362,8 +3842,9 @@ async function dumpNode(node, nodePath, parent) {
   if ('cornerRadius' in node && typeof node.cornerRadius === 'number' && node.cornerRadius !== 0) {
     out.cornerRadius = node.cornerRadius;
   } else if ('cornerRadius' in node && typeof node.cornerRadius !== 'number') {
-    // figma.mixed — per-corner radii (dump v1.2: named, no longer silent)
-    degrade('radii-nonuniform', nodePath, 'per-corner radii [' + [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius].join(', ') + '] (CSS border-top-left-radius / border-top-right-radius / border-bottom-right-radius / border-bottom-left-radius) are not uniform — dump v1 carries a uniform border-radius only; omitted');
+    const corners = [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius];
+    if (corners.every(r => Number.isFinite(r) && r >= 0) && !node.cornerSmoothing) out.cornerRadii = corners;
+    else degrade('radii-nonuniform', nodePath, 'per-corner radii with invalid values or smoothing are not carried');
   }
 
   // Direct variable bindings (paint bindings ride fill/stroke/text instead).
@@ -3374,6 +3855,17 @@ async function dumpNode(node, nodePath, parent) {
     if (name) bound[field] = name;
   }
   if (Object.keys(bound).length > 0) out.bound = bound;
+
+  // An absent or mixed fill list is not evidence of an explicitly empty fill.
+  if (node.type !== 'TEXT' && Array.isArray(node.fills) && node.fills.length === 0) out.sourceEmptyFill = true;
+  const sourceFillComposition=SolidFillCapture.observeSolidFillComposition('fills' in node ? node.fills : undefined);
+  if (sourceFillComposition) out.sourceFillComposition=sourceFillComposition;
+  // NORMAL text paint belongs to typography, not a background owner cell.
+  // Non-NORMAL text evidence stays above so unsupported blending still refuses.
+  else if (node.type !== 'TEXT') {
+    const normalPeer=SolidFillCapture.observeSolidFillComposition('fills' in node ? node.fills : undefined,true);
+    if(normalPeer)out.sourceNormalFillComposition=normalPeer;
+  }
 
   if (node.type !== 'TEXT') {
     // dump v1.16: the fill STACK — first visible SOLID plus a GRADIENT_LINEAR
@@ -3396,7 +3888,7 @@ async function dumpNode(node, nodePath, parent) {
     }
   }
   const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke', node) : null;
-  if (stroke) {
+  if (stroke && !out.mask?.stroke) {
     out.stroke = stroke;
     // dump v1.34: a stroke whose sides differ has no uniform weight — Figma
     // reports strokeWeight as figma.mixed — so the four side weights ride
@@ -3670,26 +4162,23 @@ async function dumpNode(node, nodePath, parent) {
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');
     }
+    const font = observedTextFont(node);
     const text = {
       characters: node.characters,
       fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
-      fontStyle: node.fontName === figma.mixed ? null : node.fontName.style,
+      fontStyle: font && typeof font.style === 'string' ? font.style : null,
     };
     if (typeof pxLineHeight === 'number' && isFinite(pxLineHeight)) text.lineHeight = pxLineHeight;
     if (lineHeightUnit) text.lineHeightUnit = lineHeightUnit;
     if (typeof pxLetterSpacing === 'number' && isFinite(pxLetterSpacing)) text.letterSpacing = pxLetterSpacing;
     if (node.textCase !== figma.mixed && TEXT_CASE_CAPTURED[node.textCase]) text.textCase = node.textCase;
     if (node.textDecoration !== figma.mixed && TEXT_DECORATION_CAPTURED[node.textDecoration]) text.textDecoration = node.textDecoration;
-    // dump v1.31: the font FAMILY, verbatim (REST twin: style.fontFamily).
-    // Inter is copied too — propose treats Inter as the pipeline default and
-    // carries any other family as declared font-family; omitting Inter would
-    // make "Inter drawn" and "not captured" the same absence. A mixed
-    // fontName carries nothing (the fontStyle above is null for the same
-    // reason) — a named receipt, not a first-range guess.
-    if (node.fontName !== figma.mixed && node.fontName && typeof node.fontName.family === 'string' && node.fontName.family.trim() !== '') {
-      text.fontFamily = node.fontName.family;
+    // v1.64: a mixed aggregate can be recovered only from complete uniform
+    // range evidence. Genuine mixed runs retain the named fidelity gap.
+    if (font && typeof font.family === 'string' && font.family.trim() !== '') {
+      text.fontFamily = font.family;
     } else if (node.fontName === figma.mixed) {
-      degrade('text-channel-unsupported', nodePath, 'fontName is mixed across character ranges — dump v1 carries ONE family/face per text node; fontFamily and fontStyle omitted (dump v1.31)');
+      degrade('text-channel-unsupported', nodePath, 'fontName is mixed and complete uniform range evidence is unavailable — dump v1 carries ONE family/face per text node; fontFamily and fontStyle omitted (dump v1.64)');
     }
     // Every observed alignment carries. LEFT cannot be inferred from CSS:
     // text-align inherits and button user-agent styles may center it.
@@ -3737,13 +4226,16 @@ async function dumpNode(node, nodePath, parent) {
     // stamps remain a fallback only when there is no native binding.
     const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
     const weightAliases = node.boundVariables && node.boundVariables.fontWeight;
-    if (Array.isArray(weightAliases) && weightAliases.length === 1 && weightAliases[0] &&
-        weightAliases[0].type === 'VARIABLE_ALIAS' && typeof weightAliases[0].id === 'string' && weightAliases[0].id !== '') {
+    const singleWeightAlias = Array.isArray(weightAliases) && weightAliases.length === 1 && weightAliases[0] &&
+        weightAliases[0].type === 'VARIABLE_ALIAS' && typeof weightAliases[0].id === 'string' && weightAliases[0].id !== '';
+    // A uniform rendered weight remains known when its variable name cannot be resolved.
+    if ((weightAliases === undefined || Array.isArray(weightAliases) && weightAliases.length === 0 || singleWeightAlias) &&
+        typeof node.fontWeight === 'number' && Number.isFinite(node.fontWeight) && node.fontWeight >= 1 && node.fontWeight <= 1000) text.fontWeight = node.fontWeight;
+    if (singleWeightAlias) {
       const nativeWeight = await varNameById(weightAliases[0].id, node);
       if (nativeWeight) {
         text.fontWeightVar = nativeWeight;
-        if (typeof node.fontWeight === 'number' && Number.isFinite(node.fontWeight)) text.fontWeight = node.fontWeight;
-        else degrade('text-channel-unsupported', nodePath, 'native fontWeight binding has no uniform numeric value');
+        if (text.fontWeight === undefined) degrade('text-channel-unsupported', nodePath, 'native fontWeight binding has no uniform numeric value');
         if (weightVar && weightVar !== nativeWeight) degrade('text-binding-conflict', nodePath,
           'native fontWeight binding "' + nativeWeight + '" differs from legacy stamp "' + weightVar + '" — native identity captured');
       } else degrade('text-channel-unsupported', nodePath, 'native fontWeight variable unavailable — legacy stamp not substituted');
@@ -3767,13 +4259,14 @@ async function dumpNode(node, nodePath, parent) {
     } else if (lhVar) text.lineHeightVar = lhVar;
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
+    if (Array.isArray(node.fills) && node.fills.every(paint => paint.visible === false)) out.textFillAbsent = true;
     out.text = text;
     if (fill) out.fill = fill;
   }
 
   const propRefs = {};
   for (const [kind, key] of Object.entries(node.componentPropertyReferences || {})) {
-    if (key) propRefs[kind] = key.split('#')[0];
+    if (key) propRefs[kind] = key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
   }
   if (Object.keys(propRefs).length > 0) out.propRefs = propRefs;
 
@@ -3829,7 +4322,7 @@ async function dumpNode(node, nodePath, parent) {
             const swap = { id: def.value };
             try {
               const observedInstances = await dumpSwapInstances(node, key);
-              if (observedInstances && observedInstances.length) swap.observedInstances = observedInstances;
+              if (observedInstances !== undefined) swap.observedInstances = observedInstances;
             } catch (_) {
               degrade('instance-main-unresolved', nodePath, 'INSTANCE_SWAP "' + key + '" occurrence geometry could not be read; no partial sizing evidence is retained');
             }
@@ -3844,7 +4337,7 @@ async function dumpNode(node, nodePath, parent) {
             } catch (e) {
               degrade('instance-main-unresolved', nodePath, 'INSTANCE_SWAP "' + key + '" = ' + def.value + ' — lookup threw (' + (e && e.message ? e.message : String(e)) + '); the id is carried without a name/key (dump v1.31 fixedSwaps)');
             }
-            fixedSwaps[key.split('#')[0]] = swap;
+            fixedSwaps[key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')] = swap;
           }
           continue;
         }
@@ -3856,6 +4349,11 @@ async function dumpNode(node, nodePath, parent) {
       // componentProperties can throw on detached/broken instances — dump v1
       // fixtures shipped without this field, so absence is always tolerated.
     }
+    out.instanceGeometry = observeInstanceGeometry(node.id, main && main.id, node.relativeTransform, node.width, node.height);
+    if (!out.instanceGeometry) delete out.instanceGeometry;
+    if (!out.instanceGeometry && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+      degrade('rotation-unsupported', nodePath, 'instance rotation has no observed local size and matrix; transform cannot be qualified');
+    }
     // dump v1.10: TEXT OVERRIDES — the one channel a child component with no
     // TEXT property leaves nowhere else to land. InstanceNode.overrides is
     // Figma's OWN record of what this host changed; we filter it to
@@ -3866,6 +4364,26 @@ async function dumpNode(node, nodePath, parent) {
     try {
       const overridden = {};
       let overriddenCount = 0;
+      const rootOverrides = (node.overrides || []).filter(function (o) {
+        return o && o.id === node.id;
+      });
+      if (Array.isArray(node.overrides) && main &&
+          (rootOverrides.length === 0 || rootOverrides.length === 1 && Array.isArray(rootOverrides[0].overriddenFields))) {
+        const fields = Array.from(new Set(rootOverrides[0]?.overriddenFields || [])).sort();
+        const localSize = {};
+        for (const dimension of ['width','height']) {
+          if (fields.indexOf(dimension) >= 0 && Number.isFinite(node[dimension]) && node[dimension] >= 0) localSize[dimension] = node[dimension];
+        }
+        out.instanceRootOverrides = {nodeId:node.id,componentId:main.id,fields,
+          ...(['HORIZONTAL','VERTICAL'].includes(main.layoutMode) && [main.paddingTop,main.paddingRight,main.paddingBottom,main.paddingLeft].every(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0) ? {mainPadding:[main.paddingTop,main.paddingRight,main.paddingBottom,main.paddingLeft]} : {}),
+          ...(Number.isFinite(main.width) && Number.isFinite(main.height) && main.width >= 0 && main.height >= 0 ? {mainSize:{width:main.width,height:main.height}} : {}),
+          ...(out.instanceKey ? {componentKey:out.instanceKey} : {}),
+          ...(out.instanceSetKey ? {componentSetKey:out.instanceSetKey} : {}),
+          ...(node.relativeTransform && node.relativeTransform.length===2 && node.relativeTransform.every(row=>row.length===3&&row.every(Number.isFinite)) ? {localTransform:node.relativeTransform.map(row=>[...row])} : {}),
+          ...(Object.keys(localSize).length ? {localSize} : {})};
+      } else if (rootOverrides.length > 1) {
+        degrade('instance-root-override-ambiguous', nodePath, 'multiple root override rows — no unique root override authority captured');
+      }
       // dump v1.31 hostOverrides: the SAME record, every field beyond
       // 'characters' (fills on an icon's vector, strokes, visible, …) — a
       // HOST fact on a child-owned node, named with the descendant's first
@@ -3897,13 +4415,52 @@ async function dumpNode(node, nodePath, parent) {
           const seg = [];
           for (let p = n; p && p.id !== node.id; p = p.parent) seg.unshift(p.name);
           const h = { path: seg.join('/'), fields: hostFieldsById[n.id] };
+          if (h.fields.includes('componentProperties') && n.type === 'INSTANCE') {
+            try {
+              const observed = await dumpNestedInstanceProperties(node,n);
+              if (observed) h.instanceProperties = observed;
+              else degrade('host-instance-properties-unavailable', nodePath, 'nested property values lack complete owner, target or selection identity');
+            } catch (_) { degrade('host-instance-properties-unavailable', nodePath, 'nested property selection could not be read'); }
+          }
+          if (h.fields.indexOf('visible') >= 0 && typeof n.visible === 'boolean') {
+            try {
+              const target = await dumpSolidFillTarget(node,n,'visibility');
+              if (target) h.visibilityTarget = {...target,visible:n.visible};
+            } catch (_) { degrade('host-override-visibility-target-unavailable', nodePath, 'the overridden visibility owner identity could not be read'); }
+          }
           if (h.fields.indexOf('fills') >= 0 && 'fills' in n && Array.isArray(n.fills)) {
+            if (n.fills.length === 0) {
+              const target = await dumpSolidFillTarget(node,n,'shape-fill');
+              if (target) { h.shapeFillTarget = target; h.sourceEmptyFill = true; }
+              const vectorTarget = await dumpSolidFillTarget(node,n);
+              if (vectorTarget) { h.solidFillTarget = vectorTarget; h.sourceEmptyFill = true; }
+            }
             const paint = await dumpPaint(n.fills, null, 'fill', n);
             if (paint) {
               h.fill = paint;
               try {
+                const shapeTarget = await dumpSolidFillTarget(node,n,'shape-fill');
+                if (shapeTarget) {
+                  h.shapeFillTarget = shapeTarget;
+                  const normal = SolidFillCapture.observeSolidFillComposition(n.fills, true);
+                  if (normal) h.sourceNormalFillComposition = normal;
+                  const rows = capturedVariableConsumers.get(n.id);
+                  if (rows) { const captured=Object.fromEntries(Object.entries(rows).filter(([,value])=>value!==null)); if(Object.keys(captured).length)h.variableConsumers=captured; }
+                }
+                const textTarget = await dumpSolidFillTarget(node,n,'text-fill');
+                if (textTarget) h.textFillTarget = textTarget;
                 const target = await dumpSolidFillTarget(node,n);
-                if (target) h.solidFillTarget = target;
+                if (target) {
+                  h.solidFillTarget = target;
+                  if (Array.isArray(n.strokes) && n.strokes.length === 0) h.emptyStrokeTarget = target;
+                  const normal = SolidFillCapture.observeSolidFillComposition(n.fills, true);
+                  if (normal) h.sourceNormalFillComposition = normal;
+                  const rows = capturedVariableConsumers.get(n.id);
+                  if (rows) {
+                    const captured = Object.fromEntries(Object.entries(rows).filter(([, value]) => value !== null));
+                    if (Object.keys(captured).length) h.variableConsumers = captured;
+                  }
+                }
               } catch (_) {
                 degrade('host-paint-target-unavailable', nodePath, 'the overridden vector main identity could not be read — no paint target inferred');
               }
@@ -3913,11 +4470,25 @@ async function dumpNode(node, nodePath, parent) {
             const paint = await dumpPaint(n.strokes, null, 'stroke', n);
             if (paint) {
               h.stroke = paint;
-              try { const target = await dumpSolidFillTarget(node,n,'stroke'); if (target) h.solidStrokeTarget = target; }
+              try {
+                const target = await dumpSolidFillTarget(node,n,'stroke');
+                if (target) {
+                  h.solidStrokeTarget = target;
+                  const normal = SolidFillCapture.observeSolidFillComposition(n.strokes,true);
+                  if (normal) h.sourceNormalStrokeComposition = normal;
+                  try { h.vectorStrokeGeometry = dumpHostVectorStrokeGeometry(n,target); }
+                  catch (error) { degrade('host-vector-stroke-geometry-unavailable',nodePath,String(error.message||error)); }
+                }
+              }
               catch (_) { degrade('host-paint-target-unavailable', nodePath, 'the overridden stroke main identity could not be read'); }
             }
           }
           if (h.fields.indexOf('strokeWeight') >= 0 && Number.isFinite(n.strokeWeight) && n.strokeWeight > 0) h.strokeWeight = n.strokeWeight;
+          const consumers = capturedVariableConsumers.get(n.id);
+          if (consumers) {
+            const captured = Object.fromEntries(Object.entries(consumers).filter(([,value])=>value!==null));
+            if (Object.keys(captured).length) h.variableConsumers = captured;
+          }
           hostOverrides.push(h);
           located++;
         }
@@ -3928,6 +4499,7 @@ async function dumpNode(node, nodePath, parent) {
       }
       if (overriddenCount > 0 && typeof node.findAll === 'function') {
         const textOverrides = {};
+        const textOverrideTargets = {};
         let located = 0;
         for (const t of node.findAll(function (n) { return n.type === 'TEXT'; }).slice(0, 60)) {
           if (!overridden[t.id]) continue;
@@ -3938,20 +4510,45 @@ async function dumpNode(node, nodePath, parent) {
           if (Object.prototype.hasOwnProperty.call(textOverrides, seg.join('/'))) {
             degrade('text-override-ambiguous-path', nodePath, 'two text descendants of this instance share the name path "' + seg.join('/') + '" — both character overrides refused (a name path must identify one node)');
             textOverrides[seg.join('/')] = null;
+            delete textOverrideTargets[seg.join('/')];
             located++;
             continue;
           }
           textOverrides[seg.join('/')] = t.characters;
+          const target = await dumpSolidFillTarget(node, t, 'text-characters');
+          if (target) textOverrideTargets[seg.join('/')] = target;
           located++;
         }
         for (const k of Object.keys(textOverrides)) if (textOverrides[k] === null) delete textOverrides[k];
         if (Object.keys(textOverrides).length > 0) out.textOverrides = textOverrides;
+        if (Object.keys(textOverrideTargets).length > 0) out.textOverrideTargets = textOverrideTargets;
         if (located < overriddenCount) {
           degrade('text-override-unlocated', nodePath, (overriddenCount - located) + ' of ' + overriddenCount + ' character override(s) reported by InstanceNode.overrides could not be matched to a TEXT descendant of this instance (hidden branch, or past the 60-node walk cap) — not captured');
         }
       }
     } catch (e) {
       degrade('text-override-unreadable', nodePath, 'InstanceNode.overrides threw — per-instance character overrides not captured for this instance (the child renders its own default characters)');
+    }
+  }
+
+  if (node.type === 'INSTANCE') {
+    // Capture the current usage completely before proposing a shared drawing.
+    // A refusal leaves the instance API unknown; another usage is never substituted.
+    if (out.propRefs?.mainComponent === undefined) {
+      const captured = await captureNativeInstanceVectorInput(node);
+      if (captured.status === 'captured') {
+        let projectionRefusal;
+        const drawing = observeInstanceVector(captured.root, new Map(captured.components), reason => { projectionRefusal = reason; });
+        if (drawing) {
+          const nativeVector = await figma.getNodeByIdAsync(drawing.vector.id);
+          const paint = nativeVector && await dumpPaint(nativeVector.fills, nodePath + '/[observed vector]', 'fill', nativeVector);
+          if (paint) {
+            out.instanceVectorContent = {source:drawing.source,shape:drawing.shape,paint};
+            out.bbox = {width:captured.root.size.x,height:captured.root.size.y};
+            nativeInstanceVisibility.push({nodeId:node.id,ancestry:captured.ancestry,effectiveVisible:captured.effectiveVisible});
+          }
+        } else degrade('instance-vector-content-unobserved', nodePath, projectionRefusal || 'captured usage has no qualified vector projection');
+      } else degrade('instance-vector-content-unobserved', nodePath, captured.reason || captured.status);
     }
   }
 
@@ -3976,7 +4573,7 @@ function dumpPropertyDefinitions(node) {
   const out = { propertyDefinitions: {}, swapPreferredValues: {}, boolDefaults: {}, slotDescriptions: {} };
   try {
     for (const [propName, def] of Object.entries(node.componentPropertyDefinitions || {})) {
-      const name = propName.split('#')[0];
+      const name = propName.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
       const captured = { type: def.type, defaultValue: def.defaultValue };
       if (def.type === 'VARIANT' && Array.isArray(def.variantOptions)) {
         captured.variantOptions = def.variantOptions.map(String);
@@ -4011,12 +4608,19 @@ function dumpPropertyDefinitions(node) {
   return out;
 }
 
+// Private component names beginning with _ remain component identities.
+// Only actual metadata slots, unsafe object keys and integer-order keys collide.
+function invalidDumpSetName(name) {
+  return ['_provenance', '_variables', '_degradations', '_imageAssets', '__proto__', 'constructor', 'prototype'].includes(name) || /^(0|[1-9]\d*)$/.test(name);
+}
+
+const nativeInstanceVisibility = [];
 const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.48',
+    dumpVersion: '1.76',
   },
 };
 dumps._degradations = degradations;
@@ -4038,30 +4642,40 @@ const localSets = [];
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
-    if (node.name === 'Slot') continue; // utility, never a contract component
     seenNames.push(node.name);
     localSets.push(node);
   }
 }
+const capturedNames = new Map();
+const captureName = node => capturedNames.get(node.id) || node.name;
+const remoteMainSnapshots = new Map();
+const detachedMainSnapshots = new Map();
 let captureSets = localSets.filter((node) =>
   TARGET_SETS.length > 0 ? TARGET_SETS.includes(node.name) :
-    scope === 'selection' ? selectedSetIds.has(node.id) : true);
+    scope === 'selection' ? selectedSetIds.has(node.id) : node.name !== 'Slot');
 if (INCLUDE_DEPENDENCIES) {
   const refuse = (reason, detail) => { throw new Error('DEPENDENCY_CAPTURE_' + reason + ': ' + detail); };
   const byId = new Map(localSets.map((node) => [node.id, node]));
   const chosen = new Map();
   const names = new Map();
+  const sameKeyRemoteNames = new Set();
   const edges = new Map();
   const origins = new Map();
   const requestedIds = new Set(captureSets.map((node) => node.id));
   let visited = 0;
-  const describe = (node) => ({ nodeId: node.id, name: node.name, type: node.type });
+  const describe = (node) => ({ nodeId: node.id, name: captureName(node), type: node.type,
+    ...(capturedNames.has(node.id) ? {sourceName:node.name} : {}),
+    ...(detachedMainSnapshots.has(node.id) ? {detachedSnapshot:detachedMainSnapshots.get(node.id)} : {}),
+    ...(remoteMainSnapshots.has(node.id) ? {remoteSnapshot:remoteMainSnapshots.get(node.id)} : {}) });
   const add = (node, round, from) => {
-    if (node.name.startsWith('_') || node.name === 'constructor' || node.name === 'prototype' || /^(0|[1-9]\d*)$/.test(node.name)) {
+    if (invalidDumpSetName(node.name)) {
       refuse('SET_NAME', JSON.stringify(node.name) + ' cannot be represented as a dump set key. Rename the component and retry.');
     }
     if (names.has(node.name) && names.get(node.name) !== node.id) {
-      refuse('AMBIGUOUS_NAME', JSON.stringify(node.name) + ' names multiple captured components. Rename them and retry.');
+      const prior = chosen.get(names.get(node.name));
+      const sameRemoteKey = prior && prior.remote && node.remote && typeof node.key === 'string' && node.key.length > 0 && prior.key === node.key;
+      if (sameRemoteKey && remoteMainSnapshots.get(prior.id)?.kind === 'remote-main-snapshot' && remoteMainSnapshots.get(node.id)?.kind === 'remote-main-snapshot') sameKeyRemoteNames.add(node.name);
+      else refuse('AMBIGUOUS_NAME', JSON.stringify(node.name) + ' names multiple captured components (' + prior.id + ', ' + node.id + '). Use distinct component names and retry.');
     }
     names.set(node.name, node.id);
     if (!chosen.has(node.id)) {
@@ -4072,19 +4686,22 @@ if (INCLUDE_DEPENDENCIES) {
       edges.set(node.id, new Set());
       origins.set(node.id, { round, referencedBy: new Set() });
     }
-    if (from) origins.get(node.id).referencedBy.add(from.name);
+    if (from) origins.get(node.id).referencedBy.add(from.id);
   };
   for (const node of captureSets) add(node, 0, null);
   // Map iteration includes later additions, giving a deterministic breadth-first
   // walk. IDs, never names, decide which main owns an observed instance.
   for (const owner of chosen.values()) {
-    const follow = (main, path) => {
+    const follow = async (main, path) => {
       if (!main) refuse('MAIN_UNREADABLE', path + ' has no readable main component.');
       if (main.type !== 'COMPONENT') refuse('NOT_COMPONENT', path + ' does not reference a component.');
       const target = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
-      if (main.remote || target.remote) refuse('REMOTE_COMPONENT', path + ' references remote ' + target.name + '; capture requires local main components.');
-      if (target.name === 'Slot') return; // utility placeholder, not a dependency
-      if (!byId.has(target.id)) refuse('MAIN_UNREADABLE', path + ' references a main outside the readable local file.');
+      if (main.remote || target.remote) {
+        remoteMainSnapshots.set(target.id,target === main ? captureRemoteMainSnapshot(main,figma.fileKey) : captureRemoteSetSnapshot(target,figma.fileKey));
+      } else if (!byId.has(target.id)) {
+        if (target !== main || main.parent !== null) refuse('MAIN_UNREADABLE', path + ' references a main outside the readable local file.');
+        detachedMainSnapshots.set(target.id, await captureDetachedMainSnapshot(main, figma.fileKey, id => figma.getNodeByIdAsync(id)));
+      }
       add(target, origins.get(owner.id).round + 1, owner);
       edges.get(owner.id).add(target.id);
     };
@@ -4097,7 +4714,7 @@ if (INCLUDE_DEPENDENCIES) {
         let main;
         try { main = await node.getMainComponentAsync(); }
         catch (e) { refuse('MAIN_UNREADABLE', path + ': ' + String(e && e.message || e)); }
-        follow(main, path);
+        await follow(main, path);
         let props;
         try { props = node.componentProperties || {}; }
         catch (e) { refuse('PROPERTIES_UNREADABLE', path + ': ' + String(e && e.message || e)); }
@@ -4106,14 +4723,22 @@ if (INCLUDE_DEPENDENCIES) {
           let swapped;
           try { swapped = await figma.getNodeByIdAsync(def.value); }
           catch (e) { refuse('MAIN_UNREADABLE', path + ' / ' + key + ': ' + String(e && e.message || e)); }
-          follow(swapped, path + ' / ' + key);
+          await follow(swapped, path + ' / ' + key);
         }
-        // The dump represents the main and fixed swaps above, not arbitrary
-        // instance internals. Its own override reader names unsupported changes.
-        continue;
+        // Nested instances can select a different main from the library default
+        // without exposing that swap on this outer instance. Capture their real
+        // dependencies too. This inventory does not authorize applying overrides;
+        // the normal reader and proposer still require their own source witnesses.
       }
       if (node.children) for (let i = node.children.length - 1; i >= 0; i--) pending.push(node.children[i]);
     }
+  }
+  // Preserve distinct remote snapshots without changing their source nodes.
+  const occupiedNames = new Set([...chosen.values()].map(node=>node.name));
+  for (const node of chosen.values()) if (sameKeyRemoteNames.has(node.name)) {
+    const name=node.name+' [captured '+node.id+']';
+    if (occupiedNames.has(name) || invalidDumpSetName(name)) refuse('AMBIGUOUS_NAME', 'Capture-local name collision: '+name);
+    occupiedNames.add(name);capturedNames.set(node.id,name);
   }
   const active = new Set(), complete = new Set(), dependencyFirst = [];
   const checkCycle = (id) => {
@@ -4131,7 +4756,7 @@ if (INCLUDE_DEPENDENCIES) {
     requested: captureSets.map(describe),
     pulled: [...chosen.values()].filter((node) => !requestedIds.has(node.id)).map((node) => ({
       ...describe(node), round: origins.get(node.id).round,
-      referencedBy: [...origins.get(node.id).referencedBy].sort(),
+      referencedBy: [...origins.get(node.id).referencedBy].map(id=>captureName(chosen.get(id))).sort(),
     })),
     unresolved: [], cycles: [],
   };
@@ -4140,15 +4765,21 @@ if (INCLUDE_DEPENDENCIES) {
   captureSets = dependencyFirst;
 }
 for (const node of captureSets) {
+    const capturedName=captureName(node);
+    if (invalidDumpSetName(node.name)) throw new Error('DUMP_CAPTURE_SET_NAME: ' + JSON.stringify(node.name) + ' collides with dump metadata, object keys or integer ordering.');
+    if (Object.prototype.hasOwnProperty.call(dumps, capturedName)) throw new Error('DUMP_CAPTURE_AMBIGUOUS_NAME: ' + JSON.stringify(node.name) + ' names multiple captured components.');
     const variants = [];
     if (node.type === 'COMPONENT_SET') {
-      for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name, node));
+      for (const variant of node.children) variants.push(await dumpNode(variant, capturedName + ':' + variant.name, node));
     } else {
-      variants.push(await dumpNode(node, node.name + ':' + node.name));
+      variants.push(await dumpNode(node, capturedName + ':' + node.name));
     }
     const defs = dumpPropertyDefinitions(node);
-    dumps[node.name] = {
-      setName: node.name,
+    dumps[capturedName] = {
+      setName: capturedName,
+      ...(capturedNames.has(node.id) ? {captureAlias:{sourceName:node.name,nodeId:node.id}} : {}),
+      ...(detachedMainSnapshots.has(node.id) ? {detachedSnapshot:detachedMainSnapshots.get(node.id)} : {}),
+    ...(remoteMainSnapshots.has(node.id) ? {remoteSnapshot:remoteMainSnapshots.get(node.id)} : {}),
       // dump v1.32: the set's own description + documentation links — the
       // designer's words and pointers, carried so propose can keep them
       // (REST reads the same two fields off the response metadata).
@@ -4210,6 +4841,11 @@ for (const node of captureSets) {
         try { return { unsetVariantAxes: JSON.parse(raw) }; } catch (e) { return { unsetVariantAxes: raw }; }
       })(),
       ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'drawnVariants');
+        if (!raw) return {};
+        try { return { drawnVariants: JSON.parse(raw) }; } catch (e) { return { drawnVariants: raw }; }
+      })(),
+      ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'rootSlot');
         if (!raw) return {};
         try { return { rootSlot: JSON.parse(raw) }; } catch (e) { return { rootSlot: raw }; }
@@ -4239,25 +4875,25 @@ for (const node of captureSets) {
       key: node.key,
       variants,
     };
-    if (dumps[node.name].rootSlot && dumps[node.name].rootSlot.textTemplate === 1) {
+    if (dumps[capturedName].rootSlot && dumps[capturedName].rootSlot.textTemplate === 1) {
       try {
         const graph = await readTemplateVariableGraph(node);
-        if (graph) dumps[node.name].templateVariableGraph = graph;
+        if (graph) dumps[capturedName].templateVariableGraph = graph;
       } catch (e) {
         degrade('template-variable-graph-unavailable', node.name,
           'complete raw graph not captured (' + (e && e.message ? e.message : String(e)) + ')');
       }
     }
-    if (Object.keys(defs.propertyDefinitions).length > 0) dumps[node.name].propertyDefinitions = defs.propertyDefinitions;
-    if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
-    if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;
-    if (Object.keys(defs.slotDescriptions).length > 0) dumps[node.name].slotDescriptions = defs.slotDescriptions;
+    if (Object.keys(defs.propertyDefinitions).length > 0) dumps[capturedName].propertyDefinitions = defs.propertyDefinitions;
+    if (Object.keys(defs.swapPreferredValues).length > 0) dumps[capturedName].swapPreferredValues = defs.swapPreferredValues;
+    if (Object.keys(defs.boolDefaults).length > 0) dumps[capturedName].boolDefaults = defs.boolDefaults;
+    if (Object.keys(defs.slotDescriptions).length > 0) dumps[capturedName].slotDescriptions = defs.slotDescriptions;
 }
 // R8: the dump says WHAT it dumped, and a named set that is not in the file is
 // a refusal — never a quiet `{}` that propose reads as "no sets".
-const dumpedSets = Object.keys(dumps).filter((k) => k.charAt(0) !== '_');
+const dumpedSets = captureSets.map(captureName);
 if (TARGET_SETS.length > 0) {
-  const missing = TARGET_SETS.filter((name) => !dumpedSets.includes(name));
+  const missing = TARGET_SETS.filter((name) => !captureSets.some(node=>node.name===name));
   if (missing.length > 0) {
     const available = seenNames.slice(0, 40).map((n) => JSON.stringify(n)).join(', ') + (seenNames.length > 40 ? ', +' + (seenNames.length - 40) + ' more' : '');
     throw new Error(
@@ -4268,7 +4904,13 @@ if (TARGET_SETS.length > 0) {
     );
   }
 }
+if (Object.keys(nativeImageAssets).length) dumps._imageAssets = nativeImageAssets;
+dumps._provenance.nativeInstanceVisibility = nativeInstanceVisibility;
 dumps._provenance.sets = dumpedSets;
 console.log('dump v1.30 (' + scope + '): ' + dumpedSets.length + ' set(s)' + (dumpedSets.length > 0 ? ' — ' + dumpedSets.join(', ') : ' — nothing to dump: this file has no COMPONENT_SET / COMPONENT outside the Slot utility'));
 return dumps;
+
+} finally {
+figma.skipInvisibleInstanceChildren = previousInvisibleChildFlag;
+}
 </script>

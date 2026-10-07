@@ -6,6 +6,9 @@ import type {ReactElementObservedValue} from './react-element-invocation.js';
 export type ReactContextValueWitness=ReactElementObservedValue & {identity?:number};
 export interface ReactContextRuntimeReport {
   qualification:'react-context-transport-only';effectsVerified:false;acceptedContract:null;
+  exportReads?:Array<{site:HelperSourcePoint;render:number;factory:number;value:ReactContextValueWitness;qualification:'runtime-export-binding-only';effectsVerified:false}>;
+  initializationWrites?:{qualification:'original-initialization-assignment-observations-only';effectsVerified:false;planned:number;writes:Array<{site:string;property:string;owner:{kind:string;source?:string;file?:string;allocation?:number};target:ReactContextValueWitness;value:ReactContextValueWitness;valueSource:string}>};
+  commonJs?:{qualification:'bundler-allocated-module-identity-only';effectsVerified:false;allocations:number;modules:Array<{file:string;allocation:number;module:ReactContextValueWitness;initialExports:ReactContextValueWitness;currentExports:ReactContextValueWitness}>};
   contexts:number;providers:Array<{id:number;context:number;factory:number;value:ReactElementObservedValue;valueOrigin:number|null}>;
   reads:Array<{context:number;provider:number|null;consumer:HelperSourcePoint|null;render:number|null;call:HelperSourcePoint|null;value:ReactElementObservedValue;valueOrigin:number|null}>;
   renders:{qualification:'original-render-context-boundaries-only';effectsVerified:false;acceptedContract:null;
@@ -13,7 +16,7 @@ export interface ReactContextRuntimeReport {
   bindings:{qualification:'source-module-binding-read-identity-only';effectsVerified:false;acceptedContract:null;planned:number;functions:number;
     reads:Array<{id:number;site:HelperSourcePoint;binding:HelperSourcePoint;consumer:HelperSourcePoint;render:number;kind:'value'|'typeof';value:ReactContextValueWitness;functionSource:HelperSourcePoint|null;calleeOf:number|null}>};
   factories:{qualification:'source-jsx-factory-identity-only';effectsVerified:false;acceptedContract:null;planned:number;
-    invocations:Array<{id:number;site:HelperSourcePoint;target:HelperSourcePoint;consumer:HelperSourcePoint;render:number;factory:'jsx'|'jsxs';targetRead:number|null;callee:ReactContextValueWitness;arguments:ReactContextValueWitness[];completion:'returned'|'threw';value?:ReactContextValueWitness}>};
+    invocations:Array<{id:number;site:HelperSourcePoint;target:HelperSourcePoint;consumer:HelperSourcePoint;render:number;factory:'jsx'|'jsxs'|'createElement';targetRead:number|null;callee:ReactContextValueWitness;arguments:ReactContextValueWitness[];completion:'returned'|'threw';value?:ReactContextValueWitness;propsReceipt?:{qualification:'native-factory-config-props-observation-only';effectsVerified:false;config:ReactContextValueWitness;props:ReactContextValueWitness;configFields:Array<[string,ReactContextValueWitness]>;propsFields:Array<[string,ReactContextValueWitness]>;positionalChildren:ReactContextValueWitness[]}}>};
   targetReads:{qualification:'source-object-target-property-reads-only';effectsVerified:false;acceptedContract:null;planned:number;allocations:number;reads:Array<{id:number;site:HelperSourcePoint;objectSource:HelperSourcePoint;property:string;render:number;factory:number;value:ReactContextValueWitness;propertyEffectsVerified:true}>};
   values:{qualification:'source-object-rest-values-only';effectsVerified:false;acceptedContract:null;allocations:number;
     origins:Array<{id:number;source:HelperSourcePoint;identity:number;fields:Array<[string,ReactElementObservedValue]>|null;witnesses:Array<[string,ReactContextValueWitness]>|null}>};
@@ -32,7 +35,7 @@ export interface ReactContextRuntimeReport {
  * factory/renderer. Only compiler-witnessed fresh object-rest allocations have
  * shallow data descriptors recorded; all other values remain opaque. This is
  * not a source model of providers, hooks, state, refs or event effects. */
-export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,callPlans,restPlans,helperPlans,consumerPlans,factoryPlans,invokeFactory,bindingPlans,targetPlans,observeConsumerReturn)=>{
+export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,callPlans,restPlans,helperPlans,consumerPlans,factoryPlans,invokeFactory,bindingPlans,targetPlans,observeConsumerReturn,describeFactory,initializationWritePlans=[])=>{
  const contexts=new N.WeakMapCtor(),factories=new N.WeakMapCtor(),created=[],providers=[],reads=[],renders=[],renderInvocations=[],hookFrames=[],hookCalls=[];
  const identities=new Map();let nextIdentity=0;
  const allocated=new N.WeakMapCtor(),allocations=[];let restValidationFailed=false;
@@ -46,7 +49,39 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
  const helperByValue=new N.WeakMapCtor(),helperInstances=[],helperInvocations=[],helperFrames=[];let helperValidationFailed=false;
  const consumerSites=(consumerPlans??[]).map(p=>({key:point(p.call),consumer:point(p.consumer),callee:point(p.callee),arity:p.arguments.length})),consumerInvocations=[],consumerFrames=[];
  let consumerValidationFailed=false;
- const bindingSites=(bindingPlans?.reads??[]).map(p=>({key:point(p.read),binding:point(p.binding),consumer:point(p.consumer),kind:p.kind}));
+ const functionNamespaces=new N.WeakMapCtor();
+ const initializationWrites=[];
+ function initializationWrite(site,target,property,invoke){
+  intrinsics();const plan=initializationWritePlans.find(p=>point(p.site)===site);
+  if(!plan||plan.key!==property||typeof invoke!=='function'||renderInvocations.length||initializationWrites.some(w=>w.site===site))fail('initialization-write-unplanned-or-late');
+  let owner;
+  if(plan.owner==='source-function'){
+   if(!plan.targetSource||!N.is(bindingFunctions.get(point(plan.targetSource)),target))fail('initialization-write-function-origin');owner={kind:'source-function',source:point(plan.targetSource)};
+   if(N.prototype(target)!==Function.prototype)fail('initialization-write-function-prototype');
+  }else if(plan.owner==='loader'){
+   const module=commonJsModules.find(m=>m.file===plan.site.file&&N.is(m.module,target));if(!module||property!=='exports')fail('initialization-write-module-origin');owner={kind:'loader',file:module.file,allocation:module.origin.id};
+   if(N.prototype(target)!==Object.prototype)fail('initialization-write-module-prototype');
+  }else fail('initialization-write-owner-unmodeled');
+  const before=N.descriptor(target,property);
+  if(before){if(!N.descriptor(before,'value')||!before.writable||!before.enumerable||!before.configurable)fail('initialization-write-descriptor');}
+  else {if(property==='__proto__')fail('initialization-write-inherited');for(let p=N.prototype(target);p!==null;p=N.prototype(p))if(N.descriptor(p,property))fail('initialization-write-inherited');}
+  const value=N.apply(invoke,undefined,[target]);intrinsics();const after=N.descriptor(target,property);
+  if(!after||!N.descriptor(after,'value')||!after.writable||!after.enumerable||!after.configurable||!N.is(after.value,value))fail('initialization-write-result');
+  const valueSource=[...bindingFunctions.entries()].find(([key,fn])=>N.is(fn,value))?.[0];if(!valueSource)fail('initialization-write-value-unregistered');
+  initializationWrites.push({site,property,target,owner,value,valueSource});return value;
+ }
+
+ let commonJsKernel=null;const commonJsObjects=new N.WeakMapCtor(),commonJsModules=[];let commonJsAllocations=0;
+ function commonJsKernelRegister(fn,read){intrinsics();if(commonJsKernel||typeof fn!=='function'||typeof read!=='function')fail('commonjs-kernel-registration');const deps=N.apply(read,undefined,[]);if(deps.length!==2||deps[0]!==fn||deps[1]!==Object.getOwnPropertyNames)fail('commonjs-kernel-dependencies');commonJsKernel={fn,read,deps};}
+ function checkCommonJs(){intrinsics();if(!commonJsKernel)fail('commonjs-kernel-missing');const deps=N.apply(commonJsKernel.read,undefined,[]);if(deps.length!==2||deps.some((v,i)=>!N.is(v,commonJsKernel.deps[i])))fail('commonjs-kernel-changed');}
+ function commonJsAllocate(value){checkCommonJs();const ds=N.descriptors(value),ks=N.keys(ds),d=ds.exports;if(N.prototype(value)!==Object.prototype||ks.length!==1||ks[0]!=='exports'||!d||!N.descriptor(d,'value')||!d.enumerable||!d.writable||!d.configurable||N.prototype(d.value)!==Object.prototype||N.keys(N.descriptors(d.value)).length)fail('commonjs-allocation-shape');if(N.apply(N.mapGet,commonJsObjects,[value]))fail('commonjs-allocation-reused');N.apply(N.mapSet,commonJsObjects,[value,{exports:d.value,id:commonJsAllocations++}]);return value;}
+ function commonJsModule(file,module,exports){checkCommonJs();const origin=N.apply(N.mapGet,commonJsObjects,[module]);if(!origin||!N.is(origin.exports,exports)||commonJsModules.some(m=>m.file===file||m.module===module))fail('commonjs-module-origin');commonJsModules.push({file,module,origin});}
+ function commonJsReport(){if(!commonJsKernel)return undefined;checkCommonJs();return {qualification:'bundler-allocated-module-identity-only',effectsVerified:false,allocations:commonJsAllocations,modules:commonJsModules.map(m=>{const d=N.descriptor(m.module,'exports');if(N.prototype(m.module)!==Object.prototype||!d||!N.descriptor(d,'value')||!d.enumerable||!d.writable||!d.configurable)fail('commonjs-module-exports-descriptor');return {file:m.file,allocation:m.origin.id,module:witness(m.module),initialExports:witness(m.origin.exports),currentExports:witness(d.value)};})};}
+
+ const exportBindings=new Map(),exportReads=[];
+ function exportRegister(key,value,read){intrinsics();if(exportBindings.has(key)||typeof read!=='function'||!N.is(value,N.apply(read,undefined,[])))fail('context-export-registration-invalid');exportBindings.set(key,{value,read});}
+ function exportRead(key,read){intrinsics();const binding=exportBindings.get(key),render=renders[renders.length-1],frame=jsxFrames[jsxFrames.length-1];if(!binding||!render||frame?.render!==render||frame.site.target!==key||typeof read!=='function')fail('context-export-read-unplanned');const value=N.apply(read,undefined,[]);intrinsics();if(!N.is(value,binding.value)||!N.is(value,N.apply(binding.read,undefined,[])))fail('context-export-binding-changed');exportReads.push({site:key,render:render.id,factory:frame.id,value});return value;}
+ const bindingSites=(bindingPlans?.reads??[]).map(p=>({key:point(p.read),binding:point(p.binding),functionSource:p.functionSource?point(p.functionSource):point(p.binding),consumer:point(p.consumer),kind:p.kind}));
  const functionSites=(bindingPlans?.functions??[]).map(p=>point(p.source)),bindingFunctions=new Map(),bindingReads=[];
  function bindingFunction(key,value){
   intrinsics();if(!functionSites.includes(key)||typeof value!=='function'||bindingFunctions.has(key))fail('context-binding-function-unplanned');
@@ -59,7 +94,7 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
   if(!site||render?.key!==site.consumer)fail('context-binding-read-unplanned');
   if(bindingReads.length>=100000)fail('context-binding-read-limit');
   bindingReads.push({id:bindingReads.length,site,render,value,calleeOf:null,
-   functionSource:site.kind==='value'&&bindingFunctions.has(site.binding)&&N.is(bindingFunctions.get(site.binding),value)?site.binding:null});
+   functionSource:site.kind==='value'&&bindingFunctions.has(site.functionSource)&&N.is(bindingFunctions.get(site.functionSource),value)?site.functionSource:null});
   return value;
  }
 
@@ -102,8 +137,9 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
    // including target functions or proxies, stay opaque to this boundary.
    const args=N.apply(readArgs,undefined,[]);
    if(args.length!==site.arity||frame.args.length!==site.arity||args.some((v,i)=>!N.is(v,frame.args[i])))fail('context-factory-arguments-changed');
-   const value=invokeFactory(fn,args);
+   const value=invokeFactory(fn,args,site.factory);
    if(N.apply(N.mapGet,jsxByValue,[value]))fail('context-factory-result-reused');
+   frame.propsReceipt=describeFactory?describeFactory(value,args,site.factory):undefined;
    frame.value=value;frame.returned=true;N.apply(N.mapSet,jsxByValue,[value,frame]);return value;
   }finally{
    if(jsxFrames[jsxFrames.length-1]!==frame)jsxValidationFailed=true;else jsxFrames.pop();
@@ -255,7 +291,13 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
    if(N.prototype(value)!==Object.prototype||!ds.useContext||typeof ds.useContext.get!=='function'||ds.useContext.set!==undefined)fail('context-hook-interop-unmodeled');
    N.apply(N.mapSet,nativeNamespaces,[value,{origin,descriptors:ds}]);namespaceCount++;
   }
+  if([...bindingFunctions.values()].some(fn=>N.is(fn,mod))){const ds=N.descriptors(value);if(ds.default&&N.descriptor(ds.default,'value')&&N.is(ds.default.value,mod))N.apply(N.mapSet,functionNamespaces,[value,{mod,descriptor:ds.default}]);}
   return value;
+ }
+ function importDefault(key,value){
+  intrinsics();const record=N.apply(N.mapGet,functionNamespaces,[value]);if(!record)fail('context-function-default-origin-unproved');
+  const d=N.descriptor(value,'default');if(!sameDescriptor(d,record.descriptor)||!N.descriptor(d,'value')||!N.is(d.value,record.mod))fail('context-function-default-mutated');
+  const result=bindingRead(key,value.default);bindingReads[bindingReads.length-1].propertyEffectsVerified=true;return result;
  }
  function lookup(key,fn,kind){
   const site=sites.find(p=>p.key===key);if(!site)fail('context-hook-lookup-unplanned');
@@ -410,14 +452,16 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
   for(const frame of providers)if(!frame.closed)fail('context-provider-open');
   for(const item of allocations)if(item.used&&!restUnchanged(item))restValidationFailed=true;
   if(restValidationFailed)fail('context-rest-value-mutated');
-  return {qualification:'react-context-transport-only',effectsVerified:false,acceptedContract:null,contexts:created.length,
+  return {exportReads:exportReads.map(r=>({site:source(r.site),render:r.render,factory:r.factory,value:witness(r.value),qualification:'runtime-export-binding-only',effectsVerified:false})),qualification:'react-context-transport-only',effectsVerified:false,acceptedContract:null,contexts:created.length,
    providers:providers.map(f=>({id:f.id,context:f.context.id,factory:f.factory.id,value:scalar(f.value),valueOrigin:f.valueOrigin})),
    reads:reads.map(r=>({context:r.context.id,provider:r.provider?r.provider.id:null,consumer:source(r.consumer),render:r.render,call:source(r.call),value:scalar(r.value),valueOrigin:r.valueOrigin})),
    renders:{qualification:'original-render-context-boundaries-only',effectsVerified:false,acceptedContract:null,invocations:renderInvocations.map(f=>({id:f.id,source:source(f.key),completion:f.returned?'returned':'threw',consumerCalls:[...f.consumerCalls],reads:[...f.reads],returnedFactory:f.returnedFactory}))},
    bindings:{qualification:'source-module-binding-read-identity-only',effectsVerified:false,acceptedContract:null,planned:bindingSites.length,functions:bindingFunctions.size,
-    reads:bindingReads.map(r=>({id:r.id,site:source(r.site.key),binding:source(r.site.binding),consumer:source(r.site.consumer),render:r.render.id,kind:r.site.kind,value:witness(r.value),functionSource:source(r.functionSource),calleeOf:r.calleeOf}))},
+    reads:bindingReads.map(r=>({id:r.id,site:source(r.site.key),binding:source(r.site.binding),consumer:source(r.site.consumer),render:r.render.id,kind:r.site.kind,value:witness(r.value),functionSource:source(r.functionSource),calleeOf:r.calleeOf,...(r.propertyEffectsVerified?{propertyEffectsVerified:true}: {})}))},
+   initializationWrites:{qualification:'original-initialization-assignment-observations-only',effectsVerified:false,planned:initializationWritePlans.length,writes:initializationWrites.map(w=>({site:w.site,property:w.property,owner:{...w.owner},target:witness(w.target),value:witness(w.value),valueSource:w.valueSource}))},
+   commonJs:commonJsReport(),
    factories:{qualification:'source-jsx-factory-identity-only',effectsVerified:false,acceptedContract:null,planned:jsxSites.length,
-    invocations:jsxInvocations.map(f=>({id:f.id,site:source(f.site.key),target:source(f.site.target),consumer:source(f.site.consumer),render:f.render.id,factory:f.site.factory,targetRead:f.targetRead,callee:witness(f.fn),arguments:f.args.map(witness),completion:f.returned?'returned':'threw',...(f.returned?{value:witness(f.value)}:{})}))},
+    invocations:jsxInvocations.map(f=>({id:f.id,site:source(f.site.key),target:source(f.site.target),consumer:source(f.site.consumer),render:f.render.id,factory:f.site.factory,targetRead:f.targetRead,callee:witness(f.fn),arguments:f.args.map(witness),completion:f.returned?'returned':'threw',...(f.returned?{value:witness(f.value),...(f.propsReceipt?{propsReceipt:{...f.propsReceipt,config:{...f.propsReceipt.config},props:{...f.propsReceipt.props},configFields:f.propsReceipt.configFields.map(([k,v])=>[k,{...v}]),propsFields:f.propsReceipt.propsFields.map(([k,v])=>[k,{...v}]),positionalChildren:f.propsReceipt.positionalChildren.map(v=>({...v}))}}:{})}:{})}))},
    targetReads:{qualification:'source-object-target-property-reads-only',effectsVerified:false,acceptedContract:null,planned:targetReadSites.length,allocations:objectCount,reads:targetReads.map(r=>({id:r.id,site:source(r.site.key),objectSource:source(r.origin.key),property:r.site.property,render:r.render,factory:r.factory,value:witness(r.value),propertyEffectsVerified:true}))},
    values:{qualification:'source-object-rest-values-only',effectsVerified:false,acceptedContract:null,allocations:allocations.length,origins:allocations.filter(a=>a.used).map(a=>({id:a.id,source:source(a.key),identity:witness(a.value).identity,fields:a.keys.some(k=>typeof k!=='string')?null:a.keys.map(k=>[k,scalar(a.before[k].value)]),witnesses:a.keys.some(k=>typeof k!=='string')?null:a.keys.map(k=>[k,witness(a.before[k].value)])}))},
    calls:{qualification:'source-use-context-values-only',effectsVerified:false,acceptedContract:null,planned:sites.length,invocations:hookCalls.map(c=>({site:source(c.site.key),enclosingFunction:source(c.site.enclosing),read:c.read,lookup:c.lookup}))},
@@ -430,5 +474,5 @@ export const reactContextRuntime=String.raw`((N,intrinsics,sameDescriptor,fail,c
    consumerCalls:{qualification:'consumer-context-helper-call-identity-only',effectsVerified:false,acceptedContract:null,planned:consumerSites.length,
     invocations:consumerInvocations.map(f=>({id:f.id,site:source(f.site.key),consumer:source(f.site.consumer),render:f.render.id,callee:witness(f.callee),calleeRead:f.calleeRead,arguments:f.args.map(scalar),argumentWitnesses:f.args.map(witness),completion:f.returned?'returned':'threw',...(f.returned?{value:scalar(f.value),returnWitness:witness(f.value)}:{}),helperInstance:f.item?.id??null,helperInvocation:f.helper?.id??null,returnMatched:f.matched}))}};
  }
- return {renderScope:()=>{const r=renders[renders.length-1];return {render:r?.id??null,renderSource:r?.key??null,consumerCalls:r?.consumerCalls.length??0};},nativeHookRead,nativeHookValue,nativeHookIdentify,nativeDefault,sourceScope:()=>{const render=renders[renders.length-1],call=consumerFrames[consumerFrames.length-1];return call&&call.render===render?{id:call.id,key:call.site.key,render:render.id,callee:call.callee,args:call.args}:null;},scope:()=>{const render=renders[renders.length-1],call=consumerFrames[consumerFrames.length-1];return {render:render?.id??null,consumerCall:call&&call.render===render?call.id:null};},register,access,beforeRead,element,push,pop,read,begin,finish,end,report,witness,sourceObject,targetRead,hook,interopKernelRegister,interop,hookRead,hookValue,use,rest,helperRegister,helperBegin,helperReturn,helperEnd,helperRead,consumerCall,consumerArgument,factoryCall,factoryArgument,bindingFunction,bindingRead};
+ return {initializationWrite,commonJsKernelRegister,commonJsAllocate,commonJsModule,renderScope:()=>{const r=renders[renders.length-1];return {render:r?.id??null,renderSource:r?.key??null,consumerCalls:r?.consumerCalls.length??0};},nativeHookRead,nativeHookValue,nativeHookIdentify,nativeDefault,sourceScope:()=>{const render=renders[renders.length-1],call=consumerFrames[consumerFrames.length-1];return call&&call.render===render?{id:call.id,key:call.site.key,render:render.id,callee:call.callee,args:call.args}:null;},scope:()=>{const render=renders[renders.length-1],call=consumerFrames[consumerFrames.length-1];return {render:render?.id??null,consumerCall:call&&call.render===render?call.id:null};},register,access,beforeRead,element,push,pop,read,begin,finish,end,report,witness,sourceObject,targetRead,hook,interopKernelRegister,interop,hookRead,hookValue,use,rest,helperRegister,helperBegin,helperReturn,helperEnd,helperRead,consumerCall,consumerArgument,factoryCall,factoryArgument,bindingFunction,bindingRead,importDefault,exportRegister,exportRead};
 })`;

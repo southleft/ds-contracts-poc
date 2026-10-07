@@ -33,9 +33,9 @@ export const SideNavItem = forwardRef<HTMLAnchorElement, SideNavItemProps>(funct
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');
   return (
     <a ref={ref} className={classes} href={href} {...rest}>
-      {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+      <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
       <span className={styles.labelText}>{label}</span>
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
     </a>
   );
 });

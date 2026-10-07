@@ -26,11 +26,11 @@ export const ChatMessage = forwardRef<HTMLDivElement, ChatMessageProps>(function
   const classes = [styles.root, styles[`sender-${sender}`], className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} {...rest}>
-      {avatar != null ? <div className={styles.avatarSlot}>{avatar}</div> : null}
+      <>{avatar != null ? <div className={styles.avatarSlot}>{avatar}</div> : null}</>
       <div className={styles.body}>
         <span className={styles.nameText}>{name}</span>
         <div className={styles.bubble}>{children}</div>
-        {metadata != null ? <div className={styles.metadataSlot}>{metadata}</div> : null}
+        <>{metadata != null ? <div className={styles.metadataSlot}>{metadata}</div> : null}</>
       </div>
     </div>
   );

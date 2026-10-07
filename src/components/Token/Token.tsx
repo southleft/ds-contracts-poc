@@ -59,9 +59,9 @@ export const Token = forwardRef<HTMLSpanElement, TokenProps>(function Token(
     .join(' ');
   return (
     <span ref={ref} className={classes} data-is-disabled={isDisabled || undefined} {...rest}>
-      {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+      <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
       <span className={styles.labelText}>{label}</span>
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
     </span>
   );
 });

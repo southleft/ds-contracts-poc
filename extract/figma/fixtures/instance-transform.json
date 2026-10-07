@@ -1,0 +1,92 @@
+{
+  "source": {
+    "fileKey": "uYZdfbhQnkwZtlHoRY7w8O",
+    "version": "2405899822035794365"
+  },
+  "rows": [
+    {
+      "id": "58005:8334",
+      "name": "Segment - wave - start",
+      "matrix": [
+        [
+          -1,
+          0,
+          40
+        ],
+        [
+          0,
+          -1,
+          12
+        ]
+      ],
+      "size": {
+        "x": 40,
+        "y": 12
+      },
+      "componentId": "58005:7973"
+    },
+    {
+      "id": "58005:8365",
+      "name": "Segment - wave - start",
+      "matrix": [
+        [
+          -1,
+          0,
+          40
+        ],
+        [
+          0,
+          -1,
+          12
+        ]
+      ],
+      "size": {
+        "x": 40,
+        "y": 12
+      },
+      "componentId": "58005:7971"
+    },
+    {
+      "id": "58005:8399",
+      "name": "Segment - wave - start",
+      "matrix": [
+        [
+          -1,
+          0,
+          40
+        ],
+        [
+          0,
+          -1,
+          12
+        ]
+      ],
+      "size": {
+        "x": 40,
+        "y": 12
+      },
+      "componentId": "58005:7979"
+    },
+    {
+      "id": "58005:8430",
+      "name": "Segment - wave - start",
+      "matrix": [
+        [
+          -1,
+          0,
+          40
+        ],
+        [
+          0,
+          -1,
+          12
+        ]
+      ],
+      "size": {
+        "x": 40,
+        "y": 12
+      },
+      "componentId": "58005:7977"
+    }
+  ]
+}

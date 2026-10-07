@@ -46,6 +46,7 @@ import { ContractSchema, componentRefsOf, slotsOf, sortByDependencies, type Cont
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
 import {
   emitTokensCss,
+  externalizeTokenImages,
   mentionedCssVars,
   referencedCssVars,
   tokensCssLayers,
@@ -385,7 +386,7 @@ export async function generateComponents(
   // everything composing it) leaves no file.
   for (const contract of ordered) {
     const errors: string[] = [];
-    validateContract(contract, byId, errors, iconAssets);
+    validateContract(contract, byId, errors, iconAssets, { drawnVariants: 'react-runtime' }, tokenTrees);
     if (errors.length > 0) ledger.refuse(contract.id, errors);
   }
   ledger.propagate();
@@ -394,7 +395,7 @@ export async function generateComponents(
   const cssById = new Map<string, string>();
   for (const contract of ordered) {
     const errors: string[] = [];
-    const css = generateCss(contract, tokenInventory, errors, tokenTrees);
+    const css = generateCss(contract, tokenInventory, errors, tokenTrees, byId);
     if (errors.length > 0) ledger.refuse(contract.id, errors);
     else cssById.set(contract.id, css);
   }
@@ -444,7 +445,7 @@ export async function generateComponents(
       });
       plan.push({
         path: path.join(dir, `${contract.name}.tsx`),
-        contents: await formatTsx(generateTsx(contract, byId, iconAssets, css)),
+        contents: await formatTsx(generateTsx(contract, byId, iconAssets, css, tokenTrees)),
       });
       if (stories) {
         plan.push({
@@ -493,6 +494,9 @@ export async function generateComponents(
     skippedComposite: sheet.skippedComposite,
   };
 
+  const tokenImages = externalizeTokenImages(sheet.css);
+  sheet.css = tokenImages.css;
+
   const generated = ordered.map((contract) => contract.name).sort();
   const plan: PlannedFile[] = ordered.flatMap((c) => planById.get(c.id)!);
   if (ordered.length > 0) {
@@ -513,6 +517,12 @@ export async function generateComponents(
     mkdirSync(path.dirname(file.path), { recursive: true });
     writeFileSync(file.path, file.contents);
   }
+  if (ordered.length > 0) for (const asset of tokenImages.assets) {
+    const dest = path.join(outDir, asset.path);
+    mkdirSync(path.dirname(dest), { recursive: true });
+    writeFileSync(dest, Buffer.from(asset.base64, 'base64'));
+  }
+
 
   // REQUIRED FACTS PER ARCHETYPE — named on the code surface too, in the
   // generate voice: the fact is missing, the code still renders, and the

@@ -1,9 +1,10 @@
-import type { StrokedPath } from '../../scripts/contract-schema.js';
+import type {SourceFillComposition} from './solid-fill-observation.js';
+import type { StrokedPath, Part } from '../../scripts/contract-schema.js';
 
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.48';
+export const PLUGIN_DUMP_VERSION = '1.76';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -131,6 +132,8 @@ export interface DumpGradient {
 }
 
 export interface DumpText {
+  /** Complete captured UTF-16 appearance runs; observation is not override authority. */
+  sourceAppearance?: import('./text-appearance-observation.js').TextAppearanceObservation;
   characters: string;
   fontSize: number;
   /** Inter style name ('Medium', 'Semi Bold', …) — the canvas projection of a
@@ -179,7 +182,7 @@ export interface DumpText {
   /** Native uniform weight binding, or legacy emitter stamp when unbound.
    * Mixed ranges do not fall back to a stamp (plugin v1.43). */
   fontWeightVar?: string;
-  /** Native numeric weight observed with a uniform native binding. */
+  /** Uniform observed numeric CSS weight; independent of face label or binding. */
   fontWeight?: number;
   /** Native uniform line-height binding, or a legacy emitter stamp when
    * unbound. Mixed native ranges never fall back to a stamp (plugin v1.42). */
@@ -199,6 +202,8 @@ export interface DumpText {
    *  SILENT substitution (Phase 2 exam: Manrope on 44 Heading/Kicker nodes).
    *  propose carries a uniform non-Inter family as the declared `font-family`
    *  channel (DECLARED_CHANNELS, canvas: draw) and NAMES a mixed axis.
+   *  Plugin v1.64 also recovers a mixed aggregate when full, contiguous text
+   *  range evidence proves one identical FontName across every character.
    *  Absence in older dumps means not captured, never "Inter". */
   fontFamily?: string;
   /** Additive canvas-facts bridge channel: resolved letter spacing in pixels.
@@ -285,14 +290,53 @@ export interface DumpReaction {
  *  solid when "fills" is among them (so the note can say WHICH colour).
  *  Character overrides keep their own channel (textOverrides, dump v1.10). */
 export interface DumpHostOverride {
+  /** Observed fills: [] on the identity-qualified shape or vector target. Missing paint
+   * data and invisible paint entries are not an empty list. */
+  sourceEmptyFill?: true;
+  /** Actual nested property values and numeric occurrence path. These do not
+   * by themselves authorize changing the shared main or promoting child APIs. */
+  instanceProperties?: {
+    ownerId:string; ownerComponentId:string; ownerComponentKey:string;
+    nodeId:string; componentId:string; componentKey:string; componentSetKey?:string;
+    path:number[];
+    properties:Record<string,{type:'VARIANT'|'TEXT'|'BOOLEAN'|'INSTANCE_SWAP';value:string|boolean;
+      selected?:{nodeId:string;componentKey:string}}>;
+  };
+  /** Original solid vector or shape paint plus the exact consuming binding
+   * and alias chain. Never inferred from the variable table or style name. */
+  sourceNormalFillComposition?: DumpNode['sourceNormalFillComposition'];
+  /** Plugin 1.65: stroke paint uses its own consuming binding, not fill's. */
+  sourceNormalStrokeComposition?: DumpNode['sourceNormalFillComposition'];
+  /** Native outlines remain centered regardless of strokeAlign. INSIDE needs
+   * intersection with fillGeometry; OUTSIDE needs its complement. */
+  vectorStrokeGeometry?: {
+    target: NonNullable<DumpHostOverride['solidStrokeTarget']>;
+    width:number; height:number; relativeTransform:number[][];
+    fillGeometry:Array<{data:string;windingRule:'NONZERO'|'EVENODD'}>;
+    centeredStrokeGeometry:Array<{data:string;windingRule:'NONZERO'|'EVENODD'}>;
+    strokeAlign:'INSIDE'|'CENTER'|'OUTSIDE'; strokeWeight:number;
+    strokeJoin:string; strokeCap:string; strokeMiterLimit:number; dashPattern:number[];
+    opacity:number; blendMode:string; effects:unknown[];
+  };
+  variableConsumers?: Record<string, DumpVariableConsumer>;
   path: string;
   fields: string[];
   fill?: DumpPaint;
   stroke?: DumpPaint;
   strokeWeight?: number;
+  /** Actual descendant visibility plus the nearest instance owner and numeric paths.
+   * A display-name path alone does not authorize a generated-child override. */
+  visibilityTarget?: NonNullable<DumpHostOverride['solidFillTarget']> & {visible:boolean};
+  /** Single NORMAL solid paint on a frame, rectangle, or ellipse descendant.
+   * Captured owner identity only; applying it requires independent main matching. */
+  shapeFillTarget?: NonNullable<DumpHostOverride['solidFillTarget']>;
+  /** Uniform solid text fill owner; separate from vector paint qualification. */
+  textFillTarget?: NonNullable<DumpHostOverride['solidFillTarget']>;
+  /** Observed empty strokes on this exact solid-fill owner; absence is unknown. */
+  emptyStrokeTarget?: NonNullable<DumpHostOverride['solidFillTarget']>;
   solidStrokeTarget?: { nodeId: string; instanceId: string; componentId: string; instancePath: number[]; childPath: number[] };
   /** Exact paint owner, captured only for a VECTOR with one visible normal
-   * SOLID fill. The nearest instance's actual main identity and numeric
+   * SOLID fill or an explicitly empty list (sourceEmptyFill). The nearest instance's actual main identity and numeric
    * child path disambiguate duplicate layer names and nested swaps. This
    * describes the observed node, not the main's complete anatomy. */
   solidFillTarget?: {
@@ -319,8 +363,10 @@ export interface DumpFixedSwap {
   key?: string;
   /** Actual selected instances, matched by the complete property reference,
    * not their display names. Dimensions and transforms are local, unrounded
-   * observations; absence means uncaptured. This list does not assert that a
-   * truncated source subtree contains no further occurrences. */
+   * observations; an omitted list means uncaptured, while [] retains no matches
+   * in the observed subtree. Caller absence additionally needs keyed child
+   * props and the linked presence gate; this list alone does not assert that
+   * a truncated source subtree contains no further occurrences. */
   observedInstances?: Array<{
     nodeId: string;
     path: number[];
@@ -340,6 +386,8 @@ export interface DumpFixedSwap {
  *  Field case: the CBDS Tooltip "Pointer" triangle (12×12 REGULAR_POLYGON,
  *  rotated per placement, absolutely positioned against the bubble). */
 export interface DumpShape {
+  /** Original filled-path matrix under a native GROUP; qualified during projection. */
+  affineTransform?: number[][];
   /** Since dump v1.7 an UNROTATED RECTANGLE is also captured when nothing
    *  else carries its size — parent not auto-layout, or the node is
    *  ABSOLUTE (field case: Untitled UI slider/progress tracks, which
@@ -350,7 +398,7 @@ export interface DumpShape {
   line?: import('../../packages/schema/src/native-line.js').NativeLineGeometry & { source?: { nodeId: string; parentId?: string } };
   /** Plugin capture only: original open centerline and SCALE parent basis. */
   strokePath?: StrokedPath;
-  paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
+  paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' | 'NONE' }>;
   /** Polygon point count (Plugin API pointCount). The REST surface does not
    *  expose it — ABSENT means not captured; the proposer assumes the Figma
    *  default of 3 with a named review note, never silently. */
@@ -366,7 +414,7 @@ export interface DumpShape {
    *  (innerRadius > 0). Angles are the Plugin API's RADIANS, verbatim.
    *  NOT yet consumed by the proposer (a planned iteration renders arcs);
    *  presence is ledgered by name, never a throw. */
-  arc?: { start: number; end: number; innerRadius: number };
+  arc?: { start: number; end: number; innerRadius: number; cap?: "NONE" | "ROUND" | "SQUARE" };
   /** CSS-clockwise degrees: `transform: rotate(<n>deg)` reproduces the
    *  canvas rendering. The REST `rotation` field rides RADIANS with the same
    *  visual sign (verified against absoluteRenderBounds of the CBDS Tooltip
@@ -409,6 +457,52 @@ export interface DumpVariableConsumer {
 }
 
 export interface DumpNode {
+  /** Raw node-to-parent affine observation. Bounds are never substituted for
+   * local dimensions. Capturing this does not qualify a rendering transform. */
+  localGeometry?: {
+    nodeId:string; parentId:string;
+    transform:[[number,number,number],[number,number,number]];
+    localSize:{width:number;height:number}; parentSize:{width:number;height:number};
+  };
+  /** Stable identity of a captured component main, local or remote. */
+  componentKey?: string;
+  /** Explicit outlined-stroke conversion; width is baked into the paths.
+   * Source identity is retained without claiming a native centerline. */
+  straightVectorSource?: { nodeId: string; networkWidth: number; scaleX: number; canonicalJoin: 'MITER'; canonicalMiterLimit: 4 };
+  paintedStrokeSource?: { nodeId: string; strokeWeight: number; representation: 'fixed-outline' };
+  /** Plugin v1.57: exact native node identity, including variant rows. The
+   * public checker requires these IDs to fetch independent images/content. */
+  nodeId?: string;
+  /** Plugin v1.56: raw affine bases and containing-frame identity for GROUPs
+   * and their immediate children. GROUPs do not own native constraints.
+   * Missing/malformed facts must remain unqualified; no CSS projection implied. */
+  nativeContainerPlane?: {
+    nodeId: string; parentId?: string; containerId?: string; containerType?: string;
+    size?: { width?: number; height?: number };
+    containerSize?: { width?: number; height?: number };
+    relativeTransform?: unknown; absoluteTransform?: unknown;
+    containerAbsoluteTransform?: unknown; constraints?: unknown; issue?: string;
+  };
+  /** Plugin v1.56: visible native IMAGE paints, at their original stack index.
+   * Metadata does not mean asset bytes are exported or crop CSS is qualified. */
+  imagePaints?: Array<{index: number; imageHash?: unknown; scaleMode?: unknown;
+    imageTransform?: unknown; rotation?: unknown; scalingFactor?: unknown;
+    opacity?: unknown; blendMode?: unknown; filters?: unknown}>;
+  /** Explicit mask ownership. Sibling order scopes the mask; absence is not
+   * evidence that a legacy reader observed this channel. Unknown/missing types
+   * remain unknown instead of being defaulted to ALPHA. */
+  mask?: { type?: string; stroke?: NonNullable<Part['mask']>['stroke']; paintedStroke?: NonNullable<Part['mask']>['paintedStroke'] };
+  /** Native local dimensions and affine basis for a FRAME mask. Absence
+   * means uncaptured; an axis-aligned bounding box is not this evidence. */
+  maskFramePlane?: {
+    nodeId: string; parentId: string;
+    size: { width: number; height: number };
+    parentSize: { width: number; height: number };
+    relativeTransform: number[][];
+    parentRelativeTransform: number[][];
+  };
+  /** The same native proof for a FRAME painted through an earlier sibling mask. */
+  maskedFramePlane?: DumpNode['maskFramePlane'];
   /** Retained selection identity. Malformed values must reach validation. */
   selectionIdentity?: unknown;
   name: string;
@@ -445,10 +539,19 @@ export interface DumpNode {
   clipsContent?: true;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
+  /** Observed nonuniform TL, TR, BR, BL radii; zero smoothing only. */
+  cornerRadii?: [number, number, number, number];
   /** Bound variables: Plugin-API field name → variable name (slash-form),
    *  e.g. { paddingLeft: 'space/inset-x/sm', width: 'size/switch/width' }. */
   bound?: Record<string, string>;
+  /** Explicit empty source fill list. Absence is not evidence of emptiness. */
+  sourceEmptyFill?: true;
   fill?: DumpPaint;
+  /** Exact non-normal source fill, independent of rounded legacy hex/alpha. */
+  sourceFillComposition?: SourceFillComposition;
+  /** Exact NORMAL peer paint for a mixed-composition occurrence owner. It is
+   * not a promotion flag; ordinary NORMAL proposals ignore this additive fact. */
+  sourceNormalFillComposition?: SourceFillComposition;
   /** First visible GRADIENT_LINEAR fill (dump v1.16, additive — see
    *  DumpGradient). Carried ALONE, or alongside `fill` when a visible SOLID
    *  sits BELOW it in the paint stack (Figma paints draw bottom-to-top, so
@@ -599,6 +702,39 @@ export interface DumpNode {
     horizontal?: 'FIXED' | 'HUG' | 'FILL'; vertical?: 'FIXED' | 'HUG' | 'FILL';
     width?: number; height?: number;
   };
+  /** Rotated auto-layout FRAME local geometry. A captured HUG/FILL extent is
+   * an observation, never permission to freeze it into fixed dimensions. */
+  nativeFlowGeometry?: {
+    nodeId:string;parentId:string;localSize:{width:number;height:number};
+    parentSize:{width:number;height:number};relativeTransform:number[][];
+    sizing:{horizontal:'FIXED'|'HUG'|'FILL';vertical:'FIXED'|'HUG'|'FILL'};
+    primarySizing:string;counterSizing:string;layoutGrow:number;layoutAlign:string;
+  };
+  /** Observed local geometry, independent of override authority. Transform is
+   * relative to the source parent; local size is never an axis-aligned bbox.
+   * This witness does not authorize resizing or restyling a linked child. */
+  instanceGeometry?: {
+    nodeId: string; componentId: string;
+    transform: [[number, number, number], [number, number, number]];
+    localSize: { width: number; height: number };
+  };
+  /** Explicit root overrides reported by Figma, independently of HUG/FILL
+   * sizing modes. Identity and unrounded LOCAL dimensions are observations,
+   * not permission to resize a linked contract. Missing size is not bbox. */
+  /** An empty fields array means the override list was observed and the root
+   * was unchanged. Absence means authority was not captured. Empty fields alone
+   * never authorize dimensions or another explicitly overridden property. A
+   * matching mainSize and instanceGeometry can prove a retained default. */
+  instanceRootOverrides?: {
+    nodeId: string; componentId: string; fields: string[];
+    componentKey?: string; componentSetKey?: string;
+    localTransform?: number[][];
+    localSize?: { width?: number; height?: number };
+    /** Independently captured local dimensions of the referenced main. */
+    mainSize?: { width?: number; height?: number };
+    /** Independently observed main auto-layout padding: top, right, bottom, left. */
+    mainPadding?: [number, number, number, number];
+  };
   /** First visible SOLID fill found in an INSTANCE's subtree (dump v1.7,
    *  additive) — the stub-paint channel: a child stub with observed geometry
    *  but no paint rendered invisible (field case: Untitled UI Badge's _Dot,
@@ -623,6 +759,8 @@ export interface DumpNode {
    *  NAME with no exported bytes — consumers render the documented
    *  placeholder gradient. Absence means no image fill or not captured. */
   imageFill?: boolean | string;
+  /** Positive observation: TEXT has an explicit paint array with no visible fills. */
+  textFillAbsent?: true;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,
@@ -685,6 +823,9 @@ export interface DumpNode {
    *  of it by construction. Absence = no override observed (or a pre-v1.10
    *  producer); consumers never invent text from it. */
   textOverrides?: Record<string, string>;
+  /** Identity of each captured character override. Name paths alone cannot
+   * authorize edits to a generated child. Absent on legacy captures. */
+  textOverrideTargets?: Record<string, NonNullable<DumpHostOverride['solidFillTarget']>>;
   /** GRID-cell placement (dump v1.17, additive) — captured on every IN-FLOW
    *  child of a MANUAL GRID parent: 0-based anchors
    *  (gridRowAnchorIndex/gridColumnAnchorIndex — read-only getters, P3),
@@ -708,6 +849,12 @@ export interface DumpNode {
    * main component, its complete API, or evidence of an unobserved variant.
    * Readers must check every observed use before sharing a static fallback. */
   instanceContent?: { root: DumpNode; propertyTypes: Record<string, string> };
+  /** Captured caller occurrence; never the remote main or its full API. */
+  instanceComposition?: {
+    source: {nodeId:string;componentId:string;key:string};
+    applied: Record<string,string|boolean>;
+    root: DumpNode;
+  };
   /** Fully observed vector appearance at this usage; never a remote main API. */
   instanceVectorContent?: {
     source: Array<{nodeId:string;componentId:string;key:string}>;
@@ -779,6 +926,13 @@ export interface DumpTemplateVariableGraph {
 }
 
 export interface DumpSet {
+  /** Storage alias for distinct observed remote mains sharing a source name/key. */
+  captureAlias?: {sourceName:string;nodeId:string};
+  /** Detached readable definition; capture location grants no library ownership. */
+  detachedSnapshot?: {kind:'detached-main-snapshot';captureFileKey:string;componentKey:string;nodeId:string;lookup:{nodeId:string;componentKey:string}};
+  /** Readable remote main observed in a consuming file. This does not grant
+   * original-library ownership or establish unseen remote variants. */
+  remoteSnapshot?: {kind:'remote-main-snapshot';captureFileKey:string;componentKey:string;nodeId:string} | {kind:'remote-set-snapshot';captureFileKey:string;componentKey:string;nodeId:string;variants:Array<{nodeId:string;componentKey:string;values:Record<string,string>}>};
   /** Retained API, corroborated against all native relationship nodes. */
   selectionApi?: unknown;
   setName: string;
@@ -838,6 +992,8 @@ export interface DumpSet {
   unsetVariantAxes?: unknown;
   /** Typed code API mappings; malformed metadata remains visible to readers. */
   codeValueAxes?: unknown;
+  /** Raw positive domain stamp, never authority without an independent contract. */
+  drawnVariants?: unknown;
   /** Compiler-owned root content container; preserve even malformed metadata. */
   rootSlot?: unknown;
   /** Complete raw graph captured independently; inverse validation is required. */
@@ -848,6 +1004,8 @@ export interface DumpSet {
     states: string[];
     primary: string | null;
     pinned: Record<string, string>;
+    /** Explicit non-default rows in Figma labels; validated against the observed domain. */
+    rows?: Record<string,string>[];
   };
   /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
    *  additive), keyed by property name with the "#id" suffix stripped —
@@ -913,6 +1071,15 @@ export interface DumpVariable {
   modes?: Record<string, string | number | boolean>;
 }
 
+/** Plugin v1.58: original native bitmap bytes, deduplicated by imageHash.
+ * No cropped/node raster or consumer equivalence is implied. */
+export type DumpImageAsset = {
+  imageHash: string;
+  mimeType: 'image/png' | 'image/jpeg' | 'image/gif' | 'image/webp';
+  byteLength: number;
+  base64: string;
+} | {imageHash: string; refused: string};
+
 export interface DumpFile {
   /** `dumpVersion` (dump v1.5, additive): producers that capture the FULL
    *  v1.5 surface stamp '1.5' here. Consumers use it as POSITIVE evidence
@@ -963,6 +1130,12 @@ export interface DumpFile {
      *  and every reference that could not be followed with its reason.
      *  Absent when no closure ran (`--no-closure`, plugin dumps, fixtures). */
     closure?: import('./rest/closure.js').DumpClosure;
+    /** Native usage drawing visibility, including hidden ancestor authority. */
+    nativeInstanceVisibility?: Array<{
+      nodeId: string;
+      ancestry: Array<{nodeId:string;type:string;visible?:boolean}>;
+      effectiveVisible: boolean;
+    }>;
   };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean).
@@ -976,7 +1149,9 @@ export interface DumpFile {
    *  when the variables endpoint answered — `_provenance.variables` names
    *  which; value-only minting stays the degraded route otherwise). */
   _variables?: Record<string, DumpVariable>;
-  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | undefined;
+  /** Original bytes or a named read/format/budget refusal, never a placeholder. */
+  _imageAssets?: Record<string, DumpImageAsset>;
+  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | Record<string, DumpImageAsset> | undefined;
 }
 
 export const isDumpSet = (v: unknown): v is DumpSet =>

@@ -48,8 +48,8 @@ const reactCallNeedle='            return Component(props, secondArg);';
 /** The binder distinguishes a JSX-runtime import from a same-named local.
  * This is an invocation location, not an interpretation of its containing body,
  * hooks, closures, wrapper factories, children or possible future inputs. */
-export function readReactElementCreationSites(text:string,file:string,module:string,includeCreateElement=false):Site[]{
-  const sf=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+export function readReactElementCreationSites(text:string,file:string,module:string,includeCreateElement=false,reservedBinding:'refuse'|'omit'='refuse'):Site[]{
+  const sf=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true);
   if((sf as ts.SourceFile&{parseDiagnostics:readonly ts.Diagnostic[]}).parseDiagnostics.length)
     throw Error('element-creation-source-syntax');
   const host:ts.CompilerHost={getSourceFile:f=>f===file?sf:undefined,getDefaultLibFileName:()=>'',writeFile:()=>{},getCurrentDirectory:()=>path.dirname(file),getDirectories:()=>[],fileExists:f=>f===file,readFile:f=>f===file?text:undefined,getCanonicalFileName:f=>f,useCaseSensitiveFileNames:()=>true,getNewLine:()=> '\n'};
@@ -90,10 +90,10 @@ export function readReactElementCreationSites(text:string,file:string,module:str
         // JS expando analysis can attach a declaration to the globalThis
         // identifier in globalThis.property = value. That is a property write,
         // not a lexical replacement of the observer's global binding.
-        if(globalBinding?.declarations?.some(d=>!(ts.isIdentifier(d)&&
-          (ts.isPropertyAccessExpression(d.parent)||ts.isElementAccessExpression(d.parent))&&d.parent.expression===d)))
-          throw Error('element-creation-reserved-binding');
-        sites.push({module,sourceSha256,span:{start:node.getStart(sf),end:node.end},...(containing?{functionSpan:{start:containing.getStart(sf),end:containing.end}}:{}),factory,...(receiver?{receiver}:{})});
+        const reserved=globalBinding?.declarations?.some(d=>!(ts.isIdentifier(d)&&
+          (ts.isPropertyAccessExpression(d.parent)||ts.isElementAccessExpression(d.parent))&&d.parent.expression===d));
+        if(reserved&&reservedBinding==='refuse')throw Error('element-creation-reserved-binding');
+        if(!reserved)sites.push({module,sourceSha256,span:{start:node.getStart(sf),end:node.end},...(containing?{functionSpan:{start:containing.getStart(sf),end:containing.end}}:{}),factory,...(receiver?{receiver}:{})});
       }
     }
     ts.forEachChild(node,child=>walk(child,containing));
@@ -126,7 +126,7 @@ export function reactElementCreationHook(sites:readonly ReactElementCreationSite
  };
  const api=N.freeze({
   enter:invocation.enter,binding:invocation.binding,returned:invocation.returned,thrown:invocation.thrown,leave:invocation.leave,
-  enterReact:invocation.enterReact,reactCall:invocation.reactCall,
+  enterReact:invocation.enterReact,reactCall:invocation.reactCall,registerReactCallback:invocation.registerReactCallback,
   enterSource:invocation.enterSource,sourceCall:invocation.sourceCall,sourceObject:invocation.sourceObject,callbackObject:invocation.callbackObject,
   sourceArray:composition.array,
   registerTarget:compareJsx.register,registerFragment:compareJsx.fragment,
@@ -230,7 +230,10 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
   }));
   const forwardRuntime=version===undefined?undefined:Object.keys(reference.files).find(file=>file.endsWith(reactRuntimeAdapters[2].suffix));
   const coreRuntime=version===undefined?undefined:Object.keys(reference.files).find(file=>file.endsWith(reactRuntimeAdapters[0].suffix));
-  const modules=[...new Set((reference.runtimeImports??[]).filter(e=>e.specifier==='react/jsx-runtime'&&/\.(?:[cm]?js|jsx|tsx|ts)$/.test(e.importer)).map(e=>e.importer))];
+  // Instrument witnessed workspace sources, not external runtime dependencies
+  // that happen to import React (for example react-dom). Uninstrumented
+  // external elements still cannot acquire authored-source provenance.
+  const modules=[...new Set((reference.runtimeImports??[]).filter(e=>e.importer.startsWith(reference.sourceRoot+path.sep)&&(e.specifier==='react/jsx-runtime'||e.specifier==='react')&&/\.(?:[cm]?js|jsx|tsx|ts)$/.test(e.importer)).map(e=>e.importer))];
   const files=new Map<string,{text:string;code:string;sites:Array<Site&{index:number}>;plans:Array<ReactElementInvocationPlan&{index:number}>;sources:NonNullable<Parameters<typeof transformReactElementSource>[3]>;transformed?:ReactElementCreationSite['transformed'];jsxMarkers?:ReactJsxMarker[]}>(),sites:ReactElementCreationSite[]=[],plans:ReactElementInvocationPlan[]=[];
   const sourceCalls:ReactElementSourceCalls={objects:[],calls:[],arrays:[]};
   const transformedSources:Array<{file:string;sourceSha256:string;transform:NonNullable<ReactElementCreationSite['transformed']>;code:string;instrumentedSource?:string;originalJsx?:Array<{source:ReactOriginalJsxSite;marker:ReactJsxMarker;factoryObserved:boolean}>}>=[];
@@ -289,7 +292,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
       originalFunctions=bindReactJsxInvocations(generated,originalPlans);
       jsxBindings=bindReactOriginalJsxSites(generated,originalJsx);
     }
-    const local=readReactElementCreationSites(code,file,module)
+    const local=readReactElementCreationSites(code,file,module,true)
       .map(site=>{
         const originalFunction=originalFunctions?.get(JSON.stringify(site.functionSpan));
         const originalJsx=jsxBindings?.bindings.get(JSON.stringify(site.span));
@@ -331,7 +334,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
   return {
     sites,plans,changes,sourceCalls,transformedSources,transformRefusals,targets,targetResolutions,hook:reactElementCreationHook(sites,plans,version!==undefined,sourceCalls,targets),
     referenceEntry:entry?{source:entry.text,identity:entry.identity}:undefined,
-    complete(){if(!seen.has(runtime[0])||forwardRuntime&&!seen.has(forwardRuntime)||coreRuntime&&!seen.has(coreRuntime)||entry&&!seen.has('react-reference.tsx')||[...files.keys()].some(f=>!seen.has(f)))throw Error('element-creation-transform-incomplete');},
+    complete(){if(sites.some(site=>site.factory!=='createElement')&&!seen.has(runtime[0])||forwardRuntime&&!seen.has(forwardRuntime)||coreRuntime&&!seen.has(coreRuntime)||entry&&!seen.has('react-reference.tsx')||[...files.keys()].some(f=>!seen.has(f)))throw Error('element-creation-transform-incomplete');},
     async transform(text:string,file:string,loader:Loader){
       if(file==='react-reference.tsx'){
         if(!entry)return {contents:text,loader};
@@ -352,7 +355,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
         if(text.split(reactCallNeedle).length!==2)throw Error('element-react-call-site-unmatched');
         contents=contents.replace(reactCallNeedle,`            return ${G}.reactCall(Component,props,secondArg);`);
       }
-      else if(file===coreRuntime){contents+=`\n${G}.registerFragment(exports.Fragment);\n`;if(entry)contents+=`\n${G}.registerCreateElement(exports.createElement);\n`;}
+      else if(file===coreRuntime){contents+=`\n${G}.registerFragment(exports.Fragment);\n`;contents+=`\n${G}.registerCreateElement(exports.createElement);\n`;}
       else {
         const entry=files.get(file);if(!entry)return {contents,loader};
         if(text!==entry.text)throw Error('element-creation-source-changed');

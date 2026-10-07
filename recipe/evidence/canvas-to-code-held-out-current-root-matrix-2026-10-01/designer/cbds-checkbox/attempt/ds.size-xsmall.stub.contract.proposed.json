@@ -1,0 +1,78 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.size-xsmall",
+  "name": "SizeXsmall",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"size=xsmall\" instances of Checkbox — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "iconSwap",
+      "type": "text",
+      "default": "184:89713",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "iconSwap"
+        },
+        "code": {
+          "prop": "iconSwap"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xsmall"
+        ]
+      },
+      "default": "xsmall",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "xsmall": "xsmall"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "iconSwap": {
+          "content": {
+            "prop": "iconSwap"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.stub-size-xsmall.root.width}",
+        "height": "{imported.stub-size-xsmall.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/SizeXsmall",
+        "export": "SizeXsmall"
+      }
+    }
+  }
+}

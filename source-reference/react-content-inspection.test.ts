@@ -13,7 +13,7 @@ import { selectReactNativeRequest, readReactNativeContentEvidence } from './reac
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { startReactContentInspection, readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
 import { reactOwnershipEngine, type ReactOwnershipReport } from './react-ownership-run.js';
-import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
+import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography, captureReactSourceSubject } from './react-source-framing.js';
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createReactInitialInspectionStore, observerIdentityUnavailable, reactInitialObserverIdentity, reactInitialObserverModules, reactInitialReobservable } from './react-initial-inspection.js';
@@ -93,6 +93,12 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(typography.rows[0].lines, 1);
   assert(typography.rows[0].width > 0);
   assert.deepEqual(await measureReactSourceTypography(frameInput), typography);
+  const transparent = await captureReactSourceSubject(frameInput);
+  assert.equal(transparent.sourceSha256, captured.sourcePngSha256);
+  assert.equal(transparent.treeSha256, captured.treeSha256);
+  assert.equal(transparent.frame.pngSha256, evidenceSha(transparent.bytes));
+  assert.deepEqual(await captureReactSourceSubject(frameInput), transparent);
+  await assert.rejects(captureReactSourceSubject({ ...frameInput, reference: { ...reference, css: reference.css + 'button{margin-left:1px}' } }), /original-changed/);
   await assert.rejects(measureReactSourceTypography({ ...frameInput, reference: { ...reference, css: reference.css + 'button{font-family:serif}' } }), /original-changed/);
   for (const css of ['button{margin-left:1px}', 'button{visibility:hidden}', 'button{font-family:serif}']) {
     await assert.rejects(measureReactSourceFrame({ ...frameInput, reference: { ...reference, css: reference.css + css } }), /original-changed/);

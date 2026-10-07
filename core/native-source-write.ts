@@ -219,6 +219,9 @@ function nativeRefuse(code) { throw Error('native-source-write-' + code); }
 function nativeFileGuard() {
   if (figma.fileKey !== NATIVE.operation.fileKey) nativeRefuse('file-mismatch');
 }
+// Retain owned live handles: freshly derived slot IDs can require a remote
+// lookup even while their parent instance is already loaded.
+const nativeOwnedNodes = new Map();
 const nativeOwner = JSON.stringify({ version: 1, operationId: NATIVE.operation.id,
   sourceContractId: NATIVE.sourceContractId, sourceContractRevision: NATIVE.sourceContractRevision,
   tokenPreparationRevision: NATIVE.tokenPreparationRevision, acceptedContract: null });
@@ -233,6 +236,7 @@ function nativeOwn(node) {
   nativeRetain(node);
   node.setSharedPluginData('ds_contracts', 'nativeSourceOperation', nativeOwner);
   node.setSharedPluginData('ds_contracts', 'nativeSourceAllocation', node.id);
+  nativeOwnedNodes.set(node.id, node);
 }
 function nativeInit(node, spec) {
   // SVG import returns every descendant at once. Retain the entire allocation
@@ -393,8 +397,11 @@ ${render}
   // both the allocation stamp and its exact role under a stable slot root.
   for (const c of (NATIVE_RESULT.comparisons || [])) if (c.status === 'created-comparison') {
     for (const saved of c.slots) {
-      const slot = await figma.getNodeByIdAsync(saved.nodeId); nativeFileGuard();
-      if (!slot || slot.type !== 'SLOT') nativeRefuse('slot-identity-unavailable');
+      const slot = nativeOwnedNodes.get(saved.nodeId); nativeFileGuard();
+      if (!slot || slot.id !== saved.nodeId || slot.type !== 'SLOT' ||
+          slot.getSharedPluginData('ds_contracts', 'nativeSourceOperation') !== nativeOwner ||
+          slot.getSharedPluginData('ds_contracts', 'nativeSourceAllocation') !== saved.nodeId)
+        nativeRefuse('slot-identity-unavailable');
       function record(node, path) {
         const allocation = node.getSharedPluginData('ds_contracts', 'nativeSourceAllocation');
         const identity = NATIVE_RESULT.nodes.find(n => n.id === allocation);

@@ -264,15 +264,8 @@ try {
     ui.includes('codeOnlyFacts') && ui.includes('stay code-only'));
 
   // --- 4. R8 (2026-08-22): the declared paths that escaped the naming -------
-  // Found by conformance/canvas.ts: `aspect-ratio` was the one SILENT row.
-  // The registry calls the channel 'draw' (so the declared collector names
-  // nothing) and the emitter lowers it to a FIXED HEIGHT — the ratio itself
-  // never reaches a canvas that has no aspect-ratio field, the dump reads a
-  // height back and the proposal mints a height token. Synthetic seeds pin
-  // every branch of that lowering as a NAMED channel fact, and pin that a
-  // declared channel the registry does not know (compileComponentData does
-  // NOT run validateContract — only the script emitter does) produces a
-  // fact instead of the bare `return` it used to.
+  // Known-width frame ratios now carry a native lock. Unsupported ratio
+  // cases must still name the lost channel, including explicit-height precedence.
   const seed = (root: Record<string, unknown>): Contract =>
     ContractSchema.parse({
       $schema: './contract.schema.json',
@@ -297,15 +290,17 @@ try {
   const names = (facts: CodeOnlyFact[], part: string, kind: CodeOnlyFact['kind'], channel: string, value: string, words: string[]): boolean =>
     facts.some((f) => f.part === part && f.kind === kind && f.channel === channel && f.value === value && words.every((w) => f.reason.includes(w)));
   {
-    const lowered = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' }, literals: { width: '80px' } });
-    check('aspect-ratio lowered from a literal width is NAMED with its numbers (kind channel, "LOWERED to a fixed height of 40px")',
-      names(lowered, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'LOWERED to a fixed height of 40px', '80px ÷ 2']));
+    const ratioContract = seed({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' }, literals: { width: '80px' } });
+    const ratioData = engine.compileComponentData(ratioContract, new Map([[ratioContract.id, ratioContract]]));
+    check('known-width frame aspect-ratio carries a native lock and initial 80 by 40 dimensions',
+      ratioData.variants[0].spec.nativeAspectRatio === 2 && ratioData.variants[0].spec.lits?.width === 80 &&
+      ratioData.variants[0].spec.lits?.height === 40 && !(ratioData.codeOnlyFacts ?? []).some(f => f.channel === 'aspect-ratio'));
     const widthless = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' } });
     check('aspect-ratio with no width to derive from is NAMED (nothing drawn, and the receipt says why)',
-      names(widthless, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'no bound or literal width']));
+      names(widthless, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no bound or literal width']));
     const heightWins = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' }, literals: { width: '80px', height: '20px' } });
     check('aspect-ratio beside a carried height is NAMED (the height wins; the ratio is not enforced)',
-      names(heightWins, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'height channel, which wins']));
+      names(heightWins, 'root', 'channel', 'aspect-ratio', '2 / 1', ['height channel, which wins']));
     const parent = factsOf({
       layout: { display: 'flex' },
       literals: { width: '80px' },

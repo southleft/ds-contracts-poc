@@ -7,6 +7,7 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
   const apply=Reflect.apply, same=Object.is, ErrorConstructor=Error;
   const objectPrototype=Object.prototype,arrayPrototype=Array.prototype,functionPrototype=Function.prototype;
   const functions=new WeakMap(),functionKeys=new Map(),bindings=new Map();let active=null,checkedCalls=0,activeTrace=null,traceCursor=0;
+  const initialization=[],started=new Set(),initializationChecks=[];
   const point=p=>JSON.stringify([p.file,p.sha256,p.start,p.end]);
   const fail=reason=>{const message='helper-binding-'+reason;if(recordFailure)recordFailure(message);throw new ErrorConstructor(message);};
   const descriptorFields=['value','get','set','writable','enumerable','configurable'];
@@ -105,6 +106,7 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
       // edge: declaration-file identity alone is insufficient.
       match(get(),b.value);
     }
+    return plan.bindings.map(b=>point(b.binding));
   }
   function sourceCall(site,fn,invoke){
     assertNative();const registered=functions.get(fn);if(!registered)fail('call-function-unregistered');
@@ -129,16 +131,37 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
         check(active);checkedCalls++;const result=apply(fn,undefined,args);check(active);return result;
       });
     }
-    checkedCalls++;return invoke(fn);
+    const owners=[];for(let i=0;i<models.length;i++)if(models[i].calls.some(c=>c.phase==='module-initialization'&&c.site&&point(c.site)===site&&point(c.source)===registered.key))owners.push(i);
+    if(owners.some(i=>started.has(i)))fail('initialization-after-render');
+    const event=owners.length?{site,source:registered.key,owners,completion:'threw'}:null;
+    if(event)initialization.push(event);
+    checkedCalls++;const result=invoke(fn);if(event)event.completion='returned';return result;
   }
   return {
     sourceFunction,binding,sourceCall,check,reactDisplayName,
+    metadataFunction(value,source){
+      // A source location alone cannot identify repeated closure allocations.
+      // Require the singleton compiler registration, then check its descriptors.
+      assertNative();const key=point(source);
+      if(functionKeys.get(key)!==value)fail('metadata-function-unregistered-or-ambiguous');
+      let found=false;
+      for(const model of models)for(const id of model.runtimeBindings.functions){
+        const node=model.runtimeBindings.nodes[id];
+        if(node?.kind==='function'&&point(node.source)===key){matcher(model.runtimeBindings)(value,{kind:'reference',id});found=true;}
+      }
+      if(!found)fail('metadata-function-outside-model');
+    },
+
     component(index,key,invoke,trace=false){
       if(active!==null)fail('reentrant-component');
       const model=models[index],fn=functionKeys.get(key);
       if(!model?.component||point(model.component)!==key||!fn)fail('component-unregistered-or-ambiguous');
       const id=model.runtimeBindings.functions.find(id=>point(model.runtimeBindings.nodes[id].source)===key);
       if(id===undefined)fail('component-function-missing');
+      const expectedInitialization=model.calls.filter(c=>c.phase==='module-initialization'&&c.site);
+      const observedInitialization=initialization.filter(e=>e.owners.includes(index));
+      if(expectedInitialization.length!==observedInitialization.length||expectedInitialization.some((c,i)=>point(c.site)!==observedInitialization[i].site||point(c.source)!==observedInitialization[i].source||observedInitialization[i].completion!=='returned'))fail('initialization-trace-incomplete-or-changed');
+      started.add(index);if(!initializationChecks.includes(index))initializationChecks.push(index);
       check(index);matcher(model.runtimeBindings)(fn,{kind:'reference',id});active=index;
       if(trace){activeTrace=model.calls.filter(c=>c.site&&c.phase!=='module-initialization');traceCursor=0;}
       try{const result=invoke();check(index);if(activeTrace&&traceCursor!==activeTrace.length)fail('call-trace-incomplete');return result;}
@@ -146,6 +169,6 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
     },
     within(index,fn,args){if(active===null||!models[active].component)fail('component-invocation-missing');check(index);const result=apply(fn,undefined,args);check(index);return result;},
     run(index,fn,args){if(active!==null)fail('reentrant-helper');check(index);active=index;try{const result=apply(fn,undefined,args);check(index);return result;}finally{active=null;}},
-    report(){assertNative();return {registeredBindings:bindings.size,checkedCalls};}
+    report(){assertNative();return {registeredBindings:bindings.size,checkedCalls,initialization:{qualification:'source-initialization-call-order-only',effectsVerified:false,checks:initializationChecks.map(model=>({model,calls:initialization.filter(e=>e.owners.includes(model)).map(e=>({site:e.site,source:e.source,completion:e.completion}))}))}};}
   };
 })`;

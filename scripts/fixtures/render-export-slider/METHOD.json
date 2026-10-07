@@ -1,0 +1,13 @@
+{
+  "fileKey": "ZQKD6XLG7mzarvkRnmpHCM",
+  "nodeId": "884:120261",
+  "version": "2404408407624006950",
+  "capture": "2026-10-04",
+  "source": "Radix Themes Community kit",
+  "method": "Bounds snapshots retain exact root id, clipping, layout and render boxes, version and lastModified. Shallow saved snapshot used depth=1; fresh before/after used no depth limit. Layout export was retained unchanged from same-version historical capture; fresh render export uses use_absolute_bounds=false. Existing overlap proof verifies all shared pixels.",
+  "sha256": {
+    "before.json": "4fdc3b5b3d031771af4292ee04d85da8ec0086b8f84597108772de614c342399",
+    "after.json": "4fdc3b5b3d031771af4292ee04d85da8ec0086b8f84597108772de614c342399",
+    "figma-bounds-before.json": "3c7e090fd18c0b9f76b2f683da10b1cbf349708cb118be8446bfe5e8a92a4153"
+  }
+}

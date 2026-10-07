@@ -27,7 +27,7 @@ export const TypeaheadItem = forwardRef<HTMLDivElement, TypeaheadItemProps>(func
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} role="option" {...rest}>
-      {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+      <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
       <div className={styles.textCol}>
         <span className={styles.labelText}>{label}</span>
         <span className={styles.descriptionText}>{description}</span>

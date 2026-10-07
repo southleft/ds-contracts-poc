@@ -1,0 +1,24 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/icon.contract.json (ds.icon v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-icon-root-width);
+  height: var(--imported-stub-icon-root-height);
+}
+
+.icon {
+  font-family: Inter, system-ui, sans-serif;
+}

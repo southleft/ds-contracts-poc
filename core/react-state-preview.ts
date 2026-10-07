@@ -45,5 +45,5 @@ export function reactStatePreviewAttribute(parent: Contract, ref: ComponentRef):
   if (preview === undefined) return '';
   if (typeof preview === 'string') return ` ${STATE_PREVIEW_CODE_PROP}=${JSON.stringify(preview)}`;
   const parentProp = parent.props.find((p) => p.name === preview.prop);
-  return ` ${STATE_PREVIEW_CODE_PROP}={${componentLookupExpression(undefined, parentProp?.bindings.code.prop ?? preview.prop, preview.map)}}`;
+  return ` ${STATE_PREVIEW_CODE_PROP}={${componentLookupExpression(undefined, parentProp?.bindings.code.prop ?? preview.prop, preview.map, parentProp)}}`;
 }

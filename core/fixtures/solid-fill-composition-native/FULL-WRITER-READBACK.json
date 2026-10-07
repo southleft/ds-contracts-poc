@@ -1,0 +1,4383 @@
+{
+  "scope": "canonical full component writer through SHA-verified standalone desktop runner; literal resolved paint only",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "scriptSHA256": "c5bd30ba20be485fcdb41c9697f7181fc525d4669f57d6f78b38d348fde8cc08",
+  "runtimeSHA256": "90f8137719078bb0914c9ce323a780b4e3aaf1ac00ce466836a268b443b2937b",
+  "newPages": [
+    {
+      "id": "427:2543",
+      "name": "FullPaintRoot20261002"
+    },
+    {
+      "id": "427:2649",
+      "name": "FullPaintNested20261002"
+    }
+  ],
+  "createdNodeIds": [
+    "427:2608",
+    "427:2544",
+    "427:2545",
+    "427:2546",
+    "427:2547",
+    "427:2548",
+    "427:2549",
+    "427:2550",
+    "427:2551",
+    "427:2552",
+    "427:2553",
+    "427:2554",
+    "427:2555",
+    "427:2556",
+    "427:2557",
+    "427:2558",
+    "427:2559",
+    "427:2560",
+    "427:2561",
+    "427:2562",
+    "427:2563",
+    "427:2564",
+    "427:2565",
+    "427:2566",
+    "427:2567",
+    "427:2568",
+    "427:2569",
+    "427:2570",
+    "427:2571",
+    "427:2572",
+    "427:2573",
+    "427:2574",
+    "427:2575",
+    "427:2576",
+    "427:2577",
+    "427:2578",
+    "427:2579",
+    "427:2580",
+    "427:2581",
+    "427:2582",
+    "427:2583",
+    "427:2584",
+    "427:2585",
+    "427:2586",
+    "427:2587",
+    "427:2588",
+    "427:2589",
+    "427:2590",
+    "427:2591",
+    "427:2592",
+    "427:2593",
+    "427:2594",
+    "427:2595",
+    "427:2596",
+    "427:2597",
+    "427:2598",
+    "427:2599",
+    "427:2600",
+    "427:2601",
+    "427:2602",
+    "427:2603",
+    "427:2604",
+    "427:2605",
+    "427:2606",
+    "427:2607",
+    "427:2609",
+    "427:2746",
+    "427:2650",
+    "427:2651",
+    "427:2652",
+    "427:2653",
+    "427:2654",
+    "427:2655",
+    "427:2656",
+    "427:2657",
+    "427:2658",
+    "427:2659",
+    "427:2660",
+    "427:2661",
+    "427:2662",
+    "427:2663",
+    "427:2664",
+    "427:2665",
+    "427:2666",
+    "427:2667",
+    "427:2668",
+    "427:2669",
+    "427:2670",
+    "427:2671",
+    "427:2672",
+    "427:2673",
+    "427:2674",
+    "427:2675",
+    "427:2676",
+    "427:2677",
+    "427:2678",
+    "427:2679",
+    "427:2680",
+    "427:2681",
+    "427:2682",
+    "427:2683",
+    "427:2684",
+    "427:2685",
+    "427:2686",
+    "427:2687",
+    "427:2688",
+    "427:2689",
+    "427:2690",
+    "427:2691",
+    "427:2692",
+    "427:2693",
+    "427:2694",
+    "427:2695",
+    "427:2696",
+    "427:2697",
+    "427:2698",
+    "427:2699",
+    "427:2700",
+    "427:2701",
+    "427:2702",
+    "427:2703",
+    "427:2704",
+    "427:2705",
+    "427:2706",
+    "427:2707",
+    "427:2708",
+    "427:2709",
+    "427:2710",
+    "427:2711",
+    "427:2712",
+    "427:2713",
+    "427:2714",
+    "427:2715",
+    "427:2716",
+    "427:2717",
+    "427:2718",
+    "427:2719",
+    "427:2720",
+    "427:2721",
+    "427:2722",
+    "427:2723",
+    "427:2724",
+    "427:2725",
+    "427:2726",
+    "427:2727",
+    "427:2728",
+    "427:2729",
+    "427:2730",
+    "427:2731",
+    "427:2732",
+    "427:2733",
+    "427:2734",
+    "427:2735",
+    "427:2736",
+    "427:2737",
+    "427:2738",
+    "427:2739",
+    "427:2740",
+    "427:2741",
+    "427:2742",
+    "427:2743",
+    "427:2744",
+    "427:2745",
+    "427:2747"
+  ],
+  "reports": [
+    {
+      "nested": false,
+      "result": {
+        "createdNodeIds": [
+          "427:2608"
+        ],
+        "results": [
+          {
+            "name": "FullPaintRoot20261002",
+            "contractId": "ds.full-paint-root20261002",
+            "nodeId": "427:2608",
+            "key": "5d5d93b4a7fe631554190bfa687b5d64dedef6e8",
+            "variants": 32,
+            "properties": [
+              "Cell"
+            ],
+            "codeOnlyFacts": [
+              {
+                "part": "ink",
+                "kind": "declared",
+                "channel": "position",
+                "value": "absolute",
+                "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+                "variants": {
+                  "count": 32,
+                  "of": 32
+                }
+              },
+              {
+                "part": "root",
+                "kind": "declared",
+                "channel": "position",
+                "value": "relative",
+                "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+                "variants": {
+                  "count": 32,
+                  "of": 32
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "nested": true,
+      "result": {
+        "createdNodeIds": [
+          "427:2746"
+        ],
+        "results": [
+          {
+            "name": "FullPaintNested20261002",
+            "contractId": "ds.full-paint-nested20261002",
+            "nodeId": "427:2746",
+            "key": "332563af24dee7d158adda27dc1c13b1f4e68b30",
+            "variants": 32,
+            "properties": [
+              "Cell"
+            ],
+            "codeOnlyFacts": [
+              {
+                "part": "Wrapper",
+                "kind": "declared",
+                "channel": "position",
+                "value": "absolute",
+                "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+                "variants": {
+                  "count": 32,
+                  "of": 32
+                }
+              },
+              {
+                "part": "ink",
+                "kind": "declared",
+                "channel": "position",
+                "value": "absolute",
+                "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+                "variants": {
+                  "count": 32,
+                  "of": 32
+                }
+              },
+              {
+                "part": "root",
+                "kind": "declared",
+                "channel": "position",
+                "value": "relative",
+                "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+                "variants": {
+                  "count": 32,
+                  "of": 32
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "fullNativeBindingRecreationQualified": false,
+  "kitWrites": false,
+  "rows": [
+    {
+      "nested": false,
+      "id": "427:2544",
+      "name": "Cell=Cell0",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2544",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2545",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:4",
+      "sourcePng": "412-4.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2544.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2546",
+      "name": "Cell=Cell1",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2546",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2547",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:7",
+      "sourcePng": "412-7.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2546.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2548",
+      "name": "Cell=Cell2",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2548",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2549",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:23",
+      "sourcePng": "412-23.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2548.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2550",
+      "name": "Cell=Cell3",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2550",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2551",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:26",
+      "sourcePng": "412-26.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2550.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2552",
+      "name": "Cell=Cell4",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2552",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2553",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:42",
+      "sourcePng": "412-42.png",
+      "sourcePngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2552.png",
+      "pngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03"
+    },
+    {
+      "nested": false,
+      "id": "427:2554",
+      "name": "Cell=Cell5",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2554",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2555",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:45",
+      "sourcePng": "412-45.png",
+      "sourcePngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2554.png",
+      "pngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03"
+    },
+    {
+      "nested": false,
+      "id": "427:2556",
+      "name": "Cell=Cell6",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2556",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2557",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:61",
+      "sourcePng": "412-61.png",
+      "sourcePngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2556.png",
+      "pngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0"
+    },
+    {
+      "nested": false,
+      "id": "427:2558",
+      "name": "Cell=Cell7",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2558",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2559",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:64",
+      "sourcePng": "412-64.png",
+      "sourcePngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2558.png",
+      "pngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0"
+    },
+    {
+      "nested": false,
+      "id": "427:2560",
+      "name": "Cell=Cell8",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2560",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2561",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:4",
+      "sourcePng": "412-81.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2560.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2562",
+      "name": "Cell=Cell9",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2562",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2563",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:7",
+      "sourcePng": "412-84.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2562.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2564",
+      "name": "Cell=Cell10",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2564",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2565",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:23",
+      "sourcePng": "412-100.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2564.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2566",
+      "name": "Cell=Cell11",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2566",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2567",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:26",
+      "sourcePng": "412-103.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2566.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2568",
+      "name": "Cell=Cell12",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2568",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2569",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:42",
+      "sourcePng": "412-119.png",
+      "sourcePngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2568.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "nested": false,
+      "id": "427:2570",
+      "name": "Cell=Cell13",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2570",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2571",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:45",
+      "sourcePng": "412-122.png",
+      "sourcePngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2570.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "nested": false,
+      "id": "427:2572",
+      "name": "Cell=Cell14",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2572",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2573",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:61",
+      "sourcePng": "412-138.png",
+      "sourcePngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2572.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "nested": false,
+      "id": "427:2574",
+      "name": "Cell=Cell15",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2574",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2575",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:64",
+      "sourcePng": "412-141.png",
+      "sourcePngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2574.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "nested": false,
+      "id": "427:2576",
+      "name": "Cell=Cell16",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2576",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2577",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:80",
+      "sourcePng": "412-157.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2576.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2578",
+      "name": "Cell=Cell17",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2578",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2579",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:83",
+      "sourcePng": "412-160.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2578.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2580",
+      "name": "Cell=Cell18",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2580",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2581",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:99",
+      "sourcePng": "412-176.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2580.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2582",
+      "name": "Cell=Cell19",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2582",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2583",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:102",
+      "sourcePng": "412-179.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2582.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2584",
+      "name": "Cell=Cell20",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2584",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2585",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:118",
+      "sourcePng": "412-195.png",
+      "sourcePngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2584.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "nested": false,
+      "id": "427:2586",
+      "name": "Cell=Cell21",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2586",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2587",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:121",
+      "sourcePng": "412-198.png",
+      "sourcePngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2586.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "nested": false,
+      "id": "427:2588",
+      "name": "Cell=Cell22",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2588",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2589",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:137",
+      "sourcePng": "412-214.png",
+      "sourcePngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2588.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "nested": false,
+      "id": "427:2590",
+      "name": "Cell=Cell23",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2590",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2591",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:140",
+      "sourcePng": "412-217.png",
+      "sourcePngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2590.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "nested": false,
+      "id": "427:2592",
+      "name": "Cell=Cell24",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2592",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2593",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:156",
+      "sourcePng": "412-233.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2592.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2594",
+      "name": "Cell=Cell25",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2594",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2595",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:159",
+      "sourcePng": "412-236.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2594.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2596",
+      "name": "Cell=Cell26",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2596",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2597",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:175",
+      "sourcePng": "412-252.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2596.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2598",
+      "name": "Cell=Cell27",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2598",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2599",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:178",
+      "sourcePng": "412-255.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2598.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": false,
+      "id": "427:2600",
+      "name": "Cell=Cell28",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2600",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2601",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:194",
+      "sourcePng": "412-271.png",
+      "sourcePngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2600.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "nested": false,
+      "id": "427:2602",
+      "name": "Cell=Cell29",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2602",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2603",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:197",
+      "sourcePng": "412-274.png",
+      "sourcePngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2602.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "nested": false,
+      "id": "427:2604",
+      "name": "Cell=Cell30",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2604",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2605",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:213",
+      "sourcePng": "412-290.png",
+      "sourcePngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2604.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "nested": false,
+      "id": "427:2606",
+      "name": "Cell=Cell31",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2606",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2607",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2538"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:216",
+      "sourcePng": "412-293.png",
+      "sourcePngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2606.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "nested": true,
+      "id": "427:2650",
+      "name": "Cell=Cell0",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2651",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2652",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:4",
+      "sourcePng": "412-4.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2650.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2653",
+      "name": "Cell=Cell1",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2654",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2655",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:7",
+      "sourcePng": "412-7.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2653.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2656",
+      "name": "Cell=Cell2",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2657",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2658",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:23",
+      "sourcePng": "412-23.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2656.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2659",
+      "name": "Cell=Cell3",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2660",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2661",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:26",
+      "sourcePng": "412-26.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2659.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2662",
+      "name": "Cell=Cell4",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2663",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2664",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:42",
+      "sourcePng": "412-42.png",
+      "sourcePngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2662.png",
+      "pngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03"
+    },
+    {
+      "nested": true,
+      "id": "427:2665",
+      "name": "Cell=Cell5",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2666",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2667",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:45",
+      "sourcePng": "412-45.png",
+      "sourcePngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2665.png",
+      "pngSHA256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03"
+    },
+    {
+      "nested": true,
+      "id": "427:2668",
+      "name": "Cell=Cell6",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2669",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2670",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:61",
+      "sourcePng": "412-61.png",
+      "sourcePngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2668.png",
+      "pngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0"
+    },
+    {
+      "nested": true,
+      "id": "427:2671",
+      "name": "Cell=Cell7",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2672",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2673",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "404:64",
+      "sourcePng": "412-64.png",
+      "sourcePngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2671.png",
+      "pngSHA256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0"
+    },
+    {
+      "nested": true,
+      "id": "427:2674",
+      "name": "Cell=Cell8",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2675",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2676",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:4",
+      "sourcePng": "412-81.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2674.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2677",
+      "name": "Cell=Cell9",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2678",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2679",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:7",
+      "sourcePng": "412-84.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2677.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2680",
+      "name": "Cell=Cell10",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2681",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2682",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:23",
+      "sourcePng": "412-100.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2680.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2683",
+      "name": "Cell=Cell11",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2684",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2685",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:26",
+      "sourcePng": "412-103.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2683.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2686",
+      "name": "Cell=Cell12",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2687",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2688",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:42",
+      "sourcePng": "412-119.png",
+      "sourcePngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2686.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "nested": true,
+      "id": "427:2689",
+      "name": "Cell=Cell13",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2690",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2691",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:45",
+      "sourcePng": "412-122.png",
+      "sourcePngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2689.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "nested": true,
+      "id": "427:2692",
+      "name": "Cell=Cell14",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2693",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2694",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:61",
+      "sourcePng": "412-138.png",
+      "sourcePngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2692.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "nested": true,
+      "id": "427:2695",
+      "name": "Cell=Cell15",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2696",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2697",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:64",
+      "sourcePng": "412-141.png",
+      "sourcePngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2695.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "nested": true,
+      "id": "427:2698",
+      "name": "Cell=Cell16",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2699",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2700",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:80",
+      "sourcePng": "412-157.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2698.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2701",
+      "name": "Cell=Cell17",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2702",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2703",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:83",
+      "sourcePng": "412-160.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2701.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2704",
+      "name": "Cell=Cell18",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2705",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2706",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:99",
+      "sourcePng": "412-176.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2704.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2707",
+      "name": "Cell=Cell19",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2708",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2709",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:102",
+      "sourcePng": "412-179.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2707.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2710",
+      "name": "Cell=Cell20",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2711",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2712",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:118",
+      "sourcePng": "412-195.png",
+      "sourcePngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2710.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "nested": true,
+      "id": "427:2713",
+      "name": "Cell=Cell21",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2714",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2715",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:121",
+      "sourcePng": "412-198.png",
+      "sourcePngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2713.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "nested": true,
+      "id": "427:2716",
+      "name": "Cell=Cell22",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2717",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2718",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:137",
+      "sourcePng": "412-214.png",
+      "sourcePngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2716.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "nested": true,
+      "id": "427:2719",
+      "name": "Cell=Cell23",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2720",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 1,
+            "g": 0,
+            "b": 0
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2721",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:140",
+      "sourcePng": "412-217.png",
+      "sourcePngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2719.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "nested": true,
+      "id": "427:2722",
+      "name": "Cell=Cell24",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2723",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2724",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:156",
+      "sourcePng": "412-233.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2722.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2725",
+      "name": "Cell=Cell25",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2726",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2727",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:159",
+      "sourcePng": "412-236.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2725.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2728",
+      "name": "Cell=Cell26",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2729",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2730",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:175",
+      "sourcePng": "412-252.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2728.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2731",
+      "name": "Cell=Cell27",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2732",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2733",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:178",
+      "sourcePng": "412-255.png",
+      "sourcePngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2731.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "nested": true,
+      "id": "427:2734",
+      "name": "Cell=Cell28",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2735",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2736",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:194",
+      "sourcePng": "412-271.png",
+      "sourcePngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2734.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "nested": true,
+      "id": "427:2737",
+      "name": "Cell=Cell29",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2738",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2739",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:197",
+      "sourcePng": "412-274.png",
+      "sourcePngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2737.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "nested": true,
+      "id": "427:2740",
+      "name": "Cell=Cell30",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2741",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2742",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:213",
+      "sourcePng": "412-290.png",
+      "sourcePngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "full-427-2740.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "nested": true,
+      "id": "427:2743",
+      "name": "Cell=Cell31",
+      "width": 20,
+      "height": 20,
+      "ownerId": "427:2744",
+      "paint": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "MULTIPLY",
+          "color": {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5
+          },
+          "boundVariables": {}
+        }
+      ],
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH",
+      "ink": {
+        "id": "427:2745",
+        "x": 6,
+        "y": 6,
+        "width": 8,
+        "height": 8,
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.501960813999176,
+              "g": 0.501960813999176,
+              "b": 0.501960813999176
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:427:2644"
+              }
+            }
+          }
+        ]
+      },
+      "sourceCell": "407:216",
+      "sourcePng": "412-293.png",
+      "sourcePngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "full-427-2743.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    }
+  ]
+}

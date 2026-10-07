@@ -1,7 +1,10 @@
+import {observeReactOriginalWrapper} from './react-original-wrapper-observation.js';
+import {readReactOriginalWrappers,type ReactOriginalWrapperCandidate} from './react-original-wrappers.js';
+import {discoverCompiledDependencies} from './react-compiled-dependencies.js';
 import {observeReactJsxHelpers,reactJsxHelperObservationUnchanged,type ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
 import {type ReactJsxValueRequest,type ReactJsxValues} from './react-jsx-values.js';
 import {readReactJsxEffects,type ReactJsxEffects} from './react-jsx-effects.js';
-import { observeReactHelpers, reactHelperObservationUnchanged, type ReactHelperObservation } from "./react-helper-observation.js";
+import { observeReactHelpers, reactHelperObservationsUnchanged, type ReactHelperObservation } from "./react-helper-observation.js";
 import type {ReactPropertySnapshot} from './react-root-variants.js';
 import {assembleReactRootMatrix,type ReactRootMatrix} from './react-root-matrix.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
@@ -15,6 +18,7 @@ import {readReactContextualContent} from './react-contextual-content.js';
 import {readReactAuthoredContent} from './react-authored-content.js';
 import {projectReactAuthoredTree,type ReactAuthoredTreeDraft} from './react-authored-tree.js';
 import {observeReactRuntimeDependencies,observeReactRuntimeMounts} from './react-runtime-export.js';
+import {observeReactRuntimeHelperCandidates} from './react-runtime-helper-candidates.js';
 import {createReactElementCreationObserver} from './react-element-creation.js';
 import {readReactCompiledContent,type ReactCompiledContent} from './react-compiled-content.js';
 import {readReactCompiledEffects,type ReactCompiledEffects} from './react-compiled-effects.js';
@@ -64,6 +68,8 @@ export interface ReactOwnershipRow {
   authoredTrees?:Array<{helper:number;draft?:ReactAuthoredTreeDraft;reason?:string}>;
   helperObservations?: ReactHelperObservation[];
   /** Source-flow candidates at matched compiled creation sites, not authority. */
+  originalWrappers?:Array<{path:string;result:ReactJsxHelperObservation}>;
+  originalWrapperPlans?:ReactOriginalWrapperCandidate[];
   jsxEffects?: Array<{path:string;model:ReactJsxEffects}>;
   jsxValues?: Array<{path:string;result:ReactJsxValues}>;
   jsxHelpers?: Array<{path:string;result:ReactJsxHelperObservation}>;
@@ -91,7 +97,8 @@ export function readReactOwnershipProgram(reference: ReactReference, sourceRoot:
   const mounts=observeReactRuntimeMounts(reference,
     readReactSourceProgram(sourceRoot, reactReferenceSourceModules(reference), { includeJsxDependencies: true }));
   const dependencies=observeReactRuntimeDependencies(reference,mounts.program);
-  return {program:dependencies.program,observations:[...mounts.observations,...dependencies.observations]};
+  const compiled=discoverCompiledDependencies(reference,dependencies.program);
+  return {program:compiled.program,observations:[...mounts.observations,...dependencies.observations,...compiled.observations]};
 }
 /** Private, paired source observation using the same frozen cases and reader.
  * No render configuration, script, path or role map is accepted from the UI. */
@@ -121,7 +128,8 @@ export function startReactOwnership(
     sealed: Record<string, string> | undefined;
   const unchanged = () =>
     reactReferenceUnchanged(reference) && reactSourceProgramUnchanged(program) &&
-    state.rows.every(row=>(row.helperObservations??[]).every(reactHelperObservationUnchanged)&&(row.jsxHelpers??[]).every(item=>reactJsxHelperObservationUnchanged(item.result)));
+    reactHelperObservationsUnchanged(state.rows.flatMap(row=>row.helperObservations??[])) &&
+    state.rows.every(row=>[...(row.jsxHelpers??[]),...(row.originalWrappers??[])].every(item=>reactJsxHelperObservationUnchanged(item.result)));
   const promise = (async () => {
     let terminal: "complete" | "failed" = "complete";
     try {
@@ -326,6 +334,13 @@ export function startReactOwnership(
             treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'helpers'),
             assertCurrent:()=>{if(stopped||!unchanged())throw Error('helper-observation-source-changed-or-interrupted');},
           });
+          row.originalWrapperPlans=readReactOriginalWrappers(reference,row.ownership!);
+          writeFileSync(path.join(rowDir,'original-wrapper-plans.json'),JSON.stringify(row.originalWrapperPlans,null,2)+'\n',{flag:'wx'});
+          row.originalWrappers=[];
+          for(const [index,candidate] of row.originalWrapperPlans.entries()){
+            row.originalWrappers.push({path:candidate.path,result:await observeReactOriginalWrapper({browser,reference,program,ownership:row.ownership!,candidate,caseId:c.id,treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'original-wrappers',String(index)),engine:state.engine!,assertCurrent:()=>{if(stopped||!unchanged())throw Error('original-wrapper-source-changed-or-interrupted');}})});
+          }
+          writeFileSync(path.join(rowDir,'original-wrappers.json'),JSON.stringify(row.originalWrappers,null,2)+'\n',{flag:'wx'});
           row.jsxHelpers=[];
           for(const [index,entry] of (row.jsxEffects??[]).entries()){
             row.jsxHelpers.push({path:entry.path,result:await observeReactJsxHelpers({browser,reference,program,ownership:row.ownership!,model:entry.model,caseId:c.id,
@@ -333,9 +348,9 @@ export function startReactOwnership(
               assertCurrent:()=>{if(stopped||!unchanged())throw Error('jsx-helper-source-changed-or-interrupted');}})});
           }
           writeFileSync(path.join(rowDir,'jsx-helpers.json'),JSON.stringify(row.jsxHelpers,null,2)+'\n',{flag:'wx'});
-          const contentContext=row.helperObservations.some(h=>h.containingFlow?.status==='observed'&&h.containingFlow.content==='forwarded')
-            ?readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership!,tree:pair[0].root,helpers:row.helperObservations,
-              read:(id,name)=>readFileSync(path.join(rowDir,'helpers',id,name))}):undefined;
+          const contentContext=row.helperObservations.some(h=>h.containingFlow?.status==='observed'&&h.containingFlow.content==='forwarded') || row.originalWrappers?.some(w=>w.result.status==='observed')
+            ?readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership!,tree:pair[0].root,helpers:row.helperObservations,wrappers:row.originalWrappers,
+              read:(id,name)=>readFileSync(id.startsWith('wrapper-')?path.join(rowDir,'original-wrappers',id.slice(8),name):path.join(rowDir,'helpers',id,name))}):undefined;
           row.anatomy = linkReactSourceAnatomy(program, pair[1].ownership!, pair[0].root,contentContext);
           row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root, pair[1].styleOrigin, undefined, undefined, pair[1].gridConstraints,contentContext);
           if(row.propertyMatrix){
@@ -383,7 +398,7 @@ export function startReactOwnership(
           : "react-ownership-source-changed";
       }
       if (terminal === "failed")
-        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; delete row.propertyMatrix; delete row.rootMatrix; delete row.authoredTrees; delete row.helperObservations; delete row.compiledContent; delete row.compiledEffects; delete row.compiledValues; delete row.jsxEffects; delete row.jsxValues; delete row.jsxHelpers; }
+        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; delete row.propertyMatrix; delete row.rootMatrix; delete row.authoredTrees; delete row.helperObservations; delete row.compiledContent; delete row.compiledEffects; delete row.compiledValues; delete row.originalWrappers; delete row.originalWrapperPlans; delete row.jsxEffects; delete row.jsxValues; delete row.jsxHelpers; }
       state.matched = state.rows.filter((r) => r.matched).length;
       writeFileSync(
         path.join(dir, "report.json"),
@@ -418,7 +433,7 @@ export function startReactOwnership(
             problem: current
               ? "react-ownership-evidence-changed"
               : "react-ownership-source-changed",
-            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined, propertyMatrix: undefined, rootMatrix: undefined, authoredTrees: undefined, helperObservations: undefined, compiledContent:undefined, compiledEffects:undefined, compiledValues:undefined, jsxEffects:undefined, jsxValues:undefined, jsxHelpers:undefined })),
+            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined, propertyMatrix: undefined, rootMatrix: undefined, authoredTrees: undefined, helperObservations: undefined, compiledContent:undefined, compiledEffects:undefined, compiledValues:undefined, originalWrappers:undefined, originalWrapperPlans:undefined, jsxEffects:undefined, jsxValues:undefined, jsxHelpers:undefined })),
           };
     },
     close: () => {
@@ -449,6 +464,19 @@ export function reactOwnershipEngine():Record<string,string>{
         [
           "react-ownership.ts",
           "react-ownership-run.ts",
+          "react-original-wrapper-observation.ts",
+          "react-compiled-dependencies.ts",
+          "link-root-dependencies.ts",
+          "upstream-factories.ts",
+          "react-wrapper-content.ts",
+          "react-original-wrappers.ts",
+          "react-original-wrapper-plan.ts",
+          "react-initialization-verification.ts",
+          "react-factory-props-verification.ts",
+          "react-commonjs-kernel.ts",
+          "react-context-import-functions.ts",
+          "react-context-export-reads.ts",
+          "react-import-read.ts",
           "react-reference.ts",
           "react-source-program.ts",
           "react-context-export.ts",
@@ -456,6 +484,10 @@ export function reactOwnershipEngine():Record<string,string>{
           "react-helper-effects.ts",
           "react-contextual-content.ts",
           "react-runtime-export.ts",
+          "react-runtime-helper-candidates.ts",
+          "react-implementation-stability.ts",
+          "react-runtime-implementation.ts",
+          "react-runtime-root.ts",
           "react-element-creation.ts",
           "react-element-invocation.ts",
           "react-element-source-call.ts",

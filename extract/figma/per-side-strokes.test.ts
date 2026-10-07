@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from './types.js';
 // Per-side stroke weights are CARRIED by both Figma readers (dump v1.34). Found
 // by the design-led clean-consumer check on a designer's Tabs set: the header
 // rule is drawn top 1 / right 0 / bottom 1 / left 0, both readers named that a
@@ -47,7 +48,7 @@ const stripWeights = (n: DumpNode) => { const { strokeWeight: _w, strokeWeights:
 test('the REST reader carries sides [1, 0, 1, 0] as strokeWeights, writes no uniform weight beside them, and names nothing', () => {
   // `strokeWeight: 0` is what Figma REST really reports for these sides.
   const { headers, receipts, provenance } = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }, { sides: HEADER_RULE, strokeWeight: 0 }]);
-  assert.equal(provenance.dumpVersion, '1.44');
+  assert.equal(provenance.dumpVersion, '1.63');
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, HEADER_RULE]);
   assert.deepEqual(headers.map(h => 'strokeWeight' in h), [false, false], 'one stroke, one spelling — the reported 0 is not a drawn fact');
   assert.deepEqual(receipts, []);
@@ -93,7 +94,7 @@ test('the plugin reader carries the same field from strokeTopWeight…strokeLeft
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RuledTabs'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string }; _degradations: Array<{ code: string; nodePath: string }> };
-  assert.equal(dumps._provenance.dumpVersion, '1.48');
+  assert.equal(dumps._provenance.dumpVersion, PLUGIN_DUMP_VERSION);
   // The dump was built in the VM's realm; copy the values into this one.
   const headers = Array.from(dumps.RuledTabs.variants, v => JSON.parse(JSON.stringify(v.children![0])) as DumpNode);
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, undefined, undefined]);
@@ -167,4 +168,41 @@ test('mixed or partial evidence is NAMED, never guessed', () => {
   const named = propose(outside.set);
   assert.deepEqual(headerPart(named.contract as never).literals, { 'border-top-width': '1px', 'border-right-width': '0px', 'border-bottom-width': '1px', 'border-left-width': '0px' });
   assert.ok(named.notes.some(n => /strokeAlign OUTSIDE on a stroke whose sides differ .* carries as a border drawn INWARD/.test(n)));
+});
+
+
+test('nonuniform corners survive REST capture and proposal with explicit zero corners', async () => {
+  const document:any={id:'9:1',name:'CornerBox',type:'COMPONENT',rectangleCornerRadii:[8,0,0,8],cornerSmoothing:0,
+    absoluteBoundingBox:{x:0,y:0,width:22,height:22},fills:SOLID(1,1,1),children:[]};
+  const mapped=mapRestToDump({name:'corners',nodes:{'9:1':{document}}} as never);
+  const set=mapped.dump.CornerBox as DumpSet;
+  assert.deepEqual(set.variants[0].cornerRadii,[8,0,0,8]);
+  assert.equal(mapped.report.degradations.some(d=>d.code==='radii-nonuniform'),false);
+  const p=propose(set);const {ContractSchema}=await import('../../scripts/contract-schema.js');
+  const c=ContractSchema.parse(p.contract);const {createFigmaEngine}=await import('../../core/emit-figma-script.js');
+  const engine=createFigmaEngine({tokens:{primitives:p.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const spec=engine.compileComponentData(c,new Map([[c.id,c]])).variants[0].spec;
+  for (const [field,value] of Object.entries({topLeftRadius:'8px',topRightRadius:'0px',bottomRightRadius:'0px',bottomLeftRadius:'8px'})) {
+    const name=spec.bindings?.[field];assert(name,field);
+    const entry=p.mintedTokens!.entries.find(e=>e.ref.slice(1,-1).replaceAll('.', '/')===name);
+    assert.equal(entry?.value,value,field);
+  }
+  const smooth=mapRestToDump({name:'corners',nodes:{'9:1':{document:{...document,cornerSmoothing:.5}}}} as never);
+  assert.equal((smooth.dump.CornerBox as DumpSet).variants[0].cornerRadii,undefined);
+  assert(smooth.report.degradations.some(d=>d.code==='radii-nonuniform'));
+});
+
+
+test('plugin capture preserves mixed corner radii and refuses smoothing', async () => {
+  const {figma}=createFigmaMock();
+  const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000});
+  await run(`const c=figma.createComponent();c.name='CornerBox';c.cornerRadius=figma.mixed;
+    c.topLeftRadius=8;c.topRightRadius=0;c.bottomRightRadius=0;c.bottomLeftRadius=8;c.cornerSmoothing=0;figma.currentPage.appendChild(c);`);
+  const source=readFileSync(new URL('./dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ['CornerBox'];`);
+  const dump=await run(source);
+  assert.deepEqual(JSON.parse(JSON.stringify(dump.CornerBox.variants[0].cornerRadii)),[8,0,0,8]);
+  await run(`figma.currentPage.findOne(n=>n.name==='CornerBox').cornerSmoothing=.5;`);
+  const smooth=await run(source);assert.equal(smooth.CornerBox.variants[0].cornerRadii,undefined);
+  assert(smooth._degradations.some((d:any)=>d.code==='radii-nonuniform'));
 });

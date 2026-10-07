@@ -1,3 +1,8 @@
+import {
+  ContractSchema,
+  resolveLayout,
+  resolveTokens,
+} from "../scripts/contract-schema.js";
 import type { DumpLayout, DumpNode, DumpSet } from "../extract/figma/types.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
 import { validateExactVariantProjection } from "./exact-projection.js";
@@ -2435,24 +2440,27 @@ check(
     ),
 );
 check(
-  "bound padding that is a function of the Disabled boolean axis is NAMED with the axis and the per-value refs (tokensByProp is enum-keyed)",
-  boolAxisNotes.some(
-    (n) =>
-      /padding/i.test(n) &&
-      n.includes('BOOLEAN axis "Disabled"') &&
-      n.includes("spacing.sm") &&
-      n.includes("spacing.lg"),
-  ),
+  "bound Boolean padding retains both token identities through per-value overrides",
+  resolveTokens(ContractSchema.parse(boolAxisExact.contract).anatomy.root, {
+    disabled: "false",
+  })["padding-inline"] === "{spacing.sm}" &&
+    resolveTokens(ContractSchema.parse(boolAxisExact.contract).anatomy.root, {
+      disabled: "true",
+    })["padding-inline"] === "{spacing.lg}",
 );
 check(
-  "nested-instance applied prop tracking the Checked boolean axis is NAMED with the axis and the value map, first value carried (PropByProp compares strings; a boolean parent would silently miss)",
-  boolAxisNotes.some(
-    (n) =>
-      n.includes('applied prop "state"') &&
-      n.includes('BOOLEAN axis "Checked"') &&
-      n.includes("false→unselected") &&
-      n.includes("true→selected"),
-  ),
+  "nested-instance applied prop tracking the Checked boolean axis carries the complete captured value map",
+  JSON.stringify(boolAxisRoot?.parts?.icon?.component?.props?.state) ===
+    JSON.stringify({
+      prop: "checked",
+      map: { false: "unselected", true: "selected" },
+    }) &&
+    boolAxisNotes.some(
+      (n) =>
+        n.includes('applied prop "state"') &&
+        n.includes("false→unselected") &&
+        n.includes("true→selected"),
+    ),
 );
 
 console.log(
@@ -2553,8 +2561,8 @@ console.log("\n34. clipsContent read back (FC-DUMP-PROPOSE-CLIP-UNREAD)");
 // The dump captured clipsContent (v1.20) and propose never looked at it. On a
 // set THIS pipeline drew, every frame's clipsContent is written explicitly
 // (true only from a declared overflow), so the flag is an authored fact and
-// carries; on a foreign set Figma's frame default is also true, so the flag
-// cannot be attributed and is NAMED instead of minted.
+// carries. A foreign set retains the observed clipping boundary too, while
+// explicitly declining to infer whether a designer authored the flag.
 const clipRow = (size: string): DumpNode => ({
   name: `Size=${size}`,
   type: "COMPONENT",
@@ -2627,23 +2635,28 @@ const clipForeignSet: DumpSet = {
 };
 const clipForeign = proposeFromDump(clipForeignSet, {
   ...baseOpts,
+  projectionMode: "exact",
   mintUnbound: true,
 });
 const clipForeignRoot = (
   clipForeign.contract as { anatomy?: { root?: DeclaredPart } }
 ).anatomy?.root;
 check(
-  "foreign set: clipsContent is NAMED per node (Figma's frame default is also true) and no overflow is minted",
-  clipForeignRoot?.declared?.["overflow-x"] === undefined &&
-    clipForeignRoot?.parts?.viewport?.declared?.["overflow-x"] === undefined &&
+  "foreign clipping preserves observed paint boundaries without claiming authored intent",
+  clipForeignRoot?.declared?.["overflow-x"] === "hidden" &&
+    clipForeignRoot?.declared?.["overflow-y"] === "hidden" &&
+    clipForeignRoot?.parts?.viewport?.declared?.["overflow-x"] === "hidden" &&
+    clipForeignRoot?.parts?.viewport?.declared?.["overflow-y"] === "hidden" &&
+    clipForeignRoot?.parts?.open?.declared?.["overflow-x"] === undefined &&
     clipForeign.notes.some(
       (n) =>
         n.includes("/viewport") &&
-        n.includes("clipsContent") &&
-        /not (carried|proposed|inverted)/i.test(n),
+        n.includes("no authorship or design-intent claim"),
     ) &&
     clipForeign.notes.some(
-      (n) => n.startsWith("ClipForeign:root:") && n.includes("clipsContent"),
+      (n) =>
+        n.startsWith("ClipForeign:root:") &&
+        n.includes("no authorship or design-intent claim"),
     ),
 );
 
@@ -3565,10 +3578,13 @@ console.log(
         '{"id":"ds.glyph","props":{"state":"default"}}',
   );
   check(
-    "itemReverseZIndex is NAMED (render-inert, no carrier); the state plane's host overrides are named too (state groups never pass through buildPart)",
-    r.notes.some((n) =>
-      /P2V131:root: itemReverseZIndex is true in 1\/2 variant\(s\)/.test(n),
-    ) &&
+    "itemReverseZIndex preserves each variant paint order; the state plane's host overrides remain named",
+    resolveLayout(ContractSchema.parse(r.contract).anatomy.root, {
+      variant: "primary",
+    })?.reversePaint === true &&
+      resolveLayout(ContractSchema.parse(r.contract).anatomy.root, {
+        variant: "ghost",
+      })?.reversePaint === false &&
       r.notes.some((n) =>
         /P2V131:root \(state hover\)\/Icon: host override\(s\) on nested "Glyph"/.test(
           n,

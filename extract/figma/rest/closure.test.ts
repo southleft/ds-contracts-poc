@@ -510,7 +510,7 @@ test("batches respect the ids-per-request bound", async () => {
   assert.deepEqual(calls, [["10:0", "11:0"], ["12:0", "13:0"], ["14:0"]]);
 });
 
-test("null answers, non-components, the Slot utility, a name collision and a failed request each stay stubs, named", async () => {
+test("null answers, non-components, a name collision and a failed request stay named; an identified Slot dependency is included", async () => {
   const W = entry(
     set("1:0", "W", [
       [inst("a", "2:1"), inst("b", "3:1"), inst("c", "4:1"), inst("d", "5:1")],
@@ -543,9 +543,13 @@ test("null answers, non-components, the Slot utility, a name collision and a fai
     [
       ["2:0", "not-found"],
       ["3:0", "not-a-component"],
-      ["4:0", "utility-slot-set"],
       ["5:0", "set-name-collision"],
     ],
+  );
+  assert(
+    closure.pulled.some(
+      (node) => node.nodeId === "4:0" && node.name === "Slot",
+    ),
   );
   const failing: FetchNodesBatch = async () => {
     throw new Error("Figma API 500 on /v1/files/k/nodes");
@@ -1055,4 +1059,40 @@ test("review M4: a 429 waits what Retry-After says up to the cap, announced each
     /Figma API 429/,
   );
   assert.deepEqual(many, ["1", "2", "3"]);
+});
+
+test("Slot is excluded only from broad discovery, not explicit targets or identity-linked dependencies", async () => {
+  const slot = entry(
+    set("2:0", "Slot", [
+      [
+        {
+          id: "2:9",
+          name: "Caption",
+          type: "TEXT",
+          characters: "Actual slot content",
+          style: { fontFamily: "Inter", fontSize: 14, fontWeight: 400 },
+        } as RestNode,
+      ],
+    ]),
+  );
+  const raw = resp("2:0", slot);
+  assert.equal(mapRestToDump(raw).dump.Slot, undefined);
+  assert(mapRestToDump(raw, { target: "Slot" }).dump.Slot);
+  const parent = entry(set("1:0", "Host", [[inst("child", "2:1")]]), {
+    "2:1": { name: "Size=Default", componentSetId: "2:0" },
+  });
+  const followed = await followInstances(
+    resp("1:0", parent),
+    ["1:0"],
+    batches({ "2:0": slot }),
+  );
+  const mapped = mapRestToDump(followed.response, {
+    target: "Host",
+    closure: followed.closure,
+  });
+  assert(mapped.dump.Slot);
+  assert(JSON.stringify(mapped.dump.Slot).includes("Actual slot content"));
+  assert(
+    !followed.closure.unresolved.some((x) => x.reason === "utility-slot-set"),
+  );
 });

@@ -7,6 +7,9 @@ export interface StrokedPath {
   join: 'MITER' | 'ROUND' | 'BEVEL';
   miterLimit: number;
   viewport: { width: number; height: number; x: number; y: number };
+  /** Omitted means SCALE/SCALE. Zero-height lines may stretch; positive-height
+   * fixed outlines may use native MIN/MAX/CENTER anchoring. */
+  constraints?: { horizontal: 'SCALE' | 'STRETCH' | 'MIN' | 'MAX' | 'CENTER'; vertical: 'SCALE' | 'STRETCH' | 'MIN' | 'MAX' | 'CENTER' };
 }
 
 /** The native viewport and stroke weight are positive pixel measures.
@@ -81,12 +84,25 @@ export function strokedPathGeometryIssue(shape: { width: number; height: number;
       !Number.isFinite(path.miterLimit) || path.miterLimit < 1 || path.miterLimit > 1000)
     return 'stroked-path-stroke-properties';
   const viewport = path.viewport;
-  if (!viewport || [shape.width, shape.height, viewport.width, viewport.height].some(value => !Number.isFinite(value) || value <= 0 || value > 1e6) ||
+  if (path.constraints && !(shape.height === 0
+      ? ['SCALE', 'STRETCH'].includes(path.constraints.horizontal) && ['SCALE', 'STRETCH'].includes(path.constraints.vertical)
+      : ['MIN', 'MAX', 'CENTER'].includes(path.constraints.horizontal) && ['MIN', 'MAX', 'CENTER'].includes(path.constraints.vertical))) return 'stroked-path-constraints';
+  if (!Number.isFinite(shape.height) || shape.height < 0 || shape.height > 1e6) return 'stroked-path-viewport';
+  if (!viewport || [shape.width, viewport.width, viewport.height].some(value => !Number.isFinite(value) || value <= 0 || value > 1e6) ||
       [viewport.x, viewport.y].some(value => !Number.isFinite(value) || Math.abs(value) > 1e6))
     return 'stroked-path-viewport';
   const bounds = strokedPathBounds(path.data);
   const same = (a: number, b: number) => a === b || Math.fround(a) === Math.fround(b);
-  if (!same(bounds.x, 0) || !same(bounds.y, 0) || !same(bounds.width, shape.width) || !same(bounds.height, shape.height))
+  // Figma stores vertices and extents in float32. Reconstructing a cubic's
+  // extrema from those vertices can leave a nonzero local origin even in
+  // Figma's own vectorPaths readback. Accept only an origin that cannot move
+  // either signed extent to another float32 value. No pixel epsilon, path
+  // translation, or coordinate rounding is applied to the emitted geometry.
+  // Degenerate axes retain exact zero (there is no nonzero extent as a basis).
+  const atOrigin = (origin: number, extent: number) => origin === 0 || extent > 0 &&
+    Math.fround(extent + origin) === Math.fround(extent) &&
+    Math.fround(extent - origin) === Math.fround(extent);
+  if (!atOrigin(bounds.x, shape.width) || !atOrigin(bounds.y, shape.height) || !same(bounds.width, shape.width) || !same(bounds.height, shape.height))
     return 'stroked-path-bounds-mismatch';
   return undefined;
 }
@@ -143,5 +159,22 @@ export function strokedPathSvg(shape: { width: number; height: number; strokePat
   if (issue) throw new Error(issue);
   const path = shape.strokePath!, viewport = path.viewport;
   const cap = path.cap === 'NONE' ? 'butt' : path.cap.toLowerCase();
+  if (shape.height > 0 && path.constraints) {
+    const offset = (constraint: string, position: number, parent: number) => constraint === 'MIN'
+      ? `${position}px` : `calc(${constraint === 'MAX' ? '100%' : '50%'} + ${position - parent * (constraint === 'MAX' ? 1 : 0.5)}px)`;
+    const x = offset(path.constraints.horizontal, viewport.x, viewport.width);
+    const y = offset(path.constraints.vertical, viewport.y, viewport.height);
+    return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" style="display:block;width:100%;height:100%;overflow:visible"><foreignObject width="100%" height="100%" style="overflow:visible"><div xmlns="http://www.w3.org/1999/xhtml" style="position:relative;width:100%;height:100%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${shape.width} ${shape.height}" fill="none" style="display:block;position:absolute;left:${x};top:${y};width:${shape.width}px;height:${shape.height}px;overflow:visible"><path d="${path.data}" stroke-linecap="${cap}" stroke-linejoin="${path.join.toLowerCase()}" stroke-miterlimit="${path.miterLimit}" vector-effect="non-scaling-stroke"/></svg></div></foreignObject></svg>`;
+  }
+  if (shape.height === 0) {
+    const c = path.constraints ?? { horizontal: 'SCALE', vertical: 'SCALE' };
+    const x = c.horizontal === 'STRETCH' ? `${viewport.x}px` : `${viewport.x / viewport.width * 100}%`;
+    const y = c.vertical === 'STRETCH' ? `${viewport.y}px` : `${viewport.y / viewport.height * 100}%`;
+    const width = c.horizontal === 'STRETCH' ? `calc(100% - ${viewport.width - shape.width}px)` : `${shape.width / viewport.width * 100}%`;
+    // Keep the graphic's complete viewport while CSS lays out its centerline.
+    // A foreignObject establishes the CSS containing block for fixed gutters;
+    // nested SVG percentage/calc viewports do not reliably invalidate on resize.
+    return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" style="display:block;width:100%;height:100%;overflow:visible"><foreignObject width="100%" height="100%" style="overflow:visible"><div xmlns="http://www.w3.org/1999/xhtml" style="position:relative;width:100%;height:100%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${shape.width} 1" preserveAspectRatio="none" fill="none" style="display:block;position:absolute;left:${x};top:${y};width:${width};height:1px;overflow:visible"><path d="${path.data}" stroke-linecap="${cap}" stroke-linejoin="${path.join.toLowerCase()}" stroke-miterlimit="${path.miterLimit}" vector-effect="non-scaling-stroke"/></svg></div></foreignObject></svg>`;
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewport.width} ${viewport.height}" preserveAspectRatio="none" fill="none" style="display:block;width:100%;height:100%;overflow:visible"><path d="${path.data}" transform="translate(${viewport.x} ${viewport.y})" stroke-linecap="${cap}" stroke-linejoin="${path.join.toLowerCase()}" stroke-miterlimit="${path.miterLimit}" vector-effect="non-scaling-stroke"/></svg>`;
 }

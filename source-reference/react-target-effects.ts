@@ -1,3 +1,5 @@
+import {prepareReactEffectProgram} from './react-helper-effects.js';
+import {readReactElementCreationSites} from './react-element-creation.js';
 import {planReactHookHelpers} from './react-hook-helpers.js';
 import {planReactCallbackFactories} from './react-callback-factories.js';
 import {planReactEffectHooks} from './react-effect-hooks.js';
@@ -86,19 +88,29 @@ function readProjection(reference:ReactHelperReference,initializer:ReactTargetIn
     const file=realpathSync(path.resolve(reference.sourceRoot,initializer.render.file)),text=readFileSync(file,'utf8');
     const hash=createHash('sha256').update(text).digest('hex');sourceFiles[file]=hash;
     if(hash!==initializer.render.sha256||reference.files[file]!==hash)throw Error('target-effects-source-changed');
-    const kind=file.endsWith('.tsx')?ts.ScriptKind.TSX:ts.ScriptKind.JS;
-    const sf=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,kind);
-    const host:ts.CompilerHost={getSourceFile:f=>f===file?sf:undefined,getDefaultLibFileName:()=>'',writeFile:()=>{},getCurrentDirectory:()=>reference.sourceRoot,getDirectories:()=>[],fileExists:f=>f===file,readFile:f=>f===file?text:undefined,getCanonicalFileName:f=>f,useCaseSensitiveFileNames:()=>true,getNewLine:()=> '\n'};
-    const program=ts.createProgram([file],{allowJs:true,noLib:true,noResolve:true},host),checker=program.getTypeChecker();
-    const point=(node:ts.Node):HelperSourcePoint=>({file:initializer.render.file,sha256:hash,start:node.getStart(sf),end:node.end});
+    const checkerFiles:Record<string,string>={};
+    const prepared=prepareReactEffectProgram(reference,initializer.render.file,sourceFiles,checkerFiles);
+    const {program,checker,sf,runtimeFiles,resolveRuntimeExport,requireCurrent}=prepared;
+    const point=prepared.source;
     const key=(node:ts.Node)=>JSON.stringify([node.getStart(sf),node.end]),nodes=new Map<string,ts.Node>();
     const scan=(node:ts.Node)=>{nodes.set(key(node),node);ts.forEachChild(node,scan);};scan(sf);
     const component=nodes.get(JSON.stringify([initializer.render.start,initializer.render.end]));
     if(!component||!(ts.isFunctionExpression(component)||ts.isArrowFunction(component))||!component.parameters[0]||!(ts.isIdentifier(component.parameters[0].name)||ts.isObjectBindingPattern(component.parameters[0].name)))throw Error('target-effects-render-unmodeled');
     // The lexical inventory owns a separate checker/AST. Never rebind symbols
     // on the AST used by the abstract evaluator.
-    const planning=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,kind),closures=readReactElementClosures(planning),planned=new Map<string,ts.FunctionExpression|ts.ArrowFunction>();
-    const find=(node:ts.Node)=>{if(ts.isArrowFunction(node)||ts.isFunctionExpression(node))planned.set(key(node),node);ts.forEachChild(node,find);};find(planning);
+    const callbackInventories=new Map<ts.SourceFile,{closures:ReturnType<typeof readReactElementClosures>;planned:Map<string,ts.FunctionExpression|ts.ArrowFunction>;nodes:Map<string,ts.Node>}>();
+    const callbackInventory=(node:ts.Node)=>{
+      const source=node.getSourceFile(); // The caller authenticates this module with point(node).
+      let inventory=callbackInventories.get(source);
+      if(!inventory){
+        const planning=ts.createSourceFile(source.fileName,source.text,ts.ScriptTarget.Latest,true,source.fileName.endsWith('.tsx')?ts.ScriptKind.TSX:ts.ScriptKind.JS);
+        const planned=new Map<string,ts.FunctionExpression|ts.ArrowFunction>(),actualNodes=new Map<string,ts.Node>();
+        const scanActual=(n:ts.Node)=>{actualNodes.set(JSON.stringify([n.getStart(source),n.end]),n);ts.forEachChild(n,scanActual);};scanActual(source);
+        const scanPlan=(n:ts.Node)=>{if(ts.isArrowFunction(n)||ts.isFunctionExpression(n))planned.set(JSON.stringify([n.getStart(planning),n.end]),n);ts.forEachChild(n,scanPlan);};scanPlan(planning);
+        inventory={closures:readReactElementClosures(planning),planned,nodes:actualNodes};callbackInventories.set(source,inventory);
+      }
+      return inventory;
+    };
     const decode=(v:ReactElementObservedValue):CompiledModelInput=>{
       if(v.representation)throw Error('target-effects-value-unmodeled');
       if(v.kind==='undefined'&&!('value' in v))return undefined;
@@ -195,8 +207,9 @@ function readProjection(reference:ReactHelperReference,initializer:ReactTargetIn
         }
       }
     }
-    const options:Parameters<typeof modelReactTargetRender>[0]={program,component,parameter:component.parameters[0].name,properties,contentKey:'children',source:point,...(deferred?{deferred}:{}),
-      factory(node){const name=imported(node.expression);return name==='jsx'||name==='jsxs'?name:undefined;},
+    const creationSites=readReactElementCreationSites(text,file,initializer.render.file,true);
+    const options:Parameters<typeof modelReactTargetRender>[0]={runtimeFiles,resolution:reference.runtimeImports??[],resolveRuntimeExport,program,component,parameter:component.parameters[0].name,properties,contentKey:'children',source:point,...(deferred?{deferred}:{}),
+      factory(node){if(creationSites.some(s=>s.factory==='createElement'&&s.span.start===node.getStart(sf)&&s.span.end===node.end))return 'createElement';const name=imported(node.expression);return name==='jsx'||name==='jsxs'?name:undefined;},
       target(node){
         node=unwrap(node);if(imported(node)==='Fragment')return {kind:'fragment'};
         if(!ts.isIdentifier(node))return;
@@ -215,11 +228,12 @@ function readProjection(reference:ReactHelperReference,initializer:ReactTargetIn
           ts.forEachChild(child,inspect);
         };inspect(node);
         if(unmodeled)throw Error('target-callback-context-unmodeled');
-        const original=planned.get(key(node));if(!original)throw Error('target-effects-callback-unavailable');
-        const inventory=closures(original);
+        const source=point(node),lexical=callbackInventory(node);
+        const original=lexical.planned.get(JSON.stringify([source.start,source.end]));if(!original)throw Error('target-effects-callback-unavailable');
+        const inventory=lexical.closures(original);
         return {effects:inventory.effects,reads:inventory.reads.map(read=>{
-          const actual=nodes.get(JSON.stringify([read.span.start,read.span.end]));if(!actual)throw Error('target-effects-callback-read-unavailable');
-          return {name:read.name,node:actual,...(read.declaration?{declaration:{file:initializer.render.file,sha256:hash,...read.declaration.span}}:{})};
+          const actual=lexical.nodes.get(JSON.stringify([read.span.start,read.span.end]));if(!actual)throw Error('target-effects-callback-read-unavailable');
+          return {name:read.name,node:actual,...(read.declaration?{declaration:{file:source.file,sha256:source.sha256,...read.declaration.span}}:{})};
         })};
       },
     };
@@ -234,6 +248,7 @@ function readProjection(reference:ReactHelperReference,initializer:ReactTargetIn
       if(d&&(ts.isImportSpecifier(d)&&!d.isTypeOnly&&!d.parent.parent.isTypeOnly||ts.isNamespaceImport(d)&&!d.parent.isTypeOnly||ts.isImportClause(d)&&!d.isTypeOnly))return {kind:'source-read',source:point(node)};
     }})}:{...common,qualification:'target-render-projection-model-only' as const,...modelReactTargetRender(options)};
     if(createHash('sha256').update(readFileSync(file)).digest('hex')!==hash)throw Error('target-effects-source-changed');
+    requireCurrent();
     return result;
   }catch(error){return {...common,status:'refused',reason:error instanceof Error?error.message:'target-effects-unavailable',steps:0};}
 }

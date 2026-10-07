@@ -14,7 +14,7 @@
  * layoutOverrideDecls) are exported for the sibling validate/css/grid modules
  * and are deliberately NOT re-exported from the package index.
  */
-import { DEFAULT_FONT_STACK, literalsByCombinationRecords, slotsOf, walkAnatomy, type Contract, type Part, type Prop } from '@ds-contracts/schema';
+import { DEFAULT_FONT_STACK, instanceRootColor, literalsByCombinationRecords, slotsOf, walkAnatomy, type Contract, type Part, type Prop } from '@ds-contracts/schema';
 import { flattenTokens, makeResolveLiteral, type TokenTreeInput } from './tokens.js';
 
 
@@ -429,6 +429,62 @@ export const partCarriesStroke = (part: Part): boolean =>
  *  channel for it to qualify (an outline-only part has nothing to redraw). */
 export const drawsStrokeRing = (part: Part): boolean =>
   part.strokesIncludedInLayout === false && strokeHolderMaps(part).some((m) => Object.keys(m).some(isStrokeRingChannel));
+/** Container strokes paint above their children on the canvas. Void and
+ * reference hosts keep their existing leaf ring; they cannot own an overlay. */
+export const drawsForegroundStroke = (part: Part, element = part.element ?? 'div'): boolean =>
+  drawsStrokeRing(part) && (Object.keys(part.parts ?? {}).length > 0 || !!part.solidFillComposition || !!part.solidFillCompositionByCombination) && !part.component && !part.shape &&
+  !['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'].includes(element);
+
+/** A normal-flow box (including text and slot wrappers) or unrotated filled path may paint above its parent's independent fill without
+ * leaving flow. Never replace authored placement or add a wrapper to a ref. */
+export function composedFillFlowChild(part: Part): boolean {
+  const flowPath=part.shape?.kind==='path' && !part.shape.parentViewport && !part.shape.rotation;
+  const element=part.element??'div';
+  const ordinaryBox=element==='div' || element==='span';
+  if ((!part.layout && !flowPath && !ordinaryBox) || part.component || part.repeat || (part.shape && !flowPath) || part.icon || part.meter ||
+      part.overlay || part.absoluteGeometry || part.absoluteGeometryByCombination || part.absolutePlacement || part.absolutePlacementByCombination || part.placement || part.mask) return false;
+  const maps=[part.declared,...strokeHolderMaps(part),
+    ...(part.tokensByCombination??[]).flatMap(table=>table.rows.map(row=>row.tokens)),
+    ...(part.stylesWhen??[]).map(row=>row.styles), ...Object.values(part.declaredStates??{})];
+  return !maps.some(map=>Object.keys(map??{}).some(key=>
+    key.startsWith('inset-') || ['position','top','right','bottom','left','inset','z-index','transform','translate','rotate','scale'].includes(key)));
+}
+
+/** No foreground stacking is needed for a box that cannot render. Conditional
+ * display channels are deliberately excluded from this proof. */
+export function composedFillHiddenChild(part: Part): boolean {
+  if(part.declared?.display!=='none' || part.visibilityOverrideProp || part.layoutByProp) return false;
+  const maps=[...strokeHolderMaps(part),
+    ...(part.tokensByCombination??[]).flatMap(table=>table.rows.map(row=>row.tokens)),
+    ...(part.stylesWhen??[]).map(row=>row.styles),...Object.values(part.declaredStates??{})];
+  return !maps.some(map=>map?.display!==undefined && map.display!=='none');
+}
+
+/** Only a known, single generated root can receive foreground placement.
+ * Child-authored positioning and conditional placement keep their authority.
+ * Affine references have a positioned flow allocation host; the child retains
+ * its own foreground positioning inside that host. */
+export function composedFillReferenceChild(part: Part, contracts?: ReadonlyMap<string, Contract>): boolean {
+  if (!part.component || part.absoluteGeometry || part.absoluteGeometryByCombination || part.repeat || part.slot || part.overlay || part.placement || part.absolutePlacement || part.absolutePlacementByCombination || Object.keys(part.component.rootOverrides??{}).some(channel=>!['width','height','background-color'].includes(channel))) return false;
+  const child=contracts?.get(part.component.id), root=child?.anatomy.root;
+  if (!child || child.bindings.code.runtime || !root || Object.keys(child.anatomy).length!==1 || root.component || root.repeat || root.slot || root.overlay || root.placement || root.absolutePlacement || root.absolutePlacementByCombination || root.absoluteGeometry || root.absoluteGeometryByCombination || root.mask) return false;
+  for (const node of [part,root]) {
+    const maps=[node.declared,...strokeHolderMaps(node),
+      ...(node.tokensByCombination??[]).flatMap(table=>table.rows.map(row=>row.tokens)),
+      ...(node.stylesWhen??[]).map(row=>row.styles), ...Object.values(node.declaredStates??{})];
+    if(maps.some(map=>Object.entries(map??{}).some(([key,value])=>
+      key==='position' ? !(map===node.declared && value==='relative') :
+      key.startsWith('inset-') || ['top','right','bottom','left','inset','z-index','transform','translate','rotate','scale'].includes(key))))return false;
+  }
+  return true;
+}
+
+export function composedFillForegroundParts(contract: Contract, contracts?: ReadonlyMap<string, Contract>): Set<Part> {
+  const result=new Set<Part>();
+  for(const {part} of walkAnatomy(contract))if(part.solidFillComposition || part.solidFillCompositionByCombination)
+    for(const child of Object.values(part.parts??{}))if(composedFillFlowChild(child)||composedFillReferenceChild(child,contracts))result.add(child);
+  return result;
+}
 /** A literal width of unitless zero, as a LENGTH (see the per-side bullet). */
 const zeroAsLength = (v: string): string => (/^[-+]?0*\.?0+$/.test(v.trim()) ? '0px' : v);
 export function lowerStrokeRings(contract: Contract): Contract {
@@ -809,7 +865,7 @@ export function wholePixelTextBoxDecls(contract: Contract, part: Part, path: str
     parent.layout !== undefined && parent.layout.display !== 'grid' && parent.declared?.['display'] === undefined &&
     /^column/.test(parent.layout.direction ?? '') &&
     (parent.layout.align === undefined || parent.layout.align === 'stretch') &&
-    parent.layoutByProp === undefined
+    parent.layoutByProp === undefined && parent.layoutByCombination === undefined
   ) decls.push('align-self: flex-start');
   return decls;
 }
@@ -930,17 +986,21 @@ export function layoutOverrideDecls(o: {
   justify?: string;
   grow?: boolean;
   growBasis?: "zero";
-}, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
+  alignSelf?: "auto" | "stretch";
+}, base?: {grow?: boolean; growBasis?: "zero"}, minima?: Pick<Part, "tokens" | "literals">): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
+  if (o.alignSelf) d.push(`align-self: ${o.alignSelf}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
   if (o.grow !== undefined || o.growBasis !== undefined) {
     const grow = o.grow ?? base?.grow;
     const zero = (o.growBasis ?? base?.growBasis) === 'zero';
-    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`, `min-width: ${grow ? '0' : 'auto'}`);
-    if (zero) d.push(`min-height: ${grow ? '0' : 'auto'}`);
+    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`);
+    // An explicit base floor remains authoritative on both growing and fixed planes.
+    if (minima?.tokens?.['min-width'] === undefined && minima?.literals?.['min-width'] === undefined) d.push(`min-width: ${grow ? '0' : 'auto'}`);
+    if (zero && minima?.tokens?.['min-height'] === undefined && minima?.literals?.['min-height'] === undefined) d.push(`min-height: ${grow ? '0' : 'auto'}`);
   }
   return d;
 }
@@ -954,4 +1014,40 @@ export function holderDeclaresPosition(contract: Contract, path: string[]): bool
   let cur: Part | undefined = contract.anatomy[path[0]];
   for (const seg of path.slice(1, -1)) cur = cur?.parts?.[seg];
   return cur?.declared?.['position'] !== undefined;
+}
+
+/** Follow reachable composition only; unrelated manifest entries are inert. */
+export function refuseInstanceRootInputTarget(contract:Contract,scope:Map<string,Contract>,target:string):void {
+ const seen=new Set<string>(),pending=[contract];
+ while(pending.length){const current=pending.pop()!;if(seen.has(current.id))continue;seen.add(current.id);
+  for(const {part} of walkAnatomy(current)){
+   if(Object.keys(part.component?.rootOverrides??{}).length || part.component?.rootFill?.length)throw Error('instance-root-input-target-unsupported:'+target);
+   const ids=[...(part.component?[part.component.id]:[]),...(part.slot?.defaultContent??[]).map(item=>item.id)];
+   for(const id of ids){const dep=scope.get(id);if(dep)pending.push(dep)}
+  }
+ }
+}
+
+/** Root usage values require absolute pixel lengths in every supplied mode. */
+export function instanceRootInputTokenRefusals(contract:Contract,tokens:unknown):string[] {
+ const errors:string[]=[];
+ for(const {name,part} of walkAnatomy(contract))for(const [channel,ref] of Object.entries(part.component?.rootOverrides??{})) {
+  const path=ref.slice(1,-1),axes=placeholdersIn(path);let paths=[path];
+  for(const axis of axes){const prop=contract.props.find(p=>p.name===axis);
+   const values=prop?.type==='boolean'?['false','true']:prop&&typeof prop.type==='object'&&'enum' in prop.type?prop.type.enum:[];
+   if(!values.length){errors.push(`instance-root-input-axis-unsupported:${name}:${axis}`);paths=[];break}
+   if(paths.length*values.length>4096){errors.push(`instance-root-input-domain-too-large:${name}`);paths=[];break}
+   paths=paths.flatMap(path=>values.map(value=>path.replaceAll(`{${axis}}`,value)));
+  }
+  for(const leaf of paths){const values=tokenModeValues(tokens,leaf);
+   if(channel==='background-color'||channel==='outline-color') {
+    try {if(!values.length)throw Error('missing');for(const value of values)instanceRootColor(value);}
+    catch {errors.push(`instance-root-input-color-unsupported:${name}:{${leaf}}`);}
+    continue;
+   }
+   if(!values.length||values.some(value=>value===undefined || (channel==='opacity' ? !/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(value)||Number(value)>1 : !/^(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value))))
+    errors.push(`instance-root-input-value-unsupported:${name}:${channel}:{${leaf}}: provide ${channel==='opacity'?'unitless values from 0 to 1':'nonnegative pixel values'} in every mode`);
+  }
+ }
+ return errors;
 }

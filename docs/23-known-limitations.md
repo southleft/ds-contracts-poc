@@ -4405,29 +4405,27 @@ root or depth-1 override in any channel the reader captures (the refusal quotes 
 first note the proposal wrote about that state, or says that nothing captured
 differs). Each is named in the refusal; none is guessed at.
 
-**What `verified-exact` attests for a projected axis, and what it does not (review
-H3).** It attests source → contract: every DRAWN row is the contract's own cell × a
-state the contract carries; nothing drawn is dropped. It does NOT attest contract →
-canvas. The contract vocabulary carries neither the designer's state spelling nor
-the state cells they left undrawn (`absentVariants` ranges over VARIANT props, and
-state is not a prop), so **write-back draws the WRITER's matrix, not the
-designer's**: its own `State = Default | Hover | Active | Focus Visible | Disabled`
-axis, the rest grid + one preview row per carried state per value of ONE primary
-axis, every other axis pinned. Carrying it would need a new `statePreviews`
-shape (full product + declared-absent state cells) through the schema, the referee,
-the writer, the plugin dump reader's `statePreviewAxis` stamp, the exact projection
-and the round-trip comparer — not small, not attempted. Instead it is **NAMED,
-every time, exactly**: the proposer computes the writer's matrix by the writer's own
-rule, in the designer's spelling, and puts it on the decision
-(`stateAxisProjection.writeBack = { draws, completes[], omits[] }`) and in a
-`state-axis-write-back-diverges` note listing the cells write-back DRAWS that the
-designer did not and the cells it does NOT draw that the designer did. Pinned by
-tests against the real writer on the mock canvas: a 5-of-6 set writes 6 and the
-completed cell is the one named; a two-axis set writes 6 of the designer's 8 and the
-two omitted cells are the ones named. Real: `Menu Item` writes 10 of 16 (completes
-0, omits 6), `Chip` 25 of 40 (omits 15). The designer's set is never edited — the
-writer creates its own stamped set. (The writer's OWN report cannot list them: the
-contract does not carry what the designer left undrawn, which is the point.)
+**What `verified-exact` attests for a projected axis.** It proves the structured
+source-to-contract variant domain. It does not prove image, text, icon, font or
+layout fidelity. Those require the independent visual checks.
+
+With `bindings.figma.statePreviews: true`, a contract may carry
+`bindings.figma.statePreviewRows`: explicit non-default state cells. Each row has
+`state` (hover, active, focus-visible or disabled) and a complete `props` tuple
+using contract prop names and typed values. The writer draws the normal rest grid
+plus exactly these preview rows. Without this field, the existing primary-axis
+preview rule remains in effect. The proposer derives rows from captured state
+cells and the proposed bindings, with or without token minting. The native marker
+carries the explicit rows in Figma labels; the exact projection validates those
+labels against the observed axes and independently compares returned contract rows.
+Missing, extra, duplicate, unknown or incomplete rows do not qualify as exact.
+
+The write-back report still lists `{ draws, completes, omits }` and names any
+remaining divergence. Full mock writer tests now preserve the five drawn cells of
+a 5-of-6 fixture and all eight cells of a two-axis fixture. A separate test runs
+the real dump script and exact importer and recompiles the returned contract.
+These tests establish domain preservation, not live visual fidelity or unseen-kit
+qualification. Custom state spellings still use the writer's canonical labels.
 
 **Refused by name — never a guess.** `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`, the old
 sentence unchanged, then the slug:
@@ -4484,9 +4482,9 @@ value → state with `carried`, `undrawnStateCells`, `writeBack`) and a
 a contract absence over the REMAINING axes, `bindings.figma.absentVariants` exactly
 as §D.40 defines it; every state must leave that cell undrawn too (else
 `state-axis-orphan-state-cell`), and `statePreviews` is then NOT set, by name.
-Undrawn ONLY in a non-rest state → no prop combination is missing, so nothing is
-declared on the contract; the cells ride `undrawnStateCells` — and are what
-write-back completes, above. **The fence is over ALL undrawn cells, spelled over the
+Undrawn ONLY in a non-rest state → no rest prop combination is missing. When
+state previews are supported, the drawn non-rest cells are preserved in
+`statePreviewRows`; `undrawnStateCells` remains a proposal diagnostic. **The fence is over ALL undrawn cells, spelled over the
 remaining axes**: a plane that draws a cell fits it identically under every
 explanation, so a cell another plane lacks can never refuse it, and a plane with a
 hole is held to the same uniqueness rule (tested inside a state plane). **A
@@ -12530,3 +12528,19 @@ channel dispatch; every recorded state renders only the edit; the variable
 chain rule, from recorded capture shapes; one selection rule for preview and
 witness); `react-source-repair-preview.test.ts` (rank preference and
 ambiguity); `react-source-repair-cohort.test.ts` (a witnessed shadow refuses).
+
+### Captured vector geometry partitions
+
+Same-named leaf VECTOR occurrences may carry unrelated geometry across variants.
+When a complete enum-axis mapping already carries the geometry, the importer
+retains that mapping and its parent viewport and size proofs. Otherwise it partitions
+these occurrences by captured path bytes and dimensions before constructing anatomy,
+retaining sibling order and using the normal presence proof for each branch. Uncaptured occurrences remain separate; no captured path is
+substituted for them. Existing path/paint validation still applies. The native
+compiler tests compare per-variant path bytes and absence, independently of the
+number of intermediate anatomy nodes.
+
+This does not resolve missing external child components or establish live native
+roundtrip fidelity. Known Social Icon diagnostics improved from 18 to 43 of 105
+passes under unchanged visual checks; an Atlassian transfer case stayed at 16 of
+36. These are diagnostic results, not never-seen-kit qualification.

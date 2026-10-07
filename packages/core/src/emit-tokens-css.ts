@@ -137,6 +137,18 @@ function shadowCss(v: Record<string, unknown>): string | null {
 export function cssValueOf(value: unknown): string | null {
   if (typeof value === 'string') {
     const target = aliasTarget(value);
+    // Legacy rgba() quantizes alpha to an 8-bit channel in Chromium. A
+    // positive native alpha below one channel step can disappear entirely.
+    // The equivalent sRGB spelling retains that value; zero remains zero.
+    const rgba=/^rgba\(([^()]*)\)$/.exec(value.trim());
+    if(rgba){
+      const fields=rgba[1].split(',').map(s=>s.trim());
+      const channels=fields.map(Number),[r,g,b,a]=channels;
+      if(fields.length===4 && fields.every(s=>/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(s)) &&
+        channels.every(Number.isFinite) && [r,g,b].every(v=>v>=0&&v<=255) && a>0 && a<1/255)
+        return `color(srgb ${r/255} ${g/255} ${b/255} / ${a})`;
+    }
+
     // One declaration per line: a $value captured with a hard wrap (the
     // Tailwind font stacks carry "\n      ") would otherwise span lines —
     // valid CSS, but every line-oriented reader of the sheet misparses it.
@@ -326,4 +338,29 @@ export function mentionedCssVars(cssText: string): string[] {
 export function undefinedCssVars(referenced: Iterable<string>, defined: Iterable<string>): string[] {
   const have = new Set(defined);
   return [...new Set(referenced)].filter((name) => !have.has(name)).sort();
+}
+
+/** Keep large original images out of CSS custom-property token streams.
+ * Asset URLs remain inside the original mode/alias cascade. The caller writes
+ * the returned bytes beside tokens.css; no image decoding or resampling occurs.
+ * Small values keep their historical spelling. Pure and browser-importable. */
+export function externalizeTokenImages(css: string): {
+  css: string; assets: Array<{ path: string; base64: string }>;
+} {
+  const assets: Array<{ path: string; base64: string }> = [];
+  const seen = new Map<string, string>();
+  const output = css.replace(/url\(["']?(data:image\/(png|jpeg|webp);base64,([A-Za-z0-9+/]*={0,2}))["']?\)/g,
+    (whole, data: string, mime: string, base64: string) => {
+      // Stay well below browser custom-property expansion limits, including
+      // when several image layers share one token.
+      if (data.length < 128 * 1024) return whole;
+      if (base64.length % 4 !== 0) throw new Error('token-image-base64-invalid');
+      let path = seen.get(data);
+      if (!path) {
+        path = `assets/token-image-${assets.length}.${mime === 'jpeg' ? 'jpg' : mime}`;
+        seen.set(data, path); assets.push({ path, base64 });
+      }
+      return `url("./${path}")`;
+    });
+  return { css: output, assets };
 }

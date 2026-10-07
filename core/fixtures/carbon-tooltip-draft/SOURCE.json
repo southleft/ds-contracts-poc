@@ -1,0 +1,22 @@
+{
+  "fileKey": "A451UfD58U7XU21FzaqfHL",
+  "fileName": "(v11) Carbon Design System (Community)",
+  "capture": "Read-only canonical native dump, 2026-10-04; continuation356. No source modifications. Dependency capture disabled.",
+  "sets": [
+    {
+      "file": "caret.json",
+      "setId": "3498:33136",
+      "setName": "_Tooltip caret item",
+      "variants": 2,
+      "sha256": "2ce51a672aa73fc83874d2059727e5f33bca301cdfb09e28d4f12297cf0d946e"
+    },
+    {
+      "file": "body.json",
+      "setId": "9005:400571",
+      "setName": "_Toggletip body item",
+      "variants": 12,
+      "sha256": "b4624e9fa4b1a3adeb9169b5772899d2fee6dde7b60900e550b19eb1a5069904"
+    }
+  ],
+  "qualification": "Draft composition regression, not a visual whole-component acceptance fixture. Body Button and Link remain provisional stubs. Axis declarations derive from captured source and do not qualify public promotion."
+}

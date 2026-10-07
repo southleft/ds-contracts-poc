@@ -20,10 +20,11 @@
  *     variables observed on node `opacity` or native `fontWeight`, which stay unitless
  *     ('<n>' / $type number)
  *   · STRING / BOOLEAN → no CSS custom-property projection; SKIPPED by name
- *   · a name outside the token-ref grammar ([a-z0-9.-] after slash→dot) is
- *     SKIPPED by name (the U+2024 field case — rename the variable)
- *   · a name that is a group prefix of another captured name is SKIPPED by
- *     name (a leaf cannot sit on a group path in a DTCG tree)
+ *   · whitespace and U+2024 fold to hyphens through the shared path rule;
+ *     ambiguous whitespace folds refuse rather than merging identities
+ *   · other names outside the token-ref grammar are SKIPPED by name
+ *   · group-prefix variables receive a collision-free child leaf; references
+ *     use the same whole-capture allocation and original names are retained
  *   · layering is the CALLER's rule: repo tokens win on name collision —
  *     the playground prunes shadowed paths at registration and receipts them
  *
@@ -61,6 +62,8 @@ export interface CapturedTokenLayer {
   /** Number of registrable entries (= entries.length). */
   count: number;
   entries: CapturedTokenEntry[];
+  /** Whole-capture source names to allocated paths, including reserved names. */
+  variablePaths: ReadonlyMap<string, string>;
   /** Per-mode DTCG trees (dump v1.6) — the repo's own token vocabulary shape
    *  (tokens/modes/semantic.<mode>.tokens.json: a tree per mode carrying the
    *  entries that HAVE a value for that mode). Absent when no captured
@@ -81,6 +84,9 @@ export const ONE_DOT_LEADER = '․';
  *  captured-token layer (registration) and core/propose-figma.ts dotPath
  *  (binding refs), so a folded name resolves end to end:
  *    · '/' → '.'  (grouping, unchanged)
+ *    · whitespace → '-' (one character per character; no trimming)
+ *    · other characters outside the token path grammar → '-u<codepoint>-'
+ *      (including parentheses and non-ASCII characters; original names retained)
  *    · U+2024 ONE DOT LEADER → '-'  (dump v1.16): '-' rather than '.' because
  *      the designer's "1․5" is ONE path segment, and a real dot would split
  *      it into two ("spacing.1.5"), changing the tree's depth.
@@ -89,8 +95,25 @@ export const ONE_DOT_LEADER = '․';
  *  target path another variable already owns). */
 export function foldVariablePath(name: string): { path: string; folded: boolean } {
   const dotted = name.split('/').join('.');
-  if (!dotted.includes(ONE_DOT_LEADER)) return { path: dotted, folded: false };
-  return { path: dotted.split(ONE_DOT_LEADER).join('-'), folded: true };
+  const path = dotted.split(ONE_DOT_LEADER).join('-').replace(/\s/g, '-')
+    .replace(/[()]/g, character => character === '(' ? '-u28-' : '-u29-')
+    .replace(/[^A-Za-z0-9.-]/gu, character => '-u' + character.codePointAt(0)!.toString(16) + '-');
+  return { path, folded: path !== dotted };
+}
+
+/** A whitespace or parenthesis rename must never bind another variable's value. Refuse
+ * before registration/proposal rather than keeping whichever claimant came first. */
+export function assertUnambiguousVariablePaths(names: Iterable<string>): void {
+  const claims = new Map<string, Set<string>>();
+  for (const name of names) {
+    const path = foldVariablePath(name).path;
+    const owners = claims.get(path) ?? new Set<string>();
+    owners.add(name); claims.set(path, owners);
+  }
+  const collisions = [...claims].filter(([, owners]) => owners.size > 1 && [...owners].some(name => /[^A-Za-z0-9/.․-]/u.test(name)))
+    .map(([path, owners]) => `${JSON.stringify(path)}: ${[...owners].sort().map(name => JSON.stringify(name)).join(' vs ')}`)
+    .sort();
+  if (collisions.length) throw new Error(`captured-variable-name-fold-collision: ${collisions.join('; ')} — rename or explicitly map these distinct source variables`);
 }
 
 /** Nested DTCG tree from flat entries (the mint-tokens tree shape). */
@@ -153,6 +176,7 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
   // already owns is a COLLISION — the folded entry refuses by name (the
   // original occupant keeps the path; a silent merge would resolve one
   // variable's refs to the other's value).
+  assertUnambiguousVariablePaths(Object.keys(vars));
   const unfoldedPaths = new Set(
     Object.keys(vars).map((name) => foldVariablePath(name)).filter((f) => !f.folded).map((f) => f.path),
   );
@@ -169,7 +193,7 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     if (folded && (unfoldedPaths.has(path) || claimedFolded.has(path))) {
       skipped.push({
         name,
-        reason: `U+2024 fold target "${path}" collides with another captured variable — not registrable; rename the variable or map it manually`,
+        reason: `Variable-name fold target "${path}" collides with another captured variable — not registrable; rename the variable or map it manually`,
       });
       continue;
     }
@@ -243,18 +267,14 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     }
   }
 
-  // A leaf cannot sit on another leaf's group path.
-  const paths = new Set(entries.map((e) => e.path));
-  const registrable = entries.filter((e) => {
-    const isPrefix = [...paths].some((other) => other !== e.path && other.startsWith(`${e.path}.`));
-    if (isPrefix) {
-      skipped.push({
-        name: e.name,
-        reason: 'the name is a group prefix of another captured variable — a leaf cannot sit on a group path; not registered',
-      });
-    }
-    return !isPrefix;
-  });
+  // Allocate against the complete identity inventory, not just supported values.
+  const variablePaths = allocateCapturedVariablePaths([...Object.keys(vars), ...sourceTokens.map(t => t.name)]);
+  const renamedPaths = new Map([...variablePaths].map(([name, path]) => [foldVariablePath(name).path, path]));
+  const registrable = entries.map(entry => ({...entry,
+    path: variablePaths.get(entry.name) ?? entry.path,
+    ...(entry.reference ? {reference: entry.reference.replace(/\{([^{}]+)\}/g,
+      (match, path: string) => renamedPaths.has(path) ? `{${renamedPaths.get(path)}}` : match)} : {}),
+  }));
 
   // Per-mode trees (dump v1.6) — the repo tokens/modes/*.tokens.json shape:
   // one tree per mode NAME, carrying the registrable entries that have a
@@ -272,6 +292,7 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     tree: treeFromEntries(registrable),
     count: registrable.length,
     entries: registrable,
+    variablePaths,
     ...(modeNames.length > 0 ? { modes } : {}),
     skipped,
   };
@@ -369,4 +390,23 @@ export function capturedTokensDocument(dump: Record<string, unknown>): CapturedT
     (skipNames.length > 0 ? ` (${skipNames.map((n) => `"${n}"`).join(', ')} — see $extensions["ds-contracts"].skipped for each reason)` : '') +
     '. LIMIT: the dump carries RESOLVED values per mode, not the alias graph — a variable aliasing another lands as the aliased value; aliases are NOT preserved (named, dump v1.4/v1.6).';
   return { document, receipt, layer };
+}
+
+/** Allocate a distinct leaf for source variables that also name a group.
+ * The caller must use the same complete mapping for registration and references. */
+export function allocateCapturedVariablePaths(names: Iterable<string>): Map<string,string> {
+  const unique=[...new Set(names)].sort();
+  assertUnambiguousVariablePaths(unique);
+  const base=new Map(unique.map(name=>[name,foldVariablePath(name).path]));
+  const occupied=new Set(base.values());
+  const result=new Map<string,string>();
+  for(const [name,path] of base){
+    if(![...occupied].some(other=>other.startsWith(path+'.'))){result.set(name,path);continue;}
+    let candidate=path+'.-value',suffix=1;
+    while([...occupied].some(other=>other===candidate||other.startsWith(candidate+'.'))){
+      candidate=path+'.-value-'+(++suffix);
+    }
+    occupied.add(candidate);result.set(name,candidate);
+  }
+  return result;
 }

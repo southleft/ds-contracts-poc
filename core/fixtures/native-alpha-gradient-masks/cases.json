@@ -1,0 +1,449 @@
+{
+  "source": "Owned primitive controls in DS Contracts Live Testing, NqssRZQpSjChxv5VyN1ZvJ, 2026-10-02; no kit components/fonts/assets",
+  "gradient": {
+    "start": {
+      "x": 0,
+      "y": 0.5
+    },
+    "end": {
+      "x": 1,
+      "y": 0.5
+    },
+    "stops": [
+      {
+        "position": 0,
+        "hex": "ffffff",
+        "alpha": 0
+      },
+      {
+        "position": 0.5365,
+        "hex": "ffffff"
+      },
+      {
+        "position": 1,
+        "hex": "ffffff",
+        "alpha": 0
+      }
+    ]
+  },
+  "cases": [
+    {
+      "file": "native-164x2.png",
+      "sha256": "46f7da3a8b8be1957b8e57186b2ade832ef83b76bf2da2da13fe9ff063331922",
+      "parent": {
+        "width": 164,
+        "height": 2
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 164,
+        "height": 2
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 164,
+        "height": 2
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 116,
+          "width": 164,
+          "height": 2
+        },
+        "render": {
+          "x": 765,
+          "y": 116,
+          "width": 164,
+          "height": 2
+        }
+      },
+      "frameId": "42:3",
+      "maskId": "42:4"
+    },
+    {
+      "file": "native-164x4.png",
+      "sha256": "fd9e4a94bb18cff90ca780f0a41100aa210f9e988283d9a8b3bc31a6288d4f1f",
+      "parent": {
+        "width": 164,
+        "height": 2
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 164,
+        "height": 2
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 164,
+        "height": 4
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 134,
+          "width": 164,
+          "height": 4
+        },
+        "render": {
+          "x": 765,
+          "y": 134,
+          "width": 164,
+          "height": 4
+        }
+      },
+      "frameId": "42:6",
+      "maskId": "42:7"
+    },
+    {
+      "file": "native-328x8.png",
+      "sha256": "e545f0d9c09f2ea3f2f4e261e9d21e20fe05c78bdb8e7e734cea58913f1f9e3c",
+      "parent": {
+        "width": 164,
+        "height": 2
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 164,
+        "height": 2
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 328,
+        "height": 8
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 154,
+          "width": 328,
+          "height": 8
+        },
+        "render": {
+          "x": 765,
+          "y": 154,
+          "width": 328,
+          "height": 8
+        }
+      },
+      "frameId": "42:9",
+      "maskId": "42:10"
+    },
+    {
+      "file": "native-82x2.png",
+      "sha256": "85d28273cd519916de51c163727299ce776496f5003c7799355ff443be9d8858",
+      "parent": {
+        "width": 164,
+        "height": 2
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 164,
+        "height": 2
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 82,
+        "height": 2
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 178,
+          "width": 82,
+          "height": 2
+        },
+        "render": {
+          "x": 765,
+          "y": 178,
+          "width": 82,
+          "height": 2
+        }
+      },
+      "frameId": "42:12",
+      "maskId": "42:13"
+    },
+    {
+      "file": "native-40x24-inset.png",
+      "sha256": "961211db1f1e286d76d34d82a491eb08aa78a8863cea1c298f2286754330c835",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 4,
+        "y": 2,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 40,
+        "height": 24
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 196,
+          "width": 40,
+          "height": 24
+        },
+        "render": {
+          "x": 765,
+          "y": 196,
+          "width": 40,
+          "height": 24
+        }
+      },
+      "frameId": "42:15",
+      "maskId": "42:16"
+    },
+    {
+      "file": "native-80x48-inset.png",
+      "sha256": "8b069f997b56b2351404400ffa4d04331773522ad1795ed696214e218975564e",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 4,
+        "y": 2,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "target": {
+        "width": 80,
+        "height": 48
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 765,
+          "y": 236,
+          "width": 80,
+          "height": 48
+        },
+        "render": {
+          "x": 765,
+          "y": 236,
+          "width": 80,
+          "height": 48
+        }
+      },
+      "frameId": "42:18",
+      "maskId": "42:19"
+    },
+    {
+      "file": "native-scale.png",
+      "sha256": "2c7014a7dc289c99918eb1aac48defbdd3fcab8d27e6bd02cee1e0b3029aa5ee",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 4,
+        "y": 2,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "SCALE",
+        "vertical": "SCALE"
+      },
+      "target": {
+        "width": 80,
+        "height": 48
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 1225,
+          "y": 116,
+          "width": 80,
+          "height": 48
+        },
+        "render": {
+          "x": 1225,
+          "y": 116,
+          "width": 80,
+          "height": 48
+        }
+      },
+      "frameId": "48:3",
+      "maskId": "48:4"
+    },
+    {
+      "file": "native-left-top.png",
+      "sha256": "8183bfcf1f8345876a28d81fc6f95cc60e6b7f5a124cfa7c3214fa7daf8b6436",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 4,
+        "y": 2,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "LEFT",
+        "vertical": "TOP"
+      },
+      "target": {
+        "width": 80,
+        "height": 48
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 1225,
+          "y": 180,
+          "width": 80,
+          "height": 48
+        },
+        "render": {
+          "x": 1225,
+          "y": 180,
+          "width": 80,
+          "height": 48
+        }
+      },
+      "frameId": "48:6",
+      "maskId": "48:7"
+    },
+    {
+      "file": "native-right-bottom.png",
+      "sha256": "3862cf7aa37ca373c2d2d1422bd267f533f2ca15f0b5eb17b47feb051fed80ac",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 4,
+        "y": 2,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "RIGHT",
+        "vertical": "BOTTOM"
+      },
+      "target": {
+        "width": 80,
+        "height": 48
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 1225,
+          "y": 244,
+          "width": 80,
+          "height": 48
+        },
+        "render": {
+          "x": 1225,
+          "y": 244,
+          "width": 80,
+          "height": 48
+        }
+      },
+      "frameId": "48:9",
+      "maskId": "48:10"
+    },
+    {
+      "file": "native-center-base.png",
+      "sha256": "143de336384794c9405111aca2beaafbc8083c892f65b11e605e0436d81d7a71",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 3,
+        "y": 1,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "CENTER",
+        "vertical": "CENTER"
+      },
+      "target": {
+        "width": 40,
+        "height": 24
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 1225,
+          "y": 308,
+          "width": 40,
+          "height": 24
+        },
+        "render": {
+          "x": 1225,
+          "y": 308,
+          "width": 40,
+          "height": 24
+        }
+      },
+      "frameId": "48:12",
+      "maskId": "48:13"
+    },
+    {
+      "file": "native-center-resized.png",
+      "sha256": "b10282fba82eec6f2b85baf0dac1aff457a4449e4a9065a45723ac53dabf3510",
+      "parent": {
+        "width": 40,
+        "height": 24
+      },
+      "box": {
+        "x": 3,
+        "y": 1,
+        "width": 32,
+        "height": 20
+      },
+      "constraints": {
+        "horizontal": "CENTER",
+        "vertical": "CENTER"
+      },
+      "target": {
+        "width": 80,
+        "height": 48
+      },
+      "nativeFrame": {
+        "layout": {
+          "x": 1225,
+          "y": 348,
+          "width": 80,
+          "height": 48
+        },
+        "render": {
+          "x": 1225,
+          "y": 348,
+          "width": 80,
+          "height": 48
+        }
+      },
+      "frameId": "48:15",
+      "maskId": "48:16"
+    }
+  ]
+}

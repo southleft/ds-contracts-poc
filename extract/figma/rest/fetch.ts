@@ -1,3 +1,4 @@
+import { collectRestImageAssets } from './image-assets.js';
 /**
  * Thin Figma REST client for the no-plugin import path: figma.com URL + user
  * token → dump v1 (via extract/figma/rest/map.ts).
@@ -90,6 +91,8 @@ export type FetchLike = (url: string, init?: { headers?: Record<string, string> 
   status: number;
   /** Read for `Retry-After` on a 429 only; optional so fixture transports need not carry it. */
   headers?: { get(name: string): string | null };
+  body?: ReadableStream<Uint8Array> | null;
+  arrayBuffer?: () => Promise<ArrayBuffer>;
   json(): Promise<unknown>;
   text(): Promise<string>;
 }>;
@@ -372,6 +375,9 @@ export async function fetchFile(fileKey: string, token: string, opts: ClientOpti
 export interface ImportOptions extends ClientOptions {
   /** Acquire original, version-pinned centerline exports at capture time. */
   captureStrokeSvg?: boolean;
+  /** Qualification switches; defaults preserve the measured public importer. */
+  inspectPaintedStrokeOutlines?: boolean;
+  inspectStraightVectorNetworks?: boolean;
   /** Set/component name to map when the URL has no node-id (or to filter). */
   target?: string;
   /**
@@ -459,6 +465,8 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
     },
   });
   const mapOptions: MapOptions = {
+    ...(opts.inspectPaintedStrokeOutlines ? {inspectPaintedStrokeOutlines:true} : {}),
+    ...(opts.inspectStraightVectorNetworks ? {inspectStraightVectorNetworks:true} : {}),
     ...(variables ? { variables } : {}),
     ...(refusal ? { variablesUnavailable: refusal } : {}),
     ...(opts.target ? { target: opts.target } : {}),
@@ -479,13 +487,17 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
         ids => fetchNodes(parsed.fileKey, ids, token, { ...opts, ...(first.version ? { version: first.version } : {}) }), { cap });
       response = followed.response; closure = followed.closure;
     }
-    const captured = opts.captureStrokeSvg ? await captureStrokeSvgs(parsed.fileKey, response, token, opts) : undefined;
+    const captured = opts.captureStrokeSvg || opts.inspectPaintedStrokeOutlines ? await captureStrokeSvgs(parsed.fileKey, response, token, opts) : undefined;
     const mapped = mapRestToDump(response, { ...mapOptions, ...(closure ? { closure } : {}),
       ...(captured?.sources ? { strokeSvgSources: captured.sources } : {}) });
     if (captured) {
       mapped.report.notes.push(...captured.refusals);
       Object.assign(mapped.dump._provenance!, { strokeSvgCapture: captured });
     }
+    const imageAssets = await collectRestImageAssets(mapped.dump,
+      () => get(`/v1/files/${parsed.fileKey}/images`, token, opts),
+      url => (opts.fetchImpl ?? fetch)(url));
+    if (Object.keys(imageAssets).length) mapped.dump._imageAssets = imageAssets;
     return mapped;
   };
 

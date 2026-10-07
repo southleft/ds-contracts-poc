@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,readFileSync,writeFileSync,rmSync,realpathSync} from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import ts from 'typescript';
@@ -28,7 +28,7 @@ export function replace(){normalize=value=>'['+value+']';}`;
   const config='{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Bundler","jsx":"react-jsx"}}';
   writeFileSync(file,text);writeFileSync(helper,helpers);writeFileSync(targetFile,targets);writeFileSync(configFile,config);
   const files:Record<string,string>={[file]:sha(text),[helper]:sha(helpers),[targetFile]:sha(targets),[configFile]:sha(config)};
-  for(const adapter of reactRuntimeAdapters){const f=repo+adapter.suffix;files[f]=sha(readFileSync(f,'utf8'));}
+  for(const adapter of reactRuntimeAdapters){const f=realpathSync(repo+adapter.suffix);files[f]=sha(readFileSync(f,'utf8'));}
   // This bundler fixture uses only the source/edge portion of a reference.
   const reference={sourceRoot:dir,files,runtimeImports:[{importer:file,specifier:'./helper.mjs',file:helper},{importer:file,specifier:'./targets.tsx',file:targetFile}]} as unknown as ReactReference;
   const target=readReactRuntimeExport(reference,'targets.tsx',['Root']),other=readReactRuntimeExport(reference,'targets.tsx',['Other']);

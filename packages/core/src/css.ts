@@ -1,5 +1,12 @@
+import {outerShadowInTokens} from './composed-fill-shadow.js';
+import {solidFillPartTokenError} from './solid-fill-binding-tokens.js';
+import {statePresenceCss,statePresenceRows} from '@ds-contracts/schema';
+import {textStateProp} from './text-state-target.js';
+import {childPaintOrderPlans} from './child-paint-order.js';
+import {INSTANCE_FILL_RESET,rootFillLayerCss,boundFillSvgCss,hasBoundPaintUsage} from './instance-fill-composition.js';
+import {instanceRootInputTokenRefusals} from './anatomy.js';
 import {hasComponentGrow, normalizeAbsoluteGeometry, absentVariantAxes} from '@ds-contracts/schema';
-import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
+import { lowerFilledEllipseVariants, lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
 import {jointTokenCss} from './joint-tokens.js';
 import {componentPlacementDomain} from './component-placement.js';
@@ -12,6 +19,7 @@ import {componentPlacementDomain} from './component-placement.js';
  * @ds-contracts/schema only.
  */
 import {
+  VOID_ELEMENTS,
   CONTRACT_STATES,
   PSEUDO_ELEMENT_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -20,6 +28,9 @@ import {
   borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
+  solidFillCompositionCss,
+  solidFillCompositionTokenCss,
+  SolidFillCompositionTableSchema,
   tokensByPropEntries,
   walkAnatomy,
   type Contract,
@@ -50,6 +61,10 @@ import {
   placeholdersIn,
   rootElementsOf,
   settleStrokeShadows,
+  drawsForegroundStroke,
+  composedFillFlowChild,
+  composedFillHiddenChild,
+  composedFillReferenceChild,
   disabledStateSelector,
   stateSelectorsFor,
   stripBraces,
@@ -110,7 +125,7 @@ function splitDecl(decl: string): [string, string] {
 }
 
 /** Captured geometry lowers through the same normalizer as inline/native output. */
-function absoluteGeometryCss(contract: Contract): string[] {
+function absoluteGeometryCss(contract: Contract, childScope?: (path: readonly string[]) => string): string[] {
   const lines: string[] = [];
   const axes = absentVariantAxes(contract);
   const selector = (name: string, value: string): string => {
@@ -124,8 +139,8 @@ function absoluteGeometryCss(contract: Contract): string[] {
     const emit = (conditions: string, geometry: NonNullable<Part['absoluteGeometry']>) => {
       const parent = path[path.length-2];
       const target = conditions
-        ? `.${cssIdentifier(path[0])}${conditions}${parent === path[0] ? '' : ` .${cssIdentifier(parent)}`} > .${cssIdentifier(name)}`
-        : `.${cssIdentifier(parent)} > .${cssIdentifier(name)}`;
+        ? `.${cssIdentifier(path[0])}${conditions}${parent === path[0] ? '' : ` .${cssIdentifier(parent)}`} > ${childScope?.(path) ?? ''}.${cssIdentifier(name)}`
+        : `.${cssIdentifier(parent)} > ${childScope?.(path) ?? ''}.${cssIdentifier(name)}`;
       lines.push('',`${target} {`,...Object.entries(normalizeAbsoluteGeometry(geometry).css).map(([key,value])=>`  ${key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())}: ${value};`),'}');
     };
     if (part.absoluteGeometry) emit('',part.absoluteGeometry);
@@ -142,18 +157,129 @@ function absoluteGeometryCss(contract: Contract): string[] {
   return lines;
 }
 
-export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown): string {
+/** Draft structural paint route. Strict PartSchema still rejects this field.
+ * This is the real shared stylesheet generator, exercised against native PNGs;
+ * no public converter can silently accept incomplete native/consumer support. */
+export function solidFillCompositionRules(contract: Contract, childScope?: (path: readonly string[]) => string, selectors?: {root:string;part:(name:string)=>string;modifier:(axis:string,value:string)=>string;disabled:string;booleanAttributes?:boolean}, contracts?: ReadonlyMap<string, Contract>, boundPaintSvg=false, shadowTokens?:unknown): string[] {
+  const lines: string[] = [];
+  for (const {part,name,path} of walkAnatomy(contract)) {
+    if (!part.solidFillComposition && !part.solidFillCompositionByCombination) continue;
+    if(part.solidFillComposition && part.solidFillCompositionByCombination)throw Error('solid-fill-composition-base-table-conflict');
+    if(part.solidFillCompositionToken!==undefined && (!part.solidFillComposition || part.solidFillCompositionByCombination))throw Error('solid-fill-composition-token-owner-unqualified:'+path.join('/'));
+    const table=part.solidFillCompositionByCombination ? SolidFillCompositionTableSchema.parse(part.solidFillCompositionByCombination) : undefined;
+    if(table){
+      if(!contract.anatomy.root)throw Error('solid-fill-composition-multi-root-table-unqualified');
+      for(const [i,axis] of table.props.entries()){
+        const prop=contract.props.find(p=>p.name===axis);
+        const domain=prop?.type==='boolean'?['true','false']:prop && typeof prop.type==='object' && 'enum' in prop.type?prop.type.enum:[];
+        if(!domain.length || table.rows.some(row=>!domain.includes(row.values[i])))throw Error('solid-fill-composition-axis-value-unqualified');
+      }
+    }
+    if(part.component) {
+      const root=contracts?.get(part.component.id)?.anatomy.root;
+      const qualifiedOverrides=Object.keys(part.component.overrides??{}).every(key=>['size','color','stroke-width'].includes(key) && root?.overridable?.includes(key as 'size'|'color'|'stroke-width'));
+      const directNormal=root?.instanceRootInputs?.includes('background-color') && (table?table.rows.every(row=>row.paint.blendMode==='NORMAL'):part.solidFillComposition?.blendMode==='NORMAL');
+      if(path.length===1 || !qualifiedOverrides || !composedFillReferenceChild(part,contracts) || !root || (!root.solidFillComposition && !root.solidFillCompositionByCombination && !directNormal))
+        throw Error(`solid-fill-composition-instance-root-unqualified:${path.join('/')}`);
+      continue; // The child's existing paint layer consumes the usage override.
+    }
+    if (path.length===1 && typeof contract.a11y?.minHitArea==='number')
+      throw new Error('solid-fill-composition-pseudo-element-collision');
+    if (VOID_ELEMENTS.has(part.element ?? (path.length===1 && name==='root' ? contract.semantics.element : 'div'))) throw new Error('solid-fill-composition-void-element-unqualified');
+    if (part.content || part.meter || part.repeat || part.text || part.shape || part.icon || part.component || part.mask)
+      throw new Error(`solid-fill-composition-structural-part-required:${path.join('/')}`);
+    if(part.slot && (path.length===1 || (part.element??'div')!=='div' || !part.layout))throw new Error(`solid-fill-composition-slot-layout-unqualified:${path.join('/')}`);
+    const records = [part.tokens,part.literals,part.declared,
+      ...Object.values(part.states ?? {}),
+      ...(part.statesByProp ?? []).flatMap(entry=>Object.values(entry.map)),
+      ...tokensByPropEntries(part).flatMap(entry=>Object.values(entry.map)),
+      ...(part.tokensByCombination ?? []).flatMap(entry=>entry.rows.map(row=>row.tokens)),
+      ...(part.literalsByProp ?? []).flatMap(entry=>Object.values(entry.map)),
+      ...(part.literalsByCombination ?? []).flatMap(entry=>entry.rows.map(row=>row.literals)),
+      ...(part.stylesWhen ?? []).map(entry=>entry.styles)];
+    // The existing foreground ring renders after child content and therefore
+    // after this independent fill layer. Only its supported border channels
+    // may coexist here; leaf inset shadows and unrelated effects still refuse.
+    const foregroundRing=drawsForegroundStroke(part,path.length===1?contract.semantics.element:part.element);
+    const ringChannel=(channel:string)=>foregroundRing && /^(border-(width|color)|border-(top|right|bottom|left)-width)$/.test(channel);
+    // The independent fill occupies the same borderless box and inherits its
+    // radius. Foreground stroke/radius intersections still need separate proof.
+    const radiusChannel=(channel:string)=>!foregroundRing && channel==='border-radius';
+    const children=Object.values(part.parts??{});
+    const clippedDrawing=children.length>0 && children.every(child=>child.shape?.kind==='path' && !!child.shape.parentViewport || child.shape?.kind==='stroked-path' && !!child.shape.strokePath);
+    // Clipping both axes bounds the independently painted fill and its children
+    // without changing blending ownership. Keep asymmetric clipping refused.
+    const clipChannel=(channel:string,record:Record<string,string>|undefined)=>
+      ['overflow-x','overflow-y'].includes(channel) && record?.[channel]==='hidden' &&
+      (clippedDrawing || record?.['overflow-x']==='hidden' && record?.['overflow-y']==='hidden');
+    const competingChannels=[...new Set(records.flatMap(record=>Object.keys(record??{}).filter(channel=>!(channel==='box-shadow' && !foregroundRing && outerShadowInTokens(record![channel],shadowTokens)) && !ringChannel(channel) && !radiusChannel(channel) && !clipChannel(channel,record) && (channel.startsWith('background') || ['opacity','border','overflow','overflow-x','overflow-y','filter','transform','box-shadow'].includes(channel) || channel==='border-radius' || channel.startsWith('border-') || channel==='clip-path' || channel==='mix-blend-mode' || channel==='isolation'))))];
+    if (competingChannels.length)
+      throw new Error(`solid-fill-composition-competing-or-unqualified-paint:${path.join('/')}:${competingChannels.sort().join(',')}`);
+    const unqualifiedChildren=Object.entries(part.parts??{}).filter(([,child])=>!composedFillHiddenChild(child) && !composedFillFlowChild(child) && !composedFillReferenceChild(child,contracts) && !child.overlay && !child.absoluteGeometry && !child.absoluteGeometryByCombination && !['absolute','relative','fixed','sticky'].includes(String(child.declared?.position??child.literals?.position))).map(([name])=>name);
+    if (part.declared?.position==='static' || part.literals?.position==='static' || unqualifiedChildren.length)
+      throw new Error(`solid-fill-composition-child-stacking-unqualified:${path.join('/')}:${unqualifiedChildren.join(',')||'static-owner'}`);
+    const holder = `${path.length>1 ? childScope?.(path)??'' : ''}${path.length===1 && name==='root' && selectors ? selectors.root : selectors?.part(name)??'.'+cssIdentifier(name)}`;
+    for(const [childName,child] of Object.entries(part.parts??{}))if(composedFillFlowChild(child)||composedFillReferenceChild(child,contracts)) {
+      const target=`${childScope?.([...path,childName])??''}${selectors?.part(childName)??'.'+cssIdentifier(childName)}`;
+      lines.push('',`${target} {`,'  position: relative;','}');
+    }
+    const cells=table?table.rows.map(row=>({paint:row.paint,values:row.values,token:row.token,empty:row.empty})):[{paint:part.solidFillComposition!,values:[],token:part.solidFillCompositionToken,empty:false}];
+    const selector=(values:string[])=>{
+      if(!table)return holder;
+      const fragments=table.props.map((axis,i)=>{
+        const prop=contract.props.find(p=>p.name===axis)!;
+        if(prop.type!=='boolean' || prop.default===undefined && !selectors?.booleanAttributes)return selectors?.modifier(axis,values[i])??`.${cssIdentifier(axis+'-'+values[i])}`;
+        const attr=axis==='disabled'?(selectors?.disabled??reactRootDisabledSelector(contract)):`[data-${axis.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}]`;
+        if(prop.default===undefined && selectors?.booleanAttributes && values[i]==='false')return `[data-dsc-false-${axis.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}="true"]`;
+        return values[i]==='true'?attr:`:not(${attr})`;
+      }).join('');
+      const root=`${selectors?.root??'.root'}:where(${fragments})`;
+      return path.length===1?root:`${root} ${holder}`;
+    };
+    if (!part.overlay && !part.absoluteGeometry && !part.absoluteGeometryByCombination && !part.declared?.position && !part.literals?.position) lines.push('',`${holder} {`, '  position: relative;', '}');
+    if((part.element??(path.length===1 && name==='root'?contract.semantics.element:'div'))==='button')lines.push('',`${holder} {`,'  appearance: none;','  background: none;','}');
+    if(path.length===1)lines.push('',`${holder} {`,...Object.entries(INSTANCE_FILL_RESET).map(([key,value])=>`  ${key}: ${value};`),'}');
+    for(const cell of cells){
+      const css=path.length===1?rootFillLayerCss(cell.paint,cell.token):cell.token===undefined?solidFillCompositionCss(cell.paint):solidFillCompositionTokenCss(cell.paint,cell.token);
+      const svg=boundPaintSvg && (part.solidFillCompositionToken!==undefined || !!table?.rows.some(row=>row.token!==undefined) || path.length===1 && hasBoundPaintUsage(contract,contracts));
+      const declarations=Object.entries(svg?boundFillSvgCss(css):css).map(([key,value])=>`${key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())}: ${value};`);
+      lines.push('',`${selector(cell.values)}${svg?' > svg[data-dsc-paint-layer]':'::before'} {`, ...(svg?[]:['  content: "";']), ...declarations.map(d=>'  '+d), ...(table?.rows.some(row=>row.empty)?[cell.empty?(path.length===1?'  display: var(--dsc-instance-fill-display, none);':'  display: none;'):'  display: block;']:[]), '}');
+    }
+  }
+  return lines;
+}
+
+export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown,
+  childScope?: (path: readonly string[]) => string, contracts?: ReadonlyMap<string, Contract>, boundPaintSvg=false): string {
   // `strokesIncludedInLayout: false` — a stroke that takes no layout space is
   // drawn as an inset box-shadow ring, not a border (anatomy.ts
   // lowerStrokeRings, which says why it is a rewrite BEFORE the rules are
   // written and not a guard at each of their push sites). The same object
   // comes back when no part is flagged.
   // @lower css.stroke-outside-layout-inset-ring
-  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledPathVariants(input)));
+  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledEllipseVariants(lowerFilledPathVariants(input))));
+  // Composition rules below use the original input: generated inset shadows
+  // belong to the foreground-ring lowering, not to source competing paint.
+  // foregroundStrokeCss moves those rings above the independent fill layer.
   // …and a ring's real shadow whose TOKEN resolves to `none` is settled on the
   // finished text, the first place a token's VALUE is known (`tokenValues`:
   // the DTCG trees, when the caller has them — anatomy.ts settleStrokeShadows).
-  const settle = (css: string) => (contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id));
+  const paintOrderCss=childPaintOrderPlans(input,contracts).flatMap(plan=>{
+    const holder=`.${cssIdentifier(plan.name)}`;
+    // Conditional children disappear from the DOM; ranks belong to part identities.
+    const rules=(selector:string,ranks:typeof plan.base)=>ranks.map(rank=>`${selector} > .${cssIdentifier(rank.name)} { z-index: ${rank.zIndex}; ${rank.order!==undefined?`order: ${rank.order};`:""} }`);
+    return [...(plan.isolate?[`${holder} { isolation: isolate; }`]:[]),...rules(holder,plan.base),...plan.rows.flatMap(row=>{
+      const fragments=Object.entries(row.selection).map(([axis,value])=>{
+        const p=input.props.find(p=>p.name===axis)!;
+        if(p.type!=='boolean')return `.${cssIdentifier(axis+'-'+value)}`;
+        const attr=axis==='disabled'?reactRootDisabledSelector(input):`[data-${axis.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}]`;
+        return value==='true'?attr:`:not(${attr})`;
+      }).join('');
+      if(!fragments)return [];
+      return rules(plan.path.length===1?`${holder}${fragments}`:`.root${fragments} ${holder}`,row.ranks);
+    })];
+  }).join('\n');
+  const settle = (css: string) => foregroundStrokeCss(contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id), input)+paintOrderCss;
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   // A disabled state styles what the element actually exposes (anatomy.ts
   // disabledStateSelector): `:disabled` on a native form-control root, the
@@ -169,6 +295,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // value cannot be subtracted refused by name before any rule is written.
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
   if (textBoxes.size > 0) errors.push(...textBoxTokenRefusals(contract, tokenValues));
+  errors.push(...instanceRootInputTokenRefusals(contract,tokenValues));
+  for(const {part} of walkAnatomy(contract)){if(!(part.solidFillCompositionToken && part.solidFillCompositionSourceBinding) && !part.solidFillCompositionByCombination?.rows.some(row=>row.token || row.sourceBinding))continue;const error=solidFillPartTokenError(part,tokenValues);if(error)errors.push(error); }
   const lines: string[] = [
     `/* GENERATED FILE — DO NOT EDIT.`,
     ` * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})`,
@@ -270,7 +398,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         }
       }
       decls.push(...(gridPlan.cells.get(name) ?? []));
-      if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
+      if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}, undefined, part));
+      if (part.layout?.alignSelf) decls.push(`align-self: ${part.layout.alignSelf}`);
       if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
       if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
       if (part.shape) decls.push(...shapeCssDecls(part.shape));
@@ -311,7 +440,25 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     }
     // The multi-root sheet never took finishStylesheet; a ring part still owes
     // its forced-colors boundary (a no-op, byte for byte, without one).
-    lines.push(...absoluteGeometryCss(contract));
+    for(const {name,part,path} of walkAnatomy(contract))if(part.presenceByState){
+    const table=part.presenceByState;
+    for(const row of table.rows.filter(r=>r.state==='default')){
+      const subst=Object.fromEntries(table.props.map((p,i)=>[p,row.values[i]]));
+      const conditions=table.props.map((p,i)=>{
+        const prop=contract.props.find(x=>x.name===p)!;const value=row.values[i];
+        if(prop.type==='boolean'){
+          const attr=p==='disabled'?reactRootDisabledSelector(contract):`[data-${p.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}]`;
+          return value==='true'?attr:`:not(${attr})`;
+        }
+        if(value===null)return `:not([data-${p.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}])`;
+        return `.${cssIdentifier(p+'-'+value)}`;
+      }).join('');
+      const rules=statePresenceCss(statePresenceRows(table,subst),'.'+cssIdentifier(path[0])+conditions,`${childScope?.(path)??''}.${cssIdentifier(name)}`);
+      lines.push(rules.replaceAll(':disabled',reactRootDisabledSelector(contract)));
+    }
+  }
+  lines.push(...absoluteGeometryCss(contract, childScope));
+    lines.push(...solidFillCompositionRules(input,childScope,undefined,contracts,boundPaintSvg,tokenValues));
     return settle(lowerStrokeRingForcedColors(lines.join('\n') + '\n'));
   }
 
@@ -507,6 +654,11 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   }
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls
+  for(const {part} of walkAnatomy(contract))for(const row of part.solidFillCompositionByCombination?.rows??[])
+    part.solidFillCompositionByCombination!.props.forEach((axis,i)=>{
+      const prop=contract.props.find(p=>p.name===axis);
+      if(prop?.type!=='boolean' || prop.default===undefined)enumRules.set(`${axis}-${row.values[i]}`,new Map());
+    });
   const stateRules: Array<{ state: string; css: string }> = [];
   const rootSubRules: string[] = [];
 
@@ -584,15 +736,11 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // canvas side uses negative itemSpacing — same projection as nested
     // parts below, single-placeholder refs expand per enum class.
     if (cssProp === 'gap' && root.layout?.overlap) {
-      const phs = placeholdersIn(refPath);
-      if (phs.length === 1) {
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          if (!checkToken(resolved, 'anatomy.root.tokens.gap')) continue;
-          rootSubRules.push(`\n.${phs[0]}-${value} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
-        }
-      } else if (checkToken(refPath, 'anatomy.root.tokens.gap')) {
-        rootSubRules.push(`\n.root > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
+      for (const {combo, resolved} of expandRef('anatomy.root.tokens.gap', refPath)) {
+        if (!checkToken(resolved, 'anatomy.root.tokens.gap')) continue;
+        const selector = combo.length ? `.${comboCls(combo)}` : '.root';
+        rootSubRules.push(`\n${selector} { --dsc-overlap-gap: ${cssVar(resolved)}; }`);
+        rootSubRules.push(`\n${selector} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
       }
       continue;
     }
@@ -683,7 +831,17 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         }
       }
     } else {
-      errors.push(`${contract.id}: root token "${cssProp}" uses ${phs.length} substitutions (max 3)`);
+      for(const {combo,resolved} of expandRef(`anatomy.root.tokens.${cssProp}`,refPath)) {
+        if(!checkToken(resolved,`anatomy.root.tokens.${cssProp}`))continue;
+        for(const [prop,value] of combo) {
+          if(boolNames.has(prop))continue;
+          const single=`${prop}-${value}`;
+          if(!enumRules.has(single))enumRules.set(single,new Map());
+        }
+        const cls=comboCls(combo);
+        if(!enumRules.has(cls))enumRules.set(cls,new Map());
+        enumRules.get(cls)!.set(cssProp,ovVal(cssProp,cssVar(resolved)));
+      }
     }
   }
 
@@ -708,10 +866,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
           for (const phValue of enums.get(phs[0]) ?? []) {
             const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
             if (!checkToken(resolved, `anatomy.root.tokensByProp.${value}.${cssProp}`)) continue;
-            for (const single of [`${tbpProp}-${value}`, `${phs[0]}-${phValue}`]) {
+            for (const single of [comboCls([[tbpProp, value]]), `${phs[0]}-${phValue}`]) {
               if (!enumRules.has(single)) enumRules.set(single, new Map());
             }
-            const cls = `${tbpProp}-${value}.${phs[0]}-${phValue}`;
+            const cls = comboCls([[tbpProp, value], [phs[0], phValue]]);
             if (!enumRules.has(cls)) enumRules.set(cls, new Map());
             enumRules.get(cls)!.set(cssProp, cssVar(resolved));
             if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(resolved));
@@ -719,7 +877,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
           continue;
         }
         if (!checkToken(refPath, `anatomy.root.tokensByProp.${value}.${cssProp}`)) continue;
-        const cls = `${tbpProp}-${value}`;
+        const cls = comboCls([[tbpProp, value]]);
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(refPath));
         if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(refPath));
@@ -728,7 +886,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       // in ITS OWN rule — the base `.root` rule may carry no width at all.
       for (const decl of borderStyleDecls(overrides, 'tokens', root.declared)) {
         const [p, v] = splitDecl(decl);
-        const cls = `${tbpProp}-${value}`;
+        const cls = comboCls([[tbpProp, value]]);
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(p, v);
       }
@@ -755,6 +913,14 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         enumRules.get(cls)!.set(p, v);
       }
     }
+  }
+  for (const row of root.layoutByCombination?.rows ?? []) {
+    const table = root.layoutByCombination!;
+    const combo = table.props.map((p, i) => [p, row.values[i]] as [string, string]);
+    for (const [sp, sv] of combo) if (!boolNames.has(sp) && !enumRules.has(`${sp}-${sv}`)) enumRules.set(`${sp}-${sv}`, new Map());
+    const cls = literalComboCls(combo);
+    if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+    for (const decl of layoutOverrideDecls(row.layout)) { const [p, v] = splitDecl(decl); enumRules.get(cls)!.set(p, v); }
   }
   // Beta spike — literalsByCombination on the root: one compound rule per
   // row on the root's own prop classes / attributes, with base specificity.
@@ -826,7 +992,30 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   }
 
   if (contract.states.includes('focus-visible')) {
-    lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: solid;', '  outline-offset: 2px;', '}');
+    const focusRoot = input.anatomy.root; // Before stroke-ring lowering renames box-shadow.
+    const focusMaps = [focusRoot.tokens, focusRoot.literals, focusRoot.declared, focusRoot.states?.['focus-visible'], focusRoot.declaredStates?.['focus-visible'],
+      ...tokensByPropEntries(focusRoot).flatMap(entry => Object.values(entry.map)),
+      ...(focusRoot.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+      ...(focusRoot.literalsByCombination ?? []).flatMap(entry => entry.rows.map(row => row.literals)),
+      ...(focusRoot.statesByProp ?? []).filter(entry => entry.state === 'focus-visible').flatMap(entry => Object.values(entry.map)),
+      ...(focusRoot.stylesWhen ?? []).map(rule => rule.styles)];
+    const explicitOutline = focusMaps.some(map => Object.keys(map ?? {}).some(key => key === 'outline' || key.startsWith('outline-')));
+    const authoredShadow = focusRoot.states?.['focus-visible']?.['box-shadow'] !== undefined || focusRoot.declaredStates?.['focus-visible']?.['box-shadow'] !== undefined;
+    const authoredStroke = focusRoot.strokesIncludedInLayout === false &&
+      ['border-width', 'border-color'].some(key => {
+        const focused = focusRoot.states?.['focus-visible']?.[key] ?? focusRoot.declaredStates?.['focus-visible']?.[key];
+        const resting = focusRoot.tokens?.[key] ?? focusRoot.literals?.[key] ?? focusRoot.declared?.[key];
+        return focused !== undefined && focused !== resting;
+      });
+    if ((authoredShadow || authoredStroke) && !explicitOutline) {
+      // The declared focus shadow or inset stroke owns the normal-color indicator. Do not add
+      // an unrelated browser outline; shadows disappear in forced colors.
+      lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: none;', '}',
+        '@media (forced-colors: active) {', `  .root${STATE_SELECTORS['focus-visible']} {`,
+        '    outline: 2px solid Highlight;', '    outline-offset: 2px;', '  }', '}');
+    } else {
+      lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: solid;', '  outline-offset: 2px;', '}');
+    }
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
     lines.push('', `.root${disabledSel} {`, '  cursor: not-allowed;', '}');
@@ -956,6 +1145,14 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         }
       }
 
+      for (const row of part.layoutByCombination?.rows ?? []) {
+        const table = part.layoutByCombination!;
+        const combo = table.props.map((prop,i) => [prop,row.values[i]] as [string,string]);
+        for (const [prop,value] of combo) if (!boolNames.has(prop) && !enumRules.has(`${prop}-${value}`)) enumRules.set(`${prop}-${value}`,new Map());
+        lines.push('', `.${literalComboCls(combo)} .${cssIdentifier(name)} {`,
+          ...layoutOverrideDecls(row.layout,part.layout).map(decl => `  ${decl};`), '}');
+      }
+
       // Round 2 iteration 9 — per-instance overrides: the ref part becomes a
       // structural WRAPPER class (the TSX wraps the instance in a span; the
       // child contract still owns ALL of its own styling) whose only job is
@@ -963,6 +1160,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       // the instance and land in the child's var() fallback chains.
       // inline-flex hugs the child, so layout (overlap margins included)
       // sees the same box as the bare instance.
+      for(const [channel,ref] of Object.entries(part.component.rootOverrides??{}))
+        for(const row of expandRef(`anatomy.${name}.component.rootOverrides.${channel}`,stripBraces(ref)))
+          checkToken(row.resolved,`anatomy.${name}.component.rootOverrides.${channel}`);
       const ov = Object.entries(part.component.overrides ?? {});
       const hasStateOverrides = Object.keys(part.states ?? {}).length > 0 || (part.statesByProp?.length ?? 0) > 0;
       // A2 grid (G3/P12): an instance child of a grid parent rides a wrapper
@@ -975,7 +1175,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         lines.push('', `.${cssIdentifier(name)} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
       }
       if (ov.length > 0 || hasStateOverrides) {
-        const wrapDecls: string[] = cell ? [...cell, 'display: grid'] : ['display: inline-flex'];
+        const wrapDecls: string[] = cell ? [...cell, 'display: grid'] : hasComponentGrow(part) && ov.length > 0 ? [] : ['display: inline-flex'];
         const wrapSubRules: string[] = [];
         for (const [channel, ref] of ov) {
           const ovVar = refOverrideVar(part.component.id, channel);
@@ -1019,7 +1219,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
           const refPath=stripBraces(ref),where=`anatomy.${name}.states.${state}.${channel}`;
           const rows=placeholdersIn(refPath).length ? expandRef(where,refPath) : [{combo:[],resolved:refPath}];
           for(const {combo,resolved} of rows) if(checkToken(resolved,where))
-            instanceStateRules.push({state,css:`\n.${combo.length?comboCls(combo):'root'}${sel} .${cssIdentifier(name)} {\n  ${refOverrideVar(part.component.id,channel)}: ${cssVar(resolved)};\n}`});
+            instanceStateRules.push({state,css:`\n.${combo.length?comboCls(combo):'root'}${sel} .${cssIdentifier(name)}${textStateProp(channel) ? ` [data-dsc-text-color=${JSON.stringify(part.component.id+':'+textStateProp(channel))}]` : ''} {\n  ${textStateProp(channel) ? 'color' : refOverrideVar(part.component.id,channel)}: ${cssVar(resolved)}${textStateProp(channel) ? ' !important' : ''};\n}`});
         }
       }
       for(const entry of part.statesByProp ?? []) {
@@ -1027,7 +1227,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         for(const [value,overrides] of Object.entries(entry.map)) for(const [channel,ref] of Object.entries(overrides)) {
           const refPath=stripBraces(ref);
           if(checkToken(refPath,`anatomy.${name}.statesByProp.${entry.prop}.${value}.${entry.state}.${channel}`))
-            instanceStateRules.push({state:entry.state,css:`\n.${comboCls([[entry.prop,value]])}${sel} .${cssIdentifier(name)} {\n  ${refOverrideVar(part.component.id,channel)}: ${cssVar(refPath)};\n}`});
+            instanceStateRules.push({state:entry.state,css:`\n.${comboCls([[entry.prop,value]])}${sel} .${cssIdentifier(name)}${textStateProp(channel) ? ` [data-dsc-text-color=${JSON.stringify(part.component.id+':'+textStateProp(channel))}]` : ''} {\n  ${textStateProp(channel) ? 'color' : refOverrideVar(part.component.id,channel)}: ${cssVar(refPath)}${textStateProp(channel) ? ' !important' : ''};\n}`});
         }
       }
       instanceStateRules.sort((a,b)=>stateOrder.indexOf(a.state)-stateOrder.indexOf(b.state));
@@ -1053,7 +1253,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // explicit placement. Sizing stays UNSPELLED: stretch is the CSS grid
     // default and the pinned spelling of the canvas FILL (G3).
     decls.push(...(gridPlan.cells.get(name) ?? []));
-    if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
+    if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}, undefined, part));
+      if (part.layout?.alignSelf) decls.push(`align-self: ${part.layout.alignSelf}`);
     // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
     // part would leak UA margins the real component resets — same discipline
     // as the root rule; captured nonzero margins arrive as minted overrides.
@@ -1134,15 +1335,11 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       // Single-placeholder refs expand per enum class (P21 minted per-axis
       // magnitudes), the nested-token-substitution rule shape.
       if (cssProp === 'gap' && part.layout?.overlap) {
-        const overlapPhs = placeholdersIn(refPath);
-        if (overlapPhs.length === 1) {
-          for (const value of enums.get(overlapPhs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${overlapPhs[0]}}`, value);
-            if (!checkToken(resolved, `anatomy.${name}.tokens.gap`)) continue;
-            nestedSubRules.push(`\n.${overlapPhs[0]}-${value} .${cssIdentifier(name)} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
-          }
-        } else if (checkToken(refPath, `anatomy.${name}.tokens.gap`)) {
-          nestedSubRules.push(`\n.${cssIdentifier(name)} > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
+        for (const {combo, resolved} of expandRef(`anatomy.${name}.tokens.gap`, refPath)) {
+          if (!checkToken(resolved, `anatomy.${name}.tokens.gap`)) continue;
+          const selector = `${combo.length ? `.${comboCls(combo)} ` : ''}.${cssIdentifier(name)}`;
+          nestedSubRules.push(`\n${selector} { --dsc-overlap-gap: ${cssVar(resolved)}; }`);
+          nestedSubRules.push(`\n${selector} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
         }
         continue;
       }
@@ -1208,25 +1405,25 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
             for (const phValue of enums.get(phs[0]) ?? []) {
               const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
               if (!checkToken(resolved, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
-              for (const single of [`${entry.prop}-${value}`, `${phs[0]}-${phValue}`]) {
+              for (const single of [comboCls([[entry.prop, value]]), `${phs[0]}-${phValue}`]) {
                 if (!enumRules.has(single)) enumRules.set(single, new Map());
               }
               nestedSubRules.push(
-                `\n.${entry.prop}-${value}.${phs[0]}-${phValue} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`,
+                `\n.${comboCls([[entry.prop, value], [phs[0], phValue]])} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`,
               );
             }
             continue;
           }
           if (!checkToken(refPath, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
           nestedSubRules.push(
-            `\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
+            `\n.${comboCls([[entry.prop, value]])} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
           );
         }
         // FC-BORDER-STYLE-NOT-SYNTHESISED — a per-variant SHORTHAND width earns
         // the keyword in its own rule (round 9's rule, at a scope it never
         // reached).
         for (const d of borderStyleDecls(overrides, 'tokens', part.declared)) {
-          nestedSubRules.push(`\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n  ${d};\n}`);
+          nestedSubRules.push(`\n.${comboCls([[entry.prop, value]])} .${cssIdentifier(name)} {\n  ${d};\n}`);
         }
       }
     }
@@ -1245,6 +1442,13 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         nestedSubRules.push(`\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n${lDecls.join('\n')}\n}`);
       }
     }
+  for (const row of part.layoutByCombination?.rows ?? []) {
+    const table = part.layoutByCombination!;
+    const combo = table.props.map((p, i) => [p, row.values[i]] as [string, string]);
+    for (const [sp, sv] of combo) if (!boolNames.has(sp) && !enumRules.has(`${sp}-${sv}`)) enumRules.set(`${sp}-${sv}`, new Map());
+    const cls = literalComboCls(combo);
+    nestedSubRules.push(`\n.${cls} .${cssIdentifier(name)} {\n${layoutOverrideDecls(row.layout, undefined, part).map(d => `  ${d};`).join("\n")}\n}`);
+  }
     // Beta spike — literalsByCombination on a nested part: one compound
     // ancestor rule per row, below part state rules regardless of axis count;
     // single classes claimed as above.
@@ -1337,7 +1541,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // enum class — exactly the nested-token-substitution rule shape.
     if (part.layoutByProp) {
       for (const [value, override] of Object.entries(part.layoutByProp.map)) {
-        const lDecls = layoutOverrideDecls(override, part.layout);
+        const lDecls = layoutOverrideDecls(override, part.layout, part);
         if (lDecls.length === 0) continue;
         nestedSubRules.push(
           `\n.${part.layoutByProp.prop}-${value} .${cssIdentifier(name)} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,
@@ -1379,7 +1583,25 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
-  lines.push(...absoluteGeometryCss(contract));
+  for(const {name,part,path} of walkAnatomy(contract))if(part.presenceByState){
+    const table=part.presenceByState;
+    for(const row of table.rows.filter(r=>r.state==='default')){
+      const subst=Object.fromEntries(table.props.map((p,i)=>[p,row.values[i]]));
+      const conditions=table.props.map((p,i)=>{
+        const prop=contract.props.find(x=>x.name===p)!;const value=row.values[i];
+        if(prop.type==='boolean'){
+          const attr=p==='disabled'?reactRootDisabledSelector(contract):`[data-${p.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}]`;
+          return value==='true'?attr:`:not(${attr})`;
+        }
+        if(value===null)return `:not([data-${p.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}])`;
+        return `.${cssIdentifier(p+'-'+value)}`;
+      }).join('');
+      const rules=statePresenceCss(statePresenceRows(table,subst),'.'+cssIdentifier(path[0])+conditions,`${childScope?.(path)??''}.${cssIdentifier(name)}`);
+      lines.push(rules.replaceAll(':disabled',reactRootDisabledSelector(contract)));
+    }
+  }
+  lines.push(...absoluteGeometryCss(contract, childScope));
+  lines.push(...solidFillCompositionRules(input,childScope,undefined,contracts,boundPaintSvg,tokenValues));
   return settle(finishStylesheet(lines.join('\n') + '\n'));
 }
 
@@ -1587,4 +1809,30 @@ export function stripCanvasOnlyChannels(css: string): string {
     '   can carry them. The canvas lowers them to absolute placement. */',
   ].join('\n');
   return `${note}\n${out.join('\n').replace(/\n{3,}/g, '\n\n')}`;
+}
+
+/** Retain the host's external shadow and forced-color outline, but paint its
+ * inset stroke above child layers. Private stroke variables still carry every
+ * conditional width/color. No real border or extra layout box is introduced. */
+export function foregroundStrokeCss(css: string, contract: Contract): string {
+  const rules: string[] = [];
+  for (const {name,part} of walkAnatomy(contract)) {
+    if (!drawsForegroundStroke(part, name==='root' ? contract.semantics.element : part.element)) continue;
+    const selector='.'+cssIdentifier(name);
+    if(css.includes(selector+'::after'))throw Error(`foreground-stroke-pseudo-element-collision:${contract.id}:${name}`);
+    const source='\n'+css, marker='\n'+selector+' {\n';
+    const start=source.indexOf(marker), end=start<0 ? -1 : source.indexOf('\n}',start+marker.length);
+    const body=start>=0 && end>=0 ? source.slice(start+marker.length,end) : undefined;
+    if(!body)throw Error(`foreground-stroke-base-rule-unavailable:${contract.id}:${name}`);
+    const shadow=/box-shadow:\s*(inset [^\n;]+);/.exec(body)?.[1];
+    if(!shadow)throw Error(`foreground-stroke-ring-unavailable:${contract.id}:${name}`);
+    const external=shadow.includes('var(--_stroke-shadow)');
+    const ring=external ? shadow.replace(/, var\(--_stroke-shadow\)$/, '') : shadow;
+    // Generated child paint ranks are 1..N. Keep the foreground stroke at
+    // N+1 above ranked children. Composed fills must retain their backdrop;
+    // isolating those hosts would change native blend-mode pixels.
+    rules.push('',`${selector} {`,...(!/\bposition\s*:/.test(body)?['  position: relative;']:[]),...(!(part.solidFillComposition || part.solidFillCompositionByCombination)?['  isolation: isolate;']:[]),`  box-shadow: ${external?'var(--_stroke-shadow)':'none'};`,'}', '',`${selector}::after {`,
+      '  content: "";','  display: block;','  position: absolute;','  inset: 0;','  pointer-events: none;','  border-radius: inherit;',`  z-index: ${Object.keys(part.parts??{}).length+1};`,`  box-shadow: ${ring};`,'}');
+  }
+  return rules.length ? css+'\n'+rules.join('\n') : css;
 }

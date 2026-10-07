@@ -32,7 +32,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card(
         <span className={styles.title}>{title}</span>
       </header>
       <div className={styles.body}>{children}</div>
-      {actions != null ? <footer className={styles.footer}>{actions}</footer> : null}
+      <>{actions != null ? <footer className={styles.footer}>{actions}</footer> : null}</>
     </article>
   );
 });

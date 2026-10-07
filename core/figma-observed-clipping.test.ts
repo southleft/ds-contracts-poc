@@ -13,10 +13,10 @@ test('reviewable observed mixed clipping carries both planes without claiming au
  assert.deepEqual(c.anatomy.root.stylesWhen,[{prop:'variant',equals:'outline',styles:{overflow:'hidden'}},{prop:'variant',equals:'subtle',styles:{overflow:'visible'}}]);
  assert.ok(p.notes.some(n=>n.includes('does not assert authored intent')));
 });
-test('uniform observed clipping carries in reviewable mode while exact foreign inversion remains conservative',()=>{
+test('uniform and conditional clipping preserve observed pixels without claiming authored intent',()=>{
  const c=ContractSchema.parse(propose('reviewable-inversion',false).contract);
  assert.equal(c.anatomy.root.declared?.['overflow-x'],'hidden');
  assert.equal(c.anatomy.root.declared?.['overflow-y'],'hidden');
- const exact=propose('exact');assert.equal(ContractSchema.parse(exact.contract).anatomy.root.stylesWhen,undefined);
- assert.ok(exact.notes.some(n=>n.includes('authored clip')));
+ const exact=propose('exact');assert.deepEqual(ContractSchema.parse(exact.contract).anatomy.root.stylesWhen,[{prop:'variant',equals:'outline',styles:{overflow:'hidden'}},{prop:'variant',equals:'subtle',styles:{overflow:'visible'}}]);
+ assert.ok(exact.notes.some(n=>n.includes('does not assert authored intent')));
 });

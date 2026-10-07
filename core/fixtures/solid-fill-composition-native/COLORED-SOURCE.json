@@ -1,0 +1,1305 @@
+{
+  "scope": "Actual72coloredScratch nativepaintcontrols; no kit or reverseacceptance.",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "parentId": "407:2",
+  "sourceSHA256": "e3bf57724aaebb07d832faf85f764bb80e9025a7f434d3f2ad74699a5ea84d48",
+  "recoveredWithoutRecreation": true,
+  "rows": [
+    {
+      "cellId": "407:4",
+      "wrapperId": "407:5",
+      "inkId": "407:6",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-4.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:7",
+      "wrapperId": "407:8",
+      "inkId": "407:9",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-7.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:10",
+      "wrapperId": "407:11",
+      "inkId": "407:12",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-10.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:13",
+      "wrapperId": "407:14",
+      "inkId": "407:15",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-13.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:16",
+      "wrapperId": "407:17",
+      "inkId": "407:18",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-16.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:19",
+      "wrapperId": "407:20",
+      "inkId": "407:21",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-19.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:23",
+      "wrapperId": "407:24",
+      "inkId": "407:25",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-23.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:26",
+      "wrapperId": "407:27",
+      "inkId": "407:28",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-26.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:29",
+      "wrapperId": "407:30",
+      "inkId": "407:31",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-29.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:32",
+      "wrapperId": "407:33",
+      "inkId": "407:34",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-32.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:35",
+      "wrapperId": "407:36",
+      "inkId": "407:37",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-35.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:38",
+      "wrapperId": "407:39",
+      "inkId": "407:40",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-38.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:42",
+      "wrapperId": "407:43",
+      "inkId": "407:44",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-42.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "cellId": "407:45",
+      "wrapperId": "407:46",
+      "inkId": "407:47",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-45.png",
+      "pngSHA256": "30580c9f9fa50bb38ecaf21536063c00f05e276a99b92ae84b699b695aec8afd"
+    },
+    {
+      "cellId": "407:48",
+      "wrapperId": "407:49",
+      "inkId": "407:50",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-48.png",
+      "pngSHA256": "5a5906840cfee7277eb6649c323901036eadfd4bb486168bc198399f5594d894"
+    },
+    {
+      "cellId": "407:51",
+      "wrapperId": "407:52",
+      "inkId": "407:53",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-51.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:54",
+      "wrapperId": "407:55",
+      "inkId": "407:56",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-54.png",
+      "pngSHA256": "9a37f8627cfbb6ba6af44b6f6a5627130b25f6663f54b4f13d399a1e52faa0d2"
+    },
+    {
+      "cellId": "407:57",
+      "wrapperId": "407:58",
+      "inkId": "407:59",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-57.png",
+      "pngSHA256": "ed9f4c6268d1c44bd48c2f12efd4a5a32b56e94b8c58bb41ecd459d46a94ed98"
+    },
+    {
+      "cellId": "407:61",
+      "wrapperId": "407:62",
+      "inkId": "407:63",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-61.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "cellId": "407:64",
+      "wrapperId": "407:65",
+      "inkId": "407:66",
+      "colorLabel": "mixed",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-64.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "cellId": "407:67",
+      "wrapperId": "407:68",
+      "inkId": "407:69",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-67.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "cellId": "407:70",
+      "wrapperId": "407:71",
+      "inkId": "407:72",
+      "colorLabel": "mixed",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-70.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:73",
+      "wrapperId": "407:74",
+      "inkId": "407:75",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-73.png",
+      "pngSHA256": "8038cd86e805ee09351f0aee66dfb6fa3c97945ecfbc2b1f8e2ba3a852c12114"
+    },
+    {
+      "cellId": "407:76",
+      "wrapperId": "407:77",
+      "inkId": "407:78",
+      "colorLabel": "mixed",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-76.png",
+      "pngSHA256": "20f286c46b02acf4f144adf0aae3672163279984bb59b040d280ad7c1ae7d1af"
+    },
+    {
+      "cellId": "407:80",
+      "wrapperId": "407:81",
+      "inkId": "407:82",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-80.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:83",
+      "wrapperId": "407:84",
+      "inkId": "407:85",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-83.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:86",
+      "wrapperId": "407:87",
+      "inkId": "407:88",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-86.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:89",
+      "wrapperId": "407:90",
+      "inkId": "407:91",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-89.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:92",
+      "wrapperId": "407:93",
+      "inkId": "407:94",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-92.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:95",
+      "wrapperId": "407:96",
+      "inkId": "407:97",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-95.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:99",
+      "wrapperId": "407:100",
+      "inkId": "407:101",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-99.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:102",
+      "wrapperId": "407:103",
+      "inkId": "407:104",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-102.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:105",
+      "wrapperId": "407:106",
+      "inkId": "407:107",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-105.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:108",
+      "wrapperId": "407:109",
+      "inkId": "407:110",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-108.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:111",
+      "wrapperId": "407:112",
+      "inkId": "407:113",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-111.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:114",
+      "wrapperId": "407:115",
+      "inkId": "407:116",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-114.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:118",
+      "wrapperId": "407:119",
+      "inkId": "407:120",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-118.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "cellId": "407:121",
+      "wrapperId": "407:122",
+      "inkId": "407:123",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-121.png",
+      "pngSHA256": "070910bface8dc1dab1d904806e9d0b0dfe52a5d0d67855588df5122434167a7"
+    },
+    {
+      "cellId": "407:124",
+      "wrapperId": "407:125",
+      "inkId": "407:126",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-124.png",
+      "pngSHA256": "6340c50381f75eb69804ae320248e12aba6f719b0b69e089d9545a0e5a3c0881"
+    },
+    {
+      "cellId": "407:127",
+      "wrapperId": "407:128",
+      "inkId": "407:129",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-127.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:130",
+      "wrapperId": "407:131",
+      "inkId": "407:132",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-130.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:133",
+      "wrapperId": "407:134",
+      "inkId": "407:135",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-133.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:137",
+      "wrapperId": "407:138",
+      "inkId": "407:139",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-137.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:140",
+      "wrapperId": "407:141",
+      "inkId": "407:142",
+      "colorLabel": "red",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-140.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:143",
+      "wrapperId": "407:144",
+      "inkId": "407:145",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-143.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:146",
+      "wrapperId": "407:147",
+      "inkId": "407:148",
+      "colorLabel": "red",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-146.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:149",
+      "wrapperId": "407:150",
+      "inkId": "407:151",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-149.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:152",
+      "wrapperId": "407:153",
+      "inkId": "407:154",
+      "colorLabel": "red",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 1,
+          "g": 0,
+          "b": 0
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-152.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:156",
+      "wrapperId": "407:157",
+      "inkId": "407:158",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-156.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:159",
+      "wrapperId": "407:160",
+      "inkId": "407:161",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-159.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:162",
+      "wrapperId": "407:163",
+      "inkId": "407:164",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-162.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:165",
+      "wrapperId": "407:166",
+      "inkId": "407:167",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-165.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:168",
+      "wrapperId": "407:169",
+      "inkId": "407:170",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-168.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:171",
+      "wrapperId": "407:172",
+      "inkId": "407:173",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-171.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:175",
+      "wrapperId": "407:176",
+      "inkId": "407:177",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-175.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:178",
+      "wrapperId": "407:179",
+      "inkId": "407:180",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-178.png",
+      "pngSHA256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4"
+    },
+    {
+      "cellId": "407:181",
+      "wrapperId": "407:182",
+      "inkId": "407:183",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-181.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:184",
+      "wrapperId": "407:185",
+      "inkId": "407:186",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-184.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:187",
+      "wrapperId": "407:188",
+      "inkId": "407:189",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-187.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:190",
+      "wrapperId": "407:191",
+      "inkId": "407:192",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-190.png",
+      "pngSHA256": "5552e6cbe82146c9a76bc3efbcb514fd7954e5a4a3d15434f7d80985aed9ef42"
+    },
+    {
+      "cellId": "407:194",
+      "wrapperId": "407:195",
+      "inkId": "407:196",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-194.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "cellId": "407:197",
+      "wrapperId": "407:198",
+      "inkId": "407:199",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-197.png",
+      "pngSHA256": "af6e359a8c22d40ddfed62431f5d895f7db3b878000af07751256094b6188309"
+    },
+    {
+      "cellId": "407:200",
+      "wrapperId": "407:201",
+      "inkId": "407:202",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-200.png",
+      "pngSHA256": "d06251e67893fafac37ba0eac7abf226869262f6654ff05ff07df3e30507ec9e"
+    },
+    {
+      "cellId": "407:203",
+      "wrapperId": "407:204",
+      "inkId": "407:205",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-203.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:206",
+      "wrapperId": "407:207",
+      "inkId": "407:208",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-206.png",
+      "pngSHA256": "29f2ebec2bcc261abd7eb6b7c313a4a1c8d6b3ffd39135a4f139baf44b460e8a"
+    },
+    {
+      "cellId": "407:209",
+      "wrapperId": "407:210",
+      "inkId": "407:211",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 0.5,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-209.png",
+      "pngSHA256": "604ace15b48a38704a7f10cd16ea5da9d1685a87293ec965f5bd74578827af56"
+    },
+    {
+      "cellId": "407:213",
+      "wrapperId": "407:214",
+      "inkId": "407:215",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-213.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "cellId": "407:216",
+      "wrapperId": "407:217",
+      "inkId": "407:218",
+      "colorLabel": "gray",
+      "backdrop": "transparent",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-216.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "cellId": "407:219",
+      "wrapperId": "407:220",
+      "inkId": "407:221",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-219.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "cellId": "407:222",
+      "wrapperId": "407:223",
+      "inkId": "407:224",
+      "colorLabel": "gray",
+      "backdrop": "black",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-222.png",
+      "pngSHA256": "2ac2d37c83b0ff45bb84b9c4b87658cd55287a909d07820b1da580d5e08da74f"
+    },
+    {
+      "cellId": "407:225",
+      "wrapperId": "407:226",
+      "inkId": "407:227",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "NORMAL"
+      },
+      "png": "407-225.png",
+      "pngSHA256": "7a1cf35d6982e245cb1135ddda0c1b00fe25f03a2b07a2e0e495f75b9321fdf3"
+    },
+    {
+      "cellId": "407:228",
+      "wrapperId": "407:229",
+      "inkId": "407:230",
+      "colorLabel": "gray",
+      "backdrop": "red",
+      "composition": {
+        "color": {
+          "r": 0.5,
+          "g": 0.5,
+          "b": 0.5
+        },
+        "opacity": 1,
+        "blendMode": "MULTIPLY"
+      },
+      "png": "407-228.png",
+      "pngSHA256": "6340c50381f75eb69804ae320248e12aba6f719b0b69e089d9545a0e5a3c0881"
+    }
+  ]
+}

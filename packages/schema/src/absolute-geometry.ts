@@ -51,7 +51,7 @@ export function normalizeAbsoluteGeometry({box,parent,border={left:0,right:0,top
 
 /** Native coordinates use the parent's border box. Re-evaluate after auto
  * layout settles; assigning constraints alone does not resize that child. */
-export function resolveNativeAbsoluteGeometry(input: AbsoluteGeometryInput, parent: {width:number;height:number}) {
+export function resolveNativeAbsoluteGeometry(input: AbsoluteGeometryInput, parent: {width:number;height:number}, rotation = 0) {
   if(input.synthetic)throw Error('absolute-placement-synthetic-observation');
   if(input.boundSize?.width || input.boundSize?.height)throw Error('absolute-placement-bound-size-needs-owner');
   if(!Number.isFinite(input.parent.width) || !Number.isFinite(input.parent.height) || input.parent.width<=0 || input.parent.height<=0)throw Error('absolute-placement-parent-unqualified');
@@ -69,6 +69,10 @@ export function resolveNativeAbsoluteGeometry(input: AbsoluteGeometryInput, pare
     v=helpers.axis(b.y,b.height,b.bottom,input.parent.height,parent.height,b.constraints.vertical);
   if (![h.start,h.extent,v.start,v.extent].every(Number.isFinite) || h.extent<0 || v.extent<0)
     throw Error('absolute-placement-native-extent-unqualified');
-  return{x:h.start,y:v.start,width:h.extent,height:v.extent,
+  if (!Number.isFinite(rotation)) throw Error('absolute-placement-rotation-unqualified');
+  // CSS rotates around the box center. Figma stores the rotated local origin.
+  const angle=rotation*Math.PI/180,cos=Math.cos(angle),sin=Math.sin(angle);
+  return{x:h.start+(1-cos)*h.extent/2+sin*v.extent/2,
+    y:v.start+(1-cos)*v.extent/2-sin*h.extent/2,width:h.extent,height:v.extent,
     constraints:{horizontal:helpers.nativeMode(b.constraints.horizontal),vertical:helpers.nativeMode(b.constraints.vertical)}};
 }

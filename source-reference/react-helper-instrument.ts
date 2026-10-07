@@ -26,7 +26,11 @@ export type ReactHelperInstrumentationPlan = {
 export interface ReactJsxHelperInstrumentationPlan {
   kind: "jsx-component";
   models: readonly Extract<JsxModelResult,{status:"modeled"}>[];
-  component: HelperSourcePoint;
+  component?: HelperSourcePoint;
+  boundaryOnly?:true;
+  bodyModels?:readonly Extract<import("./react-target-effects.js").ReactContextConsumerEffects,{status:"modeled"}>[];
+  contextExportReads?:readonly import("./react-context-export-reads.js").ContextExportRead[];
+  contextImportFunctions?:readonly import("./react-context-import-functions.js").ContextImportFunctionRequest[];
   targets: readonly import("./react-runtime-export.js").ReactRuntimeExportDefinition[];
   initializers?: readonly import("./react-target-initializer.js").ReactTargetInitializer[];
   targetEffects?: readonly import("./react-target-effects.js").ReactTargetEffects[];
@@ -59,6 +63,9 @@ export function instrumentReactHelperSource(
   plan: ReactEffectInstrumentationPlan,
 ): string {
   const sha256 = createHash("sha256").update(text).digest("hex");
+  const bodyModels=plan.kind==='jsx-component'?plan.bodyModels??[]:[];
+  const effectModels=[...plan.models,...bodyModels];
+  const initializationWrites=new Map(bodyModels.flatMap(m=>m.writes.filter(w=>w.phase==='module-initialization'&&w.source).map(w=>[helperPointKey(w.source!),w] as const)));
   const helper = plan.kind === "jsx-component" ? undefined : plan;
   const initializers=plan.kind==='jsx-component'?plan.initializers??[]:[];
   const projection=targetProjectionParts(plan.kind==='jsx-component'?plan.targetEffects??[]:[]);
@@ -80,6 +87,7 @@ export function instrumentReactHelperSource(
   const contextConsumers=new Map((plan.kind==='jsx-component'?plan.contextConsumerCalls??[]:[]).map(p=>[helperPointKey(p.call),p]));
   const contextBindingReads=new Map((plan.kind==='jsx-component'?plan.contextBindings?.reads??[]:[]).map(p=>[helperPointKey(p.read),p]));
   const contextBindingFunctions=new Map((plan.kind==='jsx-component'?plan.contextBindings?.functions??[]:[]).map(p=>[helperPointKey(p.source),p]));
+  const contextExportReads=new Map((plan.kind==='jsx-component'?plan.contextExportReads??[]:[]).map(p=>[helperPointKey(p.read),p]));
   const contextTargetReads=new Map((plan.kind==='jsx-component'?plan.contextTargets?.reads??[]:[]).map(p=>[helperPointKey(p.read),p]));
   const contextObjects=new Set((plan.kind==='jsx-component'?plan.contextTargets?.objects??[]:[]).map(helperPointKey));
   const contextFactories=new Map((plan.kind==='jsx-component'?plan.contextFactories??[]:[]).map(p=>[helperPointKey(p.call),p]));
@@ -113,6 +121,7 @@ export function instrumentReactHelperSource(
     ...[...callbackSourceCalls.values()].flatMap(p=>[p.call,p.callee]),
     ...[...callbackSourceLiterals.values()].map(p=>p.source),
     ...(plan.kind==='jsx-component'?plan.contextTargets?.objects??[]:[]),
+    ...[...contextExportReads.values()].flatMap(p=>[p.read,p.consumer]),
     ...[...contextTargetReads.values()].flatMap(r=>[r.read,r.object,r.consumer]),
     ...[...contextHelperReads.values()].map(r=>r.read),
     ...[...contextBindingReads.values()].flatMap(p=>[p.read,p.binding,p.consumer]),
@@ -129,7 +138,7 @@ export function instrumentReactHelperSource(
     ...(plan.component ? [plan.component] : []),
     ...(plan.kind === "jsx-component" ? plan.models.flatMap(m=>m.jsxTargets.flatMap(t=>[t.site,t.read])) : []),
     ...initializers.flatMap(p=>[p.call,p.render,...(p.naming?[p.naming.call,p.naming.helper,p.naming.nativeAlias]:[])]),
-    ...plan.models.flatMap((m) => [
+    ...effectModels.flatMap((m) => [
       ...m.definitions,
       ...m.calls.flatMap((c) => (c.site ? [c.site] : [])),
       ...m.runtimeBindings.bindings.map((b) => b.binding),
@@ -160,15 +169,15 @@ export function instrumentReactHelperSource(
   });
   const key = (n: ts.Node) => helperPointKey(point(n));
   const definitions = new Set(
-    plan.models.flatMap((m) => m.definitions.map(helperPointKey)),
+    effectModels.flatMap((m) => m.definitions.map(helperPointKey)),
   );
   const calls = new Set(
-    plan.models.flatMap((m) =>
+    effectModels.flatMap((m) =>
       m.calls.flatMap((c) => (c.site ? [helperPointKey(c.site)] : [])),
     ),
   );
   const bindings = new Map(
-    plan.models.flatMap((m) =>
+    effectModels.flatMap((m) =>
       m.runtimeBindings.bindings.map(
         (b) => [helperPointKey(b.binding), b] as const,
       ),
@@ -190,7 +199,7 @@ export function instrumentReactHelperSource(
       args,
     );
   const literal = (value: string) => f.createStringLiteral(value);
-  const arrow = (body: ts.Expression) =>
+  const arrow = (body: ts.ConciseBody) =>
     f.createArrowFunction(
       undefined,
       undefined,
@@ -217,7 +226,7 @@ export function instrumentReactHelperSource(
     if(factoryFunction&&ts.isFunctionDeclaration(n)){if(!n.name||n.name.text!==factoryFunction.name||!ts.isSourceFile(n.parent))throw Error('factory-declaration-changed');prepend(n.parent,api('factoryRegister',[literal(k),f.createIdentifier(n.name.text)]));}
     const contextBindingFunction=contextBindingFunctions.get(k);
     if(contextBindingFunction){
-      if(!ts.isFunctionDeclaration(n)||!n.name||n.name.text!==contextBindingFunction.name||!ts.isSourceFile(n.parent))throw Error('context-binding-function-changed');
+      if(!ts.isFunctionDeclaration(n)||!n.name||n.name.text!==contextBindingFunction.name||!(ts.isSourceFile(n.parent)&&!contextBindingFunction.scope||ts.isBlock(n.parent)&&contextBindingFunction.scope&&helperPointKey(contextBindingFunction.scope)===key(n.parent)))throw Error('context-binding-function-changed');
       prepend(n.parent,api('contextBindingFunction',[literal(k),f.createIdentifier(n.name.text)]));
     }
     const callbackSourceFunction=callbackSourceFunctions.get(k);
@@ -278,6 +287,9 @@ export function instrumentReactHelperSource(
       if (ts.isFunctionDeclaration(n)) scope = n.parent;
       else if (ts.isImportClause(n) && ts.isImportDeclaration(n.parent))
         scope = n.parent.parent;
+      else if (ts.isImportSpecifier(n) && ts.isNamedImports(n.parent) &&
+               ts.isImportClause(n.parent.parent) && ts.isImportDeclaration(n.parent.parent.parent))
+        scope = n.parent.parent.parent.parent;
       else if (
         ts.isVariableDeclaration(n) &&
         ts.isVariableDeclarationList(n.parent) &&
@@ -320,6 +332,14 @@ export function instrumentReactHelperSource(
           return f.createPropertyAssignment(n.name,api(contextHelperReads.has(key(n.name))?'contextHelperRead':'contextBindingRead',[literal(key(n.name)),n.name]));
         }
         let updated = ts.visitEachChild(n, visit, context);
+        if(ts.isBinaryExpression(n)&&ts.isPropertyAccessExpression(n.left)&&initializationWrites.has(key(n.left))){
+          const write=initializationWrites.get(key(n.left))!;
+          if(n.operatorToken.kind!==ts.SyntaxKind.EqualsToken||write.operation!=='set'||write.key!==n.left.name.text||!ts.isBinaryExpression(updated)||!ts.isPropertyAccessExpression(updated.left))throw Error('initialization-write-shape-changed');
+          const owner=f.createUniqueName('_dscInitializationTarget');
+          const invoke=f.createArrowFunction(undefined,undefined,[f.createParameterDeclaration(undefined,undefined,owner)],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),f.createAssignment(f.createPropertyAccessExpression(owner,updated.left.name),updated.right));
+          return api('contextInitializationWrite',[literal(key(n.left)),updated.left.expression,literal(write.key),invoke]);
+        }
+
         if(contextBindingReads.has(k)||contextHelperReads.has(k)){
           if(!ts.isIdentifier(n)&&!ts.isTypeOfExpression(n))throw Error('context-binding-read-changed');
           return api(contextHelperReads.has(k)?'contextHelperRead':'contextBindingRead',[literal(k),updated as ts.Expression]);
@@ -457,7 +477,7 @@ export function instrumentReactHelperSource(
         if(contextFactory){
           if(!ts.isCallExpression(updated)||updated.questionDotToken||updated.arguments.length!==contextFactory.arguments.length||updated.arguments.some(ts.isSpreadElement)||calls.has(k))throw Error('context-factory-call-unmodeled-or-overlapping');
           let callee:ts.Expression=updated.expression;while(ts.isParenthesizedExpression(callee))callee=callee.expression;
-          if(!ts.isIdentifier(callee))throw Error('context-factory-callee-changed');
+          if(!ts.isIdentifier(callee)&&!(contextFactory.factory==='createElement'&&ts.isPropertyAccessExpression(callee)&&!callee.questionDotToken&&ts.isIdentifier(callee.expression)&&callee.name.text==='createElement'))throw Error('context-factory-callee-changed');
           // Capture the original callee before evaluating any argument. The
           // compiler-owned arrow retains lexical this/arguments and executes
           // each original expression once, including nested JSX calls.
@@ -483,6 +503,7 @@ export function instrumentReactHelperSource(
           if(!ts.isObjectLiteralExpression(updated))throw Error('context-target-object-changed');
           return api('contextObject',[literal(k),updated]);
         }
+        const exported=contextExportReads.get(k);if(exported){if(!ts.isIdentifier(updated))throw Error('context-export-read-nonlexical');return api('contextExportRead',[literal(k),arrow(updated)]);}
         const targetRead=contextTargetReads.get(k);
         if(targetRead){
           if(!(ts.isPropertyAccessExpression(updated)||ts.isElementAccessExpression(updated)))throw Error('context-target-read-changed');
@@ -513,6 +534,11 @@ export function instrumentReactHelperSource(
           // its original argument position, before props and child evaluation.
           const marker=api('targetJsx',[literal(helperPointKey(target.read)),updated as ts.Expression]);
           return ts.isJsxElement(n.parent)||ts.isJsxFragment(n.parent)?f.createJsxExpression(undefined,marker):marker;
+        }
+        if(bodyModels.some(m=>helperPointKey(m.component)===k)){
+          if(!(ts.isArrowFunction(updated)||ts.isFunctionExpression(updated))||!updated.body)throw Error('context-body-function-changed');
+          const body=updated.body;const call=api('contextBody',[literal(k),arrow(body)]);
+          updated=ts.isArrowFunction(updated)?f.updateArrowFunction(updated,updated.modifiers,updated.typeParameters,updated.parameters,updated.type,updated.equalsGreaterThanToken,call):f.updateFunctionExpression(updated,updated.modifiers,updated.asteriskToken,updated.name,updated.typeParameters,updated.parameters,updated.type,f.createBlock([f.createReturnStatement(call)],true));
         }
         if (plan.component && k === helperPointKey(plan.component)) {
           if (
@@ -596,10 +622,11 @@ export function instrumentReactHelperSource(
           if(consumerCall){
             let original:ts.Expression=n.expression;while(ts.isParenthesizedExpression(original))original=original.expression;
             const callee=updated.expression;
-            if(!ts.isIdentifier(original)||updated.questionDotToken||updated.arguments.length!==consumerCall.arguments.length||updated.arguments.some(ts.isSpreadElement)||calls.has(k))throw Error('context-consumer-call-unmodeled-or-overlapping');
+            if(!ts.isIdentifier(original)||updated.questionDotToken||updated.arguments.length!==consumerCall.arguments.length||updated.arguments.some(ts.isSpreadElement)||(calls.has(k)&&!bodyModels.some(m=>m.calls.some(c=>c.site&&helperPointKey(c.site)===k))))throw Error('context-consumer-call-unmodeled-or-overlapping');
             const captured=f.createIdentifier('__DSC_CONTEXT_CALLEE');
             const invoke=f.createArrowFunction(undefined,undefined,[f.createParameterDeclaration(undefined,undefined,captured)],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(captured,updated.typeArguments,updated.arguments.map((a,i)=>api('contextConsumerArgument',[literal(k),f.createNumericLiteral(i),a]))));
+            if(calls.has(k)){const originalInvoke=invoke;const inner=f.createArrowFunction(undefined,undefined,[f.createParameterDeclaration(undefined,undefined,captured)],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),api('sourceCall',[literal(k),captured,originalInvoke]));return api('contextConsumerCall',[literal(k),callee,inner]);}
             return api('contextConsumerCall',[literal(k),callee,invoke]);
           }
           const contextCall=contextCalls.get(k);

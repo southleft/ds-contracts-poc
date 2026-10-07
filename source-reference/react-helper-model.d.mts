@@ -3,6 +3,7 @@ import type ts from "typescript";
 export type HelperPrimitive = string | number | boolean | null | undefined;
 export type HelperValueShape =
   | { kind: "opaque" }
+  | { kind: "metadata-function"; source: HelperSourcePoint }
   | { kind: "literal"; type: string; value?: HelperPrimitive }
   | { kind: "record"; fields: Array<[string, HelperValueShape]> }
   | { kind: "array"; items: HelperValueShape[] };
@@ -28,6 +29,8 @@ export interface HelperRuntimeBindings {
     declarationKind: string;
     name: string;
     reads: HelperSourcePoint[];
+    /** Dynamic source-model occurrences; unique read sites remain in reads. */
+    readOccurrences?: Array<{site:HelperSourcePoint;phase:"render"|"module-initialization"}>;
     value: HelperRuntimeValue;
   }>;
   nodes: Array<{
@@ -51,7 +54,10 @@ export type HelperModelResult =
         phase?: "module-initialization";
       }>;
       writes: Array<{
+        phase?:"module-initialization"|"render";
         target: number;
+        targetSource?:HelperSourcePoint;
+        valueSource?:HelperSourcePoint;
         origin: string;
         key: string;
         operation: "delete" | "set";
@@ -73,6 +79,8 @@ export function modelReactHelperCall(options: {
   source(node: ts.Node): HelperSourcePoint;
   runtimeFiles?: readonly string[];
   resolution?: readonly HelperRuntimeImport[];
+  resolveRuntimeExport?(file: string, exportName: string): ts.Declaration | undefined;
+  createElementSites?: readonly HelperSourcePoint[];
 }): HelperModelResult;
 
 export type ComponentValueShape =
@@ -182,7 +190,7 @@ export type TargetModelResult =
   | Extract<JsxModelResult,{status:"refused"}>
   | (Omit<Extract<JsxModelResult,{status:"modeled"}>,"input"|"output"> & {
       input:TargetValueShape;output:Extract<TargetValueShape,{kind:"jsx"}>;
-      targetFactories:Array<{source:HelperSourcePoint;factory:"jsx"|"jsxs"}>;
+      targetFactories:Array<{source:HelperSourcePoint;factory:"jsx"|"jsxs"|"createElement"}>;
       deferred?:TargetCallbackProjection;
     });
 export type TargetCallbackValueShape =
@@ -199,7 +207,7 @@ export interface TargetCallbackProjection {
   writes:Extract<HelperModelResult,{status:"modeled"}>["writes"];
   decisions:Extract<ComponentModelResult,{status:"modeled"}>["decisions"];
   jsxTargets:Extract<JsxModelResult,{status:"modeled"}>["jsxTargets"];
-  targetFactories:Array<{source:HelperSourcePoint;factory:"jsx"|"jsxs"}>;
+  targetFactories:Array<{source:HelperSourcePoint;factory:"jsx"|"jsxs"|"createElement"}>;
   intrinsics:string[];definitions:HelperSourcePoint[];runtimeBindings:HelperRuntimeBindings;
 }
 /** Source-only dependency projection. Deferred callback bodies do not gain any
@@ -207,7 +215,7 @@ export interface TargetCallbackProjection {
 export function modelReactTargetRender(options:
   Omit<Parameters<typeof modelReactJsxComponent>[0],"jsxTarget"|"parameter"> & {
     parameter:ts.Identifier|ts.ObjectBindingPattern;
-    factory(node:ts.CallExpression):"jsx"|"jsxs"|undefined;
+    factory(node:ts.CallExpression):"jsx"|"jsxs"|"createElement"|undefined;
     target(node:ts.Expression):Extract<JsxValueShape,{kind:"jsx"}>["tag"]|undefined;
     callback(node:ts.ArrowFunction|ts.FunctionExpression):{
       reads:Array<{name:string;node:ts.Node;declaration?:HelperSourcePoint}>;
@@ -267,7 +275,7 @@ export type ContextConsumerModelResult =
       hookCalls:ContextConsumerHookCall[];
       contextValues:Array<{id:number;fields:Array<[string,ContextConsumerValueShape]>}>;
       targetReads:Array<{site:HelperSourcePoint;read:HelperSourcePoint}>;
-      contextFunctionCalls:Array<{source:HelperSourcePoint;site:HelperSourcePoint;arguments:ContextConsumerValueShape[];output:ContextConsumerValueShape}>;
+      contextFunctionCalls:Array<{phase?:"module-initialization"|"render";source:HelperSourcePoint;site:HelperSourcePoint;arguments:ContextConsumerValueShape[];output:ContextConsumerValueShape}>;
       mutableBindings:Array<{binding:HelperSourcePoint;value:HelperValueShape}>;
     });
 /** Separate source-only API; never accepted by the existing target runtime guard. */

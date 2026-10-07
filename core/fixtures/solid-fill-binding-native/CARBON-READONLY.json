@@ -1,0 +1,104 @@
+{
+  "fileKey": "A451UfD58U7XU21FzaqfHL",
+  "rootId": "2154:8479",
+  "pageId": "31:2385",
+  "rows": [
+    {
+      "nodeId": "2154:8479",
+      "name": "Size=Large, State=Enabled, Alignment=Start, Flush=False, Expanded=False",
+      "type": "COMPONENT",
+      "paint": {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:103532:4034"
+          }
+        }
+      },
+      "variable": {
+        "id": "VariableID:103532:4034",
+        "name": "Transparent",
+        "collectionId": "VariableCollectionId:25984:295101",
+        "resolvedType": "COLOR",
+        "modeId": "25984:0",
+        "modeName": "White Theme",
+        "selectedValue": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 9.999999747378752e-06
+        }
+      },
+      "consumer": {
+        "value": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 9.999999747378752e-06
+        },
+        "resolvedType": "COLOR"
+      },
+      "error": null,
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH"
+    },
+    {
+      "nodeId": "11520:384457",
+      "name": "Chevron--down",
+      "type": "INSTANCE",
+      "paint": {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "boundVariables": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:103532:4034"
+          }
+        }
+      },
+      "variable": {
+        "id": "VariableID:103532:4034",
+        "name": "Transparent",
+        "collectionId": "VariableCollectionId:25984:295101",
+        "resolvedType": "COLOR",
+        "modeId": "25984:0",
+        "modeName": "White Theme",
+        "selectedValue": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 9.999999747378752e-06
+        }
+      },
+      "consumer": {
+        "value": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 9.999999747378752e-06
+        },
+        "resolvedType": "COLOR"
+      },
+      "error": null,
+      "nodeOpacity": 1,
+      "nodeBlend": "PASS_THROUGH"
+    }
+  ],
+  "kitWrites": false
+}

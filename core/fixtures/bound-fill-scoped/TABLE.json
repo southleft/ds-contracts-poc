@@ -1,0 +1,1547 @@
+{
+  "c": {
+    "$schema": "./contract.schema.json",
+    "id": "ds.badge",
+    "name": "Badge",
+    "version": "1.1.0",
+    "status": "draft",
+    "description": "Communicates status or categorization at a glance. Non-interactive.",
+    "archetype": "badge / tag / chip",
+    "semantics": {
+      "element": "div"
+    },
+    "props": [
+      {
+        "name": "paint",
+        "type": {
+          "enum": [
+            "first",
+            "second",
+            "empty"
+          ]
+        },
+        "default": "first",
+        "bindings": {
+          "code": {
+            "prop": "paint"
+          },
+          "figma": {
+            "kind": "VARIANT",
+            "property": "Paint"
+          }
+        }
+      }
+    ],
+    "states": [],
+    "anatomy": {
+      "root": {
+        "layout": {
+          "display": "flex",
+          "direction": "row",
+          "align": "center",
+          "justify": "center"
+        },
+        "literals": {
+          "width": "20px",
+          "height": "20px"
+        },
+        "solidFillCompositionByCombination": {
+          "props": [
+            "paint"
+          ],
+          "rows": [
+            {
+              "values": [
+                "first"
+              ],
+              "paint": {
+                "color": {
+                  "r": 0.12345670163631439,
+                  "g": 0.5,
+                  "b": 1
+                },
+                "opacity": 1,
+                "blendMode": "NORMAL"
+              },
+              "token": "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+              "sourceBinding": {
+                "owner": "root",
+                "nodeName": "Paint",
+                "variantName": "First",
+                "binding": {
+                  "variableId": "semantic",
+                  "paint": {
+                    "color": {
+                      "r": 0.12345670163631439,
+                      "g": 0.5,
+                      "b": 1
+                    },
+                    "opacity": 1,
+                    "blendMode": "NORMAL"
+                  },
+                  "consumer": {
+                    "name": "paint",
+                    "collectionId": "theme",
+                    "modeId": "light",
+                    "modeName": "Light",
+                    "resolvedType": "COLOR",
+                    "value": {
+                      "r": 0.12345670163631439,
+                      "g": 0.5,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "selectedValue": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "primitive"
+                    },
+                    "aliasChain": [
+                      {
+                        "id": "primitive",
+                        "name": "paint",
+                        "collectionId": "palette",
+                        "modeId": "base",
+                        "modeName": "Base",
+                        "resolvedType": "COLOR",
+                        "value": {
+                          "r": 0.12345670163631439,
+                          "g": 0.5,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "selectedValue": {
+                          "r": 0.12345670163631439,
+                          "g": 0.5,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "values": [
+                "second"
+              ],
+              "paint": {
+                "color": {
+                  "r": 0.75,
+                  "g": 0.5,
+                  "b": 1
+                },
+                "opacity": 1,
+                "blendMode": "NORMAL"
+              },
+              "token": "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc",
+              "sourceBinding": {
+                "owner": "root",
+                "nodeName": "Paint",
+                "variantName": "Second",
+                "binding": {
+                  "variableId": "second",
+                  "paint": {
+                    "color": {
+                      "r": 0.75,
+                      "g": 0.5,
+                      "b": 1
+                    },
+                    "opacity": 1,
+                    "blendMode": "NORMAL"
+                  },
+                  "consumer": {
+                    "name": "second",
+                    "collectionId": "theme",
+                    "modeId": "light",
+                    "modeName": "Light",
+                    "resolvedType": "COLOR",
+                    "value": {
+                      "r": 0.75,
+                      "g": 0.5,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "selectedValue": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "second-base"
+                    },
+                    "aliasChain": [
+                      {
+                        "id": "second-base",
+                        "name": "second-base",
+                        "collectionId": "palette",
+                        "modeId": "base",
+                        "modeName": "Base",
+                        "resolvedType": "COLOR",
+                        "value": {
+                          "r": 0.75,
+                          "g": 0.5,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "selectedValue": {
+                          "r": 0.75,
+                          "g": 0.5,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "values": [
+                "empty"
+              ],
+              "paint": {
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "opacity": 0,
+                "blendMode": "NORMAL"
+              },
+              "empty": true
+            }
+          ]
+        }
+      }
+    },
+    "bindings": {
+      "figma": {
+        "anchors": {
+          "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+          "componentSetKey": "89f1fb2d4580116cea4be5d4ca340de216a27819",
+          "nodeId": "4:313"
+        }
+      },
+      "code": {
+        "anchors": {
+          "importPath": "src/components/Badge",
+          "export": "Badge"
+        }
+      }
+    }
+  },
+  "tokens": {
+    "primitives": {
+      "sourcePaint": {
+        "v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16": {
+          "$type": "color",
+          "$value": "rgba(31.48145891726017,127.5,255,1)"
+        },
+        "vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc": {
+          "$type": "color",
+          "$value": "{sourcePaint.v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9}"
+        },
+        "v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9": {
+          "$type": "color",
+          "$value": "rgba(191.25,127.5,255,1)"
+        },
+        "v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d": {
+          "$type": "color",
+          "$value": "{sourcePaint.v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16}"
+        }
+      }
+    },
+    "semantic": {},
+    "light": {},
+    "dark": {},
+    "brands": {
+      "default": {}
+    }
+  },
+  "source": {
+    "kind": "prepared-contract-library",
+    "revision": "sha256:1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+    "artifactId": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+    "inputSha256": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+    "tarballSha256": "846996361cdda3ee457a4c3a0e0bf70bee9fbfb22aed71d010894c425b8f23fb",
+    "tokensSha256": "3cdaa316ac58aec92c98c0b3a2be0fccf8ab9555d4c4a15d91c7bbe007e8a52a"
+  },
+  "operation": {
+    "id": "70000000-0000-4000-8000-000000000885",
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ"
+  },
+  "input": {
+    "operation": {
+      "id": "70000000-0000-4000-8000-000000000885",
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ"
+    },
+    "planRevision": "sha256:ba66e1e28305dc5be87a44e897c28a0ce2c19c23340358d174c9aa0783a43ce2",
+    "component": {
+      "setName": "Badge",
+      "contractId": "source-native:70000000-0000-4000-8000-000000000885:ds.badge",
+      "version": "1.1.0",
+      "anchorKey": null,
+      "description": "Badge \u2014 generated from contract ds.badge v1.1.0",
+      "isSet": true,
+      "boolProps": [],
+      "textProps": [],
+      "fontStyles": [
+        "Medium"
+      ],
+      "variants": [
+        {
+          "name": "Paint=first",
+          "row": 0,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Paint=first",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER"
+            },
+            "solidFillComposition": {
+              "type": "SOLID",
+              "color": {
+                "r": 0.12345670163631439,
+                "g": 0.5,
+                "b": 1
+              },
+              "opacity": 1,
+              "blendMode": "NORMAL"
+            },
+            "solidFillCompositionToken": "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+            "lits": {
+              "width": 20,
+              "height": 20
+            },
+            "nativeContractPart": {
+              "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+              "variant": "Paint=first",
+              "specPath": []
+            }
+          }
+        },
+        {
+          "name": "Paint=second",
+          "row": 1,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Paint=second",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER"
+            },
+            "solidFillComposition": {
+              "type": "SOLID",
+              "color": {
+                "r": 0.75,
+                "g": 0.5,
+                "b": 1
+              },
+              "opacity": 1,
+              "blendMode": "NORMAL"
+            },
+            "solidFillCompositionToken": "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc",
+            "lits": {
+              "width": 20,
+              "height": 20
+            },
+            "nativeContractPart": {
+              "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+              "variant": "Paint=second",
+              "specPath": []
+            }
+          }
+        },
+        {
+          "name": "Paint=empty",
+          "row": 2,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Paint=empty",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER"
+            },
+            "lits": {
+              "width": 20,
+              "height": 20,
+              "fillClear": true
+            },
+            "nativeContractPart": {
+              "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+              "variant": "Paint=empty",
+              "specPath": []
+            }
+          }
+        }
+      ],
+      "propNames": {
+        "Paint": "paint"
+      },
+      "semantics": {
+        "element": "div"
+      },
+      "colW": 380,
+      "nativeContractDraft": {
+        "revision": "sha256:1f3d91cfab8d4c3c09f72eeb22d25d99e9267041755c4c1c1dc09c269a086c80",
+        "acceptedContract": null
+      }
+    },
+    "graphComponents": [
+      {
+        "setName": "Badge",
+        "contractId": "source-native:70000000-0000-4000-8000-000000000885:ds.badge",
+        "version": "1.1.0",
+        "anchorKey": null,
+        "description": "Badge \u2014 generated from contract ds.badge v1.1.0",
+        "isSet": true,
+        "boolProps": [],
+        "textProps": [],
+        "fontStyles": [
+          "Medium"
+        ],
+        "variants": [
+          {
+            "name": "Paint=first",
+            "row": 0,
+            "col": 0,
+            "spec": {
+              "type": "root",
+              "name": "Paint=first",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "solidFillComposition": {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.12345670163631439,
+                  "g": 0.5,
+                  "b": 1
+                },
+                "opacity": 1,
+                "blendMode": "NORMAL"
+              },
+              "solidFillCompositionToken": "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+              "lits": {
+                "width": 20,
+                "height": 20
+              },
+              "nativeContractPart": {
+                "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+                "variant": "Paint=first",
+                "specPath": []
+              }
+            }
+          },
+          {
+            "name": "Paint=second",
+            "row": 1,
+            "col": 0,
+            "spec": {
+              "type": "root",
+              "name": "Paint=second",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "solidFillComposition": {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.75,
+                  "g": 0.5,
+                  "b": 1
+                },
+                "opacity": 1,
+                "blendMode": "NORMAL"
+              },
+              "solidFillCompositionToken": "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc",
+              "lits": {
+                "width": 20,
+                "height": 20
+              },
+              "nativeContractPart": {
+                "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+                "variant": "Paint=second",
+                "specPath": []
+              }
+            }
+          },
+          {
+            "name": "Paint=empty",
+            "row": 2,
+            "col": 0,
+            "spec": {
+              "type": "root",
+              "name": "Paint=empty",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "lits": {
+                "width": 20,
+                "height": 20,
+                "fillClear": true
+              },
+              "nativeContractPart": {
+                "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+                "variant": "Paint=empty",
+                "specPath": []
+              }
+            }
+          }
+        ],
+        "propNames": {
+          "Paint": "paint"
+        },
+        "semantics": {
+          "element": "div"
+        },
+        "colW": 380,
+        "nativeContractDraft": {
+          "revision": "sha256:1f3d91cfab8d4c3c09f72eeb22d25d99e9267041755c4c1c1dc09c269a086c80",
+          "acceptedContract": null
+        }
+      }
+    ],
+    "graphVerification": 2,
+    "projection": {
+      "version": 1,
+      "kind": "prepared-contract-library",
+      "purpose": "source-candidate-inspection",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "contractId": "ds.badge",
+      "contractRevision": "sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c",
+      "tokenRevision": "sha256:14e01fe20b22fe2f1f3f204a249234c40f98b2c5cd64973de602975a6aa9a15a",
+      "source": {
+        "kind": "prepared-contract-library",
+        "revision": "sha256:1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "artifactId": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "inputSha256": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "tarballSha256": "846996361cdda3ee457a4c3a0e0bf70bee9fbfb22aed71d010894c425b8f23fb",
+        "tokensSha256": "3cdaa316ac58aec92c98c0b3a2be0fccf8ab9555d4c4a15d91c7bbe007e8a52a"
+      },
+      "context": {
+        "mode": "light",
+        "brand": "default"
+      }
+    },
+    "tokenInput": {
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "scopeId": "source-70000000-0000-4000-8000-000000000885",
+      "source": {
+        "kind": "prepared-contract-library",
+        "revision": "sha256:1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "artifactId": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "inputSha256": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+        "tarballSha256": "846996361cdda3ee457a4c3a0e0bf70bee9fbfb22aed71d010894c425b8f23fb",
+        "tokensSha256": "3cdaa316ac58aec92c98c0b3a2be0fccf8ab9555d4c4a15d91c7bbe007e8a52a"
+      },
+      "tokenPaths": [
+        "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+        "sourcePaint.v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9",
+        "sourcePaint.v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16",
+        "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc"
+      ],
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "nativeModeName": "Selected",
+          "tokens": {
+            "sourcePaint.v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16": {
+              "$type": "color",
+              "$value": "rgba(31.48145891726017,127.5,255,1)"
+            },
+            "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc": {
+              "$type": "color",
+              "$value": "{sourcePaint.v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9}"
+            },
+            "sourcePaint.v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9": {
+              "$type": "color",
+              "$value": "rgba(191.25,127.5,255,1)"
+            },
+            "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d": {
+              "$type": "color",
+              "$value": "{sourcePaint.v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16}"
+            }
+          },
+          "tokenTreeRevision": "sha256:14e01fe20b22fe2f1f3f204a249234c40f98b2c5cd64973de602975a6aa9a15a"
+        }
+      ],
+      "writeProtocol": "explicit-modes-v1"
+    },
+    "tokenIdentity": {
+      "origin": "created",
+      "preparationRevision": "sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e",
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "collection": {
+        "id": "VariableCollectionId:155:67054",
+        "key": "f1e24c5b7f685db579f5e1f2e9528638c927e998",
+        "name": "DS candidate tokens / source-70000000-0000-4000-8000-000000000885"
+      },
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "modeId": "155:353",
+          "name": "Selected"
+        }
+      ],
+      "variables": [
+        {
+          "tokenPath": "sourcePaint.v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16",
+          "id": "VariableID:155:67055",
+          "key": "85f063344280f07b43cf4782b70e721473edb42c"
+        },
+        {
+          "tokenPath": "sourcePaint.v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9",
+          "id": "VariableID:155:67056",
+          "key": "d469072998136332b4bb342c30c0cd5185c4fa2c"
+        },
+        {
+          "tokenPath": "sourcePaint.v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+          "id": "VariableID:155:67057",
+          "key": "ef39383d563d1f868f0a621db4329be80322a724"
+        },
+        {
+          "tokenPath": "sourcePaint.vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc",
+          "id": "VariableID:155:67058",
+          "key": "687accb642d8c5706d0604cc2d9bdd8a20d078ee"
+        }
+      ]
+    },
+    "creation": {
+      "version": 1,
+      "status": "created-candidate",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "operationId": "70000000-0000-4000-8000-000000000885",
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "allocationAttempted": true,
+      "pageId": "155:67059",
+      "target": {
+        "id": "155:67065",
+        "type": "COMPONENT_SET",
+        "key": "82bb11e0c845ec098d86e1b3bed8aac8e64bb2e1"
+      },
+      "nodes": [
+        {
+          "id": "155:67059",
+          "type": "PAGE"
+        },
+        {
+          "id": "155:67060",
+          "type": "COMPONENT",
+          "key": "35781d058d399261e0689573cad2b3db38c3644b"
+        },
+        {
+          "id": "155:67061",
+          "type": "RECTANGLE"
+        },
+        {
+          "id": "155:67062",
+          "type": "COMPONENT",
+          "key": "667e827507e2b175d966304cca8fcb550e93a120"
+        },
+        {
+          "id": "155:67063",
+          "type": "RECTANGLE"
+        },
+        {
+          "id": "155:67064",
+          "type": "COMPONENT",
+          "key": "0adccd46c823d6b836a571fa3e7751a34d6c726c"
+        },
+        {
+          "id": "155:67065",
+          "type": "COMPONENT_SET",
+          "key": "82bb11e0c845ec098d86e1b3bed8aac8e64bb2e1"
+        }
+      ],
+      "problems": [],
+      "propertyDefinitions": {
+        "Paint": {
+          "type": "VARIANT",
+          "defaultValue": "first",
+          "variantOptions": [
+            "first",
+            "second",
+            "empty"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "id": "155:67060",
+          "key": "35781d058d399261e0689573cad2b3db38c3644b",
+          "name": "Paint=first"
+        },
+        {
+          "id": "155:67062",
+          "key": "667e827507e2b175d966304cca8fcb550e93a120",
+          "name": "Paint=second"
+        },
+        {
+          "id": "155:67064",
+          "key": "0adccd46c823d6b836a571fa3e7751a34d6c726c",
+          "name": "Paint=empty"
+        }
+      ],
+      "graphVerification": 2,
+      "graphTargets": [
+        {
+          "contractId": "source-native:70000000-0000-4000-8000-000000000885:ds.badge",
+          "id": "155:67065",
+          "key": "82bb11e0c845ec098d86e1b3bed8aac8e64bb2e1",
+          "type": "COMPONENT_SET",
+          "variants": [
+            {
+              "id": "155:67060",
+              "key": "35781d058d399261e0689573cad2b3db38c3644b",
+              "name": "Paint=first"
+            },
+            {
+              "id": "155:67062",
+              "key": "667e827507e2b175d966304cca8fcb550e93a120",
+              "name": "Paint=second"
+            },
+            {
+              "id": "155:67064",
+              "key": "0adccd46c823d6b836a571fa3e7751a34d6c726c",
+              "name": "Paint=empty"
+            }
+          ],
+          "propertyDefinitions": {
+            "Paint": {
+              "type": "VARIANT",
+              "defaultValue": "first",
+              "variantOptions": [
+                "first",
+                "second",
+                "empty"
+              ]
+            }
+          }
+        }
+      ],
+      "applied": {
+        "createdNodeIds": [
+          "155:67065"
+        ],
+        "results": [
+          {
+            "name": "Badge",
+            "contractId": "source-native:70000000-0000-4000-8000-000000000885:ds.badge",
+            "nodeId": "155:67065",
+            "key": "82bb11e0c845ec098d86e1b3bed8aac8e64bb2e1",
+            "variants": 3,
+            "properties": [
+              "Paint"
+            ],
+            "nativeGraphIdentity": {
+              "type": "COMPONENT_SET",
+              "variants": [
+                {
+                  "id": "155:67060",
+                  "key": "35781d058d399261e0689573cad2b3db38c3644b",
+                  "name": "Paint=first"
+                },
+                {
+                  "id": "155:67062",
+                  "key": "667e827507e2b175d966304cca8fcb550e93a120",
+                  "name": "Paint=second"
+                },
+                {
+                  "id": "155:67064",
+                  "key": "0adccd46c823d6b836a571fa3e7751a34d6c726c",
+                  "name": "Paint=empty"
+                }
+              ],
+              "propertyDefinitions": {
+                "Paint": {
+                  "type": "VARIANT",
+                  "defaultValue": "first",
+                  "variantOptions": [
+                    "first",
+                    "second",
+                    "empty"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "receipt": {
+    "version": 1,
+    "status": "native-readback-collected",
+    "receiptKind": "independent-native-component-readback",
+    "operationId": "70000000-0000-4000-8000-000000000885",
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+    "planRevision": "sha256:ba66e1e28305dc5be87a44e897c28a0ce2c19c23340358d174c9aa0783a43ce2",
+    "acceptedContract": null,
+    "nativeQualification": "unqualified",
+    "problems": [],
+    "nodes": [
+      {
+        "id": "155:67059",
+        "type": "PAGE",
+        "name": "DS prepared library / 70000000-0000-4000-8000-000000000885",
+        "parentId": "0:0",
+        "childIds": [
+          "155:67065"
+        ],
+        "values": {
+          "explicitVariableModes": {}
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67059",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        }
+      },
+      {
+        "id": "155:67065",
+        "type": "COMPONENT_SET",
+        "name": "Badge",
+        "parentId": "155:67059",
+        "childIds": [
+          "155:67060",
+          "155:67062",
+          "155:67064"
+        ],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "itemReverseZIndex": false,
+          "isMask": false,
+          "blendMode": "PASS_THROUGH",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 220,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "layoutMode": "NONE",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": true,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 5,
+          "topRightRadius": 5,
+          "bottomRightRadius": 5,
+          "bottomLeftRadius": 5,
+          "cornerRadius": 5,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "resolvedVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "componentPropertyReferences": null
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67065",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "source-native:70000000-0000-4000-8000-000000000885:ds.badge",
+          "specHash": "887560928",
+          "canvasFingerprint": "v6:3395961035",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "{\"element\":\"div\"}",
+          "propNames": "{\"Paint\":\"paint\"}",
+          "statePreviewAxis": ""
+        },
+        "key": "82bb11e0c845ec098d86e1b3bed8aac8e64bb2e1",
+        "definitions": {
+          "Paint": {
+            "type": "VARIANT",
+            "defaultValue": "first",
+            "variantOptions": [
+              "first",
+              "second",
+              "empty"
+            ]
+          }
+        }
+      },
+      {
+        "id": "155:67060",
+        "type": "COMPONENT",
+        "name": "Paint=first",
+        "parentId": "155:67065",
+        "childIds": [
+          "155:67061"
+        ],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "itemReverseZIndex": false,
+          "isMask": false,
+          "blendMode": "PASS_THROUGH",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 40,
+          "y": 40,
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              40
+            ],
+            [
+              0,
+              1,
+              40
+            ]
+          ],
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "resolvedVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67060",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "v6:1975788571",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"variant\":\"Paint=first\",\"specPath\":[]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        },
+        "key": "35781d058d399261e0689573cad2b3db38c3644b",
+        "variantProperties": {
+          "Paint": "first"
+        }
+      },
+      {
+        "id": "155:67061",
+        "type": "RECTANGLE",
+        "name": "[ds-contracts bound paint]",
+        "parentId": "155:67060",
+        "childIds": [],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "isMask": false,
+          "blendMode": "NORMAL",
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "ABSOLUTE",
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.12345670163631439,
+                "g": 0.5,
+                "b": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:155:67057"
+                }
+              }
+            }
+          ],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:67057"
+              }
+            ]
+          },
+          "explicitVariableModes": {},
+          "resolvedVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67061",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        }
+      },
+      {
+        "id": "155:67062",
+        "type": "COMPONENT",
+        "name": "Paint=second",
+        "parentId": "155:67065",
+        "childIds": [
+          "155:67063"
+        ],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "itemReverseZIndex": false,
+          "isMask": false,
+          "blendMode": "PASS_THROUGH",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 40,
+          "y": 100,
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              40
+            ],
+            [
+              0,
+              1,
+              100
+            ]
+          ],
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "resolvedVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67062",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "v6:695045062",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"variant\":\"Paint=second\",\"specPath\":[]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        },
+        "key": "667e827507e2b175d966304cca8fcb550e93a120",
+        "variantProperties": {
+          "Paint": "second"
+        }
+      },
+      {
+        "id": "155:67063",
+        "type": "RECTANGLE",
+        "name": "[ds-contracts bound paint]",
+        "parentId": "155:67062",
+        "childIds": [],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "isMask": false,
+          "blendMode": "NORMAL",
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "ABSOLUTE",
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.75,
+                "g": 0.5,
+                "b": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:155:67058"
+                }
+              }
+            }
+          ],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:67058"
+              }
+            ]
+          },
+          "explicitVariableModes": {},
+          "resolvedVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67063",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        }
+      },
+      {
+        "id": "155:67064",
+        "type": "COMPONENT",
+        "name": "Paint=empty",
+        "parentId": "155:67065",
+        "childIds": [],
+        "values": {
+          "rotation": 0,
+          "cornerSmoothing": 0,
+          "itemReverseZIndex": false,
+          "isMask": false,
+          "blendMode": "PASS_THROUGH",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "visible": true,
+          "opacity": 1,
+          "x": 40,
+          "y": 160,
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              40
+            ],
+            [
+              0,
+              1,
+              160
+            ]
+          ],
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1,
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:155:67054": "155:353"
+          },
+          "resolvedVariableModes": {},
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"70000000-0000-4000-8000-000000000885\",\"sourceContractId\":\"ds.badge\",\"sourceContractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"tokenPreparationRevision\":\"sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "155:67064",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "v6:2249673908",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:3866b13ee50a99755baf7d4702df6edaa02381b6dbb87febb6d2c9464a22812c\",\"variant\":\"Paint=empty\",\"specPath\":[]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": "",
+          "statePreviewAxis": ""
+        },
+        "key": "0adccd46c823d6b836a571fa3e7751a34d6c726c",
+        "variantProperties": {
+          "Paint": "empty"
+        }
+      }
+    ],
+    "tokens": {
+      "version": 1,
+      "status": "readback-collected",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "preparationRevision": "sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e",
+      "receiptKind": "independent-native-readback",
+      "problems": [],
+      "receipt": {
+        "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+        "collection": {
+          "id": "VariableCollectionId:155:67054",
+          "key": "f1e24c5b7f685db579f5e1f2e9528638c927e998",
+          "name": "DS candidate tokens / source-70000000-0000-4000-8000-000000000885",
+          "remote": false,
+          "ownership": {
+            "scopeId": "source-70000000-0000-4000-8000-000000000885",
+            "preparationRevision": "sha256:774ffd0b852909129eba616f98614ce58054cbb68f47345afb79b67c9eedee5e",
+            "source": {
+              "kind": "prepared-contract-library",
+              "revision": "sha256:1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+              "artifactId": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+              "inputSha256": "1963eb0a15a9ee580da9094a0af8b0cb2a0d64cff89777a46363649db5c4bc0b",
+              "tarballSha256": "846996361cdda3ee457a4c3a0e0bf70bee9fbfb22aed71d010894c425b8f23fb",
+              "tokensSha256": "3cdaa316ac58aec92c98c0b3a2be0fccf8ab9555d4c4a15d91c7bbe007e8a52a"
+            }
+          },
+          "defaultModeId": "155:353",
+          "modes": [
+            {
+              "modeId": "155:353",
+              "name": "Selected"
+            }
+          ]
+        },
+        "variables": [
+          {
+            "id": "VariableID:155:67055",
+            "key": "85f063344280f07b43cf4782b70e721473edb42c",
+            "name": "sourcePaint/v79d9ea757f7e85dfa3824358922275b22e851bd235ffd8ae719d97168d97cc16",
+            "variableCollectionId": "VariableCollectionId:155:67054",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "155:353": {
+                "r": 0.12345670163631439,
+                "g": 0.5,
+                "b": 1,
+                "a": 1
+              }
+            }
+          },
+          {
+            "id": "VariableID:155:67056",
+            "key": "d469072998136332b4bb342c30c0cd5185c4fa2c",
+            "name": "sourcePaint/v5d1e2fe7417ebc9e0035d6a78559d587d6ff2d276a5cf62eb5f913c15bb379a9",
+            "variableCollectionId": "VariableCollectionId:155:67054",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "155:353": {
+                "r": 0.75,
+                "g": 0.5,
+                "b": 1,
+                "a": 1
+              }
+            }
+          },
+          {
+            "id": "VariableID:155:67057",
+            "key": "ef39383d563d1f868f0a621db4329be80322a724",
+            "name": "sourcePaint/v52548ca730af2f3ce5985fc4902ae84b8ab3c556bc456db825cdccb01ebf0f5d",
+            "variableCollectionId": "VariableCollectionId:155:67054",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "155:353": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:67055"
+              }
+            }
+          },
+          {
+            "id": "VariableID:155:67058",
+            "key": "687accb642d8c5706d0604cc2d9bdd8a20d078ee",
+            "name": "sourcePaint/vc4a288a445c851f4eeef272662e36d0d8cbbbbc361128011fca95b78c0ed85cc",
+            "variableCollectionId": "VariableCollectionId:155:67054",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "155:353": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:67056"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "images": []
+  }
+}

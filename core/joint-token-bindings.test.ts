@@ -301,3 +301,16 @@ test('joint paint refuses uncorroborated native consumer modes without flattenin
  const unused=structuredClone(dump);unused._variables['palette/unused']={type:'COLOR',value,modes:{Base:value,Alternate:'#c80ab4'}};
  assert.equal(proposeBatchFromDump(unused,options).proposals.length,1);
 });
+
+
+test('generated native token writer parses functional RGB and RGBA colors before readback',async()=>{
+ const colors=structuredClone(tokens);
+ colors.primitives.palette.p00.$value='rgb(20 30 40)';
+ colors.primitives.palette.p01.$value='rgba(20, 30, 40, 0.5)';
+ const {captureAll}=await nativeFixture(seed(),colors);
+ const dump=await captureAll() as any;
+ assert.equal(dump._variables['palette/p00'].value,'#141e28');
+ assert.equal(dump._variables['palette/p01'].value,'#141e2880');
+ for(const variable of Object.values(dump._variables) as any[])
+  assert.match(variable.value,/^#[a-f0-9]{6}([a-f0-9]{2})?$/i);
+});

@@ -20,6 +20,9 @@ const DEFAULT_OUTPUT = path.join(ROOT, "dist", "release-candidate");
 const PACKAGES = [
   {
     directory: "packages/schema",
+    // Reviewed 2026-10-06: rigid-instance allocation, state presence and solid
+    // fill schemas are imported/re-exported by contract-schema and index.
+    // Their pure runtime modules and declarations are required by consumers.
     // Reviewed 2026-10-01: schema validation and both emitters import the pure
     // absolute-geometry domain. Its runtime and declaration are public dependencies.
     // Reviewed 2026-10-01: contract-schema imports the pure native LINE domain;
@@ -49,6 +52,16 @@ const PACKAGES = [
       "dist/filled-path.js",
       "dist/index.d.ts",
       "dist/index.js",
+      "dist/instance-affine.d.ts",
+      "dist/instance-affine.js",
+      "dist/solid-fill-binding.d.ts",
+      "dist/solid-fill-binding.js",
+      "dist/solid-fill-composition.d.ts",
+      "dist/solid-fill-composition.js",
+      "dist/solid-fill-paint.d.ts",
+      "dist/solid-fill-paint.js",
+      "dist/state-presence.d.ts",
+      "dist/state-presence.js",
       "dist/migrate.d.ts",
       "dist/migrate.js",
       "dist/native-line.d.ts",
@@ -62,6 +75,10 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-10-06: validation/CSS depend on child paint order, text
+    // state targeting, instance sizing/strokes, composed shadows and fill bindings. The
+    // affine token referee is shared with both emitters. These pure helpers
+    // ship with matching declarations; the exact file-set guard stays intact.
     // Reviewed 2026-09-26: validation and CSS emission import the pure
     // component-placement domain/referee (no I/O); both files must ship.
     // Reviewed 2026-09-22: shared contract validation imports selection.js;
@@ -83,6 +100,22 @@ const PACKAGES = [
     // joined the package — the analysis half of emit-react).
     expected: [
       "README.md",
+      "dist/composed-fill-shadow.d.ts",
+      "dist/composed-fill-shadow.js",
+      "dist/child-paint-order.d.ts",
+      "dist/child-paint-order.js",
+      "dist/instance-affine-tokens.d.ts",
+      "dist/instance-affine-tokens.js",
+      "dist/instance-fill-composition.d.ts",
+      "dist/instance-fill-composition.js",
+      "dist/instance-inside-stroke.d.ts",
+      "dist/instance-inside-stroke.js",
+      "dist/instance-intrinsic-size.d.ts",
+      "dist/instance-intrinsic-size.js",
+      "dist/solid-fill-binding-tokens.d.ts",
+      "dist/solid-fill-binding-tokens.js",
+      "dist/text-state-target.d.ts",
+      "dist/text-state-target.js",
       "dist/anatomy.d.ts",
       "dist/anatomy.js",
       "dist/canvas-code-plan.d.ts",

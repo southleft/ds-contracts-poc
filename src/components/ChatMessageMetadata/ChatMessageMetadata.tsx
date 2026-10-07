@@ -51,7 +51,7 @@ export const ChatMessageMetadata = forwardRef<HTMLDivElement, ChatMessageMetadat
           dangerouslySetInnerHTML={{ __html: ICONS[status] }}
         />
         <span className={styles.timestampText}>{timestamp}</span>
-        {footer != null ? <div className={styles.footer}>{footer}</div> : null}
+        <>{footer != null ? <div className={styles.footer}>{footer}</div> : null}</>
       </div>
     );
   },

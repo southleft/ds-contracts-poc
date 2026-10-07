@@ -29,7 +29,7 @@ export function readReactCompiledContent(reference:Pick<ReactReference,'sourceRo
     const text=readFileSync(file,'utf8'),sha=createHash('sha256').update(text).digest('hex');
     if(text.length>5_000_000)throw Error('compiled-content-source-limit');
     if(sha!==reference.files[file]||sha!==site.sourceSha256)throw Error('compiled-content-source-changed');
-    const sites=readReactElementCreationSites(text,file,path.relative(root,file).split(path.sep).join('/'));
+    const sites=readReactElementCreationSites(text,file,path.relative(root,file).split(path.sep).join('/'),true);
     const match=sites.find(s=>s.span.start===site.span.start&&s.span.end===site.span.end);
     if(!match||match.factory!==site.factory||JSON.stringify(match.functionSpan)!==JSON.stringify(site.functionSpan)||match.module!==site.module)
       throw Error('compiled-content-site-unproved');
@@ -51,7 +51,7 @@ export function readReactCompiledContent(reference:Pick<ReactReference,'sourceRo
     let returned:ts.Node=call;while(ts.isParenthesizedExpression(returned.parent))returned=returned.parent;
     if(!(fn.body===returned||(ts.isReturnStatement(returned.parent)&&returned.parent.expression===returned)))
       throw Error('compiled-content-call-not-returned');
-    const children=readReactChildren(fn,call,program.getTypeChecker(),true,true);
+    const children=readReactChildren(fn,call,program.getTypeChecker(),true,site.factory==='createElement'?'createElement':true);
     if(createHash('sha256').update(readFileSync(file)).digest('hex')!==sha)throw Error('compiled-content-source-changed');
     return {...common,status:'read',children,input:{start:fn.parameters[0].getStart(sf),end:fn.parameters[0].end}};
   }catch(error){return {...common,status:'refused',reason:error instanceof Error?error.message:'compiled-content-source-unavailable'};}

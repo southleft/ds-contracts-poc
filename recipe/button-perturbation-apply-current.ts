@@ -30,7 +30,7 @@ import { canonicalJson } from "./normalize.js";
 import { portableGzipSync } from "./portable-gzip.js";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const CURRENT_PERTURBATION_ROOT = "recipe/evidence/button-perturbation-apply-current";
+export const CURRENT_PERTURBATION_ROOT = "recipe/evidence/button-perturbation-apply-current-global-error-2026-10-06";
 const sha = (bytes: string | Uint8Array): string => createHash("sha256").update(bytes).digest("hex");
 const json = (file: string, value: unknown): void => {
   writeFileSync(file, `${canonicalJson(value)}\n`);

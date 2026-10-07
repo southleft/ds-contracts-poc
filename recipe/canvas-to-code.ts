@@ -54,6 +54,7 @@ import {
   proposeBatchFromDump,
   type FigmaProposalResult,
 } from "../core/propose-figma.js";
+import { readStateAxis } from "../core/interaction-state-axis.js";
 import { tokenCorpusFromJson } from "../core/token-corpus.js";
 import { launchBrowser } from "../extract/figma/visual-parity/render.js";
 import { generateComponents } from "../scripts/generate-components.js";
@@ -242,6 +243,8 @@ export interface MountCell {
   ownershipKey: string;
   props: Record<string, string>;
   variantProperties: Record<string, string>;
+  statePreview?: string;
+  interactionState?: string;
 }
 
 interface RenderedChild {
@@ -267,6 +270,7 @@ export function mountCells(
   const props = (contract as {
     props?: Array<{
       name: string;
+      type?: unknown;
       bindings?: { figma?: { kind?: string; property?: string; values?: Record<string, string> } };
     }>;
   }).props ?? [];
@@ -287,13 +291,38 @@ export function mountCells(
       ),
     });
   }
-  return doc.hierarchy.children
-    .filter((child) => child.type === "COMPONENT")
+  const components = doc.hierarchy.children.filter(child => child.type === "COMPONENT");
+  const unmapped = new Map<string, Set<string>>();
+  for (const child of components) for (const [axis, value] of Object.entries(child.variantProperties ?? {})) {
+    if (!byAxis.has(axis)) { if (!unmapped.has(axis)) unmapped.set(axis, new Set()); unmapped.get(axis)!.add(value); }
+  }
+  const missing = [...unmapped];
+  const reading = missing.length === 1 ? readStateAxis(missing[0][0], [...missing[0][1]]) : undefined;
+  const stateAxis = reading?.kind === 'projected' ? reading.projection : undefined;
+  return components
     .map((child) => {
       const tuple = child.variantProperties ?? {};
       const cellProps: Record<string, string> = {};
+      let statePreview: string | undefined;
+      let interactionState: string | undefined;
       for (const [axis, value] of Object.entries(tuple)) {
         const mapping = byAxis.get(axis);
+        if (mapping === undefined && stateAxis?.property === axis) {
+          const projected = stateAxis.values.find(row => row.value === value);
+          if (!projected)
+            throw new Error(`canvas-to-code: state ${axis}=${value} is not carried by the proposal`);
+          const disabled = props.find(prop => prop.name === 'disabled' && prop.type === 'boolean');
+          if (disabled) cellProps[disabled.name] = String(projected.state === 'disabled');
+          if (projected.state !== 'default') {
+            const bindings = contract.bindings as {code?: {statePreviews?: boolean}};
+            if (bindings?.code?.statePreviews && (contract.states as string[]).includes(projected.state))
+              statePreview = projected.state;
+            else if (projected.state === 'disabled' && !disabled)
+              throw new Error(`canvas-to-code: state ${axis}=${value} has no disabled input`);
+            else if (projected.state !== 'disabled') interactionState = projected.state;
+          }
+          continue;
+        }
         if (mapping === undefined)
           throw new Error(
             `canvas-to-code: variant axis ${axis} has no contract prop — cannot mount ${child.name}`,
@@ -310,6 +339,8 @@ export function mountCells(
         ownershipKey: child.ownershipKey,
         props: cellProps,
         variantProperties: tuple,
+        ...(statePreview ? {statePreview} : {}),
+        ...(interactionState ? {interactionState} : {}),
       };
     });
 }
@@ -361,7 +392,14 @@ export async function renderCells(
   try {
     writeFileSync(
       path.join(harness, "cells.json"),
-      JSON.stringify(cells.map(({ key, props }) => ({ key, props }))),
+      JSON.stringify(cells.map(({ key, props, statePreview }) => ({
+        key,
+        props: {...Object.fromEntries(Object.entries(props).map(([name, value]) => {
+          const prop = (build.contract.props as Array<{name: string; type?: unknown; bindings?: {code?: {prop?: string; values?: Record<string, unknown>}}}>).find(p => p.name === name);
+          const code = prop?.bindings?.code;
+          return [code?.prop ?? name, code?.values && Object.hasOwn(code.values, value) ? code.values[value] : prop?.type === "boolean" ? value === "true" : value];
+        })), ...(statePreview ? {statePreview} : {})},
+      }))),
     );
     const genIndex = path
       .join(path.resolve(REPO, build.generatedDir), "index")
@@ -449,6 +487,19 @@ createRoot(document.getElementById('root')).render(<App />);
             pageLog.length > 0 ? `the page reported:\n${pageLog.slice(0, 8).join("\n")}` : "the page reported no console error"
           }\n(${error instanceof Error ? error.message.split("\n")[0] : String(error)})`,
         );
+      }
+      // Force real pseudo-classes only where the generated preview API has no
+      // override. Absent styling stays observable as a delta against the source.
+      if (cells.some(cell => cell.interactionState)) {
+        const cdp = await page.context().newCDPSession(page);
+        await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+        const {root} = await cdp.send('DOM.getDocument');
+        const {nodeIds} = await cdp.send('DOM.querySelectorAll', {nodeId:root.nodeId,selector:'[data-cell] > :first-child'});
+        if (nodeIds.length !== cells.length) throw new Error('canvas-to-code: interaction state root inventory mismatch');
+        for (let i=0;i<cells.length;i++) if (cells[i].interactionState) {
+          const state=cells[i].interactionState!;
+          await cdp.send('CSS.forcePseudoState',{nodeId:nodeIds[i],forcedPseudoClasses:state==='focus-visible'?['focus','focus-visible']:[state]});
+        }
       }
       const rendered = (await page.evaluate(
         `(() => {
@@ -660,6 +711,23 @@ export function diffRenderedAgainstFacts(
     }
   };
 
+  // This positional harness can prove hidden direct instances absent only
+  // for its supported flat anatomy. Preserve their facts as receipts, and
+  // reject extra or missing rendered children rather than inventing boxes.
+  const hiddenInstances = new Set<string>();
+  for (const cell of cells) {
+    const component = sceneByKey.get(cell.ownershipKey);
+    if (!component?.children.some(child => child.type === "INSTANCE" && child.visible === false)) continue;
+    if (component.children.some(child => !["INSTANCE", "TEXT"].includes(child.type)))
+      throw Error(`canvas-to-code: hidden instance absence requires flat instance/text anatomy: ${cell.key}`);
+    const expected = component.children.filter(child => child.type === "INSTANCE" && child.visible !== false).length;
+    const actual = renderedByKey.get(cell.key)?.children.length;
+    if (actual !== expected)
+      throw Error(`canvas-to-code: visible instance count mismatch: ${cell.key}: expected ${expected}, got ${actual}`);
+    for (const child of component.children)
+      if (child.type === "INSTANCE" && child.visible === false) hiddenInstances.add(child.ownershipKey);
+  }
+
   /** Rendered child element for an INSTANCE node: canvas children of a
    *  component are [instances…, label, instances…]; rendered children
    *  (excluding the label span) hold instances in the SAME drawn order. */
@@ -673,7 +741,7 @@ export function diffRenderedAgainstFacts(
       return undefined;
     const instanceKeys = component.children
       .map((child, i) => ({ child, key: `${componentKey}/children/${i}` }))
-      .filter(({ child }) => child.type === "INSTANCE")
+      .filter(({ child }) => child.type === "INSTANCE" && child.visible !== false)
       .map(({ key }) => key);
     const position = instanceKeys.indexOf(instanceKey);
     if (position < 0) return undefined;
@@ -723,6 +791,17 @@ export function diffRenderedAgainstFacts(
     const isComponentRoot = fact.nodeOwnershipKey === componentKey;
     const isText = node.type === "TEXT";
     const isInstance = node.type === "INSTANCE";
+
+    if (hiddenInstances.has(fact.nodeOwnershipKey)) {
+      row(fact, fact.channel === "visible" ? {
+        disposition: "matched", computed: "hidden direct instance absence",
+        expected: "not rendered", actual: "not rendered",
+      } : {
+        disposition: "receipted",
+        landing: "source instance is hidden; absence verified against the complete flat child count; non-visible geometry and metadata retained as receipts",
+      });
+      continue;
+    }
 
     switch (fact.channel) {
       case "layout.mode": {
@@ -1276,9 +1355,9 @@ export interface CanvasToCodeReceipt {
 export const CHECKBOX_BLOCKER =
   "Checkbox has NO committed scene observe: the only committed canvas artifacts for checkbox v3 (recipe/evidence/checkbox-live-pivot-v3/) are structural receipts (set ids, winding, glyph paths) and stay records — no SceneNodeSnapshot tree with per-node geometry/paints/typography exists offline, and this task forbids live Figma reads. Producing the Checkbox observe (a scene readback of page 198:77718) is the named unblocking step for a future LIVE session.";
 
-export async function runCanvasToCode(write: boolean): Promise<CanvasToCodeReceipt> {
+export async function runCanvasToCode(write: boolean, evidenceRoot = CANVAS_TO_CODE_ROOT): Promise<CanvasToCodeReceipt> {
   const workRoot = write
-    ? path.resolve(REPO, CANVAS_TO_CODE_ROOT)
+    ? path.resolve(REPO, evidenceRoot)
     : mkdtempSync(path.join(os.tmpdir(), "canvas-to-code-check-"));
   try {
     const build = await buildButtonCanvasToCode(
@@ -1323,7 +1402,7 @@ export async function runCanvasToCode(write: boolean): Promise<CanvasToCodeRecei
 
     if (write) {
       writeFileSync(
-        path.resolve(REPO, CANVAS_TO_CODE_BRIDGE_PATH),
+        path.resolve(REPO, evidenceRoot, "bridge-button.json.gz"),
         gzipSync(
           Buffer.from(
             `${canonicalJson({
@@ -1338,7 +1417,7 @@ export async function runCanvasToCode(write: boolean): Promise<CanvasToCodeRecei
         ),
       );
       writeFileSync(
-        path.resolve(REPO, CANVAS_TO_CODE_RENDER_LEDGER_PATH),
+        path.resolve(REPO, evidenceRoot, "render-ledger-button.json.gz"),
         gzipSync(
           Buffer.from(
             `${canonicalJson({ ledger: diff.ledger, counts: diff.counts })}\n`,
@@ -1348,13 +1427,13 @@ export async function runCanvasToCode(write: boolean): Promise<CanvasToCodeRecei
         ),
       );
       writeFileSync(
-        path.resolve(REPO, CANVAS_TO_CODE_RECEIPT_PATH),
+        path.resolve(REPO, evidenceRoot, "receipt.json"),
         `${canonicalJson(receipt)}\n`,
       );
     } else {
       // Fail closed: the committed receipt must match this recomputation.
       const committed = JSON.parse(
-        readFileSync(path.resolve(REPO, CANVAS_TO_CODE_RECEIPT_PATH), "utf8"),
+        readFileSync(path.resolve(REPO, evidenceRoot, "receipt.json"), "utf8"),
       ) as CanvasToCodeReceipt;
       if (canonicalJson(committed) !== canonicalJson(receipt)) {
         throw new Error(
@@ -1363,7 +1442,7 @@ export async function runCanvasToCode(write: boolean): Promise<CanvasToCodeRecei
       }
       // The committed generated/ tree must match the regenerated bytes.
       for (const file of build.emittedFiles) {
-        const committedPath = path.resolve(REPO, CANVAS_TO_CODE_ROOT, file.path);
+        const committedPath = path.resolve(REPO, evidenceRoot, file.path);
         const committedHash = sha256(readFileSync(committedPath));
         if (committedHash !== file.sha256)
           throw new Error(

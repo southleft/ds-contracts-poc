@@ -55,10 +55,11 @@ export function componentLookupExpression(
   child: Prop | undefined,
   parentExpression: string,
   map: Record<string, string>,
+  parent?: Pick<Prop, "name" | "type">,
 ): string {
   const chain = Object.entries(map).map(([key, value]) => {
     const literal = JSON.stringify(componentLookupValue(child, value));
-    return `${parentExpression} === ${JSON.stringify(key)} ? ${literal} : `;
+    return `${parentExpression} === ${JSON.stringify(componentLookupValue(parent, key))} ? ${literal} : `;
   }).join("");
   return codeValueExpression(child, chain + "undefined");
 }

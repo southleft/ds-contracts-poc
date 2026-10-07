@@ -14,7 +14,7 @@ import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
-import type {ReactContextualContent} from './react-contextual-content.js';
+import {verifiedReactContextualContent,type ReactContextualContent} from './react-contextual-content.js';
 import { reactChildContextSizing, reactChildContextGrid, reactRootGrid, type ReactChildContext } from './react-child-context.js';
 import { verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 
@@ -70,6 +70,7 @@ export function projectReactRootVisual(
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
     inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}), ...(rootGrid ? {rootGrid} : {}),...(contentContext?{contentContextRevision:contentContext.revision}:{}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree,contentContext);
+  const contextual=anatomy.status==='linked'?verifiedReactContextualContent(contentContext,program,ownership,tree):[];
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
     // A child operation needs this root only. Still authenticate the complete
@@ -91,7 +92,7 @@ export function projectReactRootVisual(
         if (styleOrigin!.version !== 1) throw Error('react-root-visual-style-origin-version');
         const origin = styleOrigin!.roots.find(r => r.path === at);
         if (!origin || origin.tag !== observed.tag) throw Error('react-root-visual-style-origin-mismatch');
-        const callerStyle=ownership.components.filter(c=>owners.includes(c.id)).some(({props})=>['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'})));
+        const callerStyle=ownership.components.filter(c=>owners.includes(c.id)).some(({id,props})=>['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'})&&!(key==='className'&&contextual.some(f=>owners.includes(f.instanceId)&&f.delegatedClassName?.instanceId===id&&f.delegatedClassName.value===props[key]))));
         return {callerStyle,sourceSizing:origin.sizes?.map(size=>callerStyle
           ? {...size,status:'unresolved' as const,reason:'caller-style-input-needs-ownership-proof'}
           : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',normalizeValue(observed.style[size.channel]??''))

@@ -1,0 +1,74 @@
+{
+  "before": {
+    "version": "2404408407624006950",
+    "lastModified": "2026-09-28T22:04:36Z",
+    "nodes": {
+      "884:120261": {
+        "document": {
+          "id": "884:120261",
+          "clipsContent": false,
+          "absoluteBoundingBox": {
+            "x": 264.0,
+            "y": 2882.0,
+            "width": 300.0,
+            "height": 6.0
+          },
+          "absoluteRenderBounds": {
+            "x": 264.0,
+            "y": 2879.0,
+            "width": 300.0,
+            "height": 12.0
+          }
+        }
+      }
+    }
+  },
+  "after": {
+    "version": "2404408407624006950",
+    "lastModified": "2026-09-28T22:04:36Z",
+    "nodes": {
+      "884:120261": {
+        "document": {
+          "id": "884:120261",
+          "clipsContent": false,
+          "absoluteBoundingBox": {
+            "x": 264.0,
+            "y": 2882.0,
+            "width": 300.0,
+            "height": 6.0
+          },
+          "absoluteRenderBounds": {
+            "x": 264.0,
+            "y": 2879.0,
+            "width": 300.0,
+            "height": 12.0
+          }
+        }
+      }
+    }
+  },
+  "shallow": {
+    "version": "2404408407624006950",
+    "lastModified": "2026-09-28T22:04:36Z",
+    "nodes": {
+      "884:120261": {
+        "document": {
+          "id": "884:120261",
+          "clipsContent": false,
+          "absoluteBoundingBox": {
+            "x": 264.0,
+            "y": 2882.0,
+            "width": 300.0,
+            "height": 6.0
+          },
+          "absoluteRenderBounds": {
+            "x": 264.0,
+            "y": 2882.0,
+            "width": 300.0,
+            "height": 6.0
+          }
+        }
+      }
+    }
+  }
+}

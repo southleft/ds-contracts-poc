@@ -24,6 +24,10 @@
   align-items: center;
 }
 
+.stack {
+  --dsc-overlap-gap: var(--space-avatarGroup-overlap);
+}
+
 .stack > * + * {
   margin-left: var(--space-avatarGroup-overlap);
 }

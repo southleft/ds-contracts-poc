@@ -1,0 +1,488 @@
+[
+  {
+    "expected": {
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "hostId": "155:66997",
+      "layerId": "155:67006",
+      "variableId": "VariableID:155:66967",
+      "width": 320,
+      "height": 96,
+      "layoutMode": "VERTICAL",
+      "reversePaint": false,
+      "contentIds": [
+        "155:66998",
+        "155:66999",
+        "155:67000",
+        "155:67001"
+      ],
+      "paint": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "layerWidth": 320
+    },
+    "receipt": {
+      "version": 1,
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "host": {
+        "id": "155:66997",
+        "type": "COMPONENT",
+        "width": 320,
+        "height": 96,
+        "layoutMode": "VERTICAL",
+        "itemReverseZIndex": false,
+        "fills": [],
+        "childIds": [
+          "155:67006",
+          "155:66998",
+          "155:66999",
+          "155:67000",
+          "155:67001"
+        ],
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        }
+      },
+      "layer": {
+        "id": "155:67006",
+        "parentId": "155:66997",
+        "type": "RECTANGLE",
+        "rotation": 0,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "isMask": false,
+        "strokes": [],
+        "effects": [],
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 96,
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "MULTIPLY",
+        "layoutPositioning": "ABSOLUTE",
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        },
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:66967"
+              }
+            }
+          }
+        ]
+      },
+      "variable": {
+        "id": "VariableID:155:66967",
+        "resolved": {
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "resolvedType": "COLOR"
+        }
+      }
+    }
+  },
+  {
+    "expected": {
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "hostId": "155:67004",
+      "layerId": "155:67005",
+      "variableId": "VariableID:155:66967",
+      "width": 85.33332824707031,
+      "height": 10,
+      "layoutMode": "HORIZONTAL",
+      "reversePaint": false,
+      "contentIds": [],
+      "paint": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "layerWidth": 85.33332824707031
+    },
+    "receipt": {
+      "version": 1,
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "host": {
+        "id": "155:67004",
+        "type": "FRAME",
+        "width": 85.33332824707031,
+        "height": 10,
+        "layoutMode": "HORIZONTAL",
+        "itemReverseZIndex": false,
+        "fills": [],
+        "childIds": [
+          "155:67005"
+        ],
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        }
+      },
+      "layer": {
+        "id": "155:67005",
+        "parentId": "155:67004",
+        "type": "RECTANGLE",
+        "rotation": 0,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "isMask": false,
+        "strokes": [],
+        "effects": [],
+        "x": 0,
+        "y": 0,
+        "width": 85.33332824707031,
+        "height": 10,
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "MULTIPLY",
+        "layoutPositioning": "ABSOLUTE",
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        },
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:66967"
+              }
+            }
+          }
+        ]
+      },
+      "variable": {
+        "id": "VariableID:155:66967",
+        "resolved": {
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "resolvedType": "COLOR"
+        }
+      }
+    }
+  },
+  {
+    "expected": {
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "hostId": "155:67007",
+      "layerId": "155:67016",
+      "variableId": "VariableID:155:66967",
+      "width": 320,
+      "height": 96,
+      "layoutMode": "VERTICAL",
+      "reversePaint": false,
+      "contentIds": [
+        "155:67008",
+        "155:67009",
+        "155:67010",
+        "155:67011"
+      ],
+      "paint": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "layerWidth": 320
+    },
+    "receipt": {
+      "version": 1,
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "host": {
+        "id": "155:67007",
+        "type": "COMPONENT",
+        "width": 320,
+        "height": 96,
+        "layoutMode": "VERTICAL",
+        "itemReverseZIndex": false,
+        "fills": [],
+        "childIds": [
+          "155:67016",
+          "155:67008",
+          "155:67009",
+          "155:67010",
+          "155:67011"
+        ],
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        }
+      },
+      "layer": {
+        "id": "155:67016",
+        "parentId": "155:67007",
+        "type": "RECTANGLE",
+        "rotation": 0,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "isMask": false,
+        "strokes": [],
+        "effects": [],
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 96,
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "MULTIPLY",
+        "layoutPositioning": "ABSOLUTE",
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        },
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:66967"
+              }
+            }
+          }
+        ]
+      },
+      "variable": {
+        "id": "VariableID:155:66967",
+        "resolved": {
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "resolvedType": "COLOR"
+        }
+      }
+    }
+  },
+  {
+    "expected": {
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "hostId": "155:67014",
+      "layerId": "155:67015",
+      "variableId": "VariableID:155:66967",
+      "width": 85.33332824707031,
+      "height": 10,
+      "layoutMode": "HORIZONTAL",
+      "reversePaint": false,
+      "contentIds": [],
+      "paint": {
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "opacity": 9.999999747378752e-06,
+        "blendMode": "MULTIPLY"
+      },
+      "layerWidth": 85.33332824707031
+    },
+    "receipt": {
+      "version": 1,
+      "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+      "host": {
+        "id": "155:67014",
+        "type": "FRAME",
+        "width": 85.33332824707031,
+        "height": 10,
+        "layoutMode": "HORIZONTAL",
+        "itemReverseZIndex": false,
+        "fills": [],
+        "childIds": [
+          "155:67015"
+        ],
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        }
+      },
+      "layer": {
+        "id": "155:67015",
+        "parentId": "155:67014",
+        "type": "RECTANGLE",
+        "rotation": 0,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "isMask": false,
+        "strokes": [],
+        "effects": [],
+        "x": 0,
+        "y": 0,
+        "width": 85.33332824707031,
+        "height": 10,
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "MULTIPLY",
+        "layoutPositioning": "ABSOLUTE",
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        },
+        "corners": {
+          "topLeftRadius": 0,
+          "topRightRadius": 0,
+          "bottomLeftRadius": 0,
+          "bottomRightRadius": 0,
+          "cornerSmoothing": 0
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:155:66967"
+              }
+            }
+          }
+        ]
+      },
+      "variable": {
+        "id": "VariableID:155:66967",
+        "resolved": {
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "resolvedType": "COLOR"
+        }
+      }
+    }
+  }
+]

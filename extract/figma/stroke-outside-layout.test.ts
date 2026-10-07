@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from './types.js';
 // Whether a stroke takes LAYOUT SPACE is CARRIED by both Figma readers (dump
 // v1.35) and round-trips through the contract. Found by the design-led
 // clean-consumer check on a designer's 72-variant Badge: a Figma stroke on an
@@ -41,7 +42,7 @@ const without = (set: DumpSet): DumpSet => { const copy = structuredClone(set); 
 
 test('the REST reader writes the fact on every stroked auto-layout frame — false included, because REST omits its default — and nowhere else', () => {
   const { set, provenance } = mapped([{}, { included: true }, { strokes: false }]);
-  assert.equal(provenance.dumpVersion, '1.44');
+  assert.equal(provenance.dumpVersion, '1.63');
   assert.deepEqual(set.variants.map((v) => (v as DumpNode).strokesIncludedInLayout), [false, true, undefined], 'a strokeless frame draws nothing the fact could move');
   // A free frame's stroke never insets the child coordinate origin.
   assert.equal((mapped([{ layoutMode: 'NONE' }]).set.variants[0] as DumpNode).strokesIncludedInLayout, false);
@@ -65,7 +66,7 @@ test('the plugin reader carries the same field from node.strokesIncludedInLayout
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RingedBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.48');
+  assert.equal(dumps._provenance.dumpVersion, PLUGIN_DUMP_VERSION);
   const variants = Array.from(dumps.RingedBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
   assert.deepEqual(variants.map((v) => v.strokesIncludedInLayout), [false, true, undefined, false], 'unreported auto-layout stays unknown; a free frame has no stroke inset');
 });

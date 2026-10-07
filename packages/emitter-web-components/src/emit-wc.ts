@@ -1,3 +1,5 @@
+import {childPaintOrderPlans} from '@ds-contracts/core';
+import {refuseInstanceRootInputTarget} from '../../core/src/anatomy.js';
 import {hasComponentGrow} from '@ds-contracts/schema';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '@ds-contracts/schema';
 /**
@@ -231,6 +233,7 @@ function layoutOverrideDecls(o: {
   display?: string;
   direction?: string;
   align?: string;
+  alignSelf?: string;
   justify?: string;
   grow?: boolean;
   growBasis?: "zero";
@@ -239,6 +242,7 @@ function layoutOverrideDecls(o: {
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
+  if (o.alignSelf) d.push(`align-self: ${o.alignSelf}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
   if (o.grow !== undefined || o.growBasis !== undefined) {
     const grow = o.grow ?? base?.grow;
@@ -263,11 +267,12 @@ function layoutDecls(part: Part): string[] {
     if (part.layout?.align) d.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
     if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
   }
+  if (part.layout?.alignSelf) d.push(`align-self: ${part.layout.alignSelf}`);
   if (part.layout?.grow) d.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
   return d;
 }
 
-export function shadowCss(input: Contract, tokenValues?: unknown, errors: string[] = []): string {
+export function shadowCss(input: Contract, tokenValues?: unknown, errors: string[] = [], contracts?: ReadonlyMap<string,Contract>): string {
   // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
   // that takes no layout space — core lowerStrokeRings, the same rewrite
   // generateCss applies, so the two sheets cannot disagree about a border.
@@ -793,6 +798,15 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // finishStylesheet also restores a ring part's boundary under forced colors;
   // a ring's real shadow whose token is `none` is settled where values are known.
   lines.push(...jointTokenCss(contract,enumCond,conditions=>rootWithConds(["",...conditions]),ref=>cssVar(stripBraces(ref))));
+  for(const plan of childPaintOrderPlans(input,contracts)) {
+    const suffix=plan.path.slice(1).map(key=>' > '+partSel(key)).join('');
+    const holder=ROOT_SEL+suffix;
+    lines.push(`${holder} { isolation: isolate; }`);
+    const ranks=(selector:string,rows:typeof plan.base)=>rows.map(row=>`${selector} > ${partSel(row.name)} { z-index: ${row.zIndex}; }`);
+    lines.push(...ranks(holder,plan.base));
+    for(const row of plan.rows)if(Object.keys(row.selection).length)
+      lines.push(...ranks(rootWithCombo(Object.entries(row.selection))+suffix,row.ranks));
+  }
   const finished = finishStylesheet(lines.join('\n'));
   return contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
 }
@@ -812,6 +826,18 @@ const tpl = (s: string) => s.replaceAll('\\', '\\\\').replaceAll('`', '\\`').rep
 const isIdent = (s: string) => /^[A-Za-z_$][\w$]*$/.test(s);
 /** Prop access expression inside #view (`p.variant` / `p['weird-name']`). */
 const acc = (name: string) => (isIdent(name) ? `p.${name}` : `p[${JSON.stringify(name)}]`);
+
+/** Compatibility with the existing Boolean guard vocabulary. Joint or
+ * incomplete presence tables still require a separate implementation. */
+function singleBooleanPresence(contract: Contract, part: Part): {prop:string;equals:boolean} | undefined {
+  const table=part.presenceByCombination;
+  if(!table || table.props.length!==1 || table.rows.length!==2 ||
+      contract.props.find(p=>p.name===table.props[0])?.type!=='boolean')return;
+  const no=table.rows.find(row=>row.values.length===1 && row.values[0]==='false');
+  const yes=table.rows.find(row=>row.values.length===1 && row.values[0]==='true');
+  if(!no || !yes || typeof no.present!=='boolean' || typeof yes.present!=='boolean' || no.present===yes.present)return;
+  return {prop:table.props[0],equals:yes.present};
+}
 
 const enumUnion = (values: string[]) => values.map((v) => JSON.stringify(v).replace(/"/g, "'")).join(' | ');
 
@@ -1037,11 +1063,15 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       .join('');
 
   const visibleWrap = (part: Part, inner: string): string => {
+    const presence=singleBooleanPresence(contract,part);
+    if(presence)inner=`\${${acc(presence.prop)} === ${presence.equals} ? \`${inner}\` : ''}`;
     if (!part.visibleWhen) return inner;
     const vw = part.visibleWhen;
     const cond =
       vw.equals === undefined
         ? `${acc(vw.prop)} === true`
+        : typeof vw.equals === 'boolean'
+          ? `${acc(vw.prop)} === ${vw.equals}`
         : Array.isArray(vw.equals)
           ? vw.equals.map((v) => `(${acc(vw.prop)} ?? '') === ${JSON.stringify(v)}`).join(' || ')
           : `(${acc(vw.prop)} ?? '') === ${JSON.stringify(vw.equals)}`;
@@ -1059,7 +1089,13 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
         // unmapped parent values apply no attribute (child default).
         const e = acc(value.prop);
         const chain = Object.entries(value.map)
-          .map(([k, v]) => `(${e} ?? '') === ${JSON.stringify(k)} ? \` ${a}="${escapeHtml(v)}"\` : `)
+          .map(([k, v]) => {
+            const parentProp = contract.props.find(p => p.name === value.prop);
+            if (parentProp?.type === 'boolean' && k !== 'true' && k !== 'false')
+              throw Error(`COMPONENT_BOOLEAN_LOOKUP_INVALID:${parentProp.name}:${JSON.stringify(k)}`);
+            const key = parentProp?.type === 'boolean' ? k === 'true' : k;
+            return `(${e} ?? '') === ${JSON.stringify(key)} ? \` ${a}="${escapeHtml(v)}"\` : `;
+          })
           .join('');
         out += `\${${chain}''}`;
         continue;
@@ -1455,8 +1491,8 @@ ${noOps.map((n) => ` *   · ${n}`).join('\n')}${
 // Stylesheet module — the shadow CSS as a constructable sheet.
 // ---------------------------------------------------------------------------
 
-function generateStylesheetModule(contract: Contract, tokenValues?: unknown): string {
-  const css = shadowCss(contract, tokenValues);
+function generateStylesheetModule(contract: Contract, tokenValues?: unknown, contracts?: ReadonlyMap<string,Contract>): string {
+  const css = shadowCss(contract, tokenValues, [], contracts);
   return [
     `/**`,
     ` * ${contract.name} — constructable shadow stylesheet from contract`,
@@ -1636,6 +1672,7 @@ function generateManifest(contract: Contract): string {
 // ---------------------------------------------------------------------------
 
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
+  refuseInstanceRootInputTarget(contract,ctx.contracts,'web-components');
   if (contract.props.some(p => p.bindings.code.initial)) throw new Error('WEB_COMPONENT_INITIAL_CODE_BINDING_UNSUPPORTED');
   const checked = new Set<string>();
   const refuseMapped = (c: Contract): void => {
@@ -1643,16 +1680,36 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     checked.add(c.id);
     if (c.selection) throw new Error(`WEB_COMPONENT_SELECTION_UNSUPPORTED:${c.id}: selection behavior is implemented for React`);
     if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
+    childPaintOrderPlans(c,ctx.contracts);
     for (const w of walkAnatomy(c)) {
+
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
+      if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
+      if (w.part.presenceByCombination && !singleBooleanPresence(c,w.part)) throw new Error('WEB_COMPONENT_PRESENCE_COMBINATION_UNSUPPORTED');
+      if (w.part.shape?.arc?.cap) throw new Error('WEB_COMPONENT_ELLIPSE_ARC_CAP_UNSUPPORTED');
+      if (w.part.component?.sameInkInsideStroke) throw new Error('WEB_COMPONENT_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
+      if (w.part.component?.booleanPropsByCombination) throw new Error('WEB_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
+      if (w.part.component?.enumPropsByCombination) throw new Error('WEB_COMPONENT_ENUM_ARGUMENTS_UNSUPPORTED');
+      if (w.part.shapeFillOverrideProp) throw new Error('WEB_COMPONENT_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
+      if (w.part.textColorOverrideProp) throw new Error('WEB_COMPONENT_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
+      if (w.part.textAppearanceOverride) throw new Error('WEB_COMPONENT_TEXT_APPEARANCE_UNSUPPORTED');
+      if (w.part.imageOverride) throw new Error('WEB_COMPONENT_IMAGE_OVERRIDE_UNSUPPORTED');
+      if (w.part.visibilityOverrideProp) throw new Error('WEB_COMPONENT_VISIBILITY_OVERRIDE_UNSUPPORTED');
+      if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('WEB_COMPONENT_INSTANCE_AFFINE_UNSUPPORTED');
+      if (w.part.layoutByCombination) throw new Error('WEB_COMPONENT_JOINT_LAYOUT_UNSUPPORTED');
+      if ((w.part.component || w.part.repeat) && (w.part.layout?.alignSelf || Object.values(w.part.layoutByProp?.map ?? {}).some(value => value.alignSelf))) throw new Error('WEB_COMPONENT_ITEM_STRETCH_UNSUPPORTED');
+      if (w.part.slot?.collapseWhenEmpty) throw new Error('SLOT_COLLAPSE_RUNTIME_UNSUPPORTED:web-components');
+      if (w.part.solidFillComposition || w.part.solidFillCompositionByCombination) throw new Error("WEB_COMPONENT_SOLID_FILL_COMPOSITION_UNQUALIFIED");
       if (w.part.absolutePlacement || w.part.absolutePlacementByCombination) throw new Error('WEB_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       if (w.part.component?.initialProps) throw new Error('WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component?.statePreview !== undefined) throw new Error('WEB_COMPONENT_STATE_PREVIEW_UNSUPPORTED: component statePreview (docs/23 §D.164) is implemented for React');
       if (w.part.component && w.part.parts !== undefined) throw new Error('WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED');
+      if(w.part.component && [...Object.values(w.part.states??{}),...(w.part.statesByProp??[]).flatMap(e=>Object.values(e.map))].some(m=>Object.keys(m).some(k=>k.startsWith('text-color:'))))throw Error('WEB_COMPONENT_INSTANCE_STATE_TEXT_UNSUPPORTED');
       const ids = [...(w.part.component ? [w.part.component.id] : []), ...(w.part.slot?.defaultContent ?? []).map(i => i.id)];
       for (const id of ids) { const dep = ctx.contracts.get(id); if (dep) refuseMapped(dep); }
     }
   };
+  for(const {part} of walkAnatomy(contract))if(part.solidFillComposition || part.solidFillCompositionByCombination)throw new Error("WEB_COMPONENT_SOLID_FILL_COMPOSITION_UNQUALIFIED");
   refuseMapped(contract);
   refuseRetainedRuntime(contract, 'web-components', ctx.contracts);
   const errors: string[] = [];
@@ -1672,7 +1729,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
         `Pass WcEmitCtx.tokens (core/tokens.ts tokenInventoryFromJson). Emitting unchecked would ship dangling var(--…) references that render as nothing, silently.`,
     );
   } else {
-    generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
+    generateCss(contract, ctx.tokens, errors, ctx.tokenValues, undefined, ctx.contracts);
   }
 
   if (errors.length > 0) {
@@ -1682,7 +1739,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   }
   return {
     element: generateElement(contract, ctx),
-    stylesheet: generateStylesheetModule(contract, ctx.tokenValues),
+    stylesheet: generateStylesheetModule(contract, ctx.tokenValues, ctx.contracts),
     demo: generateDemo(contract),
     manifest: generateManifest(contract),
   };

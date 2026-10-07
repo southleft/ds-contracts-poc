@@ -28,6 +28,7 @@ import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
+import { applyNativeStrokeCapture } from './native-stroke-capture.js';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
 import { consumerFontManifest, readConsumerFonts } from './design-consumer-fonts.js';
@@ -186,7 +187,7 @@ export function reportCheck(r: { component: string; setName: string; tarball: st
 }
 
 export interface FigmaToReactRun {
-  dump?: string; url?: string; out: string; name?: string; expectRequest?: string; fonts?: string; allowFailures?: boolean;
+  dump?: string; url?: string; out: string; name?: string; expectRequest?: string; fonts?: string; nativeStrokes?: string; allowFailures?: boolean;
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -204,6 +205,17 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
     const fetched = await dumpFromFigmaUrl(run.url, run.out);
     for (const r of fetched.refusals) error('variables: ' + r);
     dumpPath = path.join(run.out, 'dump.json'); source = 'figma';
+  }
+  if (run.nativeStrokes) {
+    const receipt=JSON.parse(readFileSync(run.nativeStrokes,'utf8'));
+    const enriched=applyNativeStrokeCapture(JSON.parse(readFileSync(dumpPath,'utf8')),receipt);
+    const target=path.join(run.out,'native-stroke-dump.json');
+    if(path.resolve(target)===path.resolve(dumpPath))throw Error('native-stroke-supplement-output-conflicts-with-source');
+    mkdirSync(run.out,{recursive:true});
+    writeFileSync(target,JSON.stringify(enriched,null,2)+'\n');
+    writeFileSync(path.join(run.out,'native-stroke-receipt.json'),JSON.stringify(receipt,null,2)+'\n');
+    dumpPath=target;
+    log(`native stroke supplement: ${receipt.records.length} source-matched observation(s); provenance retained`);
   }
   const r = await figmaToReact(deps.loadEngine, dumpPath, run.out, run.expectRequest, source,
     { ...(run.name ? { packageName: run.name } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}) });

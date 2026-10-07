@@ -1,0 +1,363 @@
+{
+  "source": "Live Figma Plugin API probe, 2026-10-03. Ordinary vectors and native STRETCH behavior, not simulated geometry.",
+  "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+  "boardId": "88:1331",
+  "rows": [
+    {
+      "frameId": "88:1343",
+      "vectorId": "88:1344",
+      "before": {
+        "parentWidth": 50,
+        "parentHeight": 12,
+        "width": 40,
+        "height": 0,
+        "x": 0,
+        "y": 6,
+        "paths": [
+          {
+            "windingRule": "NONE",
+            "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+          }
+        ]
+      },
+      "states": [
+        {
+          "requested": 80.2,
+          "parentWidth": 80.19999694824219,
+          "parentHeight": 12,
+          "width": 70,
+          "height": 0,
+          "x": 0,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.499993324279785 0 L 52.499993324279785 0 L 70 0"
+            }
+          ]
+        },
+        {
+          "requested": 80.6,
+          "parentWidth": 80.5999984741211,
+          "parentHeight": 12,
+          "width": 71,
+          "height": 0,
+          "x": 0,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.749993228912352 0 L 53.24999322891235 0 L 71 0"
+            }
+          ]
+        },
+        {
+          "requested": 201.19,
+          "parentWidth": 201.19000244140625,
+          "parentHeight": 12,
+          "width": 191,
+          "height": 0,
+          "x": 0,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 47.74998178482056 0 L 143.24998178482056 0 L 191 0"
+            }
+          ]
+        },
+        {
+          "requested": 50,
+          "parentWidth": 50,
+          "parentHeight": 12,
+          "width": 40,
+          "height": 0,
+          "x": 0,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+            }
+          ]
+        }
+      ],
+      "stroke": {
+        "cap": "NONE",
+        "join": "MITER",
+        "miterLimit": 4,
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        }
+      }
+    },
+    {
+      "frameId": "88:1345",
+      "vectorId": "88:1346",
+      "before": {
+        "parentWidth": 50,
+        "parentHeight": 12,
+        "width": 40,
+        "height": 0,
+        "x": 3,
+        "y": 6,
+        "paths": [
+          {
+            "windingRule": "NONE",
+            "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+          }
+        ]
+      },
+      "states": [
+        {
+          "requested": 80.2,
+          "parentWidth": 80.19999694824219,
+          "parentHeight": 12,
+          "width": 70,
+          "height": 0,
+          "x": 3,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.499993324279785 0 L 52.499993324279785 0 L 70 0"
+            }
+          ]
+        },
+        {
+          "requested": 80.6,
+          "parentWidth": 80.5999984741211,
+          "parentHeight": 12,
+          "width": 71,
+          "height": 0,
+          "x": 3,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.749993228912352 0 L 53.24999322891235 0 L 71 0"
+            }
+          ]
+        },
+        {
+          "requested": 201.19,
+          "parentWidth": 201.19000244140625,
+          "parentHeight": 12,
+          "width": 191,
+          "height": 0,
+          "x": 3,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 47.74998178482056 0 L 143.24998178482056 0 L 191 0"
+            }
+          ]
+        },
+        {
+          "requested": 50,
+          "parentWidth": 50,
+          "parentHeight": 12,
+          "width": 40,
+          "height": 0,
+          "x": 3,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+            }
+          ]
+        }
+      ],
+      "stroke": {
+        "cap": "NONE",
+        "join": "MITER",
+        "miterLimit": 4,
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        }
+      }
+    },
+    {
+      "frameId": "88:1347",
+      "vectorId": "88:1348",
+      "before": {
+        "parentWidth": 50,
+        "parentHeight": 12,
+        "width": 40,
+        "height": 0,
+        "x": 3.200000047683716,
+        "y": 6,
+        "paths": [
+          {
+            "windingRule": "NONE",
+            "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+          }
+        ]
+      },
+      "states": [
+        {
+          "requested": 80.2,
+          "parentWidth": 80.19999694824219,
+          "parentHeight": 12,
+          "width": 70,
+          "height": 0,
+          "x": 3.200000047683716,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.499993324279785 0 L 52.499993324279785 0 L 70 0"
+            }
+          ]
+        },
+        {
+          "requested": 80.6,
+          "parentWidth": 80.5999984741211,
+          "parentHeight": 12,
+          "width": 71,
+          "height": 0,
+          "x": 3.200000047683716,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.749993228912352 0 L 53.24999322891235 0 L 71 0"
+            }
+          ]
+        },
+        {
+          "requested": 201.19,
+          "parentWidth": 201.19000244140625,
+          "parentHeight": 12,
+          "width": 191,
+          "height": 0,
+          "x": 3.200000047683716,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 47.74998178482056 0 L 143.24998178482056 0 L 191 0"
+            }
+          ]
+        },
+        {
+          "requested": 50,
+          "parentWidth": 50,
+          "parentHeight": 12,
+          "width": 40,
+          "height": 0,
+          "x": 3.200000047683716,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+            }
+          ]
+        }
+      ],
+      "stroke": {
+        "cap": "NONE",
+        "join": "MITER",
+        "miterLimit": 4,
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        }
+      }
+    },
+    {
+      "frameId": "88:1349",
+      "vectorId": "88:1350",
+      "before": {
+        "parentWidth": 50,
+        "parentHeight": 12,
+        "width": 40,
+        "height": 0,
+        "x": -0.30000001192092896,
+        "y": 6,
+        "paths": [
+          {
+            "windingRule": "NONE",
+            "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+          }
+        ]
+      },
+      "states": [
+        {
+          "requested": 80.2,
+          "parentWidth": 80.19999694824219,
+          "parentHeight": 12,
+          "width": 70,
+          "height": 0,
+          "x": -0.30000001192092896,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.499993324279785 0 L 52.499993324279785 0 L 70 0"
+            }
+          ]
+        },
+        {
+          "requested": 80.6,
+          "parentWidth": 80.5999984741211,
+          "parentHeight": 12,
+          "width": 71,
+          "height": 0,
+          "x": -0.30000001192092896,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 17.749993228912352 0 L 53.24999322891235 0 L 71 0"
+            }
+          ]
+        },
+        {
+          "requested": 201.19,
+          "parentWidth": 201.19000244140625,
+          "parentHeight": 12,
+          "width": 191,
+          "height": 0,
+          "x": -0.30000001192092896,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 47.74998178482056 0 L 143.24998178482056 0 L 191 0"
+            }
+          ]
+        },
+        {
+          "requested": 50,
+          "parentWidth": 50,
+          "parentHeight": 12,
+          "width": 40,
+          "height": 0,
+          "x": -0.30000001192092896,
+          "y": 6,
+          "paths": [
+            {
+              "windingRule": "NONE",
+              "data": "M 0 0 L 9.999996185302734 0 L 29.999996185302734 0 L 40 0"
+            }
+          ]
+        }
+      ],
+      "stroke": {
+        "cap": "NONE",
+        "join": "MITER",
+        "miterLimit": 4,
+        "constraints": {
+          "horizontal": "STRETCH",
+          "vertical": "STRETCH"
+        }
+      }
+    }
+  ]
+}

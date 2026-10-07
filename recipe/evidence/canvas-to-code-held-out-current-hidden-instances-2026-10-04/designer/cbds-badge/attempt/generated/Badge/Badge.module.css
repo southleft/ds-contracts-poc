@@ -1,0 +1,232 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (ds.badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding-inline: var(--spacing-150);
+  padding-block: var(--spacing-100);
+  gap: var(--spacing-100);
+  height: var(--component-size-small);
+  width: fit-content;
+}
+
+.type-brand {
+}
+
+.style-fill {
+}
+
+.type-brand.style-fill {
+  background-color: var(--imported-badge-root-background-color-brand-fill);
+  border-color: var(--imported-badge-root-border-color-brand-fill);
+}
+
+.style-tonal {
+}
+
+.type-brand.style-tonal {
+  background-color: var(--imported-badge-root-background-color-brand-tonal);
+  border-color: var(--imported-badge-root-border-color-brand-tonal);
+}
+
+.style-outline {
+}
+
+.type-brand.style-outline {
+  background-color: var(--imported-badge-root-background-color-brand-outline);
+  border-color: var(--imported-badge-root-border-color-brand-outline);
+}
+
+.type-success {
+}
+
+.type-success.style-fill {
+  background-color: var(--imported-badge-root-background-color-success-fill);
+  border-color: var(--imported-badge-root-border-color-success-fill);
+}
+
+.type-success.style-tonal {
+  background-color: var(--imported-badge-root-background-color-success-tonal);
+  border-color: var(--imported-badge-root-border-color-success-tonal);
+}
+
+.type-success.style-outline {
+  background-color: var(--imported-badge-root-background-color-success-outline);
+  border-color: var(--imported-badge-root-border-color-success-outline);
+}
+
+.type-warning {
+}
+
+.type-warning.style-fill {
+  background-color: var(--imported-badge-root-background-color-warning-fill);
+  border-color: var(--imported-badge-root-border-color-warning-fill);
+}
+
+.type-warning.style-tonal {
+  background-color: var(--imported-badge-root-background-color-warning-tonal);
+  border-color: var(--imported-badge-root-border-color-warning-tonal);
+}
+
+.type-warning.style-outline {
+  background-color: var(--imported-badge-root-background-color-warning-outline);
+  border-color: var(--imported-badge-root-border-color-warning-outline);
+}
+
+.type-danger {
+}
+
+.type-danger.style-fill {
+  background-color: var(--imported-badge-root-background-color-danger-fill);
+  border-color: var(--imported-badge-root-border-color-danger-fill);
+}
+
+.type-danger.style-tonal {
+  background-color: var(--imported-badge-root-background-color-danger-tonal);
+  border-color: var(--imported-badge-root-border-color-danger-tonal);
+}
+
+.type-danger.style-outline {
+  background-color: var(--imported-badge-root-background-color-danger-outline);
+  border-color: var(--imported-badge-root-border-color-danger-outline);
+}
+
+.type-neutral {
+}
+
+.type-neutral.style-fill {
+  background-color: var(--imported-badge-root-background-color-neutral-fill);
+  border-color: var(--imported-badge-root-border-color-neutral-fill);
+}
+
+.type-neutral.style-tonal {
+  background-color: var(--imported-badge-root-background-color-neutral-tonal);
+  border-color: var(--imported-badge-root-border-color-neutral-tonal);
+}
+
+.type-neutral.style-outline {
+  background-color: var(--imported-badge-root-background-color-neutral-outline);
+  border-color: var(--imported-badge-root-border-color-neutral-outline);
+}
+
+.type-accent {
+}
+
+.type-accent.style-fill {
+  background-color: var(--imported-badge-root-background-color-accent-fill);
+  border-color: var(--imported-badge-root-border-color-accent-fill);
+}
+
+.type-accent.style-tonal {
+  background-color: var(--imported-badge-root-background-color-accent-tonal);
+  border-color: var(--imported-badge-root-border-color-accent-tonal);
+}
+
+.type-accent.style-outline {
+  background-color: var(--imported-badge-root-background-color-accent-outline);
+  border-color: var(--imported-badge-root-border-color-accent-outline);
+}
+
+.size-small {
+  padding-inline: var(--spacing-100);
+  height: var(--component-size-xsmall);
+}
+
+.Label {
+  font-weight: var(--imported-badge-label-font-weight);
+  line-height: var(--imported-badge-label-line-height);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.type-brand.style-fill .Label {
+  color: var(--imported-badge-label-color-brand-fill);
+}
+
+.type-brand.style-tonal .Label {
+  color: var(--imported-badge-label-color-brand-tonal);
+}
+
+.type-brand.style-outline .Label {
+  color: var(--imported-badge-label-color-brand-outline);
+}
+
+.type-success.style-fill .Label {
+  color: var(--imported-badge-label-color-success-fill);
+}
+
+.type-success.style-tonal .Label {
+  color: var(--imported-badge-label-color-success-tonal);
+}
+
+.type-success.style-outline .Label {
+  color: var(--imported-badge-label-color-success-outline);
+}
+
+.type-warning.style-fill .Label {
+  color: var(--imported-badge-label-color-warning-fill);
+}
+
+.type-warning.style-tonal .Label {
+  color: var(--imported-badge-label-color-warning-tonal);
+}
+
+.type-warning.style-outline .Label {
+  color: var(--imported-badge-label-color-warning-outline);
+}
+
+.type-danger.style-fill .Label {
+  color: var(--imported-badge-label-color-danger-fill);
+}
+
+.type-danger.style-tonal .Label {
+  color: var(--imported-badge-label-color-danger-tonal);
+}
+
+.type-danger.style-outline .Label {
+  color: var(--imported-badge-label-color-danger-outline);
+}
+
+.type-neutral.style-fill .Label {
+  color: var(--imported-badge-label-color-neutral-fill);
+}
+
+.type-neutral.style-tonal .Label {
+  color: var(--imported-badge-label-color-neutral-tonal);
+}
+
+.type-neutral.style-outline .Label {
+  color: var(--imported-badge-label-color-neutral-outline);
+}
+
+.type-accent.style-fill .Label {
+  color: var(--imported-badge-label-color-accent-fill);
+}
+
+.type-accent.style-tonal .Label {
+  color: var(--imported-badge-label-color-accent-tonal);
+}
+
+.type-accent.style-outline .Label {
+  color: var(--imported-badge-label-color-accent-outline);
+}
+
+.size-large .Label {
+  font-size: var(--imported-badge-label-font-size-large);
+}
+
+.size-small .Label {
+  font-size: var(--imported-badge-label-font-size-small);
+}

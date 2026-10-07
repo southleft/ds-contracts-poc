@@ -1,3 +1,5 @@
+import {refuseInstanceRootInputTarget} from '../packages/core/src/anatomy.js';
+import {solidFillCompositionRules} from '../packages/core/src/css.js';
 import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
@@ -884,6 +886,7 @@ function componentCss(contract: Contract): string[] {
   if (usedAnimations.has('pulse')) {
     lines.push('', `@keyframes ${k}-pulse {`, '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
+  lines.push(...solidFillCompositionRules(contract,undefined,{root:rootCls,part:partCls,modifier:(axis,value)=>enumCls(axis,value),disabled:disabledSel,booleanAttributes:true}));
   return lines;
 }
 
@@ -1046,7 +1049,8 @@ function renderComponentHtml(
   const visible = (part: Part): boolean => {
     if (!part.visibleWhen) return true;
     const vw = part.visibleWhen;
-    if (vw.equals !== undefined) return (propValue(vw.prop) ?? '') === vw.equals;
+    if (typeof vw.equals === 'boolean') return state.bools[vw.prop] === vw.equals;
+    if (vw.equals !== undefined) return Array.isArray(vw.equals) ? vw.equals.includes(propValue(vw.prop) ?? '') : (propValue(vw.prop) ?? '') === vw.equals;
     return state.bools[vw.prop] === true;
   };
 
@@ -1191,6 +1195,7 @@ function renderComponentHtml(
       // every visual-parity row 55-97%). The absence is named in the emitted
       // header comment, never painted.
       if (items.length === 0) {
+        if (part.slot.collapseWhenEmpty) return `${pad}<!-- ${escapeHtmlComment(part.slot.name)} slot: empty static snapshot; host collapsed -->`;
         return `${pad}<${el} class="${cls}"${attrString(part)}><!-- ${escapeHtmlComment(part.slot.name)} slot: no content --></${el}>`;
       }
       const inner = items
@@ -1347,7 +1352,7 @@ function renderComponentHtml(
   }
   const supportsDisabled = HTML_SUPPORTS_DISABLED.includes(el);
   for (const p of boolProps(contract)) {
-    if (state.bools[p.name] === false && walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false'))) {
+    if (state.bools[p.name] === false && walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false') || p.default===undefined && w.part.solidFillCompositionByCombination?.props.includes(p.name))) {
       const falseName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       attrs.push(`data-dsc-false-${falseName}="true"`);
     }
@@ -1414,10 +1419,23 @@ export interface EmitHtmlResult {
 }
 
 export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  return emitHtmlImpl(contract,ctx,false);
+}
+
+/** Internal source-binding qualification; public emission supports literal paint. */
+export function emitHtmlDraftPaintQualification(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  solidFillCompositionRules(contract,undefined,{root:'.root',part:name=>'.'+name,modifier:(axis,value)=>'.'+axis+'-'+value,disabled:htmlRootDisabledSelector(contract),booleanAttributes:true});
+  return emitHtmlImpl(contract,ctx,true);
+}
+
+function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitHtmlResult {
   refuseRetainedRuntime(contract, 'html', ctx.contracts);
+  refuseInstanceRootInputTarget(contract,ctx.contracts,'html');
   validateStaticHtmlIdentity(contract, ctx);
   const errors: string[] = [];
-  validateContract(contract, ctx.contracts, errors, ctx.icons);
+  const validationContract=draftPaint?structuredClone(contract):contract;
+  if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;}
+  validateContract(validationContract, ctx.contracts, errors, ctx.icons);
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
@@ -1430,9 +1448,25 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
     if (seen.has(c.id)) return;
     seen.add(c.id);
     for (const w of walkAnatomy(c)) {
+      if(w.part.slot && (w.part.solidFillComposition || w.part.solidFillCompositionByCombination))throw new Error("HTML_SLOT_FILL_COMPOSITION_UNQUALIFIED");
+      if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
+      if (w.part.presenceByCombination) throw new Error("HTML_PRESENCE_COMBINATION_UNSUPPORTED");
+      if (w.part.shape?.arc?.cap) throw new Error('HTML_ELLIPSE_ARC_CAP_UNSUPPORTED');
+      if (w.part.component?.sameInkInsideStroke) throw new Error('HTML_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
+      if (w.part.component?.booleanPropsByCombination) throw new Error('HTML_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
+      if (w.part.component?.enumPropsByCombination) throw new Error('HTML_ENUM_ARGUMENTS_UNSUPPORTED');
+      if (w.part.shapeFillOverrideProp) throw new Error('HTML_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
+      if (w.part.textColorOverrideProp) throw new Error('HTML_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
+      if (w.part.textAppearanceOverride) throw new Error('HTML_TEXT_APPEARANCE_UNSUPPORTED');
+      if (w.part.imageOverride) throw new Error('HTML_IMAGE_OVERRIDE_UNSUPPORTED');
+      if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
+      if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('HTML_INSTANCE_AFFINE_UNSUPPORTED');
+      if (w.part.layoutByCombination) throw new Error('HTML_JOINT_LAYOUT_UNSUPPORTED');
+    if (w.part.layout?.alignSelf || Object.values(w.part.layoutByProp?.map ?? {}).some(value => value.alignSelf)) throw new Error("HTML_ITEM_STRETCH_UNSUPPORTED");
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');
+      if(w.part.component && [...Object.values(w.part.states??{}),...(w.part.statesByProp??[]).flatMap(e=>Object.values(e.map))].some(m=>Object.keys(m).some(k=>k.startsWith('text-color:'))))throw Error('HTML_INSTANCE_STATE_TEXT_UNSUPPORTED');
       if (w.part.component) collectCss(ctx.contracts.get(w.part.component.id)!);
       for (const item of w.part.slot?.defaultContent ?? []) collectCss(ctx.contracts.get(item.id)!);
     }
@@ -1471,6 +1505,9 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
     }
   }
   for (const p of boolProps(contract)) {
+    if (p.default===undefined && walkAnatomy(contract).some(w=>w.part.solidFillCompositionByCombination?.props.includes(p.name))) {
+      const s=defaultsState();s.bools[p.name]=false;item(`${p.name}=false`,s);
+    }
     if (p.default === true) continue;
     const s = defaultsState();
     s.bools[p.name] = true;

@@ -1,0 +1,113 @@
+{
+  "fileKey": "A451UfD58U7XU21FzaqfHL",
+  "rows": [
+    {
+      "id": "41080:384381",
+      "type": "COMPONENT",
+      "name": "Add",
+      "width": 16,
+      "height": 16,
+      "mainKey": "2789a71ed6a8914b581e8ac04dd0045997b54745",
+      "children": [
+        {
+          "id": "41080:384382",
+          "name": "Vector",
+          "type": "VECTOR",
+          "x": 4,
+          "y": 4,
+          "width": 8,
+          "height": 8,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.08627451211214066,
+                "g": 0.08627451211214066,
+                "b": 0.08627451211214066
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:508b85ce17f36e353759b5297c25e4cec2e5d72d/4168:2228"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11004:370784",
+      "type": "INSTANCE",
+      "name": "Add",
+      "width": 20,
+      "height": 20,
+      "mainKey": "2789a71ed6a8914b581e8ac04dd0045997b54745",
+      "children": [
+        {
+          "id": "I11004:370784;1572:278",
+          "name": "Vector",
+          "type": "VECTOR",
+          "x": 5,
+          "y": 5,
+          "width": 10,
+          "height": 10,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:26071:295217"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10941:406875",
+      "type": "COMPONENT",
+      "name": "Style=Primary, Type=Icon only, Size=Expressive, State=Enabled",
+      "width": 48,
+      "height": 48,
+      "mainKey": "6c3883efcb88de697da142ab93cced576e0ab28f",
+      "children": [
+        {
+          "id": "11004:370783",
+          "name": "Button content",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "width": 48,
+          "height": 48,
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "fills": []
+        }
+      ]
+    }
+  ]
+}

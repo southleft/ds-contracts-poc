@@ -493,37 +493,25 @@ test('H2 (A6): "Active" WITH hover beside it, on an axis named State, is a press
 // ---------------------------------------------------------------------------
 // 8. review, PR 131 — H3 / M1: what write-back draws is NAMED, and pinned
 // ---------------------------------------------------------------------------
-test('H3: write-back completes the state matrix — the contract does not carry the designer\'s undrawn state cell, the writer draws it, and the proposal names exactly that cell', async () => {
-  const states = ['Default', 'Hover', 'Disabled'];
-  const set = designerSet('Pill', { State: states, Tone: ['A', 'B'] }, pillCells(states, (s, t) => !(s === 'Disabled' && t === 'B')));
-  const first = exact(set);
-  assert.equal(first.projection.status, 'verified-exact', 'every DRAWN row is carried: that is what the status attests');
-  assert.deepEqual(first.stateAxisProjection?.writeBack, { draws: 6, completes: [{ Tone: 'B', State: 'Disabled' }], omits: [] });
-  const note = first.notes.find((n) => n.startsWith('state-axis-write-back-diverges: '));
-  assert.ok(note?.includes('draws 6 variant(s) where the designer drew 5'));
-  assert.ok(note?.includes('It DRAWS 1 cell(s) the designer did NOT draw: Tone=B, State=Disabled.'));
-  // …and that is exactly what the writer does.
-  const c1 = ContractSchema.parse(first.contract);
-  const { write } = await canvas(first.mintedTokens!.tree);
-  const written = (await write(c1)).children.map((v) => v.name);
-  assert.equal(written.length, 6);
-  assert.ok(written.includes('Tone=B, State=Disabled'), 'the cell the designer left undrawn is drawn on write-back — a NAMED divergence (docs/23 §D.41), not a carried fact');
-  // A full single-axis set diverges in nothing, and says so.
-  const full = exact(designerSet('Pill', { State: states, Tone: ['A', 'B'] }, pillCells(states)));
-  assert.deepEqual(full.stateAxisProjection?.writeBack, { draws: 6, completes: [], omits: [] });
-  assert.ok(full.notes.some((n) => n.startsWith('state-axis-write-back: regenerating the canvas from this contract draws the same 6 cell(s)')));
+test('explicit state rows preserve undrawn cells and report the actual native writer domain',async()=>{
+ const states=['Default','Hover','Disabled'];
+ const set=designerSet('Pill',{State:states,Tone:['A','B']},pillCells(states,(s,t)=>!(s==='Disabled'&&t==='B')));
+ const first=exact(set);assert.equal(first.projection.status,'verified-exact');
+ assert.deepEqual(first.stateAxisProjection?.writeBack,{draws:5,completes:[],omits:[]});
+ assert.ok(first.notes.some(n=>n.startsWith('state-axis-write-back: regenerating the canvas from this contract draws the same 5 cell(s)')));
+ const {write}=await canvas(first.mintedTokens!.tree);
+ const names=(await write(ContractSchema.parse(first.contract))).children.map(v=>v.name).sort();
+ assert.equal(names.length,5);assert(!names.includes('Tone=B, State=Disabled'));
+ const full=exact(designerSet('Pill',{State:states,Tone:['A','B']},pillCells(states)));
+ assert.deepEqual(full.stateAxisProjection?.writeBack,{draws:6,completes:[],omits:[]});
 });
-
-test('H3: with a second API axis the writer draws ITS sparse preview matrix, not the designer\'s full one — the omitted cells are counted and named', async () => {
-  const full = exact(designerSet('Tag', GRID, gridCells(() => true, (s, t) => (s === 'Hover' ? BY_STATE.Hover[t] : REST[t]))));
-  assert.equal(full.projection.status, 'verified-exact');
-  // Designer: 2 states × 2 tones × 2 sizes = 8. Writer: the 4-cell rest grid + Hover per Tone (the substituted axis), Size pinned to S = 6.
-  assert.deepEqual(full.stateAxisProjection?.writeBack, { draws: 6, completes: [], omits: [{ State: 'Hover', Tone: 'A', Size: 'L' }, { State: 'Hover', Tone: 'B', Size: 'L' }] });
-  assert.ok(full.notes.some((n) => n.includes('It does NOT draw 2 cell(s) the designer drew: State=Hover, Tone=A, Size=L | State=Hover, Tone=B, Size=L.')));
-  // The prediction is the WRITER's own rule, held to the writer: what it names is what gets drawn.
-  const { write } = await canvas(full.mintedTokens!.tree);
-  const written = (await write(ContractSchema.parse(full.contract))).children.map((v) => v.name).sort();
-  assert.deepEqual(written, ['Tone=A, Size=L, State=Default', 'Tone=A, Size=S, State=Default', 'Tone=A, Size=S, State=Hover', 'Tone=B, Size=L, State=Default', 'Tone=B, Size=S, State=Default', 'Tone=B, Size=S, State=Hover']);
+test('explicit state rows preserve every second-axis state cell in the native writer',async()=>{
+ const set=designerSet('Tag',GRID,gridCells(()=>true,(s,t)=>(s==='Hover'?BY_STATE.Hover[t]:REST[t])));
+ const full=exact(set);assert.equal(full.projection.status,'verified-exact');
+ assert.deepEqual(full.stateAxisProjection?.writeBack,{draws:8,completes:[],omits:[]});
+ const {write}=await canvas(full.mintedTokens!.tree);
+ const names=(await write(ContractSchema.parse(full.contract))).children.map(v=>v.name.split(', ').sort().join(', ')).sort();
+ assert.deepEqual(names,set.variants.map(v=>v.name.split(', ').sort().join(', ')).sort());
 });
 
 test('M1: a rest-plane hole + a states plane — write-back draws the rest grid only, and the read-back says the states are NOT on that canvas (its verified-exact is about 3 variants, not about the states)', async () => {

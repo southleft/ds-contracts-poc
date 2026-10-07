@@ -1004,7 +1004,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -1101,7 +1103,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -1247,6 +1249,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -1810,7 +1813,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1912,7 +1915,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -2166,7 +2169,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -3893,7 +3896,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -3990,7 +3995,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -4136,6 +4141,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -4635,7 +4641,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4737,7 +4743,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -4991,7 +4997,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -8583,7 +8589,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -8680,7 +8688,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -8826,6 +8834,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -8885,10 +8894,11 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
+    node.strokeAlign = spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE');
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
+  if (spec.strokeOutside && spec.lits && spec.lits.strokeColor) node.strokeAlign = spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE');
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
     node.effects = spec.effectStack.map((e) => ({
@@ -9080,7 +9090,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'); }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
@@ -9400,7 +9410,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9502,7 +9512,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -9756,7 +9766,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -10447,7 +10457,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -10544,7 +10556,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -10690,6 +10702,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -11201,7 +11214,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11303,7 +11316,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -11557,7 +11570,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -12312,7 +12325,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -12409,7 +12424,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -12555,6 +12570,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -13054,7 +13070,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13156,7 +13172,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -13410,7 +13426,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -14065,7 +14081,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -14162,7 +14180,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -14308,6 +14326,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -14807,7 +14826,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14909,7 +14928,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -15163,7 +15182,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -15917,7 +15936,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -16014,7 +16035,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -16160,6 +16181,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -16659,7 +16681,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16761,7 +16783,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -17015,7 +17037,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -18402,7 +18424,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -18499,7 +18523,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -18645,6 +18669,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -18781,6 +18806,13 @@ function applyFrameSpec(node, spec) {
       }
     }
   }
+  // Edge-pinned auto-layout wrappers own the parent's allocated extent.
+  // HUG would shrink them back to a nested component's main/default size.
+  if (spec.absolute && node.layoutMode !== 'NONE') {
+    const horizontalIsPrimary = node.layoutMode !== 'VERTICAL';
+    if (spec.absolute.h === 'STRETCH') node[horizontalIsPrimary ? 'primaryAxisSizingMode' : 'counterAxisSizingMode'] = 'FIXED';
+    if (spec.absolute.v === 'STRETCH') node[horizontalIsPrimary ? 'counterAxisSizingMode' : 'primaryAxisSizingMode'] = 'FIXED';
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -18862,7 +18894,9 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+const outOfFlowBuiltChildren = new WeakMap();
 function resizeOutOfFlow(parent, built) {
+  outOfFlowBuiltChildren.set(parent, built);
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
@@ -18870,8 +18904,8 @@ function resizeOutOfFlow(parent, built) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
-        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
         if (fw != null || fh != null) {
           childNode.resize(
             Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
@@ -18893,6 +18927,13 @@ function resizeOutOfFlow(parent, built) {
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
     } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+  // An ancestor can allocate FILL only after its subtree was constructed.
+  // Re-evaluate descendants against that final allocation, using the actual
+  // built-node correspondence rather than assuming a child-index mapping.
+  for (const pair of built) {
+    const nested = outOfFlowBuiltChildren.get(pair[1]);
+    if (nested) resizeOutOfFlow(pair[1], nested);
   }
 }
 
@@ -19412,7 +19453,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19514,7 +19555,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -19772,7 +19813,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),

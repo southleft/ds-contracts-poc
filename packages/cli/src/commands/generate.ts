@@ -31,7 +31,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { emitTokensCss, referencedCssVars, tokensCssLayers, undefinedCssVars, type Emitter } from '@ds-contracts/core';
+import { externalizeTokenImages, emitTokensCss, referencedCssVars, tokensCssLayers, undefinedCssVars, type Emitter } from '@ds-contracts/core';
 // The registry comes through the repo's core/emitter.ts, which registers the
 // four built-ins into @ds-contracts/core's registry at load — importing the
 // registry from the package alone would see them only if something else in
@@ -205,7 +205,8 @@ export async function generateCommand(argv: string[]): Promise<number> {
         missing.map((n) => `  - ${n} — referenced by ${referencedBy.get(n)!.join(', ')}`).join('\n'),
     );
   }
-  if (ordered.length > 0) planned.push({ path: 'tokens.css', contents: sheet.css });
+  const tokenImages = externalizeTokenImages(sheet.css);
+  if (ordered.length > 0) planned.push({ path: 'tokens.css', contents: tokenImages.css });
 
   mkdirSync(outDir, { recursive: true });
   const written: string[] = [];
@@ -214,6 +215,12 @@ export async function generateCommand(argv: string[]): Promise<number> {
     mkdirSync(path.dirname(dest), { recursive: true });
     writeFileSync(dest, file.contents);
     written.push(file.path);
+  }
+  if (ordered.length > 0) for (const asset of tokenImages.assets) {
+    const dest = path.join(outDir, asset.path);
+    mkdirSync(path.dirname(dest), { recursive: true });
+    writeFileSync(dest, Buffer.from(asset.base64, 'base64'));
+    written.push(asset.path);
   }
   console.log(`✔ Emitted ${written.length} file(s) with "${emitter.name}" → ${outDir}: ${written.join(', ')}`);
   for (const line of describeTokensCss({

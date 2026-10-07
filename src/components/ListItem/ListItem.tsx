@@ -36,12 +36,12 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListIt
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <li ref={ref} className={classes} {...rest}>
-      {startContent != null ? <div className={styles.startContent}>{startContent}</div> : null}
+      <>{startContent != null ? <div className={styles.startContent}>{startContent}</div> : null}</>
       <div className={styles.textCol}>
         <span className={styles.labelText}>{label}</span>
         <span className={styles.descriptionText}>{description}</span>
       </div>
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
     </li>
   );
 });

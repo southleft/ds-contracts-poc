@@ -1,4 +1,5 @@
 import ts from "typescript";
+import { createReactImplementationStability } from "./react-implementation-stability.js";
 import { readReactChildren, type ReactChildrenFact } from "./react-children.js";
 import { reactHelperCandidates, type ReactHelperCandidate } from "./react-helper-effects.js";
 import { isReactContextExport } from "./react-context-export.js";
@@ -242,62 +243,7 @@ export function readReactSourceProgram(
     const valueExport = (symbol: ts.Symbol) => !!(unalias(symbol).flags & ts.SymbolFlags.Value) &&
       !symbol.declarations?.every(d => ts.isExportSpecifier(d) &&
         (d.isTypeOnly || (ts.isExportDeclaration(d.parent.parent) && d.parent.parent.isTypeOnly)));
-    const stableDependencies = new Map<ts.Symbol, boolean>();
-    const dependencyImplementationStable = (symbol: ts.Symbol, declaration: ts.Declaration): boolean => {
-      const saved = stableDependencies.get(symbol);
-      if (saved !== undefined) return saved;
-      let stable = ts.isFunctionDeclaration(declaration) || (ts.isVariableDeclaration(declaration) &&
-        ts.isVariableDeclarationList(declaration.parent) && !!(declaration.parent.flags & ts.NodeFlags.Const));
-      const namespaceContains = (candidate: ts.Symbol | undefined, seen = new Set<ts.Symbol>()): boolean => {
-        if (!candidate) return false;
-        candidate = unalias(candidate);
-        if (seen.has(candidate) || !(candidate.flags & (ts.SymbolFlags.ValueModule | ts.SymbolFlags.NamespaceModule))) return false;
-        seen.add(candidate);
-        return checker.getExportsOfModule(candidate).some(e => valueExport(e) &&
-          (unalias(e) === symbol || namespaceContains(e, seen)));
-      };
-      // An export object's current value is not proof of its original body.
-      // Inspect its uses across the installed source graph, including callers
-      // importing it under another name. JSX and import/export/type references
-      // preserve identity; passing/storing/mutating the value does not.
-      for (const source of program.getSourceFiles()) {
-        if (!stable || source.isDeclarationFile) continue;
-        let referenced = false, hasEval = false;
-        const inspect = (node: ts.Node) => {
-          if (ts.isTypeNode(node)) return;
-          if (ts.isIdentifier(node) && node.text === 'eval') hasEval = true;
-          if (ts.isIdentifier(node) || ts.isPropertyAccessExpression(node)) {
-            const candidate = checker.getSymbolAtLocation(node);
-            if (candidate && unalias(candidate) === symbol) {
-              referenced = true;
-              let use: ts.Node = node;
-              if (ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) use = node.parent;
-              const parent = use.parent;
-              const tag = (ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) || ts.isJsxSelfClosingElement(parent)) && parent.tagName === use;
-              const label = ts.isPropertyAccessExpression(parent) && parent.expression === use && parent.name.text === 'displayName' &&
-                ts.isBinaryExpression(parent.parent) && parent.parent.left === parent &&
-                parent.parent.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
-                (ts.isStringLiteral(parent.parent.right) || ts.isNoSubstitutionTemplateLiteral(parent.parent.right));
-              if (!(node === (declaration as ts.NamedDeclaration).name || tag || label ||
-                ts.isImportSpecifier(parent) || ts.isImportClause(parent) || ts.isExportSpecifier(parent) ||
-                (ts.isExportAssignment(parent) && !parent.isExportEquals && parent.expression === use))) stable = false;
-            } else if (namespaceContains(candidate) || namespaceContains(checker.getTypeAtLocation(node).getSymbol())) {
-              // An escaping namespace can expose this export to untyped code
-              // without another symbol-level reference to the component.
-              referenced = true;
-              const parent = node.parent;
-              if (!(ts.isNamespaceImport(parent) || ts.isImportSpecifier(parent) || ts.isExportSpecifier(parent) ||
-                ts.isNamespaceExport(parent) || (ts.isPropertyAccessExpression(parent) && parent.expression === node))) stable = false;
-            }
-          }
-          ts.forEachChild(node, inspect);
-        };
-        inspect(source);
-        if (hasEval && referenced) stable = false;
-      }
-      stableDependencies.set(symbol, stable);
-      return stable;
-    };
+    const dependencyImplementationStable = createReactImplementationStability(program, checker);
     for (let fileIndex = 0; fileIndex < pending.length; fileIndex++) {
       const file = pending[fileIndex];
       const sf = program.getSourceFile(file);

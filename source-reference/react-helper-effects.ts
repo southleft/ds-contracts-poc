@@ -2,6 +2,8 @@ import ts from "typescript";
 import { createHash } from "node:crypto";
 import { readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
+import { readReactRuntimeExport } from "./react-runtime-export.js";
+import { readReactElementCreationSites } from "./react-element-creation.js";
 import {
   modelReactHelperCall,
   modelReactComponentCall,
@@ -67,6 +69,20 @@ export function reactHelperCandidates(
         checker.getSymbolAtLocation(argument) !== input
       )
         continue;
+      // A rest binding can carry children without spelling it explicitly.
+      // This only nominates the call; the effects and paired runtime witnesses
+      // still have to prove the returned record and containing content flow.
+      if (declaration.name.elements.some(binding => binding.dotDotDotToken && ts.isIdentifier(binding.name)) &&
+          !declaration.name.elements.some(binding => {
+            const key = binding.propertyName ?? binding.name;
+            return !binding.dotDotDotToken && (ts.isIdentifier(key) || ts.isStringLiteral(key)) && key.text === "children";
+          })) {
+        candidates.push({
+          call: { start: call.getStart(), end: call.end },
+          parameter: { start: parameter.name.getStart(), end: parameter.name.end },
+          contentKey: "children",
+        });
+      }
       for (const binding of declaration.name.elements) {
         const key = binding.propertyName ?? binding.name;
         if (
@@ -182,7 +198,7 @@ function readReactEffects(
   };
   let callSite: HelperSourcePoint | undefined;
   try {
-    const { program, checker, sf, source, runtimeFiles, requireCurrent } =
+    const { program, checker, sf, source, runtimeFiles, resolveRuntimeExport, requireCurrent } =
       prepareReactEffectProgram(reference, module, sourceFiles, checkerFiles);
     let call: ts.CallExpression | undefined,
       parameter: ts.Identifier | undefined;
@@ -260,7 +276,12 @@ function readReactEffects(
       contentKey: candidate.contentKey,
       source,
       runtimeFiles,
+      resolveRuntimeExport,
       resolution: reference.runtimeImports,
+      createElementSites: scope === "component" && /\.[cm]?js$/.test(sf.fileName)
+        ? readReactElementCreationSites(sf.text, sf.fileName, module, true)
+            .filter(site => site.factory === "createElement").map(site => ({file:module,sha256:site.sourceSha256,...site.span}))
+        : [],
     };
     const result =
       scope === "component"
@@ -274,21 +295,27 @@ function readReactEffects(
           c.site.start === callSite!.start &&
           c.site.end === callSite!.end,
       )?.source;
-      const declarations = call.arguments.slice(1).map((argument) => {
+      const metadata = call.arguments.slice(1).map((argument) => {
         const value = unwrap(argument);
         if (!ts.isIdentifier(value)) return undefined;
         let symbol = checker.getSymbolAtLocation(value);
         if (symbol && symbol.flags & ts.SymbolFlags.Alias)
           symbol = checker.getAliasedSymbol(symbol);
         const declaration = symbol?.valueDeclaration;
-        return declaration &&
+        if (declaration && !declaration.getSourceFile().isDeclarationFile &&
           ts.isVariableDeclaration(declaration) &&
-          declaration.initializer
-          ? declaration
-          : undefined;
+          declaration.initializer) return source(declaration);
+        // The executable fallback records the actual module declaration and
+        // the local import binding at this read. Only the former can register
+        // the metadata initializer; declaration-file spans have no authority.
+        const site = source(value);
+        const bindings = result.runtimeBindings.bindings.filter(binding =>
+          binding.declarationKind === "VariableDeclaration" && binding.reads.some(read =>
+            read.file === site.file && read.sha256 === site.sha256 && read.start === site.start && read.end === site.end));
+        return bindings.length === 1 ? bindings[0].binding : undefined;
       });
-      if (helper && declarations.every((d): d is ts.VariableDeclaration => !!d))
-        instrumentation = { helper, metadata: declarations.map(source) };
+      if (helper && metadata.every((point): point is HelperSourcePoint => !!point))
+        instrumentation = { helper, metadata };
     }
     requireCurrent();
     return {
@@ -398,5 +425,24 @@ export function prepareReactEffectProgram(
         end: node.end,
       };
     };
-    return {root,file,program,checker,sf,source,runtimeFiles,requireCurrent};
+    const resolveRuntimeExport = (file: string, exportName: string): ts.Declaration | undefined => {
+      const result = readReactRuntimeExport(reference, path.relative(root, file), [exportName]);
+      if (result.status !== "resolved") return undefined;
+      const target = program.getSourceFile(path.resolve(root, result.definition.module));
+      if (!target || target.isDeclarationFile) return undefined;
+      let found: ts.Declaration | undefined;
+      const visit = (node: ts.Node) => {
+        if (node.getStart(target) === result.definition.span.start && node.end === result.definition.span.end &&
+            (ts.isVariableDeclaration(node) || ts.isFunctionDeclaration(node)) && node.name && ts.isIdentifier(node.name))
+          found = node;
+        ts.forEachChild(node, visit);
+      };
+      visit(target);
+      if (found) {
+        source(found);
+        Object.assign(sourceFiles, result.files);
+      }
+      return found;
+    };
+    return {root,file,program,checker,sf,source,runtimeFiles,resolveRuntimeExport,requireCurrent};
 }

@@ -1,5 +1,10 @@
 # 28 — Beta Tester Runbook
 
+> **Historical workflow.** For the current Figma → React preview, start with
+> [Preview](PREVIEW.md) and the [packed CLI instructions](../packages/cli/README.md#release-status).
+> The current bidirectional acceptance goal is [GOAL-BRIDGE.md](GOAL-BRIDGE.md).
+> The older workflow below is retained for reference; it does not establish current beta readiness.
+
 > **Current state (2026-08-30).** Tracks A–C below are the
 > universal-contract beta. They are not the recipe-IR v1 proof. Combobox,
 > table, and calendar are live-proven on the recipe path; product v1 is

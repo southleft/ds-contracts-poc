@@ -1,6 +1,6 @@
 import {isReactAuthoredNativeRequest,type ReactAuthoredNativeRequest} from './react-authored-native-request.js';
 import {readReactAuthoredNativeEvidence} from './react-authored-native-evidence.js';
-import { reactHelperObservationUnchanged } from './react-helper-observation.js';
+import { reactHelperObservationsUnchanged } from './react-helper-observation.js';
 /** Restore only an archive pinned by an existing host-owned native journal. */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -21,7 +21,7 @@ export function restoreReactOwnership(repo: string, reference: ReactReference,
     const snapshot = structuredClone(state);
     try {
       read();
-      if(snapshot.rows.some(r=>(r.helperObservations??[]).some(h=>!reactHelperObservationUnchanged(h))))throw Error('helper-observation-input-changed');
+      if(!reactHelperObservationsUnchanged(snapshot.rows.flatMap(r=>r.helperObservations??[])))throw Error('helper-observation-input-changed');
       return snapshot;
     } catch {
       const sourceUnchanged = reactReferenceUnchanged(reference) && reactSourceProgramUnchanged(program);

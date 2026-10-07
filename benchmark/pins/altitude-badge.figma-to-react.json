@@ -2,16 +2,16 @@
   "id": "altitude-badge.figma-to-react",
   "version": 1,
   "inputSha256": "f0b1297625c096740fbe4487bfe5d620633ee4514fc57b8ecb18e8ea6c2b5a39",
-  "requestSha256": "cc9f6803c0b3f08a970e700a71fb457d19c2362a9c66e05fd4e795e7ca0e68ce",
+  "requestSha256": "d8f701c4b58ca106f736ed0928fc8f43c84dff9a735f722698a167ebb13bc9a9",
   "rootId": "ds.badge",
   "generated": {
     "Badge/Badge.module.css": "3b9c41944e230560fa9261770bc713fdeb54eee40b5221b0df331d58a9898fa7",
-    "Badge/Badge.tsx": "55e370d7ba2beb0a0cd586b29688f8d3cf5ebcdaded05e61c262ff87c96b3d3d",
+    "Badge/Badge.tsx": "3e0ef56d997f4f54576a7481c05453fce339b498d7a2087835ef10ad137783eb",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
     "tokens.css": "f204a5c71b35419bb0987d96c3a0cb98b2728ab9077fe1c7e3efea5ce842976a"
   },
-  "generatedSha256": "3cc9b1d2de7753503779e52a5d642285eccbe72326db79c4ff410e27e667632c",
+  "generatedSha256": "d15fc06e8375b770981ee0478d10cab986d54ef89d889ae43ce16192e91ad113",
   "entries": {
     "package/dist/Badge/Badge.d.ts": "a1276011bc5d14a5a91b63803e28ad2ec20f94cbc206f7149735a5864ab67929",
     "package/dist/Badge/Badge.js": "19efc20bcfdf98a6fc5087a2f18b66d9d8731d8b977a942d02e34c79c9dd7363",
@@ -28,17 +28,17 @@
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/altitude-badge.figma-to-react/receipt.json",
-    "receiptSha256": "dcd080b0229cbea2f49022a079305014630db0fc67095d050967cf0719c52842",
-    "generatedSha256": "3cc9b1d2de7753503779e52a5d642285eccbe72326db79c4ff410e27e667632c",
+    "receiptSha256": "955ef951e088398c1db3e007b31173639b1572ed1486cf9a8c97cab7218832ae",
+    "generatedSha256": "d15fc06e8375b770981ee0478d10cab986d54ef89d889ae43ce16192e91ad113",
     "component": "Badge",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-28",
+    "measuredAt": "2026-10-06",
     "cases": [
       {
         "key": "variant-danger_shape-label",
         "withinLimit": true,
-        "white": 2.807017543859649,
-        "black": 2.807017543859649,
+        "white": 2.631578947368421,
+        "black": 2.631578947368421,
         "residual": null
       },
       {
@@ -51,22 +51,22 @@
       {
         "key": "variant-info_shape-label",
         "withinLimit": true,
-        "white": 2.719298245614035,
-        "black": 2.719298245614035,
+        "white": 2.456140350877193,
+        "black": 2.456140350877193,
         "residual": null
       },
       {
         "key": "variant-success_shape-label",
         "withinLimit": true,
-        "white": 2.982456140350877,
-        "black": 2.982456140350877,
+        "white": 2.719298245614035,
+        "black": 2.719298245614035,
         "residual": null
       },
       {
         "key": "variant-warning_shape-label",
         "withinLimit": true,
-        "white": 3.3333333333333335,
-        "black": 3.3333333333333335,
+        "white": 2.982456140350877,
+        "black": 2.982456140350877,
         "residual": null
       },
       {

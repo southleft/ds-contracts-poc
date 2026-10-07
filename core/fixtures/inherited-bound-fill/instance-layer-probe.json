@@ -1,0 +1,409 @@
+{
+  "probe": {
+    "pageId": "157:67106",
+    "collectionId": "VariableCollectionId:157:67107",
+    "variableId": "VariableID:157:67108",
+    "bound": {
+      "type": "SOLID",
+      "visible": true,
+      "opacity": 0.5,
+      "blendMode": "MULTIPLY",
+      "color": {
+        "r": 0.25,
+        "g": 0.5,
+        "b": 0.75
+      },
+      "boundVariables": {
+        "color": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:157:67108"
+        }
+      }
+    },
+    "rows": [
+      {
+        "id": "157:67109",
+        "name": "Literal main",
+        "type": "COMPONENT",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "MULTIPLY",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "157:67110",
+        "name": "Bound direct",
+        "type": "INSTANCE",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:157:67108"
+              }
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "157:67111",
+        "name": "Bound then blend",
+        "type": "INSTANCE",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:157:67108"
+              }
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "157:67112",
+        "name": "Paint layer main",
+        "type": "COMPONENT",
+        "fills": [],
+        "children": [
+          {
+            "id": "157:67113",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 0.5,
+                "blendMode": "MULTIPLY",
+                "color": {
+                  "r": 0.25,
+                  "g": 0.5,
+                  "b": 0.75
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH",
+            "opacity": 1
+          }
+        ]
+      },
+      {
+        "id": "157:67114",
+        "name": "Layer override",
+        "type": "INSTANCE",
+        "fills": [],
+        "children": [
+          {
+            "id": "I157:67114;157:67113",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 0.5,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.25,
+                  "g": 0.5,
+                  "b": 0.75
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:157:67108"
+                  }
+                }
+              }
+            ],
+            "blendMode": "MULTIPLY",
+            "opacity": 1
+          }
+        ]
+      }
+    ]
+  },
+  "comparison": {
+    "pageId": "157:67106",
+    "frames": [
+      {
+        "id": "157:67118",
+        "name": "literal-0",
+        "instanceId": "157:67119",
+        "mainId": "157:67109",
+        "children": [
+          {
+            "id": "I157:67119;157:67116",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAGRJREFUeAHt1TENwDAMBVG3KpFCKZMya5kESqAkGOJbrOje7OEkD//4Wh9R2BnFGUgZSBlIGUgZSBlIXZH0PvfS/d96ZPhiykDKQMpAykBq3y3ObusqX0wZSBlIGUgZSBlIlQ+cx0MIzttGFfAAAAAASUVORK5CYII=",
+        "sha256": "efbdfc2d554dddd02afbc221ff21d53ba06e9856d010dc2916a6e92f790a4c1b"
+      },
+      {
+        "id": "157:67121",
+        "name": "layer-0",
+        "instanceId": "157:67122",
+        "mainId": "157:67112",
+        "children": [
+          {
+            "id": "I157:67122;157:67113",
+            "name": "Paint",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 0.5,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.25,
+                  "g": 0.5,
+                  "b": 0.75
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:157:67108"
+                  }
+                }
+              }
+            ],
+            "blendMode": "MULTIPLY"
+          },
+          {
+            "id": "I157:67122;157:67117",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAGRJREFUeAHt1TENwDAMBVG3KpFCKZMya5kESqAkGOJbrOje7OEkD//4Wh9R2BnFGUgZSBlIGUgZSBlIXZH0PvfS/d96ZPhiykDKQMpAykBq3y3ObusqX0wZSBlIGUgZSBlIlQ+cx0MIzttGFfAAAAAASUVORK5CYII=",
+        "sha256": "efbdfc2d554dddd02afbc221ff21d53ba06e9856d010dc2916a6e92f790a4c1b"
+      },
+      {
+        "id": "157:67125",
+        "name": "literal-1",
+        "instanceId": "157:67126",
+        "mainId": "157:67109",
+        "children": [
+          {
+            "id": "I157:67126;157:67116",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAFVJREFUeAHt2LENACAIBdGPcf+VNY4g11Dcm+ASCgiV5GSwleEMpAykDKQMpAykDKR2mn5PoEqPI6YMpAykDKQMpMYHvhXpZ4EwkDKQMpAykDKQMpC6D1oDTzuxYbIAAAAASUVORK5CYII=",
+        "sha256": "9970d7cf0195ee302339bbd37f9495c5e3a1192860c68351737fe0d62d7f4248"
+      },
+      {
+        "id": "157:67128",
+        "name": "layer-1",
+        "instanceId": "157:67129",
+        "mainId": "157:67112",
+        "children": [
+          {
+            "id": "I157:67129;157:67113",
+            "name": "Paint",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 0.5,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.25,
+                  "g": 0.5,
+                  "b": 0.75
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:157:67108"
+                  }
+                }
+              }
+            ],
+            "blendMode": "MULTIPLY"
+          },
+          {
+            "id": "I157:67129;157:67117",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAFVJREFUeAHt2LENACAIBdGPcf+VNY4g11Dcm+ASCgiV5GSwleEMpAykDKQMpAykDKR2mn5PoEqPI6YMpAykDKQMpMYHvhXpZ4EwkDKQMpAykDKQMpC6D1oDTzuxYbIAAAAASUVORK5CYII=",
+        "sha256": "9970d7cf0195ee302339bbd37f9495c5e3a1192860c68351737fe0d62d7f4248"
+      },
+      {
+        "id": "157:67132",
+        "name": "literal-2",
+        "instanceId": "157:67133",
+        "mainId": "157:67109",
+        "children": [
+          {
+            "id": "I157:67133;157:67116",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAF1JREFUeAHt2DERACEMBdFwc3ZQhwAwgDoEgQbYJsW+OsXOpPult7ojsS+SM5AykDKQMpAykDKQ+uPRmOvuvtV44YspAykDKQMpA6n0gcVlATKQMpAykDKQMpAykDorlgeNVoAzWgAAAABJRU5ErkJggg==",
+        "sha256": "001a554b0e88d74966f6bde29f2dcfb8c13579147e45cb387755fb45e52bd5f3"
+      },
+      {
+        "id": "157:67135",
+        "name": "layer-2",
+        "instanceId": "157:67136",
+        "mainId": "157:67112",
+        "children": [
+          {
+            "id": "I157:67136;157:67113",
+            "name": "Paint",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 0.5,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.25,
+                  "g": 0.5,
+                  "b": 0.75
+                },
+                "boundVariables": {
+                  "color": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:157:67108"
+                  }
+                }
+              }
+            ],
+            "blendMode": "MULTIPLY"
+          },
+          {
+            "id": "I157:67136;157:67117",
+            "name": "Foreground",
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0,
+                  "b": 0
+                },
+                "boundVariables": {}
+              }
+            ],
+            "blendMode": "PASS_THROUGH"
+          }
+        ],
+        "png": "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAF1JREFUeAHt2DERACEMBdFwc3ZQhwAwgDoEgQbYJsW+OsXOpPult7ojsS+SM5AykDKQMpAykDKQ+uPRmOvuvtV44YspAykDKQMpA6n0gcVlATKQMpAykDKQMpAykDorlgeNVoAzWgAAAABJRU5ErkJggg==",
+        "sha256": "001a554b0e88d74966f6bde29f2dcfb8c13579147e45cb387755fb45e52bd5f3"
+      }
+    ]
+  },
+  "probeCode": "\nconst page=figma.createPage();page.name='Bound instance paint 889';await figma.setCurrentPageAsync(page);\nconst collection=figma.variables.createVariableCollection('Probe889');\nconst variable=figma.variables.createVariable('Ink',collection,'COLOR');\nvariable.setValueForMode(collection.defaultModeId,{r:.25,g:.5,b:.75,a:.5});\nconst main=figma.createComponent();page.appendChild(main);main.name='Literal main';main.resize(40,40);\nconst paint={type:'SOLID',color:{r:.25,g:.5,b:.75},opacity:.5,blendMode:'MULTIPLY'};\nmain.fills=[paint];\nconst bound=figma.variables.setBoundVariableForPaint(paint,'color',variable);\nconst direct=main.createInstance();page.appendChild(direct);direct.x=60;direct.name='Bound direct';direct.fills=[bound];\nconst restored=main.createInstance();page.appendChild(restored);restored.x=120;restored.name='Bound then blend';restored.fills=[{...bound,blendMode:'MULTIPLY'}];\nconst layered=figma.createComponent();page.appendChild(layered);layered.x=180;layered.name='Paint layer main';layered.resize(40,40);layered.fills=[];\nconst layer=figma.createRectangle();layered.appendChild(layer);layer.name='Paint';layer.resize(40,40);layer.fills=[paint];layer.constraints={horizontal:'STRETCH',vertical:'STRETCH'};\nconst instance=layered.createInstance();page.appendChild(instance);instance.x=240;instance.name='Layer override';instance.children[0].fills=[bound];instance.children[0].blendMode='MULTIPLY';instance.children[0].opacity=1;\nconst rows=[main,direct,restored,layered,instance].map(n=>({id:n.id,name:n.name,type:n.type,fills:n.fills,children:n.children.map(c=>({id:c.id,fills:c.fills,blendMode:c.blendMode,opacity:c.opacity}))}));\nfigma.viewport.scrollAndZoomIntoView([main,direct,restored,layered,instance]);\nreturn {pageId:page.id,collectionId:collection.id,variableId:variable.id,bound,rows};\n",
+  "comparisonCode": "\nconst page=await figma.getNodeByIdAsync('157:67106');await figma.setCurrentPageAsync(page);\nconst main=await figma.getNodeByIdAsync('157:67109'),layered=await figma.getNodeByIdAsync('157:67112'),variable=await figma.variables.getVariableByIdAsync('VariableID:157:67108');\nfor(const m of [main,layered]){const foreground=figma.createRectangle();m.appendChild(foreground);foreground.name='Foreground';foreground.resize(12,12);foreground.x=14;foreground.y=14;foreground.fills=[{type:'SOLID',color:{r:1,g:0,b:0}}];}\nconst frames=[];\nfor(const [i,color]of [{r:1,g:1,b:1},{r:0,g:0,b:0},{r:.8,g:.6,b:.2}].entries())for(const kind of ['literal','layer']){\n const frame=figma.createFrame();page.appendChild(frame);frame.name=kind+'-'+i;frame.resize(40,40);frame.x=i*120+(kind==='layer'?50:0);frame.y=80;frame.fills=[{type:'SOLID',color}];\n const instance=(kind==='literal'?main:layered).createInstance();frame.appendChild(instance);instance.x=0;instance.y=0;\n if(kind==='layer'){const paint=instance.children[0];paint.fills=[figma.variables.setBoundVariableForPaint({type:'SOLID',color:{r:0,g:0,b:0}},'color',variable)];paint.blendMode='MULTIPLY';paint.opacity=1;}\n frames.push({id:frame.id,name:frame.name,instanceId:instance.id,mainId:(await instance.getMainComponentAsync()).id,children:instance.children.map(n=>({id:n.id,name:n.name,fills:n.fills,blendMode:n.blendMode})),png:figma.base64Encode(await frame.exportAsync({format:'PNG'}))});\n}\nfigma.viewport.scrollAndZoomIntoView(frames.map(r=>figma.getNodeById(r.id)));\nreturn {pageId:page.id,frames};\n",
+  "scope": "Native feasibility only; no public conversion or reverse qualification."
+}

@@ -1,0 +1,164 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "qualification.reverse-paint361",
+  "name": "ReversePaintQualification361",
+  "version": "1.1.0",
+  "status": "draft",
+  "description": "Communicates status or categorization at a glance. Non-interactive.",
+  "archetype": "badge / tag / chip",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "order",
+      "type": {
+        "enum": [
+          "front",
+          "back"
+        ]
+      },
+      "default": "front",
+      "bindings": {
+        "code": {
+          "prop": "order"
+        },
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Order"
+        }
+      }
+    },
+    {
+      "name": "flow",
+      "type": {
+        "enum": [
+          "forward",
+          "reverse"
+        ]
+      },
+      "default": "forward",
+      "bindings": {
+        "code": {
+          "prop": "flow"
+        },
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Flow"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center",
+        "reversePaint": true
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "literals": {
+        "width": "20px",
+        "height": "20px"
+      },
+      "parts": {
+        "ink": {
+          "element": "div",
+          "literals": {
+            "width": "8px",
+            "height": "8px",
+            "background-color": "#ff0000"
+          }
+        },
+        "background": {
+          "element": "div",
+          "declared": {
+            "position": "absolute"
+          },
+          "literals": {
+            "left": "0px",
+            "top": "0px",
+            "width": "20px",
+            "height": "20px",
+            "background-color": "#0000ff"
+          }
+        }
+      },
+      "layoutByCombination": {
+        "props": [
+          "order",
+          "flow"
+        ],
+        "rows": [
+          {
+            "values": [
+              "front",
+              "forward"
+            ],
+            "layout": {
+              "direction": "row",
+              "justify": "center",
+              "align": "center",
+              "reversePaint": true
+            }
+          },
+          {
+            "values": [
+              "front",
+              "reverse"
+            ],
+            "layout": {
+              "direction": "row-reverse",
+              "justify": "center",
+              "align": "center",
+              "reversePaint": true
+            }
+          },
+          {
+            "values": [
+              "back",
+              "forward"
+            ],
+            "layout": {
+              "direction": "row",
+              "justify": "center",
+              "align": "center",
+              "reversePaint": false
+            }
+          },
+          {
+            "values": [
+              "back",
+              "reverse"
+            ],
+            "layout": {
+              "direction": "row-reverse",
+              "justify": "center",
+              "align": "center",
+              "reversePaint": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "bindings": {
+    "code": {
+      "anchors": {
+        "importPath": "./ReversePaintQualification361",
+        "export": "ReversePaintQualification361"
+      }
+    },
+    "figma": {
+      "anchors": {
+        "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+        "componentSetKey": null
+      }
+    }
+  }
+}

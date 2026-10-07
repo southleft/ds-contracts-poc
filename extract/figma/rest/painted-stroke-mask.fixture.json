@@ -1,0 +1,73 @@
+{
+  "id": "50994:15226",
+  "name": "Rectangle 2",
+  "type": "VECTOR",
+  "size": {
+    "x": 18.0,
+    "y": 18.0
+  },
+  "absoluteBoundingBox": {
+    "x": 738.0,
+    "y": 2952.0,
+    "width": 18.0,
+    "height": 18.0
+  },
+  "relativeTransform": [
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ]
+  ],
+  "constraints": {
+    "vertical": "SCALE",
+    "horizontal": "SCALE"
+  },
+  "fills": [
+    {
+      "blendMode": "NORMAL",
+      "visible": false,
+      "type": "SOLID",
+      "color": {
+        "r": 0.03529411926865578,
+        "g": 0.6784313917160034,
+        "b": 0.9176470637321472,
+        "a": 1.0
+      }
+    }
+  ],
+  "strokes": [
+    {
+      "blendMode": "NORMAL",
+      "type": "SOLID",
+      "color": {
+        "r": 0.03529411926865578,
+        "g": 0.6784313917160034,
+        "b": 0.9176470637321472,
+        "a": 1.0
+      }
+    }
+  ],
+  "strokeAlign": "INSIDE",
+  "strokeWeight": 5.0,
+  "blendMode": "PASS_THROUGH",
+  "fillGeometry": [
+    {
+      "path": "M0 9C0 4.02944 4.02944 0 9 0L9 0C13.9706 0 18 4.02944 18 9L18 9C18 13.9706 13.9706 18 9 18L9 18C4.02944 18 0 13.9706 0 9L0 9Z",
+      "windingRule": "NONZERO"
+    }
+  ],
+  "strokeGeometry": [
+    {
+      "path": "M9 13C6.79086 13 5 11.2091 5 9L-5 9C-5 16.732 1.26801 23 9 23L9 13ZM13 9C13 11.2091 11.2091 13 9 13L9 23C16.732 23 23 16.732 23 9L13 9ZM9 5C11.2091 5 13 6.79086 13 9L23 9C23 1.26801 16.732 -5 9 -5L9 5ZM9 -5C1.26801 -5 -5 1.26801 -5 9L5 9C5 6.79086 6.79086 5 9 5L9 -5Z",
+      "windingRule": "NONZERO"
+    }
+  ],
+  "isMask": true,
+  "maskType": "ALPHA"
+}

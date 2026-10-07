@@ -1,3 +1,4 @@
+import {cpSync as copyRuntimeFixture} from 'node:fs';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { createReactHelperObserver } from "./react-helper-transform.js";
 import { reactHelperRuntimeHook, reactHelperRuntimeRead, type ReactHelperRuntimeReport } from "./react-helper-runtime.js";
@@ -820,7 +821,8 @@ test('helper observations preserve the paired render, refuse missing registratio
   let job:ReturnType<typeof startReactOwnership>|undefined;
   try {
     mkdirSync(path.join(dir,'node_modules'),{recursive:true});mkdirSync(path.join(dir,'src'));
-    for(const name of ['react','react-dom','scheduler'])symlinkSync(path.resolve('node_modules',name),path.join(dir,'node_modules',name),'dir');
+    // This source-root fixture owns its runtime; external linked packages are a separate boundary case.
+    for(const name of ['react','react-dom','scheduler'])copyRuntimeFixture(realpathSync(path.resolve('node_modules',name)),path.join(dir,'node_modules',name),{recursive:true});
     writeFileSync(path.join(dir,'package.json'),'{}');writeFileSync(path.join(dir,'package-lock.json'),'{}');
     writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler',skipLibCheck:true,paths:{react:[path.resolve('node_modules/@types/react/index.d.ts')],'react/jsx-runtime':[path.resolve('node_modules/@types/react/jsx-runtime.d.ts')]}}}));
     writeFileSync(path.join(dir,'style.css'),':root{--sample-color:rgb(0, 0, 0)} button{display:inline-flex;width:80px;height:32px;color:var(--sample-color)}');

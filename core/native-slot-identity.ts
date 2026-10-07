@@ -140,6 +140,31 @@ export function resolveNativeGraphSlotIdentities(creation: Row, rows: Row[]): Ro
     };
     const aliases = new Map<string, string>();
     const claimed = new Set<string>();
+    // Caller content in a main's nested slot is inherited when the enclosing
+    // main is instantiated. Prove that copy by its exact child-index path from
+    // an instance to its observed main, never by a shared stamp alone.
+    const inheritedCaller = (row: Row, original: Row) => {
+      const path: Row[] = [], seen = new Set<string>();
+      for (let cursor: Row | undefined = row; cursor && !seen.has(cursor.id); cursor = live.get(cursor.parentId)) {
+        seen.add(cursor.id);
+        if (cursor.type === 'INSTANCE' && path.length && bornInstance(cursor)) {
+          let source = live.get(cursor.mainId);
+          if (source?.type === 'COMPONENT') {
+            let parent = cursor;
+            for (const child of [...path].reverse()) {
+              const index = parent.childIds.indexOf(child.id);
+              const next: Row | undefined = index >= 0 ? live.get(source?.childIds[index]) : undefined;
+              if (!next || next.parentId !== source?.id || next.type !== child.type) { source = undefined; break; }
+              source = next; parent = child;
+            }
+            if (source?.id === original.id && row.type === original.type && row.mainId === original.mainId &&
+                row.metadata?.nativeContractPart === original.metadata?.nativeContractPart) return true;
+          }
+        }
+        path.push(cursor);
+      }
+      return false;
+    };
     for (const n of rows) {
       if (born.has(n.id)) continue;
       const slot = boundary(n);
@@ -157,6 +182,8 @@ export function resolveNativeGraphSlotIdentities(creation: Row, rows: Row[]): Ro
             n.metadata.nativeContractPart === live.get(stamp)!.metadata?.nativeContractPart) continue;
       }
       // A stamped copy beside its still-present original is a duplicate.
+      if (creation.graphVerification === 2 && live.has(stamp) && n.type === 'INSTANCE' &&
+          inheritedCaller(n, live.get(stamp)!)) continue;
       if (live.has(stamp) || claimed.has(stamp)) return null;
       const original = born.get(stamp)!;
       if (n.type !== original.type || (original.key && original.key !== n.key)) return null;

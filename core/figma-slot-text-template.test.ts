@@ -130,6 +130,8 @@ test('canonical capture restores reusable root typography and refuses unsupporte
   const source = readFileSync(new URL('../extract/figma/dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify([set.name])};`);
   const dump = JSON.parse(JSON.stringify(await run(source))), captured = dump[set.name] as DumpSet;
+  assert.equal(typeof captured.variants[0].children?.[0].nodeId, 'string');
+  assert.equal(typeof captured.variants[0].children?.[0].children?.[0].nodeId, 'string');
   const capturedLayer = capturedTokensFromDump(dump)!;
   assert.equal(capturedLayer.entries.find(e => e.path === 'weight')?.value, '400');
   assert.equal(capturedLayer.entries.find(e => e.path === 'weight')?.type, 'number');
@@ -145,6 +147,10 @@ test('canonical capture restores reusable root typography and refuses unsupporte
   assert.equal(returned.anatomy.root.declared?.['font-family'], 'Inter');
   const original = structuredClone(captured);
   for (const mutate of [
+    (d: any) => { d.variants[0].children[0].nodeId = 3; },
+    (d: any) => { d.variants[0].children[0].children[0].nodeId = ''; },
+    (d: any) => { d.variants[0].children[0].fill = { color: '#ff0000' }; },
+    (d: any) => { d.variants[0].children[0].sourceEmptyFill = false; },
     (d: any) => { d.rootSlot.textTemplate = 2; },
     (d: any) => { d.variants[0].children[0].children[0].hidden = false; },
     (d: any) => { d.variants[0].children[0].children[0].text.characters = 'Invented default'; },
@@ -237,6 +243,26 @@ test('independent native draft readback requires template typography, bindings, 
 });
 
 
+test('template tracking accepts only its exact float32 storage and keeps units and resize guarded', async () => {
+  for (const tracking of [0.03, -0.03]) {
+    const { run, input } = await scopedTemplateFixture(tracking);
+    const receipt = await run(emitNativeContractReadbackScript(input));
+    assert.equal(verifyNativeContractReadback(input, receipt).status, 'supported-structure-observed');
+    for (const node of receipt.nodes.filter((n: any) => n.type === 'TEXT'))
+      node.values.letterSpacing.value = Math.fround(tracking);
+    assert.equal(verifyNativeContractReadback(input, receipt).status, 'supported-structure-observed');
+    for (const mutate of [
+      (v: any) => { v.letterSpacing.value = Math.fround(tracking + 0.001); },
+      (v: any) => { v.letterSpacing.unit = 'PERCENT'; },
+      (v: any) => { v.letterSpacing.extra = true; },
+      (v: any) => { v.textAutoResize = 'HEIGHT'; },
+    ]) {
+      const changed = structuredClone(receipt); mutate(changed.nodes.find((n: any) => n.type === 'TEXT').values);
+      assert(verifyNativeContractReadback(input, changed).problems.some(p => p.startsWith('native-source-observation-text-template-sizing')));
+    }
+  }
+});
+
 test('direct caller text uses the observed template bindings and selected main mode', async () => {
   const f = await scopedTemplateFixture(0.25), { c, engine, run, source, compiled, input } = f;
   const receipt = await run(emitNativeContractReadbackScript(input));
@@ -280,8 +306,17 @@ test('direct caller text uses the observed template bindings and selected main m
   const tokenCreated = await run(emitNativeTokenContextScript(tokenInput).script);
   const tokenRead = await run(emitNativeTokenContextReadbackScript(tokenInput, tokenCreated.creationIdentity));
   const context = { operation, tokens: { input: tokenInput, identity: tokenCreated.creationIdentity, receipt: tokenRead.receipt } };
+  const lookup = f.figma.getNodeByIdAsync.bind(f.figma);
+  let slotLookups = 0;
+  f.figma.getNodeByIdAsync = async (id: string) => {
+    const node = await lookup(id);
+    if (node?.type === 'SLOT') { slotLookups++; throw 'Derived slot lookup unavailable'; }
+    return node;
+  };
   const creation = await run(engine.buildNativeContractComparisonScript(content, new Map([[content.id, content]]), source, context, comparison));
+  f.figma.getNodeByIdAsync = lookup;
   assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  assert.equal(slotLookups, 0, 'template caller post-write roles use owned handles');
   const observedInput: NativeContractComparisonObservationInput = { operation, planRevision: revisionOf('caller plan'), comparison: prepared,
     tokenInput, tokenIdentity: tokenCreated.creationIdentity, creation };
   const observed = await run(emitNativeContractComparisonReadbackScript(observedInput));

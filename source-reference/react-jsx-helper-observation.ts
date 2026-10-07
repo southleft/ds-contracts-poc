@@ -34,7 +34,7 @@ import {verifyReactContextConsumers,type ReactContextConsumerVerification} from 
 
 export interface ReactJsxHelperObservation {
   version:1;acceptedContract:null;effectsVerified:false;
-  qualification:'original-jsx-helper-state-only';
+  qualification:'original-jsx-helper-state-only'|'original-call-wrapper-state-only';
   status:'observed'|'refused';reason?:string;
   inputs?:Record<string,string>;runtime?:ReactHelperRuntimeReport;lookup?:ReactJsxLookupProof;
   /** Source assumptions. Runtime projection checks are reported separately. */

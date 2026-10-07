@@ -27,12 +27,12 @@ import { createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJ
 import { createNativeOperationTransport } from './native-operation-transport.js';
 import { isReactNativeRequest, reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
-import { selectReactNativeRequest, readReactNativeEvidence } from './react-native-evidence.js';
+import { selectReactNativeRequest, readReactNativeEvidence, reactRootSourceMatrixMatches } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { builtinReactCohort } from './react-cohort.js';
 
 // Synthetic input and native API mock: guard/structure evidence, not visual fidelity.
-function inputFixture(shadow?: string, template = false) {
+function inputFixture(shadow?: string, template = false, insetRing = false) {
   const contract = ContractSchema.parse({ id: 'check.react-native', name: 'ReactNativeDraft',
     status: 'draft', version: '0.1.0', description: 'Synthetic root draft', states: [],
     semantics: { element: 'button' }, props: [{ name: 'tone', type: { enum: ['quiet', 'null'] },
@@ -46,6 +46,7 @@ function inputFixture(shadow?: string, template = false) {
     } }, bindings: { code: { anchors: { importPath: './source', export: 'Surface' } },
       figma: { anchors: { fileKey: null, componentSetKey: null } } },
   });
+  if(insetRing)contract.anatomy.root.literals={'border-width':'0px'};
   const tokens = { surface: { $type: 'color', $value: '#123456' }, space: { $type: 'dimension', $value: '8px' },
     height: { $type: 'dimension', $value: '36px' }, width: { $type: 'dimension', $value: '72px' },
     ...(shadow ? { shadow: { $type: 'shadow', $value: shadow } } : {}) };
@@ -63,8 +64,8 @@ function inputFixture(shadow?: string, template = false) {
   return { input: { operation: { id: '10000000-0000-4000-8000-000000000099', fileKey: SOURCE_NATIVE_FILE_KEY },
     source: { revision: revisionOf('synthetic source'), programSha256: 'b'.repeat(64), evidenceRevision: revisionOf(matrix) }, matrix }, engine };
 }
-async function hostFixture(shadow?: string) {
-  const { input, engine } = inputFixture(shadow), host = nativeFixtureHost();
+async function hostFixture(shadow?: string, insetRing = false) {
+  const { input, engine } = inputFixture(shadow,false,insetRing), host = nativeFixtureHost();
   const prototype = Object.getPrototypeOf(host.figma.currentPage);
   prototype.setExplicitVariableModeForCollection = function(collection: any, modeId: string) {
     this.explicitVariableModes = { [collection.id]: modeId };
@@ -81,6 +82,22 @@ async function hostFixture(shadow?: string) {
   const emit = () => buildReactNativeComponentWrite({ ...input, expectedPlanRevision: prepared.revision, tokens }).script;
   return { ...host, input, engine, prepared, tokens, emit, run };
 }
+
+test('source matrix comparison isolates cached native output while retaining all source facts', () => {
+  const original=inputFixture().input.matrix, changed=structuredClone(original), pinned=structuredClone(original);
+  changed.draft!.native!.variants[0].spec.effectStack=[];
+  assert(reactRootSourceMatrixMatches(original,changed));
+  assert.deepEqual(original,pinned);
+  for(const field of ['contract','tokens','properties','problems','status'] as const){
+    const drift=structuredClone(changed);
+    if(field==='contract')drift.draft!.contract!.name+=' changed';
+    else if(field==='tokens')drift.draft!.tokens!['changed']={$value:'1px',$type:'dimension'};
+    else if(field==='properties')drift.draft!.properties.push('unknown' as never);
+    else if(field==='problems')drift.draft!.problems.push('source-refused');
+    else drift.draft!.status='refused';
+    assert.equal(reactRootSourceMatrixMatches(original,drift),false,field);
+  }
+});
 
 test('current correction compilation preserves archived output and cannot replace creation authority', async () => {
   const f = await hostFixture('oklab(0.145 0 0 / 0.1) 0px 0px 0px 1px');
@@ -102,6 +119,38 @@ test('current correction compilation preserves archived output and cannot replac
   const write=buildReactNativeFreshComponentWrite({...saved,expectedPlanRevision:fresh.revision,tokens:f.tokens});
   const result=await f.run(write.script);assert.equal(result.status,'created-candidate',JSON.stringify(result.problems));
   assert.deepEqual(saved,frozen,'fresh preparation and creation cannot rewrite the original source draft');
+});
+
+test('inset ring readback refuses absent or space-taking stroke policy', async () => {
+  const f=await hostFixture('rgba(0, 43, 183, 0.447) 0px 0px 0px 1px inset',true);
+  assert(f.prepared.plan.component.variants.every(v=>v.spec.insetRingStroke));
+  const creation=await f.run(f.emit());
+  // This fixture has no native uniform-to-edge stroke getters. Figma exposes
+  // all four edge weights after a uniform assignment (verified live).
+  for(const variant of creation.variants){const node=await f.figma.getNodeByIdAsync(variant.id);
+    for(const side of ['Top','Right','Bottom','Left'])node['stroke'+side+'Weight']=node.strokeWeight;
+    node.dashPattern=[];
+  }
+  const observation:NativeContractObservationInput={operation:f.input.operation,planRevision:f.prepared.revision,
+    component:f.prepared.plan.component,projection:f.prepared.plan.projection,tokenInput:f.tokens.input,tokenIdentity:f.tokens.identity,creation};
+  const read=emitNativeContractReadbackScript(observation),receipt=await f.run(read);
+  assert.equal(verifyNativeContractReadback(observation,receipt).status,'supported-structure-observed',JSON.stringify({verification:verifyNativeContractReadback(observation,receipt),nodes:receipt.nodes.filter((n:any)=>n.type==='COMPONENT').map((n:any)=>n.values)}));
+  assert(receipt.nodes.filter((n:any)=>n.type==='COMPONENT').every((n:any)=>n.values.strokesIncludedInLayout===false));
+  for(const value of [true,undefined]){
+    const bad=structuredClone(receipt),row=bad.nodes.find((n:any)=>n.type==='COMPONENT');
+    if(value===undefined)delete row.values.strokesIncludedInLayout;else row.values.strokesIncludedInLayout=value;
+    assert(verifyNativeContractReadback(observation,bad).problems.some(p=>p.includes('native-inset-ring-observation-layout-policy')));
+  }
+  for(const corrupt of [
+    (v:any)=>{v.strokeLeftWeight=0;}, (v:any)=>{v.strokes[0].opacity=1;},
+    (v:any)=>{v.strokes[0].color.r=1;}, (v:any)=>{v.strokeAlign='OUTSIDE';},
+    (v:any)=>{v.dashPattern=[1,1];}, (v:any)=>{delete v.dashPattern;},
+    (v:any)=>{v.strokes[0].boundVariables={color:{type:'VARIABLE_ALIAS',id:'foreign'}};},
+  ]){const bad=structuredClone(receipt);corrupt(bad.nodes.find((n:any)=>n.type==='COMPONENT').values);
+    assert(verifyNativeContractReadback(observation,bad).problems.some(p=>p.includes('native-inset-ring-observation-paint')));
+  }
+  const node=await f.figma.getNodeByIdAsync(creation.variants[0].id);node.strokesIncludedInLayout=true;
+  assert.equal(verifyNativeContractReadback(observation,await f.run(read)).status,'refused');
 });
 
 test('React draft uses shared scoped writer without a retained runtime and preserves empty editable content', async () => {

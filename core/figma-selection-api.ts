@@ -330,7 +330,7 @@ export function readFigmaSelectionApi(set: DumpSet): SelectionRead | undefined {
           if (
             node.type !== "SLOT" ||
             !node.slotKey ||
-            node.slotKey.split("#")[0] !== slot.property ||
+            node.slotKey.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') !== slot.property ||
             node.name !== slot.property ||
             set.propertyDefinitions?.[node.slotKey]?.type !== "SLOT"
           )

@@ -31,9 +31,11 @@ export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(function Toolbar
   const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} aria-label={label} role="toolbar" {...rest}>
-      {startContent != null ? <div className={styles.startContent}>{startContent}</div> : null}
-      {centerContent != null ? <div className={styles.centerContent}>{centerContent}</div> : null}
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{startContent != null ? <div className={styles.startContent}>{startContent}</div> : null}</>
+      <>
+        {centerContent != null ? <div className={styles.centerContent}>{centerContent}</div> : null}
+      </>
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
     </div>
   );
 });

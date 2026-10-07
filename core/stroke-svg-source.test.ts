@@ -59,12 +59,19 @@ test('ordinary URL capture requests pinned SVG source and never forwards the tok
   await assert.rejects(fetchNodes('nbsDhtFZ4BICs2CY20vKih', ['1027:7111'], 'fixture-token', { fetchImpl: replay, version: 'wrong' }), /figma-dependent-source-version-mismatch/);
 });
 
-test('version-pinned sources travel through ordinary REST mapping and root proposal without injected geometry', () => {
+test('version-pinned SVG fallback travels through REST mapping when network geometry is unavailable', () => {
   const fileKey = 'nbsDhtFZ4BICs2CY20vKih';
+  const svgOnly = structuredClone(native);
+  const omitNetwork = (value: any) => {
+    if (!value || typeof value !== 'object') return;
+    delete value.vectorNetwork;
+    for (const child of Object.values(value)) omitNetwork(child);
+  };
+  omitNetwork(svgOnly);
   const sources = { fileKey, version: source.version, svgByNodeId: Object.fromEntries(source.rows.map((r: any) => [r.id, r.svg])) };
-  const mapped = mapRestToDump(native, { fileKey, strokeSvgSources: sources });
-  const stale = mapRestToDump(native, { fileKey, strokeSvgSources: { ...sources, version: 'wrong' } });
-  const wrongFile = mapRestToDump(native, { fileKey: 'wrong', strokeSvgSources: sources });
+  const mapped = mapRestToDump(svgOnly, { fileKey, strokeSvgSources: sources });
+  const stale = mapRestToDump(svgOnly, { fileKey, strokeSvgSources: { ...sources, version: 'wrong' } });
+  const wrongFile = mapRestToDump(svgOnly, { fileKey: 'wrong', strokeSvgSources: sources });
   assert.ok(wrongFile.report.notes.some(n => n.includes('stroke-svg-source-file-mismatch')));
   assert.ok(stale.report.notes.some(n => n.includes('stroke-svg-source-version-mismatch')));
   for (const r of rows) {
@@ -206,4 +213,19 @@ test('native vector path expands SVG H/V exactly across closed and multiple subp
   assert.equal(strokedPathNativeData('M0 0H2 3V4ZM5 6 7 8H9'), 'M 0 0 L 2 0 L 3 0 L 3 4 Z M 5 6 L 7 8 L 9 8');
   assert.equal(strokedPathNativeData('M0 0C1 2 3 4 5 6H7Q8 9 10 11V12'), 'M 0 0 C 1 2 3 4 5 6 L 7 6 Q 8 9 10 11 L 10 12');
   assert.throws(() => strokedPathNativeData('m0 0h2'));
+});
+
+
+test('equivalent opaque exported colors agree exactly without accepting contextual paint or changing geometry', () => {
+  const r = rows.find(r => 'shape' in strokeSvgGeometry(r.svg, r.observed))!;
+  for (const [exported, observed] of [['black','#000000'], ['white','#ffffff'], ['#000','#000000'], ['#FFF','#ffffff'], ['#AaBbCc','#aabbcc']]) {
+    const svg=r.svg.replace('stroke="#171717"', `stroke="${exported}"`);
+    assert('shape' in strokeSvgGeometry(svg,{...r.observed,strokeColor:observed}));
+    assert.deepEqual(strokeSvgGeometry(svg,{...r.observed,strokeColor:'#171717'}),{issue:'stroke-svg-export-paint-mismatch'});
+    assert.deepEqual(strokeSvgGeometry(svg,{...r.observed,strokeColor:observed,width:r.observed.width+0.001}),{issue:'stroke-svg-export-basis-mismatch'});
+  }
+  for(const color of ['currentColor','transparent','url(#paint)','#00000080','none','black ','rgb(0,0,0)']) {
+    const svg=r.svg.replace('stroke="#171717"', `stroke="${color}"`);
+    assert.deepEqual(strokeSvgGeometry(svg,{...r.observed,strokeColor:color}),{issue:'stroke-svg-export-paint-mismatch'});
+  }
 });

@@ -275,3 +275,59 @@ test('the tokens.css gate exempts only a private variable the sheet DECLARES —
   assert.deepEqual(referencedCssVars('.a {\n  --_x: 1px;\n  width: var(--_x);\n}'), []);
   assert.deepEqual(referencedCssVars('.a { color: var(--paint-brand); }'), ['--paint-brand']);
 });
+
+for(const reversePaint of [undefined,false,true])test('container stroke paints above translucent children without changing layout: '+reversePaint, async t => {
+ const {chromium}=await import('playwright-core'),{PNG}=await import('pngjs'),{mountGenerated}=await import('./react-test-runtime.js');
+ const c=flagged({layout:{display:'flex',...(reversePaint===undefined?{}:{reversePaint,childOrder:['layer']})},literals:{width:'40px',height:'20px','background-color':'#ffffff','border-width':'2px','border-color':'#ff0000','border-radius':'6px'},parts:{layer:{declared:{position:'absolute'},literals:{left:'0px',top:'0px',right:'0px',bottom:'0px','border-radius':'6px','background-color':'#0000ff80'}}}});
+ const browser=await chromium.launch({headless:true});t.after(()=>browser.close());
+ for(const output of [modules(c),{...inline(c),css:''}]){
+  const page=await browser.newPage({viewport:{width:40,height:20}});try{
+   const render=await mountGenerated(page,c.name,output.tsx,output.css);await page.addStyleTag({content:'body{margin:0}'});await render({});
+   const png=PNG.sync.read(await page.screenshot({omitBackground:true})),pixel=(x:number,y:number)=>[...png.data.subarray((y*png.width+x)*4,(y*png.width+x)*4+4)];
+   assert.deepEqual(pixel(1,10),[255,0,0,255],'child paint must not recolor the native foreground stroke');
+   assert.deepEqual(pixel(20,10),[127,127,255,255],'foreground stroke must preserve captured child paint');
+   const root=await page.locator('#root > *').first().boundingBox();assert.equal(root?.width,40);assert.equal(root?.height,20);
+  }finally{await page.close();}
+ }
+});
+
+test('foreground stroke preserves an authored absolute position and per-side source widths', async t=>{
+ const {chromium}=await import('playwright-core'),{PNG}=await import('pngjs'),{mountGenerated}=await import('./react-test-runtime.js');
+ const c=flagged({layout:{display:'flex'},declared:{position:'absolute'},literals:{left:'3px',top:'4px',width:'40px',height:'20px','border-top-width':'1px','border-right-width':'2px','border-bottom-width':'3px','border-left-width':'4px','border-color':'#ff0000'},parts:{layer:{declared:{position:'absolute'},literals:{left:'0px',top:'0px',right:'0px',bottom:'0px','background-color':'#0000ff80'}}}});
+ const browser=await chromium.launch({headless:true});t.after(()=>browser.close());
+ for(const output of [modules(c),{...inline(c),css:''}]){
+  const page=await browser.newPage({viewport:{width:50,height:30}});try{
+   const render=await mountGenerated(page,c.name,output.tsx,output.css);await page.addStyleTag({content:'body{margin:0}'});await render({});const png=PNG.sync.read(await page.screenshot({omitBackground:true})),pixel=(x:number,y:number)=>[...png.data.subarray((y*png.width+x)*4,(y*png.width+x)*4+4)];
+   assert.deepEqual(pixel(5,14),[255,0,0,255]);assert.deepEqual(pixel(41,14),[255,0,0,255]);assert.deepEqual(pixel(20,4),[255,0,0,255]);assert.deepEqual(pixel(20,22),[255,0,0,255]);
+   const root=await page.locator('#root > *').first().boundingBox();assert.deepEqual(root,{x:3,y:4,width:40,height:20});
+  }finally{await page.close();}
+ }
+});
+
+
+test('declared focus shadows replace the synthetic outline while forced colors and explicit outlines remain visible',async()=>{
+ const browser=await chromium.launch();
+ try{for(const explicit of ['none','state','variant']){
+ for(const ring of [false,true]){
+   const c=contract({strokesIncludedInLayout:ring?false:undefined,literals:{width:'32px',height:'32px','border-width':'1px','border-color':'#777777'},states:{'focus-visible':{'box-shadow':'{lift}',...(explicit==='state'?{'outline-color':'{paint.brand}'}:{})}},...(explicit==='variant'?{tokensByProp:[{prop:'tone',map:{brand:{'outline-color':'{paint.brand}'},danger:{'outline-color':'{paint.danger}'}}}]}:{})},'button');
+   c.states=['focus-visible'];const out=modules(c),page=await browser.newPage();
+   try{const render=await mountGenerated(page,c.name,out.tsx,out.css);await render({});await page.addStyleTag({content:rootVars});await page.keyboard.press('Tab');
+     const read=()=>page.locator('#root>button').evaluate(el=>({focused:el.matches(':focus-visible'),outline:getComputedStyle(el).outlineStyle,shadow:getComputedStyle(el).boxShadow}));
+     const normal=await read();assert.equal(normal.focused,true);assert.equal(normal.outline,explicit==='none'?'none':'solid');assert.notEqual(normal.shadow,'none');
+     await page.emulateMedia({forcedColors:'active'});const forced=await read();assert.equal(forced.focused,true);assert.equal(forced.outline,'solid');
+   }finally{await page.close();}
+ }}}finally{await browser.close();}
+});
+
+test('an authored focus stroke replaces the extra outline but preserves keyboard and forced-color indicators', async () => {
+ const browser=await chromium.launch();
+ try { for (const indicator of ['changed','unchanged','explicit']) {
+  const c=contract({strokesIncludedInLayout:false,literals:{width:'68px',height:'32px','border-color':'#0a0a0a'},tokens:{'border-width':'{stroke.thin}'},states:{'focus-visible':{'border-width':indicator==='unchanged'?'{stroke.thin}':'{stroke.thick}',...(indicator==='explicit'?{'outline-color':'{paint.brand}'}:{})}}},'button');
+  c.states=['focus-visible'];const out=modules(c);const page=await browser.newPage();
+  try {const render=await mountGenerated(page,c.name,out.tsx,out.css);await page.addStyleTag({content:rootVars});await render({});await page.keyboard.press('Tab');
+   const read=()=>page.locator('#root>button').evaluate(el=>{const s=getComputedStyle(el),b=el.getBoundingClientRect();return {focus:el.matches(':focus-visible'),outline:s.outlineStyle,stroke:s.getPropertyValue('--_stroke-width').trim(),width:b.width,height:b.height};});
+   const normal=await read();assert.equal(normal.focus,true);assert.equal(normal.outline,indicator==='changed'?'none':'solid');assert.equal(normal.stroke,indicator==='unchanged'?'1px':'2px');assert.deepEqual([normal.width,normal.height],[68,32]);
+   await page.emulateMedia({forcedColors:'active'});assert.equal((await read()).outline,'solid');
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+});

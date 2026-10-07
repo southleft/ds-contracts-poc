@@ -151,3 +151,44 @@ test('the primary-axis twin uses variant grow without replacing sibling widths w
   assert.equal((headerOf(every).parts!.list.layout as Record<string, unknown>).grow, true);
   assert.ok(!every.notes.some(n => /primary axis in/.test(n)));
 });
+
+for (const primary of ['MIN','CENTER'] as const) test(`all children filling a ${primary} fixed row keep their native cross height on both React surfaces`, async () => {
+  const {ContractSchema} = await import('../../scripts/contract-schema.js');
+  const {reactEmitter, reactInlineEmitter} = await import('../../core/emitter.js');
+  const {mountGenerated} = await import('../../core/react-test-runtime.js');
+  const {chromium} = await import('playwright-core');
+  const {mintedTokenCss} = await import('../../core/mint-tokens.js');
+  const input: DumpSet = {setName: 'CenteredFill', type: 'COMPONENT_SET', propertyDefinitions: {
+    Size: {type: 'VARIANT', defaultValue: 'Large', variantOptions: ['Large','Small']},
+  }, variants: ['Large','Small'].map(Size => ({name: `Size=${Size}`, variantProperties: {Size}, type: 'COMPONENT',
+    bbox: {width: Size === 'Large' ? 64 : 48, height: Size === 'Large' ? 32 : 24},
+    layout: {mode: 'HORIZONTAL', primary, counter: 'CENTER', spacing: 2, padding: [2,2,2,2], primarySizing: 'FIXED', counterSizing: 'FIXED'},
+    children: ['Left','Right'].map(name => ({name, type: 'FRAME', fillWidth: true, fillHeight: true,
+      fill: {hex: name === 'Left' ? '112233' : 'ffffff'}, children: []})),
+  }))};
+  const result = proposeFromDump(input, {corpus: tokenCorpusFromJson({primitives: {},semantic: {},light: {},brandDefault: {}}),
+    contractIdByName: new Map(), mintUnbound: true, projectionMode: 'reviewable-inversion'});
+  const contract = ContractSchema.parse(result.contract);
+  assert.equal(contract.anatomy.root.layout?.align, 'center');
+  const {validateContract} = await import('../../packages/core/src/validate.js');
+  const errors: string[] = [];
+  validateContract(contract,new Map([[contract.id,contract]]),errors,new Map());
+  assert.deepEqual(errors,[]);
+  // Verify the rendered cross size below; stretch need not use a percentage literal.
+  const browser = await chromium.launch();
+  try {
+    for (const emitter of [reactEmitter, reactInlineEmitter]) {
+      const files = emitter.emit(contract, {contracts: new Map([[contract.id,contract]]), icons: new Map(),
+        tokens: {primitives: result.mintedTokens?.tree ?? {},semantic: {},light: {},dark: {},brands: {default: {}}}});
+      const page = await browser.newPage();
+      try {
+        const render = await mountGenerated(page,contract.name,files[0].contents,mintedTokenCss(result.mintedTokens?.tree ?? {}) + (files.find(f=>f.path.endsWith('.css'))?.contents ?? ''));
+        for (const size of ['large','small','large']) {
+          await render({size});
+          const boxes = await page.locator('#root > * > *').evaluateAll(els => els.map(el=>el.getBoundingClientRect().height));
+          assert.deepEqual(boxes,[size === 'large' ? 28 : 20,size === 'large' ? 28 : 20],emitter.name+size);
+        }
+      } finally {await page.close();}
+    }
+  } finally {await browser.close();}
+});

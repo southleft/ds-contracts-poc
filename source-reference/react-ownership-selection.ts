@@ -8,7 +8,7 @@ import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-sn
 import { evidenceSha, evidenceUnchanged } from './react-validation-evidence.js';
 import { reactReferenceUnchanged, type ReactReference } from './react-reference.js';
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
-import { reactHelperObservationUnchanged } from './react-helper-observation.js';
+import { reactHelperObservationsUnchanged } from './react-helper-observation.js';
 import { reactJsxHelperObservationUnchanged } from './react-jsx-helper-observation.js';
 import type { ReactOwnershipReport, startReactOwnership } from './react-ownership-run.js';
 
@@ -74,8 +74,8 @@ function readArchiveFresh(repo: string, reference: ReactReference, selection: Se
     throw Error('react-ownership-selection-report-invalid');
   const program = JSON.parse(readFileSync(path.join(dir, 'program.json'), 'utf8')) as ReactSourceProgram;
   if (!reactReferenceUnchanged(reference) || !reactSourceProgramUnchanged(program) ||
-      state.rows.some(row => (row.helperObservations ?? []).some(h => !reactHelperObservationUnchanged(h)) ||
-        (row.jsxHelpers ?? []).some(h => !reactJsxHelperObservationUnchanged(h.result))))
+      !reactHelperObservationsUnchanged(state.rows.flatMap(row => row.helperObservations ?? [])) ||
+      state.rows.some(row => (row.jsxHelpers ?? []).some(h => !reactJsxHelperObservationUnchanged(h.result))))
     throw Error('react-ownership-selection-source-changed');
   return { state, dir };
 }

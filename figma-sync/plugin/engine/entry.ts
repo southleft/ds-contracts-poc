@@ -1056,10 +1056,10 @@ ${skipUnmarked}
     const propKinds = { variant: 0, boolean: 0, text: 0, swap: 0 };
     try {
       const defs = node.componentPropertyDefinitions || {};
-      props = Object.keys(defs).map((k) => k.split('#')[0]);
+      props = Object.keys(defs).map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, ''));
       for (const rawName of Object.keys(defs)) {
         const def = defs[rawName];
-        const plainName = rawName.split('#')[0];
+        const plainName = rawName.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
         if (def.type === 'VARIANT') { variantAxes[plainName] = def.variantOptions || []; propKinds.variant++; }
         else if (def.type === 'BOOLEAN') propKinds.boolean++;
         else if (def.type === 'TEXT') propKinds.text++;

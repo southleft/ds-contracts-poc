@@ -116,3 +116,8 @@ test('a run packages the dump, and without a Chromium says NOT CHECKED and exits
   assert.ok(log.some(l => /^◌ figma-to-react Badge: NOT CHECKED — no Chromium for the consumer check .*npx playwright-core@\d+\.\d+\.\d+ install chromium/.test(l)), log.join('\n'));
   assert.equal(log.some(l => l.startsWith('✔')), false);
 });
+
+test('native stroke receipt flag is explicit and requires a filename',()=>{
+ assert.equal(parseFigmaToReactArgs(['--dump','d','--out','o','--native-strokes','receipt.json']).nativeStrokes,'receipt.json');
+ assert.throws(()=>parseFigmaToReactArgs(['--dump','d','--out','o','--native-strokes']),/--native-strokes/);
+});

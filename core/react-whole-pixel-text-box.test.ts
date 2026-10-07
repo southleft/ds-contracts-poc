@@ -603,3 +603,30 @@ test('explicit runtime slot default without content is a named validation refusa
   const c=contract({slot:{name:'children',renderDefault:true}});
   assert.match(errorsOf(c),/SLOT_RUNTIME_DEFAULT_EMPTY/);
 });
+
+
+test('literal and finite-map tracked text compile and retain empty box behavior on both React surfaces', async () => {
+  const browser = await chromium.launch();
+  try {
+    for (const mapped of [false, true]) {
+      const c = flagged({ content: undefined, text: '50',
+        ...(mapped ? { textByProp: { prop: 'tone', map: { brand: '50', danger: '' } } } : {}),
+        literals: { ...LABEL.literals, 'letter-spacing': '1px' }, declared: { 'font-family': 'Arial' } });
+      for (const surface of ['css-module', 'inline'] as const) {
+        const out = surface === 'inline' ? { ...inline(c), css: '' } : modules(c);
+        assert.deepEqual(generatedTypeErrors(c.name, out.tsx), [], `${surface} mapped=${mapped}`);
+        const page = await browser.newPage();
+        try {
+          const render = await mountGenerated(page, c.name, out.tsx, out.css);
+          for (const tone of ['brand', 'danger', 'brand']) {
+            await render({ tone });
+            const row = await page.locator('#root > :first-child > :first-child').evaluate(el => ({ text: el.textContent, width: el.getBoundingClientRect().width }));
+            const empty = mapped && tone === 'danger';
+            assert.equal(row.text, empty ? '' : '50');
+            assert.equal(row.width === 0, empty, `${surface} ${tone}: ${JSON.stringify(row)}`);
+          }
+        } finally { await page.close(); }
+      }
+    }
+  } finally { await browser.close(); }
+});

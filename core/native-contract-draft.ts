@@ -1,3 +1,5 @@
+import {nativeLiteralTextBox} from './native-text-box.js';
+import {ShapeSchema,strokedPathGeometryIssue} from '../scripts/contract-schema.js';
 import {nativePaintSpecSupported} from './native-paint-observation.js';
 import {lowerNativeFilledPath} from './native-filled-path.js';
 /** Framework-neutral provenance for a host-verified, unaccepted Contract draft.
@@ -90,6 +92,13 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
   }
   const boundTextProperties = new Set<string>();
   function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec, insideCallerSlot = false) {
+    if(spec.textAppearanceTarget&&spec.type!=='text')throw Error('NATIVE_TEXT_APPEARANCE_TARGET_UNQUALIFIED');
+    if(spec.instanceTextAppearances&&spec.type!=='instance')throw Error('NATIVE_TEXT_APPEARANCE_ARGUMENT_UNQUALIFIED');
+    if(spec.imageTarget&&(spec.type!=='frame'||!spec.imagePaint))throw Error('NATIVE_IMAGE_TARGET_UNQUALIFIED');
+    if(spec.instanceImages&&spec.type!=='instance')throw Error('NATIVE_IMAGE_ARGUMENT_UNQUALIFIED');
+    if(spec.textColorTarget && spec.type!=='text')throw Error('NATIVE_TEXT_COLOR_TARGET_UNQUALIFIED');
+    if(spec.instanceRootFill && (spec.type!=='instance'||!spec.instanceRootFill.varName))throw Error('NATIVE_INSTANCE_ROOT_FILL_UNQUALIFIED');
+    if(spec.instanceTextColors && (spec.type!=='instance'||Object.values(spec.instanceTextColors).some(v=>!/^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(v))))throw Error('NATIVE_TEXT_COLOR_ARGUMENT_UNQUALIFIED');
     if (spec.shape?.kind === 'path' && !spec.nativePathInk) lowerNativeFilledPath(spec);
     if (spec.nativePathInk && (!parent?.nativePathViewport || spec.type !== 'shape' || spec.shape?.kind !== 'path'))
       throw Error('NATIVE_FILLED_PATH_OWNERSHIP_UNQUALIFIED');
@@ -106,10 +115,20 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
     }
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
-    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text', 'instance'].includes(spec.type) || (!library && (spec.slotDefault?.length || spec.visibleProp || spec.slotOptional)) || spec.margins || spec.insetOverlay ||
+    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text', 'instance'].includes(spec.type) || (!library && (spec.slotDefault?.length || spec.visibleProp || spec.slotOptional)) || spec.margins || (!library && spec.insetOverlay) ||
         spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
         spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
+    if(spec.insetOverlay){
+      const offsets=spec.insetOffsets??{top:0,right:0,bottom:0,left:0};
+      if(!library||spec.type!=='frame'||!parent?.layout||!['HORIZONTAL','VERTICAL'].includes(parent.layout.mode)||
+          !['top','right','bottom','left'].every(k=>Number.isFinite(offsets[k as keyof typeof offsets]))||
+          spec.absolute||spec.overlay||spec.capturedAbsoluteGeometry||spec.instanceAffineAllocation||
+          spec.fillW||spec.fillH||spec.widthFill||spec.grow||spec.pct!==undefined||
+          [spec.fixedWidth,spec.fixedHeight].some(v=>v&&(!Number.isFinite(v.px)||v.px!<=0))||
+          (!spec.children?.length&&!spec.insetOffsets&&parent.children?.[0]!==spec))
+        throw Error('NATIVE_INSET_OVERLAY_OWNERSHIP_UNQUALIFIED');
+    }
     if (spec.type === 'instance' && (!spec.dep || !spec.depContractId || (!library && spec.depAnchorKey) ||
         (spec.children ?? []).some(child => child.callerSlotProperty === undefined)))
       throw Error('NATIVE_CONTRACT_DRAFT_INSTANCE_OWNERSHIP_UNQUALIFIED');
@@ -120,7 +139,8 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
       spec.fontFamily = DEFAULT_FONT_FAMILY;
     if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
         spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
-        spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||
+        spec.pct !== undefined || spec.rotation || spec.layout ||
+        spec.lits && (!spec.literalTextBox || Object.keys(spec.lits).some(k=>!['width','height'].includes(k)) || JSON.stringify(spec.literalTextBox)!==JSON.stringify(nativeLiteralTextBox(spec))) ||
         typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))
       throw Error('NATIVE_CONTRACT_DRAFT_TEXT_OWNERSHIP_UNQUALIFIED');
     if (spec.slotTextTemplate && (spec.type !== 'text' || !parent?.rootSlotContent || parent.type !== 'slot' ||
@@ -159,8 +179,23 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
           Object.keys(spec.lits??{}).some(k=>!['radius','fillColor'].includes(k)))
         throw Error('NATIVE_CONTRACT_DRAFT_BACKGROUND_GEOMETRY_UNQUALIFIED');
     }
-    if (spec.type === 'shape' && (!spec.shape || !['rect', 'ellipse', ...(spec.nativePathInk ? ['path'] : [])].includes(spec.shape.kind) || spec.svg ||
-        spec.shape.arc || spec.shape.rotation ||
+    if(spec.shape?.kind==='stroked-path' && (strokedPathGeometryIssue(spec.shape) || !parent?.strokeViewport ||
+        spec.type!=='shape' || spec.children?.length || spec.svg || spec.mask || spec.rotation ||
+        spec.fill || spec.gradient || spec.effectStack?.length || spec.dropShadow || spec.capturedAbsoluteGeometry ||
+        spec.fillW || spec.fillH || spec.widthFill || spec.grow || spec.fixedWidth || spec.fixedHeight ||
+        spec.pct!==undefined || !spec.absolute || spec.absolute.h!=='MIN' || spec.absolute.v!=='MIN'))
+      throw Error('NATIVE_STROKED_PATH_OWNERSHIP_UNQUALIFIED');
+    if(spec.shape?.kind==='line'&&(!library||spec.type!=='shape'||!parent||!ShapeSchema.safeParse(spec.shape).success||
+        spec.children?.length||spec.fill||spec.gradient||spec.lits?.fillColor||spec.mask||spec.rotation||
+        spec.capturedAbsoluteGeometry||spec.insetOverlay||spec.overlay||spec.fillW||spec.fillH||spec.widthFill||spec.grow||
+        spec.fixedWidth||spec.fixedHeight||spec.pct!==undefined||spec.effectStack?.length||spec.dropShadow))
+      throw Error('NATIVE_LINE_OWNERSHIP_UNQUALIFIED');
+    const arc=spec.shape?.arc;
+    const qualifiedArc=spec.shape?.kind==='ellipse' && spec.shape.width===spec.shape.height && arc?.cap && ['NONE','ROUND','SQUARE'].includes(arc.cap) && arc.innerRadius===1 &&
+      Number.isFinite(arc.start) && Number.isFinite(arc.end) && arc.end>arc.start && arc.end-arc.start<Math.PI*2 &&
+      !spec.fill && !spec.lits?.fillColor && !spec.gradient && !spec.effectStack?.length && !spec.dropShadow && !spec.mask;
+    if (spec.type === 'shape' && spec.shape?.kind !== 'stroked-path' && spec.shape?.kind !== 'line' && (!spec.shape || !['rect', 'ellipse', ...(spec.nativePathInk || spec.nativeMaskPath ? ['path'] : [])].includes(spec.shape.kind) || spec.svg ||
+        (spec.shape.arc && !qualifiedArc) || (spec.shape.rotation && !(spec.shape.kind === 'ellipse' && spec.capturedAbsoluteGeometry && Number.isFinite(spec.shape.rotation))) ||
         !Number.isFinite(spec.shape.width) || !Number.isFinite(spec.shape.height) || spec.shape.width <= 0 || spec.shape.height <= 0 ||
         (spec.absolute && !spec.backgroundPaint && (spec.absolute.h !== 'MIN' || spec.absolute.v !== 'MIN' ||
           !Number.isFinite(spec.absolute.left) || !Number.isFinite(spec.absolute.top)))))
@@ -178,7 +213,11 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
       }
     }
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
-    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.instanceSize?.varName, spec.instanceInk?.varName, spec.svgPaintVar,
+    for (const value of Object.values(spec.instanceRootOverrides ?? {})) boundNames.add(value.varName);
+    for (const name of [spec.instanceRootStroke?.color, spec.instanceRootStroke?.width])
+      if (name) boundNames.add(name);
+    if(spec.solidFillCompositionToken)boundNames.add(spec.solidFillCompositionToken.split('.').join('/'));
+    for (const name of [spec.fill, spec.stroke, spec.instanceRootFill?.varName, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.instanceSize?.varName, spec.instanceInk?.varName, spec.svgPaintVar,
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
       if (name) boundNames.add(name);
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i], spec, insideCallerSlot));

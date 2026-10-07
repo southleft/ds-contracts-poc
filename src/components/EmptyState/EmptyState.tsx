@@ -43,14 +43,16 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function E
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} {...rest}>
-      {icon != null ? (
-        <div className={styles.iconArea} aria-hidden="true">
-          {icon}
-        </div>
-      ) : null}
+      <>
+        {icon != null ? (
+          <div className={styles.iconArea} aria-hidden="true">
+            {icon}
+          </div>
+        ) : null}
+      </>
       <span className={styles.title}>{title}</span>
       <span className={styles.descriptionText}>{description}</span>
-      {actions != null ? <div className={styles.actions}>{actions}</div> : null}
+      <>{actions != null ? <div className={styles.actions}>{actions}</div> : null}</>
     </div>
   );
 });

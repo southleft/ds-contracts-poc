@@ -7,9 +7,10 @@ import {createRequire} from 'node:module';
 import {runInNewContext} from 'node:vm';
 import ts from 'typescript';
 import React from 'react';
+import {planContextImportFunctions} from './react-context-import-functions.js';
 import {readReactRuntimeExport} from './react-runtime-export.js';
 import {readReactTargetInitializer} from './react-target-initializer.js';
-import {readReactTargetEffects} from './react-target-effects.js';
+import {readReactTargetEffects,readReactContextConsumerEffects} from './react-target-effects.js';
 import type {ReactElementInvocation} from './react-element-invocation.js';
 import type {TargetValueShape} from './react-helper-model.mjs';
 
@@ -23,7 +24,8 @@ export const ${name}=React.forwardRef(function Render(props,ref){${body}});`;
 }
 function prepare(root:string,text:string,name:string){
   const file=path.join(root,'control.mjs');writeFileSync(file,text);
-  const reference={sourceRoot:root,files:{[file]:sha(text)}};
+  const config=path.join(root,'tsconfig.json'),configText=JSON.stringify({compilerOptions:{jsx:'react-jsx',module:'ESNext',target:'ES2022',moduleResolution:'Bundler'}});writeFileSync(config,configText);
+  const reference={sourceRoot:root,files:{[file]:sha(text),[config]:sha(configText)}};
   const target=readReactRuntimeExport(reference,'control.mjs',[name]);assert.equal(target.status,'resolved');
   const initializer=readReactTargetInitializer(reference,target.definition);
   // These are explicit source-model assumptions, not a claimed browser receipt.
@@ -102,6 +104,7 @@ return make(Provider,{selected,scope,render:({visible})=>many(Fragment,{children
 test('compiled factory argument order, renamed imports, key precedence, fragments and absent children match actual React',()=>{
   for(const body of [
     `const config={id:'before',key:'props'};return make('button',config,config.id='after');`,
+    `const config={id:'before'};return make('button',config,(config.id='after','key'));`,
     `return many(Fragment,{children:[make('b',{children:props.label}),make('i',{})]});`,
     `const {label='Default',...rest}=props;return make('button',{...rest,children:label});`,
   ])fixture(body,f=>{
@@ -128,7 +131,6 @@ test('callback captures describe the binding at render return, including a local
 
 test('unknown context effects, writes, opaque inspection, callback writes and guessed factories remain refusals',()=>{
   const cases=[
-    [`const config={id:'before'};return make('button',config,(config.id='after','key'));`,{},'binary-unmodeled:,',''],
     [`props.label='changed';return make('button',{});`,{label:'Original'},'external-data-write',''],
     [`return make('button',{title:props.payload.value});`,{payload:{}},'opaque-input-inspected:payload',''],
     [`ref.current='changed';return make('button',{});`,{},'opaque-parameter-inspected',''],
@@ -159,4 +161,62 @@ test('source-model observations are assumptions and cannot authenticate changed 
     const duplicate=structuredClone(input);if(duplicate.status!=='observed')return;duplicate.input.push(duplicate.input[0]);assert.equal(readReactTargetEffects(f.reference,f.initializer,duplicate).status,'refused');
     writeFileSync(f.file,f.text+'\n');assert.equal(readReactTargetEffects(f.reference,f.initializer,input).status,'refused');
   });
+});
+
+
+test('imported callback inventories retain their own executable module and captured binding',()=>{
+ fixture("const callback=reader(props.label);return make('span',{children:props.children,onClick:callback});",f=>{
+  const helper=path.join(f.root,'helper.mjs'),text="export function reader(label){return ()=>label;}";
+  writeFileSync(helper,text);
+  const reference={...f.reference,files:{...f.reference.files,[helper]:sha(text)},runtimeImports:[{importer:f.file,specifier:'./helper.mjs',file:helper}]};
+  const result=readReactContextConsumerEffects(reference,f.initializer,f.invocation({label:'Captured',children:'Content'}),[]);
+  assert.equal(result.status,'modeled',JSON.stringify(result));if(result.status!=='modeled')return;
+  assert.equal(result.effectsVerified,false);assert.equal(result.runtimeVerified,false);
+  assert.equal(result.sourceFiles[helper],sha(text));
+  const callback=new Map(result.output.props.fields).get('onClick');assert(callback?.kind==='callback');
+  assert.equal(callback.source.file,'helper.mjs');assert.equal(callback.captures[0].binding.file,'helper.mjs');
+  assert.deepEqual(callback.captures[0].value,{kind:'literal',type:'string',value:'Captured'});
+  assert(result.runtimeRequirements.includes('actual-callback-creation-identity-and-captured-local-values'));
+  const writeText="export function reader(label){return ()=>{label='changed';return label;};}";
+  writeFileSync(helper,writeText);
+  const effectful={...reference,files:{...reference.files,[helper]:sha(writeText)}};
+  assert.equal(readReactContextConsumerEffects(effectful,f.initializer,f.invocation({label:'Captured',children:'Content'}),[]).status,'refused','imported callback writes remain unqualified');
+  writeFileSync(helper,text+' ');
+  assert.equal(readReactContextConsumerEffects(reference,f.initializer,f.invocation({label:'Captured',children:'Content'}),[]).status,'refused');
+ },'Container',"import {reader} from './helper.mjs';");
+});
+
+test('callbacks with identical offsets in different imported modules keep distinct lexical ownership',()=>{
+ fixture("const a=reader(props.left),b=other(props.right);return make('span',{onClick:a,onFocus:b});",f=>{
+  const text="export function reader(label){return ()=>label;}",files={...f.reference.files},runtimeImports=[];
+  for(const name of ['first','second']){const file=path.join(f.root,name+'.mjs');writeFileSync(file,text);files[file]=sha(text);runtimeImports.push({importer:f.file,specifier:'./'+name+'.mjs',file});}
+  const reference={...f.reference,files,runtimeImports};
+  const result=readReactContextConsumerEffects(reference,f.initializer,f.invocation({left:'Left',right:'Right'}),[]);
+  assert.equal(result.status,'modeled',JSON.stringify(result));if(result.status!=='modeled')return;
+  for(const [prop,file,value] of [['onClick','first.mjs','Left'],['onFocus','second.mjs','Right']]){
+   const callback=new Map(result.output.props.fields).get(prop);assert(callback?.kind==='callback');
+   assert.equal(callback.source.file,file);assert.equal(callback.captures[0].binding.file,file);
+   assert.deepEqual(callback.captures[0].value,{kind:'literal',type:'string',value});
+  }
+ },'Container',"import {reader} from './first.mjs';import {reader as other} from './second.mjs';");
+});
+
+
+test('transitive imported function reads belong to their binding module and retain the root consumer',()=>{
+ fixture("return make('span',{children:format(props.label)});",f=>{
+  const sources={'helper.mjs':"import {suffix} from './suffix.mjs';export function format(label){let value='';for(let i=0;i<2;i++)value=value+suffix(label);return value;}",'suffix.mjs':"export function suffix(label){return label+'!';}"};
+  const files={...f.reference.files};
+  for(const [name,text] of Object.entries({'helper.d.mts':'export declare function format(label:string):string;','suffix.d.mts':'export declare function suffix(label:string):string;'})){const file=path.join(f.root,name);writeFileSync(file,text);files[file]=sha(text);}
+  for(const [name,text] of Object.entries(sources)){const file=path.join(f.root,name);writeFileSync(file,text);files[file]=sha(text);}
+  const reference={...f.reference,files,runtimeImports:[{importer:f.file,specifier:'./helper.mjs',file:path.join(f.root,'helper.mjs')},{importer:path.join(f.root,'helper.mjs'),specifier:'./suffix.mjs',file:path.join(f.root,'suffix.mjs')}]};
+  const request={initializer:f.initializer,invocation:f.invocation({label:'Captured'})};
+  const model=readReactContextConsumerEffects(reference,f.initializer,request.invocation,[]);assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+  const suffix=model.runtimeBindings.bindings.find(b=>b.declarationKind==='ImportSpecifier'&&b.name==='suffix');assert(suffix);assert.equal(suffix.reads.length,1);assert.equal(suffix.readOccurrences?.filter(r=>r.phase==='render').length,2);
+  const plan=planContextImportFunctions(reference,[request]);
+  assert.deepEqual(plan.reads.map(r=>[r.read.file,r.binding.file,r.functionSource?.file]),[['control.mjs','control.mjs','helper.mjs'],['helper.mjs','helper.mjs','suffix.mjs']]);
+  for(const read of plan.reads)assert.deepEqual(read.consumer,f.initializer.render);
+  assert.deepEqual(plan.functions.map(f=>f.source.file),['helper.mjs','suffix.mjs']);
+  writeFileSync(path.join(f.root,'suffix.mjs'),sources['suffix.mjs']+' ');
+  assert.throws(()=>planContextImportFunctions(reference,[request]),/changed|refused|witnessed/);
+ },'Container',"import {format} from './helper.mjs';");
 });

@@ -214,3 +214,65 @@ test('explicit false-side placement agrees in both React surfaces and native var
     }
   }finally{await browser.close();}
 });
+
+test('qualified component roots retain stretch and center geometry on both React surfaces and native creation',async()=>{
+ const f=await nativeComparisonFixture();
+ const child=f.contract('fixture.outline',{root:{instanceRootInputs:['width','height'],layout:{display:'flex'},literals:{width:'fit-content',height:'fit-content'}}});
+ child.name='Outline';child.semantics={element:'div'};
+ const parent=f.contract('fixture.positioned',{root:{declared:{position:'relative'},literals:{width:'68px',height:'32px'},parts:{ring:{component:{id:child.id},absoluteGeometry:{box:{x:-2,y:-2,width:72,height:36,right:-2,bottom:-2,constraints:{horizontal:'STRETCH',vertical:'CENTER'}},parent:{width:68,height:32},border:{top:0,right:0,bottom:0,left:0}}}}}});
+ parent.name='Positioned';parent.semantics={element:'div'};
+ const scope=new Map([[child.id,child],[parent.id,parent]]),tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const browser=await chromium.launch();
+ try{for(const surface of ['module','inline']){
+  const emit=(c:typeof parent)=>surface==='module'?emitReact(c,{contracts:scope,icons:new Map(),tokens:new Set(),tokenValues:tokens}):{...emitReactInline(c,{contracts:scope,icons:new Map(),tokens}),css:''};
+  const p=emit(parent),c=emit(child),page=await browser.newPage();
+  try{
+   await mountGenerated(page,parent.name,p.tsx,p.css,{Outline:{tsx:c.tsx,css:c.css}});
+   const render=(props:Record<string,unknown>)=>page.evaluate(props=>(window as any).renderSubject(props),props);
+   for(const [width,height] of [[68,32],[108,52]]){
+    await render({style:{width,height}});
+    const box=await page.locator('#root > *').evaluate(root=>{const a=root.getBoundingClientRect(),b=root.children[0].getBoundingClientRect();return {x:b.x-a.x,y:b.y-a.y,width:b.width,height:b.height};});
+    assert.deepEqual(box,{x:-2,y:(height-32)/2-2,width:width+4,height:36},surface);
+   }
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+ await f.run(f.engine.buildComponentScript(child,scope));
+ for(const [width,height] of [[68,32],[108,52]]){
+  const c=structuredClone(parent);c.id+='-'+width;c.anatomy.root.literals={width:width+'px',height:height+'px'};
+  const byId=new Map(scope);byId.set(c.id,c);
+  await f.run(f.engine.buildComponentScript(c,byId));
+  const root=f.figma.root.findAll((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id)[0];
+  const instance=root.children.find((n:any)=>n.type==='INSTANCE');assert(instance);
+  assert.deepEqual({x:instance.x,y:instance.y,width:instance.width,height:instance.height},{x:-2,y:(height-32)/2-2,width:width+4,height:36});
+ }
+ const invalid=structuredClone(child);delete invalid.anatomy.root.instanceRootInputs;
+ assert.throws(()=>emitReact(parent,{contracts:new Map([[parent.id,parent],[invalid.id,invalid]]),icons:new Map(),tokens:new Set(),tokenValues:tokens}),/absolute-geometry-host-unproven/);
+});
+
+test('independent native readback rejects lost rotation and shifted centers on captured ellipse geometry', async () => {
+ const f=await nativeComparisonFixture();
+ const c=f.contract('fixture.rotated-geometry',{root:{declared:{position:'relative'},literals:{width:'24px',height:'24px'},parts:{ring:{shape:{kind:'ellipse',width:16,height:12,rotation:-90},tokens:{'background-color':'{surface}'},absoluteGeometry:{box:{x:4,y:6,width:16,height:12,right:4,bottom:6,constraints:{horizontal:'SCALE',vertical:'CENTER'}},parent:{width:24,height:24},border:{left:0,right:0,top:0,bottom:0}}}}}});
+ const scope=new Map([[c.id,c]]),compiled=f.engine.compileNativeContractDraft(c,scope,f.source),context=await f.context('10000000-0000-4000-8000-000000000913');
+ const creation=await f.run(f.engine.buildNativeContractDraftScript(c,scope,f.source,context));
+ assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+ const input={operation:context.operation,planRevision:revisionOf(c),projection:compiled.projection,component:compiled.component,tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
+ const receipt=await f.run(emitNativeContractReadbackScript(input));
+ const checked=verifyNativeContractReadback(input,receipt);assert.equal(checked.status,'supported-structure-observed',JSON.stringify(checked));
+ const n=receipt.nodes.find((node:any)=>node.type==='ELLIPSE');assert(n);assert.equal(n.values.rotation,90);assert(Math.abs(n.values.x-6)<1e-9);assert.equal(n.values.y,20);
+ for(const [key,value] of [['rotation',0],['x',4],['y',6]] as const){const bad=structuredClone(receipt);bad.nodes.find((node:any)=>node.type==='ELLIPSE').values[key]=value;assert.equal(verifyNativeContractReadback(input,bad).status,'refused');}
+});
+
+test('direct instance geometry and paint overrides share the child root without a shrinking wrapper',async()=>{
+ const f=await nativeComparisonFixture();
+ const child=f.contract('fixture.painted-child',{root:{instanceRootInputs:['width','height'],overridable:['color'],tokens:{color:'{ink}'},literals:{width:'24px',height:'24px'},parts:{label:{text:'X'}}}});child.name='PaintedChild';child.semantics={element:'div'};
+ const parent=f.contract('fixture.paint-host',{root:{declared:{position:'relative'},literals:{width:'24px',height:'24px'},parts:{glyph:{component:{id:child.id,overrides:{color:'{ink}'}},absoluteGeometry:{box:{x:6,y:6,width:12,height:12,right:6,bottom:6,constraints:{horizontal:'LEFT',vertical:'TOP'}},parent:{width:24,height:24},border:{top:0,right:0,bottom:0,left:0}}}}}});parent.name='PaintHost';parent.semantics={element:'div'};
+ const contracts=new Map([[child.id,child],[parent.id,parent]]),tokens={primitives:{ink:{$type:'color',$value:'#123456'}},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const browser=await chromium.launch();try{for(const inline of [false,true]){
+  const emit=(c:typeof child)=>inline?{...emitReactInline(c,{tokens,contracts,icons:new Map()}),css:''}:emitReact(c,{tokens:new Set(['ink']),tokenValues:tokens,contracts,icons:new Map()});
+  const a=emit(parent),b=emit(child),page=await browser.newPage();try{
+   await mountGenerated(page,parent.name,a.tsx,a.css,{PaintedChild:{tsx:b.tsx,css:b.css}});await page.addStyleTag({content:':root{--ink:#123456}'});
+   const box=await page.locator('#root > *').evaluate(root=>{const host=root.getBoundingClientRect(),child=root.children[0],b=child.getBoundingClientRect();return {tag:child.tagName,x:b.x-host.x,y:b.y-host.y,width:b.width,height:b.height,color:getComputedStyle(child).color};});
+   assert.deepEqual(box,{tag:'DIV',x:6,y:6,width:12,height:12,color:'rgb(18, 52, 86)'});
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+});

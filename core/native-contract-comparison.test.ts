@@ -13,7 +13,7 @@ import { prepareNativeComparisonFrameRepair } from './native-comparison-repair.j
 import assert from 'node:assert/strict';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { revisionOf } from './contract-provenance.js';
-import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
+import { emitNativeInventoryReadbackScript, emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 
 
@@ -756,4 +756,35 @@ test('a caller-width instance refuses by name when its main left the slot at exa
   const creation = await f.run(f.emit(f.content, { ...f.comparison, instanceWidth: 360 }));
   assert.equal(creation.status, 'partial-or-unknown-allocation');
   assert.deepEqual(creation.problems, ['native-source-write-comparison-instance-width-slot-refused']);
+});
+
+
+test('comparison captures the authenticated main field set without ignoring extra instance fields', async () => {
+  const f = await observedFixture();
+  for (const node of f.figma.root.findAll(() => true)) node.strokeCap = 'NONE';
+  const receipt = await f.run(emitNativeContractComparisonReadbackScript(f.input));
+  const checked = verifyNativeContractComparisonReadback(f.input, receipt);
+  assert.equal(checked.status, 'supported-comparison-structure-observed', JSON.stringify(checked));
+  const main = receipt.parent.nodes.find((n:any)=>n.type==='COMPONENT');
+  const instance = receipt.content.nodes.find((n:any)=>n.type==='INSTANCE');
+  assert.equal(Object.hasOwn(main.values,'strokeCap'), false);
+  assert.equal(Object.hasOwn(instance.values,'strokeCap'), false);
+  // The comparison verifier remains strict: an extra field is still a mismatch.
+  instance.values.strokeCap = 'ROUND';
+  assert(verifyNativeContractComparisonReadback(f.input, receipt).problems.some(p=>p.includes('main-instance-strokeCap')));
+});
+
+
+test('paired capture retains required caps and leaves caller content on the full inventory', async () => {
+  const f = await observedFixture(), creation=f.input.creation, record=creation.comparisons[0];
+  for (const node of f.figma.root.findAll(() => true)) node.strokeCap='NONE';
+  const slotId=record.slots[0].nodeId;
+  const script=emitNativeInventoryReadbackScript({operation:f.input.operation,planRevision:f.input.planRevision,pageId:creation.pageId,nodes:creation.nodes,
+    comparisons:[{id:f.input.comparison.caseId,instanceId:record.instanceId,type:'INSTANCE'}]},f.input.tokenInput,f.input.tokenIdentity,[],false,false,[],[],false,[],false,false,undefined,false,false,false,false,false,true,
+    {[record.instanceId]:['strokeCap'],[slotId]:[]});
+  const receipt=await f.run(script);
+  assert.equal(receipt.status,'native-readback-collected');
+  assert.equal(receipt.nodes.find((n:any)=>n.id===record.instanceId).values.strokeCap,'NONE');
+  assert.equal(Object.hasOwn(receipt.nodes.find((n:any)=>n.id===slotId).values,'strokeCap'),false);
+  assert.equal(receipt.nodes.find((n:any)=>n.type==='TEXT').values.strokeCap,'NONE');
 });

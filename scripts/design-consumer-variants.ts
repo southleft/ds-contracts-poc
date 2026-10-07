@@ -3,7 +3,7 @@
  * does not prove prop consumption, semantics or interaction behavior. */
 import { isDeepStrictEqual } from "node:util";
 import { PNG } from "pngjs";
-import { imageSha256, type FigmaFrame } from "./design-consumer-framing.js";
+import { imageSha256, type FigmaFrame } from "./design-consumer-framing-v2.js";
 
 interface VariantCase {
   key: string;
@@ -86,7 +86,7 @@ function equivalentSourcePair(
       b = images[to.nodeId];
     const af = frames[from.nodeId],
       bf = frames[to.nodeId];
-    if (!a || !b || !af || !bf || !a.equals(b)) return null;
+    if (!a || !b || !af || !bf || af.refused || bf.refused || !a.equals(b)) return null;
     if (!isDeepStrictEqual(af.raster, bf.raster)) return null;
     const hash = imageSha256(a);
     if (hash !== af.pngSha256 || hash !== bf.pngSha256) return null;

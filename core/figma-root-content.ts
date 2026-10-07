@@ -21,7 +21,7 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
             : marker.version === 2 && marker.display === 'grid')) || typeof marker.property !== 'string' || !marker.property)
     return fail('invalid root content declaration');
   const property = (raw as { property: string }).property;
-  const definitions = Object.entries(set.propertyDefinitions ?? {}).filter(([key]) => key.split('#')[0] === property);
+  const definitions = Object.entries(set.propertyDefinitions ?? {}).filter(([key]) => key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === property);
   if (definitions.length !== 1 || definitions[0][1].type !== 'SLOT') return fail('missing or ambiguous SLOT definition');
   const definition = definitions[0][1];
   if (definition.type === 'SLOT' && (definition.description?.includes('REFUSED BY FIGMA') ||
@@ -33,7 +33,8 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
   for (const root of normalized?.variants ?? set.variants) {
     const slot = root.children?.[0], outer = root.layout, inner = slot?.layout;
     if (root.children?.length !== 1 || slot?.type !== 'SLOT' || slot.name !== property ||
-        slot.propRefs?.slotContentId?.split('#')[0] !== property ||
+        (slot.nodeId !== undefined && (typeof slot.nodeId !== 'string' || !slot.nodeId)) ||
+        slot.propRefs?.slotContentId?.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') !== property ||
         (slot.slotKey !== undefined && slot.slotKey !== definitions[0][0])) return fail(`${root.name}: content structure disagrees`);
     // Contents of the main are defaults, not a sample to bake into React.
     // Default-content inversion is a separate qualification from empty mains.
@@ -44,12 +45,15 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       const carrier = slot.children?.[0], grid = carrier?.layout;
       // Consumer records describe existing bindings; they are capture evidence,
       // not another style/layout channel or authority to relax these guards.
-      const slotFields = new Set(['name', 'type', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'variableConsumers']);
-      const frameFields = new Set(['name', 'type', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound', 'variableConsumers']);
+      const slotFields = new Set(['name', 'type', 'nodeId', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers']);
+      const frameFields = new Set(['name', 'type', 'nodeId', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound', 'sourceEmptyFill', 'variableConsumers']);
       if (Object.keys(slot).some(key => !slotFields.has(key)) ||
+          (slot.sourceEmptyFill !== undefined && slot.sourceEmptyFill !== true) ||
+          (carrier?.sourceEmptyFill !== undefined && carrier.sourceEmptyFill !== true) ||
           Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
           slot.children?.length !== 1 || carrier?.type !== 'FRAME' || carrier.name !== 'Content layout' ||
           carrier.children?.length || Object.keys(carrier).some(key => !frameFields.has(key)) ||
+          (carrier.nodeId !== undefined && (typeof carrier.nodeId !== 'string' || !carrier.nodeId)) ||
           Object.keys(carrier.bound ?? {}).some(key => !['gridRowGap', 'gridColumnGap'].includes(key)) ||
           ['itemSpacing', 'gridRowGap', 'gridColumnGap'].some(key => root.bound?.[key] !== undefined))
         return fail(`${root.name}: grid carrier has independent content, styling or behavior`);
@@ -95,8 +99,10 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
     if (marker.display === 'block' && (!outer || outer.mode !== 'VERTICAL' || outer.primary !== 'MIN' ||
         outer.counter !== 'MIN' || outer.spacing !== 0 || outer.primarySizing !== 'AUTO' || root.bound?.itemSpacing))
       return fail(`${root.name}: block content requires intrinsic vertical flow without flex distribution`);
-    const allowed = new Set(['name', 'type', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'variableConsumers']);
+    // Node identity is capture evidence, not an independent visual channel.
+    const allowed = new Set(['name', 'type', 'nodeId', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers']);
     if (Object.keys(slot).some(key => !allowed.has(key)) ||
+        (slot.sourceEmptyFill !== undefined && slot.sourceEmptyFill !== true) ||
         Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
         Object.keys(slot.bound ?? {}).some(key => key !== 'itemSpacing')) return fail(`${root.name}: content container has independent styling or behavior`);
     if (!outer || !inner || !['HORIZONTAL', 'VERTICAL'].includes(outer.mode) ||

@@ -21,7 +21,7 @@ export const Blockquote = forwardRef<HTMLQuoteElement, BlockquoteProps>(function
   return (
     <blockquote ref={ref} className={classes} {...rest}>
       <div className={styles.quote}>{children}</div>
-      {cite != null ? <footer className={styles.citation}>{cite}</footer> : null}
+      <>{cite != null ? <footer className={styles.citation}>{cite}</footer> : null}</>
     </blockquote>
   );
 });

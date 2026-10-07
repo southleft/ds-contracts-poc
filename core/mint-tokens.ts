@@ -1,3 +1,5 @@
+import {cssDecimal} from './css-decimal.js';
+import {cssValueOf} from '../packages/core/src/emit-tokens-css.js';
 /**
  * PROVISIONAL TOKEN MINTING — the fallback for imports whose variable NAMES
  * are unrecoverable (the Figma variables endpoint is Enterprise-only, so a
@@ -102,7 +104,7 @@ export interface MintObservation {
    *  stops into a native GRADIENT_LINEAR paint; dump v1.9 image-fill assets
    *  ride this channel as url('./assets/images/<hash>.png') refs — the
    *  canvas emitter ledgers those as gradientMiss BY NAME, never a throw). */
-  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size';
+  kind: 'color' | 'color-alias' | 'px' | 'number' | 'shadow' | 'gradient' | 'size';
   /** v17 — the Figma TEXT STYLE this observation's node rides, when the style
    *  is NOT token-derived (the designer named a style but bound no variable to
    // @door mint.text-style-namespacing
@@ -114,7 +116,9 @@ export interface MintObservation {
    *  each a machine path carrying none of the designer's vocabulary. An
    *  observation carrying a styleName mints under a COMPONENT-INDEPENDENT
    *  `imported.text.<style>` group instead, so every part riding the style
-   *  binds the same leaf and the name is the designer's own. */
+   *  binds the same leaf and the name is the designer's own. Variant-dependent
+   *  overrides retain the style name/identity but are scoped to the component;
+   *  their finite values are not a shared style definition. */
   styleName?: string;
   /** Published key when the source style has one. */
   styleKey?: string;
@@ -142,6 +146,9 @@ export interface MintObservation {
   /** The receiving channel explicitly supports boolean ancestor selectors.
    * Does not relax value agreement or required axis coverage. */
   booleanAxes?: true;
+  /** Receiver evaluates complete multi-axis token refs directly (for example
+   * component.overrides), without a one-axis part map. Coverage stays exact. */
+  compoundRefs?: true;
 }
 
 export interface MintAxis {
@@ -250,7 +257,7 @@ const formatValue = (kind: MintKind, value: string | number): string =>
   kind === 'color'
     ? `#${String(value).replace(/^#/, '').toLowerCase()}`
     : kind === 'px'
-      ? `${value}px`
+      ? `${typeof value === 'number' ? cssDecimal(value) : value}px`
       : // GAP-CLOSING ROUND 6 — 'size' is 'px' that may also carry a SIZING
         // KEYWORD. A Figma axis is FIXED (a number) or HUG (content-sized);
         // one channel can be both across variants (UUI Tooltip: width FIXED
@@ -258,8 +265,8 @@ const formatValue = (kind: MintKind, value: string | number): string =>
         // stream is mixed and a numeric-only formatter would spell the
         // keyword '<kw>px'. Numbers format exactly like 'px'.
         kind === 'size' && typeof value === 'number'
-        ? `${value}px`
-        : String(value);
+        ? `${typeof value === 'number' ? cssDecimal(value) : value}px`
+        : typeof value === 'number' ? cssDecimal(value) : String(value);
 
 /** THE DUMP'S GEOMETRY ROUNDING. Both dump producers spell canvas geometry
  *  through `round2` — `Math.round(n * 100) / 100` (extract/figma/dump.plugin.js
@@ -300,6 +307,7 @@ const dtcgType = (kind: MintKind, value: string | number): string | undefined =>
 
 const DTCG_TYPE: Record<Exclude<MintKind, 'size'>, string> = {
   color: 'color',
+  'color-alias': 'color',
   px: 'dimension',
   number: 'number',
   shadow: 'shadow',
@@ -312,7 +320,7 @@ const DTCG_TYPE: Record<Exclude<MintKind, 'size'>, string> = {
 const sharedName = (kind: MintKind, value: string | number): string =>
   kind === 'color'
     ? `color-${String(value).replace(/^#/, '').toLowerCase()}`
-    : kind === 'shadow' || kind === 'gradient'
+    : kind === 'shadow' || kind === 'gradient' || kind === 'color-alias'
       ? `${kind}-${sanitizeSegment(String(value))}`
       : `${kind === 'number' ? 'num' : 'size'}-${String(value).replace(/^-/, 'neg-').replace(/\./g, '-')}`;
 
@@ -343,6 +351,7 @@ type Classified =
       partAbsent?: string[];
     }
   | { kind: 'variant3'; axes: [MintAxis, MintAxis, MintAxis]; byValue: Map<string, string | number> }
+  | { kind: 'variantN'; axes: MintAxis[]; byValue: Map<string, string | number>; undrawn?: string[] }
   | { kind: 'none'; reason: string };
 
 /** Key for a multi-axis value combination — '.'-joined because the leaf path
@@ -652,12 +661,13 @@ function classify(
     }
   }
   // Three-axis correlation (live-gauntlet class ① — CBDS Chip's root fill is
-  // f(type, style, state), irreducible to any pair). ROOT ONLY, and it stays
-  // root-only: a nested part's per-value map pins exactly ONE axis, leaving
+  // f(type, style, state), irreducible to any pair). A legacy nested part's
+  // per-value map pins exactly ONE axis, leaving
   // TWO placeholders in the ref — past the one-placeholder map rule. A
-  // nested triple is a named refusal.
+  // nested triple is a named refusal unless the receiver explicitly supports
+  // compound refs without that intermediate part map.
   // @door mint.nested-triple-refusal
-  if (obs.part !== '') {
+  if (obs.part !== '' && !obs.compoundRefs) {
     return {
       kind: 'none',
       reason:
@@ -702,10 +712,63 @@ function classify(
       }
     }
   }
+  // Root paint may depend on more than three observed axes. Carry only a
+  // complete Cartesian matrix, with one consistent observation per cell.
+  // Missing rows, unknown values and contradictions never receive a fill.
+  // Reuse the bounded subset search; very large declarations try the full
+  // tuple only. Emission remains deterministic and independent of kit names.
+  const sizes=axes.length<=LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES
+    ?Array.from({length:Math.max(0,axes.length-3)},(_,i)=>i+4):[axes.length];
+  for(const size of sizes)for(const subset of axisSubsets(axes,size)) {
+    const expected=subset.reduce((n,a)=>n*a.values.length,1);
+    if(!expected || expected>obs.occurrences.length || subset.some(a=>new Set(a.values).size!==a.values.length))continue;
+    const observed=new Map<string,string|number>();let fits=true;
+    for(const o of obs.occurrences) {
+      const values=subset.map(a=>o.axisValues[a.propName]);
+      if(values.some((v,i)=>!subset[i].values.includes(v))){fits=false;break;}
+      const key=comboKey(values),previous=observed.get(key);
+      if(previous!==undefined && previous!==o.value){fits=false;break;}
+      observed.set(key,o.value);
+    }
+    if(!fits || observed.size!==expected)continue;
+    let tuples:string[][]=[[]];
+    for(const axis of subset)tuples=tuples.flatMap(prefix=>axis.values.map(v=>[...prefix,v]));
+    const byValue=new Map(tuples.map(values=>{const key=comboKey(values);return [key,observed.get(key)!] as [string,string|number];}));
+    return {kind:'variantN',axes:subset,byValue};
+  }
+  // Compound instance refs can also span a captured absence domain. Try
+  // this only after all complete matrices, and require a complete account of
+  // every realized tuple. The existing absence fence rejects partial or
+  // contradictory claims. Filled leaves are never reported as measurements.
+  if(obs.compoundRefs && realizedCombos?.length && allAxes.every(a=>a.values.length) &&
+     obs.occurrences.every(o=>completeKey(o.axisValues)!==undefined && realizedCombos.some(c=>completeKey(c)===completeKey(o.axisValues))) &&
+     realizedCombos.every(c=>completeKey(c)!==undefined && (observedKeys.has(completeKey(c)) || isAbsent(c)))) {
+    const widths=axes.length<=LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES
+      ?Array.from({length:Math.max(0,axes.length-2)},(_,i)=>i+3):[axes.length];
+    for(const width of widths)for(const subset of axisSubsets(axes,width)) {
+      const count=subset.reduce((n,a)=>n*a.values.length,1);
+      if(count>4096 || subset.some(a=>new Set(a.values).size!==a.values.length))continue;
+      const byValue=new Map<string,string|number>();let fits=true;
+      for(const o of obs.occurrences){const values=subset.map(a=>o.axisValues[a.propName]);
+        if(values.some((v,i)=>!subset[i].values.includes(v))){fits=false;break;}
+        const key=comboKey(values),prior=byValue.get(key);
+        if(prior!==undefined && prior!==o.value){fits=false;break;}byValue.set(key,o.value);
+      }
+      if(!fits || !byValue.size)continue;
+      let tuples:string[][]=[[]];for(const axis of subset)tuples=tuples.flatMap(p=>axis.values.map(v=>[...p,v]));
+      const missing=tuples.map(comboKey).filter(key=>!byValue.has(key));
+      const visible=new Set(realizedCombos.filter(c=>!isAbsent(c)).map(c=>comboKey(subset.map(a=>c[a.propName]))));
+      if(!missing.length || missing.some(key=>visible.has(key)))continue;
+      const rank=(o:MintOccurrence)=>allAxes.map(a=>String(a.values.indexOf(o.axisValues[a.propName])).padStart(4,'0')).join('.');
+      const base=[...obs.occurrences].sort((a,b)=>rank(a).localeCompare(rank(b)))[0].value;
+      for(const key of missing)byValue.set(key,base);
+      return {kind:'variantN',axes:subset,byValue,undrawn:missing};
+    }
+  }
   // @door mint.uncorrelated-refusal
   return {
     kind: 'none',
-    reason: 'resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually',
+    reason: 'resolved values differ across variants without a complete consistent axis, pair, triple or multi-axis root matrix — nothing minted; bind manually',
   };
 }
 
@@ -920,8 +983,11 @@ export function mintTokens(
     // not for the component/part that happens to draw it (see styleName).
     const base =
       obs.styleName !== undefined
-        ? `${MINT_NAMESPACE}.text.${sanitizeSegment(obs.styleName)}.${obs.cssProperty}`
-        : `${MINT_NAMESPACE}.${comp}.${partSegment(obs.part)}.${obs.cssProperty}`;
+        // A variant table describes this component's overrides, not a global
+        // text style. Sharing its prefix lets another component's uniform
+        // style leaf overwrite the whole table when the library is merged.
+        ? `${MINT_NAMESPACE}.${c.kind === 'uniform' ? '' : `${comp}.`}text.${sanitizeSegment(obs.styleName)}.${obs.cssProperty}`
+        : `${MINT_NAMESPACE}.${comp}.${partSegment(obs.part)}.${obs.cssProperty.startsWith('text-color:') ? sanitizeSegment(obs.cssProperty) : obs.cssProperty}`;
     const site = `${obs.nodePath} ${obs.cssProperty}`;
     if (c.kind === 'uniform') {
       const key = `${obs.kind}|${formatValue(obs.kind, c.value)}`;
@@ -945,7 +1011,7 @@ export function mintTokens(
       );
       return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: `{${path}}` };
     }
-    // Per-variant (one, two, or three axes): one leaf per axis value (or
+    // Per-variant (one or more complete root axes): one leaf per axis value (or
     // value combination) under a common base. The base must be free (or
     // value-compatible) for EVERY key — probe suffixes as a group so the
     // substituted ref stays a real tree prefix.
@@ -966,7 +1032,7 @@ export function mintTokens(
       // A ragged-matrix fill is not a usage SITE — no variant renders it. Say
       // so on the leaf, so a reader renaming these tokens against a real
       // system can see which cells the design never drew.
-      const undrawnKeys = new Set(c.kind === 'variant2' || c.kind === 'variant' ? (c.undrawn ?? []) : []);
+      const undrawnKeys = new Set(c.kind === 'variant2' || c.kind === 'variant' || c.kind === 'variantN' ? (c.undrawn ?? []) : []);
       const textStyleForKey = (
         // @door mint.per-key-textstyle-fallback
         key: string,
@@ -997,7 +1063,8 @@ export function mintTokens(
           c.kind === 'variant2' && c.partAbsent?.includes(key)
             ? `${site} (${siteSuffix(key)} — PART ABSENT in drawn variants under its visibility gate; base value supplied)`
             : undrawnKeys.has(key)
-            ? `${site} (${siteSuffix(key)} — NOT DRAWN in the variant set; base value supplied so the pair can carry)`
+            ? c.kind==='variantN' ? `${site} (${siteSuffix(key)} — NOT DRAWN or explicitly PART ABSENT; base value supplied so the ref can carry)`
+              : `${site} (${siteSuffix(key)} — NOT DRAWN in the variant set; base value supplied so the pair can carry)`
             : `${site} (${siteSuffix(key)})`,
           textStyleForKey(key),
         );
@@ -1007,6 +1074,9 @@ export function mintTokens(
       // Both caveats can apply to one binding; they are different facts, so
       // they are both said rather than one shadowing the other.
       const caveats: string[] = [];
+      if(c.kind==='variantN')caveats.push(c.undrawn?.length
+        ? `${c.axes.length}-axis compound ref: ${c.byValue.size-c.undrawn.length} measured cells; ${c.undrawn.length} cells are undrawn or explicitly part-absent and use the declared-order base value. Supplied cells are not observations.`
+        : `${c.axes.length}-axis complete observed matrix (${c.byValue.size} cells); every cell is measured, no missing combination supplied. This reproduces the capture; correlation does not establish design intent.`);
       const undrawnCount = c.kind === 'variant2' ? (c.undrawn?.length ?? 0) : 0;
       if (c.kind === 'variant2' && c.undrawn !== undefined && undrawnCount > 0 && !c.partAbsent?.length) {
         const drawn = cells2 - undrawnCount;
@@ -1134,8 +1204,7 @@ export function mintedTokenCss(tree: Record<string, unknown>): string {
     // — including the fidelity gate now that it carries one (task #21).
     // var() is the faithful spelling: it keeps the alias a REFERENCE, so the
     // library's own stylesheet (and its modes) still decide the value.
-    const target = aliasTarget(entry.value);
-    lines.push(`  --${dashed(path)}: ${target ? `var(--${dashed(target)})` : String(entry.value)};`);
+    lines.push(`  --${dashed(path)}: ${cssValueOf(entry.value) ?? String(entry.value)};`);
   }
   lines.push('}');
   return lines.join('\n');

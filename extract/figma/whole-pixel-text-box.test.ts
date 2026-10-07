@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from './types.js';
 // How a TEXT BOX SIZES ITSELF is CARRIED by both Figma readers (dump v1.36) and
 // the auto-width value round-trips through the contract. Found by the design-led
 // clean-consumer check on a designer's 72-variant Badge: 26 of the 48 × 16 px
@@ -50,7 +51,7 @@ const AUTO = { resize: 'WIDTH_AND_HEIGHT', sizing: 'HUG' };
 test('the REST reader carries textAutoResize on every text node — an ABSENT response key is NONE, REST\'s default (review M4) — and never copies an unknown spelling', () => {
   // A fixed box is built BY OMISSION, as REST is believed to report it: NONE is the field's default.
   const { set, provenance } = mapped([AUTO, { resize: 'HEIGHT', sizing: 'FILL' }, { sizing: 'FIXED' }]);
-  assert.equal(provenance.dumpVersion, '1.44');
+  assert.equal(provenance.dumpVersion, '1.63');
   assert.deepEqual(set.variants.map((v) => labelOf(v as DumpNode).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', 'NONE']);
   assert.equal(labelOf(mapped([{ resize: 'NONE', sizing: 'FIXED' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'NONE', 'an explicit NONE reads the same');
   assert.equal(labelOf(mapped([{ resize: 'TRUNCATE' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'TRUNCATE', 'the deprecated value is captured too, so nothing is guessed at');
@@ -75,7 +76,7 @@ test('the plugin reader carries the same field from node.textAutoResize, and wri
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['WholePixelBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.48');
+  assert.equal(dumps._provenance.dumpVersion, PLUGIN_DUMP_VERSION);
   const variants = Array.from(dumps.WholePixelBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
   assert.deepEqual(variants.map((v) => labelOf(v).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', undefined], 'unreported: not captured, never auto-width');
 });
@@ -99,7 +100,7 @@ test('reader → proposer: an auto-width text box proposes textAutoResize: WIDTH
   assert.doesNotMatch(generateCss(plain.contract as never, inventory, []), /calc-size|inline-size/, 'not captured: the bytes it always emitted');
 });
 
-test('not captured, or not auto-width, proposes exactly what it did before — an older dump keeps its bytes, a fixed or filled box keeps its vocabulary', () => {
+test('legacy text keeps its bytes while explicit fixed width uses the dimension vocabulary', () => {
   const legacy = propose(without(mapped([AUTO, AUTO]).set));
   assert.equal('textAutoResize' in partOf(legacy), false, 'absent is not captured, never auto-width');
   assert.equal(legacy.notes.some((n) => /textAutoResize/.test(n)), false, 'and nothing is said about it');
@@ -110,24 +111,37 @@ test('not captured, or not auto-width, proposes exactly what it did before — a
   assert.equal('textAutoResize' in partOf(filled), false, 'a filled box is carried by the fill vocabulary');
   const truncate = propose(mapped([{ resize: 'TRUNCATE', sizing: 'FIXED' }, { resize: 'TRUNCATE', sizing: 'FIXED' }]).set);
   assert.equal('textAutoResize' in partOf(truncate), false, 'the deprecated truncating box never carries the fact');
-  // Same structure, same notes: the fixed-box dump and the legacy dump differ only in what they say about the label.
-  assert.deepEqual(fixed.contract, legacy.contract);
+  const tokens=partOf(fixed).tokens as Record<string,string>;
+  assert.equal(tokens.width,'{imported.badge.label.width}');
+  assert.equal(tokens['flex-shrink'],'{imported.badge.label.flex-shrink}');
+  const withoutFixed=structuredClone(fixed.contract);
+  const stripped=partOf({contract:withoutFixed}).tokens as Record<string,string>;
+  delete stripped.width;delete stripped['flex-shrink'];
+  assert.deepEqual(withoutFixed,legacy.contract,'only the explicitly captured fixed width and shrink constraint change');
 });
 
-test('mixed evidence and a contradicting dump are NAMED, never guessed', () => {
+test('complete per-variant resize evidence is partitioned; contradictory or missing evidence stays named', () => {
   const mixed = propose(mapped([AUTO, { resize: 'HEIGHT', sizing: 'HUG' }]).set);
-  assert.equal('textAutoResize' in partOf(mixed), false);
-  assert.ok(mixed.notes.some((n) => /sizes itself to its text .* in 1 of 2 variants and is HEIGHT in the rest .* REFUSED BY NAME/.test(n)));
+  const partitioned=(result:ReturnType<typeof propose>)=>{
+    const parts=Object.values((result.contract as unknown as {anatomy:Anatomy}).anatomy.root.parts!);
+    assert.equal(parts.length,2);
+    const intrinsic=parts.find(part=>part.textAutoResize==='WIDTH_AND_HEIGHT')!;
+    const fixed=parts.find(part=>!part.textAutoResize)!;
+    assert.ok(intrinsic);assert.ok(fixed);
+    assert.deepEqual(intrinsic.visibleWhen,{prop:'tone',equals:'a'});
+    assert.deepEqual(fixed.visibleWhen,{prop:'tone',equals:'b'});
+    ContractSchema.parse(result.contract);
+  };
+  partitioned(mixed);
   // WIDTH_AND_HEIGHT beside FILL cannot both be true of one box: the dump is named, the fill it carries stays.
   const contradiction = propose(mapped([{ resize: 'WIDTH_AND_HEIGHT', sizing: 'FILL' }, { resize: 'WIDTH_AND_HEIGHT', sizing: 'FILL' }]).set);
   assert.equal('textAutoResize' in partOf(contradiction), false);
   assert.ok(contradiction.notes.some((n) => /WIDTH_AND_HEIGHT is captured beside layoutSizingHorizontal FILL in 2 of 2 variants .* REFUSED BY NAME/.test(n)));
   ContractSchema.parse(contradiction.contract);
-  // Review M4: a variant whose text reports NOTHING beside auto-width ones is the mixed case, never agreement —
-  // on the REST route the omitted default reads NONE; on a dump with a hole it is "not captured".
+  // REST supplies its known NONE default, so the complete axis can be partitioned.
+  // A dump with a missing observation still cannot justify separate sizing branches.
   const omitted = propose(mapped([AUTO, { sizing: 'FIXED' }]).set);
-  assert.equal('textAutoResize' in partOf(omitted), false);
-  assert.ok(omitted.notes.some((n) => /in 1 of 2 variants and is NONE in the rest .* REFUSED BY NAME/.test(n)));
+  partitioned(omitted);
   const hole = mapped([AUTO, AUTO]).set; delete labelOf(hole.variants[1] as DumpNode).text!.textAutoResize;
   const holed = propose(hole);
   assert.equal('textAutoResize' in partOf(holed), false);

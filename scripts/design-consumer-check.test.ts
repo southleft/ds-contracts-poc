@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
+import { mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -619,4 +619,53 @@ test('cases mount through the component API: code props and declared code values
   assert.deepEqual(mountProps(contract, { variant: 'destructive' }), { variant: 'destructive' });
   // A value the mapping does not declare passes through, so the component refuses it by name.
   assert.deepEqual(mountProps(contract, { variant: 'ghost' }), { variant: 'ghost' });
+});
+
+
+test('variant paint detects generated pseudo strokes while ignoring unpainted pseudo rules', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const page = await browser.newPage();
+  await page.setContent(`<style>
+    #subject { position:relative; width:100px; height:40px }
+    #subject::after { content:''; position:absolute; inset:0; box-shadow:inset 0 1px #333; pointer-events:none }
+    #subject.focus::after { box-shadow:inset 0 2px #999 }
+    #subject.absent::after { content:none }
+    #subject.hidden::after { display:none }
+  </style><div id="subject"></div>`);
+  const root = page.locator('#subject'), observe = () => root.evaluate(variantPaintOf);
+  const before = await observe(), pixelsBefore = PNG.sync.read(await root.screenshot()).data;
+  await root.evaluate(n => n.setAttribute('class', 'focus'));
+  const after = await observe(), pixelsAfter = PNG.sync.read(await root.screenshot()).data;
+  assert.notEqual(after, before); assert(!pixelsBefore.equals(pixelsAfter));
+  await root.evaluate(n => (n as HTMLElement).style.setProperty('--unused', 'changed'));
+  assert.equal(await observe(), after);
+  for (const mode of ['absent', 'hidden']) {
+    await root.evaluate((n, mode) => n.setAttribute('class', mode), mode);
+    const unpainted = await observe();
+    await root.evaluate((n, mode) => n.setAttribute('class', mode + ' focus'), mode);
+    assert.equal(await observe(), unpainted);
+  }
+  await root.evaluate(n => n.setAttribute('class', '')); assert.equal(await observe(), before);
+});
+
+
+test('export downloads overlap at most four jobs and retain exact ordered bytes',async()=>{
+ let active=0,peak=0;const finished:number[]=[];
+ const ids=Array.from({length:13},(_,i)=>i);
+ const result=await mapExportDownloads(ids,async id=>{
+  active++;peak=Math.max(peak,active);
+  await new Promise(resolve=>setTimeout(resolve,13-id));
+  active--;finished.push(id);return Buffer.from([id,255-id]);
+ });
+ assert.equal(peak,4);assert.equal(active,0);assert.equal(finished.length,13);
+ assert.deepEqual(result,ids.map(id=>Buffer.from([id,255-id])));
+ assert.deepEqual(await mapExportDownloads([],async()=>{throw Error('empty queue started');}),[]);
+});
+
+test('failed export download drains active workers and starts no more downloads',async()=>{
+ let started=0,active=0;const sentinel=Error('download failed');
+ await assert.rejects(mapExportDownloads(Array.from({length:12},(_,i)=>i),async id=>{
+  started++;active++;try{if(id===0)throw sentinel;await new Promise(resolve=>setTimeout(resolve,10));return id;}finally{active--;}
+ }),error=>error===sentinel);
+ assert.equal(started,4);assert.equal(active,0);
 });

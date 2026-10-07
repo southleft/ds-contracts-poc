@@ -1,0 +1,230 @@
+{
+  "description": "Live Figma observations from generated stroked-path construction and placement statements, read with canonical dumpStrokedPath. Harness builds parent and applies solid paint; not full component-script qualification.",
+  "source": {
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+    "boardId": "85:2",
+    "generatorHead": "6c91fd43a5fdbe2c69a278aed2804483749dc6b9",
+    "capturedAt": "2026-10-03"
+  },
+  "rows": [
+    {
+      "parentId": "85:3",
+      "nodeId": "85:4",
+      "size": [
+        50,
+        12
+      ],
+      "before": {
+        "kind": "stroked-path",
+        "width": 40,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 10 0 L 30 0 L 40 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 50,
+            "height": 12,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "after": {
+        "kind": "stroked-path",
+        "width": 40,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 10 0 L 30 0 L 40 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 50,
+            "height": 12,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "bounds": {
+        "width": 40,
+        "height": 0,
+        "x": 3,
+        "y": 6
+      },
+      "paint": {
+        "strokeWeight": 4,
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.40392157435417175,
+              "g": 0.3137255012989044,
+              "b": 0.6431372761726379
+            },
+            "boundVariables": {}
+          }
+        ]
+      }
+    },
+    {
+      "parentId": "85:5",
+      "nodeId": "85:6",
+      "size": [
+        91,
+        24
+      ],
+      "before": {
+        "kind": "stroked-path",
+        "width": 40,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 10 0 L 30 0 L 40 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 50,
+            "height": 12,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "after": {
+        "kind": "stroked-path",
+        "width": 81,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 20.25 0 L 60.75 0 L 81 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 91,
+            "height": 24,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "bounds": {
+        "width": 81,
+        "height": 0,
+        "x": 3,
+        "y": 6
+      },
+      "paint": {
+        "strokeWeight": 4,
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.40392157435417175,
+              "g": 0.3137255012989044,
+              "b": 0.6431372761726379
+            },
+            "boundVariables": {}
+          }
+        ]
+      }
+    },
+    {
+      "parentId": "85:7",
+      "nodeId": "85:8",
+      "size": [
+        211,
+        48
+      ],
+      "before": {
+        "kind": "stroked-path",
+        "width": 40,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 10 0 L 30 0 L 40 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 50,
+            "height": 12,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "after": {
+        "kind": "stroked-path",
+        "width": 201,
+        "height": 0,
+        "strokePath": {
+          "data": "M 0 0 L 50.25 0 L 150.75 0 L 201 0",
+          "cap": "ROUND",
+          "join": "MITER",
+          "miterLimit": 4,
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "STRETCH"
+          },
+          "viewport": {
+            "width": 211,
+            "height": 48,
+            "x": 3,
+            "y": 6
+          }
+        }
+      },
+      "bounds": {
+        "width": 201,
+        "height": 0,
+        "x": 3,
+        "y": 6
+      },
+      "paint": {
+        "strokeWeight": 4,
+        "strokes": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.40392157435417175,
+              "g": 0.3137255012989044,
+              "b": 0.6431372761726379
+            },
+            "boundVariables": {}
+          }
+        ]
+      }
+    }
+  ]
+}
