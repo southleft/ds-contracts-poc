@@ -153,7 +153,7 @@ test("different or partially missing text bindings stay named instead of choosin
     assert.ok(result.notes.some((note) => note.includes(different
       ? "combined presence/visibility requires review"
       : "visibility property reference differs or is missing")));
-    assert.ok(!result.contract.props.some((prop) =>
+    assert.ok(!ContractSchema.parse(result.contract).props.some((prop) =>
       prop.name === "showCaption" || prop.name === "showOther"));
   }
 });
