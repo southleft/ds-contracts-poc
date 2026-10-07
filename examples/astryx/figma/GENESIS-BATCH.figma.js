@@ -913,7 +913,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -1010,7 +1012,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -1156,6 +1158,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -1300,13 +1303,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -1655,7 +1656,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1757,7 +1758,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -2011,7 +2012,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -3621,7 +3622,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -3718,7 +3721,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -3864,6 +3867,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -4017,13 +4021,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -4372,7 +4374,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4474,7 +4476,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -4728,7 +4730,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -6526,7 +6528,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -6623,7 +6627,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -6769,6 +6773,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -6962,13 +6967,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -7317,7 +7320,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7419,7 +7422,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -7673,7 +7676,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -8956,7 +8959,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -9053,7 +9058,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -9199,6 +9204,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -9447,13 +9453,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -9802,7 +9806,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9904,7 +9908,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -10158,7 +10162,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -10806,7 +10810,7 @@ const COMPONENTS = [
         "kind": "channel",
         "channel": "aspect-ratio",
         "value": "1 / 1",
-        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 2,
           "of": 2
@@ -10949,7 +10953,7 @@ const COMPONENTS = [
         "kind": "channel",
         "channel": "aspect-ratio",
         "value": "1 / 1",
-        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 2,
           "of": 2
@@ -11362,7 +11366,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -11459,7 +11465,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -11634,6 +11640,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -11778,13 +11785,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -11944,9 +11949,12 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
-      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
+      Boolean(spec.fillW || spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fillH || spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -12158,7 +12166,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12260,7 +12268,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -12371,9 +12379,12 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -12539,7 +12550,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -12597,9 +12608,12 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -13640,7 +13654,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -13737,7 +13753,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -13912,6 +13928,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -14056,13 +14073,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -14222,9 +14237,12 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
-      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
+      Boolean(spec.fillW || spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fillH || spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -14436,7 +14454,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14538,7 +14556,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -14649,9 +14667,12 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -14817,7 +14838,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -14875,9 +14896,12 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -17325,7 +17349,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -17422,7 +17448,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -17597,6 +17623,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -17676,6 +17703,13 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
+  }
+  // Edge-pinned auto-layout wrappers own the parent's allocated extent.
+  // HUG would shrink them back to a nested component's main/default size.
+  if (spec.absolute && node.layoutMode !== 'NONE') {
+    const horizontalIsPrimary = node.layoutMode !== 'VERTICAL';
+    if (spec.absolute.h === 'STRETCH') node[horizontalIsPrimary ? 'primaryAxisSizingMode' : 'counterAxisSizingMode'] = 'FIXED';
+    if (spec.absolute.v === 'STRETCH') node[horizontalIsPrimary ? 'counterAxisSizingMode' : 'primaryAxisSizingMode'] = 'FIXED';
   }
 }
 
@@ -17788,12 +17822,18 @@ function applyInsetOverlay(parent, childNode, childSpec) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
+    // Inset allocation owns both axes; HUG would collapse a frame back to
+    // its content after a later layout pass, despite STRETCH constraints.
+    if (childNode.layoutMode && childNode.layoutMode !== 'NONE') {
+      childNode.primaryAxisSizingMode = 'FIXED';
+      childNode.counterAxisSizingMode = 'FIXED';
+    }
     const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
     // Astryx Slider thumb finding: inset overlays with fixedWidth/fixedHeight
     // (20×20 disk) must NOT STRETCH into a hug-zero display:contents parent —
     // that collapsed thumbs into 1px lines / semi-circles. Keep intrinsic size.
-    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
     if (fw != null || fh != null) {
       childNode.constraints = {
         horizontal: fw != null ? 'MIN' : 'STRETCH',
@@ -17817,7 +17857,9 @@ function applyInsetOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+const outOfFlowBuiltChildren = new WeakMap();
 function resizeOutOfFlow(parent, built) {
+  outOfFlowBuiltChildren.set(parent, built);
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
@@ -17825,8 +17867,8 @@ function resizeOutOfFlow(parent, built) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
-        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
         if (fw != null || fh != null) {
           childNode.resize(
             Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
@@ -17848,6 +17890,13 @@ function resizeOutOfFlow(parent, built) {
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
     } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+  // An ancestor can allocate FILL only after its subtree was constructed.
+  // Re-evaluate descendants against that final allocation, using the actual
+  // built-node correspondence rather than assuming a child-index mapping.
+  for (const pair of built) {
+    const nested = outOfFlowBuiltChildren.get(pair[1]);
+    if (nested) resizeOutOfFlow(pair[1], nested);
   }
 }
 
@@ -17906,13 +17955,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -18076,9 +18123,12 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
-      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
+      Boolean(spec.fillW || spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fillH || spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -18290,7 +18340,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -18392,7 +18442,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -18507,9 +18557,12 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -18675,7 +18728,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -18737,9 +18790,12 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -20363,7 +20419,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -20460,7 +20518,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -20635,6 +20693,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -20770,6 +20829,13 @@ function applyFrameSpec(node, spec) {
       }
     }
   }
+  // Edge-pinned auto-layout wrappers own the parent's allocated extent.
+  // HUG would shrink them back to a nested component's main/default size.
+  if (spec.absolute && node.layoutMode !== 'NONE') {
+    const horizontalIsPrimary = node.layoutMode !== 'VERTICAL';
+    if (spec.absolute.h === 'STRETCH') node[horizontalIsPrimary ? 'primaryAxisSizingMode' : 'counterAxisSizingMode'] = 'FIXED';
+    if (spec.absolute.v === 'STRETCH') node[horizontalIsPrimary ? 'counterAxisSizingMode' : 'primaryAxisSizingMode'] = 'FIXED';
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -20851,7 +20917,9 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+const outOfFlowBuiltChildren = new WeakMap();
 function resizeOutOfFlow(parent, built) {
+  outOfFlowBuiltChildren.set(parent, built);
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
@@ -20859,8 +20927,8 @@ function resizeOutOfFlow(parent, built) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
-        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
         if (fw != null || fh != null) {
           childNode.resize(
             Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
@@ -20882,6 +20950,13 @@ function resizeOutOfFlow(parent, built) {
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
     } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+  // An ancestor can allocate FILL only after its subtree was constructed.
+  // Re-evaluate descendants against that final allocation, using the actual
+  // built-node correspondence rather than assuming a child-index mapping.
+  for (const pair of built) {
+    const nested = outOfFlowBuiltChildren.get(pair[1]);
+    if (nested) resizeOutOfFlow(pair[1], nested);
   }
 }
 
@@ -20940,13 +21015,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -21109,9 +21182,12 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
-      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
+      Boolean(spec.fillW || spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fillH || spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -21323,7 +21399,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -21425,7 +21501,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -21539,9 +21615,12 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -21707,7 +21786,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -21768,9 +21847,12 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -23754,7 +23836,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -23851,7 +23935,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -23997,6 +24081,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -24190,13 +24275,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -24545,7 +24628,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24647,7 +24730,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -24901,7 +24984,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -27171,7 +27254,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -27268,7 +27353,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -27414,6 +27499,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -27607,13 +27693,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -27962,7 +28046,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -28064,7 +28148,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -28318,7 +28402,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -28906,7 +28990,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -29003,7 +29089,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -29149,6 +29235,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -29338,13 +29425,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -29693,7 +29778,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -29795,7 +29880,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -30049,7 +30134,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -30696,7 +30781,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -30793,7 +30880,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -31035,7 +31122,7 @@ function retireSlotUtility() {
     for (const k of Object.keys(defs)) {
       const d = defs[k];
       if (d && d.type === 'INSTANCE_SWAP' && String(d.defaultValue) === util.id) {
-        return { retired: false, reason: 'INSTANCE_SWAP property "' + k.split('#')[0] + '" on "' + t.name + '" still defaults to the Slot utility' };
+        return { retired: false, reason: 'INSTANCE_SWAP property "' + k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') + '" on "' + t.name + '" still defaults to the Slot utility' };
       }
     }
   }
@@ -31111,6 +31198,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -31269,7 +31357,7 @@ function applyOverlay(parent, childNode, childSpec) {
 function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
-    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'INSTANCE' || parent.type === 'SLOT') return false;
     if (parent.type === 'COMPONENT' || parent.type === 'COMPONENT_SET') { owned = true; break; }
   }
   if (!owned) return false;
@@ -31376,13 +31464,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -31549,9 +31635,12 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
-      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
+      Boolean(spec.fillW || spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fillH || spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -31763,7 +31852,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -31865,7 +31954,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -31977,9 +32066,12 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -32146,7 +32238,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -32205,9 +32297,12 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
-      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
+      Boolean(v.spec.fillW || v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fillH || v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
   for (const t of registry.texts) {
@@ -32820,7 +32915,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -32917,7 +33014,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -33063,6 +33160,7 @@ function applyFrameSpec(node, spec) {
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
@@ -33221,7 +33319,7 @@ function applyOverlay(parent, childNode, childSpec) {
 function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
-    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'INSTANCE' || parent.type === 'SLOT') return false;
     if (parent.type === 'COMPONENT' || parent.type === 'COMPONENT_SET') { owned = true; break; }
   }
   if (!owned) return false;
@@ -33275,13 +33373,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -33631,7 +33727,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -33733,7 +33829,7 @@ async function amendSet(set, C) {
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -33988,7 +34084,7 @@ async function amendComponent(comp, C) {
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),

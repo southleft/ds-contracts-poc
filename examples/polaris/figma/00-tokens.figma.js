@@ -295,6 +295,7 @@ for (const t of TEXT_STYLES) {
   s.name = t.name;
   s.fontName = { family: 'Inter', style: t.fontStyle };
   s.fontSize = t.fontSize;
+  s.lineHeight = t.lineHeight || { unit: 'AUTO' };
   s.description = 'ds_contracts: derived from tokens/' + t.tokenPath;
 }
 

@@ -206,7 +206,6 @@
   display: flex;
   align-items: center;
   flex: 1 1 auto;
-  min-width: 0;
   appearance: none;
   border: none;
   background: transparent;
@@ -355,7 +354,6 @@
 .backdrop {
   display: flex;
   flex: 1 1 auto;
-  min-width: 0;
   background-color: var(--p-color-input-bg-surface);
   border-radius: var(--p-border-radius-200);
   border-width: var(--p-border-width-0165);

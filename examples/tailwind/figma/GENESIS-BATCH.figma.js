@@ -1458,13 +1458,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -4286,13 +4284,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -9047,13 +9043,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -10859,13 +10853,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -12715,13 +12707,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -14471,13 +14461,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -16326,13 +16314,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -19029,13 +19015,11 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
