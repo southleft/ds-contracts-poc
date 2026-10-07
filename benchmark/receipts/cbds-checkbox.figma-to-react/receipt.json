@@ -1616,43 +1616,2804 @@
   "behavior": {
     "states": [],
     "text": {
-      "prop": "text",
-      "textBearingCells": [
-        "alignment-left_size-large_state-default",
-        "alignment-left_size-large_state-error",
-        "alignment-right_size-large_state-error",
-        "alignment-left_size-small_state-error",
-        "alignment-right_size-small_state-error",
-        "alignment-right_size-large_state-default",
-        "alignment-left_size-large_state-disabled",
-        "alignment-right_size-large_state-disabled",
-        "alignment-left_size-small_state-default",
-        "alignment-right_size-small_state-default",
-        "alignment-left_size-small_state-disabled",
-        "alignment-right_size-small_state-disabled",
-        "alignment-left_size-large_state-hover",
-        "alignment-left_size-large_state-focus",
-        "alignment-right_size-large_state-hover",
-        "alignment-right_size-large_state-focus",
-        "alignment-left_size-small_state-hover",
-        "alignment-left_size-small_state-focus",
-        "alignment-right_size-small_state-hover",
-        "alignment-right_size-small_state-focus"
+      "rule": "source-owned-text-controls-v1",
+      "source": {
+        "rule": "source-owned-text-controls-v1",
+        "textProperties": [
+          "text"
+        ],
+        "propertyIdentities": {
+          "label": "label#272:1",
+          "text": "text#272:2",
+          "alignment": "alignment",
+          "size": "size",
+          "state": "state"
+        },
+        "booleanDefaults": {
+          "label": true
+        },
+        "variants": [
+          {
+            "name": "alignment=left, size=large, state=default",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=large, state=error",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Content top/Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              },
+              {
+                "path": "Error text/error text",
+                "nodeId": null,
+                "characters": "error text",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=large, state=error",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Content top/Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              },
+              {
+                "path": "Error text/error text",
+                "nodeId": null,
+                "characters": "error text",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=small, state=error",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Content top/Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              },
+              {
+                "path": "Error text/error text",
+                "nodeId": null,
+                "characters": "error text",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=small, state=error",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Content top/Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              },
+              {
+                "path": "Error text/error text",
+                "nodeId": null,
+                "characters": "error text",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=large, state=default",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=large, state=disabled",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=large, state=disabled",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=small, state=default",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=small, state=default",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=small, state=disabled",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=small, state=disabled",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": "text",
+                "visibleProperty": "label",
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=large, state=hover",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=large, state=focus",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=large, state=hover",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=large, state=focus",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=small, state=hover",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=left, size=small, state=focus",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=small, state=hover",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          },
+          {
+            "name": "alignment=right, size=small, state=focus",
+            "nodeId": null,
+            "leaves": [
+              {
+                "path": "Checkbox label",
+                "nodeId": null,
+                "characters": "Checkbox label",
+                "charactersProperty": null,
+                "visibleProperty": null,
+                "visibleAtRest": true
+              }
+            ]
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "name": "defaults",
+          "overrides": {},
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "text:replace",
+          "overrides": {
+            "text": "Replaced by consumer: text"
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "text:empty",
+          "overrides": {
+            "text": ""
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "label:false",
+          "overrides": {
+            "label": false
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "text:replace,label:false",
+          "overrides": {
+            "text": "Replaced by consumer: text",
+            "label": false
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "error text",
+              "observedText": "error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "",
+              "observedText": "",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "label:true",
+          "overrides": {
+            "label": true
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label error text",
+              "observedText": "Checkbox label error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "name": "text:replace,label:true",
+          "overrides": {
+            "text": "Replaced by consumer: text",
+            "label": true
+          },
+          "rows": [
+            {
+              "key": "alignment-left_size-large_state-default",
+              "figmaName": "alignment=left, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-error",
+              "figmaName": "alignment=left, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-error",
+              "figmaName": "alignment=right, size=large, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-error",
+              "figmaName": "alignment=left, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-error",
+              "figmaName": "alignment=right, size=small, state=error",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "error text",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text error text",
+              "observedText": "Replaced by consumer: text error text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-default",
+              "figmaName": "alignment=right, size=large, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-disabled",
+              "figmaName": "alignment=left, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-disabled",
+              "figmaName": "alignment=right, size=large, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-default",
+              "figmaName": "alignment=left, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-default",
+              "figmaName": "alignment=right, size=small, state=default",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-disabled",
+              "figmaName": "alignment=left, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-disabled",
+              "figmaName": "alignment=right, size=small, state=disabled",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 0,
+                  "observed": 0
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 1,
+                  "observed": 1
+                }
+              ],
+              "expectedText": "Replaced by consumer: text",
+              "observedText": "Replaced by consumer: text",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-hover",
+              "figmaName": "alignment=left, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-large_state-focus",
+              "figmaName": "alignment=left, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-hover",
+              "figmaName": "alignment=right, size=large, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-large_state-focus",
+              "figmaName": "alignment=right, size=large, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-hover",
+              "figmaName": "alignment=left, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-left_size-small_state-focus",
+              "figmaName": "alignment=left, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-hover",
+              "figmaName": "alignment=right, size=small, state=hover",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            },
+            {
+              "key": "alignment-right_size-small_state-focus",
+              "figmaName": "alignment=right, size=small, state=focus",
+              "counts": [
+                {
+                  "text": "Checkbox label",
+                  "expected": 1,
+                  "observed": 1
+                },
+                {
+                  "text": "Replaced by consumer: text",
+                  "expected": 0,
+                  "observed": 0
+                }
+              ],
+              "expectedText": "Checkbox label",
+              "observedText": "Checkbox label",
+              "passed": true
+            }
+          ],
+          "passed": true
+        }
       ],
-      "changedCells": [
-        "alignment-left_size-large_state-default",
-        "alignment-left_size-large_state-error",
-        "alignment-right_size-large_state-error",
-        "alignment-left_size-small_state-error",
-        "alignment-right_size-small_state-error",
-        "alignment-right_size-large_state-default",
-        "alignment-left_size-large_state-disabled",
-        "alignment-right_size-large_state-disabled",
-        "alignment-left_size-small_state-default",
-        "alignment-right_size-small_state-default",
-        "alignment-left_size-small_state-disabled",
-        "alignment-right_size-small_state-disabled"
-      ]
+      "passed": true,
+      "sourceSha256": "8ec3c1a1533cbddcfe72b0ce9f0c7b3cd8871edd403f0b403705b49d742c6234"
     },
     "arrays": [],
     "children": {
@@ -3380,7 +6141,6 @@
     ]
   },
   "problems": [
-    "text-prop-discarded",
     "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
@@ -3547,7 +6307,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "d708d6a2987ba45917d038b55a012938a3a14fda2db5558b8ce4234dc19582ba",
+    "lockfileSha256": "9795ee272886366b52f948fa335ea02b9fc87aa9d7856c1afcaa5b0cfb51ea5f",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -4545,9 +7305,7 @@
         ]
       }
     ],
-    "setProblems": [
-      "text-prop-discarded"
-    ],
+    "setProblems": [],
     "counts": {
       "pass": 5,
       "fail": 15,

@@ -84,7 +84,7 @@
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/cbds-checkbox.figma-to-react/receipt.json",
-    "receiptSha256": "860eb9840c0ee00bb5a12244ea599e829fed63f4ccaa2414e4a1b3969b2c7e4e",
+    "receiptSha256": "34d6f59c926897d3bc46f2e67b88a5c9ddfa9ca61dea0a34cfdd4458e4f45b4a",
     "generatedSha256": "69cf807b46261832a2a3980a23196af48fbdfc980da4ac121393600b88667d19",
     "component": "Checkbox",
     "measuredOn": "darwin-arm64",
@@ -232,7 +232,6 @@
       }
     ],
     "problems": [
-      "text-prop-discarded",
       "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
       "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
       "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
