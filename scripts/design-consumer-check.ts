@@ -1,4 +1,5 @@
 import {consumerSlotNames,probeConsumerSlot,visibleSlotCases} from './design-consumer-slots.js';
+import {partialSourceTextControlPlan,probeSourceTextControls} from './design-consumer-text-controls.js';
 import {domainTransitionGroups} from './design-consumer-domain.js';
 /**
  * DESIGN-LED CLEAN CONSUMER CHECK — `npm run design:consumer:check -- …`
@@ -26,8 +27,10 @@ import {domainTransitionGroups} from './design-consumer-domain.js';
  *                 screenshotted. Nothing is forced that a user could not do: a
  *                 state that cannot be reached, or that changes nothing the
  *                 contract says it changes, is a NAMED problem.
- *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
- *                 text changes in every text-bearing cell; switch every
+ *   4. behave   — exercise text and visibility from each original source
+ *                 leaf's captured property references; bound leaves respond,
+ *                 unbound literals remain unchanged in every original cell;
+ *                 switch every
  *                 variant-bearing cell to another variant and assert its
  *                 rendered subtree paint, text or relative geometry changes. A prop the component accepts
  *                 but discards fails here.
@@ -814,18 +817,37 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         if (!changed && declaredStates.includes('disabled')) problems.push(`state-inert:disabled:${c.key}`);
       }
       problems.push(...notCarried);
-      // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
-      if (cases[0]?.textProp) {
-        const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
-        await page.evaluate(() => (window as any).__consumer.setText('Replaced by consumer'));
-        const after = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
-        const textBearing = cases.filter(c => before[c.key].includes(textDefault) && textDefault);
-        const changed = textBearing.filter(c => after[c.key].includes('Replaced by consumer') && !after[c.key].includes(textDefault));
-        receipt.behavior.text = { prop: cases[0].textProp, textBearingCells: textBearing.map(c => c.key), changedCells: changed.map(c => c.key) };
-        if (!textBearing.length) problems.push('text-prop-never-rendered');
-        else if (changed.length !== textBearing.length) problems.push('text-prop-discarded');
-        await page.evaluate(() => (window as any).__consumer.setText(null));
-      } else receipt.behavior.text = { prop: null, note: 'contract declares no TEXT-bound prop' };
+      // Mixed source text-control ownership has an exact source-derived
+      // oracle: bound leaves respond; unbound literals remain unchanged. All
+      // original cells remain checked. Other instruments retain their checks.
+      try {
+        const sourcePlan = partialSourceTextControlPlan(findDumpSet(dump, contract, args.component));
+        if (sourcePlan) {
+          const textProbe = await probeSourceTextControls(page, sourcePlan, cases, contract.props);
+          receipt.behavior.text = {...textProbe, sourceSha256: sha256(readFileSync(args.dump))};
+          if (!textProbe.passed) {
+            problems.push('text-prop-discarded');
+            for (const scenario of textProbe.scenarios) for (const row of scenario.rows)
+              if (!row.passed) problems.push(`source-text-control-mismatch:${row.key}:${scenario.name}`);
+          }
+        } else {
+          if (cases[0]?.textProp) {
+            const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
+            await page.evaluate(() => (window as any).__consumer.setText('Replaced by consumer'));
+            const after = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
+            const textBearing = cases.filter(c => before[c.key].includes(textDefault) && textDefault);
+            const changed = textBearing.filter(c => after[c.key].includes('Replaced by consumer') && !after[c.key].includes(textDefault));
+            receipt.behavior.text = { prop: cases[0].textProp, textBearingCells: textBearing.map(c => c.key), changedCells: changed.map(c => c.key) };
+            if (!textBearing.length) problems.push('text-prop-never-rendered');
+            else if (changed.length !== textBearing.length) problems.push('text-prop-discarded');
+            await page.evaluate(() => (window as any).__consumer.setText(null));
+          } else receipt.behavior.text = { prop: null, note: 'contract declares no TEXT-bound prop' };
+        }
+      } catch (error) {
+        // Missing/ambiguous source evidence or public inputs never passes.
+        problems.push(error instanceof Error ? error.message : String(error));
+        receipt.behavior.text = {rule:'source-owned-text-controls-v1', qualified:false};
+      }
       // Behavior: array props with text fields must render replaced item text.
       receipt.behavior.arrays = [];
       for (const [prop, sample] of Object.entries(arraySamples(contract))) {
