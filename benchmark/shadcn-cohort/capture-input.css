@@ -2,7 +2,7 @@
 @import "tailwindcss" source(none);
 @source "./src";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "./vendor/shadcn/tailwind.css";
 /* @fontsource-variable/inter @import STRIPPED for the capture build (hermetic-harness
    discipline, Altitude precedent): its @font-face src URLs are relative paths the
    harness bundler cannot resolve and MUST NOT fetch. The real 'Inter Variable' face
