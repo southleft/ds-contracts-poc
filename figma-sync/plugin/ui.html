@@ -2139,6 +2139,18 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
+// BEGIN SHARED TEXT APPEARANCE
+"use strict";var TextAppearanceCapture=(()=>{var p=Object.defineProperty;var b=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var m=Object.prototype.hasOwnProperty;var y=(n,r)=>{for(var t in r)p(n,t,{get:r[t],enumerable:!0})},A=(n,r,t,l)=>{if(r&&typeof r=="object"||typeof r=="function")for(let o of g(r))!m.call(n,o)&&o!==t&&p(n,o,{get:()=>r[o],enumerable:!(l=b(r,o))||l.enumerable});return n};var S=n=>A(p({},"__esModule",{value:!0}),n);var L={};y(L,{observeTextAppearance:()=>x});function c(n,r=!1){if(!Array.isArray(n))return;let t=n.filter(i=>i&&i.visible!==!1);if(!t.length||!r&&!t.some(i=>i.blendMode!==void 0&&i.blendMode!=="NORMAL"))return;if(t.length!==1||t[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let l=t[0],o=l.color,s=l.blendMode===void 0?"NORMAL":l.blendMode;if(s!=="MULTIPLY"&&s!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let a=i=>typeof i=="number"&&Number.isFinite(i)&&i>=0&&i<=1&&Math.fround(i)===i,e=l.opacity===void 0?1:l.opacity;if(!o||![o.r,o.g,o.b,e].every(a)||o.a!==void 0&&o.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let u=l.boundVariables?.color;return u!==void 0&&(!u||u.type!=="VARIABLE_ALIAS"||typeof u.id!="string"||!u.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:o.r,g:o.g,b:o.b},opacity:e,blendMode:s},...u?{variableId:u.id}:{}}}function x(n,r){if(typeof n!="string"||!n.length||!Array.isArray(r)||r.length<2)return;let t=e=>({issue:"text-appearance-"+e});if(n.length>65536||r.length>256)return t("budget-exceeded");let l=e=>typeof e=="number"&&Number.isFinite(e),o=e=>e===0||e===n.length||!(n.charCodeAt(e-1)>=55296&&n.charCodeAt(e-1)<=56319&&n.charCodeAt(e)>=56320&&n.charCodeAt(e)<=57343),s=[],a=0;for(let e of r){if(!e||!Number.isInteger(e.start)||!Number.isInteger(e.end)||e.start!==a||e.end<=e.start||e.end>n.length||!o(e.start)||!o(e.end)||e.characters!==n.slice(e.start,e.end))return t("range-unqualified");let u=e.fontName,i=e.lineHeight,d=e.letterSpacing;if(!u||typeof u.family!="string"||!u.family.trim()||typeof u.style!="string"||!u.style.trim()||u.variationSettings!==void 0||!l(e.fontSize)||e.fontSize<=0||!l(e.fontWeight)||e.fontWeight<1||e.fontWeight>1e3)return t("font-unqualified");if(!i||!["AUTO","PIXELS","PERCENT"].includes(i.unit)||i.unit!=="AUTO"&&(!l(i.value)||i.value<0)||!d||!["PIXELS","PERCENT"].includes(d.unit)||!l(d.value))return t("spacing-unqualified");if(!["ORIGINAL","UPPER","LOWER","TITLE","SMALL_CAPS","SMALL_CAPS_FORCED"].includes(e.textCase)||!["NONE","UNDERLINE","STRIKETHROUGH"].includes(e.textDecoration))return t("decoration-unqualified");let f=c(e.fills,!0);if(!f||"issue"in f||f.paint.blendMode!=="NORMAL")return t("paint-unqualified");s.push({start:e.start,end:e.end,fontName:{family:u.family,style:u.style},fontSize:e.fontSize,fontWeight:e.fontWeight,lineHeight:i.unit==="AUTO"?{unit:"AUTO"}:{unit:i.unit,value:i.value},letterSpacing:{unit:d.unit,value:d.value},textCase:e.textCase,textDecoration:e.textDecoration,fill:f}),a=e.end}return a!==n.length?t("range-incomplete"):{characters:n,runs:s}}return S(L);})();
+// END SHARED TEXT APPEARANCE
+function captureTextAppearance(node) {
+ if(!node.characters || typeof node.getStyledTextSegments !== 'function')return undefined;
+ try {
+  return TextAppearanceCapture.observeTextAppearance(node.characters,node.getStyledTextSegments([
+   'fontName','fontSize','fontWeight','lineHeight','letterSpacing','fills','textCase','textDecoration'
+  ]));
+ } catch (_) { return {issue:'text-appearance-range-read-failed'}; }
+}
+
 // Raw local geometry; never replace it with a rotated absolute bounding box.
 function observeLocalGeometry(nodeId,parentId,transform,width,height,parentWidth,parentHeight) {
  if(typeof nodeId!=='string'||!nodeId||typeof parentId!=='string'||!parentId||nodeId===parentId||
@@ -2729,10 +2741,11 @@ function dumpStrokedPath(node, parent) {
   const fills = paints(node.fills), strokes = paints(node.strokes), effects = paints(node.effects);
   const identity = value => Array.isArray(value) && value.length === 2 && value.every(row => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)) &&
     value[0][0] === 1 && value[0][1] === 0 && value[1][0] === 0 && value[1][1] === 1;
-  if (!parent || parent.type !== 'FRAME' || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
+  const anchored = node.height > 0 && node.constraints && ['MIN','MAX','CENTER'].includes(node.constraints.horizontal) && ['MIN','MAX','CENTER'].includes(node.constraints.vertical);
+  if (!parent || !['FRAME','COMPONENT'].includes(parent.type) || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
       ![parent.width, parent.height, node.width].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) || !Number.isFinite(node.height) || node.height < 0 || node.height > 1e6 ||
-      ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
-      !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false ||
+      !anchored && (['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
+      !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false) ||
       !identity(t) || Math.abs(t[0][2]) > 1e6 || Math.abs(t[1][2]) > 1e6 ||
       node.isMask !== false || !fills || fills.length || !effects || effects.length ||
       !strokes || strokes.length !== 1 || strokes[0].type !== 'SOLID' ||
@@ -2744,7 +2757,7 @@ function dumpStrokedPath(node, parent) {
       node.variableWidthStrokeProperties != null && (node.variableWidthStrokeProperties.widthProfile !== 'UNIFORM' || !Array.isArray(node.variableWidthStrokeProperties.variableWidthPoints) || node.variableWidthStrokeProperties.variableWidthPoints.length) ||
       node.complexStrokeProperties != null && node.complexStrokeProperties.type !== 'BASIC' ||
       Object.keys(node.boundVariables || {}).some(k => !['strokes', 'strokeWeight'].includes(k)) ||
-      !node.constraints || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.horizontal) || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.vertical) ||
+      !anchored && (!node.constraints || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.horizontal) || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.vertical)) ||
       !Array.isArray(paths) || paths.length !== 1 || paths[0].windingRule !== 'NONE' || strokedPathIssue(paths[0].data) ||
       !network || !Array.isArray(network.vertices) || !network.vertices.length ||
       (network.regions || []).length || network.vertices.some(v =>
@@ -2753,7 +2766,7 @@ function dumpStrokedPath(node, parent) {
         v.cornerRadius !== undefined && v.cornerRadius !== 0)) return null;
   return { kind: 'stroked-path', width: node.width, height: node.height, strokePath: {
     data: paths[0].data, cap: node.strokeCap, join: node.strokeJoin, miterLimit: node.strokeMiterLimit,
-    ...(node.height === 0 && (node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE') ? { constraints: { horizontal: node.constraints.horizontal, vertical: node.constraints.vertical } } : {}),
+    ...((anchored || node.height === 0) && (node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE') ? { constraints: { horizontal: node.constraints.horizontal, vertical: node.constraints.vertical } } : {}),
     viewport: { width: parent.width, height: parent.height, x: t[0][2], y: t[1][2] },
   } };
 }
@@ -3612,6 +3625,15 @@ async function dumpNode(node, nodePath, parent) {
     if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
+  // Preserve fixed text-box extents, never glyph bounds or inferred FILL.
+  if (node.type === 'TEXT' && !out.abs && parentAutoLayout && node.layoutPositioning !== 'ABSOLUTE' &&
+      (node.rotation === undefined || node.rotation === 0)) {
+    const mode = node.textAutoResize, fixed = {};
+    const {width,height} = node;
+    if ((mode === 'NONE' || mode === 'HEIGHT') && node.layoutSizingHorizontal === 'FIXED' && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (mode === 'NONE' && node.layoutSizingVertical === 'FIXED' && Number.isFinite(height) && height >= 0) fixed.height = height;
+    if (Object.keys(fixed).length) out.fixedSize = fixed;
+  }
   // Explicit fixed extents on auto-layout children are authored dimensions,
   // not inferred HUG/FILL sizes. Refuse rotated bounding-box substitution.
   if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE'
@@ -4168,6 +4190,8 @@ async function dumpNode(node, nodePath, parent) {
       fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
       fontStyle: font && typeof font.style === 'string' ? font.style : null,
     };
+    const appearance = captureTextAppearance(node);
+    if (appearance) text.sourceAppearance = appearance;
     if (typeof pxLineHeight === 'number' && isFinite(pxLineHeight)) text.lineHeight = pxLineHeight;
     if (lineHeightUnit) text.lineHeightUnit = lineHeightUnit;
     if (typeof pxLetterSpacing === 'number' && isFinite(pxLetterSpacing)) text.letterSpacing = pxLetterSpacing;
