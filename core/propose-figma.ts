@@ -18275,7 +18275,12 @@ function proposeFromDumpFencedImpl(
   if(validationContract!==contract)(validationContract as unknown as Contract).props=structuredClone(contract.props as Contract['props']);
   const hiddenAxes=ctx.axes.filter(axis=>!axis.omitted);
   const hiddenDomains=hiddenAxes.map(axis=>({prop:axis.propName,values:axis.values.map(value=>axisValue(axis,value))}));
-  const hiddenObservations=ctx.totalVariants.map(variant=>({values:hiddenAxes.map(axis=>axisValue(axis,axisValuesOf(variant)[axis.property])),present:false}));
+  // Missing axis coordinates are unknown, never an inferred default. The
+  // presence normalizer rejects them if a hidden usage actually needs a table.
+  const hiddenObservations=ctx.totalVariants.map(variant=>({values:hiddenAxes.map(axis=>{
+    const value=axisValuesOf(variant)[axis.property];
+    return value===undefined ? null : axisValue(axis,value);
+  }),present:false}));
   const hiddenUsages=normalizeHiddenComponentPresence(contract as unknown as Contract,hiddenDomains,hiddenObservations);
   if(validationContract!==contract)normalizeHiddenComponentPresence(validationContract as unknown as Contract,hiddenDomains,hiddenObservations);
   for(const path of hiddenUsages)ctx.notes.push(`${path}: captured permanent absence carried as usage presence after linked component construction`);

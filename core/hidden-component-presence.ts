@@ -4,7 +4,7 @@ import {inferPresenceByCombination} from './infer-presence.js';
 /** A captured, permanently absent usage is not a declaration on its child.
  * Run after linked paint construction, which can turn structural owners into refs. */
 export function normalizeHiddenComponentPresence(contract:Contract,
- axes:ReadonlyArray<{prop:string;values:string[]}>,observations:ReadonlyArray<{values:string[];present:boolean}>):string[] {
+ axes:ReadonlyArray<{prop:string;values:string[]}>,observations:ReadonlyArray<{values:(string|null)[];present:boolean}>):string[] {
  const changed:string[]=[];
  for(const {part,path} of walkAnatomy(contract)){
   if(!part.component||part.declared?.display!=='none'||part.visibilityOverrideProp||part.layoutByProp)continue;

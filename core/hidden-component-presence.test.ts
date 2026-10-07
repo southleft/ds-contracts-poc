@@ -42,3 +42,18 @@ test('inferred Style API leaves React host style available and avoids existing c
  const style=c.props.find((p:any)=>p.name==='style');assert.equal(style.bindings.figma.property,'Style');assert.equal(style.bindings.code.prop,'styleProp2');
  assert.equal(c.props.find((p:any)=>p.name==='styleProp').bindings.code.prop,'styleProp');
 });
+
+test('an omitted axis value stays unknown and cannot qualify hidden presence',()=>{
+ const part=structuredClone(f.rows[0].part),before=JSON.stringify(part);
+ assert.throws(()=>normalizeHiddenComponentPresence(contract(part),f.axes,[...observed,{values:[null],present:false}]),/presence-observation-axis-unqualified/);
+ assert.equal(JSON.stringify(part),before);
+});
+
+test('partial state-axis input without hidden usages preserves the named enum refusal instead of crashing',async()=>{
+ const {loadTokenCorpus}=await import('../extract/figma/tokens.js');
+ const dump=JSON.parse(readFileSync(new URL('../extract/figma/conformance/cases/axis-state-partial.dump.json',import.meta.url),'utf8'));
+ const result=proposeFromDump(dump.Case,{corpus:loadTokenCorpus(process.cwd()),contractIdByName:new Map(),mintUnbound:true,projectionMode:'reviewable-inversion'});
+ assert(result.notes.some(note=>note.includes('promotion unsafe, axis kept as an enum prop')));
+ assert.deepEqual((result.contract as any).props.find((prop:any)=>prop.name==='state').type,{enum:['default','hover']});
+ assert.deepEqual((result.contract as any).states,[]);
+});
