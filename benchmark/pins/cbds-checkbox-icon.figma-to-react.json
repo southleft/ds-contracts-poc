@@ -84,7 +84,7 @@
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/cbds-checkbox-icon.figma-to-react/receipt.json",
-    "receiptSha256": "8ce0e7be979823e25ef7b78514fe1de9f9859216eababdd4818852d7122f9953",
+    "receiptSha256": "fddcc426c7e7c832bcd9753df4b571e69de28885b1adc14fbbbd31340b44f390",
     "generatedSha256": "69cf807b46261832a2a3980a23196af48fbdfc980da4ac121393600b88667d19",
     "component": "CheckboxIcon",
     "measuredOn": "darwin-arm64",
@@ -398,7 +398,6 @@
       "state-unreachable:focus-visible:selection-indeterminate_size-small_error-false_state-focus-visible",
       "state-unreachable:focus-visible:selection-indeterminate_size-large_error-true_state-focus-visible",
       "state-unreachable:focus-visible:selection-indeterminate_size-small_error-true_state-focus-visible",
-      "variant-axis-inert-ledgered:selection",
       "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
       "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
       "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:18x18 vs 22x22",

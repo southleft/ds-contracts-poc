@@ -2890,37 +2890,36 @@
         "cellsChanged": [
           "selection-checked_size-large_error-false",
           "selection-checked_size-small_error-false",
+          "selection-checked_size-large_error-true",
+          "selection-checked_size-small_error-true",
           "selection-checked_size-large_error-false_state-hover",
           "selection-checked_size-small_error-false_state-hover",
+          "selection-checked_size-large_error-true_state-hover",
+          "selection-checked_size-small_error-true_state-hover",
           "selection-checked_size-large_error-false_state-focus-visible",
           "selection-checked_size-small_error-false_state-focus-visible",
+          "selection-checked_size-large_error-true_state-focus-visible",
+          "selection-checked_size-small_error-true_state-focus-visible",
           "selection-checked_size-large_disabled-true_error-false",
           "selection-checked_size-small_disabled-true_error-false",
           "selection-indeterminate_size-large_error-false",
           "selection-indeterminate_size-small_error-false",
+          "selection-indeterminate_size-large_error-true",
+          "selection-indeterminate_size-small_error-true",
           "selection-indeterminate_size-large_disabled-true_error-false",
           "selection-indeterminate_size-small_disabled-true_error-false",
           "selection-indeterminate_size-large_error-false_state-focus-visible",
           "selection-indeterminate_size-small_error-false_state-focus-visible",
+          "selection-indeterminate_size-large_error-true_state-focus-visible",
+          "selection-indeterminate_size-small_error-true_state-focus-visible",
           "selection-indeterminate_size-large_error-false_state-hover",
-          "selection-indeterminate_size-small_error-false_state-hover"
+          "selection-indeterminate_size-small_error-false_state-hover",
+          "selection-indeterminate_size-large_error-true_state-hover",
+          "selection-indeterminate_size-small_error-true_state-hover"
         ],
         "axisInertLedgered": true,
         "sourceEquivalentTransitions": [],
-        "cellsUnchangedWithoutEquivalentSource": [
-          "selection-checked_size-large_error-true",
-          "selection-checked_size-small_error-true",
-          "selection-checked_size-large_error-true_state-hover",
-          "selection-checked_size-small_error-true_state-hover",
-          "selection-checked_size-large_error-true_state-focus-visible",
-          "selection-checked_size-small_error-true_state-focus-visible",
-          "selection-indeterminate_size-large_error-true",
-          "selection-indeterminate_size-small_error-true",
-          "selection-indeterminate_size-large_error-true_state-focus-visible",
-          "selection-indeterminate_size-small_error-true_state-focus-visible",
-          "selection-indeterminate_size-large_error-true_state-hover",
-          "selection-indeterminate_size-small_error-true_state-hover"
-        ]
+        "cellsUnchangedWithoutEquivalentSource": []
       },
       {
         "prop": "size",
@@ -6316,7 +6315,6 @@
     "state-unreachable:focus-visible:selection-indeterminate_size-small_error-false_state-focus-visible",
     "state-unreachable:focus-visible:selection-indeterminate_size-large_error-true_state-focus-visible",
     "state-unreachable:focus-visible:selection-indeterminate_size-small_error-true_state-focus-visible",
-    "variant-axis-inert-ledgered:selection",
     "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
     "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
     "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:18x18 vs 22x22",
@@ -6472,7 +6470,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "71e8837b8ed3d8ad6e660971dfdcd6915365778f16104798a3d26d78ae59d5dc",
+    "lockfileSha256": "cfa1ac1a75b6e2c4c5c87ac2e37b03d63357e1fb3271b65f5145e5a6cf8ac6b5",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -7890,9 +7888,7 @@
         "reasons": []
       }
     ],
-    "setProblems": [
-      "variant-axis-inert-ledgered:selection"
-    ],
+    "setProblems": [],
     "counts": {
       "pass": 30,
       "fail": 12,

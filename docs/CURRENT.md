@@ -51,7 +51,7 @@ produces now. This table is generated; do not edit it by hand.
 | --- | --- | --- | --- |
 | CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-10-07. |
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 2.982% white, 2.982% black) — darwin-arm64, 2026-10-06. |
-| CBDS CheckboxIcon | Figma → React | **Failing** | 30/30 in scope within 5% (max 0.000% white, 0.000% black); problems: variant-axis-inert-ledgered:selection — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Failing** | 5/16 in scope within 5% (max 4.756% white, 3.048% black); 11 text-only partial; problems: text-prop-discarded — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
 | Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.217% black) — darwin-arm64, 2026-10-07. |
 | shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-28. |
