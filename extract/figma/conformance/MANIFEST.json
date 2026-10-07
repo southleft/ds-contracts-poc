@@ -646,12 +646,13 @@
    "id": "shape-arc-donut",
    "construct": "a partial arc with innerRadius > 0 (a donut/ring segment)",
    "expect": "CARRIED",
-   "why": "the sweep and innerRadius carry as shape.arc; the filled-hole fraction and cap style are named residues",
+   "why": "the filled ellipse retains its dimensions, exact sweep and hole fraction in shape.arc for React and native Figma arcData",
    "check": {
     "carried": [
-     "\"innerRadius\":0\\.8"
+     "\"kind\":\"ellipse\",\"width\":24,\"height\":24",
+     "\"arc\":\\{\"start\":0,\"end\":3\\.141592653589793,\"innerRadius\":0\\.8\\}"
     ],
-    "note": "arc ends render square"
+    "note": "filled ellipse angles and hole fraction retained jointly for code and native arcData"
    },
    "status": "green"
   },
