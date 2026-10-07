@@ -448,8 +448,7 @@ ${tokenReadback ?? emitNativeTokenContextReadbackScript(tokenInput, tokenIdentit
 ${synchronous ? '' : 'async '}function read(page) {
   const nodes = [page, ...page.findAll(() => true)];
   if (nodes.length > 10000) throw Error('native-source-readback-scope-too-large');
-  const out = [];
-  ${originalImages ? 'const originalAssets = new Map(); let originalBytes = 0;' : ''}
+  const out = [];${originalImages ? '\n  const originalAssets = new Map(); let originalBytes = 0;' : ''}
   for (const node of nodes) {
     const row = { id: node.id, type: node.type, name: node.name, parentId: node.parent ? node.parent.id : null,
       childIds: node.children ? node.children.map(c => c.id) : [], values: {}, metadata: {} };
@@ -459,9 +458,7 @@ ${synchronous ? '' : 'async '}function read(page) {
     for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, node.id) || PAIRED_ARC_CAP_FIELDS[node.id].includes(field))` : ''}) {
       const v = node[field];
       row.values[field] = typeof v === 'symbol' ? { mixed: true } : v === undefined ? null : copy(v);
-    }
-    ${extraMetadata.includes('textAppearanceOverride') ? `if(node.type==='TEXT'&&node.getSharedPluginData('ds_contracts','textAppearanceOverride'))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : ''}
-    ${originalImages ? `if (Array.isArray(row.values.fills)) for (const paint of row.values.fills) if (paint.type === 'IMAGE') {
+    }${extraMetadata.includes('textAppearanceOverride') ? `\n    if(node.type==='TEXT'&&node.getSharedPluginData('ds_contracts','textAppearanceOverride'))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : ''}${originalImages ? `\n    if (Array.isArray(row.values.fills)) for (const paint of row.values.fills) if (paint.type === 'IMAGE') {
       const hash = paint.imageHash;
       if (typeof hash !== 'string' || !hash || typeof figma.getImageByHash !== 'function' || typeof figma.base64Encode !== 'function') throw Error('native-image-original-readback-unavailable');
       if (!originalAssets.has(hash)) {
