@@ -48,11 +48,11 @@
       "path": "extract/figma/conformance/MANIFEST.json",
       "count": 158,
       "expectations": {
-        "CARRIED": 112,
-        "LEDGERED": 38,
+        "CARRIED": 114,
+        "LEDGERED": 36,
         "REFUSED": 8
       },
-      "pinnedBecause": "RE-PINNED 2026-10-01: 157 -> 158 after captured SCALE geometry qualified the positive case and an independent contradictory-parent refusal control was added. CARRIED 111+1=112; REFUSED 8-1+1=8; LEDGERED stays38. No fidelity threshold or source conservation invariant changed."
+      "pinnedBecause": "RE-PINNED 2026-10-01: 157 -> 158 after captured SCALE geometry qualified the positive case and an independent contradictory-parent refusal control was added. CARRIED 111+1=112; REFUSED 8-1+1=8; LEDGERED stays38. No fidelity threshold or source conservation invariant changed. RECONCILED 2026-10-07: rest-item-reverse-z-index and layout-item-reverse-z-index are CARRIED by shared reversePaint capture/emission (15 child-paint-order controls and all158 canvas cases pass). Total158 unchanged; CARRIED112+2=114; LEDGERED38-2=36; REFUSED8 unchanged. No visual threshold, source-conservation rule or fidelity floor changed."
     },
     {
       "id": "draw-read-closure",

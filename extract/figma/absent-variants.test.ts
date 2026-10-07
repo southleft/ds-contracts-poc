@@ -698,13 +698,33 @@ test('positive tuple domain: unqualified validation callers remain closed', () =
   assert.ok(errors.some(error => error.includes('drawn-variants-surfaces-unqualified')));
 });
 
-test('positive tuple domain: React and Figma enforce the domain while HTML and Web Components remain closed', () => {
+test('positive tuple domain: React, Figma and HTML enforce declared planes while Web Components remain closed', () => {
   const contract = positiveSeed(), contracts = new Map([[contract.id, contract]]), icons = new Map<string, string>();
   const tokens = { primitives, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
   const cssContext = { tokens: new Set(['paint.a', 'paint.b', 'paint.c', 'space.s', 'space.l']), contracts, icons };
   assert.match(emitReact(contract, cssContext).tsx, /DRAWN_VARIANT_UNDECLARED/);
   assert.match(emitReactInline(contract, { tokens, contracts, icons }).tsx, /DRAWN_VARIANT_UNDECLARED/);
-  assert.throws(() => emitHtml(contract, cssContext), /drawn-variants-surfaces-unqualified/);
+  const before = JSON.stringify(contract), html = emitHtml(contract, cssContext).html;
+  const snapshots = [...html.matchAll(/class="showcase__item">\n    <p class="showcase__label">([^<]*)<\/p>\n([\s\S]*?)\n  <\/div>/g)]
+    .map(match => {
+      const root = match[2].match(/<div class="([^"]+)"([^>]*)>/);
+      assert(root, 'every actual HTML snapshot contains the emitted component root');
+      const classes = root[1].split(' ');
+      return {label: match[1], tuple: {
+        tone: classes.find(name => name.startsWith('sparse--tone-'))?.slice('sparse--tone-'.length),
+        size: classes.find(name => name.startsWith('sparse--size-'))?.slice('sparse--size-'.length),
+        flag: root[2].includes('data-flag="true"'),
+      }, quiet: root[2].includes('data-quiet="true"')};
+    });
+  assert.deepEqual(snapshots.map(snapshot => snapshot.label), ['default',
+    ...positiveTuples.slice(1).map(tuple => `tone=${tuple.tone}, size=${tuple.size}, flag=${tuple.flag}`), 'quiet=true']);
+  assert.deepEqual(snapshots.slice(0, positiveTuples.length).map(snapshot => snapshot.tuple), positiveTuples,
+    'default and every declared positive plane are actual HTML snapshots');
+  assert(snapshots.every(snapshot => positiveTuples.some(tuple => JSON.stringify(tuple) === JSON.stringify(snapshot.tuple))),
+    'no undeclared Cartesian plane reaches HTML, including the independent live Boolean showcase');
+  assert.deepEqual(snapshots.filter(snapshot => snapshot.quiet), [{label:'quiet=true',tuple:positiveTuples[0],quiet:true}],
+    'the independent Boolean control remains addressable on the qualified default plane');
+  assert.equal(JSON.stringify(contract), before, 'HTML does not alter the source domain or defaults');
   assert.throws(() => emitWebComponent(contract, cssContext), /drawn-variants-surfaces-unqualified/);
   assert.doesNotThrow(() => engine.buildComponentScript(contract, contracts));
 });

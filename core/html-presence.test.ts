@@ -153,3 +153,54 @@ test('a root showcase lists qualified planes without inventing a default while c
   assert(!ContractSchema.safeParse(invalidDrawn).success,'positive domains still require explicit defaults');
   assert.throws(()=>emitHtml(invalidDrawn,context(invalidDrawn)),/drawn-variants-explicit-default-required/);
 });
+
+test('an ancestor hidden by live visibility preserves omitted defaults and showcases activation only on qualified planes',()=>{
+  const c=specimen();c.props=c.props.filter(p=>p.name!=='checked');
+  delete c.props.find(p=>p.name==='style')!.default;
+  c.props.find(p=>p.name==='show')!.default=false;
+  const mark={text:'Moon',presenceByCombination:{props:['style'],rows:[
+    {values:['solid'],present:true},{values:['raised'],present:false},
+  ]}};
+  c.anatomy.root.parts={wrapper:{visibleWhen:{prop:'show'},parts:{mark}}};
+  assert(ContractSchema.safeParse(c).success);
+  const before=JSON.stringify(c),Subject=reactSubject(c),rows=items(emitHtml(c,context(c)).html);
+  assert.deepEqual(rows.map(row=>row.label),['default','style=solid','style=raised','style=solid, show=true','style=raised, show=true']);
+  assert(!rows[0].html.includes('>Moon<'));
+  assert(!rows[0].html.includes('presence-html--style-'),'default omission does not invent an enum class');
+  assert(!renderToStaticMarkup(React.createElement(Subject)).includes('>Moon<'));
+  assert(rows.find(row=>row.label==='style=solid, show=true')!.html.includes('>Moon<'));
+  assert(!rows.find(row=>row.label==='style=raised, show=true')!.html.includes('>Moon<'));
+  assert.equal(rows.filter(row=>row.html.includes('>Moon<')).length,1);
+  assert.throws(()=>renderToStaticMarkup(React.createElement(Subject,{showMark:true})),/presence-combination-unavailable/,
+    'a real caller activating the ancestor without the required plane still refuses');
+  assert.equal(JSON.stringify(c),before);
+  const own=structuredClone(c);own.anatomy.root.parts={mark:{...mark,visibleWhen:{prop:'show'}}};
+  assert(ContractSchema.safeParse(own).success);
+  assert(items(emitHtml(own,context(own)).html).every(row=>row.label!=='default'));
+  const parent=parentOf(own);
+  assert.throws(()=>emitHtml(parent,context(parent,[own])),/presence-combination-unavailable/,
+    'a reached part checks its own missing presence before its own false live visibility');
+});
+
+test('an ancestor absent in the finite source plane skips defaultless descendant presence without weakening composed omission',()=>{
+  const c=specimen();c.props=c.props.filter(p=>p.name!=='show');
+  delete c.props.find(p=>p.name==='style')!.default;
+  c.anatomy.root.parts={wrapper:{presenceByCombination:{props:['checked'],rows:[
+    {values:['false'],present:false},{values:['true'],present:true},
+  ]},parts:{mark:{text:'Moon',presenceByCombination:{props:['style'],rows:[
+    {values:['solid'],present:true},{values:['raised'],present:false},
+  ]}}}}};
+  assert(ContractSchema.safeParse(c).success);
+  const rows=items(emitHtml(c,context(c)).html),Subject=reactSubject(c);
+  assert.deepEqual(rows.map(row=>row.label),['default','checked=false, style=solid','checked=false, style=raised',
+    'checked=true, style=solid','checked=true, style=raised']);
+  assert(!rows[0].html.includes('>Moon<'));
+  assert(!rows[0].html.includes('presence-html--style-'));
+  assert(!renderToStaticMarkup(React.createElement(Subject)).includes('>Moon<'));
+  assert.equal(rows.filter(row=>row.html.includes('>Moon<')).length,1);
+  const parent=parentOf(c);
+  assert(!defaultItem(emitHtml(parent,context(parent,[c])).html).includes('>Moon<'));
+  const activeParent=parentOf(c,{checked:true});
+  assert.throws(()=>emitHtml(activeParent,context(activeParent,[c])),/presence-combination-unavailable/,
+    'a composed caller reaching the descendant still needs its exact style plane');
+});

@@ -1024,6 +1024,25 @@ const presenceSelection = (state: RenderState): Record<string, string | boolean>
 const hasFinitePresence = (contract: Contract): boolean =>
   walkAnatomy(contract).some(({ part }) => part.presenceByCombination !== undefined);
 
+/** The rendered part's own presence is checked before its live visibility.
+ * Ancestors decide whether this part is reached at all. */
+function snapshotPartVisible(part: Part, state: RenderState): boolean {
+  if (!resolvePresence(part, presenceSelection(state))) return false;
+  const when = part.visibleWhen;
+  if (!when) return true;
+  if (typeof when.equals === 'boolean') return state.bools[when.prop] === when.equals;
+  if (when.equals !== undefined) return Array.isArray(when.equals)
+    ? when.equals.includes(state.subst[when.prop] ?? '')
+    : (state.subst[when.prop] ?? '') === when.equals;
+  return state.bools[when.prop] === true;
+}
+
+function snapshotPanelSelected(contract: Contract, name: string, state: RenderState): boolean {
+  const selection = contract.selection;
+  const panel = selection?.panels.find(panel => panel.part === name);
+  return !panel || panel.value === selectedSampleKey(contract, state.subst[selection!.valueProp]);
+}
+
 function childDefaultsState(contract: Contract): RenderState {
   const state: RenderState = { subst: {}, bools: {} };
   for (const p of enumProps(contract)) {
@@ -1066,16 +1085,23 @@ function presenceShowcaseTuples(contract: Contract): Array<Record<string, string
 /** A showcase can list explicit planes even when caller omission has no
  * qualified presence row. This checks only this root's own inputs; composed
  * child omission is still refused by renderComponentHtml. */
-function rootDefaultPresenceQualified(contract: Contract, state: RenderState): boolean {
-  const selection = presenceSelection(state);
-  for (const { part } of walkAnatomy(contract)) {
-    try { resolvePresence(part, selection); }
-    catch (error) {
+function rootPresenceQualified(contract: Contract, state: RenderState): boolean {
+  const reached = (name: string, part: Part): boolean => {
+    try {
+      if (!snapshotPartVisible(part, state) || !snapshotPanelSelected(contract, name, state)) return true;
+    } catch (error) {
       if (error instanceof Error && error.message === 'presence-combination-unavailable') return false;
       throw error;
     }
-  }
-  return true;
+    // These render branches do not traverse the part's owned descendants.
+    // Composed children retain their separate omission checks at render time.
+    if (part.shape?.kind === 'line' || part.shape?.kind === 'stroked-path' || part.icon ||
+        part.component || part.slot || part.meter || isNativeCheckablePart(part)) return true;
+    return Object.entries(part.parts ?? {}).every(([childName, child]) => reached(childName, child));
+  };
+  // A single root uses the root renderer, not the ordinary part renderer.
+  const roots = isMultiRoot(contract) ? topRoots(contract) : Object.entries(contract.anatomy.root.parts ?? {});
+  return roots.every(([name, part]) => reached(name, part));
 }
 
 function renderComponentHtml(
@@ -1117,14 +1143,7 @@ function renderComponentHtml(
     if (prop && state.subst[prop.name] !== undefined) return state.subst[prop.name];
     return typeof prop?.default === 'string' ? prop.default : contract.name;
   };
-  const visible = (part: Part): boolean => {
-    if (!resolvePresence(part, presenceSelection(state))) return false;
-    if (!part.visibleWhen) return true;
-    const vw = part.visibleWhen;
-    if (typeof vw.equals === 'boolean') return state.bools[vw.prop] === vw.equals;
-    if (vw.equals !== undefined) return Array.isArray(vw.equals) ? vw.equals.includes(propValue(vw.prop) ?? '') : (propValue(vw.prop) ?? '') === vw.equals;
-    return state.bools[vw.prop] === true;
-  };
+  const visible = (part: Part): boolean => snapshotPartVisible(part, state);
 
   // A toggling event's ARIA state renders per showcase item on its trigger
   // (root or part): the static surface cannot RUN the toggle, but the state
@@ -1161,8 +1180,7 @@ function renderComponentHtml(
     if (!visible(part)) return '';
     const selection = contract.selection;
     const selected = selection ? selectedSampleKey(contract, propValue(selection.valueProp)) : undefined;
-    const panel = selection?.panels.find(panel => panel.part === name);
-    if (panel && panel.value !== selected) return '';
+    if (!snapshotPanelSelected(contract, name, state)) return '';
     const cls = `${k}__${name}`;
     if (part.shape?.kind === 'line') return `${pad}<span class="${cls}" aria-hidden="true">${nativeLineSvg(part.shape)}</span>`;
     if (part.shape?.kind === 'stroked-path') return `${pad}<span class="${cls}" aria-hidden="true">${strokedPathSvg(part.shape)}</span>`;
@@ -1567,7 +1585,7 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
   };
   const defaults = defaultsState();
   const tuples = presenceShowcaseTuples(contract);
-  const defaultQualified = tuples === undefined || rootDefaultPresenceQualified(contract, defaults);
+  const defaultQualified = tuples === undefined || rootPresenceQualified(contract, defaults);
   const tupleState = (tuple: Record<string, string | boolean | null>): RenderState => {
     const state = defaultsState();
     for (const [name, value] of Object.entries(tuple)) {
@@ -1607,8 +1625,8 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
     if (p.default===undefined && walkAnatomy(contract).some(w=>w.part.solidFillCompositionByCombination?.props.includes(p.name))) cases.push(false);
     if (p.default !== true) cases.push(true);
     for (const value of cases) {
-      if (defaultQualified) {
-        const state = defaultsState(); state.bools[p.name] = value;
+      const state = defaultsState(); state.bools[p.name] = value;
+      if (rootPresenceQualified(contract, state)) {
         item(`${p.name}=${value}`, state);
       } else for (const tuple of tuples!) {
         const state = tupleState(tuple); state.bools[p.name] = value;
