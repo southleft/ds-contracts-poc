@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
+import { mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -668,4 +668,26 @@ test('failed export download drains active workers and starts no more downloads'
   started++;active++;try{if(id===0)throw sentinel;await new Promise(resolve=>setTimeout(resolve,10));return id;}finally{active--;}
  }),error=>error===sentinel);
  assert.equal(started,4);assert.equal(active,0);
+});
+
+
+test('SVG variant observation sees visible path changes, never hidden or covered geometry, and restores exactly', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({viewport:{width:100,height:100},deviceScaleFactor:1});
+    const square = 'M2 2H22V22H2Z M4 4V20H20V4Z';
+    const check = 'M2 2H22V22H2Z M6 12L10 16L18 7L16 5L10 12L8 10Z';
+    for (const background of ['white','black']) for (const mode of ['visible','hidden','transparent','occluded']) {
+      await page.setContent(`<body style="margin:0;background:${background}"><div id="cell" style="position:relative;width:24px;height:24px"><svg width="24" height="24" style="display:block;${mode==='hidden'?'visibility:hidden;':''}${mode==='transparent'?'opacity:0;':''}"><path fill="#d22" fill-rule="evenodd" d="${square}"/></svg>${mode==='occluded'?'<div style="position:absolute;inset:0;background:#666"></div>':''}</div></body>`);
+      const cell = page.locator('#cell');
+      const cssBefore = await cell.evaluate(variantPaintOf);
+      const before = await observeVariantPaint(cell);
+      await page.locator('path').evaluate((n,d)=>n.setAttribute('d',d),check);
+      assert.equal(await cell.evaluate(variantPaintOf),cssBefore,'CSS and boxes alone miss this geometry change');
+      const after = await observeVariantPaint(cell);
+      assert.equal(before!==after,mode==='visible',`${mode} SVG on ${background}`);
+      await page.locator('path').evaluate((n,d)=>n.setAttribute('d',d),square);
+      assert.equal(await observeVariantPaint(cell),before,'restoring geometry restores the observation');
+    }
+  } finally { await browser.close(); }
 });

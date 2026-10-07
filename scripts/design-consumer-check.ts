@@ -74,6 +74,7 @@ import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { PNG } from 'pngjs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -350,6 +351,25 @@ export const variantPaintOf = new Function('el', `
   });
   return JSON.stringify([paint(el), el.innerText ?? el.textContent, boxes]);
 `) as (el: Element) => string;
+/** SVG geometry can change visible pixels without changing CSS, text or boxes.
+ * Observe decoded pixels, not path attributes (hidden/covered paths prove nothing).
+ * Callers serialize captures because locator screenshots scroll the shared page. */
+export async function observeVariantPaint(cell: import('playwright-core').Locator): Promise<string> {
+  const fingerprint = await cell.evaluate(variantPaintOf);
+  const hasSvg = await cell.evaluate(el => el.matches('svg') || !!el.querySelector('svg'));
+  const box = hasSvg ? await cell.boundingBox() : null;
+  let pixels: string | null = null;
+  if (box && box.width > 0 && box.height > 0) {
+    const png = PNG.sync.read(await cell.screenshot({ animations: 'disabled', caret: 'hide', scale: 'css' }));
+    pixels = `${png.width}x${png.height}:${sha256(png.data)}`;
+  }
+  return JSON.stringify([fingerprint, pixels]);
+}
+async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
+  const observations: Record<string, string> = {};
+  for (const key of keys) observations[key] = await observeVariantPaint(page.locator(`[data-cell="${key}"] > *`).first());
+  return observations;
+}
 /** Keyboard-modality focus on the component's own focus target: the root when
  *  it is focusable, else its first focusable descendant. Returns whether
  *  :focus-visible really matches — nothing is forced. */
@@ -856,10 +876,9 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         for(const group of groups){
           if(!group.legal.length)continue;
           const prop=variantProps.find(p=>p.name===group.prop)!;
-          const styleOf=async(key:string)=>page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
-          const baseline=Object.fromEntries(await Promise.all(group.legal.map(async key=>[key,await styleOf(key)])));
+          const baseline=await observeVariantCells(page,group.legal);
           await page.evaluate(({keys,props})=>(window as any).__consumer.setScopedVariantOverride({keys,props}),{keys:group.legal,props:mountProps(contract,{[group.prop]:group.target})});
-          const switched=Object.fromEntries(await Promise.all(group.legal.map(async key=>[key,await styleOf(key)])));
+          const switched=await observeVariantCells(page,group.legal);
           await page.evaluate(()=>(window as any).__consumer.setScopedVariantOverride(null));
           const changed=group.legal.filter(key=>baseline[key]!==switched[key]);
           const inert=new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop??prop.name}\\b`).test(readFileSync(path.join(args.generated,args.component,`${args.component}.tsx`),'utf8'));
@@ -869,11 +888,10 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       } else {
       for (const prop of variantProps) {
         const values = variantValues(prop);
-        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
-        const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
+        const baseline = await observeVariantCells(page, cases.map(c => c.key));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
         await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
-        const switched = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
+        const switched = await observeVariantCells(page, cases.map(c => c.key));
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
