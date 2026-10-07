@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -22,26 +23,26 @@
     "ArrowArcLeft/ArrowArcLeft.module.css": "373b2d58cb5a9cc8fd61d1232b628ae7d4b210a01c3f3f7aeb4acd39200dcf7f",
     "ArrowArcLeft/ArrowArcLeft.tsx": "39597f11d55b2b53db37ba9c9ea4462b0dda22170120a99665859d0322bf4453",
     "ArrowArcLeft/index.ts": "021f109a0fd7f2c7dd65788a99fbabd22294650592315f389ad6c3e32ee09119",
-    "Button/Button.module.css": "430da83987aa70c1826f887a89883472e7f470aa2a77f72c89aa6e7ad056f22e",
-    "Button/Button.tsx": "74840abae61ddf39a8fe4c895e30f883bf592d50adaa25f120d477de06f7466a",
+    "Button/Button.module.css": "9f87f69ceb0b738991d7daf5ecdd6854c8e81119042f5b22e4ec8b58232ab751",
+    "Button/Button.tsx": "40c7e5898fb0a0f51e4381cec5b8824634194de40a77396e6ac1e5b38e2fb590",
     "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "Icon/Icon.module.css": "cb408f49ac55e8b6360285bce74e7d5c6e81587429f3330a45a8d44652ea7774",
     "Icon/Icon.tsx": "2738f4f1a179a62cc18872e1ccdfbd77d81dcc0872672933c56eadf0b6607d1a",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "Tab/Tab.module.css": "958ea9cabddc8b13bfd872130b8208efe58f391ee7242ada98e30abf49a4d4e8",
-    "Tab/Tab.tsx": "1c9628e2f857a32041f20e18fea6a241be72611084d91be9331d0d8fd0c3e162",
+    "Tab/Tab.tsx": "d222bb064e2b9e8e0fa0c4a826f3a302deef6b3777cd4b814e94674dabf24f89",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
-    "TabPanel/TabPanel.module.css": "5ec5d0dd172b9ce28796b3ca4b1439dde4e8eb08abf8262254ed3482b8af80c8",
+    "TabPanel/TabPanel.module.css": "6d7ef8addb055ba50cba8f717e150eec5b7743712e256b5a1de9757e8fe5602e",
     "TabPanel/TabPanel.tsx": "d14e75b47a31470895f96f4c3d815c59c1d27cac96a0798d92d9a90d00ac978e",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
-    "Tabs/Tabs.module.css": "50619076b0a95f3dfd7c7948598c5b384da9d02d66b2a5b8308ebc84b2c44e93",
+    "Tabs/Tabs.module.css": "e67e204f6e8dddd6b48d3769afd3a501c3dcced0ffdab60ff3aaaf2b79143111",
     "Tabs/Tabs.tsx": "ddd3122a1e9f2ba2c3c801a148504b91ef2b84ce096af3ba3b2da9ec08c92ac9",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
     "TextPassage/TextPassage.module.css": "f414ff703840d73f51d990865e4ec9dc48310c66a4350d02c5be185795231fb2",
     "TextPassage/TextPassage.tsx": "b91dece789f139106b13b6babcbc03fa210cb85fd8dc12aecc4227d1573fae12",
     "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
     "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
-    "tokens.css": "d6bf2c73f0e0428893212ee13aff4a4aa012f933bf274e663956edd93e0a5ea0"
+    "tokens.css": "47f0d7b2c3bbdb16fe99dbe8ff0e4f8ef9975e8fdbaad7063774465679c5a8af"
   },
   "cases": [
     {
@@ -95,13 +96,90 @@
           "height": 176
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b4400e83b81f286cc21bd15d934c6fdad32209a7f1e09fa79b3b9c109f57a23e"
+        "pngSha256": "b4400e83b81f286cc21bd15d934c6fdad32209a7f1e09fa79b3b9c109f57a23e",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 439,
+            "height": 176
+          }
+        }
       },
       "content": {
         "key": "variant-default",
         "texts": {
           "figma": 6,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Button",
+              "figma": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -161,13 +239,90 @@
           "height": 176
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c3c14207ffec27b8ec67e3581ebd3d292108742de714631842100d8cb57e3946"
+        "pngSha256": "c3c14207ffec27b8ec67e3581ebd3d292108742de714631842100d8cb57e3946",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 204,
+            "width": 439,
+            "height": 176
+          }
+        }
       },
       "content": {
         "key": "variant-stretch",
         "texts": {
           "figma": 6,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Button",
+              "figma": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -199,6 +354,7 @@
       "renderedAtRuntime": false,
       "refusedByType": true
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "variant",
@@ -224,7 +380,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2402234553296509410",
+      "version": "2406162359972981894",
       "export": {
         "format": "png",
         "scale": 1,
@@ -235,22 +391,29 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "ffb30369c4a799b9679e4d7254687b2390155cb6afd9b9ff92ce1fa25349f49c",
-      "afterSha256": "ffb30369c4a799b9679e4d7254687b2390155cb6afd9b9ff92ce1fa25349f49c"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "beforeSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae",
+      "afterSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
         "key": "variant-default",
         "figmaImage": "figma-3558_61901.png",
         "mismatchPercent": 0.015566625155666251,
-        "blackMismatchPercent": 3.240452469904525,
+        "blackMismatchPercent": 3.2171025321710256,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
           "whiteMismatchPercent": 0.015566625155666251,
-          "blackMismatchPercent": 3.240452469904525,
+          "blackMismatchPercent": 3.2171025321710256,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -283,7 +446,7 @@
             "width": 439,
             "height": 176
           },
-          "pngSha256": "cb3f17ad2e66e328c4045ae54c3f57b4735f425d981366f16efead1621da8bb4",
+          "pngSha256": "e3c984cb72b43c5c897881cf77d95fc2bccc620c4eab6eb4d33b562fb1fd8add",
           "raster": {
             "kind": "figma-rest-full-bounds-v1",
             "scale": 1
@@ -294,7 +457,7 @@
         "textMaskCoveragePercent": 39.181195516811954,
         "inkCoveragePercent": {
           "consumer": 12.83,
-          "figma": 12.72
+          "figma": 12.71
         },
         "contentSize": {
           "consumer": {
@@ -321,12 +484,12 @@
         "key": "variant-stretch",
         "figmaImage": "figma-3558_61928.png",
         "mismatchPercent": 0.015531165872851522,
-        "blackMismatchPercent": 3.211068544212052,
+        "blackMismatchPercent": 3.1877717954027744,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
           "whiteMismatchPercent": 0.015531165872851522,
-          "blackMismatchPercent": 3.211068544212052,
+          "blackMismatchPercent": 3.1877717954027744,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -359,7 +522,7 @@
             "width": 439,
             "height": 176
           },
-          "pngSha256": "8e64da79c8347db2f1439cd041d308a8fdf55dc5d9e1b1a8ba53578ebc9052fe",
+          "pngSha256": "96940ec510ca83a2451a16f7872f0a2df2c02089d7b788390a4d3828e910f1bc",
           "raster": {
             "kind": "figma-rest-full-bounds-v1",
             "scale": 1
@@ -370,7 +533,7 @@
         "textMaskCoveragePercent": 39.161834748395115,
         "inkCoveragePercent": {
           "consumer": 13.34,
-          "figma": 13.26
+          "figma": 13.25
         },
         "contentSize": {
           "consumer": {
@@ -478,7 +641,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "66882edb8a5ddee8774603a21658d606f081f5cc2c443181f7bead82f7cad695",
+    "tarballSha256": "b702b7895104665d6fb6fd50f466958f60855cfb8a66bf0d6f74f4b08a55325b",
     "distFiles": [
       "ArrowArcLeft",
       "ArrowArcLeft/ArrowArcLeft.d.ts",
@@ -530,7 +693,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "75610dffdb4ba32c3d5b484da65dae0a62aaa73a2eaf83ecd9824acb86c99f71",
+    "lockfileSha256": "1b32af74fe6a3c48b512d9c6f0e695828334a18ad36c95004b8f5b1ebee2980e",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -591,9 +754,9 @@
       ]
     },
     "builtCss": {
-      "bytes": 19137,
-      "tokenDefinitions": 83,
-      "tokenDefinitionsExpected": 83
+      "bytes": 18400,
+      "tokenDefinitions": 77,
+      "tokenDefinitionsExpected": 77
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -604,15 +767,84 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
-    "figmaVersion": "2402234553296509410",
-    "responseSha256": "987f618088ec692ab7939e6df24b648ec564b50260c606617976a1599dcb56db",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
+    "figmaVersion": "2406162359972981894",
+    "responseSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "variant-default",
         "texts": {
           "figma": 6,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Button",
+              "figma": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -624,7 +856,75 @@
         "key": "variant-stretch",
         "texts": {
           "figma": 6,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Tab label",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 500"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "A passage of body copy used to verify measure and rhythm.",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "Button",
+              "figma": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#0e1834 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -644,12 +944,13 @@
         "verdict": "pass",
         "image": {
           "white": 0.015566625155666251,
-          "black": 3.240452469904525,
+          "black": 3.2171025321710256,
           "withinLimit": true
         },
         "content": {
           "texts": 6,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -661,12 +962,13 @@
         "verdict": "pass",
         "image": {
           "white": 0.015531165872851522,
-          "black": 3.211068544212052,
+          "black": 3.1877717954027744,
           "withinLimit": true
         },
         "content": {
           "texts": 6,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },

@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -19,32 +20,32 @@
     }
   },
   "generatedSha256": {
-    "CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
-    "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
+    "CheckSquare/CheckSquare.module.css": "9049a391f705fff7da910e6097d3cba188e1473c7618476f3ebd7720a3ee8784",
+    "CheckSquare/CheckSquare.tsx": "8ceaa5aeb7f77a360288ffbf76cc9fbe1b32f5b0594b91b86a4c4ff3bf2ad829",
     "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
-    "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
-    "Checkbox/Checkbox.tsx": "fd3d148a73bac337a3f145b3da121ae9937593821a4b9e28aad978678258916e",
+    "Checkbox/Checkbox.module.css": "a5405ddd8425efbe9989078f73c19fad543b5e227eda3a60eda47d3492828cea",
+    "Checkbox/Checkbox.tsx": "bd14475631b66a04f9b1d3cd03a65d02b77b30a74bbd06591b71548233346fbf",
     "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
     "CheckboxIcon/CheckboxIcon.module.css": "c1d05d4a401c2a16e79355256bac61aa57ae429a71edcd123766dfc5e4b54386",
     "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
-    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
-    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/Icon.module.css": "9a1f41e10f47ebd3208f922617ed3dbb74f168eeacb15ffefd51711c7305cff8",
+    "Icon/Icon.tsx": "1a216ed26641d93f8e84eae6e0c22376a70fc0aed89d7e06510e26c48ab8caf1",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
-    "MinusSquare/MinusSquare.tsx": "5b14d238d633d8916302f061cb74f1b9a9590789d519c8921e26416780eee8ae",
+    "MinusSquare/MinusSquare.module.css": "6d83b085b834a78eecd1debba4b3bbc232552efa64294896c01613b1cd68f746",
+    "MinusSquare/MinusSquare.tsx": "fb8936d3d39d2c024bf9b49e33f174fb4dd66bc1cbc3e3690ecc3c7fa0fede8e",
     "MinusSquare/index.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
-    "Placeholder/Placeholder.module.css": "e023e4150990629822b821ab1152ec4fe00a09b1b5536577971d427fb1476855",
-    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/Placeholder.module.css": "916940b6aac42d63d3f12490d0b8523637b4ba9f621ac7069cddcf7eff71c84f",
+    "Placeholder/Placeholder.tsx": "b3305bfb76ef875be460c0e4b6cbb1407618ba04635fc3e3f55c9c812dc56453",
     "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
-    "Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
-    "Square/Square.tsx": "12b6057a66d7542a1d8056b031fa170cad0e6c39ddcc883d74a0d485e5f09640",
+    "Square/Square.module.css": "3c1cff768f8533b1b31193542c35e0dca49c8d30be17a813335e9bcfb157aaf5",
+    "Square/Square.tsx": "7215c439252b4bcdccf90ef458919d63c498554f4c6de276670e06df339a40f8",
     "Square/index.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
-    "WarningCircle/WarningCircle.module.css": "e72d08fe5e62ef6e92ec834d61c08ed00315d375d7b14ed9f3395a3d16150531",
-    "WarningCircle/WarningCircle.tsx": "463a1e292226e391fa5f6eb24351920a9dcdeb9bd5a7ac61079719c7754f769d",
+    "WarningCircle/WarningCircle.module.css": "747d2b3a4c5eec8a25ea101a9faaa69d9e81959e462e03b463c82270eca0d0bb",
+    "WarningCircle/WarningCircle.tsx": "42590d2702cd35b6a158c989adaa9f414d68a831cb7a432595e6dfb8ce9bc634",
     "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
     "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
-    "tokens.css": "860f97f8acfaab78aebc8dc5a3265da72462dbb615e8cefc6ef1fb1783160448"
+    "tokens.css": "a9bfdca4d1c7a466641bf61e5e8859a9c16403395ab010276d63abfa217fda41"
   },
   "cases": [
     {
@@ -86,13 +87,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+        "pngSha256": "05d20fe53094dfff7eccaaa0974ef675afef4d5d77c4d018438b31d82fe4ff10",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-large_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -140,13 +163,46 @@
           "height": 42
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "78ab899bb073e9a75abf48c3de4cde56665029aadb6731d2257473c3c1f5f269"
+        "pngSha256": "aec582874374314ffe398ceba94519b79fc0b91da327a0d9b513be063633b3f7",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 52,
+            "width": 148,
+            "height": 42
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-large_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -194,13 +250,46 @@
           "height": 42
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "38926a5c0daa6f839068e07a04a5c8c03ab5cbc1887715c0734dfeb3dcb2a8c4"
+        "pngSha256": "2148cb01b15dc2b20bea1c3be33750c4674bb555fb7038e9768e61f22488708b",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 110,
+            "width": 148,
+            "height": 42
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-large_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -248,13 +337,46 @@
           "height": 38
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1f3ebb6a8aa06874ea33ffff1b47267cc717e1cc8a915dc11418822fe9238451"
+        "pngSha256": "1d21418808ad9a61afb863ecf7944d3e2ef5f047618055fd3ddc189aded65b64",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 168,
+            "width": 126,
+            "height": 38
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-small_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -302,13 +424,46 @@
           "height": 38
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "5fe39d8f4c709fae1bd968a7c815030cd4128d0159712915cef83015f0623ef5"
+        "pngSha256": "b0c2b26225be268909f117e5070fb2e35164e2e0c4f894b1387104d2995933a5",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 222,
+            "width": 126,
+            "height": 38
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-small_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -356,13 +511,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+        "pngSha256": "292d6608bce8b9f758ed0e52ebb2b9aeaefa07eb6257cc056de5ac72ba74a7a5",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 276,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-large_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -410,13 +587,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e5f02096e8a8e854af4fe90592701f8c15574268179c82e9c0ff51d9288e8320"
+        "pngSha256": "7167e6c6bc96796788335e60eab1d5953b96d82c62eecefe4987b674fe6edd12",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 316,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-large_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -464,13 +663,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "8e58f6339f78ebfd8a6e7ef14c914a96cfce63eb25037e08cc21e97222887fcb"
+        "pngSha256": "c77f102a326facb99466a27e8dcc40e56d66d292270f60e846298d8fef081eb1",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 356,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-large_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -518,13 +739,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+        "pngSha256": "4c3278155acf9fc0bb700f0014059766731eb8fa6c3f1ebf56b34a6ca86b0dbf",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 396,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-small_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -572,13 +815,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+        "pngSha256": "ebffe0b7e012ee7254478725990eb1ca1cf8fb8da3a5691f7108af32cc8a000a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 432,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-small_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -626,13 +891,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3798963210586fc8c967c72998d885fe95fed976a645093d93b7709c3e297f32"
+        "pngSha256": "d1f2e6bf1630793600e1343127ccffca961dc5705bc07e7e36dd13785d66c368",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 468,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-small_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -680,13 +967,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "aa1d037b6ede49c058d5c42e5711e760408d823abd7bbaee8419e2eab9c86873"
+        "pngSha256": "bb01377969ac999487ed8b41999a7f7ee2a118b534be0da17516cda7af26d9e4",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 504,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-small_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -734,13 +1043,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "001329c218d12d74bb320da4d9b2e88fe1e8d5298fa1fe20e599f2bda7b2d106"
+        "pngSha256": "acac266be246e3259f0f1443734f8096cbcbee94919534476c99b333fbc6e633",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 540,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-large_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -782,19 +1113,41 @@
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 580,
-          "width": 148,
-          "height": 24
+          "x": 8,
+          "y": 576,
+          "width": 152,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c0fa293978bf1bab5f0237fd12e6d1568efecdb9999934c3e02b37f64a114d83"
+        "pngSha256": "2315586f428679ae94d0eb026a648724133066792d04a06c120de982b1cf37a0",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 8,
+            "y": 576,
+            "width": 152,
+            "height": 32
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-large_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -842,13 +1195,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "8ad1347703dc760faaeecc9c930ffc021304f75c39e968bc3c8519e8a1af208d"
+        "pngSha256": "cec4a4a50d74bf2d6d8e989a965f9503d895f4fd97df70831591bf14e768cb70",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 620,
+            "width": 148,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-large_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -891,18 +1266,40 @@
         },
         "capture": {
           "x": 12,
-          "y": 660,
-          "width": 148,
-          "height": 24
+          "y": 656,
+          "width": 152,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "bbcc7f2aff1c426024946e801a428ddbafcc4cb907366e0dd099cceb603c5c3c"
+        "pngSha256": "1822f67202af82b6f07ca286b8dfb7dbbd18b3bc8723ddc644ed86d16dda343b",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 656,
+            "width": 152,
+            "height": 32
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-large_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -950,13 +1347,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "54ce5dde3c0aed7a42a8336c71a0bf49a75c87c1ac80c015cb48526fcab99a95"
+        "pngSha256": "19de2929f05830f464be3ef6e90d56f3c194ac056a78ea86d5995b4e952a76fe",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 700,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-small_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -998,19 +1417,41 @@
           "height": 20
         },
         "capture": {
-          "x": 12,
-          "y": 736,
-          "width": 126,
-          "height": 20
+          "x": 8,
+          "y": 734,
+          "width": 130,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "a53be4c9ebae90c58e6a50b60e9bcb421ebf93e374299ce06ac5563998bc7dcf"
+        "pngSha256": "d22c05e5b0e16038553d952809dc348b3e9c900ac673ef209306d4efa8549cae",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 8,
+            "y": 734,
+            "width": 130,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-left_size-small_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -1058,13 +1499,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d87b6a5637f7875dfb1d3f4c1495360907f291d822ddac4289dfc70872650d03"
+        "pngSha256": "3c4551ffc3addb08e72b5eca7f468994b9133e48bd0d380ff14890bea47ce50a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 772,
+            "width": 126,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-small_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -1107,18 +1570,40 @@
         },
         "capture": {
           "x": 12,
-          "y": 808,
-          "width": 126,
-          "height": 20
+          "y": 806,
+          "width": 130,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9e6f635748b58c0ad19c94b1368360f2713ed64f5537fe325b3ec6f67de37614"
+        "pngSha256": "7267b9ae57d6964a166a8b9fdce69fbb6157a67dabdcb2d8a22e9ff79d4513d0",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 806,
+            "width": 130,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "alignment-right_size-small_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -1166,15 +1651,7 @@
         "alignment-left_size-small_state-default",
         "alignment-right_size-small_state-default",
         "alignment-left_size-small_state-disabled",
-        "alignment-right_size-small_state-disabled",
-        "alignment-left_size-large_state-hover",
-        "alignment-left_size-large_state-focus",
-        "alignment-right_size-large_state-hover",
-        "alignment-right_size-large_state-focus",
-        "alignment-left_size-small_state-hover",
-        "alignment-left_size-small_state-focus",
-        "alignment-right_size-small_state-hover",
-        "alignment-right_size-small_state-focus"
+        "alignment-right_size-small_state-disabled"
       ]
     },
     "arrays": [],
@@ -1183,6 +1660,7 @@
       "renderedAtRuntime": false,
       "refusedByType": true
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "alignment",
@@ -1350,10 +1828,17 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "eccc2a56d015f9f9c66919afff7228e651ece135ce6f205545d3f4dc9ebd47f5",
-      "afterSha256": "eccc2a56d015f9f9c66919afff7228e651ece135ce6f205545d3f4dc9ebd47f5"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "beforeSha256": "186c3a43a6c457d8712e03ff48f15b5a1bbe2b501d4964372fa96871a83e8a75",
+      "afterSha256": "186c3a43a6c457d8712e03ff48f15b5a1bbe2b501d4964372fa96871a83e8a75"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
@@ -1436,13 +1921,13 @@
       {
         "key": "alignment-left_size-large_state-error",
         "figmaImage": "figma-1536_24526.png",
-        "mismatchPercent": 4.089506172839506,
-        "blackMismatchPercent": 0.2507716049382716,
+        "mismatchPercent": 3.896604938271605,
+        "blackMismatchPercent": 0.19290123456790123,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 4.089506172839506,
-          "blackMismatchPercent": 0.2507716049382716,
+          "whiteMismatchPercent": 3.896604938271605,
+          "blackMismatchPercent": 0.19290123456790123,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -1482,10 +1967,10 @@
           }
         },
         "withinLimit": true,
-        "textMaskedPercent": 0.7961783439490446,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 75.77160493827161,
         "inkCoveragePercent": {
-          "consumer": 18.71,
+          "consumer": 18.76,
           "figma": 17.59
         },
         "contentSize": {
@@ -1512,13 +1997,13 @@
       {
         "key": "alignment-right_size-large_state-error",
         "figmaImage": "figma-1536_24617.png",
-        "mismatchPercent": 8.984674329501916,
+        "mismatchPercent": 9.042145593869732,
         "blackMismatchPercent": 3.065134099616858,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 4.946727549467275,
-          "blackMismatchPercent": 1.141552511415525,
+          "whiteMismatchPercent": 4.756468797564688,
+          "blackMismatchPercent": 1.0844748858447488,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -1558,11 +2043,11 @@
           }
         },
         "withinLimit": true,
-        "textMaskedPercent": 2.142857142857143,
+        "textMaskedPercent": 2.380952380952381,
         "textMaskCoveragePercent": 75.86206896551724,
         "residual": "text-only",
         "inkCoveragePercent": {
-          "consumer": 18.71,
+          "consumer": 18.76,
           "figma": 17.59
         },
         "contentSize": {
@@ -1589,13 +2074,13 @@
       {
         "key": "alignment-left_size-small_state-error",
         "figmaImage": "figma-1536_24572.png",
-        "mismatchPercent": 4.930500917912405,
-        "blackMismatchPercent": 0.34093889325990034,
+        "mismatchPercent": 4.668240230789404,
+        "blackMismatchPercent": 0.26226068712300027,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 4.930500917912405,
-          "blackMismatchPercent": 0.34093889325990034,
+          "whiteMismatchPercent": 4.668240230789404,
+          "blackMismatchPercent": 0.26226068712300027,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -1635,10 +2120,10 @@
           }
         },
         "withinLimit": true,
-        "textMaskedPercent": 1.3227513227513228,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 80.17309205350118,
         "inkCoveragePercent": {
-          "consumer": 19.86,
+          "consumer": 19.92,
           "figma": 18.69
         },
         "contentSize": {
@@ -1665,13 +2150,13 @@
       {
         "key": "alignment-right_size-small_state-error",
         "figmaImage": "figma-1536_24592.png",
-        "mismatchPercent": 4.8126951092611865,
-        "blackMismatchPercent": 0.31217481789802287,
+        "mismatchPercent": 4.552549427679501,
+        "blackMismatchPercent": 0.2601456815816858,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 4.8126951092611865,
-          "blackMismatchPercent": 0.31217481789802287,
+          "whiteMismatchPercent": 4.552549427679501,
+          "blackMismatchPercent": 0.2601456815816858,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -1711,10 +2196,10 @@
           }
         },
         "withinLimit": true,
-        "textMaskedPercent": 1.098901098901099,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 81.06139438085329,
         "inkCoveragePercent": {
-          "consumer": 19.86,
+          "consumer": 19.92,
           "figma": 18.69
         },
         "contentSize": {
@@ -2356,13 +2841,13 @@
       {
         "key": "alignment-left_size-large_state-focus",
         "figmaImage": "figma-6659_61957.png",
-        "mismatchPercent": 19.03538812785388,
-        "blackMismatchPercent": 6.392694063926941,
+        "mismatchPercent": 22.30960264900662,
+        "blackMismatchPercent": 8.443708609271523,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 10.131278538812785,
-          "blackMismatchPercent": 5.5936073059360725,
+          "whiteMismatchPercent": 11.320364238410596,
+          "blackMismatchPercent": 8.02980132450331,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2370,17 +2855,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
+              "x": 0,
               "y": 0,
-              "width": 146,
-              "height": 24
+              "width": 151,
+              "height": 32
             }
           },
-          "pixelsCompared": 3504
+          "pixelsCompared": 4832
         },
         "figmaFrame": {
           "layout": {
@@ -2402,17 +2887,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 39.1025641025641,
-        "textMaskCoveragePercent": 82.1917808219178,
+        "textMaskedPercent": 29.533333333333335,
+        "textMaskCoveragePercent": 68.95695364238411,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 25.28,
+          "consumer": 22.41,
           "figma": 26.71
         },
         "contentSize": {
           "consumer": {
-            "width": 144,
-            "height": 24
+            "width": 151,
+            "height": 32
           },
           "figma": {
             "width": 146,
@@ -2421,8 +2906,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 148,
-            "height": 24
+            "width": 152,
+            "height": 32
           },
           "figma": {
             "width": 149,
@@ -2510,13 +2995,13 @@
       {
         "key": "alignment-right_size-large_state-focus",
         "figmaImage": "figma-6659_61972.png",
-        "mismatchPercent": 22.70408163265306,
-        "blackMismatchPercent": 6.349206349206349,
+        "mismatchPercent": 18.07154605263158,
+        "blackMismatchPercent": 8.963815789473683,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 11.289414414414415,
-          "blackMismatchPercent": 6.306306306306306,
+          "whiteMismatchPercent": 12.191611842105262,
+          "blackMismatchPercent": 8.552631578947368,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2525,16 +3010,16 @@
             },
             "figma": {
               "x": 0,
-              "y": 0
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 148,
-              "height": 24
+              "width": 152,
+              "height": 32
             }
           },
-          "pixelsCompared": 3552
+          "pixelsCompared": 4864
         },
         "figmaFrame": {
           "layout": {
@@ -2556,17 +3041,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 35.688405797101446,
-        "textMaskCoveragePercent": 84.35374149659864,
+        "textMaskedPercent": 28.59195402298851,
+        "textMaskCoveragePercent": 71.38157894736842,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 25.28,
+          "consumer": 22.41,
           "figma": 26.71
         },
         "contentSize": {
           "consumer": {
-            "width": 145,
-            "height": 24
+            "width": 152,
+            "height": 32
           },
           "figma": {
             "width": 147,
@@ -2575,8 +3060,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 148,
-            "height": 24
+            "width": 152,
+            "height": 32
           },
           "figma": {
             "width": 149,
@@ -2664,13 +3149,13 @@
       {
         "key": "alignment-left_size-small_state-focus",
         "figmaImage": "figma-6659_61987.png",
-        "mismatchPercent": 18.759999999999998,
-        "blackMismatchPercent": 5.96,
+        "mismatchPercent": 26.905684754521964,
+        "blackMismatchPercent": 9.17312661498708,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 10.879999999999999,
-          "blackMismatchPercent": 5.6000000000000005,
+          "whiteMismatchPercent": 13.178294573643413,
+          "blackMismatchPercent": 8.914728682170542,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2678,17 +3163,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 2
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 125,
-              "height": 20
+              "width": 129,
+              "height": 24
             }
           },
-          "pixelsCompared": 2500
+          "pixelsCompared": 3096
         },
         "figmaFrame": {
           "layout": {
@@ -2710,17 +3195,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 45,
-        "textMaskCoveragePercent": 84.8,
+        "textMaskedPercent": 53.125,
+        "textMaskCoveragePercent": 81.3953488372093,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 26.9,
+          "consumer": 26.09,
           "figma": 27.82
         },
         "contentSize": {
           "consumer": {
-            "width": 123,
-            "height": 20
+            "width": 129,
+            "height": 24
           },
           "figma": {
             "width": 125,
@@ -2729,8 +3214,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 126,
-            "height": 20
+            "width": 130,
+            "height": 24
           },
           "figma": {
             "width": 126,
@@ -2818,13 +3303,13 @@
       {
         "key": "alignment-right_size-small_state-focus",
         "figmaImage": "figma-6659_62002.png",
-        "mismatchPercent": 21.825396825396826,
-        "blackMismatchPercent": 5.952380952380952,
+        "mismatchPercent": 25.128205128205128,
+        "blackMismatchPercent": 9.102564102564102,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 10.714285714285714,
-          "blackMismatchPercent": 5.555555555555555,
+          "whiteMismatchPercent": 13.012820512820515,
+          "blackMismatchPercent": 8.846153846153847,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2833,16 +3318,16 @@
             },
             "figma": {
               "x": 0,
-              "y": 0
+              "y": 2
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 126,
-              "height": 20
+              "width": 130,
+              "height": 24
             }
           },
-          "pixelsCompared": 2520
+          "pixelsCompared": 3120
         },
         "figmaFrame": {
           "layout": {
@@ -2864,17 +3349,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 41.5625,
-        "textMaskCoveragePercent": 87.3015873015873,
+        "textMaskedPercent": 52.083333333333336,
+        "textMaskCoveragePercent": 84.61538461538461,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 26.9,
+          "consumer": 26.09,
           "figma": 27.82
         },
         "contentSize": {
           "consumer": {
-            "width": 124,
-            "height": 20
+            "width": 130,
+            "height": 24
           },
           "figma": {
             "width": 126,
@@ -2883,8 +3368,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 126,
-            "height": 20
+            "width": 130,
+            "height": 24
           },
           "figma": {
             "width": 126,
@@ -2895,6 +3380,7 @@
     ]
   },
   "problems": [
+    "text-prop-discarded",
     "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
@@ -2903,19 +3389,21 @@
     "layout-image-difference-above-limit:alignment-left_size-small_state-disabled:7.38%",
     "layout-image-difference-above-limit:alignment-right_size-small_state-disabled:6.65%",
     "layout-image-difference-above-limit:alignment-left_size-large_state-hover:6.13%",
-    "layout-image-difference-above-limit:alignment-left_size-large_state-focus:10.13%",
-    "layout-image-difference-on-black-above-limit:alignment-left_size-large_state-focus:5.59%",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-focus:11.32%",
+    "layout-image-difference-on-black-above-limit:alignment-left_size-large_state-focus:8.03%",
+    "content-size-mismatch:alignment-left_size-large_state-focus:151x32 vs 146x22",
     "layout-image-difference-above-limit:alignment-right_size-large_state-hover:7.95%",
-    "layout-image-difference-above-limit:alignment-right_size-large_state-focus:11.29%",
-    "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:6.31%",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-focus:12.19%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:8.55%",
+    "content-size-mismatch:alignment-right_size-large_state-focus:152x32 vs 147x22",
     "layout-image-difference-above-limit:alignment-left_size-small_state-hover:9.55%",
-    "layout-image-difference-above-limit:alignment-left_size-small_state-focus:10.88%",
-    "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.60%",
-    "content-size-mismatch:alignment-left_size-small_state-focus:123x20 vs 125x16",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-focus:13.18%",
+    "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:8.91%",
+    "content-size-mismatch:alignment-left_size-small_state-focus:129x24 vs 125x16",
     "layout-image-difference-above-limit:alignment-right_size-small_state-hover:9.27%",
-    "layout-image-difference-above-limit:alignment-right_size-small_state-focus:10.71%",
-    "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.56%",
-    "content-size-mismatch:alignment-right_size-small_state-focus:124x20 vs 126x16"
+    "layout-image-difference-above-limit:alignment-right_size-small_state-focus:13.01%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:8.85%",
+    "content-size-mismatch:alignment-right_size-small_state-focus:130x24 vs 126x16"
   ],
   "limitations": [
     "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
@@ -3001,7 +3489,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/checkbox",
-    "tarballSha256": "5c6df6d93cb7feaef15d605360f452f28e9cb34e7d54e30dab36711f1a07c6ce",
+    "tarballSha256": "7597d21459b81995bbf7726f01aa7cea326469aec6bdf0089717606c06540d1b",
     "distFiles": [
       "CheckSquare",
       "CheckSquare/CheckSquare.d.ts",
@@ -3059,7 +3547,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "82b09a4ae80af27c9000cedc3fe1df26a807b68e162bfe367423393df9f945e7",
+    "lockfileSha256": "d708d6a2987ba45917d038b55a012938a3a14fda2db5558b8ce4234dc19582ba",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -3090,9 +3578,9 @@
       ]
     },
     "builtCss": {
-      "bytes": 26792,
-      "tokenDefinitions": 87,
-      "tokenDefinitionsExpected": 87
+      "bytes": 45580,
+      "tokenDefinitions": 98,
+      "tokenDefinitionsExpected": 98
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -3103,15 +3591,29 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
     "figmaVersion": "2402777548310810334",
-    "responseSha256": "5ddb9ca6e9c6aa8695759b32d599b677009abc2ea23389ff9c9145386adbedd0",
+    "responseSha256": "186c3a43a6c457d8712e03ff48f15b5a1bbe2b501d4964372fa96871a83e8a75",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "alignment-left_size-large_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3123,7 +3625,31 @@
         "key": "alignment-left_size-large_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -3135,7 +3661,31 @@
         "key": "alignment-right_size-large_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -3147,7 +3697,31 @@
         "key": "alignment-left_size-small_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -3159,7 +3733,31 @@
         "key": "alignment-right_size-small_state-error",
         "texts": {
           "figma": 2,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            },
+            {
+              "text": "error text",
+              "figma": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 2,
@@ -3171,7 +3769,20 @@
         "key": "alignment-right_size-large_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3183,7 +3794,20 @@
         "key": "alignment-left_size-large_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3195,7 +3819,20 @@
         "key": "alignment-right_size-large_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3207,7 +3844,20 @@
         "key": "alignment-left_size-small_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3219,7 +3869,20 @@
         "key": "alignment-right_size-small_state-default",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3231,7 +3894,20 @@
         "key": "alignment-left_size-small_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3243,7 +3919,20 @@
         "key": "alignment-right_size-small_state-disabled",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#556275 \"Inter\" 400"
+              ],
+              "rendered": [
+                "#556275 \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3255,7 +3944,20 @@
         "key": "alignment-left_size-large_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3267,7 +3969,20 @@
         "key": "alignment-left_size-large_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3279,7 +3994,20 @@
         "key": "alignment-right_size-large_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3291,7 +4019,20 @@
         "key": "alignment-right_size-large_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3303,7 +4044,20 @@
         "key": "alignment-left_size-small_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3315,7 +4069,20 @@
         "key": "alignment-left_size-small_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3327,7 +4094,20 @@
         "key": "alignment-right_size-small_state-hover",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3339,7 +4119,20 @@
         "key": "alignment-right_size-small_state-focus",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Checkbox label",
+              "figma": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 400"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 1,
@@ -3365,6 +4158,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3377,13 +4171,14 @@
         "figmaName": "alignment=left, size=large, state=error",
         "verdict": "pass",
         "image": {
-          "white": 4.089506172839506,
-          "black": 0.2507716049382716,
+          "white": 3.896604938271605,
+          "black": 0.19290123456790123,
           "withinLimit": true
         },
         "content": {
           "texts": 2,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 2,
           "partsMissing": 0
         },
@@ -3394,13 +4189,14 @@
         "figmaName": "alignment=right, size=large, state=error",
         "verdict": "pass",
         "image": {
-          "white": 4.946727549467275,
-          "black": 1.141552511415525,
+          "white": 4.756468797564688,
+          "black": 1.0844748858447488,
           "withinLimit": true
         },
         "content": {
           "texts": 2,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 2,
           "partsMissing": 0
         },
@@ -3411,13 +4207,14 @@
         "figmaName": "alignment=left, size=small, state=error",
         "verdict": "pass",
         "image": {
-          "white": 4.930500917912405,
-          "black": 0.34093889325990034,
+          "white": 4.668240230789404,
+          "black": 0.26226068712300027,
           "withinLimit": true
         },
         "content": {
           "texts": 2,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 2,
           "partsMissing": 0
         },
@@ -3428,13 +4225,14 @@
         "figmaName": "alignment=right, size=small, state=error",
         "verdict": "pass",
         "image": {
-          "white": 4.8126951092611865,
-          "black": 0.31217481789802287,
+          "white": 4.552549427679501,
+          "black": 0.2601456815816858,
           "withinLimit": true
         },
         "content": {
           "texts": 2,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 2,
           "partsMissing": 0
         },
@@ -3452,6 +4250,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3471,6 +4270,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3488,6 +4288,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3507,6 +4308,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3526,6 +4328,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3545,6 +4348,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3564,6 +4368,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3583,6 +4388,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3595,19 +4401,21 @@
         "figmaName": "alignment=left, size=large, state=focus",
         "verdict": "fail",
         "image": {
-          "white": 10.131278538812785,
-          "black": 5.5936073059360725,
+          "white": 11.320364238410596,
+          "black": 8.02980132450331,
           "withinLimit": false
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
         "reasons": [
-          "layout-image-difference-above-limit:alignment-left_size-large_state-focus:10.13%",
-          "layout-image-difference-on-black-above-limit:alignment-left_size-large_state-focus:5.59%"
+          "layout-image-difference-above-limit:alignment-left_size-large_state-focus:11.32%",
+          "layout-image-difference-on-black-above-limit:alignment-left_size-large_state-focus:8.03%",
+          "content-size-mismatch:alignment-left_size-large_state-focus:151x32 vs 146x22"
         ]
       },
       {
@@ -3622,6 +4430,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3634,19 +4443,21 @@
         "figmaName": "alignment=right, size=large, state=focus",
         "verdict": "fail",
         "image": {
-          "white": 11.289414414414415,
-          "black": 6.306306306306306,
+          "white": 12.191611842105262,
+          "black": 8.552631578947368,
           "withinLimit": false
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
         "reasons": [
-          "layout-image-difference-above-limit:alignment-right_size-large_state-focus:11.29%",
-          "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:6.31%"
+          "layout-image-difference-above-limit:alignment-right_size-large_state-focus:12.19%",
+          "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:8.55%",
+          "content-size-mismatch:alignment-right_size-large_state-focus:152x32 vs 147x22"
         ]
       },
       {
@@ -3661,6 +4472,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3673,20 +4485,21 @@
         "figmaName": "alignment=left, size=small, state=focus",
         "verdict": "fail",
         "image": {
-          "white": 10.879999999999999,
-          "black": 5.6000000000000005,
+          "white": 13.178294573643413,
+          "black": 8.914728682170542,
           "withinLimit": false
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
         "reasons": [
-          "layout-image-difference-above-limit:alignment-left_size-small_state-focus:10.88%",
-          "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.60%",
-          "content-size-mismatch:alignment-left_size-small_state-focus:123x20 vs 125x16"
+          "layout-image-difference-above-limit:alignment-left_size-small_state-focus:13.18%",
+          "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:8.91%",
+          "content-size-mismatch:alignment-left_size-small_state-focus:129x24 vs 125x16"
         ]
       },
       {
@@ -3701,6 +4514,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -3713,24 +4527,27 @@
         "figmaName": "alignment=right, size=small, state=focus",
         "verdict": "fail",
         "image": {
-          "white": 10.714285714285714,
-          "black": 5.555555555555555,
+          "white": 13.012820512820515,
+          "black": 8.846153846153847,
           "withinLimit": false
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
         "reasons": [
-          "layout-image-difference-above-limit:alignment-right_size-small_state-focus:10.71%",
-          "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.56%",
-          "content-size-mismatch:alignment-right_size-small_state-focus:124x20 vs 126x16"
+          "layout-image-difference-above-limit:alignment-right_size-small_state-focus:13.01%",
+          "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:8.85%",
+          "content-size-mismatch:alignment-right_size-small_state-focus:130x24 vs 126x16"
         ]
       }
     ],
-    "setProblems": [],
+    "setProblems": [
+      "text-prop-discarded"
+    ],
     "counts": {
       "pass": 5,
       "fail": 15,
