@@ -40,6 +40,12 @@ import {selectedSampleKey} from '../packages/core/src/selection.js';
  *   · Boolean-driven parts render per the showcased boolean value.
  */
 import {
+  absentVariantAxes,
+  absentVariantKey,
+  absentVariantKeys,
+  ABSENT_VARIANTS_MAX_PRODUCT,
+  ContractSchema,
+  resolvePresence,
   borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
@@ -1011,6 +1017,67 @@ interface RenderState {
   statePreview?: string;
 }
 
+/** Static presence reads the same contract-name values as the React and native
+ * resolvers. A false Boolean is a value; omission remains omission. */
+const presenceSelection = (state: RenderState): Record<string, string | boolean> =>
+  ({ ...state.subst, ...state.bools });
+const hasFinitePresence = (contract: Contract): boolean =>
+  walkAnatomy(contract).some(({ part }) => part.presenceByCombination !== undefined);
+
+function childDefaultsState(contract: Contract): RenderState {
+  const state: RenderState = { subst: {}, bools: {} };
+  for (const p of enumProps(contract)) {
+    if (p.default !== undefined) state.subst[p.name] = String(p.default);
+    else if (!hasFinitePresence(contract) && contract.bindings.figma.drawnVariants === undefined)
+      state.subst[p.name] = p.type.enum[0];
+  }
+  for (const p of boolProps(contract))
+    if (typeof p.default === 'boolean') state.bools[p.name] = p.default;
+  return state;
+}
+
+/** No composed snapshot may turn an undrawn tuple into an implicit absence. */
+function assertSnapshotDomain(contract: Contract, state: RenderState): void {
+  const axes = absentVariantAxes(contract), selection = presenceSelection(state);
+  const tuple = Object.fromEntries(axes.map(({ prop }) => [prop.name, selection[prop.name] ?? null]));
+  const drawn = contract.bindings.figma.drawnVariants;
+  if (drawn !== undefined && !drawn.some(row =>
+    axes.every(({ prop }) => row[prop.name] === tuple[prop.name])))
+    throw new Error('HTML_DRAWN_VARIANT_UNDECLARED: ' + contract.id);
+  if (hasFinitePresence(contract) && absentVariantKeys(contract).has(absentVariantKey(axes, tuple)))
+    throw new Error('HTML_ABSENT_VARIANT_UNAVAILABLE: ' + contract.id);
+}
+
+/** Enumerate only qualified planes. Ordinary contracts retain their existing
+ * per-axis showcase; finite presence needs complete tuples, including omission. */
+function presenceShowcaseTuples(contract: Contract): Array<Record<string, string | boolean | null>> | undefined {
+  if (!hasFinitePresence(contract) && contract.bindings.figma.drawnVariants === undefined) return undefined;
+  if (contract.bindings.figma.drawnVariants !== undefined) return contract.bindings.figma.drawnVariants;
+  const axes = absentVariantAxes(contract);
+  if (axes.reduce((count, axis) => count * axis.options.length, 1) > ABSENT_VARIANTS_MAX_PRODUCT)
+    throw new Error('HTML_PRESENCE_SHOWCASE_DOMAIN_TOO_LARGE');
+  let tuples: Array<Record<string, string | boolean | null>> = [{}];
+  for (const { prop, options } of axes)
+    tuples = tuples.flatMap(tuple => options.map(value => ({ ...tuple, [prop.name]: value })));
+  const absent = absentVariantKeys(contract);
+  return tuples.filter(tuple => !absent.has(absentVariantKey(axes, tuple)));
+}
+
+/** A showcase can list explicit planes even when caller omission has no
+ * qualified presence row. This checks only this root's own inputs; composed
+ * child omission is still refused by renderComponentHtml. */
+function rootDefaultPresenceQualified(contract: Contract, state: RenderState): boolean {
+  const selection = presenceSelection(state);
+  for (const { part } of walkAnatomy(contract)) {
+    try { resolvePresence(part, selection); }
+    catch (error) {
+      if (error instanceof Error && error.message === 'presence-combination-unavailable') return false;
+      throw error;
+    }
+  }
+  return true;
+}
+
 function renderComponentHtml(
   contract: Contract,
   ctx: EmitCtx,
@@ -1019,6 +1086,7 @@ function renderComponentHtml(
   extraText?: string,
   extraRootClass?: string,
 ): string {
+  assertSnapshotDomain(contract, state);
   const k = kebab(contract.name);
   const root = contract.anatomy.root;
   // A2 grid: the same compiled cell plan the CSS consulted — the markup owes
@@ -1050,6 +1118,7 @@ function renderComponentHtml(
     return typeof prop?.default === 'string' ? prop.default : contract.name;
   };
   const visible = (part: Part): boolean => {
+    if (!resolvePresence(part, presenceSelection(state))) return false;
     if (!part.visibleWhen) return true;
     const vw = part.visibleWhen;
     if (typeof vw.equals === 'boolean') return state.bools[vw.prop] === vw.equals;
@@ -1118,9 +1187,7 @@ function renderComponentHtml(
       const dep = ctx.contracts.get(part.component.id)!;
       return part.repeat.sample
         .map((rec) => {
-          const depState: RenderState = { subst: {}, bools: {} };
-          for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+          const depState = childDefaultsState(dep);
           for (const [pn, v] of Object.entries(part.component!.props ?? {})) {
             if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
             if (typeof v === 'object') {
@@ -1155,9 +1222,7 @@ function renderComponentHtml(
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const depState: RenderState = { subst: {}, bools: {} };
-      for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-      for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+      const depState = childDefaultsState(dep);
       for (const [pn, v] of Object.entries(part.component.props ?? {})) {
         if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
         if (typeof v === 'object') {
@@ -1204,9 +1269,7 @@ function renderComponentHtml(
       const inner = items
         .map((item) => {
           const dep = ctx.contracts.get(item.id)!;
-          const depState: RenderState = { subst: {}, bools: {} };
-          for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+          const depState = childDefaultsState(dep);
           for (const [pn, v] of Object.entries(item.props ?? {})) {
             if (typeof v === 'boolean') depState.bools[pn] = v;
             else depState.subst[pn] = v;
@@ -1438,7 +1501,8 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
   const errors: string[] = [];
   const validationContract=draftPaint?structuredClone(contract):contract;
   if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;}
-  validateContract(validationContract, ctx.contracts, errors, ctx.icons);
+  // Every rendered root and composed child enforces the positive tuple domain.
+  validateContract(validationContract, ctx.contracts, errors, ctx.icons, { drawnVariants: 'figma-domain' });
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
@@ -1450,10 +1514,14 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
   const collectCss = (c: Contract) => {
     if (seen.has(c.id)) return;
     seen.add(c.id);
+    if (hasFinitePresence(c) || c.bindings.figma.drawnVariants !== undefined) {
+      const checked = ContractSchema.safeParse(c);
+      if (!checked.success) throw new Error('HTML_PRESENCE_COMBINATION_UNQUALIFIED: ' +
+        checked.error.issues.map(issue => issue.message).join('; '));
+    }
     for (const w of walkAnatomy(c)) {
       if(w.part.slot && (w.part.solidFillComposition || w.part.solidFillCompositionByCombination))throw new Error("HTML_SLOT_FILL_COMPOSITION_UNQUALIFIED");
       if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
-      if (w.part.presenceByCombination) throw new Error("HTML_PRESENCE_COMBINATION_UNSUPPORTED");
       if (w.part.shape?.arc?.cap) throw new Error('HTML_ELLIPSE_ARC_CAP_UNSUPPORTED');
       if (w.part.component?.sameInkInsideStroke) throw new Error('HTML_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
       if (w.part.component?.booleanPropsByCombination) throw new Error('HTML_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
@@ -1497,23 +1565,56 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
       `  <div class="showcase__item">\n    <p class="showcase__label">${escapeHtml(label)}</p>\n${renderComponentHtml(contract, ctx, state, '    ')}\n  </div>`,
     );
   };
-  item('default', defaultsState());
-  for (const p of enumProps(contract)) {
-    for (const v of p.type.enum) {
-      if (v === String(p.default ?? '')) continue;
-      const s = defaultsState();
-      s.subst[p.name] = v;
-      item(`${p.name}=${v}`, s);
+  const defaults = defaultsState();
+  const tuples = presenceShowcaseTuples(contract);
+  const defaultQualified = tuples === undefined || rootDefaultPresenceQualified(contract, defaults);
+  const tupleState = (tuple: Record<string, string | boolean | null>): RenderState => {
+    const state = defaultsState();
+    for (const [name, value] of Object.entries(tuple)) {
+      delete state.subst[name]; delete state.bools[name];
+      if (typeof value === 'boolean') state.bools[name] = value;
+      else if (value !== null) state.subst[name] = value;
+    }
+    return state;
+  };
+  const tupleLabel = (tuple: Record<string, string | boolean | null>): string =>
+    absentVariantAxes(contract).map(({ prop }) =>
+      `${prop.name}=${tuple[prop.name] === null ? '(omitted)' : String(tuple[prop.name])}`).join(', ');
+  if (defaultQualified) item('default', defaults);
+  else items.push('  <!-- default-snapshot-unavailable: omitted inputs have no qualified presence plane; explicit reachable tuples follow -->');
+  if (tuples !== undefined) {
+    const axes = absentVariantAxes(contract);
+    const defaultTuple = Object.fromEntries(axes.map(({ prop }) =>
+      [prop.name, presenceSelection(defaults)[prop.name] ?? null]));
+    for (const tuple of tuples) {
+      if (defaultQualified && absentVariantKey(axes, tuple) === absentVariantKey(axes, defaultTuple)) continue;
+      item(tupleLabel(tuple), tupleState(tuple));
+    }
+  } else {
+    for (const p of enumProps(contract)) {
+      for (const v of p.type.enum) {
+        if (v === String(p.default ?? '')) continue;
+        const s = defaultsState();
+        s.subst[p.name] = v;
+        item(`${p.name}=${v}`, s);
+      }
     }
   }
+  const variantNames = tuples === undefined ? new Set<string>() : new Set(absentVariantAxes(contract).map(axis => axis.prop.name));
   for (const p of boolProps(contract)) {
-    if (p.default===undefined && walkAnatomy(contract).some(w=>w.part.solidFillCompositionByCombination?.props.includes(p.name))) {
-      const s=defaultsState();s.bools[p.name]=false;item(`${p.name}=false`,s);
+    if (variantNames.has(p.name)) continue;
+    const cases: boolean[] = [];
+    if (p.default===undefined && walkAnatomy(contract).some(w=>w.part.solidFillCompositionByCombination?.props.includes(p.name))) cases.push(false);
+    if (p.default !== true) cases.push(true);
+    for (const value of cases) {
+      if (defaultQualified) {
+        const state = defaultsState(); state.bools[p.name] = value;
+        item(`${p.name}=${value}`, state);
+      } else for (const tuple of tuples!) {
+        const state = tupleState(tuple); state.bools[p.name] = value;
+        item(`${tupleLabel(tuple)}, ${p.name}=${value}`, state);
+      }
     }
-    if (p.default === true) continue;
-    const s = defaultsState();
-    s.bools[p.name] = true;
-    item(`${p.name}=true`, s);
   }
 
   const header = `<!--

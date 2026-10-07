@@ -88,9 +88,10 @@ test('geometry completeness counts only explicit present planes and invalid pres
 
 import {emitHtml} from './emit-html.js';
 import {emitWebComponent} from '../packages/emitter-web-components/src/emit-wc.js';
-test('unsupported emitters refuse presence rather than silently drawing absent content',()=>{
+test('HTML renders finite presence while an unqualified Web Components table still refuses',()=>{
  const c=fixture(),contracts=new Map([[c.id,c]]);
- assert.throws(()=>emitHtml(c,{tokens:new Set(),icons:new Map(),contracts}),/HTML_PRESENCE_COMBINATION_UNSUPPORTED/);
+ const html=emitHtml(c,{tokens:new Set(),icons:new Map(),contracts}).html;
+ assert.equal((html.match(/>Moon</g)??[]).length,1,'only the default tuple contains the observed content');
  assert.throws(()=>emitWebComponent(c,{tokens:new Set(),icons:new Map(),contracts}),/WEB_COMPONENT_PRESENCE_COMBINATION_UNSUPPORTED/);
 });
 

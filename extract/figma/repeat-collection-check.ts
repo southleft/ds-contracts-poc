@@ -12,10 +12,10 @@
  *
  * Pinned here:
  *   1. REAL owner's-kit fixture (Navigation-Header, the census composition):
- *      the 5 Link-Neutral menu items propose ONE repeat part with a varying
- *      boolean field, the ambiguous '✏️text' and the "Show item N" count
- *      controls are receipted, and all four surfaces render — React maps the
- *      live array; html/canvas render the observed sample.
+ *      the 5 Link-Neutral menu items retain their independent Boolean
+ *      visibility bindings and applied iconRight values. A repeat cannot
+ *      represent those live controls; the named refusal keeps fixed children
+ *      editable. All four surfaces render the qualified presence planes.
  *   2. SYNTHETIC v1.5-shaped run (Badge Row): '#'-suffixed TEXT keys carry
  *      per-item text ('children' field) and the declared child variant enum.
  *   3. No carriable field → the pattern is receipted and the siblings stay
@@ -230,89 +230,34 @@ console.log(
       ),
     ),
   );
-  const repeatParts = walkAnatomy(r.contract).filter((w) => w.part.repeat);
-  check(
-    `exactly ONE repeat part proposes for the 5 drawn menu items (got ${repeatParts.length})`,
-    repeatParts.length === 1,
-  );
-  const rp = repeatParts[0]?.part.repeat;
-  check(
-    `the sample carries the 5 OBSERVED siblings (got ${rp?.sample.length})`,
-    rp?.sample.length === 5,
-  );
-  check(
-    "the sample carries the varying boolean per item (iconRight false/true/true/false/false)",
-    JSON.stringify(rp?.sample.map((s) => s.iconRight)) ===
-      "[false,true,true,false,false]",
-  );
-  const itemsProp = r.contract.props.find((p) => p.name === rp?.itemsProp);
-  check(
-    "the arrayOf prop `items` ships code-only (bindings.figma.kind NONE)",
-    itemsProp !== undefined &&
-      typeof itemsProp.type === "object" &&
-      "arrayOf" in itemsProp.type &&
-      itemsProp.bindings.figma.kind === "NONE",
-  );
-  check(
-    "its fields are exactly the carriable per-item facts ({ iconRight: boolean })",
-    JSON.stringify((itemsProp?.type as { arrayOf?: unknown })?.arrayOf) ===
-      '{"iconRight":"boolean"}',
-  );
-
-  const flagship = r.proposal.notes.find(
-    (n) =>
-      n.includes(
-        '5 adjacent sibling instances of "Link-Neutral" with a homogeneous applied-prop shape — proposed as ONE item-template part with repeat over arrayOf prop `items` (P9; fields: iconRight:boolean)',
-      ) &&
-      n.includes(
-        "the meter discipline: canvas and static surfaces render the OBSERVED sample; code maps the live array",
-      ),
-  );
-  check(
-    "the collection carry is the NAMED flagship note (P9, meter discipline spelled out)",
-    flagship !== undefined,
-  );
-  const ambiguous = r.proposal.notes.find(
-    (n) =>
-      n.includes('applied prop "✏️text" varies per sibling') &&
-      n.includes(
-        'a bare string key is VARIANT/TEXT-ambiguous (pre-v1.5 dump, no "#id" suffix) — not carried as a field; recapture with the v1.5 plugin',
-      ),
-  );
-  check(
-    "the per-item TEXT stays a NAMED ambiguity receipt (pre-v1.5 dump — never guessed)",
-    ambiguous !== undefined,
-  );
-  const countControls = r.proposal.notes.find(
-    (n) =>
-      n.includes("per-sibling visibility bindings") &&
-      n.includes(
-        'the canvas\'s drawn COUNT controls ("Show item N", the P9 canvas count spelling) — not promoted to boolean props',
-      ),
-  );
-  check(
-    'the "Show item N" count booleans are receipted, never promoted (rename story named)',
-    countControls !== undefined,
-  );
-  check(
-    "no menuItem1…5 boolean props ship",
-    !r.contract.props.some((p) => /^menuItem\d$/.test(p.name)),
-  );
-
-  check(
-    `referee CLEAN (got ${r.violations.length})`,
-    r.violations.length === 0,
-  );
-  check(
-    `ALL FOUR surfaces emit (${surfaces})`,
-    r.files.size === generateSurfaces().length && r.refusals.length === 0,
-  );
+  const parts = walkAnatomy(r.contract);
+  const links = parts.filter(({ part }) => part.component?.id === 'ds.link-neutral');
+  check('independent live visibility controls keep five fixed Link-Neutral instances', links.length === 5 &&
+    !parts.some(({ part }) => part.repeat));
+  check('no arrayOf prop replaces the five native controls', !r.contract.props.some(p =>
+    typeof p.type === 'object' && 'arrayOf' in p.type));
+  check('the five applied iconRight facts remain false/true/true/false/false',
+    JSON.stringify(links.map(({ part }) => part.component!.props?.iconRight)) === '[false,true,true,false,false]');
+  check('every menu control retains its original BOOLEAN property and unknown default',
+    Array.from({length:5},(_,i)=>i+1).every(index => {
+      const p = r.contract.props.find(p => p.name === `menuItem${index}`);
+      return p?.type === 'boolean' && p.default === undefined && p.bindings.figma.kind === 'BOOLEAN' &&
+        p.bindings.figma.property === `↪️menu-item-${index}`;
+    }));
+  check('each child is gated by its own menu control', links.every(({ part }, i) =>
+    part.visibleWhen?.prop === `menuItem${i+1}` && part.visibleWhen.equals === undefined));
+  check('the fallback names the visibility facts a repeat cannot preserve',
+    r.proposal.notes.some(note => note.includes('repeat-visibility-not-uniform') &&
+      note.includes('retaining individual instances and their captured visibility controls')));
+  check('menu source presence remains independent of the live Boolean controls',
+    parts.filter(({ part }) => /^menuItem[1-5]$/.test(part.visibleWhen?.prop ?? '') &&
+      part.presenceByCombination !== undefined).length === 5);
+  check(`referee CLEAN (got ${r.violations.length})`, r.violations.length === 0);
+  check(`ALL FOUR surfaces emit (${surfaces})`, r.files.size === generateSurfaces().length && r.refusals.length === 0);
   const tsx = fileText(r, "react", "NavigationHeader.tsx");
-  check(
-    "React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})",
-    tsx.includes("{items?.map((item, index) => (<LinkNeutral key={index}") &&
-      tsx.includes("iconRight={item.iconRight}"),
-  );
+  check('generated React retains all five public controls instead of replacing them with an items array',
+    Array.from({length:5},(_,i)=>i+1).every(index => tsx.includes(`menuItem${index}`)) &&
+      !tsx.includes('items?.map('));
   const script =
     fileText(r, "figma-script", ".js") ||
     fileText(r, "figma-script", ".mjs") ||
@@ -528,5 +473,5 @@ if (failures.length > 0) {
   process.exit(1);
 }
 console.log(
-  "\n✔ P9 holds — repeated children propose as ONE repeat part + arrayOf prop; the observed sample renders; typed enums carry; ambiguity stays receipted",
+  "\n✔ P9 holds — qualified collections carry typed fields and observed samples; independently controlled siblings keep their live Boolean bindings",
 );
