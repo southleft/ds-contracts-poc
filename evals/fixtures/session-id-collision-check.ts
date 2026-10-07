@@ -200,7 +200,16 @@ if (
   );
   const errors: string[] = [];
   validateContract(parent.contract, contracts, errors, icons);
-  generateCss(parent.contract, inventory, errors);
+  // The parent composes the registered icon. Paint-order qualification must
+  // receive the same registry as validation; missing context must still refuse.
+  let missingRegistryRefused = false;
+  try {
+    generateCss(parent.contract, inventory, []);
+  } catch (error) {
+    missingRegistryRefused = String(error).includes('child-paint-order-reference-unqualified');
+  }
+  if (!missingRegistryRefused) fail('composed paint order accepted a missing registry');
+  generateCss(parent.contract, inventory, errors, undefined, contracts);
   const cycle = errors.find(
     (e) => e.includes("cannot compose itself") || e.includes("Circular"),
   );
