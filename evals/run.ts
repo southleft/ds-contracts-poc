@@ -3528,36 +3528,47 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
-    // P9 (repeated-children collections, schema v12 `repeat`): ≥3 adjacent
-    // sibling instances of the same child with a carriable per-item field
-    // propose as ONE item-template part + arrayOf prop — React maps the live
-    // array, the canvas/static surfaces render the OBSERVED sample (the
-    // meter discipline). Declared per-item enums carry their observed choices;
-    // pre-v1.5 TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
-    // booleans never promote. Receipt runs the REAL owner's-kit
-    // Navigation-Header fixture + a v1.5-shaped synthetic run.
+    // P9: eligible homogeneous siblings carry typed fields and an observed
+    // sample as a live array. Independent source visibility controls cannot
+    // be represented by a repeat: keep all five fixed children and name the
+    // refusal. Replay the real Navigation-Header and the qualified Badge Row,
+    // retaining source facts, independent presence, and all four emitters.
     id: 'repeated-children-collection',
     claim: 'C5-extraction',
     run: () => {
       const r = run(TSX, ['extract/figma/repeat-collection-check.ts']);
       if (r.status !== 0) throw new Error(`repeat receipt failed:\n${r.out}`);
       for (const line of [
-        '✔ exactly ONE repeat part proposes for the 5 drawn menu items (got 1)',
-        '✔ the sample carries the 5 OBSERVED siblings (got 5)',
-        '✔ the arrayOf prop `items` ships code-only (bindings.figma.kind NONE)',
-        '✔ the collection carry is the NAMED flagship note (P9, meter discipline spelled out)',
-        '✔ the per-item TEXT stays a NAMED ambiguity receipt (pre-v1.5 dump — never guessed)',
-        '✔ the "Show item N" count booleans are receipted, never promoted (rename story named)',
-        '✔ React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})',
+        '✔ independent live visibility controls keep five fixed Link-Neutral instances',
+        '✔ no arrayOf prop replaces the five native controls',
+        '✔ the five applied iconRight facts remain false/true/true/false/false',
+        '✔ every menu control retains its original BOOLEAN property and unknown default',
+        '✔ each child is gated by its own menu control',
+        '✔ the fallback names the visibility facts a repeat cannot preserve',
+        '✔ menu source presence remains independent of the live Boolean controls',
+        '✔ generated React retains all five public controls instead of replacing them with an items array',
         '✔ the canvas constructs the OBSERVED instances (5 LinkNeutral sample instances in the sync script)',
+        '✔ ONE repeat part proposes (got 1)',
         '✔ per-item text and the declared child enum both carry as typed fields',
         '✔ the sample carries the drawn labels VERBATIM (One/Two/Three/Four)',
         '✔ the observed variant choices survive in the sample instead of becoming child defaults',
+        '✔ React forwards each item variant and renders its text as JSX children',
         '✔ the static surface renders the OBSERVED sample per item (One…Four appear in the html)',
         '✔ the pattern is DETECTED and the fallback is a NAMED note (no field invented)',
+        '✔ no repeat part ships',
+        '✔ no arrayOf prop ships',
+        '✔ the 5 siblings stay fixed component-ref parts',
+        '✔ no repeat part proposes (the candidate is one-per-variant, not a sibling run)',
+        '✔ P9 holds — qualified collections carry typed fields and observed samples; independently controlled siblings keep their live Boolean bindings',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
+      // The real menu, qualified collection and unchanged Text Area must all
+      // emit every surface; all four receipt fixtures must stay referee clean.
+      if ((r.out.match(/✔ ALL FOUR surfaces emit \(react, html, react-inline, figma-script\)/g) ?? []).length !== 3)
+        throw new Error('repeat receipt missing an all-four-surface fixture result');
+      if ((r.out.match(/✔ referee CLEAN \(got 0\)/g) ?? []).length !== 4)
+        throw new Error('repeat receipt missing a clean fixture result');
     },
   },
   {
