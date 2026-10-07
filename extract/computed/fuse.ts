@@ -3797,6 +3797,51 @@ export function applyMintToContract(
     }
   }
 
+  // A successful mint can still exceed this receiver's two-axis vocabulary.
+  // Refusing that ref must retain the same exact base and qualified set-plane
+  // literals as an uncorrelated mint, without admitting the rejected ref.
+  // @door fuse.base-plane-literal-fallback
+  const carryBasePlaneLiteral = (obs: MintObservation, partName: string, channel: string, cause = 'uncorrelated across planes'): void => {
+    // NON-INHERITED box geometry only: inherited channels (color,
+    // typography) are usually RIGHT via CSS inheritance when absent —
+    // a base literal would break that (Button's primary label went
+    // dark). Paddings/sizes/radii/borders have no inheritance to lean
+    // on; absence there is a raw UA default.
+    const target0 = partByName.get(partName);
+    // Reviewed carriage owns the channel, including partial conditional
+    // planes: fallback literals must not outrank it in CSS or inline styles.
+    const reviewed = target0 && [target0.tokens, target0.literals, target0.declared,
+      ...tokensByPropEntries(target0).flatMap(entry => Object.values(entry.map)),
+      ...(target0.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+      ...(target0.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
+      ...(target0.literalsByCombination ?? []).flatMap(table => table.rows.map(row => row.literals)),
+    ].some(record => record !== undefined && channel in record);
+    if (reviewed) return;
+    const baseOccurrences = obs.occurrences.filter((o) => o.variant === space.baseComboKey);
+    const baseOcc = new Set(baseOccurrences.map((o) => String(o.value))).size === 1 ? baseOccurrences[0] : undefined;
+    if (target0 && baseOcc !== undefined && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
+      const lit = obs.kind === 'px' ? `${baseOcc.value}px` : obs.kind === 'color' ? `#${baseOcc.value}` : obs.kind === 'number' ? String(baseOcc.value) : null;
+      if (lit !== null && LITERAL_VALUE_RE.test(lit)) {
+        target0.literals ??= {};
+        if (!(channel in target0.literals)) {
+          target0.literals[channel] = lit;
+          enrichmentNotes.push(`base-plane literal carried: ${partName}.${channel} = ${lit} (${cause} — the base combo's exact value; set planes remain named residue)`);
+        }
+      }
+      // Round 5c — SET-PLANE literals: the refused channel's exact
+      // per-plane truth on defaultless axes (presence-off slice
+      // uniform), carried as literalsByProp (Tag size=large 8px).
+      const rows = obs.occurrences
+        .map((o) => ({
+          axisValues: o.axisValues,
+          value: obs.kind === 'px' ? `${o.value}px` : obs.kind === 'number' ? String(o.value) : '',
+        }))
+        .filter((r) => r.value !== '');
+      const cands = setPlaneCandidates(rows, space);
+      if (cands.length > 0) refusedSetPlaneLits.push({ part: partName, channel, cands });
+    }
+  };
+
   const apply = (result: MintResult, obsList: MintObservation[], isState: boolean) => {
     result.bindings.forEach((b, i) => {
       const obs = obsList[i];
@@ -3805,41 +3850,9 @@ export function applyMintToContract(
       const channel = parsed ? parsed.channel : obs.cssProperty;
       const state = parsed?.state;
       if (b.ref === null) {
-        // Round 4 base-plane literal fallback: an UNCORRELATED base channel
-        // still has one exact truth at the BASE combo — carried as a literal
-        // (bounded LITERAL_CHANNELS grammar) so the default plane renders
-        // right on every surface; the set planes stay NAMED residue.
-        // @door fuse.base-plane-literal-fallback
-        if (!state) {
-          // NON-INHERITED box geometry only: inherited channels (color,
-          // typography) are usually RIGHT via CSS inheritance when absent —
-          // a base literal would break that (Button's primary label went
-          // dark). Paddings/sizes/radii/borders have no inheritance to lean
-          // on; absence there is a raw UA default.
-          const target0 = partByName.get(partName);
-          const baseOcc = obs.occurrences.find((o) => o.variant === space.baseComboKey);
-          if (target0 && baseOcc !== undefined && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
-            const lit = obs.kind === 'px' ? `${baseOcc.value}px` : obs.kind === 'color' ? `#${baseOcc.value}` : obs.kind === 'number' ? String(baseOcc.value) : null;
-            if (lit !== null && LITERAL_VALUE_RE.test(lit)) {
-              target0.literals ??= {};
-              if (!(channel in target0.literals)) {
-                target0.literals[channel] = lit;
-                enrichmentNotes.push(`base-plane literal carried: ${partName}.${channel} = ${lit} (uncorrelated across planes — the base combo's exact value; set planes remain named residue)`);
-              }
-            }
-            // Round 5c — SET-PLANE literals: the refused channel's exact
-            // per-plane truth on defaultless axes (presence-off slice
-            // uniform), carried as literalsByProp (Tag size=large 8px).
-            const rows = obs.occurrences
-              .map((o) => ({
-                axisValues: o.axisValues,
-                value: obs.kind === 'px' ? `${o.value}px` : obs.kind === 'number' ? String(o.value) : '',
-              }))
-              .filter((r) => r.value !== '');
-            const cands = setPlaneCandidates(rows, space);
-            if (cands.length > 0) refusedSetPlaneLits.push({ part: partName, channel, cands });
-          }
-        }
+        // A null base binding and an unsupported base ref share the same
+        // source-observed literal fallback. State bindings never use it.
+        if (!state) carryBasePlaneLiteral(obs, partName, channel);
         // @door fuse.uncorrelated-overflow
         overflowBindings.push({ part: partName, channel, ...(state ? { state } : {}), refusal: b.reason ?? 'uncorrelated' });
         return;
@@ -4077,6 +4090,7 @@ export function applyMintToContract(
         return;
       }
       // @door fuse.beyond-two-axis-vocabulary
+      carryBasePlaneLiteral(obs, partName, channel, `${phs.length} placeholders exceed the receiver vocabulary`);
       overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `${phs.length} placeholders — beyond the two-axis vocabulary` });
     });
   };
