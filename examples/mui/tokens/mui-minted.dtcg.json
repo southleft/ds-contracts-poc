@@ -6761,6 +6761,19 @@
               }
             }
           }
+        },
+        "line-height": {
+          "$value": "23px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "MUI/Input Label/Regular",
+                "weight": 400
+              }
+            }
+          },
+          "$description": "Authored style definition: preserve the computed React line height when attaching this named MUI style. This is not a captured Figma style value."
         }
       },
       "inputbase-adornedend": {
@@ -6864,7 +6877,16 @@
         },
         "line-height": {
           "$value": "19.92px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "MUI/Helper and Error/Regular",
+                "weight": 400
+              }
+            }
+          },
+          "$description": "Authored style definition: preserve the computed React line height when attaching this named MUI style. This is not a captured Figma style value."
         },
         "margin-top": {
           "$value": "3px",

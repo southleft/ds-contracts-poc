@@ -47,13 +47,22 @@ try {
 
 const textStyles = Object.entries(mintedFlat)
   .flatMap(([tokenPath, entry]) => {
+    if (!tokenPath.endsWith('/font-size')) return [];
     const identity = entry?.$extensions?.dsContracts?.textStyle;
     if (!identity || typeof identity.name !== 'string') return [];
     const fontSize = float(entry.$value);
     if (fontSize === null) throw new Error(`text-style-identity-refused: ${tokenPath} is not a numeric size`);
     const weight = Number(identity.weight ?? 500);
     const fontStyle = weight === 400 ? 'Regular' : weight === 700 ? 'Bold' : 'Medium';
-    return [{ name: identity.name, tokenPath: tokenPath.replaceAll('.', '/'), fontSize, fontStyle }];
+    const leading = mintedFlat[tokenPath.replace(/\/font-size$/, '/line-height')];
+    const leadingIdentity = leading?.$extensions?.dsContracts?.textStyle;
+    let lineHeight;
+    if (leadingIdentity?.name === identity.name && leadingIdentity?.key === identity.key) {
+      const value = float(leading.$value);
+      if (value === null || value <= 0) throw new Error(`text-style-identity-refused: ${tokenPath} has unsupported authored line height`);
+      lineHeight = { unit: 'PIXELS', value };
+    }
+    return [{ name: identity.name, tokenPath: tokenPath.replaceAll('.', '/'), fontSize, fontStyle, ...(lineHeight ? {lineHeight} : {}) }];
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -169,6 +178,7 @@ for (const t of TEXT_STYLES) {
   s.name = t.name;
   s.fontName = { family: 'Roboto', style: t.fontStyle };
   s.fontSize = t.fontSize;
+  s.lineHeight = t.lineHeight || { unit: 'AUTO' };
 }
 figma.notify('MUI tokens: ' + created + ' created, ' + updated + ' updated (' + TOKENS.length + ' total, ' + aliased + ' aliases, ' + TEXT_STYLES.length + ' text styles, Light/Dark)');
 return { created, updated, aliased, total: TOKENS.length, textStyles: { total: TEXT_STYLES.length, created: textStylesCreated } };

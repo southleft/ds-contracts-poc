@@ -124,7 +124,7 @@
             "height": "{imported.shared.size-23}",
             "left": "{imported.shared.size-0}",
             "letter-spacing": "{imported.shared.size-0-15008}",
-            "line-height": "{imported.shared.size-23}",
+            "line-height": "{imported.text-field.label.line-height}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.text-field.label.right}",

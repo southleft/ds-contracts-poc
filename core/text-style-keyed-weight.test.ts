@@ -91,3 +91,27 @@ test('component typography overrides cannot overwrite shared style leaves or sib
  }
  assert.equal(uniform.bindings[0].ref,'{imported.text.body.font-size}','uniform named style remains shared');
 });
+
+test('authored MUI styles preserve the existing React line heights on every TextField variant',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const {ContractSchema}=await import('../scripts/contract-schema.js');
+ const read=(p:string)=>JSON.parse(readFileSync(new URL('../examples/mui/'+p,import.meta.url),'utf8'));
+ const tokens={primitives:{...read('tokens/mui.dtcg.json'),...read('tokens/mui-minted.dtcg.json')},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const c=ContractSchema.parse(read('contracts/text-field.contract.json'));
+ const dep=ContractSchema.parse(read('contracts/input-adornment.contract.json'));
+ const engine=createFigmaEngine({tokens,icons:new Map()});
+ const styles=JSON.parse(engine.buildTokensScript(null).match(/const TEXT_STYLES = (.*);/)![1]);
+ const expected=new Map([['MUI/Input Label/Regular',23],['MUI/Helper and Error/Regular',19.92]]);
+ const sync=readFileSync(new URL('../examples/mui/figma/00-tokens.figma.js',import.meta.url),'utf8');
+ const synced=JSON.parse(sync.match(/const TEXT_STYLES = (.*);/)![1]);
+ assert.equal(synced.length,2);
+ for(const style of synced)assert.deepEqual(style.lineHeight,{unit:'PIXELS',value:expected.get(style.name)});
+ assert.match(sync,/s\.lineHeight = t\.lineHeight/);
+ for(const [name,value] of expected)assert.deepEqual(styles.find((s:any)=>s.name===name).lineHeight,{unit:'PIXELS',value});
+ const data=engine.compileComponentData(c,new Map([[c.id,c],[dep.id,dep]]));
+ for(const variant of data.variants){
+  const nodes:any[]=[];const walk=(n:any)=>{if(n.textStyle)nodes.push(n);for(const child of n.children??[])walk(child);};walk(variant.spec);
+  assert.equal(nodes.length,2);
+  for(const node of nodes)assert.deepEqual(node.lineHeight,{unit:'PIXELS',value:expected.get(node.textStyle)});
+ }
+});
