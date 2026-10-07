@@ -50,9 +50,9 @@ test('a column stretches width without stealing the main-axis allocation',()=>{
 
 import {emitHtml} from './emit-html.js';
 import {emitWebComponent} from '../packages/emitter-web-components/src/emit-wc.js';
-test('unsupported surfaces and conflicting placement owners refuse explicitly',()=>{
+test('supported surfaces retain stretch while conflicting placement owners refuse explicitly',()=>{
  const c=fixture(),contracts=new Map([[c.id,c]]);
- assert.throws(()=>emitHtml(c,{tokens:new Set(),icons:new Map(),contracts}),/HTML_ITEM_STRETCH_UNSUPPORTED/);
+ assert.doesNotThrow(()=>emitHtml(c,{tokens:new Set(),icons:new Map(),contracts}));
  assert.doesNotThrow(()=>emitWebComponent(c,{tokens:new Set(),icons:new Map(),contracts}));
  for(const edit of [(c:any)=>c.anatomy.root.parts.connector.declared={position:'absolute'},
   (c:any)=>c.anatomy.root.parts.connector.declared={position:'relative',top:'1px'},
@@ -61,6 +61,7 @@ test('unsupported surfaces and conflicting placement owners refuse explicitly',(
   (c:any)=>c.anatomy.root.parts.connector.text='unexpected']) {
   const bad=fixture();edit(bad);
   assert.throws(()=>emitReactInline(bad,{tokens,icons:new Map(),contracts:new Map([[bad.id,bad]])}),/cross-axis-stretch-owner-unqualified/);
+  assert.throws(()=>emitHtml(bad,{tokens:new Set(),icons:new Map(),contracts:new Map([[bad.id,bad]])}),/cross-axis-stretch-owner-unqualified/);
  }
 });
 
@@ -132,4 +133,31 @@ test('Web Component stretch preserves sibling sizing and resets to intrinsic hei
  }finally{await browser.close();fs.rmSync(dir,{recursive:true,force:true});}
  const invalid=structuredClone(c);invalid.anatomy.root.parts!.connector.declared={position:'absolute'};
  assert.throws(()=>emitWebComponent(invalid,{contracts:new Map([[invalid.id,invalid]]),tokens:new Set(),icons:new Map()}),/cross-axis-stretch-owner-unqualified/);
+});
+
+test('HTML preserves nested cross-axis allocation and conditional intrinsic reset', async t => {
+ const {emitHtml}=await import('./emit-html.js');
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ const c=fixture(),contracts=new Map([[c.id,c]]),ctx={tokens:new Set<string>(),contracts,icons:new Map(),mode:'light' as const};
+ const page=await browser.newPage();t.after(()=>page.close());
+ const output=emitHtml(c,ctx);
+ await page.setContent(`<style>${output.css}</style>${output.html}`);
+ assert.deepEqual(await page.locator('.item-stretch').evaluate(root=>[root,root.children[0],root.children[0].children[1],root.children[1]].map(n=>n.getBoundingClientRect().height)),[60,60,32,20]);
+ c.props=[{name:'state',type:{enum:['default','focus']},default:'default',bindings:{code:{prop:'state'},figma:{kind:'VARIANT',property:'State',values:{default:'Default',focus:'Focus'}}}}];
+ const connector=c.anatomy.root.parts!.connector;
+ delete connector.parts!.line;
+ connector.layoutByProp={prop:'state',map:{focus:{alignSelf:'auto'}}};
+ const conditional=emitHtml(c,ctx);
+ await page.setContent(`<style>${conditional.css}</style>${conditional.html}`);
+ for(const [state,height] of [['default',60],['focus',20],['default',60]] as const){
+  await page.locator('.item-stretch').first().evaluate((root,state)=>{root.classList.remove('item-stretch--state-default','item-stretch--state-focus');root.classList.add('item-stretch--state-'+state);},state);
+  assert.equal(await page.locator('.item-stretch').first().locator(':scope > :first-child').evaluate(n=>n.getBoundingClientRect().height),height);
+ }
+});
+
+test('HTML still refuses unqualified component stretch owners', () => {
+ const c=fixture();
+ const child=ContractSchema.parse({...fixture(),id:'test.stretch-child',name:'StretchChild'});
+ c.anatomy.root.parts!.connector={component:{id:child.id},layout:{alignSelf:'stretch'}};
+ assert.throws(()=>emitHtml(c,{tokens:new Set(),contracts:new Map([[c.id,c],[child.id,child]]),icons:new Map()}),/cross-axis-stretch-owner-unqualified/);
 });

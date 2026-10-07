@@ -134,6 +134,7 @@ const JUSTIFY_CSS: Record<string, string> = {
  *  core/emit-react.ts layoutOverrideDecls (reversed directions are plain
  *  CSS here; the canvas resolves them by reversing compiled child order). */
 function layoutOverrideDecls(o: {
+  alignSelf?: string;
   display?: string;
   direction?: string;
   align?: string;
@@ -142,6 +143,7 @@ function layoutOverrideDecls(o: {
   growBasis?: "zero";
 }, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
+  if (o.alignSelf) d.push(`align-self: ${o.alignSelf}`);
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
@@ -181,6 +183,7 @@ function layoutDecls(part: Part, gridWhere: string, isGridChild = false): string
       if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
   }
+  if (part.layout?.alignSelf) d.push(`align-self: ${part.layout.alignSelf}`);
   if (part.layout?.grow) d.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
   return d;
 }
@@ -1462,7 +1465,6 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
       if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
       if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('HTML_INSTANCE_AFFINE_UNSUPPORTED');
       if (w.part.layoutByCombination) throw new Error('HTML_JOINT_LAYOUT_UNSUPPORTED');
-    if (w.part.layout?.alignSelf || Object.values(w.part.layoutByProp?.map ?? {}).some(value => value.alignSelf)) throw new Error("HTML_ITEM_STRETCH_UNSUPPORTED");
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');
