@@ -59,13 +59,13 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.image` | Image | 1 | 12 | 12 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.kicker` | Kicker | 2 | 28 | 14 | 0 | recognisable | FC-FONT-SUBSTRATE; TEXT-LETTER-SPACING-NAMED |
-| figma-ds | `ds.button-group` | Button Group | 2 | 15 | 11 | 0 | NOT recognisable | SLOT-CONTENT-NAMED |
+| figma-ds | `ds.button-group` | Button Group | 2 | 19 | 7 | 0 | NOT recognisable | SLOT-CONTENT-NAMED |
 | figma-ds | `ds.section-header` | Section Header | 2 | 38 | 26 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; GRID-CELL-NAMED |
 | figma-ds | `ds.section-footer` | Section Footer | 1 | 21 | 15 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.card` | Card | 2 | 42 | 71 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 25 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **3131** | **3943** | **0** | | |
+| **all** | | 23 sets | | **3135** | **3939** | **0** | | |
 
 ## Renders
 
