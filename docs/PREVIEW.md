@@ -21,7 +21,7 @@ preview command.
 | Component | Direction | Result | Measured |
 | --- | --- | --- | --- |
 | CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-10-01. |
-| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-28. |
+| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 2.982% white, 2.982% black) — darwin-arm64, 2026-10-06. |
 | CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-10-01. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-10-01. Out of scope: keyboard focus is V1.1. |
 | Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-28. |
