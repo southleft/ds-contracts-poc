@@ -1,7 +1,7 @@
 import {observeReactOriginalWrapper} from './react-original-wrapper-observation.js';
 import {readReactOriginalWrappers,type ReactOriginalWrapperCandidate} from './react-original-wrappers.js';
 import {discoverCompiledDependencies} from './react-compiled-dependencies.js';
-import {observeReactJsxHelpers,reactJsxHelperObservationUnchanged,type ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
+import {observeReactJsxHelpers,reactJsxHelperObservationsUnchanged,type ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
 import {type ReactJsxValueRequest,type ReactJsxValues} from './react-jsx-values.js';
 import {readReactJsxEffects,type ReactJsxEffects} from './react-jsx-effects.js';
 import { observeReactHelpers, reactHelperObservationsUnchanged, type ReactHelperObservation } from "./react-helper-observation.js";
@@ -129,7 +129,7 @@ export function startReactOwnership(
   const unchanged = () =>
     reactReferenceUnchanged(reference) && reactSourceProgramUnchanged(program) &&
     reactHelperObservationsUnchanged(state.rows.flatMap(row=>row.helperObservations??[])) &&
-    state.rows.every(row=>[...(row.jsxHelpers??[]),...(row.originalWrappers??[])].every(item=>reactJsxHelperObservationUnchanged(item.result)));
+    reactJsxHelperObservationsUnchanged(state.rows.flatMap(row=>[...(row.jsxHelpers??[]),...(row.originalWrappers??[])].map(item=>item.result)));
   const promise = (async () => {
     let terminal: "complete" | "failed" = "complete";
     try {
