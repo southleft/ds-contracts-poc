@@ -15,9 +15,9 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **158/158** green, 0 pinned red — 112 constructs expected CARRIED, 8 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **158/158** green, 0 pinned red — 114 constructs expected CARRIED, 8 REFUSED, 36 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
-| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 46 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
+| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 44 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 158 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **112 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 158 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **114 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -53,13 +53,13 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Fills and paints | 8 | `fill-absent-on-axis-value` `fill-alpha` `fill-image-bool` `fill-image-hash` `fill-solid-and-image-mixed` `fill-solid-raw` `fill-solid-var` `fill-unset-by-state` |
 | `grid-*` | 22 | `grid-2d` `grid-absolute-overlay` `grid-area-slot-native` `grid-auto-flow-row` `grid-bento-span-matrix` `grid-child-align` `grid-child-fill-cell` `grid-child-grow-invalid` `grid-child-text-hug` `grid-col-span` `grid-explicit-anchor` `grid-gap-row-column` `grid-gap-shorthand` `grid-in-flex-fill` `grid-instance-child` `grid-on-component-variant` `grid-root-hug-height-fixed-conflict` `grid-row-span` `grid-sidebar-px-fr` `grid-track-fit-content` `grid-tracks-mixed-fractional` `grid-two-column` |
 | Nested instances and their linkage | 7 | `instance-absent-stub` `instance-override-size-carried` `instance-props-fixed` `instance-props-thread` `instance-resolvable-key` `instance-resolvable-name` `instance-stub-no-bbox` |
-| Auto-layout (direction, gap, padding, alignment, sizing) | 11 | `layout-align-baseline` `layout-column` `layout-fill-height-row-fixed` `layout-fill-width-column` `layout-fill-width-row` `layout-gap-literal` `layout-justify-space-between` `layout-padding-asymmetric-bound` `layout-root-default-elided` `layout-root-fixed-bbox` `layout-width-bound-root` |
+| Auto-layout (direction, gap, padding, alignment, sizing) | 12 | `layout-align-baseline` `layout-column` `layout-fill-height-row-fixed` `layout-fill-width-column` `layout-fill-width-row` `layout-gap-literal` `layout-item-reverse-z-index` `layout-justify-space-between` `layout-padding-asymmetric-bound` `layout-root-default-elided` `layout-root-fixed-bbox` `layout-width-bound-root` |
 | Min/max sizing | 1 | `minmax-size` |
 | Deep part nesting | 1 | `nest-three-deep` |
 | Node opacity | 1 | `opacity-node` |
 | Absolute placement and constraints | 4 | `placement-abs-frame` `placement-constraints-scale` `placement-fixedsize-inflow` `placement-xy-none-layout` |
 | Corner radii | 2 | `radius-uniform-bound` `radius-uniform-literal` |
-| `rest-*` | 8 | `rest-documentation-links-carried` `rest-layout-sizing-vertical-fill` `rest-set-description-carried` `rest-slot-interior-auto-layout` `rest-slot-primary-axis-fill` `rest-stamped-identity-carried` `rest-text-align-center` `rest-variables-captured` |
+| `rest-*` | 9 | `rest-documentation-links-carried` `rest-item-reverse-z-index` `rest-layout-sizing-vertical-fill` `rest-set-description-carried` `rest-slot-interior-auto-layout` `rest-slot-primary-axis-fill` `rest-stamped-identity-carried` `rest-text-align-center` `rest-variables-captured` |
 | Drawn geometry (ellipse, polygon, arc, rotated rect, vector) | 8 | `shape-arc-donut` `shape-arc-full` `shape-arc-partial` `shape-ellipse` `shape-polygon` `shape-polygon-no-sides` `shape-rect-abs` `shape-rotated-rect` |
 | Slots and preferred values | 6 | `slot-interior-auto-layout` `slot-native-node` `slot-optional-show` `slot-preferred-values` `slot-primary-axis-fill` `slot-wrapper-swap` |
 | Spacers and growth | 2 | `spacer-growth` `spacer-visiblewhen` |
@@ -123,7 +123,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 
 ### 3.3 Named refusals in the document model
 
-8 constructs are refused **by name** — the proposal must produce a note, never a guess. 38 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 46 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
+8 constructs are refused **by name** — the proposal must produce a note, never a guess. 36 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 44 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
 
 | case | disposition | side | the construct | why it is refused |
 |---|---|---|---|---|
@@ -140,7 +140,6 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 | `instance-swap-fixed-value` | LEDGERED | inversion-side | PLUGIN twin of rest-instance-swap-fixed-value: a nested INSTANCE with a FIXED INSTANCE_SWAP value (dump v1.31 fixedSwaps, resolved to the swapped component's name/key) | a component ref carries props only; nested slot CONTENT is not expressible in the composition grammar, so the fixed swap is named with the swapped component's identity |
 | `instance-target-aspect-ratio` | LEDGERED | inversion-side | PLUGIN twin of rest-instance-target-aspect-ratio: a nested INSTANCE with a 16:16 aspect lock (dump v1.31 targetAspectRatio) | an aspect lock acts on resize; on an instance (child-owned box) it is named, a FRAME part would carry declared aspect-ratio |
 | `layout-fill-height-parent-mode-by-variant` | LEDGERED | inversion-side | a child SLOT drawn fillHeight only under the variant where its parent is a ROW, the parent being a COLUMN in the other variant (layoutByProp) and HUGGING its height in both (Phase 2 exam: Card Inline Image, dump v1.31 fillHeight) | the cross-axis stretch under a HUG-height ROW parent has no exact grammar spelling (carryCrossAxisFill names it for a uniform parent); a parent whose direction is a function of the axis is the same fact per variant and must be named per variant, not dropped at the mixed-modes door |
-| `layout-item-reverse-z-index` | LEDGERED | inversion-side | PLUGIN twin of rest-item-reverse-z-index: an auto-layout root with itemReverseZIndex true (dump v1.31) | paint order is a canvas fact with no contract carrier (z-index is declared-but-inert); render-inert without overlap but must be named |
 | `prototype-reaction-field` | LEDGERED | inversion-side | PLUGIN twin of rest-prototype-reaction: an ON_HOVER → CHANGE_TO reaction carried as dump v1.31 reactions[] BESIDE the v1.27 prototype-reactions-unsupported receipt | prototype wiring is named with its target, never inverted into onClick/onHover (the State axis + statePreviewAxis recover the matrix) |
 | `radius-per-corner` | LEDGERED | capture-side | per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only) | the capture receipts radii-nonuniform; nothing corner-shaped may be invented |
 | `rest-child-frame-fixed-size` | LEDGERED | inversion-side | REST: a child FRAME drawn FIXED at 20×20 (layoutSizingHorizontal/Vertical FIXED) inside a HUG root | Option B (FC-GEOMETRY-EXCLUDED, parity/receipts/beta/KIT-CLIMB.md): a child's drawn px is environment-dependent geometry this pipeline does not read back or mint — the part sizes to content. That is a declared exclusion and must be a RECEIPT carrying the code, never silence. (Re-authored 2026-08-22: the first cut expected CARRIED; the Phase 2 brief pins Option B. The fixture gained primaryAxisSizingMode/counterAxisSizingMode FIXED on the child, which the REST surface returns for a FIXED auto-layout frame — the exam dump's Button (contract) 20x20 frames carry exactly that, mapped to layout.primarySizing/counterSizing.) |
@@ -150,7 +149,6 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 | `rest-instance-slot-prop-value` | LEDGERED | inversion-side | REST: a nested INSTANCE with a SLOT-typed property value ({guid}) in componentProperties | an object is not a prop value the contract grammar can hold (exact mode crashed on Card Grid with a ContractSchema error); it must be dropped BY NAME |
 | `rest-instance-swap-fixed-value` | LEDGERED | inversion-side | REST: a nested INSTANCE with a FIXED INSTANCE_SWAP value (componentProperties "Icon#3:1" = 9:9) and no host propRef | fixed prop values ride componentProperties (propose.ts COMPOSITION rule); the mapper skips INSTANCE_SWAP ("slots ride propRefs instead") so a fixed swap with no propRef vanishes |
 | `rest-instance-target-aspect-ratio` | LEDGERED | inversion-side | REST: a nested INSTANCE with a targetAspectRatio lock (16:16) | an aspect lock acts on resize; the code twin is aspect-ratio — carry it or name it |
-| `rest-item-reverse-z-index` | LEDGERED | inversion-side | REST: an auto-layout root with itemReverseZIndex true | paint order is a canvas fact with no dump field; render-inert without overlap but must be named, not dropped |
 | `rest-map-receipts-in-dump` | LEDGERED | inversion-side | REST: a VECTOR child (arbitrary paths — no dump projection) under the root | the mapper names the loss (vector-geometry-unsupported); the receipt must ride the DUMP as `_degradations` (the plugin dump shape) so propose surfaces it and the round trip can match by channel — not live only on stderr |
 | `rest-prototype-reaction` | LEDGERED | inversion-side | REST: an ON_HOVER → CHANGE_TO prototype reaction (interactions[] + transitionNodeID) on the root | the plugin dump names this class as prototype-reactions-unsupported (dump v1.27); the REST route must name it too — map.ts never reads interactions and no captureGap names prototypes |
 | `rest-slot-property-definition` | LEDGERED | inversion-side | REST: a native SLOT property definition whose defaultValue is an object ({guid}) and whose preferredValues name a COMPONENT_SET key | REST does return SLOT definitions with preferredValues (live probe 2026-08-22, file aekVseUceg35tVn62knRrj); the accepts list must be carried or named as "no in-scope contract for key" — not reported as "REST returns componentPropertyDefinitions EMPTY" (the SLOT layer is named "Media" — on the canvas the layer name IS the SLOT property's display name, live probe 2b; the exam's first draft named it "s", which no canvas can produce) |
@@ -323,7 +321,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `4b57c52b7308` | 287,993 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `a8d187f78ef7` | 674,806 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `5cf35e52bcfc` | 114,733 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `1eaa3f173f51` | 114,953 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

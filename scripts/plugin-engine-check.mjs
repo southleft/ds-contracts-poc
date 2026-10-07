@@ -1303,9 +1303,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // 2026-08-22: 2144 → 2143 — the promoter's authored-facts ledger pruned the
   // orphan `imported.link.root.width` leaf (16889547 had unbound it by hand).
   // regen that shipped the node-opacity unbind; both paths still agree.
+  // 2026-10-07: 2143 → 2144 — authored MUI Label/Regular line height adds
+  // imported.text-field.label.line-height (23px), bound by TextField's label.
   assert(
-    mockA.variables.length === 2143 && mockB.variables.length === 2143,
-    `both paths land 2143 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2144 && mockB.variables.length === 2144,
+    `both paths land 2144 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
@@ -1314,6 +1316,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
   assert(namesA === namesB, 'bundle path ≡ script path on the full variable NAME inventory');
+  for (const [side, mock] of [['bundle', mockA], ['script', mockB]]) {
+    const labelHeight = mock.variables.filter((v) => v.name === 'imported/text-field/label/line-height');
+    assert(labelHeight.length === 1 && Object.values(labelHeight[0].valuesByMode).every((value) => value === 23),
+      `${side} carries the authored MUI label line height as one 23px variable`);
+  }
 
   // --- MUI REGEN ROUND (task #31) — REVIEW-THEN-REPIN -----------------------
   // Every counted number above (set shapes, variant grids, variable inventory,
@@ -1405,7 +1412,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2144 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------

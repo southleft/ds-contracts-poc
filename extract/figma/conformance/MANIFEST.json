@@ -1818,10 +1818,13 @@
   {
    "id": "rest-item-reverse-z-index",
    "construct": "REST: an auto-layout root with itemReverseZIndex true",
-   "expect": "LEDGERED",
-   "why": "paint order is a canvas fact with no dump field; render-inert without overlap but must be named, not dropped",
+   "expect": "CARRIED",
+   "why": "the captured container paint order is retained as layout.reversePaint independently of flow and CSS positioning",
    "check": {
-    "note": "itemReverseZIndex|z-index|paint order"
+    "carried": [
+     "\"reversePaint\":true"
+    ],
+    "note": "captured child paint order carried independently of flow order and CSS positioning \\(itemReverseZIndex\\)"
    },
    "status": "green",
    "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts copies itemReverseZIndex when true; propose nameItemReverseZIndex names the reversed paint order. dump.plugin.js mirrors it.",
@@ -2081,10 +2084,13 @@
   {
    "id": "layout-item-reverse-z-index",
    "construct": "PLUGIN twin of rest-item-reverse-z-index: an auto-layout root with itemReverseZIndex true (dump v1.31)",
-   "expect": "LEDGERED",
-   "why": "paint order is a canvas fact with no contract carrier (z-index is declared-but-inert); render-inert without overlap but must be named",
+   "expect": "CARRIED",
+   "why": "the captured container paint order is retained as layout.reversePaint independently of flow and CSS positioning",
    "check": {
-    "note": "itemReverseZIndex is true in 1/1 variant"
+    "carried": [
+     "\"reversePaint\":true"
+    ],
+    "note": "captured child paint order carried independently of flow order and CSS positioning \\(itemReverseZIndex\\)"
    },
    "status": "green",
    "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-item-reverse-z-index; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
