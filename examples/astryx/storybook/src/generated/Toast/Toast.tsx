@@ -29,7 +29,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
       <div className={styles.content}>
         <span className={styles.bodyText}>{body}</span>
       </div>
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
       <Button variant="ghost" label="Dismiss" />
     </div>
   );

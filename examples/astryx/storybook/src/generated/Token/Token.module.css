@@ -92,7 +92,6 @@
 
 .label {
   flex: 1 1 auto;
-  min-width: 0;
   font-size: var(--imported-token-label-font-size);
   font-weight: var(--imported-token-label-font-weight);
   line-height: var(--imported-token-label-line-height);

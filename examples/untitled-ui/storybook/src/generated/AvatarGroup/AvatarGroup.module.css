@@ -92,12 +92,24 @@
   flex-direction: row;
 }
 
+.size-xs .Avatars {
+  --dsc-overlap-gap: var(--imported-avatar-group-avatars-gap-xs);
+}
+
 .size-xs .Avatars > * + * {
   margin-left: var(--imported-avatar-group-avatars-gap-xs);
 }
 
+.size-sm .Avatars {
+  --dsc-overlap-gap: var(--imported-avatar-group-avatars-gap-sm);
+}
+
 .size-sm .Avatars > * + * {
   margin-left: var(--imported-avatar-group-avatars-gap-sm);
+}
+
+.size-md .Avatars {
+  --dsc-overlap-gap: var(--imported-avatar-group-avatars-gap-md);
 }
 
 .size-md .Avatars > * + * {
