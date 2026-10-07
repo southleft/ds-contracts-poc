@@ -75,28 +75,35 @@ test('blend capture requires identical promoted and isolated rasters within the 
  }finally{await browser.close();}
 });
 
-test('blend promotion proof excludes unrelated sibling rerasterization while checking the complete subject',async()=>{
+test('blend promotion proof excludes unrelated sibling paint changes while checking the complete subject',async()=>{
  const browser=await chromium.launch();try{
  const page=await browser.newPage({viewport:{width:320,height:240}});
+ // Force a sibling-only paint difference during the exact promotion used by
+ // the observer. Natural compositor rerasterization differs across platforms.
+ // The subject has an opaque backdrop and contains no platform-specific text.
  await page.setContent(`<style>body{margin:0}.sample{position:relative;width:24px;height:24px;overflow:hidden;margin:12px}
- svg{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;fill:color(srgb 1 1 1 / .000009999999747378752)}
- span{position:absolute;left:3px;top:3px;font:600 12px Arial;color:#161616}
- #neighbor svg{fill:rgba(22.000000588595867,22.000000588595867,22.000000588595867,1)}#neighbor span{color:white}</style>
- <div id="subject" class="sample"><svg><rect width="100%" height="100%"/></svg><span>AI</span></div>
- <div id="neighbor" class="sample"><svg><rect width="100%" height="100%"/></svg><span>AI</span></div>`);
+ #subject{background:#4080c0}#ink{position:absolute;inset:0;background:rgba(220,80,140,.5);mix-blend-mode:multiply}
+ #neighbor{background:lime}body:has(#subject[style]) #neighbor{background:red}</style>
+ <div id="subject" class="sample"><div id="ink"></div></div>
+ <div id="neighbor" class="sample"></div>`);
  const original=await page.locator('body').innerHTML();
  const before=PNG.sync.read(await page.screenshot({omitBackground:true}));
- await page.locator('#subject').evaluate(el=>(el as HTMLElement).style.willChange='transform');
+ await page.locator('#subject').evaluate(el=>(el as HTMLElement).style.setProperty('will-change','transform','important'));
  const after=PNG.sync.read(await page.screenshot({omitBackground:true}));
  await page.locator('#subject').evaluate(el=>el.removeAttribute('style'));
- assert(!before.data.equals(after.data),'fixture must reproduce sibling rerasterization');
- const box=await page.locator('#subject').boundingBox();assert(box);
+ assert(!before.data.equals(after.data),'fixture must change unrelated sibling pixels');
+ const box=await page.locator('#subject').boundingBox(),neighbor=await page.locator('#neighbor').boundingBox();assert(box&&neighbor);
+ const pixel=(png:PNG,x:number,y:number)=>[...png.data.subarray((y*png.width+x)*4,(y*png.width+x)*4+4)];
+ assert.deepEqual(pixel(before,neighbor.x,neighbor.y),[0,255,0,255]);
+ assert.deepEqual(pixel(after,neighbor.x,neighbor.y),[255,0,0,255]);
  for(let y=box.y;y<box.y+box.height;y++){
   const start:number=(y*before.width+box.x)*4,end:number=start+box.width*4;
   assert(before.data.subarray(start,end).equals(after.data.subarray(start,end)),'subject pixels remain identical');
  }
+ assert(PNG.sync.read(await page.screenshot({omitBackground:true})).data.equals(before.data),'original page raster is restored');
  const observed=await observeConsumerPaintExtent(page,'#subject');assert('observation'in observed,JSON.stringify(observed));
  assert.equal(observed.observation.blendRasterVerified,true);assert.equal(await page.locator('body').innerHTML(),original);
+ assert(PNG.sync.read(await page.screenshot({omitBackground:true})).data.equals(before.data),'observer restores the original page raster');
  }finally{await browser.close();}
 });
 
