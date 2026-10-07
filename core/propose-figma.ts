@@ -70,6 +70,7 @@ import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, C
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpText, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
+import {aliasTarget, pxOrNull} from './tokens.js';
 import { capturedTokensFromDump, foldVariablePath, assertUnambiguousVariablePaths, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
@@ -1950,6 +1951,31 @@ export class ExactProjectionError extends Error {
   }
 }
 
+/** A valid registered variable name does not qualify conditional overlap. */
+export class BoundMixedSignSpacingError extends Error {
+  readonly code = 'BOUND_MIXED_SIGN_SPACING_UNSUPPORTED' as const;
+  readonly detail: string;
+  constructor(where: string, facts: ReadonlyArray<{variant:string;spacing:number|null;variable:string|null;token:string|null}>) {
+    super(`BOUND_MIXED_SIGN_SPACING_UNSUPPORTED: ${where} — bound itemSpacing is negative only in some captured planes; layout.overlap has no per-variant form. No contract or negative CSS gap published.`);
+    this.name = 'BoundMixedSignSpacingError';
+    this.detail = `${this.message} Captured names, bindings and values remain unchanged: ${JSON.stringify(facts)}`;
+  }
+}
+
+/** A negative bound channel may publish only with the existing invariant
+ * overlap projection; a binding identity does not supply missing layout facts. */
+export class BoundNegativeSpacingOverlapError extends Error {
+  readonly code = 'BOUND_NEGATIVE_SPACING_OVERLAP_UNQUALIFIED' as const;
+  readonly detail: string;
+  constructor(where: string, reasons: ReadonlyArray<string>, facts: ReadonlyArray<{
+    variant:string;spacing:number|string|null;layoutMode:string|null;variable:string|null;token:string|null;
+  }>, negativeTokens: ReadonlyArray<{token:string;source:'captured-variable'|'token-corpus';value:string|number}>) {
+    super(`BOUND_NEGATIVE_SPACING_OVERLAP_UNQUALIFIED: ${where} — bound negative itemSpacing requires a child container and finite negative spacing in every captured flex plane (${reasons.join(', ')}). No contract or negative CSS gap published.`);
+    this.name = 'BoundNegativeSpacingOverlapError';
+    this.detail = `${this.message} Captured names, bindings and values remain unchanged: ${JSON.stringify(facts)} Known negative carried token values remain unchanged: ${JSON.stringify(negativeTokens)}`;
+  }
+}
+
 /** Exact mode fails closed when a named Figma text style cannot survive
  *  proposal with its semantic identity. Reviewable inversion notes instead. */
 export class TextStyleIdentityError extends Error {
@@ -2487,7 +2513,8 @@ interface Ctx {
   effectsCaptured?: boolean;
   /** Captured-variable resolved values (dump v1.4 `_variables`), dot-path →
    *  CSS value ("bg.brand.default" → "#0e61ba") — the default/consuming
-   *  mode's values, exactly the captured-token layer's entries. Used ONLY to
+   *  mode's values, exactly the captured-token layer's entries. Also checks
+   *  a carried negative gap's overlap qualification; paint uses this index to
    *  route bound-paint drift refusals into the mint pass (live-gauntlet
    *  class ①): when the bound refs cannot be carried as one binding, every
    *  variant's ref still resolves here, so the paint survives as per-variant
@@ -3746,7 +3773,56 @@ function invertNodeTokens(
       ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
     }
   }
-  carry('gap', f('itemSpacing'));
+  // P21's overlap vocabulary is a part invariant. A bound name can be
+  // registered truthfully while its mixed-sign spacing still has no shared
+  // render projection. Refuse before publishing an invalid negative CSS gap.
+  const boundSpacings = m.occ.map(({node}) => node.layout?.spacing);
+  if (fields.has('itemSpacing') && boundSpacings.some(value => typeof value === 'number' && value < 0) &&
+      boundSpacings.some(value => typeof value === 'number' && value >= 0)) {
+    const facts = m.occ.map(({variant,node}) => ({variant,spacing:node.layout?.spacing ?? null,
+      variable:node.bound?.itemSpacing ?? null,
+      token:node.bound?.itemSpacing ? `{${dotPath(node.bound.itemSpacing)}}` : null}));
+    throw new BoundMixedSignSpacingError(where, facts);
+  }
+  const gapRef = f('itemSpacing');
+  const gapRefs = gapRef === undefined ? [] : typeof gapRef === 'string' ? [gapRef]
+    : 'props' in gapRef ? gapRef.rows.map(row => row.ref) : Object.values(gapRef.byValue);
+  // A substituted ref may contain an axis placeholder. Its source values
+  // are the concrete occurrence bindings, inspected only if unification carries.
+  if (gapRef !== undefined) for (const {node} of m.occ) {
+    if (node.bound?.itemSpacing) gapRefs.push(ref(node.bound.itemSpacing));
+  }
+  const negativeGapTokens: Array<{token:string;source:'captured-variable'|'token-corpus';value:string|number}> = [];
+  for (const token of new Set(gapRefs)) {
+    const path = aliasTarget(token);
+    if (path === null) continue;
+    const retainNegative = (source:'captured-variable'|'token-corpus', value:unknown) => {
+      if (typeof value !== 'number' && typeof value !== 'string') return;
+      const dimension = pxOrNull(value);
+      if (dimension !== null && dimension < 0) negativeGapTokens.push({token,source,value});
+    };
+    // Either exact source layer can reveal a negative emitted ref. Unknown
+    // capture never overwrites a known corpus sign, and names supply no value.
+    retainNegative('captured-variable', ctx.capturedValues?.get(path));
+    try { retainNegative('token-corpus', ctx.corpus.resolveLiteral(path)); } catch { /* absent source value */ }
+  }
+  if (fields.has('itemSpacing') && (boundSpacings.some(value => typeof value === 'number' && value < 0) || negativeGapTokens.length > 0)) {
+    // Match invertLayout's container requirement. Missing capture is never
+    // treated as negative, and GRID's inert flex fields cannot prove overlap.
+    const reasons: string[] = [];
+    if (!(m.rootContent || m.children.length > 0 || m.type === 'SLOT')) reasons.push('no overlap container');
+    if (m.occ.some(({node}) => node.layout?.mode !== 'HORIZONTAL' && node.layout?.mode !== 'VERTICAL')) reasons.push('missing or non-flex layout');
+    if (boundSpacings.some(value => typeof value !== 'number' || !Number.isFinite(value) || value >= 0)) reasons.push('incomplete finite negative spacing capture');
+    if (reasons.length > 0) {
+      const facts = m.occ.map(({variant,node}) => ({variant,
+        spacing:typeof node.layout?.spacing === 'number' && !Number.isFinite(node.layout.spacing)
+          ? String(node.layout.spacing) : node.layout?.spacing ?? null,
+        layoutMode:node.layout?.mode ?? null,variable:node.bound?.itemSpacing ?? null,
+        token:node.bound?.itemSpacing ? `{${dotPath(node.bound.itemSpacing)}}` : null}));
+      throw new BoundNegativeSpacingOverlapError(where, reasons, facts, negativeGapTokens);
+    }
+  }
+  carry('gap', gapRef);
   // A uniformly FIXED, non-FILL root has an authored width, just like an
   // unbound FIXED root below. Keep its variable on that exact channel. The
   // older fluid-up-to translation shrank empty controls to their content.
@@ -15926,8 +16002,9 @@ function proposeFromDumpFencedImpl(
     effectsCaptured?: boolean;
     /** Captured-variable resolved values, dot-path → CSS value — build from
      *  the dump's `_variables` via capturedTokensFromDump (the batch entry
-     *  does this automatically). Only consumed with `mintUnbound: true`: it
-     *  lets a bound paint whose refs refuse unification survive as
+     *  does this automatically). A known negative carried gap must qualify
+     *  invariant overlap. With `mintUnbound: true`, this also lets a bound
+     *  paint whose refs refuse unification survive as
      *  per-variant minted literals (live-gauntlet class ①) instead of
      *  dropping the channel. Absent → the classic drift note stands. */
     capturedValues?: Map<string, string>;
@@ -18531,6 +18608,8 @@ export function plainWordsProposalError(e: unknown): { headline: string; detail?
   // Preserve stable refusal headlines used by historical evidence; additive
   // reader diagnostics use the existing technical-detail channel.
   if (e instanceof ExactProjectionError && e.detail) return { headline: e.message, detail: e.detail };
+  if (e instanceof BoundMixedSignSpacingError) return { headline: e.message, detail: e.detail };
+  if (e instanceof BoundNegativeSpacingOverlapError) return { headline: e.message, detail: e.detail };
   const issues = (e as { issues?: unknown } | null)?.issues;
   if (Array.isArray(issues) && issues.length > 0 && issues.every((i) => i && typeof i === 'object')) {
     const first = issues[0] as { path?: unknown[]; message?: unknown };

@@ -262,8 +262,10 @@ const layeredInventory = new Set<string>([
   ...boundNames,
   ...minted.keys(),
 ]);
+const contracts = new Map<string, Contract>([[contract.id, contract]]);
+for (const s of stubs) contracts.set(s.id, s);
 const refusals: string[] = [];
-generateCss(contract, layeredInventory, refusals);
+generateCss(contract, layeredInventory, refusals, undefined, contracts);
 check(
   `ZERO referee violations (got ${refusals.length})`,
   refusals.length === 0,
@@ -280,6 +282,8 @@ generateCss(
   contract,
   new Set<string>([...repoInventory, ...minted.keys()]),
   withoutNames,
+  undefined,
+  contracts,
 );
 check(
   `control: WITHOUT the registered names the referee refuses his refs by name (got ${withoutNames.filter((e) => e.includes("does not exist in tokens/")).length} refusals)`,
@@ -292,8 +296,6 @@ check(
 // ---------------------------------------------------------------------------
 
 console.log("\n4. Surfaces: emitHtml renders, canvas compiles");
-const contracts = new Map<string, Contract>([[contract.id, contract]]);
-for (const s of stubs) contracts.set(s.id, s);
 let html = "";
 let css = "";
 try {

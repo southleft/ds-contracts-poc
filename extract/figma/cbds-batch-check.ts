@@ -22,7 +22,7 @@
  * This receipt pins both fixes on the real dumps:
  *
  *   1. ID SANITIZE at proposal (componentIdSlug): every previously-failing
- *      name proposes; sanitized ids carry a NAMED note with the original
+ *      name is sanitized; qualified proposals carry a NAMED note with the original
  *      spelling; component refs and their child-stub ids stay consistent
  *      (one shared function).
  *   2. BATCH ISOLATION (proposeBatchFromDump — the function the playground
@@ -131,35 +131,25 @@ check(
 console.log(
   "\n3. Child-stub ids and component refs stay consistent (one shared function)",
 );
-const avatar = proposeFromDump(allDump["Avatar"] as DumpSet, opts);
-const avatarStubIds = (avatar.childStubs ?? []).map(
-  (s) => (s as { id?: string }).id,
-);
-check(
-  '"Avatar" proposes (its "_Avatar Indicator" child no longer kills it)',
-  avatarStubIds.length > 0,
-);
-check(
-  '"Avatar" child stub id is "ds.avatar-indicator"',
-  avatarStubIds.includes("ds.avatar-indicator"),
-);
-const avatarJson = JSON.stringify(avatar.contract);
-check(
-  "the anatomy component ref uses the SAME sanitized id as the stub",
-  avatarJson.includes('"ds.avatar-indicator"'),
-);
-check(
-  'no "ds.-" id survives anywhere in the Avatar proposal or its stubs',
-  !avatarJson.includes('"ds.-') &&
-    !JSON.stringify(avatar.childStubs ?? []).includes('"ds.-'),
-);
-check(
-  'the stub-id sanitize note NAMES "_Avatar Indicator" → "ds.avatar-indicator"',
-  avatar.notes.some(
-    (n) =>
-      n.includes('"_Avatar Indicator"') && n.includes('"ds.avatar-indicator"'),
-  ),
-);
+// Avatar's older capture lacks the layout/paint-order plane required by the
+// current guard. Keep that source refusal, and exercise sanitized child refs
+// on the independently qualified Accordion from the same unmodified dump.
+let avatarRefusal = "";
+try { proposeFromDump(allDump["Avatar"] as DumpSet, opts); }
+catch (error) { avatarRefusal = error instanceof Error ? error.message : String(error); }
+check("Avatar retains its named unqualified child-paint-order refusal",
+  avatarRefusal === "child-paint-order-owner-unqualified:Avatar:root");
+const accordion = proposeFromDump(allDump["Accordion"] as DumpSet, opts);
+const stubIds = (accordion.childStubs ?? []).map(s => (s as { id?: string }).id);
+check('qualified Accordion proposes with its "_Panel-Accordion" child', stubIds.length > 0);
+check('child stub id is "ds.panel-accordion"', stubIds.includes("ds.panel-accordion"));
+const accordionJson = JSON.stringify(accordion.contract);
+check("the anatomy component ref uses the SAME sanitized id as the stub",
+  accordionJson.includes('"ds.panel-accordion"'));
+check('no "ds.-" id survives in the qualified proposal or its stubs',
+  !accordionJson.includes('"ds.-') && !JSON.stringify(accordion.childStubs ?? []).includes('"ds.-'));
+check('the sanitize note names "_Panel-Accordion" → "ds.panel-accordion"',
+  accordion.notes.some(n => n.includes('"_Panel-Accordion"') && n.includes('"ds.panel-accordion"')));
 
 // ---------------------------------------------------------------------------
 console.log(
@@ -217,8 +207,11 @@ check(
   batch.proposals.length + batch.skipped.length === total,
 );
 check(
-  `ALL ${total} sets propose (zero skips on the live dump after sanitize)`,
-  batch.skipped.length === 0,
+  `all ${total} sets are accounted for; only the named Avatar paint-order and Avatar group mixed-sign spacing refusals are skipped`,
+  batch.skipped.length === 2 &&
+    batch.skipped.find(row => row.setName === "Avatar")?.reason.endsWith(avatarRefusal) === true &&
+    batch.skipped.find(row => row.setName === "Avatar group")?.reason.includes(
+      "BOUND_MIXED_SIGN_SPACING_UNSUPPORTED: Avatar group:root") === true,
 );
 check(
   "every proposed id satisfies the schema pattern",
@@ -232,10 +225,10 @@ check(
 // "Radio button" set both sanitize to ds.radio-button — the note must name both.
 check(
   'the real id collision ("RadioButton" vs "Radio button" → ds.radio-button) is NAMED, never silent',
-  batch.notes.length === 1 &&
-    batch.notes[0].includes('"ds.radio-button"') &&
-    batch.notes[0].includes('"RadioButton"') &&
-    batch.notes[0].includes('"Radio button"'),
+  batch.notes.filter(note => note.includes('contract id "ds.radio-button" is claimed') &&
+    note.includes('"RadioButton"') && note.includes('"Radio button"')).length === 1 &&
+    batch.proposals.find(p => p.setName === "RadioButton")?.contract.id === "ds.radio-button" &&
+    batch.proposals.find(p => p.setName === "Radio button")?.contract.id === "ds.radio-button-2",
 );
 
 // ---------------------------------------------------------------------------

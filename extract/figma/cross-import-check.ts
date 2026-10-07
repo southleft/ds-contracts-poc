@@ -295,7 +295,7 @@ check(
 console.log("\n5. Zero token refusals on every emitted surface (scoped tree)");
 const scopedInventory = new Set<string>([...activeInventory, ...scope.paths]);
 const refereeErrors: string[] = [];
-generateCss(dialogContract, scopedInventory, refereeErrors);
+generateCss(dialogContract, scopedInventory, refereeErrors, scopedTree, contracts);
 check(
   `referee (generateCss over the scoped inventory): zero violations (got ${refereeErrors.length})`,
   refereeErrors.length === 0,
