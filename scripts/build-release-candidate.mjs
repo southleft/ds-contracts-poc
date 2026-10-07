@@ -68,6 +68,8 @@ const PACKAGES = [
       "dist/native-line.js",
       "dist/stroked-path.d.ts",
       "dist/stroked-path.js",
+      "dist/text-appearance.d.ts",
+      "dist/text-appearance.js",
       "dist/validate.d.ts",
       "dist/validate.js",
       "package.json",
