@@ -77,7 +77,7 @@ test('automatic image routing omits the argument for an unchanged caller variant
 
 test('automatic image census reports unavailable originals without mutating or poisoning source mains',async()=>{
  const {imageDemandsFromDumps}=await import('./source-image-control.js');const f=fixture();
- const parent:DumpSet={setName:'Parent',variants:[{name:'Parent',type:'COMPONENT',children:[f.instance]}]};
+ const parent:DumpSet={setName:'Parent',type:'COMPONENT',variants:[{name:'Parent',type:'COMPONENT',children:[f.instance]}]};
  const dump={parent,child:f.set},before=JSON.stringify(dump),result=imageDemandsFromDumps(dump,'file',{});
  assert.equal(result.demands.length,0);assert(result.notes.some(n=>n.includes('original-asset-unavailable')));assert.equal(JSON.stringify(dump),before);
 });

@@ -315,7 +315,7 @@ for(const family of ['Source Sans Pro','Inter']) {
  test(`${family}: captured percentage line height retains native per-line rounding`,()=>{
   for(const [px,expected] of [[19.1,19],[19.4,19],[19.5,20],[19.6,20],[19.9,20],[20.2,20]]) {
    for(const unit of ['PERCENT',undefined,'AUTO'] as const){
-    const dump:DumpSet={setName:'TextProbe',type:'COMPONENT',variants:[{name:'TextProbe',type:'COMPONENT',children:[{name:'Label',type:'TEXT',text:{characters:'Ag\nAg\nAg',fontFamily:family,fontWeight:400,fontSize:14,lineHeight:px,...(unit?{lineHeightUnit:unit}:{})}}]}]};
+    const dump:DumpSet={setName:'TextProbe',type:'COMPONENT',variants:[{name:'TextProbe',type:'COMPONENT',children:[{name:'Label',type:'TEXT',text:{characters:'Ag\nAg\nAg',fontFamily:family,fontStyle:'Regular',fontWeight:400,fontSize:14,lineHeight:px,...(unit?{lineHeightUnit:unit}:{})}}]}]};
     const before=JSON.stringify(dump);
     const r=proposeFromDump(dump,{mintUnbound:true,contractIdByName:new Map(),corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}})});
     const values=r.mintedTokens?.entries.filter(e=>e.usageSites.some(site=>site.includes('line-height'))).map(e=>e.value)??[];

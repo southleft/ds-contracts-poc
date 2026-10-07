@@ -286,7 +286,7 @@ test('variant slot defaults require matching main, set, file and uniform applied
 test('mixed component placement preserves absolute and flowing instances across a gated axis',async()=>{
  const f=fixture();f.child.anatomy.root={literals:{width:'24px',height:'24px','background-color':'#123456'}};
  f.set.propertyDefinitions={Mode:{type:'VARIANT',defaultValue:'Overlay',variantOptions:['Overlay','Flow','Absent']}};
- f.set.variants=['Overlay','Flow','Absent'].map(mode=>({name:`Mode=${mode}`,variantProperties:{Mode:mode},type:'COMPONENT',layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0]},fixedSize:{width:80,height:40},children:mode==='Absent'?[]:[{name:'Mark',type:'INSTANCE',instanceOf:'Mark',instanceKey:'mark-key',...(mode==='Overlay'?{abs:{x:30,y:5,right:26,bottom:11,width:24,height:24,constraints:{horizontal:'LEFT' as const,vertical:'TOP' as const}}}:{})}]}));
+ f.set.variants=['Overlay','Flow','Absent'].map(mode=>({name:`Mode=${mode}`,variantProperties:{Mode:mode},type:'COMPONENT',layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},fixedSize:{width:80,height:40},children:mode==='Absent'?[]:[{name:'Mark',type:'INSTANCE',instanceOf:'Mark',instanceKey:'mark-key',...(mode==='Overlay'?{abs:{x:30,y:5,right:26,bottom:11,width:24,height:24,constraints:{horizontal:'LEFT' as const,vertical:'TOP' as const}}}:{})}]}));
  const result=proposeFromDump(f.set,{corpus,mintUnbound:true,fileKey:'fixture',projectionMode:'exact',contractIdByName:new Map([['Mark',f.child.id]]),contractIdByKey:new Map([['mark-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});
  const contract=ContractSchema.parse(result.contract),scope=new Map([[contract.id,contract],[f.child.id,f.child]]),errors:string[]=[];
  validateContract(contract,scope,errors,new Map());assert.deepEqual(errors,[]);
@@ -322,7 +322,7 @@ test('mixed component placement preserves absolute and flowing instances across 
 test('native slots retain multiple keyed default instances and explicit replacement ownership',async()=>{
  const f=fixture();f.child.props=[{name:'label',type:'text',default:'Default',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Label'}}}];
  f.child.anatomy.root={parts:{label:{content:{prop:'label'}}}};
- for(const [i,v]of f.set.variants.entries())v.children=[{name:'Options',type:'SLOT',layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:4,padding:[0,0,0,0]},children:['First',...(i?['Second']:[])].map((name,index)=>({name:index?'Alpha':'Zulu',type:'INSTANCE',instanceOf:'Mark',instanceKey:'mark-key',componentProperties:{Label:name}}))}];
+ for(const [i,v]of f.set.variants.entries())v.children=[{name:'Options',type:'SLOT',layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:4,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},children:['First',...(i?['Second']:[])].map((name,index)=>({name:index?'Alpha':'Zulu',type:'INSTANCE',instanceOf:'Mark',instanceKey:'mark-key',componentProperties:{Label:name}}))}];
  const {contract,result,part}=f.read();assert.equal(part.slot?.renderDefault,true);assert.equal(part.slot?.defaultContent?.length,2);
  const scope=new Map([[contract.id,contract],[f.child.id,f.child]]),errors:string[]=[];validateContract(contract,scope,errors,new Map());assert.deepEqual(errors,[]);
  const tokens={primitives:result.mintedTokens?.tree??{},semantic:{},light:{},dark:{},brands:{default:{}}},engine=createFigmaEngine({tokens,icons:new Map()});

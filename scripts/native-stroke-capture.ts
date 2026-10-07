@@ -34,7 +34,7 @@ export function applyNativeStrokeCapture(input: any, receipt: any): any {
   const seen=new Set<string>();
   for(const row of receipt.records){
     if(!row||typeof row.nodeId!=='string'||seen.has(row.nodeId))fail('duplicate-or-invalid-node');seen.add(row.nodeId);
-    const matches=nodes.get(row.nodeId);if(matches?.length!==1)fail('source-node-not-unique');
+    const matches=nodes.get(row.nodeId);if(!matches || matches.length!==1)throw Error('native-stroke-supplement-source-node-not-unique');
     const node=matches[0],g=node.localGeometry,s=row.shape;
     if(node.type!=='VECTOR'||!g||row.issue!==null||!s||s.kind!=='stroked-path'||strokedPathGeometryIssue(s))fail('geometry-unqualified');
     if(Object.keys(s).some(k=>!['kind','width','height','strokePath'].includes(k)))fail('shape-fields-unqualified');

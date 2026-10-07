@@ -1,3 +1,4 @@
+import {ContractSchema} from '../scripts/contract-schema.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {qualifySourceTextAppearance,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,selectSourceTextAppearance,inspectTextAppearance} from './source-text-appearance-control.js';
@@ -79,10 +80,10 @@ test('main proposal rejects foreign appearance demands before emitting a control
  const demand=f.demand(),opts={fileKey:'file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map<string,string>(),mintUnbound:true};
  for(const change of [{fileKey:'foreign'},{sourceNodeId:'foreign'},{childPath:[0,1]},{instanceNodeId:'Iforeign;2:3'}])assert.throws(()=>proposeFromDump(f.set,{...opts,textAppearanceDemands:[{...demand,...change}]}),/text-appearance-demand-/);
  const child=proposeFromDump(f.set,{...opts,textAppearanceDemands:[demand]});
- const binding=child.textAppearanceBindings![0];
+ const binding=child.textAppearanceBindings![0];assert.equal(typeof child.contract.id,'string');const childId=String(child.contract.id);
  f.instance.instanceOf='Card';f.parent.key='parent-key';f.parent.propertyDefinitions={};f.parent.variants[0].variantProperties={};
- const parentOpts={...opts,contractsById:new Map([[child.contract.id,child.contract]]),contractIdByName:new Map([['Card',child.contract.id]]),contractIdByKey:new Map([['set-key',child.contract.id]]),textAppearanceBindingsByContract:new Map([[child.contract.id,[{...binding,contractRevision:'stale'}]]])};
+ const parentOpts={...opts,contractsById:new Map([[childId,ContractSchema.parse(child.contract)]]),contractIdByName:new Map([['Card',childId]]),contractIdByKey:new Map([['set-key',childId]]),textAppearanceBindingsByContract:new Map([[childId,[{...binding,contractRevision:'stale'}]]])};
  assert.throws(()=>proposeFromDump(f.parent,parentOpts),/text-appearance-argument-binding-unqualified/);
- parentOpts.textAppearanceBindingsByContract.set(child.contract.id,[binding]);f.text.text!.characters='stale';
+ parentOpts.textAppearanceBindingsByContract.set(childId,[binding]);f.text.text!.characters='stale';
  assert.throws(()=>proposeFromDump(f.parent,parentOpts),/text-appearance-argument-observation-unqualified/);
 });

@@ -13,7 +13,7 @@ import {createFigmaEngine} from './emit-figma-script.js';
 function fixture(){
  const png=(color:number[])=>{const p=new PNG({width:2,height:2});for(let i=0;i<p.data.length;i+=4)p.data.set(color,i);return `url('data:image/png;base64,${PNG.sync.write(p).toString('base64')}')`;};
  const original=png([255,0,0,255]),replacement=png([0,0,255,255]);
- const p=proposeFromDump({setName:'Picture',type:'COMPONENT',propertyDefinitions:{},variants:[{name:'Default',type:'COMPONENT',variantProperties:{},layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0]},children:[{name:'Photo',type:'FRAME',fixedSize:{width:16,height:16},fill:{hex:'ff0000'}}]}]},{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map()});
+ const p=proposeFromDump({setName:'Picture',type:'COMPONENT',propertyDefinitions:{},variants:[{name:'Default',type:'COMPONENT',variantProperties:{},layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},children:[{name:'Photo',type:'FRAME',fixedSize:{width:16,height:16},fill:{hex:'ff0000'}}]}]},{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map()});
  const c=ContractSchema.parse(p.contract),part=Object.values(c.anatomy.root.parts!)[0];
  c.props.push({name:'photo',type:{enum:['blue']},bindings:{code:{prop:'photo'},figma:{kind:'NONE'}}});
  part.imageOverride={prop:'photo',choices:{blue:{image:replacement,size:'cover',position:'50% 50%'}}};

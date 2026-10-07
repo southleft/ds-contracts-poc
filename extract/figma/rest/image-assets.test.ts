@@ -58,7 +58,7 @@ test('multi-megabyte originals retain exact bytes through REST, CSS and native f
  const image=new PNG({width:1024,height:512});randomFillSync(image.data);
  const bytes=PNG.sync.write(image),key=createHash('sha1').update(bytes).digest('hex');assert(bytes.length>1024*1024);
  const set:any={setName:'Photo',variants:[{name:'Default',type:'COMPONENT',imagePaints:[{index:0,imageHash:key,scaleMode:'FILL'}]}]};
- const assets=await collectRestImageAssets({Photo:set} as DumpFile,async()=>({meta:{images:{[key]:'https://s3.amazonaws.com/original.png'}}}),async()=>new Response(bytes));
+ const assets=await collectRestImageAssets({Photo:set} as DumpFile,async()=>({meta:{images:{[key]:'https://s3.amazonaws.com/original.png'}}}),async()=>new Response(new Uint8Array(bytes)));
  assert.equal((assets[key] as any).base64,bytes.toString('base64'));
  const result=projectNativeImagePaints(set,assets),projection=nativeImageProjection(result.set.variants[0])!;
  assert.equal(nativeImageFill(projection.image,projection.declared).base64,bytes.toString('base64'));

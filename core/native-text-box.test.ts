@@ -20,5 +20,5 @@ test('production native script applies literal width to the text node without an
  const c=ContractSchema.parse({id:'test.literal-text-box',name:'LiteralTextBox',version:'0.1.0',status:'draft',description:'Width box',semantics:{element:'div'},props:[],states:[],anatomy:{root:{layout:{display:'flex',direction:'column'},parts:{text:{text:'Long text',literals:{width:'232px','font-size':'14px'}}}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./LiteralTextBox',export:'LiteralTextBox'}}}});
  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}),byId=new Map([[c.id,c]]),{figma}=createFigmaMock();
  await vm.runInNewContext('(async()=>{'+engine.buildComponentScript(c,byId)+'})()',{figma,console:{log(){},warn(){},error(){}}});
- const text=figma.root.findOne((n:any)=>n.type==='TEXT');assert.equal(text.width,232);assert.equal(text.textAutoResize,'HEIGHT');assert.equal(text.parent.type,'COMPONENT');
+ const text=figma.root.findOne((n:any)=>n.type==='TEXT');assert(text);assert(text.parent);assert.equal(text.width,232);assert.equal(text.textAutoResize,'HEIGHT');assert.equal(text.parent.type,'COMPONENT');
 });

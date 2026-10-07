@@ -489,7 +489,7 @@ test('fixed text boxes carry only explicit dimensions compatible with text resiz
 });
 
 test('native and REST fixed text extents agree without assigning FILL dimensions',async()=>{
- const specs=[{mode:'NONE',horizontal:'FIXED',vertical:'FIXED'},{mode:'NONE',horizontal:'FILL',vertical:'FIXED'},{mode:'HEIGHT',horizontal:'FIXED',vertical:'HUG'},{mode:'WIDTH_AND_HEIGHT',horizontal:'HUG',vertical:'HUG'},{mode:'TRUNCATE',horizontal:'FIXED',vertical:'FIXED'}];
+ const specs=[{mode:'NONE',horizontal:'FIXED',vertical:'FIXED'},{mode:'NONE',horizontal:'FILL',vertical:'FIXED'},{mode:'HEIGHT',horizontal:'FIXED',vertical:'HUG'},{mode:'WIDTH_AND_HEIGHT',horizontal:'HUG',vertical:'HUG'},{mode:'TRUNCATE',horizontal:'FIXED',vertical:'FIXED'}] as const;
  const {figma:mock}=createFigmaMock(),figma:any=mock,variants:any[]=[];
  for(const [i,s]of specs.entries()){
   const c=figma.createComponent();c.name=`Case=${i}`;c.layoutMode='HORIZONTAL';variants.push(c);

@@ -149,7 +149,7 @@ test('proven absent enum planes do not erase the visible frame fill relation',as
  const d=changingParentSource();
  for(const v of d.variants)v.fixedSize={width:100,height:60};
  d.variants[1].children![0]={name:'connector',type:'RECTANGLE',fixedSize:{width:20,height:20}};
- d.propertyDefinitions!.Mode.variantOptions!.push('Absent');
+ const modeDefinition=d.propertyDefinitions!.Mode;assert.equal(modeDefinition.type,'VARIANT');if(modeDefinition.type!=='VARIANT')throw Error('expected variant');modeDefinition.variantOptions!.push('Absent');
  const absent=structuredClone(d.variants[1]);absent.name='Mode=Absent';absent.variantProperties!.Mode='Absent';absent.children=absent.children!.slice(1);d.variants.push(absent);
  const p=propose(d),part=p.contract.anatomy.root.parts!.connector;
  assert.deepEqual(part.visibleWhen,{prop:'mode',equals:['default','compact']});
@@ -175,7 +175,7 @@ test('proven absent enum planes do not erase the visible frame fill relation',as
 
 test('a presence-gated frame retains row and column directions on visible planes',async t=>{
  const d=source();
- d.propertyDefinitions!.Mode.variantOptions!.push('Absent');
+ const modeDefinition=d.propertyDefinitions!.Mode;assert.equal(modeDefinition.type,'VARIANT');if(modeDefinition.type!=='VARIANT')throw Error('expected variant');modeDefinition.variantOptions!.push('Absent');
  const absent=structuredClone(d.variants[1]);absent.name='Mode=Absent';absent.variantProperties!.Mode='Absent';absent.children=absent.children!.slice(1);d.variants.push(absent);
  for(const v of d.variants.slice(0,2))v.children![0].children!.push({name:'second',type:'RECTANGLE',fixedSize:{width:20,height:20}});
  const p=propose(d),part=p.contract.anatomy.root.parts!.connector;

@@ -163,7 +163,7 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
       const row=rows.get(start)??{start,end,characters:this.characters.slice(start,end),fontWeight:400};
       row[name[0].toLowerCase()+name.slice(1)]=structuredClone(value);rows.set(start,row);
     };
-    proto.getStyledTextSegments=function(_fields:unknown,start=0,end=this.characters.length){
+    proto.getStyledTextSegments=function(this:any,_fields:unknown,start=0,end=this.characters.length){
       if(this._appearanceRows)return [...this._appearanceRows.values()].filter((r:any)=>r.start>=start&&r.end<=end);
       return [{start,end,characters:this.characters.slice(start,end),fontName:this.fontName,fontSize:this.fontSize,fontWeight:this.fontWeight??500,lineHeight:this.lineHeight,letterSpacing:this.letterSpacing,textCase:this.textCase??'ORIGINAL',textDecoration:this.textDecoration??'NONE',fills:this.fills}];
     };
