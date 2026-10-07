@@ -47,6 +47,9 @@ export interface ReactJsxHelperObservation {
 }
 export function reactJsxHelperObservationUnchanged(row:ReactJsxHelperObservation):boolean{
   try{
+    // Refused attempts may retain diagnostic prefixes before evidence is sealed.
+    // They confer no observation authority, but their source inputs still must match.
+    if(row.status==='refused'&&!row.evidence)return !row.inputs||Object.entries(row.inputs).every(([file,hash])=>realpathSync(file)===file&&evidenceSha(readFileSync(file))===hash);
     if(row.status==='observed'&&(!row.inputs||!row.evidence||row.runtime?.status!=='observed'||row.lookup?.status!=='verified'))return false;
     if(row.targetEffects&&row.evidence&&evidenceSha(JSON.stringify(row.targetEffects,null,2)+'\n')!==row.evidence.targetModelsSha256)return false;
     if(row.targetCallbacks&&row.evidence&&evidenceSha(JSON.stringify(row.targetCallbacks,null,2)+'\n')!==row.evidence.callbackModelsSha256)return false;
