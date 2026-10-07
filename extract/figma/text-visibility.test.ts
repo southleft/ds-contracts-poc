@@ -144,16 +144,17 @@ test("different or partially missing text bindings stay named instead of choosin
     if (different)
       input.variants[1].children![0].propRefs = { visible: "ShowOther" };
     const result = propose(input);
-    assert.equal(
-      ContractSchema.parse(result.contract).anatomy.root.parts?.Caption
-        .visibleWhen,
-      undefined,
+    // A proven enum predicate can survive even when the Boolean references
+    // cannot be unified. Neither conflicting reference may become the gate.
+    assert.deepEqual(
+      ContractSchema.parse(result.contract).anatomy.root.parts?.Caption.visibleWhen,
+      different ? { prop: "caption", equals: "shown" } : undefined,
     );
-    assert.ok(
-      result.notes.some((note) =>
-        note.includes("visibility property reference differs or is missing"),
-      ),
-    );
+    assert.ok(result.notes.some((note) => note.includes(different
+      ? "combined presence/visibility requires review"
+      : "visibility property reference differs or is missing")));
+    assert.ok(!result.contract.props.some((prop) =>
+      prop.name === "showCaption" || prop.name === "showOther"));
   }
 });
 
@@ -275,7 +276,10 @@ test('explicit BOOLEAN visibility and captured enum presence remain independent 
   const result = propose(input), contract = ContractSchema.parse(result.contract);
   const part = contract.anatomy.root.parts!.Caption;
   assert.deepEqual(part.visibleWhen, {prop: 'focused'});
-  assert(part.stylesWhen?.some(rule => rule.prop === 'caption' && rule.equals === 'hidden' && rule.styles.display === 'none'));
+  assert.deepEqual(part.presenceByCombination, {
+    props: ['caption'],
+    rows: [{values: ['hidden'], present: false}, {values: ['shown'], present: true}],
+  });
   const {reactEmitter, reactInlineEmitter} = await import('../../core/emitter.js');
   const scope = new Map([[contract.id, contract]]), tokens = {primitives: result.mintedTokens?.tree ?? {}, semantic: {}, light: {}, dark: {}, brands: {default: {}}};
   const browser = await chromium.launch();
