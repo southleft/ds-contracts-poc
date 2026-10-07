@@ -159,3 +159,17 @@ for(const sparse of [false,true])test(`childless rectangles preserve frame align
  assert.equal(resolveLayout(surface,{kind:'a',state:'b'})?.alignSelf,'stretch');
  assert.equal(resolveLayout(surface,{kind:'b',state:'b'})?.alignSelf,'auto');
 });
+
+test('captured hidden presence limits joint layout authority to drawn cells',async()=>{
+ const {proposeFromDump}=await import('./propose-figma.js');
+ const {tokenCorpusFromJson}=await import('./token-corpus.js');
+ const dump:any={setName:'HiddenLayout',type:'COMPONENT_SET',propertyDefinitions:Object.fromEntries(['Kind','State'].map(p=>[p,{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}])),variants:[['A','A'],['A','B'],['B','A'],['B','B']].map(([Kind,State])=>({name:`Kind=${Kind}, State=${State}`,type:'COMPONENT',variantProperties:{Kind,State},layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0]},children:[{name:'Panel',type:'FRAME',hidden:Kind!==State,layout:{mode:'HORIZONTAL',primary:Kind==='B'&&State==='B'?'MAX':'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0]},children:[{name:'Label',type:'TEXT',text:{characters:'Content',fontSize:14,fontStyle:'Regular'}}]}]}))};
+ const result=proposeFromDump(dump,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true,hiddenCaptured:true});
+ const c=ContractSchema.parse(result.contract),panel=c.anatomy.root.parts!.Panel;
+ assert(panel.presenceByCombination);
+ assert.deepEqual(panel.layoutByCombination?.rows.map(r=>r.values),[['a','a'],['b','b']]);
+ assert.equal(resolveLayout(panel,{kind:'b',state:'b'})?.justify,'end');
+ assert.deepEqual(errors(c),[]);
+ const missing=structuredClone(c);missing.anatomy.root.parts!.Panel.layoutByCombination!.rows.pop();
+ assert(errors(missing).some(e=>e.includes('presence domain')),'missing drawn layout remains a validation error');
+});

@@ -12023,6 +12023,21 @@ function buildPart(
   const {observedPresence,presenceMatrix}=observedPartPresence(m,ctx,where);
   const mintStart = ctx.mint?.observations.length ?? 0;
   let part = buildPartFromEvidence(m, parentMode, ctx, where, selfKey, observedPresence,presenceMatrix);
+  // Hidden visibility is finalized after layout inference inside the builder.
+  // Retain layout authority only on cells this same part proves present. An
+  // unrelated live Boolean is not evidence of structural absence.
+  if (part?.layoutByCombination && part.presenceByCombination) {
+    const table = part.layoutByCombination as NonNullable<Part['layoutByCombination']>;
+    const presence = part.presenceByCombination as NonNullable<Part['presenceByCombination']>;
+    if (presence.props.every(prop => table.props.includes(prop))) {
+      const rows = table.rows.filter(row => resolvePresence({presenceByCombination: presence},
+        Object.fromEntries(table.props.map((prop, i) => [prop, row.values[i]]))));
+      if (rows.length && rows.length !== table.rows.length) {
+        part.layoutByCombination = {...table, rows};
+        ctx.notes.push(`${where}: joint layout excludes ${table.rows.length - rows.length} cells proved absent by captured presence`);
+      }
+    }
+  }
   if(part)(ctx.partialMinMaxOrigins??=[]).push({part,merged:m,where});
   if(part && presenceMatrix && ctx.mint){
     const present=new Set(m.occ.map(o=>o.variant));
