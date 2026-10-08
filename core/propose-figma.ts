@@ -44,6 +44,7 @@ import { readRootContent } from './figma-root-content.js';
 import { validateRootTextTemplates } from './figma-slot-text-template.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
+import {componentLookupValue} from './code-values.js';
 /**
  * DESIGN → CONTRACT — the PURE core of extract/figma/propose.ts.
  *
@@ -71,6 +72,7 @@ import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpText, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import {aliasTarget, pxOrNull} from './tokens.js';
+import {finitePaintArguments} from './finite-paint-arguments.js';
 import { capturedTokensFromDump, foldVariablePath, assertUnambiguousVariablePaths, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
@@ -2458,6 +2460,8 @@ interface MintCapture {
 }
 
 interface Ctx {
+  /** Original non-scalar applied keys retained before private sanitation. */
+  repeatNonScalarApplied?: WeakMap<DumpNode, ReadonlySet<string>>;
   nestedPropertyNodeIds?:ReadonlySet<string>;
   sourceInstanceParts?:SourceInstancePart[];
   rootInputUses?: Array<{merged:Merged;component:Record<string,unknown>;where:string}>;
@@ -2472,6 +2476,8 @@ interface Ctx {
   fileKey: string | null;
   axes: Axis[];
   totalVariants: string[];
+  /** Independently validated full drawn domain is retained and consumer-guarded. */
+  guardedDrawnPaintDomain?: boolean;
   presenceVariants?: string[];
   /** Rest-plane absence is distinct from the cross-state ambiguity fence. */
   presenceAbsentVariants?: ReadonlyArray<Readonly<Record<string, string>>>;
@@ -2506,6 +2512,8 @@ interface Ctx {
    *  CHANGE_TO into a hover variant is described as the state-preview
    *  wiring it is (dump v1.31). */
   stateAxisPromoted?: string;
+  /** Root-input sharing cannot certify source planes removed by semantic promotion. */
+  repeatRootInputFilteredOwners?: ReadonlySet<string>;
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
@@ -10434,9 +10442,89 @@ function repeatRunAt(children: Merged[], i: number, ctx: Ctx): Merged[] | null {
   return run.length >= 3 ? run : null;
 }
 
+/** Repeat root dimensions use the ordinary instance carrier, independently for
+ * every item. A template may share only the exact same qualified source table;
+ * unsupported ownership keeps fixed instances and their existing carrier. */
+function qualifyRepeatRootInputs(run: Merged[], id: string, ctx: Ctx, where: string, parent: ParentModes | null): {
+  component: Record<string, unknown>; observations: MintCapture['observations'];
+  refOverrides: MintCapture['refOverrides']; notes: string[];
+} | null {
+  const empty = {component: {id} as Record<string, unknown>, observations: [], refOverrides: [], notes: []};
+  const occurrences = run.flatMap(item => item.occ);
+  const refuse = (reason: string): null => {
+    ctx.notes.push(`${where}: repeat-instance-root-${reason} — every sibling in every parent plane must carry the same qualified root input; keeping separate child instances with their existing guarded root inputs`);
+    return null;
+  };
+  const dense = (value: unknown): value is unknown[] => Array.isArray(value) &&
+    Array.from({length: value.length}, (_, i) => Object.hasOwn(value, i)).every(Boolean);
+  if (occurrences.some(o => o.node.instanceRootOverrides && (!dense(o.node.instanceRootOverrides.fields) ||
+      o.node.instanceRootOverrides.fields.some(field => typeof field !== 'string') ||
+      new Set(o.node.instanceRootOverrides.fields).size !== o.node.instanceRootOverrides.fields.length))) return refuse('fields-unqualified');
+  const fields = occurrences.flatMap(o => o.node.instanceRootOverrides?.fields ?? []);
+  if (run.some(item => item.occ.some(({node}) => ctx.repeatRootInputFilteredOwners?.has(observedInstanceIdentity(node) ?? `name:${node.instanceOf ?? node.name}`)))) return refuse('source-planes-unqualified');
+  // Name-only overrides carry no root styling. Other channels are not granted
+  // by this dimension repair; the fixed-instance path retains their receipts.
+  if (fields.every(field => field === 'name')) return empty;
+  if (fields.some(field => !['name', 'width', 'height'].includes(field))) return refuse('unsupported-fields');
+  if (!ctx.mint) return refuse('source-planes-unqualified');
+  const required = new Set(fields.filter(field => field === 'width' || field === 'height'));
+  const variants = new Set(ctx.totalVariants);
+  if (variants.size !== ctx.totalVariants.length || run.some(item =>
+      item.occ.length !== variants.size || new Set(item.occ.map(o => o.variant)).size !== variants.size ||
+      item.occ.some(o => !variants.has(o.variant)))) return refuse('coverage-unqualified');
+  for (const {node: n} of occurrences) {
+    const w = n.instanceRootOverrides, g = n.instanceGeometry;
+    const transform = w?.localTransform;
+    if (!w || !g || !dense(w.fields) || w.fields.some(field => typeof field !== 'string') ||
+        !n.nodeId || w.nodeId !== n.nodeId || g.nodeId !== n.nodeId ||
+        !w.componentId || g.componentId !== w.componentId || !n.instanceKey || w.componentKey !== n.instanceKey ||
+        !n.instanceSetKey || w.componentSetKey !== n.instanceSetKey ||
+        !dense(transform) || transform.length !== 2 || transform.some(row => !dense(row) || row.length !== 3 || row.some(v => typeof v !== 'number' || !Number.isFinite(v))) ||
+        canonicalJson(transform) !== canonicalJson(g.transform) ||
+        [...required].some(channel => {
+          const main = w.mainSize?.[channel as 'width' | 'height'], local = g.localSize?.[channel as 'width' | 'height'];
+          return typeof main !== 'number' || !Number.isFinite(main) || main < 0 ||
+            typeof local !== 'number' || !Number.isFinite(local) || local < 0;
+        })) return refuse('geometry-unqualified');
+    // Repeat templates have no affine or absolute-placement receiver. Local
+    // dimensions do not grant those independently observed source channels.
+    if (transform[0][0] !== 1 || transform[0][1] !== 0 || transform[1][0] !== 0 || transform[1][1] !== 1)
+      return refuse('affine-unqualified');
+    if (absBoxOf(n) !== undefined) return refuse('placement-unqualified');
+  }
+  const qualified = run.map(item => {
+    const component: Record<string, unknown> = {id};
+    const scratch: Ctx = {...ctx, notes: [], rootInputUses: [], mint: {...ctx.mint!, observations: [], refOverrides: []}};
+    carryInstanceRootInputs(item, component, scratch, where, 'dimensions', parent);
+    return {component, observations: scratch.mint!.observations, refOverrides: scratch.mint!.refOverrides, notes: scratch.notes};
+  });
+  if (qualified.some(item => item.component.rootFill || item.observations.length !== required.size ||
+      [...required].some(channel => item.observations.filter(o => o.cssProperty === channel).length !== 1))) {
+    ctx.notes.push(...qualified.flatMap((item, i) => item.notes.map(note => `repeat sibling ${i + 1}: ${note}`)));
+    return refuse('channel-unqualified');
+  }
+  const table = (item: typeof qualified[number]): string => canonicalJson(item.observations.map(observation => ({
+    channel: observation.cssProperty, kind: observation.kind,
+    rows: ctx.totalVariants.map(variant => {
+      const rows = observation.occurrences.filter(o => o.variant === variant);
+      return rows.length === 1 ? {variant, value: rows[0].value, axisValues: rows[0].axisValues} : null;
+    }),
+  })).sort((a, b) => a.channel.localeCompare(b.channel)));
+  if (qualified.some(item => table(item) !== table(qualified[0]))) return refuse('not-uniform');
+  // Instance root overrides have no literal-table receiver. Require the same
+  // existing mint classification before accepting a shared template channel.
+  const projected = qualified.map(item => mintTokens(componentIdSlug(ctx.setName), item.observations, ctx.mint!.axes,
+    {nestedPairs: true, realizedCombos: [...ctx.mint!.axisValuesByVariant.values()]}).bindings);
+  if (projected.some(bindings => bindings.some(binding => !binding.ref)) ||
+      projected.some(bindings => canonicalJson(bindings.map(binding => binding.ref)) !== canonicalJson(projected[0].map(binding => binding.ref))))
+    return refuse('projection-unqualified');
+  ctx.notes.push(`${where}: repeat-instance-root-qualified — every sibling independently carries the same complete ${[...required].join('/')} projection; shared template retains source-owned dimensions`);
+  return qualified[0];
+}
+
 /** Build the ONE repeat part for a P9 run — or null when no per-item field
  *  is carriable (the caller falls back to fixed parts; the skip is NAMED). */
-function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string): Record<string, unknown> | null {
+function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string, parent: ParentModes | null): Record<string, unknown> | null {
   const head = run[0];
   const instanceOf = first(head.occ, (n) => n.instanceOf) ?? head.name;
   const keys = instanceKeysOf({...head,occ:run.flatMap(item=>item.occ)});
@@ -10452,9 +10540,57 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
   const records = run.map(appliedOf);
 
   const fields: Record<string, 'text' | 'boolean' | { enum: string[] }> = {};
-  const enumSamples = new Map<string, string[]>();
+  const scalarSamples = new Map<string, Array<string | boolean>>();
   const fieldKeyByName: Record<string, string> = {};
   const constantKeys: string[] = [];
+  // Only the exact receiving child's declaration owns Boolean conversion.
+  // Inspect every occurrence before field classification: a later-only key,
+  // duplicate binding or stripped null must not vanish behind the first row.
+  const bareKey = (key: string): string => key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
+  const observedKeys = new Set(run.flatMap(sibling => sibling.occ.flatMap(occurrence => [
+    ...Object.keys(occurrence.node.componentProperties ?? {}),
+    ...(ctx.repeatNonScalarApplied?.get(occurrence.node) ?? []),
+  ])));
+  const booleanSamples = new Map<string, {name: string; samples: boolean[]}>();
+  const refuseBoolean = (bare: string, reason: string): null => {
+    ctx.notes.push(`${where}: repeat-boolean-${reason} — per-item "${bare}" cannot retain every captured Boolean input; keeping separate child instances with their applied props`);
+    return null;
+  };
+  for (const bare of new Set([...observedKeys].map(bareKey))) {
+    const owners = mapping?.props.filter(prop => prop.bindings.figma.property === bare) ?? [];
+    if (!owners.some(prop => prop.type === 'boolean')) continue;
+    if (owners.length !== 1) return refuseBoolean(bare, 'ambiguous-binding');
+    const prop = owners[0];
+    const valueMap = (prop.bindings.figma as {values?: Record<string, string>}).values;
+    if (valueMap && (Object.entries(valueMap).some(([canonical, spelling]) =>
+      (canonical !== 'true' && canonical !== 'false') || typeof spelling !== 'string') ||
+      (Object.hasOwn(valueMap, 'true') && Object.hasOwn(valueMap, 'false') && valueMap.true === valueMap.false)))
+      return refuseBoolean(bare, 'ambiguous-values');
+    const samples: boolean[] = [];
+    for (const sibling of run) {
+      let sample: boolean | undefined;
+      for (const occurrence of sibling.occ) {
+        if ([...(ctx.repeatNonScalarApplied?.get(occurrence.node) ?? [])].some(key => bareKey(key) === bare))
+          return refuseBoolean(bare, 'non-scalar');
+        const applied = occurrence.node.componentProperties ?? {};
+        const rawKeys = Object.keys(applied).filter(key => bareKey(key) === bare);
+        if (rawKeys.length !== 1) return refuseBoolean(bare, rawKeys.length ? 'ambiguous-source' : 'missing');
+        const rawKey = rawKeys[0], value = applied[rawKey];
+        const omitted = new Set<string>();
+        const canonical = canonicalizeInstanceProps(instanceOf, {[rawKey]: value}, refId, ctx, where, true, keys, omitted)[prop.name];
+        if (omitted.has(prop.name)) return refuseBoolean(bare, 'omitted');
+        // Reuse the strict typed lookup after the child's binding join. A raw
+        // string is not Boolean authority; canonicalization must yield bool.
+        if (typeof canonical !== 'boolean') return refuseBoolean(bare, 'invalid');
+        const typed = componentLookupValue({name: prop.name, type: 'boolean'}, String(canonical)) as boolean;
+        if (sample !== undefined && sample !== typed) return refuseBoolean(bare, 'not-uniform');
+        sample = typed;
+      }
+      if (sample === undefined) return refuseBoolean(bare, 'missing');
+      samples.push(sample);
+    }
+    booleanSamples.set(bare, {name: prop.name, samples});
+  }
   const claimField = (name: string, type: 'text' | 'boolean' | { enum: string[] }, rawKey: string, bare: string): boolean => {
     if (fields[name] !== undefined) {
       ctx.notes.push(
@@ -10471,6 +10607,15 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
     const values = records.map((r) => r[rawKey]);
     const varying = new Set(values.map((v) => String(v))).size > 1;
     const mappingProp = mapping?.props.find((p) => p.bindings.figma.property === bare);
+    const booleanField = booleanSamples.get(bare);
+    if (booleanField) {
+      if (new Set(booleanField.samples).size === 1) constantKeys.push(rawKey);
+      else {
+        if (!claimField(booleanField.name, 'boolean', rawKey, bare)) return null;
+        scalarSamples.set(booleanField.name, booleanField.samples);
+      }
+      continue;
+    }
     if (typeof values[0] === 'boolean') {
       if (!varying) {
         constantKeys.push(rawKey);
@@ -10505,7 +10650,7 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
         return null;
       }
       if (claimField(mappingProp.name, {enum: [...domain]}, rawKey, bare))
-        enumSamples.set(mappingProp.name, samples as string[]);
+        scalarSamples.set(mappingProp.name, samples as string[]);
     } else if (mapping && !mappingProp) {
       ctx.notes.push(
         `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but does not map through ${mapping.id}'s bindings — not carried as a field; verify the child contract is current (P9)`,
@@ -10526,6 +10671,10 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
     );
     return null;
   }
+
+  // Qualify every item before committing the array API or a shared carrier.
+  const rootInputs = qualifyRepeatRootInputs(run, refId, ctx, where, parent);
+  if (!rootInputs) return null;
 
   // The run proposes — register resolution notes / stubs ONCE, for the run.
   noteResolution(res, instanceOf, keys, ctx, where);
@@ -10562,7 +10711,7 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
   const sample = records.map((rec, index) => {
     const out: Record<string, string | boolean> = {};
     for (const [name, rawKey] of Object.entries(fieldKeyByName)) {
-      const v = enumSamples.get(name)?.[index] ?? rec[rawKey];
+      const v = scalarSamples.has(name) ? scalarSamples.get(name)![index] : rec[rawKey];
       if (v !== undefined) out[name] = v;
     }
     return out;
@@ -10571,7 +10720,12 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
   // Constant applied props stay fixed — canonicalized through the child's
   // bindings exactly like a single instance, threading included.
   const part: Record<string, unknown> = {};
-  const component: Record<string, unknown> = { id: refId };
+  const component: Record<string, unknown> = rootInputs.component;
+  if (ctx.mint && rootInputs.observations.length) {
+    ctx.mint.observations.push(...rootInputs.observations);
+    ctx.mint.refOverrides.push(...rootInputs.refOverrides);
+    ctx.notes.push(...rootInputs.notes);
+  }
   const constantApplied: Record<string, string | boolean> = {};
   for (const k of constantKeys) constantApplied[k] = records[0][k];
   if (Object.keys(constantApplied).length > 0) {
@@ -10581,8 +10735,11 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
       .map((o) => {
         const constOnly: Record<string, string | boolean> = {};
         for (const k of constantKeys) {
-          const v = o.node.componentProperties![k];
-          if (v !== undefined) constOnly[k] = v;
+          const observedKey = booleanSamples.has(bareKey(k))
+            ? Object.keys(o.node.componentProperties!).find(key => bareKey(key) === bareKey(k))!
+            : k;
+          const v = o.node.componentProperties![observedKey];
+          if (v !== undefined) constOnly[observedKey] = v;
         }
         return { variant: o.variant, canonical: canonicalizeInstanceProps(instanceOf, constOnly, res.id, ctx, where, true, keys) };
       });
@@ -11089,6 +11246,26 @@ function carryInstanceTextAppearances(m:Merged,component:Record<string,unknown>,
  }
 }
 
+/** Keep the complete observed argument map separate from its selector axes.
+ * Sparse projections are legal only inside the already validated drawn domain. */
+function sourcePaintArguments(ctx: Ctx, byVariant: ReadonlyMap<string,string|null>, where: string) {
+  const tupleOf = (variant: string) => ctx.axes.map(axis => {
+    const raw = axisValuesOf(variant)[axis.property];
+    if (raw === undefined) throw Error('finite-paint-arguments-source-unqualified:missing-axis:' + where);
+    return axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw);
+  });
+  const sourceTuples = ctx.totalVariants.map(tupleOf);
+  const table = finitePaintArguments(ctx.axes.map(axis => ({
+    prop: axis.propName,
+    values: axis.values.map(raw => axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw)),
+  })), sourceTuples, {
+    props: ctx.axes.map(axis => axis.propName),
+    rows: ctx.totalVariants.map((variant, i) => ({ values: sourceTuples[i], value: byVariant.get(variant) ?? null })),
+  }, ctx.guardedDrawnPaintDomain);
+  if (table.props.length < ctx.axes.length) ctx.notes.push(where + ': finite source-bound paint argument uses exact dependency axes [' + table.props.join(', ') + ']; every original parent tuple and null omission remains covered; full parent admission is unchanged');
+  return table;
+}
+
 /** Usage-specific default content stays ordinary caller-owned anatomy.
  * That reuses the existing component override vocabulary on every emitter,
  * instead of baking host ink into the shared child's main/default. */
@@ -11108,8 +11285,8 @@ function carryInstanceTextInk(m: Merged, component: Record<string,unknown>, id: 
       const axis=ctx.axes.find(axis=>{const seen=new Map<string,string|undefined>();return m.occ.every((o,i)=>{const key=axisValue(axis,axisValuesOf(o.variant)[axis.property]);if(seen.has(key)&&seen.get(key)!==values[i])return false;seen.set(key,values[i]);return true;});});
       if(combinationOnly||!axis||m.occ.length!==ctx.totalVariants.length){
         const byVariant=new Map(m.occ.map((o,i)=>[o.variant,values[i]??null]));
-        if(!ctx.axes.length||byVariant.size!==m.occ.length)throw Error('text-color-override-combination-unqualified:'+where);
-        ((component.paintPropsByCombination??={})as Record<string,unknown>)[binding.prop]={props:ctx.axes.map(a=>a.propName),rows:ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>{const raw=axisValuesOf(variant)[a.property];return a.omitted?.unsetValue===raw?null:axisValue(a,raw);}),value:byVariant.get(variant)??null}))};
+        if(!ctx.axes.length||byVariant.size!==m.occ.length||(ctx.axes.length>8&&m.occ.some(o=>!ctx.totalVariants.includes(o.variant))))throw Error('text-color-override-combination-unqualified:'+where);
+        ((component.paintPropsByCombination??={})as Record<string,unknown>)[binding.prop]=ctx.axes.length>8?sourcePaintArguments(ctx,byVariant,where):{props:ctx.axes.map(a=>a.propName),rows:ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>{const raw=axisValuesOf(variant)[a.property];return a.omitted?.unsetValue===raw?null:axisValue(a,raw);}),value:byVariant.get(variant)??null}))};
         ctx.notes.push(where+': source-bound text color retained through complete parent combination table; absent parts and absent overrides omit the child argument');continue;
       }
       const map=Object.fromEntries(m.occ.flatMap((o,i)=>values[i]===undefined?[]:[[axisValue(axis,axisValuesOf(o.variant)[axis.property]),values[i]]]));
@@ -11762,7 +11939,7 @@ function buildChildParts(
       // Claim the key BEFORE building (pre-order, the partKey discipline).
       const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
       if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
-      const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key);
+      const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key, mode);
       if (repeatPart) {
         if (run.some((sib) => sib.occ.some((o) => absBoxOf(o.node) !== undefined))) {
           ctx.notes.push(
@@ -12959,7 +13136,7 @@ function buildPartFromEvidence(
       if(!axis){
         const byVariant=new Map(m.occ.map((o,i)=>[o.variant,values[i]??null]));
         if(!ctx.axes.length||byVariant.size!==m.occ.length||m.occ.some(o=>!ctx.totalVariants.includes(o.variant)))throw Error('shape-fill-override-combination-unqualified:'+where);
-        ((component.paintPropsByCombination??={}) as Record<string,unknown>)[binding.prop]={props:ctx.axes.map(a=>a.propName),rows:ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>axisValue(a,axisValuesOf(variant)[a.property])),value:byVariant.get(variant)??null}))};
+        ((component.paintPropsByCombination??={}) as Record<string,unknown>)[binding.prop]=ctx.axes.length>8?sourcePaintArguments(ctx,byVariant,where):{props:ctx.axes.map(a=>a.propName),rows:ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>axisValue(a,axisValuesOf(variant)[a.property])),value:byVariant.get(variant)??null}))};
         ctx.notes.push(where+': source-bound shape fill retained through complete parent combination table; absent values retain child paint');continue;
       }
       fenceSparseInference(ctx.axes,`shape-fill-override-${prop}@${where}`,m.occ.map((o,i)=>({variant:o.variant,value:values[i]})));
@@ -15847,7 +16024,7 @@ function dropStateMintTargets(ctx: Ctx, target: Record<string, string>, state: s
  *  only producer of such values today is the REST mapper copying a
  *  SLOT-typed value through as `{ guid }`. Sets without one are returned
  *  as-is (same object, zero receipts — byte-identical). */
-function stripNonScalarAppliedProps(set: DumpSet, receipts: string[]): DumpSet {
+function stripNonScalarAppliedProps(set: DumpSet, receipts: string[], originalKeys?: WeakMap<DumpNode, ReadonlySet<string>>): DumpSet {
   const offenders: Array<{ variant: string; path: string; node: DumpNode; keys: string[] }> = [];
   const scan = (n: DumpNode, variant: string, path: string): void => {
     const bad = Object.entries(n.componentProperties ?? {})
@@ -15858,17 +16035,20 @@ function stripNonScalarAppliedProps(set: DumpSet, receipts: string[]): DumpSet {
   };
   for (const v of set.variants) scan(v, v.name, `${set.setName}:${v.name}`);
   if (offenders.length === 0) return set;
+  const badKeysByNode = new WeakMap<DumpNode, readonly string[]>(offenders.map(offender => [offender.node, offender.keys]));
   const clone = JSON.parse(JSON.stringify(set)) as DumpSet;
-  const strip = (n: DumpNode): void => {
+  const strip = (n: DumpNode, original: DumpNode): void => {
+    // Read keys from the ORIGINAL node: JSON cloning can erase undefined or
+    // Symbol values, or coerce NaN into null. None becomes omission evidence.
+    const badKeys = badKeysByNode.get(original) ?? [];
+    if (badKeys.length) originalKeys?.set(n, new Set(badKeys));
     if (n.componentProperties) {
-      for (const [k, v] of Object.entries(n.componentProperties)) {
-        if (typeof v !== 'string' && typeof v !== 'boolean') delete n.componentProperties[k];
-      }
+      for (const key of badKeys) delete n.componentProperties[key];
       if (Object.keys(n.componentProperties).length === 0) delete n.componentProperties;
     }
-    for (const c of n.children ?? []) strip(c);
+    for (let index = 0; index < (n.children?.length ?? 0); index++) strip(n.children![index], original.children![index]);
   };
-  for (const v of clone.variants) strip(v);
+  for (let index = 0; index < clone.variants.length; index++) strip(clone.variants[index], set.variants[index]);
   for (const o of offenders) {
     for (const key of o.keys) {
       const raw = (o.node.componentProperties as Record<string, unknown>)[key];
@@ -16139,7 +16319,20 @@ function proposeFromDumpFencedImpl(
   // the whole set on ContractSchema ("Unrecognized key: guid" — Card Grid in
   // exact mode). Stripped here, on a private clone, BY NAME per node.
   const slotValueReceipts: string[] = [];
-  set = stripNonScalarAppliedProps(set, slotValueReceipts);
+  const repeatNonScalarApplied = new WeakMap<DumpNode, ReadonlySet<string>>();
+  set = stripNonScalarAppliedProps(set, slotValueReceipts, repeatNonScalarApplied);
+  // The normal pre-merge/state clones must retain the sanitation evidence;
+  // it belongs to observed nodes, never to their display names or slugs.
+  const cloneRepeatSource = (source: DumpNode): DumpNode => {
+    const clone = JSON.parse(JSON.stringify(source)) as DumpNode;
+    const retain = (original: DumpNode, copy: DumpNode): void => {
+      const keys = repeatNonScalarApplied.get(original);
+      if (keys) repeatNonScalarApplied.set(copy, keys);
+      for (let index = 0; index < (original.children?.length ?? 0); index++) retain(original.children![index], copy.children![index]);
+    };
+    retain(source, clone);
+    return clone;
+  };
   const allocatedPropNames = (set as {propNames?: unknown}).propNames || (set as {semantics?: unknown}).semantics || set.statePreviewAxis || readStampedContractId(set)
     ? Object.create(null) as Record<string, string>
     : allocateFigmaPropertyNames(Object.keys(set.propertyDefinitions ?? {}).map(name => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')!));
@@ -16344,10 +16537,11 @@ function proposeFromDumpFencedImpl(
   if (modePromo) {
     sourceVariants = set.variants
       .filter((v) => axisValuesOf(v.name)[modePromo.axis.property] === modePromo.defaultValue)
-      .map((v) => ({
-        ...(JSON.parse(JSON.stringify(v)) as DumpNode),
-        name: stripAxisFromName(v.name, modePromo.axis.property, set.setName),
-      }));
+      .map((v) => {
+        const clone = cloneRepeatSource(v);
+        clone.name = stripAxisFromName(v.name, modePromo.axis.property, set.setName);
+        return clone;
+      });
     preNotes.push(
       `variant axis "${modePromo.axis.property}" (${modePromo.axis.values.join('|')}) IS a token-mode axis, not API (§3 — structurally corroborated: identical anatomy and bound variable NAMES across the axis; only color-kind literals/resolved values differ) — excluded from props; anatomy and facts build from the ${sourceVariants.length} "${modePromo.defaultValue}" (default-mode) variant(s) only; bindings resolve per mode through the variable collection (the captured-token layer carries per-mode values when the dump provides them — dump v1.6 \`modes\`); other modes' resolved literals are NOT minted (a dark-mode hex minting imported.* tokens would fabricate a second palette). Rename story: regeneration draws the default mode only — the axis spelling lives in this note and on the source set, and the contract's \`modes\` metadata names the modes`,
     );
@@ -16502,10 +16696,11 @@ function proposeFromDumpFencedImpl(
           }
         }
       }
-      const strip = (v: DumpNode): DumpNode => ({
-        ...(JSON.parse(JSON.stringify(v)) as DumpNode),
-        name: stripAxisFromName(v.name, promo.axis.property, set.setName),
-      });
+      const strip = (v: DumpNode): DumpNode => {
+        const clone = cloneRepeatSource(v);
+        clone.name = stripAxisFromName(v.name, promo.axis.property, set.setName);
+        return clone;
+      };
       baseVariants = sourceVariants.filter((v) => valueOf(v) === promo.defaultValue).map(strip);
       for (const p of promo.promoted) {
         stateGroups.set(p.state, sourceVariants.filter((v) => valueOf(v) === p.value).map(strip));
@@ -16670,10 +16865,12 @@ function proposeFromDumpFencedImpl(
     selfSetKey: set.key,
     axes,
     totalVariants: variantNames,
+    guardedDrawnPaintDomain: drawnDeclaration !== undefined,
     ...(designerStateAxis !== null && statePromo ? {presenceAbsentVariants: contractAbsentVariants ?? []} : {}),
     corpus: opts.corpus,
     contractIdByName: opts.contractIdByName,
     contractsById: opts.contractsById,
+    repeatNonScalarApplied,
     capturedMainIdsByKey: opts.capturedMainIdsByKey,
     contractIdByKey: opts.contractIdByKey && new Map([...opts.contractIdByKey].filter(([key])=>new Set([...(opts.contractsById?.values()??[])].filter(c=>c.bindings?.figma?.anchors?.componentSetKey===key).map(c=>c.id)).size<=1 && (opts.capturedMainIdsByKey?.get(key)?.size??0)<=1)),
     fileKey: opts.fileKey ?? null,
@@ -16682,6 +16879,18 @@ function proposeFromDumpFencedImpl(
     slotDescriptions: set.slotDescriptions,
     propertyDefinitions: set.propertyDefinitions,
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
+    repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
+      const owners = new Set<string>();
+      const visit = (node: DumpNode): void => {
+        const fields = node.instanceRootOverrides?.fields;
+        if (node.type === 'INSTANCE' && node.instanceRootOverrides &&
+            (!Array.isArray(fields) || fields.some(field => field !== 'name')))
+          owners.add(observedInstanceIdentity(node) ?? `name:${node.instanceOf ?? node.name}`);
+        for (const child of node.children ?? []) visit(child);
+      };
+      set.variants.forEach(visit);
+      return owners;
+    })() : undefined,
     hiddenCaptured: opts.hiddenCaptured,
     effectsCaptured: opts.effectsCaptured,
     capturedValues: opts.capturedValues,
@@ -16777,7 +16986,7 @@ function proposeFromDumpFencedImpl(
   // styling speaks for the variant, its captured componentProperties are
   // promoted after the anatomy is built. (With state promotion the base
   // variants were already cloned + name-stripped above.)
-  const variants = baseVariants ?? (JSON.parse(JSON.stringify(sourceVariants)) as DumpNode[]);
+  const variants = baseVariants ?? sourceVariants.map(cloneRepeatSource);
   const draftPaintSourceInventory:Array<{node:DumpNode;path:string}>=[];
   if(carryPaint){
     const collect=(node:DumpNode,path:string)=>{if(node.sourceFillComposition!==undefined)draftPaintSourceInventory.push({node,path});for(const [i,child] of (node.children??[]).entries())collect(child,`${path}/${i}`);};

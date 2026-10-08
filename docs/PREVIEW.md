@@ -6,6 +6,8 @@ React package. It works from your own Figma file. Everything outside the
 components listed below is unmeasured, and anything the engine cannot convert
 is refused by name instead of guessed.
 
+Recent shared fixes preserve exact finite paint dependencies and repeated child Boolean and root-size inputs. The original Ant form and Spectrum tab cases have bounded installed-consumer evidence; missing fonts and broader bidirectional qualification remain open.
+
 ## What works today
 
 These rows are the benchmark. Each is replayed from a frozen input (a Figma

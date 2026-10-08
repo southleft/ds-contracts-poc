@@ -1159,7 +1159,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
               } else if (depProp && hasCodeValues(depProp) && typeof v === 'string') {
                 fieldAttrs += ` ${codeName}={${codeValueLiteral(depProp,v)}}`;
               } else if (typeof v === 'boolean') {
-                fieldAttrs += v ? ` ${codeName}` : '';
+                fieldAttrs += v ? ` ${codeName}` : ` ${codeName}={false}`;
               } else if (typeof v === 'number') {
                 fieldAttrs += ` ${codeName}={${v}}`;
               } else {

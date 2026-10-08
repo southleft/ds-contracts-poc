@@ -1,6 +1,8 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-09-26 · V1 is not complete.**
+**Public project status · updated 2026-10-08 · V1 is not complete.**
+
+The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real
 > codebases](GOAL.md).** The V1 criteria below are frozen as a regression

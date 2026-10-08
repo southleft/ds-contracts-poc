@@ -4972,6 +4972,34 @@ function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, 
   parentSpec.children = children;
 }
 
+function applyInstanceRootInputs(spec: NodeSpec, name: string, part: Part, dep: Contract, contract: Contract, subst: Record<string, string>): void {
+    for(const [channel,ref] of Object.entries(part.component!.rootOverrides??{})) {
+      if(!dep.anatomy.root.instanceRootInputs?.includes(channel as never))throw Error(`instance-root-input-undeclared:${name}:${channel}`);
+      const tokenPath=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>{
+        const prop=contract.props.find(p=>p.name===key);
+        return subst[key]??(prop?.type==='boolean'&&typeof prop.default==='boolean'?String(prop.default):`{${key}}`);
+      });
+      const value=resolveLiteral(tokenPath);
+      if(channel==='background-color') {
+        instanceRootColor(value);
+        spec.instanceRootFill={varName:tokenPath.replaceAll('.','/')};
+        continue;
+      }
+      if(channel==='outline-color'||channel==='outline-width') {
+        if(channel==='outline-color')instanceRootColor(value);
+        const stroke=(spec.instanceRootStroke??={color:'',width:'',px:0});
+        if(channel==='outline-color')stroke.color=tokenPath.replaceAll('.','/');
+        else {stroke.width=tokenPath.replaceAll('.','/');stroke.px=instanceRootValue(channel,value);}
+        continue;
+      }
+      const numeric=instanceRootValue(channel,value);
+      // Figma opacity variable bindings use percent; contract values use 0..1.
+      // Reuse the literal opacity lowering, including stale-binding removal.
+      if (channel === 'opacity') { spec.opacity = numeric; continue; }
+      (spec.instanceRootOverrides??={})[channel]={px:numeric,varName:tokenPath.replaceAll('.','/')};
+    }
+}
+
 function partToSpecs(
   name: string,
   part: Part,
@@ -5013,6 +5041,7 @@ function partToSpecs(
         instanceShapeFills: mapInstanceShapeFills(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
         depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract, undefined, true),
       };
+      applyInstanceRootInputs(spec, spec.name, part, dep, contract, subst);
       applyVisibleWhen(spec, part, contract, subst);
       return spec;
     });
@@ -5460,31 +5489,7 @@ function partToSpecInner(
       if (caller.root.rootFillWidth) spec.callerRootFillWidth = true;
     }
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
-    for(const [channel,ref] of Object.entries(part.component.rootOverrides??{})) {
-      if(!dep.anatomy.root.instanceRootInputs?.includes(channel as never))throw Error(`instance-root-input-undeclared:${name}:${channel}`);
-      const tokenPath=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>{
-        const prop=contract.props.find(p=>p.name===key);
-        return subst[key]??(prop?.type==='boolean'&&typeof prop.default==='boolean'?String(prop.default):`{${key}}`);
-      });
-      const value=resolveLiteral(tokenPath);
-      if(channel==='background-color') {
-        instanceRootColor(value);
-        spec.instanceRootFill={varName:tokenPath.replaceAll('.','/')};
-        continue;
-      }
-      if(channel==='outline-color'||channel==='outline-width') {
-        if(channel==='outline-color')instanceRootColor(value);
-        const stroke=(spec.instanceRootStroke??={color:'',width:'',px:0});
-        if(channel==='outline-color')stroke.color=tokenPath.replaceAll('.','/');
-        else {stroke.width=tokenPath.replaceAll('.','/');stroke.px=instanceRootValue(channel,value);}
-        continue;
-      }
-      const numeric=instanceRootValue(channel,value);
-      // Figma opacity variable bindings use percent; contract values use 0..1.
-      // Reuse the literal opacity lowering, including stale-binding removal.
-      if (channel === 'opacity') { spec.opacity = numeric; continue; }
-      (spec.instanceRootOverrides??={})[channel]={px:numeric,varName:tokenPath.replaceAll('.','/')};
-    }
+    applyInstanceRootInputs(spec, name, part, dep, contract, subst);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
     // natively a resize / image-fill / paint override on THIS instance, but
     // the canvas lowering is not carried this round — declared-not-drawn,
