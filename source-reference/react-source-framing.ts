@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { chromium, type Page } from 'playwright-core';
 import { revisionOf } from '../core/contract-provenance.js';
-import { reactReferenceHtml, type ReactReference } from './react-reference.js';
+import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
+import { captureSubjectWithoutBackdrop } from '../scripts/design-consumer-observed-capture.js';
 import { readReactNativeContentEvidence } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { captureValidatedTree } from './capture.js';
@@ -26,6 +27,21 @@ export function loadReactFrameInput(repoRoot: string, reference: ReactReference,
 }
 export async function measureReactSourceFrame(input: ReturnType<typeof loadReactFrameInput>) {
   return inspectOriginal(input, page => sourceBounds(page, input.reference.cohort.profile(input.request.caseId)));
+}
+/** Independent transparent acquisition, never a replacement of sealed source
+ * pixels. Both captures must reproduce the original page before and after. */
+export async function captureReactSourceSubject(input: ReturnType<typeof loadReactFrameInput>) {
+  if (!reactReferenceUnchanged(input.reference)) throw Error('react-source-capture-source-changed');
+  const captured = await inspectOriginal(input, async page => {
+    const profile = input.reference.cohort.profile(input.request.caseId);
+    if (profile.path.length !== 1) throw Error('react-source-capture-shadow-path-unsupported');
+    const result = await captureSubjectWithoutBackdrop(page, profile.path[0], '#root');
+    if ('refused' in result) throw Error(result.refused);
+    return result;
+  });
+  if (!reactReferenceUnchanged(input.reference)) throw Error('react-source-capture-source-changed');
+  return { ...captured, sourceSha256: input.sourceSha256, treeSha256: input.captured.treeSha256,
+    referenceId: input.reference.id, caseId: input.request.caseId };
 }
 /** Read glyph advances from the unchanged original. Family-name equality is
  * not proof of matching font binaries or glyph metrics across renderers. */

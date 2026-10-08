@@ -1,7 +1,27 @@
-import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
+import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
+import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
+import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
+import {wrapReactFilledPath,REACT_FILLED_PATH_RUNTIME} from './react-filled-path.js';
+import {callerContentGroups} from '../scripts/contract-schema.js';
+import {wrapReactShapeFill,REACT_SHAPE_FILL_RUNTIME} from './react-shape-fill.js';
+import {lowerCenteredFillPadding} from './react-centered-fill.js';
+import {wrapReactTextColor, REACT_TEXT_COLOR_RUNTIME} from './react-text-color.js';
+import {wrapReactArc, REACT_ARC_RUNTIME} from './react-arc.js';
+import {instanceInsideStrokeTokenErrors} from '../packages/core/src/instance-inside-stroke.js';
+import {reactSlotPaintForeground} from './react-slot-paint.js';
+import {reactBooleanArguments} from './component-boolean-arguments.js';
+import {wrapReactOverlap, REACT_OVERLAP_RUNTIME} from './react-overlap.js';
+import {instanceFillExpression,hasBoundPaintUsage} from '../packages/core/src/instance-fill-composition.js';
+import { reactComposedPath } from './react-composed-path.js';
+import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
+import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
+import {wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {reactInstanceRootStyle} from './react-instance-root.js';
+import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
+import {hasComponentGrow,hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
-import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies } from './react-slot-inputs.js';
+import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies, REACT_SLOT_CONTENT_RUNTIME } from './react-slot-inputs.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
@@ -38,6 +58,7 @@ import { rootContentJsx, literalTextJsx } from './root-content.js';
 import { literalAttrJsx, literalDocText, literalStringJs } from './emit-literal.js';
 import { REACT_REPEAT_RUNTIME } from './react-repeat-runtime.js';
 import { reactSelectionPlan } from './react-selection.js';
+import { reactDrawnVariantGuard } from './react-drawn-variants.js';
 import {
   isNativeCheckablePart,
   pascal,
@@ -48,6 +69,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import {
+  composedFillForegroundParts,
   arrayProps,
   boolProps,
   enumProps,
@@ -66,7 +88,7 @@ import {
 } from '../packages/core/src/anatomy.js';
 import { gridCellPlan } from '../packages/core/src/grid.js';
 import { validateContract } from '../packages/core/src/validate.js';
-import { generateCss } from '../packages/core/src/css.js';
+import { solidFillCompositionRules, generateCss as generateCoreCss } from '../packages/core/src/css.js';
 import { ELEMENT_META } from '../packages/core/src/elements.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
@@ -77,11 +99,13 @@ import { refuseRetainedRuntime, type RuntimeEmissionContext } from '../packages/
 // exported them before the move (plus ELEMENT_META / holderDeclaresPosition,
 // hoisted out of the projection half because they are contract facts).
 export {
+  composedFillForegroundParts,
   arrayProps,
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
   drawsStrokeRing,
+  drawsForegroundStroke,
   drawsWholePixelTextBox,
   lowerStrokeRings,
   settleStrokeShadows,
@@ -126,7 +150,20 @@ export {
   type GridCellPlan,
 } from '../packages/core/src/grid.js';
 export { validateContract } from '../packages/core/src/validate.js';
-export { generateCss, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from '../packages/core/src/css.js';
+export { stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from '../packages/core/src/css.js';
+/** React's split public generator and one-call emitter share the same scope
+ * selectors. A mask wrapper must not detach measured sibling geometry. */
+export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown, contracts?: ReadonlyMap<string, Contract>): string {
+  input=lowerCenteredFillPadding(input,tokenValues);
+  const maskChildren=reactMaskChildPaths(input,tokenValues);
+  const css = generateCoreCss(input,tokenInventory,errors,tokenValues,
+    path=>maskChildren.has(JSON.stringify(path))?'[data-ds-mask-scope] > ':'',contracts,true);
+  // SVG arcs need authored fractional widths; computed CSS border widths are
+  // snapped to device pixels. Mirror declarations so every state/axis keeps
+  // the same cascade, including token changes. Only the arc runtime reads it.
+  return walkAnatomy(input).some(({part})=>part.shape?.arc?.cap)
+    ? css.replace(/(^|\n)([ \t]*)border-width: ([^;\n]+);/g,'$1$2border-width: $3;\n$2--dsc-arc-stroke-width: $3;') : css;
+}
 export { ELEMENT_META } from '../packages/core/src/elements.js';
 
 // ---------------------------------------------------------------------------
@@ -150,7 +187,7 @@ function depAttrString(
       // undefined applies the child's own default for unmapped values.
       const parentProp = parent?.props.find((p) => p.name === value.prop);
       const expr = parentProp?.bindings.code.prop ?? value.prop;
-      parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map)}}`);
+      parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp)}}`);
       continue;
     }
     if (typeof value === 'boolean') {
@@ -273,6 +310,7 @@ export function generateTsx(
    *  caller in this repo) — the historical unconditional spelling, so an
    *  out-of-tree caller cannot silently change. */
   emittedCss?: string,
+  tokenValues?: unknown,
 ): string {
   refuseRetainedRuntime(contract, 'direct generateTsx; use emitReact with verified runtime context');
   validateCodeValueConsumers(contract);
@@ -283,6 +321,8 @@ export function generateTsx(
     ? { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false }
     : ELEMENT_META[contract.semantics.element];
   const name = contract.name;
+  const fillForegroundParts = composedFillForegroundParts(contract,byId);
+  const rankedPartNames = new Set(childPaintOrderPlans(contract,byId).flatMap(plan=>plan.base.map(rank=>rank.name)));
   const selection = reactSelectionPlan(contract, byId);
   const repeatRuntime = selection?.runtime ?? (walkAnatomy(contract).some(({part}) => part.repeat?.keyField !== undefined)
     ? REACT_REPEAT_RUNTIME : '');
@@ -291,8 +331,12 @@ export function generateTsx(
   const texts = namedTextProps(contract);
   const slots = namedSlots(contract);
   const slotInputs = reactSlotInputs(contract);
-  const codePropOf = (propName: string) =>
-    contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
+  let usesChildren = false;
+  const codePropOf = (propName: string) => {
+    const codeName = contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
+    if (codeName === 'children') usesChildren = true;
+    return codeName;
+  };
   // Optional absence is not the string "undefined" (which may itself be an
   // enum value). Guard every keyed projection, not only destructuring.
   const whenProvided = (propName: string, expression: string, absent = 'undefined') =>
@@ -326,8 +370,15 @@ export function generateTsx(
   const nativeTextLeafStyle = (part: Part, text: string) => {
     const declarations: string[] = [];
     if (nativeTextLeaves.has(part) && !omittedAttrs.includes('style')) declarations.push('textRendering: rest.style?.textRendering');
-    if (needsWholePixelTextRun(part)) declarations.push(`...((${text}) == null || (${text}) === '' ? { inlineSize: 0 } : {})`);
+    // Widen the empty string for literal/finite-map text; preserve exact runtime equality.
+    if (needsWholePixelTextRun(part)) declarations.push(`...((${text}) == null || (${text}) === ('' as string) ? { inlineSize: 0 } : {})`);
     return declarations.length ? ` style={{ ${declarations.join(', ')} }}` : '';
+  };
+
+  const instanceRootAttrs = (part:Part) => {
+    const style=reactInstanceRootStyle(contract,part,path=>`var(--${path.replaceAll('.', '-')})`,codePropOf);
+    const fill=instanceFillExpression(part,codePropOf,byId);
+    return style || fill ? ` style={{ ${[style,fill&&`...(${fill})`].filter(Boolean).join(', ')} }}` : '';
   };
 
   const events = contract.events ?? [];
@@ -439,6 +490,7 @@ export function generateTsx(
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
+  prelude.push(...reactDrawnVariantGuard(contract, codePropOf));
   /** onClick + ARIA state for a part that is an event trigger. A NATIVE
    *  checkable trigger (input[type=checkbox|radio]) gets the platform's own
    *  channels instead: checked + onChange, and any out-of-pair toggle value
@@ -621,18 +673,29 @@ export function generateTsx(
     JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+    jsx = wrapReactFilledPath(part, jsx, codePropOf);
+    jsx = wrapReactTextAppearance(part, jsx, codePropOf);
+    jsx = wrapReactImage(part, jsx, codePropOf);
+    jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
+    const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
-    if (panel !== undefined) return panel;
-    if (!part.visibleWhen) return jsx;
+    if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
+    if (!part.visibleWhen) return wrapReactPresence(part,jsx,codePropOf);
     const codeName = codePropOf(part.visibleWhen.prop);
     const eq = part.visibleWhen.equals;
+    // A hidden ancestor can narrow this prop to the opposite boolean. Keep
+    // exact boolean equality without making retained descendant JSX a TS2367.
     const cond =
       eq === undefined
         ? codeName
+        : typeof eq === 'boolean'
+          ? `globalThis.Object.is(${codeName}, ${eq})`
         : Array.isArray(eq)
           ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
           : `${codeName} === '${eq}'`;
-    return `{${cond} ? (${jsx}) : null}`;
+    return wrapReactPresence(part,`{${cond} ? (${jsx}) : null}`,codePropOf);
+    })();
+    return wrapReactVisibilityOverride(part,jsx,fallback,codePropOf);
   };
 
   // Recursive JSX for the anatomy tree.
@@ -647,7 +710,14 @@ export function generateTsx(
 
   const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
+  const boundPaintChild=(part:Part)=>part.solidFillCompositionToken || part.solidFillCompositionByCombination?.rows.some(row=>row.token!==undefined) || part===contract.anatomy.root && !!(part.solidFillComposition || part.solidFillCompositionByCombination) && hasBoundPaintUsage(contract,byId)
+    ? '<svg aria-hidden="true" focusable="false" data-dsc-paint-layer=""><rect width="100%" height="100%" /></svg>' : '';
   const renderPart = (partName: string, part: Part): string => {
+    for (const value of Object.values(part.component?.props ?? {})) {
+      const parentName = typeof value === 'string' ? value.match(/^\{([a-zA-Z][\w-]*)\}$/)?.[1]
+        : value && typeof value === 'object' && 'prop' in value ? value.prop : undefined;
+      if (typeof parentName === 'string') codePropOf(parentName);
+    }
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
       `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
@@ -675,7 +745,7 @@ export function generateTsx(
       const dep = byId.get(part.component.id)!;
       const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
       const codeName = rp.bindings.code.prop;
-      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '');
+      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract) + reactBooleanArguments(contract,dep,part.component) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '');
       const itemName = selection?.item === part ? '__dscItem' : 'item';
       const itemField = (field: string) => selection?.item === part ? `${itemName}[${JSON.stringify(field)}]` : `${itemName}.${field}`;
       let childrenField: string | null = null;
@@ -700,7 +770,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
@@ -723,8 +793,12 @@ export function generateTsx(
       // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
       // visibleWhen-on-component-parts).
       const instance =
-        part.parts !== undefined
-          ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+        part.component.contentSlots !== undefined
+          ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderPart,undefined,codePropOf).join('\n')}\n</>}`).join('')} />`
+          : part.parts !== undefined
+          ? (part.component.contentSlot && part.component.contentSlot !== 'children'
+            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('\n')}\n</>} />`
+            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('\n')}\n</></${dep.name}>`)
           : text !== undefined
           ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
           : `<${dep.name}${attrs} />`;
@@ -735,20 +809,29 @@ export function generateTsx(
       // A2 grid (G3/P12): an instance cell rides the same wrapper span — its
       // class carries the grid placement (see generateCss).
       const withOverrides =
-        Object.keys(part.component.overrides ?? {}).length > 0 || part.states || part.statesByProp?.length || gridPlan.wrappedInstances.has(partName)
+        (!(part.absoluteGeometry || part.absoluteGeometryByCombination || (hasComponentGrow(part) && Object.keys(part.component.overrides ?? {}).length > 0)) &&
+          (Object.keys(part.component.overrides ?? {}).length > 0 || part.states || part.statesByProp?.length)) || gridPlan.wrappedInstances.has(partName)
           ? `<span className={${stylesRef(partName)}}>${instance}</span>`
           : instance;
-      return wrapVisibleWhen(part, withOverrides);
+      return wrapVisibleWhen(part, wrapReactInstanceAffine(part, withOverrides, codePropOf));
     }
     if (part.slot) {
+      if (part.slot.name === 'children') usesChildren = true;
       const el = part.element ?? 'div';
       const expr = part.slot.renderDefault && part.parts
-        ? `${part.slot.name} === undefined ? <>${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('')}</> : ${part.slot.name}`
+        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, byId, depAttrString);
-      const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
-      return part.optional ? `{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
+      const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${reactSlotPaintForeground(part,expr)}</${el}>`;
+      if (part.slot.collapseWhenEmpty) {
+        const content = `{__dscSlotHasContent(${expr}) ? ${node} : null}`;
+        // Visibility wraps JSX, not another braced JavaScript expression.
+        // A transparent fragment keeps both gates without adding a DOM box.
+        return wrapVisibleWhen(part, `<>${content}</>`);
+      }
+      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
     }
     if (part.content) {
+      if (part.content.prop === 'children') usesChildren = true;
       const el = part.element ?? 'span';
       const prop = contract.props.find(
         (p) => p.type === 'text' && p.bindings.code.prop === part.content!.prop,
@@ -786,12 +869,13 @@ export function generateTsx(
     // after the declared children — the slot class carries the placement,
     // so the grid's shape is visible with nothing in it.
     const inner = [
-      ...Object.entries(part.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+      ...(boundPaintChild(part)?[boundPaintChild(part)]:[]),
+      ...reactMaskChildren(part.parts, renderPart, undefined, codePropOf),
       ...(gridPlaceholderJsx(partName) ? [gridPlaceholderJsx(partName)] : []),
     ].join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
+      wrapReactInstanceAffine(part, `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`, codePropOf),
     );
   };
 
@@ -807,7 +891,7 @@ export function generateTsx(
       .join('\n      ');
     const mrTypeImports = [meta.attrs, ...(slots.length > 0 ? ['ReactNode'] : [])].join(', ');
     const mrDepImports = deps.map((depName) => `import { ${depName} } from '../${depName}';`).join('\n');
-    const mr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, rootsJsx + prelude.join('\n'), meta);
+    const mr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, usesChildren, meta);
     return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -818,8 +902,8 @@ export function generateTsx(
  * Fragment; there is no single wrapping element (a Modal's backdrop + dialog
  * are position-driven siblings). Each root's class is styles.<rootName>.${mr.omittedNote}
  */
-import type { ${mrTypeImports} } from 'react';
-${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
+import type { ${mrTypeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
@@ -838,14 +922,16 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
 
   const root = contract.anatomy.root;
   const explicitRootContent = rootContentJsx(root, codePropOf);
-  const rootInner = root.parts || gridPlan.placeholders.has('root')
+  if (root.content?.prop === 'children') usesChildren = true;
+  const defaultChildren = () => { usesChildren = true; return '{children}'; };
+  const rootInner = boundPaintChild(root) + (reactComposedPath(contract, codePropOf, undefined, tokenValues) ?? (root.parts || gridPlan.placeholders.has('root')
     ? [
         ...(explicitRootContent !== undefined ? [explicitRootContent] : []),
-        ...Object.entries(root.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+        ...reactMaskChildren(root.parts, renderPart, undefined, codePropOf),
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlaceholderJsx('root') ? [gridPlaceholderJsx('root')] : []),
       ].join('\n')
-    : explicitRootContent ?? '{children}';
+    : explicitRootContent ?? defaultChildren()));
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
@@ -861,7 +947,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
   const depImports = deps
     .map((depName) => `import { ${depName} } from '../${depName}';`)
     .join('\n');
-  const sr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, rootInner + elementAttrs.join(' ') + prelude.join('\n'), meta);
+  const sr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, usesChildren, meta);
 
   return `/**
  * GENERATED FILE — DO NOT EDIT.
@@ -869,8 +955,8 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  * Regenerate with: npm run generate${sr.omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
-import type { ${typeImports} } from 'react';
-${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
+import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}
@@ -883,9 +969,9 @@ export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
 ) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}${undrawnNote}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
   return (
-    <${el} ${elementAttrs.join(' ')}>
+    ${contract.anatomy.root?.layout?.overlap && contract.anatomy.root?.tokens?.gap ? '<__DscOverlap>' : ''}<${el} ${elementAttrs.join(' ')}>
       ${rootInner}
-    </${el}>
+    </${el}>${contract.anatomy.root?.layout?.overlap && contract.anatomy.root?.tokens?.gap ? '</__DscOverlap>' : ''}
   );
 });
 `;
@@ -895,8 +981,8 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}${undrawnNote}
  *  consumer's children would be silently discarded (an accepted-but-discarded
  *  prop). Omit them from the props type and the destructure; the header names
  *  the omission. Components that render `children` are byte-identical. */
-function refuseUnrenderedChildren(propsBase: string, omittedNote: string, destructured: string[], jsx: string, meta: { attrs: string; el: string }) {
-  if (/\bchildren\b/.test(jsx)) return { propsBase, omittedNote, destructured };
+function refuseUnrenderedChildren(propsBase: string, omittedNote: string, destructured: string[], usesChildren: boolean, meta: { attrs: string; el: string }) {
+  if (usesChildren) return { propsBase, omittedNote, destructured };
   const plain = `${meta.attrs}<${meta.el}>`;
   const base = propsBase.startsWith('Omit<') ? propsBase.replace(`Omit<${plain}, `, `Omit<${plain}, 'children' | `) : `Omit<${plain}, 'children'>`;
   const note = omittedNote + `\n *\n * \`children\` OMITTED from ${plain} — the contract declares no slot or\n * children-bound text, so JSX children would be discarded; the type refuses them.`;
@@ -964,10 +1050,10 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
   }
   const defaultSlot = slotsOf(contract).find((s) => s.slot.name === 'children');
   const defaultSample =
-    defaultSlot && (defaultSlot.slot.defaultContent?.length ?? 0) > 0
+    defaultSlot && !defaultSlot.slot.renderDefault && (defaultSlot.slot.defaultContent?.length ?? 0) > 0
       ? sampleJSX(defaultSlot.slot.defaultContent!, byId)
       : null;
-  if (hasDefaultSlot && !defaultSample) {
+  if (hasDefaultSlot && !defaultSample && !defaultSlot?.slot.renderDefault) {
     argTypes.push(`    children: { control: 'text' },`);
     args.push(`    children: 'The quick brown fox jumps over the lazy dog.',`);
   }
@@ -1049,7 +1135,7 @@ export const ${storyName}: Story = {
     : '';
 
   let matrixStory = '';
-  if (enums.length > 0 && !defaultSample) {
+  if ((enums.length > 0 || contract.bindings.figma.drawnVariants?.length) && !defaultSample) {
     // N-axis matrix: rows = the first enum axis; columns = the ordered
     // cartesian product of every remaining axis (matches the canvas grid).
     const rowProp = enums[0];
@@ -1069,7 +1155,20 @@ export const ${storyName}: Story = {
       .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string' && p.bindings.code.prop !== 'children')
       .map((p) => literalAttrJsx(p.bindings.code.prop, String(p.default)));
     const cells: string[] = [];
-    for (const row of rowProp.type.enum) {
+    if (contract.bindings.figma.drawnVariants) {
+      for (const tuple of contract.bindings.figma.drawnVariants) {
+        const attrs = [...Object.entries(tuple).map(([key,value]) => {
+          const prop = contract.props.find(p=>p.name===key)!;
+          return typeof value === 'boolean'
+            ? `${prop.bindings.code.prop}={${value}}`
+            : hasCodeValues(prop) ? `${prop.bindings.code.prop}={${codeValueLiteral(prop,String(value))}}`
+            : literalAttrJsx(prop.bindings.code.prop,String(value));
+        }), ...requiredTextAttrs].join(' ');
+        cells.push(hasDefaultSlot || textProps(contract).some(p=>p.bindings.code.prop==='children')
+          ? `        <${name} ${attrs}>${literalTextJsx(label)}</${name}>`
+          : `        <${name} ${attrs} />`);
+      }
+    } else for (const row of rowProp.type.enum) {
       const rowCells = colCombos
         .map((combo) => {
           const attrs = [
@@ -1194,10 +1293,24 @@ const seeLines = (contract: Contract): string =>
   (contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('');
 
 export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
+  return emitReactImpl(contract,ctx,false);
+}
+
+/** Internal source-binding qualification; public emission supports literal paint. */
+export function emitReactDraftPaintQualification(contract: Contract, ctx: EmitCtx): EmitReactResult {
+  solidFillCompositionRules(contract,undefined,undefined,ctx.contracts,false,ctx.tokenValues);
+  return emitReactImpl(contract,ctx,true);
+}
+
+function emitReactImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitReactResult {
   validateReactInitialBindings(contract);
   const errors: string[] = [];
-  validateContract(contract, ctx.contracts, errors, ctx.icons);
-  const css = generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
+  const validationContract=draftPaint?structuredClone(contract):contract;
+  if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
+  validateContract(validationContract, ctx.contracts, errors, ctx.icons, { drawnVariants: 'react-runtime' }, ctx.tokenValues);
+  errors.push(...instanceAffineTokenErrors(contract,ctx.contracts,ctx.tokenValues));
+  errors.push(...instanceInsideStrokeTokenErrors(contract,ctx.contracts,ctx.tokenValues));
+  const css = generateCss(contract, ctx.tokens, errors, ctx.tokenValues,ctx.contracts);
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
@@ -1214,7 +1327,7 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
     };
   }
   return {
-    tsx: generateTsx(contract, ctx.contracts, ctx.icons, css),
+    tsx: generateTsx(contract, ctx.contracts, ctx.icons, css, ctx.tokenValues),
     css,
     stories: generateStories(contract, ctx.contracts),
   };

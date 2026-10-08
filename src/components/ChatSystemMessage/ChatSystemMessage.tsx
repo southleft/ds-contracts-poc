@@ -31,7 +31,7 @@ export const ChatSystemMessage = forwardRef<HTMLDivElement, ChatSystemMessagePro
     return (
       <div ref={ref} className={classes} {...rest}>
         {variant === 'divider' ? <div className={styles.lineStart}></div> : null}
-        {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+        <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
         <span className={styles.messageText}>{message}</span>
         {variant === 'divider' ? <div className={styles.lineEnd}></div> : null}
       </div>

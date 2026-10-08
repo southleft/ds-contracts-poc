@@ -58,13 +58,30 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
   const nested = nativeComparisonDependencies(input.comparison).parents;
   const nestedScripts = nested.map(ref => emitNativeContractReadbackScript(ref.parent));
   const parent = emitNativeContractReadbackScript(input.comparison.parent);
+  // Main receipts authenticate a spec-dependent field set. Clone observations
+  // must use that same set, including mixed nested-main schemas. Caller-owned
+  // content still uses the complete inventory. No verifier fields are ignored.
+  const pairedArcCapFields: Record<string, string[]> = {};
+  const pairFields = (reference: {mainId:string;receipt:NativeSourceReadback}, record:Row|undefined) => {
+    const nodes = new Map(reference.receipt.nodes!.map(n=>[n.id,n]));
+    for (const part of record?.sourceParts ?? []) {
+      let source = nodes.get(reference.mainId);
+      for (const index of part.specPath) source = source && nodes.get(source.childIds[index]);
+      if (!source) throw Error('native-contract-comparison-capture-pairing-invalid');
+      pairedArcCapFields[part.nodeId] = ['arcData','strokeCap'].filter(field=>Object.prototype.hasOwnProperty.call(source.values,field));
+    }
+  };
+  pairFields(input.comparison, input.creation.comparisons[0]);
+  (input.comparison.instances ?? []).forEach((reference,index)=>pairFields(reference,input.creation.comparisons[0].nested?.find((r:Row)=>r.index===index)));
+  const hasInsetRing=(spec:NodeSpec):boolean=>spec.insetRingStroke===true||!!spec.children?.some(hasInsetRing);
+  const strokeLayout=[input.comparison.parent,...nested.map(ref=>ref.parent)].some(p=>p.component.variants.some(v=>hasInsetRing(v.spec)));
   const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
     pageId: input.creation.pageId, nodes: input.creation.nodes,
     comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
   }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
     ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true,
     [input.comparison.parent,...nested.map(ref=>ref.parent)].flatMap(p=>backgroundPaintIdentities(p.component)),
-    [], false, [], false, !!input.comparison.textTemplate);
+    [], false, [], false, !!input.comparison.textTemplate, undefined, false, false, false, false, false, true, pairedArcCapFields, strokeLayout);
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},
@@ -248,6 +265,11 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         if (expected !== undefined && !numeric(v[field], expected)) issue('sample-' + field, n);
       }
       for (const [field, value] of Object.entries(spec.lits ?? {})) if (!['width', 'height'].includes(field) && !numeric(v[field], value as number)) issue('sample-literal-' + field, n);
+      if (spec.nativeAspectRatio !== undefined &&
+          !(Number.isFinite(v.targetAspectRatio?.x) && Number.isFinite(v.targetAspectRatio?.y) &&
+            v.targetAspectRatio.x > 0 && v.targetAspectRatio.y > 0 &&
+            Math.abs(v.targetAspectRatio.x / v.targetAspectRatio.y - spec.nativeAspectRatio) <= 0.00001))
+        issue('sample-aspect-ratio', n);
       if (v.reactions?.length) issue('sample-reactions', n);
       if (spec.type === 'text') {
         if (v.characters !== spec.characters || v.fontName?.family !== spec.fontFamily ||

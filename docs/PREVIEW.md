@@ -20,11 +20,11 @@ preview command.
 <!-- benchmark:begin -->
 | Component | Direction | Result | Measured |
 | --- | --- | --- | --- |
-| CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-10-01. |
-| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-28. |
-| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-10-01. Out of scope: keyboard focus is V1.1. |
-| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-10-01. Out of scope: keyboard focus is V1.1. |
-| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-28. |
+| CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-10-07. |
+| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 2.982% white, 2.982% black) — darwin-arm64, 2026-10-06. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
+| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.756% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
+| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.217% black) — darwin-arm64, 2026-10-07. |
 | shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-28. |
 | shadcn Badge (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 3.611% black) — darwin-arm64, 2026-09-28. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-27. |
@@ -85,6 +85,12 @@ What that means for your own components:
    that was not with the reason, and the check's verdict). It then checks the
    package against the design, which takes about a minute, and prints one line
    per Figma variant (see [Read the result](#read-the-result)).
+
+   Supported image fills include their original image assets in the generated
+   output. The importer accepts PNG, JPEG, GIF and WebP assets up to 1 MiB each,
+   with a 4 MiB total budget and at most 64 asset downloads per import. Missing
+   assets and unsupported crop, filter or paint combinations remain named
+   limitations; downloading an image does not by itself establish visual fidelity.
 
 3. In your app:
 
@@ -156,6 +162,14 @@ unchanged. The receipt keeps the files and the faces the browser loaded, and
 `out/result.json` lists them under `check.fonts`. This pins what the check
 rendered with; it does not prove these are the exact font files Figma used,
 and the image comparison still decides.
+
+Match the font release as well as its family and weight. Different releases
+can keep the same family name while changing glyphs and text widths; for
+example, [Inter 4 changed metrics relative to Inter 3](https://github.com/rsms/inter/releases/tag/v4.0).
+If text and surrounding auto-sized components differ, verify the design's
+font assets before compensating with padding or fixed text widths. Keep any
+alternate-font comparison in a separate manifest and receipt; a better image
+score alone does not authenticate the font version used by Figma.
 
 ## Read the result
 
@@ -233,3 +247,21 @@ The local app (`npm run playground`) runs the same Figma-to-React engine, and
 this command reproduces its output byte for byte on the benchmark. The other
 directions (React to native Figma, and live two-way updates) are in progress
 and not part of this preview; see [Current status](CURRENT.md).
+
+### Native stroke evidence
+
+When a REST dump lacks an editable vector centerline, the contributor helper
+`scripts/native-stroke-capture.ts` can generate a bounded Figma read script
+with `buildNativeStrokeCapture(pluginSource, fileKey, nodeIds)`. It uses the
+canonical plugin reader and returns a `native-stroke-capture` receipt. Run it
+against the source file through a Figma bridge; it does not modify design nodes.
+
+Pass the saved JSON receipt with `figma-to-react --native-strokes receipt.json`
+(alongside the normal `--dump` or `--url` and `--out` flags). The importer checks
+file/node identity, local geometry and stroke paint before applying observations
+to a copy. Mismatches refuse. The output retains `native-stroke-dump.json`,
+`native-stroke-receipt.json`, and a receipt hash in dump provenance. Original
+input files remain unchanged. Normal visual/content checks still determine the
+result; this option does not establish a REST-only first-pass result or certify
+an editable Figma round trip. Capture execution currently requires the bridge;
+the CLI does not launch Figma or collect the receipt itself.

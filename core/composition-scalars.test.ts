@@ -396,6 +396,7 @@ test('native composition skips static and variant-only exposure while preserving
     parent.anatomy.root.parts = {
       control: { component: { id: child.id, props: { label: 'Editable', disabled: false } } },
       retained: { component: { id: inert.id } },
+      slotted: { slot: { name: 'slotted', renderDefault: true, defaultContent: [{ id: child.id, props: { label: 'Slotted', disabled: false } }] }, parts: { slottedControl: { component: { id: child.id, props: { label: 'Slotted', disabled: false } } } } },
       variant: { component: { id: axis.id } },
     };
     const outer = ContractSchema.parse({ ...inert, id: 'ds.outer', name: 'Outer',
@@ -412,6 +413,10 @@ test('native composition skips static and variant-only exposure while preserving
       for (const component of variantSet ? target.children : [target]) {
         const instances = component.findAll(n => n.type === 'INSTANCE') as ComposedMockNode[];
         assert.equal(instances.find(n => n.name === 'control')!.isExposedInstance, true);
+        const slotted = instances.find(n => n.name === 'slottedControl')!;
+        assert(slotted);assert.equal(slotted.parent!.type, 'SLOT');
+        assert.equal(slotted.isExposedInstance, false);
+        assert.throws(() => { slotted.isExposedInstance = true; }, /Cannot expose instances within slots/);
         for (const name of ['retained', 'variant']) {
           const instance = instances.find(n => n.name === name)!;
           assert.equal(instance.isExposedInstance, false);

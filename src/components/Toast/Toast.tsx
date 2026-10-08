@@ -25,7 +25,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
   return (
     <div ref={ref} className={classes} role={ROLE_MAP[type]} {...rest}>
       <div className={styles.body}>{children}</div>
-      {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+      <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
     </div>
   );
 });

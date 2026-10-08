@@ -7584,6 +7584,19 @@
                   }
                 }
               }
+            },
+            "line-height": {
+              "$value": "23px",
+              "$type": "dimension",
+              "$extensions": {
+                "dsContracts": {
+                  "textStyle": {
+                    "name": "MUI/Input Label/Regular",
+                    "weight": 400
+                  }
+                }
+              },
+              "$description": "Authored style definition: preserve the computed React line height when attaching this named MUI style. This is not a captured Figma style value."
             }
           },
           "inputbase-adornedend": {
@@ -7687,7 +7700,16 @@
             },
             "line-height": {
               "$value": "19.92px",
-              "$type": "dimension"
+              "$type": "dimension",
+              "$extensions": {
+                "dsContracts": {
+                  "textStyle": {
+                    "name": "MUI/Helper and Error/Regular",
+                    "weight": 400
+                  }
+                }
+              },
+              "$description": "Authored style definition: preserve the computed React line height when attaching this named MUI style. This is not a captured Figma style value."
             },
             "margin-top": {
               "$value": "3px",
@@ -19176,7 +19198,7 @@
                 "height": "{imported.shared.size-23}",
                 "left": "{imported.shared.size-0}",
                 "letter-spacing": "{imported.shared.size-0-15008}",
-                "line-height": "{imported.shared.size-23}",
+                "line-height": "{imported.text-field.label.line-height}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.text-field.label.right}",
@@ -25813,7 +25835,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 12,
             "of": 12
@@ -26056,7 +26078,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 28,
             "of": 28
@@ -26364,7 +26386,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 28,
             "of": 28
@@ -27355,7 +27377,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 2,
             "of": 2
@@ -27454,7 +27476,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 2,
             "of": 2
@@ -27553,7 +27575,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 2,
             "of": 2

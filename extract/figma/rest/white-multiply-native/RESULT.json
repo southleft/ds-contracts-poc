@@ -1,0 +1,85 @@
+{
+  "qualification": "native-paint-diagnostic-only",
+  "rows": [
+    {
+      "id": "402:3",
+      "name": "Empty fill baseline",
+      "sha256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "corner": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "center": [
+        128,
+        128,
+        128,
+        255
+      ],
+      "rgbaChangedPixels": 0,
+      "whiteChangedPixels": 0,
+      "blackChangedPixels": 0
+    },
+    {
+      "id": "402:5",
+      "name": "White MULTIPLY 0",
+      "sha256": "a8c6f0417e3722bce4598ad9aa77c112068640de54b885002c6a7097665fc4c4",
+      "corner": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "center": [
+        128,
+        128,
+        128,
+        255
+      ],
+      "rgbaChangedPixels": 0,
+      "whiteChangedPixels": 0,
+      "blackChangedPixels": 0
+    },
+    {
+      "id": "402:7",
+      "name": "White MULTIPLY 0.5",
+      "sha256": "2d4d5c4d7ae745bfe898c0dba9edc549c7477b193376a27b45a9f7335608df03",
+      "corner": [
+        255,
+        255,
+        255,
+        128
+      ],
+      "center": [
+        128,
+        128,
+        128,
+        255
+      ],
+      "rgbaChangedPixels": 336,
+      "whiteChangedPixels": 0,
+      "blackChangedPixels": 336
+    },
+    {
+      "id": "402:9",
+      "name": "White MULTIPLY 1",
+      "sha256": "62fe4b07a7f7a9b6975a1b4f576b5b96943e7ea443d4b301f13d4b1bfbdf63d0",
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "center": [
+        128,
+        128,
+        128,
+        255
+      ],
+      "rgbaChangedPixels": 336,
+      "whiteChangedPixels": 0,
+      "blackChangedPixels": 336
+    }
+  ]
+}

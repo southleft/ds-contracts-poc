@@ -1,0 +1,323 @@
+{
+  "section": "103:2436",
+  "cases": [
+    {
+      "name": "HORIZONTAL -8 20/40/60",
+      "width": 104,
+      "height": 14,
+      "gap": -8,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        },
+        {
+          "x": 12,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 44,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "HORIZONTAL -8 60/40/20",
+      "width": 104,
+      "height": 14,
+      "gap": -8,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        },
+        {
+          "x": 52,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 84,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "HORIZONTAL -30 20/40/60",
+      "width": 80,
+      "height": 14,
+      "gap": -30,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 20,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "HORIZONTAL -30 60/40/20",
+      "width": 80,
+      "height": 14,
+      "gap": -30,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        },
+        {
+          "x": 40,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 60,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "HORIZONTAL -1000000 20/40/60",
+      "width": 80,
+      "height": 14,
+      "gap": -1000000,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 20,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "HORIZONTAL -1000000 60/40/20",
+      "width": 80,
+      "height": 14,
+      "gap": -1000000,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 60,
+          "height": 14
+        },
+        {
+          "x": 40,
+          "y": 0,
+          "width": 40,
+          "height": 14
+        },
+        {
+          "x": 60,
+          "y": 0,
+          "width": 20,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -8 20/40/60",
+      "width": 14,
+      "height": 104,
+      "gap": -8,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 20
+        },
+        {
+          "x": 0,
+          "y": 12,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 44,
+          "width": 14,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -8 60/40/20",
+      "width": 14,
+      "height": 104,
+      "gap": -8,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 60
+        },
+        {
+          "x": 0,
+          "y": 52,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 84,
+          "width": 14,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -30 20/40/60",
+      "width": 14,
+      "height": 80,
+      "gap": -30,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 20
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 20,
+          "width": 14,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -30 60/40/20",
+      "width": 14,
+      "height": 80,
+      "gap": -30,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 60
+        },
+        {
+          "x": 0,
+          "y": 40,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 60,
+          "width": 14,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -1000000 20/40/60",
+      "width": 14,
+      "height": 80,
+      "gap": -1000000,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 20
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 20,
+          "width": 14,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "name": "VERTICAL -1000000 60/40/20",
+      "width": 14,
+      "height": 80,
+      "gap": -1000000,
+      "children": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 14,
+          "height": 60
+        },
+        {
+          "x": 0,
+          "y": 40,
+          "width": 14,
+          "height": 40
+        },
+        {
+          "x": 0,
+          "y": 60,
+          "width": 14,
+          "height": 20
+        }
+      ]
+    }
+  ],
+  "_provenance": {
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+    "pageId": "102:2421",
+    "sectionId": "103:2436",
+    "capture": "Native Figma Plugin API, 2026-10-04; unwrapped auto-layout; forward child order"
+  }
+}

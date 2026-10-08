@@ -112,7 +112,7 @@ interface Replays {
   /** CBDS Tooltip pointer — a real shape part (triangle, per-placement offsets). */
   shapePart: Record<string, unknown>;
   shapeStates: { visibleWhen: unknown; stylesWhenCount: number };
-  /** Navigation-header menu — a real repeat part + its arrayOf prop. */
+  /** Navigation-header replay: inferred repeat or named limit with retained controls. */
   repeatPart: Record<string, unknown>;
   repeatProp: Record<string, unknown>;
 }
@@ -167,12 +167,15 @@ export async function loadReplays(): Promise<Replays> {
   });
   const navContract = ContractSchema.parse(batch.proposals[0].contract);
   const repeatWalk = walkAnatomy(navContract).find((w) => w.part.repeat);
-  if (!repeatWalk)
-    throw new Error("replay: navigation-header proposal has no repeat part");
-  const itemsPropName = repeatWalk.part.repeat!.itemsProp;
-  const repeatProp = navContract.props.find((p) => p.name === itemsPropName);
-  if (!repeatProp)
+  const repeatProp = repeatWalk
+    ? navContract.props.find((p) => p.name === repeatWalk.part.repeat!.itemsProp)
+    : undefined;
+  if (repeatWalk && !repeatProp)
     throw new Error("replay: repeat itemsProp not found on the proposal");
+  const repeatLimits = batch.proposals[0].notes.filter((note) => note.includes("repeat-visibility-not-uniform"));
+  const retainedControls = navContract.props.filter((p) => /^menuItem[1-5]$/.test(p.name));
+  if (!repeatWalk && (!repeatLimits.length || retainedControls.length !== 5))
+    throw new Error("replay: navigation-header lost both repeat and its five visibility controls");
 
   replays = {
     shapePart: {
@@ -191,13 +194,22 @@ export async function loadReplays(): Promise<Replays> {
       visibleWhen: pointer.part.visibleWhen,
       stylesWhenCount: pointer.part.stylesWhen?.length ?? 0,
     },
-    repeatPart: {
+    repeatPart: repeatWalk ? {
       [repeatWalk.name]: {
         component: repeatWalk.part.component,
         repeat: repeatWalk.part.repeat,
       },
+    } : {
+      status: "repeat-not-inferred",
+      reasons: repeatLimits,
+      parts: Object.fromEntries(walkAnatomy(navContract)
+        .filter((w) => retainedControls.some((p) => p.name === w.part.visibleWhen?.prop))
+        .map((w) => [w.path.join("/"), { component: w.part.component, visibleWhen: w.part.visibleWhen }])),
     },
-    repeatProp: repeatProp as unknown as Record<string, unknown>,
+    repeatProp: repeatProp as unknown as Record<string, unknown> ?? {
+      status: "repeat-not-inferred",
+      retainedVisibilityProps: retainedControls,
+    },
   };
   return replays;
 }

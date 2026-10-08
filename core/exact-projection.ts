@@ -172,6 +172,7 @@ export interface StatePreviewAxisDescriptor {
    *  Size declares [Xs, Sm] and sorts to [Sm, Xs]). Guessing it here would
    *  silently expect the wrong 12 rows. */
   pinned: Readonly<Record<string, string>>;
+  rows?: readonly Readonly<Record<string, string>>[];
 }
 
 const readStatePreviewAxis = (
@@ -187,6 +188,19 @@ const readStatePreviewAxis = (
   if (!Array.isArray(states) || states.length === 0) return null;
   if (!states.every((s) => typeof s === "string" && s.length > 0)) return null;
   if (primary !== null && typeof primary !== "string") return null;
+  const rows = value.rows;
+  if (
+    rows !== undefined &&
+    (!Array.isArray(rows) ||
+      rows.length === 0 ||
+      rows.length > 4096 ||
+      !rows.every(
+        (row) =>
+          isRecord(row) &&
+          Object.values(row).every((v) => typeof v === "string"),
+      ))
+  )
+    return null;
   const pinned = value.pinned ?? {};
   if (!isRecord(pinned)) return null;
   if (!Object.values(pinned).every((v) => typeof v === "string")) return null;
@@ -196,6 +210,7 @@ const readStatePreviewAxis = (
     states: states as readonly string[],
     primary: primary as string | null,
     pinned: pinned as Record<string, string>,
+    ...(rows === undefined ? {} : { rows: rows as Record<string, string>[] }),
   };
 };
 
@@ -244,6 +259,26 @@ const statePreviewTuples = (
   }
   for (const row of base) {
     out.push(canonicalTuple(names, { ...row, [d.axis]: d.default }));
+  }
+  if (d.rows !== undefined) {
+    for (const row of d.rows) {
+      if (
+        Object.keys(row).length !== axes.length ||
+        axes.some(
+          (a) =>
+            !Object.hasOwn(row, a.name) || !a.options.includes(row[a.name]!),
+        ) ||
+        !d.states.includes(row[d.axis]!)
+      )
+        return null;
+      out.push(canonicalTuple(names, row));
+    }
+    if (
+      d.states.some((state) => !d.rows!.some((row) => row[d.axis] === state)) ||
+      new Set(out).size !== out.length
+    )
+      return null;
+    return out.sort();
   }
   // 2. the preview rows — primary varies, every other real axis pinned FIRST
   const primaryValues = primaryAxis ? primaryAxis.options : [null];
@@ -764,3 +799,147 @@ export function validateExactVariantProjection(
 }
 
 export const validateExactProjection = validateExactVariantProjection;
+
+export type DeclaredDrawnProjectionResult =
+  | RefusedExactProjection
+  | ((SourceMatrixVerifiedExactProjection | VerifiedExactProjection) & {
+      domainKind: "declared-drawn-tuples";
+      declarationTupleSetHash: string;
+    });
+
+/** Matrix proof for a positive, independently supplied tuple declaration.
+ * This is deliberately separate from Cartesian/absent-variant validation.
+ * It neither infers a declaration from source rows nor licenses composition
+ * of undrawn code states. Schema, emitters and runtime enforcement must adopt
+ * the same declaration before the importer can use this proof. */
+export function validateDeclaredDrawnProjection(
+  set: ExactDumpSet,
+  declaration: unknown,
+  returned?: ExactProjectionRows,
+  options: Pick<ExactProjectionOptions, "propertyNames"> = {},
+): DeclaredDrawnProjectionResult {
+  const fail = (message: string): RefusedExactProjection =>
+    refused([{ code: "EXACT_MATRIX_RAGGED", message }]);
+  if (set.type !== "COMPONENT_SET" || set.statePreviewAxis != null) {
+    return fail(
+      "drawn-domain-incompatible-shape: requires a component set without a state-preview descriptor.",
+    );
+  }
+  if (!isRecord(set.propertyDefinitions)) {
+    return refused([
+      {
+        code: "EXACT_DEFINITIONS_MISSING",
+        message: "drawn-domain: structured property definitions are required.",
+      },
+    ]);
+  }
+  const { axes, refusals } = readAxes(
+    set.propertyDefinitions,
+    options.propertyNames,
+  );
+  if (refusals.length) return refused(refusals);
+  if (!axes.length) return fail("drawn-domain-no-axes: requires variant axes.");
+  // Bound the positive declaration itself; never expand the Cartesian product.
+  if (
+    !Array.isArray(declaration) ||
+    !declaration.length ||
+    declaration.length > EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+  ) {
+    return fail(
+      `drawn-domain-invalid-declaration: requires 1–${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} complete tuples.`,
+    );
+  }
+  const declared = checkRows(
+    declaration.map((variantProperties) => ({ variantProperties })),
+    axes,
+    "source",
+    false,
+  );
+  if (declared.refusals.length)
+    return refused(
+      declared.refusals.map((r) => ({
+        ...r,
+        message: `drawn-domain-declaration: ${r.message}`,
+      })),
+    );
+  for (const axis of axes) {
+    for (const option of axis.options) {
+      if (!declaration.some((tuple) => tuple[axis.name] === option)) {
+        return fail(
+          `drawn-domain-erased-option: no declared tuple contains ${JSON.stringify(axis.name)}=${JSON.stringify(option)}.`,
+        );
+      }
+    }
+  }
+  const defaults: Record<string, string> = {};
+  for (const axis of axes) {
+    const definition = set.propertyDefinitions[
+      axis.name
+    ] as ExactPropertyDefinition;
+    if (
+      typeof definition.defaultValue !== "string" ||
+      !axis.options.includes(definition.defaultValue)
+    ) {
+      return fail(
+        `drawn-domain-default-unavailable: ${JSON.stringify(axis.name)} has no valid declared default.`,
+      );
+    }
+    defaults[axis.name] = definition.defaultValue;
+  }
+  const names = axes.map((a) => a.name);
+  if (!declared.tuples.includes(canonicalTuple(names, defaults))) {
+    return fail(
+      "drawn-domain-default-undrawn: the complete default tuple must be declared.",
+    );
+  }
+  const source = checkRows(set.variants, axes, "source", false);
+  if (source.refusals.length) return refused(source.refusals);
+  const expected = new Set(declared.tuples),
+    observed = new Set(source.tuples);
+  const sourceMissing = declared.tuples.filter((t) => !observed.has(t));
+  const sourceExtra = source.tuples.filter((t) => !expected.has(t));
+  if (sourceMissing.length || sourceExtra.length) {
+    return refused([
+      {
+        code: "EXACT_MATRIX_RAGGED",
+        message:
+          "drawn-domain-source-mismatch: source must equal the independently declared tuple domain exactly.",
+        tuples: [...sourceMissing, ...sourceExtra].sort(),
+        expected: declared.tuples.length,
+        actual: source.tuples.length,
+      },
+    ]);
+  }
+  if (returned !== undefined) {
+    const checked = checkRows(rowsFrom(returned), axes, "returned", false);
+    const returnedSet = new Set(checked.tuples);
+    const missing = declared.tuples.filter((t) => !returnedSet.has(t));
+    const extra = checked.tuples.filter((t) => !expected.has(t));
+    const problems = [...checked.refusals];
+    if (missing.length)
+      problems.push({
+        code: "EXACT_ROWS_MISSING",
+        message: "drawn-domain: returned projection lost declared tuples.",
+        tuples: missing,
+      });
+    if (extra.length)
+      problems.push({
+        code: "EXACT_ROWS_EXTRA",
+        message:
+          "drawn-domain: returned projection invented undeclared tuples.",
+        tuples: extra,
+      });
+    if (problems.length) return refused(problems);
+  }
+  return {
+    status:
+      returned === undefined ? "source-matrix-verified" : "verified-exact",
+    domainKind: "declared-drawn-tuples",
+    declarationTupleSetHash: tupleHash(declared.tuples),
+    propertyNames: names,
+    expectedCount: declared.tuples.length,
+    observedCount: source.tuples.length,
+    tupleSetHash: tupleHash(source.tuples),
+    tuples: source.tuples,
+  };
+}

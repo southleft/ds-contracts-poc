@@ -192,3 +192,50 @@ test('both React consumers render the original geometry and keep stroke weight t
     }
   } finally { await browser.close(); }
 });
+
+test('zero-height vector paths retain stretch offsets, width and paint in both React consumers',async()=>{
+ const observed = JSON.parse(readFileSync(new URL('../extract/figma/fixtures/zero-height-native.json', import.meta.url), 'utf8'));
+ const c=contract();parent(c).literals={width:'50px',height:'12px'};
+ leaf(c).shape={kind:'stroked-path',width:40,height:0,strokePath:{data:'M0 0L10 0L30 0L40 0',cap:'ROUND',join:'MITER',miterLimit:4,viewport:{width:50,height:12,x:3,y:6},constraints:{horizontal:'STRETCH',vertical:'STRETCH'}}};
+ delete leaf(c).literalsByProp;leaf(c).literals={'border-color':'#6750a4','border-width':'4px'};
+ assert(ContractSchema.safeParse(c).success);assert.deepEqual(errorsOf(c),[]);
+ const contracts=new Map([[c.id,c]]),icons=new Map<string,string>();
+ const native=createFigmaEngine({tokens,icons}).compileComponentData(c,contracts);assert(native.variants.length>0);
+ const specs:any[]=[];const walk=(s:any)=>{if(s.shape?.kind==='stroked-path')specs.push(s);for(const n of s.children??[])walk(n);};for(const v of native.variants)walk(v.spec);
+ assert(specs.every(s=>s.shape.height===0&&s.shape.strokePath.constraints.horizontal==='STRETCH'));
+ for (const row of observed.rows) assert.deepEqual(specs[0].shape, row.before, 'compiled shape matches live canonical readback');
+ const script=createFigmaEngine({tokens,icons}).buildComponentScript(c,contracts);
+ const start=script.indexOf("if (childSpec.shape && childSpec.shape.kind === 'stroked-path')"),end=script.indexOf('\n  try {',start);
+ assert(start>0&&end>start);
+ const place=new Function('parent','childNode','childSpec',script.slice(start,end));
+ const placed:any={};place({id:'host',layoutMode:'NONE',width:50,height:12},placed,specs[0]);
+ assert.deepEqual(placed,{constraints:{horizontal:'STRETCH',vertical:'STRETCH'},x:3,y:6});
+ assert.throws(()=>place({id:'host',layoutMode:'NONE',width:49,height:12},{},specs[0]),/parent-basis-mismatch/);
+
+ const browser=await chromium.launch();try{for(const inline of [false,true]){
+  const code=inline?{...emitReactInline(c,{contracts,icons,tokens}),css:''}:emitReact(c,{contracts,icons,tokens:new Set()});
+  const page=await browser.newPage();try{const render=await mountGenerated(page,c.name,code.tsx,code.css);await render({});
+   for(const observation of observed.rows){
+    const [width,height] = observation.size;
+    const result=await page.locator('#root path').evaluate((node,size)=>{
+     const host=document.querySelector('#root > * > *') as HTMLElement;host.style.width=size[0]+'px';host.style.height=size[1]+'px';
+     const b=node.getBoundingClientRect(),h=host.getBoundingClientRect(),style=getComputedStyle(node);
+     return {x:b.x-h.x,y:b.y-h.y,width:b.width,height:b.height,weight:style.strokeWidth,stroke:style.stroke};
+    },[width!,height!]);
+    assert.deepEqual(result,{...observation.bounds,weight:observation.paint.strokeWeight+'px',stroke:'rgb(103, 80, 164)'},String(inline));
+    assert.equal(observation.after.width, result.width);
+    assert.equal(observation.after.height, result.height);
+    const viewport=await page.locator('#root > * > * > span > svg').evaluate(node=>{
+     const r=node.getBoundingClientRect();return [r.width,r.height];
+    });
+    assert.deepEqual(viewport,[width,height],'the graphic owns its complete source viewport');
+   }
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+ const node={...nativeNode(),width:40,height:0,relativeTransform:[[1,0,3],[0,1,6]],strokeJoin:'MITER',strokeWeight:4,
+  vectorPaths:[{data:'M0 0L10 0L30 0L40 0',windingRule:'NONE'}],constraints:{horizontal:'STRETCH',vertical:'STRETCH'}};
+ const read=reader.shape(node,{...nativeParent(),width:50,height:12});assert.deepEqual(JSON.parse(JSON.stringify(read)),leaf(c).shape);
+ assert.equal(reader.shape({...node,height:-1},{...nativeParent(),width:50,height:12}),null);
+ assert.ok(strokedPathGeometryIssue({...leaf(c).shape!,height:1}));
+ assert.equal(ContractSchema.safeParse({...c,anatomy:{root:{parts:{bad:{shape:{kind:'rect',width:40,height:0}}}}}}).success,false);
+});

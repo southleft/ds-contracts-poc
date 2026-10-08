@@ -4,17 +4,29 @@ import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
-import { ContractSchema, filledPathIssue, filledPathMask, lowerFilledPathVariants, shapeCssDecls, type Contract, type FilledPath } from '../scripts/contract-schema.js';
+import { ContractSchema, filledPathIssue, filledPathsIssue, filledPathMask, lowerFilledPathVariants, shapeCssDecls, type Contract, type FilledPath } from '../scripts/contract-schema.js';
 import { mapRestToDump, type RestNode } from '../extract/figma/rest/map.js';
 import { proposeFromDump } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { validateContract, emitReact } from './emit-react.js';
 import { emitReactInline } from './emit-react-inline.js';
-import { mountGenerated } from './react-test-runtime.js';
+import { mountGenerated, generatedTypeErrors } from './react-test-runtime.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { walkAnatomy } from '../scripts/contract-schema.js';
 import { fetchObservation } from '../sync/observe.js';
-import { nativeFilledPathMatches } from './native-filled-path.js';
+import { nativeFilledPathMatches, nativeFilledPathResizeMatches, lowerNativeFilledPath } from './native-filled-path.js';
+
+test('native normalization preserves an exact zero endpoint at a float32 origin',()=>{
+ const fixture=JSON.parse(readFileSync(new URL('../extract/figma/fixtures/filled-path-native-origin.json',import.meta.url),'utf8'));
+ for(const state of fixture.states){
+  assert(nativeFilledPathMatches(fixture.shape,state.paths,state.x,state.y));
+  const moved=structuredClone(state.paths);
+  moved[0].data=moved[0].data.replace('L 0 6.', 'L 0.00000001 6.');
+  assert.notEqual(moved[0].data,state.paths[0].data);
+  assert(!nativeFilledPathMatches(fixture.shape,moved,state.x,state.y));
+  assert(!nativeFilledPathMatches(fixture.shape,state.paths,state.x+0.0001,state.y));
+ }
+});
 
 const triangle = { data: 'M0 0L12 0L6 10Z', windingRule: 'NONZERO' as const };
 const inset = { data: 'M0 0L12 0L12 10L0 10Z M3 3L9 3L9 7L3 7Z', windingRule: 'EVENODD' as const };
@@ -52,20 +64,20 @@ test('filled paths reject malformed, open, unsafe and approximated geometry in b
   }
 });
 const paint = [{ type: 'SOLID', color: { r: 0.2, g: 0.3, b: 0.4, a: 1 } }];
-const vector = (path: FilledPath = triangle): RestNode => ({ id: '3:1', name: 'Mark', type: 'VECTOR', size: { x: 12, y: 10 }, relativeTransform: [[1, 0, 2.742499828338623], [0, 1, 4.242500305175781]], fillGeometry: [{ path: path.data, windingRule: path.windingRule }], fills: paint, strokes: [], effects: [], absoluteBoundingBox: { x: 0, y: 0, width: 12, height: 10 } });
+const vector = (path: FilledPath & {windingRule:'NONZERO'|'EVENODD'} = triangle): RestNode => ({ id: '3:1', name: 'Mark', type: 'VECTOR', size: { x: 12, y: 10 }, relativeTransform: [[1, 0, 2.742499828338623], [0, 1, 4.242500305175781]], fillGeometry: [{ path: path.data, windingRule: path.windingRule }], fills: paint, strokes: [], effects: [], absoluteBoundingBox: { x: 0, y: 0, width: 12, height: 10 } });
 const mapped = (nodes: RestNode[]) => mapRestToDump({ name: 'probe', nodes: { '1:1': { document: { id: '1:1', name: 'GeometryProbe', type: 'COMPONENT_SET', children: nodes.map((node, i) => ({ id: `2:${i}`, name: `Kind=${i ? 'Inset' : 'Triangle'}`, type: 'COMPONENT', children: [node], absoluteBoundingBox: { x: 0, y: 0, width: 20, height: 20 } })) } } } } as never);
 
 test('REST carries original path bytes and fractional local placement, refusing unsupported paints and transforms', () => {
   const result = mapped([vector()]);
   const set = result.dump.GeometryProbe as never as { variants: Array<{ children: Array<{ shape: unknown }> }> };
   assert.deepEqual(set.variants[0]!.children[0]!.shape, { kind: 'path', width: 12, height: 10, paths: [triangle], x: 2.742499828338623, y: 4.242500305175781, right: 5.257500171661377, bottom: 5.757499694824219 });
-  for (const patch of [{ fillGeometry: undefined }, { strokes: paint }, { fills: [...paint, ...paint] }, { effects: [{ type: 'DROP_SHADOW' }] }, { blendMode: 'MULTIPLY' }, { cornerRadius: 2 }, { fillGeometry: [vector().fillGeometry![0], vector().fillGeometry![0]] }, { relativeTransform: [[1, 0.1, 0], [0, 1, 0]] }, { fillGeometry: [{ path: 'M0 0H2Z', windingRule: 'NONZERO' }] }]) {
+  for (const patch of [{ fillGeometry: undefined }, { strokes: paint }, { fills: [...paint, ...paint] }, { effects: [{ type: 'DROP_SHADOW' }] }, { blendMode: 'MULTIPLY' }, { cornerRadius: 2 }, { fillGeometry: [vector().fillGeometry![0], {path:'M0 0Z',windingRule:'NONZERO'}] }, { relativeTransform: [[1, 0.1, 0], [0, 1, 0]] }, { fillGeometry: [{ path: 'M0 0H2Z', windingRule: 'NONZERO' }] }]) {
     const refused = mapped([{ ...vector(), ...patch } as RestNode]);
     assert.ok(refused.report.degradations.some((d) => d.code === 'vector-geometry-unsupported'));
   }
 });
 
-test('REST and plugin readers never promote a vector mask to an ordinary filled path', () => {
+test('REST and plugin readers preserve supported mask paths and refuse unsupported mask kinds', () => {
   const end = plugin.indexOf('const capturedVariables', gateEnd);
   assert.ok(end > gateEnd);
   const pluginShape = vm.runInNewContext(`${plugin.slice(gateStart, end)}; dumpShape`) as (node: unknown, parent: unknown) => unknown;
@@ -80,7 +92,12 @@ test('REST and plugin readers never promote a vector mask to an ordinary filled 
     const before = JSON.stringify(input);
     const result = mapped([input]);
     assert.equal(JSON.stringify(input), before, 'captured evidence stays unchanged');
-    assert.equal((result.dump.GeometryProbe as any).variants[0].children[0].shape, undefined);
+    const node=(result.dump.GeometryProbe as any).variants[0].children[0];
+    if(isMask===true && ['ALPHA','VECTOR'].includes(maskType)){
+      assert.equal(node.mask.type,maskType);assert.deepEqual(node.shape.paths,[triangle]);
+      assert.ok(pluginShape({...pluginNode,isMask,maskType},null));continue;
+    }
+    assert.equal(node.shape, undefined);
     assert.ok(result.report.degradations.some(d => d.code === 'vector-mask-unsupported'));
     assert.ok(result.report.degradations.some(d => d.code === 'vector-geometry-unsupported'));
     assert.equal(pluginShape({ ...pluginNode, isMask, maskType }, null), null);
@@ -123,7 +140,7 @@ test('unsupported path paints cannot enter through conditional or state channels
     const c = contract(); Object.assign(c.anatomy.root!.parts!.mark!, patch);
     assert.ok(errorsOf(c).some((e) => e.includes('filled-path-unsupported-paint-or-mask')), JSON.stringify(patch));
   }
-  assert.equal(ContractSchema.safeParse({ ...contract(), anatomy: { root: { parts: { mark: { shape: { kind: 'path', width: 12, height: 10, paths: [triangle, inset] } } } } } }).success, false);
+  assert.equal(ContractSchema.safeParse({ ...contract(), anatomy: { root: { parts: { mark: { shape: { kind: 'path', width: 12, height: 10, paths: Array.from({length:33},()=>triangle) } } } } } }).success, false);
 });
 
 function contract(): Contract {
@@ -185,9 +202,16 @@ test('a child presence gate is scoped to the exact parent domain; both path vari
   const p = proposeFromDump(m.dump.NestedProbe as never, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }), contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
   const parsed = ContractSchema.parse(p.contract);
   const paths = walkAnatomy(parsed).filter((w) => w.part.shape?.kind === 'path');
-  assert.equal(paths.length, 1, p.notes.join('\n'));
-  assert.equal(paths[0]!.part.shape!.pathsByProp!.prop, 'kind');
-  assert.ok(paths[0]!.part.stylesWhen!.some((s) => s.styles.left === '2.742499828338623px'), JSON.stringify(paths[0]!.part));
+  assert.ok(paths.length > 0, p.notes.join('\n'));
+  const tokens={primitives:p.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+  const data=createFigmaEngine({tokens,icons:new Map()}).compileComponentData(parsed,new Map([[parsed.id,parsed]]));
+  assert.equal(data.variants.length,6);
+  for(const row of data.variants){
+    const actual:unknown[]=[];const walk=(node:any)=>{if(node.shape?.kind==='path')actual.push(node.shape.paths);for(const child of node.children??[])walk(child);};walk(row.spec);
+    const visible=row.name.includes('Outer=Present')&&!row.name.includes('Kind=Off');
+    assert.deepEqual(actual,visible?[row.name.includes('Kind=Triangle')?[triangle]:[inset]]:[],row.name);
+  }
+  assert(paths.some(w=>w.part.stylesWhen?.some(s=>s.styles.left==='2.742499828338623px')),JSON.stringify(paths));
 });
 
 
@@ -203,10 +227,10 @@ test('generated React surfaces render both path variants, including an evenodd h
         const render = await mountGenerated(page, c.name, out.tsx, out.css);
         // CSS modules are identity-mapped by this fixture runtime; inline
         // parts use data-part, so select the actual leaf for both surfaces.
-        const leaf = page.locator('#root > * > *');
+        const leaf = page.locator('#root > * > :not(svg)');
         await render({ kind: 'triangle' });
         const a = await leaf.screenshot();
-        const maskA = await leaf.evaluate((el) => getComputedStyle(el).maskImage);
+        const maskA = await page.locator('#root clipPath path').evaluateAll(paths => paths.map(p => p.getAttribute('d')).join(' '));
         assert.match(decodeURIComponent(maskA), /M0 0L12 0L6 10Z/);
         await render({ kind: 'inset' });
         const b = await leaf.screenshot();
@@ -215,11 +239,251 @@ test('generated React surfaces render both path variants, including an evenodd h
         assert.deepEqual(pixel(6, 5), [255, 255, 255, 255], `${surface}: the evenodd hole exposes the page`);
         assert.deepEqual(pixel(1, 5), [51, 68, 85, 255], `${surface}: the surrounding path remains filled`);
         assert.notDeepEqual(a, b, `${surface}: the enum must change pixels`);
-        const maskB = await leaf.evaluate((el) => getComputedStyle(el).maskImage);
-        assert.match(decodeURIComponent(maskB), /fill-rule="evenodd"/);
+        const maskB = await page.locator('#root clipPath').evaluate(el => el.innerHTML);
+        assert.match(decodeURIComponent(maskB), /clip-rule="evenodd"/);
         assert.match(decodeURIComponent(maskB), /M3 3L9 3L9 7L3 7Z/);
         const bounds = await leaf.boundingBox();
         assert.equal(bounds!.width, 12); assert.equal(bounds!.height, 10);
+      } finally { await page.close(); }
+    }
+  } finally { await browser.close(); }
+});
+
+test('multiple ordered regions survive readers, schema, native lowering and exact readback comparison',()=>{
+ const paths=[{data:'M0 0L4 0L4 4L0 4Z',windingRule:'NONZERO' as const},{data:'M8 6L12 6L12 10L8 10Z',windingRule:'EVENODD' as const}];
+ const node={...vector(),fillGeometry:paths.map(p=>({path:p.data,windingRule:p.windingRule}))};
+ const dump=mapped([node]);assert.deepEqual((dump.dump.GeometryProbe as any).variants[0].children[0].shape.paths,paths);
+ const c=contract();delete c.anatomy.root.parts!.mark!.shape!.pathsByProp;c.anatomy.root.parts!.mark!.shape!.paths=paths;
+ assert.equal(ContractSchema.safeParse(c).success,true);assert.deepEqual(errorsOf(c),[]);
+ const specs=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(c,new Map([[c.id,c]])).variants;
+ const leaf=specs[0].spec.children![0];assert.equal(leaf.nativePathViewport,true);assert.deepEqual(leaf.lits,{width:12,height:10});assert.deepEqual(leaf.children![0].shape!.paths,paths);
+ const wanted={kind:'path' as const,width:12,height:10,paths};
+ assert(nativeFilledPathMatches(wanted,paths,0,0));
+ assert(!nativeFilledPathMatches(wanted,paths.slice(0,1),0,0));
+ assert(!nativeFilledPathMatches(wanted,[paths[1],paths[0]],0,0));
+ assert(!nativeFilledPathMatches(wanted,[paths[0],{...paths[1],data:'M8 6L12 6L12 9.9L8 10Z'}],0,0));
+ assert(!nativeFilledPathMatches(wanted,[paths[0],{...paths[1],windingRule:'NONZERO'}],0,0));
+});
+
+test('both React surfaces draw two distinct filled regions and preserve their empty gap',async()=>{
+ const browser=await chromium.launch();
+ try{
+  const c=contract(),shape=c.anatomy.root.parts!.mark!.shape!;delete shape.pathsByProp;
+  shape.paths=[{data:'M0 0L4 0L4 10L0 10Z',windingRule:'NONZERO'},{data:'M8 0L12 0L12 10L8 10Z',windingRule:'EVENODD'}];
+  const contracts=new Map([[c.id,c]]),icons=new Map<string,string>(),tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+  for(const surface of ['module','inline']){
+   const page=await browser.newPage();try{
+    const out=surface==='module'?emitReact(c,{contracts,icons,tokens:new Set()}):{...emitReactInline(c,{contracts,icons,tokens}),css:''};
+    await mountGenerated(page,c.name,out.tsx,out.css);const leaf=page.locator('#root > * > :not(svg)');const image=PNG.sync.read(await leaf.screenshot());
+    const pixel=(x:number)=>Array.from(image.data.subarray((5*image.width+x)*4,(5*image.width+x)*4+4));
+    assert.deepEqual(pixel(1),[51,68,85,255],surface);assert.deepEqual(pixel(6),[255,255,255,255],surface);assert.deepEqual(pixel(10),[51,68,85,255],surface);
+   }finally{await page.close();}
+  }
+ }finally{await browser.close();}
+});
+
+
+test('closed NONE contours retain their native winding only with a convex single-contour proof', () => {
+  const pluginPathsGate = vm.runInNewContext(`${plugin.slice(gateStart, gateEnd)}; filledPathsIssue`) as typeof filledPathsIssue;
+  const shapeEnd = plugin.indexOf('const capturedVariables', gateEnd);
+  const pluginShape = vm.runInNewContext(`${plugin.slice(gateStart, shapeEnd)}; dumpShape`) as (node: unknown, parent: unknown) => any;
+  const accepted = [
+    'M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z',
+    'M 0 0 L 53.66666793823242 0 L 53.66666793823242 10 L 0 10 L 0 0 Z',
+    'M0 0L12 0L6 10Z', 'M6 10L12 0L0 0Z',
+    'M0 0 12 0 6 10Z',
+  ];
+  for (const data of accepted) {
+    const paths: FilledPath[] = [{data,windingRule:'NONE'}];
+    assert.equal(filledPathsIssue(paths), undefined, data);
+    assert.equal(pluginPathsGate(paths), undefined, data);
+    const node = {...vector(), width:161,height:10,vectorPaths:paths};
+    const captured = pluginShape(node, null);
+    assert.equal(captured.paths[0].windingRule, 'NONE');assert.equal(captured.paths[0].data,data);
+    const mask=filledPathMask({width:161,height:10,paths});
+    assert.ok(mask.includes(encodeURIComponent('fill-rule="nonzero"')));
+    assert(nativeFilledPathMatches({kind:'path',width:161,height:10,paths},paths,0,0));
+    assert(!nativeFilledPathMatches({kind:'path',width:161,height:10,paths},[{data,windingRule:'NONZERO'}],0,0));
+  }
+  const refused = [
+    'M0 0L12 0L6 10', 'M0 0Q6 10 12 0L0 0Z',
+    'M0 0L12 0L4 4L12 10L0 10Z', 'M0 0L12 10L0 10L12 0Z',
+    'M0 0L12 0L12 10L0 10Z M3 3L9 3L9 7L3 7Z',
+    'M0 0L12 0L6 10L12 0Z', 'M0 0L6 0L12 0Z',
+    'M0 0L12.1 0L6 10Z',
+    'M0 3L12 3L2 10L6 0L10 10Z',
+  ];
+  for(const data of refused){
+    const paths:FilledPath[]=[{data,windingRule:'NONE'}];
+    assert.ok(filledPathsIssue(paths),data);assert.equal(pluginPathsGate(paths),filledPathsIssue(paths),data);
+    assert.throws(()=>filledPathMask({width:161,height:10,paths}));
+    assert.equal(pluginShape({...vector(),width:161,height:10,vectorPaths:paths},null),null);
+    const c=contract();c.anatomy.root!.parts!.mark!.shape!.paths=paths;
+    assert.equal(ContractSchema.safeParse(c).success,false,data);
+  }
+  for(const invalid of [[null],[{}],[42],[{data:triangle.data,windingRule:'UNKNOWN'}]]){
+    assert.ok(filledPathsIssue(invalid as any));assert.equal(pluginPathsGate(invalid as any),filledPathsIssue(invalid as any));
+    assert.equal(nativeFilledPathResizeMatches(invalid,invalid,1,1),false);
+  }
+  const mixed:FilledPath[]=[{data:accepted[0]!,windingRule:'NONE'},triangle];
+  assert.equal(filledPathsIssue(mixed),'filled-path-none-multiple-contours');
+  assert.throws(()=>filledPathMask({width:161,height:10,paths:mixed}));
+  const c=contract();const shape=c.anatomy.root!.parts!.mark!.shape!;
+  shape.paths=[{data:triangle.data,windingRule:'NONE'}];delete shape.pathsByProp;
+  assert.equal(ContractSchema.safeParse(c).success,true);assert.deepEqual(errorsOf(c),[]);
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const script=engine.buildComponentScript(c,new Map([[c.id,c]]));
+  assert.match(script,/"windingRule"\s*:\s*"NONE"/);
+});
+
+
+test('both generated React surfaces match the actual native closed NONE rectangle raster', async () => {
+  const native = PNG.sync.read(readFileSync(new URL('./fixtures/closed-none-rectangle-native.png', import.meta.url)));
+  assert.equal(native.width,161);assert.equal(native.height,10);
+  const browser=await chromium.launch();
+  try{
+    const c=contract(),shape=c.anatomy.root!.parts!.mark!.shape!;
+    delete shape.pathsByProp;shape.width=161;shape.height=10;
+    shape.paths=[{data:'M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z',windingRule:'NONE'}];
+    c.anatomy.root!.parts!.mark!.literals={'background-color':'#e8e8e8'};
+    const contracts=new Map([[c.id,c]]),icons=new Map<string,string>(),tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+    for(const surface of ['module','inline']){
+      const page=await browser.newPage();try{
+        const out=surface==='module'?emitReact(c,{contracts,icons,tokens:new Set()}):{...emitReactInline(c,{contracts,icons,tokens}),css:''};
+        await mountGenerated(page,c.name,out.tsx,out.css);
+        for(const background of ['white','black']){
+          await page.addStyleTag({content:`body{background:${background}}`});
+          const actual=PNG.sync.read(await page.locator('#root > * > :not(svg)').screenshot());
+          assert.equal(actual.width,native.width);assert.equal(actual.height,native.height);
+          assert.deepEqual(actual.data,native.data,`${surface} on ${background}: actual native filled NONE pixels`);
+        }
+      }finally{await page.close();}
+    }
+  }finally{await browser.close();}
+});
+
+test('native convexity gate works without BigInt and matches the exact integer oracle',()=>{
+ const portable=vm.runInNewContext(`${plugin.slice(gateStart,gateEnd)}; filledPathsIssue`,{BigInt:undefined}) as typeof filledPathsIssue;
+ type Point=[number,number];
+ const oracle=(points:Point[])=>{
+  const p=points.map(point=>point.map(value=>BigInt(value*2**149)));
+  let direction=0;
+  for(let i=0;i<p.length;i++)for(let j=0;j<p.length;j++){
+   if(j===i||j===(i+1)%p.length)continue;
+   const a=p[i]!,b=p[(i+1)%p.length]!,c=p[j]!;
+   const determinant=(b[0]!-a[0]!)*(c[1]!-a[1]!)-(b[1]!-a[1]!)*(c[0]!-a[0]!);
+   const sign=determinant===0n?0:determinant>0n?1:-1;
+   if(!sign||(direction&&direction!==sign))return false;
+   direction=sign;
+  }
+  return true;
+ };
+ const tiny=2**-149,large=2**19;
+ const cases:Point[][]=[[[0,0],[1,1],[2,2]],[[-large,-large],[large,large],[tiny,0]],[[-large,-large],[tiny,0],[large,large]],[[0,0],[tiny,0],[0,tiny]]];
+ const [a,b,c]=cases[1]!;
+ assert.equal((b![0]-a![0])*(c![1]-a![1])-(b![1]-a![1])*(c![0]-a![0]),0,'ordinary double determinant loses this nonzero orientation');
+ assert.equal(oracle(cases[1]!),true);
+ let seed=0x51a77e;const buffer=new ArrayBuffer(4),view=new DataView(buffer);
+ const coordinate=()=>{for(;;){seed=(Math.imul(seed,1664525)+1013904223)>>>0;view.setUint32(0,seed);const value=view.getFloat32(0);if(Number.isFinite(value)&&Math.abs(value)<=1e6)return value;}};
+ for(let i=0;i<6000;i++)cases.push(Array.from({length:i<5000?3:4+i%5},()=>[coordinate(),coordinate()] as Point));
+ for(const points of cases){
+  const paths:FilledPath[]=[{data:'M'+points.map(p=>p.join(' ')).join('L')+'Z',windingRule:'NONE'}];
+  const expected=oracle(points);
+  assert.equal(filledPathsIssue(paths)===undefined,expected,paths[0]!.data);
+  assert.equal(portable(paths)===undefined,expected,paths[0]!.data+' sandbox');
+ }
+});
+
+test('scaled filled paths retain a painted parent plane on both React surfaces and native specs', async () => {
+  const c=contract(); c.props=[];
+  c.anatomy.root={declared:{position:'relative'},literals:{width:'24px',height:'24px','background-color':'#eebb88'},parts:{ink:{
+    literals:{'background-color':'#224466'},shape:{kind:'path',width:12,height:10,paths:[inset],parentViewport:{width:24,height:24,x:3,y:4}}
+  }}};
+  assert.deepEqual(errorsOf(c),[]);
+  const contracts=new Map([[c.id,c]]),icons=new Map(),tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+  const native=createFigmaEngine({tokens,icons}).compileComponentData(c,contracts).variants[0]!.spec;
+  assert.deepEqual(native.lits?.fillColor,{r:238/255,g:187/255,b:136/255});
+  assert.equal(native.scalablePathParent,true);
+  assert.deepEqual(native.children?.[0]?.absolute,{h:'MIN',v:'MIN',left:3,top:4});
+  Object.assign(c.anatomy.root!.literals!,{'padding-top':'0px','padding-right':'0px','padding-bottom':'0px','padding-left':'0px'});
+  const browser=await chromium.launch();
+  try {
+    for(const surface of ['module','inline'])for(const size of [24,48]) {
+      const code=surface==='module'?emitReact(c,{contracts,icons,tokens:new Set()}):{...emitReactInline(c,{contracts,icons,tokens}),css:''};
+      const page=await browser.newPage({viewport:{width:size,height:size}});
+      await mountGenerated(page,c.name,code.tsx,code.css);
+      await page.addStyleTag({content:`body{margin:0}#root>*{width:${size}px!important;height:${size}px!important}`});
+      const actual=PNG.sync.read(await page.screenshot());
+      await page.setContent(`<style>body{margin:0}</style><svg width="${size}" height="${size}" viewBox="0 0 24 24"><rect width="24" height="24" fill="#eebb88"/><path d="${inset.data}" transform="translate(3 4)" fill-rule="evenodd" fill="#224466"/></svg>`);
+      const expected=PNG.sync.read(await page.screenshot());
+      assert.deepEqual(actual.data,expected.data,`${surface} ${size}: background, scaled path and origin`);
+      await page.close();
+    }
+  } finally {await browser.close();}
+  const rejected=structuredClone(c);rejected.anatomy.root!.literals!['padding']='2px';
+  assert(errorsOf(rejected).some(e=>e.includes('filled-path-parent-channel-unsupported:padding')));
+});
+
+test('captured vector branches retain their own path bytes and never substitute for uncaptured geometry',()=>{
+ const variants=['Triangle','Inset','Uncaptured'].map((kind,i)=>({id:`2:${i}`,name:`Kind=${kind}`,variantProperties:{Kind:kind},type:'COMPONENT',absoluteBoundingBox:{x:0,y:0,width:20,height:20},children:[kind==='Uncaptured'?{...vector(),fillGeometry:undefined}:vector(kind==='Triangle'?triangle:inset)]}));
+ const input={name:'partition',nodes:{'1:1':{document:{id:'1:1',name:'PartitionProbe',type:'COMPONENT_SET',componentPropertyDefinitions:{Kind:{type:'VARIANT',defaultValue:'Triangle',variantOptions:['Triangle','Inset','Uncaptured']}},children:variants}}}};
+ const mapped=mapRestToDump(input as never),dump=mapped.dump.PartitionProbe as any,before=JSON.stringify(dump);
+ const p=proposeFromDump(dump,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true,stampsObservable:true});
+ assert.equal(JSON.stringify(dump),before);assert.equal(p.projection.status,'verified-exact');
+ const c=ContractSchema.parse(p.contract),tokens={primitives:p.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const compiled=createFigmaEngine({tokens,icons:new Map()}).compileComponentData(c,new Map([[c.id,c]]));
+ assert.equal(compiled.variants.length,3);
+ for(const row of compiled.variants){
+  const paths:unknown[]=[];const walk=(node:any)=>{if(node.shape?.kind==='path')paths.push(node.shape.paths);for(const child of node.children??[])walk(child);};walk(row.spec);
+  const expected=row.name.includes('Uncaptured')?[]:[row.name.includes('Triangle')?[triangle]:[inset]];
+  assert.deepEqual(paths,expected,row.name);
+ }
+ assert(mapped.report.degradations.some(d=>d.code==='vector-geometry-unsupported'));
+});
+
+ test('native path viewport preserves declared bounds independently of decimal path ink',()=>{
+ const c=contract(),part=c.anatomy.root.parts!.mark!;delete part.shape!.pathsByProp;part.shape!.height=10.000019;part.shape!.paths=[triangle];part.literals={...part.literals,opacity:'0.5'};
+ const before=JSON.stringify(c);const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+ const data=engine.compileComponentData(c,new Map([[c.id,c]]));assert.equal(JSON.stringify(c),before);
+ for(const variant of data.variants){const viewport=variant.spec.children![0];assert.equal(viewport.nativePathViewport,true);assert.equal(viewport.lits!.height,10.000019);assert.equal(viewport.opacity,0.5);assert.deepEqual(viewport.children![0].shape!.paths,[triangle]);assert(nativeFilledPathMatches(viewport.children![0].shape,[triangle],0,0));}
+ });
+
+
+test('filled path generated packages typecheck constant and prop-selected geometry',()=>{
+ for(const dynamic of [false,true])for(const name of ['PathProbe','Error']){
+  const c=contract();c.name=name;if(!dynamic)delete c.anatomy.root.parts!.mark!.shape!.pathsByProp;
+  const contracts=new Map([[c.id,c]]),icons=new Map<string,string>();
+  const tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+  for(const surface of ['module','inline']){
+   const out=surface==='module'?emitReact(c,{contracts,icons,tokens:new Set()}):emitReactInline(c,{contracts,icons,tokens});
+   assert.deepEqual(generatedTypeErrors(c.name,out.tsx),[],surface+' dynamic='+dynamic);
+  }
+ }
+});
+
+
+test('nested boolean visibility keeps unreachable geometry type-safe without changing rendered states', async () => {
+  const c = contract();
+  c.props.push({name:'checked',type:'boolean',default:false,bindings:{code:{prop:'checked'},figma:{kind:'BOOLEAN',property:'Checked'}}});
+  const mark = c.anatomy.root.parts!.mark!;
+  c.anatomy.root.parts = {outer:{visibleWhen:{prop:'checked'},parts:{
+    hidden:{...structuredClone(mark),visibleWhen:{prop:'checked',equals:false}},
+    shown:{...structuredClone(mark),visibleWhen:{prop:'checked',equals:true}},
+  }}};
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['module','inline']) {
+      const contracts = new Map([[c.id,c]]), icons = new Map<string,string>();
+      const tokens = {primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
+      const out = surface === 'module' ? emitReact(c,{contracts,icons,tokens:new Set()}) : {...emitReactInline(c,{contracts,icons,tokens}),css:''};
+      assert.deepEqual(generatedTypeErrors(c.name,out.tsx),[],surface);
+      const page = await browser.newPage();
+      try {
+        const render = await mountGenerated(page,c.name,out.tsx,out.css);
+        for (const checked of [false,true,false]) {
+          await render({checked,kind:'triangle'});
+          assert.equal(await page.locator('#root clipPath').count(),checked ? 1 : 0,surface);
+        }
       } finally { await page.close(); }
     }
   } finally { await browser.close(); }

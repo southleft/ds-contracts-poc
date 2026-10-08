@@ -1,0 +1,827 @@
+{
+  "rows": [
+    {
+      "id": "138:43562",
+      "paintId": "138:43563",
+      "inkId": "138:43564",
+      "variableId": "VariableID:138:43557",
+      "alpha": 0,
+      "backdrop": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "x": 0,
+      "y": 0,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43557"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43565",
+      "paintId": "138:43566",
+      "inkId": "138:43567",
+      "variableId": "VariableID:138:43557",
+      "alpha": 0,
+      "backdrop": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "x": 48,
+      "y": 0,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43557"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43568",
+      "paintId": "138:43569",
+      "inkId": "138:43570",
+      "variableId": "VariableID:138:43557",
+      "alpha": 0,
+      "backdrop": {
+        "r": 0.25,
+        "g": 0.75,
+        "b": 0.5
+      },
+      "x": 96,
+      "y": 0,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43557"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43571",
+      "paintId": "138:43572",
+      "inkId": "138:43573",
+      "variableId": "VariableID:138:43558",
+      "alpha": 9.999999747378752e-06,
+      "backdrop": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "x": 0,
+      "y": 48,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43558"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 9.999999747378752e-06
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43574",
+      "paintId": "138:43575",
+      "inkId": "138:43576",
+      "variableId": "VariableID:138:43558",
+      "alpha": 9.999999747378752e-06,
+      "backdrop": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "x": 48,
+      "y": 48,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43558"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 9.999999747378752e-06
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43577",
+      "paintId": "138:43578",
+      "inkId": "138:43579",
+      "variableId": "VariableID:138:43558",
+      "alpha": 9.999999747378752e-06,
+      "backdrop": {
+        "r": 0.25,
+        "g": 0.75,
+        "b": 0.5
+      },
+      "x": 96,
+      "y": 48,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 9.999999747378752e-06,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43558"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 9.999999747378752e-06
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43580",
+      "paintId": "138:43581",
+      "inkId": "138:43582",
+      "variableId": "VariableID:138:43559",
+      "alpha": 0.5,
+      "backdrop": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "x": 0,
+      "y": 96,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43559"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0.5
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43583",
+      "paintId": "138:43584",
+      "inkId": "138:43585",
+      "variableId": "VariableID:138:43559",
+      "alpha": 0.5,
+      "backdrop": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "x": 48,
+      "y": 96,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43559"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0.5
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43586",
+      "paintId": "138:43587",
+      "inkId": "138:43588",
+      "variableId": "VariableID:138:43559",
+      "alpha": 0.5,
+      "backdrop": {
+        "r": 0.25,
+        "g": 0.75,
+        "b": 0.5
+      },
+      "x": 96,
+      "y": 96,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 0.5,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43559"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0.5
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43589",
+      "paintId": "138:43590",
+      "inkId": "138:43591",
+      "variableId": "VariableID:138:43560",
+      "alpha": 1,
+      "backdrop": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "x": 0,
+      "y": 144,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43560"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 1
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43592",
+      "paintId": "138:43593",
+      "inkId": "138:43594",
+      "variableId": "VariableID:138:43560",
+      "alpha": 1,
+      "backdrop": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "x": 48,
+      "y": 144,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43560"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 1
+        },
+        "resolvedType": "COLOR"
+      }
+    },
+    {
+      "id": "138:43595",
+      "paintId": "138:43596",
+      "inkId": "138:43597",
+      "variableId": "VariableID:138:43560",
+      "alpha": 1,
+      "backdrop": {
+        "r": 0.25,
+        "g": 0.75,
+        "b": 0.5
+      },
+      "x": 96,
+      "y": 144,
+      "paint": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40,
+        "blendMode": "MULTIPLY",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.25,
+              "g": 0.5,
+              "b": 0.75
+            },
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:138:43560"
+              }
+            }
+          }
+        ]
+      },
+      "ink": {
+        "x": 12,
+        "y": 12,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 0,
+              "b": 0
+            },
+            "boundVariables": {}
+          }
+        ]
+      },
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 1
+        },
+        "resolvedType": "COLOR"
+      }
+    }
+  ],
+  "qualification": "Independent native bound paint-only layer; node MULTIPLY, bound NORMAL fill, foreground is a separate sibling. Synthetic primitive oracle, not component qualification.",
+  "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+  "parentId": "138:43561",
+  "png": "matrix.png",
+  "width": 136,
+  "height": 184,
+  "pngSHA256": "e876a607ad4285dc13ba47a4d6099bb673fbb63f3745c21fefa68fbf2b7df1b8"
+}

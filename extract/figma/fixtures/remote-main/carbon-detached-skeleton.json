@@ -1,0 +1,654 @@
+{
+  "setName": "_Accordion content skeleton base",
+  "detachedSnapshot": {
+    "kind": "detached-main-snapshot",
+    "captureFileKey": "A451UfD58U7XU21FzaqfHL",
+    "componentKey": "dfa671797be29953acf7e71ee8900e8a1a749af2",
+    "nodeId": "2464:17121",
+    "lookup": {
+      "nodeId": "2464:17121",
+      "componentKey": "dfa671797be29953acf7e71ee8900e8a1a749af2"
+    }
+  },
+  "type": "COMPONENT",
+  "nodeId": "2464:17121",
+  "key": "dfa671797be29953acf7e71ee8900e8a1a749af2",
+  "variants": [
+    {
+      "name": "_Accordion content skeleton base",
+      "type": "COMPONENT",
+      "nodeId": "2464:17121",
+      "bbox": {
+        "width": 161,
+        "height": 64
+      },
+      "layout": {
+        "mode": "VERTICAL",
+        "primary": "MIN",
+        "counter": "MIN",
+        "spacing": 8,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primarySizing": "FIXED",
+        "counterSizing": "FIXED"
+      },
+      "sourceEmptyFill": true,
+      "children": [
+        {
+          "name": "Skeleton line",
+          "type": "VECTOR",
+          "nodeId": "2464:17114",
+          "localGeometry": {
+            "nodeId": "2464:17114",
+            "parentId": "2464:17121",
+            "transform": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ]
+            ],
+            "localSize": {
+              "width": 161,
+              "height": 10
+            },
+            "parentSize": {
+              "width": 161,
+              "height": 64
+            }
+          },
+          "shape": {
+            "kind": "path",
+            "width": 161,
+            "height": 10,
+            "paths": [
+              {
+                "data": "M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z",
+                "windingRule": "NONE"
+              }
+            ]
+          },
+          "sourceNormalFillComposition": {
+            "paint": {
+              "color": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327
+              },
+              "opacity": 1,
+              "blendMode": "NORMAL"
+            },
+            "variableId": "VariableID:26071:295191"
+          },
+          "fill": {
+            "var": "Miscellaneous/skeleton-background"
+          },
+          "fillWidth": true,
+          "variableConsumers": {
+            "VariableID:26071:295191": {
+              "name": "Miscellaneous/skeleton-background",
+              "collectionId": "VariableCollectionId:25984:295101",
+              "modeId": "25984:0",
+              "modeName": "White Theme",
+              "resolvedType": "COLOR",
+              "value": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327,
+                "a": 1
+              },
+              "selectedValue": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285"
+              },
+              "aliasChain": [
+                {
+                  "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285",
+                  "name": "Hover/Gray/10",
+                  "collectionId": "VariableCollectionId:69b7aa2e44e7b7728743cc2db24cb498da0003af/4168:2272",
+                  "modeId": "4165:0",
+                  "modeName": "Value",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  },
+                  "selectedValue": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Skeleton line",
+          "type": "VECTOR",
+          "nodeId": "2464:17115",
+          "localGeometry": {
+            "nodeId": "2464:17115",
+            "parentId": "2464:17121",
+            "transform": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                18
+              ]
+            ],
+            "localSize": {
+              "width": 161,
+              "height": 10
+            },
+            "parentSize": {
+              "width": 161,
+              "height": 64
+            }
+          },
+          "shape": {
+            "kind": "path",
+            "width": 161,
+            "height": 10,
+            "paths": [
+              {
+                "data": "M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z",
+                "windingRule": "NONE"
+              }
+            ]
+          },
+          "sourceNormalFillComposition": {
+            "paint": {
+              "color": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327
+              },
+              "opacity": 1,
+              "blendMode": "NORMAL"
+            },
+            "variableId": "VariableID:26071:295191"
+          },
+          "fill": {
+            "var": "Miscellaneous/skeleton-background"
+          },
+          "fillWidth": true,
+          "variableConsumers": {
+            "VariableID:26071:295191": {
+              "name": "Miscellaneous/skeleton-background",
+              "collectionId": "VariableCollectionId:25984:295101",
+              "modeId": "25984:0",
+              "modeName": "White Theme",
+              "resolvedType": "COLOR",
+              "value": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327,
+                "a": 1
+              },
+              "selectedValue": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285"
+              },
+              "aliasChain": [
+                {
+                  "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285",
+                  "name": "Hover/Gray/10",
+                  "collectionId": "VariableCollectionId:69b7aa2e44e7b7728743cc2db24cb498da0003af/4168:2272",
+                  "modeId": "4165:0",
+                  "modeName": "Value",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  },
+                  "selectedValue": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Skeleton line",
+          "type": "VECTOR",
+          "nodeId": "2464:17116",
+          "localGeometry": {
+            "nodeId": "2464:17116",
+            "parentId": "2464:17121",
+            "transform": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                36
+              ]
+            ],
+            "localSize": {
+              "width": 161,
+              "height": 10
+            },
+            "parentSize": {
+              "width": 161,
+              "height": 64
+            }
+          },
+          "shape": {
+            "kind": "path",
+            "width": 161,
+            "height": 10,
+            "paths": [
+              {
+                "data": "M 0 0 L 161 0 L 161 10 L 0 10 L 0 0 Z",
+                "windingRule": "NONE"
+              }
+            ]
+          },
+          "sourceNormalFillComposition": {
+            "paint": {
+              "color": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327
+              },
+              "opacity": 1,
+              "blendMode": "NORMAL"
+            },
+            "variableId": "VariableID:26071:295191"
+          },
+          "fill": {
+            "var": "Miscellaneous/skeleton-background"
+          },
+          "fillWidth": true,
+          "variableConsumers": {
+            "VariableID:26071:295191": {
+              "name": "Miscellaneous/skeleton-background",
+              "collectionId": "VariableCollectionId:25984:295101",
+              "modeId": "25984:0",
+              "modeName": "White Theme",
+              "resolvedType": "COLOR",
+              "value": {
+                "r": 0.9098039269447327,
+                "g": 0.9098039269447327,
+                "b": 0.9098039269447327,
+                "a": 1
+              },
+              "selectedValue": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285"
+              },
+              "aliasChain": [
+                {
+                  "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285",
+                  "name": "Hover/Gray/10",
+                  "collectionId": "VariableCollectionId:69b7aa2e44e7b7728743cc2db24cb498da0003af/4168:2272",
+                  "modeId": "4165:0",
+                  "modeName": "Value",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  },
+                  "selectedValue": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Skeleton line",
+          "type": "FRAME",
+          "nodeId": "2464:17117",
+          "localGeometry": {
+            "nodeId": "2464:17117",
+            "parentId": "2464:17121",
+            "transform": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                54
+              ]
+            ],
+            "localSize": {
+              "width": 161,
+              "height": 10
+            },
+            "parentSize": {
+              "width": 161,
+              "height": 64
+            }
+          },
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "spacing": 0,
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "primarySizing": "FIXED",
+            "counterSizing": "AUTO"
+          },
+          "sourceEmptyFill": true,
+          "fillWidth": true,
+          "children": [
+            {
+              "name": "Skeleton line piece",
+              "type": "VECTOR",
+              "nodeId": "2464:17118",
+              "localGeometry": {
+                "nodeId": "2464:17118",
+                "parentId": "2464:17117",
+                "transform": [
+                  [
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0
+                  ]
+                ],
+                "localSize": {
+                  "width": 53.66666793823242,
+                  "height": 10
+                },
+                "parentSize": {
+                  "width": 161,
+                  "height": 10
+                }
+              },
+              "shape": {
+                "kind": "path",
+                "width": 53.66666793823242,
+                "height": 10,
+                "paths": [
+                  {
+                    "data": "M 0 0 L 53.66666793823242 0 L 53.66666793823242 10 L 0 10 L 0 0 Z",
+                    "windingRule": "NONE"
+                  }
+                ]
+              },
+              "sourceNormalFillComposition": {
+                "paint": {
+                  "color": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327
+                  },
+                  "opacity": 1,
+                  "blendMode": "NORMAL"
+                },
+                "variableId": "VariableID:26071:295191"
+              },
+              "fill": {
+                "var": "Miscellaneous/skeleton-background"
+              },
+              "fillWidth": true,
+              "variableConsumers": {
+                "VariableID:26071:295191": {
+                  "name": "Miscellaneous/skeleton-background",
+                  "collectionId": "VariableCollectionId:25984:295101",
+                  "modeId": "25984:0",
+                  "modeName": "White Theme",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  },
+                  "selectedValue": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285"
+                  },
+                  "aliasChain": [
+                    {
+                      "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285",
+                      "name": "Hover/Gray/10",
+                      "collectionId": "VariableCollectionId:69b7aa2e44e7b7728743cc2db24cb498da0003af/4168:2272",
+                      "modeId": "4165:0",
+                      "modeName": "Value",
+                      "resolvedType": "COLOR",
+                      "value": {
+                        "r": 0.9098039269447327,
+                        "g": 0.9098039269447327,
+                        "b": 0.9098039269447327,
+                        "a": 1
+                      },
+                      "selectedValue": {
+                        "r": 0.9098039269447327,
+                        "g": 0.9098039269447327,
+                        "b": 0.9098039269447327,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Skeleton line piece",
+              "type": "VECTOR",
+              "nodeId": "2464:17119",
+              "localGeometry": {
+                "nodeId": "2464:17119",
+                "parentId": "2464:17117",
+                "transform": [
+                  [
+                    1,
+                    0,
+                    53.66666793823242
+                  ],
+                  [
+                    0,
+                    1,
+                    0
+                  ]
+                ],
+                "localSize": {
+                  "width": 53.66666793823242,
+                  "height": 10
+                },
+                "parentSize": {
+                  "width": 161,
+                  "height": 10
+                }
+              },
+              "shape": {
+                "kind": "path",
+                "width": 53.66666793823242,
+                "height": 10,
+                "paths": [
+                  {
+                    "data": "M 0 0 L 53.66666793823242 0 L 53.66666793823242 10 L 0 10 L 0 0 Z",
+                    "windingRule": "NONE"
+                  }
+                ]
+              },
+              "sourceNormalFillComposition": {
+                "paint": {
+                  "color": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327
+                  },
+                  "opacity": 1,
+                  "blendMode": "NORMAL"
+                },
+                "variableId": "VariableID:26071:295191"
+              },
+              "fill": {
+                "var": "Miscellaneous/skeleton-background"
+              },
+              "fillWidth": true,
+              "variableConsumers": {
+                "VariableID:26071:295191": {
+                  "name": "Miscellaneous/skeleton-background",
+                  "collectionId": "VariableCollectionId:25984:295101",
+                  "modeId": "25984:0",
+                  "modeName": "White Theme",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 0.9098039269447327,
+                    "g": 0.9098039269447327,
+                    "b": 0.9098039269447327,
+                    "a": 1
+                  },
+                  "selectedValue": {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285"
+                  },
+                  "aliasChain": [
+                    {
+                      "id": "VariableID:a49b7c97a330141ee74af2e938facec6eeb32458/4168:2285",
+                      "name": "Hover/Gray/10",
+                      "collectionId": "VariableCollectionId:69b7aa2e44e7b7728743cc2db24cb498da0003af/4168:2272",
+                      "modeId": "4165:0",
+                      "modeName": "Value",
+                      "resolvedType": "COLOR",
+                      "value": {
+                        "r": 0.9098039269447327,
+                        "g": 0.9098039269447327,
+                        "b": 0.9098039269447327,
+                        "a": 1
+                      },
+                      "selectedValue": {
+                        "r": 0.9098039269447327,
+                        "g": 0.9098039269447327,
+                        "b": 0.9098039269447327,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Spacer",
+              "type": "VECTOR",
+              "nodeId": "2464:17120",
+              "localGeometry": {
+                "nodeId": "2464:17120",
+                "parentId": "2464:17117",
+                "transform": [
+                  [
+                    1,
+                    0,
+                    107.33333587646484
+                  ],
+                  [
+                    0,
+                    1,
+                    0
+                  ]
+                ],
+                "localSize": {
+                  "width": 53.66666793823242,
+                  "height": 10
+                },
+                "parentSize": {
+                  "width": 161,
+                  "height": 10
+                }
+              },
+              "shape": {
+                "kind": "path",
+                "width": 53.66666793823242,
+                "height": 10,
+                "paths": [
+                  {
+                    "data": "M 0 0 L 53.66666793823242 0 L 53.66666793823242 10 L 0 10 L 0 0 Z",
+                    "windingRule": "NONE"
+                  }
+                ]
+              },
+              "sourceFillComposition": {
+                "paint": {
+                  "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1
+                  },
+                  "opacity": 9.999999747378752e-06,
+                  "blendMode": "MULTIPLY"
+                },
+                "variableId": "VariableID:103532:4034"
+              },
+              "fill": {
+                "var": "Transparent",
+                "alpha": 9.999999747378752e-06
+              },
+              "fillWidth": true,
+              "variableConsumers": {
+                "VariableID:103532:4034": {
+                  "name": "Transparent",
+                  "collectionId": "VariableCollectionId:25984:295101",
+                  "modeId": "25984:0",
+                  "modeName": "White Theme",
+                  "resolvedType": "COLOR",
+                  "value": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1,
+                    "a": 9.999999747378752e-06
+                  },
+                  "selectedValue": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1,
+                    "a": 9.999999747378752e-06
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -6,18 +6,18 @@ import { projectRootTextTemplateAliases } from './figma-template-aliases.js';
 
 /** Bound typography requires corroborated consuming values. The reserved
  * compiler carrier projection additionally validates every selected edge. */
-export function validateRootTextTemplates(set: DumpSet, corpus: TokenCorpus, capturedValues?: Map<string, string>): { family: string; normalized?: DumpSet } {
+export function validateRootTextTemplates(set: DumpSet, corpus: TokenCorpus, capturedValues?: Map<string, string>, pathForName: (name: string) => string = name => name.replaceAll('/', '.')): { family: string; normalized?: DumpSet } {
   const projection = projectRootTextTemplateAliases(set);
   if (projection) set = projection.set;
   const fail = (why: string): never => { throw Error(`FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED: ${why}`); };
-  const fields = new Set(['name', 'type', 'hidden', 'text', 'fill', 'variableConsumers']);
+  const fields = new Set(['name', 'type', 'nodeId', 'hidden', 'text', 'fill', 'variableConsumers']);
   const textFields = new Set(['characters', 'fontSize', 'fontWeight', 'fontStyle', 'fontFamily', 'lineHeight', 'letterSpacing',
     'textAutoResize', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar', 'fillVar', 'textCase', 'textAlign']);
   const byName = new Map<string, string>(), modes = new Map<string, string>();
   let family: string | undefined, declared: string | undefined;
   const exact = (actual: unknown, expected: number) => actual === expected || actual === Math.fround(expected);
   const literal = (name: string): unknown => {
-    const path = name.replaceAll('/', '.');
+    const path = pathForName(name);
     if (capturedValues?.has(path)) return capturedValues.get(path);
     try { return corpus.resolveLiteral(path); } catch { return fail(`unresolved token ${name}`); }
   };
@@ -37,6 +37,7 @@ export function validateRootTextTemplates(set: DumpSet, corpus: TokenCorpus, cap
   for (const root of set.variants) {
     const node = root.children?.[0].children?.[0], t = node?.text;
     if (!node || !t || Object.keys(node).some(key => !fields.has(key)) || Object.keys(t).some(key => !textFields.has(key)) ||
+        (node.nodeId !== undefined && (typeof node.nodeId !== 'string' || !node.nodeId)) ||
         t.textAutoResize !== 'WIDTH_AND_HEIGHT' || !t.fontFamily?.trim() || !t.fontStyle?.trim() ||
         !Number.isFinite(t.fontSize) || t.fontSize <= 0 || !Number.isFinite(t.lineHeight) || t.lineHeight! <= 0 ||
         !Number.isFinite(t.letterSpacing) || !t.fontSizeVar || !t.fontWeightVar || !t.lineHeightVar || !t.fillVar ||

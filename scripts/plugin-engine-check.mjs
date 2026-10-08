@@ -57,6 +57,8 @@ import { createFigmaMock } from './plugin-engine-mock-figma.mjs';
 
 const ROOT = process.cwd();
 const read = (p) => readFileSync(path.join(ROOT, p), 'utf8');
+const dumpVersion = /export const PLUGIN_DUMP_VERSION = '([^']+)'/.exec(read('extract/figma/types.ts'))?.[1];
+if (!dumpVersion) throw new Error('Canonical plugin dump version is missing');
 const fail = (msg) => {
   console.error(`✖ plugin-engine-check: ${msg}`);
   process.exit(1);
@@ -542,8 +544,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
   assert(
-    dump._provenance && dump._provenance.dumpVersion === '1.48',
-    `dump v1.48: provenance dumpVersion is 1.48 (got ${dump._provenance && dump._provenance.dumpVersion})`,
+    dump._provenance && dump._provenance.dumpVersion === dumpVersion,
+    `dump provenance matches canonical version ${dumpVersion} (got ${dump._provenance && dump._provenance.dumpVersion})`,
   );
   assert(
     storedHash && dump.Badge.specHash === storedHash,
@@ -1301,9 +1303,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // 2026-08-22: 2144 → 2143 — the promoter's authored-facts ledger pruned the
   // orphan `imported.link.root.width` leaf (16889547 had unbound it by hand).
   // regen that shipped the node-opacity unbind; both paths still agree.
+  // 2026-10-07: 2143 → 2144 — authored MUI Label/Regular line height adds
+  // imported.text-field.label.line-height (23px), bound by TextField's label.
   assert(
-    mockA.variables.length === 2143 && mockB.variables.length === 2143,
-    `both paths land 2143 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2144 && mockB.variables.length === 2144,
+    `both paths land 2144 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
@@ -1312,6 +1316,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
   assert(namesA === namesB, 'bundle path ≡ script path on the full variable NAME inventory');
+  for (const [side, mock] of [['bundle', mockA], ['script', mockB]]) {
+    const labelHeight = mock.variables.filter((v) => v.name === 'imported/text-field/label/line-height');
+    assert(labelHeight.length === 1 && Object.values(labelHeight[0].valuesByMode).every((value) => value === 23),
+      `${side} carries the authored MUI label line height as one 23px variable`);
+  }
 
   // --- MUI REGEN ROUND (task #31) — REVIEW-THEN-REPIN -----------------------
   // Every counted number above (set shapes, variant grids, variable inventory,
@@ -1403,7 +1412,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2144 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------
@@ -1580,8 +1589,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       const buttonDump = await runIn(mockA, scopedButton);
       const rxNotes = (buttonDump._degradations || []).filter((d) => d.code === 'prototype-reactions-unsupported');
       assert(
-        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.48',
-        `dump v1.48: provenance dumpVersion is 1.48 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
+        buttonDump._provenance && buttonDump._provenance.dumpVersion === dumpVersion,
+        `dump provenance matches canonical version ${dumpVersion} (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
       );
       assert(
         rxNotes.length === wiringA.length,
@@ -2438,13 +2447,26 @@ return { ok: true };
     .slice(dumpStart + '<script type="text/plain" id="dump-source">'.length, uiSrc.indexOf('</script>', dumpStart))
     .replace(/^\n/, '')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['Badge'])};`);
-  const roDump = await runReadOnly(dumpSrc);
-  assert(roDump && roDump.Badge, 'the Send-tab dump — variables, resolveForConsumer and all — runs through the façade');
+  for (const priorVisibilityFlag of [false, true]) {
+    figma.skipInvisibleInstanceChildren = priorVisibilityFlag;
+    const roDump = await runReadOnly(dumpSrc);
+    assert(roDump && roDump.Badge, 'the Send-tab dump — variables, resolveForConsumer and all — runs through the façade');
+    assert(figma.skipInvisibleInstanceChildren === priorVisibilityFlag, 'successful canonical capture restores its traversal setting');
+    let missingRefusal;
+    try { await runReadOnly(dumpSrc.replace(/const TARGET_SETS = \[[^\n]*\];/, 'const TARGET_SETS = ["Missing read-only capture fixture"];')); }
+    catch (error) { missingRefusal = error; }
+    assert(missingRefusal && String(missingRefusal.message).includes('set(s) not found'), 'missing named capture scope refuses rather than becoming an empty success');
+    assert(figma.skipInvisibleInstanceChildren === priorVisibilityFlag, 'failed canonical capture also restores its traversal setting');
+  }
 
   // 2. every write REFUSES BY NAME.
   const refusals = [
     ['figma.createFrame()', 'const f = figma.createFrame(); return f;'],
     ['node.setSharedPluginData', "await figma.loadAllPagesAsync(); figma.root.children[0].setSharedPluginData('ds_contracts', 'x', 'y'); return 1;"],
+    ['runtime flag nonboolean assignment', 'figma.skipInvisibleInstanceChildren = 1; return 1;'],
+    ['runtime flag defineProperty', 'Object.defineProperty(figma, "skipInvisibleInstanceChildren", {value:false}); return 1;'],
+    ['runtime flag deletion', 'delete figma.skipInvisibleInstanceChildren; return 1;'],
+    ['node traversal-named assignment', 'figma.root.skipInvisibleInstanceChildren = false; return 1;'],
     ['property assignment', 'await figma.loadAllPagesAsync(); figma.root.children[0].name = "hacked"; return 1;'],
     ['node.remove()', "await figma.loadAllPagesAsync(); const n = figma.root.children[0].findAllWithCriteria({ types: ['COMPONENT_SET'] })[0]; n.remove(); return 1;"],
     ['figma.variables.createVariable', "figma.variables.createVariableCollection('x'); return 1;"],
@@ -2466,7 +2488,7 @@ return { ok: true };
   const after = await runScript(DSC.scanScriptSource());
   assert(
     JSON.stringify(after.inventory) === JSON.stringify(plainScan.inventory),
-    'after five refused writes the file is byte-identical — the guard blocked, it did not half-apply',
+    'after refused writes the file is byte-identical — the guard blocked, it did not half-apply',
   );
   // 4. the UI only ever asks for readOnly on scripts that read.
   const readOnlyCalls = (uiSrc.match(/readOnly:\s*true/g) || []).length;

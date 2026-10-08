@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {mintTokens,type MintObservation} from './mint-tokens.js';
+function fixture(count:number){const axes=Array.from({length:count},(_,i)=>({propName:'axis'+i,values:['a','b']}));let tuples:string[][]=[[]];for(const _ of axes)tuples=tuples.flatMap(t=>['a','b'].map(v=>[...t,v]));const occurrences=tuples.map((t,i)=>({variant:'row'+i,value:'#'+(i+1).toString(16).padStart(6,'0'),axisValues:Object.fromEntries(axes.map((a,j)=>[a.propName,t[j]]))}));const observation:MintObservation={nodePath:'Host/Mark',part:'mark',cssProperty:'color',kind:'color',compoundRefs:true,occurrences};return{axes,observation,realizedCombos:occurrences.map(o=>o.axisValues)};}
+test('compound receivers retain complete three- and four-axis colors; legacy nested maps still refuse',()=>{
+ for(const count of [3,4]){const f=fixture(count),run=(o:MintObservation)=>mintTokens('host',[o],f.axes,{nestedPairs:true,realizedCombos:f.realizedCombos});const r=run(f.observation);assert(r.bindings[0].ref);assert.equal(r.entries.length,2**count);assert.equal((r.bindings[0].ref!.match(/axis\d/g)??[]).length,count);assert.equal(run({...f.observation,compoundRefs:undefined}).bindings[0].ref,null);}
+});
+test('compound absence is complete, contradiction-free, order-independent and visibly distinguished from measurements',()=>{
+ for(const count of [3,4]){const f=fixture(count),absent=f.observation.occurrences.pop()!;f.observation.partAbsentCombos=[absent.axisValues];const run=(o=f.observation,combos=f.realizedCombos)=>mintTokens('host',[o],f.axes,{nestedPairs:true,realizedCombos:combos});const r=run();assert(r.bindings[0].ref);assert.match(r.bindings[0].caveat!,/1 cells are undrawn or explicitly part-absent/);assert.match(r.bindings[0].caveat!,/Supplied cells are not observations/);assert.deepEqual(run({...f.observation,occurrences:[...f.observation.occurrences].reverse()}).tree,r.tree);
+ for(const mutate of [(o:MintObservation)=>delete o.partAbsentCombos,(o:MintObservation)=>{o.partAbsentCombos=[{axis0:'b'}]},(o:MintObservation)=>o.partAbsentCombos!.push(o.occurrences[0].axisValues),(o:MintObservation)=>{o.occurrences.pop()},(o:MintObservation)=>{o.occurrences.push({...o.occurrences[0],value:'#ff0000'})}]){const o=structuredClone(f.observation);mutate(o);assert.equal(run(o).bindings[0].ref,null,String(mutate));}
+ assert.equal(run(f.observation,[...f.realizedCombos,{axis0:'unknown'}]).bindings[0].ref,null);
+ }
+});

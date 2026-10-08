@@ -16,6 +16,7 @@ export interface ReactElementInvocationPlan {
    * from a pinned React call or an observed call of the exact source callback. */
   argumentSource?:'react-call'|'source-call';
   identityName?:string;
+  identityCallback?:true;
   identityProperty?:{key:string;objectSpan:{start:number;end:number}};
   bindingReads?:ReactElementBindingRead[];
   /** Syntactic candidates in all branches, including calls and writes. */
@@ -57,8 +58,10 @@ export function readReactElementInvocationPlans(sf:ts.SourceFile,sites:readonly 
           (!e.propertyName||ts.isIdentifier(e.propertyName)||ts.isStringLiteral(e.propertyName)||ts.isNumericLiteral(e.propertyName)));
       const fromReact=flat&&(ts.isFunctionDeclaration(node)||ts.isFunctionExpression(node))&&node.name&&node.parameters.length<=2&&
         node.parameters.slice(1).every(p=>ts.isIdentifier(p.name));
+      const callback=flat&&(ts.isArrowFunction(node)||ts.isFunctionExpression(node)&&!node.name)&&
+        ts.isCallExpression(node.parent)&&node.parent.arguments.includes(node)&&node.parameters.length<=2&&node.parameters.slice(1).every(p=>ts.isIdentifier(p.name));
       const property=flat&&node.parameters.length===1?reactElementCallbackProperty(node,sf):undefined;
-      if(!direct&&!fromReact&&!property){ts.forEachChild(node,scan);return;}
+      if(!direct&&!fromReact&&!property&&!callback){ts.forEachChild(node,scan);return;}
       let unmodeled=false;
       const check=(n:ts.Node)=>{
         // A nested function declaration can change hoisting in a new try block.
@@ -79,7 +82,7 @@ export function readReactElementInvocationPlans(sf:ts.SourceFile,sites:readonly 
         const {reads,effects}=closures(node);
         if(reads.length>10000||effects.length>10000)throw Error('element-closure-site-limit');
         plans.push({module:site.module,sourceSha256:site.sourceSha256,span:site.functionSpan!,parameters:node.parameters.map(p=>({name:ts.isIdentifier(p.name)?p.name.text:p.name.getText(sf),start:p.getStart(sf),end:p.end})),
-          ...(fromReact?{argumentSource:'react-call' as const,identityName:node.name!.text}:property?{argumentSource:'source-call' as const,identityProperty:property}:{}),bindingReads:reads,effectSites:effects,operations:readReactElementOperations(node,sf,reads)});
+          ...(callback?{argumentSource:'react-call' as const,identityCallback:true as const}:fromReact?{argumentSource:'react-call' as const,identityName:node.name!.text}:property?{argumentSource:'source-call' as const,identityProperty:property}:{}),bindingReads:reads,effectSites:effects,operations:readReactElementOperations(node,sf,reads)});
       }
     }
     ts.forEachChild(node,scan);
@@ -181,7 +184,7 @@ export function transformReactElementSource(sf:ts.SourceFile,sites:readonly (Rea
         const statements=ts.isBlock(updated.body)?[...updated.body.statements]:[f.createReturnStatement(api('returned',[frame,updated.body]))];
         let directives=0;while(directives<statements.length&&ts.isExpressionStatement(statements[directives])&&ts.isStringLiteral((statements[directives] as ts.ExpressionStatement).expression))directives++;
         const entry=plan.argumentSource==='react-call'
-          ?api('enterReact',[f.createNumericLiteral(plan.index),f.createIdentifier(plan.identityName!)])
+          ?api('enterReact',[f.createNumericLiteral(plan.index),...(plan.identityCallback?[]:[f.createIdentifier(plan.identityName!)])])
           :plan.argumentSource==='source-call'?api('enterSource',[f.createNumericLiteral(plan.index)])
           :api('enter',[f.createNumericLiteral(plan.index),f.createArrayLiteralExpression(plan.parameters.map(p=>f.createIdentifier(p.name)))]);
         const declaration=f.createVariableStatement(undefined,f.createVariableDeclarationList([f.createVariableDeclaration(frame,undefined,undefined,entry)],ts.NodeFlags.Const));
@@ -192,6 +195,7 @@ export function transformReactElementSource(sf:ts.SourceFile,sites:readonly (Rea
         else if(ts.isFunctionExpression(updated))updated=f.updateFunctionExpression(updated,updated.modifiers,updated.asteriskToken,updated.name,updated.typeParameters,updated.parameters,updated.type,body);
         else updated=f.updateArrowFunction(updated,updated.modifiers,updated.typeParameters,updated.parameters,updated.type,updated.equalsGreaterThanToken,body);
       }
+      if(plan?.identityCallback&&(ts.isArrowFunction(updated)||ts.isFunctionExpression(updated)))updated=api('registerReactCallback',[f.createNumericLiteral(plan.index),updated]);
       return updated;
     };return node=>ts.visitNode(node,n=>visit(n,undefined)) as ts.SourceFile;
   }]);
@@ -202,6 +206,7 @@ export function transformReactElementSource(sf:ts.SourceFile,sites:readonly (Rea
  * not absence of deep child mutation, unmodeled effects or caller-slot safety. */
 export const reactElementInvocationRuntime=`(plans,provenance,sources)=>{
  const N={keys:Reflect.ownKeys,descriptors:Object.getOwnPropertyDescriptors,descriptor:Object.getOwnPropertyDescriptor,prototype:Object.getPrototypeOf,is:Object.is,hasOwn:Object.prototype.hasOwnProperty,apply:Reflect.apply,finite:Number.isFinite,nan:Number.isNaN};
+ const callbackPlans=new WeakMap(),callbackSet=WeakMap.prototype.set,callbackGet=WeakMap.prototype.get;
  const objectPrototype=Object.prototype,stack=[],reactStack=[];let serial=0,readCount=0,reactSerial=0;
  const has=(o,k)=>N.apply(N.hasOwn,o,[k]);
  const data=value=>{
@@ -246,12 +251,17 @@ export const reactElementInvocationRuntime=`(plans,provenance,sources)=>{
    catch(error){call.threw=true;throw error;}
    finally{call.finished=true;reactStack.pop();}
   },
+  registerReactCallback(index,fn){
+   if(!plans[index]?.identityCallback||typeof fn!=='function')throw Error('element-react-callback-plan-mismatch');
+   if(N.apply(callbackGet,callbackPlans,[fn])!==undefined)throw Error('element-react-callback-already-registered');
+   N.apply(callbackSet,callbackPlans,[fn,index]);return fn;
+  },
   enterReact(index,fn){
    const plan=plans[index];if(!plan||plan.argumentSource!=='react-call')throw Error('element-react-plan-mismatch');
    // Flat parameter bindings over known plain React props cannot invoke a user
    // getter/default/computed key before the body claims this call. Unknown
    // inputs and more complex patterns therefore cannot borrow an outer call.
-   const call=reactStack[reactStack.length-1],valid=call&&call.fn===fn&&!call.claimed&&call.before;
+   const call=reactStack[reactStack.length-1],valid=call&&(plan.identityCallback?N.apply(callbackGet,callbackPlans,[call.fn])===index:call.fn===fn)&&!call.claimed&&call.before;
    const args=valid?call.args.slice(0,plan.parameters.length):plan.parameters.map(()=>undefined);
    const frame=api.enter(index,args,valid?call:undefined);
    if(valid){call.claimed=true;frame.react=call;frame.before=call.before;}

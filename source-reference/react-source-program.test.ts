@@ -6,7 +6,12 @@ import { tmpdir } from "node:os";
 import { runInNewContext } from "node:vm";
 import * as React from "react";
 import ts from "typescript";
-import { readReactHelperEffects, readReactComponentEffects, reactHelperCandidates } from "./react-helper-effects.js";
+import { createHash } from "node:crypto";
+import { instrumentReactHelperSource, helperPointKey } from "./react-helper-instrument.js";
+import { reactHelperBindingGuard } from "./react-helper-binding-runtime.js";
+import { reactHelperIntrinsicGuard } from "./react-helper-intrinsics.js";
+import { reactHelperRuntimeHook, reactHelperRuntimeRead } from "./react-helper-runtime.js";
+import { readReactHelperEffects, readReactComponentEffects, reactHelperCandidates, prepareReactEffectProgram } from "./react-helper-effects.js";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
@@ -21,6 +26,170 @@ export function Toggle(props:Parameters<typeof Primitive.Root>[0]) {return <Prim
 export function Action({asChild=false,...props}:{asChild?:boolean;disabled?:boolean}) {const Comp=asChild?Primitive.Root:'button';return <Comp data-slot="action" {...props}/>;}
 export function Box(props:{children?:string}) {const div='button';return <div {...props}><Action/></div>;}
 `;
+
+test('failed provider-pop observations permit native cleanup but permanently refuse the run', () => fixture(dir => {
+  writeFileSync(path.join(dir,'components.tsx'),`import './primitive';
+function normalize(props:{children?:unknown}){return {...props};}
+export function Control(props:{children?:unknown}){const {children,...rest}=normalize(props);return <button {...rest}>{children}</button>;}`);
+  const program=readReactSourceProgram(dir,['components.tsx']);
+  const candidate=program.components.find(c=>c.exportName==='Control')!.helperCandidates![0];
+  const model=readReactHelperEffects({sourceRoot:dir,files:program.files},'components.tsx',candidate,{children:'caller'});
+  assert.equal(model.status,'modeled');if(model.status!=='modeled')return;
+  for(const tamper of [false,true]) {
+    const result=runInNewContext(`${reactHelperRuntimeHook([model])}
+      (()=>{
+        const api=globalThis.__DSC_RUNTIME_PROOF;
+        const context={$$typeof:Symbol.for('react.context'),_currentValue:'default',_currentValue2:'default'};
+        context.Provider=context;context.Consumer={$$typeof:Symbol.for('react.consumer'),_context:context};
+        api.contextCreated(context);
+        const original=Array.prototype.push;
+        if(${tamper})Array.prototype.push=function(){throw Error('substituted push called');};
+        let cleaned=false,ordinaryRefused=false;
+        api.contextPop(context,{});cleaned=true;
+        try{api.contextAccess(context);}catch{ordinaryRefused=true;}
+        Array.prototype.push=original;
+        const first=${reactHelperRuntimeRead};
+        api.contextPop(context,{});
+        const second=${reactHelperRuntimeRead};
+        return {cleaned,ordinaryRefused,first,second};
+      })()`);
+    assert.equal(result.cleaned,true);
+    assert.equal(result.ordinaryRefused,tamper,'only cleanup suppresses an observer exception');
+    assert.equal(result.first.status,'refused');
+    assert.equal(result.second.status,'refused');
+    assert.equal(result.first.reason,result.second.reason,'cleanup cannot clear or replace the first refusal');
+  }
+}));
+
+test('compiled containing functions bind original createElement calls and preserve children precedence', () => fixture(dir => {
+  for(const [expression,secondary,accepted] of [
+    ["React.createElement('span',{...rest,children,key:'chosen',__source:'debug'})",'',true],
+    ["React.createElement('span',{...rest,children:'replaced'},children)",'',true],
+    ["React.createElement('span',null,'prefix',children)",'',true],
+    ["React.createElement('span',{children})",',React',false],
+    ["React.createElement('span',{title:children})",'',false],
+  ] as const) {
+    const text=`import * as React from 'react';function normalize(props){return {...props};}
+export function Control(props${secondary}){const {children,...rest}=normalize(props);return ${expression};}`;
+    const file=path.join(dir,'component.js');writeFileSync(file,text);
+    const reference={sourceRoot:dir,files:{[realpathSync(file)]:createHash('sha256').update(text).digest('hex')}};
+    const {sf,checker}=prepareReactEffectProgram(reference,'component.js',{},{});
+    const component=sf.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='Control') as ts.FunctionDeclaration;
+    const candidate=reactHelperCandidates(component,checker)[0];
+    const result=readReactComponentEffects(reference,'component.js',candidate,{children:'caller'});
+    assert.equal(result.status,accepted?'modeled':'refused',JSON.stringify(result));
+    if(result.status==='modeled') {
+      assert.equal(result.output.kind,'jsx');
+      if(result.output.kind==='jsx'&&result.output.props.kind==='record') {
+        const fields=new Map(result.output.props.fields);
+        assert.ok(fields.has('children'));
+        assert.ok(!fields.has('key')&&!fields.has('__source'));
+        assert.equal(result.output.key,expression.includes("key:'chosen'")?'chosen':null);
+        assert.deepEqual(fields.get('children'),expression.includes("null,'prefix'")
+          ? {kind:'array',items:[{kind:'literal',type:'string',value:'prefix'},{kind:'opaque'}]} : {kind:'opaque'});
+      }
+      assert.equal(result.runtimeVerified,false);
+      assert.equal(result.acceptedContract,null);
+    }
+  }
+}));
+
+test('comma expressions preserve ordered effects and opaque content while refusing unsafe operands', () => fixture(dir => {
+  for(const [body,reason] of [
+    ["const output={...input};return (output.className='first',output.className=output.className+' second',input.children,output);",null],
+    ["return {...input,className:(1=='1' && null==undefined && 1!='2' && !(0!=false))?'first second':'wrong'};",null],
+    ["return (input.children='changed',{...input});",'external-data-write'],
+    ["return (input.children.length,{...input});",'opaque-content-inspected'],
+    ["return (input.children==null,{...input});",'opaque-content-inspected'],
+    ["return ({}==0,{...input});",'object-coercion-unproved'],
+    ["return ({...input},{...input,children:'changed'});",'helper-content-not-preserved'],
+  ] as const) {
+    writeFileSync(path.join(dir,'components.tsx'),`import './primitive';
+function normalize(input:{children?:unknown;className?:string}){${body}}
+export function Control(props:{children?:unknown;className?:string}){const {children,...rest}=normalize(props);return <button {...rest}>{children}</button>;}`);
+    const program=readReactSourceProgram(dir,['components.tsx']);
+    const candidate=program.components.find(c=>c.exportName==='Control')!.helperCandidates![0];
+    const effects=readReactHelperEffects({sourceRoot:dir,files:program.files},'components.tsx',candidate,{children:'caller'});
+    assert.equal(effects.status,reason?'refused':'modeled',JSON.stringify(effects));
+    if(effects.status==='refused')assert.equal(effects.reason,reason);
+    else {
+      assert.deepEqual(effects.output,{kind:'record',fields:[['children',{kind:'opaque'}],['className',{kind:'literal',type:'string',value:'first second'}]]});
+      assert.equal(effects.runtimeVerified,false);
+      assert.equal(effects.acceptedContract,null);
+    }
+  }
+}));
+
+test('helper named imports use witnessed executable reexports rather than declarations', () => fixture(dir => {
+  writeFileSync(path.join(dir, 'components.tsx'), `import {normalize as helper, metadata} from './barrel.js';
+export function Control(props:{children?:unknown}) {const {children,...rest}=helper(props,metadata);return <button {...rest}>{children}</button>;}`);
+  writeFileSync(path.join(dir, 'barrel.d.ts'), 'export declare function normalize(input:any,metadata:any):any; export declare const metadata:any;');
+  writeFileSync(path.join(dir, 'barrel.js'), "export {normalize, metadata} from './impl.js';");
+  writeFileSync(path.join(dir, 'impl.js'), "export const metadata={prefix:'actual'}; export function normalize(input,metadata){return {...input,className:metadata.prefix};}");
+  const program = readReactSourceProgram(dir, ['components.tsx']);
+  const candidate = program.components.find(c => c.exportName === 'Control')!.helperCandidates![0];
+  const file = (name:string) => realpathSync(path.join(dir,name));
+  const files = {...program.files};
+  for (const name of ['barrel.js','impl.js']) files[file(name)] = createHash('sha256').update(readFileSync(file(name))).digest('hex');
+  const runtimeImports = [
+    {importer:file('components.tsx'),specifier:'./barrel.js',file:file('barrel.js')},
+    {importer:file('barrel.js'),specifier:'./impl.js',file:file('impl.js')},
+  ];
+  const reference = {sourceRoot:dir,files,runtimeImports};
+  const effects = readReactHelperEffects(reference,'components.tsx',candidate,{children:'caller'});
+  assert.equal(effects.status,'modeled',JSON.stringify(effects));
+  assert.equal(effects.runtimeVerified,false);
+  assert.equal(effects.acceptedContract,null);
+  assert.equal(effects.instrumentation?.metadata[0]?.file,'impl.js');
+  if(effects.status==='modeled') {
+    assert.deepEqual(effects.output,{kind:'record',fields:[['children',{kind:'opaque'}],['className',{kind:'literal',type:'string',value:'actual'}]]});
+    assert.ok(effects.runtimeBindings.bindings.some(b=>b.declarationKind==='ImportSpecifier'));
+    assert.ok(effects.callSite);
+    const helper=effects.calls.find(c=>c.site&&helperPointKey(c.site)===helperPointKey(effects.callSite!))!.source;
+    const plan={models:[effects],call:effects.callSite!,helper,metadata:[]};
+    const modules=Object.fromEntries(['impl.js','barrel.js','components.tsx'].map(name=>[name,
+      ts.transpileModule(instrumentReactHelperSource(readFileSync(file(name),'utf8'),name,plan),
+        {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.React}}).outputText]));
+    const imported=effects.runtimeBindings.bindings.find(b=>b.declarationKind==='ImportSpecifier')!;
+    for(const missing of [null,helperPointKey(imported.binding)]) {
+      const report=runInNewContext(`(() => {
+        const literals=new WeakSet();
+        const guard=(${reactHelperBindingGuard})(${JSON.stringify([effects])},${reactHelperIntrinsicGuard},value=>literals.has(value));
+        let calls=0;
+        globalThis.__DSC_RUNTIME_PROOF={sourceFunction:guard.sourceFunction,sourceCall:guard.sourceCall,
+          binding:(key,get)=>{if(key!==${JSON.stringify(missing)})guard.binding(key,get);},registerHelper:()=>{},
+          invoke:(fn,args)=>{guard.check(0);calls++;return guard.run(0,fn,args);}};
+        globalThis.React={createElement:(tag,props,...children)=>({tag,props,children})};
+        const sources=${JSON.stringify(modules)},cache={};
+        function load(name){name=name.replace(/^\\.\\//,'');if(cache[name])return cache[name];const exports=cache[name]={};new Function('exports','require',sources[name])(exports,load);return exports;}
+        const control=load('components.tsx');
+        // This fixture has one original metadata literal. The production
+        // observer must independently establish compiler literal provenance.
+        literals.add(load('impl.js').metadata);let reason;
+        try{control.Control({children:'caller'});}catch(error){reason=error.message;}
+        if(${JSON.stringify(missing)}!==null)return {reason,calls};
+        if(reason)throw Error(reason);
+        load('impl.js').metadata.prefix='changed';
+        try{control.Control({children:'caller'});}catch(error){reason=error.message;}
+        return {reason,calls};
+      })()`);
+      assert.equal(report.calls,missing?0:1);
+      assert.match(report.reason,/^helper-binding-/);
+      if(missing)assert.equal(report.reason,'helper-binding-registration-missing');
+    }
+  }
+  for (const name of ['barrel.js','impl.js']) assert.equal(effects.sourceFiles[file(name)],files[file(name)]);
+  for(const edges of [[],runtimeImports.slice(0,1),[...runtimeImports,{...runtimeImports[0],file:file('impl.js')}]]) {
+    const refused=readReactHelperEffects({...reference,runtimeImports:edges},'components.tsx',candidate,{children:'caller'});
+    assert.equal(refused.status,'refused');
+  }
+  writeFileSync(file('impl.js'), "export const metadata={prefix:'actual'}; export function normalize(input,metadata){return {...input,children:'replaced'};}");
+  assert.equal(readReactHelperEffects(reference,'components.tsx',candidate,{children:'caller'}).status,'refused');
+  files[file('impl.js')]=createHash('sha256').update(readFileSync(file('impl.js'))).digest('hex');
+  const replacement=readReactHelperEffects(reference,'components.tsx',candidate,{children:'caller'});
+  assert.equal(replacement.status,'refused');
+  if(replacement.status==='refused') assert.equal(replacement.reason,'helper-content-not-preserved');
+}));
 
 test('helper candidates remain unresolved source facts while contextual effects retain opaque content', () => fixture(dir => {
   const code = `import './primitive';
@@ -1300,4 +1469,48 @@ export function Control(props:Input,ref?:any){${item.body}}`;
     }
     check(result.output,actual);
   }
+}));
+
+test('helper rest bindings nominate content candidates without asserting forwarding', () => {
+  const file = path.join(mkdtempSync(path.join(tmpdir(),'helper-rest-candidate-')), 'entry.ts');
+  try {
+    writeFileSync(file, `declare function helper(value:unknown):any;
+      export function Rest(props:any) { const {className,...rest}=helper(props); return rest; }
+      export function Explicit(props:any) { const {children,...rest}=helper(props); return rest; }
+      export function Other(props:any) { const other={}; const {...rest}=helper(other); return rest; }
+      export function Default(props:any={}) { const {...rest}=helper(props); return rest; }`);
+    const program=ts.createProgram([file],{target:ts.ScriptTarget.ESNext,noLib:true}),checker=program.getTypeChecker(),sf=program.getSourceFile(file)!;
+    const candidates=Object.fromEntries(sf.statements.filter(ts.isFunctionDeclaration).filter(fn=>fn.body).map(fn=>[fn.name!.text,reactHelperCandidates(fn,checker)]));
+    assert.equal(candidates.Rest.length,1);
+    assert.equal(candidates.Explicit.length,1,'one call is nominated once');
+    assert.equal(candidates.Other.length,0,'an unrelated object is not the component input');
+    assert.equal(candidates.Default.length,0,'defaulted parameters need separate modeling');
+    assert.equal(candidates.Rest[0].contentKey,'children');
+  } finally { rmSync(path.dirname(file),{recursive:true,force:true}); }
+});
+
+test('primitive helper switches preserve strict matching, default search, fallthrough, break and return',()=>fixture(dir=>{
+  for(const [input,body] of [
+    ['a',`let result='';switch(input.kind){case 'a':result=result+'A';case 'b':result=result+'B';break;default:result='D';}return {...input,className:result};`],
+    ['b',`let result='';switch(input.kind){case 'a':result='A';break;default:result='D';case 'b':result=result+'B';}return {...input,className:result};`],
+    ['x',`let result='';switch(input.kind){case 'a':result='A';break;default:result='D';case 'b':result=result+'B';}return {...input,className:result};`],
+    [1,`switch(input.kind){case '1':return {...input,className:'string'};case 1:return {...input,className:'number'};default:return {...input,className:'default'};}`],
+    ['z',`let result='none';switch(input.kind){case 'a':result='a';}return {...input,className:result};`],
+  ] as const){
+    const code=`import './primitive';type Input={children?:unknown;kind?:string|number};function normalize(input:Input){${body}}export function Control(props:Input){const {children,...rest}=normalize(props);return <button {...rest}>{children}</button>;}`;
+    writeFileSync(path.join(dir,'components.tsx'),code);const program=readReactSourceProgram(dir,['components.tsx']);const candidate=program.components.find(c=>c.exportName==='Control')!.helperCandidates![0];
+    const result=readReactHelperEffects({sourceRoot:dir,files:program.files},'components.tsx',candidate,{children:'original',kind:input});assert.equal(result.status,'modeled',JSON.stringify(result));
+    const actual=runInNewContext(`(function(input){${body}})({children:'original',kind:${JSON.stringify(input)}})`);
+    if(result.status==='modeled'){assert.equal(result.output.kind,'record');if(result.output.kind==='record'){assert.deepEqual(result.output.fields.find(([k])=>k==='children')?.[1],{kind:'opaque'});assert.deepEqual(result.output.fields.find(([k])=>k==='className')?.[1],{kind:'literal',type:'string',value:actual.className});}}
+  }
+}));
+test('helper switches refuse opaque content inspection and unresolved cross-case lexical bindings',()=>fixture(dir=>{
+ for(const [body,reason] of [
+  [`switch(input.children){case 'a':break;}return {...input};`,'opaque-content-inspected'],
+  [`switch(input.kind){case 'a':const value='a';return {...input,className:value};default:return {...input};}`,'switch-lexical-scope-unmodeled'],
+  [`switch(input.kind){case 'a':return {...input,children:'changed'};default:return {...input};}`,'helper-content-not-preserved'],
+ ]){
+  writeFileSync(path.join(dir,'components.tsx'),`import './primitive';type Input={children?:unknown;kind?:string};function normalize(input:Input){${body}}export function Control(props:Input){const {children,...rest}=normalize(props);return <button {...rest}>{children}</button>;}`);
+  const program=readReactSourceProgram(dir,['components.tsx']);const candidate=program.components.find(c=>c.exportName==='Control')!.helperCandidates![0];const result=readReactHelperEffects({sourceRoot:dir,files:program.files},'components.tsx',candidate,{children:'original',kind:'a'});assert.equal(result.status,'refused');if(result.status==='refused')assert.equal(result.reason,reason);
+ }
 }));

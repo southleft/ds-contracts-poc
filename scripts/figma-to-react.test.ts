@@ -12,6 +12,50 @@ import type { Verdicts } from './design-consumer-verdict.js';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dump = path.join(repo, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
 
+test('the normal React package path carries sparse tuples and rejects every undrawn combination at runtime', async t => {
+  const out = mkdtempSync(path.join(tmpdir(), 'figma-sparse-package-'));
+  t.after(() => rmSync(out, { recursive: true, force: true }));
+  const tuples = [
+    { Tone: 'A', Size: 'Small', Shape: 'Round' },
+    { Tone: 'B', Size: 'Small', Shape: 'Round' },
+    { Tone: 'A', Size: 'Large', Shape: 'Square' },
+  ];
+  const source = path.join(out, 'dump.json');
+  writeFileSync(source, JSON.stringify({ _provenance: { stampsObservable: true }, SparsePackage: {
+    setName: 'SparsePackage', type: 'COMPONENT_SET', propertyDefinitions: {
+      Tone: { type: 'VARIANT', defaultValue: 'A', variantOptions: ['A', 'B'] },
+      Size: { type: 'VARIANT', defaultValue: 'Small', variantOptions: ['Small', 'Large'] },
+      Shape: { type: 'VARIANT', defaultValue: 'Round', variantOptions: ['Round', 'Square'] },
+    },
+    variants: tuples.map(tuple => ({ name: Object.entries(tuple).map(([k,v]) => `${k}=${v}`).join(', '),
+      variantProperties: tuple, type: 'COMPONENT', bbox: { width: 20, height: 20 }, children: [] })),
+  } }));
+  const result = await figmaToReact(source, path.join(out, 'package'));
+  const request = JSON.parse(readFileSync(path.join(out, 'package', 'request.json'), 'utf8'));
+  const contract = request.contracts.find((c: { id: string }) => c.id === request.rootId);
+  assert.equal(contract.bindings.figma.drawnVariants.length, 3);
+  assert(result.notes.some(n => n.includes('DRAWN_VARIANT_UNDECLARED')));
+  const { buildSync } = await import('esbuild');
+  const { createRequire } = await import('node:module');
+  const { runInNewContext } = await import('node:vm');
+  const React = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const code = buildSync({ entryPoints: [path.join(result.generatedDir, result.component, result.component + '.tsx')],
+    bundle: true, jsx: 'automatic', write: false, format: 'cjs', platform: 'node',
+    external: ['react', 'react/jsx-runtime'], loader: { '.css': 'empty', '.module.css': 'empty' }, logLevel: 'silent' }).outputFiles[0].text;
+  const module = { exports: {} as Record<string, React.ComponentType<Record<string, string>>> };
+  runInNewContext(code, { module, exports: module.exports, require: createRequire(import.meta.url) });
+  let accepted = 0, rejected = 0;
+  for (const tone of ['a', 'b']) for (const size of ['small', 'large']) for (const shape of ['round', 'square']) {
+    const props = { tone, size, shape };
+    const drawn = contract.bindings.figma.drawnVariants.some((row: typeof props) => Object.entries(props).every(([k,v]) => row[k as keyof typeof row] === v));
+    const render = () => renderToStaticMarkup(React.createElement(module.exports[result.component], props));
+    if (drawn) { assert.doesNotThrow(render); accepted++; }
+    else { assert.throws(render, (e: unknown) => (e as { code?: string }).code === 'DRAWN_VARIANT_UNDECLARED'); rejected++; }
+  }
+  assert.deepEqual({ accepted, rejected }, { accepted: 3, rejected: 5 });
+});
+
 test('a user-chosen package name reaches the packed package.json; an invalid one refuses by name', async t => {
   const out = mkdtempSync(path.join(tmpdir(), 'figma-to-react-'));
   t.after(() => rmSync(out, { recursive: true, force: true }));

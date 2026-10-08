@@ -1,0 +1,539 @@
+{
+  "sourceFileKey": "ZQKD6XLG7mzarvkRnmpHCM",
+  "nodeId": "854:34261",
+  "recorded": "2026-10-04",
+  "originalResponseHashes": {
+    "before": "2aa6b78014c1d14fd9268ee432060d2c1a778dd597c1961e0df916d142368974",
+    "after": "2aa6b78014c1d14fd9268ee432060d2c1a778dd597c1961e0df916d142368974"
+  },
+  "before": {
+    "version": "2404408407624006950",
+    "lastModified": "2026-09-28T22:04:36Z",
+    "nodes": {
+      "854:34261": {
+        "document": {
+          "id": "854:34261",
+          "name": "size=9, weight=bold, highContrast=true",
+          "type": "COMPONENT",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "paddingLeft": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:605:3226"
+            },
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:602:2844"
+              }
+            ]
+          },
+          "children": [
+            {
+              "id": "854:34262",
+              "name": "Text",
+              "type": "TEXT",
+              "scrollBehavior": "SCROLLS",
+              "componentPropertyReferences": {
+                "characters": "✏️ text#800:6"
+              },
+              "boundVariables": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:602:2913"
+                  }
+                ],
+                "lineHeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69865"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69856"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1328:69688"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69844"
+                  }
+                ],
+                "fontStyle": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69878"
+                  }
+                ]
+              },
+              "blendMode": "PASS_THROUGH",
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.10980392247438431,
+                    "g": 0.125490203499794,
+                    "b": 0.1411764770746231,
+                    "a": 1
+                  },
+                  "boundVariables": {
+                    "color": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:602:2913"
+                    }
+                  }
+                }
+              ],
+              "strokes": [],
+              "strokeWeight": 1,
+              "strokeAlign": "OUTSIDE",
+              "absoluteBoundingBox": {
+                "x": -1101.5,
+                "y": 376,
+                "width": 114,
+                "height": 60
+              },
+              "absoluteRenderBounds": {
+                "x": -1100.09375,
+                "y": 384.724609375,
+                "width": 110.65545654296875,
+                "height": 42.919921875
+              },
+              "constraints": {
+                "vertical": "TOP",
+                "horizontal": "LEFT"
+              },
+              "layoutAlign": "INHERIT",
+              "layoutGrow": 0,
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG",
+              "characters": "Text",
+              "characterStyleOverrides": [],
+              "styleOverrideTable": {},
+              "lineTypes": [
+                "NONE"
+              ],
+              "lineIndentations": [
+                0
+              ],
+              "style": {
+                "fontFamily": "SF Pro",
+                "fontPostScriptName": "SFPro-Bold",
+                "fontStyle": "Bold",
+                "fontWeight": 700,
+                "textAutoResize": "WIDTH_AND_HEIGHT",
+                "fontSize": 60,
+                "textAlignHorizontal": "LEFT",
+                "textAlignVertical": "TOP",
+                "letterSpacing": -0.4000000059604645,
+                "lineHeightPx": 60,
+                "lineHeightPercent": 83.79705810546875,
+                "lineHeightPercentFontSize": 100,
+                "lineHeightUnit": "PIXELS"
+              },
+              "layoutVersion": 4,
+              "styles": {
+                "text": "610:77"
+              },
+              "effects": [],
+              "interactions": [],
+              "complexStrokeProperties": {
+                "strokeType": "BASIC"
+              }
+            }
+          ],
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": false,
+          "background": [
+            {
+              "opacity": 0.000009999999747378752,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "fills": [
+            {
+              "opacity": 0.000009999999747378752,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "opacity": 0.24313725531101227,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0.24313725531101227,
+                "b": 1,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:602:2844"
+                }
+              }
+            }
+          ],
+          "strokeWeight": 4,
+          "individualStrokeWeights": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 15
+          },
+          "strokeAlign": "OUTSIDE",
+          "backgroundColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 0.000009999999747378752
+          },
+          "layoutMode": "HORIZONTAL",
+          "paddingLeft": 24,
+          "layoutWrap": "NO_WRAP",
+          "absoluteBoundingBox": {
+            "x": -1125.5,
+            "y": 376,
+            "width": 138,
+            "height": 60
+          },
+          "absoluteRenderBounds": {
+            "x": -1140.5,
+            "y": 376,
+            "width": 153,
+            "height": 60
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        },
+        "components": {
+          "854:34261": {
+            "key": "799344eee5fa3b596dde1e2464495b83764fe3ec",
+            "name": "size=9, weight=bold, highContrast=true",
+            "description": "",
+            "remote": false,
+            "componentSetId": "854:33838",
+            "documentationLinks": []
+          }
+        },
+        "componentSets": {
+          "854:33838": {
+            "key": "e518c80a4e9f51f22a58b7d0a195f8bba5485e88",
+            "name": "Blockquote",
+            "description": "A block level extended quotation.",
+            "remote": false
+          }
+        },
+        "schemaVersion": 0,
+        "styles": {
+          "610:77": {
+            "key": "300b8751ab248d2c796731fde211832059d09f0d",
+            "name": "Typography/9/Bold",
+            "styleType": "TEXT",
+            "remote": false,
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "after": {
+    "version": "2404408407624006950",
+    "lastModified": "2026-09-28T22:04:36Z",
+    "nodes": {
+      "854:34261": {
+        "document": {
+          "id": "854:34261",
+          "name": "size=9, weight=bold, highContrast=true",
+          "type": "COMPONENT",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "paddingLeft": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:605:3226"
+            },
+            "strokes": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:602:2844"
+              }
+            ]
+          },
+          "children": [
+            {
+              "id": "854:34262",
+              "name": "Text",
+              "type": "TEXT",
+              "scrollBehavior": "SCROLLS",
+              "componentPropertyReferences": {
+                "characters": "✏️ text#800:6"
+              },
+              "boundVariables": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:602:2913"
+                  }
+                ],
+                "lineHeight": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69865"
+                  }
+                ],
+                "letterSpacing": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69856"
+                  }
+                ],
+                "fontFamily": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1328:69688"
+                  }
+                ],
+                "fontSize": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69844"
+                  }
+                ],
+                "fontStyle": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1326:69878"
+                  }
+                ]
+              },
+              "blendMode": "PASS_THROUGH",
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.10980392247438431,
+                    "g": 0.125490203499794,
+                    "b": 0.1411764770746231,
+                    "a": 1
+                  },
+                  "boundVariables": {
+                    "color": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:602:2913"
+                    }
+                  }
+                }
+              ],
+              "strokes": [],
+              "strokeWeight": 1,
+              "strokeAlign": "OUTSIDE",
+              "absoluteBoundingBox": {
+                "x": -1101.5,
+                "y": 376,
+                "width": 114,
+                "height": 60
+              },
+              "absoluteRenderBounds": {
+                "x": -1100.09375,
+                "y": 384.724609375,
+                "width": 110.65545654296875,
+                "height": 42.919921875
+              },
+              "constraints": {
+                "vertical": "TOP",
+                "horizontal": "LEFT"
+              },
+              "layoutAlign": "INHERIT",
+              "layoutGrow": 0,
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG",
+              "characters": "Text",
+              "characterStyleOverrides": [],
+              "styleOverrideTable": {},
+              "lineTypes": [
+                "NONE"
+              ],
+              "lineIndentations": [
+                0
+              ],
+              "style": {
+                "fontFamily": "SF Pro",
+                "fontPostScriptName": "SFPro-Bold",
+                "fontStyle": "Bold",
+                "fontWeight": 700,
+                "textAutoResize": "WIDTH_AND_HEIGHT",
+                "fontSize": 60,
+                "textAlignHorizontal": "LEFT",
+                "textAlignVertical": "TOP",
+                "letterSpacing": -0.4000000059604645,
+                "lineHeightPx": 60,
+                "lineHeightPercent": 83.79705810546875,
+                "lineHeightPercentFontSize": 100,
+                "lineHeightUnit": "PIXELS"
+              },
+              "layoutVersion": 4,
+              "styles": {
+                "text": "610:77"
+              },
+              "effects": [],
+              "interactions": [],
+              "complexStrokeProperties": {
+                "strokeType": "BASIC"
+              }
+            }
+          ],
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": false,
+          "background": [
+            {
+              "opacity": 0.000009999999747378752,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "fills": [
+            {
+              "opacity": 0.000009999999747378752,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "opacity": 0.24313725531101227,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0.24313725531101227,
+                "b": 1,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:602:2844"
+                }
+              }
+            }
+          ],
+          "strokeWeight": 4,
+          "individualStrokeWeights": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 15
+          },
+          "strokeAlign": "OUTSIDE",
+          "backgroundColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 0.000009999999747378752
+          },
+          "layoutMode": "HORIZONTAL",
+          "paddingLeft": 24,
+          "layoutWrap": "NO_WRAP",
+          "absoluteBoundingBox": {
+            "x": -1125.5,
+            "y": 376,
+            "width": 138,
+            "height": 60
+          },
+          "absoluteRenderBounds": {
+            "x": -1140.5,
+            "y": 376,
+            "width": 153,
+            "height": 60
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        },
+        "components": {
+          "854:34261": {
+            "key": "799344eee5fa3b596dde1e2464495b83764fe3ec",
+            "name": "size=9, weight=bold, highContrast=true",
+            "description": "",
+            "remote": false,
+            "componentSetId": "854:33838",
+            "documentationLinks": []
+          }
+        },
+        "componentSets": {
+          "854:33838": {
+            "key": "e518c80a4e9f51f22a58b7d0a195f8bba5485e88",
+            "name": "Blockquote",
+            "description": "A block level extended quotation.",
+            "remote": false
+          }
+        },
+        "schemaVersion": 0,
+        "styles": {
+          "610:77": {
+            "key": "300b8751ab248d2c796731fde211832059d09f0d",
+            "name": "Typography/9/Bold",
+            "styleType": "TEXT",
+            "remote": false,
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,10 @@
 # BETA — the one journey that is supported end-to-end
 
+> **Historical workflow.** For the current Figma → React preview, start with
+> [Preview](PREVIEW.md) and the [packed CLI instructions](../packages/cli/README.md#release-status).
+> The current bidirectional acceptance goal is [GOAL-BRIDGE.md](GOAL-BRIDGE.md).
+> The older workflow below is retained for reference; it does not establish current beta readiness.
+
 > **Current state (2026-08-30).** This page is the **Flowbite capture-path**
 > golden journey (path B). It is supported and receipted. It is **not** the
 > v1 proof. Recipe-IR proved five archetypes live with owner grades;

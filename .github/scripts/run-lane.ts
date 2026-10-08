@@ -23,7 +23,7 @@
  * if any failed.
  */
 import { spawnSync } from 'node:child_process';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
@@ -77,10 +77,51 @@ if (prereqs.length) {
   console.log('');
 }
 
+// Support the file-presence guards used by these workflows. Unknown syntax
+// fails explicitly rather than silently running or skipping a gated command.
+function guardAllows(expression: string): boolean {
+  const terms = expression.replace(/^\s*\$\{\{/, '').replace(/\}\}\s*$/, '').trim().split(/\s*&&\s*/);
+  let allowed = true;
+  for (const term of terms) {
+    if (term === GUARD || term === '!cancelled()') continue;
+    const match = /^hashFiles\('([^']+)'\) != ''$/.exec(term);
+    if (!match) throw new Error(`Unsupported local gate condition: ${term}`);
+    const segments = match[1]!.split('/');
+    if (segments.some(s => !s || s === '.' || s === '..' || /[^a-zA-Z0-9_@.*-]/.test(s) || s.includes('**')))
+      throw new Error(`Unsupported hashFiles pattern: ${match[1]}`);
+    let candidates = [ROOT];
+    for (const segment of segments) {
+      const pattern = new RegExp('^' + segment.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
+      candidates = candidates.flatMap(dir => {
+        if (!existsSync(dir) || !statSync(dir).isDirectory()) return [];
+        return segment.includes('*')
+          ? readdirSync(dir).filter(name => pattern.test(name)).map(name => path.join(dir, name))
+          : [path.join(dir, segment)].filter(existsSync);
+      });
+    }
+    allowed = candidates.some(file => statSync(file).isFile()) && allowed;
+  }
+  return allowed;
+}
+
+let skipped = 0;
 let failed = 0;
 const rows: string[] = [];
 for (const step of gates) {
   const cmd = (step.run ?? '').trim();
+  try {
+    if (!guardAllows(step.if ?? '')) {
+      skipped += 1;
+      rows.push(`  - SKIP ${cmd} (workflow file-presence condition is false)`);
+      console.log(rows[rows.length - 1]);
+      continue;
+    }
+  } catch (error) {
+    failed += 1;
+    rows.push(`  ✖ ${cmd}: ${String(error)}`);
+    console.error(rows[rows.length - 1]);
+    continue;
+  }
   const started = Date.now();
   // A multi-line `run:` block reports only its LAST command's status under a
   // plain shell, so a failure on line 1 would be reported green. GitHub runs
@@ -96,8 +137,9 @@ for (const step of gates) {
 
 console.log(`\nLANE "${lane}" SUMMARY`);
 for (const row of rows) console.log(row);
+console.log(`\n${skipped} gate(s) skipped by workflow conditions.`);
 if (failed) {
   console.error(`\n✖ ${failed}/${gates.length} gate(s) failed in lane "${lane}".`);
   process.exit(1);
 }
-console.log(`\n✔ ${gates.length}/${gates.length} gates green in lane "${lane}".`);
+console.log(`\n✔ ${gates.length - skipped}/${gates.length} gates passed in lane "${lane}".`);

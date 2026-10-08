@@ -1,0 +1,112 @@
+{
+  "imported": {
+    "button-set-button-button-1-proof": {
+      "root": {
+        "background-color": {
+          "secondary": {
+            "default": {
+              "$value": "#a49981",
+              "$type": "color"
+            },
+            "hover": {
+              "$value": "#c0b191",
+              "$type": "color"
+            },
+            "pressed": {
+              "$value": "#a49981",
+              "$type": "color"
+            },
+            "focusVisible": {
+              "$value": "#a49981",
+              "$type": "color"
+            },
+            "disabled": {
+              "$value": "#a49981",
+              "$type": "color"
+            },
+            "loading": {
+              "$value": "#a49981",
+              "$type": "color"
+            }
+          },
+          "primary": {
+            "default": {
+              "$value": "#4375ff",
+              "$type": "color"
+            },
+            "hover": {
+              "$value": "#6b93ff",
+              "$type": "color"
+            },
+            "pressed": {
+              "$value": "#4375ff",
+              "$type": "color"
+            },
+            "focusVisible": {
+              "$value": "#4375ff",
+              "$type": "color"
+            },
+            "disabled": {
+              "$value": "#4375ff",
+              "$type": "color"
+            },
+            "loading": {
+              "$value": "#4375ff",
+              "$type": "color"
+            }
+          }
+        },
+        "border-color": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "primary": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        }
+      },
+      "button-label-label": {
+        "color": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "primary": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        },
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        }
+      }
+    },
+    "stub-button-helper-loading-spinner-1": {
+      "root": {
+        "width": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-button-helper-leading-icon-1": {
+      "root": {
+        "width": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

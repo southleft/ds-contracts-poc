@@ -1,6 +1,19 @@
 import type {RestNode} from './map.js';
 import {filledPathIssue} from '../../../scripts/contract-schema.js';
 
+/** White MULTIPLY preserves RGB only over an opaque backdrop; it still adds
+ * source alpha on transparent backing. Flatten only exactly transparent paints.
+ * Native Scratch controls at 0.5 and 1 change 336/400 pixels over black. */
+export function neutralVectorWrapperPaint(paint: NonNullable<RestNode['fills']>[number]): boolean {
+  const opacity = paint.opacity ?? 1;
+  const alpha = paint.color?.a ?? 1;
+  return paint.type === 'SOLID' && paint.blendMode === 'MULTIPLY' &&
+    paint.color?.r === 1 && paint.color.g === 1 && paint.color.b === 1 &&
+    Number.isFinite(opacity) && opacity >= 0 && opacity <= 1 &&
+    Number.isFinite(alpha) && alpha >= 0 && alpha <= 1 &&
+    (opacity === 0 || alpha === 0);
+}
+
 /** A usage observation, never an inferred remote main or complete child API.
  * Transparent single-child wrappers admit translation only. Clip rectangles
  * must contain the entire path control hull, so flattening loses no paint. */
@@ -12,9 +25,9 @@ export function observeInstanceVector(root: RestNode, components: ReadonlyMap<st
   const visible=<T extends {visible?:boolean}>(rows?:T[]):T[]=>(rows??[]).filter(p=>p.visible!==false);
   while (node.type !== 'VECTOR') {
     if (++depth>8 || !['INSTANCE','FRAME','GROUP'].includes(node.type) ||
-        node.visible===false || node.isMask || (node.opacity!==undefined&&node.opacity!==1) ||
+        (node!==root && node.visible===false) || node.isMask || (node.opacity!==undefined&&node.opacity!==1) ||
         !['NORMAL','PASS_THROUGH',undefined].includes(node.blendMode) ||
-        visible(node.fills).length || visible(node.strokes).length || visible(node.effects).length ||
+        visible(node.fills).some(paint => !neutralVectorWrapperPaint(paint)) || visible(node.strokes).length || visible(node.effects).length ||
         (node.cornerRadius??0)!==0 || node.rectangleCornerRadii?.some(v=>v!==0) ||
         !node.size || !Number.isFinite(node.size.x) || !Number.isFinite(node.size.y) ||
         node.size.x<=0 || node.size.y<=0 || node.children?.length!==1 ||
@@ -37,13 +50,16 @@ export function observeInstanceVector(root: RestNode, components: ReadonlyMap<st
     !['NORMAL','PASS_THROUGH',undefined].includes(node.blendMode)||
     !node.size||!Number.isFinite(node.size.x)||!Number.isFinite(node.size.y)||node.size.x<=0||node.size.y<=0||
     node.children?.length||visible(node.strokes).length||visible(node.effects).length||
-    fills.length!==1||fills[0]!.type!=='SOLID'||paths?.length!==1||
-    filledPathIssue(paths[0]!.path)||!['NONZERO','EVENODD'].includes(paths[0]!.windingRule))return;
-  const coordinates=paths[0]!.path.match(/[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!.map(Number);
-  if(coordinates.some((n,i)=>n<0||n>(i%2===0?node.size!.x:node.size!.y)))return;
+    fills.length!==1||fills[0]!.type!=='SOLID'||!paths?.length||paths.length>32||
+    paths.some(p=>filledPathIssue(p.path)||!['NONZERO','EVENODD'].includes(p.windingRule)))return;
+  const coordinates=paths.flatMap(p=>p.path.match(/[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!.map(Number));
+  if(coordinates.some((n,i)=>!Number.isFinite(n)||wrappers.some(w=>{
+    const value=n+(i%2===0?x:y),start=i%2===0?w.x:w.y,extent=i%2===0?w.width:w.height;
+    return value<start||value>start+extent;
+  })))return;
   if(wrappers.some(w=>x<w.x||y<w.y||x+node.size!.x>w.x+w.width||y+node.size!.y>w.y+w.height))return;
   return {source,vector:node,shape:{kind:'path' as const,width:node.size.x,height:node.size.y,
     x,y,right:root.size.x-x-node.size.x,bottom:root.size.y-y-node.size.y,
-    paths:[{data:paths[0]!.path,windingRule:paths[0]!.windingRule}],
+    paths:paths.map(p=>({data:p.path,windingRule:p.windingRule})),
     parentViewport:{width:root.size.x,height:root.size.y}}};
 }

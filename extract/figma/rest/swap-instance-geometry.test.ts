@@ -69,7 +69,7 @@ test('uncaptured dimensions, identity and transforms are never inferred from bou
   assert.equal(captureRest(input).observedInstances, undefined);
   assert.equal(await capturePlugin(pluginNode(input), property), undefined);
   input.children = [];
-  assert.equal(captureRest(input).observedInstances, undefined);
+  assert.deepEqual(captureRest(input).observedInstances, []);
   assert.deepEqual(plain(await capturePlugin(pluginNode(input), property)), []);
 });
 
@@ -110,4 +110,7 @@ test('the complete plugin capture attaches selected occurrence geometry without 
   assert.equal(retained.id, selected.id);
   assert.equal(retained.observedInstances, undefined, 'a failure after one observation must not retain a partial list');
   assert(refused._degradations.some((d: any) => d.message.includes('no partial sizing evidence')));
+  content.remove(); broken.remove();
+  const empty = await vm.runInContext(`(async()=>{${source}})()`, context);
+  assert.deepEqual(plain(empty.Source.variants[0].children[0].fixedSwaps.Content.observedInstances), [], 'complete native capture retains empty inventory rather than an unknown observation');
 });

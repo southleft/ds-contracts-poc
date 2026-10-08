@@ -88,7 +88,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
         <div className={styles.descriptionText}>{description}</div>
       </div>
       <div className={styles.endArea}>
-        {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}
+        <>{endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}</>
         {isDismissable ? (
           <button className={styles.close} aria-label="Dismiss" type="button" data-action="dismiss">
             <span

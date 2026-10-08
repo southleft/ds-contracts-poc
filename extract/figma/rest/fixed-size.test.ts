@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from '../types.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import vm from 'node:vm';
@@ -17,9 +18,9 @@ import { mountGenerated } from '../../../core/react-test-runtime.js';
 import { ContractSchema, resolveLiterals } from '../../../scripts/contract-schema.js';
 const box = { x: 100, y: 100, width: 18.125, height: 20.0625 };
 const child = (extra: Partial<RestNode> = {}): RestNode => ({ id: '1:3', name: 'Indicator', type: 'FRAME', absoluteBoundingBox: box, size:{x:box.width,y:box.height}, layoutSizingHorizontal: 'FIXED', layoutSizingVertical: 'FIXED', ...extra });
-function capture(node = child(), parent: Partial<RestNode> = {}) {
+function capture(node = child(), parent: Partial<RestNode> = {}, main?: RestNode) {
   const component = { id: '1:2', name: 'Only', type: 'COMPONENT', layoutMode: 'HORIZONTAL', children: [node], ...parent };
-  const result = mapRestToDump({ name: 'fixture', nodes: { '1:2': { document: component } } } as never);
+  const result = mapRestToDump({ name: 'fixture', nodes: { '1:2': { document: component }, ...(main ? { [main.id]: {document: main} } : {}) } } as never);
   const set = (result.dump as unknown as Record<string, DumpSet>).Only;
   return set.variants[0].children![0];
 }
@@ -134,7 +135,7 @@ test('plugin and REST fixed manual-box capture agree, including fractions, inval
   const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ['MeasuredBox'];`);
   const dumps=await run(source);
-  assert.equal(dumps._provenance.dumpVersion,'1.48');
+  assert.equal(dumps._provenance.dumpVersion,PLUGIN_DUMP_VERSION);
   assert.deepEqual(Array.from(dumps.MeasuredBox.variants, (v:any)=>v.children[0].fixedSize && JSON.parse(JSON.stringify(v.children[0].fixedSize))),
     specs.map(spec=>capture(child(spec as Partial<RestNode>)).fixedSize));
 });
@@ -410,4 +411,92 @@ test('compound FILL lowers to native FILL only on the exact observed tuples',()=
   assert.equal(filler.widthFill===true,!hug);
   assert.equal(filler.fillW===true,!hug);
  }
+});
+
+test('explicit root overrides preserve local dimensions even under HUG without treating bbox as authority', () => {
+ const node=child({type:'INSTANCE',componentId:'main:1',size:{x:24.125,y:18.25},layoutSizingHorizontal:'HUG',layoutSizingVertical:'HUG',
+  overrides:[{id:'1:3',overriddenFields:['width','paddingLeft','height']}]});
+ const before=JSON.stringify(node);
+ assert.deepEqual(capture(node).instanceRootOverrides,{nodeId:'1:3',componentId:'main:1',fields:['height','paddingLeft','width'],localSize:{width:24.125,height:18.25}});
+ assert.deepEqual(capture(node).instanceSizing,{horizontal:'HUG',vertical:'HUG'});
+ assert.equal(JSON.stringify(node),before);
+ assert.deepEqual(capture({...node,overrides:[]}).instanceRootOverrides,{nodeId:'1:3',componentId:'main:1',fields:[]});
+ assert.equal(capture({...node,overrides:undefined}).instanceRootOverrides,undefined);
+ assert.equal(capture({...node,componentId:undefined}).instanceRootOverrides,undefined);
+ assert.deepEqual(capture({...node,overrides:[{id:'foreign',overriddenFields:['width']}]}).instanceRootOverrides,{nodeId:'1:3',componentId:'main:1',fields:[]});
+ assert.equal(capture({...node,overrides:[{id:'1:3',overriddenFields:[]},...node.overrides!]}).instanceRootOverrides,undefined);
+ assert.equal(capture({...node,overrides:[...node.overrides!,...node.overrides!]}).instanceRootOverrides,undefined);
+ for(const size of [undefined,{x:NaN,y:-1}]) assert.equal(capture({...node,size}).instanceRootOverrides?.localSize,undefined);
+ assert.deepEqual(capture({...node,overrides:[{id:'1:3',overriddenFields:['width']}]}).instanceRootOverrides?.localSize,{width:24.125});
+});
+
+test('plugin and REST root override witnesses agree and duplicate root rows fail closed', async () => {
+ const {figma:mockFigma}=createFigmaMock();const figma:any=mockFigma;
+ const main=figma.createComponent();main.name='RootOverrideChild';main.layoutMode='HORIZONTAL';main.paddingTop=2;main.paddingRight=3;main.paddingBottom=4;main.paddingLeft=5;const variants=[],expected=[];
+ const cases=[{fields:['width','height','paddingLeft'],width:24.125,height:18.25},
+  {fields:['width'],width:0,height:18.25},{fields:['height'],width:24,height:18.25},
+  {fields:['paddingLeft'],width:24,height:18},{fields:['width','height'],width:24,height:18,duplicate:true},
+  {fields:['width','height'],width:24,height:18,foreign:true},
+  {fields:[],width:24,height:18},{fields:[],width:24,height:18,duplicate:true},
+  {fields:[],width:24,height:18,empty:true},{fields:[],width:24,height:18,missing:true}];
+ for(const [i,spec] of cases.entries()){
+  const c=figma.createComponent();c.name=`Case=${i}`;c.layoutMode='HORIZONTAL';variants.push(c);
+  const n=main.createInstance();n.name='Indicator';n.width=spec.width;n.height=spec.height;n.layoutSizingHorizontal='HUG';n.layoutSizingVertical='HUG';n.relativeTransform=[[1,0,0],[0,1,0]];
+  n.overrides=[{id:spec.foreign?'foreign':n.id,overriddenFields:spec.fields}];if(spec.duplicate)n.overrides.push({...n.overrides[0]});if(spec.empty)n.overrides=[];if(spec.missing)delete n.overrides;c.appendChild(n);
+  const witness=capture(child({id:n.id,type:'INSTANCE',componentId:main.id,size:{x:n.width,y:n.height},layoutSizingHorizontal:'HUG',layoutSizingVertical:'HUG',overrides:n.overrides}),{}, {id:main.id,name:main.name,type:'COMPONENT',layoutMode:'HORIZONTAL',paddingTop:2,paddingRight:3,paddingBottom:4,paddingLeft:5,size:{x:main.width,y:main.height}}).instanceRootOverrides;
+  if(witness){witness.componentKey=main.key;witness.localTransform=JSON.parse(JSON.stringify(n.relativeTransform))}expected.push(witness);
+ }
+ const set=figma.combineAsVariants(variants,figma.currentPage);set.name='RootOverrideProbe';
+ const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,"const TARGET_SETS = ['RootOverrideProbe'];");
+ const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+ const dumps:any=await vm.runInContext(`(async()=>{${source}})()`,context,{timeout:20000});
+ const actual=Array.from(dumps.RootOverrideProbe.variants,(v:any)=>v.children[0].instanceRootOverrides&&JSON.parse(JSON.stringify(v.children[0].instanceRootOverrides)));
+ assert.deepEqual(actual,expected);
+});
+
+test('REST fill absence is explicit only for a captured empty array',()=>{
+ for(const fills of [undefined,[],[{type:'SOLID',visible:false,color:{r:0,g:0,b:0,a:1}}]]){
+  const root:RestNode={id:'1:1',name:'Paint',type:'COMPONENT',fills: fills as any};
+  const result=mapRestToDump({nodes:{root:{document:root}}});
+  const n=(result.dump.Paint as DumpSet).variants[0];
+  assert.equal(n.sourceEmptyFill,Array.isArray(fills)&&fills.length===0?true:undefined);
+ }
+});
+
+
+test('REST inherited padding witness rejects incomplete and contradictory main captures',()=>{
+ const node=child({type:'INSTANCE',componentId:'main:1',overrides:[]});
+ const main:RestNode={id:'main:1',name:'Main',type:'COMPONENT',layoutMode:'HORIZONTAL',paddingTop:2,paddingRight:3,paddingBottom:4,paddingLeft:5};
+ assert.deepEqual(capture(node,{},main).instanceRootOverrides?.mainPadding,[2,3,4,5]);
+ for(const changed of [{paddingLeft:undefined},{paddingTop:NaN},{paddingBottom:-1},{layoutMode:'NONE'}])
+  assert.equal(capture(node,{}, {...main,...changed} as RestNode).instanceRootOverrides?.mainPadding,undefined);
+ const root:RestNode={id:'1:2',name:'Only',type:'COMPONENT',children:[node]};
+ for(const changed of [{paddingLeft:6},{paddingLeft:undefined}]){
+  const result=mapRestToDump({nodes:{root:{document:root},a:{document:main},b:{document:{...main,...changed}}}});
+  assert.equal((result.dump.Only as DumpSet).variants[0].children![0].instanceRootOverrides?.mainPadding,undefined);
+ }
+});
+
+
+test('fixed text boxes carry only explicit dimensions compatible with text resizing',()=>{
+ const text=child({type:'TEXT',characters:'First\nSecond',style:{fontFamily:'Arial',fontSize:14,textAutoResize:'NONE'}});
+ assert.deepEqual(capture(text).fixedSize,{width:box.width,height:box.height});
+ assert.deepEqual(capture({...text,layoutSizingHorizontal:'FILL'}).fixedSize,{height:box.height});
+ assert.deepEqual(capture({...text,style:{...text.style,textAutoResize:'HEIGHT'}}).fixedSize,{width:box.width});
+ for(const mode of ['WIDTH_AND_HEIGHT','TRUNCATE'])assert.equal(capture({...text,style:{...text.style,textAutoResize:mode}}).fixedSize,undefined);
+ assert.equal(capture({...text,rotation:.00000001}).fixedSize,undefined);
+ assert.equal(capture({...text,layoutSizingHorizontal:'FILL',layoutSizingVertical:'FILL'}).fixedSize,undefined);
+});
+
+test('native and REST fixed text extents agree without assigning FILL dimensions',async()=>{
+ const specs=[{mode:'NONE',horizontal:'FIXED',vertical:'FIXED'},{mode:'NONE',horizontal:'FILL',vertical:'FIXED'},{mode:'HEIGHT',horizontal:'FIXED',vertical:'HUG'},{mode:'WIDTH_AND_HEIGHT',horizontal:'HUG',vertical:'HUG'},{mode:'TRUNCATE',horizontal:'FIXED',vertical:'FIXED'}] as const;
+ const {figma:mock}=createFigmaMock(),figma:any=mock,variants:any[]=[];
+ for(const [i,s]of specs.entries()){
+  const c=figma.createComponent();c.name=`Case=${i}`;c.layoutMode='HORIZONTAL';variants.push(c);
+  const n=figma.createText();n.name='Indicator';n.characters='First\nSecond';n.textAutoResize=s.mode;n.layoutSizingHorizontal=s.horizontal;n.layoutSizingVertical=s.vertical;Object.defineProperty(n,'width',{value:box.width,configurable:true});Object.defineProperty(n,'height',{value:box.height,configurable:true});c.appendChild(n);
+ }
+ const set=figma.combineAsVariants(variants,figma.currentPage);set.name='FixedTextProbe';
+ const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,"const TARGET_SETS = ['FixedTextProbe'];");
+ const dumps=await vm.runInContext(`(async()=>{${source}})()`,vm.createContext({figma,console:{log(){},warn(){},error(){}}}),{timeout:20000});
+ assert.deepEqual(Array.from(dumps.FixedTextProbe.variants,(v:any)=>v.children[0].fixedSize&&JSON.parse(JSON.stringify(v.children[0].fixedSize))),specs.map(s=>capture(child({type:'TEXT',characters:'First\nSecond',style:{fontFamily:'Arial',fontSize:14,textAutoResize:s.mode},layoutSizingHorizontal:s.horizontal,layoutSizingVertical:s.vertical})).fixedSize));
 });

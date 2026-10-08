@@ -1,0 +1,11 @@
+# Full native inside-stroke mask writer qualification
+
+The ordinary `createFigmaEngine().buildComponentScript()` writer executed through the existing Figma Desktop Bridge in the owner’s Live Testing file. No native API shim, shortened writer, or validation bypass was used. The script and independent readback are preserved in the protected continuation archive `native-desktop-bridge-writer-proof-2026-10-02.zip` (continuation 170).
+
+The owned component is [OwnedStrokeMaskNativeWriter](https://www.figma.com/design/NqssRZQpSjChxv5VyN1ZvJ/?node-id=61-32204). Its page is `61:32203`, section `61:32207`, component `61:32204`, VECTOR mask `61:32205`, and painted RECTANGLE `61:32206`. All three provisional variable IDs (`61:32200` through `61:32202`) are recorded separately from the existing collection.
+
+Independent native readback verifies an 18 × 18 component, the original closed path, empty mask fills, ALPHA masking, a 5 px INSIDE stroke, NONE cap, MITER join, miter limit 4, SCALE constraints, and both children at (0, 0). The paint retains its native color-variable binding. The post-write screenshot was inspected. Compared at recorded origins with the independent frozen native control, the unchanged scorer reports 0% difference on both white and black. Raw RGBA bytes differ; this is threshold-based image qualification, not byte identity with that control.
+
+A second complete writer run returns `unchanged`, preserves component ID and component key, and exports the same PNG bytes as the first writer run. This closes the full native writer execution limitation for this owned control. It does not qualify arbitrary mask paths, real React-library conversion, or either never-seen scoreboard.
+
+The fresh 40-set public URL rerun remains 506 pass, 279 fail, and 94 unverified out of 879 variants. Assistive chip remains a named 48-variant REST refusal: the URL route does not obtain the native mask witness facts. The separate 28-pass Material measurement therefore earns no first-pass URL score credit. A fresh unmodified canonical native-reader capture now reaches a different public-path refusal: names such as `Static/Label Large/Size` become token references containing spaces, outside the contract grammar. That naming failure must be repaired in the shared registration/proposal path, not in captured data.

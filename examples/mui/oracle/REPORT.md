@@ -1,6 +1,6 @@
 # MUI oracle — offline report
 
-Run: `exact-conversion-finish-wave2` · scored 2026-08-27T00:17:49.575Z
+Run: `exact-conversion-finish-wave2` · scored 2026-10-07T16:21:09.276Z
 
 Summary: **32** MATCH · **0** PENDING · **0** FAIL / 32 facts
 

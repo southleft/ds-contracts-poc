@@ -28,7 +28,7 @@ export const TopNavItem = forwardRef<HTMLAnchorElement, TopNavItemProps>(functio
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');
   return (
     <a ref={ref} className={classes} href={href} {...rest}>
-      {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
+      <>{icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}</>
       <span className={styles.labelText}>{label}</span>
     </a>
   );

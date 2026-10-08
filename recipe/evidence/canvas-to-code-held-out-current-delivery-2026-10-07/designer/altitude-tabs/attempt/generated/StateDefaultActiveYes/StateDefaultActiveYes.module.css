@@ -1,0 +1,23 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/state-default-active-yes.contract.json (ds.state-default-active-yes v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  height: var(--imported-stub-state-default-active-yes-root-height);
+}
+
+.text {
+  font-family: Inter, system-ui, sans-serif;
+}

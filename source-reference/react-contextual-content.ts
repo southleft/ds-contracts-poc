@@ -1,3 +1,5 @@
+import {readReactWrapperContent} from './react-wrapper-content.js';
+import type {ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
 /** Host-authenticated, observation-specific content authority. This module does
  * not accept a browser-supplied forwarding flag or mutate source-program facts.
  * The host must anchor restored artifacts to its existing sealed report first. */
@@ -25,6 +27,8 @@ export interface ReactContextualContentFact {
   tag: string;
   helperId: string;
   modelSha256: string;
+  delegatedClassName?: {instanceId:string;value:string};
+  delegatedTarget?: {module:string;exportName:string;sourceSha256:string;span:{start:number;end:number}};
 }
 type Proof = {
   inputRevision: string;
@@ -63,6 +67,7 @@ export function readReactContextualContent(options: {
   ownership: ReactOwnership;
   tree: CapturedNode;
   helpers: readonly ReactHelperObservation[];
+  wrappers?: readonly {path:string;result:ReactJsxHelperObservation}[];
   read(helperId: string, name: string): Buffer;
 }): ReactContextualContent {
   const { program, ownership, tree, helpers, read } = options;
@@ -256,6 +261,16 @@ export function readReactContextualContent(options: {
       modelSha256: helper.containingFlow.modelSha256,
     });
   }
+  const wrapperProof = readReactWrapperContent({...options, wrappers:options.wrappers??[]});
+  for(const fact of wrapperProof.facts){
+    if(instances.has(fact.instanceId))fail('ambiguous-observation');
+    instances.add(fact.instanceId);facts.push(fact);
+  }
+  for(const [file,hash] of Object.entries(wrapperProof.inputs)){
+    if(inputs[file]&&inputs[file]!==hash)fail('input-identity-conflict');
+    inputs[file]=hash;
+  }
+  artifacts.push(...wrapperProof.artifacts);
   const proof: Proof = {
     inputRevision: inputRevision(program, ownership, tree),
     facts,

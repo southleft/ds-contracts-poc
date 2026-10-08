@@ -1,3 +1,4 @@
+import { reactInputFilesUnchanged } from './react-input-files.js';
 import { readFileSync, realpathSync, mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
@@ -59,29 +60,19 @@ export interface ReactHelperObservation {
     pairedOwnershipSha256?: string;
   };
 }
-export function reactHelperObservationUnchanged(
-  observation: ReactHelperObservation,
-): boolean {
+export function reactHelperObservationUnchanged(observation: ReactHelperObservation): boolean {
+  return reactHelperObservationsUnchanged([observation]);
+}
+
+/** Validate every observation's authority, then read each distinct pinned file
+ * once in this synchronous check. No freshness result is cached across calls. */
+export function reactHelperObservationsUnchanged(observations: readonly ReactHelperObservation[]): boolean {
   try {
-    if (
-      observation.status === "observed" &&
-      (!observation.inputs ||
-        !Object.keys(observation.inputs).length ||
-        !observation.evidence ||
-        observation.runtime?.status !== "observed")
-    )
-      return false;
-    return (
-      !observation.inputs ||
-      Object.entries(observation.inputs).every(
-        ([file, hash]) =>
-          realpathSync(file) === file &&
-          evidenceSha(readFileSync(file)) === hash,
-      )
-    );
-  } catch {
-    return false;
-  }
+    if (observations.some(observation => observation.status === "observed" &&
+        (!observation.inputs || !Object.keys(observation.inputs).length ||
+         !observation.evidence || observation.runtime?.status !== "observed"))) return false;
+    return reactInputFilesUnchanged(observations.map(observation => observation.inputs || {}));
+  } catch { return false; }
 }
 
 /** A separate guarded render for each candidate. Serialized props only propose
@@ -189,6 +180,7 @@ export async function observeReactHelpers(options: {
           moduleRoot = path.dirname(fileURLToPath(import.meta.url));
         const engineFiles = [
           "react-helper-observation.ts",
+          "react-input-files.ts",
           "react-contextual-content.ts",
           "react-helper-effects.ts",
           "react-helper-model.mjs",

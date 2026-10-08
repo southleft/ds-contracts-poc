@@ -1,0 +1,102 @@
+{
+  "imported": {
+    "textarea": {
+      "al-c-textarea-label-label": {
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        }
+      },
+      "al-c-textarea-container-al-c-textarea-input": {
+        "opacity": {
+          "default": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "hover": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "focus": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "active": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "error": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "disabled": {
+            "$value": "0.4000000059604645",
+            "$type": "number"
+          }
+        }
+      },
+      "root": {
+        "width": {
+          "default": {
+            "$value": "216px",
+            "$type": "dimension"
+          },
+          "hover": {
+            "$value": "220px",
+            "$type": "dimension"
+          },
+          "focus": {
+            "$value": "222px",
+            "$type": "dimension"
+          },
+          "active": {
+            "$value": "220px",
+            "$type": "dimension"
+          },
+          "error": {
+            "$value": "220px",
+            "$type": "dimension"
+          },
+          "disabled": {
+            "$value": "220px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "default": {
+            "$value": "128px",
+            "$type": "dimension"
+          },
+          "hover": {
+            "$value": "152px",
+            "$type": "dimension"
+          },
+          "focus": {
+            "$value": "fit-content"
+          },
+          "active": {
+            "$value": "fit-content"
+          },
+          "error": {
+            "$value": "fit-content"
+          },
+          "disabled": {
+            "$value": "fit-content"
+          }
+        }
+      }
+    },
+    "stub-state-default": {
+      "root": {
+        "width": {
+          "$value": "74px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

@@ -156,7 +156,7 @@ const COMMAND_HELP: Record<string, string> = {
 
   figma-to-react --url <figma component-set link> --out <dir>
   figma-to-react --dump <dump.json> --out <dir>
-    [--name <npm package name>] [--fonts <manifest.json>] [--allow-failures]
+    [--name <npm package name>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--allow-failures]
 
 Writes <out>/<name>.tgz (install it with npm install <path>), <out>/request.json
 and <out>/result.json, then checks the package against the design: every Figma

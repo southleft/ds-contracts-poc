@@ -23,3 +23,5 @@ export {
   type ValidateResult,
   type ValidateSetResult,
 } from './validate.js';
+
+export {qualifySolidFillColorBinding,inspectSolidFillColorBinding,SolidFillObservedBindingSchema,type SolidFillObservedBinding,SolidFillSourceBindingSchema,SolidFillSourceBindingsSchema} from './solid-fill-binding.js';

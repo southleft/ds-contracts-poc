@@ -1,3 +1,5 @@
+import {refuseInstanceRootInputTarget} from '../packages/core/src/anatomy.js';
+import {solidFillCompositionRules} from '../packages/core/src/css.js';
 import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
@@ -38,6 +40,12 @@ import {selectedSampleKey} from '../packages/core/src/selection.js';
  *   · Boolean-driven parts render per the showcased boolean value.
  */
 import {
+  absentVariantAxes,
+  absentVariantKey,
+  absentVariantKeys,
+  ABSENT_VARIANTS_MAX_PRODUCT,
+  ContractSchema,
+  resolvePresence,
   borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
@@ -132,6 +140,7 @@ const JUSTIFY_CSS: Record<string, string> = {
  *  core/emit-react.ts layoutOverrideDecls (reversed directions are plain
  *  CSS here; the canvas resolves them by reversing compiled child order). */
 function layoutOverrideDecls(o: {
+  alignSelf?: string;
   display?: string;
   direction?: string;
   align?: string;
@@ -140,6 +149,7 @@ function layoutOverrideDecls(o: {
   growBasis?: "zero";
 }, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
+  if (o.alignSelf) d.push(`align-self: ${o.alignSelf}`);
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
@@ -179,6 +189,7 @@ function layoutDecls(part: Part, gridWhere: string, isGridChild = false): string
       if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
   }
+  if (part.layout?.alignSelf) d.push(`align-self: ${part.layout.alignSelf}`);
   if (part.layout?.grow) d.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
   return d;
 }
@@ -884,6 +895,7 @@ function componentCss(contract: Contract): string[] {
   if (usedAnimations.has('pulse')) {
     lines.push('', `@keyframes ${k}-pulse {`, '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
+  lines.push(...solidFillCompositionRules(contract,undefined,{root:rootCls,part:partCls,modifier:(axis,value)=>enumCls(axis,value),disabled:disabledSel,booleanAttributes:true}));
   return lines;
 }
 
@@ -1005,6 +1017,93 @@ interface RenderState {
   statePreview?: string;
 }
 
+/** Static presence reads the same contract-name values as the React and native
+ * resolvers. A false Boolean is a value; omission remains omission. */
+const presenceSelection = (state: RenderState): Record<string, string | boolean> =>
+  ({ ...state.subst, ...state.bools });
+const hasFinitePresence = (contract: Contract): boolean =>
+  walkAnatomy(contract).some(({ part }) => part.presenceByCombination !== undefined);
+
+/** The rendered part's own presence is checked before its live visibility.
+ * Ancestors decide whether this part is reached at all. */
+function snapshotPartVisible(part: Part, state: RenderState): boolean {
+  if (!resolvePresence(part, presenceSelection(state))) return false;
+  const when = part.visibleWhen;
+  if (!when) return true;
+  if (typeof when.equals === 'boolean') return state.bools[when.prop] === when.equals;
+  if (when.equals !== undefined) return Array.isArray(when.equals)
+    ? when.equals.includes(state.subst[when.prop] ?? '')
+    : (state.subst[when.prop] ?? '') === when.equals;
+  return state.bools[when.prop] === true;
+}
+
+function snapshotPanelSelected(contract: Contract, name: string, state: RenderState): boolean {
+  const selection = contract.selection;
+  const panel = selection?.panels.find(panel => panel.part === name);
+  return !panel || panel.value === selectedSampleKey(contract, state.subst[selection!.valueProp]);
+}
+
+function childDefaultsState(contract: Contract): RenderState {
+  const state: RenderState = { subst: {}, bools: {} };
+  for (const p of enumProps(contract)) {
+    if (p.default !== undefined) state.subst[p.name] = String(p.default);
+    else if (!hasFinitePresence(contract) && contract.bindings.figma.drawnVariants === undefined)
+      state.subst[p.name] = p.type.enum[0];
+  }
+  for (const p of boolProps(contract))
+    if (typeof p.default === 'boolean') state.bools[p.name] = p.default;
+  return state;
+}
+
+/** No composed snapshot may turn an undrawn tuple into an implicit absence. */
+function assertSnapshotDomain(contract: Contract, state: RenderState): void {
+  const axes = absentVariantAxes(contract), selection = presenceSelection(state);
+  const tuple = Object.fromEntries(axes.map(({ prop }) => [prop.name, selection[prop.name] ?? null]));
+  const drawn = contract.bindings.figma.drawnVariants;
+  if (drawn !== undefined && !drawn.some(row =>
+    axes.every(({ prop }) => row[prop.name] === tuple[prop.name])))
+    throw new Error('HTML_DRAWN_VARIANT_UNDECLARED: ' + contract.id);
+  if (hasFinitePresence(contract) && absentVariantKeys(contract).has(absentVariantKey(axes, tuple)))
+    throw new Error('HTML_ABSENT_VARIANT_UNAVAILABLE: ' + contract.id);
+}
+
+/** Enumerate only qualified planes. Ordinary contracts retain their existing
+ * per-axis showcase; finite presence needs complete tuples, including omission. */
+function presenceShowcaseTuples(contract: Contract): Array<Record<string, string | boolean | null>> | undefined {
+  if (!hasFinitePresence(contract) && contract.bindings.figma.drawnVariants === undefined) return undefined;
+  if (contract.bindings.figma.drawnVariants !== undefined) return contract.bindings.figma.drawnVariants;
+  const axes = absentVariantAxes(contract);
+  if (axes.reduce((count, axis) => count * axis.options.length, 1) > ABSENT_VARIANTS_MAX_PRODUCT)
+    throw new Error('HTML_PRESENCE_SHOWCASE_DOMAIN_TOO_LARGE');
+  let tuples: Array<Record<string, string | boolean | null>> = [{}];
+  for (const { prop, options } of axes)
+    tuples = tuples.flatMap(tuple => options.map(value => ({ ...tuple, [prop.name]: value })));
+  const absent = absentVariantKeys(contract);
+  return tuples.filter(tuple => !absent.has(absentVariantKey(axes, tuple)));
+}
+
+/** A showcase can list explicit planes even when caller omission has no
+ * qualified presence row. This checks only this root's own inputs; composed
+ * child omission is still refused by renderComponentHtml. */
+function rootPresenceQualified(contract: Contract, state: RenderState): boolean {
+  const reached = (name: string, part: Part): boolean => {
+    try {
+      if (!snapshotPartVisible(part, state) || !snapshotPanelSelected(contract, name, state)) return true;
+    } catch (error) {
+      if (error instanceof Error && error.message === 'presence-combination-unavailable') return false;
+      throw error;
+    }
+    // These render branches do not traverse the part's owned descendants.
+    // Composed children retain their separate omission checks at render time.
+    if (part.shape?.kind === 'line' || part.shape?.kind === 'stroked-path' || part.icon ||
+        part.component || part.slot || part.meter || isNativeCheckablePart(part)) return true;
+    return Object.entries(part.parts ?? {}).every(([childName, child]) => reached(childName, child));
+  };
+  // A single root uses the root renderer, not the ordinary part renderer.
+  const roots = isMultiRoot(contract) ? topRoots(contract) : Object.entries(contract.anatomy.root.parts ?? {});
+  return roots.every(([name, part]) => reached(name, part));
+}
+
 function renderComponentHtml(
   contract: Contract,
   ctx: EmitCtx,
@@ -1013,6 +1112,7 @@ function renderComponentHtml(
   extraText?: string,
   extraRootClass?: string,
 ): string {
+  assertSnapshotDomain(contract, state);
   const k = kebab(contract.name);
   const root = contract.anatomy.root;
   // A2 grid: the same compiled cell plan the CSS consulted — the markup owes
@@ -1043,12 +1143,7 @@ function renderComponentHtml(
     if (prop && state.subst[prop.name] !== undefined) return state.subst[prop.name];
     return typeof prop?.default === 'string' ? prop.default : contract.name;
   };
-  const visible = (part: Part): boolean => {
-    if (!part.visibleWhen) return true;
-    const vw = part.visibleWhen;
-    if (vw.equals !== undefined) return (propValue(vw.prop) ?? '') === vw.equals;
-    return state.bools[vw.prop] === true;
-  };
+  const visible = (part: Part): boolean => snapshotPartVisible(part, state);
 
   // A toggling event's ARIA state renders per showcase item on its trigger
   // (root or part): the static surface cannot RUN the toggle, but the state
@@ -1085,8 +1180,7 @@ function renderComponentHtml(
     if (!visible(part)) return '';
     const selection = contract.selection;
     const selected = selection ? selectedSampleKey(contract, propValue(selection.valueProp)) : undefined;
-    const panel = selection?.panels.find(panel => panel.part === name);
-    if (panel && panel.value !== selected) return '';
+    if (!snapshotPanelSelected(contract, name, state)) return '';
     const cls = `${k}__${name}`;
     if (part.shape?.kind === 'line') return `${pad}<span class="${cls}" aria-hidden="true">${nativeLineSvg(part.shape)}</span>`;
     if (part.shape?.kind === 'stroked-path') return `${pad}<span class="${cls}" aria-hidden="true">${strokedPathSvg(part.shape)}</span>`;
@@ -1111,9 +1205,7 @@ function renderComponentHtml(
       const dep = ctx.contracts.get(part.component.id)!;
       return part.repeat.sample
         .map((rec) => {
-          const depState: RenderState = { subst: {}, bools: {} };
-          for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+          const depState = childDefaultsState(dep);
           for (const [pn, v] of Object.entries(part.component!.props ?? {})) {
             if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
             if (typeof v === 'object') {
@@ -1148,9 +1240,7 @@ function renderComponentHtml(
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const depState: RenderState = { subst: {}, bools: {} };
-      for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-      for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+      const depState = childDefaultsState(dep);
       for (const [pn, v] of Object.entries(part.component.props ?? {})) {
         if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
         if (typeof v === 'object') {
@@ -1191,14 +1281,13 @@ function renderComponentHtml(
       // every visual-parity row 55-97%). The absence is named in the emitted
       // header comment, never painted.
       if (items.length === 0) {
+        if (part.slot.collapseWhenEmpty) return `${pad}<!-- ${escapeHtmlComment(part.slot.name)} slot: empty static snapshot; host collapsed -->`;
         return `${pad}<${el} class="${cls}"${attrString(part)}><!-- ${escapeHtmlComment(part.slot.name)} slot: no content --></${el}>`;
       }
       const inner = items
         .map((item) => {
           const dep = ctx.contracts.get(item.id)!;
-          const depState: RenderState = { subst: {}, bools: {} };
-          for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
+          const depState = childDefaultsState(dep);
           for (const [pn, v] of Object.entries(item.props ?? {})) {
             if (typeof v === 'boolean') depState.bools[pn] = v;
             else depState.subst[pn] = v;
@@ -1347,7 +1436,7 @@ function renderComponentHtml(
   }
   const supportsDisabled = HTML_SUPPORTS_DISABLED.includes(el);
   for (const p of boolProps(contract)) {
-    if (state.bools[p.name] === false && walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false'))) {
+    if (state.bools[p.name] === false && walkAnatomy(contract).some(w => w.part.stylesWhen?.some(rule => rule.prop === p.name && rule.equals === 'false') || p.default===undefined && w.part.solidFillCompositionByCombination?.props.includes(p.name))) {
       const falseName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       attrs.push(`data-dsc-false-${falseName}="true"`);
     }
@@ -1414,10 +1503,24 @@ export interface EmitHtmlResult {
 }
 
 export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  return emitHtmlImpl(contract,ctx,false);
+}
+
+/** Internal source-binding qualification; public emission supports literal paint. */
+export function emitHtmlDraftPaintQualification(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  solidFillCompositionRules(contract,undefined,{root:'.root',part:name=>'.'+name,modifier:(axis,value)=>'.'+axis+'-'+value,disabled:htmlRootDisabledSelector(contract),booleanAttributes:true});
+  return emitHtmlImpl(contract,ctx,true);
+}
+
+function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitHtmlResult {
   refuseRetainedRuntime(contract, 'html', ctx.contracts);
+  refuseInstanceRootInputTarget(contract,ctx.contracts,'html');
   validateStaticHtmlIdentity(contract, ctx);
   const errors: string[] = [];
-  validateContract(contract, ctx.contracts, errors, ctx.icons);
+  const validationContract=draftPaint?structuredClone(contract):contract;
+  if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;}
+  // Every rendered root and composed child enforces the positive tuple domain.
+  validateContract(validationContract, ctx.contracts, errors, ctx.icons, { drawnVariants: 'figma-domain' });
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
@@ -1429,10 +1532,29 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
   const collectCss = (c: Contract) => {
     if (seen.has(c.id)) return;
     seen.add(c.id);
+    if (hasFinitePresence(c) || c.bindings.figma.drawnVariants !== undefined) {
+      const checked = ContractSchema.safeParse(c);
+      if (!checked.success) throw new Error('HTML_PRESENCE_COMBINATION_UNQUALIFIED: ' +
+        checked.error.issues.map(issue => issue.message).join('; '));
+    }
     for (const w of walkAnatomy(c)) {
+      if(w.part.slot && (w.part.solidFillComposition || w.part.solidFillCompositionByCombination))throw new Error("HTML_SLOT_FILL_COMPOSITION_UNQUALIFIED");
+      if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
+      if (w.part.shape?.arc?.cap) throw new Error('HTML_ELLIPSE_ARC_CAP_UNSUPPORTED');
+      if (w.part.component?.sameInkInsideStroke) throw new Error('HTML_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
+      if (w.part.component?.booleanPropsByCombination) throw new Error('HTML_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
+      if (w.part.component?.enumPropsByCombination) throw new Error('HTML_ENUM_ARGUMENTS_UNSUPPORTED');
+      if (w.part.shapeFillOverrideProp) throw new Error('HTML_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
+      if (w.part.textColorOverrideProp) throw new Error('HTML_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
+      if (w.part.textAppearanceOverride) throw new Error('HTML_TEXT_APPEARANCE_UNSUPPORTED');
+      if (w.part.imageOverride) throw new Error('HTML_IMAGE_OVERRIDE_UNSUPPORTED');
+      if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
+      if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('HTML_INSTANCE_AFFINE_UNSUPPORTED');
+      if (w.part.layoutByCombination) throw new Error('HTML_JOINT_LAYOUT_UNSUPPORTED');
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');
+      if(w.part.component && [...Object.values(w.part.states??{}),...(w.part.statesByProp??[]).flatMap(e=>Object.values(e.map))].some(m=>Object.keys(m).some(k=>k.startsWith('text-color:'))))throw Error('HTML_INSTANCE_STATE_TEXT_UNSUPPORTED');
       if (w.part.component) collectCss(ctx.contracts.get(w.part.component.id)!);
       for (const item of w.part.slot?.defaultContent ?? []) collectCss(ctx.contracts.get(item.id)!);
     }
@@ -1461,20 +1583,56 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
       `  <div class="showcase__item">\n    <p class="showcase__label">${escapeHtml(label)}</p>\n${renderComponentHtml(contract, ctx, state, '    ')}\n  </div>`,
     );
   };
-  item('default', defaultsState());
-  for (const p of enumProps(contract)) {
-    for (const v of p.type.enum) {
-      if (v === String(p.default ?? '')) continue;
-      const s = defaultsState();
-      s.subst[p.name] = v;
-      item(`${p.name}=${v}`, s);
+  const defaults = defaultsState();
+  const tuples = presenceShowcaseTuples(contract);
+  const defaultQualified = tuples === undefined || rootPresenceQualified(contract, defaults);
+  const tupleState = (tuple: Record<string, string | boolean | null>): RenderState => {
+    const state = defaultsState();
+    for (const [name, value] of Object.entries(tuple)) {
+      delete state.subst[name]; delete state.bools[name];
+      if (typeof value === 'boolean') state.bools[name] = value;
+      else if (value !== null) state.subst[name] = value;
+    }
+    return state;
+  };
+  const tupleLabel = (tuple: Record<string, string | boolean | null>): string =>
+    absentVariantAxes(contract).map(({ prop }) =>
+      `${prop.name}=${tuple[prop.name] === null ? '(omitted)' : String(tuple[prop.name])}`).join(', ');
+  if (defaultQualified) item('default', defaults);
+  else items.push('  <!-- default-snapshot-unavailable: omitted inputs have no qualified presence plane; explicit reachable tuples follow -->');
+  if (tuples !== undefined) {
+    const axes = absentVariantAxes(contract);
+    const defaultTuple = Object.fromEntries(axes.map(({ prop }) =>
+      [prop.name, presenceSelection(defaults)[prop.name] ?? null]));
+    for (const tuple of tuples) {
+      if (defaultQualified && absentVariantKey(axes, tuple) === absentVariantKey(axes, defaultTuple)) continue;
+      item(tupleLabel(tuple), tupleState(tuple));
+    }
+  } else {
+    for (const p of enumProps(contract)) {
+      for (const v of p.type.enum) {
+        if (v === String(p.default ?? '')) continue;
+        const s = defaultsState();
+        s.subst[p.name] = v;
+        item(`${p.name}=${v}`, s);
+      }
     }
   }
+  const variantNames = tuples === undefined ? new Set<string>() : new Set(absentVariantAxes(contract).map(axis => axis.prop.name));
   for (const p of boolProps(contract)) {
-    if (p.default === true) continue;
-    const s = defaultsState();
-    s.bools[p.name] = true;
-    item(`${p.name}=true`, s);
+    if (variantNames.has(p.name)) continue;
+    const cases: boolean[] = [];
+    if (p.default===undefined && walkAnatomy(contract).some(w=>w.part.solidFillCompositionByCombination?.props.includes(p.name))) cases.push(false);
+    if (p.default !== true) cases.push(true);
+    for (const value of cases) {
+      const state = defaultsState(); state.bools[p.name] = value;
+      if (rootPresenceQualified(contract, state)) {
+        item(`${p.name}=${value}`, state);
+      } else for (const tuple of tuples!) {
+        const state = tupleState(tuple); state.bools[p.name] = value;
+        item(`${tupleLabel(tuple)}, ${p.name}=${value}`, state);
+      }
+    }
   }
 
   const header = `<!--

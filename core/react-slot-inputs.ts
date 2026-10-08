@@ -39,3 +39,15 @@ export function reactSlotExpression(slot: Slot, byId: Map<string, Contract>, att
   }).join('');
   return `${input} === undefined ? <>${fallback}</> : ${input}`;
 }
+
+/** Only inspect transparent React containers. Components are opaque and remain
+ * present: calling a component here would violate hooks and render semantics. */
+export const REACT_SLOT_CONTENT_RUNTIME = `function __dscSlotHasContent(value: React.ReactNode): boolean {
+  if (value == null || typeof value === 'boolean' || value === '') return false;
+  if (Array.isArray(value)) return value.some(__dscSlotHasContent);
+  if (React.isValidElement<{ children?: React.ReactNode }>(value) && value.type === React.Fragment)
+    return __dscSlotHasContent(value.props.children);
+  return true;
+}
+
+`;

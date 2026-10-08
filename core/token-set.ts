@@ -1,3 +1,4 @@
+import { capturedStyleLineHeight, sameStyleLineHeight, type StyleLineHeight } from './text-style-line-height.js';
 /**
  * Foreign token sets — the CONTRACTS-BUNDLE `tokenSet` section.
  *
@@ -474,6 +475,7 @@ export function unsupportedTokenValues(tokenSet: TokenSetPayload): string[] {
 }
 
 interface TokenSetTextStyle {
+  lineHeight?: StyleLineHeight;
   name: string;
   tokenPath: string;
   fontSize: number;
@@ -528,7 +530,33 @@ function tokenSetTextStyles(
         const weightRow = byName.get([...groupPrefix, 'font-weight'].join('/'));
         const weight =
           weightRow?.type === 'FLOAT' ? weightRow.light : 500;
+        const lineHeight = capturedStyleLineHeight(next.join('.'), {
+          name: identity.name,
+          ...(typeof identity.key === 'string' ? { key: identity.key } : {}),
+        }, (path) => {
+          let node: unknown = tokenSet.minted;
+          for (const segment of path.split('.')) node = isPlainObject(node) ? node[segment] : undefined;
+          if (!isPlainObject(node) || !('$value' in node)) return undefined;
+          const leaf = node;
+          const raw = leaf.$value;
+          const extensions = leaf.$extensions as { dsContracts?: { textStyle?: { name?: unknown; key?: unknown } } } | undefined;
+          let resolved: unknown = raw;
+          if (typeof raw === 'string' && raw.startsWith('{')) {
+            let row = byName.get(path.replaceAll('.', '/'));
+            const seen = new Set<string>();
+            while (row?.type === 'ALIAS' && !seen.has(row.name)) {
+              seen.add(row.name);
+              row = byName.get(row.target);
+            }
+            resolved = row && row.type !== 'ALIAS' ? row.light : undefined;
+          }
+          return {
+            value: resolved,
+            identity: extensions?.dsContracts?.textStyle,
+          };
+        });
         out.push({
+          ...(lineHeight ? { lineHeight } : {}),
           name: identity.name,
           tokenPath: next.join('.'),
           fontSize: sizeRow.light,
@@ -567,7 +595,7 @@ function prioritizeSharedTextStyles(
       byName.set(s.name, s);
       continue;
     }
-    if (prev.fontSize !== s.fontSize || prev.fontStyle !== s.fontStyle) {
+    if (prev.fontSize !== s.fontSize || prev.fontStyle !== s.fontStyle || !sameStyleLineHeight(prev.lineHeight, s.lineHeight)) {
       throw new Error(
         `text-style-identity-refused: text style ${JSON.stringify(s.name)} has conflicting definitions ` +
           `(${prev.fontSize}px/${prev.fontStyle} via ${prev.tokenPath} vs ${s.fontSize}px/${s.fontStyle} via ${s.tokenPath})`,
@@ -1042,7 +1070,7 @@ for (const t of TEXT_STYLES) {
   s.name = t.name;
   s.fontName = { family: 'Inter', style: t.fontStyle };
   s.fontSize = t.fontSize;
-}
+${textStyles.length ? "  s.lineHeight = t.lineHeight || { unit: 'AUTO' };\n" : ''}}
 const modeNames = col.modes.map((m) => m.name).join('/');
 figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated, ' + pruned + ' pruned, ' + leftovers.length + ' leftover(s), ' + variableDrift.length + ' edited value(s) ' + (DS_OVERWRITE_TOKENS ? 'overwritten' : 'kept') + ', ' + skippedValues.length + ' skipped (' + TOKENS.length + ' total, ' + aliased + ' aliases, modes ' + modeNames + '; ' + createdStyles + ' text styles created)');
 return { created, updated, aliased, pruned, leftovers, pruneSkipped, variableDrift, driftOverwritten: DS_OVERWRITE_TOKENS, skippedValues, modeSkipped, modes: col.modes.map((m) => m.name), total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };

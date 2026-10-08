@@ -287,11 +287,66 @@ test("family capture refuses missing, remote, cyclic, ambiguous and over-budget 
     if (kind === "REMOTE_COMPONENT") main.remote = true;
     if (kind === "CYCLE") instance.getMainComponentAsync = async () => live.node.children![0];
     if (kind === "AMBIGUOUS_NAME") main.parent.name = live.node.name;
-    if (kind === "SET_NAME") main.parent.name = "_hidden";
+    if (kind === "SET_NAME") main.parent.name = "_provenance";
     if (kind === "SET_CAP") source = source.replace("const DEPENDENCY_SET_CAP = 64;", "const DEPENDENCY_SET_CAP = 0;");
     if (kind === "NODE_CAP") source = source.replace("const DEPENDENCY_NODE_CAP = 50000;", "const DEPENDENCY_NODE_CAP = 1;");
-    await assert.rejects(live.run(source), new RegExp("DEPENDENCY_CAPTURE_" + kind), kind);
+    await assert.rejects(live.run(source), new RegExp("DEPENDENCY_CAPTURE_" + (kind === "REMOTE_COMPONENT" ? "REMOTE_SET_SNAPSHOT_UNQUALIFIED" : kind)), kind);
   }
+});
+
+
+test("family capture retains private component names and proposes their actual child API", async () => {
+  const c = fixture(), live = await native(c);
+  const instance: any = live.node.findOne((n: any) => n.type === "INSTANCE");
+  const main = await instance.getMainComponentAsync();
+  main.parent.name = "_Private child";
+  live.node.name = "_Private host";
+  const source = familyCaptureSource(live.node.name);
+  const dump = JSON.parse(JSON.stringify(await live.run(source)));
+  assert.ok(dump["_Private child"]);
+  assert.ok(dump["_Private host"]);
+  assert.ok(dump._provenance.sets.includes("_Private child"));
+  assert.ok(dump._provenance.sets.includes("_Private host"));
+  assert.equal(dump._provenance.closure.requested[0].name, "_Private host");
+  assert.ok(dump._provenance.closure.pulled.some((s: any) => s.name === "_Private child"));
+  assert.deepEqual(JSON.parse(JSON.stringify(await live.run(source))), dump, "read-only repeat retains every captured field");
+  const batch = proposeBatchFromDump(dump, {
+    corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map(), contractsById: new Map(), mintUnbound: true, projectionMode: "exact",
+  });
+  assert.deepEqual(batch.skipped, []);
+  assert.equal(batch.proposals.length, 3);
+  const returned = batch.proposals.map(p => ContractSchema.parse(p.contract));
+  const item = returned.find(p => p.id === child.id)!;
+  assert.equal(item.props.find(p => p.bindings.figma.property === "Label")?.name, "label");
+  assert.equal(item.anatomy.root.parts?.label.content?.prop, "label");
+  assert.deepEqual(rows(returned.find(p => p.id === c.id)!), rows(c));
+});
+
+test("family and ordinary capture refuse reserved metadata, unsafe and integer-order names", async () => {
+  for (const name of ["_provenance", "_variables", "_degradations", "__proto__", "constructor", "prototype", "0", "42"]) {
+    for (const dependencies of [true, false]) {
+      const live = await native();
+      live.node.name = name;
+      let source = familyCaptureSource(name);
+      if (!dependencies) source = source.replace("const INCLUDE_DEPENDENCIES = true;", "const INCLUDE_DEPENDENCIES = false;");
+      await assert.rejects(live.run(source), new RegExp(dependencies ? "DEPENDENCY_CAPTURE_SET_NAME" : "DUMP_CAPTURE_SET_NAME"), `${name} dependencies=${dependencies}`);
+    }
+  }
+});
+
+test("ordinary capture retains private requested names and refuses duplicate captured names", async () => {
+  const live = await native();
+  live.node.name = "_Private host";
+  const source = familyCaptureSource(live.node.name).replace("const INCLUDE_DEPENDENCIES = true;", "const INCLUDE_DEPENDENCIES = false;");
+  const dump = JSON.parse(JSON.stringify(await live.run(source)));
+  assert.equal(dump["_Private host"].nodeId, live.node.id);
+  assert.deepEqual(dump._provenance.sets, ["_Private host"]);
+  const figma: any = live.figma;
+  const duplicate = figma.createComponent();
+  duplicate.name = live.node.name;
+  figma.currentPage.appendChild(duplicate);
+  await assert.rejects(live.run(source), /DUMP_CAPTURE_AMBIGUOUS_NAME/);
 });
 
 test("family capture follows transitive mains and applied swaps by identity", async () => {
@@ -628,4 +683,50 @@ test("returned React keeps keyboard callbacks and stable keys after native renam
     );
     await page.close();
   }
+});
+
+
+test("family capture includes a nested replacement absent from the outer main", async () => {
+  const live = await native();
+  const outer: any = live.node.findOne((n: any) => n.type === "INSTANCE");
+  const selected = (live.figma as any).createComponent();
+  selected.name = "Nested replacement"; selected.resize(16,16);
+  (live.figma as any).currentPage.appendChild(selected);
+  const replacement = selected.createInstance();
+  outer.appendChild(replacement);
+  const before = await live.dump();
+  const source = familyCaptureSource(live.node.name);
+  const captured = JSON.parse(JSON.stringify(await live.run(source)));
+  assert(captured[selected.name]);
+  assert(captured._provenance.closure.pulled.some((r:any)=>r.nodeId===selected.id));
+  assert.deepEqual(await live.dump(),before,"dependency traversal is read-only");
+  replacement.getMainComponentAsync = async () => null;
+  await assert.rejects(live.run(source),/DEPENDENCY_CAPTURE_MAIN_UNREADABLE/);
+});
+
+test('family capture preserves distinct same-key remote snapshots without renaming source nodes',async()=>{
+ const live=await native();
+ (live.figma as any).fileKey='capture-file';
+ const host:any=live.node.children![0];
+ const mains=['old','new'].map((tag,i)=>{
+  const main:any=(live.figma as any).createComponent();
+  main.name='Shared remote';main.key='a'.repeat(40);main.resize(16,16);
+  main.remote=true;main.parent=null;
+  main.fills=[{type:'SOLID',color:{r:i,g:0,b:0}}];
+  const instance=main.createInstance();instance.getMainComponentAsync=async()=>main;
+  host.appendChild(instance);return main;
+ });
+ const source=familyCaptureSource(live.node.name);
+ const dump=JSON.parse(JSON.stringify(await live.run(source)));
+ for(const main of mains){
+  const alias=main.name+' [captured '+main.id+']';
+  assert.equal(dump[alias].nodeId,main.id);
+  assert.deepEqual(dump[alias].captureAlias,{sourceName:'Shared remote',nodeId:main.id});
+  assert.equal(dump[alias].variants[0].name,'Shared remote');
+  assert.equal(main.name,'Shared remote');
+ }
+ assert.notDeepEqual(dump['Shared remote [captured '+mains[0].id+']'].variants[0],
+  dump['Shared remote [captured '+mains[1].id+']'].variants[0]);
+ mains[1].key='b'.repeat(40);
+ await assert.rejects(live.run(source),/DEPENDENCY_CAPTURE_AMBIGUOUS_NAME/);
 });

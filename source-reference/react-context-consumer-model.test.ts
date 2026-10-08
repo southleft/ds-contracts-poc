@@ -29,7 +29,8 @@ export const ${name}=React.forwardRef(function Render({scope,...props},ref){${bo
 }
 function prepare(root:string,text:string,name:string){
   const file=path.join(root,'consumer.mjs');writeFileSync(file,text);
-  const factory=path.join(root,'factories.mjs'),reference={sourceRoot:root,files:{[file]:sha(text),...(existsSync(factory)?{[factory]:sha(readFileSync(factory,'utf8'))}:{})},runtimeImports:existsSync(factory)?[{importer:file,specifier:'./factories.mjs',file:factory}]:[]};
+  const config=path.join(root,'tsconfig.json'),configText=JSON.stringify({compilerOptions:{jsx:'react-jsx',module:'ESNext',target:'ES2022',moduleResolution:'Bundler'}});writeFileSync(config,configText);
+  const factory=path.join(root,'factories.mjs'),reference={sourceRoot:root,files:{[file]:sha(text),[config]:sha(configText),...(existsSync(factory)?{[factory]:sha(readFileSync(factory,'utf8'))}:{})},runtimeImports:existsSync(factory)?[{importer:file,specifier:'./factories.mjs',file:factory}]:[]};
   const target=readReactRuntimeExport(reference,'consumer.mjs',[name]);assert.equal(target.status,'resolved');
   const initializer=readReactTargetInitializer(reference,target.definition),plans=planReactContextConsumerCalls(reference,[initializer]);
   const calls=plans.filter(p=>text.slice(p.callee.start,p.callee.end)==='readContext');

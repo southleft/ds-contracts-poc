@@ -832,3 +832,14 @@ reproducible from `extract/computed/out/mui` + the ledger; the minted tree lost 
 receipt rebuilt from the new tree. The per-component sync scripts were not re-emitted by this
 round (the four authored contracts emit byte-identically; the engine-side staleness of
 alert/slider/switch/tabs predates it and is the engine lane's to close).
+
+### Authored text-style repair (2026-10-07)
+
+The named TextField label and helper styles now explicitly include the existing
+computed React line heights: 23px and 19.92px. These are authored style
+definitions, not values inferred from the old Figma styles. Live readback found
+both old styles and all 12 consumers using AUTO; changing a consumer's line
+height cleared its style ID. The previous style application therefore lost the
+contract's typography. The contract values remain unchanged; the label now uses
+a dedicated identity-bearing line-height token. Both token sync and component
+compilation retain the same definitions, with the exact-match guard unchanged.

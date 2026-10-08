@@ -72,7 +72,11 @@ try {
     },
     bundle: true, platform: 'browser', format: 'iife', write: false, logLevel: 'silent',
   });
-  const sandbox = { INPUT: JSON.parse(data), RESULT: { value: null }, console: { log() {}, warn() {}, error() {} } };
+  // Node VM contexts omit host Web APIs that are available in browsers.
+  // Supply structuredClone without exposing process, require, or Buffer.
+  const sandbox = { INPUT: JSON.parse(data), RESULT: { value: null }, structuredClone, console: { log() {}, warn() {}, error() {} } };
+  if (vm.runInNewContext("typeof process !== 'undefined' || typeof require !== 'undefined' || typeof Buffer !== 'undefined'", sandbox))
+    throw new Error('browser sandbox exposes Node globals');
   vm.runInNewContext(probe.outputFiles[0].text, sandbox, { timeout: 60_000 });
   const result = sandbox.RESULT.value;
   const names = ['react', 'html', 'react-inline', 'figma-script'];

@@ -157,6 +157,7 @@ export {
   cssVarName,
   DARK_MODE_SELECTOR,
   emitTokensCss,
+  externalizeTokenImages,
   mentionedCssVars,
   referencedCssVars,
   ROOT_SELECTOR,
@@ -224,3 +225,5 @@ export {
   type RequiredFact,
   type RequiredFactsResult,
 } from './required-facts.js';
+
+export {childPaintOrderPlans} from './child-paint-order.js';

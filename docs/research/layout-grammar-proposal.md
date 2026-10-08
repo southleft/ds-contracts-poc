@@ -307,10 +307,27 @@ write order preserves both**:
   (GP1b). A node that reports HUG and behaves FIXED is worse than the defect,
   because the readback lies to the differ.
 
-The two are contradictory by construction, and **CSS agrees**: `1fr` resolves
-against a definite size; under `height: auto` the `fr` rows are content-sized
-and the ratio does not hold either. So this is not a platform gap to route
-around — it is a fact that does not exist on either surface.
+**Correction (2026-10-05): this is a native Figma limitation, not an invalid
+CSS layout.** With indefinite available space, CSS sizes fractional tracks
+from content contributions while preserving their proportions. See
+[CSS Grid §11.7](https://www.w3.org/TR/css-grid-1/#algo-flex-tracks).
+For example, automatic-height `1fr 2fr` rows with 20px and 80px content
+resolve to 40px and 80px (120px total); replacing them with `auto auto`
+produces 20px and 80px (100px total). Empty explicit fractional rows also
+participate: five equal fractional rows with only two 24px items resolve to
+five 24px tracks, not two content tracks plus three collapsed tracks.
+
+A fresh native probe reproduced the distinction: writing HUG after the tracks
+converted them to HUG and produced 100px; writing HUG before the fractional
+tracks retained a 100px frame, with the second item starting at 33.333px and
+overflowing its track. Neither matches the browser's 120px result. The probe
+is recorded in `docs/research/grid-intrinsic-fraction-2026-10-05.md`.
+
+The native refusal remains necessary for the current emitter. A future
+lowering must preserve the original fractional declarations and account for
+intrinsic content sizing; replacing them with HUG or presenting one measured
+height as an authored fixed height is not equivalent. The schema guard must
+not be interpreted as evidence that CSS itself cannot express this layout.
 
 **REFUSED by name: `grid-hug-flex-axis`** (G7 row added below). The refusal
 fires contract-side, before emission, so the silent rewrite can never be

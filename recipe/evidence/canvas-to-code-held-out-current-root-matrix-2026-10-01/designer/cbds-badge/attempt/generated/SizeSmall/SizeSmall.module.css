@@ -1,0 +1,32 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/size-small.contract.json (ds.size-small v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.size-small {
+  width: var(--imported-stub-size-small-root-width-small);
+  height: var(--imported-stub-size-small-root-height-small);
+}
+
+.size-xsmall {
+  width: var(--imported-stub-size-small-root-width-xsmall);
+  height: var(--imported-stub-size-small-root-height-xsmall);
+}
+
+.iconSwap {
+  font-family: Inter, system-ui, sans-serif;
+}

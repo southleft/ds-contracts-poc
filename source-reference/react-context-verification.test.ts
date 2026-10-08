@@ -1,3 +1,4 @@
+import {realpathSync} from 'node:fs';
 import {planReactCallbackFactories} from './react-callback-factories.js';
 import {planReactEffectHooks} from './react-effect-hooks.js';
 import {planReactRefHooks} from './react-ref-hooks.js';
@@ -38,14 +39,14 @@ for(const [callbackMode,refMode,effectMode,factoryMode] of [[false,'none','none'
  export const Context=React.createContext(null);
  export function Provider(props){const {children,...value}=props;return jsx(Context.Provider,{value,children});}
  function useSelection(name){const value=React.useContext(Context);if(value)return value;throw new Error(name);}
- var NAME='indicator';function label(active){return active?'on':'off';}
- export const Indicator=React.forwardRef(function Reader(props,ref){const value=useSelection(NAME);${callbackMode?'const merged=useJoined(ref,value.secondaryRef);':''}${refMode!=='none'?`const localRef=${refExpression}(value.active);`:''}${effectSource}${factorySetup}return jsx(Widgets.control,{'data-state':label(value.active),payload:value.payload,${refMode!=='none'?'payloadRef:localRef,':''}...props,${factoryMode?'onClick:click,':''}ref:${callbackMode?'merged':'ref'}});});`;
+ var NAME='indicator';function pass(value){return value;}function label(active){return active?'on':'off';}
+ export const Indicator=React.forwardRef(function Reader(props,ref){const value=useSelection(NAME);${callbackMode?'const merged=useJoined(ref,value.secondaryRef);':''}${refMode!=='none'?`const localRef=${refExpression}(value.active);`:''}${effectSource}${factorySetup}return jsx(Widgets.control,{'data-state':label(value.active),payload:${callbackMode?'value.payload':'pass(value.payload)'},${refMode!=='none'?'payloadRef:localRef,':''}...props,${factoryMode?'onClick:click,':''}ref:${callbackMode?'merged':'ref'}});});`;
  const tableSource=`import * as React from 'react';import {jsx} from 'react/jsx-runtime';const Node=React.forwardRef((props,ref)=>{window.renderCount++;const {payload,payloadRef,...rest}=props;${refMode!=='none'?'window.savedRef=payloadRef;':''}return jsx('button',{...rest,ref,${refMode!=='none'?"'data-ref':String(payloadRef.current),":''}children:'Control'});});export const Widgets={control:Node};`;
  const factoryFile=path.join(dir,'factories.mjs'),callbackFile=path.join(dir,'callbacks.mjs');
  const callbackSource="import * as React from 'react';function join(...refs){return node=>{for(const ref of refs){if(typeof ref==='function')ref(node);else if(ref)ref.current=node;}};}export function useJoined(...refs){return React.useCallback(join(...refs),refs);}";
  const file=path.join(dir,'fixture.tsx'),targetFile=path.join(dir,'targets.mjs'),tableFile=path.join(dir,'tables.mjs'),config=path.join(dir,'tsconfig.json'),files:Record<string,string>={};
  for(const [f,s] of [[file,text],[targetFile,targetSource],[tableFile,tableSource],[callbackFile,callbackSource],[factoryFile,factorySource],[config,'{"compilerOptions":{"jsx":"react-jsx","module":"ESNext","target":"ES2022","moduleResolution":"Bundler"}}']]){writeFileSync(f,s);files[f]=sha(s);}
- for(const a of reactRuntimeAdapters){const f=repo+a.suffix;files[f]=sha(readFileSync(f,'utf8'));}
+ for(const a of reactRuntimeAdapters){const f=realpathSync(repo+a.suffix);files[f]=sha(readFileSync(f,'utf8'));}
  const reference={sourceRoot:dir,files,runtimeImports:[{importer:targetFile,specifier:'./factories.mjs',file:factoryFile},{importer:targetFile,specifier:'./callbacks.mjs',file:callbackFile},{importer:file,specifier:'./targets.mjs',file:targetFile},{importer:targetFile,specifier:'./tables.mjs',file:tableFile}]} as unknown as ReactReference;
  const target=readReactRuntimeExport(reference,'targets.mjs',['Indicator']);assert.equal(target.status,'resolved');if(target.status!=='resolved')return;
  const initializer=readReactTargetInitializer(reference,target.definition),{program,sf,source,runtimeFiles}=prepareReactEffectProgram(reference,'fixture.tsx',{},{});let component:ts.ArrowFunction|undefined;
@@ -74,6 +75,19 @@ for(const [callbackMode,refMode,effectMode,factoryMode] of [[false,'none','none'
    const runtime=await page.evaluate<ReactHelperRuntimeReport>(reactHelperRuntimeRead);assert.equal(runtime.status,'observed');if(runtime.status!=='observed')continue;
    const proof=prepared!.proof,verified=verifyReactContextConsumers(reference,plan,runtime,proof);
    assert.equal(verified.rows.length,effectMode==='none'?2:3);assert(verified.rows.every(r=>r.status==='verified'),JSON.stringify(verified));assert.equal(verified.effectsVerified,false);assert.equal(verified.acceptedContract,null);assert(verified.rows.every(r=>r.remainingRequirements.length===(callbackMode?5:3)+(refMode!=='none'?1:0)+(effectMode!=='none'?1:0)+(factoryMode?1:0)));
+   if(!callbackMode){
+    const forwarded=runtime.contexts!.consumerCalls.invocations.find(c=>targetSource.slice(c.site.start,c.site.end)==='pass(value.payload)');assert(forwarded);
+    assert.equal(forwarded.arguments[0].kind,'object');assert.deepEqual(forwarded.argumentWitnesses[0],forwarded.returnWitness);
+    assert(Number.isSafeInteger(forwarded.returnWitness?.identity));
+    for(const attack of ['argument','return','missing','scalar']){
+     const changed=structuredClone(runtime),call=changed.contexts!.consumerCalls.invocations[forwarded.id];
+     if(attack==='argument')call.argumentWitnesses[0]={kind:'object',identity:99999};
+     if(attack==='return')call.returnWitness={kind:'object',identity:99999};
+     if(attack==='missing')call.argumentWitnesses=[];
+     if(attack==='scalar')call.arguments[0]={kind:'string',value:'forged'};
+     const failed=verifyReactContextConsumers(reference,plan,changed,proof);assert.equal(failed.rows[0].status,'refused',attack);
+    }
+   }
    if(factoryMode){
     const factory=runtime.callbackFactories!;assert.equal(factory.invocations.length,3);assert.equal(factory.callbacks.length,3);assert(factory.invocations.every(f=>f.callVerified&&f.bindingsVerified&&f.bindingPhase==='function-entry'));assert(factory.callbacks.every(c=>c.originVerified&&c.namingVerified&&!c.bodyVerified&&!c.capturesVerified));assert(verified.rows.every(r=>r.factoryCalls.length===1&&r.factoryCalls[0].creationBodyVerified&&!r.factoryCalls[0].callbackBodyVerified&&!r.factoryCalls[0].capturesVerified));
     for(const attack of ['binding','argument','literal','return','origin','order','lookup']){

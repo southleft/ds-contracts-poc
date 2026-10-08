@@ -68,7 +68,8 @@ export type ReactHelperRuntimeReport =
         inputKeys: string[];
         context: number;
       }>;
-      bindings: { registeredBindings: number; checkedCalls: number };
+      bodyTraces?:Array<{source:string;render:number;checkedCalls:number;output:ReactContextValueWitness;callTraceVerified:true;bindingKeys:string[];effectsVerified:false}>;
+      bindings: { registeredBindings: number; checkedCalls: number; initialization?:{qualification:'source-initialization-call-order-only';effectsVerified:false;checks:Array<{model:number;calls:Array<{site:string;source:string;completion:'returned'|'threw'}>}>} };
       components?: Array<{
         context: number;
         helperCalls: number;
@@ -101,7 +102,10 @@ export function reactHelperRuntimeHook(
   callbackFactories?: ReactCallbackFactories,
   hookHelpers?:ReactHookHelpers,
   consumerLiterals:readonly ReactConsumerLiteral[]=[],
+  boundaryOnly=false,
+  bodyModels:readonly import("./react-target-effects.js").ReactContextConsumerEffects[]=[],
 ): string {
+  if(boundaryOnly&&(!jsxOnly||models.length||components.length||!initializerPlans.length||projectionModels.length||callbackPlans.length||callbackValues.length))throw Error('wrapper-boundary-context-invalid');
   if (
     (!models.length && !jsxOnly) ||
     models.some(
@@ -120,7 +124,7 @@ export function reactHelperRuntimeHook(
   )
     throw Error("component-runtime-contexts-incompatible");
   if(initializerPlans.length&&!jsxOnly)throw Error('target-initializer-context-invalid');
-  if(jsxOnly && (models.length || !components.length || components.some(m=>!("jsxTargets" in m))))
+  if(jsxOnly && (models.length || (!components.length&&!boundaryOnly) || components.some(m=>!("jsxTargets" in m))))
     throw Error("jsx-helper-runtime-contexts-invalid");
   return `(((models,componentModels,jsxOnly,initializerPlans,projectionModels,callbackPlans,callbackValues,contextCalls,contextRests,contextHelpers,contextConsumerCalls,contextFactories,contextBindings,contextTargets,callbackSources,refHooks,effectHooks,callbackFactories,hookHelpers,consumerLiterals) => {
  const expected=models[0]?.extraArguments??[],contexts=models;
@@ -128,15 +132,15 @@ export function reactHelperRuntimeHook(
  const objectPrototype=Object.prototype,arrayPrototype=Array.prototype;
  const literals=new N.WeakSetCtor(),props=new N.WeakMapCtor(),elements=new N.WeakMapCtor(),runtimes=new N.WeakSetCtor(),seenMetadata=new N.WeakSetCtor();
  const metadataNodes=[],defs=[],registeredDefinitions=[],events=[],failures=[];let helper,helperCalls=0,forwardCopies=0,jsxCalls=0,elementCalls=0;
- const componentEvents=[];let activeComponent=null,inHelper=false,fragment;const targets=new Map(),namespaces=new N.WeakMapCtor();
+ const bodyEvents=[],componentEvents=[];let activeComponent=null,inHelper=false,fragment;const targets=new Map(),namespaces=new N.WeakMapCtor();
  const fail=reason=>{failures[failures.length]=reason;throw new N.ErrorCtor(reason);};
  const sameDescriptor=(a,b)=>{if(!a||!b)return false;const fields=['value','get','set','writable','enumerable','configurable'];for(let i=0;i<fields.length;i++){const left=N.descriptor(a,fields[i]),right=N.descriptor(b,fields[i]);if(!!left!==!!right||left&&!N.is(left.value,right.value))return false;}return true;};
  const intrinsics=${reactHelperIntrinsicGuard};
- const contextTransport=(${reactContextRuntime})(N,intrinsics,sameDescriptor,fail,contextCalls,contextRests,contextHelpers,contextConsumerCalls,contextFactories,(fn,args)=>{
-  const value=element(fn,args,'jsx'),origin=N.apply(N.mapGet,elements,[value]);
+ const contextTransport=(${reactContextRuntime})(N,intrinsics,sameDescriptor,fail,contextCalls,contextRests,contextHelpers,contextConsumerCalls,contextFactories,(fn,args,factory)=>{
+  const value=element(fn,args,factory==='createElement'?'create-element':'jsx'),origin=N.apply(N.mapGet,elements,[value]);
   if(!origin||!N.is(origin.descriptors.type?.value,args[0]))fail('context-factory-target-changed');
   return value;
- },contextBindings,contextTargets,(id,value)=>callbackMemo.consumerReturn(id,value));
+ },contextBindings,contextTargets,(id,value)=>callbackMemo.consumerReturn(id,value),factoryPropsReceipt,${JSON.stringify(bodyModels.flatMap(m=>{if(m.status!=='modeled')throw Error('initialization-write-model-refused');return m.writes.filter(w=>w.phase==='module-initialization'&&w.source).map(w=>{return {site:w.source,owner:w.origin,key:w.key,targetSource:w.targetSource??null};});}))});
  const literalOrigins=(${reactConsumerLiteralRuntime})(consumerLiterals,N,intrinsics,fail,contextTransport.renderScope,contextTransport.witness);
  const callbackOrigins=(${reactCallbackSourceRuntime})(callbackSources,N,intrinsics,sameDescriptor,fail,contextTransport.sourceScope,contextTransport.witness,contextTransport,(id,args,value)=>callbackMemo.sourceReturn(id,args,value));
  const factoryOrigins=(${reactCallbackFactoryRuntime})(callbackFactories,N,intrinsics,sameDescriptor,fail,contextTransport.sourceScope,contextTransport.renderScope,contextTransport.witness);
@@ -173,7 +177,7 @@ export function reactHelperRuntimeHook(
  const initializers=(${reactTargetInitializerRuntime})(initializerPlans,N,intrinsics,sameDescriptor,fail,targetBoundaries());
  function literal(value){N.apply(N.weakAdd,literals,[value]);return renderGraph.literal(value);}
  function knownLiteral(value){return value!==null&&(typeof value==='object'||typeof value==='function')&&N.apply(N.weakHas,literals,[value]);}
- const bindingGuard=(${reactHelperBindingGuard})([...models,...componentModels],()=>{intrinsics();if(activeComponent)checkTargets();},knownLiteral,reason=>{failures[failures.length]=reason;});
+ const bindingGuard=(${reactHelperBindingGuard})([...models,...componentModels,...${JSON.stringify(bodyModels)}],()=>{intrinsics();if(activeComponent)checkTargets();},knownLiteral,reason=>{failures[failures.length]=reason;});
  function data(value,reason,origin){const ds=N.descriptors(value),keys=N.keys(ds);if(N.prototype(value)!==objectPrototype)fail(reason+'-prototype');for(let i=0;i<keys.length;i++){const k=keys[i],d=ds[k];
   // Only the unchanged warning getter created by the pinned React factory is
   // excluded. Arbitrary accessors and caller-shaped lookalikes still refuse.
@@ -184,6 +188,7 @@ export function reactHelperRuntimeHook(
   if(keys.length!==oldKeys.length)fail(reason);for(let i=0;i<keys.length;i++)if(keys[i]!==oldKeys[i]||!sameDescriptor(now[keys[i]],origin.descriptors[keys[i]]))fail(reason);
  }
  function register(value,shape){
+  if(shape.kind==='metadata-function'){bindingGuard.metadataFunction(value,shape.source);return;}
   if(shape.kind==='literal'){if(typeof value!==shape.type||!N.is(value,shape.type==='undefined'?undefined:shape.value))fail('metadata-value-mismatch');return;}
   if(!knownLiteral(value))fail('metadata-provenance-unproved');
   const prototype=shape.kind==='array'?arrayPrototype:objectPrototype;if(N.prototype(value)!==prototype)fail('metadata-prototype-mismatch');
@@ -202,8 +207,9 @@ export function reactHelperRuntimeHook(
  function element(fn,args,kind){
   intrinsics();if(!N.apply(N.weakHas,runtimes,[fn]))fail('react-runtime-unregistered');
   const config=args[1];if(config!==null&&config!==undefined&&!knownLiteral(config))fail('jsx-config-provenance-unproved');
-  if(config!==null&&config!==undefined)data(config,'jsx-config');
+  const configDescriptors=config!==null&&config!==undefined?data(config,'jsx-config'):null;
   const result=N.apply(fn,undefined,args);intrinsics();
+  if(kind==='create-element'&&configDescriptors)stable(config,{descriptors:configDescriptors},'factory-config-mutated');
   // The exact installed React runtime is pinned, registered at initialization,
   // and receives only known fresh compiler configs. Its returned props are not
   // inferred trustworthy from their appearance.
@@ -211,11 +217,23 @@ export function reactHelperRuntimeHook(
   const ref=N.descriptor(d.value,'ref');
   const descriptors=N.descriptors(d.value),warning=descriptors.key;
   const keyWarning=warning&&!N.descriptor(warning,'value')&&!warning.enumerable&&typeof warning.get==='function'&&warning.set===undefined?warning:undefined;
-  const origin={kind,descriptors,ref:ref&&N.descriptor(ref,'value')?ref.value??null:null,keyWarning};
+  const origin={kind,configDescriptors,descriptors,ref:ref&&N.descriptor(ref,'value')?ref.value??null:null,keyWarning};
   N.apply(N.mapSet,props,[d.value,origin]);
   N.apply(N.mapSet,elements,[result,{descriptors:N.descriptors(result),props:d.value,origin}]);
   renderGraph.factory(result,N.apply(N.mapGet,elements,[result]));
   if(kind==='jsx')jsxCalls++;else elementCalls++;return result;
+ }
+ function factoryPropsReceipt(value,args,factory){
+  const record=N.apply(N.mapGet,elements,[value]);if(!record)fail('factory-receipt-origin-missing');
+  stable(value,record,'factory-receipt-element-mutated');stable(record.props,record.origin,'factory-receipt-props-mutated');
+  const fields=ds=>N.keys(ds).map(key=>[key,contextTransport.witness(ds[key].value)]);
+  const config=record.origin.configDescriptors;
+  // All descriptors below come from known compiler allocations or the pinned
+  // native factory. Nested caller values remain opaque identity witnesses.
+  return {qualification:'native-factory-config-props-observation-only',effectsVerified:false,
+   config:contextTransport.witness(args[1]),props:contextTransport.witness(record.props),
+   configFields:config?fields(config):[],propsFields:fields(data(record.props,'factory-receipt-props',record.origin)),
+   positionalChildren:factory==='createElement'?args.slice(2).map(contextTransport.witness):[]};
  }
  function forward(from,to){
   const origin=N.apply(N.mapGet,props,[from]);if(!origin)return;
@@ -379,12 +397,16 @@ export function reactHelperRuntimeHook(
    componentEvents[componentEvents.length]={context,helperCalls:helperCalls-before,...(jsxOnly?{checkedCalls:bindingGuard.report().checkedCalls-callsBefore,targetReads:frame.targetCursor}:{}),content:componentModels[context].content};return output;
   }finally{activeComponent=null;}
  }
- const raw={renderGraphHost:renderGraph.host,consumerLiteral:literalOrigins.capture,helperRegister:helperHooks.register,helperBegin:helperHooks.begin,helperReturn:helperHooks.returned,helperEnd:helperHooks.end,helperHookValue:helperHooks.hookValue,helperHookRead:helperHooks.hookRead,helperHookDefault:helperHooks.hookDefault,helperHookCall:helperHooks.hookCall,helperHookLiteral:helperHooks.literal,helperHookDependencies:helperHooks.dependencies,stateBegin:states.begin,stateInitialized:states.initialized,stateQueue:states.queue,stateTuple:states.tuple,stateReturn:states.returned,stateThrow:states.thrown,stateEnd:states.end,factoryRegister:factoryOrigins.register,factoryArgument:factoryOrigins.argument,factoryBegin:factoryOrigins.begin,factoryLiteral:factoryOrigins.literal,factoryNamingHelper:factoryOrigins.namingHelper,factoryName:factoryOrigins.name,factoryReturn:factoryOrigins.returned,factoryEnd:factoryOrigins.end,effectRecord:effects.record,effectCreateBegin:effects.createBegin,effectCleanupValue:effects.cleanupValue,effectCleanupBegin:effects.cleanupBegin,effectRunReturn:effects.returned,effectRunThrow:effects.thrown,effectRunEnd:effects.end,effectHookValue:effects.hookValue,effectHookRead:effects.hookRead,effectHookDefault:effects.hookDefault,effectHookCall:effects.hookCall,effectLiteral:effects.literal,effectDependencies:effects.dependencies,refState:refs.state,refMount:refs.mount,refUpdate:refs.update,refHookValue:refs.hookValue,refHookRead:refs.hookRead,refHookDefault:refs.hookDefault,refHookCall:refs.hookCall,callbackSourceHookDefault:callbackOrigins.hookDefault,callbackSourceHookRead:callbackOrigins.hookRead,callbackSourceHookValue:callbackOrigins.hookValue,callbackSourceHookCall:callbackOrigins.hookCall,callbackSourceRegister:callbackOrigins.register,callbackSourceBegin:callbackOrigins.begin,callbackSourceReturn:callbackOrigins.returned,callbackSourceEnd:callbackOrigins.end,callbackSourceCall:callbackOrigins.call,callbackSourceLiteral:callbackOrigins.callback,callbackState:callbackMemo.state,callbackBegin:callbackMemo.begin,callbackCompare:callbackMemo.compare,callbackReturn:callbackMemo.returned,callbackEnd:callbackMemo.end,callbackMount:callbackMemo.mount,contextObject:contextTransport.sourceObject,contextTargetRead:contextTransport.targetRead,contextInteropKernel:contextTransport.interopKernelRegister,contextInterop:contextTransport.interop,contextHookRead:contextTransport.hookRead,contextHookValue:contextTransport.hookValue,contextHelperRead:contextTransport.helperRead,contextBindingRead:contextTransport.bindingRead,contextBindingFunction:contextTransport.bindingFunction,contextFactoryCall:contextTransport.factoryCall,contextFactoryArgument:contextTransport.factoryArgument,contextConsumerCall:contextTransport.consumerCall,contextConsumerArgument:contextTransport.consumerArgument,contextHelperRegister:contextTransport.helperRegister,contextHelperBegin:contextTransport.helperBegin,contextHelperReturn:contextTransport.helperReturn,contextHelperEnd:contextTransport.helperEnd,contextRest:contextTransport.rest,contextHook:contextTransport.hook,contextUse:contextTransport.use,contextBeforeRead:contextTransport.beforeRead,contextCreated:contextTransport.register,contextAccess:contextTransport.access,contextElement:(type,props,value)=>renderGraph.native(contextTransport.element(type,props,value),props,type),contextPush:contextTransport.push,contextPop:contextTransport.pop,contextRead:contextTransport.read,targetCallbackBinding:projection.deferred.binding,targetCallbackObject:projection.deferred.object,targetCallbackInvoke:projection.deferred.invoke,targetCallbackFactory:projection.deferred.factory,targetProjectionBinding:projection.binding,targetProjectionCallback:projection.callback,targetProjectionRest:projection.rest,targetProjectionResult:projection.result,literal,definition,targetRead,namespaceExport,namespaceRead,targetRender:initializers.render,targetNamingHelper:initializers.namingHelper,targetName:initializers.name,targetForward:initializers.forward,targetDispatch:initializers.dispatch,targetInvoke:(fn,input,ref,call)=>renderGraph.invoke(fn,input,()=>initializers.invoke(fn,input,ref,call)),registerForwardRef:initializers.registerForwardRef,registerTarget(key,value,read){intrinsics();if(!jsxOnly||typeof read!=='function'||targets.has(key)||!componentModels.some(m=>m.jsxTargets?.some(t=>point(t.binding)===key)))fail('jsx-target-registration-unplanned-or-duplicate');if(!N.is(value,N.apply(read,undefined,[])))fail('jsx-target-binding-changed');initializers.check(key,value);targets.set(key,{value,read});},sourceFunction:bindingGuard.sourceFunction,binding:bindingGuard.binding,sourceCall:bindingGuard.sourceCall,reactDisplayName:(fn,name,invoke)=>initializers.displayName(fn,name,()=>bindingGuard.reactDisplayName(fn,name,invoke)),registerHelper(fn){intrinsics();if(helper&&helper!==fn)fail('helper-registered-twice');helper=fn;},registerRuntime(...fns){intrinsics();for(let i=0;i<fns.length;i++)N.apply(N.weakAdd,runtimes,[fns[i]]);},registerFragment(value){intrinsics();if(fragment!==undefined&&fragment!==value)fail('react-fragment-changed');fragment=value;},jsx(fn,...args){return element(fn,args,'jsx');},createElement(fn,...args){return element(fn,args,'create-element');},forward,invoke,component};
+ const raw={contextInitializationWrite:contextTransport.initializationWrite,contextCommonJsKernel:contextTransport.commonJsKernelRegister,contextCommonJsAllocate:contextTransport.commonJsAllocate,contextCommonJsModule:contextTransport.commonJsModule,contextBody(key,invoke){const models=${JSON.stringify(bodyModels)};const i=models.findIndex(m=>point(m.component)===key);if(i<0)fail("context-body-unplanned");const scope=contextTransport.renderScope(),before=bindingGuard.report().checkedCalls;const value=bindingGuard.component(${models.length+components.length}+i,key,invoke,true);bodyEvents.push({source:key,render:scope.render,checkedCalls:bindingGuard.report().checkedCalls-before,output:contextTransport.witness(value),callTraceVerified:true,bindingKeys:bindingGuard.check(${models.length+components.length}+i),effectsVerified:false});return value;},renderGraphHost:renderGraph.host,consumerLiteral:literalOrigins.capture,helperRegister:helperHooks.register,helperBegin:helperHooks.begin,helperReturn:helperHooks.returned,helperEnd:helperHooks.end,helperHookValue:helperHooks.hookValue,helperHookRead:helperHooks.hookRead,helperHookDefault:helperHooks.hookDefault,helperHookCall:helperHooks.hookCall,helperHookLiteral:helperHooks.literal,helperHookDependencies:helperHooks.dependencies,stateBegin:states.begin,stateInitialized:states.initialized,stateQueue:states.queue,stateTuple:states.tuple,stateReturn:states.returned,stateThrow:states.thrown,stateEnd:states.end,factoryRegister:factoryOrigins.register,factoryArgument:factoryOrigins.argument,factoryBegin:factoryOrigins.begin,factoryLiteral:factoryOrigins.literal,factoryNamingHelper:factoryOrigins.namingHelper,factoryName:factoryOrigins.name,factoryReturn:factoryOrigins.returned,factoryEnd:factoryOrigins.end,effectRecord:effects.record,effectCreateBegin:effects.createBegin,effectCleanupValue:effects.cleanupValue,effectCleanupBegin:effects.cleanupBegin,effectRunReturn:effects.returned,effectRunThrow:effects.thrown,effectRunEnd:effects.end,effectHookValue:effects.hookValue,effectHookRead:effects.hookRead,effectHookDefault:effects.hookDefault,effectHookCall:effects.hookCall,effectLiteral:effects.literal,effectDependencies:effects.dependencies,refState:refs.state,refMount:refs.mount,refUpdate:refs.update,refHookValue:refs.hookValue,refHookRead:refs.hookRead,refHookDefault:refs.hookDefault,refHookCall:refs.hookCall,callbackSourceHookDefault:callbackOrigins.hookDefault,callbackSourceHookRead:callbackOrigins.hookRead,callbackSourceHookValue:callbackOrigins.hookValue,callbackSourceHookCall:callbackOrigins.hookCall,callbackSourceRegister:callbackOrigins.register,callbackSourceBegin:callbackOrigins.begin,callbackSourceReturn:callbackOrigins.returned,callbackSourceEnd:callbackOrigins.end,callbackSourceCall:callbackOrigins.call,callbackSourceLiteral:callbackOrigins.callback,callbackState:callbackMemo.state,callbackBegin:callbackMemo.begin,callbackCompare:callbackMemo.compare,callbackReturn:callbackMemo.returned,callbackEnd:callbackMemo.end,callbackMount:callbackMemo.mount,contextObject:contextTransport.sourceObject,contextTargetRead:contextTransport.targetRead,contextInteropKernel:contextTransport.interopKernelRegister,contextInterop:contextTransport.interop,contextHookRead:contextTransport.hookRead,contextHookValue:contextTransport.hookValue,contextHelperRead:contextTransport.helperRead,contextBindingRead:contextTransport.bindingRead,contextImportDefault:contextTransport.importDefault,contextExportRegister:contextTransport.exportRegister,contextExportRead:contextTransport.exportRead,contextBindingFunction:contextTransport.bindingFunction,contextFactoryCall:contextTransport.factoryCall,contextFactoryArgument:contextTransport.factoryArgument,contextConsumerCall:contextTransport.consumerCall,contextConsumerArgument:contextTransport.consumerArgument,contextHelperRegister:contextTransport.helperRegister,contextHelperBegin:contextTransport.helperBegin,contextHelperReturn:contextTransport.helperReturn,contextHelperEnd:contextTransport.helperEnd,contextRest:contextTransport.rest,contextHook:contextTransport.hook,contextUse:contextTransport.use,contextBeforeRead:contextTransport.beforeRead,contextCreated:contextTransport.register,contextAccess:contextTransport.access,contextElement:(type,props,value)=>renderGraph.native(contextTransport.element(type,props,value),props,type),contextPush:contextTransport.push,contextPop:contextTransport.pop,contextRead:contextTransport.read,targetCallbackBinding:projection.deferred.binding,targetCallbackObject:projection.deferred.object,targetCallbackInvoke:projection.deferred.invoke,targetCallbackFactory:projection.deferred.factory,targetProjectionBinding:projection.binding,targetProjectionCallback:projection.callback,targetProjectionRest:projection.rest,targetProjectionResult:projection.result,literal,definition,targetRead,namespaceExport,namespaceRead,targetRender:initializers.render,targetNamingHelper:initializers.namingHelper,targetName:initializers.name,targetForward:initializers.forward,targetDispatch:initializers.dispatch,targetInvoke:(fn,input,ref,call)=>renderGraph.invoke(fn,input,()=>initializers.invoke(fn,input,ref,call)),registerForwardRef:initializers.registerForwardRef,registerTarget(key,value,read){intrinsics();if(!jsxOnly||typeof read!=='function'||targets.has(key)||(!${boundaryOnly}&&!componentModels.some(m=>m.jsxTargets?.some(t=>point(t.binding)===key))))fail('jsx-target-registration-unplanned-or-duplicate');if(!N.is(value,N.apply(read,undefined,[])))fail('jsx-target-binding-changed');initializers.check(key,value);targets.set(key,{value,read});},sourceFunction:bindingGuard.sourceFunction,binding:bindingGuard.binding,sourceCall:bindingGuard.sourceCall,reactDisplayName:(fn,name,invoke)=>initializers.displayName(fn,name,()=>bindingGuard.reactDisplayName(fn,name,invoke)),registerHelper(fn){intrinsics();if(helper&&helper!==fn)fail('helper-registered-twice');helper=fn;},registerRuntime(...fns){intrinsics();for(let i=0;i<fns.length;i++)N.apply(N.weakAdd,runtimes,[fns[i]]);},registerFragment(value){intrinsics();if(fragment!==undefined&&fragment!==value)fail('react-fragment-changed');fragment=value;},jsx(fn,...args){return element(fn,args,'jsx');},createElement(fn,...args){return element(fn,args,'create-element');},forward,invoke,component};
  const api=Object.create(null);
  // A consumer or factory call can throw an original source exception that its caller
  // catches. Its boundary records that outcome; do not mark it as an observer
  // failure. Validation failures still go through fail() inside the boundary.
- for(const key of N.keys(raw))api[key]=(key==='contextConsumerCall'||key==='contextFactoryCall'||key==='callbackSourceCall'||key==='callbackSourceHookCall')?raw[key]:(...args)=>{try{return N.apply(raw[key],undefined,args);}catch(error){failures[failures.length]='helper-runtime-'+key+'-failed';throw error;}};
+ // A provider-pop observation runs inside React's native unwind path. Once it
+ // fails, the run is permanently refused, but throwing here prevents React
+ // from popping its own stack and can trap recovery in the same unwind step.
+ // Let native cleanup finish; never turn the recorded failure into evidence.
+ for(const key of N.keys(raw))api[key]=(key==='contextConsumerCall'||key==='contextFactoryCall'||key==='callbackSourceCall'||key==='callbackSourceHookCall')?raw[key]:(...args)=>{try{return N.apply(raw[key],undefined,args);}catch(error){failures[failures.length]='helper-runtime-'+key+'-failed';if(key!=='contextPop')throw error;}};
  Object.freeze(api);N.define(globalThis,'__DSC_RUNTIME_PROOF',{value:api,writable:false,configurable:false});
  N.define(globalThis,'__DSC_RUNTIME_READ',{value:()=>{
   try {
@@ -392,7 +414,7 @@ export function reactHelperRuntimeHook(
    if(failures.length)return {status:'refused',reason:failures[0]};
    if(!jsxOnly&&(!helperCalls||helperCalls!==events.length))return {status:'refused',reason:'helper-runtime-call-unobserved'};
    if(componentModels.length&&(!componentEvents.length||activeComponent||inHelper||componentEvents.reduce((n,e)=>n+e.helperCalls,0)!==helperCalls))return {status:'refused',reason:'component-runtime-call-unobserved'};
-   return {status:'observed',consumerLiterals:literalOrigins.report(),hookHelpers:helperHooks.report(),stateHooks:states.report(),callbackFactories:factoryOrigins.report(),effectHooks:effects.report(),refHooks:refs.report(),contexts:contextTransport.report(),callbackSources:callbackOrigins.report(),callbackMemo:callbackMemo.report(),...(jsxOnly?{targetInitializers:initializers.report(),targetProjections:projection.report(),targetCallbacks:projection.deferred.report()}:{}),helperCalls,forwardCopies,jsxCalls,elementCalls,metadataNodes:metadataNodes.length,
+   return {status:'observed',bodyTraces:bodyEvents.map(e=>({...e})),...( ${boundaryOnly} ? {qualification:'wrapper-boundaries-only',effectsVerified:false,acceptedContract:null}:{}),consumerLiterals:literalOrigins.report(),hookHelpers:helperHooks.report(),stateHooks:states.report(),callbackFactories:factoryOrigins.report(),effectHooks:effects.report(),refHooks:refs.report(),contexts:contextTransport.report(),callbackSources:callbackOrigins.report(),callbackMemo:callbackMemo.report(),...(jsxOnly?{targetInitializers:initializers.report(),targetProjections:projection.report(),targetCallbacks:projection.deferred.report()}:{}),helperCalls,forwardCopies,jsxCalls,elementCalls,metadataNodes:metadataNodes.length,
     events:events.map(e=>({...e,inputKeys:[...e.inputKeys]})),bindings,...(componentModels.length?{components:componentEvents.map(e=>({...e}))}:{}),renderGraph:renderGraph.report()};
   }catch{return {status:'refused',reason:failures[0]??'helper-runtime-state-changed'};}
  },writable:false,configurable:false});

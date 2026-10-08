@@ -1,4 +1,15 @@
+import {restTextAppearance} from './text-appearance.js';
+import {nestedInstanceProperties} from './nested-instance-properties.js';
+import {observeLocalGeometry} from '../local-geometry.js';
+import { restImagePaints } from './image-assets.js';
+import {observeInstanceGeometry} from '../instance-geometry.js';
+import {observeInstanceComposition} from './observed-composition.js';
+import {observeSolidFillComposition,composeNormalSolidStrokePaints} from '../solid-fill-observation.js';
+import { networkPath } from './vector-network.js';
+import { strokedPathGeometryIssue } from '../../../packages/schema/src/stroked-path.js';
 import { strokeSvgGeometry } from './stroke-svg.js';
+import { mapStraightVector } from './straight-vector.js';
+import { mapPaintedOutline } from './painted-outline.js';
 import { observeInstanceVector } from './observed-vector.js';
 import { nativeLineIssue, type NativeLineGeometry } from '../../../packages/schema/src/native-line.js';
 import { filledPathIssue } from '../../../scripts/contract-schema.js';
@@ -134,6 +145,8 @@ export interface RestVariableAlias {
 
 /** SolidPaint & BasePaint (api_types.ts): color channels are 0–1 floats. */
 export interface RestPaint {
+  imageRef?: string;
+  scaleMode?: unknown; imageTransform?: unknown; rotation?: unknown; scalingFactor?: unknown; filters?: unknown;
   blendMode?: string;
   type: string;
   visible?: boolean;
@@ -262,7 +275,11 @@ export interface RestComponentPropertyDefinition {
 }
 
 export interface RestNode {
+  vectorNetwork?: unknown;
+  complexStrokeProperties?: {strokeType?: string};
   isMask?: boolean;
+  maskType?: string;
+  booleanOperation?: string;
   size?: { x: number; y: number };
   relativeTransform?: number[][];
   fillGeometry?: Array<{ path: string; windingRule: 'NONZERO' | 'EVENODD' }>;
@@ -314,6 +331,8 @@ export interface RestNode {
   gridColumnSpan?: number;
   gridChildHorizontalAlign?: 'AUTO' | 'MIN' | 'CENTER' | 'MAX';
   gridChildVerticalAlign?: 'AUTO' | 'MIN' | 'CENTER' | 'MAX';
+  /** Native ellipse sweep; radians, clockwise from the positive x axis. */
+  arcData?: { startingAngle: number; endingAngle: number; innerRadius: number };
   // CornerTrait
   cornerRadius?: number;
   /** [top-left, top-right, bottom-right, bottom-left] per api_types.ts. */
@@ -337,6 +356,8 @@ export interface RestNode {
   // TypePropertiesTrait
   characters?: string;
   style?: RestTypeStyle;
+  characterStyleOverrides?: number[];
+  styleOverrideTable?: Record<string, RestTypeStyle>;
   // IsLayerTrait
   componentPropertyReferences?: Record<string, string>;
   boundVariables?: RestBoundVariables;
@@ -486,6 +507,7 @@ export type MapDegradationCode =
   // dump v1.2 (STYLE-FIDELITY audit): every channel the capture reads but
   // cannot carry is a RECEIPT now — the silent-loss census hit zero.
   | 'paint-stack-truncated'
+  | 'stroke-stack-resolved'
   | 'stroke-weights-nonuniform'
   | 'stroke-style-unsupported'
   // dump v1.44 (plugin parity, dump.plugin.js since v1.11/v1.13): a
@@ -521,7 +543,9 @@ export type MapDegradationCode =
   | 'effect-style-unresolved'
   // An overrides[] id the instance's returned subtree does not contain (a
   // hidden branch REST elided) — the host override is not captured.
+  | 'host-instance-properties-unavailable'
   | 'host-override-unlocated'
+  | 'instance-root-override-ambiguous'
   // Two overridden TEXT descendants share one name path — both character
   // overrides refused (the plugin dump's own code, dump v1.10).
   | 'text-override-ambiguous-path'
@@ -531,7 +555,8 @@ export type MapDegradationCode =
   // instance stays an auto-proposed stub.
   | 'instance-closure-unresolved'
   // The trigger is observed but REST returned a null action, not a behavior.
-  | 'prototype-action-null';
+  | 'prototype-action-null'
+  | 'stroke-expanded-outline';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -549,6 +574,16 @@ export interface MapReport {
 }
 
 export interface MapOptions {
+  /** Preserve bounded observed caller geometry; false opts out of the observation. */
+  inspectInstanceCompositions?: boolean;
+  /** Inspection-only candidate pending composed-component and native
+   * readback qualification. Never enabled by ordinary URL capture. */
+  inspectPaintedStrokeOutlines?: boolean;
+  /** Explicit network candidate; ordinary URL capture keeps this disabled. */
+  inspectStraightVectorNetworks?: boolean;
+  /** Native readback of the scalar REST cannot preserve exactly. File version
+   * must bracket the native read; mismatched or absent evidence is refused. */
+  nativeMaskStrokeSources?: {fileKey:string;version:string;miterLimitByNodeId:Record<string,number>;strokeByNodeId?:Record<string,NonNullable<NonNullable<DumpNode['mask']>['stroke']>>;pathWitnessByNodeId?:Record<string,{width:number;height:number;restPaths:Array<{path:string;windingRule:string}>;nativePaths:Array<{data:string;windingRule:string}>}>};
   /** Frozen, version-pinned SVG observations; originals remain capture evidence. */
   strokeSvgSources?: { fileKey: string; version: string; svgByNodeId: Record<string, string> };
   /** GET /v1/files/:key/variables/local response (needs a token with the
@@ -658,6 +693,15 @@ function normalizeConstraints(
 }
 
 interface Ctx {
+  inspectInstanceCompositions?: boolean;
+  mainSizeById: Map<string, {width:number; height:number}>;
+  mainPaddingById: Map<string, [number,number,number,number]>;
+  inspectPaintedStrokeOutlines?: boolean;
+  /** Explicit network candidate; ordinary URL capture keeps this disabled. */
+  inspectStraightVectorNetworks?: boolean;
+  nativeMaskStrokeSources?: Record<string,number>;
+  nativeMaskStrokeFacts?: NonNullable<MapOptions['nativeMaskStrokeSources']>['strokeByNodeId'];
+  nativeMaskPathWitnesses?: NonNullable<MapOptions['nativeMaskStrokeSources']>['pathWitnessByNodeId'];
   strokeSvgSources?: Record<string, string>;
   varNameById: Map<string, string>;
   /** The full variables response, indexed — present only when the caller
@@ -813,6 +857,12 @@ function mapPaint(
 ): DumpPaint | undefined {
   if (!Array.isArray(paints)) return undefined;
   const visibles = paints.filter((x) => x.visible !== false);
+  const composed=paintField==='stroke'?composeNormalSolidStrokePaints(paints):undefined;
+  if(composed){
+    ctx.report.degradations.push({code:'stroke-stack-resolved',nodePath,field:paintField,
+      message:`${visibles.length} NORMAL solid stroke paints composed as a provisional literal; individual paint layers and their variable bindings are not recreated`});
+    return composed;
+  }
   const p = visibles.find((x) => x.type === 'SOLID');
   if (!p) {
     const visible = visibles[0];
@@ -839,7 +889,7 @@ function mapPaint(
   }
   const effectiveAlpha = (p.color?.a ?? 1) * (p.opacity ?? 1);
   const withAlpha = (paint: DumpPaint): DumpPaint =>
-    effectiveAlpha < 1 ? { ...paint, alpha: Math.round(effectiveAlpha * 10000) / 10000 } : paint;
+    effectiveAlpha < 1 ? { ...paint, alpha: effectiveAlpha } : paint;
   const alias = p.boundVariables?.color;
   if (alias && isAlias(alias)) {
     const name = resolveVarName(ctx, alias, nodePath, paintField);
@@ -1123,6 +1173,7 @@ function mapCornerRadius(node: RestNode, ctx: Ctx, nodePath: string): number | u
   const radii = node.rectangleCornerRadii;
   if (Array.isArray(radii) && radii.length === 4) {
     if (radii.every((r) => r === radii[0])) return radii[0] !== 0 ? radii[0] : undefined;
+    if (radii.every(r => Number.isFinite(r) && r >= 0) && !(node as RestNode & {cornerSmoothing?:number}).cornerSmoothing) return undefined;
     ctx.report.degradations.push({
       code: 'radii-nonuniform',
       nodePath,
@@ -1200,15 +1251,22 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
+  const appearance=restTextAppearance(node);
+  if(appearance)text.sourceAppearance=appearance;
+  // Preserve the observed CSS weight independently of the face label.
   // Native bindings take precedence over historical emitter stamps.
   const weightVar = node.sharedPluginData?.ds_contracts?.fontWeightVar;
   const weightAliases = node.boundVariables?.fontWeight;
-  if (Array.isArray(weightAliases) && weightAliases.length === 1 && isAlias(weightAliases[0])) {
+  const rangesUniform = (node.characterStyleOverrides ?? []).every(index => index === 0 || node.styleOverrideTable?.[String(index)] !== undefined && (node.styleOverrideTable[String(index)].fontWeight ?? s.fontWeight) === s.fontWeight);
+  if (!rangesUniform) ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeight', message: 'numeric fontWeight is mixed or unavailable across character ranges — uniform observation omitted' });
+  const singleWeightAlias = Array.isArray(weightAliases) && weightAliases.length === 1 && isAlias(weightAliases[0]);
+  // The observed numeric value does not depend on permission to resolve its variable name.
+  if ((weightAliases === undefined || Array.isArray(weightAliases) && weightAliases.length === 0 || singleWeightAlias) && rangesUniform && typeof s.fontWeight === 'number' && Number.isFinite(s.fontWeight) && s.fontWeight >= 1 && s.fontWeight <= 1000) text.fontWeight = s.fontWeight;
+  if (singleWeightAlias) {
     const nativeWeight = resolveVarName(ctx, weightAliases[0], nodePath, 'text.fontWeightVar');
     if (nativeWeight) {
       text.fontWeightVar = nativeWeight;
-      if (typeof s.fontWeight === 'number' && Number.isFinite(s.fontWeight)) text.fontWeight = s.fontWeight;
-      else ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeight',
+      if (text.fontWeight === undefined) ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeight',
         message: 'native fontWeight binding has no uniform numeric value' });
       if (typeof weightVar === 'string' && weightVar !== '' && weightVar !== nativeWeight) ctx.report.degradations.push({
         code: 'text-binding-conflict', nodePath, field: 'text.fontWeightVar',
@@ -1336,7 +1394,7 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
 function mapPropRefs(node: RestNode): Record<string, string> | undefined {
   const propRefs: Record<string, string> = {};
   for (const [kind, key] of Object.entries(node.componentPropertyReferences ?? {})) {
-    if (key) propRefs[kind] = key.split('#')[0];
+    if (key) propRefs[kind] = key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
   }
   return Object.keys(propRefs).length > 0 ? propRefs : undefined;
 }
@@ -1407,7 +1465,49 @@ const restRotationToCssDeg = (rad: number | undefined): number =>
  * parent box. The polygon side count is not on the REST surface — absent
  * means not captured (the plugin dump carries pointCount).
  */
-function mapStrokeSvgShape(node: RestNode, parent: RestNode | null | undefined, svg: string): { shape: DumpShape } | { issue: string } {
+/** Exact opaque literal INSIDE stroke on a closed ALPHA mask. Geometry and
+ * affine placement are qualified separately; unsupported binding stays refused. */
+function insideMaskStroke(node:RestNode,ctx:Ctx): NonNullable<DumpNode['mask']>['stroke'] | undefined {
+  const native=ctx.nativeMaskStrokeFacts?.[node.id];
+  const miterLimit=ctx.nativeMaskStrokeSources?.[node.id];
+  const cap=node.strokeCap ?? native?.cap,join=node.strokeJoin ?? native?.join;
+  const visible=node.strokes?.filter(p=>p.visible!==false) ?? [],p=visible[0];
+  const bound=(v:unknown)=>!!v && typeof v==='object' && Object.keys(v).length>0;
+  if(node.type!=='VECTOR' || node.isMask!==true || node.maskType!=='ALPHA' || node.strokeAlign!=='INSIDE' ||
+    visible.length!==1 || !p || p.type!=='SOLID' || !p.color || (p.opacity ?? 1)!==1 || (p.color.a ?? 1)!==1 ||
+    p.blendMode && p.blendMode!=='NORMAL' || (node.opacity ?? 1)!==1 ||
+    node.blendMode && !['NORMAL','PASS_THROUGH'].includes(node.blendMode) ||
+    node.fills?.some(p=>p.visible!==false || bound(p.boundVariables)) || node.effects?.some(p=>p.visible!==false) ||
+    node.strokeDashes?.length || node.children?.length || bound(node.boundVariables) || bound(p.boundVariables) ||
+    !Number.isFinite(node.strokeWeight) || node.strokeWeight!<=0 || node.strokeWeight!>1e6 ||
+    !['NONE','ROUND','SQUARE'].includes(cap ?? '') || !['MITER','ROUND','BEVEL'].includes(join ?? '') ||
+    !Number.isFinite(miterLimit) || miterLimit!<1 || miterLimit!>1000 ||
+    ![p.color.r,p.color.g,p.color.b].every(v=>Number.isFinite(v)&&v>=0&&v<=1) ||
+    native && (native.align!==node.strokeAlign || native.weight!==node.strokeWeight || native.miterLimit!==miterLimit ||
+      native.cap!==cap || native.join!==join || ['r','g','b'].some(k=>native.color[k as 'r'|'g'|'b']!==p.color![k as 'r'|'g'|'b'])))return undefined;
+  return {align:'INSIDE',weight:node.strokeWeight!,color:{r:p.color.r,g:p.color.g,b:p.color.b},
+    cap:cap as 'NONE'|'ROUND'|'SQUARE',join:join as 'MITER'|'ROUND'|'BEVEL',miterLimit:miterLimit!};
+}
+
+/** REST supplies painted stroke paths independently of cap/join metadata.
+ * INSIDE intersects that ink with the original fill outline. No stroke
+ * settings are inferred. Other paints and transformations remain unqualified. */
+function insidePaintedMaskStroke(node: RestNode): NonNullable<DumpNode['mask']>['paintedStroke'] | undefined {
+  const strokes=node.strokes?.filter(p=>p.visible!==false) ?? [],paint=strokes[0];
+  const bound=(value:unknown)=>!!value && typeof value==='object' && Object.keys(value).length>0;
+  const paths=(node as RestNode & {strokeGeometry?:Array<{path:string;windingRule:string}>}).strokeGeometry;
+  if(node.type!=='VECTOR' || node.isMask!==true || node.maskType!=='ALPHA' || node.strokeAlign!=='INSIDE' ||
+    strokes.length!==1 || paint?.type!=='SOLID' || !paint.color || (paint.opacity ?? 1)!==1 || (paint.color.a ?? 1)!==1 ||
+    paint.blendMode && paint.blendMode!=='NORMAL' || (node.opacity ?? 1)!==1 ||
+    node.blendMode && !['NORMAL','PASS_THROUGH'].includes(node.blendMode) ||
+    node.fills?.some(p=>p.visible!==false || bound(p.boundVariables)) || node.effects?.some(p=>p.visible!==false) ||
+    node.children?.length || bound(node.boundVariables) || bound(paint.boundVariables) ||
+    !paths?.length || paths.length>32 || paths.some(p=>filledPathIssue(p.path) || !['NONZERO','EVENODD'].includes(p.windingRule)) ||
+    ![paint.color.r,paint.color.g,paint.color.b].every(v=>Number.isFinite(v)&&v>=0&&v<=1))return undefined;
+  return {paths:paths.map(p=>({data:p.path,windingRule:p.windingRule as 'NONZERO'|'EVENODD'})),color:{r:paint.color.r,g:paint.color.g,b:paint.color.b}};
+}
+
+function mapStrokeSvgShape(node: RestNode, parent: RestNode | null | undefined, svg?: string): { shape: DumpShape } | { issue: string } {
   const identity = (t: number[][] | undefined) => t?.length === 2 && t.every(r => r.length === 3 && r.every(Number.isFinite)) &&
     t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1;
   const strokes = node.strokes?.filter(p => p.visible !== false) ?? [], paint = strokes[0];
@@ -1422,6 +1522,21 @@ function mapStrokeSvgShape(node: RestNode, parent: RestNode | null | undefined, 
       !['NONE', 'ROUND', 'SQUARE'].includes(node.strokeCap ?? '') || !['MITER', 'ROUND', 'BEVEL'].includes(node.strokeJoin ?? '') ||
       !Number.isFinite(node.strokeWeight) || node.strokeWeight! <= 0)
     return { issue: 'stroke-svg-native-context-unqualified' };
+  if (node.vectorNetwork && node.complexStrokeProperties?.strokeType === 'BASIC' &&
+      Object.keys(node.complexStrokeProperties).every(k => k === 'strokeType') && node.strokeJoin !== 'MITER') {
+    try {
+      const {data} = networkPath(node.vectorNetwork);
+      const shape: DumpShape = {kind:'stroked-path',width:node.size.x,height:node.size.y,strokePath:{
+        data,cap:node.strokeCap as 'NONE'|'ROUND'|'SQUARE',join:node.strokeJoin as 'MITER'|'ROUND'|'BEVEL',
+        miterLimit:4,viewport:{width:parent.size.x,height:parent.size.y,x:node.relativeTransform![0]![2]!,y:node.relativeTransform![1]![2]!}}};
+      const issue=strokedPathGeometryIssue(shape);
+      if (!issue) return {shape};
+      if (!svg) return {issue};
+    } catch (error) {
+      if (!svg) return {issue:error instanceof Error?error.message:'vector-network-unqualified'};
+    }
+  }
+  if (!svg) return {issue:'vector-network-unqualified'};
   const color = '#' + [paint.color.r, paint.color.g, paint.color.b].map(v => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
   return strokeSvgGeometry(svg, { nodeId: node.id, width: node.size.x, height: node.size.y,
     strokeWeight: node.strokeWeight!, strokeColor: color, cap: node.strokeCap as 'NONE' | 'ROUND' | 'SQUARE',
@@ -1454,28 +1569,46 @@ function mapShape(
       transform: line.transform.map(row => [...row]) as NativeLineGeometry['transform'],
       source: { nodeId: node.id, ...(parent ? { parentId: parent.id } : {}) } } };
   }
-  if (node.type === 'VECTOR') {
+  const combinedBooleanMask=node.type==='BOOLEAN_OPERATION' && node.isMask===true &&
+    ['ALPHA','VECTOR'].includes(node.maskType ?? '') &&
+    ['UNION','INTERSECT','SUBTRACT','EXCLUDE'].includes(node.booleanOperation ?? '');
+  if (node.type === 'VECTOR' || combinedBooleanMask) {
     const svg = ctx.strokeSvgSources?.[node.id];
-    if (svg) {
+    if (svg || node.vectorNetwork) {
       const captured = mapStrokeSvgShape(node, parent, svg);
       if ('shape' in captured) return captured.shape;
       ctx.report.degradations.push({ code: 'vector-geometry-unsupported', nodePath, message: captured.issue });
     }
-    const paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
+    let paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
+    const witness=ctx.nativeMaskPathWitnesses?.[node.id];
+    if(witness){
+      if(!insideMaskStroke(node,ctx) || witness.width!==node.size?.x || witness.height!==node.size?.y ||
+          JSON.stringify(witness.restPaths)!==JSON.stringify(node.fillGeometry) ||
+          !Array.isArray(witness.nativePaths) || !witness.nativePaths.length || witness.nativePaths.length>32 ||
+          witness.nativePaths.some(p=>filledPathIssue(p.data) || !['NONZERO','EVENODD'].includes(p.windingRule))){
+        ctx.report.degradations.push({code:'vector-geometry-unsupported',nodePath,message:'native-mask-path-witness-source-changed-or-unqualified'});
+        return undefined;
+      }
+      // This independently captured native path is authoritative geometry, not
+      // an epsilon match to REST's rounded serialization. Keep both in evidence.
+      paths=witness.nativePaths.map(p=>({data:p.data,windingRule:p.windingRule as 'NONZERO'|'EVENODD'}));
+    }
     const fills = node.fills?.filter((p) => p.visible !== false) ?? [];
+    const maskStroke=insideMaskStroke(node,ctx) ?? insidePaintedMaskStroke(node);
     const t = node.relativeTransform;
     const width = node.size?.x, height = node.size?.y;
-    const readable = (node.isMask === undefined || node.isMask === false) &&
+    const readable = (node.isMask === undefined || node.isMask === false ||
+      node.isMask===true && ['ALPHA','VECTOR'].includes(node.maskType ?? '')) &&
       typeof width === 'number' && Number.isFinite(width) && width > 0 &&
       typeof height === 'number' && Number.isFinite(height) && height > 0 &&
-      paths && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
+      paths && paths.length > 0 && paths.length <= 32 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
       t?.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
       t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1 &&
-      fills.length === 1 && fills[0]!.type === 'SOLID' &&
+      (maskStroke || fills.length === 1 && fills[0]!.type === 'SOLID') &&
       (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
       (node.cornerRadius === undefined || node.cornerRadius === 0) &&
-      !(node.strokes ?? []).some((p) => p.visible !== false) &&
-      !(node.effects ?? []).some((p) => p.visible !== false) && !(node.children?.length);
+      (maskStroke || !(node.strokes ?? []).some((p) => p.visible !== false)) &&
+      !(node.effects ?? []).some((p) => p.visible !== false) && (!node.children?.length || combinedBooleanMask);
     if (!readable) return undefined;
     const shape: DumpShape = { kind: 'path', width, height, paths };
     if (parentBox && (node.layoutPositioning === 'ABSOLUTE' || !parent || !parent.layoutMode || parent.layoutMode === 'NONE')) {
@@ -1520,6 +1653,19 @@ function mapShape(
   const width = round2(swapped ? box.height : box.width);
   const height = round2(swapped ? box.width : box.height);
   const shape: DumpShape = { kind, width, height };
+  if (node.type === 'ELLIPSE' && node.arcData) {
+    const {startingAngle:start, endingAngle:end, innerRadius} = node.arcData;
+    if (![start,end,innerRadius].every(Number.isFinite) || innerRadius < 0 || innerRadius > 1) {
+      ctx.report.degradations.push({code:'vector-geometry-unsupported',nodePath,
+        message:'ellipse-arc-invalid: arc angles and hole fraction must be finite; hole fraction must be within 0..1'});
+      return undefined;
+    }
+    // Preserve the source precision. Proposal qualification decides which
+    // sweeps are representable; the reader must not silently turn an arc
+    // into a complete ellipse before that decision.
+    if (Math.abs(end-start) < Math.PI*2-1e-6 || innerRadius > 0)
+      shape.arc = {start,end,innerRadius,...(["NONE","ROUND","SQUARE"].includes(node.strokeCap ?? "") ? {cap:node.strokeCap as "NONE"|"ROUND"|"SQUARE"} : {})};
+  }
   if (rotation !== 0) shape.rotation = rotation;
   // dump v1.44 (plugin parity, plugin dump v1.7): a shape child of a
   // NON-auto-layout parent is placed by x/y exactly like an ABSOLUTE one —
@@ -1570,7 +1716,11 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
   // Rotation RIDES the shape channel since dump v1.3 (quarter turns exactly;
   // non-quarter turns receipt inside mapShape) — only a rotated node OUTSIDE
   // the shape vocabulary is still a receipt.
-  if (!shapeCarried && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
+  // Instance matrices have their own observed channel. Whether a particular
+  // affine transform can be emitted is decided by the contract proposer.
+  const instanceGeometryCaptured = node.type === 'INSTANCE' &&
+    observeInstanceGeometry(node.id, node.componentId, node.relativeTransform, node.size?.x, node.size?.y);
+  if (!shapeCarried && !instanceGeometryCaptured && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     ctx.report.degradations.push({
       code: 'rotation-unsupported',
       nodePath,
@@ -1772,15 +1922,18 @@ function indexSubtree(root: RestNode, cap = 200): Map<string, { node: RestNode; 
 
 /** A display path is useful for notes, but cannot authorize a paint override.
  * Follow source identities and reset the numeric path at each instance. */
-function solidFillTarget(root: RestNode, targetId: string, plane: 'fill' | 'stroke' = 'fill'): DumpHostOverride['solidFillTarget'] {
+function solidFillTarget(root: RestNode, targetId: string, plane: 'fill' | 'stroke' | 'visibility' | 'text-fill' | 'text-characters' | 'shape-fill' = 'fill'): DumpHostOverride['solidFillTarget'] {
   let count = 0, incomplete = false;
   const matches: NonNullable<DumpHostOverride['solidFillTarget']>[] = [];
   const visit = (node: RestNode, owner: RestNode, path: number[], depth: number, instancePath: number[], absolutePath: number[]) => {
     if (++count > 200 || depth > 32) { incomplete = true; return; }
     if (node.id === targetId) {
-      const paints = (plane === 'fill' ? node.fills : node.strokes)?.filter(p => p.visible !== false);
-      if (node.type === 'VECTOR' && paints?.length === 1 && paints[0].type === 'SOLID' &&
-          (!paints[0].blendMode || paints[0].blendMode === 'NORMAL') && owner.type === 'INSTANCE' && owner.componentId)
+      const paints = (plane === 'fill' || plane === 'text-fill' || plane === 'shape-fill' ? node.fills : node.strokes)?.filter(p => p.visible !== false);
+      if ((plane === 'text-characters' ? node.type === 'TEXT' && typeof node.characters === 'string' : plane === 'visibility' ? node.visible===undefined||typeof node.visible === 'boolean' :
+          (plane === 'shape-fill' ? ['FRAME','RECTANGLE','ELLIPSE'].includes(node.type) : node.type === (plane === 'text-fill' ? 'TEXT' : 'VECTOR')) &&
+          (plane !== 'text-fill' || !Object.values(node.styleOverrideTable ?? {}).some(style => Object.hasOwn(style,'fills'))) &&
+          (((plane === 'shape-fill' || plane === 'fill') && Array.isArray(node.fills) && node.fills.length === 0) ||
+          (paints?.length === 1 && paints[0].type === 'SOLID' && (!paints[0].blendMode || paints[0].blendMode === 'NORMAL')))) && owner.type === 'INSTANCE' && owner.componentId)
         matches.push({nodeId:node.id,instanceId:owner.id,componentId:owner.componentId,instancePath,childPath:path});
     }
     const nextOwner = node.type === 'INSTANCE' ? node : owner;
@@ -1801,7 +1954,23 @@ function mapNode(
    *  layoutMode/gridItemsPositioning, not just its box. Null at the root. */
   parent: RestNode | null = null,
 ): RestDumpNode {
-  const out: RestDumpNode = { name: node.name, type: node.type };
+  const out: RestDumpNode = { name: node.name, type: node.type, nodeId: node.id };
+  const localGeometry=observeLocalGeometry(node.id,parent?.id,node.relativeTransform,node.size?.x,node.size?.y,parent?.size?.x,parent?.size?.y);
+  if(localGeometry)out.localGeometry=localGeometry;
+  const imagePaints = restImagePaints(node.fills);
+  if (imagePaints) { out.imagePaints = imagePaints; out.imageFill = true; }
+  if (node.isMask === true) out.mask = typeof node.maskType === 'string'
+    ? { type: node.maskType, ...(insideMaskStroke(node,ctx)?{stroke:insideMaskStroke(node,ctx)}:insidePaintedMaskStroke(node)?{paintedStroke:insidePaintedMaskStroke(node)}:{}) } : {};
+  if (node.type === 'FRAME' && parent && (node.isMask === true ||
+      parent.children?.slice(0,parent.children.indexOf(node)).some(sibling=>sibling.isMask === true))) {
+    const matrix = (value: unknown): value is number[][] => Array.isArray(value) && value.length===2 &&
+      value.every(row=>Array.isArray(row) && row.length===3 && row.every(n=>typeof n==='number' && Number.isFinite(n)));
+    const size = (value: RestNode['size']) => value && Number.isFinite(value.x) && value.x>0 && Number.isFinite(value.y) && value.y>0;
+    if (size(node.size) && size(parent.size) && matrix(node.relativeTransform) && matrix(parent.relativeTransform))
+      out[node.isMask === true ? 'maskFramePlane' : 'maskedFramePlane']={nodeId:node.id,parentId:parent.id,
+        size:{width:node.size!.x,height:node.size!.y},parentSize:{width:parent.size!.x,height:parent.size!.y},
+        relativeTransform:node.relativeTransform.map(row=>[...row]),parentRelativeTransform:parent.relativeTransform.map(row=>[...row])};
+  }
   const selectionIdentity = node.sharedPluginData?.ds_contracts?.selectionIdentity;
   if (selectionIdentity) { try { out.selectionIdentity = JSON.parse(selectionIdentity); } catch { out.selectionIdentity = selectionIdentity; } }
 
@@ -1825,6 +1994,10 @@ function mapNode(
     if (node.gridChildVerticalAlign && node.gridChildVerticalAlign !== 'AUTO') cell.alignY = node.gridChildVerticalAlign;
     out.cell = cell;
   }
+
+  // Keep the selected main identity distinct from its containing set key.
+  const capturedMainKey = node.type === 'COMPONENT' ? ctx.components.get(node.id)?.key : undefined;
+  if (capturedMainKey) out.componentKey = capturedMainKey;
 
   // dump v1.14 structured-axis addition. The REST component-properties map
   // carries each direct variant row's realized values; preserve its verbatim
@@ -1879,12 +2052,25 @@ function mapNode(
   }
   const cornerRadius = mapCornerRadius(node, ctx, nodePath);
   if (cornerRadius !== undefined) out.cornerRadius = cornerRadius;
+  const corners = node.rectangleCornerRadii;
+  if (corners?.length === 4 && corners.every(r => Number.isFinite(r) && r >= 0) &&
+      !corners.every(r => r === corners[0]) && !(node as RestNode & {cornerSmoothing?:number}).cornerSmoothing)
+    out.cornerRadii = [...corners] as [number,number,number,number];
   const bound = mapBound(node, ctx, nodePath);
   if (bound) out.bound = bound;
 
   // dump v1.16: non-TEXT fills go through the STACK dumper (SOLID +
   // GRADIENT_LINEAR above it); TEXT fills keep the single-solid rule (a
   // gradient text fill stays a named receipt).
+  if (node.type !== 'TEXT' && Array.isArray(node.fills) && node.fills.length === 0) out.sourceEmptyFill = true;
+  const sourceFillComposition=observeSolidFillComposition(node.fills);
+  if (sourceFillComposition) out.sourceFillComposition=sourceFillComposition;
+  // NORMAL text paint belongs to typography, not a background owner cell.
+  // Non-NORMAL text evidence stays above so unsupported blending still refuses.
+  else if (node.type !== 'TEXT') {
+    const normalPeer=observeSolidFillComposition(node.fills,true);
+    if(normalPeer)out.sourceNormalFillComposition=normalPeer;
+  }
   const stack = node.type === 'TEXT'
     ? { fill: mapPaint(node.fills, ctx, nodePath, 'fill') }
     : mapFillStack(node, ctx, nodePath);
@@ -1966,6 +2152,18 @@ function mapNode(
     if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
+  // A fixed text box is not its glyph bounds. Preserve only explicitly
+  // FIXED axes whose resize mode agrees; FILL/HUG remain parent-owned.
+  if (node.type === 'TEXT' && node.style && typeof node.characters === 'string' &&
+      !out.abs && parentAutoLayout && node.layoutPositioning !== 'ABSOLUTE' &&
+      (node.rotation === undefined || node.rotation === 0) && node.absoluteBoundingBox) {
+    const mode = node.style.textAutoResize ?? 'NONE';
+    const fixed: NonNullable<DumpNode['fixedSize']> = {};
+    const {width,height} = node.absoluteBoundingBox;
+    if ((mode === 'NONE' || mode === 'HEIGHT') && node.layoutSizingHorizontal === 'FIXED' && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (mode === 'NONE' && node.layoutSizingVertical === 'FIXED' && Number.isFinite(height) && height >= 0) fixed.height = height;
+    if (Object.keys(fixed).length) out.fixedSize = fixed;
+  }
   // Fixed auto-layout children have an authored local extent too. Keep each
   // explicitly FIXED axis; HUG/FILL and rotated bounding boxes are not evidence.
   if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE' &&
@@ -2043,6 +2241,7 @@ function mapNode(
 
   if (node.type === 'TEXT') {
     out.text = mapText(node, ctx, nodePath);
+    if (Array.isArray(node.fills) && node.fills.every(paint => paint.visible === false)) out.textFillAbsent = true;
     if (fill) {
       out.fill = fill;
       if (fill.var) out.text.fillVar = fill.var;
@@ -2100,7 +2299,7 @@ function mapNode(
           const target = ctx.components.get(def.value);
           const swap: DumpFixedSwap = { id: def.value };
           const observedInstances = mapSwapInstances(node, key);
-          if (observedInstances?.length) swap.observedInstances = observedInstances;
+          if (observedInstances !== undefined) swap.observedInstances = observedInstances;
           if (target) {
             swap.name = target.name;
             if (target.key) swap.key = target.key;
@@ -2109,7 +2308,7 @@ function mapNode(
               `${nodePath}: INSTANCE_SWAP "${key}" = ${def.value} — the swapped component is not in the response's components map; the id is carried without a name/key (dump v1.31 fixedSwaps)`,
             );
           }
-          fixedSwaps[key.split('#')[0]] = swap;
+          fixedSwaps[key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')] = swap;
         }
         continue;
       }
@@ -2148,9 +2347,35 @@ function mapNode(
     const overrides = (node.overrides ?? []).filter(
       (o) => o && typeof o.id === 'string' && Array.isArray(o.overriddenFields) && o.overriddenFields.length > 0,
     );
+    out.instanceGeometry = observeInstanceGeometry(node.id, node.componentId, node.relativeTransform, node.size?.x, node.size?.y);
+    if (!out.instanceGeometry) delete out.instanceGeometry;
+    // An explicitly observed empty root override list is evidence of an
+    // unchanged usage. Missing REST data is not that evidence. Retain empty
+    // rows before checking uniqueness so a duplicate cannot gain authority.
+    const rootOverrides = (node.overrides ?? []).filter(o => o?.id === node.id);
+    if (Array.isArray(node.overrides) && node.componentId &&
+        (rootOverrides.length === 0 || rootOverrides.length === 1 && Array.isArray(rootOverrides[0].overriddenFields))) {
+      const fields = [...new Set(rootOverrides[0]?.overriddenFields ?? [])].sort();
+      const localSize: {width?:number; height?:number} = {};
+      for (const [dimension, local] of [['width','x'],['height','y']] as const) {
+        const value = node.size?.[local];
+        if (fields.includes(dimension) && typeof value === 'number' && Number.isFinite(value) && value >= 0) localSize[dimension] = value;
+      }
+      out.instanceRootOverrides = {nodeId:node.id,componentId:node.componentId,fields,
+        ...(ctx.mainPaddingById.has(node.componentId) ? {mainPadding:ctx.mainPaddingById.get(node.componentId)} : {}),
+        ...(ctx.mainSizeById.has(node.componentId) ? {mainSize:ctx.mainSizeById.get(node.componentId)} : {}),
+        ...(out.instanceKey ? {componentKey:out.instanceKey} : {}),
+        ...(out.instanceSetKey ? {componentSetKey:out.instanceSetKey} : {}),
+        ...(node.relativeTransform?.length===2&&node.relativeTransform.every(row=>row.length===3&&row.every(Number.isFinite)) ? {localTransform:node.relativeTransform.map(row=>[...row])} : {}),
+        ...(Object.keys(localSize).length ? {localSize} : {})};
+    } else if (rootOverrides.length > 1) {
+      ctx.report.degradations.push({code:'instance-root-override-ambiguous',nodePath,
+        message:'multiple root override rows — no unique root override authority captured'});
+    }
     if (overrides.length > 0) {
       const byId = indexSubtree(node);
       const textOverrides: Record<string, string> = {};
+      const textOverrideTargets: NonNullable<DumpNode['textOverrideTargets']> = {};
       const ambiguous = new Set<string>();
       const hostOverrides: DumpHostOverride[] = [];
       let unlocated = 0;
@@ -2161,8 +2386,9 @@ function mapNode(
         // "Icon Before" lists {id: <self>, overriddenFields: [boundVariables,
         // name, targetAspectRatio]}). Those fields ride THIS node's own
         // channels (bound / name / targetAspectRatio / hidden / stroke /
-        // componentProperties / bbox) — a root entry is located, not an
-        // internal override, and is not a row here.
+        // componentProperties). Explicit root dimensions retain independent
+        // authority in instanceRootOverrides above; bbox alone does not.
+        // A root entry is located and is not an internal override row here.
         if (o.id === node.id) {
           selfRows++;
           continue;
@@ -2177,6 +2403,7 @@ function mapNode(
           if (path in textOverrides || ambiguous.has(path)) {
             ambiguous.add(path);
             delete textOverrides[path];
+            delete textOverrideTargets[path];
             ctx.report.degradations.push({
               code: 'text-override-ambiguous-path',
               nodePath,
@@ -2184,17 +2411,45 @@ function mapNode(
             });
           } else {
             textOverrides[path] = hit.node.characters;
+            const target = solidFillTarget(node, o.id, 'text-characters');
+            if (target) textOverrideTargets[path] = target;
           }
         }
         const fields = o.overriddenFields.filter((f) => f !== 'characters');
         if (fields.length > 0) {
           const h: DumpHostOverride = { path, fields };
-          if (fields.includes('fills')) {
+          if(fields.includes('componentProperties')){
+            const observed=overrides.filter(row=>row.id===o.id&&row.overriddenFields.includes('componentProperties')).length===1
+              ? nestedInstanceProperties(node,o.id,ctx.components,ctx.componentSets) : undefined;
+            if(observed)h.instanceProperties=observed;
+            else ctx.report.degradations.push({code:'host-instance-properties-unavailable',nodePath,
+              message:'nested property values lack unique complete owner, target or selection identity'});
+          }
+          if (fields.includes('visible') && (hit.node.visible===undefined||typeof hit.node.visible === 'boolean')) {
+            const target=solidFillTarget(node,o.id,'visibility');
+            if(target)h.visibilityTarget={...target,visible:hit.node.visible!==false};
+          }
+          // A text fill-style override resolves to fills in the REST node,
+          // but Figma may name only inheritFillStyleId in overrides[].
+          if (fields.includes('fills') || (hit.node.type === 'TEXT' && fields.includes('inheritFillStyleId'))) {
+            if (Array.isArray(hit.node.fills) && hit.node.fills.length === 0) {
+              const target = solidFillTarget(node,o.id,'shape-fill');
+              if (target) { h.shapeFillTarget = target; h.sourceEmptyFill = true; }
+              const vectorTarget = solidFillTarget(node,o.id);
+              if (vectorTarget) { h.solidFillTarget = vectorTarget; h.sourceEmptyFill = true; }
+            }
             const fill = mapPaint(hit.node.fills, ctx, `${nodePath}/${path}`, 'fill');
             if (fill) {
               h.fill = fill;
               const target = solidFillTarget(node,o.id);
-              if (target) h.solidFillTarget = target;
+              if (target) {
+                h.solidFillTarget = target;
+                if (Array.isArray(hit.node.strokes) && hit.node.strokes.length === 0) h.emptyStrokeTarget = target;
+              }
+              const shapeTarget = solidFillTarget(node,o.id,'shape-fill');
+              if (shapeTarget) { h.shapeFillTarget=shapeTarget; const normal=observeSolidFillComposition(hit.node.fills,true); if(normal)h.sourceNormalFillComposition=normal; }
+              const textTarget = solidFillTarget(node,o.id,'text-fill');
+              if (textTarget) h.textFillTarget = textTarget;
             }
           }
           if (fields.includes('strokes')) {
@@ -2206,6 +2461,7 @@ function mapNode(
         }
       }
       if (Object.keys(textOverrides).length > 0) out.textOverrides = textOverrides;
+      if (Object.keys(textOverrideTargets).length > 0) out.textOverrideTargets = textOverrideTargets;
       if (hostOverrides.length > 0) out.hostOverrides = hostOverrides;
       if (unlocated > 0) {
         ctx.report.degradations.push({
@@ -2249,6 +2505,27 @@ function mapNode(
         if (paint) out.instanceVectorContent = {source:observed.source,shape:observed.shape,paint};
       }
     }
+    if(ctx.inspectInstanceCompositions){
+      const observation=observeInstanceComposition(node,ctx.components);
+      if(observation){
+        const snapshot=observation.root;
+        snapshot.type='FRAME';
+        delete snapshot.componentId;
+        delete snapshot.componentProperties;
+        const outline=(part:RestNode):void=>{
+          const paths=observation.strokeOutlines[part.id];
+          if(paths){
+            part.fillGeometry=paths.map(p=>({path:p.path,windingRule:p.windingRule as 'NONZERO'|'EVENODD'}));
+            part.fills=part.strokes;part.strokes=[];delete part.vectorNetwork;
+          }
+          part.children?.forEach(outline);
+        };
+        outline(snapshot);
+        out.instanceComposition={source:observation.source,
+          applied:Object.fromEntries(Object.entries(observation.appliedProperties).map(([k,p])=>[k,p.value as string|boolean])),
+          root:mapNode(snapshot,ctx,`${nodePath}/[observed composition]`,parentBox,parent)};
+      }
+    }
     return out; // referenced identity and observed content remain separate
   }
 
@@ -2256,6 +2533,20 @@ function mapNode(
     out.children = node.children.map((child) =>
       mapNode(child, ctx, `${nodePath}/${child.name}`, node.absoluteBoundingBox ?? null, node),
     );
+  }
+  const straight = ctx.inspectStraightVectorNetworks && mapStraightVector(node,parent,out);
+  if(straight){
+    ctx.report.degradations=ctx.report.degradations.filter(d=>d.nodePath!==nodePath||d.code!=='vector-geometry-unsupported');
+    ctx.report.notes.push(`${nodePath}: explicit straight vector network captured with original cap, paint and allocation. Collinear joins use generated MITER/4 metadata, not an observed join setting. Inspection-only: live native resize/readback qualification pending.`);
+    return straight;
+  }
+  const outlineSvg = ctx.inspectPaintedStrokeOutlines && ctx.strokeSvgSources?.[node.id];
+  const outlined = outlineSvg && mapPaintedOutline(node, parent, outlineSvg, out);
+  if (outlined) {
+    ctx.report.degradations = ctx.report.degradations.filter(d => d.nodePath !== nodePath || d.code !== 'vector-geometry-unsupported');
+    ctx.report.degradations.push({ code: 'stroke-expanded-outline', nodePath,
+      message: 'Exact SVG/REST painted outline captured with mapped stroke paint and complete control hull; unresolved bindings remain named. Stroke width is baked into filled paths, not retained as an editable centerline. Inspection-only candidate: composed-component and native readback qualification remain pending.' });
+    return outlined;
   }
   return out;
 }
@@ -2280,7 +2571,11 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.44';
+// 1.46: exact non-normal fill observations; preserve paint alpha without rounding.
+// 1.47: exact NORMAL peer paint for mixed source composition cells.
+// 1.53: instance local affine geometry independent of override authority.
+// 1.56: retain native ellipse arc sweep and hole fraction at source precision.
+export const REST_DUMP_VERSION = '1.63';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin
@@ -2320,7 +2615,7 @@ const REST_CAPTURE_GAPS: readonly string[] = [
   // dump v1.44: REST returns layoutPositioning, constraints and both
   // absoluteBoundingBoxes, so `abs` is captured here (mapNode) exactly as the
   // plugin spells it.
-  'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
+  'image fills: original paint facts are captured; URL imports fetch bounded original assets by imageRef. Missing bytes or unsupported paint compositions remain unqualified',
   // 'instance text overrides (dump v1.10 textOverrides)' left this list in
   // dump v1.31: REST returns overrides[] AND the instance subtree, so the
   // channel is captured here (mapNode, INSTANCE branch) — the old line was a
@@ -2358,6 +2653,9 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     report.notes.push('stroke-svg-source-version-mismatch — supplied centerlines not used');
   if (options.strokeSvgSources && options.strokeSvgSources.fileKey !== options.fileKey)
     report.notes.push('stroke-svg-source-file-mismatch — supplied centerlines not used');
+
+  if(options.nativeMaskStrokeSources && (options.nativeMaskStrokeSources.version!==nodesResponse.version || options.nativeMaskStrokeSources.fileKey!==options.fileKey))
+    report.notes.push('native-mask-stroke-source-context-mismatch — supplied native stroke facts not used');
 
   const varNameById = new Map<string, string>();
   const variablesById = new Map<string, RestLocalVariable>();
@@ -2409,6 +2707,31 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   };
   const closurePulled = new Set((options.closure?.pulled ?? []).map((p) => p.nodeId));
 
+  const mainSizeById = new Map<string, {width:number; height:number}>();
+  const conflictingMainSizes = new Set<string>();
+  const mainPaddingById = new Map<string, [number,number,number,number]>();
+  const conflictingMainPadding = new Set<string>();
+  const indexMainSizes = (node: RestNode): void => {
+    if (node.type === 'COMPONENT') {
+      const values = [node.paddingTop,node.paddingRight,node.paddingBottom,node.paddingLeft];
+      if (!['HORIZONTAL','VERTICAL'].includes(node.layoutMode ?? '') || !values.every(v => typeof v === 'number' && Number.isFinite(v) && v >= 0)) conflictingMainPadding.add(node.id);
+      else {
+        const padding = values as [number,number,number,number], prior = mainPaddingById.get(node.id);
+        if (prior && prior.some((v,i) => v !== padding[i])) conflictingMainPadding.add(node.id);
+        mainPaddingById.set(node.id,padding);
+      }
+    }
+    if (node.type === 'COMPONENT' && Number.isFinite(node.size?.x) && Number.isFinite(node.size?.y) && node.size!.x >= 0 && node.size!.y >= 0) {
+      const size = {width:node.size!.x, height:node.size!.y}, prior = mainSizeById.get(node.id);
+      if (prior && (prior.width !== size.width || prior.height !== size.height)) conflictingMainSizes.add(node.id);
+      mainSizeById.set(node.id,size);
+    }
+    for (const child of node.children ?? []) indexMainSizes(child);
+  };
+  for (const entry of Object.values(nodesResponse.nodes ?? {})) if (entry) indexMainSizes(entry.document);
+  for (const id of conflictingMainSizes) mainSizeById.delete(id);
+  for (const id of conflictingMainPadding) mainPaddingById.delete(id);
+
   for (const entry of Object.values(nodesResponse.nodes ?? {})) {
     if (!entry) continue; // REST returns null for ids not in the file
     const doc = entry.document;
@@ -2418,7 +2741,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       );
       continue;
     }
-    if (doc.name === 'Slot') continue; // utility, never a contract component (dump.plugin.js rule)
+    if (doc.name === 'Slot' && options.target !== 'Slot' && !closurePulled.has(doc.id) && !options.closure?.requested.some(node => node.nodeId === doc.id)) continue; // broad discovery skips utilities; explicit requests and dependencies retain their content
     if (options.target && doc.name !== options.target && !closurePulled.has(doc.id)) continue;
 
     const styleById = new Map<string, { name: string; key?: string }>();
@@ -2442,7 +2765,13 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     };
     indexNames(doc);
     const ctx: Ctx = {
+      mainSizeById,
+      mainPaddingById,
+      inspectPaintedStrokeOutlines: options.inspectPaintedStrokeOutlines,
+      inspectInstanceCompositions: options.inspectInstanceCompositions !== false,
+      inspectStraightVectorNetworks: options.inspectStraightVectorNetworks,
       varNameById,
+      ...(options.nativeMaskStrokeSources && options.nativeMaskStrokeSources.version===nodesResponse.version && options.nativeMaskStrokeSources.fileKey===options.fileKey ? {nativeMaskStrokeSources:options.nativeMaskStrokeSources.miterLimitByNodeId,nativeMaskPathWitnesses:options.nativeMaskStrokeSources.pathWitnessByNodeId,nativeMaskStrokeFacts:options.nativeMaskStrokeSources.strokeByNodeId}:{}),
       ...(options.strokeSvgSources && options.strokeSvgSources.version === nodesResponse.version && options.strokeSvgSources.fileKey === options.fileKey ? { strokeSvgSources: options.strokeSvgSources.svgByNodeId } : {}),
       ...(variablesIndex ? { variables: variablesIndex } : {}),
       ...(variablesUnavailable ? { variablesUnavailable } : {}),
@@ -2505,6 +2834,10 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     // are not interchangeable observations.
     const stampedUnsetVariantAxes = rawUnsetVariantAxes === undefined ? undefined : (() => {
       try { return JSON.parse(rawUnsetVariantAxes) as unknown; } catch { return rawUnsetVariantAxes; }
+    })();
+    const rawDrawnVariants = stampString('drawnVariants');
+    const stampedDrawnVariants = rawDrawnVariants === undefined ? undefined : (() => {
+      try { return JSON.parse(rawDrawnVariants) as unknown; } catch { return rawDrawnVariants; }
     })();
     const rawRootSlot = stampString('rootSlot');
     const stampedRootSlot = rawRootSlot === undefined ? undefined : (() => {
@@ -2580,7 +2913,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
           ...(def.slotSettings ? { slotSettings: def.slotSettings } : {}),
         };
         if (typeof def.description === 'string' && def.description !== '') {
-          slotDescriptions[propName.split('#')[0]] = def.description;
+          slotDescriptions[propName.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')] = def.description;
         }
       }
       // dump v1.18 parity with dump.plugin.js: SLOT joins INSTANCE_SWAP on the
@@ -2588,7 +2921,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       // included — so the proposer can say "unconstrained" for an empty list
       // and "not captured" ONLY when the field is absent.
       if ((def.type === 'INSTANCE_SWAP' || def.type === 'SLOT') && Array.isArray(def.preferredValues)) {
-        const shortName = propName.split('#')[0];
+        const shortName = propName.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
         swapPreferredValues[shortName] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
         if (def.preferredValues.length === 0) {
           report.notes.push(
@@ -2599,7 +2932,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       // dump v1.5: BOOLEAN defaults — the one property default variants alone
       // cannot recover (visibility-bound parts' boolean prop defaults).
       if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
-        boolDefaults[propName.split('#')[0]] = def.defaultValue;
+        boolDefaults[propName.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')] = def.defaultValue;
       }
     }
     // dump v1.32: the REST nodes API does NOT put componentProperties on a
@@ -2663,6 +2996,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedRootSlot !== undefined ? { rootSlot: stampedRootSlot } : {}),
       ...(stampedSelectionApi !== undefined ? { selectionApi: stampedSelectionApi } : {}),
       ...(stampedCodeValueAxes !== undefined ? { codeValueAxes: stampedCodeValueAxes } : {}),
+      ...(stampedDrawnVariants !== undefined ? { drawnVariants: stampedDrawnVariants } : {}),
       ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),

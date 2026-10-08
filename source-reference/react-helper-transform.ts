@@ -1,3 +1,7 @@
+import {readReactContextConsumerEffects} from './react-target-effects.js';
+import {planContextExportReads} from './react-context-export-reads.js';
+import {planContextImportFunctions} from './react-context-import-functions.js';
+import {instrumentUpstreamFactories} from './upstream-factories.js';
 import {planReactConsumerLiterals} from './react-consumer-literals.js';
 import {planReactHookHelpers} from './react-hook-helpers.js';
 import {planReactCallbackFactories} from './react-callback-factories.js';
@@ -66,6 +70,10 @@ export function createReactHelperObserver(
   reference: ReactReference,
   plan: ReactEffectInstrumentationPlan,
 ) {
+  if(plan.kind==='jsx-component'&&plan.boundaryOnly&&(!plan.initializers?.length||plan.models.length||plan.component||plan.targetEffects?.length||plan.callbackPlans?.length||plan.callbackValues?.length))throw Error('wrapper-boundary-plan-invalid');
+  if(plan.kind==='jsx-component'&&!plan.boundaryOnly&&!plan.component)throw Error('jsx-component-plan-missing');
+  if(plan.kind==='jsx-component'&&plan.contextExportReads&&JSON.stringify(planContextExportReads(reference,plan.contextFactories??[]))!==JSON.stringify(plan.contextExportReads))throw Error('context-export-plan-changed');
+  if(plan.kind==='jsx-component'&&plan.bodyModels){const expected=(plan.contextImportFunctions??[]).map(r=>readReactContextConsumerEffects(reference,r.initializer,r.invocation,[]));if(JSON.stringify(expected)!==JSON.stringify(plan.bodyModels))throw Error('context-body-model-changed');}
   const changes: Array<{
     file: string;
     kind: string;
@@ -78,7 +86,7 @@ export function createReactHelperObserver(
   if(plan.kind==='jsx-component'&&plan.contextHelpers&&JSON.stringify(planReactContextHelpers(reference,plan.contextCalls??[]))!==JSON.stringify(plan.contextHelpers))throw Error('context-helper-plan-changed');
   if(plan.kind==='jsx-component'&&plan.contextConsumerCalls&&JSON.stringify(planReactContextConsumerCalls(reference,plan.initializers??[]))!==JSON.stringify(plan.contextConsumerCalls))throw Error('context-consumer-plan-changed');
   if(plan.kind==='jsx-component'&&plan.contextFactories&&JSON.stringify(planReactContextFactoryCalls(reference,plan.initializers??[]))!==JSON.stringify(plan.contextFactories))throw Error('context-factory-plan-changed');
-  if(plan.kind==='jsx-component'&&plan.contextBindings&&JSON.stringify(planReactContextBindings(reference,plan.initializers??[]))!==JSON.stringify(plan.contextBindings))throw Error('context-binding-plan-changed');
+  if(plan.kind==='jsx-component'&&plan.contextBindings){const base=planReactContextBindings(reference,plan.initializers??[]),imports=planContextImportFunctions(reference,plan.contextImportFunctions??[]);const expected={reads:[...base.reads,...imports.reads],functions:[...base.functions,...imports.functions]};if(JSON.stringify(expected)!==JSON.stringify(plan.contextBindings))throw Error('context-binding-plan-changed');}
   if(plan.kind==='jsx-component'&&plan.contextTargets&&JSON.stringify(planReactContextTargets(reference,plan.contextFactories??[]))!==JSON.stringify(plan.contextTargets))throw Error('context-target-plan-changed');
   if(plan.kind==='jsx-component'&&plan.consumerLiterals&&JSON.stringify(planReactConsumerLiterals(reference,plan.initializers??[]))!==JSON.stringify(plan.consumerLiterals))throw Error('consumer-literal-plan-changed');
   if(plan.kind==='jsx-component'&&plan.hookHelpers&&JSON.stringify(planReactHookHelpers(reference,plan.contextConsumerCalls??[]))!==JSON.stringify(plan.hookHelpers))throw Error('hook-helper-plan-changed');
@@ -191,7 +199,9 @@ export function createReactHelperObserver(
       // protocols. They have no modeled literal authority in this observer.
       if (loader === "js" && (registered === text || plan.kind==='jsx-component'&&(plan.consumerLiterals?.length||plan.hookHelpers?.functions.length||plan.callbackFactories?.functions.length||plan.effectHooks?.length||plan.refHooks?.length||plan.callbackSources?.functions.length||plan.contextCalls?.length||plan.contextRests?.length||plan.contextHelpers?.length||plan.contextConsumerCalls?.length||plan.contextFactories?.length||plan.contextBindings?.reads.length||plan.contextTargets?.reads.length)&&instrumentReactHelperSource(text,path.relative(reference.sourceRoot,file),{...plan,consumerLiterals:[],hookHelpers:undefined,callbackFactories:undefined,effectHooks:[],refHooks:[],callbackSources:{hooks:[],consumers:[],functions:[],calls:[],callbacks:[]},contextCalls:[],contextRests:[],contextHelpers:[],contextConsumerCalls:[],contextFactories:[],contextBindings:{reads:[],functions:[]},contextTargets:{reads:[],objects:[]}})===text)) {
         if(registered!==text)changes.push({file,kind:'context-source-calls',inputSha256,outputSha256:sha(registered)});
-        return { contents: registered, loader };
+        const contents=registered===text?instrumentUpstreamFactories(text,file,path.relative(reference.sourceRoot,file)):registered;
+        if(contents!==registered)changes.push({file,kind:'upstream-react-factories',inputSha256,outputSha256:sha(contents)});
+        return { contents, loader };
       }
       const compiled = await transform(registered, {
         loader,
@@ -307,6 +317,7 @@ export function createReactHelperObserver(
           p.text +
           contents.slice(p.endReplace ?? p.pos);
       if(entry&&plan.kind==='jsx-component'){
+        contents+='\n'+(plan.contextExportReads??[]).map((r,i)=>{const t=r.target;return `import {${JSON.stringify(t.exportName)} as __DSC_CONTEXT_EXPORT_${i}} from ${JSON.stringify('./'+t.module)};\nglobalThis.__DSC_RUNTIME_PROOF.contextExportRegister(${JSON.stringify(helperPointKey(r.read))},__DSC_CONTEXT_EXPORT_${i},()=>__DSC_CONTEXT_EXPORT_${i});`;}).join('\n');
         if(text.includes('__DSC_JSX_HELPER_TARGET_'))throw Error('jsx-helper-target-reserved-binding');
         contents+='\n'+plan.targets.map((target,index)=>{
           const key=JSON.stringify([target.module,target.sourceSha256,target.span.start,target.span.end]);

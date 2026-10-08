@@ -42,3 +42,23 @@ npm install @ds-contracts/schema@17.0.0-rc.1
 
 See the repository [release process](../../docs/27-release-process.md) for
 schema byte checks, pack verification, publication approvals, and rollback.
+
+## Explicit Figma state preview rows
+
+`bindings.figma.statePreviewRows` optionally replaces the default primary-axis
+preview domain when `statePreviews` is true. Example for an enum prop `tone`:
+
+```json
+[{"state":"hover","props":{"tone":"white"}},{"state":"hover","props":{"tone":"gray"}}]
+```
+
+Rows use contract prop names, enum strings, Boolean values, or `null` for an
+explicit unset variant. Each row must specify exactly every VARIANT prop, with
+valid values. The schema rejects duplicates, undeclared states, and declared states
+with no row. The array contains 1–4096 rows. It cannot accompany `drawnVariants`,
+`absentVariants`, or native representation. These checks require Zod validation;
+the generated JSON Schema does not encode all cross-field refinements.
+
+The field constrains preview variants only. It does not alter the rest grid or
+restrict the React runtime's possible prop/state combinations. Absence preserves
+the legacy preview rule. Domain validation is separate from visual acceptance.

@@ -302,7 +302,10 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       if (v.kind === "array" && index && Number(k) > v.length)
         throw new Refused("array-sparse-write-unmodeled", n);
       this.writes.push({
+        ...(contextMode?{phase:this.initializationDepth?"module-initialization":"render"}:{}),
         target: v.id,
+        ...(contextMode && value?.kind === "function" ? {valueSource:source(value.node)} : {}),
+        ...(contextMode && v.kind === "function" ? {targetSource:source(v.node)} : {}),
         origin: v.origin,
         key: k,
         operation: remove ? "delete" : "set",
@@ -378,11 +381,13 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         name: decl.name.text,
         value,
         reads: [],
+        ...(contextMode?{readOccurrences:[]}:{}),
       };
       if (
         !entry.reads.some((r) => r.file === site.file && r.start === site.start)
       )
         entry.reads.push(site);
+      if(contextMode)entry.readOccurrences.push({site,phase:this.initializationDepth?"module-initialization":"render"});
       this.bindingReads.set(key, entry);
       return value;
     }
@@ -433,27 +438,39 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         while (imp && !ts.isImportDeclaration(imp)) imp = imp.parent;
         if (!imp || !ts.isStringLiteral(imp.moduleSpecifier))
           throw new Refused("import-origin-unresolved", n);
-        const edge = resolution.find(
+        const edges = resolution.filter(
           (r) =>
             r.importer === realpathSync(imp.getSourceFile().fileName) &&
             r.specifier === imp.moduleSpecifier.text,
         );
-        if (!edge || !runtimeFiles.includes(edge.file))
+        const targets = [...new Set(edges.map(edge => edge.file))];
+        if (targets.length !== 1 || !runtimeFiles.includes(targets[0]))
           throw new Refused("executable-import-unresolved", n);
+        if (ts.isImportSpecifier(imported)) {
+          const target = options.resolveRuntimeExport?.(targets[0], (imported.propertyName ?? imported.name).text);
+          if (!target || !target.name || !ts.isIdentifier(target.name))
+            throw new Refused("runtime-named-import-unmodeled", n);
+          const targetSymbol = checker.getSymbolAtLocation(target.name);
+          if (!targetSymbol) throw new Refused("runtime-named-import-unmodeled", n);
+          return this.bindingRead(n, imported, this.moduleBinding(n, target, targetSymbol));
+        }
         if (!ts.isImportClause(imported) || !imported.name)
           throw new Refused("runtime-named-import-unmodeled", n);
-        return this.bindingRead(n, imported, this.cjs(edge.file, n));
+        return this.bindingRead(n, imported, this.cjs(targets[0], n));
       }
+      return this.moduleBinding(n, decl, unalias(s));
+    }
+    moduleBinding(n, decl, bindingSymbol) {
       if (!decl || decl.getSourceFile().isDeclarationFile)
         throw new Refused("binding-without-source:" + n.text, n);
       source(decl);
       const global = this.moduleScope(decl.getSourceFile()),
-        old = global.lookup(unalias(s));
+        old = global.lookup(bindingSymbol);
       if (old) return this.bindingRead(n, decl, old.value);
       if (ts.isFunctionDeclaration(decl) && ts.isSourceFile(decl.parent)) {
         const f = this.fn(decl, global);
         this.sealModule(f);
-        global.own(unalias(s), f);
+        global.own(bindingSymbol, f);
         return this.bindingRead(n, decl, f);
       }
       // An initialized module var is not a constant. In this separate model,
@@ -466,7 +483,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         if (ts.isStringLiteral(init) || ts.isNumericLiteral(init) ||
             [ts.SyntaxKind.TrueKeyword,ts.SyntaxKind.FalseKeyword,ts.SyntaxKind.NullKeyword].includes(init.kind)) {
           const value = this.expr(init, global);
-          global.own(unalias(s), value);
+          global.own(bindingSymbol, value);
           mutableBindings.push({binding:source(decl),value:shape(value)});
           return this.bindingRead(n, decl, value);
         }
@@ -486,7 +503,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         finally { this.initializationDepth--; }
         this.reading.delete(decl);
         this.sealModule(v);
-        global.own(unalias(s), v);
+        global.own(bindingSymbol, v);
         return this.bindingRead(n, decl, v);
       }
       throw new Refused("unbound-or-mutable-source-binding:" + n.text, n);
@@ -541,7 +558,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
     targetJsx(n, env) {
       const factory = options.factory(n);
       if (!factory) return MISSING;
-      if (n.questionDotToken || n.arguments.length < 2 || n.arguments.length > 3 || n.arguments.some(ts.isSpreadElement))
+      if (n.questionDotToken || n.arguments.length < 2 || n.arguments.length > (factory === 'createElement' ? 100 : 3) || n.arguments.some(ts.isSpreadElement))
         throw new Refused("target-factory-call-unmodeled", n);
       let tag = options.target(n.arguments[0]);
       if (!tag) {
@@ -554,7 +571,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       const given = this.expr(n.arguments[1], env);
       if (given?.kind !== "record") throw new Refused("target-props-not-data", n);
       let key = null;
-      if (n.arguments[2]) {
+      if (factory !== 'createElement' && n.arguments[2]) {
         const value = this.scalar(this.expr(n.arguments[2], env), n.arguments[2]);
         if (value !== undefined) key = String(value);
       }
@@ -563,6 +580,10 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         const value = this.scalar(props.fields.get("key"),n);
         if (value !== undefined) key = String(value);
         props.fields.delete("key");
+      }
+      if (factory === 'createElement' && n.arguments.length > 2) {
+        const children = n.arguments.slice(2).map(child => this.expr(child, env));
+        props.fields.set('children', children.length === 1 ? children[0] : this.array(children));
       }
       targetFactories.push({source:source(n),factory});
       return {kind:"jsx",tag,props,key,source:source(n)};
@@ -842,7 +863,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         site: n ? source(n) : null,
         ...(jsxMode && this.initializationDepth ? {phase:"module-initialization"} : {}),
       });
-      const contextCall=contextMode&&n?{source:source(target.node),site:source(n),arguments:args.map(v=>shape(v))}:null;
+      const contextCall=contextMode&&n?{phase:this.initializationDepth?"module-initialization":"render",source:source(target.node),site:source(n),arguments:args.map(v=>shape(v))}:null;
       if(contextCall)contextFunctionCalls.push(contextCall);
       const env = new Scope(target.env);
       if (!ts.isArrowFunction(target.node))
@@ -1095,6 +1116,28 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
           "children",
           children.length === 1 ? children[0] : this.array(children),
         );
+      return this.finishJsx(n, tag, props);
+    }
+    createElement(n, env) {
+      // Only original import-bound sites reach this model. The existing runtime
+      // observer must still authenticate the pinned React factory and compare
+      // the complete returned element; source syntax grants no admission.
+      const tag = this.scalar(this.expr(n.arguments[0], env), n.arguments[0]);
+      if (typeof tag !== "string" || !tag)
+        throw new Refused("create-element-target-unmodeled", n);
+      const config = this.expr(n.arguments[1], env), props = this.record();
+      if (config !== null && config !== undefined) {
+        if (config?.kind !== "record") throw new Refused("create-element-config-unmodeled", n);
+        for (const key of this.keys(config, n)) {
+          if (key === "__self" || key === "__source") continue;
+          props.fields.set(key, this.get(config, key, n));
+        }
+      }
+      const children = n.arguments.slice(2).map(child => this.expr(child, env));
+      if (children.length) props.fields.set("children", children.length === 1 ? children[0] : this.array(children));
+      return this.finishJsx(n, {kind:"host",name:tag}, props);
+    }
+    finishJsx(n, tag, props) {
       const escapeSeen = new Set();
       const checkEscape = (value, role) => {
         if (value === opaque) {
@@ -1220,6 +1263,11 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         );
       }
       if (ts.isCallExpression(n)) {
+        if (componentMode && !compiledMode && !jsxMode && options.createElementSites?.length) {
+          const point = source(n);
+          if (options.createElementSites.some(site => site.file === point.file && site.sha256 === point.sha256 && site.start === point.start && site.end === point.end))
+            return this.createElement(n, env);
+        }
         if (helperMode) {const value=this.helperContextCall(n,env);if(value!==MISSING)return value;}
         if (contextMode) {const value=this.hookCall(n,env);if(value!==MISSING)return value;}
         if (contextMode) {const value=this.factoryCall(n,env);if(value!==MISSING)return value;}
@@ -1335,6 +1383,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         const op = n.operatorToken.kind;
         if (op === ts.SyntaxKind.EqualsToken)
           return this.ref(n.left, env).set(this.expr(n.right, env));
+        if (op === ts.SyntaxKind.CommaToken) {
+          // Evaluate discarded operands for their effects without coercing or
+          // inspecting their values. A refusal on the left stops evaluation.
+          this.expr(n.left, env);
+          return this.expr(n.right, env);
+        }
         if (op === ts.SyntaxKind.AmpersandAmpersandToken) {
           const l = this.expr(n.left, env);
           const chosen = this.truth(l, n.left);
@@ -1388,6 +1442,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         const a = this.scalar(l, n),
           b = this.scalar(r, n);
         switch (op) {
+          // Both operands passed scalar(), so abstract equality cannot invoke
+          // application-defined coercion or inspect opaque caller content.
+          case ts.SyntaxKind.EqualsEqualsToken:
+            return a == b;
+          case ts.SyntaxKind.ExclamationEqualsToken:
+            return a != b;
           case ts.SyntaxKind.EqualsEqualsEqualsToken:
             return a === b;
           case ts.SyntaxKind.ExclamationEqualsEqualsToken:
@@ -1448,6 +1508,25 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
           : n.elseStatement
             ? this.statement(n.elseStatement, env)
             : undefined;
+      }
+      if (ts.isSwitchStatement(n)) {
+        // Cross-clause lexical declarations require TDZ/hoisting semantics we
+        // do not model. Primitive dispatch and ordinary fallthrough do not.
+        const clauses=n.caseBlock.clauses;
+        if(clauses.some(c=>c.statements.some(s=>ts.isVariableStatement(s)||ts.isFunctionDeclaration(s)||ts.isClassDeclaration(s))))throw new Refused("switch-lexical-scope-unmodeled",n);
+        const value=this.scalar(this.expr(n.expression,env),n.expression);
+        let selected=-1,fallback=-1;
+        for(let i=0;i<clauses.length;i++){
+          const c=clauses[i];if(ts.isDefaultClause(c)){fallback=i;continue;}
+          const match=value===this.scalar(this.expr(c.expression,env),c.expression);decision(c.expression,"switch",match);
+          if(match){selected=i;break;}
+        }
+        if(selected<0)selected=fallback;
+        if(selected<0)return;
+        for(let i=selected;i<clauses.length;i++)for(const statement of clauses[i].statements){
+          const signal=this.statement(statement,env);if(signal?.kind==="break")return;if(signal)return signal;
+        }
+        return;
       }
       if (ts.isContinueStatement(n)) {
         if (n.label) throw new Refused("label-control", n);
@@ -1579,12 +1658,16 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       declarationKind: b.declarationKind,
       name: b.name,
       reads: b.reads,
+      ...(b.readOccurrences?{readOccurrences:b.readOccurrences}:{}),
       value: value(b.value),
     }));
     const functions = e.functionValues.map((v) => value(v).id);
     return { bindings, nodes, functions };
   }
-  function shape(value, seen = new Set()) {
+  function shape(value, seen = new Set(), metadata = false) {
+    // Only helper metadata may retain source functions. Ordinary outputs still
+    // refuse them; the runtime must authenticate each registered identity.
+    if(metadata && value?.kind === "function") return {kind:"metadata-function",source:source(value.node)};
     if(contextMode&&value?.kind==='opaque-hook-reference')return {kind:'hook-reference',invocation:value.invocation,qualification:'state-and-effects-unverified'};
     if(contextMode&&value?.kind==='opaque-factory-reference')return {kind:'factory-reference',origin:value.origin,source:value.source,qualification:'body-and-captures-unverified'};
     if(contextMode&&value?.kind==='opaque-ref-reference')return {kind:'ref-reference',state:value.state,call:value.call};
@@ -1657,11 +1740,11 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
     if (seen.has(value)) throw new Refused("result-cycle");
     const next = new Set([...seen, value]);
     return value.kind === "array"
-      ? { kind: "array", items: e.items(value).map((v) => shape(v, next)),...(contextMode&&value.literalSource?{allocation:{id:value.id,source:value.literalSource}}:{}) }
+      ? { kind: "array", items: e.items(value).map((v) => shape(v, next, metadata)),...(contextMode&&value.literalSource?{allocation:{id:value.id,source:value.literalSource}}:{}) }
       : {
           kind: "record",
           ...(contextMode&&value.literalSource?{allocation:{id:value.id,source:value.literalSource}}:{}),
-          fields: e.keys(value).map((k) => [k, shape(e.get(value, k), next)]),
+          fields: e.keys(value).map((k) => [k, shape(e.get(value, k), next, metadata)]),
         };
   }
   try {
@@ -1730,7 +1813,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
     } else {
       extraArguments = call.arguments
         .slice(1)
-        .map((argument) => shape(e.expr(argument, env)));
+        .map((argument) => shape(e.expr(argument, env),new Set(),true));
       output = e.expr(call, env);
       if (output?.kind !== "record" || output.fields.get(contentKey) !== opaque)
         throw new Refused("helper-content-not-preserved", call);

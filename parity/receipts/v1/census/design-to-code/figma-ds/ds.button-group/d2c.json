@@ -5,10 +5,10 @@
   "nodeId": "53:2558",
   "mode": "reviewable-inversion",
   "variantCount": 2,
-  "contractSha256": "bcfe46df2dde95e4eeb5ff099bbc419662ed1a3ee25c3ff4c5f305295af5c16e",
+  "contractSha256": "ba446b581274f27d00adbba46659018e4c5af13b74df4572944d5369337b63fb",
   "carriage": {
-    "carried": 15,
-    "named": 11,
+    "carried": 19,
+    "named": 7,
     "silent": 0
   },
   "silentRows": [],
@@ -74,8 +74,8 @@
       0
     ],
     "SLOT child INSTANCE (design-time content)": [
-      0,
       4,
+      0,
       0
     ]
   },
@@ -119,13 +119,13 @@
   ],
   "generatedFiles": {
     "react/ButtonGroup/ButtonGroup.module.css": "952344c8575dc45dde16dc23f26abbb0281b2d3c241f539ab4f93cd888aeb3d4",
-    "react/ButtonGroup/ButtonGroup.stories.tsx": "4a53e323c111c7ef22ee23c890e755e52b2de277c9974f5f21c1ee68e873b4c2",
-    "react/ButtonGroup/ButtonGroup.tsx": "8ddc63ec19a72ef1d873c2e2bb0d1fdc65f1f89b6ca5c42110d6345f96199804",
+    "react/ButtonGroup/ButtonGroup.stories.tsx": "6ae6166c0b4d6774bf90d8d8cffa74e99ce64ba64265d071cb17d7d97c53d934",
+    "react/ButtonGroup/ButtonGroup.tsx": "ff256af9349ca0a1cc9f60972f4f06496c86d65e2358a2e67d45e40a67ca340c",
     "react/ButtonGroup/index.ts": "ed87204c5ce6d251e5518c6940a660e3cddbe815379b367a5088d5a64534e992",
-    "wc/ds-button-group.ts": "950538ef9991360eb18dcef3c5e39e25ed6b0483898f7307504e80f2d31d52fd",
+    "wc/ds-button-group.ts": "b52f30c86f9c2cb6f3fc627702fe662ac1fb4866cb57ae71141d05786b00b091",
     "wc/ds-button-group.css.ts": "90932ebdb7f830e986276c518113f65c7d3d097d96c4973d3058fe164e8e6016",
     "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
-    "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
+    "wc/ds-button-group.custom-elements.json": "1edf55577afed6672dfb6b2d05d2cad4f4d6b49687df94a68c339ce3a94ac3a6"
   },
-  "notesCount": 66
+  "notesCount": 82
 }

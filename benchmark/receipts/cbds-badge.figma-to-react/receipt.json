@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -19,11 +20,11 @@
     }
   },
   "generatedSha256": {
-    "Badge/Badge.module.css": "87c3960e51cdd1a7286b1f1c6ce6cb9ca9656837a2d7405222af13096b16e93c",
-    "Badge/Badge.tsx": "e1768e3038b1c0a6691a0abe4027c52557c9e74882e159a1666d956a12d54ba4",
+    "Badge/Badge.module.css": "8936817c26892b237b2f651333f264269a9dbcf1ccc587c238a7b0e0fe2f28d0",
+    "Badge/Badge.tsx": "7d5451e27c97e3e8671f6842d91a972b78289883f3940c54bbd0896ab8c544b8",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
-    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/Icon.tsx": "dc738a7c3745423b48fa5331c6fee5595c8283e4162dd973f8aab086dab0a40a",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
     "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
@@ -72,13 +73,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "2f7a5f216b9e63840f09718227a90eeb21250aa2d251341d78827f9978f4645b"
+        "pngSha256": "2f7a5f216b9e63840f09718227a90eeb21250aa2d251341d78827f9978f4645b",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -127,13 +150,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b876118714a4abb06f3de57905a8476d3700fe1c267c4c6f1f8fa6e9bd12a4a4"
+        "pngSha256": "b876118714a4abb06f3de57905a8476d3700fe1c267c4c6f1f8fa6e9bd12a4a4",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 52,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -182,13 +227,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "22c91480c38103029660cce36b4b98bf4f31698948df60faf414068d27384928"
+        "pngSha256": "22c91480c38103029660cce36b4b98bf4f31698948df60faf414068d27384928",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 94,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -237,13 +304,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "071b03c8e3c4f90cfb3745db8f7ca62a858ddbece90c059ce1502a6f90287a03"
+        "pngSha256": "071b03c8e3c4f90cfb3745db8f7ca62a858ddbece90c059ce1502a6f90287a03",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 128,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -292,13 +381,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "2f5f321704a1433727c9045969a31e0d946c79d1de360bcc7f3814f0e8d31db2"
+        "pngSha256": "2f5f321704a1433727c9045969a31e0d946c79d1de360bcc7f3814f0e8d31db2",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 160,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -347,13 +458,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3149517d7e808ccc19c231d2f00c33a6f6c8587fc5ac4f421cff9b59c91e1d04"
+        "pngSha256": "3149517d7e808ccc19c231d2f00c33a6f6c8587fc5ac4f421cff9b59c91e1d04",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 200,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -402,13 +535,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d2f1831ba2dfd17f6cb6c055f9f2b5ff6568ccc42e318602845ad2854116baea"
+        "pngSha256": "d2f1831ba2dfd17f6cb6c055f9f2b5ff6568ccc42e318602845ad2854116baea",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 242,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -457,13 +612,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "8e7209823c66d62535184961a3c58d50a332cab8441cc7b3b45c3ae56bb3c041"
+        "pngSha256": "8e7209823c66d62535184961a3c58d50a332cab8441cc7b3b45c3ae56bb3c041",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 276,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -512,13 +689,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "13770c637ad2c85fc9eea292ca73571bcb39243a093c26d00b7a78fe14e78a7f"
+        "pngSha256": "13770c637ad2c85fc9eea292ca73571bcb39243a093c26d00b7a78fe14e78a7f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 308,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -567,13 +766,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "08bc72fc4b922cda18a2ebf64e3d76f024ac72e7f97c94c15870b514b77546cc"
+        "pngSha256": "08bc72fc4b922cda18a2ebf64e3d76f024ac72e7f97c94c15870b514b77546cc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 348,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -622,13 +843,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c7e06ca8ba89ee832d61b3c14942d8baa18a2faa1f2169a4456a3ffb57f3a5f4"
+        "pngSha256": "c7e06ca8ba89ee832d61b3c14942d8baa18a2faa1f2169a4456a3ffb57f3a5f4",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 390,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -677,13 +920,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7827b65a48a5e29955832b7d4f222870af4b1767a79859d63245ba737088146d"
+        "pngSha256": "7827b65a48a5e29955832b7d4f222870af4b1767a79859d63245ba737088146d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 424,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-brand_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -732,13 +997,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "5e7f05ae53c8e63b30941c62d4dd7b4deaf68205687c2d1845c2dcfc35be2204"
+        "pngSha256": "5e7f05ae53c8e63b30941c62d4dd7b4deaf68205687c2d1845c2dcfc35be2204",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 456,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -787,13 +1074,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c6cfafb844468b171d0bb433f47da979cf55b49df290608e202269446683f16a"
+        "pngSha256": "c6cfafb844468b171d0bb433f47da979cf55b49df290608e202269446683f16a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 496,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -842,13 +1151,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "308ffcf2c961e60a8e013036161721ef0071296171f225ef4a8c4980098c8919"
+        "pngSha256": "308ffcf2c961e60a8e013036161721ef0071296171f225ef4a8c4980098c8919",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 538,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -897,13 +1228,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e6690e79d64ab9282251f1912739f4d3f41e1106bdee56a7b8a38f862d0ec863"
+        "pngSha256": "e6690e79d64ab9282251f1912739f4d3f41e1106bdee56a7b8a38f862d0ec863",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 572,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -952,13 +1305,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e10f6bcd5c8018c56d66ec0053f6ebc97dfedcde21ee585f18bda0e481259d65"
+        "pngSha256": "e10f6bcd5c8018c56d66ec0053f6ebc97dfedcde21ee585f18bda0e481259d65",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 604,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1007,13 +1382,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "5d10fc7d05a2a05e5cf127cf255c4c9fc1c67d7193be501e27c8d45a266a69b2"
+        "pngSha256": "5d10fc7d05a2a05e5cf127cf255c4c9fc1c67d7193be501e27c8d45a266a69b2",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 644,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1062,13 +1459,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1df96fcdb8050e5fec62c31b36500f5341c0951644243a92d1309e64b0e1f951"
+        "pngSha256": "1df96fcdb8050e5fec62c31b36500f5341c0951644243a92d1309e64b0e1f951",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 686,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1117,13 +1536,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c024785e959ee812ab96788184d24f9a9976744976897b55970a3cde89796100"
+        "pngSha256": "c024785e959ee812ab96788184d24f9a9976744976897b55970a3cde89796100",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 720,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1172,13 +1613,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c7463c7a456330869478c3462b2206725ec04492bb823ecd849b99b7c21c8361"
+        "pngSha256": "c7463c7a456330869478c3462b2206725ec04492bb823ecd849b99b7c21c8361",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 752,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1227,13 +1690,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1427fd8634a9b63005ef2f24dcec8ec345d3dbe1fefc380a20372889030a26d9"
+        "pngSha256": "1427fd8634a9b63005ef2f24dcec8ec345d3dbe1fefc380a20372889030a26d9",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 792,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-success_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1282,13 +1767,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e00f0ecc0449a8ddfe71e03ad297b54e330fd4fbe51d1003135d73c4f3c3a989"
+        "pngSha256": "e00f0ecc0449a8ddfe71e03ad297b54e330fd4fbe51d1003135d73c4f3c3a989",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 834,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1337,13 +1844,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "407bf9b5904bc510fd121fbead984770780eacbcf655143c9358a1f756084053"
+        "pngSha256": "407bf9b5904bc510fd121fbead984770780eacbcf655143c9358a1f756084053",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 868,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-success_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1392,13 +1921,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "080b21d3728fa0f9d23837398c59fa942d7aa2052d17a39a88af06e15917bef8"
+        "pngSha256": "080b21d3728fa0f9d23837398c59fa942d7aa2052d17a39a88af06e15917bef8",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 900,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1447,13 +1998,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fd7e0da37cc3b44cf48cd436c8c128946d0000d6f81876c1a3b6d3ecb8caa75a"
+        "pngSha256": "fd7e0da37cc3b44cf48cd436c8c128946d0000d6f81876c1a3b6d3ecb8caa75a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 940,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1502,13 +2075,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "99f758204eb5c0a54454b4dbf786d45b9f8e2ed1d6eca29a3955ee0f7e68ec3a"
+        "pngSha256": "99f758204eb5c0a54454b4dbf786d45b9f8e2ed1d6eca29a3955ee0f7e68ec3a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 982,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1557,13 +2152,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9f3a60eda0ef2b90093edb5ad4fa6e546b6872ca3d903c6f67cdb1a896c04643"
+        "pngSha256": "9f3a60eda0ef2b90093edb5ad4fa6e546b6872ca3d903c6f67cdb1a896c04643",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1016,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1612,13 +2229,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "addf685580b56b026f11448db9e14241e1a98bd1b143a6cbf406d6f17d63f3cb"
+        "pngSha256": "addf685580b56b026f11448db9e14241e1a98bd1b143a6cbf406d6f17d63f3cb",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1048,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1667,13 +2306,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "2bfcf0d9fde2b8b5e901699c5710067bf66e916767aeb23f721999c1b0c48cc7"
+        "pngSha256": "2bfcf0d9fde2b8b5e901699c5710067bf66e916767aeb23f721999c1b0c48cc7",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1088,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1722,13 +2383,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b72dd7ee8e051cb4093f6b05fa65f447ee36dd761b30a27660f59e785b5d9146"
+        "pngSha256": "b72dd7ee8e051cb4093f6b05fa65f447ee36dd761b30a27660f59e785b5d9146",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1130,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1777,13 +2460,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "57b9f56c608156fbd09cdede1a802c8b71a2394c389d56eaa6a0fae80801d961"
+        "pngSha256": "57b9f56c608156fbd09cdede1a802c8b71a2394c389d56eaa6a0fae80801d961",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1164,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1832,13 +2537,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e28ff79e7b14d3b0f80099e5e10fd5ad4f6538e61d14180ad3fc678c2af3d6d4"
+        "pngSha256": "e28ff79e7b14d3b0f80099e5e10fd5ad4f6538e61d14180ad3fc678c2af3d6d4",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1196,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1887,13 +2614,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "566203717456aad419a73202d321f6caa05d221222049f09d10bc78c38488b75"
+        "pngSha256": "566203717456aad419a73202d321f6caa05d221222049f09d10bc78c38488b75",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1236,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1942,13 +2691,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "2659bf8f79c265dc6787da5d802b2f6f0c4fd9a22005bacdf0463b4fbe10560a"
+        "pngSha256": "2659bf8f79c265dc6787da5d802b2f6f0c4fd9a22005bacdf0463b4fbe10560a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1278,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1997,13 +2768,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "0c76372560266d9f9a949fa1c554bc753ed3b04c2bdcb5f2487da31860518551"
+        "pngSha256": "0c76372560266d9f9a949fa1c554bc753ed3b04c2bdcb5f2487da31860518551",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1312,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-warning_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2052,13 +2845,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9115792ed34399c5a58c67e6e2e0a8fa8ebd32698fded09a50e7ccd5268af5b0"
+        "pngSha256": "9115792ed34399c5a58c67e6e2e0a8fa8ebd32698fded09a50e7ccd5268af5b0",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1344,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2107,13 +2922,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "212ff1683c4a3ba72cd75ab11d3ffa4f344f46e10be67878d94c4b28902c6477"
+        "pngSha256": "212ff1683c4a3ba72cd75ab11d3ffa4f344f46e10be67878d94c4b28902c6477",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1384,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2162,13 +2999,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "71df523b16e6699172f183d00e8316b886b3f0fc9717421478931d7efb3dec95"
+        "pngSha256": "71df523b16e6699172f183d00e8316b886b3f0fc9717421478931d7efb3dec95",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1426,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2217,13 +3076,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c6b6e44c0d8343ea7da8d6d0446eab5e93bd8a23054ded1862d9a604834a1cbd"
+        "pngSha256": "c6b6e44c0d8343ea7da8d6d0446eab5e93bd8a23054ded1862d9a604834a1cbd",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1460,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2272,13 +3153,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3c305e287d6b63f99954a42ed414ff7624e76504f5256466a9a26e7ad6779139"
+        "pngSha256": "3c305e287d6b63f99954a42ed414ff7624e76504f5256466a9a26e7ad6779139",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1492,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2327,13 +3230,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "bdc6ea7336756f1472e5577fe04577d542ebff9c0c055f3724dab1f071f046e8"
+        "pngSha256": "bdc6ea7336756f1472e5577fe04577d542ebff9c0c055f3724dab1f071f046e8",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1532,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2382,13 +3307,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1ea68751823d85c17343cf2474b0b05a9cb34292f30020a50f2695918e952c10"
+        "pngSha256": "1ea68751823d85c17343cf2474b0b05a9cb34292f30020a50f2695918e952c10",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1574,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2437,13 +3384,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3231729c6d2ffd89d2721826740e640e8a512274b87cc777b93b22f54de6ebc6"
+        "pngSha256": "3231729c6d2ffd89d2721826740e640e8a512274b87cc777b93b22f54de6ebc6",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1608,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2492,13 +3461,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "18aefe1afb613ae3937112e433749085fe37622b80f0e6c21c7f092ee8e3f851"
+        "pngSha256": "18aefe1afb613ae3937112e433749085fe37622b80f0e6c21c7f092ee8e3f851",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1640,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2547,13 +3538,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "69a07162d0223cb8d6051d3a69a5ad45737b7d2c35fbeaea1d45c633a39339b5"
+        "pngSha256": "69a07162d0223cb8d6051d3a69a5ad45737b7d2c35fbeaea1d45c633a39339b5",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1680,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2602,13 +3615,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "a0c48d151f4035a230259b762a04624f53284b5c400aef4091b5e0796fde29fb"
+        "pngSha256": "a0c48d151f4035a230259b762a04624f53284b5c400aef4091b5e0796fde29fb",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1722,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2657,13 +3692,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3adc537214056c8727c321090385e0675b63b479a86dc8939000903952d77ea3"
+        "pngSha256": "3adc537214056c8727c321090385e0675b63b479a86dc8939000903952d77ea3",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1756,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-danger_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2712,13 +3769,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "0bbfb8a1e9616c3257793fdd7807dd8e936ea6fee67eba5f6682ac2f5550468e"
+        "pngSha256": "0bbfb8a1e9616c3257793fdd7807dd8e936ea6fee67eba5f6682ac2f5550468e",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1788,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2767,13 +3846,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d36496939144e9fb31a234f197c031a1f4902da3ff5f7fb705de833b126f4a2f"
+        "pngSha256": "d36496939144e9fb31a234f197c031a1f4902da3ff5f7fb705de833b126f4a2f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1828,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2822,13 +3923,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9dcf4ed73fccf724e8d28944fefcbec58751425d29f084c1d5cb31ec59b398fb"
+        "pngSha256": "9dcf4ed73fccf724e8d28944fefcbec58751425d29f084c1d5cb31ec59b398fb",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1870,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2877,13 +4000,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "5980172f769d37b608a8920e596a85656b98d9d8ca715e9c274f36509c123c10"
+        "pngSha256": "5980172f769d37b608a8920e596a85656b98d9d8ca715e9c274f36509c123c10",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1904,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2932,13 +4077,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "ec5d3869d3cb737fb983f7aa5721a40d700d510f83c934884c937bcc3b41aa4d"
+        "pngSha256": "ec5d3869d3cb737fb983f7aa5721a40d700d510f83c934884c937bcc3b41aa4d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1936,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -2987,13 +4154,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "204301de1b0182e12e5bc7ef7c9d0bd4b308d749499c63de8e259803c1ebc174"
+        "pngSha256": "204301de1b0182e12e5bc7ef7c9d0bd4b308d749499c63de8e259803c1ebc174",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1976,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3042,13 +4231,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "be1401f60767776e62d9702187b7723f06c424505bbd4b1a9985d66c48f75302"
+        "pngSha256": "be1401f60767776e62d9702187b7723f06c424505bbd4b1a9985d66c48f75302",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2018,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3097,13 +4308,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c6b35dd89433adefa7f4cff321047c92314e50d9c30745c9c40eafba3916e7ee"
+        "pngSha256": "c6b35dd89433adefa7f4cff321047c92314e50d9c30745c9c40eafba3916e7ee",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2052,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3152,13 +4385,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "5d886154608a8b5ea17daf3e45015d9fb68266fd9242bffb7478e79d05f3062c"
+        "pngSha256": "5d886154608a8b5ea17daf3e45015d9fb68266fd9242bffb7478e79d05f3062c",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2084,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3207,13 +4462,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c14e509645956ab0f86e74ae004012c90e4b25f0999b2f51a54a80d60f52a673"
+        "pngSha256": "c14e509645956ab0f86e74ae004012c90e4b25f0999b2f51a54a80d60f52a673",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2124,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3262,13 +4539,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c4d2d2b9cc16b2a2838b8f5f3095b2148df353f7da007f7d89a7e5ea7f3dc11f"
+        "pngSha256": "c4d2d2b9cc16b2a2838b8f5f3095b2148df353f7da007f7d89a7e5ea7f3dc11f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2166,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3317,13 +4616,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1a906366dbb9e419a18518ec76a56b081fc56acfacfb23bbe64427c455b5978c"
+        "pngSha256": "1a906366dbb9e419a18518ec76a56b081fc56acfacfb23bbe64427c455b5978c",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2200,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-neutral_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3372,13 +4693,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "bd3c62d2b53c286c451d54721887702d85dd9b08dc1e44a8598fd1bde67d2516"
+        "pngSha256": "bd3c62d2b53c286c451d54721887702d85dd9b08dc1e44a8598fd1bde67d2516",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2232,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3427,13 +4770,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "100023fdc677e8cee0c6d9fd55d0ec4982c05298a0fbee31c7f01c0cfd3af9f1"
+        "pngSha256": "100023fdc677e8cee0c6d9fd55d0ec4982c05298a0fbee31c7f01c0cfd3af9f1",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2272,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3482,13 +4847,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9d4fd7a01d491c7b6a3c10845fc052428327c5b364b7d0aea47093e1d4b610de"
+        "pngSha256": "9d4fd7a01d491c7b6a3c10845fc052428327c5b364b7d0aea47093e1d4b610de",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2314,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3537,13 +4924,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "96768d643c21f86c286a17c7d0e2fe60f92b3df692745a99cc33d002bb03981d"
+        "pngSha256": "96768d643c21f86c286a17c7d0e2fe60f92b3df692745a99cc33d002bb03981d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2348,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3592,13 +5001,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d6196b9254afdd823a8bc0f90d90d98a43e8e086dc6201308cf4698df2064508"
+        "pngSha256": "d6196b9254afdd823a8bc0f90d90d98a43e8e086dc6201308cf4698df2064508",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2380,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3647,13 +5078,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "af53253452b9523bc5032657ed63fbc877c3c1b4c6c5a4a0fdada69f944a4133"
+        "pngSha256": "af53253452b9523bc5032657ed63fbc877c3c1b4c6c5a4a0fdada69f944a4133",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2420,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3702,13 +5155,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "6de579b6001478b0025859a6a5653f7089827591031571ff9614e594248547fc"
+        "pngSha256": "6de579b6001478b0025859a6a5653f7089827591031571ff9614e594248547fc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2462,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3757,13 +5232,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "0fe0e0aa992fe9aecdb1f5d6a43a37ece6ccb57506c84be030f149bd6e185661"
+        "pngSha256": "0fe0e0aa992fe9aecdb1f5d6a43a37ece6ccb57506c84be030f149bd6e185661",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2496,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3812,13 +5309,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "40b6b1679033c189a9d41462eeb6209facfdd29612cefb9f4d97a59ee7972f6f"
+        "pngSha256": "40b6b1679033c189a9d41462eeb6209facfdd29612cefb9f4d97a59ee7972f6f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2528,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3867,13 +5386,35 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "dcbd2c1d1bd518771e8a03d96398f67da683f474a786a6aba9bfbb434e2f0391"
+        "pngSha256": "dcbd2c1d1bd518771e8a03d96398f67da683f474a786a6aba9bfbb434e2f0391",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2568,
+            "width": 61,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3922,13 +5463,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "04e358dcde1d340d61b5e0335a4503bbf663fe97a863672e3439beaacb26c740"
+        "pngSha256": "04e358dcde1d340d61b5e0335a4503bbf663fe97a863672e3439beaacb26c740",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2610,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -3977,13 +5540,35 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7fee90ce646bf4526d4f72afbfa44fa2ca0d3e6337946086b89b01f336068c5a"
+        "pngSha256": "7fee90ce646bf4526d4f72afbfa44fa2ca0d3e6337946086b89b01f336068c5a",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 2644,
+            "width": 48,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "type-accent_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -4152,6 +5737,7 @@
       "renderedAtRuntime": false,
       "refusedByType": true
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "type",
@@ -4764,10 +6350,17 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "1c0be483719276b2742fa3e8f67dcb37bf074ef62cf7988d01c3253b3de58f33",
-      "afterSha256": "1c0be483719276b2742fa3e8f67dcb37bf074ef62cf7988d01c3253b3de58f33"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "beforeSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468",
+      "afterSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
@@ -10289,7 +11882,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "79a5d95f63124d083bb0e041b33b1fb16371551c8b58105b0dfa40b216107db8",
+    "tarballSha256": "ecd2f2482451a2b30d9de00e54e8d13ba99f498608157ddfdae93f72fb4578c1",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -10317,7 +11910,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "0b317e6895d87d4fb0b4b9f3c0a97f1f6eaade6cf4d33467fa202583afd61f37",
+    "lockfileSha256": "f714f8f957539dd4eebae47dde7d002e6f823a44bd30ad16f675ebc14531c95c",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -10348,7 +11941,7 @@
       ]
     },
     "builtCss": {
-      "bytes": 15826,
+      "bytes": 16137,
       "tokenDefinitions": 84,
       "tokenDefinitionsExpected": 84
     },
@@ -10361,15 +11954,29 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
     "figmaVersion": "2402777548310810334",
-    "responseSha256": "a32d4e150903b5e7aa97d2a6d694e7c0b585b383733b22dab9e320f9cbcc15d6",
+    "responseSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "type-brand_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10381,7 +11988,20 @@
         "key": "type-brand_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10393,7 +12013,20 @@
         "key": "type-brand_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10405,7 +12038,20 @@
         "key": "type-brand_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10417,7 +12063,20 @@
         "key": "type-brand_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10429,7 +12088,20 @@
         "key": "type-brand_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10441,7 +12113,20 @@
         "key": "type-brand_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10453,7 +12138,20 @@
         "key": "type-brand_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10465,7 +12163,20 @@
         "key": "type-brand_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10477,7 +12188,20 @@
         "key": "type-brand_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10489,7 +12213,20 @@
         "key": "type-brand_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10501,7 +12238,20 @@
         "key": "type-brand_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "rendered": [
+                "#0e61ba \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10513,7 +12263,20 @@
         "key": "type-success_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10525,7 +12288,20 @@
         "key": "type-success_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10537,7 +12313,20 @@
         "key": "type-success_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10549,7 +12338,20 @@
         "key": "type-success_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10561,7 +12363,20 @@
         "key": "type-success_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10573,7 +12388,20 @@
         "key": "type-success_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10585,7 +12413,20 @@
         "key": "type-success_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10597,7 +12438,20 @@
         "key": "type-success_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10609,7 +12463,20 @@
         "key": "type-success_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10621,7 +12488,20 @@
         "key": "type-success_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10633,7 +12513,20 @@
         "key": "type-success_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10645,7 +12538,20 @@
         "key": "type-success_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#038142 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#038142 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10657,7 +12563,20 @@
         "key": "type-warning_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10669,7 +12588,20 @@
         "key": "type-warning_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10681,7 +12613,20 @@
         "key": "type-warning_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10693,7 +12638,20 @@
         "key": "type-warning_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10705,7 +12663,20 @@
         "key": "type-warning_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10717,7 +12688,20 @@
         "key": "type-warning_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10729,7 +12713,20 @@
         "key": "type-warning_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10741,7 +12738,20 @@
         "key": "type-warning_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10753,7 +12763,20 @@
         "key": "type-warning_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10765,7 +12788,20 @@
         "key": "type-warning_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10777,7 +12813,20 @@
         "key": "type-warning_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10789,7 +12838,20 @@
         "key": "type-warning_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b67300 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10801,7 +12863,20 @@
         "key": "type-danger_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10813,7 +12888,20 @@
         "key": "type-danger_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10825,7 +12913,20 @@
         "key": "type-danger_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10837,7 +12938,20 @@
         "key": "type-danger_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10849,7 +12963,20 @@
         "key": "type-danger_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10861,7 +12988,20 @@
         "key": "type-danger_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10873,7 +13013,20 @@
         "key": "type-danger_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10885,7 +13038,20 @@
         "key": "type-danger_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10897,7 +13063,20 @@
         "key": "type-danger_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10909,7 +13088,20 @@
         "key": "type-danger_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10921,7 +13113,20 @@
         "key": "type-danger_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10933,7 +13138,20 @@
         "key": "type-danger_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#b51833 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10945,7 +13163,20 @@
         "key": "type-neutral_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10957,7 +13188,20 @@
         "key": "type-neutral_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10969,7 +13213,20 @@
         "key": "type-neutral_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10981,7 +13238,20 @@
         "key": "type-neutral_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -10993,7 +13263,20 @@
         "key": "type-neutral_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11005,7 +13288,20 @@
         "key": "type-neutral_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11017,7 +13313,20 @@
         "key": "type-neutral_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11029,7 +13338,20 @@
         "key": "type-neutral_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11041,7 +13363,20 @@
         "key": "type-neutral_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11053,7 +13388,20 @@
         "key": "type-neutral_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11065,7 +13413,20 @@
         "key": "type-neutral_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11077,7 +13438,20 @@
         "key": "type-neutral_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "rendered": [
+                "#3a475b \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11089,7 +13463,20 @@
         "key": "type-accent_style-fill_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11101,7 +13488,20 @@
         "key": "type-accent_style-fill_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11113,7 +13513,20 @@
         "key": "type-accent_style-fill_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11125,7 +13538,20 @@
         "key": "type-accent_style-fill_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "rendered": [
+                "#fcfeff \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11137,7 +13563,20 @@
         "key": "type-accent_style-tonal_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11149,7 +13588,20 @@
         "key": "type-accent_style-tonal_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11161,7 +13613,20 @@
         "key": "type-accent_style-tonal_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11173,7 +13638,20 @@
         "key": "type-accent_style-tonal_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "rendered": [
+                "#050a0f \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11185,7 +13663,20 @@
         "key": "type-accent_style-outline_size-large_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11197,7 +13688,20 @@
         "key": "type-accent_style-outline_size-large_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11209,7 +13713,20 @@
         "key": "type-accent_style-outline_size-small_rounded-false",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11221,7 +13738,20 @@
         "key": "type-accent_style-outline_size-small_rounded-true",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Label",
+              "figma": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "rendered": [
+                "#292d96 \"Inter\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -11247,6 +13777,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11264,6 +13795,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11281,6 +13813,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11298,6 +13831,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11315,6 +13849,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11332,6 +13867,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11349,6 +13885,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11366,6 +13903,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11383,6 +13921,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11400,6 +13939,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11417,6 +13957,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11434,6 +13975,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11451,6 +13993,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11468,6 +14011,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11485,6 +14029,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11502,6 +14047,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11519,6 +14065,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11536,6 +14083,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11553,6 +14101,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11570,6 +14119,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11587,6 +14137,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11604,6 +14155,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11621,6 +14173,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11638,6 +14191,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11655,6 +14209,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11672,6 +14227,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11689,6 +14245,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11706,6 +14263,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11723,6 +14281,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11740,6 +14299,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11757,6 +14317,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11774,6 +14335,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11791,6 +14353,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11808,6 +14371,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11825,6 +14389,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11842,6 +14407,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11859,6 +14425,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11876,6 +14443,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11893,6 +14461,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11910,6 +14479,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11927,6 +14497,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11944,6 +14515,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11961,6 +14533,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11978,6 +14551,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -11995,6 +14569,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12012,6 +14587,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12029,6 +14605,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12046,6 +14623,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12063,6 +14641,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12080,6 +14659,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12097,6 +14677,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12114,6 +14695,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12131,6 +14713,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12148,6 +14731,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12165,6 +14749,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12182,6 +14767,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12199,6 +14785,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12216,6 +14803,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12233,6 +14821,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12250,6 +14839,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12267,6 +14857,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12284,6 +14875,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12301,6 +14893,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12318,6 +14911,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12335,6 +14929,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12352,6 +14947,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12369,6 +14965,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12386,6 +14983,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12403,6 +15001,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12420,6 +15019,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12437,6 +15037,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -12454,6 +15055,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },

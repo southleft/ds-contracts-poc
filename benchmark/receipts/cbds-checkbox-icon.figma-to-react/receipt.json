@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -19,32 +20,32 @@
     }
   },
   "generatedSha256": {
-    "CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
-    "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
+    "CheckSquare/CheckSquare.module.css": "9049a391f705fff7da910e6097d3cba188e1473c7618476f3ebd7720a3ee8784",
+    "CheckSquare/CheckSquare.tsx": "8ceaa5aeb7f77a360288ffbf76cc9fbe1b32f5b0594b91b86a4c4ff3bf2ad829",
     "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
-    "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
-    "Checkbox/Checkbox.tsx": "fd3d148a73bac337a3f145b3da121ae9937593821a4b9e28aad978678258916e",
+    "Checkbox/Checkbox.module.css": "a5405ddd8425efbe9989078f73c19fad543b5e227eda3a60eda47d3492828cea",
+    "Checkbox/Checkbox.tsx": "bd14475631b66a04f9b1d3cd03a65d02b77b30a74bbd06591b71548233346fbf",
     "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
     "CheckboxIcon/CheckboxIcon.module.css": "c1d05d4a401c2a16e79355256bac61aa57ae429a71edcd123766dfc5e4b54386",
     "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
-    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
-    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/Icon.module.css": "9a1f41e10f47ebd3208f922617ed3dbb74f168eeacb15ffefd51711c7305cff8",
+    "Icon/Icon.tsx": "1a216ed26641d93f8e84eae6e0c22376a70fc0aed89d7e06510e26c48ab8caf1",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
-    "MinusSquare/MinusSquare.tsx": "5b14d238d633d8916302f061cb74f1b9a9590789d519c8921e26416780eee8ae",
+    "MinusSquare/MinusSquare.module.css": "6d83b085b834a78eecd1debba4b3bbc232552efa64294896c01613b1cd68f746",
+    "MinusSquare/MinusSquare.tsx": "fb8936d3d39d2c024bf9b49e33f174fb4dd66bc1cbc3e3690ecc3c7fa0fede8e",
     "MinusSquare/index.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
-    "Placeholder/Placeholder.module.css": "e023e4150990629822b821ab1152ec4fe00a09b1b5536577971d427fb1476855",
-    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/Placeholder.module.css": "916940b6aac42d63d3f12490d0b8523637b4ba9f621ac7069cddcf7eff71c84f",
+    "Placeholder/Placeholder.tsx": "b3305bfb76ef875be460c0e4b6cbb1407618ba04635fc3e3f55c9c812dc56453",
     "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
-    "Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
-    "Square/Square.tsx": "12b6057a66d7542a1d8056b031fa170cad0e6c39ddcc883d74a0d485e5f09640",
+    "Square/Square.module.css": "3c1cff768f8533b1b31193542c35e0dca49c8d30be17a813335e9bcfb157aaf5",
+    "Square/Square.tsx": "7215c439252b4bcdccf90ef458919d63c498554f4c6de276670e06df339a40f8",
     "Square/index.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
-    "WarningCircle/WarningCircle.module.css": "e72d08fe5e62ef6e92ec834d61c08ed00315d375d7b14ed9f3395a3d16150531",
-    "WarningCircle/WarningCircle.tsx": "463a1e292226e391fa5f6eb24351920a9dcdeb9bd5a7ac61079719c7754f769d",
+    "WarningCircle/WarningCircle.module.css": "747d2b3a4c5eec8a25ea101a9faaa69d9e81959e462e03b463c82270eca0d0bb",
+    "WarningCircle/WarningCircle.tsx": "42590d2702cd35b6a158c989adaa9f414d68a831cb7a432595e6dfb8ce9bc634",
     "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
     "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
-    "tokens.css": "860f97f8acfaab78aebc8dc5a3265da72462dbb615e8cefc6ef1fb1783160448"
+    "tokens.css": "a9bfdca4d1c7a466641bf61e5e8859a9c16403395ab010276d63abfa217fda41"
   },
   "cases": [
     {
@@ -81,13 +82,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3807515e16b6a650d06436e3cf0da7535683efb37c9f0189e7bd52c813febad8"
+        "pngSha256": "4e16dc82777bfde1caa1b82ce28c3cc95e233c1dac70b2083fc7b20631b8fc94",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -130,13 +141,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7b6668e0d18aa7e9f69cdb07fdea2fdae0086a1480ed30f416df749d6a4c9258"
+        "pngSha256": "079f6585faddd2975af063c9d9e7b407af9fbf40f8634daaa972356ba5e0e90d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 56,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -179,13 +200,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "55bc711f9d191e63a9ca9fd5b4fdc8d2cd3e8e256696900d0e7dc05df770ee02"
+        "pngSha256": "1e777a2b8dbf77d0403210935fd9c22ce43d4c05d9062e1f68524c46e11d7218",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 92,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -228,13 +259,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "19befaf495e95a28d8548c0f23a215d8087ef278b58d0a307c400e75a34ad700"
+        "pngSha256": "28a42c31190e0cd6b095e7548aa171ad1310ecc44e61366be95242630a89f463",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 136,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -279,13 +320,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c415eeb56fe745ef0a721ef65dd2dc68717f355da9ea33638b41d138a49ccacb"
+        "pngSha256": "17c6fa921ed4b345001b79605dd6adbc2241a9c9997bc36b957e0323746f2681",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 172,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -330,13 +381,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "be6cd02b3c7ee8bc7174fda95942397ea79e1d6c9232f1a6b2b26d8aa0a7f53a"
+        "pngSha256": "cef421f5bbf8b828602137573f907ac2ea372ad647b988a0515b8ffe380a9297",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 216,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -381,13 +442,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "6e65eb949fd79096bced0565d9c55578b67a0e848a7c3114a8da06ae97126854"
+        "pngSha256": "4f34ada045a7dbe4e695427930ea8c825d01f26ba62857eea5dc02e168f7fec0",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 252,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -432,13 +503,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "72b080731ce4b5459598bc9501cbffc74d18a63d3bb1a57d64cdfcc78304a41e"
+        "pngSha256": "e703c01df77e9c89b396889885f94210a8f3881435f09debd0b71fc269054623",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 296,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -483,13 +564,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3807515e16b6a650d06436e3cf0da7535683efb37c9f0189e7bd52c813febad8"
+        "pngSha256": "4e16dc82777bfde1caa1b82ce28c3cc95e233c1dac70b2083fc7b20631b8fc94",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 332,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -534,13 +625,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7b6668e0d18aa7e9f69cdb07fdea2fdae0086a1480ed30f416df749d6a4c9258"
+        "pngSha256": "079f6585faddd2975af063c9d9e7b407af9fbf40f8634daaa972356ba5e0e90d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 376,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -585,13 +686,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "55bc711f9d191e63a9ca9fd5b4fdc8d2cd3e8e256696900d0e7dc05df770ee02"
+        "pngSha256": "1e777a2b8dbf77d0403210935fd9c22ce43d4c05d9062e1f68524c46e11d7218",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 412,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -636,13 +747,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "19befaf495e95a28d8548c0f23a215d8087ef278b58d0a307c400e75a34ad700"
+        "pngSha256": "28a42c31190e0cd6b095e7548aa171ad1310ecc44e61366be95242630a89f463",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 456,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -688,13 +809,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "33cf6423b74210f03f68b8a0b33d16a07cb286830e233136ba01cbe994516d4a"
+        "pngSha256": "adbb4a7f0c90fcdf7865a66f85c1e3dec920b211a9978a1b6f39fa7bedae8e7f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 492,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -740,13 +871,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c7c6bab8e7f863eaef6140a8d17fd79ef12a464ee669bf548096ddd8ad149fec"
+        "pngSha256": "d65d72780abf102c97d625bb7ff818fd6d44c8b56f9c025e1a921e6d9934b49b",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 536,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-unchecked_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -789,13 +930,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "eb1b780fac671716e68d19c03bf8796dfb95ddad2e3886f36a4d1aad2d294aa0"
+        "pngSha256": "7b901e4fdd4479aec2cd3c69f285a38f18a465f67fa86b14902ffcc2301bef15",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 572,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -838,13 +989,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "def7a5fce1296e6cf78242487715d8ff77ff89fa8de8f6a6a0e4f78dc7fca21f"
+        "pngSha256": "c412593b19be8b2697c31f907d62753981bf8147d05a73ad1fd30b3c047b6595",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 616,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -887,13 +1048,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "20e4cce8cf91824466c2145b375d4a6de9a5cde93cd340649bc023d5a34da206"
+        "pngSha256": "bd540ac0a1b883b614c0cf6960a5b6bc5114d13bbf931895d699e2b285cb9caf",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 652,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -936,13 +1107,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "af799994640625ff4a98043a8584f007a686b59e2b95f50934c76ce6febbae7d"
+        "pngSha256": "784064001ec8439cac91478b15a593b6c131d346c52051cf2557311271d1280c",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 696,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -987,13 +1168,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c1bf7a681ae839126f3a74d90816b55492b87299ecb70613982254ab30a1c156"
+        "pngSha256": "6fe14d661f991e5b2aa6062b81df7213170c2a92433b4883935c1ddac2d7fbdf",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 732,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1038,13 +1229,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "63256a8cbd0d215d04815d209582bffbaf79279dc3da35ab266914ef1a73c223"
+        "pngSha256": "cf770828eaa43eb8abcd83535cedccee481bd200a0185e8c0b681f0b1b4e37b8",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 776,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1089,13 +1290,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "27c7b87d55f651f6b548258845acf493d5b722f7e075f3f4cbe6ffa54c981295"
+        "pngSha256": "3ba981fae93e16f1c6f74b2b3ec232ee106b4b4acd6f48c07075007121725f57",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 812,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1140,13 +1351,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "882a91d63999fd49f41e41239e51de7a945184ed3a44939204bc194a6229fafd"
+        "pngSha256": "79850a3f5edc2e87ac12d8f1092a7fab1e8fdbf43d934581a7eaa079c7e68236",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 856,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1191,13 +1412,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "eb1b780fac671716e68d19c03bf8796dfb95ddad2e3886f36a4d1aad2d294aa0"
+        "pngSha256": "7b901e4fdd4479aec2cd3c69f285a38f18a465f67fa86b14902ffcc2301bef15",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 892,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1242,13 +1473,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "def7a5fce1296e6cf78242487715d8ff77ff89fa8de8f6a6a0e4f78dc7fca21f"
+        "pngSha256": "c412593b19be8b2697c31f907d62753981bf8147d05a73ad1fd30b3c047b6595",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 936,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1293,13 +1534,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "20e4cce8cf91824466c2145b375d4a6de9a5cde93cd340649bc023d5a34da206"
+        "pngSha256": "bd540ac0a1b883b614c0cf6960a5b6bc5114d13bbf931895d699e2b285cb9caf",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 972,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1344,13 +1595,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "af799994640625ff4a98043a8584f007a686b59e2b95f50934c76ce6febbae7d"
+        "pngSha256": "784064001ec8439cac91478b15a593b6c131d346c52051cf2557311271d1280c",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1016,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1396,13 +1657,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d9ec94495817c1bd8feebd0e6e5a3b750658ba252d14d8247490c846b86c2e36"
+        "pngSha256": "507b24a913572ae122e543e40463935cee4ef9e23e92f5c9aa5f948f37ac8867",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1052,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1448,13 +1719,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "eb193584f153025481cbe1790d79970e90fa9b2425ffea4fe17765c8bbb220e1"
+        "pngSha256": "4083b004703eff3eca71bda9150bc62c2362ee675d840c4bdfca01eff8e10337",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1096,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-checked_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1497,13 +1778,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fb887deab79b5e10a982b2c6db37b0f3ed83b460f7a5cdad516efb3abdb63c66"
+        "pngSha256": "908c72b09a2e14964d3e4d781cdc0a0733217cb79ff12bb4f4a083ecbed15ccd",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1132,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1546,13 +1837,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b579fafea6419b867d7796b2e5deafe24ebbe413bf032fb502f15d54e5746476"
+        "pngSha256": "b471b8dd287ad0cca81f63504a81d747e62300486b1cbbb6fd55d712acd6c0df",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1176,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1595,13 +1896,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7233f080676c409ee1d8c2db37a9a8048953c43e502629a37ae5262c6c526c71"
+        "pngSha256": "130b4a7e560bb77ac743e849379595d4d9a510b2e27553532001a773a75ac9e7",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1212,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1644,13 +1955,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "63d2d3f3377d18c4374a6e78dbc54e510bce5db6be5bf641f06cb0bf6fdb04ec"
+        "pngSha256": "0f6337592704d6ea5c9eaeaa2125b958d3f58467d8ae86dcaae3fba928a82a51",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1256,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1696,13 +2017,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "f7780705d940874447579bb62a0711af447a21dc9126dc2fc6c06ada398a6d30"
+        "pngSha256": "b002662bb7f1444bee43f014667031ed79b980d211dd2c39e60138165e6e7923",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1292,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1748,13 +2079,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c553db9c54e9bfd7b13a562ceb91ded499ceefb855c01c8c8219f41e9f38f6ec"
+        "pngSha256": "4885eb862e0ef1853d6e7d692a51c34091682a8c6064da3e5d253cab25f7f7de",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1336,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1799,13 +2140,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fb887deab79b5e10a982b2c6db37b0f3ed83b460f7a5cdad516efb3abdb63c66"
+        "pngSha256": "908c72b09a2e14964d3e4d781cdc0a0733217cb79ff12bb4f4a083ecbed15ccd",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1372,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1850,13 +2201,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b579fafea6419b867d7796b2e5deafe24ebbe413bf032fb502f15d54e5746476"
+        "pngSha256": "b471b8dd287ad0cca81f63504a81d747e62300486b1cbbb6fd55d712acd6c0df",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1416,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1901,13 +2262,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7233f080676c409ee1d8c2db37a9a8048953c43e502629a37ae5262c6c526c71"
+        "pngSha256": "130b4a7e560bb77ac743e849379595d4d9a510b2e27553532001a773a75ac9e7",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1452,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -1952,13 +2323,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "63d2d3f3377d18c4374a6e78dbc54e510bce5db6be5bf641f06cb0bf6fdb04ec"
+        "pngSha256": "0f6337592704d6ea5c9eaeaa2125b958d3f58467d8ae86dcaae3fba928a82a51",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1496,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -2003,13 +2384,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c71b8253228adf2a081369f30d0fc135f94d124c191bf28e554735917e3c32ee"
+        "pngSha256": "a6992b8533d6819d5b75882939c501cdb934cdd284377cb1008329429424a3a0",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1532,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -2054,13 +2445,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "269121ce14c85da51a3df911f6f2894d6c4cf6c7eb4b2e762b85f0ea7326b921"
+        "pngSha256": "026786082fdea0b2444a036af64d568a382d761789890d409c2cfb7549417ddc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1576,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -2105,13 +2506,23 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "8ae79c7c325a460bef56120323fba9a5e9168d23ce9f884dcfc29a7691cc5547"
+        "pngSha256": "5d828a3a2ad63910463864eb6985db5b9a9afaf7cb43d2177fe3f3ddd6146d29",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1612,
+            "width": 24,
+            "height": 24
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -2156,13 +2567,23 @@
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "49af3a038c98f829f676718866cb1d2f5ea6ec4e5dd479c5880ded3188d28b64"
+        "pngSha256": "86b09d88965c4d97eba306f455f1522a9a192279ffd8359366a3fa130af1cadc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 1656,
+            "width": 16,
+            "height": 16
+          }
+        }
       },
       "content": {
         "key": "selection-indeterminate_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -2401,6 +2822,7 @@
       "renderedAtRuntime": false,
       "refusedByType": true
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "selection",
@@ -2661,10 +3083,17 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "99be699a491f56d5b3c219444350b99b7565826a460d7edf8288b95e64ea337e",
-      "afterSha256": "99be699a491f56d5b3c219444350b99b7565826a460d7edf8288b95e64ea337e"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "beforeSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989",
+      "afterSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
@@ -5983,7 +6412,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/checkboxicon",
-    "tarballSha256": "c679be9bbc0d3135a16147f928326f8013c3416faa1c8a197208a2640ea06336",
+    "tarballSha256": "031e9b23803165d55660ba1bb87c51c269b9521a0912c135933621a78fea2e94",
     "distFiles": [
       "CheckSquare",
       "CheckSquare/CheckSquare.d.ts",
@@ -6041,7 +6470,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "ca020f1167ec7a05568bef8ff414b8d0efbec2be3c7404683b77730c67297a35",
+    "lockfileSha256": "cfa1ac1a75b6e2c4c5c87ac2e37b03d63357e1fb3271b65f5145e5a6cf8ac6b5",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -6072,9 +6501,9 @@
       ]
     },
     "builtCss": {
-      "bytes": 18314,
-      "tokenDefinitions": 87,
-      "tokenDefinitionsExpected": 87
+      "bytes": 19215,
+      "tokenDefinitions": 98,
+      "tokenDefinitionsExpected": 98
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -6085,15 +6514,17 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
     "figmaVersion": "2402777548310810334",
-    "responseSha256": "daccb3d31fce002797e45bedf919ef328dba76374bf35975f8e41066d9d66f78",
+    "responseSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "selection-unchecked_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6105,7 +6536,8 @@
         "key": "selection-unchecked_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6117,7 +6549,8 @@
         "key": "selection-unchecked_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6129,7 +6562,8 @@
         "key": "selection-unchecked_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6141,7 +6575,8 @@
         "key": "selection-unchecked_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6153,7 +6588,8 @@
         "key": "selection-unchecked_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6165,7 +6601,8 @@
         "key": "selection-unchecked_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6177,7 +6614,8 @@
         "key": "selection-unchecked_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6189,7 +6627,8 @@
         "key": "selection-unchecked_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6201,7 +6640,8 @@
         "key": "selection-unchecked_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6213,7 +6653,8 @@
         "key": "selection-unchecked_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6225,7 +6666,8 @@
         "key": "selection-unchecked_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6237,7 +6679,8 @@
         "key": "selection-unchecked_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6249,7 +6692,8 @@
         "key": "selection-unchecked_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6261,7 +6705,8 @@
         "key": "selection-checked_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6273,7 +6718,8 @@
         "key": "selection-checked_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6285,7 +6731,8 @@
         "key": "selection-checked_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6297,7 +6744,8 @@
         "key": "selection-checked_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6309,7 +6757,8 @@
         "key": "selection-checked_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6321,7 +6770,8 @@
         "key": "selection-checked_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6333,7 +6783,8 @@
         "key": "selection-checked_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6345,7 +6796,8 @@
         "key": "selection-checked_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6357,7 +6809,8 @@
         "key": "selection-checked_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6369,7 +6822,8 @@
         "key": "selection-checked_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6381,7 +6835,8 @@
         "key": "selection-checked_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6393,7 +6848,8 @@
         "key": "selection-checked_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6405,7 +6861,8 @@
         "key": "selection-checked_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6417,7 +6874,8 @@
         "key": "selection-checked_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6429,7 +6887,8 @@
         "key": "selection-indeterminate_size-large_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6441,7 +6900,8 @@
         "key": "selection-indeterminate_size-small_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6453,7 +6913,8 @@
         "key": "selection-indeterminate_size-large_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6465,7 +6926,8 @@
         "key": "selection-indeterminate_size-small_error-true",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6477,7 +6939,8 @@
         "key": "selection-indeterminate_size-large_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6489,7 +6952,8 @@
         "key": "selection-indeterminate_size-small_disabled-true_error-false",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6501,7 +6965,8 @@
         "key": "selection-indeterminate_size-large_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6513,7 +6978,8 @@
         "key": "selection-indeterminate_size-small_error-false_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6525,7 +6991,8 @@
         "key": "selection-indeterminate_size-large_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6537,7 +7004,8 @@
         "key": "selection-indeterminate_size-small_error-true_state-focus-visible",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6549,7 +7017,8 @@
         "key": "selection-indeterminate_size-large_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6561,7 +7030,8 @@
         "key": "selection-indeterminate_size-small_error-false_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6573,7 +7043,8 @@
         "key": "selection-indeterminate_size-large_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6585,7 +7056,8 @@
         "key": "selection-indeterminate_size-small_error-true_state-hover",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 1,
@@ -6611,6 +7083,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6628,6 +7101,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6645,6 +7119,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6662,6 +7137,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6679,6 +7155,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6696,6 +7173,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6713,6 +7191,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6730,6 +7209,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6747,6 +7227,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6769,6 +7250,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6791,6 +7273,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6813,6 +7296,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6835,6 +7319,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6852,6 +7337,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6869,6 +7355,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6886,6 +7373,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6903,6 +7391,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6920,6 +7409,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6937,6 +7427,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6954,6 +7445,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6971,6 +7463,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -6988,6 +7481,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7005,6 +7499,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7027,6 +7522,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7049,6 +7545,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7071,6 +7568,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7093,6 +7591,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7110,6 +7609,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7127,6 +7627,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7144,6 +7645,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7161,6 +7663,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7178,6 +7681,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7195,6 +7699,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7212,6 +7717,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7229,6 +7735,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7251,6 +7758,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7273,6 +7781,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7295,6 +7804,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7317,6 +7827,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7334,6 +7845,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7351,6 +7863,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },
@@ -7368,6 +7881,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 1,
           "partsMissing": 0
         },

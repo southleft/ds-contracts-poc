@@ -1,0 +1,6084 @@
+{
+  "source": "Carbon Tile saved Plugin capture, experiment 950; original proposal before presence normalization",
+  "axes": [
+    {
+      "prop": "type",
+      "values": [
+        "base",
+        "clickable",
+        "singleSelect",
+        "expandableinteractive",
+        "expandable",
+        "multiSelect"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "path": [
+        "root",
+        "contentArea",
+        "aiIconsRadioButton",
+        "revertAiButtonWrapper",
+        "revertAiButton"
+      ],
+      "part": {
+        "component": {
+          "id": "ds.revert-ai-button",
+          "props": {
+            "state": "enabled"
+          }
+        },
+        "visibleWhen": {
+          "prop": "type",
+          "equals": [
+            "singleSelect",
+            "multiSelect"
+          ]
+        },
+        "declared": {
+          "display": "none"
+        }
+      }
+    },
+    {
+      "path": [
+        "root",
+        "contentArea",
+        "aiIconsRadioButton",
+        "aiSlugWrapper",
+        "aiLabel"
+      ],
+      "part": {
+        "component": {
+          "id": "ds.ai-label",
+          "props": {
+            "textTranslation": "AI",
+            "size": "16px",
+            "state": "enabled"
+          }
+        },
+        "visibleWhen": {
+          "prop": "type",
+          "equals": [
+            "singleSelect",
+            "multiSelect"
+          ]
+        },
+        "declared": {
+          "display": "none"
+        },
+        "solidFillCompositionSourceBinding": [
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Enabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Disabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Disabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Disabled, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Disabled, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Hover, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Hover, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Focus, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Focus, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Enabled, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Enabled, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Hover, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Hover, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Enabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Disabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Disabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Disabled, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Disabled, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Enabled, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Enabled, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Hover, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Hover, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Hover, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Hover, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Focus, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Single-select, State=Focus, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Focus, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Focus, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Focus, v12 feature flags=False, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons + Radio button/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Multi-select, State=Focus, v12 feature flags=True, Selected=True",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          }
+        ],
+        "solidFillCompositionToken": "sourcePaint.vdbf033ae871e1fb521ba797e5bc0c6e77bbae48c67c226239c774532c7e52a90",
+        "solidFillComposition": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY"
+        }
+      }
+    },
+    {
+      "path": [
+        "root",
+        "contentArea",
+        "aiIcons",
+        "aiIconsRevertAiButton"
+      ],
+      "part": {
+        "component": {
+          "id": "ds.revert-ai-button",
+          "props": {
+            "state": "enabled"
+          }
+        },
+        "visibleWhen": {
+          "prop": "type",
+          "equals": [
+            "base",
+            "clickable",
+            "expandableinteractive",
+            "expandable"
+          ]
+        },
+        "declared": {
+          "display": "none"
+        }
+      }
+    },
+    {
+      "path": [
+        "root",
+        "contentArea",
+        "aiIcons",
+        "aiIconsAiSlugWrapper",
+        "aiIconsAiSlugWrapperAiLabel"
+      ],
+      "part": {
+        "component": {
+          "id": "ds.ai-label",
+          "props": {
+            "textTranslation": "AI",
+            "size": "16px",
+            "state": "enabled"
+          }
+        },
+        "visibleWhen": {
+          "prop": "type",
+          "equals": [
+            "base",
+            "clickable",
+            "expandableinteractive",
+            "expandable"
+          ]
+        },
+        "declared": {
+          "display": "none"
+        },
+        "solidFillCompositionSourceBinding": [
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Base, State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Enabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Hover, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Hover, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Focus, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Focus, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Enabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Enabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Enabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Enabled (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Enabled (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Enabled (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Enabled (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Hover, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Hover, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Hover, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Hover, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Hover (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Hover (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Hover (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Hover (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Disabled, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Clickable, State=Disabled, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Focus, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Focus, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Focus, v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Focus, v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Focus (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable (Interactive), State=Focus (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Focus (expanded), v12 feature flags=False, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          },
+          {
+            "owner": "Tile:root/Content area/AI icons/AI slug wrapper/AI label",
+            "nodeName": "AI label",
+            "variantName": "Type=Expandable, State=Focus (expanded), v12 feature flags=True, Selected=False",
+            "binding": {
+              "variableId": "VariableID:103532:4034",
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 9.999999747378752e-06,
+                "blendMode": "MULTIPLY"
+              },
+              "consumer": {
+                "name": "Transparent",
+                "collectionId": "VariableCollectionId:25984:295101",
+                "modeId": "25984:0",
+                "modeName": "White Theme",
+                "resolvedType": "COLOR",
+                "value": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                },
+                "selectedValue": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 9.999999747378752e-06
+                }
+              }
+            }
+          }
+        ],
+        "solidFillCompositionToken": "sourcePaint.vdbf033ae871e1fb521ba797e5bc0c6e77bbae48c67c226239c774532c7e52a90",
+        "solidFillComposition": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "MULTIPLY"
+        }
+      }
+    },
+    {
+      "path": [
+        "root",
+        "aiLayerBorder",
+        "instance"
+      ],
+      "part": {
+        "presenceByCombination": {
+          "props": [
+            "type",
+            "state",
+            "selected"
+          ],
+          "rows": [
+            {
+              "values": [
+                "base",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "clickable",
+                "disabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "clickable",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "clickable",
+                "focus",
+                "false"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "clickable",
+                "hover",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandable",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandable",
+                "enabledexpanded",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandable",
+                "focus",
+                "false"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "expandable",
+                "focusexpanded",
+                "false"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "expandable",
+                "hover",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandable",
+                "hoverexpanded",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabledexpanded",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focus",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focusexpanded",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hover",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hoverexpanded",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "true"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "true"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "false"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "true"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "true"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "true"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "true"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "false"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "true"
+              ],
+              "present": false
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "false"
+              ],
+              "present": true
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "true"
+              ],
+              "present": false
+            }
+          ]
+        },
+        "component": {
+          "id": "ds.ai-layer-border"
+        },
+        "declared": {
+          "display": "none"
+        }
+      }
+    },
+    {
+      "path": [
+        "root",
+        "aiLayerBackground"
+      ],
+      "part": {
+        "component": {
+          "id": "ds.ai-layer-background",
+          "enumPropsByCombination": {
+            "level": {
+              "props": [
+                "type",
+                "state",
+                "v12FeatureFlags",
+                "selected"
+              ],
+              "rows": [
+                {
+                  "values": [
+                    "base",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabledexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabledexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabledexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabledexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hoverexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hoverexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hoverexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hoverexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focusexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focusexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focusexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focusexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "false",
+                    "true"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "true",
+                    "true"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "false",
+                    "true"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "true",
+                    "true"
+                  ],
+                  "value": "background"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "false",
+                    "true"
+                  ],
+                  "value": "layer01"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "true",
+                    "true"
+                  ],
+                  "value": "layer01"
+                }
+              ]
+            },
+            "state": {
+              "props": [
+                "type",
+                "state",
+                "v12FeatureFlags",
+                "selected"
+              ],
+              "rows": [
+                {
+                  "values": [
+                    "base",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "disabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabledexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "enabledexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabledexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "enabledexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hoverexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "hoverexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hoverexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "hoverexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "clickable",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focusexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandableinteractive",
+                    "focusexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focusexpanded",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "expandable",
+                    "focusexpanded",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "enabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "false",
+                    "true"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "hover",
+                    "true",
+                    "true"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "disabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "enabled",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "false",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "true",
+                    "false"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "false",
+                    "true"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "hover",
+                    "true",
+                    "true"
+                  ],
+                  "value": "hover"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "singleSelect",
+                    "focus",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "false",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "true",
+                    "false"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "false",
+                    "true"
+                  ],
+                  "value": "enabled"
+                },
+                {
+                  "values": [
+                    "multiSelect",
+                    "focus",
+                    "true",
+                    "true"
+                  ],
+                  "value": "enabled"
+                }
+              ]
+            }
+          },
+          "props": {
+            "showBackgroundLayer": true
+          }
+        },
+        "declared": {
+          "display": "none"
+        },
+        "absoluteGeometryByCombination": {
+          "props": [
+            "type",
+            "state",
+            "v12FeatureFlags",
+            "selected"
+          ],
+          "rows": [
+            {
+              "values": [
+                "base",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "enabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "hover",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "hover",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "focus",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "focus",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "disabled",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "enabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabledexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "enabledexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "enabledexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "enabledexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hover",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hover",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "hover",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "hover",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hoverexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "hoverexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "hoverexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "hoverexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "disabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "clickable",
+                "disabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focus",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focus",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "focus",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "focus",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focusexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandableinteractive",
+                "focusexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "focusexpanded",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "expandable",
+                "focusexpanded",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 132,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 132
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "enabled",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "hover",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "disabled",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "enabled",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "hover",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "singleSelect",
+                "focus",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "false",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "true",
+                "false"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "false",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            },
+            {
+              "values": [
+                "multiSelect",
+                "focus",
+                "true",
+                "true"
+              ],
+              "geometry": {
+                "box": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 360,
+                  "height": 84,
+                  "right": 0,
+                  "bottom": 0,
+                  "constraints": {
+                    "horizontal": "STRETCH",
+                    "vertical": "STRETCH"
+                  }
+                },
+                "parent": {
+                  "width": 360,
+                  "height": 84
+                },
+                "border": {
+                  "left": 0,
+                  "right": 0,
+                  "top": 0,
+                  "bottom": 0
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

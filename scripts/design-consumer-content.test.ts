@@ -49,7 +49,7 @@ test('what a Figma variant draws: texts inside instances, the innermost text-fre
   assert.deepEqual(figmaContent(dialogVariant()), {
     texts: ['Dialog heading', 'Dialog content'],
     textStyles: [[{ ...eee, end: 14 }], [{ ...eee, end: 14 }]],
-    parts: [{ name: 'al-button/Icon After/X', kind: 'icon', box: box(558, 26, 20, 20) }],
+    parts: [{ name: 'al-button/Icon After/X', kind: 'icon', box: box(558, 26, 20, 20), members: [box(562,30,12.5,12.5)] }],
   });
   // A vector beside text in the same instance is judged on its own; a
   // transparent layer, a fill-less text and an unrendered vector draw nothing.
@@ -359,4 +359,50 @@ test('duplicate case keys refuse by name before anything is mounted (cold-start:
   assert.equal(receipt.problems.some((p: string) => p.startsWith('check-failed')), false);
   assert.equal(receipt.verdict.verdict, 'fail');
   assert.equal(JSON.parse(readFileSync(path.join(dir, 'out', 'receipt.json'), 'utf8')).outcome, 'refused-or-failed');
+});
+
+test('composite graphics require every drawn member; deleting glyphs cannot improve presence', async()=>{
+  const source=figmaContent(node('COMPONENT','fixture',box(0,0,64,32),[
+    node('INSTANCE','arbitrary composite',box(0,0,64,32),[vector(box(8,10,4,4)),vector(box(48,10,4,4))]),
+  ]));
+  assert.equal(source.parts.length,1);assert.equal(source.parts[0].members!.length,2);
+  const browser=await chromium.launch();
+  try{const page=await browser.newPage();
+    for(const representation of ['css','svg','mask']){
+      const shape=(x:number)=>representation==='svg'?`<rect x="${x}" y="10" width="4" height="4" fill="red"/>`:`<i style="position:absolute;left:${x}px;top:10px;width:4px;height:4px;background:red;${representation==='mask'?'mask-image:linear-gradient(black,black)':''}"></i>`;
+      const children=shape(8)+shape(48);
+      await page.setContent(`<div data-cell><div style="position:relative;width:64px;height:32px;background:#ccc">${representation==='svg'?`<svg width="64" height="32">${children}</svg>`:children}</div></div>`);
+      const check=async()=>matchParts(source.parts,(await page.locator('[data-cell]').evaluate(domContentOf)).graphics);
+      assert.equal((await check()).matched,1,representation+': both glyphs present');
+      const selector=representation==='svg'?'rect':'i';
+      await page.locator(selector).first().evaluate(n=>n.remove());
+      assert.equal((await check()).matched,0,representation+': one glyph removed');
+      await page.locator(selector).evaluateAll(nodes=>nodes.forEach(n=>n.remove()));
+      assert.equal((await check()).matched,0,representation+': both glyphs removed');
+    }
+  }finally{await browser.close();}
+});
+
+test('SVG viewport and member alternatives cannot count the same paint twice',()=>{
+  const small={name:'small',kind:'vector' as const,box:box(0,0,4,4)};
+  const whole={name:'whole',kind:'vector' as const,box:box(0,0,20,20)};
+  const graphics=[{tag:'svg',box:box(0,0,20,20),members:[box(0,0,4,4),box(10,0,4,4)]}];
+  assert.equal(matchParts([whole,small],graphics).matched,1);
+  assert.equal(matchParts([small,{...small,name:'second'}],graphics).matched,2);
+  assert.equal(matchParts([small,{...small,name:'second'},{...small,name:'third'}],graphics).matched,2);
+  assert.equal(matchParts([whole],[{...graphics[0],members:[]}]).matched,0);
+});
+
+
+test('one multi-region vector can use the drawn SVG union without borrowing its empty viewport', async()=>{
+  const source=figmaContent(node('COMPONENT','fixture',box(0,0,64,32),[node('INSTANCE','icon',box(0,0,64,32),[vector(box(8,10,44,4))])]));
+  const browser=await chromium.launch();
+  try{const page=await browser.newPage();
+    await page.setContent('<div data-cell><svg width="64" height="32"><path d="M8 10h4v4H8Z"/><path d="M48 10h4v4H48Z"/><path visibility="hidden" d="M0 0h64v32H0Z"/><path fill="none" d="M0 0h64v32H0Z"/></svg></div>');
+    const collect=()=>page.locator('[data-cell]').evaluate(domContentOf);
+    const before=await collect();assert.equal(before.graphics[0].members!.length,2);
+    assert.equal(matchParts(source.parts,before.graphics).matched,1);
+    await page.locator('path').first().evaluate(n=>n.remove());
+    assert.equal(matchParts(source.parts,(await collect()).graphics).matched,0);
+  }finally{await browser.close();}
 });

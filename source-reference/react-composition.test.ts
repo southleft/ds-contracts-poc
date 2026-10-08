@@ -298,6 +298,15 @@ test('a nested caller host cannot reuse a root-only main or erase its wrapper', 
   assert.equal(verified.status,'supported-structure-observed',JSON.stringify(verified));
   const nativeCaller=hostFixture.figma.root.findOne((node:any)=>node.type==='TEXT'&&node.characters==='Save'&&node.getSharedPluginData('ds_contracts','callerContentProperty'))!;
   assert.ok(nativeCaller);assert.equal(nativeCaller.parent.type,'SLOT');assert.equal(nativeCaller.parent.parent.type,'INSTANCE');
+  const originalWeight = nativeCaller.fontWeight;
+  assert.equal(typeof originalWeight, 'number');
+  nativeCaller.fontWeight = originalWeight + 100;
+  const changedWeight = verifyNativeContractReadback(observation, await hostFixture.run(emitNativeContractReadbackScript(observation)));
+  assert.equal(changedWeight.status, 'refused');
+  assert.ok(changedWeight.problems.some(p => p.startsWith('native-source-observation-text-weight:')), JSON.stringify(changedWeight));
+  nativeCaller.fontWeight = originalWeight;
+  assert.equal(verifyNativeContractReadback(observation, await hostFixture.run(emitNativeContractReadbackScript(observation))).status, 'supported-structure-observed');
+
   assert.equal(nativeCaller.parent.width,120);assert.equal(nativeCaller.parent.height,40);
   assert.equal(nativeCaller.parent.layoutMode,'VERTICAL');
   nativeCaller.characters='Native caller edit';

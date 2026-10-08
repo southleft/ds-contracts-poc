@@ -1,0 +1,13 @@
+{
+  "fileKey": "A451UfD58U7XU21FzaqfHL",
+  "nodeId": "51447:122527",
+  "source": "Original Carbon AI layer - Shadow isolated native screenshot, experiment 941",
+  "pngSHA256": "cd9d8b53beb92b4b6fd4d683ba19c1787cba712bde9a37673b91d885ba0d41e6",
+  "layout": {
+    "x": 8,
+    "y": 4,
+    "width": 320,
+    "height": 320
+  },
+  "scope": "Emitter regression only; not a Tile conversion pass."
+}

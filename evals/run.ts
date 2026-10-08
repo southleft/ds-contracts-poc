@@ -2777,10 +2777,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ componentIdSlug("01 Icons") = "c-01-icons"',
         '✔ "_variable-list-item" proposes with id "ds.variable-list-item"',
         '✔ its sanitize note NAMES the original spelling and the rule',
-        '✔ "Avatar" child stub id is "ds.avatar-indicator"',
+        '✔ Avatar retains its named unqualified child-paint-order refusal',
+        '✔ qualified Accordion proposes with its "_Panel-Accordion" child',
+        '✔ child stub id is "ds.panel-accordion"',
         '✔ the anatomy component ref uses the SAME sanitized id as the stub',
-        '✔ the stub-id sanitize note NAMES "_Avatar Indicator" → "ds.avatar-indicator"',
-        '✔ no "ds.-" id survives anywhere in the Avatar proposal or its stubs',
+        '✔ the sanitize note names "_Panel-Accordion" → "ds.panel-accordion"',
+        '✔ no "ds.-" id survives in the qualified proposal or its stubs',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
@@ -2790,7 +2792,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // The other half of the field failure: ONE bad set killed the WHOLE
     // receive and the raw zod issue array rendered verbatim in the rail.
     // proposeBatchFromDump (the function the playground receive paths run)
-    // must complete the full ALL-SETS replay with zero raw errors, name a
+    // must account for the full ALL-SETS replay, retain exactly the named
+    // Avatar paint-order and Avatar group mixed-sign spacing refusals, name a
     // poisoned set as a plain-words skip while the rest import, name real
     // sanitized-id collisions, and never headline machine text.
     id: 'design-batch-isolation-plain-words-skips',
@@ -2800,7 +2803,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (r.status !== 0) throw new Error(`CBDS batch receipt failed:\n${r.out}`);
       for (const line of [
         '✔ every set accounted for: proposed + skipped = total',
-        '✔ ALL 1618 sets propose (zero skips on the live dump after sanitize)',
+        '(replayed 1618 sets: 1616 proposed, 2 skipped)',
+        '✔ all 1618 sets are accounted for; only the named Avatar paint-order and Avatar group mixed-sign spacing refusals are skipped',
         '✔ every proposed id satisfies the schema pattern',
         '✔ the real id collision ("RadioButton" vs "Radio button" → ds.radio-button) is NAMED, never silent',
         '✔ the healthy set still proposes',
@@ -3008,13 +3012,16 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // an applied Figma prop on a nested instance that does not map through
     // the in-scope child contract's bindings.figma is DROPPED with a named
     // note — never emitted under a guessed spelling the referee refuses.
-    // Fixture replay of the live Avatar group set.
+    // The untouched live Avatar group retains its bound mixed-sign refusal;
+    // unchanged uniform-bound overlap planes isolate this child-prop class.
     id: 'design-census-unmappable-child-props-dropped',
     claim: 'C5-extraction',
     run: () => {
       const r = run(TSX, ['extract/figma/gauntlet/class-fix-check.ts']);
       if (r.status !== 0) throw new Error(`class-fix receipt failed:\n${r.out}`);
       for (const line of [
+        '✔ the untouched real fixture refuses its bound mixed-sign spacing before any invalid gap contract publishes',
+        '✔ the uniform-bound child-prop control keeps all three original overlap planes and does not alter the source fixture',
         '✔ the unmappable applied prop is DROPPED with the named note (isVisible on nested Avatar → ds.avatar)',
         '✔ "isVisible" appears NOWHERE in the emitted anatomy (dropped, not guessed)',
         '✔ referee CLEAN (validateContract + generateCss report zero violations; got 0)',
@@ -3029,9 +3036,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // Census class fix 2/3 (visiblewhen-value-outside-prop-enum, was 11
     // sets): presence riding a true/false axis spells the truthy form
     // visibleWhen { prop } (the axis promotes to a BOOLEAN prop; equals:
-    // "true" is enum vocabulary). The inexpressible false side is a NAMED
-    // note, kept unconditional — never a wrong condition. Fixture replay of
-    // the live Alert set + a synthesized false-side set.
+    // "true" is enum vocabulary). The false side carries typed Boolean
+    // equality, visibleWhen { prop, equals: false }, and the actual React,
+    // HTML and canvas outputs must honor the source planes and default.
+    // Fixture replay of the live Alert set + a synthesized false-side set.
     id: 'design-census-boolean-visiblewhen-truthy-form',
     claim: 'C5-extraction',
     run: () => {
@@ -3042,9 +3050,24 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ no visibleWhen carries equals:"true"/"false" (boolean spelling, not enum vocabulary)',
         '✔ the axis promoted to a BOOLEAN prop `inlineAction`',
         '✔ no "visibleWhen.equals … is not a value of prop" violation anywhere',
-        '✔ false side: the inexpressible condition is a NAMED note (visibleWhen has no negated form; kept unconditional)',
-        '✔ false side: NO visibleWhen is invented on the part (never wrong)',
+        '✔ every non-Figma surface emits (react, html, react-inline)',
+        '✔ the Figma script refuses BY NAME: zero-basis Message in Description (D.138)',
+        '✔ false side: source Boolean axis, original binding and first drawn true default remain intact',
+        '✔ false side: the source-absent true plane and present false plane carry typed Boolean equality by name',
         '✔ false side: referee CLEAN (got 0)',
+        '✔ false side: ALL FOUR surfaces emit (react, html, react-inline, figma-script)',
+        '✔ false side: actual react compact=undefined preserves Hi and shows More only for false',
+        '✔ false side: actual react compact=true preserves Hi and shows More only for false',
+        '✔ false side: actual react compact=false preserves Hi and shows More only for false',
+        '✔ false side: actual react-inline compact=undefined preserves Hi and shows More only for false',
+        '✔ false side: actual react-inline compact=true preserves Hi and shows More only for false',
+        '✔ false side: actual react-inline compact=false preserves Hi and shows More only for false',
+        '✔ false side: actual HTML compact=true shows More exactly on the false plane',
+        '✔ false side: actual HTML compact=false shows More exactly on the false plane',
+        '✔ false side: canvas builds exactly the original true/false variants',
+        '✔ false side: actual canvas compact=true shows More exactly on the false plane',
+        '✔ false side: actual canvas compact=false shows More exactly on the false plane',
+        '✔ false side: proposal and emission leave the complete source fixture unchanged',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
@@ -3505,36 +3528,47 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
-    // P9 (repeated-children collections, schema v12 `repeat`): ≥3 adjacent
-    // sibling instances of the same child with a carriable per-item field
-    // propose as ONE item-template part + arrayOf prop — React maps the live
-    // array, the canvas/static surfaces render the OBSERVED sample (the
-    // meter discipline). Declared per-item enums carry their observed choices;
-    // pre-v1.5 TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
-    // booleans never promote. Receipt runs the REAL owner's-kit
-    // Navigation-Header fixture + a v1.5-shaped synthetic run.
+    // P9: eligible homogeneous siblings carry typed fields and an observed
+    // sample as a live array. Independent source visibility controls cannot
+    // be represented by a repeat: keep all five fixed children and name the
+    // refusal. Replay the real Navigation-Header and the qualified Badge Row,
+    // retaining source facts, independent presence, and all four emitters.
     id: 'repeated-children-collection',
     claim: 'C5-extraction',
     run: () => {
       const r = run(TSX, ['extract/figma/repeat-collection-check.ts']);
       if (r.status !== 0) throw new Error(`repeat receipt failed:\n${r.out}`);
       for (const line of [
-        '✔ exactly ONE repeat part proposes for the 5 drawn menu items (got 1)',
-        '✔ the sample carries the 5 OBSERVED siblings (got 5)',
-        '✔ the arrayOf prop `items` ships code-only (bindings.figma.kind NONE)',
-        '✔ the collection carry is the NAMED flagship note (P9, meter discipline spelled out)',
-        '✔ the per-item TEXT stays a NAMED ambiguity receipt (pre-v1.5 dump — never guessed)',
-        '✔ the "Show item N" count booleans are receipted, never promoted (rename story named)',
-        '✔ React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})',
+        '✔ independent live visibility controls keep five fixed Link-Neutral instances',
+        '✔ no arrayOf prop replaces the five native controls',
+        '✔ the five applied iconRight facts remain false/true/true/false/false',
+        '✔ every menu control retains its original BOOLEAN property and unknown default',
+        '✔ each child is gated by its own menu control',
+        '✔ the fallback names the visibility facts a repeat cannot preserve',
+        '✔ menu source presence remains independent of the live Boolean controls',
+        '✔ generated React retains all five public controls instead of replacing them with an items array',
         '✔ the canvas constructs the OBSERVED instances (5 LinkNeutral sample instances in the sync script)',
+        '✔ ONE repeat part proposes (got 1)',
         '✔ per-item text and the declared child enum both carry as typed fields',
         '✔ the sample carries the drawn labels VERBATIM (One/Two/Three/Four)',
         '✔ the observed variant choices survive in the sample instead of becoming child defaults',
+        '✔ React forwards each item variant and renders its text as JSX children',
         '✔ the static surface renders the OBSERVED sample per item (One…Four appear in the html)',
         '✔ the pattern is DETECTED and the fallback is a NAMED note (no field invented)',
+        '✔ no repeat part ships',
+        '✔ no arrayOf prop ships',
+        '✔ the 5 siblings stay fixed component-ref parts',
+        '✔ no repeat part proposes (the candidate is one-per-variant, not a sibling run)',
+        '✔ P9 holds — qualified collections carry typed fields and observed samples; independently controlled siblings keep their live Boolean bindings',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
+      // The real menu, qualified collection and unchanged Text Area must all
+      // emit every surface; all four receipt fixtures must stay referee clean.
+      if ((r.out.match(/✔ ALL FOUR surfaces emit \(react, html, react-inline, figma-script\)/g) ?? []).length !== 3)
+        throw new Error('repeat receipt missing an all-four-surface fixture result');
+      if ((r.out.match(/✔ referee CLEAN \(got 0\)/g) ?? []).length !== 4)
+        throw new Error('repeat receipt missing a clean fixture result');
     },
   },
   {
@@ -3976,7 +4010,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // inverts to the existing `layout.overlap` vocabulary with the drawn
     // magnitude on the gap token (the ds.avatar-group owner-precedent:
     // {space.overlap} = -8px, projected as a negative child margin / negative
-    // itemSpacing); mixed-sign spacing is a NAMED per-part-invariant limit.
+    // itemSpacing); mixed-sign literal spacing is a named per-part limit,
+    // and bound mixed signs refuse the whole source before an invalid gap
+    // publishes. Source names, values and registration collisions remain
+    // pinned; a uniform-bound positive control must still emit correctly.
     // Receipt replays the owner's live Avatar group census fixture.
     id: 'negative-spacing-overlap',
     claim: 'C5-extraction',
@@ -3993,7 +4030,17 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ layout.overlap is NOT set (overlap holds in only half the variants — never guessed)',
         '✔ NO negative px token mints anywhere (got 0; the pre-P21 bug class is gone)',
         '✔ the unbound itemSpacing report SURVIVES for review',
-        '✔ the bound-negative channel keeps its existing NAMED refusal (illegal variable name — rename or map manually)',
+        '✔ bound negative source variable preserves its original name, exact -8px and shared registered path',
+        '✔ two distinct canvas names cannot silently share the sanitized spacing path',
+        '✔ the untouched bound mixed-sign source refuses by exact BOUND_MIXED_SIGN_SPACING_UNSUPPORTED code',
+        '✔ the refusal retains every original plane, spacing value, bound source name and registered token identity',
+        '✔ no misleading contract or conditional negative CSS gap is published for the refused source',
+        '✔ uniform bound negative spacing keeps its exact sanitized source token and overlap projection',
+        '✔ uniform bound CSS and HTML use negative child margins, never invalid negative gap declarations',
+        '✔ uniform bound source spacing is not replaced with an invented negative minted token',
+        '✔ uniform bound referee CLEAN (got 0)',
+        '✔ uniform bound ALL FOUR surfaces emit (react, html, react-inline, figma-script)',
+        '✔ registration, refusal and positive bound control leave the untouched source fixture unchanged',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
@@ -6307,13 +6354,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, Wave 5 denominator) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip/TablePagination, 2143 variables incl. 134
+        // path (same sets + standalone Menu/Tooltip/TablePagination, 2144 variables incl. 134
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2144 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -8313,8 +8360,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      // 2144 → 2143 (2026-08-22): the authored-facts door pruned `imported.link.root.width` — a capture-font glyph width nothing binds (examples/mui/authored-facts.json).
-      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2143 variables\)/.test(batch.out)) {
+      // 2143 → 2144 (2026-10-07): authored MUI/Input Label/Regular adds
+      // imported.text-field.label.line-height (23px), bound by TextField's label.
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2144 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -8339,7 +8387,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2143 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2144 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {

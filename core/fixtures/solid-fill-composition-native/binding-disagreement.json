@@ -1,0 +1,227 @@
+{
+  "fileKey": "A451UfD58U7XU21FzaqfHL",
+  "rows": [
+    {
+      "nodeId": "3390:31714",
+      "name": "Status=Failed",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 9.999999747378752e-06,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "129078:468148",
+      "name": "Status=Info",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 1,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "129141:491686",
+      "name": "Status=Info square",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 1,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "129118:498511",
+      "name": "Status=Success",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 1,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "129138:332900",
+      "name": "Status=Warning",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 1,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "129136:1795",
+      "name": "Status=Warning alt",
+      "observation": {
+        "paint": {
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "opacity": 1,
+          "blendMode": "NORMAL"
+        },
+        "variableId": "VariableID:103532:4034"
+      },
+      "consumers": {
+        "VariableID:103532:4034": {
+          "name": "Transparent",
+          "collectionId": "VariableCollectionId:25984:295101",
+          "modeId": "25984:0",
+          "modeName": "White Theme",
+          "resolvedType": "COLOR",
+          "value": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          },
+          "selectedValue": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 9.999999747378752e-06
+          }
+        }
+      }
+    }
+  ]
+}

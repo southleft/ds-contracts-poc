@@ -25,7 +25,10 @@ export const ${name}=React.forwardRef(function Render(props,ref){${body}});`;
   try{run(prepare(root,text,name));}finally{rmSync(root,{recursive:true,force:true});}
 }
 function prepare(root:string,text:string,name:string){
-  const file=path.join(root,'control.mjs');writeFileSync(file,text);const reference={sourceRoot:root,files:{[file]:sha(text)}};
+  const file=path.join(root,'control.mjs');writeFileSync(file,text);
+  const config=path.join(root,'tsconfig.json'),configText=JSON.stringify({compilerOptions:{jsx:'react-jsx',module:'ESNext',target:'ES2022',moduleResolution:'Bundler'}});
+  writeFileSync(config,configText);
+  const reference={sourceRoot:root,files:{[file]:sha(text),[config]:sha(configText)}};
   const target=readReactRuntimeExport(reference,'control.mjs',[name]);assert.equal(target.status,'resolved');
   const initializer=readReactTargetInitializer(reference,target.definition);
   const model=(input:Record<string,unknown>)=>replanReactTargetEffects(reference,initializer,{kind:'record',fields:Object.entries(input).map(([key,v])=>[key,

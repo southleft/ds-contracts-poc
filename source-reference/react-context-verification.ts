@@ -1,3 +1,6 @@
+import {planContextExportReads} from './react-context-export-reads.js';
+import {verifyReactInitialization} from './react-initialization-verification.js';
+import {verifyReactFactoryProps} from './react-factory-props-verification.js';
 import {planReactConsumerLiterals} from './react-consumer-literals.js';
 import {verifyReactHookHelpers,type ReactHookHelperVerification} from './react-hook-helper-verification.js';
 import {planReactCallbackFactories} from './react-callback-factories.js';
@@ -16,7 +19,7 @@ export interface ReactContextConsumerVerification {
   qualification:'observed-context-consumer-body-only';effectsVerified:false;acceptedContract:null;
   hookHelpers?:ReactHookHelperVerification;
   rows:Array<{render:number;source:HelperSourcePoint;status:'verified'|'refused';reason?:string;at?:HelperSourcePoint;
-    consumerBodyVerified:boolean;helperInvocations:number[];bindingReads:number[];functionCalls:number[];
+    initialization?:ReturnType<typeof verifyReactInitialization>;factoryProps?:ReturnType<typeof verifyReactFactoryProps>;guardedBindingReads?:number;guardedFunctionCalls?:number;consumerBodyVerified:boolean;helperInvocations:number[];bindingReads:number[];functionCalls:number[];
     literalValues:Array<{record:number;allocation:number;source:HelperSourcePoint;valuesVerified:true;mutationEffectsVerified:false}>;
     hookCalls:Array<{call:number;invocation:number;bodyVerified:true;stateTransitionsVerified:false;effectBodiesVerified:false}>;
     factoryCalls:Array<{call:number;invocation:number;callback:number;creationBodyVerified:true;callbackBodyVerified:false;capturesVerified:false}>;
@@ -56,7 +59,7 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
   const helperProof=verifyReactHookHelpers(reference,plan,runtime,lookup);result.hookHelpers=helperProof;
   const c=runtime.contexts,creations=verifyReactCallbackCreations(reference,plan,runtime,lookup);
   for(const render of c.renders.invocations){
-    if(!render.consumerCalls.some(id=>c.consumerCalls.invocations[id]?.helperInvocation!==null&&c.consumerCalls.invocations[id]?.helperInvocation!==undefined))continue;
+    if(!plan.bodyModels?.some(m=>same(m.component,render.source))&&!render.consumerCalls.some(id=>c.consumerCalls.invocations[id]?.helperInvocation!==null&&c.consumerCalls.invocations[id]?.helperInvocation!==undefined))continue;
     const row:ReactContextConsumerVerification['rows'][number]={render:render.id,source:render.source,status:'refused',consumerBodyVerified:false,helperInvocations:[],bindingReads:[],functionCalls:[],callbackCalls:[],refCalls:[],effectCalls:[],factoryCalls:[],hookCalls:[],literalValues:[],remainingRequirements:remaining};result.rows.push(row);
     try{
       requireProof(render.completion==='returned','render-threw');
@@ -65,7 +68,10 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
       const targets=runtime.targetInitializers.targets.filter(t=>same(t.render,render.source));requireProof(targets.length===1,'initializer-ambiguous');
       const boundaries=targets[0].invocations.filter(i=>i.input.render===render.id&&i.output.render===render.id);requireProof(boundaries.length===1,'boundary-ambiguous');
       const {input,output}=boundaries[0];
-      requireProof(['jsx','forward-ref-copy'].includes(input.origin),'input-origin');
+      const returned=c.factories.invocations.filter(f=>f.render===render.id&&f.id===render.returnedFactory);
+      requireProof(returned.length===1,'returned-factory-missing');
+      row.factoryProps=verifyReactFactoryProps(returned[0],output);
+      requireProof(['jsx','create-element','forward-ref-copy'].includes(input.origin),'input-origin');
       const actualCalls=render.consumerCalls.map(id=>{const call=c.consumerCalls.invocations[id];requireProof(call&&call.id===id&&call.render===render.id&&same(call.consumer,render.source),'call-render-mismatch');return call;});
       requireProof(new Set(render.consumerCalls).size===render.consumerCalls.length&&actualCalls.length===c.consumerCalls.invocations.filter(i=>i.render===render.id).length,'call-coverage');
       const helperCalls=actualCalls.filter(i=>i.helperInvocation!==null),assumptions:ContextConsumerCallAssumption[]=[];
@@ -246,11 +252,17 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
       requireProof(row.effectCalls.length===effectAssumptions.length,'effect-model-coverage');
       requireProof(row.refCalls.length===refAssumptions.length,'ref-model-coverage');
       requireProof(row.callbackCalls.length===callbackAssumptions.length,'callback-model-coverage');
-      requireProof(!model.writes.length&&!model.intrinsics.length&&!model.extraArguments.length&&model.targetFactories.length===1,'body-effects-unmodeled');
+      if(plan.bodyModels?.some(m=>same(m.component,render.source)))row.initialization=verifyReactInitialization(model,plan,runtime,render.id);
+      requireProof((!!row.initialization||!model.writes.length&&!model.intrinsics.length)&&!model.extraArguments.length&&model.targetFactories.length===1,'body-effects-unmodeled');
       requireProof(model.input.kind==='record'&&input.fields.length===model.input.fields.length&&input.fields.every(([name,v],i)=>model.input.kind==='record'&&model.input.fields[i][0]===name&&matches(v,model.input.fields[i][1])),'input-model-mismatch');
       const factories=c.factories.invocations.filter(f=>f.render===render.id);requireProof(factories.length===1,'factory-coverage');const factory=factories[0];
-      requireProof(factory.id===render.returnedFactory&&factory.completion==='returned'&&same(factory.consumer,render.source)&&same(factory.site,model.output.source)&&same(factory.site,model.targetFactories[0].source)&&factory.factory===model.targetFactories[0].factory&&equal(factory.value,output.value)&&equal(factory.arguments[0],output.type)&&equal(factory.arguments[1],output.props),'factory-return-link');
-      if(model.output.tag.kind==='source-read'){
+      requireProof(factory.id===render.returnedFactory&&factory.completion==='returned'&&same(factory.consumer,render.source)&&same(factory.site,model.output.source)&&same(factory.site,model.targetFactories[0].source)&&factory.factory===model.targetFactories[0].factory&&equal(factory.value,output.value)&&equal(factory.arguments[0],output.type)&&row.factoryProps?.factory===factory.id,'factory-return-link');
+      if(model.output.tag.kind==='source-read'&&plan.contextExportReads?.some(p=>same(p.read,factory.target))){
+        requireProof(JSON.stringify(planContextExportReads(reference,plan.contextFactories??[]))===JSON.stringify(plan.contextExportReads),'export-plan-changed');
+        const reads=c.exportReads?.filter(r=>r.render===render.id&&r.factory===factory.id)??[],planned=plan.contextExportReads.find(p=>same(p.read,factory.target));
+        requireProof(reads.length===1&&planned&&same(planned.consumer,render.source)&&same(reads[0].site,factory.target)&&same(reads[0].site,model.output.tag.source)&&equal(reads[0].value,output.type)&&lookup.contextExportReads?.includes(key(planned.read)),'export-read-link');
+        requireProof(model.targetReads.length===1&&same(model.targetReads[0].site,factory.site)&&same(model.targetReads[0].read,reads[0].site),'export-read-coverage');
+      }else if(model.output.tag.kind==='source-read'){
         const target=c.targetReads.reads[factory.targetRead!],targetPlan=plan.contextTargets?.reads.find(p=>same(p.read,factory.target));
         requireProof(factory.targetRead!==null&&target&&target.id===factory.targetRead&&target.factory===factory.id&&target.render===render.id&&target.propertyEffectsVerified&&same(target.site,factory.target)&&same(target.site,model.output.tag.source)&&equal(target.value,output.type),'target-read-link');
         requireProof(targetPlan&&targetPlan.property===target.property&&targetPlan.origin.module===target.objectSource.file&&plan.contextTargets?.objects.some(p=>same(p,target.objectSource))&&lookup.contextTargets?.reads===plan.contextTargets.reads.length,'target-read-plan');
@@ -258,18 +270,30 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
       }else requireProof(model.output.tag.kind==='host'&&equal(output.type,literal(model.output.tag.name))&&!model.targetReads.length&&factory.targetRead===null,'target-unmodeled');
       requireProof(output.fields.length===model.output.props.fields.length&&output.fields.every(([name,v],i)=>name===model.output.props.fields[i][0]&&matches(v,model.output.props.fields[i][1]))&&equal(output.key,literal(model.output.key)),'output-mismatch-or-callback');
       for(const binding of model.runtimeBindings.bindings)for(const site of binding.reads){
-        const reads=c.bindings.reads.filter(r=>r.render===render.id&&same(r.binding,binding.binding)&&same(r.site,site));requireProof(reads.length===1&&reads[0].kind==='value','binding-read-coverage');const read=reads[0];
-        if(binding.value.kind==='literal')requireProof(matches(read.value,binding.value),'binding-value-mismatch');
-        else {requireProof(binding.value.kind==='reference','binding-shape-unmodeled');const node=model.runtimeBindings.nodes[binding.value.id];requireProof(node?.kind==='function'&&same(read.functionSource,node.source)&&read.value.kind==='function','binding-function-mismatch');}
-        row.bindingReads.push(read.id);
+        const reads=c.bindings.reads.filter(r=>r.render===render.id&&same(r.binding,binding.binding)&&same(r.site,site));
+        if(!reads.length&&row.initialization?.guardedBindings.includes(key(binding.binding))){row.guardedBindingReads=(row.guardedBindingReads??0)+1;continue;}
+        const expected=binding.readOccurrences?.filter(r=>r.phase==='render'&&same(r.site,site)).length??1;
+        requireProof(expected>0&&reads.length===expected&&reads.every(read=>read.kind==='value'),'binding-read-coverage');
+        for(const read of reads){
+          if(binding.value.kind==='literal')requireProof(matches(read.value,binding.value),'binding-value-mismatch');
+          else {requireProof(binding.value.kind==='reference','binding-shape-unmodeled');const node=model.runtimeBindings.nodes[binding.value.id];requireProof(node?.kind==='function'&&same(read.functionSource,node.source)&&read.value.kind==='function','binding-function-mismatch');}
+          row.bindingReads.push(read.id);
+        }
       }
       requireProof(new Set(row.bindingReads).size===row.bindingReads.length&&row.bindingReads.length===c.bindings.reads.filter(r=>r.render===render.id).length,'binding-extra-read');
       for(const call of model.contextFunctionCalls){
+        if(row.initialization&&!actualCalls.some(a=>same(a.site,call.site))){requireProof(model.calls.some(c=>same(c.site,call.site)&&same(c.source,call.source)),'guarded-function-call-unmodeled');row.guardedFunctionCalls=(row.guardedFunctionCalls??0)+1;continue;}
         const calls=actualCalls.filter(i=>same(i.site,call.site));requireProof(calls.length===1,'function-call-coverage');const actual=calls[0],read=c.bindings.reads[actual.calleeRead!];
         requireProof(actual.helperInvocation===null&&actual.completion==='returned'&&actual.calleeRead!==null&&read&&read.calleeOf===actual.id&&same(read.functionSource,call.source)&&read.render===render.id&&equal(read.value,actual.callee)&&row.bindingReads.includes(read.id)&&lookup.contextConsumerCallees?.includes(key(actual.site)),'function-callee-link');
-        requireProof(actual.arguments.length===call.arguments.length&&actual.arguments.every((v,i)=>matches(v,call.arguments[i]))&&matches(actual.value,call.output),'function-values');row.functionCalls.push(actual.id);
+        // Scalar summaries intentionally omit object identity. Use the already
+        // captured witnesses and retain agreement with those summaries.
+        const agrees=(scalar:ReactContextValueWitness|undefined,witness:ReactContextValueWitness|undefined)=>!!scalar&&!!witness&&scalar.kind===witness.kind&&
+          (['object','function','symbol','bigint'].includes(scalar.kind)||equal(scalar,witness));
+        requireProof(actual.arguments.length===call.arguments.length&&actual.argumentWitnesses.length===call.arguments.length&&
+          actual.argumentWitnesses.every((v,i)=>agrees(actual.arguments[i],v)&&matches(v,call.arguments[i]))&&
+          agrees(actual.value,actual.returnWitness)&&matches(actual.returnWitness,call.output),'function-values');row.functionCalls.push(actual.id);
       }
-      requireProof(actualCalls.length===helperCalls.length+row.functionCalls.length+row.callbackCalls.length+row.factoryCalls.length+row.hookCalls.length&&new Set(row.functionCalls).size===row.functionCalls.length&&model.calls.length===row.functionCalls.length+1&&model.calls[0].site===null&&same(model.calls[0].source,render.source)&&model.calls.slice(1).every(m=>model.contextFunctionCalls.some(f=>same(f.source,m.source)&&same(f.site,m.site))),'unmodeled-body-call');
+      requireProof(actualCalls.length===helperCalls.length+row.functionCalls.length+row.callbackCalls.length+row.factoryCalls.length+row.hookCalls.length&&new Set(row.functionCalls).size===row.functionCalls.length&&model.calls.length===row.functionCalls.length+(row.guardedFunctionCalls??0)+1&&model.calls[0].site===null&&same(model.calls[0].source,render.source)&&model.calls.slice(1).every(m=>model.contextFunctionCalls.some(f=>same(f.source,m.source)&&same(f.site,m.site))),'unmodeled-body-call');
       row.status='verified';row.consumerBodyVerified=true;
     }catch(error){row.reason=error instanceof Error?error.message:'context-consumer-verification-unavailable';}
   }

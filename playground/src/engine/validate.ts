@@ -14,6 +14,7 @@ import type { RefusalIssue } from './refusal-lines.js';
 import { sessionRegistry, contractsInSession } from './session-registry.js';
 import { activeChildStubs } from './stub-contracts.js';
 import { activeTokens } from './token-source.js';
+import { linkedImportScope, applyLinkedScope } from './linked-scope.js';
 
 export type ValidationResult =
   | { status: 'empty' }
@@ -28,7 +29,7 @@ export type ValidationResult =
     }
   | { status: 'valid'; contract: Contract; contracts: Map<string, Contract> };
 
-export function validateContractText(text: string): ValidationResult {
+export function validateContractText(text: string, surface?: Parameters<typeof validateContract>[4]): ValidationResult {
   if (!text.trim()) return { status: 'empty' };
   let raw: unknown;
   try {
@@ -68,11 +69,12 @@ export function validateContractText(text: string): ValidationResult {
     if (!contracts.has(id)) contracts.set(id, stub);
   }
   const errors: string[] = [];
-  validateContract(contract, contracts, errors, icons);
+  validateContract(contract, contracts, errors, icons, surface);
   // Pass the active values as well as their names: value-dependent checks
   // (including tracked text sizing) need the same trees the emitters receive.
   const tokens = activeTokens();
-  generateCss(contract, tokens.inventory, errors, tokens.tree);
+  const linked = linkedImportScope(contract, contracts, session.layersByContractId, tokens.inventory);
+  generateCss(contract, new Set([...tokens.inventory, ...linked.paths]), errors, applyLinkedScope(tokens.tree, linked), contracts);
   if (errors.length > 0) {
     return {
       status: 'violations',

@@ -1,0 +1,466 @@
+{
+  "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+  "pageId": "25:31993",
+  "section": {
+    "id": "63:52",
+    "x": 0,
+    "y": 816,
+    "width": 240,
+    "height": 160
+  },
+  "frameId": "63:53",
+  "createdNodeIds": [
+    "63:52",
+    "63:53",
+    "63:54",
+    "63:55",
+    "63:56",
+    "63:57"
+  ],
+  "mutatedNodeIds": [
+    "63:53",
+    "63:54",
+    "63:55",
+    "63:56",
+    "63:57"
+  ],
+  "observed": [
+    {
+      "size": [
+        18,
+        18
+      ],
+      "mask": {
+        "width": 18,
+        "height": 18,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "group": {
+        "width": 20,
+        "height": 20,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            0,
+            1,
+            -1
+          ]
+        ]
+      },
+      "children": [
+        {
+          "id": "63:55",
+          "name": "ground",
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              -1
+            ],
+            [
+              0,
+              1,
+              -1
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              31
+            ],
+            [
+              0,
+              1,
+              847
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        },
+        {
+          "id": "63:56",
+          "name": "detail",
+          "width": 12,
+          "height": 14,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              35
+            ],
+            [
+              0,
+              1,
+              850
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        }
+      ],
+      "png": "iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAARhJREFUeAGtlEFKw0AYhd+b0q4DeoABFdwZUKHL9AT2BtKTqTfQExh3LhSy7EJhLiCdfcz8/lM01lhKm+kHP5NM+B+TN/OGWMPh8UURRK5FpABov6crUgt4+Hh/ve/2cPUls2PLQX0DQYHNOBkNJ37+7P59yU4ucwEWWrJlLWLPT79pV9KEx/iI7cliT3Y6tq0QTb2ryK9YrVZEoYOj86mOFn1RP+PmGP3ZKyQSd9gImCMRXUyhHkmykGIN9kQUckiGlaHgCYmQUpkw4C0SCZo/499eSk1cif44ryFemi1NM9PBY3e8jJrJn5l+oc3bo9O5RnJLM4i5s9gEWcrwc+bnlVsr1Apq/kzAVMizlQPrSFMGyt3S1w5f9paMrut2DY8AAAAASUVORK5CYII="
+    },
+    {
+      "size": [
+        36,
+        36
+      ],
+      "mask": {
+        "width": 36,
+        "height": 36,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "group": {
+        "width": 40,
+        "height": 40,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            -2
+          ],
+          [
+            0,
+            1,
+            -2
+          ]
+        ]
+      },
+      "children": [
+        {
+          "id": "63:55",
+          "name": "ground",
+          "width": 40,
+          "height": 40,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              -2
+            ],
+            [
+              0,
+              1,
+              -2
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              30
+            ],
+            [
+              0,
+              1,
+              846
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        },
+        {
+          "id": "63:56",
+          "name": "detail",
+          "width": 24,
+          "height": 28,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              6
+            ],
+            [
+              0,
+              1,
+              4
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              38
+            ],
+            [
+              0,
+              1,
+              852
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        }
+      ],
+      "png": "iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAkRJREFUeAHNmL1uE0EQx/8zJkZKwxIQDc1KUKSLhShSHk8Q8wTAE5A3cKio6eggT4B5ghwdSIiYjgKUo6NBWlFFTm6H2fOZfHCOfbLv4yedfPLtaX+63dndGUJJzOa25fG4D6ItEYkAMuHv/LHTKwEhYcj7dK0bu28fE5SAFm14696Dpx70BIIIZSDEKrf/+8eXt4s1n8Pt+w+j1MsbvbVYjoRJXswT68x6YGxk1jc2XnrBa5wNyTIYAfXXb94112/c+XTsfh0v/qbdtgIc6iUVXUdhLhb1zUUyxCcHettDdVganxwUSfFFmcjkMhbVE6TeGdszM4WY/wxqkpnSY742QJFQCGuddLuoGYHshkjGZSEvNEBD5MtKRiYUvg7qHarL2NxhIpStwA0zdeAQ5qW3gypQh2yf7HTGEVoCj0/7rJ9qB22BZEs3YrJoCbqnRDqpxaI9mBBlq9jJV4VhtIwg5NAeXMuEKJwq8QFtQeQne6IRWoKwDBn+dIi2sOZjdsko5FExmoZIc7hRkoW9HpL20TACnzlkQm6SKyVojiR3ODsxCtMzNIRoAjm9/yfkvn+ONY19hZoJfbpz2eyFrcP7dE9/6lwGkrxPFAppxDnx6WPUM58S6aaPQp9zW2ryFlLpowpT6UOz2bNFfdMVUoa5s6cvP8cKCXMmDNOsLzO3HGM0PaFJzmaxHEmI5BA8VzVauGCViYG1YBWqZiXQFTgsem5VBav/xHR+ocORyu3o8mrzI/D5kp4j4thL+hXd7rBsSe8v6JsudV/pSTcAAAAASUVORK5CYII="
+    },
+    {
+      "size": [
+        27,
+        45
+      ],
+      "mask": {
+        "width": 27,
+        "height": 45,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "group": {
+        "width": 30,
+        "height": 50,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            -1.5
+          ],
+          [
+            0,
+            1,
+            -2.5
+          ]
+        ]
+      },
+      "children": [
+        {
+          "id": "63:55",
+          "name": "ground",
+          "width": 30,
+          "height": 50,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              -1.5
+            ],
+            [
+              0,
+              1,
+              -2.5
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              30.5
+            ],
+            [
+              0,
+              1,
+              845.5
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        },
+        {
+          "id": "63:56",
+          "name": "detail",
+          "width": 18,
+          "height": 35,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              4.5
+            ],
+            [
+              0,
+              1,
+              5
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              36.5
+            ],
+            [
+              0,
+              1,
+              853
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        }
+      ],
+      "png": "iVBORw0KGgoAAAANSUhEUgAAABsAAAAtCAYAAABf9xDlAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAmVJREFUeAG9mDFzEkEUgN9bgsPQuDCOM8HClbGwkzEWlPyD8A9CaUfKWGl+gaS0Ev5B6LSjtBDn7FKonI1pNJw2OAO3z7cgyCXHXcjc7jdzc8fd8b57y9vh3iJcA6kaUojfLULcB4KaOcVbAAieAOqF+VuD4Oy9nxYHU0XVvTbf9PKfYBO+QDr++eVjN+EeyCVdLFefvOHnOeLDAqQ8EwE2i6V7cjL+/m5rmRFxgBZsR71YrqjJ+Lx/bRmLXrHoGdyMWlqGKwigxRtlsDUTRVLV1evbd0dZyDpydyxVLVJUIvJBTF+MxY6CDPiDyNNl5zBWZrIyQwgZQkDt9exWMpMVZE8kO/H/KaABFjDZRWTy4dMG7xTYQd5ZxF/IhKYDsIjW1FzJbA3hEo6/P5eZKgR7Q7hEyUd1JXK5aQ0ckJuGDUGETmREpAQhPQYXIN03BSLBAWYE+V/denEsddJZZsbjXOYM57IA3BC4lqEbGaJ5kaVP4AJNv4QxggMQ0ROI2gcHaCRPhKEegAvyoScC3/P50Ae7+MGZ588nNbdEfbAIIgzMfi7TAk/BIlwYvZUs+PxhAPYmt/9jEX/9JRVPwALLIYzIQM86YCE7nQ+Pr8i4KoOss+OsuqYKr8gWjzHrFIgyya6kZ/56VrGYjjGjzrN1OXbs0kS5utfhm9twQzjoycXX4eHl87ENPHf7b4uy8oC/tfULLBL0LkbD2OZ/49LEJDg/LZYqJT6sw3ai1qbriYsuJsNCefcbAi6XkDZhKvn5eDQ8SoqXupxk4L5YQU40EMQB//Rra1foEek+N2BdM3XS4vwF3Fg6r3tg2QkAAAAASUVORK5CYII="
+    },
+    {
+      "size": [
+        18,
+        18
+      ],
+      "mask": {
+        "width": 18,
+        "height": 18,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "group": {
+        "width": 20,
+        "height": 20,
+        "relativeTransform": [
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            0,
+            1,
+            -1
+          ]
+        ]
+      },
+      "children": [
+        {
+          "id": "63:55",
+          "name": "ground",
+          "width": 20,
+          "height": 20,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              -1
+            ],
+            [
+              0,
+              1,
+              -1
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              31
+            ],
+            [
+              0,
+              1,
+              847
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        },
+        {
+          "id": "63:56",
+          "name": "detail",
+          "width": 12,
+          "height": 14,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              35
+            ],
+            [
+              0,
+              1,
+              850
+            ]
+          ],
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          }
+        }
+      ],
+      "png": "iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAARhJREFUeAGtlEFKw0AYhd+b0q4DeoABFdwZUKHL9AT2BtKTqTfQExh3LhSy7EJhLiCdfcz8/lM01lhKm+kHP5NM+B+TN/OGWMPh8UURRK5FpABov6crUgt4+Hh/ve/2cPUls2PLQX0DQYHNOBkNJ37+7P59yU4ucwEWWrJlLWLPT79pV9KEx/iI7cliT3Y6tq0QTb2ryK9YrVZEoYOj86mOFn1RP+PmGP3ZKyQSd9gImCMRXUyhHkmykGIN9kQUckiGlaHgCYmQUpkw4C0SCZo/499eSk1cif44ryFemi1NM9PBY3e8jJrJn5l+oc3bo9O5RnJLM4i5s9gEWcrwc+bnlVsr1Apq/kzAVMizlQPrSFMGyt3S1w5f9paMrut2DY8AAAAASUVORK5CYII="
+    }
+  ],
+  "qualification": "Owned native geometry control only; no Material document writes and no real-kit score credit"
+}

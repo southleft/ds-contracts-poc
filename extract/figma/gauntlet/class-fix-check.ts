@@ -7,7 +7,9 @@
  *   1. component-ref-unknown-child-prop (Avatar group fixture) — applied
  *      props that do not map through an in-scope child contract's
  *      bindings.figma are DROPPED with the named note, never guessed; the
- *      referee is clean and all four surfaces emit.
+ *      untouched bound mixed-sign source refuses before invalid CSS gap
+ *      publication; an explicit uniform-bound subset keeps this child-prop
+ *      class independently pinned, clean on all four surfaces.
  *   2. visiblewhen-value-outside-prop-enum (Alert fixture) — presence on a
  *      true/false axis spells the truthy form visibleWhen { prop } (the axis
  *      promotes to a BOOLEAN prop; equals: "true" is enum vocabulary); the
@@ -15,8 +17,8 @@
  *      script refuses BY NAME (FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED, D.138):
  *      this v14 dump records the root as FIXED width with no captured box,
  *      so no definite width reaches Message's zero-basis Fill. The
- *      inexpressible false side is pinned on a synthesized two-variant set (visibleWhen has no
- *      negated form — NAMED note, kept unconditional, never wrong).
+ *      false side is pinned on a synthesized two-variant set: typed
+ *      visibleWhen equals:false carries the drawn condition on every surface.
  *   3. prop-binding-not-camelcase (Note fixture) — digit-led property
  *      spellings get the componentIdSlug digit-led discipline on prop code
  *      bindings ("2nd paragraph" → `p2ndParagraph`, deterministic "p"
@@ -32,12 +34,18 @@
  */
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
+import vm from 'node:vm';
+import {createRequire} from 'node:module';
+import * as React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {transformSync} from 'esbuild';
+import {createFigmaMock} from '../../../scripts/plugin-engine-mock-figma.mjs';
 import {
   ContractSchema,
   type Contract,
 } from "../../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../../core/captured-tokens.js";
-import { generateSurfaces, type EmitterCtx } from "../../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx, type EmittedFile } from "../../../core/emitter.js";
 import { generateCss, validateContract } from "../../../core/emit-react.js";
 import { emitFigmaScript } from "../../../core/emit-figma-script.js";
 import {
@@ -137,8 +145,8 @@ interface Replay {
 }
 
 /** One fixture through the census/playground receive pipeline. */
-function replay(fixtureFile: string): Replay {
-  const dump = read(path.join(FIXTURE_DIR, fixtureFile));
+function replay(fixtureFile: string, sourceControl?: Record<string,unknown>): Replay {
+  const dump = sourceControl ?? read(path.join(FIXTURE_DIR, fixtureFile));
   const captured = capturedTokensFromDump(dump);
   const capturedRegistered = (captured?.entries ?? []).filter(
     (e) => !repoInventory.has(e.path),
@@ -226,7 +234,23 @@ console.log(
   "1. component-ref-unknown-child-prop (component-ref-unknown-child-prop-avatar-group.dump.json)",
 );
 {
-  const r = replay("component-ref-unknown-child-prop-avatar-group.dump.json");
+  const original=read(path.join(FIXTURE_DIR,'component-ref-unknown-child-prop-avatar-group.dump.json'));
+  const originalBytes=JSON.stringify(original);
+  const originalBatch=proposeBatchFromDump(original,{projectionMode:'reviewable-inversion',corpus,
+    contractIdByName:loaded.byName,contractsById:loaded.byId,
+    fileKey:(original._provenance as {fileKey?:string})?.fileKey ?? null,mintUnbound:true});
+  check('the untouched real fixture refuses its bound mixed-sign spacing before any invalid gap contract publishes',
+    originalBatch.proposals.length===0 && originalBatch.skipped.length===1 &&
+    originalBatch.skipped[0].reason.includes('BOUND_MIXED_SIGN_SPACING_UNSUPPORTED: Avatar group:root'));
+  // The child-prop class is independent of the unsupported spacing switch.
+  // Select unchanged overlap planes, retaining their bound variable and values.
+  const uniform=structuredClone(original),set=uniform['Avatar group'] as {variants:Array<{name:string}>};
+  set.variants=set.variants.filter(variant=>variant.name.includes('type=overlap'))
+    .map(variant=>({...variant,name:variant.name.replace(/,\s*type=overlap/,'')}));
+  const r = replay('component-ref-unknown-child-prop-avatar-group.dump.json',uniform);
+  check('the uniform-bound child-prop control keeps all three original overlap planes and does not alter the source fixture',
+    set.variants.length===3 && JSON.stringify(original)===originalBytes &&
+    r.contract.anatomy.root.layout?.overlap===true && r.contract.anatomy.root.tokens?.gap==='{spacing.100-negative}');
   const dropNote = r.notes.find((n) =>
     n.includes(
       'applied prop "isVisible" on nested "Avatar" does not map through ds.avatar\'s bindings — not carried; verify the child contract is current',
@@ -304,12 +328,9 @@ console.log(
       /^FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED: ds\.alert, .*part "Message" in "Description" requests zero-basis width/.test(r.refusals[0].message),
   );
 
-  // The FALSE side (present exactly where the boolean is false) is
-  // inexpressible — visibleWhen has no negated form — and must be a NAMED
-  // note with the part kept unconditional, never a wrong condition or a
-  // refusal. Pinned on a synthesized two-variant set.
-  const falseSide = proposeBatchFromDump(
-    {
+  // The FALSE side preserves the typed Boolean condition instead of
+  // drawing the source-absent part unconditionally.
+  const falseSideDump = {
       _provenance: { fileKey: null },
       "False Side": {
         setName: "False Side",
@@ -348,7 +369,9 @@ console.log(
           },
         ],
       },
-    },
+    };
+  const falseSideSource = JSON.stringify(falseSideDump);
+  const falseSide = proposeBatchFromDump(falseSideDump,
     {
       projectionMode: "reviewable-inversion",
       corpus,
@@ -359,32 +382,75 @@ console.log(
     },
   );
   const fsProposal = falseSide.proposals[0];
-  const fsNote = fsProposal?.notes.find((n) =>
-    n.includes(
-      'present exactly where "compact" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review',
-    ),
-  );
-  check(
-    "false side: the inexpressible condition is a NAMED note (visibleWhen has no negated form; kept unconditional)",
-    fsNote !== undefined,
-  );
-  const fsAnatomy = JSON.stringify(fsProposal?.contract ?? {});
-  check(
-    "false side: NO visibleWhen is invented on the part (never wrong)",
-    !fsAnatomy.includes("visibleWhen"),
-  );
   const fsContract = ContractSchema.parse(fsProposal!.contract);
+  const compact = fsContract.props.find(p=>p.name==='compact');
+  check('false side: source Boolean axis, original binding and first drawn true default remain intact',
+    compact?.type==='boolean' && compact.default===true && compact.bindings.figma.kind==='VARIANT' &&
+    compact.bindings.figma.property==='compact' && compact.bindings.code.prop==='compact');
+  check('false side: the source-absent true plane and present false plane carry typed Boolean equality by name',
+    fsProposal.notes.some(n=>n.includes('present exactly where "compact" is false') &&
+      n.includes('visibleWhen { prop: compact, equals: false } (typed boolean equality)')) &&
+    JSON.stringify(fsContract.anatomy.root.parts?.Extra.visibleWhen)==='{"prop":"compact","equals":false}' &&
+    fsContract.anatomy.root.parts?.Label.visibleWhen===undefined);
+  const fsContracts = new Map([...repoContracts, [fsContract.id, fsContract]]);
   const fsErrors: string[] = [];
-  validateContract(
-    fsContract,
-    new Map([...repoContracts, [fsContract.id, fsContract]]),
-    fsErrors,
-    icons,
-  );
-  check(
-    `false side: referee CLEAN (got ${fsErrors.length})`,
-    fsErrors.length === 0,
-  );
+  validateContract(fsContract, fsContracts, fsErrors, icons);
+  check(`false side: referee CLEAN (got ${fsErrors.length})`,fsErrors.length===0);
+  const fsMinted = fsProposal.mintedTokens?.tree ?? {};
+  const fsContext: EmitterCtx = {tokens:{...repoTrees,
+    semantic:mergeTrees([repoTrees.semantic as Record<string,unknown>,fsMinted]),brands},
+    icons,contracts:fsContracts,mintedTokens:fsMinted};
+  const fsFiles = new Map<string,EmittedFile[]>();
+  const fsRefusals: string[] = [];
+  for(const emitter of generateSurfaces())try{fsFiles.set(emitter.name,emitter.emit(fsContract,fsContext));}
+    catch(error){fsRefusals.push(`${emitter.name}: ${String(error)}`);}
+  check(`false side: ALL FOUR surfaces emit (${surfaces})`,
+    fsFiles.size===generateSurfaces().length && fsRefusals.length===0);
+  const require=createRequire(import.meta.url);
+  for(const name of ['react','react-inline']){
+    const tsx=fsFiles.get(name)?.find(file=>file.path.endsWith('.tsx'))?.contents;
+    check(`false side: ${name} supplies the actual component`,typeof tsx==='string');
+    if(!tsx)continue;
+    const module={exports:{} as Record<string,React.ComponentType<{compact?:boolean}>>};
+    vm.runInNewContext(transformSync(tsx,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,
+      {module,exports:module.exports,require:(name:string)=>name.endsWith('.module.css')?{}:require(name)});
+    const Subject=module.exports[fsContract.name];
+    for(const [value,expected] of [[undefined,false],[true,false],[false,true]] as const){
+      const markup=renderToStaticMarkup(React.createElement(Subject,{compact:value}));
+      check(`false side: actual ${name} compact=${String(value)} preserves Hi and shows More only for false`,
+        markup.includes('>Hi<') && markup.includes('>More<')===expected);
+    }
+  }
+  for(const value of [true,false]){
+    const selected=structuredClone(fsContract);selected.props.find(p=>p.name==='compact')!.default=value;
+    const html=generateSurfaces().find(emitter=>emitter.name==='html')!.emit(selected,
+      {...fsContext,contracts:new Map([...fsContracts,[selected.id,selected]])})
+      .find(file=>file.path.endsWith('.html'))!.contents;
+    const snapshot=html.match(/showcase__label">default<\/p>\n([\s\S]*?)\n  <\/div>/)?.[1] ?? '';
+    check(`false side: actual HTML compact=${value} shows More exactly on the false plane`,
+      snapshot.includes('>Hi<') && snapshot.includes('>More<')===!value);
+  }
+  const mock=createFigmaMock(),canvasContext=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}});
+  const script=fsFiles.get('figma-script')?.[0].contents;
+  check('false side: the actual canvas script supplies both source planes',typeof script==='string');
+  if(script){
+    await vm.runInContext(`(async()=>{\n${script}\n})()`,canvasContext,{timeout:20_000});
+    const set=mock.root.findOne((node:any)=>node.type==='COMPONENT_SET' &&
+      node.getSharedPluginData('ds_contracts','contractId')===fsContract.id);
+    const variants=set?.children ?? [];
+    check('false side: canvas builds exactly the original true/false variants',
+      !!set && variants.length===2 && variants.some((node:any)=>node.name==='compact=true') &&
+      variants.some((node:any)=>node.name==='compact=false'));
+    for(const value of [true,false]){
+      const variant=variants.find((node:any)=>node.name===`compact=${value}`);
+      const extra=variant?.findOne((node:any)=>node.type==='TEXT' && node.characters==='More');
+      const label=variant?.findOne((node:any)=>node.type==='TEXT' && node.characters==='Hi');
+      check(`false side: actual canvas compact=${value} shows More exactly on the false plane`,
+        !!label && label.visible!==false && (extra?.visible!==false && !!extra)===!value);
+    }
+  }
+  check('false side: proposal and emission leave the complete source fixture unchanged',JSON.stringify(falseSideDump)===falseSideSource);
+
 }
 
 // ---------------------------------------------------------------------------

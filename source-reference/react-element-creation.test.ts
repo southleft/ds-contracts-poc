@@ -27,6 +27,13 @@ function Unsupported(){jsxs?.('div',{});jsxs(...unknown);return jsxs('div',{chil
   assert.throws(()=>readReactElementCreationSites("import {jsx} from 'react/jsx-runtime';const globalThis={};const C=props=>jsx('span',{...props});",'/shadow.mjs','shadow.mjs'),/reserved-binding/);
 });
 
+test('planning omits reserved-binding sites while observation still refuses the source',()=>{
+  const text="import React from 'react';function C(){ {const globalThis={};React.createElement('i',{});} return React.createElement('span',{});}";
+  assert.throws(()=>readReactElementCreationSites(text,'/mixed.mjs','mixed.mjs',true),/reserved-binding/);
+  const sites=readReactElementCreationSites(text,'/mixed.mjs','mixed.mjs',true,'omit');
+  assert.deepEqual(sites.map(s=>text.slice(s.span.start,s.span.end)),["React.createElement('span',{})"]);
+});
+
 test('source analysis does not execute initializer or wrapper factories',()=>{
   const text=`import {jsx} from 'react/jsx-runtime';throw Error('do not execute');
 const Element=unknownWrapper(()=>jsx('span',{}));const forged={jsx};forged.jsx('button',{});`;
@@ -108,4 +115,27 @@ test('runtime joins require exact type, props and reciprocal owner identities; f
     })()`);
     assert.deepEqual(result,{matched:true,reciprocal:true,wrongProps:false,wrongType:false,wrongOwner:false,refused:['element-creation-factory-unproved','element-creation-result-changed']});
   }finally{await browser.close();}
+});
+
+test('original factory discovery respects TypeScript and TSX source syntax',()=>{
+  for(const ext of ['ts','tsx']){
+    const text=`import * as React from 'react'; type Input={children?:React.ReactNode}; export const Control=(props:Input)=>React.createElement('button',props);`;
+    const sites=readReactElementCreationSites(text,'/source/control.'+ext,'control.'+ext,true);
+    assert.equal(sites.length,1);assert.equal(sites[0].factory,'createElement');
+    assert.equal(text.slice(sites[0].span.start,sites[0].span.end),"React.createElement('button',props)");
+  }
+  assert.throws(()=>readReactElementCreationSites('const broken = (','/source/control.tsx','control.tsx',true),/source-syntax/);
+});
+
+
+test('external React importers are left uninstrumented without blocking witnessed workspace sites',async t=>{
+ const text="import {jsx} from 'react/jsx-runtime';export const C=()=>jsx('button',{});";
+ const own=fixture(t,text),foreign=fixture(t,"import React from 'react';export const Outside=()=>React.createElement('span',{});");
+ own.reference.sourceRoot=path.dirname(own.file);
+ own.reference.files[foreign.file]=foreign.reference.files[foreign.file];
+ own.reference.runtimeImports.push({importer:foreign.file,specifier:'react',file:path.join(process.cwd(),'node_modules/react/index.js')});
+ const observer=createReactElementCreationObserver(own.reference);
+ assert.equal(observer.sites.length,1);assert.equal(observer.sites[0].module,'fixture.mjs');
+ assert.equal(observer.transformedSources.some(r=>r.file===foreign.file),false);
+ const source=readFileSync(foreign.file,'utf8');assert.equal((await observer.transform(source,foreign.file,'js')).contents,source);
 });

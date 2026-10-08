@@ -1,0 +1,3428 @@
+{
+  "source": {
+    "fileKey": "zsPTBEGbYcToMLRs9IoRL7",
+    "componentSetId": "98815:169405",
+    "variantId": "98815:169404",
+    "sourceDumpSha256": "74f56a59dfd800d6425b9d643fef5d337ead87f3f009a46806a8fd74cd4bd1c1",
+    "pngSha256": "2b74ed7dc4832972a1631878fd4d46952b5c91d4785992d458547de39b64f1e1",
+    "scope": "Native Figma export; original36-unit path rendered by14px instance, selected=false"
+  },
+  "contracts": [
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.inline-menu-item-menu-item",
+      "name": "InlineMenuItemMenuItem",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) \u2014 API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "selected",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Selected",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "selected"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "background-color": "{imported.inline-menu-item-menu-item.root.background-color.{selected}}",
+            "padding-inline": "{imported.inline-menu-item-menu-item.root.padding-inline}",
+            "padding-block": "{imported.inline-menu-item-menu-item.root.padding-block}"
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
+          "instanceRootInputs": [
+            "opacity",
+            "width",
+            "height",
+            "background-color"
+          ],
+          "parts": {
+            "iconChangeSizeHere": {
+              "component": {
+                "id": "ds.icon-wrapper",
+                "props": {
+                  "size": "14px",
+                  "union": true
+                },
+                "rootOverrides": {
+                  "width": "{imported.shared.size-14}",
+                  "height": "{imported.shared.size-14}"
+                }
+              },
+              "parts": {
+                "selectedContent": {
+                  "component": {
+                    "id": "ds.setting",
+                    "overrides": {
+                      "size": "{imported.shared.size-14}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "bindings": {
+        "figma": {
+          "anchors": {
+            "fileKey": "zsPTBEGbYcToMLRs9IoRL7",
+            "componentSetKey": "79cfdead33394b92178d33a883f2c40e68d9feb2",
+            "nodeId": "98815:169405"
+          }
+        },
+        "code": {
+          "anchors": {
+            "importPath": "src/components/InlineMenuItemMenuItem",
+            "export": "InlineMenuItemMenuItem"
+          }
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icon-wrapper",
+      "name": "IconWrapper",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "\u56fe\u6807\u5305\u88f910px,\n\u041e\u0431\u0435\u0440\u0442\u043a\u0430 \u0438\u043a\u043e\u043d\u043a\u0438 10 \u043f\u0438\u043a\u0441.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "10px",
+              "128px",
+              "104px",
+              "64px",
+              "48px",
+              "32px",
+              "24px",
+              "22px",
+              "20px",
+              "18px",
+              "16px",
+              "14px",
+              "12px"
+            ]
+          },
+          "default": "10px",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "10px": "10px",
+                "128px": "128px",
+                "104px": "104px",
+                "64px": "64px",
+                "48px": "48px",
+                "32px": "32px",
+                "24px": "24px",
+                "22px": "22px",
+                "20px": "20px",
+                "18px": "18px",
+                "16px": "16px",
+                "14px": "14px",
+                "12px": "12px"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "union",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Union",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "union"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "center",
+            "justify": "center"
+          },
+          "tokens": {
+            "background-color": "{imported.icon-wrapper.root.background-color}"
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
+          "declared": {
+            "overflow-x": "hidden",
+            "overflow-y": "hidden"
+          },
+          "instanceRootInputs": [
+            "opacity",
+            "width",
+            "height",
+            "background-color"
+          ],
+          "parts": {
+            "Setting": {
+              "tokens": {
+                "width": "{imported.icon-wrapper.setting.width.{size}}",
+                "height": "{imported.icon-wrapper.setting.height.{size}}",
+                "flex-shrink": "{imported.shared.num-0}"
+              },
+              "slot": {
+                "name": "children",
+                "bindings": {
+                  "figma": {
+                    "property": "Icon"
+                  }
+                },
+                "defaultContent": [
+                  {
+                    "id": "ds.setting"
+                  }
+                ],
+                "renderDefault": true,
+                "collapseWhenEmpty": true
+              },
+              "presenceByCombination": {
+                "props": [
+                  "union"
+                ],
+                "rows": [
+                  {
+                    "values": [
+                      "false"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "true"
+                    ],
+                    "present": false
+                  }
+                ]
+              },
+              "parts": {
+                "defaultContent": {
+                  "component": {
+                    "id": "ds.setting",
+                    "overrides": {
+                      "size": "{imported.icon-wrapper.setting.size.{size}}"
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "union",
+                    "equals": false
+                  }
+                }
+              }
+            },
+            "wrapper": {
+              "tokens": {
+                "width": "{imported.icon-wrapper.wrapper.width.{size}}",
+                "height": "{imported.icon-wrapper.wrapper.height.{size}}",
+                "flex-shrink": "{imported.shared.num-0}"
+              },
+              "declared": {
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "relative"
+              },
+              "presenceByCombination": {
+                "props": [
+                  "size",
+                  "union"
+                ],
+                "rows": [
+                  {
+                    "values": [
+                      "104px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "104px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "10px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "10px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "128px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "128px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "12px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "12px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "14px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "14px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "16px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "16px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "18px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "18px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "20px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "20px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "22px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "22px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "24px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "24px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "32px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "32px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "48px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "48px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "64px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "64px",
+                      "true"
+                    ],
+                    "present": true
+                  }
+                ]
+              },
+              "parts": {
+                "Union": {
+                  "element": "div",
+                  "tokens": {
+                    "left": "{imported.icon-wrapper.wrapper-union.left.{size}}",
+                    "top": "{imported.icon-wrapper.wrapper-union.top}"
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "slot": {
+                    "name": "children",
+                    "bindings": {
+                      "figma": {
+                        "property": "Icon"
+                      }
+                    },
+                    "defaultContent": [
+                      {
+                        "id": "ds.setting"
+                      }
+                    ]
+                  },
+                  "presenceByCombination": {
+                    "props": [
+                      "size",
+                      "union"
+                    ],
+                    "rows": [
+                      {
+                        "values": [
+                          "104px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "104px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "10px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "10px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "128px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "128px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "12px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "12px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "14px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "14px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "16px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "16px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "18px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "18px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "20px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "20px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "22px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "22px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "24px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "24px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "32px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "32px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "48px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "48px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "64px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "64px",
+                          "true"
+                        ],
+                        "present": true
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "frame41": {
+              "tokens": {
+                "width": "{imported.icon-wrapper.frame-41.width}",
+                "height": "{imported.icon-wrapper.frame-41.height}",
+                "flex-shrink": "{imported.shared.num-0}"
+              },
+              "declared": {
+                "position": "relative"
+              },
+              "presenceByCombination": {
+                "props": [
+                  "size",
+                  "union"
+                ],
+                "rows": [
+                  {
+                    "values": [
+                      "104px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "104px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "10px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "10px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "128px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "128px",
+                      "true"
+                    ],
+                    "present": true
+                  },
+                  {
+                    "values": [
+                      "12px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "12px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "14px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "14px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "16px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "16px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "18px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "18px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "20px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "20px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "22px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "22px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "24px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "24px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "32px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "32px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "48px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "48px",
+                      "true"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "64px",
+                      "false"
+                    ],
+                    "present": false
+                  },
+                  {
+                    "values": [
+                      "64px",
+                      "true"
+                    ],
+                    "present": false
+                  }
+                ]
+              },
+              "parts": {
+                "frame41Union": {
+                  "element": "div",
+                  "tokens": {
+                    "left": "{imported.icon-wrapper.frame-41-union.left}",
+                    "top": "{imported.icon-wrapper.frame-41-union.top}"
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "slot": {
+                    "name": "children",
+                    "bindings": {
+                      "figma": {
+                        "property": "Icon"
+                      }
+                    },
+                    "defaultContent": [
+                      {
+                        "id": "ds.setting"
+                      }
+                    ]
+                  },
+                  "presenceByCombination": {
+                    "props": [
+                      "size",
+                      "union"
+                    ],
+                    "rows": [
+                      {
+                        "values": [
+                          "104px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "104px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "10px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "10px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "128px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "128px",
+                          "true"
+                        ],
+                        "present": true
+                      },
+                      {
+                        "values": [
+                          "12px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "12px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "14px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "14px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "16px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "16px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "18px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "18px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "20px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "20px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "22px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "22px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "24px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "24px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "32px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "32px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "48px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "48px",
+                          "true"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "64px",
+                          "false"
+                        ],
+                        "present": false
+                      },
+                      {
+                        "values": [
+                          "64px",
+                          "true"
+                        ],
+                        "present": false
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "bindings": {
+        "figma": {
+          "anchors": {
+            "fileKey": "zsPTBEGbYcToMLRs9IoRL7",
+            "componentSetKey": "e7a81de2f6e7fd1722fe231c4e49e7a1bd7ef43d",
+            "nodeId": "96529:163520"
+          }
+        },
+        "code": {
+          "anchors": {
+            "importPath": "src/components/IconWrapper",
+            "export": "IconWrapper"
+          }
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.setting",
+      "name": "Setting",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) \u2014 API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "tokens": {
+            "width": "{imported.setting.root.width}",
+            "height": "{imported.setting.root.height}",
+            "color": "{imported.setting.vector.background-color}"
+          },
+          "declared": {
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "relative"
+          },
+          "overridable": [
+            "size",
+            "color"
+          ],
+          "instanceRootInputs": [
+            "opacity"
+          ],
+          "parts": {
+            "Vector": {
+              "shape": {
+                "kind": "path",
+                "parentViewport": {
+                  "width": 36,
+                  "height": 36,
+                  "x": 0.9558225274085999,
+                  "y": -0.00016743052401579916
+                },
+                "paths": [
+                  {
+                    "data": "M33.6295 22.5743L30.9978 20.3243C31.1223 19.5609 31.1866 18.7815 31.1866 18.002C31.1866 17.2225 31.1223 16.4431 30.9978 15.6797L33.6295 13.4297C33.828 13.2598 33.97 13.0334 34.0368 12.7808C34.1035 12.5282 34.0918 12.2612 34.0031 12.0154L33.967 11.9109C33.2425 9.88604 32.1576 8.00894 30.7647 6.37031L30.6924 6.28594C30.5235 6.08726 30.2983 5.94445 30.0465 5.87631C29.7947 5.80817 29.5283 5.81791 29.2822 5.90424L26.0156 7.0654C24.8103 6.07701 23.4643 5.29754 22.0098 4.75112L21.379 1.33594C21.3314 1.07896 21.2068 0.842554 21.0216 0.658116C20.8365 0.473678 20.5996 0.349942 20.3424 0.303348L20.2339 0.283259C18.1406 -0.0944196 15.9388 -0.0944196 13.8455 0.283259L13.7371 0.303348C13.4799 0.349942 13.243 0.473678 13.0579 0.658116C12.8727 0.842554 12.748 1.07896 12.7005 1.33594L12.0656 4.76719C10.6228 5.31373 9.27912 6.09278 8.08796 7.07344L4.79733 5.90424C4.5513 5.81722 4.28461 5.80713 4.03271 5.87531C3.78081 5.94349 3.55562 6.08671 3.38706 6.28594L3.31474 6.37031C1.92354 8.0101 0.83884 9.88689 0.112508 11.9109L0.0763474 12.0154C-0.104456 12.5176 0.0442046 13.0801 0.450008 13.4297L3.11385 15.7038C2.98929 16.4592 2.92903 17.2306 2.92903 17.998C2.92903 18.7694 2.98929 19.5408 3.11385 20.2922L0.450008 22.5663C0.251509 22.7362 0.10944 22.9626 0.0426938 23.2152C-0.0240528 23.4678 -0.0123147 23.7348 0.0763474 23.9806L0.112508 24.085C0.83974 26.11 1.91653 27.9783 3.31474 29.6257L3.38706 29.71C3.55603 29.9087 3.78123 30.0515 4.03298 30.1197C4.28473 30.1878 4.55122 30.1781 4.79733 30.0917L8.08796 28.9225C9.28528 29.9069 10.6232 30.6864 12.0656 31.2288L12.7005 34.66C12.748 34.917 12.8727 35.1534 13.0579 35.3379C13.243 35.5223 13.4799 35.646 13.7371 35.6926L13.8455 35.7127C15.9581 36.0924 18.1214 36.0924 20.2339 35.7127L20.3424 35.6926C20.5996 35.646 20.8365 35.5223 21.0216 35.3379C21.2068 35.1534 21.3314 34.917 21.379 34.66L22.0098 31.2449C23.4637 30.6999 24.8173 29.9179 26.0156 28.9306L29.2822 30.0917C29.5282 30.1788 29.7949 30.1889 30.0468 30.1207C30.2987 30.0525 30.5239 29.9093 30.6924 29.71L30.7647 29.6257C32.163 27.9743 33.2397 26.11 33.967 24.085L34.0031 23.9806C34.1839 23.4864 34.0353 22.9239 33.6295 22.5743ZM28.1451 16.1538C28.2455 16.7605 28.2978 17.3833 28.2978 18.006C28.2978 18.6288 28.2455 19.2516 28.1451 19.8583L27.8799 21.4694L30.8813 24.0368C30.4263 25.085 29.8519 26.0773 29.1696 26.994L25.4411 25.6721L24.1795 26.7087C23.2192 27.4962 22.1505 28.115 20.9933 28.5489L19.4625 29.1234L18.7433 33.0208C17.6085 33.1493 16.4629 33.1493 15.3281 33.0208L14.6089 29.1154L13.0902 28.5328C11.9451 28.0989 10.8804 27.4801 9.92813 26.6967L8.66653 25.656L4.91385 26.99C4.23081 26.0699 3.66028 25.0775 3.20224 24.0328L6.23572 21.4413L5.97456 19.8342C5.87813 19.2355 5.8259 18.6167 5.8259 18.006C5.8259 17.3913 5.87412 16.7766 5.97456 16.1779L6.23572 14.5708L3.20224 11.9792C3.65626 10.9306 4.23081 9.94219 4.91385 9.0221L8.66653 10.356L9.92813 9.3154C10.8804 8.53192 11.9451 7.91317 13.0902 7.47924L14.613 6.90469L15.3322 2.99933C16.4612 2.87076 17.6143 2.87076 18.7473 2.99933L19.4665 6.89665L20.9973 7.47121C22.1505 7.90513 23.2232 8.52388 24.1835 9.31138L25.4451 10.348L29.1737 9.02612C29.8567 9.94621 30.4272 10.9386 30.8853 11.9833L27.8839 14.5507L28.1451 16.1538ZM17.0438 10.5328C13.1384 10.5328 9.97233 13.6989 9.97233 17.6042C9.97233 21.5096 13.1384 24.6757 17.0438 24.6757C20.9491 24.6757 24.1152 21.5096 24.1152 17.6042C24.1152 13.6989 20.9491 10.5328 17.0438 10.5328ZM20.2259 20.7864C19.8085 21.205 19.3125 21.5369 18.7664 21.763C18.2203 21.9892 17.6349 22.1052 17.0438 22.1042C15.8424 22.1042 14.7134 21.6342 13.8616 20.7864C13.443 20.369 13.1111 19.873 12.885 19.3269C12.6588 18.7808 12.5428 18.1953 12.5438 17.6042C12.5438 16.4029 13.0138 15.2739 13.8616 14.4221C14.7134 13.5703 15.8424 13.1042 17.0438 13.1042C18.2451 13.1042 19.3741 13.5703 20.2259 14.4221C20.6445 14.8395 20.9764 15.3355 21.2026 15.8816C21.4287 16.4277 21.5447 17.0131 21.5438 17.6042C21.5438 18.8056 21.0737 19.9346 20.2259 20.7864Z",
+                    "windingRule": "NONZERO"
+                  }
+                ],
+                "width": 34.0794792175293,
+                "height": 35.997501373291016
+              },
+              "tokens": {},
+              "literals": {
+                "background-color": "currentColor"
+              },
+              "declared": {
+                "position": "absolute"
+              }
+            }
+          }
+        }
+      },
+      "bindings": {
+        "figma": {
+          "anchors": {
+            "fileKey": "zsPTBEGbYcToMLRs9IoRL7",
+            "componentSetKey": "6cbc98ab8b5ab19ccdaf8eecfb911ac74cc3e8b5",
+            "nodeId": "80:327"
+          }
+        },
+        "code": {
+          "anchors": {
+            "importPath": "src/components/Setting",
+            "export": "Setting"
+          }
+        }
+      }
+    }
+  ],
+  "tokens": {
+    "primitives": {
+      "color": {
+        "$type": "color",
+        "white": {
+          "$value": "#FFFFFF"
+        },
+        "black": {
+          "$value": "#000000"
+        },
+        "gray": {
+          "50": {
+            "$value": "#F9FAFB"
+          },
+          "100": {
+            "$value": "#F3F4F6"
+          },
+          "200": {
+            "$value": "#E5E7EB"
+          },
+          "300": {
+            "$value": "#D1D5DB"
+          },
+          "400": {
+            "$value": "#9CA3AF"
+          },
+          "500": {
+            "$value": "#6B7280"
+          },
+          "600": {
+            "$value": "#4B5563"
+          },
+          "700": {
+            "$value": "#374151"
+          },
+          "800": {
+            "$value": "#1F2937"
+          },
+          "900": {
+            "$value": "#111827"
+          }
+        },
+        "blue": {
+          "100": {
+            "$value": "#DBEAFE"
+          },
+          "300": {
+            "$value": "#93C5FD"
+          },
+          "400": {
+            "$value": "#60A5FA"
+          },
+          "500": {
+            "$value": "#3B82F6"
+          },
+          "600": {
+            "$value": "#2563EB"
+          },
+          "700": {
+            "$value": "#1D4ED8"
+          },
+          "900": {
+            "$value": "#1E3A8A"
+          }
+        },
+        "red": {
+          "100": {
+            "$value": "#FEE2E2"
+          },
+          "300": {
+            "$value": "#FCA5A5"
+          },
+          "400": {
+            "$value": "#F87171"
+          },
+          "500": {
+            "$value": "#EF4444"
+          },
+          "600": {
+            "$value": "#DC2626"
+          },
+          "700": {
+            "$value": "#B91C1C"
+          },
+          "900": {
+            "$value": "#7F1D1D"
+          }
+        },
+        "green": {
+          "100": {
+            "$value": "#DCFCE7"
+          },
+          "500": {
+            "$value": "#22C55E"
+          },
+          "600": {
+            "$value": "#16A34A"
+          },
+          "700": {
+            "$value": "#15803D"
+          },
+          "900": {
+            "$value": "#14532D"
+          }
+        },
+        "amber": {
+          "100": {
+            "$value": "#FEF3C7"
+          },
+          "500": {
+            "$value": "#F59E0B"
+          },
+          "600": {
+            "$value": "#D97706"
+          },
+          "700": {
+            "$value": "#B45309"
+          },
+          "900": {
+            "$value": "#78350F"
+          }
+        },
+        "orange": {
+          "100": {
+            "$value": "#FFEDD5"
+          },
+          "700": {
+            "$value": "#C2410C"
+          },
+          "900": {
+            "$value": "#7C2D12"
+          }
+        },
+        "yellow": {
+          "100": {
+            "$value": "#FEF9C3"
+          },
+          "700": {
+            "$value": "#A16207"
+          },
+          "900": {
+            "$value": "#713F12"
+          }
+        },
+        "teal": {
+          "100": {
+            "$value": "#CCFBF1"
+          },
+          "300": {
+            "$type": "color",
+            "$value": "#5EEAD4"
+          },
+          "400": {
+            "$type": "color",
+            "$value": "#2DD4BF"
+          },
+          "500": {
+            "$type": "color",
+            "$value": "#14B8A6"
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#0D9488"
+          },
+          "700": {
+            "$value": "#0F766E"
+          },
+          "900": {
+            "$value": "#134E4A"
+          }
+        },
+        "cyan": {
+          "100": {
+            "$value": "#CFFAFE"
+          },
+          "700": {
+            "$value": "#0E7490"
+          },
+          "900": {
+            "$value": "#164E63"
+          }
+        },
+        "purple": {
+          "100": {
+            "$value": "#F3E8FF"
+          },
+          "300": {
+            "$type": "color",
+            "$value": "#D8B4FE"
+          },
+          "400": {
+            "$type": "color",
+            "$value": "#C084FC"
+          },
+          "500": {
+            "$type": "color",
+            "$value": "#A855F7"
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#9333EA"
+          },
+          "700": {
+            "$value": "#7E22CE"
+          },
+          "900": {
+            "$value": "#581C87"
+          }
+        },
+        "pink": {
+          "100": {
+            "$value": "#FCE7F3"
+          },
+          "700": {
+            "$value": "#BE185D"
+          },
+          "900": {
+            "$value": "#831843"
+          }
+        }
+      },
+      "space": {
+        "25": {
+          "$value": "2px"
+        },
+        "50": {
+          "$value": "4px"
+        },
+        "100": {
+          "$value": "8px"
+        },
+        "150": {
+          "$value": "12px"
+        },
+        "200": {
+          "$value": "16px"
+        },
+        "250": {
+          "$value": "20px"
+        },
+        "300": {
+          "$value": "24px"
+        },
+        "400": {
+          "$value": "32px"
+        },
+        "$type": "dimension",
+        "overlap": {
+          "$value": "-8px"
+        }
+      },
+      "radius": {
+        "100": {
+          "$value": "4px"
+        },
+        "200": {
+          "$value": "8px"
+        },
+        "$type": "dimension",
+        "pill": {
+          "$value": "999px"
+        },
+        "none": {
+          "$value": "0px"
+        }
+      },
+      "border-width": {
+        "100": {
+          "$value": "1px"
+        },
+        "200": {
+          "$value": "2px"
+        },
+        "$type": "dimension"
+      },
+      "container": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "320px"
+        },
+        "xs": {
+          "$value": "120px"
+        },
+        "md": {
+          "$value": "480px"
+        },
+        "lg": {
+          "$value": "640px"
+        }
+      },
+      "font": {
+        "family": {
+          "sans": {
+            "$type": "fontFamily",
+            "$value": "Inter, system-ui, -apple-system, sans-serif"
+          },
+          "mono": {
+            "$value": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+            "$type": "fontFamily"
+          }
+        },
+        "size": {
+          "100": {
+            "$value": "12px"
+          },
+          "200": {
+            "$value": "14px"
+          },
+          "300": {
+            "$value": "16px"
+          },
+          "400": {
+            "$value": "18px"
+          },
+          "$type": "dimension"
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "regular": {
+            "$value": 400
+          },
+          "medium": {
+            "$value": 500
+          },
+          "semibold": {
+            "$value": 600
+          }
+        }
+      },
+      "opacity": {
+        "$type": "number",
+        "disabled": {
+          "$value": 0.5
+        }
+      },
+      "control": {
+        "sm": {
+          "$value": "28px"
+        },
+        "md": {
+          "$value": "36px"
+        },
+        "lg": {
+          "$value": "44px"
+        }
+      }
+    },
+    "semantic": {
+      "imported": {
+        "icon-wrapper": {
+          "root": {
+            "background-color": {
+              "$value": "#ffffff00",
+              "$type": "color"
+            }
+          },
+          "setting": {
+            "size": {
+              "128px": {
+                "$value": "128px",
+                "$type": "dimension"
+              },
+              "104px": {
+                "$value": "104px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "64px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "18px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "10px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "128px": {
+                "$value": "128px",
+                "$type": "dimension"
+              },
+              "104px": {
+                "$value": "104px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "64px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "18px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "10px",
+                "$type": "dimension"
+              }
+            },
+            "height": {
+              "128px": {
+                "$value": "128px",
+                "$type": "dimension"
+              },
+              "104px": {
+                "$value": "104px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "64px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "18px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "10px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "wrapper": {
+            "width": {
+              "104px": {
+                "$value": "104px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "64px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "18px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "128px": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "height": {
+              "104px": {
+                "$value": "104px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "64px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "22px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "18px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "128px": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "wrapper-union": {
+            "left": {
+              "104px": {
+                "$value": "2.76px",
+                "$type": "dimension"
+              },
+              "64px": {
+                "$value": "1.7px",
+                "$type": "dimension"
+              },
+              "48px": {
+                "$value": "1.27px",
+                "$type": "dimension"
+              },
+              "32px": {
+                "$value": "0.88px",
+                "$type": "dimension"
+              },
+              "24px": {
+                "$value": "0.64px",
+                "$type": "dimension"
+              },
+              "22px": {
+                "$value": "0.58px",
+                "$type": "dimension"
+              },
+              "20px": {
+                "$value": "0.53px",
+                "$type": "dimension"
+              },
+              "18px": {
+                "$value": "0.48px",
+                "$type": "dimension"
+              },
+              "16px": {
+                "$value": "0.42px",
+                "$type": "dimension"
+              },
+              "14px": {
+                "$value": "0.37px",
+                "$type": "dimension"
+              },
+              "12px": {
+                "$value": "0.32px",
+                "$type": "dimension"
+              },
+              "10px": {
+                "$value": "0.27px",
+                "$type": "dimension"
+              },
+              "128px": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "top": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "frame-41": {
+            "width": {
+              "$value": "128px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "128px",
+              "$type": "dimension"
+            }
+          },
+          "frame-41-union": {
+            "left": {
+              "$value": "3.4px",
+              "$type": "dimension"
+            },
+            "top": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "shared": {
+          "num-0": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "size-14": {
+            "$value": "14px",
+            "$type": "dimension"
+          }
+        },
+        "setting": {
+          "vector": {
+            "background-color": {
+              "$value": "#000000d9",
+              "$type": "color"
+            }
+          },
+          "root": {
+            "width": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "36px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "inline-menu-item-menu-item": {
+          "root": {
+            "background-color": {
+              "true": {
+                "$value": "#e6f7ff",
+                "$type": "color"
+              },
+              "false": {
+                "$value": "#ffffff00",
+                "$type": "color"
+              }
+            },
+            "padding-inline": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "padding-block": {
+              "$value": "13px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "space": {
+        "inset-x": {
+          "$type": "dimension",
+          "sm": {
+            "$value": "{space.150}"
+          },
+          "md": {
+            "$value": "{space.200}"
+          },
+          "lg": {
+            "$value": "{space.300}"
+          },
+          "xs": {
+            "$type": "dimension",
+            "$value": "{space.100}"
+          }
+        },
+        "inset-y": {
+          "$type": "dimension",
+          "sm": {
+            "$value": "{space.50}"
+          },
+          "md": {
+            "$value": "{space.100}"
+          },
+          "lg": {
+            "$value": "{space.150}"
+          },
+          "xs": {
+            "$type": "dimension",
+            "$value": "{space.25}"
+          }
+        },
+        "gap": {
+          "$type": "dimension",
+          "control": {
+            "$value": "{space.100}"
+          },
+          "sm": {
+            "$value": "{space.100}"
+          },
+          "md": {
+            "$value": "{space.200}"
+          },
+          "lg": {
+            "$value": "{space.300}"
+          }
+        },
+        "table": {
+          "cell-y": {
+            "$type": "dimension",
+            "comfortable": {
+              "$value": "{space.150}"
+            },
+            "compact": {
+              "$value": "{space.50}"
+            }
+          }
+        },
+        "list": {
+          "compact": {
+            "$type": "dimension",
+            "$value": "{space.50}"
+          },
+          "balanced": {
+            "$type": "dimension",
+            "$value": "{space.100}"
+          },
+          "spacious": {
+            "$type": "dimension",
+            "$value": "{space.150}"
+          }
+        },
+        "avatarGroup": {
+          "overlap": {
+            "$type": "dimension",
+            "$value": "{space.overlap}"
+          }
+        }
+      },
+      "radius": {
+        "control": {
+          "$type": "dimension",
+          "$value": "{brand.radius.control}"
+        },
+        "badge": {
+          "$type": "dimension",
+          "$value": "{radius.pill}"
+        },
+        "card": {
+          "$type": "dimension",
+          "$value": "{radius.200}"
+        },
+        "avatar": {
+          "$type": "dimension",
+          "$value": "{radius.pill}"
+        },
+        "banner": {
+          "card": {
+            "$type": "dimension",
+            "$value": "{radius.200}"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "{radius.none}"
+          }
+        },
+        "skeleton": {
+          "text": {
+            "$value": "{radius.100}"
+          },
+          "rect": {
+            "$value": "{radius.200}"
+          },
+          "circle": {
+            "$value": "{radius.pill}"
+          }
+        }
+      },
+      "size": {
+        "avatar": {
+          "$type": "dimension",
+          "sm": {
+            "$value": "{space.300}"
+          },
+          "md": {
+            "$value": "{space.400}"
+          }
+        },
+        "card": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{container.sm}"
+          }
+        },
+        "table": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{container.md}"
+          },
+          "cell-width": {
+            "$type": "dimension",
+            "$value": "{container.xs}"
+          }
+        },
+        "banner": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{container.lg}"
+          }
+        },
+        "icon-button": {
+          "sm": {
+            "$type": "dimension",
+            "$value": "{control.sm}"
+          },
+          "md": {
+            "$type": "dimension",
+            "$value": "{control.md}"
+          },
+          "lg": {
+            "$type": "dimension",
+            "$value": "{control.lg}"
+          }
+        },
+        "checkbox": {
+          "sm": {
+            "$type": "dimension",
+            "$value": "{space.200}"
+          },
+          "md": {
+            "$type": "dimension",
+            "$value": "{space.250}"
+          }
+        },
+        "dot": {
+          "$type": "dimension",
+          "$value": "{space.100}"
+        },
+        "divider": {
+          "length": {
+            "$type": "dimension",
+            "$value": "{container.sm}"
+          }
+        },
+        "toolbar": {
+          "sm": {
+            "$type": "dimension",
+            "$value": "{control.sm}"
+          },
+          "md": {
+            "$type": "dimension",
+            "$value": "{control.md}"
+          },
+          "lg": {
+            "$type": "dimension",
+            "$value": "{control.lg}"
+          }
+        },
+        "progress": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{container.sm}"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "{space.100}"
+          }
+        },
+        "slider": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{container.sm}"
+          },
+          "track": {
+            "$type": "dimension",
+            "$value": "{space.50}"
+          },
+          "thumb": {
+            "$type": "dimension",
+            "$value": "{space.200}"
+          }
+        },
+        "switch": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{space.400}"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "{space.250}"
+          },
+          "thumb": {
+            "$type": "dimension",
+            "$value": "{space.200}"
+          }
+        },
+        "spinner": {
+          "sm": {
+            "$type": "dimension",
+            "$value": "{space.150}"
+          },
+          "md": {
+            "$type": "dimension",
+            "$value": "{space.200}"
+          },
+          "lg": {
+            "$type": "dimension",
+            "$value": "{space.300}"
+          }
+        },
+        "skeleton": {
+          "text": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{container.xs}"
+            },
+            "height": {
+              "$type": "dimension",
+              "$value": "{space.150}"
+            }
+          },
+          "rect": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{container.sm}"
+            },
+            "height": {
+              "$type": "dimension",
+              "$value": "{space.400}"
+            }
+          },
+          "circle": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{space.400}"
+            },
+            "height": {
+              "$type": "dimension",
+              "$value": "{space.400}"
+            }
+          }
+        }
+      },
+      "border": {
+        "width": {
+          "$type": "dimension",
+          "focus": {
+            "$value": "{border-width.200}"
+          },
+          "divider": {
+            "subtle": {
+              "$value": "{border-width.100}"
+            },
+            "strong": {
+              "$value": "{border-width.200}"
+            }
+          }
+        }
+      },
+      "font": {
+        "control": {
+          "family": {
+            "$type": "fontFamily",
+            "$value": "{brand.font.control-family}"
+          },
+          "weight": {
+            "$type": "fontWeight",
+            "$value": "{brand.font.control-weight}"
+          },
+          "size": {
+            "$type": "dimension",
+            "sm": {
+              "$value": "{font.size.200}"
+            },
+            "md": {
+              "$value": "{font.size.300}"
+            },
+            "lg": {
+              "$value": "{font.size.400}"
+            }
+          }
+        },
+        "badge": {
+          "size": {
+            "$type": "dimension",
+            "$value": "{font.size.100}"
+          }
+        },
+        "title": {
+          "size": {
+            "$type": "dimension",
+            "$value": "{font.size.300}"
+          },
+          "weight": {
+            "$type": "fontWeight",
+            "$value": "{font.weight.semibold}"
+          }
+        },
+        "avatar": {
+          "size": {
+            "$type": "dimension",
+            "sm": {
+              "$value": "{font.size.100}"
+            },
+            "md": {
+              "$value": "{font.size.200}"
+            }
+          }
+        },
+        "code": {
+          "family": {
+            "$type": "fontFamily",
+            "$value": "{font.family.mono}"
+          }
+        },
+        "tab": {
+          "default": {
+            "weight": {
+              "$type": "fontWeight",
+              "$value": "{font.weight.medium}"
+            }
+          },
+          "selected": {
+            "weight": {
+              "$type": "fontWeight",
+              "$value": "{font.weight.semibold}"
+            }
+          }
+        }
+      }
+    },
+    "light": {
+      "color": {
+        "surface": {
+          "background": {
+            "$value": "{color.gray.50}"
+          },
+          "foreground": {
+            "$value": "{color.gray.900}"
+          },
+          "$type": "color",
+          "raised": {
+            "$value": "{color.white}"
+          },
+          "sunken": {
+            "$value": "{color.gray.100}"
+          }
+        },
+        "action": {
+          "primary": {
+            "background": {
+              "$value": "{brand.accent.600}"
+            },
+            "background-hover": {
+              "$value": "{brand.accent.700}"
+            },
+            "foreground": {
+              "$value": "{color.white}"
+            }
+          },
+          "secondary": {
+            "background": {
+              "$value": "{color.gray.200}"
+            },
+            "background-hover": {
+              "$value": "{color.gray.300}"
+            },
+            "foreground": {
+              "$value": "{color.gray.900}"
+            }
+          },
+          "danger": {
+            "background": {
+              "$value": "{color.red.600}"
+            },
+            "background-hover": {
+              "$value": "{color.red.700}"
+            },
+            "foreground": {
+              "$value": "{color.white}"
+            }
+          },
+          "$type": "color",
+          "destructive": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.600}"
+            },
+            "background-hover": {
+              "$type": "color",
+              "$value": "{color.red.700}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}"
+            }
+          },
+          "ghost": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.50}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            },
+            "background-hover": {
+              "$type": "color",
+              "$value": "{color.gray.200}"
+            }
+          }
+        },
+        "border": {
+          "focus": {
+            "$value": "{brand.accent.500}"
+          },
+          "$type": "color",
+          "subtle": {
+            "$value": "{color.gray.200}"
+          }
+        },
+        "feedback": {
+          "info": {
+            "background": {
+              "$value": "{color.blue.100}"
+            },
+            "foreground": {
+              "$value": "{color.blue.700}"
+            }
+          },
+          "success": {
+            "background": {
+              "$value": "{color.green.100}"
+            },
+            "foreground": {
+              "$value": "{color.green.700}"
+            }
+          },
+          "warning": {
+            "background": {
+              "$value": "{color.amber.100}"
+            },
+            "foreground": {
+              "$value": "{color.amber.700}"
+            }
+          },
+          "danger": {
+            "background": {
+              "$value": "{color.red.100}"
+            },
+            "foreground": {
+              "$value": "{color.red.700}"
+            }
+          },
+          "$type": "color",
+          "error": {
+            "background": {
+              "$value": "{color.red.100}"
+            },
+            "foreground": {
+              "$value": "{color.red.700}"
+            }
+          }
+        },
+        "identity": {
+          "$type": "color",
+          "background": {
+            "$value": "{brand.accent.100}"
+          },
+          "foreground": {
+            "$value": "{brand.accent.700}"
+          }
+        },
+        "table": {
+          "$type": "color",
+          "row": {
+            "default": {
+              "$value": "{color.white}"
+            },
+            "selected": {
+              "$value": "{brand.accent.100}"
+            }
+          }
+        },
+        "token": {
+          "default": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            }
+          },
+          "gray": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.200}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            }
+          },
+          "red": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.red.700}"
+            }
+          },
+          "orange": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.orange.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.orange.700}"
+            }
+          },
+          "yellow": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.yellow.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.yellow.700}"
+            }
+          },
+          "green": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.green.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.green.700}"
+            }
+          },
+          "teal": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.teal.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.teal.700}"
+            }
+          },
+          "cyan": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.cyan.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.cyan.700}"
+            }
+          },
+          "blue": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.blue.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.blue.700}"
+            }
+          },
+          "purple": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.purple.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.purple.700}"
+            }
+          },
+          "pink": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.pink.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.pink.700}"
+            }
+          }
+        },
+        "status": {
+          "success": {
+            "$type": "color",
+            "$value": "{color.green.600}"
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{color.amber.500}"
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{color.red.600}"
+          },
+          "accent": {
+            "$type": "color",
+            "$value": "{brand.accent.600}"
+          },
+          "neutral": {
+            "$type": "color",
+            "$value": "{color.gray.400}"
+          }
+        },
+        "divider": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.gray.200}"
+          },
+          "strong": {
+            "$type": "color",
+            "$value": "{color.gray.400}"
+          }
+        },
+        "input": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.white}"
+          },
+          "placeholder": {
+            "$type": "color",
+            "$value": "{color.gray.500}"
+          }
+        },
+        "toast": {
+          "info": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            }
+          },
+          "error": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.600}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}"
+            }
+          }
+        },
+        "text": {
+          "secondary": {
+            "$type": "color",
+            "$value": "{color.gray.600}"
+          }
+        },
+        "checkbox": {
+          "unchecked": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.white}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.gray.400}"
+            }
+          },
+          "checked": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            }
+          },
+          "indeterminate": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            }
+          },
+          "icon": {
+            "$type": "color",
+            "$value": "{color.white}"
+          }
+        },
+        "section": {
+          "section": {
+            "$type": "color",
+            "$value": "{color.white}"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "{color.gray.100}"
+          }
+        },
+        "chat": {
+          "user": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.900}"
+            }
+          },
+          "assistant": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.900}"
+            }
+          },
+          "system": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.50}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.600}"
+            }
+          }
+        },
+        "tab": {
+          "default": {
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.600}"
+            }
+          },
+          "selected": {
+            "foreground": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            }
+          }
+        },
+        "nav": {
+          "selected": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{brand.accent.700}"
+            }
+          },
+          "default": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.white}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            }
+          }
+        },
+        "switch": {
+          "off": {
+            "track": {
+              "$type": "color",
+              "$value": "{color.gray.300}"
+            }
+          },
+          "on": {
+            "track": {
+              "$type": "color",
+              "$value": "{brand.accent.600}"
+            }
+          },
+          "thumb": {
+            "$type": "color",
+            "$value": "{color.white}"
+          }
+        },
+        "progress": {
+          "track": {
+            "$type": "color",
+            "$value": "{color.gray.200}"
+          },
+          "accent": {
+            "$type": "color",
+            "$value": "{brand.accent.600}"
+          },
+          "success": {
+            "$type": "color",
+            "$value": "{color.green.600}"
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{color.amber.500}"
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{color.red.600}"
+          },
+          "neutral": {
+            "$type": "color",
+            "$value": "{color.gray.500}"
+          }
+        },
+        "skeleton": {
+          "$type": "color",
+          "$value": "{color.gray.200}"
+        }
+      }
+    },
+    "dark": {
+      "color": {
+        "surface": {
+          "background": {
+            "$value": "{color.gray.800}"
+          },
+          "foreground": {
+            "$value": "{color.gray.100}"
+          },
+          "$type": "color",
+          "raised": {
+            "$value": "{color.gray.700}"
+          },
+          "sunken": {
+            "$value": "{color.gray.800}"
+          }
+        },
+        "action": {
+          "primary": {
+            "background": {
+              "$value": "{brand.accent.500}"
+            },
+            "background-hover": {
+              "$value": "{brand.accent.400}"
+            },
+            "foreground": {
+              "$value": "{color.white}"
+            }
+          },
+          "secondary": {
+            "background": {
+              "$value": "{color.gray.700}"
+            },
+            "background-hover": {
+              "$value": "{color.gray.600}"
+            },
+            "foreground": {
+              "$value": "{color.gray.100}"
+            }
+          },
+          "danger": {
+            "background": {
+              "$value": "{color.red.500}"
+            },
+            "background-hover": {
+              "$value": "{color.red.400}"
+            },
+            "foreground": {
+              "$value": "{color.white}"
+            }
+          },
+          "$type": "color",
+          "destructive": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.500}"
+            },
+            "background-hover": {
+              "$type": "color",
+              "$value": "{color.red.400}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}"
+            }
+          },
+          "ghost": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.800}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.200}"
+            },
+            "background-hover": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            }
+          }
+        },
+        "border": {
+          "focus": {
+            "$value": "{brand.accent.300}"
+          },
+          "$type": "color",
+          "subtle": {
+            "$value": "{color.gray.600}"
+          }
+        },
+        "feedback": {
+          "info": {
+            "background": {
+              "$value": "{color.blue.900}"
+            },
+            "foreground": {
+              "$value": "{color.blue.100}"
+            }
+          },
+          "success": {
+            "background": {
+              "$value": "{color.green.900}"
+            },
+            "foreground": {
+              "$value": "{color.green.100}"
+            }
+          },
+          "warning": {
+            "background": {
+              "$value": "{color.amber.900}"
+            },
+            "foreground": {
+              "$value": "{color.amber.100}"
+            }
+          },
+          "danger": {
+            "background": {
+              "$value": "{color.red.900}"
+            },
+            "foreground": {
+              "$value": "{color.red.100}"
+            }
+          },
+          "$type": "color",
+          "error": {
+            "background": {
+              "$value": "{color.red.900}"
+            },
+            "foreground": {
+              "$value": "{color.red.100}"
+            }
+          }
+        },
+        "identity": {
+          "$type": "color",
+          "background": {
+            "$value": "{brand.accent.900}"
+          },
+          "foreground": {
+            "$value": "{brand.accent.100}"
+          }
+        },
+        "table": {
+          "$type": "color",
+          "row": {
+            "default": {
+              "$value": "{color.gray.700}"
+            },
+            "selected": {
+              "$value": "{brand.accent.900}"
+            }
+          }
+        },
+        "token": {
+          "default": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            }
+          },
+          "gray": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.600}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            }
+          },
+          "red": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.red.100}"
+            }
+          },
+          "orange": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.orange.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.orange.100}"
+            }
+          },
+          "yellow": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.yellow.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.yellow.100}"
+            }
+          },
+          "green": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.green.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.green.100}"
+            }
+          },
+          "teal": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.teal.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.teal.100}"
+            }
+          },
+          "cyan": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.cyan.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.cyan.100}"
+            }
+          },
+          "blue": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.blue.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.blue.100}"
+            }
+          },
+          "purple": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.purple.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.purple.100}"
+            }
+          },
+          "pink": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.pink.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.pink.100}"
+            }
+          }
+        },
+        "status": {
+          "success": {
+            "$type": "color",
+            "$value": "{color.green.500}"
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{color.amber.500}"
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{color.red.500}"
+          },
+          "accent": {
+            "$type": "color",
+            "$value": "{brand.accent.400}"
+          },
+          "neutral": {
+            "$type": "color",
+            "$value": "{color.gray.500}"
+          }
+        },
+        "divider": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.gray.600}"
+          },
+          "strong": {
+            "$type": "color",
+            "$value": "{color.gray.500}"
+          }
+        },
+        "input": {
+          "background": {
+            "$type": "color",
+            "$value": "{color.gray.700}"
+          },
+          "placeholder": {
+            "$type": "color",
+            "$value": "{color.gray.400}"
+          }
+        },
+        "toast": {
+          "info": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.900}"
+            }
+          },
+          "error": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.red.500}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.white}"
+            }
+          }
+        },
+        "text": {
+          "secondary": {
+            "$type": "color",
+            "$value": "{color.gray.300}"
+          }
+        },
+        "checkbox": {
+          "unchecked": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.gray.500}"
+            }
+          },
+          "checked": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.500}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{brand.accent.500}"
+            }
+          },
+          "indeterminate": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.500}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{brand.accent.500}"
+            }
+          },
+          "icon": {
+            "$type": "color",
+            "$value": "{color.white}"
+          }
+        },
+        "section": {
+          "section": {
+            "$type": "color",
+            "$value": "{color.gray.700}"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "{color.gray.800}"
+          }
+        },
+        "chat": {
+          "user": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            }
+          },
+          "assistant": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.100}"
+            }
+          },
+          "system": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.800}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.300}"
+            }
+          }
+        },
+        "tab": {
+          "default": {
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.300}"
+            }
+          },
+          "selected": {
+            "foreground": {
+              "$type": "color",
+              "$value": "{brand.accent.400}"
+            }
+          }
+        },
+        "nav": {
+          "selected": {
+            "background": {
+              "$type": "color",
+              "$value": "{brand.accent.900}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{brand.accent.100}"
+            }
+          },
+          "default": {
+            "background": {
+              "$type": "color",
+              "$value": "{color.gray.700}"
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{color.gray.200}"
+            }
+          }
+        },
+        "switch": {
+          "off": {
+            "track": {
+              "$type": "color",
+              "$value": "{color.gray.500}"
+            }
+          },
+          "on": {
+            "track": {
+              "$type": "color",
+              "$value": "{brand.accent.500}"
+            }
+          },
+          "thumb": {
+            "$type": "color",
+            "$value": "{color.white}"
+          }
+        },
+        "progress": {
+          "track": {
+            "$type": "color",
+            "$value": "{color.gray.600}"
+          },
+          "accent": {
+            "$type": "color",
+            "$value": "{brand.accent.400}"
+          },
+          "success": {
+            "$type": "color",
+            "$value": "{color.green.500}"
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{color.amber.500}"
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{color.red.500}"
+          },
+          "neutral": {
+            "$type": "color",
+            "$value": "{color.gray.400}"
+          }
+        },
+        "skeleton": {
+          "$type": "color",
+          "$value": "{color.gray.600}"
+        }
+      }
+    },
+    "brands": {
+      "default": {
+        "brand": {
+          "accent": {
+            "100": {
+              "$type": "color",
+              "$value": "{color.blue.100}"
+            },
+            "300": {
+              "$type": "color",
+              "$value": "{color.blue.300}"
+            },
+            "400": {
+              "$type": "color",
+              "$value": "{color.blue.400}"
+            },
+            "500": {
+              "$type": "color",
+              "$value": "{color.blue.500}"
+            },
+            "600": {
+              "$type": "color",
+              "$value": "{color.blue.600}"
+            },
+            "700": {
+              "$type": "color",
+              "$value": "{color.blue.700}"
+            },
+            "900": {
+              "$type": "color",
+              "$value": "{color.blue.900}"
+            }
+          },
+          "radius": {
+            "control": {
+              "$type": "dimension",
+              "$value": "{radius.200}"
+            }
+          },
+          "font": {
+            "control-family": {
+              "$type": "fontFamily",
+              "$value": "{font.family.sans}"
+            },
+            "control-weight": {
+              "$type": "fontWeight",
+              "$value": "{font.weight.medium}"
+            }
+          }
+        }
+      },
+      "aurora": {
+        "brand": {
+          "accent": {
+            "100": {
+              "$type": "color",
+              "$value": "{color.teal.100}"
+            },
+            "300": {
+              "$type": "color",
+              "$value": "{color.teal.300}"
+            },
+            "400": {
+              "$type": "color",
+              "$value": "{color.teal.400}"
+            },
+            "500": {
+              "$type": "color",
+              "$value": "{color.teal.500}"
+            },
+            "600": {
+              "$type": "color",
+              "$value": "{color.teal.600}"
+            },
+            "700": {
+              "$type": "color",
+              "$value": "{color.teal.700}"
+            },
+            "900": {
+              "$type": "color",
+              "$value": "{color.teal.900}"
+            }
+          },
+          "radius": {
+            "control": {
+              "$type": "dimension",
+              "$value": "{radius.none}"
+            }
+          },
+          "font": {
+            "control-family": {
+              "$type": "fontFamily",
+              "$value": "{font.family.mono}"
+            },
+            "control-weight": {
+              "$type": "fontWeight",
+              "$value": "{font.weight.semibold}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

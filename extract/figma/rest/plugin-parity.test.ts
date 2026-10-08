@@ -30,6 +30,8 @@ interface Fact {
   /** Plugin spelling (MIN/MAX/STRETCH …) — REST spelling derived below. */
   constraints?: { horizontal: string; vertical: string };
   layoutPositioning?: 'ABSOLUTE';
+  isMask?: boolean;
+  maskType?: string;
   stroke?: { align: 'INSIDE' | 'CENTER' | 'OUTSIDE'; weight: number };
   text?: {
     characters: string;
@@ -74,6 +76,8 @@ function restNode(f: Fact, i: number): RestNode {
     absoluteBoundingBox: f.box,
     constraints: { horizontal: REST_H[c.horizontal], vertical: REST_V[c.vertical] },
     ...(f.layoutPositioning ? { layoutPositioning: f.layoutPositioning } : {}),
+    ...(f.isMask !== undefined ? { isMask: f.isMask } : {}),
+    ...(f.maskType !== undefined ? { maskType: f.maskType } : {}),
     ...(f.stroke ? { strokes: [SOLID], strokeWeight: f.stroke.weight, strokeAlign: f.stroke.align } : {}),
     ...(f.text ? { characters: f.text.characters, style: restStyle(f.text) } : {}),
   };
@@ -104,6 +108,8 @@ async function pluginCapture(root: { box: Box; layoutMode?: 'HORIZONTAL' }, fact
   for (const f of facts) {
     const n = f.type === 'TEXT' ? figma.createText() : f.type === 'RECTANGLE' ? figma.createRectangle() : figma.createFrame();
     n.name = f.name;
+    if (f.isMask !== undefined) n.isMask = f.isMask;
+    if (f.maskType !== undefined) n.maskType = f.maskType;
     if (f.type === 'FRAME') n.layoutMode = 'NONE';
     if (f.constraints) n.constraints = f.constraints;
     if (f.layoutPositioning) n.layoutPositioning = f.layoutPositioning;
@@ -304,4 +310,111 @@ test('empty action lists and legacy prototype destinations keep their existing m
   const legacy = prototypeCapture(undefined, { transitionNodeID: '8:1', transitionDuration: 125.4 });
   assert.deepEqual(legacy.variant.reactions, [{ trigger: 'UNKNOWN', destination: '8:1', destinationName: 'Nullable action', duration: 125 }]);
   assert.equal(legacy.report.degradations.some(d => d.code === 'prototype-action-null'), false);
+});
+
+import {proposeFromDump} from '../../../core/propose-figma.js';
+import {tokenCorpusFromJson} from '../../../core/token-corpus.js';
+import {walkAnatomy, ContractSchema} from '../../../scripts/contract-schema.js';
+import {emitReact} from '../../../core/emit-react.js';
+test('both readers preserve explicit mask type and sibling order without guessing from names', async()=>{
+ const nodes:Fact[]=[
+  {name:'ordinary white rectangle',type:'RECTANGLE',box:{x:100,y:100,width:40,height:40},isMask:true,maskType:'ALPHA'},
+  {name:'paint',type:'RECTANGLE',box:{x:110,y:110,width:30,height:30}},
+  {name:'mask by name only',type:'RECTANGLE',box:{x:100,y:100,width:20,height:20},isMask:false,maskType:'ALPHA'},
+ ];
+ const before=JSON.stringify(nodes),rest=restCapture(FREE,nodes),plugin=await pluginCapture(FREE,nodes);
+ assert.deepEqual(childrenOf(rest).map(n=>({name:n.name,mask:n.mask})),childrenOf(plugin).map(n=>({name:n.name,mask:n.mask})));
+ assert.deepEqual(childrenOf(rest).map(n=>n.mask),[{type:'ALPHA'},undefined,undefined]);
+ assert.equal(JSON.stringify(nodes),before);
+});
+test('mask type absence and unknown future type remain observed facts, not an ALPHA default', async()=>{
+ for(const maskType of [undefined,'FUTURE-MASK','VECTOR','LUMINANCE']){
+  const nodes:Fact[]=[{name:'mask',type:'RECTANGLE',box:{x:100,y:100,width:40,height:40},isMask:true,...(maskType?{maskType}:{})}];
+  const expected=maskType?{type:maskType}:{};
+  const rest=restCapture(FREE,nodes);
+  assert.deepEqual(childrenOf(rest)[0].mask,expected);
+  assert.deepEqual(childrenOf(await pluginCapture(FREE,nodes))[0].mask,expected);
+  if(maskType===undefined || maskType==='FUTURE-MASK')assert.throws(()=>proposeFromDump(rest.Parity as DumpSet,
+    {corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true}),/figma-mask-composition-unqualified/);
+ }
+});
+test('observed mask ownership reaches qualified React scopes and unsupported masks cannot become ordinary paint',async()=>{
+ const dump=restCapture(FREE,[
+  {name:'white',type:'RECTANGLE',box:{x:100,y:100,width:40,height:40},isMask:true,maskType:'ALPHA'},
+  {name:'paint',type:'RECTANGLE',box:{x:105,y:105,width:30,height:30}},
+ ]);
+ childrenOf(dump)[0].fill={hex:'ffffff'};
+ childrenOf(dump)[1].fill={hex:'ff0000'};
+ const set=dump.Parity as DumpSet,before=JSON.stringify(set);
+ const proposal=proposeFromDump(set,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true});
+ const contract=ContractSchema.parse(proposal.contract);
+ assert.deepEqual(walkAnatomy(contract).filter(w=>w.part.mask).map(w=>w.part.mask),[{type:'ALPHA',outline:'rect'}]);
+ const mask=walkAnatomy(contract).find(w=>w.part.mask)!.part;
+ assert.equal(mask.absoluteGeometry?.box.width,40);
+ assert(mask.tokens?.['background-color'],'deferred mint paint target must remain attached');
+ assert.equal(mask.tokens?.width,undefined);
+ assert.equal(mask.literals?.width,undefined,'derived fallback must not compete with geometry owner');
+ const sibling=walkAnatomy(contract).find(w=>w.name==='paint')!.part;
+ assert.equal(sibling.absoluteGeometry?.box.x,5);
+ assert.equal(sibling.absoluteGeometry?.box.y,5);
+ assert.equal(sibling.absoluteGeometry?.box.width,30);
+ assert(sibling.tokens?.['background-color'],'masked sibling retains its paint');
+ assert.equal(sibling.tokens?.width,undefined);
+ const {tokenInventoryFromJson}=await import('../../../core/tokens.js');
+ const tokens={primitives:proposal.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const ctx={tokens:tokenInventoryFromJson([tokens.primitives]),tokenValues:tokens,contracts:new Map([[contract.id,contract]]),icons:new Map()};
+ const rendered=emitReact(contract,ctx);
+ assert.match(rendered.tsx,/data-ds-mask-scope/,'the observed ALPHA mask must own a composite scope');
+ const unsupported=structuredClone(contract);
+ walkAnatomy(unsupported).find(w=>w.part.mask)!.part.mask!.type='LUMINANCE';
+ assert.throws(()=>emitReact(unsupported,{...ctx,contracts:new Map([[unsupported.id,unsupported]])}),/native-luminance-transfer-unqualified/);
+ const mixed=structuredClone(set);mixed.variants=[structuredClone(set.variants[0]),structuredClone(set.variants[0])];
+ mixed.variants[0].name='Case=A';mixed.variants[1].name='Case=B';
+ mixed.variants[0].variantProperties={Case:'A'};mixed.variants[1].variantProperties={Case:'B'};
+ mixed.propertyDefinitions={...mixed.propertyDefinitions,Case:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}};
+ mixed.variants[1].children![0].type='ELLIPSE';
+ assert.throws(()=>proposeFromDump(mixed,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true}),/varying-mask-outline/);
+ assert.equal(JSON.stringify(set),before);
+});
+
+import {restTextAppearance} from './text-appearance.js';
+import {execFileSync} from 'node:child_process';
+
+function appearanceFixture(){
+ const characters='A😀\nLearn more';
+ const style={fontFamily:'Source Sans Pro',fontStyle:'Regular',fontWeight:400,fontSize:14,letterSpacing:0,lineHeightUnit:'FONT_SIZE_%',lineHeightPercentFontSize:140};
+ const black=[{type:'SOLID',color:{r:0,g:0,b:0,a:1}}],blue=[{type:'SOLID',color:{r:0,g:0,b:1,a:1}}];
+ const node:RestNode={id:'9:4',name:'Description',type:'TEXT',characters,style,fills:black,
+  characterStyleOverrides:Array.from({length:characters.length},(_,i)=>i<4?1:2),
+  styleOverrideTable:{'1':{lineHeightUnit:'INTRINSIC_%'},'2':{lineHeightUnit:'INTRINSIC_%',fills:blue} as RestTypeStyle}};
+ const segments=[{start:0,end:4,fills:black},{start:4,end:characters.length,fills:blue}].map(r=>({...r,characters:characters.slice(r.start,r.end),fontName:{family:'Source Sans Pro',style:'Regular'},fontWeight:400,fontSize:14,lineHeight:{unit:'AUTO'},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE'}));
+ const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8');
+ const capture=vm.runInNewContext(source.slice(0,source.indexOf('// Raw local geometry'))+'\ncaptureTextAppearance');
+ const plugin=(rows:unknown=segments)=>JSON.parse(JSON.stringify(capture({characters,getStyledTextSegments:()=>rows})));
+ return {node,segments,plugin};
+}
+test('complete UTF-16 appearance ranges agree across REST and embedded native capture',()=>{
+ execFileSync(process.execPath,['scripts/embed-text-appearance.mjs','--check']);
+ const f=appearanceFixture(),before=JSON.stringify(f.node),r=restTextAppearance(f.node);
+ assert(r && 'runs'in r);assert.equal(r.runs.length,2);
+ assert.deepEqual(r.runs.map(x=>[x.start,x.end,x.lineHeight,x.fill.paint.color]),[[0,4,{unit:'AUTO'},{r:0,g:0,b:0}],[4,14,{unit:'AUTO'},{r:0,g:0,b:1}]]);
+ assert.equal(r.characters,'A😀\nLearn more');assert.deepEqual(f.plugin(),r);
+ const c:RestNode={id:'9:2',name:'Appearance',type:'COMPONENT',children:[f.node]};
+ const mapped=mapRestToDump({nodes:{'9:2':{document:c}}}).dump as unknown as Record<string,DumpSet>;
+ assert.deepEqual(mapped.Appearance.variants[0].children![0].text!.sourceAppearance,r);
+ assert.equal(JSON.stringify(f.node),before,'sparse source style deltas remain unchanged');
+});
+test('text appearance capture names incomplete, split-surrogate and unsupported evidence',()=>{
+ const f=appearanceFixture();
+ for(const mutate of [
+  (n:RestNode)=>{n.characterStyleOverrides!.pop();},
+  (n:RestNode)=>{n.characterStyleOverrides![0]=99;},
+  (n:RestNode)=>{n.characterStyleOverrides![2]=2;},
+  (n:RestNode)=>{(n.styleOverrideTable!['2'] as any).fills=[{type:'GRADIENT_LINEAR'}];},
+  (n:RestNode)=>{delete n.style!.fontFamily;},
+  (n:RestNode)=>{n.styleOverrideTable!['2'].lineHeightUnit='unknown';},
+ ]){const n=structuredClone(f.node);mutate(n);const observed=restTextAppearance(n);assert(observed && 'issue'in observed,String(mutate));}
+ const broken=structuredClone(f.segments);broken[1].start=5;assert.match(f.plugin(broken).issue,/range-unqualified/);
+ const changed=structuredClone(f.segments);changed[0].characters='different';assert.match(f.plugin(changed).issue,/range-unqualified/);
+ assert.equal(restTextAppearance({...f.node,characterStyleOverrides:undefined}),undefined,'missing ranges do not invent a partition');
 });

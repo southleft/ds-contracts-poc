@@ -9,8 +9,9 @@
  * <select> drops structural children (Dropdown rendered only the caret).
  *
  * Pins (emit-html root content-model honesty):
- *   · textarea/select-with-structure roots with drawn anatomy project the
- *     BOX as a neutral <div> (same classes), with a NAMED comment
+ *   · textarea-with-structure roots REFUSE through the shared content-model
+ *     guard; an explicitly authored container keeps its native control
+ *   · select-with-structure roots project the BOX with a named comment
  *   · VOID roots (<input>) with drawn anatomy REFUSE via the shared
  *     void-element mount guard (commit 8c28dfe8) before any projection —
  *     the React surface would render NOTHING, so the html surface must not
@@ -87,18 +88,22 @@ const parentFor = (element: string, withParts: boolean) =>
     },
   });
 
-const ctx = { tokens: {} as never, icons: new Map<string, string>(), contracts: new Map([[child.id, child]]) };
+const ctx = { tokens: new Set<string>(), icons: new Map<string, string>(), contracts: new Map([[child.id, child]]) };
 
-// 1) textarea root WITH drawn anatomy → projected box, real child structure,
-//    escaped leaf text.
+// 1) Shared validation refuses textarea element children on every surface.
+//    Explicitly re-rooted anatomy preserves both the control and label markup.
 {
-  const out = emitHtml(parentFor('textarea', true), ctx as never);
-  if (out.html.includes('<textarea')) {
-    fail('textarea root with drawn anatomy still renders <textarea> — the browser would show child markup as literal text');
-  }
-  if (!out.html.includes('cannot host the drawn anatomy')) {
-    fail('the content-model projection is not NAMED in an emitted comment');
-  }
+  let refusal = '';
+  try { emitHtml(parentFor('textarea', true), ctx); }
+  catch (error) { refusal = String(error); }
+  if (!refusal.includes('cannot mount element children inside <textarea>'))
+    fail('textarea children bypassed the shared content-model guard');
+  const rerooted = parentFor('div', true);
+  rerooted.anatomy.root.parts!.control = { element: 'textarea' };
+  const out = emitHtml(rerooted, ctx);
+  if (!out.html.includes('<textarea')) fail('explicitly re-rooted field lost its native textarea');
+  if (out.html.includes('cannot host the drawn anatomy'))
+    fail('valid container received an unnecessary projection');
   if (!out.html.includes('<div class="eval-input-label">')) {
     fail('linked-child markup is not rendered as real structure');
   }
@@ -123,9 +128,8 @@ const ctx = { tokens: {} as never, icons: new Map<string, string>(), contracts: 
 //    (a) the old void-root shape refuses loudly with the guard's message;
 //    (b) the guard's own prescribed fix (container root, <input> mounted as
 //        a child part) emits cleanly, keeps the native <input>, and needs
-//        no projection. The raw-text (textarea) and select projections in
-//        cases 1/3 are untouched — those elements are not void, so the
-//        guard does not fire and the projection remains their honesty story.
+//        no projection. Textarea now has its own shared content-model guard (case 1);
+//        select projection is checked separately in case 3.
 {
   let refusal = '';
   try {
@@ -181,4 +185,4 @@ const ctx = { tokens: {} as never, icons: new Map<string, string>(), contracts: 
   if (out.html.includes('cannot host the drawn anatomy')) fail('part-less textarea root carries a projection comment it does not need');
 }
 
-console.log('raw-text-root-projection ok: textarea/select boxes project to <div> with a named comment; void roots refuse via the mount guard and re-root cleanly per its fix message; child markup stays structure; leaf text stays escaped (XSS pin holds); part-less native roots untouched');
+console.log('raw-text-root-projection ok: textarea and void roots refuse invalid element children and re-root cleanly with native controls; select boxes project with a named comment; child markup stays structure; leaf text stays escaped (XSS pin holds); part-less native roots untouched');

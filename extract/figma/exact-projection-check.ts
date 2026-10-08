@@ -5,6 +5,7 @@ import {
   type ExactProjectionRefusalCode,
   type ExactVariantRow,
   validateExactVariantProjection,
+  validateDeclaredDrawnProjection,
 } from "./exact-projection.js";
 
 const failures: string[] = [];
@@ -400,6 +401,130 @@ check(
   "the authoritative grammar publishes the exact stable refusal vocabulary",
   JSON.stringify(grammar.variantRecoveryRefusals) ===
     JSON.stringify(EXACT_PROJECTION_REFUSAL_CODES),
+);
+
+const drawnAxes = ["A", "B", "C", "D"];
+const drawnDefault = Object.fromEntries(drawnAxes.map((name) => [name, "off"]));
+const drawnDomain = [
+  drawnDefault,
+  ...drawnAxes.map((name) => ({ ...drawnDefault, [name]: "on" })),
+];
+const drawnSet: ExactDumpSet = {
+  type: "COMPONENT_SET",
+  propertyDefinitions: Object.fromEntries(
+    drawnAxes.map((name) => [
+      name,
+      { type: "VARIANT", defaultValue: "off", variantOptions: ["off", "on"] },
+    ]),
+  ),
+  variants: drawnDomain.map((variantProperties) => ({ variantProperties })),
+};
+const drawnRefuses = (
+  set: ExactDumpSet,
+  declaration: unknown,
+  returned?: ExactVariantRow[],
+) =>
+  validateDeclaredDrawnProjection(set, declaration, returned).status ===
+  "refused";
+check(
+  "positive domain does not change undeclared Cartesian refusal",
+  validateExactVariantProjection(drawnSet).status === "refused",
+);
+check(
+  "independent positive domain preserves a majority-undrawn matrix exactly",
+  validateDeclaredDrawnProjection(
+    drawnSet,
+    structuredClone(drawnDomain),
+    structuredClone(drawnSet.variants),
+  ).status === "verified-exact",
+);
+check(
+  "positive domain never infers a missing declaration",
+  drawnRefuses(drawnSet, undefined),
+);
+check("positive domain refuses empty declaration", drawnRefuses(drawnSet, []));
+check(
+  "positive domain refuses duplicate declaration",
+  drawnRefuses(drawnSet, [...drawnDomain, drawnDomain[0]]),
+);
+check(
+  "positive domain refuses incomplete tuple",
+  drawnRefuses(drawnSet, [{ A: "off" }]),
+);
+check(
+  "positive domain refuses unknown tuple property",
+  drawnRefuses(drawnSet, [...drawnDomain, { ...drawnDefault, Unknown: "off" }]),
+);
+check(
+  "positive domain refuses invalid tuple option",
+  drawnRefuses(drawnSet, [...drawnDomain, { ...drawnDefault, A: "invalid" }]),
+);
+check(
+  "positive domain refuses erased axis option",
+  drawnRefuses(drawnSet, drawnDomain.slice(0, -1)),
+);
+check(
+  "positive domain refuses absent default",
+  drawnRefuses(drawnSet, drawnDomain.slice(1)),
+);
+check(
+  "positive domain detects lost source row",
+  drawnRefuses(
+    { ...drawnSet, variants: drawnSet.variants.slice(1) },
+    drawnDomain,
+  ),
+);
+const undrawnRow = { variantProperties: { ...drawnDefault, A: "on", B: "on" } };
+check(
+  "positive domain detects invented source combination",
+  drawnRefuses(
+    { ...drawnSet, variants: [...drawnSet.variants, undrawnRow] },
+    drawnDomain,
+  ),
+);
+check(
+  "positive domain detects lost returned row",
+  drawnRefuses(drawnSet, drawnDomain, drawnSet.variants.slice(1)),
+);
+check(
+  "positive domain detects invented returned combination",
+  drawnRefuses(drawnSet, drawnDomain, [...drawnSet.variants, undrawnRow]),
+);
+check(
+  "positive domain detects duplicate returned row",
+  drawnRefuses(drawnSet, drawnDomain, [
+    ...drawnSet.variants,
+    drawnSet.variants[0]!,
+  ]),
+);
+check(
+  "positive domain refuses state preview shape",
+  drawnRefuses({ ...drawnSet, statePreviewAxis: {} }, drawnDomain),
+);
+check(
+  "positive domain refuses declaration over bounded row count",
+  drawnRefuses(drawnSet, Array(4097).fill(drawnDefault)),
+);
+const manyNames = Array.from({ length: 20 }, (_, n) => `axis${n}`),
+  manyDefault = Object.fromEntries(manyNames.map((name) => [name, "off"]));
+const manyDomain = [
+  manyDefault,
+  ...manyNames.map((name) => ({ ...manyDefault, [name]: "on" })),
+];
+const manySet: ExactDumpSet = {
+  type: "COMPONENT_SET",
+  propertyDefinitions: Object.fromEntries(
+    manyNames.map((name) => [
+      name,
+      { type: "VARIANT", defaultValue: "off", variantOptions: ["off", "on"] },
+    ]),
+  ),
+  variants: manyDomain.map((variantProperties) => ({ variantProperties })),
+};
+check(
+  "positive domain validates 21 explicit rows without expanding million-cell product",
+  validateDeclaredDrawnProjection(manySet, manyDomain, manySet.variants)
+    .status === "verified-exact",
 );
 
 if (failures.length > 0) {

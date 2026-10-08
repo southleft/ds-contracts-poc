@@ -50,3 +50,14 @@ test('both routes refuse scale, arrow decoration, dashes, masks and nonzero nati
   assert.equal(nativeCapture({...writes[0],type:'LINE',...pluginPatch},frame),null);
  }
 });
+
+test('live dashed vectors with identical cap and network metadata can have different painted outlines',async()=>{
+ const {PNG}=await import('pngjs');const {createHash}=await import('node:crypto');
+ const fixture=JSON.parse(readFileSync(new URL('../fixtures/native-line/dash-cap-ambiguity.json',import.meta.url),'utf8'));
+ const [node,endpoint]=fixture.rows;
+ assert.deepEqual(node.observed,endpoint.observed,'the exposed fields do not distinguish dash caps from endpoint caps');
+ assert.notDeepEqual(node.strokeGeometry,endpoint.strokeGeometry,'captured native paint is required to disambiguate');
+ const images=fixture.rows.map((row:any)=>{const bytes=readFileSync(new URL('../fixtures/native-line/'+row.png,import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),row.sha256);return PNG.sync.read(bytes);});
+ assert.equal(images[0].width,images[1].width);assert.equal(images[0].height,images[1].height);
+ assert(!images[0].data.equals(images[1].data),'same fields must not silently produce one supposed native rendering');
+});

@@ -71,3 +71,431 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 - `part root/body font-family` — {font.control.family} — text-cascade token with no bound text node beneath it on the canvas
 - `part root/body font-size` — {font.control.size.sm} — text-cascade token with no bound text node beneath it on the canvas
 
+
+### Captured text paint absence
+
+Plugin dump 1.62 and REST dump 1.54 add `textFillAbsent: true` only when a TEXT node has an explicit fills array with no visible paints. A missing fills array or an unsupported visible paint does not establish absence. The proposer carries this positive observation as transparent text color, including mixed bound-color/empty planes; old dumps with missing color data retain their named refusal. Captured compound hidden flags can also become a complete finite presence table when hidden capture authority and the full observed domain are available. Neither observation grants support for per-instance visibility overrides on a referenced component.
+
+Plugin dump 1.63 and REST dump 1.55 also retain `hostOverrides[].visibilityTarget` for an explicit descendant visibility override with a known Boolean value and instance owner. It contains the observed node ID, nearest instance ID and main component ID, numeric instance/child paths, and `visible`. Duplicate display-name paths remain distinct. Missing values or owner identities do not receive a target. This is capture evidence, not permission to modify arbitrary internals of a generated component; the public override carrier remains unqualified.
+
+### React overlap projection
+
+Both React emitters use the same DOM-preserving overlap controller when a part
+has `layout.overlap` and a gap token. The requested native spacing remains in the
+contract; the browser caps its negative margin at the smallest visible in-flow
+child's main-axis border-box size. Native row and column observations are pinned
+in `core/fixtures/native-overlap-369.json`. Caller text, font resizing, presence
+changes, and token variants are exercised through generated React in
+`core/react-overlap.test.ts`. Resize and mutation observers are disconnected on
+unmount; forwarded root refs still receive the original DOM node.
+
+This projection runs after hydration. It is not a new server-rendered/static HTML
+fidelity claim, and the native probes do not qualify wrapped overlap layouts.
+Descendant visibility overrides still require a separate child-authorized carrier;
+correct spacing does not itself authorize showing a hidden child.
+
+### Child-owned instance visibility
+
+`part.visibilityOverrideProp` names an optional, defaultless Boolean code prop
+owned by exactly one nested part. Its Figma binding is `NONE`: it does not mint a
+shared component property. Omission preserves that part's variant-dependent
+visibility; explicit true or false overrides it. React uses the public code prop.
+The native writer retains the hidden layer, marks it with contract/prop identity,
+and applies a reference's value to that instance layer only. A missing or
+ambiguous marker refuses instead of falling back to display-name matching.
+
+The native projection accepts fixed values and resolved parent variant values.
+A live parent Boolean link and an existing live Boolean base-visibility control
+remain named refusals. Component, slot, and repeat
+parts cannot declare this authority. HTML and Web Components refuse the carrier.
+The importer must separately prove which captured descendant corresponds to the
+child-owned part before authoring this field; capture alone grants no permission.
+The rejected shared-Boolean experiment showed why reading every default after
+all variants are built is required for native qualification.
+
+Fresh batch proposals can author the node control from captured visibility demand.
+The child main ID, numeric child path, and expanded instance-node ID must agree;
+matching a display name does not grant authority. A binding receipt pins the file,
+set key, selected main, path, generated prop, and exact child contract revision.
+Parents consume only matching receipts. Complete fixed observations become fixed
+arguments; complete varying observations become `booleanPropsByCombination`
+tables. A null row omits the argument and retains the child default. Incomplete
+parent observations remain a named `visibility-control-combination-required` gap;
+omission is not inferred as false.
+Supplied and stamped child APIs are not expanded by this fresh-authoring path.
+
+Plugin dump 1.64 recovers an aggregate `figma.mixed` font only when styled
+text segments cover every character contiguously and carry identical complete
+FontName records, including variable-font axes. Family and face then use the
+existing dump channels. Gaps, overlaps, unavailable range APIs and genuinely
+mixed font records retain the named unsupported-text receipt. No sibling font
+or first-range guess is used.
+
+A linked, declared instance-swap default retains composed instance fill on its
+fallback component reference. The source occurrence is consumed by that exact
+fallback owner, never by the slot container or a caller replacement. The normal
+paint qualification and variable-binding receipts still apply. Unlinked or
+undeclared defaults cannot consume the paint. This does not qualify composed
+fill on the slot wrapper itself, which remains a separate structural paint gap.
+
+A normal-flow structural child with an omitted element uses the emitted default
+`div` and can be placed above its parent's independent composed fill without
+adding a wrapper or changing layout. Explicit `div`/`span` boxes without a layout
+container use the same rule. Authored placement and specialized text, content,
+meter, repeat, reference, shape and mask handling retain their existing guards.
+Native paint controls cover default and explicit boxes on both CSS and inline
+React surfaces; this does not qualify paint owned by a slot wrapper.
+
+Nested `div` slot hosts with captured layout can carry their own composed fill
+in React. A positioned foreground box inherits the child layout and fills the
+host content box; the host's independent paint still blends against its external
+backdrop. Bare text, fragments and replacements therefore remain above paint.
+Visibility, clearing and collapse gates stay on the existing host. Root slots,
+non-div slots and hosts without layout remain unqualified. HTML and Web
+Components refuse this path. Native compilation retains paint on the slot host.
+
+A child with an explicit `div` slot host participates in reverse child-paint
+order as one physical box. Defaults and arbitrary caller fragments stay within
+that host, so neither DOM reordering nor an additional wrapper is needed.
+Unnamed insertion points and repeated children remain unqualified; authored
+z-index still refuses. Native overlap controls verify both React surfaces.
+
+A free painted parent does not invalidate its children's captured SCALE/SCALE
+coordinate relationship. Qualified drawing viewports retain their clipping and
+existing size/color override channels; their independent composed fill follows
+the resized box. Other paint, placement and override guards remain in force.
+
+Draft inspection may supply `draftDrawingReadbacks`, keyed by child contract ID,
+for an inspected remote cached main. Each receipt binds read-file context, main
+node ID, globally keyed component, `remote: true` and exact contract revision.
+The usage must carry the same cached-main identity. This is distinct from the
+upstream owning-file anchor, which must remain null. Public proposal ignores
+these receipts; production remote dependency capture is unchanged. The draft
+notes identify the read context and explicitly deny upstream/public authority.
+
+Plugin dump 1.65 captures overridden solid VECTOR strokes with exact descendant
+identity, fill geometry, centered stroke outlines, local transform, alignment,
+weight, join/cap, miter limit, dashes, opacity, blend mode and effects. Centered outlines alone
+are not the appearance of an inside/outside stroke: the fill mask and alignment
+must be applied. Stroke paint keeps its own normal-fill observation and consuming
+variable evidence; consumers are collected after both paint planes. Missing or
+malformed geometry retains the override and emits a named degradation. This is
+capture evidence only; it does not waive the existing rendering refusal.
+
+Instance color overrides explicitly opt into compound token references with
+three or more axes. Other nested-map receivers retain their existing admission
+rules. Complete matrices are preferred; missing compound cells are supplied
+only when the realized tuple census proves them undrawn or the owning part is
+explicitly absent. Every realized tuple must be observed or proven absent;
+partial, contradictory and missing paint evidence still refuses. Supplied cells
+use the declared-order base observation and are labeled separately from measured
+cells. Both React renderers and native instance compilation resolve the same ref.
+This does not authorize dropping native stroke overrides: the inside-stroke
+compositing inspector preserves source evidence and is not a rendering bypass.
+
+A component reference may carry `sameInkInsideStroke: {props, rows}`. Each row
+contains the finite parent tuple and either null (retain the unstroked main) or
+an editable stroke's weight, cap, join and miter limit. The declared invariant is
+INSIDE alignment, no dashes, one opaque paint shared with the filled path.
+It requires a single currentColor path, an explicit color override, complete
+variant coverage and opaque resolved ink in every supplied mode and brand.
+React renders the union once. Native compilation applies the stroke only after
+the instance is attached and resized, and binds both paints to the same color.
+Independent readback checks the paint, binding, width, alignment, cap, join,
+miter limit and dash pattern. HTML and Web Components refuse the carrier.
+
+Importer admission additionally verifies original fill/stroke binding identity,
+geometry, transform and the exact keyed descendant. It preserves the source
+capture and leaves the shared child main unchanged. Missing proof retains the
+existing refusal. This carrier qualifies a specific composition mechanism;
+it does not qualify the whole imported kit or its source-variable recreation.
+
+REST dump v1.56 carries native ellipse `arcData` into the existing `shape.arc`
+channel, preserving radians and the hole fraction at source precision. Previously
+the REST route silently rendered partial arcs as complete ellipses even though
+the plugin route, contract and native writer already carried them. Invalid
+nonfinite angles or an out-of-range hole fraction receive `ellipse-arc-invalid`;
+unsupported sweep/hole compositions retain the proposer's existing named limits.
+Negative partial sweeps are projected with reversed endpoints, preserving the
+same painted region; the signed source angles remain in the dump. A live native
+control distinguishes the upper-right quarter of `0 → -π/2` from the three-quarter
+`0 → 3π/2` sweep. Constant filled sectors with no inner hole can retain their
+measured absolute geometry as masked siblings. This does not admit sector-shaped
+mask owners, rotated sectors, or donut holes. Both React surfaces verify the
+painted quadrant at original and doubled size.
+
+Nested OUTSIDE strokes may carry conditional `outline-width` and `outline-color`
+through literal combination tables. Observed strokeless states carry zero width
+and transparent color, preventing the browser's default medium black outline.
+Both React surfaces resolve the table; native compilation lowers a complete
+literal pair with explicit solid style to an OUTSIDE stroke. Incomplete pairs,
+unsupported styles, token collisions, and competing borders receive named
+native refusals. This does not qualify arbitrary CSS outline offsets.
+The Chakra Spinner public URL check improved from 10/50 to 23/50 on unchanged
+source PNGs and thresholds; the remaining 27 cases still fail image fidelity.
+
+REST v1.57 and plugin v1.66 preserve explicit NONE/ROUND/SQUARE arc caps.
+`shape.arc.cap` opts an unfilled constant partial ring into React SVG stroke
+rendering; the original layout box remains, and live CSS dimensions and paint
+are observed without replacing caller size/color changes. Legacy uncapped arcs
+retain their existing conic mask. Filled/donut, root, compound and varying-sweep
+cap compositions refuse by name; HTML and Web Components refuse explicit caps.
+The native writer sets the original cap. Prepared native admission currently
+covers unrotated circular controls, and readback rejects changed cap or arc data.
+A live 20px control passed native readback and measured 0.294% white / 0% black
+against both React surfaces. That does not qualify the rotated source Spinner
+or the broader reverse journey. Normal public Spinner import now passes40/50
+(vs23/50 after arc capture,10/50 before), with50 byte-identical native PNGs.
+
+A SCALE filled path's parent viewport may retain a solid `background-color`.
+The fill paints behind its children and does not change their coordinate basis;
+other parent channels such as padding remain refused. Both React projections
+are checked against an independent painted SVG at original and doubled size,
+including an even-odd hole, and native compilation preserves parent fill and
+child offsets. This repairs the Data List dependency generation regression
+introduced when painted parent viewports were captured; generation alone is
+not a fidelity pass.
+
+Figma property display names may contain `#` (for example `item #5`). Readers,
+proposal bindings and native property lookup strip only a terminal numeric Figma
+identity such as `#1522:8`, preserving the display name and its own default.
+Previously first-hash splitting merged six Data List visibility properties into
+one true default. Reader parity and both generated React surfaces now verify
+six independent bindings, four initially visible rows, and independent toggles.
+Live kit fidelity remains separately measured; this does not repair font or
+high-contrast overrides by itself.
+
+REST v1.59 retains native node IDs on mapped nodes, matching the plugin path.
+Both readers capture `hostOverrides.textFillTarget` for a uniform normal solid
+text fill, with the nearest instance/main IDs and numeric paths. Text targets
+remain separate from vector targets. Mixed-range REST paint, multiple paints,
+gradients and non-normal blends do not receive a qualified target. This is
+source evidence for future child-owned text-paint propagation; no descendant
+color override is applied merely because its layer name matches.
+
+`Part.textColorOverrideProp` is an optional child-owned code input for a uniform
+text node. Its finite enum contains observed six- or eight-digit hex colors;
+omission retains the selected child's existing paint. Both React surfaces
+apply it to the owned text element. Native generation marks that text node and
+applies instance fills without mutating the main or another caller. HTML and
+Web Components refuse the input. Independent prepared-native readback checks
+the source-owned target marker, exact RGB/alpha, removal of the overridden
+paint binding, and preservation of other fields and untouched instances.
+It refuses missing, duplicate, or out-of-owner targets. This structural check
+does not establish visual fidelity or qualify the reverse scoreboard.
+
+Batch proposal authors this input only from captured file/main/node identity
+and numeric paths, never a matching layer name. Bindings pin the child revision.
+All matching main variants are considered together. A constant color or a
+single-axis lookup is carried, including omitted parent values; an observed
+multi-axis relationship outside this mapping receives a named refusal.
+
+### Observed unchanged instance roots (REST 1.60 / plugin 1.69)
+
+An explicitly available override list now retains an identity-bound
+`instanceRootOverrides` record with `fields: []` when the root is unchanged.
+A missing override list remains missing evidence; duplicate root rows remain
+ambiguous, including duplicate empty rows. An empty record does not authorize
+width, height, padding, or paint writes. It lets occurrence-wide checks retain
+an unchanged sibling alongside observed changed usages without inventing an
+explicit override. Root paint variable capture and carriage still require
+separate qualification.
+
+### NORMAL instance paint inspection
+
+The bound-paint inspection route now queues an instance's exact NORMAL paint
+cells when source root authority reports a fill override. Every occurrence,
+including unchanged defaults, must still have a paint observation and qualified
+consumer evidence. The linked main supplies its own default paint owner; the
+usage override does not rewrite that main or an unmodified sibling.
+
+Borderless paint owners may now carry `border-radius`: the independent CSS or
+inline fill layer inherits the owner's radius. Rounded foreground stroke
+intersections remain unqualified. Public source-variable binding recreation is
+still refused; inspection output is not an accepted public import or a native
+round-trip qualification.
+
+### Scoped source-paint token graph preparation
+
+`planSolidFillBindingTokens` revalidates captured paint consumers and converts
+one observed consuming context into DTCG color tokens with real alias edges.
+Variable IDs determine token paths; equal colors do not merge identities, and
+source names, collection IDs, selected modes, and alias evidence remain in the
+returned provenance. Native float32 colors are serialized as numeric RGBA,
+without eight-bit hex rounding. Conflicting variable facts, same-collection
+names, or selected modes refuse the plan.
+
+The result is input to the existing scoped native token writer and independent
+readback verifier. Keep each source graph in its authenticated allocation scope;
+it is not a token tree to merge across unrelated source files. A selected-context
+graph does not claim complete theme reconstruction. Creating and verifying it
+also does not yet qualify paint attachment, an accepted public import, or a
+component round trip.
+
+### Declared root background-color inputs
+
+A single solid container root may opt into `background-color` through
+`instanceRootInputs`. A caller's token-backed `rootOverrides` replaces that
+usage's root paint in both React emitters and native Figma generation. The
+main and other instances retain their own fills. Arbitrary CSS backgrounds,
+paint compositions, shape/text roots, and out-of-range colors are refused.
+
+Native generation binds the replacement paint through the verified token
+context. Independent readback checks the exact alias, resolved RGB/alpha,
+NORMAL blend mode and aggregate fill binding; an unmodified instance must
+retain its main's fills and bindings. This API does not automatically promote
+source-bound instance paints through the Figma proposer.
+
+The 2026-10-04 source-token control used three states and an untouched sibling:
+both public React emitters matched all three 48×20 native exports with 0%
+unmasked difference on white and black at the existing pixelmatch threshold.
+This small control is not a real-kit benchmark or reverse qualification.
+
+### Public proposal carriage of bound root paints
+
+The public proposer can now populate a declared root `background-color` input
+from exact NORMAL instance paints. Every occurrence, including unchanged
+siblings, needs its own node/main/set identity and qualified variable consumer
+chain. Missing authority, paint disagreement, conflicting selected modes and
+undeclared child APIs remain named refusals. Other override fields retain
+their independent qualification requirements.
+
+Fresh batch-generated container modules declare this input only when every
+main variant has qualified NORMAL paint evidence and the root passes the
+container input restrictions. Supplied and stamped modules remain unchanged.
+Usage token classification retains Boolean and compound axes and emits color
+aliases into the captured source-variable graph instead of flattening bindings
+to hex. The graph describes one observed mode context, not all source themes.
+
+A Primer replay using captured consumers plus independently refreshed root
+identities passed 64 color/radius checks (32 variants in each public React
+emitter). It required supplemental live capture; this is not a fresh CLI
+first-pass score. Font, framing and content qualification remain outstanding.
+
+### Centered fixed graphics in FILL containers
+
+Figma shares outer FILL widths even when an item's padding exceeds its share.
+CSS zero-basis flex includes padding in the allocation. A padded centered
+indicator and an unpadded sibling therefore received 42px and 16px where the
+source assigned 29px each.
+
+Both React emitters, including the split public CSS generator, now omit
+symmetric main-axis padding when a zero-basis FILL container centers fixed,
+nonshrinking path graphics. Symmetric padding cancels from the center position;
+removing its code-side contribution restores equal outer allocation. The source
+contract and native Figma padding remain unchanged. This rule excludes
+wrapping, asymmetric/conditional padding, unresolvable scalar tokens, flexible
+content, positioned graphics and axis-changing layouts. Parent row reversal
+retains the same allocation axis.
+
+On the 32 source-paired Primer ToggleSwitch cases, mean content-aligned image
+difference improved from 16.89% to 5.82% on white and 14.96% to 3.89% on black.
+All 32 diagnostic comparisons improved; all 32 full checks still fail on font,
+framing and content requirements. These diagnostic averages are not acceptance
+scores or evidence for the untouched fixed40 scoreboard.
+
+### Composite content observation correction (2026-10-04)
+
+A browser negative control exposed an inverted signal: two drawn glyphs inside
+an instance failed the old owner-box content check, while deleting both let the
+remaining painted background satisfy the instance box. The source collector now
+retains each drawn vector member of a text-free instance. Every member must match
+one rendered graphic using the existing size tolerance. SVG viewport, painted
+union and individual-shape candidates share paint resources, preventing the same
+paint from satisfying multiple source requirements. Hidden and unpainted SVG
+shapes do not supply evidence. CSS, SVG and mask deletion controls require a miss
+when either glyph disappears; a multi-region SVG control retains valid compound
+rendering and detects removal of its separated region.
+
+This changes the measurement instrument, not the converter or acceptance limits.
+A fresh normal-URL Primer ToggleSwitch run remains 0 pass / 32 fail; all 32 source
+PNGs and all 32 consumer PNGs are byte-identical to the completed fixed40 run at
+09b40c457. Its 32 false content-missing findings disappear; font, framing and four
+size findings remain. Do not count that correction as a conversion gain or splice
+it into the 564/879 fixed40 baseline. The latter used the prior collector; a new
+full run is required before publishing a score under the corrected instrument.
+
+### Render-export origin control (2026-10-04)
+
+The version-pinned Radix Blockquote control (`854:34261`) demonstrates actual
+capture loss: full-layout export is 138×60; render-bounds export is 153×60. The
+source records a 15px left OUTSIDE stroke. Placing the layout export at the
+source-derived offset (15, 0) yields 8,280 identical overlapping pixels; the
+additional 900 pixels are exactly the source stroke's RGBA (0, 62, 255, 62).
+Recorded snapshots and both unmodified PNGs live in
+`scripts/fixtures/render-export-blockquote`.
+
+`qualifyRenderBoundsExport` checks stable source identity, bounds and version,
+both PNG spans, integral source-derived offsets and exact overlapping paint.
+It refuses empty or uniform overlap because those pixels cannot anchor an
+origin. Negative controls cover shifted or wrong images, deleted ink, truncation,
+changed source and fractional origins; transparent layout margins are retained.
+This helper is not yet connected to scoring. It does not establish browser
+capture completeness, qualify arbitrary effects, or remove the existing
+`render-outside-layout-capture-unqualified` refusal. Isolated browser overflow
+capture and integration remain required.
+
+### Isolated requested-region capture and full collector measurement (2026-10-04)
+
+`captureIsolatedRegion` captures an explicitly requested document region at scale
+one while temporarily hiding non-ancestor siblings with opacity. It verifies the
+subject's computed styles and geometry before and after isolation/capture, restores
+inline opacity and the original absence of a style attribute, and refuses painted
+ancestors, truncated layout regions, changed subjects and PNG-span mismatches.
+Browser controls cover neighboring paint, outside paint, overflow clipping,
+transparent margins, selector side effects, scrolling and viewport-relative size.
+It does not yet infer complete paint bounds or replace the consumer scorer's
+capture path. Completeness qualification and integration remain required.
+
+The isolated full fixed40 run at f0a623c27 completed with 567 pass, 242 fail and
+70 unverified out of the unchanged 879 variants. There were 37 source-paired sets
+and all 864 captured browser images matched the prior run byte for byte. Three
+USA Combo Box states moved from fail to pass after false missing-icon findings
+were corrected. This is measurement correction only, not a rendering improvement;
+the run is not never-seen-kit qualification and reverse remains unqualified.
+
+The requested-region helper now allocates a nonpainting extent marker before
+capture, then removes it. This lets the original composited page paint the entire
+requested rectangle even when scroll bounds omit a distant shadow. A control
+captures a shadow 2,000px away plus separated descendant paint, then verifies exact
+DOM restoration. Computed pseudo styles join the subject-change guard; a selector
+side effect caused by the marker refuses capture. Viewport dimensions are checked
+as well. This still requires an independently qualified requested extent; it is
+not a complete paint-bound observer and is not wired into scoring yet.
+
+### Engine-observed paint extent candidate (2026-10-04)
+
+`observeConsumerPaintExtent` maps Chromium paint layers associated with the
+subject's DOM subtree into document coordinates, including separately composited
+descendants. It temporarily requests a subject layer, guards geometry and computed
+styles (including pseudo-elements), verifies subtree identity and view state, and
+restores the original inline style. Parent transforms and scroll offsets are
+applied to layer corners. Unsupported 3D/anchor transforms, unattributed painted
+layers, filters, blending and negative stacking receive named refusals.
+
+Browser controls cover a distant shadow, a separate child layer 4,000px away,
+scrolling, fixed-descendant and pseudo-selector side effects, and restoration.
+The observed extent feeds the original-page isolated capture helper; the layer
+snapshot itself is not used as the scored image. Integration controls verify
+all separated paint regions and preserve clipping and opacity. These are extent
+candidates and capture controls, not a new published scoreboard: negative-origin
+handling, broader compositor effects and end-to-end scorer integration remain.
+
+### Reversible negative-origin capture (2026-10-04)
+
+`captureObservedSubject` joins the paint-extent observer to original-page isolated
+capture. When the extent crosses the document's left or top boundary, it applies
+an integer translation to the instrument wrapper. It requires uniform translation
+of every subject rectangle, unchanged dimensions/computed and pseudo styles,
+unchanged view state, the corresponding translated paint extent, exact layout
+raster equality, and restoration afterward. The receipt retains before/after
+layout origins, translation and layout-image hashes. Existing wrapper transforms,
+changed containing blocks and selector side effects are named refusals.
+
+The negative-origin browser control recovers all 225 outside red pixels and 400
+layout blue pixels; the layout raster is identical before/after translation and
+the DOM is restored. Isolation now leaves display-none siblings untouched and
+refuses if they become visible. This fixes mutation of a non-rendering stylesheet
+node uncovered by the translation controls. The joined helper is still not wired
+into the public scoring path; paired native render exports and expanded-frame
+alignment must be integrated before any new acceptance result is reported.

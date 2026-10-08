@@ -1662,7 +1662,11 @@ function applyCondition(part: ExtractedPart, condition?: ExtractedPart['visibleW
 }
 
 function fillChildren(el: JsxEl, part: ExtractedPart, partName: string, ctx: JsxContext) {
-  const kids = jsxChildren(el);
+  // Shorthand fragments have no DOM box. Walk their children in place so
+  // optional slots and interleaved text keep their real sibling order.
+  const flattenFragments = (children: readonly ts.JsxChild[]): ts.JsxChild[] =>
+    children.flatMap(child => ts.isJsxFragment(child) ? flattenFragments(child.children) : [child]);
+  const kids = flattenFragments(jsxChildren(el));
   const parts: Record<string, ExtractedPart> = {};
   const texts: string[] = [];
   let sawExpression = false;

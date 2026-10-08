@@ -24,7 +24,7 @@ export function reactInitialValue(contract: Contract, prop: Prop): string {
         `case ${codeValueLiteral(prop, value)}: return ${JSON.stringify(value)} as const;`,
     )
     .join(" ");
-  return `() => { if (${raw} === undefined) return ${fallback === undefined ? "undefined" : JSON.stringify(fallback) + " as const"}; switch (${raw}) { ${cases} default: throw new Error(${JSON.stringify("CODE_INITIAL_VALUE_UNSUPPORTED:" + prop.name)}); } }`;
+  return `() => { if (${raw} === undefined) return ${fallback === undefined ? "undefined" : JSON.stringify(fallback) + " as const"}; switch (${raw}) { ${cases} default: throw new globalThis.Error(${JSON.stringify("CODE_INITIAL_VALUE_UNSUPPORTED:" + prop.name)}); } }`;
 }
 
 export function validateReactInitialBindings(contract: Contract): void {

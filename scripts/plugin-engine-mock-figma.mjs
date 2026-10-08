@@ -441,6 +441,10 @@ export function createFigmaMock(options = {}) {
       if (this._birthBox) this._birthBox = { w: false, h: false };
     }
 
+    // Ratio API state only; responsive allocation is verified in live Figma.
+    lockAspectRatio() { this.targetAspectRatio = { x: this.width, y: this.height }; }
+    unlockAspectRatio() { this.targetAspectRatio = null; }
+
     resizeWithoutConstraints(w, h) {
       this._resizeBox(w, h);
       // Live Scratch probe, 2026-09-26: a SLOT whose width was reset to exact
@@ -1128,6 +1132,7 @@ export function createFigmaMock(options = {}) {
       let owner = this.parent;
       while (owner && owner.type !== 'COMPONENT' && owner.type !== 'COMPONENT_SET') {
         if (owner.type === 'INSTANCE') throw new Error('isExposedInstance is inherited on nested instances');
+        if (owner.type === 'SLOT') throw new Error('Cannot expose instances within slots.');
         owner = owner.parent;
       }
       if (!owner) throw new Error('isExposedInstance requires a containing component');
@@ -1198,8 +1203,8 @@ export function createFigmaMock(options = {}) {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
           clone[field] = this[field];
         }
+        if (typeof this.fontWeight === 'number') clone.fontWeight = this.fontWeight;
         if (options.consumerVariableModes) {
-          clone.fontWeight = this.fontWeight;
           clone.textAutoResize = this.textAutoResize;
           delete clone.clipsContent;
         }
@@ -1561,7 +1566,7 @@ export function createFigmaMock(options = {}) {
         for (const [key, def] of Object.entries(n._propDefs ?? {})) {
           if (def.type !== 'SLOT') continue;
           delete n._propDefs[key];
-          const display = key.split('#')[0];
+          const display = key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
           if (!merged.has(display)) {
             merged.set(display, `${display}#${set.id}:${set._propSeq++}`);
             set._propDefs[merged.get(display)] = def;
@@ -1571,7 +1576,7 @@ export function createFigmaMock(options = {}) {
       for (const [display, mergedKey] of merged) {
         for (const n of [set, ...set.findAll()]) {
           const ref = n.componentPropertyReferences?.slotContentId;
-          if (ref && ref.split('#')[0] === display) {
+          if (ref && ref.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === display) {
             n.componentPropertyReferences = { ...n.componentPropertyReferences, slotContentId: mergedKey };
           }
         }

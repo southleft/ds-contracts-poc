@@ -2,20 +2,23 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/progress-bar.contract.json (ds.progress-bar v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import { Tooltip } from '../Tooltip';
 import styles from './ProgressBar.module.css';
 
-export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
+export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   progress?: '0' | '10' | '20' | '30' | '40' | '50' | '60' | '70' | '80' | '90' | '100';
   label?: 'right' | 'bottom' | 'topFloating' | 'bottomFloating' | 'false';
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function ProgressBar(
-  { progress = '0', label = 'right', className, children, ...rest },
+  { progress = '0', label = 'right', className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`progress-${progress}`], styles[`label-${label}`], className]

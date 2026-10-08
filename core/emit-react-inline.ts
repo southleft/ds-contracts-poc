@@ -1,8 +1,35 @@
+import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
+import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
+import {boundFillSvgCss} from '../packages/core/src/instance-fill-composition.js';
+import {solidFillPartTokenError} from '../packages/core/src/solid-fill-binding-tokens.js';
+import {wrapReactFilledPath,REACT_FILLED_PATH_RUNTIME} from './react-filled-path.js';
+import {callerContentGroups} from '../scripts/contract-schema.js';
+import {wrapReactShapeFill,REACT_SHAPE_FILL_RUNTIME} from './react-shape-fill.js';
+import {lowerCenteredFillPadding} from './react-centered-fill.js';
+import {wrapReactTextColor, REACT_TEXT_COLOR_RUNTIME} from './react-text-color.js';
+import {wrapReactArc, REACT_ARC_RUNTIME} from './react-arc.js';
+import {instanceInsideStrokeTokenErrors} from '../packages/core/src/instance-inside-stroke.js';
+import {reactSlotPaintForeground} from './react-slot-paint.js';
+import {reactBooleanArguments} from './component-boolean-arguments.js';
+import {wrapReactOverlap, REACT_OVERLAP_RUNTIME} from './react-overlap.js';
+import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
+import {INSTANCE_FILL_RESET,instanceFillExpression,rootFillLayerCss,hasBoundPaintUsage} from '../packages/core/src/instance-fill-composition.js';
+import { reactComposedPath } from './react-composed-path.js';
+import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
+import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
+import {wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
+import {reactInstanceRootStyle} from './react-instance-root.js';
+import {solidFillCompositionRules} from '../packages/core/src/css.js';
+import {composedFillForegroundParts,layoutOverrideDecls} from '../packages/core/src/anatomy.js';
+import { reactDrawnVariantGuard } from './react-drawn-variants.js';
+import {solidFillCompositionCss,solidFillCompositionTokenCss} from '@ds-contracts/schema';
+import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
 import {normalizeAbsoluteGeometry} from '@ds-contracts/schema';
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
-import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
+import { lowerFilledEllipseVariants, lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
-import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies } from './react-slot-inputs.js';
+import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies, REACT_SLOT_CONTENT_RUNTIME } from './react-slot-inputs.js';
 import { reactSelectionPlan } from './react-selection.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
@@ -72,6 +99,7 @@ import {
   validateContract,
   defaultFontFamilyParts,
   drawsStrokeRing,
+  drawsForegroundStroke,
   ELEMENT_META,
   holderDeclaresPosition,
   textBoxTokenRefusals,
@@ -182,30 +210,54 @@ const strokeRing = ({
   borderWidth: w = 0, borderColor: c = 'currentColor',
   borderTopWidth: t = w, borderRightWidth: r = w, borderBottomWidth: b = w, borderLeftWidth: l = w,
   boxShadow, ...rest
-}: CSSProperties): CSSProperties => {
+}: CSSProperties, foreground = false, isolate = true): CSSProperties => {
   const px = (v: string | number) => (typeof v === 'number' || /^[-+]?0*\\.?0+$/.test(v) ? \`\${Number(v)}px\` : v);
   const ring = t === r && r === b && b === l
     ? [\`inset 0 0 0 \${px(t)} \${c}\`]
     : [\`inset 0 \${px(t)} 0 0 \${c}\`, \`inset 0 calc(-1 * \${px(b)}) 0 0 \${c}\`, \`inset \${px(l)} 0 0 0 \${c}\`, \`inset calc(-1 * \${px(r)}) 0 0 0 \${c}\`];
-  return { ...rest, border: border ?? 0, boxShadow: [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
+  return { ...rest, ...(foreground ? {position: rest.position ?? 'relative',...(isolate?{isolation:'isolate' as const}:{})} : {}), border: border ?? 0, boxShadow: foreground ? boxShadow : [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
 };
+const strokeRingOverlay = (source: CSSProperties, layer: number): CSSProperties => ({
+  display:'block', position:'absolute', inset:0, pointerEvents:'none',
+  borderRadius:'inherit', background:'transparent', zIndex:layer,
+  boxShadow:strokeRing({...source, boxShadow:undefined}).boxShadow,
+});
 
 `;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
+  return emitReactInlineImpl(contract,ctx,false);
+}
+
+/** Internal qualification route only. The public path accepts qualified literal paint; selected source bindings
+ * remain fenced until editable native recreation is qualified. */
+export function emitReactInlineDraftPaintQualification(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
+  solidFillCompositionRules(contract,undefined,undefined,ctx.contracts,false,ctx.tokens); // shared named paint/stacking refusals
+  return emitReactInlineImpl(contract,ctx,true);
+}
+
+function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftPaint: boolean): EmitReactInlineResult {
+  reactMaskChildPaths(contract,ctx.tokens);
   validateReactInitialBindings(contract);
   refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
   validateCodeValueConsumers(contract);
   const errors: string[] = [];
-  validateContract(contract, ctx.contracts, errors, ctx.icons);
+  const validationContract = draftPaint ? structuredClone(contract) : contract;
+  if (draftPaint) for (const {part} of walkAnatomy(validationContract)) {delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
+  validateContract(validationContract, ctx.contracts, errors, ctx.icons, { drawnVariants: 'react-runtime' }, ctx.tokens);
+  errors.push(...instanceAffineTokenErrors(contract,ctx.contracts,ctx.tokens));
+  errors.push(...instanceInsideStrokeTokenErrors(contract,ctx.contracts,ctx.tokens));
+  for(const {part} of walkAnatomy(contract)){if(!(part.solidFillCompositionToken && part.solidFillCompositionSourceBinding) && !part.solidFillCompositionByCombination?.rows.some(row=>row.token || row.sourceBinding))continue;const error=solidFillPartTokenError(part,ctx.tokens);if(error)errors.push(error); }
   // dump v1.36: a flagged part's letter-spacing TOKEN must resolve to a
   // length the whole-pixel box can subtract (anatomy.ts textBoxTokenRefusals).
+  if(walkAnatomy(contract).some(w=>w.part.presenceByState))throw new Error('INLINE_REACT_STATE_PRESENCE_UNSUPPORTED');
   if (walkAnatomy(contract).some((w) => w.part.textAutoResize !== undefined)) errors.push(...textBoxTokenRefusals(contract, ctx.tokens));
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
 
-  contract = lowerStrokedPathPaint(lowerFilledPathVariants(contract));
+  const graphicContract = contract;
+  contract = lowerStrokedPathPaint(lowerFilledEllipseVariants(lowerFilledPathVariants(lowerCenteredFillPadding(contract,ctx.tokens))));
   const nativeLineStyleType = walkAnatomy(contract).some(({part}) => part.shape?.kind === 'line')
     ? "CSSProperties & { '--native-line-stroke-width'?: string | number }" : 'CSSProperties';
   const mode = ctx.mode ?? 'light';
@@ -261,6 +313,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // Style compilation: base per part + per-enum-value overrides per part.
   // -------------------------------------------------------------------------
   const baseStyles: Record<string, StyleRecord> = {};
+  const fillForegroundParts = composedFillForegroundParts(contract,ctx.contracts);
+  const rankedPartNames = new Set(childPaintOrderPlans(contract,ctx.contracts).flatMap(plan=>plan.base.map(rank=>rank.name)));
   const defaultFamily = defaultFontFamilyParts(contract);
   const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
   const nativeTextLeafNames = new Set(walkAnatomy(contract).filter(entry => nativeTextLeaves.has(entry.part)).map(entry => entry.name));
@@ -319,6 +373,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const usedAnimations = new Set<string>();
   /** Part names whose border is redrawn as a ring (STROKE_RING_RUNTIME). */
   const strokeRingParts = new Set<string>();
+  const foregroundStrokeParts = new Set<string>();
 
   /** Slot-wrapper floor predicate (live-gauntlet class ⑤) — see the root
    *  max-width handling below; shared with the tokensByProp per-value pass. */
@@ -333,6 +388,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // and native surfaces. Do not depend on the consumer's global reset.
     const s: StyleRecord = { boxSizing: 'border-box' };
     if (drawsStrokeRing(part)) strokeRingParts.add(partName);
+    if (drawsForegroundStroke(part, isRoot ? contract.semantics.element : part.element)) foregroundStrokeParts.add(partName);
     // A2 grid (G2/G4): this part's cell under its grid parent — resolved
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).
@@ -429,6 +485,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           if (part.layout?.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
         }
       }
+      if (part.layout?.alignSelf) s.alignSelf = part.layout.alignSelf;
       if (part.layout?.grow) { s.flex = part.layout.growBasis === 'zero' ? '1 1 0px' : '1 1 auto'; s.minWidth = 0; if (part.layout.growBasis === 'zero') s.minHeight = 0; }
       if (part.overlay) Object.assign(s, { position: 'absolute' }, OVERLAY_CSS[part.overlay.placement]);
       // v9 shape: the shared projection, camelCased for style objects.
@@ -481,18 +538,18 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       }
       applyBorderStyle(s, part.literals, 'literals', part.declared);
     }
-    for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
+    for (const [sourceProp, ref] of Object.entries(part.tokens ?? {})) {
+      const cssProp = sourceProp === 'gap' && part.layout?.overlap ? '--dsc-overlap-gap' : sourceProp;
       const refPath = stripBraces(ref);
-      if (cssProp === 'gap' && part.layout?.overlap) continue; // negative child margins — see note below
       const phs = placeholdersIn(refPath);
       const selectedStyle = (resolved: string): StyleRecord => {
         const value = resolveValue(resolved);
-        const style: StyleRecord = { [camel(cssProp)]: value };
+        const style: StyleRecord = { [cssProp.startsWith('--') ? cssProp : camel(cssProp)]: value };
         applyDeclStrings(style, wholePixelTextTrackingDecls(part, cssProp, String(value)));
         return style;
       };
       if (phs.length === 0) {
-        s[camel(cssProp)] = resolveValue(refPath);
+        s[cssProp.startsWith('--') ? cssProp : camel(cssProp)] = resolveValue(refPath);
       } else if (phs.length === 1) {
         for (const value of substByName.get(phs[0]) ?? []) {
           const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
@@ -521,6 +578,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             }
           }
         }
+      } else {
+        let rows:Array<{combo:Array<[string,string]>;resolved:string}>=[{combo:[],resolved:refPath}];
+        for(const prop of phs)rows=rows.flatMap(row=>(substByName.get(prop)??[]).map(value=>({combo:[...row.combo,[prop,value] as [string,string]],resolved:row.resolved.replaceAll(`{${prop}}`,value)})));
+        for(const row of rows)addVariantCompound(row.combo,partName,selectedStyle(row.resolved));
       }
     }
     // v10 tokensByProp: per-enum-value token overrides merged over the base
@@ -538,13 +599,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             const other = placeholders[0];
             for (const otherValue of substByName.get(other) ?? []) {
               const resolved = resolveValue(refPath.replaceAll(`{${other}}`, otherValue));
-              const compound: StyleRecord = { [camel(cssProp)]: resolved };
+              const compound: StyleRecord = { [cssProp.startsWith('--') ? cssProp : camel(cssProp)]: resolved };
               if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) compound.minWidth = resolved;
               applyBorderStyle(compound, { [cssProp]: ref }, 'tokens', part.declared);
               addVariantCompound([[entry.prop, value], [other, otherValue]], partName, compound);
             }
           } else {
-            decls[camel(cssProp)] = resolveValue(refPath);
+            decls[cssProp.startsWith('--') ? cssProp : camel(cssProp)] = resolveValue(refPath);
             if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
               decls.minWidth = resolveValue(refPath);
             }
@@ -589,6 +650,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       s[camel(cssProp)] = value;
     }
+    if (part.solidFillComposition || part.solidFillCompositionByCombination) {
+      if(isRoot)Object.assign(s,INSTANCE_FILL_RESET);
+      if(!s.position)s.position='relative';
+      // The independent layer owns paint; the UA button face is not source paint.
+      if((isRoot?contract.semantics.element:part.element)==='button'){s.appearance='none';s.background='none';}
+    }
+    if (fillForegroundParts.has(part)) s.position='relative';
     // No declared family = the pipeline default (defaultFontFamilyParts) —
     // an inline style inherits the host page's font exactly as a class does.
     if (defaultFamily.has(part)) s.fontFamily = DEFAULT_FONT_STACK;
@@ -601,6 +669,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // browser without calc-size() keeps today's box, so no @supports guard
     // is needed and none could be spelled here.
     applyDeclStrings(s, textBoxes.get(part) ?? []);
+    for (const row of part.layoutByCombination?.rows ?? []) {
+      const table = part.layoutByCombination!;
+      const style: StyleRecord = {};
+      applyDeclStrings(style,layoutOverrideDecls(row.layout,part.layout,part.component ? undefined : part));
+      addVariantCompound(table.props.map((p, i) => [p, row.values[i]] as [string, string]), partName, style);
+    }
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {
@@ -609,8 +683,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         if (merged?.display) decls.display = merged.display;
         if (merged?.direction) decls.flexDirection = merged.direction;
         if (merged?.align) decls.alignItems = ALIGN_CSS[merged.align];
+        if (merged?.alignSelf) decls.alignSelf = merged.alignSelf;
         if (merged?.justify) decls.justifyContent = JUSTIFY_CSS[merged.justify];
-        if (merged?.grow !== undefined) { decls.flex = merged.grow ? (merged.growBasis === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto'; decls.minWidth = merged.grow ? 0 : 'auto'; if (merged.growBasis === 'zero') decls.minHeight = merged.grow ? 0 : 'auto'; }
+        if (merged?.grow !== undefined) applyDeclStrings(decls, layoutOverrideDecls({grow: merged.grow, growBasis: merged.growBasis}, undefined, part));
         addVariant(part.layoutByProp.prop, value, partName, decls);
       }
     }
@@ -619,12 +694,19 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   for (const { name: partName, part, path: p } of walkAnatomy(contract)) {
     if (part.component) {
+      if (part.absoluteGeometry) baseStyles[partName] = Object.fromEntries(
+        Object.entries(normalizeAbsoluteGeometry(part.absoluteGeometry).css).map(([key, value]) => [camel(key), value]));
       if (part.absolutePlacement) baseStyles[partName] = {position: 'absolute', left: part.absolutePlacement.left,
         top: part.absolutePlacement.top, right: 'auto', bottom: 'auto'};
       if (hasComponentGrow(part)) {
         baseStyles[partName] = part.layout?.grow === undefined ? {} : {flex: part.layout.grow ? (part.layout.growBasis === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: part.layout.grow ? 0 : 'auto', ...(part.layout.growBasis === 'zero' ? {minHeight: part.layout.grow ? 0 : 'auto'} : {})};
         for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) if (override.grow !== undefined)
           addVariant(part.layoutByProp!.prop, value, partName, {flex: override.grow ? ((override.growBasis ?? part.layout?.growBasis) === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: override.grow ? 0 : 'auto', ...((override.growBasis ?? part.layout?.growBasis) === 'zero' ? {minHeight: override.grow ? 0 : 'auto'} : {})});
+      }
+      for (const row of part.layoutByCombination?.rows ?? []) {
+        const table=part.layoutByCombination!, style:StyleRecord={};
+        applyDeclStrings(style,layoutOverrideDecls(row.layout,part.layout));
+        addVariantCompound(table.props.map((prop,i)=>[prop,row.values[i]] as [string,string]),partName,style);
       }
       for (const [channel,ref] of Object.entries(scalableOverrideRefs(part))) {
         const path = stripBraces(ref), axes = placeholdersIn(path);
@@ -639,6 +721,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           expand(0,path,[]);
         }
       }
+      if(fillForegroundParts.has(part))baseStyles[partName]={...baseStyles[partName],position:"relative"};
       continue;
     }
     // A top-level root (path.length === 1) is compiled as a root — single-root:
@@ -647,6 +730,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     compilePart(partName, part, p.length === 1);
     if (part.absoluteGeometry) baseStyles[partName] = {...baseStyles[partName],
       ...Object.fromEntries(Object.entries(normalizeAbsoluteGeometry(part.absoluteGeometry).css).map(([key,value])=>[camel(key),value]))};
+  }
+  for(const plan of childPaintOrderPlans(contract,ctx.contracts)) {
+    if(plan.isolate)baseStyles[plan.name]={...baseStyles[plan.name],isolation:'isolate'};
+    for(const rank of plan.base)baseStyles[rank.name]={...baseStyles[rank.name],zIndex:rank.zIndex,...(rank.order!==undefined?{order:rank.order}:{})};
+    for(const row of plan.rows)if(Object.keys(row.selection).length)
+      for(const rank of row.ranks)addVariantCompound(Object.entries(row.selection),rank.name,{zIndex:rank.zIndex,...(rank.order!==undefined?{order:rank.order}:{})});
   }
   // A2 grid: style entries the anatomy walk cannot produce — EMPTY areas'
   // placeholder elements (G4's dual-slot convention: the placement is
@@ -792,6 +881,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
+  prelude.push(...reactDrawnVariantGuard(contract, codePropOf));
   const eventAttrsFor = (partName: string, part: Part | undefined, partEl: string): string => {
     const ev = events.find((e) => e.trigger === partName);
     if (!ev) return '';
@@ -826,7 +916,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
    *  emitted where a variant actually changes something). */
   const variantPropsFor = (partName: string): string[] => [...(partVariantProps.get(partName) ?? [])];
 
-  const styleExpr = (partName: string, isRoot: boolean, extra: string[] = []): string => {
+  const styleExpr = (partName: string, isRoot: boolean, extra: string[] = [], overlay = false): string => {
     // Promoted anatomies carry hyphenated part names ("label-2") — dot access
     // parses as subtraction (the emit-react hyphenated-part-name defect,
     // examples/ci/VALIDATION.md). Non-identifier names use bracket access;
@@ -853,6 +943,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const values = placement.props.map(prop => `${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(', ');
       pieces.push(`...PL[${JSON.stringify(partName)}][JSON.stringify([${values}])]`);
     }
+    const rootUsagePart = walkAnatomy(contract).find(row=>row.name===partName)?.part;
+    if(rootUsagePart) {
+      const usage=reactInstanceRootStyle(contract,rootUsagePart,(path,channel)=>channel==='background-color'?instanceRootColor(resolveValue(path)):channel==='opacity'?instanceRootValue(channel,resolveValue(path)):`${instanceRootValue(channel,resolveValue(path))}px`,codePropOf);
+      if(usage)pieces.push(usage);
+      const fill=instanceFillExpression(rootUsagePart,codePropOf,ctx.contracts);if(fill)pieces.push(`...(${fill})`);
+    }
     pieces.push(...extra);
     const selectionPart = selection && walkAnatomy(contract).find(row => row.name === partName)?.part;
     if (selectionPart && selection?.style(selectionPart)) pieces.push(selection.style(selectionPart)!);
@@ -865,7 +961,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // A flagged part's merged record — the consumer's `style` included, so
     // their border/shadow props land on the ring — is redrawn as a ring
     // (STROKE_RING_RUNTIME).
-    if (strokeRingParts.has(partName)) return `{strokeRing({ ${pieces.join(', ')} })}`;
+    if (strokeRingParts.has(partName)) return overlay ? `{strokeRingOverlay({ ${pieces.join(', ')} }, ${Object.keys(rootUsagePart?.parts??{}).length+1})}` : `{strokeRing({ ${pieces.join(', ')} }${foregroundStrokeParts.has(partName)?`, true, ${!(rootUsagePart?.solidFillComposition || rootUsagePart?.solidFillCompositionByCombination)}`:''})}`;
     return `{{ ${pieces.join(', ')} }}`;
   };
 
@@ -884,18 +980,29 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   };
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+    jsx = wrapReactFilledPath(part, jsx, codePropOf);
+    jsx = wrapReactTextAppearance(part, jsx, codePropOf);
+    jsx = wrapReactImage(part, jsx, codePropOf);
+    jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
+    const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
-    if (panel !== undefined) return panel;
-    if (!part.visibleWhen) return jsx;
+    if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
+    if (!part.visibleWhen) return wrapReactPresence(part,jsx,codePropOf);
     const codeName = codePropOf(part.visibleWhen.prop);
     const eq = part.visibleWhen.equals;
+    // A hidden ancestor can narrow this prop to the opposite boolean. Keep
+    // exact boolean equality without making retained descendant JSX a TS2367.
     const cond =
       eq === undefined
         ? codeName
+        : typeof eq === 'boolean'
+          ? `globalThis.Object.is(${codeName}, ${eq})`
         : Array.isArray(eq)
           ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
           : `${codeName} === '${eq}'`;
-    return `{${cond} ? (${jsx}) : null}`;
+    return wrapReactPresence(part,`{${cond} ? (${jsx}) : null}`,codePropOf);
+    })();
+    return wrapReactVisibilityOverride(part,jsx,fallback,codePropOf);
   };
 
   // Root and nested attrs share typed native/ARIA projection with the CSS-module emitter.
@@ -944,7 +1051,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         // PropByProp lookup (see emit-react depAttrString).
         const parentProp = contract.props.find((p) => p.name === value.prop);
         const expr = parentProp?.bindings.code.prop ?? value.prop;
-        parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map)}}`);
+        parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp)}}`);
         continue;
       }
       if (typeof value === 'boolean') {
@@ -976,10 +1083,29 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return parts.join('');
   };
 
+  // Widen the empty string for literal/finite-map text; preserve exact runtime equality.
   const emptyRun = (part: Part, text: string) => needsWholePixelTextRun(part)
-    ? [`...((${text}) == null || (${text}) === '' ? { inlineSize: 0 } : {})`] : [];
+    ? [`...((${text}) == null || (${text}) === ('' as string) ? { inlineSize: 0 } : {})`] : [];
   const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
+  const paintChild = (part: Part | undefined): string => {
+    const bound=!!part?.solidFillCompositionToken || !!part?.solidFillCompositionByCombination?.rows.some(row=>row.token!==undefined) || part===contract.anatomy.root && hasBoundPaintUsage(contract,ctx.contracts);
+    const layerExpr=(paint:Parameters<typeof solidFillCompositionCss>[0],token=part?.solidFillCompositionToken)=>{
+      const baseCss=part===contract.anatomy.root?rootFillLayerCss(paint,token):token===undefined?solidFillCompositionCss(paint):solidFillCompositionTokenCss(paint,token);
+      const css=bound?boundFillSvgCss(baseCss):baseCss;
+      // CSS accepts var() here; React's keyword-only MixBlendMode type does not.
+      return JSON.stringify(css).replace(JSON.stringify(css.mixBlendMode),`${JSON.stringify(css.mixBlendMode)} as CSSProperties['mixBlendMode']`);
+    };
+    if(part?.solidFillComposition && bound)return `<svg aria-hidden="true" focusable="false" data-dsc-paint-layer="" style={${layerExpr(part.solidFillComposition)}}><rect width="100%" height="100%" /></svg>`;
+    if(part?.solidFillComposition)return `<span aria-hidden="true" data-dsc-paint-layer="" style={${layerExpr(part.solidFillComposition)}} />`;
+    const table=part?.solidFillCompositionByCombination;
+    if(!table)return '';
+    const cases=table.rows.map(row=>{
+      const condition=table.props.map((axis,i)=>`String(${codePropOf(axis)}) === ${JSON.stringify(row.values[i])}`).join(' && ');
+      return `(${condition}) ? ${row.empty?`{...${layerExpr(row.paint)},display:${JSON.stringify(part===contract.anatomy.root?"var(--dsc-instance-fill-display, none)":"none")}}`:layerExpr(row.paint,row.token)} : `;
+    }).join('');
+    return bound?`<svg aria-hidden="true" focusable="false" data-dsc-paint-layer="" style={(${cases}undefined)}><rect width="100%" height="100%" /></svg>`:`<span aria-hidden="true" data-dsc-paint-layer="" style={(${cases}undefined)} />`;
+  };
   const renderPart = (partName: string, part: Part): string => {
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
       `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
@@ -1007,7 +1133,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             if (prop.bindings.code.prop === 'children') { childrenField = field; return ''; }
             return ` ${prop.bindings.code.prop}={${codeValueExpression(prop, `__dscItem[${JSON.stringify(field)}]`)}}`;
           }).join('');
-        const attrs = depAttrString(dep, part.component.props ?? {}) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+        const attrs = depAttrString(dep, part.component.props ?? {}) + reactBooleanArguments(contract,dep,part.component) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
         const key = `__dscItem[${JSON.stringify(part.repeat.keyField)}]`;
         const node = childrenField ? `<${dep.name} key={${key}}${attrs}>{__dscItem[${JSON.stringify(childrenField)}]}</${dep.name}>`
           : `<${dep.name} key={${key}}${attrs} />`;
@@ -1040,7 +1166,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
                 fieldAttrs += ` ${literalAttrJsx(codeName, String(v))}`;
               }
             }
-            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
               ? `<${dep.name}${attrs}>${literalTextJsx(itemText)}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
@@ -1050,7 +1176,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.
@@ -1061,24 +1187,34 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
           ? depChildren.default
           : undefined);
-      const instance = part.parts !== undefined
-        ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+      const instance = part.component.contentSlots !== undefined
+        ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderPart,path=>resolveValue(path),codePropOf).join('\n')}\n</>}`).join('')} />`
+        : part.parts !== undefined
+        ? (part.component.contentSlot && part.component.contentSlot !== 'children'
+            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('\n')}\n</>} />`
+            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('\n')}\n</></${dep.name}>`)
         : text !== undefined
         ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
       // A2 grid (G3/P12): an instance cell rides a wrapper span whose style
       // carries the placement (see the baseStyles entries above).
-      return wrapVisibleWhen(part, gridPlan.wrappedInstances.has(partName)
+      return wrapVisibleWhen(part, wrapReactInstanceAffine(part, gridPlan.wrappedInstances.has(partName)
         ? `<span style=${styleExpr(partName, false, [])}>${instance}</span>`
-        : instance);
+        : instance, codePropOf));
     }
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.renderDefault && part.parts
-        ? `${part.slot.name} === undefined ? <>${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('')}</> : ${part.slot.name}`
+        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, ctx.contracts, depAttrString);
-      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
-      return part.optional ? `{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
+      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${paintChild(part)}${reactSlotPaintForeground(part,expr)}</${el}>`;
+      if (part.slot.collapseWhenEmpty) {
+        const content = `{__dscSlotHasContent(${expr}) ? ${node} : null}`;
+        // Visibility wraps JSX, not another braced JavaScript expression.
+        // A transparent fragment keeps both gates without adding a DOM box.
+        return wrapVisibleWhen(part, `<>${content}</>`);
+      }
+      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
     }
     if (part.content) {
       const el = part.element ?? 'span';
@@ -1116,14 +1252,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // A2 grid (G4): a grid parent's EMPTY areas render placeholder elements
     // after the declared children (their styles carry the placement).
     const inner = [
-      ...Object.entries(part.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+      ...((part.solidFillComposition || part.solidFillCompositionByCombination) ? [paintChild(part)] : []),
+      ...reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf),
       ...(gridPlan.placeholders.get(partName) ?? []).map(
         (area) => `<div style=${styleExpr(area, false, [])} />`,
       ),
+      ...(foregroundStrokeParts.has(partName) ? [`<span aria-hidden="true" style=${styleExpr(partName, false, stylesWhenExprs(part), true)} />`] : []),
     ].join('\n');
     return wrapVisibleWhen(
       part,
-      `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
+      wrapReactInstanceAffine(part, `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`, codePropOf),
     );
   };
 
@@ -1132,16 +1270,18 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
   const explicitRootContent = rootContentJsx(root, codePropOf);
-  const rootInner = root?.parts || gridPlan.placeholders.has('root')
+  const rootInnerContent = reactComposedPath(graphicContract, codePropOf, resolveValue) ?? (root?.parts || gridPlan.placeholders.has('root')
     ? [
+        ...((root?.solidFillComposition || root?.solidFillCompositionByCombination) ? [paintChild(root)] : []),
         ...(explicitRootContent !== undefined ? [explicitRootContent] : []),
-        ...Object.entries(root?.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+        ...reactMaskChildren(root?.parts, renderPart, path=>resolveValue(path), codePropOf),
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlan.placeholders.get('root') ?? []).map(
           (area) => `<div style=${styleExpr(area, false, [])} />`,
         ),
       ].join('\n')
-    : explicitRootContent ?? '{children}';
+    : paintChild(root) + (explicitRootContent ?? '{children}'));
+  const rootInner = rootInnerContent + (foregroundStrokeParts.has('root') ? `\n<span aria-hidden="true" style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [], true)} />` : '');
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
@@ -1195,12 +1335,22 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   elementAttrs.push('{...rest}');
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
+  const paintStyleType = walkAnatomy(contract).some(({part})=>part.solidFillComposition || part.solidFillCompositionByCombination) ? `${nativeLineStyleType} & Partial<Record<'--dsc-instance-fill-color' | '--dsc-instance-fill-blend' | '--dsc-instance-fill-display', string>>` : nativeLineStyleType;
+  const overlapStyleType = walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap)
+    ? `${paintStyleType} & { '--dsc-overlap-gap'?: string | number }` : paintStyleType;
   const styleType = walkAnatomy(contract).some(({ part }) => needsWholePixelTextRun(part))
-    ? `${nativeLineStyleType} & { '--_dsc-text-box-tracking'?: string }` : nativeLineStyleType;
+    ? `${overlapStyleType} & { '--_dsc-text-box-tracking'?: string }` : overlapStyleType;
   const variantFlat: Record<string, StyleRecord> = {};
-  for (const [key, parts] of Object.entries({ ...variantStyles, ...variantPairStyles })) {
-    for (const [partName, decls] of Object.entries(parts)) {
-      variantFlat[`${key}:${partName}`] = decls;
+  // A compound table may name just one axis, sharing a key with ordinary
+  // variant styles. Merge declarations per part; replacing the outer record
+  // would erase other parts and unrelated layout/token channels. Compound
+  // declarations retain their existing precedence on the same CSS channel.
+  for (const table of [variantStyles, variantPairStyles]) {
+    for (const [key, parts] of Object.entries(table)) {
+      for (const [partName, decls] of Object.entries(parts)) {
+        const flatKey = `${key}:${partName}`;
+        variantFlat[flatKey] = {...variantFlat[flatKey], ...decls};
+      }
     }
   }
 
@@ -1227,9 +1377,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   ].join(', ');
   const depImports = deps.map((depName) => `import { ${depName} } from './${depName}';`).join('\n');
 
-  const overlapNote = walkAnatomy(contract).some((w) => w.part.layout?.overlap && w.part.tokens?.gap)
-    ? `\n * Fidelity: the overlap gap (negative child margins) needs a child selector — not\n * expressible inline; children render without the overlap offset.`
-    : '';
+  const overlapNote = '';
   const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat && w.part !== selection?.item)
     ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
     : '';
@@ -1304,8 +1452,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
  * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
-import type { ${typeImports} } from 'react';
-${depImports}${depImports ? '\n' : ''}
+import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
 ${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
@@ -1340,8 +1488,8 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatAndPreviewNote}${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
-import type { ${typeImports} } from 'react';
-${depImports}${depImports ? '\n' : ''}
+import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
 ${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
@@ -1357,9 +1505,9 @@ export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   ref,
 ) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
-    <${el} ${elementAttrs.join(' ')}>
+    ${contract.anatomy.root?.layout?.overlap && contract.anatomy.root?.tokens?.gap ? '<__DscOverlap>' : ''}<${el} ${elementAttrs.join(' ')}>
       ${keyframesNode}${rootInner}
-    </${el}>
+    </${el}>${contract.anatomy.root?.layout?.overlap && contract.anatomy.root?.tokens?.gap ? '</__DscOverlap>' : ''}
   );
 });
 `;

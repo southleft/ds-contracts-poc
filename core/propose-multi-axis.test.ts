@@ -8,6 +8,44 @@ import {
   type Part,
 } from "../scripts/contract-schema.js";
 import type { DumpSet } from "../extract/figma/types.js";
+import { ContractSchema } from "../scripts/contract-schema.js";
+import { createFigmaEngine } from "./emit-figma-script.js";
+import { generateCss } from "./emit-react.js";
+
+function alignmentFixture(): DumpSet {
+  return {setName:'Aligned copy',type:'COMPONENT_SET',
+    propertyDefinitions:{Align:{type:'VARIANT',defaultValue:'Start',variantOptions:['Start','Center']}},
+    variants:['Start','Center'].map((value,i)=>({name:`Align=${value}`,type:'COMPONENT',
+      variantProperties:{Align:value},bbox:{width:160,height:40},
+      children:[{name:'Copy',type:'TEXT',bbox:{width:160,height:40},text:{characters:'Two lines of copy',
+        fontSize:16,fontStyle:'Regular',lineHeight:20,textAlign:i?'CENTER':'LEFT',textAutoResize:'NONE'}}]}))};
+}
+test('observed enum text alignment reaches CSS and native text without changing its base declaration',()=>{
+  const result=proposeFromDump(alignmentFixture(),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true});
+  const contract=ContractSchema.parse(result.contract),root=contract.anatomy.root;
+  const css=generateCss(contract,new Set(),[]);
+  assert.match(css,/\.align-start[^}]*text-align: left/s);
+  assert.match(css,/\.align-center[^}]*text-align: center/s);
+  const engine=createFigmaEngine({tokens:{primitives:result.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  const variants=engine.compileComponentData(contract,new Map([[contract.id,contract]])).variants;
+  const alignments=(node:any):string[]=>[...(node.type==='text'?[node.textAlignH]:[]),...(node.children??[]).flatMap(alignments)];
+  assert.deepEqual(alignments(variants.find(v=>v.name.includes('Start'))!.spec),['LEFT']);
+  assert.deepEqual(alignments(variants.find(v=>v.name.includes('Center'))!.spec),['CENTER']);
+  assert.equal(root.declared?.['text-align'],undefined);
+});
+test('missing and contradictory alignment evidence cannot create conditional rules',()=>{
+  for(const kind of ['missing','conflict'] as const){
+    const dump=alignmentFixture();
+    if(kind==='missing')delete dump.variants[1].children![0].text!.textAlign;
+    else {dump.propertyDefinitions!.Size={type:'VARIANT',defaultValue:'Small',variantOptions:['Small','Large']};
+      dump.variants=dump.variants.flatMap((v,i)=>['Small','Large'].map((size,j)=>({...structuredClone(v),name:v.name+`, Size=${size}`,
+        variantProperties:{...v.variantProperties,Size:size},children:[{...structuredClone(v.children![0]),text:{...v.children![0].text!,textAlign:i===j?'LEFT':'CENTER'}}]})));}
+    const result=proposeFromDump(dump,{corpus,contractIdByName:new Map(),mintUnbound:true});
+    const contract=ContractSchema.parse(result.contract);
+    assert(!JSON.stringify(contract.anatomy).includes('"text-align"'));
+    assert(result.notes.some(n=>n.includes('no complete enum-axis alignment correlation')));
+  }
+});
 
 const corpus = tokenCorpusFromJson({
   primitives: {
@@ -268,3 +306,22 @@ test("partial padding bindings retain measured sides without replacing a carried
     "mint-off still refuses partial bindings",
   );
 });
+
+// Live Figma probe 1118, section 164:75949 in Live Testing:
+// Source Sans Pro and Inter, 14px, one/two/three explicit lines.
+// PERCENT heights were 19/38/57 or 20/40/60; PIXELS retained fractions
+// (19.6px produced 20/40/59). Do not round the PIXELS channel.
+for(const family of ['Source Sans Pro','Inter']) {
+ test(`${family}: captured percentage line height retains native per-line rounding`,()=>{
+  for(const [px,expected] of [[19.1,19],[19.4,19],[19.5,20],[19.6,20],[19.9,20],[20.2,20]]) {
+   for(const unit of ['PERCENT',undefined,'AUTO'] as const){
+    const dump:DumpSet={setName:'TextProbe',type:'COMPONENT',variants:[{name:'TextProbe',type:'COMPONENT',children:[{name:'Label',type:'TEXT',text:{characters:'Ag\nAg\nAg',fontFamily:family,fontStyle:'Regular',fontWeight:400,fontSize:14,lineHeight:px,...(unit?{lineHeightUnit:unit}:{})}}]}]};
+    const before=JSON.stringify(dump);
+    const r=proposeFromDump(dump,{mintUnbound:true,contractIdByName:new Map(),corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}})});
+    const values=r.mintedTokens?.entries.filter(e=>e.usageSites.some(site=>site.includes('line-height'))).map(e=>e.value)??[];
+    assert.deepEqual(values,unit==='AUTO'?[]:[`${unit==='PERCENT'?expected:px}px`],`${unit} ${px}`);
+    assert.equal(JSON.stringify(dump),before,'raw source evidence stays unchanged');
+   }
+  }
+ });
+}

@@ -1,0 +1,52 @@
+{
+  "scope": "Editable native control only, no kit/reverse qualification",
+  "createdNodeIds": [
+    "394:2",
+    "394:3"
+  ],
+  "mutatedNodeIds": [],
+  "frameId": "394:2",
+  "vectorId": "394:3",
+  "sourcePaths": [
+    {
+      "data": "M0 0L4 0L4 4L0 4Z",
+      "windingRule": "NONZERO"
+    },
+    {
+      "data": "M8 6L12 6L12 10L8 10Z",
+      "windingRule": "EVENODD"
+    }
+  ],
+  "initial": {
+    "x": 3,
+    "y": 4,
+    "width": 12,
+    "height": 10,
+    "vectorPaths": [
+      {
+        "windingRule": "NONZERO",
+        "data": "M 0 0 L 4 0 L 4 4 L 0 4 L 0 0 Z"
+      },
+      {
+        "windingRule": "EVENODD",
+        "data": "M 8 6 L 12 6 L 12 10 L 8 10 L 8 6 Z"
+      }
+    ]
+  },
+  "resized": {
+    "x": 3,
+    "y": 4,
+    "width": 6,
+    "height": 5,
+    "vectorPaths": [
+      {
+        "windingRule": "NONZERO",
+        "data": "M 0 0 L 2 0 L 2 2 L 0 2 L 0 0 Z"
+      },
+      {
+        "windingRule": "EVENODD",
+        "data": "M 4 3 L 6 3 L 6 5 L 4 5 L 4 3 Z"
+      }
+    ]
+  }
+}

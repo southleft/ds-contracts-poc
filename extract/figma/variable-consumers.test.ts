@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from './types.js';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
@@ -52,7 +53,7 @@ test('hidden text captures its actual line-height binding and inherited consumin
   const f = fixture();
   const before = f.texts.map(t => JSON.stringify({ characters: t.characters, visible: t.visible, bound: t.boundVariables, modes: t.explicitVariableModes }));
   const dump = await f.capture(), labels = f.labels(dump);
-  assert.equal(dump._provenance.dumpVersion, '1.48');
+  assert.equal(dump._provenance.dumpVersion, PLUGIN_DUMP_VERSION);
   assert.ok(!dump._degradations.some(d => d.code === 'variable-consumer-unresolved'));
   assert.deepEqual(labels.map(n => n.text!.lineHeightVar), ['line-height', 'line-height']);
   assert.deepEqual(labels.map(n => n.variableConsumers![f.line.id]), [f.small, f.large].map((modeId, i) => ({
@@ -237,7 +238,7 @@ test('REST native line-height bindings agree with plugin precedence without inve
       variableCollections: { typography: { id: 'typography', defaultModeId: 'small', modes: [{ modeId: 'small', name: 'Small' }, { modeId: 'large', name: 'Large' }] } },
     } } });
     const label = (result.dump.RestProbe as DumpSet).variants[0].children![0];
-    assert.equal(REST_DUMP_VERSION, '1.44');
+    assert.equal(REST_DUMP_VERSION, '1.63');
     assert.equal(label.text!.lineHeightVar, ['native', 'conflict'].includes(kind) ? 'line-height'
       : ['empty', 'unbound'].includes(kind) ? 'legacy-line' : undefined, kind);
     assert.equal(label.variableConsumers, undefined, 'REST does not identify inherited consuming modes');
@@ -267,7 +268,7 @@ test('native weight capture retains numeric weight, mode and variable identity w
     const captured = ['native', 'conflict', 'non-numeric'].includes(kind);
     assert.deepEqual(rows.map(n => n.text!.fontWeightVar), Array(2).fill(captured ? 'font-weight' :
       ['empty', 'unbound'].includes(kind) ? 'legacy-weight' : undefined), kind);
-    assert.deepEqual(rows.map(n => n.text!.fontWeight), captured && kind !== 'non-numeric' ? [400, 700] : [undefined, undefined], kind);
+    assert.deepEqual(rows.map(n => n.text!.fontWeight), ['native','conflict','missing','empty','unbound'].includes(kind) ? [400, 700] : [undefined, undefined], kind);
     if (captured) {
       assert.ok(Object.hasOwn(dump._variables, 'font-weight'));
       assert.deepEqual(rows.map(n => n.variableConsumers![weight.id].value), [400, 700]);
@@ -300,10 +301,32 @@ test('REST weight capture uses native binding precedence and preserves weight wi
     const label = (result.dump.WeightProbe as DumpSet).variants[0].children![0];
     const captured = ['native', 'conflict', 'non-numeric'].includes(kind);
     assert.equal(label.text!.fontWeightVar, captured ? 'font-weight' : ['empty', 'unbound'].includes(kind) ? 'legacy-weight' : undefined, kind);
-    assert.equal(label.text!.fontWeight, captured && kind !== 'non-numeric' ? 700 : undefined, kind);
+    assert.equal(label.text!.fontWeight, ['native','conflict','missing','empty','unbound'].includes(kind) ? 700 : undefined, kind);
     assert.equal(label.variableConsumers, undefined);
     if (kind === 'conflict') assert.ok(result.report.degradations.some(d => d.code === 'text-binding-conflict'));
     if (['mixed', 'missing', 'malformed', 'non-numeric'].includes(kind))
       assert.ok(result.report.degradations.some(d => d.code === 'text-channel-unsupported'), kind);
   }
+});
+
+test('unresolvable weight identity preserves a uniform variable-font value without a legacy alias', async()=>{
+ const f=fixture();
+ for(const text of f.texts){text.fontWeight=653;text.boundVariables.fontWeight=[{type:'VARIABLE_ALIAS',id:'unavailable'}];text.setSharedPluginData('ds_contracts','fontWeightVar','legacy-weight');}
+ const dump=await f.capture();
+ for(const label of f.labels(dump)){assert.equal(label.text!.fontWeight,653);assert.equal(label.text!.fontWeightVar,undefined);assert.equal(label.variableConsumers?.unavailable,undefined);}
+ assert(dump._degradations.some(d=>d.code==='text-channel-unsupported'&&d.message.includes('legacy stamp not substituted')));
+});
+
+test('REST retains unresolved 653 weight but refuses mixed-range numeric authority',()=>{
+ for(const mixed of [false,true]){
+  const result=mapRestToDump({name:'fixture',nodes:{'1:1':{document:{id:'1:1',type:'COMPONENT',name:'WeightProbe',children:[{
+   id:'1:2',type:'TEXT',name:'Heading',characters:'Blog',style:{fontSize:12,fontFamily:'Atlassian Sans',fontStyle:'Bold',fontWeight:653},
+   boundVariables:{fontWeight:[{type:'VARIABLE_ALIAS',id:'unavailable'}]},sharedPluginData:{ds_contracts:{fontWeightVar:'legacy-weight'}},
+   ...(mixed?{characterStyleOverrides:[1,1,1,1],styleOverrideTable:{'1':{fontWeight:700}}}:{})
+  }]}}}});
+  const label=(result.dump.WeightProbe as DumpSet).variants[0].children![0];
+  assert.equal(label.text!.fontWeight,mixed?undefined:653);assert.equal(label.text!.fontWeightVar,undefined);
+  assert.equal(label.variableConsumers,undefined);
+  assert(result.report.degradations.some(d=>d.code==='text-channel-unsupported'));
+ }
 });

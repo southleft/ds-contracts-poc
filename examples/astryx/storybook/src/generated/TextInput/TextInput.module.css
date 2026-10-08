@@ -89,7 +89,6 @@
 .part-1-0-0 {
   display: flex;
   flex: 1 1 auto;
-  min-width: 0;
   appearance: none;
   border: none;
   background: transparent;

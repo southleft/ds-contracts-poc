@@ -63,7 +63,7 @@ export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
  *  validator JSON never leaves the engine as a headline. The isolation loop
  *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
  *  this wrapper only supplies the playground's live corpus and options. */
-export function proposalsFromDump(dump: FigmaImportResult['dump']): DumpProposalBatch {
+export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime'): DumpProposalBatch {
   // The ACTIVE corpus — nearest-token suggestions and hex→token matching
   // come from the user's pasted tree when one is applied. mintUnbound:
   // values whose variable names are unrecoverable (the non-Enterprise
@@ -75,6 +75,7 @@ export function proposalsFromDump(dump: FigmaImportResult['dump']): DumpProposal
   // fallback; a name match whose keys contradict is refused by name).
   const session = sessionRegistry();
   return proposeBatchFromDump(dump, {
+    drawnVariantSurface: surface,
     corpus: activeTokens().corpus,
     contractIdByName: new Map([...contractIdByName, ...session.idByName]),
     contractIdByKey: new Map([...contractIdByKey, ...session.idByKey]),

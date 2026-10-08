@@ -1,0 +1,120 @@
+{
+  "qualification": "Full draft compiler generated component; independent bound paint receiver readback, not public component qualification",
+  "expected": {
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+    "hostId": "155:66954",
+    "layerId": "155:66956",
+    "variableId": "VariableID:155:66952",
+    "paint": {
+      "color": {
+        "r": 0.25,
+        "g": 0.5,
+        "b": 0.75
+      },
+      "opacity": 0.5,
+      "blendMode": "MULTIPLY"
+    },
+    "width": 40,
+    "height": 40,
+    "layoutMode": "HORIZONTAL",
+    "reversePaint": true,
+    "contentIds": [
+      "155:66955"
+    ]
+  },
+  "receipt": {
+    "version": 1,
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ",
+    "host": {
+      "id": "155:66954",
+      "type": "COMPONENT",
+      "width": 40,
+      "height": 40,
+      "layoutMode": "HORIZONTAL",
+      "itemReverseZIndex": true,
+      "fills": [],
+      "childIds": [
+        "155:66955",
+        "155:66956"
+      ],
+      "corners": {
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0,
+        "cornerSmoothing": 0
+      }
+    },
+    "layer": {
+      "id": "155:66956",
+      "parentId": "155:66954",
+      "type": "RECTANGLE",
+      "rotation": 0,
+      "relativeTransform": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "isMask": false,
+      "strokes": [],
+      "effects": [],
+      "x": 0,
+      "y": 0,
+      "width": 40,
+      "height": 40,
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "MULTIPLY",
+      "layoutPositioning": "ABSOLUTE",
+      "constraints": {
+        "horizontal": "STRETCH",
+        "vertical": "STRETCH"
+      },
+      "corners": {
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0,
+        "cornerSmoothing": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.5,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 0.75
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:155:66952"
+            }
+          }
+        }
+      ]
+    },
+    "variable": {
+      "id": "VariableID:155:66952",
+      "resolved": {
+        "value": {
+          "r": 0.25,
+          "g": 0.5,
+          "b": 0.75,
+          "a": 0.5
+        },
+        "resolvedType": "COLOR"
+      }
+    }
+  }
+}

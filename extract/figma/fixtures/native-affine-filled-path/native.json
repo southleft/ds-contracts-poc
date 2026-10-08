@@ -1,0 +1,309 @@
+{
+  "fileKey": "MfQWBskM44sS8VvL41eqPH",
+  "roots": [
+    {
+      "id": "120546:8446",
+      "name": "Chevron left",
+      "key": "f6adf7e7ea1256f02d284896f39d8587eba03d68",
+      "facts": [
+        {
+          "id": "120546:8446",
+          "name": "Chevron left",
+          "type": "COMPONENT",
+          "width": 16,
+          "height": 16,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              76
+            ],
+            [
+              0,
+              1,
+              64
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              76
+            ],
+            [
+              0,
+              1,
+              64
+            ]
+          ],
+          "rotation": 0,
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "fills": [],
+          "strokes": [],
+          "effects": [],
+          "opacity": 1
+        },
+        {
+          "id": "120546:8447",
+          "parentId": "120546:8446",
+          "name": "Icon",
+          "type": "GROUP",
+          "width": 7.280390739440918,
+          "height": 13.060546875,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              3.7498831748962402
+            ],
+            [
+              0,
+              1,
+              1.4697259664535522
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              79.74988555908203
+            ],
+            [
+              0,
+              1,
+              65.4697265625
+            ]
+          ],
+          "rotation": 0,
+          "effects": [],
+          "opacity": 1
+        },
+        {
+          "id": "120546:8448",
+          "parentId": "120546:8447",
+          "name": "Glyph",
+          "type": "VECTOR",
+          "width": 13.060546875,
+          "height": 7.28039026260376,
+          "relativeTransform": [
+            [
+              4.371138828673793e-08,
+              -1,
+              11.0302734375
+            ],
+            [
+              -1,
+              -4.371138828673793e-08,
+              14.530272841453552
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              4.371138828673793e-08,
+              -1,
+              87.0302734375
+            ],
+            [
+              -1,
+              -4.371138828673793e-08,
+              78.5302734375
+            ]
+          ],
+          "rotation": 89.99999749552194,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "vectorPaths": [
+            {
+              "windingRule": "NONZERO",
+              "data": "M 13.060546875 1.060546875 L 7.060546875 7.060546875 C 6.785943120718002 7.335150629281998 6.351221859455109 7.352613657712936 6.056640625 7.1123046875 L 6 7.060546875 L 0 1.060546875 L 1.060546875 0 L 6.5302734375 5.4697265625 L 12 0 L 13.060546875 1.060546875 Z"
+            }
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.16078431904315948,
+                "g": 0.16470588743686676,
+                "b": 0.18039216101169586
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:adc21f151a10d070dfbc2b370a7fc119b40586ba/60193:1"
+                }
+              }
+            }
+          ],
+          "strokes": [],
+          "effects": [],
+          "opacity": 1
+        }
+      ],
+      "screenshot": {
+        "file": "chevron-left.png",
+        "scale": 4,
+        "sha256": "c3d296622cbf0fd9d630c9977daadd42631a65b13064f756d4f45183caf94673"
+      }
+    },
+    {
+      "id": "120546:12590",
+      "name": "Chevron right",
+      "key": "3695d0bef2a5b839b0ef2ffa7e2ad64e14a7c6bc",
+      "facts": [
+        {
+          "id": "120546:12590",
+          "name": "Chevron right",
+          "type": "COMPONENT",
+          "width": 16,
+          "height": 16,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              76
+            ],
+            [
+              0,
+              1,
+              64
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              76
+            ],
+            [
+              0,
+              1,
+              64
+            ]
+          ],
+          "rotation": 0,
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "fills": [],
+          "strokes": [],
+          "effects": [],
+          "opacity": 1
+        },
+        {
+          "id": "120546:12591",
+          "parentId": "120546:12590",
+          "name": "Icon",
+          "type": "GROUP",
+          "width": 7.280390739440918,
+          "height": 13.060546875,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              4.969725608825684
+            ],
+            [
+              0,
+              1,
+              1.4697259664535522
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              1,
+              0,
+              80.9697265625
+            ],
+            [
+              0,
+              1,
+              65.4697265625
+            ]
+          ],
+          "rotation": 0,
+          "effects": [],
+          "opacity": 1
+        },
+        {
+          "id": "120546:12592",
+          "parentId": "120546:12591",
+          "name": "Glyph",
+          "type": "VECTOR",
+          "width": 13.060546875,
+          "height": 7.28039026260376,
+          "relativeTransform": [
+            [
+              -4.371138828673793e-08,
+              1,
+              4.969726716162086
+            ],
+            [
+              -1,
+              -4.371138828673793e-08,
+              14.530272841453552
+            ]
+          ],
+          "absoluteTransform": [
+            [
+              -4.371138828673793e-08,
+              1,
+              80.9697265625
+            ],
+            [
+              -1,
+              -4.371138828673793e-08,
+              78.5302734375
+            ]
+          ],
+          "rotation": 90.00000250447806,
+          "constraints": {
+            "horizontal": "SCALE",
+            "vertical": "SCALE"
+          },
+          "vectorPaths": [
+            {
+              "windingRule": "NONZERO",
+              "data": "M 13.060546875 1.060546875 L 7.060546875 7.060546875 C 6.785943120718002 7.335150629281998 6.351221859455109 7.352613657712936 6.056640625 7.1123046875 L 6 7.060546875 L 0 1.060546875 L 1.060546875 0 L 6.5302734375 5.4697265625 L 12 0 L 13.060546875 1.060546875 Z"
+            }
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.16078431904315948,
+                "g": 0.16470588743686676,
+                "b": 0.18039216101169586
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:adc21f151a10d070dfbc2b370a7fc119b40586ba/60193:1"
+                }
+              }
+            }
+          ],
+          "strokes": [],
+          "effects": [],
+          "opacity": 1
+        }
+      ],
+      "screenshot": {
+        "file": "chevron-right.png",
+        "scale": 4,
+        "sha256": "4cd804f86c37821639077724903011a17f76f526befff838d80be2236838ed8d"
+      }
+    }
+  ]
+}

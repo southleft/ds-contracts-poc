@@ -1,0 +1,683 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/radio-button.contract.json (ds.radio-button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--spacing-100);
+  width: fit-content;
+  height: fit-content;
+}
+
+.state-error {
+  gap: var(--spacing-025);
+}
+
+.alignment-left {
+}
+
+.size-large {
+}
+
+.state-default {
+}
+
+.root:where(.alignment-left.size-large.state-default) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-large.state-error) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.alignment-right {
+}
+
+.root:where(.alignment-right.size-large.state-error) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.size-small {
+}
+
+.root:where(.alignment-left.size-small.state-error) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.root:where(.alignment-right.size-small.state-error) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.root:where(.alignment-right.size-large.state-default) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.state-disabled {
+}
+
+.root:where(.alignment-left.size-large.state-disabled) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-large.state-disabled) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-small.state-default) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small.state-default) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-small.state-disabled) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small.state-disabled) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.state-hover {
+}
+
+.root:where(.alignment-left.size-large.state-hover) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.state-focus {
+}
+
+.root:where(.alignment-left.size-large.state-focus) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-large.state-hover) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-large.state-focus) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-small.state-hover) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-small.state-focus) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small.state-hover) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small.state-focus) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.contentTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-100);
+  width: 100%;
+}
+
+.root:where(.alignment-left.size-large.state-error) .contentTop {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-large.state-error) .contentTop {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-left.size-small.state-error) .contentTop {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.root:where(.alignment-right.size-small.state-error) .contentTop {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.radioLabel {
+  color: var(--text-primary);
+  font-weight: var(--imported-shared-num-400);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.size-large .radioLabel {
+  font-size: var(--imported-radio-button-content-top-radio-label-font-size-large);
+}
+
+.size-small .radioLabel {
+  font-size: var(--imported-radio-button-content-top-radio-label-font-size-small);
+}
+
+.size-large .radioLabel {
+  line-height: var(--imported-radio-button-content-top-radio-label-line-height-large);
+}
+
+.size-small .radioLabel {
+  line-height: var(--imported-radio-button-content-top-radio-label-line-height-small);
+}
+
+.errorText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-050);
+  width: var(--imported-radio-button-error-text-width);
+}
+
+.alignment-left.size-large .errorText {
+  padding-left: var(--imported-radio-button-error-text-padding-left-left-large);
+}
+
+.alignment-left.size-small .errorText {
+  padding-left: var(--imported-radio-button-error-text-padding-left-left-small);
+}
+
+.alignment-right.size-large .errorText {
+  padding-left: var(--imported-radio-button-error-text-padding-left-right-large);
+}
+
+.alignment-right.size-small .errorText {
+  padding-left: var(--imported-radio-button-error-text-padding-left-right-small);
+}
+
+.errorText2 {
+  color: var(--text-danger-default);
+  font-size: var(--body-font-small);
+  line-height: var(--body-line-height-small);
+  font-weight: var(--imported-shared-num-400);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.radioLabel2 {
+  font-weight: var(--imported-shared-num-400);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.state-default .radioLabel2 {
+  color: var(--imported-radio-button-radio-label-color-default);
+}
+
+.state-error .radioLabel2 {
+  color: var(--imported-radio-button-radio-label-color-error);
+}
+
+.state-disabled .radioLabel2 {
+  color: var(--imported-radio-button-radio-label-color-disabled);
+}
+
+.state-hover .radioLabel2 {
+  color: var(--imported-radio-button-radio-label-color-hover);
+}
+
+.state-focus .radioLabel2 {
+  color: var(--imported-radio-button-radio-label-color-focus);
+}
+
+.size-large .radioLabel2 {
+  font-size: var(--imported-radio-button-radio-label-font-size-large);
+}
+
+.size-small .radioLabel2 {
+  font-size: var(--imported-radio-button-radio-label-font-size-small);
+}
+
+.size-large .radioLabel2 {
+  line-height: var(--imported-radio-button-radio-label-line-height-large);
+}
+
+.size-small .radioLabel2 {
+  line-height: var(--imported-radio-button-radio-label-line-height-small);
+}
+.root {
+  isolation: isolate;
+}
+.root > .contentTop {
+  z-index: 1;
+}
+.root > .errorText {
+  z-index: 2;
+}
+.root > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-large.state-default > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-default > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-default > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-large.state-default > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-large.state-error > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-error > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-error > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-large.state-error > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-large.state-disabled > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-disabled > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-disabled > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-large.state-disabled > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-large.state-hover > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-hover > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-hover > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-large.state-hover > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-large.state-focus > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-focus > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-focus > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-large.state-focus > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-small.state-default > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-default > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-default > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-small.state-default > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-small.state-error > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-error > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-error > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-small.state-error > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-small.state-disabled > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-disabled > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-disabled > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-small.state-disabled > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-small.state-hover > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-hover > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-hover > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-small.state-hover > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-left.size-small.state-focus > .contentTop {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-focus > .errorText {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-focus > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-left.size-small.state-focus > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-default > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-default > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-large.state-default > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-default > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-error > .contentTop {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-error > .errorText {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-error > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-right.size-large.state-error > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-disabled > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-disabled > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-large.state-disabled > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-disabled > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-hover > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-hover > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-large.state-hover > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-hover > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-focus > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-large.state-focus > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-large.state-focus > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-focus > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-default > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-small.state-default > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-small.state-default > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-default > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-error > .contentTop {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-error > .errorText {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-error > .radioButtonIcon2 {
+  z-index: 3;
+}
+.root.alignment-right.size-small.state-error > .radioLabel2 {
+  z-index: 4;
+}
+.root.alignment-right.size-small.state-disabled > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-small.state-disabled > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-small.state-disabled > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-disabled > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-hover > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-small.state-hover > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-small.state-hover > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-hover > .radioLabel2 {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-focus > .contentTop {
+  z-index: 4;
+}
+.root.alignment-right.size-small.state-focus > .errorText {
+  z-index: 3;
+}
+.root.alignment-right.size-small.state-focus > .radioButtonIcon2 {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-focus > .radioLabel2 {
+  z-index: 1;
+}
+.contentTop {
+  isolation: isolate;
+}
+.contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-default .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-default .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-error .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-error .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-disabled .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-disabled .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-hover .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-hover .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-large.state-focus .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-large.state-focus .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-default .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-default .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-error .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-error .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-disabled .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-disabled .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-hover .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-hover .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-left.size-small.state-focus .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-left.size-small.state-focus .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-default .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-default .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-error .contentTop > .radioButtonIcon {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-error .contentTop > .radioLabel {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-disabled .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-disabled .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-hover .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-hover .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-large.state-focus .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-large.state-focus .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-default .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-default .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-error .contentTop > .radioButtonIcon {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-error .contentTop > .radioLabel {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-disabled .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-disabled .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-hover .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-hover .contentTop > .radioLabel {
+  z-index: 2;
+}
+.root.alignment-right.size-small.state-focus .contentTop > .radioButtonIcon {
+  z-index: 1;
+}
+.root.alignment-right.size-small.state-focus .contentTop > .radioLabel {
+  z-index: 2;
+}

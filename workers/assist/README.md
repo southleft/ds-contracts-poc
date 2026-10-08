@@ -355,7 +355,10 @@ above.
 
 ## Deploy runbook (orchestrator)
 
-From `workers/assist/` (requires `wrangler` ≥ 4, `npm install` first):
+From `workers/assist/`, run `npm ci` first. The locked Wrangler/Miniflare
+toolchain requires Node 22 or newer for local development and deployment;
+the repository's Node 20 pin still applies to its root CI checks and worker
+handler tests.
 
 ```sh
 # 1. Create the KV namespace and paste the printed id into wrangler.toml
@@ -406,6 +409,10 @@ curl -s "$BASE/channel/<readKey>?since=0"      # → { status: "current", seq: 0
 
 A claim that answers `503` means `CHANNEL_ENABLED` is not `"true"` in the
 deployed config; everything else is unaffected by that switch.
+
+The `sharp` override pins 0.35.5 to address the librsvg advisory
+CVE-2026-96889 while Miniflare still pins 0.35.4. Remove the override once
+the locked upstream dependency includes the patched version.
 
 Local dev: `npm run dev` (wrangler dev with a local KV simulator), with
 `ASSIST_DEV_ORIGIN` set so the local playground origin passes CORS.

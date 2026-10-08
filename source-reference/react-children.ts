@@ -21,7 +21,7 @@ export function readReactChildren(
   checker: ts.TypeChecker,
   hasChildren: boolean,
   /** Only a separately bound JSX-runtime call may use the compiled form. */
-  compiledFactory = false,
+  compiledFactory: boolean | 'createElement' = false,
 ): ReactChildrenFact {
   const sf = root.getSourceFile();
   const unknown = (reason: string): ReactChildrenFact => ({
@@ -345,10 +345,10 @@ export function readReactChildren(
   };
   const readCompiled = (call: ts.CallExpression): ReactChildrenFact => {
     const props = call.arguments[1] && unwrap(call.arguments[1]);
-    if (!props || !ts.isObjectLiteralExpression(props))
+    if (!props || (!ts.isObjectLiteralExpression(props) && !(compiledFactory==='createElement' && props.kind===ts.SyntaxKind.NullKeyword)))
       return unknown('children-compiled-props-unresolved');
     let fact: ReactChildrenFact = {kind:'absent'};
-    for (const property of props.properties) {
+    for (const property of ts.isObjectLiteralExpression(props)?props.properties:[]) {
       if (ts.isSpreadAssignment(property)) {
         const kind = inputKind(property.expression);
         if (kind === 'excluded') approve(property.expression);
@@ -370,6 +370,11 @@ export function readReactChildren(
         const ref = unwrap(value);
         if (ts.isIdentifier(ref) && secondaryAliases.has(symbolAt(ref)!)) approve(ref);
       }
+    }
+    if(compiledFactory==='createElement' && call.arguments.length>2){
+      if(call.arguments.length!==3)return unknown('children-create-element-composition-unresolved');
+      // Positional children replace config.children, including explicit null.
+      return expression(call.arguments[2],'expression');
     }
     return fact;
   };

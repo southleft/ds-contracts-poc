@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -20,7 +21,7 @@
   },
   "generatedSha256": {
     "Badge/Badge.module.css": "3b9c41944e230560fa9261770bc713fdeb54eee40b5221b0df331d58a9898fa7",
-    "Badge/Badge.tsx": "55e370d7ba2beb0a0cd586b29688f8d3cf5ebcdaded05e61c262ff87c96b3d3d",
+    "Badge/Badge.tsx": "3e0ef56d997f4f54576a7481c05453fce339b498d7a2087835ef10ad137783eb",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
     "tokens.css": "f204a5c71b35419bb0987d96c3a0cb98b2728ab9077fe1c7e3efea5ce842976a"
@@ -64,13 +65,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "bff141d2a2a81da317ff96c3f56938449a986b44cab0b406a4fca755f7034b06"
+        "pngSha256": "f5df6ad1925666e86e0c48c3bef8a479eb22efddd7200ea46e6492692c74e7dc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 57,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "variant-danger_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#ff6d76 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#ff6d76 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -117,13 +140,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "e4306e23224f25f441964dc2f2506caf1797befd60bd51bbd71fb5f220ca1af6"
+        "pngSha256": "b5e8ba3a600c0766a1c56a027668f571ab9bf029e188cdd7b3f36ee77fb11267",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 48,
+            "width": 57,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "variant-neutral_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -170,13 +215,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "73329bd2c80c4cea321307d1872f44bfea3a53a176e55105c6a3d81550b99bb3"
+        "pngSha256": "754eaa0886a339f8a7819a0c1c332c8035dd6f5e5af0f10155e1f38d5621f682",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 84,
+            "width": 57,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "variant-info_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#a3b5ff \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#a3b5ff \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -223,13 +290,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c19cb1d292fe269b04bd6f461cb8a20217b3f8750d50f4f2aa4f7cc048ac0606"
+        "pngSha256": "1d677af72c758a1464344fe253871b6852b1821f6837a867335365b4f37391a4",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 120,
+            "width": 57,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "variant-success_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#4cd98a \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#4cd98a \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -276,13 +365,35 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "ea7b85851ad450370271ae07fc44b63654ac7524cb3f43d4bb1a4e5285c501f5"
+        "pngSha256": "5e44bde24b05aa01d3f7bdafb0051f74cee460d17934e340399c616b97b36e03",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 156,
+            "width": 57,
+            "height": 20
+          }
+        }
       },
       "content": {
         "key": "variant-warning_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#f5b942 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f5b942 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -324,13 +435,23 @@
           "height": 8
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d9005226f5b12e7ab2e3897a3cd6a75646e378a6a583608ccc90daa6d5e7cc1e"
+        "pngSha256": "d9005226f5b12e7ab2e3897a3cd6a75646e378a6a583608ccc90daa6d5e7cc1e",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 198,
+            "width": 8,
+            "height": 8
+          }
+        }
       },
       "content": {
         "key": "variant-danger_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -372,13 +493,23 @@
           "height": 8
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fd091d43646172945aee9ed8acb83bbedc285f9cbff940296845375513393dfc"
+        "pngSha256": "fd091d43646172945aee9ed8acb83bbedc285f9cbff940296845375513393dfc",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 232,
+            "width": 8,
+            "height": 8
+          }
+        }
       },
       "content": {
         "key": "variant-neutral_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -420,13 +551,23 @@
           "height": 8
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "11439e879e439133a4b0c6c96d0a2a1cdb5bbea1153167af69d709417e52cf0c"
+        "pngSha256": "11439e879e439133a4b0c6c96d0a2a1cdb5bbea1153167af69d709417e52cf0c",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 266,
+            "width": 8,
+            "height": 8
+          }
+        }
       },
       "content": {
         "key": "variant-info_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -468,13 +609,23 @@
           "height": 8
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b250a2b3b29913c023db91808dd2aa31ef3b325f69d004dac9cfb0ae4cbde0e8"
+        "pngSha256": "b250a2b3b29913c023db91808dd2aa31ef3b325f69d004dac9cfb0ae4cbde0e8",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 300,
+            "width": 8,
+            "height": 8
+          }
+        }
       },
       "content": {
         "key": "variant-success_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -516,13 +667,23 @@
           "height": 8
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "f4c1a787b937b8324ba9679783a933cb8fca35856c2e9a8d78e9ba4fe163552f"
+        "pngSha256": "f4c1a787b937b8324ba9679783a933cb8fca35856c2e9a8d78e9ba4fe163552f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 334,
+            "width": 8,
+            "height": 8
+          }
+        }
       },
       "content": {
         "key": "variant-warning_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -557,6 +718,7 @@
       "renderedAtRuntime": false,
       "refusedByType": true
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "variant",
@@ -631,7 +793,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2402234553296509410",
+      "version": "2406162359972981894",
       "export": {
         "format": "png",
         "scale": 1,
@@ -642,22 +804,29 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3",
-      "afterSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "beforeSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c",
+      "afterSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
         "key": "variant-danger_shape-label",
         "figmaImage": "figma-3538_35762.png",
-        "mismatchPercent": 2.807017543859649,
-        "blackMismatchPercent": 2.807017543859649,
+        "mismatchPercent": 2.631578947368421,
+        "blackMismatchPercent": 2.631578947368421,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 2.807017543859649,
-          "blackMismatchPercent": 2.807017543859649,
+          "whiteMismatchPercent": 2.631578947368421,
+          "blackMismatchPercent": 2.631578947368421,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -803,13 +972,13 @@
       {
         "key": "variant-info_shape-label",
         "figmaImage": "figma-3538_35766.png",
-        "mismatchPercent": 2.719298245614035,
-        "blackMismatchPercent": 2.719298245614035,
+        "mismatchPercent": 2.456140350877193,
+        "blackMismatchPercent": 2.456140350877193,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 2.719298245614035,
-          "blackMismatchPercent": 2.719298245614035,
+          "whiteMismatchPercent": 2.456140350877193,
+          "blackMismatchPercent": 2.456140350877193,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -879,13 +1048,13 @@
       {
         "key": "variant-success_shape-label",
         "figmaImage": "figma-3538_35768.png",
-        "mismatchPercent": 2.982456140350877,
-        "blackMismatchPercent": 2.982456140350877,
+        "mismatchPercent": 2.719298245614035,
+        "blackMismatchPercent": 2.719298245614035,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 2.982456140350877,
-          "blackMismatchPercent": 2.982456140350877,
+          "whiteMismatchPercent": 2.719298245614035,
+          "blackMismatchPercent": 2.719298245614035,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -955,13 +1124,13 @@
       {
         "key": "variant-warning_shape-label",
         "figmaImage": "figma-3538_35770.png",
-        "mismatchPercent": 3.3333333333333335,
-        "blackMismatchPercent": 3.3333333333333335,
+        "mismatchPercent": 2.982456140350877,
+        "blackMismatchPercent": 2.982456140350877,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 3.3333333333333335,
-          "blackMismatchPercent": 3.3333333333333335,
+          "whiteMismatchPercent": 2.982456140350877,
+          "blackMismatchPercent": 2.982456140350877,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -1452,18 +1621,38 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "380c5a799aac3619e4f4b8ed15455013deb655c7ee9022ff57e13628b2ac2e48",
+    "lockfileSha256": "d80179f7273fdcc2d2e10a6f6bb81ee1ca95d053a08e672ea3b7c0980cd6a77c",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
-      "kind": "environment-fonts",
-      "manifest": null,
+      "kind": "explicit-local-assets",
+      "manifest": {
+        "version": 1,
+        "fonts": [
+          {
+            "family": "Public Sans",
+            "weight": "100 900",
+            "style": "normal",
+            "file": "d75a7dc1a27eb9e336d5b33f55489d2ecb5621bf694d5c43b2415bce2ca830a8.ttf",
+            "sha256": "d75a7dc1a27eb9e336d5b33f55489d2ecb5621bf694d5c43b2415bce2ca830a8"
+          }
+        ]
+      },
       "sourceFontByteIdentity": "unverified",
       "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
-      "loaded": []
+      "loaded": [
+        {
+          "family": "Public Sans",
+          "weight": "100 900",
+          "style": "normal",
+          "file": "d75a7dc1a27eb9e336d5b33f55489d2ecb5621bf694d5c43b2415bce2ca830a8.ttf",
+          "sha256": "d75a7dc1a27eb9e336d5b33f55489d2ecb5621bf694d5c43b2415bce2ca830a8",
+          "status": "loaded"
+        }
+      ]
     },
     "builtCss": {
-      "bytes": 4534,
+      "bytes": 4740,
       "tokenDefinitions": 21,
       "tokenDefinitionsExpected": 21
     },
@@ -1476,15 +1665,29 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
-    "figmaVersion": "2402234553296509410",
-    "responseSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
+    "figmaVersion": "2406162359972981894",
+    "responseSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "variant-danger_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#ff6d76 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#ff6d76 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1496,7 +1699,20 @@
         "key": "variant-neutral_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f1f0ea \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1508,7 +1724,20 @@
         "key": "variant-info_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#a3b5ff \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#a3b5ff \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1520,7 +1749,20 @@
         "key": "variant-success_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#4cd98a \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#4cd98a \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1532,7 +1774,20 @@
         "key": "variant-warning_shape-label",
         "texts": {
           "figma": 1,
-          "missing": []
+          "missing": [],
+          "styles": [
+            {
+              "text": "Badge",
+              "figma": [
+                "#f5b942 \"Public Sans\" 600"
+              ],
+              "rendered": [
+                "#f5b942 \"Public Sans\" 600"
+              ],
+              "color": "match",
+              "font": "match"
+            }
+          ]
         },
         "parts": {
           "figma": 0,
@@ -1544,7 +1799,8 @@
         "key": "variant-danger_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -1556,7 +1812,8 @@
         "key": "variant-neutral_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -1568,7 +1825,8 @@
         "key": "variant-info_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -1580,7 +1838,8 @@
         "key": "variant-success_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -1592,7 +1851,8 @@
         "key": "variant-warning_shape-dot",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -1611,13 +1871,14 @@
         "figmaName": "Variant=Danger, Shape=Label",
         "verdict": "pass",
         "image": {
-          "white": 2.807017543859649,
-          "black": 2.807017543859649,
+          "white": 2.631578947368421,
+          "black": 2.631578947368421,
           "withinLimit": true
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1635,6 +1896,7 @@
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1645,13 +1907,14 @@
         "figmaName": "Variant=Info, Shape=Label",
         "verdict": "pass",
         "image": {
-          "white": 2.719298245614035,
-          "black": 2.719298245614035,
+          "white": 2.456140350877193,
+          "black": 2.456140350877193,
           "withinLimit": true
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1662,13 +1925,14 @@
         "figmaName": "Variant=Success, Shape=Label",
         "verdict": "pass",
         "image": {
-          "white": 2.982456140350877,
-          "black": 2.982456140350877,
+          "white": 2.719298245614035,
+          "black": 2.719298245614035,
           "withinLimit": true
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1679,13 +1943,14 @@
         "figmaName": "Variant=Warning, Shape=Label",
         "verdict": "pass",
         "image": {
-          "white": 3.3333333333333335,
-          "black": 3.3333333333333335,
+          "white": 2.982456140350877,
+          "black": 2.982456140350877,
           "withinLimit": true
         },
         "content": {
           "texts": 1,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1703,6 +1968,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1720,6 +1986,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1737,6 +2004,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1754,6 +2022,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -1771,6 +2040,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },

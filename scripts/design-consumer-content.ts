@@ -44,7 +44,11 @@
  *         background-image or mask-image, or a text-free leaf element that
  *         paints a background, border or shadow. Parts are matched one to one,
  *         largest first, each within max(3 px, 35%) of its Figma width and
- *         height, preferring the nearest size and then the nearest position. A
+ *         height, preferring the nearest size and then the nearest position.
+ *         Grouped Figma icons retain every drawn vector member: each must
+ *         match, so a surviving background cannot replace deleted glyphs.
+ *         SVG viewports, painted unions and individual drawn shapes are
+ *         alternatives sharing paint resources; paint cannot be counted twice. A
  *         part with no match is missing. Position does not decide presence: a
  *         wrong arrangement is the pixel score's finding, not a missing part.
  *
@@ -73,10 +77,10 @@ export interface RestNode {
 export interface TextStyle { color: Rgba | null; family: string | null; weight: number | null; unmeasured?: string }
 /** A run of a Figma text's characters (UTF-16 indices, end exclusive) sharing one style. */
 export interface FigmaTextRun extends TextStyle { start: number; end: number }
-export interface FigmaPart { name: string; kind: 'icon' | 'vector'; box: Box }
+export interface FigmaPart { name: string; kind: 'icon' | 'vector'; box: Box; members?: Box[] }
 /** `textStyles[i]` styles `texts[i]`. */
 export interface FigmaContent { texts: string[]; textStyles: FigmaTextRun[][]; parts: FigmaPart[] }
-export interface DomGraphic { tag: string; box: Box }
+export interface DomGraphic { tag: string; box: Box; members?: Box[] }
 /** A rendered text run as the page reports it: raw computed strings, parsed here. */
 export interface DomTextRun { text: string; color: string; family: string; weight: string; opacity: number }
 export interface DomContent { text: string; graphics: DomGraphic[]; runs?: DomTextRun[] }
@@ -139,7 +143,7 @@ export function figmaTextRuns(node: RestNode, layerOpacity: number): FigmaTextRu
 export function figmaContent(variant: RestNode): FigmaContent {
   const origin = variant.absoluteBoundingBox ?? { x: 0, y: 0, width: 0, height: 0 };
   const texts: string[] = [], textStyles: FigmaTextRun[][] = [], parts: FigmaPart[] = [];
-  const owners = new Set<RestNode>();
+  const owners = new Map<RestNode, FigmaPart>();
   const relative = (n: RestNode): Box => {
     const b = n.absoluteBoundingBox ?? n.absoluteRenderBounds ?? { x: origin.x, y: origin.y, width: 0, height: 0 };
     return { x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height };
@@ -155,10 +159,11 @@ export function figmaContent(variant: RestNode): FigmaContent {
       if (!rendered(node) || !(paints(node.fills) || paints(node.strokes))) return;
       const innermost = instances[instances.length - 1];
       const owner = innermost && !drawsText(innermost) ? innermost : undefined;
-      if (owner && owners.has(owner)) return;
+      if (owner && owners.has(owner)) { owners.get(owner)!.members!.push(relative(node)); return; }
       const chain = (owner ? instances : [...instances, node]).map(n => n.name ?? n.type);
-      if (owner) owners.add(owner);
-      parts.push({ name: chain.join('/'), kind: owner ? 'icon' : 'vector', box: relative(owner ?? node) });
+      const part: FigmaPart = { name: chain.join('/'), kind: owner ? 'icon' : 'vector', box: relative(owner ?? node), ...(owner ? { members: [relative(node)] } : {}) };
+      if (owner) owners.set(owner, part);
+      parts.push(part);
       return;
     }
     const next = node.type === 'INSTANCE' ? [...instances, node] : instances;
@@ -194,22 +199,41 @@ export function missingTexts(figmaTexts: readonly string[], renderedText: string
 const within = (figma: number, dom: number) => Math.abs(figma - dom) <= Math.max(3, 0.35 * figma);
 /** One-to-one size matching of Figma parts to rendered graphics (see the header). */
 export function matchParts(parts: readonly FigmaPart[], graphics: readonly DomGraphic[]): { matched: number; missing: FigmaPart[] } {
-  const free = new Set(graphics.map((_, i) => i));
+  // An SVG viewport and its drawn shapes are alternative representations of
+  // the same paint. Consuming either reserves its resources so the viewport
+  // cannot stand in for another missing icon after a child was matched.
+  const candidates = graphics.flatMap((g, i) => {
+    if (!g.members) return [{box:g.box, resources:[`${i}`]}];
+    if (!g.members.length) return [];
+    const resources=g.members.map((_,j)=>`${i}:${j}`);
+    const x=Math.min(...g.members.map(b=>b.x)),y=Math.min(...g.members.map(b=>b.y));
+    const painted={x,y,width:Math.max(...g.members.map(b=>b.x+b.width))-x,height:Math.max(...g.members.map(b=>b.y+b.height))-y};
+    return [{box:g.box,resources}, {box:painted,resources}, ...g.members.map((box,j)=>({box,resources:[resources[j]]}))];
+  });
+  const used = new Set<string>();
   const center = (b: Box) => [b.x + b.width / 2, b.y + b.height / 2];
   const order = [...parts].sort((a, b) => b.box.width * b.box.height - a.box.width * a.box.height);
   const missing: FigmaPart[] = [];
   let matched = 0;
   for (const part of order) {
-    let best = -1, bestScore: [number, number] = [Infinity, Infinity];
-    for (const i of free) {
-      const g = graphics[i].box;
-      if (!within(part.box.width, g.width) || !within(part.box.height, g.height)) continue;
-      const [px, py] = center(part.box), [gx, gy] = center(g);
-      const score: [number, number] = [Math.abs(part.box.width - g.width) + Math.abs(part.box.height - g.height), Math.hypot(px - gx, py - gy)];
-      if (score[0] < bestScore[0] || (score[0] === bestScore[0] && score[1] < bestScore[1])) { best = i; bestScore = score; }
+    const reserved=new Set<string>();
+    const required=[...(part.members ?? [part.box])].sort((a,b)=>b.width*b.height-a.width*a.height);
+    let complete=required.length>0;
+    for (const box of required) {
+      let best = -1, bestScore: [number, number] = [Infinity, Infinity];
+      for (const [i,candidate] of candidates.entries()) {
+        if (candidate.resources.some(r=>used.has(r)||reserved.has(r))) continue;
+        const g = candidate.box;
+        if (!within(box.width, g.width) || !within(box.height, g.height)) continue;
+        const [px, py] = center(box), [gx, gy] = center(g);
+        const score: [number, number] = [Math.abs(box.width - g.width) + Math.abs(box.height - g.height), Math.hypot(px - gx, py - gy)];
+        if (score[0] < bestScore[0] || (score[0] === bestScore[0] && score[1] < bestScore[1])) { best = i; bestScore = score; }
+      }
+      if (best < 0) { complete=false; break; }
+      for (const resource of candidates[best].resources) reserved.add(resource);
     }
-    if (best < 0) missing.push(part);
-    else { free.delete(best); matched++; }
+    if (!complete) missing.push(part);
+    else { for (const resource of reserved) used.add(resource); matched++; }
   }
   // Report in the variant's own drawing order.
   return { matched, missing: parts.filter(p => missing.includes(p)) };
@@ -397,7 +421,17 @@ export const domContentOf = new Function('el', `
       tag === 'img' || tag === 'canvas' || tag === 'video' ||
       (s.maskImage && s.maskImage !== 'none') || (s.webkitMaskImage && s.webkitMaskImage !== 'none') || s.backgroundImage !== 'none' ||
       (n.children.length === 0 && !(n.textContent || '').trim() && paintsBox(s));
-    if (graphic) graphics.push({ tag, box: { x: r.x - origin.x, y: r.y - origin.y, width: r.width, height: r.height } });
+    if (graphic) {
+      const entry = { tag, box: { x: r.x - origin.x, y: r.y - origin.y, width: r.width, height: r.height } };
+      if (tag === 'svg') entry.members = [...n.querySelectorAll('path, circle, ellipse, rect, line, polyline, polygon, use, image, text')].filter(shape => {
+        if (!visible(shape) || shape.closest('defs, clipPath, mask, pattern, symbol')) return false;
+        const paint=getComputedStyle(shape);
+        return ['image','text','use'].includes(shape.localName) ||
+          (paint.fill !== 'none' && alpha(paint.fill)>0 && parseFloat(paint.fillOpacity)>0) ||
+          (paint.stroke !== 'none' && alpha(paint.stroke)>0 && parseFloat(paint.strokeOpacity)>0 && parseFloat(paint.strokeWidth)>0);
+      }).map(shape => { const b=shape.getBoundingClientRect(); return {x:b.x-origin.x,y:b.y-origin.y,width:b.width,height:b.height}; }).filter(b=>b.width>0||b.height>0);
+      graphics.push(entry);
+    }
   }
   // Text runs in document order, each with the DECLARED style it is drawn in:
   // the computed text-fill color (SVG: fill), the family stack as requested,

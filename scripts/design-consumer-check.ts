@@ -1,3 +1,6 @@
+import {consumerSlotNames,probeConsumerSlot,visibleSlotCases} from './design-consumer-slots.js';
+import {partialSourceTextControlPlan,probeSourceTextControls} from './design-consumer-text-controls.js';
+import {domainTransitionGroups} from './design-consumer-domain.js';
 /**
  * DESIGN-LED CLEAN CONSUMER CHECK — `npm run design:consumer:check -- …`
  *
@@ -24,8 +27,10 @@
  *                 screenshotted. Nothing is forced that a user could not do: a
  *                 state that cannot be reached, or that changes nothing the
  *                 contract says it changes, is a NAMED problem.
- *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
- *                 text changes in every text-bearing cell; switch every
+ *   4. behave   — exercise text and visibility from each original source
+ *                 leaf's captured property references; bound leaves respond,
+ *                 unbound literals remain unchanged in every original cell;
+ *                 switch every
  *                 variant-bearing cell to another variant and assert its
  *                 rendered subtree paint, text or relative geometry changes. A prop the component accepts
  *                 but discards fails here.
@@ -64,12 +69,15 @@
 import { packageReactLibrary } from './package-react-library.js';
 import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
-import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
+import { alignRecordedFrames, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
+import {captureObservedSubject} from './design-consumer-observed-capture.js';
+import {qualifyRenderBoundsExport} from './design-consumer-render-export.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { PNG } from 'pngjs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -78,6 +86,7 @@ import { readStateAxes, type InteractionState } from '../core/interaction-state-
 import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
 import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
+import { retryConsumerRead } from './design-consumer-network.js';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -331,7 +340,7 @@ export const paintOf = new Function('el', `
     'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
     'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
     'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth', 'maskImage', 'maskSize', 'maskPosition', 'maskRepeat', 'clipPath'];
-  return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
+  return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); const pseudos=['::before','::after'].map(p=>{const ps=getComputedStyle(n,p);if(ps.content==='none'||ps.content==='normal'||ps.display==='none')return null;return [p,ps.content,...K.map(k=>ps[k]),...['display','position','top','right','bottom','left','width','height','marginTop','marginRight','marginBottom','marginLeft','paddingTop','paddingRight','paddingBottom','paddingLeft','zIndex','mixBlendMode','backgroundSize','backgroundPosition','backgroundRepeat'].map(k=>ps[k])];}); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100 + '|' + JSON.stringify(pseudos); }).join('/');
 `) as (el: Element) => string;
 /** Observe actual variant effects across the rendered subtree. Class names
  * alone prove nothing; relative positions catch a rearrangement whose root
@@ -345,6 +354,25 @@ export const variantPaintOf = new Function('el', `
   });
   return JSON.stringify([paint(el), el.innerText ?? el.textContent, boxes]);
 `) as (el: Element) => string;
+/** SVG geometry can change visible pixels without changing CSS, text or boxes.
+ * Observe decoded pixels, not path attributes (hidden/covered paths prove nothing).
+ * Callers serialize captures because locator screenshots scroll the shared page. */
+export async function observeVariantPaint(cell: import('playwright-core').Locator): Promise<string> {
+  const fingerprint = await cell.evaluate(variantPaintOf);
+  const hasSvg = await cell.evaluate(el => el.matches('svg') || !!el.querySelector('svg'));
+  const box = hasSvg ? await cell.boundingBox() : null;
+  let pixels: string | null = null;
+  if (box && box.width > 0 && box.height > 0) {
+    const png = PNG.sync.read(await cell.screenshot({ animations: 'disabled', caret: 'hide', scale: 'css' }));
+    pixels = `${png.width}x${png.height}:${sha256(png.data)}`;
+  }
+  return JSON.stringify([fingerprint, pixels]);
+}
+async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
+  const observations: Record<string, string> = {};
+  for (const key of keys) observations[key] = await observeVariantPaint(page.locator(`[data-cell="${key}"] > *`).first());
+  return observations;
+}
 /** Keyboard-modality focus on the component's own focus target: the root when
  *  it is focusable, else its first focusable descendant. Returns whether
  *  :focus-visible really matches — nothing is forced. */
@@ -410,7 +438,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
-  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:#fff}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
+  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
@@ -421,12 +449,14 @@ import CASES from './cases.json';
 function App() {
   const [text, setText] = useState(null);
   const [variantOverride, setVariantOverride] = useState(null);
-  window.__consumer = { setText, setVariantOverride };
+  const [scopedVariantOverride, setScopedVariantOverride] = useState(null);
+  window.__consumer = { setText, setVariantOverride, setScopedVariantOverride };
   return <div>
     {CASES.map(cell => {
       const props = { ...cell.mount };
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
+      if (scopedVariantOverride?.keys.includes(cell.key)) Object.assign(props, scopedVariantOverride.props);
       return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
     })}
   </div>;
@@ -454,12 +484,31 @@ async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: 
   return null;
 }
 
+/** Bound independent CDN downloads; REST API requests remain serialized.
+ * Results retain input order, and a failed worker stops new work before the
+ * whole queue rejects. Await every active worker so none outlives the caller. */
+export async function mapExportDownloads<T, R>(items: readonly T[], download: (item: T) => Promise<R>): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let next = 0, failed = false, failure: unknown;
+  await Promise.all(Array.from({ length: Math.min(4, items.length) }, async () => {
+    while (!failed && next < items.length) {
+      const index = next++;
+      try { results[index] = await download(items[index]); }
+      catch (error) { if (!failed) { failed = true; failure = error; } }
+    }
+  }));
+  if (failed) throw failure;
+  return results;
+}
+
 async function fetchFigmaImages(fileKey: string, ids: string[], token: string | undefined, out: string) {
   const frames: Record<string,FigmaFrame> = {};
   if (!token) return { status: 'figma-images-unavailable' as const, reason: 'no token', files: {} as Record<string, string>, frames, framingRefusal: 'no token' };
-  const boundsUrl = `https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}&depth=1`;
+  // Figma recomputes render bounds from the returned subtree. A depth limit
+  // can omit overflowing descendants and falsely report only layout bounds.
+  const boundsUrl = `https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`;
   const readBounds = async (phase: string) => {
-    const response = await fetchFigmaApi(boundsUrl, token);
+    const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaApi(boundsUrl, token));
     if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
     const bytes = Buffer.from(await response.arrayBuffer());
     writeFileSync(path.join(out, `figma-bounds-${phase}.json`), bytes, {flag:'wx'});
@@ -467,22 +516,62 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   };
   const before = await readBounds('before');
   const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true`;
-  const response = await fetchFigmaApi(url, token);
+  const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaApi(url, token));
   if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
   const files: Record<string, string> = {}, images: Record<string,Buffer> = {};
-  for (const id of ids) {
+  const downloadedImages = await mapExportDownloads(ids, async id => {
     const imageUrl = body.images?.[id];
-    if (!imageUrl) continue;
-    const imageResponse = await fetch(imageUrl);
-    if (!imageResponse.ok) throw new Error(`figma-image-download-failed:${id}:HTTP ${imageResponse.status}`);
-    const png = Buffer.from(await imageResponse.arrayBuffer());
+    if (!imageUrl) return null;
+    return retryConsumerRead(`figma-image-download:${id}`,async()=>{
+      const imageResponse = await fetch(imageUrl);
+      if (!imageResponse.ok) throw new Error(`HTTP ${imageResponse.status}`);
+      return Buffer.from(await imageResponse.arrayBuffer());
+    });
+  });
+  for (const [index, id] of ids.entries()) {
+    const png = downloadedImages[index];
+    if (!png) continue;
     const file = path.join(out, `figma-${id.replace(/[^a-z0-9]/gi, '_')}.png`); writeFileSync(file, png); files[id] = file; images[id] = png;
+  }
+  const overflow=ids.filter(id=>{const n=before.nodes?.[id]?.document;if(!n?.absoluteBoundingBox||!n?.absoluteRenderBounds)return false;
+    const l=figmaBoundsInLayoutUnits(n.absoluteBoundingBox),r=figmaBoundsInLayoutUnits(n.absoluteRenderBounds);
+    return r.x<l.x||r.y<l.y||r.x+r.width>l.x+l.width||r.y+r.height>l.y+l.height;});
+  const renderImages:Record<string,Buffer>={}, renderErrors:Record<string,string>={};
+  if(overflow.length){
+    await new Promise(resolve=>setTimeout(resolve,15000));
+    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaApi(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false`,token));
+    if(!renderResponse.ok)for(const id of overflow)renderErrors[id]=`figma-render-export-unavailable:HTTP ${renderResponse.status}`;
+    else {const renderBody=await renderResponse.json() as {images:Record<string,string|null>};
+      const downloads=await mapExportDownloads(overflow,async id=>{const location=renderBody.images?.[id];if(!location)return {error:'figma-render-export-missing'};
+        return retryConsumerRead(`figma-render-download:${id}`,async()=>{
+          const downloaded=await fetch(location);if(!downloaded.ok)return {error:`figma-render-download-failed:HTTP ${downloaded.status}`};
+          return {png:Buffer.from(await downloaded.arrayBuffer())};
+        });
+      });
+      for(const [index,id] of overflow.entries()){const result=downloads[index];if(result.png)renderImages[id]=result.png;else renderErrors[id]=result.error!;}
+    }
   }
   const after = await readBounds('after');
   const verified = figmaFramesFromSnapshots(before, after, images, FIGMA_REST_FULL_BOUNDS);
+  const renderProofs:Record<string,unknown>={};
+  if(!verified.refused)for(const id of overflow){const frame=verified.frames[id];if(!frame)continue;
+    if(renderErrors[id]||!renderImages[id]||!images[id]){frame.refused=renderErrors[id]??'figma-render-pair-missing';continue;}
+    // Retain both source exports even when their framing proof refuses.
+    // Diagnostic readback must not require another network export.
+    const layoutFile=`figma-layout-${id.replace(/[^a-z0-9]/gi,'_')}.png`;
+    const rawRenderFile=`figma-render-${id.replace(/[^a-z0-9]/gi,'_')}.png`;
+    writeFileSync(path.join(out,layoutFile),images[id],{flag:'wx'});
+    writeFileSync(path.join(out,rawRenderFile),renderImages[id],{flag:'wx'});
+    const result=qualifyRenderBoundsExport(before,after,id,images[id],renderImages[id]);
+    if('refused'in result){frame.refused=result.refused;renderProofs[id]={...result,layoutFile,renderFile:rawRenderFile};continue;}
+    writeFileSync(files[id],renderImages[id]);
+    frame.pngSha256=imageSha256(renderImages[id]);frame.raster={kind:'figma-rest-paired-render-v1',scale:1,proof:result.proof};
+    renderProofs[id]={...result,layoutFile,renderFile:path.basename(files[id])};
+  }
+  writeFileSync(path.join(out,'figma-render-export-proofs.json'),JSON.stringify({overflow,proofs:renderProofs,errors:renderErrors},null,2)+'\n',{flag:'wx'});
   return { status: 'figma-images-collected' as const, reason: null, files, frames: verified.frames, framingRefusal: verified.refused,
-    frameEvidence: { before: 'figma-bounds-before.json', after: 'figma-bounds-after.json', version: before.version, export: { format:'png', scale:1, contentsOnly:true, useAbsoluteBounds:true }, raster: FIGMA_REST_FULL_BOUNDS,
+    frameEvidence: { before: 'figma-bounds-before.json', after: 'figma-bounds-after.json', version: before.version, export: { format:'png', scale:1, contentsOnly:true, useAbsoluteBounds:true }, raster: FIGMA_REST_FULL_BOUNDS, overflowExport:{format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false,proofs:'figma-render-export-proofs.json'},
       beforeSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-before.json'))), afterSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-after.json'))) } };
 }
 
@@ -519,7 +608,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'], framing: 'recorded-layout-origins-common-alpha-union-v3', figmaBoundsUnitPx: FIGMA_BOUNDS_UNIT_PX, deviceScaleFactor: 1, nativeRaster: FIGMA_REST_FULL_BOUNDS }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'], framing: 'observed-paint-extents-paired-render-origins-v4', figmaBoundsUnitPx: FIGMA_BOUNDS_UNIT_PX, deviceScaleFactor: 1, nativeRaster: FIGMA_REST_FULL_BOUNDS }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
@@ -676,23 +765,22 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
-        // Match the Figma node export's transparent substrate. The scorer
-        // applies its shared background after trimming both alpha bounds.
+        // The instrument page has a transparent substrate. The scorer applies
+        // white and black backgrounds after mapping the recorded origins.
         await root.scrollIntoViewIfNeeded();
-        const boundsOf = (el: Element) => {const b=el.getBoundingClientRect();return {x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height};};
         const shot = path.join(args.out, `consumer-${c.key}.png`);
         // A root of zero size has no pixels to capture: the screenshot would wait
         // for a visible box and time out, ending the check for every later cell
         // (cold-start Progress, 0 px tall). zero-size-render already fails it by name.
         if (style.width > 0 && style.height > 0) {
-          const beforeCapture = await root.evaluate(boundsOf);
-          await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
-          const afterCapture = await root.evaluate(boundsOf);
-          if(JSON.stringify(beforeCapture)!==JSON.stringify(afterCapture)) problems.push(`consumer-bounds-changed-during-capture:${c.key}`);
-          else consumerFrames[c.key]={layout:afterCapture,capture:enclosingFrame(afterCapture),deviceScaleFactor:1,pngSha256:imageSha256(readFileSync(shot))};
+          const captured=await captureObservedSubject(page,`[data-cell="${c.key}"] > :first-child`,`[data-cell="${c.key}"]`);
+          if('refused'in captured){problems.push(`image-framing-unqualified:${c.key}:${captured.refused}`);}
+          else {writeFileSync(shot,captured.bytes);consumerFrames[c.key]={...captured.frame,raster:{kind:'browser-paint-extent-v1',paint:captured.paint}};
+            writeFileSync(path.join(args.out,`consumer-capture-${c.key}.json`),JSON.stringify({frame:consumerFrames[c.key],translation:captured.translation??null},null,2)+'\n',{flag:'wx'});
+          }
         }
-        // Where this render draws text, in the screenshot's own pixels (the root's
-        // layout box). The same walk extract/figma/visual-parity/render.ts makes.
+        // Collect text boxes relative to layout, then map into capture pixels.
+        // These masks are diagnostic only; acceptance uses unmasked pixels.
         // Serialized as text for the same reason as the font probe above.
         textRects[c.key] = await root.evaluate(new Function('el', `
           const origin = el.getBoundingClientRect(), rects = [], walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -703,6 +791,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
           }
           return rects;
         `) as (el: Element) => unknown) as Array<{ x: number; y: number; width: number; height: number }>;
+        const frame = consumerFrames[c.key];
+        if (frame) textRects[c.key] = textRects[c.key].map(rect => ({...rect, x:rect.x+frame.layout.x-frame.capture.x, y:rect.y+frame.layout.y-frame.capture.y}));
         paints[c.key] = await cell.evaluate(paintOf);
         // What the cell renders, for the content check (judged once Figma's side is read).
         domContent[c.key] = await cell.evaluate(domContentOf);
@@ -727,18 +817,37 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         if (!changed && declaredStates.includes('disabled')) problems.push(`state-inert:disabled:${c.key}`);
       }
       problems.push(...notCarried);
-      // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
-      if (cases[0]?.textProp) {
-        const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
-        await page.evaluate(() => (window as any).__consumer.setText('Replaced by consumer'));
-        const after = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
-        const textBearing = cases.filter(c => before[c.key].includes(textDefault) && textDefault);
-        const changed = textBearing.filter(c => after[c.key].includes('Replaced by consumer') && !after[c.key].includes(textDefault));
-        receipt.behavior.text = { prop: cases[0].textProp, textBearingCells: textBearing.map(c => c.key), changedCells: changed.map(c => c.key) };
-        if (!textBearing.length) problems.push('text-prop-never-rendered');
-        else if (changed.length !== textBearing.length) problems.push('text-prop-discarded');
-        await page.evaluate(() => (window as any).__consumer.setText(null));
-      } else receipt.behavior.text = { prop: null, note: 'contract declares no TEXT-bound prop' };
+      // Mixed source text-control ownership has an exact source-derived
+      // oracle: bound leaves respond; unbound literals remain unchanged. All
+      // original cells remain checked. Other instruments retain their checks.
+      try {
+        const sourcePlan = partialSourceTextControlPlan(findDumpSet(dump, contract, args.component));
+        if (sourcePlan) {
+          const textProbe = await probeSourceTextControls(page, sourcePlan, cases, contract.props);
+          receipt.behavior.text = {...textProbe, sourceSha256: sha256(readFileSync(args.dump))};
+          if (!textProbe.passed) {
+            problems.push('text-prop-discarded');
+            for (const scenario of textProbe.scenarios) for (const row of scenario.rows)
+              if (!row.passed) problems.push(`source-text-control-mismatch:${row.key}:${scenario.name}`);
+          }
+        } else {
+          if (cases[0]?.textProp) {
+            const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
+            await page.evaluate(() => (window as any).__consumer.setText('Replaced by consumer'));
+            const after = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
+            const textBearing = cases.filter(c => before[c.key].includes(textDefault) && textDefault);
+            const changed = textBearing.filter(c => after[c.key].includes('Replaced by consumer') && !after[c.key].includes(textDefault));
+            receipt.behavior.text = { prop: cases[0].textProp, textBearingCells: textBearing.map(c => c.key), changedCells: changed.map(c => c.key) };
+            if (!textBearing.length) problems.push('text-prop-never-rendered');
+            else if (changed.length !== textBearing.length) problems.push('text-prop-discarded');
+            await page.evaluate(() => (window as any).__consumer.setText(null));
+          } else receipt.behavior.text = { prop: null, note: 'contract declares no TEXT-bound prop' };
+        }
+      } catch (error) {
+        // Missing/ambiguous source evidence or public inputs never passes.
+        problems.push(error instanceof Error ? error.message : String(error));
+        receipt.behavior.text = {rule:'source-owned-text-controls-v1', qualified:false};
+      }
       // Behavior: array props with text fields must render replaced item text.
       receipt.behavior.arrays = [];
       for (const [prop, sample] of Object.entries(arraySamples(contract))) {
@@ -755,11 +864,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       // Behavior: React children. If the contract declares no slot, the component
       // must not silently accept and discard them; if it declares one, they must render.
       {
-        const declaresSlot = (function find(node: any): boolean {
-          if (!node || typeof node !== 'object') return false;
-          if (node.slot && typeof node.slot === 'object' && typeof node.slot.name === 'string') return true;
-          return Object.values(node).some(find);
-        })(contract.anatomy);
+        const slotNames = consumerSlotNames(contract.anatomy);
+        const declaresSlot = slotNames.includes('children');
         const marker = 'Consumer child content';
         await page.evaluate(([m]) => (window as any).__consumer.setVariantOverride({ children: m }), [marker] as const);
         const cellTexts = await Promise.all(cases.map(async c => page.locator(`[data-cell="${c.key}"]`).innerText()));
@@ -772,24 +878,49 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         receipt.behavior.children = { contractDeclaresSlot: declaresSlot, renderedAtRuntime: shown, refusedByType };
         if (declaresSlot && !shown) problems.push('children-slot-discarded');
         if (!declaresSlot && !shown && !refusedByType) problems.push('children-accepted-but-discarded');
+        receipt.behavior.namedSlots = [];
+        for (const name of slotNames.filter(name => name !== 'children')) {
+          const coverage = visibleSlotCases(contract, cases, name);
+          const probe = await probeConsumerSlot(page, coverage.keys, name);
+          receipt.behavior.namedSlots.push({...probe,coverage});
+          if (coverage.unsupported.length) problems.push(`named-slot-visibility-unqualified:${name}`);
+          if (!coverage.keys.length) problems.push(`named-slot-not-exercised:${name}`);
+          else if (!probe.passed) problems.push(`named-slot-content-discarded:${name}`);
+        }
       }
       // Observe every differing variant value. An unchanged render needs exact
       // source equivalence, adjudicated after authenticated Figma export below.
       const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT' && variantValues(p).length > 1);
       receipt.behavior.variants = [];
+      if (contract.bindings?.figma?.drawnVariants) {
+        const groups=domainTransitionGroups(contract.bindings.figma.drawnVariants,cases,variantProps.map(prop=>({name:prop.name,values:variantValues(prop)})));
+        receipt.behavior.declaredDomainTransitions={groups:groups.map(g=>({prop:g.prop,target:g.target,legal:g.legal,outsideDeclaredDomain:g.outside,pairs:g.pairs})),illegalTupleEvidence:'separate exhaustive runtime refusal qualification required'};
+        for(const group of groups){
+          if(!group.legal.length)continue;
+          const prop=variantProps.find(p=>p.name===group.prop)!;
+          const baseline=await observeVariantCells(page,group.legal);
+          await page.evaluate(({keys,props})=>(window as any).__consumer.setScopedVariantOverride({keys,props}),{keys:group.legal,props:mountProps(contract,{[group.prop]:group.target})});
+          const switched=await observeVariantCells(page,group.legal);
+          await page.evaluate(()=>(window as any).__consumer.setScopedVariantOverride(null));
+          const changed=group.legal.filter(key=>baseline[key]!==switched[key]);
+          const inert=new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop??prop.name}\\b`).test(readFileSync(path.join(args.generated,args.component,`${args.component}.tsx`),'utf8'));
+          receipt.behavior.variants.push({prop:group.prop,switchedTo:group.target,cellsSwitched:group.legal,cellsExpectedToChange:group.legal,cellsChanged:changed,axisInertLedgered:inert});
+        }
+        for(const prop of variantProps)if(!groups.some(g=>g.prop===prop.name&&g.legal.length))problems.push(`variant-axis-unexercised:${prop.name}`);
+      } else {
       for (const prop of variantProps) {
         const values = variantValues(prop);
-        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
-        const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
+        const baseline = await observeVariantCells(page, cases.map(c => c.key));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
         await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
-        const switched = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
+        const switched = await observeVariantCells(page, cases.map(c => c.key));
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
         const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
         receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert });
         if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
+      }
       }
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }

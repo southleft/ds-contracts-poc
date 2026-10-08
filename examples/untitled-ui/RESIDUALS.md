@@ -304,7 +304,7 @@ What each would need in order to stop costing pixels, quoted from the receipt th
 
 ### 5.4 Refusals that are structural given the contract vocabulary
 
-The conformance manifest names **8 constructs REFUSED** and **38 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
+The conformance manifest names **8 constructs REFUSED** and **36 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
 
 | case | the construct | the vocabulary change it would need |
 |---|---|---|
@@ -327,7 +327,6 @@ The conformance manifest names **8 constructs REFUSED** and **38 LEDGERED** — 
 | `instance-swap-fixed-value` | PLUGIN twin of rest-instance-swap-fixed-value: a nested INSTANCE with a FIXED INSTANCE_SWAP value (dump v1.31 fixedSwaps, resolved to the swapped component's name/key) | a component ref carries props only; nested slot CONTENT is not expressible in the composition grammar, so the fixed swap is named with the swapped component's identity |
 | `instance-target-aspect-ratio` | PLUGIN twin of rest-instance-target-aspect-ratio: a nested INSTANCE with a 16:16 aspect lock (dump v1.31 targetAspectRatio) | an aspect lock acts on resize; on an instance (child-owned box) it is named, a FRAME part would carry declared aspect-ratio |
 | `layout-fill-height-parent-mode-by-variant` | a child SLOT drawn fillHeight only under the variant where its parent is a ROW, the parent being a COLUMN in the other variant (layoutByProp) and HUGGING its height in both (Phase 2 exam: Card Inline Image, dump v1.31 fillHeight) | the cross-axis stretch under a HUG-height ROW parent has no exact grammar spelling (carryCrossAxisFill names it for a uniform parent); a parent whose direction is a function of the axis is the same fact per variant and must be named per variant, not dropped at the mixed-modes door |
-| `layout-item-reverse-z-index` | PLUGIN twin of rest-item-reverse-z-index: an auto-layout root with itemReverseZIndex true (dump v1.31) | paint order is a canvas fact with no contract carrier (z-index is declared-but-inert); render-inert without overlap but must be named |
 | `placement-constraints-scale-unqualified-parent` | SCALE child whose independently captured parent extent contradicts its measured inset sum | An inconsistent source basis cannot justify proportional placement; refuse rather than inventing a parent extent. |
 | `prototype-reaction-field` | PLUGIN twin of rest-prototype-reaction: an ON_HOVER → CHANGE_TO reaction carried as dump v1.31 reactions[] BESIDE the v1.27 prototype-reactions-unsupported receipt | prototype wiring is named with its target, never inverted into onClick/onHover (the State axis + statePreviewAxis recover the matrix) |
 | `radius-per-corner` | per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only) | the capture receipts radii-nonuniform; nothing corner-shaped may be invented |
@@ -338,7 +337,6 @@ The conformance manifest names **8 constructs REFUSED** and **38 LEDGERED** — 
 | `rest-instance-slot-prop-value` | REST: a nested INSTANCE with a SLOT-typed property value ({guid}) in componentProperties | an object is not a prop value the contract grammar can hold (exact mode crashed on Card Grid with a ContractSchema error); it must be dropped BY NAME |
 | `rest-instance-swap-fixed-value` | REST: a nested INSTANCE with a FIXED INSTANCE_SWAP value (componentProperties "Icon#3:1" = 9:9) and no host propRef | fixed prop values ride componentProperties (propose.ts COMPOSITION rule); the mapper skips INSTANCE_SWAP ("slots ride propRefs instead") so a fixed swap with no propRef vanishes |
 | `rest-instance-target-aspect-ratio` | REST: a nested INSTANCE with a targetAspectRatio lock (16:16) | an aspect lock acts on resize; the code twin is aspect-ratio — carry it or name it |
-| `rest-item-reverse-z-index` | REST: an auto-layout root with itemReverseZIndex true | paint order is a canvas fact with no dump field; render-inert without overlap but must be named, not dropped |
 | `rest-map-receipts-in-dump` | REST: a VECTOR child (arbitrary paths — no dump projection) under the root | the mapper names the loss (vector-geometry-unsupported); the receipt must ride the DUMP as `_degradations` (the plugin dump shape) so propose surfaces it and the round trip can match by channel — not live only on stderr |
 | `rest-prototype-reaction` | REST: an ON_HOVER → CHANGE_TO prototype reaction (interactions[] + transitionNodeID) on the root | the plugin dump names this class as prototype-reactions-unsupported (dump v1.27); the REST route must name it too — map.ts never reads interactions and no captureGap names prototypes |
 | `rest-slot-property-definition` | REST: a native SLOT property definition whose defaultValue is an object ({guid}) and whose preferredValues name a COMPONENT_SET key | REST does return SLOT definitions with preferredValues (live probe 2026-08-22, file aekVseUceg35tVn62knRrj); the accepts list must be carried or named as "no in-scope contract for key" — not reported as "REST returns componentPropertyDefinitions EMPTY" (the SLOT layer is named "Media" — on the canvas the layer name IS the SLOT property's display name, live probe 2b; the exam's first draft named it "s", which no canvas can produce) |
@@ -480,7 +478,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `3e63cbb08129` | 114,544 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `1eaa3f173f51` | 114,953 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

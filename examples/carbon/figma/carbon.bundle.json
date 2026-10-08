@@ -13367,7 +13367,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 16,
             "of": 16
@@ -13642,7 +13642,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "reason": "native aspect-ratio projection is unavailable for this geometry — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 16,
             "of": 16

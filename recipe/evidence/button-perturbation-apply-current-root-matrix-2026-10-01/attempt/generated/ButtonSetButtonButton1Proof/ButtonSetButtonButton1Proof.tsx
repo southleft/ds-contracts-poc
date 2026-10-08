@@ -1,0 +1,50 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-set-button-button-1-proof.contract.json (ds.button-set-button-button-1-proof v0.1.0)
+ * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
+ */
+import { forwardRef } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import { ButtonHelperLoadingSpinner1 } from '../ButtonHelperLoadingSpinner1';
+import { ButtonHelperLeadingIcon1 } from '../ButtonHelperLeadingIcon1';
+import styles from './ButtonSetButtonButton1Proof.module.css';
+
+export interface ButtonSetButtonButton1ProofProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
+  variant?: 'secondary' | 'primary';
+  size?: 'medium' | 'small' | 'large';
+  state?: 'default' | 'hover' | 'pressed' | 'focusVisible' | 'disabled' | 'loading';
+  icons?: 'none' | 'leading' | 'trailing' | 'both';
+}
+
+/** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
+export const ButtonSetButtonButton1Proof = forwardRef<
+  HTMLButtonElement,
+  ButtonSetButtonButton1ProofProps
+>(function ButtonSetButtonButton1Proof(
+  { variant = 'secondary', size = 'medium', state = 'default', icons = 'none', className, ...rest },
+  ref,
+) {
+  const classes = [
+    styles.root,
+    styles[`variant-${variant}`],
+    styles[`size-${size}`],
+    styles[`state-${state}`],
+    styles[`icons-${icons}`],
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <button ref={ref} className={classes} {...rest}>
+      {state === 'loading' ? <ButtonHelperLoadingSpinner1 /> : null}
+      <span className={styles.buttonlabelLabel}>Button</span>
+      {icons === 'trailing' || icons === 'both' ? <ButtonHelperLeadingIcon1 /> : null}
+    </button>
+  );
+});

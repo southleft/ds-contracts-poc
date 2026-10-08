@@ -1,3 +1,4 @@
+import {readReactCommonJsKernel} from './react-commonjs-kernel.js';
 import ts from 'typescript';
 import {createHash} from 'node:crypto';
 import {helperPointKey,type ReactJsxHelperInstrumentationPlan} from './react-helper-instrument.js';
@@ -7,6 +8,7 @@ export interface ReactJsxLookupProof {
   qualification:'bundled-esm-binding-reads-only';
   status:'verified';sourceJavascriptSha256:string;javascriptSha256:string;namespaces:number;
   contextTargets?:{reads:number};
+  contextExportReads?:string[];
   /** Calls whose emitted callee is a resolved lexical read, optionally inside
    * its independently planned module-binding witness. Other callees stay open. */
   contextConsumerCallees?:string[];
@@ -24,6 +26,7 @@ export interface ReactJsxLookupProof {
  * proxies, calls and shadowed names cannot stand in for it. Initializer effects
  * and imported component behavior are separate, unproved requirements. */
 export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelperInstrumentationPlan):{javascript:string;proof:ReactJsxLookupProof} {
+  const commonJs=plan.contextImportFunctions?.length?readReactCommonJsKernel(javascript):undefined;
   const fail=(reason:string):never=>{throw Error('jsx-lookup-'+reason);};
   const file='/__dsc_jsx_lookup_bundle.js',sf=ts.createSourceFile(file,javascript,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
   if((sf as ts.SourceFile & {parseDiagnostics:readonly ts.Diagnostic[]}).parseDiagnostics.length)fail('bundle-syntax');
@@ -44,6 +47,27 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
   };
   const callback=(node:ts.Node|undefined)=>binding(callbackNode(node));
   const edits:Array<{start:number;end:number;text:string}>=[],namespaces=new Map<ts.Symbol,Map<string,ReturnType<typeof binding>>>();
+  if(commonJs){
+    const scan=(n:ts.Node,visit:(n:ts.Node)=>void)=>{visit(n);ts.forEachChild(n,c=>scan(c,visit));};
+    let kernel:ts.VariableDeclaration|undefined,allocation:ts.ObjectLiteralExpression|undefined;
+    scan(sf,n=>{if(ts.isVariableDeclaration(n)&&n.getStart(sf)===commonJs.kernel.start)kernel=n;});
+    if(!kernel?.initializer)fail('commonjs-kernel-span');
+    scan(kernel!.initializer!,n=>{if(ts.isObjectLiteralExpression(n)&&n.properties.length===1&&ts.isPropertyAssignment(n.properties[0])&&n.properties[0].name.getText(sf)==='exports')allocation=n;});
+    if(!allocation)fail('commonjs-allocation-missing');
+    const alloc=allocation!;edits.push({start:alloc.getStart(sf),end:alloc.end,text:'globalThis.__DSC_RUNTIME_PROOF.contextCommonJsAllocate('+alloc.getText(sf)+')'});
+    edits.push({start:kernel!.parent.parent.end,end:kernel!.parent.parent.end,text:'\nglobalThis.__DSC_RUNTIME_PROOF.contextCommonJsKernel(__commonJS,()=>[__commonJS,__getOwnPropNames]);\n'});
+    const files=new Set((plan.bodyModels??[]).flatMap(m=>m.writes.filter(w=>w.phase==='module-initialization'&&w.origin==='loader').map(w=>{if(!w.source)return fail('commonjs-write-source-missing');return w.source.file;})));
+    for(const file of files){
+      const wrappers=commonJs.wrappers.filter(w=>w.name===file);if(wrappers.length!==1||wrappers[0].parameters.length!==2)fail('commonjs-module-wrapper-unqualified');
+      let method:ts.MethodDeclaration|undefined;scan(sf,n=>{if(ts.isMethodDeclaration(n)&&n.getStart(sf)===wrappers[0].start)method=n;});
+      if(!method?.body)fail('commonjs-module-body-missing');
+      let linked=false;scan(method!.body!,n=>{if(ts.isCallExpression(n)&&ts.isPropertyAccessExpression(n.expression)&&n.expression.name.text==='contextBindingFunction'&&ts.isStringLiteral(n.arguments[0])){const key=n.arguments[0].text;linked ||= !!plan.contextBindings?.functions.some(f=>f.source.file===file&&helperPointKey(f.source)===key);}});
+      if(!linked)fail('commonjs-module-source-unlinked');
+      let start=method!.body!.getStart(sf)+1;for(const statement of method!.body!.statements){if(ts.isExpressionStatement(statement)&&ts.isStringLiteral(statement.expression))start=statement.end;else break;}
+      edits.push({start,end:start,text:'\nglobalThis.__DSC_RUNTIME_PROOF.contextCommonJsModule('+JSON.stringify(file)+','+wrappers[0].parameters[1]+','+wrappers[0].parameters[0]+');\n'});
+    }
+  }
+
   const namespace=(base:ts.Identifier)=>{
     const value=binding(base),prior=namespaces.get(value.symbol);if(prior)return prior;
     const declaration=value.declaration;
@@ -79,7 +103,7 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
   const refHookReads:string[]=[],refHooks=new Map((plan.refHooks??[]).map(h=>[helperPointKey(h.call),h]));
   const helperHookReads:string[]=[],helperHooks=new Map((plan.hookHelpers?.functions??[]).flatMap(f=>f.hooks.map(h=>[helperPointKey(h.call),h] as const)));
   const effectHookReads:string[]=[],effectHooks=new Map((plan.effectHooks??[]).map(h=>[helperPointKey(h.call),h]));
-  if(plan.contextCalls?.length||callbackHooks.size||refHooks.size||effectHooks.size||helperHooks.size){
+  if(plan.contextImportFunctions?.length||plan.contextCalls?.length||callbackHooks.size||refHooks.size||effectHooks.size||helperHooks.size){
     // Authenticate compiler-generated getter bodies before permitting runtime
     // reflection of their freshly allocated wrapper. Names here identify the
     // pinned bundler kernel, never a source library or component.
@@ -245,13 +269,29 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
         seen.add(site.text);let value=unwrap(callee);
         if(marker(value,'contextBindingRead')){
           const [read,actual]=value.arguments;
-          if(value.arguments.length===2&&ts.isStringLiteral(read)&&plan.contextBindings?.reads.some(p=>helperPointKey(p.read)===read.text&&helperPointKey(p.read)===helperPointKey(expected.get(site.text)!.callee)))value=unwrap(actual);
+          if(value.arguments.length===2&&ts.isStringLiteral(read)&&plan.contextBindings?.reads.some(p=>helperPointKey(p.read)===read.text&&helperPointKey(p.read)===helperPointKey(expected.get(site.text)!.callee))){
+            const imported=plan.contextBindings?.reads.find(p=>helperPointKey(p.read)===read.text&&p.functionSource);const raw=unwrap(actual);
+            if(imported&&ts.isPropertyAccessExpression(raw)&&!raw.questionDotToken&&ts.isIdentifier(raw.expression)&&raw.name.text==='default'){
+              binding(raw.expression);edits.push({start:value.getStart(sf),end:value.end,text:'globalThis.__DSC_RUNTIME_PROOF.contextImportDefault('+read.getText(sf)+','+raw.expression.getText(sf)+')'});contextConsumerCallees.push(site.text);
+            }
+            value=raw;
+          }
         }
         if(ts.isIdentifier(value)){binding(value);contextConsumerCallees.push(site.text);}
       }
       ts.forEachChild(n,inspect);
     };inspect(sf);
     if(seen.size!==expected.size)fail('context-consumer-coverage-incomplete');
+  }
+  if(plan.contextExportReads?.length){
+    const planned=new Map(plan.contextExportReads.map(r=>[helperPointKey(r.read),r])),registered=new Map<string,ReturnType<typeof binding>>(),reads=new Map<string,ReturnType<typeof binding>>();
+    const scan=(n:ts.Node)=>{if(ts.isCallExpression(n)&&ts.isPropertyAccessExpression(n.expression)&&['contextExportRegister','contextExportRead'].includes(n.expression.name.text)){
+      const owner=n.expression.expression;if(!ts.isPropertyAccessExpression(owner)||owner.name.text!=='__DSC_RUNTIME_PROOF'||!ts.isIdentifier(owner.expression)||owner.expression.text!=='globalThis')return;
+      const key=n.arguments[0];if(n.questionDotToken||!ts.isStringLiteral(key)||!planned.has(key.text))return fail('context-export-bundle-unplanned');
+      if(n.expression.name.text==='contextExportRegister'){if(n.arguments.length!==3||registered.has(key.text))return fail('context-export-registration-duplicate');const value=binding(n.arguments[1]),read=callback(n.arguments[2]);if(value.symbol!==read.symbol)return fail('context-export-registration-binding-differs');registered.set(key.text,read);}
+      else{if(n.arguments.length!==2||reads.has(key.text))return fail('context-export-read-duplicate');reads.set(key.text,callback(n.arguments[1]));}
+    }ts.forEachChild(n,scan);};scan(sf);
+    if(registered.size!==planned.size||reads.size!==planned.size)return fail('context-export-coverage-incomplete');for(const [key,value]of registered)if(reads.get(key)?.symbol!==value.symbol)return fail('context-export-source-binding-differs');
   }
   const expected=new Map<string,string>();
   for(const model of plan.models)for(const target of model.jsxTargets){
@@ -290,5 +330,5 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
   }
   let output=javascript;edits.sort((a,b)=>b.start-a.start);let last=javascript.length;for(const edit of edits){if(edit.end>last)fail('instrumentation-overlap');output=output.slice(0,edit.start)+edit.text+output.slice(edit.end);last=edit.start;}
   const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
-  return {javascript:output,proof:{version:1,acceptedContract:null,effectsVerified:false,qualification:'bundled-esm-binding-reads-only',status:'verified',sourceJavascriptSha256:sha(javascript),javascriptSha256:sha(output),namespaces:namespaces.size,reads:result,...(contextImports?{contextImports}:{}),...(callbackHooks.size?{callbackHookReads}:{}),...(refHooks.size?{refHookReads}:{}),...(effectHooks.size?{effectHookReads}:{}),...(helperHooks.size?{helperHookReads}:{}),...(contextTargets?{contextTargets}:{}),...(plan.contextConsumerCalls?.length?{contextConsumerCallees}:{})}};
+  return {javascript:output,proof:{version:1,acceptedContract:null,effectsVerified:false,qualification:'bundled-esm-binding-reads-only',status:'verified',sourceJavascriptSha256:sha(javascript),javascriptSha256:sha(output),namespaces:namespaces.size,reads:result,...(plan.contextExportReads?.length?{contextExportReads:plan.contextExportReads.map(r=>helperPointKey(r.read))}:{}),...(contextImports?{contextImports}:{}),...(callbackHooks.size?{callbackHookReads}:{}),...(refHooks.size?{refHookReads}:{}),...(effectHooks.size?{effectHookReads}:{}),...(helperHooks.size?{helperHookReads}:{}),...(contextTargets?{contextTargets}:{}),...(plan.contextConsumerCalls?.length?{contextConsumerCallees}:{})}};
 }

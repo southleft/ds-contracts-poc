@@ -1,0 +1,125 @@
+{
+  "scope": "Existing native overlap controls from turn361. Original native children were ink div and absolute background; slot substitutions use the same visual geometry. Not new slot-native hierarchy evidence.",
+  "rows": [
+    {
+      "id": "102:2422",
+      "name": "Order=front, Flow=forward",
+      "width": 20,
+      "height": 20,
+      "props": {
+        "Order": "front",
+        "Flow": "forward"
+      },
+      "reverse": true,
+      "children": [
+        {
+          "name": "ink",
+          "x": 6,
+          "y": 6,
+          "width": 8,
+          "height": 8
+        },
+        {
+          "name": "background",
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "png": "native-0.png",
+      "sha256": "c851156d33b7c10b323ae7168c5b3ff7f6afcb48edb8d4ee62fd20010b91ada2"
+    },
+    {
+      "id": "102:2425",
+      "name": "Order=front, Flow=reverse",
+      "width": 20,
+      "height": 20,
+      "props": {
+        "Order": "front",
+        "Flow": "reverse"
+      },
+      "reverse": false,
+      "children": [
+        {
+          "name": "background",
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20
+        },
+        {
+          "name": "ink",
+          "x": 6,
+          "y": 6,
+          "width": 8,
+          "height": 8
+        }
+      ],
+      "png": "native-1.png",
+      "sha256": "c851156d33b7c10b323ae7168c5b3ff7f6afcb48edb8d4ee62fd20010b91ada2"
+    },
+    {
+      "id": "102:2428",
+      "name": "Order=back, Flow=forward",
+      "width": 20,
+      "height": 20,
+      "props": {
+        "Order": "back",
+        "Flow": "forward"
+      },
+      "reverse": false,
+      "children": [
+        {
+          "name": "ink",
+          "x": 6,
+          "y": 6,
+          "width": 8,
+          "height": 8
+        },
+        {
+          "name": "background",
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20
+        }
+      ],
+      "png": "native-2.png",
+      "sha256": "c702110ff009c5ded236395140bcf41dee808696441d53f303b75ced6dc49c9b"
+    },
+    {
+      "id": "102:2431",
+      "name": "Order=back, Flow=reverse",
+      "width": 20,
+      "height": 20,
+      "props": {
+        "Order": "back",
+        "Flow": "reverse"
+      },
+      "reverse": true,
+      "children": [
+        {
+          "name": "background",
+          "x": 0,
+          "y": 0,
+          "width": 20,
+          "height": 20
+        },
+        {
+          "name": "ink",
+          "x": 6,
+          "y": 6,
+          "width": 8,
+          "height": 8
+        }
+      ],
+      "png": "native-3.png",
+      "sha256": "c702110ff009c5ded236395140bcf41dee808696441d53f303b75ced6dc49c9b"
+    }
+  ],
+  "nativeFileContext": {
+    "fileName": "DS Contracts Live Testing",
+    "fileKey": "NqssRZQpSjChxv5VyN1ZvJ"
+  }
+}

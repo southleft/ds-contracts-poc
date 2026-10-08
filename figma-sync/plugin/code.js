@@ -152,7 +152,8 @@ function toPlain(value) {
 //   • every method whose name mutates (set* / create* / import* / delete*,
 //     plus the named list below) THROWS a plain-words refusal naming the call;
 //   • every property assignment, defineProperty and delete on any API object
-//     reached through it THROWS the same way;
+//     reached through it THROWS the same way, except the root API boolean
+//     skipInvisibleInstanceChildren (a traversal setting, not document data);
 //   • reads pass through untouched — methods run with the RAW object as
 //     `this`, and any wrapped object handed BACK to the API as an argument is
 //     unwrapped first, so Figma never sees a proxy.
@@ -228,7 +229,14 @@ function createReadOnlyFigma(target) {
         var isObj = v !== null && typeof v === 'object' && !Array.isArray(v);
         return locked(t, prop, wrap(v, isNamespace && isObj), v);
       },
-      set: function (t, prop) { throw refusal('the assignment "' + String(prop) + ' = …"'); },
+      set: function (t, prop, next) {
+        // Canonical capture temporarily includes hidden instance children and
+        // restores this runtime traversal flag in finally. No node property,
+        // other global setting, or nonboolean value receives this exception.
+        if (t === target && prop === 'skipInvisibleInstanceChildren' && typeof next === 'boolean')
+          return Reflect.set(t, prop, next, t);
+        throw refusal('the assignment "' + String(prop) + ' = …"');
+      },
       defineProperty: function (t, prop) { throw refusal('defining "' + String(prop) + '"'); },
       deleteProperty: function (t, prop) { throw refusal('deleting "' + String(prop) + '"'); },
     });

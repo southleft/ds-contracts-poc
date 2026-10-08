@@ -557,3 +557,47 @@ test("comparison failure retains instance/source identities and never alters mai
       .every((n: any) => n.children.length === 0),
   );
 });
+
+test('post-write comparison slot roles use owned live handles when derived ID lookup is unavailable', async () => {
+  const f = await comparisonFixture(), lookup = f.figma.getNodeByIdAsync.bind(f.figma);
+  let attemptedSlotLookups = 0;
+  f.figma.getNodeByIdAsync = async (id: string) => {
+    const node = await lookup(id);
+    if (node?.type === 'SLOT') {
+      attemptedSlotLookups++;
+      throw 'Unable to establish connection to Figma after 10 seconds';
+    }
+    return node;
+  };
+  const result = await f.run(f.emit());
+  assert.equal(result.status, 'created-candidate', JSON.stringify(result.problems));
+  assert.equal(attemptedSlotLookups, 0);
+  const roles = result.nodes.filter((n: any) => n.slotIdentity);
+  assert.ok(roles.length > 0);
+  for (const role of roles) {
+    const slot = await lookup(role.slotIdentity.slotId);
+    const child = role.slotIdentity.path.reduce((node: any, index: number) => node.children[index], slot);
+    assert.equal(child.id, role.id);
+    assert.equal(child.getSharedPluginData('ds_contracts', 'nativeSourceAllocation'), role.id);
+  }
+});
+
+test('an owned live slot handle does not excuse changed allocation metadata', async () => {
+  const f = await comparisonFixture(), create = f.figma.createComponent.bind(f.figma);
+  f.figma.createComponent = () => {
+    const component = create(), instantiate = component.createInstance.bind(component);
+    component.createInstance = () => {
+      const instance = instantiate();
+      for (const slot of instance.findAll((n: any) => n.type === 'SLOT')) {
+        const get = slot.getSharedPluginData.bind(slot);
+        slot.getSharedPluginData = (namespace: string, key: string) =>
+          namespace === 'ds_contracts' && key === 'nativeSourceAllocation' ? 'foreign' : get(namespace, key);
+      }
+      return instance;
+    };
+    return component;
+  };
+  const result = await f.run(f.emit());
+  assert.equal(result.status, 'partial-or-unknown-allocation');
+  assert.deepEqual(result.problems, ['native-source-write-slot-identity-unavailable']);
+});

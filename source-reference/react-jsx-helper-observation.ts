@@ -30,11 +30,12 @@ import {captureValidatedTree} from './capture.js';
 import {captureMatchedInitialTree} from './react-initial-capture.js';
 import {watchSourceFailures} from './observe.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {reactInputFilesUnchanged} from './react-input-files.js';
 import {verifyReactContextConsumers,type ReactContextConsumerVerification} from './react-context-verification.js';
 
 export interface ReactJsxHelperObservation {
   version:1;acceptedContract:null;effectsVerified:false;
-  qualification:'original-jsx-helper-state-only';
+  qualification:'original-jsx-helper-state-only'|'original-call-wrapper-state-only';
   status:'observed'|'refused';reason?:string;
   inputs?:Record<string,string>;runtime?:ReactHelperRuntimeReport;lookup?:ReactJsxLookupProof;
   /** Source assumptions. Runtime projection checks are reported separately. */
@@ -46,7 +47,24 @@ export interface ReactJsxHelperObservation {
   evidence?:{renderGraphSha256?:string;callbackCreationsSha256?:string;contextConsumersSha256?:string;callbackDiscoverySha256?:string;callbackModelsSha256?:string;targetModelsSha256?:string;modelSha256:string;planSha256:string;buildSha256:string;runtimeSha256:string;treeSha256:string;pngSha256:string;ownershipSha256:string;pairedOwnershipSha256:string};
 }
 export function reactJsxHelperObservationUnchanged(row:ReactJsxHelperObservation):boolean{
+  return reactJsxHelperObservationsUnchanged([row]);
+}
+
+/** Validate every observation's metadata, then read each distinct pinned input
+ * once in this synchronous check. Conflicting pins refuse; no result is cached
+ * across calls. Source freshness never promotes refused diagnostic prefixes. */
+export function reactJsxHelperObservationsUnchanged(rows:readonly ReactJsxHelperObservation[]):boolean{
   try{
+    if(!rows.every(reactJsxHelperObservationMetadataUnchanged))return false;
+    return reactInputFilesUnchanged(rows.map(row=>row.inputs??{}));
+  }catch{return false;}
+}
+
+function reactJsxHelperObservationMetadataUnchanged(row:ReactJsxHelperObservation):boolean{
+  try{
+    // Refused attempts may retain diagnostic prefixes before evidence is sealed.
+    // They confer no observation authority, but their source inputs still must match.
+    if(row.status==='refused'&&!row.evidence)return true;
     if(row.status==='observed'&&(!row.inputs||!row.evidence||row.runtime?.status!=='observed'||row.lookup?.status!=='verified'))return false;
     if(row.targetEffects&&row.evidence&&evidenceSha(JSON.stringify(row.targetEffects,null,2)+'\n')!==row.evidence.targetModelsSha256)return false;
     if(row.targetCallbacks&&row.evidence&&evidenceSha(JSON.stringify(row.targetCallbacks,null,2)+'\n')!==row.evidence.callbackModelsSha256)return false;
@@ -56,7 +74,7 @@ export function reactJsxHelperObservationUnchanged(row:ReactJsxHelperObservation
     if(row.evidence?.contextConsumersSha256&&!row.contextConsumers)return false;
     if(row.renderGraph&&(!row.evidence||evidenceSha(JSON.stringify(row.renderGraph,null,2)+'\n')!==row.evidence.renderGraphSha256))return false;
     if(row.evidence?.renderGraphSha256&&!row.renderGraph)return false;
-    return !row.inputs||Object.entries(row.inputs).every(([file,hash])=>realpathSync(file)===file&&evidenceSha(readFileSync(file))===hash);
+    return true;
   }catch{return false;}
 }
 

@@ -15,19 +15,23 @@ export interface FrameBox {
   width: number;
   height: number;
 }
+import type {RenderExportProof} from "./design-consumer-render-export.js";
+
 export interface ConsumerFrame {
+  raster?: {kind:"browser-paint-extent-v1";paint:FrameBox};
   layout: FrameBox;
   capture: FrameBox;
   deviceScaleFactor: number;
   pngSha256: string;
 }
 export interface FigmaFrame {
+  refused?: string;
   layout: FrameBox;
   render: FrameBox;
   pngSha256: string;
   /** Only attached by a producer that explicitly requested full node bounds.
    * Earlier receipts retain their original absolute-span interpretation. */
-  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 };
+  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 } | {kind:"figma-rest-paired-render-v1";scale:1;proof:RenderExportProof};
 }
 export const FIGMA_REST_FULL_BOUNDS = {
   kind: "figma-rest-full-bounds-v1",
@@ -137,6 +141,14 @@ export function alignRecordedFrames(
     !validBox(figma.render)
   )
     return { refused: "layout-origin-not-recorded" };
+  if(figma.refused)return {refused:figma.refused};
+  const expanded=consumer.raster?.kind==="browser-paint-extent-v1";
+  if(consumer.raster&&(!expanded||!validBox(consumer.raster.paint)))return {refused:"consumer-raster-model-unsupported"};
+  const paired=figma.raster?.kind==="figma-rest-paired-render-v1";
+  if(paired){const proof=figma.raster!.kind==="figma-rest-paired-render-v1"?figma.raster!.proof:null;
+    if(!proof||!proof.version||!proof.nodeId||!validBox(proof.layout)||!validBox(proof.render)||!proof.layoutInRender||!sameBox(proof.layout,figma.layout)||!sameBox(proof.render,figma.render)||proof.renderSha256!==figma.pngSha256||!/^([a-f0-9]{64})$/.test(proof.layoutSha256)||proof.layoutInRender.x!==figma.layout.x-figma.render.x||proof.layoutInRender.y!==figma.layout.y-figma.render.y||!Number.isInteger(proof.paintedOverlapPixels)||proof.paintedOverlapPixels<=0||!Number.isInteger(proof.overlapPixels)||proof.overlapPixels<proof.paintedOverlapPixels)
+      return {refused:"figma-render-origin-proof-mismatch"};
+  }
   if (consumer.deviceScaleFactor !== 1)
     return { refused: "consumer-scale-not-one" };
   if (
@@ -148,7 +160,7 @@ export function alignRecordedFrames(
     theirs = PNG.sync.read(figmaBytes);
   if (
     figma.raster &&
-    (figma.raster.kind !== FIGMA_REST_FULL_BOUNDS.kind ||
+    ((figma.raster.kind !== FIGMA_REST_FULL_BOUNDS.kind && !paired) ||
       figma.raster.scale !== 1)
   )
     return { refused: "figma-raster-model-unsupported" };
@@ -160,8 +172,9 @@ export function alignRecordedFrames(
   // receipts (no raster model) keep their original raw render-span reading.
   const spans = (pixels: number, raw: number, unit: number) =>
     pixels === Math.ceil(raw) || pixels === Math.ceil(unit);
-  const capture = enclosingFrame(consumer.layout),
+  const capture = enclosingFrame(expanded ? consumer.raster!.paint : consumer.layout),
     exported = figma.raster ? null : enclosingFrame(figma.render);
+  if(expanded&&(capture.x>consumer.layout.x||capture.y>consumer.layout.y||capture.x+capture.width<consumer.layout.x+consumer.layout.width||capture.y+capture.height<consumer.layout.y+consumer.layout.height))return {refused:"consumer-layout-outside-capture"};
   if (!sameBox(consumer.capture, capture))
     return { refused: "consumer-capture-span-mismatch" };
   if (ours.width !== capture.width || ours.height !== capture.height)
@@ -169,17 +182,17 @@ export function alignRecordedFrames(
   if (
     exported
       ? theirs.width !== exported.width || theirs.height !== exported.height
-      : !spans(theirs.width, figma.layout.width, figmaLayout.width) ||
-        !spans(theirs.height, figma.layout.height, figmaLayout.height)
+      : !spans(theirs.width, paired?figma.render.width:figma.layout.width, paired?figmaRender.width:figmaLayout.width) ||
+        !spans(theirs.height, paired?figma.render.height:figma.layout.height, paired?figmaRender.height:figmaLayout.height)
   )
     return { refused: "figma-image-span-mismatch" };
   // The browser instrument captures the root layout box. It cannot qualify a
   // Figma export with shadows/outlines beyond that box by clipping them away.
   if (
-    figmaRender.x < figmaLayout.x ||
+    !(paired && expanded) && (figmaRender.x < figmaLayout.x ||
     figmaRender.y < figmaLayout.y ||
     figmaRender.x + figmaRender.width > figmaLayout.x + figmaLayout.width ||
-    figmaRender.y + figmaRender.height > figmaLayout.y + figmaLayout.height
+    figmaRender.y + figmaRender.height > figmaLayout.y + figmaLayout.height)
   )
     return { refused: "render-outside-layout-capture-unqualified" };
   const ca = {
@@ -188,7 +201,7 @@ export function alignRecordedFrames(
   };
   const fa = exported
     ? { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y }
-    : { x: 0, y: 0 };
+    : paired ? {x:figma.layout.x-figma.render.x,y:figma.layout.y-figma.render.y} : { x: 0, y: 0 };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };

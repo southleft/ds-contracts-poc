@@ -69,7 +69,7 @@ export async function packageReactLibrary(generatedDir: string, component: strin
   // jsxImportSource or verbatimModuleSyntax would change the output. This is the
   // same output as no tsconfig at all.
   await run(toolchain.esbuild, [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', '--tsconfig-raw={}', `--outbase=${src}`, `--outdir=${dist}`], pkgDir);
-  for (const f of sources.filter(f => f.endsWith('.css'))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
+  for (const f of sources.filter(f => f.endsWith('.css') || /^assets[\\/]/.test(path.relative(src, f)))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
   // Declarations, so a TypeScript consumer sees the contract-derived props.
   writeFileSync(path.join(pkgDir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { declaration: true, emitDeclarationOnly: true, jsx: 'react-jsx', module: 'ESNext', moduleResolution: 'Bundler',
     target: 'ES2022', strict: true, skipLibCheck: true, outDir: 'dist', rootDir: 'src', types: [],

@@ -1,0 +1,139 @@
+{
+  "status": "collected",
+  "version": "2406248445072249954",
+  "responseSha256": "3a65e47d4f05caae9aeef09a5fabc2c47e1ae2edb63fcbb9e99502152133a78e",
+  "byNodeId": {
+    "5734:283743": {
+      "texts": [],
+      "textStyles": [],
+      "parts": [
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 16,
+            "y": 8,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 16,
+            "y": 26,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 16,
+            "y": 44,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 16,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 101.333251953125,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        },
+        {
+          "name": "Spacer",
+          "kind": "vector",
+          "box": {
+            "x": 186.666748046875,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        }
+      ]
+    },
+    "5734:286366": {
+      "texts": [],
+      "textStyles": [],
+      "parts": [
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 48,
+            "y": 8,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 48,
+            "y": 26,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 48,
+            "y": 44,
+            "width": 256,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 48,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        },
+        {
+          "name": "Content line",
+          "kind": "vector",
+          "box": {
+            "x": 133.333251953125,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        },
+        {
+          "name": "Spacer",
+          "kind": "vector",
+          "box": {
+            "x": 218.666748046875,
+            "y": 62,
+            "width": 85.33333587646484,
+            "height": 10
+          }
+        }
+      ]
+    }
+  }
+}

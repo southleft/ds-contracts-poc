@@ -20,6 +20,20 @@ import type { ReactChildRoot } from './react-child-root.js';
 import type { NativeContractDraftSource } from '../core/native-contract-draft.js';
 
 const fail = (): never => { throw Error('react-native-evidence-unavailable'); };
+/** Compare source-derived facts, not the native compiler's cached output.
+ * The archived native draft remains authenticated by the report and inventory
+ * seals and is returned unchanged. Native planning separately requires explicit
+ * fresh/correction authority when the current compiler differs from it. */
+export function reactRootSourceMatrixMatches(saved: ReactRootMatrix, current: ReactRootMatrix): boolean {
+  if (saved.draft?.status !== 'native-compiled' || current.draft?.status !== 'native-compiled')
+    return revisionOf(saved) === revisionOf(current);
+  const source = (matrix: ReactRootMatrix) => {
+    const copy = structuredClone(matrix);
+    delete copy.draft!.native;
+    return copy;
+  };
+  return revisionOf(source(saved)) === revisionOf(source(current));
+}
 /** Only call with the current runner's already authenticated report. */
 export function selectReactNativeRequest(repoRoot: string, report: ReactOwnershipReport, caseId: string): ReactNativeRequest {
   const row = report.rows.find(r => r.id === caseId);
@@ -84,14 +98,14 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
   let contentContext:ReactContextualContent|undefined;
   if(row.rootMatrix!.contentContextRevision){
     if(!row.ownership||!row.propertyMatrix||!row.helperObservations)return fail();
-    contentContext=readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership,tree:captured.tree,helpers:row.helperObservations,
-      read:(id,name)=>{const file=path.join(request.caseId,'helpers',id,name);if(!Object.hasOwn(seal.files,file))return fail();return readFileSync(path.join(dir,file));}});
+    contentContext=readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership,tree:captured.tree,helpers:row.helperObservations,wrappers:row.originalWrappers,
+      read:(id,name)=>{const file=id.startsWith('wrapper-')?path.join(request.caseId,'original-wrappers',id.slice(8),name):path.join(request.caseId,'helpers',id,name);if(!Object.hasOwn(seal.files,file))return fail();return readFileSync(path.join(dir,file));}});
     if(contentContext.revision!==row.rootMatrix!.contentContextRevision)fail();
     const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyMatrix.rows.map(effect=>{
       if(!/^\d+$/.test(effect.id))return fail();const file=path.join(request.caseId,'matrix',effect.id+'.json');
       if(!Object.hasOwn(seal.files,file))return fail();return [effect.id,JSON.parse(readFileSync(path.join(dir,file),'utf8'))];
     }));
-    if(revisionOf(assembleReactRootMatrix(program,row.ownership,captured.tree,row.propertyMatrix,snapshots,undefined,contentContext))!==revisionOf(row.rootMatrix))
+    if(!reactRootSourceMatrixMatches(row.rootMatrix!,assembleReactRootMatrix(program,row.ownership,captured.tree,row.propertyMatrix,snapshots,undefined,contentContext)))
       throw Error('react-native-contextual-matrix-reassembly-changed');
   }
   let context,ownedEvidence;
@@ -119,7 +133,7 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
       return [effect.id,JSON.parse(readFileSync(path.join(dir,file),'utf8'))];
     }));
     const reassembled=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,undefined,contentContext);
-    if(revisionOf(reassembled)!==revisionOf(row.rootMatrix))throw Error('react-native-matrix-reassembly-changed');
+    if(!reactRootSourceMatrixMatches(row.rootMatrix!,reassembled))throw Error('react-native-matrix-reassembly-changed');
     matrix=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,identity,contentContext);
     if(matrix.problems.length||matrix.draft?.status!=='native-compiled'||matrix.draft.problems.length)fail();
   }

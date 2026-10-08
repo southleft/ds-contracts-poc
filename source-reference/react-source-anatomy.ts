@@ -173,7 +173,11 @@ export function linkReactSourceAnatomy(
         const { nodes: _sampleContent, ...observation } = captured;
         const owned = observed.createdBy === instance.id &&
           source.implementation !== 'unresolved' &&
-          !source.problems.includes('component-return-control-flow-unresolved') && hostBranches(source.root).includes(captured.tag);
+          !source.problems.includes('component-return-control-flow-unresolved') &&
+          (hostBranches(source.root).includes(captured.tag) ||
+            // A guarded containing-function proof can resolve a dynamic host
+            // for this exact input without changing the shared source fact.
+            contextual.get(instance.id)?.tag === captured.tag && !contextual.get(instance.id)?.delegatedTarget);
         return { path, tag: captured.tag,
           correspondence: owned ? source.root.kind === 'host' ? 'source-host' as const : 'observed-host-branch' as const : 'runtime-dependent' as const,
           observation: structuredClone(observation) };
@@ -182,7 +186,7 @@ export function linkReactSourceAnatomy(
         ? 'caller-slot' as const : source.children.kind === 'unresolved' ? 'unresolved' as const : 'authored-or-runtime' as const;
       const nodes = ownership.nodes.filter(node => instance.roots.some(root => contains(root, node.path)));
       const contextFact=contextual.get(instance.id);
-      if(contextFact){
+      if(contextFact&&!contextFact.delegatedTarget){
         if(roots.length!==1||roots[0].correspondence==='runtime-dependent'||roots[0].tag!==contextFact.tag||
           nodes.some(node=>node.path!==roots[0].path&&node.createdBy===instance.id))fail('react-anatomy-contextual-content-root-mismatch');
         content='caller-slot';
@@ -273,7 +277,9 @@ export function linkReactSourceAnatomy(
       const childrenValue = (id: string) => instances.get(id)!.props.children ??
         (Object.hasOwn(instances.get(id)!.props, 'children') ? null : {kind:'undefined'});
       const childrenAgree = JSON.stringify(childrenValue(instance.instanceId)) === JSON.stringify(childrenValue(child.instanceId));
-      const forwardsChildren = source.children.kind === 'forwarded' && child.content === 'caller-slot' && childrenAgree;
+      const wrapperFact=contextual.get(instance.instanceId);
+      const wrapperForwards=wrapperFact?.delegatedTarget && identity(wrapperFact.delegatedTarget)===targetIdentity && wrapperFact.tag===instance.roots[0].tag;
+      const forwardsChildren = (source.children.kind === 'forwarded' || !!wrapperForwards) && child.content === 'caller-slot' && childrenAgree;
       instance.rootDelegation = { instanceIds: chain, hostOwner, forwardsChildren };
       instance.roots[0].correspondence = 'delegated-host';
       instance.problems = instance.problems.filter(problem => problem !== 'root-runtime-correspondence-unqualified');
@@ -281,7 +287,7 @@ export function linkReactSourceAnatomy(
       if (linked.get(hostOwner)!.roots[0].correspondence === 'observed-host-branch') instance.problems.push('other-root-branches-unqualified');
       if (forwardsChildren) {
         instance.content = 'caller-slot';
-        if(child.contentContext){instance.contentContext={...child.contentContext};instance.problems.push('caller-content-observed-input-context-only');}
+        if(child.contentContext){instance.contentContext??={...child.contentContext};if(!instance.problems.includes('caller-content-observed-input-context-only'))instance.problems.push('caller-content-observed-input-context-only');}
         instance.callerContentPaths = [...child.callerContentPaths];
         instance.runtimeDependentPaths = ownership.nodes.filter(node => contains(path, node.path) && node.path !== path && !instance.callerContentPaths.includes(node.path)).map(node => node.path);
       } else {

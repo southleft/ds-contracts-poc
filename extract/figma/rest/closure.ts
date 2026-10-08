@@ -14,8 +14,9 @@
  *   not-found                 no metadata for the componentId in the response,
  *                             or /nodes answered null for the target id
  *   not-a-component           the target id is not a COMPONENT_SET/COMPONENT
- *   utility-slot-set          the target is named "Slot" — a utility the
- *                             mapper never maps (dump.plugin.js rule)
+ * A set named "Slot" remains eligible when reached through a component ID;
+ * utility-name filtering belongs only to broad discovery, not dependencies.
+ *
  *   set-name-collision        another set already in the dump has the same
  *                             name (the dump is keyed by set name)
  *   unreadable                the /nodes request for the target failed
@@ -93,6 +94,7 @@ export const integerLikeSetName = (name: string): boolean =>
   /^(0|[1-9]\d*)$/.test(name) && Number(name) < 4294967295;
 
 export interface ClosureSet {
+  remoteSnapshot?: import("../types.js").DumpSet["remoteSnapshot"];
   nodeId: string;
   name: string;
   type: string;
@@ -385,9 +387,6 @@ export async function followInstances(
         } else if (!isSetDoc(entry.document)) {
           reason = "not-a-component";
           detail = `${id} "${entry.document.name}" is a ${entry.document.type}, not a COMPONENT_SET or COMPONENT`;
-        } else if (entry.document.name === "Slot") {
-          reason = "utility-slot-set";
-          detail = `${id} is the utility set "Slot", which the mapper never maps`;
         } else if (integerLikeSetName(entry.document.name)) {
           reason = "set-name-integer-like";
           detail = `${id}: ${integerDetail(entry.document.name)}`;

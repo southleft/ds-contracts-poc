@@ -1,3 +1,4 @@
+import {ContractSchema} from '../../scripts/contract-schema.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
@@ -93,4 +94,32 @@ test('literal-only libraries retain an empty owned token scope and used untyped 
     const bad=retainPreparedReactLibrary(work,invalid,await buildReactLibrary(repo,invalid));
     assert.throws(()=>prepareReactLibraryNativePlan(work,{...request,artifactId:bad.id}),/token-type-missing/);
   } finally {rmSync(work,{recursive:true,force:true});}
+});
+
+for(const outsideStroke of [false,true])test(`prepared instance root overrides allocate their tokens before native creation (stroke=${outsideStroke})`,async()=>{
+ const work=mkdtempSync(path.join(tmpdir(),'retained-instance-root-tokens-'));
+ try {
+ const base={version:'0.1.0',status:'draft',description:'Generated absolute flex regression 1053',semantics:{element:'div'},props:[],states:[],bindings:{code:{anchors:{importPath:'./Absolute1053',export:'Absolute1053'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}};
+const child=ContractSchema.parse({...base,id:'probe.absolute-child-1053',name:'AbsoluteChild1053',anatomy:{root:{instanceRootInputs:['width','height','padding-left'],layout:{display:'flex',direction:'row'},literals:{width:'48px',height:'48px','padding-left':'4px','padding-right':'4px','background-color':'#dce8f2'},parts:{mark:{shape:{kind:'rect',width:20,height:20},literals:{'background-color':'#113355'}}}}}});
+const parent=ContractSchema.parse({...base,id:'probe.absolute-host-1053',name:'AbsoluteHost1053',anatomy:{root:{declared:{position:'relative'},layout:{display:'flex',direction:'column'},literals:{width:'200px',height:'120px','background-color':'#f5dfba'},parts:{wrapper:{declared:{position:'absolute'},layout:{direction:'column'},literals:{left:'10px',right:'15px',top:'5px',bottom:'5px'},parts:{usage:{component:{id:child.id,rootFill:['width'],rootOverrides:{height:'{usage.height}','padding-left':'{usage.padding-left}'}},layout:{grow:true,growBasis:'zero'}}}}}}}});
+if(outsideStroke){
+ child.anatomy.root.instanceRootInputs!.push('outline-color','outline-width');
+ Object.assign(parent.anatomy.root.parts!.wrapper.parts!.usage.component!.rootOverrides!,{'outline-color':'{usage.ink}','outline-width':'{usage.stroke}'});
+}
+const input=parseLibraryRequest({rootId:parent.id,contracts:[parent,child],icons:[],tokens:{primitives:{usage:{height:{$type:'dimension',$value:'24px'},'padding-left':{$type:'dimension',$value:'0px'}}},semantic:{},light:{},dark:{},brands:{default:{}}}});
+
+ if(outsideStroke)Object.assign((input.tokens.primitives as any).usage,{ink:{$type:'color',$value:'#123456'},stroke:{$type:'dimension',$value:'2px'}});
+ const saved=retainPreparedReactLibrary(work,input,await buildReactLibrary(work,input));
+ const request={artifactId:saved.id,mode:'light' as const,brand:'default',operation:{id:'70000000-0000-4000-8000-000000001054',fileKey:'RetainedLibraryFixture'}};
+ const {plan,revision}=prepareReactLibraryNativePlan(work,request);
+ assert.deepEqual(plan.tokenInput.tokenPaths,outsideStroke?['usage.height','usage.ink','usage.padding-left','usage.stroke']:['usage.height','usage.padding-left']);
+ const host=nativeFixtureHost();host.figma.fileKey=request.operation.fileKey;
+ Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string){this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};};
+ const run=async(script:string)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma:host.figma,console})));
+ const born=await run(emitNativeTokenContextScript(plan.tokenInput).script);
+ assert.equal(born.status,'created-candidate');
+ const read=await run(emitNativeTokenContextReadbackScript(plan.tokenInput,born.creationIdentity));
+ const creation=await run(buildReactLibraryNativeWrite(work,request,revision,{input:plan.tokenInput,identity:born.creationIdentity,receipt:read.receipt}).script);
+ assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+ } finally {rmSync(work,{recursive:true,force:true});}
 });

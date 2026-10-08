@@ -36,3 +36,43 @@ test("a component with a declared slot keeps children in its props type and rend
   assert.doesNotMatch(tsx, /`children` OMITTED/);
   assert.match(tsx, /\{children\}/);
 });
+
+test('a part named children and literal children text do not grant an unused caller API',()=>{
+ for(const root of [
+  {parts:{children:{content:{prop:'label'}}}},
+  {parts:{copy:{text:'children'}}},
+  {parts:{copy:{text:'A "children" label'}}},
+ ]){
+  const tsx=emit(contract(root,[{name:'label',type:'text',default:'Button',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Label'}}}]));
+  assert.match(tsx,/extends Omit<HTMLAttributes<HTMLDivElement>, 'children'>/);
+  assert.doesNotMatch(tsx.slice(tsx.indexOf('function ChildrenProbe('),tsx.indexOf(') {',tsx.indexOf('function ChildrenProbe('))),/\bchildren\b/);
+ }
+});
+
+test('a children-bound text leaf keeps the caller API even when its CSS part has the same name',()=>{
+ const tsx=emit(contract({parts:{children:{content:{prop:'children'}}}},[
+  {name:'label',type:'text',default:'Button',bindings:{code:{prop:'children'},figma:{kind:'TEXT',property:'Label'}}},
+ ]));
+ assert.match(tsx,/extends HTMLAttributes<HTMLDivElement> \{/);
+ assert.match(tsx,/\{children\}/);
+});
+
+test('the generated consumer type rejects children on a named label part and accepts them on a real slot',async()=>{
+ const {generatedTypeErrors}=await import('./react-test-runtime.js');
+ const label=contract({parts:{children:{content:{prop:'label'}}}},[
+  {name:'label',type:'text',default:'Button',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Label'}}},
+ ]);
+ const closed=emit(label),open=emit(contract({slot:{name:'children'}}));
+ assert.deepEqual(generatedTypeErrors(label.name,closed),[]);
+ assert(generatedTypeErrors(label.name,closed+'\nconst consumer = <ChildrenProbe children="Caller text" />;').some(e=>e.includes('children')));
+ assert.deepEqual(generatedTypeErrors(label.name,open+'\nconst consumer = <ChildrenProbe children="Caller text" />;'),[]);
+});
+
+test('a conditional slot with default content retains its children binding',async()=>{
+ const {generatedTypeErrors}=await import('./react-test-runtime.js');
+ const child=contract({text:'Default'});child.id='probe.default';child.name='DefaultSample';
+ const c=contract({parts:{icon:{slot:{name:'children',renderDefault:true,collapseWhenEmpty:true,defaultContent:[{id:child.id}]},parts:{fallback:{component:{id:child.id}}}}}});
+ const tsx=emitReact(c,{contracts:new Map([[c.id,c],[child.id,child]]),icons:new Map(),tokens:tokenInventoryFromJson([tokens.primitives])}).tsx;
+ assert.match(tsx,/children === undefined/);
+ assert.deepEqual(generatedTypeErrors(c.name,tsx+'\nconst consumer = <ChildrenProbe children="Caller text" />;',{DefaultSample:emit(child)}),[]);
+});

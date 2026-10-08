@@ -5,7 +5,7 @@ import {chromium} from 'playwright-core';
 import {generatedTypeErrors, mountGenerated} from './react-test-runtime.js';
 import assert from 'node:assert/strict';
 import {ContractSchema, walkAnatomy, resolveLayout, type Contract} from '../scripts/contract-schema.js';
-import {asMinimalChildContract, proposeFromDump} from './propose-figma.js';
+import {asMinimalChildContract, proposeFromDump, proposeDeclaredDrawnCandidate} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {textBoxConflicts} from '../packages/core/src/anatomy.js';
 import {validateContract} from '../packages/core/src/validate.js';
@@ -288,4 +288,138 @@ test('fixed shapes retain declared geometry while percentage width and explicit 
       assert.deepEqual([shape.width,shape.height],[mode==='percent'?40:mode==='literal'?15:10,12],`${kind} ${direction} ${mode}`);
     }
   }
+});
+
+function compoundGrowthSource():DumpSet {
+  return {setName:'Compound host',type:'COMPONENT_SET',propertyDefinitions:{
+    Density:{type:'VARIANT',defaultValue:'Compact',variantOptions:['Compact','Wide']},
+    Emphasis:{type:'VARIANT',defaultValue:'Quiet',variantOptions:['Quiet','Loud']}},
+    variants:['Compact','Wide'].flatMap(density=>['Quiet','Loud'].map(emphasis=>({
+      name:`Density=${density}, Emphasis=${emphasis}`,variantProperties:{Density:density,Emphasis:emphasis},type:'COMPONENT',
+      layout:{...layout!,primarySizing:'FIXED'},bbox:{width:200,height:30},children:[{
+        name:'entry',type:'INSTANCE',instanceOf:'Entry',instanceSetKey:'entry-key',
+        componentProperties:{'Text#1:0':'Item'},fillWidth:(density==='Wide')!==(emphasis==='Loud'),
+      }],
+    })))};
+}
+
+test('compound parent growth preserves every observed exception through both React targets and native plans', async t=>{
+  const input=compoundGrowthSource();
+  const {contract,ctx}=propose(input),part=contract.anatomy.root.parts!.entry;
+  assert.equal(part.layoutByCombination?.rows.length,4);
+  assert.deepEqual(errors(contract),[]);
+  const missing=structuredClone(contract);missing.anatomy.root.parts!.entry.layoutByCombination!.rows.pop();
+  assert(errors(missing).some(error=>error.includes('complete finite coverage')));
+  const mixed=structuredClone(contract);mixed.anatomy.root.parts!.entry.layoutByCombination!.rows[0].layout.direction='column';
+  assert.equal(ContractSchema.safeParse(mixed).success,false,'a placement table cannot restyle child internals');
+  const conflicting=structuredClone(contract);conflicting.anatomy.root.parts!.entry.literals={'min-width':'12px'};
+  assert(errors(conflicting).some(error=>error.includes('component')),'instance parts cannot add arbitrary styling');
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  const combinations=[{density:'compact',emphasis:'quiet',grow:false},{density:'compact',emphasis:'loud',grow:true},
+    {density:'wide',emphasis:'loud',grow:false},{density:'wide',emphasis:'quiet',grow:true},{density:'compact',emphasis:'quiet',grow:false}];
+  for(const emitter of [reactEmitter,reactInlineEmitter]){
+    const files=emitter.emit(contract,ctx),child=emitter.emit(entry,ctx),page=await browser.newPage();
+    try{const render=await mountGenerated(page,contract.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents,
+      {Entry:{tsx:child[0].contents,css:child.find(f=>f.path.endsWith('.css'))?.contents}});
+      for(const {grow,...props} of combinations){await render({...props,style:{width:200}});
+        const observed=await page.locator('#root > :first-child > :first-child').evaluate(el=>({grow:getComputedStyle(el).flexGrow,width:el.getBoundingClientRect().width}));
+        assert.equal(observed.grow,grow?'1':'0',JSON.stringify(props));
+        if(grow)assert.equal(observed.width,200);else assert(observed.width<200);
+      }
+    }finally{await page.close();}
+  }
+  const compiled=createFigmaEngine({tokens:ctx.tokens,icons:ctx.icons}).compileComponentData(contract,ctx.contracts);
+  for(const variant of compiled.variants){const expected=variant.name.includes('Wide')!==variant.name.includes('Loud');
+    const usage=nodes(variant.spec).find(n=>n.type==='instance')!;assert.equal(usage.grow,expected||undefined,variant.name);
+  }
+});
+
+
+test('compound growth covers only visible planes and refuses missing observations or child restyling',()=>{
+  const input=compoundGrowthSource();
+  input.propertyDefinitions!.Presence={type:'VARIANT',defaultValue:'Shown',variantOptions:['Shown','Absent']};
+  input.variants=input.variants.flatMap(variant=>['Shown','Absent'].map(presence=>({...structuredClone(variant),
+    name:variant.name+`, Presence=${presence}`,variantProperties:{...variant.variantProperties,Presence:presence},
+    children:presence==='Shown'?structuredClone(variant.children):[]})));
+  const {contract}=propose(input),part=contract.anatomy.root.parts!.entry;
+  assert.equal(part.layoutByCombination?.rows.length,4);
+  assert.deepEqual(errors(contract),[]);
+  const inconsistent=structuredClone(contract);inconsistent.anatomy.root.parts!.entry.layoutByCombination!.rows[0].layout.direction='column';
+  assert(errors(inconsistent).some(error=>error.includes('cannot restyle')));
+  const missing=compoundGrowthSource();missing.variants.pop();
+  assert.throws(()=>propose(missing),(error:any)=>error.code==='EXACT_MATRIX_RAGGED');
+  const unobserved=compoundGrowthSource();delete unobserved.variants[0].layout;
+  const result=propose(unobserved);
+  assert.equal(result.contract.anatomy.root.parts!.entry.layoutByCombination,undefined);
+  assert(result.notes.some(note=>note.includes('primary-axis-fill-not-carried')));
+  const custom=structuredClone(entry);custom.props[0].bindings.code.prop='style';
+  assert(errors(contract,custom).some(error=>error.includes('component-grow-host-unproven')));
+});
+
+
+test('compound component growth uses Boolean false selectors and never restyles the child layout',async t=>{
+  const {contract,ctx}=propose(compoundGrowthSource()),part=contract.anatomy.root.parts!.entry;
+  const prop=contract.props.find(prop=>prop.name==='emphasis')!;
+  prop.type='boolean';prop.default=false;prop.bindings.figma={kind:'VARIANT',property:'Emphasis',values:{false:'Quiet',true:'Loud'}};
+  const index=part.layoutByCombination!.props.indexOf('emphasis');
+  for(const row of part.layoutByCombination!.rows)row.values[index]=row.values[index]==='loud'?'true':'false';
+  assert.deepEqual(errors(contract),[]);
+  const gated=structuredClone(contract);gated.anatomy.root.parts!.entry.visibleWhen={prop:'emphasis'};
+  assert.deepEqual(errors(gated),[],'full-matrix Boolean gating keeps its existing coverage semantics');
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  for(const emitter of [reactEmitter,reactInlineEmitter]){
+    const files=emitter.emit(contract,ctx),child=emitter.emit(entry,ctx),page=await browser.newPage();
+    try{const render=await mountGenerated(page,contract.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents,
+      {Entry:{tsx:child[0].contents,css:child.find(f=>f.path.endsWith('.css'))?.contents}});
+      for(const density of ['compact','wide'])for(const emphasis of [false,true,false]){
+        await render({density,emphasis,style:{width:200}});
+        const grow=density==='wide'?!emphasis:emphasis;
+        const observed=await page.locator('#root > :first-child > :first-child').evaluate(el=>({grow:getComputedStyle(el).flexGrow,direction:getComputedStyle(el).flexDirection}));
+        assert.equal(observed.grow,grow?'1':'0');assert.equal(observed.direction,'row');
+      }
+    }finally{await page.close();}
+  }
+});
+
+test('declared drawn growth covers only reachable tuples while preserving a captured non-fill exception',()=>{
+ const input=compoundGrowthSource();input.variants.pop();
+ const result=proposeDeclaredDrawnCandidate(input,{corpus,mintUnbound:true,stampsObservable:true,contractIdByName:new Map([['Entry',entry.id]]),contractIdByKey:new Map([['entry-key',entry.id]]),contractsById:new Map([[entry.id,asMinimalChildContract(entry)]])},input.variants.map(v=>v.variantProperties));
+ const c=ContractSchema.parse(result.proposal.contract),part=c.anatomy.root.parts!.entry;
+ assert.equal(c.bindings.figma.drawnVariants?.length,3);
+ assert.equal(part.layoutByCombination?.rows.length,3);
+ assert.equal(resolveLayout(part,{density:'compact',emphasis:'quiet'})?.grow,false);
+ assert.equal(resolveLayout(part,{density:'wide',emphasis:'quiet'})?.grow,true);
+ assert.equal(resolveLayout(part,{density:'compact',emphasis:'loud'})?.grow,true);
+ const errs:string[]=[];validateContract(c,new Map([[c.id,c],[entry.id,entry]]),errs,new Map(),{drawnVariants:'react-runtime'});assert.deepEqual(errs,[]);
+ const absent=proposeFromDump(input,{corpus,mintUnbound:true,stampsObservable:true,contractIdByName:new Map([['Entry',entry.id]]),contractIdByKey:new Map([['entry-key',entry.id]]),contractsById:new Map([[entry.id,asMinimalChildContract(entry)]])});
+ const a=ContractSchema.parse(absent.contract);
+ assert.equal(a.bindings.figma.absentVariants?.length,1);
+ assert.equal(a.anatomy.root.parts!.entry.layoutByCombination?.rows.length,3);
+ assert.deepEqual(errors(a),[]);
+ const missing=structuredClone(c);missing.anatomy.root.parts!.entry.layoutByCombination!.rows.pop();
+ assert(errors(missing).some(error=>error.includes('complete finite coverage')));
+});
+
+test('single-root component growth and scalable overrides share the child root in both React targets',async t=>{
+ const child=structuredClone(entry);child.anatomy.root.overridable=['size','color'];
+ child.anatomy.root.tokens={width:'{sample.size}',height:'{sample.size}',color:'{sample.color}'};
+ delete child.anatomy.root.layout;child.anatomy.root.declared={position:'relative'};
+ child.anatomy.root.parts={ink:{declared:{position:'absolute'},shape:{kind:'path',width:16,height:16,parentViewport:{width:16,height:16,x:0,y:0},paths:[{data:'M0 0L16 0L16 16L0 16Z',windingRule:'NONZERO'}]},literals:{'background-color':'currentColor'}}};
+ const host=ContractSchema.parse({id:'ds.host',name:'Host',version:'0.1.0',status:'draft',description:'Growth and owned overrides',semantics:{element:'div'},props:[],states:[],anatomy:{root:{layout:{display:'flex',direction:'row'},literals:{width:'120px',height:'40px'},parts:{item:{layout:{grow:true,growBasis:'zero'},component:{id:child.id,overrides:{size:'{sample.overrideSize}',color:'{sample.overrideColor}'}}}}}},bindings:{figma:{anchors:{fileKey:'fixture',componentSetKey:'host-key'}},code:{anchors:{importPath:'./Host',export:'Host'}}}});
+ const tokens={primitives:{sample:{size:{$type:'dimension',$value:16},color:{$type:'color',$value:'#ff0000'},overrideSize:{$type:'dimension',$value:24},overrideColor:{$type:'color',$value:'#0000ff'}}},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const ctx={contracts:new Map([[child.id,child],[host.id,host]]),tokens,icons:new Map<string,string>()};
+ const found:string[]=[];validateContract(host,ctx.contracts,found,new Map());assert.deepEqual(found,[]);
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  const c=emitter.emit(child,ctx),h=emitter.emit(host,ctx),page=await browser.newPage();
+  try{
+   await mountGenerated(page,host.name,h[0].contents,h.find(f=>f.path.endsWith('.css'))?.contents,{[child.name]:{tsx:c[0].contents,css:c.find(f=>f.path.endsWith('.css'))?.contents}});
+   await page.addStyleTag({content:':root {--sample-size:16px;--sample-color:#ff0000;--sample-overrideSize:24px;--sample-overrideColor:#0000ff;}'});
+   const actual=await page.locator('#root > *').evaluate(el=>{const item=el.firstElementChild!;return{children:el.children.length,width:item.getBoundingClientRect().width,height:item.getBoundingClientRect().height,color:getComputedStyle(item).color,text:item.textContent};});
+   assert.deepEqual(actual,{children:1,width:120,height:24,color:'rgb(0, 0, 255)',text:''},emitter===reactEmitter?'css':'inline');
+  }finally{await page.close();}
+ }
+ assert(errors(host,entry).some(e=>e.includes('component-grow-host-unproven')));
+ const custom=structuredClone(child);custom.props[0].bindings.code.prop='style';assert(errors(host,custom).some(e=>e.includes('component-grow-host-unproven')));
+ const states=structuredClone(host);states.anatomy.root.parts!.item.states={hover:{color:'{sample.color}'}};assert(errors(states,child).some(e=>e.includes('component-grow-host-unproven')));
 });

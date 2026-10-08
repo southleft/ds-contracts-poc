@@ -1,3 +1,4 @@
+import {PLUGIN_DUMP_VERSION} from '../extract/figma/types.js';
 /**
  * Hop 4 pin — a set this pipeline drew must propose. Recovered props /
  * host element are the bar. Events stay canvas-absent (dump cannot
@@ -373,8 +374,8 @@ check(
 );
 const dumpPlugin = readFileSync(path.join(ROOT, 'extract', 'figma', 'dump.plugin.js'), 'utf8');
 check(
-  'dump.plugin.js declares dumpVersion 1.48 (a v1.48 producer must still read this v1.30 fixture)',
-  /dumpVersion: '1\.48'/.test(dumpPlugin),
+  `dump.plugin.js declares dumpVersion ${PLUGIN_DUMP_VERSION} (the current producer must still read this v1.30 fixture)`,
+  dumpPlugin.includes(`dumpVersion: '${PLUGIN_DUMP_VERSION}'`),
 );
 const flowbiteSetName = 'Alert (flowbite.alert)';
 const scopedDump = dumpPlugin.replace(

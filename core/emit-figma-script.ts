@@ -1,3 +1,24 @@
+import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME} from './native-text-box.js';
+import {mapNativeTextAppearances,NATIVE_TEXT_APPEARANCE_RUNTIME} from './native-text-appearance.js';
+import type {QualifiedTextAppearance} from './source-text-appearance-control.js';
+import {mapNativeImageArguments,NATIVE_IMAGE_CONTROL_RUNTIME} from './native-image-control.js';
+import {solidFillPartTokenError,solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
+import {statePresenceRows,type PresenceState} from './state-presence.js';
+import {nativeImageFill,NATIVE_IMAGE_FILL_RUNTIME,type NativeImageFill} from './native-image-fill.js';
+import {textStateProp,textStateTarget} from '../packages/core/src/text-state-target.js';
+import {callerContentGroups} from '../scripts/contract-schema.js';
+import { capturedStyleLineHeight, sameStyleLineHeight, type StyleLineHeight } from './text-style-line-height.js';
+import {planInstancePropertyAmend,INSTANCE_PROPERTY_AMEND_RUNTIME,type InstancePropertyAmend} from './native-instance-property-amend.js';
+import {instanceInsideStrokeTokenErrors,resolvedInstanceInsideStroke} from '../packages/core/src/instance-inside-stroke.js';
+import {resolveBooleanArguments} from './component-boolean-arguments.js';
+import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
+import {allocateInstanceAffine,type InstanceAffineAllocation} from '../scripts/contract-schema.js';
+import {resolvePresence, defaultSlotFamilyIssue} from '../scripts/contract-schema.js';
+import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
+import {planSolidFillBindingTokens} from './solid-fill-binding-tokens.js';
+import {SOLID_FILL_COMPOSITION_NATIVE_RUNTIME,BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME} from './solid-fill-composition-native.js';
+import {solidFillCompositionRules} from '../packages/core/src/css.js';
+import {solidFillCompositionPaint, resolveSolidFillComposition, resolveSolidFillToken} from '@ds-contracts/schema';
 import {normalizeAbsoluteGeometry, resolveNativeAbsoluteGeometry} from '@ds-contracts/schema';
 import { strokedPathNativeData } from './stroked-path-native.js';
 import {contractDependencyEdges, resolveAbsoluteGeometry, resolveComponentPlacement} from '../scripts/contract-schema.js';
@@ -55,6 +76,7 @@ import {
   absentVariantAxes,
   absentVariantKey,
   absentVariantKeys,
+  drawnVariantIssues,
   channelDraws,
   TOKEN_CHANNELS,
   gridAxisSizing,
@@ -141,9 +163,16 @@ export interface LayoutSpec {
   };
 }
 
-type ResolvedShape<T> = T extends unknown ? Omit<T, 'pathsByProp'> : never;
+type ResolvedShape<T> = T extends unknown ? Omit<T, 'pathsByProp' | 'arcByCombination'> : never;
 
 export interface NodeSpec {
+  /** Native responsive ratio, seeded from an independently known width. */
+  nativeAspectRatio?: number;
+  /** Draft resolved per-fill paint; public writing remains refused. */
+  solidFillComposition?: ReturnType<typeof solidFillCompositionPaint>;
+  /** Internal qualified token receiver; ordinary public compilation refuses. */
+  solidFillCompositionToken?: string;
+  mask?: NonNullable<Part['mask']>;
   type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
   backgroundClip?: 'padding-box';
   /** Synthetic, independently verified paint plane; not a content/API part. */
@@ -158,12 +187,18 @@ export interface NodeSpec {
   /** Authenticated filled-path drawing area and its unresized native ink. */
   nativePathViewport?: true;
   nativePathInk?: true;
+  nativeMaskPath?: true;
+  nativePaintedStrokeMask?: true;
   nativePathScale?: true;
   pathParentViewport?: { width: number; height: number; x: number; y: number };
   scalablePathParent?: true;
   instanceSize?: { px: number; varName: string };
+  instanceRootOverrides?: Record<string,{px:number;varName:string}>;
+  instanceRootFill?: {varName:string};
+  instanceRootStroke?: {color:string;width:string;px:number};
   instanceInk?: { varName: string; writeProtocol: 'attached-v1'; paintKind?: 'stroke' };
   instanceStrokeWeight?: { px: number; varName: string };
+  instanceInsideStroke?: NonNullable<NonNullable<Part['component']>['sameInkInsideStroke']>['rows'][number]['stroke'];
   nativeContractSample?: NativeContractSampleIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
@@ -186,12 +221,17 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
+  /** Resolved CSS outline band; offset tokens require recompilation. */
+  outlineStrokeAlign?: 'INSIDE' | 'CENTER';
   /** The public Part model carries only false, for a stroke outside layout.
    *  Internally true also enables explicit CSS border-box layout when a
    *  uniform state width replaces literal or bound resting sides. Retained
    *  nodes can carry an outside-layout value; this transition must write its
    *  layout policy instead of relying on that prior state. */
   strokesIncludedInLayout?: boolean;
+  /** Compiled inset-ring representation; requires independent layout-policy readback. */
+  insetRingStroke?: true;
+  itemReverseZIndex?: boolean;
   /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
    *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
   dashPattern?: number[];
@@ -201,6 +241,8 @@ export interface NodeSpec {
   grow?: boolean;
   /** Compile-only placement fact; checked and removed after fill allocation. */
   growBasis?: 'zero';
+  crossStretch?: boolean;
+  resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
   /** Parent-established vertical main-axis growth. */
@@ -255,6 +297,17 @@ export interface NodeSpec {
    *  the part is simply omitted from non-matching variants.) */
   visibleProp?: string;
   visibleDefault?: boolean;
+  visibilityTarget?: {key:string; visible:boolean};
+  instanceVisibility?: Record<string,boolean>;
+  literalTextBox?:{width:number;height?:number};
+  textAppearanceTarget?:string;
+  instanceTextAppearances?:Record<string,QualifiedTextAppearance>;
+  imageTarget?: string;
+  instanceImages?: Record<string,NativeImageFill>;
+  textColorTarget?: string;
+  shapeFillTarget?: string;
+  instanceShapeFills?: Record<string,{r:number;g:number;b:number;a?:number}>;
+  instanceTextColors?: Record<string,string>;
   /** Meter fill: fraction of the parent track's width (the canvas renders
    *  the contract defaults' state). Runtime resizes after append. */
   pct?: number;
@@ -276,6 +329,9 @@ export interface NodeSpec {
    *  documented canvas stylesWhen fidelity limit. */
   shape?: ResolvedShape<NonNullable<Part['shape']>>;
   /** Fixed free frame used by captured SCALE/SCALE open paths. */
+  affineViewport?: true;
+  instanceAffineAllocation?: InstanceAffineAllocation;
+  instanceAffineFill?: {width:boolean;height:boolean};
   strokeViewport?: true;
   /** v9 shape placement — compiled from the part's stylesWhen entries whose
    *  condition holds for this combo (the proposer's closed placement
@@ -313,6 +369,9 @@ export interface NodeSpec {
    *  named description limit by compileComponentData and STRIPPED before the
    *  spec JSON is emitted — never a silent drop, never emitted noise. */
   gradientMiss?: string;
+  imagePaint?: NativeImageFill;
+  /** Compile-only full original data URL, finalized after declared sizing. */
+  imageCandidate?: string;
   /** COMPILE-INTERNAL (B-3 finding 6 companion): a box-shadow whose resolved
    *  value parsed NEITHER as the single-drop dump grammar NOR as a full
    *  effect stack — genuinely inexpressible / foreign grammar. Collected by
@@ -493,7 +552,7 @@ export interface NodeSpec {
    *  variable puts the identity back where a reader can see it. */
   fontSizeVar?: string;
   /** Weight token identity. Historical output carries a plugin-data stamp;
-   * explicit empty text templates also bind the native fontWeight field. */
+   * native contract drafts also bind the native fontWeight field. */
   fontWeightVar?: string;
   /** Line-height token identity. Historical output carries a plugin-data
    * stamp; explicit empty text templates also use a native lineHeight binding. */
@@ -523,10 +582,13 @@ export interface NodeSpec {
   /** Reuse this slot on the containing child instance; never create a parent
    * slot property or replace the child main. Children belong to the caller. */
   callerSlotProperty?: string;
+  /** This visibility binding belongs to the reused child slot, not the caller. */
+  callerSlotVisibleProp?: string;
   callerRootFillWidth?: true;
   // slot
   slotProperty?: string;
   slotOptional?: boolean;
+  slotCollapseWhenEmpty?: boolean;
   slotAccepts?: Array<{ dep: string; contractId: string; anchorKey?: string }>;
   /** The SLOT property's `description` — the ONE surface Figma gives a slot
    *  for facts it cannot enforce. Carries `accepts` in words plus every
@@ -691,6 +753,8 @@ export interface ComponentData {
    *  this to keep saying so, on every sync, while a set written earlier still
    *  holds one (docs/23 §D.40). */
   absentVariants?: string[];
+  /** Positive canonical tuple declaration; readback requires an independent contract. */
+  drawnVariants?: Array<Record<string, string | boolean | null>>;
   nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
@@ -776,6 +840,7 @@ export interface ComponentData {
     states: string[];
     primary: string | null;
     pinned: Record<string, string>;
+    rows?: Record<string,string>[];
   };
   /** PROTOTYPE WIRING: deterministic Figma prototype reactions binding each
    *  base (State=Default) variant to its hover/active preview twin, so a
@@ -977,9 +1042,12 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
   if (${specExpr}.layout && ${specExpr}.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
+    // A compiled FILL is assigned by the parent after this child is built.
+    // Do not reset that pending allocation to exact zero: Figma can retain
+    // the zero extent after reporting FILL, hiding an otherwise valid paint.
     remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
-      Boolean(${specExpr}.rootFillWidth || ${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
-      Boolean(${specExpr}.fixedHeight || (${specExpr}.lits && ${specExpr}.lits.height !== undefined)));
+      Boolean(${specExpr}.fillW || ${specExpr}.rootFillWidth || ${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
+      Boolean(${specExpr}.fillH || ${specExpr}.fixedHeight || (${specExpr}.lits && ${specExpr}.lits.height !== undefined)));
   }`
     : '';
 
@@ -991,7 +1059,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
+export const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
 
 function componentHasJointPropertyReferences(component: ComponentData): boolean {
   const visit = (spec: NodeSpec): boolean =>
@@ -1077,6 +1145,8 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   const compilingCallerDeps = new Set<string>();
   const compiledData = new WeakMap<ComponentData, string>();
   const nativeCandidateData = new WeakSet<ComponentData>();
+  const boundPaintPermit = Symbol('bound-paint-comparison');
+  const boundPaintData = new WeakSet<ComponentData>();
   const variableCollection = input.variableCollection;
   const mode = input.mode === undefined ? 'light' : input.mode;
   const brand = input.brand === undefined ? 'default' : input.brand;
@@ -1250,6 +1320,7 @@ function scopesFor(dotPath: string, entry: TokenEntry): string[] {
 // ---------------------------------------------------------------------------
 
 interface DerivedTextStyle {
+  lineHeight?: StyleLineHeight;
   name: string;
   /** The semantic size-token dot-path — the style's IDENTITY marker on the
    *  canvas (sharedPluginData ds_contracts/textStyleToken; rename-safe). */
@@ -1331,13 +1402,21 @@ function deriveTextStyles(): {
   for (const { path: p, identity } of candidates) {
     const group = p.replace(/\.font-size(?:\.[^.]+)?$/, '');
     const weightPath = `${group}.font-weight`;
+    const knownStyle = byName.get(identity.name);
+    const fontSize = px(resolveLiteral(p));
+    const keyedPeer = identity.key && knownStyle?.sourceStyleKey === identity.key && knownStyle.fontSize === fontSize ? knownStyle : undefined;
     const fontStyle =
       typeof identity.weight === 'number'
         ? (FONT_STYLE_BY_WEIGHT[identity.weight] ?? 'Medium')
         : primitives.has(weightPath)
           ? (FONT_STYLE_BY_WEIGHT[px(resolveLiteral(weightPath))] ?? 'Medium')
-          : 'Medium';
-    const fontSize = px(resolveLiteral(p));
+          : keyedPeer?.fontStyle ?? 'Medium';
+    const lineHeight = capturedStyleLineHeight(p, identity, (path) => {
+      const entry = primitives.get(path);
+      if (!entry) return undefined;
+      const extensions = entry.extensions as { dsContracts?: { textStyle?: { name?: unknown; key?: unknown } } } | undefined;
+      return { value: resolveLiteral(path), identity: extensions?.dsContracts?.textStyle };
+    });
     let style = byName.get(identity.name);
     if (!style) {
       style = {
@@ -1345,11 +1424,12 @@ function deriveTextStyles(): {
         tokenPath: p,
         fontSize,
         fontStyle,
+        ...(lineHeight ? { lineHeight } : {}),
         ...(identity.key ? { sourceStyleKey: identity.key } : {}),
       };
       styles.push(style);
       byName.set(identity.name, style);
-    } else if (style.fontSize !== fontSize || style.fontStyle !== fontStyle) {
+    } else if (style.fontSize !== fontSize || style.fontStyle !== fontStyle || !sameStyleLineHeight(style.lineHeight, lineHeight)) {
       // Same semantic name with contradictory size/weight — never let one
       // definition silently win (exact text-style identity fails closed).
       throw new Error(
@@ -1592,6 +1672,7 @@ for (const t of TEXT_STYLES) {
   s.name = t.name;
   s.fontName = { family: 'Inter', style: t.fontStyle };
   s.fontSize = t.fontSize;
+  s.lineHeight = t.lineHeight || { unit: 'AUTO' };
   s.description = 'ds_contracts: derived from tokens/' + t.tokenPath;
 }
 
@@ -2490,7 +2571,8 @@ function applyTokens(
         const resolved = String(resolveLiteral(tokenPath));
         if (resolved !== 'none') {
           const g = parseCssGradient(resolved);
-          if (g) spec.gradient = g;
+          if (resolved.startsWith('url(')) spec.imageCandidate=resolved;
+          else if (g) spec.gradient = g;
           else spec.gradientMiss = resolved.slice(0, 60);
         }
         break;
@@ -2575,16 +2657,23 @@ function applyTokens(
       // viewport) sizes the control BY IT: dropping the channel drew every
       // canvas Button 4px shorter than the captured truth. minHeight is a
       // bindable field, exactly like minWidth — but ONLY when the part
-      // carries no height channel: a FIXED height is the drawn design truth
+      // carries no fixed height: a HUG keyword still needs its minimum, while
+      // a FIXED height is the drawn design truth
       // (the repo Button's captured Figma boxes are 32/40/48 while its
       // min-height 44 is a code-side a11y fact — the reviewed canvas-box
       // parity pin, evals design-canvas-box-parity).
-      case 'min-height':
+      case 'min-height': {
         // @lower emit.size-minheight-dropped-under-height
-        if (tokens['height'] === undefined) {
+        let heightPath = tokens['height']?.slice(1, -1);
+        if (heightPath !== undefined)
+          for (const [propName, value] of Object.entries(subst)) heightPath = heightPath.replaceAll(`{${propName}}`, value);
+        if (heightPath === undefined || isHugKeyword(resolveLiteral(heightPath))) {
           spec.bindings = { ...spec.bindings, minHeight: varName };
+          const minimum = pxOrNull(resolveLiteral(tokenPath));
+          if (minimum !== null && Number.isFinite(minimum)) spec.resolvedMinHeight = minimum;
         }
         break;
+      }
       case 'height': {
         if (isHugKeyword(resolveLiteral(tokenPath))) break; // see `width` above
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
@@ -2729,6 +2818,7 @@ function compileLineHeight(raw: unknown): NodeSpec['lineHeight'] | undefined {
     return { value: raw, unit: 'PIXELS' };
   }
   const s = String(raw).trim();
+  if (/^\d+(\.\d+)?%$/.test(s)) return { value: parseFloat(s), unit: 'PERCENT' };
   if (/^\d+(\.\d+)?$/.test(s)) {
     const n = parseFloat(s);
     if (n > 0 && n <= 4) return { value: n * 100, unit: 'PERCENT' };
@@ -2815,7 +2905,7 @@ function applyLiterals(
   spec: NodeSpec,
   lits: Record<string, string>,
   ctx: TextCtx,
-  placement?: { absolute: boolean; position: string },
+  placement?: { absolute: boolean; position: string; outlineStyle?: string },
   tokens?: Record<string, string>,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
@@ -2826,6 +2916,26 @@ function applyLiterals(
       continue;
     }
     switch (cssProp) {
+      case 'outline-width':
+      case 'outline-color': {
+        const width=lits['outline-width'],color=lits['outline-color'];
+        if(tokens?.['outline-width'] || tokens?.['outline-color']) {
+          literalMiss(spec,cssProp,value,'literal outline pair competes with a token outline binding');break;
+        }
+        if(placement?.outlineStyle!=='solid' || width===undefined || color===undefined) {
+          literalMiss(spec,cssProp,value,'literal outline requires a complete pair and explicit solid style');break;
+        }
+        const weight=parseLitPx(width),paint=color==='transparent'?{r:0,g:0,b:0,a:0}:parseLitColor(color);
+        if(weight===undefined||!Number.isFinite(weight)||weight<0||!paint) {
+          literalMiss(spec,cssProp,value,'literal outline width/color cannot be resolved');break;
+        }
+        const borderWidth=(key:string)=>/^border(?:-(?:top|right|bottom|left))?-width$/.test(key);
+        if(spec.stroke || Object.keys(tokens??{}).some(borderWidth) || Object.keys(lits).some(k=>borderWidth(k)&&(parseLitPx(lits[k])??0)>0)) {
+          literalMiss(spec,cssProp,value,'literal outline competes with a border stroke');break;
+        }
+        li().strokeWeight=weight;li().strokeColor=paint;spec.strokeOutside=true;
+        break;
+      }
       // R7 LITERAL INK — the case this switch never had. The text twin of
       // the `background-color` literal above: a literal SOLID paint on the
       // TEXT node (runtime), and the ink an icon child bakes into its glyph.
@@ -3024,7 +3134,8 @@ function applyLiterals(
         if (tokens?.['background-image'] !== undefined) break;
         if (value !== 'none') {
           const gradient = parseCssGradient(value);
-          if (gradient) spec.gradient = gradient;
+          if (value.startsWith('url(')) spec.imageCandidate=value;
+          else if (gradient) spec.gradient = gradient;
           else spec.gradientMiss = value.slice(0, 60);
         } else delete spec.gradient;
         break;
@@ -3431,6 +3542,27 @@ function applyDeclared(declared: Record<string, string> | undefined, ctx: TextCt
   return next;
 }
 
+/** CSS outline-offset moves the whole stroke band without consuming layout.
+ * Only the three native alignments have an exact single-stroke equivalent. */
+function applyOutlineOffset(spec: NodeSpec, tokens: Record<string,string>, literals: Record<string,string>, subst: Record<string,string>): void {
+  delete spec.outlineStrokeAlign;
+  if (!spec.strokeOutside) return;
+  const read=(channel:string):number|undefined=>{
+    const ref=tokens[channel];
+    if(ref!==undefined){let path=ref.slice(1,-1);for(const [k,v]of Object.entries(subst))path=path.replaceAll(`{${k}}`,v);return parseLitPx(String(resolveLiteral(path)));}
+    return literals[channel]===undefined?undefined:parseLitPx(literals[channel]);
+  };
+  const explicit=tokens['outline-offset']!==undefined||literals['outline-offset']!==undefined;
+  if(!explicit)return;
+  const offset=read('outline-offset'),width=read('outline-width');
+  if(offset===undefined||width===undefined||!Number.isFinite(offset)||!Number.isFinite(width)||width<=0)return;
+  if(offset===-width)spec.outlineStrokeAlign='INSIDE';
+  else if(offset===-width/2)spec.outlineStrokeAlign='CENTER';
+  else if(offset!==0)return;
+  spec.channelMiss=spec.channelMiss?.filter(x=>x.channel!=='outline-offset');
+  if(tokens['outline-offset'])miss(spec,'outline-offset',`resolved to native ${spec.outlineStrokeAlign??'OUTSIDE'} stroke alignment; offset has no live variable binding and requires recompilation`,tokens['outline-offset']);
+}
+
 /** Token bindings + literal channels + declared facts for one part under one
  *  combo — the ONE styling entry point every part kind compiles through. */
 function applyStyling(
@@ -3457,7 +3589,13 @@ function applyStyling(
   const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute);
   // The literal pass also sees the part's own token map (a token on the
   // same channel wins, by name).
-  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static' }, tokens);
+  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static', outlineStyle:part.declared?.['outline-style'] }, tokens);
+  if(spec.imageCandidate!==undefined){
+    try{spec.imagePaint=nativeImageFill(spec.imageCandidate,part.declared);}
+    catch(error){miss(spec,'background-image',String(error),spec.imageCandidate.slice(0,60));}
+    delete spec.imageCandidate;
+  }
+  applyOutlineOffset(spec, tokens, resolveLiterals(part, subst), subst);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the
   // carried paddings are added back (MUI's Slider root declares
@@ -3467,7 +3605,14 @@ function applyStyling(
     if (li.height !== undefined) li.height += (li.paddingTop ?? 0) + (li.paddingBottom ?? 0);
     if (li.width !== undefined) li.width += (li.paddingLeft ?? 0) + (li.paddingRight ?? 0);
   }
-  const d = applyDeclared(part.declared, l);
+  let d = applyDeclared(part.declared, l);
+  // Enum-conditioned text alignment inherits through the same text context
+  // as a uniform declared alignment. Later matching rules win, as in CSS.
+  for (const rule of part.stylesWhen ?? []) {
+    const alignment = rule.styles['text-align'];
+    if (alignment !== undefined && rule.equals !== undefined && subst[rule.prop] === rule.equals)
+      d = applyDeclared({ 'text-align': alignment }, d);
+  }
   // FC-OVERFLOW-CLIP-LOST: declared overflow hidden/clip draws natively as
   // clipsContent. It is set HERE, beside the other spec-level declared reads,
   // and not in applyDeclared — that function returns a TextCtx, has no `spec`
@@ -3482,6 +3627,8 @@ function applyStyling(
   // stroke fact — it holds whichever vocabulary draws the stroke (border or
   // outline, token or literal, this combo or another), so it is read here,
   // beside the other spec-level facts, and not in the stroke cases above.
+  const paintLayout=resolveLayout(part,subst);
+  if(paintLayout?.reversePaint!==undefined)spec.itemReverseZIndex=paintLayout.reversePaint !== (paintLayout.direction?.endsWith('-reverse')??false);
   if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
   // A state shorthand replacing literal or bound side widths needs border-box layout
   // on both resting and state frames. Write it explicitly because retained
@@ -3492,26 +3639,18 @@ function applyStyling(
   )) {
     spec.strokesIncludedInLayout = true;
   }
-  // Round 4: declared aspect-ratio draws natively — height follows the bound
-  // width when the contract carries no height channel (Avatar/Thumbnail
-  // squares whose real height rides a pseudo-element padding hack).
-  // Round 5: the LITERAL width channel (v14 lits — Avatar/Thumbnail carry
-  // per-size width literals, not token widths) lowers the same way.
-  // R8 (2026-08-22, canvas gate `aspect-ratio` SILENT): the registry calls
-  // this channel 'draw', so the declared collector in compileComponentData
-  // names nothing — and what draws is a FIXED HEIGHT, not a ratio. Figma has
-  // no aspect-ratio field: the dump reads back `height: 40` and the proposal
-  // mints a height token; the channel the contract carried vanished with no
-  // receipt. Every branch below now NAMES what happened to the ratio (the
-  // lowering with its numbers, or why nothing was derived) through the same
-  // channelMiss collector applyTokens / applyLiterals use.
-  applyAspectRatio(spec, part.declared?.['aspect-ratio']);
+  // Resolve enum-conditioned ratios with the same later-rule precedence as CSS.
+  let aspect = part.declared?.['aspect-ratio'];
+  for (const rule of part.stylesWhen ?? [])
+    if (rule.equals !== undefined && subst[rule.prop] === rule.equals && rule.styles['aspect-ratio'] !== undefined)
+      aspect = rule.styles['aspect-ratio'];
+  applyAspectRatio(spec, aspect);
   return d;
 }
 
 /** The receipt every aspect-ratio lowering opens with, so a reader can grep
  *  the code-only facts for the class. */
-const ASPECT_MISS = 'the canvas has no aspect-ratio field';
+const ASPECT_MISS = 'native aspect-ratio projection is unavailable for this geometry';
 
 /** Parse the declared grammar (`<n>` or `<n> / <n>`) to a width/height ratio;
  *  undefined when it does not parse or is not positive. */
@@ -3524,9 +3663,8 @@ function aspectRatioOf(aspect: string): number | undefined {
 
 const fmtPx = (n: number): string => `${Math.round(n * 100) / 100}px`;
 
-/** Declared aspect-ratio on THIS part: lower it to a fixed height from the
- *  part's own bound/literal width when no height channel is carried, and
- *  NAME the outcome either way (see applyStyling). */
+/** Seed a native ratio lock from this part's known width when no height
+ * channel is carried. Other geometry retains a named limited lowering. */
 function applyAspectRatio(spec: NodeSpec, aspect: string | undefined): void {
   if (aspect === undefined) return;
   const ratio = aspectRatioOf(aspect);
@@ -3541,12 +3679,20 @@ function applyAspectRatio(spec: NodeSpec, aspect: string | undefined): void {
   if (spec.fixedWidth && Number.isFinite(spec.fixedWidth.px)) {
     const h = spec.fixedWidth.px / ratio;
     spec.fixedHeight = { px: h };
+    if (['root','frame'].includes(spec.type) && spec.fixedWidth.px > 0 && h > 0) {
+      spec.nativeAspectRatio = ratio;
+      return;
+    }
     miss(spec, 'aspect-ratio', `${ASPECT_MISS} — LOWERED to a fixed height of ${fmtPx(h)} (bound width ${fmtPx(spec.fixedWidth.px)} ÷ ${ratio}); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height`, aspect);
     return;
   }
   if (spec.lits?.width !== undefined) {
     const h = spec.lits.width / ratio;
     spec.lits.height = h;
+    if (['root','frame'].includes(spec.type) && spec.lits.width > 0 && h > 0) {
+      spec.nativeAspectRatio = ratio;
+      return;
+    }
     miss(spec, 'aspect-ratio', `${ASPECT_MISS} — LOWERED to a fixed height of ${fmtPx(h)} (literal width ${fmtPx(spec.lits.width)} ÷ ${ratio}); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height`, aspect);
     return;
   }
@@ -3626,6 +3772,11 @@ function withPartStateOverrides(
   const out: Record<string, Part> = {};
   for (const [key, part] of Object.entries(parts)) {
     let next = part;
+    if(part.presenceByState){
+      const rows=statePresenceRows(part.presenceByState,subst);
+      if(!(rows.get(stateName as PresenceState)??rows.get('default'))){changed=true;continue;}
+      next={...part};delete next.presenceByState;
+    }
     const nested = part.parts ? withPartStateOverrides(part.parts, stateName, subst) : undefined;
     if (nested && nested !== part.parts) next = { ...next, parts: nested };
     const byPropOverrides: Record<string, string> = {};
@@ -3656,6 +3807,11 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
   const t = textStyleByTokenPath.get(ctx.fontSizePath);
   if (!t) return undefined;
   if (t.fontSize !== ctx.fontSize || t.fontStyle !== figmaFaceStyle(ctx)) return undefined;
+  // Attaching a style resets line height. Match the complete captured value,
+  // including its unit; an incomplete or overridden style keeps raw typography.
+  const lineHeight = typeof ctx.lineHeight === 'number'
+    ? { value: ctx.lineHeight, unit: 'PIXELS' as const } : ctx.lineHeight;
+  if (!sameStyleLineHeight(t.lineHeight, lineHeight)) return undefined;
   return t.name;
 }
 
@@ -3714,8 +3870,7 @@ const boolAxisValues = (p: Prop): string[] =>
  *  properties DO NOT EXIST on the emitted node (single-variant-dep-collapse).
  *  Mirrors compileComponentData's isSet computation exactly. */
 const depEmitsStandalone = (dep: Contract): boolean => {
-  const combos = dep.props
-    .filter((p) => isEnum(p) || isVariantBool(p))
+  const combos = absentVariantAxes(dep).map(axis => axis.prop)
     .reduce((n, p) => n * ((isEnum(p) ? p.type.enum.length : 2) + (p.bindings.figma.unsetValue === undefined ? 0 : 1)), 1);
   const hasPreviews = Boolean(dep.bindings.figma.statePreviews) && dep.states.length > 0;
   return combos === 1 && !hasPreviews;
@@ -4020,6 +4175,52 @@ const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
 
 /** Map canonical prop values to Figma property/value pairs through the CHILD
  *  contract's bindings. `{parentProp}` values resolve through `subst` first. */
+function mapInstanceTextColors(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>):Record<string,string>|undefined {
+ const out:Record<string,string>={};
+ for(const {part} of walkAnatomy(dep)) {
+  const name=part.textColorOverrideProp;if(!name||!Object.hasOwn(props,name))continue;
+  const raw=props[name];let value:unknown=typeof raw==='object'?raw.map[subst[raw.prop]??'']:raw;
+  if(typeof raw==='string'&&/^\{[\w-]+\}$/.test(raw))value=subst[raw.slice(1,-1)];
+  if(value===undefined)continue;
+  const prop=dep.props.find(p=>p.name===name);
+  if(typeof value!=='string'||!/^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(value)||!prop||typeof prop.type!=='object'||!('enum' in prop.type)||!prop.type.enum.includes(value))throw Error('text-color-override-value-unqualified');
+  out[dep.id+':'+name]=value;
+ }
+ return Object.keys(out).length?out:undefined;
+}
+function mapInstanceShapeFills(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>):Record<string,{r:number;g:number;b:number;a?:number}>|undefined {
+ const out:Record<string,{r:number;g:number;b:number;a?:number}>={};
+ for(const {part} of walkAnatomy(dep)) {
+  const name=part.shapeFillOverrideProp;if(!name||!Object.hasOwn(props,name))continue;
+  const raw=props[name];let value:unknown=typeof raw==='object'?raw.map[subst[raw.prop]??'']:raw;
+  if(typeof raw==='string'&&/^\{[\w-]+\}$/.test(raw))value=subst[raw.slice(1,-1)];
+  if(value===undefined)continue;
+  const prop=dep.props.find(p=>p.name===name);
+  if(typeof value!=='string'||!prop||typeof prop.type!=='object'||!('enum' in prop.type)||!prop.type.enum.includes(value))throw Error('shape-fill-override-value-unqualified');
+  instanceRootColor(value);const paint=parseCssColor(value);if(!paint)throw Error('shape-fill-override-paint-unqualified');out[dep.id+':'+name]=paint;
+ }
+ return Object.keys(out).length?out:undefined;
+}
+
+function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>,parent:Contract):Record<string,boolean>|undefined {
+  const out:Record<string,boolean>={};
+  for(const {part} of walkAnatomy(dep)) {
+    const name=part.visibilityOverrideProp;if(!name||!Object.hasOwn(props,name))continue;
+    const raw=props[name];let value:unknown=raw;
+    if(typeof raw==='object')value=raw.map[subst[raw.prop]??''];
+    else if(typeof raw==='string' && /^\{[\w-]+\}$/.test(raw)) {
+      const source=raw.slice(1,-1),prop=parent.props.find(p=>p.name===source);
+      if(!prop||prop.bindings.figma.kind!=='VARIANT')throw Error('visibility-override-live-parent-link-unqualified');
+      value=subst[source];
+    }
+    if(value===undefined)continue;
+    if(value==='true')value=true;else if(value==='false')value=false;
+    if(typeof value!=='boolean')throw Error('visibility-override-value-not-boolean');
+    out[dep.id+':'+name]=value;
+  }
+  return Object.keys(out).length?out:undefined;
+}
+
 function mapDepProps(
   dep: Contract,
   props: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
@@ -4031,6 +4232,7 @@ function mapDepProps(
   parent?: Contract,
   /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
   statePreview?: ComponentRef['statePreview'],
+  visibilityConsumed = false,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4038,6 +4240,10 @@ function mapDepProps(
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
     if (depProp.bindings.figma.kind === 'NONE') {
+      if(walkAnatomy(dep).some(w=>w.part.visibilityOverrideProp===propName||w.part.textColorOverrideProp===propName||w.part.shapeFillOverrideProp===propName||w.part.imageOverride?.prop===propName||w.part.textAppearanceOverride?.prop===propName)){
+        if(!visibilityConsumed)throw Error('visibility-override-context-unqualified');
+        continue;
+      }
       // code-only (v7 arrayOf; ROUND 3 promoted character overrides). An
       // arrayOf value never reaches here (the emitter refuses it in
       // anatomy); a fixed text value is a REAL canvas loss — ledgered.
@@ -4154,7 +4360,7 @@ function mapDepProps(
     });
     if (forced !== undefined && !active.includes(forced)) active.push(forced);
     if (active.length > 0) {
-      const axes = dep.props.filter((p) => isEnum(p) || isVariantBool(p));
+      const axes = absentVariantAxes(dep).map(axis => axis.prop);
       const substProps = statePreviewSubstProps(dep);
       const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.name)));
       const offPin = axes.filter((a, i) => {
@@ -4176,9 +4382,11 @@ function mapDepProps(
   // variant the child set DRAWS. The wired values plus the child's defaults
   // for every axis left unwired name one combination; when the child declares
   // it absent the runtime setProperties would throw mid-paste, so it refuses
-  // here BY NAME instead. Only a dep that declares absences enters this block.
+  // here BY NAME instead. Positive domains use the same selected tuple and
+  // refuse any combination outside their independent declaration.
   const depAbsent = absentVariantKeys(dep);
-  if (depAbsent.size > 0 && !standalone) {
+  const depDrawn = dep.bindings.figma.drawnVariants;
+  if ((depAbsent.size > 0 || depDrawn !== undefined) && !standalone) {
     const depAxes = absentVariantAxes(dep);
     const tuple: Record<string, string | boolean | null> = {};
     for (const { prop } of depAxes) {
@@ -4187,6 +4395,9 @@ function mapDepProps(
         wired === undefined ? true : axisLabel(prop, v) === String(wired));
       if (chosen === undefined) { tuple[prop.name] = '\u0000unresolved'; continue; }
       tuple[prop.name] = chosen === null ? null : prop.type === 'boolean' ? chosen === 'true' : chosen;
+    }
+    if (depDrawn !== undefined && !depDrawn.some(row => absentVariantKey(depAxes, row) === absentVariantKey(depAxes, tuple))) {
+      throw new Error(`FIGMA_COMPONENT_REF_UNDRAWN_VARIANT: ${parent?.id ?? 'a parent'} selects undeclared tuple ${JSON.stringify(tuple)} of ${dep.id}`);
     }
     if (depAbsent.has(absentVariantKey(depAxes, tuple))) {
       throw new Error(
@@ -4215,16 +4426,17 @@ const axisLabel = (p: Prop, value: string | null): string =>
 function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string | boolean>,
   parent: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>) {
   const fail = (why: string): never => { throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: ' + why); };
-  const slots = walkAnatomy(dep).filter(w => w.part.slot?.name === 'children');
-  if (slots.length !== 1) fail('dependency needs one children slot');
+  const contentSlot = part.component!.contentSlot ?? 'children';
+  const slots = walkAnatomy(dep).filter(w => w.part.slot?.name === contentSlot);
+  if (defaultSlotFamilyIssue(dep, contentSlot)) fail(`dependency needs a qualified ${contentSlot} slot family`);
   const slot = slots[0].part.slot!;
-  if (slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined)
+  if (slots.some(w=>w.part.slot!.acceptsMode === 'restrict' || w.part.slot!.required || w.part.slot!.min !== undefined || w.part.slot!.max !== undefined))
     fail('constrained caller slots need a separate projection');
   if (part.repeat || part.component!.text !== undefined || part.slot || part.content || part.text !== undefined || part.icon || part.meter ||
-      dep.props.some(p => p.bindings.code.prop === 'children' && Object.hasOwn(part.component!.props ?? {}, p.name)))
+      dep.props.some(p => p.bindings.code.prop === contentSlot && Object.hasOwn(part.component!.props ?? {}, p.name)))
     fail('competing caller content');
   const childSubst: Record<string, string> = {}, names: string[] = [];
-  for (const axis of dep.props.filter(p => isEnum(p) || isVariantBool(p))) {
+  for (const axis of absentVariantAxes(dep).map(axis => axis.prop)) {
     if (axis.bindings.figma.kind !== 'VARIANT') fail('child axis has no native variant binding');
     const values = orderedVariantValues(axis), wanted = props[axis.bindings.figma.property!];
     const selected = wanted === undefined ? [values[0]] : values.filter(v => axisLabel(axis, v) === String(wanted));
@@ -4243,14 +4455,21 @@ function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string 
   const property = slotFigmaProperty(slot), matches: NodeSpec[] = [];
   const visit = (spec: NodeSpec) => { if (spec.type === 'slot' && spec.slotProperty === property) matches.push(spec); (spec.children ?? []).forEach(visit); };
   visit(variant!.spec);
-  if (matches.length !== 1) fail('selected variant has no unique caller slot');
+  const activeSlots=slots.filter(w=>resolvePresence(w.part,childSubst));
+  if(!activeSlots.length && !matches.length && slots.every(w=>w.part.presenceByCombination))return {root:variant!.spec,slot:undefined};
+  if (matches.length !== 1 || activeSlots.length!==1) fail('selected variant has no unique caller slot');
   let childCtx = ctx;
-  const path = slots[0].path;
+  const path = activeSlots[0].path;
   for (const entry of walkAnatomy(dep)) if (entry.path.length <= path.length && entry.path.every((p, i) => p === path[i]))
     childCtx = applyStyling({ type: 'frame', name: entry.name }, entry.part, childSubst, childCtx);
   const children = variantParts(part.parts!, subst).flatMap(([name, child]) => partToSpecs(name, child, parent, byId, childCtx, subst));
   const result = structuredClone(matches[0]);
   result.callerSlotProperty = property;
+  if (result.visibleProp) {
+    result.callerSlotVisibleProp = result.visibleProp;
+    delete result.visibleProp;
+    delete result.visibleDefault;
+  }
   delete result.slotDefault;
   if (result.children?.[0]?.rootSlotGridContent) {
     const carrier = result.children[0], grid = carrier.layout!.grid!;
@@ -4259,10 +4478,26 @@ function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string 
     if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, children.length);
     if (children.length > grid.rows.length * grid.columns.length) fail('caller content exceeds declared grid capacity');
   } else {
-    if (result.children?.length) fail('unsupported existing slot anatomy');
+    // Explicit caller content replaces runtime fallback anatomy on both
+    // surfaces. Preserve the compiled slot's own box and visibility, but do
+    // not retain its omitted-input children beside the caller's selection.
+    const runtimeFallback = activeSlots[0].part.slot?.renderDefault === true && !!activeSlots[0].part.parts;
+    if (result.children?.length && !runtimeFallback) fail('unsupported existing slot anatomy');
     result.children = children;
   }
+  assertSlotCollapseVisibility(result);
   return { slot: result, root: variant!.spec };
+}
+
+/** Native collapse is resolved for a variant snapshot. A populated slot may
+ * retain its own visibility control: content presence is then constant and
+ * the BOOLEAN is the only live condition. Descendant controls still refuse. */
+function assertSlotCollapseVisibility(spec: NodeSpec): void {
+  const live = (node: NodeSpec): boolean => Boolean(node.visibleProp || node.callerSlotVisibleProp || node.slotOptional) || (node.children ?? []).some(live);
+  const fixedContent = Boolean(spec.slotDefault?.length) || (spec.children ?? []).some(child => child.type === 'instance');
+  const ownControlOnly = !spec.slotOptional && !(spec.children ?? []).some(live);
+  if (spec.slotCollapseWhenEmpty && live(spec) && !(fixedContent && ownControlOnly))
+    throw new Error('SLOT_COLLAPSE_LIVE_VISIBILITY_UNSUPPORTED:' + spec.name);
 }
 
 /** A canvas variant depicts a fresh mount, not a running React instance.
@@ -4297,7 +4532,22 @@ function mapDepInitialProps(dep: Contract, initial: Record<string, string>,
 /** visibleWhen on a boolean prop → runtime visibility binding fields.
  *  (Enum-valued visibleWhen.equals never reaches here — those parts are
  *  filtered out of non-matching variants at compile time.) */
-function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract): void {
+function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract, subst: Record<string,string>): void {
+  if(part.shapeFillOverrideProp)spec.shapeFillTarget=contract.id+':'+part.shapeFillOverrideProp;
+  if(part.textAppearanceOverride)spec.textAppearanceTarget=contract.id+':'+part.textAppearanceOverride.prop;
+  if(part.imageOverride)spec.imageTarget=contract.id+':'+part.imageOverride.prop;
+  if(part.textColorOverrideProp)spec.textColorTarget=contract.id+':'+part.textColorOverrideProp;
+  if (part.visibilityOverrideProp) {
+    const {visibilityOverrideProp, ...source} = part;
+    const defaults = Object.fromEntries(contract.props.filter(p=>p.type==='boolean' && p.bindings.figma.kind==='BOOLEAN').map(p=>[p.name,String(p.default===true)]));
+    spec.visibilityTarget = {key:contract.id+':'+visibilityOverrideProp, visible:part.visibilityOverrideDefault??(variantParts({source},{...defaults,...subst}).length>0)};
+    return;
+  }
+  if (typeof part.visibleWhen?.equals === 'boolean') {
+    const prop = contract.props.find(p => p.name === part.visibleWhen!.prop);
+    if (prop?.bindings.figma.kind !== 'VARIANT')
+      throw Error('FIGMA_BOOLEAN_EQUALITY_VISIBILITY_UNQUALIFIED: inverse live BOOLEAN binding cannot be preserved');
+  }
   if (!part.visibleWhen || part.visibleWhen.equals !== undefined) return;
   const prop = contract.props.find((p) => p.name === part.visibleWhen!.prop);
   if (!prop || prop.type !== 'boolean') return;
@@ -4542,6 +4792,12 @@ function insetOverlayOffsets(
   return null;
 }
 
+function orderedVariantParts(part: Part, subst: Record<string,string>): Array<[string,Part]> {
+  const children=variantParts(part.parts??{},subst),order=resolveLayout(part,subst)?.childOrder;
+  if(order)children.sort(([a],[b])=>order.indexOf(a)-order.indexOf(b));
+  return children;
+}
+
 function variantParts(
   parts: Record<string, Part>,
   subst: Record<string, string>,
@@ -4575,6 +4831,9 @@ function variantParts(
     );
   entries.sort((x, y) => Number(positioned(x[1])) - Number(positioned(y[1])));
   return entries.filter(([, p]) => {
+    if (p.visibilityOverrideProp) return true;
+    if(p.presenceByState&&!statePresenceRows(p.presenceByState,subst).get('default'))return false;
+    if (!resolvePresence(p,subst)) return false;
     // v11: a native checkable control (input[type=checkbox|radio]) is CODE
     // semantics — the presentational box and glyphs are the visual; the
     // canvas doesn't draw semantics, so the part compiles to no node at all.
@@ -4582,7 +4841,7 @@ function variantParts(
     const vw = p.visibleWhen;
     if (vw && vw.equals !== undefined) {
       const value = subst[vw.prop];
-      const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
+      const eqs = (Array.isArray(vw.equals) ? vw.equals : [vw.equals]).map(String);
       // Omission cannot satisfy an explicit equality predicate. In particular,
       // an optional enum's native unset plane must not acquire its "on" icon.
       if (value === undefined || !eqs.includes(value)) return false;
@@ -4721,6 +4980,8 @@ function partToSpecs(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec[] {
+  if (part.mask && (part.repeat || part.declared?.display === 'contents'))
+    throw Error('native-mask-owner-ambiguous:' + name);
   const selection = contract.selection;
   const selected = selection ? selectedSampleKey(contract, subst[selection.valueProp]) : undefined;
   const panel = selection?.panels.find(panel => panel.part === name);
@@ -4745,9 +5006,14 @@ function partToSpecs(
         dep: dep.name,
         depContractId: dep.id,
         ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract),
+        instanceVisibility: mapInstanceVisibility(dep,{ ...(part.component!.props ?? {}), ...fields },subst,contract),
+        instanceTextAppearances:mapNativeTextAppearances(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
+        instanceImages: mapNativeImageArguments(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
+        instanceTextColors: mapInstanceTextColors(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
+        instanceShapeFills: mapInstanceShapeFills(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
+        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract, undefined, true),
       };
-      applyVisibleWhen(spec, part, contract);
+      applyVisibleWhen(spec, part, contract, subst);
       return spec;
     });
   }
@@ -4848,7 +5114,16 @@ function partToSpec(
     }
     if (Object.keys(defaults).length) subst = {...defaults, ...subst};
   }
+  if(part.mask?.outline) {
+    if(part.shape && part.shape.kind!==part.mask.outline)throw Error(`native-mask-outline-conflict:${name}`);
+    if(!part.shape) {
+      const g=resolveAbsoluteGeometry(part,subst);
+      if(!g)throw Error(`native-mask-outline-geometry-unqualified:${name}`);
+      part={...part,shape:{kind:part.mask.outline,width:g.box.width,height:g.box.height}};
+    }
+  }
   const spec = partToSpecInner(name, part, contract, byId, ctx, subst);
+  if (part.mask) spec.mask = {...part.mask};
   const captured = resolveAbsoluteGeometry(part, subst);
   if (captured) {
     const normalized = normalizeAbsoluteGeometry(captured);
@@ -4863,8 +5138,16 @@ function partToSpec(
   // requires an auto-layout parent).
   if (part.overlay) spec.overlay = part.overlay;
   applyStylesWhenOpacity(spec, part, contract, subst);
+  const resolvedPaint=resolveSolidFillComposition(part,subst);
+  if (resolvedPaint) spec.solidFillComposition=solidFillCompositionPaint(resolvedPaint);
+  const selectedPaintToken=resolveSolidFillToken(part,subst);
+  if(selectedPaintToken!==undefined)spec.solidFillCompositionToken=selectedPaintToken;
+  const paintTable=part.solidFillCompositionByCombination;
+  if(paintTable?.rows.some(row=>row.empty && paintTable.props.every((prop,i)=>subst[prop]===row.values[i])))
+    spec.lits={...spec.lits,fillClear:true};
   nativePartOrigins.set(spec, part);
   spec.growBasis = resolveLayout(part, subst)?.growBasis;
+  if (resolveLayout(part, subst)?.alignSelf === 'stretch') spec.crossStretch = true;
   return spec;
 }
 
@@ -5001,7 +5284,7 @@ function partToSpecInner(
       } else {
         applyAbsoluteThisCombo(spec, part, subst);
       }
-      applyVisibleWhen(spec, part, contract);
+      applyVisibleWhen(spec, part, contract, subst);
       return spec;
     }
     const frame: NodeSpec = {
@@ -5034,13 +5317,13 @@ function partToSpecInner(
     } else {
       applyAbsoluteThisCombo(frame, part, subst);
     }
-    applyVisibleWhen(frame, part, contract);
+    applyVisibleWhen(frame, part, contract, subst);
     return frame;
   }
   // v9 shape (#42): a REAL parametric node — geometry from the contract,
   // fill from tokens, placement/rotation from the compiled stylesWhen.
   if (part.shape) {
-    const { pathsByProp, ...baseShape } = part.shape;
+    const { pathsByProp, arcByCombination, ...baseShape } = part.shape;
     let selected = baseShape;
     if (baseShape.kind === 'line') {
       // Capture identities stay in the contract and receipts, not in every
@@ -5048,6 +5331,12 @@ function partToSpecInner(
       // node would multiply the full source inventory by the variant count.
       const { length, transform, cap, align } = baseShape.line;
       selected = { ...baseShape, line: { length, transform, cap, align } };
+    }
+    if (arcByCombination) {
+      const values=arcByCombination.props.map(name=>String(subst[name] ?? contract.props.find(p=>p.name===name)?.default));
+      const row=arcByCombination.rows.find(row=>row.values.every((value,i)=>value===values[i]));
+      if(!row)throw Error('filled-ellipse-variant-missing:'+values.join('|'));
+      selected={...selected,arc:row.arc};
     }
     if (pathsByProp && baseShape.kind !== 'line') {
       const prop = contract.props.find((p) => p.name === pathsByProp.prop);
@@ -5121,15 +5410,17 @@ function partToSpecInner(
     if (selected.parentViewport) {
       const v = selected.parentViewport;
       spec.absolute = { h: 'MIN', v: 'MIN', left: v.x, top: v.y };
-      lowerNativeFilledPath(spec);
     }
-    applyVisibleWhen(spec, part, contract);
+    // Masks acquire sibling ownership and captured geometry in partToSpec.
+    // Their native lowering must wait until that ownership is attached.
+    if (selected.kind === 'path' && !part.mask) lowerNativeFilledPath(spec);
+    applyVisibleWhen(spec, part, contract, subst);
     return spec;
   }
   {
     const control = formControlSpec(name, part, contract, ctx, subst);
     if (control) {
-      applyVisibleWhen(control, part, contract);
+      applyVisibleWhen(control, part, contract, subst);
       return control;
     }
   }
@@ -5143,29 +5434,73 @@ function partToSpecInner(
       type: 'instance',
       grow: resolveLayout(part, subst)?.grow || undefined,
       name,
+      fillW: part.component.rootFill?.includes('width') || undefined,
+      fillH: part.component.rootFill?.includes('height') || undefined,
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract, part.component.statePreview) },
+      instanceInsideStroke: resolvedInstanceInsideStroke(part.component,subst),
+      instanceVisibility: mapInstanceVisibility(dep,resolveBooleanArguments(dep,part.component,subst),subst,contract),
+      instanceTextAppearances:mapNativeTextAppearances(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceImages: mapNativeImageArguments(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceTextColors: mapInstanceTextColors(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceShapeFills: mapInstanceShapeFills(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      depProps: { ...initialProps, ...mapDepProps(dep, resolveBooleanArguments(dep,part.component,subst), subst, part.component.text, depLedger, contract, part.component.statePreview, true) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
     const placement = resolveComponentPlacement(part, subst);
     if (placement) spec.absolute = {h: 'MIN', v: 'MIN', ...placement};
     if (part.parts !== undefined) {
-      const caller = callerSlotSpec(part, dep, spec.depProps!, contract, byId, ctx, subst);
-      spec.children = [caller.slot];
+      const callers=callerContentGroups(part).map(group=>callerSlotSpec({...part,component:{...part.component!,contentSlots:undefined,contentSlot:group.slot},parts:group.parts},dep,spec.depProps!,contract,byId,ctx,subst));
+      const caller=callers[0];
+      spec.children=callers.flatMap(c=>c.slot?[c.slot]:[]);
       spec.layout = structuredClone(caller.root.layout);
       if (caller.root.fixedWidth) spec.fixedWidth = structuredClone(caller.root.fixedWidth);
       if (caller.root.lits?.width !== undefined) spec.lits = { width: caller.root.lits.width };
       if (caller.root.rootFillWidth) spec.callerRootFillWidth = true;
     }
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
+    for(const [channel,ref] of Object.entries(part.component.rootOverrides??{})) {
+      if(!dep.anatomy.root.instanceRootInputs?.includes(channel as never))throw Error(`instance-root-input-undeclared:${name}:${channel}`);
+      const tokenPath=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>{
+        const prop=contract.props.find(p=>p.name===key);
+        return subst[key]??(prop?.type==='boolean'&&typeof prop.default==='boolean'?String(prop.default):`{${key}}`);
+      });
+      const value=resolveLiteral(tokenPath);
+      if(channel==='background-color') {
+        instanceRootColor(value);
+        spec.instanceRootFill={varName:tokenPath.replaceAll('.','/')};
+        continue;
+      }
+      if(channel==='outline-color'||channel==='outline-width') {
+        if(channel==='outline-color')instanceRootColor(value);
+        const stroke=(spec.instanceRootStroke??={color:'',width:'',px:0});
+        if(channel==='outline-color')stroke.color=tokenPath.replaceAll('.','/');
+        else {stroke.width=tokenPath.replaceAll('.','/');stroke.px=instanceRootValue(channel,value);}
+        continue;
+      }
+      const numeric=instanceRootValue(channel,value);
+      // Figma opacity variable bindings use percent; contract values use 0..1.
+      // Reuse the literal opacity lowering, including stale-binding removal.
+      if (channel === 'opacity') { spec.opacity = numeric; continue; }
+      (spec.instanceRootOverrides??={})[channel]={px:numeric,varName:tokenPath.replaceAll('.','/')};
+    }
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
     // natively a resize / image-fill / paint override on THIS instance, but
     // the canvas lowering is not carried this round — declared-not-drawn,
     // ledgered through the existing channelMiss footnote (never a silent
     // drop; the instance renders the child's own defaults).
     for (const [channel, ref] of Object.entries(part.component.overrides ?? {})) {
+      const textProp=textStateProp(channel);
+      if(textProp){
+        if(!textStateTarget(dep,channel))throw Error('instance-state-text-target-unqualified:'+channel);
+        const tokenPath=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>subst[key]??`{${key}}`);
+        const value=String(resolveLiteral(tokenPath));
+        const prop=dep.props.find(p=>p.name===textProp)!;
+        if(typeof prop.type!=='object'||!('enum' in prop.type)||!prop.type.enum.includes(value))throw Error('instance-state-text-value-unqualified:'+channel);
+        (spec.instanceTextColors??={})[dep.id+':'+textProp]=value;
+        continue;
+      }
       if (channel === 'color' && dep.anatomy.root?.overridable?.includes('color')) {
         const paths = Object.values(dep.anatomy.root.parts ?? {});
         if (paths.length === 1 && (paths[0].shape?.kind === 'path' && paths[0].literals?.['background-color'] === 'currentColor' ||
@@ -5204,7 +5539,23 @@ function partToSpecInner(
     }
     // Boolean-toggled component-ref parts (CBDS icon toggles): the instance's
     // visibility binds to the BOOLEAN property like every other part kind.
-    applyVisibleWhen(spec, part, contract);
+    applyVisibleWhen(spec, part, contract, subst);
+    const affineRow=part.instanceAffineLayout?.rows.find(row=>part.instanceAffineLayout!.props.every((prop,i)=>row.values[i]===String(subst[prop])));
+    if(part.instanceAffineLayout&&!affineRow){
+      const w=part.visibleWhen,hidden=w?.equals!==undefined&&!(Array.isArray(w.equals)?w.equals:[w.equals]).map(String).includes(String(subst[w.prop]));
+      if(!hidden)throw Error('instance-affine-layout-combination-unavailable:'+name);
+    }
+    const affine=affineRow?.geometry ?? part.instanceAffine ?? (part.instanceAffineByProp ? part.instanceAffineByProp.map[String(subst[part.instanceAffineByProp.prop])] : undefined);
+    if (affine) {
+      const result=allocateInstanceAffine(affine);if('issue'in result)throw Error(result.issue);
+      const a=result.allocation;
+      spec.instanceAffineAllocation=a;
+      if(affineRow){spec.instanceAffineFill=affineRow.fill;delete spec.grow;delete spec.fillW;delete spec.fillH;}
+      spec.absolute={h:'MIN',v:'MIN',left:0,top:0};
+      const host:NodeSpec={type:'frame',name,affineViewport:true,lits:{width:a.allocation.width,height:a.allocation.height},children:[spec],...(affineRow?{fillW:affineRow.fill.width||undefined,fillH:affineRow.fill.height||undefined}: {})};
+      applyVisibleWhen(host, part, contract, subst);
+      return host;
+    }
     return spec;
   }
   if (part.slot) {
@@ -5220,6 +5571,7 @@ function partToSpecInner(
       grow: resolveLayout(part, subst)?.grow || undefined,
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
+      slotCollapseWhenEmpty: part.slot.collapseWhenEmpty || undefined,
       slotAccepts: (part.slot.accepts ?? []).map((id) => {
         const dep = byId.get(id)!;
         return {
@@ -5245,7 +5597,8 @@ function partToSpecInner(
       });
     }
     applyStyling(spec, part, subst, ctx);
-    applyVisibleWhen(spec, part, contract);
+    applyVisibleWhen(spec, part, contract, subst);
+    assertSlotCollapseVisibility(spec);
     return spec;
   }
   // MUI round (Chip live finding): a text-holder part can carry BOX channels
@@ -5296,7 +5649,7 @@ function partToSpecInner(
       ),
     );
     applyAbsoluteThisCombo(frame, part, subst);
-    applyVisibleWhen(frame, part, contract);
+    applyVisibleWhen(frame, part, contract, subst);
     return frame;
   };
   if (part.text !== undefined) {
@@ -5332,7 +5685,7 @@ function partToSpecInner(
     Object.assign(spec, textExtras(textCtx));
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     applyAbsoluteThisCombo(spec, part, subst);
-    applyVisibleWhen(spec, part, contract);
+    applyVisibleWhen(spec, part, contract, subst);
     return spec;
   }
   if (part.meter) {
@@ -5343,7 +5696,7 @@ function partToSpecInner(
     const fraction = Math.min(1, Math.max(0, num(part.meter.valueProp, 0) / (num(part.meter.maxProp, 100) || 100)));
     const spec: NodeSpec = { type: 'frame', name, layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' }, pct: fraction, children: [] };
     applyStyling(spec, part, subst, ctx);
-    applyVisibleWhen(spec, part, contract);
+    applyVisibleWhen(spec, part, contract, subst);
     return spec;
   }
   // Round 5: a content part with fallback anatomy (per-value glyph children)
@@ -5381,7 +5734,7 @@ function partToSpecInner(
     Object.assign(spec, textExtras(textCtx));
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     spec.contentProp = prop.bindings.figma.property;
-    applyVisibleWhen(spec, part, contract);
+    applyVisibleWhen(spec, part, contract, subst);
     return spec;
   }
   const spec: NodeSpec = {
@@ -5396,7 +5749,18 @@ function partToSpecInner(
   // offsets carried too).
   {
     const io = insetOverlayOffsets(part, subst);
-    if (io) {
+    const authoredLayout = resolveLayout(part, subst);
+    const tokens = resolveTokens(part, subst), literals = resolveLiterals(part, subst);
+    const absoluteFlow = io && isAbsoluteThisCombo(part, subst) &&
+      authoredLayout && ['flex', 'inline-flex'].includes(authoredLayout.display ?? 'flex') &&
+      (authoredLayout.display !== undefined || authoredLayout.direction !== undefined) &&
+      Object.keys(part.parts ?? {}).length > 0 &&
+      ['width', 'height'].every(channel => tokens[channel] === undefined && literals[channel] === undefined);
+    // An authored flex container keeps its alignment and definite allocation.
+    // The legacy overlay route centers glyphs and does not establish child FILL.
+    if (absoluteFlow) {
+      spec.absolute = absolutePartPlacement(part, subst)!;
+    } else if (io) {
       spec.insetOverlay = true;
       if (io.top !== 0 || io.right !== 0 || io.bottom !== 0 || io.left !== 0) spec.insetOffsets = io;
     } else if (isAbsoluteThisCombo(part, subst)) {
@@ -5418,7 +5782,7 @@ function partToSpecInner(
   }
   // Round 5: parent aspect lowering (Avatar/Thumbnail square roots).
   applyChildAspect(spec, part);
-  spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
+  spec.children = orderedVariantParts(part, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
   applyFilledPathParent(spec);
@@ -5438,7 +5802,17 @@ function partToSpecInner(
   if (spec.insetOverlay && spec.layout && spec.children.length > 0) {
     spec.layout = { ...spec.layout, primary: 'CENTER', counter: 'CENTER' };
   }
-  applyVisibleWhen(spec, part, contract);
+  applyVisibleWhen(spec, part, contract, subst);
+  if (part.instanceAffine && !part.component) {
+    const result=allocateInstanceAffine(part.instanceAffine);
+    if('issue' in result)throw Error(result.issue);
+    const a=result.allocation;
+    spec.instanceAffineAllocation=a;
+    spec.absolute={h:'MIN',v:'MIN',left:0,top:0};
+    const host:NodeSpec={type:'frame',name,affineViewport:true,lits:{width:a.allocation.width,height:a.allocation.height},children:[spec]};
+    applyVisibleWhen(host,part,contract,subst);
+    return host;
+  }
   return spec;
 }
 
@@ -5585,6 +5959,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
   for (const { name, part, path } of walkAnatomy(contract)) {
     if (part.slot?.bindings?.figma?.textTemplate && part !== contract.anatomy.root)
       errors.push('FIGMA_SLOT_TEXT_TEMPLATE_ROOT_REQUIRED');
+    if ((part.component?.contentSlot !== undefined || part.component?.contentSlots !== undefined) && part.parts === undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: contentSlot requires caller parts');
     if (part.component && (path.length === 1 || part.repeat)) {
       if (part.parts !== undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: caller parts require a non-repeated nested instance');
       if (part.component.initialProps) errors.push('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializers require a non-repeated nested instance');
@@ -5632,6 +6007,10 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
   // BOOLEAN property or an explicit enum equality. Otherwise it silently
   // draws an unconditional part (or treats an enum as the string "true").
   for (const { name, part } of walkAnatomy(contract)) {
+    if (typeof part.visibleWhen?.equals === 'boolean') {
+      const prop = contract.props.find(p => p.name === part.visibleWhen!.prop);
+      if (prop?.bindings.figma.kind !== 'VARIANT') errors.push('FIGMA_BOOLEAN_EQUALITY_VISIBILITY_UNQUALIFIED: inverse live BOOLEAN binding cannot be preserved');
+    }
     if (!part.visibleWhen || part.visibleWhen.equals !== undefined) continue;
     const prop = contract.props.find((p) => p.name === part.visibleWhen!.prop);
     if (prop?.type !== 'boolean') errors.push(
@@ -5647,7 +6026,9 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
     byProperty.set(key, [...(byProperty.get(key) ?? []), name]);
   }
   for (const [property, names] of byProperty) {
-    if (names.length > 1) {
+    const qualifiedFamily=defaultSlotFamilyIssue(contract)===undefined && walkAnatomy(contract)
+      .filter(w=>w.part.slot && slotFigmaProperty(w.part.slot)===property).every(w=>w.part.slot!.name==='children');
+    if (names.length > 1 && !qualifiedFamily) {
       errors.push(
         `${contract.id}: slot parts "${names.join('", "')}" all resolve to the Figma property "${property}" — one SLOT property cannot serve two areas (set slot.bindings.figma.property to disambiguate)`,
       );
@@ -5800,14 +6181,23 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
       if (c.callerRootFillWidth && (!ready || (!gridParent && s.layout?.mode !== 'VERTICAL')))
         throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid' +
           ` (child ${c.name}, parent ${s.name}, mode ${s.layout?.mode ?? 'none'}, width established ${ready})`);
-      const fills = !gridParent && ready && isCandidate(c);
+      const crossWidth = c.crossStretch === true && s.layout?.mode === 'VERTICAL';
+      const crossHeight = c.crossStretch === true && s.layout?.mode === 'HORIZONTAL';
+      // A positive observed minimum establishes a nonzero cross-axis floor
+      // without turning a HUG parent into a fixed-size box.
+      const crossHeightReady = establishedHeight || (s.lits?.minHeight ?? s.resolvedMinHeight ?? 0) > 0;
+      if (c.crossStretch && (!inFlow(c) || gridParent ||
+          (crossWidth && (!ready || hasOwnWidth(c))) ||
+          (crossHeight && (!crossHeightReady || hasOwnHeight(c))) || (!crossWidth && !crossHeight)))
+        throw Error(`FIGMA_CROSS_AXIS_STRETCH_UNSUPPORTED: ${context}: ${c.name} has no qualified cross-axis allocation`);
+      const fills = !gridParent && ready && (isCandidate(c) || crossWidth);
       if (fills) {
         c.fillW = true;
         // FC-TEXT-FILL-ALIGNMENT: a text candidate only reaches here when
         // hugging displaces it; the flag is the runtime's proof.
         if (c.type === 'text' && !c.textTruncation) c.fillText = true;
       }
-      const fillsHeight = !gridParent && heightReady && heightCandidate(c);
+      const fillsHeight = !gridParent && ((heightReady && heightCandidate(c)) || (crossHeight && crossHeightReady));
       if (fillsHeight) c.fillH = true;
       // A zero basis is a requested allocation rule, not permission to fall
       // back to each child's intrinsic size. In particular, FILL under HUG
@@ -5821,6 +6211,7 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
           'but this native layout cannot establish that fill; intrinsic child sizes are not an equivalent result');
       }
       delete c.growBasis;
+      delete c.crossStretch;
       // REJECTED-SETS ROUND: an hAligned grid occupant HUGS its width (the
       // runtime skips FILL for it — CSS justify-self beats the stretch
       // default), so its subtree is NOT width-established; treating it as
@@ -5829,12 +6220,20 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
       // established source box through sizeRootContent. They do not create a
       // new intrinsic width; carrying that fact lets nested full-width
       // instances use the same known width without inventing a fixed size.
-      walk(c, fills || hasOwnWidth(c) || (c.rootSlotContent === true && established) ||
+      // An absolute box pinned to both edges inherits a definite allocation.
+      // Its in-flow descendants can fill that box even though the box itself
+      // cannot participate in its parent's flex layout.
+      walk(c, fills || hasOwnWidth(c) || (c.absolute?.h === 'STRETCH' && established) || (c.rootSlotContent === true && established) ||
         (gridParent && c.cell?.hAlign === undefined),
-        fillsHeight || hasOwnHeight(c) || (c.rootSlotContent === true && establishedHeight));
+        fillsHeight || hasOwnHeight(c) || (c.absolute?.v === 'STRETCH' && establishedHeight) || (c.rootSlotContent === true && establishedHeight));
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec), hasOwnHeight(rootSpec));
+  const clearResolvedMinimum = (s: NodeSpec): void => {
+    delete s.resolvedMinHeight;
+    for (const child of s.children ?? []) clearResolvedMinimum(child);
+  };
+  clearResolvedMinimum(rootSpec);
 }
 
 /** REQUIRED FACTS — the refuse-to-mint referee, applied at COMPILE time so it
@@ -5858,7 +6257,12 @@ function refuseMissingRequiredFacts(contract: Contract): void {
   );
 }
 
-function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+function compileComponentData(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
+  const insideStrokeErrors=instanceInsideStrokeTokenErrors(contract,byId,input.tokens);if(insideStrokeErrors.length)throw Error(insideStrokeErrors.join('; '));
+  if(permit!==boundPaintPermit)for(const {part} of walkAnatomy(contract)){const error=solidFillPartTokenError(part,input.tokens);if(error)throw Error(error);}
+  if (walkAnatomy(contract).some(({part})=>part.solidFillComposition || part.solidFillCompositionByCombination)) solidFillCompositionRules(contract,undefined,undefined,byId);
+  const drawnProblems = drawnVariantIssues(contract);
+  if (drawnProblems.length) throw new Error(drawnProblems.join("\n"));
   const selectionProblems = selectionErrors(contract, byId);
   if (selectionProblems.length) throw Error(`FIGMA_SELECTION_INVALID: ${selectionProblems.join('; ')}`);
   const nativeSource = contract.bindings.code.runtime && input.nativeSourceCandidate
@@ -5886,10 +6290,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
   }
-  // Variant axes = enum props AND VARIANT-bound boolean props, in prop
-  // declaration order (see isVariantBool). An enum-only contract's axis list
-  // is exactly the old enum filter — byte-identical substitution space.
-  const axisProps = contract.props.filter((p) => isEnum(p) || isVariantBool(p));
+  // Use the schema's variant domain, excluding declared per-instance paint
+  // controls. Other enum and VARIANT-bound Boolean semantics are unchanged.
+  const axisProps = absentVariantAxes(contract).map(axis => axis.prop);
   // ANTD EXAM (heal loop): a root with no parts and no `children` prop can
   // still carry its text through another TEXT prop — antd's Input draws
   // its `placeholder`. The canvas label follows the first text prop when no
@@ -5911,7 +6314,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       : contract.props.find((p) => p.type === 'text' && p.bindings.figma.kind === 'TEXT'));
   // VARIANT-bound booleans are axes, not BOOLEAN component properties.
   const boolPropsData = contract.props
-    .filter((p) => p.type === 'boolean' && !isVariantBool(p))
+    .filter((p) => p.type === 'boolean' && !isVariantBool(p) && p.bindings.figma.kind !== 'NONE')
     .map((p) => ({ property: p.bindings.figma.property!, default: p.default === true }));
   // A root that carries literal `text` beside a `children` prop with no
   // string default draws its own text as the bound label's characters — the
@@ -5944,13 +6347,28 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // Grid mapping: rows = axis 0's values; columns = the ordered cartesian
   // product of axes 1..n (a 5×3×2 component renders 5 rows × 6 columns).
   const axes = axisProps.map((p) => ({ prop: p, values: orderedVariantValues(p) }));
-  let combos: number[][] = [[]];
-  for (const axis of axes) {
-    const next: number[][] = [];
-    for (const combo of combos) {
-      for (let i = 0; i < axis.values.length; i++) next.push([...combo, i]);
+  const drawn = contract.bindings.figma.drawnVariants;
+  let combos: number[][];
+  if (drawn !== undefined) {
+    // The positive declaration is the complete domain. Never expand its product.
+    combos = drawn.map(tuple => axes.map(({ prop, values }) => {
+      const value = tuple[prop.name];
+      const index = values.indexOf(typeof value === 'boolean' ? String(value) : value);
+      if (index < 0) throw new Error('FIGMA_DRAWN_VARIANT_INVALID_OPTION');
+      return index;
+    }));
+    const defaultIndex = combos.findIndex(combo => combo.every(index => index === 0));
+    if (defaultIndex < 0) throw new Error('FIGMA_DRAWN_VARIANT_DEFAULT_UNDRAWN');
+    if (defaultIndex > 0) combos.unshift(...combos.splice(defaultIndex, 1));
+  } else {
+    combos = [[]];
+    for (const axis of axes) {
+      const next: number[][] = [];
+      for (const combo of combos) {
+        for (let i = 0; i < axis.values.length; i++) next.push([...combo, i]);
+      }
+      combos = next;
     }
-    combos = next;
   }
   // bindings.figma.absentVariants: the declared undrawn combinations emit NO
   // variant — so the generated set is the product minus the list, which is
@@ -5981,7 +6399,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   }
   const fontStyles = new Set<string>(['Medium']);
 
-  for (const combo of combos) {
+  const drawnColumns = drawn === undefined ? 0 : Math.ceil(Math.sqrt(combos.length));
+  for (const [comboIndex, combo] of combos.entries()) {
     // Every axis's value for this combo feeds BOTH the `{prop}` token
     // substitutions and the visibleWhen part filtering (variantParts).
     const subst: Record<string, string> = {};
@@ -5994,9 +6413,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       nameParts.push(
         `${prop.bindings.figma.property}=${axisLabel(prop, value)}`,
       );
-      if (a >= 1) col = col * values.length + combo[a];
+      if (drawn === undefined && a >= 1) col = col * values.length + combo[a];
     }
-    const row = combo[0] ?? 0;
+    // Packing a positive domain must not allocate Cartesian grid holes either.
+    // Its board dimensions scale with declared rows, even for many sparse axes.
+    if (drawn !== undefined) col = comboIndex % drawnColumns;
+    const row = drawn === undefined ? combo[0] ?? 0 : Math.floor(comboIndex / drawnColumns);
 
     // MULTI-ROOT composite: a Figma component/variant is ONE frame, so the N
     // anatomy roots (Modal = {dialog, backdrop}) become CHILDREN of a SYNTHETIC
@@ -6031,12 +6453,19 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       name: nameParts.join(', ') || contract.name,
       layout: layoutSpec(root, true, subst),
     };
+    const resolvedRootPaint=resolveSolidFillComposition(root,subst);
+    if (resolvedRootPaint) rootSpec.solidFillComposition=solidFillCompositionPaint(resolvedRootPaint);
+    const selectedRootPaintToken=resolveSolidFillToken(root,subst);
+    if(selectedRootPaintToken!==undefined)rootSpec.solidFillCompositionToken=selectedRootPaintToken;
     nativePartOrigins.set(rootSpec, root);
     // resolveTokens, not root.tokens: the root's tokensByProp overrides (v10
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
     // without tokensByProp (resolveTokens returns the base map unchanged).
     const ctx = applyStyling(rootSpec, root, subst, {});
+    const rootPaintTable=root.solidFillCompositionByCombination;
+    if(rootPaintTable?.rows.some(row=>row.empty && rootPaintTable.props.every((prop,i)=>subst[prop]===row.values[i])))
+      rootSpec.lits={...rootSpec.lits,fillClear:true};
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
     boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);
     // Round 5: parent aspect lowering + block-root width fact (see NodeSpec).
@@ -6085,7 +6514,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       // for every root without `text`.
       rootSpec.children = [
         ...rootTextSpecs(root, contract, byId, ctx, subst),
-        ...variantParts(root.parts ?? {}, subst).flatMap(([childName, child]) =>
+        ...orderedVariantParts(root, subst).flatMap(([childName, child]) =>
           partToSpecs(childName, child, contract, byId, ctx, subst),
         ),
       ];
@@ -6162,6 +6591,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       axis: STATE_PREVIEW_PROPERTY,
       default: STATE_PREVIEW_DEFAULT,
       states: contract.states.map((s) => statePreviewLabel(s)),
+      ...(contract.bindings.figma.statePreviewRows ? {rows:contract.bindings.figma.statePreviewRows.map(row=>Object.fromEntries([[STATE_PREVIEW_PROPERTY,statePreviewLabel(row.state)],...axes.map(a=>[a.prop.bindings.figma.property,figmaLabel(a,row.props[a.prop.name]===null?null:String(row.props[a.prop.name]))])]))} : {}),
       primary: primary?.prop.bindings.figma.property ?? null,
       pinned: Object.fromEntries(
         axes
@@ -6174,21 +6604,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const baseColsN = axes.slice(1).reduce((n, a) => n * a.values.length, 1);
     for (let si = 0; si < contract.states.length; si++) {
       const stateName = contract.states[si];
-      for (let pi = 0; pi < primaryValues.length; pi++) {
+      const explicitRows=contract.bindings.figma.statePreviewRows?.filter(row=>row.state===stateName);
+      for (let pi = 0; pi < (explicitRows?.length ?? primaryValues.length); pi++) {
         const subst: Record<string, string> = {};
         const nameParts: string[] = [];
         for (let a = 0; a < axes.length; a++) {
           const { prop, values } = axes[a];
-          const value = a === primaryIdx ? values[pi]! : values[0];
+          const selected=explicitRows?.[pi].props[prop.name];
+          const value = explicitRows ? (selected===null?null:String(selected)) : a === primaryIdx ? values[pi]! : values[0];
           if (value !== null) subst[prop.name] = value;
           nameParts.push(
             `${prop.bindings.figma.property}=${axisLabel(prop, value)}`,
           );
         }
+        // Disabled previews drive the same Boolean input as the live component.
+        if(stateName==='disabled'&&contract.props.some(p=>p.name==='disabled'&&p.type==='boolean'))subst.disabled='true';
         const previewName = withStateSegment(nameParts.join(', '), statePreviewLabel(stateName));
-        const row = primaryIdx === 0 && primary ? pi : 0;
+        const row = explicitRows ? pi : primaryIdx === 0 && primary ? pi : 0;
         const col =
-          primaryIdx === 0 || !primary
+          explicitRows || primaryIdx === 0 || !primary
             ? baseColsN + si
             : baseColsN + si * primaryValues.length + pi;
         const rootSpec: NodeSpec = {
@@ -6227,6 +6661,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           baseCtx,
           root.hugsBelowMaxWidth,
         );
+        const outlineStateTokens={...resolveTokens(root,subst),...stateTokens};
+        for(const channel of ['outline-width','outline-color'])if(stateTokens[channel+':outline-preview']!==undefined)outlineStateTokens[channel]=stateTokens[channel+':outline-preview'];
+        applyOutlineOffset(rootSpec,outlineStateTokens,resolveLiterals(root,subst),subst);
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
         boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);
         // Round 5: same parent-aspect + block-root facts as the base loop.
@@ -6251,7 +6688,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           // draws the state's ink.
           rootSpec.children = [
             ...rootTextSpecs(root, contract, byId, ctx, subst),
-            ...variantParts(stateParts, subst).flatMap(([childName, child]) =>
+            ...orderedVariantParts({...root,parts:stateParts}, subst).flatMap(([childName, child]) =>
               partToSpecs(childName, child, contract, byId, ctx, subst),
             ),
           ];
@@ -6375,9 +6812,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // the eight Flowbite contracts collapsed to 8 bare daggers, and nothing a
   // designer could open named a single one of them.
   const backgroundLowering=new Map<Part,boolean[]>();
+  const imageLowering=new Map<Part,boolean[]>();
   const lowerBackground=(spec:NodeSpec) => {
     (spec.children??[]).forEach(lowerBackground);
     const part=nativePartOrigins.get(spec);
+    if(part)imageLowering.set(part,[...imageLowering.get(part)??[],!!spec.imagePaint]);
     if(part?.declared?.['background-clip']!=='padding-box')return;
     // @lower emit.padding-box-background-plane
     const lowered=lowerPaddingBoxBackground(spec,name=>{
@@ -6386,6 +6825,43 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     backgroundLowering.set(part,[...backgroundLowering.get(part)??[],lowered]);
   };
   variants.forEach(v=>lowerBackground(v.spec));
+  const qualifyLiteralTextBoxes=(spec:NodeSpec)=>{const box=nativeLiteralTextBox(spec);if(box)spec.literalTextBox=box;spec.children?.forEach(qualifyLiteralTextBoxes);};
+  [...variants,...stateVariants].forEach(v=>qualifyLiteralTextBoxes(v.spec));
+  const verifyImageTarget=(spec:NodeSpec)=>{if(spec.imageTarget&&(!spec.imagePaint||spec.type!=='frame'))throw Error('native-image-target-original-unqualified');spec.children?.forEach(verifyImageTarget);};
+  variants.forEach(v=>verifyImageTarget(v.spec));
+  {
+    for(const {part} of walkAnatomy(contract))if(part.component && (part.solidFillCompositionToken || part.solidFillCompositionByCombination?.rows.some(row=>row.token))){
+      const root=byId.get(part.component.id)?.anatomy.root;
+      const cells=part.solidFillCompositionByCombination?.rows ?? [{paint:part.solidFillComposition,token:part.solidFillCompositionToken,empty:false}];
+      if(!root?.instanceRootInputs?.includes('background-color') || root.solidFillComposition || root.solidFillCompositionByCombination ||
+          cells.some(cell=>cell.empty || !cell.token || cell.paint?.blendMode!=='NORMAL'))
+        throw Error('bound-instance-paint-native-unqualified');
+    }
+    for(const {part} of walkAnatomy(contract))if(part.solidFillCompositionSourceBinding && !part.solidFillCompositionToken)
+      throw Error('bound-paint-source-token-missing');
+    for(const {part} of walkAnatomy(contract)){
+      const planned=solidFillPartBindingPlan(part);if(!planned)continue;
+      if(permit===boundPaintPermit)for(const [path,leaf] of flatten(planned.tokens)){
+        if(canonicalJson(primitives.get(path))!==canonicalJson(leaf)||semantic.has(path)||light.has(path)||dark.has(path)||
+          [...brandModes.values()].some(tree=>tree.has(path)))throw Error('bound-paint-source-token-graph-disagreement');
+      }
+    }
+    const carry=(spec:NodeSpec)=>{
+      const part=nativePartOrigins.get(spec),path=spec.solidFillCompositionToken??part?.solidFillCompositionToken;
+      if(path!==undefined){
+        if(!['root','frame'].includes(spec.type)||!spec.solidFillComposition||spec.layout?.mode==='GRID'||
+          !/^[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i.test(path))
+          throw Error('bound-paint-compiled-owner-unqualified');
+        const color=parseCssColor(String(resolveLiteral(path))),paint=spec.solidFillComposition;
+        if(!color||['r','g','b'].some(k=>Math.fround(color[k as 'r'|'g'|'b'])!==paint.color[k as 'r'|'g'|'b'])||
+          Math.fround(color.a??1)!==paint.opacity)throw Error('bound-paint-token-value-disagreement');
+        spec.solidFillCompositionToken=path;
+      }
+      (spec.children??[]).forEach(carry);
+    };
+    [...variants,...stateVariants].forEach(v=>carry(v.spec));
+  }
+
   const facts: CodeOnlyFactObservation[] = [];
   if (contract.selection) facts.push({
     part: contract.selection.itemPart, variant: '', kind: 'event', channel: contract.selection.bindings.code.prop,
@@ -6393,6 +6869,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     reason: 'selection keyboard, focus and callbacks execute in React; the canvas draws finite enum states from the observed sample; bounded recapture restores retained relationships only after checking native identities and appearances; it does not observe interaction',
   });
   for (const { name: partName, part } of walkAnatomy(contract)) {
+    if (part.slot?.collapseWhenEmpty) facts.push({
+      part: partName, variant: '', kind: 'declared', channel: 'slot.collapseWhenEmpty', value: 'true',
+      reason: 'the writer resolves empty-slot visibility for each default or caller snapshot; later manual canvas content changes need regeneration to recompute it; React recomputes on each render',
+    });
     if (part.repeat?.keyField !== undefined) facts.push({
       part: partName, variant: '', kind: 'declared', channel: 'repeat.keyField', value: part.repeat.keyField,
       reason: 'stable collection identity is code metadata; the canvas draws the observed sample; explicit selection identities can return after validation, while other repeats do not reconstruct these keys',
@@ -6426,6 +6906,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       // channelDraws owns the per-value exceptions (drawExcept) that used to
       // be spelled out here — overflow-x/y auto|scroll annotate while
       // hidden|clip draw, and text-decoration-line/overline annotates.
+      if(!state&&['background-size','background-position','background-repeat'].includes(channel)&&imageLowering.get(part)?.every(Boolean))return;
       const drawn = channelDraws(channel, value) && !state;
       if (drawn) return;
       // Part D (owner directive, 2026-07-19): the annotation COPY does not
@@ -6521,6 +7002,43 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
   for (const v of variants) stripMarginVars(v.spec);
   for (const v of stateVariants) stripMarginVars(v.spec);
+  // A zero-blur inset ring is paint, not layout. Native frame inner shadows
+  // can disappear with transparent fills / visible overflow. An inside stroke
+  // is equivalent when every existing border side is explicitly zero. Keep
+  // other shadow stacks and competing strokes on their existing path.
+  const lowerInsetRing = (spec: NodeSpec): void => {
+    spec.children?.forEach(lowerInsetRing);
+    const effect = spec.effectStack?.length === 1 ? spec.effectStack[0] : undefined;
+    if (!['root', 'frame'].includes(spec.type) || !effect?.inner || effect.x !== 0 || effect.y !== 0 ||
+        effect.radius !== 0 || !Number.isFinite(effect.spread) || effect.spread! <= 0 ||
+        spec.strokeOutside || spec.dashPattern?.length) return;
+    const zero = (value: unknown) => value === 0 || typeof value === 'string' && /^0(?:\.0+)?(?:px|rem|em)?$/.test(value.trim());
+    const zeroBinding = (field: string) => {
+      const name = spec.bindings?.[field];
+      return name !== undefined && zero(resolveLiteral(name.split('/').join('.')));
+    };
+    const zeroSides = ['top', 'right', 'bottom', 'left'].every(side => {
+      const field = `stroke${side[0].toUpperCase()}${side.slice(1)}Weight`;
+      const literal = spec.lits?.strokeSides?.[side as 'top' | 'right' | 'bottom' | 'left'];
+      if (literal !== undefined) return literal === 0;
+      if (spec.bindings?.[field]) return zeroBinding(field);
+      if (spec.lits?.strokeWeight !== undefined) return spec.lits.strokeWeight === 0;
+      return zeroBinding('strokeWeight');
+    });
+    if (['root', 'frame'].includes(spec.type) && effect?.inner && effect.x === 0 && effect.y === 0 &&
+        effect.radius === 0 && Number.isFinite(effect.spread) && effect.spread! > 0 &&
+        !spec.strokeOutside && !spec.dashPattern?.length && zeroSides) {
+      delete spec.stroke;
+      for (const field of ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'])
+        if (spec.bindings) delete spec.bindings[field];
+      spec.lits = { ...spec.lits, strokeWeight: effect.spread!, strokeColor: { ...effect.color } };
+      delete spec.lits.strokeSides;
+      spec.strokesIncludedInLayout = false;
+      spec.insetRingStroke = true;
+      spec.effectStack = [];
+    }
+  };
+  for (const v of [...variants, ...stateVariants]) lowerInsetRing(v.spec);
   // FILL is a compile-time decision (see annotateFillW) — runs LAST so it
   // sees the final spec shape (after margin lowering / miss stripping).
   for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`);
@@ -6808,7 +7326,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       return Object.keys(map).length > 0 ? { propNames: map } : {};
     })(),
     ...(() => {
-      const axes = contract.props.filter(p => (isEnum(p) || isVariantBool(p)) && p.bindings.figma.unsetValue !== undefined)
+      const axes = absentVariantAxes(contract).map(axis => axis.prop).filter(p => p.bindings.figma.unsetValue !== undefined)
         .map(p => ({
           property: p.bindings.figma.property!, propName: p.name, codeProp: p.bindings.code.prop,
           unsetValue: p.bindings.figma.unsetValue!,
@@ -6830,6 +7348,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
     ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
     ...(absentVariantNames.length > 0 ? { absentVariants: absentVariantNames } : {}),
+    ...(drawn !== undefined ? { drawnVariants: structuredClone(drawn) } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
     ...(hasCodeOnlyFacts ? { codeOnlyFacts } : {}),
     colW: Math.max(
@@ -6838,6 +7357,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ),
   };
   if (contract.anatomy.root?.slot?.bindings?.figma?.textTemplate && data.rootSlot) data.rootSlot.textTemplate = 1;
+  if(permit===boundPaintPermit && dataSome(data,spec=>!!spec.solidFillCompositionToken))boundPaintData.add(data);
   compiledData.set(data, canonicalJson(data));
   if (nativeSource) nativeCandidateData.add(data);
   return data;
@@ -6907,18 +7427,22 @@ function mintedPreamble(
 // ---------------------------------------------------------------------------
 const MINTED_VARIABLES = ${JSON.stringify(vars)};
 {
-  // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
-  // Figma COLOR variables accept RGBA, so the alpha channel survives.
-  const hexToRgb = (hex) => {
-    const h = hex.replace('#', '');
-    const c = {
-      r: parseInt(h.slice(0, 2), 16) / 255,
-      g: parseInt(h.slice(2, 4), 16) / 255,
-      b: parseInt(h.slice(4, 6), 16) / 255,
-    };
-    if (h.length === 8) c.a = parseInt(h.slice(6, 8), 16) / 255;
-    return c;
+  // Imported paints may be functional rgb/rgba as well as hex. Validate all
+  // color values before creating variables, preserving fractional channels.
+  const colorValue = (value) => {
+    const v = String(value).trim(), fn = v.match(/^rgba?\\(([^)]+)\\)$/);
+    if (fn) {
+      const parts = fn[1].split(/[\\s,/]+/).filter(Boolean).map(Number);
+      if ((parts.length === 3 || parts.length === 4) && parts.every(Number.isFinite) &&
+          parts.slice(0,3).every(x=>x>=0&&x<=255) && (parts.length===3 || parts[3]>=0&&parts[3]<=1))
+        return {r:parts[0]/255,g:parts[1]/255,b:parts[2]/255,...(parts.length===4?{a:parts[3]}:{})};
+    } else if (/^#[0-9a-fA-F]{3}$|^#[0-9a-fA-F]{6}$|^#[0-9a-fA-F]{8}$/.test(v)) {
+      let h=v.slice(1);if(h.length===3)h=h.split('').map(x=>x+x).join('');
+      return {r:parseInt(h.slice(0,2),16)/255,g:parseInt(h.slice(2,4),16)/255,b:parseInt(h.slice(4,6),16)/255,...(h.length===8?{a:parseInt(h.slice(6,8),16)/255}:{})};
+    }
+    throw new Error('minted-color-value-unqualified: '+v);
   };
+  const colorValues = new Map(MINTED_VARIABLES.filter(t=>t.type==='COLOR').map(t=>[t.name,colorValue(t.value)]));
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
   let col = cols.find((c) => c.name === 'Imported (provisional)');
   if (!col) col = figma.variables.createVariableCollection('Imported (provisional)');
@@ -6943,7 +7467,7 @@ const MINTED_VARIABLES = ${JSON.stringify(vars)};
       v.setValueForMode(modeId, { type: 'VARIABLE_ALIAS', id: aliasTarget.id });
       continue;
     }` : ''}
-    v.setValueForMode(modeId, t.type === 'COLOR' ? hexToRgb(t.value) : t.value);
+    v.setValueForMode(modeId, t.type === 'COLOR' ? colorValues.get(t.name) : t.value);
   }
 }
 
@@ -7046,7 +7570,7 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
  *  opaque tone ribbon under the old INSIDE constant). Feature-gated: the
  *  constant is emitted verbatim when no spec carries strokeOutside. */
 const strokeAlignJs = (hasOutside: boolean): string =>
-  hasOutside ? `spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'` : `'INSIDE'`;
+  hasOutside ? `spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE')` : `'INSIDE'`;
 
 /** Round 5d: the CSS margin box as a fixed wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
@@ -7156,6 +7680,7 @@ ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcD
     // exact radians the dump captured (Figma ArcData semantics both ways).
     if (spec.shape.kind === 'ellipse' && spec.shape.arc) {
       node.arcData = { startingAngle: spec.shape.arc.start, endingAngle: spec.shape.arc.end, innerRadius: spec.shape.arc.innerRadius };
+      if(spec.shape.arc.cap)node.strokeCap=spec.shape.arc.cap;
     }
 ` : ''}    // Shape nodes ship a default gray paint — a spec with NO fill channel
     // clears it (a canvas artifact is not contract data; Phase B deviation 3).
@@ -7467,7 +7992,7 @@ function retireSlotUtility() {
     for (const k of Object.keys(defs)) {
       const d = defs[k];
       if (d && d.type === 'INSTANCE_SWAP' && String(d.defaultValue) === util.id) {
-        return { retired: false, reason: 'INSTANCE_SWAP property "' + k.split('#')[0] + '" on "' + t.name + '" still defaults to the Slot utility' };
+        return { retired: false, reason: 'INSTANCE_SWAP property "' + k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') + '" on "' + t.name + '" still defaults to the Slot utility' };
       }
     }
   }
@@ -7765,13 +8290,13 @@ const gridChildrenCall = (has: boolean, args: string): string =>
 
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
-const absoluteRuntime = (has: boolean, hasStrokedPath = false, hasNativePath = false, hasNativeLine = false, hasCapturedGeometry = false): string =>
+const absoluteRuntime = (has: boolean, hasStrokedPath = false, hasNativePath = false, hasNativeLine = false, hasCapturedGeometry = false, hasInstanceAffine = false): string =>
   has
     ? `
 ${hasCapturedGeometry ? `
 const resolveCapturedNativeGeometry = ${resolveNativeAbsoluteGeometry.toString()};
 function applyCapturedAbsolute(parent, childNode, childSpec) {
-  const box = resolveCapturedNativeGeometry(childSpec.capturedAbsoluteGeometry,{width:parent.width,height:parent.height});
+  const box = resolveCapturedNativeGeometry(childSpec.capturedAbsoluteGeometry,{width:parent.width,height:parent.height},childSpec.shape?.rotation ?? 0);
   if (box.width<=0 || box.height<=0) throw Error('absolute-placement-native-zero-extent-unqualified');
   if (parent.layoutMode !== 'NONE') childNode.layoutPositioning = 'ABSOLUTE';
   childNode.resize(box.width,box.height);
@@ -7779,7 +8304,21 @@ function applyCapturedAbsolute(parent, childNode, childSpec) {
 }
 ` : ''}// v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
-  if (!childSpec.absolute) return;${hasCapturedGeometry ? `
+  if (!childSpec.absolute) return;${hasInstanceAffine ? `
+  if (childSpec.instanceAffineAllocation) {
+    const a=childSpec.instanceAffineAllocation;
+    if(childSpec.instanceAffineFill){
+      const fill=childSpec.instanceAffineFill,m=a.normalizedTransform;
+      for(const [axis,index] of [['width',0],['height',1]])if((Math.abs(m[0][index])>0.5&&fill.width)||(Math.abs(m[1][index])>0.5&&fill.height))childNode.setBoundVariable(axis,null);
+      childNode.resize(a.localSize.width,a.localSize.height);
+    }
+    if (parent.layoutMode !== 'NONE' || Math.abs(childNode.width-a.localSize.width)>0.0001 || Math.abs(childNode.height-a.localSize.height)>0.0001)
+      throw Error('instance-affine-native-local-size-mismatch:'+childNode.id);
+    childNode.relativeTransform=a.normalizedTransform.map(row=>row.slice());
+    if(childSpec.instanceAffineFill)childNode.constraints={horizontal:childSpec.instanceAffineFill.width?'STRETCH':'MIN',vertical:childSpec.instanceAffineFill.height?'STRETCH':'MIN'};
+    return;
+  }
+` : ''}${hasCapturedGeometry ? `
   if (childSpec.capturedAbsoluteGeometry) { applyCapturedAbsolute(parent,childNode,childSpec); return; }
 ` : ''}${hasNativeLine ? `
   if (childSpec.shape && childSpec.shape.kind === 'line') return; // dedicated zero-height placement below
@@ -7800,7 +8339,7 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
         parent.width !== v.width && parent.width !== Math.fround(v.width) ||
         parent.height !== v.height && parent.height !== Math.fround(v.height))
       throw new Error('stroked-path-native-parent-basis-mismatch:' + parent.id);
-    childNode.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+    childNode.constraints = childSpec.shape.strokePath.constraints || { horizontal: 'SCALE', vertical: 'SCALE' };
     childNode.x = v.x; childNode.y = v.y;
     return;
   }` : ''}
@@ -7906,12 +8445,18 @@ function applyInsetOverlay(parent, childNode, childSpec) {
       parent.insertChild(0, childNode);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
+    // Inset allocation owns both axes; HUG would collapse a frame back to
+    // its content after a later layout pass, despite STRETCH constraints.
+    if (childNode.layoutMode && childNode.layoutMode !== 'NONE') {
+      childNode.primaryAxisSizingMode = 'FIXED';
+      childNode.counterAxisSizingMode = 'FIXED';
+    }
     const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
     // Astryx Slider thumb finding: inset overlays with fixedWidth/fixedHeight
     // (20×20 disk) must NOT STRETCH into a hug-zero display:contents parent —
     // that collapsed thumbs into 1px lines / semi-circles. Keep intrinsic size.
-    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
     if (fw != null || fh != null) {
       childNode.constraints = {
         horizontal: fw != null ? 'MIN' : 'STRETCH',
@@ -7959,7 +8504,9 @@ const insetOverlayCall = (has: boolean, args: string): string =>
 const outOfFlowResizeRuntime = (has: boolean, hasCapturedGeometry = false): string =>
   has
     ? `
+const outOfFlowBuiltChildren = new WeakMap();
 function resizeOutOfFlow(parent, built) {
+  outOfFlowBuiltChildren.set(parent, built);
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
@@ -7969,8 +8516,8 @@ function resizeOutOfFlow(parent, built) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
-        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : childSpec.lits && typeof childSpec.lits.width === 'number' ? childSpec.lits.width : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : childSpec.lits && typeof childSpec.lits.height === 'number' ? childSpec.lits.height : null;
         if (fw != null || fh != null) {
           childNode.resize(
             Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
@@ -7992,6 +8539,13 @@ function resizeOutOfFlow(parent, built) {
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
     } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+  // An ancestor can allocate FILL only after its subtree was constructed.
+  // Re-evaluate descendants against that final allocation, using the actual
+  // built-node correspondence rather than assuming a child-index mapping.
+  for (const pair of built) {
+    const nested = outOfFlowBuiltChildren.get(pair[1]);
+    if (nested) resizeOutOfFlow(pair[1], nested);
   }
 }
 `
@@ -8119,19 +8673,24 @@ function buildComponentScript(
   byId: Map<string, Contract>,
   fileKeyOverride?: string,
   mintedTokens?: Record<string, unknown>,
+  draftPaint=false,
 ): string {
   // The referee, same wording as emitReact: an invalid contract refuses BY
   // NAME on the canvas surface too. The gauntlet census found this was the
   // one emitter that never called validateContract — every referee-violating
   // set still emitted a sync script while react/html/react-inline refused.
   const refereeErrors: string[] = [];
-  validateContract(contract, byId, refereeErrors, input.icons);
+  const validationContract=draftPaint?structuredClone(contract):contract;
+  if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
+  validateContract(validationContract, byId, refereeErrors, input.icons, { drawnVariants: 'figma-domain' });
+  refereeErrors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
+  refereeErrors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (refereeErrors.length > 0) {
     throw new Error(
       `Refused — ${refereeErrors.length} contract violation(s):\n${refereeErrors.map((e) => `  - ${e}`).join('\n')}`,
     );
   }
-  const data = compileComponentData(contract, byId);
+  const data = compileComponentData(contract, byId, draftPaint?boundPaintPermit:undefined);
   if (nativeCandidateData.has(data)) throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
   if (data.rootSlot?.textTemplate === 1) throw new Error('FIGMA_SLOT_TEXT_TEMPLATE_REQUIRES_SCOPED_MODES');
   return buildSyncScript([data], fileKeyOverride ?? contract.bindings.figma.anchors.fileKey, {
@@ -8145,6 +8704,13 @@ function buildComponentScript(
 }
 
 
+/** Internal full-writer comparison route; public writing supports literal paint. */
+function buildComponentScriptDraftPaintQualification(contract:Contract,byId:Map<string,Contract>,fileKeyOverride?:string,mintedTokens?:Record<string,unknown>):string {
+  solidFillCompositionRules(contract,undefined,undefined,byId);
+  return buildComponentScript(contract,byId,fileKeyOverride,mintedTokens,true);
+}
+
+
 // ---------------------------------------------------------------------------
 // Batch script emission — several components per script (minified specs),
 // same runtime as the per-component scripts but parameterized and looped.
@@ -8154,8 +8720,9 @@ function buildComponentScript(
 /** Batch inputs must be unchanged objects returned by this engine's guarded
  * compileComponentData. Serialized copies and caller-built descriptors are
  * not a supported writer boundary; callers must compile their Contracts. */
-function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
-  for (const data of datas) {
+function buildBatchScript(datas: ComponentData[], fileKey: string | null, previousDatas?: ComponentData[]): string {
+  for (const data of [...datas,...previousDatas??[]]) {
+    if(boundPaintData.has(data))throw Error('BOUND_PAINT_COMPARISON_ONLY');
     if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') || Object.hasOwn(data, 'nativeContractDraft') ||
         dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractSample') || Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
@@ -8166,9 +8733,15 @@ function buildBatchScript(datas: ComponentData[], fileKey: string | null): strin
     if (compiledData.get(data) !== canonicalJson(data)) throw new Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
     if (data.rootSlot?.textTemplate === 1) throw new Error('FIGMA_SLOT_TEXT_TEMPLATE_REQUIRES_SCOPED_MODES');
   }
+  let propertyAmends: InstancePropertyAmend[] | undefined;
+  if(previousDatas){
+    if(previousDatas.length!==datas.length || new Set(previousDatas.map(d=>d.contractId)).size!==previousDatas.length)throw Error('INSTANCE_PROPERTY_AMEND_PREVIOUS_DOMAIN_MISMATCH');
+    propertyAmends=datas.map(next=>{const before=previousDatas.find(d=>d.contractId===next.contractId);if(!before)throw Error('INSTANCE_PROPERTY_AMEND_PREVIOUS_MISSING');return planInstancePropertyAmend(before,next);});
+  }
   return buildSyncScript(datas, fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (unchanged components skip; changed ones amend in place).`,
+    propertyAmends,
     preamble: '',
   });
 }
@@ -8224,6 +8797,8 @@ function compileNativeContractDraft(
 ) {
   const errors: string[] = [];
   validateContract(contract, byId, errors, input.icons);
+  errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
+  errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (errors.length) throw Error('NATIVE_CONTRACT_DRAFT_INVALID: ' + errors.join('; '));
   const data = compileComponentData(contract, byId);
   if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
@@ -8349,7 +8924,7 @@ function buildNativeContractGraphDraftScript(
 /** Retained-library path. Original anchors and source status remain in the
  * projection; only fresh compiler output receives the operation scope. */
 function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contract>,
-  source: NativePreparedLibrarySource, operationId: string) {
+  source: NativePreparedLibrarySource, operationId: string, permit?:typeof boundPaintPermit) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent || byId.size < 1 || byId.size > 30)
     throw Error('NATIVE_PREPARED_LIBRARY_IDENTITY_REQUIRED');
   if (source.tokensSha256 !== revisionOf(input.tokens).slice(7)) throw Error('NATIVE_PREPARED_LIBRARY_TOKENS_CHANGED');
@@ -8370,9 +8945,13 @@ function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contra
   const context = {mode:input.mode ?? 'light', brand:input.brand ?? 'default'};
   const routed = layeredNativeTokenModes(input.tokens, [{sourceMode:input.mode ?? 'light',brand:context.brand,nativeModeName:'Selected'}]);
   const compiled = ordered.map(contract => {
-    const errors:string[]=[]; validateContract(contract, byId, errors, input.icons);
+    const validation=permit===boundPaintPermit?structuredClone(contract):contract;
+    if(permit===boundPaintPermit)for(const {part}of walkAnatomy(validation)){delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
+    const errors:string[]=[]; validateContract(validation, byId, errors, input.icons, { drawnVariants: 'figma-domain' });
+  errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
+  errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
     if (errors.length) throw Error('NATIVE_PREPARED_LIBRARY_INVALID: ' + errors.join('; '));
-    const data = compileComponentData(contract, byId);
+    const data = compileComponentData(contract, byId,permit);
     if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
     return prepareNativePreparedLibraryComponent(contract,data,source,routed.modes[0].tokenTreeRevision,context);
   });
@@ -8384,10 +8963,10 @@ function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contra
     fonts:[...new Map(compiled.flatMap(row=>row.fonts).map(font=>[JSON.stringify(font),font])).values()]};
 }
 function buildNativePreparedLibraryScript(parent: Contract, byId: Map<string, Contract>,
-  source: NativePreparedLibrarySource, context: NativeSourceWriteContext) {
+  source: NativePreparedLibrarySource, context: NativeSourceWriteContext,permit?:typeof boundPaintPermit) {
   if (context.comparisons || context.comparisonRecovery || context.templateGraph)
     throw Error('NATIVE_PREPARED_LIBRARY_CONTEXT_UNQUALIFIED');
-  const graph = compileNativePreparedLibrary(parent,byId,source,context.operation.id);
+  const graph = compileNativePreparedLibrary(parent,byId,source,context.operation.id,permit);
   const prepared = prepareNativeSourceWrite(graph.projection,context,graph.boundNames);
   return wrapNativeSourceWrite(prepared,buildSyncScript(graph.components,context.operation.fileKey,{
     header:'// Shared renderer: operation-scoped retained contract library.',
@@ -8401,6 +8980,8 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   source: NativeContractDraftSource, context: NativeSourceWriteContext, comparison: NativeContractComparisonInput): string {
   const errors: string[] = [];
   validateContract(contract, byId, errors, input.icons);
+  errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
+  errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (errors.length) throw Error('NATIVE_CONTRACT_COMPARISON_INVALID: ' + errors.join('; '));
   if (context.comparisons || context.operation.fileKey !== comparison.parent.operation.fileKey ||
       (context.operation.id === comparison.parent.operation.id || comparison.instances?.some(ref => ref.parent.operation.id === context.operation.id))) throw Error('NATIVE_CONTRACT_COMPARISON_SCOPE_INVALID');
@@ -8424,7 +9005,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { propertyAmends?: InstancePropertyAmend[]; header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8436,6 +9017,9 @@ function buildSyncScript(
     .map(blocker => `${data.contractId}:${blocker.property}:${blocker.nodeName}`));
   if (callerPropertyBlockers.length)
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
+  const hasSolidFillComposition = featureDatas.some(d=>dataSome(d,s=>s.solidFillComposition!==undefined));
+  const hasBoundSolidFill=featureDatas.some(d=>dataSome(d,s=>s.solidFillCompositionToken!==undefined));
+  const hasInstanceRootFill = featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootFill));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
   // A visibility assignment replaces the complete Figma reference map. Text
@@ -8443,10 +9027,13 @@ function buildSyncScript(
   // Keep unrelated emitted programs and their runtime hashes unchanged.
   const hasJointPropertyReferences = featureDatas.some(componentHasJointPropertyReferences);
   const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
+  if(featureDatas.some(d=>dataSome(d,s=>!!s.mask?.paintedStroke && !s.nativePaintedStrokeMask)))
+    throw Error('NATIVE_PAINTED_MASK_REQUIRES_QUALIFIED_LOWERING');
   const hasNativePath = featureDatas.some(d => dataSome(d, s => s.nativePathViewport === true));
   const hasStrokedPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'stroked-path'));
   const hasNativeLine = featureDatas.some(d => dataSome(d,x => x.shape?.kind === 'line'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
+  const hasMask = featureDatas.some(d => dataSome(d, x => x.mask !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
   // seven committed libraries) emit byte-identical scripts.
@@ -8454,7 +9041,10 @@ function buildSyncScript(
   const hasShadow = featureDatas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
   const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasSlotTextTemplate = featureDatas.some((d) => dataSome(d, (x) => x.slotTextTemplate === true));
+  const hasCollapsingSlot = featureDatas.some(d => dataSome(d, x => x.slotCollapseWhenEmpty === true));
   const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
+  const hasNativeAspectRatio = featureDatas.some(d=>dataSome(d,x=>x.nativeAspectRatio!==undefined));
+  const hasInstanceAffine = featureDatas.some(d=>dataSome(d,x=>x.affineViewport===true));
   const hasCapturedGeometry = featureDatas.some(d => dataSome(d,x=>x.capturedAbsoluteGeometry !== undefined));
   const hasLits = featureDatas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
@@ -8477,11 +9067,13 @@ function buildSyncScript(
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined ||
     x.type === 'slot' && (x.children ?? []).some(child => child.instanceInk !== undefined || child.instanceStrokeWeight !== undefined)));
+  const hasVisibilityOverrides = featureDatas.some(d=>dataSome(d,x=>!!x.visibilityTarget || !!x.instanceVisibility || !!x.textColorTarget || !!x.instanceTextColors || !!x.shapeFillTarget || !!x.instanceShapeFills));
   const hasInstanceInk = featureDatas.some(d => dataSome(d, x => x.instanceInk !== undefined || x.instanceStrokeWeight !== undefined));
   // bindings.figma.absentVariants: the "still holds a declared-absent variant"
   // receipt on the skip path is emitted only for a script that carries such a
   // contract — every other script keeps its bytes.
   const hasAbsentVariants = featureDatas.some((d) => (d.absentVariants?.length ?? 0) > 0);
+  const hasDrawnVariants = featureDatas.some(d => d.drawnVariants !== undefined);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
@@ -8512,6 +9104,7 @@ function buildSyncScript(
   // dagger census already counts — rather than a silent skip at runtime.
   const hasColumnWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
   const hasEffectStack = featureDatas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
+  const hasImagePaint = featureDatas.some(d=>dataSome(d,x=>x.imagePaint!==undefined));
   const hasGradient = featureDatas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
   const hasShapeGradient = featureDatas.some((d) => dataSome(d, (x) => x.type === 'shape' && x.gradient !== undefined));
   const hasInsetOverlay = featureDatas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
@@ -8525,6 +9118,7 @@ function buildSyncScript(
   const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout !== undefined));
   // dump v1.36: same discipline — a contract with no whole-pixel text box
   // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
+  const hasLiteralTextBox=featureDatas.some(d=>dataSome(d,s=>!!s.literalTextBox));
   const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = featureDatas.some((d) =>
@@ -8536,8 +9130,8 @@ function buildSyncScript(
     ),
   );
   return `${opts.header}
-const COMPONENTS = ${JSON.stringify(datas, null, 2)};
-const ROW_H = 240, PAD = 40;
+const COMPONENTS = ${JSON.stringify(datas, null, 2)};${opts.propertyAmends ? '\nconst INSTANCE_PROPERTY_AMENDS = '+JSON.stringify(opts.propertyAmends)+';\n'+INSTANCE_PROPERTY_AMEND_RUNTIME : ''}
+const ROW_H = 240, PAD = 40;${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
 
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
@@ -8798,7 +9392,9 @@ function isSyncTarget(n) {
 function allSyncTargets() {
   const out = [];
   for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+    for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
+      if (isSyncTarget(node)) out.push(node);
+    }
   }
   return out;
 }
@@ -8895,7 +9491,7 @@ function setInstanceProps(inst, props, owner) {
     const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
     throw new Error(
       'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')).join(', ') || 'none') +
       ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
     );
   }
@@ -9005,7 +9601,16 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-${slotRuntime(hasSlot)}${birthBoxRuntime(hasChildlessBox)}
+${slotRuntime(hasSlot)}${birthBoxRuntime(hasChildlessBox)}${hasNativeAspectRatio ? `
+function applyNativeAspectRatio(node, spec) {
+  if (spec.nativeAspectRatio === undefined) return;
+  if (typeof node.lockAspectRatio !== 'function' || !(node.width > 0)) throw Error('NATIVE_ASPECT_RATIO_UNAVAILABLE:' + spec.name);
+  node.resizeWithoutConstraints(node.width, node.width / spec.nativeAspectRatio);
+  node.lockAspectRatio();
+  const ratio = node.targetAspectRatio;
+  if (!ratio || !Number.isFinite(ratio.x) || !Number.isFinite(ratio.y) || ratio.x <= 0 || ratio.y <= 0 || Math.abs(ratio.x / ratio.y - spec.nativeAspectRatio) > 0.00001) throw Error('NATIVE_ASPECT_RATIO_READBACK_MISMATCH:' + spec.name);
+}
+` : ''}
 // FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
 // (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
 // can never be reverted silently by an overhanging descendant.
@@ -9047,6 +9652,7 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // (axis aligns, layoutWrap) are not grid facts and are never written.
   if (l.mode === 'GRID') { applyGridFrame(node, l); } else {` : ''}
   node.layoutMode = l.mode;
+  if(spec.itemReverseZIndex!==undefined)node.itemReverseZIndex=spec.itemReverseZIndex;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}${hasGrid ? `
   }` : ''}
@@ -9130,13 +9736,14 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
   }
-  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
+  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];${hasSolidFillComposition ? '\n  applySolidFillComposition(node,spec);' : ''}
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = ${strokeAlignJs(hasStrokeOutside)};
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
-  }${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
+  }${hasStrokeOutside ? `
+  if (spec.strokeOutside && spec.lits && spec.lits.strokeColor) node.strokeAlign = ${strokeAlignJs(true)};` : ''}${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
@@ -9153,19 +9760,27 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}${hasGrid ? `
+  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}${hasImagePaint ? NATIVE_IMAGE_FILL_RUNTIME : ''}${hasGrid ? `
   // Resizing can replace HUG tracks with FLEX. Restore the declaration after
   // all bound/literal size writes, before appending or placing any children.
   if (l.mode === 'GRID') applyGridFrame(node, l);` : ''}${hasGridGapBindings ? `
   // Rebind after the last literal grid write so variable identity survives.
   if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
     node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
-  }` : ''}${hasStrokedPath ? `
+  }` : ''}${hasInstanceAffine ? `
+  if (spec.affineViewport) node.layoutMode = 'NONE';` : ''}${hasStrokedPath ? `
   // A path viewport owns coordinates, not child flow. Apply after size and
   // variable bindings, before appending paths; resize preserves SCALE.
   if (spec.strokeViewport) node.layoutMode = 'NONE';` : ''}${hasNativePath ? `
   // A filled-path mask has a fixed drawing viewport, independent of ink bounds.
-  if (spec.nativePathViewport || spec.scalablePathParent) node.layoutMode = 'NONE';` : ''}
+  if (spec.nativePathViewport || spec.scalablePathParent) node.layoutMode = 'NONE';` : ''}${hasAbsolute ? `
+  // Edge-pinned auto-layout wrappers own the parent's allocated extent.
+  // HUG would shrink them back to a nested component's main/default size.
+  if (spec.absolute && node.layoutMode !== 'NONE') {
+    const horizontalIsPrimary = node.layoutMode !== 'VERTICAL';
+    if (spec.absolute.h === 'STRETCH') node[horizontalIsPrimary ? 'primaryAxisSizingMode' : 'counterAxisSizingMode'] = 'FIXED';
+    if (spec.absolute.v === 'STRETCH') node[horizontalIsPrimary ? 'counterAxisSizingMode' : 'primaryAxisSizingMode'] = 'FIXED';
+  }` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -9210,15 +9825,16 @@ function applyNativeLine(parent, node, spec) {
     matrix[1][2] = (a.top !== undefined ? a.top : a.bottom !== undefined ? parent.height - a.bottom - h : (parent.height - h) / 2) - Math.min(0,y);
     node.constraints = {horizontal:a.h || 'MIN',vertical:a.v || 'MIN'};
   }
+  if (parent.layoutMode && parent.layoutMode !== 'NONE') node.layoutPositioning = 'ABSOLUTE';
   node.relativeTransform = matrix;
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
-    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'INSTANCE' || parent.type === 'SLOT') return false;
     if (parent.type === 'COMPONENT' || parent.type === 'COMPONENT_SET') { owned = true; break; }
   }
   if (!owned) return false;
@@ -9245,6 +9861,12 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     const slots = caller.findAll(n => n.type === 'SLOT' && n.componentPropertyReferences?.slotContentId === keys[0]);
     if (slots.length !== 1) throw Error('CALLER_SLOT_NODE_AMBIGUOUS');
     node = slots[0];
+    if (spec.callerSlotVisibleProp) {
+      const visibleKey = node.componentPropertyReferences?.visible;
+      if (!visibleKey || owner.componentPropertyDefinitions[visibleKey]?.type !== 'BOOLEAN' ||
+          !(visibleKey === spec.callerSlotVisibleProp || visibleKey.startsWith(spec.callerSlotVisibleProp + '#')))
+        throw Error('CALLER_SLOT_VISIBILITY_BINDING_MISMATCH');
+    }
     for (const child of [...node.children]) child.remove();
   } else ` : ''}if (spec.type === 'svg') {
     node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
@@ -9291,13 +9913,11 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+${opts.nativeSource ? `    if (spec.nativeContractPart && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
     if (spec.slotTextTemplate) {
       if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
@@ -9305,7 +9925,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
       node.visible = false;
     }` : ''}
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
-    if (spec.contentProp) {
+${hasLiteralTextBox ? NATIVE_LITERAL_TEXT_BOX_RUNTIME : ''}    if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }${hasCallerContent ? `
     if (spec.callerContentProp) {
@@ -9367,6 +9987,15 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       node.resize(spec.instanceSize.px, spec.instanceSize.px);
       node.setBoundVariable('width', need(spec.instanceSize.varName));
       node.setBoundVariable('height', need(spec.instanceSize.varName));
+    }` : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootOverrides)) ? `
+    if(spec.instanceRootOverrides) {
+      const usage=spec.instanceRootOverrides;
+      if(usage.width || usage.height) node.resize(usage.width ? usage.width.px : node.width, usage.height ? usage.height.px : node.height);
+      for(const [channel,value] of Object.entries(usage)) {
+        const field=channel.replace(/-([a-z])/g,(_,letter)=>letter.toUpperCase());
+        if(channel !== 'width' && channel !== 'height') node[field]=value.px;
+        node.setBoundVariable(field,need(value.varName));
+      }
     }` : ''}${hasNestedPropertyControls ? `
     (registry.nestedControls || (registry.nestedControls = [])).push(node);` : ''}
   } else if (spec.type === 'slot') {
@@ -9402,7 +10031,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${gradientRuntime(hasShapeGradient)}${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath, hasNativePath, hasNativeLine)} else {
+  }${shapeRuntime(hasShape, `${gradientRuntime(hasShapeGradient)}${hasImagePaint ? NATIVE_IMAGE_FILL_RUNTIME : ''}${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, (hasArc ? '(spec.shape.arc && spec.shape.arc.align) || ' : '') + strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath, hasNativePath, hasNativeLine)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it
@@ -9413,13 +10042,69 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
   // layer renames the linked SLOT property (probe 2b), so the contract's
   // slot.bindings.figma.property is spelled here and nowhere else.
   ${hasCallerSlots ? 'if (!spec.callerSlotProperty) ' : ''}node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
-${hasSelection ? `  if (spec.selectionIdentity) node.setSharedPluginData('ds_contracts', 'selectionIdentity', JSON.stringify(spec.selectionIdentity));\n` : ''}  if (spec.visibleProp) {
+${hasSelection ? `  if (spec.selectionIdentity) node.setSharedPluginData('ds_contracts', 'selectionIdentity', JSON.stringify(spec.selectionIdentity));\n` : ''}${hasMask ? `  if (spec.mask) {
+    node.isMask = true;
+    node.maskType = spec.mask.type;
+    if(spec.mask.stroke){
+      const s=spec.mask.stroke;
+      if(spec.mask.type!=='ALPHA' || spec.shape?.kind!=='path')throw Error('native-mask-stroke-outline-refused:'+spec.name);
+      node.fills=[];
+      node.strokes=[{type:'SOLID',color:s.color,opacity:1}];
+      node.strokeAlign=s.align;node.strokeWeight=s.weight;node.strokeCap=s.cap;node.strokeJoin=s.join;node.strokeMiterLimit=s.miterLimit;node.dashPattern=[];
+      if(node.strokeAlign!==s.align || node.strokeWeight!==s.weight || node.strokeMiterLimit!==s.miterLimit)throw Error('native-mask-stroke-write-refused:'+spec.name);
+    }
+    if (node.isMask !== true || node.maskType !== spec.mask.type) throw Error('native-mask-write-refused:' + spec.name);
+  }
+` : ''}  if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
 ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an already-populated
   // instance into another instance's slot invalidates its private sublayers
   // in native Figma. Frames carrying such instances must also be built in place.
   if (parent && !spec.callerSlotProperty) parent.appendChild(node);
+` : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootStroke)) ? `  if(spec.instanceRootStroke) {
+    node.strokes=[boundPaint(spec.instanceRootStroke.color,node)];
+    node.strokeAlign='OUTSIDE';node.strokeWeight=spec.instanceRootStroke.px;
+    node.setBoundVariable('strokeWeight',need(spec.instanceRootStroke.width));
+  }
+` : ''}${hasInstanceRootFill ? `  if(spec.instanceRootFill)node.fills=[boundPaint(spec.instanceRootFill.varName,node)];
+` : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances)) ? NATIVE_TEXT_APPEARANCE_RUNTIME : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.imageTarget||!!s.instanceImages)) ? NATIVE_IMAGE_CONTROL_RUNTIME : ''}${hasVisibilityOverrides ? `  if(spec.textColorTarget)node.setSharedPluginData('ds_contracts','textColorOverride',spec.textColorTarget);
+  if(spec.shapeFillTarget)node.setSharedPluginData('ds_contracts','shapeFillOverride',spec.shapeFillTarget);
+  if(spec.instanceShapeFills){
+    const previousSkip=figma.skipInvisibleInstanceChildren;figma.skipInvisibleInstanceChildren=false;
+    try{for(const [key,paint] of Object.entries(spec.instanceShapeFills)){
+      const found=[];const visit=n=>{if(n.getSharedPluginData('ds_contracts','shapeFillOverride')===key)found.push(n);if(n.type!=='INSTANCE')for(const child of n.children||[])visit(child);};
+      for(const child of node.children||[])visit(child);
+      if(found.length!==1||!['FRAME','RECTANGLE','ELLIPSE'].includes(found[0].type))throw Error('shape-fill-override-target-unqualified:'+key);
+      found[0].fills=[{type:'SOLID',color:{r:paint.r,g:paint.g,b:paint.b},opacity:paint.a===undefined?1:paint.a}];
+    }}finally{figma.skipInvisibleInstanceChildren=previousSkip;}
+  }
+  if(spec.instanceTextColors){
+    const previousSkip=figma.skipInvisibleInstanceChildren;figma.skipInvisibleInstanceChildren=false;
+    try{for(const [key,color] of Object.entries(spec.instanceTextColors)){
+      const found=[];const visit=n=>{if(n.getSharedPluginData('ds_contracts','textColorOverride')===key)found.push(n);if(n.type!=='INSTANCE')for(const child of n.children||[])visit(child);};
+      for(const child of node.children||[])visit(child);
+      if(found.length!==1||found[0].type!=='TEXT')throw Error('text-color-override-target-unqualified:'+key);
+      const hex=color.slice(1);found[0].fills=[{type:'SOLID',color:{r:parseInt(hex.slice(0,2),16)/255,g:parseInt(hex.slice(2,4),16)/255,b:parseInt(hex.slice(4,6),16)/255},opacity:hex.length===8?parseInt(hex.slice(6,8),16)/255:1}];
+    }}finally{figma.skipInvisibleInstanceChildren=previousSkip;}
+  }
+  if (spec.visibilityTarget) {
+    node.setSharedPluginData('ds_contracts','visibilityOverride',spec.visibilityTarget.key);
+    node.visible = spec.visibilityTarget.visible;
+  }
+  if (spec.instanceVisibility) {
+    const previousSkip = figma.skipInvisibleInstanceChildren;
+    figma.skipInvisibleInstanceChildren = false;
+    try {
+    for (const [key,value] of Object.entries(spec.instanceVisibility)) {
+      const found = [];
+      const visit = n => { if(n.getSharedPluginData('ds_contracts','visibilityOverride')===key)found.push(n); if(n.type!=='INSTANCE')for(const child of n.children||[])visit(child); };
+      for(const child of node.children||[])visit(child);
+      if(found.length!==1)throw Error('visibility-override-target-unqualified:'+key+':'+found.length);
+      found[0].visible = value;
+    }
+    } finally { figma.skipInvisibleInstanceChildren = previousSkip; }
+  }
 ` : ''}${hasInstanceInk ? `  // Paint overrides also create private sublayers. Apply after attachment
   // to a caller slot, so moving the instance cannot invalidate those handles.
   if (spec.instanceInk || spec.instanceStrokeWeight) {
@@ -9431,6 +10116,12 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     if (spec.instanceInk) {
       if (spec.instanceInk.paintKind === 'stroke') ink.strokes = [boundPaint(spec.instanceInk.varName,ink)];
       else ink.fills = [boundPaint(spec.instanceInk.varName,ink)];
+    }
+    if (spec.instanceInsideStroke) {
+      if(!spec.instanceInk || spec.instanceInk.paintKind)throw Error('inside-stroke-ink-unqualified');
+      const stroke=spec.instanceInsideStroke;ink.strokes=[boundPaint(spec.instanceInk.varName,ink)];
+      ink.setBoundVariable('strokeWeight',null);ink.strokeAlign='INSIDE';ink.strokeWeight=stroke.weight;
+      ink.strokeCap=stroke.cap;ink.strokeJoin=stroke.join;ink.strokeMiterLimit=stroke.miterLimit;ink.dashPattern=[];
     }
     if (spec.instanceStrokeWeight) { ink.strokeWeight = spec.instanceStrokeWeight.px; ink.setBoundVariable('strokeWeight',need(spec.instanceStrokeWeight.varName)); }
   }
@@ -9491,7 +10182,7 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
 ${hasFillH ? `\n    if (child.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasNativeAspectRatio ? '\n  applyNativeAspectRatio(node, spec);' : ''}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -9509,7 +10200,16 @@ ${hasSlotTextTemplate ? `  if (spec.type === 'slot' && spec.children?.some(child
     node.layoutSizingHorizontal = 'HUG';
     node.layoutSizingVertical = 'HUG';
   }
-` : ''}  return node;
+` : ''}${hasCollapsingSlot ? `  // Resolve the current default/caller snapshot after all content is built.
+  // The slot stays addressable for subsequent caller replacement.
+  if (spec.slotCollapseWhenEmpty) {
+    const populated = node.children.some(child => child.visible !== false);
+    // Recheck resolved native content before binding the live host control.
+    // A missing/hidden dependency must not make BOOLEAN=true expose an empty box.
+    if ((spec.visibleProp || spec.callerSlotVisibleProp) && !populated) throw Error('SLOT_COLLAPSE_LIVE_CONTENT_EMPTY:' + spec.name);
+    if (!spec.callerSlotVisibleProp) node.visible = populated;
+  }
+` : ''}${hasBoundSolidFill ? `  if(spec.solidFillCompositionToken)applyBoundSolidFillLayer(node,spec,need(spec.solidFillCompositionToken.split('.').join('/'))${opts.nativeSource?',nativeOwn':''});\n` : ''}  return node;
 }
 
 
@@ -9526,7 +10226,7 @@ await dsLoadVarNames();
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
 // "canvas edited" over 63 Button variants is not actionable).
-function dsStampFingerprints(node) {
+function dsStampFingerprints(node) {${hasBoundSolidFill ? '\n  settleBoundSolidFillLayers(node);' : ''}
   node.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(node));
   // v3: variants also store the SNAPSHOT the hash derives from, so Check
   // Drift can say WHAT changed, not just that something did. Each variant
@@ -9605,7 +10305,17 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // REPORTED, never deleted — except State preview leftovers when
 // bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
-  set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+${hasDrawnVariants ? `  if (C.drawnVariants) {
+    const expected = C.variants.map(variant => variant.name);
+    const actual = set.children.map(child => child.name);
+    if (actual.some((name, index) => expected.indexOf(name) < 0 || actual.indexOf(name) !== index))
+      throw new Error('FIGMA_DRAWN_DOMAIN_EXTRA_OR_DUPLICATE_VARIANT: ' + C.contractId);
+    if (set.getSharedPluginData('ds_contracts', 'specHash') === specHash(C) &&
+        expected.some(name => actual.indexOf(name) < 0))
+      throw new Error('FIGMA_DRAWN_DOMAIN_MISSING_VARIANT: ' + C.contractId);
+  }
+  set.setSharedPluginData('ds_contracts', 'drawnVariants', C.drawnVariants ? JSON.stringify(C.drawnVariants) : '');
+` : ''}  set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
@@ -9666,7 +10376,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
 
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
@@ -9756,7 +10466,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
 ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNode) {\n          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n        }\n` : ''}        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
-      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n      sizeCallerSlots(comp);' : ''}
+      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasNativeAspectRatio ? '\n  applyNativeAspectRatio(comp, v.spec);' : ''}${hasCallerSlots && hasRootSlot ? '\n      sizeCallerSlots(comp);' : ''}
       report.rebuiltVariants++;
     }${hasNestedPropertyControls ? `
     for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;` : ''}
@@ -9922,7 +10632,7 @@ ${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.s
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+    Object.keys(defs).find((k) => k.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === name) || null;
   for (const w of [
     ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
     ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
@@ -9959,7 +10669,7 @@ ${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.s
 ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
-  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n  sizeCallerSlots(comp);' : ''}
+  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasNativeAspectRatio ? '\n  applyNativeAspectRatio(comp, v.spec);' : ''}${hasCallerSlots && hasRootSlot ? '\n  sizeCallerSlots(comp);' : ''}
   ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
   ` : ''}for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -10050,7 +10760,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       key: existing.key,
     };
   }
-  // Retiring/renaming an internal omission option must not leave its retained
+${opts.propertyAmends ? '  return await amendInstanceProperties(existing,C,INSTANCE_PROPERTY_AMENDS.find(p=>p.before.contractId===C.contractId));\n' : ''}  // Retiring/renaming an internal omission option must not leave its retained
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
@@ -10215,7 +10925,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
   target.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
-  target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+${hasDrawnVariants ? `  target.setSharedPluginData('ds_contracts', 'drawnVariants', C.drawnVariants ? JSON.stringify(C.drawnVariants) : '');\n` : ''}  target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
@@ -10266,6 +10976,7 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildTokensScript,
     compileComponentData,
     buildComponentScript,
+    buildComponentScriptDraftPaintQualification,
     buildBatchScript,
     buildNativeSourceComponentScript,
     compileNativeContractDraft,
@@ -10274,6 +10985,9 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     compileNativeContractGraphDraft,
     compileNativePreparedLibrary,
     buildNativePreparedLibraryScript,
+    /** Internal bound-paint qualification; public acceptance remains fenced. */
+    compileNativePreparedLibraryDraftPaintQualification:(parent:Contract,byId:Map<string,Contract>,source:NativePreparedLibrarySource,operationId:string)=>compileNativePreparedLibrary(parent,byId,source,operationId,boundPaintPermit),
+    buildNativePreparedLibraryDraftPaintQualification:(parent:Contract,byId:Map<string,Contract>,source:NativePreparedLibrarySource,context:NativeSourceWriteContext)=>buildNativePreparedLibraryScript(parent,byId,source,context,boundPaintPermit),
     buildNativeContractGraphDraftScript,
     buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not

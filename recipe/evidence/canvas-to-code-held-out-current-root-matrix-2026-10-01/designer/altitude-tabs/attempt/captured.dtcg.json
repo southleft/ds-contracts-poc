@@ -1,0 +1,19 @@
+{
+  "theme": {
+    "color": {
+      "border": {
+        "neutral-default": {
+          "$value": "#3c3c35",
+          "$type": "color"
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 1,
+      "skipped": []
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import {readReactElementCreationSites} from './react-element-creation.js';
 import ts from 'typescript';
 import {readReactRuntimeExport,type ReactRuntimeExportDefinition} from './react-runtime-export.js';
 import {readReactElementClosures} from './react-element-closure.js';
@@ -26,11 +27,11 @@ export interface ReactContextHelper {
 export interface ReactContextConsumerCall {
   call:HelperSourcePoint;callee:HelperSourcePoint;consumer:HelperSourcePoint;arguments:HelperSourcePoint[];
 }
-export interface ReactContextFactoryCall extends ReactContextConsumerCall {factory:'jsx'|'jsxs'}
+export interface ReactContextFactoryCall extends ReactContextConsumerCall {factory:'jsx'|'jsxs'|'createElement'}
 
 export interface ReactContextBindings {
-  reads:Array<{read:HelperSourcePoint;binding:HelperSourcePoint;consumer:HelperSourcePoint;name:string;kind:'value'|'typeof'}>;
-  functions:Array<{source:HelperSourcePoint;name:string}>;
+  reads:Array<{read:HelperSourcePoint;binding:HelperSourcePoint;consumer:HelperSourcePoint;name:string;kind:'value'|'typeof';functionSource?:HelperSourcePoint}>;
+  functions:Array<{source:HelperSourcePoint;name:string;scope?:HelperSourcePoint}>;
 }
 /** Observe a module lexical binding only at an original read. This plan does
  * not assume its initializer remains current, nor reflect the resulting value. */
@@ -70,13 +71,13 @@ export function planReactContextBindings(reference:ReactHelperReference,initiali
 export function planReactContextConsumerCalls(reference:ReactHelperReference,initializers:readonly ReactTargetInitializer[]):ReactContextConsumerCall[]{
   return planRenderCalls(reference,initializers,false);
 }
-/** Original named JSX-runtime calls inside registered render bodies. Neither a
+/** Original import-bound React factory calls inside registered render bodies. Neither a
  * plan nor a target expression's spelling establishes its actual runtime value. */
 export function planReactContextFactoryCalls(reference:ReactHelperReference,initializers:readonly ReactTargetInitializer[]):ReactContextFactoryCall[]{
   return planRenderCalls(reference,initializers,true).map(p=>{if(!p.factory)throw Error('context-factory-plan-unavailable');return {...p,factory:p.factory};});
 }
-function planRenderCalls(reference:ReactHelperReference,initializers:readonly ReactTargetInitializer[],factories:boolean):Array<ReactContextConsumerCall & {factory?:'jsx'|'jsxs'}>{
-  const result:Array<ReactContextConsumerCall & {factory?:'jsx'|'jsxs'}>=[];
+function planRenderCalls(reference:ReactHelperReference,initializers:readonly ReactTargetInitializer[],factories:boolean):Array<ReactContextConsumerCall & {factory?:'jsx'|'jsxs'|'createElement'}>{
+  const result:Array<ReactContextConsumerCall & {factory?:'jsx'|'jsxs'|'createElement'}>=[];
   for(const name of [...new Set(initializers.map(i=>i.render.file))].sort()){
     const file=path.resolve(reference.sourceRoot,name),real=realpathSync(file),hash=reference.files[real];
     if(file!==real||!hash)throw Error('context-consumer-source-unavailable');
@@ -99,6 +100,9 @@ function planRenderCalls(reference:ReactHelperReference,initializers:readonly Re
       const imp=d.parent.parent.parent,name=(d.propertyName??d.name).text;
       if(ts.isImportDeclaration(imp)&&ts.isStringLiteral(imp.moduleSpecifier)&&imp.moduleSpecifier.text==='react/jsx-runtime'&&(name==='jsx'||name==='jsxs'))return name;
     };
+    // Planning inventories only safe sites. Observation retains its default
+    // whole-source refusal; an omitted site is never permission to instrument it.
+    const originalFactories=readReactElementCreationSites(text,file,name,true,'omit');
     const visit=(n:ts.Node)=>{
       const initializer=initializers.find(i=>i.render.file===name&&i.render.sha256===hash&&i.render.start===n.getStart(sf)&&i.render.end===n.end);
       if(initializer){
@@ -107,8 +111,9 @@ function planRenderCalls(reference:ReactHelperReference,initializers:readonly Re
           if(ts.isFunctionLike(a))return;
           if(ts.isCallExpression(a)&&!a.questionDotToken&&a.arguments.length<=10000&&!a.arguments.some(ts.isSpreadElement)){
             const callee=unwrap(a.expression);
-            const factory=ts.isIdentifier(callee)?factoryImport(callee):undefined;
-            if(ts.isIdentifier(callee)&&callee.text!=='eval'&&(factories?factory&&a.arguments.length>=2&&a.arguments.length<=3:!excludedImport(callee))&&globalAvailable(a)){
+            const createElement=originalFactories.find(site=>site.factory==='createElement'&&site.span.start===a.getStart(sf)&&site.span.end===a.end);
+            const factory=createElement?'createElement':ts.isIdentifier(callee)?factoryImport(callee):undefined;
+            if((factories?factory&&a.arguments.length>=2&&a.arguments.length<=(factory==='createElement'?100:3):ts.isIdentifier(callee)&&callee.text!=='eval'&&!excludedImport(callee))&&globalAvailable(a)){
               let unsafe=false;
               const scan=(v:ts.Node)=>{
                 if(ts.isAwaitExpression(v)||ts.isYieldExpression(v))unsafe=true;

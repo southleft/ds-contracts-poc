@@ -19,11 +19,16 @@ export const camel = (value: string): string => {
   return sanitized.length > 0 ? sanitized : spelled;
 };
 
+/** Inferred code bindings must be legal in strict module/function scope.
+ * Original Figma property spelling remains in its binding and projection. */
+const RESERVED_BINDINGS=new Set(['await','break','case','catch','class','const','continue','debugger','default','delete','do','else','enum','export','extends','false','finally','for','function','if','implements','import','in','instanceof','interface','let','new','null','package','private','protected','public','return','static','super','switch','this','throw','true','try','typeof','var','void','while','with','yield','arguments','eval']);
+/** Strip only Figma's terminal identity; a display name may itself contain '#'. */
+export const figmaPropertyDisplayName = (property:string):string => property.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
 export const canonicalPropName = (property: string): string => {
-  const bare = property.split("#")[0].trim();
-  if (/^[a-z][A-Za-z0-9]*$/.test(bare)) return bare;
-  const name = camel(bare.replace(/[^A-Za-z0-9 _-]+/g, " ").trim());
-  return /^[a-z]/.test(name) ? name : `p${name}`;
+  const bare = figmaPropertyDisplayName(property).trim();
+  const spelled=/^[a-z][A-Za-z0-9]*$/.test(bare)?bare:camel(bare.replace(/[^A-Za-z0-9 _-]+/g, " ").trim());
+  const name=/^[a-z]/.test(spelled)?spelled:`p${spelled}`;
+  return RESERVED_BINDINGS.has(name)?`${name}Prop`:name;
 };
 
 /** Allocate only colliding source spellings. Names already accepted by the

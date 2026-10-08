@@ -65,7 +65,12 @@ createRoot(document.getElementById('root')!).render(<App/>);`;
   const observer=createReactElementCreationObserver(reference),receipt=observer.transformedSources[0];
   assert(receipt.originalJsx?.some(s=>s.source.kind==='fragment'&&s.factoryObserved));
   const fallback=receipt.originalJsx!.find(s=>source.slice(s.source.span.start,s.source.span.end).startsWith('<span {...'))!;
-  assert(fallback);assert.equal(fallback.factoryObserved,false); // createElement fallback is not an authenticated JSX factory.
+  assert(fallback);assert.equal(fallback.factoryObserved,true);
+  // The pinned core React adapter now observes esbuild's createElement fallback.
+  // Verify the exact original JSX link, not only the presence of instrumentation.
+  const fallbackSite=observer.sites.find(site=>JSON.stringify(site.originalJsx)===JSON.stringify(fallback.source));
+  assert.equal(fallbackSite?.factory,'createElement');
+  assert.equal(fallbackSite?.sourceSha256,sha(source));
   const browser=await chromium.launch();t.after(()=>browser.close());const rows=[];
   for(const observed of [false,true]){
     const built=await build({entryPoints:[file],tsconfig:configFile,bundle:true,write:false,format:'iife',jsx:'automatic',define:{'process.env.NODE_ENV':'"development"'},plugins:observed?[{name:'observe',setup(b){b.onLoad({filter:/./},async args=>args.path in files?observer.transform(readFileSync(args.path,'utf8'),args.path,args.path===file?'tsx':'js'):undefined);}}]:[]});
@@ -84,7 +89,11 @@ createRoot(document.getElementById('root')!).render(<App/>);`;
       assert.equal(source.slice(parent.site.originalJsx!.tagSpan!.start,parent.site.originalJsx!.tagSpan!.end),'UI.Leaf');
       assert.equal(parent.invocation?.status,'observed');assert.equal(parent.invocation?.effectsVerified,false);assert.equal(parent.invocation?.acceptedContract,null);
       assert.deepEqual(await page.evaluate(reactOwnershipRead('#selected')),ownership);
-      const unsupported=await page.evaluate<ReactOwnership>(reactOwnershipRead('#fallback'));assert.equal(unsupported.nodes[0].creationSite,undefined);
+      const fallbackOwnership=await page.evaluate<ReactOwnership>(reactOwnershipRead('#fallback'));
+      const fallbackCreation=fallbackOwnership.nodes[0].creationSite;
+      assert.equal(fallbackCreation?.factory,'createElement');
+      assert.equal(fallbackCreation?.sourceSha256,sha(source));
+      assert.deepEqual(fallbackCreation?.originalJsx,fallback.source);
     }finally{await page.close();}
   }
   observer.complete();assert.deepEqual(rows[0],rows[1]);assert(rows[1].metadata.ref&&rows[1].metadata.type&&rows[1].metadata.callback);

@@ -77,6 +77,26 @@ test('missing or refused requested parents and oversized families leave the work
   assert.equal(workspaceSnapshot(), before);
 });
 
+test('package preparation counts reachable dependencies and still refuses an oversized graph atomically', async () => {
+  const { batch, closure } = await load();
+  const extra = Array.from({ length: WORKSPACE_CAP }, (_, i) => {
+    const row = structuredClone(batch.proposals[0]);
+    row.setName = 'Unused' + i;
+    row.contract.id = 'ds.unused-' + i;
+    (row.contract as any).bindings.figma.anchors.nodeId = 'extra:' + i;
+    return row;
+  });
+  const large = { ...batch, proposals: [...batch.proposals, ...extra] };
+  recordFigmaClosure(large, closure, receiptsFor, null, 'figma', 'referenced');
+  assert.deepEqual(workspaceSnapshot().map(entry => entry.name), ['Icon', 'Placeholder']);
+  const before = workspaceSnapshot();
+  const reached = structuredClone(large);
+  const root = (reached.proposals.find(row => row.setName === 'Icon')!.contract as any).anatomy.root;
+  root.parts = { ...root.parts, ...Object.fromEntries(extra.map((row, i) => ['extra' + i, { component: { id: row.contract.id } }])) };
+  assert.throws(() => recordFigmaClosure(reached, closure, receiptsFor, null, 'figma', 'referenced'), /workspace-import-too-large/);
+  assert.equal(workspaceSnapshot(), before);
+});
+
 test('a pasted REST closure preserves the same parent and dependencies in the JSON workspace', async () => {
   const { batch, closure } = await load();
   const saved = recordFigmaClosure(batch, closure, receiptsFor, null, 'json');

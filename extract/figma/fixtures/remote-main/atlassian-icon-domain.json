@@ -1,0 +1,106 @@
+{
+  "setName": "❖ Icon",
+  "type": "COMPONENT_SET",
+  "nodeId": "139061:3660",
+  "key": "4c90e9edb5aba345e52a77e207c361c4ba6a7b47",
+  "remoteSnapshot": {
+    "kind": "remote-set-snapshot",
+    "captureFileKey": "MfQWBskM44sS8VvL41eqPH",
+    "componentKey": "4c90e9edb5aba345e52a77e207c361c4ba6a7b47",
+    "nodeId": "139061:3660",
+    "variants": [
+      {
+        "nodeId": "139061:3661",
+        "componentKey": "ef7768851a009e542dc69007164f4ecf9ed4fa30",
+        "values": {
+          "size": "medium (16px)",
+          "⚠️ spacing (deprecated)": "spacious (24px)"
+        }
+      },
+      {
+        "nodeId": "139061:3662",
+        "componentKey": "ace8f3a947badcccbc5b416bc16729562b592cce",
+        "values": {
+          "size": "small (12px)",
+          "⚠️ spacing (deprecated)": "spacious (24px)"
+        }
+      },
+      {
+        "nodeId": "139061:3663",
+        "componentKey": "d7bd7f69e402c1c5ec4c62b205932ff4e91d0fda",
+        "values": {
+          "size": "small (12px)",
+          "⚠️ spacing (deprecated)": "none"
+        }
+      },
+      {
+        "nodeId": "139061:3664",
+        "componentKey": "69df337a50601659cfdc58c9c2629eb994999b15",
+        "values": {
+          "size": "medium (16px)",
+          "⚠️ spacing (deprecated)": "none"
+        }
+      }
+    ]
+  },
+  "propertyDefinitions": {
+    "size": {
+      "type": "VARIANT",
+      "defaultValue": "medium (16px)",
+      "variantOptions": [
+        "small (12px)",
+        "medium (16px)"
+      ]
+    },
+    "⚠️ spacing (deprecated)": {
+      "type": "VARIANT",
+      "defaultValue": "none",
+      "variantOptions": [
+        "none",
+        "spacious (24px)"
+      ]
+    }
+  },
+  "variants": [
+    {
+      "name": "size=medium (16px), ⚠️ spacing (deprecated)=spacious (24px)",
+      "type": "COMPONENT",
+      "nodeId": "139061:3661",
+      "componentKey": "ef7768851a009e542dc69007164f4ecf9ed4fa30",
+      "variantProperties": {
+        "size": "medium (16px)",
+        "⚠️ spacing (deprecated)": "spacious (24px)"
+      }
+    },
+    {
+      "name": "size=small (12px), ⚠️ spacing (deprecated)=spacious (24px)",
+      "type": "COMPONENT",
+      "nodeId": "139061:3662",
+      "componentKey": "ace8f3a947badcccbc5b416bc16729562b592cce",
+      "variantProperties": {
+        "size": "small (12px)",
+        "⚠️ spacing (deprecated)": "spacious (24px)"
+      }
+    },
+    {
+      "name": "size=small (12px), ⚠️ spacing (deprecated)=none",
+      "type": "COMPONENT",
+      "nodeId": "139061:3663",
+      "componentKey": "d7bd7f69e402c1c5ec4c62b205932ff4e91d0fda",
+      "variantProperties": {
+        "size": "small (12px)",
+        "⚠️ spacing (deprecated)": "none"
+      }
+    },
+    {
+      "name": "size=medium (16px), ⚠️ spacing (deprecated)=none",
+      "type": "COMPONENT",
+      "nodeId": "139061:3664",
+      "componentKey": "69df337a50601659cfdc58c9c2629eb994999b15",
+      "variantProperties": {
+        "size": "medium (16px)",
+        "⚠️ spacing (deprecated)": "none"
+      }
+    }
+  ]
+}

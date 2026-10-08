@@ -9,6 +9,7 @@ import type {ReactSourceProgram} from './react-source-program.js';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
 import {reactOwnershipHook,reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
+import {observeReactRuntimeHelperCandidates} from './react-runtime-helper-candidates.js';
 
 function fixture(t:test.TestContext,source:Record<string,string>,edges:Array<[string,string,string]>=[]){
   const sourceRoot=realpathSync(mkdtempSync(path.join(tmpdir(),'react-runtime-export-')));t.after(()=>rmSync(sourceRoot,{recursive:true,force:true}));
@@ -20,6 +21,42 @@ function fixture(t:test.TestContext,source:Record<string,string>,edges:Array<[st
 }
 const resolved=(r:ReturnType<typeof readReactRuntimeExport>)=>{assert.equal(r.status,'resolved',r.status==='refused'?r.reason:'resolved');if(r.status!=='resolved')throw Error('unreachable');return r;};
 const refusal=(r:ReturnType<typeof readReactRuntimeExport>,reason:string)=>{assert.equal(r.status,'refused');if(r.status==='refused')assert.equal(r.reason,reason);};
+
+test('runtime helper discovery nominates only the exact imported forwardRef body without granting content authority',t=>{
+  const r=fixture(t,{'tsconfig.json':'{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Bundler"}}',
+    'react.mjs':'export const forwardRef=fn=>fn;export const createElement=()=>null;',
+    'public.mjs':`import * as React from 'react';
+const impostor={forwardRef:fn=>fn};function helper(p){return {...p};}
+export const Good=React.forwardRef((props,ref)=>{const {...rest}=helper(props);return React.createElement('span',{...rest,ref});});
+export const Fake=impostor.forwardRef((props,ref)=>{const {...rest}=helper(props);return rest;});
+export const Unrelated=React.forwardRef((props,ref)=>{const {...rest}=helper({});return rest;});`},[['public.mjs','react','react.mjs']]);
+  const reference={...r,cohort:{declared:true,mountedExports:['Good','Fake','Unrelated'].map(name=>({module:'controls',export:name}))},
+    runtimeEntryImports:[{specifier:'controls',file:path.join(r.sourceRoot,'public.mjs')}]};
+  const source=observeReactRuntimeMounts(reference,emptyRuntimeProgram()).program;
+  const result=observeReactRuntimeHelperCandidates(reference,source);
+  assert.equal(source.components[0].helperCandidates,undefined,'input source facts remain unchanged');
+  const good=result.components.find(c=>c.exportName==='Good')!;
+  assert.equal(good.helperCandidates?.length,1);assert.deepEqual(good.wrappers,['forwardRef']);
+  assert.equal(good.implementation,'source-checked');assert.deepEqual(good.root,{kind:'host',name:'span'});assert.equal(good.children.kind,'unresolved');assert.deepEqual(good.props,[]);
+  assert(result.components.filter(c=>c.exportName!=='Good').every(c=>!c.helperCandidates?.length));
+  const missing=observeReactRuntimeHelperCandidates({...reference,runtimeImports:[]},source).components.find(c=>c.exportName==='Good')!;
+  assert.equal(missing.implementation,'unresolved');assert.equal(missing.helperCandidates?.length,1);
+  const forged=structuredClone(source);forged.components[0].span.start++;
+  assert.equal(observeReactRuntimeHelperCandidates(reference,forged).components[0].helperCandidates,undefined);
+  writeFileSync(path.join(r.sourceRoot,'public.mjs'),'export const Good=1;');
+  assert(observeReactRuntimeHelperCandidates(reference,source).components.every(c=>!c.helperCandidates?.length));
+});
+
+test('runtime helper source promotion refuses a mutated export while retaining its candidate',t=>{
+  const r=fixture(t,{'tsconfig.json':'{}','react.mjs':'export const forwardRef=fn=>fn;export const createElement=()=>null;',
+    'public.mjs':`import * as React from 'react';function helper(p){return {...p};}
+export const Good=React.forwardRef((props,ref)=>{const {...rest}=helper(props);return React.createElement('span',{...rest,ref});});
+Good.render=()=>null;`},[['public.mjs','react','react.mjs']]);
+  const reference={...r,cohort:{declared:true,mountedExports:[{module:'controls',export:'Good'}]},runtimeEntryImports:[{specifier:'controls',file:path.join(r.sourceRoot,'public.mjs')}]};
+  const source=observeReactRuntimeMounts(reference,emptyRuntimeProgram()).program;
+  const component=observeReactRuntimeHelperCandidates(reference,source).components[0];
+  assert.equal(component.helperCandidates?.length,1);assert.equal(component.implementation,'unresolved');assert.equal(component.root.kind,'unresolved');
+});
 
 test('follows named namespace imports and renamed exports through witnessed runtime edges',t=>{
   const r=fixture(t,{'entry.mjs':'import * as Controls from "package"; export {Controls as Widgets};','barrel.mjs':'export {Target as Root} from "implementation";','impl.mjs':'var Target = unknownFactory(); export {Target};'},[['entry.mjs','package','barrel.mjs'],['barrel.mjs','implementation','impl.mjs']]);

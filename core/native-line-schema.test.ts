@@ -23,12 +23,18 @@ test('native line branch requires logical zero height, exact length and one geom
 });
 test('exported JSON Schema preserves the preexisting positive-size branch and isolates native zero height',()=>{
  const schema=z.toJSONSchema(ShapeSchema,{target:'draft-7',io:'input'}) as any;
- assert.equal(schema.anyOf.length,2);
- const [ordinary,line]=schema.anyOf;
+ assert.equal(schema.anyOf.length,3);
+ const ordinary=schema.anyOf.find((branch:any)=>branch.properties.kind.enum);
+ const line=schema.anyOf.find((branch:any)=>branch.properties.kind.const==='line');
+ const stroke=schema.anyOf.find((branch:any)=>branch.properties.kind.const==='stroked-path');
  assert.equal(ordinary.properties.width.exclusiveMinimum,0);
  assert.equal(ordinary.properties.height.exclusiveMinimum,0);
  assert.equal(ordinary.properties.kind.enum.includes('line'),false);
  assert.equal(line.properties.kind.const,'line');
  assert.equal(line.properties.height.const,0);
  assert.equal(line.properties.width.exclusiveMinimum,0);
+ assert.equal(stroke.properties.height.const,0);
+ assert.equal(stroke.properties.width.exclusiveMinimum,0);
+ assert(stroke.required.includes('strokePath'),'zero-height strokes require explicit stroke geometry');
+ assert(line.required.includes('line'),'native lines require explicit line geometry');
 });
