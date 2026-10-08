@@ -63,7 +63,7 @@ export const viteEngine: EngineLoader = async () => {
 };
 
 export function figmaToReact(dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
-  options: { packageName?: string; toolchain?: Toolchain } = {}) {
+  options: Parameters<typeof lib.figmaToReact>[5] = {}) {
   return lib.figmaToReact(viteEngine, dumpPath, outDirArg, expectRequest, source, options);
 }
 

@@ -1,3 +1,5 @@
+import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
+export * from './vector-stroke.js';
 import {TextAppearanceOverrideSchema,type TextAppearanceOverride} from './text-appearance.js';
 import {SolidFillSourceBindingsSchema,SolidFillObservedBindingSchema,type SolidFillObservedBinding} from './solid-fill-binding.js';
 import {PRESENCE_STATES,validateStatePresence} from './state-presence.js';
@@ -710,18 +712,20 @@ export const LayoutByCombinationSchema = z.strictObject({
       align: z.enum(['start', 'center', 'end', 'stretch', 'baseline']).optional(),
       grow: z.boolean().optional(),
       growBasis: z.literal('zero').optional(),
+      alignSelf:z.enum(['auto','stretch']).optional(),
     }),
   })).min(1).max(4096),
 }).superRefine((table,ctx)=>{
   const growth = table.rows.every(row => row.layout.grow !== undefined);
+  const stretch = table.rows.every(row=>row.layout.alignSelf!==undefined);
   for (const row of table.rows) {
-    if (growth ? Object.keys(row.layout).some(key => !['grow','growBasis'].includes(key)) ||
+    if (stretch ? Object.keys(row.layout).some(key=>key!=='alignSelf') : growth ? Object.keys(row.layout).some(key => !['grow','growBasis'].includes(key)) ||
         row.layout.growBasis !== undefined && row.layout.grow !== true :
         row.layout.grow !== undefined || row.layout.growBasis !== undefined ||
         row.layout.direction === undefined || row.layout.justify === undefined || row.layout.align === undefined)
       ctx.addIssue({code:'custom',message:'Layout tables must uniformly carry complete container layouts or parent-owned growth.'});
   }
-  if(!growth && table.props.length===1 && table.rows.some(row=>row.layout.reversePaint===undefined))ctx.addIssue({code:"custom",message:"Single-axis layout tables require explicit reversePaint."});
+  if(!growth && !stretch && table.props.length===1 && table.rows.some(row=>row.layout.reversePaint===undefined))ctx.addIssue({code:"custom",message:"Single-axis layout tables require explicit reversePaint."});
 });
 
 /** v10: token bindings driven by an enum prop — the VALUE-level sibling of
@@ -2808,6 +2812,8 @@ export interface Part {
   attrs?: Record<string, string>;
   visibleWhen?: z.infer<typeof VisibleWhenSchema>;
   presenceByCombination?: z.infer<typeof PresenceByCombinationSchema>;
+  /** Exact physical source membership, independent of authored hidden state. */
+  availabilityByCombination?: z.infer<typeof PresenceByCombinationSchema>;
   presenceByState?: z.infer<typeof StatePresenceSchema>;
   /** Optional child-owned Boolean code prop. NONE means no native component
    * property: native references override the marked instance layer directly. */
@@ -2819,6 +2825,8 @@ export interface Part {
   textAppearanceOverride?:TextAppearanceOverride;
   imageOverride?: {prop:string;choices:Record<string,{image:string;size:string;position:string}>};
   /** Optional finite solid-color input on this owned frame or shape. */
+  vectorStrokeByCombination?: z.infer<typeof VectorStrokeTableSchema>;
+  vectorStrokeOverride?: z.infer<typeof VectorStrokeOverrideSchema>;
   shapeFillOverrideProp?: string;
   /** Optional parts render conditionally (code: when the slot prop is
    *  provided; Figma: a "Show X" BOOLEAN controls visibility). */
@@ -3188,6 +3196,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v4, gap G1. */
     visibleWhen: VisibleWhenSchema.optional(),
     presenceByCombination: PresenceByCombinationSchema.optional(),
+    availabilityByCombination: PresenceByCombinationSchema.optional(),
     presenceByState: StatePresenceSchema.optional(),
     visibilityOverrideProp: z.string().min(1).optional(),
     visibilityOverrideDefault: z.boolean().optional(),
@@ -3198,6 +3207,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
       size:z.string().regex(/^(?:cover|contain|(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)% (?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)%)$/),
       position:z.string().regex(/^-?(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)% -?(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)%$/),
     }))}).optional(),
+    vectorStrokeByCombination:VectorStrokeTableSchema.optional(),
+    vectorStrokeOverride:VectorStrokeOverrideSchema.optional(),
     shapeFillOverrideProp: z.string().min(1).optional(),
     optional: z.boolean().optional(),
     /** Nested anatomy. On a component reference, these are caller-owned
@@ -3691,6 +3702,20 @@ export const ContractSchema = z.strictObject({
         if(drawnKeys!==null ? table.rows.length!==drawnKeys.size || table.rows.some(row=>!drawnKeys.has(JSON.stringify(row.values))) : table.rows.length!==domains.reduce((n,d)=>n*d!.length,1))issue('component-argument-domain-incomplete');
       }
     }
+    if(part.vectorStrokeByCombination){
+      const table=part.vectorStrokeByCombination,issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'vectorStrokeByCombination'],message});
+      if(!nested||part.component||part.slot||part.repeat||part.parts||part.shape||part.mask||part.icon||part.text!==undefined||part.content||part.shapeFillOverrideProp||part.presenceByState||!part.availabilityByCombination||c.bindings.figma.drawnVariants===undefined||drawnVariantIssues(c as Contract).length)issue('vector-stroke-requires-owned-closed-source-leaf');
+      const axes=absentVariantAxes(c),domains=table.props.map(name=>axes.find(a=>a.prop.name===name)?.options.map(v=>v===null?null:String(v)));
+      if(domains.some(d=>!d||d.includes(null))||table.rows.some(r=>r.values.some((v,i)=>v===null||!domains[i]?.includes(v))))issue('vector-stroke-axis-value-unqualified');
+      const all=drawnGeometryTupleKeys(c as Contract,table.props),available=all&&new Set([...all].filter(key=>resolveAvailability(part,Object.fromEntries(table.props.map((name,i)=>[name,JSON.parse(key)[i]])))));
+      if(!available||table.rows.length!==available.size||table.rows.some(r=>!available.has(JSON.stringify(r.values))))issue('vector-stroke-source-domain-incomplete');
+      if(part.vectorStrokeOverride){
+        const control=part.vectorStrokeOverride,p=c.props.find(p=>p.name===control.prop),values=p&&typeof p.type==='object'&&'enum'in p.type?p.type.enum:[];
+        if(!p||p.default!==undefined||p.required||p.bindings.figma.kind!=='NONE'||values.length!==Object.keys(control.choices).length||!values.length||values.some(v=>!Object.hasOwn(control.choices,v))||walkAnatomy(c as Contract).filter(w=>w.part.vectorStrokeOverride?.prop===control.prop).length!==1)issue('vector-stroke-requires-unique-optional-finite-input');
+      }
+      const paints=[part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{}),...tokensByPropEntries(part).flatMap(t=>Object.values(t.map)),...(part.literalsByProp??[]).flatMap(t=>Object.values(t.map)),...(part.tokensByCombination??[]).flatMap(t=>t.rows.map(r=>r.tokens)),...(part.literalsByCombination??[]).flatMap(t=>t.rows.map(r=>r.literals)),...(part.stylesWhen??[]).map(r=>r.styles)];
+      if(paints.some(p=>Object.keys(p??{}).some(k=>/^(?:border|outline|background|mask|stroke|fill|box-shadow)/.test(k))))issue('vector-stroke-competing-paint');
+    }else if(part.vectorStrokeOverride)ctx.addIssue({code:'custom',path,message:'vector-stroke-input-without-geometry'});
     const presenceIssuesBefore=ctx.issues.length;
     if (part.shapeFillOverrideProp) {
       const prop=c.props.find(p=>p.name===part.shapeFillOverrideProp);
@@ -3754,6 +3779,20 @@ export const ContractSchema = z.strictObject({
         ctx.addIssue({code:'custom',path:[...path,'visibilityOverrideProp'],message:'visibility-override-display-style-unqualified'});
       if (part.slot || part.repeat)
         ctx.addIssue({code:'custom',path:[...path,'visibilityOverrideProp'],message:'visibility-override-requires-owned-native-node'});
+    }
+    if(part.availabilityByCombination){
+      const table=part.availabilityByCombination,axes=absentVariantAxes(c);
+      const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'availabilityByCombination'],message});
+      if(!nested || !part.visibilityOverrideProp || part.component || part.slot || part.repeat || part.parts || part.presenceByState || c.bindings.code.runtime)
+        issue('structural-availability-requires-owned-visibility-leaf');
+      if(c.bindings.figma.drawnVariants===undefined || drawnVariantIssues(c as Contract).length)
+        issue('structural-availability-requires-valid-drawn-domain');
+      const domains=table.props.map(name=>axes.find(a=>a.prop.name===name)?.options.map(v=>v===null?null:String(v)));
+      if(domains.some(d=>!d || d.includes(null)) || table.rows.some(r=>r.values.some((v,i)=>v===null || !domains[i]?.includes(v))))
+        issue('structural-availability-axis-value-unqualified');
+      const expected=drawnGeometryTupleKeys(c as Contract,table.props);
+      if(expected===null || expected.size!==table.rows.length || table.rows.some(r=>!expected.has(JSON.stringify(r.values))))
+        issue('structural-availability-domain-incomplete');
     }
     if(part.presenceByState){
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'presenceByState'],message});
@@ -4000,6 +4039,31 @@ export function resolvePresence(part: Pick<Part,'presenceByCombination'>, subst:
     (subst[prop]===undefined || subst[prop]===null?null:String(subst[prop]))));
   if(!row)throw Error('presence-combination-unavailable');
   return row.present;
+}
+
+/** Public emitters also receive unparsed objects. Validate this opt-in before
+ * any projected row or native retained-target shortcut supplies permission. */
+export function validateStructuralAvailability(contract: Contract): void {
+  if(!walkAnatomy(contract).some(w=>w.part.availabilityByCombination))return;
+  const parsed=ContractSchema.safeParse(contract);
+  if(!parsed.success)throw Error('STRUCTURAL_AVAILABILITY_INVALID: '+parsed.error.issues.map(i=>i.message).join('; '));
+}
+
+/** Structural absence cannot be bypassed by a caller visibility argument.
+ * Tables are required to cover the independently declared positive domain. */
+export function resolveAvailability(part: Pick<Part,'availabilityByCombination'>, subst: Record<string,unknown>): boolean {
+  const table=part.availabilityByCombination;if(!table)return true;
+  const values=table.props.map(prop=>Object.hasOwn(subst,prop) && subst[prop]!==undefined && subst[prop]!==null ? String(subst[prop]) : null);
+  const row=table.rows.find(row=>row.values.every((value,i)=>value===values[i]));
+  if(!row)throw Error('structural-availability-combination-unavailable');
+  return row.present;
+}
+
+export function assertAvailableVisibilityTarget(part: Part, subst: Record<string,unknown>, supplied: boolean, value: unknown): boolean {
+  const available=resolveAvailability(part,subst);
+  if(supplied && !available)throw Error('structural-availability-target-unavailable');
+  if(supplied && typeof value!=='boolean')throw Error('visibility-override-value-not-boolean');
+  return available;
 }
 
 /** Resolve a captured plane without substituting omission or another axis value. */
@@ -4386,7 +4450,7 @@ export function absentVariantAxes(contract: Contract): AbsentVariantAxis[] {
   // Keep other enum semantics unchanged; the anatomy declaration establishes
   // which NONE-bound inputs have a native per-instance target.
   const paintInputs = new Set(walkAnatomy(contract).flatMap(({part}) =>
-    [part.textColorOverrideProp, part.shapeFillOverrideProp, part.imageOverride?.prop, part.textAppearanceOverride?.prop].filter((name): name is string => name !== undefined)));
+    [part.textColorOverrideProp, part.shapeFillOverrideProp, part.vectorStrokeOverride?.prop, part.imageOverride?.prop, part.textAppearanceOverride?.prop].filter((name): name is string => name !== undefined)));
   return contract.props
     .filter(
       (p) =>

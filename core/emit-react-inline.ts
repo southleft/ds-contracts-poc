@@ -1,3 +1,5 @@
+import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
+import {validateStructuralAvailability} from '../scripts/contract-schema.js';
 import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
 import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
 import {boundFillSvgCss} from '../packages/core/src/instance-fill-composition.js';
@@ -17,7 +19,7 @@ import {INSTANCE_FILL_RESET,instanceFillExpression,rootFillLayerCss,hasBoundPain
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
 import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {solidFillCompositionRules} from '../packages/core/src/css.js';
@@ -237,6 +239,7 @@ export function emitReactInlineDraftPaintQualification(contract: Contract, ctx: 
 }
 
 function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftPaint: boolean): EmitReactInlineResult {
+  validateStructuralAvailability(contract);
   reactMaskChildPaths(contract,ctx.tokens);
   validateReactInitialBindings(contract);
   refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
@@ -1002,7 +1005,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
           : `${codeName} === '${eq}'`;
     return wrapReactPresence(part,`{${cond} ? (${jsx}) : null}`,codePropOf);
     })();
-    return wrapReactVisibilityOverride(part,jsx,fallback,codePropOf);
+    return wrapReactAvailability(part,wrapReactVisibilityOverride(part,jsx,fallback,codePropOf),codePropOf);
   };
 
   // Root and nested attrs share typed native/ARIA projection with the CSS-module emitter.
@@ -1107,6 +1110,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     return bound?`<svg aria-hidden="true" focusable="false" data-dsc-paint-layer="" style={(${cases}undefined)}><rect width="100%" height="100%" /></svg>`:`<span aria-hidden="true" data-dsc-paint-layer="" style={(${cases}undefined)} />`;
   };
   const renderPart = (partName: string, part: Part): string => {
+    if(part.vectorStrokeByCombination)return wrapVisibleWhen(part,reactVectorStroke(part,`style=${styleExpr(partName, false, stylesWhenExprs(part))}`,codePropOf));
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
       `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
@@ -1453,7 +1457,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
  * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
 ${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
@@ -1489,7 +1493,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
 ${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */

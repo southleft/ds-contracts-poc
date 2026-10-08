@@ -1,3 +1,4 @@
+import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {refuseInstanceRootInputTarget} from '../packages/core/src/anatomy.js';
 import {solidFillCompositionRules} from '../packages/core/src/css.js';
 import {hasComponentGrow} from '../scripts/contract-schema.js';
@@ -1513,6 +1514,7 @@ export function emitHtmlDraftPaintQualification(contract: Contract, ctx: EmitCtx
 }
 
 function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitHtmlResult {
+  refuseVectorStrokeSurface(contract,ctx.contracts,'html');
   refuseRetainedRuntime(contract, 'html', ctx.contracts);
   refuseInstanceRootInputTarget(contract,ctx.contracts,'html');
   validateStaticHtmlIdentity(contract, ctx);
@@ -1548,7 +1550,8 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
       if (w.part.textColorOverrideProp) throw new Error('HTML_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
       if (w.part.textAppearanceOverride) throw new Error('HTML_TEXT_APPEARANCE_UNSUPPORTED');
       if (w.part.imageOverride) throw new Error('HTML_IMAGE_OVERRIDE_UNSUPPORTED');
-      if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
+      if (w.part.availabilityByCombination) throw new Error('HTML_STRUCTURAL_AVAILABILITY_UNSUPPORTED');
+    if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
       if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('HTML_INSTANCE_AFFINE_UNSUPPORTED');
       if (w.part.layoutByCombination) throw new Error('HTML_JOINT_LAYOUT_UNSUPPORTED');
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');

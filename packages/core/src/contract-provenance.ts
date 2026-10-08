@@ -143,6 +143,9 @@ function sha256(text: string): string {
   return h.map((n) => n.toString(16).padStart(8, "0")).join("");
 }
 
+/** Exact UTF-8 source bytes, separate from canonical JSON identity. */
+export const sourceBytesRevisionOf = (text: string): string => `sha256:${sha256(text)}`;
+
 export const revisionOf = (value: unknown): string =>
   `sha256:${sha256(canonicalJson(value))}`;
 

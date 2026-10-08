@@ -1,3 +1,5 @@
+import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
+import {validateStructuralAvailability} from '../scripts/contract-schema.js';
 import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
 import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
 import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
@@ -15,7 +17,7 @@ import {instanceFillExpression,hasBoundPaintUsage} from '../packages/core/src/in
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
 import {hasComponentGrow,hasComponentHostPlacement} from '../scripts/contract-schema.js';
@@ -695,7 +697,7 @@ export function generateTsx(
           : `${codeName} === '${eq}'`;
     return wrapReactPresence(part,`{${cond} ? (${jsx}) : null}`,codePropOf);
     })();
-    return wrapReactVisibilityOverride(part,jsx,fallback,codePropOf);
+    return wrapReactAvailability(part,wrapReactVisibilityOverride(part,jsx,fallback,codePropOf),codePropOf);
   };
 
   // Recursive JSX for the anatomy tree.
@@ -718,6 +720,7 @@ export function generateTsx(
         : value && typeof value === 'object' && 'prop' in value ? value.prop : undefined;
       if (typeof parentName === 'string') codePropOf(parentName);
     }
+    if(part.vectorStrokeByCombination)return wrapVisibleWhen(part,reactVectorStroke(part,`className={${stylesRef(partName)}}`,codePropOf));
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
       `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
@@ -903,7 +906,7 @@ export function generateTsx(
  * are position-driven siblings). Each root's class is styles.<rootName>.${mr.omittedNote}
  */
 import type { ${mrTypeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
@@ -956,7 +959,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}
@@ -1303,6 +1306,7 @@ export function emitReactDraftPaintQualification(contract: Contract, ctx: EmitCt
 }
 
 function emitReactImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitReactResult {
+  validateStructuralAvailability(contract);
   validateReactInitialBindings(contract);
   const errors: string[] = [];
   const validationContract=draftPaint?structuredClone(contract):contract;

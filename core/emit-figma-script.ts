@@ -1,3 +1,5 @@
+import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
+import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
 import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME} from './native-text-box.js';
 import {mapNativeTextAppearances,NATIVE_TEXT_APPEARANCE_RUNTIME} from './native-text-appearance.js';
 import type {QualifiedTextAppearance} from './source-text-appearance-control.js';
@@ -4203,11 +4205,12 @@ function mapInstanceShapeFills(dep:Contract,props:NonNullable<ComponentRef['prop
 }
 
 function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>,parent:Contract):Record<string,boolean>|undefined {
+  validateStructuralAvailability(dep);
   const out:Record<string,boolean>={};
   for(const {part} of walkAnatomy(dep)) {
     const name=part.visibilityOverrideProp;if(!name||!Object.hasOwn(props,name))continue;
     const raw=props[name];let value:unknown=raw;
-    if(typeof raw==='object')value=raw.map[subst[raw.prop]??''];
+    if(typeof raw==='object' && raw!==null)value=raw.map[subst[raw.prop]??''];
     else if(typeof raw==='string' && /^\{[\w-]+\}$/.test(raw)) {
       const source=raw.slice(1,-1),prop=parent.props.find(p=>p.name===source);
       if(!prop||prop.bindings.figma.kind!=='VARIANT')throw Error('visibility-override-live-parent-link-unqualified');
@@ -4215,6 +4218,19 @@ function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['prop
     }
     if(value===undefined)continue;
     if(value==='true')value=true;else if(value==='false')value=false;
+    if(part.availabilityByCombination){
+      // Use the same child variant/default selection and full drawn-domain
+      // refusal as ordinary native composition before the projected table.
+      const mapped=mapDepProps(dep,props,subst,undefined,undefined,parent,undefined,true);
+      const childTuple:Record<string,unknown>={};
+      for(const {prop} of absentVariantAxes(dep)){
+        const wired=mapped[prop.bindings.figma.property!];
+        const chosen=orderedVariantValues(prop).find(v=>wired===undefined || axisLabel(prop,v)===String(wired));
+        if(chosen===undefined)throw Error('structural-availability-combination-unavailable');
+        childTuple[prop.name]=chosen===null?null:prop.type==='boolean'?chosen==='true':chosen;
+      }
+      assertAvailableVisibilityTarget(part,childTuple,true,value);
+    }
     if(typeof value!=='boolean')throw Error('visibility-override-value-not-boolean');
     out[dep.id+':'+name]=value;
   }
@@ -4831,6 +4847,7 @@ function variantParts(
     );
   entries.sort((x, y) => Number(positioned(x[1])) - Number(positioned(y[1])));
   return entries.filter(([, p]) => {
+    if (!resolveAvailability(p,subst)) return false;
     if (p.visibilityOverrideProp) return true;
     if(p.presenceByState&&!statePresenceRows(p.presenceByState,subst).get('default'))return false;
     if (!resolvePresence(p,subst)) return false;
@@ -6263,6 +6280,7 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
+  validateStructuralAvailability(contract);
   const insideStrokeErrors=instanceInsideStrokeTokenErrors(contract,byId,input.tokens);if(insideStrokeErrors.length)throw Error(insideStrokeErrors.join('; '));
   if(permit!==boundPaintPermit)for(const {part} of walkAnatomy(contract)){const error=solidFillPartTokenError(part,input.tokens);if(error)throw Error(error);}
   if (walkAnatomy(contract).some(({part})=>part.solidFillComposition || part.solidFillCompositionByCombination)) solidFillCompositionRules(contract,undefined,undefined,byId);
@@ -6282,6 +6300,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
   for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);
   const aliasConflicts = omittedCodeBindingConflicts(contract, contract.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop));
   if (aliasConflicts.length) throw new Error(`FIGMA_UNSET_BINDING_COLLISION: ${aliasConflicts.join(', ')} collides with a prop, slot, event or generated event binding`);
+  refuseVectorStrokeSurface(contract,byId,'figma-script');
   refuseUnresolvableRefs(contract, byId);
   refuseMissingRequiredFacts(contract);
   if (contract.anatomy.root?.slot) {

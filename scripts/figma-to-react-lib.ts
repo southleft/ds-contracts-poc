@@ -29,6 +29,8 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
 import { applyNativeStrokeCapture } from './native-stroke-capture.js';
+import { assertNativeVectorInputPaths, prepareNativeVectorStrokeInput } from './native-vector-stroke-capture.js';
+import type { NativeVectorStrokeCapture } from '../core/source-vector-stroke.js';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
 import { consumerFontManifest, readConsumerFonts } from './design-consumer-fonts.js';
@@ -67,11 +69,15 @@ export async function dumpFromFigmaUrl(url: string, outDirArg: string) {
 }
 
 export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
-  options: { packageName?: string; toolchain?: Toolchain } = {}) {
+  options: { packageName?: string; toolchain?: Toolchain; nativeVectorStrokeCapture?: NativeVectorStrokeCapture } = {}) {
   // The packager runs npm from inside the package directory, so a relative
   // --out (as the preview page shows: ./out) must be anchored here first.
   const outDir = path.resolve(outDirArg);
-  const dump = JSON.parse(readFileSync(dumpPath, 'utf8'));
+  if (options.nativeVectorStrokeCapture) assertNativeVectorInputPaths(outDir, dumpPath, undefined, source);
+  const rawDumpText = readFileSync(dumpPath, 'utf8');
+  const dump = options.nativeVectorStrokeCapture
+    ? prepareNativeVectorStrokeInput(rawDumpText, options.nativeVectorStrokeCapture)
+    : JSON.parse(rawDumpText);
   installSessionStorage();
   const { engine, close } = await loadEngine();
   let imported;
@@ -93,7 +99,8 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const input = parseLibraryRequest(imported.request);
   // The first argument only names buildReactLibrary's default parent; the
   // parent is given here, so no repository path is involved.
-  const library = await buildReactLibrary(outDir, input, path.join(outDir, 'work'), options);
+  const library = await buildReactLibrary(outDir, input, path.join(outDir, 'work'),
+    {...(options.packageName ? {packageName: options.packageName} : {}), ...(options.toolchain ? {toolchain: options.toolchain} : {})});
   const generatedDir = path.join(path.dirname(library.tarball), 'generated');
   if (!existsSync(generatedDir)) throw Error('figma-to-react-generated-missing: ' + generatedDir);
   const tarball = path.join(outDir, path.basename(library.tarball));
@@ -201,13 +208,29 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
     log(`fonts: ${faces.length} face(s) from ${run.fonts} (${[...new Set(faces.map(f => f.family))].join(', ')})`);
   }
   let dumpPath = run.dump!, source: 'json' | 'figma' = 'json';
+  // Read only the new kind before a URL fetch can write <out>/dump.json.
+  const suppliedReceipt = run.nativeStrokes ? JSON.parse(readFileSync(run.nativeStrokes, 'utf8')) : undefined;
+  if (suppliedReceipt?.kind === 'native-vector-stroke-capture')
+    assertNativeVectorInputPaths(run.out, run.dump, run.nativeStrokes);
   if (run.url) {
     const fetched = await dumpFromFigmaUrl(run.url, run.out);
     for (const r of fetched.refusals) error('variables: ' + r);
     dumpPath = path.join(run.out, 'dump.json'); source = 'figma';
   }
+  let nativeVectorStrokeCapture: NativeVectorStrokeCapture | undefined;
   if (run.nativeStrokes) {
-    const receipt=JSON.parse(readFileSync(run.nativeStrokes,'utf8'));
+    const receipt=suppliedReceipt?.kind === 'native-vector-stroke-capture'
+      ? suppliedReceipt : JSON.parse(readFileSync(run.nativeStrokes,'utf8'));
+    if (receipt?.kind === 'native-vector-stroke-capture') {
+      prepareNativeVectorStrokeInput(readFileSync(dumpPath, 'utf8'), receipt);
+      const target = path.join(run.out, 'native-vector-stroke-receipt.json');
+      if ([dumpPath, run.nativeStrokes].some(source => path.resolve(source) === path.resolve(target)))
+        throw Error('native-vector-stroke-supplement-output-conflicts-with-input');
+      nativeVectorStrokeCapture = receipt;
+      mkdirSync(run.out, {recursive: true});
+      writeFileSync(target, JSON.stringify(receipt, null, 2) + '\n');
+      log(`native vector stroke observation: ${receipt.occurrences.length} source-matched occurrence(s); original checker source retained`);
+    } else if (receipt?.kind === 'native-stroke-capture') {
     const enriched=applyNativeStrokeCapture(JSON.parse(readFileSync(dumpPath,'utf8')),receipt);
     const target=path.join(run.out,'native-stroke-dump.json');
     if(path.resolve(target)===path.resolve(dumpPath))throw Error('native-stroke-supplement-output-conflicts-with-source');
@@ -216,9 +239,13 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
     writeFileSync(path.join(run.out,'native-stroke-receipt.json'),JSON.stringify(receipt,null,2)+'\n');
     dumpPath=target;
     log(`native stroke supplement: ${receipt.records.length} source-matched observation(s); provenance retained`);
+    } else if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt) || typeof receipt.kind !== 'string')
+      throw Error('native-stroke-supplement-receipt-invalid');
+    else throw Error('native-stroke-supplement-receipt-kind-unsupported');
   }
   const r = await figmaToReact(deps.loadEngine, dumpPath, run.out, run.expectRequest, source,
-    { ...(run.name ? { packageName: run.name } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}) });
+    { ...(run.name ? { packageName: run.name } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
+      ...(nativeVectorStrokeCapture ? {nativeVectorStrokeCapture} : {}) });
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
   if (r.skipped.length) log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
   log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; about a minute)…`);

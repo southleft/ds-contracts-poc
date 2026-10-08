@@ -525,6 +525,8 @@ export function validateContract(
       const table = part.layoutByCombination;
       const fail = (message: string) => errors.push(`${contract.id}: part "${name}" layoutByCombination ${message}`);
       const growth = table.rows.every(row => row.layout.grow !== undefined);
+      const stretch=table.rows.every(row=>row.layout.alignSelf!==undefined);
+      if(stretch&&table.rows.some(row=>Object.keys(row.layout).some(key=>key!=='alignSelf')))fail('parent-owned stretch cannot restyle a child');
       if (growth && isMultiRoot(contract)) fail('compound growth requires a single-root owner');
       if (growth && table.rows.some(row => Object.keys(row.layout).some(key => !['grow','growBasis'].includes(key)) || row.layout.growBasis !== undefined && row.layout.grow !== true)) fail('parent-owned growth cannot restyle a child or apply zero basis without growth');
       // Parent-owned growth and stretch are independent of internal flow.
@@ -533,9 +535,9 @@ export function validateContract(
       const independentItemLayout = !growth && part.layoutByProp &&
         Object.values(part.layoutByProp.map).every(layout =>
           Object.keys(layout).every(key => key === 'grow' || key === 'growBasis' || key === 'alignSelf'));
-      if ((!growth && part.component) || part.shape || part.layout?.display === 'grid' || (part.layoutByProp && !independentItemLayout))
+      if ((!growth && !stretch && part.component) || part.shape || part.layout?.display === 'grid' || (part.layoutByProp && !independentItemLayout))
         fail('requires an owned flex container without shape, grid, instance, or layoutByProp');
-      if (!growth && (!part.layout || !['flex', 'inline-flex'].includes(part.layout.display ?? 'flex'))) fail('requires a flex base layout');
+      if (!growth && !stretch && (!part.layout || !['flex', 'inline-flex'].includes(part.layout.display ?? 'flex'))) fail('requires a flex base layout');
       if (new Set(table.props).size !== table.props.length) fail('contains duplicate props');
       const domains = table.props.map(key => {
         const prop = contract.props.find(p => p.name === key);
@@ -549,13 +551,13 @@ export function validateContract(
         if (seen.has(key)) fail('duplicate tuple');
         seen.add(key);
       }
-      const visibleDomains = growth ? absoluteGeometryVisibleDomains(table.props, domains, part.visibleWhen) : domains;
-      if (growth && table.rows.some(row => row.values.some((value, i) => !visibleDomains[i]?.includes(value)))) fail('row outside visible domain');
+      const visibleDomains = growth || stretch ? absoluteGeometryVisibleDomains(table.props, domains, part.visibleWhen) : domains;
+      if ((growth || stretch) && table.rows.some(row => row.values.some((value, i) => !visibleDomains[i]?.includes(value)))) fail('row outside visible domain');
       const count = visibleDomains.reduce((n, values) => n * values.length, 1);
-      const sparseGrowth = growth && (contract.bindings.figma.drawnVariants !== undefined ||
+      const sparseGrowth = (growth || stretch) && (contract.bindings.figma.drawnVariants !== undefined ||
         (contract.bindings.figma.absentVariants?.length ?? 0) > 0);
       const gatedLayout = !!(part.presenceByCombination || part.visibleWhen);
-      const drawn = growth
+      const drawn = growth || stretch
         ? sparseGrowth ? reachablePresenceTupleKeys(contract,table.props,part) : null
         : gatedLayout ? reachablePresenceTupleKeys(contract,table.props,part)
           : reachableVariantTupleKeys(contract,table.props);
@@ -594,7 +596,7 @@ export function validateContract(
       if (override.growBasis !== undefined && (override.grow ?? part.layout?.grow) !== true)
         errors.push(`${contract.id}: part "${name}" layoutByProp.${value}.growBasis requires grow: true`);
     }
-    if (part.layout?.alignSelf || Object.values(part.layoutByProp?.map ?? {}).some(value => value.alignSelf)) {
+    if (part.layout?.alignSelf || Object.values(part.layoutByProp?.map ?? {}).some(value => value.alignSelf) || part.layoutByCombination?.rows.some(row=>row.layout.alignSelf)) {
       const parent = p.length > 1
         ? p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]])
         : undefined;
@@ -1686,7 +1688,7 @@ export function validateContract(
       if (Object.keys(p.type.arrayOf).length === 0) {
         errors.push(`${contract.id}: arrayOf prop "${p.name}" must declare at least one field`);
       }
-    } else if (p.bindings.figma.kind === 'NONE' && walkAnatomy(contract).some(w=>w.part.textAppearanceOverride?.prop===p.name || w.part.imageOverride?.prop===p.name || w.part.textColorOverrideProp===p.name || w.part.shapeFillOverrideProp===p.name || p.type === 'boolean' && w.part.visibilityOverrideProp===p.name)) {
+    } else if (p.bindings.figma.kind === 'NONE' && walkAnatomy(contract).some(w=>w.part.textAppearanceOverride?.prop===p.name || w.part.imageOverride?.prop===p.name || w.part.textColorOverrideProp===p.name || w.part.shapeFillOverrideProp===p.name || w.part.vectorStrokeOverride?.prop===p.name || p.type === 'boolean' && w.part.visibilityOverrideProp===p.name)) {
       // Explicit child-owned node control; no shared native component property.
     } else if (p.bindings.figma.kind === 'NONE' && p.type !== 'text') {
       errors.push(`${contract.id}: prop "${p.name}" binds figma kind "NONE" but is neither an arrayOf prop nor a text prop — every other scalar prop has a canvas manifestation`);

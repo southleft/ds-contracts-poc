@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "recordedAtUtc": "2026-10-08T11:11:53.521399+00:00",
+  "platform": "darwin",
+  "nodeVersion": "20.19.4",
+  "recordingActualExitCode": 0,
+  "recordingActualLogSha256": "355107804fdce4da0204d391aaa2a8941f0925cf415253807e236dbc092f69dd",
+  "previousRecordingRoot": "recipe/evidence/canvas-to-code-held-out-current-delivery-paint-2026-10-07",
+  "currentRecordingRoot": "recipe/evidence/canvas-to-code-held-out-current-delivery-vector-2026-10-08",
+  "cohortArtifactFiles": 236,
+  "cohortChanges": [
+    "designer/cbds-checkbox/proposal.json.gz",
+    "designer/results.json"
+  ],
+  "checkboxNotes": {
+    "oldCount": 66,
+    "newCount": 82,
+    "insertedCount": 16,
+    "insertedText": "Checkbox:root: synthetic wrapper \"Content top\" has neutral padding; no captured padding or padding binding copied from another plane",
+    "allOldNotesPreservedInOrder": true,
+    "emittedContractAndRenderLedgerUnchanged": true
+  },
+  "counts": {
+    "scratch": {
+      "subjects": 1,
+      "accounted": 1,
+      "refused": 0,
+      "mounted": 4
+    },
+    "designer": {
+      "subjects": 24,
+      "accounted": 11,
+      "refused": 13,
+      "mounted": 198
+    }
+  },
+  "allTwelveBaseRenderLedgersByteIdentical": true,
+  "historicalLinuxOverlay": [
+    {
+      "path": "designer/altitude-textarea/render-ledger.json.gz",
+      "sha256": "d58cd42f86a3a44763461cec2bb987771324f4f343a9d91e2e5aed5d6de42e78",
+      "bytes": 13492,
+      "originalRecordingCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e",
+      "freshLinuxMeasurement": false,
+      "unchangedBaseRenderLedgerSha256": "64d2ddb0236b61fd01e42cd82e66ef945a3fac8d415406d1634e9f2a7bfe1853",
+      "renderInputFilesCompared": 17,
+      "originalPlatformTypographyRows": 6
+    },
+    {
+      "path": "designer/cbds-checkbox/render-ledger.json.gz",
+      "sha256": "198cdd678cce6ec5b03192682ca3286d2b2de9d0dd63948fab1db08b093bf36a",
+      "bytes": 14177,
+      "originalRecordingCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e",
+      "freshLinuxMeasurement": false,
+      "unchangedBaseRenderLedgerSha256": "1858cd9c24a847ac3bfb7e951a800fff0256ee47eda423bfee3bb13f2654234e",
+      "renderInputFilesCompared": 21,
+      "originalPlatformTypographyRows": 20
+    },
+    {
+      "path": "designer/cbds-radio/render-ledger.json.gz",
+      "sha256": "96e9a38008f5875c0feed4d53c60df7e6681e55dd1019131f1c31a9bfcb54d07",
+      "bytes": 14645,
+      "originalRecordingCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e",
+      "freshLinuxMeasurement": false,
+      "unchangedBaseRenderLedgerSha256": "e8cba15b72785500af556563cd37de06d1abefaa8bcccf98efee1adc15f59b87",
+      "renderInputFilesCompared": 25,
+      "originalPlatformTypographyRows": 4
+    },
+    {
+      "path": "scratch/scratch-card/render-ledger.json.gz",
+      "sha256": "807db4b968d3b3f9129dc9d7a97b9d75cbabf246c571bf30e1273280c7174bff",
+      "bytes": 9343,
+      "originalRecordingCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e",
+      "freshLinuxMeasurement": false,
+      "unchangedBaseRenderLedgerSha256": "dae32c397570344a89f7f8f1aa7e3f5db54d78532aa241065b4b790f21860af4",
+      "renderInputFilesCompared": 12,
+      "originalPlatformTypographyRows": 4
+    }
+  ],
+  "unchangedRenderSourceFiles": [
+    {
+      "path": "recipe/canvas-to-code.ts",
+      "sha256": "5000cc4d3fd6e30e590ebd56072611de5fd72a5a7cfaa74ab4f42d8b82d43d50",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/canvas-facts.ts",
+      "sha256": "1998b0d43f45b7ae5c8fcd9b710a93aeb901532c45a7151cbcae6617d05fa4cd",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/canvas-facts-to-dump.ts",
+      "sha256": "0374fb7d082877464dfa1a29d60ffccd56c088a96f723823c9eb8ef9722ddbf8",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/scene-readback.ts",
+      "sha256": "3fbf3f5e178384d2112af38d8f633746bbddb65bfebb8f533c90f7e8fdff619b",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/canvas-to-code-held-out.ts",
+      "sha256": "ced6d7d7a2eb3b4c5053d3ece0a5aaba7ade8718fa9731e9a57a3a96d689eb74",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/canvas-to-code-held-out-v2.ts",
+      "sha256": "f429fb9875a8250ede5a1172698fd8385f561b31f39d2fce1f5be79a43da5c6f",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/canvas-to-code-held-out-v2-manifest.ts",
+      "sha256": "b21ed07565b93a067edcec5e9d945f4a5444a89d83854a1029df1a61a2a95c4e",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/normalize.ts",
+      "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "recipe/portable-gzip.ts",
+      "sha256": "dd92bfc8d0872fd8a21af247eb96d5ea88d6ed27023f802318dc88fcf0c6fa88",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "extract/figma/visual-parity/render.ts",
+      "sha256": "db9ef0434e2b0f00bf22012c63d1dc29efa9f3f6f0387a38ccd8374af048cc9d",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "scripts/generate-components.ts",
+      "sha256": "e9aded53598ae8dd46036276a90a13faa95ffc1bd1a6a60fe5bb878bfa674d82",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "28c140838942da27ede247df73e6323adabc26b3d46d10f18c29f7c939e541a0",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    },
+    {
+      "path": "core/interaction-state-axis.ts",
+      "sha256": "04c6877e09222c76cbec74d616bcaf361da5a08306ae41b30417e99467802231",
+      "referenceCommit": "fcab8ee69e8c7b612d2acb0d4ca460f1938f597e"
+    }
+  ],
+  "recorderChange": "Only CURRENT_HELD_OUT_ROOT advances after recording; recorder and scorer logic remain unchanged.",
+  "qualification": "Computed-style accounting only, not visual or product qualification. The Linux overlay is historical reuse with exact source/artifact joins; actual current Linux replay remains required in CI. Old installed browser/resource bytes were not recorded, so historical runtime-byte equivalence is not claimed."
+}

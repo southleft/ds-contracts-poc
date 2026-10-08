@@ -556,6 +556,21 @@ reg("layout", "observed-presence", [
   "componentRef.sameInkInsideStroke.rows.stroke.cap", "componentRef.sameInkInsideStroke.rows.stroke.join",
   "componentRef.sameInkInsideStroke.rows.stroke.miterLimit",
 ]);
+reg("shape", "witnessed-vector-strokes", [
+  "part.vectorStrokeByCombination",
+  "part.vectorStrokeByCombination.props",
+  "part.vectorStrokeByCombination.rows",
+  "part.vectorStrokeOverride",
+  "part.vectorStrokeOverride.prop",
+  "part.vectorStrokeOverride.choices",
+]);
+reg("layout", "structural-availability", [
+  "part.availabilityByCombination",
+  "part.availabilityByCombination.props",
+  "part.availabilityByCombination.rows",
+  "part.availabilityByCombination.rows.values",
+  "part.availabilityByCombination.rows.present",
+]);
 reg("layout", "captured-absolute-geometry", [
   "part.absoluteGeometry",
   "part.absoluteGeometry.box",
@@ -619,6 +634,7 @@ reg("layout", "layout-by-prop", [
   "part.layoutByCombination.rows.layout.direction",
   "part.layoutByCombination.rows.layout.justify",
   "part.layoutByCombination.rows.layout.align",
+  "part.layoutByCombination.rows.layout.alignSelf",
   "part.layoutByCombination.rows.layout.grow",
   "part.layoutByCombination.rows.layout.growBasis",
   "part.layoutByCombination.rows.layout.reversePaint",

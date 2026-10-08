@@ -15,3 +15,13 @@ export function wrapReactVisibilityOverride(part:Part,shown:string,fallback:stri
   if(part.visibilityOverrideDefault!==undefined)fallback=part.visibilityOverrideDefault?shown:"";
   return `{${prop} === undefined ? (<>${fallback}</>) : ${prop} ? (<>${shown}</>) : null}`;
 }
+
+/** Evaluate physical membership before the visibility override, including
+ * explicit false: neither Boolean argument targets a source-absent node. */
+export function wrapReactAvailability(part:Part,jsx:string,codePropOf:(name:string)=>string):string {
+  const table=part.availabilityByCombination;if(!table)return jsx;
+  const values=table.props.map(p=>`(${codePropOf(p)} == null ? null : String(${codePropOf(p)}))`);
+  const control=codePropOf(part.visibilityOverrideProp!);
+  const condition=`((table: {values: (string | null)[]; present: boolean}[], values: (string | null)[], control: unknown) => { const row = table.find(r => r.values.every((v,i) => v === values[i])); if (!row) throw new globalThis.Error('structural-availability-combination-unavailable'); if (control !== undefined && !row.present) throw new globalThis.Error('structural-availability-target-unavailable'); if (control !== undefined && typeof control !== 'boolean') throw new globalThis.Error('visibility-override-value-not-boolean'); return row.present; })(${JSON.stringify(table.rows)}, [${values.join(', ')}], ${control})`;
+  return `{${condition} ? (<>${jsx}</>) : null}`;
+}
