@@ -1,0 +1,32 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/selected-false-size-large-state-default-error-false.contract.json (ds.selected-false-size-large-state-default-error-false v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.size-large {
+  width: var(--imported-stub-selected-false-size-large-state-default-error-false-root-width-large);
+  height: var(
+    --imported-stub-selected-false-size-large-state-default-error-false-root-height-large
+  );
+}
+
+.size-small {
+  width: var(--imported-stub-selected-false-size-large-state-default-error-false-root-width-small);
+  height: var(
+    --imported-stub-selected-false-size-large-state-default-error-false-root-height-small
+  );
+}

@@ -1,3 +1,4 @@
+import {refuseVectorStrokeSurface} from '@ds-contracts/schema';
 import {childPaintOrderPlans} from '@ds-contracts/core';
 import {refuseInstanceRootInputTarget} from '../../core/src/anatomy.js';
 import {hasComponentGrow} from '@ds-contracts/schema';
@@ -1705,6 +1706,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
       if (w.part.textColorOverrideProp) throw new Error('WEB_COMPONENT_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
       if (w.part.textAppearanceOverride) throw new Error('WEB_COMPONENT_TEXT_APPEARANCE_UNSUPPORTED');
       if (w.part.imageOverride) throw new Error('WEB_COMPONENT_IMAGE_OVERRIDE_UNSUPPORTED');
+      if (w.part.availabilityByCombination) throw new Error('WEB_COMPONENT_STRUCTURAL_AVAILABILITY_UNSUPPORTED');
       if (w.part.visibilityOverrideProp) throw new Error('WEB_COMPONENT_VISIBILITY_OVERRIDE_UNSUPPORTED');
       if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('WEB_COMPONENT_INSTANCE_AFFINE_UNSUPPORTED');
       if (w.part.layoutByCombination) throw new Error('WEB_COMPONENT_JOINT_LAYOUT_UNSUPPORTED');
@@ -1722,6 +1724,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   };
   for(const {part} of walkAnatomy(contract))if(part.solidFillComposition || part.solidFillCompositionByCombination)throw new Error("WEB_COMPONENT_SOLID_FILL_COMPOSITION_UNQUALIFIED");
   refuseMapped(contract);
+  refuseVectorStrokeSurface(contract,ctx.contracts,'web-components');
   refuseRetainedRuntime(contract, 'web-components', ctx.contracts);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);

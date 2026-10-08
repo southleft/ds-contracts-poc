@@ -338,3 +338,99 @@ test('native slots retain multiple keyed default instances and explicit replacem
   }
  }finally{await page.close();}}}finally{await browser.close();}
 });
+
+function ownedFrameVisibilityFixture() {
+ const f=fixture(),wrapper=structuredClone(f.set.variants[1].children![0]);
+ delete f.child.anatomy.root.parts;f.child.anatomy.root.text='DRAWING';
+ f.set.propertyDefinitions={Active:{type:'VARIANT',defaultValue:'False',variantOptions:['False','True']},Icon:{type:'INSTANCE_SWAP',defaultValue:'50:1'}};
+ f.set.variants=['False','True'].map(active=>({name:`Active=${active}`,type:'COMPONENT',variantProperties:{Active:active},layout:structuredClone(f.set.variants[0].layout),children:[{...structuredClone(wrapper),...(active==='False'?{hidden:true}:{})}]}));
+ const read=(hiddenCaptured=true,projectionMode:'exact'|'reviewable-inversion'='exact',mintUnbound=true,stampsObservable=false)=>{
+  const result=proposeFromDump(f.set,{corpus,mintUnbound,hiddenCaptured,stampsObservable,fileKey:'fixture',projectionMode,contractIdByName:new Map([['Mark',f.child.id]]),contractIdByKey:new Map([['mark-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});
+  const contract=ContractSchema.parse(result.contract),part=walkAnatomy(contract).find(p=>p.part.slot)!.part;
+  return {result,contract,part,scope:new Map([[contract.id,contract],[f.child.id,f.child]])};
+ };
+ return {...f,read};
+}
+
+test('owned FRAME slot carries captured host visibility separately from default-child ownership',()=>{
+ const f=ownedFrameVisibilityFixture(),before=JSON.stringify({set:f.set,child:f.child});
+ for(const mode of ['exact','reviewable-inversion'] as const)for(const minted of [false,true]){
+  const {contract,part,scope,result}=f.read(true,mode,minted),errors:string[]=[];
+  assert.deepEqual(part.visibleWhen,{prop:'active'});assert.equal(contract.props.find(p=>p.name==='active')!.default,false);
+  assert.equal(part.slot?.renderDefault,true);assert.equal(part.slot?.defaultContent?.[0].id,f.child.id);
+  assert.equal(Object.values(part.parts??{})[0]?.visibleWhen,undefined,'the child is present on both host planes');
+  validateContract(contract,scope,errors,new Map());assert.deepEqual(errors,[]);
+  assert(result.notes.some(note=>note.includes('hidden exactly where "Active" is false')));
+ }
+ assert.equal(JSON.stringify({set:f.set,child:f.child}),before,'neither source nor shared main is rewritten');
+});
+
+test('owned FRAME slot gates default and explicit caller content in both React surfaces',()=>{
+ const f=ownedFrameVisibilityFixture(),{contract,scope,result,part}=f.read(),tokens={primitives:{mark:{size:{$type:'dimension',$value:'24px'}},...result.mintedTokens?.tree},semantic:{},light:{},dark:{},brands:{default:{}}};
+ for(const tsx of [generateTsx(contract,scope,new Map()),emitReactInline(contract,{contracts:scope,icons:new Map(),tokens}).tsx]){
+  const mod={exports:{} as {Holder:ComponentType<{active?:boolean;children?:ReactNode}>}};
+  vm.runInNewContext(transformSync(tsx,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module:mod,exports:mod.exports,require:(id:string)=>id.endsWith('.css')?{}:id.endsWith('/Mark')||id==='./Mark'?{Mark:()=>createElement('span',null,'DRAWING')}:require(id)});
+  const render=(active?:boolean,children?:ReactNode)=>renderToStaticMarkup(createElement(mod.exports.Holder,{active,children}));
+  assert.doesNotMatch(render(),/DRAWING/,'omitted caller Boolean preserves the false source default');
+  assert.doesNotMatch(render(false),/DRAWING/);assert.match(render(true),/DRAWING/);
+  assert.doesNotMatch(render(false,'REPLACEMENT'),/REPLACEMENT|DRAWING/,'the source-owned host also hides explicit caller content');
+  assert.match(render(true,'REPLACEMENT'),/REPLACEMENT/);assert.doesNotMatch(render(true,'REPLACEMENT'),/DRAWING/);
+  for(const empty of [null,false,'',createElement(Fragment,null)])assert.doesNotMatch(render(true,empty),/DRAWING/,'explicit caller emptiness cannot invoke the default');
+ }
+ assert.equal(part.slot?.collapseWhenEmpty,undefined,'an independently allocated FRAME remains a framed slot');
+});
+
+test('owned FRAME slot visibility reaches native and HTML snapshots with the same typed false default',()=>{
+ const f=ownedFrameVisibilityFixture(),{contract,scope,result}=f.read(),tokens={primitives:{mark:{size:{$type:'dimension',$value:'24px'}},...result.mintedTokens?.tree},semantic:{},light:{},dark:{},brands:{default:{}}};
+ const data=createFigmaEngine({tokens,icons:new Map()}).compileComponentData(contract,scope);
+ assert.equal(data.variants.length,2);
+ for(const variant of data.variants){
+  assert.equal(variant.spec.children?.length??0,variant.name==='Active=True'?1:0,variant.name);
+  if(variant.name==='Active=True'){const slot=variant.spec.children![0];assert.equal(slot.type,'slot');assert.equal(slot.fixedWidth?.px,16);assert.equal(slot.fixedHeight?.px,16);assert.equal((slot.children?.length??0)+(slot.slotDefault?.length??0),1);assert.equal(slot.slotDefault?.[0].contractId,f.child.id);}
+ }
+ const html=emitHtml(contract,{contracts:scope,icons:new Map(),tokens:new Set(['mark.size'])}).html;
+ const snapshots=html.split('<div class="showcase__item">').slice(1);
+ assert.equal(snapshots.length,2);assert.doesNotMatch(snapshots[0],/DRAWING/);assert.match(snapshots[1],/DRAWING/);
+});
+
+test('owned FRAME slot preserves explicit visibility authority and requires captured hidden evidence',()=>{
+ const unobserved=ownedFrameVisibilityFixture();assert.equal(unobserved.read(false).part.visibleWhen,undefined);
+ for(const [property,optional]of [['Live owner',false],['Show Icon',true]] as const){
+  const f=ownedFrameVisibilityFixture();f.set.propertyDefinitions![property]={type:'BOOLEAN',defaultValue:true};
+  for(const variant of f.set.variants)variant.children![0].propRefs={visible:property};
+  const {part,result}=f.read();
+  if(optional){assert.equal(part.optional,true);assert.equal(part.visibleWhen,undefined);}else assert.deepEqual(part.visibleWhen,{prop:'liveOwner'});
+  assert(!result.notes.some(note=>note.includes('hidden exactly where "Active" is false')),'captured hidden facts cannot override an explicit source reference');
+ }
+ const foreign=ownedFrameVisibilityFixture();foreign.set.propertyDefinitions!.Icon.defaultValue='foreign:1';
+ const {part}=foreign.read();assert.deepEqual(part.visibleWhen,{prop:'active'});assert.equal(part.slot?.renderDefault,undefined);assert.equal(part.parts,undefined,'visibility evidence cannot fabricate a linked default child');
+});
+
+test('owned FRAME slot folds structural and hidden gates while leaving default absence independent',()=>{
+ const f=ownedFrameVisibilityFixture(),wrapper=structuredClone(f.set.variants[1].children![0]);
+ f.set.propertyDefinitions!.Mode={type:'VARIANT',defaultValue:'Shown',variantOptions:['Shown','Hidden']};
+ f.set.propertyDefinitions!.Selected={type:'VARIANT',defaultValue:'Off',variantOptions:['Off','On']};
+ f.set.variants=['Shown','Hidden'].flatMap(mode=>['False','True'].flatMap(active=>['Off','On'].map(selected=>({name:`Mode=${mode}, Active=${active}, Selected=${selected}`,type:'COMPONENT',variantProperties:{Mode:mode,Active:active,Selected:selected},layout:structuredClone(f.set.variants[0].layout),children:mode==='Hidden'?[]:[{...structuredClone(wrapper),...(active==='False'?{hidden:true}:{}),children:selected==='Off'?[]:structuredClone(wrapper.children)}]}))));
+ const {contract,part,scope,result}=f.read();
+ assert.deepEqual(part.visibleWhen,{prop:'mode',equals:'shown'});assert(part.presenceByCombination,'existing guarded carrier folds the structural and own hidden facts');
+ assert.deepEqual(Object.values(part.parts!)[0].visibleWhen,{prop:'selected',equals:'on'});
+ const data=createFigmaEngine({tokens:{primitives:{mark:{size:{$type:'dimension',$value:'24px'}},...result.mintedTokens?.tree},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(contract,scope);
+ assert.equal(data.variants.length,8);
+ for(const variant of data.variants){const visible=variant.name.includes('Mode=Shown')&&variant.name.includes('Active=True');assert.equal(variant.spec.children?.length??0,visible?1:0,variant.name);if(visible)assert.equal(variant.spec.children![0].children?.length??0,variant.name.includes('Selected=On')?1:0,variant.name);}
+});
+
+test('owned FRAME slot preserves sparse source omissions and rejects conflicting or unknown full tuples',()=>{
+ const f=ownedFrameVisibilityFixture(),original=f.set.variants;
+ f.set.propertyDefinitions!.Disabled={type:'VARIANT',defaultValue:'False',variantOptions:['False','True']};
+ f.set.propertyDefinitions!.Borderless={type:'VARIANT',defaultValue:'False',variantOptions:['False','True']};
+ f.set.variants=['False','True'].flatMap(borderless=>original.flatMap(v=>['False','True'].filter(disabled=>!(v.variantProperties!.Active==='True'&&disabled==='True')).map(disabled=>({...structuredClone(v),name:`${v.name}, Disabled=${disabled}, Borderless=${borderless}`,variantProperties:{...v.variantProperties,Disabled:disabled,Borderless:borderless}}))));
+ assert.throws(()=>f.read(),/Source matrix has 6 rows; Cartesian definitions require 8/,'unobserved stamp authority retains its ragged-source refusal');
+ const {contract,part,scope,result}=f.read(true,'exact',true,true);assert.deepEqual(part.visibleWhen,{prop:'active'});assert.equal(contract.bindings.figma.absentVariants?.length,2);
+ const data=createFigmaEngine({tokens:{primitives:{mark:{size:{$type:'dimension',$value:'24px'}},...result.mintedTokens?.tree},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(contract,scope);
+ assert.equal(data.variants.length,6,'the native canvas must not gain either undrawn full tuple');
+ assert(!data.variants.some(v=>v.name.includes('Active=True')&&v.name.includes('Disabled=True')));
+ const duplicate=ownedFrameVisibilityFixture(),extra=structuredClone(duplicate.set.variants[0]);delete extra.children![0].hidden;duplicate.set.variants.push(extra);
+ assert.throws(()=>duplicate.read(),/duplicates tuple/,'two contradictory occurrences cannot self-authorize a gate');
+ const unknown=ownedFrameVisibilityFixture();unknown.set.variants[1].name='Active=Unknown';unknown.set.variants[1].variantProperties={Active:'Unknown'};
+ assert.throws(()=>unknown.read(),/source row 1 has invalid values for: "Active"/,'undeclared full-axis values must remain source refusals');
+});

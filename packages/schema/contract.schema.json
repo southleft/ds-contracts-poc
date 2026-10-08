@@ -3662,6 +3662,13 @@
                       "growBasis": {
                         "type": "string",
                         "const": "zero"
+                      },
+                      "alignSelf": {
+                        "type": "string",
+                        "enum": [
+                          "auto",
+                          "stretch"
+                        ]
                       }
                     },
                     "additionalProperties": false
@@ -6183,6 +6190,52 @@
           ],
           "additionalProperties": false
         },
+        "availabilityByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "present": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "values",
+                  "present"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "presenceByState": {
           "type": "object",
           "properties": {
@@ -6530,6 +6583,246 @@
                   "image",
                   "size",
                   "position"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "choices"
+          ],
+          "additionalProperties": false
+        },
+        "vectorStrokeByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "minItems": 0,
+                    "maxItems": 4096,
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "stroke": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 65536
+                          },
+                          "width": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "maximum": 1000000
+                          },
+                          "height": {
+                            "type": "number",
+                            "const": 0
+                          },
+                          "cap": {
+                            "type": "string",
+                            "const": "NONE"
+                          },
+                          "join": {
+                            "type": "string",
+                            "const": "MITER"
+                          },
+                          "miterLimit": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 1000
+                          },
+                          "weight": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "maximum": 1000000
+                          },
+                          "color": {
+                            "type": "object",
+                            "properties": {
+                              "r": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              "g": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              "b": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              }
+                            },
+                            "required": [
+                              "r",
+                              "g",
+                              "b"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "opacity": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          }
+                        },
+                        "required": [
+                          "data",
+                          "width",
+                          "height",
+                          "cap",
+                          "join",
+                          "miterLimit",
+                          "weight",
+                          "color",
+                          "opacity"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "refusal": {
+                    "type": "string",
+                    "enum": [
+                      "vector-stroke-dashed-unqualified",
+                      "vector-stroke-vertical-unqualified"
+                    ]
+                  }
+                },
+                "required": [
+                  "values",
+                  "stroke"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
+        "vectorStrokeOverride": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string",
+              "minLength": 1
+            },
+            "choices": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "minLength": 1
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 65536
+                  },
+                  "width": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 1000000
+                  },
+                  "height": {
+                    "type": "number",
+                    "const": 0
+                  },
+                  "cap": {
+                    "type": "string",
+                    "const": "NONE"
+                  },
+                  "join": {
+                    "type": "string",
+                    "const": "MITER"
+                  },
+                  "miterLimit": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 1000
+                  },
+                  "weight": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 1000000
+                  },
+                  "color": {
+                    "type": "object",
+                    "properties": {
+                      "r": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "g": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "b": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "r",
+                      "g",
+                      "b"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "data",
+                  "width",
+                  "height",
+                  "cap",
+                  "join",
+                  "miterLimit",
+                  "weight",
+                  "color",
+                  "opacity"
                 ],
                 "additionalProperties": false
               }

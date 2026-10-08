@@ -1,3 +1,6 @@
+import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
+import {qualifyDirectPartAvailability} from './source-part-availability.js';
+import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
 import {sourceImageInput,type SourceImageInput,type SourceImageBinding} from './source-image-input.js';
@@ -1407,8 +1410,9 @@ const siblingKeys = (children: DumpNode[], semanticNames: ReadonlySet<string> = 
  *  W's members by name+type, synthesize W around the matched flats in those
  *  variants so the union folds them into ONE part. The synthetic wrapper
  *  keeps the first REAL W occurrence's structural channels, excluding its
- *  captured box, fixed dimensions and dimension bindings. Those sizes were
- *  never observed on the flat plane; the fold is ledgered per variant.
+ *  captured box, fixed dimensions and dimension bindings; its padding is
+ *  neutral rather than copied from another plane. Those channels were never
+ *  observed on the flat plane; the fold is ledgered per variant.
  *  Its children are the variant's REAL flat
  *  nodes, so every leaf channel stays observed. No-op when every variant
  *  nests identically. Deterministic: candidates and folds walk in occurrence
@@ -1503,10 +1507,17 @@ function foldWrapperUnion(
       // constrain the flat members. Keep real planes' sizes independent.
       delete synthetic.fixedSize;
       delete synthetic.bbox;
+      // A synthetic holder owns no source padding. Neutral allocation keeps
+      // each flat plane's real parent padding on that parent; the real wrapper
+      // planes retain their own captured values through the existing classifier.
+      if (synthetic.layout) synthetic.layout = {...synthetic.layout, padding: [0, 0, 0, 0]};
       if (synthetic.bound) {
         synthetic.bound = {...synthetic.bound};
         delete synthetic.bound.width; delete synthetic.bound.height;
+        for (const field of ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'])
+          delete synthetic.bound[field];
       }
+      notes.push(`${where}: synthetic wrapper "${wName}" has neutral padding; no captured padding or padding binding copied from another plane`);
       const rest = kids.filter((c) => !matched.includes(c));
       rest.splice(Math.min(at, rest.length), 0, synthetic);
       childrenOf.set(o, rest);
@@ -1888,6 +1899,7 @@ export interface FigmaProposalResult {
   imageBindings?:SourceImageBinding[];
   textAppearanceBindings?:SourceTextAppearanceBinding[];
   textColorBindings?:TextColorBinding[];
+  vectorStrokeBindings?:VectorStrokeBinding[];
   shapeFillBindings?:ShapeFillBinding[];
   /** Internal source-owner proof; does not qualify public schema/promotion. */
   draftPaintQualification?: {sourceOccurrences:number;partOwners:number;publicPartAccepted:boolean;sourceBindings?:Array<{owner:string;nodeName:string;variantName:string;binding:ReturnType<typeof qualifySolidFillColorBinding>}>};
@@ -2456,10 +2468,15 @@ interface MintCapture {
    *  linked child's own minted values. Filled like every other mint target
    *  after classification; a target that stays empty (every channel
    *  refused, each refusal named) attaches nothing. */
-  refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string>; property?: 'rootOverrides' }>;
+  refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string>; property?: 'rootOverrides'; fixedSwapDimensions?: string }>;
 }
 
 interface Ctx {
+  structuralAvailabilitySource?: DumpSet;
+  guardedDrawnPartDomain?: boolean;
+  fixedSwapOwnerRoots?: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]>;
+  fixedSwapRootAllocationFiltered?: boolean;
+  fixedSwapRootInputUses?: Array<{merged:Merged;property:string;ownerSetKey:string;targetId:string;targetKey:string;component:Record<string,unknown>;target:Record<string,string>;values:Array<{width:number;height:number}>;where:string}>;
   /** Original non-scalar applied keys retained before private sanitation. */
   repeatNonScalarApplied?: WeakMap<DumpNode, ReadonlySet<string>>;
   nestedPropertyNodeIds?:ReadonlySet<string>;
@@ -2577,6 +2594,9 @@ interface Ctx {
   textAppearanceAuthored?:Array<{prop:string;input:SourceTextAppearanceInput}>;
   imageAuthored?:Array<{prop:string;input:SourceImageInput}>;
   textColorNodes?:Map<string,TextColorDemand[]>;
+  vectorStrokeCapture?:QualifiedVectorStrokeCapture;
+  vectorStrokeAuthored:Array<{prop:string;owners:any[];choices:Record<string,import('../scripts/contract-schema.js').VectorStroke>}>;
+  vectorStrokeBindingsByContract?:ReadonlyMap<string,readonly VectorStrokeBinding[]>;
   shapeFillNodes?:Map<string,ShapeFillDemand[]>;
   textColorAuthored?:Array<{prop:string;demands:TextColorDemand[]}>;
   shapeFillAuthored?:Array<{prop:string;demands:ShapeFillDemand[]}>;
@@ -11685,7 +11705,43 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     ctx.notes.push(`${where}: selected caller content preserves observed absence corroborated by keyed child props and the linked source presence gate; arbitrary explicit slot replacements remain independent`);
   }
   const drawn=sizes.map((row,index)=>({row,index})).filter(({index})=>!hidden[index]);
-  if (ctx.mint && drawn.length && target.data.anatomy.root?.overridable?.includes('size') && drawn.every(({row}) => row &&
+  let rectangularCarried = false;
+  // The scalable square receiver remains unchanged. Rectangles require a
+  // separate original descendant/root-authority join for EVERY source host.
+  if (ctx.mint && drawn.some(({row}) => row?.size && row.size.width !== row.size.height)) {
+    const declineAllocation = (issue:string) => ctx.notes.push(`${where}: fixed-swap-caller-root-allocation-not-carried:${issue}; review`);
+    const ownerKey = child.bindings.figma.anchors?.componentSetKey;
+    const inputs = target.data.anatomy.root.instanceRootInputs;
+    const existing = selected.rootOverrides !== undefined || selected.rootFill !== undefined || selected.affine !== undefined ||
+      selected.placement !== undefined || (selected.overrides as Record<string,unknown>|undefined)?.size !== undefined ||
+      ctx.mint.refOverrides.some(row => row.component === selected);
+    const allocations = m.occ.map(o => ownerKey ? qualifyFixedSwapRootAllocation(o.node, property,
+      ownerKey, firstSwap.id, firstSwap.key!, ctx.fixedSwapOwnerRoots) : {issue:'owner-key'});
+    const issue = ctx.fixedSwapRootAllocationFiltered ? 'promoted-source-plane' : existing ? 'receiver-ownership' :
+      hidden.some(Boolean) ? 'hidden-source-allocation' : !inputs?.includes('width') || !inputs.includes('height') ? 'child-inputs' :
+      new Set(m.occ.map(o=>o.variant)).size !== m.occ.length || m.occ.some(o=>!ctx.totalVariants.includes(o.variant)) ? 'source-occurrences' :
+      allocations.find(row=>'issue' in row)?.issue;
+    if (issue) declineAllocation(issue);
+    else {
+      const values = allocations as Array<{width:number;height:number;sizing:NonNullable<DumpNode['instanceSizing']>;remainingFields:string[]}>;
+      const rootTarget:Record<string,string> = {};
+      for (const channel of ['width','height'] as const) {
+        mintObservation(ctx, rootTarget, `${where}.selectedContent`, channel, 'px',
+          m.occ.map((o,i)=>({variant:o.variant,value:values[i][channel]})));
+        const observation=ctx.mint.observations.at(-1)!;observation.booleanAxes=true;
+        const present=new Set(m.occ.map(o=>o.variant));
+        observation.partAbsentCombos=ctx.totalVariants.filter(v=>!present.has(v)).map(v=>ctx.mint!.axisValuesByVariant.get(v)??{});
+      }
+      ctx.mint.refOverrides.push({component:selected,target:rootTarget,property:'rootOverrides',fixedSwapDimensions:where});
+      (ctx.fixedSwapRootInputUses ??= []).push({merged:m,property,ownerSetKey:ownerKey!,targetId:firstSwap.id,
+        targetKey:firstSwap.key!,component:selected,target:rootTarget,values,where});
+      rectangularCarried=true;
+      ctx.notes.push(`${where}: identity-qualified fixed-swap descendant width/height queued as frozen local allocation; original sizing ${[...new Set(values.map(row=>row.sizing.horizontal+'/'+row.sizing.vertical))].join(', ')} is observed, not responsive rootFill authority`);
+      const remaining=[...new Set(values.flatMap(row=>row.remainingFields))];
+      if(remaining.length)ctx.notes.push(`${where}: fixed-swap descendant root override fields not modeled by allocation: ${remaining.join(', ')}; review`);
+    }
+  }
+  if (!rectangularCarried && ctx.mint && drawn.length && target.data.anatomy.root?.overridable?.includes('size') && drawn.every(({row}) => row &&
       row.componentId === firstSwap.id && Array.isArray(row.path) && row.path.length > 0 && row.path.length <= 8 &&
       row.path.every(index => Number.isSafeInteger(index) && index >= 0) &&
       row.relativeTransform?.length === 2 && row.relativeTransform.every(axis => axis.length === 3 && axis.every(Number.isFinite)) &&
@@ -11699,7 +11755,7 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
       m.occ.filter((_,index)=>hidden[index]).map(o=>ctx.mint!.axisValuesByVariant.get(o.variant) ?? {});
     ctx.mint.refOverrides.push({component:selected, target});
     ctx.notes.push(`${where}: selected caller content retains its captured local square size through the child's declared scalable drawing; ancestor placement remains separate`);
-  } else if (observations.some(rows => rows?.length)) {
+  } else if (!rectangularCarried && observations.some(rows => rows?.length)) {
     ctx.notes.push(`${where}: fixed-swap-caller-size-not-carried — requires one identity-matched local square instance with an unrotated unit transform, a valid descendant path, and an overridable scalable child; review`);
   }
   const inkParts = Object.values(target.data.anatomy.root.parts ?? {});
@@ -12637,7 +12693,17 @@ function buildPart(
   }
   const demands=m.occ.flatMap(o=>o.node.nodeId?ctx.visibilityNodes?.get(o.node.nodeId)??[]:[]);
   if(demands.length){
-    if(!ctx.hiddenCaptured||!part||part!==sourcePart||part.slot||part.repeat||m.occ.length!==ctx.totalVariants.length)throw Error('visibility-demand-owned-part-unqualified:'+where);
+    if(!ctx.hiddenCaptured||!part||part!==sourcePart||part.slot||part.repeat)throw Error('visibility-demand-owned-part-unqualified:'+where);
+    if(m.occ.length!==ctx.totalVariants.length){
+      const availability=ctx.structuralAvailabilitySource && !part.component && !part.parts &&
+        qualifyDirectPartAvailability(ctx.structuralAvailabilitySource,m.occ,ctx.axes.map(axis=>({
+          property:axis.property,prop:axis.propName,values:axis.values,
+          map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
+        })),declaredPresenceDomain(ctx),ctx.guardedDrawnPartDomain===true);
+      if(!availability)throw Error('visibility-demand-owned-part-unqualified:'+where);
+      part.availabilityByCombination=availability;
+      ctx.notes.push(where+': exact direct source membership carried independently from authored visibility; an explicit control cannot target an absent plane');
+    }
     const taken=new Set([...ctx.axes.map(a=>a.propName),...ctx.boolProps.map(p=>p.name),...ctx.textProps.map(p=>p.name),...ctx.visibilityAuthored!.map(p=>p.prop)]);
     const base='show'+pascal(selfKey)+'Override';let prop=base,index=2;while(taken.has(prop))prop=base+index++;
     if(m.occ.every(o=>o.node.hidden===true)){
@@ -12648,6 +12714,29 @@ function buildPart(
     part.visibilityOverrideProp=prop;ctx.visibilityAuthored!.push({prop,demands});
     for(const o of m.occ)if(o.node.nodeId)ctx.visibilityNodes?.delete(o.node.nodeId);
     ctx.notes.push(where+': authored child-owned visibility control '+prop+' from captured main identity and numeric child path');
+  }
+  const vectorOwners=m.occ.flatMap(o=>o.node.nodeId&&ctx.vectorStrokeCapture?.owners.get(o.node.nodeId)?[ctx.vectorStrokeCapture.owners.get(o.node.nodeId)!]:[]);
+  if(vectorOwners.length){
+    if(!part||part!==sourcePart||part.component||part.slot||part.repeat||part.parts||m.type!=='VECTOR'||!part.availabilityByCombination||!ctx.guardedDrawnPartDomain)throw Error('vector-stroke-owned-part-unqualified:'+where);
+    const axes=ctx.axes;
+    if(!axes.length||axes.length>8||axes.some(a=>a.omitted))throw Error('vector-stroke-domain-unqualified:'+where);
+    const rows=m.occ.map(o=>{const owner=ctx.vectorStrokeCapture!.owners.get(o.node.nodeId!);if(!owner)throw Error('vector-stroke-owner-witness-unavailable:'+where);return {values:axes.map(a=>axisValue(a,axisValuesOf(o.variant)[a.property])),stroke:owner.stroke,...(owner.refusal?{refusal:owner.refusal}:{})};});
+    if(new Set(rows.map(r=>JSON.stringify(r.values))).size!==rows.length)throw Error('vector-stroke-domain-conflict:'+where);
+    part.vectorStrokeByCombination={props:axes.map(a=>a.propName),rows};
+    const source=ctx.structuralAvailabilitySource!;
+    if(m.occ.some(o=>{const main=source.variants.find(v=>v.name===o.variant);return !main||canonicalJson(main.children?.find(n=>n.nodeId===o.node.nodeId))!==canonicalJson(o.node)||!(main.layout?.mode==='VERTICAL'&&o.node.fillWidth===true&&o.node.fillHeight!==true||main.layout?.mode==='HORIZONTAL'&&o.node.fillHeight===true&&o.node.fillWidth!==true);}))throw Error('vector-stroke-fill-allocation-unqualified:'+where);
+    if(part.layoutByCombination||part.layoutByProp||part.layout)throw Error('vector-stroke-fill-allocation-conflict:'+where);
+    part.layoutByCombination={props:axes.map(a=>a.propName),rows:rows.map(r=>({values:r.values,layout:{alignSelf:'stretch'}}))};
+    const choices:Record<string,import('../scripts/contract-schema.js').VectorStroke>={};
+    for(const usage of ctx.vectorStrokeCapture!.usages.values())if(vectorOwners.some(o=>o.nodeId===usage.nodeId)){
+      const key=vectorStrokeChoice(usage.stroke);if(choices[key]&&canonicalJson(choices[key])!==canonicalJson(usage.stroke))throw Error('vector-stroke-choice-conflict');choices[key]=usage.stroke;
+    }
+    if(Object.keys(choices).length){
+      const taken=new Set([...ctx.axes.map(a=>a.propName),...ctx.boolProps.map(p=>p.name),...ctx.textProps.map(p=>p.name),...ctx.vectorStrokeAuthored.map(p=>p.prop)]);
+      const base='vector'+pascal(selfKey)+'StrokeOverride';let prop=base,index=2;while(taken.has(prop))prop=base+index++;
+      part.vectorStrokeOverride={prop,choices};ctx.vectorStrokeAuthored.push({prop,owners:vectorOwners,choices});
+    }
+    ctx.notes.push(where+': exact native VECTOR source bytes retained with zero logical height and per-plane observed descendant FILL; unwitnessed/dashed/vertical geometry remains refused; native production growth remains unqualified');
   }
   // NORMAL instance paint is a usage override too. The inspection route
   // already gives the linked main its observed default paint owner; retain
@@ -13125,6 +13214,24 @@ function buildPartFromEvidence(
     carryTextOverrides(m, component, id, instanceOf, ctx, where);
     const child=(id ? ctx.contractsById?.get(id) : undefined) as unknown as Contract|undefined;
     carryInstanceTextInk(m, component, id, ctx, where);
+    const vectorBindings=id?ctx.vectorStrokeBindingsByContract?.get(id):undefined;
+    if(child&&vectorBindings?.length)for(const binding of vectorBindings){
+      if(!vectorStrokeBindingMatches(binding,child)||!ctx.vectorStrokeCapture)throw Error('vector-stroke-binding-unqualified:'+where);
+      const values=m.occ.map(o=>{
+        const usage=o.node.nodeId?ctx.vectorStrokeCapture!.usages.get(o.node.nodeId):undefined;
+        if(!usage){if(o.node.hostOverrides?.some(h=>h.solidStrokeTarget&&binding.owners.some(owner=>owner.componentId===h.solidStrokeTarget!.componentId)))ctx.notes.push(where+': vector-stroke-usage-witness-unavailable — captured stroke remains named; no absent witness channel guessed');return undefined;}
+        if(o.node.instanceSetKey!==binding.setKey||!binding.owners.some(owner=>owner.nodeId===usage.nodeId&&owner.componentId===usage.componentId)||!Object.hasOwn(binding.choices,vectorStrokeChoice(usage.stroke)))throw Error('vector-stroke-usage-owner-unqualified:'+where);
+        return vectorStrokeChoice(usage.stroke);
+      });
+      if(!values.some(v=>v!==undefined))continue;
+      if(values.every(v=>v!==undefined)&&new Set(values).size===1){((component.props??={}) as Record<string,unknown>)[binding.prop]=values[0];}
+      else {
+        const byVariant=new Map(m.occ.map((o,i)=>[o.variant,values[i]??null]));
+        if(!ctx.axes.length||ctx.axes.length>8||ctx.axes.some(a=>a.omitted)||byVariant.size!==m.occ.length)throw Error('vector-stroke-caller-domain-unqualified:'+where);
+        ((component.enumPropsByCombination??={}) as Record<string,unknown>)[binding.prop]={props:ctx.axes.map(a=>a.propName),rows:ctx.totalVariants.map(v=>({values:ctx.axes.map(a=>axisValue(a,axisValuesOf(v)[a.property])),value:byVariant.get(v)??null}))};
+      }
+      ctx.notes.push(where+': carried exact child-owned native VECTOR stroke/allocation choice; omission preserves the main default, independently captured visibility retains its own guard');
+    }
     const shapeBindings=id?ctx.shapeFillBindingsByContract?.get(id):undefined;
     if(child&&shapeBindings?.length)for(const prop of new Set(shapeBindings.map(b=>b.prop))){
       const bindings=shapeBindings.filter(b=>b.prop===prop),binding=bindings[0];
@@ -13635,6 +13742,9 @@ function buildPartFromEvidence(
     carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     if (part.declared && !part.element) part.element = 'div'; // explicit FRAME wrapper owns carried clipping
     if (visibleWhen) part.visibleWhen = visibleWhen;
+    // The FRAME's captured visibility owns the host, including caller content;
+    // default-child absence is carried independently by carryWrappedSlotDefault.
+    if (ctx.hiddenCaptured && !visibleRef) invertHiddenVisibility(m, part, ctx, where);
     carryWrappedSlotDefault(m, soleChild, part, slot, ctx, where, selfKey);
     return part;
   }
@@ -16142,6 +16252,8 @@ function proposeFromDumpFencedImpl(
     /** The batch supplies all uses, including those with no captured content.
      * Set-only callers otherwise derive this census from their whole set. */
     instanceContentGroups?: ReadonlyMap<string, readonly DumpNode[]>;
+    /** Original batch source roots; absent source cannot authorize a rectangular caller. */
+    fixedSwapOwnerRoots?: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]>;
     contractIdByName: Map<string, string>;
     contractsById?: Map<string, MinimalChildContract>;
     /** componentSetKey (or setless component key) → contract id (dump v1.5)
@@ -16173,6 +16285,9 @@ function proposeFromDumpFencedImpl(
     imageDemands?:readonly SourceImageDemand[];
     textAppearanceDemands?:readonly SourceTextAppearanceDemand[];
     textColorDemands?:readonly TextColorDemand[];
+    nativeVectorStrokeCapture?:NativeVectorStrokeCapture;
+    vectorStrokeCapture?:QualifiedVectorStrokeCapture;
+    vectorStrokeBindingsByContract?:ReadonlyMap<string,readonly VectorStrokeBinding[]>;
     shapeFillDemands?:readonly ShapeFillDemand[];
     textColorBindingsByContract?:ReadonlyMap<string,readonly TextColorBinding[]>;
     shapeFillBindingsByContract?:ReadonlyMap<string,readonly ShapeFillBinding[]>;
@@ -16249,6 +16364,7 @@ function proposeFromDumpFencedImpl(
   draftPaint=false,
   drawnDeclaration?: Array<Record<string, string>>,
 ): FigmaProposalResult {
+  const structuralAvailabilitySource=set;
   if(set.detachedSnapshot){
     const s=set.detachedSnapshot;
     if(set.remoteSnapshot || s.kind!=='detached-main-snapshot' || !s.captureFileKey || s.captureFileKey!==opts.fileKey ||
@@ -16859,6 +16975,8 @@ function proposeFromDumpFencedImpl(
     inspectBoundDraftChildren:draftPaint,
     ...(carryPaint?{draftPaintOrigins:[]}:{}),
     instanceContentGroups: opts.instanceContentGroups ?? observedInstanceGroups(set.variants),
+    fixedSwapOwnerRoots: opts.fixedSwapOwnerRoots,
+    fixedSwapRootAllocationFiltered: !!(statePromo || modePromo),
     instanceInputNames: instanceInputNames(set.variants, opts.instanceContentGroups ?? observedInstanceGroups(set.variants)),
     allocatedPropNames,
     setName: set.setName,
@@ -16866,6 +16984,8 @@ function proposeFromDumpFencedImpl(
     axes,
     totalVariants: variantNames,
     guardedDrawnPaintDomain: drawnDeclaration !== undefined,
+    structuralAvailabilitySource,
+    guardedDrawnPartDomain: drawnDeclaration !== undefined,
     ...(designerStateAxis !== null && statePromo ? {presenceAbsentVariants: contractAbsentVariants ?? []} : {}),
     corpus: opts.corpus,
     contractIdByName: opts.contractIdByName,
@@ -16914,6 +17034,7 @@ function proposeFromDumpFencedImpl(
     textAppearanceNodes:opts.textAppearanceDemands?demandedTextAppearanceNodes(set,opts.fileKey,opts.textAppearanceDemands):undefined,textAppearanceAuthored:[],
     imageNodes:opts.imageDemands?demandedImageNodes(set,opts.fileKey,opts.imageDemands):undefined,imageAuthored:[],
     textColorNodes:opts.textColorDemands?demandedTextColorNodes(set,opts.fileKey,opts.textColorDemands):undefined,
+    vectorStrokeCapture:(assertQualifiedVectorStrokeCapture(opts.vectorStrokeCapture),opts.vectorStrokeCapture),vectorStrokeAuthored:[],vectorStrokeBindingsByContract:opts.vectorStrokeBindingsByContract,
     shapeFillNodes:opts.shapeFillDemands?demandedShapeFillNodes(set,opts.fileKey,opts.shapeFillDemands):undefined,
     textColorAuthored:[],textColorBindingsByContract:opts.textColorBindingsByContract,
     shapeFillAuthored:[],shapeFillBindingsByContract:opts.shapeFillBindingsByContract,
@@ -17119,6 +17240,24 @@ function proposeFromDumpFencedImpl(
   const promotedLabel =
     soleLabel && !autoLabel ? ctx.textPromote?.get(`${where}/label`.slice(`${ctx.setName}:root/`.length)) : undefined;
   const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined && !demandedLabel;
+  // An independently fixed TEXT leaf is a separate sizing owner. Moving its
+  // glyphs onto a HUG root discards the leaf box and its NONE wrapping mode.
+  // Retain that real part and reuse its existing fixed-size/text carriers.
+  const fixedLabelBox = soleLabel && only!.occ.some(o => o.node.text?.textAutoResize === 'NONE' &&
+    (o.node.fixedSize?.width !== undefined || o.node.fixedSize?.height !== undefined));
+  if (fixedLabelBox && !rootContent && (hoistAutoLabel || unboundRootText)) {
+    if (only!.occ.some(o => ['width', 'height'].some(dim => {
+      const size = o.node.fixedSize?.[dim as 'width' | 'height'];
+      return size !== undefined && (!Number.isFinite(size) || size < 0);
+    }))) throw Error(`fixed-text-box-source-size-unqualified:${where}/label`);
+    if (hoistAutoLabel) {
+      registerTextProp(ctx, autoLabel, first(only!.occ, n => n.text?.characters) ?? '', 'children');
+      // Keep the retained leaf's ordinary lookup on the same public name
+      // chosen by the existing auto-label rule, including raw Content/Label.
+      ctx.allocatedPropNames[autoLabel] = 'children';
+    }
+    ctx.notes.push(`${where}/label: independently fixed NONE text box retained on its source TEXT part; root text hoist would discard leaf geometry`);
+  }
   if (rootContent) {
     const slot: Record<string, unknown> = { name: 'children' };
     if (rootContent.property !== 'Children' || rootContent.textTemplate) slot.bindings = { figma: {
@@ -17141,7 +17280,7 @@ function proposeFromDumpFencedImpl(
       ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
     }
     ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
-  } else if (only && (hoistAutoLabel || unboundRootText)) {
+  } else if (only && !fixedLabelBox && (hoistAutoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp, true);
@@ -17452,6 +17591,7 @@ function proposeFromDumpFencedImpl(
   for(const row of ctx.textAppearanceAuthored??[])props.push({name:row.prop,type:{enum:row.input.choices.map(c=>c.value)},bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
   for(const row of ctx.imageAuthored??[])props.push({name:row.prop,type:{enum:row.input.choices.map(c=>c.value)},bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
   for(const row of ctx.textColorAuthored??[])props.push({name:row.prop,type:{enum:[...new Set(row.demands.map(d=>d.color))].sort()},bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
+  for(const row of ctx.vectorStrokeAuthored)props.push({name:row.prop,type:{enum:Object.keys(row.choices)},bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
   for(const row of ctx.shapeFillAuthored??[])props.push({name:row.prop,type:{enum:[...new Set(row.demands.map(d=>d.color))].sort()},bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
   for(const row of ctx.visibilityAuthored??[])props.push({name:row.prop,type:'boolean',bindings:{code:{prop:row.prop},figma:{kind:'NONE'}}});
   for (const b of ctx.boolProps) {
@@ -17952,7 +18092,22 @@ function proposeFromDumpFencedImpl(
     // ROUND 2 ITERATION 9 — per-instance override targets whose refs
     // classified attach as component.overrides; an all-refused target
     // attaches nothing (each refusal already named above).
+    // A rectangular source origin is paired: partial classification cannot
+    // publish one axis while silently dropping the other or changing owners.
+    for(const use of ctx.fixedSwapRootInputUses ?? []) {
+      const rows=use.merged.occ.map(o=>qualifyFixedSwapRootAllocation(o.node,use.property,
+        use.ownerSetKey,use.targetId,use.targetKey,ctx.fixedSwapOwnerRoots));
+      if(rows.some((row,i)=>'issue' in row || row.width!==use.values[i].width || row.height!==use.values[i].height))
+        throw Error('fixed-swap-root-allocation-source-changed:'+use.where);
+    }
     for (const ro of ctx.mint.refOverrides) {
+      if(ro.fixedSwapDimensions && (!ro.target.width || !ro.target.height || ro.component.rootOverrides!==undefined ||
+          ro.component.rootFill!==undefined || ro.component.affine!==undefined || ro.component.placement!==undefined ||
+          (ro.component.overrides as Record<string,unknown>|undefined)?.size!==undefined ||
+          ctx.mint.refOverrides.some(other=>other!==ro && other.component===ro.component && other.property==='rootOverrides'))) {
+        delete ro.target.width;delete ro.target.height;
+        ctx.notes.push(`${ro.fixedSwapDimensions}: fixed-swap-caller-root-allocation-not-carried:paired-classification-or-receiver-ownership; review`);
+      }
       if (Object.keys(ro.target).length > 0) ro.component[ro.property ?? 'overrides'] = ro.target;
     }
     // Root dimensions and glyph ink have separate queues on the same usage.
@@ -18759,6 +18914,7 @@ function proposeFromDumpFencedImpl(
   if(ctx.textColorNodes?.size)throw Error('text-color-demand-source-part-not-emitted');
   if(ctx.shapeFillNodes?.size)throw Error('shape-fill-demand-source-part-not-emitted');
   const textColorBindings=[...new Map((ctx.textColorAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract)}))).map(b=>[canonicalJson(b),b])).values()];
+  const vectorStrokeBindings=ctx.vectorStrokeAuthored.map(row=>({setKey:set.key!,...row,contractRevision:revisionOf(contract)}));
   const shapeFillBindings=[...new Map((ctx.shapeFillAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract)}))).map(b=>[canonicalJson(b),b])).values()];
   if(ctx.visibilityNodes?.size)throw Error('visibility-demand-source-part-not-emitted');
   const visibilityBindings=[...new Map((ctx.visibilityAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract)}))).map(b=>[canonicalJson(b),b])).values()];
@@ -18769,6 +18925,7 @@ function proposeFromDumpFencedImpl(
     ...(imageBindings.length?{imageBindings}:{}),
     ...(textAppearanceBindings.length?{textAppearanceBindings}:{}),
     ...(textColorBindings.length?{textColorBindings}:{}),
+    ...(vectorStrokeBindings.length?{vectorStrokeBindings}:{}),
     ...(shapeFillBindings.length?{shapeFillBindings}:{}),
     ...(characterBindings.length?{characterBindings}:{}),
     contract,
@@ -18909,6 +19066,8 @@ function proposeBatchFromDumpInternal(
   // The batch has the whole dump, so the captured-variable value index
   // (dump v1.4 `_variables` — the class-① mint-routing input) is built here
   // once unless the caller supplied its own.
+  const nativeVectorStrokeCapture=opts.nativeVectorStrokeCapture??(dump as {_nativeVectorStrokeCapture?:NativeVectorStrokeCapture})._nativeVectorStrokeCapture;
+  const vectorStrokeCapture=nativeVectorStrokeCapture?qualifyNativeVectorStrokeCapture(dump,nativeVectorStrokeCapture,opts.fileKey):undefined;
   const capturedLayer = capturedTokensFromDump(dump);
   const capturedValues =
     opts.capturedValues ??
@@ -19053,17 +19212,19 @@ function proposeBatchFromDumpInternal(
   const textColorDemands=opts.fileKey?textColorDemandsFromDumps(dump,opts.fileKey):[];
   const shapeFillDemands=opts.fileKey?shapeFillDemandsFromDumps(dump,opts.fileKey):[];
   const textColorBindingsByContract=new Map(opts.textColorBindingsByContract??[]);
+  const vectorStrokeBindingsByContract=new Map(opts.vectorStrokeBindingsByContract??[]);
   const shapeFillBindingsByContract=new Map(opts.shapeFillBindingsByContract??[]);
   const visibilityDemands=opts.fileKey?visibilityDemandsFromDumps(dump,opts.fileKey):[];
   const visibilityBindingsByContract=new Map(opts.visibilityBindingsByContract??[]);
   const setOpts = {
-    ...opts,
+    ...opts,vectorStrokeCapture,vectorStrokeBindingsByContract,
     nestedPropertyNodeIds:nestedPropertySourceNodes(dump),
     nestedCharacterRoutes:nestedCharacterRoutes(dump),
     imageDemands,imageBindingsByContract,textAppearanceDemands,textAppearanceBindingsByContract,
     visibilityDemands,visibilityBindingsByContract,shapeFillDemands,shapeFillBindingsByContract,textColorDemands,textColorBindingsByContract,characterDemands,characterBindingsByContract,
     // Derive from the complete batch; caller options cannot narrow the census.
     instanceContentGroups: observedInstanceGroups(Object.values(dump).filter(isDumpSet).flatMap(set => set.variants)),
+    fixedSwapOwnerRoots: fixedSwapOwnerRoots(Object.values(dump).filter(isDumpSet)),
     stampsObservable:
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
@@ -19265,6 +19426,7 @@ function proposeBatchFromDumpInternal(
       if(proposal.textAppearanceBindings?.length){for(const b of proposal.textAppearanceBindings)b.contractRevision=revisionOf(proposal.contract);textAppearanceBindingsByContract.set(String(proposal.contract.id),proposal.textAppearanceBindings);}
       if(proposal.imageBindings?.length){for(const b of proposal.imageBindings)b.contractRevision=revisionOf(proposal.contract);imageBindingsByContract.set(String(proposal.contract.id),proposal.imageBindings);}
       if(proposal.textColorBindings?.length){for(const b of proposal.textColorBindings)b.contractRevision=revisionOf(proposal.contract);textColorBindingsByContract.set(String(proposal.contract.id),proposal.textColorBindings);}
+      if(proposal.vectorStrokeBindings?.length){for(const b of proposal.vectorStrokeBindings)b.contractRevision=revisionOf(proposal.contract);vectorStrokeBindingsByContract.set(String(proposal.contract.id),proposal.vectorStrokeBindings);}
       if(proposal.shapeFillBindings?.length){for(const b of proposal.shapeFillBindings)b.contractRevision=revisionOf(proposal.contract);shapeFillBindingsByContract.set(String(proposal.contract.id),proposal.shapeFillBindings);}
       if(proposal.visibilityBindings?.length){for(const b of proposal.visibilityBindings)b.contractRevision=revisionOf(proposal.contract);visibilityBindingsByContract.set(String(proposal.contract.id),proposal.visibilityBindings);}
       registerSession(proposal.contract as Record<string, unknown>, name);
