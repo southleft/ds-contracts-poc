@@ -57,6 +57,7 @@
  * emits are byte-equal (code-connect-check.ts pins it). Browser-importable.
  */
 import {
+  walkAnatomy,
   slotFigmaProperty,
   slotsOf,
   type Contract,
@@ -305,6 +306,8 @@ function header(contract: Contract, plan: CodeConnectPlan, flavour: 'react' | 'h
 // ---------------------------------------------------------------------------
 
 export function emitCodeConnectReact(contract: Contract): string {
+  if (walkAnatomy(contract).some(w => w.part.slot?.renderDefaultAnatomy))
+    throw new Error('SLOT_DIRECT_DEFAULT_ANATOMY_UNSUPPORTED:code-connect');
   refuseRetainedRuntime(contract, 'code-connect');
   const plan = planCodeConnect(contract);
   const name = contract.name;
@@ -343,6 +346,8 @@ export function emitCodeConnectReact(contract: Contract): string {
 export const codeConnectTagOf = (contract: Contract): string => contract.id.replace('.', '-');
 
 export function emitCodeConnectHtml(contract: Contract): string {
+  if (walkAnatomy(contract).some(w => w.part.slot?.renderDefaultAnatomy))
+    throw new Error('SLOT_DIRECT_DEFAULT_ANATOMY_UNSUPPORTED:code-connect-html');
   refuseRetainedRuntime(contract, 'code-connect-html');
   const plan = planCodeConnect(contract);
   const tag = codeConnectTagOf(contract);

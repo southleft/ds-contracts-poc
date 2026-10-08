@@ -818,6 +818,7 @@ reg("composition", "slots", [
 reg("composition", "default-content", [
   "slot.defaultContent",
   "slot.renderDefault",
+  "slot.renderDefaultAnatomy",
   "slot.collapseWhenEmpty",
   "slotContent.id",
   "slotContent.props",

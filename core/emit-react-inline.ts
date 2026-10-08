@@ -1208,7 +1208,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }
     if (part.slot) {
       const el = part.element ?? 'div';
-      const expr = part.slot.renderDefault && part.parts
+      const expr = (part.slot.renderDefault || part.slot.renderDefaultAnatomy) && part.parts
         ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, ctx.contracts, depAttrString);
       const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${paintChild(part)}${reactSlotPaintForeground(part,expr)}</${el}>`;
@@ -1218,7 +1218,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
         // A transparent fragment keeps both gates without adding a DOM box.
         return wrapVisibleWhen(part, `<>${content}</>`);
       }
-      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
+      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault || part.slot.renderDefaultAnatomy ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
     }
     if (part.content) {
       const el = part.element ?? 'span';

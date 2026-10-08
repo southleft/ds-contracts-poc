@@ -2383,10 +2383,18 @@ export const SlotSchema = z.strictObject({
    * When the slot part has child parts, those matching default-content
    * instances carry its usage-specific fallback anatomy. */
   renderDefault: z.literal(true).optional(),
+  /** Direct authored SLOT children, carried in the slot part's `parts`.
+   * This is an omitted-caller default, not a component-reference sample.
+   * Explicit null/false/empty content clears it. Mutually exclusive with
+   * the reference default list and its renderDefault mode. */
+  renderDefaultAnatomy: z.literal(true).optional(),
   /** A bare swapped drawing has no independently authored host box. Remove
    * its layout footprint when resolved content is empty, including fragments.
    * Explicit source wrapper frames must not opt into this behavior. */
   collapseWhenEmpty: z.literal(true).optional(),
+}).superRefine((slot, ctx) => {
+  if (slot.renderDefaultAnatomy && (slot.renderDefault || slot.defaultContent !== undefined))
+    ctx.addIssue({code:'custom',path:['renderDefaultAnatomy'],message:'SLOT_DIRECT_DEFAULT_MODE_CONFLICT'});
 });
 
 /** A fixed instance of another contract, embedded in this component. */
@@ -3218,6 +3226,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
      *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart).superRefine((part, ctx) => {
+    if (part.slot?.renderDefaultAnatomy && (!part.parts || !Object.keys(part.parts).length))
+      ctx.addIssue({code:'custom',path:['parts'],message:'SLOT_DIRECT_DEFAULT_ANATOMY_EMPTY'});
     if(part.solidFillCompositionObservedBinding){
       if(!part.solidFillComposition || part.solidFillCompositionByCombination || part.solidFillCompositionToken || part.solidFillCompositionSourceBinding ||
         part.solidFillCompositionObservedBinding.some(row=>JSON.stringify(row.observedPaint)!==JSON.stringify(part.solidFillComposition)))
