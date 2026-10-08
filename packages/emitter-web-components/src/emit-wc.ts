@@ -1695,6 +1695,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     childPaintOrderPlans(c,ctx.contracts);
     for (const w of walkAnatomy(c)) {
 
+      if (w.part.slot?.renderDefaultAnatomy) throw new Error('SLOT_DIRECT_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
       if (w.part.slot?.renderDefault && w.part.parts && !hasEquivalentSlotFallback(w.part)) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components');
       if(w.part.presenceByState)throw new Error('STATE_PRESENCE_UNSUPPORTED');
       if (w.part.presenceByCombination && !singleBooleanPresence(c,w.part)) throw new Error('WEB_COMPONENT_PRESENCE_COMBINATION_UNSUPPORTED');

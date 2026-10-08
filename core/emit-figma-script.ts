@@ -4497,7 +4497,7 @@ function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string 
     // Explicit caller content replaces runtime fallback anatomy on both
     // surfaces. Preserve the compiled slot's own box and visibility, but do
     // not retain its omitted-input children beside the caller's selection.
-    const runtimeFallback = activeSlots[0].part.slot?.renderDefault === true && !!activeSlots[0].part.parts;
+    const runtimeFallback = (activeSlots[0].part.slot?.renderDefault === true || activeSlots[0].part.slot?.renderDefaultAnatomy === true) && !!activeSlots[0].part.parts;
     if (result.children?.length && !runtimeFallback) fail('unsupported existing slot anatomy');
     result.children = children;
   }
@@ -5605,7 +5605,7 @@ function partToSpecInner(
     };
     const description = slotPropertyDescription(part.slot);
     if (description) spec.slotDescription = description;
-    if (part.slot.renderDefault && part.parts) {
+    if ((part.slot.renderDefault || part.slot.renderDefaultAnatomy) && part.parts) {
       spec.children = variantParts(part.parts, subst).flatMap(([childName, child]) => partToSpecs(childName, child, contract, byId, ctx, subst));
     } else if ((part.slot.defaultContent?.length ?? 0) > 0) {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {

@@ -2,6 +2,8 @@
 
 **Public project status · updated 2026-10-08 · V1 is not complete.**
 
+The React importer now preserves direct slot anatomy as an omitted-input default. A fresh ordinary installed CLI comparison on the fixed 40-set sample improved from 652 to 653 passing variants out of 879 (74.29%), with no lost passes or new failing sets. Failures fell from 181 to 179; unverified rows increased from 46 to 47 because the third Carousel row retains an original reference-framing refusal. Passing sets remain 17 of 40. The two-slide Carousel now passes with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort still has zero scored reverse passes.
+
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real

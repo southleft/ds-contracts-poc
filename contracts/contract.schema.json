@@ -5598,6 +5598,10 @@
               "type": "boolean",
               "const": true
             },
+            "renderDefaultAnatomy": {
+              "type": "boolean",
+              "const": true
+            },
             "collapseWhenEmpty": {
               "type": "boolean",
               "const": true

@@ -2641,6 +2641,8 @@ interface Ctx {
   mint?: MintCapture;
   /** Exact fails closed on text-style identity gaps; reviewable notes. */
   projectionMode: 'exact' | 'reviewable-inversion';
+  /** Explicit React opt-in retains strict direct-default source requirements. */
+  directSlotReactRuntime: boolean;
 }
 
 /** Exact mode throws; reviewable-inversion records the stable refusal name. */
@@ -11958,6 +11960,83 @@ function carryAspectRatio(m: Merged, holder: Record<string, unknown> | null, ctx
   );
 }
 
+/** Only this source requirement may enter the existing captured React domain
+ * route. An unrelated error or a string with the same message cannot do so. */
+class DirectSlotDrawnDomainRequired extends Error {
+  constructor(where: string) {
+    super(`native-slot-default-anatomy-unqualified:${where}:complete-declared-source-domain-required`);
+    this.name = 'DirectSlotDrawnDomainRequired';
+  }
+}
+
+/** A native SLOT's direct defaults belong to its COMPONENT declaration,
+ * never to a caller instance or to an inferred collection. Keep the exact
+ * source tree and physical member order before using ordinary part lowering. */
+function qualifyDirectSlotDefaults(m: Merged, ctx: Ctx, where: string): void {
+  const refuse = (reason: string): never => { throw Error(`native-slot-default-anatomy-unqualified:${where}:${reason}`); };
+  const source = ctx.structuralAvailabilitySource;
+  if (!source) refuse('complete-declared-source-domain-required');
+  if (!ctx.guardedDrawnPartDomain) throw new DirectSlotDrawnDomainRequired(where);
+  if (!ctx.hiddenCaptured) refuse('hidden-membership-capture-required');
+  if (!ctx.mint) refuse('ordinary-source-geometry-mint-required');
+  const variants = source!.variants;
+  if (variants.length !== ctx.totalVariants.length || new Set(variants.map(v => v.name)).size !== variants.length ||
+      variants.some(v => v.type !== 'COMPONENT' || !ctx.totalVariants.includes(v.name)) ||
+      m.occ.length !== variants.length || new Set(m.occ.map(o => o.variant)).size !== variants.length)
+    refuse('component-declaration-owner-required');
+  const strip = (name: string) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
+  const properties = new Set(m.occ.map(o => strip(o.node.propRefs?.slotContentId ?? m.name)));
+  const definitions = Object.entries(ctx.propertyDefinitions ?? {}).filter(([name]) => properties.has(strip(name)));
+  if (properties.size !== 1 || !properties.has(strip(m.name)) || definitions.length !== 1 || definitions[0][1].type !== 'SLOT')
+    refuse('unique-slot-declaration-required');
+  if (m.children.some(child => new Set(child.occ.map(o => o.variant)).size !== child.occ.length))
+    refuse('direct-member-occurrence-ambiguous');
+  const uniformType = (child: Merged): void => {
+    if (!child.occ.length || child.occ.some(o => o.node.type !== child.type))
+      refuse('direct-member-type-varies');
+    for (const nested of child.children) uniformType(nested);
+  };
+  for (const child of m.children) uniformType(child);
+  const dense = (values: unknown[]): boolean => Array.from({length: values.length}, (_, i) => Object.hasOwn(values, i)).every(Boolean);
+  const allowed = new Set(['FRAME', 'GROUP', 'TEXT', 'RECTANGLE', 'ELLIPSE', 'VECTOR']);
+  for (const occurrence of m.occ) {
+    const root = variants.find(v => v.name === occurrence.variant)!;
+    const matches: DumpNode[] = [];
+    const find = (node: DumpNode): void => {
+      if (node.nodeId === occurrence.node.nodeId) matches.push(node);
+      if (node.children !== undefined && (!Array.isArray(node.children) || !dense(node.children))) refuse('source-children-incomplete');
+      for (const child of node.children ?? []) {
+        if (!child || typeof child !== 'object') refuse('source-child-missing');
+        find(child);
+      }
+    };
+    if (!occurrence.node.nodeId) refuse('slot-source-identity-missing');
+    find(root);
+    if (matches.length !== 1 || matches[0].type !== 'SLOT' || canonicalJson(matches[0]) !== canonicalJson(occurrence.node))
+      refuse('slot-source-identity-or-tree-disagreement');
+    const ids = new Set<string>();
+    const check = (node: DumpNode, parent: DumpNode): void => {
+      if (!allowed.has(node.type) || !node.nodeId || ids.has(node.nodeId)) return refuse('unsupported-or-ambiguous-direct-member');
+      ids.add(node.nodeId);
+      if (node.type === 'TEXT' && typeof node.text?.characters !== 'string') refuse('direct-text-characters-missing');
+      if ([node.fillWidth, node.fillHeight, node.hidden].some(value => value !== undefined && typeof value !== 'boolean'))
+        refuse('direct-member-flags-invalid');
+      if ((node.fillWidth || node.fillHeight) && !['HORIZONTAL', 'VERTICAL'].includes(parent.layout?.mode ?? ''))
+        refuse('direct-member-fill-parent-unqualified');
+      if (node.children !== undefined && (!Array.isArray(node.children) || !dense(node.children))) refuse('source-children-incomplete');
+      for (const child of node.children ?? []) {
+        if (!child || typeof child !== 'object') refuse('source-child-missing');
+        check(child, node);
+      }
+    };
+    for (const child of matches[0].children ?? []) check(child, matches[0]);
+    const members = new Map(m.children.flatMap((child, index) => child.occ.filter(o => o.variant === occurrence.variant).map(o => [o.node, index] as const)));
+    const order = (occurrence.node.children ?? []).map(node => members.get(node));
+    if (members.size !== order.length || order.some((value, index) => value === undefined || index > 0 && value <= order[index - 1]!))
+      refuse('direct-member-order-or-membership-unqualified');
+  }
+}
+
 function buildChildParts(
   children: Merged[],
   mode: ParentModes | null,
@@ -12958,6 +13037,36 @@ function buildPartFromEvidence(
         ctx.notes=ctx.notes.filter(note=>!note.startsWith(`${where}: native slot "${m.name}" holds`));
         ctx.notes.push(`${where}: native slot observed keyed instances retained as omitted-caller fallback anatomy; explicit replacement and clearing retain ownership`);
       }
+    }
+    // Ordinary reviewable inversion retains the named, uncarried subtree.
+    // Exact, explicit React and authenticated declared-domain paths stay closed.
+    if (undrawn.length > 0 && (ctx.projectionMode === 'exact' ||
+        ctx.directSlotReactRuntime || ctx.guardedDrawnPartDomain)) {
+      qualifyDirectSlotDefaults(m, ctx, where);
+      const previousPresence = ctx.presenceVariants;
+      ctx.presenceVariants = m.occ.map(o => o.variant);
+      const defaults: Record<string, unknown> = {};
+      const mode = parentModesOf(m, ctx.mint !== undefined);
+      try {
+        for (const [index, child] of m.children.entries()) {
+          const childWhere = `${where}/${child.name}`;
+          const key = partKey(`content${String(index + 1).padStart(6, '0')}`, ctx, childWhere, selfKey);
+          const built = buildPart(child, mode, ctx, childWhere, key);
+          if (!built || child.occ.length !== m.occ.length && !built.visibleWhen && !built.presenceByCombination)
+            throw Error(`native-slot-default-anatomy-unqualified:${childWhere}:direct-member-presence-not-carried`);
+          attachGridPlacement(child, mode, built, ctx, childWhere);
+          carryPrimaryAxisGrow(child, mode, built, ctx, childWhere);
+          defaults[key] = wrapPositionedRefPart(child, built, ctx, childWhere, key);
+        }
+      } finally { ctx.presenceVariants = previousPresence; }
+      if (!Object.keys(defaults).length) throw Error(`native-slot-default-anatomy-unqualified:${where}:direct-members-empty`);
+      nativeSlot.renderDefaultAnatomy = true;
+      delete nativeSlot.defaultContent;
+      delete nativeSlot.renderDefault;
+      part.parts = defaults;
+      declareRelativeIfPositionedChildren(part, defaults, m);
+      ctx.notes = ctx.notes.filter(note => !note.startsWith(`${where}: native slot "${m.name}" drawn content includes`));
+      ctx.notes.push(`${where}: declaration-owned direct SLOT anatomy retained as omitted-caller fallback; ordinary source layout, paint and visibility guards remain active`);
     }
     // What the canvas cannot enforce, the emitter wrote in words on the SLOT
     // property. Read it back BY NAME rather than re-deriving (or losing) it:
@@ -16185,8 +16294,9 @@ export function proposeFromDump(
   } catch (error) {
     const uncarriedState = error instanceof ExactProjectionError &&
       error.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS' && error.message.includes('state-axis-state-not-carried:');
-    if (opts.drawnVariantSurface !== 'react-runtime' || !(error instanceof ExactProjectionError) ||
-        (error.code !== 'EXACT_MATRIX_RAGGED' && !uncarriedState)) throw error;
+    const capturedDomainRequired = error instanceof DirectSlotDrawnDomainRequired ||
+      error instanceof ExactProjectionError && (error.code === 'EXACT_MATRIX_RAGGED' || uncarriedState);
+    if (opts.drawnVariantSurface !== 'react-runtime' || !capturedDomainRequired) throw error;
     // Freeze the package's API domain before inversion. This declares which
     // captured tuples the generated runtime accepts, not which combinations
     // the designer intended, nor whether their rendered appearance is correct.
@@ -16364,6 +16474,21 @@ function proposeFromDumpFencedImpl(
   draftPaint=false,
   drawnDeclaration?: Array<Record<string, string>>,
 ): FigmaProposalResult {
+  // Reject incomplete raw child lists before paint/mask/source traversals.
+  // A hole is missing evidence, not an absent or hidden captured member.
+  const completeSourceChildren = (node: DumpNode): void => {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) throw Error('figma-source-children-incomplete');
+    if (node.children === undefined) return;
+    if (!Array.isArray(node.children)) throw Error('figma-source-children-incomplete');
+    for (let index = 0; index < node.children.length; index++) {
+      if (!Object.hasOwn(node.children, index)) throw Error('figma-source-children-incomplete');
+      completeSourceChildren(node.children[index]);
+    }
+  };
+  for (let index = 0; index < set.variants.length; index++) {
+    if (!Object.hasOwn(set.variants, index)) throw Error('figma-source-children-incomplete');
+    completeSourceChildren(set.variants[index]);
+  }
   const structuralAvailabilitySource=set;
   if(set.detachedSnapshot){
     const s=set.detachedSnapshot;
@@ -17058,6 +17183,7 @@ function proposeFromDumpFencedImpl(
     ),
     ...(Object.keys(authoredPropNames).length > 0 ? {propNames: authoredPropNames} : {}),
     projectionMode,
+    directSlotReactRuntime: opts.drawnVariantSurface === 'react-runtime',
     mint: opts.mintUnbound
       ? {
           // Enum axes substitute anywhere; two-value True/False axes (minted

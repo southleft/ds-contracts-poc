@@ -821,7 +821,7 @@ export function generateTsx(
     if (part.slot) {
       if (part.slot.name === 'children') usesChildren = true;
       const el = part.element ?? 'div';
-      const expr = part.slot.renderDefault && part.parts
+      const expr = (part.slot.renderDefault || part.slot.renderDefaultAnatomy) && part.parts
         ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, byId, depAttrString);
       const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${reactSlotPaintForeground(part,expr)}</${el}>`;
@@ -831,7 +831,7 @@ export function generateTsx(
         // A transparent fragment keeps both gates without adding a DOM box.
         return wrapVisibleWhen(part, `<>${content}</>`);
       }
-      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
+      return wrapVisibleWhen(part, part.optional ? `<>{${part.slot.renderDefault || part.slot.renderDefaultAnatomy ? `(${expr})` : expr} != null ? ${node} : null}</>` : node);
     }
     if (part.content) {
       if (part.content.prop === 'children') usesChildren = true;
@@ -1056,7 +1056,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
     defaultSlot && !defaultSlot.slot.renderDefault && (defaultSlot.slot.defaultContent?.length ?? 0) > 0
       ? sampleJSX(defaultSlot.slot.defaultContent!, byId)
       : null;
-  if (hasDefaultSlot && !defaultSample && !defaultSlot?.slot.renderDefault) {
+  if (hasDefaultSlot && !defaultSample && !defaultSlot?.slot.renderDefault && !defaultSlot?.slot.renderDefaultAnatomy) {
     argTypes.push(`    children: { control: 'text' },`);
     args.push(`    children: 'The quick brown fox jumps over the lazy dog.',`);
   }

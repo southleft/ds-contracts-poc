@@ -1554,6 +1554,7 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
     if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');
       if (w.part.instanceAffine || w.part.instanceAffineByProp || w.part.instanceAffineLayout) throw new Error('HTML_INSTANCE_AFFINE_UNSUPPORTED');
       if (w.part.layoutByCombination) throw new Error('HTML_JOINT_LAYOUT_UNSUPPORTED');
+      if (w.part.slot?.renderDefaultAnatomy) throw new Error('SLOT_DIRECT_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.slot?.renderDefault && w.part.parts) throw new Error('SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:html');
       if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');

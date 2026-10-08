@@ -375,6 +375,12 @@ export function validateContract(
       if (part.instanceRootInputs.some(channel => channel.startsWith('padding-')) && !['flex','inline-flex'].includes(part.layout?.display ?? ''))
         errors.push(`${contract.id}: instanceRootInputs padding requires an auto-layout root`);
     }
+    if (part.slot?.renderDefaultAnatomy) {
+      if (part.slot.renderDefault || part.slot.defaultContent !== undefined)
+        errors.push(`${contract.id}: SLOT_DIRECT_DEFAULT_MODE_CONFLICT:${part.slot.name}`);
+      if (!part.parts || !Object.keys(part.parts).length)
+        errors.push(`${contract.id}: SLOT_DIRECT_DEFAULT_ANATOMY_EMPTY:${part.slot.name}`);
+    }
     if (part.slot?.renderDefault && !part.slot.defaultContent?.length)
       errors.push(`${contract.id}: SLOT_RUNTIME_DEFAULT_EMPTY:${part.slot.name}: an explicit runtime default needs declared content`);
     if (part.slot?.renderDefault && part.parts) {
