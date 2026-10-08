@@ -1,0 +1,58 @@
+{
+  "kind": "original-read-only-M3-Chips-export-and-observed-consumer-fixture",
+  "fileKey": "uYZdfbhQnkwZtlHoRY7w8O",
+  "nodeId": "53923:28144",
+  "nativeReadStartedAt": "2026-10-08T23:01:37.640Z",
+  "nativeReadCompletedAt": "2026-10-08T23:02:03.601Z",
+  "export": {
+    "format": "png",
+    "scale": 1,
+    "contentsOnly": true,
+    "layoutUseAbsoluteBounds": true,
+    "renderUseAbsoluteBounds": false
+  },
+  "savedConsumerReceiptSha256": "2663108bc8cf3722e2c3ef8361090274c872bb21cafbb802024291f744adbe86",
+  "originalNativeOriginRefusal": "render-export-overlap-mismatch",
+  "historicalContentSize": {
+    "consumer": {
+      "width": 71,
+      "height": 37
+    },
+    "figma": {
+      "width": 67,
+      "height": 32
+    }
+  },
+  "files": [
+    {
+      "name": "consumer-frame.json",
+      "bytes": 419,
+      "sha256": "df3dc0be66e39708fdf2862bb507e07d987cc48b2eec4e1d0dbbd54c3e9c748e"
+    },
+    {
+      "name": "bounds-before.json",
+      "bytes": 7299,
+      "sha256": "8bdf0f1404e3e5403ddfd85362efc72b5472e393db959b636509585e9a21684d"
+    },
+    {
+      "name": "bounds-after.json",
+      "bytes": 7299,
+      "sha256": "8bdf0f1404e3e5403ddfd85362efc72b5472e393db959b636509585e9a21684d"
+    },
+    {
+      "name": "layout.png",
+      "bytes": 1162,
+      "sha256": "e55f3af3a3026f209843368a77b98a8451983a6e13dc1a900e5ebf64f8e169f4"
+    },
+    {
+      "name": "render.png",
+      "bytes": 3203,
+      "sha256": "a0d070dd3f7e6dbad75eafa5e4a88fdcebf2427b25f802e9eef58afd1095ad84"
+    },
+    {
+      "name": "consumer.png",
+      "bytes": 1929,
+      "sha256": "844293954d74414e9b34b1ae6d052638958808a4784b49a37a37004005d90bd5"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "layout": {
+    "x": 12,
+    "y": 684,
+    "width": 67,
+    "height": 32
+  },
+  "capture": {
+    "x": 1,
+    "y": 675,
+    "width": 89,
+    "height": 54
+  },
+  "deviceScaleFactor": 1,
+  "pngSha256": "844293954d74414e9b34b1ae6d052638958808a4784b49a37a37004005d90bd5",
+  "raster": {
+    "kind": "browser-paint-extent-v1",
+    "paint": {
+      "x": 1,
+      "y": 675,
+      "width": 89,
+      "height": 54
+    }
+  }
+}

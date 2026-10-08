@@ -101,6 +101,43 @@ const sameBox = (a: FrameBox, b: FrameBox) =>
     (k) => a[k as keyof FrameBox] === b[k as keyof FrameBox],
   );
 
+/** Size is independently observable from a stable REST node and the recorded
+ * DOM root, even when two native exports cannot establish a pixel origin.
+ * The caller supplies only frames produced by figmaFramesFromSnapshots; a
+ * global source-plane refusal must still refuse this measurement. This never
+ * qualifies the image pair or substitutes layout size for measured paint. */
+export function recordedLayoutSize(
+  consumerBytes: Buffer,
+  figmaBytes: Buffer,
+  consumer: ConsumerFrame | undefined,
+  figma: FigmaFrame | undefined,
+  sourceRefusal?: string,
+): { consumer: { width: number; height: number }; figma: { width: number; height: number } } | { refused: string } {
+  if (sourceRefusal) return { refused: sourceRefusal };
+  if (!consumer || !figma || !validBox(consumer.layout) ||
+      !validBox(consumer.capture) || !validBox(figma.layout) || !validBox(figma.render))
+    return { refused: 'layout-size-not-recorded' };
+  if (consumer.deviceScaleFactor !== 1) return { refused: 'consumer-scale-not-one' };
+  if (imageSha256(consumerBytes) !== consumer.pngSha256 ||
+      imageSha256(figmaBytes) !== figma.pngSha256)
+    return { refused: 'image-frame-hash-mismatch' };
+  const expanded = consumer.raster?.kind === 'browser-paint-extent-v1';
+  if (consumer.raster && (!expanded || !validBox(consumer.raster.paint)))
+    return { refused: 'consumer-raster-model-unsupported' };
+  const capture = enclosingFrame(expanded ? consumer.raster!.paint : consumer.layout);
+  if (!sameBox(consumer.capture, capture)) return { refused: 'consumer-capture-span-mismatch' };
+  if (capture.x > consumer.layout.x || capture.y > consumer.layout.y ||
+      capture.x + capture.width < consumer.layout.x + consumer.layout.width ||
+      capture.y + capture.height < consumer.layout.y + consumer.layout.height)
+    return { refused: 'consumer-layout-outside-capture' };
+  const png = PNG.sync.read(consumerBytes);
+  if (png.width !== capture.width || png.height !== capture.height)
+    return { refused: 'consumer-image-span-mismatch' };
+  const native = figmaBoundsInLayoutUnits(figma.layout);
+  return { consumer: { width: consumer.layout.width, height: consumer.layout.height },
+    figma: { width: native.width, height: native.height } };
+}
+
 /** Unlike historical alpha>16 trimming, retain every nonzero-alpha pixel.
  * Pale paint and missing outlines must not disappear from the common crop. */
 function inkBox(png: PNG): FrameBox | null {
