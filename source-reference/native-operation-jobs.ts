@@ -230,6 +230,8 @@ export interface NativeOperationSnapshot {
     scope: "supported-structure";
     status: "supported-structure-observed" | "supported-comparison-structure-observed" | "refused";
     limitations: string[];
+    /** Named verifier boundaries only; node IDs and receipt metadata stay private. */
+    refusalReasons?: string[];
   };
   imageObservation?: NativeImageObservation & { attemptId: string };
   pendingPhase?: NativeOperationPhase;
@@ -1022,8 +1024,8 @@ export function createNativeOperationJobs(
         checked.status !== "refused"
           ? "component-structure-observed"
           : "component-observation-refused",
-      // Keep exact node diagnostics in the private readback. Public snapshots
-      // identify the boundary without exposing native IDs or plugin metadata.
+      // Exact node diagnostics stay in the private readback. The display
+      // snapshot separately exposes names without their diagnostic suffixes.
       problems:
         checked.status !== "refused"
           ? []
@@ -1539,6 +1541,12 @@ export function createNativeOperationJobs(
               scope: "supported-structure" as const,
               status: loaded.state.componentObservation.status,
               limitations: [...loaded.state.componentObservation.limitations],
+              ...(loaded.state.componentObservation.status === 'refused' ? {
+                refusalReasons: [...new Set(loaded.state.componentObservation.problems.flatMap(problem => {
+                  const name = /^(native-(?:source-observation|contract-observation|contract-comparison)-[a-zA-Z0-9-]+)(?=:|$)/.exec(problem)?.[1];
+                  return name ? [name] : [];
+                }))],
+              } : {}),
             },
           }
         : {}),
