@@ -22,6 +22,17 @@ require verification. Native exports are available for review; visual fidelity,
 callbacks, the caller's sibling label and unseen reverse qualification remain
 unverified. The original Button refusals and both scoreboards are unchanged.
 
+The plugin's Send tab now exposes a complete captured component family before
+single-component proposal generation. A malformed optional base or a refused
+root proposal no longer hides the family JSON. The app still reviews conversion
+and refuses an unsupported requested parent. A fresh Scratch family reached the
+ordinary JSON import and prepared a React library with its child dependency.
+The app's downloaded archive then installed and built in a clean React 19/Vite
+consumer, rendering the parent, child and label without editing generated code.
+Browser download automation stalled before succeeding; visual fidelity, font
+matching and unseen-kit qualification remain unproven. This fixes a handoff
+blocker without changing either scoreboard.
+
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real
 > codebases](GOAL.md).** The V1 criteria below are frozen as a regression
 > record; the benchmark keeps running in CI as a guard, not a target.
