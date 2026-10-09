@@ -5,6 +5,8 @@
 
 # Design System Contracts
 
+**New here? [Try a Figma component set in React](docs/QUICKSTART.md).** The technical preview quickstart installs the supplied CLI archive, checks your set and shows how to install the result in your app.
+
 **Connect your component library in code and your design library in Figma through a shared, machine-readable contract.**
 
 Start with a React library or a Figma library. Read its supported structure, properties, tokens and composition into a contract, then generate the other surface. When both exist, compare changes against their shared baseline and repair differences under your team's ownership policy.
@@ -15,7 +17,7 @@ Start with a React library or a Figma library. Read its supported structure, pro
 
 ![V1 workflows: React to contract to editable Figma; Figma to contract to reusable React; changes on either side through comparison, authorized repair and independent verification.](docs/assets/product-loop.svg)
 
-**New here? [Start with your library: installation and the three user journeys](docs/USER-JOURNEYS.md).**
+For the expanded workflows, see [installation and the three user journeys](docs/USER-JOURNEYS.md).
 
 ## What you should be able to do
 
