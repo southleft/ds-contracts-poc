@@ -69,7 +69,7 @@ import {domainTransitionGroups} from './design-consumer-domain.js';
 import { packageReactLibrary } from './package-react-library.js';
 import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
-import { alignRecordedFrames, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
+import { alignRecordedFrames, recordedLayoutSize, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
 import {qualifyRenderBoundsExport} from './design-consumer-render-export.js';
 import { execFileSync } from 'node:child_process';
@@ -91,7 +91,27 @@ import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
-const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
+const SIZE_SLACK_PX = 2; // unchanged size limit; unqualified paint cannot supply size
+type SizePair = { consumer: { width: number; height: number }; figma: { width: number; height: number } };
+/** Keep the existing painted-size guard for a qualified pixel pair. Refused
+ * native origins cannot make independently trimmed paint comparable: check
+ * stable source/DOM root dimensions instead, without qualifying that image. */
+export function consumerSizeCheck(key: string, pixelQualified: boolean, historical: SizePair,
+  source: { consumerBytes: Buffer; figmaBytes: Buffer; consumer: ConsumerFrame | undefined;
+    figma: FigmaFrame | undefined; refusal?: string }) {
+  const pair = pixelQualified ? historical : recordedLayoutSize(source.consumerBytes,
+    source.figmaBytes, source.consumer, source.figma, source.refusal);
+  if ('refused' in pair) return { measurement: { status: 'unmeasured' as const,
+    reason: pair.refused, limitPx: SIZE_SLACK_PX },
+    problems: [`content-size-unmeasured:${key}:${pair.refused}`] };
+  const delta = { width: Math.abs(pair.consumer.width - pair.figma.width),
+    height: Math.abs(pair.consumer.height - pair.figma.height) };
+  const withinLimit = delta.width <= SIZE_SLACK_PX && delta.height <= SIZE_SLACK_PX;
+  return { measurement: { status: 'measured' as const,
+    basis: pixelQualified ? 'qualified-alpha-content' : 'recorded-layout', ...pair,
+    delta, limitPx: SIZE_SLACK_PX, withinLimit },
+    problems: withinLimit ? [] : [`content-size-mismatch:${key}:${pair.consumer.width}x${pair.consumer.height} vs ${pair.figma.width}x${pair.figma.height}`] };
+}
 /** Figma exports node alpha, excluding the editor page. Match that substrate
  *  without changing the component or the page retained for visible review. */
 export const NODE_SCREENSHOT_OPTIONS = {
@@ -990,14 +1010,15 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         if (white.unmaskedPct>IMAGE_LIMIT_PERCENT) problems.push(`layout-image-difference-above-limit:${c.key}:${white.unmaskedPct.toFixed(2)}%`);
         if (black.unmaskedPct>IMAGE_LIMIT_PERCENT) problems.push(`layout-image-difference-on-black-above-limit:${c.key}:${black.unmaskedPct.toFixed(2)}%`);
       }
+      const size = consumerSizeCheck(c.key, layoutAligned.status === 'measured',
+        { consumer: aligned.aContent, figma: aligned.bContent },
+        { consumerBytes: ourBytes, figmaBytes, consumer: consumerFrames[c.key],
+          figma: figma.frames[c.nodeId], refusal: figma.framingRefusal });
+      problems.push(...size.problems);
       receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, historicalWithinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
         layoutAligned, figmaFrame:figma.frames[c.nodeId]??null, withinLimit:layoutAligned.withinLimit,
         textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
-        contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
-      // Mostly-white surfaces can score under the pixel limit while the
-      // rendered size is wrong; the trimmed content size must agree too.
-      const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);
-      if (dw > SIZE_SLACK_PX || dh > SIZE_SLACK_PX) problems.push(`content-size-mismatch:${c.key}:${aligned.aContent.width}x${aligned.aContent.height} vs ${aligned.bContent.width}x${aligned.bContent.height}`);
+        size: size.measurement, contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
     } else problems.push('figma-images-unavailable');
     // THE CONTENT CHECK (design-consumer-content.ts): every text and icon the
     // Figma variant draws must render, whatever the pixel score says.

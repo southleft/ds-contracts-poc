@@ -23,7 +23,7 @@ export const CONTENT_RULE = 'Every TEXT the Figma variant draws must appear in t
 export const TEXT_STYLE_RULE = 'Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.';
 
 /** A problem that says a measurement could not be made: never a pass, never a product failure. */
-export const UNMEASURED = /^(figma-images-unavailable|figma-image-missing:|image-framing-unqualified:|image-score-unavailable:|content-check-unavailable:|content-unmeasured:|text-style-unmeasured:)/;
+export const UNMEASURED = /^(figma-images-unavailable|figma-image-missing:|image-framing-unqualified:|image-score-unavailable:|content-size-unmeasured:|content-check-unavailable:|content-unmeasured:|text-style-unmeasured:)/;
 
 /** The problem an aborted check records. Figma answering 429 or 5xx after the
  *  retries (bounds read, image download) is an unmade measurement, reported

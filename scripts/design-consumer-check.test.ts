@@ -6,7 +6,11 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
+import { consumerSizeCheck, mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
+import { readFileSync } from 'node:fs';
+import { qualifyRenderBoundsExport } from './design-consumer-render-export.js';
+import { variantVerdicts } from './design-consumer-verdict.js';
+import { captureObservedSubject } from './design-consumer-observed-capture.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -347,6 +351,123 @@ test('recorded-origin comparison preserves matching geometry when the first ink 
  assert.ok(diffPair(alignPair(readPngForTest(a),readPngForTest(b),0),[]).diffCount>2,'historical independent crop shifts the matching large rectangle');
 });
 function readPngForTest(bytes:Buffer){return PNG.sync.read(bytes);}
+
+function chipsSizeFixture() {
+  const read = (name: string) => readFileSync(new URL('./fixtures/render-export-chips-unqualified/' + name, import.meta.url));
+  const before = JSON.parse(read('bounds-before.json').toString()), after = JSON.parse(read('bounds-after.json').toString());
+  const consumerBytes = read('consumer.png'), figmaBytes = read('layout.png');
+  const consumer = JSON.parse(read('consumer-frame.json').toString());
+  const recorded = figmaFramesFromSnapshots(before, after, { '53923:28144': figmaBytes });
+  assert.equal(recorded.refused, undefined);
+  const figma = { ...recorded.frames['53923:28144'], refused: 'render-export-overlap-mismatch' };
+  return { read, before, after, consumerBytes, figmaBytes, consumer, figma };
+}
+function sizeVerdict(sizeProblems: string[], qualified = false, white = 0, black = 0, extra: string[] = []) {
+  return variantVerdicts({ problems: [...(qualified ? [] : ['image-framing-unqualified:k:render-export-overlap-mismatch']), ...sizeProblems, ...extra],
+    images: { cases: [{ key: 'k', layoutAligned: qualified ? { status: 'measured', whiteMismatchPercent: white,
+      blackMismatchPercent: black, withinLimit: white <= 5 && black <= 5 } : { status: 'refused', reason: 'render-export-overlap-mismatch' } }] },
+    content: { cases: [{ key: 'k', texts: { figma: 0, missing: [], styles: [] }, parts: { figma: 0, missing: [] } }] } },
+    [{ key: 'k', figmaName: 'Original size control' }]);
+}
+const shadowHistorical = { consumer: { width: 71, height: 37 }, figma: { width: 67, height: 32 } };
+
+test('real Chips exports retain origin refusal while matching source/DOM size stays unverified', () => {
+  const source = chipsSizeFixture(), provenance = JSON.parse(source.read('provenance.json').toString());
+  assert.equal(provenance.nodeId, '53923:28144');
+  for (const file of provenance.files) assert.equal(imageSha256(source.read(file.name)), file.sha256);
+  assert.deepEqual(qualifyRenderBoundsExport(source.before, source.after, '53923:28144', source.figmaBytes, source.read('render.png')),
+    { refused: 'render-export-overlap-mismatch' });
+  const result = consumerSizeCheck('k', false, shadowHistorical, source);
+  assert.equal(result.measurement.status, 'measured');
+  assert.equal('basis' in result.measurement && result.measurement.basis, 'recorded-layout');
+  assert.deepEqual(result.problems, []);
+  assert.equal(sizeVerdict(result.problems).verdict, 'unverified');
+  assert.equal(sizeVerdict(result.problems).variants[0].image, null);
+});
+
+test('independent logical size retains the exact 2px boundary with a refused pixel origin', () => {
+  const source = chipsSizeFixture();
+  for (const axis of ['width', 'height'] as const) for (const delta of [2, 2 + 1 / 64, 3]) {
+    const changed = { ...source, consumer: { ...source.consumer, layout: { ...source.consumer.layout,
+      [axis]: source.consumer.layout[axis] + delta } } };
+    const result = consumerSizeCheck('k', false, shadowHistorical, changed);
+    assert.equal(result.measurement.status, 'measured');
+    assert.equal(sizeVerdict(result.problems).verdict, delta <= 2 ? 'unverified' : 'fail');
+    if (delta > 2) assert.match(result.problems[0], /^content-size-mismatch:k:/);
+  }
+});
+
+test('missing, stale or invalid source/capture evidence cannot supply logical size authority', () => {
+  const source = chipsSizeFixture();
+  const invalidSources = [
+    { ...source, consumer: undefined }, { ...source, figma: undefined },
+    { ...source, consumer: { ...source.consumer, pngSha256: 'stale' } },
+    { ...source, figma: { ...source.figma, pngSha256: 'stale' } },
+    { ...source, consumer: { ...source.consumer, deviceScaleFactor: 2 } },
+    { ...source, consumer: { ...source.consumer, layout: { ...source.consumer.layout, width: NaN } } },
+    { ...source, consumer: { ...source.consumer, capture: { ...source.consumer.capture, width: 88 } } },
+  ];
+  const wrongNode = structuredClone(source.before); wrongNode.nodes['53923:28144'].document.id = 'wrong';
+  for (const before of [{ ...source.before, version: undefined }, wrongNode]) {
+    const recorded = figmaFramesFromSnapshots(before, source.after, { '53923:28144': source.figmaBytes });
+    assert.ok(recorded.refused);
+    invalidSources.push({ ...source, figma: recorded.frames['53923:28144'], refusal: recorded.refused } as any);
+  }
+  const changed = figmaFramesFromSnapshots(source.before, { ...source.after, version: 'changed' }, { '53923:28144': source.figmaBytes });
+  invalidSources.push({ ...source, refusal: changed.refused } as any);
+  for (const invalid of invalidSources) {
+    const result = consumerSizeCheck('k', false, shadowHistorical, invalid);
+    assert.equal(result.measurement.status, 'unmeasured');
+    assert.match(result.problems[0], /^content-size-unmeasured:k:/);
+    assert.equal(sizeVerdict(result.problems).verdict, 'unverified');
+    assert.equal(sizeVerdict(result.problems, false, 0, 0, ['zero-size-render:k']).verdict, 'fail');
+  }
+});
+
+test('qualified alpha-content size defects and unrelated product failures remain failures', () => {
+  const source = chipsSizeFixture();
+  const result = consumerSizeCheck('k', true, shadowHistorical, source);
+  assert.equal('basis' in result.measurement && result.measurement.basis, 'qualified-alpha-content');
+  assert.match(result.problems[0], /^content-size-mismatch:k:71x37 vs 67x32$/);
+  assert.equal(sizeVerdict(result.problems, true).verdict, 'fail');
+  for (const problem of ['text-missing:k:Label', 'icon-missing:k:brand', 'text-color-mismatch:k:Label',
+    'text-font-mismatch:k:Label', 'font-unavailable-in-consumer:k:Roboto', 'state-unreachable:hover:k'])
+    assert.equal(sizeVerdict([], false, 0, 0, [problem]).verdict, 'fail');
+});
+
+test('unchanged pixel operators keep either-background paint losses red and a measured control green', () => {
+  for (const color of [0, 255]) {
+    const a = frameBytes(40, 40, p => rect(p, 2, 2, 20, 20, [color, color, color, 255]));
+    const b = frameBytes(40, 40, p => { rect(p, 2, 2, 20, 20, [color, color, color, 255]); rect(p, 4, 4, 16, 16, [0, 0, 0, 0]); });
+    const white = framed(a, b, undefined, undefined, 255), black = framed(a, b, undefined, undefined, 0);
+    assert('aligned' in white && 'aligned' in black);
+    const wp = diffPair(white.aligned, []).unmaskedPct, bp = diffPair(black.aligned, []).unmaskedPct;
+    assert(color === 0 ? wp > 5 && bp === 0 : wp === 0 && bp > 5);
+    const size = consumerSizeCheck('k', true, { consumer: white.aligned.aContent, figma: white.aligned.bContent }, chipsSizeFixture());
+    assert.deepEqual(size.problems, []);
+    assert.equal(sizeVerdict(size.problems, true, wp, bp).verdict, 'fail');
+    const positive = framed(a, a); assert('aligned' in positive);
+    assert.equal(sizeVerdict([], true, diffPair(positive.aligned, []).unmaskedPct, 0).verdict, 'pass');
+  }
+});
+
+test('observed browser roots still fail actual width and height defects despite native origin refusal', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 320, height: 240 } });
+    const source = chipsSizeFixture();
+    for (const [width, height, expected] of [[67, 32, 'unverified'], [70, 32, 'fail'], [67, 35, 'fail']] as const) {
+      await page.setContent(`<style>body{margin:0;background:transparent}#cell{position:absolute;left:40px;top:40px}#subject{width:${width}px;height:${height}px;border-radius:8px;background:#f7f2fa;box-shadow:0 2px 6px 2px #00000026,0 1px 2px #0000004d}</style><div id="cell"><div id="subject"></div></div>`);
+      const captured = await captureObservedSubject(page, '#subject', '#cell');
+      assert('bytes' in captured, JSON.stringify(captured));
+      assert.equal(captured.frame.layout.width, width); assert.equal(captured.frame.layout.height, height);
+      const result = consumerSizeCheck('k', false, shadowHistorical,
+        { ...source, consumerBytes: captured.bytes,
+          consumer: { ...captured.frame, raster: { kind: 'browser-paint-extent-v1', paint: captured.paint } } });
+      assert.equal(sizeVerdict(result.problems).verdict, expected);
+    }
+  } finally { await browser.close(); }
+});
 
 test('a real geometry shift remains a mismatch; transparent padding cannot dilute it',()=>{
  const a=frameBytes(40,40,p=>rect(p,2,3,20,20));
