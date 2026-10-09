@@ -7,7 +7,7 @@ import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
-import {linkReactSourceAnatomy,nestedReactHostPaths} from './react-source-anatomy.js';
+import {foldedRuntimeDependencies,linkReactSourceAnatomy,nestedReactHostPaths} from './react-source-anatomy.js';
 import {probeReactPropertyBaseline,probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
 import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
@@ -147,7 +147,20 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);
    if(before.status!=='linked'||changed.status!=='linked')throw Error('react-property-effects-anatomy-unqualified');
    const projection=projectReactRootVisual(program,probe.changed.ownership,probe.changed.tree,probe.changed.styleOrigin,undefined,undefined,probe.changed.gridConstraints);
-   const changedInstances=changed.instances.map(i=>{
+   // Fresh mounts can show a source-owned dependency that was absent in the
+   // original state. Its hosts stay in the full capture; only dependencies
+   // already proved to draw their workspace owner's content fold out of this
+   // stable-instance style comparison. Workspace identities still must match.
+   const folded=args.observationMode==='initial-mount'?foldedRuntimeDependencies(changed):new Set<string>();
+   if(args.observationMode==='initial-mount'){
+    const priorFolded=foldedRuntimeDependencies(before);
+    // Traversal ordinals can be reused by a newly mounted dependency. It may
+    // not hide a workspace/context instance that occupied that ordinal before.
+    if(before.instances.some(i=>!priorFolded.has(i.instanceId)&&
+      (folded.has(i.instanceId)||!changed.instances.some(next=>next.instanceId===i.instanceId))))
+     throw Error('react-property-effects-instance-changed');
+   }
+   const changedInstances=changed.instances.filter(i=>!folded.has(i.instanceId)).map(i=>{
     const prior=before.instances.find(b=>b.instanceId===i.instanceId);
     if(!prior||JSON.stringify(prior.source)!==JSON.stringify(i.source))throw Error('react-property-effects-instance-changed');
     const channels=new Set<string>();

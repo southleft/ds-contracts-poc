@@ -1,6 +1,6 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-10-08 · V1 is not complete.**
+**Public project status · updated 2026-10-09 · V1 is not complete.**
 
 The React importer now preserves direct slot anatomy as an omitted-input default. A fresh ordinary installed CLI comparison on the fixed 40-set sample improved from 652 to 653 passing variants out of 879 (74.29%), with no lost passes or new failing sets. Failures fell from 181 to 179; unverified rows increased from 46 to 47 because the third Carousel row retains an original reference-framing refusal. Passing sets remain 17 of 40. The two-slide Carousel now passes with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort still has zero scored reverse passes.
 
@@ -11,6 +11,16 @@ the source review screen. The saved Button caller shows its background inset
 geometry mismatch instead of only a generic refusal. Native node IDs and receipt
 metadata stay private. This improves diagnosis; the conversion remains refused
 and both direction scoreboards are unchanged.
+
+The current full ten-case React workspace now completes all 12 Checkbox
+initial-input combinations through the ordinary Sources flow and creates the
+12 editable native variants in Live Testing. Independent readback reports
+supported structure. Initial inspection retains conditional library descendants
+inside their proved source-owned component instead of requiring them to exist
+in the unchecked state. Workspace identities and exact restoration still
+require verification. Native exports are available for review; visual fidelity,
+callbacks, the caller's sibling label and unseen reverse qualification remain
+unverified. The original Button refusals and both scoreboards are unchanged.
 
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real
 > codebases](GOAL.md).** The V1 criteria below are frozen as a regression
