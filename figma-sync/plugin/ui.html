@@ -1676,6 +1676,18 @@
         var dump = msg.result || {};
         var row = null;
         var capturedSet = dump[setName];
+        // A family is observed canvas data. Its delivery must not depend on
+        // a single-parent proposal or the optional base contract: the app
+        // derives and checks every captured component together on import.
+        var closure = dump._provenance && dump._provenance.closure;
+        if (capturedSet && closure && closure.pulled && closure.pulled.length > 0) {
+          var familyBox = resultBox('prop-result', null, 'Family capture — ' + setName + ':');
+          addLine(familyBox, 'Captured ' + (closure.requested.length + closure.pulled.length) + ' local components: ' + closure.requested.concat(closure.pulled).map(function (set) { return set.name; }).join(', ') + '.');
+          addLine(familyBox, 'Download or copy this family JSON, then import it in the app’s JSON input. The app derives proposals for the captured components together and opens ' + setName + '. Review any refusals or provisional dependencies before preparing a React library.');
+          addMeta(familyBox, 'Captured canvas data still needs conversion review in the app. The optional base contract is not used for a family capture. Single-proposal GitHub and pairing delivery do not carry a complete family.');
+          addArtifactActions(familyBox, setName.replace(/[^a-zA-Z0-9._-]/g, '-') + '.family.json', JSON.stringify(dump, null, 2));
+          return;
+        }
         inventory.forEach(function (r) { if (capturedSet && r.nodeId === capturedSet.nodeId) row = r; });
         // MARKER = PROVENANCE, and the whole canvas→code asymmetry hangs off
         // it. The marked inventory lists every set this tool generated; a set
@@ -1716,15 +1728,6 @@
         if (!diff.ok) {
           $('prop-code-section').hidden = true;
           addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
-          return;
-        }
-        var closure = dump._provenance && dump._provenance.closure;
-        if (closure && closure.pulled && closure.pulled.length > 0) {
-          var familyBox = resultBox('prop-result', true, 'Family capture — ' + setName + ':');
-          addLine(familyBox, 'Captured ' + (closure.requested.length + closure.pulled.length) + ' local components: ' + closure.requested.concat(closure.pulled).map(function (set) { return set.name; }).join(', ') + '.');
-          addLine(familyBox, 'Download or copy this family JSON, then import it in the app’s JSON input. The app derives proposals for the captured components together and opens ' + setName + '. Review any refusals or provisional dependencies before preparing a React library.');
-          addMeta(familyBox, 'This artifact contains the observed canvas, not a base-contract diff. Single-proposal GitHub and pairing delivery do not carry a complete family.');
-          addArtifactActions(familyBox, String(diff.proposal.id || 'component') + '.family.json', JSON.stringify(dump, null, 2));
           return;
         }
         lastProposal = diff;

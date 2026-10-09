@@ -444,6 +444,33 @@ ok(familyArtifact.name.endsWith('.family.json') && JSON.stringify(familyArtifact
   'download retains the entire observed capture including closure and children');
 ok(!(await shown('#prop-pr-section')) && !(await shown('#prop-bridge-section')) && !(await shown('#prop-code-section')),
   'family delivery cannot send an incomplete parent through a single-proposal door');
+for (const base of ['{', '{"id":"nope"}']) {
+  await page.fill('#prop-base', base);
+  await page.click('#prop-run');
+  await page.waitForTimeout(700);
+  const captured = await page.locator('#prop-result .download').count();
+  ok(captured === 1, 'family capture remains available with an invalid single-proposal base: ' + base);
+  if (captured) ok(await page.locator('#prop-result .download').evaluate(async a =>
+    JSON.stringify(await (await fetch(a.href)).json())) === JSON.stringify(FAMILY_DUMP),
+    'invalid base cannot change the captured family');
+  ok(!(await shown('#prop-pr-section')) && !(await shown('#prop-bridge-section')) && !(await shown('#prop-code-section')),
+    'invalid base does not reopen single-proposal delivery');
+}
+await page.fill('#prop-base', '');
+const REFUSED_FAMILY = structuredClone(FAMILY_DUMP);
+REFUSED_FAMILY.HandBuilt.selectionApi = '{';
+ok(await page.evaluate(dump => !window.DSC.proposeDiff(dump, 'HandBuilt', null).ok, REFUSED_FAMILY),
+  'the actual engine refuses the malformed requested parent even with a supported child');
+await page.evaluate(dump => { window.__sim.dump = dump; }, REFUSED_FAMILY);
+await page.click('#prop-run');
+await page.waitForTimeout(700);
+const refusedCapture = await page.locator('#prop-result .download').count();
+ok(refusedCapture === 1, 'a refused parent proposal does not discard an observed family');
+if (refusedCapture) ok(await page.locator('#prop-result .download').evaluate(async a =>
+  JSON.stringify(await (await fetch(a.href)).json())) === JSON.stringify(REFUSED_FAMILY),
+  'family delivery retains the refused parent facts instead of substituting a supported child');
+ok(!(await shown('#prop-pr-section')) && !(await shown('#prop-bridge-section')) && !(await shown('#prop-code-section')),
+  'captured data does not qualify a refused proposal for code or repository delivery');
 await page.evaluate(() => { window.__sim.dump = {}; });
 await page.click('#prop-run');
 await page.waitForTimeout(700);
