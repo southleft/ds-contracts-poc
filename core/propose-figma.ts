@@ -1,5 +1,5 @@
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
-import {qualifyDirectPartAvailability} from './source-part-availability.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability} from './source-part-availability.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
@@ -12774,14 +12774,18 @@ function buildPart(
   if(demands.length){
     if(!ctx.hiddenCaptured||!part||part!==sourcePart||part.slot||part.repeat)throw Error('visibility-demand-owned-part-unqualified:'+where);
     if(m.occ.length!==ctx.totalVariants.length){
-      const availability=ctx.structuralAvailabilitySource && !part.component && !part.parts &&
-        qualifyDirectPartAvailability(ctx.structuralAvailabilitySource,m.occ,ctx.axes.map(axis=>({
+      const componentLeaf=part.component && m.type==='INSTANCE' && !part.parts && !part.mask &&
+        !part.instanceAffine && !part.instanceAffineByProp && !part.instanceAffineLayout;
+      const qualifier=componentLeaf ? qualifyOwnedComponentAvailability :
+        !part.component && !part.parts ? qualifyDirectPartAvailability : undefined;
+      const availability=ctx.structuralAvailabilitySource && qualifier &&
+        qualifier(ctx.structuralAvailabilitySource,m.occ,ctx.axes.map(axis=>({
           property:axis.property,prop:axis.propName,values:axis.values,
           map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
         })),declaredPresenceDomain(ctx),ctx.guardedDrawnPartDomain===true);
       if(!availability)throw Error('visibility-demand-owned-part-unqualified:'+where);
       part.availabilityByCombination=availability;
-      ctx.notes.push(where+': exact direct source membership carried independently from authored visibility; an explicit control cannot target an absent plane');
+      ctx.notes.push(where+': exact source membership carried independently from authored visibility; an explicit control cannot target an absent plane');
     }
     const taken=new Set([...ctx.axes.map(a=>a.propName),...ctx.boolProps.map(p=>p.name),...ctx.textProps.map(p=>p.name),...ctx.visibilityAuthored!.map(p=>p.prop)]);
     const base='show'+pascal(selfKey)+'Override';let prop=base,index=2;while(taken.has(prop))prop=base+index++;

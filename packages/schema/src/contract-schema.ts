@@ -3793,7 +3793,9 @@ export const ContractSchema = z.strictObject({
     if(part.availabilityByCombination){
       const table=part.availabilityByCombination,axes=absentVariantAxes(c);
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'availabilityByCombination'],message});
-      if(!nested || !part.visibilityOverrideProp || part.component || part.slot || part.repeat || part.parts || part.presenceByState || c.bindings.code.runtime)
+      const componentHybrid=part.component && (part.text!==undefined || part.textByProp || part.content || part.icon || part.shape || part.meter || part.mask ||
+        part.instanceAffine || part.instanceAffineByProp || part.instanceAffineLayout);
+      if(!nested || !part.visibilityOverrideProp || componentHybrid || part.slot || part.repeat || part.parts || part.presenceByState || c.bindings.code.runtime)
         issue('structural-availability-requires-owned-visibility-leaf');
       if(c.bindings.figma.drawnVariants===undefined || drawnVariantIssues(c as Contract).length)
         issue('structural-availability-requires-valid-drawn-domain');
