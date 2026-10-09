@@ -1,5 +1,5 @@
 import type {CapturedNode} from '../extract/computed/lib.js';
-import {observeReactPropertyEffects,planReactPropertyEffects} from './react-property-effects.js';
+import {observeReactPropertyEffects,observeReactPropertyPlan,planReactPropertyEffects} from './react-property-effects.js';
 import {captureJs} from '../extract/computed/capture.js';
 import {evidenceSha} from './react-validation-evidence.js';
 import test from 'node:test';
@@ -150,4 +150,62 @@ test('restoration ignores only the numeric render ordinal of a factory invocatio
   assert.equal(same(node(1), node('1')), false, 'a non-numeric invocation value is compared verbatim');
   assert.equal(same({ nodes: [], problems: [] }, node(1)), false, 'structure changes still refuse');
   assert.equal(ownershipDifference(ownershipForRestoration(node(1)), ownershipForRestoration(node(1, { input: {} }))), '$.nodes.0.creationInvocation.input.variant');
+});
+
+test('initial mounts retain conditional dependency content without hiding workspace identities', async () => {
+  mkdirSync(path.join(process.cwd(), 'private'), {recursive:true});
+  const browser = await chromium.launch();
+  try {
+    for (const [installed, sibling] of [[true,false],[false,false],[true,true]]) {
+      const dir = mkdtempSync(path.join(process.cwd(), 'private/react-initial-dependency-'));
+      const context = await browser.newContext({viewport:{width:900,height:600},deviceScaleFactor:1});
+      try {
+        const markerDir = path.join(dir, installed ? 'node_modules/fixture-marker' : 'local');
+        mkdirSync(markerDir, {recursive:true});
+        writeFileSync(path.join(markerDir, 'index.tsx'), "import React from 'react'; export function Marker(){return <span style={{display:'block',width:8,height:8,backgroundColor:'red'}}/>} export function Indicator({present}:{present:boolean}){return <span>{present&&<Marker/>}</span>}");
+        if (installed) writeFileSync(path.join(markerDir, 'package.json'), JSON.stringify({name:'fixture-marker',version:'1.0.0',main:'index.tsx'}));
+        writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
+        const source = "import React from 'react'; import {Indicator,Marker} from '"+(installed?'fixture-marker':'./local/index')+"';\n"+
+          "export function Subject({defaultChecked=false}:{defaultChecked?:boolean}){return <div style={{display:'flex',width:16,height:16}}><Indicator present={defaultChecked}/></div>}\n"+
+          (sibling?"export function Tail(){return <p>Context</p>}":'');
+        writeFileSync(path.join(dir, 'components.tsx'), source);
+        const program = readReactSourceProgram(dir, ['components.tsx'], {includeJsxDependencies:true});
+        assert.deepEqual(program.problems, []);
+        assert.ok(program.components.some(c=>c.exportName==='Marker'&&c.module.startsWith('node_modules/')===installed));
+        const registry = program.components.map(c=>'{identity:'+JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})+',value:'+c.exportName+'}').join(',');
+        const entry = source+";import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=["+registry+"];flushSync(()=>createRoot(document.getElementById('mount')).render("+
+          (sibling?'<div><Subject defaultChecked={false}/><Tail/></div>':'<Subject defaultChecked={false}/>')+"));";
+        const bundle = await build({stdin:{contents:entry,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+        await context.addInitScript(reactOwnershipHook);
+        const page = await context.newPage();
+        await page.setContent('<div id="mount"></div>');
+        await page.addScriptTag({content:bundle.outputFiles[0].text});
+        await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
+        const selector = '#mount > div';
+        const ownership = await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+        assert.deepEqual(ownership.problems, []);
+        const instanceId = ownership.components.find(c=>c.source.exportName==='Subject')!.id;
+        const tree = await page.evaluate(captureJs('#mount',undefined,'--',[selector])) as CapturedNode;
+        const image = evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+        const args = {page,program,ownership,tree,image,instanceId,selector,stageSelector:'#mount',assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}};
+        const initial = await observeReactInitialStates({...args,dir:path.join(dir,'initial')});
+        assert.equal(initial.rows.length,3);
+        if (installed&&!sibling) {
+          assert.deepEqual(initial.problems,[],JSON.stringify(initial.rows));
+          assert.ok(initial.rows.every(r=>r.status==='observed'&&r.restored),JSON.stringify(initial.rows));
+          const checked = JSON.parse(readFileSync(path.join(dir,'initial','1.json'),'utf8'));
+          assert.ok(checked.ownership.components.some((c:ReactOwnership['components'][number])=>c.source.exportName==='Marker'),'folding retains the complete dependency ownership');
+          assert.ok(JSON.stringify(checked.tree).includes('span'),'the conditional dependency host remains in the native compiler input');
+          assert.notEqual(initial.rows[1].image,image,'the checked content was actually captured');
+          const live = await observeReactPropertyPlan({...args,dir:path.join(dir,'live')},[{changes:{defaultChecked:{kind:'set' as const,value:true}}}]);
+          assert.equal(live.rows[0].problem,'react-property-effects-instance-changed','live-update identity protection is unchanged');
+        } else {
+          assert.equal(initial.rows[1].problem,'react-property-effects-instance-changed',sibling?'a folded dependency cannot reuse a protected context ordinal':'a workspace child remains a separate identity');
+          assert.equal(initial.rows[2].problem,'prior-observation-invalidated-context');
+        }
+        assert.equal(evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})),image,'all outcomes restore the exact original pixels');
+        assert.deepEqual(await page.evaluate(reactOwnershipRead(selector)),ownership,'all outcomes restore complete source ownership');
+      } finally { await context.close(); rmSync(dir,{recursive:true,force:true}); }
+    }
+  } finally { await browser.close(); }
 });
