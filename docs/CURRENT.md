@@ -33,6 +33,16 @@ Browser download automation stalled before succeeding; visual fidelity, font
 matching and unseen-kit qualification remain unproven. This fixes a handoff
 blocker without changing either scoreboard.
 
+Sources now offers **Review all source states on two backgrounds** for saved
+root initial-state operations. All 12 current Checkbox combinations were
+recaptured through this control, including omitted, checked, indeterminate and
+disabled inputs. Each source capture must match its pinned full tree and image,
+then restore the original mount and unchanged source. The app shows transparent
+source crops beside the saved native exports on white and black at original
+pixel size. A named refusal stops the review; every saved state stays visible.
+This does not refresh the canvas, score native fidelity or qualify behavior,
+font-byte identity or unseen reverse conversion. Both scoreboards are unchanged.
+
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real
 > codebases](GOAL.md).** The V1 criteria below are frozen as a regression
 > record; the benchmark keeps running in CI as a guard, not a target.

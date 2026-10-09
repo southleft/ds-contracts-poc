@@ -10,6 +10,7 @@ import {createReactSourceWitnessSuccessions} from './react-source-witness-succes
 import {planReactDesignSourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
+import {captureReactInitialSourceReview,initialSourceReviewReason} from './react-initial-source-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
 import {canonicalJson, revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
@@ -308,6 +309,7 @@ export function createReactReferenceService(
   native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; successions?: ReturnType<typeof createNativeSourceSuccessions>; updateTransport?: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
+  let initialSourceReviewBusy = false;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactSourceRequest(operationId) };
@@ -800,6 +802,27 @@ export function createReactReferenceService(
           throw Error('react-source-typography-source-changed');
         json(res, 200, { typography: measured });
       } catch { json(res, 409, { error: 'Original typography could not be measured unchanged. Mixed text and nested inline content are not yet supported by this diagnostic.' }); }
+      return;
+    }
+    const initialSourceReview = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/initial-source-review\/(\d+)$/.exec(route);
+    if (initialSourceReview && req.method === 'POST') {
+      if (initialSourceReviewBusy) { json(res, 409, { error: 'Another source review is running. Wait for it to finish.' }); return; }
+      initialSourceReviewBusy = true;
+      try {
+        if (!native || !reference || reference.id !== initialSourceReview[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-initial-source-review-reference-unavailable');
+        const selected = reference, request = native().jobs.reactInitialRequest(initialSourceReview[2]);
+        const compiled = thisInitialEvidence(request).draft.compiled;
+        if (!compiled?.contract) throw Error('react-initial-source-review-contract-unavailable');
+        const identity = compiled.contract.id;
+        const review = await captureReactInitialSourceReview(repoRoot, sourceRoot, selected, request, initialSourceReview[3], () => {
+          if (reference !== selected || !reactReferenceUnchanged(selected)) throw Error('react-initial-source-review-reference-changed');
+          return initialStates.repairEvidence(selected, request, identity);
+        });
+        json(res, 200, { review });
+      } catch (error) { json(res, 409, { error: 'This saved initial-state source could not be recaptured unchanged.',
+        reason: initialSourceReviewReason(error) }); }
+      finally { initialSourceReviewBusy = false; }
       return;
     }
     const matchedReview = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/matched-review$/.exec(route);
