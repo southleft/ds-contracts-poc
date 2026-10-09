@@ -1200,6 +1200,9 @@ test("native drift refuses observation and a later read can observe an externall
     "native-operation-component-readback-refused",
   ]);
   assert.equal(refused.structuralObservation?.status, "refused");
+  assert.deepEqual(refused.structuralObservation?.refusalReasons, [
+    "native-source-observation-text",
+  ]);
   text.characters = original;
   const next = f.jobs.dispatch(f.snapshot.id, "component-readback");
   assert.equal(f.jobs.get(f.snapshot.id).structuralObservation, undefined);

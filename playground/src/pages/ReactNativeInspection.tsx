@@ -360,6 +360,19 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.sizingObservation && <p>Sizing details: {op.sizingObservation.status} for {op.sizingObservation.nodeCount} native layers. This read does not change the design; each proposed size update still requires its own checks.</p>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
         {op.structuralObservation && <p>Supported structure: {op.structuralObservation.status.replaceAll('-', ' ')}. Visual fidelity remains unverified.</p>}
+        {!!op.structuralObservation?.refusalReasons?.length && <section aria-label="Why native inspection stopped">
+          <h4>Why native inspection stopped</h4>
+          <ul>{op.structuralObservation.refusalReasons.map(reason => <li key={reason}>
+            {reason === 'native-contract-comparison-main-instance-background-geometry'
+              ? 'The instance background dimensions do not match its expected inset inside the component.'
+              : reason === 'native-contract-observation-background-geometry'
+                ? 'The background dimensions do not match the component layout.'
+                : reason === 'native-source-observation-text'
+                  ? 'The native text does not match the saved source text or typography.'
+                  : reason.replace(/^native-(?:source-observation|contract-observation|contract-comparison)-/, '').replaceAll('-', ' ')}
+            <details><summary>Diagnostic name</summary><code>{reason}</code></details>
+          </li>)}</ul>
+        </section>}
         {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !(op.sourceCurrent || corrected) || row.content?.phase === 'running'}
           onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>}
         {row.kind === 'root' && row.content?.content?.status === 'compiled-comparison-draft' && <button type="button"

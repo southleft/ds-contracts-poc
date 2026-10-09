@@ -6,6 +6,12 @@ The React importer now preserves direct slot anatomy as an omitted-input default
 
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 
+Native inspection now names the verifier boundary behind a refused readback in
+the source review screen. The saved Button caller shows its background inset
+geometry mismatch instead of only a generic refusal. Native node IDs and receipt
+metadata stay private. This improves diagnosis; the conversion remains refused
+and both direction scoreboards are unchanged.
+
 > **2026-09-28: the active goal is [Beta 1 on real Figma files and real
 > codebases](GOAL.md).** The V1 criteria below are frozen as a regression
 > record; the benchmark keeps running in CI as a guard, not a target.
