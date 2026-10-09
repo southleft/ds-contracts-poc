@@ -15,6 +15,7 @@ import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan, NativeTokenValueChange } from '../../../core/native-contract-update';
 import type { RecordedNativeMeasurement } from '../../../source-reference/matched-native-review';
+import type { ReactInitialSourceReview } from '../../../source-reference/react-initial-source-review';
 import { designValue, correctionValue } from './NativeReviewValue';
 
 function MeasurementImages({measurement, background}: {measurement: RecordedNativeMeasurement['rows'][number]; background: 'white' | 'black'}) {
@@ -75,6 +76,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const [measurements, setMeasurements] = useState<Record<string, RecordedNativeMeasurement>>({});
+  const [sourceReviews, setSourceReviews] = useState<Record<string, ReactInitialSourceReview>>({});
   const [observationRevision, setObservationRevision] = useState(0);
   const [inspectionSourceAvailable, setInspectionSourceAvailable] = useState(false);
   const [inspectionSources, setInspectionSources] = useState<Record<string, boolean>>({});
@@ -118,6 +120,18 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     const timer = setInterval(() => void load(true), 4000);
     return () => { stopped = true; clearInterval(timer); };
   }, [root, observationRevision, ownership?.id, ownership?.state]);
+  async function reviewInitialSources(operationId: string, rowIds: string[]) {
+    setBusy(true); setError('');
+    try {
+      for (const rowId of rowIds) {
+        const response = await fetch(`${root}/native-operation/${operationId}/initial-source-review/${rowId}`, { method: 'POST' });
+        const result = await readSourceResponse(response);
+        if (!response.ok) throw Error(`State ${rowId}: ${result.reason ? `${result.error} Refused by: ${result.reason}` : result.error}`);
+        setSourceReviews(old => ({ ...old, [`${referenceId}/${operationId}/${rowId}`]: result.review }));
+      }
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    finally { setBusy(false); }
+  }
   async function inspectTypography(parentId: string, key: string) {
     setBusy(true); setError('');
     try {
@@ -454,6 +468,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         </section>}
         {!!op.imageObservation?.images.length && <details open={comparison || initial}><summary>{initial ? 'Native initial-state exports' : comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
           <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : op.sourceOwnedContent ? 'These mains retain the component’s own observed internal content. Other inputs, runtime interactions and visual fidelity remain unqualified.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
+          {row.kind === 'initial' && op.sourceCurrent && !!row.initialStates?.length && <>
+            <button type="button" disabled={busy} onClick={() => void reviewInitialSources(id, row.initialStates!.map(state => state.observation))}>
+              Review all {row.initialStates.length} source states on two backgrounds</button>
+            <p role="status">{row.initialStates.filter(state => sourceReviews[`${referenceId}/${id}/${state.observation}`]).length} / {row.initialStates.length} current source states reviewed. Each capture checks and restores the saved source; no fidelity score is assigned.</p>
+          </>}
           {comparison && <>
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
               onClick={() => void action(`native-operation/${row.sourceOperationId ?? row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
@@ -472,6 +491,26 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               <div style={{...nativeImageFraming(state.frame,image).source,width:'max-content',backgroundColor:'white'}}><img loading="lazy" style={{ display: 'block', maxWidth: 'none', backgroundColor: 'white', ...(state.frame ? {width:state.frame.crop.width,height:state.frame.crop.height} : {}) }} alt={`Original state ${state.observation}`}
                 src={`${root}/native-operation/${id}/initial-source/${state.observation}.png`}
                 onError={() => setError('A pinned original state image could not be verified or loaded. Reload unchanged originals before reviewing this comparison.')} /></div>
+              {row.kind === 'initial' && op.sourceCurrent && <button type="button" disabled={busy}
+                onClick={() => void reviewInitialSources(id, [state.observation])}>Review this source on two backgrounds</button>}
+              {op.sourceCurrent && sourceReviews[`${referenceId}/${id}/${state.observation}`] && <details open>
+                <summary>Current source review · diagnostic only</summary>
+                <p>The source matched this saved initial state and was restored after capture. These views use the saved native export; they do not grade visual fidelity or check the current canvas.</p>
+                {(['white', 'black'] as const).map(background => {
+                  const review = sourceReviews[`${referenceId}/${id}/${state.observation}`], framing = nativeImageFraming(review.frame, image);
+                  return <div key={background} style={{display:'flex',gap:12,marginBottom:12}}>
+                    <figure style={{margin:0}}><figcaption>React · {background}</figcaption>
+                      <div style={{...framing.source,backgroundColor:background,width:'max-content'}}><img alt={`Reviewed React state ${state.observation} on ${background}`} src={review.image}
+                        width={review.frame.crop.width} height={review.frame.crop.height} style={{display:'block',maxWidth:'none'}} /></div>
+                    </figure>
+                    <figure style={{margin:0}}><figcaption>Saved Figma · {background}</figcaption>
+                      <div style={{...framing.native,backgroundColor:background,width:'max-content'}}><img alt={`Saved Figma state ${state.observation} on ${background}`}
+                        src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`}
+                        width={image.width} height={image.height} style={{display:'block',maxWidth:'none'}} /></div>
+                    </figure>
+                  </div>;
+                })}
+              </details>}
             </div>)}
             <figcaption>Native {image.caseId}{image.layoutSize && <><br />Layout: {image.layoutSize.width.toFixed(2)} × {image.layoutSize.height.toFixed(2)} px</>}</figcaption>
             <div style={{ padding: comparison || initial ? 8 : 0, ...(comparison || initial ? nativeImageFraming(initial ? row.initialStates?.find(state=>'variant:'+state.variant===image.caseId)?.frame : row.sourceFrame,image).native : {}), width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
