@@ -248,7 +248,7 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
       ...(nativeVectorStrokeCapture ? {nativeVectorStrokeCapture} : {}) });
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
   if (r.skipped.length) log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
-  log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; about a minute)…`);
+  log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; duration depends on variant count)…`);
   const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined, ...(run.fonts ? { fonts: run.fonts } : {}) });
   const report = reportCheck(r, run.out, outcome, run.allowFailures === true, deps.label);
   for (const line of report.lines) log(line);
