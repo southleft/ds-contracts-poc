@@ -24,6 +24,8 @@
  *      directory must say NOT CHECKED, name the install command, and exit 0.
  *   7. --fonts must reach the real consumer, record its faces, and reject a
  *      mismatched family before writing output from the installed artifact.
+ *   8. build the Sync Runner plugin zip using its existing dump-source and
+ *      engine-receipt guards. Native preparation is a separate remaining gap.
  *
  * Needs the npm registry (the install and the check's clean consumer) and
  * downloads Chromium when it is not cached. `--keep` leaves the temp directory.
@@ -167,6 +169,10 @@ export async function smoke(keep = false): Promise<string[]> {
     expect(wrongFamily.status === 1, `wrong-family-exit-code: expected 1, got ${wrongFamily.status}`);
     expect(/consumer-fonts:0:family-not-declared-by-font/.test(wrongFamily.stderr), 'wrong-family-refusal: no family mismatch diagnosis');
     expect(!existsSync(path.join(project, 'out-wrong-family')), 'wrong-family-output: files were written before the font refusal');
+    console.log('building the Sync Runner plugin zip with its existing dump and engine receipt guards…');
+    // Packaging only. Never re-record the engine receipt or dispatch to Figma.
+    process.stdout.write(sh(process.execPath, [path.join(ROOT, 'scripts', 'build-plugin-zip.mjs'),
+      path.join(work, 'ds-contracts-sync-runner-plugin.zip')], ROOT, process.env));
     return problems;
   } finally {
     if (keep) console.log(`kept ${work}`); else rmSync(work, { recursive: true, force: true });
@@ -180,6 +186,6 @@ if (process.argv[1] && /(^|[\\/])cli-figma-to-react-smoke\.(m?[tj]s)$/.test(path
       console.error(`✘ cli:figma-to-react:smoke:check — the installed CLI does not reproduce the pinned in-repo result:\n  - ${found.join('\n  - ')}`);
       process.exit(1);
     }
-    console.log('✔ cli:figma-to-react:smoke:check — the packed CLI, installed with no repository, reproduces the altitude-badge pin; the check reports all 10 variants UNVERIFIED without a token and NOT CHECKED without a Chromium');
+    console.log('✔ cli:figma-to-react:smoke:check — the packed CLI, installed with no repository, reproduces the altitude-badge pin; the check reports all 10 variants UNVERIFIED without a token and NOT CHECKED without a Chromium; the Sync Runner zip passes its dump and engine guards');
   }).catch(e => { console.error('✘ cli:figma-to-react:smoke:check — ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });
 }
