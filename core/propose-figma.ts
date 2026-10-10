@@ -1,5 +1,5 @@
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
-import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability} from './source-part-availability.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
@@ -2474,6 +2474,7 @@ interface MintCapture {
 interface Ctx {
   structuralAvailabilitySource?: DumpSet;
   guardedDrawnPartDomain?: boolean;
+  sourcePartMatrixVerified?: boolean;
   fixedSwapOwnerRoots?: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]>;
   fixedSwapRootAllocationFiltered?: boolean;
   fixedSwapRootInputUses?: Array<{merged:Merged;property:string;ownerSetKey:string;targetId:string;targetKey:string;component:Record<string,unknown>;target:Record<string,string>;values:Array<{width:number;height:number}>;where:string}>;
@@ -12129,6 +12130,28 @@ function declaredPresenceDomain(ctx: Ctx): Array<Array<string | null>> | undefin
     .filter(row => !absent.has(JSON.stringify(row)));
 }
 
+/** Authenticate observed caller rows without granting presence authority.
+ * A complete source matrix may use its full finite product;
+ * a ragged source still needs the independently admitted drawn domain. */
+function qualifiedComponentCallerRows(m: Merged, ctx: Ctx) {
+  const source = ctx.structuralAvailabilitySource;
+  if (!source || m.type !== 'INSTANCE') return;
+  let domain = declaredPresenceDomain(ctx);
+  let qualified = ctx.guardedDrawnPartDomain === true;
+  if (!domain && ctx.sourcePartMatrixVerified && ctx.axes.length &&
+      ctx.axes.length <= 8 && ctx.axes.every(axis => !axis.omitted)) {
+    const domains = ctx.axes.map(axis => axis.values.map(value => axisValue(axis, value)));
+    if (domains.reduce((n, values) => n * values.length, 1) > 4096) return;
+    domain = domains.reduce<Array<Array<string | null>>>((rows, values) =>
+      rows.flatMap(row => values.map(value => [...row, value])), [[]]);
+    qualified = true;
+  }
+  return qualifyOwnedComponentCallerRows(source, m.occ, ctx.axes.map(axis => ({
+    property: axis.property, prop: axis.propName, values: axis.values,
+    map: Object.fromEntries(axis.values.map(value => [value, axisValue(axis, value)])),
+  })), domain, qualified);
+}
+
 /** Share the same complete presence proof before and after keyed identity splitting. */
 function observedPartPresence(m:Merged,ctx:Ctx,where:string) {
   const presenceNoteStart=ctx.notes.length;
@@ -13374,13 +13397,17 @@ function buildPartFromEvidence(
           if(matches.length>1)throw Error('visibility-control-source-conflict:'+where+':'+prop);
           return matches[0]?.visibilityTarget?.visible;
         });
-        if(values.every(v=>typeof v==='boolean')&&new Set(values).size===1){((component.props??={}) as Record<string,unknown>)[prop]=values[0]!;ctx.notes.push(where+': carried identity-proven descendant visibility as '+prop+'='+values[0]);}
+        if(m.occ.length===ctx.totalVariants.length&&values.every(v=>typeof v==='boolean')&&new Set(values).size===1){((component.props??={}) as Record<string,unknown>)[prop]=values[0]!;ctx.notes.push(where+': carried identity-proven descendant visibility as '+prop+'='+values[0]);}
         else if(values.some(v=>typeof v==='boolean')){
-          if(m.occ.length===ctx.totalVariants.length && ctx.axes.length>0){
-            const rows=m.occ.map((o,i)=>({values:ctx.axes.map(axis=>{const raw=axisValuesOf(o.variant)[axis.property];return axis.omitted?.unsetValue===raw?null:axisValue(axis,raw);}),value:values[i]??null}));
+          const complete = m.occ.length === ctx.totalVariants.length;
+          const qualifiedRows = !complete && qualifiedComponentCallerRows(m, ctx);
+          if((complete || qualifiedRows) && ctx.axes.length>0){
+            const byVariant = new Map(m.occ.map((o,i) => [o.variant, values[i] ?? null]));
+            const variants = complete ? m.occ.map(o => o.variant) : ctx.totalVariants;
+            const rows=variants.map(variant=>({values:ctx.axes.map(axis=>{const raw=axisValuesOf(variant)[axis.property];return axis.omitted?.unsetValue===raw?null:axisValue(axis,raw);}),value:byVariant.get(variant)??null}));
             const table={props:ctx.axes.map(axis=>axis.propName),rows};
             ((component.booleanPropsByCombination??={}) as Record<string,unknown>)[prop]=table;
-            ctx.notes.push(where+': carried identity-proven descendant visibility through a complete combination table; '+values.filter(v=>typeof v==='boolean').length+'/'+values.length+' explicit values, remaining arguments omitted');
+            ctx.notes.push(where+': carried identity-proven descendant visibility through a complete combination table; '+values.filter(v=>typeof v==='boolean').length+'/'+values.length+' explicit values, remaining arguments omitted'+(qualifiedRows?'; observed caller rows authenticated from original mains':''));
           }else ctx.notes.push(where+': visibility-control-combination-required — incomplete parent observations');
         }
       }
@@ -17115,6 +17142,7 @@ function proposeFromDumpFencedImpl(
     guardedDrawnPaintDomain: drawnDeclaration !== undefined,
     structuralAvailabilitySource,
     guardedDrawnPartDomain: drawnDeclaration !== undefined,
+    sourcePartMatrixVerified: sourceProjection.status === 'source-matrix-verified',
     ...(designerStateAxis !== null && statePromo ? {presenceAbsentVariants: contractAbsentVariants ?? []} : {}),
     corpus: opts.corpus,
     contractIdByName: opts.contractIdByName,
