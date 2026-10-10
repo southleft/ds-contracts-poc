@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
-import {nativeTextAppearanceMatches} from './native-text-appearance-observation.js';
+import {nativeTextAppearanceMatches,nativeTextAppearanceDefaultProfileRequired} from './native-text-appearance-observation.js';
 import {emitNativeInventoryReadbackScript} from './native-source-observation.js';
 function fixture(){const characters='AB\nC',segments=[{start:0,end:3},{start:3,end:4}].map((r,i)=>({...r,characters:characters.slice(r.start,r.end),fontName:{family:'Inter',style:'Regular'},fontSize:14,fontWeight:400,lineHeight:{unit:'AUTO'},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE',fills:[{type:'SOLID',color:{r:0,g:0,b:i}}]}));return{characters,segments,expected:observeTextAppearance(characters,segments)!};}
 test('independent range comparison rejects text, style, paint and coverage tampering',()=>{
@@ -11,6 +11,52 @@ test('independent range comparison rejects text, style, paint and coverage tampe
  assert.equal(nativeTextAppearanceMatches(f.expected,'stale',f.segments),false);
  const split=[{...f.segments[0],end:1,characters:'A'},{...f.segments[0],start:1,characters:'B\n'},f.segments[1]];
  assert.equal(nativeTextAppearanceMatches(f.expected,f.characters,split),true);
+});
+test('independent ranges accept the complete explicit source font-axis inventory',()=>{
+ const f=fixture(),segments=f.segments.map(s=>({...s,fontName:{...s.fontName,variationSettings:{wght:400,opsz:14,GRAD:20}}}));
+ const expected=observeTextAppearance(f.characters,segments);assert.ok(expected&&'runs'in expected,'source observation must retain explicit font axes');
+ assert.deepEqual(expected.runs.map(r=>r.fontName),segments.map(s=>s.fontName),'the fixture must preserve the actual source axes');
+ const native=segments.map(s=>({...s,fontName:{...s.fontName,variationSettings:{GRAD:20,opsz:14,wght:400}}}));
+ for(const authored of [false,true]){
+  assert.equal(nativeTextAppearanceMatches(expected,f.characters,native,authored),true);
+  assert.equal(nativeTextAppearanceDefaultProfileRequired(expected,native,authored),false);
+ }
+});
+test('independent explicit font axes reject missing, extra, changed and malformed axes exactly',()=>{
+ const f=fixture(),segments=f.segments.map(s=>({...s,fontName:{...s.fontName,variationSettings:{wght:400,opsz:14,GRAD:20}}}));
+ const expected=observeTextAppearance(f.characters,segments);assert.ok(expected,'source observation must retain explicit font axes');
+ const mutations:Array<[string,(s:any)=>void]>=[
+  ['missing weight axis',s=>{delete s[1].fontName.variationSettings.wght;}],
+  ['missing optical-size axis',s=>{delete s[1].fontName.variationSettings.opsz;}],
+  ['missing custom axis',s=>{delete s[1].fontName.variationSettings.GRAD;}],
+  ['extra custom axis',s=>{s[1].fontName.variationSettings.XTRA=1;}],
+  ['changed weight below numeric tolerance',s=>{s[1].fontName.variationSettings.wght+=1e-6;}],
+  ['changed optical size below numeric tolerance',s=>{s[1].fontName.variationSettings.opsz+=1e-6;}],
+  ['changed custom axis below numeric tolerance',s=>{s[1].fontName.variationSettings.GRAD+=1e-6;}],
+  ['omitted native axis inventory',s=>{delete s[1].fontName.variationSettings;}],
+  ['non-finite weight',s=>{s[1].fontName.variationSettings.wght=NaN;}],
+  ['infinite custom axis',s=>{s[1].fontName.variationSettings.GRAD=Infinity;}],
+  ['string axis value',s=>{s[1].fontName.variationSettings.opsz='14';}],
+  ['null axis value',s=>{s[1].fontName.variationSettings.GRAD=null;}],
+  ['undefined axis value',s=>{s[1].fontName.variationSettings.GRAD=undefined;}],
+  ['array inventory',s=>{s[1].fontName.variationSettings=[400,14,20];}],
+  ['malformed axis tag',s=>{s[1].fontName.variationSettings.BAD=20;}],
+ ];
+ for(const [name,mutate] of mutations){
+  const native=structuredClone(segments);mutate(native);
+  for(const authored of [false,true]){
+   assert.equal(nativeTextAppearanceMatches(expected,f.characters,native,authored),false,name);
+   assert.equal(nativeTextAppearanceDefaultProfileRequired(expected,native,authored),false,name+' has explicit source authority');
+  }
+ }
+});
+test('native materialized axes require default-profile authority when the source omits axes',()=>{
+ const f=fixture(),native=f.segments.map(s=>({...s,fontName:{...s.fontName,variationSettings:{wght:400,opsz:14,GRAD:20}}}));
+ for(const authored of [false,true]){
+  assert.equal(nativeTextAppearanceMatches(f.expected,f.characters,native,authored),false);
+  assert.equal(nativeTextAppearanceDefaultProfileRequired(f.expected,native,authored),true);
+  assert.equal(nativeTextAppearanceDefaultProfileRequired(f.expected,f.segments,authored),false);
+ }
 });
 test('independent inventory captures marked native ranges twice and detects between-read drift',async()=>{
  for(const drift of [false,true]){

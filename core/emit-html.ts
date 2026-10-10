@@ -1548,7 +1548,7 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
       if (w.part.component?.enumPropsByCombination) throw new Error('HTML_ENUM_ARGUMENTS_UNSUPPORTED');
       if (w.part.shapeFillOverrideProp) throw new Error('HTML_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
       if (w.part.textColorOverrideProp) throw new Error('HTML_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
-      if (w.part.textAppearanceOverride) throw new Error('HTML_TEXT_APPEARANCE_UNSUPPORTED');
+      if (w.part.textAppearanceOverride || w.part.textAppearanceByCombination) throw new Error('HTML_TEXT_APPEARANCE_UNSUPPORTED');
       if (w.part.imageOverride) throw new Error('HTML_IMAGE_OVERRIDE_UNSUPPORTED');
       if (w.part.availabilityByCombination) throw new Error('HTML_STRUCTURAL_AVAILABILITY_UNSUPPORTED');
     if (w.part.visibilityOverrideProp) throw new Error('HTML_VISIBILITY_OVERRIDE_UNSUPPORTED');

@@ -17,6 +17,62 @@ test('appearance compiler preserves source units, alpha, font and exact characte
  assert.equal(source.runs[0].lineHeight.value,140);
  assert.throws(()=>compileReactTextAppearance({characters:'stale',runs:source.runs}),/unqualified/);
 });
+
+
+test('font-axis CSS preserves custom values, canonical order, empty and absent maps',()=>{
+ const plain=appearance();assert.ok('runs'in plain);const before=structuredClone(plain);
+ assert.equal(Object.hasOwn(compileReactTextAppearance(plain).runs[0].style,'fontVariationSettings'),false);
+ const source=structuredClone(plain);source.runs[0].fontName.variationSettings={wght:430.5,slnt:0,XTRA:-.25};source.runs[1].fontName.variationSettings={};
+ const reordered=structuredClone(source);reordered.runs[0].fontName.variationSettings={XTRA:-.25,slnt:0,wght:430.5};
+ const compiled=compileReactTextAppearance(source);
+ assert.equal(compiled.runs[0].style.fontVariationSettings,'"XTRA" -0.25, "slnt" 0, "wght" 430.5');
+ assert.equal(compiled.runs[1].style.fontVariationSettings,'normal');
+ assert.equal(JSON.stringify(compiled),JSON.stringify(compileReactTextAppearance(reordered)));
+ const withoutAxes=structuredClone(compiled);for(const r of withoutAxes.runs)delete r.style.fontVariationSettings;
+ assert.deepEqual(withoutAxes,compileReactTextAppearance(plain),'axis transport must not change legacy source style fields');
+ assert.deepEqual(plain,before,'compilation leaves no-axis source unchanged');
+});
+
+test('authored ranges select canonical aliased tuples, yield to explicit choices and restore changed or empty caller text',async t=>{
+ const {ContractSchema}=await import('../scripts/contract-schema.js');
+ const {reactEmitter,reactInlineEmitter}=await import('./emitter.js');
+ const source=appearance();assert.ok('runs'in source);
+ for(const r of source.runs)r.fontName.variationSettings={wght:400,slnt:0,XTRA:-.25};
+ const strong=structuredClone(source);strong.runs[1].fill.paint.color={r:1,g:0,b:0};
+ strong.runs[1].fontName.variationSettings={wght:625,slnt:-4,XTRA:1.25};
+ const explicit=structuredClone(source);explicit.runs[1].fill.paint.color={r:0,g:1,b:0};explicit.runs[1].fontName.variationSettings={};
+ const c=ContractSchema.parse({id:'test.authored-appearance',name:'AuthoredAppearance',version:'0.1.0',status:'draft',description:'Owned range defaults',semantics:{element:'div'},props:[
+  {name:'tone',type:{enum:['calm','strong']},default:'calm',bindings:{code:{prop:'toneKind'},figma:{kind:'VARIANT',property:'Tone',values:{calm:'Calm',strong:'Strong'}}}},
+  {name:'text',type:'text',default:source.characters,bindings:{code:{prop:'description'},figma:{kind:'TEXT',property:'Description'}}},
+  {name:'appearance',type:{enum:['explicit']},bindings:{code:{prop:'appearance'},figma:{kind:'NONE'}}},
+ ],states:[],anatomy:{root:{parts:{description:{content:{prop:'description'},literals:{color:'#d6deeb','font-size':'14px','line-height':'40px'},textAppearanceByCombination:{props:['tone'],rows:[{values:['calm'],appearance:source},{values:['strong'],appearance:strong}]},textAppearanceOverride:{prop:'appearance',choices:{explicit}}}}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./AuthoredAppearance',export:'AuthoredAppearance'}}}});
+ const ctx={tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},contracts:new Map([[c.id,c]]),icons:new Map<string,string>()};
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  const files=emitter.emit(c,ctx);assert.deepEqual(generatedTypeErrors(c.name,files[0].contents),[]);
+  const page=await browser.newPage(),render=await mountGenerated(page,c.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents);
+  await render({});assert.equal(await page.locator('#root').textContent(),source.characters);
+  assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).color),'rgb(0, 0, 255)');
+  assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).fontVariationSettings),'"XTRA" -0.25, "slnt" 0, "wght" 400');
+  await render({toneKind:'strong'});assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).color),'rgb(255, 0, 0)');
+  assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).fontVariationSettings),'"XTRA" 1.25, "slnt" -4, "wght" 625');
+  await render({toneKind:'strong',appearance:'explicit'});assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).color),'rgb(0, 255, 0)');
+  assert.equal(await page.locator('#root span').last().evaluate(n=>getComputedStyle(n).fontVariationSettings),'normal','explicit empty axis map clears authored axes');
+  for(const replacement of ['Changed caller text','']){
+   await render({description:replacement});assert.equal(await page.locator('#root').textContent(),replacement);
+   const textNode=page.locator('#root > div > span');
+   assert.equal(await textNode.evaluate(n=>getComputedStyle(n).color),'rgb(214, 222, 235)');
+   assert.equal(await textNode.evaluate(n=>getComputedStyle(n).lineHeight),'40px');
+   assert.equal(await textNode.evaluate(n=>getComputedStyle(n).fontVariationSettings),'normal','authored axes must not survive changed or empty caller text');
+   assert.equal(await textNode.locator('span').count(),0,'source ranges must not survive a caller replacement');
+  }
+  const failure=page.waitForEvent('pageerror');await render({description:'Changed',appearance:'explicit'});
+  assert.match((await failure).message,/text-appearance-characters-unqualified/);await page.close();
+ }
+ for(const mutate of [(x:any)=>x.anatomy.root.parts.description.textAppearanceByCombination.rows.pop(),(x:any)=>{x.anatomy.root.parts.description.textAppearanceByCombination.rows[0].values=['foreign'];},(x:any)=>{x.anatomy.root.parts.description.textAppearanceByCombination.rows[0].appearance.characters='stale';}]){
+  const changed=structuredClone(c);mutate(changed);assert.equal(ContractSchema.safeParse(changed).success,false);
+ }
+});
 test('generated runtime renders distinct ranges and newline, then restores omitted appearance',async t=>{
  const choice=compileReactTextAppearance(appearance());
  const code=REACT_TEXT_APPEARANCE_RUNTIME+`

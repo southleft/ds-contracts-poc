@@ -1,6 +1,7 @@
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
 export * from './vector-stroke.js';
-import {TextAppearanceOverrideSchema,type TextAppearanceOverride} from './text-appearance.js';
+import {TextAppearanceOverrideSchema,TextAppearanceTableSchema,type TextAppearanceOverride,type TextAppearanceTable} from './text-appearance.js';
+export * from './text-appearance.js';
 import {SolidFillSourceBindingsSchema,SolidFillObservedBindingSchema,type SolidFillObservedBinding} from './solid-fill-binding.js';
 import {PRESENCE_STATES,validateStatePresence} from './state-presence.js';
 export * from './state-presence.js';
@@ -2831,6 +2832,8 @@ export interface Part {
   /** Optional finite hex-color input scoped to this owned text node. */
   textColorOverrideProp?: string;
   textAppearanceOverride?:TextAppearanceOverride;
+  /** Exact source-authored range defaults for complete finite variant tuples. */
+  textAppearanceByCombination?:TextAppearanceTable;
   imageOverride?: {prop:string;choices:Record<string,{image:string;size:string;position:string}>};
   /** Optional finite solid-color input on this owned frame or shape. */
   vectorStrokeByCombination?: z.infer<typeof VectorStrokeTableSchema>;
@@ -3210,6 +3213,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     visibilityOverrideDefault: z.boolean().optional(),
     textColorOverrideProp: z.string().min(1).optional(),
     textAppearanceOverride:TextAppearanceOverrideSchema.optional(),
+    textAppearanceByCombination:TextAppearanceTableSchema.optional(),
     imageOverride: z.strictObject({prop:z.string().min(1),choices:z.record(z.string(),z.strictObject({
       image:z.string().max(11184900).regex(/^url\((['"])data:image\/(?:png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}\1\)$/),
       size:z.string().regex(/^(?:cover|contain|(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)% (?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)%)$/),
@@ -3739,6 +3743,27 @@ export const ContractSchema = z.strictObject({
         ctx.addIssue({code:'custom',path,message:'shape-fill-override-requires-owned-normal-shape'});
       if(walkAnatomy(c as Contract).filter(w=>w.part.shapeFillOverrideProp===part.shapeFillOverrideProp).length!==1)
         ctx.addIssue({code:'custom',path,message:'shape-fill-override-target-must-be-unique'});
+    }
+    if(part.textAppearanceByCombination){
+      const table=part.textAppearanceByCombination;
+      const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'textAppearanceByCombination'],message});
+      const textInput=part.content&&c.props.find(p=>p.bindings.code.prop===part.content!.prop);
+      const bound=part.text===undefined&&textInput?.type==='text'&&textInput.bindings.figma.kind==='TEXT'&&typeof textInput.default==='string';
+      if(!nested||(part.text===undefined&&!bound)||part.component||part.slot||part.repeat||part.parts||part.mask||part.icon||part.shape||part.textColorOverrideProp)
+        issue('text-appearance-requires-owned-text');
+      const axes=absentVariantAxes(c as Contract);
+      const selected=axes.filter(axis=>table.props.includes(axis.prop.name));
+      if(selected.length!==table.props.length||selected.some((axis,i)=>axis.prop.name!==table.props[i]))issue('text-appearance-axis-domain-unqualified');
+      for(const row of table.rows){
+        if(row.values.some((value,i)=>!selected[i]?.options.some(option=>(option===null?null:String(option))===value)))issue('text-appearance-value-unqualified');
+      }
+      const expected=reachablePresenceTupleKeys(c as Contract,table.props,part);
+      if(!expected||expected.size!==table.rows.length||table.rows.some(row=>!expected.has(JSON.stringify(row.values))))issue('text-appearance-source-domain-incomplete');
+      for(const row of table.rows){
+        const subst=Object.fromEntries(table.props.map((name,i)=>[name,row.values[i]]));
+        const characters=part.content?textInput?.default:part.textByProp?part.textByProp.map[String(subst[part.textByProp.prop])]??part.text:part.text;
+        if(typeof characters!=='string'||characters!==row.appearance.characters)issue('text-appearance-source-characters-unqualified');
+      }
     }
     if(part.textAppearanceOverride){
       const control=part.textAppearanceOverride;

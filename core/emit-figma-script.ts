@@ -1,7 +1,8 @@
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
 import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME} from './native-text-box.js';
-import {mapNativeTextAppearances,NATIVE_TEXT_APPEARANCE_RUNTIME} from './native-text-appearance.js';
+import {NATIVE_FONT_NAME_EXACT_RUNTIME} from './native-font-profile.js';
+import {mapNativeTextAppearances,attachNativeAuthoredTextAppearance,NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME,NATIVE_AUTHORED_TEXT_OVERRIDE_RUNTIME,NATIVE_AUTHORED_TEXT_APPEARANCE_FUNCTIONS,type NativeScalarTextRecipe,type NativeAuthoredTextRecipes,type NativeAuthoredTextInstanceRecipe} from './native-text-appearance.js';
 import type {QualifiedTextAppearance} from './source-text-appearance-control.js';
 import {mapNativeImageArguments,NATIVE_IMAGE_CONTROL_RUNTIME} from './native-image-control.js';
 import {solidFillPartTokenError,solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
@@ -303,6 +304,12 @@ export interface NodeSpec {
   instanceVisibility?: Record<string,boolean>;
   literalTextBox?:{width:number;height?:number};
   textAppearanceTarget?:string;
+  authoredTextAppearance?:QualifiedTextAppearance;
+  authoredTextAppearanceTarget?:string;
+  authoredTextScalar?:NativeScalarTextRecipe;
+  authoredTextInstanceTarget?:string;
+  instanceAuthoredTextAppearance?:true;
+  instanceAuthoredTextRecipes?:NativeAuthoredTextRecipes;
   instanceTextAppearances?:Record<string,QualifiedTextAppearance>;
   imageTarget?: string;
   instanceImages?: Record<string,NativeImageFill>;
@@ -534,6 +541,7 @@ export interface NodeSpec {
   characters?: string;
   fontSize?: number;
   fontStyle?: string;
+  fontVariationSettings?: NativeScalarTextRecipe['fontVariationSettings'];
   /** Name of the derived text style whose definition the node's font
    *  bindings exactly match — the runtime sets textStyleId when the style
    *  exists in the file (raw fontName/fontSize stand as the fallback). */
@@ -603,7 +611,7 @@ export interface NodeSpec {
    *  main component (instances inherit it; `resetSlot()` returns to it). Any
    *  number of items carries: a native slot holds a child SEQUENCE, so the
    *  old one-instance INSTANCE_SWAP ceiling is gone. */
-  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity }>;
+  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity; authoredTextInstanceTarget?:string } & Partial<NativeAuthoredTextInstanceRecipe>>;
   children?: NodeSpec[];
 }
 
@@ -1070,11 +1078,18 @@ function componentHasJointPropertyReferences(component: ComponentData): boolean 
   return [...component.variants, ...(component.stateVariants ?? [])].some(v => visit(v.spec));
 }
 
-/** Only components with overlapping property references need this runtime
- * correction. Keep the plugin's preview hash aligned with emitted specHash. */
+function componentHasTextAppearanceFinalization(component:ComponentData):boolean {
+  const visit=(s:NodeSpec):boolean=>Boolean(s.authoredTextAppearance||s.instanceAuthoredTextAppearance||s.textAppearanceTarget||s.instanceTextAppearances)||
+    Boolean(s.slotDefault?.some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances))||(s.children??[]).some(visit);
+  return [...component.variants,...(component.stateVariants??[])].some(v=>visit(v.spec));
+}
+
+/** Salt only components whose property or text-appearance paths changed.
+ * Keep the plugin preview hash aligned with emitted specHash. */
 export function figmaRuntimeRevision(component: ComponentData): string {
   return RUNTIME_EMIT_REV + (componentHasJointPropertyReferences(component)
-    ? '|joint-property-references-v1' : '');
+    ? '|joint-property-references-v1' : '') + (componentHasTextAppearanceFinalization(component)
+    ? '|text-appearance-property-finalization-v1' : '');
 }
 
 /** Contract → the single-component sync script text (pure). */
@@ -4248,7 +4263,7 @@ function mapDepProps(
   parent?: Contract,
   /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
   statePreview?: ComponentRef['statePreview'],
-  visibilityConsumed = false,
+  visibilityConsumed:boolean|{textAppearances:ReadonlySet<string>} = false,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4256,8 +4271,15 @@ function mapDepProps(
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
     if (depProp.bindings.figma.kind === 'NONE') {
-      if(walkAnatomy(dep).some(w=>w.part.visibilityOverrideProp===propName||w.part.textColorOverrideProp===propName||w.part.shapeFillOverrideProp===propName||w.part.imageOverride?.prop===propName||w.part.textAppearanceOverride?.prop===propName)){
-        if(!visibilityConsumed)throw Error('visibility-override-context-unqualified');
+      const controls=walkAnatomy(dep).filter(w=>w.part.visibilityOverrideProp===propName||w.part.textColorOverrideProp===propName||w.part.shapeFillOverrideProp===propName||w.part.imageOverride?.prop===propName||w.part.textAppearanceOverride?.prop===propName);
+      if(controls.length){
+        // Ordinary references retain their existing complete-consumption flag.
+        // Slot defaults consume only the qualified text-appearance channel;
+        // another control sharing this NONE prop must still refuse.
+        const appearanceConsumed=typeof visibilityConsumed==='object'&&visibilityConsumed.textAppearances.has(propName)&&controls.every(({part})=>
+          part.textAppearanceOverride?.prop===propName&&part.visibilityOverrideProp!==propName&&part.textColorOverrideProp!==propName&&
+          part.shapeFillOverrideProp!==propName&&part.imageOverride?.prop!==propName);
+        if(visibilityConsumed!==true&&!appearanceConsumed)throw Error('visibility-override-context-unqualified');
         continue;
       }
       // code-only (v7 arrayOf; ROUND 3 promoted character overrides). An
@@ -5017,6 +5039,58 @@ function applyInstanceRootInputs(spec: NodeSpec, name: string, part: Part, dep: 
     }
 }
 
+// Descendants can be replaced in a reused engine/map while this intermediate
+// Contract object stays identical. Share recipes only within one synchronous
+// root compilation, never across independent compileComponentData calls.
+let authoredTextRecipeCache=new WeakMap<Contract,NativeAuthoredTextRecipes>();
+let authoredTextRecipeActive=new WeakSet<Contract>();
+let authoredTextCompileDepth=0;
+// This is feature reachability, not recipe construction. Opaque legacy
+// cycles have no authored recipe to reject. Keep visited state local to this
+// complete scan; never memoize a negative answer from an in-progress cycle.
+function hasAuthoredTextDependency(contract:Contract,byId:Map<string,Contract>,visited=new Set<Contract>()):boolean {
+  if(visited.has(contract))return false;
+  visited.add(contract);
+  return walkAnatomy(contract).some(({part})=>!!part.textAppearanceByCombination||
+    [...(part.component?[part.component.id]:[]),...(part.slot?.defaultContent??[]).map(item=>item.id)].some(id=>{
+      const dep=byId.get(id);if(!dep)throw Error('authored-text-appearance-dependency-unavailable');
+      return hasAuthoredTextDependency(dep,byId,visited);
+    }));
+}
+function nativeAuthoredInstanceFields(dep:Contract,byId:Map<string,Contract>) {
+  const recipes=compileAuthoredTextRecipes(dep,byId);
+  return recipes?{instanceAuthoredTextAppearance:true as const,instanceAuthoredTextRecipes:recipes}:{};
+}
+function compileAuthoredTextRecipes(contract:Contract,byId:Map<string,Contract>):NativeAuthoredTextRecipes|undefined {
+  if(!hasAuthoredTextDependency(contract,byId))return;
+  const cached=authoredTextRecipeCache.get(contract);if(cached)return cached;
+  if(authoredTextRecipeActive.has(contract))throw Error('authored-text-appearance-dependency-cycle');
+  authoredTextRecipeActive.add(contract);
+  try{
+    const data=compileComponentData(contract,byId);
+    const variants=data.stateVariants?.length
+      ? [...data.variants.map(v=>({...v,name:v.name.includes('=')?v.name+', State='+STATE_PREVIEW_DEFAULT:'State='+STATE_PREVIEW_DEFAULT})),...data.stateVariants]
+      : data.variants;
+    const result:NativeAuthoredTextRecipes={contractId:data.contractId,isSet:data.isSet,variants:variants.map(v=>{
+      const plans:NativeAuthoredTextRecipes['variants'][number]['plans']=[];
+      const instances:NonNullable<NativeAuthoredTextRecipes['variants'][number]['instances']>=[];
+      const addInstance=(n:Pick<NodeSpec,'depContractId'|'instanceAuthoredTextAppearance'|'instanceAuthoredTextRecipes'|'instanceTextAppearances'|'authoredTextInstanceTarget'>)=>{
+        if(!n.instanceAuthoredTextAppearance)return;
+        if(!n.depContractId||!n.instanceAuthoredTextRecipes||!n.authoredTextInstanceTarget)throw Error('authored-text-appearance-nested-recipe-missing');
+        instances.push({target:n.authoredTextInstanceTarget,spec:{depContractId:n.depContractId,instanceAuthoredTextAppearance:true,
+          instanceAuthoredTextRecipes:structuredClone(n.instanceAuthoredTextRecipes),
+          ...(n.instanceTextAppearances?{instanceTextAppearances:structuredClone(n.instanceTextAppearances)}:{})}});
+      };
+      const scan=(n:NodeSpec)=>{if(n.type==='instance'){addInstance(n);return;}if(n.authoredTextAppearance){
+        if(!n.authoredTextAppearanceTarget||!n.authoredTextScalar)throw Error('authored-text-appearance-scalar-recipe-missing');
+        plans.push({target:n.authoredTextAppearanceTarget,appearance:n.authoredTextAppearance,scalar:{...n.authoredTextScalar}});
+      }for(const item of n.slotDefault??[])addInstance(item);for(const child of n.children??[])scan(child);};scan(v.spec);
+      return {name:v.name,plans,...(instances.length?{instances}:{})};
+    })};
+    authoredTextRecipeCache.set(contract,result);return result;
+  }finally{authoredTextRecipeActive.delete(contract);}
+}
+
 function partToSpecs(
   name: string,
   part: Part,
@@ -5053,6 +5127,7 @@ function partToSpecs(
         ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
         instanceVisibility: mapInstanceVisibility(dep,{ ...(part.component!.props ?? {}), ...fields },subst,contract),
         instanceTextAppearances:mapNativeTextAppearances(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
+        ...nativeAuthoredInstanceFields(dep,byId),
         instanceImages: mapNativeImageArguments(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
         instanceTextColors: mapInstanceTextColors(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
         instanceShapeFills: mapInstanceShapeFills(dep,{ ...(part.component!.props ?? {}), ...fields },subst),
@@ -5488,6 +5563,7 @@ function partToSpecInner(
       instanceInsideStroke: resolvedInstanceInsideStroke(part.component,subst),
       instanceVisibility: mapInstanceVisibility(dep,resolveBooleanArguments(dep,part.component,subst),subst,contract),
       instanceTextAppearances:mapNativeTextAppearances(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      ...nativeAuthoredInstanceFields(dep,byId),
       instanceImages: mapNativeImageArguments(dep,resolveBooleanArguments(dep,part.component,subst),subst),
       instanceTextColors: mapInstanceTextColors(dep,resolveBooleanArguments(dep,part.component,subst),subst),
       instanceShapeFills: mapInstanceShapeFills(dep,resolveBooleanArguments(dep,part.component,subst),subst),
@@ -5610,11 +5686,18 @@ function partToSpecInner(
     } else if ((part.slot.defaultContent?.length ?? 0) > 0) {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {
         const dep = byId.get(item.id)!;
+        const authored=nativeAuthoredInstanceFields(dep,byId);
+        // The same finite mapper validates present appearance arguments and
+        // preserves absent lookup rows as omission before consumption is granted.
+        const appearances=authored.instanceAuthoredTextAppearance?mapNativeTextAppearances(dep,item.props??{},subst):undefined;
+        const consumedAppearances=new Set(authored.instanceAuthoredTextAppearance?walkAnatomy(dep).flatMap(({part})=>
+          part.textAppearanceOverride&&Object.hasOwn(item.props??{},part.textAppearanceOverride.prop)?[part.textAppearanceOverride.prop]:[]):[]);
         return {
           dep: dep.name,
           contractId: dep.id,
           ...(dep.bindings.figma.anchors.componentSetKey ? { anchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-          props: mapDepProps(dep, item.props ?? {}, subst, item.text),
+          props: mapDepProps(dep, item.props ?? {}, subst, item.text,undefined,contract,undefined,{textAppearances:consumedAppearances}),
+          ...(authored.instanceAuthoredTextAppearance?{depContractId:dep.id,...authored,instanceTextAppearances:appearances}:{}),
         };
       });
     }
@@ -5657,6 +5740,8 @@ function partToSpecInner(
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
     Object.assign(textSpec, textExtras(textCtx));
+    attachNativeAuthoredTextAppearance(textSpec,part,contract,subst);
+    if(part.textAppearanceByCombination&&frame.textAppearanceTarget){textSpec.textAppearanceTarget=frame.textAppearanceTarget;delete frame.textAppearanceTarget;}
     // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
     // the box that sizes itself to its text, so the fact rides the text spec.
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
@@ -5705,6 +5790,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    attachNativeAuthoredTextAppearance(spec,part,contract,subst);
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
@@ -5754,6 +5840,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    attachNativeAuthoredTextAppearance(spec,part,contract,subst);
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     spec.contentProp = prop.bindings.figma.property;
     applyVisibleWhen(spec, part, contract, subst);
@@ -6280,6 +6367,17 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
+  const outermost=authoredTextCompileDepth===0;
+  if(outermost){authoredTextRecipeCache=new WeakMap();authoredTextRecipeActive=new WeakSet();}
+  authoredTextCompileDepth++;
+  try{return compileComponentDataInner(contract,byId,permit);}
+  finally{
+    authoredTextCompileDepth--;
+    if(outermost){authoredTextRecipeCache=new WeakMap();authoredTextRecipeActive=new WeakSet();}
+  }
+}
+
+function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
   validateStructuralAvailability(contract);
   const insideStrokeErrors=instanceInsideStrokeTokenErrors(contract,byId,input.tokens);if(insideStrokeErrors.length)throw Error(insideStrokeErrors.join('; '));
   if(permit!==boundPaintPermit)for(const {part} of walkAnatomy(contract)){const error=solidFillPartTokenError(part,input.tokens);if(error)throw Error(error);}
@@ -7382,6 +7480,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
   };
   if (contract.anatomy.root?.slot?.bindings?.figma?.textTemplate && data.rootSlot) data.rootSlot.textTemplate = 1;
   if(permit===boundPaintPermit && dataSome(data,spec=>!!spec.solidFillCompositionToken))boundPaintData.add(data);
+  // Stable compiler-owned pairing markers are stamped on owned instances,
+  // inherited by later callers, and never written into private descendants.
+  const markAuthoredInstances=(spec:NodeSpec,path:Array<number|string>)=>{
+    if(spec.instanceAuthoredTextAppearance)spec.authoredTextInstanceTarget=contract.id+':authored-instance:'+JSON.stringify(path);
+    for(const [index,item] of (spec.slotDefault??[]).entries())if(item.instanceAuthoredTextAppearance)
+      item.authoredTextInstanceTarget=contract.id+':authored-instance:'+JSON.stringify([...path,'slotDefault',index]);
+    spec.children?.forEach((child,index)=>markAuthoredInstances(child,[...path,index]));
+  };
+  for(const variant of [...data.variants,...data.stateVariants??[]])markAuthoredInstances(variant.spec,[]);
   compiledData.set(data, canonicalJson(data));
   if (nativeSource) nativeCandidateData.add(data);
   return data;
@@ -8873,7 +8980,18 @@ function compileNativeContractTemplateGraph(contract: Contract, byId: Map<string
 function scopeNativeGraphComponent(data: ComponentData, ids: Map<string, string>) {
   const scoped = structuredClone(data);
   scoped.contractId = ids.get(data.contractId)!;
+  const scopedRecipes=new WeakSet<NativeAuthoredTextRecipes>();
+  const remapRecipes=(recipes:NativeAuthoredTextRecipes)=>{
+    if(scopedRecipes.has(recipes))return;scopedRecipes.add(recipes);
+    const id=ids.get(recipes.contractId);if(!id)throw Error('NATIVE_CONTRACT_GRAPH_AUTHORED_DEPENDENCY_UNQUALIFIED');
+    recipes.contractId=id;
+    for(const variant of recipes.variants)for(const child of variant.instances??[]){
+      const dep=ids.get(child.spec.depContractId);if(!dep)throw Error('NATIVE_CONTRACT_GRAPH_AUTHORED_DEPENDENCY_UNQUALIFIED');
+      child.spec.depContractId=dep;remapRecipes(child.spec.instanceAuthoredTextRecipes);
+    }
+  };
   const visit = (spec: NodeSpec) => {
+    if(spec.instanceAuthoredTextRecipes)remapRecipes(spec.instanceAuthoredTextRecipes);
     if (spec.depContractId) {
       const id = ids.get(spec.depContractId);
       if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
@@ -8884,6 +9002,8 @@ function scopeNativeGraphComponent(data: ComponentData, ids: Map<string, string>
       const id = ids.get(item.contractId);
       if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
       item.contractId = id;
+      if(item.depContractId)item.depContractId=id;
+      if(item.instanceAuthoredTextRecipes)remapRecipes(item.instanceAuthoredTextRecipes);
       delete item.anchorKey;
     }
     for (const item of spec.slotAccepts ?? []) {
@@ -9041,6 +9161,16 @@ function buildSyncScript(
     .map(blocker => `${data.contractId}:${blocker.property}:${blocker.nodeName}`));
   if (callerPropertyBlockers.length)
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
+  const authoredTextScalars:NativeScalarTextRecipe[]=[];
+  const collectAuthoredScalars=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
+    for(const plan of v.plans)authoredTextScalars.push(plan.scalar);
+    for(const child of v.instances??[])collectAuthoredScalars(child.spec.instanceAuthoredTextRecipes);
+  }};
+  for(const data of featureDatas)dataSome(data,s=>{
+    if(s.instanceAuthoredTextRecipes)collectAuthoredScalars(s.instanceAuthoredTextRecipes);
+    for(const item of s.slotDefault??[])if(item.instanceAuthoredTextRecipes)collectAuthoredScalars(item.instanceAuthoredTextRecipes);
+    return false;
+  });
   const hasSolidFillComposition = featureDatas.some(d=>dataSome(d,s=>s.solidFillComposition!==undefined));
   const hasBoundSolidFill=featureDatas.some(d=>dataSome(d,s=>s.solidFillCompositionToken!==undefined));
   const hasInstanceRootFill = featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootFill));
@@ -9063,7 +9193,7 @@ function buildSyncScript(
   // seven committed libraries) emit byte-identical scripts.
   const hasArc = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
   const hasShadow = featureDatas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
-  const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
+  const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined)) || authoredTextScalars.some(s=>s.lineHeight!==undefined);
   const hasSlotTextTemplate = featureDatas.some((d) => dataSome(d, (x) => x.slotTextTemplate === true));
   const hasCollapsingSlot = featureDatas.some(d => dataSome(d, x => x.slotCollapseWhenEmpty === true));
   const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
@@ -9076,7 +9206,7 @@ function buildSyncScript(
   const hasLitStrokeColor = featureDatas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
   // R7 LITERAL INK: the runtime line is emitted only when a spec carries it,
   // so every existing emission stays byte-identical.
-  const hasTextFillLit = featureDatas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
+  const hasTextFillLit = featureDatas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined)) || authoredTextScalars.some(s=>s.textFillLit!==undefined);
   // …and the SHAPE branch's literal ring/weight/radius application.
   const hasShapeLits = featureDatas.some((d) =>
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
@@ -9152,7 +9282,189 @@ function buildSyncScript(
         x.letterSpacing !== undefined || x.textCase !== undefined || x.textDecoration !== undefined ||
         x.textAlignH !== undefined || x.fontFamily !== undefined || x.textTruncation === true,
     ),
-  );
+  ) || authoredTextScalars.some(s=>s.fontFamily!==undefined||s.letterSpacing!==undefined||s.textCase!==undefined||s.textDecoration!==undefined);
+
+  const hasAuthoredTextAppearance=featureDatas.some(d=>dataSome(d,s=>!!s.authoredTextAppearance||!!s.instanceAuthoredTextAppearance||!!s.slotDefault?.some(item=>item.instanceAuthoredTextAppearance)));
+  const hasTextAppearanceWriter=featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances||!!s.slotDefault?.some(item=>item.instanceTextAppearances)));
+  const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter;
+  if(hasAuthoredTextAppearance&&opts.nativeSource){
+    const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
+      const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
+        for(const plan of v.plans)plan.scalar.nativeWeightBinding=!!(opts.nativeSource&&plan.scalar.fontWeightVar);
+        for(const child of v.instances??[])markRecipes(child.spec.instanceAuthoredTextRecipes);
+      }};
+      if(s.instanceAuthoredTextRecipes)markRecipes(s.instanceAuthoredTextRecipes);
+      for(const item of s.slotDefault??[])if(item.instanceAuthoredTextRecipes)markRecipes(item.instanceAuthoredTextRecipes);
+      for(const child of s.children??[])mark(child);
+    };for(const C of featureDatas)for(const v of [...C.variants,...(C.stateVariants??[])])mark(v.spec);
+  }
+  const scalarTextInitialization=`    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
+    node.fontSize = spec.fontSize || 16;
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}${hasTextBox ? `
+    // dump v1.36 — THE TEXT BOX SIZES ITSELF TO ITS TEXT where the contract
+    // says so (Part.textAutoResize: WIDTH_AND_HEIGHT): a whole-pixel box, the
+    // advance rounded up. It is the value createText is born with, so a
+    // script with no such spec never names the field (the golden discipline)
+    // and reads the same value back; it is written explicitly here so an
+    // AMENDED node that had been filled or fixed is put back.
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
+    if (spec.textStyle) {
+      // Exact-definition match compiled in: ride the named style. Text
+      // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
+      const st = await ourTextStyle(spec.textStyle);
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
+    }
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+${opts.nativeSource ? `    if (spec.nativeContractPart && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
+    if (spec.slotTextTemplate) {
+      if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
+      if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
+      node.visible = false;
+    }` : ''}
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}`;
+  const authoredScalarTextRuntime=hasAuthoredTextAppearance?`
+async function applyScalarText(node,spec,initialCharacters,reset) {
+  if(reset)qualifyScalarTextPaint(spec,node);
+  let wantedFont={family:'Inter',style:spec.fontStyle||'Medium'};
+  if(reset){
+    try{await figma.loadFontAsync(wantedFont);}
+    catch(error){throw Error('authored-text-appearance-scalar-font-unavailable');}
+    if(spec.fontFamily){
+      let loaded=false;
+      for(const style of [...new Set([spec.fontStyle||'Medium',(spec.fontStyle||'Medium').split(' ').join('')])]){
+        try{wantedFont={family:spec.fontFamily,style};await figma.loadFontAsync(wantedFont);loaded=true;break;}catch(error){}
+      }
+      if(!loaded)throw Error('authored-text-appearance-scalar-font-unavailable');
+    }
+    if(spec.fontVariationSettings)wantedFont={...wantedFont,variationSettings:spec.fontVariationSettings};
+    await prepareAuthoredFont(wantedFont);
+    if(spec.fontVariationSettings&&spec.nativeWeightBinding&&spec.fontWeightVar&&Object.hasOwn(spec.fontVariationSettings,'wght')){
+      const weight=need(spec.fontWeightVar).resolveForConsumer(node)?.value;
+      if(typeof weight!=='number'||!Number.isFinite(weight)||weight!==spec.fontVariationSettings.wght)throw Error('authored-text-appearance-scalar-axis-weight-conflict');
+    }
+    for(const field of ['fontSize','fontWeight','lineHeight'])if(node.boundVariables?.[field])node.setBoundVariable(field,null);
+    node.lineHeight={unit:'AUTO'};node.letterSpacing={unit:'PIXELS',value:0};
+    node.textCase='ORIGINAL';node.textDecoration='NONE';
+    node.fills=[{type:'SOLID',color:{r:0,g:0,b:0},opacity:1}];
+  }
+      node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
+    node.fontSize = spec.fontSize || 16;
+    if(initialCharacters!==undefined)node.characters=initialCharacters;${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
+    if(spec.fontVariationSettings)node.fontName=reset?wantedFont:{family:spec.fontFamily||'Inter',style:spec.fontStyle||'Medium',variationSettings:spec.fontVariationSettings};${hasTextBox ? `
+    // dump v1.36 — THE TEXT BOX SIZES ITSELF TO ITS TEXT where the contract
+    // says so (Part.textAutoResize: WIDTH_AND_HEIGHT): a whole-pixel box, the
+    // advance rounded up. It is the value createText is born with, so a
+    // script with no such spec never names the field (the golden discipline)
+    // and reads the same value back; it is written explicitly here so an
+    // AMENDED node that had been filled or fixed is put back.
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
+    if (spec.textStyle) {
+      // Exact-definition match compiled in: ride the named style. Text
+      // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
+      const st = await ourTextStyle(spec.textStyle);
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
+    }
+    // Retain the historical identity stamp for round-trip readers. Native
+    // contract drafts also bind the actual weight below, so nonstandard
+    // variable weights are not reduced to a static face-name fallback.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+${opts.nativeSource ? `    if ((spec.nativeContractPart || spec.nativeWeightBinding) && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
+    if (spec.slotTextTemplate) {
+      if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
+      if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
+      node.visible = false;
+    }` : ''}
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
+  if(!reset)return;
+  const style=spec.textStyle?await ourTextStyle(spec.textStyle):undefined;
+  if(spec.textStyle&&(!style||node.textStyleId!==style.id))throw Error('authored-text-appearance-scalar-style-unqualified');
+  const resolveNumber=name=>{const value=need(name).resolveForConsumer(node)?.value;if(typeof value!=='number'||!Number.isFinite(value))throw Error('authored-text-appearance-scalar-variable-unqualified');return value;};
+  const styleWeight=font=>nativeScalarFaceWeight(font.style);
+  const font=style?style.fontName:authoredExpectedFontName(wantedFont);
+  const size=!style&&spec.fontSizeVar?resolveNumber(spec.fontSizeVar):style?style.fontSize:spec.fontSize||16;
+  const weight=spec.nativeWeightBinding&&spec.fontWeightVar?resolveNumber(spec.fontWeightVar):style&&typeof style.fontWeight==='number'?style.fontWeight:authoredFontProfiles.get(authoredFontKey(wantedFont))?.fontWeight??styleWeight(font);
+  if(!Number.isFinite(weight))throw Error('authored-text-appearance-scalar-weight-unqualified');
+  const line=style?style.lineHeight:typeof spec.lineHeight==='number'?{unit:'PIXELS',value:spec.lineHeight}:spec.lineHeight||{unit:'AUTO'};
+  const expected={fontName:authoredScalarFontName(font,weight,!!(spec.nativeWeightBinding&&spec.fontWeightVar)),fontSize:size,fontWeight:weight,lineHeight:line,
+    letterSpacing:style?style.letterSpacing:{unit:'PIXELS',value:spec.letterSpacing||0},
+    textCase:style?style.textCase:spec.textCase||'ORIGINAL',textDecoration:style?style.textDecoration:spec.textDecoration||'NONE'};
+  const wantedPaint=spec.textFill?boundPaint(spec.textFill,node):spec.textFillLit?{type:'SOLID',color:{r:spec.textFillLit.r,g:spec.textFillLit.g,b:spec.textFillLit.b},opacity:spec.textFillLit.a===undefined?1:spec.textFillLit.a}:{type:'SOLID',color:{r:0,g:0,b:0},opacity:1};
+  const verify=(actual)=>{
+    if(!authoredTextStyleSame(actual,expected))throw Error('authored-text-appearance-scalar-readback-mismatch');
+    const paint=Array.isArray(actual.fills)&&actual.fills.length===1?actual.fills[0]:undefined;
+    if(!paint||paint.type!=='SOLID'||paint.visible===false||(paint.blendMode||'NORMAL')!=='NORMAL'||!authoredTextSame(paint.opacity===undefined?1:paint.opacity,wantedPaint.opacity===undefined?1:wantedPaint.opacity)||!['r','g','b'].every(c=>authoredTextSame(paint.color[c],wantedPaint.color[c])))throw Error('authored-text-appearance-scalar-paint-mismatch');
+    const binding=paint.boundVariables?.color;
+    if(spec.textFill?binding?.id!==need(spec.textFill).id:binding!==undefined)throw Error('authored-text-appearance-scalar-paint-binding-mismatch');
+  };
+  if(node.characters.length){let end=0;for(const segment of node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills'])){
+    if(segment.start!==end||segment.end<=end||segment.end>node.characters.length||segment.characters!==node.characters.slice(segment.start,segment.end))throw Error('authored-text-appearance-scalar-readback-incomplete');verify(segment);end=segment.end;
+  }if(end!==node.characters.length)throw Error('authored-text-appearance-scalar-readback-incomplete');}
+  else verify({...authoredTextFields(node),fills:node.fills});
+  for(const field of ['fontSize','fontWeight','lineHeight']){
+    const name=field==='fontSize'&&!style?spec.fontSizeVar:field==='fontWeight'&&spec.nativeWeightBinding?spec.fontWeightVar:undefined;
+    if(name?node.boundVariables?.[field]?.id!==need(name).id:node.boundVariables?.[field]!==undefined)throw Error('authored-text-appearance-scalar-binding-mismatch');
+  }
+}
+${NATIVE_AUTHORED_TEXT_APPEARANCE_FUNCTIONS}`:'';
+  const finalTextAppearanceRuntime=hasFinalTextAppearances?`
+${!hasAuthoredTextAppearance?`async function replayExplicitFinalTextAppearance(node,spec) {
+${NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME.slice(NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME.indexOf('  if(spec.instanceTextAppearances)'))}
+}`:''}
+async function replayFinalTextAppearances(registry) {
+ const records=registry.finalTextAppearances||[];
+ ${hasAuthoredTextAppearance?`await preflightAuthoredText(records.filter(record=>record.node.type==='TEXT').map(({node,spec})=>({target:node,appearance:spec.authoredTextAppearance,scalar:spec.authoredTextScalar})));`:''}
+ for(const {node,spec} of records){
+  if(node.removed)throw Error('text-appearance-final-target-removed');
+  ${hasAuthoredTextAppearance?`if(node.type==='TEXT')await applyAuthoredTextPlan(node,spec.authoredTextAppearance,spec.authoredTextScalar,spec.authoredTextAppearanceTarget);
+  else {await applyInstanceAuthoredText(node,spec);await replayExplicitAuthoredTextAppearance(node,spec);}`:`await replayExplicitFinalTextAppearance(node,spec);`}
+ }
+}
+` : '';
   return `${opts.header}
 const COMPONENTS = ${JSON.stringify(datas, null, 2)};${opts.propertyAmends ? '\nconst INSTANCE_PROPERTY_AMENDS = '+JSON.stringify(opts.propertyAmends)+';\n'+INSTANCE_PROPERTY_AMEND_RUNTIME : ''}
 const ROW_H = 240, PAD = 40;${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
@@ -9872,7 +10184,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -9901,55 +10213,15 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
-    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
-    node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}${hasTextBox ? `
-    // dump v1.36 — THE TEXT BOX SIZES ITSELF TO ITS TEXT where the contract
-    // says so (Part.textAutoResize: WIDTH_AND_HEIGHT): a whole-pixel box, the
-    // advance rounded up. It is the value createText is born with, so a
-    // script with no such spec never names the field (the golden discipline)
-    // and reads the same value back; it is written explicitly here so an
-    // AMENDED node that had been filled or fixed is put back.
-    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
-    if (spec.textStyle) {
-      // Exact-definition match compiled in: ride the named style. Text
-      // styles own typography only — the bound fill paint below coexists.
-      // Fail closed: a compiled textStyle that cannot bind is identity loss.
-      const st = await ourTextStyle(spec.textStyle);
-      if (!st) {
-        throw new Error(
-          'text-style-identity-refused: missing local text style "' + spec.textStyle +
-          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
-        );
-      }
-      try {
-        await node.setTextStyleIdAsync(st.id);
-      } catch (e) {
-        throw new Error(
-          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
-          '": ' + (e && e.message ? e.message : String(e)),
-        );
-      }
-    } else if (spec.fontSizeVar) {
-      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
-      // overrides its group's weight, and Figma clears textStyleId on any
-      // fontName write), so the SIZE VARIABLE carries the identity instead.
-      // Bound AFTER fontName/fontSize so the literal stays the fallback.
-      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
+${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
+    if(spec.authoredTextAppearance){
+      node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
+      if(spec.textAppearanceTarget)node.setSharedPluginData('ds_contracts','textAppearanceOverride',spec.textAppearanceTarget);
+      await preflightAuthoredText([{appearance:spec.authoredTextAppearance}]);
+      await applyAuthoredTextPlan(node,spec.authoredTextAppearance,spec.authoredTextScalar,spec.authoredTextAppearanceTarget);
+      (registry.finalTextAppearances||=[]).push({node,spec});
     }
-    // Retain the historical identity stamp for round-trip readers. Native
-    // contract drafts also bind the actual weight below, so nonstandard
-    // variable weights are not reduced to a static face-name fallback.
-    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
-${opts.nativeSource ? `    if (spec.nativeContractPart && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
-    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
-    if (spec.slotTextTemplate) {
-      if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
-      if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
-      node.visible = false;
-    }` : ''}
-    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
-${hasLiteralTextBox ? NATIVE_LITERAL_TEXT_BOX_RUNTIME : ''}    if (spec.contentProp) {
+` : scalarTextInitialization+'\n'}${hasLiteralTextBox ? NATIVE_LITERAL_TEXT_BOX_RUNTIME : ''}    if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }${hasCallerContent ? `
     if (spec.callerContentProp) {
@@ -10005,8 +10277,8 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       false,
     );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-    node = main.createInstance();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
-    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${featureDatas.some(d => dataSome(d, s => !!s.instanceSize)) ? `
+    node = main.createInstance();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasAuthoredTextAppearance ? "\n    if(spec.authoredTextInstanceTarget)node.setSharedPluginData('ds_contracts','authoredTextInstance',spec.authoredTextInstanceTarget);" : ''}
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${hasAuthoredTextAppearance ? '\n    await applyInstanceAuthoredText(node,spec);' : ''}${featureDatas.some(d => dataSome(d, s => !!s.instanceSize)) ? `
     if (spec.instanceSize) {
       node.resize(spec.instanceSize.px, spec.instanceSize.px);
       node.setBoundVariable('width', need(spec.instanceSize.varName));
@@ -10048,7 +10320,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       );
       const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
       const inst = main.createInstance();${opts.nativeGraphVerification === 2 ? '\n      nativeInit(inst, {type: \'instance\', nativeContractPart:item.nativeContractPart});' : ''}
-      if (item.props) setInstanceProps(inst, item.props, target);
+      if (item.props) setInstanceProps(inst, item.props, target);${hasAuthoredTextAppearance ? "\n      if(item.authoredTextInstanceTarget)inst.setSharedPluginData('ds_contracts','authoredTextInstance',item.authoredTextInstanceTarget);\n      await applyInstanceAuthoredText(inst,item);\n      if(item.instanceAuthoredTextAppearance)await replayExplicitAuthoredTextAppearance(inst,item);" : ''}${hasFinalTextAppearances ? '\n      if(item.instanceAuthoredTextAppearance||item.instanceTextAppearances)(registry.finalTextAppearances||=[]).push({node:inst,spec:item});' : ''}
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
         try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
@@ -10092,7 +10364,7 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     node.setBoundVariable('strokeWeight',need(spec.instanceRootStroke.width));
   }
 ` : ''}${hasInstanceRootFill ? `  if(spec.instanceRootFill)node.fills=[boundPaint(spec.instanceRootFill.varName,node)];
-` : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances)) ? NATIVE_TEXT_APPEARANCE_RUNTIME : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.imageTarget||!!s.instanceImages)) ? NATIVE_IMAGE_CONTROL_RUNTIME : ''}${hasVisibilityOverrides ? `  if(spec.textColorTarget)node.setSharedPluginData('ds_contracts','textColorOverride',spec.textColorTarget);
+` : ''}${hasTextAppearanceWriter ? (hasAuthoredTextAppearance?NATIVE_AUTHORED_TEXT_OVERRIDE_RUNTIME.replace('if(spec.textAppearanceTarget)','if(spec.textAppearanceTarget&&(!spec.authoredTextAppearance||node.type===\'TEXT\'))'):NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME) : ''}${hasFinalTextAppearances ? "  if(node.type==='INSTANCE'&&(spec.instanceAuthoredTextAppearance||spec.instanceTextAppearances))(registry.finalTextAppearances||=[]).push({node,spec});\n" : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.imageTarget||!!s.instanceImages)) ? NATIVE_IMAGE_CONTROL_RUNTIME : ''}${hasVisibilityOverrides ? `  if(spec.textColorTarget)node.setSharedPluginData('ds_contracts','textColorOverride',spec.textColorTarget);
   if(spec.shapeFillTarget)node.setSharedPluginData('ds_contracts','shapeFillOverride',spec.shapeFillTarget);
   if(spec.instanceShapeFills){
     const previousSkip=figma.skipInvisibleInstanceChildren;figma.skipInvisibleInstanceChildren=false;
@@ -10275,9 +10547,14 @@ ${hasJointPropertyReferences ? `function hasJointPropertyReferences(spec) {
   return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
     (spec.children || []).some(hasJointPropertyReferences);
 }
+` : ''}${hasFinalTextAppearances ? `function hasTextAppearanceFinalization(spec) {
+  return Boolean(spec.authoredTextAppearance||spec.instanceAuthoredTextAppearance||spec.textAppearanceTarget||spec.instanceTextAppearances)||
+    (spec.slotDefault||[]).some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances)||(spec.children||[]).some(hasTextAppearanceFinalization);
+}
 ` : ''}function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV${hasJointPropertyReferences ? ` +
-    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '')` : ''};
+    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '')` : ''}${hasFinalTextAppearances ? ` +
+    (C.variants.concat(C.stateVariants || []).some(v => hasTextAppearanceFinalization(v.spec)) ? '|text-appearance-property-finalization-v1' : '')` : ''};
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -10458,7 +10735,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
     }
   }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
-
+${hasFinalTextAppearances ? '  const finalTextRegistries=[];\n' : ''}
   for (const v of EV) {
     let comp = existingByName.get(v.name);
     const registry = { texts: [], slots: [], visibles: [] };
@@ -10550,9 +10827,9 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
       vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
       vis.node.visible = vis.default;
     }
-  }
+${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -10736,7 +11013,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -10919,7 +11196,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
@@ -10992,7 +11269,7 @@ ${opts.nativeGraphVerification ? `NATIVE_RESULT.graphVerification = ${opts.nativ
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
 const slotUtility = retireSlotUtility();` : ''}
-return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results${hasSlot && !opts.nativeSource ? `, ...(slotUtility ? { slotUtility: slotUtility } : {})` : ''} };
+return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results${hasAuthoredTextAppearance ? ', authoredFontCalibrations' : ''}${hasSlot && !opts.nativeSource ? `, ...(slotUtility ? { slotUtility: slotUtility } : {})` : ''} };
 `;
 }
 
