@@ -4,8 +4,8 @@ import vm from 'node:vm';
 import {createRequire} from 'node:module';
 import {transformSync} from 'esbuild';
 import {ContractSchema, resolveAvailability, assertAvailableVisibilityTarget, walkAnatomy, type Contract} from '../scripts/contract-schema.js';
-import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability} from './source-part-availability.js';
-import {proposeDeclaredDrawnCandidate} from './propose-figma.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
+import {proposeDeclaredDrawnCandidate, proposeBatchFromDump, proposeDeclaredDrawnBatchCandidate} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {emitReact} from './emit-react.js';
 import {emitReactInline} from './emit-react-inline.js';
@@ -255,4 +255,154 @@ test('native component membership keeps dependency identity and one visibility t
   assert.equal(targets.length,props.b==='q'?0:1);
   if(targets.length){assert.equal(targets[0].type,'INSTANCE');assert.equal(targets[0].visible,'show'in props?props.show:true);assert.equal((await (targets[0] as any).getMainComponentAsync()).getSharedPluginData('ds_contracts','contractId'),leaf.id);}
  }
+});
+
+function partialCallerSource() {
+ const child:DumpSet={setName:'Connector owner',type:'COMPONENT',nodeId:'child-main',key:'child-key',propertyDefinitions:{},variants:[
+  {name:'Default',type:'COMPONENT',nodeId:'child-main',layout:layout as any,minHeight:60,children:[
+   {name:'Connector',type:'RECTANGLE',nodeId:'connector',fixedSize:{width:2,height:42},fill:{hex:'336699'}},
+  ]},
+ ]};
+ const parent:DumpSet={setName:'Partial caller',type:'COMPONENT_SET',nodeId:'parent-set',key:'parent-key',
+  propertyDefinitions:{Count:{type:'VARIANT',defaultValue:'Short',variantOptions:['Short','Long']},Mode:{type:'VARIANT',defaultValue:'Horizontal',variantOptions:['Horizontal','Vertical']}},
+  variants:['Short','Long'].flatMap((Count,i)=>['Horizontal','Vertical'].map((Mode,j)=>{
+   const instanceId='caller-'+i+'-'+j;
+   return {name:`Count=${Count}, Mode=${Mode}`,type:'COMPONENT',nodeId:'parent-'+i+'-'+j,variantProperties:{Count,Mode},layout:layout as any,
+    children:Count==='Short'?[]:[{name:'Conditional owner',type:'INSTANCE',nodeId:instanceId,instanceOf:child.setName,instanceKey:child.key,
+     componentProperties:{},...(Mode==='Vertical'?{hostOverrides:[{path:'Connector',fields:['visible'],visibilityTarget:{
+      instanceId,componentId:'child-main',nodeId:'I'+instanceId+';connector',instancePath:[],childPath:[0],visible:false,
+     }}]}:{})}],
+   };
+  })),
+ };
+ return {child,parent};
+}
+function proposePartialCaller(dump=partialCallerSource(),drawn=false) {
+ const options={fileKey:'file',stampsObservable:true,hiddenCaptured:true,mintUnbound:true,contractIdByName:new Map<string,string>(),
+  corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}})};
+ const batch=drawn?proposeDeclaredDrawnBatchCandidate({child:dump.child,parent:dump.parent},options,
+  new Map([['parent',dump.parent.variants.map(v=>v.variantProperties!)]] )).batch:
+  proposeBatchFromDump({child:dump.child,parent:dump.parent},options);
+ const parent=batch.proposals.find(p=>p.setName==='parent');
+ const child=batch.proposals.find(p=>p.setName==='child');
+ return {batch,parent:parent&&ContractSchema.parse(parent.contract),child:child&&ContractSchema.parse(child.contract)};
+}
+
+test('complete original membership retains partial caller false and omits absent arguments',()=>{
+ const dump=partialCallerSource(),original=JSON.stringify(dump),{batch,parent,child}=proposePartialCaller(dump);
+ assert.deepEqual(batch.skipped,[]);assert(parent);assert(child);assert.equal(JSON.stringify(dump),original);
+ const ref=walkAnatomy(parent).find(w=>w.part.component?.id===child.id)!.part.component!;
+ const entries=Object.entries(ref.booleanPropsByCombination!);assert.equal(entries.length,1);
+ const [prop,table]=entries[0];assert.deepEqual(table.rows.map(r=>r.value),[null,null,null,false]);
+ assert.equal(child.props.find(p=>p.name===prop)!.default,undefined);
+ assert.equal(child.anatomy.root.tokens?.['min-height']!==undefined||child.anatomy.root.literals?.['min-height']!==undefined,true);
+ const scope=new Map([parent,child].map(c=>[c.id,c]));
+ const merge=(a:Record<string,any>,b:Record<string,any>|undefined):Record<string,any>=>{for(const [k,v] of Object.entries(b??{})){if(v&&typeof v==='object'&&!Array.isArray(v))a[k]=merge(a[k]??{},v);else a[k]=v;}return a;};
+ const sourceTokens={...tokens,primitives:batch.proposals.reduce((a,p)=>merge(a,p.mintedTokens?.tree),{})};
+ const tokenPaths=new Set(batch.proposals.flatMap(p=>p.mintedTokens?.entries.map(e=>e.ref.slice(1,-1))??[]));
+ for(const inline of [false,true]){
+  const emit=(c:Contract)=>inline?emitReactInline(c,{tokens:sourceTokens,icons:new Map(),contracts:scope}).tsx:emitReact(c,{tokens:tokenPaths,icons:new Map(),contracts:scope}).tsx;
+  const Child=load(emit(child),child.name),tsx=emit(parent),deps:Record<string,unknown>={};
+  for(const match of tsx.matchAll(/import \{[^}]+\} from ['"]([^'"]+)['"]/g))if(match[1].includes(child.name))deps[match[1]]={[child.name]:Child};
+  const Parent=load(tsx,parent.name,deps);
+  const elements=(n:any):any[]=>n==null?[]:Array.isArray(n)?n.flatMap(elements):typeof n==='object'?[n,...elements(n.props?.children)]:[];
+  for(const count of ['short','long'])for(const mode of ['horizontal','vertical']){
+   const nodes=elements(Parent({count,mode})).filter(n=>n.type===Child);
+   assert.equal(nodes.length,count==='long'?1:0);
+   if(nodes.length)assert.equal(nodes[0].props[prop],mode==='vertical'?false:undefined);
+  }
+ }
+ const data=createFigmaEngine({tokens:sourceTokens,icons:new Map()}).compileComponentData(parent,scope);
+ const vertical=data.variants.find(v=>v.name==='Count=Long, Mode=Vertical')!;
+ const horizontal=data.variants.find(v=>v.name==='Count=Long, Mode=Horizontal')!;
+ assert.deepEqual(vertical.spec.children![0].instanceVisibility,{[child.id+':'+prop]:false});
+ assert.equal(horizontal.spec.children![0].instanceVisibility,undefined);
+});
+
+test('independently declared ragged membership preserves exact false without fabricating absent instances',()=>{
+ const dump=partialCallerSource();dump.parent.variants.splice(1,1);
+ const {batch,parent,child}=proposePartialCaller(dump,true);assert.deepEqual(batch.skipped,[]);assert(parent);assert(child);
+ const table=Object.values(walkAnatomy(parent).find(w=>w.part.component?.id===child.id)!.part.component!.booleanPropsByCombination!)[0];
+ assert.deepEqual(table.rows.map(r=>r.value),[null,null,false]);
+ assert.equal(parent.bindings.figma.drawnVariants!.length,3);
+});
+
+test('partial caller source conflicts cannot gain visibility argument authority',()=>{
+ for(const corrupt of [
+  (d:ReturnType<typeof partialCallerSource>)=>{d.parent.variants[2].children![0].nodeId=d.parent.variants[3].children![0].nodeId;},
+  (d:ReturnType<typeof partialCallerSource>)=>{d.parent.variants[3].children![0].hostOverrides![0].visibilityTarget!.instanceId='foreign-instance';},
+ ]){
+  const dump=partialCallerSource();corrupt(dump);const {parent}=proposePartialCaller(dump);
+  assert(!parent||walkAnatomy(parent).every(w=>!w.part.component?.booleanPropsByCombination));
+ }
+ const duplicate=partialCallerSource(),node=duplicate.parent.variants[3].children![0];
+ node.hostOverrides!.push(structuredClone(node.hostOverrides![0]));
+ const {batch}=proposePartialCaller(duplicate);assert(batch.skipped.some(s=>s.reason.includes('visibility-control-source-conflict')));
+});
+
+function repeatedCallerSource() {
+ const dump=partialCallerSource();
+ for(const [i,main] of dump.parent.variants.entries()){
+  const selected=main.children![0]??{name:'Conditional owner',type:'INSTANCE',nodeId:'short-'+i,
+   instanceOf:dump.child.setName,instanceKey:dump.child.key,componentProperties:{}};
+  const step=(ordinal:number)=>({...structuredClone(selected),name:'Repeated step',nodeId:ordinal===2?selected.nodeId:'repeat-'+i+'-'+ordinal,
+   ...(ordinal===2?{}:{hostOverrides:undefined}),...(ordinal===3?{hidden:true}:{})});
+  const siblings=main.variantProperties!.Count==='Long'?[step(0),step(1),step(2),step(3)]:[step(0)];
+  main.children=main.variantProperties!.Mode==='Horizontal'?siblings.flatMap((node,j)=>j===0?[node]:[
+   {name:'Separator',type:'RECTANGLE',nodeId:'gap-'+i+'-'+j,fixedSize:{width:2,height:2},fill:{hex:'336699'}},node]):siblings;
+ }
+ return dump;
+}
+const callerAxes:Array<{property:string;prop:string;values:string[];map:Record<string,string>}>=
+ [{property:'Count',prop:'count',values:['Short','Long'],map:{Short:'short',Long:'long'}},
+ {property:'Mode',prop:'mode',values:['Horizontal','Vertical'],map:{Horizontal:'horizontal',Vertical:'vertical'}}];
+const callerDomain=[['short','horizontal'],['short','vertical'],['long','horizontal'],['long','vertical']];
+const repeatedOccurrences=(s:DumpSet)=>s.variants.flatMap(main=>(main.children??[])
+ .filter(node=>node.nodeId?.startsWith('caller-')).map(node=>({variant:main.name,node})));
+
+test('repeated sibling Boolean rows authenticate original ordinals without gaining presence authority',()=>{
+ const dump=repeatedCallerSource(),original=JSON.stringify(dump),occ=repeatedOccurrences(dump.parent);
+ assert.equal(occ.length,2);
+ assert.equal(qualifyOwnedComponentCallerRows(dump.parent,occ,callerAxes,callerDomain,true),true);
+ assert.equal(qualifyOwnedComponentAvailability(dump.parent,occ,callerAxes,callerDomain,true),undefined);
+ const {batch,parent,child}=proposePartialCaller(dump);assert.deepEqual(batch.skipped,[]);assert(parent);assert(child);
+ const controlled=walkAnatomy(parent).filter(w=>w.part.component?.booleanPropsByCombination);
+ assert.equal(controlled.length,1);assert.equal(controlled[0].part.availabilityByCombination,undefined);
+ const table=Object.values(controlled[0].part.component!.booleanPropsByCombination!)[0];
+ assert.deepEqual(table.rows.map(r=>r.value),[null,null,null,false]);
+ assert.equal(JSON.stringify(dump),original);
+});
+
+test('caller row witness rejects changed canonical facts, ordinal identity, domain, bindings and ownership',()=>{
+ const qualifies=(s:DumpSet,occ=repeatedOccurrences(s),rows=callerDomain,qualified=true)=>
+  qualifyOwnedComponentCallerRows(s,occ,callerAxes,rows,qualified);
+ for(const corrupt of [
+  (s:DumpSet)=>{s.variants[3].children![2].hidden=true;},
+  (s:DumpSet)=>{s.variants[3].children![2].bound={visible:'foreign'} as any;},
+  (s:DumpSet)=>{s.variants[3].propRefs={visible:'foreign'};},
+  (s:DumpSet)=>{s.variants[3].children![2].instanceKey='foreign';},
+  (s:DumpSet)=>{s.variants[3].children![2].nodeId=s.variants[2].children![4].nodeId;},
+  (s:DumpSet)=>{s.variants[3].variantProperties=s.variants[2].variantProperties;},
+ ]){const s=repeatedCallerSource().parent;corrupt(s);assert.equal(qualifies(s),false);}
+ const s=repeatedCallerSource().parent,occ=repeatedOccurrences(s);
+ for(const field of [{name:'renamed'},{minHeight:59},{hostOverrides:[]},{nodeId:'synthetic'}]){
+  const changed=structuredClone(occ);Object.assign(changed[1].node,field);assert.equal(qualifies(s,changed),false);
+ }
+ const differentOrdinal=structuredClone(occ);differentOrdinal[1].node=s.variants[3].children![1];
+ assert.equal(qualifies(s,differentOrdinal),false);
+ assert.equal(qualifies(s,[occ[0],occ[0]]),false);
+ assert.equal(qualifies(s,[occ[0],{...occ[1],variant:'foreign'}]),false);
+ assert.equal(qualifies(s,occ,callerDomain.slice(1)),false);
+ assert.equal(qualifies(s,occ,[...callerDomain.slice(1),callerDomain[1]]),false);
+ assert.equal(qualifies(s,occ,callerDomain,false),false);
+});
+
+test('partial constant caller Boolean values retain null omissions outside authenticated rows',()=>{
+ const dump=partialCallerSource(),first=dump.parent.variants[2].children![0],last=dump.parent.variants[3].children![0];
+ first.hostOverrides=structuredClone(last.hostOverrides);
+ first.hostOverrides![0].visibilityTarget!.instanceId=first.nodeId!;
+ first.hostOverrides![0].visibilityTarget!.nodeId='I'+first.nodeId+';connector';
+ const {batch,parent}=proposePartialCaller(dump);assert.deepEqual(batch.skipped,[]);assert(parent);
+ const ref=walkAnatomy(parent).find(w=>w.part.component?.booleanPropsByCombination)!.part.component!;
+ assert.deepEqual(Object.values(ref.booleanPropsByCombination!)[0].rows.map(r=>r.value),[null,null,false,false]);
 });
