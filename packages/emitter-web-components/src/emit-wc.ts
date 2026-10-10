@@ -1705,7 +1705,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
       if (w.part.component?.enumPropsByCombination) throw new Error('WEB_COMPONENT_ENUM_ARGUMENTS_UNSUPPORTED');
       if (w.part.shapeFillOverrideProp) throw new Error('WEB_COMPONENT_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
       if (w.part.textColorOverrideProp) throw new Error('WEB_COMPONENT_TEXT_COLOR_OVERRIDE_UNSUPPORTED');
-      if (w.part.textAppearanceOverride) throw new Error('WEB_COMPONENT_TEXT_APPEARANCE_UNSUPPORTED');
+      if (w.part.textAppearanceOverride || w.part.textAppearanceByCombination) throw new Error('WEB_COMPONENT_TEXT_APPEARANCE_UNSUPPORTED');
       if (w.part.imageOverride) throw new Error('WEB_COMPONENT_IMAGE_OVERRIDE_UNSUPPORTED');
       if (w.part.availabilityByCombination) throw new Error('WEB_COMPONENT_STRUCTURAL_AVAILABILITY_UNSUPPORTED');
       if (w.part.visibilityOverrideProp) throw new Error('WEB_COMPONENT_VISIBILITY_OVERRIDE_UNSUPPORTED');

@@ -1,7 +1,8 @@
 import {ContractSchema} from '../scripts/contract-schema.js';
+import {TextAppearanceSchema,TextAppearanceOverrideSchema} from '../packages/schema/src/text-appearance.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {qualifySourceTextAppearance,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,selectSourceTextAppearance,inspectTextAppearance} from './source-text-appearance-control.js';
+import {qualifySourceTextAppearance,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,selectSourceTextAppearance,inspectTextAppearance,inspectAuthoredTextAppearance} from './source-text-appearance-control.js';
 import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
 import type {DumpNode,DumpSet} from '../extract/figma/types.js';
 
@@ -20,6 +21,77 @@ test('exact text appearance ownership survives display renaming without mutating
  const f=fixture(),before=JSON.stringify(f),d=f.demand();
  assert.equal(d.appearance.characters,'Text\nLearn more');assert.deepEqual(d.childPath,[0,0]);assert.equal(d.sourceNodeId,'2:3');assert.equal(JSON.stringify(f),before);
  f.set.setName='Different name';f.instance.name='Different instance';f.text.name='Different label';assert.deepEqual(f.demand(),d);
+});
+
+
+test('explicit font axes preserve exact maps and malformed maps refuse without reading getters',()=>{
+ const base=fixture().demand().appearance,run=base.runs[0];
+ const observe=(axes:unknown,present=true)=>observeTextAppearance(base.characters,[{...run,start:0,end:base.characters.length,characters:base.characters,
+  fontName:{family:run.fontName.family,style:run.fontName.style,...(present?{variationSettings:axes}:{})},fills:[{type:'SOLID',...run.fill.paint}]}]);
+ const axes={wght:430.5,slnt:0,XTRA:-.25},one=observe(axes);assert.ok(one&&'runs'in one);
+ assert.deepEqual(one.runs[0].fontName.variationSettings,axes);assert.notEqual(one.runs[0].fontName.variationSettings,axes);
+ axes.wght=700;assert.equal(one.runs[0].fontName.variationSettings!.wght,430.5,'source map is copied, never aliased');
+ assert.deepEqual(inspectAuthoredTextAppearance(one),one);assert.equal(TextAppearanceSchema.safeParse(one).success,true);
+ assert.throws(()=>inspectTextAppearance(one),/text-appearance-observation-unqualified/);
+ assert.equal(TextAppearanceOverrideSchema.safeParse({prop:'appearance',choices:{one}}).success,false,'explicit override still requires two runs');
+ const two=structuredClone(base);for(const r of two.runs)r.fontName.variationSettings={wght:430.5,slnt:0,XTRA:-.25};
+ assert.deepEqual(inspectTextAppearance(two),two);assert.equal(TextAppearanceOverrideSchema.safeParse({prop:'appearance',choices:{two}}).success,true);
+ for(const [map,present] of [[undefined,false],[undefined,true],[{},true]] as const){
+  const value=observe(map,present);assert.ok(value&&'runs'in value);
+  assert.equal(Object.hasOwn(value.runs[0].fontName,'variationSettings'),map!==undefined);
+  if(map!==undefined)assert.deepEqual(value.runs[0].fontName.variationSettings,{});
+ }
+ let reads=0;const getter=Object.defineProperty({},'wght',{enumerable:true,get(){reads++;return 400;}});
+ const hidden=Object.defineProperty({},'wght',{enumerable:false,value:400});
+ const symbol={wght:400,[Symbol('axis')]:1};
+ const malformed:unknown[]=[null,[],{wgt:400},{weight:400},{'éabc':1},{'a\nbc':1},{wght:NaN},{wght:Infinity},{wght:-Infinity},{wght:'400'},{wght:null},Object.create({wght:400}),hidden,symbol,getter];
+ for(const map of malformed){
+  assert.deepEqual(observe(map),{issue:'text-appearance-font-unqualified'});
+  const forged:typeof one=structuredClone(one);(forged.runs[0].fontName as any).variationSettings=map;
+  assert.throws(()=>inspectAuthoredTextAppearance(forged),/text-appearance-observation-unqualified/);
+ }
+ assert.equal(reads,0,'malformed axis getters are never evaluated');
+ for(const map of malformed.slice(0,11)){
+  const forged:typeof one=structuredClone(one);(forged.runs[0].fontName as any).variationSettings=map;
+  assert.equal(TextAppearanceSchema.safeParse(forged).success,false);
+ }
+});
+
+test('authored tables require positive scalar loss and complete original membership corroborated by existing predicates',async()=>{
+ const {qualifyAuthoredTextAppearanceTable,authoredTextAppearanceNeedsCarrier}=await import('./source-authored-text-appearance.js');
+ const observed=fixture().demand().appearance;
+ const source:DumpSet={setName:'Owned source',type:'COMPONENT_SET',nodeId:'10:0',key:'source-key',variants:['A','B'].map((name,i)=>({name:'Mode='+name,type:'COMPONENT',nodeId:'10:'+(i+1),variantProperties:{Mode:name},children:[{name:'Label',type:'TEXT',nodeId:'11:'+(i+1),text:{characters:observed.characters,fontSize:14,fontStyle:'Regular',sourceAppearance:structuredClone(observed)}}]}))};
+ const axes=[{property:'Mode',prop:'mode',values:['A','B'],map:{A:'a',B:'b'}}],domain=[['a'],['b']];
+ const occurrences=()=>source.variants.map(main=>({variant:main.name,node:main.children![0]}));
+ const before=JSON.stringify(source),table=qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,true,{});
+ assert.equal(table?.rows.length,2);assert.equal(JSON.stringify(source),before);
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,false,{}),undefined);
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences().slice(0,1),axes,domain,true,{}),undefined,'missing appearance rows cannot create absence');
+ const equal=structuredClone(observed);equal.runs[1]={...equal.runs[0],start:equal.runs[1].start,end:equal.runs[1].end};
+ assert.equal(authoredTextAppearanceNeedsCarrier(equal),false,'equivalent source boundaries are not scalar loss');
+ equal.runs=[{...equal.runs[0],start:0,end:equal.characters.length}];assert.equal(authoredTextAppearanceNeedsCarrier(equal),false);
+ const uniform=structuredClone(equal);uniform.runs[0].fontName.variationSettings={slnt:0,wght:400};
+ assert.equal(authoredTextAppearanceNeedsCarrier(uniform),false,'materialized named-face defaults alone are not scalar loss');
+ for(const main of source.variants)main.children![0].text!.sourceAppearance=structuredClone(uniform);
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,true,{}),undefined,'uniform axes do not widen table admission');
+ const custom=structuredClone(uniform);custom.runs[0].fontName.variationSettings={XTRA:-.25};
+ assert.equal(authoredTextAppearanceNeedsCarrier(custom),false,'uniform custom axes remain unqualified without positive scalar-loss evidence');
+ const differing=structuredClone(uniform);differing.runs=[{...structuredClone(uniform.runs[0]),end:5},{...structuredClone(uniform.runs[0]),start:5}];
+ differing.runs[1].fontName.variationSettings={slnt:0,wght:430.5,XTRA:-.25};
+ assert.equal(authoredTextAppearanceNeedsCarrier(differing),true,'actual differing run axes are a source channel');
+ for(const main of source.variants)main.children![0].text!.sourceAppearance=structuredClone(differing);
+ const axesTable=qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,true,{});
+ assert.deepEqual(axesTable?.rows.map(row=>row.appearance),[differing,differing]);
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,false,{}),undefined,'axis differences cannot bypass the captured domain');
+ for(const main of source.variants)main.children![0].text!.sourceAppearance=structuredClone(observed);
+ equal.runs[0].textCase='SMALL_CAPS';assert.equal(authoredTextAppearanceNeedsCarrier(equal),true,'a genuinely observed supported scalar vocabulary omission qualifies');
+ source.variants[1].children=[];
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences().slice(0,1),axes,domain,true,{}),undefined);
+ const present=qualifyAuthoredTextAppearanceTable(source,'file',occurrences().slice(0,1),axes,domain,true,{visibleWhen:{prop:'mode',equals:'a'}});
+ assert.deepEqual(present?.rows.map(r=>r.values),[['a']]);
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences().slice(0,1),axes,domain,true,{visibleWhen:{prop:'mode',equals:'b'}}),undefined,'a predicate must agree with original physical membership');
+ source.variants[1].children=[structuredClone(source.variants[0].children![0])];
+ assert.equal(qualifyAuthoredTextAppearanceTable(source,'file',occurrences(),axes,domain,true,{}),undefined,'duplicate original IDs confer no ownership');
 });
 test('text appearance demand refuses foreign identity, changed text and nested instance ownership',()=>{
  const mutations:Array<(f:ReturnType<typeof fixture>)=>void>=[

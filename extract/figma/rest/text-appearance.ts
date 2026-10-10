@@ -3,9 +3,13 @@ import {observeTextAppearance,type TextAppearanceObservation} from '../text-appe
 
 /** REST range styles are sparse deltas over the node style, indexed in UTF-16. */
 export function restTextAppearance(node:RestNode):TextAppearanceObservation|undefined {
- const indices=node.characterStyleOverrides,characters=node.characters;
- if(!indices?.some(i=>i!==0)||typeof characters!=='string')return;
+ const characters=node.characters;
+ if(typeof characters!=='string'||!characters.length)return;
  const issue=(reason:string)=>({issue:'text-appearance-'+reason});
+ if(node.characterStyleOverrides===undefined&&Object.keys(node.styleOverrideTable??{}).length)return issue('range-incomplete');
+ // A complete uniform observation is a real source segment, never an invented
+ // second range. Absent facts still fail the shared observer below.
+ const indices=node.characterStyleOverrides??Array.from({length:characters.length},()=>0);
  if(indices.length!==characters.length)return issue('range-incomplete');
  const segments=[];
  for(let start=0;start<indices.length;){

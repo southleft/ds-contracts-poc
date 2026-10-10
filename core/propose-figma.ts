@@ -1,5 +1,6 @@
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
 import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
+import {qualifyAuthoredTextAppearanceTable} from './source-authored-text-appearance.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
@@ -12152,6 +12153,32 @@ function qualifiedComponentCallerRows(m: Merged, ctx: Ctx) {
   })), domain, qualified);
 }
 
+/** Direct authored appearance is a default, independent of optional instance
+ * appearance controls. Only a complete original source owner domain may supply
+ * its rows; state/mode filtering and partial presence cannot fill the gaps. */
+function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const source = ctx.structuralAvailabilitySource;
+  if (!source || m.type !== 'TEXT' || !m.occ.some(o => o.node.text?.sourceAppearance)) return;
+  let domain = declaredPresenceDomain(ctx);
+  let qualified = ctx.guardedDrawnPartDomain === true;
+  if (!domain && ctx.sourcePartMatrixVerified && ctx.axes.length && ctx.axes.length <= 8 &&
+      ctx.axes.every(axis => !axis.omitted)) {
+    const values = ctx.axes.map(axis => axis.values.map(value => axisValue(axis, value)));
+    if (values.reduce((product, choices) => product * choices.length, 1) > 4096) return;
+    domain = values.reduce<Array<Array<string | null>>>((rows, choices) =>
+      rows.flatMap(row => choices.map(value => [...row, value])), [[]]);
+    qualified = true;
+  }
+  const table = qualifyAuthoredTextAppearanceTable(source, ctx.fileKey, m.occ,
+    ctx.axes.map(axis => ({property: axis.property, prop: axis.propName, boolean: isBooleanAxis(axis), values: axis.values,
+      map: Object.fromEntries(axis.values.map(raw => [raw,
+        axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw)])),
+    })), domain, qualified, part as Part);
+  if (!table) return;
+  part.textAppearanceByCombination = table;
+  ctx.notes.push(`${where}: complete source-owned authored text appearance retained for ${table.rows.length} source-present combinations; optional caller overrides remain independent`);
+}
+
 /** Share the same complete presence proof before and after keyed identity splitting. */
 function observedPartPresence(m:Merged,ctx:Ctx,where:string) {
   const presenceNoteStart=ctx.notes.length;
@@ -12991,6 +13018,7 @@ function buildPartFromEvidence(
         invertHiddenVisibility(m, part, ctx, where);
       }
     }
+    carryAuthoredTextAppearance(m, part, ctx, where);
     return part;
   }
 

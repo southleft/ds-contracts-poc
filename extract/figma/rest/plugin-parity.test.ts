@@ -416,5 +416,17 @@ test('text appearance capture names incomplete, split-surrogate and unsupported 
  ]){const n=structuredClone(f.node);mutate(n);const observed=restTextAppearance(n);assert(observed && 'issue'in observed,String(mutate));}
  const broken=structuredClone(f.segments);broken[1].start=5;assert.match(f.plugin(broken).issue,/range-unqualified/);
  const changed=structuredClone(f.segments);changed[0].characters='different';assert.match(f.plugin(changed).issue,/range-unqualified/);
- assert.equal(restTextAppearance({...f.node,characterStyleOverrides:undefined}),undefined,'missing ranges do not invent a partition');
+ assert.match((restTextAppearance({...f.node,characterStyleOverrides:undefined}) as {issue:string}).issue,/range-incomplete/,'override styles without their indices cannot become uniform text');
+});
+
+test('uniform authored observations preserve one genuine segment without widening caller overrides',async()=>{
+ const {inspectAuthoredTextAppearance,inspectTextAppearance}=await import('../../../core/source-text-appearance-control.js');
+ const {TextAppearanceSchema,TextAppearanceOverrideSchema}=await import('../../../packages/schema/src/text-appearance.js');
+ const node:RestNode={id:'10:1',name:'Uniform small caps',type:'TEXT',characters:'Source',style:{fontFamily:'Inter',fontStyle:'Regular',fontWeight:400,fontSize:14,lineHeightUnit:'PIXELS',lineHeightPx:20,letterSpacing:0,textCase:'SMALL_CAPS'},fills:[{type:'SOLID',color:{r:0,g:0,b:0,a:1}}]};
+ const observed=restTextAppearance(node);assert.ok(observed&&'runs'in observed);assert.equal(observed.runs.length,1);
+ assert.deepEqual(observed.runs.map(r=>[r.start,r.end]),[[0,node.characters!.length]]);
+ assert.deepEqual(inspectAuthoredTextAppearance(observed),observed);assert.ok(TextAppearanceSchema.safeParse(observed).success);
+ assert.throws(()=>inspectTextAppearance(observed),/unqualified/);assert.equal(TextAppearanceOverrideSchema.safeParse({prop:'appearance',choices:{source:observed}}).success,false);
+ const incomplete=structuredClone(node);delete incomplete.style!.fontStyle;
+ assert.match((restTextAppearance(incomplete) as {issue:string}).issue,/font-unqualified/);
 });

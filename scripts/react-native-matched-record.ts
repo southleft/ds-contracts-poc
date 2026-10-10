@@ -185,8 +185,11 @@ export function collectMatchedEvidence(privateRoot: string, sourceCapture: strin
   const restored = json(nativeCapture, 'repeat-and-restoration.json');
   const event = json(path.join(privateRoot, spec.journal, 'events'), spec.event);
   const normalize = (r: any) => normalizeMatchedReadback(authenticated.creation, authenticated.readback, r, spec.source.kind);
-  if (!probe.response.success || !same(normalize(current.response.result), event.envelope.result) ||
-      !same(normalize(restored.afterReadback.result), event.envelope.result)) throw Error('matched-record-native-baseline-changed');
+  // Resolve the retained baseline through the same allocation/topology proof;
+  // a later authenticated event can itself contain Figma's settled physical IDs.
+  const expected = normalize(event.envelope.result);
+  if (!probe.response.success || !same(normalize(current.response.result), expected) ||
+      !same(normalize(restored.afterReadback.result), expected)) throw Error('matched-record-native-baseline-changed');
   const summary = json(sourceCapture, 'source-summary.json');
   if (!summary.sourceFilesUnchanged || !summary.ownershipOriginalMatched ||
       summary.referenceId !== authenticated.source.referenceId ||

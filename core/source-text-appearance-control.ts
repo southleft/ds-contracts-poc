@@ -10,8 +10,15 @@ export interface SourceTextAppearanceDemand {
 }
 /** Revalidate serialized observations; a typed field alone is not evidence. */
 export function inspectTextAppearance(value:unknown):QualifiedTextAppearance {
+ return inspectAppearance(value,2);
+}
+/** Complete authored partitions do not widen the public caller override. */
+export function inspectAuthoredTextAppearance(value:unknown):QualifiedTextAppearance {
+ return inspectAppearance(value,1);
+}
+function inspectAppearance(value:unknown,minimumRuns:number):QualifiedTextAppearance {
  const v=value as QualifiedTextAppearance|undefined;
- if(!v||typeof v.characters!=='string'||!Array.isArray(v.runs)||v.runs.length<2||v.runs.length>256||v.runs.some(r=>!r||typeof r!=='object'))throw Error('text-appearance-observation-unqualified');
+ if(!v||typeof v.characters!=='string'||!Array.isArray(v.runs)||v.runs.length<minimumRuns||v.runs.length>256||v.runs.some(r=>!r||typeof r!=='object'))throw Error('text-appearance-observation-unqualified');
  const segments=v.runs.map(r=>({...r,characters:v.characters.slice(r.start,r.end),fills:r.fill&&'paint'in r.fill?[{
   type:'SOLID',...r.fill.paint,...(r.fill.variableId?{boundVariables:{color:{type:'VARIABLE_ALIAS',id:r.fill.variableId}}}:{})
  }]:undefined}));
@@ -54,7 +61,7 @@ export function textAppearanceDemandsFromDumps(dump:Record<string,unknown>,fileK
     const set=mains[0],main=set.variants.find(v=>v.nodeId===instance.instanceGeometry?.componentId)!;
     const scan=(source:DumpNode|undefined,observed:DumpNode,path:number[])=>{
      if(path.length&&(source?.type==='INSTANCE'||observed.type==='INSTANCE')){if(hasAppearance(observed))notes.push(`${instance.nodeId}:${path.join('.')}: text-appearance-demand-crosses-instance-owner`);return;}
-     if(observed.text?.sourceAppearance&&canonicalJson(observed.text.sourceAppearance)!==canonicalJson(source?.text?.sourceAppearance)){
+     if(observed.text?.sourceAppearance&&(!('runs'in observed.text.sourceAppearance)||observed.text.sourceAppearance.runs.length>=2)&&canonicalJson(observed.text.sourceAppearance)!==canonicalJson(source?.text?.sourceAppearance)){
       try{demands.push(qualifySourceTextAppearance(set,instance,path,fileKey));}
       catch(error){notes.push(`${instance.nodeId}:${path.join('.')}: ${error instanceof Error?error.message:String(error)}`);}
      }
