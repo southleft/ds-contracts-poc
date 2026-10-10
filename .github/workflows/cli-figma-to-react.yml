@@ -6,6 +6,8 @@ name: cli-figma-to-react
 # request, generated files and tarball entries must equal the benchmark pin;
 # the check must report every variant UNVERIFIED without a Figma token and
 # NOT CHECKED without a Chromium; no repository path may reach its output.
+# The Sync Runner zip must also pass its existing dump and engine guards on
+# Linux and macOS. Native-plan preparation remains a separate Beta 1 gap.
 # See scripts/cli-figma-to-react-smoke.ts. Its own workflow so the fast job's
 # time budget is untouched.
 
@@ -23,8 +25,12 @@ concurrency:
 
 jobs:
   cli-smoke:
-    name: installed CLI figma-to-react
-    runs-on: ubuntu-latest
+    name: installed CLI figma-to-react (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -44,7 +50,9 @@ jobs:
       - name: cache playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: ~/.cache/ms-playwright
+          path: |
+            ~/.cache/ms-playwright
+            ~/Library/Caches/ms-playwright
           key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
           restore-keys: ${{ runner.os }}-ms-playwright-
 
