@@ -1,43 +1,14 @@
 /** Local-only installable React downloads. Browser inputs are data, never paths or programs. */
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { generateComponents } from '../../scripts/generate-components.js';
-import { packageReactLibrary, type Toolchain } from '../../scripts/package-react-library.js';
+import { buildReactLibrary } from './react-library-build.js';
 import { MAX_BYTES, parseLibraryRequest } from './react-library-input.js';
 import { readPreparedReactLibrary, retainPreparedReactLibrary } from './react-library-artifact.js';
+import { createRetainedOccurrenceStore, parseRetainedOccurrenceKey } from './caller-occurrence.js';
+export { buildReactLibrary } from './react-library-build.js';
 export { parseLibraryRequest } from './react-library-input.js';
 
-
-/** `repoRoot` only names the default parent for prepared downloads; the
- *  packaging toolchain resolves from where the packager is installed. */
-export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>,
-  parent = path.join(repoRoot, 'private', 'react-library-downloads'), options: { packageName?: string; toolchain?: Toolchain } = {}) {
-  mkdirSync(parent, { recursive: true });
-  const work = mkdtempSync(path.join(parent, 'library-'));
-  const inputs = path.join(work, 'inputs'), generated = path.join(work, 'generated'), iconsDir = path.join(inputs, 'icons');
-  mkdirSync(iconsDir, { recursive: true });
-  const contractFiles = input.contracts.map((contract, index) => {
-    const file = path.join(inputs, `${index}.contract.json`); writeFileSync(file, JSON.stringify(contract, null, 2), { flag: 'wx' }); return file;
-  });
-  const tokenFiles: string[] = [];
-  const token = (slot: string, tree: Record<string, unknown>) => {
-    const file = path.join(inputs, `${slot}.tokens.json`); writeFileSync(file, JSON.stringify(tree), { flag: 'wx' }); tokenFiles.push(`${slot}=${file}`);
-  };
-  for (const slot of ['primitives', 'semantic', 'light', 'dark'] as const) token(slot, input.tokens[slot]);
-  for (const [brand, tree] of Object.entries(input.tokens.brands)) token(`brand.${brand}`, tree);
-  for (const [name, svg] of input.icons) writeFileSync(path.join(iconsDir, `${name}.svg`), svg, { flag: 'wx' });
-  // A package ships only the tokens its own components reach (tokensScope):
-  // the request's token tree also holds the repository's demo tokens.
-  const result = await generateComponents({ contractFiles, tokenFiles, iconsDir, outDir: generated, stories: false, tokensScope: 'reachable', regenerateHint: 'Export this family again from the local Contract Playground.' });
-  if (result.refused.length || result.generated.length !== input.contracts.length) throw Error('react-library-generation-refused: ' + result.refused.flatMap(r => r.violations).join('; '));
-  if (result.tokensCss.danglingAliases.length) throw Error('react-library-token-alias-missing: ' + result.tokensCss.danglingAliases.join(', '));
-  const library = await packageReactLibrary(generated, input.root.name, work, options);
-  writeFileSync(path.join(work, 'receipt.json'), JSON.stringify({ rootId: input.root.id, contracts: input.contracts.map(c => ({ id: c.id, name: c.name })), generated: result.generated, requiredFacts: result.requiredFacts, tarballSha256: library.tarballSha256 }, null, 2), { flag: 'wx' });
-  return { ...library, bytes: readFileSync(library.tarball), filename: path.basename(library.tarball) };
-}
-
-export function createReactLibraryService(repoRoot: string, build = buildReactLibrary) {
+export function createReactLibraryService(repoRoot: string, build = buildReactLibrary,
+  resolveOccurrence = createRetainedOccurrenceStore(repoRoot).resolve) {
   let busy = false;
   const json = (res: ServerResponse, status: number, error: string) => { res.statusCode = status; res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store'); res.end(JSON.stringify({ error })); };
   return async (req: IncomingMessage, res: ServerResponse) => {
@@ -70,7 +41,20 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
       const chunks: Buffer[] = []; let size = 0;
       for await (const chunk of req) { size += chunk.length; if (size > MAX_BYTES) { json(res, 413, 'React library request exceeds 5 MB.'); return; } chunks.push(Buffer.from(chunk)); }
       let input: ReturnType<typeof parseLibraryRequest>;
-      try { input = parseLibraryRequest(JSON.parse(Buffer.concat(chunks).toString('utf8'))); }
+      try {
+        const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+        if (body && typeof body === 'object' && !Array.isArray(body) && 'occurrence' in body) {
+          const keys = Object.keys(body).sort().join(',');
+          const inspect = body.kind === 'resolve-caller-occurrence' && keys === 'kind,occurrence';
+          if (!inspect && keys !== 'occurrence') throw Error('retained-occurrence-invalid-request');
+          const retained = resolveOccurrence(parseRetainedOccurrenceKey(body.occurrence));
+          if (inspect) {
+            res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store');
+            res.end(JSON.stringify(retained)); return;
+          }
+          input = parseLibraryRequest(retained.request);
+        } else input = parseLibraryRequest(body);
+      }
       catch (error) { json(res, 400, error instanceof Error ? error.message : 'Invalid React library input.'); return; }
       const result = await build(repoRoot, input);
       const artifact = retainPreparedReactLibrary(repoRoot, input, result);

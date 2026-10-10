@@ -40,9 +40,10 @@ import {
   tokenTreesForCode as repoTreesForCode,
 } from './data.js';
 import { tokenTreeToCss } from './token-css.js';
+import { emitTokensCss, tokensCssLayers } from '../../../core/emit-tokens-css.js';
 
 export interface TokenSource {
-  kind: 'repo' | 'user';
+  kind: 'repo' | 'user' | 'retained';
   /** Provenance line, shown wherever the source matters. */
   label: string;
   /** EmitterCtx.tokens for every registered emitter. */
@@ -266,6 +267,7 @@ function composeSource(base: TokenSource, minted: MintedTokenLayer | null): Toke
 const STORAGE_KEY = 'ds-playground.user-tokens';
 
 let baseSource: TokenSource = repoTokenSource;
+let retainedSource: TokenSource | null = null;
 let mintedLayer: MintedTokenLayer | null = null;
 let capturedLayer: CapturedTokenLayer | null = null;
 let capturedShadowed: string[] = [];
@@ -275,13 +277,33 @@ const recompose = () => {
   // Layer order: base (repo or user paste) → captured (the designer's real
   // variables; base wins on collisions) → minted (imported.* — its namespace
   // never collides by the MINT_NAMESPACE invariant).
-  const withCaptured = composeCaptured(baseSource, capturedLayer);
+  const withCaptured = composeCaptured(retainedSource ?? baseSource, capturedLayer);
   capturedShadowed = withCaptured.shadowed;
   active = composeSource(withCaptured.source, mintedLayer);
 };
 const notify = () => listeners.forEach((fn) => fn());
 
 export const activeTokens = (): TokenSource => active;
+
+/** Preserve the host-retained tree's real layer boundaries. This is session
+ * display data; selecting it grants no host capture or package authority. */
+export function setRetainedTokenTree(input: TokenTreeInput): void {
+  const tree = structuredClone(input);
+  const trees = [tree.primitives, tree.semantic, tree.light, tree.dark, ...Object.values(tree.brands)] as Record<string, unknown>[];
+  // Use the generator's exact layer order, type checks and selectors. A
+  // retained tree is not a pasted flat document, and every mode must remain.
+  const sheet = emitTokensCss(tokensCssLayers(tree));
+  const unavailable = [...sheet.danglingAliases, ...sheet.skippedComposite.map(name => `${name}: unsupported composite token`)];
+  if (unavailable.length) throw Error('retained-occurrence-token-css: ' + unavailable.join('; '));
+  const source: TokenSource = {
+    kind: 'retained', label: 'host-retained occurrence tokens (technical preview, session-only)', tree,
+    inventory: tokenInventoryFromJson(trees),
+    corpus: tokenCorpusFromJson({ primitives: tree.primitives, semantic: tree.semantic, light: tree.light, brandDefault: tree.brands.default ?? {} }),
+    treesForCode: trees, docCount: trees.length,
+    stylesheets: { base: sheet.css, dark: '', brands: '' },
+  };
+  retainedSource = source; mintedLayer = null; capturedLayer = null; recompose(); notify();
+}
 
 /** The registered captured-token layer, if any. */
 export const activeCapturedTokens = (): CapturedTokenLayer | null => capturedLayer;
@@ -295,7 +317,8 @@ export const capturedShadowedNames = (): string[] => capturedShadowed;
  *  so the layer always belongs to the import on screen. */
 export function setCapturedTokens(layer: CapturedTokenLayer | null): void {
   const next = layer && layer.count > 0 ? layer : null;
-  if (next === capturedLayer) return;
+  if (next === capturedLayer && !retainedSource) return;
+  retainedSource = null;
   capturedLayer = next;
   recompose();
   notify();
@@ -312,7 +335,8 @@ export const activeMintedTokens = (): MintedTokenLayer | null => mintedLayer;
  *  every load path so the layer always belongs to the contract on screen. */
 export function setMintedTokens(layer: MintedTokenLayer | null): void {
   const next = layer && layer.count > 0 ? layer : null;
-  if (next === mintedLayer) return;
+  if (next === mintedLayer && !retainedSource) return;
+  retainedSource = null;
   mintedLayer = next;
   recompose();
   notify();
@@ -375,6 +399,7 @@ export function useTokenSource(): TokenSource {
 export function applyUserTokens(text: string): ApplyTokensResult {
   const result = buildUserTokenSource(text);
   if (result.ok) {
+    retainedSource = null;
     baseSource = result.source;
     recompose();
     try {
@@ -388,6 +413,7 @@ export function applyUserTokens(text: string): ApplyTokensResult {
 }
 
 export function resetToRepoTokens(): void {
+  retainedSource = null;
   baseSource = repoTokenSource;
   recompose();
   try {
@@ -449,6 +475,7 @@ const stored = storedUserTokensText();
 if (stored) {
   const result = buildUserTokenSource(stored);
   if (result.ok) {
+    retainedSource = null;
     baseSource = result.source;
     recompose();
   }

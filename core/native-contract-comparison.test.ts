@@ -788,3 +788,110 @@ test('paired capture retains required caps and leaves caller content on the full
   assert.equal(Object.hasOwn(receipt.nodes.find((n:any)=>n.id===slotId).values,'strokeCap'),false);
   assert.equal(receipt.nodes.find((n:any)=>n.type==='TEXT').values.strokeCap,'NONE');
 });
+
+async function reidentifiedProfileFixture() {
+  const f = await nestedFixture('flow'), creation = await f.run(f.emit());
+  assert.equal(creation.status, 'created-candidate');
+  const observed = await f.observe(creation), slotId = creation.comparisons[0].slots[0].nodeId;
+  const selected = creation.nodes.filter((row: any) => row.slotIdentity);
+  const live = new Map<string, any>();
+  for (const row of selected) live.set(row.id, await f.figma.getNodeByIdAsync(row.id));
+  for (const node of f.figma.root.findAll(() => true)) node.strokeCap = 'NONE';
+  for (const [bornId, node] of live) node.id = `${slotId};derived-${bornId}`;
+  return { ...f, creation, input: observed.input, live, slotId };
+}
+
+test('reidentified nested native nodes retain the same declared main field profile before capture', async () => {
+  const f = await reidentifiedProfileFixture();
+  const receipt = await f.run(emitNativeContractComparisonReadbackScript(f.input));
+  assert.equal(receipt.status, 'native-comparison-readback-collected', JSON.stringify(receipt));
+  const checked = verifyNativeContractComparisonReadback(f.input, receipt);
+  assert.equal(checked.status, 'supported-comparison-structure-observed', JSON.stringify(checked));
+  const paired = f.creation.comparisons[0].nested.flatMap((row: any) => row.sourceParts);
+  for (const part of paired) {
+    const actual = receipt.content.nodes.find((row: any) => row.id === f.live.get(part.nodeId)?.id || row.id === part.nodeId);
+    assert(actual, part.nodeId);
+    assert.equal(Object.hasOwn(actual.values, 'strokeCap'), false, part.nodeId);
+  }
+  const callerText = receipt.content.nodes.find((row: any) => row.type === 'TEXT');
+  assert.equal(callerText.values.strokeCap, 'NONE', 'unprofiled caller fields remain fully observed');
+  assert.equal(callerText.values.characters.length > 0, true);
+  const changed = structuredClone(receipt);
+  changed.content.nodes.find((row: any) => row.type === 'INSTANCE' && row.id.startsWith(f.slotId + ';')).values.strokeCap = 'ROUND';
+  assert(verifyNativeContractComparisonReadback(f.input, changed).problems.some(problem => problem.includes('main-instance-strokeCap')));
+});
+
+test('reidentified profile lookup retains explicitly required cap and arc fields', async () => {
+  const f = await reidentifiedProfileFixture(), record = f.creation.comparisons[0].nested[0];
+  const node = f.live.get(record.instanceId), arc = {startingAngle: 0, endingAngle: 2, innerRadius: 0};
+  node.arcData = arc; node.strokeCap = 'ROUND';
+  const script = emitNativeInventoryReadbackScript({operation: f.input.operation, planRevision: f.input.planRevision,
+    pageId: f.creation.pageId, nodes: f.creation.nodes, comparisons: []}, f.input.tokenInput, f.input.tokenIdentity,
+    [], false, false, [], [], false, [], false, false, undefined, false, false, false, false, false, true,
+    {[record.instanceId]: ['strokeCap', 'arcData']}, false, false, true, false,
+    {nodes: f.creation.nodes, comparisons: f.creation.comparisons});
+  const receipt = await f.run(script);
+  assert.equal(receipt.status, 'native-readback-collected', JSON.stringify(receipt));
+  const actual = receipt.nodes.find((row: any) => row.id === node.id);
+  assert.equal(actual.values.strokeCap, 'ROUND'); assert.deepEqual(actual.values.arcData, arc);
+  assert.equal(actual.id, node.id, 'profile resolution does not rewrite physical IDs');
+});
+
+test('profile capture refuses unproven allocation aliases instead of choosing a field set', async () => {
+  for (const sabotage of ['stamp', 'prefix', 'type', 'duplicate', 'path'] as const) {
+    const f = await reidentifiedProfileFixture(), node = f.live.values().next().value!;
+    if (sabotage === 'stamp') node.setSharedPluginData('ds_contracts', 'nativeSourceAllocation', 'foreign');
+    if (sabotage === 'prefix') node.id = 'foreign:' + node.id;
+    if (sabotage === 'type') node.type = 'RECTANGLE';
+    if (sabotage === 'duplicate') {const another = [...f.live.values()][1]; another.id = node.id;}
+    if (sabotage === 'path') {
+      const sibling = [...f.live.values()].find(candidate => candidate.parent?.children.length > 1)!;
+      assert(sibling, 'the path control must have siblings');
+      const before = sibling.parent.children.map((child: any) => child.id);
+      sibling.parent.children.reverse();
+      assert.notDeepEqual(sibling.parent.children.map((child: any) => child.id), before);
+    }
+    const receipt = await f.run(emitNativeContractComparisonReadbackScript(f.input));
+    assert.equal(receipt.status, 'refused', sabotage);
+    assert.notEqual(verifyNativeContractComparisonReadback(f.input, receipt).status, 'supported-comparison-structure-observed', sabotage);
+  }
+});
+
+test('reidentified profile capture retains strict operation ownership and keyed identity checks', async () => {
+  for (const sabotage of ['owner', 'key', 'born-type'] as const) {
+    const f = await reidentifiedProfileFixture();
+    const born = f.creation.nodes.find((row: any) => row.slotIdentity)!;
+    const node = f.live.get(born.id);
+    if (sabotage === 'owner') node.setSharedPluginData('ds_contracts', 'nativeSourceOperation', '{}');
+    if (sabotage === 'key') {born.key = 'authenticated-key'; node.key = 'foreign-key';}
+    if (sabotage === 'born-type') {
+      const unchanged = f.creation.nodes.find((row: any) => !row.slotIdentity && row.type === 'FRAME')!;
+      (await f.figma.getNodeByIdAsync(unchanged.id)).type = 'RECTANGLE';
+    }
+    const receipt = await f.run(emitNativeContractComparisonReadbackScript(f.input));
+    const checked = verifyNativeContractComparisonReadback(f.input, receipt);
+    assert.equal(checked.status, 'refused', sabotage);
+    if (sabotage === 'owner' || sabotage === 'born-type') assert(checked.problems.some(problem => problem.includes('ownership')), JSON.stringify(checked));
+    else assert.equal(receipt.status, 'refused');
+  }
+});
+
+test('profile capture rejects changed allocation envelopes and IDs changing within a read', async () => {
+  const f = await reidentifiedProfileFixture(), identity = {nodes: structuredClone(f.creation.nodes), comparisons: f.creation.comparisons};
+  identity.nodes[0].id = 'foreign-envelope';
+  assert.throws(() => emitNativeInventoryReadbackScript({operation: f.input.operation, planRevision: f.input.planRevision,
+    pageId: f.creation.pageId, nodes: f.creation.nodes, comparisons: []}, f.input.tokenInput, f.input.tokenIdentity,
+    [], false, false, [], [], false, [], false, false, undefined, false, false, false, false, false, true,
+    {[f.creation.comparisons[0].instanceId]: []}, false, false, true, false, identity), /paired-profile-input-invalid/);
+  const node = f.live.values().next().value!, before = node.id;
+  const original = node.getSharedPluginData.bind(node);
+  node.getSharedPluginData = (namespace: string, key: string) => {
+    const value = original(namespace, key);
+    if (key === 'nativeSourceAllocation') node.id = node.id + '-changed-during-read';
+    return value;
+  };
+  const receipt = await f.run(emitNativeContractComparisonReadbackScript(f.input));
+  assert.notEqual(node.id, before);
+  assert.equal(receipt.status, 'refused', JSON.stringify(receipt));
+  assert.notEqual(verifyNativeContractComparisonReadback(f.input, receipt).status, 'supported-comparison-structure-observed');
+});

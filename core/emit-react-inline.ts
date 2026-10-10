@@ -984,7 +984,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     jsx = wrapReactFilledPath(part, jsx, codePropOf);
-    jsx = wrapReactTextAppearance(part, jsx, codePropOf);
+    jsx = wrapReactTextAppearance(part, jsx, codePropOf, resolveValue);
     jsx = wrapReactImage(part, jsx, codePropOf);
     jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
     const fallback = (() => {

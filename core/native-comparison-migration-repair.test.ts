@@ -50,6 +50,8 @@ async function fixture() {
  // old explicit slot metadata. Product repair must account for those changes.
  const {instance,paint,oldSlot}=await inheritPaint(f,creation);
  const observed=await f.run(emitNativeContractComparisonReadbackScript(input));
+ assert.equal(observed.status,'native-comparison-readback-collected',JSON.stringify(observed.problems));
+ assert.equal(observed.content.status,'native-readback-collected',JSON.stringify(observed.content.problems));
  return {...f,input,original,before,observed,instance,paint,oldSlot,migration};
 }
 
@@ -168,4 +170,43 @@ test('comparison caller content excludes only the synthetic paint on the replace
  assert.deepEqual(comparison.specs.map(s=>s.type),['svg','text']);
  assert.deepEqual(comparison.specs.map(s=>s.nativeContractSample!.specPath),[[0],[1]]);
  assert.equal(comparison.specs[1].characters,'Save changes');
+});
+
+test('migration observation preserves complete inherited fields without adopting their ownership',async()=>{
+ const f=await fixture(),saved=JSON.stringify(f.input.creation);
+ f.paint.strokeCap='ROUND';
+ const observed=await f.run(emitNativeContractComparisonReadbackScript(f.input));
+ assert.equal(observed.status,'native-comparison-readback-collected');
+ const paint=observed.content.nodes.find((n:any)=>n.id===f.paint.id);
+ assert.equal(paint.values.strokeCap,'ROUND','unadopted additions use the complete field set');
+ assert.equal(paint.metadata.nativeSourceAllocation,f.migration.additions[0].mainNodeId);
+ assert.equal(f.input.creation.nodes.some((n:any)=>n.id===paint.id),false);
+ assert.equal(JSON.stringify(f.input.creation),saved,'profile lookup cannot rewrite retained creation');
+ assert.equal(verifyNativeContractComparisonReadback(f.input,observed).status,'refused');
+ assert.throws(()=>prepareNativeComparisonMigrationRepair(f.input,observed),/unrelated-differences/);
+});
+
+test('migration observation retains strict known slot aliases beside an unadopted addition',async()=>{
+ const f=await fixture();
+ for(const [index,row] of f.input.creation.nodes.filter((n:any)=>n.slotIdentity).entries()){
+  const live=await f.figma.getNodeByIdAsync(row.id);
+  live.id=`${row.slotIdentity.slotId};migration-${index}`;
+ }
+ const observed=await f.run(emitNativeContractComparisonReadbackScript(f.input));
+ assert.equal(observed.status,'native-comparison-readback-collected',JSON.stringify(observed));
+ assert(observed.content.nodes.some((n:any)=>n.id.includes(';migration-')),'physical IDs remain in observation');
+ const repair=prepareNativeComparisonMigrationRepair(f.input,observed);
+ assert.equal(verifyNativeContractComparisonReadback(repair.input,repair.after).status,'supported-comparison-structure-observed');
+});
+
+test('migration profile lookup rejects unpinned additions and unrelated extra nodes',async()=>{
+ for(const corruption of ['allocation','operation','part','revision','extra'] as const){
+  const f=await fixture();
+  const key={allocation:'nativeSourceAllocation',operation:'nativeSourceOperation',part:'nativeContractPart',revision:'nativeBackgroundMigration'}[corruption as Exclude<typeof corruption,'extra'>];
+  if(corruption==='extra')f.instance.appendChild(f.figma.createRectangle());
+  else f.paint.setSharedPluginData('ds_contracts',key,'foreign');
+  const observed=await f.run(emitNativeContractComparisonReadbackScript(f.input));
+  assert.equal(observed.status,'refused',corruption);
+  assert.equal(verifyNativeContractComparisonReadback(f.input,observed).status,'refused',corruption);
+ }
 });

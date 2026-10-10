@@ -4,6 +4,8 @@ import { proposeBatchFromDump } from '../../../core/propose-figma.js';
 import { tokenCorpusFromJson } from '../../../core/token-corpus.js';
 import type { DumpSet } from '../../../extract/figma/types.js';
 import { buildSessionRegistry } from './session-registry.js';
+import { selectFigmaImportRoot } from '../../../core/figma-import-selection.js';
+import { ContractSchema } from '../../../scripts/contract-schema.js';
 import { clearWorkspace, recordImports, removeWorkspaceEntry, workspaceSnapshot } from './workspace.js';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
@@ -61,4 +63,86 @@ test('contradicting file identity cannot borrow an existing id even when a key i
   assert.notEqual(first.contract.id, second.contract.id);
   assert.equal(load('file-b', 'same-key').contract.id, second.contract.id);
   assert.equal(workspaceSnapshot().length, 2);
+});
+
+
+test('caller occurrence identity cannot borrow a main declaration or serialized proof', () => {
+  const main = ContractSchema.parse(load('file-a', 'main-key').contract);
+  const dump = { _occurrences: { version: 1, dependencyInventory: 'complete', requested: ['2:3'],
+    roots: [{ source: { fileKey: 'file-a', nodeId: '2:3' }, root: { nodeId: '2:3' } }],
+    proof: { authenticated: true }, acceptedContract: main.id } };
+  assert.throws(() => selectFigmaImportRoot(dump, [main]), /figma-occurrence-host-proof-required/);
+  assert.throws(() => selectFigmaImportRoot(dump, [main], () => ({ contractId: main.id })), /figma-occurrence-proposal-mismatch/);
+  let called = false;
+  const malformed = structuredClone(dump); malformed._occurrences.roots[0].root.nodeId = 'foreign-node';
+  assert.throws(() => selectFigmaImportRoot(malformed, [main], () => { called = true; return { contractId: main.id }; }), /figma-occurrence-source-mismatch/);
+  assert.equal(called, false, 'contradictory caller identity stops before the host resolver');
+});
+
+test('caller occurrence root selection requires the host result and exact file and node identity', () => {
+  const main = ContractSchema.parse(load('file-a', 'main-key').contract);
+  const caller = structuredClone(main);
+  caller.id = 'test.caller'; caller.name = 'Caller'; caller.bindings.figma.anchors.nodeId = '2:3';
+  const dump = { _occurrences: { version: 1, dependencyInventory: 'complete', requested: ['2:3'],
+    roots: [{ source: { fileKey: 'file-a', nodeId: '2:3' }, root: { nodeId: '2:3' } }] } };
+  const resolve = (seen: unknown, nodeId: string) => { assert.equal(seen, dump); assert.equal(nodeId, '2:3'); return { contractId: caller.id }; };
+  assert.deepEqual(selectFigmaImportRoot(dump, [main, caller], resolve), { kind: 'occurrence', nodeId: '2:3', contractId: caller.id, index: 1 });
+  const foreign = structuredClone(caller); foreign.bindings.figma.anchors.fileKey = 'file-b';
+  assert.throws(() => selectFigmaImportRoot(dump, [main, foreign], resolve), /figma-occurrence-proposal-mismatch/);
+  assert.throws(() => selectFigmaImportRoot(dump, [caller, structuredClone(caller)], resolve), /figma-occurrence-proposal-mismatch/);
+});
+
+import { revisionOf } from '../../../core/contract-provenance.js';
+import { resolveRetainedOccurrence, registerRetainedOccurrence, retainedOccurrenceForContract,
+  retainedOccurrencePackageSelection } from './retained-occurrence.js';
+
+/** Protocol fixtures exercise browser session state, never host capture authority. */
+function retainedResponse(label: string, childId = 'test.retained-shared') {
+  const child = ContractSchema.parse(load('transport-file', 'transport-key').contract);
+  child.id = childId; child.name = 'RetainedChild'; child.description = label;
+  child.bindings.figma.anchors.nodeId = '31:2';
+  const root = structuredClone(child);
+  root.id = `test.retained-${label.toLowerCase()}`; root.name = `Retained${label}`;
+  root.bindings.figma.anchors.nodeId = `31:${label === 'Older' ? 3 : 4}`;
+  root.anatomy.root = { element: 'div', parts: { child: { component: { id: child.id } } } };
+  const contracts = [ContractSchema.parse(root), ContractSchema.parse(child)];
+  const dump = { _occurrences: { version: 1, dependencyInventory: 'complete', requested: [root.bindings.figma.anchors.nodeId],
+    roots: [{ source: { fileKey: 'transport-file', nodeId: root.bindings.figma.anchors.nodeId }, root: { nodeId: root.bindings.figma.anchors.nodeId } }] } };
+  const key = { fileKey: 'transport-file', nodeId: root.bindings.figma.anchors.nodeId!, canonicalJsonSha256: revisionOf(dump).slice('sha256:'.length) };
+  const tokens = { primitives: {}, semantic: { label: { $type: 'string', $value: label } }, light: {}, dark: {}, brands: {} };
+  const envelope = { kind: 'host-retained-occurrence', key, request: { rootId: root.id, contracts, tokens, icons: [] },
+    selection: { kind: 'occurrence', contractId: root.id }, degradations: [], qualification: 'unqualified', acceptedContract: null };
+  return { dump, envelope, root: contracts[0], child: contracts[1], tokens, family: new Map(contracts.map(c => [c.id, c])) };
+}
+const retainedFetch = (value: ReturnType<typeof retainedResponse>['envelope']) =>
+  (async () => ({ ok: true, json: async () => structuredClone(value) })) as unknown as typeof fetch;
+
+test('late discarded occurrence resolution cannot replace an accepted shared-child session', async () => {
+  const older = retainedResponse('Older'), newer = retainedResponse('Newer');
+  let release!: () => void;
+  const wait = new Promise<void>(resolve => { release = resolve; });
+  let revision = 0;
+  const applyCurrent = async (fixture: typeof older, fetchImpl: typeof fetch) => {
+    const mine = ++revision;
+    const retained = await resolveRetainedOccurrence(fixture.dump, fetchImpl);
+    if (mine === revision && retained) registerRetainedOccurrence(retained);
+  };
+  const pending = applyCurrent(older, (async () => { await wait; return retainedFetch(older.envelope)('', {}); }) as typeof fetch);
+  await applyCurrent(newer, retainedFetch(newer.envelope));
+  assert.equal(retainedOccurrenceForContract(newer.child)?.request.rootId, newer.root.id);
+  release(); await pending;
+  assert.equal(retainedOccurrenceForContract(newer.child)?.request.rootId, newer.root.id);
+  assert.deepEqual(retainedOccurrencePackageSelection(newer.root, newer.family, newer.tokens), { occurrence: newer.envelope.key });
+  assert.throws(() => retainedOccurrenceForContract(older.child), /retained-occurrence-contract-changed/);
+});
+
+test('resolved occurrence data stays unregistered when an import is cancelled or cannot apply', async () => {
+  const fixture = retainedResponse('Cancelled', 'test.retained-cancelled-child');
+  const resolved = await resolveRetainedOccurrence(fixture.dump, retainedFetch(fixture.envelope));
+  assert(resolved);
+  // Editor/token/reset cancellation and token-CSS refusal return before accepted apply.
+  // Merely completing HTTP resolution must not create any session entry.
+  assert.equal(retainedOccurrenceForContract(fixture.root), null);
+  assert.equal(retainedOccurrenceForContract(fixture.child), null);
+  assert.equal(retainedOccurrencePackageSelection(fixture.root, fixture.family, fixture.tokens), null);
 });

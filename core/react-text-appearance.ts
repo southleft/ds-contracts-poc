@@ -1,4 +1,6 @@
-import type {Part} from '../scripts/contract-schema.js';
+import {textAppearanceTokenBindingIssues,type Part} from '../scripts/contract-schema.js';
+import {aliasTarget} from '../packages/core/src/tokens.js';
+import {cssVarName} from '../packages/core/src/emit-tokens-css.js';
 import {inspectTextAppearance,inspectAuthoredTextAppearance} from './source-text-appearance-control.js';
 
 export interface ReactTextAppearance {
@@ -50,10 +52,23 @@ function __DscTextAppearance({children,value,characters,choices,authored,values=
 }
 `;
 
-export function wrapReactTextAppearance(part:Part,jsx:string,codePropOf:(name:string)=>string){
+export function boundAuthoredReactTextAppearance(part:Part,resolveToken:(path:string)=>string|number=(path)=>`var(${cssVarName(path)})`):ReactTextAppearance|undefined {
+ const errors=textAppearanceTokenBindingIssues(part);if(errors.length)throw Error(errors.join('; '));
+ if(!part.textAppearanceTokenBindings)return;
+ const appearance=compileReactTextAppearance(part.textAppearanceByCombination!.rows[0].appearance,true);
+ for(const channel of part.textAppearanceTokenBindings){
+  const path=aliasTarget(part.tokens![channel]);if(!path)throw Error('text-appearance-token-reference-invalid:'+channel);
+  const value=resolveToken(path);if(typeof value!=='string'&&typeof value!=='number'||typeof value==='number'&&!Number.isFinite(value))throw Error('text-appearance-token-value-invalid:'+channel);
+  appearance.runs[0].style[channel==='font-size'?'fontSize':'color']=value;
+ }
+ return appearance;
+}
+
+export function wrapReactTextAppearance(part:Part,jsx:string,codePropOf:(name:string)=>string,resolveToken?:(path:string)=>string|number){
  const control=part.textAppearanceOverride,table=part.textAppearanceByCombination;if(!control&&!table)return jsx;
  const characters=part.content?part.content.prop:part.textByProp?Object.entries(part.textByProp.map).map(([value,text])=>`${codePropOf(part.textByProp!.prop)} === ${JSON.stringify(value)} ? ${JSON.stringify(text)} : `).join('')+JSON.stringify(part.text):JSON.stringify(part.text);
  const choices=Object.fromEntries(Object.entries(control?.choices??{}).map(([key,value])=>[key,compileReactTextAppearance(value)]));
- const authored=table?` authored={${JSON.stringify(table.rows.map(row=>({values:row.values,appearance:compileReactTextAppearance(row.appearance,true)})))}} values={[${table.props.map(name=>`(${codePropOf(name)} == null ? null : globalThis.String(${codePropOf(name)}))`).join(', ')}]}`:'';
+ const bound=boundAuthoredReactTextAppearance(part,resolveToken);
+ const authored=table?` authored={${JSON.stringify(table.rows.map(row=>({values:row.values,appearance:bound??compileReactTextAppearance(row.appearance,true)})))}} values={[${table.props.map(name=>`(${codePropOf(name)} == null ? null : globalThis.String(${codePropOf(name)}))`).join(', ')}]}`:'';
  return `<__DscTextAppearance value={${control?codePropOf(control.prop):'undefined'}} characters={${characters}} choices={${JSON.stringify(choices)}}${authored}>${jsx}</__DscTextAppearance>`;
 }

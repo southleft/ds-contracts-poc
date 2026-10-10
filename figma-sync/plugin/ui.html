@@ -2489,6 +2489,8 @@ figma.skipInvisibleInstanceChildren = false;
 // runtime to the set you picked (figma-sync/plugin/ui.html proposeFor) and
 // was never affected.
 const TARGET_SETS = [];
+// Explicit native usage IDs; absence uses supported current selection.
+const TARGET_OCCURRENCES = [];
 // Send opts in to a complete, bounded local family. Other capture callers keep
 // their historical scope. No imports or mutations are performed by this walk.
 const INCLUDE_DEPENDENCIES = false;
@@ -3533,7 +3535,7 @@ async function captureNativeImageAsset(hash) {
 }
 // --- NATIVE GROUP AND IMAGE FACTS (end) ------------------------------------
 
-async function dumpNode(node, nodePath, parent) {
+async function dumpNode(node, nodePath, parent, captureChildren = true) {
   const out = { name: node.name, type: node.type, nodeId: node.id };
   const localGeometry=observeLocalGeometry(node.id,parent && parent.id,node.relativeTransform,node.width,node.height,parent && parent.width,parent && parent.height);
   if(localGeometry)out.localGeometry=localGeometry;
@@ -4579,7 +4581,7 @@ async function dumpNode(node, nodePath, parent) {
     }
   }
 
-  if ('children' in node && node.type !== 'INSTANCE') {
+  if (captureChildren && 'children' in node && node.type !== 'INSTANCE') {
     out.children = [];
     for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name, node));
   }
@@ -4590,6 +4592,148 @@ async function dumpNode(node, nodePath, parent) {
   }
   return out;
 }
+
+// --- CALLER OCCURRENCE OBSERVATION (start) ---------------------------------
+// Capture usage facts only. No tree difference, missing override, SLOT stamp or
+// opaque property value establishes caller/default/empty assignment here.
+async function dumpCallerOccurrences(roots) {
+  const refuse = (code, detail) => { throw Error('CALLER_OCCURRENCE_' + code + ': ' + detail); };
+  if (typeof figma.fileKey !== 'string' || !figma.fileKey) refuse('FILE_KEY_REQUIRED', 'native source file identity is unavailable');
+  const seen = new Set(), mains = new Map(), mainSlots = new Map();
+  let inspected = 0, rawItems = 0;
+  const record = value => {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+    const prototype=Object.getPrototypeOf(value);
+    return prototype===null || Object.getPrototypeOf(prototype)===null && Object.hasOwn(prototype,'constructor') && prototype.constructor.name==='Object';
+  };
+  const raw = (value, depth = 0) => {
+    if (++rawItems > DEPENDENCY_NODE_CAP * 20 || depth > 256) refuse('RAW_WITNESS_CAP', 'native property witness exceeds the bounded reader');
+    if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+    if (typeof value === 'number' && Number.isFinite(value)) return value;
+    if (Array.isArray(value)) {
+      if (Array.from({length:value.length}, (_, i) => Object.hasOwn(value, i)).some(v => !v)) refuse('RAW_WITNESS_SPARSE', 'native witness array has an omitted member');
+      if (Reflect.ownKeys(value).some(key=>typeof key!=='string' || key!=='length' && (!/^(0|[1-9]\d*)$/.test(key) || !Number.isSafeInteger(Number(key)) || Number(key)>=value.length))) refuse('RAW_WITNESS_UNSUPPORTED','array has an unsupported member');
+      return value.map((v,i) => {
+        const descriptor=Object.getOwnPropertyDescriptor(value,String(i));
+        if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor,'value')) refuse('RAW_WITNESS_UNSUPPORTED','array member is not an observed data value');
+        return raw(v, depth + 1);
+      });
+    }
+    if (!record(value)) refuse('RAW_WITNESS_UNSUPPORTED', 'native witness contains an opaque object or non-JSON value');
+    return Object.fromEntries(Reflect.ownKeys(value).map(key => {
+      const descriptor=Object.getOwnPropertyDescriptor(value,key);
+      if (typeof key!=='string' || !descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor,'value')) refuse('RAW_WITNESS_UNSUPPORTED','native witness has a symbol, hidden or accessor member');
+      return [key,raw(descriptor.value,depth+1)];
+    }));
+  };
+  const identity = main => {
+    if (!main || main.type !== 'COMPONENT' || typeof main.id !== 'string' || !main.id || typeof main.key !== 'string' || !main.key)
+      refuse('MAIN_IDENTITY_REQUIRED', 'INSTANCE must resolve an actual readable COMPONENT ID and key');
+    const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+    if (owner.type==='COMPONENT_SET' && (!Array.isArray(owner.children) ||
+      Array.from({length:owner.children.length},(_,i)=>Object.hasOwn(owner.children,i)).some(v=>!v) ||
+      owner.children.some(child=>!child || child.type!=='COMPONENT' || child.parent!==owner) ||
+      new Set(owner.children.map(child=>child.id)).size!==owner.children.length ||
+      owner.children.filter(child=>child.id===main.id).length!==1 || !owner.children.includes(main)))
+      refuse('OWNER_MEMBERSHIP_DISAGREEMENT',main.id);
+    if (typeof owner.id !== 'string' || !owner.id || typeof owner.key !== 'string' || !owner.key) refuse('OWNER_IDENTITY_REQUIRED', main.id);
+    return {componentId:main.id,componentKey:main.key,ownerId:owner.id,ownerType:owner.type,ownerKey:owner.key};
+  };
+  const slots = (root, label) => {
+    const result = new Map(), localIds = new Set(), pending = [{node:root,parent:root.parent,depth:0}];
+    while (pending.length) {
+      const {node,parent,depth} = pending.pop();
+      if (++inspected > DEPENDENCY_NODE_CAP || depth > 256) refuse('NODE_CAP', 'complete usage/main SLOT observation exceeds the bounded reader');
+      if (!node || !node.id || localIds.has(node.id)) refuse('TOPOLOGY_AMBIGUOUS', label);
+      if (node.parent!==parent) refuse('DECLARATION_PARENT_DISAGREEMENT',label+' / '+node.id);
+      localIds.add(node.id);
+      if (node.type === 'SLOT') {
+        const key = node.componentPropertyReferences && node.componentPropertyReferences.slotContentId;
+        if (typeof key !== 'string' || !key || result.has(key)) refuse('SLOT_BINDING_AMBIGUOUS', label + ' / ' + node.id);
+        result.set(key,node);
+      }
+      if (node !== root && node.type === 'INSTANCE') continue;
+      if ('children' in node) {
+        if (!Array.isArray(node.children) || Array.from({length:node.children.length},(_,i)=>Object.hasOwn(node.children,i)).some(v=>!v)) refuse('CHILDREN_INCOMPLETE', label);
+        for (let i=node.children.length-1;i>=0;i--) pending.push({node:node.children[i],parent:node,depth:depth+1});
+      }
+    }
+    return result;
+  };
+  const capture = async (node, path, parent, dependencies, depth = 0) => {
+    if (++inspected > DEPENDENCY_NODE_CAP || depth > 256) refuse('NODE_CAP', 'complete observed usage exceeds the bounded reader');
+    if (!node || typeof node.id !== 'string' || !node.id || seen.has(node.id)) refuse('TOPOLOGY_AMBIGUOUS', path);
+    if (parent && node.parent !== parent) refuse('PARENT_DISAGREEMENT', path);
+    seen.add(node.id);
+    const out = await dumpNode(node,path,parent,false);
+    if (node.type === 'INSTANCE') {
+      let main;
+      try { main = await node.getMainComponentAsync(); }
+      catch (e) { refuse('MAIN_UNREADABLE', path + ': ' + String(e && e.message || e)); }
+      const observed = identity(main), prior = mains.get(main.id);
+      if (prior && (JSON.stringify(prior.identity) !== JSON.stringify(observed))) refuse('MAIN_CHANGED', path);
+      if (out.instanceGeometry && out.instanceGeometry.componentId !== main.id || out.instanceKey && out.instanceKey !== main.key || out.instanceSetKey && out.instanceSetKey !== observed.ownerKey) refuse('MAIN_CHANGED', path);
+      mains.set(main.id,{node:main,identity:observed});dependencies.set(main.id,observed);
+      const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+      let definitions, properties, overrides;
+      try { definitions = raw(owner.componentPropertyDefinitions);properties = raw(node.componentProperties);overrides = raw(node.overrides); }
+      catch (e) { refuse('NATIVE_WITNESS_UNREADABLE', path + ': ' + String(e && e.message || e)); }
+      if (!record(definitions) || !record(properties) || !Array.isArray(overrides)) refuse('NATIVE_WITNESS_INCOMPLETE', path);
+      for (const [propertyId, property] of Object.entries(properties)) if (property && property.type === 'INSTANCE_SWAP') {
+        if (typeof property.value !== 'string' || !property.value) refuse('SWAP_IDENTITY_REQUIRED',path+' / '+propertyId);
+        let selected;
+        try { selected=await figma.getNodeByIdAsync(property.value); }
+        catch (e) { refuse('SWAP_UNREADABLE',path+' / '+propertyId+': '+String(e && e.message || e)); }
+        const swapIdentity=identity(selected),previous=mains.get(selected.id);
+        if (previous && JSON.stringify(previous.identity)!==JSON.stringify(swapIdentity)) refuse('MAIN_CHANGED',path+' / '+propertyId);
+        mains.set(selected.id,{node:selected,identity:swapIdentity});dependencies.set(selected.id,swapIdentity);
+      }
+      let declared = mainSlots.get(main.id);
+      if (!declared) { declared = slots(main,path+' / main');mainSlots.set(main.id,declared); }
+      const current = slots(node,path), propertyIds = Object.entries(definitions).filter(([,v])=>v && v.type==='SLOT').map(([key])=>key);
+      if (propertyIds.length !== declared.size || declared.size !== current.size || propertyIds.some(key=>!declared.has(key)||!current.has(key))) refuse('SLOT_INVENTORY_DISAGREEMENT', path);
+      const inventory = propertyIds.map(propertyId => {
+        const sourceSlot = declared.get(propertyId), usageSlot = current.get(propertyId);
+        const property = properties[propertyId];
+        if (!property || property.type !== 'SLOT') refuse('SLOT_PROPERTY_DISAGREEMENT', path + ' / ' + propertyId);
+        degrade('caller-slot-assignment-disposition-unobserved',path+' / '+propertyId,'native SLOT relationship is observed; caller-supplied, inherited-default and explicitly-empty assignment are not established');
+        return {propertyId,mainSlotNodeId:sourceSlot.id,occurrenceSlotNodeId:usageSlot.id,
+          mainChildNodeIds:sourceSlot.children.map(c=>c.id),occurrenceChildNodeIds:usageSlot.children.map(c=>c.id),
+          ...(sourceSlot.limitViolations!==undefined?{mainLimitViolations:raw(sourceSlot.limitViolations)}:{}),
+          ...(usageSlot.limitViolations!==undefined?{occurrenceLimitViolations:raw(usageSlot.limitViolations)}:{}),
+          assignmentDisposition:{status:'unsupported',code:'caller-slot-assignment-disposition-unobserved'}};
+      });
+      out.instanceSlotObservation = {instanceId:node.id,mainComponentId:main.id,mainComponentKey:main.key,
+        ownerId:observed.ownerId,ownerType:observed.ownerType,ownerKey:observed.ownerKey,
+        componentProperties:properties,overrides,propertyDefinitions:definitions,slots:inventory};
+    }
+    if ('children' in node) {
+      if (!Array.isArray(node.children) || Array.from({length:node.children.length},(_,i)=>Object.hasOwn(node.children,i)).some(v=>!v)) refuse('CHILDREN_INCOMPLETE',path);
+      out.children=[];
+      for (const child of node.children) out.children.push(await capture(child,path+'/'+child.name,node,dependencies,depth+1));
+    }
+    return out;
+  };
+  const captured=[];
+  for (const root of roots) {
+    if (!root || !['FRAME','GROUP','INSTANCE'].includes(root.type)) refuse('ROOT_TYPE_UNSUPPORTED','select an actual native FRAME, GROUP or INSTANCE');
+    const ancestry=[], ancestors=new Set();let parent=root.parent;
+    while (parent) {
+      if (ancestors.has(parent.id) || ancestry.length >= 256) refuse('ANCESTRY_AMBIGUOUS',root.id);
+      ancestors.add(parent.id);ancestry.push({nodeId:parent.id,type:parent.type,
+        ...(typeof parent.visible==='boolean'?{visible:parent.visible}:{}),
+        ...(parent.explicitVariableModes!==undefined?{explicitVariableModes:raw(parent.explicitVariableModes)}:{}),
+        ...(parent.resolvedVariableModes!==undefined?{resolvedVariableModes:raw(parent.resolvedVariableModes)}:{})});
+      parent=parent.parent;
+    }
+    const dependencies=new Map(),tree=await capture(root,'occurrence:'+root.id,root.parent,dependencies);
+    captured.push({source:{fileKey:figma.fileKey,nodeId:root.id,type:root.type},ancestry,root:tree,
+      requiredMains:[...dependencies.values()],lowering:{status:'unsupported',code:'caller-occurrence-lowering-unimplemented'}});
+    degrade('caller-occurrence-lowering-unimplemented','occurrence:'+root.id,'complete observed tree is preserved; occurrence lowering and independently authenticated assignment remain required');
+  }
+  return {roots:captured,mains:[...mains.values()].map(v=>v.node)};
+}
+// --- CALLER OCCURRENCE OBSERVATION (end) -----------------------------------
 
 // dump v1.5: set-level INSTANCE_SWAP preferredValues (component keys →
 // slot `accepts` downstream) and BOOLEAN property defaults (the one
@@ -4638,7 +4782,7 @@ function dumpPropertyDefinitions(node) {
 // Private component names beginning with _ remain component identities.
 // Only actual metadata slots, unsafe object keys and integer-order keys collide.
 function invalidDumpSetName(name) {
-  return ['_provenance', '_variables', '_degradations', '_imageAssets', '__proto__', 'constructor', 'prototype'].includes(name) || /^(0|[1-9]\d*)$/.test(name);
+  return ['_provenance', '_variables', '_degradations', '_imageAssets', '_occurrences', '__proto__', 'constructor', 'prototype'].includes(name) || /^(0|[1-9]\d*)$/.test(name);
 }
 
 const nativeInstanceVisibility = [];
@@ -4647,7 +4791,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.76',
+    dumpVersion: '1.77',
   },
 };
 dumps._degradations = degradations;
@@ -4655,15 +4799,23 @@ dumps._variables = capturedVariables;
 // R8 scope (see TARGET_SETS): a non-empty list selects by name; an empty list
 // selects the current selection's sets when there is one, else every set.
 const selectedSetIds = new Set();
-if (TARGET_SETS.length === 0) {
+const selectedOccurrences = new Map();
+if (TARGET_OCCURRENCES.length && TARGET_SETS.length) throw Error('CALLER_OCCURRENCE_SCOPE_AMBIGUOUS: component names and occurrence IDs cannot both be requested');
+for (const id of TARGET_OCCURRENCES) {
+  const node=await figma.getNodeByIdAsync(id);
+  if (!node || !['FRAME','GROUP','INSTANCE'].includes(node.type) || selectedOccurrences.has(id)) throw Error('CALLER_OCCURRENCE_REQUEST_UNREADABLE: '+id);
+  selectedOccurrences.set(id,node);
+}
+if (TARGET_SETS.length === 0 && TARGET_OCCURRENCES.length === 0) {
   try {
     for (const sel of (figma.currentPage && figma.currentPage.selection) || []) {
-      if (sel.type === 'COMPONENT_SET') selectedSetIds.add(sel.id);
+      if (['FRAME','GROUP','INSTANCE'].includes(sel.type)) selectedOccurrences.set(sel.id,sel);
+      else if (sel.type === 'COMPONENT_SET') selectedSetIds.add(sel.id);
       else if (sel.type === 'COMPONENT') selectedSetIds.add(sel.parent && sel.parent.type === 'COMPONENT_SET' ? sel.parent.id : sel.id);
     }
   } catch (e) { /* no selection surface on this bridge — every set */ }
 }
-const scope = TARGET_SETS.length > 0 ? 'TARGET_SETS' : selectedSetIds.size > 0 ? 'selection' : 'every set';
+const scope = selectedOccurrences.size > 0 ? 'occurrences' : TARGET_SETS.length > 0 ? 'TARGET_SETS' : selectedSetIds.size > 0 ? 'selection' : 'every set';
 const seenNames = [];
 const localSets = [];
 for (const page of figma.root.children) {
@@ -4679,8 +4831,9 @@ const remoteMainSnapshots = new Map();
 const detachedMainSnapshots = new Map();
 let captureSets = localSets.filter((node) =>
   TARGET_SETS.length > 0 ? TARGET_SETS.includes(node.name) :
-    scope === 'selection' ? selectedSetIds.has(node.id) : node.name !== 'Slot');
-if (INCLUDE_DEPENDENCIES) {
+    scope === 'selection' || scope === 'occurrences' ? selectedSetIds.has(node.id) : node.name !== 'Slot');
+const observedOccurrences = selectedOccurrences.size ? await dumpCallerOccurrences([...selectedOccurrences.values()]) : null;
+if (INCLUDE_DEPENDENCIES || observedOccurrences) {
   const refuse = (reason, detail) => { throw new Error('DEPENDENCY_CAPTURE_' + reason + ': ' + detail); };
   const byId = new Map(localSets.map((node) => [node.id, node]));
   const chosen = new Map();
@@ -4716,6 +4869,15 @@ if (INCLUDE_DEPENDENCIES) {
     if (from) origins.get(node.id).referencedBy.add(from.id);
   };
   for (const node of captureSets) add(node, 0, null);
+  if (observedOccurrences) for (const main of observedOccurrences.mains) {
+    const target=main.parent && main.parent.type==='COMPONENT_SET'?main.parent:main;
+    if (main.remote || target.remote) remoteMainSnapshots.set(target.id,target===main?captureRemoteMainSnapshot(main,figma.fileKey):captureRemoteSetSnapshot(target,figma.fileKey));
+    else if (!byId.has(target.id)) {
+      if (target!==main || main.parent!==null) refuse('MAIN_UNREADABLE','occurrence main '+main.id+' is outside the readable local file');
+      detachedMainSnapshots.set(target.id,await captureDetachedMainSnapshot(main,figma.fileKey,id=>figma.getNodeByIdAsync(id)));
+    }
+    add(target,0,null);
+  }
   // Map iteration includes later additions, giving a deterministic breadth-first
   // walk. IDs, never names, decide which main owns an observed instance.
   for (const owner of chosen.values()) {
@@ -4930,6 +5092,18 @@ if (TARGET_SETS.length > 0) {
         ' (dump v1.30; an empty TARGET_SETS dumps every set, or the selection)',
     );
   }
+}
+if (observedOccurrences) {
+  for (const main of observedOccurrences.mains) {
+    const owner=main.parent && main.parent.type==='COMPONENT_SET'?main.parent:main;
+    const observed=observedOccurrences.roots.flatMap(root=>root.requiredMains).filter(pin=>pin.componentId===main.id);
+    if (!observed.length || observed.some(pin=>pin.componentKey!==main.key || pin.ownerId!==owner.id || pin.ownerType!==owner.type || pin.ownerKey!==owner.key))
+      throw Error('CALLER_OCCURRENCE_CAPTURED_MAIN_IDENTITY_CHANGED: '+main.id);
+    const definition=dumps[captureName(owner)],matches=definition && definition.variants.filter(v=>v.nodeId===main.id);
+    if (!definition || definition.nodeId!==owner.id || definition.key!==owner.key || !matches || matches.length!==1 || matches[0].componentKey!==main.key)
+      throw Error('CALLER_OCCURRENCE_SERIALIZED_MAIN_DISAGREEMENT: '+main.id);
+  }
+  dumps._occurrences = {version:1,requested:[...selectedOccurrences.keys()],roots:observedOccurrences.roots,dependencyInventory:'complete'};
 }
 if (Object.keys(nativeImageAssets).length) dumps._imageAssets = nativeImageAssets;
 dumps._provenance.nativeInstanceVisibility = nativeInstanceVisibility;

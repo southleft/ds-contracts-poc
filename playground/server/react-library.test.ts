@@ -233,3 +233,103 @@ test('non-regular artifact members refuse without blocking the local service', (
     }
   } finally { rmSync(work, { recursive: true, force: true }); }
 });
+
+type OccurrenceResolver = NonNullable<Parameters<typeof createReactLibraryService>[2]>;
+const occurrenceKey = { fileKey: 'caller-file', nodeId: '20:30', canonicalJsonSha256: 'a'.repeat(64) };
+function retainedEnvelope(): ReturnType<OccurrenceResolver> {
+  const parsed = parseLibraryRequest(request());
+  return {
+    kind: 'host-retained-occurrence', key: occurrenceKey,
+    request: { rootId: parsed.root.id, contracts: parsed.contracts, tokens: { ...parsed.tokens, brands: { default: {}, ...parsed.tokens.brands } }, icons: parsed.icons },
+    selection: { kind: 'occurrence', nodeId: occurrenceKey.nodeId, contractId: parsed.root.id, index: 0 },
+    degradations: [{ code: 'observation-incomplete', nodePath: 'caller', message: 'Still a technical preview.' }],
+    qualification: 'unqualified', acceptedContract: null,
+  };
+}
+async function serveOccurrenceRoute(work: string, build: Parameters<typeof createReactLibraryService>[1], resolve?: OccurrenceResolver) {
+  const service = createReactLibraryService(work, build, resolve);
+  const server = createServer((req, res) => { void service(req, res); });
+  await new Promise<void>(done => server.listen(0, '127.0.0.1', done));
+  const origin = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  return {
+    post: (body: unknown) => fetch(origin + '/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: origin }, body: JSON.stringify(body) }),
+    close: async () => { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); },
+  };
+}
+
+test('retained occurrence inspect accepts only a selector and cannot publish or accept browser authority', async () => {
+  const work = mkdtempSync(path.join(tmpdir(), 'occurrence-inspect-route-'));
+  let resolverCalls = 0, builderCalls = 0;
+  const resolve: OccurrenceResolver = key => { resolverCalls++; assert.deepEqual(key, occurrenceKey); return retainedEnvelope(); };
+  const route = await serveOccurrenceRoute(work, async () => { builderCalls++; throw Error('inspection must not build'); }, resolve);
+  try {
+    const inspected = await route.post({ kind: 'resolve-caller-occurrence', occurrence: occurrenceKey });
+    assert.equal(inspected.status, 200);
+    assert.deepEqual(await inspected.json(), retainedEnvelope(), 'the technical-preview envelope remains explicit');
+    assert.equal(resolverCalls, 1); assert.equal(builderCalls, 0);
+    assert.equal(existsSync(path.join(work, 'private')), false, 'inspection cannot publish an artifact');
+    for (const forged of [
+      { kind: 'resolve-caller-occurrence', occurrence: occurrenceKey, proof: { authenticated: true } },
+      { occurrence: occurrenceKey, ...request() },
+      { occurrence: occurrenceKey, tokens: request().tokens },
+      { occurrence: occurrenceKey, registration: { canonical: '/private/capture.json', event: '/private/event.json' } },
+      { kind: 'register-caller-occurrence', occurrence: occurrenceKey },
+      { kind: 'resolve-caller-occurrence', occurrence: { ...occurrenceKey, proof: true } },
+      { kind: 'resolve-caller-occurrence', occurrence: { ...occurrenceKey, nodeId: '' } },
+      { kind: 'resolve-caller-occurrence', occurrence: { ...occurrenceKey, canonicalJsonSha256: 'not-a-sha' } },
+    ]) {
+      const response = await route.post(forged);
+      assert.equal(response.status, 400);
+      assert.match((await response.json()).error, /^retained-occurrence-(invalid-request|invalid-selection)$/);
+    }
+    assert.equal(resolverCalls, 1, 'malformed or mixed-authority bodies stop before the host resolver');
+    assert.equal(builderCalls, 0);
+  } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
+});
+
+test('retained occurrence prepare reacquires the host selection and uses its current request', async () => {
+  const work = mkdtempSync(path.join(tmpdir(), 'occurrence-prepare-route-'));
+  let resolverCalls = 0, builderCalls = 0, stale = false;
+  const resolve: OccurrenceResolver = key => {
+    resolverCalls++; assert.deepEqual(key, occurrenceKey);
+    if (stale) throw Error('retained-occurrence-capture-selection-changed');
+    const envelope = retainedEnvelope();
+    if (resolverCalls > 1) envelope.request.tokens.semantic = { color: { ink: { $type: 'color', $value: '#654321' } } };
+    return envelope;
+  };
+  const route = await serveOccurrenceRoute(work, async (_repo, input) => {
+    builderCalls++;
+    assert.deepEqual(input.tokens.semantic, { color: { ink: { $type: 'color', $value: '#654321' } } }, 'preparation must not reuse the earlier inspection request');
+    assert.equal(input.root.id, parent.id);
+    return { ...storedOutput(), tarball: '/unused', dist: '/unused' };
+  }, resolve);
+  try {
+    assert.equal((await route.post({ kind: 'resolve-caller-occurrence', occurrence: occurrenceKey })).status, 200);
+    const prepared = await route.post({ occurrence: occurrenceKey });
+    assert.equal(prepared.status, 200);
+    const artifact = await prepared.json();
+    assert.equal(resolverCalls, 2); assert.equal(builderCalls, 1);
+    assert.deepEqual(readPreparedReactLibrary(work, artifact.artifactId).input.tokens.semantic, { color: { ink: { $type: 'color', $value: '#654321' } } });
+    stale = true;
+    const rejected = await route.post({ occurrence: occurrenceKey });
+    assert.equal(rejected.status, 400);
+    assert.equal((await rejected.json()).error, 'retained-occurrence-capture-selection-changed');
+    assert.equal(resolverCalls, 3); assert.equal(builderCalls, 1, 'stale host capture cannot reuse an earlier preparation');
+    assert.ok(readPreparedReactLibrary(work, artifact.artifactId).bytes.equals(storedOutput().bytes), 'the earlier artifact remains untouched');
+  } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
+});
+
+test('retained occurrence selectors without a host registration refuse before building', async () => {
+  const work = mkdtempSync(path.join(tmpdir(), 'occurrence-unregistered-route-'));
+  let builderCalls = 0;
+  const route = await serveOccurrenceRoute(work, async () => { builderCalls++; throw Error('unregistered selection must not build'); });
+  try {
+    for (const body of [{ kind: 'resolve-caller-occurrence', occurrence: occurrenceKey }, { occurrence: occurrenceKey }]) {
+      const response = await route.post(body);
+      assert.equal(response.status, 400);
+      assert.equal((await response.json()).error, 'retained-occurrence-not-registered');
+    }
+    assert.equal(builderCalls, 0);
+    assert.equal(existsSync(path.join(work, 'private')), false, 'an HTTP selection cannot create a registration or artifact');
+  } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
+});

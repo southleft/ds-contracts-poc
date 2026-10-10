@@ -7,6 +7,7 @@
  * with the benchmark pin) and by vite-glob-plugin.test.ts.
  */
 import { test } from 'node:test';
+import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -19,6 +20,20 @@ import { viteEngine } from '../../../scripts/figma-to-react.js';
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const dump = path.join(repoRoot, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
 const supported = { platform: 'linux', node: 'v20.19.4' };
+
+test('importing the CLI command leaves optional Playwright uninitialized until browser configuration', () => {
+  const command = new URL('../src/commands/figma-to-react.ts', import.meta.url).href;
+  const probe = `import assert from 'node:assert/strict';
+    import { createRequire } from 'node:module';
+    import path from 'node:path';
+    await import(${JSON.stringify(command)});
+    const require = createRequire(import.meta.url);
+    assert.equal(Object.keys(require.cache).some(file => file.includes(path.sep + 'playwright-core' + path.sep)), false,
+      'ordinary CLI packaging must not initialize the host-only browser dependency');`;
+  const run = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', probe],
+    { cwd: repoRoot, encoding: 'utf8', timeout: 15000 });
+  assert.equal(run.status, 0, run.stderr || run.stdout);
+});
 
 test('flags: exactly one of --url and --dump, and --out', () => {
   assert.deepEqual(parseFigmaToReactArgs(['--dump', 'd.json', '--out', 'o']), { dump: 'd.json', out: 'o', name: undefined, allowFailures: false });

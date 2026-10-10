@@ -73,6 +73,27 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
   };
   pairFields(input.comparison, input.creation.comparisons[0]);
   (input.comparison.instances ?? []).forEach((reference,index)=>pairFields(reference,input.creation.comparisons[0].nested?.find((r:Row)=>r.index===index)));
+  // Inherited paint must remain observable before its explicit migration
+  // adoption. Pin its main/path/metadata without granting comparison ownership
+  // or applying the main's field profile to the unadopted row.
+  const inheritedAdditions: Array<{instanceId:string;specPath:number[];mainNodeId:string;metadata:Record<string,string>}> = [];
+  for (const migration of input.mainMigrations ?? []) {
+    const reference = migration.index === -1 ? input.comparison : input.comparison.instances?.[migration.index];
+    const record = migration.index === -1 ? input.creation.comparisons[0] : input.creation.comparisons[0].nested?.find((r:Row)=>r.index===migration.index);
+    if (!reference || !record) throw Error('native-contract-comparison-migration-profile-invalid');
+    const nodes = new Map(reference.receipt.nodes!.map(node=>[node.id,node]));
+    for (const addition of migration.additions) {
+      let main = nodes.get(reference.mainId);
+      for (const index of addition.part.specPath) main = main && nodes.get(main.childIds[index]);
+      if (!main || main.id !== addition.mainNodeId || main.type !== 'RECTANGLE' ||
+          !same(JSON.parse(main.metadata.nativeContractPart), addition.part) ||
+          main.metadata.nativeBackgroundMigration !== reference.parent.backgroundMigration?.allocationRevision)
+        throw Error('native-contract-comparison-migration-profile-invalid');
+      const metadata = Object.fromEntries(['nativeSourceOperation','nativeSourceAllocation','nativeContractPart','nativeBackgroundMigration']
+        .map(key=>[key,main!.metadata[key]]));
+      inheritedAdditions.push({instanceId:record.instanceId,specPath:[...addition.part.specPath],mainNodeId:main.id,metadata});
+    }
+  }
   const hasInsetRing=(spec:NodeSpec):boolean=>spec.insetRingStroke===true||!!spec.children?.some(hasInsetRing);
   const strokeLayout=[input.comparison.parent,...nested.map(ref=>ref.parent)].some(p=>p.component.variants.some(v=>hasInsetRing(v.spec)));
   const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
@@ -81,7 +102,9 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
   }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
     ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true,
     [input.comparison.parent,...nested.map(ref=>ref.parent)].flatMap(p=>backgroundPaintIdentities(p.component)),
-    [], false, [], false, !!input.comparison.textTemplate, undefined, false, false, false, false, false, true, pairedArcCapFields, strokeLayout);
+    [], false, [], false, !!input.comparison.textTemplate, undefined, false, false, false, false, false, true, pairedArcCapFields, strokeLayout,
+    false, true, false, {nodes: input.creation.nodes, comparisons: input.creation.comparisons,
+      ...(inheritedAdditions.length ? {inheritedAdditions} : {})});
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},

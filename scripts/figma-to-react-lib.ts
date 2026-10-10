@@ -27,7 +27,8 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSyn
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
+import { buildReactLibrary } from '../playground/server/react-library-build.js';
+import { parseLibraryRequest } from '../playground/server/react-library-input.js';
 import { applyNativeStrokeCapture } from './native-stroke-capture.js';
 import { assertNativeVectorInputPaths, prepareNativeVectorStrokeInput } from './native-vector-stroke-capture.js';
 import type { NativeVectorStrokeCapture } from '../core/source-vector-stroke.js';

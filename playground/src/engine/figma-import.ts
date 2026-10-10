@@ -10,6 +10,7 @@
  * what CI referees (roundtrip-rest) is what the demo shows.
  */
 import { importFigmaUrl } from './figma-url-import.js';
+import {selectFigmaImportRoot} from '../../../core/figma-import-selection.js';
 import { dumpCapturesHidden, proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
 
 // Captured tokens (dump v1.4 `_variables`) — the designer's real variables,
@@ -64,6 +65,9 @@ export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
  *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
  *  this wrapper only supplies the playground's live corpus and options. */
 export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime'): DumpProposalBatch {
+  // Filled caller occurrences require the host's authenticated lowering path.
+  // JSON, REST, bridge and headless callers all stop before main-only fallback.
+  if ('_occurrences' in dump) selectFigmaImportRoot(dump, []);
   // The ACTIVE corpus — nearest-token suggestions and hex→token matching
   // come from the user's pasted tree when one is applied. mintUnbound:
   // values whose variable names are unrecoverable (the non-Enterprise
@@ -96,3 +100,5 @@ export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 're
     hiddenCaptured: dumpCapturesHidden(dump._provenance),
   });
 }
+
+export { resolveRetainedOccurrence, registerRetainedOccurrence, retainedOccurrenceForContract, retainedOccurrencePackageSelection, type RetainedOccurrenceImport } from './retained-occurrence.js';

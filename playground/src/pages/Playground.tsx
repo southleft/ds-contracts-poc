@@ -49,6 +49,11 @@ import {
   importFigmaDemo,
   importFigmaUrl,
   proposalsFromDump,
+  resolveRetainedOccurrence,
+  registerRetainedOccurrence,
+  retainedOccurrenceForContract,
+  retainedOccurrencePackageSelection,
+  type RetainedOccurrenceImport,
   type DumpProposalBatch,
   type FigmaImportResult,
   type FigmaProposal,
@@ -102,6 +107,7 @@ import {
   resetToRepoTokens,
   setCapturedTokens,
   setMintedTokens,
+  setRetainedTokenTree,
   STARTER_USER_TOKENS,
   storedUserTokensText,
   useTokenSource,
@@ -118,6 +124,7 @@ import { validateContractText } from '../engine/validate';
 import {
   clearWorkspace,
   recordImport,
+  recordImports,
   removeWorkspaceEntry,
   useWorkspace,
   WORKSPACE_CAP,
@@ -396,7 +403,10 @@ export function Playground() {
   const workspace = useWorkspace();
 
   // -------------------------------------------------- contract editor state
-  const [text, setText] = useState('');
+  const [text, updateText] = useState('');
+  const importRevision = useRef(0);
+  // A late transport result must not replace a newer import or editor change.
+  const setText = (value: string) => { importRevision.current++; updateText(value); };
   const [provenance, setProvenance] = useState('');
   // The pristine original of whatever was last LOADED (example, import,
   // generation, share link). While the editor text diverges from it, a small
@@ -691,6 +701,16 @@ export function Playground() {
   const loadWorkspaceEntry = (entry: WorkspaceEntry) => {
     const importOrigin = entry.receipts?.source ?? `${entry.source} import`;
     const origin = `workspace — ${entry.name} (${importOrigin}, imported ${wsDateTime(entry.importedAt)})`;
+    let retained: RetainedOccurrenceImport | null = null;
+    try {
+      retained = retainedOccurrenceForContract(JSON.parse(entry.contractText));
+      if (!retained && entry.receipts?.groups.some(g => g.title === 'Host-retained occurrence — technical preview')) {
+        throw Error('retained-occurrence-session-expired: reimport the original capture to restore its tokens and host selection');
+      }
+    } catch (error) {
+      setReceipts({ source: origin, groups: [{ title: 'Retained occurrence refused', kind: 'degradation', entries: [{ message: error instanceof Error ? error.message : String(error) }] }] });
+      return;
+    }
     setText(entry.contractText);
     setProvenance(origin);
     setPristine({ text: entry.contractText, provenance: origin });
@@ -701,6 +721,7 @@ export function Playground() {
     // now, not trusted from the stored receipts.
     setMintedTokens(entry.mintedTokens ?? null);
     setCapturedTokens(entry.capturedTokens ?? null);
+    if (retained) setRetainedTokenTree(retained.request.tokens);
     const stubResult = setChildStubs(entry.childStubs ?? null);
     // DISPLAY-STATE RECOMPUTE (stored data untouched): the stored receipt
     // groups are the record AS OF IMPORT DAY and are labeled so; anything
@@ -1192,7 +1213,34 @@ export function Playground() {
     setWsLoaded(null);
   };
 
-  const handleImportResult = (result: FigmaImportResult, origin: string) => {
+  const applyRetainedOccurrence = (retained: RetainedOccurrenceImport, origin: string, source: WorkspaceSource) => {
+    const groups: ReceiptGroup[] = [
+      { title: 'Host-retained occurrence — technical preview', kind: 'note', entries: [{ message: `The local host rechecked the retained source, native observations and filled assignments. ${retained.request.contracts.length} linked contracts and their exact token tree are available for inspection. This remains unqualified; the capture limitations below are preserved.` }] },
+      { title: 'Original capture limitations', kind: 'degradation', entries: retained.degradations.map(d => ({ code: d.code, label: d.nodePath, message: d.message })) },
+    ];
+    // Token CSS is checked before recording a family. No projection verdict or
+    // captured/minted-token label is manufactured for the host result.
+    setRetainedTokenTree(retained.request.tokens);
+    const recorded = recordImports(retained.request.contracts.map(contract => ({
+      name: contract.name, contractId: contract.id, source, contractText: pretty(contract), receipts: { source: origin, groups },
+    })));
+    // The response has survived the import revision guard, token CSS check and
+    // atomic workspace write. Discarded responses never register session data.
+    registerRetainedOccurrence(retained);
+    const root = retained.request.contracts.find(c => c.id === retained.request.rootId)!;
+    const rootText = pretty(root), provenance = `host-retained occurrence from ${origin} — technical preview`;
+    setChildStubs(null); setFigmaProposals(null); capturedRef.current = null; importGroupsRef.current = [];
+    figmaOriginRef.current = { origin, ws: source };
+    setText(rootText); setProvenance(provenance); setPristine({ text: rootText, provenance });
+    setReceipts(recorded.find(r => r.entry.contractId === root.id)?.receipts ?? { source: origin, groups });
+    setActiveExample(null); setExpectedRefusal(null); setWsLoaded(null);
+  };
+
+  const handleImportResult = async (result: FigmaImportResult, origin: string) => {
+    const revision = ++importRevision.current;
+    const retained = await resolveRetainedOccurrence(result.dump);
+    if (revision !== importRevision.current) return;
+    if (retained) { applyRetainedOccurrence(retained, origin, 'figma'); return; }
     const batch = proposalsFromDump(result.dump);
     // ROUTE HONESTY: name the dump grammar this route produced. Both callers
     // are the REST routes (URL import + demo fixture) — the mapper stamps
@@ -1254,8 +1302,9 @@ export function Playground() {
   const [bridgeDelivered, setBridgeDelivered] = useState<string | null>(null);
   const bridgeTimer = useRef<number | null>(null);
   const bridgeInFlight = useRef(false);
+  const bridgeGeneration = useRef(0);
 
-  const stopBridge = () => {
+  const clearBridge = () => {
     if (bridgeTimer.current !== null) {
       window.clearInterval(bridgeTimer.current);
       bridgeTimer.current = null;
@@ -1264,8 +1313,16 @@ export function Playground() {
     setBridge(null);
     setBridgeDelivered(null);
   };
+  const stopBridge = () => {
+    importRevision.current++;
+    bridgeGeneration.current++;
+    clearBridge();
+    setBridgeBusy(false);
+  };
   useEffect(
     () => () => {
+      importRevision.current++;
+      bridgeGeneration.current++;
       if (bridgeTimer.current !== null) window.clearInterval(bridgeTimer.current);
     },
     [],
@@ -1273,8 +1330,15 @@ export function Playground() {
 
   /** Returns the delivered set names (for the auto-renew delivery line);
    *  null when the dump could not be handled at all. */
-  const handleBridgeDump = (dump: unknown, code: string): string[] | null => {
+  const handleBridgeDump = async (dump: unknown, code: string): Promise<string[] | null> => {
+    const revision = ++importRevision.current;
     try {
+      const retained = await resolveRetainedOccurrence(dump);
+      if (revision !== importRevision.current) return null;
+      if (retained) {
+        applyRetainedOccurrence(retained, 'Figma plugin import', 'figma');
+        return retained.request.contracts.map(c => c.name);
+      }
       const groups: ReceiptGroup[] = [
         {
           title: 'Plugin bridge',
@@ -1328,12 +1392,13 @@ export function Playground() {
     } catch (e) {
       // Never the raw exception text as a headline (owner field case: a zod
       // issue array rendered verbatim here) — plain words + expandable detail.
-      setBridgeError(plainWordsError(e));
+      if (revision === importRevision.current) setBridgeError(plainWordsError(e));
       return null;
     }
   };
 
-  const bridgeTick = async (code: string, readCapability: string, expiresAt: number) => {
+  const bridgeTick = async (code: string, readCapability: string, expiresAt: number, generation: number) => {
+    if (generation !== bridgeGeneration.current) return;
     const remaining = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
     setBridgeRemaining(remaining);
     if (remaining <= 0) {
@@ -1345,31 +1410,36 @@ export function Playground() {
     bridgeInFlight.current = true;
     try {
       const poll = await pollBridge(code, readCapability);
+      if (generation !== bridgeGeneration.current) return;
       if (poll.status === 'delivered') {
         // One-time read by design (the bridge already deleted its copy) —
         // the CODE is spent, not the listener. Process the dump, then
         // immediately ask for a fresh session so the next send needs no
         // extra click; polling continues on the new code until Cancel/expiry.
-        stopBridge();
-        const delivered = handleBridgeDump(poll.dump, code);
-        await startBridge(delivered ?? []);
+        clearBridge();
+        const delivered = await handleBridgeDump(poll.dump, code);
+        await startBridge(delivered ?? [], generation);
       } else if (poll.status === 'error' && poll.fatal) {
         stopBridge();
         setBridgeError(notice(poll.message));
       }
       // 'waiting' and transient network errors: keep listening until expiry.
     } finally {
-      bridgeInFlight.current = false;
+      if (generation === bridgeGeneration.current) bridgeInFlight.current = false;
     }
   };
 
   /** Mint a session and start polling. `deliveredNames` marks an AUTO-RENEW
    *  after a delivery: the fresh code renders with a plain-words delivery
    *  line, and any error handleBridgeDump just surfaced is left standing. */
-  const startBridge = async (deliveredNames?: string[]) => {
+  const startBridge = async (deliveredNames?: string[], expectedGeneration?: number) => {
+    if (expectedGeneration !== undefined && expectedGeneration !== bridgeGeneration.current) return;
+    const generation = expectedGeneration ?? ++bridgeGeneration.current;
+    if (expectedGeneration === undefined) { importRevision.current++; clearBridge(); }
     if (deliveredNames === undefined) setBridgeError(null);
     setBridgeBusy(true);
     const result = await createBridgeSession();
+    if (generation !== bridgeGeneration.current) return;
     setBridgeBusy(false);
     if (!result.ok) {
       setBridgeError(notice(result.message));
@@ -1393,20 +1463,23 @@ export function Playground() {
           result.session.code,
           result.session.readCapability,
           expiresAt,
+          generation,
         ),
       BRIDGE_POLL_INTERVAL_MS,
     );
   };
 
   const runFigmaImport = async () => {
+    const revision = ++importRevision.current;
     setFigmaBusy(true);
     setFigmaError(null);
     try {
       const result = await importFigmaUrl(figmaUrl.trim(), figmaToken.trim());
+      if (revision !== importRevision.current) return;
       // The ground-truth panel reuses the token this import just proved —
       // session memory only, never persisted (see engine/figma-render.ts).
       rememberFigmaSession(figmaToken.trim());
-      handleImportResult(result, 'Figma REST import');
+      await handleImportResult(result, 'Figma REST import');
     } catch (e) {
       setFigmaError(plainWordsError(e));
     } finally {
@@ -1415,14 +1488,16 @@ export function Playground() {
   };
 
   const runFigmaDemo = async (degraded: boolean) => {
+    const revision = ++importRevision.current;
     setFigmaBusy(true);
     setFigmaError(null);
     try {
       const result = await importFigmaDemo({ degraded });
+      if (revision !== importRevision.current) return;
       // The demo marker lets ground truth serve its recorded fixture render;
       // a real session token always outranks it.
       rememberFigmaSession(DEMO_SESSION_TOKEN);
-      handleImportResult(
+      await handleImportResult(
         result,
         degraded ? 'Figma REST import (demo fixture, variables 403)' : 'Figma REST import (demo fixture)',
       );
@@ -1438,7 +1513,8 @@ export function Playground() {
   const [jsonError, setJsonError] = useState<PlainError | null>(null);
   const [jsonReading, setJsonReading] = useState(false);
 
-  const loadJson = () => {
+  const loadJson = async () => {
+    const revision = ++importRevision.current;
     setJsonError(null);
     setExpectedRefusal(null);
     let parsed: unknown;
@@ -1446,6 +1522,16 @@ export function Playground() {
       parsed = JSON.parse(jsonText);
     } catch (e) {
       setJsonError(plainWordsError(e));
+      return;
+    }
+    // Occurrence captures always require host selection, even if other JSON
+    // envelope fields are present. No declaration fallback may claim them.
+    if (parsed && typeof parsed === 'object' && '_occurrences' in parsed) {
+      try {
+        const retained = await resolveRetainedOccurrence(parsed);
+        if (revision !== importRevision.current) return;
+        if (retained) applyRetainedOccurrence(retained, 'Figma JSON import', 'json');
+      } catch (error) { if (revision === importRevision.current) setJsonError(plainWordsError(error)); }
       return;
     }
     // A CONTRACT-PROPOSAL envelope (the plugin Send tab's export / what
@@ -1532,11 +1618,14 @@ export function Playground() {
     const isDump =
       parsed !== null &&
       typeof parsed === 'object' &&
-      Object.entries(parsed).some(
+      ('_occurrences' in parsed || Object.entries(parsed).some(
         ([k, v]) => k !== '_provenance' && v !== null && typeof v === 'object' && 'variants' in v,
-      );
+      ));
     if (isDump) {
       try {
+        const retained = await resolveRetainedOccurrence(parsed);
+        if (revision !== importRevision.current) return;
+        if (retained) { applyRetainedOccurrence(retained, 'Figma JSON import', 'json'); return; }
         const batch = proposalsFromDump(parsed as FigmaImportResult['dump']);
         const groups = batchReceiptGroups(batch);
         if (batch.proposals.length === 0) {
@@ -1755,6 +1844,7 @@ export function Playground() {
   } | null>(null);
 
   const applyTokens = (text = tokensText) => {
+    importRevision.current++;
     const result = applyUserTokens(text);
     setPlainWrapOffer(null);
     if (result.ok) {
@@ -2414,8 +2504,9 @@ export function Playground() {
     try {
       const scope = linkedImportScope(emittable.contract, emittable.contracts,
         sessionRegistry().layersByContractId, tokenSource.inventory);
+      const occurrence = retainedOccurrencePackageSelection(emittable.contract, emittable.contracts, tokenSource.tree);
       const response = await fetch('/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rootId: emittable.contract.id,
+        body: JSON.stringify(occurrence ?? { rootId: emittable.contract.id,
           contracts: reactLibraryFamily(emittable.contract, emittable.contracts),
           tokens: applyLinkedScope(tokenSource.tree, scope), icons: [...icons] }) });
       if (!response.ok) {
@@ -3408,8 +3499,8 @@ export function Playground() {
               {tokenSource.label} — {tokenSource.inventory.size} token paths. Proposals,
               suggestions, the inline emitter&rsquo;s literals, and the preview stylesheet all
               bind against this tree.
-              {tokenSource.kind === 'user' ? (
-                <button type="button" onClick={() => { resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); setPlainWrapOffer(null); }}>
+              {tokenSource.kind !== 'repo' ? (
+                <button type="button" onClick={() => { importRevision.current++; resetToRepoTokens(); setTokensNote(null); setTokensErrors(null); setPlainWrapOffer(null); }}>
                   Back to repo tokens
                 </button>
               ) : null}
