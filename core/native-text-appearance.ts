@@ -32,6 +32,7 @@ export interface NativeAuthoredTextInstanceRecipe {
 }
 type AuthoredTextSpec=Partial<NativeScalarTextRecipe>&{characters?:string;authoredTextAppearance?:QualifiedTextAppearance;authoredTextAppearanceTarget?:string;authoredTextScalar?:NativeScalarTextRecipe};
 export function attachNativeAuthoredTextAppearance(spec:AuthoredTextSpec,part:Part,contract:Contract,subst:Record<string,string>):void {
+ if(part.textAppearanceTokenBindings)throw Error('authored-text-appearance-token-binding-native-unsupported');
  const table=part.textAppearanceByCombination;if(!table)return;
  const matches=walkAnatomy(contract).filter(w=>w.part.textAppearanceByCombination===table);
  if(matches.length!==1)throw Error('authored-text-appearance-owner-unqualified');

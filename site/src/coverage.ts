@@ -546,6 +546,7 @@ reg("layout", "observed-presence", [
   "part.textColorOverrideProp",
   "part.textAppearanceOverride", "part.textAppearanceOverride.prop", "part.textAppearanceOverride.choices",
   "part.textAppearanceByCombination",
+  "part.textAppearanceTokenBindings",
   "part.textAppearanceByCombination.props",
   "part.textAppearanceByCombination.rows",
   "part.textAppearanceByCombination.rows.appearance",

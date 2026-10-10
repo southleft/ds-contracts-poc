@@ -118,3 +118,67 @@ test('both production React emitters consume finite contract appearances without
  assert.equal(createFigmaEngine({tokens,icons:ctx.icons}).compileComponentData(c,ctx.contracts).variants[0].spec.children?.[0].textAppearanceTarget,c.id+':appearance');
  for(const mutate of [(x:any)=>{x.props[0].default='observed';},(x:any)=>{x.anatomy.root.parts.description.textAppearanceOverride.choices.observed.runs[1].start=12;},(x:any)=>{x.anatomy.root.parts.description.textColorOverrideProp='appearance';}]){const copy=structuredClone(c);mutate(copy);assert.equal(ContractSchema.safeParse(copy).success,false);}
 });
+
+// These compiler fixtures exercise portable authored-run binding semantics;
+// they are not native-capture or source-assignment authority.
+function boundTokenFixture() {
+ const characters='Paid';
+ const run={start:0,end:characters.length,fontName:{family:'Inter',style:'Medium',variationSettings:{wght:500,slnt:0,XTRA:1.25}},fontSize:14,fontWeight:500,lineHeight:{unit:'PIXELS',value:20},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE',fill:{paint:{color:{r:0,g:0,b:0},opacity:1,blendMode:'NORMAL'},variableId:'native:color'}};
+ const part={text:characters,literals:{'letter-spacing':'0px'},declared:{display:'block','white-space':'pre','text-align':'left'},textAutoResize:'WIDTH_AND_HEIGHT',tokens:{color:'{test.ink}','font-size':'{test.size}'},textAppearanceTokenBindings:['color','font-size'],textAppearanceByCombination:{props:[],rows:[{values:[],appearance:{characters,runs:[run]}}]}};
+ return {id:'test.bound-appearance',name:'BoundAppearance',version:'0.1.0',status:'draft',description:'Single native authored run, portable token carrier',semantics:{element:'div'},props:[],states:[],anatomy:{root:{parts:{label:part}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./BoundAppearance',export:'BoundAppearance'}}}};
+}
+
+test('bound token authored appearance preserves native axes and resolves portable single-run refs',async()=>{
+ const {ContractSchema,textAppearanceTokenBindingIssues}=await import('../scripts/contract-schema.js');
+ const {boundAuthoredReactTextAppearance}=await import('./react-text-appearance.js');
+ const c=ContractSchema.parse(boundTokenFixture()),part=c.anatomy.root!.parts!.label;
+ const before=structuredClone(part),bound=boundAuthoredReactTextAppearance(part)!;
+ assert.deepEqual(textAppearanceTokenBindingIssues(part),[]);
+ assert.equal(bound.runs[0].style.color,'var(--test-ink)');assert.equal(bound.runs[0].style.fontSize,'var(--test-size)');
+ assert.equal(bound.runs[0].style.fontVariationSettings,'"XTRA" 1.25, "slnt" 0, "wght" 500');assert.equal(bound.runs[0].style.fontWeight,500);assert.equal(bound.runs[0].style.lineHeight,'20px');assert.equal(bound.runs[0].style.letterSpacing,'0px');
+ assert.deepEqual(part,before,'binding compilation must not replace captured native fields');
+ const legacy=structuredClone(part);delete legacy.textAppearanceTokenBindings;
+ assert.equal(boundAuthoredReactTextAppearance(legacy),undefined,'legacy tables retain their existing scalar fallback precedence');
+});
+
+test('bound token authored appearance refuses ambiguous, stateful and malformed carriers',async()=>{
+ const {ContractSchema}=await import('../scripts/contract-schema.js');
+ const {boundAuthoredReactTextAppearance}=await import('./react-text-appearance.js');
+ const mutators:Array<(x:any)=>void>=[
+  x=>{delete x.tokens.color;},x=>{x.tokens.color='{test_under.ink}';},x=>{x.tokens.color='{test.{tone}}';},
+  x=>{x.textAppearanceByCombination.rows[0].appearance.runs.push({...x.textAppearanceByCombination.rows[0].appearance.runs[0]});},
+  x=>{x.textAppearanceByCombination.rows[0].appearance.characters='stale';},
+  x=>{x.content={prop:'label'};},x=>{x.states={hover:{color:'{test.other}'}};},
+  x=>{x.statesByProp=[{prop:'tone',map:{calm:{color:'{test.other}'}}}];},
+  x=>{x.tokensByProp={prop:'tone',map:{calm:{color:'{test.other}'}}};},
+  x=>{x.literals.color='red';},x=>{x.declared['font-size']='14px';},
+  x=>{x.textAppearanceByCombination.rows[0].appearance.runs[0].lineHeight={unit:'PERCENT',value:150};},
+  x=>{x.textAppearanceByCombination.rows[0].appearance.runs[0].letterSpacing={unit:'PERCENT',value:2};},
+ ];
+ for(const mutate of mutators){const raw=boundTokenFixture();mutate(raw.anatomy.root.parts.label);assert.equal(ContractSchema.safeParse(raw).success,false);assert.throws(()=>boundAuthoredReactTextAppearance(raw.anatomy.root.parts.label as any));}
+});
+
+test('bound token authored appearance keeps native writer refusal for color and size-only refs',async()=>{
+ const {ContractSchema}=await import('../scripts/contract-schema.js');const {attachNativeAuthoredTextAppearance}=await import('./native-text-appearance.js');
+ for(const sizeOnly of [false,true]){const raw=boundTokenFixture();if(sizeOnly){delete (raw.anatomy.root.parts.label.tokens as any).color;raw.anatomy.root.parts.label.textAppearanceTokenBindings=['font-size'];delete (raw.anatomy.root.parts.label.textAppearanceByCombination.rows[0].appearance.runs[0].fill as any).variableId;}
+ const c=ContractSchema.parse(raw),part=c.anatomy.root!.parts!.label;assert.throws(()=>attachNativeAuthoredTextAppearance({characters:part.text},part,c,{}),/authored-text-appearance-token-binding-native-unsupported/);}
+});
+
+test('bound token authored appearance reaches both emitted React roots and spans without literal overrides',async()=>{
+ const {ContractSchema}=await import('../scripts/contract-schema.js');const {reactEmitter,reactInlineEmitter}=await import('./emitter.js');
+ const {emitTokensCss,tokensCssLayers}=await import('../packages/core/src/emit-tokens-css.js');
+ const {build}=await import('esbuild');const {createRequire}=await import('node:module');const require=createRequire(import.meta.url);
+ const c=ContractSchema.parse(boundTokenFixture()),before=structuredClone(c);
+ async function render(emitter:any,tokens:any){const files=emitter.emit(c,{tokens,contracts:new Map([[c.id,c]]),icons:new Map()});const tsx=files.find((f:any)=>f.path.endsWith('.tsx')).contents;
+  assert.deepEqual(generatedTypeErrors(c.name,tsx),[]);
+  const built=await build({stdin:{contents:tsx,resolveDir:process.cwd(),sourcefile:'bound.tsx',loader:'tsx'},bundle:true,write:false,format:'cjs',platform:'node',jsx:'automatic',external:['react','react/jsx-runtime'],plugins:[{name:'css-modules-for-server-render',setup(b){b.onResolve({filter:/\.module\.css$/},()=>({path:'styles',namespace:'test-css'}));b.onLoad({filter:/.*/,namespace:'test-css'},()=>({contents:'export default new Proxy({}, {get: (_t, key) => String(key)})',loader:'js'}));}}]});
+  const mod={exports:{}};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);const React=require('react'),{renderToStaticMarkup}=require('react-dom/server');return {html:renderToStaticMarkup(React.createElement((mod.exports as any)[c.name],{})),files};}
+ const tokens=(color:string,size:string)=>({primitives:{},semantic:{test:{ink:{$type:'color',$value:color},size:{$type:'dimension',$value:size}}},light:{},dark:{},brands:{default:{}}});
+ const first=tokens('#123456','14px'),second=tokens('#abcdef','18px');
+ const a=await render(reactEmitter,first),b=await render(reactEmitter,second);
+ assert.equal(a.html,b.html,'CSS-variable renderer keeps refs when only token values change');assert.equal((a.html.match(/color:var\(--test-ink\)/g)??[]).length,2);assert.equal((a.html.match(/font-size:var\(--test-size\)/g)??[]).length,2);
+ const sheetA=emitTokensCss(tokensCssLayers(first)).css,sheetB=emitTokensCss(tokensCssLayers(second)).css;assert.match(sheetA,/--test-ink: #123456;/);assert.match(sheetB,/--test-ink: #abcdef;/);assert.match(sheetB,/--test-size: 18px;/);
+ const inlineA=await render(reactInlineEmitter,first),inlineB=await render(reactInlineEmitter,second);assert.equal((inlineA.html.match(/color:#123456/g)??[]).length,2);assert.equal((inlineB.html.match(/color:#abcdef/g)??[]).length,2);assert.equal((inlineB.html.match(/font-size:18px/g)??[]).length,2);assert.notEqual(inlineA.html,inlineB.html);
+ for(const html of[a.html,b.html,inlineA.html,inlineB.html]){assert.match(html,/font-weight:500/);assert.match(html,/font-variation-settings:&quot;XTRA&quot; 1.25, &quot;slnt&quot; 0, &quot;wght&quot; 500/);assert.match(html,/line-height:20px/);assert.match(html,/text-transform:none/);assert.match(html,/text-decoration:none/);}
+ assert.deepEqual(c,before);
+});

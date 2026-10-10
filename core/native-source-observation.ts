@@ -1,4 +1,5 @@
 import {nativeLiteralTextBox} from './native-text-box.js';
+import {nativeSlotIdentityRuntime} from './native-slot-identity.js';
 import {nativeScalarFaceWeight} from './native-text-appearance.js';
 import {nativeFontNameExact,nativeFontDefaultProfileRequired} from './native-font-profile.js';
 import {nativeTextAppearanceMatches,nativeTextAppearanceDefaultProfileRequired} from './native-text-appearance-observation.js';
@@ -361,7 +362,18 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false, capturedGeometry=false, masks=false, packed=false, arcCaps=true, pairedArcCapFields?: Record<string, string[]>, strokeLayout=false,boundPaint=false,aspectRatio=true, contractDraftText=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false, capturedGeometry=false, masks=false, packed=false, arcCaps=true, pairedArcCapFields?: Record<string, string[]>, strokeLayout=false,boundPaint=false,aspectRatio=true, contractDraftText=false, pairedArcCapIdentity?: {nodes: Record<string, unknown>[]; comparisons: Record<string, unknown>[]; inheritedAdditions?: Array<{instanceId:string;specPath:number[];mainNodeId:string;metadata:Record<string,string>}>}): string {
+  if (pairedArcCapIdentity && (!pairedArcCapFields || !Object.keys(pairedArcCapFields).length ||
+      !same(pairedArcCapIdentity.nodes, expected.nodes) || !Array.isArray(pairedArcCapIdentity.comparisons) ||
+      pairedArcCapIdentity.comparisons.length !== 1 || pairedArcCapIdentity.comparisons[0].status !== 'created-comparison' ||
+      !Array.isArray(pairedArcCapIdentity.comparisons[0].slots) ||
+      expected.comparisons.some(record => record.id !== pairedArcCapIdentity.comparisons[0].id ||
+        record.instanceId !== pairedArcCapIdentity.comparisons[0].instanceId) ||
+      pairedArcCapIdentity.inheritedAdditions?.some(addition => !addition.instanceId || !addition.mainNodeId ||
+        !Array.isArray(addition.specPath) || !addition.specPath.length || addition.specPath.some(i => !Number.isSafeInteger(i) || i < 0) ||
+        !same(Object.keys(addition.metadata).sort(), ['nativeBackgroundMigration','nativeContractPart','nativeSourceAllocation','nativeSourceOperation']) ||
+        Object.values(addition.metadata).some(value => typeof value !== 'string' || !value))))
+    throw Error('native-source-readback-paired-profile-input-invalid');
   const originalImages=extraMetadata.includes('imageOverride');
   if(synchronous&&originalImages)throw Error('native-image-original-readback-requires-async');
   if(synchronousPartialInventory && !synchronous) throw Error('native-partial-sync-inventory-required');
@@ -435,7 +447,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   ];
   return `// GENERATED independent native source readback. READ ONLY.
 const EXPECTED = ${JSON.stringify(expected)};
-const FIELDS = ${JSON.stringify(fields)};${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? `\nconst PAIRED_ARC_CAP_FIELDS = ${JSON.stringify(pairedArcCapFields)};` : ''}
+const FIELDS = ${JSON.stringify(fields)};${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? `\nconst PAIRED_ARC_CAP_FIELDS = ${JSON.stringify(pairedArcCapFields)};` : ''}${pairedArcCapIdentity ? `\nconst PAIRED_ARC_CAP_IDENTITY = ${JSON.stringify(pairedArcCapIdentity)};` : ''}
 const result = { version: 1, status: 'refused', receiptKind: 'independent-native-component-readback',
   operationId: EXPECTED.operation.id, fileKey: EXPECTED.operation.fileKey, planRevision: EXPECTED.planRevision,
   acceptedContract: null, nativeQualification: 'unqualified', problems: [] };
@@ -452,14 +464,57 @@ ${tokenReadback ?? emitNativeTokenContextReadbackScript(tokenInput, tokenIdentit
 ${synchronous ? '' : 'async '}function read(page) {
   const nodes = [page, ...page.findAll(() => true)];
   if (nodes.length > 10000) throw Error('native-source-readback-scope-too-large');
-  const out = [];${originalImages ? '\n  const originalAssets = new Map(); let originalBytes = 0;' : ''}
+${pairedArcCapIdentity ? `  // Resolve the full allocation topology before choosing a declared field set.
+  // Keep physical IDs in the actual readback; the alias is only a profile key.
+  const identityRows = nodes.map(node => ({
+    id: node.id, type: node.type, parentId: node.parent ? node.parent.id : null,
+    childIds: node.children ? node.children.map(child => child.id) : [],
+    ...(typeof node.key === 'string' ? {key: node.key} : {}),
+    metadata: {
+      nativeSourceAllocation: node.getSharedPluginData('ds_contracts', 'nativeSourceAllocation'),
+      nativeSourceOperation: node.getSharedPluginData('ds_contracts', 'nativeSourceOperation'),${pairedArcCapIdentity.inheritedAdditions?.length ? `
+      nativeContractPart: node.getSharedPluginData('ds_contracts', 'nativeContractPart'),
+      nativeBackgroundMigration: node.getSharedPluginData('ds_contracts', 'nativeBackgroundMigration'),` : ''}
+    },
+  }));
+  const resolvedRows = (() => {
+    const canonicalJson = stable;
+    ${nativeSlotIdentityRuntime()}
+${pairedArcCapIdentity.inheritedAdditions?.length ? `    // A verified main migration can add an inherited paint row before the
+    // explicit ownership adoption. It has no paired field profile yet: keep
+    // its complete fields and leave admission to the unchanged repair verifier.
+    // This local lookup census never changes the retained creation receipt.
+    const profileIdentity = copy(PAIRED_ARC_CAP_IDENTITY);
+    const byId = new Map(identityRows.map(row => [row.id, row]));
+    for (const addition of profileIdentity.inheritedAdditions || []) {
+      const roots = identityRows.filter(row => row.id === addition.instanceId || row.metadata.nativeSourceAllocation === addition.instanceId);
+      if (roots.length !== 1 || roots[0].type !== 'INSTANCE') throw Error('native-source-readback-migration-root-identity');
+      let row = roots[0];
+      for (const index of addition.specPath) {
+        const child = byId.get(row.childIds[index]);
+        if (!child || child.parentId !== row.id) throw Error('native-source-readback-migration-addition-path');
+        row = child;
+      }
+      if (profileIdentity.nodes.some(node => node.id === row.id)) continue;
+      if (row.type !== 'RECTANGLE' || row.id === addition.mainNodeId || row.childIds.length ||
+          !same(row.metadata, addition.metadata)) throw Error('native-source-readback-migration-addition-identity');
+      profileIdentity.nodes.push({id: row.id, type: row.type});
+    }
+    return resolveNativeSlotIdentities(profileIdentity, identityRows);` : '    return resolveNativeSlotIdentities(PAIRED_ARC_CAP_IDENTITY, identityRows);'}
+  })();
+  if (!resolvedRows || resolvedRows.length !== identityRows.length)
+    throw Error('native-source-readback-paired-profile-identity-refused');
+  const profileIds = new Map(identityRows.map((row, index) => [row.id, resolvedRows[index].id]));
+` : ''}  const out = [];${originalImages ? '\n  const originalAssets = new Map(); let originalBytes = 0;' : ''}
   for (const node of nodes) {
     const row = { id: node.id, type: node.type, name: node.name, parentId: node.parent ? node.parent.id : null,
       childIds: node.children ? node.children.map(c => c.id) : [], values: {}, metadata: {} };
     if (typeof node.key === 'string') row.key = node.key;
     const fields = FIELDS.concat(node.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_FIELDS)} : [],
       node.parent && node.parent.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_CHILD_FIELDS)} : []);
-    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, node.id) || PAIRED_ARC_CAP_FIELDS[node.id].includes(field))` : ''}) {
+${pairedArcCapIdentity ? `    const profileId = profileIds.get(node.id);
+    if (typeof profileId !== 'string') throw Error('native-source-readback-paired-profile-identity-changed');
+` : ''}    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, ${pairedArcCapIdentity ? 'profileId' : 'node.id'}) || PAIRED_ARC_CAP_FIELDS[${pairedArcCapIdentity ? 'profileId' : 'node.id'}].includes(field))` : ''}) {
       const v = node[field];
       row.values[field] = typeof v === 'symbol' ? { mixed: true } : v === undefined ? null : copy(v);
     }${extraMetadata.includes('authoredTextAppearance') ? `\n    if(node.type==='TEXT'&&(${extraMetadata.includes('textAppearanceOverride') ? "node.getSharedPluginData('ds_contracts','textAppearanceOverride')||" : ''}node.getSharedPluginData('ds_contracts','authoredTextAppearance')))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : extraMetadata.includes('textAppearanceOverride') ? `\n    if(node.type==='TEXT'&&node.getSharedPluginData('ds_contracts','textAppearanceOverride'))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : ''}${originalImages ? `\n    if (Array.isArray(row.values.fills)) for (const paint of row.values.fills) if (paint.type === 'IMAGE') {

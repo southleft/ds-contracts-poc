@@ -4,7 +4,7 @@ import type { StrokedPath, Part } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.76';
+export const PLUGIN_DUMP_VERSION = '1.77';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -861,6 +861,9 @@ export interface DumpNode {
     shape: DumpShape;
     paint: DumpPaint;
   };
+  /** Complete observed native occurrence internals, not caller assignment authority.
+   * Only the explicit _occurrences channel uses this witness. */
+  instanceSlotObservation?: DumpInstanceSlotObservation;
   children?: DumpNode[];
 }
 
@@ -1080,6 +1083,50 @@ export type DumpImageAsset = {
   base64: string;
 } | {imageHash: string; refused: string};
 
+/** Observed native owner/main/slot relationships; none classifies assignment. */
+export interface DumpInstanceSlotObservation {
+  instanceId: string;
+  mainComponentId: string;
+  mainComponentKey: string;
+  ownerId: string;
+  ownerType: 'COMPONENT_SET' | 'COMPONENT';
+  ownerKey: string;
+  componentProperties: Record<string, unknown>;
+  overrides: unknown;
+  propertyDefinitions: Record<string, unknown>;
+  slots: Array<{
+    propertyId: string;
+    mainSlotNodeId: string;
+    occurrenceSlotNodeId: string;
+    mainChildNodeIds: string[];
+    occurrenceChildNodeIds: string[];
+    mainLimitViolations?: unknown;
+    occurrenceLimitViolations?: unknown;
+    assignmentDisposition: { status: 'unsupported'; code: 'caller-slot-assignment-disposition-unobserved' };
+  }>;
+}
+
+/** A full observed usage tree, never a reusable main or source-owned API.
+ * INSTANCE children preserve inherited chrome too. Their presence does not
+ * authorize routing them into a child slot or modifying that main. */
+export interface DumpCallerOccurrence {
+  source: { fileKey: string; nodeId: string; type: 'FRAME' | 'GROUP' | 'INSTANCE' };
+  ancestry: Array<{nodeId: string; type: string; visible?: boolean;
+    explicitVariableModes?: unknown; resolvedVariableModes?: unknown}>;
+  root: DumpNode;
+  requiredMains: Array<{componentId: string; componentKey: string;
+    ownerId: string; ownerType: 'COMPONENT_SET' | 'COMPONENT'; ownerKey: string}>;
+  lowering: {status: 'unsupported'; code: 'caller-occurrence-lowering-unimplemented'};
+}
+
+export interface DumpCallerOccurrences {
+  version: 1;
+  requested: string[];
+  roots: DumpCallerOccurrence[];
+  /** Complete, bounded dependencies were serialized; no assignment authority. */
+  dependencyInventory: 'complete';
+}
+
 export interface DumpFile {
   /** `dumpVersion` (dump v1.5, additive): producers that capture the FULL
    *  v1.5 surface stamp '1.5' here. Consumers use it as POSITIVE evidence
@@ -1151,7 +1198,9 @@ export interface DumpFile {
   _variables?: Record<string, DumpVariable>;
   /** Original bytes or a named read/format/budget refusal, never a placeholder. */
   _imageAssets?: Record<string, DumpImageAsset>;
-  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | Record<string, DumpImageAsset> | undefined;
+  /** Explicit observed usages; has no variants field and is not a DumpSet. */
+  _occurrences?: DumpCallerOccurrences;
+  [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | Record<string, DumpImageAsset> | DumpCallerOccurrences | undefined;
 }
 
 export const isDumpSet = (v: unknown): v is DumpSet =>

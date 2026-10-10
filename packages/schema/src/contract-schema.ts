@@ -2543,6 +2543,28 @@ export const MaskSchema = z.strictObject({
   }).optional(),
 }).refine(mask => !(mask.stroke && mask.paintedStroke) && (!mask.paintedStroke || mask.type === 'ALPHA'), 'mask-stroke-carriers-conflict');
 
+/** Strict opt-in boundary shared by schema and direct React emission. */
+export function textAppearanceTokenBindingIssues(part: Part): string[] {
+  const bindings = part.textAppearanceTokenBindings;
+  if (bindings === undefined) return [];
+  const issues: string[] = [], table = part.textAppearanceByCombination;
+  if (!Array.isArray(bindings) || !bindings.length || bindings.length > 2 || new Set(bindings).size !== bindings.length || bindings.some(c => c !== 'color' && c !== 'font-size')) return ['text-appearance-token-bindings-invalid'];
+  if (part.text === undefined || part.content || part.textByProp || part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.mask || part.textAppearanceOverride || part.textColorOverrideProp ||
+      !table || table.props.length !== 0 || table.rows.length !== 1 || table.rows[0].values.length !== 0 || table.rows[0].appearance.runs.length !== 1 || table.rows[0].appearance.characters !== part.text) return ['text-appearance-token-bindings-require-invariant-owned-run'];
+  if (['tokensByProp','tokensByCombination','literalsByProp','literalsByCombination','states','statesByProp','declaredStates','stylesWhen','layoutByProp','layoutByCombination'].some(key => Object.keys((part as unknown as Record<string, unknown>)[key] ?? {}).length)) issues.push('text-appearance-token-bindings-competing-styles');
+  for (const channel of ['color','font-size'] as const) {
+    const ref = part.tokens?.[channel];
+    if (ref !== undefined && !bindings.includes(channel)) issues.push('text-appearance-token-binding-unmapped:'+channel);
+    if (bindings.includes(channel) && (typeof ref !== 'string' || !/^\{[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\}$/.test(ref))) issues.push('text-appearance-token-reference-invalid:'+channel);
+    if (bindings.includes(channel) && (part.literals?.[channel] !== undefined || part.declared?.[channel] !== undefined)) issues.push('text-appearance-token-binding-competing-channel:'+channel);
+  }
+  const run = table.rows[0].appearance.runs[0];
+  if (run.start !== 0 || run.end !== part.text.length) issues.push('text-appearance-token-bindings-require-complete-run');
+  if (run.fill.variableId && !bindings.includes('color')) issues.push('text-appearance-token-binding-unmapped:color');
+  if (bindings.includes('font-size') && (run.lineHeight.unit === 'PERCENT' || run.letterSpacing.unit === 'PERCENT' && run.letterSpacing.value !== 0)) issues.push('text-appearance-token-size-dependent-percent-unsupported');
+  return issues;
+}
+
 export interface Part {
   /** Exact single literal fill composition; host and stacking limits are
    * checked by the shared emitter referee. On a component reference this is
@@ -2832,6 +2854,10 @@ export interface Part {
   /** Optional finite hex-color input scoped to this owned text node. */
   textColorOverrideProp?: string;
   textAppearanceOverride?:TextAppearanceOverride;
+  /** Explicit rendering semantics for verified, invariant one-run authored text.
+   * Native IDs do not select token paths; these consume the part's own portable
+   * token references. This marker supplies no source or native authority. */
+  textAppearanceTokenBindings?: Array<'color' | 'font-size'>;
   /** Exact source-authored range defaults for complete finite variant tuples. */
   textAppearanceByCombination?:TextAppearanceTable;
   imageOverride?: {prop:string;choices:Record<string,{image:string;size:string;position:string}>};
@@ -3213,6 +3239,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     visibilityOverrideDefault: z.boolean().optional(),
     textColorOverrideProp: z.string().min(1).optional(),
     textAppearanceOverride:TextAppearanceOverrideSchema.optional(),
+    textAppearanceTokenBindings:z.array(z.enum(['color','font-size'])).min(1).max(2).refine(v=>new Set(v).size===v.length,'text-appearance-token-binding-duplicate').optional(),
     textAppearanceByCombination:TextAppearanceTableSchema.optional(),
     imageOverride: z.strictObject({prop:z.string().min(1),choices:z.record(z.string(),z.strictObject({
       image:z.string().max(11184900).regex(/^url\((['"])data:image\/(?:png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}\1\)$/),
@@ -3765,6 +3792,7 @@ export const ContractSchema = z.strictObject({
         if(typeof characters!=='string'||characters!==row.appearance.characters)issue('text-appearance-source-characters-unqualified');
       }
     }
+    for(const message of textAppearanceTokenBindingIssues(part as Part))ctx.addIssue({code:'custom',path:[...path,'textAppearanceTokenBindings'],message});
     if(part.textAppearanceOverride){
       const control=part.textAppearanceOverride;
       const p=c.props.find(p=>p.name===control.prop),values=p&&typeof p.type==='object'&&'enum'in p.type?p.type.enum:[];
