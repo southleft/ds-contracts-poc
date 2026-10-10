@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { PNG } from 'pngjs';
 import { MATCHED_EVIDENCE, CURRENT_MATCHED_INSTRUMENTS, assertCurrentMatchedCapture, checkMatchedEvidence, scoreMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
-import { authenticateMatchedOperation, authenticateMatchedStateApi, normalizeMatchedReadback } from './react-native-matched-record.js';
+import { authenticateMatchedOperation, authenticateMatchedStateApi, normalizeMatchedReadback, collectMatchedEvidence } from './react-native-matched-record.js';
 import { REPO, sha256 } from './react-native-fidelity-check.js';
 import type { MatchedSpec } from './react-native-matched-record.js';
 import { hasRecordedNativeMeasurement, readRecordedNativeMeasurement, assertMatchedManifestBinding } from '../source-reference/matched-native-review.js';
@@ -234,7 +234,7 @@ function comparisonFixture(dir: string) {
   const header={id:'composed',policy:{fileKey:'file'},planRevision:'revision',planSha256:sha256(plan),tokenScriptSha256:sha256(script),request:{kind:'react-content-comparison',root}};
   const creation={status:'created-candidate',operationId:'composed',fileKey:'file',problems:[],comparisonBoardId:'board'};
   const board={id:'board',type:'FRAME',childIds:['child'],values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]],fills:[],strokes:[],effects:[],opacity:1,visible:true,layoutMode:'VERTICAL',clipsContent:false,paddingTop:0,paddingBottom:0,paddingLeft:0,paddingRight:0,itemSpacing:0,cornerRadius:0}};
-  const child={id:'child',type:'INSTANCE',parentId:'board',values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]]}};
+  const child={id:'child',type:'INSTANCE',parentId:'board',childIds:[] as string[],values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]]}};
   const common={operationId:'composed',fileKey:'file',planRevision:'revision',nativeQualification:'unqualified',acceptedContract:null,problems:[]};
   const readback={...common,status:'native-comparison-readback-collected',content:{...common,status:'native-readback-collected',receiptKind:'independent-native-component-readback',nodes:[board,child],images:[{nodeId:'child'}]}};
   const save=()=>{
@@ -247,7 +247,7 @@ function comparisonFixture(dir: string) {
     }
   };save();
   const spec={id:'sample',component:'Composed',description:'fixture',operation:'composed',journal:op,event:'00000003.json',source:{kind:'comparison' as const,bounds:{x:10,y:10,width:5,height:5}}};
-  return {put,save,archive,spec,board,child,readback,header};
+  return {put,save,archive,spec,board,child,readback,header,creation};
 }
 test('caller content pairs its sealed original only with the authenticated neutral presentation frame',()=>temp(dir=>{
   const f=comparisonFixture(dir),r=authenticateMatchedOperation(dir,f.spec);
@@ -372,3 +372,59 @@ test('app catalog admits both instrument generations but refuses duplicates and 
   put(currentDir,mixed); assert(!present(),'mixed generations must not hide behind the valid original');
   put(currentDir,current); assert(present());
 }));
+
+
+// Protocol fixtures exercise the real authenticated collector guard. They
+// deliberately have no capture receipts or image exports and cannot be scored.
+function settledComparisonFixture(dir: string, settledBaseline: boolean) {
+  const f = comparisonFixture(dir);
+  const slot = { id:'slot',type:'SLOT',name:'Content',parentId:'child',childIds:[settledBaseline?'slot;settled':'allocated'],metadata:{},
+    values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]]} };
+  const leaf = {id:settledBaseline?'slot;settled':'allocated',type:'TEXT',name:'Content text',parentId:'slot',childIds:[] as string[],
+    metadata:{nativeSourceAllocation:'allocated'},values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]],characters:'Original',
+      fontName:{family:'Inter',style:'Medium',defaultAxes:{slnt:0,wght:500}},fontSize:14,strokeCap:'NONE',fills:[] as unknown[]} };
+  Object.assign(f.child,{childIds:['slot'],metadata:{}});
+  f.readback.content.nodes.push(slot,leaf);
+  Object.assign(f.creation,{nodes:[{id:'board',type:'FRAME'},{id:'child',type:'INSTANCE'},{id:'slot',type:'SLOT'},
+    {id:'allocated',type:'TEXT',slotIdentity:{slotId:'slot',path:[0]}}],comparisons:[{status:'created-comparison',slots:[{nodeId:'slot'}]}]});
+  f.save();
+  const current = structuredClone(f.readback), restored = structuredClone(f.readback);
+  for(const r of [current,restored]) {
+    r.content.nodes.find(n=>n.id==='slot')!.childIds=['slot;settled'];
+    r.content.nodes.find(n=>n.type==='TEXT')!.id='slot;settled';
+  }
+  const native = path.join(dir,'native'),source = path.join(dir,'source');
+  const write = () => {
+    // The collector stops at the absent source-summary after this success
+    // envelope; it never receives invented clone rows or capture flags.
+    f.put('native/native-probe.json',{response:{success:true}});
+    f.put('native/current-original-readback.json',{response:{result:current}});
+    f.put('native/repeat-and-restoration.json',{afterReadback:{result:restored}});
+  };
+  write();
+  return {f,current,restored,write,collect:()=>collectMatchedEvidence(dir,source,native,f.spec)};
+}
+test('authenticated canonical and settled baselines both reach the mandatory real capture boundary',()=>{
+  for(const settled of [false,true])temp(dir=>{
+    const f=settledComparisonFixture(dir,settled);
+    assert.throws(f.collect,(error:NodeJS.ErrnoException)=>error.code==='ENOENT'&&!!error.path?.endsWith('source-summary.json'));
+  });
+});
+test('normalizing a settled retained baseline never hides changed values or foreign allocation and topology',()=>{
+  type Probe = ReturnType<typeof settledComparisonFixture>;
+  const leaf=(p:Probe)=>p.current.content.nodes.find(n=>n.type==='TEXT')! as any;
+  const controls:Array<(p:Probe)=>void>=[
+    p=>{leaf(p).values.characters='Changed';},
+    p=>{leaf(p).values.fontName.defaultAxes.wght=600;},
+    p=>{delete leaf(p).values.fontName.defaultAxes.slnt;},
+    p=>{delete leaf(p).values.strokeCap;},
+    p=>{leaf(p).values.fills=[{type:'SOLID',color:{r:1,g:0,b:0}}];},
+    p=>{leaf(p).metadata.nativeSourceAllocation='foreign';},
+    p=>{leaf(p).parentId='child';},
+    p=>{leaf(p).id='foreign;settled';p.current.content.nodes.find(n=>n.id==='slot')!.childIds=['foreign;settled'];},
+    p=>{p.current.content.nodes.find(n=>n.id==='slot')!.childIds=[];},
+    p=>{(p.restored.content.nodes.find(n=>n.type==='TEXT')! as any).values.fontSize=18;},
+    p=>{p.current.problems.push('changed-parent-channel' as never);},
+  ];
+  for(const mutate of controls)temp(dir=>{const p=settledComparisonFixture(dir,true);mutate(p);p.write();assert.throws(p.collect,/matched-record-(native-baseline-changed|slot-identity-invalid)/);});
+});
