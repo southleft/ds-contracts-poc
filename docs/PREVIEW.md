@@ -112,9 +112,10 @@ What that means for your own components:
    string prop (here `text`), a variant property an enum prop (`variant`,
    `shape`). The package ships TypeScript declarations, so your editor lists
    them; children are refused by type when the design has no slot. The
-   package's root import includes its token stylesheet. It does not include
-   font files: load the fonts your Figma design uses, and give the check the
-   same files with `--fonts` (see [Check with your fonts](#check-with-your-fonts)).
+   package's root import includes its token stylesheet. Supply the design's
+   font files with `--fonts` to include them in the package and load them
+   automatically (see [Check with your fonts](#check-with-your-fonts)). Without
+   that option, your app must load the fonts itself.
 
 A saved capture works the same way: `npm run figma:to-react -- --dump
 <dump.json> --out ./out`.
@@ -159,11 +160,18 @@ the manifest, or by absolute path:
   family the file does not declare, overlapping faces or an unknown field
   stops the command by name.
 
-The fonts load only in the check's consumer app; the package and its CSS are
-unchanged. The receipt keeps the files and the faces the browser loaded, and
+The package includes the original font files and an `@font-face` stylesheet,
+loaded by its root import. The check installs that same archive, without a
+separate font setup. The component's styles are unchanged. Include any supplied
+distribution notice with an optional `"license": { "file": "./fonts/OFL.txt",
+"sha256": "<notice SHA-256>" }` on the corresponding font entry; its original
+bytes travel with the font. Supply files you can distribute with your package.
+
+The receipt keeps the files and the faces the browser loaded, and
 `out/result.json` lists them under `check.fonts`. This pins what the check
 rendered with; it does not prove these are the exact font files Figma used,
-and the image comparison still decides.
+and the image comparison still decides. The browser's Prepare React library
+flow currently has no font-upload step; this option is available in the CLI.
 
 Match the font release as well as its family and weight. Different releases
 can keep the same family name while changing glyphs and text widths; for

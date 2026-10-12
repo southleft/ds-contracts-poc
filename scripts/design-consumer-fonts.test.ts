@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
 import { deflateSync } from 'node:zlib';
+import { packageReactLibrary, resolveToolchain } from './package-react-library.js';
 import { consumerFontManifest, fontFamilyNames, loadConsumerFonts, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
 
 const fixtureBytes = readFileSync(new URL('../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
@@ -52,6 +54,9 @@ test('mismatched bytes, ambiguous faces and CSS/network inputs refuse before out
     ['weight range', m => { m.fonts[0].weight = '0 900'; }, /invalid-weight/],
     ['style', m => { m.fonts[0].style = 'oblique'; }, /invalid-style/],
     ['network', m => { m.fonts[0].file = 'https://example.com/a.woff2'; }, /local-file-required/],
+    ['license network', m => { m.fonts[0].license = { file: 'https://example.com/OFL.txt', sha256: '0'.repeat(64) }; }, /invalid-license/],
+    ['license fields', m => { m.fonts[0].license = { file: 'OFL.txt', sha256: '0'.repeat(64), guessed: true }; }, /invalid-license/],
+    ['license hash', m => { m.fonts[0].license = { file: './input.woff2', sha256: '0'.repeat(64) }; }, /license-sha256-mismatch/],
     ['unknown option', m => { m.fonts[0].css = '*{text-rendering:geometricPrecision}'; }, /invalid-face/],
     ['overlap', m => { m.fonts.push({ ...m.fonts[0], family: m.fonts[0].family.toLowerCase(), weight: '100 900' }); }, /overlapping-face/],
     ['empty', m => { m.fonts = []; }, /invalid-manifest/],
@@ -154,4 +159,94 @@ test('the macOS system UI font is never provisioned as SF Pro', { skip: !existsS
   assert.equal(fontFamilyNames(bytes).includes('SF Pro'), false);
   writeFileSync(path.join(root, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ family: 'SF Pro', weight: '100 900', style: 'normal', file: '/System/Library/Fonts/SFNS.ttf', sha256: sha(bytes) }] }));
   assert.throws(() => readConsumerFonts(path.join(root, 'fonts.json')), /family-not-declared-by-font:"SF Pro"/);
+});
+
+
+function generatedFontProbe(root: string) {
+  const generated = path.join(root, 'generated');
+  mkdirSync(path.join(generated, 'FontProbe'), { recursive: true });
+  writeFileSync(path.join(generated, 'index.ts'), "import './tokens.css';\nexport { FontProbe } from './FontProbe/FontProbe';\n");
+  writeFileSync(path.join(generated, 'FontProbe', 'FontProbe.ts'), "export const FontProbe = 'AV office 012';\n");
+  writeFileSync(path.join(generated, 'tokens.css'), 'span{font-family:"IBM Plex Sans";font-weight:400;font-size:24px}\n');
+  return generated;
+}
+
+test('supplied fonts travel inside the archive and its root import loads the original font in a clean browser', async t => {
+  const notice = Buffer.from('Supplied license notice fixture\n');
+  const { root, file } = fixture(t, manifest => {
+    manifest.fonts[0].license = { file: './NOTICE.txt', sha256: sha(notice) };
+  });
+  writeFileSync(path.join(root, 'NOTICE.txt'), notice);
+  const fonts = readConsumerFonts(file);
+  const generated = generatedFontProbe(root);
+  const library = await packageReactLibrary(generated, 'FontProbe', path.join(root, 'packaged'), { fonts });
+  const readMember = (member: string) => execFileSync('tar', ['-xzOf', library.tarball, 'package/' + member]);
+  const manifest = JSON.parse(readMember('package.json').toString());
+  assert.equal(manifest.exports['./fonts.css'], './dist/fonts/fonts.css');
+  assert.match(readMember('dist/index.js').toString(), /^import '\.\/fonts\/fonts\.css';/);
+  assert.deepEqual(JSON.parse(readMember('dist/fonts/manifest.json').toString()), consumerFontManifest(fonts));
+  assert.deepEqual(readMember('dist/fonts/' + fonts[0]!.file), fixtureBytes);
+  assert.deepEqual(readMember('dist/fonts/' + fonts[0]!.license!.file), notice);
+  assert.match(readMember('README.md').toString(), /explicitly supplied font files/);
+  assert.doesNotMatch(readMember('README.md').toString(), /does not include font files/);
+  // Build only from the extracted package; there is no separate consumer font setup.
+  const consumer = path.join(root, 'consumer'), installed = path.join(consumer, 'node_modules', library.name);
+  mkdirSync(installed, { recursive: true });
+  execFileSync('tar', ['-xzf', library.tarball, '--strip-components=1', '-C', installed]);
+  writeFileSync(path.join(consumer, 'main.js'), `import { FontProbe } from ${JSON.stringify(library.name)};\nconst span = document.createElement('span'); span.textContent = FontProbe; document.body.append(span);\n`);
+  const site = path.join(consumer, 'site');
+  execFileSync(resolveToolchain().esbuild, [path.join(consumer, 'main.js'), '--bundle', '--format=esm', '--loader:.woff2=file', '--outdir=' + site], { stdio: 'pipe' });
+  const fontResponses: string[] = [];
+  const server = createServer((req, res) => {
+    if (req.url === '/') { res.setHeader('content-type', 'text/html'); res.end('<link rel="stylesheet" href="/main.css"><script type="module" src="/main.js"></script>'); return; }
+    const asset = path.basename(req.url ?? '');
+    if (!/^[a-zA-Z0-9_.-]+$/.test(asset) || !existsSync(path.join(site, asset))) { res.statusCode = 404; res.end(); return; }
+    const bytes = readFileSync(path.join(site, asset));
+    res.setHeader('content-type', asset.endsWith('.css') ? 'text/css' : asset.endsWith('.js') ? 'text/javascript' : 'font/woff2');
+    if (asset.endsWith('.woff2')) fontResponses.push(sha(bytes));
+    res.end(bytes);
+  });
+  const browser = await chromium.launch();
+  try {
+    await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+    const page = await browser.newPage();
+    await page.goto(`http://127.0.0.1:${(server.address() as AddressInfo).port}/`);
+    await page.locator('span').waitFor();
+    assert.equal((await loadConsumerFonts(page, fonts))[0]!.status, 'loaded');
+    assert.deepEqual(fontResponses, [fonts[0]!.sha256]);
+    const session = await page.context().newCDPSession(page);
+    await session.send('DOM.enable'); await session.send('CSS.enable');
+    const { root: documentNode } = await session.send('DOM.getDocument');
+    const { nodeId } = await session.send('DOM.querySelector', { nodeId: documentNode.nodeId, selector: 'span' });
+    const painted = await session.send('CSS.getPlatformFontsForNode', { nodeId });
+    assert.ok(painted.fonts.length > 0 && painted.fonts.every(font => font.isCustomFont && font.familyName === 'IBM Plex Sans'));
+  } finally {
+    await browser.close();
+    if (server.listening) await new Promise<void>(resolve => server.close(() => resolve()));
+  }
+});
+
+test('no-font archives stay unchanged and mutated font bytes refuse before packaging writes', async t => {
+  const { root, file } = fixture(t), fonts = readConsumerFonts(file);
+  const generated = generatedFontProbe(root);
+  const omitted = await packageReactLibrary(generated, 'FontProbe', path.join(root, 'omitted'));
+  const empty = await packageReactLibrary(generated, 'FontProbe', path.join(root, 'empty'), { fonts: [] });
+  assert.deepEqual(readFileSync(omitted.tarball), readFileSync(empty.tarball));
+  const manifest = JSON.parse(execFileSync('tar', ['-xzOf', omitted.tarball, 'package/package.json']).toString());
+  assert.equal(manifest.exports['./fonts.css'], undefined);
+  assert.doesNotMatch(execFileSync('tar', ['-tzf', omitted.tarball]).toString(), /dist\/fonts/);
+  fonts[0]!.bytes[0] ^= 1;
+  const refused = path.join(root, 'refused');
+  await assert.rejects(packageReactLibrary(generated, 'FontProbe', refused, { fonts }), /react-library-font-sha256-mismatch/);
+  assert.equal(existsSync(refused), false);
+  const original = readConsumerFonts(file);
+  const unsafe = [{ ...original[0]!, file: '../escape.woff2' }];
+  await assert.rejects(packageReactLibrary(generated, 'FontProbe', refused, { fonts: unsafe }), /react-library-font-filename-invalid/);
+  assert.equal(existsSync(refused), false);
+  const license = { file: sha(fixtureBytes) + '.txt', sha256: sha(fixtureBytes), bytes: Buffer.from('changed') };
+  await assert.rejects(packageReactLibrary(generated, 'FontProbe', refused, { fonts: [{ ...original[0]!, license }] }), /react-library-font-license-invalid/);
+  assert.equal(existsSync(refused), false);
+  const unsafeLicense = { ...license, file: '../escape.txt', bytes: fixtureBytes };
+  await assert.rejects(packageReactLibrary(generated, 'FontProbe', refused, { fonts: [{ ...original[0]!, license: unsafeLicense }] }), /react-library-font-license-invalid/);
+  assert.equal(existsSync(refused), false);
 });

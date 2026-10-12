@@ -13,15 +13,15 @@
  *      `node node_modules/@ds-contracts/cli/dist/cli.js figma-to-react --dump
  *      dump.json --out ./out --fonts ./fonts.json` there, supplying the Public
  *      Sans family the dump names, with no FIGMA_TOKEN and no npm run environment;
- *   3. require the request hash, the generated files and the packed tarball's
- *      entries to equal benchmark/pins/altitude-badge.figma-to-react.json (the
- *      pin the in-repo replay is held to);
+ *   3. require the request and generated files to equal the altitude-badge pin;
+ *      the archive may add only the explicit font assets and loading metadata;
  *   4. require the check to report UNVERIFIED for every one of the pin's 10
  *      variants and never a green check (no token means no Figma images);
  *   5. require that no absolute path of this repository appears in any file
  *      under out/;
- *   6. control: the same run with PLAYWRIGHT_BROWSERS_PATH pointing at an empty
- *      directory must say NOT CHECKED, name the install command, and exit 0.
+ *   6. control: without fonts, and with PLAYWRIGHT_BROWSERS_PATH pointing at an
+ *      empty directory, require the entire original pinned archive unchanged,
+ *      NOT CHECKED, the install command, and exit 0.
  *   7. --fonts must reach the real consumer, record its faces, and reject a
  *      mismatched family before writing output from the installed artifact.
  *   8. build the Sync Runner plugin zip using its existing dump-source and
@@ -102,9 +102,14 @@ export async function smoke(keep = false): Promise<string[]> {
     // otherwise masks the missing-font failure on a clean Linux runner.
     const fontFile = 'PublicSans-VariableFont_wght.ttf';
     copyFileSync(path.join(ROOT, 'extract', 'computed', 'fonts', 'public-sans', fontFile), path.join(project, fontFile));
+    const licenseBytes = readFileSync(path.join(ROOT, 'extract', 'computed', 'fonts', 'public-sans', 'OFL.txt'));
+    const licenseSha256 = createHash('sha256').update(licenseBytes).digest('hex');
+    writeFileSync(path.join(project, 'PublicSans-OFL.txt'), licenseBytes);
     const fontFace = { family: 'Public Sans', weight: '100 900', style: 'normal',
-      sha256: createHash('sha256').update(readFileSync(path.join(project, fontFile))).digest('hex') };
-    writeFileSync(path.join(project, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, file: fontFile }] }));
+      sha256: createHash('sha256').update(readFileSync(path.join(project, fontFile))).digest('hex'),
+      license: { file: `${licenseSha256}.txt`, sha256: licenseSha256 } };
+    writeFileSync(path.join(project, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, file: fontFile,
+      license: { ...fontFace.license, file: 'PublicSans-OFL.txt' } }] }));
 
     console.log('running figma-to-react from the installed CLI with local fonts (no FIGMA_TOKEN)…');
     const run = runCli(project, './out', userEnv(), ['--fonts', './fonts.json']);
@@ -115,11 +120,12 @@ export async function smoke(keep = false): Promise<string[]> {
       const result = JSON.parse(readFileSync(path.join(out, 'result.json'), 'utf8'));
       expect(JSON.stringify(result.check?.fonts) === JSON.stringify([fontFace]), 'font-receipt: the supplied face was not recorded');
       const consumerReceipt = JSON.parse(readFileSync(path.join(out, 'check', 'receipt.json'), 'utf8'));
-      expect(consumerReceipt.consumer?.fontProvision?.kind === 'explicit-local-assets', 'font-consumer: the installed check did not receive local fonts');
+      expect(consumerReceipt.consumer?.fontProvision?.kind === 'package-assets', 'font-consumer: the installed check did not use packaged fonts');
+      expect(consumerReceipt.package?.tarballSha256 === result.tarballSha256, 'checked-archive: the consumer did not install the emitted archive');
       const loadedFonts = consumerReceipt.consumer?.fontProvision?.loaded;
       expect(Array.isArray(loadedFonts) && loadedFonts.length === 1 &&
         Object.entries({ ...fontFace, file: `${fontFace.sha256}.ttf`, status: 'loaded' })
-          .every(([key, value]) => loadedFonts[0][key] === value),
+          .every(([key, value]) => JSON.stringify(loadedFonts[0][key]) === JSON.stringify(value)),
         'font-loaded: Chromium did not load the supplied Public Sans face');
       expect(existsSync(path.join(out, 'check', 'inputs', 'fonts', `${fontFace.sha256}.ttf`)), 'font-evidence: the authenticated font asset was not retained');
       expect(result.requestSha256 === pin.requestSha256, `request-sha256: ${result.requestSha256} ≠ pin ${pin.requestSha256}`);
@@ -131,8 +137,14 @@ export async function smoke(keep = false): Promise<string[]> {
         expect(drift.length === 0, `generated-files-differ: ${drift.join(', ')}`);
       }
       const entries = tarballEntries(readFileSync(path.join(out, result.tarball)));
-      const entryDrift = firstDiff(entries, pin.entries);
+      const fontChanges = new Set(['package/dist/index.js', 'package/package.json', 'package/README.md',
+        'package/dist/fonts/fonts.css', 'package/dist/fonts/manifest.json',
+        `package/dist/fonts/${fontFace.sha256}.ttf`, `package/dist/fonts/${licenseSha256}.txt`]);
+      const withoutFontChanges = (tree: Record<string, string>) => Object.fromEntries(Object.entries(tree).filter(([file]) => !fontChanges.has(file)));
+      const entryDrift = firstDiff(withoutFontChanges(entries), withoutFontChanges(pin.entries));
       expect(entryDrift.length === 0, `tarball-entries-differ: ${entryDrift.join(', ')}`);
+      expect(entries[`package/dist/fonts/${fontFace.sha256}.ttf`] === fontFace.sha256, 'packed-font: the supplied font bytes did not travel');
+      expect(entries[`package/dist/fonts/${licenseSha256}.txt`] === licenseSha256, 'packed-notice: the supplied notice did not travel');
       // The check: every variant the pin scored is reported, and none as a pass.
       const cases = pin.fidelity?.cases.length ?? 0;
       const variants: Array<{ verdict: string }> = result.check?.variants ?? [];
@@ -150,7 +162,7 @@ export async function smoke(keep = false): Promise<string[]> {
     console.log('control: the same run with no Chromium (PLAYWRIGHT_BROWSERS_PATH is an empty directory)…');
     const empty = path.join(work, 'no-browsers');
     mkdirSync(empty);
-    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }), ['--fonts', './fonts.json']);
+    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }));
     process.stdout.write(control.stdout.split('\n').map(l => '  | ' + l).join('\n') + '\n');
     expect(control.status === 0, `control-exit-code: expected 0, got ${control.status}`);
     expect(/^◌ figma-to-react Badge: NOT CHECKED — no Chromium for the consumer check/m.test(control.stdout), 'control-not-checked: no NOT CHECKED line');
@@ -160,7 +172,9 @@ export async function smoke(keep = false): Promise<string[]> {
     if (existsSync(path.join(project, 'out-control', 'result.json'))) {
       const controlResult = JSON.parse(readFileSync(path.join(project, 'out-control', 'result.json'), 'utf8'));
       expect(controlResult.check?.status === 'not-checked', 'control-result: check.status is not "not-checked"');
-      expect(JSON.stringify(controlResult.check?.fonts) === JSON.stringify([fontFace]), 'control-font-receipt: the supplied face was not recorded without Chromium');
+      expect(controlResult.check?.fonts === null, 'control-font-receipt: a run without fonts recorded a face');
+      const controlEntries = tarballEntries(readFileSync(path.join(project, 'out-control', controlResult.tarball)));
+      expect(firstDiff(controlEntries, pin.entries).length === 0, 'no-font-tarball: the original benchmark package changed');
     }
     else problems.push('control-result: out-control/result.json missing');
     console.log('control: a font file named as another family must refuse before output…');

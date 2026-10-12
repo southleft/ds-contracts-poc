@@ -6,6 +6,7 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, wri
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { type ConsumerFont, writeConsumerFonts } from './design-consumer-fonts.js';
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 const exec = promisify(execFile);
 async function run(cmd: string, args: string[], cwd: string, label = path.basename(cmd)): Promise<string> {
@@ -43,10 +44,22 @@ export function resolveToolchain(from: string = import.meta.url): Toolchain {
 export const PACKAGE_NAME = /^(?:@[a-z0-9][a-z0-9._~-]*\/)?[a-z0-9][a-z0-9._~-]*$/;
 
 export async function packageReactLibrary(generatedDir: string, component: string, work: string,
-  options: { packageName?: string; toolchain?: Toolchain } = {}) {
+  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[] } = {}) {
   const toolchain = options.toolchain ?? resolveToolchain();
   if (options.packageName !== undefined && (!PACKAGE_NAME.test(options.packageName) || options.packageName.length > 214))
     throw new Error(`react-library-package-name-invalid: "${options.packageName}" is not an npm package name`);
+  // Snapshot authenticated assets before asynchronous tool runs, so callers cannot
+  // change the packaged bytes after their digest has been checked.
+  const fonts = (options.fonts ?? []).map(font => {
+    const bytes = Buffer.from(font.bytes);
+    if (sha256(bytes) !== font.sha256) throw new Error(`react-library-font-sha256-mismatch: ${font.file}`);
+    const extension = { truetype: 'ttf', opentype: 'otf', woff: 'woff', woff2: 'woff2' }[font.format];
+    if (!extension || font.file !== `${font.sha256}.${extension}`) throw new Error('react-library-font-filename-invalid');
+    const license = font.license && { ...font.license, bytes: Buffer.from(font.license.bytes) };
+    if (license && (sha256(license.bytes) !== license.sha256 || license.file !== `${license.sha256}.txt`))
+      throw new Error('react-library-font-license-invalid');
+    return { ...font, bytes, ...(license ? { license } : {}) };
+  });
   const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
   mkdirSync(src, { recursive: true }); mkdirSync(dist, { recursive: true });
   // Copy generated sources except stories (a Storybook consumer is a different check).
@@ -78,21 +91,26 @@ export async function packageReactLibrary(generatedDir: string, component: strin
     paths: { react: [path.join(toolchain.reactTypes, 'index.d.ts')], 'react/jsx-runtime': [path.join(toolchain.reactTypes, 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
   writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
   await run(process.execPath, [toolchain.tsc, '-p', 'tsconfig.json'], pkgDir, 'tsc');
+  if (fonts.length) {
+    writeConsumerFonts(path.join(dist, 'fonts'), fonts);
+    const index = path.join(dist, 'index.js');
+    writeFileSync(index, `import './fonts/fonts.css';\n${readFileSync(index, 'utf8')}`);
+  }
   const name = options.packageName ?? `@ds-contracts-generated/${component.toLowerCase()}`;
   writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
     description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
     files: ['dist'], main: './dist/index.js', types: './dist/index.d.ts',
-    exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' }, './tokens.css': './dist/tokens.css', './package.json': './package.json' },
-    // The barrel imports tokens.css on purpose; a consumer bundler must not drop it.
+    exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' }, './tokens.css': './dist/tokens.css', ...(fonts.length ? { './fonts.css': './dist/fonts/fonts.css' } : {}), './package.json': './package.json' },
+    // The barrel imports tokens.css and any bundled fonts; a bundler must not drop them.
     sideEffects: ['./dist/index.js', '**/*.css'], peerDependencies: { react: '>=18', 'react-dom': '>=18' } }, null, 2));
   writeFileSync(path.join(pkgDir, 'README.md'), `# ${component} React library
 
 Install the downloaded .tgz with npm install followed by its local file path.
-Then import { ${component} } from '${name}'. The root import includes tokens.css.
+Then import { ${component} } from '${name}'. The root import includes tokens.css${fonts.length ? ' and bundled fonts.css' : ''}.
 
 Requires React 18 or later and a bundler supporting CSS Modules (such as Vite).
 The archive includes generated dependencies, CSS and TypeScript declarations.
-It does not include font files: load the font families declared by your design.
+${fonts.length ? `The archive includes the explicitly supplied font files${fonts.some(font => font.license) ? ', supplied license notices' : ''} and their manifest.\nThe root import loads the fonts automatically; load any other font families declared by your design.` : 'It does not include font files: load the font families declared by your design.'}
 Generation and installation do not qualify visual fidelity or accessibility.
 `);
   const packed = await run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', work], pkgDir);
