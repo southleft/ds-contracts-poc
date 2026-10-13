@@ -70,8 +70,20 @@ The shared importer now carries exact finite paint dependencies beyond the argum
 Native inspection now names the verifier boundary behind a refused readback in
 the source review screen. The saved Button caller shows its background inset
 geometry mismatch instead of only a generic refusal. Native node IDs and receipt
-metadata stay private. This improves diagnosis; the conversion remains refused
-and both direction scoreboards are unchanged.
+metadata stay private. That earlier conversion remains a recorded refusal.
+
+Qualified horizontal, non-wrapping content-width native roots now carry their
+padding-box background on an inner auto-layout frame around the original slot.
+A fresh 63-variant Button family and its populated caller completed independent
+native structural readback through the normal source service. The caller's
+background is 114 × 34 px inside a 116 × 36 px root; the earlier background was
+114.010002 px wide. All 35 eligible variants retain the new flow structure and
+the other 28 retain their existing structure. The fresh caller passes the
+unchanged 5% image limit on white and black at 3.8958%. Its original source root
+is 115.8125 × 36 px, so the root widths differ by 0.1875 px. This is one current
+source case, separate from the original 36-case native image ledger. The family
+readback does not qualify every variant's pixels, font-byte identity, browser
+delivery or unseen kits. Both direction scoreboards are unchanged.
 
 The current full ten-case React workspace now completes all 12 Checkbox
 initial-input combinations through the ordinary Sources flow and creates the
