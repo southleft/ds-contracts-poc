@@ -24,6 +24,39 @@ export function nativeDeliveryPendingFromAcknowledgement(value: unknown, operati
   return value.pending;
 }
 
+interface ComparisonInspection {
+  kind: string;
+  caseId: string;
+  ownershipId: string;
+  parentOperationId?: string;
+  sourceOperationId?: string;
+  fileKey: string;
+  operation: {id: string};
+  connection: {paired: boolean; connected: boolean; started: boolean; finished: boolean};
+}
+
+/** Check the response identity; the host supplies the same verified row as its full listing. */
+export function nativeComparisonInspectionFromResponse<T extends ComparisonInspection>(value: unknown, parentOperationId: string, caseId: string): T {
+  const record = (input: unknown): input is Record<string, unknown> => !!input && typeof input === 'object' && !Array.isArray(input);
+  const uuid = (input: unknown) => typeof input === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input);
+  if (!record(value) || Object.keys(value).join(',') !== 'comparison' || !record(value.comparison))
+    throw Error('Native comparison response unavailable. Refresh the saved inspection.');
+  const row = value.comparison;
+  if (row.kind !== 'comparison' || row.parentOperationId !== parentOperationId || row.caseId !== caseId ||
+      !uuid(row.ownershipId) || !uuid(row.sourceOperationId) || typeof row.fileKey !== 'string' || !row.fileKey ||
+      !record(row.operation) || !uuid(row.operation.id) || !record(row.connection) ||
+      ['paired','connected','started','finished'].some(key => typeof (row.connection as Record<string, unknown>)[key] !== 'boolean'))
+    throw Error('Native comparison response unavailable. Refresh the saved inspection.');
+  return row as unknown as T;
+}
+
+/** Replace only this checked child; keep unrelated rows and avoid duplicate entries on retry. */
+export function mergeNativeComparisonInspection<T extends {operation:{id:string}}>(rows: T[], comparison: T): T[] {
+  return rows.some(row => row.operation.id === comparison.operation.id)
+    ? rows.map(row => row.operation.id === comparison.operation.id ? comparison : row)
+    : [...rows, comparison];
+}
+
 /** An older full response cannot overwrite a later delivery acknowledgement. */
 export async function readCurrentNativeInspection<T>(read: () => Promise<T>, currentRevision: () => number): Promise<{revision: number; value: T} | undefined> {
   const revision = currentRevision();

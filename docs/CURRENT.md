@@ -11,8 +11,8 @@ content directly to its observed HTML root. Every helper call, object identity,
 ordered write and source return site must still agree with the original render;
 unknown writes, changed children and conflicting roots refuse. A fresh native
 Badge comparison contains the caller text and passed structural readback.
-Visual scoring is separate: nine of the 36 original cases now have native image
-passes on both backgrounds, with zero measured image failures and 27 unmeasured.
+Visual scoring is separate: 11 of the 36 original cases now have native image
+passes on both backgrounds, with zero measured image failures and 25 unmeasured.
 The 36 source matches do not count as 36 native passes, and the unseen reverse
 scoreboard remains unqualified.
 
@@ -22,10 +22,23 @@ family and its three filled comparison instances completed independent native
 readback. All three comparisons passed the unchanged 5% image limit on white
 and black (worst difference 0.8404%); text, recorded font names, sizes, tracking
 and colors agree, and root dimensions differ by less than one pixel. These
-three cases overlap the nine above and do not add scoreboard credit. Font-byte
-identity, unselected values, behavior, family updates and the complete browser
-journey remain unqualified. Mixed normal and finite letter spacing is retained
-per variant; unsupported or changed source evidence still refuses.
+three cases overlap earlier measurements and do not add scoreboard credit. A
+second family adds the previously unmeasured `radius="none"` and `radius="full"`
+cases: both completed native readback and passed the same image check (0.5263%
+white, 0% black), with the caller text present and root dimensions within one
+pixel. These results form an image-only ledger across recorded runs, not a
+fresh 36-case qualification on one revision. Font-byte identity, unselected
+values, behavior, family updates and the complete browser journey remain
+unqualified. Mixed normal and finite letter spacing is retained per variant;
+unsupported or changed source evidence still refuses.
+
+Preparing or reopening a member comparison now returns only that checked
+comparison to the Sources screen, preserving unrelated rows and rejecting
+older responses that would erase it. Source and native verification still run.
+One ordered comparison on an existing completed case took 166.4 seconds with
+the full response and 90.7 seconds with the compact response; response size fell
+from 191,352 to 1,939 bytes and the checked comparison data was identical.
+This does not measure fresh preparation or establish a general latency target.
 
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 

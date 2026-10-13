@@ -20,6 +20,7 @@ import {evidenceReadOnce,assertOutsideEvidenceSnapshot} from './evidence-read-sn
 import {
   buildReactReference,
   createReactReferenceService,
+  readReactComparisonInspection,
   reactReferenceHtml,
   reactReferenceUnchanged,
 } from "./react-reference.js";
@@ -135,19 +136,20 @@ test('comparison preflight reuses reads only within one request and retains refu
     },
   }} as any));
   t.after(()=>handle.close());
-  const call=async(route:string,body?:string)=>{
+  const call=async(route:string,body?:string,prefer?:string)=>{
     const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method:'POST',url:'/'+route,
-      headers:{host:'localhost:5181',...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
-    let status=0,text='';
-    await handle(req as any,{set statusCode(value:number){status=value;},setHeader(){},end(value:string){text=value;}} as any,route);
-    return {status,value:JSON.parse(text)};
+      headers:{host:'localhost:5181',...(prefer?{prefer}:{}),...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
+    let status=0,text='';const headers:Record<string,unknown>={};
+    await handle(req as any,{set statusCode(value:number){status=value;},setHeader(k:string,v:unknown){headers[k.toLowerCase()]=v;},end(value:string){text=value;}} as any,route);
+    return {status,headers,value:JSON.parse(text)};
   };
   referenceId=(await call('react')).value.id;
   const route=`react/${referenceId}/native-operation/${id}/compare-case/button`;
-  for(const expected of [1,2]){
+  for(const [expected,prefer] of [[1,undefined],[2,'return=minimal']] as const){
     generation=expected;
-    const response=await call(route);
+    const response=await call(route,undefined,prefer);
     assert.equal(response.status,409);assert.equal(response.value.reason,'react-preflight-control-refused');
+    assert.equal(response.headers['preference-applied'],undefined,'compact preference cannot turn a refusal into a successful response');
     assert.deepEqual(observed.slice(-2),[expected,expected]);
     assert.equal(reads,expected,'repeated reads share one check, next request checks fresh');
     assert.equal(scopes,expected);assert.doesNotThrow(assertOutsideEvidenceSnapshot,'scope ends on refusal');
@@ -156,6 +158,44 @@ test('comparison preflight reuses reads only within one request and retains refu
   assert.equal((await call(route.replace(referenceId,'b'.repeat(64)))).status,409);
   assert.equal(reads,2,'body and reference guards refuse before preflight');
   assert.equal(scopes,2);assert.doesNotThrow(assertOutsideEvidenceSnapshot);
+});
+
+test('comparison response reads only its current child and keeps the full-row display fields', t => {
+  const repo=mkdtempSync(path.join(tmpdir(),'react-comparison-row-'));
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const id='10000000-0000-4000-8000-000000000008', parent='10000000-0000-4000-8000-000000000009';
+  const referenceId='a'.repeat(64),calls:string[]=[];
+  const fresh={id,phase:'prepared',sourceCurrent:true,problems:[]};
+  const row={kind:'comparison',caseId:'large',ownershipId:'10000000-0000-4000-8000-000000000007',
+    parentOperationId:parent,sourceOperationId:id,fileKey:'file',operation:{...fresh,phase:'older'}};
+  const frame={imageSha256:'b'.repeat(64)},connection={paired:false,connected:false,started:false,finished:false};
+  const proposal={id:'c'.repeat(64),status:'planned'},update={id:'10000000-0000-4000-8000-000000000006'};
+  let refusal='',frameMissing=false;
+  const runtime:any={jobs:{
+    withReadSnapshot:(read:()=>unknown)=>read(),
+    get:(target:string)=>{assert.equal(target,id);calls.push('get');assert.throws(assertOutsideEvidenceSnapshot,/write-during-evidence-read-snapshot/);if(refusal)throw Error(refusal);return fresh;},
+    listReact:()=>assert.fail('a single comparison display does not enumerate other operations'),
+    listReactMoved:()=>assert.fail('a single comparison display does not enumerate source successions'),
+  },updates:{list:(target:string)=>{assert.equal(target,id);calls.push('updates');return [proposal];}},
+    updateJobs:{forProposal:(target:string,proposalId:string)=>{assert.equal(target,id);assert.equal(proposalId,proposal.id);return update;}},
+    updateTransport:{status:(target:string,at:number)=>{assert.equal(target,update.id);assert.equal(at,123);return connection;}},
+    transport:{status:(target:string,at:number)=>{assert.equal(target,id);assert.equal(at,123);calls.push('connection');return connection;}}};
+  const frames:any={read:(reference:string,target:string)=>{assert.equal(reference,referenceId);assert.equal(target,row.sourceOperationId);calls.push('frame');if(frameMissing)throw Error('changed');return frame;}};
+  const read=()=>readReactComparisonInspection(repo,referenceId,row as any,runtime,frames,123);
+  assert.deepEqual(read(),{...row,operation:fresh,sourceFrame:frame,sourceFrameProblem:undefined,recordedMeasurement:false,
+    updates:[{...proposal,operation:update,connection}],connection});
+  assert.deepEqual(calls,['get','frame','updates','connection']);
+  assert.doesNotThrow(assertOutsideEvidenceSnapshot);
+  // Historical comparisons can frame their parent. Preserve that existing mapping.
+  row.sourceOperationId=parent;frameMissing=true;fresh.sourceCurrent=false;calls.length=0;
+  const changed=read();assert.equal(changed.sourceFrame,undefined);
+  assert.equal(changed.sourceFrameProblem,'Original source framing unavailable or changed.');
+  assert.equal(changed.operation.sourceCurrent,false,'a stale source remains visibly stale, never promoted');
+  assert.equal(changed.sourceOperationId,parent);
+  refusal='native-operation-journal-invalid';calls.length=0;
+  assert.throws(read,/native-operation-journal-invalid/);assert.deepEqual(calls,['get']);
+  assert.doesNotThrow(assertOutsideEvidenceSnapshot);
+  assert.throws(()=>readReactComparisonInspection(repo,referenceId,{...row,kind:'root'} as any,runtime,frames,123),/react-comparison-inspection-required/);
 });
 
 test("reference bytes are deterministic, source changes invalidate them, and raw-text literals cannot escape the document", async () => {

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
 
 const connection = {paired:true, started:true, finished:false};
 const root = {operation:{id:'root-id', phase:'awaiting-native-result'}, connection};
@@ -79,4 +79,45 @@ test('transport completion races, read-only reinspection and interrupted command
   const rows = [{...settled,updates:[{...update,connection:finished}]}];
   assert.equal(await nativePollNeedsRefresh(rows, async () => ({pending:false})), true, 'the older journal view must settle too');
   assert.equal(await nativePollNeedsRefresh([root], async () => {assert.fail('full recovery status is due');}, true), true);
+});
+
+
+test('compact comparison keeps only the checked child identity and preserves unrelated rows on retry', async () => {
+  const parentOperationId = '10000000-0000-4000-8000-000000000001';
+  const id = '10000000-0000-4000-8000-000000000002';
+  const comparison = {kind:'comparison',caseId:'large',ownershipId:'10000000-0000-4000-8000-000000000003',
+    parentOperationId,sourceOperationId:id,fileKey:'file',
+    operation:{id,phase:'prepared',sourceCurrent:true},connection:{paired:false,connected:false,started:false,finished:false},
+    sourceFrame:{imageSha256:'a'.repeat(64)},recordedMeasurement:false,updates:[]};
+  const checked = nativeComparisonInspectionFromResponse<typeof comparison>({comparison},parentOperationId,'large');
+  assert.equal(checked,comparison,'the full checked row is retained without inventing verification fields');
+  const unrelated = {...comparison,kind:'family',operation:{...comparison.operation,id:parentOperationId}};
+  let revision = 0;
+  let finishOld!:(value: typeof comparison[])=>void;
+  const old = readCurrentNativeInspection(()=>new Promise<typeof comparison[]>(resolve=>{finishOld=resolve;}),()=>revision);
+  revision++;
+  let displayed = mergeNativeComparisonInspection([unrelated],checked);
+  finishOld([unrelated]);
+  const stale = await old;
+  if(stale && stale.revision===revision)displayed=stale.value;
+  assert.deepEqual(displayed,[unrelated,comparison],'a delayed full response cannot remove the new child');
+  const refreshed = {...comparison,operation:{...comparison.operation,sourceCurrent:false}};
+  displayed = mergeNativeComparisonInspection(displayed,refreshed);
+  assert.equal(displayed.length,2);assert.equal(displayed[0],unrelated);
+  assert.equal(displayed[1],refreshed,'a repeat replaces just its child and retains a reported stale source');
+  assert.equal(await nativePollNeedsRefresh(displayed,async()=>{assert.fail('preparation did not start native delivery');}),false);
+});
+
+test('compact comparison rejects a different parent, case, malformed envelope or incomplete connection', () => {
+  const parentOperationId='10000000-0000-4000-8000-000000000001';
+  const id='10000000-0000-4000-8000-000000000002';
+  const comparison={kind:'comparison',caseId:'large',ownershipId:'10000000-0000-4000-8000-000000000003',
+    parentOperationId,sourceOperationId:id,fileKey:'file',operation:{id},
+    connection:{paired:false,connected:false,started:false,finished:false}};
+  for(const value of [null,[],{},comparison,{comparison,operations:[]},{comparison:{...comparison,kind:'root'}},
+    {comparison:{...comparison,parentOperationId:id}},{comparison:{...comparison,caseId:'small'}},
+    {comparison:{...comparison,ownershipId:'bad'}},{comparison:{...comparison,sourceOperationId:'bad'}},
+    {comparison:{...comparison,fileKey:''}},{comparison:{...comparison,operation:{id:'bad'}}},
+    {comparison:{...comparison,connection:{...comparison.connection,finished:'false'}}}])
+    assert.throws(()=>nativeComparisonInspectionFromResponse(value,parentOperationId,'large'),/comparison response unavailable/);
 });

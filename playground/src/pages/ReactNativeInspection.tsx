@@ -3,7 +3,7 @@ import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -168,10 +168,19 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   async function action(route: string, id?: string) {
     setBusy(true); setError('');
     const compact = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/(start|retry-observation)$/.exec(route);
+    const compactComparison = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/compare-case\/([a-z-]+)$/.exec(route);
     try {
-      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
+      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact || compactComparison ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
       if (!response.ok) throw Error(['native-update-caller-context-unavailable-before-refresh','react-authored-native-action-unqualified'].includes(result.reason)
         ? updateProblem(result.reason) : result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
+      if (compactComparison) {
+        if (activeRoot.current !== root) return;
+        const comparison = nativeComparisonInspectionFromResponse<Operation>(result, compactComparison[1], compactComparison[2]);
+        // An older full listing must not erase the newly prepared child.
+        deliveryRevision.current++;
+        setRows(old => mergeNativeComparisonInspection(old, comparison));
+        return;
+      }
       if (compact) {
         if (activeRoot.current !== root) return;
         const pending = nativeDeliveryPendingFromAcknowledgement(result,compact[1]);

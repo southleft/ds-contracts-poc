@@ -301,6 +301,29 @@ export function selectRecordedInspectionAnchor(repo: string, anchor: ReactNative
     candidates.find(candidate => recorded(candidate, 'initial')) ?? anchor;
 }
 
+type ReactNativeRuntime = { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; successions?: ReturnType<typeof createNativeSourceSuccessions>; updateTransport?: ReturnType<typeof createNativeOperationTransport> };
+type ReactNativeListingRow = ReturnType<ReturnType<typeof createNativeOperationJobs>['listReact']>[number];
+
+/** The same checked comparison row serves full and explicitly compact responses. */
+export function readReactComparisonInspection(repoRoot: string, referenceId: string, row: ReactNativeListingRow,
+  native: ReactNativeRuntime, frames: Pick<ReturnType<typeof createReactSourceFramingStore>, 'read'>, observedAt: number) {
+  if (row.kind !== 'comparison' || !row.parentOperationId || !row.sourceOperationId)
+    throw Error('react-comparison-inspection-required');
+  return withEvidenceReadSnapshot(() => native.jobs.withReadSnapshot(() => {
+    // Reopen the target after preparation/framing; a preflight view is not current.
+    const operation = native.jobs.get(row.operation.id);
+    let sourceFrame, sourceFrameProblem;
+    try { sourceFrame = frames.read(referenceId, row.sourceOperationId!); }
+    catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
+    return {...row, operation, sourceFrame, sourceFrameProblem,
+      recordedMeasurement: hasRecordedNativeMeasurement(repoRoot, operation.id, referenceId),
+      updates: (native.updates?.list(operation.id) ?? []).map(proposal => {
+        const update = native.updateJobs?.forProposal(operation.id, proposal.id);
+        return {...proposal, operation: update, connection: update ? native.updateTransport?.status(update.id, observedAt) : undefined};
+      }), connection: native.transport.status(operation.id, observedAt)};
+  }));
+}
+
 export function createReactReferenceService(
   repoRoot: string,
   sourceRoot = process.env.DS_CONTRACTS_REACT_SOURCE_ROOT ??
@@ -308,7 +331,7 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
-  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; successions?: ReturnType<typeof createNativeSourceSuccessions>; updateTransport?: ReturnType<typeof createNativeOperationTransport> },
+  native?: () => ReactNativeRuntime,
 ) {
   let reference: ReactReference | undefined;
   let initialSourceReviewBusy = false;
@@ -953,6 +976,7 @@ export function createReactReferenceService(
               return {kind:'prepare' as const,family,source,parent,scope,
                 inspected:readReactContentInspection(repoRoot, current, source, scope)};
             }));
+            let preparedComparison: ReturnType<typeof jobs.prepare> | undefined;
             if (preflight.kind==='prepare') {
               const {family,source,parent,scope}=preflight;
               let inspected=preflight.inspected;
@@ -973,7 +997,22 @@ export function createReactReferenceService(
                 familyRoot:family,root:source,content:selected.content} : { ...selected, version:parentUpdate?4:3,
                 ...(parentUpdate?{parentUpdate}:{}),parentOperationId: parentId, mainRoot: parent.request as ReactNativeRequest });
               await frames.create(reference.id, prepared.id);
+              preparedComparison = prepared;
             } else if (!preflight.existing.operation.sourceCurrent) throw Error('react-comparison-source-changed');
+            if (req.headers.prefer === 'return=minimal') {
+              // Preparation and framing above retain every ordinary guard and write.
+              // Return this current child without enriching unrelated operations/cases.
+              const comparison = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
+                const row: ReactNativeListingRow = preflight.kind === 'existing' ? preflight.existing : {
+                  kind:'comparison', caseId:preflight.source.caseId, ownershipId:preflight.source.ownership.id,
+                  parentOperationId:parentId, sourceOperationId:preparedComparison!.id,
+                  fileKey:jobs.deliveryState(preparedComparison!.id).fileKey, operation:preparedComparison!,
+                };
+                return readReactComparisonInspection(repoRoot, current.id, row, native!(), frames, Date.now());
+              }));
+              res.setHeader('Preference-Applied','return=minimal');
+              json(res,200,{comparison});return;
+            }
           } else if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
@@ -1133,6 +1172,7 @@ export function createReactReferenceService(
           catch { return [id, false]; }
         }));
         return { moved, inspectionSourceAvailable, inspectionSources, operations: jobs.listReact(reference!.id).map(row => {
+          if (row.kind === 'comparison') return readReactComparisonInspection(repoRoot, reference!.id, row, native!(), frames, observedAt);
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
@@ -1149,10 +1189,6 @@ export function createReactReferenceService(
             try { const evidence = thisInitialEvidence(initialRequestForOperation(row.operation.id));
               initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
             catch { /* Image endpoints independently refuse unavailable source. */ }
-          }
-          if (row.kind === 'comparison') {
-            try { sourceFrame = frames.read(reference!.id, row.sourceOperationId!); }
-            catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
           if (row.kind === 'root') {
             const id = row.operation.id;
@@ -1182,7 +1218,7 @@ export function createReactReferenceService(
             try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
             catch { /* An unreadable succession journal already fails identity above. */ }
           return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
-            recordedMeasurement: (row.kind === 'initial' || row.kind === 'comparison' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
+            recordedMeasurement: (row.kind === 'initial' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
