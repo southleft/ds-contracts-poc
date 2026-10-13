@@ -514,3 +514,46 @@ test('explicit OUTSIDE refuses mixed width precedence while the legacy projectio
     assert.doesNotThrow(() => contract(legacy, 'button'), 'withdrawing only the new flag preserves the prior accepted projection');
   }
 });
+
+
+test('OUTSIDE refuses a variant literal over a resting token without changing the legacy projection', () => {
+  const root = outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080'},
+    tokens: {'border-left-width': '{stroke.thin}'},
+    literalsByProp: [{prop: 'tone', map: {danger: {'border-left-width': '6px'}}}],
+  });
+  assert.throws(() => contract(root), /outside-stroke-width-precedence/);
+  const {strokeAlign: _alignment, ...legacy} = root;
+  const c = contract(legacy);
+  const errors: string[] = [];
+  validateContract(c, new Map([[c.id, c]]), errors, new Map());
+  assert.deepEqual(errors, [], 'the old input remains valid; only the new carrier is refused');
+  assert.deepEqual(c.anatomy.root.tokens, {'border-left-width': '{stroke.thin}'});
+  assert.deepEqual(c.anatomy.root.literalsByProp, [{prop: 'tone', map: {danger: {'border-left-width': '6px'}}}]);
+  assert.match(rule(modules(c).css, '.tone-danger'), /--_stroke-left-width: 6px;/);
+});
+
+test('OUTSIDE keeps base-literal to variant-token precedence and the later state-token override', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const c = contract(outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080', 'border-left-width': '4px'},
+    tokensByProp: [{prop: 'tone', map: {danger: {'border-left-width': '{stroke.thick}'}}}],
+    states: {hover: {'border-left-width': '{stroke.thin}'}},
+  }), 'button');
+  c.bindings.figma.statePreviews = true;
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  const data = engine.compileComponentData(c, new Map([[c.id, c]]));
+  assert.equal(data.variants.length, 2);
+  for (const {name, spec} of data.variants) {
+    const changed = name.includes('Tone=Danger');
+    assert.equal(spec.bindings?.strokeLeftWeight, changed ? 'stroke/thick' : undefined);
+    assert.equal(spec.lits?.strokeSides?.left, changed ? undefined : 4);
+    for (const side of ['top', 'right', 'bottom'] as const) assert.equal(spec.lits?.strokeSides?.[side], 0);
+  }
+  assert.equal(data.stateVariants?.length, 2);
+  for (const {spec} of data.stateVariants!) {
+    assert.equal(spec.bindings?.strokeLeftWeight, 'stroke/thin', 'the final state overrides either resting value');
+    assert.equal(spec.lits?.strokeSides?.left, undefined);
+    assert.equal(spec.bindings?.strokeWeight, undefined);
+  }
+});

@@ -3164,6 +3164,15 @@ export function outsideStrokeIssues(part: Part): string[] {
     widthRecords.some(other => other !== record && Object.keys(other ?? {}).some(sideWidth)) ||
     Object.keys(record).some((key, index, keys) => sideWidth(key) && index < keys.indexOf('border-width'))
   ))) issues.push('outside-stroke-width-precedence');
+  // A variant literal may override a resting token on the same side, but
+  // native side completion retains the binding. Keep this mixed-kind cascade
+  // on the prior projection; base literals overridden by variant/state tokens
+  // remain admitted. State tokens are intentionally not resting bindings.
+  const restingTokens = [part.tokens, ...tokensByPropEntries(part).flatMap(t => Object.values(t.map))];
+  const variantLiterals = (part.literalsByProp ?? []).flatMap(t => Object.values(t.map));
+  if (variantLiterals.some(record => Object.keys(record).some(key =>
+    sideWidth(key) && restingTokens.some(tokens => tokens?.[key] !== undefined))))
+    issues.push('outside-stroke-width-precedence');
   if (part.stylesWhen?.some(row => Object.keys(row.styles).some(key => /^(border|outline)(-|$)/.test(key))))
     issues.push('outside-stroke-conditional-style-channel');
   // Isolation keeps the stroke above children without escaping to siblings.
