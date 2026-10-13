@@ -62,7 +62,14 @@ export function lowerCenteredFillPadding(input:Contract,tokenValues?:unknown):Co
 
   if(path.length<2||part.layout?.growBasis!=='zero'||part.layout.justify!=='center'||part.layout.wrap||part.layoutByProp||part.layoutByCombination||!part.parts||part.component||part.slot||part.text!==undefined||part.content||part.shape||part.icon||part.repeat||part.meter)continue;
   let parent:Part=clone.anatomy[path[0]];for(const key of path.slice(1,-1))parent=parent.parts![key];
-  const direction=part.layout.direction??'row';if(!['row','column'].includes(direction)||!parent.layout||parent.layout.wrap||(parent.layout?.direction??'row')!==direction||parent.layoutByCombination||Object.values(parent.layoutByProp?.map??{}).some(o=>Object.keys(o).some(k=>k!=='direction')||o.direction!==undefined&&o.direction!==direction&&o.direction!==direction+'-reverse')||parent.layout?.display==='grid')continue;
+  const direction=part.layout.direction??'row';
+  // Complete container tables also carry alignment and paint order. These
+  // do not change which padding lies on the parent's main axis; an axis
+  // switch, growth table or any other layout channel still declines lowering.
+  const jointAxisChanges=parent.layoutByCombination?.rows.some(({layout})=>
+   Object.keys(layout).some(k=>!['direction','align','justify','reversePaint'].includes(k))||
+   layout.direction!==direction&&layout.direction!==direction+'-reverse');
+  if(!['row','column'].includes(direction)||!parent.layout||parent.layout.wrap||(parent.layout?.direction??'row')!==direction||jointAxisChanges||Object.values(parent.layoutByProp?.map??{}).some(o=>Object.keys(o).some(k=>k!=='direction')||o.direction!==undefined&&o.direction!==direction&&o.direction!==direction+'-reverse')||parent.layout?.display==='grid')continue;
   const children=Object.values(part.parts);if(!children.length||children.some(c=>c.shape?.kind!=='path'||c.shape.parentViewport||c.parts||c.layout?.grow||c.layoutByProp||c.layoutByCombination||c.absoluteGeometry||c.absoluteGeometryByCombination||c.overlay||c.absolutePlacement||c.placement||c.declared?.position==='absolute'||/"(?:flex(?:-shrink|-basis|-grow)?|position|writing-mode)":/.test(JSON.stringify([c.tokens,c.literals,c.declared,c.states,c.declaredStates,c.stylesWhen,c.tokensByProp,c.tokensByCombination,c.literalsByProp,c.literalsByCombination]))))continue;
   const channel=direction==='column'?'padding-block':'padding-inline';
   // Limit to static own style holders; conditional or competing padding can

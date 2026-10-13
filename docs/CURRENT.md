@@ -4,7 +4,9 @@
 
 The latest retained fixed 40-set installed-CLI comparison measures **713 passing, 80 failing and 86 unverified variants out of 879 (81.11% passing)**; 18 complete sets pass. The outside-stroke candidate preserves the original ordered identities, reference images, all 32 consumer font faces and the unchanged checker. Against the retained 669/124/86 run, 44 Radix Blockquote variants move from failing to passing; no passing variant is lost and no failure becomes unverified. This is a measured candidate result on the original corpus, not a fresh 204-set run or unseen-kit qualification. The measured package source is `51ca7e0a` (tree `09b3d78c`); the subsequent mixed-width guard is covered separately by focused regressions.
 
-The remaining 80 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The fresh 36-case React → Figma run is still in progress; the 17/36 native image ledger below is historical and does not qualify the current revision. Never-seen kits in both directions and a complete private-tester journey remain unqualified.
+The remaining 80 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The completed original 36-case React → Figma run at `e3c115ebe` passes all 36 cases against the listed content, font, color, image and size criteria. These are known cohorts; never-seen kits in both directions remain unqualified.
+
+A packed CLI from `8067b0015`, installed into an empty directory, converted a live SDS Text Content Heading component set with **2 passing variants**. Its generated package installed and built in a clean React/Vite app; both variants rendered, and changing the heading text and subheading visibility updated both. This supports a guided technical preview. It does not establish outside-user completion, arbitrary-file coverage or a private-beta qualification.
 
 The [owner's fidelity bar](GOAL-BRIDGE.md#finish-line) still requires matching fonts and text color, every text and icon, size within 2 px, and image difference within 5% on both white and black. The existing content checker compares requested font family and numeric weight and reports unavailable fonts separately. Font-file byte identity is diagnostic evidence for rendering differences, not an additional acceptance gate; it does not replace any required check.
 
@@ -19,10 +21,13 @@ content directly to its observed HTML root. Every helper call, object identity,
 ordered write and source return site must still agree with the original render;
 unknown writes, changed children and conflicting roots refuse. A fresh native
 Badge comparison contains the caller text and passed structural readback.
-The historical image ledger records 17 of the 36 original cases with native
-passes on both backgrounds, zero measured image failures and 19 unmeasured.
-The 36 source matches do not count as 36 native passes, and the unseen reverse
-scoreboard remains unqualified.
+The completed native run and subsequent original-source capture compare all
+36 cases, with **36 passing and none failing or unmeasured**. Maximum image
+differences are **0.9211% on white** and **0.7895% on black**; maximum size
+difference is **0.8125 px**. The separate content audit found no missing or
+extra text/icons or mismatched recorded font family, weight, slant, size or
+text color. This supersedes the historical 17/36 image result for this known
+cohort; the unseen reverse scoreboard remains unqualified.
 
 The Sources flow now prepares explicitly selected, observed values of one
 string property as a shared editable native family. A fresh three-size Badge
