@@ -161,3 +161,43 @@ test('zero-border flow records the derived zero and constrained height stays leg
  const fixed=make();fixed.lits={height:36,minHeight:20};fixed.bindings={maxHeight:'size'};
  assert.equal(lowerPaddingBoxBackground(fixed,()=>40),true);assert.ok(fixed.children![0].rootSlotFlow);
 });
+
+
+test('flow geometry checks the rounded outer extent of all seven observed empty HUG variants',()=>{
+ // Reduced checked fields from FLOW-GEOMETRY-DIAGNOSTIC.json (SHA256
+ // 9840cd76d016633ae3d724d8f210c9d50e18500eb918f470ec333e84bdff14e2).
+ // This regression replays recorded numbers, not a new native observation.
+ const observations:Array<[string,number,number,number,number]>=[
+  ['size=null, variant=default',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=null',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=outline',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=secondary',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=ghost',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=destructive',2.009999990463257,2,0.009999999776482582,0],
+  ['size=null, variant=link',2.009999990463257,2,0.009999999776482582,0],
+ ];
+ const rootFields={layoutMode:'HORIZONTAL',layoutSizingHorizontal:'HUG',primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'AUTO',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',strokesIncludedInLayout:true,strokeAlign:'INSIDE',strokeTopWeight:1,strokeRightWeight:1,
+  strokeBottomWeight:1,strokeLeftWeight:1,paddingTop:0,paddingRight:0,paddingBottom:0,paddingLeft:0,itemSpacing:0,cornerRadius:8,topLeftRadius:8,topRightRadius:8,bottomLeftRadius:8,bottomRightRadius:8};
+ const flowFields={x:1,y:1,relativeTransform:[[1,0,1],[0,1,1]],layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',layoutSizingHorizontal:'HUG',
+  layoutSizingVertical:'HUG',primaryAxisSizingMode:'AUTO',primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',cornerRadius:7,topLeftRadius:7,
+  topRightRadius:7,bottomLeftRadius:7,bottomRightRadius:7,visible:true,opacity:1,clipsContent:false,strokes:[],effects:[]};
+ for(const [variant,width,height,innerWidth,innerHeight] of observations){
+  const parent={...rootFields,width,height},carrier={...flowFields,width:innerWidth,height:innerHeight};
+  assert.notEqual(innerWidth,width-2,variant);
+  assert.notEqual(innerWidth,Math.fround(width-2),variant);
+  assert.equal(width,Math.fround(innerWidth+2),variant);
+  assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},parent,carrier),true,variant);
+  // Do not widen the accepted relation to a neighbouring float32 outer size.
+  assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},{...parent,width:2.010000228881836},carrier),false,variant);
+  for(const invalid of [-1,NaN,Infinity,-Infinity]){
+   assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},parent,{...carrier,width:invalid}),false,variant);
+   assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},parent,{...carrier,height:invalid}),false,variant);
+  }
+ }
+ // The original inherited STRETCH overshoot is still a geometric mismatch.
+ const filledParent={...rootFields,width:116,height:36,counterAxisSizingMode:'FIXED'};
+ const filledCarrier={...flowFields,width:114,height:34,layoutSizingVertical:'FILL'};
+ assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},filledParent,filledCarrier),true);
+ assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},filledParent,{...filledCarrier,width:114.01000213623047}),false);
+});

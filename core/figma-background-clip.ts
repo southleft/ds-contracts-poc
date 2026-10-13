@@ -45,7 +45,7 @@ export function rootSlotFlowSpecValid(parent:NodeSpec|undefined, carrier:NodeSpe
 export function nativeRootSlotFlowGeometry(geometry:{inset:number;radius:number}, parent:Record<string,any>, carrier:Record<string,any>):boolean {
   const eq=(actual:unknown,expected:number)=>actual===expected || actual===Math.fround(expected);
   const inset=geometry.inset, radius=geometry.radius;
-  return [inset,radius,parent.width,parent.height,parent.cornerRadius].every(n=>Number.isFinite(n)&&n>=0) &&
+  return [inset,radius,parent.width,parent.height,parent.cornerRadius,carrier.width,carrier.height].every(n=>Number.isFinite(n)&&n>=0) &&
     parent.layoutMode==='HORIZONTAL' && parent.layoutSizingHorizontal==='HUG' && parent.primaryAxisSizingMode==='AUTO' &&
     ['AUTO','FIXED'].includes(parent.counterAxisSizingMode) &&
     parent.strokesIncludedInLayout===true && parent.strokeAlign==='INSIDE' &&
@@ -55,7 +55,10 @@ export function nativeRootSlotFlowGeometry(geometry:{inset:number;radius:number}
     carrier.layoutMode==='HORIZONTAL' && carrier.layoutPositioning==='AUTO' && carrier.layoutSizingHorizontal==='HUG' &&
     carrier.primaryAxisSizingMode==='AUTO' && carrier.layoutSizingVertical===(parent.counterAxisSizingMode==='AUTO'?'HUG':'FILL') &&
     carrier.primaryAxisAlignItems===parent.primaryAxisAlignItems && carrier.counterAxisAlignItems===parent.counterAxisAlignItems &&
-    eq(carrier.x,inset) && eq(carrier.y,inset) && eq(carrier.width,parent.width-2*inset) && eq(carrier.height,parent.height-2*inset) &&
+    eq(carrier.x,inset) && eq(carrier.y,inset) &&
+    // Figma rounds the derived outer HUG extent to float32. Subtracting the
+    // inset from that rounded value cannot recover a small inner SLOT seed.
+    eq(parent.width,carrier.width+2*inset) && eq(parent.height,carrier.height+2*inset) &&
     eq(carrier.cornerRadius,radius) && ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'].every(key=>eq(carrier[key],radius)) &&
     same(carrier.relativeTransform,[[1,0,carrier.x],[0,1,carrier.y]]) && carrier.visible===true && carrier.opacity===1 &&
     carrier.clipsContent===false && Array.isArray(carrier.strokes) && carrier.strokes.length===0 &&
