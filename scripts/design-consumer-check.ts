@@ -1,3 +1,4 @@
+import { CONSUMER_VITE_CONFIG } from './design-consumer-vite-config.js';
 import {consumerSlotNames,probeConsumerSlot,visibleSlotCases} from './design-consumer-slots.js';
 import {partialSourceTextControlPlan,probeSourceTextControls} from './design-consumer-text-controls.js';
 import {domainTransitionGroups} from './design-consumer-domain.js';
@@ -459,7 +460,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
-  writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
+  writeFileSync(path.join(consumer, 'vite.config.js'), CONSUMER_VITE_CONFIG);
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);

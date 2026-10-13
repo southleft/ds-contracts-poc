@@ -925,3 +925,31 @@ test('packaged fonts refuse trailing newline basenames instead of normalizing th
     assert.throws(() => readPackagedConsumerFonts(fixture.installed), new RegExp(`consumer-package-fonts:noncanonical-${field}-file`));
   });
 });
+
+// Expected names were recorded from postcss-modules 6.0.1's default generator
+// shipped in Vite 7.3.7, including its prefix-match and CRLF line-count quirks.
+test('cached consumer CSS modules preserve default names for raw identifiers and line endings', async () => {
+  const { CONSUMER_VITE_CONFIG } = await import('./design-consumer-vite-config.js');
+  const { default: config } = await import('data:text/javascript;base64,' + Buffer.from(CONSUMER_VITE_CONFIG).toString('base64'));
+  const generate = config.css.modules.generateScopedName as (name: string, file: string, css: string) => string;
+  const css = '.foobar {color:red}\r\n.foo {color:blue}\r.onlyCR{display:block}\n.icon\\:small {color:green}\n.__proto__ {}\n.constructor {}\n.α {content:"💡"}\n';
+  const names = ['foo', 'foobar', 'onlyCR', 'icon\\:small', '__proto__', 'constructor', 'α', 'missing'];
+  const expected = ['_foo_x9j1k_1', '_foobar_x9j1k_1', '_onlyCR_x9j1k_4', '_icon\\:small_x9j1k_5', '___proto___x9j1k_6', '_constructor_x9j1k_7', '_α_x9j1k_8', '_missing_x9j1k_1'];
+  for (let repeat = 0; repeat < 3; repeat++) assert.deepEqual(names.map(name => generate(name, '/a/Button.module.css', css)), expected);
+  assert.deepEqual({ base: config.base, esbuild: config.esbuild, build: config.build },
+    { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } }, 'consumer options are unchanged');
+});
+
+test('cached consumer CSS modules invalidate changed content and isolate file caches', async () => {
+  const { CONSUMER_VITE_CONFIG } = await import('./design-consumer-vite-config.js');
+  const { default: config } = await import('data:text/javascript;base64,' + Buffer.from(CONSUMER_VITE_CONFIG).toString('base64'));
+  const generate = config.css.modules.generateScopedName as (name: string, file: string, css: string) => string;
+  const css = '.foobar {color:red}\r\n.foo {color:blue}\r.onlyCR{display:block}\n.icon\\:small {color:green}\n.__proto__ {}\n.constructor {}\n.α {content:"💡"}\n';
+  const changed = '/* before\nline */\n' + css;
+  assert.equal(generate('foo', '/a/Button.module.css', css), '_foo_x9j1k_1');
+  assert.equal(generate('foo', '/a/Button.module.css', changed), '_foo_1147x_3');
+  assert.equal(generate('foo', '/b/Button.module.css', css), '_foo_x9j1k_1', 'filename is a cache boundary, not new naming input');
+  assert.equal(generate('missing', '/a/Button.module.css', changed), '_missing_1147x_1');
+  assert.equal(generate('foo', '/a/Button.module.css', css), '_foo_x9j1k_1', 'returning to earlier bytes cannot retain a stale content name');
+  assert.equal(generate('foo', '/b/Button.module.css', changed), '_foo_1147x_3');
+});
