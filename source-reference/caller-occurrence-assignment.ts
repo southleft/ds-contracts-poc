@@ -123,6 +123,16 @@ export function verifyCallerReadbackCommand(input:Parameters<typeof emitNativeCo
  if(!command||command.phase!=='component-readback'||command.readOnly!==true||command.script!==expectedReader||command.scriptSha256!==expectedSha256)fail('current-reader-script-changed');
  return expectedSha256;
 }
+/** Native dependency inventory is unique by main, while the evidence above
+ * remains one positive assignment per physical instance. Repeated uses may
+ * share a main only when its complete captured identity agrees. */
+function verifyRequiredMainInventory(required:unknown,inventory:Row[]) {
+ const unique=new Map<string,Row>();
+ for(const row of inventory){const prior=unique.get(row.componentId);if(prior&&!same(prior,row))fail('required-main-identity-conflict');unique.set(row.componentId,row);}
+ if(!Array.isArray(required)||required.some(r=>!r||typeof r.componentId!=='string')||new Set(required.map(r=>r.componentId)).size!==required.length)fail('required-main-inventory');
+ const sort=(rows:Row[])=>[...rows].sort((a,b)=>a.componentId.localeCompare(b.componentId));
+ if(!same(sort(required),sort([...unique.values()])))fail('required-main-inventory');
+}
 export interface CallerCaptureSelection {
  /** Retained journal event guarded by the original canonical capture. Host-selected. */
  captureEvent:string;
@@ -196,10 +206,10 @@ export function authenticateCallerSlotInputs(repo:string,spec:MatchedSpec,select
   // inventory. Keep the target carrier separate from positively appended roots.
   assignments.push({instanceId:instanceId!,mainId:observation.mainComponentId,mainKey:observation.mainComponentKey,ownerId:observation.ownerId,ownerKey:observation.ownerKey,propertyId:saved.propertyKey,slotId,mainSlotId:slot.mainSlotNodeId,targetId:targetId!,contentIds,allocationIds:[...saved.contentNodeIds]});
  }
- if(assignments.length!==[...physical.values()].filter(n=>n.type==='INSTANCE').length)fail('assignment-census');
- const inventory=assignments.map(a=>({componentId:a.mainId,componentKey:a.mainKey,ownerId:a.ownerId,ownerKey:a.ownerKey,ownerType:mains.get(references[assignments.indexOf(a)].parent.operation.id)!.input.creation.target.type}));
- const sort=(rows:Row[])=>[...rows].sort((a,b)=>a.componentId.localeCompare(b.componentId));
- if(!same(sort(channel.roots[0].requiredMains??[]),sort(inventory)))fail('required-main-inventory');
+ const instances=[...physical.values()].filter(n=>n.type==='INSTANCE'),assigned=new Set(assignments.map(a=>a.instanceId));
+ if(assignments.length!==instances.length||assigned.size!==assignments.length||instances.some(n=>!assigned.has(n.nodeId)))fail('assignment-census');
+ const inventory=assignments.map((a,i)=>({componentId:a.mainId,componentKey:a.mainKey,ownerId:a.ownerId,ownerKey:a.ownerKey,ownerType:mains.get(references[i].parent.operation.id)!.input.creation.target.type}));
+ verifyRequiredMainInventory(channel.roots[0].requiredMains??[],inventory);
  const captureCoverage=verifyCallerReadbackContinuity(observationInput,historical,native);
  const fieldWitness=selection.fieldWitness?readCallerFieldWitness(selection.fieldWitness,historical,aliases,[...mains.values()].flatMap(m=>m.receipt.nodes),native):null;
  if(verified.status!=='supported-comparison-structure-observed'||verified.problems.length){const error=Error('caller-assignment-comparison-readback-refused:'+verified.problems.join(','));Object.assign(error,{diagnostic:{status:'refused',assignments,captureCoverage,problems:verified.problems,limitations:verified.limitations,fieldWitness:fieldWitness?{pins:fieldWitness.pins,coverageDifferences:fieldWitness.coverageDifferences}:null,canonicalSha256:selection.pins.canonical,authorityPins:{native:matched.native,source:matched.source,capture:{event:selection.captureEvent,eventSha256:hash(readFileSync(path.join(repo,'private/source-native-app/operations',spec.operation,'events',selection.captureEvent)))},content:request.content,composition:request.composition,scriptSha256:command!.scriptSha256},acceptedContract:null,qualification:'unqualified',hostProofIssued:false}});throw error;}
