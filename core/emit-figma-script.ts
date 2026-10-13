@@ -1,3 +1,4 @@
+import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
 import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME} from './native-text-box.js';
@@ -1161,6 +1162,9 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   // post-hoc layer-name walk cannot establish this identity (names can repeat,
   // and layout lowering may reorder or expand nodes).
   const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  // This new carrier alone gets complete side initialization; outline previews
+  // and the older inward stroke paths retain their existing compilation.
+  const outsideBorderSpecs = new WeakSet<NodeSpec>();
   const compilingCallerDeps = new Set<string>();
   const compiledData = new WeakMap<ComponentData, string>();
   const nativeCandidateData = new WeakSet<ComponentData>();
@@ -3237,6 +3241,7 @@ const barCollapsePending = new WeakMap<
 
 /** See applyLiterals — single-side stroke → filled bar. */
 function collapseSingleSideStrokeBar(spec: NodeSpec): void {
+  if (spec.strokeOutside) return; // Explicit outside paint is not an inward CSS bar.
   const li = spec.lits;
   if (!li?.strokeSides || !li.strokeColor) return;
   if (spec.fill || li.fillColor) return;
@@ -3337,6 +3342,7 @@ function lStrokePolylinePoints(
  * rides the same absolute box + shape.rotation.
  */
 function collapseTwoSideStrokeGlyph(spec: NodeSpec): void {
+  if (spec.strokeOutside) return;
   if (spec.type !== 'shape' || !spec.shape) return;
   const li = spec.lits;
   if (!li?.strokeSides || !li.strokeColor) return;
@@ -3591,6 +3597,10 @@ function applyStyling(
   ctx: TextCtx,
 ): TextCtx {
   const tokens = resolveTokens(part, subst);
+  if (part.strokeAlign === 'OUTSIDE') {
+    spec.strokeOutside = true;
+    outsideBorderSpecs.add(spec);
+  }
   if (spec.layout?.mode === 'GRID') {
     const gap = resolveLayout(part, subst)?.gap;
     for (const [axis, channel] of [['row', 'row-gap'], ['column', 'column-gap']] as const) {
@@ -6381,6 +6391,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
 
 function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
   validateStructuralAvailability(contract);
+  for (const {part} of walkAnatomy(contract)) {
+    const issues = outsideStrokeIssues(part);
+    if (issues.length) throw Error(issues.join('; '));
+  }
   if(walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination))throw Error('native-rect-stroke-pattern-unsupported');
   const insideStrokeErrors=instanceInsideStrokeTokenErrors(contract,byId,input.tokens);if(insideStrokeErrors.length)throw Error(insideStrokeErrors.join('; '));
   if(permit!==boundPaintPermit)for(const {part} of walkAnatomy(contract)){const error=solidFillPartTokenError(part,input.tokens);if(error)throw Error(error);}
@@ -7127,6 +7141,32 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   };
   for (const v of variants) stripMarginVars(v.spec);
   for (const v of stateVariants) stripMarginVars(v.spec);
+  // Resolve only explicit OUTSIDE border boxes after the actual variant and
+  // state overrides. Missing CSS sides are uniform-width or zero, never a
+  // fresh/stale native stroke weight. Expand the uniform binding per side so
+  // its later write cannot erase an explicit side, and keep bound sides free
+  // of literal tail writes. Existing outline/inside paths are untouched.
+  const completeOutsideStrokeSides = (spec: NodeSpec): void => {
+    spec.children?.forEach(completeOutsideStrokeSides);
+    if (!outsideBorderSpecs.has(spec)) return;
+    const uniformBinding = spec.bindings?.strokeWeight;
+    const uniformLiteral = spec.lits?.strokeWeight;
+    const li = spec.lits ??= {};
+    const widths = li.strokeSides ??= {};
+    for (const side of ['top', 'right', 'bottom', 'left'] as const) {
+      const field = `stroke${side[0].toUpperCase()}${side.slice(1)}Weight`;
+      if (spec.bindings?.[field] !== undefined) {
+        delete widths[side];
+      } else if (widths[side] === undefined) {
+        if (uniformBinding !== undefined) {
+          (spec.bindings ??= {})[field] = uniformBinding;
+        } else widths[side] = uniformLiteral ?? 0;
+      }
+    }
+    delete li.strokeWeight;
+    if (spec.bindings) delete spec.bindings.strokeWeight;
+  };
+  for (const v of [...variants, ...stateVariants]) completeOutsideStrokeSides(v.spec);
   // A zero-blur inset ring is paint, not layout. Native frame inner shadows
   // can disappear with transparent fills / visible overflow. An inside stroke
   // is equivalent when every existing border side is explicitly zero. Keep

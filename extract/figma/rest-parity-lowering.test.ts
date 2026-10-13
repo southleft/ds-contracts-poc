@@ -166,7 +166,7 @@ test('CENTER where the stroke takes layout space, or the fact is not captured, k
   assert.equal((anatomyOf(bare).root.tokens as Record<string, string> | undefined)?.['outline-offset'], undefined);
 });
 
-test('an OUTSIDE stroke drawn on some sides only keeps its per-side widths as a border (no outline spelling), named', () => {
+test('a square OUTSIDE stroke drawn on some sides retains its alignment and per-side widths without layout space', () => {
   // Radix's Blockquote: a 4px rule on the left side only, aligned OUTSIDE.
   const set: RestNode = {
     id: '1:1', name: 'Quote', type: 'COMPONENT_SET',
@@ -185,8 +185,10 @@ test('an OUTSIDE stroke drawn on some sides only keeps its per-side widths as a 
   const root = JSON.stringify(anatomyOf(r).root);
   assert.doesNotMatch(root, /outline-color/);
   assert.match(root, /border-left-width/);
-  assert.ok(r.notes.some((n) => /strokeAlign OUTSIDE on a stroke whose sides differ .* carries as a border drawn INWARD/.test(n)), r.notes.join('\n'));
-  assert.match(cssOf(r), /--_stroke-left-width: 4px|border-left-width: 4px/);
+  assert.equal(anatomyOf(r).root.strokeAlign, 'OUTSIDE');
+  assert.ok(r.notes.some((n) => /square OUTSIDE per-side stroke retained without layout space/.test(n)), r.notes.join('\n'));
+  assert.match(cssOf(r), /--_stroke-left-width: 4px/);
+  assert.match(cssOf(r), /left: calc\(-1 \* var\(--_stroke-left-width\)\)/);
 });
 
 test('an undrawable path node with a drawn size keeps its box but is not painted as one', () => {

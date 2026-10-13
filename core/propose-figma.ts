@@ -23,7 +23,7 @@ import {inspectOpaqueInsideStroke} from './inside-stroke-equivalence.js';
 import {nativeFilledPathResizeMatches} from './native-filled-path.js';
 import {draftDrawingReadbackMatches,type DraftDrawingReadback} from './draft-drawing-readback.js';
 import {demandedVisibilityNodes,visibilityBindingMatches,visibilityDemandsFromDumps,type VisibilityDemand,type VisibilityBinding} from './source-visibility-control.js';
-import {resolveLayout} from '../scripts/contract-schema.js';
+import {outsideStrokeIssues, resolveLayout} from '../scripts/contract-schema.js';
 import {allocateInstanceAffine} from '../scripts/contract-schema.js';
 import {inferPresenceByCombination} from './infer-presence.js';
 import {resolvePresence, defaultSlotFamilyIssue} from '../scripts/contract-schema.js';
@@ -3436,6 +3436,20 @@ const perSideStroked = (nodes: readonly DumpNode[]): boolean =>
     // Four sides bound to ONE variable (or a bound uniform weight) is a uniform stroke.
     return sides.some((s) => s !== undefined) && n.bound?.strokeWeight === undefined && !sides.every((s) => s !== undefined && s === sides[0]);
   });
+/** Only carried square, non-clipping ordinary box facts select the exterior
+ * per-side band. This does not prove unsupported dash/join/smoothing facts absent:
+ * the readers' existing degradation receipts remain authoritative. Other
+ * alignments and carried geometry keep their named approximation. */
+function outsidePerSideBox(nodes: readonly DumpNode[]): boolean {
+  return perSideStroked(nodes) && nodes.length > 0 && nodes.every(n =>
+    ['FRAME', 'COMPONENT'].includes(n.type ?? '') && n.layout !== undefined &&
+    ['HORIZONTAL', 'VERTICAL'].includes(n.layout.mode) && !n.shape && !n.clipsContent && !n.abs &&
+    !(n.cornerRadius ?? 0) && !n.cornerRadii?.some(v => v !== 0) &&
+    !Object.keys(n.bound ?? {}).some(k => /radius|stroke.*weight/i.test(k)) &&
+    (n.stroke === undefined || n.strokeAlign === 'OUTSIDE' && n.strokesIncludedInLayout === false &&
+      (n.strokeWeights ? ['top', 'right', 'bottom', 'left'].every(s => Number.isFinite(n.strokeWeights![s as keyof NonNullable<DumpNode['strokeWeights']>]) && n.strokeWeights![s as keyof NonNullable<DumpNode['strokeWeights']>] >= 0)
+        : Number.isFinite(n.strokeWeight) && n.strokeWeight! >= 0)));
+}
 function centeredStrokeOutline(nodes: readonly DumpNode[]): boolean {
   const drawn = nodes.filter((n) => n.stroke !== undefined);
   if (!drawn.some((n) => n.strokeAlign === 'CENTER')) return false;
@@ -3479,6 +3493,10 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   const [align] = aligns;
   if (align === 'OUTSIDE') {
     if (!perSideStroked(m.occ.map((o) => o.node))) return 'outline';
+    if (outsidePerSideBox(m.occ.map(o => o.node))) {
+      ctx.notes.push(`${where}: square OUTSIDE per-side stroke retained without layout space; existing side widths and color draw one exterior border band; existing mapper dash/join/corner degradation receipts remain unchanged`);
+      return 'border';
+    }
     // An OUTSIDE stroke drawn on SOME sides only (Radix's Blockquote rule: the
     // left side) has no outline spelling — `outline` draws all four sides at
     // one width — and lowering it to outline-color with no width drew nothing
@@ -7103,8 +7121,11 @@ function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx,
     return;
   }
   holder.strokesIncludedInLayout = false;
+  if (outsidePerSideBox(m.occ.map(o => o.node))) holder.strokeAlign = 'OUTSIDE';
   ctx.notes.push(
-    ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))
+    holder.strokeAlign === 'OUTSIDE'
+      ? `${where}: the square OUTSIDE stroke takes no layout space; strokeAlign preserves its exterior band and the existing side widths/color`
+      : ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))
       ? `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; the stroke rides the offset outline (see the strokeAlign note), which takes no layout space in CSS, and the writer sets the field back on the frame`
       : `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
   );
@@ -7120,6 +7141,7 @@ function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ct
     // @door propose.stroke-layout-without-stroke-withdrawn
     if (own.strokesIncludedInLayout === false && !maps(own).some((h) => Object.keys(h).some((c) => /^(border|outline)(-(top|right|bottom|left))?-(width|color)$/.test(c)))) {
       delete part.strokesIncludedInLayout;
+      delete part.strokeAlign;
       ctx.notes.push(
         `${name}: strokesIncludedInLayout false was captured but no stroke channel survived on this part (each refusal is named above) — the flag qualifies a stroke and is WITHDRAWN with it`,
       );
@@ -7127,6 +7149,23 @@ function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ct
     for (const [child, p] of Object.entries((parts as Record<string, Record<string, unknown>> | undefined) ?? {})) visit(child, p);
   };
   for (const [name, part] of Object.entries(anatomy)) visit(name, part);
+}
+/** The source geometry selects a candidate before its complete Part exists.
+ * Keep the old non-layout border if later ownership or paint is incompatible;
+ * only the optional new alignment is withdrawn, never the source channels. */
+function settleOutsideStrokeAlignment(contract: Record<string, unknown>, notes: string[]): void {
+  const typed = contract as unknown as Contract;
+  for (const {part, path} of walkAnatomy(typed)) {
+    if (part.strokeAlign !== 'OUTSIDE') continue;
+    const issues = outsideStrokeIssues(part);
+    const elements = path.length === 1 && part === typed.anatomy.root
+      ? [typed.semantics.element, ...Object.values(typed.semantics.elementByProp?.map ?? {})]
+      : [part.element ?? 'div'];
+    if (elements.some(element => VOID_ELEMENTS.has(element))) issues.push('outside-stroke-void-element');
+    if (!issues.length) continue;
+    delete part.strokeAlign;
+    notes.push(`${path.join('.')}: OUTSIDE per-side alignment not admitted (${issues.join('; ')}); strokeAlign withdrawn, preserving the existing non-layout inset border approximation and all source width/color channels`);
+  }
 }
 /** dump v1.36: a flag the finished contract cannot honour — inherited or
  *  unsubtractable tracking, an inline-level element, a sizing channel the
@@ -18975,6 +19014,7 @@ function proposeFromDumpFencedImpl(
         : `${origin.where}: exact source fill composition carried on the actual merged occurrence owner; legacy background-color projection removed; literal paint pipeline qualified; source-variable recreation requires separate evidence`);
     }
     for(const {node,path} of draftPaintSourceInventory)if(!consumed.has(node))throw Error(`solid-fill-composition-source-occurrence-unconsumed:${path}`);
+    settleOutsideStrokeAlignment(contract, ctx.notes);
     const paintChildren = new Map<string,Contract>();
     for(const child of [...(opts.contractsById?.values() ?? []),...childStubs]) {
       const parsed=ContractSchema.safeParse(child);
@@ -19047,6 +19087,8 @@ function proposeFromDumpFencedImpl(
       ctx.notes.push(`${where}: exact rectangular stroke dash/gap lengths retained for complete source tuples; React projects a layout-neutral SVG stroke; native-rect-stroke-pattern-unsupported remains explicit`);
     }else ctx.notes.push(`${where}: rect-stroke-pattern-source-unqualified; existing solid approximation remains, source dash styling is not qualified`);
   }
+  settleOutsideStrokeAlignment(contract, ctx.notes);
+  if (validationContract !== contract) settleOutsideStrokeAlignment(validationContract, ctx.notes);
   const parsedContract = ContractSchema.parse(validationContract);
   const jointErrors = jointTokenTableErrors(parsedContract);
   if (jointErrors.length) throw new Error(`FIGMA_JOINT_TOKEN_TABLE_UNSUPPORTED: ${jointErrors.join('; ')}`);

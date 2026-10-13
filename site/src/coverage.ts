@@ -653,7 +653,7 @@ reg("layout", "absolute-component-placement", ["part.absolutePlacementByCombinat
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
 reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
 // dump v1.35: a CAPTURED canvas fact — the part's stroke takes no layout space.
-reg("layout", "strokes-included-in-layout", ["part.strokesIncludedInLayout"]);
+reg("layout", "strokes-included-in-layout", ["part.strokesIncludedInLayout", "part.strokeAlign"]);
 reg("layout", "rectangular-stroke-pattern", [
   "part.rectStrokePatternByCombination",
   "part.rectStrokePatternByCombination.props",

@@ -432,7 +432,7 @@ export const drawsStrokeRing = (part: Part): boolean =>
 /** Container strokes paint above their children on the canvas. Void and
  * reference hosts keep their existing leaf ring; they cannot own an overlay. */
 export const drawsForegroundStroke = (part: Part, element = part.element ?? 'div'): boolean =>
-  drawsStrokeRing(part) && (Object.keys(part.parts ?? {}).length > 0 || !!part.solidFillComposition || !!part.solidFillCompositionByCombination) && !part.component && !part.shape &&
+  drawsStrokeRing(part) && (part.strokeAlign === 'OUTSIDE' || Object.keys(part.parts ?? {}).length > 0 || !!part.solidFillComposition || !!part.solidFillCompositionByCombination) && !part.component && !part.shape &&
   !['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'].includes(element);
 
 /** A normal-flow box (including text and slot wrappers) or unrotated filled path may paint above its parent's independent fill without
@@ -535,7 +535,7 @@ export function lowerStrokeRings(contract: Contract, patternedStrokeSvg = false)
           `inset calc(-1 * ${w(strokeSideVar('right'))}) 0 0 0 ${c}`,
         ]
       : [`inset 0 0 0 ${w(STROKE_WIDTH_VAR)} ${c}`];
-    literals['box-shadow'] = part.rectStrokePatternByCombination ? (hasShadow ? w(STROKE_SHADOW_VAR) : 'none') : [...layers, ...(hasShadow ? [w(STROKE_SHADOW_VAR)] : [])].join(', ');
+    literals['box-shadow'] = part.rectStrokePatternByCombination || part.strokeAlign === 'OUTSIDE' ? (hasShadow ? w(STROKE_SHADOW_VAR) : 'none') : [...layers, ...(hasShadow ? [w(STROKE_SHADOW_VAR)] : [])].join(', ');
     const tbp = part.tokensByProp;
     return {
       ...own,

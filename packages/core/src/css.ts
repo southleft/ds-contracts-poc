@@ -20,6 +20,7 @@ import {componentPlacementDomain} from './component-placement.js';
  */
 import {
   VOID_ELEMENTS,
+  outsideStrokeIssues,
   CONTRACT_STATES,
   PSEUDO_ELEMENT_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -279,7 +280,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       return rules(plan.path.length===1?`${holder}${fragments}`:`.root${fragments} ${holder}`,row.ranks);
     })];
   }).join('\n');
-  const settle = (css: string) => foregroundStrokeCss(contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id), input)+paintOrderCss;
+  const settle = (css: string) => {
+    const settled = foregroundStrokeCss(contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id), input);
+    return settled + outsideStrokeCss(input, undefined, settled) + paintOrderCss;
+  };
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   // A disabled state styles what the element actually exposes (anatomy.ts
   // disabledStateSelector): `:disabled` on a native form-control root, the
@@ -1817,6 +1821,7 @@ export function stripCanvasOnlyChannels(css: string): string {
 export function foregroundStrokeCss(css: string, contract: Contract): string {
   const rules: string[] = [];
   for (const {name,part} of walkAnatomy(contract)) {
+    if (part.strokeAlign === 'OUTSIDE') continue;
     if (part.rectStrokePatternByCombination) { rules.push('',`.${cssIdentifier(name)} { isolation: isolate; }`); continue; }
     if (!drawsForegroundStroke(part, name==='root' ? contract.semantics.element : part.element)) continue;
     const selector='.'+cssIdentifier(name);
@@ -1836,4 +1841,29 @@ export function foregroundStrokeCss(css: string, contract: Contract): string {
       '  content: "";','  display: block;','  position: absolute;','  inset: 0;','  pointer-events: none;','  border-radius: inherit;',`  z-index: ${Object.keys(part.parts??{}).length+1};`,`  box-shadow: ${ring};`,'}');
   }
   return rules.length ? css+'\n'+rules.join('\n') : css;
+}
+
+/** A square exterior band. Its expanded border box starts one side-width
+ * outside the owner, and its inner edges coincide with the owner's box.
+ * Border corners paint once; an exterior pseudo-element takes no layout space. */
+export function outsideStrokeCss(contract: Contract, selector = (name: string) => '.' + cssIdentifier(name), existingCss = ''): string {
+  const rules: string[] = [];
+  for (const {name, part, path} of walkAnatomy(contract)) {
+    if (part.strokeAlign !== 'OUTSIDE') continue;
+    const issues = outsideStrokeIssues(part);
+    if (issues.length) throw Error(issues.join('; '));
+    if ((path.length === 1 ? rootElementsOf(contract) : [part.element ?? 'div']).some(element => VOID_ELEMENTS.has(element)))
+      throw Error('outside-stroke-void-element');
+    const target = selector(name), side = (s: string) => `var(--_stroke-${s}-width)`;
+    if (existingCss.includes(target + '::after')) throw Error('outside-stroke-pseudo-element-collision:' + name);
+    rules.push('', `${target} {`, '  position: relative;', '  isolation: isolate;', '}',
+      '', `${target}::after {`, '  content: "";', '  display: block;', '  position: absolute;',
+      `  top: calc(-1 * ${side('top')});`, `  right: calc(-1 * ${side('right')});`,
+      `  bottom: calc(-1 * ${side('bottom')});`, `  left: calc(-1 * ${side('left')});`,
+      '  box-sizing: border-box;', '  pointer-events: none;', '  background: transparent;',
+      '  border-radius: 0;', '  border-style: solid;', '  border-color: var(--_stroke-color);',
+      `  border-width: ${side('top')} ${side('right')} ${side('bottom')} ${side('left')};`,
+      `  z-index: ${Object.keys(part.parts ?? {}).length + 1};`, '}');
+  }
+  return rules.join('\n');
 }

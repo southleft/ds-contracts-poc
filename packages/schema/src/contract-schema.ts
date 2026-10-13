@@ -2719,6 +2719,9 @@ export interface Part {
    *  it. A part that carries no stroke channel must not carry the flag
    *  (validateContract refuses — the hugsBelowMaxWidth discipline). */
   strokesIncludedInLayout?: false;
+  /** An explicitly OUTSIDE square-box stroke, retaining the existing per-side
+   * width/color channels without changing layout. Absent keeps prior behavior. */
+  strokeAlign?: 'OUTSIDE';
   /** Exact numeric source dash/gap lengths. React only until native qualification. */
   rectStrokePatternByCombination?: z.infer<typeof RectStrokePatternTableSchema>;
   /** Design-led round (dump v1.36) — a CAPTURED canvas fact, never
@@ -3129,6 +3132,62 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
   }
 }
 
+/** Square exterior bands have no rounded-corner or self-clipping approximation.
+ * Shared by schema parsing and direct emitter calls that receive typed objects. */
+export function outsideStrokeIssues(part: Part): string[] {
+  if (part.strokeAlign === undefined) return [];
+  const issues: string[] = [];
+  if (part.strokeAlign !== 'OUTSIDE' || part.strokesIncludedInLayout !== false ||
+      !part.layout || !['flex', 'inline-flex'].includes(part.layout.display ?? 'flex') ||
+      part.component || part.shape || part.mask || part.icon || part.meter || part.repeat ||
+      part.slot || part.content || part.text !== undefined || part.textByProp || part.overlay ||
+      part.placement || part.absoluteGeometry || part.absoluteGeometryByCombination ||
+      part.absolutePlacement || part.absolutePlacementByCombination || part.instanceAffine ||
+      part.instanceAffineByProp || part.instanceAffineLayout || part.rectStrokePatternByCombination ||
+      part.solidFillComposition || part.solidFillCompositionByCombination || part.tokensByCombination?.length)
+    issues.push('outside-stroke-requires-owned-square-layout-box');
+  const recordsOf = (part: Part) => [part.tokens, part.literals, part.declared,
+    ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+    ...tokensByPropEntries(part).flatMap(t => Object.values(t.map)),
+    ...(part.tokensByCombination ?? []).flatMap(t => t.rows.map(r => r.tokens)),
+    ...(part.literalsByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.literalsByCombination ?? []).flatMap(t => t.rows.map(r => r.literals)),
+    ...(part.statesByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.stylesWhen ?? []).map(t => t.styles)];
+  const records = recordsOf(part);
+  // Existing surfaces disagree when a later shorthand and earlier side live
+  // in different maps, or the shorthand follows a side within one map. Keep
+  // those inputs on the old projection instead of broadening this carrier.
+  const sideWidth = (key: string) => /^border-(top|right|bottom|left)-width$/.test(key);
+  const widthRecords = records.filter(r => Object.keys(r ?? {}).some(k => k === 'border-width' || sideWidth(k)));
+  if (widthRecords.some(record => record?.['border-width'] !== undefined && (
+    widthRecords.some(other => other !== record && Object.keys(other ?? {}).some(sideWidth)) ||
+    Object.keys(record).some((key, index, keys) => sideWidth(key) && index < keys.indexOf('border-width'))
+  ))) issues.push('outside-stroke-width-precedence');
+  if (part.stylesWhen?.some(row => Object.keys(row.styles).some(key => /^(border|outline)(-|$)/.test(key))))
+    issues.push('outside-stroke-conditional-style-channel');
+  // Isolation keeps the stroke above children without escaping to siblings.
+  // A descendant that needs the outside backdrop cannot share that boundary.
+  const backdropDependent = (node: Part): boolean => !!node.component || !!node.solidFillComposition ||
+    !!node.solidFillCompositionByCombination || recordsOf(node).some(record =>
+      Object.entries(record ?? {}).some(([key, value]) => key === 'mix-blend-mode' && value !== 'normal')) ||
+    Object.values(node.parts ?? {}).some(backdropDependent);
+  if (Object.values(part.parts ?? {}).some(backdropDependent))
+    issues.push('outside-stroke-backdrop-dependent-child');
+  if (!records.some(r => Object.keys(r ?? {}).some(k => /^border-(top|right|bottom|left)-width$/.test(k))))
+    issues.push('outside-stroke-requires-per-side-widths');
+  for (const record of records) for (const [key, value] of Object.entries(record ?? {})) {
+    if ((/^border.*radius$/.test(key) && !/^0(?:\.0+)?(?:px|em|rem|%)?$/.test(String(value))) ||
+        /^border(?:-(?:top|right|bottom|left))?-style$/.test(key) ||
+        /^border-(top|right|bottom|left)-color$/.test(key) || /^outline-/.test(key) ||
+        (key.startsWith('overflow') && value !== 'visible') ||
+        (key === 'position' && value !== 'relative') ||
+        ['transform', 'translate', 'rotate', 'scale', 'clip-path', 'mask', 'filter', 'mix-blend-mode'].includes(key))
+      issues.push('outside-stroke-competing-channel:' + key);
+  }
+  return [...new Set(issues)];
+}
+
 export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   z.strictObject({
     solidFillComposition: SolidFillCompositionSchema.optional(),
@@ -3195,6 +3254,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** dump v1.35: the stroke takes NO layout space — see the Part interface.
      *  Only `false` is spelled; absent keeps the space-taking border. */
     strokesIncludedInLayout: z.literal(false).optional(),
+    strokeAlign: z.literal('OUTSIDE').optional(),
     rectStrokePatternByCombination:RectStrokePatternTableSchema.optional(),
     /** dump v1.36: the text box sizes itself to its text and is a whole
      *  number of pixels wide — see the Part interface. Only the auto-width
@@ -3265,6 +3325,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
      *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart).superRefine((part, ctx) => {
+    for (const message of outsideStrokeIssues(part))
+      ctx.addIssue({code:'custom',path:['strokeAlign'],message});
     if (part.slot?.renderDefaultAnatomy && (!part.parts || !Object.keys(part.parts).length))
       ctx.addIssue({code:'custom',path:['parts'],message:'SLOT_DIRECT_DEFAULT_ANATOMY_EMPTY'});
     if(part.solidFillCompositionObservedBinding){

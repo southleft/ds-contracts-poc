@@ -5376,6 +5376,10 @@
           "type": "boolean",
           "const": false
         },
+        "strokeAlign": {
+          "type": "string",
+          "const": "OUTSIDE"
+        },
         "rectStrokePatternByCombination": {
           "type": "object",
           "properties": {

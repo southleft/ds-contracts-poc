@@ -15,6 +15,7 @@ import {solidFillCompositionRules} from './css.js';
  */
 import {
   PropSchema,
+  outsideStrokeIssues,
   callerContentGroups,
   defaultSlotFamilyIssue,
   filledPathIssue,
@@ -182,6 +183,9 @@ export function validateContract(
     dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
   const seen = new Set<string>();
   for (const { name, path: p, part } of walkAnatomy(contract)) {
+    errors.push(...outsideStrokeIssues(part).map(issue => `${contract.id}: part "${name}" ${issue}`));
+    if (part.strokeAlign === 'OUTSIDE' && (p.length === 1 ? rootElementsOf(contract) : [part.element ?? 'div']).some(element => VOID_ELEMENTS.has(element)))
+      errors.push(`${contract.id}: part "${name}" outside-stroke-void-element`);
     try {solidFillPartBindingPlan(part);} catch(error) {errors.push(`${contract.id}: part "${name}" ${String(error)}`);}
     if (seen.has(name)) errors.push(`${contract.id}: duplicate anatomy part name "${name}"`);
     seen.add(name);

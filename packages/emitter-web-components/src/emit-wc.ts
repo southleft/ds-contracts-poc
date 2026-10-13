@@ -86,6 +86,7 @@ import {
   enumProps,
   finishStylesheet,
   generateCss,
+  outsideStrokeCss,
   lowerStrokeRings,
   settleStrokeShadows,
   stateSelectorsFor,
@@ -809,7 +810,8 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
       lines.push(...ranks(rootWithCombo(Object.entries(row.selection))+suffix,row.ranks));
   }
   const finished = finishStylesheet(lines.join('\n'));
-  return contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
+  const settled = contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
+  return settled + outsideStrokeCss(input, name => name === 'root' ? ROOT_SEL : partSel(name), settled);
 }
 
 // ---------------------------------------------------------------------------

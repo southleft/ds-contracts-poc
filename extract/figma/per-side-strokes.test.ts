@@ -17,6 +17,7 @@ import { proposeFromDump } from '../../core/propose-figma.js';
 import { generateCss } from '../../core/emit-react.js';
 import { tokenCorpusFromJson } from '../../core/token-corpus.js';
 import type { DumpNode, DumpSet } from './types.js';
+import type { Contract } from '../../scripts/contract-schema.js';
 
 type Sides = { top?: unknown; right?: unknown; bottom?: unknown; left?: unknown };
 type HeaderSpec = { sides?: Sides; strokeWeight?: number; type?: string; strokes?: boolean };
@@ -205,4 +206,73 @@ test('plugin capture preserves mixed corner radii and refuses smoothing', async 
   await run(`figma.currentPage.findOne(n=>n.name==='CornerBox').cornerSmoothing=.5;`);
   const smooth=await run(source);assert.equal(smooth.CornerBox.variants[0].cornerRadii,undefined);
   assert(smooth._degradations.some((d:any)=>d.code==='radii-nonuniform'));
+});
+
+
+test('raw square OUTSIDE per-side facts preserve source size and alignment through proposal, while other alignments and geometry keep their previous route', () => {
+  // Dimensions and left weights from real 38x16/138x60 source boxes. This is
+  // a generic rule fixture: no component name selects the conversion path.
+  const source = (extra: Record<string, unknown> = {}) => ({id:'outside-set', name:'ExteriorRule', type:'COMPONENT_SET',
+    children: [[38,16,4],[138,60,15]].map(([width,height,left],i) => ({
+      id:`outside-${i}`,name:`Size=${i + 1}`,type:'COMPONENT',layoutMode:'HORIZONTAL',
+      primaryAxisSizingMode:'FIXED',counterAxisSizingMode:'FIXED',paddingLeft:i?24:8,
+      absoluteBoundingBox:{x:0,y:i*100,width,height},strokes:SOLID(0,0.24313725531101227,1),
+      strokeAlign:'OUTSIDE',strokeWeight:0,individualStrokeWeights:{top:0,right:0,bottom:0,left},
+      children:[],...extra,
+    }))});
+  const proposal = (extra: Record<string, unknown> = {}) => {
+    const result = mapRestToDump({nodes:{'outside-set':{document:source(extra)}}} as never);
+    return {mapped:result, proposal:propose((result.dump as unknown as Record<string,DumpSet>).ExteriorRule)};
+  };
+  const {mapped:read,proposal:result}=proposal();
+  const root=(result.contract as unknown as Contract).anatomy.root;
+  assert.equal(root.strokeAlign,'OUTSIDE');
+  assert.equal(root.strokesIncludedInLayout,false);
+  assert.deepEqual((read.dump as unknown as Record<string,DumpSet>).ExteriorRule.variants.map(v=>v.bbox),
+    [{width:38,height:16},{width:138,height:60}]);
+  assert.match(JSON.stringify(root), /border-left-width/);
+  assert.match(JSON.stringify(root), /15px/);
+  const inventory = new Set([
+    ...Array.from(JSON.stringify(result.contract).matchAll(/\{([a-z0-9.-]+)\}/gi), m => m[1]),
+    ...(result.mintedTokens?.entries ?? []).map(entry => entry.ref.slice(1, -1)),
+  ]);
+  const errors: string[] = [];
+  const css = generateCss(result.contract as never, inventory, errors);
+  assert.deepEqual(errors, []);
+  assert.match(css, /--_stroke-left-width: 15px/);
+  assert.ok(result.notes.some(note=>/existing mapper dash\/join\/corner degradation receipts remain unchanged/.test(note)));
+  for (const extra of [{strokeAlign:'INSIDE'},{strokeAlign:'CENTER'},{strokesIncludedInLayout:true},
+    {clipsContent:true},{cornerRadius:8},{rectangleCornerRadii:[8,8,0,0]}]) {
+    assert.equal((proposal(extra).proposal.contract as unknown as Contract).anatomy.root.strokeAlign,undefined,JSON.stringify(extra));
+  }
+  // Dashed-source degradation remains visible. The carried alignment flag
+  // never upgrades absent dash/join/corner vocabulary into a fidelity claim.
+  const dashed=proposal({strokeDashes:[3,2]});
+  assert.ok(dashed.mapped.report.degradations.some(row=>row.code==='stroke-style-unsupported'));
+});
+
+
+test('a later component child withdraws only the new OUTSIDE alignment and retains the old non-layout border proposal', () => {
+  const document = restSet('Variant', [{sides:HEADER_RULE,strokeWeight:0},{sides:HEADER_RULE,strokeWeight:0}]);
+  for (const [i, variant] of document.children.entries()) {
+    const header = variant.children[0] as any;
+    header.strokeAlign = 'OUTSIDE'; header.strokesIncludedInLayout = false;
+    header.children = [{id:`reference-${i}`,name:'copy',type:'INSTANCE',componentId:'body-main',
+      layoutMode:'HORIZONTAL',absoluteBoundingBox:{x:0,y:0,width:16,height:16},children:[]}];
+  }
+  const response = {nodes:{'1:1':{document,
+    components:{'body-main':{name:'Variant=Default',key:'body-main-key',componentSetId:'body-set'}},
+    componentSets:{'body-set':{name:'Copy',key:'body-set-key'}}}}};
+  const mapped = mapRestToDump(response as never);
+  const set = (mapped.dump as unknown as Record<string,DumpSet>).Tabs;
+  const result = propose(set), part = headerPart(result.contract as never);
+  assert.equal(part.strokeAlign,undefined);
+  assert.equal(part.strokesIncludedInLayout,false);
+  assert.deepEqual(part.literals,WIDTHS);
+  assert.ok(Object.values(part.parts as Record<string,any>).some(child=>child.component));
+  assert.ok(result.notes.some(note=>/outside-stroke-backdrop-dependent-child.*strokeAlign withdrawn/.test(note)));
+  // The same owned channels with the old inward alignment are unchanged.
+  const inside = structuredClone(set);
+  for (const variant of inside.variants) variant.children![0].strokeAlign='INSIDE';
+  assert.deepEqual(part,headerPart(propose(inside).contract as never));
 });
