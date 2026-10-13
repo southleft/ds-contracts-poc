@@ -245,3 +245,33 @@ test('an observed in-flow padding-box carrier supplies spacing without hiding ca
   const wrong=structuredClone(flow);mutate(wrong);assert.equal(nativeBackgroundFlow(host,nodesOf(host,wrong,content)),null);
  }
 });
+
+
+test('native flow recognition preserves independently rounded fractional radius and inset',()=>{
+ const inset=Math.fround(0.3),outerRadius=Math.fround(8.2),innerRadius=Math.fround(8.2-0.3);
+ const corners=(radius:number)=>({cornerRadius:radius,topLeftRadius:radius,topRightRadius:radius,bottomLeftRadius:radius,bottomRightRadius:radius});
+ const host=root({width:116,fills:[],itemSpacing:0,paddingLeft:0,paddingRight:0,primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'FIXED',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',strokesIncludedInLayout:true,...corners(outerRadius),
+  strokeTopWeight:inset,strokeRightWeight:inset,strokeBottomWeight:inset,strokeLeftWeight:inset},['flow']);
+ const flow:NativeNode={id:'flow',type:'FRAME',parentId:'root',childIds:['slot'],values:{x:inset,y:inset,width:Math.fround(116-2*inset),height:Math.fround(36-2*inset),
+  relativeTransform:[[1,0,inset],[0,1,inset]],layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',primaryAxisSizingMode:'AUTO',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL',...corners(innerRadius),
+  visible:true,opacity:1,clipsContent:false,strokes:[],effects:[],fills:[solid(23,23,23)],itemSpacing:6,paddingTop:0,paddingRight:10,paddingBottom:0,paddingLeft:10}};
+ const content:NativeNode={...slot,parentId:'flow',values:{layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL'}};
+ // The source numbers and each native scalar were rounded independently.
+ assert.notEqual(innerRadius,outerRadius-inset);assert.notEqual(innerRadius,Math.fround(outerRadius-inset));
+ assert.equal(Math.fround(innerRadius+inset),outerRadius);
+ const nodes=nodesOf(host,flow,content);
+ assert.equal(nativeBackgroundFlow(host,nodes)?.id,'flow');
+ const facts=nativeRootFacts(host,nodes,new Map(),fixedHeight);
+ assert.equal(facts.content,'empty-slot');assert.equal(facts.padding.left,10);assert.equal(facts.gap.px,6);assert.equal(facts.background.kind,'solid');
+ const source=sourceRootFacts(style({'background-clip':'padding-box',
+  'border-top-width':'0.3px','border-right-width':'0.3px','border-bottom-width':'0.3px','border-left-width':'0.3px',
+  'border-top-left-radius':'8.2px','border-top-right-radius':'8.2px','border-bottom-left-radius':'8.2px','border-bottom-right-radius':'8.2px'}),sizes('auto','fixed'));
+ const checks=verdicts(source,facts);
+ for(const kind of ['background','gap','padding-left','border-width-top','radius-top-left'] as const)assert.equal(checks[kind],'match',kind);
+ const label:NativeNode={id:'label',type:'TEXT',parentId:'slot',values:{characters:'Save changes'}};
+ assert.equal(nativeRootFacts(host,nodesOf(host,flow,{...content,childIds:['label']},label),new Map(),fixedHeight).content,'has-content');
+ const damaged=structuredClone(flow);Object.assign(damaged.values,corners(Math.fround(7.901)));
+ assert.equal(nativeBackgroundFlow(host,nodesOf(host,damaged,content)),null,'inconsistent observed inner/outer radii remain refused');
+});

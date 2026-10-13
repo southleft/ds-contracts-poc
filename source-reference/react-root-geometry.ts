@@ -263,7 +263,9 @@ export function nativeBackgroundFlow(root:NativeNode,nodes:Map<string,NativeNode
   if(!slot || slot.type!=='SLOT' || slot.parentId!==carrier.id || slot.values.layoutMode!=='HORIZONTAL' ||
       slot.values.layoutSizingHorizontal!=='HUG' || slot.values.layoutPositioning!=='AUTO' ||
       slot.values.layoutSizingVertical!==carrier.values.layoutSizingVertical)return null;
-  const inset=v.strokeTopWeight,radius=Math.max(0,v.cornerRadius-inset);
+  // Recognition has no authored NodeSpec: retain the observed inner radius
+  // and check its forward outer relation instead of subtracting rounded facts.
+  const inset=v.strokeTopWeight,radius=carrier.values.cornerRadius;
   if(!Number.isFinite(inset)||inset<0||!Number.isFinite(radius)||
       !nativeRootSlotFlowGeometry({inset,radius},v,carrier.values))return null;
   return carrier;

@@ -201,3 +201,38 @@ test('flow geometry checks the rounded outer extent of all seven observed empty 
  assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},filledParent,filledCarrier),true);
  assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},filledParent,{...filledCarrier,width:114.01000213623047}),false);
 });
+
+
+test('flow radius uses authored-to-observed float32 direction and preserves clamping',()=>{
+ const fixture=(outerRadius:number,inset:number)=>{
+  const radius=Math.max(0,outerRadius-inset),observedInset=Math.fround(inset),observedOuter=Math.fround(outerRadius),observedInner=Math.fround(radius);
+  const parent={width:116,height:36,layoutMode:'HORIZONTAL',layoutSizingHorizontal:'HUG',primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'FIXED',
+   primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',strokesIncludedInLayout:true,strokeAlign:'INSIDE',strokeTopWeight:observedInset,strokeRightWeight:observedInset,
+   strokeBottomWeight:observedInset,strokeLeftWeight:observedInset,paddingTop:0,paddingRight:0,paddingBottom:0,paddingLeft:0,itemSpacing:0,
+   cornerRadius:observedOuter,topLeftRadius:observedOuter,topRightRadius:observedOuter,bottomLeftRadius:observedOuter,bottomRightRadius:observedOuter};
+  const carrier={width:Math.fround(116-2*observedInset),height:Math.fround(36-2*observedInset),x:observedInset,y:observedInset,
+   relativeTransform:[[1,0,observedInset],[0,1,observedInset]],layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL',
+   primaryAxisSizingMode:'AUTO',primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',cornerRadius:observedInner,topLeftRadius:observedInner,
+   topRightRadius:observedInner,bottomLeftRadius:observedInner,bottomRightRadius:observedInner,visible:true,opacity:1,clipsContent:false,strokes:[],effects:[]};
+  return {geometry:{inset,radius},parent,carrier};
+ };
+ // These are authored dimensions with independently rounded native scalars,
+ // not new live observations. The former inverse comparison rejects them.
+ for(const [outer,inset] of [[8.2,1],[8.2,0.3]]){
+  const f=fixture(outer,inset),reverse=Math.max(0,f.parent.cornerRadius-inset);
+  assert.notEqual(f.geometry.radius,reverse);assert.notEqual(f.geometry.radius,Math.fround(reverse));
+  assert.equal(nativeRootSlotFlowGeometry(f.geometry,f.parent,f.carrier),true,JSON.stringify({outer,inset}));
+ }
+ for(const [outer,inset] of [[0,1],[0.25,1],[0.3,0.3]]){
+  const f=fixture(outer,inset);assert.equal(f.geometry.radius,0);
+  assert.equal(nativeRootSlotFlowGeometry(f.geometry,f.parent,f.carrier),true,JSON.stringify({outer,inset}));
+ }
+ const positive=fixture(8.2,1);
+ const corners=(value:number)=>({cornerRadius:value,topLeftRadius:value,topRightRadius:value,bottomLeftRadius:value,bottomRightRadius:value});
+ assert.equal(nativeRootSlotFlowGeometry(positive.geometry,{...positive.parent,...corners(Math.fround(8.2001))},positive.carrier),false);
+ assert.equal(nativeRootSlotFlowGeometry(positive.geometry,positive.parent,{...positive.carrier,...corners(Math.fround(7.2001))}),false);
+ assert.equal(nativeRootSlotFlowGeometry(positive.geometry,positive.parent,{...positive.carrier,width:114.01000213623047}),false);
+ const clamped=fixture(0.3,0.3);
+ assert.equal(nativeRootSlotFlowGeometry(clamped.geometry,{...clamped.parent,...corners(Math.fround(0.30001))},clamped.carrier),false);
+ assert.equal(nativeRootSlotFlowGeometry(clamped.geometry,clamped.parent,{...clamped.carrier,...corners(Math.fround(0.0001))}),false);
+});

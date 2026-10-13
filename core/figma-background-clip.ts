@@ -45,12 +45,18 @@ export function rootSlotFlowSpecValid(parent:NodeSpec|undefined, carrier:NodeSpe
 export function nativeRootSlotFlowGeometry(geometry:{inset:number;radius:number}, parent:Record<string,any>, carrier:Record<string,any>):boolean {
   const eq=(actual:unknown,expected:number)=>actual===expected || actual===Math.fround(expected);
   const inset=geometry.inset, radius=geometry.radius;
+  // Compare observed values to authored geometry in the same direction as
+  // every other scalar. A positive inner radius recovers the authored outer
+  // radius; zero only establishes its clamped range, including the rounded
+  // float32 representation of the upper boundary.
+  const outerRadiusMatches=radius>0 ? eq(parent.cornerRadius,radius+inset)
+    : parent.cornerRadius<=inset || eq(parent.cornerRadius,inset);
   return [inset,radius,parent.width,parent.height,parent.cornerRadius,carrier.width,carrier.height].every(n=>Number.isFinite(n)&&n>=0) &&
     parent.layoutMode==='HORIZONTAL' && parent.layoutSizingHorizontal==='HUG' && parent.primaryAxisSizingMode==='AUTO' &&
     ['AUTO','FIXED'].includes(parent.counterAxisSizingMode) &&
     parent.strokesIncludedInLayout===true && parent.strokeAlign==='INSIDE' &&
     ['Top','Right','Bottom','Left'].every(side=>eq(parent['stroke'+side+'Weight'],inset) && parent['padding'+side]===0) &&
-    parent.itemSpacing===0 && eq(radius,Math.max(0,parent.cornerRadius-inset)) &&
+    parent.itemSpacing===0 && outerRadiusMatches &&
     ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'].every(key=>eq(parent[key],parent.cornerRadius)) &&
     carrier.layoutMode==='HORIZONTAL' && carrier.layoutPositioning==='AUTO' && carrier.layoutSizingHorizontal==='HUG' &&
     carrier.primaryAxisSizingMode==='AUTO' && carrier.layoutSizingVertical===(parent.counterAxisSizingMode==='AUTO'?'HUG':'FILL') &&
