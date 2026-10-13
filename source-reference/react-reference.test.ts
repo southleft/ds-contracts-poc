@@ -15,6 +15,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { createServer } from "node:http";
 import { runInNewContext } from "node:vm";
+import { Readable } from 'node:stream';
+import {evidenceReadOnce,assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 import {
   buildReactReference,
   createReactReferenceService,
@@ -65,6 +67,96 @@ function fixture() {
     );
   return { root, put };
 }
+
+test('explicit minimal start and retry acknowledge only successful actions; legacy callers retain the full listing', async t => {
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-minimal-delivery-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const id='10000000-0000-4000-8000-000000000008';let referenceId='',refusal='',history=false;
+  const calls:string[]=[];
+  let state:{phase:string;pendingPhase?:string}={phase:'prepared'};
+  const action=(name:string)=>{calls.push(name);if(refusal)throw Error(refusal);if(name==='retry')state={phase:'awaiting-native-result',pendingPhase:'component-readback'};};
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{
+    reactIdentity:(operationId:string)=>{assert.equal(operationId,id);return {referenceId,authored:false};},
+    reactFamilyRequest:()=>null,
+    deliveryState:(operationId:string)=>{assert.equal(operationId,id);calls.push('state');return state;},
+    withReadSnapshot:(read:()=>unknown)=>read(),
+    listReact:()=>{calls.push('list');return [];},listReactMoved:()=>{calls.push('moved');return [];},
+  },transport:{start:()=>action('start'),retryObservation:()=>action('retry')},
+    updateJobs:{updateHistory:()=>history?[{}]:[]}} as any));
+  t.after(()=>handle.close());
+  const call=async(route:string,prefer?:string,body?:string,method='POST')=>{
+    const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method,url:'/'+route,
+      headers:{host:'localhost:5181',...(prefer?{prefer}:{}),...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
+    let status=0,text='';const headers:Record<string,unknown>={};
+    await handle(req as any,{set statusCode(value:number){status=value;},setHeader(k:string,v:unknown){headers[k.toLowerCase()]=v;},end(value:string){text=value;}} as any,route);
+    return {status,headers,value:JSON.parse(text)};
+  };
+  referenceId=(await call('react')).value.id;calls.length=0;
+  const route=`react/${referenceId}/native-operation/${id}`;
+  for(const mode of ['start','retry-observation']){
+    calls.length=0;const response=await call(route+'/'+mode,'return=minimal');
+    assert.equal(response.status,200);assert.deepEqual(response.value,{operationId:id,pending:true});
+    assert.equal(response.headers['preference-applied'],'return=minimal');assert.equal(response.headers['cache-control'],'no-store');
+    assert.deepEqual(calls,[mode==='start'?'start':'retry','state'],'the action runs before the small journal read, without a dashboard listing');
+  }
+  for(const prefer of [undefined,'return=representation','return=minimal, wait=1']){
+    calls.length=0;const response=await call(route+'/start',prefer);
+    assert.equal(response.status,200);assert.deepEqual(response.value.operations,[]);assert.deepEqual(response.value.moved,[]);
+    assert.equal(response.headers['preference-applied'],undefined);assert.equal(response.value.operationId,undefined);
+    assert(calls.includes('list')&&calls.includes('moved'),'legacy full response is retained');
+  }
+  for(const mode of ['start','retry-observation']){
+    refusal='native-operation-source-evidence-unavailable';calls.length=0;
+    const response=await call(route+'/'+mode,'return=minimal');assert.equal(response.status,409);
+    assert.equal(response.value.reason,refusal);assert.equal(response.headers['preference-applied'],undefined);
+    assert.deepEqual(calls,[mode==='start'?'start':'retry'],'refusal cannot be turned into an acknowledgement');
+  }
+  refusal='';calls.length=0;
+  assert.equal((await call(route+'/start','return=minimal','{}')).status,409);assert.deepEqual(calls,[],'body rejection still precedes the action');
+  history=true;assert.equal((await call(route+'/retry-observation','return=minimal')).status,409);assert.deepEqual(calls,[],'superseded retry still refuses');
+  history=false;referenceId='b'.repeat(64);assert.equal((await call(route+'/start','return=minimal')).status,409);assert.deepEqual(calls,[],'reference mismatch still refuses');
+});
+
+test('comparison preflight reuses reads only within one request and retains refusal guards', async t => {
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-comparison-preflight-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const id='10000000-0000-4000-8000-000000000008';
+  let referenceId='',generation=1,reads=0,scopes=0;
+  const observed:number[]=[];
+  const checked=()=>evidenceReadOnce('comparison-preflight-control',repo,()=>{reads++;return {generation};});
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{
+    withReadSnapshot:(read:()=>unknown)=>{scopes++;return read();},
+    reactFamilyRequest:()=>{observed.push(checked().generation);return null;},
+    reactEffectiveRequest:()=>{
+      observed.push(checked().generation);
+      assert.throws(assertOutsideEvidenceSnapshot,/write-during-evidence-read-snapshot/);
+      // Stop before selecting a source; this control grants no fake authority.
+      throw Error('react-preflight-control-refused');
+    },
+  }} as any));
+  t.after(()=>handle.close());
+  const call=async(route:string,body?:string)=>{
+    const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method:'POST',url:'/'+route,
+      headers:{host:'localhost:5181',...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
+    let status=0,text='';
+    await handle(req as any,{set statusCode(value:number){status=value;},setHeader(){},end(value:string){text=value;}} as any,route);
+    return {status,value:JSON.parse(text)};
+  };
+  referenceId=(await call('react')).value.id;
+  const route=`react/${referenceId}/native-operation/${id}/compare-case/button`;
+  for(const expected of [1,2]){
+    generation=expected;
+    const response=await call(route);
+    assert.equal(response.status,409);assert.equal(response.value.reason,'react-preflight-control-refused');
+    assert.deepEqual(observed.slice(-2),[expected,expected]);
+    assert.equal(reads,expected,'repeated reads share one check, next request checks fresh');
+    assert.equal(scopes,expected);assert.doesNotThrow(assertOutsideEvidenceSnapshot,'scope ends on refusal');
+  }
+  assert.equal((await call(route,'{}')).status,409);
+  assert.equal((await call(route.replace(referenceId,'b'.repeat(64)))).status,409);
+  assert.equal(reads,2,'body and reference guards refuse before preflight');
+  assert.equal(scopes,2);assert.doesNotThrow(assertOutsideEvidenceSnapshot);
+});
 
 test("reference bytes are deterministic, source changes invalidate them, and raw-text literals cannot escape the document", async () => {
   const { root, put } = fixture();

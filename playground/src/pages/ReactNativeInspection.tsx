@@ -3,7 +3,7 @@ import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { nativePollNeedsRefresh } from './native-inspection-poll';
+import { nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -52,7 +52,8 @@ function updateProblem(problem: string) {
   return problem;
 }
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api' | 'authored' | 'authored-initial' | 'authored-state-api'; sourceRevisions?: string[]; successionProblem?: string;
+  kind: 'family' | 'root' | 'comparison' | 'initial' | 'nested' | 'state-api' | 'authored' | 'authored-initial' | 'authored-state-api'; sourceRevisions?: string[]; successionProblem?: string;
+  family?: {axis:{prop:string;values:string[];baseValue:string};members:Array<{caseId:string;value:string;variantName:string}>};
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
     tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
@@ -73,6 +74,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
   const [moved, setMoved] = useState<MovedOperation[]>([]), [reviewed, setReviewed] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [familyAxis,setFamilyAxis]=useState('');
+  const [familyCases,setFamilyCases]=useState<string[]>([selectedCase]);
+  useEffect(()=>{setFamilyCases([selectedCase]);setFamilyAxis('');},[referenceId,selectedCase]);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const [measurements, setMeasurements] = useState<Record<string, RecordedNativeMeasurement>>({});
@@ -82,8 +86,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [inspectionSources, setInspectionSources] = useState<Record<string, boolean>>({});
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
+  const activeRoot = useRef(root);activeRoot.current=root;
   const latest = useRef({rows, busy});
   const fullReadAt = useRef(0);
+  const progressDeferredAt = useRef(0);
+  const deliveryRevision = useRef(0);
   latest.current = {rows, busy};
   async function reviewMeasurement(id: string) {
     setBusy(true); setError('');
@@ -104,11 +111,17 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           const response = await fetch(`${root}/${route}`);
           if (!response.ok) throw Error('Native progress unavailable.');
           return readSourceResponse(response);
-        }, Date.now() - fullReadAt.current >= 60_000)) return;
+        }, Date.now() - Math.max(fullReadAt.current,progressDeferredAt.current) >= 60_000)) return;
         if (stopped) return;
         setLoading(true);
-        const response = await fetch(`${root}/native`), result = await readSourceResponse(response);
+        const current = await readCurrentNativeInspection(async () => {
+          const response = await fetch(`${root}/native`);
+          return {response, result: await readSourceResponse(response)};
+        }, () => deliveryRevision.current);
+        if (!current || stopped || current.revision !== deliveryRevision.current) return;
+        const {response,result} = current.value;
         fullReadAt.current = Date.now();
+        progressDeferredAt.current = 0;
         if (!response.ok) throw Error(result.error);
         if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setInspectionSourceAvailable(result.inspectionSourceAvailable === true); setInspectionSources(result.inspectionSources ?? {}); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
@@ -142,12 +155,34 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
     finally { setBusy(false); }
   }
+  async function prepareFamily() {
+    setBusy(true);setError('');
+    try {
+      const response=await fetch(`${root}/native-family`,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({version:1,kind:'react-observed-one-axis-family',axis:familyAxis,baseCaseId:selectedCase,caseIds:familyCases})});
+      const result=await readSourceResponse(response);
+      if(!response.ok)throw Error(result.reason?`${result.error} Refused by: ${result.reason}`:result.error);
+      refreshObservations();
+    }catch(e){setError(e instanceof Error?e.message:String(e));}finally{setBusy(false);}
+  }
   async function action(route: string, id?: string) {
     setBusy(true); setError('');
+    const compact = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/(start|retry-observation)$/.exec(route);
     try {
-      const response = await fetch(`${root}/${route}`, { method: 'POST' }), result = await readSourceResponse(response);
+      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
       if (!response.ok) throw Error(['native-update-caller-context-unavailable-before-refresh','react-authored-native-action-unqualified'].includes(result.reason)
         ? updateProblem(result.reason) : result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
+      if (compact) {
+        if (activeRoot.current !== root) return;
+        const pending = nativeDeliveryPendingFromAcknowledgement(result,compact[1]);
+        deliveryRevision.current++;
+        progressDeferredAt.current = pending ? Date.now() : 0;
+        // Keep all verified source/structure fields from the last full read.
+        setRows(old => old.map(row => row.operation.id === compact[1]
+          ? {...row,connection:{...row.connection,started:true,finished:!pending}} : row));
+        if (!pending) refreshObservations();
+        return;
+      }
       if (result.connection && id) {
         setCodes(old => ({ ...old, [id]: result.connection }));
         const refreshed = await fetch(`${root}/native`), snapshot = await readSourceResponse(refreshed);
@@ -195,6 +230,19 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       Prepare {selectedCase} for Figma
     </button>}
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}</>}
+    {!authoredReady && <details>
+      <summary>Prepare an observed component family</summary>
+      <p>Select saved cases that vary one explicit string property. All other props, children and surrounding context must match. Only these selected values are covered.</p>
+      <label>Property name <input value={familyAxis} disabled={busy} onChange={event=>setFamilyAxis(event.target.value)} /></label>
+      <fieldset disabled={busy}><legend>Saved cases</legend>
+        {(ownership?.rows??[]).filter(row=>row.matched&&!row.problems.length&&row.rootMatrix?.draft?.status==='native-compiled').map(row=><label key={row.id} style={{display:'block'}}>
+          <input type="checkbox" checked={familyCases.includes(row.id)} disabled={row.id===selectedCase}
+            onChange={event=>setFamilyCases(old=>event.target.checked?[...old,row.id]:old.filter(id=>id!==row.id))} /> {row.id}
+        </label>)}
+      </fieldset>
+      <button type="button" disabled={busy||loading||!ready||!familyAxis.trim()||familyCases.length<2||familyCases.length>32}
+        onClick={()=>void prepareFamily()}>Prepare selected family for Figma</button>
+    </details>}
     {authoredReady && <section aria-label="Observed composition for Figma">
       <h4>Observed composition</h4>
       <p>Prepare the component with its authored children as editable native components at the captured inputs. Other states, behavior, visual fidelity and later updates still need qualification.</p>
@@ -246,7 +294,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
         {row.successionProblem && <p role="alert">This operation's source-succession record cannot be read, so its updates are refused until that is repaired. <code>{row.successionProblem}</code></p>}
         {(row.sourceRevisions?.length ?? 0) > 1 && <p>This operation has followed {row.sourceRevisions!.length} source observations ({row.sourceRevisions!.map(r => r.slice(0, 8)).join(' → ')}). Its creation evidence belongs to the first; changes since then arrive only as reviewed updates to the same nodes. Content and comparison inspections recorded against an earlier revision are unavailable here.</p>}
-        {!comparison && row.kind !== 'authored' && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
+        {!comparison && row.kind !== 'authored' && row.kind !== 'family' && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {reviewed[id] && <p role="status">{reviewed[id]}</p>}
           {orderedUpdates.map(update => <div key={update.id}>
@@ -369,7 +417,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {written && <p>This operation has a written correction. Its own reader compares the canvas with the creation plan, so reading it again would call the corrected nodes wrong and strand later updates. Use <em>Inspect update again</em> or <em>Read design changes from the canvas</em> on the latest correction instead.</p>}
         {!corrected && !callerCorrection && !written && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
-        {!corrected && !written && ['root', 'initial', 'state-api'].includes(row.kind) && op.phase === 'component-structure-observed' && !op.sizingObservation && <button type="button" disabled={busy || !row.connection.paired}
+        {!corrected && !written && ['family','root', 'initial', 'state-api'].includes(row.kind) && op.phase === 'component-structure-observed' && !op.sizingObservation && <button type="button" disabled={busy || !row.connection.paired}
           onClick={() => void action(`native-operation/${id}/inspect-sizing`)}>Inspect sizing details</button>}
         {op.sizingObservation && <p>Sizing details: {op.sizingObservation.status} for {op.sizingObservation.nodeCount} native layers. This read does not change the design; each proposed size update still requires its own checks.</p>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
@@ -386,6 +434,16 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                   : reason.replace(/^native-(?:source-observation|contract-observation|contract-comparison)-/, '').replaceAll('-', ' ')}
             <details><summary>Diagnostic name</summary><code>{reason}</code></details>
           </li>)}</ul>
+        </section>}
+        {row.kind==='family' && row.family && <section aria-label="Observed family members">
+          <p>{row.family.axis.prop}: {row.family.axis.values.join(', ')}. Other values, combinations and contexts are unqualified. Each member needs its own comparison.</p>
+          {row.family.members.map(member=>{
+            const comparisonRow=rows.find(item=>item.kind==='comparison'&&item.parentOperationId===id&&item.caseId===member.caseId);
+            return <p key={member.caseId}><span>{member.caseId} · {member.variantName} </span><button type="button"
+              disabled={busy||!op.sourceCurrent||op.phase!=='component-structure-observed'||!!comparisonRow}
+              onClick={()=>void action(`native-operation/${id}/compare-case/${member.caseId}`)}>
+                {comparisonRow?'Comparison saved':'Prepare member comparison'}</button></p>;
+          })}
         </section>}
         {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !(op.sourceCurrent || corrected) || row.content?.phase === 'running'}
           onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>}

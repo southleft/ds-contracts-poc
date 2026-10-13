@@ -92,7 +92,7 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
      const projected=projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin).roots.find(r=>r.instanceId===effects.instanceId);
      if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-variants-content-unqualified');
      const painted=reactPropertyPaintedRoot(snap,row,linked.roots[0].path);
-     textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children});
+     textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children,actualProps:instance.props});
      const root={...painted,nodes:[],style:Object.fromEntries(Object.entries(painted.style).map(([k,v])=>[k,normalizeValue(v)]))};
      if(painted.style['font-family']!==linked.roots[0].observation.style['font-family'])
       result.lowerings.push({value:key,channel:'font-family',from:linked.roots[0].observation.style['font-family'],to:painted.style['font-family'],reason:'painted-font-family'});

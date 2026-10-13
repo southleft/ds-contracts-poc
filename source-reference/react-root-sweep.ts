@@ -9,7 +9,16 @@ import {reactRootStyleExclusion,type ReactRootVisual} from './react-root-visual.
 export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,roots:Map<string,CapturedNode>,sizingChannels:Set<string>=new Set()){
  const enumeration=enumerate(axes,[],256,baseAxisValues);
  if(enumeration.policy!=='full-cartesian'||roots.size!==enumeration.combos.length||enumeration.combos.some(c=>!roots.has(c.key)))throw Error('react-root-sweep-incomplete');
- const captures:Capture[]=enumeration.combos.map(c=>({combo:c.key,interaction:'default',root:roots.get(c.key)!}));
+ // CSS normal adds no tracking. Normalize only when a mixed numeric plane
+ // needs the common finite-px channel; uniform legacy output remains unchanged.
+ const tracking=[...roots.values()].map(root=>root.style['letter-spacing']);
+ const mixedTracking=tracking.includes('normal')&&tracking.some(value=>
+  typeof value==='string'&&/^-?(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value));
+ const captures:Capture[]=enumeration.combos.map(c=>{
+  const root=roots.get(c.key)!;
+  return {combo:c.key,interaction:'default',root:mixedTracking&&root.style['letter-spacing']==='normal'
+   ? {...root,style:{...root.style,'letter-spacing':'0px'}} : root};
+ });
  const byKey=new Map(captures.map(c=>[c.combo+'__default',c])),alignedByKey=new Map(captures.map(c=>[c.combo+'__default',[{path:'',sig:'root',partName:'root',node:c.root}] as FlatEl[]]));
  const baseCombo=enumeration.combos.find(c=>axes.every(a=>c.axisValues[a.prop]===baseAxisValues[a.prop]));if(!baseCombo)throw Error('react-root-sweep-base-missing');
  const base=byKey.get(baseCombo.key+'__default')!,baseFlat=alignedByKey.get(baseCombo.key+'__default')!;

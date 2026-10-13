@@ -418,3 +418,16 @@ export function loadReactCohort(sourceRoot: string): ReactCohort {
   if (stat.size > maxBytes) refuse("too-large");
   return parseReactCases(readFileSync(file), file);
 }
+
+/** The exact declared caller tree, for grouping already-observed cases. This
+ * does not create an entry or mutate the declaration/reference identity. */
+export function readReactDeclaredCaseMount(cohort:ReactCohort,caseId:string):ReactCaseElement {
+  if(!cohort.declared||!cohort.declaration)throw Error('react-family-declared-source-required');
+  const bytes=readFileSync(cohort.declaration.file);
+  if(createHash('sha256').update(bytes).digest('hex')!==cohort.declaration.sha256)throw Error('react-family-declaration-changed');
+  const parsed=JSON.parse(bytes.toString()),cases:Array<{id:string;mount:ReactCaseElement}>=parsed.cases.map((c:{id:string;mount:unknown})=>({id:c.id,mount:element(c.mount,1)}));
+  if(reactCasesEntry(cases,parsed.sideEffectImports??[])!==cohort.entry)throw Error('react-family-declaration-entry-changed');
+  const selected=cases.filter(c=>c.id===caseId);
+  if(selected.length!==1)throw Error('react-family-case-unavailable');
+  return structuredClone(selected[0].mount);
+}

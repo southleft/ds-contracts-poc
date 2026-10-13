@@ -1,3 +1,5 @@
+import {isObservedFamilySelection,selectObservedFamily,readObservedFamilyEvidence} from './react-observed-family.js';
+import {observedFamilyNativeEvidence,createReactObservedFamilyNativeRequest,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {readReactAuthoredNativeEvidence,selectReactAuthoredNativeRequest} from './react-authored-native-evidence.js';
 import {isReactAuthoredNativeRequest,reactAuthoredInitialAnchor,type ReactAuthoredOperationRequest,type ReactAuthoredStateApiNativeRequest} from './react-authored-native-request.js';
 import {joinReactAuthoredStateApiEvidence,projectReactAuthoredStateApiDraft} from './react-authored-state-api.js';
@@ -17,7 +19,7 @@ import {compileReactCallerNative} from './react-caller-native.js';
 import {requireReactCallerComposition} from './react-caller-composition.js';
 import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
-import { selectReactComparisonCase } from './react-comparison-case.js';
+import { selectObservedFamilyComparisonCase, selectReactComparisonCase } from './react-comparison-case.js';
 import { reactComparisonContentScope, reactComparisonContentOperation } from './react-comparison-request.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { readReactCompositionEvidence } from './react-composition-evidence.js';
@@ -877,6 +879,25 @@ export function createReactReferenceService(
     const stateApiNativeRoute = /^react\/([a-f0-9]{64})\/native-state-api\/([a-z-]+)$/.exec(route);
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const authoredNativeRoute = /^react\/([a-f0-9]{64})\/native-authored\/([a-z-]+)$/.exec(route);
+    const familyRoute=/^react\/([a-f0-9]{64})\/native-family$/.exec(route);
+    if(familyRoute) {
+      try {
+        if(req.method!=='POST'||!native||!reference||reference.id!==familyRoute[1])throw Error('react-family-reference-unavailable');
+        const chunks:Buffer[]=[];let length=0;
+        for await(const chunk of req){const value=Buffer.from(chunk);length+=value.length;if(length>8192)throw Error('react-family-selection-too-large');chunks.push(value);}
+        const selection=JSON.parse(Buffer.concat(chunks).toString());
+        if(!isObservedFamilySelection(selection))throw Error('react-family-selection-invalid');
+        const job=ownershipJobs.get(reference.id);if(!job)throw Error('react-native-observation-required');
+        const family=selectObservedFamily(repoRoot,reference,job.report(),selection);
+        const request=createReactObservedFamilyNativeRequest(readObservedFamilyEvidence(repoRoot,reference,family));
+        const prepared=native().jobs.prepare(request);
+        json(res,200,{operation:prepared});
+      }catch(error){
+        const message=error instanceof Error?error.message:'';
+        json(res,409,{error:'The selected cases could not form an observed family.',...(/^react-[a-z-]+$/.test(message)?{reason:message}:{})});
+      }
+      return;
+    }
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const caseComparisonRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/compare-case\/([a-z-]+)$/.exec(route);
@@ -915,15 +936,26 @@ export function createReactReferenceService(
             throw Error('react-native-body-refused');
           if (caseComparisonRoute) {
             const [, , parentId, caseId] = caseComparisonRoute;
-            const main = jobs.reactEffectiveRequest(parentId);
-            const source = selectReactComparisonCase(repoRoot, reference, main, caseId);
-            const existing = jobs.listReact(reference.id).find(row => row.kind === 'comparison' &&
-              row.parentOperationId === parentId && row.caseId === caseId && row.ownershipId === source.ownership.id);
-            if (!existing) {
-              const parent=jobs.verifiedReactCallerObservation(parentId);
+            const current=reference;
+            // These reads share one synchronous preflight only. End both
+            // snapshots before content persistence, await, or native preparation.
+            const preflight=withEvidenceReadSnapshot(()=>jobs.withReadSnapshot(()=>{
+              const family=jobs.reactFamilyRequest(parentId);
+              const main = family ?? jobs.reactEffectiveRequest(parentId);
+              const source = family ? selectObservedFamilyComparisonCase(repoRoot,current,family,caseId).rootRequest
+                : selectReactComparisonCase(repoRoot, current, main as ReactNativeRequest, caseId);
+              const existing = jobs.listReact(current.id).find(row => row.kind === 'comparison' &&
+                row.parentOperationId === parentId && row.caseId === caseId && row.ownershipId === source.ownership.id);
+              if(existing)return {kind:'existing' as const,existing};
+              const parent=family?jobs.verifiedObservedFamilyObservation(parentId):jobs.verifiedReactCallerObservation(parentId);
               if(canonicalJson(parent.request)!==canonicalJson(main))throw Error('react-comparison-parent-changed');
               const scope = reactComparisonContentScope(parentId, source);
-              let inspected = readReactContentInspection(repoRoot, reference, source, scope);
+              return {kind:'prepare' as const,family,source,parent,scope,
+                inspected:readReactContentInspection(repoRoot, current, source, scope)};
+            }));
+            if (preflight.kind==='prepare') {
+              const {family,source,parent,scope}=preflight;
+              let inspected=preflight.inspected;
               if (!inspected || inspected.phase !== 'complete') {
                 let job = contentJobs.get(scope);
                 if (!job || job.state.phase !== 'running') {
@@ -934,12 +966,14 @@ export function createReactReferenceService(
                 inspected = job.report();
               }
               if (inspected.phase !== 'complete' || !inspected.sourceUnchanged) throw Error('react-comparison-content-unavailable');
-              const composition = readReactCompositionEvidence(repoRoot, reference, source, scope, jobs, undefined, initialStates.nativeEvidence);
+              const composition = family ? undefined : readReactCompositionEvidence(repoRoot, reference, source, scope, jobs, undefined, initialStates.nativeEvidence);
               const selected = selectReactComparisonRequest(repoRoot, reference, source, scope, composition);
-              const prepared = jobs.prepare({ ...selected, version: parent.parentUpdate?4:3,
-                ...(parent.parentUpdate?{parentUpdate:parent.parentUpdate}:{}),parentOperationId: parentId, mainRoot: parent.request });
+              const parentUpdate='parentUpdate' in parent?parent.parentUpdate:undefined;
+              const prepared = jobs.prepare(family ? {version:5,kind:'react-content-comparison',parentOperationId:parentId,
+                familyRoot:family,root:source,content:selected.content} : { ...selected, version:parentUpdate?4:3,
+                ...(parentUpdate?{parentUpdate}:{}),parentOperationId: parentId, mainRoot: parent.request as ReactNativeRequest });
               await frames.create(reference.id, prepared.id);
-            } else if (!existing.operation.sourceCurrent) throw Error('react-comparison-source-changed');
+            } else if (!preflight.existing.operation.sourceCurrent) throw Error('react-comparison-source-changed');
           } else if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
@@ -1021,6 +1055,7 @@ export function createReactReferenceService(
             const id = nativeAction[2];
             const identity = jobs.reactIdentity(id);
             if (identity.referenceId !== reference.id) throw Error('react-native-operation-mismatch');
+            if(jobs.reactFamilyRequest(id)&&!['connection','start','retry-observation','inspect-sizing'].includes(nativeAction[3]))throw Error('react-family-action-unqualified');
             const authoredUpdate=identity.authored && jobs.reactAuthoredRequest(id).version===3 && nativeAction[3]==='update-plan';
             if (identity.authored && !authoredUpdate && !['connection','start','retry-observation'].includes(nativeAction[3]))
               throw Error('react-authored-native-action-unqualified');
@@ -1065,6 +1100,14 @@ export function createReactReferenceService(
               else transport.retryObservation(id);
             }
             else transport.start(id);
+            if (['start','retry-observation'].includes(nativeAction[3]) && req.headers.prefer === 'return=minimal') {
+              // The action above retains its normal source and mutation checks.
+              // A delivery acknowledgement need not rebuild every saved inspection.
+              const pending = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() =>
+                nativeDeliveryPending(jobs.deliveryState(id))));
+              res.setHeader('Preference-Applied','return=minimal');
+              json(res,200,{operationId:id,pending});return;
+            }
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
@@ -1490,6 +1533,10 @@ export function createReactReferenceService(
       return readReactComparisonEvidence(repoRoot, reference, request, parent, request.composition
         ? readReactCompositionEvidence(repoRoot, reference, request.root, reactComparisonContentOperation(request), native!().jobs,
           { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
+    },
+    observedFamilyEvidence(request:ReactObservedFamilyNativeRequest) {
+      if(!reference||reference.id!==request.referenceId)throw Error('react-family-reference-unavailable');
+      return observedFamilyNativeEvidence(readObservedFamilyEvidence(repoRoot,reference,request.family),request);
     },
     nativeEvidence(request: ReactNativeRequest, identity?: string) {
       if (!reference) throw Error('react-native-reference-unavailable');

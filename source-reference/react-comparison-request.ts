@@ -1,3 +1,4 @@
+import {isReactObservedFamilyNativeRequest,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import { createHash } from 'node:crypto';
 import { isReactNativeRequest, type ReactNativeRequest } from './react-native-request.js';
 export interface ReactComparisonParentUpdate {
@@ -11,7 +12,8 @@ export interface ReactComparisonBirth {
   parentUpdate: ReactComparisonParentUpdate;
 }
 export interface ReactComparisonRequest {
-  version: 1 | 2 | 3 | 4;
+  version: 1 | 2 | 3 | 4 | 5;
+  familyRoot?: ReactObservedFamilyNativeRequest;
   parentUpdate?: ReactComparisonParentUpdate;
   mainRoot?: ReactNativeRequest;
   composition?: { revision: string };
@@ -29,7 +31,7 @@ export function isReactComparisonParentUpdate(v: unknown): v is ReactComparisonP
 }
 export function isReactComparisonRequest(v: unknown): v is ReactComparisonRequest {
   const r = v as ReactComparisonRequest;
-  return !!r && ((r.version === 1 && Object.keys(r).sort().join(',') === 'content,kind,parentOperationId,root,version') ||
+  return !!r && ((r.version === 5 && Object.keys(r).sort().join(',') === 'content,familyRoot,kind,parentOperationId,root,version' && isReactObservedFamilyNativeRequest(r.familyRoot)) || (r.version === 1 && Object.keys(r).sort().join(',') === 'content,kind,parentOperationId,root,version') ||
     (r.version === 4 && Object.keys(r).sort().join(',') === (r.composition ? 'composition,content,kind,mainRoot,parentOperationId,parentUpdate,root,version' : 'content,kind,mainRoot,parentOperationId,parentUpdate,root,version') &&
       isReactComparisonParentUpdate(r.parentUpdate) && isReactNativeRequest(r.mainRoot) && r.mainRoot.version === 1 &&
       (!r.composition || (Object.keys(r.composition).join(',') === 'revision' && /^sha256:[a-f0-9]{64}$/.test(r.composition.revision)))) ||
@@ -42,7 +44,7 @@ export function isReactComparisonRequest(v: unknown): v is ReactComparisonReques
 }
 export function reactComparisonReservation(r: ReactComparisonRequest): string {
   if (!isReactComparisonRequest(r)) throw Error('react-comparison-request-invalid');
-  const h = createHash('sha256').update(JSON.stringify(r.version === 4
+  const h = createHash('sha256').update(JSON.stringify(r.version === 5 ? ['react-content-comparison-v5',r.parentOperationId,r.familyRoot,r.root,r.content] : r.version === 4
     ? ['react-content-comparison-v4',r.parentOperationId,r.root,r.mainRoot,r.parentUpdate,r.composition?.revision??null]
     : r.version === 3 ? ['react-content-comparison-v3', r.parentOperationId, r.root.caseId, r.composition?.revision ?? null] : r.version === 1 ? ['react-content-comparison', r.parentOperationId] : ['react-content-comparison-v2', r.parentOperationId, r.composition!.revision])).digest('hex').slice(0, 32);
   return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
@@ -54,5 +56,5 @@ export function reactComparisonContentScope(parentId: string, source: ReactNativ
   return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
 }
 export function reactComparisonContentOperation(request: ReactComparisonRequest): string {
-  return request.version === 3 || request.version === 4 ? reactComparisonContentScope(request.parentOperationId, request.root) : request.parentOperationId;
+  return request.version === 3 || request.version === 4 || request.version === 5 ? reactComparisonContentScope(request.parentOperationId, request.root) : request.parentOperationId;
 }

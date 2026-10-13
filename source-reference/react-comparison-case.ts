@@ -1,3 +1,5 @@
+import {readObservedFamilyEvidence,observedFamilyFacts,observedFamilyMember} from './react-observed-family.js';
+import type {ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 /** Reuse a verified native family only for an exactly identical archived root
  * matrix. Case labels and visual resemblance never establish equivalence. */
 import { readFileSync } from 'node:fs';
@@ -35,4 +37,13 @@ export function selectReactComparisonCase(repo: string, reference: ReactReferenc
   const selected = selectReactNativeRequest(repo, report, caseId);
   assertReactComparisonFamily(repo, reference, main, selected);
   return selected;
+}
+
+/** Explicit family membership, independently re-opened before each comparison. */
+export function selectObservedFamilyComparisonCase(repo:string,reference:ReactReference,main:ReactObservedFamilyNativeRequest,caseId:string) {
+  if(main.referenceId!==reference.id)throw Error('react-family-reference-mismatch');
+  const family=readObservedFamilyEvidence(repo,reference,main.family);
+  const member=observedFamilyFacts(family).members.find(m=>m.caseId===caseId);
+  if(!member)throw Error('react-family-member-unavailable');
+  return observedFamilyMember(family,member.rootRequest);
 }

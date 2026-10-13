@@ -14,6 +14,28 @@ interface ProgressRow {
   }>;
 }
 
+/** A delivery acknowledgement schedules polling; it supplies no verified view. */
+export function nativeDeliveryPendingFromAcknowledgement(value: unknown, operationId: string): boolean {
+  if (!value || typeof value !== 'object' || Array.isArray(value) ||
+      Object.keys(value).sort().join(',') !== 'operationId,pending' ||
+      !('operationId' in value) || value.operationId !== operationId ||
+      !('pending' in value) || typeof value.pending !== 'boolean')
+    throw Error('Native delivery acknowledgement unavailable. Refresh the saved inspection.');
+  return value.pending;
+}
+
+/** An older full response cannot overwrite a later delivery acknowledgement. */
+export async function readCurrentNativeInspection<T>(read: () => Promise<T>, currentRevision: () => number): Promise<{revision: number; value: T} | undefined> {
+  const revision = currentRevision();
+  try {
+    const result = await read();
+    return revision === currentRevision() ? {revision, value: result} : undefined;
+  } catch (error) {
+    if (revision !== currentRevision()) return undefined;
+    throw error;
+  }
+}
+
 /** null means source inspection needs the full listing; [] means idle. */
 export function nativeProgressRoutes(rows: ProgressRow[]): string[] | null {
   if (rows.some(row => row.content?.phase === 'running')) return null;

@@ -640,3 +640,67 @@ test('graph inverse refuses changed unselected edges, missing inventory, foreign
     assert.throws(() => projectRootTextTemplateAliases(changed), /FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED/);
   }
 });
+
+
+test('different static tracking retains original modes when all four source aliases agree',()=>{
+  const f=fixture(2,1);
+  const tokens=f.tokens as typeof f.tokens & {tracking:Record<string,{$type:string;$value:string}>};
+  tokens.tracking={v0:{$type:'dimension',$value:'0.03px'},v1:{$type:'dimension',$value:'0px'}};
+  Object.assign(f.contract.anatomy.root.tokens!,{'font-size':'{size.v0}','line-height':'{line.v0}','letter-spacing':'{tracking.{size}}'});
+  const input=f.compile(), graph=planNativeRootTextTemplateGraph(input), plan=graph.template;
+  assert.equal(plan.modes.length,1);assert.equal(Object.keys(plan.aliases).length,4);
+  assert.equal(plan.modes[0].key,revisionOf(plan.modes[0].targets));
+  assert.deepEqual(plan.variants.map(v=>v.letterSpacing).sort(),[0,0.03]);
+  assert.equal(plan.variants[0].modeKey,plan.variants[1].modeKey);
+  assert.deepEqual(nativeRootTextTemplateGraphSelection(graph,plan.variants[0].name),nativeRootTextTemplateGraphSelection(graph,plan.variants[1].name));
+  const reversed={...input,component:{...input.component,variants:[...input.component.variants].reverse()}};
+  assert.deepEqual(planNativeRootTextTemplateGraph(reversed),graph,'input order does not change selected modes');
+  for(const field of ['fontFamily','fontStyle','textCase','textAlignH'] as const) {
+    const changed=structuredClone(input), text=changed.component.variants[1].spec.children![0].children![0];
+    Object.assign(text,{[field]:({fontFamily:'Arial',fontStyle:'Italic',textCase:'UPPER',textAlignH:'RIGHT'} as const)[field]});
+    assert.throws(()=>planNativeRootTextTemplateGraph(changed),/UNBOUND_TYPOGRAPHY_VARIES/);
+  }
+  const changed=structuredClone(input);changed.component.variants[1].spec.children![0].children![0].letterSpacing=NaN;
+  assert.throws(()=>planNativeRootTextTemplateGraph(changed),/TEMPLATE_SHAPE/);
+});
+
+test('size-specific tracking survives native graph write/readback and strict selected caller checks',async()=>{
+  const h=await componentFixture(3,1,f=>{
+    const tokens=f.tokens as typeof f.tokens & {tracking:Record<string,{$type:string;$value:string}>};
+    for(const [i,size,line,tracking] of [[0,12,16,0.03],[1,12,16,0.03],[2,14,20,0]] as const) {
+      f.tokens.size['v'+i].$value=size+'px';f.tokens.line['v'+i].$value=line+'px';
+      (tokens.tracking??={})['v'+i]={$type:'dimension',$value:tracking+'px'};
+    }
+    Object.assign(f.contract.anatomy.root.tokens!,{'letter-spacing':'{tracking.{size}}'});
+  });
+  const creation=await h.run(h.script());
+  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const draft=h.engine.compileNativeContractDraft(h.contract,h.byId,h.source);
+  const parent:NativeContractObservationInput={operation:h.operation,planRevision:revisionOf('tracking parent'),
+    projection:draft.projection,component:draft.component,tokenInput:h.context.tokens.input,
+    tokenIdentity:h.context.tokens.identity,creation,templateGraph:{input:h.input,identity:h.created.identity}};
+  const receipt=await h.run(emitNativeContractReadbackScript(parent));
+  assert.equal(verifyNativeContractReadback(parent,receipt).status,'supported-structure-observed');
+  for(const [i,tracking] of [[0,0.03],[1,0.03],[2,0]] as const) {
+    const content=structuredClone(h.contract);content.id='test.tracking-caller-'+i;content.props=[];
+    delete content.anatomy.root.slot;
+    for(const [key,value] of Object.entries(content.anatomy.root.tokens!))
+      content.anatomy.root.tokens![key]=value.replace('{size}','v'+i).replace('{ink}','v0');
+    content.anatomy.root.parts={label:{text:'New'}};
+    const variantName=parent.component.variants.find(v=>v.name.includes('Size=v'+i))!.name;
+    assert.equal(parent.component.variants.find(v=>v.name===variantName)!.spec.children![0].children![0].letterSpacing,tracking);
+    const input={parent,receipt,caseId:'tracking-'+i,variantName,slotSpecPath:[0],
+      rootText:{version:1 as const,kind:'direct-root-text' as const,characters:'New',contractRevision:revisionOf(content),treeRevision:revisionOf('tracking source '+i)}};
+    const caller=h.engine.compileComponentData(content,new Map([[content.id,content]]));
+    const prepared=prepareNativeContractComparison(content,caller,h.source,revisionOf(h.tokens),{mode:'light',brand:'default'},input,h.tokens);
+    assert.equal(prepared.textTemplate!.characters,'New');
+    const wrong=structuredClone(caller);
+    wrong.variants[0].spec.children![0].letterSpacing=tracking===0?0.03:0;
+    assert.throws(()=>prepareNativeContractComparison(content,wrong,h.source,revisionOf(h.tokens),{mode:'light',brand:'default'},input,h.tokens),
+      /native-contract-comparison-text-template-caller-typography-differs/);
+  }
+  const tampered=structuredClone(receipt), text=tampered.nodes.find((n:any)=>n.type==='TEXT'&&n.values.letterSpacing?.value===0.03);
+  assert(text,'native readback contains the actual precise tracking');
+  text.values.letterSpacing.value=0;
+  assert.equal(verifyNativeContractReadback(parent,tampered).status,'refused');
+});

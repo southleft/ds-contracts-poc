@@ -20,9 +20,10 @@ export interface NativeRootTextTemplatePlan {
   aliases: RootTextTemplateBindings;
   /** Deduplicated by source token identity, never by resolved value. */
   modes: Array<{ key: string; name: string; targets: RootTextTemplateBindings }>;
-  variants: Array<{ name: string; modeKey: string }>;
-  /** Channels without native variable bindings must agree across all mains. */
-  typography: { family: string; italic: boolean; letterSpacing: number; textCase: string; textAlign: string };
+  /** Static tracking varies on existing text nodes; aliases and mode routing do not. */
+  variants: Array<{ name: string; modeKey: string; letterSpacing?: number }>;
+  /** Uniform plans retain the historical global tracking field. */
+  typography: { family: string; italic: boolean; letterSpacing?: number; textCase: string; textAlign: string };
   revision: string;
 }
 
@@ -37,6 +38,7 @@ export function planNativeRootTextTemplate(
   if (!component.variants.length || component.stateVariants?.length) fail('VARIANTS_UNQUALIFIED');
   const names = new Set<string>(), tuples = new Map<string, RootTextTemplateBindings>();
   const variants: NativeRootTextTemplatePlan['variants'] = [];
+  const tracking: number[] = [];
   let typography: NativeRootTextTemplatePlan['typography'] | undefined;
   for (const variant of component.variants) {
     if (!variant.name || names.has(variant.name)) fail('VARIANT_IDENTITY');
@@ -50,14 +52,22 @@ export function planNativeRootTextTemplate(
     const t = text as NodeSpec;
     const current = { family: t.fontFamily!, italic: /italic$/i.test(t.fontStyle!),
       letterSpacing: t.letterSpacing!, textCase: t.textCase ?? 'ORIGINAL', textAlign: t.textAlignH ?? 'LEFT' };
-    if (typography && canonicalJson(typography) !== canonicalJson(current)) fail('UNBOUND_TYPOGRAPHY_VARIES');
-    typography = current;
+    if (typography && canonicalJson({ ...typography, letterSpacing: current.letterSpacing }) !== canonicalJson(current))
+      fail('UNBOUND_TYPOGRAPHY_VARIES');
+    typography ??= { ...current };
+    tracking.push(current.letterSpacing);
     const targets = { fontSize: t.fontSizeVar!, lineHeight: t.lineHeightVar!, fontWeight: t.fontWeightVar!, fill: t.textFill! };
     if (Object.values(targets).some(name => typeof name !== 'string' || !name || name.trim() !== name))
       fail('BOUND_TYPOGRAPHY_REQUIRED');
     const tuple = canonicalJson(targets), modeKey = revisionOf(targets);
     tuples.set(tuple, targets);
     variants.push({ name: variant.name, modeKey });
+  }
+  if (new Set(tracking).size > 1) {
+    // No fifth alias or native mode is introduced. Every existing variant
+    // carries its finite literal; original four-target routing stays intact.
+    variants.forEach((variant, index) => { variant.letterSpacing = tracking[index]; });
+    delete typography!.letterSpacing;
   }
   const prefix = `dsc-native-template/${source.contractRevision.slice(7)}`;
   const body = {

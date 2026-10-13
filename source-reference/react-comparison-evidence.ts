@@ -1,3 +1,5 @@
+import {selectObservedFamilyComparisonCase} from './react-comparison-case.js';
+import type {ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import { assertReactComparisonFamily } from './react-comparison-case.js';
 import type { readReactCompositionEvidence } from './react-composition-evidence.js';
 import { readFileSync } from 'node:fs';
@@ -26,10 +28,12 @@ export function selectReactComparisonRequest(repoRoot: string, reference: ReactR
   } };
 }
 export function readReactComparisonEvidence(repoRoot: string, reference: ReactReference, request: ReactComparisonRequest,
-  parent: { input: NativeContractObservationInput; receipt: NativeSourceReadback; request: ReactNativeRequest }, composition?: ReturnType<typeof readReactCompositionEvidence>) {
+  parent: { input: NativeContractObservationInput; receipt: NativeSourceReadback; request: ReactNativeRequest | ReactObservedFamilyNativeRequest }, composition?: ReturnType<typeof readReactCompositionEvidence>) {
   if (!isReactComparisonRequest(request) || parent.input.operation.id !== request.parentOperationId ||
-      canonicalJson(parent.request) !== canonicalJson(request.mainRoot ?? request.root)) throw Error('react-comparison-parent-changed');
-  if (request.version === 3 || request.version === 4) assertReactComparisonFamily(repoRoot, reference, parent.request, request.root);
+      canonicalJson(parent.request) !== canonicalJson(request.version===5 ? request.familyRoot : request.mainRoot ?? request.root)) throw Error('react-comparison-parent-changed');
+  if (request.version === 3 || request.version === 4) assertReactComparisonFamily(repoRoot, reference, parent.request as ReactNativeRequest, request.root);
+  const familyMember=request.version===5 ? selectObservedFamilyComparisonCase(repoRoot,reference,request.familyRoot!,request.root.caseId) : undefined;
+  if(familyMember&&canonicalJson(familyMember.rootRequest)!==canonicalJson(request.root))throw Error('react-family-member-request-changed');
   const contentOperation = reactComparisonContentOperation(request);
   if (request.composition && (!composition || composition.review.status !== 'ready' || composition.review.inputRevision !== request.composition!.revision))
     throw Error('react-composition-pinned-mapping-changed');
@@ -53,7 +57,7 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
     ? { content: composition!.content, sourceCompatibility: undefined }
     : recompileSavedObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'), saved.content);
   const contract = original.matrix.draft!.contract!;
-  const variantName = reactComparisonVariant(contract, original.observedProps);
+  const variantName = familyMember?.variantName ?? reactComparisonVariant(contract, original.observedProps);
   const variant = parent.input.component.variants.find(v => v.name === variantName);
   if (!variant) throw Error('react-comparison-variant-unavailable');
   const paths: number[][] = [];

@@ -63,10 +63,11 @@ export function selectReactChildRequest(repoRoot: string, reference: ReactRefere
  * request must first come from selectReactNativeRequest on a current runner. */
 export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, identity?: string) {
   return evidenceReadOnce('react-native', {repoRoot,referenceId:reference.id,files:reference.files,request,identity},
-    ()=>readReactNativeEvidenceFresh(repoRoot,reference,request,identity));
+    ()=>{ const {matrix,source}=readReactNativeEvidenceFresh(repoRoot,reference,request,identity); return {matrix,source}; });
 }
 function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, identity?: string): {
   matrix: ReactRootMatrix | ReactChildRoot; source: NativeContractDraftSource;
+  program: ReactSourceProgram; contentContext?: ReactContextualContent;
 } {
   if (!isReactNativeRequest(request) || reference.id !== request.referenceId || !reactReferenceUnchanged(reference)) fail();
   const dir = path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id);
@@ -137,7 +138,7 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
     matrix=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,identity,contentContext);
     if(matrix.problems.length||matrix.draft?.status!=='native-compiled'||matrix.draft.problems.length)fail();
   }
-  return { matrix, source: {
+  return { matrix, program, ...(contentContext?{contentContext}:{}), source: {
     revision: `sha256:${reference.id}`, programSha256: evidenceSha(programBytes), evidenceRevision: revisionOf(request),
   } };
 }
@@ -157,4 +158,32 @@ function readReactNativeContentEvidenceFresh(repoRoot: string, reference: ReactR
       captured.treeSha256 !== evidenceSha(Buffer.from(JSON.stringify(captured.tree))) ||
       captured.treeSha256 !== report.rows.find(row => row.id === request.caseId)?.treeSha256) return fail();
   return { ...original, captured, observedProps: structuredClone(report.rows.find(row => row.id === request.caseId)?.propertyMatrix?.heldProps) };
+}
+
+/** Read-only family plane access. Historical public evidence retains its exact
+ * shape; this accessor additionally authenticates and returns the actual saved
+ * singleton plane, never manufactures property-probe rows. */
+export function readReactObservedFamilyPlane(repoRoot:string,reference:ReactReference,request:ReactNativeRequest) {
+  if(request.version!==1)throw Error('react-family-member-root-required');
+  const original=readReactNativeEvidenceFresh(repoRoot,reference,request);
+  const dir=path.join(repoRoot,'private/react-source-ownership',request.referenceId,request.ownership.id);
+  const report=JSON.parse(readFileSync(path.join(dir,'report.json'),'utf8')) as ReactOwnershipReport;
+  const row=report.rows.find(r=>r.id===request.caseId)!;
+  const matrix=row.propertyMatrix;
+  if(!row.ownership||!matrix||matrix.axes.length||matrix.planned!==1||matrix.rows.length!==1||
+      matrix.problems.length||!matrix.rows[0].baseline||Object.keys(matrix.rows[0].changes).length)
+    throw Error('react-family-singleton-plane-required');
+  const plane=matrix.rows[0];
+  if(!/^\d+$/.test(plane.id))throw Error('react-family-plane-id-invalid');
+  const inventory=JSON.parse(readFileSync(path.join(dir,'integrity.json'),'utf8'));
+  for(const relative of [path.join(request.caseId,'source-tree.json'),path.join(request.caseId,'matrix',plane.id+'.json')])
+    if(!Object.hasOwn(inventory.files,relative))throw Error('react-family-plane-not-in-inventory');
+  const captured=JSON.parse(readFileSync(path.join(dir,request.caseId,'source-tree.json'),'utf8'));
+  const snapshot=JSON.parse(readFileSync(path.join(dir,request.caseId,'matrix',plane.id+'.json'),'utf8')) as ReactPropertySnapshot;
+  if(captured.status!=='captured'||captured.problems.length||captured.treeSha256!==row.treeSha256||
+      captured.treeSha256!==evidenceSha(JSON.stringify(captured.tree)))throw Error('react-family-source-tree-changed');
+  const reassembled=assembleReactRootMatrix(original.program,row.ownership,captured.tree,matrix,{[plane.id]:snapshot},undefined,original.contentContext);
+  if(!reactRootSourceMatrixMatches(row.rootMatrix!,reassembled)||reassembled.draft?.status!=='native-compiled')
+    throw Error('react-family-member-reassembly-changed');
+  return {...original,row,matrix,plane,snapshot,captured};
 }

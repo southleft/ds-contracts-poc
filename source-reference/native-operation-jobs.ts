@@ -1,3 +1,4 @@
+import {isReactObservedFamilyNativeRequest,reactObservedFamilyReservation,prepareReactObservedFamilyNativePlan,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {isReactAuthoredOperationRequest as isReactAuthoredNativeRequest,reactAuthoredNativeReservation,type ReactAuthoredStateApiNativeRequest,
   reactAuthoredOwnershipAnchor,type ReactAuthoredOperationRequest as ReactAuthoredNativeRequest} from './react-authored-native-request.js';
 import type {prepareReactAuthoredNativePlan} from './react-authored-native-plan.js';
@@ -97,6 +98,8 @@ const POLICY = {
   ownership: "new-operation-only",
 } as const;
 type SourcePlan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
+type FamilyPlan = ReturnType<typeof prepareReactObservedFamilyNativePlan>;
+const isFamilyPlan = (p: Plan): p is FamilyPlan => 'kind' in p.plan && p.plan.kind === 'react-observed-family-draft-inspection';
 type ReactPlan = ReturnType<typeof prepareReactNativePlan>;
 type CallerGraphPlan = ReturnType<typeof prepareReactCallerNativePlan>;
 type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
@@ -105,16 +108,16 @@ type StateApiPlan = ReturnType<typeof prepareReactStateApiNativePlan>;
 type LibraryPlan = ReturnType<typeof prepareReactLibraryNativePlan>;
 type AuthoredPlan = ReturnType<typeof prepareReactAuthoredNativePlan>;
 const isAuthoredPlan = (p: Plan): p is AuthoredPlan => 'kind' in p.plan && p.plan.kind === 'react-authored-draft-inspection';
-type Plan = AuthoredPlan | SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan | LibraryPlan;
+type Plan = FamilyPlan | AuthoredPlan | SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan | LibraryPlan;
 const isLibraryPlan = (p: Plan): p is LibraryPlan => 'kind' in p.plan && p.plan.kind === 'prepared-library-native-inspection';
 const templateGraphPlan = (p: Plan) => 'templateGraph' in p.plan ? p.plan.templateGraph : undefined;
 const isStateApiPlan = (p: Plan): p is StateApiPlan => 'kind' in p.plan && p.plan.kind === 'react-state-api-draft-inspection';
 const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
 const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
-type OperationRequest = ReactAuthoredNativeRequest | PreparedLibraryNativeRequest | BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
-const validRequest = (v: unknown): v is OperationRequest => isReactAuthoredNativeRequest(v) || isPreparedLibraryNativeRequest(v) || isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
-const reservation = (r: OperationRequest) => isReactAuthoredNativeRequest(r) ? reactAuthoredNativeReservation(r) : isPreparedLibraryNativeRequest(r) ? preparedLibraryNativeReservation(r) : isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
-const reactRequest = (r: OperationRequest) => isReactAuthoredNativeRequest(r) || isPreparedLibraryNativeRequest(r) || isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r);
+type OperationRequest = ReactObservedFamilyNativeRequest | ReactAuthoredNativeRequest | PreparedLibraryNativeRequest | BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isReactObservedFamilyNativeRequest(v) || isReactAuthoredNativeRequest(v) || isPreparedLibraryNativeRequest(v) || isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
+const reservation = (r: OperationRequest) => isReactObservedFamilyNativeRequest(r) ? reactObservedFamilyReservation(r) : isReactAuthoredNativeRequest(r) ? reactAuthoredNativeReservation(r) : isPreparedLibraryNativeRequest(r) ? preparedLibraryNativeReservation(r) : isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const reactRequest = (r: OperationRequest) => isReactObservedFamilyNativeRequest(r) || isReactAuthoredNativeRequest(r) || isPreparedLibraryNativeRequest(r) || isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r);
 /** The policy a NEW operation records. React operations target the user's
  * configured file (DS_CONTRACTS_FIGMA_FILE), else the evaluation file. */
 const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: reactRequest(r) ? reactFigmaFileKey() : SOURCE_NATIVE_FILE_KEY });
@@ -126,8 +129,8 @@ const recordedPolicyValid = (policy: unknown, r: OperationRequest) => {
   return same({ ...policy, fileKey: null }, { ...POLICY, fileKey: null }) &&
     (reactRequest(r) ? validFigmaFileKey(p.fileKey) : p.fileKey === SOURCE_NATIVE_FILE_KEY);
 };
-const isReactPlan = (p: Plan): p is AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan => isAuthoredPlan(p) || 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection' || p.plan.kind === 'react-state-api-draft-inspection');
-const isMainPlan = (p: Plan): p is AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan | LibraryPlan => isReactPlan(p) || isLibraryPlan(p);
+const isReactPlan = (p: Plan): p is FamilyPlan | AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan => isFamilyPlan(p) || isAuthoredPlan(p) || 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection' || p.plan.kind === 'react-state-api-draft-inspection');
+const isMainPlan = (p: Plan): p is FamilyPlan | AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan | LibraryPlan => isReactPlan(p) || isLibraryPlan(p);
 type Pin = { id: string; reportSha256: string };
 type LibraryPin = { id: string; inputSha256: string; tarballSha256: string };
 type SourcePins = { visual: Pin; preparation: Pin; artifact?: never };
@@ -301,6 +304,10 @@ interface State {
   libraryReplacementOutcome?: {status:string;retiredNodeCount:number};
 }
 export interface NativeOperationJobsOptions {
+  observedFamily?: {
+    prepare(request:ReactObservedFamilyNativeRequest,operation:{id:string;fileKey:string}):NativeOperationPreparation<FamilyPlan>;
+    buildComponent(request:ReactObservedFamilyNativeRequest,context:NativeOperationComponentContext):{planRevision:string;script:string};
+  };
   preparedLibrary?: {
     prepare(request: PreparedLibraryNativeRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<LibraryPlan>;
     buildComponent(request: PreparedLibraryNativeRequest, context: NativeOperationComponentContext): {planRevision: string; script: string};
@@ -462,6 +469,10 @@ export function createNativeOperationJobs(
   options: NativeOperationJobsOptions,
 ) {
   const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if(isReactObservedFamilyNativeRequest(request)) {
+      if(!options.observedFamily)fail('react-family-adapter-unavailable');
+      return options.observedFamily.prepare(request,operation);
+    }
     if (isReactAuthoredNativeRequest(request)) {
       if (!options.reactAuthored) fail('react-authored-adapter-unavailable');
       return options.reactAuthored.prepare(request,operation);
@@ -575,7 +586,12 @@ export function createNativeOperationJobs(
       plan.plan.acceptedContract !== null ||
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
-      isReactPlan(plan) !== (isReactAuthoredNativeRequest(request) || isReactStateApiNativeRequest(request) || isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isReactPlan(plan) !== (isReactObservedFamilyNativeRequest(request) || isReactAuthoredNativeRequest(request) || isReactStateApiNativeRequest(request) || isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isFamilyPlan(plan) !== isReactObservedFamilyNativeRequest(request) ||
+      (isFamilyPlan(plan) && (!isReactObservedFamilyNativeRequest(request) ||
+        !same(plan.plan.family,request.family) || plan.plan.referenceId!==request.referenceId ||
+        !same(prepared.visual,{id:plan.plan.ownership.id,reportSha256:plan.plan.ownership.sha256}) ||
+        !same(prepared.preparation,{id:plan.plan.ownership.id,reportSha256:request.family.recordSha256}))) ||
       isAuthoredPlan(plan) !== isReactAuthoredNativeRequest(request) ||
       (isAuthoredPlan(plan) && (!isReactAuthoredNativeRequest(request) || plan.plan.graphVerification !== 1 ||
         plan.plan.draftRevision !== request.draftRevision ||
@@ -1565,7 +1581,7 @@ export function createNativeOperationJobs(
       nativeQualification: "unqualified",
       counters: {
         variants: isComparisonPlan(displayPlan) ? 0 : nativeGraphVariants(displayPlan.plan.component, isLibraryPlan(displayPlan) ? 2 : 1).length,
-        sourceCases: isLibraryPlan(loaded.plan) ? 0 : isReactPlan(loaded.plan) || isComparisonPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
+        sourceCases: isFamilyPlan(loaded.plan) ? loaded.plan.plan.members.length : isLibraryPlan(loaded.plan) ? 0 : isReactPlan(loaded.plan) || isComparisonPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
         loweredCases: isComparisonPlan(loaded.plan) ? 1 : isMainPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
           (c) => c.status === "lowered",
         ).length,
@@ -1844,12 +1860,12 @@ export function createNativeOperationJobs(
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (isReactAuthoredNativeRequest(loaded.header.request) ? !options.reactAuthored : isPreparedLibraryNativeRequest(loaded.header.request) ? !options.preparedLibrary : isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
+      if (isReactObservedFamilyNativeRequest(loaded.header.request) ? !options.observedFamily : isReactAuthoredNativeRequest(loaded.header.request) ? !options.reactAuthored : isPreparedLibraryNativeRequest(loaded.header.request) ? !options.preparedLibrary : isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
       const request = structuredClone(loaded.header.request);
-      const built = isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+      const built = isReactObservedFamilyNativeRequest(request) ? options.observedFamily!.buildComponent(request,context) : isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
         : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
@@ -2198,6 +2214,20 @@ export function createNativeOperationJobs(
       if (!isReactNativeRequest(request)) fail('react-operation-required');
       return structuredClone(request);
     },
+    reactFamilyRequest(id:string):ReactObservedFamilyNativeRequest|null {
+      const {header}=load(id);return isReactObservedFamilyNativeRequest(header.request)?structuredClone(header.request):null;
+    },
+    verifiedObservedFamilyObservation(id:string) {
+      const loaded=load(id);
+      if(!isReactObservedFamilyNativeRequest(loaded.header.request)||!isFamilyPlan(loaded.plan)||
+          loaded.state.phase!=='component-structure-observed'||loaded.state.pending||!loaded.state.imageReadback)
+        fail('react-family-parent-observation-required');
+      authenticate(loaded);
+      // This uses the complete main/template graph, not an individual variant.
+      const input=componentObservationInput(loaded.state,loaded.plan) as NativeContractObservationInput;delete input.allocationAnchor;
+      const receipt=structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;delete receipt.images;
+      return structuredClone({input,receipt,request:loaded.header.request});
+    },
     verifiedReactObservation(id: string) {
       const loaded = load(id);
       if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
@@ -2264,7 +2294,11 @@ export function createNativeOperationJobs(
       return structuredClone(current);
     },
     reactIdentity(id: string) {
-      const { header } = load(id);
+      const { header,plan } = load(id);
+      if(isReactObservedFamilyNativeRequest(header.request)&&isFamilyPlan(plan))return {
+        authored:false,referenceId:header.request.referenceId,caseId:plan.plan.baseCaseId,
+        ownershipId:plan.plan.ownership.id,fileKey:header.policy.fileKey,
+      };
       if (isReactCallerNativeRequest(header.request)) return {
         authored: false, referenceId: header.request.referenceId, caseId: header.request.caseId,
         ownershipId: header.request.ownership.id, fileKey: header.policy.fileKey,
@@ -2320,13 +2354,24 @@ export function createNativeOperationJobs(
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
       directories();
-      return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
+      type ListingRow={caseId:string;ownershipId:string;kind:'family'|'root'|'nested'|'comparison'|'initial'|'state-api'|'authored'|'authored-initial'|'authored-state-api';
+        family?:Pick<FamilyPlan['plan'],'axis'|'members'>;nestedInstanceId?:string;stateApiObservation?:ReactStateApiNativeRequest['observation'];
+        initialObservation?:ReactInitialNativeRequest['observation'];parentOperationId?:string;sourceOperationId?:string;
+        successionProblem?:string;fileKey:string;operation:ReturnType<typeof get>};
+      return readdirSync(operations).filter(id => UUID.test(id)).flatMap((id):ListingRow[] => {
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
         // Filtered BEFORE get(): authenticating a state-API draft selects its
         // inspection source, which lists this reference again (see get()).
         if (kind === 'authored' && !(isReactAuthoredNativeRequest(header.request) && header.request.version !== 2 && header.request.version !== 3)) return [];
+        if(isReactObservedFamilyNativeRequest(header.request)) {
+          if(header.request.referenceId!==referenceId)return [];
+          const loaded=load(id);if(!isFamilyPlan(loaded.plan))fail('react-family-plan-required');
+          return [{caseId:loaded.plan.plan.baseCaseId,ownershipId:loaded.plan.plan.ownership.id,kind:'family' as const,
+            family:{axis:structuredClone(loaded.plan.plan.axis),members:structuredClone(loaded.plan.plan.members)},
+            fileKey:header.policy.fileKey,operation:get(id)}];
+        }
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
         // One unreadable succession journal fails THAT operation closed (its
         // update planning refuses by name); it must not take the listing down.
@@ -2346,7 +2391,7 @@ export function createNativeOperationJobs(
           ...(isReactNativeRequest(request) && request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(stateApi ? { stateApiObservation: structuredClone(stateApi.observation) } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
-          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 || comparison.version === 4 ? id : comparison.parentOperationId } : {}),
+          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 || comparison.version === 4 || comparison.version === 5 ? id : comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
       });
       });

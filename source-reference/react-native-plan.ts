@@ -9,16 +9,17 @@ import type { NativeSourceWriteContext } from '../core/native-source-write.js';
 import { prepareNativeTokenContext, type NativeTokenContextInput } from '../core/native-token-context.js';
 import { flattenTokens } from '../core/tokens.js';
 import type { ReactRootMatrix } from './react-root-matrix.js';
+import type { ObservedFamilyMatrix } from './react-observed-family.js';
 import type { ReactChildRoot } from './react-child-root.js';
 
 export interface ReactNativePlanInput {
   operation: { id: string; fileKey: string };
   source: NativeContractDraftSource;
-  matrix: ReactRootMatrix | ReactChildRoot;
+  matrix: ReactRootMatrix | ReactChildRoot | ObservedFamilyMatrix;
 }
 function nativeDraft(input: ReactNativePlanInput, recompile = false) {
   const { matrix } = input, draft = matrix.draft;
-  if (matrix.version !== 1 || !['combined-property-root-draft', 'observed-child-root-draft'].includes(matrix.qualification) ||
+  if (matrix.version !== 1 || !['combined-property-root-draft', 'observed-child-root-draft', 'observed-selected-family-root-draft'].includes(matrix.qualification) ||
       matrix.acceptedContract !== null || matrix.problems.length ||
       !draft || draft.status !== 'native-compiled' || draft.problems.length ||
       !draft.contract || !draft.tokens || !draft.native)
