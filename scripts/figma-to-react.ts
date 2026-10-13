@@ -24,7 +24,7 @@
  * for a Radio with no circle and a Dialog without its heading. The
  * programmatic figmaToReact() (the benchmark replay) does not run the check.
  * --fonts <manifest.json> authenticates the design's font files before any
- * fetch or write, then provides them to the consumer check.
+ * fetch or write, then bundles them into the package the consumer check installs.
  */
 import { createServer } from 'vite';
 import path from 'node:path';
@@ -78,7 +78,7 @@ if (process.argv[1] && /(^|[\\/])figma-to-react\.(m?[tj]s)$/.test(path.resolve(p
   if ((!dump && !url) || (dump && url) || !out || (process.argv.includes('--fonts') && (!fonts || fonts.startsWith('--'))) || (process.argv.includes('--native-strokes') && (!nativeStrokes || nativeStrokes.startsWith('--')))) {
     console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--allow-failures]\n'
       + '  --url reads FIGMA_TOKEN from the environment (never from the command line).\n'
-      + '  --fonts gives the check your design\'s font files (a sha256-pinned manifest; see docs/PREVIEW.md).\n'
+      + '  --fonts bundles your design\'s font files for the package and check (a sha256-pinned manifest; see docs/PREVIEW.md).\n'
       + '  After packaging, the generated package is checked against the design (design:consumer:check) and each\n'
       + '  variant is reported pass / FAIL / unverified; any FAIL exits 1 unless --allow-failures is given.\n'
       + '  Outside this repository: npx @ds-contracts/cli figma-to-react (same flags but --expect-request).');

@@ -14,6 +14,8 @@ export interface ConsumerFont {
   file: string;
   format: 'truetype' | 'opentype' | 'woff' | 'woff2';
   bytes: Buffer;
+  /** Optional distribution notice supplied with the font, retained byte for byte. */
+  license?: { file: string; sha256: string; bytes: Buffer };
 }
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 function fail(reason: string): never { throw Error(`consumer-fonts:${reason}`); }
@@ -90,7 +92,7 @@ export function readConsumerFonts(manifestPath: string): ConsumerFont[] {
   let total = 0;
   for (const [index, value] of manifest.fonts.entries()) {
     function reason(message: string): never { return fail(`${index}:${message}`); }
-    if (!record(value) || !exactKeys(value, ['family', 'weight', 'style', 'file', 'sha256'])) reason('invalid-face');
+    if (!record(value) || !exactKeys(value, ['family', 'weight', 'style', 'file', 'sha256', ...(Object.hasOwn(value, 'license') ? ['license'] : [])])) reason('invalid-face');
     if (typeof value.family !== 'string' || value.family.length > 100 || value.family !== value.family.trim() ||
         !/^[\p{L}\p{N}][\p{L}\p{N} ._+-]*$/u.test(value.family) ||
         /^(serif|sans-serif|monospace|cursive|fantasy|system-ui|ui-serif|ui-sans-serif|ui-monospace|ui-rounded|math|fangsong|emoji)$/i.test(value.family)) reason('invalid-family');
@@ -122,14 +124,29 @@ export function readConsumerFonts(manifestPath: string): ConsumerFont[] {
     try { declared = fontFamilyNames(bytes); } catch (error) { reason(`font-names-unreadable:${error instanceof Error ? error.message : String(error)}`); }
     if (!declared.some(name => name.toLowerCase() === family.toLowerCase()))
       reason(`family-not-declared-by-font:${JSON.stringify(family)} (the file names itself ${declared.map(n => JSON.stringify(n)).join(', ')})`);
+    let license: ConsumerFont['license'];
+    if (value.license !== undefined) {
+      const notice = value.license;
+      if (!record(notice) || !exactKeys(notice, ['file', 'sha256']) ||
+          typeof notice.file !== 'string' || !notice.file || notice.file.includes('\0') || /^[a-z][a-z0-9+.-]*:/i.test(notice.file) ||
+          typeof notice.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(notice.sha256)) reason('invalid-license');
+      const noticePath = path.resolve(path.dirname(manifestPath), notice.file);
+      const noticeStat = statSync(noticePath);
+      if (!noticeStat.isFile() || noticeStat.size < 1 || noticeStat.size > 256 * 1024) reason('invalid-license-size');
+      const noticeBytes = readFileSync(noticePath);
+      if (noticeBytes.length !== noticeStat.size || createHash('sha256').update(noticeBytes).digest('hex') !== notice.sha256)
+        reason('license-sha256-mismatch');
+      license = { file: `${notice.sha256}.txt`, sha256: notice.sha256, bytes: noticeBytes };
+    }
     fonts.push({ family: value.family, weight, style: value.style, sha256: value.sha256,
-      file: `${value.sha256}.${format[0]}`, format: format[1], bytes });
+      file: `${value.sha256}.${format[0]}`, format: format[1], bytes, ...(license ? { license } : {}) });
   }
   return fonts;
 }
 
 export function consumerFontManifest(fonts: readonly ConsumerFont[]) {
-  return { version: 1, fonts: fonts.map(({ family, weight, style, sha256, file }) => ({ family, weight, style, file, sha256 })) };
+  return { version: 1, fonts: fonts.map(({ family, weight, style, sha256, file, license }) => ({ family, weight, style, file, sha256,
+    ...(license ? { license: { file: license.file, sha256: license.sha256 } } : {}) })) };
 }
 
 /** The only CSS generated here is @font-face. Asset URLs are relative so the
@@ -137,8 +154,13 @@ export function consumerFontManifest(fonts: readonly ConsumerFont[]) {
 export function writeConsumerFonts(directory: string, fonts: readonly ConsumerFont[]): void {
   mkdirSync(directory, { recursive: true });
   const files = new Set<string>();
-  for (const font of fonts) if (!files.has(font.file)) {
-    writeFileSync(path.join(directory, font.file), font.bytes, { flag: 'wx' }); files.add(font.file);
+  for (const font of fonts) {
+    if (!files.has(font.file)) {
+      writeFileSync(path.join(directory, font.file), font.bytes, { flag: 'wx' }); files.add(font.file);
+    }
+    if (font.license && !files.has(font.license.file)) {
+      writeFileSync(path.join(directory, font.license.file), font.license.bytes, { flag: 'wx' }); files.add(font.license.file);
+    }
   }
   writeFileSync(path.join(directory, 'manifest.json'), JSON.stringify(consumerFontManifest(fonts), null, 2) + '\n', { flag: 'wx' });
   writeFileSync(path.join(directory, 'fonts.css'), fonts.map(font =>

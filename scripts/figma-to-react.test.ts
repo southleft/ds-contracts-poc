@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkGenerated, dumpFromFigmaUrl, figmaToReact, reportCheck, type CheckOutcome } from './figma-to-react.js';
 import type { Verdicts } from './design-consumer-verdict.js';
+import { readConsumerFonts } from './design-consumer-fonts.js';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dump = path.join(repo, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
@@ -143,16 +144,20 @@ function plexManifest(dir: string, family: string) {
   return { file, sha256 };
 }
 
-test('--fonts passes an authenticated, sha256-pinned manifest to the consumer check and records the faces', async t => {
+test('--fonts ships the authenticated assets and checks the exact named package', async t => {
   const out = mkdtempSync(path.join(tmpdir(), 'figma-to-react-fonts-'));
   t.after(() => rmSync(out, { recursive: true, force: true }));
   const { file, sha256 } = plexManifest(out, 'IBM Plex Sans');
-  const result = await figmaToReact(dump, path.join(out, 'run'));
+  const result = await figmaToReact(dump, path.join(out, 'run'), undefined, 'json',
+    { packageName: '@acme/font-badge', fonts: readConsumerFonts(file) });
+  const archivedFont = execFileSync('tar', ['-xzOf', path.join(result.outDir, result.tarball), `package/dist/fonts/${sha256}.woff2`]);
+  assert.equal(createHash('sha256').update(archivedFont).digest('hex'), sha256);
   const seen: any[] = [];
   const runCheck = async (args: any) => { seen.push(args); return { verdict: { verdict: 'pass', variants: [], setProblems: [], counts: { pass: 0, fail: 0, unverified: 0 } } }; };
   await checkGenerated(result, dump, { chromiumPath: process.execPath, fonts: path.relative(process.cwd(), file), runCheck });
   assert.equal(seen.length, 1);
   assert.equal(seen[0].fonts, file, 'the manifest reaches design:consumer:check, resolved');
+  assert.deepEqual(seen[0].package, { name: '@acme/font-badge', tarball: path.join(result.outDir, result.tarball), tarballSha256: result.tarballSha256 });
   assert.deepEqual(JSON.parse(readFileSync(path.join(out, 'run', 'result.json'), 'utf8')).check.fonts, [{ family: 'IBM Plex Sans', weight: '400', style: 'normal', sha256 }]);
   // Without --fonts the check gets none and says so.
   await checkGenerated(result, dump, { chromiumPath: process.execPath, runCheck });

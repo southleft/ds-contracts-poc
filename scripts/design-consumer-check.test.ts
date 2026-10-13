@@ -6,8 +6,12 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { consumerSizeCheck, mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
-import { readFileSync } from 'node:fs';
+import { readPackagedConsumerFonts, consumerSizeCheck, mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, runConsumerCheck, type Interaction } from './design-consumer-check.js';
+import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { consumerFontManifest, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { qualifyRenderBoundsExport } from './design-consumer-render-export.js';
 import { variantVerdicts } from './design-consumer-verdict.js';
 import { captureObservedSubject } from './design-consumer-observed-capture.js';
@@ -16,6 +20,16 @@ const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
 const contract = { props: [variantProp('size', { enum: ['large', 'small'] }, ['large', 'small']), variantProp('rounded', 'boolean', ['false', 'true'])], anatomy: {} };
 const dump = { Badge: { setName: 'Badge', variants: [{ name: 'size=large, rounded=false', nodeId: '1:1' }, { name: 'size=small, rounded=true', nodeId: '1:2' }] } };
+
+test('the consumer rejects a replaced generated archive before reading inputs or writing output', async t => {
+  const root = mkdtempSync(path.join(tmpdir(), 'consumer-package-integrity-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const tarball = path.join(root, 'replaced.tgz'), out = path.join(root, 'out');
+  writeFileSync(tarball, 'replaced bytes');
+  await assert.rejects(runConsumerCheck({ dump: 'not-read', contract: 'not-read', generated: 'not-read', component: 'Badge', out,
+    package: { name: '@acme/badge', tarball, tarballSha256: '0'.repeat(64) } }), /consumer-package-sha256-mismatch/);
+  assert.equal(existsSync(out), false);
+});
 
 test('a boolean prop backed by a VARIANT axis is mounted with a boolean, never the truthy string "false"', () => {
   const cases = deriveCases(dump, contract, 'Badge');
@@ -811,4 +825,103 @@ test('SVG variant observation sees visible path changes, never hidden or covered
       assert.equal(await observeVariantPaint(cell),before,'restoring geometry restores the observation');
     }
   } finally { await browser.close(); }
+});
+
+
+function packagedFontFixture(t: { after(fn: () => void): void }) {
+  const root = mkdtempSync(path.join(tmpdir(), 'packaged-font-reader-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const bytes = readFileSync(new URL('../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
+  const notice = Buffer.from('Font distribution notice retained byte for byte.\n');
+  const hash = (value: Buffer) => createHash('sha256').update(value).digest('hex');
+  writeFileSync(path.join(root, 'input.woff2'), bytes);
+  writeFileSync(path.join(root, 'notice.txt'), notice);
+  writeFileSync(path.join(root, 'input.json'), JSON.stringify({ version: 1, fonts: [{
+    family: 'IBM Plex Sans', weight: '400', style: 'normal', file: 'input.woff2', sha256: hash(bytes),
+    license: { file: 'notice.txt', sha256: hash(notice) },
+  }] }));
+  const expected = readConsumerFonts(path.join(root, 'input.json'));
+  const installed = path.join(root, 'installed'), dir = path.join(installed, 'dist', 'fonts');
+  writeConsumerFonts(dir, expected);
+  const manifestPath = path.join(dir, 'manifest.json');
+  const manifest = consumerFontManifest(expected);
+  const save = () => writeFileSync(manifestPath, JSON.stringify(manifest));
+  return { root, installed, dir, expected, manifest, manifestPath, save };
+}
+
+test('packaged fonts accept normalized assets and notices while an absent font directory remains optional', t => {
+  const fixture = packagedFontFixture(t);
+  assert.deepEqual(readPackagedConsumerFonts(fixture.installed), fixture.expected);
+  rmSync(fixture.dir, { recursive: true });
+  assert.deepEqual(readPackagedConsumerFonts(fixture.installed), []);
+  mkdirSync(fixture.dir);
+  assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-package-fonts:manifest-not-regular/);
+});
+
+test('packaged fonts refuse every escaping or noncanonical font and notice reference before reading assets', async t => {
+  for (const field of ['font', 'license'] as const) {
+    for (const [name, file] of [
+      ['parent', '../missing.woff2'], ['absolute', '/missing.woff2'], ['backslash', '..\\missing.woff2'],
+      ['relative prefix', './missing.woff2'], ['wrong digest', '0'.repeat(64) + (field === 'font' ? '.woff2' : '.txt')],
+    ]) await t.test(`${field}: ${name}`, tt => {
+      const fixture = packagedFontFixture(tt);
+      const face = fixture.manifest.fonts[0]!;
+      (field === 'font' ? face : face.license!).file = file!;
+      fixture.save();
+      assert.throws(() => readPackagedConsumerFonts(fixture.installed), new RegExp(`consumer-package-fonts:noncanonical-${field}-file`));
+    });
+  }
+});
+
+test('packaged fonts reject linked directories and files including CSS and dangling font directories', async t => {
+  for (const name of ['installed', 'dist', 'fonts', 'manifest', 'font', 'license', 'css', 'dangling fonts']) {
+    await t.test(name, tt => {
+      const fixture = packagedFontFixture(tt), face = fixture.manifest.fonts[0]!;
+      const source = name === 'installed' ? fixture.installed : name === 'dist' ? path.dirname(fixture.dir) :
+        name === 'fonts' || name === 'dangling fonts' ? fixture.dir : name === 'manifest' ? fixture.manifestPath :
+          path.join(fixture.dir, name === 'font' ? face.file : name === 'license' ? face.license!.file : 'fonts.css');
+      const moved = path.join(fixture.root, 'moved');
+      const directory = lstatSync(source).isDirectory();
+      renameSync(source, moved);
+      symlinkSync(name === 'dangling fonts' ? path.join(fixture.root, 'absent') : moved, source, directory ? 'dir' : 'file');
+      assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-package-fonts:(directory-not-regular|file-not-regular)/);
+    });
+  }
+});
+
+test('packaged fonts reject a hash-correct font whose declared extension disagrees with its bytes', t => {
+  const fixture = packagedFontFixture(t), face = fixture.manifest.fonts[0]!;
+  const wrong = face.sha256 + '.ttf';
+  renameSync(path.join(fixture.dir, face.file), path.join(fixture.dir, wrong));
+  face.file = wrong; fixture.save();
+  assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-package-fonts:font-format-mismatch/);
+});
+
+test('packaged fonts preflight all paths before delegating any font reads', t => {
+  const fixture = packagedFontFixture(t), face = fixture.manifest.fonts[0]!;
+  writeFileSync(path.join(fixture.dir, face.file), 'changed bytes');
+  fixture.manifest.fonts.push({ ...face, file: '../outside.woff2' }); fixture.save();
+  assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-package-fonts:noncanonical-font-file/,
+    'an unsafe later reference is refused before the first corrupted font is read');
+});
+
+test('packaged fonts retain underlying byte and manifest authentication', t => {
+  const fixture = packagedFontFixture(t), face = fixture.manifest.fonts[0]!;
+  writeFileSync(path.join(fixture.dir, face.license!.file), 'changed notice');
+  assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-fonts:0:license-sha256-mismatch/);
+  writeFileSync(fixture.manifestPath, ' '.repeat(64 * 1024 + 1));
+  assert.throws(() => readPackagedConsumerFonts(fixture.installed), /consumer-package-fonts:manifest-too-large/);
+});
+
+
+test('packaged fonts refuse trailing newline basenames instead of normalizing them', async t => {
+  for (const field of ['font', 'license'] as const) await t.test(field, tt => {
+    const fixture = packagedFontFixture(tt), face = fixture.manifest.fonts[0]!;
+    const target = field === 'font' ? face : face.license!;
+    const original = target.file;
+    target.file += '\n';
+    renameSync(path.join(fixture.dir, original), path.join(fixture.dir, target.file));
+    fixture.save();
+    assert.throws(() => readPackagedConsumerFonts(fixture.installed), new RegExp(`consumer-package-fonts:noncanonical-${field}-file`));
+  });
 });

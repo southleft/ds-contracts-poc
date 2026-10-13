@@ -34,7 +34,7 @@ import { assertNativeVectorInputPaths, prepareNativeVectorStrokeInput } from './
 import type { NativeVectorStrokeCapture } from '../core/source-vector-stroke.js';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
-import { consumerFontManifest, readConsumerFonts } from './design-consumer-fonts.js';
+import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import type { Toolchain } from './package-react-library.js';
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
@@ -70,7 +70,7 @@ export async function dumpFromFigmaUrl(url: string, outDirArg: string) {
 }
 
 export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
-  options: { packageName?: string; toolchain?: Toolchain; nativeVectorStrokeCapture?: NativeVectorStrokeCapture } = {}) {
+  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[]; nativeVectorStrokeCapture?: NativeVectorStrokeCapture } = {}) {
   // The packager runs npm from inside the package directory, so a relative
   // --out (as the preview page shows: ./out) must be anchored here first.
   const outDir = path.resolve(outDirArg);
@@ -101,7 +101,8 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   // The first argument only names buildReactLibrary's default parent; the
   // parent is given here, so no repository path is involved.
   const library = await buildReactLibrary(outDir, input, path.join(outDir, 'work'),
-    {...(options.packageName ? {packageName: options.packageName} : {}), ...(options.toolchain ? {toolchain: options.toolchain} : {})});
+    {...(options.packageName ? {packageName: options.packageName} : {}), ...(options.toolchain ? {toolchain: options.toolchain} : {}),
+      ...(options.fonts?.length ? {fonts: options.fonts} : {})});
   const generatedDir = path.join(path.dirname(library.tarball), 'generated');
   if (!existsSync(generatedDir)) throw Error('figma-to-react-generated-missing: ' + generatedDir);
   const tarball = path.join(outDir, path.basename(library.tarball));
@@ -110,7 +111,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const rootIndex = request.contracts.findIndex(c => c.id === request.rootId);
   const component = String(request.contracts[rootIndex]?.name ?? '');
   const result = { setName: imported.setName, rootId: imported.request.rootId, component, proposed: imported.proposed,
-    skipped: imported.skipped, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
+    skipped: imported.skipped, packageName: library.name, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
     requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes };
   writeFileSync(path.join(outDir, 'result.json'), JSON.stringify(result, null, 2) + '\n');
   // buildReactLibrary writes contract i of the request to inputs/<i>.contract.json.
@@ -157,6 +158,7 @@ export async function checkGenerated(r: FigmaToReactResult, dumpPath: string,
     rmSync(out, { recursive: true, force: true }); // this command's own subdirectory, rewritten each run
     const runCheck = options.runCheck ?? (await import('./design-consumer-check.js')).runConsumerCheck;
     const receipt = await runCheck({ dump: dumpPath, contract: r.contractFile, generated: r.generatedDir, component: r.component, out, token: options.token,
+      package: { name: r.packageName, tarball: path.join(r.outDir, r.tarball), tarballSha256: r.tarballSha256 },
       ...(options.chromiumPath ? { chromiumPath: options.chromiumPath } : {}),
       ...(options.fonts ? { fonts: path.resolve(options.fonts) } : {}) });
     outcome = { status: receipt.verdict.verdict, receipt: path.relative(r.outDir, path.join(out, 'receipt.json')), verdicts: receipt.verdict };
@@ -204,8 +206,8 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   log?: (line: string) => void; error?: (line: string) => void }): Promise<number> {
   const log = deps.log ?? ((line: string) => console.log(line)), error = deps.error ?? ((line: string) => console.error(line));
   // Both command entrypoints authenticate the manifest before fetching or writing.
+  const faces = run.fonts ? readConsumerFonts(path.resolve(run.fonts)) : [];
   if (run.fonts) {
-    const faces = readConsumerFonts(path.resolve(run.fonts));
     log(`fonts: ${faces.length} face(s) from ${run.fonts} (${[...new Set(faces.map(f => f.family))].join(', ')})`);
   }
   let dumpPath = run.dump!, source: 'json' | 'figma' = 'json';
@@ -246,6 +248,7 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   }
   const r = await figmaToReact(deps.loadEngine, dumpPath, run.out, run.expectRequest, source,
     { ...(run.name ? { packageName: run.name } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
+      ...(faces.length ? { fonts: faces } : {}),
       ...(nativeVectorStrokeCapture ? {nativeVectorStrokeCapture} : {}) });
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
   if (r.skipped.length) log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);

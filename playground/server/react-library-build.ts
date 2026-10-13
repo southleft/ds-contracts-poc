@@ -4,12 +4,13 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { generateComponents } from '../../scripts/generate-components.js';
 import { packageReactLibrary, type Toolchain } from '../../scripts/package-react-library.js';
+import type { ConsumerFont } from '../../scripts/design-consumer-fonts.js';
 import { parseLibraryRequest } from './react-library-input.js';
 
 /** `repoRoot` only names the default parent for prepared downloads; the
  *  packaging toolchain resolves from where the packager is installed. */
 export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>,
-  parent = path.join(repoRoot, 'private', 'react-library-downloads'), options: { packageName?: string; toolchain?: Toolchain } = {}) {
+  parent = path.join(repoRoot, 'private', 'react-library-downloads'), options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[] } = {}) {
   mkdirSync(parent, { recursive: true });
   const work = mkdtempSync(path.join(parent, 'library-'));
   const inputs = path.join(work, 'inputs'), generated = path.join(work, 'generated'), iconsDir = path.join(inputs, 'icons');

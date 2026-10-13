@@ -66,7 +66,7 @@ import {domainTransitionGroups} from './design-consumer-domain.js';
  * --fonts <manifest.json> provisions explicitly hashed local font files in the
  * consumer; the receipt retains them. It never changes generated component CSS.
  */
-import { packageReactLibrary } from './package-react-library.js';
+import { packageReactLibrary, PACKAGE_NAME } from './package-react-library.js';
 import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, recordedLayoutSize, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
@@ -75,7 +75,7 @@ import {qualifyRenderBoundsExport} from './design-consumer-render-export.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
 import { tmpdir } from 'node:os';
@@ -146,6 +146,8 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
 }
 
 type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean; fonts?: string;
+  /** The just-generated archive. When present, check these bytes without repackaging. */
+  package?: { name: string; tarball: string; tarballSha256: string };
   /** the Chromium to launch; playwright-core's own when absent */ chromiumPath?: string };
 
 declare const __DS_CONTRACTS_REACT_RANGE__: string | undefined;
@@ -595,11 +597,67 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
       beforeSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-before.json'))), afterSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-after.json'))) } };
 }
 
+/** Installed archives may only refer to their own normalized, regular font files.
+ * Operator manifests intentionally accept local paths; authenticate package paths
+ * before passing any asset to that reader. A package without fonts remains valid. */
+export function readPackagedConsumerFonts(installedDir: string): ConsumerFont[] {
+  const fail = (reason: string): never => { throw Error(`consumer-package-fonts:${reason}`); };
+  const directory = (file: string, optional = false) => {
+    const stat = lstatSync(file, { throwIfNoEntry: false });
+    if (!stat && optional) return false;
+    if (!stat || !stat.isDirectory() || stat.isSymbolicLink()) fail('directory-not-regular');
+    return true;
+  };
+  directory(installedDir);
+  const dist = path.join(installedDir, 'dist');
+  directory(dist);
+  const fontsDir = path.join(dist, 'fonts');
+  if (!directory(fontsDir, true)) return [];
+  // Include CSS and notices: no file in this flat directory may follow a link.
+  for (const name of readdirSync(fontsDir)) {
+    const stat = lstatSync(path.join(fontsDir, name));
+    if (!stat.isFile() || stat.isSymbolicLink()) fail('file-not-regular');
+  }
+  const manifestPath = path.join(fontsDir, 'manifest.json');
+  const manifestStat = lstatSync(manifestPath, { throwIfNoEntry: false });
+  if (!manifestStat?.isFile() || manifestStat.isSymbolicLink()) return fail('manifest-not-regular');
+  if (manifestStat.size > 64 * 1024) fail('manifest-too-large');
+  const manifest: unknown = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  if (!manifest || typeof manifest !== 'object' || !Array.isArray((manifest as any).fonts)) fail('invalid-manifest');
+  const faces = (manifest as { fonts: unknown[] }).fonts;
+  const regularAsset = (value: unknown, extension: string, kind: string) => {
+    if (!value || typeof value !== 'object') fail(`invalid-${kind}`);
+    const { file, sha256: hash } = value as { file?: unknown; sha256?: unknown };
+    if (typeof hash !== 'string' || !/^[a-f0-9]{64}$/.test(hash) ||
+        typeof file !== 'string' || new RegExp(`^${hash}\\.${extension}$`).exec(file)?.[0] !== file) fail(`noncanonical-${kind}-file`);
+    const asset = path.join(fontsDir, file as string);
+    const stat = lstatSync(asset, { throwIfNoEntry: false });
+    if (!stat?.isFile() || stat.isSymbolicLink()) fail(`${kind}-not-regular`);
+  };
+  // Check ALL references before readConsumerFonts can read even the first face.
+  for (const face of faces) {
+    regularAsset(face, '(?:ttf|otf|woff|woff2)', 'font');
+    if (Object.hasOwn(face as object, 'license')) regularAsset((face as any).license, 'txt', 'license');
+  }
+  const fonts = readConsumerFonts(manifestPath);
+  for (const [index, font] of fonts.entries()) {
+    const face = faces[index] as { file: string; license?: { file: string } };
+    if (font.file !== face.file) fail('font-format-mismatch');
+    if (font.license?.file !== face.license?.file) fail('noncanonical-license-file');
+  }
+  return fonts;
+}
+
 export type ConsumerCheckArgs = Args;
 /** The whole check, as a function: figma:to-react runs it on what it just
  *  generated. Writes <out>/receipt.json and returns the receipt; never exits. */
 export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
-  const fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
+  let fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
+  const packageBytes = args.package ? readFileSync(args.package.tarball) : undefined;
+  if (args.package && (!PACKAGE_NAME.test(args.package.name) || args.package.name.length > 214))
+    throw Error('consumer-package-name-invalid');
+  if (args.package && sha256(packageBytes!) !== args.package.tarballSha256)
+    throw Error('consumer-package-sha256-mismatch');
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
   for (const c of cases) c.mount = mountProps(contract, c.props);
@@ -660,19 +718,32 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     problems.push(`case-key-duplicate:${d.key}: Figma variants ${d.figmaNames.map(n => JSON.stringify(n)).join(', ')} mount the same props (the contract maps no axis that tells them apart); refused before mounting`);
   if (duplicates.length) { receipt.refused = 'case-key-duplicate'; rmSync(work, { recursive: true, force: true }); }
   else try {
-    const lib = await packageReactLibrary(args.generated, args.component, work);
-    receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
-    const consumer = writeConsumer(work, lib, args.component, cases, consumerReactRange(), fonts);
+    const lib = args.package
+      ? { ...args.package, tarball: path.join(work, 'generated.tgz') }
+      : await packageReactLibrary(args.generated, args.component, work);
+    if (packageBytes) writeFileSync(lib.tarball, packageBytes, { flag: 'wx' });
+    receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: [] };
+    // A delivered archive must supply its own fonts. Standalone generated-dir
+    // checks keep their explicit consumer inputs for backwards compatibility.
+    const consumer = writeConsumer(work, lib, args.component, cases, consumerReactRange(), args.package ? [] : fonts);
     run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], consumer);
     // The consumer must not resolve anything from this repository.
     const lockfile = readFileSync(path.join(consumer, 'package-lock.json'), 'utf8');
     const installedDir = path.join(consumer, 'node_modules', ...lib.name.split('/'));
     const installed = JSON.parse(readFileSync(path.join(installedDir, 'package.json'), 'utf8'));
+    if (installed.name !== lib.name) throw Error('consumer-package-name-mismatch');
+    receipt.package.distFiles = readdirSync(path.join(installedDir, 'dist'), { recursive: true }).map(String).sort();
+    if (args.package) {
+      const bundled = readPackagedConsumerFonts(installedDir);
+      if (fonts.length && JSON.stringify(consumerFontManifest(fonts)) !== JSON.stringify(consumerFontManifest(bundled)))
+        throw Error('consumer-package-fonts-mismatch');
+      fonts = bundled;
+    }
     const installedFiles: string[] = readdirSync(path.join(installedDir, 'dist'), { recursive: true }).map(String).filter(f => !statSync(path.join(installedDir, 'dist', f)).isDirectory());
     const repoPathInInstalled = installedFiles.filter(f => readFileSync(path.join(installedDir, 'dist', f), 'utf8').includes(ROOT));
     receipt.consumer = { react: installed.peerDependencies?.react ?? null, installedVersion: installed.version, lockfileSha256: sha256(lockfile),
       repoPathInLockfile: lockfile.includes(ROOT), repoPathInInstalledFiles: repoPathInInstalled };
-    receipt.consumer.fontProvision = { kind: fonts.length ? 'explicit-local-assets' : 'environment-fonts',
+    receipt.consumer.fontProvision = { kind: fonts.length ? (args.package ? 'package-assets' : 'explicit-local-assets') : 'environment-fonts',
       manifest: fonts.length ? consumerFontManifest(fonts) : null,
       sourceFontByteIdentity: 'unverified',
       note: 'These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.' };
