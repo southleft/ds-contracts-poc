@@ -1,3 +1,4 @@
+import {withObservedFamilyPreparation} from './react-observed-family.js';
 import {isReactObservedFamilyNativeRequest,reactObservedFamilyReservation,prepareReactObservedFamilyNativePlan,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {isReactAuthoredOperationRequest as isReactAuthoredNativeRequest,reactAuthoredNativeReservation,type ReactAuthoredStateApiNativeRequest,
   reactAuthoredOwnershipAnchor,type ReactAuthoredOperationRequest as ReactAuthoredNativeRequest} from './react-authored-native-request.js';
@@ -491,7 +492,7 @@ export function createNativeOperationJobs(
     }
     if (isReactComparisonRequest(request)) {
       if (!options.reactComparison) fail('react-comparison-adapter-unavailable');
-      return options.reactComparison.prepare(request, operation);
+      return withObservedFamilyPreparation(()=>options.reactComparison!.prepare(request, operation));
     }
     if (isReactCallerNativeRequest(request)) {
       if (!options.reactCaller) fail('react-caller-adapter-unavailable');
@@ -1850,11 +1851,11 @@ export function createNativeOperationJobs(
     } else if (phase === 'comparison-recovery-apply') {
       if(loaded.state.phase!=='comparison-recovery-observed' || loaded.state.recoveryWritten || !loaded.state.recovery || !isReactComparisonRequest(loaded.header.request) || !options.reactComparison) fail('comparison-recovery-refused');
       authenticate(loaded);
-      const recovery=loaded.state.recovery;
-      const built=options.reactComparison.buildComponent(loaded.header.request,{
+      const recovery=loaded.state.recovery,request=loaded.header.request;
+      const built=withObservedFamilyPreparation(()=>options.reactComparison!.buildComponent(request,{
         operation:loaded.plan.plan.operation,planRevision:loaded.plan.revision,journalRevision:loaded.fingerprint,
         tokens:{input:loaded.plan.plan.tokenInput,identity:loaded.state.identity!,receipt:(recovery.observation as any).content.tokens.receipt},comparisonRecovery:recovery,
-      });
+      }));
       if(built.planRevision!==loaded.plan.revision || typeof built.script!=='string' || !built.script.trim() || Buffer.byteLength(built.script)>4*1024*1024) fail('component-script-invalid');
       authenticate(loaded);script=built.script;
     } else if (phase === "component-create") {
@@ -1865,7 +1866,7 @@ export function createNativeOperationJobs(
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
       const request = structuredClone(loaded.header.request);
-      const built = isReactObservedFamilyNativeRequest(request) ? options.observedFamily!.buildComponent(request,context) : isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+      const built = isReactObservedFamilyNativeRequest(request) ? options.observedFamily!.buildComponent(request,context) : isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? withObservedFamilyPreparation(()=>options.reactComparison!.buildComponent(request, context)) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
         : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
@@ -1883,7 +1884,8 @@ export function createNativeOperationJobs(
       // observation never authorizes admission, allocation or baseline changes.
       if(isComparisonPlan(loaded.plan) && isReactComparisonRequest(loaded.header.request) && options.reactComparison?.refresh) {
         try {
-          const fresh=options.reactComparison.refresh(structuredClone(loaded.header.request),loaded.plan.plan.operation);
+          const request=structuredClone(loaded.header.request);
+          const fresh=withObservedFamilyPreparation(()=>options.reactComparison!.refresh!(request,loaded.plan.plan.operation));
           refreshedComparisonPlan(loaded.plan,loaded.header.request,fresh);
           if(loadFresh(id).fingerprint!==loaded.fingerprint) fail('evidence-changed-during-validation');
           if (!same(fresh.plan,loaded.plan)) comparisonRefresh=fresh;

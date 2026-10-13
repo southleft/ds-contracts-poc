@@ -1,4 +1,6 @@
 import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {inventoryEvidence} from './react-validation-evidence.js';
+import {reactSourceProgramUnchanged} from './react-source-program.js';
 /** A bounded family of already-observed source callers, not an inferred API. */
 import {createHash} from 'node:crypto';
 import {existsSync,lstatSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';
@@ -41,6 +43,36 @@ export interface ObservedFamilyMatrix {
 type Plane=ReturnType<typeof readReactObservedFamilyPlane>;
 const verified=new WeakMap<object,{record:ObservedFamilyRecord;planes:Plane[];pin:ObservedFamilyPin}>();
 export interface VerifiedObservedFamily {record:ObservedFamilyRecord;pin:ObservedFamilyPin;planes:Plane[]}
+type PreparationFamily={repo:string;reference:ReactReference;pin:string;family:VerifiedObservedFamily;verify:()=>void};
+let preparationFamilies:PreparationFamily[]|undefined;
+/** One synchronous compiler/evidence preparation only. A later source check,
+ * builder, delivery or request always opens its own fresh scope. This is not
+ * a display snapshot and never caches operation authorization or refusals. */
+export function withObservedFamilyPreparation<T>(prepare:()=>T):T {
+  const outer=preparationFamilies,entries:PreparationFamily[]=[];
+  preparationFamilies=entries;
+  try {
+    const result=prepare();
+    if(result&&typeof (result as any).then==='function')throw Error('react-family-async-preparation');
+    for(const entry of entries)entry.verify();
+    return result;
+  } finally {preparationFamilies=outer;}
+}
+function copyVerifiedFamily(family:VerifiedObservedFamily):VerifiedObservedFamily {
+  const value=verified.get(family);if(!value)fail('verified-evidence-required');
+  const planes=value.planes.map(({contentContext,...plane})=>({...structuredClone(plane),...(contentContext?{contentContext}:{})}));
+  const copy={record:structuredClone(value.record),pin:structuredClone(value.pin),planes};
+  verified.set(copy,value);return copy;
+}
+// Include all declared mount/runtime-route metadata consumed by family
+// derivation. A profile callback is checked by identity separately; any
+// succession-dependent profile values retain reactReferenceUnchanged's check.
+function preparationReferenceIdentity(reference:ReactReference):string {
+  const {profile,...cohort}=reference.cohort;
+  return canonicalJson({id:reference.id,sourceRoot:reference.sourceRoot,files:reference.files,cohort,
+    mountedSourceFiles:reference.mountedSourceFiles,runtimeImports:reference.runtimeImports,
+    runtimeEntryImports:reference.runtimeEntryImports});
+}
 const hash=(x:string|Buffer)=>createHash('sha256').update(x).digest('hex');
 const sha=/^[a-f0-9]{64}$/,caseId=/^[a-z][a-z-]{0,79}$/;
 const reserved=new Set(['children','className','style','ref','key','id','__proto__','constructor','prototype','dangerouslySetInnerHTML']);
@@ -135,6 +167,11 @@ export function selectObservedFamily(repo:string,reference:ReactReference,report
 }
 export function readObservedFamilyEvidence(repo:string,reference:ReactReference,pin:ObservedFamilyPin):VerifiedObservedFamily {
   if(!isObservedFamilyPin(pin))fail('pin-invalid');const dir=familyDir(repo,pin.id);
+  const repoKey=path.resolve(repo),pinKey=canonicalJson(pin);
+  const referenceIdentity=preparationFamilies?preparationReferenceIdentity(reference):undefined;
+  const referenceProfile=preparationFamilies?reference.cohort.profile:undefined;
+  const saved=preparationFamilies?.find(entry=>entry.repo===repoKey&&entry.reference===reference&&entry.pin===pinKey);
+  if(saved){saved.verify();return copyVerifiedFamily(saved.family);}
   const read=(name:string)=>{const f=path.join(dir,name),s=lstatSync(f);if(!s.isFile()||s.isSymbolicLink()||s.size>1_000_000)fail('record-invalid');return readFileSync(f);};
   const bytes=read('record.json'),inventory=read('integrity.json');
   if(hash(bytes)!==pin.recordSha256||hash(inventory)!==pin.inventorySha256)fail('record-changed');
@@ -147,7 +184,27 @@ export function readObservedFamilyEvidence(repo:string,reference:ReactReference,
   // Clone mutable source data, but retain the existing frozen contextual
   // capability: serializing that object would erase its private authority.
   const planes=current.planes.map(({contentContext,...plane})=>({...structuredClone(plane),...(contentContext?{contentContext}:{})}));
-  verified.set(result,{record:structuredClone(current.record),pin:structuredClone(pin),planes});return result;
+  verified.set(result,{record:structuredClone(current.record),pin:structuredClone(pin),planes});
+  if(preparationFamilies){
+    const expectedPin=structuredClone(pin);
+    const archive=path.join(repoKey,'private/react-source-ownership',reference.id,record.ownership.id);
+    const sealBytes=readFileSync(path.join(archive,'integrity.json'));
+    if(hash(sealBytes)!==record.inventorySha256)fail('preparation-evidence-changed');
+    const seal=JSON.parse(sealBytes.toString());
+    const archiveFiles=canonicalJson({...seal.files,'integrity.json':record.inventorySha256});
+    const verify=()=>{
+      // Physical reads deliberately bypass a surrounding display snapshot,
+      // retaining the original directory and safe regular-file checks.
+      familyDir(repoKey,expectedPin.id);
+      if(reference.cohort.profile!==referenceProfile||preparationReferenceIdentity(reference)!==referenceIdentity||
+          !reactReferenceUnchanged(reference)||!reactSourceProgramUnchanged(planes[0].program)||
+          hash(read('record.json'))!==expectedPin.recordSha256||
+          hash(read('integrity.json'))!==expectedPin.inventorySha256||
+          canonicalJson(inventoryEvidence(archive))!==archiveFiles)fail('preparation-evidence-changed');
+    };
+    verify();preparationFamilies.push({repo:repoKey,reference,pin:pinKey,family:result,verify});
+  }
+  return result;
 }
 export function assembleObservedFamily(family:VerifiedObservedFamily):{matrix:ObservedFamilyMatrix;source:{revision:string;programSha256:string;evidenceRevision:string}}{
   const canonical=verified.get(family);if(!canonical)fail('verified-evidence-required');

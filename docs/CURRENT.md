@@ -2,7 +2,7 @@
 
 **Public project status · updated 2026-10-13 · V1 is not complete.**
 
-The React importer now preserves direct slot anatomy as an omitted-input default. A fresh ordinary installed CLI comparison on the fixed 40-set sample improved from 652 to 653 passing variants out of 879 (74.29%), with no lost passes or new failing sets. Failures fell from 181 to 179; unverified rows increased from 46 to 47 because the third Carousel row retains an original reference-framing refusal. Passing sets remain 17 of 40. The two-slide Carousel now passes with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort has the bounded native measurements below.
+The React importer preserves direct slot anatomy as an omitted-input default. The latest retained complete fixed 40-set result is 653 passing, 172 failing and 54 unverified variants out of 879 (74.29% passing); 17 sets pass. Seven M3 Assistive Chip variants changed from failed to unverified after the checker retained their unresolved image-alignment refusal. Their images are unchanged, and this adds no passes. Later focused comparisons and refreshed-source experiments remain separate and do not add whole-cohort credit. The two-slide Carousel has recorded passing evidence with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort has the bounded native measurements below.
 
 The original Radix Themes Badge workspace now authenticates all 36 declared
 source cases without changing its code. Source-owned synchronous helpers can
@@ -11,8 +11,8 @@ content directly to its observed HTML root. Every helper call, object identity,
 ordered write and source return site must still agree with the original render;
 unknown writes, changed children and conflicting roots refuse. A fresh native
 Badge comparison contains the caller text and passed structural readback.
-Visual scoring is separate: 11 of the 36 original cases now have native image
-passes on both backgrounds, with zero measured image failures and 25 unmeasured.
+Visual scoring is separate: 12 of the 36 original cases now have native image
+passes on both backgrounds, with zero measured image failures and 24 unmeasured.
 The 36 source matches do not count as 36 native passes, and the unseen reverse
 scoreboard remains unqualified.
 
@@ -26,8 +26,11 @@ three cases overlap earlier measurements and do not add scoreboard credit. A
 second family adds the previously unmeasured `radius="none"` and `radius="full"`
 cases: both completed native readback and passed the same image check (0.5263%
 white, 0% black), with the caller text present and root dimensions within one
-pixel. These results form an image-only ledger across recorded runs, not a
-fresh 36-case qualification on one revision. Font-byte identity, unselected
+pixel. The first color-family comparison, Brown, also completed native readback
+and passed (0.3947% white, 0% black). Its caller text is present; the source is
+37.96875 × 20 px and the native output is 38 × 20 px. These results form an
+image-only ledger across recorded runs, not a fresh 36-case qualification on
+one revision. Font-byte identity, unselected
 values, behavior, family updates and the complete browser journey remain
 unqualified. Mixed normal and finite letter spacing is retained per variant;
 unsupported or changed source evidence still refuses.
