@@ -180,6 +180,8 @@ export interface NodeSpec {
   backgroundClip?: 'padding-box';
   /** Synthetic, independently verified paint plane; not a content/API part. */
   backgroundPaint?: {inset:number;radius:number};
+  /** Qualified in-flow padding-box frame around an empty native root SLOT. */
+  rootSlotFlow?: {inset:number;radius:number};
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
@@ -9231,6 +9233,7 @@ function buildSyncScript(
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
+  const hasRootSlotFlow = featureDatas.some((d) => dataSome(d, (x) => !!x.rootSlotFlow));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
   const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
@@ -9477,7 +9480,7 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 await figma.loadAllPagesAsync();
 
 ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
-  if (!spec.rootSlotContent) return;${hasRootGridSlot ? `
+  if (!spec.rootSlotContent${hasRootSlotFlow ? ' && !spec.rootSlotFlow' : ''}) return;${hasRootGridSlot ? `
   // The grid must wait until its enclosing slot has its final parent sizing.
   if (spec.rootSlotGridContent) return;` : ''}
   // FILL under HUG can retain a stale extent (live probe 2026-09-16).
@@ -9497,8 +9500,8 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     child.resizeWithoutConstraints(axis === 'Horizontal' ? extent : child.width, axis === 'Vertical' ? extent : child.height);
     child['layoutSizing' + axis] = 'FILL';
   };
-  if (!horizontal && child.layoutSizingHorizontal === 'FILL') reseat('Horizontal', parent.width - parent.paddingLeft - parent.paddingRight);
-  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);
+  ${hasRootSlotFlow ? 'const inset = spec.rootSlotFlow ? spec.rootSlotFlow.inset : 0;\n  ' : ''}if (!horizontal && child.layoutSizingHorizontal === 'FILL') reseat('Horizontal', parent.width - parent.paddingLeft - parent.paddingRight${hasRootSlotFlow ? ' - 2 * inset' : ''});
+  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom${hasRootSlotFlow ? ' - 2 * inset' : ''});
   // An exact-zero width here is inherited by every instance, and no instance
   // override changes it: a caller that widens the instance leaves the slot at
   // 0 px, its content centred (live Scratch probe 2026-09-27; the composed
@@ -9509,7 +9512,10 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     child.layoutSizingHorizontal = 'FIXED';
     child.resizeWithoutConstraints(${ROOT_CONTENT_EMPTY_WIDTH_SEED}, child.height);
     child.layoutSizingHorizontal = sizing;
-  }${hasRootGridSlot ? `
+  }${hasRootSlotFlow ? `
+  // The frame receives its outer sizing after its subtree is built. Reseat
+  // its native SLOT against this final immediate parent, not the outer root.
+  if (spec.rootSlotFlow) sizeRootContent(child, child.children[0], spec.children[0]);` : ''}${hasRootGridSlot ? `
   if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
     const grid = child.children[0];
     grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
@@ -9531,7 +9537,7 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
 }
 ` : ''}${hasCallerSlots && hasRootSlot ? `const callerSlotsByInstance = new WeakMap();
 function sizeCallerSlots(node) {
-  for (const entry of callerSlotsByInstance.get(node) || []) sizeRootContent(node, entry.slot, entry.spec);
+  for (const entry of callerSlotsByInstance.get(node) || []) sizeRootContent(${hasRootSlotFlow ? 'entry.slot.parent' : 'node'}, entry.slot, entry.spec);
   for (const child of node.children || []) sizeCallerSlots(child);
 }
 ` : ''}${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};

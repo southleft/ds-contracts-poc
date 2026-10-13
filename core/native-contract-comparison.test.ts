@@ -286,7 +286,8 @@ test('comparison variant selection preserves typed null, string null, defaults a
 async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false, callerWidth = false, paint = false) {
   const f = await fixture(undefined, callerWidth ? 'column' : fillWidth ? 'flow' : grid);
   if (paint) {
-    // This fixture models uniform inset STRETCH paint under a HUG instance.
+    // This legacy fixture models uniform inset STRETCH paint under a HUG
+    // instance with an explicit minimum; the new flow topology is separate.
     // The live retained Card readback measured its inherited paint at 114x34
     // inside a 116x36 Button. The general mock leaves absolute boxes fixed.
     const proto = Object.getPrototypeOf(f.figma.currentPage);
@@ -300,7 +301,7 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, 
   }
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
   if (paint) Object.assign(child.anatomy.root, { declared: { 'background-clip': 'padding-box' },
-    literals: { 'border-width': '1px', 'border-radius': '8px' } });
+    literals: { 'border-width': '1px', 'border-radius': '8px', 'min-width': '0px' } });
   if(grid) {
     child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
     if(grid==='flow') { child.anatomy.root.layout.columns=[{fr:1}];delete child.anatomy.root.layout.rows;child.anatomy.root.layout.autoRows={fit:true}; }

@@ -11,6 +11,7 @@ import {
   joinAxesOfPlan,
   joinSourceRowsToNativeMains,
   nativeBackgroundPlane,
+  nativeBackgroundFlow,
   nativeRootFacts,
   numericEqual,
   sourceRootFacts,
@@ -221,4 +222,26 @@ test('the join is data only: set values map through the plan axes, an omission c
   assert.throws(() => joinAxesOfPlan({}), /root-geometry-join-axes-missing/);
   const noDefault = joinAxesOfPlan({ codeValueAxes: { axes: [{ property: 'scale', codeProp: 'scale', values: [{ value: 'md', label: 'md', code: 'md' }] }] } });
   assert.throws(() => assignmentOf(noDefault, { scale: { kind: 'omit' } }), /root-geometry-join-omitted-without-default:scale/);
+});
+
+
+test('an observed in-flow padding-box carrier supplies spacing without hiding caller descendants',()=>{
+ const host=root({width:116,fills:[],itemSpacing:0,paddingLeft:0,paddingRight:0,primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'FIXED',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',strokesIncludedInLayout:true},['flow']);
+ const flow:NativeNode={id:'flow',type:'FRAME',parentId:'root',childIds:['slot'],values:{x:1,y:1,width:114,height:34,
+  relativeTransform:[[1,0,1],[0,1,1]],layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',primaryAxisSizingMode:'AUTO',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL',cornerRadius:7,
+  topLeftRadius:7,topRightRadius:7,bottomLeftRadius:7,bottomRightRadius:7,visible:true,opacity:1,clipsContent:false,strokes:[],effects:[],
+  fills:[solid(23,23,23)],itemSpacing:6,paddingTop:0,paddingRight:10,paddingBottom:0,paddingLeft:10}};
+ const content:NativeNode={...slot,parentId:'flow',values:{layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL'}};
+ assert.equal(nativeBackgroundFlow(host,nodesOf(host,flow,content))?.id,'flow');
+ const facts=nativeRootFacts(host,nodesOf(host,flow,content),new Map(),fixedHeight);
+ assert.equal(facts.content,'empty-slot');assert.equal(facts.padding.left,10);assert.equal(facts.gap.px,6);
+ assert.equal(facts.background.kind,'solid');assert.equal(verdicts(sourceRootFacts(style({'background-clip':'padding-box'}),sizes('auto','fixed')),facts).background,'match');
+ const text:NativeNode={id:'label',type:'TEXT',parentId:'slot',values:{characters:'Save changes'}};
+ assert.equal(nativeRootFacts(host,nodesOf(host,flow,{...content,childIds:['label']},text),new Map(),fixedHeight).content,'has-content');
+ for(const mutate of [(n:NativeNode)=>{n.values.width=114.01000213623047},(n:NativeNode)=>{n.values.layoutPositioning='ABSOLUTE'},
+  (n:NativeNode)=>{n.childIds=['slot','unexpected']},(n:NativeNode)=>{n.parentId='other'},(n:NativeNode)=>{n.values.opacity=0.5}]){
+  const wrong=structuredClone(flow);mutate(wrong);assert.equal(nativeBackgroundFlow(host,nodesOf(host,wrong,content)),null);
+ }
 });

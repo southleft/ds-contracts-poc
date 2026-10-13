@@ -5,6 +5,9 @@ import {emitNativeContractReadbackScript,verifyNativeContractReadback,type Nativ
 import {emitNativeContractComparisonReadbackScript,verifyNativeContractComparisonReadback} from './native-contract-comparison-observation.js';
 import {prepareNativeContractComparison} from './native-contract-comparison.js';
 import {revisionOf} from './contract-provenance.js';
+import {lowerPaddingBoxBackground,rootSlotFlowSpecValid,nativeRootSlotFlowGeometry} from './figma-background-clip.js';
+import {prepareNativeContractDraft} from './native-contract-draft.js';
+import type {NodeSpec} from './emit-figma-script.js';
 
 test('padding-box paint preserves outer layout and token colour through native creation and independent readback',async()=>{
  const f=await nativeComparisonFixture();
@@ -61,7 +64,7 @@ test('shared rule derives bound radii and border widths and leaves unsupported c
  c.anatomy.root.tokens!['border-radius']='{size}';
  c.anatomy.root.literals={'border-width':'2px'};
  const compile=()=>f.engine.compileComponentData(c,new Map([[c.id,c]]));
- assert.deepEqual(compile().variants[0].spec.children?.[0].backgroundPaint,{inset:2,radius:12});
+ assert.deepEqual(compile().variants[0].spec.children?.[0].rootSlotFlow,{inset:2,radius:12});
  c.anatomy.root.literals['border-left-width']='3px';
  const asymmetric=compile();
  assert.equal(asymmetric.variants[0].spec.backgroundClip,undefined);
@@ -90,4 +93,71 @@ test('nested literal backgrounds retain alpha and zero inner radii',async()=>{
  assert.equal(verdict.status,'supported-structure-observed',JSON.stringify(verdict));
  const bad=structuredClone(receipt);bad.nodes.find((n:any)=>n.type==='RECTANGLE').values.fills[0].opacity=1;
  assert.equal(verifyNativeContractReadback(input,bad).status,'refused');
+});
+
+
+test('HUG row padding-box roots lower to a closed flow frame and preserve native SLOT bindings',async()=>{
+ const f=await nativeComparisonFixture(),c=structuredClone(f.main);
+ c.anatomy.root.declared={'background-clip':'padding-box'};
+ c.anatomy.root.literals={height:'36px','border-width':'1px','border-radius':'8px','padding-top':'2px','padding-bottom':'3px'};
+ c.anatomy.root.tokens={...c.anatomy.root.tokens,'padding-left':'{size}','padding-right':'{size}',gap:'{size}'};
+ const compiled=f.engine.compileNativeContractDraft(c,new Map([[c.id,c]]),f.source),root=compiled.component.variants[0].spec;
+ const flow=root.children![0],slot=flow.children![0];
+ assert.deepEqual(flow.rootSlotFlow,{inset:1,radius:7});assert.equal(rootSlotFlowSpecValid(root,flow),true);
+ assert.equal(root.strokesIncludedInLayout,true);assert.equal(root.fill,undefined);assert.equal(root.fixedHeight?.px??root.lits?.height,36);
+ assert.equal(root.bindings?.paddingLeft,undefined);assert.equal(root.lits?.paddingTop,undefined);
+ assert.equal(flow.fill,'surface');assert.equal(flow.bindings?.paddingLeft,'size');assert.equal(flow.bindings?.itemSpacing,'size');
+ assert.equal(flow.lits?.paddingTop,2);assert.equal(flow.lits?.paddingBottom,3);assert.equal(slot.type,'slot');
+ assert.equal(slot.bindings?.itemSpacing,'size');assert.deepEqual(slot.children??[],[]);
+ assert.deepEqual([root.nativeContractPart?.specPath,flow.nativeContractPart?.specPath,slot.nativeContractPart?.specPath],[[],[0],[0,0]]);
+ const data=f.engine.compileComponentData(c,new Map([[c.id,c]]));
+ for(const change of [
+  (r:NodeSpec)=>{r.children![0].absolute={h:'STRETCH',v:'STRETCH',left:1,right:1,top:1,bottom:1};},
+  (r:NodeSpec)=>{r.children![0].children![0].children=[{type:'text',name:'forged',characters:'x'}];},
+  (r:NodeSpec)=>{r.children![0].lits!.radius=8;},
+  (r:NodeSpec)=>{r.children![0].children![0].rootSlotContent=undefined;},
+  (r:NodeSpec)=>{r.bindings={...r.bindings,paddingLeft:'size'};},
+  (r:NodeSpec)=>{r.children!.push({type:'frame',name:'extra'});},
+ ]){const bad=structuredClone(data);change(bad.variants[0].spec);assert.throws(()=>prepareNativeContractDraft(c,bad,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'}),/ROOT_SLOT_FLOW_UNQUALIFIED/);}
+ const script=f.engine.buildNativeContractDraftScript(c,new Map([[c.id,c]]),f.source,f.supplemental);
+ assert.match(script,/if \(spec.rootSlotFlow\) sizeRootContent\(child, child.children\[0\], spec.children\[0\]\)/);
+});
+
+test('the flow branch leaves fixed, minimum, template, default, column and non-root topology on the legacy path',()=>{
+ const fresh=():NodeSpec=>({type:'root',name:'Root',layout:{mode:'HORIZONTAL',primary:'CENTER',counter:'CENTER'},
+  fill:'surface',lits:{strokeWeight:1,radius:8,paddingLeft:10},children:[{type:'slot',name:'children',slotProperty:'Children',rootSlotContent:true,
+   layout:{mode:'HORIZONTAL',primary:'CENTER',counter:'CENTER'}}]});
+ const mutations:Array<(r:NodeSpec)=>void>=[r=>{r.lits!.width=100},r=>{r.pct=0.5},r=>{r.fixedWidth={px:100,varName:'width'}},r=>{r.lits!.minWidth=0},
+  r=>{r.bindings={maxWidth:'width'}},r=>{r.lits!.minHeight=0},r=>{r.bindings={maxHeight:'height'}},r=>{r.rootFillWidth=true},r=>{r.layout!.mode='VERTICAL'},r=>{r.type='frame'},
+  r=>{r.children![0].children=[{type:'text',name:'Content text template',slotTextTemplate:true}]},
+  r=>{r.children![0].slotDefault=[{dep:'Other',contractId:'other'}]},r=>{r.strokesIncludedInLayout=false}];
+ for(const mutate of mutations){const root=fresh();mutate(root);assert.equal(lowerPaddingBoxBackground(root,()=>undefined),true);
+  assert.equal(root.children![0].rootSlotFlow,undefined);assert.deepEqual(root.children![0].backgroundPaint,{inset:1,radius:7});}
+});
+
+test('flow geometry accepts the two live-proved extents and rejects seed overshoot, offset and sizing corruption',()=>{
+ // Synthetic values based on the retained live diagnostic; no mock or fixture is claimed as a native observation.
+ const parent=(width:number)=>({width,height:36,layoutMode:'HORIZONTAL',layoutSizingHorizontal:'HUG',primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'FIXED',
+  primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',strokesIncludedInLayout:true,strokeAlign:'INSIDE',strokeTopWeight:1,strokeRightWeight:1,
+  strokeBottomWeight:1,strokeLeftWeight:1,paddingTop:0,paddingRight:0,paddingBottom:0,paddingLeft:0,itemSpacing:0,cornerRadius:8,topLeftRadius:8,topRightRadius:8,bottomLeftRadius:8,bottomRightRadius:8});
+ const frame=(width:number)=>({width:width-2,height:34,x:1,y:1,relativeTransform:[[1,0,1],[0,1,1]],layoutMode:'HORIZONTAL',layoutPositioning:'AUTO',
+  layoutSizingHorizontal:'HUG',layoutSizingVertical:'FILL',primaryAxisSizingMode:'AUTO',primaryAxisAlignItems:'CENTER',counterAxisAlignItems:'CENTER',
+  cornerRadius:7,topLeftRadius:7,topRightRadius:7,bottomLeftRadius:7,bottomRightRadius:7,visible:true,opacity:1,clipsContent:false,strokes:[],effects:[]});
+ for(const width of [116,155])assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},parent(width),frame(width)),true);
+ for(const fields of [{width:114.01000213623047},{x:0},{height:36},{cornerRadius:8},{layoutPositioning:'ABSOLUTE'},
+  {layoutSizingHorizontal:'FILL'},{opacity:0.5},{effects:[{}]},{relativeTransform:[[1,0,0],[0,1,1]]}])
+  assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},parent(116),{...frame(116),...fields}),false,JSON.stringify(fields));
+ assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},{...parent(116),strokesIncludedInLayout:false},frame(116)),false);
+ assert.equal(nativeRootSlotFlowGeometry({inset:1,radius:7},{...parent(116),counterAxisSizingMode:'unknown'},frame(116)),false);
+});
+
+// Absence of a border still means a zero inset, rather than Figma's default
+// birth-node stroke weight. This retains the broad no-stroke HUG-row case.
+test('zero-border flow records the derived zero and constrained height stays legacy',()=>{
+ const make=():NodeSpec=>({type:'root',name:'Root',layout:{mode:'HORIZONTAL',primary:'CENTER',counter:'CENTER'},fill:'surface',
+   children:[{type:'slot',name:'children',slotProperty:'Children',rootSlotContent:true,layout:{mode:'HORIZONTAL',primary:'CENTER',counter:'CENTER'}}]});
+ const none=make();assert.equal(lowerPaddingBoxBackground(none,()=>undefined),true);
+ assert.equal(none.lits?.strokeWeight,0);assert.deepEqual(none.children![0].rootSlotFlow,{inset:0,radius:0});
+ const fixed=make();fixed.lits={height:36,minHeight:20};fixed.bindings={maxHeight:'size'};
+ assert.equal(lowerPaddingBoxBackground(fixed,()=>40),true);assert.ok(fixed.children![0].rootSlotFlow);
 });

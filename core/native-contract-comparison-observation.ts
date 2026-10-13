@@ -3,7 +3,7 @@ import { nativeRootTextCallerModes } from './native-root-text-caller.js';
 import type {NativeComparisonMainMigration} from './native-comparison-main-migration.js';
 /** Independent observation of caller content in an existing native main.
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
-import {backgroundPaintIdentities} from './figma-background-clip.js';
+import {backgroundPaintIdentities,nativeRootSlotFlowGeometry} from './figma-background-clip.js';
 import { nativeGridProblems, NATIVE_GRID_CHILD_FIELDS } from './native-grid-observation.js';
 import { canonicalJson } from './contract-provenance.js';
 import type { NodeSpec } from './emit-figma-script.js';
@@ -94,7 +94,7 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
       inheritedAdditions.push({instanceId:record.instanceId,specPath:[...addition.part.specPath],mainNodeId:main.id,metadata});
     }
   }
-  const hasInsetRing=(spec:NodeSpec):boolean=>spec.insetRingStroke===true||!!spec.children?.some(hasInsetRing);
+  const hasInsetRing=(spec:NodeSpec):boolean=>spec.insetRingStroke===true||!!spec.rootSlotFlow||!!spec.children?.some(hasInsetRing);
   const strokeLayout=[input.comparison.parent,...nested.map(ref=>ref.parent)].some(p=>p.component.variants.some(v=>hasInsetRing(v.spec)));
   const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
     pageId: input.creation.pageId, nodes: input.creation.nodes,
@@ -362,6 +362,15 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       const fields = new Set([...Object.keys(original.values), ...Object.keys(actual.values)]);
       let pairedSpec:NodeSpec|undefined=reference.parent.component.variants.find(v=>v.name===reference.variantName)!.spec;
       for(const index of specPath)pairedSpec=pairedSpec?.children?.[index];
+      if(pairedSpec?.rootSlotFlow) {
+        const host=nodes.get(actual.parentId),slot=nodes.get(actual.childIds[0]);
+        if(!host || host.childIds.length!==1 || host.childIds[0]!==actual.id || actual.childIds.length!==1 ||
+            !slot || slot.type!=='SLOT' || slot.parentId!==actual.id || slot.values.layoutMode!=='HORIZONTAL' ||
+            slot.values.layoutSizingHorizontal!=='HUG' || slot.values.layoutPositioning!=='AUTO' ||
+            slot.values.layoutSizingVertical!==actual.values.layoutSizingVertical ||
+            !nativeRootSlotFlowGeometry(pairedSpec.rootSlotFlow,host.values,actual.values))
+          issue('main-instance-root-slot-flow-geometry',actual);
+      }
       const background=pairedSpec?.backgroundPaint;
       if(background){
         const host=nodes.get(actual.parentId)?.values,v=actual.values;

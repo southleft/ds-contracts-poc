@@ -1,4 +1,5 @@
 import {nativeLiteralTextBox} from './native-text-box.js';
+import {rootSlotFlowSpecValid} from './figma-background-clip.js';
 import {ShapeSchema,strokedPathGeometryIssue} from '../scripts/contract-schema.js';
 import {nativePaintSpecSupported} from './native-paint-observation.js';
 import {lowerNativeFilledPath} from './native-filled-path.js';
@@ -169,6 +170,8 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
       throw Error('NATIVE_CONTRACT_DRAFT_LEAF_CHILDREN_UNQUALIFIED');
     if (spec.type === 'svg' && (!spec.svg || !Number.isFinite(spec.iconSize) || spec.iconSize! <= 0 || spec.rotation))
       throw Error('NATIVE_CONTRACT_DRAFT_SVG_GEOMETRY_UNQUALIFIED');
+    if(spec.rootSlotFlow && !rootSlotFlowSpecValid(parent,spec))
+      throw Error('NATIVE_CONTRACT_DRAFT_ROOT_SLOT_FLOW_UNQUALIFIED');
     if(spec.backgroundPaint){
       const {inset,radius}=spec.backgroundPaint,a=spec.absolute;
       if(spec.type!=='shape'||spec.shape?.kind!=='rect'||spec.shape.width!==1||spec.shape.height!==1||

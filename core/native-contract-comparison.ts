@@ -1,3 +1,4 @@
+import { rootSlotFlowSpecValid } from './figma-background-clip.js';
 import { materializeFlowRows } from './grid-flow-rows.js';
 import { planNativeRootTextCaller, type NativeRootTextCallerEvidence, type NativeRootTextCaller } from './native-root-text-caller.js';
 /** Comparison content belongs to an instance of an independently observed main.
@@ -186,9 +187,14 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     if (reference && paint.length) {
       const main = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
       const mainPaint = main.children?.[0];
+      // A filled source snapshot still owns a legacy leaf paint, while its
+      // independently verified empty main may use the in-flow SLOT carrier.
+      // Only compare the paint geometry; never discard a FRAME subtree.
+      const mainGeometry = mainPaint?.backgroundPaint ??
+        (mainPaint?.rootSlotFlow && rootSlotFlowSpecValid(main,mainPaint) ? mainPaint.rootSlotFlow : undefined);
       if (paint.length !== 1 || paint[0] !== spec.children![0] || spec.backgroundClip !== 'padding-box' ||
-          main.backgroundClip !== 'padding-box' || !mainPaint?.backgroundPaint ||
-          canonicalJson(paint[0].backgroundPaint) !== canonicalJson(mainPaint.backgroundPaint))
+          main.backgroundClip !== 'padding-box' || !mainGeometry ||
+          canonicalJson(paint[0].backgroundPaint) !== canonicalJson(mainGeometry))
         fail('nested-inherited-paint-unqualified');
       // Preserve the logical linked-root fields used by historical content
       // comparisons. Actual paint and bindings are verified on the main.

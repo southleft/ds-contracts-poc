@@ -40,6 +40,7 @@
  */
 import { kindOf, normalizeValue } from '../extract/computed/lib.js';
 import { CssBoxShadowError, parseCssBoxShadow } from '../recipe/css-box-shadow.js';
+import { nativeRootSlotFlowGeometry } from '../core/figma-background-clip.js';
 
 export type Verdict = 'match' | 'mismatch' | `not-comparable:${string}`;
 export type Rgba8 = [number, number, number, number];
@@ -252,6 +253,22 @@ export function nativeBackgroundPlane(root: NativeNode, nodes: Map<string, Nativ
     numericEqual(p.cornerRadius, Math.max(0, v.cornerRadius - inset)) ? plane : null;
 }
 
+/** A flow carrier is recognised from complete observed topology and geometry,
+ * never from its name or a compiler marker. Caller content remains visible. */
+export function nativeBackgroundFlow(root:NativeNode,nodes:Map<string,NativeNode>):NativeNode|null {
+  if(root.childIds?.length!==1)return null;
+  const carrier=nodes.get(root.childIds[0]),v=root.values;
+  if(!carrier || carrier.type!=='FRAME' || carrier.parentId!==root.id || carrier.childIds?.length!==1)return null;
+  const slot=nodes.get(carrier.childIds[0]);
+  if(!slot || slot.type!=='SLOT' || slot.parentId!==carrier.id || slot.values.layoutMode!=='HORIZONTAL' ||
+      slot.values.layoutSizingHorizontal!=='HUG' || slot.values.layoutPositioning!=='AUTO' ||
+      slot.values.layoutSizingVertical!==carrier.values.layoutSizingVertical)return null;
+  const inset=v.strokeTopWeight,radius=Math.max(0,v.cornerRadius-inset);
+  if(!Number.isFinite(inset)||inset<0||!Number.isFinite(radius)||
+      !nativeRootSlotFlowGeometry({inset,radius},v,carrier.values))return null;
+  return carrier;
+}
+
 export interface NativePlanSpec { fixedWidth?: { px: number }; fixedHeight?: { px: number }; lits?: { width?: number; height?: number } }
 
 export function nativeRootFacts(root: NativeNode, nodes: Map<string, NativeNode>, variables: Map<string, NativeVariable>, spec: NativePlanSpec): NativeRootFacts {
@@ -271,7 +288,9 @@ export function nativeRootFacts(root: NativeNode, nodes: Map<string, NativeNode>
     seen.add(id);
     return (nodes.get(id)?.childIds ?? []).flatMap((child) => (nodes.has(child) ? [nodes.get(child)!, ...descendants(child, seen)] : []));
   };
-  const plane = nativeBackgroundPlane(root, nodes), below = descendants(root.id).filter((n) => n !== plane);
+  const flow = nativeBackgroundFlow(root, nodes);
+  const plane = flow ?? nativeBackgroundPlane(root, nodes), below = descendants(root.id).filter((n) => n !== plane);
+  const contentValues=flow?.values??v;
   const slots = below.filter((n) => n.type === 'SLOT');
   const content: NativeRootFacts['content'] = below.some((n) => n.type !== 'SLOT') ? 'has-content' : slots.length > 0 ? 'empty-slot' : 'no-slot';
 
@@ -288,11 +307,11 @@ export function nativeRootFacts(root: NativeNode, nodes: Map<string, NativeNode>
   return {
     layoutMode: typeof v.layoutMode === 'string' ? v.layoutMode : null, strokeAlign: typeof v.strokeAlign === 'string' ? v.strokeAlign : null, content,
     width: dimension('width'), height: dimension('height'),
-    padding: Object.fromEntries(SIDES.map((s) => [s, nativeNum(v[`padding${cap(s)}`])])) as Record<Side, Num>,
+    padding: Object.fromEntries(SIDES.map((s) => [s, nativeNum(contentValues[`padding${cap(s)}`])])) as Record<Side, Num>,
     borderWidth: Object.fromEntries(SIDES.map((s) => [s, inside ? nativeNum(v[`stroke${cap(s)}Weight`]) : { unresolved: 'native-stroke-align-not-inside' }])) as Record<Side, Num>,
     radius: Object.fromEntries(CORNERS.map((c) => { const [a, b] = c.split('-'); return [c, nativeNum(v[`${a}${cap(b!)}Radius`])]; })) as Record<Corner, Num>,
     background, borderPaint: nativePaint(v.strokes, root, variables), opacity: nativeNum(v.opacity),
-    gap: { px: v.layoutMode === 'HORIZONTAL' || v.layoutMode === 'VERTICAL' ? nativeNum(v.itemSpacing) : { unresolved: 'native-not-an-auto-layout-stack' } },
+    gap: { px: v.layoutMode === 'HORIZONTAL' || v.layoutMode === 'VERTICAL' ? nativeNum(contentValues.itemSpacing) : { unresolved: 'native-not-an-auto-layout-stack' } },
     shadow: nativeShadow(v.effects),
   };
 }
