@@ -117,6 +117,10 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
   class Evaluator {
     constructor() {
       this.steps = 0;
+      this.consumerSequence = 0;
+      this.consumerCallStack = [];
+      this.functionAllocations = [];
+      this.literalAllocations = [];
       this.nextId = 0;
       this.modules = new Map();
       this.globals = new Map();
@@ -301,7 +305,9 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         Number(k) < 4294967295;
       if (v.kind === "array" && index && Number(k) > v.length)
         throw new Refused("array-sparse-write-unmodeled", n);
+      const consumerWrite=contextMode&&!this.initializationDepth?{sequence:this.consumerSequence++,before:shape(v),...(remove?{}:{value:shape(value)})}:null;
       this.writes.push({
+        ...consumerWrite,
         ...(contextMode?{phase:this.initializationDepth?"module-initialization":"render"}:{}),
         target: v.id,
         ...(contextMode && value?.kind === "function" ? {valueSource:source(value.node)} : {}),
@@ -317,6 +323,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         if (v.kind === "array" && index)
           v.length = Math.max(v.length, Number(k) + 1);
       }
+      if(consumerWrite)this.writes[this.writes.length-1].after=shape(v);
       return value;
     }
     items(v, n) {
@@ -364,6 +371,11 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       };
       this.sourceDefinitions.set(n, source(n));
       this.functionValues.push(f);
+      if(contextMode&&!this.initializationDepth&&!env.closed&&this.consumerCallStack.length){
+        const owner=this.consumerCallStack[this.consumerCallStack.length-1];
+        f.synchronousAllocation={id:f.id,source:source(n),ownerEntry:owner.entry,sequence:this.consumerSequence++};
+        this.functionAllocations.push(f.synchronousAllocation);
+      }
       return f;
     }
     bindingRead(n, decl, value) {
@@ -864,7 +876,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         ...(jsxMode && this.initializationDepth ? {phase:"module-initialization"} : {}),
       });
       const contextCall=contextMode&&n?{phase:this.initializationDepth?"module-initialization":"render",source:source(target.node),site:source(n),arguments:args.map(v=>shape(v))}:null;
-      if(contextCall)contextFunctionCalls.push(contextCall);
+      if(contextCall){if(!this.initializationDepth){contextCall.entry=this.consumerSequence++;this.consumerCallStack.push(contextCall);}contextFunctionCalls.push(contextCall);}
       const env = new Scope(target.env);
       if (!ts.isArrowFunction(target.node))
         env.special.set(
@@ -894,7 +906,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         output=signal?.value;
         if(helperMode&&target.node===component)this.helperReturnSource=signal?.source??null;
       }
-      if(contextCall)contextCall.output=shape(output);
+      if(contextCall){contextCall.output=shape(output);if(!this.initializationDepth){contextCall.exit=this.consumerSequence++;this.consumerCallStack.pop();}}
       return output;
     }
     intrinsic(name, args, receiver, n) {
@@ -902,9 +914,11 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       switch (name) {
         case "Object.assign": {
           const [target, ...sources] = args;
+          const firstWrite=this.writes.length,assignArguments=contextMode&&!this.initializationDepth?args.map(v=>shape(v)):null;
           for (const s of sources)
             for (const key of this.keys(s, n))
               this.put(target, key, this.get(s, key, n), n);
+          if(assignArguments&&this.writes.length>firstWrite)this.writes[firstWrite].assign={arguments:assignArguments};
           return target;
         }
         case "Object.keys":
@@ -1237,6 +1251,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
             this.expr(ts.isPropertyAssignment(p) ? p.initializer : p.name, env),
           );
         }
+        if(contextMode)this.literalAllocations.push(shape(value));
         return value;
       }
       if (ts.isArrayLiteralExpression(n)) {
@@ -1248,7 +1263,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
             throw new Refused("sparse-array", e);
           else items.push(this.expr(e, env));
         }
-        const value=this.array(items);if(contextMode)value.literalSource=source(n);return value;
+        const value=this.array(items);if(contextMode){value.literalSource=source(n);this.literalAllocations.push(shape(value));}return value;
       }
       if (ts.isPropertyAccessExpression(n) || ts.isElementAccessExpression(n)) {
         const owner = this.expr(n.expression, env);
@@ -1733,7 +1748,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
         } else dependencies.push({name:read.name,read:source(read.node),...(read.declaration?{binding:read.declaration}:{})});
       }
       returnedCallbacks.push(value);
-      return {kind:"callback",source:source(value.node),qualification:"callback-body-unverified",capturePhase:"render-return",captures,dependencies};
+      return {kind:"callback",source:source(value.node),qualification:"callback-body-unverified",capturePhase:"render-return",captures,dependencies,...(contextMode&&value.synchronousAllocation?{allocation:value.synchronousAllocation}:{})};
     }
     if (!value || !["record", "array"].includes(value.kind))
       throw new Refused("result-shape-unmodeled");
@@ -1831,7 +1846,7 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       ...(compiledMode ? {nativeEffects:e.nativeEffects} : {}),
       ...(jsxMode ? {jsxTargets:[...jsxTargets]} : {}),
       ...(targetMode ? {targetFactories:[...targetFactories]} : {}),
-      ...(contextMode ? {contextCalls,callbackCalls,refCalls,effectCalls,factoryCalls,hookCalls,targetReads,mutableBindings,contextFunctionCalls,
+      ...(contextMode ? {literalAllocations:e.literalAllocations,functionAllocations:e.functionAllocations,contextCalls,callbackCalls,refCalls,effectCalls,factoryCalls,hookCalls,targetReads,mutableBindings,contextFunctionCalls,
         contextValues:[...contextObjects.values()].map(v=>({id:v.contextId,fields:e.keys(v).map(k=>[k,shape(e.get(v,k))])}))} : {}),
       steps: e.steps,
       ...(componentMode

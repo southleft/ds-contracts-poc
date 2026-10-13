@@ -1,8 +1,18 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-10-09 · V1 is not complete.**
+**Public project status · updated 2026-10-13 · V1 is not complete.**
 
 The React importer now preserves direct slot anatomy as an omitted-input default. A fresh ordinary installed CLI comparison on the fixed 40-set sample improved from 652 to 653 passing variants out of 879 (74.29%), with no lost passes or new failing sets. Failures fell from 181 to 179; unverified rows increased from 46 to 47 because the third Carousel row retains an original reference-framing refusal. Passing sets remain 17 of 40. The two-slide Carousel now passes with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort still has zero scored reverse passes.
+
+The original Radix Themes Badge workspace now authenticates all 36 declared
+source cases without changing its code. Source-owned synchronous helpers can
+copy and update fresh props objects, and a verified wrapper can forward caller
+content directly to its observed HTML root. Every helper call, object identity,
+ordered write and source return site must still agree with the original render;
+unknown writes, changed children and conflicting roots refuse. A fresh native
+Badge comparison contains the caller text and passed structural readback.
+Visual scoring of this example is separate: the 36 source matches do not count
+as 36 native passes, and the unseen reverse scoreboard remains unqualified.
 
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 

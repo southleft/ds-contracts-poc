@@ -1,7 +1,7 @@
 /** Private observer bootstrap, evaluated in the same fresh realm as the native
  * guard and compiler-literal registry. No source/native admission is implied.
  * Models and callbacks are host/compiler inputs, never application props. */
-export const reactHelperBindingGuard = String.raw`((models, assertNative, knownLiteral, recordFailure) => {
+export const reactHelperBindingGuard = String.raw`((models, assertNative, knownLiteral, recordFailure, literalCalls) => {
   const keys=Reflect.ownKeys, descriptors=Object.getOwnPropertyDescriptors;
   const descriptor=Object.getOwnPropertyDescriptor, prototype=Object.getPrototypeOf;
   const apply=Reflect.apply, same=Object.is, ErrorConstructor=Error;
@@ -73,7 +73,7 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
   function sourceFunction(key,fn){
     assertNative();if(typeof fn!=='function'||functions.has(fn))fail('function-registration-invalid');
     if(!models.some(m=>m.definitions.some(p=>point(p)===key)))fail('function-outside-model');
-    functions.set(fn,{key,descriptors:descriptors(fn)});functionKeys.set(key,functionKeys.has(key)?null:fn);return fn;
+    functions.set(fn,{key,descriptors:descriptors(fn)});functionKeys.set(key,functionKeys.has(key)?null:fn);literalCalls?.sourceFunction(key,fn);return fn;
   }
   function binding(key,get){
     assertNative();if(bindings.has(key)||typeof get!=='function')fail('registration-ambiguous');
@@ -128,7 +128,13 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
       return invoke((...args)=>{
         const expected=activeTrace[traceCursor++];
         if(!expected||point(expected.site)!==site||point(expected.source)!==registered.key)fail('call-trace-changed');
-        check(active);checkedCalls++;const result=apply(fn,undefined,args);check(active);return result;
+        check(active);checkedCalls++;
+        // Only context consumer models own the literal/call effect trace. JSX
+        // models retain their independent binding trace without a render scope.
+        const captureCalls=Array.isArray(models[active].contextFunctionCalls);
+        if(captureCalls&&!literalCalls)fail('consumer-call-capture-missing');
+        const call=captureCalls?literalCalls.beginCall(site,registered.key,args,fn):null;
+        const result=apply(fn,undefined,args);check(active);if(call)literalCalls.endCall(call,result,args);return result;
       });
     }
     const owners=[];for(let i=0;i<models.length;i++)if(models[i].calls.some(c=>c.phase==='module-initialization'&&c.site&&point(c.site)===site&&point(c.source)===registered.key))owners.push(i);

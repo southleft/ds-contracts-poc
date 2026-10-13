@@ -125,7 +125,7 @@ export async function observeReactJsxHelpers(options:{browser:Browser;reference:
     plan.contextFactories=planReactContextFactoryCalls(reference,plan.initializers??[]);
     plan.contextTargets=planReactContextTargets(reference,plan.contextFactories);
     plan.contextBindings=planReactContextBindings(reference,plan.initializers??[]);
-    plan.consumerLiterals=planReactConsumerLiterals(reference,plan.initializers??[]);
+    plan.consumerLiterals=planReactConsumerLiterals(reference,plan.initializers??[],plan.bodyModels??[]);
     plan.hookHelpers=planReactHookHelpers(reference,plan.contextConsumerCalls??[]);
     plan.callbackFactories=planReactCallbackFactories(reference,plan.contextConsumerCalls??[]);
     plan.effectHooks=planReactEffectHooks(reference,plan.initializers??[]);
