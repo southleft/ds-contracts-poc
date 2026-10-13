@@ -82,9 +82,11 @@ export function callerOccurrenceLibraryRequest(proof:CallerAssignmentProof,dump:
  const nodes=new Map<string,Row>();const visit=(n:Row)=>{nodes.set(n.nodeId,n);for(const c of n.children??[])visit(c);};visit(root);
  const captured=capturedTokensFromDump(d);
  const assignments=new Map(saved.proof.assignments.map(a=>[a.instanceId,a]));
+ const instances=[...nodes.values()].filter(n=>n.type==='INSTANCE');
+ if(assignments.size!==saved.proof.assignments.length||instances.length!==assignments.size||instances.some(n=>!assignments.has(n.nodeId)))fail('assignment-census');
  const family=saved.family as Row[],contracts=family.map(f=>{const copy=structuredClone(f.contract);copy.bindings.figma.anchors={fileKey:saved.native.fileKey,componentSetKey:f.creation.target.key,nodeId:f.creation.target.id};return ContractSchema.parse(copy);});
  if(new Set(contracts.map(c=>c.id)).size!==contracts.length)fail('family-duplicate');
- const used=new Set<string>(),owned=new Set<string>(),partKeys=new Set<string>();
+ const used=new Set<string>(),consumed=new Set<string>(),owned=new Set<string>(),partKeys=new Set<string>();
  const contentKey=(id:string)=>{const key='content'+createHash('sha256').update(id).digest('hex');if(partKeys.has(key))fail('part-key-reused');partKeys.add(key);return key;};
  function lower(id:string):Part {
   if(owned.has(id))fail('caller-root-reused');owned.add(id);
@@ -106,11 +108,12 @@ export function callerOccurrenceLibraryRequest(proof:CallerAssignmentProof,dump:
   const parts:Record<string,Part>={};a.contentIds.forEach(child=>{const key=contentKey(child);parts[key]=lower(child);});
   const part:Part={component:{id:contract.id,...(Object.keys(props).length?{props}:{}),contentSlots:{[slots[0].part.slot!.name]:Object.keys(parts)}},parts};
   // The existing disjoint/exhaustive slot referee owns the routing rule.
-  callerContentGroups(part);used.add(contract.id);return part;
+  callerContentGroups(part);used.add(contract.id);consumed.add(id);return part;
  }
  const wrapper=qualifyNeutralOccurrenceFrame(native.get(root.nodeId)!);if(root.children?.length!==1||root.children[0].type!=='INSTANCE')fail('root-content-shape');
  const entryId=root.children[0].nodeId;wrapper.parts={[contentKey(entryId)]:lower(entryId)};
- if(used.size!==family.length||assignments.size!==used.size)fail('complete-family-required');
+ if(used.size!==family.length)fail('complete-family-required');
+ if(consumed.size!==assignments.size||[...assignments.keys()].some(id=>!consumed.has(id)))fail('assignment-census');
  const suffix=createHash('sha256').update(saved.proof.canonicalSha256+'\0'+root.nodeId).digest('hex').slice(0,16),id='observed.occurrence-'+suffix,name='ObservedOccurrence'+suffix;
  const contract=ContractSchema.parse({id,name,version:'0.1.0',status:'draft',description:'Observed filled caller occurrence; retained source and native evidence remain unqualified.',semantics:{element:'div'},props:[],states:[],anatomy:{root:wrapper},bindings:{figma:{anchors:{fileKey:channel.roots[0].source.fileKey,componentSetKey:null,nodeId:root.nodeId}},code:{anchors:{importPath:'observed/'+suffix,export:name}}}});
  const all=[contract,...contracts],byId=new Map(all.map(c=>[c.id,c]));for(const c of all)for(const edge of contractDependencyEdges(c))if(!byId.has(edge.id))fail('family-missing:'+edge.id);
