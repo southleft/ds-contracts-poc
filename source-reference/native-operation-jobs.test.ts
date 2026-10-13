@@ -1515,3 +1515,74 @@ test('a stack overflow during authentication propagates instead of reading as a 
   overflow = false;
   assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent, true);
 });
+
+
+// Synthetic state-machine/source preparer only; no Figma, browser, or source
+// qualification is supplied by these exact-listing controls.
+function scopedReactFixture(t: test.TestContext) {
+  const repo = mkdtempSync(path.join(tmpdir(), 'native-scoped-list-'));
+  t.after(() => rmSync(repo, {recursive:true,force:true}));
+  const referenceId = 'a'.repeat(64), owner = '10000000-0000-4000-8000-000000000001';
+  const request = (caseId:string, ownershipId=owner) => ({version:1 as const,kind:'react-root-draft' as const,
+    referenceId,ownership:{id:ownershipId,sha256:'b'.repeat(64)},inventorySha256:'c'.repeat(64),caseId,matrixRevision:revisionOf(caseId)});
+  const calls:string[]=[]; let stale=false;
+  const effective=new Map<string,ReturnType<typeof request>>();
+  const jobs=createNativeOperationJobs(repo,{prepare:nativeFixturePrepare,react:{
+    effectiveSource:(id,original)=>effective.get(id)??original,
+    prepare:(r,operation)=>{
+      calls.push(r.caseId);if(stale)throw Error('source changed');
+      const base=nativeFixturePreparation(operation),plan={...base.plan.plan,kind:'react-root-draft-inspection'};
+      return {visual:{id:r.ownership.id,reportSha256:r.ownership.sha256},
+        preparation:{id:r.ownership.id,reportSha256:r.matrixRevision.slice(7)},
+        plan:{plan,revision:revisionOf(plan)}} as any;
+    },buildComponent:()=>{throw Error('not a writer test');},
+  }});
+  const first=jobs.prepare(request('first')),other=jobs.prepare(request('other'));
+  calls.length=0;
+  return {repo,jobs,referenceId,owner,request,first,other,calls,effective,setStale:(v:boolean)=>{stale=v;}};
+}
+
+test('scoped inspection authenticates exactly selected journals and retains complete rows and fresh reads',t=>{
+  const f=scopedReactFixture(t);
+  const full=f.jobs.listReact(f.referenceId);assert.equal(full.length,2);assert.deepEqual(f.calls.sort(),['first','other']);f.calls.length=0;
+  assert.deepEqual(f.jobs.listReact(f.referenceId,undefined,undefined,{operationId:f.first.id}),full.filter(r=>r.operation.id===f.first.id));
+  assert.deepEqual(f.calls,['first']);f.calls.length=0;
+  assert.deepEqual(f.jobs.listReact(f.referenceId,'root',undefined,{caseId:'first',ownershipId:f.owner}),full.filter(r=>r.operation.id===f.first.id));
+  assert.deepEqual(f.calls,['first']);f.calls.length=0;
+  f.setStale(true);
+  const stale=f.jobs.listReact(f.referenceId,undefined,undefined,{operationId:f.first.id});
+  assert.equal(stale[0].operation.sourceCurrent,false);assert.deepEqual(f.calls,['first']);
+  assert.equal(stale[0].operation.nativeQualification,'unqualified');assert.equal(stale[0].operation.acceptedContract,null);
+});
+
+test('scoped inspection never reads an unrelated plan but refuses selected corruption and malformed scope',t=>{
+  const f=scopedReactFixture(t),otherPlan=path.join(f.repo,'private/source-native-app/operations',f.other.id,'plan.json');
+  writeFileSync(otherPlan,'{}');
+  assert.equal(f.jobs.listReact(f.referenceId,undefined,undefined,{operationId:f.first.id}).length,1);
+  assert.equal(f.jobs.listReact(f.referenceId,'root',undefined,{caseId:'first',ownershipId:f.owner}).length,1);
+  assert.throws(()=>f.jobs.listReact(f.referenceId),/artifact-changed/,'full legacy listing still checks every included journal');
+  assert.throws(()=>f.jobs.listReact(f.referenceId,undefined,undefined,{operationId:f.other.id}),/artifact-changed/);
+  for(const q of [{operationId:'not-an-id'},{operationId:f.first.id,caseId:'first'},
+    {caseId:'first'},[],{caseId:'first',ownershipId:f.owner,extra:true}] as any[])
+    assert.throws(()=>f.jobs.listReact(f.referenceId,undefined,undefined,q),/request-invalid/);
+  assert.throws(()=>f.jobs.listReact(f.referenceId,'root',undefined,{operationId:f.first.id}),/request-invalid/);
+  assert.throws(()=>f.jobs.listReact(f.referenceId,undefined,undefined,{caseId:'first',ownershipId:f.owner}),/request-invalid/);
+  assert.deepEqual(f.jobs.listReact('d'.repeat(64),undefined,undefined,{operationId:f.first.id}),[],'foreign reference never borrows a row');
+  const header=path.join(f.repo,'private/source-native-app/operations',f.first.id,'operation.json');
+  const h=JSON.parse(readFileSync(header,'utf8'));h.id=f.other.id;writeFileSync(header,JSON.stringify(h));
+  assert.throws(()=>f.jobs.listReact(f.referenceId,undefined,undefined,{operationId:f.first.id}),/header-invalid/);
+});
+
+test('scoped root discovery follows effective ownership and keeps unreadable succession visible',t=>{
+  const f=scopedReactFixture(t),nextOwner='10000000-0000-4000-8000-000000000009';
+  f.effective.set(f.first.id,{...f.request('first',nextOwner),referenceId:'d'.repeat(64)});
+  const current=f.jobs.listReact('d'.repeat(64),'root',undefined,{caseId:'first',ownershipId:nextOwner});
+  assert.equal(current[0].operation.id,f.first.id);assert.equal(current[0].ownershipId,nextOwner);
+  assert.deepEqual(f.jobs.listReact(f.referenceId,'root',undefined,{caseId:'first',ownershipId:f.owner}),[]);
+  // A failing trusted succession reader remains a visible original row with a
+  // named problem; discovery never treats it as a free reservation.
+  f.effective.get=()=>{throw Error('native-source-succession-journal-chain-invalid');};
+  const refused=f.jobs.listReact(f.referenceId,'root',undefined,{caseId:'first',ownershipId:f.owner});
+  assert.equal(refused[0].operation.id,f.first.id);
+  assert.equal(refused[0].successionProblem,'native-source-succession-journal-chain-invalid:'+f.first.id);
+});

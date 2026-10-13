@@ -50,6 +50,32 @@ export function nativeComparisonInspectionFromResponse<T extends ComparisonInspe
   return row as unknown as T;
 }
 
+interface NativeInspectionScope {
+  referenceId: string;
+  ownershipId: string | undefined;
+}
+
+/** A response from an older source or observation must not enter the active view. */
+export function nativeInspectionScopeMatches(requested: NativeInspectionScope, active: NativeInspectionScope): boolean {
+  return !!requested.ownershipId && requested.referenceId === active.referenceId && requested.ownershipId === active.ownershipId;
+}
+
+/** Keep the complete host-checked root row, including reported stale/refused state. */
+export function nativeRootInspectionFromResponse<T extends ComparisonInspection>(value: unknown, caseId: string, ownershipId: string | undefined): T {
+  const record = (input: unknown): input is Record<string, unknown> => !!input && typeof input === 'object' && !Array.isArray(input);
+  const uuid = (input: unknown) => typeof input === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input);
+  const unavailable = () => Error('Native root response unavailable. Refresh the saved inspection.');
+  if (!uuid(ownershipId) || !record(value) || Object.keys(value).join(',') !== 'operation' || !record(value.operation)) throw unavailable();
+  const row = value.operation;
+  if (row.kind !== 'root' || row.caseId !== caseId || row.ownershipId !== ownershipId ||
+      row.parentOperationId !== undefined || row.sourceOperationId !== undefined ||
+      typeof row.fileKey !== 'string' || !row.fileKey || !record(row.operation) || !uuid(row.operation.id) ||
+      typeof row.operation.phase !== 'string' || !row.operation.phase || typeof row.operation.sourceCurrent !== 'boolean' ||
+      !Array.isArray(row.operation.problems) || !row.operation.problems.every(problem => typeof problem === 'string') ||
+      !record(row.connection) || ['paired','connected','started','finished'].some(key => typeof (row.connection as Record<string, unknown>)[key] !== 'boolean')) throw unavailable();
+  return row as unknown as T;
+}
+
 /** Replace only this checked child; keep unrelated rows and avoid duplicate entries on retry. */
 export function mergeNativeComparisonInspection<T extends {operation:{id:string}}>(rows: T[], comparison: T): T[] {
   return rows.some(row => row.operation.id === comparison.operation.id)

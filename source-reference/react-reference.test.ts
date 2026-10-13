@@ -670,3 +670,75 @@ test('comparison preflight forwards exact lookup identity and refuses ambiguous 
   matches=[match];const stale=await call(route);assert.equal(stale.status,409);assert.equal(stale.value.reason,'react-comparison-source-changed');
   matches=[];const absent=await call(route);assert.equal(absent.status,409);assert.equal(absent.value.reason,'selected-parent-required','no match still reaches fresh parent verification');
 });
+
+
+test('exact native inspection shares full row semantics without listing unrelated operations',async t=>{
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-exact-inspection-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const id='10000000-0000-4000-8000-000000000008',owner='10000000-0000-4000-8000-000000000009';
+  const calls:string[]=[];let referenceId='',failure='',stale=false,comparison=false;
+  const snapshot=()=>({id,phase:'prepared',sourceCurrent:!stale,problems:[],acceptedContract:null,nativeQualification:'unqualified'});
+  const row=()=>({caseId:'button-default',ownershipId:owner,kind:comparison?'comparison':'root',fileKey:'file',
+    ...(comparison?{parentOperationId:owner,sourceOperationId:id}:{}),
+    successionProblem:'native-source-succession-journal-chain-invalid:'+id,operation:snapshot()});
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{
+    withReadSnapshot:(fn:()=>unknown)=>fn(),
+    listReact:(ref:string,kind?:string,query?:unknown,inspection?:any)=>{
+      if(failure)throw Error(failure);assert.equal(ref,referenceId);
+      if(inspection){assert.equal(kind,undefined);assert.equal(query,undefined);assert.deepEqual(inspection,{operationId:id});calls.push('exact');return [row()];}
+      if(kind)return [];calls.push('full');return [row()];
+    },listReactMoved:()=>{calls.push('moved');return [];},
+    get:(target:string)=>{assert.equal(target,id);calls.push('get');if(failure)throw Error(failure);return snapshot();},
+    reactRequest:()=>{throw Error('no synthetic source authority');},reactSuccessionSubject:()=>{throw Error('no synthetic source authority');},
+  },transport:{status:(target:string)=>{assert.equal(target,id);return {finished:false};}},updates:{list:()=>[]}} as any));
+  t.after(()=>handle.close());
+  const call=async(route:string,method='GET',body?:string)=>{
+    const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method,url:'/'+route,headers:{host:'localhost:5181',...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
+    let status=0,text='';const headers:Record<string,unknown>={};await handle(req as any,{set statusCode(v:number){status=v;},setHeader(k:string,v:unknown){headers[k.toLowerCase()]=v;},end(v:string){text=v;}} as any,route);
+    return {status,headers,value:JSON.parse(text)};
+  };
+  // Build a real ordinary reference; the mock supplies no native/source proof.
+  const initial=await call('react','POST');assert.equal(initial.status,200);referenceId=initial.value.id;
+  for(comparison of [false,true]){
+    calls.length=0;const exact=await call(`react/${referenceId}/native-operation/${id}/inspection`);
+    assert.equal(exact.status,200);assert.equal(exact.headers['cache-control'],'no-store');assert.deepEqual(calls,comparison?['exact','get']:['exact']);
+    calls.length=0;const full=await call(`react/${referenceId}/native`);assert.equal(full.status,200);
+    assert.deepEqual(exact.value.operation,full.value.operations[0]);assert(calls.includes('moved')&&calls.includes('full'));
+  }
+  stale=true;comparison=false;calls.length=0;
+  const staleRow=await call(`react/${referenceId}/native-operation/${id}/inspection`);
+  assert.equal(staleRow.value.operation.operation.sourceCurrent,false);assert.equal(staleRow.value.operation.successionProblem,row().successionProblem);
+  for(const [method,body] of [['POST',undefined],['GET','{}']] as const){calls.length=0;assert.equal((await call(`react/${referenceId}/native-operation/${id}/inspection`,method,body)).status,409);assert.deepEqual(calls,[]);}
+  calls.length=0;assert.equal((await call(`react/${'f'.repeat(64)}/native-operation/${id}/inspection`)).status,409);assert.deepEqual(calls,[]);
+  failure='native-operation-artifact-changed';const refused=await call(`react/${referenceId}/native-operation/${id}/inspection`);
+  assert.equal(refused.status,409);assert.equal(refused.value.reason,failure);
+});
+
+test('minimal parent preparation returns one checked row and preserves default full listing and refusal',async t=>{
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-parent-minimal-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const {readReactSourceProgram}=await import('./react-source-program.js');
+  const {inventoryEvidence}=await import('./react-validation-evidence.js');
+  const {beginReactOwnershipSelection,sealReactOwnershipSelection}=await import('./react-ownership-selection.js');
+  const ref=await buildReactReference(root),owner='10000000-0000-4000-8000-000000000009',id='10000000-0000-4000-8000-000000000008';
+  const report:any={id:owner,referenceId:ref.id,state:'complete',acceptedContract:null,denominator:10,matched:1,sourceUnchanged:true,
+    rows:[{id:'button-default',matched:true,problems:[],rootMatrix:{draft:{status:'native-compiled'}}}]};
+  const dir=path.join(repo,'private/react-source-ownership',ref.id,owner);mkdirSync(dir,{recursive:true});
+  writeFileSync(path.join(dir,'program.json'),JSON.stringify(readReactSourceProgram(ref.sourceRoot,['src/components/ui/button.tsx'])));
+  writeFileSync(path.join(dir,'report.json'),JSON.stringify(report));writeFileSync(path.join(dir,'integrity.json'),JSON.stringify({version:1,files:inventoryEvidence(dir)}));
+  beginReactOwnershipSelection(repo,ref.id,owner);sealReactOwnershipSelection(repo,ref,report);
+  const calls:string[]=[];let prepared=false,failure='';
+  const row={kind:'root',caseId:'button-default',ownershipId:owner,fileKey:'file',operation:{id,sourceCurrent:true,phase:'prepared',problems:[],acceptedContract:null,nativeQualification:'unqualified'}};
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{withReadSnapshot:(fn:()=>unknown)=>fn(),
+    listReact:(refId:string,kind?:string,unused?:unknown,query?:unknown)=>{assert.equal(refId,ref.id);if(query){assert.equal(kind,'root');assert.deepEqual(query,{caseId:'button-default',ownershipId:owner});calls.push('selected');return prepared?[row]:[];}if(kind)return [];calls.push('full');return prepared?[row]:[];},
+    listReactMoved:()=>{calls.push('moved');return [];},prepare:(r:any)=>{calls.push('prepare');if(failure)throw Error(failure);assert.equal(r.caseId,'button-default');assert.equal(r.ownership.id,owner);assert.equal(r.compilation,'current');prepared=true;return row.operation;},
+    get:()=>{calls.push('get');if(failure)throw Error(failure);return row.operation;},reactRequest:()=>{throw Error('no synthetic source authority');},reactSuccessionSubject:()=>{throw Error('no synthetic source authority');},
+  },transport:{status:()=>({finished:false})},updates:{list:()=>[]}} as any));t.after(()=>handle.close());
+  const call=async(route:string,prefer?:string,body?:string)=>{const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method:'POST',url:'/'+route,headers:{host:'localhost:5181',...(prefer?{prefer}:{}),...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});let status=0,text='';const headers:Record<string,unknown>={};await handle(req as any,{set statusCode(v:number){status=v;},setHeader(k:string,v:unknown){headers[k.toLowerCase()]=v;},end(v:string){text=v;}} as any,route);return {status,headers,value:JSON.parse(text)};};
+  assert.equal((await call('react')).status,200);calls.length=0;
+  const route=`react/${ref.id}/native/button-default`,first=await call(route,'return=minimal');
+  assert.equal(first.status,200);assert.equal(first.headers['preference-applied'],'return=minimal');assert.equal(first.value.operation.operation.id,id);assert.deepEqual(calls,['selected','prepare','selected']);
+  calls.length=0;const full=await call(route);assert.equal(full.status,200);assert.deepEqual(full.value.operations[0],first.value.operation);assert(calls.includes('moved')&&calls.includes('full'));assert.equal(full.headers['preference-applied'],undefined);
+  calls.length=0;failure='native-operation-source-plan-stale';const refused=await call(route,'return=minimal');assert.equal(refused.status,409);assert.equal(refused.value.reason,failure);assert.equal(refused.headers['preference-applied'],undefined);assert.deepEqual(calls,['selected','get']);
+  calls.length=0;assert.equal((await call(route,'return=minimal','{}')).status,409);assert.deepEqual(calls,[]);
+});

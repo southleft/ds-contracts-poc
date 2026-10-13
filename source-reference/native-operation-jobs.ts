@@ -2360,20 +2360,30 @@ export function createNativeOperationJobs(
       }));
     },
     listReact(referenceId: string, kind?: 'root' | 'mains' | 'authored',
-      comparisonQuery?: {parentOperationId:string;caseId:string;ownershipId:string}) {
+      comparisonQuery?: {parentOperationId:string;caseId:string;ownershipId:string},
+      inspectionQuery?: {operationId:string} | {caseId:string;ownershipId:string}) {
       return withReadSnapshot(() => {
       if (!HASH.test(referenceId) || (comparisonQuery && (kind !== undefined ||
           !UUID.test(comparisonQuery.parentOperationId) || !UUID.test(comparisonQuery.ownershipId) ||
-          !/^[a-z][a-z-]{0,79}$/.test(comparisonQuery.caseId)))) fail('request-invalid');
+          !/^[a-z][a-z-]{0,79}$/.test(comparisonQuery.caseId))) ||
+          (inspectionQuery && (comparisonQuery !== undefined || !object(inspectionQuery) ||
+            !('operationId' in inspectionQuery
+              ? kind === undefined && Object.keys(inspectionQuery).join(',') === 'operationId' && UUID.test(inspectionQuery.operationId)
+              : kind === 'root' && Object.keys(inspectionQuery).sort().join(',') === 'caseId,ownershipId' &&
+                /^[a-z][a-z-]{0,79}$/.test(inspectionQuery.caseId) && UUID.test(inspectionQuery.ownershipId))))) fail('request-invalid');
       if (!present(root)) return [];
       directories();
       type ListingRow={caseId:string;ownershipId:string;kind:'family'|'root'|'nested'|'comparison'|'initial'|'state-api'|'authored'|'authored-initial'|'authored-state-api';
         family?:Pick<FamilyPlan['plan'],'axis'|'members'>;nestedInstanceId?:string;stateApiObservation?:ReactStateApiNativeRequest['observation'];
         initialObservation?:ReactInitialNativeRequest['observation'];parentOperationId?:string;sourceOperationId?:string;
         successionProblem?:string;fileKey:string;operation:ReturnType<typeof get>};
-      return readdirSync(operations).filter(id => UUID.test(id)).flatMap((id):ListingRow[] => {
-        if (comparisonQuery) ensure(dir(id));
+      const ids = inspectionQuery && 'operationId' in inspectionQuery ? [inspectionQuery.operationId]
+        : readdirSync(operations).filter(id => UUID.test(id));
+      return ids.flatMap((id):ListingRow[] => {
+        if (comparisonQuery || inspectionQuery) ensure(dir(id));
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if ((comparisonQuery || inspectionQuery) &&
+            (!object(header) || header.version !== 1 || header.id !== id || !validRequest(header.request))) fail('header-invalid');
         if (comparisonQuery) {
           // Per-case preparation needs only matching comparisons, not fresh
           // authentication of every historical operation. Headers select;
@@ -2394,6 +2404,7 @@ export function createNativeOperationJobs(
         if(isReactObservedFamilyNativeRequest(header.request)) {
           if(header.request.referenceId!==referenceId)return [];
           const loaded=load(id);if(!isFamilyPlan(loaded.plan))fail('react-family-plan-required');
+          if (inspectionQuery && !same(loaded.header,header)) fail('header-changed');
           return [{caseId:loaded.plan.plan.baseCaseId,ownershipId:loaded.plan.plan.ownership.id,kind:'family' as const,
             family:{axis:structuredClone(loaded.plan.plan.axis),members:structuredClone(loaded.plan.plan.members)},
             fileKey:header.policy.fileKey,operation:get(id)}];
@@ -2412,6 +2423,13 @@ export function createNativeOperationJobs(
         const initial = stateApi?.initial ?? (isReactInitialNativeRequest(pin) ? pin : undefined);
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? pin;
         if (!(isReactNativeRequest(request) || isReactAuthoredNativeRequest(request)) || request.referenceId !== referenceId) return [];
+        // A root lookup selects by the effective source pin, after checking any
+        // succession. Header discovery never grants authority: get() still
+        // validates the selected complete journal and current source below.
+        if (inspectionQuery && !('operationId' in inspectionQuery) &&
+            (!isReactNativeRequest(request) || request.version !== 1 || request.caseId !== inspectionQuery.caseId ||
+              request.ownership.id !== inspectionQuery.ownershipId)) return [];
+        if (inspectionQuery && !same(load(id).header,header)) fail('header-changed');
         // get() verifies the saved journal and separately reports source freshness.
         return [{ ...(successionProblem ? { successionProblem } : {}), caseId: request.caseId, ownershipId: request.ownership.id, kind: isReactAuthoredNativeRequest(request) ? request.version===3?'authored-state-api' as const:request.version===2?'authored-initial' as const:'authored' as const : stateApi ? 'state-api' as const : initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
           ...(isReactNativeRequest(request) && request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),

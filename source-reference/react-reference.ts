@@ -610,6 +610,63 @@ export function createReactReferenceService(
     res.setHeader("Cache-Control", "no-store");
     res.end(JSON.stringify(body));
   };
+  // One exact operation and the legacy full listing share the same enriched
+  // row. This does not select an inspection source or enumerate other owners.
+  const readNativeInspectionRow = (row: ReactNativeListingRow, observedAt: number) => {
+    if (!native || !reference) throw Error('react-native-reference-unavailable');
+    const {jobs, transport} = native();
+    if (row.kind === 'comparison') return readReactComparisonInspection(repoRoot, reference!.id, row, native!(), frames, observedAt);
+    let content;
+    let composition, compositionProblem;
+    let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
+    if(row.kind==='authored-initial'||row.kind==='authored-state-api'){
+      try{
+        const evidence=authoredNativeEvidence(jobs.reactEffectiveAuthoredRequest(row.operation.id));
+        if('nativeVariants' in evidence.draft && 'frames' in evidence)
+          initialStates=evidence.draft.nativeVariants.map(state=>({...state,frame:evidence.frames[state.observation]}));
+      }catch{/* The independently authenticated image endpoint refuses stale source. */}
+    }
+    if (row.kind === 'initial' || row.kind === 'state-api') {
+      // A corrected compiler plan differs from creation without changing
+      // its pinned source archive. Authenticate that archive separately.
+      try { const evidence = thisInitialEvidence(initialRequestForOperation(row.operation.id));
+        initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
+      catch { /* Image endpoints independently refuse unavailable source. */ }
+    }
+    if (row.kind === 'root') {
+      const id = row.operation.id;
+      let running:ReturnType<typeof startReactContentInspection>|undefined;
+      try {
+        const {request,scope}=callerContentSource(jobs,id);running=contentJobs.get(scope);
+        if (running && running.state.phase !== 'complete') content = running.report();
+        else {
+          try {
+            // The composition reader authenticates and returns the saved
+            // inspection too. Do not read the same sealed archive twice.
+            const evidence = readReactCompositionEvidence(repoRoot, reference!, request, scope, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
+            if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
+            content = evidence.inspection; composition = evidence.review;
+          } catch (error) {
+            content = running?.report() ?? readReactContentInspection(repoRoot, reference!, request, scope);
+            // Name the reader's refusal when it is identifier-shaped, as other refusals that reach the browser do.
+            const reason = error instanceof Error && /^[a-z][a-z0-9:._-]{2,160}$/.test(error.message) ? ` (${error.message})` : '';
+            if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
+              compositionProblem = `Nested component evidence is unavailable or changed${reason}. Reload the unchanged original and inspect its content.`;
+          }
+        }
+      } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
+    }
+    let sourceRevisions: string[] | undefined;
+    if (row.kind === 'root' || row.kind === 'initial' || row.kind === 'state-api' || row.kind==='authored-state-api')
+      try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
+      catch { /* An unreadable succession journal already fails identity above. */ }
+    return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
+      recordedMeasurement: (row.kind === 'initial' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
+      updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
+        const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
+        return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
+      }), connection: transport.status(row.operation.id, observedAt) };
+  };
   const handle = async (
     req: IncomingMessage,
     res: ServerResponse,
@@ -928,10 +985,21 @@ export function createReactReferenceService(
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|attest-dead|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
     const nativeProgress = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})(?:\/update\/([a-f0-9]{64}))?\/progress$/.exec(route);
-    if (authoredNativeRoute || nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute || nativeProgress) {
+    const nativeInspection = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/inspection$/.exec(route);
+    if (authoredNativeRoute || nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute || nativeProgress || nativeInspection) {
       try {
-        if (!native || !reference || reference.id !== (authoredNativeRoute ?? nativeRoute ?? nativeAction ?? initialNativeRoute ?? stateApiNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute ?? nativeProgress)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (authoredNativeRoute ?? nativeRoute ?? nativeAction ?? initialNativeRoute ?? stateApiNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute ?? nativeProgress ?? nativeInspection)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
+        if (nativeInspection) {
+          if(req.method!=='GET' || Number(req.headers['content-length'] ?? 0)>0 || req.headers['transfer-encoding'])
+            throw Error('react-native-inspection-read-only');
+          const operation = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
+            const rows = jobs.listReact(reference!.id, undefined, undefined, {operationId:nativeInspection[2]});
+            if (rows.length !== 1) throw Error('react-native-inspection-reference-mismatch');
+            return readNativeInspectionRow(rows[0], Date.now());
+          }));
+          json(res,200,{operation});return;
+        }
         if (nativeProgress) {
           if(req.method!=='GET' || Number(req.headers['content-length'] ?? 0)>0 || req.headers['transfer-encoding'])
             throw Error('react-native-progress-read-only');
@@ -1056,9 +1124,19 @@ export function createReactReferenceService(
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');
             const report = job.report();
-            const existing = jobs.listReact(reference.id).find(row => row.kind === 'root' && row.caseId === nativeRoute[2] && row.ownershipId === report.id);
+            const query = {caseId:nativeRoute[2],ownershipId:report.id};
+            const existing = jobs.listReact(reference.id, 'root', undefined, query).find(row => row.kind === 'root');
             if (existing) jobs.get(existing.operation.id);
             else jobs.prepare({ ...selectReactNativeRequest(repoRoot, report, nativeRoute[2]), compilation: 'current' });
+            if (req.headers.prefer === 'return=minimal') {
+              const operation = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
+                const rows = jobs.listReact(reference!.id, 'root', undefined, query);
+                if (rows.length !== 1) throw Error('react-native-inspection-ambiguous');
+                return readNativeInspectionRow(rows[0], Date.now());
+              }));
+              res.setHeader('Preference-Applied','return=minimal');
+              json(res,200,{operation});return;
+            }
           } else if (nativeAction?.[3] === 'adopt-source') {
             // The one action addressed to an operation that follows ANOTHER
             // source revision: record that it now follows this one. Nothing is
@@ -1174,57 +1252,7 @@ export function createReactReferenceService(
           catch { return [id, false]; }
         }));
         return { moved, inspectionSourceAvailable, inspectionSources, operations: jobs.listReact(reference!.id).map(row => {
-          if (row.kind === 'comparison') return readReactComparisonInspection(repoRoot, reference!.id, row, native!(), frames, observedAt);
-          let content;
-          let composition, compositionProblem;
-          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
-          if(row.kind==='authored-initial'||row.kind==='authored-state-api'){
-            try{
-              const evidence=authoredNativeEvidence(jobs.reactEffectiveAuthoredRequest(row.operation.id));
-              if('nativeVariants' in evidence.draft && 'frames' in evidence)
-                initialStates=evidence.draft.nativeVariants.map(state=>({...state,frame:evidence.frames[state.observation]}));
-            }catch{/* The independently authenticated image endpoint refuses stale source. */}
-          }
-          if (row.kind === 'initial' || row.kind === 'state-api') {
-            // A corrected compiler plan differs from creation without changing
-            // its pinned source archive. Authenticate that archive separately.
-            try { const evidence = thisInitialEvidence(initialRequestForOperation(row.operation.id));
-              initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
-            catch { /* Image endpoints independently refuse unavailable source. */ }
-          }
-          if (row.kind === 'root') {
-            const id = row.operation.id;
-            let running:ReturnType<typeof startReactContentInspection>|undefined;
-            try {
-              const {request,scope}=callerContentSource(jobs,id);running=contentJobs.get(scope);
-              if (running && running.state.phase !== 'complete') content = running.report();
-              else {
-                try {
-                  // The composition reader authenticates and returns the saved
-                  // inspection too. Do not read the same sealed archive twice.
-                  const evidence = readReactCompositionEvidence(repoRoot, reference!, request, scope, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
-                  if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
-                  content = evidence.inspection; composition = evidence.review;
-                } catch (error) {
-                  content = running?.report() ?? readReactContentInspection(repoRoot, reference!, request, scope);
-                  // Name the reader's refusal when it is identifier-shaped, as other refusals that reach the browser do.
-                  const reason = error instanceof Error && /^[a-z][a-z0-9:._-]{2,160}$/.test(error.message) ? ` (${error.message})` : '';
-                  if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
-                    compositionProblem = `Nested component evidence is unavailable or changed${reason}. Reload the unchanged original and inspect its content.`;
-                }
-              }
-            } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          }
-          let sourceRevisions: string[] | undefined;
-          if (row.kind === 'root' || row.kind === 'initial' || row.kind === 'state-api' || row.kind==='authored-state-api')
-            try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
-            catch { /* An unreadable succession journal already fails identity above. */ }
-          return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
-            recordedMeasurement: (row.kind === 'initial' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
-            updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
-              const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
-              return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
-            }), connection: transport.status(row.operation.id, observedAt) };
+          return readNativeInspectionRow(row, observedAt);
         }) };
         }));
         json(res, 200, listing);
