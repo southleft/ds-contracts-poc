@@ -90,9 +90,20 @@ and refuses an unsupported requested parent. A fresh Scratch family reached the
 ordinary JSON import and prepared a React library with its child dependency.
 The app's downloaded archive then installed and built in a clean React 19/Vite
 consumer, rendering the parent, child and label without editing generated code.
-Browser download automation stalled before succeeding; visual fidelity, font
+In that earlier run, browser download automation stalled before succeeding; visual fidelity, font
 matching and unseen-kit qualification remain unproven. This fixes a handoff
 blocker without changing either scoreboard.
+
+A separate October 13 browser run imported that known parent and child from
+their live Figma URL, attached an existing local Inter font, and prepared and
+downloaded a React archive. The exact download installed in an empty React
+19/Vite app and built without editing generated code. Both visible previews
+render the nested child and “Try me” label at 94 × 40 px, and the bundled Inter
+font loads automatically. This closes the browser import-to-download-to-consumer
+check for that reference. It does not establish unseen-kit fidelity, Figma's
+font-byte identity or reverse conversion. No font license notice was attached
+in this local functional check; its archive is not a redistributable tester
+bundle. Both scoreboards remain unchanged.
 
 Sources now offers **Review all source states on two backgrounds** for saved
 root initial-state operations. All 12 current Checkbox combinations were
