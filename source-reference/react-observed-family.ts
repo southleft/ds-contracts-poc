@@ -11,7 +11,7 @@ import {normalizeValue,type CapturedNode} from '../extract/computed/lib.js';
 import {readReactDeclaredCaseMount,type ReactCaseElement} from './react-cohort.js';
 import {readReactRuntimeExport} from './react-runtime-export.js';
 import {reactReferenceUnchanged,type ReactReference} from './react-reference.js';
-import {readReactObservedFamilyPlane,selectReactNativeRequest} from './react-native-evidence.js';
+import {readReactObservedFamilyPlane,readReactObservedFamilyMembers} from './react-native-evidence.js';
 import type {ReactNativeRequest} from './react-native-request.js';
 import type {ReactOwnershipReport} from './react-ownership-run.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
@@ -93,8 +93,7 @@ function sourceMount(reference:ReactReference,id:string,target:ObservedFamilyRec
 }
 function derive(repo:string,reference:ReactReference,report:ReactOwnershipReport,selection:ObservedFamilySelection){
   if(!isObservedFamilySelection(selection)||!reactReferenceUnchanged(reference)||reference.id!==report.referenceId)fail('selection-invalid');
-  const requests=selection.caseIds.map(id=>selectReactNativeRequest(repo,report,id));
-  const planes=requests.map(request=>readReactObservedFamilyPlane(repo,reference,request));
+  const {requests,planes}=readReactObservedFamilyMembers(repo,reference,report,selection.caseIds);
   const identity=planes[0].matrix.source;
   const entries=planes.map((p,i)=>{
     if(!equal(p.matrix.source,identity)||p.source.programSha256!==planes[0].source.programSha256)fail('source-identity-differs');
