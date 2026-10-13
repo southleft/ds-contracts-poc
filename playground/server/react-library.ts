@@ -3,6 +3,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { buildReactLibrary } from './react-library-build.js';
 import { MAX_BYTES, parseLibraryRequest } from './react-library-input.js';
 import { readPreparedReactLibrary, retainPreparedReactLibrary } from './react-library-artifact.js';
+import { parseLibraryFonts } from './react-library-fonts.js';
 import { createRetainedOccurrenceStore, parseRetainedOccurrenceKey } from './caller-occurrence.js';
 export { buildReactLibrary } from './react-library-build.js';
 export { parseLibraryRequest } from './react-library-input.js';
@@ -41,22 +42,28 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
       const chunks: Buffer[] = []; let size = 0;
       for await (const chunk of req) { size += chunk.length; if (size > MAX_BYTES) { json(res, 413, 'React library request exceeds 5 MB.'); return; } chunks.push(Buffer.from(chunk)); }
       let input: ReturnType<typeof parseLibraryRequest>;
+      let fonts: ReturnType<typeof parseLibraryFonts>;
       try {
         const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
         if (body && typeof body === 'object' && !Array.isArray(body) && 'occurrence' in body) {
           const keys = Object.keys(body).sort().join(',');
           const inspect = body.kind === 'resolve-caller-occurrence' && keys === 'kind,occurrence';
-          if (!inspect && keys !== 'occurrence') throw Error('retained-occurrence-invalid-request');
+          if (!inspect && keys !== 'occurrence' && keys !== 'fonts,occurrence') throw Error('retained-occurrence-invalid-request');
           const retained = resolveOccurrence(parseRetainedOccurrenceKey(body.occurrence));
           if (inspect) {
             res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store');
             res.end(JSON.stringify(retained)); return;
           }
           input = parseLibraryRequest(retained.request);
+          fonts = parseLibraryFonts(body.fonts);
+        } else if (body && typeof body === 'object' && !Array.isArray(body)) {
+          const { fonts: uploadedFonts, ...request } = body;
+          input = parseLibraryRequest(request);
+          fonts = parseLibraryFonts(uploadedFonts);
         } else input = parseLibraryRequest(body);
       }
       catch (error) { json(res, 400, error instanceof Error ? error.message : 'Invalid React library input.'); return; }
-      const result = await build(repoRoot, input);
+      const result = fonts ? await build(repoRoot, input, undefined, { fonts }) : await build(repoRoot, input);
       const artifact = retainPreparedReactLibrary(repoRoot, input, result);
       res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store');
       res.end(JSON.stringify({ filename: result.filename, name: result.name, sha256: result.tarballSha256, artifactId: artifact.id, downloadUrl: `/api/react-library/download/${artifact.id}` }));

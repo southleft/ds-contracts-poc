@@ -41,6 +41,8 @@ import type { DumpSet } from '../../../extract/figma/types.js';
 import { dumpClosure } from '../../../extract/figma/rest/closure.js';
 import { recordFigmaClosure } from '../engine/figma-import-workspace';
 import { reactLibraryFamily } from '../engine/react-library';
+import { encodeLibraryRequest, type LibraryFontUpload } from '../engine/library-fonts';
+import { LibraryFontUploads } from '../components/LibraryFontUploads';
 import type { RecordImportResult } from '../engine/workspace';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
@@ -2489,6 +2491,7 @@ export function Playground() {
     validation.status === 'valid' || validation.status === 'violations' ? validation : null;
   const canPrepareLibrary = validation.status === 'valid' && text === debouncedText;
 
+  const [libraryFonts, setLibraryFonts] = useState<LibraryFontUpload[]>([]);
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
   const [libraryArtifact, setLibraryArtifact] = useState<{ artifactId: string; filename: string; name: string; downloadUrl: string } | null>(null);
@@ -2496,7 +2499,7 @@ export function Playground() {
   useEffect(() => {
     libraryRevision.current++;
     setLibraryArtifact(null); setLibraryNotice(null);
-  }, [text, tokenSource.tree, icons, emittable?.contracts]);
+  }, [text, tokenSource.tree, icons, emittable?.contracts, libraryFonts]);
   const downloadReactLibrary = async () => {
     if (!emittable || !canPrepareLibrary || libraryBusy) return;
     const revision = libraryRevision.current;
@@ -2505,10 +2508,11 @@ export function Playground() {
       const scope = linkedImportScope(emittable.contract, emittable.contracts,
         sessionRegistry().layersByContractId, tokenSource.inventory);
       const occurrence = retainedOccurrencePackageSelection(emittable.contract, emittable.contracts, tokenSource.tree);
-      const response = await fetch('/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(occurrence ?? { rootId: emittable.contract.id,
-          contracts: reactLibraryFamily(emittable.contract, emittable.contracts),
-          tokens: applyLinkedScope(tokenSource.tree, scope), icons: [...icons] }) });
+      const body = await encodeLibraryRequest(occurrence ?? { rootId: emittable.contract.id,
+        contracts: reactLibraryFamily(emittable.contract, emittable.contracts),
+        tokens: applyLinkedScope(tokenSource.tree, scope), icons: [...icons] }, libraryFonts);
+      if (revision !== libraryRevision.current) return;
+      const response = await fetch('/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
       if (!response.ok) {
         const detail = await response.json().catch(() => null);
         throw Error(detail?.error ?? `React library preparation failed (${response.status}).`);
@@ -4070,10 +4074,11 @@ export function Playground() {
             <div className="output__files">
               {outputTab === 'react' && import.meta.env.DEV && (
                 <div className="pane__body">
+                  <LibraryFontUploads fonts={libraryFonts} onChange={setLibraryFonts} disabled={libraryBusy} />
                   <button type="button" className="btn--primary" disabled={libraryBusy || !canPrepareLibrary} onClick={() => void downloadReactLibrary()}>
                     {libraryBusy ? 'Preparing React library…' : 'Prepare React library'}
                   </button>
-                  <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>
+                  <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support. Added fonts and notices are bundled and load automatically; provide any other fonts declared by the design.</p>
                   {libraryNotice && <p role="status">{libraryNotice}</p>}
                   {libraryArtifact && <>
                     <p><a href={libraryArtifact.downloadUrl} download={libraryArtifact.filename}>Download {libraryArtifact.filename}</a></p>

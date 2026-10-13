@@ -333,3 +333,157 @@ test('retained occurrence selectors without a host registration refuse before bu
     assert.equal(existsSync(path.join(work, 'private')), false, 'an HTTP selection cannot create a registration or artifact');
   } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
 });
+
+
+test('font uploads reach preparation as authenticated bytes with a supplied notice for ordinary and retained requests', async () => {
+  const work = mkdtempSync(path.join(tmpdir(), 'font-upload-route-'));
+  const font = readFileSync(new URL('../../extract/computed/fonts/public-sans/PublicSans-VariableFont_wght.ttf', import.meta.url));
+  const notice = readFileSync(new URL('../../extract/computed/fonts/public-sans/OFL.txt', import.meta.url));
+  const face = { family: 'Public Sans', weight: '100 900', style: 'normal', dataBase64: font.toString('base64'), license: { dataBase64: notice.toString('base64') } };
+  let calls = 0, resolutions = 0;
+  const route = await serveOccurrenceRoute(work, async (_repo, input, _parent, options) => {
+    calls++;
+    assert.equal(input.root.id, parent.id);
+    assert.equal(options?.fonts?.length, 1);
+    const saved = options!.fonts![0]!;
+    assert.equal(saved.family, face.family);
+    assert.equal(saved.sha256, createHash('sha256').update(font).digest('hex'));
+    assert.equal(saved.file, saved.sha256 + '.ttf');
+    assert.ok(saved.bytes.equals(font));
+    assert.ok(saved.license?.bytes.equals(notice));
+    assert.equal(saved.license?.file, createHash('sha256').update(notice).digest('hex') + '.txt');
+    return { ...storedOutput(), tarball: '/unused', dist: '/unused' };
+  }, key => { resolutions++; assert.deepEqual(key, occurrenceKey); return retainedEnvelope(); });
+  try {
+    assert.equal((await route.post({ ...request(), fonts: [face] })).status, 200);
+    assert.equal((await route.post({ occurrence: occurrenceKey, fonts: [face] })).status, 200);
+    assert.equal(calls, 2); assert.equal(resolutions, 1);
+    const inspection = await route.post({ kind: 'resolve-caller-occurrence', occurrence: occurrenceKey, fonts: [face] });
+    assert.equal(inspection.status, 400, 'font uploads cannot expand inspection authority');
+    assert.equal(resolutions, 1); assert.equal(calls, 2);
+  } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
+});
+
+test('font upload errors, paths, URLs, notices and oversized transport stop before preparation', async () => {
+  const work = mkdtempSync(path.join(tmpdir(), 'font-upload-refusals-'));
+  const font = readFileSync(new URL('../../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
+  const face = { family: 'IBM Plex Sans', weight: '400', style: 'normal', dataBase64: font.toString('base64') };
+  // A tiny WOFF header may declare enormous expanded tables. HTTP uploads must
+  // refuse that before decompression, while the explicit CLI path is unchanged.
+  const oversizedDecodedFont = Buffer.alloc(65);
+  oversizedDecodedFont.write('wOFF'); oversizedDecodedFont.writeUInt16BE(1, 12);
+  oversizedDecodedFont.write('name', 44); oversizedDecodedFont.writeUInt32BE(64, 48);
+  oversizedDecodedFont.writeUInt32BE(1, 52); oversizedDecodedFont.writeUInt32BE(33 * 1024 * 1024, 56);
+  let calls = 0;
+  const route = await serveOccurrenceRoute(work, async () => { calls++; throw Error('invalid upload must not build'); });
+  try {
+    const expanded = await route.post({ ...request(), fonts: [{ ...face, dataBase64: oversizedDecodedFont.toString('base64') }] });
+    assert.equal(expanded.status, 400);
+    assert.match((await expanded.json()).error, /decoded-font-too-large/);
+    for (const invalid of [
+      { ...face, family: 'Inter' },
+      { ...face, file: '/private/font.woff2' },
+      { ...face, url: 'https://example.com/font.woff2' },
+      { ...face, sha256: 'a'.repeat(64) },
+      { ...face, dataBase64: 'https://example.com/font.woff2' },
+      { ...face, dataBase64: 'YQ' },
+      { ...face, license: { file: '/private/notice.txt', dataBase64: 'YQ==' } },
+      { ...face, license: { dataBase64: Buffer.alloc(256 * 1024 + 1).toString('base64') } },
+    ]) {
+      const response = await route.post({ ...request(), fonts: [invalid] });
+      assert.equal(response.status, 400);
+    }
+    const oversized = await route.post({ ...request(), fonts: [{ ...face, dataBase64: Buffer.alloc(4 * 1024 * 1024).toString('base64') }] });
+    assert.equal(oversized.status, 413);
+    assert.equal(calls, 0);
+    assert.equal(existsSync(path.join(work, 'private')), false, 'bad fonts do not write artifacts');
+  } finally { await route.close(); rmSync(work, { recursive: true, force: true }); }
+});
+
+test('the session font encoder preserves ordinary inputs, transports only bytes and counts encoded request size', async () => {
+  const { encodeLibraryRequest } = await import('../src/engine/library-fonts.js');
+  const font = readFileSync(new URL('../../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
+  const face = { id: 1, family: 'IBM Plex Sans', weight: '400', style: 'normal' as const,
+    file: new File([font], 'untrusted-name.woff2'), license: new File(['Notice\n'], 'OFL.txt') };
+  assert.deepEqual(JSON.parse(await encodeLibraryRequest(request(), [])), request());
+  const body = JSON.parse(await encodeLibraryRequest({ occurrence: occurrenceKey }, [face]));
+  assert.deepEqual(body.occurrence, occurrenceKey);
+  assert.deepEqual(Object.keys(body.fonts[0]).sort(), ['dataBase64', 'family', 'license', 'style', 'weight']);
+  assert.equal(body.fonts[0].dataBase64, font.toString('base64'));
+  assert.equal(body.fonts[0].license.dataBase64, Buffer.from('Notice\n').toString('base64'));
+  await assert.rejects(encodeLibraryRequest(request(), [{ ...face, file: null }]), /Choose a font file/);
+  await assert.rejects(encodeLibraryRequest(request(), [{ ...face, file: new File([Buffer.alloc(4 * 1024 * 1024)], 'big.ttf') }]), /exceeds 5 MB/);
+  await assert.rejects(encodeLibraryRequest({ metadata: 'x'.repeat(5 * 1024 * 1024) }, [face]), /exceeds 5 MB/);
+  await assert.rejects(encodeLibraryRequest(request(), [{ ...face, license: new File([Buffer.alloc(256 * 1024 + 1)], 'notice.txt') }]), /size limit/);
+});
+
+
+test('font upload filenames remain visible on remount and match the held files sent for preparation', async () => {
+  const { createElement } = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const { LibraryFontUploads } = await import('../src/components/LibraryFontUploads.js');
+  const { encodeLibraryRequest } = await import('../src/engine/library-fonts.js');
+  const empty = { id: 4, family: 'Example Sans', weight: '400', style: 'normal' as const, file: null, license: null };
+  const view = (fonts: Parameters<typeof LibraryFontUploads>[0]['fonts']) => renderToStaticMarkup(createElement(LibraryFontUploads, { fonts, onChange: () => {}, disabled: false }));
+  assert.match(view([empty]), /Choose font file/);
+  assert.match(view([empty]), /Choose license notice \(optional\)/);
+  const selected = { ...empty, file: new File(['held-font'], 'ExampleSans-Regular.ttf'), license: new File(['held-notice'], 'ExampleSans-LICENSE.txt') };
+  const beforeUnmount = view([selected]);
+  // A new render has no native file-input selection. Its labels must describe
+  // the parent-held Files, which survive leaving and returning to the React tab.
+  const remounted = view([selected]);
+  assert.equal(remounted, beforeUnmount);
+  assert.match(remounted, /Selected font: <strong>ExampleSans-Regular.ttf<\/strong>/);
+  assert.match(remounted, /Selected license notice: <strong>ExampleSans-LICENSE.txt<\/strong>/);
+  assert.match(remounted, /Replace font file/);
+  assert.match(remounted, /Replace license notice/);
+  const sent = JSON.parse(await encodeLibraryRequest({ occurrence: occurrenceKey }, [selected]));
+  assert.equal(sent.fonts[0].dataBase64, Buffer.from('held-font').toString('base64'));
+  assert.equal(sent.fonts[0].license.dataBase64, Buffer.from('held-notice').toString('base64'));
+  const replacement = { ...selected, file: new File(['replacement-font'], 'ExampleSans-Updated.ttf'), license: null };
+  const replaced = view([replacement]);
+  assert.match(replaced, /Selected font: <strong>ExampleSans-Updated.ttf<\/strong>/);
+  assert.doesNotMatch(replaced, /ExampleSans-Regular|ExampleSans-LICENSE/);
+  assert.match(replaced, /Selected license notice: <strong>None selected<\/strong>/);
+  const replacementSent = JSON.parse(await encodeLibraryRequest({ occurrence: occurrenceKey }, [replacement]));
+  assert.equal(replacementSent.fonts[0].dataBase64, Buffer.from('replacement-font').toString('base64'));
+  assert.equal(replacementSent.fonts[0].license, undefined);
+});
+
+
+/** Small sfnt with overlapping name-string ranges, exercising expansion in the
+ * name-record parser independently of compressed-table expansion. */
+function overlappingNameFont(count: number, familyLength: number, step = 1): Buffer {
+  const stringSize = familyLength + count * step;
+  const tableSize = 6 + count * 12 + stringSize;
+  const font = Buffer.alloc(28 + tableSize);
+  font.writeUInt32BE(0x00010000, 0); font.writeUInt16BE(1, 4);
+  font.write('name', 12); font.writeUInt32BE(28, 20); font.writeUInt32BE(tableSize, 24);
+  font.writeUInt16BE(count, 30); font.writeUInt16BE(6 + count * 12, 32);
+  for (let index = 0; index < count; index++) {
+    const at = 34 + index * 12;
+    font.writeUInt16BE(1, at); font.writeUInt16BE(1, at + 6);
+    font.writeUInt16BE(familyLength, at + 8); font.writeUInt16BE(index * step, at + 10);
+  }
+  for (let index = 0; index < stringSize; index++) font[34 + count * 12 + index] = 33 + index % 94;
+  return font;
+}
+
+test('uploaded font name records have individual and aggregate budgets and bounded mismatch diagnostics', async () => {
+  const { parseLibraryFonts } = await import('./react-library-fonts.js');
+  const { fontFamilyNames } = await import('../../scripts/design-consumer-fonts.js');
+  const face = (font: Buffer) => [{ family: 'Missing Family', weight: '400', style: 'normal', dataBase64: font.toString('base64') }];
+  const overlapping = overlappingNameFont(90, 1024);
+  const cliNames = fontFamilyNames(overlapping);
+  assert.equal(overlapping.length, 2228);
+  assert.equal(cliNames.length, 90);
+  assert.equal(cliNames.reduce((total, name) => total + Buffer.byteLength(name), 0), 92160, 'explicit CLI decoding retains its existing behavior');
+  assert.throws(() => parseLibraryFonts(face(overlapping)), /font-name-total-budget-exceeded/);
+  assert.throws(() => parseLibraryFonts(face(overlappingNameFont(4097, 1, 0))), /font-name-record-budget-exceeded/);
+  assert.throws(() => parseLibraryFonts(face(overlappingNameFont(1, 1025))), /font-name-family-budget-exceeded/);
+  let diagnostic = '';
+  try { parseLibraryFonts(face(overlappingNameFont(16, 1024))); }
+  catch (error) { diagnostic = (error as Error).message; }
+  assert.match(diagnostic, /family-not-declared-by-font/);
+  assert.ok(diagnostic.length < 1500, `mismatch output must be bounded, got ${diagnostic.length}`);
+});

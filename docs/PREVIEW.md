@@ -170,8 +170,11 @@ bytes travel with the font. Supply files you can distribute with your package.
 The receipt keeps the files and the faces the browser loaded, and
 `out/result.json` lists them under `check.fonts`. This pins what the check
 rendered with; it does not prove these are the exact font files Figma used,
-and the image comparison still decides. The browser's Prepare React library
-flow currently has no font-upload step; this option is available in the CLI.
+and the image comparison still decides. In the local Playground, add each font
+file and optional license notice under **Include font files** before choosing
+**Prepare React library**. Enter its declared family, weight or range, and style;
+no manifest editing is required. The full browser request, including encoded
+files, is limited to 5 MB. Larger font sets can use the CLI manifest.
 
 Match the font release as well as its family and weight. Different releases
 can keep the same family name while changing glyphs and text widths; for
