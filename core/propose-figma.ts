@@ -3805,6 +3805,19 @@ function invertNodeTokens(
       ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
     }
   }
+  // Native SPACE_BETWEEN ignores itemSpacing; CSS gap would instead impose
+  // a minimum and can push FILL children past their captured parent. Keep
+  // unknown/mixed distribution, wrapping row gaps, and negative overlap on
+  // their existing paths. The inverse writer names the same incompatibility
+  // in FIGMA_ROOT_SLOT_DISTRIBUTION_UNSUPPORTED.
+  const dormantDistributedSpacing = m.occ.length > 0 && m.occ.every(({ node }) =>
+    (node.layout?.mode === 'HORIZONTAL' || node.layout?.mode === 'VERTICAL') &&
+    node.layout.primary === 'SPACE_BETWEEN' && node.layout.wrap !== true &&
+    typeof node.layout.spacing === 'number' && Number.isFinite(node.layout.spacing) && node.layout.spacing >= 0);
+  if (dormantDistributedSpacing && (fields.has('itemSpacing') || m.occ.some(({ node }) => node.layout!.spacing !== 0))) {
+    const bindings = [...new Set(m.occ.flatMap(({ node }) => node.bound?.itemSpacing ? [node.bound.itemSpacing] : []))];
+    ctx.notes.push(`${where}: captured SPACE_BETWEEN distributes the main axis; dormant itemSpacing (${m.occ.map(({ node }) => node.layout!.spacing).join('/')})${bindings.length ? ` bound to ${bindings.join(', ')}` : ''} is not a CSS minimum gap — gap omitted`);
+  }
   // P21's overlap vocabulary is a part invariant. A bound name can be
   // registered truthfully while its mixed-sign spacing still has no shared
   // render projection. Refuse before publishing an invalid negative CSS gap.
@@ -3816,7 +3829,7 @@ function invertNodeTokens(
       token:node.bound?.itemSpacing ? `{${dotPath(node.bound.itemSpacing)}}` : null}));
     throw new BoundMixedSignSpacingError(where, facts);
   }
-  const gapRef = f('itemSpacing');
+  const gapRef = dormantDistributedSpacing ? undefined : f('itemSpacing');
   const gapRefs = gapRef === undefined ? [] : typeof gapRef === 'string' ? [gapRef]
     : 'props' in gapRef ? gapRef.rows.map(row => row.ref) : Object.values(gapRef.byValue);
   // A substituted ref may contain an axis placeholder. Its source values
@@ -3919,7 +3932,7 @@ function invertNodeTokens(
       return v !== undefined && v !== bad;
     })?.node ?? n0;
   if (
-    !fields.has('itemSpacing') &&
+    !dormantDistributedSpacing && !fields.has('itemSpacing') &&
     // ANY variant with 2+ children makes the gap a rendered fact — gating on
     // the FIRST variant's child count let a set whose default variant has a
     // single child (Badge base Icon=False) drop every other variant's
@@ -7293,6 +7306,13 @@ function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ct
     return;
   }
   holder.textAutoResize = 'WIDTH_AND_HEIGHT';
+  // Auto-width preserves authored line feeds; max-content alone collapses
+  // them to spaces in CSS. Keep ordinary one-line text unchanged, and allow
+  // an independently authored max-width to wrap this text when present.
+  if (textOcc.some((o) => o.node.text?.characters?.includes('\n'))) {
+    holder.declared = { ...(holder.declared as Record<string, string> | undefined), 'white-space': 'pre-wrap' };
+    ctx.notes.push(`${where}: captured auto-width text contains line feeds — preserved with white-space: pre-wrap; no clipping or parent-width ceiling inferred`);
+  }
   ctx.notes.push(
     `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round its intrinsic max-content inline size where calc-size() is supported and prevent flex shrinking, without inventing a parent-width ceiling; authored bounds remain authoritative, and the writer sets the field back on the node`,
   );
