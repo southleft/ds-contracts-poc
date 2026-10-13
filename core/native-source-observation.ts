@@ -28,7 +28,7 @@ import type { NativeContractDraftProjection } from "./native-contract-draft.js";
 import type { NativeSourceComparisonInput } from "./native-source-comparisons.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
 import { emitNativeTokenExtensionContextReadbackScript } from './native-token-extension.js';
-import {backgroundPaintIdentities} from './figma-background-clip.js';
+import {backgroundPaintIdentities,nativeRootSlotFlowGeometry} from './figma-background-clip.js';
 import {validNativeGraphCreation} from './native-graph-creation.js';
 import {
   verifyNativeTokenContextReceipt,
@@ -308,7 +308,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   const hasMask = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || spec.shape?.kind === 'stroked-path' || !!spec.instanceInsideStroke || !!spec.mask || !!spec.children?.some(hasMask);
   const hasCapturedGeometry = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || !!spec.capturedAbsoluteGeometry || !!spec.insetOverlay || !!spec.children?.some(hasCapturedGeometry);
-  const hasStrokeLayout = (spec: NodeSpec): boolean => spec.insetRingStroke === true ||
+  const hasStrokeLayout = (spec: NodeSpec): boolean => spec.insetRingStroke === true || !!spec.rootSlotFlow ||
     (['root','frame'].includes(spec.type) && !!spec.lits?.strokeColor && typeof spec.lits.strokeWeight === 'number') ||
     !!spec.children?.some(hasStrokeLayout);
   const hasPathInk = (spec: NodeSpec): boolean => spec.shape?.kind === 'stroked-path' || spec.nativePathInk === true || spec.nativeMaskPath === true || !!spec.children?.some(hasPathInk);
@@ -363,6 +363,26 @@ export function emitNativeInventoryReadbackScript(expected: {
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
 }, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false, capturedGeometry=false, masks=false, packed=false, arcCaps=true, pairedArcCapFields?: Record<string, string[]>, strokeLayout=false,boundPaint=false,aspectRatio=true, contractDraftText=false, pairedArcCapIdentity?: {nodes: Record<string, unknown>[]; comparisons: Record<string, unknown>[]; inheritedAdditions?: Array<{instanceId:string;specPath:number[];mainNodeId:string;metadata:Record<string,string>}>}): string {
+  // Optional main-capture fields are a closed per-node profile, never a
+  // verifier exception. Caller-owned nodes retain the full requested inventory.
+  if (pairedArcCapFields) {
+    const allowed = new Set(['arcData', 'strokeCap', 'strokesIncludedInLayout', 'dashPattern']);
+    const ids = new Set(expected.nodes.map(node => node.id));
+    const plain = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' &&
+      !Array.isArray(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value));
+    if (!plain(pairedArcCapFields) || Reflect.ownKeys(pairedArcCapFields).some(key => {
+      if (typeof key !== 'string' || !ids.has(key)) return true;
+      const entry = Object.getOwnPropertyDescriptor(pairedArcCapFields, key);
+      if (!entry?.enumerable || !('value' in entry) || !Array.isArray(entry.value)) return true;
+      const fields = entry.value;
+      return Reflect.ownKeys(fields).some(k => k !== 'length' &&
+        (typeof k !== 'string' || !/^(0|[1-9][0-9]*)$/.test(k) || Number(k) >= fields.length)) ||
+        Array.from({length: fields.length}, (_, index) => {
+          const field = Object.getOwnPropertyDescriptor(fields, String(index));
+          return !field?.enumerable || !('value' in field) || !allowed.has(field.value);
+        }).some(Boolean) || new Set(fields).size !== fields.length;
+    })) throw Error('native-source-readback-paired-profile-input-invalid');
+  }
   if (pairedArcCapIdentity && (!pairedArcCapFields || !Object.keys(pairedArcCapFields).length ||
       !same(pairedArcCapIdentity.nodes, expected.nodes) || !Array.isArray(pairedArcCapIdentity.comparisons) ||
       pairedArcCapIdentity.comparisons.length !== 1 || pairedArcCapIdentity.comparisons[0].status !== 'created-comparison' ||
@@ -514,7 +534,7 @@ ${pairedArcCapIdentity.inheritedAdditions?.length ? `    // A verified main migr
       node.parent && node.parent.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_CHILD_FIELDS)} : []);
 ${pairedArcCapIdentity ? `    const profileId = profileIds.get(node.id);
     if (typeof profileId !== 'string') throw Error('native-source-readback-paired-profile-identity-changed');
-` : ''}    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, ${pairedArcCapIdentity ? 'profileId' : 'node.id'}) || PAIRED_ARC_CAP_FIELDS[${pairedArcCapIdentity ? 'profileId' : 'node.id'}].includes(field))` : ''}) {
+` : ''}    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap','strokesIncludedInLayout','dashPattern'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, ${pairedArcCapIdentity ? 'profileId' : 'node.id'}) || PAIRED_ARC_CAP_FIELDS[${pairedArcCapIdentity ? 'profileId' : 'node.id'}].includes(field))` : ''}) {
       const v = node[field];
       row.values[field] = typeof v === 'symbol' ? { mixed: true } : v === undefined ? null : copy(v);
     }${extraMetadata.includes('authoredTextAppearance') ? `\n    if(node.type==='TEXT'&&(${extraMetadata.includes('textAppearanceOverride') ? "node.getSharedPluginData('ds_contracts','textAppearanceOverride')||" : ''}node.getSharedPluginData('ds_contracts','authoredTextAppearance')))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : extraMetadata.includes('textAppearanceOverride') ? `\n    if(node.type==='TEXT'&&node.getSharedPluginData('ds_contracts','textAppearanceOverride'))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : ''}${originalImages ? `\n    if (Array.isArray(row.values.fills)) for (const paint of row.values.fills) if (paint.type === 'IMAGE') {
@@ -1579,6 +1599,14 @@ function verifyReadback(
         issue('native-source-observation-aspect-ratio', n);
       for (const problem of nativeGridProblems(spec, v, n.childIds.map((id: string) => nodes.get(id)?.values)))
         issue('native-source-observation-grid-' + problem, n);
+      if(spec.rootSlotFlow) {
+        const parent=nodes.get(n.parentId),slot=nodes.get(n.childIds[0]);
+        if(!parent || parent.childIds.length!==1 || parent.childIds[0]!==n.id || n.childIds.length!==1 ||
+            !slot || slot.type!=='SLOT' || slot.parentId!==n.id || slot.values.layoutMode!=='HORIZONTAL' ||
+            slot.values.layoutSizingHorizontal!=='HUG' || slot.values.layoutPositioning!=='AUTO' ||
+            slot.values.layoutSizingVertical!==v.layoutSizingVertical || !nativeRootSlotFlowGeometry(spec.rootSlotFlow,parent.values,v))
+          issue('native-contract-observation-root-slot-flow-geometry',n);
+      }
       if (spec.rootFillWidth && (v.layoutSizingHorizontal !== 'FIXED' ||
           (v.layoutMode === 'HORIZONTAL' ? v.primaryAxisSizingMode : v.counterAxisSizingMode) !== 'FIXED' ||
           nodes.get(n.childIds[(spec.children??[]).findIndex(child=>!child.backgroundPaint)])?.values.layoutSizingHorizontal !== 'FILL'))
@@ -1710,7 +1738,7 @@ function verifyReadback(
               Object.keys(paints[0].boundVariables ?? {}).length ||
               (observedBindings.fills !== undefined && (!Array.isArray(observedBindings.fills) || observedBindings.fills.length !== 0)))
             issue('native-library-observation-literal-fill',n);
-        } else if (field==='fill'&&spec.backgroundPaint&&spec.lits?.fillColor) {
+        } else if (field==='fill'&&(spec.backgroundPaint||spec.rootSlotFlow)&&spec.lits?.fillColor) {
           if(paints.length!==1 || paints[0].type!=='SOLID' || !paint(paints[0].color,spec.lits.fillColor) ||
              !numeric(paints[0].opacity??1,spec.lits.fillColor.a??1) || Object.keys(paints[0].boundVariables??{}).length)
             issue('native-contract-observation-background-paint',n);

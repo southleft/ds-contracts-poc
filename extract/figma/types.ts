@@ -4,7 +4,7 @@ import type { StrokedPath, Part } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.77';
+export const PLUGIN_DUMP_VERSION = '1.79';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -600,6 +600,8 @@ export interface DumpNode {
    *  16px-high small one 20px high. Inverts to `Part.strokesIncludedInLayout:
    *  false`. */
   strokesIncludedInLayout?: boolean;
+  /** Exact source-owned rectangular stroke input. Unsupported patterns stay absent. */
+  rectStrokePattern?: {nodeId:string;weight:number;radius:number;dashes:number[]};
   /** Literal min/max sizing in px (dump v1.4, additive) — carried as
    *  min-width/min-height/max-width/max-height style facts (a drawn
    *  minHeight 44 is a tap-target fact). Bound min/max variables ride

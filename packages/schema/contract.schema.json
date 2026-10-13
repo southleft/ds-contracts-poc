@@ -5376,6 +5376,59 @@
           "type": "boolean",
           "const": false
         },
+        "strokeAlign": {
+          "type": "string",
+          "const": "OUTSIDE"
+        },
+        "rectStrokePatternByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "dashes": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1000000
+                    }
+                  }
+                },
+                "required": [
+                  "values",
+                  "dashes"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "textAutoResize": {
           "type": "string",
           "const": "WIDTH_AND_HEIGHT"

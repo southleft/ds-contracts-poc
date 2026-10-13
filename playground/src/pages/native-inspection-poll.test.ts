@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
 
 const connection = {paired:true, started:true, finished:false};
 const root = {operation:{id:'root-id', phase:'awaiting-native-result'}, connection};
@@ -120,4 +120,67 @@ test('compact comparison rejects a different parent, case, malformed envelope or
     {comparison:{...comparison,fileKey:''}},{comparison:{...comparison,operation:{id:'bad'}}},
     {comparison:{...comparison,connection:{...comparison.connection,finished:'false'}}}])
     assert.throws(()=>nativeComparisonInspectionFromResponse(value,parentOperationId,'large'),/comparison response unavailable/);
+});
+
+
+const rootOwner = '20000000-0000-4000-8000-000000000001';
+const preparedRoot = {kind:'root',caseId:'large',ownershipId:rootOwner,fileKey:'file',
+  operation:{id:'20000000-0000-4000-8000-000000000002',phase:'prepared',sourceCurrent:true,problems:[] as string[]},
+  connection:{paired:false,connected:false,started:false,finished:false},
+  updates:[],content:{phase:'unmeasured'},recordedMeasurement:false};
+
+test('compact parent response retains the checked row and merges only its exact identity', async () => {
+  const checked = nativeRootInspectionFromResponse<typeof preparedRoot>({operation:preparedRoot},'large',rootOwner);
+  assert.equal(checked,preparedRoot,'retain all host fields rather than minting a ready snapshot');
+  const unrelated = {...preparedRoot,caseId:'small',operation:{...preparedRoot.operation,id:'20000000-0000-4000-8000-000000000003'}};
+  let revision=0;
+  let finishOld!:(value:typeof preparedRoot[])=>void;
+  const old=readCurrentNativeInspection(()=>new Promise<typeof preparedRoot[]>(resolve=>{finishOld=resolve;}),()=>revision);
+  revision++;
+  let displayed=mergeNativeComparisonInspection([unrelated],checked);
+  finishOld([unrelated]);const stale=await old;
+  if(stale && stale.revision===revision)displayed=stale.value;
+  assert.deepEqual(displayed,[unrelated,preparedRoot]);assert.equal(displayed[0],unrelated);
+  const staleSource={...preparedRoot,operation:{...preparedRoot.operation,sourceCurrent:false,problems:['native-operation-source-evidence-unavailable']}};
+  const staleChecked=nativeRootInspectionFromResponse<typeof preparedRoot>({operation:staleSource},'large',rootOwner);
+  displayed=mergeNativeComparisonInspection(displayed,staleChecked);
+  assert.equal(displayed.length,2);assert.equal(displayed[0],unrelated);assert.equal(displayed[1],staleSource);
+  assert.equal(await nativePollNeedsRefresh(displayed,async()=>{assert.fail('preparation did not start delivery');}),false);
+});
+
+test('compact parent refuses foreign owner/case/kind and incomplete root or response shape', () => {
+  const other='20000000-0000-4000-8000-000000000004';
+  for(const value of [null,[],{},preparedRoot,{operations:[preparedRoot]},{operation:preparedRoot,operations:[]},
+    {operation:{...preparedRoot,kind:'comparison'}},{operation:{...preparedRoot,kind:'nested'}},
+    {operation:{...preparedRoot,caseId:'small'}},{operation:{...preparedRoot,ownershipId:other}},
+    {operation:{...preparedRoot,parentOperationId:other}},{operation:{...preparedRoot,sourceOperationId:other}},
+    {operation:{...preparedRoot,fileKey:''}},{operation:{...preparedRoot,operation:{...preparedRoot.operation,id:'bad'}}},
+    {operation:{...preparedRoot,operation:{...preparedRoot.operation,phase:''}}},
+    {operation:{...preparedRoot,operation:{...preparedRoot.operation,sourceCurrent:undefined}}},
+    {operation:{...preparedRoot,operation:{...preparedRoot.operation,problems:[null]}}},
+    {operation:{...preparedRoot,connection:{...preparedRoot.connection,finished:'false'}}}])
+    assert.throws(()=>nativeRootInspectionFromResponse(value,'large',rootOwner),/root response unavailable/);
+  for(const owner of [undefined,'bad',other])
+    assert.throws(()=>nativeRootInspectionFromResponse({operation:preparedRoot},'large',owner),/root response unavailable/);
+});
+
+test('a compact parent completing after active reference or ownership changed cannot enter that view', async () => {
+  const requested={referenceId:'a'.repeat(64),ownershipId:rootOwner};
+  const otherOwner='20000000-0000-4000-8000-000000000004';
+  const original=[{...preparedRoot,caseId:'small'}];
+  for(const changed of [{...requested,referenceId:'b'.repeat(64)},{...requested,ownershipId:otherOwner},{...requested,ownershipId:undefined}]){
+    let active={...requested} as {referenceId:string;ownershipId:string|undefined};let displayed=original;
+    let resolve!:(value:unknown)=>void;
+    const response=new Promise<unknown>(r=>{resolve=r;});
+    const action=(async()=>{const value=await response;if(!nativeInspectionScopeMatches(requested,active))return;
+      const row=nativeRootInspectionFromResponse<typeof preparedRoot>(value,'large',requested.ownershipId);
+      displayed=nativeInspectionScopeMatches(requested,active)?mergeNativeComparisonInspection(displayed,row):displayed;})();
+    active=changed;resolve({operation:preparedRoot});await action;assert.equal(displayed,original);
+  }
+  assert.equal(nativeInspectionScopeMatches(requested,{...requested}),true);
+  assert.equal(nativeInspectionScopeMatches({...requested,ownershipId:undefined},{...requested,ownershipId:undefined}),false);
+  const checked=nativeRootInspectionFromResponse<typeof preparedRoot>({operation:preparedRoot},'large',rootOwner);
+  let active={...requested};active={...requested,ownershipId:otherOwner};
+  const duringPublication=nativeInspectionScopeMatches(requested,active)?mergeNativeComparisonInspection(original,checked):original;
+  assert.equal(duringPublication,original,'the state updater rechecks scope after parsing');
 });

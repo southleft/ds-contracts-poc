@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
-import { mapRestToDump } from './rest/map.js';
+import { mapRestToDump, REST_DUMP_VERSION } from './rest/map.js';
 import { proposeFromDump } from '../../core/propose-figma.js';
 import { createFigmaEngine } from '../../core/emit-figma-script.js';
 import { generateCss } from '../../core/emit-react.js';
@@ -42,13 +42,15 @@ const without = (set: DumpSet): DumpSet => { const copy = structuredClone(set); 
 
 test('the REST reader writes the fact on every stroked auto-layout frame — false included, because REST omits its default — and nowhere else', () => {
   const { set, provenance } = mapped([{}, { included: true }, { strokes: false }]);
-  assert.equal(provenance.dumpVersion, '1.63');
+  assert.equal(provenance.dumpVersion, REST_DUMP_VERSION);
   assert.deepEqual(set.variants.map((v) => (v as DumpNode).strokesIncludedInLayout), [false, true, undefined], 'a strokeless frame draws nothing the fact could move');
   // A free frame's stroke never insets the child coordinate origin.
   assert.equal((mapped([{ layoutMode: 'NONE' }]).set.variants[0] as DumpNode).strokesIncludedInLayout, false);
-  // The new field is the ONLY thing that moved on the node.
-  const { strokesIncludedInLayout: _f, ...rest } = mapped([{}]).set.variants[0] as DumpNode;
-  const { strokesIncludedInLayout: _t, ...same } = mapped([{ included: true }]).set.variants[0] as DumpNode;
+  // Only the outside-layout flag and its qualified root-pattern observation differ.
+  const { strokesIncludedInLayout: _f, rectStrokePattern: pattern, ...rest } = mapped([{}]).set.variants[0] as DumpNode;
+  const { strokesIncludedInLayout: _t, rectStrokePattern: includedPattern, ...same } = mapped([{ included: true }]).set.variants[0] as DumpNode;
+  assert.deepEqual(pattern,{nodeId:'1:2',weight:2,radius:0,dashes:[]});
+  assert.equal(includedPattern,undefined);
   assert.deepEqual(rest, same);
 });
 

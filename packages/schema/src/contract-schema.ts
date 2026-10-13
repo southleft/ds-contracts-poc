@@ -1992,6 +1992,11 @@ const FilledGeometrySchema = z.strictObject({
   paths: z.array(FilledPathSchema).min(1).max(32).refine(paths => !filledPathsIssue(paths), "filled-path-geometry-unqualified"),
   parentViewport: z.strictObject({ width: z.number().positive(), height: z.number().positive(), x: z.number(), y: z.number() }).optional(),
 });
+export const RectStrokePatternTableSchema = z.strictObject({
+  props:z.array(z.string()).min(1).max(3),
+  rows:z.array(z.strictObject({values:z.array(z.string()).min(1).max(3),
+    dashes:z.array(z.number().positive().max(1e6)).refine(a=>a.length===0||a.length===2,'rect-stroke-pattern-unsupported')})).min(1).max(4096),
+});
 const StrokedPathSchema = z.strictObject({
   data: z.string().min(1).max(65536).regex(/^[MLCQHVZ0-9eE+., \t\r\n-]+$/),
   cap: z.enum(['NONE', 'ROUND', 'SQUARE']),
@@ -2714,6 +2719,11 @@ export interface Part {
    *  it. A part that carries no stroke channel must not carry the flag
    *  (validateContract refuses — the hugsBelowMaxWidth discipline). */
   strokesIncludedInLayout?: false;
+  /** An explicitly OUTSIDE square-box stroke, retaining the existing per-side
+   * width/color channels without changing layout. Absent keeps prior behavior. */
+  strokeAlign?: 'OUTSIDE';
+  /** Exact numeric source dash/gap lengths. React only until native qualification. */
+  rectStrokePatternByCombination?: z.infer<typeof RectStrokePatternTableSchema>;
   /** Design-led round (dump v1.36) — a CAPTURED canvas fact, never
    *  hand-inferred: this TEXT part's box sizes itself to its text, and a
    *  Figma text box that does so is a WHOLE number of pixels wide — the
@@ -3122,6 +3132,71 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
   }
 }
 
+/** Square exterior bands have no rounded-corner or self-clipping approximation.
+ * Shared by schema parsing and direct emitter calls that receive typed objects. */
+export function outsideStrokeIssues(part: Part): string[] {
+  if (part.strokeAlign === undefined) return [];
+  const issues: string[] = [];
+  if (part.strokeAlign !== 'OUTSIDE' || part.strokesIncludedInLayout !== false ||
+      !part.layout || !['flex', 'inline-flex'].includes(part.layout.display ?? 'flex') ||
+      part.component || part.shape || part.mask || part.icon || part.meter || part.repeat ||
+      part.slot || part.content || part.text !== undefined || part.textByProp || part.overlay ||
+      part.placement || part.absoluteGeometry || part.absoluteGeometryByCombination ||
+      part.absolutePlacement || part.absolutePlacementByCombination || part.instanceAffine ||
+      part.instanceAffineByProp || part.instanceAffineLayout || part.rectStrokePatternByCombination ||
+      part.solidFillComposition || part.solidFillCompositionByCombination || part.tokensByCombination?.length)
+    issues.push('outside-stroke-requires-owned-square-layout-box');
+  const recordsOf = (part: Part) => [part.tokens, part.literals, part.declared,
+    ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+    ...tokensByPropEntries(part).flatMap(t => Object.values(t.map)),
+    ...(part.tokensByCombination ?? []).flatMap(t => t.rows.map(r => r.tokens)),
+    ...(part.literalsByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.literalsByCombination ?? []).flatMap(t => t.rows.map(r => r.literals)),
+    ...(part.statesByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.stylesWhen ?? []).map(t => t.styles)];
+  const records = recordsOf(part);
+  // Existing surfaces disagree when a later shorthand and earlier side live
+  // in different maps, or the shorthand follows a side within one map. Keep
+  // those inputs on the old projection instead of broadening this carrier.
+  const sideWidth = (key: string) => /^border-(top|right|bottom|left)-width$/.test(key);
+  const widthRecords = records.filter(r => Object.keys(r ?? {}).some(k => k === 'border-width' || sideWidth(k)));
+  if (widthRecords.some(record => record?.['border-width'] !== undefined && (
+    widthRecords.some(other => other !== record && Object.keys(other ?? {}).some(sideWidth)) ||
+    Object.keys(record).some((key, index, keys) => sideWidth(key) && index < keys.indexOf('border-width'))
+  ))) issues.push('outside-stroke-width-precedence');
+  // A variant literal may override a resting token on the same side, but
+  // native side completion retains the binding. Keep this mixed-kind cascade
+  // on the prior projection; base literals overridden by variant/state tokens
+  // remain admitted. State tokens are intentionally not resting bindings.
+  const restingTokens = [part.tokens, ...tokensByPropEntries(part).flatMap(t => Object.values(t.map))];
+  const variantLiterals = (part.literalsByProp ?? []).flatMap(t => Object.values(t.map));
+  if (variantLiterals.some(record => Object.keys(record).some(key =>
+    sideWidth(key) && restingTokens.some(tokens => tokens?.[key] !== undefined))))
+    issues.push('outside-stroke-width-precedence');
+  if (part.stylesWhen?.some(row => Object.keys(row.styles).some(key => /^(border|outline)(-|$)/.test(key))))
+    issues.push('outside-stroke-conditional-style-channel');
+  // Isolation keeps the stroke above children without escaping to siblings.
+  // A descendant that needs the outside backdrop cannot share that boundary.
+  const backdropDependent = (node: Part): boolean => !!node.component || !!node.solidFillComposition ||
+    !!node.solidFillCompositionByCombination || recordsOf(node).some(record =>
+      Object.entries(record ?? {}).some(([key, value]) => key === 'mix-blend-mode' && value !== 'normal')) ||
+    Object.values(node.parts ?? {}).some(backdropDependent);
+  if (Object.values(part.parts ?? {}).some(backdropDependent))
+    issues.push('outside-stroke-backdrop-dependent-child');
+  if (!records.some(r => Object.keys(r ?? {}).some(k => /^border-(top|right|bottom|left)-width$/.test(k))))
+    issues.push('outside-stroke-requires-per-side-widths');
+  for (const record of records) for (const [key, value] of Object.entries(record ?? {})) {
+    if ((/^border.*radius$/.test(key) && !/^0(?:\.0+)?(?:px|em|rem|%)?$/.test(String(value))) ||
+        /^border(?:-(?:top|right|bottom|left))?-style$/.test(key) ||
+        /^border-(top|right|bottom|left)-color$/.test(key) || /^outline-/.test(key) ||
+        (key.startsWith('overflow') && value !== 'visible') ||
+        (key === 'position' && value !== 'relative') ||
+        ['transform', 'translate', 'rotate', 'scale', 'clip-path', 'mask', 'filter', 'mix-blend-mode'].includes(key))
+      issues.push('outside-stroke-competing-channel:' + key);
+  }
+  return [...new Set(issues)];
+}
+
 export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   z.strictObject({
     solidFillComposition: SolidFillCompositionSchema.optional(),
@@ -3188,6 +3263,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** dump v1.35: the stroke takes NO layout space — see the Part interface.
      *  Only `false` is spelled; absent keeps the space-taking border. */
     strokesIncludedInLayout: z.literal(false).optional(),
+    strokeAlign: z.literal('OUTSIDE').optional(),
+    rectStrokePatternByCombination:RectStrokePatternTableSchema.optional(),
     /** dump v1.36: the text box sizes itself to its text and is a whole
      *  number of pixels wide — see the Part interface. Only the auto-width
      *  value is spelled; absent keeps the browser's fractional box. */
@@ -3257,6 +3334,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
      *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart).superRefine((part, ctx) => {
+    for (const message of outsideStrokeIssues(part))
+      ctx.addIssue({code:'custom',path:['strokeAlign'],message});
     if (part.slot?.renderDefaultAnatomy && (!part.parts || !Object.keys(part.parts).length))
       ctx.addIssue({code:'custom',path:['parts'],message:'SLOT_DIRECT_DEFAULT_ANATOMY_EMPTY'});
     if(part.solidFillCompositionObservedBinding){
@@ -3742,6 +3821,27 @@ export const ContractSchema = z.strictObject({
         const drawnKeys=reachableVariantTupleKeys(c,table.props);
         if(drawnKeys!==null ? table.rows.length!==drawnKeys.size || table.rows.some(row=>!drawnKeys.has(JSON.stringify(row.values))) : table.rows.length!==domains.reduce((n,d)=>n*d!.length,1))issue('component-argument-domain-incomplete');
       }
+    }
+    if(part.rectStrokePatternByCombination){
+      const t=part.rectStrokePatternByCombination,issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'rectStrokePatternByCombination'],message});
+      if(nested || Object.keys(c.anatomy).length!==1 || part.strokesIncludedInLayout!==false ||
+        part.component||part.slot||part.repeat||part.shape||part.mask||part.icon||part.text!==undefined||part.content||
+        part.solidFillComposition||part.solidFillCompositionByCombination||part.absoluteGeometry||part.absolutePlacement||
+        c.states.length || !['div','section','article','button'].includes(c.semantics.element) || c.semantics.elementByProp ||
+        part.declared?.position && part.declared.position!=='relative')issue('rect-stroke-pattern-requires-owned-root');
+      const axes=absentVariantAxes(c),domains=t.props.map(name=>axes.find(a=>a.prop.name===name)?.options);
+      const keys=new Set(t.rows.map(r=>JSON.stringify(r.values)));
+      let expected=reachableVariantTupleKeys(c,t.props);
+      if(!expected && c.bindings.figma.drawnVariants===undefined && !c.bindings.figma.absentVariants?.length && domains.every(d=>d) && domains.reduce((n,d)=>n*d!.length,1)<=4096) {
+        let tuples:string[][]=[[]];for(const d of domains)tuples=tuples.flatMap(t=>d!.map(v=>[...t,String(v)]));expected=new Set(tuples.map(t=>JSON.stringify(t)));
+      }
+      if(axes.length!==t.props.length||new Set(t.props).size!==t.props.length||domains.some(d=>!d||d.some(v=>typeof v!=='string'))||
+        t.rows.some(r=>r.values.length!==t.props.length||r.values.some((v,i)=>!domains[i]?.includes(v)))||keys.size!==t.rows.length||
+        !expected||keys.size!==expected.size||[...keys].some(k=>!expected.has(k))||!t.rows.some(r=>r.dashes.length))issue('rect-stroke-pattern-domain-incomplete');
+      const maps=[part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{}),
+        ...tokensByPropEntries(part).flatMap(t=>Object.values(t.map)),...(part.literalsByProp??[]).flatMap(t=>Object.values(t.map)),
+        ...(part.tokensByCombination??[]).flatMap(t=>t.rows.map(r=>r.tokens)),...(part.literalsByCombination??[]).flatMap(t=>t.rows.map(r=>r.literals)),...(part.stylesWhen??[]).map(r=>r.styles)];
+      if(maps.some(m=>Object.keys(m??{}).some(k=>/^border-(top|right|bottom|left)-/.test(k)||/^border.*style$/.test(k)||/^outline-/.test(k)||['transform','translate','rotate','scale'].includes(k)||/^border-(top|bottom)-(left|right)-radius$/.test(k))))issue('rect-stroke-pattern-competing-channel');
     }
     if(part.vectorStrokeByCombination){
       const table=part.vectorStrokeByCombination,issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'vectorStrokeByCombination'],message});

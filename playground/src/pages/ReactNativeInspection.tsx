@@ -3,7 +3,7 @@ import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -87,6 +87,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
   const activeRoot = useRef(root);activeRoot.current=root;
+  const activeScope = useRef({referenceId,ownershipId:ownership?.id});activeScope.current={referenceId,ownershipId:ownership?.id};
   const latest = useRef({rows, busy});
   const fullReadAt = useRef(0);
   const progressDeferredAt = useRef(0);
@@ -169,10 +170,22 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     setBusy(true); setError('');
     const compact = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/(start|retry-observation)$/.exec(route);
     const compactComparison = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/compare-case\/([a-z-]+)$/.exec(route);
+    const compactRoot = /^native\/([a-z-]+)$/.exec(route);
+    const requestedScope = {referenceId,ownershipId:ownership?.id};
     try {
-      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact || compactComparison ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
+      if (compactRoot && !requestedScope.ownershipId) throw Error('Native root response unavailable. Refresh the saved inspection.');
+      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact || compactComparison || compactRoot ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
+      if (compactRoot && !nativeInspectionScopeMatches(requestedScope,activeScope.current)) return;
       if (!response.ok) throw Error(['native-update-caller-context-unavailable-before-refresh','react-authored-native-action-unqualified'].includes(result.reason)
         ? updateProblem(result.reason) : result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
+      if (compactRoot) {
+        const prepared = nativeRootInspectionFromResponse<Operation>(result,compactRoot[1],requestedScope.ownershipId);
+        // Keep unrelated saved operations; an older full read must not erase this root.
+        deliveryRevision.current++;
+        setRows(old => nativeInspectionScopeMatches(requestedScope,activeScope.current)
+          ? mergeNativeComparisonInspection(old,prepared) : old);
+        return;
+      }
       if (compactComparison) {
         if (activeRoot.current !== root) return;
         const comparison = nativeComparisonInspectionFromResponse<Operation>(result, compactComparison[1], compactComparison[2]);
@@ -213,7 +226,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         setInspectionSourceAvailable(result.inspectionSourceAvailable === true);
         setInspectionSources(result.inspectionSources ?? {});
       }
-    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    } catch (e) {
+      if (!compactRoot || nativeInspectionScopeMatches(requestedScope,activeScope.current)) setError(e instanceof Error ? e.message : String(e));
+    }
     finally { setBusy(false); }
   }
   const selected = ownership?.rows.find(r => r.id === selectedCase);

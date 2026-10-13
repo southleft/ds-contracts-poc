@@ -331,3 +331,229 @@ test('an authored focus stroke replaces the extra outline but preserves keyboard
   }finally{await page.close();}
  }}finally{await browser.close();}
 });
+
+
+// Explicit OUTSIDE is independent of the older no-layout INSIDE ring.
+const outsideBox = (sides = [1, 2, 3, 4], extra: Record<string, unknown> = {}) => ({
+  layout: { display: 'flex' }, strokesIncludedInLayout: false, strokeAlign: 'OUTSIDE',
+  literals: { width: '40px', height: '20px', 'border-color': '#ff000080',
+    ...Object.fromEntries(['top', 'right', 'bottom', 'left'].map((side, i) => [`border-${side}-width`, `${sides[i]}px`])) },
+  ...extra,
+});
+
+test('explicit square OUTSIDE uses one exterior border on both sheets and the inline overlay; inside and absent carriers stay on their old paths', () => {
+  const c = contract(outsideBox());
+  for (const [css, selector] of [[modules(c).css, '.root'], [shadowCss(c), "[part='root']"]] as const) {
+    const overlay = rule(css, selector + '::after');
+    assert.match(overlay, /top: calc\(-1 \* var\(--_stroke-top-width\)\);/);
+    assert.match(overlay, /left: calc\(-1 \* var\(--_stroke-left-width\)\);/);
+    assert.match(overlay, /border-width: var\(--_stroke-top-width\) var\(--_stroke-right-width\) var\(--_stroke-bottom-width\) var\(--_stroke-left-width\);/);
+    assert.match(overlay, /box-sizing: border-box;/);
+    assert.match(overlay, /pointer-events: none;/);
+    assert.doesNotMatch(css, /box-shadow: inset|outline-offset: calc\(-1 \*/);
+  }
+  const tsx = inline(c).tsx;
+  assert.match(tsx, /const outsideStrokeOverlay/);
+  assert.match(tsx, /outsideStrokeOverlay\(\{ \.\.\.S\.root/);
+  assert.deepEqual(generatedTypeErrors(c.name, tsx), []);
+  const inside = contract({ ...outsideBox(), strokeAlign: undefined });
+  for (const css of [modules(inside).css, shadowCss(inside)]) {
+    assert.match(css, /box-shadow: inset/);
+    assert.doesNotMatch(css, /top: calc\(-1 \* var\(--_stroke-top-width\)/);
+  }
+  assert.doesNotMatch(inline(inside).tsx, /outsideStrokeOverlay/);
+  const shadowed = contract(outsideBox([0, 0, 0, 4], {tokens: {'box-shadow': '{lift}'}}));
+  assert.match(modules(shadowed).css, /box-shadow: var\(--_stroke-shadow\)/);
+  assert.match(modules(shadowed).css, /--_stroke-shadow: var\(--lift\)/);
+});
+
+test('explicit OUTSIDE refuses clipping, rounded or backdrop-dependent ownership rather than changing those boxes', () => {
+  for (const override of [
+    {strokesIncludedInLayout: undefined}, {strokeAlign: 'CENTER'},
+    {literals: {...outsideBox().literals, 'border-radius': '2px'}},
+    {declared: {overflow: 'hidden'}}, {declared: {position: 'absolute'}},
+    {parts: {child: {layout: {display: 'flex'}, declared: {'mix-blend-mode': 'multiply'}}}},
+    {parts: {child: {component: {id: 'probe.dep'}}}},
+  ]) {
+    assert.throws(() => contract({...outsideBox(), ...override}), /outside-stroke|Invalid input/, JSON.stringify(override));
+  }
+  const c = contract(outsideBox(), 'input'), errors: string[] = [];
+  validateContract(c, new Map([[c.id, c]]), errors, new Map());
+  assert.ok(errors.some(error => /outside-stroke-void-element/.test(error)), errors.join('\n'));
+});
+
+test('MEASURED in Chromium: OUTSIDE left-only, asymmetric and zero sides retain the box, sibling flow and one alpha layer at corners', async t => {
+  const {PNG} = await import('pngjs');
+  const browser = await chromium.launch();
+  t.after(() => browser.close());
+  for (const sides of [[0, 0, 0, 4], [1, 2, 3, 4], [0, 0, 0, 0]]) {
+    const c = contract(outsideBox(sides, {parts: {paint: {declared: {position: 'absolute'},
+      literals: {top: '0px', right: '0px', bottom: '0px', left: '0px', 'background-color': '#0000ff'}}}}));
+    for (const surface of ['css-module', 'inline'] as const) await t.test(`${surface} / ${sides.join(',')}`, async () => {
+      const output = surface === 'inline' ? {...inline(c), css: ''} : modules(c);
+      assert.deepEqual(generatedTypeErrors(c.name, output.tsx), []);
+      const page = await browser.newPage({viewport: {width: 90, height: 55}});
+      try {
+        await mountGenerated(page, c.name, output.tsx, output.css);
+        await page.addStyleTag({content: 'body{margin:0;background:white}#root{padding:12px;display:flex;align-items:flex-start;gap:9px}'});
+        await page.evaluate(() => {
+          const sibling = document.createElement('div'); sibling.id = 'sibling';
+          Object.assign(sibling.style, {width: '7px', height: '7px', flexShrink: '0'});
+          document.querySelector('#root')!.appendChild(sibling);
+        });
+        assert.deepEqual(await page.locator('#root > :first-child').boundingBox(), {x:12,y:12,width:40,height:20});
+        assert.equal((await page.locator('#sibling').boundingBox())!.x, 61);
+        const png = PNG.sync.read(await page.screenshot());
+        const pixel = (x: number, y: number) => [...png.data.subarray((y * png.width + x) * 4, (y * png.width + x) * 4 + 4)];
+        const red = [255,127,127,255], white = [255,255,255,255];
+        assert.deepEqual(pixel(10,22), sides[3] ? red : white);
+        assert.deepEqual(pixel(53,22), sides[1] ? red : white);
+        assert.deepEqual(pixel(32,11), sides[0] ? red : white);
+        assert.deepEqual(pixel(32,33), sides[2] ? red : white);
+        assert.deepEqual(pixel(10,11), sides[0] && sides[3] ? red : white, 'one border corner, never two alpha layers');
+        assert.deepEqual(pixel(12,12), [0,0,255,255], 'the inside edge stays clear of the outside stroke');
+        const pointer = await page.locator('#root > :first-child').evaluate((el, surface) =>
+          getComputedStyle(surface === 'inline' ? el.lastElementChild! : el, surface === 'inline' ? undefined : '::after').pointerEvents, surface);
+        assert.equal(pointer, 'none');
+      } finally { await page.close(); }
+    });
+  }
+});
+
+
+test('native compilation retains the explicit OUTSIDE sides and original dimensions, including zero and transparent boxes', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  for (const sides of [[0,0,0,4], [1,2,3,4], [0,0,0,0]]) {
+    const c = contract(outsideBox(sides));
+    const data = engine.compileComponentData(c, new Map([[c.id,c]]));
+    for (const {spec} of data.variants) {
+      assert.equal(spec.strokeOutside, true);
+      assert.equal(spec.strokesIncludedInLayout, false);
+      assert.deepEqual(spec.lits?.strokeSides, Object.fromEntries(['top','right','bottom','left'].map((side,i) => [side,sides[i]])));
+      assert.equal(spec.lits?.width, 40);
+      assert.equal(spec.lits?.height, 20);
+      assert.equal(spec.lits?.fillColor, undefined, 'a transparent source is not collapsed into a filled stroke bar');
+    }
+  }
+});
+
+
+test('native sparse OUTSIDE literals initialize every omitted side from uniform width or zero', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  for (const uniform of [undefined, '2px']) {
+    const c = contract(outsideBox(undefined, {literals: {
+      width: '40px', height: '20px', 'border-color': '#ff000080',
+      ...(uniform === undefined ? {} : {'border-width': uniform}), 'border-left-width': '4px',
+    }}));
+    for (const {spec} of engine.compileComponentData(c, new Map([[c.id,c]])).variants) {
+      assert.equal(spec.strokeOutside, true);
+      assert.deepEqual(spec.lits?.strokeSides, {top: uniform ? 2 : 0, right: uniform ? 2 : 0, bottom: uniform ? 2 : 0, left: 4});
+      assert.equal(spec.lits?.strokeWeight, undefined, 'no uniform tail write can overwrite an explicit side');
+    }
+  }
+});
+
+test('native sparse OUTSIDE keeps side bindings and resolves uniform fallback independently for every variant', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  const root = outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080'},
+    literalsByProp: [{prop: 'tone', map: {brand: {'border-left-width': '4px'}, danger: {'border-left-width': '6px'}}}],
+  });
+  const c = contract(root);
+  for (const {name,spec} of engine.compileComponentData(c, new Map([[c.id,c]])).variants) {
+    const left = name.includes('Tone=Brand') ? 4 : 6;
+    assert.equal(spec.bindings?.strokeWeight, undefined);
+    assert.deepEqual(spec.lits?.strokeSides, {top: 0, right: 0, bottom: 0, left}, name);
+  }
+  const bound = contract(outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080'},
+    tokens: {'border-width': '{stroke.thin}', 'border-left-width': '{stroke.thick}'},
+  }));
+  for (const {spec} of engine.compileComponentData(bound, new Map([[bound.id,bound]])).variants) {
+    assert.equal(spec.bindings?.strokeLeftWeight, 'stroke/thick');
+    for (const side of ['Top','Right','Bottom']) assert.equal(spec.bindings?.[`stroke${side}Weight`], 'stroke/thin');
+    assert.deepEqual(spec.lits?.strokeSides, {});
+    assert.equal(spec.lits?.strokeWeight, undefined, 'uniform writes must not reset the bound left side');
+  }
+});
+
+test('native sparse OUTSIDE applies final root state side widths without overwriting state bindings', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  const literals = {width: '40px', height: '20px', 'border-color': '#ff000080', 'border-left-width': '4px'};
+  for (const state of [{'border-left-width': '{stroke.thick}'}]) {
+    const c = contract(outsideBox(undefined, {literals, states: {hover: state}}), 'button');
+    c.bindings.figma.statePreviews = true;
+    const data = engine.compileComponentData(c, new Map([[c.id,c]]));
+    for (const {spec} of data.variants) assert.deepEqual(spec.lits?.strokeSides, {top: 0, right: 0, bottom: 0, left: 4});
+    assert.ok(data.stateVariants?.length, 'actual hover previews are required');
+    for (const {spec} of data.stateVariants!) {
+      assert.equal(spec.bindings?.strokeLeftWeight, 'stroke/thick');
+      assert.equal(spec.lits?.strokeSides?.left, undefined, 'a base literal cannot overwrite the state binding');
+      assert.equal(spec.bindings?.strokeWeight, undefined);
+      for (const side of ['top','right','bottom'] as const) assert.equal(spec.lits?.strokeSides?.[side], 0);
+    }
+  }
+});
+
+
+test('explicit OUTSIDE refuses mixed width precedence while the legacy projection remains accepted', () => {
+  const base = {width: '40px', height: '20px', 'border-color': '#ff000080'};
+  for (const override of [
+    {literals: {...base, 'border-left-width': '4px'}, tokensByProp: [{prop: 'tone', map: {brand: {'border-width': '{stroke.thin}'}, danger: {'border-width': '{stroke.thick}'}}}]},
+    {literals: {...base, 'border-width': '1px'}, tokens: {'border-left-width': '{stroke.thick}'}},
+    {literals: {...base, 'border-left-width': '4px', 'border-width': '2px'}},
+    {literals: {...base, 'border-left-width': '4px'}, states: {hover: {'border-width': '{stroke.thick}'}}},
+  ]) {
+    const root = outsideBox(undefined, override);
+    assert.throws(() => contract(root, 'button'), /outside-stroke-width-precedence/);
+    const {strokeAlign: _alignment, ...legacy} = root;
+    assert.doesNotThrow(() => contract(legacy, 'button'), 'withdrawing only the new flag preserves the prior accepted projection');
+  }
+});
+
+
+test('OUTSIDE refuses a variant literal over a resting token without changing the legacy projection', () => {
+  const root = outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080'},
+    tokens: {'border-left-width': '{stroke.thin}'},
+    literalsByProp: [{prop: 'tone', map: {danger: {'border-left-width': '6px'}}}],
+  });
+  assert.throws(() => contract(root), /outside-stroke-width-precedence/);
+  const {strokeAlign: _alignment, ...legacy} = root;
+  const c = contract(legacy);
+  const errors: string[] = [];
+  validateContract(c, new Map([[c.id, c]]), errors, new Map());
+  assert.deepEqual(errors, [], 'the old input remains valid; only the new carrier is refused');
+  assert.deepEqual(c.anatomy.root.tokens, {'border-left-width': '{stroke.thin}'});
+  assert.deepEqual(c.anatomy.root.literalsByProp, [{prop: 'tone', map: {danger: {'border-left-width': '6px'}}}]);
+  assert.match(rule(modules(c).css, '.tone-danger'), /--_stroke-left-width: 6px;/);
+});
+
+test('OUTSIDE keeps base-literal to variant-token precedence and the later state-token override', async () => {
+  const {createFigmaEngine} = await import('./emit-figma-script.js');
+  const c = contract(outsideBox(undefined, {
+    literals: {width: '40px', height: '20px', 'border-color': '#ff000080', 'border-left-width': '4px'},
+    tokensByProp: [{prop: 'tone', map: {danger: {'border-left-width': '{stroke.thick}'}}}],
+    states: {hover: {'border-left-width': '{stroke.thin}'}},
+  }), 'button');
+  c.bindings.figma.statePreviews = true;
+  const engine = createFigmaEngine({tokens, icons: new Map()});
+  const data = engine.compileComponentData(c, new Map([[c.id, c]]));
+  assert.equal(data.variants.length, 2);
+  for (const {name, spec} of data.variants) {
+    const changed = name.includes('Tone=Danger');
+    assert.equal(spec.bindings?.strokeLeftWeight, changed ? 'stroke/thick' : undefined);
+    assert.equal(spec.lits?.strokeSides?.left, changed ? undefined : 4);
+    for (const side of ['top', 'right', 'bottom'] as const) assert.equal(spec.lits?.strokeSides?.[side], 0);
+  }
+  assert.equal(data.stateVariants?.length, 2);
+  for (const {spec} of data.stateVariants!) {
+    assert.equal(spec.bindings?.strokeLeftWeight, 'stroke/thin', 'the final state overrides either resting value');
+    assert.equal(spec.lits?.strokeSides?.left, undefined);
+    assert.equal(spec.bindings?.strokeWeight, undefined);
+  }
+});

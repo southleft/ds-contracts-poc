@@ -26,7 +26,7 @@
     "Button/Button.module.css": "9f87f69ceb0b738991d7daf5ecdd6854c8e81119042f5b22e4ec8b58232ab751",
     "Button/Button.tsx": "40c7e5898fb0a0f51e4381cec5b8824634194de40a77396e6ac1e5b38e2fb590",
     "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
-    "Icon/Icon.module.css": "cb408f49ac55e8b6360285bce74e7d5c6e81587429f3330a45a8d44652ea7774",
+    "Icon/Icon.module.css": "0daf05ba000f8015e09b8381d36b5e15fecc66384984e91956a74914df534e60",
     "Icon/Icon.tsx": "2738f4f1a179a62cc18872e1ccdfbd77d81dcc0872672933c56eadf0b6607d1a",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "Tab/Tab.module.css": "958ea9cabddc8b13bfd872130b8208efe58f391ee7242ada98e30abf49a4d4e8",
@@ -42,7 +42,7 @@
     "TextPassage/TextPassage.tsx": "b91dece789f139106b13b6babcbc03fa210cb85fd8dc12aecc4227d1573fae12",
     "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
     "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
-    "tokens.css": "47f0d7b2c3bbdb16fe99dbe8ff0e4f8ef9975e8fdbaad7063774465679c5a8af"
+    "tokens.css": "f20cdafec4d24a1beea7be492ef3ab1d09a333da2a7a7979f59a8a418e2bb4b9"
   },
   "cases": [
     {
@@ -380,7 +380,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2406162359972981894",
+      "version": "2408215415010641279",
       "export": {
         "format": "png",
         "scale": 1,
@@ -398,8 +398,8 @@
         "useAbsoluteBounds": false,
         "proofs": "figma-render-export-proofs.json"
       },
-      "beforeSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae",
-      "afterSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae"
+      "beforeSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9",
+      "afterSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9"
     },
     "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -458,6 +458,24 @@
         "inkCoveragePercent": {
           "consumer": 12.83,
           "figma": 12.71
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 438,
+            "height": 176
+          },
+          "figma": {
+            "width": 438,
+            "height": 176
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -534,6 +552,24 @@
         "inkCoveragePercent": {
           "consumer": 13.34,
           "figma": 13.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 439,
+            "height": 176
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -641,7 +677,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "b702b7895104665d6fb6fd50f466958f60855cfb8a66bf0d6f74f4b08a55325b",
+    "tarballSha256": "e974b4773afa2954d2558828983c314129e7d7a1d69bddda55781ede5c52be51",
     "distFiles": [
       "ArrowArcLeft",
       "ArrowArcLeft/ArrowArcLeft.d.ts",
@@ -685,6 +721,12 @@
       "TextPassage/TextPassage.module.css",
       "TextPassage/index.d.ts",
       "TextPassage/index.js",
+      "fonts",
+      "fonts/604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
+      "fonts/e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
+      "fonts/f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
+      "fonts/fonts.css",
+      "fonts/manifest.json",
       "index.d.ts",
       "index.js",
       "tokens.css"
@@ -693,11 +735,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "1b32af74fe6a3c48b512d9c6f0e695828334a18ad36c95004b8f5b1ebee2980e",
+    "lockfileSha256": "57d297f5e780657bd2bee55938c0937d2baa041f1476d7c61c334c661d43753c",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
-      "kind": "explicit-local-assets",
+      "kind": "package-assets",
       "manifest": {
         "version": 1,
         "fonts": [
@@ -754,9 +796,9 @@
       ]
     },
     "builtCss": {
-      "bytes": 18400,
-      "tokenDefinitions": 77,
-      "tokenDefinitionsExpected": 77
+      "bytes": 18308,
+      "tokenDefinitions": 76,
+      "tokenDefinitionsExpected": 76
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -768,8 +810,8 @@
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
     "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
-    "figmaVersion": "2406162359972981894",
-    "responseSha256": "0fc9239f8b39a8cfe387fefa84c107b0a64b60b1a0410789dd4b06295620cfae",
+    "figmaVersion": "2408215415010641279",
+    "responseSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9",
     "evidence": "figma-content.json",
     "cases": [
       {

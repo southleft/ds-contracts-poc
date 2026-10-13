@@ -1,3 +1,4 @@
+import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
 import {validateStructuralAvailability} from '../scripts/contract-schema.js';
 import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
@@ -212,8 +213,9 @@ const strokeRing = ({
   borderWidth: w = 0, borderColor: c = 'currentColor',
   borderTopWidth: t = w, borderRightWidth: r = w, borderBottomWidth: b = w, borderLeftWidth: l = w,
   boxShadow, ...rest
-}: CSSProperties, foreground = false, isolate = true): CSSProperties => {
+}: CSSProperties, foreground = false, isolate = true, patterned = false): CSSProperties => {
   const px = (v: string | number) => (typeof v === 'number' || /^[-+]?0*\\.?0+$/.test(v) ? \`\${Number(v)}px\` : v);
+  if(patterned)return {...rest,position:rest.position??'relative',isolation:'isolate',border:border??0,boxShadow, '--_stroke-width':px(w), '--_stroke-color':c} as CSSProperties;
   const ring = t === r && r === b && b === l
     ? [\`inset 0 0 0 \${px(t)} \${c}\`]
     : [\`inset 0 \${px(t)} 0 0 \${c}\`, \`inset 0 calc(-1 * \${px(b)}) 0 0 \${c}\`, \`inset \${px(l)} 0 0 0 \${c}\`, \`inset calc(-1 * \${px(r)}) 0 0 0 \${c}\`];
@@ -224,6 +226,21 @@ const strokeRingOverlay = (source: CSSProperties, layer: number): CSSProperties 
   borderRadius:'inherit', background:'transparent', zIndex:layer,
   boxShadow:strokeRing({...source, boxShadow:undefined}).boxShadow,
 });
+
+`;
+
+/** Only injected for explicit square OUTSIDE strokes. Resolved widths also
+ * include the caller's ordinary inline border-width overrides. */
+const OUTSIDE_STROKE_RUNTIME = `
+const outsideStrokeOverlay = (source: CSSProperties, layer: number): CSSProperties => {
+  const px = (v: string | number) => typeof v === 'number' || /^[-+]?0*\\.?0+$/.test(v) ? \`\${Number(v)}px\` : v;
+  const w = source.borderWidth ?? 0, t = px(source.borderTopWidth ?? w), r = px(source.borderRightWidth ?? w),
+    b = px(source.borderBottomWidth ?? w), l = px(source.borderLeftWidth ?? w);
+  return {display:'block',position:'absolute',top:\`calc(-1 * \${t})\`,right:\`calc(-1 * \${r})\`,
+    bottom:\`calc(-1 * \${b})\`,left:\`calc(-1 * \${l})\`,boxSizing:'border-box',pointerEvents:'none',
+    background:'transparent',borderRadius:0,borderStyle:'solid',borderColor:source.borderColor ?? 'currentColor',
+    borderWidth:\`\${t} \${r} \${b} \${l}\`,zIndex:layer};
+};
 
 `;
 
@@ -964,6 +981,9 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     // A flagged part's merged record — the consumer's `style` included, so
     // their border/shadow props land on the ring — is redrawn as a ring
     // (STROKE_RING_RUNTIME).
+    if (rootUsagePart?.strokeAlign === 'OUTSIDE' && overlay)
+      return `{outsideStrokeOverlay({ ${pieces.join(', ')} }, ${Object.keys(rootUsagePart.parts ?? {}).length + 1})}`;
+    if(rootUsagePart?.rectStrokePatternByCombination)return `{strokeRing({ ${pieces.join(', ')} }, false, true, true)}`;
     if (strokeRingParts.has(partName)) return overlay ? `{strokeRingOverlay({ ${pieces.join(', ')} }, ${Object.keys(rootUsagePart?.parts??{}).length+1})}` : `{strokeRing({ ${pieces.join(', ')} }${foregroundStrokeParts.has(partName)?`, true, ${!(rootUsagePart?.solidFillComposition || rootUsagePart?.solidFillCompositionByCombination)}`:''})}`;
     return `{{ ${pieces.join(', ')} }}`;
   };
@@ -1285,7 +1305,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
         ),
       ].join('\n')
     : paintChild(root) + (explicitRootContent ?? '{children}'));
-  const rootInner = rootInnerContent + (foregroundStrokeParts.has('root') ? `\n<span aria-hidden="true" style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [], true)} />` : '');
+  const rootInner = rootInnerContent + (root ? reactRectStrokePattern(root,codePropOf) : '') + (foregroundStrokeParts.has('root') && !root?.rectStrokePatternByCombination ? `\n<span aria-hidden="true" style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [], true)} />` : '');
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
@@ -1457,8 +1477,8 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
  * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination) ? REACT_RECT_STROKE_PATTERN_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
+${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}${walkAnatomy(contract).some(({part}) => part.strokeAlign === 'OUTSIDE') ? OUTSIDE_STROKE_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}${placementConst}
@@ -1493,8 +1513,8 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
-${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination) ? REACT_RECT_STROKE_PATTERN_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}
+${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}${walkAnatomy(contract).some(({part}) => part.strokeAlign === 'OUTSIDE') ? OUTSIDE_STROKE_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}${placementConst}

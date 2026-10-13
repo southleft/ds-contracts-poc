@@ -238,7 +238,7 @@ test('REST native line-height bindings agree with plugin precedence without inve
       variableCollections: { typography: { id: 'typography', defaultModeId: 'small', modes: [{ modeId: 'small', name: 'Small' }, { modeId: 'large', name: 'Large' }] } },
     } } });
     const label = (result.dump.RestProbe as DumpSet).variants[0].children![0];
-    assert.equal(REST_DUMP_VERSION, '1.63');
+    assert.equal(REST_DUMP_VERSION, '1.65');
     assert.equal(label.text!.lineHeightVar, ['native', 'conflict'].includes(kind) ? 'line-height'
       : ['empty', 'unbound'].includes(kind) ? 'legacy-line' : undefined, kind);
     assert.equal(label.variableConsumers, undefined, 'REST does not identify inherited consuming modes');

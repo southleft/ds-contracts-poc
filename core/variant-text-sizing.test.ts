@@ -108,3 +108,93 @@ test('partial text presence and independent Boolean visibility both survive runt
   for(const [mode,showPrefix,expected]of [['compact',undefined,false],['compact',true,true],['expanded',true,false],['condensed',true,false],['compact',false,false],['compact',true,true]] as const){await render({mode,...(showPrefix===undefined?{}:{showPrefix})});assert.equal((await page.locator('#root').innerText()).includes('Prefix:'),expected);}
  }finally{await page.close();}}
 });
+
+// Retained canonical TEXT 23202:247437, Twilio CodeBlock multi-line variant.
+// Its 29 LF characters and 17x600 captured box are source facts. These tests
+// exercise the ordinary proposer, not a qualified component-family replay.
+const capturedLineNumbers = {
+ name:'Line numbers',type:'TEXT',nodeId:'23202:247437',
+ localGeometry:{nodeId:'23202:247437',parentId:'23202:247583',transform:[[1,0,0],[0,1,0]],localSize:{width:17,height:600},parentSize:{width:712,height:160}},
+ text:{characters:'1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30',fontSize:14,fontStyle:'Regular',sourceAppearance:{issue:'text-appearance-range-incomplete'},fontWeight:400,lineHeight:20,fontFamily:'Twilio Sans Mono',textAlign:'RIGHT',textAutoResize:'WIDTH_AND_HEIGHT',letterSpacing:0},
+ fill:{hex:'8891aa'},propRefs:{visible:'Line numbers'},
+};
+function capturedLineFixture(node:any=structuredClone(capturedLineNumbers)):any {
+ return {setName:'CapturedLines',type:'COMPONENT_SET',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'Default',variantOptions:['Default']},'Line numbers':{type:'BOOLEAN',defaultValue:true}},variants:[{name:'Mode=Default',variantProperties:{Mode:'Default'},type:'COMPONENT',nodeId:'23202:247583',layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:20,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'},fixedSize:{width:712,height:160},children:[node,{name:'Code',type:'TEXT',fillWidth:true,text:{characters:'code',fontFamily:'Arial',fontStyle:'Regular',fontSize:14,lineHeight:20,textAutoResize:'HEIGHT'}}]}]};
+}
+function capturedLineProposal(node:any=structuredClone(capturedLineNumbers)) {
+ const set=capturedLineFixture(node),before=JSON.stringify(set);
+ const result=proposeFromDump(set,{corpus,mintUnbound:true,hiddenCaptured:true,contractIdByName:new Map()});
+ assert.equal(JSON.stringify(set),before,'the source observations stay unchanged');
+ const contract=ContractSchema.parse(result.contract);
+ const part=walkAnatomy(contract).find(({part})=>part.text===node.text.characters)!.part;
+ return {result,contract,part};
+}
+test('captured HUG LF text preserves line breaks without making incomplete appearance complete',()=>{
+ const {result,part}=capturedLineProposal();
+ assert.equal(part.textAutoResize,'WIDTH_AND_HEIGHT');
+ assert.equal(part.declared?.['white-space'],'pre-wrap');
+ assert.equal(part.declared?.['overflow-y'],undefined,'HUG overflow is not fixed-box clipping');
+ assert.equal(part.text,capturedLineNumbers.text.characters);
+ assert.equal(part.textAppearanceByCombination,undefined,'scalar layout evidence does not fabricate missing ranges');
+ assert.equal(part.textAppearanceOverride,undefined);
+ assert(result.notes.some(note=>note.includes('line feeds')&&note.includes('pre-wrap')));
+ const absent=structuredClone(capturedLineNumbers);delete (absent.text as any).sourceAppearance;
+ assert.equal(capturedLineProposal(absent).part.declared?.['white-space'],'pre-wrap','LF does not need authored range data');
+});
+test('captured HUG LF rule leaves one-line, unknown, filled, HEIGHT and NONE evidence unchanged',()=>{
+ for(const mode of [undefined,'HEIGHT','NONE']){
+  const node:any=structuredClone(capturedLineNumbers);delete node.text.textAutoResize;if(mode)node.text.textAutoResize=mode;
+  const {part}=capturedLineProposal(node);assert.equal(part.textAutoResize,undefined,String(mode));assert.equal(part.declared?.['white-space'],undefined,String(mode));
+ }
+ const oneLine=structuredClone(capturedLineNumbers);oneLine.text.characters='30';
+ const one=capturedLineProposal(oneLine).part;assert.equal(one.textAutoResize,'WIDTH_AND_HEIGHT');assert.equal(one.declared?.['white-space'],undefined);
+ const filled:any=structuredClone(capturedLineNumbers);filled.fillWidth=true;
+ const fill=capturedLineProposal(filled);assert.equal(fill.part.textAutoResize,undefined);assert.equal(fill.part.declared?.['white-space'],undefined);assert(fill.result.notes.some(note=>note.includes('contradict')));
+ const fixed:any=structuredClone(capturedLineNumbers);fixed.text.textAutoResize='NONE';fixed.fixedSize={width:17,height:40};
+ const none=capturedLineProposal(fixed).part;assert.equal(none.declared?.['white-space'],'pre-wrap');assert.equal(none.declared?.['overflow-y'],'hidden');assert.equal(none.textAutoResize,undefined);
+ const mixed=capturedLineFixture();mixed.propertyDefinitions.Mode={type:'VARIANT',defaultValue:'Known',variantOptions:['Known','Unknown']};
+ mixed.variants=[{...mixed.variants[0],name:'Mode=Known',variantProperties:{Mode:'Known'}},{...structuredClone(mixed.variants[0]),name:'Mode=Unknown',variantProperties:{Mode:'Unknown'}}];
+ delete mixed.variants[1].children[0].text.textAutoResize;
+ const proposal=proposeFromDump(mixed,{corpus,mintUnbound:true,hiddenCaptured:true,contractIdByName:new Map()});
+ const textParts=walkAnatomy(ContractSchema.parse(proposal.contract)).filter(({part})=>part.text===capturedLineNumbers.text.characters);
+ assert(textParts.length>0);assert(textParts.every(({part})=>part.textAutoResize===undefined&&part.declared?.['white-space']===undefined),'an unknown source cell does not authorize whitespace or HUG');
+});
+test('captured HUG LF geometry uses thirty line boxes and longest-line width in both React emitters',async t=>{
+ const {chromium}=await import('playwright-core');
+ const {reactEmitter,reactInlineEmitter}=await import('./emitter.js');
+ const {mountGenerated}=await import('./react-test-runtime.js');
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  for(const text of [capturedLineNumbers.text.characters,'30']){
+   const node=structuredClone(capturedLineNumbers);node.text.characters=text;
+   const {result,contract}=capturedLineProposal(node);
+   const ctx={contracts:new Map([[contract.id,contract]]),tokens:{primitives:result.mintedTokens?.tree??{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map<string,string>()};
+   const files=emitter.emit(contract,ctx),page=await browser.newPage();
+   try{
+    const render=await mountGenerated(page,contract.name,files[0].contents,files.find(file=>file.path.endsWith('.css'))?.contents);
+    await page.addStyleTag({content:mintedTokenCss(ctx.tokens.primitives)});await render({});
+    const actual=await page.locator('#root').evaluate((root,text)=>{
+     const element=[...root.querySelectorAll<HTMLElement>('*')].find(el=>el.childElementCount===0&&el.textContent===text)!;
+     const code=[...root.querySelectorAll<HTMLElement>('*')].find(el=>el.childElementCount===0&&el.textContent==='code')!;
+     const box=element.getBoundingClientRect(),style=getComputedStyle(element),textNode=element.firstChild!;
+     let offset=0;const lines=text.split('\n').map(line=>{const range=document.createRange();range.setStart(textNode,offset);range.setEnd(textNode,offset+line.length);offset+=line.length+1;const rect=range.getBoundingClientRect();return {width:rect.width,y:rect.y};});
+     return {width:box.width,height:box.height,whiteSpace:style.whiteSpace,fontFamily:style.fontFamily,lineHeight:style.lineHeight,lines,gap:code.getBoundingClientRect().left-box.right};
+    },text);
+    assert.equal(actual.height,text.includes('\n')?capturedLineNumbers.localGeometry.localSize.height:20);
+    assert.equal(actual.whiteSpace,text.includes('\n')?'pre-wrap':'normal');
+    assert.equal(actual.lineHeight,'20px');assert.equal(actual.fontFamily,'"Twilio Sans Mono"');
+    assert.equal(actual.width,Math.ceil(Math.max(...actual.lines.map(line=>line.width))));
+    assert.equal(new Set(actual.lines.map(line=>line.y)).size,text.includes('\n')?30:1);
+    for(let i=1;i<actual.lines.length;i++)assert.equal(actual.lines[i].y-actual.lines[i-1].y,20);
+    assert.equal(actual.gap,20,'the next cell follows the longest line, not the collapsed thirty-number run');
+    t.diagnostic(JSON.stringify({surface:emitter===reactEmitter?'react-css':'react-inline',characters:text.length,width:actual.width,height:actual.height,lineCount:actual.lines.length,whiteSpace:actual.whiteSpace,gap:actual.gap}));
+    // The same emitted HUG part must still honor a legitimate authored bound.
+    if(text.includes('\n')){
+     await page.locator('#root').evaluate(root=>{const el=[...root.querySelectorAll<HTMLElement>('*')].find(el=>el.childElementCount===0&&el.textContent?.startsWith('1\n2'))!;el.textContent='two words\nthree words';el.style.maxWidth='55px';});
+     const bounded=await page.locator('#root').evaluate(root=>{const el=[...root.querySelectorAll<HTMLElement>('*')].find(el=>el.childElementCount===0&&el.textContent==='two words\nthree words')!;const box=el.getBoundingClientRect();return {width:box.width,height:box.height};});
+     assert.equal(bounded.width,55);assert(bounded.height>40,'pre-wrap preserves soft wrapping within an authored max-width');
+    }
+   }finally{await page.close();}
+  }
+ }
+});

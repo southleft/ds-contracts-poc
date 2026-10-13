@@ -1,5 +1,5 @@
 {
-  "nodeId": "254:6967",
+  "nodeId": "309:2769",
   "fileKey": "T56aKuRnoay1L7CKAjSWRO",
   "limitPercent": 5,
   "sourceSize": [
@@ -14,16 +14,16 @@
   "sourceFraming": {
     "rule": "snap-outward-effects-included-v1",
     "rootOffset": {
-      "x": 8,
-      "y": 8
+      "x": 3,
+      "y": 2
     },
     "layoutBox": {
       "width": 360,
       "height": 200
     },
     "crop": {
-      "x": 7,
-      "y": 7,
+      "x": 2,
+      "y": 1,
       "width": 362,
       "height": 203
     },

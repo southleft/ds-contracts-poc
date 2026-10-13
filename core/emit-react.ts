@@ -1,3 +1,4 @@
+import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
 import {validateStructuralAvailability} from '../scripts/contract-schema.js';
 import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
@@ -159,7 +160,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   input=lowerCenteredFillPadding(input,tokenValues);
   const maskChildren=reactMaskChildPaths(input,tokenValues);
   const css = generateCoreCss(input,tokenInventory,errors,tokenValues,
-    path=>maskChildren.has(JSON.stringify(path))?'[data-ds-mask-scope] > ':'',contracts,true);
+    path=>maskChildren.has(JSON.stringify(path))?'[data-ds-mask-scope] > ':'',contracts,true,true);
   // SVG arcs need authored fractional widths; computed CSS border widths are
   // snapped to device pixels. Mirror declarations so every state/axis keeps
   // the same cascade, including token changes. Only the arc runtime reads it.
@@ -906,7 +907,7 @@ export function generateTsx(
  * are position-driven siblings). Each root's class is styles.<rootName>.${mr.omittedNote}
  */
 import type { ${mrTypeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination) ? REACT_RECT_STROKE_PATTERN_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
@@ -934,7 +935,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlaceholderJsx('root') ? [gridPlaceholderJsx('root')] : []),
       ].join('\n')
-    : explicitRootContent ?? defaultChildren()));
+    : explicitRootContent ?? defaultChildren())) + reactRectStrokePattern(root,codePropOf);
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
@@ -959,7 +960,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';${walkAnatomy(contract).some(({ part }) => part.slot?.collapseWhenEmpty) ? "\nimport * as React from 'react';\n" + REACT_SLOT_CONTENT_RUNTIME : ''}
-${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
+${walkAnatomy(contract).some(({part})=>part.layout?.overlap && part.tokens?.gap) ? REACT_OVERLAP_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.arc?.cap) ? REACT_ARC_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shape?.kind==='path' && !part.mask) ? REACT_FILLED_PATH_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination) ? REACT_RECT_STROKE_PATTERN_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.vectorStrokeByCombination) ? REACT_VECTOR_STROKE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.shapeFillOverrideProp) ? REACT_SHAPE_FILL_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textColorOverrideProp) ? REACT_TEXT_COLOR_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.textAppearanceOverride||part.textAppearanceByCombination) ? REACT_TEXT_APPEARANCE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.imageOverride) ? REACT_IMAGE_RUNTIME : ''}${walkAnatomy(contract).some(({part})=>part.instanceAffineLayout) ? REACT_AFFINE_LAYOUT_RUNTIME : ''}${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
 ${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}

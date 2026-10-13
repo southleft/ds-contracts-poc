@@ -209,3 +209,81 @@ test('empty shape fill overrides preserve explicit emptiness in both production 
  const missing=fixture();missing.children![0].type='ELLIPSE';missing.children![0].fills=[];delete missing.componentId;
  assert.equal(readRest(missing)[0].sourceEmptyFill,undefined);
 });
+
+
+// The retained source values are deliberately not adjusted to screenshot RGB.
+const normalFillStack=()=>[
+ {type:'SOLID',blendMode:'NORMAL',color:{r:0.8627451062202454,g:0.14901961386203766,b:0.14901961386203766,a:1},boundVariables:{color:{type:'VARIABLE_ALIAS',id:'VariableID:1953:9388'}}},
+ {type:'SOLID',blendMode:'NORMAL',color:{r:1,g:1,b:1,a:1},opacity:0.8999999761581421,boundVariables:{color:{type:'VARIABLE_ALIAS',id:'VariableID:1953:9421'}}},
+];
+test('NORMAL solid fill stacks preserve source-over order and alpha without retaining a layer alias',async()=>{
+ const {composeNormalSolidFillPaints:compose,observeSolidFillComposition}=await import('../solid-fill-observation.js');
+ const stack=normalFillStack(),before=structuredClone(stack);
+ assert.deepEqual(compose(stack),{hex:'fbe9e9'});
+ assert.deepEqual(compose([...stack].reverse()),{hex:'dc2626'});
+ assert.deepEqual(compose(stack.map(({boundVariables:_,...paint})=>paint)),{hex:'fbe9e9'});
+ assert.deepEqual(compose(stack.map(paint=>({...paint,opacity:0}))),{hex:'000000',alpha:0});
+ assert.deepEqual(compose([{type:'SOLID',color:{r:1,g:0,b:0},opacity:.5},{type:'SOLID',color:{r:0,g:0,b:1},opacity:.5}]),{hex:'5500aa',alpha:.75});
+ assert.deepEqual(compose([...stack,{visible:false,type:'IMAGE'}]),{hex:'fbe9e9'});
+ assert.deepEqual(observeSolidFillComposition(stack,true),{issue:'solid-fill-composition-source-paint-stack-unqualified'});
+ assert.equal(observeSolidFillComposition(stack),undefined);
+ assert.deepEqual(stack,before,'source paint/binding evidence is unchanged');
+});
+
+test('NORMAL fill composition rejects unsupported paint values and mixed or malformed bindings',async()=>{
+ const {composeNormalSolidFillPaints:compose}=await import('../solid-fill-observation.js');
+ const changes:Array<(paint:any)=>void>=[
+  p=>p.type='GRADIENT_LINEAR',p=>p.type='IMAGE',p=>p.blendMode='MULTIPLY',
+  p=>delete p.boundVariables,p=>p.boundVariables={color:{type:'VARIABLE_ALIAS',id:''}},
+  p=>p.boundVariables={color:{type:'VARIABLE_ALIAS',id:'valid'},opacity:{type:'VARIABLE_ALIAS',id:'extra'}},
+  p=>p.boundVariables={color:{type:'VARIABLE_ALIAS',id:'valid',extra:true}},p=>p.boundVariables=null,
+  p=>p.opacity=NaN,p=>p.opacity=Infinity,p=>p.opacity=-.1,p=>p.opacity=1.1,p=>p.opacity=null,
+  p=>p.color.a=NaN,p=>p.color.a=2,p=>p.color.a=null,p=>delete p.color,p=>p.visible='true',
+ ];
+ for(const change of changes){const stack=normalFillStack();change(stack[1]);assert.equal(compose(stack),undefined);}
+ assert.equal(compose([null,...normalFillStack()]),undefined);
+ assert.equal(compose(normalFillStack().slice(0,1)),undefined);
+ assert.equal(compose([]),undefined);
+});
+
+test('non-TEXT REST and plugin fill stacks emit the same provisional literal and keep strict source refusal',async()=>{
+ const stack=normalFillStack();
+ const shared=source.slice(source.indexOf('// BEGIN SHARED SOLID FILL OBSERVATION'),source.indexOf('// END SHARED SOLID FILL OBSERVATION'));
+ const begin=source.indexOf('const dumpFillStack = async'),end=source.indexOf('// Preserve nested property selections',begin);
+ const observeBegin=source.indexOf('  const sourceFillComposition=SolidFillCapture.observeSolidFillComposition');
+ const observeEnd=source.indexOf("\n\n  if (node.type !== 'TEXT')",observeBegin);
+ assert(begin>=0&&end>begin&&observeBegin>=0&&observeEnd>observeBegin);
+ const capture=vm.runInNewContext(shared+`;const codes=[],aliases=[];const varNameById=async(id,consumer)=>{if(!consumer.id)throw Error('consumer missing');aliases.push(id);return 'resolved/'+id;};const degrade=(code)=>codes.push(code);const dumpPaint=async()=>{throw Error('unexpected legacy paint selection');};const dumpGradient=async()=>{throw Error('unexpected gradient selection');};`+
+  source.slice(begin,end)+`; (async function(node){codes.length=0;aliases.length=0;const out={};`+source.slice(observeBegin,observeEnd)+`;const stack=await dumpFillStack(node,'Media');out.fill=stack.fill;return {out,codes:[...codes],aliases:[...aliases]};})`);
+ for(const type of ['FRAME','RECTANGLE']){
+  const node={id:'2:1',name:'Media',type,fills:stack};
+  const result=mapRestToDump({name:'Fixture',nodes:{root:{document:{id:'0:1',name:'Source',type:'COMPONENT',children:[node]}}}} as never);
+  const row=(result.dump.Source as DumpSet).variants[0].children![0];
+  assert.deepEqual(row.fill,{hex:'fbe9e9'});
+  assert.deepEqual(row.sourceNormalFillComposition,{issue:'solid-fill-composition-source-paint-stack-unqualified'});
+  assert.equal(row.sourceFillComposition,undefined);
+  const plugin=plain(await capture(node));
+  assert.deepEqual(plugin.out,{fill:row.fill,sourceNormalFillComposition:row.sourceNormalFillComposition});
+  assert.deepEqual(plugin.codes,['fill-stack-resolved']);
+  assert.deepEqual(plugin.aliases,stack.map(p=>p.boundVariables.color.id));
+  assert.equal(result.report.degradations.filter(d=>d.code==='variable-unresolved').length,2,'retain every layer variable refusal');
+  const withHidden=mapRestToDump({name:'Fixture',nodes:{root:{document:{id:'0:1',name:'Source',type:'COMPONENT',children:[{...node,fills:[{type:'IMAGE',visible:false},...stack]}]}}}} as never);
+  assert.deepEqual((withHidden.dump.Source as DumpSet).variants[0].children![0].fill,{hex:'fbe9e9'});
+  assert.deepEqual(withHidden.report.degradations.filter(d=>d.code==='variable-unresolved').map(d=>d.field),['fills[1].color','fills[2].color'],'diagnostics retain raw source indices across hidden paints');
+  const names=Object.fromEntries(stack.map((p,i)=>[p.boundVariables.color.id,{name:'palette/layer'+i}]));
+  const named=mapRestToDump({name:'Fixture',nodes:{root:{document:{id:'0:1',name:'Source',type:'COMPONENT',children:[node]}}}} as never,{variables:{meta:{variables:names}}});
+  assert.deepEqual((named.dump.Source as DumpSet).variants[0].children![0].fill,{hex:'fbe9e9'},'resolved variable names never become composite aliases');
+  assert(!result.report.degradations.some(d=>d.code==='paint-stack-truncated'));
+  assert(result.report.degradations.some(d=>d.code==='fill-stack-resolved'));
+ }
+ // Unsupported/mixed-bound and TEXT stacks retain the existing first-paint
+ // projection plus named loss, rather than borrowing composite authority.
+ for(const type of ['FRAME','TEXT']){
+  const fills=normalFillStack();if(type==='FRAME')delete (fills[1] as any).boundVariables;
+  const result=mapRestToDump({name:'Fixture',nodes:{root:{document:{id:'0:1',name:'Source',type:'COMPONENT',children:[{id:'2:1',name:'Media',type,fills}]}}}} as never);
+  const row=(result.dump.Source as DumpSet).variants[0].children![0];
+  assert.deepEqual(row.fill,{hex:'dc2626'});
+  assert(result.report.degradations.some(d=>d.code==='paint-stack-truncated'));
+  assert(!result.report.degradations.some(d=>d.code==='fill-stack-resolved'));
+ }
+});

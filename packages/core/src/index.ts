@@ -119,7 +119,7 @@ export {
 // The deep referee (appends to `errors`; takes the icon map) and the shared
 // stylesheet every code target emits.
 export { validateContract } from './validate.js';
-export { generateCss, reactRootDisabledSelector, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from './css.js';
+export { generateCss, reactRootDisabledSelector, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels, outsideStrokeCss } from './css.js';
 
 // Optional provenance + stale-source state machine (browser-safe).
 export {
