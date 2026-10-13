@@ -2351,9 +2351,12 @@ export function createNativeOperationJobs(
           followedReferenceId: followed, fileKey: loaded.header.policy.fileKey, phase: loaded.state.phase }];
       }));
     },
-    listReact(referenceId: string, kind?: 'root' | 'mains' | 'authored') {
+    listReact(referenceId: string, kind?: 'root' | 'mains' | 'authored',
+      comparisonQuery?: {parentOperationId:string;caseId:string;ownershipId:string}) {
       return withReadSnapshot(() => {
-      if (!HASH.test(referenceId)) fail('request-invalid');
+      if (!HASH.test(referenceId) || (comparisonQuery && (kind !== undefined ||
+          !UUID.test(comparisonQuery.parentOperationId) || !UUID.test(comparisonQuery.ownershipId) ||
+          !/^[a-z][a-z-]{0,79}$/.test(comparisonQuery.caseId)))) fail('request-invalid');
       if (!present(root)) return [];
       directories();
       type ListingRow={caseId:string;ownershipId:string;kind:'family'|'root'|'nested'|'comparison'|'initial'|'state-api'|'authored'|'authored-initial'|'authored-state-api';
@@ -2361,7 +2364,20 @@ export function createNativeOperationJobs(
         initialObservation?:ReactInitialNativeRequest['observation'];parentOperationId?:string;sourceOperationId?:string;
         successionProblem?:string;fileKey:string;operation:ReturnType<typeof get>};
       return readdirSync(operations).filter(id => UUID.test(id)).flatMap((id):ListingRow[] => {
+        if (comparisonQuery) ensure(dir(id));
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if (comparisonQuery) {
+          // Per-case preparation needs only matching comparisons, not fresh
+          // authentication of every historical operation. Headers select;
+          // the unchanged journal/source checks below still authorize the row.
+          if (!object(header) || header.version !== 1 || header.id !== id || !validRequest(header.request))
+            fail('header-invalid');
+          if (!isReactComparisonRequest(header.request) || header.request.root.referenceId !== referenceId ||
+              header.request.parentOperationId !== comparisonQuery.parentOperationId ||
+              header.request.root.caseId !== comparisonQuery.caseId ||
+              header.request.root.ownership.id !== comparisonQuery.ownershipId) return [];
+          if (!same(load(id).header, header)) fail('header-changed');
+        }
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
         // Filtered BEFORE get(): authenticating a state-API draft selects its

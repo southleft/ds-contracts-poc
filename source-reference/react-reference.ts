@@ -967,8 +967,10 @@ export function createReactReferenceService(
               const main = family ?? jobs.reactEffectiveRequest(parentId);
               const source = family ? selectObservedFamilyComparisonCase(repoRoot,current,family,caseId).rootRequest
                 : selectReactComparisonCase(repoRoot, current, main as ReactNativeRequest, caseId);
-              const existing = jobs.listReact(current.id).find(row => row.kind === 'comparison' &&
-                row.parentOperationId === parentId && row.caseId === caseId && row.ownershipId === source.ownership.id);
+              const comparisons = jobs.listReact(current.id, undefined,
+                {parentOperationId:parentId,caseId,ownershipId:source.ownership.id});
+              if(comparisons.length>1)throw Error('react-comparison-operation-ambiguous');
+              const existing = comparisons[0];
               if(existing)return {kind:'existing' as const,existing};
               const parent=family?jobs.verifiedObservedFamilyObservation(parentId):jobs.verifiedReactCallerObservation(parentId);
               if(canonicalJson(parent.request)!==canonicalJson(main))throw Error('react-comparison-parent-changed');
