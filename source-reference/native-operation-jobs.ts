@@ -1,4 +1,4 @@
-import {withObservedFamilyPreparation} from './react-observed-family.js';
+import {withObservedFamilyPreparation,withObservedFamilyCommandPreparation,assertOutsideObservedFamilyCommandPreparation} from './react-observed-family.js';
 import {isReactObservedFamilyNativeRequest,reactObservedFamilyReservation,prepareReactObservedFamilyNativePlan,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {isReactAuthoredOperationRequest as isReactAuthoredNativeRequest,reactAuthoredNativeReservation,type ReactAuthoredStateApiNativeRequest,
   reactAuthoredOwnershipAnchor,type ReactAuthoredOperationRequest as ReactAuthoredNativeRequest} from './react-authored-native-request.js';
@@ -1055,7 +1055,7 @@ export function createNativeOperationJobs(
   // Nothing survives into another request or a native command's authorization.
   let readSnapshot: Map<string, EvidenceReadEntry> | undefined;
   const evidenceReadScope = 'native-operation-jobs:' + randomUUID();
-  const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
+  const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); assertOutsideObservedFamilyCommandPreparation(); if (readSnapshot) fail('write-during-read-snapshot'); };
   function withReadSnapshot<T>(read: () => T): T {
     const outer = readSnapshot;
     readSnapshot ??= new Map();
@@ -1862,22 +1862,30 @@ export function createNativeOperationJobs(
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
       if (isReactObservedFamilyNativeRequest(loaded.header.request) ? !options.observedFamily : isReactAuthoredNativeRequest(loaded.header.request) ? !options.reactAuthored : isPreparedLibraryNativeRequest(loaded.header.request) ? !options.preparedLibrary : isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
-      const context = verifiedTokenContext(id);
-      if (context.journalRevision !== loaded.fingerprint)
-        fail("journal-changed");
-      const request = structuredClone(loaded.header.request);
-      const built = isReactObservedFamilyNativeRequest(request) ? options.observedFamily!.buildComponent(request,context) : isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? withObservedFamilyPreparation(()=>options.reactComparison!.buildComponent(request, context)) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
-        : options.buildComponent!(request, context);
-      if (
-        built.planRevision !== loaded.plan.revision ||
-        typeof built.script !== "string" ||
-        !built.script.trim() ||
-        Buffer.byteLength(built.script) > 4 * 1024 * 1024
-      )
-        fail("component-script-invalid");
-      // Compilation may reenter the manager or race another host process.
-      authenticate(loaded);
-      script = built.script;
+      const build = () => {
+        const context = verifiedTokenContext(id);
+        if (context.journalRevision !== loaded.fingerprint)
+          fail("journal-changed");
+        const request = structuredClone(loaded.header.request);
+        const built = isReactObservedFamilyNativeRequest(request) ? options.observedFamily!.buildComponent(request,context) : isReactAuthoredNativeRequest(request) ? options.reactAuthored!.buildComponent(request,context) : isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? withObservedFamilyPreparation(()=>options.reactComparison!.buildComponent(request, context)) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+          : options.buildComponent!(request, context);
+        if (
+          built.planRevision !== loaded.plan.revision ||
+          typeof built.script !== "string" ||
+          !built.script.trim() ||
+          Buffer.byteLength(built.script) > 4 * 1024 * 1024
+        )
+          fail("component-script-invalid");
+        // Compilation may reenter the manager or race another host process.
+        authenticate(loaded);
+        return built.script;
+      };
+      // Family evidence may be shared only through this pre-append computation.
+      // The scope has ended before the fresh nonce and durable dispatch below;
+      // pendingCommand independently authenticates again after publication.
+      script = isReactObservedFamilyNativeRequest(loaded.header.request) ||
+        (isReactComparisonRequest(loaded.header.request) && loaded.header.request.version === 5)
+        ? withObservedFamilyCommandPreparation(build) : build();
     } else if (phase === "component-readback") {
       // Known allocations remain inspectable when the source changes. This
       // observes the saved plan only; sourceCurrent is checked separately and

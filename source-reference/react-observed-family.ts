@@ -18,6 +18,7 @@ import type {ReactNativeRequest} from './react-native-request.js';
 import type {ReactOwnershipReport} from './react-ownership-run.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
 import {projectReactRootVisual} from './react-root-visual.js';
+import {verifiedReactContextualContent} from './react-contextual-content.js';
 import {reactPropertyPaintedRoot} from './react-property-fonts.js';
 import {prepareReactRootSizing} from './react-root-sizing.js';
 import {compileReactRootSweep,retainReactRootSourceBindings} from './react-root-sweep.js';
@@ -44,12 +45,30 @@ type Plane=ReturnType<typeof readReactObservedFamilyPlane>;
 const verified=new WeakMap<object,{record:ObservedFamilyRecord;planes:Plane[];pin:ObservedFamilyPin}>();
 export interface VerifiedObservedFamily {record:ObservedFamilyRecord;pin:ObservedFamilyPin;planes:Plane[]}
 type PreparationFamily={repo:string;reference:ReactReference;pin:string;family:VerifiedObservedFamily;verify:()=>void};
+type FamilyAssembly={matrix:ObservedFamilyMatrix;source:{revision:string;programSha256:string;evidenceRevision:string}};
+type CommandPreparation={families:PreparationFamily[];assemblies:Map<object,FamilyAssembly>};
 let preparationFamilies:PreparationFamily[]|undefined;
-/** One synchronous compiler/evidence preparation only. A later source check,
- * builder, delivery or request always opens its own fresh scope. This is not
- * a display snapshot and never caches operation authorization or refusals. */
+let commandPreparation:CommandPreparation|undefined;
+/** The caller must finish this synchronous scope before publishing a command.
+ * Only immutable family evidence/assembly is shared; native journals and
+ * operation-specific plans remain freshly read and authenticated. */
+export function withObservedFamilyCommandPreparation<T>(prepare:()=>T):T {
+  assertOutsideEvidenceSnapshot();
+  if(commandPreparation||preparationFamilies)fail('nested-command-preparation');
+  commandPreparation={families:[],assemblies:new Map()};
+  try {return withObservedFamilyPreparation(prepare);}
+  finally {commandPreparation=undefined;}
+}
+/** Prevent a reentrant builder from publishing any journal mutation while
+ * the outer command is still sharing family evidence. */
+export function assertOutsideObservedFamilyCommandPreparation():void {
+  if(commandPreparation)fail('write-during-command-preparation');
+}
+/** One synchronous compiler/evidence preparation only. Separate preparations
+ * remain fresh unless an explicit pre-publication command scope is active.
+ * This never caches operation authorization, journal state or refusals. */
 export function withObservedFamilyPreparation<T>(prepare:()=>T):T {
-  const outer=preparationFamilies,entries:PreparationFamily[]=[];
+  const outer=preparationFamilies,entries:PreparationFamily[]=commandPreparation?.families??[];
   preparationFamilies=entries;
   try {
     const result=prepare();
@@ -180,7 +199,7 @@ export function readObservedFamilyEvidence(repo:string,reference:ReactReference,
   if(hash(canonicalJson(record))!==pin.id||!equal(JSON.parse(inventory.toString()),{version:1,files:{'record.json':pin.recordSha256}})||!record.members?.length)fail('record-invalid');
   const report=JSON.parse(readFileSync(path.join(repo,'private/react-source-ownership',record.referenceId,record.ownership.id,'report.json'),'utf8')) as ReactOwnershipReport;
   const current=derive(repo,reference,report,record.selection);if(!equal(current.record,record))fail('source-facts-changed');
-  const result={...current,pin};
+  const result={...current,pin:structuredClone(pin)};
   // Clone mutable source data, but retain the existing frozen contextual
   // capability: serializing that object would erase its private authority.
   const planes=current.planes.map(({contentContext,...plane})=>({...structuredClone(plane),...(contentContext?{contentContext}:{})}));
@@ -201,13 +220,24 @@ export function readObservedFamilyEvidence(repo:string,reference:ReactReference,
           hash(read('record.json'))!==expectedPin.recordSha256||
           hash(read('integrity.json'))!==expectedPin.inventorySha256||
           canonicalJson(inventoryEvidence(archive))!==archiveFiles)fail('preparation-evidence-changed');
+      // Cached assembly skips anatomy/projection, so repeat their contextual
+      // capability consumption checks, including external helper inputs.
+      if(commandPreparation)for(const p of planes)
+        verifiedReactContextualContent(p.contentContext,p.program,p.row.ownership!,p.captured.tree);
     };
     verify();preparationFamilies.push({repo:repoKey,reference,pin:pinKey,family:result,verify});
   }
   return result;
 }
-export function assembleObservedFamily(family:VerifiedObservedFamily):{matrix:ObservedFamilyMatrix;source:{revision:string;programSha256:string;evidenceRevision:string}}{
+export function assembleObservedFamily(family:VerifiedObservedFamily):FamilyAssembly{
   const canonical=verified.get(family);if(!canonical)fail('verified-evidence-required');
+  const command=commandPreparation;
+  const entry=command?.families.find(item=>verified.get(item.family)===canonical);
+  if(entry){
+    entry.verify();
+    const saved=command!.assemblies.get(canonical);
+    if(saved)return structuredClone(saved);
+  }
   const {record,planes}=canonical,axes=[{prop:record.axis.prop,values:record.axis.values}],baseAxisValues={[record.axis.prop]:record.axis.baseValue};
   const roots=new Map<string,CapturedNode>(),projections=new Map<string,ReturnType<typeof projectReactRootVisual>['roots'][number]>(),textPlanes:ReactRootTextPlane[]=[];
   for(const p of planes){
@@ -236,8 +266,10 @@ export function assembleObservedFamily(family:VerifiedObservedFamily):{matrix:Ob
   const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)fail('contract-invalid:'+errors.join(';'));
   const native=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(enriched,new Map([[enriched.id,enriched]]));
   if(!equal(native.variants.map(v=>v.name).sort(),record.members.map(m=>m.variantName).sort()))fail('compiled-membership-changed');
-  return {matrix:{version:1,qualification:'observed-selected-family-root-draft',acceptedContract:null,problems:[],draft:{status:'native-compiled',problems:[],properties:[record.axis.prop],observations:record.members.map(m=>m.caseId),lowerings:[],limitations:['selected-observed-values-only','other-contexts-and-inputs-unqualified','native-fidelity-not-verified'],contract:enriched,tokens,residuals,sizing:sizing.reports,native}},
+  const result:FamilyAssembly={matrix:{version:1,qualification:'observed-selected-family-root-draft',acceptedContract:null,problems:[],draft:{status:'native-compiled',problems:[],properties:[record.axis.prop],observations:record.members.map(m=>m.caseId),lowerings:[],limitations:['selected-observed-values-only','other-contexts-and-inputs-unqualified','native-fidelity-not-verified'],contract:enriched,tokens,residuals,sizing:sizing.reports,native}},
     source:{revision:'sha256:'+record.referenceId,programSha256:record.programSha256,evidenceRevision:record.sourceFactsRevision}};
+  if(entry){entry.verify();command!.assemblies.set(canonical,structuredClone(result));}
+  return result;
 }
 export function observedFamilyMember(family:VerifiedObservedFamily,request:ReactNativeRequest){
   if(!verified.has(family))fail('verified-evidence-required');

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import fs, {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,renameSync,symlinkSync,unlinkSync} from 'node:fs';
+import fs, {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,renameSync,symlinkSync,unlinkSync,realpathSync} from 'node:fs';
 import {syncBuiltinESMExports} from 'node:module';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
@@ -21,17 +21,20 @@ import type {CapturedNode} from '../extract/computed/lib.js';
 import type {TextFontEvidence} from './text-fonts.js';
 
 import {selectObservedFamily,readObservedFamilyEvidence,withObservedFamilyPreparation,observedFamilyFacts,
-  observedFamilyMember,assembleObservedFamily} from './react-observed-family.js';
+  observedFamilyMember,assembleObservedFamily,withObservedFamilyCommandPreparation,
+  assertOutsideObservedFamilyCommandPreparation} from './react-observed-family.js';
 import {observedFamilyNativeEvidence,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {selectObservedFamilyComparisonCase} from './react-comparison-case.js';
 import {createNativeOperationJobs,REACT_NATIVE_FILE_KEY} from './native-operation-jobs.js';
-import {prepareReactComparisonPlan} from './react-comparison-plan.js';
+import {prepareReactComparisonPlan,buildReactComparisonWrite} from './react-comparison-plan.js';
 import {reactComparisonReservation,type ReactComparisonRequest} from './react-comparison-request.js';
 import type {ObservedContentDraft} from './observed-content.js';
 import {nativeComparisonFixture} from '../core/native-contract-comparison-test-fixture.js';
+import {ContractSchema} from '../scripts/contract-schema.js';
+import {readReactContextualContent} from './react-contextual-content.js';
 
 // Synthetic sealed source, not copied runtime authority or native fidelity.
-function fixture(t:test.TestContext) {
+function fixture(t:test.TestContext,contextual=false) {
   const repo=mkdtempSync(path.join(tmpdir(),'family-read-phase-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   const source=path.join(repo,'surface.tsx');
@@ -39,7 +42,12 @@ function fixture(t:test.TestContext) {
 export function Surface(props:{tone?:string;children?:string}){return <section {...props}/>}`;
   writeFileSync(source,sourceText);
   writeFileSync(path.join(repo,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,jsx:'preserve',target:'ES2022'}}));
-  const program=readReactSourceProgram(repo,['surface.tsx']),component=program.components[0];
+  const program=readReactSourceProgram(repo,['surface.tsx'],contextual?{includeJsxDependencies:true}:{}),component=program.components[0];
+  if(contextual)assert.equal(component.implementation,'source-checked','wrapper fixture must prove the actual executable source binding');
+  // Optional real contextual capability, following the existing wrapper unit
+  // fixture. This dependency is intentionally outside the source/archive seal.
+  let contextFile:string|undefined;
+  if(contextual){const file=path.join(repo,'wrapper-input.js');writeFileSync(file,'export const theme = 1;');contextFile=realpathSync(file);}
   assert.deepEqual(program.problems,[]);
   const reference:ReactReference={id:'a'.repeat(64),files:program.files,javascript:'',css:'',cohort:builtinReactCohort,sourceRoot:repo};
   const report:ReactOwnershipReport={id:'10000000-0000-4000-8000-000000000001',referenceId:reference.id,
@@ -61,6 +69,10 @@ export function Surface(props:{tone?:string;children?:string}){return <section {
       path:[],text:'Original',cssFamily:'Inter',cssWeight:'500',cssStyle:'normal',
       fonts:[{familyName:'Inter',postScriptName:'Inter-Medium',isCustomFont:true,glyphCount:8}]}]};
     const bounds={x:0,y:0,width:48,height:20},treeSha256=evidenceSha(JSON.stringify(tree)),image='b'.repeat(64);
+    const wrapper=contextFile?sealedWrapper(contextFile,reference.id,component,ownership,tree):undefined;
+    if(wrapper)for(const [name,bytes] of wrapper.blobs){const file=path.join(dir,id,'original-wrappers','0',name);mkdirSync(path.dirname(file),{recursive:true});writeFileSync(file,bytes);}
+    const context=wrapper?readReactContextualContent({referenceId:reference.id,sourceRoot:repo,program,ownership,tree,helpers:[],
+      wrappers:[{path:'',result:wrapper.observation}],read:(_id,name)=>wrapper.blobs.get(name)!}):undefined;
     const expected=planReactPropertyMatrix(program,ownership,tree,'one');
     assert.deepEqual(expected.axes,[]);
     const row={id:'0',changes:{},baseline:true as const,status:'observed' as const,restored:true,treeSha256,image,
@@ -68,9 +80,10 @@ export function Surface(props:{tone?:string;children?:string}){return <section {
     const matrix={version:1,qualification:'full-finite-style-matrix',instanceId:'one',source:expected.source,
       heldProps:expected.heldProps,axes:expected.axes,planned:1,skipped:expected.skipped,rows:[row],problems:[]} as ReactPropertyMatrix;
     const snapshot={tree,treeSha256,image,ownership,fonts,bounds,boundsSha256:row.boundsSha256,propertyCaptureVersion:2} as ReactPropertySnapshot;
-    const rootMatrix=assembleReactRootMatrix(program,ownership,tree,matrix,{'0':snapshot});
+    const rootMatrix=assembleReactRootMatrix(program,ownership,tree,matrix,{'0':snapshot},undefined,context);
     assert.equal(rootMatrix.draft?.status,'native-compiled',JSON.stringify(rootMatrix));
-    report.rows.push({id,matched:true,problems:[],treeSha256,ownership,propertyMatrix:matrix,rootMatrix});
+    report.rows.push({id,matched:true,problems:[],treeSha256,ownership,propertyMatrix:matrix,rootMatrix,
+      ...(wrapper?{helperObservations:[],originalWrappers:[{path:'',result:wrapper.observation}]}:{})});
     mkdirSync(path.join(dir,id,'matrix'),{recursive:true});
     writeFileSync(path.join(dir,id,'source-tree.json'),JSON.stringify({status:'captured',problems:[],tree,treeSha256}));
     writeFileSync(path.join(dir,id,'matrix/0.json'),JSON.stringify(snapshot));
@@ -81,7 +94,38 @@ export function Surface(props:{tone?:string;children?:string}){return <section {
     writeFileSync(path.join(dir,'integrity.json'),JSON.stringify({version:1,files:inventoryEvidence(dir)}));
   };
   seal();
-  return {repo,reference,report,dir,source,sourceText,seal,read:()=>readReactObservedFamilyMembers(repo,reference,report,['first','second'])};
+  return {repo,reference,report,dir,source,sourceText,contextFile,seal,read:()=>readReactObservedFamilyMembers(repo,reference,report,['first','second'])};
+}
+
+
+/** Authenticated unit wrapper artifacts, not browser/native qualification. */
+function sealedWrapper(file:string,referenceId:string,component:ReturnType<typeof readReactSourceProgram>['components'][number],
+  ownership:ReactOwnership,tree:CapturedNode){
+  const instance=ownership.components[0],source=instance.source;
+  const render={file:source.module,sha256:source.sourceSha256,...component.span};
+  const output={file:source.module,sha256:source.sourceSha256,start:component.span.start+1,end:component.span.end-1};
+  ownership.nodes[0].creationSite={module:source.module,sourceSha256:source.sourceSha256,
+    span:{start:output.start,end:output.end},functionSpan:{...component.span},factory:'createElement'};
+  const fields=Object.entries(instance.props).map(([key,value])=>[key,key==='children'?{kind:'opaque'}:{kind:'literal',type:typeof value,value}]);
+  const model={status:'modeled',acceptedContract:null,runtimeVerified:false,content:'forwarded',
+    input:{kind:'record',fields},component:render,output:{kind:'jsx',tag:{kind:'host',name:tree.tag},source:output,
+      props:{kind:'record',fields:[['children',{kind:'opaque'}]]}}};
+  const child={kind:'string',value:instance.props.children};
+  const runtime={status:'observed',targetInitializers:{targets:[{render,invocations:[{input:{render:0,fields:[['children',child]]},
+    output:{type:{kind:'string',value:tree.tag},fields:[['children',child]]}}]}]}};
+  const verification={rows:[{source:render,render:0,status:'verified',consumerBodyVerified:true}]};
+  const plan={boundaryOnly:true,models:[],bodyModels:[model],initializers:[{target:source,render}],targets:[source],contextExportReads:[]};
+  const inputs={[file]:evidenceSha(readFileSync(file))},blobs=new Map<string,Buffer>();
+  const save=(name:string,value:unknown)=>{const bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));blobs.set(name,bytes);return evidenceSha(bytes);};
+  const png=Buffer.from('synthetic-wrapper-unit-png');
+  const evidence={treeSha256:evidenceSha(JSON.stringify(tree)),pngSha256:save('observed.png',png),
+    ownershipSha256:save('ownership.json',ownership),pairedOwnershipSha256:save('paired-ownership.json',ownership),
+    modelSha256:save('model.json',model),planSha256:save('plan.json',plan),runtimeSha256:save('runtime.json',runtime),
+    contextConsumersSha256:save('context-consumers.json',verification),buildSha256:save('build.json',{referenceId,inputs})};
+  const observation={version:1,acceptedContract:null,effectsVerified:false,status:'observed',qualification:'original-call-wrapper-state-only',
+    inputs,runtime,contextConsumers:verification,evidence} as unknown as NonNullable<ReactOwnershipReport['rows'][number]['originalWrappers']>[number]['result'];
+  save('tree.json',{status:'captured',problems:[],tree,treeSha256:evidence.treeSha256,sourcePngSha256:evidence.pngSha256});
+  save('report.json',observation);return {observation,blobs};
 }
 
 test('batch equals independent single-member readers and isolates all returned mutable member data',t=>{
@@ -159,8 +203,8 @@ test('an earlier display inventory cannot hide a later batch archive mutation',t
 
 // Synthetic declaration + existing sealed member fixture. These tests exercise
 // real proof readers and journal boundaries, never source/native qualification.
-function declaredFamilyFixture(t:test.TestContext) {
-  const f=fixture(t),declarationFile=path.join(f.repo,'ds-contracts.react.json');
+function declaredFamilyFixture(t:test.TestContext,contextual=false) {
+  const f=fixture(t,contextual),declarationFile=path.join(f.repo,'ds-contracts.react.json');
   const declaration={version:1,source:'Synthetic phase fixture',theme:'Light',fontFamily:'Inter',
     requiredTokens:{'--fixture':'red'},witnessFiles:{'surface.tsx':evidenceSha(f.sourceText)},
     cases:[['first','quiet'],['second','loud']].map(([id,tone],i)=>({id,subject:'Surface',label:id,
@@ -356,4 +400,166 @@ test('comparison journal preparation stays fresh after scoped parent/member read
   assert.throws(()=>jobs.dispatch(saved.id,'token-create'),/react-family-selection-invalid|react-native-evidence-unavailable/);
   assert.deepEqual(inventoryEvidence(operationDir),before,'refused fresh authorization changes no operation evidence');
   writeFileSync(f.source,f.sourceText);assert.equal(jobs.get(saved.id).sourceCurrent,true);
+});
+
+
+// Command sharing is deliberately narrower than ordinary preparation: no scope
+// survives an await, dispatch append, exception, or independent later request.
+test('command family sharing keeps full results and compiles repeated nested reads once',t=>{
+  const f=declaredFamilyFixture(t);
+  const result=()=>{const family=f.readFamily();return {family,assembly:assembleObservedFamily(family),
+    native:observedFamilyNativeEvidence(family,f.familyRoot),member:f.select()};};
+  const expected=result(),reportFile=path.join(f.dir,'report.json'),read=fs.readFileSync,parse=ContractSchema.parse;
+  const reportText=readFileSync(reportFile,'utf8'),jsonParse=JSON.parse;
+  let reads=0,parses=0,reportParses=0;
+  const readSpy=t.mock.method(fs,'readFileSync',((...args:unknown[])=>{
+    if(String(args[0])===reportFile)reads++;return (read as Function)(...args);
+  }) as typeof fs.readFileSync);
+  const jsonSpy=t.mock.method(JSON,'parse',((...args:Parameters<typeof JSON.parse>)=>{if(args[0]===reportText)reportParses++;return jsonParse(...args);}) as typeof JSON.parse);
+  const parseSpy=t.mock.method(ContractSchema,'parse',((...args:unknown[])=>{parses++;return (parse as Function).apply(ContractSchema,args);}) as typeof ContractSchema.parse);
+  syncBuiltinESMExports();
+  try{
+    withObservedFamilyCommandPreparation(()=>{
+      const first=result(),firstReads=reads,firstParses=parses,firstReportParses=reportParses;
+      assert.deepEqual(first,expected);assert(firstReads>0);assert(firstParses>0);
+      const second=withObservedFamilyPreparation(result);
+      assert.deepEqual(second,expected);assert(reads>firstReads,'nested reads still rehash current archive bytes');
+      assert.equal(reportParses,firstReportParses,'nested reads do not reparse/rederive the sealed family report');
+      assert.equal(parses,firstParses,'a repeated family assembly is not recompiled');
+      assembleObservedFamily(expected.family);const afterForeign=parses;
+      assembleObservedFamily(expected.family);assert(parses>afterForeign,'a prior foreign capability is never silently enrolled in this command');
+    });
+    const previous={reads,parses,reportParses};
+    assert.deepEqual(withObservedFamilyCommandPreparation(result),expected);
+    assert(reads>previous.reads&&parses>previous.parses&&reportParses>previous.reportParses,'an independent command must derive and compile again');
+    withObservedFamilyPreparation(()=>{
+      result();const before={reads,parses};withObservedFamilyPreparation(result);
+      assert(reads>before.reads&&parses>before.parses,'default nested preparation remains isolated');
+    });
+  }finally{parseSpy.mock.restore();jsonSpy.mock.restore();readSpy.mock.restore();syncBuiltinESMExports();}
+});
+
+test('command family sharing isolates returned assembly/native data and foreign capabilities',t=>{
+  const f=declaredFamilyFixture(t),foreign=f.readFamily(),expected=assembleObservedFamily(foreign),suppliedPin=structuredClone(f.pin);
+  withObservedFamilyCommandPreparation(()=>{
+    const family=f.readFamily(),assembly=assembleObservedFamily(family),native=observedFamilyNativeEvidence(family,f.familyRoot);
+    assert.notEqual(family.pin,f.pin,'fresh returned metadata must not alias the supplied request');
+    family.record.axis.values.push('invented');family.planes[0].captured.tree.style.color='red';family.pin.recordSha256='f'.repeat(64);
+    assert.deepEqual(f.pin,suppliedPin,'public result mutation must not change a later request');
+    assembly.matrix.draft.contract!.name='Changed';native.matrix.draft.contract!.name='Changed too';
+    assert.deepEqual(assembleObservedFamily(f.readFamily()),expected);
+    assert.deepEqual(assembleObservedFamily(foreign),expected,'a foreign capability still follows its ordinary verified assembly path');
+    assert.throws(()=>assembleObservedFamily(structuredClone(family)),/verified-evidence-required/);
+  });
+  assert.deepEqual(assembleObservedFamily(f.readFamily()),expected);
+});
+
+for(const onHit of [true,false])test(`command family sharing refuses input drift after assembly hit=${onHit}`,t=>{
+  const f=declaredFamilyFixture(t),record=path.join(f.familyDir,'record.json'),archive=path.join(f.dir,'report.json');
+  const cases:Array<[string,()=>()=>void]>=[
+    ['source',()=>{writeFileSync(f.source,f.sourceText+'\n');return()=>writeFileSync(f.source,f.sourceText);}],
+    ['family record',()=>{const b=readFileSync(record);writeFileSync(record,Buffer.concat([b,Buffer.from('\n')]));return()=>writeFileSync(record,b);}],
+    ['archive bytes',()=>{const b=readFileSync(archive);writeFileSync(archive,Buffer.concat([b,Buffer.from('\n')]));return()=>writeFileSync(archive,b);}],
+    ['archive membership',()=>{const file=path.join(f.dir,'unexpected.json');writeFileSync(file,'{}');return()=>rmSync(file);}],
+    ['cohort input',()=>{const c=f.reference.cohort;f.reference.cohort={...c,theme:'changed'};return()=>{f.reference.cohort=c;};}],
+    ['entry route',()=>{const r=f.reference.runtimeEntryImports;f.reference.runtimeEntryImports=[];return()=>{f.reference.runtimeEntryImports=r;};}],
+  ];
+  for(const [name,change] of cases){let restore=()=>{};
+    try{assert.throws(()=>withObservedFamilyCommandPreparation(()=>{
+      assembleObservedFamily(f.readFamily());restore=change();if(onHit)assembleObservedFamily(f.readFamily());
+    }),/react-family-preparation-evidence-changed/,name);}
+    finally{restore();}
+    assert.deepEqual(f.select().caseId,'second','failed command leaves no reusable authority');
+  }
+});
+
+for(const onHit of [true,false])test(`command family sharing rechecks external contextual input hit=${onHit}`,t=>{
+  const f=declaredFamilyFixture(t,true),input=f.contextFile!;
+  assert(!Object.hasOwn(f.reference.files,input),'external contextual dependency is outside program/reference files');
+  const before=inventoryEvidence(f.dir),bytes=readFileSync(input);
+  try{assert.throws(()=>withObservedFamilyCommandPreparation(()=>{
+    const family=f.readFamily();assert(family.planes.every(p=>p.contentContext),'real wrapper capabilities were restored');
+    assembleObservedFamily(family);writeFileSync(input,'export const theme = 2;');
+    assert.deepEqual(inventoryEvidence(f.dir),before,'archive itself is unchanged');
+    if(onHit)assembleObservedFamily(family);
+  }),/react-contextual-content-inputs-changed/);}
+  finally{writeFileSync(input,bytes);}
+  assert.deepEqual(withObservedFamilyCommandPreparation(()=>assembleObservedFamily(f.readFamily())),assembleObservedFamily(f.readFamily()));
+});
+
+test('command family sharing clears on errors/thenables and refuses nested or display scopes',t=>{
+  const f=declaredFamilyFixture(t),expected=assembleObservedFamily(f.readFamily());
+  const bad:Array<[string,()=>unknown,RegExp]>=[
+    ['throw',()=>{assembleObservedFamily(f.readFamily());throw Error('deliberate-command-error');},/deliberate-command-error/],
+    ['promise',()=>Promise.resolve(assembleObservedFamily(f.readFamily())),/react-family-async-preparation/],
+    ['thenable',()=>{assembleObservedFamily(f.readFamily());return {then(){}};},/react-family-async-preparation/],
+    ['nested',()=>withObservedFamilyCommandPreparation(()=>{}),/react-family-nested-command-preparation/],
+  ];
+  for(const [name,run,reason] of bad){
+    assert.throws(()=>withObservedFamilyCommandPreparation(run),reason,name);
+    assert.doesNotThrow(assertOutsideObservedFamilyCommandPreparation);
+    assert.deepEqual(withObservedFamilyCommandPreparation(()=>assembleObservedFamily(f.readFamily())),expected,name);
+  }
+  assert.throws(()=>withObservedFamilyPreparation(()=>withObservedFamilyCommandPreparation(()=>{})),/react-family-nested-command-preparation/);
+  assert.throws(()=>withEvidenceReadSnapshot(()=>withObservedFamilyCommandPreparation(()=>{})),/write-during-evidence-read-snapshot/);
+  assert.doesNotThrow(assertOutsideObservedFamilyCommandPreparation);
+});
+
+test('command family sharing preserves component script and blocks reentrant journal writes before append',async t=>{
+  const f=declaredFamilyFixture(t),native=await nativeComparisonFixture(REACT_NATIVE_FILE_KEY);
+  const content:ObservedContentDraft={version:1,status:'compiled-comparison-draft',qualification:'observed-comparison-content-only',
+    acceptedContract:null,nativeQualification:'unqualified',inputRevision:revisionOf('command observations'),
+    treeRevision:revisionOf('command tree'),fontsRevision:revisionOf('command fonts'),contract:native.content,tokens:native.tokens,assets:native.assets,
+    component:native.engine.compileComponentData(native.content,new Map([[native.content.id,native.content]])),
+    receipts:[],residuals:[],problems:[],limitations:['synthetic-command-journal-only']};
+  const request:ReactComparisonRequest={version:5,kind:'react-content-comparison',familyRoot:f.familyRoot,
+    parentOperationId:native.comparison.parent.operation.id,root:f.select().rootRequest,
+    content:{id:'10000000-0000-4000-8000-000000000021',reportSha256:'d'.repeat(64),inventorySha256:'e'.repeat(64)}};
+  let duringBuild=()=>{};
+  const jobs=createNativeOperationJobs(f.repo,{prepare:()=>{throw Error('unexpected source adapter');},reactComparison:{
+    prepare:(selected,operation)=>{
+      assert.deepEqual(selected,request);observedFamilyNativeEvidence(f.readFamily(),f.familyRoot);
+      assert.deepEqual(f.select().rootRequest,request.root);
+      return{visual:{id:request.root.ownership.id,reportSha256:request.root.ownership.sha256},
+        preparation:{id:request.content.id,reportSha256:request.content.reportSha256},
+        plan:prepareReactComparisonPlan({operation,content,source:native.source,comparison:native.comparison})};
+    },
+    buildComponent:(selected,context)=>{
+      assert.deepEqual(selected,request);observedFamilyNativeEvidence(f.readFamily(),f.familyRoot);
+      duringBuild();
+      return buildReactComparisonWrite({operation:context.operation,content,source:native.source,comparison:native.comparison,
+        expectedPlanRevision:context.planRevision,tokens:context.tokens});
+    },
+  }});
+  const saved=jobs.prepare(request);
+  for(const phase of ['token-create','token-readback'] as const){
+    const {script,readOnly:_readOnly,kind:_kind,...identity}=jobs.dispatch(saved.id,phase);
+    jobs.accept(saved.id,{...identity,result:await native.run(script)});
+  }
+  const dir=path.join(f.repo,'private/source-native-app/operations',saved.id),before=inventoryEvidence(dir);
+  for(const mutate of [()=>jobs.prepare(request),()=>jobs.dispatch(saved.id,'token-readback')]){
+    duringBuild=mutate;
+    assert.throws(()=>jobs.dispatch(saved.id,'component-create'),/react-family-write-during-command-preparation/);
+    assert.deepEqual(inventoryEvidence(dir),before,'a reentrant write leaves no dispatch or result');
+  }
+  duringBuild=()=>{writeFileSync(f.source,f.sourceText+'\n');};
+  try{assert.throws(()=>jobs.dispatch(saved.id,'component-create'),/react-family-preparation-evidence-changed/);
+    assert.deepEqual(inventoryEvidence(dir),before,'source drift during the builder publishes no command');}
+  finally{writeFileSync(f.source,f.sourceText);}
+  duringBuild=()=>{};
+  const context=jobs.verifiedTokenContext(saved.id);
+  const expected=buildReactComparisonWrite({operation:context.operation,content,source:native.source,comparison:native.comparison,
+    expectedPlanRevision:context.planRevision,tokens:context.tokens});
+  const command=jobs.dispatch(saved.id,'component-create');
+  const {attemptId,nonce,...actual}=command;
+  assert.deepEqual(actual,{version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:saved.id,phase:'component-create',
+    fileKey:context.operation.fileKey,planRevision:context.planRevision,scriptSha256:evidenceSha(expected.script),script:expected.script,readOnly:false});
+  assert.match(attemptId,/^[a-f0-9-]{36}$/);assert.match(nonce,/^[a-f0-9]{64}$/);
+  assert.deepEqual(jobs.pendingCommand(saved.id),command);
+  const dispatched=inventoryEvidence(dir);
+  writeFileSync(f.source,f.sourceText+'\n');
+  try{assert.throws(()=>jobs.pendingCommand(saved.id),/react-family-selection-invalid|react-native-evidence-unavailable/);
+    assert.deepEqual(inventoryEvidence(dir),dispatched,'post-append source authentication is still fresh');}
+  finally{writeFileSync(f.source,f.sourceText);}
+  assert.deepEqual(jobs.pendingCommand(saved.id),command);
 });
