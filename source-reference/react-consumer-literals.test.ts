@@ -175,7 +175,8 @@ test('synchronous function arguments retain source creation owners and distinct 
  const dir=mkdtempSync(path.join(process.cwd(),'source-reference/.consumer-functions-'));
  try{
   const fixture=(mode='plain')=>{
-   const text=`const Render=(props)=>{const a=outer('one');const b=outer('two');return <span>{a+b}</span>;};function outer(value){return make(value);}function make(value,parse=${mode==='captured'?'x=>x+value':'x=>x'}){const out={value};out.value='checked-'+use(out.value,parse);return out.value;}function use(value,parse){return ${mode==='unused'?'value':'parse(value)'};}`;
+   const primitive=['primitive','missing-scope','missing-capture'].includes(mode);
+   const text=primitive?`const Render=(props)=>{return <span>{value('one')}</span>;};function value(input){return input;}`:`const Render=(props)=>{const a=outer('one');const b=outer('two');return <span>{a+b}</span>;};function outer(value){return make(value);}function make(value,parse=${mode==='captured'?'x=>x+value':'x=>x'}){const out={value};out.value='checked-'+use(out.value,parse);return out.value;}function use(value,parse){return ${mode==='unused'?'value':'parse(value)'};}`;
    const file=path.join(dir,'fixture.tsx');writeFileSync(file,text);
    const sf=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
    const host:ts.CompilerHost={getSourceFile:f=>f===file?sf:undefined,getDefaultLibFileName:()=>'',writeFile:()=>{},getCurrentDirectory:()=>dir,getDirectories:()=>[],fileExists:f=>f===file,readFile:f=>f===file?text:undefined,getCanonicalFileName:f=>f,useCaseSensitiveFileNames:()=>true,getNewLine:()=> '\n'};
@@ -196,8 +197,8 @@ test('synchronous function arguments retain source creation owners and distinct 
     const models=${JSON.stringify([model])};let active=false;const ids=new Map(),known=new WeakSet();const point=p=>JSON.stringify([p.file,p.sha256,p.start,p.end]);
     const witness=value=>{if(value===null)return {kind:'null',value:null};if(['object','function','symbol','bigint'].includes(typeof value)){if(!ids.has(value))ids.set(value,ids.size);return {kind:typeof value,identity:ids.get(value)};}return value===undefined?{kind:'undefined'}:{kind:typeof value,value};};
     const fail=s=>{throw Error(s)};const literal=(${reactConsumerLiteralRuntime})(${JSON.stringify(literalPlans)},N,()=>{},fail,()=>({render:active?0:null,renderSource:point(models[0].component)}),witness);
-    const guard=(${reactHelperBindingGuard})(models,()=>{},x=>known.has(x),fail,literal);
-    globalThis.__DSC_RUNTIME_PROOF={sourceFunction:guard.sourceFunction,binding:guard.binding,sourceCall:guard.sourceCall,contextBody(key,invoke){active=true;try{return guard.component(0,key,invoke,true)}finally{active=false}},literal(x){known.add(x);return x},consumerLiteral:literal.capture,consumerLiteralWrite:literal.write,consumerLiteralAssign:literal.assign};
+    const guard=(${reactHelperBindingGuard})(models,()=>{},x=>known.has(x),fail,${mode==='missing-capture'?'undefined':'literal'});
+    globalThis.__DSC_RUNTIME_PROOF={sourceFunction:guard.sourceFunction,binding:guard.binding,sourceCall:guard.sourceCall,contextBody(key,invoke){active=${mode!=='missing-scope'};try{return guard.component(0,key,invoke,true)}finally{active=false}},literal(x){known.add(x);return x},consumerLiteral:literal.capture,consumerLiteralWrite:literal.write,consumerLiteralAssign:literal.assign};
     const h=(tag,props,...children)=>({tag,props,children});`;
    const captured=runInNewContext('"use strict";'+setup+emit(transformed)+`const result=Render({children:'content'});({result,report:literal.report(),input:{value:witness({children:'content'}),fields:[['children',{kind:'string',value:'content'}]]},guard:guard.report()});`);
    const plain=runInNewContext(`"use strict";const h=(tag,props,...children)=>({tag,props,children});`+emit(text)+`Render({children:'content'});`);
@@ -207,6 +208,11 @@ test('synchronous function arguments retain source creation owners and distinct 
    const verify=(r=report)=>verifyConsumerLiteralEffects(model as any,r,literalPlans,0,input,(v,s)=>s.kind==='literal'&&JSON.stringify(v)===JSON.stringify(s.type==='undefined'?{kind:'undefined'}:{kind:s.type,value:s.value}));
    return {model,report,verify,input,guard:captured.guard};
   };
+  const primitive=fixture('primitive');
+  assert.equal(primitive.model.literalAllocations!.length,0,'call capture must not depend on literal allocation count');
+  assert.equal(primitive.report.calls!.length,1);primitive.verify();
+  assert.throws(()=>fixture('missing-scope'),/consumer-literal-operation-scope/,'planned calls require a live render scope before invoking the callee');
+  assert.throws(()=>fixture('missing-capture'),/helper-binding-consumer-call-capture-missing/,'planned calls require capture runtime');
   const {model,report,verify,guard}=fixture();assert.equal(report.functions!.length,model.functionAllocations!.length,JSON.stringify({model:model.functionAllocations,actual:report.functions}));verify();
   assert(report.records.some(r=>!r.currentValuesVerified));assert(verify().records.some(r=>r.mutationEffectsVerified));
   assert.equal(model.functionAllocations!.length,2);assert.equal(report.functions!.length,2);

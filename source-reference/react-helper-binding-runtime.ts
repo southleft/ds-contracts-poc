@@ -128,7 +128,13 @@ export const reactHelperBindingGuard = String.raw`((models, assertNative, knownL
       return invoke((...args)=>{
         const expected=activeTrace[traceCursor++];
         if(!expected||point(expected.site)!==site||point(expected.source)!==registered.key)fail('call-trace-changed');
-        check(active);checkedCalls++;const call=literalCalls?.beginCall(site,registered.key,args,fn);const result=apply(fn,undefined,args);check(active);if(call)literalCalls.endCall(call,result,args);return result;
+        check(active);checkedCalls++;
+        // Only context consumer models own the literal/call effect trace. JSX
+        // models retain their independent binding trace without a render scope.
+        const captureCalls=Array.isArray(models[active].contextFunctionCalls);
+        if(captureCalls&&!literalCalls)fail('consumer-call-capture-missing');
+        const call=captureCalls?literalCalls.beginCall(site,registered.key,args,fn):null;
+        const result=apply(fn,undefined,args);check(active);if(call)literalCalls.endCall(call,result,args);return result;
       });
     }
     const owners=[];for(let i=0;i<models.length;i++)if(models[i].calls.some(c=>c.phase==='module-initialization'&&c.site&&point(c.site)===site&&point(c.source)===registered.key))owners.push(i);
