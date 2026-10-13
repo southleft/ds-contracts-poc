@@ -11,8 +11,8 @@ content directly to its observed HTML root. Every helper call, object identity,
 ordered write and source return site must still agree with the original render;
 unknown writes, changed children and conflicting roots refuse. A fresh native
 Badge comparison contains the caller text and passed structural readback.
-Visual scoring is separate: 13 of the 36 original cases now have native image
-passes on both backgrounds, with zero measured image failures and 23 unmeasured.
+Visual scoring is separate: 17 of the 36 original cases now have native image
+passes on both backgrounds, with zero measured image failures and 19 unmeasured.
 The 36 source matches do not count as 36 native passes, and the unseen reverse
 scoreboard remains unqualified.
 
@@ -27,8 +27,10 @@ second family adds the previously unmeasured `radius="none"` and `radius="full"`
 cases: both completed native readback and passed the same image check (0.5263%
 white, 0% black), with the caller text present and root dimensions within one
 pixel. The Brown and Yellow color-family comparisons also completed native
-readback and each passed (0.3947% white, 0% black). Their caller text is present;
-each source is 37.96875 × 20 px and the native output is 38 × 20 px. These results form an
+readback and each passed (0.3947% white, 0% black). Amber, Orange, Tomato and Red
+also completed native readback and passed both backgrounds; their worst image
+difference is 0.6579%. Their caller text is present; each source is
+37.96875 × 20 px and the native output is 38 × 20 px. These results form an
 image-only ledger across recorded runs, not a fresh 36-case qualification on
 one revision. Font-byte identity, unselected
 values, behavior, family updates and the complete browser journey remain
@@ -48,7 +50,20 @@ reference, parent, case and ownership before authenticating their journals and
 source. It no longer authenticates every unrelated historical operation to
 find one comparison. Matching stale or corrupt operations still refuse, and
 multiple matches are rejected. The change passed focused source and journal
-checks; its live latency has not yet been measured.
+checks. One ordered replay of a saved completed comparison took 255.7 seconds
+before and 164.9 seconds after, with identical saved result bytes. This measures
+that lookup only, not fresh creation or a general latency target. Native command
+preparation also reuses verified family data within a command while retaining
+the source and journal checks at its boundaries.
+
+Consistently observed non-wrapping distributed layouts with finite nonnegative
+spacing no longer turn dormant Figma `itemSpacing` into a CSS minimum gap.
+Qualified auto-width text also preserves
+authored line breaks. Mixed or unknown distribution, wrapping layouts and
+negative spacing retain their existing handling. These shared fixes preserve
+the retained Slider's 200 px width and multiline text geometry; existing image,
+font and icon failures are still failures. The complete-cohort score above is
+not upgraded from a focused result or a historical candidate comparison.
 
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 
