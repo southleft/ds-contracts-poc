@@ -68,7 +68,7 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
       let source = nodes.get(reference.mainId);
       for (const index of part.specPath) source = source && nodes.get(source.childIds[index]);
       if (!source) throw Error('native-contract-comparison-capture-pairing-invalid');
-      pairedArcCapFields[part.nodeId] = ['arcData','strokeCap'].filter(field=>Object.prototype.hasOwnProperty.call(source.values,field));
+      pairedArcCapFields[part.nodeId] = ['arcData','strokeCap','strokesIncludedInLayout','dashPattern'].filter(field=>Object.prototype.hasOwnProperty.call(source.values,field));
     }
   };
   pairFields(input.comparison, input.creation.comparisons[0]);

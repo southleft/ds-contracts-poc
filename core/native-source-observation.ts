@@ -363,6 +363,26 @@ export function emitNativeInventoryReadbackScript(expected: {
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
 }, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false, capturedGeometry=false, masks=false, packed=false, arcCaps=true, pairedArcCapFields?: Record<string, string[]>, strokeLayout=false,boundPaint=false,aspectRatio=true, contractDraftText=false, pairedArcCapIdentity?: {nodes: Record<string, unknown>[]; comparisons: Record<string, unknown>[]; inheritedAdditions?: Array<{instanceId:string;specPath:number[];mainNodeId:string;metadata:Record<string,string>}>}): string {
+  // Optional main-capture fields are a closed per-node profile, never a
+  // verifier exception. Caller-owned nodes retain the full requested inventory.
+  if (pairedArcCapFields) {
+    const allowed = new Set(['arcData', 'strokeCap', 'strokesIncludedInLayout', 'dashPattern']);
+    const ids = new Set(expected.nodes.map(node => node.id));
+    const plain = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' &&
+      !Array.isArray(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value));
+    if (!plain(pairedArcCapFields) || Reflect.ownKeys(pairedArcCapFields).some(key => {
+      if (typeof key !== 'string' || !ids.has(key)) return true;
+      const entry = Object.getOwnPropertyDescriptor(pairedArcCapFields, key);
+      if (!entry?.enumerable || !('value' in entry) || !Array.isArray(entry.value)) return true;
+      const fields = entry.value;
+      return Reflect.ownKeys(fields).some(k => k !== 'length' &&
+        (typeof k !== 'string' || !/^(0|[1-9][0-9]*)$/.test(k) || Number(k) >= fields.length)) ||
+        Array.from({length: fields.length}, (_, index) => {
+          const field = Object.getOwnPropertyDescriptor(fields, String(index));
+          return !field?.enumerable || !('value' in field) || !allowed.has(field.value);
+        }).some(Boolean) || new Set(fields).size !== fields.length;
+    })) throw Error('native-source-readback-paired-profile-input-invalid');
+  }
   if (pairedArcCapIdentity && (!pairedArcCapFields || !Object.keys(pairedArcCapFields).length ||
       !same(pairedArcCapIdentity.nodes, expected.nodes) || !Array.isArray(pairedArcCapIdentity.comparisons) ||
       pairedArcCapIdentity.comparisons.length !== 1 || pairedArcCapIdentity.comparisons[0].status !== 'created-comparison' ||
@@ -514,7 +534,7 @@ ${pairedArcCapIdentity.inheritedAdditions?.length ? `    // A verified main migr
       node.parent && node.parent.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_CHILD_FIELDS)} : []);
 ${pairedArcCapIdentity ? `    const profileId = profileIds.get(node.id);
     if (typeof profileId !== 'string') throw Error('native-source-readback-paired-profile-identity-changed');
-` : ''}    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, ${pairedArcCapIdentity ? 'profileId' : 'node.id'}) || PAIRED_ARC_CAP_FIELDS[${pairedArcCapIdentity ? 'profileId' : 'node.id'}].includes(field))` : ''}) {
+` : ''}    for (const field of fields) if (field in node${pairedArcCapFields && Object.keys(pairedArcCapFields).length ? ` && (!['arcData','strokeCap','strokesIncludedInLayout','dashPattern'].includes(field) || !Object.prototype.hasOwnProperty.call(PAIRED_ARC_CAP_FIELDS, ${pairedArcCapIdentity ? 'profileId' : 'node.id'}) || PAIRED_ARC_CAP_FIELDS[${pairedArcCapIdentity ? 'profileId' : 'node.id'}].includes(field))` : ''}) {
       const v = node[field];
       row.values[field] = typeof v === 'symbol' ? { mixed: true } : v === undefined ? null : copy(v);
     }${extraMetadata.includes('authoredTextAppearance') ? `\n    if(node.type==='TEXT'&&(${extraMetadata.includes('textAppearanceOverride') ? "node.getSharedPluginData('ds_contracts','textAppearanceOverride')||" : ''}node.getSharedPluginData('ds_contracts','authoredTextAppearance')))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : extraMetadata.includes('textAppearanceOverride') ? `\n    if(node.type==='TEXT'&&node.getSharedPluginData('ds_contracts','textAppearanceOverride'))row.values.textAppearanceRuns=copy(node.getStyledTextSegments(['fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration','fills']));` : ''}${originalImages ? `\n    if (Array.isArray(row.values.fills)) for (const paint of row.values.fills) if (paint.type === 'IMAGE') {

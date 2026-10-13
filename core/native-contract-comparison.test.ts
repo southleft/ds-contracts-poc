@@ -948,3 +948,78 @@ test('comparison lookup authenticates exact matches without reopening unrelated 
   writeFileSync(header,headerBytes);
   assert.deepEqual(jobs.listReact(request.root.referenceId,undefined,selector),legacy);
 });
+
+
+async function mixedStrokeLayoutProfileFixture() {
+ const f=await fixture();
+ // Supply ordinary native fields omitted by the small state-machine mock.
+ // This is synthetic API-shape coverage, not native geometry evidence.
+ const proto=Object.getPrototypeOf(f.figma.currentPage);
+ Object.defineProperty(proto,'relativeTransform',{configurable:true,get(){return [[1,0,this.x],[0,1,this.y]];},set(value){Object.defineProperty(this,'relativeTransform',{value,writable:true,enumerable:true,configurable:true});}});
+ for(const side of ['Top','Right','Bottom','Left'])proto['stroke'+side+'Weight']=0;
+ for(const corner of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'])proto[corner]=0;
+ proto.strokesIncludedInLayout=false;proto.dashPattern=[];
+ f.comparison.receipt=await f.run(emitNativeContractReadbackScript(f.comparison.parent));
+ const child=f.contract('fixture.flow-child',{root:{slot:{name:'children'},layout:{display:'inline-flex',direction:'row'},
+  tokens:{'background-color':'{ink}'},declared:{'background-clip':'padding-box'},literals:{'border-width':'0px','border-radius':'0px'}}});
+ const context=await f.context('10000000-0000-4000-8000-000000000003');
+ const data=f.engine.compileNativeContractDraft(child,new Map([[child.id,child]]),f.source);
+ assert.ok(data.component.variants[0].spec.children?.[0].rootSlotFlow);
+ const created=await f.run(f.engine.buildNativeContractDraftScript(child,new Map([[child.id,child]]),f.source,context));
+ assert.equal(created.status,'created-candidate',JSON.stringify(created.problems));
+ for(const n of f.figma.root.findAll(()=>true))if(n.dashPattern===undefined)n.dashPattern=[];
+ const parent:NativeContractObservationInput={operation:context.operation,planRevision:revisionOf('flow child'),projection:data.projection,
+  component:data.component,tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation:created};
+ const receipt=await f.run(emitNativeContractReadbackScript(parent));
+ assert.equal(verifyNativeContractReadback(parent,receipt).status,'supported-structure-observed',JSON.stringify(verifyNativeContractReadback(parent,receipt).problems));
+ const body={layout:{display:'flex' as const,direction:'row' as const},tokens:{'background-color':'{ink}'},
+  declared:{'background-clip':'padding-box'},literals:{'border-width':'0px','border-radius':'0px'},
+  parts:{label:{text:'Source content',tokens:{color:'{surface}','font-size':'{size}'},declared:{'font-family':'Inter'}}}};
+ const content=f.contract('fixture.mixed-content',{root:{layout:{display:'flex',direction:'row'},parts:{child:body}}});
+ const selected:NativeContractComparisonInput={...f.comparison,instances:[{parent,receipt,variantName:data.component.variants[0].name,slotSpecPath:[0,0],specPath:[0]}]};
+ const creation=await f.run(f.emit(content,selected));
+ assert.equal(creation.status,'created-candidate',JSON.stringify(creation.problems));
+ // The small API mock does not copy these native properties into instances.
+ // Preserve each main's actual values on its corresponding synthetic clone.
+ for(const record of [creation.comparisons[0],...creation.comparisons[0].nested]) {
+  const source=record===creation.comparisons[0]?f.comparison.receipt:receipt;
+  const mainId=record===creation.comparisons[0]?f.comparison.parent.creation.variants[0].id:created.variants[0].id;
+  const sourceNodes=new Map(source.nodes.map((n:any)=>[n.id,n]));
+  for(const part of record.sourceParts){let row:any=sourceNodes.get(mainId);for(const index of part.specPath)row=sourceNodes.get(row.childIds[index]);
+   const n=await f.figma.getNodeByIdAsync(part.nodeId);n.strokesIncludedInLayout=row.values.strokesIncludedInLayout??false;n.dashPattern=row.values.dashPattern??[];}
+ }
+ const component=f.engine.compileComponentData(content,new Map([[content.id,content]]));
+ const comparison=prepareNativeContractComparison(content,component,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},selected);
+ const input:NativeContractComparisonObservationInput={operation:f.supplemental.operation,planRevision:revisionOf('mixed comparison'),comparison,
+  tokenInput:f.supplemental.tokens.input,tokenIdentity:f.supplemental.tokens.identity,creation};
+ return {...f,input};
+}
+
+test('mixed normal main and rootSlotFlow child retain exact per-main stroke capture profiles',async()=>{
+ const f=await mixedStrokeLayoutProfileFixture(),receipt=await f.run(emitNativeContractComparisonReadbackScript(f.input));
+ const checked=verifyNativeContractComparisonReadback(f.input,receipt);
+ assert.equal(checked.status,'supported-comparison-structure-observed',JSON.stringify(checked.problems));
+ const rootId=f.input.creation.comparisons[0].instanceId;
+ assert.equal(Object.hasOwn(receipt.content.nodes.find((n:any)=>n.id===rootId).values,'strokesIncludedInLayout'),false);
+ const childId=f.input.creation.comparisons[0].nested[0].instanceId;
+ assert.equal(receipt.content.nodes.find((n:any)=>n.id===childId).values.strokesIncludedInLayout,true);
+ for(const field of ['strokesIncludedInLayout','dashPattern']){
+  const bad=structuredClone(receipt);bad.content.nodes.find((n:any)=>n.id===childId).values[field]=field==='dashPattern'?[2,3]:false;
+  assert.ok(verifyNativeContractComparisonReadback(f.input,bad).problems.some(p=>p.includes('main-instance-'+field)),field);
+ }
+ const extra=structuredClone(receipt);extra.content.nodes.find((n:any)=>n.id===rootId).values.dashPattern=[];
+ assert.ok(verifyNativeContractComparisonReadback(f.input,extra).problems.some(p=>p.includes('main-instance-dashPattern')));
+});
+
+test('per-node optional field profile rejects unknown, duplicate, sparse and accessor fields before capture',async()=>{
+ const f=await mixedStrokeLayoutProfileFixture(),id=f.input.creation.comparisons[0].instanceId;
+ const emit=(profile:any)=>emitNativeInventoryReadbackScript({operation:f.input.operation,planRevision:f.input.planRevision,pageId:f.input.creation.pageId,
+  nodes:f.input.creation.nodes,comparisons:[]},f.input.tokenInput,f.input.tokenIdentity,[],false,false,[],[],false,[],false,false,undefined,
+  false,false,false,false,false,true,profile,true);
+ let reads=0;const accessor:any={};Object.defineProperty(accessor,id,{enumerable:true,get(){reads++;return [];}});
+ const arrayGetter:any=[];Object.defineProperty(arrayGetter,'0',{enumerable:true,get(){reads++;return 'dashPattern';}});
+ for(const profile of [{[id]:['notAField']},{[id]:['dashPattern','dashPattern']},{[id]:Array(1)},accessor,{[id]:arrayGetter},{foreign:[]}])
+  assert.throws(()=>emit(profile),/native-source-readback-paired-profile-input-invalid/);
+ assert.equal(reads,0);
+ assert.match(emit({[id]:['strokesIncludedInLayout','dashPattern']}),/PAIRED_ARC_CAP_FIELDS/);
+});
