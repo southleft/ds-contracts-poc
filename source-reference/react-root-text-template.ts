@@ -9,12 +9,15 @@ import { evidenceSha } from './react-validation-evidence.js';
 import { reactPropertyPaintedRoot } from './react-property-fonts.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { ReactPropertyObservation } from './react-property-effects.js';
+import { reactComparisonVariant } from './react-comparison-plan.js';
 
 export interface ReactRootTextPlane {
   snapshot: ReactPropertySnapshot;
   row: ReactPropertyObservation;
   rootPath: string;
   caller: unknown;
+  /** Actual source props select the same compiled variant used by comparison. */
+  actualProps?: Record<string,unknown>;
 }
 
 export function prepareReactRootTextTemplate(contract: Contract, tokens: Record<string, unknown>, planes: ReactRootTextPlane[]): {
@@ -50,8 +53,26 @@ export function prepareReactRootTextTemplate(contract: Contract, tokens: Record<
   try {
     const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
     const component = engine.compileComponentData(candidate, new Map([[candidate.id, candidate]]));
-    if (!planNativeRootTextTemplate(component, { contractRevision: revisionOf(candidate), tokenRevision: revisionOf(tokens) }))
-      return refuse('template-not-compiled');
+    const plan = planNativeRootTextTemplate(component, { contractRevision: revisionOf(candidate), tokenRevision: revisionOf(tokens) });
+    if (!plan) return refuse('template-not-compiled');
+    const covered = new Set<string>();
+    for (const [index, root] of roots.entries()) {
+      const props = planes[index].actualProps;
+      if (!props && component.variants.length !== 1) return refuse('source-variant-required');
+      const name = props ? reactComparisonVariant(candidate, props) : component.variants[0].name;
+      const variants = component.variants.filter(v => v.name === name);
+      const selected = plan.variants.find(v => v.name === name);
+      const mode = plan.modes.find(m => m.key === selected?.modeKey);
+      const raw = root.style['letter-spacing'];
+      const tracking = raw === 'normal' ? 0 : typeof raw === 'string' && /^-?(?:\d+(?:\.\d+)?|\.\d+)px$/.test(raw)
+        ? Number(raw.slice(0, -2)) : NaN;
+      if (!Number.isFinite(tracking) || variants.length !== 1 || !mode ||
+          variants[0].spec.children?.[0]?.children?.[0]?.letterSpacing !== tracking ||
+          (selected?.letterSpacing ?? plan.typography.letterSpacing) !== tracking)
+        return refuse('source-tracking-differs');
+      covered.add(name);
+    }
+    if (covered.size !== component.variants.length) return refuse('source-variant-coverage-required');
     return { contract: candidate, admitted: true };
   } catch (error) {
     if (error instanceof Error && /^(FIGMA_|NATIVE_ROOT_TEXT_TEMPLATE_)/.test(error.message)) return refuse(error.message);

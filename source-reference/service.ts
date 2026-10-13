@@ -1,3 +1,4 @@
+import {prepareReactObservedFamilyNativePlan,buildReactObservedFamilyNativeWrite,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {prepareReactAuthoredNativePlan,buildReactAuthoredNativeWrite} from './react-authored-native-plan.js';
 import {nativeAppUpdateDesired} from './native-app-update.js';
 import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
@@ -177,6 +178,18 @@ export function createReferenceService(
         buildComponent: (request, context) => buildReactComparisonWrite({
           ...reactReference.comparisonEvidence(request, comparisonParent(request,context.operation.id)), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision, comparisonRecovery:context.comparisonRecovery,
+        }),
+      },
+      observedFamily: {
+        prepare:(request,operation)=>{
+          const evidence=reactReference.observedFamilyEvidence(request);
+          return {visual:{id:evidence.record.ownership.id,reportSha256:evidence.record.ownership.sha256},
+            preparation:{id:evidence.record.ownership.id,reportSha256:request.family.recordSha256},
+            plan:prepareReactObservedFamilyNativePlan({...evidence,operation})};
+        },
+        buildComponent:(request,context)=>buildReactObservedFamilyNativeWrite({
+          ...reactReference.observedFamilyEvidence(request),operation:context.operation,
+          tokens:context.tokens,templateGraph:context.templateGraph,expectedPlanRevision:context.planRevision,
         }),
       },
       react: {
@@ -795,8 +808,9 @@ export function createReferenceService(
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   function comparisonParent(request:ReactComparisonRequest,operationId:string):{
-    input:NativeContractObservationInput;receipt:NativeSourceReadback;request:ReactNativeRequest
+    input:NativeContractObservationInput;receipt:NativeSourceReadback;request:ReactNativeRequest|ReactObservedFamilyNativeRequest
   } {
+    if(request.version===5)return nativeJobs.verifiedObservedFamilyObservation(request.parentOperationId);
     if(request.version!==4)return nativeJobs.verifiedReactObservation(request.parentOperationId);
     return {...nativeUpdateJobs.verifiedForNewConsumer(request.parentOperationId,operationId,request.parentUpdate!),
       request:nativeJobs.reactEffectiveRequest(request.parentOperationId)};

@@ -365,6 +365,13 @@ test('template mode planner preserves source identities and deduplicates only id
   assert.deepEqual(component, before);
   const plain = structuredClone(component); delete plain.rootSlot!.textTemplate;
   assert.equal(planNativeRootTextTemplate(plain, source), undefined);
+  const varyingTracking = structuredClone(component);
+  varyingTracking.variants[1].spec.children![0].children![0].letterSpacing = 1;
+  const trackingPlan = planNativeRootTextTemplate(varyingTracking, source)!;
+  assert.equal(trackingPlan.variants.find(v => v.name === varyingTracking.variants[1].name)!.letterSpacing, 1);
+  assert.equal(trackingPlan.typography.letterSpacing, undefined);
+  assert.deepEqual(trackingPlan.aliases, plan.aliases, 'finite tracking does not add an alias');
+  assert.deepEqual(trackingPlan.modes, plan.modes, 'finite tracking does not change source mode routing');
 });
 
 test('template mode planner refuses unbound variant typography and ambiguous template ownership', () => {
@@ -372,7 +379,9 @@ test('template mode planner refuses unbound variant typography and ambiguous tem
   const component = engine.compileComponentData(c, new Map([[c.id, c]]));
   const source = { contractRevision: revisionOf(c), tokenRevision: revisionOf(primitives) };
   for (const alter of [
-    (d: typeof component) => { d.variants[1].spec.children![0].children![0].letterSpacing = 1; },
+    (d: typeof component) => { d.variants[1].spec.children![0].children![0].letterSpacing = NaN; },
+    (d: typeof component) => { d.variants[1].spec.children![0].children![0].letterSpacing = Infinity; },
+    (d: typeof component) => { delete d.variants[1].spec.children![0].children![0].letterSpacing; },
     (d: typeof component) => { d.variants[1].spec.children![0].children![0].fontFamily = 'Different'; },
     (d: typeof component) => { d.variants[1].spec.children![0].children![0].fontStyle = 'Italic'; },
     (d: typeof component) => { d.variants[1].spec.children![0].children![0].textAlignH = 'CENTER'; },

@@ -14,6 +14,61 @@ interface ProgressRow {
   }>;
 }
 
+/** A delivery acknowledgement schedules polling; it supplies no verified view. */
+export function nativeDeliveryPendingFromAcknowledgement(value: unknown, operationId: string): boolean {
+  if (!value || typeof value !== 'object' || Array.isArray(value) ||
+      Object.keys(value).sort().join(',') !== 'operationId,pending' ||
+      !('operationId' in value) || value.operationId !== operationId ||
+      !('pending' in value) || typeof value.pending !== 'boolean')
+    throw Error('Native delivery acknowledgement unavailable. Refresh the saved inspection.');
+  return value.pending;
+}
+
+interface ComparisonInspection {
+  kind: string;
+  caseId: string;
+  ownershipId: string;
+  parentOperationId?: string;
+  sourceOperationId?: string;
+  fileKey: string;
+  operation: {id: string};
+  connection: {paired: boolean; connected: boolean; started: boolean; finished: boolean};
+}
+
+/** Check the response identity; the host supplies the same verified row as its full listing. */
+export function nativeComparisonInspectionFromResponse<T extends ComparisonInspection>(value: unknown, parentOperationId: string, caseId: string): T {
+  const record = (input: unknown): input is Record<string, unknown> => !!input && typeof input === 'object' && !Array.isArray(input);
+  const uuid = (input: unknown) => typeof input === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input);
+  if (!record(value) || Object.keys(value).join(',') !== 'comparison' || !record(value.comparison))
+    throw Error('Native comparison response unavailable. Refresh the saved inspection.');
+  const row = value.comparison;
+  if (row.kind !== 'comparison' || row.parentOperationId !== parentOperationId || row.caseId !== caseId ||
+      !uuid(row.ownershipId) || !uuid(row.sourceOperationId) || typeof row.fileKey !== 'string' || !row.fileKey ||
+      !record(row.operation) || !uuid(row.operation.id) || !record(row.connection) ||
+      ['paired','connected','started','finished'].some(key => typeof (row.connection as Record<string, unknown>)[key] !== 'boolean'))
+    throw Error('Native comparison response unavailable. Refresh the saved inspection.');
+  return row as unknown as T;
+}
+
+/** Replace only this checked child; keep unrelated rows and avoid duplicate entries on retry. */
+export function mergeNativeComparisonInspection<T extends {operation:{id:string}}>(rows: T[], comparison: T): T[] {
+  return rows.some(row => row.operation.id === comparison.operation.id)
+    ? rows.map(row => row.operation.id === comparison.operation.id ? comparison : row)
+    : [...rows, comparison];
+}
+
+/** An older full response cannot overwrite a later delivery acknowledgement. */
+export async function readCurrentNativeInspection<T>(read: () => Promise<T>, currentRevision: () => number): Promise<{revision: number; value: T} | undefined> {
+  const revision = currentRevision();
+  try {
+    const result = await read();
+    return revision === currentRevision() ? {revision, value: result} : undefined;
+  } catch (error) {
+    if (revision !== currentRevision()) return undefined;
+    throw error;
+  }
+}
+
 /** null means source inspection needs the full listing; [] means idle. */
 export function nativeProgressRoutes(rows: ProgressRow[]): string[] | null {
   if (rows.some(row => row.content?.phase === 'running')) return null;

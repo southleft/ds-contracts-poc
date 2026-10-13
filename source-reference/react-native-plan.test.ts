@@ -1,3 +1,5 @@
+import {prepareReactObservedFamilyNativePlan,buildReactObservedFamilyNativeWrite,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
+import type {ObservedFamilyRecord,ObservedFamilyMatrix} from './react-observed-family.js';
 import {nativeAppUpdateDesired,prepareNativeAppUpdate} from './native-app-update.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
@@ -692,4 +694,67 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   assert.equal(restored.report().matched, 0);
   assert.equal(restored.report().problem, 'react-ownership-evidence-changed');
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
+});
+
+
+// Synthetic trusted-host adapter exercises the normal journal/transport path;
+// real source admission is separately guarded by the family evidence reader.
+for(const version of [1,2] as const)test(`selected family request v${version} uses one normal native operation and verifies the full template graph`, async t => {
+  const repo=mkdtempSync(path.join(tmpdir(),'observed-family-journal-'));
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const base=inputFixture(undefined,true).input;
+  const legacy={version:1 as const,kind:'react-observed-family-draft' as const,referenceId:'a'.repeat(64),
+    family:{id:'b'.repeat(64),recordSha256:'c'.repeat(64),inventorySha256:'d'.repeat(64)},compilation:'current' as const};
+  const draft=base.matrix.draft!;
+  const request:ReactObservedFamilyNativeRequest=version===1?legacy:{...legacy,version:2,
+    draftRevision:revisionOf({contract:draft.contract,tokens:draft.tokens,native:draft.native})};
+  const memberRoot:ReactNativeRequest={version:1,kind:'react-root-draft',referenceId:request.referenceId,
+    ownership:{id:base.operation.id,sha256:'e'.repeat(64)},inventorySha256:'f'.repeat(64),caseId:'quiet',matrixRevision:revisionOf('matrix')};
+  const names=base.matrix.draft!.native!.variants.map(v=>v.name);
+  const record:ObservedFamilyRecord={version:1,kind:'react-observed-one-axis-family',qualification:'selected-observed-values-only',acceptedContract:null,
+    referenceId:request.referenceId,ownership:memberRoot.ownership,inventorySha256:memberRoot.inventorySha256,programSha256:base.source.programSha256,
+    selection:{version:1,kind:'react-observed-one-axis-family',axis:'tone',baseCaseId:'quiet',caseIds:['quiet','none']},
+    axis:{prop:'tone',values:['quiet','null'],baseValue:'quiet'},sourceIdentity:{module:'source.tsx',exportName:'Source',sourceSha256:'a'.repeat(64),span:{start:0,end:1}},
+    surroundingMountRevision:revisionOf('mount'),sourceFactsRevision:revisionOf('source facts'),
+    members:names.map((variantName,i)=>({caseId:i?'none':'quiet',value:i?'null':'quiet',rootRequest:{...memberRoot,caseId:i?'none':'quiet'},
+      sourceTreeSha256:'b'.repeat(64),planeId:'0',variantName}))};
+  const matrix:ObservedFamilyMatrix={...base.matrix,qualification:'observed-selected-family-root-draft',draft:base.matrix.draft!};
+  const evidence={source:base.source,matrix,record,request};let current=true;
+  if(request.version===2) {
+    const invalid={...evidence,request:{...request,draftRevision:revisionOf('counterfeit draft')}};
+    assert.throws(()=>prepareReactObservedFamilyNativePlan({...invalid,operation:base.operation}),/react-family-draft-changed/);
+    const changed=structuredClone(evidence);changed.matrix.draft.tokens!.surface={$type:'color',$value:'#abcdef'};
+    assert.throws(()=>prepareReactObservedFamilyNativePlan({...changed,operation:base.operation}),/react-family-draft-changed/);
+  }
+  const options:NativeOperationJobsOptions={prepare:()=>{throw Error('wrong adapter');},observedFamily:{
+    prepare:(selected,operation)=>{
+      assert.deepEqual(selected,request);if(!current)throw Error('source changed');
+      return {visual:{id:record.ownership.id,reportSha256:record.ownership.sha256},preparation:{id:record.ownership.id,reportSha256:request.family.recordSha256},
+        plan:prepareReactObservedFamilyNativePlan({...evidence,operation})};
+    },
+    buildComponent:(_,context)=>buildReactObservedFamilyNativeWrite({...evidence,operation:context.operation,expectedPlanRevision:context.planRevision,
+      tokens:context.tokens,templateGraph:context.templateGraph}),
+  }};
+  let jobs=createNativeOperationJobs(repo,options),transport=createNativeOperationTransport(repo,jobs);
+  const first=jobs.prepare(request),pair=transport.pair(first.id),secret=pair.split('.')[1];
+  assert.throws(()=>jobs.verifiedObservedFamilyObservation(first.id),/parent-observation-required/);
+  const host=nativeFixtureHost({modeLimit:2,consumerVariableModes:true});nativeTextBindings(host.figma);host.figma.fileKey=REACT_NATIVE_FILE_KEY;
+  Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,m:string){this.explicitVariableModes={...this.explicitVariableModes,[c.id]:m};};
+  transport.claim(first.id,secret,host.figma.fileKey);transport.start(first.id);
+  for(const expected of ['tokens-created','tokens-observed','components-created','component-structure-observed']){
+    const claimed=transport.claim(first.id,secret,host.figma.fileKey,undefined,undefined,2);
+    assert.equal(claimed.status,'command');
+    if(claimed.status!=='command')throw Error('command unavailable');
+    if(!claimed.command.readOnly)transport.begin(first.id,secret,claimed.command.attemptId);
+    const result=await host.run(claimed.command);
+    transport.acceptDelivery(first.id,secret,result);
+    assert.equal(jobs.get(first.id).phase,expected,JSON.stringify(jobs.get(first.id).problems));
+    jobs=createNativeOperationJobs(repo,options);transport=createNativeOperationTransport(repo,jobs);
+  }
+  assert.equal(jobs.listReact(request.referenceId)[0].kind,'family');
+  assert.equal(jobs.get(first.id).counters.sourceCases,2);
+  const observed=jobs.verifiedObservedFamilyObservation(first.id);
+  assert(observed.input.templateGraph);assert.equal(observed.input.component.variants.length,2);
+  assert.equal(jobs.prepare(request).id,first.id);
+  current=false;assert.throws(()=>jobs.verifiedObservedFamilyObservation(first.id),/source|evidence/);
 });

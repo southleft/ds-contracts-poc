@@ -79,7 +79,7 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
     const prior=projections.get(key);
     if(prior&&(JSON.stringify(prior.sourceBindings)!==JSON.stringify(projected.sourceBindings)||JSON.stringify(prior.sourceSizing)!==JSON.stringify(projected.sourceSizing)))throw Error('react-root-matrix-default-provenance-differs');
     const painted=reactPropertyPaintedRoot(snap,row,linked.roots[0].path);
-    textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children});
+    textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children,actualProps:instance.props});
     const root:CapturedNode={...painted,nodes:[],style:Object.fromEntries(Object.entries(painted.style).map(([k,v])=>[k,normalizeValue(v)]))};
     if(painted.style['font-family']!==linked.roots[0].observation.style['font-family'])
      result.lowerings.push({value:key,channel:'font-family',from:linked.roots[0].observation.style['font-family'],to:painted.style['font-family'],reason:'painted-font-family'});
