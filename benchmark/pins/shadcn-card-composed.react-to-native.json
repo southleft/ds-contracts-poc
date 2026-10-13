@@ -2,7 +2,7 @@
   "id": "shadcn-card-composed.react-to-native",
   "version": 1,
   "kind": "react-to-native",
-  "referenceId": "d30195a0cda4d38a849f1c9b0168d7ce7fa345f6c65a9abdb54e6dba97b2689d",
+  "referenceId": "9f3188e3f4cf48ddf41f94bd19498a4f08550661f00b566457dd4abe77a12411",
   "root": "9786dd715f9f4a71e27411d91024d84e8d07625279bfc9319c88e3e3314c7103",
   "children": {
     "instance-1": {
@@ -31,16 +31,16 @@
     },
     "instance-10": {
       "exportName": "Button",
-      "planSha256": "197eb7e575bbca2c00d7ed8bf71264ba311aa366ad89f0fcefc37421e6d133b0"
+      "planSha256": "95df39aad754683e112ce9f70d18c166ea4b6ea2e95d51fceefc896353925642"
     }
   },
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-card-composed.react-to-native/comparison.json",
-    "receiptSha256": "73ed5ad9145b2ed5e85e4beca22a27afbe4fae30d3213d07e55a5518528da7a6",
-    "planSetSha256": "b6d9c21b868495e1763dbcc4aa3ab9c59ced26ca10764071a1ae0c96a5654c1c",
+    "receiptSha256": "bfd6b6e5711414727ddc1fb84465bf0581b1e9b04d7c7c7208dd253e55b2aacb",
+    "planSetSha256": "0c6bb2099257e891abb49de133dfab70011630bdf21a0807f5b8fd7fb0315d89",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-27",
+    "measuredAt": "2026-10-13",
     "white": 1.330532212885154,
     "black": 1.330532212885154,
     "layoutExact": true,

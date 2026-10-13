@@ -87,6 +87,8 @@ source case, separate from the original 36-case native image ledger. The family
 readback does not qualify every variant's pixels, font-byte identity, browser
 delivery or unseen kits. This native evidence adds no scoreboard credit.
 
+A fresh composed Card with seven nested dependencies now passes independent native structural readback and both image checks at 1.3305%, with exact 360 × 200 px root dimensions. Comparison capture preserves each main component's recorded optional stroke fields, so a Button with a flow-based background does not change the other components' readback profiles. The original failed observation is retained; the corrected read-only observation uses the same created objects. This refreshes the existing Card benchmark cell and adds no whole-cohort or unseen-kit credit. Native font-byte identity remains unqualified.
+
 The current full ten-case React workspace now completes all 12 Checkbox
 initial-input combinations through the ordinary Sources flow and creates the
 12 editable native variants in Live Testing. Independent readback reports
@@ -180,7 +182,7 @@ produces now. This table is generated; do not edit it by hand.
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 2.982% white, 2.982% black) — darwin-arm64, 2026-10-06. |
 | CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.756% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-10-07. Out of scope: keyboard focus is V1.1. |
-| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.217% black) — darwin-arm64, 2026-10-07. |
+| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.217% black) — darwin-arm64, 2026-10-13. |
 | shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-28. |
 | shadcn Badge (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 3.611% black) — darwin-arm64, 2026-09-28. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-27. |
@@ -188,7 +190,7 @@ produces now. This table is generated; do not edit it by hand.
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (default) | React → Figma | **Partial (text only)** | native vs React source 6.250% white, 6.250% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (secondary) | React → Figma | **Partial (text only)** | native vs React source 2.614% white, 2.614% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
-| shadcn Card (composed) | React → Figma | **Pass** | native vs React source 1.331% white, 1.331% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
+| shadcn Card (composed) | React → Figma | **Pass** | native vs React source 1.331% white, 1.331% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-10-13. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->
