@@ -487,12 +487,13 @@ export function composedFillForegroundParts(contract: Contract, contracts?: Read
 }
 /** A literal width of unitless zero, as a LENGTH (see the per-side bullet). */
 const zeroAsLength = (v: string): string => (/^[-+]?0*\.?0+$/.test(v.trim()) ? '0px' : v);
-export function lowerStrokeRings(contract: Contract): Contract {
+export function lowerStrokeRings(contract: Contract, patternedStrokeSvg = false): Contract {
   let touched = false;
   const singleRoot = Object.keys(contract.anatomy).length === 1;
   const lower = (part: Part, top = false): Part => {
     const parts = part.parts && Object.fromEntries(Object.entries(part.parts).map(([n, p]) => [n, lower(p)]));
     const own: Part = parts ? { ...part, parts } : part;
+    if (part.rectStrokePatternByCombination && !patternedStrokeSvg) throw new Error('rect-stroke-pattern-css-renderer-unavailable');
     if (!drawsStrokeRing(part)) return own;
     const maps = strokeHolderMaps(part);
     touched = true;
@@ -534,10 +535,11 @@ export function lowerStrokeRings(contract: Contract): Contract {
           `inset calc(-1 * ${w(strokeSideVar('right'))}) 0 0 0 ${c}`,
         ]
       : [`inset 0 0 0 ${w(STROKE_WIDTH_VAR)} ${c}`];
-    literals['box-shadow'] = [...layers, ...(hasShadow ? [w(STROKE_SHADOW_VAR)] : [])].join(', ');
+    literals['box-shadow'] = part.rectStrokePatternByCombination ? (hasShadow ? w(STROKE_SHADOW_VAR) : 'none') : [...layers, ...(hasShadow ? [w(STROKE_SHADOW_VAR)] : [])].join(', ');
     const tbp = part.tokensByProp;
     return {
       ...own,
+      ...(part.rectStrokePatternByCombination ? {declared:{...part.declared,position:'relative'}} : {}),
       ...(tokens ? { tokens } : {}),
       literals,
       ...(tbp ? { tokensByProp: Array.isArray(tbp) ? tbp.map(renameIn) : renameIn(tbp) } : {}),

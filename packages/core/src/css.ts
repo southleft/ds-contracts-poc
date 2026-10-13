@@ -250,14 +250,14 @@ export function solidFillCompositionRules(contract: Contract, childScope?: (path
 }
 
 export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown,
-  childScope?: (path: readonly string[]) => string, contracts?: ReadonlyMap<string, Contract>, boundPaintSvg=false): string {
+  childScope?: (path: readonly string[]) => string, contracts?: ReadonlyMap<string, Contract>, boundPaintSvg=false, patternedStrokeSvg=false): string {
   // `strokesIncludedInLayout: false` — a stroke that takes no layout space is
   // drawn as an inset box-shadow ring, not a border (anatomy.ts
   // lowerStrokeRings, which says why it is a rewrite BEFORE the rules are
   // written and not a guard at each of their push sites). The same object
   // comes back when no part is flagged.
   // @lower css.stroke-outside-layout-inset-ring
-  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledEllipseVariants(lowerFilledPathVariants(input))));
+  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledEllipseVariants(lowerFilledPathVariants(input))), patternedStrokeSvg);
   // Composition rules below use the original input: generated inset shadows
   // belong to the foreground-ring lowering, not to source competing paint.
   // foregroundStrokeCss moves those rings above the independent fill layer.
@@ -1817,6 +1817,7 @@ export function stripCanvasOnlyChannels(css: string): string {
 export function foregroundStrokeCss(css: string, contract: Contract): string {
   const rules: string[] = [];
   for (const {name,part} of walkAnatomy(contract)) {
+    if (part.rectStrokePatternByCombination) { rules.push('',`.${cssIdentifier(name)} { isolation: isolate; }`); continue; }
     if (!drawsForegroundStroke(part, name==='root' ? contract.semantics.element : part.element)) continue;
     const selector='.'+cssIdentifier(name);
     if(css.includes(selector+'::after'))throw Error(`foreground-stroke-pseudo-element-collision:${contract.id}:${name}`);

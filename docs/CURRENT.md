@@ -2,7 +2,7 @@
 
 **Public project status · updated 2026-10-13 · V1 is not complete.**
 
-The React importer preserves direct slot anatomy as an omitted-input default. The latest retained complete fixed 40-set result is 653 passing, 172 failing and 54 unverified variants out of 879 (74.29% passing); 17 sets pass. Seven M3 Assistive Chip variants changed from failed to unverified after the checker retained their unresolved image-alignment refusal. Their images are unchanged, and this adds no passes. Later focused comparisons and refreshed-source experiments remain separate and do not add whole-cohort credit. The two-slide Carousel has recorded passing evidence with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort has the bounded native measurements below.
+The React importer preserves direct slot anatomy as an omitted-input default. The latest retained complete fixed 40-set installed-CLI comparison has 657 passing, 168 failing and 54 unverified variants out of 879 (74.74% passing); 18 sets pass. Its matched control has 654 passing, 171 failing and 54 unverified variants. The candidate adds the three Nova attachment-card error-state passes with no lost passes, no failures changed to unverified, and unchanged image, content and geometry records for all 168 remaining failures. The original 879 identities, references, supplied fonts and thresholds were preserved. The earlier 653/172/54 result remains historical evidence. Seven M3 Assistive Chip variants retain their unresolved image-alignment refusal; their unchanged images add no passes. The two-slide Carousel has recorded passing evidence with all source text and recorded text styles present. The never-seen bidirectional finish line remains unqualified; the separate original React cohort has the bounded native measurements below.
 
 The original Radix Themes Badge workspace now authenticates all 36 declared
 source cases without changing its code. Source-owned synchronous helpers can
@@ -65,6 +65,8 @@ the retained Slider's 200 px width and multiline text geometry; existing image,
 font and icon failures are still failures. The complete-cohort score above is
 not upgraded from a focused result or a historical candidate comparison.
 
+Observed finite stacks of visible NORMAL solid fills now preserve their composed color. The Nova attachment card no longer renders its pale red error icon tile as solid red: the three error sizes pass both image checks, with worst mismatch 1.3043%, all text and icons present and exact root sizes. Qualified partial glyph paint and rectangular dash patterns also retain their observed values; unsupported evidence keeps its explicit refusal. These shared rules changed generated output in three of the 40 sets. They do not qualify arbitrary paint effects, live binding updates or native dash output.
+
 The shared importer now carries exact finite paint dependencies beyond the argument ceiling, repeated child Boolean values including explicit false, and qualified instance-owned root dimensions. Original Ant form and Spectrum tab measurements improved under the unchanged checker. Missing SimSong faces remain named on four Ant variants; the full real-kit and never-seen bidirectional qualification remains open.
 
 Native inspection now names the verifier boundary behind a refused readback in
@@ -83,7 +85,7 @@ unchanged 5% image limit on white and black at 3.8958%. Its original source root
 is 115.8125 × 36 px, so the root widths differ by 0.1875 px. This is one current
 source case, separate from the original 36-case native image ledger. The family
 readback does not qualify every variant's pixels, font-byte identity, browser
-delivery or unseen kits. Both direction scoreboards are unchanged.
+delivery or unseen kits. This native evidence adds no scoreboard credit.
 
 The current full ten-case React workspace now completes all 12 Checkbox
 initial-input combinations through the ordinary Sources flow and creates the

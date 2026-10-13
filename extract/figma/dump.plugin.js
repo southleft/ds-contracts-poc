@@ -1,5 +1,5 @@
 // BEGIN SHARED TEXT APPEARANCE
-"use strict";var TextAppearanceCapture=(()=>{var m=Object.defineProperty;var A=Object.getOwnPropertyDescriptor;var S=Object.getOwnPropertyNames;var x=Object.prototype.hasOwnProperty;var O=(n,u)=>{for(var i in u)m(n,i,{get:u[i],enumerable:!0})},v=(n,u,i,s)=>{if(u&&typeof u=="object"||typeof u=="function")for(let o of S(u))!x.call(n,o)&&o!==i&&m(n,o,{get:()=>u[o],enumerable:!(s=A(u,o))||s.enumerable});return n};var R=n=>v(m({},"__esModule",{value:!0}),n);var L={};O(L,{observeTextAppearance:()=>E});function y(n,u=!1){if(!Array.isArray(n))return;let i=n.filter(t=>t&&t.visible!==!1);if(!i.length||!u&&!i.some(t=>t.blendMode!==void 0&&t.blendMode!=="NORMAL"))return;if(i.length!==1||i[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let s=i[0],o=s.color,a=s.blendMode===void 0?"NORMAL":s.blendMode;if(a!=="MULTIPLY"&&a!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let f=t=>typeof t=="number"&&Number.isFinite(t)&&t>=0&&t<=1&&Math.fround(t)===t,e=s.opacity===void 0?1:s.opacity;if(!o||![o.r,o.g,o.b,e].every(f)||o.a!==void 0&&o.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let r=s.boundVariables?.color;return r!==void 0&&(!r||r.type!=="VARIABLE_ALIAS"||typeof r.id!="string"||!r.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:o.r,g:o.g,b:o.b},opacity:e,blendMode:a},...r?{variableId:r.id}:{}}}function E(n,u){if(typeof n!="string"||!n.length||!Array.isArray(u)||!u.length)return;let i=e=>({issue:"text-appearance-"+e});if(n.length>65536||u.length>256)return i("budget-exceeded");let s=e=>typeof e=="number"&&Number.isFinite(e),o=e=>e===0||e===n.length||!(n.charCodeAt(e-1)>=55296&&n.charCodeAt(e-1)<=56319&&n.charCodeAt(e)>=56320&&n.charCodeAt(e)<=57343),a=[],f=0;for(let e of u){if(!e||!Number.isInteger(e.start)||!Number.isInteger(e.end)||e.start!==f||e.end<=e.start||e.end>n.length||!o(e.start)||!o(e.end)||e.characters!==n.slice(e.start,e.end))return i("range-unqualified");let r=e.fontName,t=e.lineHeight,p=e.letterSpacing;if(!r||typeof r.family!="string"||!r.family.trim()||typeof r.style!="string"||!r.style.trim()||!s(e.fontSize)||e.fontSize<=0||!s(e.fontWeight)||e.fontWeight<1||e.fontWeight>1e3)return i("font-unqualified");let g;if(r.variationSettings!==void 0){let l=r.variationSettings;if(!l||typeof l!="object"||Array.isArray(l)||![Object.prototype,null].includes(Object.getPrototypeOf(l))||Reflect.ownKeys(l).some(d=>{let b=Object.getOwnPropertyDescriptor(l,d);return typeof d!="string"||!/^[\x20-\x7e]{4}$/.test(d)||!b||!b.enumerable||!("value"in b)||!s(b.value)}))return i("font-unqualified");g=Object.fromEntries(Object.keys(l).map(d=>[d,l[d]]))}if(!t||!["AUTO","PIXELS","PERCENT"].includes(t.unit)||t.unit!=="AUTO"&&(!s(t.value)||t.value<0)||!p||!["PIXELS","PERCENT"].includes(p.unit)||!s(p.value))return i("spacing-unqualified");if(!["ORIGINAL","UPPER","LOWER","TITLE","SMALL_CAPS","SMALL_CAPS_FORCED"].includes(e.textCase)||!["NONE","UNDERLINE","STRIKETHROUGH"].includes(e.textDecoration))return i("decoration-unqualified");let c=y(e.fills,!0);if(!c||"issue"in c||c.paint.blendMode!=="NORMAL")return i("paint-unqualified");a.push({start:e.start,end:e.end,fontName:{family:r.family,style:r.style,...g===void 0?{}:{variationSettings:g}},fontSize:e.fontSize,fontWeight:e.fontWeight,lineHeight:t.unit==="AUTO"?{unit:"AUTO"}:{unit:t.unit,value:t.value},letterSpacing:{unit:p.unit,value:p.value},textCase:e.textCase,textDecoration:e.textDecoration,fill:c}),f=e.end}return f!==n.length?i("range-incomplete"):{characters:n,runs:a}}return R(L);})();
+"use strict";var TextAppearanceCapture=(()=>{var m=Object.defineProperty;var A=Object.getOwnPropertyDescriptor;var S=Object.getOwnPropertyNames;var x=Object.prototype.hasOwnProperty;var O=(n,u)=>{for(var i in u)m(n,i,{get:u[i],enumerable:!0})},L=(n,u,i,s)=>{if(u&&typeof u=="object"||typeof u=="function")for(let o of S(u))!x.call(n,o)&&o!==i&&m(n,o,{get:()=>u[o],enumerable:!(s=A(u,o))||s.enumerable});return n};var R=n=>L(m({},"__esModule",{value:!0}),n);var v={};O(v,{observeTextAppearance:()=>N});function y(n,u=!1){if(!Array.isArray(n))return;let i=n.filter(t=>t&&t.visible!==!1);if(!i.length||!u&&!i.some(t=>t.blendMode!==void 0&&t.blendMode!=="NORMAL"))return;if(i.length!==1||i[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let s=i[0],o=s.color,a=s.blendMode===void 0?"NORMAL":s.blendMode;if(a!=="MULTIPLY"&&a!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let f=t=>typeof t=="number"&&Number.isFinite(t)&&t>=0&&t<=1&&Math.fround(t)===t,e=s.opacity===void 0?1:s.opacity;if(!o||![o.r,o.g,o.b,e].every(f)||o.a!==void 0&&o.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let r=s.boundVariables?.color;return r!==void 0&&(!r||r.type!=="VARIABLE_ALIAS"||typeof r.id!="string"||!r.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:o.r,g:o.g,b:o.b},opacity:e,blendMode:a},...r?{variableId:r.id}:{}}}function N(n,u){if(typeof n!="string"||!n.length||!Array.isArray(u)||!u.length)return;let i=e=>({issue:"text-appearance-"+e});if(n.length>65536||u.length>256)return i("budget-exceeded");let s=e=>typeof e=="number"&&Number.isFinite(e),o=e=>e===0||e===n.length||!(n.charCodeAt(e-1)>=55296&&n.charCodeAt(e-1)<=56319&&n.charCodeAt(e)>=56320&&n.charCodeAt(e)<=57343),a=[],f=0;for(let e of u){if(!e||!Number.isInteger(e.start)||!Number.isInteger(e.end)||e.start!==f||e.end<=e.start||e.end>n.length||!o(e.start)||!o(e.end)||e.characters!==n.slice(e.start,e.end))return i("range-unqualified");let r=e.fontName,t=e.lineHeight,c=e.letterSpacing;if(!r||typeof r.family!="string"||!r.family.trim()||typeof r.style!="string"||!r.style.trim()||!s(e.fontSize)||e.fontSize<=0||!s(e.fontWeight)||e.fontWeight<1||e.fontWeight>1e3)return i("font-unqualified");let g;if(r.variationSettings!==void 0){let l=r.variationSettings;if(!l||typeof l!="object"||Array.isArray(l)||![Object.prototype,null].includes(Object.getPrototypeOf(l))||Reflect.ownKeys(l).some(d=>{let b=Object.getOwnPropertyDescriptor(l,d);return typeof d!="string"||!/^[\x20-\x7e]{4}$/.test(d)||!b||!b.enumerable||!("value"in b)||!s(b.value)}))return i("font-unqualified");g=Object.fromEntries(Object.keys(l).map(d=>[d,l[d]]))}if(!t||!["AUTO","PIXELS","PERCENT"].includes(t.unit)||t.unit!=="AUTO"&&(!s(t.value)||t.value<0)||!c||!["PIXELS","PERCENT"].includes(c.unit)||!s(c.value))return i("spacing-unqualified");if(!["ORIGINAL","UPPER","LOWER","TITLE","SMALL_CAPS","SMALL_CAPS_FORCED"].includes(e.textCase)||!["NONE","UNDERLINE","STRIKETHROUGH"].includes(e.textDecoration))return i("decoration-unqualified");let p=y(e.fills,!0);if(!p||"issue"in p||p.paint.blendMode!=="NORMAL")return i("paint-unqualified");a.push({start:e.start,end:e.end,fontName:{family:r.family,style:r.style,...g===void 0?{}:{variationSettings:g}},fontSize:e.fontSize,fontWeight:e.fontWeight,lineHeight:t.unit==="AUTO"?{unit:"AUTO"}:{unit:t.unit,value:t.value},letterSpacing:{unit:c.unit,value:c.value},textCase:e.textCase,textDecoration:e.textDecoration,fill:p}),f=e.end}return f!==n.length?i("range-incomplete"):{characters:n,runs:a}}return R(v);})();
 // END SHARED TEXT APPEARANCE
 function captureTextAppearance(node) {
  if(!node.characters || typeof node.getStyledTextSegments !== 'function')return undefined;
@@ -1014,7 +1014,7 @@ const dumpPaint = async (paints, nodePath, field, consumer) => {
 };
 
 // BEGIN SHARED SOLID FILL OBSERVATION
-"use strict";var SolidFillCapture=(()=>{var a=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var b=Object.getOwnPropertyNames;var m=Object.prototype.hasOwnProperty;var y=(t,r)=>{for(var s in r)a(t,s,{get:r[s],enumerable:!0})},g=(t,r,s,o)=>{if(r&&typeof r=="object"||typeof r=="function")for(let i of b(r))!m.call(t,i)&&i!==s&&a(t,i,{get:()=>r[i],enumerable:!(o=p(r,i))||o.enumerable});return t};var M=t=>g(a({},"__esModule",{value:!0}),t);var h={};y(h,{composeNormalSolidStrokePaints:()=>S,observeSolidFillComposition:()=>A});function A(t,r=!1){if(!Array.isArray(t))return;let s=t.filter(n=>n&&n.visible!==!1);if(!s.length||!r&&!s.some(n=>n.blendMode!==void 0&&n.blendMode!=="NORMAL"))return;if(s.length!==1||s[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let o=s[0],i=o.color,e=o.blendMode===void 0?"NORMAL":o.blendMode;if(e!=="MULTIPLY"&&e!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let l=n=>typeof n=="number"&&Number.isFinite(n)&&n>=0&&n<=1&&Math.fround(n)===n,u=o.opacity===void 0?1:o.opacity;if(!i||![i.r,i.g,i.b,u].every(l)||i.a!==void 0&&i.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let d=o.boundVariables?.color;return d!==void 0&&(!d||d.type!=="VARIABLE_ALIAS"||typeof d.id!="string"||!d.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:i.r,g:i.g,b:i.b},opacity:u,blendMode:e},...d?{variableId:d.id}:{}}}function S(t){if(!Array.isArray(t))return;let r=t.filter(e=>e&&e.visible!==!1);if(r.length<2)return;let s=e=>typeof e=="number"&&Number.isFinite(e)&&e>=0&&e<=1,o=0,i=[0,0,0];for(let e of r){let l=e.color,u=e.opacity??1,d=l?.a??1;if(e.type!=="SOLID"||e.blendMode!==void 0&&e.blendMode!=="NORMAL"||!l||![l.r,l.g,l.b,u,d].every(s))return;let n=u*d;i=i.map((f,c)=>[l.r,l.g,l.b][c]*n+f*(1-n)),o=n+o*(1-n)}return{hex:i.map(e=>Math.round((o?e/o:0)*255).toString(16).padStart(2,"0")).join(""),...o<1?{alpha:o}:{}}}return M(h);})();
+"use strict";var SolidFillCapture=(()=>{var f=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var y=Object.getOwnPropertyNames;var m=Object.prototype.hasOwnProperty;var A=(t,r)=>{for(var d in r)f(t,d,{get:r[d],enumerable:!0})},g=(t,r,d,i)=>{if(r&&typeof r=="object"||typeof r=="function")for(let o of y(r))!m.call(t,o)&&o!==d&&f(t,o,{get:()=>r[o],enumerable:!(i=p(r,o))||i.enumerable});return t};var M=t=>g(f({},"__esModule",{value:!0}),t);var h={};A(h,{composeNormalSolidFillPaints:()=>L,composeNormalSolidStrokePaints:()=>c,observeSolidFillComposition:()=>S});function S(t,r=!1){if(!Array.isArray(t))return;let d=t.filter(e=>e&&e.visible!==!1);if(!d.length||!r&&!d.some(e=>e.blendMode!==void 0&&e.blendMode!=="NORMAL"))return;if(d.length!==1||d[0].type!=="SOLID")return{issue:"solid-fill-composition-source-paint-stack-unqualified"};let i=d[0],o=i.color,n=i.blendMode===void 0?"NORMAL":i.blendMode;if(n!=="MULTIPLY"&&n!=="NORMAL")return{issue:"solid-fill-composition-source-blend-unqualified"};let s=e=>typeof e=="number"&&Number.isFinite(e)&&e>=0&&e<=1&&Math.fround(e)===e,l=i.opacity===void 0?1:i.opacity;if(!o||![o.r,o.g,o.b,l].every(s)||o.a!==void 0&&o.a!==1)return{issue:"solid-fill-composition-source-values-unqualified"};let u=i.boundVariables?.color;return u!==void 0&&(!u||u.type!=="VARIABLE_ALIAS"||typeof u.id!="string"||!u.id)?{issue:"solid-fill-composition-source-variable-unqualified"}:{paint:{color:{r:o.r,g:o.g,b:o.b},opacity:l,blendMode:n},...u?{variableId:u.id}:{}}}function c(t){if(!Array.isArray(t))return;let r=t.filter(n=>n&&n.visible!==!1);if(r.length<2)return;let d=n=>typeof n=="number"&&Number.isFinite(n)&&n>=0&&n<=1,i=0,o=[0,0,0];for(let n of r){let s=n.color,l=n.opacity??1,u=s?.a??1;if(n.type!=="SOLID"||n.blendMode!==void 0&&n.blendMode!=="NORMAL"||!s||![s.r,s.g,s.b,l,u].every(d))return;let e=l*u;o=o.map((a,b)=>[s.r,s.g,s.b][b]*e+a*(1-e)),i=e+i*(1-e)}return{hex:o.map(n=>Math.round((i?n/i:0)*255).toString(16).padStart(2,"0")).join(""),...i<1?{alpha:i}:{}}}function L(t){if(!Array.isArray(t))return;let r=0,d=0,i=n=>n!==null&&typeof n=="object"&&!Array.isArray(n),o=n=>typeof n=="number"&&Number.isFinite(n)&&n>=0&&n<=1;for(let n of t){if(!i(n))return;if(n.visible===!1)continue;if(n.visible!==void 0&&n.visible!==!0)return;let s=n.color,l=n.opacity===void 0?1:n.opacity;if(n.type!=="SOLID"||n.blendMode!==void 0&&n.blendMode!=="NORMAL"||!i(s)||![s.r,s.g,s.b,l,s.a===void 0?1:s.a].every(o))return;let u=n.boundVariables;if(u!==void 0&&(!i(u)||Object.keys(u).some(a=>a!=="color")))return;let e=i(u)?u.color:void 0;if(e!==void 0){if(!i(e)||Object.keys(e).some(a=>a!=="type"&&a!=="id")||e.type!=="VARIABLE_ALIAS"||typeof e.id!="string"||!e.id.trim())return;d++}r++}if(!(r<2||d!==0&&d!==r))return c(t)}return M(h);})();
 // END SHARED SOLID FILL OBSERVATION
 
 const round4 = (v) => Math.round(v * 10000) / 10000;
@@ -1067,7 +1067,8 @@ const dumpGradient = async (p, nodePath, consumer) => {
   return out;
 };
 
-// dump v1.16: the FILL STACK dumper — the first visible SOLID (dumpPaint's
+// The FILL STACK dumper first composites qualified NORMAL solid stacks as
+// provisional literals. Other stacks retain the first visible SOLID (dumpPaint's
 // selection rule, spelling parity via dumpPaint itself) PLUS the first
 // visible GRADIENT_LINEAR drawn ABOVE it (Figma paints draw bottom-to-top,
 // so solid-below-gradient is exactly CSS background-color under
@@ -1078,6 +1079,16 @@ const dumpFillStack = async (node, nodePath) => {
   const paints = node.fills;
   if (!Array.isArray(paints)) return { fill: null, gradient: null }; // figma.mixed
   const visibles = paints.filter((x) => x.visible !== false);
+  const composed=SolidFillCapture.composeNormalSolidFillPaints(paints);
+  if(composed){
+    // Preserve consumer/variable observations independently of the literal.
+    for(const paint of visibles){
+      const alias=paint.boundVariables && paint.boundVariables.color;
+      if(alias)await varNameById(alias.id,node);
+    }
+    if(nodePath)degrade('fill-stack-resolved',nodePath,visibles.length + ' NORMAL solid fill paints composed as a provisional literal; individual paint layers and their variable bindings are not recreated; source stack qualification remains unchanged');
+    return {fill:composed,gradient:null};
+  }
   const solid = visibles.find((x) => x.type === 'SOLID');
   const grad = visibles.find((x) => x.type === 'GRADIENT_LINEAR');
   const gradCarriable = grad && (!solid || visibles.indexOf(grad) > visibles.indexOf(solid));
@@ -1390,6 +1401,30 @@ async function captureNativeImageAsset(hash) {
   return pending;
 }
 // --- NATIVE GROUP AND IMAGE FACTS (end) ------------------------------------
+
+function observeRectStrokePattern(node, pattern) {
+  if (!['FRAME','COMPONENT'].includes(node.type) || !['HORIZONTAL','VERTICAL'].includes(node.layoutMode) ||
+      node.strokeAlign !== 'INSIDE' || node.strokesIncludedInLayout === true || node.visible === false ||
+      (node.opacity !== undefined && node.opacity !== 1) || (node.cornerSmoothing ?? 0) !== 0 ||
+      (node.rotation ?? 0) !== 0 || ![undefined,'NONE'].includes(node.strokeCap) || ![undefined,'MITER'].includes(node.strokeJoin) ||
+      !Number.isFinite(node.strokeWeight) || node.strokeWeight <= 0 ||
+      (node.complexStrokeProperties?.strokeType !== undefined && node.complexStrokeProperties.strokeType !== 'BASIC')) return;
+  const radius=node.cornerRadius ?? 0;
+  if (!Number.isFinite(radius) || radius < 0 ||
+      node.rectangleCornerRadii?.some((v)=>v!==radius) ||
+      node.individualStrokeWeights && Object.values(node.individualStrokeWeights).some(v=>v!==node.strokeWeight)) return;
+  if (!Array.isArray(pattern) || ![0,2].includes(pattern.length) ||
+      !Array.from({length:pattern.length},(_,i)=>Object.hasOwn(pattern,i)).every(Boolean) ||
+      pattern.some(v=>typeof v!=='number'||!Number.isFinite(v)||v<=0||v>1e6)) return;
+  const paints=Array.isArray(node.strokes)?node.strokes.filter((p)=>p.visible!==false):[];
+  // Solid multi-paint geometry is admitted by the same existing compositor;
+  // nonempty multi-paint dash patterns remain unsupported.
+  const admitted=paints.length===1
+    ? paints[0].type==='SOLID' && (paints[0].blendMode ?? 'NORMAL')==='NORMAL'
+    : pattern.length===0 && SolidFillCapture.composeNormalSolidStrokePaints(paints)!==undefined;
+  if (!admitted || typeof node.id!=='string' || !node.id) return;
+  return {nodeId:node.id,weight:node.strokeWeight,radius,dashes:pattern.slice()};
+}
 
 async function dumpNode(node, nodePath, parent, captureChildren = true) {
   const out = { name: node.name, type: node.type, nodeId: node.id };
@@ -1751,9 +1786,8 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
   }
 
   if (node.type !== 'TEXT') {
-    // dump v1.16: the fill STACK — first visible SOLID plus a GRADIENT_LINEAR
-    // above it (see dumpFillStack). Solid-only stacks are byte-identical to
-    // the v1.15 projection.
+    // Qualified NORMAL solid stacks become provisional literals. Other stacks
+    // retain the first visible SOLID plus a GRADIENT_LINEAR above it.
     const stack = 'fills' in node ? await dumpFillStack(node, nodePath) : { fill: null, gradient: null };
     const fill = stack.fill;
     if (fill) out.fill = fill;
@@ -1815,7 +1849,9 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
       if (out.strokeWeight === undefined && out.strokeWeights === undefined) {
         degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + sideWeights.map(String).join(', ') + '] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) — no single strokeWeight and a side is not a finite non-negative number, so the four weights cannot be carried as strokeWeights (dump v1.34); per-side weights dropped');
       }
-      if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
+      const pattern=(!parent || parent.type==='COMPONENT_SET') ? observeRectStrokePattern(node,node.dashPattern) : undefined;
+      if(pattern)out.rectStrokePattern=pattern;
+      if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0 && !pattern) {
         degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] (CSS border-style: dashed) — dashed strokes have no dump v1 projection; the stroke renders as border-style: solid');
       }
       // OUTSIDE and INSIDE both LOWER (outline / border). CENTER straddles
@@ -2647,7 +2683,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.77',
+    dumpVersion: '1.79',
   },
 };
 dumps._degradations = degradations;

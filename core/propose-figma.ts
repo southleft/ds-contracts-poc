@@ -2473,6 +2473,9 @@ interface MintCapture {
 }
 
 interface Ctx {
+  /** Partial drawing paint settles after shared size/root targets, so an
+   * unpainted occurrence keeps the exact original child input. */
+  partialDrawingInk?: Array<{component:Record<string,unknown>;target:Record<string,string>;painted:NonNullable<Part['presenceByCombination']>;inherited:NonNullable<Part['presenceByCombination']>;where:string;selfKey:string}>;
   structuralAvailabilitySource?: DumpSet;
   guardedDrawnPartDomain?: boolean;
   sourcePartMatrixVerified?: boolean;
@@ -11355,11 +11358,80 @@ function carrySlotDefaultInk(m: Merged, part: Record<string,unknown>, slot: Reco
   }
 }
 
+/** Only an explicit typed paint or positively identified unedited occurrence
+ * may enter this partition. Unknown overrides are not absence. */
+function queuePartialDrawingInk(m:Merged,component:Record<string,unknown>,paints:Array<DumpNode['fill']>,inherited:boolean[],ctx:Ctx,where:string,selfKey:string):boolean {
+  if(!ctx.mint||!ctx.axes.length||m.occ.length!==paints.length||m.occ.length!==inherited.length||
+      !paints.some(Boolean)||!inherited.some(Boolean)||paints.some((paint,i)=>!paint&&!inherited[i]||paint&&inherited[i])||
+      new Set(m.occ.map(o=>o.variant)).size!==m.occ.length||m.occ.some(o=>!ctx.totalVariants.includes(o.variant)))return false;
+  const byVariant=new Map(m.occ.map((o,i)=>[o.variant,!!paints[i]]));
+  const axes=ctx.axes.map(a=>({prop:a.propName,values:a.values.map(v=>a.omitted?.unsetValue===v?null:axisValue(a,v))}));
+  const rows=ctx.totalVariants.map(variant=>({variant,values:ctx.axes.map(a=>{const raw=axisValuesOf(variant)[a.property];return a.omitted?.unsetValue===raw?null:axisValue(a,raw);})}));
+  const domain=sparseFence?.drawn?.map(tuple=>ctx.axes.map(a=>a.omitted?.unsetValue===tuple[a.property]?null:axisValue(a,tuple[a.property])));
+  const painted=inferPresenceByCombination(axes,rows.map(row=>({values:row.values,present:byVariant.get(row.variant)===true})),1,domain);
+  const unpainted=inferPresenceByCombination(axes,rows.map(row=>({values:row.values,present:byVariant.get(row.variant)===false})),1,domain);
+  if(!painted||!unpainted)return false;
+  const target:Record<string,string>={};
+  mintInstanceInk(ctx,target,where,m.occ.flatMap((o,i)=>paints[i]?[{variant:o.variant,value:paintCssHex(paints[i]!)}]:[]));
+  ctx.mint.observations.at(-1)!.partAbsentCombos=ctx.totalVariants.filter(v=>byVariant.get(v)!==true).map(v=>ctx.mint!.axisValuesByVariant.get(v)??{});
+  (ctx.partialDrawingInk??=[]).push({component,target,painted,inherited:unpainted,where,selfKey});
+  return true;
+}
+
+/** Keep both branches at the original sibling position. No extra layout box,
+ * child default substitution, or conditional style value is introduced. */
+function settlePartialDrawingInk(anatomy:Record<string,unknown>,ctx:Ctx):void {
+  for(const record of ctx.partialDrawingInk??[]){
+    const found:Array<{owner:Record<string,unknown>;key:string;part:Record<string,unknown>;availabilityOwner:boolean}> = [];
+    const visit=(owner:Record<string,unknown>,availabilityOwner=false)=>{
+      availabilityOwner ||= owner.availabilityByCombination!==undefined;
+      for(const [key,value] of Object.entries(owner.parts as Record<string,Record<string,unknown>>??{})){
+        if(value.component===record.component)found.push({owner,key,part:value,availabilityOwner});
+        visit(value,availabilityOwner);
+      }
+    };
+    for(const root of Object.values(anatomy))if(root&&typeof root==='object')visit(root as Record<string,unknown>);
+    const hit=found.length===1?found[0]:undefined;
+    const routes=hit?.owner.component as {contentSlots?:Record<string,string[]>}|undefined;
+    const slot=hit?.owner.slot as {renderDefault?:boolean;defaultContent?:Array<{id:string;props?:unknown;text?:unknown}>}|undefined;
+    const defaults=slot?.defaultContent;
+    const slotMatches=!slot||slot.renderDefault===true&&defaults?.length===1&&defaults[0].id===record.component.id&&
+      canonicalJson(defaults[0].props??{})===canonicalJson(record.component.props??{})&&defaults[0].text===record.component.text;
+    if(!hit||hit.availabilityOwner||!slotMatches||!record.target.color||hit.part.presenceByCombination||
+        Object.keys(hit.part).some(key=>key!=='component'&&key!=='visibleWhen')||
+        Object.values(routes?.contentSlots??{}).some(keys=>keys.includes(hit.key))||
+        (record.component.overrides as Record<string,unknown>|undefined)?.color!==undefined){
+      ctx.notes.push(record.where+': partial-instance-ink-not-carried — final child owner, paint classification or presence is not exact; review');continue;
+    }
+    const paintedKey=partKey('paintedContent',ctx,record.where+'/paintedContent',record.selfKey);
+    const painted={...hit.part,component:{...record.component,overrides:{...record.component.overrides as Record<string,string>|undefined,color:record.target.color}},presenceByCombination:record.painted};
+    hit.part.presenceByCombination=record.inherited;
+    if(slot)slot.defaultContent=[...defaults!,structuredClone(defaults![0])];
+    hit.owner.parts=Object.fromEntries(Object.entries(hit.owner.parts as Record<string,unknown>).flatMap(([key,part])=>key===hit.key?[[key,part],[paintedKey,painted]]:[[key,part]]));
+    ctx.notes.push(record.where+': identity-qualified partial drawing ink retained in disjoint source-combination branches; unedited occurrences keep the original child input');
+  }
+}
+
 function carrySlotDefaultDrawingInk(m: Merged, part: Record<string,unknown>, slot: Record<string,unknown>, ctx:Ctx, where:string, selfKey:string) {
   const items = slot.defaultContent as Array<{id:string;props?:Record<string,string|boolean>;text?:string}> | undefined;
   if (!ctx.mint || !slot.renderDefault || part.parts || items?.length !== 1) return;
   const item=items[0], paints=m.occ.map(o=>directInstanceInk(o.node,item.id,ctx,true));
-  if (!paints.every(Boolean)) return;
+  if (!paints.every(Boolean)) {
+    const component:Record<string,unknown>={...item};
+    const exact=m.occ.map((o,i)=>{
+      const drawing=directDrawingChild(o.node,item.id,ctx),h=o.node.hostOverrides?.length===1?o.node.hostOverrides[0]:undefined,t=h?.solidFillTarget;
+      return drawing?.path.shape?.kind==='path'&&paints[i]&&h?.fields.length===1&&h.fields[0]==='fills'&&h.fill?.hex&&
+        !!t&&t.instanceId===o.node.nodeId&&t.componentId===drawing.anchor.nodeId&&t.instancePath.length===0&&JSON.stringify(t.childPath)==='[0]'?paints[i]:undefined;
+    });
+    const inherited=m.occ.map(o=>{
+      const drawing=directDrawingChild(o.node,item.id,ctx),geometry=o.node.instanceGeometry;
+      return !o.node.hostOverrides?.length&&!o.node.instanceVectorContent&&!!drawing&&!!o.node.nodeId&&
+        geometry?.nodeId===o.node.nodeId&&geometry.componentId===drawing.anchor.nodeId;
+    });
+    if(queuePartialDrawingInk(m,component,exact,inherited,ctx,where,selfKey))
+      part.parts={[partKey('defaultContent',ctx,`${where}/defaultContent`,selfKey)]:{component}};
+    return;
+  }
   const component:Record<string,unknown>={...item}, target:Record<string,string>={};
   mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
   const strokes=m.occ.map(o=>directInstanceInsideStroke(o.node,item.id,ctx));
@@ -11802,6 +11874,13 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
       if (!prior) ctx.mint.refOverrides.push({component:selected,target:ink});
       ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
       ctx.notes.push(`${where}: identity-qualified caller glyph fill carried through the child's declared color channel; the standalone main keeps its own ink`);
+    } else {
+      const inherited=m.occ.map((o,i)=>{
+        const observed=sizes[i];
+        return !o.node.hostOverrides?.length&&!!observed?.nodeId&&observed.componentId===firstSwap.id&&
+          Array.isArray(observed.path)&&observed.path.length>0&&observed.path.length<=8&&observed.path.every(index=>Number.isSafeInteger(index)&&index>=0);
+      });
+      queuePartialDrawingInk(m,selected,rows,inherited,ctx,`${where}.selectedContent`,selfKey);
     }
   }
   if (contentSlot !== 'children') component.contentSlot = contentSlot;
@@ -18722,6 +18801,7 @@ function proposeFromDumpFencedImpl(
     }
   }
 
+  settlePartialDrawingInk(contract.anatomy as Record<string,unknown>,ctx);
   settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
   settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); // dump v1.36
   // Refuse to emit an unusable proposal.
@@ -18948,6 +19028,24 @@ function proposeFromDumpFencedImpl(
         return {state,props};
       }));
     if(stateRows.length)(validationContract as any).bindings.figma.statePreviewRows=stateRows;
+  }
+  if(merged.occ.some(o=>o.node.rectStrokePattern?.dashes.length)){
+    const p=(validationContract as unknown as Contract).anatomy.root;
+    const sourceAxes=ctx.axes.filter(a=>!a.omitted && !isBooleanAxis(a));
+    const qualified=!statePromo && sourceAxes.length===ctx.axes.length && sourceAxes.length>0 && sourceAxes.length<=3 &&
+      merged.occ.length===ctx.totalVariants.length && p?.strokesIncludedInLayout===false &&
+      !p.component&&!p.slot&&!p.repeat&&!p.shape&&!p.mask&&!p.icon&&p.text===undefined&&!p.content&&
+      !p.solidFillComposition&&!p.solidFillCompositionByCombination &&
+      ['div','section','article','button'].includes((validationContract as unknown as Contract).semantics.element) &&
+      merged.occ.every(o=>{const s=o.node.rectStrokePattern;return s&&s.nodeId===o.node.nodeId&&s.weight===o.node.strokeWeight&&s.radius===(o.node.cornerRadius??0)&&
+        o.node.strokeAlign==='INSIDE'&&o.node.strokesIncludedInLayout===false&&!o.node.strokeWeights&&
+        [0,2].includes(s.dashes.length)&&s.dashes.every(d=>Number.isFinite(d)&&d>0&&d<=1e6)&&
+        sourceAxes.every(a=>axisValuesOf(o.variant)[a.property]!==undefined);});
+    if(qualified){
+      p.rectStrokePatternByCombination={props:sourceAxes.map(a=>a.propName),rows:merged.occ.map(o=>({
+        values:sourceAxes.map(a=>String(axisValue(a,axisValuesOf(o.variant)[a.property]))),dashes:[...o.node.rectStrokePattern!.dashes]}))};
+      ctx.notes.push(`${where}: exact rectangular stroke dash/gap lengths retained for complete source tuples; React projects a layout-neutral SVG stroke; native-rect-stroke-pattern-unsupported remains explicit`);
+    }else ctx.notes.push(`${where}: rect-stroke-pattern-source-unqualified; existing solid approximation remains, source dash styling is not qualified`);
   }
   const parsedContract = ContractSchema.parse(validationContract);
   const jointErrors = jointTokenTableErrors(parsedContract);

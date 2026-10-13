@@ -4,7 +4,8 @@ import {observeLocalGeometry} from '../local-geometry.js';
 import { restImagePaints } from './image-assets.js';
 import {observeInstanceGeometry} from '../instance-geometry.js';
 import {observeInstanceComposition} from './observed-composition.js';
-import {observeSolidFillComposition,composeNormalSolidStrokePaints} from '../solid-fill-observation.js';
+import {observeRectStrokePattern} from '../rect-stroke-pattern.js';
+import {observeSolidFillComposition,composeNormalSolidStrokePaints,composeNormalSolidFillPaints} from '../solid-fill-observation.js';
 import { networkPath } from './vector-network.js';
 import { strokedPathGeometryIssue } from '../../../packages/schema/src/stroked-path.js';
 import { strokeSvgGeometry } from './stroke-svg.js';
@@ -508,6 +509,7 @@ export type MapDegradationCode =
   // cannot carry is a RECEIPT now — the silent-loss census hit zero.
   | 'paint-stack-truncated'
   | 'stroke-stack-resolved'
+  | 'fill-stack-resolved'
   | 'stroke-weights-nonuniform'
   | 'stroke-style-unsupported'
   // dump v1.44 (plugin parity, dump.plugin.js since v1.11/v1.13): a
@@ -950,8 +952,9 @@ function mapGradient(p: RestPaint, ctx: Ctx, nodePath: string): DumpGradient | u
   return out;
 }
 
-/** The FILL STACK rule (dump v1.16, non-TEXT nodes — dump.plugin.js
- *  dumpFillStack parity): the first visible SOLID plus the first visible
+/** The FILL STACK rule (non-TEXT nodes — dump.plugin.js parity): qualified
+ *  NORMAL solid stacks become provisional literals; other stacks retain
+ *  the first visible SOLID plus the first visible
  *  GRADIENT_LINEAR drawn ABOVE it (Figma paints draw bottom-to-top, so the
  *  pair is exactly CSS background-color under background-image). A gradient
  *  hidden under a solid keeps the truncation receipt; other paint types keep
@@ -960,6 +963,19 @@ function mapFillStack(node: RestNode, ctx: Ctx, nodePath: string): { fill?: Dump
   const paints = node.fills;
   if (!Array.isArray(paints)) return {};
   const visibles = paints.filter((x) => x.visible !== false);
+  const composed=composeNormalSolidFillPaints(paints);
+  if(composed){
+    // Keep each layer's variable capture/refusal metadata, but never its alias
+    // on the composed literal. Source stack qualification stays independent.
+    for(const [index,paint] of paints.entries()){
+      if(paint.visible===false)continue;
+      const alias=paint.boundVariables?.color;
+      if(alias)resolveVarName(ctx,alias,nodePath,`fills[${index}].color`);
+    }
+    ctx.report.degradations.push({code:'fill-stack-resolved',nodePath,field:'fill',
+      message:`${visibles.length} NORMAL solid fill paints composed as a provisional literal; individual paint layers and their variable bindings are not recreated; source stack qualification remains unchanged`});
+    return {fill:composed};
+  }
   const solid = visibles.find((x) => x.type === 'SOLID');
   const grad = visibles.find((x) => x.type === 'GRADIENT_LINEAR');
   const gradCarriable = grad !== undefined && (solid === undefined || visibles.indexOf(grad) > visibles.indexOf(solid));
@@ -1705,7 +1721,7 @@ function perSideStrokeWeights(node: RestNode): NonNullable<DumpNode['strokeWeigh
   return { top, right, bottom, left };
 }
 
-function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean, shapeCarried: boolean) {
+function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean, shapeCarried: boolean, rootPatternCarried: boolean) {
   if (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     ctx.report.degradations.push({
       code: 'blend-mode-unsupported',
@@ -1758,7 +1774,7 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
       message: `per-side stroke weights [${[w.top, w.right, w.bottom, w.left].map((v) => String(v)).join(', ')}] — a side is not a finite non-negative number, so the four weights cannot be carried as strokeWeights (dump v1.34); per-side weights dropped`,
     });
   }
-  if (strokeDetail && Array.isArray(node.strokeDashes) && node.strokeDashes.length > 0) {
+  if (strokeDetail && Array.isArray(node.strokeDashes) && node.strokeDashes.length > 0 && !rootPatternCarried) {
     ctx.report.degradations.push({
       code: 'stroke-style-unsupported',
       nodePath,
@@ -2059,9 +2075,8 @@ function mapNode(
   const bound = mapBound(node, ctx, nodePath);
   if (bound) out.bound = bound;
 
-  // dump v1.16: non-TEXT fills go through the STACK dumper (SOLID +
-  // GRADIENT_LINEAR above it); TEXT fills keep the single-solid rule (a
-  // gradient text fill stays a named receipt).
+  // Non-TEXT fills use the stack dumper: qualified NORMAL solid composites,
+  // otherwise the legacy SOLID + GRADIENT_LINEAR rule. TEXT remains separate.
   if (node.type !== 'TEXT' && Array.isArray(node.fills) && node.fills.length === 0) out.sourceEmptyFill = true;
   const sourceFillComposition=observeSolidFillComposition(node.fills);
   if (sourceFillComposition) out.sourceFillComposition=sourceFillComposition;
@@ -2080,6 +2095,8 @@ function mapNode(
   const stroke = mapPaint(node.strokes, ctx, nodePath, 'stroke');
   if (stroke) {
     out.stroke = stroke;
+    const pattern=!parent ? observeRectStrokePattern(node,node.strokeDashes ?? []) : undefined;
+    if(pattern)out.rectStrokePattern=pattern;
     // Preserve an observed INSIDE, not an assumed default. State border
     // replacement requires this fact on both the resting and state node.
     // dump v1.44 (dump.plugin.js parity, plugin dump v1.11): EVERY observed
@@ -2183,7 +2200,7 @@ function mapNode(
     if (sizing.vertical === 'FIXED' && node.size && Number.isFinite(node.size.y) && node.size.y >= 0) sizing.height = node.size.y;
     if (Object.keys(sizing).length) out.instanceSizing = sizing;
   }
-  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
+  nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined, out.rectStrokePattern !== undefined);
   // dump v1.4: literal min/max sizing carries as style facts (a drawn
   // minHeight 44 is a tap-target fact) — previously a named degradation.
   // dump v1.30 / FC-DUMP-MINMAX-ZERO-INVENTED: omit Figma's 0 default (same
@@ -2575,7 +2592,9 @@ function mapNode(
 // 1.47: exact NORMAL peer paint for mixed source composition cells.
 // 1.53: instance local affine geometry independent of override authority.
 // 1.56: retain native ellipse arc sweep and hole fraction at source precision.
-export const REST_DUMP_VERSION = '1.63';
+// 1.64: provisional literal projection of qualified NORMAL solid fill stacks.
+// 1.65: source-qualified rectangular stroke-pattern tuple observations.
+export const REST_DUMP_VERSION = '1.65';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin

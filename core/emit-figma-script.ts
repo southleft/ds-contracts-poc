@@ -6381,6 +6381,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
 
 function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
   validateStructuralAvailability(contract);
+  if(walkAnatomy(contract).some(({part})=>part.rectStrokePatternByCombination))throw Error('native-rect-stroke-pattern-unsupported');
   const insideStrokeErrors=instanceInsideStrokeTokenErrors(contract,byId,input.tokens);if(insideStrokeErrors.length)throw Error(insideStrokeErrors.join('; '));
   if(permit!==boundPaintPermit)for(const {part} of walkAnatomy(contract)){const error=solidFillPartTokenError(part,input.tokens);if(error)throw Error(error);}
   if (walkAnatomy(contract).some(({part})=>part.solidFillComposition || part.solidFillCompositionByCombination)) solidFillCompositionRules(contract,undefined,undefined,byId);

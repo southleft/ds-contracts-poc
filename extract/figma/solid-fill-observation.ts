@@ -43,3 +43,35 @@ export function composeNormalSolidStrokePaints(input: unknown): {hex:string;alph
   return {hex:rgb.map(v=>Math.round((alpha?v/alpha:0)*255).toString(16).padStart(2,'0')).join(''),
     ...(alpha<1?{alpha}:{})};
 }
+
+
+/** Static NORMAL fill-stack projection only. A stack is either wholly literal
+ * or wholly bound through valid color aliases; mixed/unsupported bindings stay
+ * on the existing refusal path. Even an all-aliased stack returns only a literal:
+ * its individual live update semantics are not represented by that color.
+ * Source fill observations retain their independent stack qualification issue. */
+export function composeNormalSolidFillPaints(input: unknown): {hex:string;alpha?:number} | undefined {
+  if (!Array.isArray(input)) return;
+  let count=0, boundCount=0;
+  const object=(value:unknown):value is Record<string,unknown>=>value!==null && typeof value==='object' && !Array.isArray(value);
+  const unit=(value:unknown)=>typeof value==='number' && Number.isFinite(value) && value>=0 && value<=1;
+  for (const paint of input) {
+    if (!object(paint)) return;
+    if (paint.visible===false) continue;
+    if (paint.visible!==undefined && paint.visible!==true) return;
+    const color=paint.color, opacity=paint.opacity===undefined?1:paint.opacity;
+    if (paint.type!=='SOLID' || (paint.blendMode!==undefined && paint.blendMode!=='NORMAL') ||
+        !object(color) || ![color.r,color.g,color.b,opacity,color.a===undefined?1:color.a].every(unit)) return;
+    const bindings=paint.boundVariables;
+    if (bindings!==undefined && (!object(bindings) || Object.keys(bindings).some(key=>key!=='color'))) return;
+    const alias=object(bindings)?bindings.color:undefined;
+    if (alias!==undefined) {
+      if (!object(alias) || Object.keys(alias).some(key=>key!=='type' && key!=='id') ||
+          alias.type!=='VARIABLE_ALIAS' || typeof alias.id!=='string' || !alias.id.trim()) return;
+      boundCount++;
+    }
+    count++;
+  }
+  if (count<2 || (boundCount!==0 && boundCount!==count)) return;
+  return composeNormalSolidStrokePaints(input);
+}

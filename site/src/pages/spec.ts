@@ -785,6 +785,15 @@ function layoutPage(): { route: string; html: string } {
         ]),
     ),
     section(
+      "rectangular-stroke-pattern",
+      "Rectangular stroke patterns",
+      ["curated"],
+      `<p><code>part.rectStrokePatternByCombination: { props, rows }</code> carries captured dash and gap lengths for an owned rectangular root. <code>props</code> lists the finite enum variant inputs in table order. Each row contains string <code>values</code> in that order and <code>dashes</code>: an empty array for a solid stroke, or a positive finite <code>[dash, gap]</code> pair in CSS pixels. Every reachable tuple must appear exactly once, and the table must contain a dashed row. Missing, duplicate, extra or invalid tuples refuse. The schema permits up to three axes and 4096 rows; each dash or gap is at most one million pixels.</p>` +
+        `<p>The contract must have a single owned root with <code>strokesIncludedInLayout: false</code>, an ordinary <code>div</code>, <code>section</code>, <code>article</code> or <code>button</code> semantic element, and no state declarations. Component references, slots, repeats, text or shape roots, masks, composed fills, the base <code>absoluteGeometry</code> or <code>absolutePlacement</code> fields, competing border styles, per-side stroke channels, transforms and unequal corner radii are outside this projection.</p>` +
+        `<p>Source inference requires the pattern and matching node identity, stroke width and radius in every captured variant. The source must be a visible, unrotated auto-layout frame or component with an inside stroke, full node opacity, uniform stroke geometry, no corner smoothing and the ordinary cap/join. Dashed rows require a single NORMAL solid stroke paint; solid rows may retain an already-admitted NORMAL solid paint stack. Missing facts or unsupported source geometry leave a named <code>rect-stroke-pattern-source-unqualified</code> note and do not grant this field. Names and screenshots do not supply dash lengths.</p>` +
+        `<p>Both React renderers add a layout-neutral, <code>aria-hidden</code> SVG stroke layer above the root's children. It follows the root's current size, uniform radius and resolved stroke color, including variant and theme changes. It requires browser layout, <code>ResizeObserver</code> and <code>MutationObserver</code>; a missing tuple or unreadable used geometry raises an explicit runtime error. Native Figma emission refuses with <code>native-rect-stroke-pattern-unsupported</code>. CSS-only renderers without the React SVG layer refuse with <code>rect-stroke-pattern-css-renderer-unavailable</code>. This field does not qualify native round trips or general visual fidelity.</p>`,
+    ),
+    section(
       "text-auto-resize",
       "textAutoResize — a text box that sizes itself to its text is a whole number of pixels wide",
       ["curated"],
