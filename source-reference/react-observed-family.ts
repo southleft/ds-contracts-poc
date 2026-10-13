@@ -1,4 +1,6 @@
 import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {inventoryEvidence} from './react-validation-evidence.js';
+import {reactSourceProgramUnchanged} from './react-source-program.js';
 /** A bounded family of already-observed source callers, not an inferred API. */
 import {createHash} from 'node:crypto';
 import {existsSync,lstatSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';
@@ -11,11 +13,12 @@ import {normalizeValue,type CapturedNode} from '../extract/computed/lib.js';
 import {readReactDeclaredCaseMount,type ReactCaseElement} from './react-cohort.js';
 import {readReactRuntimeExport} from './react-runtime-export.js';
 import {reactReferenceUnchanged,type ReactReference} from './react-reference.js';
-import {readReactObservedFamilyPlane,selectReactNativeRequest} from './react-native-evidence.js';
+import {readReactObservedFamilyPlane,readReactObservedFamilyMembers} from './react-native-evidence.js';
 import type {ReactNativeRequest} from './react-native-request.js';
 import type {ReactOwnershipReport} from './react-ownership-run.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
 import {projectReactRootVisual} from './react-root-visual.js';
+import {verifiedReactContextualContent} from './react-contextual-content.js';
 import {reactPropertyPaintedRoot} from './react-property-fonts.js';
 import {prepareReactRootSizing} from './react-root-sizing.js';
 import {compileReactRootSweep,retainReactRootSourceBindings} from './react-root-sweep.js';
@@ -41,6 +44,54 @@ export interface ObservedFamilyMatrix {
 type Plane=ReturnType<typeof readReactObservedFamilyPlane>;
 const verified=new WeakMap<object,{record:ObservedFamilyRecord;planes:Plane[];pin:ObservedFamilyPin}>();
 export interface VerifiedObservedFamily {record:ObservedFamilyRecord;pin:ObservedFamilyPin;planes:Plane[]}
+type PreparationFamily={repo:string;reference:ReactReference;pin:string;family:VerifiedObservedFamily;verify:()=>void};
+type FamilyAssembly={matrix:ObservedFamilyMatrix;source:{revision:string;programSha256:string;evidenceRevision:string}};
+type CommandPreparation={families:PreparationFamily[];assemblies:Map<object,FamilyAssembly>};
+let preparationFamilies:PreparationFamily[]|undefined;
+let commandPreparation:CommandPreparation|undefined;
+/** The caller must finish this synchronous scope before publishing a command.
+ * Only immutable family evidence/assembly is shared; native journals and
+ * operation-specific plans remain freshly read and authenticated. */
+export function withObservedFamilyCommandPreparation<T>(prepare:()=>T):T {
+  assertOutsideEvidenceSnapshot();
+  if(commandPreparation||preparationFamilies)fail('nested-command-preparation');
+  commandPreparation={families:[],assemblies:new Map()};
+  try {return withObservedFamilyPreparation(prepare);}
+  finally {commandPreparation=undefined;}
+}
+/** Prevent a reentrant builder from publishing any journal mutation while
+ * the outer command is still sharing family evidence. */
+export function assertOutsideObservedFamilyCommandPreparation():void {
+  if(commandPreparation)fail('write-during-command-preparation');
+}
+/** One synchronous compiler/evidence preparation only. Separate preparations
+ * remain fresh unless an explicit pre-publication command scope is active.
+ * This never caches operation authorization, journal state or refusals. */
+export function withObservedFamilyPreparation<T>(prepare:()=>T):T {
+  const outer=preparationFamilies,entries:PreparationFamily[]=commandPreparation?.families??[];
+  preparationFamilies=entries;
+  try {
+    const result=prepare();
+    if(result&&typeof (result as any).then==='function')throw Error('react-family-async-preparation');
+    for(const entry of entries)entry.verify();
+    return result;
+  } finally {preparationFamilies=outer;}
+}
+function copyVerifiedFamily(family:VerifiedObservedFamily):VerifiedObservedFamily {
+  const value=verified.get(family);if(!value)fail('verified-evidence-required');
+  const planes=value.planes.map(({contentContext,...plane})=>({...structuredClone(plane),...(contentContext?{contentContext}:{})}));
+  const copy={record:structuredClone(value.record),pin:structuredClone(value.pin),planes};
+  verified.set(copy,value);return copy;
+}
+// Include all declared mount/runtime-route metadata consumed by family
+// derivation. A profile callback is checked by identity separately; any
+// succession-dependent profile values retain reactReferenceUnchanged's check.
+function preparationReferenceIdentity(reference:ReactReference):string {
+  const {profile,...cohort}=reference.cohort;
+  return canonicalJson({id:reference.id,sourceRoot:reference.sourceRoot,files:reference.files,cohort,
+    mountedSourceFiles:reference.mountedSourceFiles,runtimeImports:reference.runtimeImports,
+    runtimeEntryImports:reference.runtimeEntryImports});
+}
 const hash=(x:string|Buffer)=>createHash('sha256').update(x).digest('hex');
 const sha=/^[a-f0-9]{64}$/,caseId=/^[a-z][a-z-]{0,79}$/;
 const reserved=new Set(['children','className','style','ref','key','id','__proto__','constructor','prototype','dangerouslySetInnerHTML']);
@@ -93,8 +144,7 @@ function sourceMount(reference:ReactReference,id:string,target:ObservedFamilyRec
 }
 function derive(repo:string,reference:ReactReference,report:ReactOwnershipReport,selection:ObservedFamilySelection){
   if(!isObservedFamilySelection(selection)||!reactReferenceUnchanged(reference)||reference.id!==report.referenceId)fail('selection-invalid');
-  const requests=selection.caseIds.map(id=>selectReactNativeRequest(repo,report,id));
-  const planes=requests.map(request=>readReactObservedFamilyPlane(repo,reference,request));
+  const {requests,planes}=readReactObservedFamilyMembers(repo,reference,report,selection.caseIds);
   const identity=planes[0].matrix.source;
   const entries=planes.map((p,i)=>{
     if(!equal(p.matrix.source,identity)||p.source.programSha256!==planes[0].source.programSha256)fail('source-identity-differs');
@@ -136,6 +186,11 @@ export function selectObservedFamily(repo:string,reference:ReactReference,report
 }
 export function readObservedFamilyEvidence(repo:string,reference:ReactReference,pin:ObservedFamilyPin):VerifiedObservedFamily {
   if(!isObservedFamilyPin(pin))fail('pin-invalid');const dir=familyDir(repo,pin.id);
+  const repoKey=path.resolve(repo),pinKey=canonicalJson(pin);
+  const referenceIdentity=preparationFamilies?preparationReferenceIdentity(reference):undefined;
+  const referenceProfile=preparationFamilies?reference.cohort.profile:undefined;
+  const saved=preparationFamilies?.find(entry=>entry.repo===repoKey&&entry.reference===reference&&entry.pin===pinKey);
+  if(saved){saved.verify();return copyVerifiedFamily(saved.family);}
   const read=(name:string)=>{const f=path.join(dir,name),s=lstatSync(f);if(!s.isFile()||s.isSymbolicLink()||s.size>1_000_000)fail('record-invalid');return readFileSync(f);};
   const bytes=read('record.json'),inventory=read('integrity.json');
   if(hash(bytes)!==pin.recordSha256||hash(inventory)!==pin.inventorySha256)fail('record-changed');
@@ -144,14 +199,45 @@ export function readObservedFamilyEvidence(repo:string,reference:ReactReference,
   if(hash(canonicalJson(record))!==pin.id||!equal(JSON.parse(inventory.toString()),{version:1,files:{'record.json':pin.recordSha256}})||!record.members?.length)fail('record-invalid');
   const report=JSON.parse(readFileSync(path.join(repo,'private/react-source-ownership',record.referenceId,record.ownership.id,'report.json'),'utf8')) as ReactOwnershipReport;
   const current=derive(repo,reference,report,record.selection);if(!equal(current.record,record))fail('source-facts-changed');
-  const result={...current,pin};
+  const result={...current,pin:structuredClone(pin)};
   // Clone mutable source data, but retain the existing frozen contextual
   // capability: serializing that object would erase its private authority.
   const planes=current.planes.map(({contentContext,...plane})=>({...structuredClone(plane),...(contentContext?{contentContext}:{})}));
-  verified.set(result,{record:structuredClone(current.record),pin:structuredClone(pin),planes});return result;
+  verified.set(result,{record:structuredClone(current.record),pin:structuredClone(pin),planes});
+  if(preparationFamilies){
+    const expectedPin=structuredClone(pin);
+    const archive=path.join(repoKey,'private/react-source-ownership',reference.id,record.ownership.id);
+    const sealBytes=readFileSync(path.join(archive,'integrity.json'));
+    if(hash(sealBytes)!==record.inventorySha256)fail('preparation-evidence-changed');
+    const seal=JSON.parse(sealBytes.toString());
+    const archiveFiles=canonicalJson({...seal.files,'integrity.json':record.inventorySha256});
+    const verify=()=>{
+      // Physical reads deliberately bypass a surrounding display snapshot,
+      // retaining the original directory and safe regular-file checks.
+      familyDir(repoKey,expectedPin.id);
+      if(reference.cohort.profile!==referenceProfile||preparationReferenceIdentity(reference)!==referenceIdentity||
+          !reactReferenceUnchanged(reference)||!reactSourceProgramUnchanged(planes[0].program)||
+          hash(read('record.json'))!==expectedPin.recordSha256||
+          hash(read('integrity.json'))!==expectedPin.inventorySha256||
+          canonicalJson(inventoryEvidence(archive))!==archiveFiles)fail('preparation-evidence-changed');
+      // Cached assembly skips anatomy/projection, so repeat their contextual
+      // capability consumption checks, including external helper inputs.
+      if(commandPreparation)for(const p of planes)
+        verifiedReactContextualContent(p.contentContext,p.program,p.row.ownership!,p.captured.tree);
+    };
+    verify();preparationFamilies.push({repo:repoKey,reference,pin:pinKey,family:result,verify});
+  }
+  return result;
 }
-export function assembleObservedFamily(family:VerifiedObservedFamily):{matrix:ObservedFamilyMatrix;source:{revision:string;programSha256:string;evidenceRevision:string}}{
+export function assembleObservedFamily(family:VerifiedObservedFamily):FamilyAssembly{
   const canonical=verified.get(family);if(!canonical)fail('verified-evidence-required');
+  const command=commandPreparation;
+  const entry=command?.families.find(item=>verified.get(item.family)===canonical);
+  if(entry){
+    entry.verify();
+    const saved=command!.assemblies.get(canonical);
+    if(saved)return structuredClone(saved);
+  }
   const {record,planes}=canonical,axes=[{prop:record.axis.prop,values:record.axis.values}],baseAxisValues={[record.axis.prop]:record.axis.baseValue};
   const roots=new Map<string,CapturedNode>(),projections=new Map<string,ReturnType<typeof projectReactRootVisual>['roots'][number]>(),textPlanes:ReactRootTextPlane[]=[];
   for(const p of planes){
@@ -180,8 +266,10 @@ export function assembleObservedFamily(family:VerifiedObservedFamily):{matrix:Ob
   const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)fail('contract-invalid:'+errors.join(';'));
   const native=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(enriched,new Map([[enriched.id,enriched]]));
   if(!equal(native.variants.map(v=>v.name).sort(),record.members.map(m=>m.variantName).sort()))fail('compiled-membership-changed');
-  return {matrix:{version:1,qualification:'observed-selected-family-root-draft',acceptedContract:null,problems:[],draft:{status:'native-compiled',problems:[],properties:[record.axis.prop],observations:record.members.map(m=>m.caseId),lowerings:[],limitations:['selected-observed-values-only','other-contexts-and-inputs-unqualified','native-fidelity-not-verified'],contract:enriched,tokens,residuals,sizing:sizing.reports,native}},
+  const result:FamilyAssembly={matrix:{version:1,qualification:'observed-selected-family-root-draft',acceptedContract:null,problems:[],draft:{status:'native-compiled',problems:[],properties:[record.axis.prop],observations:record.members.map(m=>m.caseId),lowerings:[],limitations:['selected-observed-values-only','other-contexts-and-inputs-unqualified','native-fidelity-not-verified'],contract:enriched,tokens,residuals,sizing:sizing.reports,native}},
     source:{revision:'sha256:'+record.referenceId,programSha256:record.programSha256,evidenceRevision:record.sourceFactsRevision}};
+  if(entry){entry.verify();command!.assemblies.set(canonical,structuredClone(result));}
+  return result;
 }
 export function observedFamilyMember(family:VerifiedObservedFamily,request:ReactNativeRequest){
   if(!verified.has(family))fail('verified-evidence-required');

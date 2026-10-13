@@ -629,3 +629,44 @@ test("attest-dead is behind the service's same-origin guard, and an unstarted up
   transport.pair(id);
   assert.throws(()=>transport.attestDead(id),/^Error: native-transport-write-attestation-refused$/);assert.equal(reached,false);
 });
+
+
+test('comparison preflight forwards exact lookup identity and refuses ambiguous or stale matches',async t=>{
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'comparison-filter-route-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const {readReactSourceProgram}=await import('./react-source-program.js');
+  const {inventoryEvidence}=await import('./react-validation-evidence.js');
+  const {selectReactNativeRequest}=await import('./react-native-evidence.js');
+  const reference=await buildReactReference(root),owner='10000000-0000-4000-8000-000000000009',parent='10000000-0000-4000-8000-000000000008';
+  const row={id:'button-default',matched:true,problems:[],ownership:{components:[{roots:[''],source:{file:'src/components/ui/button.tsx',exportName:'Button'}}]},
+    propertyMatrix:{heldProps:{}},rootMatrix:{version:1,qualification:'combined-property-root-draft',acceptedContract:null,problems:[],
+      draft:{status:'native-compiled',problems:[],contract:{props:[]},tokens:{ink:'#000'}}}};
+  const report:any={id:owner,referenceId:reference.id,state:'complete',sourceUnchanged:true,rows:[row,{...row,id:'button-other'}]};
+  const dir=path.join(repo,'private/react-source-ownership',reference.id,owner);mkdirSync(dir,{recursive:true});
+  writeFileSync(path.join(dir,'program.json'),JSON.stringify(readReactSourceProgram(root,['src/components/ui/button.tsx'])));
+  writeFileSync(path.join(dir,'report.json'),JSON.stringify(report));
+  writeFileSync(path.join(dir,'integrity.json'),JSON.stringify({version:1,files:inventoryEvidence(dir)}));
+  const main=selectReactNativeRequest(repo,report,'button-default'),queries:unknown[]=[];
+  const match={kind:'comparison',caseId:'button-other',ownershipId:owner,parentOperationId:parent,
+    operation:{id:'10000000-0000-4000-8000-000000000007',sourceCurrent:false}};
+  let matches:unknown[]=[match,{...match,operation:{...match.operation,id:'10000000-0000-4000-8000-000000000006'}}];
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{
+    withReadSnapshot:(read:()=>unknown)=>read(),reactFamilyRequest:()=>null,reactEffectiveRequest:()=>main,
+    listReact:(referenceId:string,kind:unknown,selector:unknown)=>{
+      if(selector===undefined)return [];
+      queries.push({referenceId,kind,selector});return matches;
+    },
+    verifiedReactCallerObservation:(id:string)=>{assert.equal(id,parent);throw Error('selected-parent-required');},
+  }} as any));t.after(()=>handle.close());
+  const call=async(route:string)=>{
+    const req=Readable.from([]);Object.assign(req,{method:'POST',url:'/'+route,headers:{host:'localhost:5181',prefer:'return=minimal'}});
+    let status=0,text='';await handle(req as any,{set statusCode(value:number){status=value;},setHeader(){},end(value:string){text=value;}} as any,route);
+    return {status,value:JSON.parse(text)};
+  };
+  assert.equal((await call('react')).value.id,reference.id);
+  const route=`react/${reference.id}/native-operation/${parent}/compare-case/button-other`;
+  const ambiguous=await call(route);assert.equal(ambiguous.status,409);assert.equal(ambiguous.value.reason,'react-comparison-operation-ambiguous');
+  assert.deepEqual(queries,[{referenceId:reference.id,kind:undefined,selector:{parentOperationId:parent,caseId:'button-other',ownershipId:owner}}]);
+  matches=[match];const stale=await call(route);assert.equal(stale.status,409);assert.equal(stale.value.reason,'react-comparison-source-changed');
+  matches=[];const absent=await call(route);assert.equal(absent.status,409);assert.equal(absent.value.reason,'selected-parent-required','no match still reaches fresh parent verification');
+});

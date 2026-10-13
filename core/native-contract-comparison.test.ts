@@ -1,6 +1,6 @@
 import {refreshedComparisonPlan} from '../source-reference/react-comparison-refresh.js';
 import { nativeComparisonFixture as fixture } from './native-contract-comparison-test-fixture.js';
-import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJobsOptions } from '../source-reference/native-operation-jobs.js';
@@ -894,4 +894,56 @@ test('profile capture rejects changed allocation envelopes and IDs changing with
   assert.notEqual(node.id, before);
   assert.equal(receipt.status, 'refused', JSON.stringify(receipt));
   assert.notEqual(verifyNativeContractComparisonReadback(f.input, receipt).status, 'supported-comparison-structure-observed');
+});
+
+
+test('comparison lookup authenticates exact matches without reopening unrelated source', async t => {
+  const f=await fixture(REACT_NATIVE_FILE_KEY),repo=mkdtempSync(path.join(tmpdir(),'comparison-lookup-'));
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const content:ObservedContentDraft={version:1,status:'compiled-comparison-draft',qualification:'observed-comparison-content-only',
+    acceptedContract:null,nativeQualification:'unqualified',inputRevision:revisionOf('observations'),treeRevision:revisionOf('tree'),fontsRevision:revisionOf('fonts'),
+    contract:f.content,tokens:f.tokens,assets:f.assets,component:f.engine.compileComponentData(f.content,new Map([[f.content.id,f.content]])),
+    receipts:[],residuals:[],problems:[],limitations:['synthetic-test-only']};
+  const root=(caseId:string)=>({version:1 as const,kind:'react-root-draft' as const,referenceId:'a'.repeat(64),
+    ownership:{id:'10000000-0000-4000-8000-000000000010',sha256:'b'.repeat(64)},
+    inventorySha256:'c'.repeat(64),caseId,matrixRevision:revisionOf('matrix')});
+  const request:ReactComparisonRequest={version:3,kind:'react-content-comparison',parentOperationId:f.comparison.parent.operation.id,
+    mainRoot:root('main'),root:root('sample'),content:{id:'10000000-0000-4000-8000-000000000011',reportSha256:'d'.repeat(64),inventorySha256:'e'.repeat(64)}};
+  const unrelated={...request,root:root('other')},calls:string[]=[],stale=new Set<string>();
+  const jobs=createNativeOperationJobs(repo,{prepare:()=>{throw Error('unexpected source adapter');},reactComparison:{
+    prepare:(selected,operation)=>{
+      calls.push(selected.root.caseId);if(stale.has(selected.root.caseId))throw Error('selected source changed');
+      return {visual:{id:selected.root.ownership.id,reportSha256:selected.root.ownership.sha256},
+        preparation:{id:selected.content.id,reportSha256:selected.content.reportSha256},
+        plan:prepareReactComparisonPlan({operation,content,source:f.source,comparison:{...f.comparison,caseId:selected.root.caseId}})};
+    },buildComponent:()=>{throw Error('not used by read-only lookup');},
+  }});
+  const selected=jobs.prepare(request);jobs.prepare(unrelated);
+  const selector={parentOperationId:request.parentOperationId,caseId:request.root.caseId,ownershipId:request.root.ownership.id};
+  const legacy=jobs.listReact(request.root.referenceId).filter(row=>row.kind==='comparison'&&
+    row.parentOperationId===selector.parentOperationId&&row.caseId===selector.caseId&&row.ownershipId===selector.ownershipId);
+  calls.length=0;
+  assert.deepEqual(jobs.listReact(request.root.referenceId,undefined,selector),legacy,'same complete row as the former lookup');
+  assert.deepEqual(calls,['sample'],'unrelated comparison source must not be rederived');
+  calls.length=0;
+  for(const query of [{...selector,caseId:'missing'},{...selector,parentOperationId:'20000000-0000-4000-8000-000000000001'},
+    {...selector,ownershipId:'20000000-0000-4000-8000-000000000002'}])assert.deepEqual(jobs.listReact(request.root.referenceId,undefined,query),[]);
+  assert.deepEqual(jobs.listReact('f'.repeat(64),undefined,selector),[]);assert.deepEqual(calls,[]);
+  stale.add('other');calls.length=0;
+  assert.deepEqual(jobs.listReact(request.root.referenceId,undefined,selector),legacy);
+  assert.deepEqual(calls,['sample']);
+  assert.equal(jobs.listReact(request.root.referenceId).find(row=>row.caseId==='other')!.operation.sourceCurrent,false,'unfiltered listing still checks unrelated source');
+  stale.add('sample');
+  assert.equal(jobs.listReact(request.root.referenceId,undefined,selector)[0].operation.sourceCurrent,false);
+  assert.throws(()=>jobs.dispatch(selected.id,'token-create'),/selected source changed/,'stale selection cannot authorize a write');
+  stale.clear();
+  const dir=path.join(repo,'private/source-native-app/operations',selected.id),plan=path.join(dir,'plan.json'),planBytes=readFileSync(plan);
+  writeFileSync(plan,Buffer.concat([planBytes,Buffer.from(' ')]));
+  assert.throws(()=>jobs.listReact(request.root.referenceId,undefined,selector),/native-operation-artifact-changed/);
+  writeFileSync(plan,planBytes);
+  const header=path.join(dir,'operation.json'),headerBytes=readFileSync(header),invalid=JSON.parse(headerBytes.toString());invalid.version=99;
+  writeFileSync(header,JSON.stringify(invalid));
+  assert.throws(()=>jobs.listReact(request.root.referenceId,undefined,selector),/native-operation-header-invalid/);
+  writeFileSync(header,headerBytes);
+  assert.deepEqual(jobs.listReact(request.root.referenceId,undefined,selector),legacy);
 });
