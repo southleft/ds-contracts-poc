@@ -65,6 +65,7 @@ export function instrumentReactHelperSource(
   const sha256 = createHash("sha256").update(text).digest("hex");
   const bodyModels=plan.kind==='jsx-component'?plan.bodyModels??[]:[];
   const effectModels=[...plan.models,...bodyModels];
+  const consumerWrites=new Map(bodyModels.flatMap(m=>m.writes.filter(w=>w.phase==='render'&&w.source).map(w=>[helperPointKey(w.source!),w] as const)));
   const initializationWrites=new Map(bodyModels.flatMap(m=>m.writes.filter(w=>w.phase==='module-initialization'&&w.source).map(w=>[helperPointKey(w.source!),w] as const)));
   const helper = plan.kind === "jsx-component" ? undefined : plan;
   const initializers=plan.kind==='jsx-component'?plan.initializers??[]:[];
@@ -111,6 +112,7 @@ export function instrumentReactHelperSource(
   const factoryNames=new Map((factoryPlans?.functions??[]).flatMap(p=>p.naming?[[helperPointKey(p.naming.call),p.naming] as const]:[]));
   const points = [
     ...[...consumerLiterals.values()].flatMap(p=>[p.source,p.consumer]),
+    ...[...consumerWrites.values()].map(w=>w.source!),
     ...(helperPlans?.functions??[]).flatMap(p=>[p.source,p.returned,...p.parameters.map(p=>p.source),...p.hooks.flatMap(h=>[h.call,h.callee,...(h.callback?[h.callback]:[]),...(h.dependencies?[h.dependencies]:[])])]),
     ...(factoryPlans?.functions??[]).flatMap(p=>[p.source,p.returned,p.callback,...p.parameters.flatMap(p=>p.bindings.map(b=>b.source)),...(p.naming?[p.naming.call,p.naming.helper,p.naming.nativeAlias]:[])]),
     ...(factoryPlans?.literals??[]).map(p=>p.source),
@@ -340,6 +342,21 @@ export function instrumentReactHelperSource(
           return api('contextInitializationWrite',[literal(key(n.left)),updated.left.expression,literal(write.key),invoke]);
         }
 
+        if(ts.isBinaryExpression(n)&&consumerWrites.has(key(n.left))){
+          if(n.operatorToken.kind!==ts.SyntaxKind.EqualsToken||!(ts.isPropertyAccessExpression(n.left)||ts.isElementAccessExpression(n.left))||!ts.isBinaryExpression(updated)||!(ts.isPropertyAccessExpression(updated.left)||ts.isElementAccessExpression(updated.left)))throw Error('consumer-literal-write-shape-changed');
+          const owner=f.createUniqueName('_dscOwner'),property=f.createUniqueName('_dscKey'),value=f.createUniqueName('_dscValue');
+          const invoke=f.createArrowFunction(undefined,undefined,[owner,property,value].map(id=>f.createParameterDeclaration(undefined,undefined,id)),undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),f.createAssignment(f.createElementAccessExpression(owner,property),value));
+          return api('consumerLiteralWrite',[literal(key(n.left)),updated.left.expression,ts.isPropertyAccessExpression(updated.left)?literal(updated.left.name.text):updated.left.argumentExpression,updated.right,invoke]);
+        }
+        if(ts.isDeleteExpression(n)&&consumerWrites.has(key(n.expression))){
+          if(!ts.isDeleteExpression(updated)||!(ts.isPropertyAccessExpression(updated.expression)||ts.isElementAccessExpression(updated.expression)))throw Error('consumer-literal-delete-shape-changed');
+          const owner=f.createUniqueName('_dscOwner'),property=f.createUniqueName('_dscKey'),invoke=f.createArrowFunction(undefined,undefined,[owner,property].map(id=>f.createParameterDeclaration(undefined,undefined,id)),undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),f.createDeleteExpression(f.createElementAccessExpression(owner,property)));
+          return api('consumerLiteralWrite',[literal(key(n.expression)),updated.expression.expression,ts.isPropertyAccessExpression(updated.expression)?literal(updated.expression.name.text):updated.expression.argumentExpression,f.createVoidZero(),invoke,f.createTrue()]);
+        }
+        if(ts.isCallExpression(n)&&consumerWrites.has(k)){
+          if(!ts.isCallExpression(updated)||!ts.isPropertyAccessExpression(updated.expression)||updated.expression.name.text!=='assign'||updated.questionDotToken)throw Error('consumer-literal-native-write-unmodeled');
+          return api('consumerLiteralAssign',[literal(k),updated.expression,f.createArrayLiteralExpression(updated.arguments)]);
+        }
         if(contextBindingReads.has(k)||contextHelperReads.has(k)){
           if(!ts.isIdentifier(n)&&!ts.isTypeOfExpression(n))throw Error('context-binding-read-changed');
           return api(contextHelperReads.has(k)?'contextHelperRead':'contextBindingRead',[literal(k),updated as ts.Expression]);

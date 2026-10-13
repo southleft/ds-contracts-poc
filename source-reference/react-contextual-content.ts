@@ -262,8 +262,17 @@ export function readReactContextualContent(options: {
     });
   }
   const wrapperProof = readReactWrapperContent({...options, wrappers:options.wrappers??[]});
+  const wrapperInstances=new Set<string>();
   for(const fact of wrapperProof.facts){
-    if(instances.has(fact.instanceId))fail('ambiguous-observation');
+    if(wrapperInstances.has(fact.instanceId))fail('ambiguous-observation');
+    wrapperInstances.add(fact.instanceId);
+    if(instances.has(fact.instanceId)){
+      const existing=facts.find(item=>item.instanceId===fact.instanceId)!;
+      // Independent helper and original-wrapper proofs may establish the same
+      // direct host. Keep both evidence sets without inventing two instances.
+      if(existing.delegatedTarget||fact.delegatedTarget||existing.tag!==fact.tag)fail('ambiguous-observation');
+      continue;
+    }
     instances.add(fact.instanceId);facts.push(fact);
   }
   for(const [file,hash] of Object.entries(wrapperProof.inputs)){

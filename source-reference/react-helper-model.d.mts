@@ -55,6 +55,7 @@ export type HelperModelResult =
       }>;
       writes: Array<{
         phase?:"module-initialization"|"render";
+        assign?:{arguments:ContextConsumerValueShape[]};sequence?:number;before?:ContextConsumerValueShape;after?:ContextConsumerValueShape;value?:ContextConsumerValueShape;
         target: number;
         targetSource?:HelperSourcePoint;
         valueSource?:HelperSourcePoint;
@@ -261,6 +262,7 @@ export type ContextConsumerValueShape =
   | {kind:"array";items:ContextConsumerValueShape[];allocation?:{id:number;source:HelperSourcePoint}}
   | {kind:"jsx";tag:Extract<JsxValueShape,{kind:"jsx"}>["tag"]|{kind:"source-read";source:HelperSourcePoint};key:string|null;source:HelperSourcePoint;props:{kind:"record";fields:Array<[string,ContextConsumerValueShape]>}}
   | {kind:"callback";source:HelperSourcePoint;qualification:"callback-body-unverified";capturePhase:"render-return";
+      allocation?:{id:number;source:HelperSourcePoint;ownerEntry:number;sequence:number};
       captures:Array<{name:string;binding:HelperSourcePoint;value:ContextConsumerValueShape}>;
       dependencies:Array<{name:string;read:HelperSourcePoint;binding?:HelperSourcePoint}>};
 export type ContextConsumerModelResult =
@@ -275,7 +277,9 @@ export type ContextConsumerModelResult =
       hookCalls:ContextConsumerHookCall[];
       contextValues:Array<{id:number;fields:Array<[string,ContextConsumerValueShape]>}>;
       targetReads:Array<{site:HelperSourcePoint;read:HelperSourcePoint}>;
-      contextFunctionCalls:Array<{phase?:"module-initialization"|"render";source:HelperSourcePoint;site:HelperSourcePoint;arguments:ContextConsumerValueShape[];output:ContextConsumerValueShape}>;
+      literalAllocations?:ContextConsumerValueShape[];
+      functionAllocations?:Array<{id:number;source:HelperSourcePoint;ownerEntry:number;sequence:number}>;
+      contextFunctionCalls:Array<{entry?:number;exit?:number;phase?:"module-initialization"|"render";source:HelperSourcePoint;site:HelperSourcePoint;arguments:ContextConsumerValueShape[];output:ContextConsumerValueShape}>;
       mutableBindings:Array<{binding:HelperSourcePoint;value:HelperValueShape}>;
     });
 /** Separate source-only API; never accepted by the existing target runtime guard. */

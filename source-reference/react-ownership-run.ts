@@ -527,6 +527,7 @@ export function reactOwnershipEngine():Record<string,string>{
           "../packages/core/src/validate.ts",
           "react-consumer-literals.ts",
           "react-consumer-literal-runtime.ts",
+          "react-consumer-literal-effects.ts",
           "react-hook-helpers.ts",
           "react-hook-helper-runtime.ts",
           "react-hook-helper-verification.ts",
