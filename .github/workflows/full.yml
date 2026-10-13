@@ -1,3 +1,8 @@
+# Parallel execution: validation and drift run in separate checkouts of the
+# same github.sha with the same Node, lockfile and browser setup. Readiness and
+# the required "full gate sweep" verdict wait for both jobs to succeed.
+# The timings below describe historical serial runs, not a measured speedup.
+#
 # FULL LANE — the comprehensive sweep. Runs on every pull request and every push
 # to main. Slower than `fast`, and the one that has to be green before a merge.
 #
@@ -122,7 +127,10 @@ concurrency:
 
 jobs:
   full:
-    name: full gate sweep
+    name: full validation
+    outputs:
+      eval-artifact-id: ${{ steps.eval-evidence.outputs.artifact-id }}
+      producer-attempt: ${{ steps.eval-source.outputs.producer-attempt }}
     runs-on: ubuntu-latest
     # 2026-08-23: 60 → 120. The lane now carries the eval suite (~35 min) AND
     # extract:computed:drift:remeasure (~37 min of Chromium re-fusing, the
@@ -154,6 +162,7 @@ jobs:
         # (2026-08-22, run 32600919494). .git is ~280 MB; the cost is seconds.
         with:
           fetch-depth: 0
+          ref: ${{ github.sha }}
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -178,6 +187,13 @@ jobs:
       - name: install complete
         id: setup
         run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
+
+      - name: verify exact checkout source
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
 
       # ----------------------------------------------------------- browsers
       # Cache the downloaded Chromium, keyed on the lockfile (playwright-core's
@@ -367,20 +383,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:ceiling:check
 
-      # V1-CLASS-01's drift instrument, RE-MEASURE half (docs/23 §D.32): every
-      # committed captured truth replayed through the CURRENT fusion + emitters
-      # in headless Chromium and scored against the recorded baseline. Every
-      # artifact lands in extract/computed/.drift-remeasure/ (gitignored) via
-      # regate's --scorecard-out; the tracked out/** paths are read only, so a
-      # green run leaves `git status` clean. Cost, measured on the recording
-      # machine (macOS arm64): 7–55s per component (polaris Button, 84,480 cells, several minutes), 104 components, ~37 min —
-      # the gate page is rendered per variant × interaction and scored cell by
-      # cell (carbon Button alone is 21,056 cells). The fast lane runs the
-      # browser-free VERIFY half of the same instrument.
-      - name: extract:computed:drift:remeasure (the committed captures re-fused through the current engine, scored against the baseline)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run extract:computed:drift:remeasure
-
       # Full lane, not fast: it launches Chromium and one of its four cases is
       # a real 10s Playwright screenshot timeout (the un-shootable root), so it
       # costs ~20s — the same reason the ceiling check above lives here.
@@ -548,25 +550,262 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:theme:check
 
-      # THE DEFINITION OF V1, END TO END. Every row of docs/26 runs its
-      # acceptance chain on this commit. --trust-lanes: a command this lane ran
-      # above is cited as this run; a command the fast / catalog-visual lanes
+      # Move only the actual eval measurement to the final readiness job.
+      # A failed validation job may archive diagnostics, but cannot qualify them.
+      - name: bind actual eval measurement to this source and attempt
+        id: eval-source
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import cp from 'node:child_process';
+          import crypto from 'node:crypto';
+          import assert from 'node:assert/strict';
+          const git = (...args) => cp.execFileSync('git', args, { encoding: 'utf8' }).trim();
+          const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+          const record = JSON.parse(fs.readFileSync('evals/.ci/results.json', 'utf8'));
+          assert.equal(git('rev-parse', 'HEAD'), process.env.GITHUB_SHA);
+          assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
+          assert.equal(record.commit, process.env.GITHUB_SHA);
+          assert.equal(record.dirty, false);
+          const binding = { sha: process.env.GITHUB_SHA, tree: git('rev-parse', 'HEAD^{tree}'),
+            runId: process.env.GITHUB_RUN_ID, runAttempt: process.env.GITHUB_RUN_ATTEMPT,
+            node: process.version, lockSha256: sha('package-lock.json'),
+            evalSha256: sha('evals/.ci/results.json') };
+          fs.writeFileSync('evals/.ci/full-source.json', JSON.stringify(binding, null, 2) + '\n', { flag: 'wx' });
+          assert.match(binding.runAttempt ?? '', /^[1-9][0-9]*$/);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `producer-attempt=${binding.runAttempt}\n`);
+          JS
+      - name: retain actual eval measurement for final readiness
+        id: eval-evidence
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: full-eval-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            evals/.ci/results.json
+            evals/.ci/full-source.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  drift:
+    name: full drift remeasure
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: npm ci
+        run: npm ci
+      - name: install complete
+        id: setup
+        run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
+      - name: verify exact checkout source
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+      - name: resolve + prove both browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx tsx .github/scripts/resolve-browsers.ts
+      - name: build @ds-contracts/schema (clean-checkout resolution)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/schema run build
+      - name: build @ds-contracts/core (published engine surface)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/core run build
+      # V1-CLASS-01's drift instrument, RE-MEASURE half (docs/23 §D.32): every
+      # committed captured truth replayed through the CURRENT fusion + emitters
+      # in headless Chromium and scored against the recorded baseline. Every
+      # artifact lands in extract/computed/.drift-remeasure/ (gitignored) via
+      # regate's --scorecard-out; the tracked out/** paths are read only, so a
+      # green run leaves `git status` clean. Cost, measured on the recording
+      # machine (macOS arm64): 7–55s per component (polaris Button, 84,480 cells, several minutes), 104 components, ~37 min —
+      # the gate page is rendered per variant × interaction and scored cell by
+      # cell (carbon Button alone is 21,056 cells). The fast lane runs the
+      # browser-free VERIFY half of the same instrument.
+      - name: extract:computed:drift:remeasure (the committed captures re-fused through the current engine, scored against the baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:drift:remeasure
+
+      - name: verify source unchanged after remeasure
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+  verdict:
+    name: full gate sweep
+    needs: [full, drift]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: npm ci
+        run: npm ci
+      - name: install complete
+        id: setup
+        run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
+      - name: require both actual predecessor successes
+        id: predecessors
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env:
+          CI_LANE_STEP: prep
+          FULL_RESULT: ${{ needs.full.result }}
+          DRIFT_RESULT: ${{ needs.drift.result }}
+          EVAL_ARTIFACT_ID: ${{ needs.full.outputs.eval-artifact-id }}
+          EVAL_PRODUCER_ATTEMPT: ${{ needs.full.outputs.producer-attempt }}
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          assert.equal(process.env.FULL_RESULT, 'success');
+          assert.equal(process.env.DRIFT_RESULT, 'success');
+          assert.match(process.env.EVAL_ARTIFACT_ID ?? '', /^[1-9][0-9]*$/);
+          assert.match(process.env.EVAL_PRODUCER_ATTEMPT ?? '', /^[1-9][0-9]*$/);
+          assert(Number(process.env.EVAL_PRODUCER_ATTEMPT) <= Number(process.env.GITHUB_RUN_ATTEMPT));
+          JS
+      - name: download only this attempt's actual eval measurement
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ needs.full.outputs.eval-artifact-id }}
+          path: evals/.ci
+          merge-multiple: true
+          digest-mismatch: error
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+      - name: resolve + prove both browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx tsx .github/scripts/resolve-browsers.ts
+      # Recreate every normal readiness prerequisite from this exact source.
+      - name: build schema for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/schema run build
+      - name: build core for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/core run build
+      - name: build CLI for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/cli run build
+      - name: build web components for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/emitter-web-components run build
+      - name: build library for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm run build:lib
+      - name: package plugin for readiness
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm run plugin:zip
+
+      # Both same-SHA predecessor jobs are complete before readiness can run.
+      # Same-workflow lane reuse is now backed by those successful job results; a command the fast / catalog-visual lanes
       # run is cited from their completed run for the same commit (gh, bounded
       # wait) and runs here only when no such run exists. --pre-release: the
       # post-publish chain (deploy:check) is DEFERRED by name and the audit
       # ledger's open human rows are NAMED rather than red. The release owner's
       # run on the release commit passes neither flag.
       - name: v1:readiness (every docs/26 row on this commit; lane steps cited, the rest run)
+        id: readiness
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: npm run v1:readiness -- --trust-lanes --pre-release
+          FULL_RESULT: ${{ needs.full.result }}
+          DRIFT_RESULT: ${{ needs.drift.result }}
+          EVAL_ARTIFACT_ID: ${{ needs.full.outputs.eval-artifact-id }}
+          EVAL_PRODUCER_ATTEMPT: ${{ needs.full.outputs.producer-attempt }}
+        run: |
+          if [ "${GITHUB_ACTIONS:-false}" = true ]; then
+            node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import cp from 'node:child_process';
+          import crypto from 'node:crypto';
+          import assert from 'node:assert/strict';
+          assert.equal(process.env.FULL_RESULT, 'success');
+          assert.equal(process.env.DRIFT_RESULT, 'success');
+          assert.match(process.env.EVAL_ARTIFACT_ID ?? '', /^[1-9][0-9]*$/);
+          assert.match(process.env.EVAL_PRODUCER_ATTEMPT ?? '', /^[1-9][0-9]*$/);
+          assert(Number(process.env.EVAL_PRODUCER_ATTEMPT) <= Number(process.env.GITHUB_RUN_ATTEMPT));
+          const git = (...args) => cp.execFileSync('git', args, { encoding: 'utf8' }).trim();
+          const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+          const binding = JSON.parse(fs.readFileSync('evals/.ci/full-source.json', 'utf8'));
+          const record = JSON.parse(fs.readFileSync('evals/.ci/results.json', 'utf8'));
+          assert.equal(binding.sha, process.env.GITHUB_SHA);
+          assert.equal(binding.runId, process.env.GITHUB_RUN_ID);
+          assert.equal(binding.runAttempt, process.env.EVAL_PRODUCER_ATTEMPT);
+          assert.equal(binding.node, process.version);
+          assert.equal(binding.tree, git('rev-parse', 'HEAD^{tree}'));
+          assert.equal(binding.sha, git('rev-parse', 'HEAD'));
+          assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
+          assert.equal(binding.lockSha256, sha('package-lock.json'));
+          assert.equal(binding.evalSha256, sha('evals/.ci/results.json'));
+          assert.equal(record.commit, binding.sha);
+          assert.equal(record.dirty, false);
+          JS
+            npm run eval:carried:check -- --from evals/.ci/results.json
+            node scripts/eval-record-check.mjs evals/.ci/results.json
+          fi
+          if [ "${GITHUB_ACTIONS:-false}" = true ]; then
+            npm run v1:readiness -- --trust-lanes --pre-release --no-prep
+          else
+            npm run v1:readiness -- --trust-lanes --pre-release
+          fi
 
-      # Preserve the actual measurements, including red receipts. Consumers
-      # must verify their commit, dirty flag, and verdict; an archive is not a pass.
+      # Archive only a readiness receipt this job actually completed. Failed
+      # validation retains its actual eval artifact and logs, never a committed
+      # readiness file substituted for a run that did not reach readiness.
       # Exact paths only: hidden-file inclusion is for evals/.ci, never .env files.
       - name: archive exact-commit V1 evidence
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.readiness.outcome == 'success' }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: v1-evidence-${{ github.sha }}
