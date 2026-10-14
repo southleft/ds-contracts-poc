@@ -16,6 +16,8 @@ import type { createNativeUpdateJobs } from '../../../source-reference/native-up
 import type { NativeContractUpdatePlan, NativeTokenValueChange } from '../../../core/native-contract-update';
 import type { RecordedNativeMeasurement } from '../../../source-reference/matched-native-review';
 import type { ReactInitialSourceReview } from '../../../source-reference/react-initial-source-review';
+import type { ReactAuthoredSourceReview } from '../../../source-reference/react-authored-source-review';
+import { authoredSourceReviewMatches, authoredSourceReviewScope, type AuthoredSourceReviewIdentity } from './react-authored-source-review';
 import { designValue, correctionValue } from './NativeReviewValue';
 
 function MeasurementImages({measurement, background}: {measurement: RecordedNativeMeasurement['rows'][number]; background: 'white' | 'black'}) {
@@ -24,6 +26,85 @@ function MeasurementImages({measurement, background}: {measurement: RecordedNati
     <td style={{background,padding:8}}><img alt={`Recorded Figma ${measurement.variant} on ${background}`} src={measurement.nativeImage} width={measurement.width} height={measurement.height} style={{display:'block',maxWidth:'none'}} /></td>
     <td>{(background === 'white' ? measurement.whiteMismatch : measurement.blackMismatch).toFixed(3)}%</td>
   </>;
+}
+
+function AuthoredSourceReviewPanel({root, row, active, busy, setBusy}: {
+  root: string; row: Operation & {authoredSourceReviewIdentity: AuthoredSourceReviewIdentity};
+  active: boolean; busy: boolean; setBusy: (value: boolean) => void;
+}) {
+  const [review, setReview] = useState<ReactAuthoredSourceReview | null>(null);
+  const [problem, setProblem] = useState(''), [loading, setLoading] = useState(false);
+  const mounted = useRef(true), identity = row.authoredSourceReviewIdentity, id = row.operation.id;
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  useEffect(() => {
+    if (!active) return;
+    let stopped = false;
+    setLoading(true);
+    const recover = async () => {
+      try {
+        const response = await fetch(`${root}/native-operation/${id}/source-frame`), result = await readSourceResponse(response);
+        if (stopped) return;
+        if (!response.ok) throw Error(result?.reason ? `${result.error} Refused by: ${result.reason}` : result?.error || 'react-authored-source-review-unavailable');
+        if (result?.review !== null && !authoredSourceReviewMatches(result?.review, identity))
+          throw Error('react-authored-source-review-response-mismatch');
+        setReview(result.review); setProblem('');
+      } catch (error) { if (!stopped) { setReview(null); setProblem(error instanceof Error ? error.message : String(error)); } }
+      finally { if (!stopped) setLoading(false); }
+    };
+    void recover();
+    return () => { stopped = true; };
+  }, [root, id, active, identity.requestRevision, identity.sourceImageSha256, identity.treeSha256, identity.frameInputSha256]);
+
+  async function capture() {
+    setBusy(true); setProblem('');
+    try {
+      const response = await fetch(`${root}/native-operation/${id}/source-frame`, {method: 'POST'}), result = await readSourceResponse(response);
+      if (!mounted.current) return;
+      if (!response.ok) throw Error(result?.reason ? `${result.error} Refused by: ${result.reason}` : result?.error || 'react-authored-source-review-unavailable');
+      if (!authoredSourceReviewMatches(result?.review, identity)) throw Error('react-authored-source-review-response-mismatch');
+      setReview(result.review);
+    } catch (error) { if (mounted.current) { setReview(null); setProblem(error instanceof Error ? error.message : String(error)); } }
+    finally { setBusy(false); }
+  }
+  const op = row.operation;
+  return <section aria-label="Original composition source review">
+    <h4>Original composition source review</h4>
+    <button type="button" disabled={busy || loading || !op.sourceCurrent} onClick={() => void capture()}>
+      Review original source on two backgrounds
+    </button>
+    {loading && <p role="status">Checking the saved review against the original source…</p>}
+    {problem && <p role="alert">Source review unavailable. {problem}</p>}
+    <p>This read-only capture must match the saved original image and component tree. It changes no Figma output and assigns no fidelity score.</p>
+    {review && <details open>
+      <summary>Saved original source review · unqualified</summary>
+      <p>Original React and saved Figma exports use one image pixel per CSS pixel. Layout origins align only when recorded bounds are available; no resizing or best-fit alignment is applied. These images do not check the current canvas or qualify fidelity or behavior.</p>
+      {!op.imageObservation?.images.length && <p>No saved native export is available for comparison yet.</p>}
+      {(op.imageObservation?.images.length ? op.imageObservation.images : [undefined]).map(image =>
+        <div key={image?.caseId ?? 'source'}>
+          {image && <h5>Native {image.caseId}</h5>}
+          {(['white', 'black'] as const).map(background => {
+            const framing = nativeImageFraming(review.frame, image);
+            return <div key={background} style={{display:'flex',flexWrap:'wrap',gap:12,marginBottom:12,alignItems:'flex-start'}}>
+              <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Original React · {background}</figcaption>
+                <div style={{...framing.source,backgroundColor:background,width:'max-content'}}>
+                  <img alt={`Reviewed original ${row.caseId} on ${background}`} src={review.image}
+                    width={review.frame.crop.width} height={review.frame.crop.height} style={{display:'block',maxWidth:'none'}}
+                    onError={() => setProblem('The saved source review image could not be loaded.')} />
+                </div>
+              </figure>
+              {image && <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Saved Figma · {background}</figcaption>
+                <div style={{...framing.native,backgroundColor:background,width:'max-content'}}>
+                  <img alt={`Saved Figma ${image.caseId} on ${background}`}
+                    src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`}
+                    width={image.width} height={image.height} style={{display:'block',maxWidth:'none'}}
+                    onError={() => setProblem('The saved native export could not be verified or loaded.')} />
+                </div>
+              </figure>}
+            </div>;
+          })}
+        </div>)}
+    </details>}
+  </section>;
 }
 
 /** An existing native operation for one of these source cases that still
@@ -67,6 +148,7 @@ interface Operation {
   sourceFrame?: SourceFrame; sourceFrameProblem?: string;
   recordedMeasurement?: boolean;
   composition?: ReactCompositionReview; compositionProblem?: string;
+  authoredSourceReviewIdentity?: AuthoredSourceReviewIdentity;
 }
 export function ReactNativeInspection({ referenceId, selectedCase, ownership }: {
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
@@ -81,6 +163,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const [measurements, setMeasurements] = useState<Record<string, RecordedNativeMeasurement>>({});
   const [sourceReviews, setSourceReviews] = useState<Record<string, ReactInitialSourceReview>>({});
+  const [openedAuthoredReviews, setOpenedAuthoredReviews] = useState<Record<string, boolean>>({});
   const [observationRevision, setObservationRevision] = useState(0);
   const [inspectionSourceAvailable, setInspectionSourceAvailable] = useState(false);
   const [inspectionSources, setInspectionSources] = useState<Record<string, boolean>>({});
@@ -283,6 +366,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     <ReactInitialInspection onObservationChange={refreshObservations} referenceId={referenceId} caseId={selectedCase} available={inspectionSources[selectedCase] ?? inspectionSourceAvailable} unavailableReason={authoredReady ? "Finish a current structure observation before inspecting this composition." : undefined} nativeSaved={rows.some(r => (r.kind === 'initial'||r.kind==='authored-initial') && r.caseId === selectedCase && r.operation.sourceCurrent)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api' || row.kind === 'authored-state-api', initial = row.kind === 'initial' || row.kind==='authored-initial' || stateApi;
+      const authoredReviewScope = authoredSourceReviewScope(referenceId, row);
       const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId && r.ownershipId===row.ownershipId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
       const correctedCaller = row.updates?.some(update => update.operation?.phase === 'update-verified' &&
@@ -303,9 +387,16 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 1 :
         !update.operation ? 2 : 3;
       const orderedUpdates = [...(row.updates ?? [])].sort((a, b) => updatePriority(a) - updatePriority(b));
-      return <details key={id} open={row.caseId === selectedCase}>
+      return <details key={id} open={row.caseId === selectedCase} onToggle={event => {
+        if (authoredReviewScope && event.target === event.currentTarget && event.currentTarget.open)
+          setOpenedAuthoredReviews(old => old[authoredReviewScope] ? old : {...old, [authoredReviewScope]: true});
+      }}>
         <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${stateApi ? '· retained state API' : initial ? '· observed initial states' : row.kind === 'authored' ? '· observed composition' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
         {row.kind === 'authored' && <p>This draft preserves authored component boundaries at the captured inputs. Behavior, visual fidelity, other inputs and later updates remain unqualified.</p>}
+        {authoredReviewScope && row.authoredSourceReviewIdentity && <AuthoredSourceReviewPanel key={authoredReviewScope}
+          root={root} row={{...row,authoredSourceReviewIdentity:row.authoredSourceReviewIdentity}}
+          active={row.caseId === selectedCase || !!openedAuthoredReviews[authoredReviewScope]} busy={busy} setBusy={setBusy} />}
+        {row.kind === 'authored' && !authoredReviewScope && <p>The original source review is unavailable until this operation’s source evidence can be verified.</p>}
         {row.kind === 'authored-initial' && <p>This draft preserves component boundaries across the observed initial inputs. Each root variant is paired with its own original image. Live behavior, fidelity and updates remain unqualified.</p>}
         {stateApi && <p>This separate set retains the checked-state initializer and callback declarations from a completed source experiment. Figma variants remain editable visual states. Native interactivity, live updates, visual fidelity and the returned React consumer are not qualified by creation.</p>}
         {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
