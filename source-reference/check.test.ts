@@ -101,6 +101,47 @@ test('an empty profile cannot confer validity', () => {
   assert.ok(result.problems.includes('profile-incomplete'));
 });
 
+test('deeply wrapped source text uses its painted fonts without admitting neighboring or fallback text', async () => {
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage();
+  const failures = watchSourceFailures(page);
+  const nested: SourceProfile = {...profile,path:['#subject'],fontOrigin:'web'};
+  try {
+    // Each block creates a layout level. The selected root's bounded Chromium
+    // font census cannot reach this authentic web-font text on its own.
+    await page.setContent(html({empty:true}) + `<style>
+      #subject{display:inline-flex;background:var(--theme-accent);font:16px "IBM Plex Sans";padding:12px;color:white}
+      #outside{font:16px serif}
+      </style><article id="subject"><div><div><div><div><span id="deep">Reference</span></div></div></div></div></article>
+      <p id="outside">Unrelated text outside the selected source</p>`);
+    await page.evaluate(() => document.fonts.ready);
+    const original = await observeSource(page,nested,failures);
+    assert.deepEqual(checkSource(nested,original),{status:'valid',problems:[]});
+    assert.ok(original.platformFonts.some(font => font.glyphCount > 0));
+    assert.ok(original.platformFonts.filter(font => font.glyphCount > 0).every(font =>
+      font.familyName === nested.fontFamily && font.isCustomFont === true), 'outside text is not source font evidence');
+
+    await page.evaluate(() => {
+      const known = document.createElement('span'); known.textContent = 'Known web font';
+      document.querySelector('#subject')!.append(known);
+      (document.querySelector('#deep') as HTMLElement).style.fontFamily = 'serif';
+    });
+    const mixed = await observeSource(page,nested,failures);
+    assert.ok(mixed.platformFonts.some(font => font.glyphCount > 0 && font.familyName === nested.fontFamily));
+    assert.ok(mixed.platformFonts.some(font => font.glyphCount > 0 && font.familyName !== nested.fontFamily));
+    assert.ok(checkSource(nested,mixed).problems.includes('font-substitution'), 'a known shallow sibling cannot hide a deep fallback');
+
+    await page.evaluate(() => { (document.querySelector('#deep') as HTMLElement).style.removeProperty('font-family'); });
+    await corruptReactReference(page,'missing-font','#subject');
+    const missing = await observeSource(page,nested,failures);
+    assert.ok(checkSource(nested,missing).problems.includes('font-substitution'), 'deep text still refuses an unavailable authored web font');
+    await page.evaluate(() => { document.querySelector('#subject')!.replaceChildren(); });
+    const empty = await observeSource(page,nested,failures);
+    assert.deepEqual(empty.platformFonts,[]);
+    assert.ok(checkSource(nested,empty).problems.includes('font-substitution'), 'empty font evidence cannot pass');
+  } finally { failures.dispose(); await browser.close(); }
+});
+
 test('state and slotted font witnesses reject plausible but wrong stories', async () => {
   const browser = await chromium.launch({headless:true});
   const page = await browser.newPage();

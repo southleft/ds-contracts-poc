@@ -328,3 +328,60 @@ test('normal source order remains explicit when absolute and flow siblings overl
  assert.equal(c.anatomy.root.layout?.reversePaint,false,'CSS positioned painting must not lift the first source sibling over the later flow sibling');
  assert.equal(childPaintOrderPlans(c).length,1);
 });
+
+
+function mixedFlowPermutationFixture():any {
+ const choices=[['a','x','VERTICAL',['A','B','C']],['a','y','HORIZONTAL',['B','A','C']],['b','x','HORIZONTAL',['C','B','A']],['b','y','HORIZONTAL',['A','C','B']]] as const;
+ return {setName:'MixedFlow',type:'COMPONENT_SET',propertyDefinitions:{First:{type:'VARIANT',defaultValue:'a',variantOptions:['a','b']},Second:{type:'VARIANT',defaultValue:'x',variantOptions:['x','y']}},
+  variants:choices.map(([first,second,mode,order])=>({name:`First=${first},Second=${second}`,type:'COMPONENT',nodeId:`${first}-${second}-root`,variantProperties:{First:first,Second:second},bbox:{width:90,height:90},
+   layout:{mode,primary:'MIN',counter:'CENTER',spacing:0,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'},
+   children:order.map(name=>({name,nodeId:`${first}-${second}-${name}`,type:'FRAME',bbox:{width:10,height:10},fixedSize:{width:10,height:10},fill:{hex:name==='A'?'ff0000':name==='B'?'00ff00':'0000ff'}}))}))};
+}
+test('complete mixed-axis layout keeps each source direction through arbitrary child order',async t=>{
+ for(const reverse of [false,true]) {
+ const source=mixedFlowPermutationFixture();if(reverse)source.variants.reverse();const before=JSON.stringify(source),corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+ const {proposeFromDump}=await import('./propose-figma.js');const {mintedTokenCss}=await import('./mint-tokens.js');const {tokenInventoryFromJson}=await import('./tokens.js');
+ const result=proposeFromDump(source,{corpus,mintUnbound:true,contractIdByName:new Map()}),c=ContractSchema.parse(result.contract);
+ assert.equal(JSON.stringify(source),before);
+ assert(result.notes.some(n=>n.includes('complete observed multi-axis layout')));
+ const tokens={primitives:result.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},scope=new Map([[c.id,c]]);
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const inline of [false,true]){
+  const out=inline?emitReactInline(c,{contracts:scope,icons:new Map(),tokens}):emitReact(c,{contracts:scope,icons:new Map(),tokens:tokenInventoryFromJson([tokens.primitives])});
+  const page=await browser.newPage();try{
+   const render=await mountGenerated(page,c.name,out.tsx,('css'in out?out.css:'')+mintedTokenCss(tokens.primitives));
+   for(const variant of source.variants){
+    const props={first:variant.variantProperties.First,second:variant.variantProperties.Second},resolved=resolveLayout(c.anatomy.root,props)!;
+    assert(resolved.direction!.startsWith(variant.layout.mode==='VERTICAL'?'column':'row'));
+    await render(props);
+    const order=await page.locator('#root > :first-child').evaluate((root,column)=>[...root.children].map(el=>{const b=el.getBoundingClientRect(),color=getComputedStyle(el).backgroundColor;return {name:color==='rgb(255, 0, 0)'?'A':color==='rgb(0, 255, 0)'?'B':'C',pos:column?b.y:b.x};}).sort((a,b)=>a.pos-b.pos).map(x=>x.name),variant.layout.mode==='VERTICAL');
+    assert.deepEqual(order,variant.children.map((n:any)=>n.name),JSON.stringify({inline,props}));
+   }
+  }finally{await page.close();}
+ }
+ }
+});
+test('mixed-axis order does not qualify missing or grid parent layout',async()=>{
+ const {proposeFromDump}=await import('./propose-figma.js'),corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+ for(const missing of [true,false]){
+  const source=mixedFlowPermutationFixture();if(missing)delete source.variants[1].layout;else source.variants[1].layout.mode='GRID';
+  assert.throws(()=>proposeFromDump(source,{corpus,mintUnbound:true,contractIdByName:new Map()}),/child-paint-order-owner-unqualified/);
+ }
+});
+
+ test('exact layout bypass refuses duplicate child identity and incomplete tuple coverage',async()=>{
+  const {proposeFromDump}=await import('./propose-figma.js');const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+  for(const kind of ['duplicate','missing-node-id','mixed-child-type','mixed-parent-type','missing-tuple','empty-frame'] as const){
+    const source=mixedFlowPermutationFixture();
+    if(kind==='duplicate')source.variants[1].children[1]=source.variants[1].children[0];
+    else if(kind==='missing-node-id')delete source.variants[1].children[1].nodeId;
+    else if(kind==='mixed-child-type')source.variants[1].children[1].type='RECTANGLE';
+    else if(kind==='mixed-parent-type')source.variants[1].type='RECTANGLE';
+    else if(kind==='missing-tuple')source.variants.pop();
+    else for(const variant of source.variants)Object.assign(variant.children.find((n:any)=>n.name==='B'),{bbox:undefined,fixedSize:undefined,fill:undefined});
+    let result;
+    try{result=proposeFromDump(source,{corpus,mintUnbound:true,contractIdByName:new Map()});}
+    catch(error){assert.match(String(error),kind==='missing-tuple'?/ExactProjectionError.*Source matrix/:/child-paint-order|part name|duplicates|duplicate/);continue;}
+    assert(!result.notes.some(n=>n.includes('source-permutation-layout')),kind);
+  }
+ });

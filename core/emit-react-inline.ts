@@ -38,7 +38,7 @@ import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
  * zero-infrastructure emitter for orgs without a token pipeline: no CSS
@@ -324,6 +324,8 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
   const events = contract.events ?? [];
   const codePropOf = (propName: string) =>
     contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
+  const textValueOf = (name: string, value: string) =>
+    componentLookupValue(contract.props.find(p => p.name === name), value);
   const whenProvided = (propName: string, expression: string, absent = 'undefined') =>
     contract.props.find((p) => p.name === propName)?.default === undefined
       ? `${codePropOf(propName)} === undefined ? ${absent} : ${expression}`
@@ -874,7 +876,10 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
   for (const input of slotInputs) destructured.push(input.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   if (callerStyleAvailable) destructured.push('style');
-  destructured.push('children', '...rest');
+  // Preserve a declared axis named children without binding it a second time
+  // as the implicit JSX content parameter.
+  const declaredChildren = contract.props.some(p => p.bindings.code.prop === 'children' && p.type !== 'text');
+  destructured.push(...(declaredChildren ? [] : ['children']), '...rest');
 
   // Uncontrolled toggles + handlers — identical pattern to the CSS-Module emitter.
   const prelude: string[] = mappedPropPrelude(contract);
@@ -1004,7 +1009,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     jsx = wrapReactFilledPath(part, jsx, codePropOf);
-    jsx = wrapReactTextAppearance(part, jsx, codePropOf, resolveValue);
+    jsx = wrapReactTextAppearance(part, jsx, codePropOf, resolveValue, textValueOf);
     jsx = wrapReactImage(part, jsx, codePropOf);
     jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
     const fallback = (() => {
@@ -1252,11 +1257,11 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }
     if (part.text !== undefined) {
       const el = part.element ?? 'span';
-      // textByProp: per-enum-value characters (see emit-react).
+      // textByProp: per-enum or Boolean-value characters (see emit-react).
       const tb = part.textByProp;
       const inner = tb
         ? `{${Object.entries(tb.map)
-            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
+            .map(([v, t]) => `${codePropOf(tb.prop)} === ${typeof textValueOf(tb.prop, v) === 'boolean' ? String(textValueOf(tb.prop, v)) : `'${v}'`} ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
@@ -1293,7 +1298,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
   // is unused in that case (the isMultiRoot branch returns before the template
   // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
-  const explicitRootContent = rootContentJsx(root, codePropOf);
+  const explicitRootContent = rootContentJsx(root, codePropOf, textValueOf);
   const rootInnerContent = reactComposedPath(graphicContract, codePropOf, resolveValue) ?? (root?.parts || gridPlan.placeholders.has('root')
     ? [
         ...((root?.solidFillComposition || root?.solidFillCompositionByCombination) ? [paintChild(root)] : []),

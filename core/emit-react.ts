@@ -29,7 +29,7 @@ import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
  *
@@ -342,6 +342,8 @@ export function generateTsx(
   };
   // Optional absence is not the string "undefined" (which may itself be an
   // enum value). Guard every keyed projection, not only destructuring.
+  const textValueOf = (name: string, value: string) =>
+    componentLookupValue(contract.props.find(p => p.name === name), value);
   const whenProvided = (propName: string, expression: string, absent = 'undefined') =>
     contract.props.find((p) => p.name === propName)?.default === undefined
       ? `${codePropOf(propName)} === undefined ? ${absent} : ${expression}`
@@ -466,7 +468,10 @@ export function generateTsx(
       ? `children = ${JSON.stringify(childrenText.default)}`
       : 'children';
   if (statePreview) destructured.push(statePreview.destructured);
-  destructured.push('className', childrenDefault, '...rest');
+  // A declared non-text input may itself be named children (for example, a
+  // Boolean Figma axis). Its binding above already owns that parameter.
+  const declaredChildren = contract.props.some(p => p.bindings.code.prop === 'children' && p.type !== 'text');
+  destructured.push('className', ...(declaredChildren ? [] : [childrenDefault]), '...rest');
 
   // Body prelude: uncontrolled state + handlers for declared events.
   const prelude: string[] = mappedPropPrelude(contract);
@@ -677,7 +682,7 @@ export function generateTsx(
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     jsx = wrapReactFilledPath(part, jsx, codePropOf);
-    jsx = wrapReactTextAppearance(part, jsx, codePropOf);
+    jsx = wrapReactTextAppearance(part, jsx, codePropOf, undefined, textValueOf);
     jsx = wrapReactImage(part, jsx, codePropOf);
     jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
     const fallback = (() => {
@@ -847,12 +852,12 @@ export function generateTsx(
     }
     if (part.text !== undefined) {
       const el = part.element ?? 'span';
-      // textByProp (first-variant-freeze fix): per-enum-value characters as
+      // textByProp: per-enum or Boolean-value characters as
       // a ternary chain over the driving prop, base text as the fallback.
       const tb = part.textByProp;
       const inner = tb
         ? `{${Object.entries(tb.map)
-            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
+            .map(([v, t]) => `${codePropOf(tb.prop)} === ${typeof textValueOf(tb.prop, v) === 'boolean' ? String(textValueOf(tb.prop, v)) : `'${v}'`} ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
@@ -925,7 +930,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
   }
 
   const root = contract.anatomy.root;
-  const explicitRootContent = rootContentJsx(root, codePropOf);
+  const explicitRootContent = rootContentJsx(root, codePropOf, textValueOf);
   if (root.content?.prop === 'children') usesChildren = true;
   const defaultChildren = () => { usesChildren = true; return '{children}'; };
   const rootInner = boundPaintChild(root) + (reactComposedPath(contract, codePropOf, undefined, tokenValues) ?? (root.parts || gridPlan.placeholders.has('root')

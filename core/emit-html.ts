@@ -1136,6 +1136,8 @@ function renderComponentHtml(
     return typeof t.default === 'string' ? t.default : c.name;
   };
   const propValue = (name: string): string | undefined => state.subst[name];
+  const textPropValue = (name: string): string | undefined => propValue(name) ??
+    (state.bools[name] === undefined ? undefined : String(state.bools[name]));
   const textValue = (propName: string): string => {
     const prop = contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === propName);
     // A component-ref parent may have set this text prop's value (fixed or
@@ -1307,10 +1309,12 @@ function renderComponentHtml(
     // it. Text and children are siblings inside the part's own box. Childless
     // text parts emit byte-identical markup.
     if (part.content || part.text !== undefined) {
-      // textByProp: per-enum-value characters resolve against the LIVE
-      // parent value (first-variant-freeze fix); base text otherwise.
+      // textByProp: enum substitutions and Boolean state select the
+      // original characters; an absent value keeps the base text.
+      const textAxis = part.textByProp?.prop;
+      const textValueKey = textAxis === undefined ? undefined : textPropValue(textAxis);
       const staticText = part.textByProp
-        ? (part.textByProp.map[propValue(part.textByProp.prop) ?? ''] ?? part.text!)
+        ? (part.textByProp.map[textValueKey ?? ''] ?? part.text!)
         : part.text!;
       const value = part.content
         ? (part.content.prop === 'children' && extraText !== undefined ? extraText : textValue(part.content.prop))
@@ -1472,7 +1476,7 @@ function renderComponentHtml(
   // parts; this covers the part-less text fallback.)
   const explicitRootText = root.content ? textValue(root.content.prop)
     : root.text !== undefined
-      ? (root.textByProp?.map[propValue(root.textByProp.prop) ?? ''] ?? root.text)
+      ? (root.textByProp?.map[textPropValue(root.textByProp.prop) ?? ''] ?? root.text)
       : undefined;
   const rootText = escapeHtml(explicitRootText ?? extraText ?? textDefaultOf(contract));
   // A2 grid (G4): empty root-grid areas render placeholder elements after

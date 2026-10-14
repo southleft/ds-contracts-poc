@@ -1594,7 +1594,13 @@ export function validateContract(
       if (!tbProp) {
         errors.push(`${contract.id}: part "${name}" textByProp references unknown prop "${part.textByProp.prop}"`);
       } else {
-        const tbEnum = typeof tbProp.type === 'object' && 'enum' in tbProp.type ? tbProp.type.enum : [];
+        // Native text changes are compiled into variants. A Figma BOOLEAN
+        // property controls visibility, not a literal text node's characters.
+        if (tbProp.type === 'boolean' && tbProp.bindings.figma.kind !== 'VARIANT') {
+          errors.push(`${contract.id}: part "${name}" Boolean textByProp requires a VARIANT-bound prop`);
+        }
+        const tbEnum = tbProp.type === 'boolean' ? ['false', 'true'] :
+          typeof tbProp.type === 'object' && 'enum' in tbProp.type ? tbProp.type.enum : [];
         for (const key of Object.keys(part.textByProp.map)) {
           if (!tbEnum.includes(key)) {
             errors.push(`${contract.id}: part "${name}" textByProp map key "${key}" is not a value of prop "${part.textByProp.prop}"`);

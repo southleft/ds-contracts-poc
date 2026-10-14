@@ -299,8 +299,24 @@ function reachableCssVars(flat: Map<TokensCssLayer, Map<string, TokenEntry>>, on
 // terminal is still held to the rule. (2026-08-22: the first cut matched
 // every `var(--x` and refused the untitled-ui and astryx trees over 32 stub
 // override hooks.)
-const VAR_REF_REQUIRED = /var\(\s*(--[a-zA-Z0-9_-]+)\s*\)/g;
-const VAR_REF_ANY = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
+// Substituted enum values can be non-ASCII even when the token template is
+// ASCII. Read complete CSS name tokens, including equivalent escape spellings;
+// stopping at an ASCII prefix drops the actual dependency from scoped sheets.
+const CSS_SPACE = String.raw`[\t\n\f\r ]`;
+const CSS_NAME_CHAR = String.raw`(?:[-_a-zA-Z0-9\u0080-\u{10ffff}]|\\(?:[0-9a-fA-F]{1,6}(?:\r\n|${CSS_SPACE})?|[^\n\r\f0-9a-fA-F]))`;
+const CSS_CUSTOM_NAME = `--${CSS_NAME_CHAR}+`;
+const VAR_REF_REQUIRED = new RegExp(String.raw`var\(${CSS_SPACE}*(${CSS_CUSTOM_NAME})${CSS_SPACE}*\)`, 'gu');
+const VAR_REF_ANY = new RegExp(String.raw`var\(${CSS_SPACE}*(${CSS_CUSTOM_NAME})${CSS_SPACE}*(?=[,)])`, 'gu');
+
+function decodedCssName(name: string): string {
+  return name.replace(/\\(?:([0-9a-fA-F]{1,6})(?:\r\n|[\t\n\f\r ])?|([^\n\r\f]))/gu,
+    (_match, hex: string | undefined, literal: string | undefined) => {
+      if (hex === undefined) return literal === '\0' ? '\uFFFD' : literal!;
+      const code = Number.parseInt(hex, 16);
+      return code === 0 || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)
+        ? '\uFFFD' : String.fromCodePoint(code);
+    });
+}
 
 /** Every `var(--x)` name the stylesheet REQUIRES FROM tokens.css — referenced
  *  with no fallback (sorted, unique).
@@ -319,18 +335,19 @@ const VAR_REF_ANY = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
  *  missing, and still named. */
 export function referencedCssVars(cssText: string): string[] {
   const names = new Set<string>();
-  for (const m of cssText.matchAll(VAR_REF_REQUIRED)) names.add(m[1]!);
+  for (const m of cssText.matchAll(VAR_REF_REQUIRED)) names.add(decodedCssName(m[1]!));
   const privateNames = [...names].filter((name) => name.startsWith('--_'));
   if (privateNames.length === 0) return [...names].sort();
   const code = cssText.replace(/\/\*[\s\S]*?\*\//g, '');
-  const declaredHere = (name: string) => new RegExp(`[{;]\\s*${name}\\s*:`).test(code);
-  return [...names].filter((name) => !(name.startsWith('--_') && declaredHere(name))).sort();
+  const declarations = new Set([...code.matchAll(new RegExp(String.raw`[{;]${CSS_SPACE}*(${CSS_CUSTOM_NAME})${CSS_SPACE}*:`, 'gu'))]
+    .map((m) => decodedCssName(m[1]!)));
+  return [...names].filter((name) => !(name.startsWith('--_') && declarations.has(name))).sort();
 }
 
 /** Every `var(--x…` name mentioned at all, fallback-carrying or not (sorted, unique). */
 export function mentionedCssVars(cssText: string): string[] {
   const names = new Set<string>();
-  for (const m of cssText.matchAll(VAR_REF_ANY)) names.add(m[1]!);
+  for (const m of cssText.matchAll(VAR_REF_ANY)) names.add(decodedCssName(m[1]!));
   return [...names].sort();
 }
 

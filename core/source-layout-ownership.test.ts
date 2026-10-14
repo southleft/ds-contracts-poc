@@ -125,3 +125,103 @@ test('all four source padding binding fields remain plane-owned after actual the
  assert.deepEqual(pads(values(h,{kind:'flat'},f.corpus)),['0px','0px','0px','0px']);assert.deepEqual(pads(values(h,{kind:'nested'},f.corpus)),['8px','6px','8px','6px']);
  assert(!Object.values(h.states?.hover??{}).some(v=>v==='{space.x}'||v==='{space.y}'),'unchanged hover cannot restore source bindings to every flat plane');
 });
+
+import {emitHtml} from './emit-html.js';
+const booleanCounterFixture=():DumpSet=>({setName:'BooleanCounter',type:'COMPONENT_SET',propertyDefinitions:{defaultValue:{type:'VARIANT',defaultValue:'true',variantOptions:['true','false']},Density:{type:'VARIANT',defaultValue:'Compact',variantOptions:['Compact','Roomy']}},variants:[false,true].flatMap(value=>['Compact','Roomy'].map(density=>({name:`defaultValue=${value}, Density=${density}`,type:'COMPONENT' as const,variantProperties:{defaultValue:String(value),Density:density},layout:layout(),children:[{name:'Counter',type:'TEXT' as const,fixedSize:{width:12,height:20},text:{characters:value?'3':'0',fontFamily:'Arial',fontStyle:'Regular',fontWeight:400,fontSize:12,lineHeight:16,textAutoResize:'NONE' as const}},{name:'Limit',type:'TEXT' as const,text:{characters:'/100',fontFamily:'Arial',fontStyle:'Regular',fontWeight:400,fontSize:12,lineHeight:16,textAutoResize:'WIDTH_AND_HEIGHT' as const}}]})))});
+const counterLeaf=(c:ReturnType<typeof ContractSchema.parse>)=>walkAnatomy(c).find(w=>w.name==='Counter'||w.name==='counter')!.part;
+const staticReactText=(code:string,name:string,props:Record<string,unknown>)=>{
+ const mod={exports:{} as Record<string,any>};vm.runInNewContext(transformSync(code,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module:mod,exports:mod.exports,require:(id:string)=>id.endsWith('.css')?{}:require(id)});
+ return renderToStaticMarkup(createElement(mod.exports[name],props)).replace(/<[^>]*>/g,'');
+};
+test('complete Boolean text axes retain declared defaults and original characters across React, HTML and native',()=>{
+ for(const defaultValue of [false,true])for(const reverse of [false,true]){
+  const source=booleanCounterFixture();source.propertyDefinitions!.defaultValue.defaultValue=String(defaultValue);if(reverse)source.variants.reverse();const f=read(source),leaf=counterLeaf(f.c);
+  assert.equal(f.c.props.find(p=>p.name==='defaultValue')?.default,defaultValue);assert.equal(leaf.text,defaultValue?'3':'0');assert.deepEqual(leaf.textByProp,{prop:'defaultValue',map:defaultValue?{false:'0'}:{true:'3'}});
+  // Code and Figma names are independent of the semantic true/false map.
+  const c=structuredClone(f.c),prop=c.props.find(p=>p.name==='defaultValue')!;prop.bindings.code.prop='populated';prop.bindings.figma.values={true:'Yes',false:'No'};
+  const scope=new Map([[c.id,c]]);
+  for(const code of [generateTsx(c,scope,new Map()),emitReactInline(c,{contracts:scope,icons:new Map(),tokens:f.tokens}).tsx]){
+   assert.equal(staticReactText(code,c.name,{}),defaultValue?'3/100':'0/100');
+   assert.equal(staticReactText(code,c.name,{populated:true}),'3/100');
+   assert.equal(staticReactText(code,c.name,{populated:false}),'0/100');
+  }
+  const engine=createFigmaEngine({tokens:f.tokens,icons:new Map()});
+  const native=engine.compileComponentData(c,scope);
+  for(const variant of native.variants){
+   const texts:string[]=[];const walk=(n:any)=>{if(n.type==='text')texts.push(n.characters);for(const child of n.children??[])walk(child);};walk(variant.spec);
+   assert.equal(texts.join(''),variant.name.includes('defaultValue=Yes')?'3/100':'0/100',variant.name);
+  }
+  assert(native.variants.some(v=>v.name.includes('defaultValue=Yes')));assert(native.variants.some(v=>v.name.includes('defaultValue=No')));
+  for(const value of [false,true]){
+   const observed=structuredClone(c);observed.props.find(p=>p.name==='defaultValue')!.default=value;
+   const html=emitHtml(observed,{contracts:new Map([[c.id,observed]]),icons:new Map(),tokens:new Set(flattenTokens(f.tokens.primitives).keys())}).html;
+   const first=html.split('<div class="showcase__item">')[1].replace(/<p class="showcase__label">[^<]*<\/p>/,'').replace(/<[^>]*>/g,'').replace(/\s+/g,'');
+   assert.equal(first,value?'3/100':'0/100');
+  }
+ }
+});
+test('Boolean text inference does not infer missing characters or conflicting axes',()=>{
+ for(const kind of ['missing','conflicting'] as const){
+  const source=booleanCounterFixture();
+  if(kind==='missing')delete (source.variants[0].children![0].text! as Partial<NonNullable<DumpNode['text']>>).characters;
+  else for(const variant of source.variants)if(variant.variantProperties?.Density==='Roomy')variant.children![0].text!.characters=variant.variantProperties.defaultValue==='true'?'0':'3';
+  const f=read(source);assert.equal(counterLeaf(f.c).textByProp,undefined,kind);
+  assert(f.p.notes.some(n=>n.includes('first value pinned, review')),kind);
+ }
+});
+test('Boolean text maps reject unknown keys and non-variant native properties without losing enum support',()=>{
+ const f=read(booleanCounterFixture());
+ for(const kind of ['unknown-key','native-boolean','no-base'] as const){
+  const c=structuredClone(f.c),leaf=counterLeaf(c),prop=c.props.find(p=>p.name==='defaultValue')!;
+  if(kind==='unknown-key')leaf.textByProp!.map.maybe='?';
+  else if(kind==='native-boolean')prop.bindings.figma={kind:'BOOLEAN',property:'defaultValue'};
+  else delete leaf.text;
+  const errors:string[]=[];validateContract(c,new Map([[c.id,c]]),errors,new Map());
+  assert(errors.some(e=>e.includes(kind==='unknown-key'?'map key "maybe"':kind==='native-boolean'?'VARIANT-bound':'requires a base')),errors.join('\n'));
+ }
+});
+
+import {generatedTypeErrors} from './react-test-runtime.js';
+import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
+import {emitWebComponent,tagOf} from '../packages/emitter-web-components/src/emit-wc.js';
+test('Boolean text from a hoisted sole label selects original root characters on every supported surface',()=>{
+ const source=booleanCounterFixture();for(const v of source.variants){const label=v.children![0];label.name='label';delete label.fixedSize;v.children=[label];}
+ const f=read(source),c=f.c;assert.equal(c.anatomy.root.parts,undefined);assert.equal(c.anatomy.root.text,'3');assert.deepEqual(c.anatomy.root.textByProp,{prop:'defaultValue',map:{false:'0'}});
+ for(const code of [generateTsx(c,f.scope,new Map()),emitReactInline(c,{contracts:f.scope,icons:new Map(),tokens:f.tokens}).tsx]){
+  assert.deepEqual(generatedTypeErrors(c.name,code),[]);
+  for(const value of [false,true])assert.equal(staticReactText(code,c.name,{defaultValue:value}),value?'3':'0');
+  assert.equal(staticReactText(code,c.name,{}),'3');
+ }
+ for(const value of [false,true]){const observed=structuredClone(c);observed.props.find(p=>p.name==='defaultValue')!.default=value;
+  const html=emitHtml(observed,{contracts:new Map([[c.id,observed]]),icons:new Map(),tokens:new Set(flattenTokens(f.tokens.primitives).keys())}).html;
+  assert.equal(html.split('<div class="showcase__item">')[1].replace(/<p class="showcase__label">[^<]*<\/p>/,'').replace(/<[^>]*>/g,'').replace(/\s+/g,''),value?'3':'0');
+ }
+ assert.throws(()=>emitWebComponent(c,{contracts:f.scope,icons:new Map(),tokens:new Set(flattenTokens(f.tokens.primitives).keys())}),/WEB_COMPONENT_BOOLEAN_ROOT_TEXT_UNSUPPORTED/);
+});
+test('Boolean text selection keeps the authored appearance for the same original characters',()=>{
+ const f=read(booleanCounterFixture()),c=structuredClone(f.c),leaf=counterLeaf(c);
+ const appearance=(characters:string,red:number)=>{const observed=observeTextAppearance(characters,[{start:0,end:characters.length,characters,fontName:{family:'Arial',style:'Regular'},fontSize:12,fontWeight:400,lineHeight:{unit:'PIXELS',value:16},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE',fills:[{type:'SOLID',color:{r:red,g:0,b:0}}]}]);assert(observed&&'runs' in observed);return observed;};
+ Object.assign(leaf,{textAppearanceByCombination:{props:['defaultValue'],rows:[{values:['false'],appearance:appearance('0',0)},{values:['true'],appearance:appearance('3',1)}]}});
+ const parsed=ContractSchema.parse(c),scope=new Map([[c.id,parsed]]);
+ for(const code of [generateTsx(parsed,scope,new Map()),emitReactInline(parsed,{contracts:scope,icons:new Map(),tokens:f.tokens}).tsx]){
+  assert.deepEqual(generatedTypeErrors(parsed.name,code),[]);
+  for(const value of [false,true]){
+   const mod={exports:{} as Record<string,any>};vm.runInNewContext(transformSync(code,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module:mod,exports:mod.exports,require:(id:string)=>id.endsWith('.css')?{}:require(id)});
+   const markup=renderToStaticMarkup(createElement(mod.exports[c.name],{defaultValue:value}));
+   assert.equal(markup.replace(/<[^>]*>/g,''),value?'3/100':'0/100');
+   assert.match(markup,new RegExp(`color:rgba\\(${value?255:0}, 0, 0, 1\\)`),'authored range must remain selected, not silently fall back');
+  }
+ }
+});
+test('Web Component leaf Boolean text uses actual property values',async t=>{
+ const {chromium}=await import('playwright-core'),f=read(booleanCounterFixture()),out=emitWebComponent(f.c,{contracts:f.scope,icons:new Map(),tokens:new Set(flattenTokens(f.tokens.primitives).keys())});
+ const browser=await chromium.launch();t.after(()=>browser.close());const page=await browser.newPage(),tag=tagOf(f.c);
+ await page.setContent(`<${tag}></${tag}>`);
+ const code=transformSync(out.element,{loader:'ts',format:'cjs'}).code;
+ await page.addScriptTag({content:`(()=>{const module={exports:{}};const exports=module.exports;const require=()=>new CSSStyleSheet();${code}\n})()`});
+ assert.equal(await page.locator(tag).locator('[part="root"]').textContent(),'3/100');
+ await page.locator(tag).evaluate(n=>n.removeAttribute('default-value'));
+ assert.equal(await page.locator(tag).locator('[part="root"]').textContent(),'0/100');
+ await page.locator(tag).evaluate(n=>n.setAttribute('default-value',''));
+ assert.equal(await page.locator(tag).locator('[part="root"]').textContent(),'3/100');
+});

@@ -64,9 +64,9 @@ export function boundAuthoredReactTextAppearance(part:Part,resolveToken:(path:st
  return appearance;
 }
 
-export function wrapReactTextAppearance(part:Part,jsx:string,codePropOf:(name:string)=>string,resolveToken?:(path:string)=>string|number){
+export function wrapReactTextAppearance(part:Part,jsx:string,codePropOf:(name:string)=>string,resolveToken?:(path:string)=>string|number,textValueOf:(name:string,value:string)=>string|boolean=(_name,value)=>value){
  const control=part.textAppearanceOverride,table=part.textAppearanceByCombination;if(!control&&!table)return jsx;
- const characters=part.content?part.content.prop:part.textByProp?Object.entries(part.textByProp.map).map(([value,text])=>`${codePropOf(part.textByProp!.prop)} === ${JSON.stringify(value)} ? ${JSON.stringify(text)} : `).join('')+JSON.stringify(part.text):JSON.stringify(part.text);
+ const characters=part.content?part.content.prop:part.textByProp?Object.entries(part.textByProp.map).map(([value,text])=>`${codePropOf(part.textByProp!.prop)} === ${JSON.stringify(textValueOf(part.textByProp!.prop,value))} ? ${JSON.stringify(text)} : `).join('')+JSON.stringify(part.text):JSON.stringify(part.text);
  const choices=Object.fromEntries(Object.entries(control?.choices??{}).map(([key,value])=>[key,compileReactTextAppearance(value)]));
  const bound=boundAuthoredReactTextAppearance(part,resolveToken);
  const authored=table?` authored={${JSON.stringify(table.rows.map(row=>({values:row.values,appearance:bound??compileReactTextAppearance(row.appearance,true)})))}} values={[${table.props.map(name=>`(${codePropOf(name)} == null ? null : globalThis.String(${codePropOf(name)}))`).join(', ')}]}`:'';

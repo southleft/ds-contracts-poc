@@ -1359,6 +1359,7 @@ interface Merged {
   name: string;
   type: string;
   rootContent?: true;
+  exactJointFrameOrder?: true;
   occ: Occ[];
   children: Merged[];
 }
@@ -1584,6 +1585,39 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string, axes
       if (controls.size > 1) {
         notes.push(`${where}/${display}: source-text-control-partition: distinct bindings and literal text retained as source-presence branches`);
         return [...controls.values()].map((rows, index) => mergeOcc(`${display} control ${index + 1}`, rows, notes, `${where}/${display} control ${index + 1}`, axes));
+      }
+    }
+    // Equal numeric typography does not make distinct named styles the same
+    // identity. Keep fully observed, axis-correlated styles as exclusive
+    // source branches; each then retains its own name/key and font family.
+    if (childOcc.every(o => o.node.type === 'TEXT' && o.node.text?.style && o.node.text.fontFamily &&
+        o.node.hidden !== true && o.node.propRefs?.characters === undefined &&
+        o.node.propRefs?.visible === undefined && o.node.bound?.visible === undefined)) {
+      const styles = new Map<string, Occ[]>();
+      for (const o of childOcc) {
+        const text = o.node.text!;
+        const key = JSON.stringify([text.style, text.styleKey ?? null]);
+        styles.set(key, [...(styles.get(key) ?? []), o]);
+      }
+      const numeric = childOcc.map(o => [o.node.text!.fontSize, observedTextWeight(o.node.text!).weight]);
+      const uniform = numeric.every(([size, weight]) => Number.isFinite(size) && Number.isFinite(weight) && size === numeric[0][0] && weight === numeric[0][1]);
+      const completeStyles = [...styles.values()].every(rows => new Set(rows.map(o => {
+        const t = o.node.text!;
+        return JSON.stringify([t.fontFamily,t.fontStyle,t.fontWeight,t.fontSize,t.lineHeight,t.lineHeightUnit,t.letterSpacing,t.textCase,t.textDecoration]);
+      })).size === 1);
+      const axisCarriesStyle = axes.some(axis => {
+        const values = new Map<string, string>();
+        for (const [style, rows] of styles) for (const o of rows) {
+          const value = axisValuesOf(o.variant)[axis.property];
+          if (value === undefined || (values.has(value) && values.get(value) !== style)) return false;
+          values.set(value, style);
+        }
+        return axis.values.every(value => values.has(value));
+      });
+      if (styles.size > 1 && new Set(childOcc.map(o => o.node.text!.style)).size > 1 && uniform && completeStyles && axisCarriesStyle) {
+        notes.push(`${where}/${display}: source-text-style-partition: distinct named styles and font families retained as mutually exclusive source-presence branches`);
+        return [...styles].sort(([a],[b]) => a < b ? -1 : a > b ? 1 : 0).map(([, rows], index) =>
+          mergeOcc(`${display} typography ${index + 1}`, rows, notes, `${where}/${display} typography ${index + 1}`, axes));
       }
     }
     // A text node may switch between intrinsic and filled sizing across an
@@ -8054,6 +8088,42 @@ function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: 
   }
   const layout = (part.layout ?? {}) as Record<string, unknown>;
   if (rows.every(row => row.supported && row.fills)) {
+    // A FILL child of an indefinite HUG parent still has an observed basis.
+    // Zeroing it drops the source allocation and can collapse clipped content.
+    // Carry only a complete, uniform local measurement with exact ownership;
+    // definite parents and incomplete/conflicting evidence keep the old rule.
+    const dim = parentModes?.base === 'VERTICAL' ? 'height' : 'width';
+    const fill = dim === 'height' ? 'fillHeight' : 'fillWidth';
+    const min = dim === 'height' ? 'minHeight' : 'minWidth';
+    const max = dim === 'height' ? 'maxHeight' : 'maxWidth';
+    const literals = part.literals as Record<string,string> | undefined;
+    const tokens = part.tokens as Record<string,string> | undefined;
+    const sizes = m.occ.map(o => {
+      const parent = o.parent?.node, geometry = o.node.localGeometry;
+      const parentSize = parent?.bbox ?? parent?.localGeometry?.localSize;
+      if (o.node.type !== 'FRAME' || !o.node.layout || o.node.hidden === true ||
+          (o.node as DumpNode & {__synthetic?:boolean}).__synthetic || !parent ||
+          !parent.layout || parent.layout.mode !== parentModes?.base || parent.layout.primarySizing !== 'AUTO' || parent.layout.wrap ||
+          parent[fill] || parent.bound?.[dim] || parent.fixedSize?.[dim] !== undefined ||
+          parent[min] !== undefined || parent[max] !== undefined || parent.targetAspectRatio !== undefined ||
+          absBoxOf(parent) || o.node.bound?.[dim] || o.node.fixedSize?.[dim] !== undefined ||
+          o.node[min] !== undefined || o.node[max] !== undefined || o.node.targetAspectRatio !== undefined ||
+          !geometry || !o.node.nodeId || geometry.nodeId !== o.node.nodeId || !parent.nodeId || geometry.parentId !== parent.nodeId ||
+          !parentSize || geometry.parentSize.width !== parentSize.width || geometry.parentSize.height !== parentSize.height ||
+          geometry.transform[0][0] !== 1 || geometry.transform[0][1] !== 0 || geometry.transform[1][0] !== 0 || geometry.transform[1][1] !== 1 ||
+          !Number.isFinite(geometry.localSize[dim]) || geometry.localSize[dim] <= 0) return undefined;
+      return geometry.localSize[dim];
+    });
+    if (ctx.mint && m.occ.length === ctx.totalVariants.length && !part.component && !part.slot && !part.repeat &&
+        !part.layoutByProp && !part.layoutByCombination && !part.absoluteGeometry && !part.absoluteGeometryByCombination &&
+        literals?.[dim] === undefined && tokens?.[dim] === undefined &&
+        sizes.length > 0 && sizes.every(value => value !== undefined && value === sizes[0])) {
+      const next: Record<string,unknown> = {...layout, grow:true}; delete next.growBasis;
+      part.layout = next;
+      part.literals = {...literals, [dim]: `${cssDecimal(sizes[0]!)}px`};
+      ctx.notes.push(`${where}: source-hug-fill-basis: uniform owned local ${dim} ${sizes[0]}px retained as the intrinsic basis of FILL under HUG; parent size remains content-driven`);
+      return;
+    }
     part.layout = {...layout, grow: true, growBasis: 'zero'};
     return;
   }
@@ -9012,6 +9082,27 @@ function applyLayoutSplit(holder: Record<string, unknown>, split: LayoutSplit | 
   holder.stylesWhen = [...existing, ...split.stylesWhen];
 }
 
+/** A direct visible frame family can carry an exact per-tuple child order.
+ * Source object identity must be one-to-one; omissions and synthetic folds
+ * keep the existing layout refusal instead of borrowing a default direction. */
+function exactFrameChildOrder(m: Merged): boolean {
+  if (!['FRAME','COMPONENT'].includes(m.type) || !m.children.length ||
+      new Set(m.children.map(c=>c.name)).size !== m.children.length ||
+      m.children.some(c=>c.type !== 'FRAME' || c.occ.some(o=>o.node.type!=='FRAME') || isSpacer(c))) return false;
+  const names = new Map<DumpNode,string>();
+  for (const child of m.children) for (const o of child.occ) {
+    if (names.has(o.node) && names.get(o.node) !== child.name) return false;
+    names.set(o.node,child.name);
+  }
+  return m.occ.every(o=>{
+    if (!['FRAME','COMPONENT'].includes(o.node.type) || !o.node.layout || !['HORIZONTAL','VERTICAL'].includes(o.node.layout.mode) || o.node.layout.wrap) return false;
+    const children=o.node.children??[],sequence=children.map(n=>names.get(n));
+    return children.length>0 && children.every(n=>typeof n.nodeId==='string' && n.nodeId.length>0) &&
+      new Set(children.map(n=>n.nodeId)).size===children.length && children.every(n=>n.abs===undefined && n.hidden!==true && !(n as DumpNode & {__synthetic?:boolean}).__synthetic) &&
+      sequence.every(n=>n!==undefined) && new Set(sequence).size===sequence.length;
+  });
+}
+
 function invertLayoutByProp(
   m: Merged,
   ctx: Ctx,
@@ -9144,11 +9235,14 @@ function invertLayoutByProp(
   // channel. No unobserved tuple receives an inferred layout.
   const jointAxes = ctx.axes.filter(a => !a.omitted);
   const count = jointAxes.reduce((n, a) => n * a.values.length, 1);
+  const alignedOrder = flowSequences.every(seq => {
+    const expected = mergedOrder.filter(name => seq.includes(name));
+    return seq.join('\u0000') === expected.join('\u0000') || seq.join('\u0000') === [...expected].reverse().join('\u0000');
+  });
+  const exactOrder = !alignedOrder && exactFrameChildOrder(m);
   if (jointAxes.length >= 2 && jointAxes.length <= 8 && count <= 4096 &&
-      completeFlowIdentity && flowSequences.every(seq => {
-        const expected = mergedOrder.filter(name => seq.includes(name));
-        return seq.join('\u0000') === expected.join('\u0000') || seq.join('\u0000') === [...expected].reverse().join('\u0000');
-      }) && m.occ.every(o => inertRectangle(o)||['HORIZONTAL', 'VERTICAL'].includes(o.node.layout?.mode ?? ''))) {
+      completeFlowIdentity && (alignedOrder || exactOrder) &&
+      m.occ.every(o => inertRectangle(o)||['HORIZONTAL', 'VERTICAL'].includes(o.node.layout?.mode ?? ''))) {
     const rows = new Map<string, {values: string[]; layout: Tuple}>();
     let consistent = true;
     for (const t of tuples) {
@@ -9173,6 +9267,10 @@ function invertLayoutByProp(
     const complete = drawnRequired ? rows.size===drawnRequired.size && [...rows.keys()].every(key=>drawnRequired.has(key))
       : rows.size===count-absent.size && [...rows.keys()].every(key=>!absent.has(key));
     if (consistent && complete) {
+      if (exactOrder) {
+        m.exactJointFrameOrder = true;
+        ctx.notes.push(`${where}: source-permutation-layout: complete observed layout retained with independently proved exact child order`);
+      }
       if (reorderedChildren) m.children = reorderedChildren;
       ctx.notes.push(`${where}: complete observed multi-axis layout carried as layoutByCombination (${rows.size} tuples)`);
       return {kind: 'byCombination', table: {props: jointAxes.map(a => a.propName), rows: [...rows.values()]}};
@@ -9249,7 +9347,7 @@ function invertLayoutByProp(
 // ---------------------------------------------------------------------------
 
 /** First-variant-freeze fix, TEXT half: when a static text part's DRAWN
- *  characters vary as a pure function of ONE enum axis across every
+ *  characters vary as a pure function of ONE enum or Boolean axis across every
  *  observed occurrence (ProgressBar's Percentage '0%'…'100%' tracking the
  *  progress axis, InputFieldBase's label/'US'/'USD' tracking type), the part
  *  binds `text` to the axis's default value with `textByProp` carrying the
@@ -9262,7 +9360,9 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
     .filter((o) => o.node.text?.characters !== undefined)
     .map((o) => ({ variant: o.variant, chars: o.node.text!.characters! }));
   if (obs.length < 2 || new Set(obs.map((o) => o.chars)).size <= 1) return;
-  for (const axis of ctx.axes.filter((a) => !isBooleanAxis(a))) {
+  for (const axis of ctx.axes) {
+    const boolean = isBooleanAxis(axis);
+    if (boolean && obs.length !== m.occ.length) continue;
     const byValue = new Map<string, string>();
     let pure = true;
     for (const o of obs) {
@@ -9278,7 +9378,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
         break;
       }
     }
-    if (!pure || byValue.size <= 1) continue;
+    if (!pure || byValue.size <= 1 || (boolean && !axis.values.every(value => byValue.has(value)))) continue;
     fenceSparseInference(ctx.axes, `text@${where}`, obs.map((o) => ({ variant: o.variant, value: o.chars })));
     // Base = the axis's first OBSERVED value (axis declaration order); the
     // other values ride textByProp as deviations.
@@ -9299,7 +9399,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
     return;
   }
   ctx.notes.push(
-    `${where}: drawn characters vary across variants (${[...new Set(obs.map((o) => JSON.stringify(o.chars)))].slice(0, 6).join(', ')}) without tracking any enum axis — first value pinned, review`,
+    `${where}: drawn characters vary across variants (${[...new Set(obs.map((o) => JSON.stringify(o.chars)))].slice(0, 6).join(', ')}) without tracking any enum or Boolean axis — first value pinned, review`,
   );
 }
 
@@ -11965,6 +12065,7 @@ function isUnboundHiddenInstance(m: Merged): boolean {
 
 /** Preserve source paint order independently of merged flow order. */
 function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,where:string,isRoot=false):void {
+  if (m.exactJointFrameOrder && !exactFrameChildOrder(m)) throw Error(`child-paint-order-source-identity-unqualified:${where}`);
   // CSS paints positioned children above unpositioned siblings even when DOM
   // order matches Figma. Mixed absolute/flow owners need explicit ranks too.
   const mixedPositioning = m.type !== 'INSTANCE' && m.occ.every(o=>o.node.layout && o.node.layout.mode !== 'GRID') &&
@@ -12011,7 +12112,7 @@ function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,whe
   const keys=Object.keys((holder.parts??{}) as object);
   const sequences=m.occ.map(o=>(o.node.children??[]).map(n=>byNode.get(n)).filter((n):n is string=>n!==undefined));
   const explicit=sequences.some(seq=>{const expected=merged.filter(n=>seq.includes(n));return seq.join('\0')!==expected.join('\0') && seq.join('\0')!==[...expected].reverse().join('\0');});
-  if(explicit && keys.length!==merged.length)throw Error(`child-paint-order-child-identity-unqualified:${where}`);
+  if((explicit || m.exactJointFrameOrder) && keys.length!==merged.length)throw Error(`child-paint-order-child-identity-unqualified:${where}`);
   const rows=m.occ.map(o=>{
     const seq=(o.node.children??[]).map(n=>byNode.get(n)).filter((n):n is string=>n!==undefined);
     const expected=merged.filter(n=>seq.includes(n));
@@ -16529,7 +16630,11 @@ function proposeDeclaredDrawnInspection(set: DumpSet, opts: Parameters<typeof pr
   if (set.contractId || set.propNames || set.semantics || set.statePreviewAxis ||
       set.drawnVariants !== undefined || set.codeValueAxes !== undefined || set.unsetVariantAxes !== undefined)
     throw new Error('drawn-domain-source-marked: generated sources require independent authored contract readback');
-  const proof = validateDeclaredDrawnProjection(set, declaration);
+  // Match the normal proposal's allocation before validating this declared
+  // domain; original labels remain the tuple keys and Figma bindings.
+  const propertyNames = allocateFigmaPropertyNames(Object.keys(set.propertyDefinitions ?? {})
+    .map(name => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')));
+  const proof = validateDeclaredDrawnProjection(set, declaration, undefined, {propertyNames});
   assertExactProjection(proof, 'source-matrix-verified');
   const outer = sparseFence; sparseFence = null;
   try {

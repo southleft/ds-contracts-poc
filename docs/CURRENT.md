@@ -6,6 +6,16 @@ The latest retained fixed 40-set installed-CLI comparison measures **729 passing
 
 The remaining 64 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The completed original React → Figma run at `e3c115ebe` passes all 36 cases against the listed content, font, color, image and size criteria. Those 36 cases cover variants of one Radix Themes Badge family, not 36 different components. These are known cohorts; never-seen kits in both directions remain unqualified.
 
+The first conversion attempt on the newly acquired official [Semi](https://www.figma.com/community/file/1509783980598707066/semi-design-library) and [Arco](https://www.figma.com/community/file/1053233047330321743/arco-design-system) reference copies is complete at `6b5be245`. Each sample contains 12 component sets selected before conversion, with every variant retained. The same checker and thresholds were used, with the kits' font inputs; every rendered reference and content capture matches its frozen file version.
+
+| First-pass sample | Passing | Failing | Unverified | Refused or error, not measured | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Semi | 131 | 469 | 20 | 228 | 848 |
+| Arco | 14 | 57 | 0 | 56 | 127 |
+| Combined | 145 | 526 | 20 | 284 | 975 |
+
+This is **14.87% first-pass success**, separate from the known 40-set result above. It does not meet the unseen-kit goal. The misses include lost layout and text dependencies, omitted non-Latin color tokens, unresolved component ownership, and missing icons. Follow-up fixes preserve Boolean text and children bindings, qualified HUG/FILL dimensions and child flow, named text styles, collision-free non-Latin property names, Unicode token dependencies, and painted-font observations. Their combined focused checks pass; their effect on visual fidelity is not yet measured. Future retests of these samples will be reported separately, not relabeled as first-pass results.
+
 A packed CLI from `8067b0015`, installed into an empty directory, converted a live SDS Text Content Heading component set with **2 passing variants**. Its generated package installed and built in a clean React/Vite app; both variants rendered, and changing the heading text and subheading visibility updated both. This supports a guided technical preview. It does not establish outside-user completion, arbitrary-file coverage or a private-beta qualification.
 
 The [owner's fidelity bar](GOAL-BRIDGE.md#finish-line) still requires matching fonts and text color, every text and icon, size within 2 px, and image difference within 5% on both white and black. The existing content checker compares requested font family and numeric weight and reports unavailable fonts separately. Font-file byte identity is diagnostic evidence for rendering differences, not an additional acceptance gate; it does not replace any required check.

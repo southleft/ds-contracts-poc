@@ -112,7 +112,7 @@ export async function observeSource(page: Page, profile: SourceProfile,
   try {
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     const expression = `(() => { let root = document, element = null; for (const s of ${JSON.stringify(profile.associatedLabelText === undefined ? profile.fontPath ?? profile.path : profile.path)}) { element = root?.querySelector(s); root = element?.shadowRoot; } return ${profile.associatedLabelText === undefined ? 'element' : 'element?.labels?.length === 1 ? element.labels[0] : null'}; })()`;
-    const { result } = await cdp.send('Runtime.evaluate', {expression});
+    const { result } = await cdp.send('Runtime.evaluate', {expression,objectGroup:'dsc-source-fonts'});
     if (!result.objectId && profile.textContent === 'absent' && observed.textAbsence) {
       // A disappearing root is unavailable evidence, not a zero-glyph result.
       observed.textAbsence.status = 'refused';
@@ -144,14 +144,63 @@ export async function observeSource(page: Page, profile: SourceProfile,
         }
       }
       const resultFonts = await cdp.send('CSS.getPlatformFontsForNode', {nodeId});
+      if (profile.textContent !== 'absent') {
+        // Chromium's element census descends only two layout-object levels.
+        // Read the actual TextNodes as well, so wrappers cannot hide a fallback
+        // font. The protocol tree keeps the scope at this root, including its
+        // shadow trees; no document-wide text or CSS-family inference is used.
+        const described = await cdp.send('DOM.describeNode', {nodeId,depth:-1,pierce:true});
+        const pending = [described.node];
+        let count = 0, complete = true;
+        while (pending.length) {
+          const node = pending.pop()!;
+          if (++count > 10_000) { complete = false; break; }
+          if ((node.childNodeCount ?? 0) !== (node.children?.length ?? 0)) { complete = false; break; }
+          pending.push(...node.children ?? [], ...node.shadowRoots ?? []);
+          if (node.nodeType !== 3 || !node.nodeValue.trim()) continue;
+          const {object} = await cdp.send('DOM.resolveNode', {backendNodeId:node.backendNodeId,objectGroup:'dsc-source-fonts'});
+          if (!object.objectId) { complete = false; break; }
+          const visible = await cdp.send('Runtime.callFunctionOn', {
+            objectId:object.objectId,returnByValue:true,functionDeclaration:`function() {
+              if (!(this instanceof Text) || !this.isConnected) return null;
+              const parent = this.parentElement ?? this.getRootNode().host;
+              if (!parent || getComputedStyle(parent).visibility !== 'visible') return false;
+              for (let element = parent; element;) {
+                const style = getComputedStyle(element);
+                if (style.display === 'none' || style.opacity === '0' || style.contentVisibility === 'hidden') return false;
+                element = element.parentElement ?? element.getRootNode().host ?? null;
+              }
+              const range = document.createRange(); range.selectNodeContents(this);
+              return [...range.getClientRects()].some(rect => rect.width > 0 && rect.height > 0);
+            }`,
+          });
+          if (visible.exceptionDetails || typeof visible.result.value !== 'boolean') { complete = false; break; }
+          if (!visible.result.value) continue;
+          const {nodeId:textNodeId} = await cdp.send('DOM.requestNode', {objectId:object.objectId});
+          const fonts = await cdp.send('CSS.getPlatformFontsForNode', {nodeId:textNodeId});
+          // A known sibling must not mask missing evidence for rendered text.
+          if (!fonts.fonts.some(font => font.glyphCount > 0)) { complete = false; break; }
+          resultFonts.fonts.push(...fonts.fonts);
+        }
+        if (!complete) resultFonts.fonts = [];
+      }
       // Retain legacy observation bytes unless the authored profile requests
       // origin evidence. Absence is never inferred to mean a painted web font.
+      const seen = new Set<string>();
       platformFonts = resultFonts.fonts.map(({familyName, glyphCount, isCustomFont}) => ({
         familyName, glyphCount,
         ...(profile.fontOrigin === 'web' && typeof isCustomFont === 'boolean' ? {isCustomFont} : {}),
-      }));
-      await cdp.send('Runtime.releaseObject', {objectId:result.objectId});
+      })).filter(font => {
+        // Root/descendant censuses overlap. Retain actual rows, never add their
+        // glyph counts as though they described disjoint text.
+        const key = JSON.stringify(font);
+        if (seen.has(key)) return false;
+        seen.add(key); return true;
+      });
     }
-  } finally { await cdp.detach(); }
+  } finally {
+    await cdp.send('Runtime.releaseObjectGroup', {objectGroup:'dsc-source-fonts'}).catch(() => {});
+    await cdp.detach();
+  }
   return {...observed, platformFonts, failedResources:[...failures.failedResources], runtimeErrors:[...failures.runtimeErrors]};
 }
