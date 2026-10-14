@@ -1,4 +1,4 @@
-import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
+import {mkdtempSync,readFileSync,realpathSync,rmSync,statSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import type {Page} from 'playwright-core';
 import {consumerSlotNames} from './design-consumer-slots.js';
@@ -24,13 +24,33 @@ export async function installedBooleanChildren(consumer:string,packageName:strin
       `const stringValue = <Component {...props} children=${JSON.stringify(MARKER)} />;`,
     ].join('\n');
     writeFileSync(file,source);
-    const program=ts.createProgram([file],{
+    const options: import('typescript').CompilerOptions={
       noEmit:true,strict:true,skipLibCheck:false,types:[],
       jsx:ts.JsxEmit.ReactJSX,
       target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,
-      moduleResolution:ts.ModuleResolutionKind.Bundler,
+      moduleResolution:ts.ModuleResolutionKind.Bundler,allowArbitraryExtensions:true,
       paths:{react:[path.join(toolchain.reactTypes,'index.d.ts')],'react/jsx-runtime':[path.join(toolchain.reactTypes,'jsx-runtime.d.ts')]},
-    });
+    };
+    // A bundler loads the package's side-effect CSS, but TypeScript needs a
+    // module declaration. Admit only an actual CSS file within this installed
+    // package. Missing assets, CSS value imports, and unrelated diagnostics
+    // still refuse; no wildcard declaration or skipped diagnostic is used.
+    const installed=path.resolve(consumer,'node_modules',...packageName.split('/'));
+    const cssDeclaration=(name:string):string|undefined=>{
+      if(!name.endsWith('.d.css.ts'))return;
+      const css=path.resolve(name.slice(0,-'.d.css.ts'.length)+'.css');
+      try{
+        // TypeScript can canonicalize a symlinked consumer (including macOS
+        // /var -> /private/var). Compare physical paths on both sides.
+        if(!realpathSync(css).startsWith(realpathSync(installed)+path.sep)||!statSync(css).isFile())return;
+      }catch{return;}
+      return 'export {};';
+    };
+    const host=ts.createCompilerHost(options);
+    const fileExists=host.fileExists,readFile=host.readFile;
+    host.fileExists=name=>fileExists(name)||cssDeclaration(name)!==undefined;
+    host.readFile=name=>readFile(name)??cssDeclaration(name);
+    const program=ts.createProgram([file],options,host);
     const diagnostics=ts.getPreEmitDiagnostics(program);
     const assignmentLine=(diagnostic:typeof diagnostics[number])=>
       (diagnostic.code===2322||diagnostic.code===2769)&&diagnostic.file?.fileName===file&&diagnostic.start!==undefined

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,symlinkSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {chromium} from 'playwright-core';
@@ -19,6 +19,60 @@ export declare const Control: ForwardRefExoticComponent<ControlProps & RefAttrib
 ${extra}`);
   return {consumer,close:()=>rmSync(consumer,{recursive:true,force:true})};
 }
+
+function cssBarrel(consumer:string,imports="import './tokens.css';"){
+  const installed=path.join(consumer,'node_modules',...PACKAGE.split('/'));
+  const pkg=JSON.parse(readFileSync(path.join(installed,'package.json'),'utf8'));
+  pkg.types='./dist/index.d.ts';pkg.exports['.'].types='./dist/index.d.ts';
+  writeFileSync(path.join(installed,'package.json'),JSON.stringify(pkg));
+  writeFileSync(path.join(installed,'dist/index.d.ts'),`${imports}\nexport * from './Control/Control';\n`);
+  return path.join(installed,'dist/tokens.css');
+}
+
+test('real installed side-effect CSS qualifies without weakening Boolean prop types',async()=>{
+  for(const type of ['boolean','string','boolean | string']){
+    const f=fixture(type);try{
+      const css=cssBarrel(f.consumer);writeFileSync(css,':root { --token: red; }');
+      assert.equal(await installedBooleanChildren(f.consumer,PACKAGE,'Control'),type==='boolean',type);
+      assert.equal(readFileSync(css,'utf8'),':root { --token: red; }','the installed asset is not rewritten');
+    }finally{f.close();}
+  }
+});
+
+test('CSS typing retains missing-asset, value-import, and unrelated declaration refusals',async()=>{
+  const missing=fixture('boolean');try{
+    cssBarrel(missing.consumer);
+    await assert.rejects(installedBooleanChildren(missing.consumer,PACKAGE,'Control'),/children-type-check-unqualified: .*TS2882/);
+  }finally{missing.close();}
+  const nonCss=fixture('boolean');try{
+    const css=cssBarrel(nonCss.consumer,"import './tokens.png';");writeFileSync(css.replace(/\.css$/,'.png'),'actual bytes');
+    await assert.rejects(installedBooleanChildren(nonCss.consumer,PACKAGE,'Control'),/children-type-check-unqualified: .*TS2882/);
+  }finally{nonCss.close();}
+  const value=fixture('boolean');try{
+    const css=cssBarrel(value.consumer,"import { classes } from './tokens.css';\nexport { classes };");writeFileSync(css,'.control{}');
+    await assert.rejects(installedBooleanChildren(value.consumer,PACKAGE,'Control'),/children-type-check-unqualified: .*TS2305/);
+  }finally{value.close();}
+  const broken=fixture('boolean','export declare const broken: MissingType;');try{
+    writeFileSync(cssBarrel(broken.consumer),'.control{}');
+    await assert.rejects(installedBooleanChildren(broken.consumer,PACKAGE,'Control'),/children-type-check-unqualified: .*TS2304/);
+  }finally{broken.close();}
+});
+
+test('CSS outside the installed package cannot supply its virtual declaration',async()=>{
+  const f=fixture('boolean');try{
+    const css=cssBarrel(f.consumer);const outside=path.join(f.consumer,'outside.css');
+    writeFileSync(outside,'.control{}');symlinkSync(outside,css);
+    await assert.rejects(installedBooleanChildren(f.consumer,PACKAGE,'Control'),/children-type-check-unqualified: .*TS2882/);
+  }finally{f.close();}
+});
+
+test('a symlinked consumer uses the installed package canonical CSS boundary',async()=>{
+  const f=fixture('boolean');try{
+    writeFileSync(cssBarrel(f.consumer),'.control{}');
+    const linked=path.join(f.consumer,'linked-consumer');symlinkSync(f.consumer,linked,'dir');
+    assert.equal(await installedBooleanChildren(linked,PACKAGE,'Control'),true);
+  }finally{f.close();}
+});
 
 test('a string overload hidden by the last Boolean signature cannot bypass the runtime marker',async()=>{
   const f=fixture('boolean');try{
