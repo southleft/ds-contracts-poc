@@ -95,7 +95,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card(
 <span style={{ ...S.title }}>{title}</span>
 </header>
 <div style={{ ...S.body }}>{children}</div>
-{actions != null ? <footer style={{ ...S.footer }}>{actions}</footer> : null}
+<>{actions != null ? <footer style={{ ...S.footer }}>{actions}</footer> : null}</>
     </article>
   );
 });

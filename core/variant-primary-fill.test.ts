@@ -423,3 +423,70 @@ test('single-root component growth and scalable overrides share the child root i
  const custom=structuredClone(child);custom.props[0].bindings.code.prop='style';assert(errors(host,custom).some(e=>e.includes('component-grow-host-unproven')));
  const states=structuredClone(host);states.anatomy.root.parts!.item.states={hover:{color:'{sample.color}'}};assert(errors(states,child).some(e=>e.includes('component-grow-host-unproven')));
 });
+
+
+function observedHugFill(axis:'HORIZONTAL'|'VERTICAL'):DumpSet {
+  const column=axis==='VERTICAL',main=column?'height':'width',cross=column?'width':'height';
+  return {setName:'HugFillBasis',type:'COMPONENT_SET',propertyDefinitions:{Counter:{type:'VARIANT',defaultValue:'false',variantOptions:['false','true']}},
+    variants:[false,true].map(counter=>{
+      const rootId=`root-${counter}`,size={[main]:counter?116:92,[cross]:160} as {width:number;height:number};
+      const localSize={[main]:90,[cross]:158} as {width:number;height:number};
+      const textSize={[main]:80,[cross]:134} as {width:number;height:number};
+      const field:DumpNode={name:'Field',nodeId:`field-${counter}`,type:'FRAME',fillWidth:true,fillHeight:true,clipsContent:true,
+        layout:{mode:axis,primary:'MIN',counter:'MIN',spacing:0,padding:column?[5,12,5,12]:[12,5,12,5],primarySizing:'FIXED',counterSizing:'FIXED'},
+        localGeometry:{nodeId:`field-${counter}`,parentId:rootId,transform:[[1,0,1],[0,1,1]],localSize,parentSize:size},
+        children:[{name:'Text',nodeId:`text-${counter}`,type:'TEXT',fillWidth:true,fillHeight:true,
+          localGeometry:{nodeId:`text-${counter}`,parentId:`field-${counter}`,transform:[[1,0,column?12:5],[0,1,column?5:12]],localSize:textSize,parentSize:localSize},
+          text:{characters:'Original text',fontFamily:'Inter',fontStyle:'Regular',fontWeight:400,fontSize:14,lineHeight:20,textAutoResize:'TRUNCATE'}}]};
+      const count:DumpNode={name:'Count',nodeId:`counter-${counter}`,type:'FRAME',
+        layout:{mode:axis,primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'},
+        fixedSize:{[main]:24},[column?'fillWidth':'fillHeight']:true,
+        children:[{name:'Count text',type:'TEXT',text:{characters:'100',fontFamily:'Inter',fontSize:12,fontWeight:400,fontStyle:'Regular',lineHeight:16}}]};
+      return {name:`Counter=${counter}`,type:'COMPONENT',nodeId:rootId,bbox:size,variantProperties:{Counter:String(counter)},
+        layout:{mode:axis,primary:'MIN',counter:'MIN',spacing:0,padding:[1,1,1,1],primarySizing:'AUTO',counterSizing:'FIXED'},children:[field,...(counter?[count]:[])]};
+    })};
+}
+
+test('captured HUG parent preserves its owned FILL basis in both axes and React surfaces',async t=>{
+  const {mintedTokenCss}=await import('./mint-tokens.js');
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  for(const axis of ['HORIZONTAL','VERTICAL'] as const){
+    const dump=observedHugFill(axis),before=JSON.stringify(dump),{contract,ctx,notes}=propose(dump);
+    const main=axis==='VERTICAL'?'height':'width',field=contract.anatomy.root.parts!.Field;
+    assert.equal(JSON.stringify(dump),before);
+    assert.equal(contract.anatomy.root.literals?.[main],'fit-content');
+    assert.equal(field.literals?.[main],'90px');assert.equal(field.layout?.grow,true);assert.equal(field.layout?.growBasis,undefined);
+    assert.equal(field.literals?.[`min-${main}`],undefined);assert(notes.some(n=>n.includes('source-hug-fill-basis')));
+    for(const emitter of [reactEmitter,reactInlineEmitter]){
+      const files=emitter.emit(contract,ctx),page=await browser.newPage();
+      try{
+        const render=await mountGenerated(page,contract.name,files[0].contents,(files.find(f=>f.path.endsWith('.css'))?.contents??'')+mintedTokenCss(ctx.tokens.semantic));
+        for(const counter of [false,true]){
+          await render({counter});
+          const size=await page.locator('#root > :first-child').evaluate((root,axis)=>{
+            const box=root.getBoundingClientRect(),field=root.children[0].getBoundingClientRect(),text=root.children[0].children[0].getBoundingClientRect();
+            return axis==='VERTICAL'?{root:box.height,field:field.height,text:text.height}:{root:box.width,field:field.width,text:text.width};
+          },axis);
+          assert.deepEqual(size,{root:counter?116:92,field:90,text:80});
+        }
+      }finally{await page.close();}
+    }
+  }
+});
+
+test('captured HUG fill basis requires complete owned uniform geometry and an indefinite parent',()=>{
+  for(const mutate of [
+    (d:DumpSet)=>{delete d.variants[0].children![0].localGeometry;},
+    (d:DumpSet)=>{d.variants[0].children![0].localGeometry!.parentId='foreign';},
+    (d:DumpSet)=>{d.variants[0].children![0].localGeometry!.transform[0][0]=2;},
+    (d:DumpSet)=>{d.variants[0].children![0].localGeometry!.localSize.height=91;},
+    (d:DumpSet)=>{for(const v of d.variants)v.layout!.primarySizing='FIXED';},
+    (d:DumpSet)=>{for(const v of d.variants)v.fillHeight=true;},
+    (d:DumpSet)=>{for(const v of d.variants)v.minHeight=92;},
+  ]){
+    const dump=observedHugFill('VERTICAL');mutate(dump);
+    const {contract,notes}=propose(dump),field=contract.anatomy.root.parts!.Field;
+    assert.equal(field.literals?.height,undefined);assert.equal(field.layout?.growBasis,'zero');
+    assert(!notes.some(n=>n.includes('source-hug-fill-basis')));
+  }
+});

@@ -115,3 +115,63 @@ test('authored MUI styles preserve the existing React line heights on every Text
   for(const node of nodes)assert.deepEqual(node.lineHeight,{unit:'PIXELS',value:expected.get(node.textStyle)});
  }
 });
+
+function equalSizeNamedStyles(reverse=false):any {
+ const variants=[false,true].flatMap(populated=>['Default','Compact'].map(density=>({
+  name:`Populated=${populated},Density=${density}`,nodeId:`variant-${populated}-${density}`,type:'COMPONENT',
+  variantProperties:{Populated:String(populated),Density:density},
+  layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'},fixedSize:{width:160,height:20},
+  children:[{name:'Label',nodeId:`label-${populated}-${density}`,type:'TEXT',fixedSize:{width:100,height:20},
+   text:{characters:populated?'2022-01-01':'开始日期',fontSize:14,fontWeight:400,fontStyle:'Regular',lineHeight:20,fontFamily:populated?'Inter':'PingFang SC',
+    style:populated?'Paragraph/regular/EN-Regular':'Paragraph/regular/CN-Regular',styleKey:populated?'520ae6d88c220051c8ac0b0e5efd893ca867732f':'46c8ca2c076db835fc545ba95b8cb495a2effdfd',textAutoResize:'NONE'}}],
+ })));
+ return {setName:'StyleIdentity',type:'COMPONENT_SET',nodeId:'style-set',propertyDefinitions:{Populated:{type:'VARIANT',defaultValue:'false',variantOptions:['false','true']},Density:{type:'VARIANT',defaultValue:'Default',variantOptions:['Default','Compact']}},variants:reverse?variants.reverse():variants};
+}
+
+test('equal-size named styles retain one original text and its font for both values, defaults and source orders',async t=>{
+ const {proposeFromDump}=await import('./propose-figma.js');const {tokenCorpusFromJson}=await import('./token-corpus.js');
+ const {ContractSchema,walkAnatomy}=await import('../scripts/contract-schema.js');
+ const {reactEmitter,reactInlineEmitter}=await import('./emitter.js');const {mountGenerated}=await import('./react-test-runtime.js');
+ const {mintedTokenCss}=await import('./mint-tokens.js');
+ const {chromium}=await import('playwright-core');const browser=await chromium.launch();t.after(()=>browser.close());
+ const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+ for(const reverse of [false,true]){
+  const source=equalSizeNamedStyles(reverse),before=JSON.stringify(source);
+  const result=proposeFromDump(source,{corpus,mintUnbound:true,hiddenCaptured:true,contractIdByName:new Map(),drawnVariantSurface:'react-runtime'});
+  assert.equal(JSON.stringify(source),before,'original paths, node IDs and text facts are not rewritten');
+  const c=ContractSchema.parse(result.contract);
+  assert(result.notes.some(note=>note.includes('source-text-style-partition')));
+  assert.equal(walkAnatomy(c).filter(({part})=>part.text==='开始日期'||part.text==='2022-01-01').length,2);
+  const minted=result.mintedTokens!.tree;const identities:any[]=[];
+  const visit=(node:any)=>{if(!node||typeof node!=='object')return;if(node.$extensions?.dsContracts?.textStyle)identities.push(node.$extensions.dsContracts.textStyle);else for(const value of Object.values(node))visit(value);};visit(minted);
+  for(const [name,key] of [['Paragraph/regular/CN-Regular','46c8ca2c076db835fc545ba95b8cb495a2effdfd'],['Paragraph/regular/EN-Regular','520ae6d88c220051c8ac0b0e5efd893ca867732f']])
+   assert(identities.some(identity=>identity.name===name&&identity.key===key),'exact source style name/key retained');
+  const ctx={contracts:new Map([[c.id,c]]),icons:new Map<string,string>(),tokens:{primitives:minted,semantic:{},light:{},dark:{},brands:{default:{}}}};
+  for(const emitter of [reactEmitter,reactInlineEmitter]){
+   const files=emitter.emit(c,ctx),page=await browser.newPage();
+   try{
+    const render=await mountGenerated(page,c.name,files[0].contents,files.find(file=>file.path.endsWith('.css'))?.contents);
+    await page.addStyleTag({content:mintedTokenCss(minted)});
+    for(const [props,text,family] of [[{},'开始日期','PingFang SC'],[{populated:true},'2022-01-01','Inter'],[{populated:false},'开始日期','PingFang SC'],[{populated:true,density:'compact'},'2022-01-01','Inter'],[{populated:false,density:'compact'},'开始日期','PingFang SC']] as const){
+     await render(props);assert.equal((await page.locator('#root').innerText()).trim(),text);
+     const leaves=await page.locator('#root').evaluate(root=>[...root.querySelectorAll('*')].filter(el=>el.childElementCount===0&&el.textContent?.trim()&&el.getBoundingClientRect().width>0).map(el=>{const s=getComputedStyle(el),b=el.getBoundingClientRect();return {text:el.textContent?.trim(),family:s.fontFamily.split(',')[0].trim().replaceAll('"',''),size:s.fontSize,weight:s.fontWeight,lineHeight:s.lineHeight,width:b.width,height:b.height};}));
+     assert.deepEqual(leaves,[{text,family,size:'14px',weight:'400',lineHeight:'20px',width:100,height:20}]);
+    }
+   }finally{await page.close();}
+  }
+ }
+});
+
+test('equal-size style identities still refuse ambiguous, hidden, or caller-bound text',async()=>{
+ const {proposeFromDump}=await import('./propose-figma.js');const {tokenCorpusFromJson}=await import('./token-corpus.js');
+ const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+ for(const [reason,edit] of [
+  ['noncorrelated axis',(s:any)=>{s.variants[1].children[0].text={...s.variants[2].children[0].text};}],
+  ['missing font family',(s:any)=>{delete s.variants[0].children[0].text.fontFamily;}],
+  ['hidden Compact text in each style branch',(s:any)=>{for(const v of s.variants)if(v.variantProperties.Density==='Compact')v.children[0].hidden=true;}],
+  ['one shared text control with different drawn defaults',(s:any)=>{s.propertyDefinitions.Value={type:'TEXT',defaultValue:'开始日期'};for(const v of s.variants)v.children[0].propRefs={characters:'Value'};}],
+ ] as const){
+  const source=equalSizeNamedStyles();edit(source);
+  assert.throws(()=>proposeFromDump(source,{corpus,mintUnbound:true,hiddenCaptured:true,contractIdByName:new Map(),drawnVariantSurface:'react-runtime'}),/text-style-identity-refused/,reason);
+ }
+});

@@ -2,9 +2,33 @@
 
 **Public project status · updated 2026-10-14 · V1 is not complete.**
 
-The latest retained fixed 40-set installed-CLI comparison measures **713 passing, 80 failing and 86 unverified variants out of 879 (81.11% passing)**; 18 complete sets pass. The outside-stroke candidate preserves the original ordered identities, reference images, all 32 consumer font faces and the unchanged checker. Against the retained 669/124/86 run, 44 Radix Blockquote variants move from failing to passing; no passing variant is lost and no failure becomes unverified. This is a measured candidate result on the original corpus, not a fresh 204-set run or unseen-kit qualification. The measured package source is `51ca7e0a` (tree `09b3d78c`); the subsequent mixed-width guard is covered separately by focused regressions.
+The latest retained fixed 40-set installed-CLI comparison measures **729 passing, 64 failing and 86 unverified variants out of 879 (82.94% passing)**; 18 complete sets pass. At `5e6cc0b7` (tree `545fdfcd`), every original variant retains the preceding `6c9a7e65` verdict and recorded image, content and geometry comparison. The original ordered identities, reference images, all 32 consumer font faces and checker rules are unchanged. This preserves the earlier 16 Primer ToggleSwitch gains and 44 Radix Blockquote gains with no lost pass or failure becoming unverified. This is known-corpus evidence, separate from the new-kit follow-ups below; it is not a fresh 204-set run or unseen-kit qualification.
 
-The remaining 80 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The fresh 36-case React → Figma run is still in progress; the 17/36 native image ledger below is historical and does not qualify the current revision. Never-seen kits in both directions and a complete private-tester journey remain unqualified.
+The remaining 64 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The completed original React → Figma run at `e3c115ebe` passes all 36 cases against the listed content, font, color, image and size criteria. Those 36 cases cover variants of one Radix Themes Badge family, not 36 different components. These are known cohorts; never-seen kits in both directions remain unqualified.
+
+The first conversion attempt on the newly acquired official [Semi](https://www.figma.com/community/file/1509783980598707066/semi-design-library) and [Arco](https://www.figma.com/community/file/1053233047330321743/arco-design-system) reference copies is complete at `6b5be245`. Each sample contains 12 component sets selected before conversion, with every variant retained. The same checker and thresholds were used, with the kits' font inputs; every rendered reference and content capture matches its frozen file version.
+
+| First-pass sample | Passing | Failing | Unverified | Refused or error, not measured | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Semi | 131 | 469 | 20 | 228 | 848 |
+| Arco | 14 | 57 | 0 | 56 | 127 |
+| Combined | 145 | 526 | 20 | 284 | 975 |
+
+This is **14.87% first-pass success**, separate from the known 40-set result above. It does not meet the unseen-kit goal. The misses include lost layout and text dependencies, omitted non-Latin color tokens, unresolved component ownership, and missing icons. Follow-up fixes preserve Boolean text and children bindings, qualified HUG/FILL dimensions and child flow, named text styles, collision-free non-Latin property names, Unicode token dependencies, and painted-font observations. Their combined focused checks pass. Completed follow-ups at `5e6cc0b7` preserve the original inputs, reference images, font inputs and checker rules:
+
+| Follow-up set | Original pass / fail / unverified / not measured | Follow-up pass / fail / unverified | Whole-set result |
+| --- | --- | --- | --- |
+| Semi Input | 70 / 400 / 16 / 0 | 486 / 0 / 0 | Pass |
+| Semi TextArea | 0 / 36 / 0 / 0 | 36 / 0 / 0 | Pass |
+| Arco Link | 0 / 16 / 0 / 0 | 16 / 0 / 0 | Fail: named slot not exercised |
+| Arco vertical menu | 0 / 0 / 0 / 48 | 7 / 41 / 0 | Fail: variant axis not exercised; content and image failures remain |
+| Semi Checkbox | 0 / 0 / 0 / 60 | 0 / 0 / 60 | Unverified variants: consumer probe passes a string to Boolean children and aborts |
+
+Across these 646 original variants, 475 additional variants pass and no previous pass is lost. Input and TextArea also pass their whole-set checks; the other whole-set failures remain. The comparison is a follow-up, not first-pass credit or a fresh 975-variant run. The original **145/975** first-pass result above is unchanged.
+
+The separate Semi React-source intake contains 61 cases. None has completed native qualification: the original source-validation run ends with incomplete negative controls, and ownership matching fails to resolve public component aliases to their implementation exports. Proposed corrections are separate work; the known Badge result does not qualify this broader library.
+
+A packed CLI from `8067b0015`, installed into an empty directory, converted a live SDS Text Content Heading component set with **2 passing variants**. Its generated package installed and built in a clean React/Vite app; both variants rendered, and changing the heading text and subheading visibility updated both. This supports a guided technical preview. It does not establish outside-user completion, arbitrary-file coverage or a private-beta qualification.
 
 The [owner's fidelity bar](GOAL-BRIDGE.md#finish-line) still requires matching fonts and text color, every text and icon, size within 2 px, and image difference within 5% on both white and black. The existing content checker compares requested font family and numeric weight and reports unavailable fonts separately. Font-file byte identity is diagnostic evidence for rendering differences, not an additional acceptance gate; it does not replace any required check.
 
@@ -19,10 +43,13 @@ content directly to its observed HTML root. Every helper call, object identity,
 ordered write and source return site must still agree with the original render;
 unknown writes, changed children and conflicting roots refuse. A fresh native
 Badge comparison contains the caller text and passed structural readback.
-The historical image ledger records 17 of the 36 original cases with native
-passes on both backgrounds, zero measured image failures and 19 unmeasured.
-The 36 source matches do not count as 36 native passes, and the unseen reverse
-scoreboard remains unqualified.
+The completed native run and subsequent original-source capture compare all
+36 cases, with **36 passing and none failing or unmeasured**. Maximum image
+differences are **0.9211% on white** and **0.7895% on black**; maximum size
+difference is **0.8125 px**. The separate content audit found no missing or
+extra text/icons or mismatched recorded font family, weight, slant, size or
+text color. This supersedes the historical 17/36 image result for this known
+cohort; the unseen reverse scoreboard remains unqualified.
 
 The Sources flow now prepares explicitly selected, observed values of one
 string property as a shared editable native family. A fresh three-size Badge

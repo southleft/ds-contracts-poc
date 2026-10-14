@@ -76,3 +76,19 @@ test('a conditional slot with default content retains its children binding',asyn
  assert.match(tsx,/children === undefined/);
  assert.deepEqual(generatedTypeErrors(c.name,tsx+'\nconst consumer = <ChildrenProbe children="Caller text" />;',{DefaultSample:emit(child)}),[]);
 });
+
+test('an authored Boolean children axis compiles on both React surfaces without becoming a JSX text slot',async()=>{
+ const {emitReactInline}=await import('./emit-react-inline.js');
+ const {generatedTypeErrors}=await import('./react-test-runtime.js');
+ // Minimal form of the original Semi Checkbox's children=true/false axis.
+ // Its original label is drawn conditionally; callers supply a Boolean.
+ const c=contract({parts:{label:{text:'Original label',presenceByCombination:{props:['children'],rows:[
+  {values:['true'],present:true},{values:['false'],present:false},
+ ]}}}},[{name:'children',type:'boolean',default:true,bindings:{code:{prop:'children'},figma:{kind:'VARIANT',property:'children',values:{true:'true',false:'false'}}}}]);
+ const inline=emitReactInline(c,{contracts:new Map([[c.id,c]]),icons:new Map(),tokens}).tsx;
+ for(const tsx of [emit(c),inline]){
+  assert.deepEqual(generatedTypeErrors(c.name,tsx+'\nconst shown = <ChildrenProbe children={true} />;\nconst hidden = <ChildrenProbe children={false} />;'),[]);
+  assert(generatedTypeErrors(c.name,tsx+'\nconst wrong = <ChildrenProbe children="replacement text" />;').some(error=>error.includes('boolean')),
+   'a Boolean source axis must not become a free-form React children slot');
+ }
+});

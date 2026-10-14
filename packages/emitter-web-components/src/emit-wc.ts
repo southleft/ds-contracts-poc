@@ -864,6 +864,8 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   const events = contract.events ?? [];
   const walked = walkAnatomy(contract);
   const rootPart = contract.anatomy.root;
+  if (rootPart.textByProp && contract.props.find(p => p.name === rootPart.textByProp!.prop)?.type === 'boolean')
+    throw new Error('WEB_COMPONENT_BOOLEAN_ROOT_TEXT_UNSUPPORTED');
 
   // ---- deps: composed contracts rendered in the shadow tree -------------
   const depIds = new Set<string>();
@@ -1219,7 +1221,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       const tb = part.textByProp;
       const textFrag = tb
         ? `\${${Object.entries(tb.map)
-            .map(([v, t]) => `(${acc(tb.prop)} ?? '') === ${JSON.stringify(v)} ? ${JSON.stringify(escapeHtml(t))} : `)
+            .map(([v, t]) => `(${acc(tb.prop)} ?? '') === ${contract.props.find(p => p.name === tb.prop)?.type === 'boolean' ? v : JSON.stringify(v)} ? ${JSON.stringify(escapeHtml(t))} : `)
             .join('')}${JSON.stringify(escapeHtml(part.text))}}`
         : tpl(escapeHtml(part.text));
       return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}${emptyRun(part, tb ? textFrag.slice(2, -1) : JSON.stringify(part.text))}>${textRun(part, textFrag)}</${textEl}>`);
