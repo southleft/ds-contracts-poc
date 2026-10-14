@@ -6,7 +6,7 @@ import path from 'node:path';
 import type {Browser} from 'playwright-core';
 import {canonicalJson} from '../core/contract-provenance.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
-import {reactInitialCaseEntry} from './react-cohort.js';
+import {reactResolvedInitialCaseEntry} from './react-case-source.js';
 import {buildReactReference,reactReferenceHtml,type ReactReference} from './react-reference.js';
 import {buildReactOwnershipReference,reactOwnershipEntry,reactOwnershipHook,reactOwnershipRead,reactOwnershipStructure,type ReactOwnership} from './react-ownership.js';
 import {createReactElementCreationObserver} from './react-element-creation.js';
@@ -29,11 +29,6 @@ export interface ReactAuthoredInitialOrigins {
 }
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
 const fail=(reason:string):never=>{throw Error('react-authored-initial-'+reason);};
-function resolvedMounts(reference:ReactReference){
- const imports=reference.cohort.mountedModules??[],files=reference.mountedSourceFiles??[];
- if(imports.length!==files.length)fail('mount-resolution-unavailable');
- return new Map(imports.map((module,i)=>[module,path.relative(reference.sourceRoot,files[i]).split(path.sep).join('/')]));
-}
 function assertPair(row:Row,snapshot:ReactPropertySnapshot){
  if(!/^\d+$/.test(row.id)||row.status!=='observed'||!row.restored||!snapshot||row.treeSha256!==snapshot.treeSha256||row.image!==snapshot.image||
     evidenceSha(JSON.stringify(snapshot.tree))!==row.treeSha256)fail('state-pair-mismatch');
@@ -59,7 +54,7 @@ export async function observeReactAuthoredInitials(options:{browser:Browser;refe
   const save=(file:string,value:unknown)=>writeFileSync(path.join(rowDir,file),JSON.stringify(value,null,2)+'\n',{flag:'wx'});
   try{
    assertCurrent();const snapshot=snapshots[row.id];assertPair(row,snapshot);
-   const derivation=reactInitialCaseEntry(reference.cohort,caseId,observation.source,row.changes,resolvedMounts(reference));
+   const derivation=reactResolvedInitialCaseEntry(reference,caseId,observation.source,row.changes);
    const derived=await buildReactReference(reference.sourceRoot,{...reference.cohort,entry:derivation.entry});
    if(!same(derived.files,reference.files)||derived.css!==reference.css)fail('source-inputs-changed');
    save('derivation.json',{...derivation.receipt,baseReferenceId:reference.id,derivedReferenceId:derived.id,javascriptSha256:evidenceSha(derived.javascript)});
@@ -111,7 +106,7 @@ export function readReactAuthoredInitial(options:{reference:ReactReference;progr
 }):{content:ReactAuthoredContent;ownership:ReactOwnership}{
  const {reference,program,caseId,source,row,snapshot,origin,read}=options;assertPair(row,snapshot);
  if(origin.id!==row.id||origin.status!=='observed')fail('origin-unavailable');
- const derivation=reactInitialCaseEntry(reference.cohort,caseId,source,row.changes,resolvedMounts(reference)),record=JSON.parse(read('derivation.json').toString());
+ const derivation=reactResolvedInitialCaseEntry(reference,caseId,source,row.changes),record=JSON.parse(read('derivation.json').toString());
  const javascript=read('reference.js'),derivedId=evidenceSha(JSON.stringify({version:1,entry:evidenceSha(derivation.entry),
   files:Object.entries(reference.files).map(([file,hash])=>[path.relative(reference.sourceRoot,file),hash]).sort(),javascript:evidenceSha(javascript),css:evidenceSha(reference.css)}));
  if(!same(record,{...derivation.receipt,baseReferenceId:reference.id,derivedReferenceId:derivedId,javascriptSha256:evidenceSha(javascript)})||

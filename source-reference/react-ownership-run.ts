@@ -1,4 +1,5 @@
 import {observeReactOriginalWrapper} from './react-original-wrapper-observation.js';
+import {reactCaseRootOwner} from './react-case-source.js';
 import {readReactOriginalWrappers,type ReactOriginalWrapperCandidate} from './react-original-wrappers.js';
 import {discoverCompiledDependencies} from './react-compiled-dependencies.js';
 import {observeReactJsxHelpers,reactJsxHelperObservationsUnchanged,type ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
@@ -231,6 +232,7 @@ export function startReactOwnership(
                 : undefined;
               if (ownership?.problems.length)
                 throw Error(ownership.problems.join(","));
+              let subject:ReactOwnership['components'][number]|undefined;
               if (ownership) {
                 if (!reactOwnershipMatchesTree(ownership, tree.tree))
                   throw Error("react-ownership-captured-paths-differ");
@@ -239,13 +241,7 @@ export function startReactOwnership(
                 );
                 if (JSON.stringify(again) !== JSON.stringify(ownership))
                   throw Error("react-ownership-not-stable");
-                if (
-                  !ownership.components.some(
-                    (i) =>
-                      i.source.exportName === c.subject && i.roots.includes(""),
-                  )
-                )
-                  throw Error("react-ownership-subject-root-unmatched");
+                subject=reactCaseRootOwner(reference,program,c.id,ownership);
               }
               const ownedHostPaths = ownership ? nestedReactHostPaths(program, ownership, tree.tree) : [];
               const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership, '#root', ownedHostPaths) : undefined;
@@ -293,9 +289,8 @@ export function startReactOwnership(
                     throw Error('jsx-values-observation-unstable');
                   row.jsxValues=jsx.map((subject,i)=>({path:subject.path,result:results[i]}));
                 }
-                const target = ownership.components.find(i => i.source.exportName === c.subject && i.roots.includes(""))!;
                 row.propertyMatrix = await observeReactPropertyMatrix({page, program, ownership, tree:tree.tree,
-                  image:tree.sourcePngSha256, instanceId:target.id, selector:profile.path[0],
+                  image:tree.sourcePngSha256, instanceId:subject!.id, selector:profile.path[0],
                   dir:path.join(rowDir,"matrix"), failures,
                   assertCurrent:()=>{if(stopped || !unchanged())throw Error("react-property-effects-source-changed-or-interrupted");},
                 });
@@ -464,6 +459,7 @@ export function reactOwnershipEngine():Record<string,string>{
         [
           "react-ownership.ts",
           "react-ownership-run.ts",
+          "react-case-source.ts",
           "react-original-wrapper-observation.ts",
           "react-compiled-dependencies.ts",
           "link-root-dependencies.ts",

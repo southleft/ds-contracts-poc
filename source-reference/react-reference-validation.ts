@@ -11,7 +11,7 @@ import {
   evidenceUnchanged,
 } from "./react-validation-evidence.js";
 import { checkSource } from "./check.js";
-import type { SourceObservation } from "./check.js";
+import type { SourceObservation, SourceProfile } from "./check.js";
 import { observeSource, watchSourceFailures } from "./observe.js";
 import {
   captureReference,
@@ -69,24 +69,66 @@ export interface ReactValidation {
 const sha = (bytes: Buffer | string) =>
   createHash("sha256").update(bytes).digest("hex");
 
+/** Disposable control pages only: an indexed witness must keep naming the
+ * original element after its siblings or the element itself are removed. */
+export async function pinReactControlProfile(page: Page, profile: SourceProfile): Promise<SourceProfile> {
+  const pinned = structuredClone(profile);
+  const paths = [pinned.path, ...(pinned.fontPath ? [pinned.fontPath] : []),
+    ...Object.values(pinned.probes ?? {}).map(probe => probe.path)];
+  const resolved = await page.evaluate(({ paths, attribute }) => {
+    const names = new Map<Element, string>();
+    const result: string[][] = [];
+    for (const path of paths) {
+      let scope: Document | ShadowRoot | null = document;
+      const anchored: string[] = [];
+      for (const selector of path) {
+        const element: Element | null = scope?.querySelector(selector) ?? null;
+        if (!element) throw Error('negative-control-witness-missing');
+        let name = names.get(element);
+        if (!name) { name = String(names.size); names.set(element, name); element.setAttribute(attribute, name); }
+        anchored.push(`[${attribute}="${name}"]`);
+        scope = element.shadowRoot;
+      }
+      result.push(anchored);
+    }
+    return result;
+  }, { paths, attribute: `data-dsc-control-${randomUUID().replaceAll('-', '')}` });
+  let index = 0;
+  pinned.path = resolved[index++];
+  if (pinned.fontPath) pinned.fontPath = resolved[index++];
+  for (const probe of Object.values(pinned.probes ?? {})) probe.path = resolved[index++];
+  return pinned;
+}
+
+/** A missing/empty census or changed glyph count does not prove that the
+ * negative control actually changed the font which painted the text. */
+export function changedPaintedFont(before: SourceObservation['platformFonts'], after: SourceObservation['platformFonts']): boolean {
+  const key = (font: SourceObservation['platformFonts'][number]) => JSON.stringify([font.familyName, font.isCustomFont ?? null]);
+  const original = new Set(before.filter(font => font.glyphCount > 0).map(key));
+  return original.size > 0 && after.some(font => font.glyphCount > 0 && !original.has(key(font)));
+}
+
 export async function corruptReactReference(
   page: Page,
   kind: string,
-  selector: string,
+  target: string | SourceProfile,
 ) {
+  const profile: Pick<SourceProfile, 'path' | 'fontPath' | 'associatedLabelText'> = typeof target === 'string' ? { path: [target] } : target;
   await page.evaluate(
-    ({ kind, selector }) => {
+    ({ kind, profile }) => {
+      let scope: Document | ShadowRoot | null = document;
+      let element: Element | null = null;
+      for (const selector of profile.path) { element = scope?.querySelector(selector) ?? null; scope = element?.shadowRoot ?? null; }
       if (kind === "unexpected-text") {
-        document.querySelector(selector)?.append(document.createTextNode('Unexpected source text'));
+        element?.append(document.createTextNode('Unexpected source text'));
         return;
       }
       if (kind === "missing-root") {
-        document.querySelector(selector)?.remove();
+        element?.remove();
         return;
       }
       if (kind === "hidden-root") {
-        const node = document.querySelector<HTMLElement>(selector);
-        if (node) node.style.visibility = "hidden";
+        if (element instanceof HTMLElement || element instanceof SVGElement) element.style.visibility = "hidden";
         return;
       }
       if (kind === "missing-css") {
@@ -112,18 +154,46 @@ export async function corruptReactReference(
             pending.push(rule as CSSGroupingRule);
         }
       }
+      if (kind === 'missing-font') {
+        let fontElement: Element | null = element;
+        if (profile.associatedLabelText !== undefined) {
+          const labels = element && 'labels' in element ? (element as HTMLInputElement).labels : null;
+          fontElement = labels?.length === 1 ? labels[0] : null;
+        } else if (profile.fontPath) {
+          scope = document;
+          for (const selector of profile.fontPath) { fontElement = scope?.querySelector(selector) ?? null; scope = fontElement?.shadowRoot ?? null; }
+        }
+        if (!fontElement) throw Error('negative-control-font-witness-missing');
+        // Removing web faces cannot corrupt an installed system font. Override
+        // the actual selected font scope, including descendant-owned families.
+        const nodes: Node[] = [fontElement];
+        const seen = new Set<Node>();
+        while (nodes.length) {
+          const node = nodes.pop()!;
+          if (seen.has(node)) continue;
+          seen.add(node);
+          if (seen.size > 10_000) throw Error('negative-control-font-scope-too-large');
+          if (node instanceof HTMLElement || node instanceof SVGElement)
+            node.style.setProperty('font-family', '"__dsc_missing_control_font__", serif', 'important');
+          if (node instanceof Element && node.shadowRoot) nodes.push(node.shadowRoot);
+          if (node instanceof HTMLSlotElement) nodes.push(...node.assignedNodes({ flatten: true }));
+          nodes.push(...node.childNodes);
+        }
+      }
     },
-    { kind, selector },
+    { kind, profile },
   );
   if (kind === "hidden-root") {
     // Authored transition:all can defer visibility:hidden. Prove the corruption
     // actually took effect without stripping transitions from the source.
     await page.waitForFunction(
-      (selector) => {
-        const node = document.querySelector(selector);
+      (path) => {
+        let scope: Document | ShadowRoot | null = document;
+        let node: Element | null = null;
+        for (const selector of path) { node = scope?.querySelector(selector) ?? null; scope = node?.shadowRoot ?? null; }
         return !!node && !node.checkVisibility({ checkVisibilityCSS: true });
       },
-      selector,
+      profile.path,
       { timeout: 2000 },
     );
   }
@@ -332,11 +402,12 @@ export function startReactValidation(
                 await page.locator(profile.path[0]).waitFor();
                 await requireOpaqueSandbox(page);
                 await page.evaluate(() => document.fonts.ready);
-                const beforeObservation = await observeSource(page, profile, failures);
-                const before = checkSource(profile, beforeObservation);
-                await corruptReactReference(page, name, profile.path[0]);
-                const afterObservation = await observeSource(page, profile, failures);
-                const result = checkSource(profile, afterObservation);
+                const controlProfile = await pinReactControlProfile(page, profile);
+                const beforeObservation = await observeSource(page, controlProfile, failures);
+                const before = checkSource(controlProfile, beforeObservation);
+                await corruptReactReference(page, name, controlProfile);
+                const afterObservation = await observeSource(page, controlProfile, failures);
+                const result = checkSource(controlProfile, afterObservation);
                 const expected =
                   name === "missing-css"
                     ? "style-mismatch:"
@@ -352,12 +423,13 @@ export function startReactValidation(
                 const rejected =
                   before.status === "valid" &&
                   result.status === "invalid" &&
+                  (name !== 'missing-font' || changedPaintedFont(beforeObservation.platformFonts, afterObservation.platformFonts)) &&
                   result.problems.some((p) => p.startsWith(expected));
                 row.negativeControls.push({
                   name,
                   rejected,
                   problems: result.problems,
-                  ...(profile.fontOrigin === 'web' && name === 'missing-font' ? {
+                  ...(name === 'missing-font' ? {
                     fontEvidence: {before: beforeObservation.platformFonts, after: afterObservation.platformFonts},
                   } : {}),
                 });

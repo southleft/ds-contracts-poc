@@ -20,7 +20,7 @@ import {INSTANCE_FILL_RESET,instanceFillExpression,rootFillLayerCss,hasBoundPain
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {reactAvailabilityGuards, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
 import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {solidFillCompositionRules} from '../packages/core/src/css.js';
@@ -907,6 +907,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
   }
 
   prelude.push(...reactDrawnVariantGuard(contract, codePropOf));
+  prelude.push(...reactAvailabilityGuards(contract, codePropOf));
   const eventAttrsFor = (partName: string, part: Part | undefined, partEl: string): string => {
     const ev = events.find((e) => e.trigger === partName);
     if (!ev) return '';

@@ -1,5 +1,5 @@
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
-import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
 import {qualifyAuthoredTextAppearanceTable} from './source-authored-text-appearance.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
@@ -9082,6 +9082,35 @@ function applyLayoutSplit(holder: Record<string, unknown>, split: LayoutSplit | 
   holder.stylesWhen = [...existing, ...split.stylesWhen];
 }
 
+/** A full drawn-domain guard makes globally constant axes unreachable at any
+ * other value. Remove only those columns from over-budget layout tables;
+ * keep the original public props and complete runtime domain unchanged. */
+function compactDrawnLayoutConstants(contract: Contract, notes: string[]): void {
+  const domain = contract.bindings.figma.drawnVariants;
+  if (!domain?.length) return;
+  const constants = new Map(Object.keys(domain[0]).filter(prop =>
+    domain.every(row => Object.hasOwn(row, prop) && row[prop] === domain[0][prop]))
+    .map(prop => [prop, String(domain[0][prop])]));
+  for (const {part, path} of walkAnatomy(contract)) {
+    const table = part.layoutByCombination;
+    if (!table || table.props.length <= 8) continue;
+    const keep = table.props.flatMap((prop, index) => constants.has(prop) ? [] : [index]);
+    if (!keep.length || keep.length === table.props.length || !table.rows.length ||
+        table.rows.some(row => row.values.length !== table.props.length ||
+          table.props.some((prop, index) => constants.has(prop) && row.values[index] !== constants.get(prop)))) continue;
+    const rows = new Map<string, typeof table.rows[number]>();
+    let conflict = false;
+    for (const row of table.rows) {
+      const values = keep.map(index => row.values[index]), key = JSON.stringify(values), prior = rows.get(key);
+      if (prior && canonicalJson(prior.layout) !== canonicalJson(row.layout)) { conflict = true; break; }
+      rows.set(key, {...row, values});
+    }
+    if (conflict) continue; // Preserve the existing schema refusal for an unproved projection.
+    part.layoutByCombination = {props: keep.map(index => table.props[index]), rows: [...rows.values()]};
+    notes.push(`${path}: constant drawn-domain axes omitted from conditional layout keys; original props and full runtime domain retained`);
+  }
+}
+
 /** A direct visible frame family can carry an exact per-tuple child order.
  * Source object identity must be one-to-one; omissions and synthetic folds
  * keep the existing layout refusal instead of borrowing a default direction. */
@@ -13067,11 +13096,17 @@ function buildPart(
         !part.instanceAffine && !part.instanceAffineByProp && !part.instanceAffineLayout;
       const qualifier=componentLeaf ? qualifyOwnedComponentAvailability :
         !part.component && !part.parts ? qualifyDirectPartAvailability : undefined;
-      const availability=ctx.structuralAvailabilitySource && qualifier &&
-        qualifier(ctx.structuralAvailabilitySource,m.occ,ctx.axes.map(axis=>({
-          property:axis.property,prop:axis.propName,values:axis.values,
-          map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
-        })),declaredPresenceDomain(ctx),ctx.guardedDrawnPartDomain===true);
+      const availabilityAxes=ctx.axes.map(axis=>({
+        property:axis.property,prop:axis.propName,values:axis.values,
+        map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
+      }));
+      const domain=declaredPresenceDomain(ctx),source=ctx.structuralAvailabilitySource;
+      let availability=source && qualifier &&
+        qualifier(source,m.occ,availabilityAxes,domain,ctx.guardedDrawnPartDomain===true);
+      // A plain nested text owner uses the same exact original-path witness as
+      // a nested instance; a direct-only search cannot establish its absence.
+      if(!availability && source && qualifier===qualifyDirectPartAvailability && m.type==='TEXT')
+        availability=qualifyOwnedTextAvailability(source,m.occ,availabilityAxes,domain,ctx.guardedDrawnPartDomain===true);
       if(!availability)throw Error('visibility-demand-owned-part-unqualified:'+where);
       part.availabilityByCombination=availability;
       ctx.notes.push(where+': exact source membership carried independently from authored visibility; an explicit control cannot target an absent plane');
@@ -16593,6 +16628,7 @@ export function proposeFromDump(
     const uncarriedState = error instanceof ExactProjectionError &&
       error.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS' && error.message.includes('state-axis-state-not-carried:');
     const capturedDomainRequired = error instanceof DirectSlotDrawnDomainRequired ||
+      error instanceof SparseMatrixInferenceError ||
       error instanceof ExactProjectionError && (error.code === 'EXACT_MATRIX_RAGGED' || uncarriedState);
     if (opts.drawnVariantSurface !== 'react-runtime' || !capturedDomainRequired) throw error;
     // Freeze the package's API domain before inversion. This declares which
@@ -19194,6 +19230,10 @@ function proposeFromDumpFencedImpl(
   }
   settleOutsideStrokeAlignment(contract, ctx.notes);
   if (validationContract !== contract) settleOutsideStrokeAlignment(validationContract, ctx.notes);
+  if (drawnDeclaration !== undefined) {
+    compactDrawnLayoutConstants(contract as unknown as Contract, ctx.notes);
+    if (validationContract !== contract) compactDrawnLayoutConstants(validationContract as unknown as Contract, ctx.notes);
+  }
   const parsedContract = ContractSchema.parse(validationContract);
   const jointErrors = jointTokenTableErrors(parsedContract);
   if (jointErrors.length) throw new Error(`FIGMA_JOINT_TOKEN_TABLE_UNSUPPORTED: ${jointErrors.join('; ')}`);

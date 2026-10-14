@@ -1,4 +1,4 @@
-import type {Part} from '../scripts/contract-schema.js';
+import {walkAnatomy,type Contract,type Part} from '../scripts/contract-schema.js';
 /** Both React emitters use the same exact table and public prop aliases. */
 export function wrapReactPresence(part:Part,jsx:string,codePropOf:(name:string)=>string):string {
   const t=part.presenceByCombination;if(!t)return jsx;
@@ -19,9 +19,21 @@ export function wrapReactVisibilityOverride(part:Part,shown:string,fallback:stri
 /** Evaluate physical membership before the visibility override, including
  * explicit false: neither Boolean argument targets a source-absent node. */
 export function wrapReactAvailability(part:Part,jsx:string,codePropOf:(name:string)=>string):string {
-  const table=part.availabilityByCombination;if(!table)return jsx;
+  if(!part.availabilityByCombination)return jsx;
+  return `{${reactAvailabilityCondition(part,codePropOf)} ? (<>${jsx}</>) : null}`;
+}
+
+function reactAvailabilityCondition(part:Part,codePropOf:(name:string)=>string):string {
+  const table=part.availabilityByCombination!;
   const values=table.props.map(p=>`(${codePropOf(p)} == null ? null : String(${codePropOf(p)}))`);
   const control=codePropOf(part.visibilityOverrideProp!);
-  const condition=`((table: {values: (string | null)[]; present: boolean}[], values: (string | null)[], control: unknown) => { const row = table.find(r => r.values.every((v,i) => v === values[i])); if (!row) throw new globalThis.Error('structural-availability-combination-unavailable'); if (control !== undefined && !row.present) throw new globalThis.Error('structural-availability-target-unavailable'); if (control !== undefined && typeof control !== 'boolean') throw new globalThis.Error('visibility-override-value-not-boolean'); return row.present; })(${JSON.stringify(table.rows)}, [${values.join(', ')}], ${control})`;
-  return `{${condition} ? (<>${jsx}</>) : null}`;
+  return `((table: {values: (string | null)[]; present: boolean}[], values: (string | null)[], control: unknown) => { const row = table.find(r => r.values.every((v,i) => v === values[i])); if (!row) throw new globalThis.Error('structural-availability-combination-unavailable'); if (control !== undefined && !row.present) throw new globalThis.Error('structural-availability-target-unavailable'); if (control !== undefined && typeof control !== 'boolean') throw new globalThis.Error('visibility-override-value-not-boolean'); return row.present; })(${JSON.stringify(table.rows)}, [${values.join(', ')}], ${control})`;
+}
+
+/** An ancestor may skip a leaf's JSX. Explicit inputs must still address a
+ * structurally present target; omission retains the existing rendering path. */
+export function reactAvailabilityGuards(contract:Contract,codePropOf:(name:string)=>string):string[] {
+  return walkAnatomy(contract).flatMap(({part})=>part.availabilityByCombination && part.visibilityOverrideProp
+    ? [`  if (${codePropOf(part.visibilityOverrideProp)} !== undefined) { ${reactAvailabilityCondition(part,codePropOf)}; }`]
+    : []);
 }

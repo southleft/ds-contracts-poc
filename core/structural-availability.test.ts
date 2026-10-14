@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import {createRequire} from 'node:module';
 import {transformSync} from 'esbuild';
 import {ContractSchema, resolveAvailability, assertAvailableVisibilityTarget, walkAnatomy, type Contract} from '../scripts/contract-schema.js';
-import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
 import {proposeDeclaredDrawnCandidate, proposeBatchFromDump, proposeDeclaredDrawnBatchCandidate} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {emitReact} from './emit-react.js';
@@ -35,6 +35,83 @@ function host(child:Contract,props:any):Contract{return ContractSchema.parse({id
 const native=(c:Contract,extra:Contract[]=[])=>createFigmaEngine({tokens,icons:new Map()}).compileComponentData(c,new Map([c,...extra].map(x=>[x.id,x])));
 
 test('physical source rows cover exact three declared planes before projection',()=>{const s=source(),before=JSON.stringify(s),table=qualifyDirectPartAvailability(s,occurrences(s),axes,rawDomain(),true)!;assert(table);assert.equal(JSON.stringify(s),before);assert.equal(table.rows.length,3);for(const [i,t]of domain.entries())assert.equal(resolveAvailability({availabilityByCombination:table},{a:axes[0].map[t.A as 'X'],b:axes[1].map[t.B as 'P']}),i!==1);assert.throws(()=>resolveAvailability({availabilityByCombination:table},{a:'y',b:'p'}),/combination-unavailable/);});
+
+// Geometry follows the observed nested menu text: a 200px row with a 150px
+// content frame and a childless text leaf. The middle source plane lacks it.
+function nestedTextSource():DumpSet {
+ const s=source();
+ for(const [i,main] of s.variants.entries()){
+  main.bbox={width:200,height:40};main.layout={...layout,counter:'CENTER',padding:[9,8,9,42],primarySizing:'FIXED'} as any;
+  if(i===1)continue;
+  const leaf=main.children![0];leaf.text={...leaf.text!,characters:'Original nested label',fontSize:14,lineHeight:22,fontFamily:'Arial'};
+  leaf.localGeometry={nodeId:leaf.nodeId!,parentId:'content'+i,transform:[[1,0,0],[0,1,0]],localSize:{width:101,height:22},parentSize:{width:150,height:22}};
+  main.children=[{name:'Content',type:'FRAME',nodeId:'content'+i,fillWidth:true,
+   layout:{...layout,counter:'CENTER',spacing:8,primarySizing:'FIXED'} as any,
+   localGeometry:{nodeId:'content'+i,parentId:main.nodeId!,transform:[[1,0,42],[0,1,9]],localSize:{width:150,height:22},parentSize:{width:200,height:40}},children:[leaf]}];
+ }
+ return s;
+}
+function nestedTextOccurrences(s:DumpSet){
+ const result:Array<{variant:string;node:NonNullable<DumpSet['variants'][number]['children']>[number]}>=[];
+ for(const main of s.variants){const visit=(node:typeof result[number]['node'])=>{if(node.type==='TEXT')result.push({variant:main.name,node});for(const child of node.children??[])visit(child);};visit(main);}
+ return result;
+}
+
+test('nested text availability reads exact source paths and preserves captured geometry',()=>{
+ const s=nestedTextSource(),before=JSON.stringify(s),occ=nestedTextOccurrences(s);
+ assert.equal(qualifyDirectPartAvailability(s,occ,axes,rawDomain(),true),undefined,'the direct-only reader cannot claim this nested leaf');
+ assert.equal(qualifyOwnedComponentAvailability(s,occ,axes,rawDomain(),true),undefined,'text cannot borrow instance authority');
+ const table=qualifyOwnedTextAvailability(s,occ,axes,rawDomain(),true)!;assert(table);
+ assert.deepEqual(table.rows.map(r=>r.present),[true,false,true]);assert.equal(JSON.stringify(s),before);
+ for(const main of s.variants)if(main.children?.length){const frame=main.children[0];frame.children=[{name:'Group',type:'GROUP',nodeId:'group-'+main.nodeId,children:frame.children}];}
+ assert(qualifyOwnedTextAvailability(s,nestedTextOccurrences(s),axes,rawDomain(),true),'a unique plain group chain retains ownership');
+});
+
+test('nested text availability refuses changed, hidden, bound, duplicate and cross-instance owners',()=>{
+ const mutations:Array<(s:any)=>void>=[
+  s=>{s.variants[2].children[0].name='Moved';},s=>{s.variants[2].children[0].type='GROUP';},
+  s=>{s.variants[2].children[0].type='INSTANCE';},s=>{s.variants[2].children[0].hidden=true;},
+  s=>{s.variants[2].children[0].bound={visible:'variable'};},s=>{s.variants[2].children[0].propRefs={visible:'Show'};},
+  s=>{s.variants[1].hidden=true;},s=>{s.variants[1].bound={visible:'variable'};},
+  s=>{s.variants[2].children[0].children[0].hidden=true;},s=>{s.variants[2].children[0].children[0].propRefs={visible:'Show'};},
+  s=>{s.variants[2].children[0].children[0].bound={visible:'variable'};},
+  s=>{s.variants[2].children[0].children[0].children=[{name:'Foreign',type:'TEXT',nodeId:'foreign'}];},
+  s=>{s.variants[2].children[0].children[0].nodeId='mark0';},
+  s=>{s.variants[2].children[0].children.push({...s.variants[2].children[0].children[0],nodeId:'duplicate-text'});},
+  s=>{s.variants[2].children.push({...s.variants[2].children[0],nodeId:'duplicate-frame',children:[]});},
+  s=>{s.variants[2].children[0].children=[];},s=>{delete s.variants[2].children[0].children[0].text;},
+  s=>{s.variants[2].nodeId=s.variants[0].nodeId;},s=>{s.variants[2].variantProperties={...s.variants[0].variantProperties};},
+ ];
+ for(const mutate of mutations){const s=nestedTextSource(),occ=nestedTextOccurrences(s);mutate(s);assert.equal(qualifyOwnedTextAvailability(s,occ,axes,rawDomain(),true),undefined,String(mutate));}
+ const s=nestedTextSource(),occ=nestedTextOccurrences(s);
+ for(const node of [{...occ[0].node,nodeId:'forged'},{...occ[0].node,text:{...occ[0].node.text!,characters:'Changed captured bytes'}}])
+  assert.equal(qualifyOwnedTextAvailability(s,[{...occ[0],node},occ[1]],axes,rawDomain(),true),undefined);
+ assert.equal(qualifyOwnedTextAvailability(s,occ,axes,rawDomain(),false),undefined);
+ assert.equal(qualifyOwnedTextAvailability(s,occ,axes,undefined,true),undefined);
+ assert.throws(()=>qualifyOwnedTextAvailability(s,occ,axes,rawDomain().slice(1),true),/incomplete/);
+});
+
+test('nested text visibility keeps real React and native availability guards',()=>{
+ const s=nestedTextSource(),before=JSON.stringify(s),target={instanceId:'usage',componentId:'main0',nodeId:'Iusage;mark0',instancePath:[],childPath:[0,0],visible:true};
+ const result=proposeDeclaredDrawnCandidate(s,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true,fileKey:'file',projectionMode:'exact',stampsObservable:true,hiddenCaptured:true,visibilityDemands:[{fileKey:'file',target}]},domain);
+ const c=ContractSchema.parse(result.proposal.contract),part=walkAnatomy(c).find(w=>w.part.availabilityByCombination)!.part;
+ assert(part.visibilityOverrideProp);assert(visibilityBindingMatches(result.proposal.visibilityBindings![0],c,'file',target));
+ assert.equal(JSON.stringify(s),before);assert.equal(result.acceptedContract,null);
+ const sourceTokens={...tokens,primitives:result.proposal.mintedTokens?.tree??{}},tokenPaths=new Set(result.proposal.mintedTokens?.entries.map(e=>e.ref.slice(1,-1))??[]),scope=new Map([[c.id,c]]);
+ for(const tsx of [emitReact(c,{tokens:tokenPaths,icons:new Map(),contracts:scope}).tsx,emitReactInline(c,{tokens:sourceTokens,icons:new Map(),contracts:scope}).tsx]){
+  const C=load(tsx,c.name),show:string=part.visibilityOverrideProp;
+  for(const state of [{a:'x',b:'p'},{a:'y',b:'q'}]){
+   assert.equal(words(C(state)),'Original nested label');assert.equal(words(C({...state,[show]:true})),'Original nested label');assert.equal(words(C({...state,[show]:false})), '');
+  }
+  assert.equal(words(C({a:'x',b:'q'})), '');
+  for(const value of [true,false,null])assert.throws(()=>C({a:'x',b:'q',[show]:value}),/structural-availability-target-unavailable/);
+  for(const value of [null,'true'])assert.throws(()=>C({a:'x',b:'p',[show]:value}),/visibility-override-value-not-boolean/);
+  assert.throws(()=>C({a:'y',b:'p',[show]:true}),(e:any)=>e.code==='DRAWN_VARIANT_UNDECLARED');
+ }
+ const engine=createFigmaEngine({tokens:sourceTokens,icons:new Map()}),data=engine.compileComponentData(c,scope);
+ for(const v of data.variants){const found:any[]=[];const visit=(n:any)=>{if(n.visibilityTarget)found.push(n);for(const ch of n.children??[])visit(ch);};visit(v.spec);assert.equal(found.length,v.name==='A=X, B=Q'?0:1);if(found.length)assert.equal(found[0].visibilityTarget.visible,true);}
+ for(const value of [true,false]){const h=host(c,{a:'x',b:'q',[part.visibilityOverrideProp]:value});assert.throws(()=>engine.compileComponentData(h,new Map([...scope,[h.id,h]])),/structural-availability-target-unavailable/);}
+});
 
 test('original-node ownership, hidden state and synthetic or duplicate membership cannot grant admission',()=>{for(const mutate of [
  (s:any)=>{s.variants[0].nodeId=s.variants[2].nodeId;},(s:any)=>{s.variants[2].children[0].nodeId=s.variants[0].children[0].nodeId;},

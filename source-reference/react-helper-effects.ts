@@ -446,3 +446,39 @@ export function prepareReactEffectProgram(
     };
     return {root,file,program,checker,sf,source,runtimeFiles,resolveRuntimeExport,requireCurrent};
 }
+
+/** One synchronous dependency scan may read many exports from the same pinned
+ * executable graph. Keep compiler state inside that scan, never across requests. */
+export function createReactEffectProgramScope(reference: ReactHelperReference) {
+  const pinned = {...reference, files: Object.freeze({...reference.files})};
+  const contexts: ReturnType<typeof prepareReactEffectProgram>[] = [];
+  const requireCurrent = () => { for (const context of contexts) context.requireCurrent(); };
+  return {
+    requireCurrent,
+    assertReference(current: ReactHelperReference) {
+      if (current !== reference) throw Error('helper-reference-scope-mismatch');
+    },
+    prepare(module: string) {
+      requireCurrent();
+      const root = realpathSync(pinned.sourceRoot), file = realpathSync(path.resolve(root, module));
+      if (!file.startsWith(root + path.sep) || !Object.hasOwn(pinned.files, file))
+        throw Error('helper-source-not-witnessed');
+      for (const context of contexts) {
+        const sf = context.program.getSourceFile(file);
+        // Only compiled modules already in the common runtime root set have
+        // the same root closure. A TSX entry can add global augmentations even
+        // to an imported external module; retain its ordinary fresh program.
+        if (!sf || (file !== context.file &&
+          (!context.runtimeFiles.includes(file) || !context.runtimeFiles.includes(context.file) ||
+            !ts.isExternalModule(sf) || !ts.isExternalModule(context.sf)))) continue;
+        if (sha(sf.text) !== pinned.files[file]) throw Error('helper-executable-source-not-witnessed');
+        // source() maps the node's own SourceFile, and resolveRuntimeExport()
+        // uses the shared program; neither closes over the selected module.
+        return {...context, file, sf};
+      }
+      const context = prepareReactEffectProgram(pinned, module, {}, {});
+      contexts.push(context);
+      return context;
+    },
+  };
+}
