@@ -402,21 +402,27 @@ test('omitted binding aliases collide with slots and declared events at source a
   }
 });
 
-test('generated binding hazards stay explicit while a style enum no longer duplicates HTML style', () => {
+test('generated binding hazards stay explicit while declared style and children enums retain their types', () => {
   for (const alias of ['class', 'ref', 'rest', 'classes', 'styles', 'style', 'className', 'children']) {
     const c = seed();
     // Ordinary emission exposes unsupported bindings as negative controls.
-    // Style is now a positive control; native omission admission stays guarded.
+    // Declared style and children enums are positive controls; native omission
+    // admission stays guarded by the separate collision tests above.
     delete c.props[0].bindings.figma.unsetValue;
     c.props[0].bindings.code.prop = alias;
     const ctx = { contracts: new Map([[c.id, c]]), icons: new Map<string, string>() };
-    const moduleErrors = generatedTypeErrors(c.name, emitReact(c, { ...ctx, tokens: tokenInventoryFromJson([primitives]) }).tsx);
-    const inlineErrors = generatedTypeErrors(c.name, emitReactInline(c, { ...ctx, tokens }).tsx);
-    if (alias === 'style') {
-      // D.90 fixes ordinary style-enum emission. The separate native omitted-
-      // plane guard remains conservative; its refusals are exercised above.
+    const moduleSource = emitReact(c, { ...ctx, tokens: tokenInventoryFromJson([primitives]) }).tsx;
+    const inlineSource = emitReactInline(c, { ...ctx, tokens }).tsx;
+    const moduleErrors = generatedTypeErrors(c.name, moduleSource);
+    const inlineErrors = generatedTypeErrors(c.name, inlineSource);
+    if (alias === 'style' || alias === 'children') {
       assert.deepEqual(moduleErrors, []);
       assert.deepEqual(inlineErrors, []);
+      for (const source of [moduleSource, inlineSource]) {
+        assert.deepEqual(generatedTypeErrors(c.name, source + `\nconst valid = <${c.name} ${alias}="secondary" />;`), []);
+        assert.ok(generatedTypeErrors(c.name, source + `\nconst invalid = <${c.name} ${alias}="not-a-declared-variant" />;`).length > 0,
+          `${alias} retains the declared enum instead of accepting arbitrary text`);
+      }
     } else {
       assert.ok(moduleErrors.length + inlineErrors.length > 0, `${alias} is unsupported by at least one required emitter`);
     }
