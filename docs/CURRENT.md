@@ -1,8 +1,8 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-10-14 · V1 is not complete.**
+**Public project status · updated 2026-10-15 · V1 is not complete.**
 
-The latest retained fixed 40-set installed-CLI comparison measures **729 passing, 64 failing and 86 unverified variants out of 879 (82.94% passing)**; 18 complete sets pass. A completed rerun at `9c33067b` (tree `5d2a9132`) retains all 879 original identities and the preceding 729 passing, 64 failing and 86 unverified verdicts, with no lost pass or failure becoming unverified. The original ordered identities, reference images, all 32 consumer font faces and checker rules are unchanged. This preserves the earlier 16 Primer ToggleSwitch gains and 44 Radix Blockquote gains with no lost pass or failure becoming unverified. This is known-corpus evidence, separate from the new-kit follow-ups below; it is not a fresh 204-set run or unseen-kit qualification.
+The latest retained fixed 40-set installed-CLI comparison measures **729 passing, 64 failing and 86 unverified variants out of 879 (82.94% passing)**; 18 complete sets pass. A completed rerun at `bd0f7f09` (tree `0e058526`) retains all 879 original identities and the preceding 729 passing, 64 failing and 86 unverified verdicts, with no lost pass or failure becoming unverified. The original ordered identities, reference images, all 32 consumer font faces and checker rules are unchanged. This preserves the earlier 16 Primer ToggleSwitch gains and 44 Radix Blockquote gains. This is known-corpus evidence, separate from the new-kit follow-ups below; it is not a fresh 204-set run or unseen-kit qualification.
 
 The remaining 64 failures and 86 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The completed original React → Figma run at `e3c115ebe` passes all 36 cases against the listed content, font, color, image and size criteria. Those 36 cases cover variants of one Radix Themes Badge family, not 36 different components. These are known cohorts; never-seen kits in both directions remain unqualified.
 
@@ -14,17 +14,17 @@ The first conversion attempt on the newly acquired official [Semi](https://www.f
 | Arco | 14 | 57 | 0 | 56 | 127 |
 | Combined | 145 | 526 | 20 | 284 | 975 |
 
-This is **14.87% first-pass success**, separate from the known 40-set result above. It does not meet the unseen-kit goal. The misses include lost layout and text dependencies, omitted non-Latin color tokens, unresolved component ownership, and missing icons. Follow-up fixes preserve Boolean text and children bindings, qualified HUG/FILL dimensions and child flow, named text styles, collision-free non-Latin property names, Unicode token dependencies, and painted-font observations. Their combined focused checks pass. Completed follow-ups at `5e6cc0b7` and `9c33067b` preserve the original inputs, reference images, font inputs and checker rules. This table combines those completed runs; it is not one fresh whole-cohort run:
+This is **14.87% first-pass success**, separate from the known 40-set result above. It does not meet the unseen-kit goal. The misses include lost layout and text dependencies, omitted non-Latin color tokens, unresolved component ownership, and missing icons. Follow-up fixes preserve Boolean text and children bindings, qualified HUG/FILL dimensions and child flow, named text styles, collision-free non-Latin property names, Unicode token dependencies, and painted-font observations. Their combined focused checks pass. Completed follow-ups at `5e6cc0b7`, `9c33067b` and `bd0f7f09` preserve the original inputs, reference images, font inputs and checker rules. This table combines those completed runs; it is not one fresh whole-cohort run:
 
 | Follow-up set | Original pass / fail / unverified / not measured | Follow-up pass / fail / unverified | Whole-set result |
 | --- | --- | --- | --- |
 | Semi Input | 70 / 400 / 16 / 0 | 486 / 0 / 0 | Pass |
 | Semi TextArea | 0 / 36 / 0 / 0 | 36 / 0 / 0 | Pass |
 | Arco Link | 0 / 16 / 0 / 0 | 16 / 0 / 0 | Fail: named slot not exercised |
-| Arco vertical menu | 0 / 0 / 0 / 48 | 28 / 20 / 0 | Fail: variant axis not exercised; content and image failures remain |
-| Semi Checkbox | 0 / 0 / 0 / 60 | 22 / 38 / 0 | Fail: children and extra-content geometry remain |
+| Arco vertical menu | 0 / 0 / 0 / 48 | 29 / 19 / 0 | Fail: variant axis not exercised; repeated labels and image failures remain |
+| Semi Checkbox | 0 / 0 / 0 / 60 | 60 / 0 / 0 | Pass |
 
-Across these 646 original variants, 518 additional variants pass in the completed follow-ups and no previous pass is lost. Input and TextArea also pass their whole-set checks; the other whole-set failures remain. The comparison is a follow-up, not first-pass credit or a fresh 975-variant run. The original **145/975** first-pass result above is unchanged.
+Across these 646 original variants, 557 additional variants pass in the completed follow-ups and no previous pass is lost. Input, TextArea and Checkbox also pass their whole-set checks; the other whole-set failures remain. The latest 108-variant Checkbox/Menu comparison adds 39 passes and preserves all 108 reference PNGs byte-for-byte. Checkbox's maximum image difference is 3.90625% on white and 4.6875% on black. Menu's font and color mismatches are resolved; repeated group labels, four framing failures and one image mismatch remain. The comparison is a follow-up, not first-pass credit or a fresh 975-variant run. The original **145/975** first-pass result above is unchanged.
 
 The separate Semi React-source intake contains 61 cases. None has completed native qualification. A fresh normal operation for the original Button now creates an editable native component and passes independent structure readback, preserving the original source and all 61 case identities. Only that one case was observed; the other 60 remain explicitly unobserved. Its separate subject-capture diagnostic is within the 5% image limit on white and black, but the required source frame refuses neighboring demo content, so the diagnostic adds no scoreboard credit. General class behavior, the complete original source-validation run and unseen reverse qualification remain open; the known Badge result does not qualify this broader library.
 
