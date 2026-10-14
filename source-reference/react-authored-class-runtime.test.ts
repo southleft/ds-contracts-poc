@@ -126,3 +126,35 @@ test('unowned return values refuse and original render exceptions retain identit
  `);
  assert.equal(result.same,true);assert.equal(result.report.calls[0].completion,'threw');
 });
+
+test('state initialization keeps exact native instance origin without inspecting state',()=>{
+ const result=run(`
+ let stateReads=0;const original=input({percent:25});let owner;
+ class Button extends Component{
+  constructor(props){super(props);this._mounted=true;this._mounted=true;this.state={percentNumber:this.props.percent};}
+  render(){return element({children:this.props.percent},owner);}
+ }
+ const before=Function.prototype.toString.call(Button),renderBefore=Function.prototype.toString.call(Button.prototype.render);
+ register(Button);const effective=resolve(Button,original),instance=api.constructed(Button,effective,new Button(effective));
+ Object.defineProperty(instance.state,'opaque',{get(){stateReads++;throw Error('unrequested state read');}});
+ owner={stateNode:instance,type:Button,memoizedProps:original};const output=api.invoke(instance,instance.render),report=api.report();
+ return {stateReads,percent:instance.state.percentNumber,sameOutput:output.props.children===25,host:api.verifyHost(0,owner),
+  before,after:Function.prototype.toString.call(Button),renderBefore,renderAfter:Function.prototype.toString.call(Button.prototype.render),report};
+ `);
+ assert.equal(result.stateReads,0);assert.equal(result.percent,25);assert.equal(result.sameOutput,true);assert.equal(result.host,true);
+ assert.equal(result.before,result.after);assert.equal(result.renderBefore,result.renderAfter);
+ assert.equal(result.report.effectsVerified,false);assert.equal(result.report.calls[0].effectsVerified,false);
+ assert.equal(result.report.calls[0].current,true);
+});
+
+test('accessor-bearing constructor input refuses before constructor or getter execution',()=>{
+ const result=run(`
+ let reads=0,constructed=0;const original=input({get percent(){reads++;throw Error('getter ran');}});
+ class Button extends Component{constructor(props){super(props);constructed++;this.state={percentNumber:this.props.percent};}render(){return element({},{});}}
+ register(Button);let reason;
+ try{const effective=resolve(Button,original);api.constructed(Button,effective,new Button(effective));}catch(error){reason=error.message;}
+ return {reads,constructed,reason,report:api.report()};
+ `);
+ assert.equal(result.reads,0);assert.equal(result.constructed,0);assert.match(result.reason,/authored-class-props-not-data/);
+ assert.equal(result.report.constructions.length,0);assert.equal(result.report.calls.length,0);
+});

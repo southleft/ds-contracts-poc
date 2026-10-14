@@ -11,7 +11,7 @@ export interface ReactAuthoredClassRuntimeReport {
 
 /** The host installs this only beside the hash-pinned React constructor,
  * class-props resolver and class-render call sites. Original class bodies are
- * unchanged. Planner-approved transparent construction plus the pinned native
+ * unchanged. Planner-approved non-substituting construction plus the pinned native
  * React bases establishes instance origin before any instance reflection.
  *
  * A resolver receipt connects the native-created effective props object to its
