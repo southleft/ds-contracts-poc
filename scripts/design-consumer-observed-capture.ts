@@ -77,7 +77,7 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
  const old=await instrument.evaluate(el=>({value:(el as HTMLElement).style.getPropertyValue('translate'),priority:(el as HTMLElement).style.getPropertyPriority('translate'),style:el.getAttribute('style'),computed:getComputedStyle(el).translate,transform:getComputedStyle(el).transform}));
  if(old.computed!=='none'||old.transform!=='none')return {refused:'capture-translation-instrument-already-transformed'};
  const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
-  const b=n.getBoundingClientRect();return {box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles:[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].map(k=>[k,s.getPropertyValue(k)]);})};
+  const b=n.getBoundingClientRect();return {hasClientRect:n.getClientRects().length>0,emptyBoundingRect:b.x===0&&b.y===0&&b.width===0&&b.height===0,box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles:[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].map(k=>[k,s.getPropertyValue(k)]);})};
  }))}));
  const before=await observe();
  try{
@@ -87,7 +87,12 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
  try{
   await instrument.evaluate((el,shift)=>(el as HTMLElement).style.setProperty('translate',`${shift.x}px ${shift.y}px`,'important'),{x:dx,y:dy});
   const expected=await before.evaluateHandle((stored,shift)=>({snapshot:JSON.stringify(
-   (JSON.parse(stored.snapshot) as Array<{box:FrameBox}>).map(item=>({...item,box:{...item.box,x:item.box.x+shift.x,y:item.box.y+shift.y}}))
+   (JSON.parse(stored.snapshot) as Array<{box:FrameBox;hasClientRect:boolean;emptyBoundingRect:boolean}>).map(item=>
+    // Non-rendering SVG definitions and display:none nodes have no client
+    // rectangle. Chromium keeps their empty bounding rectangle at zero even
+    // when an ancestor moves. Real zero-size layout boxes still translate.
+    !item.hasClientRect&&item.emptyBoundingRect?item:{...item,box:{...item.box,x:item.box.x+shift.x,y:item.box.y+shift.y}}
+   )
   )}),{x:dx,y:dy});
   let unchanged:boolean;
   try{unchanged=await sameSnapshot(expected,await observe());}finally{await expected.dispose();}

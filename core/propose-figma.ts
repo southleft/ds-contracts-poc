@@ -9797,7 +9797,8 @@ function forcedStatePreview(
  *  parent's per variant). Detection is exact-correlation over EVERY
  *  occurrence: the canonical applied value equals the parent axis's
  *  canonical value in each variant. Anything that varies WITHOUT an exact
- *  axis match keeps the first value with a named note — never guessed. */
+ *  axis match or a proved finite joint table keeps the first value with a
+ *  named note — never guessed. */
 function threadInstanceProps(
   base: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean>; omitted?: ReadonlySet<string> }>,
@@ -9806,6 +9807,7 @@ function threadInstanceProps(
   instanceOf: string,
   child?: MinimalChildContract,
   component?: Record<string, unknown>,
+  caller?: Merged,
 ) {
   if (perOccurrence.length < 2) return;
   const enumAxes = ctx.axes.filter((a) => !isBooleanAxis(a) && !a.omitted);
@@ -9930,6 +9932,38 @@ function threadInstanceProps(
           .join(', ')}) — bound as a per-value lookup instead of pinning the first variant's value`,
       );
     } else {
+      // A Boolean child can depend on several parent axes (for example,
+      // selected AND NOT grouped). Preserve every observed value in the same
+      // finite argument table used by source-owned visibility controls. A
+      // source-authenticated partial caller may omit its argument outside the
+      // observed rows; this does not grant the part presence or availability.
+      const variants = new Set(perOccurrence.map(o => o.variant));
+      const complete = perOccurrence.length === ctx.totalVariants.length;
+      const callerRows = booleanChild && component && !complete && caller && qualifiedComponentCallerRows(caller, ctx);
+      if (booleanChild && component && ctx.axes.length > 1 && ctx.axes.length <= 8 &&
+          !ctx.axes.some(a => a.omitted) && variants.size === perOccurrence.length &&
+          perOccurrence.every(o => ctx.totalVariants.includes(o.variant) &&
+            typeof o.canonical[propName] === 'boolean' && !o.omitted?.has(propName)) &&
+          (complete || callerRows)) {
+        const byVariant = new Map(perOccurrence.map(o => [o.variant, o.canonical[propName] as boolean]));
+        const rows = ctx.totalVariants.map(variant => ({
+          values: ctx.axes.map(a => {
+            const raw = axisValuesOf(variant)[a.property];
+            return raw !== undefined && a.values.includes(raw) ? axisValue(a, raw) : undefined;
+          }),
+          value: byVariant.get(variant) ?? null,
+        }));
+        if (rows.every(row => row.values.every(value => value !== undefined)) &&
+            new Set(rows.map(row => JSON.stringify(row.values))).size === rows.length) {
+          ((component.booleanPropsByCombination ??= {}) as Record<string, unknown>)[propName] = {
+            props: ctx.axes.map(a => a.propName), rows,
+          };
+          delete base[propName];
+          fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
+          ctx.notes.push(`${where}: applied prop "${propName}" of the nested "${instanceOf}" retained through an exact joint Boolean table over ${ctx.axes.map(a => a.propName).join(' × ')}${callerRows ? '; source-authenticated unobserved caller rows omit the argument' : ''}`);
+          continue;
+        }
+      }
       // Joint selection is admitted only for a known finite child API and a
       // complete, unambiguous source domain. Missing captures are not defaults.
       const type = child?.props.find(p => p.name === propName)?.type;
@@ -9938,7 +9972,6 @@ function threadInstanceProps(
         const raw=axisValuesOf(o.variant)[a.property];
         return raw === undefined || !a.values.includes(raw) ? undefined : axisValue(a,raw);
       }),value:o.canonical[propName]}));
-      const variants = new Set(perOccurrence.map(o => o.variant));
       if(component && Array.isArray(domain) && ctx.axes.length > 1 && ctx.axes.length <= 8 && !ctx.axes.some(a=>a.omitted) &&
           perOccurrence.length === ctx.totalVariants.length && variants.size === perOccurrence.length &&
           ctx.totalVariants.every(v=>variants.has(v)) && !perOccurrence.some(o=>o.omitted?.has(propName)) &&
@@ -13630,7 +13663,7 @@ function buildPartFromEvidence(
         return { variant: o.variant, omitted,
           canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties ?? {}, id, ctx, where, true, keys, omitted, projectState) };
       });
-      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string), component);
+      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string), component, m);
       // Every applied prop may have been dropped as unmappable (each is a
       // named note) — an empty props object carries nothing.
       if (Object.keys(canonical).length > 0) component.props = canonical;

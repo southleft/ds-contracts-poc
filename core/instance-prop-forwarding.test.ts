@@ -308,17 +308,11 @@ test('enum-to-boolean lookups survive registering the child and reversing observ
   }
 });
 
-test('typed boolean lookups do not infer missing, incompatible or contradictory observations', () => {
+test('typed boolean lookups do not infer missing or incompatible observations', () => {
   const mutations: Array<(f: ReturnType<typeof enumToBooleanFixture>) => void> = [
     f => { delete f.set.variants[2].children![0].componentProperties; },
     f => { f.set.variants[2].children![0].componentProperties = { Powered: 'Unknown' }; },
     f => { f.set.variants[2].children![0].componentProperties = { Powered: 0 as unknown as boolean }; },
-    f => {
-      f.set.propertyDefinitions!.Side = { type: 'VARIANT', defaultValue: 'East', variantOptions: ['East', 'West'] };
-      f.set.variants = f.set.variants.flatMap(row => ['East', 'West'].map(side => ({ ...structuredClone(row),
-        name: `${row.name}, Side=${side}`, variantProperties: { ...row.variantProperties, Side: side } })));
-      f.set.variants[1].children![0].componentProperties = { Powered: 'True' };
-    },
   ];
   for (const mutate of mutations) {
     const f = enumToBooleanFixture(); mutate(f);
@@ -1551,6 +1545,110 @@ test('an unrelated component with the same contract id does not suppress fresh r
  }
 });
 
+
+function jointBooleanFixture(partial = false) {
+  const f = fixture(false), prototype = f.set.variants[0];
+  f.set.propNames = { Selected: 'selected', Grouped: 'grouped', ...(partial ? { Contains: 'contains' } : {}) };
+  f.set.key = 'housing-key'; f.set.nodeId = 'housing-set';
+  const axes = partial ? ['Selected', 'Grouped', 'Contains'] : ['Selected', 'Grouped'];
+  f.set.propertyDefinitions = Object.fromEntries(axes.map(name => [name,
+    { type: 'VARIANT' as const, defaultValue: 'False', variantOptions: ['False', 'True'] }]));
+  f.set.variants = [];
+  for (const Selected of ['False', 'True']) for (const Grouped of ['False', 'True'])
+    for (const Contains of partial ? ['False', 'True'] : ['True']) {
+      const node = structuredClone(prototype), index = f.set.variants.length;
+      node.variantProperties = { Selected, Grouped, ...(partial ? { Contains } : {}) };
+      node.name = Object.entries(node.variantProperties).map(([key, value]) => `${key}=${value}`).join(', ');
+      node.nodeId = `housing-main-${index}`;
+      node.children![0].nodeId = `lamp-${index}`;
+      node.children![0].componentProperties = { Powered: Selected === 'True' && Grouped === 'False' ? 'True' : 'False' };
+      if (Contains === 'False') node.children = [];
+      f.set.variants.push(node);
+    }
+  return f;
+}
+
+test('joint Boolean child arguments preserve two-axis values, source identity and omitted caller rows', async t => {
+  const { resolveBooleanArguments } = await import('./component-boolean-arguments.js');
+  const tokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  for (const partial of [false, true]) {
+    const f = jointBooleanFixture(partial), before = JSON.stringify(f), result = propose(f);
+    const table = result.ref.booleanPropsByCombination!.lit;
+    assert.equal(table.rows.length, partial ? 8 : 4);
+    assert.equal(result.ref.props?.lit, undefined);
+    assert.equal(JSON.stringify(f), before, 'inference leaves source and child main unchanged');
+    const scope = new Map([[result.contract.id, result.contract], [f.child.id, f.child]]);
+    const ctx = { contracts: scope, tokens, icons: new Map<string, string>() };
+    for (const row of table.rows) {
+      const selected = Object.fromEntries(table.props.map((prop, i) => [prop, row.values[i]!]));
+      const present = !partial || selected.contains === 'true';
+      assert.equal(resolveBooleanArguments(f.child, result.ref, selected).lit,
+        present ? selected.selected === 'true' && selected.grouped === 'false' : undefined);
+    }
+    for (const emitter of [reactEmitter, reactInlineEmitter]) {
+      const parent = emitter.emit(result.contract, ctx), child = emitter.emit(f.child, ctx);
+      assert.deepEqual(generatedTypeErrors(result.contract.name, parent[0].contents, { Indicator: child[0].contents }), []);
+      const page = await browser.newPage();
+      try {
+        const render = await mountGenerated(page, result.contract.name, parent[0].contents,
+          parent.find(file => file.path.endsWith('.css'))?.contents,
+          { Indicator: { tsx: child[0].contents, css: child.find(file => file.path.endsWith('.css'))?.contents } });
+        for (const row of [...table.rows, ...table.rows.slice().reverse()]) {
+          const props = Object.fromEntries(table.props.map((prop, i) => [prop, row.values[i] === 'true']));
+          await render(props);
+          const lamp = page.locator('#root span');
+          assert.equal(await lamp.count(), partial && !props.contains ? 0 : 1);
+          if (await lamp.count()) assert.equal(await lamp.getAttribute('data-lit'),
+            props.selected && !props.grouped ? 'true' : null);
+        }
+      } finally { await page.close(); }
+    }
+    const engine = createFigmaEngine({ tokens, icons: new Map() }), host = createFigmaMock();
+    const context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+    const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
+    await run(engine.buildTokensScript(null)); await run(engine.buildComponentScript(f.child, scope));
+    await run(engine.buildComponentScript(result.contract, scope));
+    const owner = host.root.findOne(node => node.type === 'COMPONENT_SET' && node.getSharedPluginData('ds_contracts', 'contractId') === result.contract.id)!;
+    assert.equal(owner.children!.length, table.rows.length);
+    for (const variant of owner.children!) {
+      const instance = variant.findOne(node => node.type === 'INSTANCE');
+      const present = !partial || variant.name.includes('Contains=True');
+      assert.equal(!!instance, present);
+      if (instance) assert.equal(instance.componentProperties!.Powered.value,
+        variant.name.includes('Selected=True') && variant.name.includes('Grouped=False') ? 'True' : 'False');
+    }
+  }
+});
+
+test('joint Boolean arguments refuse missing values, conflicting captures and unauthenticated partial callers', () => {
+  for (const partial of [false, true]) for (const corrupt of [
+    (f: ReturnType<typeof jointBooleanFixture>) => { delete f.set.variants.find(v => v.children!.length)!.children![0].componentProperties; },
+    (f: ReturnType<typeof jointBooleanFixture>) => { f.set.variants.find(v => v.children!.length)!.children![0].componentProperties = { Powered: 'Unknown' }; },
+  ]) {
+    const f = jointBooleanFixture(partial); corrupt(f);
+    assert.equal(propose(f).ref.booleanPropsByCombination, undefined);
+  }
+  for (const corrupt of [
+    (f: ReturnType<typeof jointBooleanFixture>) => { delete f.set.key; },
+    (f: ReturnType<typeof jointBooleanFixture>) => { f.set.variants[3].children![0].nodeId = f.set.variants[1].children![0].nodeId; },
+  ]) {
+    const f = jointBooleanFixture(true); corrupt(f);
+    assert.equal(propose(f).ref.booleanPropsByCombination, undefined);
+  }
+  const conflicting = jointBooleanFixture();
+  const repeated = structuredClone(conflicting.set.variants[0]);
+  repeated.children![0].componentProperties = { Powered: 'True' };
+  conflicting.set.variants.push(repeated);
+  assert.throws(() => propose(conflicting), /duplicate|DUPLICATE|EXACT_MATRIX/);
+  const f = jointBooleanFixture(), result = propose(f), table = result.ref.booleanPropsByCombination!.lit;
+  const duplicate = structuredClone(result.contract), duplicateRef = walkAnatomy(duplicate).find(row => row.part.component)!.part.component!;
+  duplicateRef.booleanPropsByCombination!.lit.rows.push({ ...table.rows[0], value: !table.rows[0].value });
+  assert.equal(ContractSchema.safeParse(duplicate).success, false);
+  const incomplete = structuredClone(result.contract);
+  walkAnatomy(incomplete).find(row => row.part.component)!.part.component!.booleanPropsByCombination!.lit.rows.pop();
+  assert.equal(ContractSchema.safeParse(incomplete).success, false);
+});
 
 function jointEnumFixture(){
  const f=fixture(false,false),prototype=f.set.variants[0];
