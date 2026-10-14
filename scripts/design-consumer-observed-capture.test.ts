@@ -48,3 +48,19 @@ test('visible text capture preserves the original raster despite a taller docume
  assert.deepEqual(during.data,before.data);assert.deepEqual(after.data,before.data);
  }finally{await browser.close();}
 });
+
+
+test('translation retains exact non-paint computed properties on a large descendant tree',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240}});
+ const leaves=Array.from({length:240},(_,i)=>`<span class="leaf" style="left:${i%20}px;top:${Math.floor(i/20)}px;--source-index:${i}"></span>`).join('');
+ await page.setContent(html.replace('</div></div></div>',leaves+'</div></div></div>')+'<style>.leaf{position:absolute;width:1px;height:1px;background:green;--capture-proof:original}.leaf::before{content:"";font-variant-numeric:tabular-nums}</style>');
+ const before=await page.content(),pixels=await page.screenshot();
+ const result=await captureObservedSubject(page,'#subject','#cell');assert('bytes'in result,JSON.stringify(result));assert(result.translation);
+ assert.equal(result.translation.beforeLayoutSha256,result.translation.afterLayoutSha256);
+ assert.equal(await page.content(),before);assert.deepEqual(await page.screenshot(),pixels);
+ await page.addStyleTag({content:'#cell[style] .leaf{--capture-proof:changed}'});
+ const guarded=await page.content();
+ assert.deepEqual(await captureObservedSubject(page,'#subject','#cell'),{refused:'capture-translation-changed-subject'});
+ assert.equal(await page.content(),guarded);
+ }finally{await browser.close();}
+});
