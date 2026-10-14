@@ -5,13 +5,49 @@ import {PNG} from 'pngjs';
 import type {JSHandle, Locator, Page} from 'playwright-core';
 import {enclosingFrame,imageSha256,type FrameBox,type ConsumerFrame} from './design-consumer-framing-v2.js';
 
-// Keep the complete snapshot in Chromium. Sending these multi-megabyte
-// objects through the protocol dominated capture time. Equality is exact;
-// no computed properties, pseudo styles, or geometry fields are omitted.
-type SnapshotHandle = JSHandle<{snapshot:string}>;
-async function sameSnapshot(before:SnapshotHandle,after:SnapshotHandle):Promise<boolean> {
- try{return await before.evaluate((left,right)=>left.snapshot===right.snapshot,after);}
- finally{await after.dispose();}
+// Keep detached baseline values in Chromium. Compare later readings directly
+// instead of building another complete JSON string (including every inherited
+// custom property on every pseudo). No checkpoint or compared field is omitted.
+type Snapshot = ReadonlyArray<{geometry:unknown;style:string[][];pseudos:string[][][]}>;
+type SnapshotHandle = JSHandle<Snapshot>;
+// One reader serves capture and comparison, keeping property order and the SVG
+// local-geometry rule identical. A string avoids transpiler helpers in the page.
+const exactSnapshot = new Function('el','before', `
+ const nodes = [el, ...el.querySelectorAll('*')];
+ if (before !== undefined && before.length !== nodes.length) return false;
+ const captured = [];
+ for (let index = 0; index < nodes.length; index++) {
+  const n = nodes[index], b = n.getBoundingClientRect();
+  const matrix = n instanceof SVGPathElement ? n.getScreenCTM() : null;
+  const local = n instanceof SVGPathElement && matrix ? n.getBBox() : null;
+  const geometry = local && matrix ? {
+   local: [local.x,local.y,local.width,local.height],
+   transform: [matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+scrollX,matrix.f+scrollY],
+   path: n.getAttribute('d')
+  } : {box:[b.x+scrollX,b.y+scrollY,b.width,b.height]};
+  const previous = before === undefined ? undefined : before[index];
+  // Retain the original JSON number/key semantics for the small geometry
+  // record. The large CSS vectors use exact ordered string comparisons.
+  if (previous && JSON.stringify(geometry) !== JSON.stringify(previous.geometry)) return false;
+  const styles = [];
+  for (const pseudo of [null,'::before','::after']) {
+   const s = getComputedStyle(n,pseudo), names = [...s];
+   const prior = previous && (pseudo === null ? previous.style : previous.pseudos[pseudo === '::before' ? 0 : 1]);
+   if (prior && prior.length !== names.length) return false;
+   const pairs = before === undefined ? [] : undefined;
+   for (let i = 0; i < names.length; i++) {
+    const name = names[i], value = s.getPropertyValue(name);
+    if (prior && (prior[i][0] !== name || prior[i][1] !== value)) return false;
+    if (pairs) pairs.push([name,value]);
+   }
+   if (pairs) styles.push(pairs);
+  }
+  if (before === undefined) captured.push({geometry,style:styles[0],pseudos:[styles[1],styles[2]]});
+ }
+ return before === undefined ? captured : true;
+`);
+async function sameSnapshot(root:Locator,before:SnapshotHandle):Promise<boolean> {
+ return root.evaluate(exactSnapshot as (el:Element,before:Snapshot)=>boolean,before);
 }
 
 export async function captureIsolatedRegion(page:Page,root:Locator,relative:FrameBox):Promise<
@@ -42,19 +78,7 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
    }
    return records;
  });
- const observation=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
-   const b=n.getBoundingClientRect(),s=getComputedStyle(n);
-   // Chromium rounds distant SVG path client rectangles differently after
-   // scrolling. Preserve exact local geometry and the document transform
-   // instead of introducing an epsilon into the stability check.
-   const matrix=n instanceof SVGPathElement?n.getScreenCTM():null;
-   const local=n instanceof SVGPathElement&&matrix?n.getBBox():null;
-   const geometry=local&&matrix?{local:[local.x,local.y,local.width,local.height],
-     transform:[matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+scrollX,matrix.f+scrollY],
-     path:n.getAttribute('d')}:{box:[b.x+scrollX,b.y+scrollY,b.width,b.height]};
-   return {geometry,style:[...s].map(k=>[k,s.getPropertyValue(k)]),
-     pseudos:['::before','::after'].map(p=>{const ps=getComputedStyle(n,p);return [...ps].map(k=>[k,ps.getPropertyValue(k)]);})};
- }))}));
+ const observation=()=>root.evaluateHandle(exactSnapshot as (el:Element)=>Snapshot);
  let before:SnapshotHandle|undefined;
  let extent: Awaited<ReturnType<Page['evaluateHandle']>> | undefined;
  try{
@@ -76,7 +100,7 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
      marker.style.cssText=`position:absolute;left:${right-1}px;top:${bottom-1}px;width:1px;height:1px;opacity:0;pointer-events:none`;
      document.body.appendChild(marker);return marker;
    },{right:capture.x+capture.width,bottom:capture.y+capture.height});
-   if(!await sameSnapshot(before,await observation()))return {refused:'isolated-capture-subject-changed'};
+   if(!await sameSnapshot(root,before))return {refused:'isolated-capture-subject-changed'};
    // Beyond-viewport rasterization can change text antialiasing even inside
    // the current viewport. Keep visible regions on the ordinary viewport path.
    const tiles=(origin:number,size:number,span:number)=>{
@@ -109,13 +133,13 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
        await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>resolve())));
        scroll=await page.evaluate(()=>({x:scrollX,y:scrollY}));
        if(!contains())return {refused:'isolated-capture-scroll-region-unreachable'};
-       if(!await sameSnapshot(before,await observation()))return {refused:'isolated-capture-scroll-changed-subject'};
+       if(!await sameSnapshot(root,before))return {refused:'isolated-capture-scroll-changed-subject'};
      }
      const tileBytes=await page.screenshot({omitBackground:true,fullPage:false,
        clip:{...tile,x:tile.x-scroll.x,y:tile.y-scroll.y},animations:'disabled',timeout:10000});
      const png=PNG.sync.read(tileBytes);
      if(png.width!==tile.width||png.height!==tile.height)return {refused:'isolated-capture-image-span-mismatch'};
-     if(!await sameSnapshot(before,await observation())||JSON.stringify(layout)!==JSON.stringify(await bounds())||
+     if(!await sameSnapshot(root,before)||JSON.stringify(layout)!==JSON.stringify(await bounds())||
         JSON.stringify(viewport)!==JSON.stringify(await page.evaluate(()=>({width:innerWidth,height:innerHeight}))))
        return {refused:'isolated-capture-subject-changed'};
      for(let py=0;py<tile.height;py++)for(let px=0;px<tile.width;px++){
@@ -131,7 +155,7 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
    bytes??=PNG.sync.write(composite);
    await restoreScroll();
    if(JSON.stringify(originalScroll)!==JSON.stringify(await page.evaluate(()=>({x:scrollX,y:scrollY})))||
-      !await sameSnapshot(before,await observation()))return {refused:'isolated-capture-scroll-restoration-changed-subject'};
+      !await sameSnapshot(root,before))return {refused:'isolated-capture-scroll-restoration-changed-subject'};
    return {bytes,frame:{layout,capture,deviceScaleFactor:1,pngSha256:imageSha256(bytes)}};
  }finally{
    try{await restoreScroll();}finally{try{

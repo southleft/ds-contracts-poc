@@ -6,6 +6,7 @@ export type SourceInstancePart={nodeId:string;partKey:string;childId:string};
 type Proposal=DumpBatchResult['proposals'][number];
 type Witness=NonNullable<DumpHostOverride['instanceProperties']>;
 const spelling=(s:string)=>s.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/,'');
+const equal=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
 const nodes=(n:DumpNode):DumpNode[]=>[n,...(n.children??[]).flatMap(nodes)];
 function sourcePart(p:Proposal,c:Contract,id:string):Part|undefined{
  const hits=p.sourceInstanceParts?.filter(x=>x.nodeId===id)??[];
@@ -23,6 +24,63 @@ function valueFor(p:Contract['props'][number],observed:Witness['properties'][str
  if(keys.length!==1)return;
  if(p.type==='boolean')return keys[0]==='true'?true:keys[0]==='false'?false:undefined;
  return typeof p.type==='object'&&'enum'in p.type&&p.type.enum.includes(keys[0])?keys[0]:undefined;
+}
+
+/** Isolate an original caller occurrence without moving its arguments into a
+ * different scope. Every original source tuple participates in both gates;
+ * omissions, duplicate tuples and a source property absent from the API refuse.
+ * The sibling keeps the prior part intact on all remaining source rows. */
+function isolateCaller(p:Proposal,c:Contract,source:DumpSet,usage:DumpNode):{part:Part;sourceParts:SourceInstancePart[]}|undefined{
+ const mapping=p.sourceInstanceParts??[],own=mapping.filter(row=>row.nodeId===usage.nodeId);
+ if(own.length!==1)return;
+ const peers=mapping.filter(row=>row.partKey===own[0].partKey);
+ const part=sourcePart(p,c,usage.nodeId!);if(!part)return;
+ if(new Set(peers.map(row=>row.nodeId)).size===1)return {part,sourceParts:mapping};
+ if(peers.length!==new Set(peers.map(row=>row.nodeId)).size||peers.some(row=>row.childId!==own[0].childId))return;
+ const axes=c.props.filter(prop=>prop.bindings.figma.kind==='VARIANT');
+ if(!axes.length||axes.length>8)return;
+ const names=axes.map(prop=>prop.name),properties=axes.map(prop=>prop.bindings.figma.property);
+ if(properties.some(property=>typeof property!=='string')||new Set(properties).size!==properties.length)return;
+ const tuples=new Set<string>(),observed=new Set<string>();let selected=0;
+ const rows:Array<{values:Array<string|null>;present:boolean}>=[];
+ for(const variant of source.variants){
+  const values=variant.variantProperties;
+  if(!values||Object.keys(values).length!==axes.length||properties.some(property=>!Object.hasOwn(values,property!)))return;
+  const tuple=axes.map(prop=>valueFor(prop,{type:'VARIANT',value:values[prop.bindings.figma.property!]}));
+  if(tuple.some(value=>value===undefined))return;
+  const serialized=tuple.map(value=>String(value)),key=JSON.stringify(serialized);if(tuples.has(key))return;tuples.add(key);
+  const occurrences=nodes(variant).filter(node=>peers.some(peer=>peer.nodeId===node.nodeId));
+  if(occurrences.length>1)return;
+  if(occurrences.length){if(observed.has(occurrences[0].nodeId!))return;observed.add(occurrences[0].nodeId!);}
+  const present=occurrences[0]?.nodeId===usage.nodeId;if(present)selected++;
+  // Existing availability may further restrict the original part. Preserve
+  // that gate exactly; neither new branch may create a formerly absent part.
+  const prior=part.presenceByCombination;
+  if(prior){
+   const indices=prior.props.map(name=>names.indexOf(name));if(indices.some(i=>i<0))return;
+   const matches=prior.rows.filter(row=>equal(row.values,indices.map(i=>serialized[i])));
+   if(matches.length!==1||present&&!matches[0].present)return;
+   rows.push({values:serialized,present:matches[0].present&&present});
+  }else rows.push({values:serialized,present});
+ }
+ if(selected!==1||observed.size!==peers.length)return;
+ const path=walkAnatomy(c).find(row=>row.part===part)?.path;if(!path||path.length<2)return;
+ let container:Part|undefined=c.anatomy[path[0]];
+ for(const key of path.slice(1,-1))container=container?.parts?.[key];
+ if(!container?.parts||container.parts[path.at(-1)!]!==part)return;
+ const routes=container.component?.contentSlots;
+ if(routes&&Object.values(routes).filter(keys=>keys.includes(own[0].partKey)).length!==1)return;
+ const taken=new Set(walkAnatomy(c).map(row=>row.name));let key=own[0].partKey+'SourceCaller',suffix=2;
+ while(taken.has(key))key=own[0].partKey+'SourceCaller'+suffix++;
+ const isolated=structuredClone(part);isolated.presenceByCombination={props:names,rows};
+ const prior=part.presenceByCombination;
+ part.presenceByCombination={props:names,rows:rows.map(row=>{
+  const match=prior?.rows.find(previous=>equal(previous.values,prior.props.map(name=>row.values[names.indexOf(name)])));
+  return {values:row.values,present:!row.present&&(prior?match!.present:true)};
+ })};
+ container.parts=Object.fromEntries(Object.entries(container.parts).flatMap(([name,value])=>name===own[0].partKey?[[name,value],[key,isolated]]:[[name,value]]));
+ if(routes)container.component!.contentSlots=Object.fromEntries(Object.entries(routes).map(([name,keys])=>[name,keys.flatMap(member=>member===own[0].partKey?[member,key]:[member])]));
+ return {part:isolated,sourceParts:mapping.map(row=>row.nodeId===usage.nodeId?{...row,partKey:key}:row)};
 }
 // Copy only literal child arguments; owner-dependent expressions cannot be
 // moved into the caller's prop scope without explicit forwarding evidence.
@@ -74,10 +132,9 @@ export function settleNestedPropertyInputs(dump:Record<string,unknown>,fileKey:s
    if(mains.length!==1){fail('wrapper selected main identity is incomplete');continue;}
    const owner=ContractSchema.parse(ownerProposal.contract),parent=ContractSchema.parse(parentProposal.contract);
    if(owner.bindings.figma.anchors.fileKey!==fileKey||parent.bindings.figma.anchors.fileKey!==fileKey){fail('source file identity disagrees');continue;}
-   const caller=usage.nodeId?sourcePart(parentProposal,parent,usage.nodeId):undefined;
-   if(!caller?.component||caller.component.id!==owner.id){fail('caller source occurrence has no unique generated part');continue;}
-   const peerIds=parentProposal.sourceInstanceParts?.filter(p=>p.partKey===parentProposal.sourceInstanceParts?.find(r=>r.nodeId===usage.nodeId)?.partKey).map(p=>p.nodeId)??[];
-   if(new Set(peerIds).size!==1){fail('caller occurrence varies across source planes');continue;}
+   const isolated=usage.nodeId?isolateCaller(parentProposal,parent,source,usage):undefined;
+   const caller=isolated?.part;
+   if(!caller?.component||caller.component.id!==owner.id){fail('caller source occurrence or complete source tuple is unqualified');continue;}
    const main=mains[0],pending=new Map<string,string>();let valid=true;
    const seen=new Set<string>();
    for(const w of witnesses){
@@ -95,8 +152,11 @@ export function settleNestedPropertyInputs(dump:Record<string,unknown>,fileKey:s
     const route=JSON.stringify([owner.id,partIdentity]);let slot=promoted.get(route)??pending.get(route);
     const fallbackKey='nestedDefault'+partIdentity;
     const originalPart=slot?part.parts?.[fallbackKey]:structuredClone(part);
+    // These source-owned presence gates stay on the wrapper slot. They cannot
+    // be copied into caller content, where the same prop name has a new scope.
+    if(originalPart&&!slot){delete originalPart.visibleWhen;delete originalPart.presenceByCombination;}
     const original=originalPart?.component;
-    if(!original||original.id!==child.id||(!slot&&(part.slot||Object.keys(part).some(k=>!['component','layout','parts'].includes(k))||Object.keys(part.layout??{}).some(k=>!['grow','growBasis'].includes(k))))){valid=false;break;}
+    if(!original||original.id!==child.id||(!slot&&(part.slot||Object.keys(part).some(k=>!['component','layout','parts','visibleWhen','presenceByCombination'].includes(k))||Object.keys(part.layout??{}).some(k=>!['grow','growBasis'].includes(k))))){valid=false;break;}
     if(!callerIndependent(originalPart!)){valid=false;break;}
     const supplied:Record<string,string|boolean>={},swaps:Array<{slot:string;part:Part}>=[];
     for(const [name,observation]of Object.entries(w.properties)){
@@ -138,12 +198,16 @@ export function settleNestedPropertyInputs(dump:Record<string,unknown>,fileKey:s
     if(!valid)break;
    }
    if(!valid){fail('source identity, property domain or default is incomplete');continue;}
+   // Cloning a part may duplicate a single-target control or invalidate a
+   // local presence domain. Schema refinements are independent of the
+   // cross-contract checks below; commit neither side unless both pass.
+   if(!ContractSchema.safeParse(parent).success||!ContractSchema.safeParse(owner).success){fail('forwarding violates the owner or caller schema');continue;}
    const scope=new Map(proposals.map(p=>{const c=ContractSchema.parse(p.contract);return[c.id,c] as const;})),before:string[]=[],after:string[]=[];
    for(const c of [scope.get(parent.id)!,scope.get(owner.id)!])validateContract(c,scope,before,new Map());
    scope.set(parent.id,parent);scope.set(owner.id,owner);
    for(const c of [parent,owner])validateContract(c,scope,after,new Map());
    if(after.some(e=>!before.includes(e))){fail('forwarding introduces contract validation errors: '+after.filter(e=>!before.includes(e)).join('; '));continue;}
-   parentProposal.contract=parent as unknown as Proposal['contract'];ownerProposal.contract=owner as unknown as Proposal['contract'];for(const [k,v]of pending)promoted.set(k,v);
+   parentProposal.contract=parent as unknown as Proposal['contract'];parentProposal.sourceInstanceParts=isolated!.sourceParts;ownerProposal.contract=owner as unknown as Proposal['contract'];for(const [k,v]of pending)promoted.set(k,v);
    parentProposal.notes.push(`${parentProposal.setName}: ${witnesses.length} identity-qualified nested property occurrences forwarded with unchanged wrapper defaults; caller-owned child props use existing component slots; live native qualification remains pending`);
   }
  }

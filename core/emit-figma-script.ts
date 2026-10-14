@@ -11310,7 +11310,7 @@ for (const C of COMPONENTS) {
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${opts.nativeSource && (datas.length > 1 || opts.nativeGraphVerification === 2) ? `
+}${opts.nativeSource && (datas.length > 1 || opts.nativeGraphVerification !== undefined) ? `
 ${opts.nativeGraphVerification ? `NATIVE_RESULT.graphVerification = ${opts.nativeGraphVerification};\n` : ''}NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key${opts.nativeGraphVerification ? ', ...result.nativeGraphIdentity' : ''} }));
 ` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no

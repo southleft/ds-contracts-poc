@@ -2432,9 +2432,19 @@ function mapNode(
             if (target) textOverrideTargets[path] = target;
           }
         }
+        // A character edit can cross a nested instance boundary. Preserve the
+        // actual nearest owner's complete selection independently of whether
+        // Figma lists componentProperties among the edited fields. It is an
+        // observation, not a claim that those properties were explicitly edited;
+        // the proposer must still match both source families and the caller path.
+        const textTarget = hit.node.type === 'TEXT' && o.overriddenFields.includes('characters') &&
+          overrides.filter(row => row.id === o.id).length === 1 ? solidFillTarget(node, o.id, 'text-characters') : undefined;
+        const textOwner = textTarget?.instancePath.length
+          ? nestedInstanceProperties(node, textTarget.instanceId, ctx.components, ctx.componentSets) : undefined;
         const fields = o.overriddenFields.filter((f) => f !== 'characters');
-        if (fields.length > 0) {
+        if (fields.length > 0 || textOwner) {
           const h: DumpHostOverride = { path, fields };
+          if (textOwner) h.instanceProperties = textOwner;
           if(fields.includes('componentProperties')){
             const observed=overrides.filter(row=>row.id===o.id&&row.overriddenFields.includes('componentProperties')).length===1
               ? nestedInstanceProperties(node,o.id,ctx.components,ctx.componentSets) : undefined;

@@ -8075,6 +8075,33 @@ function primaryGrowRows(m: Merged, parentModes: ParentModes | null) {
       fills: mode === 'HORIZONTAL' ? o.node.fillWidth === true : mode === 'VERTICAL' ? o.node.fillHeight === true : false};
   });
 }
+/** A conditional allocation needs every tuple where the emitted part can
+ * render. Existing visibility/presence gates may exclude rows; missing source
+ * observations cannot. Keep tuple identity and duplicates explicit. */
+function completePrimaryFillPresence(m: Merged, part: Part, ctx: Ctx): boolean {
+  if (!ctx.axes.length) return false;
+  const tuple = (variant: string) => ctx.axes.map(axis => {
+    const raw = axisValuesOf(variant)[axis.property];
+    return raw !== undefined && axis.values.includes(raw)
+      ? axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw) : undefined;
+  });
+  const all = ctx.totalVariants.map(tuple), observed = m.occ.map(o => tuple(o.variant));
+  if ([...all, ...observed].some(values => values.some(value => value === undefined)) ||
+      new Set(all.map(values => JSON.stringify(values))).size !== all.length) return false;
+  const gate = part.visibleWhen;
+  const gateAxis = gate && ctx.axes.findIndex(axis => axis.propName === gate.prop);
+  if (gate && (gateAxis === undefined || gateAxis < 0 ||
+      gate.equals === undefined && !isBooleanAxis(ctx.axes[gateAxis]))) return false;
+  const domains = absoluteGeometryVisibleDomains(ctx.axes.map(axis => axis.propName),
+    ctx.axes.map(axis => axis.values.map(raw => axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw))), part.visibleWhen);
+  const required = new Set(all.filter(values => values.every((value, i) => domains[i].includes(value!)) &&
+    (!gate || gate.equals !== undefined || values[gateAxis!] === 'true') &&
+    resolvePresence(part, Object.fromEntries(ctx.axes.map((axis, i) => [axis.propName, values[i]]))))
+    .map(values => JSON.stringify(values)));
+  const keys = observed.map(values => JSON.stringify(values));
+  return required.size > 0 && new Set(keys).size === keys.length && keys.length === required.size &&
+    keys.every(key => required.has(key));
+}
 function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: Record<string, unknown>, ctx: Ctx, where: string): void {
   const rows = primaryGrowRows(m, parentModes);
   if (rows.some((row, index) => !row.supported && (m.occ[index].node.fillWidth || m.occ[index].node.fillHeight))) {
@@ -8114,7 +8141,7 @@ function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: 
           !Number.isFinite(geometry.localSize[dim]) || geometry.localSize[dim] <= 0) return undefined;
       return geometry.localSize[dim];
     });
-    if (ctx.mint && m.occ.length === ctx.totalVariants.length && !part.component && !part.slot && !part.repeat &&
+    if (ctx.mint && (m.occ.length === ctx.totalVariants.length || completePrimaryFillPresence(m, part as Part, ctx)) && !part.component && !part.slot && !part.repeat &&
         !part.layoutByProp && !part.layoutByCombination && !part.absoluteGeometry && !part.absoluteGeometryByCombination &&
         literals?.[dim] === undefined && tokens?.[dim] === undefined &&
         sizes.length > 0 && sizes.every(value => value !== undefined && value === sizes[0])) {

@@ -1,3 +1,4 @@
+import {readReactAuthoredClasses,instrumentReactAuthoredClasses} from './react-authored-classes.js';
 import {readReactContextConsumerEffects} from './react-target-effects.js';
 import {planContextExportReads} from './react-context-export-reads.js';
 import {planContextImportFunctions} from './react-context-import-functions.js';
@@ -70,10 +71,15 @@ export function createReactHelperObserver(
   reference: ReactReference,
   plan: ReactEffectInstrumentationPlan,
 ) {
-  if(plan.kind==='jsx-component'&&plan.boundaryOnly&&(!plan.initializers?.length||plan.models.length||plan.component||plan.targetEffects?.length||plan.callbackPlans?.length||plan.callbackValues?.length))throw Error('wrapper-boundary-plan-invalid');
+  if(plan.kind==='jsx-component'&&plan.boundaryOnly&&((!plan.initializers?.length&&!plan.authoredClasses?.length)||plan.models.length||plan.component||plan.targetEffects?.length||plan.callbackPlans?.length||plan.callbackValues?.length))throw Error('wrapper-boundary-plan-invalid');
   if(plan.kind==='jsx-component'&&!plan.boundaryOnly&&!plan.component)throw Error('jsx-component-plan-missing');
   if(plan.kind==='jsx-component'&&plan.contextExportReads&&JSON.stringify(planContextExportReads(reference,plan.contextFactories??[]))!==JSON.stringify(plan.contextExportReads))throw Error('context-export-plan-changed');
   if(plan.kind==='jsx-component'&&plan.bodyModels){const expected=(plan.contextImportFunctions??[]).map(r=>readReactContextConsumerEffects(reference,r.initializer,r.invocation,[]));if(JSON.stringify(expected)!==JSON.stringify(plan.bodyModels))throw Error('context-body-model-changed');}
+  if(plan.kind==='jsx-component'&&plan.authoredClasses?.length){
+    if(!plan.boundaryOnly||plan.models.length||plan.bodyModels?.length||plan.initializers?.length||plan.targets.length)throw Error('authored-class-observation-plan-mixed');
+    const expected=readReactAuthoredClasses(reference,plan.authoredClasses.map(p=>p.target));
+    if(JSON.stringify(expected)!==JSON.stringify(plan.authoredClasses))throw Error('authored-class-observation-plan-changed');
+  }
   const changes: Array<{
     file: string;
     kind: string;
@@ -178,9 +184,9 @@ export function createReactHelperObserver(
           contents =
             runtimeText +
             `\n${G}.registerRuntime(${adapter.kind === "jsx" ? "exports.jsx,exports.jsxs" : "exports.createElement"});\n${G}.registerFragment(exports.Fragment);\n`+
-            (adapter.kind==='create-element'?`${G}.registerForwardRef(exports.forwardRef);\n`:'');
+            (adapter.kind==='create-element'?`${G}.registerForwardRef(exports.forwardRef);\n`+(plan.kind==='jsx-component'&&plan.authoredClasses?.length?`${G}.authoredClassBases(exports.Component,exports.PureComponent);\n`:''):'');
         }
-        contents=instrumentReactContextAdapter(contents,adapter.kind);
+        contents=instrumentReactContextAdapter(contents,adapter.kind,plan.kind==='jsx-component'&&!!plan.authoredClasses?.length);
         seen.add(adapter.kind);
         changes.push({
           file,
@@ -190,11 +196,12 @@ export function createReactHelperObserver(
         });
         return { contents, loader };
       }
-      const registered = instrumentReactHelperSource(
+      let registered = instrumentReactHelperSource(
         text,
         entry ? file : path.relative(reference.sourceRoot, file),
         plan,
       );
+      if(plan.kind==='jsx-component'&&plan.authoredClasses?.length)registered=instrumentReactAuthoredClasses(registered,path.relative(reference.sourceRoot,file).split(path.sep).join('/'),plan.authoredClasses);
       // Other JS dependencies may contain assignment patterns and custom factory
       // protocols. They have no modeled literal authority in this observer.
       if (loader === "js" && (registered === text || plan.kind==='jsx-component'&&(plan.consumerLiterals?.length||plan.hookHelpers?.functions.length||plan.callbackFactories?.functions.length||plan.effectHooks?.length||plan.refHooks?.length||plan.callbackSources?.functions.length||plan.contextCalls?.length||plan.contextRests?.length||plan.contextHelpers?.length||plan.contextConsumerCalls?.length||plan.contextFactories?.length||plan.contextBindings?.reads.length||plan.contextTargets?.reads.length)&&instrumentReactHelperSource(text,path.relative(reference.sourceRoot,file),{...plan,consumerLiterals:[],hookHelpers:undefined,callbackFactories:undefined,effectHooks:[],refHooks:[],callbackSources:{hooks:[],consumers:[],functions:[],calls:[],callbacks:[]},contextCalls:[],contextRests:[],contextHelpers:[],contextConsumerCalls:[],contextFactories:[],contextBindings:{reads:[],functions:[]},contextTargets:{reads:[],objects:[]}})===text)) {

@@ -202,7 +202,7 @@ function checkInput(input: NativeInspectionInput) {
       throw Error('native-absolute-shape-readback-input-invalid');
   }
   const graphValid = !isContractDraft(input) || input.graphComponents === undefined ||
-    (Array.isArray(input.graphComponents) && input.graphComponents.length >= (input.projection.kind === 'prepared-contract-library' ? 1 : 2) &&
+    (Array.isArray(input.graphComponents) && input.graphComponents.length >= (input.projection.kind === 'prepared-contract-library' || input.graphVerification === 1 ? 1 : 2) &&
      same(input.graphComponents.at(-1), input.component) &&
      new Set(input.graphComponents.map(component => component.contractId)).size === input.graphComponents.length &&
      input.graphComponents.every(component => component.nativeContractDraft && !component.nativeSourceCandidate) &&

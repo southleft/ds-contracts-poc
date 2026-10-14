@@ -28,6 +28,7 @@ export interface ReactJsxHelperInstrumentationPlan {
   models: readonly Extract<JsxModelResult,{status:"modeled"}>[];
   component?: HelperSourcePoint;
   boundaryOnly?:true;
+  authoredClasses?:readonly import('./react-authored-classes.js').ReactAuthoredClassPlan[];
   bodyModels?:readonly Extract<import("./react-target-effects.js").ReactContextConsumerEffects,{status:"modeled"}>[];
   contextExportReads?:readonly import("./react-context-export-reads.js").ContextExportRead[];
   contextImportFunctions?:readonly import("./react-context-import-functions.js").ContextImportFunctionRequest[];
