@@ -1401,6 +1401,43 @@ const siblingKeys = (children: DumpNode[], semanticNames: ReadonlySet<string> = 
   });
 };
 
+/** A fold may align anatomy, but cannot authorize tuple text across different
+ * original paths. Relative name/type/ordinal paths only identify a reason to
+ * retain both observed hierarchies here; they never grant source ownership.
+ * Constant text and text found only in one hierarchy do not trigger this veto. */
+function wrapperUnionChangesLiteralLineage(
+  nestedPlanes: readonly (readonly DumpNode[])[],
+  flatPlanes: readonly (readonly DumpNode[])[],
+): boolean {
+  const literals = (planes: readonly (readonly DumpNode[])[]) => {
+    const result = new Map<string, Set<string>>();
+    const visit = (children: readonly DumpNode[], path: Array<[string, string, number]>) => {
+      const ordinals = new Map<string, number>();
+      for (const node of children) {
+        const ordinal = ordinals.get(node.name) ?? 0;
+        ordinals.set(node.name, ordinal + 1);
+        const current: Array<[string, string, number]> = [...path, [node.name, node.type, ordinal]];
+        if (node.type === 'TEXT' && node.propRefs?.characters === undefined &&
+            typeof node.text?.characters === 'string') {
+          const key = JSON.stringify(current), values = result.get(key) ?? new Set<string>();
+          values.add(node.text.characters);
+          result.set(key, values);
+        }
+        // Another component's descendants cannot identify this owner's text.
+        if (node.type === 'FRAME' || node.type === 'GROUP') visit(node.children ?? [], current);
+      }
+    };
+    for (const plane of planes) visit(plane, []);
+    return result;
+  };
+  const nested = literals(nestedPlanes), flat = literals(flatPlanes);
+  for (const [path, values] of flat) {
+    const original = nested.get(path);
+    if (original && new Set([...original, ...values]).size > 1) return true;
+  }
+  return false;
+}
+
 /** Wrapper-union identity fold (audit class duplicate-parts-from-wrapper-
  *  union): some variants nest children under a pass-through wrapper FRAME/
  *  GROUP while others draw the same nodes flat at the parent level (field
@@ -1431,6 +1468,7 @@ function foldWrapperUnion(
     type: string;
     firstNode: DumpNode;
     childKeys: Set<string>;
+    memberPlanes: DumpNode[][];
     present: Set<Occ>;
     painted: boolean;
     positionedMembers: boolean;
@@ -1440,7 +1478,8 @@ function foldWrapperUnion(
     for (const c of childrenOf.get(o)!) {
       if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
       let e = candidates.get(c.name);
-      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set(), painted: false, positionedMembers: false }));
+      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), memberPlanes: [], present: new Set(), painted: false, positionedMembers: false }));
+      e.memberPlanes.push(c.children ?? []);
       e.present.add(o);
       e.painted ||= c.fill !== undefined || c.stroke !== undefined || c.imageFill !== undefined ||
         (c.opacity !== undefined && c.opacity !== 1) || (c.effects?.length ?? 0) > 0 ||
@@ -1482,6 +1521,7 @@ function foldWrapperUnion(
     }
     const foldableKeys = new Set([...w.childKeys].filter((k) => !tainted.has(k)));
     if (foldableKeys.size === 0) continue;
+    const foldSites: Array<{o: Occ; kids: DumpNode[]; matched: DumpNode[]}> = [];
     for (const o of occ) {
       if (w.present.has(o)) continue;
       const kids = childrenOf.get(o)!;
@@ -1499,6 +1539,13 @@ function foldWrapperUnion(
         notes.push(`${where}: wrapper "${wName}" fill sizing is not shared by flat members in "${o.variant}" — retain captured nested and flat hierarchies; no synthetic fill copied`);
         continue;
       }
+      foldSites.push({o, kids, matched});
+    }
+    if (wrapperUnionChangesLiteralLineage(w.memberPlanes, foldSites.map(site => site.matched))) {
+      notes.push(`${where}: wrapper "${wName}" would merge varying literal text across original source paths — retain observed nested and flat hierarchies for exact source-presence and tuple-text ownership`);
+      continue;
+    }
+    for (const {o, kids, matched} of foldSites) {
       const at = kids.indexOf(matched[0]);
       const synthetic = {
         ...w.firstNode,
@@ -8274,6 +8321,9 @@ function nameCrossAxisFillByVariant(
  *  variant proposes exactly the bytes it always did. */
 interface ParentModes {
   nodesByVariant?: Map<string, DumpNode>;
+  /** Source-parent layout still informs a moved instance's observations, but
+   *  a synthetic immediate host cannot inherit that parent's rootFill proof. */
+  allowInstanceRootFill?: boolean;
   base: 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null;
   /** variant name → that variant's parent auto-layout mode. */
   byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>;
@@ -11314,7 +11364,7 @@ function carryInstanceRootInputs(m:Merged,component:Record<string,unknown>,ctx:C
    return typeof value==='number'&&Number.isFinite(value)&&value>=0&&(channel!=='opacity'||value<=1)?value:undefined;
   });
   if(values.every(value=>value!==undefined)){
-   if((channel==='width'||channel==='height') && parent?.nodesByVariant && [...parent.byVariant.values()].every(mode=>mode===(channel==='width'?'VERTICAL':'HORIZONTAL')) && m.occ.every((o,i)=>{
+   if((channel==='width'||channel==='height') && parent?.allowInstanceRootFill!==false && parent?.nodesByVariant && [...parent.byVariant.values()].every(mode=>mode===(channel==='width'?'VERTICAL':'HORIZONTAL')) && m.occ.every((o,i)=>{
     const owner=parent.nodesByVariant!.get(o.variant),mode=owner?.layout?.mode,g=o.node.instanceGeometry,w=o.node.instanceRootOverrides;
     return !!g && !!w && g.nodeId===w.nodeId && g.componentId===w.componentId && g.localSize[channel]===values[i] &&
       canonicalJson(g.transform)===canonicalJson(w.localTransform) &&
@@ -12613,7 +12663,11 @@ function keyedInstanceReplacement(m:Merged,parentMode:ParentModes|null,ctx:Ctx,w
   const parts:Record<string,unknown>={};
   for(const group of qualified){
    const childWhere=`${where}/${group.name}`,childKey=partKey(group.name,ctx,childWhere,selfKey);
-   const part=buildPart(group.merged,parentMode,ctx,childWhere,childKey);
+   // The original source parent still owns observed sizing, but this ref
+   // will render inside our synthetic row. Keep its explicit local root
+   // dimensions instead of transferring a cross-axis fill proof across hosts.
+   const childParentMode=parentMode?{...parentMode,allowInstanceRootFill:false}:parentMode;
+   const part=buildPart(group.merged,childParentMode,ctx,childWhere,childKey);
    if(!part)return refuse('replacement-omitted:'+group.key);
    // The synthetic owner is a row flex container. Its selected instance
    // must fill the horizontal span allocated by observed STRETCH or FILL.

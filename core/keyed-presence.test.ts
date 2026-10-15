@@ -7,7 +7,8 @@ import {createRequire} from 'node:module';
 import {transformSync} from 'esbuild';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {ContractSchema} from '../scripts/contract-schema.js';
+import {ContractSchema, walkAnatomy} from '../scripts/contract-schema.js';
+import {validateContract} from '../packages/core/src/validate.js';
 import {proposeFromDump,asMinimalChildContract} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {emitReact} from './emit-react.js';
@@ -119,4 +120,89 @@ test('keyed fixed instances do not acquire horizontal fill',()=>{
  const c=f.read(),owner=Object.values(c.anatomy.root.parts!)[0]!;
  assert.equal(owner.layout?.grow,undefined);assert.equal(owner.literals?.width,undefined);
  assert(Object.values(owner.parts!).every(p=>p.layout?.grow!==true));
+});
+
+
+/** Same allocation shape as the retained Form source: a 300px column,
+ *  an optional 80px left inset, and a keyed instance occupying 220/300px. */
+function keyedRootInputFixture(split = true) {
+ const f=fixture();
+ for(const [index,child] of f.children.entries())child.anatomy.root={
+  instanceRootInputs:['width','height'],layout:{display:'flex',direction:'column'},
+  literals:{width:'32.001px',height:'64px'},parts:{label:{text:`CHILD_${index}`}},
+ };
+ for(const [index,variant] of f.set.variants.entries()){
+  const inset=variant.variantProperties!.Layout==='Vertical'?80:0,width=300-inset;
+  const childIndex=split&&variant.variantProperties!.Actions==='true'?1:0;
+  variant.nodeId=`form:${index}`;variant.bbox={width:300,height:104};
+  variant.layout={mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:12,
+   padding:[0,0,0,inset],primarySizing:'AUTO',counterSizing:'FIXED'};
+  const node=variant.children![0],nodeId=`use:${index}`,componentId=`main:${childIndex}`;
+  node.nodeId=nodeId;node.instanceOf=`Child${childIndex}`;node.instanceKey=`key${childIndex}`;
+  node.fillWidth=true;node.bbox={width,height:104};
+  node.instanceSizing={horizontal:'FILL',vertical:'FIXED',height:104};
+  node.instanceGeometry={nodeId,componentId,transform:[[1,0,inset],[0,1,0]],localSize:{width,height:104}};
+  node.instanceRootOverrides={nodeId,componentId,componentKey:node.instanceKey,
+   localTransform:[[1,0,inset],[0,1,0]],localSize:{width,height:104},mainSize:{width:32.001,height:64},fields:['width','height']};
+ }
+ return f;
+}
+
+test('keyed row owners preserve explicit source root allocations without borrowing the original column fill proof',()=>{
+ const f=keyedRootInputFixture(),before=JSON.stringify([f.set,f.children]);
+ const c=f.read(),resolved=f.getTokens(),contracts=new Map([c,...f.children].map(c=>[c.id,c]));
+ const errors:string[]=[];validateContract(c,contracts,errors,new Map(),{drawnVariants:'react-runtime'},resolved);
+ assert.deepEqual(errors,[]);
+ const owner=Object.values(c.anatomy.root.parts!)[0];
+ assert.equal(owner.layout?.direction,'row');assert.equal(owner.literals?.width,'100%');
+ const refs=Object.values(owner.parts!);
+ assert.equal(refs.length,2);
+ for(const part of refs){
+  assert.equal(part.component!.rootFill,undefined);
+  assert(part.component!.rootOverrides?.width);assert(part.component!.rootOverrides?.height);
+  assert.equal(part.layout?.grow,true);
+ }
+ const data=createFigmaEngine({tokens:resolved,icons:new Map()}).compileComponentData(c,contracts);
+ assert.equal(data.variants.length,4);
+ for(const variant of data.variants){
+  const dependencies:any[]=[];const walk=(node:any)=>{if(node.dep)dependencies.push(node);for(const child of node.children??[])walk(child);};walk(variant.spec);
+  assert.equal(dependencies.length,1);
+  const inset=variant.name.includes('Vertical')?80:0;
+  assert.equal(dependencies[0].instanceRootOverrides.width.px,300-inset,variant.name);
+  assert.equal(dependencies[0].instanceRootOverrides.height.px,104,variant.name);
+  assert.equal(dependencies[0].grow,true);
+  // Native row allocation still fills through grow; it is separate from the
+  // source-parent rootFill authority removed from the component reference.
+  assert.equal(dependencies[0].fillW,true);
+ }
+ assert(f.getEntries().some(entry=>entry.value==='300px'));
+ assert(f.getEntries().some(entry=>entry.value==='80px'));
+ for(const inline of [false,true]){
+  const code=inline?emitReactInline(c,{tokens:resolved,icons:new Map(),contracts}):emitReact(c,{tokens:new Set(f.getEntries().map(e=>e.ref.slice(1,-1))),tokenValues:resolved,icons:new Map(),contracts});
+  if(inline){assert.match(code.tsx, /220px/);assert.match(code.tsx, /300px/);}
+  else assert.match(code.tsx, /var\(--imported-/);
+ }
+ assert.equal(JSON.stringify([f.set,f.children]),before);
+});
+
+test('keyed row root dimensions retain their source authority checks',()=>{
+ for(const change of [
+  (node:NonNullable<DumpSet['variants'][number]['children']>[number])=>{node.instanceRootOverrides!.componentKey='foreign';},
+  (node:NonNullable<DumpSet['variants'][number]['children']>[number])=>{node.instanceRootOverrides!.localTransform![0][0]=0.5;},
+  (node:NonNullable<DumpSet['variants'][number]['children']>[number])=>{delete node.instanceRootOverrides!.localSize!.width;},
+ ]){
+  const f=keyedRootInputFixture();change(f.set.variants[0].children![0]);
+  const c=f.read(),part=walkAnatomy(c).find(row=>row.part.component?.id==='ds.child0')!.part;
+  assert.equal(part.component!.rootFill,undefined);
+  assert.equal(part.component!.rootOverrides?.width,undefined,'missing source authority must not borrow the bounding box');
+ }
+});
+
+test('an unsplit direct instance retains its proven source-column root fill',()=>{
+ const f=keyedRootInputFixture(false),c=f.read();
+ const part=walkAnatomy(c).find(row=>row.part.component?.id==='ds.child0')!.part;
+ assert.deepEqual(part.component!.rootFill,['width']);
+ assert.equal(part.component!.rootOverrides?.width,undefined);
+ const errors:string[]=[];validateContract(c,new Map([c,...f.children].map(c=>[c.id,c])),errors,new Map(),{drawnVariants:'react-runtime'},f.getTokens());
+ assert.deepEqual(errors,[]);
 });

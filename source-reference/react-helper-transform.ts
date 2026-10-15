@@ -56,6 +56,37 @@ export const reactRuntimeAdapters = [
     kind: "forward-ref",
   },
 ] as const;
+
+/** A classic createElement bundle need not import the automatic JSX runtime.
+ * Every present adapter remains unique and hash-pinned to one React version;
+ * core and renderer are always required. A missing runtime is never supplied. */
+export function selectReactRuntimeAdapters(reference: Pick<ReactReference, 'files' | 'runtimeImports'>) {
+  const requiresJsx = (reference.runtimeImports ?? []).some(edge =>
+    /^react\/jsx(?:-dev)?-runtime(?:\.js)?$/.test(edge.specifier));
+  const active = reactRuntimeAdapters.filter(adapter => adapter.kind !== 'jsx' || requiresJsx ||
+    Object.keys(reference.files).some(file => file.endsWith(adapter.suffix)));
+  const version = [0, 1].find(index => active.every(adapter => {
+    const matches = Object.entries(reference.files).filter(([file]) => file.endsWith(adapter.suffix));
+    return matches.length === 1 && matches[0][1] === adapter.hashes[index];
+  }));
+  return version === undefined ? undefined : { version, adapters: active };
+}
+// Inspect emitted value dependencies. Erased type-only imports do not require a
+// factory adapter; namespace, CommonJS and dynamic imports still do.
+function usesReactJsxRuntime(source: ts.SourceFile): boolean {
+  const runtime = (node: ts.Node | undefined) => !!node && ts.isStringLiteral(node) && /^react\/jsx(?:-dev)?-runtime(?:\.js)?$/.test(node.text);
+  let found = false;
+  function visit(node: ts.Node) {
+    if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) {
+      if (runtime(node.moduleSpecifier)) found = true;
+    } else if (ts.isCallExpression(node) &&
+        (node.expression.kind === ts.SyntaxKind.ImportKeyword || ts.isIdentifier(node.expression) && node.expression.text === 'require') &&
+        runtime(node.arguments[0])) found = true;
+    ts.forEachChild(node, visit);
+  }
+  visit(source);
+  return found;
+}
 export const reactForwardCopyNeedle =
   "      prepareToReadContext(workInProgress);\n      nextProps = renderWithHooks(\n        current,\n        workInProgress,\n        Component,\n        propsWithoutRef,";
 const displayNameNeedle = `          render.name ||
@@ -123,21 +154,14 @@ export function createReactHelperObserver(
     if(!plan.callbackPlans?.some(p=>JSON.stringify(p)===JSON.stringify(value.boundary))||JSON.stringify(rebuildReactTargetCallbackValues(reference,plan.targetEffects??[],plan.initializers??[],value.boundary,value.input))!==JSON.stringify(value))throw Error('target-callback-value-plan-changed');
     for(const target of value.targets)if(!plan.initializers?.some(p=>helperPointKey(p.call)===helperPointKey(target.call)&&helperPointKey(p.render)===helperPointKey(target.render)))throw Error('target-callback-value-initializer-unavailable');
   }
-  // 19.2.4 and 19.2.7: the three installed files differ only in version strings.
-  // Require one complete combination; do not independently admit mixed versions.
-  const version = [0, 1].find((index) =>
-    adapters.every((adapter) => {
-      const matches = Object.entries(reference.files).filter(([file]) =>
-        file.endsWith(adapter.suffix),
-      );
-      return matches.length === 1 && matches[0][1] === adapter.hashes[index];
-    }),
-  );
-  if (version === undefined) throw Error("helper-react-runtime-unsupported");
+  const runtime = selectReactRuntimeAdapters(reference);
+  if (!runtime) throw Error("helper-react-runtime-unsupported");
+  const {version} = runtime;
+  const hasJsxRuntime = runtime.adapters.some(adapter => adapter.kind === 'jsx');
   return {
     changes,
     complete() {
-      if (adapters.some((a) => !seen.has(a.kind)))
+      if (runtime.adapters.some((a) => !seen.has(a.kind)))
         throw Error("helper-react-runtime-registration-missing");
       if(expectedTargetReads.size!==targetReads.size||[...expectedTargetReads].some(k=>!targetReads.has(k)))throw Error('jsx-target-marker-missing');
     },
@@ -153,6 +177,9 @@ export function createReactHelperObserver(
         (reference.files[file] !== inputSha256 || text.includes("__DSC_"))
       )
         throw Error("helper-transform-source-changed-or-reserved");
+      if (!hasJsxRuntime && loader === "js" &&
+          usesReactJsxRuntime(ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS)))
+        throw Error("helper-react-runtime-unsupported");
       const adapter = adapters.find((a) => file.endsWith(a.suffix));
       if (adapter) {
         if (inputSha256 !== adapter.hashes[version])
@@ -244,6 +271,7 @@ export function createReactHelperObserver(
             if (b && ts.isNamespaceImport(b)) reactBindings.add(b.name.text);
           }
         }
+      if (!hasJsxRuntime && usesReactJsxRuntime(js)) throw Error("helper-react-runtime-unsupported");
       const pairs: Array<{
         pos: number;
         text: string;

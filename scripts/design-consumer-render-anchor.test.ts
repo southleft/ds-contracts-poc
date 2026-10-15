@@ -7,6 +7,7 @@ import {qualifyRenderBoundsExport} from './design-consumer-render-export.js';
 import {qualifySourceRenderBoundsExport,validateNativeAnchorProof,type NativeAnchorProof,type SourceRenderRequests} from './design-consumer-render-anchor.js';
 import {alignRecordedFrames,imageSha256,type ConsumerFrame,type FigmaFrame} from './design-consumer-framing-v2.js';
 import {diffPair} from '../extract/figma/visual-parity/img.js';
+import {sourceEquivalentTransitions,sourceEquivalentStateTransitions} from './design-consumer-variants.js';
 const paint={type:'SOLID',color:{r:1,g:1,b:1,a:1},blendMode:'NORMAL'};
 const png=(w:number,h:number,draw:(x:number,y:number)=>number[])=>{const p=new PNG({width:w,height:h});for(let y=0;y<h;y++)for(let x=0;x<w;x++)p.data.set(draw(x,y),(y*w+x)*4);return PNG.sync.write(p);};
 const requests=(id='root',version='fixed'):SourceRenderRequests=>({
@@ -187,4 +188,140 @@ test('the complete render still enters both unmasked five-percent gates, includi
  }
  assert.deepEqual(alignRecordedFrames(bytes,bytes,consumer,{...figma,raster:{...figma.raster!,proof:{...p,anchor:{...p.anchor,pixels:1}}} as any},0),{refused:'figma-render-anchor-proof-mismatch'});
  assert.deepEqual(alignRecordedFrames(bytes,missing,consumer,figma,0),{refused:'figma-render-anchor-proof-mismatch'});
+});
+
+
+// These two distinct source nodes intentionally draw identical full exports.
+// Their node-specific proofs cannot be compared as one serialized object.
+function equivalentAnchorVariant(nodeId:string,x:number,y:number,fileKey='file',version='fixed') {
+ const s=synthetic();s.doc.id=nodeId;s.doc.children[0].id=nodeId+':owner';
+ for(const n of [s.doc,...s.doc.children])for(const key of ['absoluteBoundingBox','absoluteRenderBounds']){
+  n[key].x+=x;n[key].y+=y;
+ }
+ const source={version,nodes:{[nodeId]:{document:s.doc}}},rs=requests(nodeId,version);
+ rs.layout.fileKey=rs.render.fileKey=fileKey;
+ const qualify=(bytes:Buffer)=>{
+  const result=qualifySourceRenderBoundsExport(source,structuredClone(source),nodeId,s.layout,bytes,rs);
+  assert('proof'in result,JSON.stringify(result));assert('kind'in result.proof);return result.proof;
+ };
+ const proof=qualify(s.render);
+ const frame:FigmaFrame={layout:{...proof.layout},render:{...proof.render},pngSha256:imageSha256(s.render),
+  raster:{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof}};
+ return {bytes:s.render,proof,frame,qualify};
+}
+function equivalentAnchorFixture(options:{fileKey?:string;version?:string}={}) {
+ const a=equivalentAnchorVariant('one',10,20),b=equivalentAnchorVariant('two',100,200,options.fileKey,options.version);
+ const cases=[{key:'off',nodeId:'one',interaction:'none',props:{selected:false}},
+  {key:'on',nodeId:'two',interaction:'none',props:{selected:true}}];
+ const images:Record<string,Buffer>={one:a.bytes,two:b.bytes},frames:Record<string,FigmaFrame>={one:a.frame,two:b.frame};
+ const inspect=()=>sourceEquivalentTransitions(cases,'selected',true,['off'],images,frames);
+ return {a,b,cases,images,frames,inspect};
+}
+
+test('source anchor equivalence validates each distinct node before comparing complete exports',()=>{
+ const f=equivalentAnchorFixture();
+ assert.notDeepEqual(f.a.proof,f.b.proof);
+ assert(validateNativeAnchorProof(f.a.proof,f.images.one,f.frames.one.layout,f.frames.one.render));
+ assert(validateNativeAnchorProof(f.b.proof,f.images.two,f.frames.two.layout,f.frames.two.render));
+ assert.deepEqual(f.inspect(),[{from:'off',to:'on',fromNodeId:'one',toNodeId:'two',
+  pngSha256:imageSha256(f.a.bytes),layoutSize:{width:12,height:12}}]);
+});
+
+test('source anchor equivalence refuses independently valid foreign file or version evidence',()=>{
+ for(const options of [{fileKey:'other-file'},{version:'other-version'}]){
+  const f=equivalentAnchorFixture(options);
+  assert(validateNativeAnchorProof(f.b.proof,f.b.bytes,f.b.frame.layout,f.b.frame.render));
+  assert.deepEqual(f.inspect(),[]);
+ }
+});
+
+test('source anchor equivalence binds both independently valid proofs to their respective case IDs',()=>{
+ for(const nodeId of ['one','two']){
+  const f=equivalentAnchorFixture(),other=nodeId==='one'?'two':'one';
+  f.frames[nodeId]=structuredClone(f.frames[other]);
+  const frame=f.frames[nodeId];assert(frame.raster?.kind==='figma-rest-source-opaque-anchor-v1');
+  assert(validateNativeAnchorProof(frame.raster.proof,f.images[nodeId],frame.layout,frame.render));
+  assert.deepEqual(f.inspect(),[]);
+ }
+});
+
+test('source anchor equivalence does not accept mixed kinds or malformed scale through legacy comparison',()=>{
+ for(const other of [undefined,{kind:'figma-rest-full-bounds-v1',scale:1},{kind:'figma-rest-paired-render-v1',scale:1,proof:{}}]){
+  const f=equivalentAnchorFixture();(f.frames.two as any).raster=other;assert.deepEqual(f.inspect(),[]);
+ }
+ for(const scale of [0,2,undefined]){
+  const f=equivalentAnchorFixture();
+  (f.frames.one.raster as any).scale=scale;(f.frames.two.raster as any).scale=scale;
+  assert.deepEqual(f.inspect(),[]);
+ }
+});
+
+test('source anchor equivalence revalidates source and PNG integrity instead of comparing proof labels',()=>{
+ const mutations:((f:ReturnType<typeof equivalentAnchorFixture>)=>void)[]=[
+  f=>{f.b.proof.anchor.coordinateSha256='0'.repeat(64);},
+  f=>{f.b.proof.sourceBeforeNodeSha256='0'.repeat(64);},
+  f=>{f.b.proof.requests.render.nodeIds=['foreign'];},
+  f=>{f.b.proof.sourceDocument.children[0].clipsContent=false;},
+  f=>{f.frames.two.pngSha256='0'.repeat(64);},
+  f=>{const bytes=Buffer.from('not a PNG');f.images.one=f.images.two=bytes;
+   f.frames.one.pngSha256=f.frames.two.pngSha256=imageSha256(bytes);
+   f.a.proof.renderSha256=f.b.proof.renderSha256=imageSha256(bytes);},
+  f=>{const bytes=edit(f.b.bytes,p=>p.data[0]^=1);f.images.one=f.images.two=bytes;
+   f.frames.one.pngSha256=f.frames.two.pngSha256=imageSha256(bytes);},
+ ];
+ for(const mutate of mutations){const f=equivalentAnchorFixture();mutate(f);assert.deepEqual(f.inspect(),[]);}
+});
+
+test('source anchor interior equality never excuses a difference elsewhere in the original PNG',()=>{
+ const f=equivalentAnchorFixture(),bytes=edit(f.b.bytes,p=>p.data.set([80,40,20,255],0));
+ const proof=f.b.qualify(bytes);
+ assert(validateNativeAnchorProof(proof,bytes,proof.layout,proof.render));
+ assert.equal(proof.anchor.rgbaSha256,f.a.proof.anchor.rgbaSha256);
+ f.images.two=bytes;f.frames.two={layout:proof.layout,render:proof.render,pngSha256:imageSha256(bytes),
+  raster:{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof}};
+ assert.deepEqual(f.inspect(),[]);
+});
+
+test('source anchor equivalence still requires exact recorded relative geometry',()=>{
+ // A periodic texture can produce valid correspondence at two different
+ // metadata offsets. Full-byte equality must not erase that layout difference.
+ const pattern=(x:number,y:number)=>[(x+y)%2?30:220,40,100,255];
+ const layout=png(12,12,pattern),render=png(16,14,(x,y)=>y===1&&(x===1||x===3)?[1,2,3,255]:pattern(x-1,y-1));
+ const records=['one','two'].map((id,index)=>{
+  const s=synthetic(),x=index*2;
+  s.doc.id=id;s.doc.absoluteBoundingBox.x=x;
+  s.doc.absoluteRenderBounds={x:-1,y:-1,width:16,height:14};
+  s.doc.children[0].id=id+':owner';s.doc.children[0].absoluteBoundingBox.x=x;
+  s.doc.children[0].absoluteRenderBounds={...s.doc.absoluteRenderBounds};
+  const source={version:'fixed',nodes:{[id]:{document:s.doc}}};
+  const result=qualifySourceRenderBoundsExport(source,structuredClone(source),id,layout,render,requests(id));
+  assert('proof'in result,JSON.stringify(result));assert('kind'in result.proof);const proof=result.proof;
+  assert(validateNativeAnchorProof(proof,render,proof.layout,proof.render));
+  return [id,{layout:proof.layout,render:proof.render,pngSha256:imageSha256(render),
+   raster:{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof}}] as const;
+ });
+ const valid=equivalentAnchorFixture();
+ assert.deepEqual(sourceEquivalentTransitions(valid.cases,'selected',true,['off'],
+  {one:render,two:render},Object.fromEntries(records)),[]);
+ for(const mutate of [(f:FigmaFrame)=>{f.layout.width+=0.125;},(f:FigmaFrame)=>{f.render.x+=1;},
+  (f:FigmaFrame)=>{f.render.height+=1;},(f:FigmaFrame)=>{f.layout.height=NaN;}]){
+  const f=equivalentAnchorFixture();mutate(f.frames.two);assert.deepEqual(f.inspect(),[]);
+ }
+});
+
+test('source anchor equality supplies no semantic or interaction reachability credit',()=>{
+ const f=equivalentAnchorFixture(),result=f.inspect();
+ assert.deepEqual(Object.keys(result[0]).sort(),['from','fromNodeId','layoutSize','pngSha256','to','toNodeId']);
+ f.cases[1].interaction='hover';assert.deepEqual(f.inspect(),[]);
+ const states=[{key:'off',nodeId:'one',interaction:'hover',state:'hover',props:{}},
+  {key:'on',nodeId:'two',interaction:'none',props:{}}];
+ assert.deepEqual(sourceEquivalentStateTransitions(states,['off'],f.images,f.frames),[],
+  'the separate interaction-state path still requires explicit full-bounds raster evidence');
+});
+
+test('source anchor change preserves equivalent legacy absent-raster and full-bounds pairs',()=>{
+ for(const raster of [undefined,{kind:'figma-rest-full-bounds-v1' as const,scale:1 as const}]){
+  const f=equivalentAnchorFixture();f.frames.one.raster=raster;f.frames.two.raster=raster;
+  assert.equal(f.inspect().length,1);
+ }
 });

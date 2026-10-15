@@ -16,7 +16,7 @@ import {createFigmaEngine} from './emit-figma-script.js';
 import {qualifyAuthoredLiteralTextTable,type AuthoredTextAppearanceAxis} from './source-authored-text-appearance.js';
 import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
 import {defaultFontFamilyParts} from '../packages/core/src/anatomy.js';
-import type {DumpSet} from '../extract/figma/types.js';
+import type {DumpNode,DumpSet} from '../extract/figma/types.js';
 
 const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
 function fixture(styled=false,optional=false){
@@ -51,6 +51,64 @@ function render(contract:Contract,tree:Record<string,unknown>,props:Record<strin
  const module={exports:{} as any};vm.runInNewContext(js,{module,exports:module.exports,require:createRequire(import.meta.url),console});
  return renderToStaticMarkup(React.createElement(module.exports[contract.name],props));
 }
+
+function hierarchyFixture(kind:'varying'|'constant'|'bound'='varying'){
+ const f=fixture(), originals=structuredClone(f.source.variants);
+ f.source.propertyDefinitions!.Topology={type:'VARIANT',defaultValue:'Nested',variantOptions:['Nested','Flat','Absent']};
+ if(kind==='bound')f.source.propertyDefinitions!.Title={type:'TEXT',defaultValue:'Caller'};
+ f.source.variants=['Nested','Flat','Absent'].flatMap(topology=>originals.map((original,index)=>{
+  const main=structuredClone(original),prefix=topology+'-'+index;
+  main.name+=',Topology='+topology;main.componentKey='key-'+prefix;main.variantProperties={...main.variantProperties,Topology:topology};
+  const label=main.children![0];
+  if(kind==='constant')label.text!.characters='Unchanged';
+  if(kind==='bound')label.propRefs={characters:'Title'};
+  if(topology==='Nested')main.children![0]={name:'Body',type:'FRAME',layout:structuredClone(main.layout),children:[label]};
+  if(topology==='Absent')main.children!.shift();
+  let serial=0;const identify=(node:DumpNode)=>{node.nodeId=prefix+'-'+serial++;for(const child of node.children??[])identify(child);};identify(main);
+  return main;
+ }));
+ return f;
+}
+
+test('varying literal text keeps original nested and flat lineages with exact tuple ownership',()=>{
+ const f=hierarchyFixture(),original=JSON.stringify(f.source),proposal=f.propose(),contract=ContractSchema.parse(proposal.contract);
+ assert(proposal.notes.some(note=>note.includes('wrapper "Body" would merge varying literal text across original source paths')));
+ const tables=walkAnatomy(contract).flatMap(({part})=>part.textByCombination?[part.textByCombination]:[]);
+ assert.equal(tables.length,2,'each original path retains its own authenticated text table');
+ for(const table of tables){assert.equal(table.rows.length,4);assert.equal(new Set(table.rows.map(row=>row.values[table.props.indexOf('topology')])).size,1);}
+ for(const topology of ['nested','flat','absent'])for(const mode of ['first','second'])for(const state of ['cold','warm']){
+  const text=mode[0].toUpperCase()+mode.slice(1)+':'+state[0].toUpperCase()+state.slice(1);
+  for(const inline of [false,true]){
+   const html=render(contract,proposal.mintedTokens!.tree,{topology,mode,state},inline);
+   assert.equal(html.split(text).length-1,topology==='absent'?0:1,topology+'/'+mode+'/'+state);
+   assert(html.includes('Keep'),'unrelated source sibling remains present');
+  }
+ }
+ assert.equal(JSON.stringify(f.source),original,'source IDs, paths, characters and tuples are not rewritten');
+});
+
+test('constant literals and explicit text controls retain the existing wrapper fold',()=>{
+ for(const kind of ['constant','bound'] as const){
+  const f=hierarchyFixture(kind),before=JSON.stringify(f.source),proposal=f.propose();
+  assert(proposal.notes.some(note=>note.includes('wrapper-union identity')),kind);
+  assert(!proposal.notes.some(note=>note.includes('would merge varying literal text across original source paths')),kind);
+  assert.equal(JSON.stringify(f.source),before,kind);
+ }
+});
+
+test('lineage separation retains mixed-path and ambiguous-membership refusals',()=>{
+ const f=hierarchyFixture(),axes:AuthoredTextAppearanceAxis[]=[...f.axes,{property:'Topology',prop:'topology',values:['Nested','Flat','Absent'],map:{Nested:'nested',Flat:'flat',Absent:'absent'}}];
+ const domain=f.source.variants.map(main=>axes.map(axis=>axis.map[main.variantProperties![axis.property]]));
+ const occurrences=f.source.variants.flatMap(main=>{
+  const texts:DumpNode[]=[];const visit=(node:DumpNode)=>{if(node.name==='Label')texts.push(node);for(const child of node.children??[])visit(child);};visit(main);
+  return texts.map(node=>({variant:main.name,node}));
+ });
+ assert.equal(qualifyAuthoredLiteralTextTable(f.source,'file',occurrences,axes,domain,true,{}),undefined,'combining original paths remains unauthorized');
+ const flat=occurrences.filter(row=>row.variant.endsWith('Topology=Flat')),part={visibleWhen:{prop:'topology',equals:'flat'}};
+ assert(qualifyAuthoredLiteralTextTable(f.source,'file',flat,axes,domain,true,part),'an exact original branch qualifies independently');
+ f.source.variants.find(main=>main.variantProperties!.Topology==='Absent')!.children!.push({name:'Label',type:'RECTANGLE',nodeId:'ambiguous-kind'});
+ assert.equal(qualifyAuthoredLiteralTextTable(f.source,'file',flat,axes,domain,true,part),undefined,'a conflicting original member kind is not absence');
+});
 
 test('source-authenticated tuple literals render unchanged in React and native without style evidence',()=>{
  const f=fixture(),before=JSON.stringify(f.source),{proposal,contract,part}=compiled(f);

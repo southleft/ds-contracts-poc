@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {transformSync,version as esbuildVersion,type Loader} from 'esbuild';
 import type {ReactReference} from './react-reference.js';
 import {readReactElementInvocationPlans,transformReactElementSource,reactElementInvocationRuntime,type ReactElementInvocationPlan,type ReactElementInvocation} from './react-element-invocation.js';
-import {reactRuntimeAdapters,reactForwardCopyNeedle} from './react-helper-transform.js';
+import {reactRuntimeAdapters,reactForwardCopyNeedle,selectReactRuntimeAdapters} from './react-helper-transform.js';
 import {reactElementProvenanceRuntime} from './react-element-provenance.js';
 import {reactCompiledValuesRuntime} from './react-compiled-values.js';
 import {readReactElementSourceCalls,type ReactElementSourceCall,type ReactElementSourceCalls} from './react-element-source-call.js';
@@ -223,11 +223,15 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
   const targets=[...new Map(targetResolutions.flatMap(result=>result.status==='resolved'
     ?[[JSON.stringify([result.definition.module,result.definition.sourceSha256,result.definition.span]),result.definition] as const]:[])).values()];
   const runtime=Object.keys(reference.files).filter(f=>f.endsWith(runtimeSuffix));
-  if(runtime.length!==1||reference.files[runtime[0]]!==runtimeSha)throw Error('element-creation-react-runtime-unsupported');
-  const version=[0,1].find(index=>reactRuntimeAdapters.every(adapter=>{
-    const matches=Object.entries(reference.files).filter(([file])=>file.endsWith(adapter.suffix));
-    return matches.length===1&&matches[0][1]===adapter.hashes[index];
-  }));
+  if(runtime.length>1||runtime.length===1&&reference.files[runtime[0]]!==runtimeSha)throw Error('element-creation-react-runtime-unsupported');
+  const selectedRuntime=selectReactRuntimeAdapters(reference);
+  // Preserve the existing JSX-only source-link mode without granting props
+  // provenance. A classic bundle, or any present core/renderer, needs a fully
+  // coherent runtime tuple; unsupported or duplicate runtimes cannot downgrade.
+  const jsxOnly=runtime.length===1&&!Object.keys(reference.files).some(file=>
+    [reactRuntimeAdapters[0],reactRuntimeAdapters[2]].some(adapter=>file.endsWith(adapter.suffix)));
+  if(!selectedRuntime&&!jsxOnly)throw Error(referenceEntry===undefined?'element-creation-react-runtime-unsupported':'reference-entry-react-runtime-unsupported');
+  const version=selectedRuntime?.version;
   const forwardRuntime=version===undefined?undefined:Object.keys(reference.files).find(file=>file.endsWith(reactRuntimeAdapters[2].suffix));
   const coreRuntime=version===undefined?undefined:Object.keys(reference.files).find(file=>file.endsWith(reactRuntimeAdapters[0].suffix));
   // Instrument witnessed workspace sources, not external runtime dependencies
@@ -331,6 +335,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
     transformedSources.push({file:'react-reference.tsx',sourceSha256,transform:transformed,code});
   }
   const changes:Array<{file:string;inputSha256:string;outputSha256:string;sites:number}>=[],seen=new Set<string>();
+  if(!runtime.length&&sites.some(site=>site.factory!=='createElement'))throw Error('element-creation-react-runtime-unsupported');
   return {
     sites,plans,changes,sourceCalls,transformedSources,transformRefusals,targets,targetResolutions,hook:reactElementCreationHook(sites,plans,version!==undefined,sourceCalls,targets),
     referenceEntry:entry?{source:entry.text,identity:entry.identity}:undefined,
