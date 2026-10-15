@@ -73,3 +73,74 @@ test('host extent must match independently recorded selector bounds',()=>{
  const f=fixture();assert.throws(()=>readObservedAuthoredLayout(f.tree,f.origin,f.descendants),/host-bounds-unqualified/);
  assert.throws(()=>readObservedAuthoredLayout(f.tree,f.origin,f.descendants,{width:201,height:4}),/host-bounds-unqualified/);
 });
+
+
+function fillFixture(width=820){
+ const f=fixture(width-24,100);
+ Object.assign(f.tree.style,plain(width,44,'flex'),{'box-sizing':'border-box','padding-left':'12px','padding-right':'12px','padding-top':'12px','padding-bottom':'12px',
+  'margin-left':'0px','margin-right':'0px','margin-top':'0px','margin-bottom':'0px','min-width':'0px','min-height':'0px','max-width':'none','max-height':'none','flex-grow':'0','flex-basis':'auto'});
+ f.track.style=plain(width-24,20);f.inner.style=plain(width-24,20);
+ f.origin.roots[0].sizes=[{channel:'width',status:'unresolved',authoredValue:'100%',selectors:['.root'],reason:'declared-fill-width-containing-block-viewport-only'},
+  {channel:'height',status:'auto',value:'auto',selectors:[]}];
+ f.descendants.nodes=[{path:'0',tag:'div',sizes:[{channel:'width',status:'auto',value:'auto',selectors:[]},{channel:'height',status:'auto',value:'auto',selectors:[]}]},
+  {path:'0.0',tag:'div',sizes:[{channel:'width',status:'unresolved',authoredValue:'100%',selectors:['.label'],reason:'declared-fill-width-containing-block-indefinite',observedPercentage:{percent:100,parentSize:width-24,usedSize:width-24}},
+   {channel:'height',status:'auto',value:'auto',selectors:[]}]}];
+ f.bounds={width,height:44};return f;
+}
+test('own full-width padded roots retain only the captured host and proven descendant percentages',()=>{
+ for(const width of [820,320.5]){
+  const f=fillFixture(width),before=structuredClone(f),layout=readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds)!;
+  assert.deepEqual(layout,{host:{width,height:44},rows:[{path:'0.0',width:{kind:'percent',value:100}}]});
+  const context=observedLayoutContext(layout,'fill.component','b'.repeat(64),f.spec,f.paths);
+  assert.deepEqual(context.parts,[{path:[0,0],width:{kind:'percent',value:100}}]);
+  assert.equal(f.spec.fixedWidth,undefined);assert.equal(f.spec.fixedHeight,undefined);assert.deepEqual(f,before,'source and compiler correspondence remain unchanged');
+ }
+});
+test('own full-width root needs no invented child percentage or reusable size',()=>{
+ const f=fillFixture();f.tree.nodes=[];f.descendants.nodes=[];
+ const layout=readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds)!;
+ assert.deepEqual(layout,{host:{width:820,height:44},rows:[]});
+ assert.deepEqual(observedLayoutContext(layout,'fill.component','b'.repeat(64),f.spec,[]).parts,[]);
+});
+test('root full-width lane does not accept automatic opaque foreign or definite-containing-block sizing',()=>{
+ for(const width of [
+  {channel:'width',status:'auto',value:'auto',selectors:[]},
+  {channel:'width',status:'unresolved',authoredValue:'var(--width)',selectors:['.root'],reason:'declared-fill-width-containing-block-viewport-only'},
+  {channel:'width',status:'unresolved',authoredValue:'100%',selectors:['#wrapper > *'],reason:'size-declared-by-outer-selector'},
+  {channel:'width',status:'unresolved',authoredValue:'100%',selectors:['.root'],reason:'declared-fill-width-not-used'},
+  {channel:'width',status:'fill',authoredValue:'100%',value:'100%',selectors:['.root']},
+ ] as const){
+  const f=fillFixture();f.origin.roots[0].sizes![0]={...width,selectors:[...width.selectors]};
+  if(width.status==='auto')assert.throws(()=>readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds),/root-context-unqualified/);
+  else assert.equal(readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds),undefined);
+ }
+ const f=fillFixture();f.origin.roots[0].sizes=[];assert.equal(readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds),undefined);
+});
+for(const [name,change] of Object.entries({
+ 'duplicate root':(f:ReturnType<typeof fillFixture>)=>{f.origin.roots.push(structuredClone(f.origin.roots[0]));},
+ 'duplicate size':(f:ReturnType<typeof fillFixture>)=>{f.origin.roots[0].sizes!.push(structuredClone(f.origin.roots[0].sizes![0]));},
+ 'missing own selector':(f:ReturnType<typeof fillFixture>)=>{f.origin.roots[0].sizes![0].selectors=[];},
+ 'contradictory definite container':(f:ReturnType<typeof fillFixture>)=>{f.origin.roots[0].fillWidthContainer={depth:1};},
+ 'fixed height':(f:ReturnType<typeof fillFixture>)=>{f.origin.roots[0].sizes![1]={channel:'height',status:'fixed',value:'44px',selectors:['.root']};},
+ 'content-box':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['box-sizing']='content-box';},
+ 'border':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['border-left-width']='1px';},
+ 'unknown padding':(f:ReturnType<typeof fillFixture>)=>{delete f.tree.style['padding-left'];},
+ 'negative padding':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['padding-left']='-1px';},
+ 'consumed content box':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['padding-left']='808px';},
+ 'margin':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['margin-left']='1px';},
+ 'min-width':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['min-width']='100px';},
+ 'max-width':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['max-width']='820px';},
+ 'max-height':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['max-height']='44px';},
+ 'grown root':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['flex-grow']='1';},
+ 'flex basis':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['flex-basis']='100%';},
+ 'root zoom':(f:ReturnType<typeof fillFixture>)=>{f.tree.style.zoom='2';},
+ 'root transform':(f:ReturnType<typeof fillFixture>)=>{f.tree.style.transform='matrix(1,0,0,1,0,0)';},
+ 'root writing mode':(f:ReturnType<typeof fillFixture>)=>{f.tree.style['writing-mode']='vertical-rl';},
+ 'out of flow root':(f:ReturnType<typeof fillFixture>)=>{f.tree.style.position='absolute';},
+ 'changed caller bounds':(f:ReturnType<typeof fillFixture>)=>{f.bounds.width=821;},
+ 'changed root used size':(f:ReturnType<typeof fillFixture>)=>{f.tree.style.width='819px';},
+ 'unproven label percent':(f:ReturnType<typeof fillFixture>)=>{delete f.descendants.nodes[1].sizes[0].observedPercentage;},
+ 'changed child parent':(f:ReturnType<typeof fillFixture>)=>{f.descendants.nodes[1].sizes[0].observedPercentage!.parentSize=795;},
+}))test('root fill context refuses '+name,()=>{
+ const f=fillFixture();change(f);assert.throws(()=>readObservedAuthoredLayout(f.tree,f.origin,f.descendants,f.bounds),/react-authored-layout-/);
+});

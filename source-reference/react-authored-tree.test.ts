@@ -533,3 +533,18 @@ test('authored native plan uses the shared graph writer with durable repeat and 
  assert.throws(()=>jobs.prepare(f.request));assert.throws(()=>jobs.dispatch(first.id,'component-create'));
  assert.equal(host.figma.root.findAll(()=>true).length,count);
 });
+
+
+test('root fill context cannot reuse authored authority across changed callers or wrappers',t=>{
+ const f=fixture(t);
+ f.origin.roots[0].sizes=[{channel:'width',status:'unresolved',authoredValue:'100%',selectors:['.root'],reason:'declared-fill-width-containing-block-viewport-only'},
+  {channel:'height',status:'auto',value:'auto',selectors:[]}];
+ for(const caller of [{className:'foreign-wrapper'}, {style:{width:820}}]){
+  const ownership=structuredClone(f.ownership);Object.assign(ownership.components[0].props,caller);
+  const result=projectReactAuthoredTree({...f,ownership,bounds:{width:100,height:30}});
+  assert.equal(result.status,'refused');assert(result.problems.includes('react-authored-content-context-changed'));
+ }
+ const tree=structuredClone(f.tree);tree.classes.push('foreign-wrapper');
+ const result=projectReactAuthoredTree({...f,tree,bounds:{width:100,height:30}});
+ assert.equal(result.status,'refused');assert(result.problems.includes('react-authored-content-context-changed'));
+});

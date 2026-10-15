@@ -99,3 +99,21 @@ test('absent observed context keeps ordinary graph topology and adds no host pro
   assert.throws(()=>applyNativeObservedLayout({...f.compiled.component,isSet:true},context),/unqualified/);
   assert.throws(()=>f.f.engine.buildNativeContractDraftScript(f.parent,f.contracts,f.f.source,{...f.native,observedLayout:context}),/observed-layout-context-unqualified/);
 });
+
+
+test('root-only observed host retains automatic padded height without a reusable width or height token',async()=>{
+ const f=await nativeComparisonFixture(),layout={...context,host:{width:820,height:44},parts:[]};
+ const parent=f.contract(context.contractId,{root:{layout:{display:'flex',direction:'row'},literals:{'padding-left':'12px','padding-right':'12px','padding-top':'12px','padding-bottom':'12px'},parts:{body:{layout:{display:'flex'},literals:{width:'81px',height:'20px'}}}}});
+ const byId=new Map([[parent.id,parent]]),native=await f.context('50000000-0000-4000-8000-000000000005');
+ const compiled=f.engine.compileNativeContractGraphDraft(parent,byId,f.source,native.operation.id,layout);
+ const spec=compiled.component.variants[0].spec;assert.equal(spec.fixedWidth,undefined);assert.equal(spec.fixedHeight,undefined);assert.equal(spec.lits?.width,undefined);assert.equal(spec.lits?.height,undefined);
+ const creation=await f.run(f.engine.buildNativeContractGraphDraftScript(parent,byId,f.source,{...native,observedLayout:layout},1));
+ assert.equal(creation.status,'created-candidate');
+ const input:NativeContractObservationInput={operation:native.operation,planRevision:revisionOf('root-only-fill'),component:compiled.component,projection:compiled.projection,graphComponents:compiled.components,graphVerification:1,tokenInput:native.tokens.input,tokenIdentity:native.tokens.identity,creation,observedLayout:layout};
+ const receipt=await f.run(emitNativeContractReadbackScript(input)),target=receipt.nodes.find((n:any)=>n.id===creation.target.id),host=receipt.nodes.find((n:any)=>n.id===creation.observedLayout.hostId);
+ assert.equal(target.values.layoutSizingHorizontal,'FILL');assert.equal(target.values.layoutSizingVertical,'HUG');assert.equal(target.values.width,820);assert.equal(target.values.height,44);
+ assert.equal(verifyNativeContractReadback(input,receipt).status,'supported-structure-observed',JSON.stringify(verifyNativeContractReadback(input,receipt)));
+ for(const mutate of [(r:any)=>{r.nodes.find((n:any)=>n.id===target.id).values.width=105;},(r:any)=>{r.nodes.find((n:any)=>n.id===host.id).values.width=105;},(r:any)=>{r.nodes.find((n:any)=>n.id===target.id).values.height=45;},(r:any)=>{r.nodes.find((n:any)=>n.id===target.id).parentId=creation.pageId;}]){
+  const changed=structuredClone(receipt);mutate(changed);assert.equal(verifyNativeContractReadback(input,changed).status,'refused');
+ }
+});
