@@ -11,6 +11,7 @@ import {readReactRuntimeExport} from './react-runtime-export.js';
 import {readReactTargetInitializer} from './react-target-initializer.js';
 import {planReactContextConsumerCalls} from './react-context-calls.js';
 import {readReactContextConsumerEffects,modelReactContextConsumerInput,readReactTargetEffects} from './react-target-effects.js';
+import {createReactEffectProgramScope} from './react-helper-effects.js';
 import type {ReactElementInvocation,ReactElementObservedValue} from './react-element-invocation.js';
 import type {ContextConsumerCallAssumption,ContextConsumerValueShape} from './react-helper-model.mjs';
 
@@ -40,7 +41,26 @@ function prepare(root:string,text:string,name:string){
     inputProvenance:{status:'verified',qualification:'react-props-origin-only',kind:'jsx',source:{module:'consumer.mjs',sourceSha256:sha(text),span:{start:0,end:1},factory:'jsx'}},
     outputProvenance:{status:'verified',qualification:'react-props-origin-only',kind:'jsx',source:{module:'consumer.mjs',sourceSha256:sha(text),span:{start:0,end:1},factory:'jsx'}}});
   const assumptions=(values:Record<string,unknown>,args=['consumer',undefined] as unknown[]):ContextConsumerCallAssumption[]=>calls.map(p=>({site:p.call,arguments:args as ContextConsumerCallAssumption['arguments'],value:{id:7,fields:Object.entries(values).map(([key,v])=>[key,v!==null&&['object','function','symbol','bigint'].includes(typeof v)?{opaque:typeof v}:v as string|number|boolean|null|undefined])}}));
-  return {root,file,text,name,reference,initializer,calls,invocation,assumptions};
+  return {root,file,text,name,reference,initializer,calls,invocation,assumptions,scope:createReactEffectProgramScope(reference)};
+}
+type ConsumerArguments=Parameters<typeof modelReactContextConsumerInput>;
+function assertScopedModel(f:ReturnType<typeof prepare>,fresh:ReturnType<typeof modelReactContextConsumerInput>,
+  input:ConsumerArguments[2],calls:ConsumerArguments[3],callbacks:ConsumerArguments[4]=[],refs:ConsumerArguments[5]=[],
+  effects:ConsumerArguments[6]=[],factories:ConsumerArguments[7]=[],hooks:ConsumerArguments[8]=[]){
+  const scoped=modelReactContextConsumerInput(f.reference,f.initializer,input,calls,callbacks,refs,effects,factories,hooks,f.scope);
+  assert.deepEqual(scoped,fresh,'scope reuse must preserve the entire modeled or refused projection');
+  assert.equal(JSON.stringify(scoped.sourceFiles),JSON.stringify(fresh.sourceFiles),'scope reuse must preserve exact current-call witness order');
+}
+function readComparedConsumer(f:ReturnType<typeof prepare>,invocation:ReactElementInvocation,
+  calls:ConsumerArguments[3],callbacks:ConsumerArguments[4]=[],refs:ConsumerArguments[5]=[],
+  effects:ConsumerArguments[6]=[],factories:ConsumerArguments[7]=[],hooks:ConsumerArguments[8]=[]){
+  assert(invocation.status==='observed');
+  const fresh=readReactContextConsumerEffects(f.reference,f.initializer,invocation,calls,callbacks,refs,effects,factories,hooks);
+  assertScopedModel(f,fresh,invocation.input,calls,callbacks,refs,effects,factories,hooks);return fresh;
+}
+function readComparedInput(f:ReturnType<typeof prepare>,input:ConsumerArguments[2],calls:ConsumerArguments[3]){
+  const fresh=modelReactContextConsumerInput(f.reference,f.initializer,input,calls);
+  assertScopedModel(f,fresh,input,calls);return fresh;
 }
 function compare(shape:ContextConsumerValueShape,value:any,input:Record<string,unknown>,context:Record<string,unknown>,ref:unknown,target:unknown):void{
   if(shape.kind==='literal'){assert.equal(typeof value,shape.type);assert.equal(value,shape.type==='undefined'?undefined:shape.value);return;}
@@ -64,8 +84,12 @@ test('conditional context consumers match original outputs with explicit opaque 
     let opaqueReads=0,targetReads=0;
     const context={checked,disabled:checked,change:()=>{},payload:new Proxy({}, {get(){opaqueReads++;throw Error('opaque inspected');}})},input={id:'a',scope:undefined},ref={current:null};
     const assumptions=f.assumptions(context),invocation=f.invocation(input),before=JSON.stringify(assumptions);
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,invocation,assumptions);
-    assert(invocation.status==='observed');assert.deepEqual(modelReactContextConsumerInput(f.reference,f.initializer,invocation.input,assumptions),model);
+    const model=readComparedConsumer(f,invocation,assumptions);
+    assert(invocation.status==='observed');assert.deepEqual(readComparedInput(f,invocation.input,assumptions),model);
+    const otherInput=f.invocation({...input,id:'other'});assert(otherInput.status==='observed');
+    const other=readComparedInput(f,otherInput.input,f.assumptions({...context,checked:!checked}));
+    assert.equal(other.status,'modeled');assert.notDeepEqual(other,model,'different input/context assumptions are evaluated afresh');
+    assert.deepEqual(readComparedInput(f,invocation.input,assumptions),model,'returning to the original assumptions reproduces the complete model');
     assert.equal(model.status,'modeled',model.status==='refused'?model.reason:'');if(model.status!=='modeled')return;
     assert.equal(model.qualification,'context-consumer-projection-model-only');assert.equal(model.runtimeVerified,false);assert.equal(model.effectsVerified,false);assert.equal(model.acceptedContract,null);
     assert.equal(model.contextCalls.length,1);assert.equal(model.targetReads.length,1);assert.equal(model.mutableBindings.length,1);
@@ -92,19 +116,19 @@ test('conditional context consumers match original outputs with explicit opaque 
 
 test('context arguments are modeled in order and never replaced by recorded values',()=>{
   fixture(`let n=0;const c=readContext(n++,scope);return make('span',{n,checked:c.checked});`,f=>{
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true},[0,undefined]));
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true},[0,undefined]));
     assert.equal(model.status,'modeled',model.status==='refused'?model.reason:'');if(model.status==='modeled')assert.deepEqual(new Map(model.output.props.fields).get('n'),{kind:'literal',type:'number',value:1});
-    const wrong=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true},[1,undefined]));
+    const wrong=readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true},[1,undefined]));
     assert.equal(wrong.status,'refused');if(wrong.status==='refused')assert.equal(wrong.reason,'context-model-arguments-mismatch');
   });
   fixture(`const c=readContext(unknownEffect(),scope);return make('span',{checked:c.checked});`,f=>{
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true}));assert.equal(model.status,'refused');if(model.status==='refused')assert.match(model.reason,/unknownEffect/);
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true}));assert.equal(model.status,'refused');if(model.status==='refused')assert.match(model.reason,/unknownEffect/);
   });
 });
 
 test('opaque context fields refuse inspection, calls, coercion and mutation',()=>{
   for(const expr of ['c.payload.x','!!c.payload','typeof c.payload','c.change()','c.payload===null','`${c.payload}`','(c.checked=false)','(delete c.checked)'])fixture(`const c=readContext(NAME,scope);return make('span',{value:${expr}});`,f=>{
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true,payload:{},change:()=>{}}));
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true,payload:{},change:()=>{}}));
     assert.equal(model.status,'refused',expr);if(model.status==='refused')assert.match(model.reason,/opaque-context-field-inspected|call-target-unresolved|external-data-write/);
   });
 });
@@ -112,30 +136,30 @@ test('opaque context fields refuse inspection, calls, coercion and mutation',()=
 test('context call sequences, source pins and value continuity are explicit preconditions',()=>{
   fixture(`const a=readContext(NAME,scope);const b=readContext(NAME,scope);return make('span',{a:a.checked,b:b.checked});`,f=>{
     const input=f.invocation({}),calls=f.assumptions({checked:true});
-    assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,input,calls).status,'modeled');
+    assert.equal(readComparedConsumer(f,input,calls).status,'modeled');
     for(const changed of [[...calls].reverse(),calls.slice(0,1),[...calls,calls[0]],calls.map((c,i)=>i?{...c,value:{id:7,fields:[['checked',false]] as Array<readonly [string,boolean]>}}:c)]){
-      assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,input,changed).status,'refused');
+      assert.equal(readComparedConsumer(f,input,changed).status,'refused');
     }
     const distinct=calls.map((c,i)=>i?{...c,value:{id:8,fields:[['checked',false]] as Array<readonly [string,boolean]>}}:c);
-    assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,input,distinct).status,'modeled');
-    writeFileSync(f.file,f.text+'\n// source changed');assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,input,calls).status,'refused');
+    assert.equal(readComparedConsumer(f,input,distinct).status,'modeled');
+    writeFileSync(f.file,f.text+'\n// source changed');assert.equal(readComparedConsumer(f,input,calls).status,'refused');
   });
   fixture(`const c=readContext(readContext(NAME,scope).checked,scope);return make('span',{checked:c.checked});`,f=>{
     const calls=f.assumptions({checked:true});calls[0].arguments=[true,undefined];
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),calls);
+    const model=readComparedConsumer(f,f.invocation({}),calls);
     assert.equal(model.status,'modeled',model.status==='refused'?model.reason:'');if(model.status==='modeled')assert.deepEqual(model.contextCalls.map(c=>c.site),calls.map(c=>c.site));
   });
 });
 
 test('void evaluates its operand and discards only the resulting value',()=>{
   fixture(`let n=0;const c=readContext(NAME,scope);const discarded=void n++;return make('span',{n,discarded,opaque:void c.payload});`,f=>{
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({payload:{}}));
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({payload:{}}));
     assert.equal(model.status,'modeled',model.status==='refused'?model.reason:'');if(model.status!=='modeled')return;
     const props=new Map(model.output.props.fields);assert.deepEqual(props.get('n'),{kind:'literal',type:'number',value:1});
     assert.deepEqual(props.get('discarded'),{kind:'literal',type:'undefined'});assert.deepEqual(props.get('opaque'),{kind:'literal',type:'undefined'});
   });
   fixture(`const c=readContext(NAME,scope);return make('span',{value:void unknownEffect(c)});`,f=>{
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true}));
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true}));
     assert.equal(model.status,'refused');if(model.status==='refused')assert.match(model.reason,/unknownEffect/);
   });
 });
@@ -147,10 +171,10 @@ test('unmodeled context assumptions and computed imported lookups stay refused',
       {...calls[0],arguments:[{opaque:'object'},undefined]},
       {...calls[0],value:{id:7,fields:[['checked',NaN]]}},
       {...calls[0],value:{id:7,fields:[['checked',true],['checked',false]]}}];
-    for(const item of malformed)assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,input,[item as ContextConsumerCallAssumption]).status,'refused');
+    for(const item of malformed)assert.equal(readComparedConsumer(f,input,[item as ContextConsumerCallAssumption]).status,'refused');
   });
   fixture(`const c=readContext(NAME,scope);return make(Thing[unknownEffect()],{checked:c.checked});`,f=>{
-    assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({checked:true})).status,'refused');
+    assert.equal(readComparedConsumer(f,f.invocation({}),f.assumptions({checked:true})).status,'refused');
   });
 });
 
@@ -163,25 +187,25 @@ test('callback summaries evaluate original arguments, retain selected origins an
     const scan=(n:ts.Node)=>{if(ts.isArrowFunction(n))callback=n;ts.forEachChild(n,scan);};scan(tree);assert(callback);
     const source={file:'consumer.mjs',sha256:sha(f.text),start:callback.getStart(tree),end:callback.end};
     const assumption={site,call:9,contextCallsBefore:1,origin:2,source};
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({payload:{}}),f.assumptions({change:()=>{}}),[assumption]);
+    const model=readComparedConsumer(f,f.invocation({payload:{}}),f.assumptions({change:()=>{}}),[assumption]);
     assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
     assert.deepEqual(model.callbackCalls,[{...assumption,arguments:[{kind:'parameter',index:1},{kind:'context-field',value:7,key:'change'},{kind:'input',key:'payload'}]}]);
     assert.deepEqual(model.output.props.fields,[['ref',{kind:'callback-reference',origin:2,source,qualification:'callback-body-unverified'}]]);
     assert.equal(model.effectsVerified,false);assert.equal(model.runtimeVerified,false);assert.equal(model.acceptedContract,null);
     for(const bad of [[{...assumption,contextCallsBefore:0}],[assumption,{...assumption,call:10}],[{...assumption,source:{...source,start:0}}]]){
-      const refused=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({payload:{}}),f.assumptions({change:()=>{}}),bad);assert.equal(refused.status,'refused');
+      const refused=readComparedConsumer(f,f.invocation({payload:{}}),f.assumptions({change:()=>{}}),bad);assert.equal(refused.status,'refused');
     }
   },'Consumer',moduleBody);
   for(const expression of ['joined.current','joined()','!!joined','typeof joined','joined===null','`${joined}`','(joined.current=null)','(delete joined.current)'])fixture(`const c=readContext(NAME,scope);const joined=remember(ref,c.change);return make('button',{value:${expression}});`,f=>{
     const site=planReactContextConsumerCalls(f.reference,[f.initializer]).find(p=>f.text.slice(p.callee.start,p.callee.end)==='remember')!.call;
     const start=f.text.indexOf('node=>refs'),source={file:'consumer.mjs',sha256:sha(f.text),start,end:start+'node=>refs'.length};
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({change:()=>{}}),[{site,call:9,contextCallsBefore:1,origin:2,source}]);
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({change:()=>{}}),[{site,call:9,contextCallsBefore:1,origin:2,source}]);
     assert.equal(model.status,'refused',expression);assert.equal(model.callbackCalls?.length,1,expression);
   },'Consumer',moduleBody);
   for(const arg of ['unknownEffect()','c.change()','c.change.current','state(true)'])fixture(`const c=readContext(NAME,scope);const joined=remember(ref,${arg});return make('button',{ref:joined});`,f=>{
     const site=planReactContextConsumerCalls(f.reference,[f.initializer]).find(p=>f.text.slice(p.callee.start,p.callee.end)==='remember')!.call;
     const start=f.text.indexOf('node=>refs'),source={file:'consumer.mjs',sha256:sha(f.text),start,end:start+'node=>refs'.length};
-    const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({change:()=>{}}),[{site,call:9,contextCallsBefore:1,origin:2,source}]);
+    const model=readComparedConsumer(f,f.invocation({}),f.assumptions({change:()=>{}}),[{site,call:9,contextCallsBefore:1,origin:2,source}]);
     assert.equal(model.status,'refused',arg);assert.equal(model.callbackCalls?.length??0,0,arg);
   },'Consumer',moduleBody);
 });
@@ -191,20 +215,20 @@ test('native ref assumptions preserve opaque identity and original arguments, le
  fixture(body,f=>{
   const plans=planReactRefHooks(f.reference,[f.initializer]);assert.equal(plans.length,1);
   const assumption={site:plans[0].call,call:2,state:4,consumerCallsBefore:1};
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({payload:{}}),[],[assumption]);
+  const model=readComparedConsumer(f,f.invocation({}),f.assumptions({payload:{}}),[],[assumption]);
   assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
   assert.deepEqual(model.refCalls,[{...assumption,argument:{kind:'context-field',value:7,key:'payload'}}]);
   assert.deepEqual(model.output.props.fields,[['held',{kind:'ref-reference',state:4,call:2}]]);assert.equal(model.runtimeVerified,false);assert.equal(model.effectsVerified,false);
-  for(const calls of [[{...assumption,consumerCallsBefore:0}],[assumption,{...assumption,call:3}],[{...assumption,site:{...assumption.site,start:0}}]])assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({payload:{}}),[],calls).status,'refused');
+  for(const calls of [[{...assumption,consumerCallsBefore:0}],[assumption,{...assumption,call:3}],[{...assumption,site:{...assumption.site,start:0}}]])assert.equal(readComparedConsumer(f,f.invocation({}),f.assumptions({payload:{}}),[],calls).status,'refused');
  });
  for(const expr of ['held.current','held.current=1','delete held.current','held()','!!held','typeof held','held===null'])fixture(`const c=readContext(NAME,scope);const held=React.useRef(c.payload);return make('span',{value:(${expr})});`,f=>{
   const plan=planReactRefHooks(f.reference,[f.initializer])[0];
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({payload:{}}),[],[{site:plan.call,call:2,state:4,consumerCallsBefore:1}]);
+  const model=readComparedConsumer(f,f.invocation({}),f.assumptions({payload:{}}),[],[{site:plan.call,call:2,state:4,consumerCallsBefore:1}]);
   assert.equal(model.status,'refused',expr);assert.equal(model.refCalls?.length,1,expr);
  });
  for(const arg of ['eval("1")','unknownEffect()','state(true)','React.useRef(1)'])fixture(`const c=readContext(NAME,scope);const held=React.useRef(${arg});return make('span',{held});`,f=>{
   const plans=planReactRefHooks(f.reference,[f.initializer]);if(arg.startsWith('eval')){assert.equal(plans.length,0);return;}
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({}),[],plans.map((p,i)=>({site:p.call,call:i,state:i,consumerCallsBefore:1})));
+  const model=readComparedConsumer(f,f.invocation({}),f.assumptions({}),[],plans.map((p,i)=>({site:p.call,call:i,state:i,consumerCallsBefore:1})));
   assert.equal(model.status,'refused',arg);
  });
 });
@@ -214,16 +238,16 @@ test('effect assumptions retain original dependency provenance while callback bo
  fixture(`const c=readContext(NAME,scope);let captured=c.checked;React.useEffect(()=>unknownEffect(captured),[c.checked,props.payload,ref]);captured=!captured;return make('span',{checked:captured});`,f=>{
   const plans=planReactEffectHooks(f.reference,[f.initializer]);assert.equal(plans.length,1);
   const assumption={site:plans[0].call,callback:plans[0].callback,call:4,effect:8,consumerCallsBefore:1,refCallsBefore:0};
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({payload:{}}),f.assumptions({checked:true}),[],[],[assumption]);
+  const model=readComparedConsumer(f,f.invocation({payload:{}}),f.assumptions({checked:true}),[],[],[assumption]);
   assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
   assert.deepEqual(model.effectCalls,[{...assumption,dependencies:[{kind:'literal',type:'boolean',value:true},{kind:'input',key:'payload'},{kind:'parameter',index:1}]}]);
   assert.equal(model.effectsVerified,false);assert.equal(model.runtimeVerified,false);assert.equal(model.acceptedContract,null);
-  for(const altered of [{...assumption,consumerCallsBefore:0},{...assumption,refCallsBefore:1},{...assumption,callback:{...assumption.callback,start:0}}])assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({payload:{}}),f.assumptions({checked:true}),[],[],[altered]).status,'refused');
+  for(const altered of [{...assumption,consumerCallsBefore:0},{...assumption,refCallsBefore:1},{...assumption,callback:{...assumption.callback,start:0}}])assert.equal(readComparedConsumer(f,f.invocation({payload:{}}),f.assumptions({checked:true}),[],[],[altered]).status,'refused');
  });
  for(const arg of ['unknownEffect()','c.payload.current','state(true)','React.useEffect(()=>{},[])'])fixture(`const c=readContext(NAME,scope);React.useEffect(()=>{},[${arg}]);return make('span',{});`,f=>{
   const plans=planReactEffectHooks(f.reference,[f.initializer]);assert(plans.length>0);
   const assumptions=plans.map((p,i)=>({site:p.call,callback:p.callback,call:i,effect:i,consumerCallsBefore:1,refCallsBefore:0}));
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({}),f.assumptions({payload:{}}),[],[],assumptions);assert.equal(model.status,'refused',arg);assert.equal(model.effectCalls?.length??0,0,arg);
+  const model=readComparedConsumer(f,f.invocation({}),f.assumptions({payload:{}}),[],[],assumptions);assert.equal(model.status,'refused',arg);assert.equal(model.effectCalls?.length??0,0,arg);
  });
  for(const call of ['React.useEffect(callback,[])','React.useEffect(()=>{},deps)','React.useEffect(()=>{},[...deps])','React.useEffect(()=>{},[,])','React.useEffect(()=>eval("1"),[])'])fixture(`const c=readContext(NAME,scope);${call};return make('span',{});`,f=>{assert.equal(planReactEffectHooks(f.reference,[f.initializer]).length,0,call);});
 });
@@ -235,15 +259,15 @@ test('ordinary callback factories model arguments without freezing callback bind
  fixture(`const c=readContext(NAME,scope);let late=c.checked;const handler=compose(props.handler,()=>{late=!late;}, {guard:false});late=!late;return make('button',{onClick:handler,checked:late});`,f=>{
   const plans=planReactCallbackFactories(f.reference,planReactContextConsumerCalls(f.reference,[f.initializer]));assert.equal(plans.functions.length,1);assert.equal(plans.literals.length,2);
   const assumption={site:plans.consumers[0].call,call:5,origin:3,source:plans.functions[0].callback,consumerCallsBefore:1};
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({handler:()=>{}}),f.assumptions({checked:true}),[],[],[],[assumption]);assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+  const model=readComparedConsumer(f,f.invocation({handler:()=>{}}),f.assumptions({checked:true}),[],[],[],[assumption]);assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
   const options=model.factoryCalls[0].arguments[2];assert(options.kind==='record'&&options.allocation);assert.deepEqual(options.allocation.source,plans.literals[1].source);
   assert.deepEqual(model.factoryCalls[0].arguments.map(v=>v.kind==='record'?{kind:v.kind,fields:v.fields}:v),[{kind:'input',key:'handler'},{kind:'deferred-literal',source:plans.literals[0].source,qualification:'body-and-captures-unverified'},{kind:'record',fields:[['guard',{kind:'literal',type:'boolean',value:false}]]}]);
   assert.deepEqual(model.output.props.fields,[['onClick',{kind:'factory-reference',origin:3,source:assumption.source,qualification:'body-and-captures-unverified'}],['checked',{kind:'literal',type:'boolean',value:false}]]);assert.equal(model.effectsVerified,false);assert.equal(model.runtimeVerified,false);
-  for(const wrong of [{...assumption,consumerCallsBefore:0},{...assumption,source:{...assumption.source,start:0}}])assert.equal(readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({handler:()=>{}}),f.assumptions({checked:true}),[],[],[],[wrong]).status,'refused');
+  for(const wrong of [{...assumption,consumerCallsBefore:0},{...assumption,source:{...assumption.source,start:0}}])assert.equal(readComparedConsumer(f,f.invocation({handler:()=>{}}),f.assumptions({checked:true}),[],[],[],[wrong]).status,'refused');
  },'Consumer',moduleBody,factory);
  for(const value of ['handler()','handler.name','typeof handler','!!handler','handler===null','handler.current=1'])fixture(`const c=readContext(NAME,scope);const handler=compose(props.handler,()=>{});return make('span',{value:(${value})});`,f=>{
   const plans=planReactCallbackFactories(f.reference,planReactContextConsumerCalls(f.reference,[f.initializer])),assumption={site:plans.consumers[0].call,call:1,origin:0,source:plans.functions[0].callback,consumerCallsBefore:1};
-  const model=readReactContextConsumerEffects(f.reference,f.initializer,f.invocation({handler:()=>{}}),f.assumptions({}),[],[],[],[assumption]);assert.equal(model.status,'refused',value);assert.equal(model.factoryCalls?.length,1,value);
+  const model=readComparedConsumer(f,f.invocation({handler:()=>{}}),f.assumptions({}),[],[],[],[assumption]);assert.equal(model.status,'refused',value);assert.equal(model.factoryCalls?.length,1,value);
  },'Consumer',moduleBody,factory);
  for(const body of [
   `export function compose(a,b,options=sideEffect()){return ()=>{};}`,
@@ -257,15 +281,15 @@ test('ordinary callback factories model arguments without freezing callback bind
 
 test('object literal spreads skip nullish sources while opaque spreads and own-key intrinsics retain refusals',()=>{
  for(const optional of [null,undefined])fixture('const value=readContext(NAME,scope);const style={before:1,...props.style,...value.optional,after:2};return make("span",{style});',f=>{
-  const model=modelReactContextConsumerInput(f.reference,f.initializer,[['style',observe(optional)]],f.assumptions({optional}));assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+  const model=readComparedInput(f,[['style',observe(optional)]],f.assumptions({optional}));assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
   const style=model.output.props.fields.find(([k])=>k==='style')![1];assert.equal(style.kind,'record');if(style.kind!=='record')return;
   assert(style.allocation);assert.deepEqual(style.fields,[['before',{kind:'literal',type:'number',value:1}],['after',{kind:'literal',type:'number',value:2}]]);
   assert.deepEqual({...optional as any},{ });
  });
  for(const expression of ['({...value.optional})','Object.keys(value.optional)'])fixture(`const value=readContext(NAME,scope);const result=${expression};return make("span",{result});`,f=>{
-  const model=modelReactContextConsumerInput(f.reference,f.initializer,[],f.assumptions({optional:{}}));assert.equal(model.status,'refused');
+  const model=readComparedInput(f,[],f.assumptions({optional:{}}));assert.equal(model.status,'refused');
  });
  fixture('const value=readContext(NAME,scope);const result=Object.keys(value.optional);return make("span",{result});',f=>{
-  for(const optional of [undefined,null]){const model=modelReactContextConsumerInput(f.reference,f.initializer,[],f.assumptions({optional}));assert.equal(model.status,'refused');}
+  for(const optional of [undefined,null]){const model=readComparedInput(f,[],f.assumptions({optional}));assert.equal(model.status,'refused');}
  });
 });

@@ -7,7 +7,7 @@ import {verifyReactHookHelpers,type ReactHookHelperVerification} from './react-h
 import {planReactCallbackFactories} from './react-callback-factories.js';
 import {planReactEffectHooks} from './react-effect-hooks.js';
 import {planReactRefHooks} from './react-ref-hooks.js';
-import type {ReactHelperReference} from './react-helper-effects.js';
+import {createReactEffectProgramScope,type ReactHelperReference} from './react-helper-effects.js';
 import type {ReactHelperRuntimeReport,ReactTargetRenderInputWitness} from './react-helper-runtime.js';
 import type {ReactContextValueWitness} from './react-context-runtime.js';
 import type {ReactJsxHelperInstrumentationPlan} from './react-helper-instrument.js';
@@ -58,7 +58,7 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
   const result:ReactContextConsumerVerification={qualification:'observed-context-consumer-body-only',effectsVerified:false,acceptedContract:null,rows:[]};
   requireProof(runtime.status==='observed'&&runtime.contexts&&runtime.targetInitializers&&lookup.status==='verified','runtime-unavailable');
   const helperProof=verifyReactHookHelpers(reference,plan,runtime,lookup);result.hookHelpers=helperProof;
-  const c=runtime.contexts,creations=verifyReactCallbackCreations(reference,plan,runtime,lookup);
+  const c=runtime.contexts,creations=verifyReactCallbackCreations(reference,plan,runtime,lookup),effects=createReactEffectProgramScope(reference);
   for(const render of c.renders.invocations){
     if(!plan.bodyModels?.some(m=>same(m.component,render.source))&&!render.consumerCalls.some(id=>c.consumerCalls.invocations[id]?.helperInvocation!==null&&c.consumerCalls.invocations[id]?.helperInvocation!==undefined))continue;
     const row:ReactContextConsumerVerification['rows'][number]={render:render.id,source:render.source,status:'refused',consumerBodyVerified:false,helperInvocations:[],bindingReads:[],functionCalls:[],callbackCalls:[],refCalls:[],effectCalls:[],factoryCalls:[],hookCalls:[],literalValues:[],remainingRequirements:remaining};result.rows.push(row);
@@ -205,7 +205,7 @@ export function verifyReactContextConsumers(reference:ReactHelperReference,plan:
         if(shape.kind==='callback-reference')return callbackAssumptions.some(a=>a.origin===shape.origin&&same(a.source,shape.source))&&equal(value,runtime.callbackSources?.callbacks[shape.origin]?.value);
         return false;
       };
-      const model=modelReactContextConsumerInput(reference,initializer,input.fields,assumptions,callbackAssumptions,refAssumptions,effectAssumptions,factoryAssumptions,hookAssumptions);
+      const model=modelReactContextConsumerInput(reference,initializer,input.fields,assumptions,callbackAssumptions,refAssumptions,effectAssumptions,factoryAssumptions,hookAssumptions,effects);
       // A refused body can still provide a bounded, verified prefix. This does
       // not qualify its other effects or the deferred callback/ref lifecycle.
       for(const call of model.callbackCalls??[]){

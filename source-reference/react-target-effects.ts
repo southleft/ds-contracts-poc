@@ -1,4 +1,4 @@
-import {prepareReactEffectProgram} from './react-helper-effects.js';
+import {prepareReactEffectProgram,type ReactEffectProgramScope} from './react-helper-effects.js';
 import {readReactElementCreationSites} from './react-element-creation.js';
 import {planReactHookHelpers} from './react-hook-helpers.js';
 import {planReactCallbackFactories} from './react-callback-factories.js';
@@ -36,8 +36,8 @@ export function readReactContextConsumerEffects(reference:ReactHelperReference,i
 /** Rebuild a source-only consumer model from a separately guarded input record.
  * The caller must retain the render/context/return linkage; never manufacture
  * a final-tree ReactElementInvocation for a transient render. */
-export function modelReactContextConsumerInput(reference:ReactHelperReference,initializer:ReactTargetInitializer,input:ReadonlyArray<readonly [string,ReactElementObservedValue]>,contextCalls:ContextConsumerCallAssumption[],callbackCalls:ContextConsumerCallbackAssumption[]=[],refCalls:ContextConsumerRefAssumption[]=[],effectCalls:ContextConsumerEffectAssumption[]=[],factoryCalls:ContextConsumerFactoryAssumption[]=[],hookCalls:ContextConsumerHookAssumption[]=[]):ReactContextConsumerEffects {
-  return readProjection(reference,initializer,{observedInput:input,contextCalls,callbackCalls,refCalls,effectCalls,factoryCalls,hookCalls});
+export function modelReactContextConsumerInput(reference:ReactHelperReference,initializer:ReactTargetInitializer,input:ReadonlyArray<readonly [string,ReactElementObservedValue]>,contextCalls:ContextConsumerCallAssumption[],callbackCalls:ContextConsumerCallbackAssumption[]=[],refCalls:ContextConsumerRefAssumption[]=[],effectCalls:ContextConsumerEffectAssumption[]=[],factoryCalls:ContextConsumerFactoryAssumption[]=[],hookCalls:ContextConsumerHookAssumption[]=[],scope?:ReactEffectProgramScope):ReactContextConsumerEffects {
+  return readProjection(reference,initializer,{observedInput:input,contextCalls,callbackCalls,refCalls,effectCalls,factoryCalls,hookCalls},scope);
 }
 
 /** Derive a dependency's returned projection from its current executable AST.
@@ -59,9 +59,9 @@ export function replanReactTargetCallback(reference:ReactHelperReference,initial
   return readProjection(reference,initializer,{input:root.input,deferred:{source:callback,input}});
 }
 type ProjectionContext={invocation?:ReactElementInvocation;input?:TargetValueShape;observedInput?:ReadonlyArray<readonly [string,ReactElementObservedValue]>;deferred?:{source:HelperSourcePoint;input:ReadonlyArray<readonly [string,ReactElementObservedValue]>}};
-function readProjection(reference:ReactHelperReference,initializer:ReactTargetInitializer,context:ProjectionContext & {contextCalls:ContextConsumerCallAssumption[];callbackCalls?:ContextConsumerCallbackAssumption[];refCalls?:ContextConsumerRefAssumption[];effectCalls?:ContextConsumerEffectAssumption[];factoryCalls?:ContextConsumerFactoryAssumption[];hookCalls?:ContextConsumerHookAssumption[]}):ReactContextConsumerEffects;
+function readProjection(reference:ReactHelperReference,initializer:ReactTargetInitializer,context:ProjectionContext & {contextCalls:ContextConsumerCallAssumption[];callbackCalls?:ContextConsumerCallbackAssumption[];refCalls?:ContextConsumerRefAssumption[];effectCalls?:ContextConsumerEffectAssumption[];factoryCalls?:ContextConsumerFactoryAssumption[];hookCalls?:ContextConsumerHookAssumption[]},scope?:ReactEffectProgramScope):ReactContextConsumerEffects;
 function readProjection(reference:ReactHelperReference,initializer:ReactTargetInitializer,context:ProjectionContext):ReactTargetEffects;
-function readProjection(reference:ReactHelperReference,initializer:ReactTargetInitializer,context:ProjectionContext & {contextCalls?:ContextConsumerCallAssumption[];callbackCalls?:ContextConsumerCallbackAssumption[];refCalls?:ContextConsumerRefAssumption[];effectCalls?:ContextConsumerEffectAssumption[];factoryCalls?:ContextConsumerFactoryAssumption[];hookCalls?:ContextConsumerHookAssumption[]}):ReactTargetEffects|ReactContextConsumerEffects {
+function readProjection(reference:ReactHelperReference,initializer:ReactTargetInitializer,context:ProjectionContext & {contextCalls?:ContextConsumerCallAssumption[];callbackCalls?:ContextConsumerCallbackAssumption[];refCalls?:ContextConsumerRefAssumption[];effectCalls?:ContextConsumerEffectAssumption[];factoryCalls?:ContextConsumerFactoryAssumption[];hookCalls?:ContextConsumerHookAssumption[]},scope?:ReactEffectProgramScope):ReactTargetEffects|ReactContextConsumerEffects {
   const {invocation}=context;
   const sourceFiles:Record<string,string>={},common={version:1 as const,acceptedContract:null,effectsVerified:false as const,runtimeVerified:false as const,
     qualification:context.contextCalls?'context-consumer-projection-model-only' as const:'target-render-projection-model-only' as const,render:initializer.render,sourceFiles,
@@ -89,7 +89,8 @@ function readProjection(reference:ReactHelperReference,initializer:ReactTargetIn
     const hash=createHash('sha256').update(text).digest('hex');sourceFiles[file]=hash;
     if(hash!==initializer.render.sha256||reference.files[file]!==hash)throw Error('target-effects-source-changed');
     const checkerFiles:Record<string,string>={};
-    const prepared=prepareReactEffectProgram(reference,initializer.render.file,sourceFiles,checkerFiles);
+    scope?.assertReference(reference);
+    const prepared=scope?scope.prepare(initializer.render.file,sourceFiles,checkerFiles):prepareReactEffectProgram(reference,initializer.render.file,sourceFiles,checkerFiles);
     const {program,checker,sf,runtimeFiles,resolveRuntimeExport,requireCurrent}=prepared;
     const point=prepared.source;
     const key=(node:ts.Node)=>JSON.stringify([node.getStart(sf),node.end]),nodes=new Map<string,ts.Node>();

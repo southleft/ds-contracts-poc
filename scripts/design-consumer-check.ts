@@ -73,7 +73,7 @@ import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsum
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, recordedLayoutSize, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
-import {qualifyRenderBoundsExport} from './design-consumer-render-export.js';
+import {qualifySourceRenderBoundsExport, type SourceRenderRequests} from './design-consumer-render-anchor.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -539,7 +539,11 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     return JSON.parse(bytes.toString('utf8'));
   };
   const before = await readBounds('before');
-  const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true`;
+  const exportRequests:SourceRenderRequests={
+    layout:{fileKey,version:before.version,nodeIds:[...ids],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:true},
+    render:{fileKey,version:before.version,nodeIds:[],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false},
+  };
+  const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true&version=${encodeURIComponent(before.version)}`;
   const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaApi(url, token));
   if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
@@ -563,8 +567,9 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     return r.x<l.x||r.y<l.y||r.x+r.width>l.x+l.width||r.y+r.height>l.y+l.height;});
   const renderImages:Record<string,Buffer>={}, renderErrors:Record<string,string>={};
   if(overflow.length){
+    exportRequests.render.nodeIds=[...overflow];
     await new Promise(resolve=>setTimeout(resolve,15000));
-    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaApi(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false`,token));
+    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaApi(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false&version=${encodeURIComponent(before.version)}`,token));
     if(!renderResponse.ok)for(const id of overflow)renderErrors[id]=`figma-render-export-unavailable:HTTP ${renderResponse.status}`;
     else {const renderBody=await renderResponse.json() as {images:Record<string,string|null>};
       const downloads=await mapExportDownloads(overflow,async id=>{const location=renderBody.images?.[id];if(!location)return {error:'figma-render-export-missing'};
@@ -587,15 +592,18 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     const rawRenderFile=`figma-render-${id.replace(/[^a-z0-9]/gi,'_')}.png`;
     writeFileSync(path.join(out,layoutFile),images[id],{flag:'wx'});
     writeFileSync(path.join(out,rawRenderFile),renderImages[id],{flag:'wx'});
-    const result=qualifyRenderBoundsExport(before,after,id,images[id],renderImages[id]);
+    const result=qualifySourceRenderBoundsExport(before,after,id,images[id],renderImages[id],exportRequests);
     if('refused'in result){frame.refused=result.refused;renderProofs[id]={...result,layoutFile,renderFile:rawRenderFile};continue;}
     writeFileSync(files[id],renderImages[id]);
-    frame.pngSha256=imageSha256(renderImages[id]);frame.raster={kind:'figma-rest-paired-render-v1',scale:1,proof:result.proof};
+    frame.pngSha256=imageSha256(renderImages[id]);
+    frame.raster='kind'in result.proof
+      ?{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof:result.proof}
+      :{kind:'figma-rest-paired-render-v1',scale:1,proof:result.proof};
     renderProofs[id]={...result,layoutFile,renderFile:path.basename(files[id])};
   }
   writeFileSync(path.join(out,'figma-render-export-proofs.json'),JSON.stringify({overflow,proofs:renderProofs,errors:renderErrors},null,2)+'\n',{flag:'wx'});
   return { status: 'figma-images-collected' as const, reason: null, files, frames: verified.frames, framingRefusal: verified.refused,
-    frameEvidence: { before: 'figma-bounds-before.json', after: 'figma-bounds-after.json', version: before.version, export: { format:'png', scale:1, contentsOnly:true, useAbsoluteBounds:true }, raster: FIGMA_REST_FULL_BOUNDS, overflowExport:{format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false,proofs:'figma-render-export-proofs.json'},
+    frameEvidence: { before: 'figma-bounds-before.json', after: 'figma-bounds-after.json', version: before.version, export: { format:'png', scale:1, contentsOnly:true, useAbsoluteBounds:true }, raster: FIGMA_REST_FULL_BOUNDS, overflowExport:{format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false,proofs:'figma-render-export-proofs.json'}, exportRequests,
       beforeSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-before.json'))), afterSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-after.json'))) } };
 }
 

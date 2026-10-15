@@ -4,6 +4,7 @@
  *
  *   npm run extract:computed:drift                  # VERIFY  (fast lane, no browser, <1s)
  *   npm run extract:computed:drift:remeasure        # RE-MEASURE (full lane, Chromium, ~37 min)
+ *   … -- --remeasure --workers 2                 # bounded whole-library concurrency (default 1)
  *   npm run extract:computed:drift -- --write       # RE-RECORD: re-measure, then update the
  *                                                   #   baseline AND the tracked regate.scorecard.json
  *   … -- --config extract/computed/configs/mui.json # one library
@@ -54,7 +55,7 @@
  * the NAMED reason it differs, so the gap is documented where it is measured
  * rather than rediscovered every round (docs/20-regate-drift.md).
  */
-import { spawnSync } from 'node:child_process';
+import { isDriftProcessFailure, parseDriftWorkers, runDriftLibraryJobs, validateDriftOutputRoots, type DriftLibraryResult } from './drift-library-runs.js';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
@@ -69,6 +70,10 @@ const arg = (n: string): string | null => {
 };
 const WRITE = process.argv.includes('--write');
 const REMEASURE = WRITE || process.argv.includes('--remeasure');
+const WORKERS = (() => {
+  try { return parseDriftWorkers(process.argv.slice(2), {remeasure: REMEASURE, write: WRITE}); }
+  catch (error) { console.error(`✖ ${error instanceof Error ? error.message : String(error)}`); process.exit(1); }
+})();
 const TOLERANCE = Number(arg('tolerance') ?? '0.001');
 const ONLY_CONFIG = arg('config');
 
@@ -254,9 +259,24 @@ const started = Date.now();
 for (const s of SKIPPED_CONFIGS) process.stdout.write(`  … config SKIPPED: ${s}\n`);
 console.log(`\n${REMEASURE ? (WRITE ? 'RE-RECORD' : 'RE-MEASURE') : 'VERIFY'} — ${selected.length} librar${selected.length === 1 ? 'y' : 'ies'} (${selected.map((l) => l.name).join(', ')})`);
 
-if (REMEASURE) rmSync(SCRATCH, { recursive: true, force: true });
+let libraryRuns: DriftLibraryResult[] = [];
+if (REMEASURE) {
+  const jobs = selected.map(lib => {
+    const outputRoot = path.join(SCRATCH, lib.name);
+    return {name: lib.name, command: 'npx',
+      args: ['tsx', 'extract/computed/regate.ts', '--config', lib.config, '--out', lib.out, '--scorecard-out', path.relative(REPO, outputRoot)],
+      cwd: REPO, outputRoot};
+  });
+  // Reject aliases/overlaps before deleting any previous evidence or dispatching a child.
+  validateDriftOutputRoots(SCRATCH, jobs);
+  rmSync(SCRATCH, { recursive: true, force: true });
+  mkdirSync(SCRATCH, { recursive: true });
+  libraryRuns = await runDriftLibraryJobs(jobs, WORKERS, result => {
+    console.log(`  measured ${result.name} ${secs(result.elapsedMs)} — exit ${result.status ?? 'none'}${result.signal ? `; signal ${result.signal}` : ''}${result.error ? '; process error' : ''}${result.stderrOverflow ? '; stderr overflow' : ''}`);
+  });
+}
 
-for (const lib of selected) {
+for (const [libraryIndex, lib] of selected.entries()) {
   const t0 = Date.now();
   /** where this library's fresh offline scorecards are read from: the
    *  re-measure scratch, or (verify) the tracked artifacts themselves. */
@@ -265,12 +285,7 @@ for (const lib of selected) {
   const refusedNow = new Map<string, string>();
   if (REMEASURE) {
     freshRoot = path.join(SCRATCH, lib.name);
-    const r = spawnSync('npx', ['tsx', 'extract/computed/regate.ts', '--config', lib.config, '--out', lib.out, '--scorecard-out', path.relative(REPO, freshRoot)], {
-      cwd: REPO,
-      stdio: ['ignore', 'ignore', 'pipe'],
-      encoding: 'utf8',
-      maxBuffer: 64 * 1024 * 1024,
-    });
+    const r = libraryRuns[libraryIndex];
     const stderr = r.stderr ?? '';
     for (const m of stderr.matchAll(/^REFUSED ([^:]+): (.+)$/gm)) refusedNow.set(m[1], m[2]);
     // regate exits 1 when any component refused — those are accounted for
@@ -278,9 +293,9 @@ for (const lib of selected) {
     // (browser, fonts, a crash outside the per-component guard), and the
     // refusal's own words are kept so "did not complete" never stands in for
     // the cause.
-    if (r.status !== 0 && refusedNow.size === 0) {
+    if (isDriftProcessFailure(r, refusedNow.size > 0)) {
       const tail = stderr.split('\n').filter(Boolean).slice(-4).join(' | ').slice(0, 600);
-      failures.push(`${lib.name}: regate exited ${r.status ?? r.signal ?? '?'} mid-sweep — ${tail}`);
+      failures.push(`${lib.name}: regate exited ${r.status ?? r.signal ?? '?'} mid-sweep${r.error ? ` (${r.error})` : ''} — ${tail}`);
     }
   }
   const comps = componentsOf(lib.config);
@@ -393,7 +408,7 @@ for (const lib of selected) {
       failures.push(`${key}: offline ${fmt(row.rerunPctEqual)} vs committed harness ${fmt(row.committedPctEqual)} — UNNAMED gap (name it in the baseline's gapCause)`);
     }
   }
-  console.log(`  ${lib.name.padEnd(10)} ${String(counted).padStart(2)} component(s)  ${secs(Date.now() - t0)}`);
+  console.log(`  ${lib.name.padEnd(10)} ${String(counted).padStart(2)} component(s)  ${secs((REMEASURE ? libraryRuns[libraryIndex].elapsedMs : 0) + Date.now() - t0)}`);
 }
 
 // Rows the baseline still carries for components that no longer have a
