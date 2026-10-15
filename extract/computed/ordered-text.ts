@@ -63,6 +63,7 @@ export function preserveOrderedFlexText(
   if (new Set(elementNames).size !== elementNames.length ||
       Object.keys(part.parts ?? {}).length !== elementNames.length || elementNames.some(n => !Object.hasOwn(part.parts!, n)))
     return refuse('element-join-unqualified');
+  if(part.textByCombination)return refuse('literal-text-combination-ordered-content-unqualified');
   if ((part.content || part.textByProp) && runs.length !== 1)
     return refuse('binding-spans-elements');
   const children: Record<string, Part> = {};

@@ -39,7 +39,7 @@ export function authoredTextAppearanceNeedsCarrier(appearance: QualifiedTextAppe
  * Original membership must equal preexisting admitted presence predicates.
  * No absence inference, INSTANCE traversal, caller evidence or first-row fill.
  * qualifiedDomain is host-owned exact-projection authority, never API input. */
-export function qualifyAuthoredTextAppearanceTable(
+function qualifyAuthoredTextRows(
   source: DumpSet,
   fileKey: string | null,
   occurrences: readonly {variant: string; node: DumpNode}[],
@@ -47,7 +47,8 @@ export function qualifyAuthoredTextAppearanceTable(
   declaredDomain: readonly (readonly (string | null)[])[] | undefined,
   qualifiedDomain: boolean,
   part: Pick<Part, 'visibleWhen' | 'presenceByCombination' | 'availabilityByCombination'>,
-): AuthoredTextAppearanceTable | undefined {
+ charactersOnly=false,
+): {props:string[];rows:Array<{values:Array<string|null>;characters:string;appearance?:QualifiedTextAppearance}>}|undefined {
   if (!fileKey || source.type !== 'COMPONENT_SET' || !source.key || !source.nodeId ||
       source.contractId || source.remoteSnapshot || source.detachedSnapshot || source.captureAlias ||
       !qualifiedDomain || !declaredDomain || !dense(declaredDomain) ||
@@ -118,7 +119,7 @@ export function qualifyAuthoredTextAppearanceTable(
   if (declared.size !== originalTuples.size) return;
 
   const joined = new Set<string>();
-  const rows: AuthoredTextAppearanceTable['rows'] = [];
+  const rows:Array<{values:Array<string|null>;characters:string;appearance?:QualifiedTextAppearance}>=[];
   let lineage: string | undefined;
   let path: Segment[] | undefined;
   let positivelyLossy = false;
@@ -136,16 +137,19 @@ export function qualifyAuthoredTextAppearanceTable(
     lineage = currentLineage;
     path = hit.path;
     const text = hit.node.text;
-    if (!text || typeof text.characters !== 'string' || !text.sourceAppearance) return;
-    let appearance: QualifiedTextAppearance;
-    try { appearance = inspectAuthoredTextAppearance(text.sourceAppearance); }
-    catch { return; }
-    if (appearance.characters !== text.characters) return;
-    positivelyLossy ||= authoredTextAppearanceNeedsCarrier(appearance);
+    if (!text || typeof text.characters !== 'string' || text.characters.length>65536) return;
+    let appearance: QualifiedTextAppearance|undefined;
+    if(!charactersOnly){
+      if(!text.sourceAppearance)return;
+      try { appearance = inspectAuthoredTextAppearance(text.sourceAppearance); }catch{return;}
+      if(appearance.characters!==text.characters)return;
+      positivelyLossy ||= authoredTextAppearanceNeedsCarrier(appearance);
+    }
     joined.add(occurrence.variant);
-    rows.push({values: [...main.values], appearance: structuredClone(appearance)});
+    rows.push({values:[...main.values],characters:text.characters,...(appearance?{appearance:structuredClone(appearance)}:{})});
   }
-  if (!positivelyLossy || !path || !rows.length || rows.length !== joined.size) return;
+  if ((!charactersOnly&&!positivelyLossy) || !path || !rows.length || rows.length !== joined.size) return;
+  if(charactersOnly&&(new Set(rows.map(row=>row.characters)).size<2||occurrences.some(o=>o.node.propRefs?.characters!==undefined)))return;
   // Predicate tables must cover their exact projection of the complete owner
   // domain. They already exist on this physical part; no new absence is authored.
   const qualifyPredicateTable = (table: Part['presenceByCombination']): boolean => {
@@ -219,3 +223,15 @@ export function qualifyAuthoredTextAppearanceTable(
   rows.sort((a, b) => compare(canonicalJson(a.values), canonicalJson(b.values)));
   return {props: columns.map(i => axes[i].prop), rows};
 }
+
+/** Existing appearance evidence and style-free characters share the same
+ * original ownership, membership and complete-domain authentication. */
+export function qualifyAuthoredTextAppearanceTable(...args:AuthoredTextArguments):AuthoredTextAppearanceTable|undefined {
+ const table=qualifyAuthoredTextRows(...args);
+ return table?{props:table.props,rows:table.rows.map(row=>({values:row.values,appearance:row.appearance!}))}:undefined;
+}
+export function qualifyAuthoredLiteralTextTable(...args:AuthoredTextArguments):import('../packages/schema/src/text-by-combination.js').TextByCombination|undefined {
+ const table=qualifyAuthoredTextRows(...args,true);
+ return table&&table.props.length?{props:table.props,rows:table.rows.map(row=>({values:row.values,text:row.characters}))}:undefined;
+}
+type AuthoredTextArguments=[DumpSet,string|null,readonly {variant:string;node:DumpNode}[],readonly AuthoredTextAppearanceAxis[],readonly (readonly (string|null)[])[]|undefined,boolean,Pick<Part,'visibleWhen'|'presenceByCombination'|'availabilityByCombination'>];

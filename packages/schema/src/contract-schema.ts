@@ -1,3 +1,5 @@
+import {TextByCombinationSchema,resolveTextByCombination,type TextByCombination} from './text-by-combination.js';
+export * from './text-by-combination.js';
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
 export * from './vector-stroke.js';
 import {TextAppearanceOverrideSchema,TextAppearanceTableSchema,type TextAppearanceOverride,type TextAppearanceTable} from './text-appearance.js';
@@ -2554,7 +2556,7 @@ export function textAppearanceTokenBindingIssues(part: Part): string[] {
   if (bindings === undefined) return [];
   const issues: string[] = [], table = part.textAppearanceByCombination;
   if (!Array.isArray(bindings) || !bindings.length || bindings.length > 2 || new Set(bindings).size !== bindings.length || bindings.some(c => c !== 'color' && c !== 'font-size')) return ['text-appearance-token-bindings-invalid'];
-  if (part.text === undefined || part.content || part.textByProp || part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.mask || part.textAppearanceOverride || part.textColorOverrideProp ||
+  if (part.text === undefined || part.content || part.textByProp || part.textByCombination || part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.mask || part.textAppearanceOverride || part.textColorOverrideProp ||
       !table || table.props.length !== 0 || table.rows.length !== 1 || table.rows[0].values.length !== 0 || table.rows[0].appearance.runs.length !== 1 || table.rows[0].appearance.characters !== part.text) return ['text-appearance-token-bindings-require-invariant-owned-run'];
   if (['tokensByProp','tokensByCombination','literalsByProp','literalsByCombination','states','statesByProp','declaredStates','stylesWhen','layoutByProp','layoutByCombination'].some(key => Object.keys((part as unknown as Record<string, unknown>)[key] ?? {}).length)) issues.push('text-appearance-token-bindings-competing-styles');
   for (const channel of ['color','font-size'] as const) {
@@ -2825,6 +2827,8 @@ export interface Part {
    *  that prop's canonical values — the tokensByProp discipline applied to
    *  characters. Requires `text` (the base is the default value's text). */
   textByProp?: z.infer<typeof PropByPropSchema>;
+  /** Complete source-present variant tuples; never a caller text default. */
+  textByCombination?: TextByCombination;
   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
    *  parent track. Code computes live; the canvas renders the defaults'
    *  fraction (its honest static state). */
@@ -3287,6 +3291,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     text: z.string().optional(),
     /** Per-enum-value text overrides merged over `text` (see Part). */
     textByProp: PropByPropSchema.optional(),
+    textByCombination: TextByCombinationSchema.optional(),
     meter: z
       .strictObject({ valueProp: z.string(), maxProp: z.string() })
       .optional(),
@@ -3871,6 +3876,7 @@ export const ContractSchema = z.strictObject({
       if(walkAnatomy(c as Contract).filter(w=>w.part.shapeFillOverrideProp===part.shapeFillOverrideProp).length!==1)
         ctx.addIssue({code:'custom',path,message:'shape-fill-override-target-must-be-unique'});
     }
+    for(const message of textByCombinationIssues(c as Contract,part as Part,nested))ctx.addIssue({code:'custom',path:[...path,'textByCombination'],message});
     if(part.textAppearanceByCombination){
       const table=part.textAppearanceByCombination;
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'textAppearanceByCombination'],message});
@@ -3888,7 +3894,8 @@ export const ContractSchema = z.strictObject({
       if(!expected||expected.size!==table.rows.length||table.rows.some(row=>!expected.has(JSON.stringify(row.values))))issue('text-appearance-source-domain-incomplete');
       for(const row of table.rows){
         const subst=Object.fromEntries(table.props.map((name,i)=>[name,row.values[i]]));
-        const characters=part.content?textInput?.default:part.textByProp?part.textByProp.map[String(subst[part.textByProp.prop])]??part.text:part.text;
+        let characters:unknown;
+        try{characters=part.content?textInput?.default:part.textByCombination?resolveTextByCombination(part.textByCombination,subst):part.textByProp?part.textByProp.map[String(subst[part.textByProp.prop])]??part.text:part.text;}catch{issue('text-appearance-source-characters-unqualified');continue;}
         if(typeof characters!=='string'||characters!==row.appearance.characters)issue('text-appearance-source-characters-unqualified');
       }
     }
@@ -4955,4 +4962,19 @@ export function callerContentGroups(part:Part):Array<{slot:string;parts:Record<s
  }))}));
  if(Object.keys(part.parts!).some(key=>!seen.has(key)))fail('unrouted caller part');
  return groups;
+}
+
+/** Shared by parsed contracts and direct emitters. Literal tuple text never
+ * replaces an explicit TEXT property or borrows absence from missing rows. */
+export function textByCombinationIssues(contract:Contract,part:Part,nested:boolean):string[]{
+ const table=part.textByCombination;if(table===undefined)return [];
+ const issues:string[]=[];
+ if(!TextByCombinationSchema.safeParse(table).success)return ['literal-text-combination-invalid'];
+ if(!nested||typeof part.text!=='string'||part.content||part.textByProp||part.component||part.parts||part.slot||part.repeat||part.icon||part.shape||part.mask||part.visibilityOverrideProp)issues.push('literal-text-combination-requires-owned-literal');
+ const axes=absentVariantAxes(contract),selected=axes.filter(axis=>table.props.includes(axis.prop.name));
+ if(selected.length!==table.props.length||selected.some((axis,i)=>axis.prop.name!==table.props[i]))issues.push('literal-text-combination-axis-domain-unqualified');
+ if(table.rows.some(row=>row.values.some((value,i)=>!selected[i]?.options.some(option=>(option===null?null:String(option))===value))))issues.push('literal-text-combination-value-unqualified');
+ const expected=reachablePresenceTupleKeys(contract,table.props,part);
+ if(!expected||expected.size!==table.rows.length||table.rows.some(row=>!expected.has(JSON.stringify(row.values))))issues.push('literal-text-combination-source-domain-incomplete');
+ return issues;
 }

@@ -1,6 +1,7 @@
+import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
 import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
-import {qualifyAuthoredTextAppearanceTable} from './source-authored-text-appearance.js';
+import {qualifyAuthoredTextAppearanceTable,qualifyAuthoredLiteralTextTable} from './source-authored-text-appearance.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
@@ -12487,6 +12488,23 @@ function qualifiedComponentCallerRows(m: Merged, ctx: Ctx) {
 /** Direct authored appearance is a default, independent of optional instance
  * appearance controls. Only a complete original source owner domain may supply
  * its rows; state/mode filtering and partial presence cannot fill the gaps. */
+function carryAuthoredLiteralText(m:Merged,part:Record<string,unknown>,ctx:Ctx,where:string):void {
+ const source=ctx.structuralAvailabilitySource;
+ if(!source||m.type!=='TEXT'||part.content||part.textByProp||typeof part.text!=='string'||new Set(m.occ.map(o=>o.node.text?.characters)).size<2)return;
+ let domain=declaredPresenceDomain(ctx),qualified=ctx.guardedDrawnPartDomain===true;
+ if(!domain&&ctx.sourcePartMatrixVerified&&ctx.axes.length&&ctx.axes.every(axis=>!axis.omitted)){
+  const values=ctx.axes.map(axis=>axis.values.map(value=>axisValue(axis,value)));
+  if(values.reduce((product,choices)=>product*choices.length,1)>4096)return;
+  domain=values.reduce<Array<Array<string|null>>>((rows,choices)=>rows.flatMap(row=>choices.map(value=>[...row,value])),[[]]);qualified=true;
+ }
+ const table=qualifyAuthoredLiteralTextTable(source,ctx.fileKey,m.occ,ctx.axes.map(axis=>({property:axis.property,prop:axis.propName,boolean:isBooleanAxis(axis),values:axis.values,
+  map:Object.fromEntries(axis.values.map(raw=>[raw,axis.omitted?.unsetValue===raw?null:axisValue(axis,raw)]))})),domain,qualified,part as Part);
+ if(!table)return;
+ part.textByCombination=table;
+ ctx.notes=ctx.notes.filter(note=>!note.startsWith(where+': drawn characters vary across variants'));
+ ctx.notes.push(where+': literal source characters retained for '+table.rows.length+' complete source-present variant tuples');
+}
+
 function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
   const source = ctx.structuralAvailabilitySource;
   if (!source || m.type !== 'TEXT' || !m.occ.some(o => o.node.text?.sourceAppearance)) return;
@@ -12515,7 +12533,7 @@ function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, c
     const inputDefault = input && !input.figmaless ? input.default : undefined;
     if (table.rows.some(row => {
       const values = Object.fromEntries(table.props.map((name, i) => [name, row.values[i]]));
-      const characters = textPart.content ? inputDefault : textPart.textByProp
+      const characters = textPart.content ? inputDefault : textPart.textByCombination ? resolveTextByCombination(textPart.textByCombination,values) : textPart.textByProp
         ? textPart.textByProp.map[String(values[textPart.textByProp.prop])] ?? textPart.text : textPart.text;
       return typeof characters !== 'string' || characters !== row.appearance.characters;
     })) {
@@ -13372,6 +13390,7 @@ function buildPartFromEvidence(
         invertHiddenVisibility(m, part, ctx, where);
       }
     }
+    carryAuthoredLiteralText(m, part, ctx, where);
     carryAuthoredTextAppearance(m, part, ctx, where);
     return part;
   }

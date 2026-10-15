@@ -493,6 +493,7 @@ function anatomyPage(): { route: string; html: string } {
           text: "Static literal text — see below.",
           textByProp:
             'Per-enum-value text overrides merged over <code>text</code> — see <a href="#text-by-prop">text by prop</a>.',
+          textByCombination: 'Complete source-present variant tuples select literal text — see <a href="#text-by-combination">text by combination</a>.',
           textOutOfBox:
             'MEASURED evidence that the indent evicts the label from its box — see <a href="#text-out-of-box">text out of box</a>.',
           instanceRootInputs:
@@ -591,6 +592,13 @@ function anatomyPage(): { route: string; html: string } {
           },
           "the Slider’s left value label (committed usage: examples/untitled-ui/storybook/contracts/slider.contract.json)",
         ),
+    ),
+    section(
+      "text-by-combination",
+      "Text by combination",
+      ["generated", "curated"],
+      `<p><code>textByCombination: { props, rows }</code> selects an owned literal text from a complete table of canonical variant tuples. Each row has <code>values</code> and <code>text</code>; values are strings, with <code>null</code> reserved for a declared omission. Unlike <code>textByProp</code>, every reachable source-present tuple must have exactly one row. Missing and duplicate tuples refuse rather than using the base <code>text</code>.</p><p>The base <code>text</code> remains required. This carrier is for nested literal leaves, independent of rich-text style evidence; it cannot coexist with <code>content</code>, <code>textByProp</code>, component content or child parts. Explicit text properties keep their own authority. A matching <code>textAppearanceByCombination</code> table may style the selected characters, but must agree with them exactly. Visibility and presence still control whether the leaf exists; an absent leaf does not require a text row. Unsupported omitted-axis native projection refuses.</p>` +
+        refusals("Refusals:", ["unknown or reordered variant axes; values outside their declared domains", "incomplete, duplicate or ambiguous tuples", "root text, caller TEXT bindings, or child-bearing and other nonliteral hybrids"]),
     ),
     section(
       "text-out-of-box",

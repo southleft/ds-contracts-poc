@@ -1688,6 +1688,7 @@ function hasEquivalentSlotFallback(part: Part): boolean {
 }
 
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
+  if(walkAnatomy(contract).some(w=>w.part.textByCombination))throw Error('literal-text-combination-web-components-unsupported');
   refuseInstanceRootInputTarget(contract,ctx.contracts,'web-components');
   if (contract.props.some(p => p.bindings.code.initial)) throw new Error('WEB_COMPONENT_INITIAL_CODE_BINDING_UNSUPPORTED');
   const checked = new Set<string>();

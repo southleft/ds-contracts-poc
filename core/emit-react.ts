@@ -1,3 +1,4 @@
+import {reactLiteralTextExpression} from './react-literal-text.js';
 import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
 import {validateStructuralAvailability} from '../scripts/contract-schema.js';
@@ -856,14 +857,14 @@ export function generateTsx(
       // textByProp: per-enum or Boolean-value characters as
       // a ternary chain over the driving prop, base text as the fallback.
       const tb = part.textByProp;
-      const inner = tb
+      const inner = part.textByCombination ? `{${reactLiteralTextExpression(part,codePropOf,textValueOf)}}` : tb
         ? `{${Object.entries(tb.map)
             .map(([v, t]) => `${codePropOf(tb.prop)} === ${typeof textValueOf(tb.prop, v) === 'boolean' ? String(textValueOf(tb.prop, v)) : `'${v}'`} ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part, tb ? inner.slice(1, -1) : JSON.stringify(part.text))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, inner)}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part, tb || part.textByCombination ? inner.slice(1, -1) : JSON.stringify(part.text))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, inner)}</${el}>`,
       );
     }
     if (part.meter) {
