@@ -114,3 +114,13 @@ test('the complete plugin capture attaches selected occurrence geometry without 
   const empty = await vm.runInContext(`(async()=>{${source}})()`, context);
   assert.deepEqual(plain(empty.Source.variants[0].children[0].fixedSwaps.Content.observedInstances), [], 'complete native capture retains empty inventory rather than an unknown observation');
 });
+
+test('REST selected-root witness separates current FILL/HUG allocation from the placeholder main',()=>{
+ const host=fixture();host.children=[leaf('4:1')];host.layoutMode='VERTICAL';host.paddingLeft=0;host.paddingRight=0;host.paddingTop=0;host.paddingBottom=0;host.size={x:220,y:104};
+ const selected=host.children[0];selected.size={x:220,y:52};selected.relativeTransform=[[1,0,0],[0,1,0]];selected.layoutSizingHorizontal='FILL';selected.layoutSizingVertical='HUG';selected.overrides=[{id:selected.id,overriddenFields:['layoutAlign','primaryAxisSizingMode']}];selected.componentProperties={Mode:{type:'VARIANT',value:'Active'}};
+ const response:any={name:'Fixture',version:'frozen',nodes:{source:{document:{id:'source',name:'Source',type:'COMPONENT',children:[host]},components:{'2:0':{name:'Host',key:'host-key'},'3:1':{name:'Selected',key:'selected-key'}}},selected:{document:{id:'3:1',name:'Selected',type:'COMPONENT',size:{x:360,y:52}}}}};
+ const before=JSON.stringify(response),result=mapRestToDump(response,{fileKey:'fixture'}),row=(result.dump.Source as DumpSet).variants[0].children![0].fixedSwaps!.Content.observedInstances![0];
+ assert.equal(result.dump._provenance!.dumpVersion,'1.66');assert.equal(JSON.stringify(response),before);
+ assert.deepEqual(row.selectedRoot?.sizing,{horizontal:'FILL',vertical:'HUG'});assert.deepEqual(row.selectedRoot?.mainSize,{width:360,height:52});assert.deepEqual(row.selectedRoot?.fields,['layoutAlign','primaryAxisSizingMode']);assert.deepEqual(row.selectedRoot?.properties,{Mode:'Active'});assert.equal(row.selectedRoot?.hostMainId,'2:0');assert.equal(row.selectedRoot?.parentId,'2:1');assert.equal(row.selectedRoot?.layoutGrow,0);assert.equal(row.selectedRoot?.sizeBound,false);
+ delete response.nodes.selected;assert.equal((mapRestToDump(response,{fileKey:'fixture'}).dump.Source as DumpSet).variants[0].children![0].fixedSwaps!.Content.observedInstances![0].selectedRoot,undefined,'missing original selected main grants no selected-root authority');
+});

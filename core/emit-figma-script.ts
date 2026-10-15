@@ -5478,7 +5478,9 @@ function partToSpecInner(
     if (pathsByProp && baseShape.kind !== 'line') {
       const prop = contract.props.find((p) => p.name === pathsByProp.prop);
       const value = subst[pathsByProp.prop] ?? prop?.default;
-      const geometry = typeof value === 'string' ? pathsByProp.map[value] : undefined;
+      const key = typeof value === 'string' ? value
+        : prop?.type === 'boolean' && typeof value === 'boolean' ? String(value) : undefined;
+      const geometry = key === undefined ? undefined : pathsByProp.map[key];
       if (!geometry) throw new Error(`filled-path-variant-missing:${pathsByProp.prop}:${String(value)}`);
       selected = { ...baseShape, ...geometry };
     }

@@ -1,3 +1,4 @@
+import {REACT_LIBRARY_COMPONENT_LIMIT} from '../react-library-limits.js';
 import { ContractSchema, contractDependencyEdges, type Contract } from '../../scripts/contract-schema.js';
 import type { TokenTreeInput } from '../../core/tokens.js';
 
@@ -14,7 +15,7 @@ function assertData(value: unknown, depth = 0): void {
 export function parseLibraryRequest(value: unknown): { root: Contract; contracts: Contract[]; tokens: TokenTreeInput; icons: Array<[string, string]> } {
   assertData(value);
   if (!record(value) || Object.keys(value).some(k => !['rootId', 'contracts', 'tokens', 'icons'].includes(k))) throw Error('react-library-invalid-request');
-  if (!Array.isArray(value.contracts) || value.contracts.length < 1 || value.contracts.length > 30) throw Error('react-library-family-limit: expected 1–30 components');
+  if (!Array.isArray(value.contracts) || value.contracts.length < 1 || value.contracts.length > REACT_LIBRARY_COMPONENT_LIMIT) throw Error(`react-library-family-limit: expected 1–${REACT_LIBRARY_COMPONENT_LIMIT} components`);
   const contracts = value.contracts.map(c => {
     const parsed = ContractSchema.safeParse(c);
     if (!parsed.success) throw Error('react-library-contract-invalid: ' + parsed.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join('; '));

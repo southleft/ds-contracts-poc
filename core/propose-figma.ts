@@ -2,7 +2,7 @@ import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
 import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
 import {qualifyAuthoredTextAppearanceTable,qualifyAuthoredLiteralTextTable} from './source-authored-text-appearance.js';
-import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
+import {fixedSwapOwnerRoots, fixedSwapVariantOwner, qualifyFixedSwapVariantSelection, capturedSelectedDefaultsMatch, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
 import {sourceImageInput,type SourceImageInput,type SourceImageBinding} from './source-image-input.js';
@@ -16,7 +16,7 @@ import {validateRemoteSetSnapshot} from '../extract/figma/remote-set-snapshot.js
 import {observedStatePresence,statePresenceRows,type PresenceState} from './state-presence.js';
 import {textStateTarget} from '../packages/core/src/text-state-target.js';
 import {shapeFillDemandsFromDumps,demandedShapeFillNodes,shapeFillBindingMatches,shapeFillValue,type ShapeFillDemand,type ShapeFillBinding} from './source-shape-fill-control.js';
-import {characterDemandsFromDumps,demandedCharacterNodes,characterBindingMatches,type CharacterDemand,type CharacterBinding,nestedCharacterRoutes,type NestedCharacterRoute} from './source-character-control.js';
+import {characterDemandsFromDumps,demandedCharacterNodes,characterBindingMatches,qualifyCharacterOwnerDomain,type CharacterDemand,type CharacterBinding,nestedCharacterRoutes,type NestedCharacterRoute} from './source-character-control.js';
 import {planSolidFillBindingTokens,solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
 import {isExactRectanglePath} from './rectangle-path.js';
 import {textColorDemandsFromDumps,demandedTextColorNodes,textColorBindingMatches,observedTextOverrideColor,type TextColorDemand,type TextColorBinding} from './source-text-color-control.js';
@@ -2551,7 +2551,7 @@ interface MintCapture {
    *  linked child's own minted values. Filled like every other mint target
    *  after classification; a target that stays empty (every channel
    *  refused, each refusal named) attaches nothing. */
-  refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string>; property?: 'rootOverrides'; fixedSwapDimensions?: string }>;
+  refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string>; property?: 'rootOverrides'; fixedSwapDimensions?: string; fixedSwapChannels?:Array<'width'|'height'> }>;
 }
 
 interface Ctx {
@@ -5153,7 +5153,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     if (new Set(shapes.map((s) => JSON.stringify(geometry(s)))).size > 1) {
       let carried = false;
       for (const axis of ctx.axes) {
-        if (isBooleanAxis(axis)) continue;
+        const booleanAxis = isBooleanAxis(axis);
         const byValue = new Map<string, ReturnType<typeof geometry>>();
         let fits = true;
         for (const s of shapes) {
@@ -5162,7 +5162,9 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
           if (value === undefined || (byValue.has(value) && JSON.stringify(byValue.get(value)) !== JSON.stringify(g))) { fits = false; break; }
           byValue.set(value, g);
         }
-        if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
+        // Boolean geometry has two real planes, including false. Neither an
+        // absent observation nor the other plane supplies its path bytes.
+        if (!fits || !axis.values.every((v) => byValue.has(v) || (!booleanAxis && first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
         fenceSparseInference(ctx.axes, `filled-path@${where}`, shapes.map((s) => ({ variant: s.variant, value: JSON.stringify(geometry(s)) })));
         shape.pathsByProp = { prop: axis.propName, map: Object.fromEntries(axis.values.map((v) => [axisValue(axis, v), byValue.get(v) ?? geometry(shapes[0])])) };
         const absent = axis.values.filter((v) => !byValue.has(v));
@@ -11870,13 +11872,21 @@ function carryNestedCharacterCaller(m:Merged,part:Record<string,unknown>,compone
     const ownedKeys=existing?(groups?(groups[names[0]]??[]):(component.contentSlot??'children')===names[0]?Object.keys(existing):[]):[];
     const owned=ownedKeys.length===1?existing![ownedKeys[0]] as Record<string,unknown>:undefined;
     if(ownedKeys.length&&(!owned||Object.keys(owned).some(key=>key!=='component')))continue;
-    const targetId=ctx.contractIdByKey?.get(first.targetKey),target=ContractSchema.safeParse(targetId&&ctx.contractsById?.get(targetId));
-    if(!target.success||targetId===ctx.selfId||targetId===child.data.id||target.data.bindings.figma.anchors.fileKey!==ctx.fileKey||target.data.props.some(p=>p.bindings.figma.kind==='VARIANT'||(p.required&&p.default===undefined)))continue;
+    const capturedRoots=ctx.fixedSwapOwnerRoots?.get(first.target.componentId);
+    const variantRoot=capturedRoots?.length===1 ? capturedRoots[0] : undefined;
+    const selectedVariant=variantRoot && fixedSwapVariantOwner({id:first.target.componentId,key:variantRoot.node.componentKey},ctx.fixedSwapOwnerRoots);
+    const selection=selectedVariant ? fixedSwapTarget({id:first.target.componentId,key:variantRoot!.node.componentKey},ctx) : undefined;
+    const targetId=selection?.id??ctx.contractIdByKey?.get(first.targetKey),target=ContractSchema.safeParse(targetId&&ctx.contractsById?.get(targetId));
+    if(!target.success||targetId===ctx.selfId||targetId===child.data.id||target.data.bindings.figma.anchors.fileKey!==ctx.fileKey||
+        target.data.bindings.figma.anchors.componentSetKey!==first.targetKey||
+        (selection ? rows.some(({r})=>r!.target.componentId!==first.target.componentId) : target.data.props.some(p=>p.bindings.figma.kind==='VARIANT'||(p.required&&p.default===undefined))))continue;
+    if(selection && !owned)continue;
     if(!owned&&slots.some(s=>s.slot.defaultContent?.length!==1||s.slot.defaultContent[0].id!==targetId))continue;
     const input=child.data.props.find(p=>p.bindings.code.prop===names[0]);
     if(input&&Object.hasOwn(component.props??{},input.name))continue;
     const prior=owned?.component as Record<string,unknown>|undefined;
     if(owned&&(!prior||prior.id!==targetId))continue;
+    if(selection?.props && Object.entries(selection.props).some(([key,value])=>(prior?.props as Record<string,unknown>|undefined)?.[key]!==value))continue;
     const selected:Record<string,unknown>=prior?{...prior,...(prior.props?{props:{...prior.props as Record<string,unknown>}}:{})}:{id:targetId};
     const observed={...m,occ:rows.map(({o,r})=>({...o,node:{...o.node,nodeId:r!.target.instanceId,instanceGeometry:undefined,instanceRootOverrides:undefined,textOverrides:{[path]:o.node.textOverrides![path]},textOverrideTargets:{[path]:r!.target}}}))};
     const gate=part.visibleWhen as {prop:string;equals?:string|string[]}|undefined;
@@ -11923,6 +11933,23 @@ function carryNestedCharacterCaller(m:Merged,part:Record<string,unknown>,compone
     ctx.notes=ctx.notes.filter(n=>!n.startsWith(where+': character-override-not-carried '+path+' —'));
     ctx.notes.push(where+': nested source characters carried through identity-qualified caller content in slot '+names[0]);
   }
+}
+
+/** Resolve either the preexisting standalone identity or an exactly captured
+ * variant's owning set plus all canonical axis values. No display-name lookup. */
+function fixedSwapTarget(swap: {id:string;key?:string},ctx:Ctx): {id:string;contract:Contract;props?:Record<string,string|boolean>} | undefined {
+  const owner=fixedSwapVariantOwner(swap,ctx.fixedSwapOwnerRoots);
+  const id=ctx.contractIdByKey?.get(owner?.setKey??swap.key??'');
+  const parsed=ContractSchema.safeParse(id && ctx.contractsById?.get(id));
+  if(!id || !parsed.success || !ctx.fileKey) return;
+  if(owner){
+    const props=qualifyFixedSwapVariantSelection(swap,ctx.fixedSwapOwnerRoots,parsed.data,ctx.fileKey);
+    return props ? {id,contract:parsed.data,props} : undefined;
+  }
+  const anchor=parsed.data.bindings.figma.anchors;
+  if(anchor.fileKey!==ctx.fileKey || anchor.componentSetKey!==swap.key || anchor.nodeId!==swap.id ||
+      parsed.data.props.some(p=>p.bindings.figma.kind==='VARIANT' || p.required && p.default===undefined)) return;
+  return {id,contract:parsed.data};
 }
 
 /** Fixed content belongs to the caller, not to the child's sample defaults.
@@ -12002,13 +12029,8 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     }
     const branches=[];
     for(const [key,occ] of [...groups].sort(([a],[b])=>a.localeCompare(b))){
-      const swap=occ[0].node.fixedSwaps![property],id=ctx.contractIdByKey?.get(swap.key!);
-      const target=ContractSchema.safeParse(id&&ctx.contractsById?.get(id));
-      if(!target.success||id===ctx.selfId||id===child.id)return decline('conditional selected content is unresolved or self-referential');
-      const anchor=target.data.bindings.figma.anchors;
-      if(!ctx.fileKey||anchor.fileKey!==ctx.fileKey||anchor.componentSetKey!==swap.key||anchor.nodeId!==swap.id||
-          target.data.props.some(p=>p.bindings.figma.kind==='VARIANT'||p.required&&p.default===undefined))
-        return decline('conditional selected content is not an exact standalone target');
+      const swap=occ[0].node.fixedSwaps![property],target=fixedSwapTarget(swap,ctx);
+      if(!target||target.id===ctx.selfId||target.id===child.id)return decline('conditional selected content is unresolved or self-referential');
       const present=new Set(occ.map(o=>o.variant));
       const gate=inferPresenceByCombination(ctx.axes.map(a=>({prop:a.propName,values:a.values.map(v=>a.omitted?.unsetValue===v?null:axisValue(a,v))})),
         ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>{const raw=axisValuesOf(variant)[a.property];return a.omitted?.unsetValue===raw?null:axisValue(a,raw)}),present:present.has(variant)})),1,
@@ -12038,17 +12060,11 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
   const firstSwap = swaps[0];
   if (!firstSwap?.key || swaps.some(s => !s || s.id !== firstSwap.id || s.key !== firstSwap.key))
     return decline('selected content is missing, unkeyed or varies across occurrences');
-  const targetId = ctx.contractIdByKey?.get(firstSwap.key);
-  const target = ContractSchema.safeParse(targetId && ctx.contractsById?.get(targetId));
-  if (!target.success || targetId === ctx.selfId || targetId === child.id)
-    return decline('the selected content is unresolved or self-referential');
-  const anchor = target.data.bindings.figma.anchors;
-  // A variant's component key/id cannot stand in for its set's default.
-  // Matching the source node as well as its key proves a standalone target.
-  if (!ctx.fileKey || anchor?.componentSetKey !== firstSwap.key || anchor.nodeId !== firstSwap.id ||
-      anchor.fileKey !== ctx.fileKey || target.data.props.some(p => p.bindings.figma.kind === 'VARIANT' || (p.required && p.default === undefined)))
-    return decline('the selected content is not an exact standalone target with usable defaults');
-  const selected: Record<string, unknown> = { id: targetId };
+  const resolved = fixedSwapTarget(firstSwap,ctx),targetId=resolved?.id;
+  if (!resolved || targetId === ctx.selfId || targetId === child.id)
+    return decline('the selected content is unresolved, not exactly qualified or self-referential');
+  const target = {data:resolved.contract};
+  const selected: Record<string, unknown> = { id: targetId, ...(resolved.props?{props:resolved.props}:{}) };
   // Part names are contract-wide identity: a second caller of the same child
   // allocates its own key through the shared rule instead of a fixed spelling.
   part.parts = { [partKey('selectedContent', ctx, `${where}/selectedContent`, selfKey)]: { component: selected } };
@@ -12095,26 +12111,29 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
       ctx.mint.refOverrides.some(row => row.component === selected);
     const allocations = m.occ.map(o => ownerKey ? qualifyFixedSwapRootAllocation(o.node, property,
       ownerKey, firstSwap.id, firstSwap.key!, ctx.fixedSwapOwnerRoots) : {issue:'owner-key'});
-    const issue = ctx.fixedSwapRootAllocationFiltered ? 'promoted-source-plane' : existing ? 'receiver-ownership' :
+    const selectedDefaultsConflict=swaps.some(s=>s?.observedInstances?.[0]?.selectedRoot && !capturedSelectedDefaultsMatch(s.observedInstances[0].selectedRoot.properties,target.data,(selected.props??{}) as Record<string,unknown>));
+    const issue = selectedDefaultsConflict ? 'selected-property-default-conflict' : ctx.fixedSwapRootAllocationFiltered ? 'promoted-source-plane' : existing ? 'receiver-ownership' :
       hidden.some(Boolean) ? 'hidden-source-allocation' : !inputs?.includes('width') || !inputs.includes('height') ? 'child-inputs' :
       new Set(m.occ.map(o=>o.variant)).size !== m.occ.length || m.occ.some(o=>!ctx.totalVariants.includes(o.variant)) ? 'source-occurrences' :
       allocations.find(row=>'issue' in row)?.issue;
     if (issue) declineAllocation(issue);
     else {
-      const values = allocations as Array<{width:number;height:number;sizing:NonNullable<DumpNode['instanceSizing']>;remainingFields:string[]}>;
+      const values = allocations as Array<{width:number;height:number;sizing:NonNullable<DumpNode['instanceSizing']>;remainingFields:string[];channels?:Array<'width'|'height'>}>;
+      const channels=values[0].channels??['width','height'] as Array<'width'|'height'>;
+      if(values.some(row=>JSON.stringify(row.channels??['width','height'])!==JSON.stringify(channels)))throw Error('fixed-swap-allocation-mode-varies:'+where);
       const rootTarget:Record<string,string> = {};
-      for (const channel of ['width','height'] as const) {
+      for (const channel of channels) {
         mintObservation(ctx, rootTarget, `${where}.selectedContent`, channel, 'px',
           m.occ.map((o,i)=>({variant:o.variant,value:values[i][channel]})));
         const observation=ctx.mint.observations.at(-1)!;observation.booleanAxes=true;
         const present=new Set(m.occ.map(o=>o.variant));
         observation.partAbsentCombos=ctx.totalVariants.filter(v=>!present.has(v)).map(v=>ctx.mint!.axisValuesByVariant.get(v)??{});
       }
-      ctx.mint.refOverrides.push({component:selected,target:rootTarget,property:'rootOverrides',fixedSwapDimensions:where});
+      ctx.mint.refOverrides.push({component:selected,target:rootTarget,property:'rootOverrides',fixedSwapDimensions:where,fixedSwapChannels:channels});
       (ctx.fixedSwapRootInputUses ??= []).push({merged:m,property,ownerSetKey:ownerKey!,targetId:firstSwap.id,
         targetKey:firstSwap.key!,component:selected,target:rootTarget,values,where});
       rectangularCarried=true;
-      ctx.notes.push(`${where}: identity-qualified fixed-swap descendant width/height queued as frozen local allocation; original sizing ${[...new Set(values.map(row=>row.sizing.horizontal+'/'+row.sizing.vertical))].join(', ')} is observed, not responsive rootFill authority`);
+      ctx.notes.push(`${where}: identity-qualified fixed-swap descendant ${channels.join('/')} queued as local allocation; original sizing ${[...new Set(values.map(row=>row.sizing.horizontal+'/'+row.sizing.vertical))].join(', ')} is observed, not responsive rootFill authority`);
       const remaining=[...new Set(values.flatMap(row=>row.remainingFields))];
       if(remaining.length)ctx.notes.push(`${where}: fixed-swap descendant root override fields not modeled by allocation: ${remaining.join(', ')}; review`);
     }
@@ -12346,6 +12365,10 @@ function carryAspectRatio(m: Merged, holder: Record<string, unknown> | null, ctx
 
 /** Only this source requirement may enter the existing captured React domain
  * route. An unrelated error or a string with the same message cannot do so. */
+class CharacterDrawnDomainRequired extends Error {
+  constructor(where:string){super('character-owned-path-needs-drawn-domain:'+where);this.name='CharacterDrawnDomainRequired';}
+}
+
 class DirectSlotDrawnDomainRequired extends Error {
   constructor(where: string) {
     super(`native-slot-default-anatomy-unqualified:${where}:complete-declared-source-domain-required`);
@@ -13105,10 +13128,15 @@ function buildPart(
         const allowed = Array.isArray(presence.equals) ? presence.equals : [presence.equals];
         // The host itself must disappear when its sole child is hidden; an
         // empty in-flow host still consumes a parent flex gap.
+        const structuralPresence={props:[presence.prop],rows:axis.values.map(value=>({
+          values:[axisValue(axis,value)],present:allowed.includes(axisValue(axis,value)),
+        }))};
+        // Affine rows are defined only on this original structural plane.
+        // The new host must not erase that same gate from the geometry owner.
+        if(part.instanceAffineLayout && !part.presenceByCombination)
+          part.presenceByCombination=structuredClone(structuralPresence);
         part = {element:'div',layout:{display:'flex',direction:'row'},visibleWhen:part.visibleWhen,
-          presenceByCombination:{props:[presence.prop],rows:axis.values.map(value=>({
-            values:[axisValue(axis,value)],present:allowed.includes(axisValue(axis,value)),
-          }))},parts:{[content]:part}};
+          presenceByCombination:structuralPresence,parts:{[content]:part}};
         ctx.notes.push(`${where}: component source presence on "${presence.prop}" and live visibility "${visibilityRef}" retained through an explicit structural host; child identity, props and paint remain owned by its contract`);
       } else if (m.occ.every(o=>absBoxOf(o.node)!==undefined) && !part.parts && !part.repeat && !part.overlay && !part.mask) {
         const positioned = wrapPositionedRefPart(m, part, ctx, where, selfKey);
@@ -13216,7 +13244,7 @@ function buildPart(
     for(const o of m.occ)if(o.node.nodeId)ctx.characterNodes?.delete(o.node.nodeId);
   }else if(characterDemands.length){
     const present = new Set(m.occ.map(o=>o.variant));
-    const presenceQualified = m.occ.length===ctx.totalVariants.length ||
+    let presenceQualified = m.occ.length===ctx.totalVariants.length ||
       Boolean(gate?.prop && ctx.mint && ctx.totalVariants.every(variant=>{
         const value=ctx.mint!.axisValuesByVariant.get(variant)?.[gate!.prop!];
         if(value===undefined)return false;
@@ -13224,6 +13252,20 @@ function buildPart(
           (Array.isArray(gate!.equals)?gate!.equals:[gate!.equals]).map(String).includes(value);
         return visible===present.has(variant);
       }));
+    if(!presenceQualified && part && part===sourcePart && !part.component && !part.slot && !part.repeat && !part.parts && m.type==='TEXT' && ctx.structuralAvailabilitySource && !ctx.guardedDrawnPartDomain && ctx.directSlotReactRuntime)
+      throw new CharacterDrawnDomainRequired(where);
+    if(!presenceQualified && part && part===sourcePart && !part.component && !part.slot && !part.repeat && !part.parts && m.type==='TEXT' && ctx.structuralAvailabilitySource){
+      const membership=qualifyOwnedTextAvailability(ctx.structuralAvailabilitySource,m.occ,
+        ctx.axes.map(axis=>({property:axis.property,prop:axis.propName,values:axis.values,
+          map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)]))})),
+        declaredPresenceDomain(ctx),ctx.guardedDrawnPartDomain===true);
+      if(membership){
+        // This remains an ordinary source-presence predicate, not a new
+        // visibility override. Exact original paths keep split leaves apart.
+        part.presenceByCombination=membership;presenceQualified=true;
+        ctx.notes.push(where+': character owner retains exact original-path membership over the independently qualified drawn domain');
+      }
+    }
     if(!part||part!==sourcePart||part.component||part.slot||part.repeat||part.parts||m.type!=='TEXT'||!presenceQualified)throw Error('character-demand-owned-part-unqualified:'+where);
     let prop=(part.content as {prop?:string}|undefined)?.prop;
     if(prop){
@@ -16780,7 +16822,7 @@ export function proposeFromDump(
   } catch (error) {
     const uncarriedState = error instanceof ExactProjectionError &&
       error.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS' && error.message.includes('state-axis-state-not-carried:');
-    const capturedDomainRequired = error instanceof DirectSlotDrawnDomainRequired ||
+    const capturedDomainRequired = error instanceof DirectSlotDrawnDomainRequired || error instanceof CharacterDrawnDomainRequired ||
       error instanceof SparseMatrixInferenceError ||
       error instanceof ExactProjectionError && (error.code === 'EXACT_MATRIX_RAGGED' || uncarriedState);
     if (opts.drawnVariantSurface !== 'react-runtime' || !capturedDomainRequired) throw error;
@@ -18719,7 +18761,7 @@ function proposeFromDumpFencedImpl(
         throw Error('fixed-swap-root-allocation-source-changed:'+use.where);
     }
     for (const ro of ctx.mint.refOverrides) {
-      if(ro.fixedSwapDimensions && (!ro.target.width || !ro.target.height || ro.component.rootOverrides!==undefined ||
+      if(ro.fixedSwapDimensions && ((ro.fixedSwapChannels??['width','height']).some(channel=>!ro.target[channel]) || ro.component.rootOverrides!==undefined ||
           ro.component.rootFill!==undefined || ro.component.affine!==undefined || ro.component.placement!==undefined ||
           (ro.component.overrides as Record<string,unknown>|undefined)?.size!==undefined ||
           ctx.mint.refOverrides.some(other=>other!==ro && other.component===ro.component && other.property==='rootOverrides'))) {
@@ -19550,8 +19592,12 @@ function proposeFromDumpFencedImpl(
   }
   settleUaPadding({ contract, notes: ctx.notes }, set);
   if(ctx.characterNodes?.size)throw Error('character-demand-source-part-not-emitted');
-  const characterBindings=[...new Map((ctx.characterAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract),...(d.forwardTarget?{forwarded:true}:{})}))).map(b=>[canonicalJson(b),b])).values()];
+  const characterBindings:CharacterBinding[]=[...new Map((ctx.characterAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract),...(d.forwardTarget?{forwarded:true}:{})}))).map(b=>[canonicalJson(b),b])).values()];
   if(ctx.textAppearanceNodes?.size)throw Error('text-appearance-demand-source-part-not-emitted');
+  for(const binding of characterBindings){
+    const proof=qualifyCharacterOwnerDomain(structuralAvailabilitySource,contract as unknown as Contract,binding.prop,ctx.sourcePartsByNodeId);
+    if(proof)binding.ownerDomain=proof;
+  }
   const textAppearanceBindings=(ctx.textAppearanceAuthored??[]).map(row=>({...row,contractRevision:revisionOf(contract)}));
   if(ctx.imageNodes?.size)throw Error('image-demand-source-part-not-emitted');
   const imageBindings=(ctx.imageAuthored??[]).map(row=>({...row,contractRevision:revisionOf(contract)}));
@@ -19948,7 +19994,8 @@ function proposeBatchFromDumpInternal(
         // linked main's default and is absent from this node's child tree.
         // Resolve keys only; display names do not establish swap identity.
         for(const swap of Object.values(node.fixedSwaps??{})){
-          const selected=swap.key?byKey.get(swap.key):undefined;
+          const owner=fixedSwapVariantOwner(swap,setOpts.fixedSwapOwnerRoots);
+          const selected=byKey.get(owner?.setKey??swap.key??'');
           if(selected&&selected!==name)schedule(selected);
         }
       }

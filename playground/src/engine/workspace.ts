@@ -1,3 +1,4 @@
+import {REACT_LIBRARY_COMPONENT_LIMIT} from '../../react-library-limits.js';
 /**
  * Session workspace — every successful import collects here, so the design↔
  * code loop is inspectable after the fact: what came in, from where, with
@@ -41,7 +42,7 @@ export interface WorkspaceEntry {
   importedAt: number;
 }
 
-export const WORKSPACE_CAP = 30;
+export const WORKSPACE_CAP = REACT_LIBRARY_COMPONENT_LIMIT;
 
 const STORAGE_KEY = 'ds-playground.workspace';
 const STORAGE_VERSION = 1;

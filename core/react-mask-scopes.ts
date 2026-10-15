@@ -1,6 +1,29 @@
 import {walkAnatomy, resolveAbsoluteGeometry, tokensByPropEntries, type Contract, type Part} from '../scripts/contract-schema.js';
 import {flattenTokens, makeResolveLiteral} from './tokens.js';
 
+/** A finite explicit equality gate is a complete positive presence domain.
+ * Unknown predicates or different axes cannot establish disjoint presence. */
+function disjointMaskPresence(a:Part,b:Part):boolean {
+  const first=a.visibleWhen,second=b.visibleWhen;
+  if(!first||!second||first.prop!==second.prop||first.equals===undefined||second.equals===undefined)return false;
+  const values=(value:NonNullable<Part['visibleWhen']>['equals'])=>Array.isArray(value)?value:[value];
+  const left=values(first.equals),right=values(second.equals);
+  if(!left.length||!right.length||[...left,...right].some(v=>typeof v!=='string'&&typeof v!=='boolean'))return false;
+  return left.every(value=>!right.includes(value));
+}
+
+/** Only a trailing, globally disjoint group may keep its original parent.
+ * The retained followers stay one compositing group, in original order. */
+function maskFollowers(entries:Array<[string,Part]>,index:number) {
+  let end=index+1;while(end<entries.length&&!entries[end][1].mask)end++;
+  let split=end;
+  while(split>index+1&&disjointMaskPresence(entries[index][1],entries[split-1][1]))split--;
+  const inside=entries.slice(index+1,split),outside=entries.slice(split,end);
+  if(outside.some(([,child])=>inside.some(([,follower])=>!disjointMaskPresence(child,follower))))
+    return {end,inside:entries.slice(index+1,end),outside:[] as Array<[string,Part]>};
+  return {end,inside,outside};
+}
+
 /** Paths, rather than bare part names, preserve the actual parent selector. */
 export function reactMaskChildPaths(contract: Contract, tokenValues?: unknown): Set<string> {
   const record=(value:unknown):Record<string,unknown> => value && typeof value==='object' && !Array.isArray(value) ? value as Record<string,unknown> : {};
@@ -47,10 +70,11 @@ export function reactMaskChildPaths(contract: Contract, tokenValues?: unknown): 
       !borderQualified(part))
       throw Error(`react-mask-composition-unqualified:${name}:parent-plane-unqualified`);
     reactMaskChildren(part.parts,()=> '');
-    let masked=false;
-    for(const [childName,child] of Object.entries(part.parts ?? {})) {
-      if(child.mask){masked=true;continue;}
-      if(masked)paths.add(JSON.stringify([...path,childName]));
+    const entries=Object.entries(part.parts ?? {});
+    for(let i=0;i<entries.length;i++)if(entries[i][1].mask){
+      const group=maskFollowers(entries,i);
+      for(const [childName] of group.inside)paths.add(JSON.stringify([...path,childName]));
+      i=group.end-1;
     }
   }
   return paths;
@@ -193,9 +217,8 @@ export function reactMaskChildren(parts: Record<string, Part> | undefined,
       return [JSON.stringify(values),{image,size:cssRect?localPaintSize:[size,...(paintLayer?['100% 100%']:[])].join(', '),position:cssRect?localPaintPosition:[position,...(paintLayer?['left top']:[])].join(', '),
         ...(cssRect?{clipPath:`inset(${top} ${right} ${bottom} ${left} round ${radiusCss})`}:{})}] as const;
     });
-    const children:string[]=[];
-    while(i+1<entries.length && !entries[i+1][1].mask){
-      const [childName,child]=entries[++i];
+    const group=maskFollowers(entries,i),children:string[]=[];
+    for(const [childName,child] of group.inside){
       if(child.repeat || child.slot || child.component)refuse(`sibling-plane-unqualified:${childName}`);
       if(child.absoluteGeometryByCombination?.props.some(prop=>!props.includes(prop)))refuse(`sibling-plane-axis-unqualified:${childName}`);
       for(const {geometry:g,values} of planes) {
@@ -206,8 +229,13 @@ export function reactMaskChildren(parts: Record<string, Part> | undefined,
       }
       children.push(render(childName,child));
     }
+    i=group.end-1;
+    const inputNames=new Set([...props,...(part.visibleWhen?[part.visibleWhen.prop]:[])].map(codePropOf));
+    // Preserve existing output unless its temporary shadows a source input.
+    let selectedName='value';
+    if(inputNames.has(selectedName)){selectedName='__dscMaskValue';while(inputNames.has(selectedName))selectedName+='_';}
     const selected=props.length
-      ? `(()=>{const value=new Map<string,{image:string;size:string;position:string${cssRect?';clipPath?:string':''}}>(${JSON.stringify(images)}).get(JSON.stringify([${props.map(prop=>`${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(',')} ]));if(value===undefined)throw Error(${JSON.stringify(`react-mask-geometry-combination-unavailable:${name}`)});return value;})()`
+      ? `(()=>{const ${selectedName}=new Map<string,{image:string;size:string;position:string${cssRect?';clipPath?:string':''}}>(${JSON.stringify(images)}).get(JSON.stringify([${props.map(prop=>`${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(',')} ]));if(${selectedName}===undefined)throw Error(${JSON.stringify(`react-mask-geometry-combination-unavailable:${name}`)});return ${selectedName};})()`
       : JSON.stringify(images[0][1]);
     const gate=part.visibleWhen;
     const condition=gate?gate.equals===undefined?codePropOf(gate.prop)
@@ -217,8 +245,9 @@ export function reactMaskChildren(parts: Record<string, Part> | undefined,
       WebkitMaskRepeat:'no-repeat',maskMode:'alpha',...(paintLayer && !cssRect?{maskComposite:'intersect',WebkitMaskComposite:'source-in'}:{})};
     // Fixed constraints retain physical path sizes; SCALE alone stretches the
     // observed parent plane. The alpha paint covers the whole current owner.
-    const styleExpr=`(()=>{const value=${valueExpr};return {...(${JSON.stringify(fixed)} as const),maskImage:value.image,WebkitMaskImage:value.image,maskSize:value.size,WebkitMaskSize:value.size,maskPosition:value.position,WebkitMaskPosition:value.position${cssRect?',clipPath:value.clipPath ?? "none"':''}};})()`;
+    const styleExpr=`(()=>{const ${selectedName}=${valueExpr};return {...(${JSON.stringify(fixed)} as const),maskImage:${selectedName}.image,WebkitMaskImage:${selectedName}.image,maskSize:${selectedName}.size,WebkitMaskSize:${selectedName}.size,maskPosition:${selectedName}.position,WebkitMaskPosition:${selectedName}.position${cssRect?`,clipPath:${selectedName}.clipPath ?? "none"`:''}};})()`;
     out.push(`<div data-ds-mask-scope=${JSON.stringify(name)} style={${styleExpr}}>${children.join('\n')}</div>`);
+    for(const [childName,child] of group.outside)out.push(render(childName,child));
   }
   return out;
 }

@@ -1455,9 +1455,11 @@ export function validateContract(
         const by = shape.pathsByProp;
         if (by) {
           const prop = contract.props.find((p) => p.name === by.prop);
-          if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type))
-            errors.push(`${contract.id}: ${name}: filled-path-axis-must-be-enum`);
-          else if (Object.keys(by.map).length !== prop.type.enum.length || prop.type.enum.some((value) => !Object.hasOwn(by.map, value)))
+          const values = prop?.type === 'boolean' ? ['false', 'true']
+            : prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+          if (!values)
+            errors.push(`${contract.id}: ${name}: filled-path-axis-must-be-enum-or-boolean`);
+          else if (Object.keys(by.map).length !== values.length || values.some((value) => !Object.hasOwn(by.map, value)))
             errors.push(`${contract.id}: ${name}: filled-path-axis-coverage`);
         }
       } else if (shape.paths || shape.pathsByProp || shape.parentViewport) errors.push(`${contract.id}: ${name}: filled-path-on-non-path-shape`);

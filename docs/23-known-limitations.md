@@ -5167,7 +5167,7 @@ graph at emit time — the next gap, named. **To reverse:** delete the
   designer drew the real set. Tested on synthetic REST bytes only (no measured set
   has a cycle).
 - A closure child that fails at `generate` refuses its parent (above).
-- The Playground retains at most 30 imported components in a session. A larger
+- The Playground retains at most 64 imported components in a session. A larger
   family refuses atomically instead of evicting a child during import; the REST
   walk still has its separate 64-child cap.
 
@@ -5206,7 +5206,7 @@ own minted/captured token layer and any named provisional stubs. The initially
 selected parent is found by its requested Figma node id; dependency-first
 ordering must not silently open the first child. A missing, ambiguous or refused
 requested parent leaves the workspace unchanged. A refused dependency remains a
-named stub. The existing 30-component workspace cap applies to the whole family.
+named stub. The existing 64-component workspace cap applies to the whole family.
 
 A recorded CBDS Icon/Placeholder replay exercises the application transport,
 storage, parent selection and React/HTML emission from the restored session
@@ -10142,7 +10142,7 @@ capture is explicitly enabled. Dump version 1.46 records the new producer.
 A family is delivered as one observed `.family.json`, through Copy/Download
 and the app's existing JSON import. The app saves supported children together,
 opens the requested parent by node ID, and refuses oversized workspace imports
-atomically at its separate 30-component limit. Refused children remain named
+atomically at its separate 64-component limit. Refused children remain named
 provisional stubs. Single-proposal GitHub and pairing transports cannot carry
 this artifact and are hidden for family results. New reads clear old delivery
 actions, and a refused requested parent cannot fall back to a successful child.
