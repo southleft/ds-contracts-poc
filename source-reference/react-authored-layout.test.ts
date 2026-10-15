@@ -13,7 +13,7 @@ function fixture(width=200,percent=10){
  const origin:ReactStyleOrigin={version:1,roots:[{path:'',tag:'div',channels:[],sizes:[{channel:'width',status:'auto',value:'auto',selectors:[]},{channel:'height',status:'fixed',value:'4px',authoredValue:'4px',selectors:['.root']}]}]};
  const relative=(channel:'width'|'height',p:number,parent:number)=>({channel,status:'unresolved' as const,authoredValue:p+'%',selectors:['.part'],reason:'responsive-or-unsupported-size-expression',observedPercentage:{percent:p,parentSize:parent,usedSize:parent*p/100}});
  const descendants:ReactDescendantSizes={version:1,nodes:[{path:'0',tag:'div',sizes:[relative('width',100,width),relative('height',100,4)]},{path:'0.0',tag:'div',sizes:[relative('width',percent,width),relative('height',100,4)]}]};
- const spec:NodeSpec={type:'root',name:'root',layout:{mode:'HORIZONTAL'},children:[{type:'frame',name:'track',layout:{mode:'VERTICAL'},children:[{type:'frame',name:'ink',layout:{mode:'HORIZONTAL'},children:[]}]}]};
+ const spec:NodeSpec={type:'root',name:'root',layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN'},children:[{type:'frame',name:'track',layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN'},children:[{type:'frame',name:'ink',layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN'},children:[]}]}]};
  const paths=[{sourcePath:'0',partName:'track',specPath:[0],type:'frame'},{sourcePath:'0.0',partName:'ink',specPath:[0,0],type:'frame'}];
  return {tree,track,inner,origin,descendants,spec,paths,bounds:{width,height:4}};
 }
