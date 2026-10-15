@@ -98,8 +98,14 @@ for (const workers of [1, 2] as const) {
     const release = (name:string) => writeFileSync(path.join(f.control,`${name}.release`),'go');
     validateDriftOutputRoots(f.scratch,jobs);
     const completed: Array<{name:string; index:number}> = [];
+    const completion = jobs.map(() => {
+      let resolve!: () => void;
+      const promise = new Promise<void>(done => { resolve = done; });
+      return {promise, resolve};
+    });
     const running = runDriftLibraryJobs(jobs, workers, (result,index) => {
       completed.push({name:result.name,index});
+      completion[index].resolve();
       // Progress is diagnostic: callback mutation/throws cannot change scores
       // or stop the remaining queue. The readonly cast models an untyped caller.
       (result as {status:number|null}).status = 99;
@@ -114,6 +120,9 @@ for (const workers of [1, 2] as const) {
           await waitFor(f.control, () => started(name));
           release(name);
           await waitFor(f.control, () => ended(name));
+          // The child marker precedes process close; wait for the scheduler's
+          // completion callback before releasing another child.
+          await completion[jobs.findIndex(job => job.name === name)].promise;
         }
         release('a');
       } else {
@@ -121,6 +130,9 @@ for (const workers of [1, 2] as const) {
           await waitFor(f.control, () => started(name));
           release(name);
           await waitFor(f.control, () => ended(name));
+          // The child marker precedes process close; wait for the scheduler's
+          // completion callback before releasing another child.
+          await completion[jobs.findIndex(job => job.name === name)].promise;
         }
       }
       const results = await running;
