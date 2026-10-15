@@ -787,8 +787,15 @@ test('validated public mount selections carry original build edges without chang
   assert(!Object.hasOwn(reference.files,path.join(reference.sourceRoot,'react-reference.tsx')));
   const program:ReactSourceProgram={version:1,status:'observed',acceptedContract:null,typescriptVersion:'test',
     readerOptions:{},compatibilityNotes:[],files:{},problems:[],components:[]};
-  const observed=observeReactRuntimeMounts(reference,program);assert.equal(observed.program.components.length,1);
-  assert.equal(observed.program.components[0].module,'node_modules/public-controls/badge.js');
-  assert.equal(observed.program.components[0].root.kind,'unresolved');assert.deepEqual(observed.program.components[0].props,[]);
+  const observed=observeReactRuntimeMounts(reference,program);
+  assert.deepEqual(observed.program.components.map(({module,exportName})=>({module,exportName})),[
+    {module:'node_modules/public-controls/badge.js',exportName:'Badge'},
+    {module:'src/components/ui/avatar.tsx',exportName:'Avatar'},
+  ]);
+  for(const component of observed.program.components){
+    assert.equal(component.implementation,'unresolved');assert.equal(component.root.kind,'unresolved');
+    assert.equal(component.children.kind,'unresolved');assert.deepEqual(component.props,[]);
+    assert.equal(component.sourceSha256,reference.files[path.join(reference.sourceRoot,component.module)]);
+  }
   assert(reactReferenceUnchanged(reference));
 });
