@@ -116,3 +116,37 @@ test('blend promotion proof still rejects changed pixels in overflow outside the
  assert.equal(await page.locator('body').innerHTML(),original);
  }finally{await browser.close();}
 });
+
+
+test('promotion comparison still reads unpainted custom properties and every pseudo context',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ for(const rules of [
+  '#subject{--unused:before}#subject[style]{--unused:after}',
+  '#child::after{--unused:before}#subject[style] #child::after{--unused:after}',
+  '#child{--removed:1}#subject[style] #child{--removed:initial;--added:1}',
+  '#child{will-change:auto}#subject[style] #child{will-change:opacity}',
+  '#subject::before{will-change:auto}#subject[style]::before{will-change:opacity}',
+ ]){
+  await page.setContent('<style>#subject{width:20px;height:20px;background:blue}#child{width:2px;height:2px}'+rules+'</style><div id="subject"><div id="child"></div></div>');
+  const before=await page.locator('body').innerHTML();
+  assert.deepEqual(await observeConsumerPaintExtent(page,'#subject'),{refused:'paint-extent-promotion-changed-subject'});
+  assert.equal(await page.locator('body').innerHTML(),before);
+ }
+ }finally{await browser.close();}
+});
+
+test('comparison preserves later fresh reads and thrown errors after an earlier mismatch',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ await page.setContent('<style>#subject{width:20px;height:20px;background:blue;--unused:before}#subject[style]{--unused:after}#tail{width:2px;height:2px}</style><div id="subject"><div id="tail"></div></div>');
+ const before=await page.locator('body').innerHTML();
+ await page.evaluate(()=>{
+  const native=window.getComputedStyle;
+  window.getComputedStyle=function(el,pseudo){
+   if(el.id==='tail'&&document.getElementById('subject')!.style.willChange==='transform')throw Error('late-style-read-error');
+   return native.call(window,el,pseudo);
+  };
+ });
+ await assert.rejects(observeConsumerPaintExtent(page,'#subject'),/late-style-read-error/);
+ assert.equal(await page.locator('body').innerHTML(),before);
+ }finally{await browser.close();}
+});
