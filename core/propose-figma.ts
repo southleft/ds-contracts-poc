@@ -8321,6 +8321,9 @@ function nameCrossAxisFillByVariant(
  *  variant proposes exactly the bytes it always did. */
 interface ParentModes {
   nodesByVariant?: Map<string, DumpNode>;
+  /** Source-parent layout still informs a moved instance's observations, but
+   *  a synthetic immediate host cannot inherit that parent's rootFill proof. */
+  allowInstanceRootFill?: boolean;
   base: 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null;
   /** variant name → that variant's parent auto-layout mode. */
   byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>;
@@ -11361,7 +11364,7 @@ function carryInstanceRootInputs(m:Merged,component:Record<string,unknown>,ctx:C
    return typeof value==='number'&&Number.isFinite(value)&&value>=0&&(channel!=='opacity'||value<=1)?value:undefined;
   });
   if(values.every(value=>value!==undefined)){
-   if((channel==='width'||channel==='height') && parent?.nodesByVariant && [...parent.byVariant.values()].every(mode=>mode===(channel==='width'?'VERTICAL':'HORIZONTAL')) && m.occ.every((o,i)=>{
+   if((channel==='width'||channel==='height') && parent?.allowInstanceRootFill!==false && parent?.nodesByVariant && [...parent.byVariant.values()].every(mode=>mode===(channel==='width'?'VERTICAL':'HORIZONTAL')) && m.occ.every((o,i)=>{
     const owner=parent.nodesByVariant!.get(o.variant),mode=owner?.layout?.mode,g=o.node.instanceGeometry,w=o.node.instanceRootOverrides;
     return !!g && !!w && g.nodeId===w.nodeId && g.componentId===w.componentId && g.localSize[channel]===values[i] &&
       canonicalJson(g.transform)===canonicalJson(w.localTransform) &&
@@ -12660,7 +12663,11 @@ function keyedInstanceReplacement(m:Merged,parentMode:ParentModes|null,ctx:Ctx,w
   const parts:Record<string,unknown>={};
   for(const group of qualified){
    const childWhere=`${where}/${group.name}`,childKey=partKey(group.name,ctx,childWhere,selfKey);
-   const part=buildPart(group.merged,parentMode,ctx,childWhere,childKey);
+   // The original source parent still owns observed sizing, but this ref
+   // will render inside our synthetic row. Keep its explicit local root
+   // dimensions instead of transferring a cross-axis fill proof across hosts.
+   const childParentMode=parentMode?{...parentMode,allowInstanceRootFill:false}:parentMode;
+   const part=buildPart(group.merged,childParentMode,ctx,childWhere,childKey);
    if(!part)return refuse('replacement-omitted:'+group.key);
    // The synthetic owner is a row flex container. Its selected instance
    // must fill the horizontal span allocated by observed STRETCH or FILL.
