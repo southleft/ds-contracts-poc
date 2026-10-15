@@ -2,37 +2,15 @@ import {PNG} from 'pngjs';
 /** Observe Chromium's painted layer extents, not DOM scroll dimensions.
  * This supplies an extent candidate; capture integration must still verify the
  * original composited raster. Unsupported compositor effects remain named. */
-import type {CDPSession, JSHandle, Locator, Page} from 'playwright-core';
+import type {CDPSession, JSHandle, Page} from 'playwright-core';
 import {enclosingFrame,type FrameBox} from './design-consumer-framing-v2.js';
-// Keep the complete, JSON-normalized baseline in Chromium. Fresh comparisons
-// read every original field without materializing another pair-array/JSON tree.
-type PaintSnapshot = ReadonlyArray<{box:FrameBox;styles:string[][][]}>;
-type SnapshotHandle = JSHandle<{snapshot:PaintSnapshot}>;
-const compareSnapshot = new Function('el','before', `
- const nodes = [el, ...el.querySelectorAll('*')], baseline = before.snapshot;
- let same = nodes.length === baseline.length;
- for (let index = 0; index < nodes.length; index++) {
-  const n = nodes[index], b = n.getBoundingClientRect(), previous = baseline[index];
-  for (const [pIndex,pseudo] of [null,'::before','::after'].entries()) {
-   const s = getComputedStyle(n,pseudo);
-   const names = [...s].filter(k => !(n === el && pseudo === null && k === 'will-change'));
-   const prior = previous && previous.styles[pIndex];
-   if (!prior || prior.length !== names.length) same = false;
-   for (let i = 0; i < names.length; i++) {
-    const name = names[i], value = s.getPropertyValue(name);
-    if (!prior || prior[i]?.[0] !== name || prior[i]?.[1] !== value) same = false;
-   }
-  }
-  // Read scroll after the styles, as the original snapshot collector does.
-  // Small geometry JSON retains its number/key semantics (including -0).
-  const box = {x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height};
-  if (!previous || JSON.stringify(box) !== JSON.stringify(previous.box)) same = false;
- }
- // Do not short-circuit: later reads/throws still occur after an early mismatch.
- return same;
-`);
-async function sameSnapshot(root:Locator,before:SnapshotHandle):Promise<boolean> {
- return root.evaluate(compareSnapshot as (el:Element,before:{snapshot:PaintSnapshot})=>boolean,before);
+// Keep the complete snapshot in Chromium. Sending these multi-megabyte
+// objects through the protocol dominated capture time. Equality is exact;
+// no computed properties, pseudo styles, or geometry fields are omitted.
+type SnapshotHandle = JSHandle<{snapshot:string}>;
+async function sameSnapshot(before:SnapshotHandle,after:SnapshotHandle):Promise<boolean> {
+ try{return await before.evaluate((left,right)=>left.snapshot===right.snapshot,after);}
+ finally{await after.dispose();}
 }
 
 export interface PaintLayer {
@@ -68,10 +46,10 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
  {observation:{layout:FrameBox;paint:FrameBox;layers:PaintLayer[];boxes:FrameBox[];blendRasterVerified?:true}}|{refused:string}> {
  const root=page.locator(selector);if(await root.count()!==1)return {refused:'paint-extent-subject-not-unique'};
  const initial=await root.evaluate(el=>({style:el.getAttribute('style'),value:(el as HTMLElement).style.getPropertyValue('will-change'),priority:(el as HTMLElement).style.getPropertyPriority('will-change')}));
- const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.parse(JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
+ const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
   const b=n.getBoundingClientRect();const styles=[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].filter(k=>!(n===el&&p===null&&k==='will-change')).map(k=>[k,s.getPropertyValue(k)]);});
   return {box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles};
- })))}));
+ }))}));
  const effects=await root.evaluate(el=>{
   let blend=false;
   for(const n of [el,...el.querySelectorAll('*')])for(const pseudo of [null,'::before','::after']){const s=getComputedStyle(n,pseudo);
@@ -104,14 +82,14 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
   const current=await cdp.send('DOM.describeNode',{nodeId:found.nodeId,depth:-1,pierce:true});
   const originalIds=[...ids].sort((a,b)=>a-b);ids.clear();visit(current.node);
   if(JSON.stringify(originalIds)!==JSON.stringify([...ids].sort((a,b)=>a-b)))return {refused:'paint-extent-subtree-changed'};
-  if(!await sameSnapshot(root,before))return {refused:'paint-extent-promotion-changed-subject'};
+  if(!await sameSnapshot(before,await observe()))return {refused:'paint-extent-promotion-changed-subject'};
   if(JSON.stringify(viewport)!==JSON.stringify(await page.evaluate(()=>({width:innerWidth,height:innerHeight,scale:devicePixelRatio,scrollX,scrollY}))))return {refused:'paint-extent-view-changed'};
   if(!layers.some(l=>l.backendNodeId===description.node.backendNodeId))return {refused:'paint-extent-subject-layer-missing'};
   if(layers.some(l=>l.drawsContent&&!l.invisible&&l.width>0&&l.height>0&&l.backendNodeId===undefined))return {refused:'paint-extent-unattributed-layer'};
   const selected=layers.filter(l=>l.backendNodeId!==undefined&&ids.has(l.backendNodeId)&&l.drawsContent&&!l.invisible&&l.width>0&&l.height>0);
   if(!selected.length)return {refused:'paint-extent-no-subject-paint'};
   const boxes:FrameBox[]=[];for(const layer of selected){const box=paintLayerDocumentBox(layer,layers,{x:viewport.scrollX,y:viewport.scrollY});if(!box)return {refused:'paint-extent-transform-unqualified'};boxes.push(box);}
-  const layout=await before.evaluate(s=>s.snapshot[0].box),all=[layout,...boxes],x=Math.min(...all.map(b=>b.x)),y=Math.min(...all.map(b=>b.y));
+  const layout=await before.evaluate((s:{snapshot:string})=>(JSON.parse(s.snapshot) as Array<{box:FrameBox}>)[0].box),all=[layout,...boxes],x=Math.min(...all.map(b=>b.x)),y=Math.min(...all.map(b=>b.y));
   const paint={x,y,width:Math.max(...all.map(b=>b.x+b.width))-x,height:Math.max(...all.map(b=>b.y+b.height))-y};
   // Raster equality only proves the viewport actually observed. A distant
   // blend or shadow cannot borrow this proof for pixels outside that raster.
