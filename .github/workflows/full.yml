@@ -650,7 +650,7 @@ jobs:
       # browser-free VERIFY half of the same instrument.
       - name: extract:computed:drift:remeasure (the committed captures re-fused through the current engine, scored against the baseline)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run extract:computed:drift:remeasure
+        run: npm run extract:computed:drift:remeasure -- --workers 2
 
       - name: verify source unchanged after remeasure
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

@@ -42,6 +42,8 @@ Native root preparation now selects the requested case and source observation be
 
 React context verification now shares compiler preparation within one verification call while keeping each projection's source witnesses separate. A paired replay of 321 verifier calls across the existing eleven scenarios, including altered reports, produced identical complete results and left the inputs unchanged. Total verifier time fell from 83.5 to 50.4 seconds (about 40%); both alternating execution orders improved. Source and checker mutation guards, re-export witnesses, and compiler fallback rules remain checked. This measures the verifier only, not complete conversion or full-suite speed, and adds no scoreboard credit.
 
+Full drift verification can run two libraries concurrently while preserving each library's measurement order and every existing scoring rule. One local pair produced byte-identical outputs across all 12,995 files and 144 baseline scorecards, including all 148 attempted component directories. Elapsed time fell from 49 minutes to 27 minutes (44.9%). Both runs retained the documented macOS/Linux MessageBar baseline discrepancy and exited 1; the baseline was not changed. This is one local timing comparison with light concurrent read-only work, not a CI speed guarantee or additional conversion coverage. The ordinary command remains serial; the full CI lane requests two workers.
+
 The original Radix Themes Badge workspace now authenticates all 36 declared
 source cases without changing its code. Source-owned synchronous helpers can
 copy and update fresh props objects, and a verified wrapper can forward caller
