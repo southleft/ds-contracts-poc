@@ -37,7 +37,8 @@ export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;pro
  try{
   const fact=verifiedReactAuthoredContent(content,program,ownership,tree);result.fact=fact;result.limitations=[...fact.limitations,'component-inputs-held-at-observed-values','source-variable-bindings-not-assembled'];
   const outer=ownership.components.find(c=>c.id===fact.instanceId)!;
-  if(['style','className'].some(k=>outer.props[k]!==undefined&&outer.props[k]!==null&&outer.props[k]!==''&&!same(outer.props[k],{kind:'undefined'})))throw Error('react-authored-tree-caller-style-unqualified');
+  if(['style','className'].some(k=>outer.props[k]!==undefined&&outer.props[k]!==null&&outer.props[k]!==''&&!same(outer.props[k],{kind:'undefined'})&&
+    !(k==='style'&&same(outer.props[k],{kind:'object'})&&fact.emptyCallerStyle===true)))throw Error('react-authored-tree-caller-style-unqualified');
   const prepared=prepareObservedContentTree(tree,fonts,svg,pseudos),flat=new Map(flatten(prepared).map(n=>[n.path,n.node]));
   const boundaries=[...fact.boundaries].sort((a,b)=>b.path.split('.').length-a.path.split('.').length||b.path.length-a.path.length||a.path.localeCompare(b.path));
   const contracts=new Map<string,Contract>(),byPath=new Map<string,Contract>(),tokens:Record<string,unknown>={},assets=new Map<string,string>();

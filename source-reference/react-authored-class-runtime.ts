@@ -6,8 +6,19 @@ export interface ReactAuthoredClassRuntimeReport {
   registered:number;
   constructions:Array<{id:number;target:ReactAuthoredClassPlan['target'];input:Witness;instance:Witness}>;
   resolvers:Array<{id:number;target:ReactAuthoredClassPlan['target'];source:Witness;effective:Witness;factoryProps:Witness;fields:Array<[string,Witness]>;factoryFields:Array<[string,Witness]>;current:boolean;valuesPreserved:false;defaultSemanticsVerified:false}>;
-  calls:Array<{id:number;target:ReactAuthoredClassPlan['target'];render:ReactAuthoredClassPlan['render'];graphRender:number;construction:number;resolver:number;input:Witness;fields:Array<[string,Witness]>;factoryProps:Witness;factoryFields:Array<[string,Witness]>;output?:Witness;completion:'returned'|'threw';current:boolean;effectsVerified:false}>;
+  calls:Array<{id:number;target:ReactAuthoredClassPlan['target'];render:ReactAuthoredClassPlan['render'];graphRender:number;construction:number;resolver:number;input:Witness;fields:Array<[string,Witness]>;factoryProps:Witness;factoryFields:Array<[string,Witness]>;emptyFactoryStyle?:{value:Witness;current:true};output?:Witness;completion:'returned'|'threw';current:boolean;effectsVerified:false}>;
 }
+
+/** The existing compiler literal hook is the only allocation authority. Never
+ * inspect an arbitrary props value; a matching identity must be registered first. */
+export const reactEmptyLiteralRuntime=String.raw`((N,intrinsics)=>{
+ const empty=new N.WeakSetCtor(),prototype=Object.prototype;
+ const shape=value=>N.prototype(value)===prototype&&N.keys(N.descriptors(value)).length===0;
+ return {
+  capture(value){intrinsics();if(value!==null&&typeof value==='object'&&shape(value))N.apply(N.weakAdd,empty,[value]);return value;},
+  current(value){if(value===null||typeof value!=='object'||!N.apply(N.weakHas,empty,[value]))return false;intrinsics();return shape(value);}
+ };
+})`;
 
 /** The host installs this only beside the hash-pinned React constructor,
  * class-props resolver and class-render call sites. Original class bodies are
@@ -18,8 +29,9 @@ export interface ReactAuthoredClassRuntimeReport {
  * original factory object; it never claims values/defaults were preserved.
  * Factory/element maps and render membership remain the existing authority.
  */
-export const reactAuthoredClassRuntime=String.raw`((plans,N,intrinsics,sameDescriptor,fail,witness,props,elements,renderGraph)=>{
+export const reactAuthoredClassRuntime=String.raw`((plans,N,intrinsics,sameDescriptor,fail,witness,props,elements,renderGraph,emptyLiteral)=>{
  'use strict';
+ emptyLiteral=emptyLiteral??(()=>false);
  const objectPrototype=Object.prototype;
  const byConstructor=new N.WeakMapCtor(),byInstance=new N.WeakMapCtor(),tokens=new N.WeakMapCtor(),resolutions=new N.WeakMapCtor();
  const classes=new Map(),constructions=[],resolvers=[],calls=[],byRender=new Map();let bases=null;
@@ -127,7 +139,9 @@ export const reactAuthoredClassRuntime=String.raw`((plans,N,intrinsics,sameDescr
   const candidates=(get(resolutions,input)??[]).filter(record=>record.registration===registration&&resolverCurrent(record));
   const resolver=candidates.at(-1);if(!resolver)bad('render-resolver-origin-unproved');
   const effective=data(input,origin);if(!sameData(input,resolver.effective.descriptors))bad('render-props-changed');
-  limit(calls,'call');const record={id:calls.length,registration,construction,resolver,instance,input,fields:effective.fields,factoryProps:resolver.factoryProps,returned:false,graphRender:null};calls.push(record);
+  const style=resolver.factory.fields.find(([name])=>name==='style')?.[1];
+  const emptyFactoryStyle=effective.fields.some(([name,value])=>name==='style'&&N.is(value,style))&&emptyLiteral(style)?style:undefined;
+  limit(calls,'call');const record={id:calls.length,registration,construction,resolver,instance,input,fields:effective.fields,factoryProps:resolver.factoryProps,emptyFactoryStyle,returned:false,graphRender:null};calls.push(record);
   try{return renderGraph.invoke(fn,input,()=>{
    const id=renderGraph.currentId();if(!Number.isSafeInteger(id)||id<0||byRender.has(id))bad('render-graph-identity-unproved');
    record.graphRender=id;byRender.set(id,record);
@@ -153,7 +167,7 @@ export const reactAuthoredClassRuntime=String.raw`((plans,N,intrinsics,sameDescr
   return {qualification:'original-class-render-boundary-only',acceptedContract:null,effectsVerified:false,registered:classes.size,
    constructions:constructions.map(record=>({id:record.id,target:record.registration.plan.target,input:witness(record.input),instance:witness(record.instance)})),
    resolvers:resolvers.map(record=>({id:record.id,target:record.registration.plan.target,source:witness(record.from),effective:witness(record.to),factoryProps:witness(record.factoryProps),fields:record.effective.fields.map(([name,value])=>[name,witness(value)]),factoryFields:record.factory.fields.map(([name,value])=>[name,witness(value)]),current:resolverCurrent(record),valuesPreserved:false,defaultSemanticsVerified:false})),
-   calls:calls.map(record=>({id:record.id,target:record.registration.plan.target,render:record.registration.plan.render,graphRender:record.graphRender,construction:record.construction.id,resolver:record.resolver.id,input:witness(record.input),fields:record.fields.map(([name,value])=>[name,witness(value)]),factoryProps:witness(record.factoryProps),factoryFields:record.resolver.factory.fields.map(([name,value])=>[name,witness(value)]),...(record.returned?{output:witness(record.output)}:{}),completion:record.returned?'returned':'threw',current:callCurrent(record),effectsVerified:false}))};
+   calls:calls.map(record=>({id:record.id,target:record.registration.plan.target,render:record.registration.plan.render,graphRender:record.graphRender,construction:record.construction.id,resolver:record.resolver.id,input:witness(record.input),fields:record.fields.map(([name,value])=>[name,witness(value)]),factoryProps:witness(record.factoryProps),factoryFields:record.resolver.factory.fields.map(([name,value])=>[name,witness(value)]),...(record.emptyFactoryStyle&&callCurrent(record)&&emptyLiteral(record.emptyFactoryStyle)?{emptyFactoryStyle:{value:witness(record.emptyFactoryStyle),current:true}}:{}),...(record.returned?{output:witness(record.output)}:{}),completion:record.returned?'returned':'threw',current:callCurrent(record),effectsVerified:false}))};
  }
  return {registerBases,registerClass,beginClassConstruction,finishClassConstruction,constructed,beginClassProps,finishClassProps,invoke,verifyHost,report};
 })`;

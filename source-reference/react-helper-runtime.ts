@@ -1,4 +1,4 @@
-import {reactAuthoredClassRuntime,type ReactAuthoredClassRuntimeReport} from './react-authored-class-runtime.js';
+import {reactAuthoredClassRuntime,reactEmptyLiteralRuntime,type ReactAuthoredClassRuntimeReport} from './react-authored-class-runtime.js';
 import type {ReactAuthoredClassPlan} from './react-authored-classes.js';
 import {reactRenderGraphRuntime,type ReactRenderGraphReport} from './react-render-graph-runtime.js';
 import type {ReactConsumerLiteral} from './react-consumer-literals.js';
@@ -181,9 +181,10 @@ export function reactHelperRuntimeHook(
    }return true;
   }
  });
- authoredClassRuntime=(${reactAuthoredClassRuntime})(authoredClasses,N,intrinsics,sameDescriptor,fail,contextTransport.witness,props,elements,renderGraph);
+ const emptyLiterals=(${reactEmptyLiteralRuntime})(N,intrinsics);
+ authoredClassRuntime=(${reactAuthoredClassRuntime})(authoredClasses,N,intrinsics,sameDescriptor,fail,contextTransport.witness,props,elements,renderGraph,emptyLiterals.current);
  const initializers=(${reactTargetInitializerRuntime})(initializerPlans,N,intrinsics,sameDescriptor,fail,targetBoundaries());
- function literal(value){N.apply(N.weakAdd,literals,[value]);return renderGraph.literal(value);}
+ function literal(value){N.apply(N.weakAdd,literals,[value]);if(authoredClasses.length)emptyLiterals.capture(value);return renderGraph.literal(value);}
  function knownLiteral(value){return value!==null&&(typeof value==='object'||typeof value==='function')&&N.apply(N.weakHas,literals,[value]);}
  const bindingGuard=(${reactHelperBindingGuard})([...models,...componentModels,...${JSON.stringify(bodyModels)}],()=>{intrinsics();if(activeComponent)checkTargets();},knownLiteral,reason=>{failures[failures.length]=reason;},literalOrigins);
  function data(value,reason,origin){const ds=N.descriptors(value),keys=N.keys(ds);if(N.prototype(value)!==objectPrototype)fail(reason+'-prototype');for(let i=0;i<keys.length;i++){const k=keys[i],d=ds[k];
