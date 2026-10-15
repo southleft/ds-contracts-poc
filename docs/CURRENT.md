@@ -40,6 +40,8 @@ A historical matched code comparison improved from 654/171/54 to 657/168/54, add
 
 Native root preparation now selects the requested case and source observation before authenticating operation journals, and the Sources screen merges only the returned checked root. Reopening one known operation can inspect that complete row without rechecking every historical operation. Full listings retain their existing behavior, and selected operations still undergo journal, source and diagnostic checks. Focused checks cover stale observations, malformed or corrupt selected operations, and older responses arriving after the active source changed. Production latency for this change has not yet been measured.
 
+React context verification now shares compiler preparation within one verification call while keeping each projection's source witnesses separate. A paired replay of 321 verifier calls across the existing eleven scenarios, including altered reports, produced identical complete results and left the inputs unchanged. Total verifier time fell from 83.5 to 50.4 seconds (about 40%); both alternating execution orders improved. Source and checker mutation guards, re-export witnesses, and compiler fallback rules remain checked. This measures the verifier only, not complete conversion or full-suite speed, and adds no scoreboard credit.
+
 The original Radix Themes Badge workspace now authenticates all 36 declared
 source cases without changing its code. Source-owned synchronous helpers can
 copy and update fresh props objects, and a verified wrapper can forward caller

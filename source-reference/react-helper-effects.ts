@@ -346,6 +346,16 @@ export function prepareReactEffectProgram(
   sourceFiles:Record<string,string>,
   checkerFiles:Record<string,string>,
 ) {
+  const core = buildReactEffectCompiler(reference, module, checkerFiles);
+  return bindReactEffectProjection(core, core.file, core.sf, sourceFiles, core.requireCurrent);
+}
+
+/** A scope owns this compiler's checker pins; a fresh preparation retains its caller's map. */
+function buildReactEffectCompiler(
+  reference:ReactHelperReference,
+  module:string,
+  checkerFiles:Record<string,string>,
+) {
     const root = realpathSync(reference.sourceRoot),
       file = realpathSync(path.resolve(root, module));
     if (
@@ -407,6 +417,20 @@ export function prepareReactEffectProgram(
     const checker = program.getTypeChecker();
     const sf = program.getSourceFile(file);
     if (!sf) throw Error("helper-source-unreadable");
+    return {reference,root,file,program,checker,sf,runtimeFiles,checkerFiles,requireCurrent};
+}
+
+type ReactEffectCompiler = ReturnType<typeof buildReactEffectCompiler>;
+
+/** Witnesses and accessors belong to one projection, never to the cached compiler. */
+function bindReactEffectProjection(
+  core:ReactEffectCompiler,
+  file:string,
+  sf:ts.SourceFile,
+  sourceFiles:Record<string,string>,
+  requireCurrent:()=>void,
+) {
+    const {reference,root,program,checker,runtimeFiles} = core;
     const source = (node: ts.Node): HelperSourcePoint => {
       const text = node.getSourceFile(),
         absolute = realpathSync(text.fileName),
@@ -451,14 +475,32 @@ export function prepareReactEffectProgram(
  * executable graph. Keep compiler state inside that scan, never across requests. */
 export function createReactEffectProgramScope(reference: ReactHelperReference) {
   const pinned = {...reference, files: Object.freeze({...reference.files})};
-  const contexts: ReturnType<typeof prepareReactEffectProgram>[] = [];
+  const contexts: ReactEffectCompiler[] = [];
   const requireCurrent = () => { for (const context of contexts) context.requireCurrent(); };
+  const bind = (core:ReactEffectCompiler,file:string,sf:ts.SourceFile,sourceFiles:Record<string,string>,checkerFiles:Record<string,string>) => {
+    const requireProjectionCurrent = () => {
+      // The core's private pins remain authoritative even if a caller retags its own map.
+      core.requireCurrent();
+      for (const [name, hash] of Object.entries(checkerFiles)) {
+        if (sha(readFileSync(name)) !== hash) throw Error('helper-checker-input-changed');
+      }
+      // Compiler reads can be lazy. Synchronize at every guarded boundary, preserving
+      // caller seeds and refusing conflicts before adding any newly discovered pins.
+      for (const [name, hash] of Object.entries(core.checkerFiles)) {
+        if (Object.hasOwn(checkerFiles,name) && checkerFiles[name] !== hash)
+          throw Error('helper-checker-input-changed');
+      }
+      Object.assign(checkerFiles,core.checkerFiles);
+    };
+    requireProjectionCurrent();
+    return bindReactEffectProjection(core,file,sf,sourceFiles,requireProjectionCurrent);
+  };
   return {
     requireCurrent,
     assertReference(current: ReactHelperReference) {
       if (current !== reference) throw Error('helper-reference-scope-mismatch');
     },
-    prepare(module: string) {
+    prepare(module: string, sourceFiles:Record<string,string> = {}, checkerFiles:Record<string,string> = {}) {
       requireCurrent();
       const root = realpathSync(pinned.sourceRoot), file = realpathSync(path.resolve(root, module));
       if (!file.startsWith(root + path.sep) || !Object.hasOwn(pinned.files, file))
@@ -472,13 +514,13 @@ export function createReactEffectProgramScope(reference: ReactHelperReference) {
           (!context.runtimeFiles.includes(file) || !context.runtimeFiles.includes(context.file) ||
             !ts.isExternalModule(sf) || !ts.isExternalModule(context.sf)))) continue;
         if (sha(sf.text) !== pinned.files[file]) throw Error('helper-executable-source-not-witnessed');
-        // source() maps the node's own SourceFile, and resolveRuntimeExport()
-        // uses the shared program; neither closes over the selected module.
-        return {...context, file, sf};
+        return bind(context,file,sf,sourceFiles,checkerFiles);
       }
-      const context = prepareReactEffectProgram(pinned, module, {}, {});
+      const context = buildReactEffectCompiler(pinned, module, {});
       contexts.push(context);
-      return context;
+      return bind(context,file,context.sf,sourceFiles,checkerFiles);
     },
   };
 }
+
+export type ReactEffectProgramScope = ReturnType<typeof createReactEffectProgramScope>;

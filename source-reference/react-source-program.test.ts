@@ -55,6 +55,32 @@ test('scan-local checker reuse preserves cross-module symbols and source identit
     assert.deepEqual(reused.source(reused.sf),fresh.source(fresh.sf),'source callback uses the selected node module');
     reused.requireCurrent();
   }
+  const bind=(module:string,resolveOther=false)=>{
+    const file=realpathSync(path.join(dir,module));
+    const sourceFiles:Record<string,string>={[file]:files[file]},checkerFiles:Record<string,string>={};
+    const freshSources:Record<string,string>={[file]:files[file]},freshCheckers:Record<string,string>={};
+    const reused=scope.prepare(module,sourceFiles,checkerFiles),fresh=prepareReactEffectProgram(reference,module,freshSources,freshCheckers);
+    const observe=(context:typeof fresh)=>{
+      const own=context.source(context.sf);
+      if(!resolveOther)return {own};
+      const other=context.resolveRuntimeExport(realpathSync(path.join(dir,'second.js')),'Second');
+      assert.ok(other);return {own,other:context.source(other)};
+    };
+    assert.deepEqual(observe(reused),observe(fresh));reused.requireCurrent();fresh.requireCurrent();
+    assert.equal(JSON.stringify(sourceFiles),JSON.stringify(freshSources),'per-call source witnesses and insertion order match fresh preparation');
+    assert.deepEqual(checkerFiles,freshCheckers,'each binding receives the complete compiler input inventory');
+    return {reused,sourceFiles,checkerFiles};
+  };
+  const a=bind('first.js',true),aSnapshot=JSON.stringify(a.sourceFiles),aCheckerSnapshot=JSON.stringify(a.checkerFiles);
+  const b=bind('second.js'),bSnapshot=JSON.stringify(b.sourceFiles),bCheckerSnapshot=JSON.stringify(b.checkerFiles);
+  const again=bind('first.js');
+  assert.equal(a.reused.program,b.reused.program);assert.equal(a.reused.checker,b.reused.checker);
+  assert.notEqual(a.reused.source,b.reused.source);assert.notEqual(a.reused.resolveRuntimeExport,b.reused.resolveRuntimeExport);
+  assert.notEqual(a.sourceFiles,b.sourceFiles);assert.notEqual(a.checkerFiles,b.checkerFiles);
+  assert.deepEqual(Object.keys(b.sourceFiles),[realpathSync(path.join(dir,'second.js'))],'B does not inherit A-only source witnesses');
+  assert.deepEqual(Object.keys(again.sourceFiles),[realpathSync(path.join(dir,'first.js'))],'later A does not inherit the prior export lookup');
+  assert.equal(JSON.stringify(a.sourceFiles),aSnapshot);assert.equal(JSON.stringify(a.checkerFiles),aCheckerSnapshot);
+  assert.equal(JSON.stringify(b.sourceFiles),bSnapshot);assert.equal(JSON.stringify(b.checkerFiles),bCheckerSnapshot);
   scope.requireCurrent();
   assert.throws(()=>scope.assertReference({...reference}),/helper-reference-scope-mismatch/);
   assert.notEqual(createReactEffectProgramScope(reference).prepare('first.js').program,first.program,'no cross-scan compiler cache');
@@ -65,9 +91,19 @@ test('scan-local preparation falls back for absent roots and script-global modul
   for(const [name,text] of Object.entries({'first.tsx':'export const first=1;','second.tsx':'export const second=2;','global.js':'var globalValue=1;'})){
     const file=path.join(dir,name);writeFileSync(file,text);files[realpathSync(file)]=createHash('sha256').update(text).digest('hex');
   }
-  const scope=createReactEffectProgramScope({sourceRoot:dir,files}),first=scope.prepare('first.tsx');
+  const reference={sourceRoot:dir,files},scope=createReactEffectProgramScope(reference);
+  const firstSources:Record<string,string>={},firstCheckers:Record<string,string>={};
+  const first=scope.prepare('first.tsx',firstSources,firstCheckers);first.source(first.sf);
   assert.equal(first.program.getSourceFile(realpathSync(path.join(dir,'second.tsx'))),undefined);
-  const second=scope.prepare('second.tsx');assert.notEqual(second.program,first.program);
+  const secondSources:Record<string,string>={},secondCheckers:Record<string,string>={};
+  const second=scope.prepare('second.tsx',secondSources,secondCheckers);assert.notEqual(second.program,first.program);
+  const freshSources:Record<string,string>={},freshCheckers:Record<string,string>={};
+  const fresh=prepareReactEffectProgram(reference,'second.tsx',freshSources,freshCheckers);
+  assert.deepEqual(second.source(second.sf),fresh.source(fresh.sf));
+  assert.equal(JSON.stringify(secondSources),JSON.stringify(freshSources));assert.deepEqual(secondCheckers,freshCheckers);
+  assert.deepEqual(Object.keys(firstSources),[realpathSync(path.join(dir,'first.tsx'))]);
+  assert.deepEqual(Object.keys(secondSources),[realpathSync(path.join(dir,'second.tsx'))]);
+  assert.notEqual(second.source,first.source);assert.notEqual(second.resolveRuntimeExport,first.resolveRuntimeExport);
   assert.equal(scope.prepare('second.tsx').program,second.program);
   const global=scope.prepare('global.js');assert.notEqual(global.program,first.program,'do not reuse different script-global root order');
   assert.equal(scope.prepare('global.js').program,global.program);
@@ -105,7 +141,17 @@ test('scan-local reuse retains source and checker mutation refusals at every bou
   const code="import type {Value} from './types';export const value:Value='original';";
   writeFileSync(file,code);writeFileSync(types,"export type Value='original';");
   const reference={sourceRoot:dir,files:{[realpathSync(file)]:createHash('sha256').update(code).digest('hex')}};
-  const scope=createReactEffectProgramScope(reference),first=scope.prepare('first.tsx');first.requireCurrent();
+  const checkerFile=realpathSync(types),checkerHash=createHash('sha256').update(readFileSync(types)).digest('hex');
+  const callerSources:Record<string,string>={},callerCheckers:Record<string,string>={[checkerFile]:checkerHash};
+  const scope=createReactEffectProgramScope(reference),first=scope.prepare('first.tsx',callerSources,callerCheckers);first.requireCurrent();
+  assert.equal(callerCheckers[checkerFile],checkerHash,'valid caller checker seed remains pinned');
+  callerCheckers[checkerFile]='0'.repeat(64);
+  assert.throws(()=>first.requireCurrent(),/helper-checker-input-changed/,'a bound facade checks its own caller pins');
+  const nextCheckers:Record<string,string>={};
+  const next=scope.prepare('first.tsx',{},nextCheckers);next.requireCurrent();
+  assert.equal(next.program,first.program);assert.equal(nextCheckers[checkerFile],checkerHash,'a caller cannot retag the private compiler pins');
+  assert.throws(()=>scope.prepare('first.tsx',{}, {[checkerFile]:'0'.repeat(64)}),/helper-checker-input-changed/,'conflicting caller pins must not be overwritten');
+  callerCheckers[checkerFile]=checkerHash;first.requireCurrent();
   writeFileSync(types,"export type Value='changed';");
   assert.throws(()=>scope.prepare('first.tsx'),/helper-checker-input-changed/);
   assert.throws(()=>scope.requireCurrent(),/helper-checker-input-changed/);
@@ -226,6 +272,22 @@ export function Control(props:{children?:unknown}) {const {children,...rest}=hel
     {importer:file('barrel.js'),specifier:'./impl.js',file:file('impl.js')},
   ];
   const reference = {sourceRoot:dir,files,runtimeImports};
+  const scope=createReactEffectProgramScope(reference),sourceFiles:Record<string,string>={},checkerFiles:Record<string,string>={};
+  const freshSources:Record<string,string>={},freshCheckers:Record<string,string>={};
+  const scoped=scope.prepare('barrel.js',sourceFiles,checkerFiles),fresh=prepareReactEffectProgram(reference,'barrel.js',freshSources,freshCheckers);
+  for(const name of ['normalize','metadata']){
+    const actual=scoped.resolveRuntimeExport(file('barrel.js'),name),expected=fresh.resolveRuntimeExport(file('barrel.js'),name);
+    assert.ok(actual);assert.ok(expected);assert.deepEqual(scoped.source(actual),fresh.source(expected));
+  }
+  scoped.requireCurrent();fresh.requireCurrent();
+  assert.equal(JSON.stringify(sourceFiles),JSON.stringify(freshSources),'export resolution retains the complete ordered witness chain');
+  assert.deepEqual(Object.keys(sourceFiles).sort(),[file('barrel.js'),file('impl.js')].sort());
+  assert.equal(Object.hasOwn(sourceFiles,file('barrel.d.ts')),false,'declaration files never become executable source witnesses');
+  assert.deepEqual(checkerFiles,freshCheckers);
+  const saved=JSON.stringify(sourceFiles),implSources:Record<string,string>={};
+  const impl=scope.prepare('impl.js',implSources,{});impl.source(impl.sf);impl.requireCurrent();
+  assert.equal(impl.program,scoped.program);assert.deepEqual(Object.keys(implSources),[file('impl.js')]);
+  assert.equal(JSON.stringify(sourceFiles),saved,'later export users cannot mutate earlier source witnesses');
   const effects = readReactHelperEffects(reference,'components.tsx',candidate,{children:'caller'});
   assert.equal(effects.status,'modeled',JSON.stringify(effects));
   assert.equal(effects.runtimeVerified,false);
