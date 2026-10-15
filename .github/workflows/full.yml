@@ -580,7 +580,7 @@ jobs:
       - name: retain actual eval measurement for final readiness
         id: eval-evidence
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: full-eval-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
@@ -806,7 +806,7 @@ jobs:
       # Exact paths only: hidden-file inclusion is for evals/.ci, never .env files.
       - name: archive exact-commit V1 evidence
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.readiness.outcome == 'success' }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: v1-evidence-${{ github.sha }}
           path: |
