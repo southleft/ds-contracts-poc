@@ -30,6 +30,7 @@ import { emitNativeTokenContextReadbackScript } from "./token-set.js";
 import { emitNativeTokenExtensionContextReadbackScript } from './native-token-extension.js';
 import {backgroundPaintIdentities,nativeRootSlotFlowGeometry} from './figma-background-clip.js';
 import {validNativeGraphCreation} from './native-graph-creation.js';
+import {checkNativeObservedLayout, applyNativeObservedLayout, nativeObservedLayoutProblems, type NativeObservedLayoutContext} from './native-observed-layout.js';
 import {
   verifyNativeTokenContextReceipt,
   type NativeTokenContextInput,
@@ -66,6 +67,7 @@ export interface NativeSourceReadback {
   problems: string[];
 }
 export interface NativeContractObservationInput extends Omit<NativeSourceObservationInput, 'projection' | 'samples'> {
+  observedLayout?: NativeObservedLayoutContext;
   projection: NativeContractDraftProjection;
   /** Closed operation-scoped graph, in dependency order with component last. */
   graphComponents?: ComponentData[];
@@ -164,8 +166,15 @@ function checkInput(input: NativeInspectionInput) {
   if (('graphVerification' in input && input.graphVerification !== undefined) || c?.graphVerification !== undefined) {
     if (!isContractDraft(input) || input.graphVerification !== (input.projection.kind === 'prepared-contract-library' ? 2 : 1) ||
         c?.graphVerification !== input.graphVerification ||
-         !validNativeGraphCreation(input.graphComponents, c, input.graphVerification))
+         !validNativeGraphCreation(input.graphComponents, c, input.graphVerification, input.observedLayout))
       throw Error('native-graph-observation-creation-invalid');
+  }
+  if (isContractDraft(input) && input.observedLayout) {
+    checkNativeObservedLayout(input.observedLayout,input.projection.contractId);
+    if (input.projection.kind !== 'contract-draft' || input.graphVerification !== 1 || !input.graphComponents ||
+        input.templateGraph || input.fixedCrossSizeReadback || input.backgroundMigration || input.absoluteShapeReadback ||
+        !same(applyNativeObservedLayout(input.component,input.observedLayout),input.component))
+      throw Error('native-observed-layout-input-invalid');
   }
   if (isContractDraft(input) && input.projection.rootTextTemplate) {
     if (input.graphComponents) throw Error('native-text-template-graph-unqualified');
@@ -291,6 +300,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     ? observedComponents.flatMap(c => [...c.variants, ...(c.stateVariants ?? [])]) : input.component.variants;
   const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
   const extra = observedVariants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
+  if (isContractDraft(input) && input.observedLayout) extra.push('nativeObservedLayoutHost','nativeObservedLayoutPart');
   const hasImageControl=(spec:NodeSpec):boolean=>!!spec.imagePaint||!!spec.imageTarget||!!spec.instanceImages||!!spec.children?.some(hasImageControl);
   if(isContractDraft(input)&&observedVariants.some(v=>hasImageControl(v.spec)))extra.push('imageOverride');
   const hasTextAppearance=(spec:NodeSpec):boolean=>!!spec.textAppearanceTarget||!!spec.instanceTextAppearances||!!spec.children?.some(hasTextAppearance);
@@ -400,7 +410,8 @@ export function emitNativeInventoryReadbackScript(expected: {
   if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate && !synchronousPartialInventory || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
-    ...(capturedGeometry?['rotation']:[]),
+    ...(capturedGeometry ? ['rotation'] : []),
+    ...(extraMetadata.includes('nativeObservedLayoutHost') ? ['rotation','isMask','blendMode'] : []),
     ...(boundPaint?['rotation','cornerSmoothing','itemReverseZIndex','isMask','blendMode','constraints']:[]),
     "visible",
     "opacity",
@@ -884,6 +895,8 @@ function verifyReadback(
     }
     return owner ? authoredPathSpecs.get(canonicalJson([owner.name,meta(source,'nativeContractPart')])) ?? undefined : undefined;
   };
+  const observedLayout = isContractDraft(input) ? input.observedLayout : undefined;
+  if (observedLayout) problems.push(...nativeObservedLayoutProblems(observedLayout,c,nodes));
   const target = nodes.get(c.target.id),
     page = nodes.get(c.pageId),
     board = isContractDraft(input) ? undefined : nodes.get(c.comparisonBoardId);
@@ -901,9 +914,9 @@ function verifyReadback(
   const graphTargetIds = Array.isArray(graphTargets) ? graphTargets.map((row: any) => row.id) : [target.id];
   if (
     page.type !== "PAGE" ||
-    !same([...page.childIds].sort(), [...graphTargetIds, ...(board ? [board.id] : [])].sort()) ||
+    !same([...page.childIds].sort(), [...graphTargetIds.filter((id: string)=>!observedLayout || id!==c.target.id), ...(observedLayout ? [c.observedLayout.hostId] : []), ...(board ? [board.id] : [])].sort()) ||
     (board && board.type !== "FRAME") ||
-    target.parentId !== page.id ||
+    target.parentId !== (observedLayout ? c.observedLayout.hostId : page.id) ||
     (board && board.parentId !== page.id)
   )
     issue("native-source-observation-page-scope");

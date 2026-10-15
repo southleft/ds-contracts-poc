@@ -309,7 +309,7 @@ export function startReactOwnership(
                     throw Error('jsx-values-observation-unstable');
                   row.jsxValues=jsx.map((subject,i)=>({path:subject.path,result:results[i]}));
                 }
-                row.propertyMatrix = await observeReactPropertyMatrix({page, program, ownership, tree:tree.tree,
+                row.propertyMatrix = await observeReactPropertyMatrix({page, program, ownership, tree:tree.tree,authoredLayout:true,
                   image:tree.sourcePngSha256, instanceId:subject!.id, selector:profile.path[0],
                   dir:path.join(rowDir,"matrix"), failures,
                   assertCurrent:()=>{if(stopped || !unchanged())throw Error("react-property-effects-source-changed-or-interrupted");},
@@ -386,7 +386,7 @@ export function startReactOwnership(
                 if(!snapshot?.fonts||snapshot.treeSha256!==pair[0].tree||JSON.stringify(snapshot.ownership)!==JSON.stringify(row.ownership))throw Error('react-authored-tree-baseline-unavailable');
                 const content=readReactAuthoredContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership!,tree:pair[0].root,
                   helper:helper.result,read:name=>readFileSync(path.join(rowDir,'jsx-helpers',String(index),name))});
-                row.authoredTrees.push({helper:index,draft:projectReactAuthoredTree({content,program,ownership:row.ownership!,tree:pair[0].root,origin:snapshot.styleOrigin,fonts:snapshot.fonts})});
+                row.authoredTrees.push({helper:index,draft:projectReactAuthoredTree({content,program,ownership:row.ownership!,tree:pair[0].root,origin:snapshot.styleOrigin,fonts:snapshot.fonts,descendantSizes:snapshot.descendantSizes,bounds:snapshot.bounds})});
               }catch(error){row.authoredTrees.push({helper:index,reason:error instanceof Error?error.message:String(error)});}
             }
             writeFileSync(path.join(rowDir,'authored-trees.json'),JSON.stringify(row.authoredTrees,null,2)+'\n',{flag:'wx'});
@@ -541,6 +541,7 @@ export function reactOwnershipEngine():Record<string,string>{
           "react-authored-class-runtime.ts",
           "react-authored-class-observation.ts",
           "react-authored-tree.ts",
+          "react-authored-layout.ts",
           "observed-component-placement.ts",
           "observed-content.ts",
           "svg-viewports.ts",
@@ -599,6 +600,7 @@ export function reactOwnershipEngine():Record<string,string>{
           "../core/mint-tokens.ts",
           "../core/emit-figma-script.ts",
           "../core/native-contract-draft.ts",
+          "../core/native-observed-layout.ts",
           "../core/native-paint-observation.ts",
           "capture.ts",
           "react-reference-profiles.ts",

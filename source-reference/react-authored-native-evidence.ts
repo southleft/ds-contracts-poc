@@ -61,7 +61,7 @@ export function readReactAuthoredNativeEvidence(repo: string, reference: ReactRe
         revisionOf(snapshot.ownership) !== revisionOf(row.ownership) || helper?.path !== '') return fail();
     const content = readReactAuthoredContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership,
       tree:captured.tree,helper:helper.result,read:name=>read('jsx-helpers/'+request.helper+'/'+name)});
-    const draft = projectReactAuthoredTree({content,program,ownership:row.ownership,tree:captured.tree,origin:snapshot.styleOrigin,fonts:snapshot.fonts});
+    const draft = projectReactAuthoredTree({content,program,ownership:row.ownership,tree:captured.tree,origin:snapshot.styleOrigin,fonts:snapshot.fonts,descendantSizes:snapshot.descendantSizes,bounds:snapshot.bounds});
     if (draft.status !== 'native-compiled' || draft.problems.length || revisionOf(draft) !== request.draftRevision ||
         !reactReferenceUnchanged(reference)) fail();
     return {draft,captured,source:{revision:'sha256:'+reference.id,programSha256:evidenceSha(programBytes),evidenceRevision:revisionOf(request)}};

@@ -16,12 +16,16 @@ import type {ReactStyleOrigin} from './react-style-origin.js';
 import type {TextFontEvidence} from './text-fonts.js';
 import type {SvgViewportEvidence} from './svg-viewports.js';
 import type {PseudoBoxEvidence} from './pseudo-boxes.js';
+import type {ReactDescendantSizes} from './react-style-origin.js';
+import type {NativeObservedLayoutContext} from '../core/native-observed-layout.js';
+import {readObservedAuthoredLayout,observedLayoutContext} from './react-authored-layout.js';
+import {evidenceSha} from './react-validation-evidence.js';
 
 export interface ReactAuthoredTreeDraft {
  version:1;qualification:'observed-authored-composition-draft';acceptedContract:null;
  status:'refused'|'style-prepared'|'native-compiled';inputRevision:string;contentRevision:string;
  fact?:ReactAuthoredContentFact;contract?:Contract;contracts?:Contract[];tokens?:Record<string,unknown>;assets?:Array<[string,string]>;
- components?:ComponentData[];
+ components?:ComponentData[];observedLayout?:NativeObservedLayoutContext;
  boundaries:Array<{path:string;contractId:string;instances:ReactOwnership['components']}>;
  problems:string[];limitations:string[];
 }
@@ -30,8 +34,8 @@ const contains=(parent:string,child:string)=>parent===''||parent===child||child.
 const relative=(parent:string,child:string)=>parent===''?child:child.slice(parent.length+1);
 
 export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;program:ReactSourceProgram;ownership:ReactOwnership;
- tree:CapturedNode;origin:ReactStyleOrigin;fonts:TextFontEvidence;svg?:SvgViewportEvidence;pseudos?:PseudoBoxEvidence}):ReactAuthoredTreeDraft {
- const {content,program,ownership,tree,origin,fonts,svg,pseudos}=input;
+ tree:CapturedNode;origin:ReactStyleOrigin;fonts:TextFontEvidence;svg?:SvgViewportEvidence;pseudos?:PseudoBoxEvidence;descendantSizes?:ReactDescendantSizes;bounds?:{width:number;height:number}}):ReactAuthoredTreeDraft {
+ const {content,program,ownership,tree,origin,fonts,svg,pseudos,descendantSizes,bounds}=input;
  const result:ReactAuthoredTreeDraft={version:1,qualification:'observed-authored-composition-draft',acceptedContract:null,status:'refused',
   inputRevision:revisionOf(input),contentRevision:content.revision,boundaries:[],problems:[],limitations:[]};
  try{
@@ -39,6 +43,9 @@ export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;pro
   const outer=ownership.components.find(c=>c.id===fact.instanceId)!;
   if(['style','className'].some(k=>outer.props[k]!==undefined&&outer.props[k]!==null&&outer.props[k]!==''&&!same(outer.props[k],{kind:'undefined'})&&
     !(k==='style'&&same(outer.props[k],{kind:'object'})&&fact.emptyCallerStyle===true)))throw Error('react-authored-tree-caller-style-unqualified');
+  const observedLayout=readObservedAuthoredLayout(tree,origin,descendantSizes,bounds);
+  if(observedLayout)result.limitations.push('observed-layout-context-only-not-responsive-resize-behavior');
+  if(observedLayout&&fact.boundaries.length!==1)throw Error('react-authored-layout-nested-context-unqualified');
   const prepared=prepareObservedContentTree(tree,fonts,svg,pseudos),flat=new Map(flatten(prepared).map(n=>[n.path,n.node]));
   const boundaries=[...fact.boundaries].sort((a,b)=>b.path.split('.').length-a.path.split('.').length||b.path.length-a.path.length||a.path.localeCompare(b.path));
   const contracts=new Map<string,Contract>(),byPath=new Map<string,Contract>(),tokens:Record<string,unknown>={},assets=new Map<string,string>();
@@ -68,7 +75,7 @@ export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;pro
    const sizing=new Map<string,ReadonlySet<string>>();
    for(const {path:local,node} of flatten(root)){
     if(['flex','inline-flex'].includes(node.style.display))for(const gap of ['row-gap','column-gap'])if(node.style[gap]==='normal')node.style[gap]='0px';
-    const absolute=[boundary.path,local].filter(Boolean).join('.'),record=origin.roots.find(r=>r.path===absolute&&r.tag===node.tag);
+    const absolute=[boundary.path,local].filter(Boolean).join('.'),record=origin.roots.find(r=>r.path===absolute&&r.tag===node.tag)??descendantSizes?.nodes.find(r=>r.path===absolute&&r.tag===node.tag);
     const channels=new Set<string>();
     for(const size of record?.sizes??[])if(size.status==='fixed'&&size.value&&authoredLengthIsUsed(size.value,node.style[size.channel]))channels.add(size.channel);
     sizing.set(local,channels);
@@ -79,6 +86,7 @@ export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;pro
    const compiled=compileObservedContentSweep(space,{name,importName:name,contract:'',sampleText:'',axes:[]},
     {captures:[{combo:name+':'+key,interaction:'default',root}]} as SweepResult,[...(sizing.get('')??[])],true,childPaths,partSizing);
    if(compiled.problems.length||!compiled.contract||!compiled.tokens||!compiled.component||!compiled.sourcePaths)throw Error('react-authored-tree-projection-unavailable:'+compiled.problems.join(','));
+   if(observedLayout&&boundary.path==='')result.observedLayout=observedLayoutContext(observedLayout,compiled.contract.id,evidenceSha(JSON.stringify(tree)),compiled.component.variants[0].spec,compiled.sourcePaths);
    const contract=compiled.contract,parts=new Map(walkAnatomy(contract).map(p=>[p.name,p.part]));
    for(const child of children){
     const local=relative(boundary.path,child.path),matches=compiled.sourcePaths.filter(p=>p.sourcePath===local),dependency=byPath.get(child.path);
