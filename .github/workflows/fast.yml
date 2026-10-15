@@ -79,7 +79,7 @@ jobs:
       # Node is pinned to the exact version the gates were verified on, not to
       # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
       # 20.19.4 is what produced every measurement in this file.
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20.19.4"
           cache: npm
@@ -1184,7 +1184,7 @@ jobs:
       # Node is pinned to the exact version the gates were verified on, not to
       # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
       # 20.19.4 is what produced every measurement in this file.
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20.19.4"
           cache: npm
@@ -1271,7 +1271,7 @@ jobs:
       # Node is pinned to the exact version the gates were verified on, not to
       # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
       # 20.19.4 is what produced every measurement in this file.
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20.19.4"
           cache: npm
@@ -1360,7 +1360,7 @@ jobs:
       # Node is pinned to the exact version the gates were verified on, not to
       # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
       # 20.19.4 is what produced every measurement in this file.
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20.19.4"
           cache: npm
