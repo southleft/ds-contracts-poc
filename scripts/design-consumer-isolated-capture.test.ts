@@ -48,6 +48,26 @@ test('document coordinates survive scrolling and painted ancestors remain unqual
  }finally{await browser.close();}
 });
 
+test('scrolling past non-rendering SVG definitions preserves paint and still rejects actual subject changes',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:200,height:150},deviceScaleFactor:1});
+ const html='<style>body{margin:0;min-height:600px}#subject{position:absolute;left:30px;top:300px;width:20px;height:20px;background:red}#zero{position:absolute;left:0;top:0;width:0;height:0}</style><div id="subject"><span id="zero"></span><svg width="20" height="20"><defs><clipPath id="clip"><path id="clip-shape" d="M0 0H10V20H0Z"/></clipPath></defs><path d="M0 0H20V20H0Z" clip-path="url(#clip)" fill="blue"/></svg></div>';
+ for(const mutation of ['',"document.querySelector('defs').style.setProperty('--guard','changed')","document.querySelector('#zero').style.left='1px'","document.querySelector('#clip-shape').setAttribute('d','M0 0H15V20H0Z')"]){
+  await page.setContent(html);await page.evaluate(()=>scrollTo(0,0));
+  const root=page.locator('#subject'),before=await page.content();
+  assert.equal(await page.locator('defs').evaluate(n=>n.getClientRects().length),0);
+  assert.equal(await page.locator('#zero').evaluate(n=>n.getClientRects().length),1);
+  if(mutation)await page.evaluate(code=>window.addEventListener('scroll',()=>new Function(code)(),{once:true}),mutation);
+  const result=await captureIsolatedRegion(page,root,{x:0,y:0,width:20,height:20});
+  if(mutation)assert.deepEqual(result,{refused:'isolated-capture-scroll-changed-subject'},mutation);
+  else{
+   assert('bytes'in result,JSON.stringify(result));assert.equal(count(result.bytes,0,0,255),200);assert.equal(count(result.bytes,255,0,0),200);
+   assert.deepEqual(result.frame.layout,{x:30,y:300,width:20,height:20});assert.equal(await page.content(),before);
+  }
+  assert.deepEqual(await page.evaluate(()=>({x:scrollX,y:scrollY})),{x:0,y:0});
+ }
+ }finally{await browser.close();}
+});
+
 test('canvas extension captures distant shadow beyond scroll bounds without retaining instrumentation',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240},deviceScaleFactor:1});
  await page.setContent('<style>body{margin:0}#subject{position:absolute;left:100px;top:100px;width:20px;height:20px;background:blue;box-shadow:2000px 0 red}#far{position:absolute;left:1000px;width:20px;height:20px;background:lime}#left{position:absolute;left:-35px;width:15px;height:20px;background:orange}</style><div id="subject"><div id="far"></div><div id="left"></div></div>');
@@ -117,12 +137,16 @@ test('the direct comparator agrees with the previous serialized snapshot across 
   await page.setContent(html);const root=page.locator('#subject');
   const expected=await root.evaluateHandle(direct as (el:Element)=>unknown);
   try{
-   const old=await root.evaluate(previous as (el:Element)=>unknown);assert.deepEqual(await expected.jsonValue(),old);
+   const baseline=await expected.jsonValue() as Array<{geometry:{hasClientRect?:boolean};style:unknown;pseudos:unknown}>;
+   // The candidate additionally records client-rectangle presence. At this
+   // unscrolled origin every pre-existing geometry/style field stays exact.
+   const legacy=baseline.map(({geometry,...rest})=>{const {hasClientRect:_,...priorGeometry}=geometry;return {geometry:priorGeometry,...rest};});
+   const old=await root.evaluate(previous as (el:Element)=>unknown);assert.deepEqual(legacy,old);
    if(mutate)await root.evaluate(new Function('el',mutate) as (el:Element)=>void);
    const after=await root.evaluate(previous as (el:Element)=>unknown);
    const oldEqual=JSON.stringify(old)===JSON.stringify(after);
    assert.equal(await root.evaluate(direct as (el:Element,before:unknown)=>boolean,expected),oldEqual,mutate);
-   assert.deepEqual(await expected.jsonValue(),old,'comparison cannot mutate its detached baseline');
+   assert.deepEqual(await expected.jsonValue(),baseline,'comparison cannot mutate its detached baseline');
   }finally{await expected.dispose();}
  }
  }finally{await browser.close();}
