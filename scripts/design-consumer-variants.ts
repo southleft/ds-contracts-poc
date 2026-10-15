@@ -4,6 +4,7 @@
 import { isDeepStrictEqual } from "node:util";
 import { PNG } from "pngjs";
 import { imageSha256, type FigmaFrame } from "./design-consumer-framing-v2.js";
+import { validateNativeAnchorProof } from "./design-consumer-render-anchor.js";
 
 interface VariantCase {
   key: string;
@@ -87,7 +88,18 @@ function equivalentSourcePair(
     const af = frames[from.nodeId],
       bf = frames[to.nodeId];
     if (!a || !b || !af || !bf || af.refused || bf.refused || !a.equals(b)) return null;
-    if (!isDeepStrictEqual(af.raster, bf.raster)) return null;
+    if (af.raster?.kind === 'figma-rest-source-opaque-anchor-v1' ||
+        bf.raster?.kind === 'figma-rest-source-opaque-anchor-v1') {
+      // Each node owns a different proof. Revalidate both original sources;
+      // equality is still of their entire PNGs and relative geometry below.
+      const ar = af.raster, br = bf.raster;
+      if (ar?.kind !== 'figma-rest-source-opaque-anchor-v1' ||
+          br?.kind !== 'figma-rest-source-opaque-anchor-v1' || ar.scale !== 1 || br.scale !== 1 ||
+          !validateNativeAnchorProof(ar.proof, a, af.layout, af.render) ||
+          !validateNativeAnchorProof(br.proof, b, bf.layout, bf.render) ||
+          ar.proof.nodeId !== from.nodeId || br.proof.nodeId !== to.nodeId ||
+          ar.proof.fileKey !== br.proof.fileKey || ar.proof.version !== br.proof.version) return null;
+    } else if (!isDeepStrictEqual(af.raster, bf.raster)) return null;
     const hash = imageSha256(a);
     if (hash !== af.pngSha256 || hash !== bf.pngSha256) return null;
     const geometry = (f: FigmaFrame) => {
