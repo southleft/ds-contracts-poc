@@ -18,16 +18,18 @@
       "decision": {
         "kind": "pending-restamp",
         "note": "the set carries no ds_contracts/canvasFingerprint stamp (content unchanged); restamping means re-running its sync script — a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:41.291Z",
+        "recordedAt": "2026-10-15T19:49:06.531Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:1218572680 (grammar 1.66), file version 2405851147168680026",
           "drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:1218572680 (grammar 1.65), file version 2405851147168680026",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66",
           "canvasStamp": null,
           "canvasDump": "dumpv1:1218572680",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/altitude/figma/avatar.figma.js (amend-capable: reconciles set 1:10498 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt altitude.avatar --note \"restamped 2026-08-23\""
       }
@@ -102,9 +104,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2277939095",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
@@ -121,9 +123,9 @@
       "direction": "canvas→code",
       "observed": {
         "dumpFingerprint": "dumpv1:3270276137",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/altitude/components/heading.json)",
@@ -156,9 +158,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3665305484",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
@@ -175,9 +177,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:4044928069",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
@@ -955,9 +957,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2166063465",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/blockquote.json"
@@ -1046,9 +1048,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:466281127",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message-metadata.json"
@@ -1065,9 +1067,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2757129331",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message.json"
@@ -1084,9 +1086,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2910912438",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-system-message.json"
@@ -1117,9 +1119,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1136643717",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/citation.json"
@@ -1136,9 +1138,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3463287457",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/code.json"
@@ -1155,9 +1157,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1411088782",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-10-13T16:16:40.218Z"
+        "observedAt": "2026-10-15T19:49:06.156Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/divider.json"
@@ -1174,9 +1176,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1838630472",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/empty-state.json"
@@ -1207,9 +1209,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1185127887",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/heading.json"
@@ -1240,9 +1242,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1652417051",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/kbd.json"
@@ -1259,9 +1261,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1743997456",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list-item.json"
@@ -1278,9 +1280,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1158341582",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list.json"
@@ -1297,9 +1299,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1109073418",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list-item.json"
@@ -1316,9 +1318,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2297858963",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list.json"
@@ -1363,9 +1365,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:184891978",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/section.json"
@@ -1438,9 +1440,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2815330961",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/status-dot.json"
@@ -1597,9 +1599,9 @@
       "direction": "canvas→code",
       "observed": {
         "dumpFingerprint": "dumpv1:3977259635",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-10-13T16:16:40.218Z"
+        "observedAt": "2026-10-15T19:49:06.156Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/token.json)",
@@ -1632,9 +1634,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3107466135",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toolbar.json"
@@ -1697,16 +1699,18 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "code is ahead: the dismiss button became a declared event (968958cd, 2026-08-16) after the last canvas write (2026-08-08); re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:41.825Z",
+        "recordedAt": "2026-10-15T19:49:06.721Z",
         "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:4113850498 (grammar 1.66), file version 2405851147168680026",
           "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:4113850498 (grammar 1.65), file version 2405851147168680026",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab",
           "canvasStamp": "v6:941557944",
           "canvasDump": "dumpv1:4113850498",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/alert.figma.js (amend-capable: reconciles set 1:2098 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.alert --note \"re-applied from 968958cd\""
       }
@@ -1785,16 +1789,18 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "genuine code-ahead: role=switch + onToggle event + root align landed in the contract (968958cd, 2026-08-16) and the canvas still carries the 2026-08-06 stamp; re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:42.510Z",
+        "recordedAt": "2026-10-15T19:49:06.905Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:599410563 (grammar 1.66), file version 2405851147168680026",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:599410563 (grammar 1.65), file version 2405851147168680026",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794",
           "canvasStamp": "v6:3468428338",
           "canvasDump": "dumpv1:599410563",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/toggle-switch.figma.js (amend-capable: reconciles set 1:2296 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.toggleswitch --note \"re-applied from 968958cd\""
       }
@@ -2061,9 +2067,9 @@
       "direction": "canvas→code",
       "observed": {
         "dumpFingerprint": "dumpv1:184491569",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-10-13T16:16:39.718Z"
+        "observedAt": "2026-10-15T19:49:05.984Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/divider.json)",
@@ -2130,16 +2136,18 @@
       "decision": {
         "kind": "pending-reconcile",
         "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:43.199Z",
+        "recordedAt": "2026-10-15T19:49:07.081Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:2778190974 (grammar 1.66), file version 2389961688576685812",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:2778190974 (grammar 1.65), file version 2389961688576685812",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166",
           "canvasStamp": "v6:2082406472",
           "canvasDump": "dumpv1:2778190974",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.fab --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/fab.figma.js (amends set 84:1743 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.fab --note \"re-applied from 16889547\""
       }
@@ -2202,16 +2210,18 @@
       "decision": {
         "kind": "pending-reconcile",
         "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. Only the grammar had moved for this row.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:43.815Z",
+        "recordedAt": "2026-10-15T19:49:07.252Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3629614192 (grammar 1.66), file version 2389961688576685812",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3629614192 (grammar 1.65), file version 2389961688576685812",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2",
           "canvasStamp": "v6:3316422374",
           "canvasDump": "dumpv1:3629614192",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.link --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/link.figma.js (amends set 84:1832 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.link --note \"re-applied from 16889547\""
       }
@@ -2242,9 +2252,9 @@
       "direction": "canvas→code",
       "observed": {
         "dumpFingerprint": "dumpv1:57778867",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-10-13T16:16:39.718Z"
+        "observedAt": "2026-10-15T19:49:05.984Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/paper.json)",
@@ -2341,16 +2351,18 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "code is ahead: the slider-thumb shadow-pseudo fold landed in the contract (01aa5243, 2026-08-11T17:28Z) 1 h 48 min after the last canvas write (2026-08-11T15:40Z); re-applying is a Figma write to 59mLQlOMiD5w5za6SUcoO5 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.] [AGENT grammar migration 2026-09-19: fresh REST observation under 1.37 (explicit fixed manual-box capture). The previous pending decision is retained; no canvas write or reconciliation is authorized or claimed, and no historical unresolved issue is assessed as resolved.] [AGENT grammar migration 2026-09-19: fresh REST GET with geometry=paths under 1.38. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET with geometry=paths under 1.39. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation authorized or claimed.] [AGENT grammar migration 2026-09-20: fresh REST GET under 1.40 retains explicitly observed zero tracking. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.41 captures uniform native line-height binding identity. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-21: fresh REST GET under 1.42 captures uniform native font-weight binding identity and numeric weight. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-23: fresh REST GET under 1.43 preserves explicitly observed LEFT text alignment. Prior pending decision, unresolved drift and owner review remain; no canvas write or reconciliation is authorized or claimed.] [AGENT grammar migration 2026-09-29: fresh REST GET under 1.44. Re-reading the same raw response with 1.43 reproduces the prior decision fingerprint; the contract hash and canvas stamp are unchanged. Existing pending action and owner review remain; no canvas write, adoption, or resolution is authorized or claimed.] [AGENT grammar migration 2026-10-02: stable fresh REST source read under 1.47; the 1.45 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration2026-10-02: fresh read-only REST under1.49; old1.47 reader reproduces the prior fingerprint, native stamp and contract hash unchanged. Existing pending action retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-02: version-verified stable REST source read under 1.50; the 1.49 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-03: version-verified stable REST source read under 1.51; the 1.50 reader reproduces the prior pending decision fingerprint and stamp, and the contract hash is unchanged. Pending action and owner review retained; no canvas write, adoption or resolution.] [AGENT grammar migration 2026-10-04: live file version unchanged; the 1.51 reader reproduces the prior pending fingerprint and stamp from the retained source, and contract hash is unchanged. Refresh to 1.62 only. Pending action and owner review retained; no canvas write, adoption, or resolution.] [Grammar migration 2026-10-06: version-stable fresh REST source, replayed through the 1.62 reader, matches the prior decision fingerprint; code hash and canvas stamp unchanged. Refresh observation to 1.63 only. Pending action and owner review retained; no canvas write, adoption, or resolution.]",
-        "recordedAt": "2026-10-13T16:16:44.414Z",
+        "recordedAt": "2026-10-15T19:49:07.422Z",
         "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2465776599 (grammar 1.66), file version 2389961688576685812",
           "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2465776599 (grammar 1.65), file version 2389961688576685812",
-          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json."
+          "2026-10-13 fresh read-only REST refresh at stable file version, mapped under grammar1.65. Existing pending action retained; no canvas write, adoption, repin, or resolution. Raw request receipts retained in delivery-sync-ledger-grammar165-candidate-20261013/REQUESTS.json.",
+          "Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write."
         ],
         "basedOn": {
           "contractHash": "sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba",
           "canvasStamp": "v6:2972081627",
           "canvasDump": "dumpv1:2465776599",
-          "dumpVersion": "1.65"
+          "dumpVersion": "1.66"
         },
         "command": "Figma desktop → open file 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/slider.figma.js (amend-capable: reconciles set 21:509 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt mui.slider --note \"re-applied from 01aa5243\""
       }
@@ -2829,9 +2841,9 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2501230752",
-        "dumpVersion": "1.65",
+        "dumpVersion": "1.66",
         "fileVersionId": "2405851147168680026",
-        "observedAt": "2026-10-13T16:16:40.758Z"
+        "observedAt": "2026-10-15T19:49:06.342Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/polaris/components/text.json"
