@@ -22,7 +22,7 @@ function compile(input: ReactAuthoredNativePlanInput) {
   if (!parent || contracts.size !== draft.contracts.length || canonicalJson(parent) !== canonicalJson(draft.contract))
     throw Error('react-authored-native-graph-invalid');
   const engine = createFigmaEngine({tokens:{primitives:draft.tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map(draft.assets)});
-  const compiled = engine.compileNativeContractGraphDraft(parent,contracts,input.source,input.operation.id);
+  const compiled = engine.compileNativeContractGraphDraft(parent,contracts,input.source,input.operation.id,'observedLayout' in draft?draft.observedLayout:undefined);
   if(draft.qualification==='observed-authored-state-api-draft' &&
     canonicalJson(draft.nativeVariants.map(v=>v.variant).sort())!==canonicalJson(compiled.component.variants.map(v=>v.name).sort()))
     throw Error('react-authored-state-api-variant-pairing-changed');
@@ -42,7 +42,7 @@ export function prepareReactAuthoredNativePlan(input: ReactAuthoredNativePlanInp
     version:1 as const,kind:'react-authored-draft-inspection' as const,purpose:'source-candidate-inspection' as const,
     acceptedContract:null,nativeQualification:'unqualified' as const,operation:{...input.operation},
     draftRevision:revisionOf(input.draft),projection:compiled.projection,component:compiled.component,
-    graphComponents:compiled.components,graphVerification:1 as const,
+    graphComponents:compiled.components,graphVerification:1 as const,...('observedLayout' in input.draft&&input.draft.observedLayout?{observedLayout:input.draft.observedLayout}:{}),
     componentRevision:revisionOf(compiled.component),componentRevisions:compiled.componentRevisions,
     tokenInput,tokenPreparation:prepareNativeTokenContext(tokenInput),
     limitations:[...input.draft.limitations,'native-visual-fidelity-unverified','native-graph-computed-geometry-unverified',
@@ -58,5 +58,5 @@ export function buildReactAuthoredNativeWrite(input: ReactAuthoredNativePlanInpu
     throw Error('react-authored-native-plan-write-stale');
   const {parent,contracts,engine} = compile(input);
   return {planRevision:current.revision,script:engine.buildNativeContractGraphDraftScript(
-    parent,contracts,input.source,{operation:input.operation,tokens:input.tokens},1)};
+    parent,contracts,input.source,{operation:input.operation,tokens:input.tokens,...('observedLayout' in input.draft&&input.draft.observedLayout?{observedLayout:input.draft.observedLayout}:{})},1)};
 }

@@ -30,7 +30,8 @@ export function selectReactAuthoredNativeRequest(repo: string, report: ReactOwne
 }
 
 export function readReactAuthoredNativeEvidence(repo: string, reference: ReactReference, request: ReactAuthoredNativeRequest):
-  {draft: ReactAuthoredTreeDraft; source: NativeContractDraftSource} {
+  {draft: ReactAuthoredTreeDraft; source: NativeContractDraftSource;
+    captured: {tree: import('../extract/computed/lib.js').CapturedNode; treeSha256:string; sourcePngSha256?:string}} {
   return evidenceReadOnce('react-authored-native',{repo,referenceId:reference.id,files:reference.files,request},() => {
     if (!isReactAuthoredNativeRequest(request) || reference.id !== request.referenceId || !reactReferenceUnchanged(reference)) fail();
     const dir = path.join(repo,'private/react-source-ownership',request.referenceId,request.ownership.id);
@@ -60,9 +61,9 @@ export function readReactAuthoredNativeEvidence(repo: string, reference: ReactRe
         revisionOf(snapshot.ownership) !== revisionOf(row.ownership) || helper?.path !== '') return fail();
     const content = readReactAuthoredContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership,
       tree:captured.tree,helper:helper.result,read:name=>read('jsx-helpers/'+request.helper+'/'+name)});
-    const draft = projectReactAuthoredTree({content,program,ownership:row.ownership,tree:captured.tree,origin:snapshot.styleOrigin,fonts:snapshot.fonts});
+    const draft = projectReactAuthoredTree({content,program,ownership:row.ownership,tree:captured.tree,origin:snapshot.styleOrigin,fonts:snapshot.fonts,descendantSizes:snapshot.descendantSizes,bounds:snapshot.bounds});
     if (draft.status !== 'native-compiled' || draft.problems.length || revisionOf(draft) !== request.draftRevision ||
         !reactReferenceUnchanged(reference)) fail();
-    return {draft,source:{revision:'sha256:'+reference.id,programSha256:evidenceSha(programBytes),evidenceRevision:revisionOf(request)}};
+    return {draft,captured,source:{revision:'sha256:'+reference.id,programSha256:evidenceSha(programBytes),evidenceRevision:revisionOf(request)}};
   });
 }

@@ -13,6 +13,7 @@ import {planReactDesignSourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {captureReactInitialSourceReview,initialSourceReviewReason} from './react-initial-source-review.js';
+import {createReactAuthoredSourceReviews,loadReactAuthoredSourceReviewInput,authoredSourceReviewReason} from './react-authored-source-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
 import {canonicalJson, revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
@@ -339,6 +340,12 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactSourceRequest(operationId) };
   });
+  const authoredSourceReviews = createReactAuthoredSourceReviews(repoRoot, (referenceId, operationId) => {
+    if (!native || !reference || reference.id !== referenceId) throw Error('react-authored-source-review-reference-unavailable');
+    const request = native().jobs.reactEffectiveAuthoredRequest(operationId);
+    if (request.version !== 1) throw Error('react-authored-source-review-version-unqualified');
+    return loadReactAuthoredSourceReviewInput(repoRoot, reference, request);
+  });
   const callerContentSource=(jobs:ReturnType<typeof createNativeOperationJobs>,id:string)=>{
     const original=jobs.reactRequest(id),request=jobs.reactEffectiveRequest(id);
     return {request,scope:canonicalJson(original)===canonicalJson(request)?id:reactComparisonContentScope(id,request)};
@@ -619,6 +626,11 @@ export function createReactReferenceService(
     let content;
     let composition, compositionProblem;
     let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
+    let authoredSourceReviewIdentity;
+    if (row.kind === 'authored' && row.operation.sourceCurrent) {
+      try { authoredSourceReviewIdentity = authoredSourceReviews.identity(reference.id, row.operation.id); }
+      catch { /* No stale or unqualified source identity is offered to the UI. */ }
+    }
     if(row.kind==='authored-initial'||row.kind==='authored-state-api'){
       try{
         const evidence=authoredNativeEvidence(jobs.reactEffectiveAuthoredRequest(row.operation.id));
@@ -660,7 +672,7 @@ export function createReactReferenceService(
     if (row.kind === 'root' || row.kind === 'initial' || row.kind === 'state-api' || row.kind==='authored-state-api')
       try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
       catch { /* An unreadable succession journal already fails identity above. */ }
-    return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
+    return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions, authoredSourceReviewIdentity,
       recordedMeasurement: (row.kind === 'initial' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
       updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
         const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
@@ -935,6 +947,25 @@ export function createReactReferenceService(
         res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
       } catch { json(res, 409, { error: 'Pinned original state image unavailable or changed.' }); }
       return;
+    }
+    const authoredSourceFrame = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-frame$/.exec(route);
+    if (authoredSourceFrame) {
+      try {
+        if (!native || !reference || reference.id !== authoredSourceFrame[1]) throw Error('react-authored-source-review-reference-unavailable');
+        const identity = native().jobs.reactIdentity(authoredSourceFrame[2]);
+        if (identity.authored) {
+          if (!['GET','POST'].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
+            throw Error('react-authored-source-review-bodyless-request-required');
+          if (identity.referenceId !== reference.id) throw Error('react-authored-source-review-reference-mismatch');
+          const review = req.method === 'POST'
+            ? await authoredSourceReviews.create(reference.id, authoredSourceFrame[2])
+            : await authoredSourceReviews.read(reference.id, authoredSourceFrame[2]);
+          json(res,200,{review});return;
+        }
+        // Existing root/comparison framing continues through its original path.
+      } catch (error) {
+        json(res,409,{error:'This authored source could not be reviewed unchanged.',reason:authoredSourceReviewReason(error)});return;
+      }
     }
     const framedImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-frame\/([a-f0-9]{64})\.png$/.exec(route);
     if (framedImage && req.method === 'GET') {

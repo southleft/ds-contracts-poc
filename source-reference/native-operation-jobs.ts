@@ -884,7 +884,7 @@ export function createNativeOperationJobs(
     if (isMainPlan(plan)) {
       if ('graphComponents' in plan.plan && (plan.plan.graphVerification !== undefined || value.graphVerification !== undefined) &&
           (plan.plan.graphVerification !== (isLibraryPlan(plan) ? 2 : 1) ||
-            !validNativeGraphCreation(plan.plan.graphComponents, value, isLibraryPlan(plan) ? 2 : 1))) return invalid;
+            !validNativeGraphCreation(plan.plan.graphComponents, value, isLibraryPlan(plan) ? 2 : 1, 'observedLayout' in plan.plan ? plan.plan.observedLayout : undefined))) return invalid;
       return { phase: 'components-created', problems: [] };
     }
     const instanceIds: string[] = [];
@@ -955,7 +955,8 @@ export function createNativeOperationJobs(
         projection: plan.plan.sourceProjection, samples: plan.plan.samples,
       }),
       ...('graphComponents' in plan.plan ? { graphComponents: plan.plan.graphComponents,
-        ...(plan.plan.graphVerification ? {graphVerification:plan.plan.graphVerification} : {}) } : {}),
+        ...(plan.plan.graphVerification ? {graphVerification:plan.plan.graphVerification} : {}),
+        ...('observedLayout' in plan.plan&&plan.plan.observedLayout?{observedLayout:plan.plan.observedLayout}:{}) } : {}),
       tokenInput: plan.plan.tokenInput,
       tokenIdentity: state.identity,
       creation: state.componentCreation,

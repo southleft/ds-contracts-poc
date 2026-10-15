@@ -120,6 +120,7 @@ import {
   type NativeSourceProjectionContext,
 } from './native-source-projection.js';
 import { prepareNativeSourceWrite, wrapNativeSourceWrite, type NativeSourceWriteContext } from './native-source-write.js';
+import {applyNativeObservedLayout, checkNativeObservedLayout, type NativeObservedLayoutContext} from './native-observed-layout.js';
 import { planNativeRootTextTemplateGraph, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { prepareNativeSourceComparisons, NATIVE_COMPARISONS_RUNTIME, type NativeSourceSampleIdentity } from './native-source-comparisons.js';
 
@@ -9070,6 +9071,7 @@ function compileNativeContractGraphDraft(
   byId: Map<string, Contract>,
   source: NativeContractDraftSource,
   operationId: string,
+  observedLayout?: NativeObservedLayoutContext,
 ) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent)
     throw Error('NATIVE_CONTRACT_GRAPH_IDENTITY_REQUIRED');
@@ -9081,6 +9083,10 @@ function compileNativeContractGraphDraft(
   const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
   const components = compiled.map(row => scopeNativeGraphComponent(row.component, ids));
   const parentIndex = ordered.findIndex(contract => contract.id === parent.id);
+  if (observedLayout) {
+    checkNativeObservedLayout(observedLayout,parent.id);
+    components[parentIndex] = applyNativeObservedLayout(components[parentIndex],observedLayout);
+  }
   return {
     projection: compiled[parentIndex].projection,
     component: components[parentIndex],
@@ -9100,8 +9106,9 @@ function buildNativeContractGraphDraftScript(
 ) {
   if (graphVerification !== undefined && graphVerification !== 1) throw Error('NATIVE_CONTRACT_GRAPH_VERIFICATION_VERSION');
   if (context.comparisons) throw Error('NATIVE_CONTRACT_GRAPH_COMPARISON_MAPPING_REQUIRED');
-  const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id);
-  const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames);
+  const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id, context.observedLayout);
+  if (context.observedLayout && graphVerification !== 1) throw Error('NATIVE_OBSERVED_LAYOUT_GRAPH_VERSION_REQUIRED');
+  const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames, undefined, undefined, undefined, true);
   return wrapNativeSourceWrite(prepared, buildSyncScript(graph.components, context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract graph.',
     preamble: '', nativeSource: true, nativeGraphVerification: graphVerification,

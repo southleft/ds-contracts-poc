@@ -10073,7 +10073,10 @@ function carryTextOverrides(
       const distinct=[...new Set(rows.map(r=>r.value!))];
       if(distinct.length===1)applied[prop]=distinct[0];
       else {
-        for(const axis of ctx.axes.filter(a=>!isBooleanAxis(a))){
+        // Finite Boolean VARIANT axes use the same exact lookup as enums.
+        // Keep omissions in the readings: false must not inherit a value
+        // observed only when true (or vice versa).
+        for(const axis of ctx.axes){
           const readings=new Map<string,string|undefined>();let pure=true;
           for(const row of rows){const value=axisValuesOf(row.variant)[axis.property];if(value===undefined){pure=false;break;}const key=axisValue(axis,value);if(readings.has(key)&&readings.get(key)!==row.value){pure=false;break;}readings.set(key,row.value);}
           // Only this instance's observed occurrences need a text input. An
@@ -12489,7 +12492,7 @@ function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, c
   if (!source || m.type !== 'TEXT' || !m.occ.some(o => o.node.text?.sourceAppearance)) return;
   let domain = declaredPresenceDomain(ctx);
   let qualified = ctx.guardedDrawnPartDomain === true;
-  if (!domain && ctx.sourcePartMatrixVerified && ctx.axes.length && ctx.axes.length <= 8 &&
+  if (!domain && ctx.sourcePartMatrixVerified && ctx.axes.length &&
       ctx.axes.every(axis => !axis.omitted)) {
     const values = ctx.axes.map(axis => axis.values.map(value => axisValue(axis, value)));
     if (values.reduce((product, choices) => product * choices.length, 1) > 4096) return;
@@ -12503,6 +12506,23 @@ function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, c
         axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw)])),
     })), domain, qualified, part as Part);
   if (!table) return;
+  if (table.props.length < ctx.axes.length) {
+    // Projection only carries appearance. The existing text channel must still
+    // resolve to each source row's characters; a font table cannot repair text
+    // that varies beyond the already supported character representation.
+    const textPart = part as Part;
+    const input = textPart.content && ctx.textProps.find(p => p.name === textPart.content!.prop);
+    const inputDefault = input && !input.figmaless ? input.default : undefined;
+    if (table.rows.some(row => {
+      const values = Object.fromEntries(table.props.map((name, i) => [name, row.values[i]]));
+      const characters = textPart.content ? inputDefault : textPart.textByProp
+        ? textPart.textByProp.map[String(values[textPart.textByProp.prop])] ?? textPart.text : textPart.text;
+      return typeof characters !== 'string' || characters !== row.appearance.characters;
+    })) {
+      ctx.notes.push(`${where}: projected authored appearance requires source characters that the existing text channel does not carry; appearance remains unqualified`);
+      return;
+    }
+  }
   part.textAppearanceByCombination = table;
   ctx.notes.push(`${where}: complete source-owned authored text appearance retained for ${table.rows.length} source-present combinations; optional caller overrides remain independent`);
 }

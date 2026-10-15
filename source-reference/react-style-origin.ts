@@ -12,6 +12,17 @@ type Layers = Awaited<ReturnType<typeof layerTree>>;
  * neither a fixed nor an automatic size: a consumer must qualify its layout. */
 export interface ReactSizeOrigin {
  channel:'width'|'height';status:'fixed'|'auto'|'fill'|'unresolved';value?:string;authoredValue?:string;selectors:string[];reason?:string;
+ /** Optional observed own percentage and its measured reference box; never inferred from a ratio. */
+ observedPercentage?:{percent:number;parentSize:number;usedSize:number};
+}
+/** A separate observed-context witness; it does not turn a percentage into a fixed source length. */
+export function observedOwnPercentageSize(input:{authored?:string;own:boolean;typed:{unit?:string;value?:number};parent?:number;used:number;edges:number;animated:boolean;ancestorAnimated?:boolean;zoomed:boolean;contextSafe:boolean;writingMode?:string;position?:string;float?:string;transform?:string}):ReactSizeOrigin['observedPercentage'] {
+ const match=input.authored&&/^([0-9]+(?:\.[0-9]+)?)%$/.exec(input.authored),percent=match?Number(match[1]):NaN;
+ return input.own&&match&&input.typed.unit==='percent'&&input.typed.value===percent&&percent>0&&percent<=100&&
+  !input.animated&&!input.ancestorAnimated&&!input.zoomed&&input.contextSafe&&input.writingMode==='horizontal-tb'&&input.edges===0&&['static','relative'].includes(input.position??'')&&
+  input.float==='none'&&input.transform==='none'&&typeof input.parent==='number'&&Number.isFinite(input.parent)&&input.parent>0&&
+  Number.isFinite(input.used)&&input.used>0&&Math.abs(input.used-input.parent*percent/100)<=1/64
+  ?{percent,parentSize:input.parent,usedSize:input.used}:undefined;
 }
 export const sourceTokenChannels = ['background-color', 'color', 'font-weight'] as const;
 export interface ReactStyleOrigin {
@@ -270,15 +281,15 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
  * carry `fixed` alone: every other status names why the size is not the
  * element's own used declaration. */
 export interface ReactDescendantSizes { version: 1; nodes: Array<{path: string; tag: string; sizes: ReactSizeOrigin[]}> }
-export async function readReactDescendantSizes(page: Page, selector: string, ownership: ReactOwnership, stage = '#root'): Promise<ReactDescendantSizes> {
+export async function readReactDescendantSizes(page: Page, selector: string, ownership: ReactOwnership, stage = '#root', capturePercentages = false): Promise<ReactDescendantSizes> {
   // Nested workspace components size their own roots; a dependency component's
   // root (e.g. Radix Thumb) is a descendant of the component that renders it.
   const roots=new Set(workspaceComponents(ownership.components).flatMap(c=>c.roots)),svg=ownership.nodes.filter(n=>n.tag==='svg').map(n=>n.path);
   const paths=ownership.nodes.map(n=>n.path).filter(p=>!roots.has(p)&&!svg.some(s=>p===s||p.startsWith(s===''?'':s+'.'))).sort();
-  return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths)).map(({path,tag,sizes})=>({path,tag,sizes:sizes??[]}))};
+  return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths,capturePercentages)).map(({path,tag,sizes})=>({path,tag,sizes:sizes??[]}))};
 }
 
-async function readOrigins(page: Page, selector: string, ownership: ReactOwnership, stage: string, paths: string[]): Promise<ReactStyleOrigin['roots']> {
+async function readOrigins(page: Page, selector: string, ownership: ReactOwnership, stage: string, paths: string[], capturePercentages = false): Promise<ReactStyleOrigin['roots']> {
   const out: {roots: ReactStyleOrigin['roots']}={roots:[]};
   const cdp=await page.context().newCDPSession(page);
   try {
@@ -297,13 +308,17 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
         // Typed OM distinguishes an explicitly empty custom value from a
         // guaranteed-invalid value; CSSOM serializes both as the empty string.
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,ancestorAnimated:(()=>{for(let a=this.parentElement;a;a=a.parentElement)if(a.getAnimations().length)return true;return false;})(),variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),${capturePercentages ? `relativeParent:(()=>{const p=this.parentElement;if(!p)return null;const s=getComputedStyle(p),edge=axis=>axis.reduce((n,k)=>n+parseFloat(s.getPropertyValue('padding-'+k))+parseFloat(s.getPropertyValue('border-'+k+'-width')),0);return {width:parseFloat(s.width)-(s.boxSizing==='border-box'?edge(['left','right']):0),height:parseFloat(s.height)-(s.boxSizing==='border-box'?edge(['top','bottom']):0)};})(),relativePosition:{position:style.position,float:style.cssFloat,transform:style.transform,writingMode:style.writingMode,contextSafe:(()=>{for(let a=this;a;a=a.parentElement){const s=getComputedStyle(a);if(s.writingMode!=='horizontal-tb'||s.zoom!=='1'||['transform','translate','rotate','scale','perspective'].some(k=>s[k]&&s[k]!=='none'))return false;}return true;})()},` : ''}animated:this.getAnimations().length>0,ancestorAnimated:(()=>{for(let a=this.parentElement;a;a=a.parentElement)if(a.getAnimations().length)return true;return false;})(),variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
-        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};animated:boolean;ancestorAnimated?:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
+        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};relativeParent?:{width:number;height:number};relativePosition?:{position:string;float:string;transform:string;writingMode:string;contextSafe:boolean};animated:boolean;ancestorAnimated?:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
         let fillDepth:number|undefined;
         const sizes:ReactSizeOrigin[]=sizeDeclarations.map(({channel,declaration})=>{
-          const typed=value.sizes[channel],base={channel,selectors:declaration.selectors,...(declaration.status==='resolved'?{authoredValue:declaration.value}:{})};
+          const typed=value.sizes[channel];
+          const observedPercentage=capturePercentages?observedOwnPercentageSize({authored:declaration.status==='resolved'?declaration.value:undefined,own:declaration.status==='resolved'&&declaration.own,
+            typed,parent:value.relativeParent?.[channel],used:value.box[channel]/64,edges:value.box.edges[channel],animated:value.animated,ancestorAnimated:value.ancestorAnimated,zoomed:value.box.zoomed,
+            contextSafe:value.relativePosition?.contextSafe===true,writingMode:value.relativePosition?.writingMode,position:value.relativePosition?.position,float:value.relativePosition?.float,transform:value.relativePosition?.transform}):undefined;
+          const base={channel,selectors:declaration.selectors,...(declaration.status==='resolved'?{authoredValue:declaration.value}:{}),...(observedPercentage?{observedPercentage}:{})};
           if(value.animated)return {...base,status:'unresolved',reason:'animated-source'};
           if(declaration.status==='unresolved'&&declaration.reason!=='no-own-declaration')return {...base,status:'unresolved',reason:declaration.reason};
           if(typed.keyword==='auto')return declaration.status==='unresolved'||['auto','initial','unset'].includes(declaration.value)

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {runInNewContext} from 'node:vm';
-import {reactAuthoredClassRuntime} from './react-authored-class-runtime.js';
+import {reactAuthoredClassRuntime,reactEmptyLiteralRuntime} from './react-authored-class-runtime.js';
 
 const target={module:'component.mjs',sourceSha256:'pinned-source',span:{start:1,end:300},exportName:'Button'};
 const plan={target,render:{file:target.module,sha256:target.sourceSha256,start:100,end:290},name:'Button',qualification:'original-class-render-boundary-only',effectsVerified:false,acceptedContract:null};
@@ -12,23 +12,24 @@ function run(source:string){
  runInNewContext(`
  const N={apply:Reflect.apply,is:Object.is,keys:Reflect.ownKeys,descriptors:Object.getOwnPropertyDescriptors,
   descriptor:Object.getOwnPropertyDescriptor,prototype:Object.getPrototypeOf,WeakMapCtor:WeakMap,
-  mapGet:WeakMap.prototype.get,mapSet:WeakMap.prototype.set};
+  mapGet:WeakMap.prototype.get,mapSet:WeakMap.prototype.set,WeakSetCtor:WeakSet,weakHas:WeakSet.prototype.has,weakAdd:WeakSet.prototype.add};
  const ids=new Map();let next=0,frame=0,current=null,reads=0;const props=new WeakMap(),elements=new WeakMap();
  const witness=value=>{if(value===null)return {kind:'null',value:null};const kind=typeof value;
   if(kind==='undefined')return {kind};if(['string','number','boolean'].includes(kind))return {kind,value};
   if(!ids.has(value))ids.set(value,next++);return {kind,identity:ids.get(value)};};
  const sameDescriptor=(a,b)=>!!a&&!!b&&['value','get','set','writable','enumerable','configurable'].every(k=>Object.is(a[k],b[k]));
  const graph={currentId:()=>current,invoke(fn,input,call){const old=current;current=frame++;try{return call();}finally{current=old;}}};
- const api=(${reactAuthoredClassRuntime})([${JSON.stringify(plan)}],N,()=>{},sameDescriptor,reason=>{throw Error(reason)},witness,props,elements,graph);
+ const empty=(${reactEmptyLiteralRuntime})(N,()=>{}),literal=empty.capture;
+ const api=(${reactAuthoredClassRuntime})([${JSON.stringify(plan)}],N,()=>{},sameDescriptor,reason=>{throw Error(reason)},witness,props,elements,graph,empty.current);
  class Component{constructor(input){this.props=input;}}class PureComponent extends Component{}
  api.registerBases(Component,PureComponent);
  const input=value=>{props.set(value,{kind:'jsx',descriptors:N.descriptors(value)});return value;};
  const element=(value,owner)=>{const result={type:'button',props:input(value),_owner:owner};elements.set(result,{descriptors:N.descriptors(result),props:value,origin:props.get(value)});return result;};
  const register=value=>api.registerClass(${JSON.stringify(key)},value);
  const resolve=(type,from,to=from)=>api.finishClassProps(api.beginClassProps(type,from),to);
- globalThis.fixture={api,Component,PureComponent,input,element,register,resolve,props,elements,graph};
+ globalThis.fixture={api,Component,PureComponent,input,element,register,resolve,props,elements,graph,literal,empty};
  `,context);
- return JSON.parse(runInNewContext(`JSON.stringify((()=>{const {api,Component,PureComponent,input,element,register,resolve,props,elements,graph}=fixture;${source}})())`,context));
+ return JSON.parse(runInNewContext(`JSON.stringify((()=>{const {api,Component,PureComponent,input,element,register,resolve,props,elements,graph,literal,empty}=fixture;${source}})())`,context));
 }
 
 test('class calls retain original identity, receiver and factory fields independently of resolved defaults',()=>{
@@ -125,4 +126,83 @@ test('unowned return values refuse and original render exceptions retain identit
  try{api.invoke(instance,instance.render);}catch(caught){same=caught===error;}return {same,report:api.report()};
  `);
  assert.equal(result.same,true);assert.equal(result.report.calls[0].completion,'threw');
+});
+
+test('state initialization keeps exact native instance origin without inspecting state',()=>{
+ const result=run(`
+ let stateReads=0;const original=input({percent:25});let owner;
+ class Button extends Component{
+  constructor(props){super(props);this._mounted=true;this._mounted=true;this.state={percentNumber:this.props.percent};}
+  render(){return element({children:this.props.percent},owner);}
+ }
+ const before=Function.prototype.toString.call(Button),renderBefore=Function.prototype.toString.call(Button.prototype.render);
+ register(Button);const effective=resolve(Button,original),instance=api.constructed(Button,effective,new Button(effective));
+ Object.defineProperty(instance.state,'opaque',{get(){stateReads++;throw Error('unrequested state read');}});
+ owner={stateNode:instance,type:Button,memoizedProps:original};const output=api.invoke(instance,instance.render),report=api.report();
+ return {stateReads,percent:instance.state.percentNumber,sameOutput:output.props.children===25,host:api.verifyHost(0,owner),
+  before,after:Function.prototype.toString.call(Button),renderBefore,renderAfter:Function.prototype.toString.call(Button.prototype.render),report};
+ `);
+ assert.equal(result.stateReads,0);assert.equal(result.percent,25);assert.equal(result.sameOutput,true);assert.equal(result.host,true);
+ assert.equal(result.before,result.after);assert.equal(result.renderBefore,result.renderAfter);
+ assert.equal(result.report.effectsVerified,false);assert.equal(result.report.calls[0].effectsVerified,false);
+ assert.equal(result.report.calls[0].current,true);
+});
+
+test('accessor-bearing constructor input refuses before constructor or getter execution',()=>{
+ const result=run(`
+ let reads=0,constructed=0;const original=input({get percent(){reads++;throw Error('getter ran');}});
+ class Button extends Component{constructor(props){super(props);constructed++;this.state={percentNumber:this.props.percent};}render(){return element({},{});}}
+ register(Button);let reason;
+ try{const effective=resolve(Button,original);api.constructed(Button,effective,new Button(effective));}catch(error){reason=error.message;}
+ return {reads,constructed,reason,report:api.report()};
+ `);
+ assert.equal(result.reads,0);assert.equal(result.constructed,0);assert.match(result.reason,/authored-class-props-not-data/);
+ assert.equal(result.report.constructions.length,0);assert.equal(result.report.calls.length,0);
+});
+
+
+test('empty style authority follows the exact original class call and factory identity',()=>{
+ const result=run(`
+ class Button extends Component{render(){return element({children:this.props.percent},{});}}register(Button);
+ const styles=[literal({}),literal({height:'8px'}),{}],calls=[];
+ for(const style of styles){const original=input({style,percent:80}),effective=resolve(Button,original,{style,percent:80});
+  const instance=api.constructed(Button,effective,new Button(effective));api.invoke(instance,instance.render);}
+ return api.report();`);
+ assert.deepEqual(result.calls.map((c:any)=>Boolean(c.emptyFactoryStyle)),[true,false,false]);
+ assert.deepEqual(result.calls[0].emptyFactoryStyle.value,result.calls[0].factoryFields.find(([k]:any)=>k==='style')[1]);
+ assert.notDeepEqual(result.calls[0].factoryFields.find(([k]:any)=>k==='style')[1],result.calls[1].factoryFields.find(([k]:any)=>k==='style')[1]);
+ assert(result.calls.every((c:any)=>c.current&&c.effectsVerified===false));
+});
+
+test('empty literal witness rejects accessors, prototypes, symbols, mutation and opaque proxy values',()=>{
+ const result=run(`
+ let reads=0,traps=0;const accessor=literal({get height(){reads++;return '8px';}});
+ const inherited=literal({__proto__:{height:'8px'}}),nullProto=literal({__proto__:null}),symbol=literal({[Symbol('x')]:1}),array=literal([]);
+ const mutable=literal({}),wasNonempty=literal({height:'8px'});delete wasNonempty.height;mutable.height='8px';
+ const proxy=new Proxy({}, {getPrototypeOf(){traps++;throw Error('prototype');},ownKeys(){traps++;throw Error('keys');},getOwnPropertyDescriptor(){traps++;throw Error('descriptor');}});
+ return {checks:[accessor,inherited,nullProto,symbol,array,mutable,wasNonempty,proxy].map(value=>empty.current(value)),reads,traps};`);
+ assert.deepEqual(result,{checks:[false,false,false,false,false,false,false,false],reads:0,traps:0});
+});
+
+test('empty style replaced by resolver defaults or changed after rendering has no empty witness',()=>{
+ const result=run(`
+ class Button extends Component{render(){return element({},{});}}register(Button);
+ const initial=literal({}),replacement=literal({}),first=input({style:initial});
+ const effective=resolve(Button,first,{style:replacement}),instance=api.constructed(Button,effective,new Button(effective));api.invoke(instance,instance.render);
+ const later=literal({}),second=input({style:later}),same=resolve(Button,second);
+ const next=api.constructed(Button,same,new Button(same));api.invoke(next,next.render);later.height='8px';
+ const changedPrototype=literal({}),third=input({style:changedPrototype}),thirdEffective=resolve(Button,third);
+ const last=api.constructed(Button,thirdEffective,new Button(thirdEffective));api.invoke(last,last.render);Object.setPrototypeOf(changedPrototype,{height:'8px'});
+ return api.report();`);
+ assert.deepEqual(result.calls.map((c:any)=>Boolean(c.emptyFactoryStyle)),[false,false,false]);
+});
+
+
+test('opaque caller style proxies get no reflection or empty-style witness at class boundaries',()=>{
+ const result=run(`
+ let traps=0;const style=new Proxy({}, {getPrototypeOf(){traps++;throw Error('prototype');},ownKeys(){traps++;throw Error('keys');},getOwnPropertyDescriptor(){traps++;throw Error('descriptor');}});
+ class Button extends Component{render(){return element({},{});}}register(Button);
+ const original=input({style}),effective=resolve(Button,original),instance=api.constructed(Button,effective,new Button(effective));api.invoke(instance,instance.render);
+ return {traps,report:api.report()};`);
+ assert.equal(result.traps,0);assert.equal(result.report.calls[0].emptyFactoryStyle,undefined);
 });

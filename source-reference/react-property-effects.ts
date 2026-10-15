@@ -62,6 +62,8 @@ export interface ReactPropertyObservationArgs {
  instanceId:string;selector:string;stageSelector?:string;dir:string;assertCurrent:()=>void;
  failures:{runtimeErrors:string[];failedResources:string[]};
  observationMode?:'live-update'|'initial-mount';
+ /** Authored native geometry needs separately sealed descendant declarations. */
+ authoredLayout?:true;
 }
 export type ReactPropertyObservation=Omit<ReactPropertyEffects['rows'][number],'property'|'requested'>;
 
@@ -86,6 +88,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   // Preserve the full-page image's actual origin and box, including fractional
   // coordinates. Old archives remain unmeasured; no origin is inferred for them.
   const bounds=await sourceBounds(page,{path:[selector]}),boundsSha256=evidenceSha(JSON.stringify(bounds));
+  const authoredSizes=args.authoredLayout?{descendantSizes:await readReactDescendantSizes(page,selector,own,args.stageSelector??'#root',true)}:{};
   const contentEvidence=args.observationMode==='initial-mount'?{
    svg:await observeSvgViewports(page,[selector],current),
    ...(hasUnpaintedPseudoBoxes(current)?{pseudoBoxes:await observePseudoBoxes(page,[selector],current)}:{}),
@@ -108,7 +111,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   if(args.failures.runtimeErrors.length||args.failures.failedResources.length)throw Error('react-property-effects-source-failed');
   if(own.problems.length)throw Error('react-property-effects-ownership-unqualified');
   args.assertCurrent();
-  return {propertyCaptureVersion:2 as const,tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,fonts,fontsSha256,bounds,boundsSha256,...grids,...contentEvidence,...(initialSelection?{initialSelection}:{})};
+  return {propertyCaptureVersion:2 as const,tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,fonts,fontsSha256,bounds,boundsSha256,...grids,...contentEvidence,...authoredSizes,...(initialSelection?{initialSelection}:{})};
  };
  let usable=true;
  let originalFontsSha256:string|undefined;

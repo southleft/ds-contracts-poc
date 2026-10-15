@@ -98,6 +98,73 @@ function sparseCharacters(){
   return v;
  });return{child,parent};
 }
+
+function booleanCharacterFixture(){
+ const {child,parent,target}=fixture(),original=parent.variants[0];
+ parent.propertyDefinitions={Grouped:{type:'VARIANT',defaultValue:'false',variantOptions:['false','true']},Count:{type:'VARIANT',defaultValue:'One',variantOptions:['One','Two']}};
+ parent.variants=['false','true'].flatMap((grouped,i)=>['One','Two'].map((count,j)=>{
+  const v=structuredClone(original),id=`boolean-usage-${i}-${j}`;v.name=`Grouped=${grouped}, Count=${count}`;
+  v.nodeId=`boolean-parent-${i}-${j}`;v.variantProperties={Grouped:grouped,Count:count};
+  const n=v.children[0];n.nodeId=id;delete n.hostOverrides;
+  if(grouped==='true'){n.textOverrides={Duplicate:'Changed'};n.textOverrideTargets={Duplicate:{...target,instanceId:id,nodeId:`I${id};target-0`}};}
+  return v;
+ }));return{child,parent};
+}
+function proposedBooleanCharacterInput(f:ReturnType<typeof booleanCharacterFixture>){
+ const result=proposeBatchFromDump({SourceParent:f.parent,SourceChild:f.child},opts);
+ const child=result.proposals.find(p=>p.setName==='SourceChild')!,parent=result.proposals.find(p=>p.setName==='SourceParent');
+ const prop=child?.characterBindings?.[0]?.prop;
+ const contract=parent&&ContractSchema.parse(parent.contract);
+ return {result,child,parent,prop,contract,ref:contract&&walkAnatomy(contract).find(w=>w.part.component)?.part.component};
+}
+test('Boolean character lookup preserves explicit values, omitted inputs, defaults and typed React emission',()=>{
+ const f=booleanCharacterFixture(),before=JSON.stringify(f),r=proposedBooleanCharacterInput(f);
+ assert.deepEqual(r.result.skipped,[]);assert(r.prop&&r.contract&&r.ref);
+ const axis=r.contract.props.find(p=>p.bindings.figma.property==='Grouped')!;assert.equal(axis.type,'boolean');
+ assert.deepEqual(r.ref.props![r.prop],{prop:axis.name,map:{true:'Changed'}});
+ const cc=ContractSchema.parse(r.child.contract);assert.equal(cc.props.find(p=>p.name===r.prop)?.default,'Underline');
+ const refs=new Set([...JSON.stringify([cc,r.contract]).matchAll(/\{([^{}]+)\}/g)].map(m=>m[1]));
+ const code=emitReact(r.contract,{contracts:new Map([[cc.id,cc],[r.contract.id,r.contract]]),icons:new Map(),tokens:refs}).tsx;
+ assert.match(code,new RegExp(`${axis.bindings.code.prop} === true \\? ['\"]Changed['\"] : undefined`));
+ assert.equal(JSON.stringify(f),before);
+});
+test('Boolean character lookup keeps an explicit empty string distinct from omission in either Boolean direction',()=>{
+ for(const edited of ['false','true']){
+  const f=booleanCharacterFixture();for(const v of f.parent.variants){const n=v.children[0];delete n.textOverrides;delete n.textOverrideTargets;
+   if(v.variantProperties.Grouped===edited){n.textOverrides={Duplicate:''};n.textOverrideTargets={Duplicate:{nodeId:`I${n.nodeId};target-0`,instanceId:n.nodeId,componentId:'main-0',instancePath:[],childPath:[1]}};}}
+  const r=proposedBooleanCharacterInput(f);assert.deepEqual(r.result.skipped,[]);assert(r.prop&&r.ref&&r.contract);
+  const axis=r.contract.props.find(p=>p.bindings.figma.property==='Grouped')!;
+  assert.deepEqual(r.ref.props![r.prop],{prop:axis.name,map:{[edited]:''}});
+ }
+});
+test('Boolean character lookup refuses a missing or stale explicit target instead of treating it as omission',()=>{
+ for(const defect of ['missing','wrong-owner','wrong-path']){
+  const f=booleanCharacterFixture(),n=f.parent.variants[3].children[0];
+  if(defect==='missing')delete n.textOverrideTargets;
+  else if(defect==='wrong-owner')n.textOverrideTargets.Duplicate.instanceId='foreign';
+  else n.textOverrideTargets.Duplicate.childPath=[0];
+  const r=proposedBooleanCharacterInput(f);
+  assert(!r.prop||!r.ref?.props?.[r.prop],defect);
+  assert(r.parent?.notes.some(n=>n.includes('character-override-not-carried')&&n.includes('identity'))||r.result.skipped.length>0,defect);
+ }
+});
+test('Boolean character lookup refuses text depending on a joint condition rather than pinning a group label',()=>{
+ const f=booleanCharacterFixture();f.parent.variants[3].children[0].textOverrides.Duplicate='Different';
+ const r=proposedBooleanCharacterInput(f);assert(r.prop&&r.parent);
+ assert.equal(r.ref?.props?.[r.prop],undefined);
+ assert(r.parent.notes.some(n=>n.includes('character-override-not-carried')&&n.includes('no complete text mapping')));
+});
+test('Boolean character lookup retains duplicate, unknown and ambiguous source-domain refusals',()=>{
+ for(const defect of ['duplicate','unknown','ambiguous']){
+  const f=booleanCharacterFixture();
+  if(defect==='duplicate'){const duplicate=structuredClone(f.parent.variants[3]);duplicate.nodeId='duplicate-parent';duplicate.children[0].nodeId='duplicate-usage';f.parent.variants.push(duplicate);}
+  else if(defect==='unknown'){f.parent.variants[3].name='Grouped=unknown, Count=Two';f.parent.variants[3].variantProperties.Grouped='unknown';}
+  else f.parent.variants=[f.parent.variants[0],f.parent.variants[3]];
+  const r=proposedBooleanCharacterInput(f);
+  assert(!r.parent,defect);
+  assert(r.result.skipped.some(s=>String(s).includes('SourceParent')||JSON.stringify(s).includes('SourceParent')),defect);
+ }
+});
 test('explicit character overrides map sparsely without inventing a value for omissions',async()=>{
  const {child,parent}=sparseCharacters();
  const result=proposeBatchFromDump({SourceParent:parent,SourceChild:child},opts);assert.deepEqual(result.skipped,[]);

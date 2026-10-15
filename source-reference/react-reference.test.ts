@@ -69,6 +69,42 @@ function fixture() {
   return { root, put };
 }
 
+test('authored source-frame route uses bodyless current-v1 authority and never delegates to root framing or native writes',async t=>{
+ const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'authored-source-route-'));
+ t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+ const id='10000000-0000-4000-8000-000000000008';let referenceId='',version=2,authored=true,sourceReads=0,identityReads=0,rootReads=0;
+ const handle=createReactReferenceService(repo,root,()=>({jobs:{
+  reactIdentity:(operationId:string)=>{identityReads++;assert.equal(operationId,id);return {referenceId,authored};},
+  reactFamilyRequest:()=>null,
+  reactEffectiveAuthoredRequest:()=>{sourceReads++;return {version,kind:'react-authored-draft',referenceId,caseId:'button-default',helper:0,
+   ownership:{id:'20000000-0000-4000-8000-000000000001',sha256:'b'.repeat(64)},inventorySha256:'c'.repeat(64),draftRevision:'sha256:'+'d'.repeat(64)};},
+  reactSourceRequest:()=>{rootReads++;throw Error('root-reader-sentinel');},
+ },transport:{start:()=>assert.fail('source capture cannot start a native write'),retryObservation:()=>assert.fail('no native retry')}}as any));
+ t.after(()=>handle.close());
+ const call=async(route:string,method='POST',body?:string)=>{
+  const req=Readable.from(body===undefined?[]:[body]);Object.assign(req,{method,url:'/'+route,headers:{host:'localhost:5181',...(body===undefined?{}:{'content-length':String(Buffer.byteLength(body))})}});
+  let status=0,text='';await handle(req as any,{set statusCode(n:number){status=n;},setHeader(){},end(value:string){text=value;}}as any,route);
+  return {status,value:JSON.parse(text)};
+ };
+ referenceId=(await call('react')).value.id;
+ const route=`react/${referenceId}/native-operation/${id}/source-frame`;
+ for(const method of ['GET','POST']){
+  const response=await call(route,method);assert.equal(response.status,409);
+  assert.equal(response.value.reason,'react-authored-source-review-version-unqualified');
+ }
+ assert.equal(sourceReads,2);assert.equal(rootReads,0);
+ for(const [method,body]of [['DELETE',undefined],['POST','{}'],['GET','{}']]as const){
+  const readsBefore:number=sourceReads;
+  const response=await call(route,method,body);assert.equal(response.status,409);
+  assert.equal(response.value.reason,'react-authored-source-review-bodyless-request-required');assert.equal(sourceReads,readsBefore);
+ }
+ const before=identityReads;assert.equal((await call(route.replace(referenceId,'f'.repeat(64)))).status,409);assert.equal(identityReads,before);
+ version=1;const v1=await call(route,'GET');assert.equal(v1.status,409);
+ assert.equal(v1.value.reason,'react-authored-source-review-unavailable','missing archive cannot be promoted or passed to a browser');
+ assert.equal(rootReads,0);
+ authored=false;const legacy=await call(route);assert.equal(legacy.status,409);assert.equal(rootReads,1,'root operations keep their existing framing loader');
+});
+
 test('explicit minimal start and retry acknowledge only successful actions; legacy callers retain the full listing', async t => {
   const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-minimal-delivery-'));
   t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});

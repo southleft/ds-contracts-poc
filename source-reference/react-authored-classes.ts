@@ -16,13 +16,64 @@ export interface ReactAuthoredClassPlan {
   acceptedContract:null;
 }
 
-function transparentConstructor(owner:ts.ClassDeclaration):ts.ConstructorDeclaration|undefined|false {
+const constructorReservedFields = new Set([
+  '__proto__', 'prototype', 'constructor', 'props', 'render', 'refs', 'updater',
+  'setState', 'forceUpdate', 'isReactComponent', 'isPureReactComponent',
+]);
+const constructorField = (name:string) => name.length>0 && !constructorReservedFields.has(name) && !name.startsWith('__DSC_');
+
+/** This shape proves non-substituting construction, not constructor purity.
+ * The pinned native new expression and runtime guards still own the instance,
+ * input props and render identity. No initializer is interpreted or rewritten. */
+function fieldInitializingConstructor(ctor:ts.ConstructorDeclaration,name:string):boolean {
+  if(!ctor.body||ctor.body.statements.length>65)return false;
+  let count=0;
+  const value=(node:ts.Expression,depth=0):boolean=>{
+    if(++count>256||depth>4)return false;
+    if(ts.isStringLiteral(node)||ts.isNoSubstitutionTemplateLiteral(node))return node.text.length<=65536;
+    if(ts.isNumericLiteral(node))return Number.isFinite(Number(node.text));
+    if([ts.SyntaxKind.TrueKeyword,ts.SyntaxKind.FalseKeyword,ts.SyntaxKind.NullKeyword].includes(node.kind))return true;
+    if(ts.isPrefixUnaryExpression(node)&&[ts.SyntaxKind.PlusToken,ts.SyntaxKind.MinusToken].includes(node.operator)&&ts.isNumericLiteral(node.operand))
+      return Number.isFinite(Number(node.operand.text));
+    if(ts.isPropertyAccessExpression(node)&&!node.questionDotToken&&constructorField(node.name.text)&&
+       ts.isPropertyAccessExpression(node.expression)&&!node.expression.questionDotToken&&
+       node.expression.expression.kind===ts.SyntaxKind.ThisKeyword&&node.expression.name.text==='props')return true;
+    if(!ts.isObjectLiteralExpression(node)||node.properties.length>64)return false;
+    const keys=new Set<string>();
+    return node.properties.every(property=>{
+      if(!ts.isPropertyAssignment(property)||!property.name||
+         !ts.isIdentifier(property.name)&&!ts.isStringLiteral(property.name))return false;
+      const key=property.name.text;
+      if(!constructorField(key)||keys.has(key))return false;
+      keys.add(key);return value(property.initializer,depth+1);
+    });
+  };
+  const statements=ctor.body.statements;
+  const first=statements[0];
+  if(!first||!ts.isExpressionStatement(first)||!ts.isCallExpression(first.expression)||
+     first.expression.expression.kind!==ts.SyntaxKind.SuperKeyword||first.expression.arguments.length!==1||
+     !ts.isIdentifier(first.expression.arguments[0])||first.expression.arguments[0].text!==name)return false;
+  return statements.slice(1).every(statement=>{
+    if(!ts.isExpressionStatement(statement)||!ts.isBinaryExpression(statement.expression)||
+       statement.expression.operatorToken.kind!==ts.SyntaxKind.EqualsToken)return false;
+    const {left,right}=statement.expression;
+    return ts.isPropertyAccessExpression(left)&&!left.questionDotToken&&left.expression.kind===ts.SyntaxKind.ThisKeyword&&
+      constructorField(left.name.text)&&value(right);
+  });
+}
+
+function sourceConstructor(owner:ts.ClassDeclaration):ts.ConstructorDeclaration|undefined|false {
   const constructors=owner.members.filter(ts.isConstructorDeclaration);if(!constructors.length)return undefined;
   if(constructors.length!==1)return false;
   const ctor=constructors[0];if(!ctor.body||ctor.modifiers?.length)return false;
   const statements=ctor.body.statements;
   const superProps=(statement:ts.Statement,name:string)=>ts.isExpressionStatement(statement)&&ts.isCallExpression(statement.expression)&&statement.expression.expression.kind===ts.SyntaxKind.SuperKeyword&&statement.expression.arguments.length===1&&ts.isIdentifier(statement.expression.arguments[0])&&statement.expression.arguments[0].text===name;
-  if(ctor.parameters.length===1){const p=ctor.parameters[0];return ts.isIdentifier(p.name)&&!['globalThis','__DSC_CLASS_CONSTRUCTION',owner.name?.text].includes(p.name.text)&&!p.initializer&&!p.dotDotDotToken&&!p.modifiers?.length&&statements.length===1&&superProps(statements[0],p.name.text)?ctor:false;}
+  if(ctor.parameters.length===1){
+    const p=ctor.parameters[0];
+    if(!ts.isIdentifier(p.name)||['arguments','eval','globalThis','__DSC_CLASS_CONSTRUCTION',owner.name?.text].includes(p.name.text)||
+       p.name.text.startsWith('__DSC_')||p.initializer||p.dotDotDotToken||p.modifiers?.length||p.type)return false;
+    return (statements.length===1&&superProps(statements[0],p.name.text)||fieldInitializingConstructor(ctor,p.name.text))?ctor:false;
+  }
   if(ctor.parameters.length||statements.length!==2||!ts.isVariableStatement(statements[0])||statements[0].declarationList.declarations.length!==1)return false;
   const decl=statements[0].declarationList.declarations[0],value=decl.initializer;
   if(!ts.isIdentifier(decl.name)||['arguments','globalThis','__DSC_CLASS_CONSTRUCTION',owner.name?.text].includes(decl.name.text)||!value||!ts.isConditionalExpression(value)||!superProps(statements[1],decl.name.text))return false;
@@ -55,7 +106,7 @@ export function readReactAuthoredClasses(reference:ReactHelperReference,targets:
     let reactBase=false;
     if(base&&ts.isPropertyAccessExpression(base)&&['Component','PureComponent'].includes(base.name.text))reactBase=sf.statements.some(st=>ts.isImportDeclaration(st)&&ts.isStringLiteral(st.moduleSpecifier)&&st.moduleSpecifier.text==='react'&&(st.importClause?.name?.text===base.expression.getText(sf)||st.importClause?.namedBindings&&ts.isNamespaceImport(st.importClause.namedBindings)&&st.importClause.namedBindings.name.text===base.expression.getText(sf)));
     if(base&&ts.isIdentifier(base))reactBase=sf.statements.some(st=>ts.isImportDeclaration(st)&&ts.isStringLiteral(st.moduleSpecifier)&&st.moduleSpecifier.text==='react'&&st.importClause?.namedBindings&&ts.isNamedImports(st.importClause.namedBindings)&&st.importClause.namedBindings.elements.some(e=>e.name.text===base.text&&['Component','PureComponent'].includes((e.propertyName??e.name).text)));
-    const constructor=transparentConstructor(owner);
+    const constructor=sourceConstructor(owner);
     if(!reactBase||constructor===false||render.parameters.length||render.asteriskToken||render.modifiers?.length||owner.modifiers?.some(m=>m.kind===ts.SyntaxKind.Decorator)||!owner.members.every(m=>m===constructor||ts.isMethodDeclaration(m)&&ts.isIdentifier(m.name)&&!m.modifiers?.length))throw Error('authored-class-construction-or-render-unmodeled');
     const key=JSON.stringify([target.module,target.sourceSha256,target.span]);
     if(result.some(p=>JSON.stringify([p.target.module,p.target.sourceSha256,p.target.span])===key))continue;

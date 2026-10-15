@@ -1,4 +1,5 @@
 import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
+import {checkNativeObservedLayout, nativeObservedLayoutWrite, type NativeObservedLayoutContext} from './native-observed-layout.js';
 import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
 import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { verifyNativeTemplateGraphReceipt, emitNativeTemplateGraphReadbackScript, type NativeTemplateGraphIdentity, type NativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
@@ -26,6 +27,7 @@ import type {
 } from "./native-source-comparisons.js";
 
 export interface NativeSourceWriteContext {
+  observedLayout?: NativeObservedLayoutContext;
   /** Allocated once by the application journal, after file policy checks. */
   operation: { id: string; fileKey: string };
   /** Identity from the durable allocation acknowledgement; receipt from a
@@ -50,6 +52,7 @@ export function prepareNativeSourceWrite(
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
   contractComparison?: PreparedNativeContractComparison,
   templateGraphInput?: NativeRootTextTemplateGraphInput,
+  allowObservedLayout = false,
 ) {
   const fail = (code: string): never => {
     throw Error(`native-source-write-${code}`);
@@ -72,6 +75,11 @@ export function prepareNativeSourceWrite(
   if (!!graphSidecar !== !!templateGraphInput || graphSidecar && (!template || comparisons || contractComparison || context.comparisonRecovery))
     fail('template-graph-context-unqualified');
   const graph = templateGraphInput ? planNativeRootTextTemplateGraph(templateGraphInput) : undefined;
+  if (context.observedLayout) {
+    checkNativeObservedLayout(context.observedLayout, projection.contractId);
+    if (!allowObservedLayout || library || template || comparisons || contractComparison || context.comparisonRecovery || graphSidecar)
+      fail('observed-layout-context-unqualified');
+  }
   if (graph && (templateGraphInput!.renderScope !== 'component' || canonicalJson(templateGraphInput!.tokens) !== canonicalJson(input) ||
       canonicalJson(graph.template) !== canonicalJson(template) || canonicalJson(graphSidecar!.identity.source) !== canonicalJson(tokens.identity) ||
       canonicalJson(graphSidecar!.receipt.source) !== canonicalJson(tokens.receipt))) fail('template-graph-context-changed');
@@ -123,6 +131,7 @@ export function prepareNativeSourceWrite(
     purpose: "source-candidate-inspection",
     acceptedContract: null,
     nativeQualification: "unqualified",
+    ...(context.observedLayout ? {observedLayout: structuredClone(context.observedLayout)} : {}),
     operation,
     sourceContractId: projection.contractId,
     sourceContractRevision: projection.contractRevision,
@@ -391,7 +400,7 @@ ${render}
   if (placements.length !== NATIVE_RESULT.graphTargets.length) nativeRefuse('library-placement-invalid');
   for (const placement of placements) { placement.target.x = 0; placement.target.y = placement.y; }
   ` : ''}
-  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
+${prepared.descriptor.observedLayout ? nativeObservedLayoutWrite(prepared.descriptor.observedLayout) : ''}  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
   ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent();' : ''}
   // Slot content can become instance-derived clones after this run. Preserve
   // both the allocation stamp and its exact role under a stable slot root.

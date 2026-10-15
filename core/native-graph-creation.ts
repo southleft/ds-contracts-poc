@@ -3,16 +3,18 @@
 import { nativeGraphVariants } from './native-prepared-library.js';
 import { canonicalJson } from './contract-provenance.js';
 import type { ComponentData } from './emit-figma-script.js';
+import {validNativeObservedLayoutCreation, type NativeObservedLayoutContext} from './native-observed-layout.js';
 
 const object = (v: unknown): v is Record<string, any> => !!v && typeof v === 'object' && !Array.isArray(v);
 const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 
-export function validNativeGraphCreation(components: ComponentData[] | undefined, creation: unknown, version: 1 | 2 = 1): boolean {
+export function validNativeGraphCreation(components: ComponentData[] | undefined, creation: unknown, version: 1 | 2 = 1, observedLayout?: NativeObservedLayoutContext): boolean {
   const library = version === 2;
   if (!Array.isArray(components) || components.length < 1 || components.length > 30 ||
       !object(creation) || creation.graphVerification !== version || !Array.isArray(creation.nodes) ||
       !Array.isArray(creation.graphTargets) || creation.graphTargets.length !== components.length ||
-      !object(creation.target) || !Array.isArray(creation.variants) || !object(creation.propertyDefinitions)) return false;
+      !object(creation.target) || !Array.isArray(creation.variants) || !object(creation.propertyDefinitions) ||
+      !validNativeObservedLayoutCreation(observedLayout,creation) || observedLayout && version !== 1) return false;
   const nodes = new Map<string, Record<string, any>>();
   for (const node of creation.nodes) {
     if (!object(node) || !text(node.id) || !text(node.type) || nodes.has(node.id)) return false;

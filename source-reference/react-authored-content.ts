@@ -17,6 +17,7 @@ export interface ReactAuthoredContent {readonly version:1;readonly revision:stri
 export interface ReactAuthoredContentFact {
   qualification:'observed-authored-render-tree-only';effectsVerified:false;acceptedContract:null;
   instanceId:string;render:number;
+  emptyCallerStyle?:true;
   hosts:ReactRenderGraphVerification['rows'];
   boundaries:Array<{path:string;instances:Array<ReactOwnership['components'][number]>}>;
   limitations:string[];
@@ -63,7 +64,7 @@ export function readReactAuthoredContent(options:{referenceId:string;sourceRoot:
   const graph=verifyReactRenderGraph(recorded,runtime,helper.contextConsumers);
   require(same(graph,helper.renderGraph),'graph-mismatch');
   const nodes=flatten(tree);require(nodes.length===recorded.nodes.length&&nodes.every((n,i)=>n.path===recorded.nodes[i].path&&n.node.tag===recorded.nodes[i].tag),'host-coverage-mismatch');
-  let root:ReactOwnership['components'][number],origins:number[];
+  let root:ReactOwnership['components'][number],origins:number[],emptyCallerStyle=false;
   if(plan.authoredClasses?.length){
     require(same(model,plan),'class-source-plan-artifact-mismatch');
     require(plan.kind==='jsx-component'&&plan.boundaryOnly&&plan.models.length===0&&!plan.component&&!plan.initializers?.length&&!plan.targets.length,'class-plan-mixed');
@@ -86,6 +87,13 @@ export function readReactAuthoredContent(options:{referenceId:string;sourceRoot:
       const calls=eligible.filter(call=>sourceSame(call.target,root.source)&&row.steps.some(step=>step.render===call.graphRender));
       require(calls.length===1&&same(project(calls[0].factoryFields),root.props),'class-root-origin-unproved:'+row.path);return calls[0].graphRender;
     });
+    const rootCalls=eligible.filter(call=>sourceSame(call.target,root.source)&&call.graphRender===origins[0]);
+    if(rootCalls.length===1){
+      const call=rootCalls[0],empty=call.emptyFactoryStyle;
+      emptyCallerStyle=empty?.current===true&&empty.value.kind==='object'&&
+        same(call.factoryFields.find(([name])=>name==='style')?.[1],empty.value)&&
+        same(call.fields.find(([name])=>name==='style')?.[1],empty.value);
+    }
     for(const boundary of ownership.components){
       require(replanned.some(p=>sourceSame(p.target,boundary.source)),'class-boundary-source-unproved');
       for(const path of boundary.roots){const row=graph.rows.find(row=>row.path===path);require(row,'class-boundary-host-missing');
@@ -119,7 +127,7 @@ export function readReactAuthoredContent(options:{referenceId:string;sourceRoot:
   for(const group of groups.values())for(const a of group)for(const b of group)
     require(descendant(a.id,b.id)||descendant(b.id,a.id),'shared-root-ambiguous');
   const fact:ReactAuthoredContentFact={qualification:'observed-authored-render-tree-only',effectsVerified:false,acceptedContract:null,
-    instanceId:root.id,render:origins[0],hosts:graph.rows,boundaries:[...groups].map(([path,instances])=>({path,instances:structuredClone(instances)})),
+    instanceId:root.id,render:origins[0],...(emptyCallerStyle?{emptyCallerStyle:true as const}:{}),hosts:graph.rows,boundaries:[...groups].map(([path,instances])=>({path,instances:structuredClone(instances)})),
     limitations:['observed-input-and-render-context-only',...(program.status==='refused'?['static-source-program-remains-partially-unresolved']:[]),'inner-body-and-provider-effects-not-qualified','behavior-and-updates-not-projected','unobserved-property-planes-not-qualified','native-structure-and-fidelity-not-verified']};
   const proof:Proof={context:context(program,ownership,tree),fact,inputs:{...helper.inputs},artifacts};
   const capability=Object.freeze({version:1 as const,revision:revisionOf(proof)});authority.set(capability,{proof,read});return capability;

@@ -52,7 +52,7 @@ export function qualifyAuthoredTextAppearanceTable(
       source.contractId || source.remoteSnapshot || source.detachedSnapshot || source.captureAlias ||
       !qualifiedDomain || !declaredDomain || !dense(declaredDomain) ||
       !declaredDomain.length || declaredDomain.length > 4096 || !dense(axes) ||
-      !axes.length || axes.length > 8 ||
+      !axes.length ||
       new Set(axes.map(a => a.property)).size !== axes.length ||
       new Set(axes.map(a => a.prop)).size !== axes.length ||
       !dense(source.variants) || !source.variants.length || source.variants.length > 4096 ||
@@ -201,6 +201,21 @@ export function qualifyAuthoredTextAppearanceTable(
     if (physicallyPresent) presentCount++;
   }
   if (presentCount !== rows.length) return;
+  // The complete source domain and its physical membership were authenticated
+  // above with every original axis. Only schema output is projected: a source
+  // axis must declare exactly one value and keep it throughout that domain.
+  // Keep historical tables unchanged when they already fit the schema.
+  let columns = axes.map((_, i) => i);
+  if (columns.length > 8) columns = columns.filter(i => axes[i].values.length !== 1 ||
+    declaredDomain.some(row => row[i] !== axes[i].map[axes[i].values[0]]));
+  if (columns.length > 8) return;
+  const projected = new Set<string>();
+  for (const row of rows) {
+    row.values = columns.map(i => row.values[i]);
+    const key = canonicalJson(row.values);
+    if (projected.has(key)) return;
+    projected.add(key);
+  }
   rows.sort((a, b) => compare(canonicalJson(a.values), canonicalJson(b.values)));
-  return {props: axes.map(a => a.prop), rows};
+  return {props: columns.map(i => axes[i].prop), rows};
 }

@@ -2,6 +2,7 @@ import {restoreReactOwnership} from './react-ownership-restore.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import {beginReactOwnershipSelection,sealReactOwnershipSelection,restoreSelectedReactOwnership} from './react-ownership-selection.js';
 import {selectReactAuthoredNativeRequest,readReactAuthoredNativeEvidence} from './react-authored-native-evidence.js';
+import {loadReactAuthoredSourceReviewInput} from './react-authored-source-review.js';
 import {isReactAuthoredNativeRequest,isReactAuthoredOperationRequest,reactAuthoredOwnershipAnchor,
   reactAuthoredNativeReservation,type ReactAuthoredInitialNativeRequest} from './react-authored-native-request.js';
 import {prepareReactAuthoredNativePlan,buildReactAuthoredNativeWrite} from './react-authored-native-plan.js';
@@ -348,6 +349,22 @@ test('authored native selection reopens the sealed archive and refuses forged dr
  f.save('report.json',altered);f.seal();const forged=selectReactAuthoredNativeRequest(f.repo,altered,'panel-default');
  assert.throws(()=>readReactAuthoredNativeEvidence(f.repo,f.reference,forged),/unavailable/,'resealing a claimed draft cannot replace the rederived capability');
  assert.equal(request.draftRevision,revision);
+});
+
+test('authored source review loader authenticates the same original capture, source and sealed helper',t=>{
+ const f=nativeArchive(t),png=f.files.get('observed.png')!;
+ const name='panel-default/source-tree.json',captured=JSON.parse(readFileSync(path.join(f.dir,name),'utf8'));
+ captured.sourcePngSha256=evidenceSha(png);f.save(name,captured);writeFileSync(path.join(f.dir,'panel-default/source.png'),png);f.seal();
+ const request=selectReactAuthoredNativeRequest(f.repo,f.report,'panel-default');
+ const read=()=>loadReactAuthoredSourceReviewInput(f.repo,f.reference,request);
+ const input=read();assert.equal(input.captured.treeSha256,f.report.rows[0].treeSha256);assert.deepEqual(input.source,png);
+ assert.equal(readReactAuthoredNativeEvidence(f.repo,f.reference,request).draft.fact?.effectsVerified,false);
+ assert.equal(readReactAuthoredNativeEvidence(f.repo,f.reference,request).draft.acceptedContract,null);
+ for(const file of [f.file,path.join(f.dir,name),path.join(f.dir,'panel-default/source.png'),path.join(f.dir,'panel-default/jsx-helpers/0/report.json'),path.join(f.dir,'integrity.json')]){
+  const before=readFileSync(file);writeFileSync(file,Buffer.concat([before,Buffer.from('\nchanged')]));assert.throws(read);writeFileSync(file,before);
+ }
+ assert.throws(()=>loadReactAuthoredSourceReviewInput(f.repo,{...f.reference,id:'f'.repeat(64)},request),/reference-unavailable/);
+ assert.throws(()=>loadReactAuthoredSourceReviewInput(f.repo,f.reference,{...request,version:2}as any),/reference-unavailable/);
 });
 
 test('authored inspection authenticates its public target without authorizing legacy native state writes',t=>{

@@ -1,5 +1,5 @@
 import {ContractSchema} from '../scripts/contract-schema.js';
-import {TextAppearanceSchema,TextAppearanceOverrideSchema} from '../packages/schema/src/text-appearance.js';
+import {TextAppearanceSchema,TextAppearanceOverrideSchema,TextAppearanceTableSchema} from '../packages/schema/src/text-appearance.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {qualifySourceTextAppearance,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,selectSourceTextAppearance,inspectTextAppearance,inspectAuthoredTextAppearance} from './source-text-appearance-control.js';
@@ -17,6 +17,102 @@ function fixture(){
  const demand=()=>qualifySourceTextAppearance(set,instance,[0,0],'file');
  return {set,instance,parent,text,demand};
 }
+
+function wideAuthoredFixture(varying: number, total = 9) {
+ const appearance = fixture().demand().appearance;
+ const axes: Array<{property:string;prop:string;values:string[];map:Record<string,string|null>}> = Array.from({length:total},(_,i)=>({property:'Axis'+i,prop:'axis'+i,
+  values:i<varying?['First','Second']:['Fixed'],map:Object.fromEntries(i<varying?[['First','first'],['Second','second']]:[['Fixed','fixed']])}));
+ const domain: Array<Array<string|null>> = Array.from({length:2**varying},(_,n)=>axes.map((_,i)=>i<varying?(n&(1<<i)?'second':'first'):'fixed'));
+ const source:DumpSet={setName:'Wide owned source',type:'COMPONENT_SET',nodeId:'wide:0',key:'wide-source-key',
+  variants:domain.map((values,n)=>({name:axes.map((a,i)=>a.property+'='+a.values[i<varying&&values[i]==='second'?1:0]).join(','),
+   type:'COMPONENT',nodeId:'wide-main:'+n,variantProperties:Object.fromEntries(axes.map((a,i)=>[a.property,a.values[i<varying&&values[i]==='second'?1:0]])),
+   children:[{name:'Label',type:'TEXT',nodeId:'wide-text:'+n,text:{characters:appearance.characters,fontSize:14,fontStyle:'Regular',sourceAppearance:structuredClone(appearance)}}]}))};
+ const occurrences=()=>source.variants.filter(main=>main.children?.length).map(main=>({variant:main.name,node:main.children![0]}));
+ return {source,axes,domain,occurrences,appearance};
+}
+
+test('authored appearance projects only authenticated singleton source axes above the table cap',async()=>{
+ const {qualifyAuthoredTextAppearanceTable}=await import('./source-authored-text-appearance.js');
+ const f=wideAuthoredFixture(6);
+ for(const main of f.source.variants)if(main.variantProperties!.Axis0==='Second'){
+  const appearance=main.children![0].text!.sourceAppearance!;
+  if('runs'in appearance)appearance.runs[0].fill.paint.color={r:1,g:0,b:0};
+ }
+ f.source.variants.reverse();f.domain.reverse();
+ const expected=new Map(f.source.variants.map(main=>[JSON.stringify(f.axes.slice(0,6).map(a=>a.map[main.variantProperties![a.property]])),main.children![0].text!.sourceAppearance]));
+ const before=JSON.stringify(f.source);
+ const table=qualifyAuthoredTextAppearanceTable(f.source,'file',f.occurrences(),f.axes,f.domain,true,{});
+ assert.deepEqual(table?.props,f.axes.slice(0,6).map(a=>a.prop));assert.equal(table?.rows.length,64);
+ assert(TextAppearanceTableSchema.safeParse(table).success);assert.equal(JSON.stringify(f.source),before);
+ for(const row of table!.rows){assert.equal(row.values.length,6);assert.deepEqual(row.appearance,expected.get(JSON.stringify(row.values)));}
+ const legacy=wideAuthoredFixture(2,8);
+ assert.equal(qualifyAuthoredTextAppearanceTable(legacy.source,'file',legacy.occurrences(),legacy.axes,legacy.domain,true,{})?.props.length,8,
+  'existing tables retain their complete shape when they already fit');
+});
+
+test('constant projection refuses variable overflow and incomplete or ambiguous original domains',async()=>{
+ const {qualifyAuthoredTextAppearanceTable}=await import('./source-authored-text-appearance.js');
+ const qualify=(f:ReturnType<typeof wideAuthoredFixture>)=>qualifyAuthoredTextAppearanceTable(f.source,'file',f.occurrences(),f.axes,f.domain,true,{});
+ assert.equal(qualify(wideAuthoredFixture(9)),undefined,'nine varying axes cannot fit the unchanged schema');
+ for(const mutate of [
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.domain.pop();},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.domain.push([...f.domain[0]]);},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.domain[0][8]='unknown';},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{delete f.domain[0][8];},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.source.variants[0].variantProperties!.Axis8='Other';},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.source.variants[1].nodeId=f.source.variants[0].nodeId;},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{const a=f.source.variants[0].children![0].text!.sourceAppearance!;if('runs'in a)a.runs.pop();},
+  (f:ReturnType<typeof wideAuthoredFixture>)=>{f.source.variants[0].children=[];},
+ ]){const f=wideAuthoredFixture(6);mutate(f);assert.equal(qualify(f),undefined);}
+ const unused=wideAuthoredFixture(0);for(const a of unused.axes){a.values=['First','Second'];a.map={First:'fixed',Second:'unused'};}
+ for(const main of unused.source.variants)for(const a of unused.axes)main.variantProperties![a.property]='First';
+ assert.equal(qualify(unused),undefined,'unused declared choices are not singleton source axes');
+ const aliases=wideAuthoredFixture(6);aliases.axes[8].values=['Fixed','Alias'];aliases.axes[8].map={Fixed:'fixed',Alias:'fixed'};
+ assert.equal(qualify(aliases),undefined,'raw aliases cannot manufacture a constant certificate');
+});
+
+test('constant-only output keeps one row and full-axis physical presence remains authoritative',async()=>{
+ const {qualifyAuthoredTextAppearanceTable}=await import('./source-authored-text-appearance.js');
+ const one=wideAuthoredFixture(0),table=qualifyAuthoredTextAppearanceTable(one.source,'file',one.occurrences(),one.axes,one.domain,true,{});
+ assert.deepEqual(table?.props,[]);assert.equal(table?.rows.length,1);assert(TextAppearanceTableSchema.safeParse(table).success);
+ const repeated=structuredClone(one.source.variants[0]);repeated.name+=' duplicate';repeated.nodeId='other-main';repeated.children![0].nodeId='other-text';one.source.variants.push(repeated);one.domain.push([...one.domain[0]]);
+ assert.equal(qualifyAuthoredTextAppearanceTable(one.source,'file',one.occurrences(),one.axes,one.domain,true,{}),undefined,
+  'constant-only collisions are refused, never coalesced');
+ const f=wideAuthoredFixture(6);for(const main of f.source.variants)if(main.variantProperties!.Axis0==='Second')main.children=[];
+ const partial=qualifyAuthoredTextAppearanceTable(f.source,'file',f.occurrences(),f.axes,f.domain,true,{visibleWhen:{prop:'axis0',equals:'first'}});
+ assert.equal(partial?.rows.length,32);assert.deepEqual(partial?.props,f.axes.slice(0,6).map(a=>a.prop));
+ assert.equal(qualifyAuthoredTextAppearanceTable(f.source,'file',f.occurrences(),f.axes,f.domain,true,{}),undefined,
+  'occurrence-only constancy cannot erase the missing physical domain');
+});
+test('projected appearance does not claim characters absent from the existing text channel',async()=>{
+ const {proposeFromDump}=await import('./propose-figma.js');
+ const {tokenCorpusFromJson}=await import('./token-corpus.js');
+ const {walkAnatomy}=await import('../scripts/contract-schema.js');
+ const f=wideAuthoredFixture(2);
+ f.source.propertyDefinitions=Object.fromEntries(f.axes.map(a=>[a.property,{type:'VARIANT' as const,defaultValue:a.values[0],variantOptions:a.values}]));
+ for(const main of f.source.variants){
+  const stable=structuredClone(main.children![0]);stable.name='Stable label';stable.nodeId+='-stable';main.children!.push(stable);
+  if(main.variantProperties!.Axis0==='Second'&&main.variantProperties!.Axis1==='Second'){
+   const text=main.children![0].text!,appearance=text.sourceAppearance!;
+   text.characters='More\nLearn text';if('runs'in appearance)appearance.characters=text.characters;
+  }
+ }
+ const before=JSON.stringify(f.source);
+ const proposal=proposeFromDump(f.source,{fileKey:'file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),
+  contractIdByName:new Map(),mintUnbound:true});
+ const contract=ContractSchema.parse(proposal.contract),parts=walkAnatomy(contract);
+ assert.equal(contract.props.length,9);assert.equal(JSON.stringify(f.source),before);
+ assert.equal(parts.filter(w=>w.part.textAppearanceByCombination).length,1,'unrelated representable appearance remains carried');
+ assert.equal(parts.find(w=>w.part.textAppearanceByCombination)!.part.textAppearanceByCombination!.props.length,2);
+ assert(proposal.notes.some(note=>note.includes('projected authored appearance requires source characters')));
+ const promoted=proposeFromDump(f.source,{fileKey:'file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),
+  contractIdByName:new Map(),mintUnbound:true,textOverrideDemand:new Map([[f.source.key!,new Set(['Stable label'])]])});
+ const promotedContract=ContractSchema.parse(promoted.contract);
+ assert.equal(promotedContract.props.find(p=>p.name==='children')?.bindings.figma.kind,'NONE');
+ assert.equal(walkAnatomy(promotedContract).filter(w=>w.part.textAppearanceByCombination).length,0,
+  'a matching default on a figmaless input cannot satisfy the owned TEXT-binding gate');
+ assert.equal(JSON.stringify(f.source),before);
+});
 test('exact text appearance ownership survives display renaming without mutating source',()=>{
  const f=fixture(),before=JSON.stringify(f),d=f.demand();
  assert.equal(d.appearance.characters,'Text\nLearn more');assert.deepEqual(d.childPath,[0,0]);assert.equal(d.sourceNodeId,'2:3');assert.equal(JSON.stringify(f),before);
