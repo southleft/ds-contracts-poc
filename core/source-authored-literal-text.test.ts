@@ -1,0 +1,132 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import vm from 'node:vm';
+import {transformSync} from 'esbuild';
+import React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {ContractSchema,walkAnatomy,resolveTextByCombination,type Contract} from '../scripts/contract-schema.js';
+import {proposeFromDump} from './propose-figma.js';
+import {tokenCorpusFromJson} from './token-corpus.js';
+import {emitReact} from './emit-react.js';
+import {emitReactInline} from './emit-react-inline.js';
+import {emitWebComponent} from '../packages/emitter-web-components/src/emit-wc.js';
+import {flattenTokens} from './tokens.js';
+import {createFigmaEngine} from './emit-figma-script.js';
+import {qualifyAuthoredLiteralTextTable,type AuthoredTextAppearanceAxis} from './source-authored-text-appearance.js';
+import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
+import {defaultFontFamilyParts} from '../packages/core/src/anatomy.js';
+import type {DumpSet} from '../extract/figma/types.js';
+
+const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
+function fixture(styled=false,optional=false){
+ const axes:AuthoredTextAppearanceAxis[]=[{property:'Mode',prop:'mode',values:['First','Second'],map:{First:'first',Second:'second'}},
+  {property:'State',prop:'state',values:['Cold','Warm'],map:{Cold:'cold',Warm:'warm'}},
+  ...(optional?[{property:'Shown',prop:'shown',values:['false','true'],map:{false:'false',true:'true'},boolean:true}]:[])];
+ const layout={mode:'HORIZONTAL' as const,primary:'MIN' as const,counter:'MIN' as const,spacing:0,padding:[0,0,0,0] as [number,number,number,number],primarySizing:'AUTO' as const,counterSizing:'AUTO' as const};
+ const rows=axes.reduce<string[][]>((rows,a)=>rows.flatMap(row=>a.values.map(v=>[...row,v])),[[]]);
+ const source:DumpSet={setName:'Literal tuple',type:'COMPONENT_SET',nodeId:'tuple-set',key:'tuple-key',
+  propertyDefinitions:Object.fromEntries(axes.map(a=>[a.property,{type:'VARIANT',defaultValue:a.values[0],variantOptions:[...a.values]}])),
+  variants:rows.map((values,i)=>{
+   const characters=values[0]+':'+values[1];
+   const appearance=styled?observeTextAppearance(characters,[{start:0,end:characters.indexOf(':')+1,characters:characters.slice(0,characters.indexOf(':')+1),fontName:{family:'Inter',style:'Bold'},fontSize:14,fontWeight:700,lineHeight:{unit:'PIXELS',value:20},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE',fills:[{type:'SOLID',color:{r:0,g:0,b:0}}]},
+    {start:characters.indexOf(':')+1,end:characters.length,characters:characters.slice(characters.indexOf(':')+1),fontName:{family:'Inter',style:'Regular'},fontSize:14,fontWeight:400,lineHeight:{unit:'PIXELS',value:20},letterSpacing:{unit:'PIXELS',value:0},textCase:'ORIGINAL',textDecoration:'NONE',fills:[{type:'SOLID',color:{r:0,g:0,b:1}}]}] as any):undefined;
+   return {name:axes.map((a,j)=>a.property+'='+values[j]).join(','),type:'COMPONENT' as const,nodeId:'main-'+i,componentKey:'key-'+i,variantProperties:Object.fromEntries(axes.map((a,j)=>[a.property,values[j]])),layout,
+    children:[...(!optional||values[2]==='true'?[{name:'Label',type:'TEXT' as const,nodeId:'text-'+i,text:{characters,fontSize:14,fontStyle:'Regular',...(appearance?{sourceAppearance:appearance}:{})}}]:[]),
+     {name:'Stable',type:'TEXT' as const,nodeId:'stable-'+i,text:{characters:'Keep',fontSize:14,fontStyle:'Regular'}}]};
+  })};
+ const occurrences=()=>source.variants.flatMap(main=>(main.children??[]).filter(n=>n.name==='Label').map(node=>({variant:main.name,node})));
+ const domain=rows.map(row=>row.map((raw,i)=>axes[i].map[raw as keyof typeof axes[typeof i]['map']] as string));
+ const propose=()=>proposeFromDump(source,{fileKey:'file',corpus,contractIdByName:new Map(),mintUnbound:true});
+ return{axes,source,occurrences,domain,propose};
+}
+function compiled(f:ReturnType<typeof fixture>){const proposal=f.propose(),contract=ContractSchema.parse(proposal.contract);
+ const found=walkAnatomy(contract).find(w=>w.part.textByCombination);assert(found,JSON.stringify({contract,notes:proposal.notes.filter(n=>n.includes('Label'))}));const part=found.part;
+ return {proposal,contract,part};
+}
+function render(contract:Contract,tree:Record<string,unknown>,props:Record<string,unknown>,inline=false){
+ const context={contracts:new Map([[contract.id,contract]]),icons:new Map(),tokens:new Set(flattenTokens(tree).keys()),tokenValues:tree};
+ const {tsx}=inline?emitReactInline(contract,{contracts:context.contracts,icons:context.icons,tokens:{primitives:tree,semantic:{},light:{},dark:{},brands:{default:{}}}}):emitReact(contract,context);
+ const js=transformSync(tsx.replace(/import styles from '[^']+';/,"const styles = new Proxy({}, {get: (_, key) => String(key)});"),{loader:'tsx',format:'cjs',jsx:'automatic'}).code;
+ const module={exports:{} as any};vm.runInNewContext(js,{module,exports:module.exports,require:createRequire(import.meta.url),console});
+ return renderToStaticMarkup(React.createElement(module.exports[contract.name],props));
+}
+
+test('source-authenticated tuple literals render unchanged in React and native without style evidence',()=>{
+ const f=fixture(),before=JSON.stringify(f.source),{proposal,contract,part}=compiled(f);
+ assert(part.textByCombination);assert.equal(part.textAppearanceByCombination,undefined);
+ const engine=createFigmaEngine({tokens:{primitives:proposal.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+ const native=engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+ for(const row of part.textByCombination.rows){
+  const props:Record<string,unknown>=Object.fromEntries(part.textByCombination.props.map((p,i)=>[p,row.values[i]]));
+  for(const inline of [false,true])assert(render(contract,proposal.mintedTokens!.tree,props,inline).includes(row.text));
+  assert.equal(resolveTextByCombination(part.textByCombination,props),row.text);
+ }
+ const allText=(n:any):string[]=>[...(n.type==='text'?[n.characters]:[]),...(n.children??[]).flatMap(allText)];
+ for(const text of ['First:Cold','First:Warm','Second:Cold','Second:Warm'])assert(native.variants.some(v=>allText(v.spec).includes(text)));
+ assert.throws(()=>emitWebComponent(contract,{contracts:new Map([[contract.id,contract]]),icons:new Map(),tokens:new Set()}),/literal-text-combination-web-components-unsupported/);
+ assert.equal(JSON.stringify(f.source),before);
+ assert.throws(()=>resolveTextByCombination(part.textByCombination!,{mode:'unknown',state:'cold'}),/combination-unavailable/);
+});
+
+test('the same tuple characters retain authored range appearance without replacing their text',()=>{
+ const f=fixture(true),{proposal,contract,part}=compiled(f);assert(part.textAppearanceByCombination);
+ for(const row of part.textAppearanceByCombination.rows){
+  const props:Record<string,unknown>=Object.fromEntries(part.textAppearanceByCombination.props.map((p,i)=>[p,row.values[i]]));
+  assert.equal(resolveTextByCombination(part.textByCombination!,props),row.appearance.characters);
+  const html=render(contract,proposal.mintedTokens!.tree,props);
+  assert(html.includes('font-weight:700'));assert(html.includes('font-weight:400'));
+ }
+});
+
+test('physical absence remains separate from complete text tuples',()=>{
+ const f=fixture(false,true),{proposal,contract,part}=compiled(f);
+ assert(part.textByCombination?.rows.every(row=>row.values.at(-1)==='true'));
+ assert(part.visibleWhen||part.presenceByCombination);
+ assert(!render(contract,proposal.mintedTokens!.tree,{mode:'first',state:'cold',shown:false}).includes('First:Cold'));
+ assert(render(contract,proposal.mintedTokens!.tree,{mode:'first',state:'cold',shown:true}).includes('First:Cold'));
+});
+
+test('an intentionally empty row stays empty while other tuples retain normal text styling',()=>{
+ const f=fixture();f.source.variants[0].children![0].text!.characters='';
+ const {proposal,contract,part}=compiled(f);assert.equal(part.text,'');
+ assert(defaultFontFamilyParts(contract).has(part));
+ const first=part.textByCombination!.rows.find(row=>row.text==='')!;
+ const props=Object.fromEntries(part.textByCombination!.props.map((p,i)=>[p,first.values[i]]));
+ assert.equal(resolveTextByCombination(part.textByCombination!,props),'');
+ for(const inline of [false,true])assert.equal(render(contract,proposal.mintedTokens!.tree,props,inline).replace(/<[^>]*>/g,''),'Keep');
+ const another=part.textByCombination!.rows.find(row=>row.text)!;
+ for(const inline of [false,true])assert(render(contract,proposal.mintedTokens!.tree,Object.fromEntries(part.textByCombination!.props.map((p,i)=>[p,another.values[i]])),inline).includes(another.text));
+});
+
+test('explicit TEXT binding retains priority and never becomes a tuple default',()=>{
+ const f=fixture();for(const main of f.source.variants)main.children![0].propRefs={characters:'Label'};
+ f.source.propertyDefinitions!.Label={type:'TEXT',defaultValue:'Caller'};
+ const proposal=f.propose(),contract=ContractSchema.parse(proposal.contract);
+ assert(!walkAnatomy(contract).some(w=>w.part.textByCombination));
+ const binding=walkAnatomy(contract).find(w=>w.part.content)!.part.content!;
+ assert(render(contract,proposal.mintedTokens!.tree,{[binding.prop]:'Explicit caller text'}).includes('Explicit caller text'));
+});
+
+test('original identity, exact membership and tuples fail closed before carrying literal text',()=>{
+ for(const change of [
+  (f:ReturnType<typeof fixture>)=>{f.domain.pop();},
+  (f:ReturnType<typeof fixture>)=>{f.domain.push([...f.domain[0]]);},
+  (f:ReturnType<typeof fixture>)=>{f.source.variants[0].children![0].nodeId='foreign';},
+  (f:ReturnType<typeof fixture>)=>{f.source.variants[0].children![0].propRefs={characters:'Caller'};},
+  (f:ReturnType<typeof fixture>)=>{f.source.variants[0].children![0].hidden=true;},
+ ]){
+  const f=fixture(),occurrences=structuredClone(f.occurrences());change(f);
+  assert.equal(qualifyAuthoredLiteralTextTable(f.source,'file',occurrences,f.axes,f.domain,true,{}),undefined);
+ }
+ const f=fixture();assert.equal(qualifyAuthoredLiteralTextTable(f.source,'file',f.occurrences().slice(1),f.axes,f.domain,true,{}),undefined);
+});
+
+test('contract grammar refuses missing, duplicate, unknown and explicit-input hybrid tables',()=>{
+ const {contract,part}=compiled(fixture());
+ for(const mutate of [(p:any)=>p.textByCombination.rows.pop(),(p:any)=>p.textByCombination.rows.push(p.textByCombination.rows[0]),
+  (p:any)=>p.textByCombination.rows[0].values[0]='unknown',(p:any)=>p.content={prop:'caller'},(p:any)=>p.textByProp={prop:'mode',map:{first:'Wrong'}},(p:any)=>p.visibilityOverrideProp='show']){
+  const c=structuredClone(contract),p=walkAnatomy(c).find(w=>w.part.textByCombination)!.part;mutate(p);assert.equal(ContractSchema.safeParse(c).success,false);
+ }
+ assert(part.textByCombination);
+});

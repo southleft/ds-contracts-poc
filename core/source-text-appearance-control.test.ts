@@ -84,7 +84,7 @@ test('constant-only output keeps one row and full-axis physical presence remains
  assert.equal(qualifyAuthoredTextAppearanceTable(f.source,'file',f.occurrences(),f.axes,f.domain,true,{}),undefined,
   'occurrence-only constancy cannot erase the missing physical domain');
 });
-test('projected appearance does not claim characters absent from the existing text channel',async()=>{
+test('projected appearance follows authenticated tuple text and never substitutes for explicit text inputs',async()=>{
  const {proposeFromDump}=await import('./propose-figma.js');
  const {tokenCorpusFromJson}=await import('./token-corpus.js');
  const {walkAnatomy}=await import('../scripts/contract-schema.js');
@@ -102,14 +102,15 @@ test('projected appearance does not claim characters absent from the existing te
   contractIdByName:new Map(),mintUnbound:true});
  const contract=ContractSchema.parse(proposal.contract),parts=walkAnatomy(contract);
  assert.equal(contract.props.length,9);assert.equal(JSON.stringify(f.source),before);
- assert.equal(parts.filter(w=>w.part.textAppearanceByCombination).length,1,'unrelated representable appearance remains carried');
+ assert.equal(parts.filter(w=>w.part.textAppearanceByCombination).length,2,'both authenticated source texts retain their appearance');
+ assert.equal(parts.filter(w=>w.part.textByCombination).length,1);
  assert.equal(parts.find(w=>w.part.textAppearanceByCombination)!.part.textAppearanceByCombination!.props.length,2);
- assert(proposal.notes.some(note=>note.includes('projected authored appearance requires source characters')));
+ assert(!proposal.notes.some(note=>note.includes('projected authored appearance requires source characters')));
  const promoted=proposeFromDump(f.source,{fileKey:'file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),
   contractIdByName:new Map(),mintUnbound:true,textOverrideDemand:new Map([[f.source.key!,new Set(['Stable label'])]])});
  const promotedContract=ContractSchema.parse(promoted.contract);
  assert.equal(promotedContract.props.find(p=>p.name==='children')?.bindings.figma.kind,'NONE');
- assert.equal(walkAnatomy(promotedContract).filter(w=>w.part.textAppearanceByCombination).length,0,
+ assert.equal(walkAnatomy(promotedContract).filter(w=>w.part.textAppearanceByCombination).length,1,
   'a matching default on a figmaless input cannot satisfy the owned TEXT-binding gate');
  assert.equal(JSON.stringify(f.source),before);
 });

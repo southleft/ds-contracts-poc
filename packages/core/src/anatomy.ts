@@ -326,7 +326,7 @@ export function defaultFontFamilyParts(contract: Contract): Set<Part> {
     const entry = !TEXTLESS_INPUT_TYPES.has(part.attrs?.type ?? '') && elements.some((e) => e !== undefined && TEXT_ENTRY_ELEMENTS.has(e));
     const rootChildren = top && single && !parts && !part.slot && childrenText;
     // `text: ""` is intentional emptiness (a skeleton block) — no glyph, no family.
-    const staticText = [part.text, ...Object.values(part.textByProp?.map ?? {})].some((t) => typeof t === 'string' && t !== '');
+    const staticText = [part.text, ...Object.values(part.textByProp?.map ?? {}), ...(part.textByCombination?.rows.map(row=>row.text)??[])].some((t) => typeof t === 'string' && t !== '');
     const draws = part.content !== undefined || staticText || entry || rootChildren;
     const spoken = inherited || namesFamily(own);
     if (draws && !spoken) out.add(part);
@@ -656,7 +656,7 @@ export function lowerStrokeRings(contract: Contract, patternedStrokeSvg = false)
 export const WHOLE_PIXEL_TEXT_BOX_BASIS = 'max-content';
 /** The part owns text of its own — the only kind of part the fact qualifies. */
 export function partOwnsText(part: Part): boolean {
-  return part.text !== undefined || part.content !== undefined || part.textByProp !== undefined;
+  return part.text !== undefined || part.content !== undefined || part.textByProp !== undefined || part.textByCombination !== undefined;
 }
 /** The part carries the whole-pixel text-box fact. */
 export function drawsWholePixelTextBox(part: Part): boolean {

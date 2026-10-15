@@ -1,3 +1,4 @@
+import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
@@ -5222,6 +5223,7 @@ function rootTextSpecs(
   // the canvas hosts none. The `text-indent` code-only fact names the drop
   // and already lists these exact variants.
   if (textOutOfBoxOn(root as Part, subst)) return [];
+  if(root.textByCombination)throw Error('literal-text-combination-root-unqualified');
   const hosted: Part = root.text !== undefined
     ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
     : ({ content: root.content } as Part);
@@ -5321,6 +5323,7 @@ function partToSpecInner(
     delete stripped.text;
     delete stripped.content;
     delete stripped.textByProp;
+    delete stripped.textByCombination;
     part = stripped;
   }
   if (part.icon) {
@@ -5776,7 +5779,7 @@ function partToSpecInner(
     // textByProp (first-variant-freeze fix): per-enum-value characters
     // resolve at COMPILE time against this combo's subst; unmapped values
     // keep the base text.
-    const partText = part.textByProp
+    const partText = part.textByCombination ? resolveTextByCombination(part.textByCombination,subst) : part.textByProp
       ? (part.textByProp.map[subst[part.textByProp.prop] ?? ''] ?? part.text)
       : part.text;
     // A TEXT node has no children — a child-BEARING text part must take the

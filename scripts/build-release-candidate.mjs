@@ -42,6 +42,8 @@ const PACKAGES = [
     // Reviewed 2026-10-08: contract-schema imports/re-exports the pure
     // witnessed vector-stroke domain. Installed validation and surface guards
     // require its runtime module and declaration alongside contract-schema.
+    // Reviewed 2026-10-15: contract-schema imports the complete text-tuple
+    // validator; installed consumers need its runtime and declaration.
     expected: [
       "README.md",
       "contract.schema.json",
@@ -73,6 +75,8 @@ const PACKAGES = [
       "dist/stroked-path.js",
       "dist/text-appearance.d.ts",
       "dist/text-appearance.js",
+      "dist/text-by-combination.d.ts",
+      "dist/text-by-combination.js",
       "dist/validate.d.ts",
       "dist/validate.js",
       "dist/vector-stroke.d.ts",

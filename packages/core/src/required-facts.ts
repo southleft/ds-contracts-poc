@@ -1203,7 +1203,7 @@ function hasWidthOrContent(parts: FlatPart[]): boolean {
   for (const { part, channels } of parts) {
     if (WIDTH_CHANNELS.some((c) => channels.has(c))) return true;
     if (part.layout?.grow) return true;
-    if (part.content || part.text || part.textByProp) return true;
+    if (part.content || part.text || part.textByProp || part.textByCombination?.rows.some(row=>row.text.length>0)) return true;
   }
   return false;
 }

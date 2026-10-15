@@ -4,6 +4,7 @@ import type { Part } from '../scripts/contract-schema.js';
  * Return undefined only when it delegates to the ordinary children channel.
  * JSON expressions preserve literal JSX punctuation and intentional emptiness. */
 export function rootContentJsx(root: Part | undefined, codePropOf: (name: string) => string, textValueOf: (name: string, value: string) => string | boolean = (_name, value) => value): string | undefined {
+  if(root?.textByCombination)throw Error('literal-text-combination-root-unqualified');
   if (root?.content) return `{${root.content.prop}}`;
   if (root?.text === undefined) return undefined;
   const byProp = root.textByProp;

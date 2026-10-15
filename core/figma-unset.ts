@@ -125,6 +125,7 @@ export function lowerUnsetProposal(
     if (Array.isArray(part.literalsByCombination) && part.literalsByCombination.some(table =>
       object(table) && Array.isArray(table.props) && table.props.some(prop => typeof prop === 'string' && axisByProp.has(prop))))
       fail(`${path}.literalsByCombination`);
+    if(object(part.textByCombination)&&Array.isArray(part.textByCombination.props)&&part.textByCombination.props.some(prop=>typeof prop==='string'&&axisByProp.has(prop)))fail(`${path}.textByCombination`);
     // Per-axis maps already prove each value is independent of other axes.
     // Their omitted row is therefore exactly the base carrier.
     for (const [mapField, baseField] of [['tokensByProp', 'tokens'], ['literalsByProp', 'literals'], ['layoutByProp', 'layout'], ['textByProp', 'text'], ['statesByProp', 'states']]) {
