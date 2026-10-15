@@ -98,6 +98,7 @@ export const reactRenderGraphRuntime=String.raw`((N,intrinsics,fail,witness,brid
   intrinsics();const candidates=get(byProps,props),record=candidates?.length===1?candidates[0]:undefined;
   if(!record)return {status:'refused',reason:'render-graph-host-factory-unavailable'};
   const ds=record.origin.descriptors,creator=ds._owner?.value;
+  if(bridge.verifyHost&&bridge.verifyHost(record.createdIn,creator)===false)return {status:'refused',reason:'render-graph-class-owner-mismatch'};
   if(typeof type!=='string'||!N.is(ds.type?.value,type)||!creator||(!N.is(creator,owner)&&!N.is(creator,alternate))||!current(record))
    return {status:'refused',reason:'render-graph-host-identity-mismatch'};
   return {status:'matched',factory:record.id,element:witness(record.value),props:witness(props),type:witness(type)};
@@ -109,5 +110,5 @@ export const reactRenderGraphRuntime=String.raw`((N,intrinsics,fail,witness,brid
    arrays:arrays.map(r=>({id:r.id,value:witness(r.value),items:Array.from({length:r.state.ds.length.value},(_,i)=>witness(r.state.ds[i].value)),currentValuesVerified:arrayCurrent(r)})),
    renders:renders.map(r=>({id:r.id,parent:r.parent,callee:witness(r.fn),input:witness(r.input),factoryProps:r.factoryProps?witness(r.factoryProps):null,factory:r.factory,completion:r.returned?'returned':'threw',...(r.returned?{output:witness(r.output)}:{}),returnedFactory:r.returned?get(byElement,r.output)?.id??null:null,sourceRender:r.sourceRender,componentModels:r.componentModels.filter(m=>r.returned&&N.is(m.output,r.output)).map(m=>m.index),membership:r.membership??{status:'refused',reason:'threw'}}))};
  }
- return {factory,native,literal,source,component,invoke,host,report};
+ return {factory,native,literal,source,component,invoke,host,report,currentId:()=>stack.at(-1)?.id??null};
 })`;

@@ -3,9 +3,27 @@ import {instrumentReactStateAdapter} from './react-state-adapter.js';
 
 /** Called only after a complete supported React/ReactDOM hash combination has
  * been checked. Function objects and native execution order stay unchanged. */
-export function instrumentReactContextAdapter(text:string,kind:'create-element'|'jsx'|'forward-ref'):string {
+export function instrumentReactContextAdapter(text:string,kind:'create-element'|'jsx'|'forward-ref',authoredClasses=false):string {
   if(kind==='forward-ref')text=instrumentReactStateAdapter(text);
-  const G='globalThis.__DSC_RUNTIME_PROOF',sf=ts.createSourceFile('pinned-runtime.js',text,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+  const G='globalThis.__DSC_RUNTIME_PROOF';
+  if(kind==='forward-ref'&&authoredClasses){
+    const classReturn='return instance.render();';
+    if(text.split(classReturn).length!==2)throw Error('authored-class-render-site-unmatched');
+    text=text.replace(classReturn,'return '+G+'.authoredClassInvoke(instance,instance.render);');
+    const construct='new Component(nextProps, state)';
+    if(text.split(construct).length!==3)throw Error('authored-class-construction-sites-unmatched');
+    text=text.replaceAll(construct,G+'.authoredClassConstructed(Component,nextProps,'+construct+')');
+    const entry='    function resolveClassComponentProps(Component, baseProps) {\n      var newProps = baseProps;';
+    const exit='      return newProps;\n    }\n    function defaultOnUncaughtError(error) {';
+    if(text.split(entry).length!==2||text.split(exit).length!==2)throw Error('authored-class-props-sites-unmatched');
+    text=text.replace(entry,entry+'\n      var __DSC_AUTHORED_PROPS='+G+'.authoredClassPropsBegin(Component,baseProps);').replace(exit,'      '+G+'.authoredClassPropsEnd(__DSC_AUTHORED_PROPS,newProps);\n'+exit);
+  }
+  if(kind==='create-element'&&authoredClasses){
+    const freeze='        Object.freeze && Object.freeze(childArray);';
+    if(text.split(freeze).length!==2)throw Error('authored-class-native-children-array-site-unmatched');
+    text=text.replace(freeze,'        '+G+'.literal(childArray);\n'+freeze);
+  }
+  const sf=ts.createSourceFile('pinned-runtime.js',text,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
   const edits:Array<{start:number;end:number;text:string}>=[];
   const declarations=new Map<string,ts.FunctionDeclaration[]>(),exports=new Map<string,ts.FunctionExpression[]>();
   const scan=(n:ts.Node)=>{

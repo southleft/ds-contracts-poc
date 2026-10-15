@@ -195,6 +195,34 @@ test('text fill-style overrides preserve resolved paint with the same identity g
  const other=fixture();other.overrides![0].overriddenFields=['inheritFillStyleId'];assert.equal(readRest(other)[0].solidFillTarget,undefined);
 });
 
+test('an explicit nested character edit retains its actual nearest-owner properties without inferring them from style fields',()=>{
+ const root:RestNode={id:'usage',name:'Wrapper',type:'INSTANCE',componentId:'wrapper-main',children:[
+  {id:'Iusage;inner',name:'Duplicate',type:'INSTANCE',componentId:'selected-main',componentProperties:{
+   Selected:{type:'VARIANT',value:'true'},'Label#1:2':{type:'TEXT',value:'Edited'},
+  },children:[{id:'Iusage;inner;label',name:'Duplicate',type:'TEXT',characters:'Edited',fills:[]}]}],
+  overrides:[{id:'Iusage;inner;label',overriddenFields:['characters','characterStyleOverrides','styleOverrideTable']}],};
+ const read=(node:RestNode)=>{
+  const out=mapRestToDump({nodes:{source:{document:{id:'source',name:'Source',type:'COMPONENT',children:[node]},
+   components:{'wrapper-main':{key:'wrapper-key'},'selected-main':{key:'selected-key',componentSetId:'child-set'}},
+   componentSets:{'child-set':{key:'child-key'}}}}} as never);
+  return (out.dump.Source as DumpSet).variants[0].children![0];
+ };
+ const before=JSON.stringify(root),out=read(root),w=out.hostOverrides![0].instanceProperties;
+ assert.deepEqual(w,{ownerId:'usage',ownerComponentId:'wrapper-main',ownerComponentKey:'wrapper-key',nodeId:'Iusage;inner',componentId:'selected-main',componentKey:'selected-key',componentSetKey:'child-key',path:[0],properties:{Selected:{type:'VARIANT',value:'true'},'Label#1:2':{type:'TEXT',value:'Edited'}}});
+ assert.deepEqual(out.hostOverrides![0].fields,['characterStyleOverrides','styleOverrideTable']);
+ assert.equal(out.hostOverrides![0].fill,undefined,'style reset fields do not authorize a paint override');
+ assert.equal(JSON.stringify(root),before);
+ const charactersOnly=structuredClone(root);charactersOnly.overrides![0].overriddenFields=['characters'];
+ assert.deepEqual(read(charactersOnly).hostOverrides![0].fields,[]);
+ assert.deepEqual(read(charactersOnly).hostOverrides![0].instanceProperties,w);
+ for(const mutate of [
+  (n:RestNode)=>{n.overrides![0].overriddenFields=['characterStyleOverrides','styleOverrideTable'];},
+  (n:RestNode)=>{n.overrides!.push(structuredClone(n.overrides![0]));},
+  (n:RestNode)=>{n.children![0].componentId='unknown';},
+  (n:RestNode)=>{n.children![0].componentProperties!.Selected.value=1 as never;},
+ ]){const bad=structuredClone(root);mutate(bad);assert(!read(bad).hostOverrides?.some(h=>h.instanceProperties));}
+});
+
 test('empty shape fill overrides preserve explicit emptiness in both production readers',async()=>{
  const begin=source.indexOf('      if (hostCount > 0'),end=source.indexOf('      if (overriddenCount > 0',begin);
  const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map(),SolidFillCapture={observeSolidFillComposition:()=>undefined};const dumpPaint=async()=>undefined;'+source.slice(begin,end)+';return out.hostOverrides;})');

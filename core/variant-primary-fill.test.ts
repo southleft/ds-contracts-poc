@@ -490,3 +490,86 @@ test('captured HUG fill basis requires complete owned uniform geometry and an in
     assert(!notes.some(n=>n.includes('source-hug-fill-basis')));
   }
 });
+
+
+function conditionalHugFill(): DumpSet {
+  const source = observedHugFill('VERTICAL');
+  source.propertyDefinitions!.Shown = { type: 'VARIANT', defaultValue: 'false', variantOptions: ['false', 'true'] };
+  source.variants = source.variants.flatMap(original => [false, true].map(shown => {
+    const main = structuredClone(original), suffix = `-${shown}`;
+    const rename = (node: DumpNode): void => {
+      if (node.nodeId) node.nodeId += suffix;
+      if (node.localGeometry) {
+        node.localGeometry.nodeId += suffix;
+        node.localGeometry.parentId += suffix;
+      }
+      for (const child of node.children ?? []) rename(child);
+    };
+    rename(main);
+    main.name += `, Shown=${shown}`;
+    main.variantProperties = { ...main.variantProperties, Shown: String(shown) };
+    if (!shown) main.children = main.children!.filter(node => node.name !== 'Field');
+    return main;
+  }));
+  return source;
+}
+
+test('conditional HUG fill basis covers exactly the complete present domain', () => {
+  for (const joint of [false, true]) for (const reversed of [false, true]) {
+    const source = conditionalHugFill();
+    if (joint) for (const main of source.variants)
+      if (main.variantProperties!.Counter === 'false') main.children = main.children!.filter(node => node.name !== 'Field');
+    if (reversed) source.variants.reverse();
+    const original = JSON.stringify(source), result = propose(source), field = result.contract.anatomy.root.parts!.Field;
+    assert.equal(JSON.stringify(source), original);
+    assert.equal(field.literals?.height, '90px');
+    assert.equal(field.layout?.growBasis, undefined);
+    if (joint) {
+      assert(field.presenceByCombination);
+      assert.equal(field.presenceByCombination.rows.filter(row => row.present).length, 1);
+    } else assert.deepEqual(field.visibleWhen, { prop: 'shown' });
+    assert(result.notes.some(note => note.includes('source-hug-fill-basis')));
+    const css = reactEmitter.emit(result.contract, result.ctx).find(file => file.path.endsWith('.css'))!.contents;
+    assert.match(css, /height: 90px/);
+    assert.match(css, /flex: 1 1 auto/);
+    assert(reactInlineEmitter.emit(result.contract, result.ctx)[0].contents.includes('90px'));
+  }
+});
+
+test('conditional HUG fill basis refuses missing geometry, contradictory sizes and live visibility gaps', () => {
+  const mutations: Array<(source: DumpSet) => void> = [
+    source => { delete source.variants[1].children![0].localGeometry; },
+    source => { source.variants[1].children![0].localGeometry!.parentId = 'foreign'; },
+    source => { source.variants[1].children![0].localGeometry!.localSize.height = 91; },
+    source => { source.variants[1].children![0].propRefs = { visible: 'Other' }; },
+  ];
+  for (const mutate of mutations) {
+    const source = conditionalHugFill(); mutate(source);
+    const field = propose(source).contract.anatomy.root.parts!.Field;
+    assert.equal(field.literals?.height, undefined, String(mutate));
+    assert.equal(field.layout?.growBasis, 'zero', String(mutate));
+  }
+});
+
+test('conditional HUG fill basis refuses empty and canonically duplicated legacy domains', () => {
+  for (const collision of [false, true]) {
+    const source = observedHugFill('VERTICAL');
+    source.propertyDefinitions = collision
+      ? { Tone: { type: 'VARIANT', defaultValue: 'High', variantOptions: ['High', 'high'] } }
+      : undefined;
+    source.variants.forEach((variant, i) => {
+      delete variant.variantProperties;
+      variant.name = collision ? `Tone=${i ? 'high' : 'High'}` : i ? 'Second' : 'First';
+    });
+    source.variants[1].children = [{ name: source.setName, type: 'INSTANCE',
+      instanceOf: source.setName, componentProperties: {} }];
+    const before = JSON.stringify(source);
+    const result = proposeFromDump(source, { corpus, mintUnbound: true,
+      contractIdByName: new Map(), projectionMode: 'reviewable-inversion' });
+    const field = (result.contract as Contract).anatomy.root.parts!.Field;
+    assert.equal(field.literals?.height, undefined, collision ? 'duplicate canonical tuples' : 'no source axes');
+    assert.equal(field.layout?.growBasis, 'zero');
+    assert(!result.notes.some(note => note.includes('source-hug-fill-basis')));
+    assert.equal(JSON.stringify(source), before);
+  }
+});

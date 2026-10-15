@@ -11,7 +11,7 @@ import { instrumentReactHelperSource, helperPointKey } from "./react-helper-inst
 import { reactHelperBindingGuard } from "./react-helper-binding-runtime.js";
 import { reactHelperIntrinsicGuard } from "./react-helper-intrinsics.js";
 import { reactHelperRuntimeHook, reactHelperRuntimeRead } from "./react-helper-runtime.js";
-import { readReactHelperEffects, readReactComponentEffects, reactHelperCandidates, prepareReactEffectProgram } from "./react-helper-effects.js";
+import { readReactHelperEffects, readReactComponentEffects, reactHelperCandidates, prepareReactEffectProgram, createReactEffectProgramScope } from "./react-helper-effects.js";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
@@ -26,6 +26,96 @@ export function Toggle(props:Parameters<typeof Primitive.Root>[0]) {return <Prim
 export function Action({asChild=false,...props}:{asChild?:boolean;disabled?:boolean}) {const Comp=asChild?Primitive.Root:'button';return <Comp data-slot="action" {...props}/>;}
 export function Box(props:{children?:string}) {const div='button';return <div {...props}><Action/></div>;}
 `;
+
+test('scan-local checker reuse preserves cross-module symbols and source identities', () => fixture(dir => {
+  const files:Record<string,string> = {};
+  for (const [name,text] of Object.entries({
+    'first.js': "import {value} from './second.js';export function First(){return value;}",
+    'second.js': "export const value='original';export function Second(){return value;}",
+  })) { const file=path.join(dir,name);writeFileSync(file,text);files[realpathSync(file)]=createHash('sha256').update(text).digest('hex'); }
+  const reference={sourceRoot:dir,files},scope=createReactEffectProgramScope(reference);
+  const first=scope.prepare('first.js'),second=scope.prepare('second.js');
+  assert.equal(first.program,second.program,'one program owns both captured runtime modules');
+  assert.equal(first.checker,second.checker);
+  assert.notEqual(first.sf,second.sf);assert.equal(second.file,realpathSync(path.join(dir,'second.js')));
+  const target=second.resolveRuntimeExport(second.file,'Second');
+  assert.ok(target);assert.equal(target.getSourceFile().fileName,second.file);
+  assert.equal(second.source(target).file,'second.js','export resolver does not retain the first module');
+  for(const module of ['first.js','second.js']) {
+    const reused=scope.prepare(module),fresh=prepareReactEffectProgram(reference,module,{},{});
+    const describe=(context:typeof fresh)=>{
+      const result:Array<unknown>=[];
+      const visit=(node:ts.Node)=>{if(ts.isIdentifier(node)){
+        const symbol=context.checker.getSymbolAtLocation(node);
+        result.push({text:node.text,start:node.getStart(context.sf),type:context.checker.typeToString(context.checker.getTypeAtLocation(node)),
+          declarations:symbol?.declarations?.map(declaration=>context.source(declaration))});
+      }ts.forEachChild(node,visit);};visit(context.sf);return result;
+    };
+    assert.deepEqual(describe(reused),describe(fresh));
+    assert.deepEqual(reused.source(reused.sf),fresh.source(fresh.sf),'source callback uses the selected node module');
+    reused.requireCurrent();
+  }
+  scope.requireCurrent();
+  assert.throws(()=>scope.assertReference({...reference}),/helper-reference-scope-mismatch/);
+  assert.notEqual(createReactEffectProgramScope(reference).prepare('first.js').program,first.program,'no cross-scan compiler cache');
+}));
+
+test('scan-local preparation falls back for absent roots and script-global modules', () => fixture(dir => {
+  const files:Record<string,string>={};
+  for(const [name,text] of Object.entries({'first.tsx':'export const first=1;','second.tsx':'export const second=2;','global.js':'var globalValue=1;'})){
+    const file=path.join(dir,name);writeFileSync(file,text);files[realpathSync(file)]=createHash('sha256').update(text).digest('hex');
+  }
+  const scope=createReactEffectProgramScope({sourceRoot:dir,files}),first=scope.prepare('first.tsx');
+  assert.equal(first.program.getSourceFile(realpathSync(path.join(dir,'second.tsx'))),undefined);
+  const second=scope.prepare('second.tsx');assert.notEqual(second.program,first.program);
+  assert.equal(scope.prepare('second.tsx').program,second.program);
+  const global=scope.prepare('global.js');assert.notEqual(global.program,first.program,'do not reuse different script-global root order');
+  assert.equal(scope.prepare('global.js').program,global.program);
+  assert.throws(()=>scope.prepare('primitive.ts'),/helper-source-not-witnessed/);
+  scope.requireCurrent();
+}));
+
+test('scan-local reuse never carries an extra TSX root global augmentation into an imported module', () => fixture(dir => {
+  const entries={
+    'first.tsx': "import './second';declare global {interface Window {scanMarker:string}} export const first=1;",
+    'second.tsx': 'export const second=window.scanMarker;',
+  };
+  const files:Record<string,string>={};
+  for(const [name,text] of Object.entries(entries)){
+    const file=path.join(dir,name);writeFileSync(file,text);files[realpathSync(file)]=createHash('sha256').update(text).digest('hex');
+  }
+  const reference={sourceRoot:dir,files},scope=createReactEffectProgramScope(reference);
+  const first=scope.prepare('first.tsx'),second=scope.prepare('second.tsx');
+  assert.ok(first.program.getSourceFile(second.file),'the dependency is already imported by the first program');
+  assert.notEqual(second.program,first.program,'imported presence alone cannot establish equal root closure');
+  const fresh=prepareReactEffectProgram(reference,'second.tsx',{},{});
+  const markerType=(program:typeof fresh.program,file:string)=>{
+    const sf=program.getSourceFile(file)!;let expression:ts.PropertyAccessExpression|undefined;
+    const visit=(node:ts.Node)=>{if(ts.isPropertyAccessExpression(node)&&node.name.text==='scanMarker')expression=node;ts.forEachChild(node,visit);};visit(sf);
+    assert.ok(expression);return program.getTypeChecker().typeToString(program.getTypeChecker().getTypeAtLocation(expression));
+  };
+  assert.equal(markerType(first.program,second.file),'string');
+  assert.equal(markerType(second.program,second.file),markerType(fresh.program,fresh.file));
+  assert.notEqual(markerType(second.program,second.file),'string');
+  scope.requireCurrent();
+}));
+
+test('scan-local reuse retains source and checker mutation refusals at every boundary', () => fixture(dir => {
+  const file=path.join(dir,'first.tsx'),types=path.join(dir,'types.d.ts');
+  const code="import type {Value} from './types';export const value:Value='original';";
+  writeFileSync(file,code);writeFileSync(types,"export type Value='original';");
+  const reference={sourceRoot:dir,files:{[realpathSync(file)]:createHash('sha256').update(code).digest('hex')}};
+  const scope=createReactEffectProgramScope(reference),first=scope.prepare('first.tsx');first.requireCurrent();
+  writeFileSync(types,"export type Value='changed';");
+  assert.throws(()=>scope.prepare('first.tsx'),/helper-checker-input-changed/);
+  assert.throws(()=>scope.requireCurrent(),/helper-checker-input-changed/);
+  writeFileSync(types,"export type Value='original';");scope.requireCurrent();
+  writeFileSync(file,code+'\n// external change');
+  reference.files[realpathSync(file)]=createHash('sha256').update(readFileSync(file)).digest('hex');
+  assert.throws(()=>scope.prepare('first.tsx'),/helper-reference-changed/,'caller cannot retag the original pinned compiler graph');
+  assert.throws(()=>first.requireCurrent(),/helper-reference-changed/);
+  assert.throws(()=>scope.requireCurrent(),/helper-reference-changed/);
+}));
 
 test('failed provider-pop observations permit native cleanup but permanently refuse the run', () => fixture(dir => {
   writeFileSync(path.join(dir,'components.tsx'),`import './primitive';

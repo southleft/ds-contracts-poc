@@ -18,7 +18,7 @@ import {instanceFillExpression,hasBoundPaintUsage} from '../packages/core/src/in
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {reactAvailabilityGuards, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
 import {hasComponentGrow,hasComponentHostPlacement} from '../scripts/contract-schema.js';
@@ -499,6 +499,7 @@ export function generateTsx(
   }
 
   prelude.push(...reactDrawnVariantGuard(contract, codePropOf));
+  prelude.push(...reactAvailabilityGuards(contract, codePropOf));
   /** onClick + ARIA state for a part that is an event trigger. A NATIVE
    *  checkable trigger (input[type=checkbox|radio]) gets the platform's own
    *  channels instead: checked + onChange, and any out-of-pair toggle value

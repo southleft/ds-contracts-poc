@@ -1,5 +1,5 @@
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
-import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
+import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
 import {qualifyAuthoredTextAppearanceTable} from './source-authored-text-appearance.js';
 import {fixedSwapOwnerRoots, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
@@ -8075,6 +8075,33 @@ function primaryGrowRows(m: Merged, parentModes: ParentModes | null) {
       fills: mode === 'HORIZONTAL' ? o.node.fillWidth === true : mode === 'VERTICAL' ? o.node.fillHeight === true : false};
   });
 }
+/** A conditional allocation needs every tuple where the emitted part can
+ * render. Existing visibility/presence gates may exclude rows; missing source
+ * observations cannot. Keep tuple identity and duplicates explicit. */
+function completePrimaryFillPresence(m: Merged, part: Part, ctx: Ctx): boolean {
+  if (!ctx.axes.length) return false;
+  const tuple = (variant: string) => ctx.axes.map(axis => {
+    const raw = axisValuesOf(variant)[axis.property];
+    return raw !== undefined && axis.values.includes(raw)
+      ? axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw) : undefined;
+  });
+  const all = ctx.totalVariants.map(tuple), observed = m.occ.map(o => tuple(o.variant));
+  if ([...all, ...observed].some(values => values.some(value => value === undefined)) ||
+      new Set(all.map(values => JSON.stringify(values))).size !== all.length) return false;
+  const gate = part.visibleWhen;
+  const gateAxis = gate && ctx.axes.findIndex(axis => axis.propName === gate.prop);
+  if (gate && (gateAxis === undefined || gateAxis < 0 ||
+      gate.equals === undefined && !isBooleanAxis(ctx.axes[gateAxis]))) return false;
+  const domains = absoluteGeometryVisibleDomains(ctx.axes.map(axis => axis.propName),
+    ctx.axes.map(axis => axis.values.map(raw => axis.omitted?.unsetValue === raw ? null : axisValue(axis, raw))), part.visibleWhen);
+  const required = new Set(all.filter(values => values.every((value, i) => domains[i].includes(value!)) &&
+    (!gate || gate.equals !== undefined || values[gateAxis!] === 'true') &&
+    resolvePresence(part, Object.fromEntries(ctx.axes.map((axis, i) => [axis.propName, values[i]]))))
+    .map(values => JSON.stringify(values)));
+  const keys = observed.map(values => JSON.stringify(values));
+  return required.size > 0 && new Set(keys).size === keys.length && keys.length === required.size &&
+    keys.every(key => required.has(key));
+}
 function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: Record<string, unknown>, ctx: Ctx, where: string): void {
   const rows = primaryGrowRows(m, parentModes);
   if (rows.some((row, index) => !row.supported && (m.occ[index].node.fillWidth || m.occ[index].node.fillHeight))) {
@@ -8114,7 +8141,7 @@ function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: 
           !Number.isFinite(geometry.localSize[dim]) || geometry.localSize[dim] <= 0) return undefined;
       return geometry.localSize[dim];
     });
-    if (ctx.mint && m.occ.length === ctx.totalVariants.length && !part.component && !part.slot && !part.repeat &&
+    if (ctx.mint && (m.occ.length === ctx.totalVariants.length || completePrimaryFillPresence(m, part as Part, ctx)) && !part.component && !part.slot && !part.repeat &&
         !part.layoutByProp && !part.layoutByCombination && !part.absoluteGeometry && !part.absoluteGeometryByCombination &&
         literals?.[dim] === undefined && tokens?.[dim] === undefined &&
         sizes.length > 0 && sizes.every(value => value !== undefined && value === sizes[0])) {
@@ -9082,6 +9109,35 @@ function applyLayoutSplit(holder: Record<string, unknown>, split: LayoutSplit | 
   holder.stylesWhen = [...existing, ...split.stylesWhen];
 }
 
+/** A full drawn-domain guard makes globally constant axes unreachable at any
+ * other value. Remove only those columns from over-budget layout tables;
+ * keep the original public props and complete runtime domain unchanged. */
+function compactDrawnLayoutConstants(contract: Contract, notes: string[]): void {
+  const domain = contract.bindings.figma.drawnVariants;
+  if (!domain?.length) return;
+  const constants = new Map(Object.keys(domain[0]).filter(prop =>
+    domain.every(row => Object.hasOwn(row, prop) && row[prop] === domain[0][prop]))
+    .map(prop => [prop, String(domain[0][prop])]));
+  for (const {part, path} of walkAnatomy(contract)) {
+    const table = part.layoutByCombination;
+    if (!table || table.props.length <= 8) continue;
+    const keep = table.props.flatMap((prop, index) => constants.has(prop) ? [] : [index]);
+    if (!keep.length || keep.length === table.props.length || !table.rows.length ||
+        table.rows.some(row => row.values.length !== table.props.length ||
+          table.props.some((prop, index) => constants.has(prop) && row.values[index] !== constants.get(prop)))) continue;
+    const rows = new Map<string, typeof table.rows[number]>();
+    let conflict = false;
+    for (const row of table.rows) {
+      const values = keep.map(index => row.values[index]), key = JSON.stringify(values), prior = rows.get(key);
+      if (prior && canonicalJson(prior.layout) !== canonicalJson(row.layout)) { conflict = true; break; }
+      rows.set(key, {...row, values});
+    }
+    if (conflict) continue; // Preserve the existing schema refusal for an unproved projection.
+    part.layoutByCombination = {props: keep.map(index => table.props[index]), rows: [...rows.values()]};
+    notes.push(`${path}: constant drawn-domain axes omitted from conditional layout keys; original props and full runtime domain retained`);
+  }
+}
+
 /** A direct visible frame family can carry an exact per-tuple child order.
  * Source object identity must be one-to-one; omissions and synthetic folds
  * keep the existing layout refusal instead of borrowing a default direction. */
@@ -9768,7 +9824,8 @@ function forcedStatePreview(
  *  parent's per variant). Detection is exact-correlation over EVERY
  *  occurrence: the canonical applied value equals the parent axis's
  *  canonical value in each variant. Anything that varies WITHOUT an exact
- *  axis match keeps the first value with a named note — never guessed. */
+ *  axis match or a proved finite joint table keeps the first value with a
+ *  named note — never guessed. */
 function threadInstanceProps(
   base: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean>; omitted?: ReadonlySet<string> }>,
@@ -9777,6 +9834,7 @@ function threadInstanceProps(
   instanceOf: string,
   child?: MinimalChildContract,
   component?: Record<string, unknown>,
+  caller?: Merged,
 ) {
   if (perOccurrence.length < 2) return;
   const enumAxes = ctx.axes.filter((a) => !isBooleanAxis(a) && !a.omitted);
@@ -9901,6 +9959,38 @@ function threadInstanceProps(
           .join(', ')}) — bound as a per-value lookup instead of pinning the first variant's value`,
       );
     } else {
+      // A Boolean child can depend on several parent axes (for example,
+      // selected AND NOT grouped). Preserve every observed value in the same
+      // finite argument table used by source-owned visibility controls. A
+      // source-authenticated partial caller may omit its argument outside the
+      // observed rows; this does not grant the part presence or availability.
+      const variants = new Set(perOccurrence.map(o => o.variant));
+      const complete = perOccurrence.length === ctx.totalVariants.length;
+      const callerRows = booleanChild && component && !complete && caller && qualifiedComponentCallerRows(caller, ctx);
+      if (booleanChild && component && ctx.axes.length > 1 && ctx.axes.length <= 8 &&
+          !ctx.axes.some(a => a.omitted) && variants.size === perOccurrence.length &&
+          perOccurrence.every(o => ctx.totalVariants.includes(o.variant) &&
+            typeof o.canonical[propName] === 'boolean' && !o.omitted?.has(propName)) &&
+          (complete || callerRows)) {
+        const byVariant = new Map(perOccurrence.map(o => [o.variant, o.canonical[propName] as boolean]));
+        const rows = ctx.totalVariants.map(variant => ({
+          values: ctx.axes.map(a => {
+            const raw = axisValuesOf(variant)[a.property];
+            return raw !== undefined && a.values.includes(raw) ? axisValue(a, raw) : undefined;
+          }),
+          value: byVariant.get(variant) ?? null,
+        }));
+        if (rows.every(row => row.values.every(value => value !== undefined)) &&
+            new Set(rows.map(row => JSON.stringify(row.values))).size === rows.length) {
+          ((component.booleanPropsByCombination ??= {}) as Record<string, unknown>)[propName] = {
+            props: ctx.axes.map(a => a.propName), rows,
+          };
+          delete base[propName];
+          fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
+          ctx.notes.push(`${where}: applied prop "${propName}" of the nested "${instanceOf}" retained through an exact joint Boolean table over ${ctx.axes.map(a => a.propName).join(' × ')}${callerRows ? '; source-authenticated unobserved caller rows omit the argument' : ''}`);
+          continue;
+        }
+      }
       // Joint selection is admitted only for a known finite child API and a
       // complete, unambiguous source domain. Missing captures are not defaults.
       const type = child?.props.find(p => p.name === propName)?.type;
@@ -9909,7 +9999,6 @@ function threadInstanceProps(
         const raw=axisValuesOf(o.variant)[a.property];
         return raw === undefined || !a.values.includes(raw) ? undefined : axisValue(a,raw);
       }),value:o.canonical[propName]}));
-      const variants = new Set(perOccurrence.map(o => o.variant));
       if(component && Array.isArray(domain) && ctx.axes.length > 1 && ctx.axes.length <= 8 && !ctx.axes.some(a=>a.omitted) &&
           perOccurrence.length === ctx.totalVariants.length && variants.size === perOccurrence.length &&
           ctx.totalVariants.every(v=>variants.has(v)) && !perOccurrence.some(o=>o.omitted?.has(propName)) &&
@@ -13067,11 +13156,17 @@ function buildPart(
         !part.instanceAffine && !part.instanceAffineByProp && !part.instanceAffineLayout;
       const qualifier=componentLeaf ? qualifyOwnedComponentAvailability :
         !part.component && !part.parts ? qualifyDirectPartAvailability : undefined;
-      const availability=ctx.structuralAvailabilitySource && qualifier &&
-        qualifier(ctx.structuralAvailabilitySource,m.occ,ctx.axes.map(axis=>({
-          property:axis.property,prop:axis.propName,values:axis.values,
-          map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
-        })),declaredPresenceDomain(ctx),ctx.guardedDrawnPartDomain===true);
+      const availabilityAxes=ctx.axes.map(axis=>({
+        property:axis.property,prop:axis.propName,values:axis.values,
+        map:Object.fromEntries(axis.values.map(value=>[value,axisValue(axis,value)])),
+      }));
+      const domain=declaredPresenceDomain(ctx),source=ctx.structuralAvailabilitySource;
+      let availability=source && qualifier &&
+        qualifier(source,m.occ,availabilityAxes,domain,ctx.guardedDrawnPartDomain===true);
+      // A plain nested text owner uses the same exact original-path witness as
+      // a nested instance; a direct-only search cannot establish its absence.
+      if(!availability && source && qualifier===qualifyDirectPartAvailability && m.type==='TEXT')
+        availability=qualifyOwnedTextAvailability(source,m.occ,availabilityAxes,domain,ctx.guardedDrawnPartDomain===true);
       if(!availability)throw Error('visibility-demand-owned-part-unqualified:'+where);
       part.availabilityByCombination=availability;
       ctx.notes.push(where+': exact source membership carried independently from authored visibility; an explicit control cannot target an absent plane');
@@ -13595,7 +13690,7 @@ function buildPartFromEvidence(
         return { variant: o.variant, omitted,
           canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties ?? {}, id, ctx, where, true, keys, omitted, projectState) };
       });
-      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string), component);
+      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string), component, m);
       // Every applied prop may have been dropped as unmappable (each is a
       // named note) — an empty props object carries nothing.
       if (Object.keys(canonical).length > 0) component.props = canonical;
@@ -16593,6 +16688,7 @@ export function proposeFromDump(
     const uncarriedState = error instanceof ExactProjectionError &&
       error.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS' && error.message.includes('state-axis-state-not-carried:');
     const capturedDomainRequired = error instanceof DirectSlotDrawnDomainRequired ||
+      error instanceof SparseMatrixInferenceError ||
       error instanceof ExactProjectionError && (error.code === 'EXACT_MATRIX_RAGGED' || uncarriedState);
     if (opts.drawnVariantSurface !== 'react-runtime' || !capturedDomainRequired) throw error;
     // Freeze the package's API domain before inversion. This declares which
@@ -19194,6 +19290,10 @@ function proposeFromDumpFencedImpl(
   }
   settleOutsideStrokeAlignment(contract, ctx.notes);
   if (validationContract !== contract) settleOutsideStrokeAlignment(validationContract, ctx.notes);
+  if (drawnDeclaration !== undefined) {
+    compactDrawnLayoutConstants(contract as unknown as Contract, ctx.notes);
+    if (validationContract !== contract) compactDrawnLayoutConstants(validationContract as unknown as Contract, ctx.notes);
+  }
   const parsedContract = ContractSchema.parse(validationContract);
   const jointErrors = jointTokenTableErrors(parsedContract);
   if (jointErrors.length) throw new Error(`FIGMA_JOINT_TOKEN_TABLE_UNSUPPORTED: ${jointErrors.join('; ')}`);

@@ -1,10 +1,17 @@
 /** Join engine-observed paint bounds with original-page isolated capture.
  * Translation belongs to the consumer instrument cell, never component CSS. */
 import {PNG} from 'pngjs';
-import type {Page} from 'playwright-core';
+import type {JSHandle,Page} from 'playwright-core';
 import {observeConsumerPaintExtent} from './design-consumer-paint-extent.js';
 import {captureIsolatedRegion} from './design-consumer-isolated-capture.js';
 import {enclosingFrame,imageSha256,type FrameBox,type ConsumerFrame} from './design-consumer-framing-v2.js';
+// Keep all geometry, computed properties and pseudo styles in Chromium. Only
+// exact equality leaves the browser, avoiding deep protocol serialization.
+type SnapshotHandle = JSHandle<{snapshot:string}>;
+async function sameSnapshot(before:SnapshotHandle,after:SnapshotHandle):Promise<boolean> {
+ try{return await before.evaluate((left,right)=>left.snapshot===right.snapshot,after);}
+ finally{await after.dispose();}
+}
 export type ObservedCapture = {bytes:Buffer;frame:ConsumerFrame;paint:FrameBox;translation?:{
  x:number;y:number;beforeLayout:FrameBox;afterLayout:FrameBox;beforeLayoutSha256:string;afterLayoutSha256:string;
 }}|{refused:string};
@@ -69,16 +76,27 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
  if(!correct)return {refused:'capture-translation-instrument-not-ancestor'};
  const old=await instrument.evaluate(el=>({value:(el as HTMLElement).style.getPropertyValue('translate'),priority:(el as HTMLElement).style.getPropertyPriority('translate'),style:el.getAttribute('style'),computed:getComputedStyle(el).translate,transform:getComputedStyle(el).transform}));
  if(old.computed!=='none'||old.transform!=='none')return {refused:'capture-translation-instrument-already-transformed'};
- const observe=()=>root.evaluate(el=>[el,...el.querySelectorAll('*')].map(n=>{
-  const b=n.getBoundingClientRect();return {box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles:[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].map(k=>[k,s.getPropertyValue(k)]);})};
- }));
- const before=await observe(),view=await page.evaluate(()=>({width:innerWidth,height:innerHeight,scrollX,scrollY}));
+ const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
+  const b=n.getBoundingClientRect();return {hasClientRect:n.getClientRects().length>0,emptyBoundingRect:b.x===0&&b.y===0&&b.width===0&&b.height===0,box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles:[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].map(k=>[k,s.getPropertyValue(k)]);})};
+ }))}));
+ const before=await observe();
+ try{
+ const view=await page.evaluate(()=>({width:innerWidth,height:innerHeight,scrollX,scrollY}));
  const baseline=await captureIsolatedRegion(page,root,{x:0,y:0,width:layout.width,height:layout.height});if('refused'in baseline)return baseline;
  let result:ObservedCapture={refused:'capture-translation-incomplete'};
  try{
   await instrument.evaluate((el,shift)=>(el as HTMLElement).style.setProperty('translate',`${shift.x}px ${shift.y}px`,'important'),{x:dx,y:dy});
-  const expected=before.map(item=>({...item,box:{...item.box,x:item.box.x+dx,y:item.box.y+dy}}));
-  if(JSON.stringify(expected)!==JSON.stringify(await observe()))result={refused:'capture-translation-changed-subject'};
+  const expected=await before.evaluateHandle((stored,shift)=>({snapshot:JSON.stringify(
+   (JSON.parse(stored.snapshot) as Array<{box:FrameBox;hasClientRect:boolean;emptyBoundingRect:boolean}>).map(item=>
+    // Non-rendering SVG definitions and display:none nodes have no client
+    // rectangle. Chromium keeps their empty bounding rectangle at zero even
+    // when an ancestor moves. Real zero-size layout boxes still translate.
+    !item.hasClientRect&&item.emptyBoundingRect?item:{...item,box:{...item.box,x:item.box.x+shift.x,y:item.box.y+shift.y}}
+   )
+  )}),{x:dx,y:dy});
+  let unchanged:boolean;
+  try{unchanged=await sameSnapshot(expected,await observe());}finally{await expected.dispose();}
+  if(!unchanged)result={refused:'capture-translation-changed-subject'};
   else if(JSON.stringify(view)!==JSON.stringify(await page.evaluate(()=>({width:innerWidth,height:innerHeight,scrollX,scrollY}))))result={refused:'capture-translation-changed-view'};
   else{
    const shifted=await observeConsumerPaintExtent(page,selector);
@@ -100,6 +118,7 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
  }finally{
   await instrument.evaluate((el,s)=>{const style=(el as HTMLElement).style;if(s.value)style.setProperty('translate',s.value,s.priority);else style.removeProperty('translate');if(s.style===null&&!style.length)el.removeAttribute('style');},old);
  }
- if(JSON.stringify(before)!==JSON.stringify(await observe()))return {refused:'capture-translation-restoration-changed-subject'};
+ if(!await sameSnapshot(before,await observe()))return {refused:'capture-translation-restoration-changed-subject'};
  return result;
+ }finally{await before.dispose();}
 }

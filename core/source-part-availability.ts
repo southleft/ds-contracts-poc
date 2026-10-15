@@ -57,7 +57,18 @@ type Segment = {name:string;type:string};
 /** Observe an owned INSTANCE plane without granting authority over its internals.
  * Membership and caller visibility remain independent. Original paths are never
  * resolved through an instance owner or through sanitized display names. */
-export function qualifyOwnedComponentAvailability(source: DumpSet,
+export function qualifyOwnedComponentAvailability(...args: Parameters<typeof qualifyDirectPartAvailability>): Part['availabilityByCombination'] {
+  return qualifyOwnedLeafAvailability('INSTANCE',...args);
+}
+
+/** A captured childless TEXT may own visibility through plain frame/group
+ * ancestors. The exact original path and source bytes, not a merged wrapper,
+ * determine membership in each independently admitted source plane. */
+export function qualifyOwnedTextAvailability(...args: Parameters<typeof qualifyDirectPartAvailability>): Part['availabilityByCombination'] {
+  return qualifyOwnedLeafAvailability('TEXT',...args);
+}
+
+function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT',source: DumpSet,
   occurrences: readonly {variant:string;node:DumpNode}[],
   axes: readonly {property:string;prop:string;values:string[];map:Record<string,string>}[],
   declaredDomain: readonly (readonly (string|null)[])[] | undefined,
@@ -67,10 +78,11 @@ export function qualifyOwnedComponentAvailability(source: DumpSet,
       new Set(axes.map(a=>a.property)).size!==axes.length||new Set(axes.map(a=>a.prop)).size!==axes.length||
       !dense(source.variants)||!dense(occurrences)||!occurrences.length||occurrences.length>=source.variants.length||
       axes.some(a=>!dense(a.values)||!a.values.length||new Set(a.values).size!==a.values.length||a.values.some(v=>!Object.hasOwn(a.map,v)||typeof a.map[v]!=='string')||new Set(a.values.map(v=>a.map[v])).size!==a.values.length)||
-      occurrences.some(o=>!o.node.nodeId||o.node.type!=='INSTANCE'||!o.node.name||
+      occurrences.some(o=>!o.node.nodeId||o.node.type!==kind||!o.node.name||
         (o.node.children!==undefined&&(!dense(o.node.children)||o.node.children.length!==0)))) return;
   const targetKey=occurrences[0].node.instanceSetKey??occurrences[0].node.instanceKey;
-  if(!targetKey||occurrences.some(o=>(o.node.instanceSetKey??o.node.instanceKey)!==targetKey)) return;
+  if(kind==='INSTANCE'&&(!targetKey||occurrences.some(o=>(o.node.instanceSetKey??o.node.instanceKey)!==targetKey))) return;
+  if(kind==='TEXT'&&occurrences.some(o=>typeof o.node.text?.characters!=='string')) return;
   const safe=(n:DumpNode)=>(n.hidden===undefined||n.hidden===false)&&n.propRefs?.visible===undefined&&n.bound?.visible===undefined&&n.propRefs?.mainComponent===undefined;
   const allIds=new Set<string>([source.nodeId]),mainNames=new Set<string>();
   const indexed=new Map<string,Map<string,{node:DumpNode;path:Segment[]}>>();
@@ -117,8 +129,8 @@ export function qualifyOwnedComponentAvailability(source: DumpSet,
     }
     const occurrence=byMain.get(main.name);
     if(node){
-      if(!occurrence||!safe(node)||node.type!=='INSTANCE'||node.nodeId!==occurrence.nodeId||
-          canonicalJson(node)!==canonicalJson(occurrence)||(node.instanceSetKey??node.instanceKey)!==targetKey) return;
+      if(!occurrence||!safe(node)||node.type!==kind||node.nodeId!==occurrence.nodeId||
+          canonicalJson(node)!==canonicalJson(occurrence)||kind==='INSTANCE'&&(node.instanceSetKey??node.instanceKey)!==targetKey) return;
     }else if(occurrence) return;
     observed.push({values,present:node!==undefined});
   }

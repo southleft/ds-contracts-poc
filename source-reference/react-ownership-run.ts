@@ -1,4 +1,7 @@
+import {readReactAuthoredClasses} from './react-authored-classes.js';
+import {observeReactAuthoredClasses} from './react-authored-class-observation.js';
 import {observeReactOriginalWrapper} from './react-original-wrapper-observation.js';
+import {reactCaseRootOwner} from './react-case-source.js';
 import {readReactOriginalWrappers,type ReactOriginalWrapperCandidate} from './react-original-wrappers.js';
 import {discoverCompiledDependencies} from './react-compiled-dependencies.js';
 import {observeReactJsxHelpers,reactJsxHelperObservationsUnchanged,type ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
@@ -90,6 +93,18 @@ export interface ReactOwnershipReport {
   engine?: Record<string, string>;
   observedReferenceId?: string;
 }
+/** Host-only work selection. Omitted cases remain in the original denominator
+ * and report; a finite observation never claims those cases were observed. */
+export function reactOwnershipSelectedCases(reference: Pick<ReactReference, 'cohort'>,
+  selectedCaseIds?: readonly string[]): ReadonlySet<string> | undefined {
+  if (selectedCaseIds === undefined) return undefined;
+  const known = new Set(reference.cohort.cases.map(c => c.id));
+  if (!Array.isArray(selectedCaseIds) || !selectedCaseIds.length ||
+      Array.from(selectedCaseIds).some(id => typeof id !== 'string' || !known.has(id)) ||
+      new Set(selectedCaseIds).size !== selectedCaseIds.length)
+    throw Error('react-ownership-case-selection-invalid');
+  return new Set(selectedCaseIds);
+}
 /** The program an ownership observation reads: the reference's declared
  * sources with their JSX dependencies, plus the dependency exports its runtime
  * imports bind. A staged repair candidate must be read the same way (§D.173). */
@@ -106,7 +121,9 @@ export function startReactOwnership(
   reference: ReactReference,
   sourceRoot: string,
   evidenceRoot: string,
+  options: { selectedCaseIds?: readonly string[] } = {},
 ) {
+  const selectedCases = reactOwnershipSelectedCases(reference, options.selectedCaseIds);
   if (!reactReferenceUnchanged(reference))
     throw Error("react-ownership-source-changed");
   const runtimeDependencies = readReactOwnershipProgram(reference, sourceRoot);
@@ -162,6 +179,10 @@ export function startReactOwnership(
           problems: [],
         };
         state.rows.push(row);
+        if (selectedCases && !selectedCases.has(c.id)) {
+          row.problems.push('react-ownership-case-not-observed');
+          continue;
+        }
         const rowDir = path.join(dir, c.id);
         mkdirSync(rowDir);
         try {
@@ -231,6 +252,7 @@ export function startReactOwnership(
                 : undefined;
               if (ownership?.problems.length)
                 throw Error(ownership.problems.join(","));
+              let subject:ReactOwnership['components'][number]|undefined;
               if (ownership) {
                 if (!reactOwnershipMatchesTree(ownership, tree.tree))
                   throw Error("react-ownership-captured-paths-differ");
@@ -239,13 +261,7 @@ export function startReactOwnership(
                 );
                 if (JSON.stringify(again) !== JSON.stringify(ownership))
                   throw Error("react-ownership-not-stable");
-                if (
-                  !ownership.components.some(
-                    (i) =>
-                      i.source.exportName === c.subject && i.roots.includes(""),
-                  )
-                )
-                  throw Error("react-ownership-subject-root-unmatched");
+                subject=reactCaseRootOwner(reference,program,c.id,ownership);
               }
               const ownedHostPaths = ownership ? nestedReactHostPaths(program, ownership, tree.tree) : [];
               const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership, '#root', ownedHostPaths) : undefined;
@@ -293,9 +309,8 @@ export function startReactOwnership(
                     throw Error('jsx-values-observation-unstable');
                   row.jsxValues=jsx.map((subject,i)=>({path:subject.path,result:results[i]}));
                 }
-                const target = ownership.components.find(i => i.source.exportName === c.subject && i.roots.includes(""))!;
                 row.propertyMatrix = await observeReactPropertyMatrix({page, program, ownership, tree:tree.tree,
-                  image:tree.sourcePngSha256, instanceId:target.id, selector:profile.path[0],
+                  image:tree.sourcePngSha256, instanceId:subject!.id, selector:profile.path[0],
                   dir:path.join(rowDir,"matrix"), failures,
                   assertCurrent:()=>{if(stopped || !unchanged())throw Error("react-property-effects-source-changed-or-interrupted");},
                 });
@@ -347,6 +362,12 @@ export function startReactOwnership(
               treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'jsx-helpers',String(index)),engine:state.engine!,
               assertCurrent:()=>{if(stopped||!unchanged())throw Error('jsx-helper-source-changed-or-interrupted');}})});
           }
+          // A finite authored class capture proves original render membership,
+          // not caller-slot semantics or the effects of private implementation helpers.
+          let classRoot=false;try{classRoot=readReactAuthoredClasses(reference,row.ownership!.components.filter(instance=>instance.roots.includes('')&&!row.ownership!.components.some(parent=>parent.id===instance.parent&&parent.roots.includes(''))).map(instance=>instance.source)).length>0;}catch{/* The ordinary source/runtime refusal remains visible. */}
+          if(classRoot){const index=row.jsxHelpers.length;row.jsxHelpers.push({path:'',result:await observeReactAuthoredClasses({browser,reference,program,ownership:row.ownership!,caseId:c.id,
+            treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'jsx-helpers',String(index)),engine:state.engine!,
+            assertCurrent:()=>{if(stopped||!unchanged())throw Error('authored-class-source-changed-or-interrupted');}})});}
           writeFileSync(path.join(rowDir,'jsx-helpers.json'),JSON.stringify(row.jsxHelpers,null,2)+'\n',{flag:'wx'});
           const contentContext=row.helperObservations.some(h=>h.containingFlow?.status==='observed'&&h.containingFlow.content==='forwarded') || row.originalWrappers?.some(w=>w.result.status==='observed')
             ?readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership!,tree:pair[0].root,helpers:row.helperObservations,wrappers:row.originalWrappers,
@@ -359,7 +380,7 @@ export function startReactOwnership(
               .map(effect=>[effect.id,JSON.parse(readFileSync(path.join(rowDir,"matrix",effect.id+".json"),"utf8"))]));
             row.authoredTrees=[];
             for(const [index,helper] of row.jsxHelpers.entries()){
-              if(helper.path!==''||!helper.result.renderGraph?.rows.some(r=>r.steps.some(s=>s.membership)))continue;
+              if(helper.path!==''||(!(helper.result.runtime?.status==='observed'&&helper.result.runtime.authoredClasses)&&!helper.result.renderGraph?.rows.some(r=>r.steps.some(s=>s.membership))))continue;
               try{
                 const baseline=row.propertyMatrix.rows.find(r=>r.baseline),snapshot=baseline&&snapshots[baseline.id];
                 if(!snapshot?.fonts||snapshot.treeSha256!==pair[0].tree||JSON.stringify(snapshot.ownership)!==JSON.stringify(row.ownership))throw Error('react-authored-tree-baseline-unavailable');
@@ -464,6 +485,7 @@ export function reactOwnershipEngine():Record<string,string>{
         [
           "react-ownership.ts",
           "react-ownership-run.ts",
+          "react-case-source.ts",
           "react-original-wrapper-observation.ts",
           "react-compiled-dependencies.ts",
           "link-root-dependencies.ts",
@@ -515,6 +537,9 @@ export function reactOwnershipEngine():Record<string,string>{
           "react-render-graph-runtime.ts",
           "react-render-graph.ts",
           "react-authored-content.ts",
+          "react-authored-classes.ts",
+          "react-authored-class-runtime.ts",
+          "react-authored-class-observation.ts",
           "react-authored-tree.ts",
           "observed-component-placement.ts",
           "observed-content.ts",

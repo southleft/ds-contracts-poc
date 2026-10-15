@@ -1,5 +1,6 @@
 import { CONSUMER_VITE_CONFIG } from './design-consumer-vite-config.js';
 import {consumerSlotNames,probeConsumerSlot,visibleSlotCases} from './design-consumer-slots.js';
+import {probeConsumerChildren,consumerChildrenProblems} from './design-consumer-children.js';
 import {partialSourceTextControlPlan,probeSourceTextControls} from './design-consumer-text-controls.js';
 import {domainTransitionGroups} from './design-consumer-domain.js';
 /**
@@ -957,19 +958,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       // must not silently accept and discard them; if it declares one, they must render.
       {
         const slotNames = consumerSlotNames(contract.anatomy);
-        const declaresSlot = slotNames.includes('children');
-        const marker = 'Consumer child content';
-        await page.evaluate(([m]) => (window as any).__consumer.setVariantOverride({ children: m }), [marker] as const);
-        const cellTexts = await Promise.all(cases.map(async c => page.locator(`[data-cell="${c.key}"]`).innerText()));
-        const shown = cellTexts.length > 0 && cellTexts.every(t => t.includes(marker));
-        await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
-        // The installed declaration is the API a TypeScript consumer sees.
-        const declaration = readFileSync(path.join(consumer, 'node_modules', ...lib.name.split('/'), 'dist', args.component, `${args.component}.d.ts`), 'utf8');
-        const propsInterface = declaration.slice(declaration.indexOf(`interface ${args.component}Props`));
-        const refusedByType = /Omit<[^>]*>,\s*(?:'[^']*'\s*\|\s*)*'children'/.test(propsInterface.split('{')[0]);
-        receipt.behavior.children = { contractDeclaresSlot: declaresSlot, renderedAtRuntime: shown, refusedByType };
-        if (declaresSlot && !shown) problems.push('children-slot-discarded');
-        if (!declaresSlot && !shown && !refusedByType) problems.push('children-accepted-but-discarded');
+        receipt.behavior.children = await probeConsumerChildren(page,contract,consumer,lib.name,args.component,cases.map(c=>c.key));
+        problems.push(...consumerChildrenProblems(receipt.behavior.children));
         receipt.behavior.namedSlots = [];
         for (const name of slotNames.filter(name => name !== 'children')) {
           const coverage = visibleSlotCases(contract, cases, name);

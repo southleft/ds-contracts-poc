@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright-core';
 import {PNG} from 'pngjs';
+import {readFileSync} from 'node:fs';
 import {captureIsolatedRegion} from './design-consumer-isolated-capture.js';
 const count=(bytes:Buffer,r:number,g:number,b:number)=>{const p=PNG.sync.read(bytes);let n=0;for(let i=0;i<p.data.length;i+=4)if(p.data[i]===r&&p.data[i+1]===g&&p.data[i+2]===b&&p.data[i+3]===255)n++;return n;};
 test('expanded isolated capture retains overflow, excludes neighbors, preserves clipping and restores styles',async()=>{
@@ -71,5 +72,58 @@ test('a hidden sibling cannot become visible as a side effect of isolation',asyn
  const browser=await chromium.launch();try{const page=await browser.newPage();
  await page.setContent('<style>#subject{width:20px;height:20px;background:blue}#hidden{display:none}body:has(#neighbor[style]) #hidden{display:block}</style><div id="subject"></div><div id="neighbor"></div><div id="hidden">Hidden</div>');
  const before=await page.locator('body').innerHTML();assert.deepEqual(await captureIsolatedRegion(page,page.locator('#subject'),{x:0,y:0,width:20,height:20}),{refused:'isolated-capture-hidden-sibling-became-visible'});assert.equal(await page.locator('body').innerHTML(),before);
+ }finally{await browser.close();}
+});
+
+test('isolation compares late hidden and pseudo custom properties, including added names',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ const leaves=Array.from({length:240},(_,i)=>`<span id="leaf${i}" style="display:none;--source-index:${i}"></span>`).join('');
+ for(const rule of ['--source-index:changed!important','--new-property:added','font-variant-numeric:tabular-nums']){
+  await page.setContent('<style>#subject{width:20px;height:20px;background:blue}#leaf239::before{content:""}body:has(#neighbor[style]) #leaf239'+(rule.startsWith('font-')?'::before':'')+'{'+rule+'}</style><div id="subject">'+leaves+'</div><div id="neighbor"></div>');
+  const before=await page.locator('body').innerHTML();
+  assert.deepEqual(await captureIsolatedRegion(page,page.locator('#subject'),{x:0,y:0,width:20,height:20}),{refused:'isolated-capture-subject-changed'},rule);
+  assert.equal(await page.locator('body').innerHTML(),before,rule);
+ }
+ }finally{await browser.close();}
+});
+
+test('the direct comparator agrees with the previous serialized snapshot across every recorded field',async()=>{
+ const text=readFileSync(new URL('./design-consumer-isolated-capture.ts',import.meta.url),'utf8');
+ const begin=text.indexOf("const exactSnapshot = new Function('el','before', `")+"const exactSnapshot = new Function('el','before', `".length;
+ const end=text.indexOf('\n`);',begin);assert(begin>0&&end>begin);
+ const direct=new Function('el','before',text.slice(begin,end));
+ // This is the previous production observation, retained verbatim as an
+ // independent comparison oracle. It does not call the candidate reader.
+ const previous=new Function('el',`return [el,...el.querySelectorAll('*')].map(n=>{
+  const b=n.getBoundingClientRect(),s=getComputedStyle(n);
+  const matrix=n instanceof SVGPathElement?n.getScreenCTM():null;
+  const local=n instanceof SVGPathElement&&matrix?n.getBBox():null;
+  const geometry=local&&matrix?{local:[local.x,local.y,local.width,local.height],
+   transform:[matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+scrollX,matrix.f+scrollY],path:n.getAttribute('d')}:{box:[b.x+scrollX,b.y+scrollY,b.width,b.height]};
+  return {geometry,style:[...s].map(k=>[k,s.getPropertyValue(k)]),pseudos:['::before','::after'].map(p=>{const ps=getComputedStyle(n,p);return [...ps].map(k=>[k,ps.getPropertyValue(k)]);})};
+ });`);
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ const html='<style>body{margin:0}#subject{width:20px;height:20px;--original:1}#hidden{display:none}#subject::before{content:"";font-variant-numeric:normal}</style><div id="subject"><svg width="20" height="20"><path d="M0 0H20V20H0Z"/></svg><span id="hidden">hidden</span></div>';
+ const mutations=[
+  '',"el.style.setProperty('--original','2')","el.style.setProperty('--added','value')",
+  "el.style.width='21px'","el.querySelector('#hidden').style.display='block'",
+  "el.querySelector('path').setAttribute('d','M0 0H20L20 20H0Z')",
+  "el.querySelector('svg').style.transform='translateX(.25px)'",
+  "el.querySelector('#hidden').style.setProperty('--hidden','changed')",
+  "el.appendChild(document.createElement('span'))","el.querySelector('svg').remove()",
+  "const style=document.createElement('style');style.textContent='#subject::before{font-variant-numeric:tabular-nums}';document.head.appendChild(style)",
+ ];
+ for(const mutate of mutations){
+  await page.setContent(html);const root=page.locator('#subject');
+  const expected=await root.evaluateHandle(direct as (el:Element)=>unknown);
+  try{
+   const old=await root.evaluate(previous as (el:Element)=>unknown);assert.deepEqual(await expected.jsonValue(),old);
+   if(mutate)await root.evaluate(new Function('el',mutate) as (el:Element)=>void);
+   const after=await root.evaluate(previous as (el:Element)=>unknown);
+   const oldEqual=JSON.stringify(old)===JSON.stringify(after);
+   assert.equal(await root.evaluate(direct as (el:Element,before:unknown)=>boolean,expected),oldEqual,mutate);
+   assert.deepEqual(await expected.jsonValue(),old,'comparison cannot mutate its detached baseline');
+  }finally{await expected.dispose();}
+ }
  }finally{await browser.close();}
 });

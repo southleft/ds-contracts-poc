@@ -1,3 +1,4 @@
+import {readReactAuthoredClasses} from './react-authored-classes.js';
 /** A host-held capability for one original, observed authored render tree.
  * It does not authorize source rewrites, unseen inputs or behavior claims. */
 import {readFileSync,realpathSync} from 'node:fs';
@@ -5,7 +6,7 @@ import path from 'node:path';
 import {revisionOf,canonicalJson} from '../core/contract-provenance.js';
 import {flatten,type CapturedNode} from '../extract/computed/lib.js';
 import {evidenceSha} from './react-validation-evidence.js';
-import {reactOwnershipStructure,type ReactOwnership} from './react-ownership.js';
+import {reactOwnershipStructure,outermostRootOwners,type ReactOwnership} from './react-ownership.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import type {ReactJsxHelperObservation} from './react-jsx-helper-observation.js';
 import type {ReactJsxHelperInstrumentationPlan} from './react-helper-instrument.js';
@@ -58,22 +59,50 @@ export function readReactAuthoredContent(options:{referenceId:string;sourceRoot:
   require(same(paired,ownership)&&same(reactOwnershipStructure(recorded),reactOwnershipStructure(ownership)),'ownership-mismatch');
   require(captured.status==='captured'&&!captured.problems.length&&same(captured.tree,tree)&&captured.treeSha256===e.treeSha256&&evidenceSha(JSON.stringify(tree))===e.treeSha256&&captured.sourcePngSha256===e.pngSha256,'tree-mismatch');
   bytes('observed.png',e.pngSha256);
-  require(model.status==='modeled'&&model.acceptedContract===null&&model.runtimeVerified===false&&plan.kind==='jsx-component'&&same(plan.models,[model])&&same(plan.component,model.component),'model-mismatch');
   const runtime=helper.runtime;
-  const expectedCalls=model.calls.filter(c=>c.site&&c.phase!=='module-initialization').length;
-  require(runtime.components?.length&&runtime.components.every(c=>c.context===0&&c.checkedCalls===expectedCalls&&c.targetReads===model.jsxTargets.length),'model-invocation-unverified');
-  const candidates=ownership.components.filter(c=>c.source.module===model.component.file&&c.source.sourceSha256===model.component.sha256&&c.source.span.start<=model.component.start&&c.source.span.end>=model.component.end&&same(c.roots,['']));
-  require(candidates.length===1,'root-instance-ambiguous');const root=candidates[0];
-  require(program.components.some(c=>same({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span},root.source)),'source-mismatch');
-  const sourceFile=realpathSync(path.resolve(options.sourceRoot,root.source.module));
-  require(program.files[sourceFile]===root.source.sourceSha256&&helper.inputs[sourceFile]===root.source.sourceSha256,'source-input-mismatch');
   const graph=verifyReactRenderGraph(recorded,runtime,helper.contextConsumers);
   require(same(graph,helper.renderGraph),'graph-mismatch');
   const nodes=flatten(tree);require(nodes.length===recorded.nodes.length&&nodes.every((n,i)=>n.path===recorded.nodes[i].path&&n.node.tag===recorded.nodes[i].tag),'host-coverage-mismatch');
-  const origins=graph.rows.map(row=>{
-    require(row.status==='linked','host-unlinked:'+row.path);
-    const outer=row.steps.filter(s=>s.componentModels.includes(0));require(outer.length===1,'authored-origin-unproved:'+row.path);return outer[0].render;
-  });
+  let root:ReactOwnership['components'][number],origins:number[];
+  if(plan.authoredClasses?.length){
+    require(same(model,plan),'class-source-plan-artifact-mismatch');
+    require(plan.kind==='jsx-component'&&plan.boundaryOnly&&plan.models.length===0&&!plan.component&&!plan.initializers?.length&&!plan.targets.length,'class-plan-mixed');
+    const replanned=readReactAuthoredClasses({sourceRoot:options.sourceRoot,files:helper.inputs},plan.authoredClasses.map(p=>p.target));
+    require(same(replanned,plan.authoredClasses),'class-source-plan-changed');
+    const candidates=outermostRootOwners(ownership.components);require(candidates.length===1,'class-root-instance-ambiguous');root=candidates[0];
+    const observed=runtime.authoredClasses;
+    require(observed?.qualification==='original-class-render-boundary-only'&&observed.effectsVerified===false&&observed.acceptedContract===null&&runtime.renderGraph,'class-runtime-unavailable');
+    const sourceSame=(target:typeof replanned[number]['target'],source:typeof root.source)=>same({module:target.module,exportName:target.exportName,sourceSha256:target.sourceSha256,span:target.span},source);
+    const project=(fields:typeof observed.calls[number]['factoryFields'])=>Object.fromEntries(fields.map(([name,value])=>[name,
+      value.kind==='null'?null:['string','number','boolean'].includes(value.kind)?value.value:value.kind==='undefined'?{kind:'undefined'}:value.kind==='function'?{kind:'function'}:{kind:'object'}]));
+    const eligible=observed.calls.filter(call=>{
+      const render=runtime.renderGraph!.renders[call.graphRender];
+      return call.current&&call.completion==='returned'&&render&&render.id===call.graphRender&&render.completion==='returned'&&
+        same(call.input,render.input)&&same(call.output,render.output)&&same(call.factoryProps,render.factoryProps)&&
+        replanned.some(p=>same(p.target,call.target)&&same(p.render,call.render));
+    });
+    origins=graph.rows.map(row=>{
+      require(row.status==='linked','host-unlinked:'+row.path);
+      const calls=eligible.filter(call=>sourceSame(call.target,root.source)&&row.steps.some(step=>step.render===call.graphRender));
+      require(calls.length===1&&same(project(calls[0].factoryFields),root.props),'class-root-origin-unproved:'+row.path);return calls[0].graphRender;
+    });
+    for(const boundary of ownership.components){
+      require(replanned.some(p=>sourceSame(p.target,boundary.source)),'class-boundary-source-unproved');
+      for(const path of boundary.roots){const row=graph.rows.find(row=>row.path===path);require(row,'class-boundary-host-missing');
+        require(eligible.some(call=>sourceSame(call.target,boundary.source)&&same(project(call.factoryFields),boundary.props)&&row.steps.some(step=>step.render===call.graphRender)),'class-boundary-origin-unproved');
+      }
+    }
+  }else{
+    require(model.status==='modeled'&&model.acceptedContract===null&&model.runtimeVerified===false&&plan.kind==='jsx-component'&&same(plan.models,[model])&&same(plan.component,model.component),'model-mismatch');
+    const expectedCalls=model.calls.filter(c=>c.site&&c.phase!=='module-initialization').length;
+    require(runtime.components?.length&&runtime.components.every(c=>c.context===0&&c.checkedCalls===expectedCalls&&c.targetReads===model.jsxTargets.length),'model-invocation-unverified');
+    const candidates=ownership.components.filter(c=>c.source.module===model.component.file&&c.source.sourceSha256===model.component.sha256&&c.source.span.start<=model.component.start&&c.source.span.end>=model.component.end&&same(c.roots,['']));
+    require(candidates.length===1,'root-instance-ambiguous');root=candidates[0];
+    origins=graph.rows.map(row=>{require(row.status==='linked','host-unlinked:'+row.path);const outer=row.steps.filter(s=>s.componentModels.includes(0));require(outer.length===1,'authored-origin-unproved:'+row.path);return outer[0].render;});
+  }
+  require(program.components.some(c=>same({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span},root.source)),'source-mismatch');
+  const sourceFile=realpathSync(path.resolve(options.sourceRoot,root.source.module));
+  require(program.files[sourceFile]===root.source.sourceSha256&&helper.inputs[sourceFile]===root.source.sourceSha256,'source-input-mismatch');
   require(origins.length>0&&new Set(origins).size===1,'authored-origin-ambiguous');
   const components=new Map(ownership.components.map(c=>[c.id,c]));require(components.size===ownership.components.length,'instance-duplicate');
   const descendant=(id:string,ancestor:string)=>{

@@ -12,6 +12,100 @@ const profile: SourceProfile = {
   requiredTokens:{'--theme-accent':'#2850a0'}, fontFamily:'IBM Plex Sans',
 };
 const font = readFileSync('extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2').toString('base64');
+
+test('native input values and visible placeholders are source text with their actual painted font', async () => {
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage();
+  const failures = watchSourceFailures(page);
+  const input: SourceProfile = {...profile, path:['#subject'], fontOrigin:'web'};
+  try {
+    await page.setContent(`<style>@font-face{font-family:'IBM Plex Sans';src:url(data:font/woff2;base64,${font})}
+      :root{--theme-accent:#2850a0}#subject{display:inline-flex;background:var(--theme-accent)}
+      input{font:16px "IBM Plex Sans";color:black;width:200px}input::placeholder{font:16px "IBM Plex Sans";color:rgb(90,90,90);opacity:1}
+      </style><div id="subject"><div><div><input value="hi" placeholder="Original placeholder"></div></div></div>`);
+    await page.evaluate(() => document.fonts.ready);
+    const read = () => observeSource(page,input,failures);
+    const original = await read();
+    assert.equal(original.text,'hi');
+    assert.deepEqual(checkSource(input,original),{status:'valid',problems:[]});
+    assert.ok(original.platformFonts.some(f=>f.glyphCount>0 && f.isCustomFont===true));
+    await page.addStyleTag({content:'input{text-transform:uppercase}'});
+    assert.equal((await read()).text,'','transformed input ink cannot use the raw value as a witness');
+    await page.addStyleTag({content:'input{text-transform:none}'});
+    assert.equal((await read()).text,'hi');
+    await page.evaluate(() => {document.querySelector('input')!.value='Actual changed value';});
+    assert.equal((await read()).text,'Actual changed value','reads live native value, not the value attribute');
+    await page.evaluate(() => {document.querySelector('input')!.value='';});
+    assert.equal((await read()).text,'Original placeholder');
+    await page.addStyleTag({content:'input::placeholder{text-transform:uppercase}'});
+    assert.equal((await read()).text,'','transformed placeholder ink cannot use the raw placeholder as a witness');
+    await page.addStyleTag({content:'input::placeholder{text-transform:none}'});
+    await page.addStyleTag({content:'input::placeholder{color:transparent}'});
+    assert.equal((await read()).text,'','transparent placeholder is not a text witness');
+    await page.addStyleTag({content:'input::placeholder{color:black;opacity:0}'});
+    assert.equal((await read()).text,'','transparent placeholder opacity is not a text witness');
+    await page.addStyleTag({content:'input::placeholder{color:black;opacity:1}'});
+    await page.evaluate(() => {document.querySelector('input')!.placeholder='';});
+    assert.ok(checkSource(input,await read()).problems.includes('text-witness-missing'),'genuinely empty input still refuses');
+    await page.evaluate(() => {document.querySelector('input')!.value='Font probe';});
+    await corruptReactReference(page,'missing-font',input);
+    assert.ok(checkSource(input,await read()).problems.includes('font-substitution'),'real missing-font corruption still rejects native input text');
+  } finally {failures.dispose();await browser.close();}
+});
+
+test('native input text excludes hidden masked non-text and arbitrary value properties', async () => {
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage();
+  const failures = watchSourceFailures(page);
+  const input: SourceProfile = {...profile,path:['#subject']};
+  try {
+    await page.setContent(`<style>:root{--theme-accent:#2850a0}#subject{display:inline-flex;background:var(--theme-accent)}
+      input{font:16px serif;color:black}#transparent{color:transparent}#masked{-webkit-text-security:disc}</style>
+      <div id="subject"><input type="password" value="password-secret"><input type="hidden" value="hidden-secret">
+      <input type="checkbox" value="checkbox-secret"><input type="number" value="123"><input type="date" value="2026-10-14">
+      <input style="display:none" value="display-secret"><input style="visibility:hidden" value="visibility-secret">
+      <input style="opacity:0" value="opacity-secret"><input id="transparent" value="transparent-secret">
+      <input id="masked" value="masked-secret"><input style="clip-path:inset(100%)" value="clip-secret">
+      <input style="text-indent:-9999px" value="indent-secret"><div style="width:1px;overflow:hidden"><input value="ancestor-clip-secret"></div>
+      <span id="arbitrary"></span></div><input value="outside-secret">`);
+    await page.evaluate(() => {Object.defineProperty(document.querySelector('#arbitrary'),'value',{get(){throw Error('arbitrary value getter read');}});});
+    const observed = await observeSource(page,input,failures);
+    assert.equal(observed.text,'');
+    assert.ok(checkSource(input,observed).problems.includes('text-witness-missing'));
+    assert.deepEqual(failures.runtimeErrors,[]);
+    await page.evaluate(() => {
+      const control=document.createElement('input');control.value='native getter';document.querySelector('#subject')!.append(control);
+      Object.defineProperty(control,'value',{get(){throw Error('shadowed value getter read');}});
+    });
+    assert.equal((await observeSource(page,input,failures)).text,'native getter','uses the native input getter');
+  } finally {failures.dispose();await browser.close();}
+});
+
+test('native input text keeps selected shadow and label scopes and exposes a deep fallback font', async () => {
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage();
+  const failures = watchSourceFailures(page);
+  try {
+    await page.setContent(`<style>@font-face{font-family:'IBM Plex Sans';src:url(data:font/woff2;base64,${font})}:root{--theme-accent:#2850a0}</style>
+      <source-input></source-input><input id="outside" value="outside text">`);
+    await page.evaluate(() => {document.querySelector('source-input')!.attachShadow({mode:'open'}).innerHTML=
+      '<style>#subject{display:inline-flex;background:var(--theme-accent);font:16px "IBM Plex Sans"}input{font:16px "IBM Plex Sans";color:black}</style><div id="subject"><span>Known</span><div><div><input value="owned value"></div></div></div>';});
+    await page.evaluate(() => document.fonts.ready);
+    const input:SourceProfile={...profile,path:['source-input','#subject'],fontOrigin:'web'};
+    const original=await observeSource(page,input,failures);
+    assert.match(original.text,/owned value/);
+    assert.doesNotMatch(original.text,/outside text/);
+    assert.equal(checkSource(input,original).status,'valid');
+    await page.evaluate(() => {document.querySelector('source-input')!.shadowRoot!.querySelector('input')!.style.fontFamily='serif';});
+    assert.ok(checkSource(input,await observeSource(page,input,failures)).problems.includes('font-substitution'),'shallow known text cannot hide the native control fallback');
+    const outside:SourceProfile={...input,fontPath:['#outside']};
+    assert.doesNotMatch((await observeSource(page,outside,failures)).text,/outside text/,'a font witness outside the source cannot donate its native value');
+    await page.setContent(`<style>button{display:inline-flex;background:var(--theme-accent)}:root{--theme-accent:#2850a0}</style>
+      <button id="labeled"></button><label for="labeled">Real label<input value="must not replace label"></label>`);
+    const labeled:SourceProfile={...profile,path:['#labeled'],associatedLabelText:'Real label'};
+    assert.equal((await observeSource(page,labeled,failures)).text,'Real label','associated label text semantics are unchanged');
+  } finally {failures.dispose();await browser.close();}
+});
 function html(options: {css?:boolean; theme?:boolean; font?:boolean; empty?:boolean; hidden?:boolean} = {}) {
   return `<style>${options.font === false ? '' : `@font-face{font-family:'IBM Plex Sans';src:url(data:font/woff2;base64,${font})}`}
     ${options.theme === false ? '' : ':root{--theme-accent:#2850a0}'}

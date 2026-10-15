@@ -102,14 +102,58 @@ test('legacy graph receipts remain readable and are not silently upgraded',async
   assert.throws(()=>emitNativeContractReadbackScript({...input,graphVerification:1}),/creation-invalid/);
 });
 
-test('a single authored main does not require graph placement identities',async()=>{
+test('a single authored main retains exact graph identities through independent readback',async()=>{
   const f=await nativeComparisonFixture();
   const parent=f.contract('fixture.single-main',{root:{layout:{display:'flex'},literals:{width:'24px',height:'18px'}}});
   const context=await f.context('30000000-0000-4000-8000-000000000003');
-  const creation=await f.run(f.engine.buildNativeContractGraphDraftScript(parent,new Map([[parent.id,parent]]),f.source,context,1));
+  const engine=createFigmaEngine({tokens:{primitives:f.tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map(f.assets)});
+  const graph=new Map([[parent.id,parent]]),compiled=engine.compileNativeContractGraphDraft(parent,graph,f.source,context.operation.id);
+  const script=engine.buildNativeContractGraphDraftScript(parent,graph,f.source,context,1);
+  const creation=await f.run(script);
   assert.equal(creation.status,'created-candidate',JSON.stringify(creation.problems));
+  assert.equal(creation.graphVerification,1);assert.equal(creation.graphTargets.length,1);
+  assert(validNativeGraphCreation(compiled.components,creation));
   const node=await f.figma.getNodeByIdAsync(creation.target.id);
   assert.equal(node.x,0);assert.equal(node.y,0);
+  const input:NativeContractObservationInput={operation:context.operation,planRevision:revisionOf(compiled),
+    projection:compiled.projection,component:compiled.component,graphComponents:compiled.components,graphVerification:1,
+    tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
+  const readback=await f.run(emitNativeContractReadbackScript(input));
+  assert.equal(verifyNativeContractReadback(input,readback).status,'supported-structure-observed');
+  assert.equal(validNativeGraphCreation([],creation),false);
+  for(const mutate of [
+    (c:any)=>{delete c.graphVerification;},
+    (c:any)=>{delete c.graphTargets;},
+    (c:any)=>{c.graphTargets.push(structuredClone(c.graphTargets[0]));},
+    (c:any)=>{c.graphTargets[0].contractId='foreign';},
+    (c:any)=>{c.graphTargets[0].key='foreign';},
+    (c:any)=>{c.graphTargets[0].variants[0].id='foreign';},
+    (c:any)=>{c.graphTargets[0].variants[0].key='foreign';},
+    (c:any)=>{c.nodes.push(structuredClone(c.nodes[1]));},
+    (c:any)=>{c.target.id='foreign';},
+  ]){
+    const altered=structuredClone(creation);mutate(altered);
+    assert.equal(validNativeGraphCreation(compiled.components,altered),false);
+    assert.throws(()=>emitNativeContractReadbackScript({...input,creation:altered}),/creation-invalid/);
+  }
+  const repeated=await f.run(script);assert.equal(repeated.status,'refused');assert.equal(repeated.allocationAttempted,false);
+});
+
+test('legacy single authored main remains unversioned and cannot be promoted to a graph receipt',async()=>{
+  const f=await nativeComparisonFixture();
+  const parent=f.contract('fixture.legacy-single',{root:{layout:{display:'flex'},literals:{width:'24px',height:'18px'}}});
+  const context=await f.context('30000000-0000-4000-8000-000000000004');
+  const engine=createFigmaEngine({tokens:{primitives:f.tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map(f.assets)});
+  const graph=new Map([[parent.id,parent]]),compiled=engine.compileNativeContractGraphDraft(parent,graph,f.source,context.operation.id);
+  const creation=await f.run(engine.buildNativeContractGraphDraftScript(parent,graph,f.source,context));
+  assert.equal(creation.status,'created-candidate');assert.equal(creation.graphVerification,undefined);assert.equal(creation.graphTargets,undefined);
+  assert.equal(validNativeGraphCreation(compiled.components,creation),false);
+  const input:NativeContractObservationInput={operation:context.operation,planRevision:revisionOf(compiled),
+    projection:compiled.projection,component:compiled.component,
+    tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
+  const readback=await f.run(emitNativeContractReadbackScript(input));
+  assert.equal(verifyNativeContractReadback(input,readback).status,'supported-structure-observed');
+  assert.throws(()=>emitNativeContractReadbackScript({...input,graphComponents:compiled.components,graphVerification:1}),/creation-invalid/);
 });
 
 test('absolute instance offsets are independently verified before accepting a graph',async()=>{

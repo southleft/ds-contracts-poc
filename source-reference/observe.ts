@@ -109,6 +109,7 @@ export async function observeSource(page: Page, profile: SourceProfile,
   // Ask Chromium which fonts actually painted the target, including shadow content.
   const cdp = await page.context().newCDPSession(page);
   let platformFonts: SourceObservation['platformFonts'] = [];
+  const nativeText: string[] = [];
   try {
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     const expression = `(() => { let root = document, element = null; for (const s of ${JSON.stringify(profile.associatedLabelText === undefined ? profile.fontPath ?? profile.path : profile.path)}) { element = root?.querySelector(s); root = element?.shadowRoot; } return ${profile.associatedLabelText === undefined ? 'element' : 'element?.labels?.length === 1 ? element.labels[0] : null'}; })()`;
@@ -151,12 +152,77 @@ export async function observeSource(page: Page, profile: SourceProfile,
         // shadow trees; no document-wide text or CSS-family inference is used.
         const described = await cdp.send('DOM.describeNode', {nodeId,depth:-1,pierce:true});
         const pending = [described.node];
+        const nativeSeen = new Set<number>();
         let count = 0, complete = true;
         while (pending.length) {
           const node = pending.pop()!;
           if (++count > 10_000) { complete = false; break; }
           if ((node.childNodeCount ?? 0) !== (node.children?.length ?? 0)) { complete = false; break; }
           pending.push(...node.children ?? [], ...node.shadowRoots ?? []);
+          // Native input ink is not a DOM Text node. Read only known textual
+          // input types, within the selected source, and require this exact
+          // control's painted glyphs before admitting its value as a witness.
+          // No arbitrary .value getter, password, or fabricated void child.
+          if (profile.associatedLabelText === undefined && node.nodeType === 1 &&
+              node.localName === 'input' && !nativeSeen.has(node.backendNodeId)) {
+            nativeSeen.add(node.backendNodeId);
+            const {object} = await cdp.send('DOM.resolveNode', {backendNodeId:node.backendNodeId,objectGroup:'dsc-source-fonts'});
+            if (!object.objectId) { complete = false; break; }
+            const ink = await cdp.send('Runtime.callFunctionOn', {
+              objectId:object.objectId,returnByValue:true,arguments:[{value:profile.path}],functionDeclaration:`function(path) {
+                if (!(this instanceof HTMLInputElement) || !this.isConnected || this.hasAttribute('is')) return null;
+                const type = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'type').get.call(this);
+                if (!['text','search','email','url','tel'].includes(type)) return null;
+                let scope = document, selected = null;
+                for (const selector of path) { selected = scope?.querySelector(selector); scope = selected?.shadowRoot; }
+                let ancestor = this;
+                while (ancestor && ancestor !== selected) {
+                  const root = ancestor.getRootNode();
+                  if (root instanceof ShadowRoot && root.mode !== 'open') return null;
+                  ancestor = ancestor.assignedSlot || ancestor.parentElement || root.host || null;
+                }
+                if (!selected || ancestor !== selected || !this.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})) return null;
+                const rect = this.getBoundingClientRect();
+                if (!(rect.width > 0 && rect.height > 0)) return null;
+                // Font enumeration is not a clipping proof. Refuse masks and
+                // displaced/clipped text rather than counting hidden glyphs.
+                for (let current = this; current; current = current.assignedSlot || current.parentElement || current.getRootNode().host || null) {
+                  const css = getComputedStyle(current);
+                  if (!['none',''].includes(css.clipPath) || !['none',''].includes(css.maskImage) || !['auto',''].includes(css.clip)) return null;
+                  if (current !== this) {
+                    const clip = current.getBoundingClientRect();
+                    if (['hidden','clip','auto','scroll'].includes(css.overflowX) &&
+                        (rect.left < clip.left + current.clientLeft || rect.right > clip.left + current.clientLeft + current.clientWidth)) return null;
+                    if (['hidden','clip','auto','scroll'].includes(css.overflowY) &&
+                        (rect.top < clip.top + current.clientTop || rect.bottom > clip.top + current.clientTop + current.clientHeight)) return null;
+                  }
+                }
+                let value = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').get.call(this);
+                const placeholder = value === '';
+                if (placeholder) {
+                  if (!this.matches(':placeholder-shown')) return null;
+                  value = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'placeholder').get.call(this);
+                }
+                if (!value.trim()) return null;
+                const style = getComputedStyle(this, placeholder ? '::placeholder' : null);
+                if (!(parseFloat(style.fontSize) > 0) || style.visibility !== 'visible' || style.textTransform !== 'none' ||
+                    style.opacity === '0' || parseFloat(style.textIndent) !== 0 ||
+                    this.scrollLeft !== 0 || this.scrollWidth > this.clientWidth + 1 ||
+                    !['none',''].includes(getComputedStyle(this).webkitTextSecurity)) return null;
+                const color = style.webkitTextFillColor || style.color;
+                if (!/^rgb(a)?\\(/.test(color) || /^rgba\\([^,]+,[^,]+,[^,]+,\\s*0(?:\\.0*)?\\)$/.test(color)) return null;
+                return value;
+              }`,
+            });
+            if (ink.exceptionDetails) { complete = false; break; }
+            if (typeof ink.result.value === 'string') {
+              const {nodeId:inputId} = await cdp.send('DOM.requestNode', {objectId:object.objectId});
+              const fonts = await cdp.send('CSS.getPlatformFontsForNode', {nodeId:inputId});
+              if (!fonts.fonts.some(font => font.glyphCount > 0)) { complete = false; break; }
+              nativeText.push(ink.result.value);
+              resultFonts.fonts.push(...fonts.fonts);
+            }
+          }
           if (node.nodeType !== 3 || !node.nodeValue.trim()) continue;
           const {object} = await cdp.send('DOM.resolveNode', {backendNodeId:node.backendNodeId,objectGroup:'dsc-source-fonts'});
           if (!object.objectId) { complete = false; break; }
@@ -182,7 +248,7 @@ export async function observeSource(page: Page, profile: SourceProfile,
           if (!fonts.fonts.some(font => font.glyphCount > 0)) { complete = false; break; }
           resultFonts.fonts.push(...fonts.fonts);
         }
-        if (!complete) resultFonts.fonts = [];
+        if (!complete) { resultFonts.fonts = []; nativeText.length = 0; }
       }
       // Retain legacy observation bytes unless the authored profile requests
       // origin evidence. Absence is never inferred to mean a painted web font.
@@ -202,5 +268,6 @@ export async function observeSource(page: Page, profile: SourceProfile,
     await cdp.send('Runtime.releaseObjectGroup', {objectGroup:'dsc-source-fonts'}).catch(() => {});
     await cdp.detach();
   }
-  return {...observed, platformFonts, failedResources:[...failures.failedResources], runtimeErrors:[...failures.runtimeErrors]};
+  return {...observed, text:[observed.text,...nativeText].filter(Boolean).join('\n'), platformFonts,
+    failedResources:[...failures.failedResources], runtimeErrors:[...failures.runtimeErrors]};
 }
