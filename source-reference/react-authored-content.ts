@@ -1,3 +1,4 @@
+import {readReactAuthoredFunctions,authoredFunctionKey} from './react-authored-functions.js';
 import {readReactAuthoredClasses} from './react-authored-classes.js';
 /** A host-held capability for one original, observed authored render tree.
  * It does not authorize source rewrites, unseen inputs or behavior claims. */
@@ -98,6 +99,39 @@ export function readReactAuthoredContent(options:{referenceId:string;sourceRoot:
       require(replanned.some(p=>sourceSame(p.target,boundary.source)),'class-boundary-source-unproved');
       for(const path of boundary.roots){const row=graph.rows.find(row=>row.path===path);require(row,'class-boundary-host-missing');
         require(eligible.some(call=>sourceSame(call.target,boundary.source)&&same(project(call.factoryFields),boundary.props)&&row.steps.some(step=>step.render===call.graphRender)),'class-boundary-origin-unproved');
+      }
+    }
+  }else if(plan.authoredFunctions?.length){
+    require(same(model,plan),'function-source-plan-artifact-mismatch');
+    require(plan.kind==='jsx-component'&&plan.boundaryOnly&&plan.models.length===0&&!plan.component&&!plan.initializers?.length&&!plan.authoredClasses?.length&&!plan.targets.length,'function-plan-mixed');
+    const replanned=readReactAuthoredFunctions({sourceRoot:options.sourceRoot,files:helper.inputs},plan.authoredFunctions.flatMap(p=>p.target?[p.target]:[]),plan.authoredFunctions.map(p=>p.source.file));
+    require(same(replanned,plan.authoredFunctions),'function-source-plan-changed');
+    require(same([...(helper.lookup.authoredFunctions??[])].sort(),replanned.map(authoredFunctionKey).sort()),'function-lookup-coverage-unproved');
+    const candidates=outermostRootOwners(ownership.components);require(candidates.length===1,'function-root-instance-ambiguous');root=candidates[0];
+    const observed=runtime.authoredFunctions;
+    require(observed?.qualification==='original-function-render-boundary-only'&&observed.effectsVerified===false&&observed.acceptedContract===null&&observed.registered===replanned.length&&runtime.renderGraph,'function-runtime-unavailable');
+    const sourceSame=(target:NonNullable<typeof replanned[number]['target']>,source:typeof root.source)=>same({module:target.module,exportName:target.exportName,sourceSha256:target.sourceSha256,span:target.span},source);
+    const project=(fields:typeof observed.calls[number]['factoryFields'])=>Object.fromEntries(fields.map(([name,value])=>[name,
+      value.kind==='null'?null:['string','number','boolean'].includes(value.kind)?value.value:value.kind==='undefined'?{kind:'undefined'}:value.kind==='function'?{kind:'function'}:{kind:'object'}]));
+    const eligible=observed.calls.filter(call=>{
+      const render=runtime.renderGraph!.renders[call.graphRender];
+      return call.current&&call.completion==='returned'&&render&&render.id===call.graphRender&&render.completion==='returned'&&
+        same(call.function,render.callee)&&same(call.input,render.input)&&same(call.output,render.output)&&same(call.factoryProps,render.factoryProps)&&
+        replanned.some(p=>same(p.source,call.source)&&same(p.render,call.render));
+    });
+    const planOf=(call:typeof eligible[number])=>replanned.find(p=>same(p.source,call.source)&&same(p.render,call.render))!;
+    origins=graph.rows.map(row=>{
+      require(row.status==='linked','host-unlinked:'+row.path);
+      const roots=eligible.filter(call=>{const p=planOf(call);return p.target&&sourceSame(p.target,root.source)&&row.steps.some(step=>step.render===call.graphRender);});
+      require(roots.length===1&&same(project(roots[0].factoryFields),root.props),'function-root-origin-unproved:'+row.path);
+      const end=row.steps.findIndex(step=>step.render===roots[0].graphRender);
+      for(const step of row.steps.slice(0,end+1))require(eligible.filter(call=>call.graphRender===step.render).length===1,'function-inner-origin-unproved:'+row.path);
+      return roots[0].graphRender;
+    });
+    for(const boundary of ownership.components){
+      require(replanned.some(p=>p.target&&sourceSame(p.target,boundary.source)),'function-boundary-source-unproved');
+      for(const path of boundary.roots){const row=graph.rows.find(row=>row.path===path);require(row,'function-boundary-host-missing');
+        require(eligible.some(call=>{const p=planOf(call);return p.target&&sourceSame(p.target,boundary.source)&&same(project(call.factoryFields),boundary.props)&&row.steps.some(step=>step.render===call.graphRender);}), 'function-boundary-origin-unproved');
       }
     }
   }else{

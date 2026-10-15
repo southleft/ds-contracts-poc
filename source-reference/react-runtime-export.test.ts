@@ -175,8 +175,9 @@ test('declared public mounts bootstrap only witnessed executable identities with
     runtimeEntryImports:[{specifier:'public-controls',file:path.join(r.sourceRoot,'public.mjs')},
       {specifier:'unselected-package',file:path.join(r.sourceRoot,'incidental.mjs')}]};
   const source=emptyRuntimeProgram(),before=JSON.stringify(source),observed=observeReactRuntimeMounts(reference,source);
-  assert.equal(JSON.stringify(source),before);assert.equal(observed.observations.length,2);
-  assert(observed.observations.every(o=>o.result.status==='resolved'&&!o.result.runtimeVerified&&o.result.acceptedContract===null));
+  assert.equal(JSON.stringify(source),before);assert.equal(observed.observations.length,3);
+  assert(observed.observations.slice(0,2).every(o=>o.result.status==='resolved'&&!o.result.runtimeVerified&&o.result.acceptedContract===null));
+  refusal(observed.observations[2].result,'runtime-export-entry-edge-unwitnessed');
   assert.equal(observed.program.components.length,1);
   const c=observed.program.components[0];assert.equal(c.module,'impl.mjs');assert.equal(c.exportName,'Original');
   assert.equal(c.implementation,'unresolved');assert.equal(c.root.kind,'unresolved');assert.equal(c.children.kind,'unresolved');
@@ -205,4 +206,47 @@ test('declared runtime mount routes retain executable-source and changed-byte re
   writeFileSync(reference.runtimeEntryImports[0].file,'export const Badge=2;');
   const changed=observeReactRuntimeMounts(reference,source);
   refusal(changed.observations[0].result,'runtime-export-source-not-witnessed-or-changed');assert.equal(changed.program.components.length,0);
+});
+
+
+test('declared local classic mounts retain exact parsed default identity and source-reader refusals',t=>{
+  for(const ext of ['js','mjs','ts','mts']){
+    const original=ext.endsWith('ts')?'const Control=(props:unknown)=>null;export default Control;':'const Control=props=>null;export default Control;';
+    const r=fixture(t,{['control.'+ext]:original,'neighbor.mjs':'export default 42;'});
+    const module='./control.'+ext;
+    const reference={...r,cohort:{declared:true,mountedExports:[{module,export:'default'}]},runtimeEntryImports:[{specifier:module,file:path.join(r.sourceRoot,'control.'+ext)}]};
+    const input=emptyRuntimeProgram();input.problems.push('source-reader-refusal-must-remain');
+    const before=JSON.stringify(input),observed=observeReactRuntimeMounts(reference,input);
+    assert.equal(JSON.stringify(input),before);assert.equal(observed.program.components.length,1);
+    const expected=resolved(readReactRuntimeExport(reference,'control.'+ext,['default'])).definition;
+    const c=observed.program.components[0];assert.equal(c.module,expected.module);assert.equal(c.exportName,'default');assert.equal(c.sourceSha256,expected.sourceSha256);assert.deepEqual(c.span,expected.span);
+    assert.equal(original.slice(c.span.start,c.span.end),original.slice(6,original.indexOf(';')));
+    assert.equal(c.implementation,'unresolved');assert.equal(c.root.kind,'unresolved');assert.equal(c.children.kind,'unresolved');assert.deepEqual(c.props,[]);assert.equal(c.helperCandidates,undefined);
+    assert.deepEqual(observed.program.problems,input.problems);assert(!Object.hasOwn(observed.program.files,path.join(r.sourceRoot,'neighbor.mjs')),'unselected neighbor is not admitted');
+    const existing=structuredClone(observed.program);existing.components[0].implementation='source-checked';existing.components[0].root={kind:'host',name:'section'};
+    assert.deepEqual(observeReactRuntimeMounts(reference,existing).program,existing,'existing exact source-reader authority is preserved');
+    const mismatch=structuredClone(existing);mismatch.components[0].span.start++;
+    assert.throws(()=>observeReactRuntimeMounts(reference,mismatch),/react-runtime-mount-source-changed/);
+    writeFileSync(reference.runtimeEntryImports[0].file,original+' ');
+    const changed=observeReactRuntimeMounts(reference,input);assert.equal(changed.program.components.length,0);refusal(changed.observations[0].result,'runtime-export-source-not-witnessed-or-changed');
+  }
+});
+
+test('declared local mounts refuse missing ambiguous or nonexecutable source routes',t=>{
+  const r=fixture(t,{'control.mjs':'const Control=props=>null;export default Control;','other.mjs':'export default 42;','types.d.ts':'export declare const Control:unknown;','bad.mjs':'export const Control = ;'});
+  const mount={module:'./control.mjs',export:'default'},input=emptyRuntimeProgram();
+  const reference={...r,cohort:{declared:true,mountedExports:[mount]},runtimeEntryImports:[{specifier:mount.module,file:path.join(r.sourceRoot,'control.mjs')}]};
+  const noEdge=observeReactRuntimeMounts({...reference,runtimeEntryImports:[]},input);
+  refusal(noEdge.observations[0].result,'runtime-export-entry-edge-unwitnessed');assert.equal(noEdge.program.components.length,0);
+  const dependencyOnly=observeReactRuntimeMounts({...reference,runtimeEntryImports:[],runtimeImports:[{importer:path.join(r.sourceRoot,'other.mjs'),specifier:mount.module,file:path.join(r.sourceRoot,'control.mjs')}]},input);
+  refusal(dependencyOnly.observations[0].result,'runtime-export-entry-edge-unwitnessed');
+  const duplicate=observeReactRuntimeMounts({...reference,runtimeEntryImports:[...reference.runtimeEntryImports,{specifier:mount.module,file:path.join(r.sourceRoot,'other.mjs')}]},input);
+  refusal(duplicate.observations[0].result,'runtime-export-entry-edge-ambiguous');assert.equal(duplicate.program.components.length,0);
+  for(const [file,reason] of [['types.d.ts','runtime-export-nonexecutable-source'],['bad.mjs','runtime-export-source-syntax']] as const){
+    const observed=observeReactRuntimeMounts({...reference,runtimeEntryImports:[{specifier:mount.module,file:path.join(r.sourceRoot,file)}]},input);
+    refusal(observed.observations[0].result,reason);assert.equal(observed.program.components.length,0);
+  }
+  const outside=fixture(t,{'outside.mjs':'export const Control=props=>null;export default Control;'});
+  const escaped=observeReactRuntimeMounts({...reference,files:{...reference.files,...outside.files},runtimeEntryImports:[{specifier:mount.module,file:path.join(outside.sourceRoot,'outside.mjs')}]},input);
+  refusal(escaped.observations[0].result,'runtime-export-outside-source-root');assert.equal(escaped.program.components.length,0);
 });

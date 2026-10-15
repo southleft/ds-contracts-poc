@@ -1,5 +1,5 @@
 import {readReactAuthoredClasses} from './react-authored-classes.js';
-import {observeReactAuthoredClasses} from './react-authored-class-observation.js';
+import {observeReactAuthoredClasses,observeReactAuthoredFunctions} from './react-authored-class-observation.js';
 import {observeReactOriginalWrapper} from './react-original-wrapper-observation.js';
 import {reactCaseRootOwner} from './react-case-source.js';
 import {readReactOriginalWrappers,type ReactOriginalWrapperCandidate} from './react-original-wrappers.js';
@@ -368,6 +368,13 @@ export function startReactOwnership(
           if(classRoot){const index=row.jsxHelpers.length;row.jsxHelpers.push({path:'',result:await observeReactAuthoredClasses({browser,reference,program,ownership:row.ownership!,caseId:c.id,
             treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'jsx-helpers',String(index)),engine:state.engine!,
             assertCurrent:()=>{if(stopped||!unchanged())throw Error('authored-class-source-changed-or-interrupted');}})});}
+          // Preserve refused JSX evidence, then try a separate original function
+          // boundary proof when no root helper has established render membership.
+          const authoredRoot=row.jsxHelpers.some(h=>h.path===''&&h.result.status==='observed'&&
+            (h.result.runtime?.status==='observed'&&!!h.result.runtime.authoredClasses||h.result.renderGraph?.rows.some(r=>r.steps.some(s=>s.membership))));
+          if(!classRoot&&!authoredRoot){const index=row.jsxHelpers.length;row.jsxHelpers.push({path:'',result:await observeReactAuthoredFunctions({browser,reference,program,ownership:row.ownership!,caseId:c.id,
+            treeSha256:pair[0].tree,pngSha256:pair[0].png,dir:path.join(rowDir,'jsx-helpers',String(index)),engine:state.engine!,
+            assertCurrent:()=>{if(stopped||!unchanged())throw Error('authored-function-source-changed-or-interrupted');}})});}
           writeFileSync(path.join(rowDir,'jsx-helpers.json'),JSON.stringify(row.jsxHelpers,null,2)+'\n',{flag:'wx'});
           const contentContext=row.helperObservations.some(h=>h.containingFlow?.status==='observed'&&h.containingFlow.content==='forwarded') || row.originalWrappers?.some(w=>w.result.status==='observed')
             ?readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership!,tree:pair[0].root,helpers:row.helperObservations,wrappers:row.originalWrappers,
@@ -380,7 +387,7 @@ export function startReactOwnership(
               .map(effect=>[effect.id,JSON.parse(readFileSync(path.join(rowDir,"matrix",effect.id+".json"),"utf8"))]));
             row.authoredTrees=[];
             for(const [index,helper] of row.jsxHelpers.entries()){
-              if(helper.path!==''||(!(helper.result.runtime?.status==='observed'&&helper.result.runtime.authoredClasses)&&!helper.result.renderGraph?.rows.some(r=>r.steps.some(s=>s.membership))))continue;
+              if(helper.path!==''||(!(helper.result.runtime?.status==='observed'&&(helper.result.runtime.authoredClasses||helper.result.runtime.authoredFunctions))&&!helper.result.renderGraph?.rows.some(r=>r.steps.some(s=>s.membership))))continue;
               try{
                 const baseline=row.propertyMatrix.rows.find(r=>r.baseline),snapshot=baseline&&snapshots[baseline.id];
                 if(!snapshot?.fonts||snapshot.treeSha256!==pair[0].tree||JSON.stringify(snapshot.ownership)!==JSON.stringify(row.ownership))throw Error('react-authored-tree-baseline-unavailable');
@@ -538,6 +545,8 @@ export function reactOwnershipEngine():Record<string,string>{
           "react-render-graph.ts",
           "react-authored-content.ts",
           "react-authored-classes.ts",
+          "react-authored-functions.ts",
+          "react-authored-function-runtime.ts",
           "react-authored-class-runtime.ts",
           "react-authored-class-observation.ts",
           "react-authored-tree.ts",

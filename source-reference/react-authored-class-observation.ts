@@ -1,3 +1,4 @@
+import {readReactAuthoredFunctions} from './react-authored-functions.js';
 import {readFileSync,realpathSync,mkdirSync,writeFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
@@ -22,18 +23,22 @@ import {reactJsxHelperObservationUnchanged,type ReactJsxHelperObservation} from 
 /** Same sealed authored-render observation as the JSX producer, with class
  * construction/render identities in place of an invented function-body model.
  * Private helper effects, behavior and other inputs remain unqualified. */
-export async function observeReactAuthoredClasses(options:{browser:Browser;reference:ReactReference;program:ReactSourceProgram;ownership:ReactOwnership;
+type AuthoredObservationOptions={browser:Browser;reference:ReactReference;program:ReactSourceProgram;ownership:ReactOwnership;
  caseId:string;treeSha256:string;pngSha256:string;dir:string;engine:Readonly<Record<string,string>>;assertCurrent():void;
-}):Promise<ReactJsxHelperObservation>{
+};
+export const observeReactAuthoredClasses=(options:AuthoredObservationOptions)=>observeAuthoredBoundaries(options,false);
+export const observeReactAuthoredFunctions=(options:AuthoredObservationOptions)=>observeAuthoredBoundaries(options,true);
+async function observeAuthoredBoundaries(options:AuthoredObservationOptions,functions:boolean):Promise<ReactJsxHelperObservation>{
  const {browser,reference,program,ownership,dir,assertCurrent}=options;
  const row:ReactJsxHelperObservation={version:1,acceptedContract:null,effectsVerified:false,qualification:'original-call-wrapper-state-only',status:'refused'};
  mkdirSync(dir,{recursive:true});
  const save=(name:string,value:unknown)=>{const text=JSON.stringify(value,null,2)+'\n';writeFileSync(path.join(dir,name),text,{flag:'wx'});return evidenceSha(text);};
  try{
   assertCurrent();
-  const classes=readReactAuthoredClasses(reference,ownership.components.map(c=>c.source));
-  if(!classes.length)throw Error('authored-class-plans-unavailable');
-  const plan:ReactJsxHelperInstrumentationPlan={kind:'jsx-component',boundaryOnly:true,models:[],targets:[],authoredClasses:classes};
+  const classes=functions?[]:readReactAuthoredClasses(reference,ownership.components.map(c=>c.source));
+  const functionPlans=functions?readReactAuthoredFunctions(reference,ownership.components.map(c=>c.source),ownership.nodes.flatMap(n=>n.creationSite?[n.creationSite.module]:[])):[];
+  if(functions?!functionPlans.length:!classes.length)throw Error('authored-boundary-plans-unavailable');
+  const plan:ReactJsxHelperInstrumentationPlan={kind:'jsx-component',boundaryOnly:true,models:[],targets:[],...(functions?{authoredFunctions:functionPlans}:{authoredClasses:classes})};
   // This branch retains a source boundary plan, never a fabricated body model.
   const modelSha256=save('model.json',plan);
   const planSha256=save('plan.json',plan),targetModelsSha256=save('target-models.json',[]),callbackModelsSha256=save('callback-models.json',[]);
@@ -57,7 +62,7 @@ export async function observeReactAuthoredClasses(options:{browser:Browser;refer
    toolchain:{node:process.version,typescript:program.typescriptVersion,chromium:browser.version(),executable}});
   const context=await browser.newContext({viewport:{width:900,height:600},deviceScaleFactor:1,colorScheme:'light'});
   try{
-   await context.addInitScript(reactOwnershipHook+'\n'+reactHelperRuntimeHook([],[],true,[],[],[],[],[],[],[],[],[],undefined,undefined,undefined,[],[],undefined,undefined,[],true,[],classes));
+   await context.addInitScript(reactOwnershipHook+'\n'+reactHelperRuntimeHook([],[],true,[],[],[],[],[],[],[],[],[],undefined,undefined,undefined,[],[],undefined,undefined,[],true,[],classes,functionPlans));
    const url='http://localhost/react-authored-class-observation?case='+encodeURIComponent(options.caseId);
    await context.route('**/*',route=>route.request().url()===url?route.fulfill({status:200,contentType:'text/html',headers:{'Content-Security-Policy':"sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'"},body:reactReferenceHtml(guarded)}):route.abort());
    const page=await context.newPage(),failures=watchSourceFailures(page),profile=reference.cohort.profile(options.caseId);
@@ -72,7 +77,7 @@ export async function observeReactAuthoredClasses(options:{browser:Browser;refer
     if(JSON.stringify(reactOwnershipStructure(actual))!==JSON.stringify(reactOwnershipStructure(ownership)))throw Error('authored-class-ownership-differs');
     const runtime=await page.evaluate<ReactHelperRuntimeReport>(reactHelperRuntimeRead);row.runtime=runtime;
     const runtimeSha256=save('runtime.json',runtime);if(runtime.status!=='observed')throw Error(runtime.reason);
-    if(!runtime.authoredClasses?.calls.length)throw Error('authored-class-render-unobserved');
+    if(!(functions?runtime.authoredFunctions?.calls.length:runtime.authoredClasses?.calls.length))throw Error('authored-boundary-render-unobserved');
     if(JSON.stringify(await page.evaluate(reactHelperRuntimeRead))!==JSON.stringify(runtime)||evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}))!==tree.sourcePngSha256)throw Error('authored-class-observation-unstable');
     row.contextConsumers=verifyReactContextConsumers(reference,plan,runtime,row.lookup);
     const contextConsumersSha256=save('context-consumers.json',row.contextConsumers);

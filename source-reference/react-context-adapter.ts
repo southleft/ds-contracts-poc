@@ -3,7 +3,7 @@ import {instrumentReactStateAdapter} from './react-state-adapter.js';
 
 /** Called only after a complete supported React/ReactDOM hash combination has
  * been checked. Function objects and native execution order stay unchanged. */
-export function instrumentReactContextAdapter(text:string,kind:'create-element'|'jsx'|'forward-ref',authoredClasses=false):string {
+export function instrumentReactContextAdapter(text:string,kind:'create-element'|'jsx'|'forward-ref',authoredClasses=false,authoredFunctions=false):string {
   if(kind==='forward-ref')text=instrumentReactStateAdapter(text);
   const G='globalThis.__DSC_RUNTIME_PROOF';
   if(kind==='forward-ref'&&authoredClasses){
@@ -18,7 +18,7 @@ export function instrumentReactContextAdapter(text:string,kind:'create-element'|
     if(text.split(entry).length!==2||text.split(exit).length!==2)throw Error('authored-class-props-sites-unmatched');
     text=text.replace(entry,entry+'\n      var __DSC_AUTHORED_PROPS='+G+'.authoredClassPropsBegin(Component,baseProps);').replace(exit,'      '+G+'.authoredClassPropsEnd(__DSC_AUTHORED_PROPS,newProps);\n'+exit);
   }
-  if(kind==='create-element'&&authoredClasses){
+  if(kind==='create-element'&&(authoredClasses||authoredFunctions)){
     const freeze='        Object.freeze && Object.freeze(childArray);';
     if(text.split(freeze).length!==2)throw Error('authored-class-native-children-array-site-unmatched');
     text=text.replace(freeze,'        '+G+'.literal(childArray);\n'+freeze);

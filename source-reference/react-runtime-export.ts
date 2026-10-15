@@ -184,7 +184,9 @@ export function observeReactRuntimeDependencies(reference:RuntimeReference,sourc
  * Only the original build's entry edge and witnessed ESM route select an
  * executable binding. Unrelated dependencies are not selected. Root, props,
  * children and implementation remain unresolved; no native body is authorized.
- * Relative workspace mounts retain their existing typed source reader. */
+ * Relative mounts also use their actual witnessed entry edge when the source
+ * reader has not supplied an identity (for example, classic JavaScript). Exact
+ * existing source identities and all source-reader refusals remain unchanged. */
 export function observeReactRuntimeMounts(reference:RuntimeReference & {
   cohort?: {declared:boolean;mountedExports?:readonly {module:string;export:string}[]};
 },source:ReactSourceProgram){
@@ -193,7 +195,6 @@ export function observeReactRuntimeMounts(reference:RuntimeReference & {
   if(!reference.cohort?.declared)return {program,observations};
   const root=realpathSync(reference.sourceRoot);
   for(const mount of reference.cohort.mountedExports??[]){
-    if(mount.module.startsWith('./'))continue;
     const targets=[...new Set((reference.runtimeEntryImports??[])
       .filter(e=>e.specifier===mount.module).map(e=>e.file))];
     const result:ReactRuntimeExport=targets.length===1
