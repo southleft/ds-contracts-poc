@@ -18,13 +18,17 @@ const exactSnapshot = new Function('el','before', `
  const captured = [];
  for (let index = 0; index < nodes.length; index++) {
   const n = nodes[index], b = n.getBoundingClientRect();
+  const hasClientRect = n.getClientRects().length > 0;
+  // Non-rendering definitions have no viewport position. Adding document
+  // scroll to their empty rectangle invents movement during tiled capture.
+  const emptyUnrendered = !hasClientRect && b.x === 0 && b.y === 0 && b.width === 0 && b.height === 0;
   const matrix = n instanceof SVGPathElement ? n.getScreenCTM() : null;
   const local = n instanceof SVGPathElement && matrix ? n.getBBox() : null;
   const geometry = local && matrix ? {
    local: [local.x,local.y,local.width,local.height],
    transform: [matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+scrollX,matrix.f+scrollY],
    path: n.getAttribute('d')
-  } : {box:[b.x+scrollX,b.y+scrollY,b.width,b.height]};
+  } : {box:emptyUnrendered ? [0,0,0,0] : [b.x+scrollX,b.y+scrollY,b.width,b.height],hasClientRect};
   const previous = before === undefined ? undefined : before[index];
   // Retain the original JSON number/key semantics for the small geometry
   // record. The large CSS vectors use exact ordered string comparisons.
