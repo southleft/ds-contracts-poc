@@ -187,7 +187,7 @@ function compileContentSweep(space: PropSpace, comp: ComponentConfig, sweep: Swe
   // proved own in EVERY plane where the part exists; a part sized in some planes only refuses.
   const partSized = new Map<string, Set<string>>();
   if (partSizing) aligned.partNames.forEach((partName, pi) => {
-    for (const channel of ['width', 'height']) {
+    for (const channel of ['width', 'height', 'min-height']) {
       const proved = [...partSizing].flatMap(([key, sizing]) => {
         const el = aligned.getAligned(`${key}__default`)[pi];
         return el ? [sizing.get(el.path)?.has(channel) === true] : [];

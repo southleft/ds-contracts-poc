@@ -218,3 +218,30 @@ test('historical root paint recompiles through the shared rule without admitting
   (x:ObservedContentDraft)=>{x.contract!.anatomy.root.declared!['background-clip']='content-box';},
  ]){const changed=structuredClone(saved);mutate(changed);assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,changed),/compiler-changed/);}
 });
+
+test('own minimum compiler carries qualified root and part floors without fixing used height', async () => {
+ const {compileObservedContentSweep}=await import('./observed-content.js');
+ const {ContractSchema}=await import('../scripts/contract-schema.js');
+ const {enumerate}=await import('../extract/computed/lib.js');
+ const {flattenTokens}=await import('../core/tokens.js');
+ const contract=ContractSchema.parse({description:'Authenticated minimum fixture',id:'fixture.minimum',name:'Minimum',version:'0.1.0',status:'draft',props:[],states:[],semantics:{element:'div'},anatomy:{root:{}},
+  bindings:{code:{anchors:{importPath:'fixture/minimum',export:'Minimum'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+ const enumeration=enumerate([],[],1,{}),key=enumeration.combos[0].key;
+ const space={contract,axes:[],presence:new Map(),stateProps:[],enumeration,baseComboKey:key,baseAxisValues:{},heldFixed:[]};
+ const comp={name:'Minimum',importName:'Minimum',contract:'',sampleText:'',axes:[]};
+ const child:CapturedNode={tag:'div',classes:[],pseudo:{},nodes:[],style:{display:'flex','flex-direction':'row','box-sizing':'border-box',height:'30px','min-height':'18px','background-color':'rgb(0, 0, 0)'}};
+ const root:CapturedNode={tag:'div',classes:[],pseudo:{},nodes:[{t:'el',el:child}],style:{display:'flex','flex-direction':'row','box-sizing':'border-box',height:'40px','min-height':'24px','background-color':'rgb(255, 255, 255)'}};
+ const sweep={captures:[{combo:'Minimum:'+key,interaction:'default',root}]} as any;
+ const partSizing=new Map([[key,new Map([['0',new Set(['min-height'])]])]]);
+ const before=structuredClone(sweep),draft=compileObservedContentSweep(space,comp,sweep,['min-height'],true,[],partSizing);
+ assert.deepEqual(draft.problems,[]);
+ const spec=draft.component!.variants[0].spec;
+ const minimum=(n:NodeSpec)=>n.lits?.minHeight??Number.parseFloat(String(flattenTokens(draft.tokens!).get(n.bindings?.minHeight?.replaceAll('/','.')??'')?.value));
+ assert.equal(minimum(spec),24,JSON.stringify(draft));assert.equal(spec.fixedHeight,undefined);assert.equal(spec.lits?.height,undefined);assert.equal(spec.fillH,undefined);
+ const parts:NodeSpec[]=[];const walk=(n:NodeSpec)=>{parts.push(n);n.children?.forEach(walk);};walk(spec);
+ assert(parts.some(n=>n!==spec&&minimum(n)===18));assert(parts.every(n=>n.fixedHeight===undefined&&n.lits?.height===undefined));
+ const unproved=compileObservedContentSweep(space,comp,sweep,[],true);
+ assert.deepEqual(unproved.problems,[]);const unprovedParts:NodeSpec[]=[];
+ const walkUnproved=(n:NodeSpec)=>{unprovedParts.push(n);n.children?.forEach(walkUnproved);};walkUnproved(unproved.component!.variants[0].spec);
+ assert(unprovedParts.every(n=>n.bindings?.minHeight===undefined&&n.lits?.minHeight===undefined));assert.deepEqual(sweep,before);
+});

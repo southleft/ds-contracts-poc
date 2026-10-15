@@ -45,7 +45,7 @@ import type {ReactStyleOrigin} from './react-style-origin.js';
 
 /** Host archive/reader fixture. Actual renderer provenance is exercised in
  * react-render-graph.test.ts and the installed ownership runner. */
-function fixture(t:test.TestContext,absolute=false,qualified=false,referenceId='reference',indexed=false,stateful=false,intrinsic=false){
+function fixture(t:test.TestContext,absolute=false,qualified=false,referenceId='reference',indexed=false,stateful=false,intrinsic=false,minimum?:{root?:string;child?:string}){
  const dir=mkdtempSync(path.join(tmpdir(),'authored-tree-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
  const file=path.join(dir,'surface.tsx');writeFileSync(path.join(dir,'tsconfig.json'),'{"compilerOptions":{"jsx":"preserve","target":"ES2022","skipLibCheck":true}}');
  writeFileSync(file,`declare global {namespace JSX {interface Element {} interface IntrinsicElements {section:any;span:any}}} export function Marker(){return <span/>} export function Panel(${stateful?'props:{active?:boolean}':''}){return <section><Marker/></section>}`);
@@ -54,6 +54,8 @@ function fixture(t:test.TestContext,absolute=false,qualified=false,referenceId='
  const child:CapturedNode={tag:'span',classes:[],pseudo:{},nodes:[],style:{display:'flex','flex-direction':'row',position:absolute?'absolute':'static',width:'20px',height:'10px','background-color':'rgb(0, 0, 0)','box-sizing':'border-box',opacity:'1'}};
  const tree:CapturedNode={tag:'section',classes:[],pseudo:{},nodes:[{t:'el',el:child}],style:{display:'flex','flex-direction':'row',position:'static',width:'100px',height:'30px','background-color':'rgb(255, 255, 255)','box-sizing':'border-box',opacity:'1'}};
  if(intrinsic){tree.style.width='20px';tree.style.height='10px';}
+ if(minimum?.root)tree.style['min-height']=minimum.root;
+ if(minimum?.child)child.style['min-height']=minimum.child;
  if(qualified){
   const defaults={'writing-mode':'horizontal-tb',direction:'ltr',translate:'none',rotate:'none',scale:'none',perspective:'none',transform:'none'};
   Object.assign(tree.style,defaults,{position:'relative'});
@@ -547,4 +549,36 @@ test('root fill context cannot reuse authored authority across changed callers o
  const tree=structuredClone(f.tree);tree.classes.push('foreign-wrapper');
  const result=projectReactAuthoredTree({...f,tree,bounds:{width:100,height:30}});
  assert.equal(result.status,'refused');assert(result.problems.includes('react-authored-content-context-changed'));
+});
+
+
+test('own minimum authored projection preserves automatic height and requires matching source evidence',t=>{
+ const f=fixture(t,false,false,'reference',false,false,false,{root:'24px',child:'8px'});
+ for(const row of f.origin.roots){
+  row.sizes=row.sizes!.map(s=>s.channel==='height'?{...s,status:'auto',value:'auto'}:s);
+  row.minimums=[{channel:'min-height',status:'fixed',value:row.path===''?'24px':'8px',authoredValue:row.path===''?'24px':'8px',selectors:['.own']}];
+ }
+ const before=structuredClone({tree:f.tree,origin:f.origin}),draft=projectReactAuthoredTree(f);
+ assert.equal(draft.status,'native-compiled',draft.problems.join('\n'));
+ for(const boundary of draft.boundaries){
+  const spec=draft.components!.find(c=>c.contractId===boundary.contractId)!.variants[0].spec;
+  assert.equal(spec.lits?.minHeight??Number.parseFloat(String(flattenTokens(draft.tokens!).get(spec.bindings?.minHeight?.replaceAll('/','.')??'')?.value)),boundary.path===''?24:8,JSON.stringify({spec,tokens:draft.tokens,contracts:draft.contracts}));
+  assert.equal(spec.fixedHeight,undefined);assert.equal(spec.lits?.height,undefined);assert.equal(spec.fillH,undefined);
+ }
+ assert.deepEqual({tree:f.tree,origin:f.origin},before);
+ const missing=structuredClone(f.origin);delete missing.roots[0].minimums;
+ const unproved=projectReactAuthoredTree({...f,origin:missing});
+ assert.equal(unproved.status,'native-compiled',unproved.problems.join('\n'));
+ assert.equal(unproved.components!.find(c=>c.contractId===unproved.contract!.id)!.variants[0].spec.bindings?.minHeight,undefined);
+ const mismatch=structuredClone(f.origin);mismatch.roots[0].minimums![0].value='25px';
+ assert(projectReactAuthoredTree({...f,origin:mismatch}).problems.includes('react-authored-tree-minimum-source-mismatch'));
+ const duplicate=structuredClone(f.origin);duplicate.roots[0].minimums!.push({...duplicate.roots[0].minimums![0]});
+ assert(projectReactAuthoredTree({...f,origin:duplicate}).problems.includes('react-authored-tree-minimum-evidence-ambiguous'));
+ const refused=structuredClone(f.origin);refused.roots[0].minimums![0]={channel:'min-height',status:'unresolved',reason:'minimum-declared-by-outer-selector',selectors:['#caller > *']};
+ const refusedDraft=projectReactAuthoredTree({...f,origin:refused});assert.equal(refusedDraft.status,'native-compiled',refusedDraft.problems.join('\n'));
+ assert.equal(refusedDraft.components!.find(c=>c.contractId===refusedDraft.contract!.id)!.variants[0].spec.bindings?.minHeight,undefined);
+ const changedTree=structuredClone(f.tree);changedTree.style['min-height']='25px';
+ assert.notEqual(projectReactAuthoredTree({...f,tree:changedTree}).status,'native-compiled','changed source tree cannot reuse authored authority');
+ const changedOwner=structuredClone(f.ownership);changedOwner.components[0].props.className='foreign';
+ assert.notEqual(projectReactAuthoredTree({...f,ownership:changedOwner}).status,'native-compiled','changed caller cannot reuse authored authority');
 });
