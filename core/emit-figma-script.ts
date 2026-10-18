@@ -4636,7 +4636,7 @@ function mapDepInitialProps(dep: Contract, initial: Record<string, string>,
 function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract, subst: Record<string,string>): void {
   if(part.shapeFillOverrideProp)spec.shapeFillTarget=contract.id+':'+part.shapeFillOverrideProp;
   if(part.textAppearanceOverride)spec.textAppearanceTarget=contract.id+':'+part.textAppearanceOverride.prop;
-  if(spec.type==='text')spec.textSizeTarget=nativeTextSizeTarget(contract,part);
+  if(spec.type==='text'){const target=nativeTextSizeTarget(contract,part);if(target!==undefined)spec.textSizeTarget=target;}
   if(part.imageOverride)spec.imageTarget=contract.id+':'+part.imageOverride.prop;
   if(part.textColorOverrideProp)spec.textColorTarget=contract.id+':'+part.textColorOverrideProp;
   if (part.visibilityOverrideProp) {
@@ -5830,7 +5830,7 @@ function partToSpecInner(
     Object.assign(textSpec, textExtras(textCtx));
     attachNativeAuthoredTextAppearance(textSpec,part,contract,subst);
     if(part.textAppearanceByCombination&&frame.textAppearanceTarget){textSpec.textAppearanceTarget=frame.textAppearanceTarget;delete frame.textAppearanceTarget;}
-    textSpec.textSizeTarget=nativeTextSizeTarget(contract,part);
+    const textSizeTarget=nativeTextSizeTarget(contract,part);if(textSizeTarget!==undefined)textSpec.textSizeTarget=textSizeTarget;
     // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
     // the box that sizes itself to its text, so the fact rides the text spec.
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
