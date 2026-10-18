@@ -10,7 +10,7 @@ import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-c
 import type {ReactComparisonRequest} from './react-comparison-request.js';
 import type {ReactNativeRequest} from './react-native-request.js';
 import type {NativeContractObservationInput,NativeSourceReadback} from '../core/native-source-observation.js';
-import { createReactReferenceService } from './react-reference.js';
+import { createReactReferenceService, type ReactReferenceServiceOptions } from './react-reference.js';
 import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
 import { prepareReactCallerNativePlan, buildReactCallerNativeWrite } from './react-caller-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
@@ -120,9 +120,10 @@ export function createReferenceService(
     >
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
+  reactOptions: ReactReferenceServiceOptions = {},
 ) {
   const nativeSuccessions = createNativeSourceSuccessions(repoRoot);
-  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport, successions: nativeSuccessions }));
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport, successions: nativeSuccessions }), reactOptions);
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();

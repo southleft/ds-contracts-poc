@@ -78,6 +78,14 @@ export function projectReactAuthoredTree(input:{content:ReactAuthoredContent;pro
     const absolute=[boundary.path,local].filter(Boolean).join('.'),record=origin.roots.find(r=>r.path===absolute&&r.tag===node.tag)??descendantSizes?.nodes.find(r=>r.path===absolute&&r.tag===node.tag);
     const channels=new Set<string>();
     for(const size of record?.sizes??[])if(size.status==='fixed'&&size.value&&authoredLengthIsUsed(size.value,node.style[size.channel]))channels.add(size.channel);
+    if(record?.minimums){
+     if(record.minimums.length!==1||record.minimums[0].channel!=='min-height')throw Error('react-authored-tree-minimum-evidence-ambiguous');
+     const minimum=record.minimums[0];
+     if(minimum.status==='fixed'){
+      if(!minimum.value||!authoredLengthIsUsed(minimum.value,node.style['min-height']))throw Error('react-authored-tree-minimum-source-mismatch');
+      channels.add('min-height');
+     }
+    }
     sizing.set(local,channels);
    }
    const children=boundaries.filter(b=>b.path!==boundary.path&&contains(boundary.path,b.path)&&!boundaries.some(mid=>mid.path!==b.path&&mid.path!==boundary.path&&contains(boundary.path,mid.path)&&contains(mid.path,b.path)));

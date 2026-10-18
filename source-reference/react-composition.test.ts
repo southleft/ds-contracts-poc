@@ -430,7 +430,7 @@ test('repeated nested shells keep owned captions out of caller controls regardle
   }
 });
 
-test('context child requests reopen pinned evidence and refuse substitution without upgrading legacy requests', async () => {
+test('context child requests reopen selected parent evidence with unobserved cohort rows and refuse substitution', async () => {
   const f = await fixture();
   try {
     const source = path.join(f.dir, 'components.tsx');
@@ -443,7 +443,10 @@ test('context child requests reopen pinned evidence and refuse substitution with
     const save = (dir: string, file: string, value: unknown) => writeFileSync(path.join(dir, file), JSON.stringify(value));
     const treeSha256 = evidenceSha(JSON.stringify(f.tree));
     const report: ReactOwnershipReport = { id: ownershipId, referenceId: reference.id, state: 'complete',
-      acceptedContract: null, denominator: 1, matched: 1, sourceUnchanged: true, rows: [{
+      acceptedContract: null, denominator: 10, matched: 1, sourceUnchanged: true, rows: [
+        ...builtinReactCohort.cases.filter(c => c.id !== 'card-composed').map(c => ({
+          id: c.id, matched: false, problems: ['react-ownership-case-not-observed'],
+        })), {
         id: 'card-composed', matched: true, problems: [], treeSha256, ownership: f.ownership,
         rootMatrix: { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
           draft: { status: 'native-compiled', properties: [], contract: f.main.contract,
@@ -456,6 +459,8 @@ test('context child requests reopen pinned evidence and refuse substitution with
       { path: '', tag: 'section', channels: [] }, { path: '0', tag: 'button', channels: [] },
     ] });
     save(archive, 'integrity.json', { version: 1, files: inventoryEvidence(archive) });
+    assert.equal(report.rows.length, report.denominator);
+    assert.throws(() => selectReactNativeRequest(f.dir, report, 'card-content'), /react-native-evidence-unavailable/);
     const parent = selectReactNativeRequest(f.dir, report, 'card-composed');
     const legacy = selectReactChildRequest(f.dir, reference, parent, 'child');
     const legacyEvidence = readReactNativeEvidence(f.dir, reference, legacy);

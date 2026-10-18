@@ -1,11 +1,34 @@
+import {affineInstanceComposition} from './instance-affine-composition.js';
 import {instanceIntrinsicSizePlan} from './instance-intrinsic-size.js';
-import {walkAnatomy,type Contract} from '@ds-contracts/schema';
+import {walkAnatomy,type Contract,type Part} from '@ds-contracts/schema';
 import {flattenTokens,makeResolveLiteral,type TokenTreeInput} from './tokens.js';
 /** A reference name is not dimension evidence. Check every supplied scope,
  * so changing mode/brand cannot invalidate the fixed allocation silently. */
 export function instanceAffineTokenErrors(contract:Contract,byId:Map<string,Contract>,values:unknown):string[]{
  const errors:string[]=[];
  for(const {part,name} of walkAnatomy(contract)){
+  const compositionChild=part.component&&byId.get(part.component.id);
+  const composition=compositionChild&&affineInstanceComposition(compositionChild,part);
+  if(composition&&(part.instanceAffineLayout||part.instanceAffine||part.instanceAffineByProp)){
+   let valid=!!values&&typeof values==='object';
+   try{
+    const input=values as TokenTreeInput,brands=Object.keys(input?.brands??{});if(!brands.length)brands.push('default');
+    const rows:Array<{geometry:NonNullable<Part['instanceAffine']>;fill:{width?:boolean;height?:boolean};subst:Record<string,string>}>=part.instanceAffineLayout?part.instanceAffineLayout.rows.map(row=>({geometry:row.geometry,fill:row.fill,subst:Object.fromEntries(part.instanceAffineLayout!.props.map((prop,i)=>[prop,row.values[i]]))}))
+     :Object.entries(part.instanceAffineByProp?.map??{base:part.instanceAffine!}).map(([key,geometry])=>({geometry,fill:{width:false,height:false},subst:part.instanceAffineByProp?{[part.instanceAffineByProp.prop]:key}:{}}));
+    for(const brand of brands)for(const mode of ['light','dark'] as const){
+     const resolve=makeResolveLiteral(new Map([...flattenTokens(input.primitives??{}),...flattenTokens(input.brands?.default??{}),...flattenTokens(input.brands?.[brand]??{}),...flattenTokens(input.semantic??{}),...flattenTokens(input[mode]??{})]));
+     for(const row of rows){
+      if(row.fill.width||row.fill.height){valid=false;continue;}
+      const valueOf=(text:string)=>/^\{.+\}$/.test(text)?resolve(text.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>row.subst[key]??`{${key}}`)):text;
+      for(const axis of ['width','height'] as const){const value=valueOf(composition[axis]),px=typeof value==='number'?value:typeof value==='string'&&/^\d+(?:\.\d+)?px$/.test(value)?parseFloat(value):NaN;
+       if(px!==row.geometry.localSize[axis])valid=false;}
+      if(composition.color){const color=valueOf(composition.color);if(typeof color!=='string'||!/^#(?:[\da-f]{3}|[\da-f]{6}|[\da-f]{8})$/i.test(color))valid=false;}
+     }
+    }
+   }catch{valid=false;}
+   if(!valid)errors.push(`${contract.id}: part "${name}" instance-affine-composition-size-or-paint-unproven`);
+   continue;
+  }
   if(part.instanceAffineLayout&&part.component){
    const table=part.instanceAffineLayout,child=byId.get(part.component.id),root=child?.anatomy.root;
    let valid=!!root&&!!values&&typeof values==='object';

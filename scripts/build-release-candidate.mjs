@@ -88,7 +88,8 @@ const PACKAGES = [
     directory: "packages/core",
     // Reviewed 2026-10-06: validation/CSS depend on child paint order, text
     // state targeting, instance sizing/strokes, composed shadows and fill bindings. The
-    // affine token referee is shared with both emitters. These pure helpers
+    // affine token referee is shared with both emitters; its effective-size
+    // composition helper is also required by installed validation. These pure helpers
     // ship with matching declarations; the exact file-set guard stays intact.
     // Reviewed 2026-09-26: validation and CSS emission import the pure
     // component-placement domain/referee (no I/O); both files must ship.
@@ -115,6 +116,8 @@ const PACKAGES = [
       "dist/composed-fill-shadow.js",
       "dist/child-paint-order.d.ts",
       "dist/child-paint-order.js",
+      "dist/instance-affine-composition.d.ts",
+      "dist/instance-affine-composition.js",
       "dist/instance-affine-tokens.d.ts",
       "dist/instance-affine-tokens.js",
       "dist/instance-fill-composition.d.ts",

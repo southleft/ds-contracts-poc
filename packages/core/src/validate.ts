@@ -1,3 +1,4 @@
+import {affineInstanceComposition} from './instance-affine-composition.js';
 import {solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
 import {textStateTarget} from './text-state-target.js';
 import {resolveLayout} from '@ds-contracts/schema';
@@ -698,6 +699,7 @@ export function validateContract(
     }
     if(part.instanceAffineLayout){
       const dep=part.component&&byId.get(part.component.id),root=dep?.anatomy.root;
+      const composition=dep&&affineInstanceComposition(dep,part);
       const parent=p.slice(1,-1).reduce<Part|undefined>((node,key)=>node?.parts?.[key],contract.anatomy[p[0]]);
       const layouts=[part.layout,...Object.values(part.layoutByProp?.map??{}),...(part.layoutByCombination?.rows??[]).map(r=>r.layout)];
       const flowOnly=layouts.every(l=>Object.keys(l??{}).every(k=>['grow','growBasis','alignSelf'].includes(k)));
@@ -709,7 +711,7 @@ export function validateContract(
       }
       if(p.length===1||!dep||!root||isMultiRoot(dep)||dep.bindings.code.runtime||contractApiNames(dep).some(n=>['style','className'].includes(n))||
         !root.instanceRootInputs?.includes('width')||!root.instanceRootInputs.includes('height')||!parent||parent.component||!parent.layout||!['flex','inline-flex'].includes(parent.layout.display??'flex')||
-        part.tokensByProp||part.tokensByCombination||part.literalsByProp||part.literalsByCombination||!flowOnly||part.repeat||part.parts||part.placement||part.overlay||part.absolutePlacement||part.absolutePlacementByCombination||part.tokens||part.literals||part.declared||part.states||part.declaredStates||part.stylesWhen||part.shape||part.slot||part.icon||Object.keys(part.component?.overrides??{}).length)
+        part.tokensByProp||part.tokensByCombination||part.literalsByProp||part.literalsByCombination||!flowOnly||part.repeat||part.parts||part.placement||part.overlay||part.absolutePlacement||part.absolutePlacementByCombination||part.tokens||part.literals||part.declared||part.states||part.declaredStates||part.stylesWhen||part.shape||part.slot||part.icon||Object.keys(part.component?.overrides??{}).length&&!composition)
         errors.push(`${contract.id}: part "${name}" instance-affine-layout-host-unproven`);
     }
     if (part.instanceAffine && !part.component) {
@@ -733,18 +735,18 @@ export function validateContract(
       const parent = p.slice(1,-1).reduce<Part|undefined>((node,key)=>node?.parts?.[key],contract.anatomy[p[0]]);
       const root = dep?.anatomy.root;
       const size = (part.instanceAffine ?? Object.values(part.instanceAffineByProp!.map)[0]).localSize;
-      const intrinsic=dep && instanceIntrinsicSizePlan(dep,part);
+      const intrinsic=dep && instanceIntrinsicSizePlan(dep,part),composition=dep&&affineInstanceComposition(dep,part);
       // Establish child dimensions without overriding its own geometry.
       const fixed = (['width','height'] as const).every(axis=>root?.tokens?.[axis]
         ? /^\{[^{}]+\}$/.test(root.tokens[axis]!) && root.literals?.[axis]===undefined
         : root?.literals?.[axis]===`${size[axis]}px`);
       const varying = root && (Object.keys(root.tokens??{}).some(key=>!['width','height','color','background-color','opacity'].includes(key)) || root.tokensByProp || root.tokensByCombination || root.literalsByProp || root.literalsByCombination || root.stylesWhen || root.states || root.declaredStates || Object.entries(root.declared??{}).some(([key,value])=>key!=='position'||value!=='relative') || root.component || root.layoutByProp || root.layoutByCombination ||
         Object.keys(root.literals ?? {}).some(key=>!['width','height','background-color','color','opacity'].includes(key)));
-      if (p.length===1 || !dep || !root || isMultiRoot(dep) || dep.bindings.code.runtime || contractApiNames(dep).some(name=>['style','className'].includes(name)) || (!(fixed && !varying) && !intrinsic) ||
+      if (p.length===1 || !dep || !root || isMultiRoot(dep) || dep.bindings.code.runtime || contractApiNames(dep).some(name=>['style','className'].includes(name)) || (!(fixed && !varying) && !intrinsic && !composition) ||
           !parent || parent.component || !parent.layout || !['flex','inline-flex'].includes(parent.layout.display ?? 'flex') ||
           part.repeat || part.parts || part.layout || part.layoutByProp || part.layoutByCombination || part.placement || part.overlay || part.absolutePlacement || part.absolutePlacementByCombination ||
           part.tokens || part.literals || part.declared || part.states || part.declaredStates || part.stylesWhen || part.shape || part.slot || part.icon ||
-          Object.keys(part.component?.overrides ?? {}).length || Object.keys(part.component?.rootOverrides ?? {}).length && !intrinsic)
+          Object.keys(part.component?.overrides ?? {}).length && !composition || Object.keys(part.component?.rootOverrides ?? {}).length && !intrinsic && !composition)
         errors.push(`${contract.id}: part "${name}" instance-affine-host-unproven — needs an in-flow ordinary generated child with proven invariant local dimensions and no competing placement`);
     }
     if (part.absolutePlacement || part.absolutePlacementByCombination) {
@@ -1455,9 +1457,11 @@ export function validateContract(
         const by = shape.pathsByProp;
         if (by) {
           const prop = contract.props.find((p) => p.name === by.prop);
-          if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type))
-            errors.push(`${contract.id}: ${name}: filled-path-axis-must-be-enum`);
-          else if (Object.keys(by.map).length !== prop.type.enum.length || prop.type.enum.some((value) => !Object.hasOwn(by.map, value)))
+          const values = prop?.type === 'boolean' ? ['false', 'true']
+            : prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+          if (!values)
+            errors.push(`${contract.id}: ${name}: filled-path-axis-must-be-enum-or-boolean`);
+          else if (Object.keys(by.map).length !== values.length || values.some((value) => !Object.hasOwn(by.map, value)))
             errors.push(`${contract.id}: ${name}: filled-path-axis-coverage`);
         }
       } else if (shape.paths || shape.pathsByProp || shape.parentViewport) errors.push(`${contract.id}: ${name}: filled-path-on-non-path-shape`);

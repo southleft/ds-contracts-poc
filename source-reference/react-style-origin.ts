@@ -15,6 +15,15 @@ export interface ReactSizeOrigin {
  /** Optional observed own percentage and its measured reference box; never inferred from a ratio. */
  observedPercentage?:{percent:number;parentSize:number;usedSize:number};
 }
+/** An own minimum constrains an automatic box; it is not the box's fixed size. */
+export interface ReactMinimumSizeOrigin {
+ channel:'min-height';status:'fixed'|'unresolved';value?:string;authoredValue?:string;selectors:string[];reason?:string;
+}
+export interface ReactMinimumHeightSnapshot {
+ typed:{unit?:string;value?:number};minHeight:string;height:string;maxHeight:string;boxSizing:string;borderHeight:number;
+ display:string;writingMode:string;position:string;float:string;contextSafe:boolean;heightAuto:boolean;
+ animated:boolean;ancestorAnimated:boolean;variables:Record<string,string>;registeredVariable:boolean;
+}
 /** A separate observed-context witness; it does not turn a percentage into a fixed source length. */
 export function observedOwnPercentageSize(input:{authored?:string;own:boolean;typed:{unit?:string;value?:number};parent?:number;used:number;edges:number;animated:boolean;ancestorAnimated?:boolean;zoomed:boolean;contextSafe:boolean;writingMode?:string;position?:string;float?:string;transform?:string}):ReactSizeOrigin['observedPercentage'] {
  const match=input.authored&&/^([0-9]+(?:\.[0-9]+)?)%$/.exec(input.authored),percent=match?Number(match[1]):NaN;
@@ -31,7 +40,7 @@ export interface ReactStyleOrigin {
     channel: string; status: 'direct-variable' | 'unresolved';
     variable?: string; rawValue?: string; computedValue?: string;
     selectors: string[]; reason?: string;
-  }>; sizes?:ReactSizeOrigin[];
+  }>; sizes?:ReactSizeOrigin[];minimums?:ReactMinimumSizeOrigin[];
   /** Which ancestor's own px width made a `fill` width definite (1 = parent). */
   fillWidthContainer?:{depth:number}}>;
 }
@@ -216,6 +225,27 @@ export function fixedSizeExpression(value:string,variables:Record<string,string>
  return !/[A-Za-z_%!]/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'(')) && /^[\d.()+*/\s-]+$/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'('));
 }
 
+/** Prove the declared floor independently from the observed automatic height.
+ * A taller box still carries the same minimum. Unsupported contexts retain a
+ * refusal instead of turning the sampled border height into a source size. */
+export function readReactMinimumHeight(declaration:ReturnType<typeof resolveReactStyleDeclaration>,snapshot:ReactMinimumHeightSnapshot):ReactMinimumSizeOrigin|undefined {
+ if(declaration.status==='unresolved'&&declaration.reason==='no-own-declaration')return undefined;
+ const base={channel:'min-height' as const,selectors:declaration.selectors,...(declaration.status==='resolved'?{authoredValue:declaration.value}:{})};
+ const refuse=(reason:string):ReactMinimumSizeOrigin=>({...base,status:'unresolved',reason});
+ if(declaration.status==='unresolved')return refuse(declaration.reason);
+ if(!declaration.own)return refuse('minimum-declared-by-outer-selector');
+ if(snapshot.animated||snapshot.ancestorAnimated)return refuse('animated-minimum-context');
+ if(!snapshot.contextSafe||snapshot.writingMode!=='horizontal-tb'||!['static','relative'].includes(snapshot.position)||snapshot.float!=='none')return refuse('minimum-layout-context-unqualified');
+ if(!['block','flow-root','flex','inline-flex','grid','inline-grid'].includes(snapshot.display)||snapshot.boxSizing!=='border-box')return refuse('minimum-border-box-unqualified');
+ if(!snapshot.heightAuto||snapshot.maxHeight!=='none')return refuse('minimum-automatic-height-unqualified');
+ if(snapshot.registeredVariable)return refuse('registered-size-variable-provenance-unqualified');
+ if(!fixedSizeExpression(declaration.value,snapshot.variables))return refuse('responsive-or-unsupported-minimum-expression');
+ if(snapshot.typed.unit!=='px'||!Number.isFinite(snapshot.typed.value)||snapshot.typed.value!<0)return refuse('minimum-not-pixels');
+ if(!authoredLengthIsUsed(snapshot.typed.value+'px',snapshot.minHeight))return refuse('minimum-computed-value-mismatch');
+ if(!Number.isFinite(snapshot.borderHeight)||snapshot.borderHeight<0||!authoredLengthIsUsed(snapshot.borderHeight+'px',snapshot.height)||snapshot.borderHeight+1/64<snapshot.typed.value!)return refuse('minimum-used-box-mismatch');
+ return {...base,status:'fixed',value:snapshot.minHeight};
+}
+
 /** Registered custom properties compute viewport/font units to px before
  * substitution, so a var()-based size is only admissible when no variable it
  * can reach (every authored candidate, fallbacks and aliases included) is
@@ -268,6 +298,14 @@ const fillWitness = (stage: string) => `const fill=()=>{
   }
   return no(indefinite);};`;
 
+/** Capture the minimum and its own automatic border box together. The DOM
+ * path and style declaration are authenticated by the same read as sizes. */
+const minimumHeightWitness = `minimum:(()=>{const v=typed?.get('min-height'),h=typed?.get('height');return {
+ typed:v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:{},minHeight:style.minHeight,height:style.height,maxHeight:style.maxHeight,
+ boxSizing:style.boxSizing,borderHeight:rect.height,display:style.display,writingMode:style.writingMode,position:style.position,float:style.cssFloat,
+ heightAuto:h instanceof CSSKeywordValue&&h.value==='auto',contextSafe:(()=>{for(let a=this;a;a=a.parentElement){const s=getComputedStyle(a);
+ if(s.writingMode!=='horizontal-tb'||s.zoom!=='1'||['transform','translate','rotate','scale','perspective'].some(k=>s[k]&&s[k]!=='none'))return false;}return true;})()};})(),`;
+
 export async function readReactStyleOrigin(page: Page, selector: string, ownership: ReactOwnership, stage = '#root', ownedHostPaths: readonly string[] = []): Promise<ReactStyleOrigin> {
   if(ownedHostPaths.some(path=>!ownership.nodes.some(node=>node.path===path&&node.createdBy&&ownership.components.some(c=>c.id===node.createdBy))))
     throw Error('react-style-origin-owned-host-unqualified');
@@ -280,13 +318,13 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
  * read; SVG subtrees keep their separate viewport evidence. A consumer may
  * carry `fixed` alone: every other status names why the size is not the
  * element's own used declaration. */
-export interface ReactDescendantSizes { version: 1; nodes: Array<{path: string; tag: string; sizes: ReactSizeOrigin[]}> }
+export interface ReactDescendantSizes { version: 1; nodes: Array<{path: string; tag: string; sizes: ReactSizeOrigin[];minimums?:ReactMinimumSizeOrigin[]}> }
 export async function readReactDescendantSizes(page: Page, selector: string, ownership: ReactOwnership, stage = '#root', capturePercentages = false): Promise<ReactDescendantSizes> {
   // Nested workspace components size their own roots; a dependency component's
   // root (e.g. Radix Thumb) is a descendant of the component that renders it.
   const roots=new Set(workspaceComponents(ownership.components).flatMap(c=>c.roots)),svg=ownership.nodes.filter(n=>n.tag==='svg').map(n=>n.path);
   const paths=ownership.nodes.map(n=>n.path).filter(p=>!roots.has(p)&&!svg.some(s=>p===s||p.startsWith(s===''?'':s+'.'))).sort();
-  return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths,capturePercentages)).map(({path,tag,sizes})=>({path,tag,sizes:sizes??[]}))};
+  return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths,capturePercentages)).map(({path,tag,sizes,minimums})=>({path,tag,sizes:sizes??[],...(minimums?{minimums}:{})}))};
 }
 
 async function readOrigins(page: Page, selector: string, ownership: ReactOwnership, stage: string, paths: string[], capturePercentages = false): Promise<ReactStyleOrigin['roots']> {
@@ -304,13 +342,14 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
         const [matched,layers]=await Promise.all([matchedStyles(cdp,nodeId),layerTree(cdp,nodeId)]);
         const channels=sourceTokenChannels.map(channel=>resolveReactStyleOrigin(matched,layers,channel));
         const sizeDeclarations=(['width','height'] as const).map(channel=>({channel,declaration:resolveReactStyleDeclaration(matched,layers,channel,['inline-size','block-size'])}));
+        const minimumDeclaration=resolveReactStyleDeclaration(matched,layers,'min-height',['min-block-size','min-inline-size','-webkit-min-logical-height','-webkit-min-logical-width']);
         const variables=channels.flatMap(c=>c.variable?[c.variable]:[]);
         // Typed OM distinguishes an explicitly empty custom value from a
         // guaranteed-invalid value; CSSOM serializes both as the empty string.
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),${capturePercentages ? `relativeParent:(()=>{const p=this.parentElement;if(!p)return null;const s=getComputedStyle(p),edge=axis=>axis.reduce((n,k)=>n+parseFloat(s.getPropertyValue('padding-'+k))+parseFloat(s.getPropertyValue('border-'+k+'-width')),0);return {width:parseFloat(s.width)-(s.boxSizing==='border-box'?edge(['left','right']):0),height:parseFloat(s.height)-(s.boxSizing==='border-box'?edge(['top','bottom']):0)};})(),relativePosition:{position:style.position,float:style.cssFloat,transform:style.transform,writingMode:style.writingMode,contextSafe:(()=>{for(let a=this;a;a=a.parentElement){const s=getComputedStyle(a);if(s.writingMode!=='horizontal-tb'||s.zoom!=='1'||['transform','translate','rotate','scale','perspective'].some(k=>s[k]&&s[k]!=='none'))return false;}return true;})()},` : ''}animated:this.getAnimations().length>0,ancestorAnimated:(()=>{for(let a=this.parentElement;a;a=a.parentElement)if(a.getAnimations().length)return true;return false;})(),variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),${minimumHeightWitness}${capturePercentages ? `relativeParent:(()=>{const p=this.parentElement;if(!p)return null;const s=getComputedStyle(p),edge=axis=>axis.reduce((n,k)=>n+parseFloat(s.getPropertyValue('padding-'+k))+parseFloat(s.getPropertyValue('border-'+k+'-width')),0);return {width:parseFloat(s.width)-(s.boxSizing==='border-box'?edge(['left','right']):0),height:parseFloat(s.height)-(s.boxSizing==='border-box'?edge(['top','bottom']):0)};})(),relativePosition:{position:style.position,float:style.cssFloat,transform:style.transform,writingMode:style.writingMode,contextSafe:(()=>{for(let a=this;a;a=a.parentElement){const s=getComputedStyle(a);if(s.writingMode!=='horizontal-tb'||s.zoom!=='1'||['transform','translate','rotate','scale','perspective'].some(k=>s[k]&&s[k]!=='none'))return false;}return true;})()},` : ''}animated:this.getAnimations().length>0,ancestorAnimated:(()=>{for(let a=this.parentElement;a;a=a.parentElement)if(a.getAnimations().length)return true;return false;})(),variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
-        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};relativeParent?:{width:number;height:number};relativePosition?:{position:string;float:string;transform:string;writingMode:string;contextSafe:boolean};animated:boolean;ancestorAnimated?:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
+        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};minimum:Omit<ReactMinimumHeightSnapshot,'animated'|'ancestorAnimated'|'variables'|'registeredVariable'>;relativeParent?:{width:number;height:number};relativePosition?:{position:string;float:string;transform:string;writingMode:string;contextSafe:boolean};animated:boolean;ancestorAnimated?:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
         let fillDepth:number|undefined;
         const sizes:ReactSizeOrigin[]=sizeDeclarations.map(({channel,declaration})=>{
@@ -352,7 +391,9 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
             :value.box.contentBox&&measured===declared+value.box.edges[channel]?'size-is-content-box':'size-clamped-or-layout-dependent'};
           return {...base,status:'fixed',value:value.values[channel]};
         });
-        out.roots.push({path,tag:value.tag,sizes,...(fillDepth!==undefined?{fillWidthContainer:{depth:fillDepth}}:{}),channels:channels.map(c=>value.animated
+        const minimum=readReactMinimumHeight(minimumDeclaration,{...value.minimum,heightAuto:value.minimum.heightAuto&&sizes.find(s=>s.channel==='height')?.status==='auto',animated:value.animated,ancestorAnimated:value.ancestorAnimated===true,variables:value.variables,
+          registeredVariable:minimumDeclaration.status==='resolved'&&/var\(/i.test(minimumDeclaration.value)&&sizeReachesRegisteredProperty(minimumDeclaration.value,matched,value.variables)});
+        out.roots.push({path,tag:value.tag,sizes,...(minimum?{minimums:[minimum]}:{}),...(fillDepth!==undefined?{fillWidthContainer:{depth:fillDepth}}:{}),channels:channels.map(c=>value.animated
           ? {channel:c.channel,status:'unresolved',selectors:c.selectors,reason:'animated-source'}
           : c.variable && value.values[c.variable] ? {...c,rawValue:value.values[c.variable],computedValue:value.values[c.channel]}
           : {...c,status:'unresolved',reason:c.reason??'source-variable-empty'})});

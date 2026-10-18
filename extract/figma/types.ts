@@ -375,6 +375,17 @@ export interface DumpFixedSwap {
     parentSize?: { width: number; height: number };
     relativeTransform?: number[][];
     constraints?: { horizontal: string; vertical: string };
+    /** Current selected instance, captured separately from its slot placeholder.
+     * Layout-produced local pixels do not assert authored width/height overrides. */
+    selectedRoot?: {
+      kind: 'selected-slot-root-v1'; hostId: string; hostMainId: string; property: string;
+      componentKey: string; componentSetKey?: string;
+      mainSize: {width:number;height:number};
+      parentId: string; parentLayout: DumpLayout;
+      sizing: NonNullable<DumpNode['instanceSizing']>;
+      fields: string[]; properties: Record<string,string|boolean>;
+      inFlow: boolean; sizeBound: boolean; layoutGrow: number;
+    };
   }>;
 }
 

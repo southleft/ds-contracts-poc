@@ -9,6 +9,12 @@ import {mountGenerated} from './react-test-runtime.js';
 import {generateTsx} from './emit-react.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import type {DumpSet} from '../extract/figma/types.js';
+import {validateContract} from '../packages/core/src/validate.js';
+import {createRequire} from 'node:module';
+import vm from 'node:vm';
+import * as React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {transformSync} from 'esbuild';
 const corpus=tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}});
 function fixture():DumpSet{return{setName:'Masked',type:'COMPONENT_SET',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'Default',variantOptions:['Default']}},variants:[{name:'Mode=Default',variantProperties:{Mode:'Default'},type:'COMPONENT',bbox:{width:40,height:40},children:[{name:'aperture',type:'ELLIPSE',mask:{type:'ALPHA'},fill:{hex:'000000'},shape:{kind:'ellipse',width:18,height:18,x:2,y:4,right:20,bottom:18,constraints:{horizontal:'SCALE',vertical:'SCALE'}}},{name:'paint',type:'RECTANGLE',fill:{hex:'336699'},shape:{kind:'rect',width:40,height:40,x:0,y:0,right:0,bottom:0,constraints:{horizontal:'SCALE',vertical:'SCALE'}}}]}]};}
 function read(set=fixture()){const r=proposeFromDump(set,{corpus,mintUnbound:true,contractIdByName:new Map()});const c=ContractSchema.parse(r.contract);return{r,c,mask:walkAnatomy(c).find(x=>x.part.mask)!.part};}
@@ -389,4 +395,145 @@ test('mixed auto-layout and plain frames retain explicit fixed heights on both R
    for(const [mode,height] of [['auto',125],['plain',104],['auto',125]] as const){await render({mode});const box=await page.locator('#root > * > *').first().boundingBox();assert.equal(box?.height,height,surface+' '+mode);}
   }finally{await page.close();}
  }
+});
+
+// The original Form dependencies have a combined mask only on the Half value,
+// with a different captured outline and extent on each Boolean hover plane.
+function booleanPathFixture():DumpSet {
+ const path=(hover:boolean)=>hover?'M0 0L20 0L20 20L0 20ZM8 8L12 8L12 12L8 12Z':'M0 0L18 0L18 18L0 18ZM4 4L14 4L14 14L4 14Z';
+ return {setName:'BooleanMask',type:'COMPONENT_SET',propertyDefinitions:{Value:{type:'VARIANT',defaultValue:'Half',variantOptions:['Full','Half','Empty']},Hover:{type:'VARIANT',defaultValue:'false',variantOptions:['false','true']}},
+  variants:['Full','Half','Empty'].flatMap(value=>[false,true].map(hover=>{
+   const size=hover?20:18,x=hover?1:2;
+   return {name:`Value=${value}, Hover=${hover}`,variantProperties:{Value:value,Hover:String(hover)},type:'COMPONENT',bbox:{width:24,height:24},children:value==='Half'?[
+    {name:'Mask',type:'BOOLEAN_OPERATION',mask:{type:'ALPHA'},fill:{hex:'c4c4c4'},shape:{kind:'path',width:size,height:size,x,y:x,right:24-x-size,bottom:24-x-size,constraints:{horizontal:'LEFT',vertical:'TOP'},paths:[{data:path(hover),windingRule:'EVENODD'}]},
+     children:[{name:'operand',type:'RECTANGLE',fill:{hex:'ffffff'},shape:{kind:'rect',width:size,height:size,x:0,y:0,right:0,bottom:0,constraints:{horizontal:'SCALE',vertical:'SCALE'}}}]},
+    {name:'paint',type:'RECTANGLE',fill:{hex:'336699'},shape:{kind:'rect',width:24,height:24,x:0,y:0,right:0,bottom:0,constraints:{horizontal:'SCALE',vertical:'SCALE'}}},
+   ]:[]};
+  }))};
+}
+
+test('Boolean mask paths preserve both original hover planes, presence and unequal extents without browser execution',async()=>{
+ const source=booleanPathFixture(),before=JSON.stringify(source),{r,c,mask}=read(source);
+ const hover=c.props.find(p=>p.bindings.figma.property==='Hover')!,value=c.props.find(p=>p.bindings.figma.property==='Value')!;
+ assert.equal(hover.type,'boolean');assert.equal(mask.shape?.pathsByProp?.prop,hover.name);
+ assert.deepEqual(Object.keys(mask.shape!.pathsByProp!.map).sort(),['false','true']);assert.equal(mask.parts,undefined);
+ assert.equal(mask.absoluteGeometryByCombination?.rows.length,2);assert.equal(JSON.stringify(source),before);
+ const tokens={primitives:r.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},contracts=new Map([[c.id,c]]);
+ const {createFigmaEngine}=await import('./emit-figma-script.js');
+ const native=createFigmaEngine({tokens,icons:new Map()}).compileComponentData(c,contracts);
+ for(const row of native.variants){
+  const masks:any[]=[];const walk=(n:any)=>{if(n.mask)masks.push(n);for(const child of n.children??[])walk(child);};walk(row.spec);
+  if(!row.name.includes('Value=Half')){assert.equal(masks.length,0,row.name);continue;}
+  assert.equal(masks.length,1,row.name);const original=source.variants.find(v=>v.name===row.name)!.children![0].shape!;
+  assert.deepEqual(masks[0].shape.paths,original.paths,row.name);assert.equal(masks[0].shape.width,original.width);assert.equal(masks[0].shape.height,original.height);
+ }
+ const {emitReact}=await import('./emit-react.js'),{emitReactInline}=await import('./emit-react-inline.js'),{tokenInventoryFromJson}=await import('./tokens.js');
+ const inventory=tokenInventoryFromJson([tokens.primitives]),require=createRequire(import.meta.url);
+ const outputs=[emitReact(c,{contracts,icons:new Map(),tokens:inventory,tokenValues:tokens}),emitReactInline(c,{contracts,icons:new Map(),tokens})];
+ for(const output of outputs){
+  const module={exports:{} as Record<string,React.ComponentType<any>>};
+  vm.runInNewContext(transformSync(output.tsx,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module,exports:module.exports,require:(id:string)=>id.endsWith('.module.css')?{__esModule:true,default:new Proxy({},{get:(_target,key)=>String(key)})}:require(id)});
+  for(const state of [false,true,false]){
+   const html=renderToStaticMarkup(React.createElement(module.exports[c.name],{[value.bindings.code.prop]:'half',[hover.bindings.code.prop]:state}));
+   const original=source.variants.find(v=>v.name===`Value=Half, Hover=${state}`)!.children![0].shape!;
+   const other=source.variants.find(v=>v.name===`Value=Half, Hover=${!state}`)!.children![0].shape!;
+   assert(html.includes(encodeURIComponent(original.paths![0].data)),`selected path ${state}`);
+   assert(!html.includes(encodeURIComponent(other.paths![0].data)),`stale path ${state}`);
+  }
+  const absent=renderToStaticMarkup(React.createElement(module.exports[c.name],{[value.bindings.code.prop]:'empty',[hover.bindings.code.prop]:false}));
+  const scope=absent.match(/<div data-ds-mask-scope="[^"]+"[^>]*>([\s\S]*?)<\/div>/);
+  assert(scope);assert.equal(scope[1],'','the original absent value has no painted siblings');
+  assert(absent.includes('mask-image:none'),'the absent mask contributes no clipping');
+ }
+ assert.equal(JSON.stringify(source),before);
+});
+
+test('Boolean path tables require exact false and true coverage and a Boolean or enum input',()=>{
+ const {c,mask}=read(booleanPathFixture()),errors=(input:typeof c)=>{const out:string[]=[];validateContract(input,new Map([[input.id,input]]),out,new Map());return out;};
+ assert.deepEqual(errors(c),[]);
+ for(const change of [(m:typeof mask)=>{delete m.shape!.pathsByProp!.map.false;},(m:typeof mask)=>{m.shape!.pathsByProp!.map.other=m.shape!.pathsByProp!.map.true;}]){
+  const copy=structuredClone(c),m=walkAnatomy(copy).find(p=>p.part.mask)!.part;change(m);
+  assert(errors(copy).some(e=>e.includes('filled-path-axis-coverage')));
+ }
+ const invalid=structuredClone(c);invalid.props.find(p=>p.name===mask.shape!.pathsByProp!.prop)!.type='text';
+ assert(errors(invalid).some(e=>e.includes('filled-path-axis-must-be-enum-or-boolean')));
+});
+
+test('Boolean path inference refuses missing and conflicting captured geometry',()=>{
+ for(const fault of ['missing','conflict']){
+  const source=booleanPathFixture();
+  if(fault==='missing')delete source.variants.find(v=>v.name==='Value=Half, Hover=true')!.children![0].shape;
+  else {
+   source.propertyDefinitions!.Context={type:'VARIANT',defaultValue:'A',variantOptions:['A','B']};
+   source.variants=source.variants.flatMap(v=>['A','B'].map(context=>{
+    const copy=structuredClone(v);copy.name+=`, Context=${context}`;copy.variantProperties!.Context=context;
+    if(context==='B'&&copy.children?.[0]?.shape)copy.children[0].shape.paths![0].data='M0 0L10 0L10 10L0 10Z';return copy;
+   }));
+  }
+  const {r,c,mask}=read(source);assert.equal(mask.shape,undefined,fault);
+  const tokens={primitives:r.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+  assert.throws(()=>maskScopeHelpers.reactMaskChildPaths(c,tokens),/react-mask-composition-unqualified/,fault);
+ }
+});
+
+test('Boolean path support leaves existing enum path selection unchanged',async()=>{
+ const source=booleanPathFixture();source.propertyDefinitions!.Hover={type:'VARIANT',defaultValue:'Off',variantOptions:['Off','On']};
+ for(const row of source.variants){const label=row.variantProperties!.Hover==='true'?'On':'Off';row.name=row.name.replace(/Hover=(true|false)/,'Hover='+label);row.variantProperties!.Hover=label;}
+ const {r,c,mask}=read(source),axis=c.props.find(p=>p.bindings.figma.property==='Hover')!;
+ assert.deepEqual(axis.type,{enum:['off','on']});assert.equal(mask.shape!.pathsByProp!.prop,axis.name);assert.deepEqual(Object.keys(mask.shape!.pathsByProp!.map),['off','on']);
+ const {createFigmaEngine}=await import('./emit-figma-script.js');
+ const native=createFigmaEngine({tokens:{primitives:r.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(c,new Map([[c.id,c]]));
+ for(const row of native.variants.filter(v=>v.name.includes('Value=Half'))){
+  const maskSpec=row.spec.children!.find(n=>n.mask)!;const expected=source.variants.find(v=>v.name===row.name)!.children![0].shape!;
+  assert.deepEqual(maskSpec.shape?.paths,expected.paths);assert.equal(maskSpec.shape?.width,expected.width);
+ }
+});
+
+function disjointMaskFixture():DumpSet {
+ const source=booleanPathFixture();
+ for(const row of source.variants)if(row.variantProperties!.Value!=='Half'){
+  const large=row.variantProperties!.Hover==='true',size=large?20:18,offset=large?1:2;
+  row.children=[{name:'Union',type:'BOOLEAN_OPERATION',fill:{hex:'336699'},abs:{x:offset,y:offset,width:size,height:size,right:24-offset-size,bottom:24-offset-size,constraints:{horizontal:'LEFT',vertical:'TOP'}},
+   children:[{name:'Path',type:'VECTOR',fill:{hex:'336699'},shape:{kind:'path',width:size,height:size,x:0,y:0,right:0,bottom:0,constraints:{horizontal:'SCALE',vertical:'SCALE'},paths:[{data:`M0 0L${size} 0L${size} ${size}L0 ${size}Z`,windingRule:'NONZERO'}]}}]}];
+ }
+ return source;
+}
+
+test('Boolean mask partition preserves disjoint sibling parent, CSS path and original source order',async()=>{
+ const source=disjointMaskFixture(),before=JSON.stringify(source),{r,c}=read(source);
+ const unionEntry=Object.entries(c.anatomy.root.parts!).find(([,p])=>p.parts)!,[unionName,union]=unionEntry;
+ assert.deepEqual(union.visibleWhen?.equals,['full','empty']);assert.equal(union.absoluteGeometry,undefined);assert.equal(union.absoluteGeometryByCombination,undefined);
+ const tokens={primitives:r.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const maskedPaths=maskScopeHelpers.reactMaskChildPaths(c,tokens);
+ assert(!maskedPaths.has(JSON.stringify(['root',unionName])),'disjoint sibling keeps its original CSS ownership');
+ const output=maskScopeHelpers.reactMaskChildren(c.anatomy.root.parts,(name)=>`<span>${name}</span>`);
+ assert.equal(output.length,2);assert(output[0].startsWith('<div data-ds-mask-scope='));assert(!output[0].includes(`<span>${unionName}</span>`));assert.equal(output[1],`<span>${unionName}</span>`);
+ const {emitReact}=await import('./emit-react.js'),{emitReactInline}=await import('./emit-react-inline.js'),{tokenInventoryFromJson}=await import('./tokens.js');
+ const contracts=new Map([[c.id,c]]),inventory=tokenInventoryFromJson([tokens.primitives]),require=createRequire(import.meta.url);
+ const value=c.props.find(p=>p.bindings.figma.property==='Value')!,hover=c.props.find(p=>p.bindings.figma.property==='Hover')!;
+ for(const generated of [emitReact(c,{contracts,icons:new Map(),tokens:inventory,tokenValues:tokens}),emitReactInline(c,{contracts,icons:new Map(),tokens})]){
+  const module={exports:{} as Record<string,React.ComponentType<any>>};
+  vm.runInNewContext(transformSync(generated.tsx,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module,exports:module.exports,require:(id:string)=>id.endsWith('.module.css')?{__esModule:true,default:new Proxy({},{get:(_target,key)=>String(key)})}:require(id)});
+  for(const mode of ['full','empty'])for(const active of [false,true]){
+   const html=renderToStaticMarkup(React.createElement(module.exports[c.name],{[value.bindings.code.prop]:mode,[hover.bindings.code.prop]:active}));
+   const scope=html.match(/<div data-ds-mask-scope="[^"]+"[^>]*>([\s\S]*?)<\/div>/);assert(scope);assert.equal(scope[1],'','inactive mask wrapper contains no source-disjoint sibling');
+   const svg=html.indexOf('<svg',html.indexOf(scope[0])+scope[0].length);assert(svg>0,'the source-disjoint path remains outside the wrapper');
+  }
+ }
+ assert.equal(JSON.stringify(source),before);
+});
+
+test('Boolean mask partition refuses unknown overlapping and follower-coincident geometry',()=>{
+ const {c}=read(disjointMaskFixture()),sourceUnion=Object.values(c.anatomy.root.parts!).find(p=>p.parts)!;
+ for(const gate of [undefined,{prop:sourceUnion.visibleWhen!.prop,equals:['half','full']},{prop:'unknown',equals:'elsewhere'}]){
+  const copy=structuredClone(c),union=Object.values(copy.anatomy.root.parts!).find(p=>p.parts)!;union.visibleWhen=gate;
+  assert.throws(()=>maskScopeHelpers.reactMaskChildPaths(copy),/sibling-plane-unqualified/);
+ }
+ const copy=structuredClone(c),parts=copy.anatomy.root.parts!,unionName=Object.keys(parts).find(name=>parts[name].parts)!;
+ const paint=Object.values(parts).find(p=>!p.mask&&!p.parts)!;paint.visibleWhen={prop:sourceUnion.visibleWhen!.prop,equals:['half','full']};
+ assert.throws(()=>maskScopeHelpers.reactMaskChildPaths(copy),/sibling-plane-unqualified/,'disjoint from mask alone cannot justify escaping a co-present follower');
+ assert(parts[unionName]);
+ const incomplete=structuredClone(c),unknown=Object.values(incomplete.anatomy.root.parts!).find(p=>p.parts)!;delete unknown.visibleWhen;
+ unknown.presenceByCombination={props:['value'],rows:[{values:['half'],present:false}]};
+ assert.throws(()=>maskScopeHelpers.reactMaskChildPaths(incomplete),/sibling-plane-unqualified/,'a partial table does not prove global absence');
 });

@@ -302,6 +302,7 @@ export interface RestNode {
    *  a real read on this route, not a REST_CAPTURE_GAPS entry. */
   clipsContent?: boolean;
   layoutMode?: 'NONE' | 'HORIZONTAL' | 'VERTICAL' | 'GRID';
+  layoutGrow?: number;
   primaryAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
   counterAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
   primaryAxisSizingMode?: 'FIXED' | 'AUTO';
@@ -1417,7 +1418,7 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
 
 /** Instance internals otherwise stay opaque. Retain only the geometry of
  * selected content whose property identity the parent actually controls. */
-function mapSwapInstances(root: RestNode, property: string): DumpFixedSwap['observedInstances'] {
+function mapSwapInstances(root: RestNode, property: string, ctx: Ctx): DumpFixedSwap['observedInstances'] {
   if (!root.children) return undefined;
   const found: NonNullable<DumpFixedSwap['observedInstances']> = [];
   const size = (n: RestNode) => n.size && Number.isFinite(n.size.x) && Number.isFinite(n.size.y)
@@ -1440,6 +1441,27 @@ function mapSwapInstances(root: RestNode, property: string): DumpFixedSwap['obse
           horizontal: CONSTRAINT_H[node.constraints.horizontal] ?? node.constraints.horizontal,
           vertical: CONSTRAINT_V[node.constraints.vertical] ?? node.constraints.vertical,
         };
+        const target=node.componentId ? ctx.components.get(node.componentId) : undefined,mainSize=node.componentId ? ctx.mainSizeById.get(node.componentId) : undefined;
+        const selfRows=(node.overrides??[]).filter(entry=>entry?.id===node.id);
+        const parentLayout=mapLayout(parent,ctx,property);
+        if(root.componentId && target?.key && mainSize && parentLayout && Array.isArray(node.overrides) &&
+            selfRows.length<=1 && (!selfRows.length || Array.isArray(selfRows[0].overriddenFields)) &&
+            node.layoutSizingHorizontal!==undefined && node.layoutSizingVertical!==undefined &&
+            [parent.paddingTop,parent.paddingRight,parent.paddingBottom,parent.paddingLeft,parent.itemSpacing].every(v=>v===undefined||typeof v==='number'&&Number.isFinite(v)&&v>=0) &&
+            (node.layoutPositioning===undefined||node.layoutPositioning==='AUTO'||node.layoutPositioning==='ABSOLUTE') &&
+            (node.rotation===undefined||node.rotation===0) &&
+            Object.values(node.componentProperties??{}).every(value=>value&&['string','boolean'].includes(typeof value.value))){
+          const sizing:NonNullable<DumpNode['instanceSizing']>={horizontal:node.layoutSizingHorizontal,vertical:node.layoutSizingVertical};
+          if(sizing.horizontal==='FIXED' && localSize)sizing.width=localSize.width;
+          if(sizing.vertical==='FIXED' && localSize)sizing.height=localSize.height;
+          const properties:Record<string,string|boolean>={};
+          for(const[key,value]of Object.entries(node.componentProperties??{}))if(typeof value.value==='string'||typeof value.value==='boolean')properties[key]=value.value;
+          row.selectedRoot={kind:'selected-slot-root-v1',hostId:root.id,hostMainId:root.componentId,property,
+            componentKey:target.key,...(target.componentSetId&&ctx.componentSets.get(target.componentSetId)?.key?{componentSetKey:ctx.componentSets.get(target.componentSetId)!.key}:{}),
+            mainSize:{...mainSize},parentId:parent.id,parentLayout,sizing,
+            fields:[...new Set(selfRows[0]?.overriddenFields??[])].sort(),properties,
+            layoutGrow:node.layoutGrow===undefined?0:node.layoutGrow,inFlow:node.layoutPositioning!=='ABSOLUTE',sizeBound:!!node.boundVariables&&['size','width','height'].some(key=>Object.hasOwn(node.boundVariables!,key))};
+        }
         found.push(row);
       }
       visit(node, next);
@@ -2315,7 +2337,7 @@ function mapNode(
         if (typeof def.value === 'string' && def.value !== '') {
           const target = ctx.components.get(def.value);
           const swap: DumpFixedSwap = { id: def.value };
-          const observedInstances = mapSwapInstances(node, key);
+          const observedInstances = mapSwapInstances(node, key, ctx);
           if (observedInstances !== undefined) swap.observedInstances = observedInstances;
           if (target) {
             swap.name = target.name;
@@ -2604,7 +2626,8 @@ function mapNode(
 // 1.56: retain native ellipse arc sweep and hole fraction at source precision.
 // 1.64: provisional literal projection of qualified NORMAL solid fill stacks.
 // 1.65: source-qualified rectangular stroke-pattern tuple observations.
-export const REST_DUMP_VERSION = '1.65';
+// 1.66: current selected-slot root identity and auto-layout allocation witness.
+export const REST_DUMP_VERSION = '1.66';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin

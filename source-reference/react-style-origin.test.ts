@@ -361,3 +361,82 @@ test('a selector is the element\'s own by its subject compound, read through esc
    '.group-data-\\[size\\=default\\]\\/switch\\:size-4:is(:where(.group\\/switch)[data-size="default"] *)','.a:not(.b)','a[href^="x > y"]'])assert.equal(selectorSubjectIsOwn(own),true,own);
  for(const outer of ['*','#w > *','div > div','button','.a > *','.a *',':is(.a)',':where(#w > *)',':not(.b)','.a ~ *','.a + li','&.a','.a &',':hover','.a > button:hover','.\\*\\:w-full > *','.a [',''])assert.equal(selectorSubjectIsOwn(outer),false,outer);
 });
+
+// These tests use a CDP double and the actual in-page reader without launching a browser.
+test('own minimum keeps an authored floor separate from automatic used height', async () => {
+ const {readReactMinimumHeight}=await import('./react-style-origin.js');
+ const declaration={channel:'min-height',status:'resolved' as const,value:'24px',selectors:['.badge'],own:true};
+ const snapshot={typed:{unit:'px',value:24},minHeight:'24px',height:'24px',maxHeight:'none',boxSizing:'border-box',borderHeight:24,
+  display:'inline-flex',writingMode:'horizontal-tb',position:'relative',float:'none',contextSafe:true,heightAuto:true,
+  animated:false,ancestorAnimated:false,variables:{},registeredVariable:false};
+ for(const height of [24,48,64]){
+  const result=readReactMinimumHeight(declaration,{...snapshot,height:height+'px',borderHeight:height});
+  assert.deepEqual(result,{channel:'min-height',status:'fixed',authoredValue:'24px',value:'24px',selectors:['.badge']});
+ }
+ assert.equal(readReactMinimumHeight(declaration,{...snapshot,height:'24.7969px',borderHeight:24.796875})?.status,'fixed');
+ assert.equal(readReactMinimumHeight({...declaration,value:'var(--floor)'},{...snapshot,variables:{'--floor':'24px'}})?.status,'fixed');
+ assert.equal(readReactMinimumHeight({...declaration,value:'calc(1rem + 8px)'},snapshot)?.status,'fixed');
+ assert.equal(readReactMinimumHeight({channel:'min-height',status:'unresolved',selectors:[],reason:'no-own-declaration'},snapshot),undefined);
+ const refuse=(change:Partial<typeof snapshot>,reason:string,source=declaration)=>assert.equal(readReactMinimumHeight(source,{...snapshot,...change})?.reason,reason);
+ refuse({},'minimum-declared-by-outer-selector',{...declaration,own:false});
+ for(const reason of ['logical-size-cascade-unsupported','all-reset-unsupported','cascade-order-tie'])assert.equal(readReactMinimumHeight({channel:'min-height',status:'unresolved',selectors:[],reason},snapshot)?.reason,reason);
+ for(const value of ['50%','1vh','1em','min-content','var(--missing)'])refuse({},'responsive-or-unsupported-minimum-expression',{...declaration,value});
+ refuse({registeredVariable:true},'registered-size-variable-provenance-unqualified');
+ for(const change of [{animated:true},{ancestorAnimated:true}])refuse(change,'animated-minimum-context');
+ for(const change of [{contextSafe:false},{writingMode:'vertical-rl'},{position:'absolute'},{float:'left'}])refuse(change,'minimum-layout-context-unqualified');
+ for(const change of [{display:'inline'},{display:'contents'},{boxSizing:'content-box'}])refuse(change,'minimum-border-box-unqualified');
+ for(const change of [{heightAuto:false},{maxHeight:'30px'}])refuse(change,'minimum-automatic-height-unqualified');
+ for(const change of [{typed:{unit:'percent',value:24}},{typed:{unit:'px',value:NaN}},{typed:{unit:'px',value:-1}}])refuse(change,'minimum-not-pixels');
+ refuse({minHeight:'25px'},'minimum-computed-value-mismatch');
+ for(const change of [{borderHeight:21,height:'21px'},{borderHeight:30},{borderHeight:NaN}])refuse(change,'minimum-used-box-mismatch');
+});
+
+test('own minimum reader captures source declaration and refuses changed ancestor geometry', async () => {
+ const {runInNewContext}=await import('node:vm');
+ const {readReactDescendantSizes}=await import('./react-style-origin.js');
+ class Unit {constructor(public value:number,public unit:string){}}
+ class Keyword {constructor(public value:string){}}
+ const values:Record<string,string>={'width':'50px','height':'24px','min-height':'24px','max-height':'none','padding-left':'8px','padding-right':'8px',
+  'padding-top':'0px','padding-bottom':'0px','border-left-width':'0px','border-right-width':'0px','border-top-width':'0px','border-bottom-width':'0px',
+  '--floor':'24px'};
+ const style={display:'inline-flex',boxSizing:'border-box',width:'50px',height:'24px',minHeight:'24px',maxHeight:'none',writingMode:'horizontal-tb',position:'relative',
+  cssFloat:'none',float:'none',zoom:'1',transform:'none',translate:'none',rotate:'none',scale:'none',perspective:'none',getPropertyValue:(key:string)=>values[key]??'',
+  [Symbol.iterator]:function*(){yield*Object.keys(values);}};
+ const ancestor={parentElement:null,getAnimations:()=>[]};
+ const subject={localName:'button',parentElement:null as null|typeof ancestor,computedStyleMap:()=>new Map<string,unknown>([['min-height',new Unit(24,'px')],['width',new Keyword('auto')],['height',new Keyword('auto')],['--floor','24px']]),
+  getBoundingClientRect:()=>({width:50,height:24}),getAnimations:()=>[]};
+ let css='var(--floor)',tag='button',ancestorTransform='none',registered=false;let extras:Array<{name:string;value:string}>=[];const commands:string[]=[];
+ const page={context:()=>({newCDPSession:async()=>({detach:async()=>{},send:async(method:string,input:any={})=>{
+  commands.push(method);
+  if(method==='Runtime.evaluate')return {result:{objectId:'subject'}};
+  if(method==='DOM.requestNode')return {nodeId:1};
+  if(method==='CSS.getMatchedStylesForNode')return {inlineStyle:{cssProperties:[{name:'min-height',value:css},{name:'--floor',value:'24px'},...extras],shorthandEntries:[]},cssPropertyRegistrations:registered?[{propertyName:'--floor'}]:[]};
+  if(method==='CSS.getLayersForNode')return {rootLayer:{name:'',order:0}};
+  if(method==='Runtime.callFunctionOn'){
+   subject.localName=tag;
+   const read=runInNewContext('('+input.functionDeclaration+')',{getComputedStyle:(node:unknown)=>node===ancestor?{...style,transform:ancestorTransform}:style,
+    CSSUnitValue:Unit,CSSKeywordValue:Keyword,CSSMathValue:class{},document:{}});
+   return {result:{value:read.call(subject)}};
+  }
+  return {};
+ }})})} as any;
+ const first=(await readReactStyleOrigin(page,'#subject',ownership)).roots[0];
+ assert.equal(first.minimums?.[0].status,'fixed');assert.equal(first.minimums?.[0].value,'24px');assert.equal(first.minimums?.[0].authoredValue,'var(--floor)');
+ assert.deepEqual(first.sizes?.map(s=>[s.channel,s.status,s.value]),[['width','auto','auto'],['height','auto','auto']]);
+ extras=[{name:'min-block-size',value:'30px'}];
+ assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].minimums?.[0].reason,'logical-size-cascade-unsupported');
+ extras=[{name:'all',value:'unset'}];
+ assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].minimums?.[0].reason,'all-reset-unsupported');
+ extras=[];registered=true;
+ assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].minimums?.[0].reason,'registered-size-variable-provenance-unqualified');
+ registered=false;
+ subject.parentElement=ancestor;ancestorTransform='matrix(1, 0, 0, 1, 5, 0)';
+ assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].minimums?.[0].reason,'minimum-layout-context-unqualified');
+ subject.parentElement=null;ancestorTransform='none';css='50%';
+ assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].minimums?.[0].reason,'responsive-or-unsupported-minimum-expression');
+ css='24px';tag='span';
+ const nested={...ownership,nodes:[...ownership.nodes,{path:'0',tag:'span',createdBy:'one',nearestComponent:'one'}]};
+ const descendant=await readReactDescendantSizes(page,'#subject',nested);
+ assert.equal(descendant.nodes[0].path,'0');assert.equal(descendant.nodes[0].minimums?.[0].value,'24px');
+ assert(commands.includes('CSS.getMatchedStylesForNode'));assert(commands.includes('Runtime.callFunctionOn'));
+});

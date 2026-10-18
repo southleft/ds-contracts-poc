@@ -302,7 +302,7 @@ interaction behavior. General-editor admission remains closed. Stamp visibility,
 source validation and exact projection requirements remain in force.
 
 Package closure now counts referenced dependencies rather than unrelated sets
-fetched alongside them; the actual graph retains its 30-component cap. For
+fetched alongside them; the actual graph retains its 64-component cap. For
 validated finite domains with more than eight axes, presence projection removes
 a column only when all matching retained rows agree. Output retains the
 eight-axis limit. Fresh generated child APIs may declare explicitly requested

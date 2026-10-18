@@ -277,3 +277,55 @@ test('owned affine frames reject variable sizes, positioning and layout competit
   assert(errors.some(e=>e.includes('owned-affine-host-unproven')),JSON.stringify(errors));
  }
 });
+
+function affineCompositionFixture(semantic:boolean){
+ const base={version:'1.0.0',description:'Explicit affine local dimensions',semantics:{element:'div'},props:[],states:[],bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./AffinePaint',export:'AffinePaint'}}}};
+ const child=ContractSchema.parse({...base,id:'probe.affine-paint',name:'AffinePaint',anatomy:{root:{tokens:{width:'{size.main}',height:'{size.main}',...(semantic?{color:'{paint.main}'}:{})},declared:{position:'relative',...(!semantic?{'overflow-x':'hidden','overflow-y':'hidden'}:{})},instanceRootInputs:['width','height'],...(semantic?{overridable:['size','color']}:{ }),parts:{ink:{shape:{kind:'path',width:40,height:40,parentViewport:{width:48,height:48,x:4,y:4},paths:[{data:'M0 0L40 0L40 40L0 40Z',windingRule:'NONZERO'}]},declared:{position:'absolute'},literals:{'background-color':'currentColor'}}}}}});
+ const geometry={localSize:{width:semantic?14:12,height:semantic?14:12},transform:semantic?[[1,-1.2246468525851679e-16,1.714505593619235e-15],[1.2246468525851679e-16,1,0]]:[[-1,0,12],[0,1,0]]};
+ const parent=ContractSchema.parse({...base,id:'probe.affine-parent',name:'AffineParent',bindings:{...base.bindings,code:{anchors:{importPath:'./AffineParent',export:'AffineParent'}}},props:semantic?[{name:'kind',type:{enum:['first','second']},default:'first',bindings:{figma:{kind:'VARIANT',property:'Kind'},code:{prop:'kind'}}}]:[],anatomy:{root:{layout:{display:'flex',direction:'row'},parts:{ink:{component:{id:child.id,...(semantic?{overrides:{size:'{size.instance}',color:'{paint.instance}'}}:{rootOverrides:{width:'{size.instance}',height:'{size.instance}'}})},...(semantic?{instanceAffineLayout:{props:['kind'],rows:['first','second'].map(value=>({values:[value],geometry,fill:{width:false,height:false}}))}}:{instanceAffine:geometry})}}}}});
+ const values={primitives:{size:{main:{$type:'dimension',$value:'48px'},instance:{$type:'dimension',$value:semantic?'14px':'12px'}},paint:{main:{$type:'color',$value:'#123456'},instance:{$type:'color',$value:'#c9cdd4'}}},semantic:{},light:{},dark:{},brands:{default:{}}};
+ return {parent,child,values};
+}
+
+async function affineSsr(parent:any,child:any,values:any,inline:boolean,props:any={}){
+ const {transformSync}=await import('esbuild'),{createRequire}=await import('node:module'),React=await import('react'),{renderToStaticMarkup}=await import('react-dom/server');
+ const require=createRequire(import.meta.url),contracts=new Map([[parent.id,parent],[child.id,child]]),icons=new Map<string,string>();
+ const emit=(c:any)=>inline?emitReactInline(c,{contracts,icons,tokens:values}):emitReact(c,{contracts,icons,tokens:new Set(['size.main','size.instance','paint.main','paint.instance']),tokenValues:values});
+ const dep=emit(child),out=emit(parent);
+ const load=(source:string,dependency?:any)=>{const module={exports:{}};vm.runInNewContext(transformSync(source,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module,exports:module.exports,require:(id:string)=>id.endsWith('.module.css')?{__esModule:true,default:new Proxy({},{get:(_o,k)=>String(k)})}:(id==='./'+child.name||id==='../'+child.name)?dependency:require(id)});return module.exports as any;};
+ const depModule=load(dep.tsx),parentModule=load(out.tsx,depModule);
+ return {html:renderToStaticMarkup(React.createElement(parentModule[parent.name],props)),css:((out as {css?:string}).css??'')+((dep as {css?:string}).css??'')};
+}
+
+test('explicit affine size and color keep both React allocation wrappers and native local geometry',async()=>{
+ for(const semantic of [true,false]){
+  const {parent,child,values}=affineCompositionFixture(semantic),contracts=new Map([[parent.id,parent],[child.id,child]]),dim=semantic?14:12;
+  for(const inline of [false,true])for(const kind of semantic?['first','second']:['first']){
+   const out=await affineSsr(parent,child,values,inline,{kind});assert(out.html.includes(`width:${dim}px;height:${dim}px`));
+   assert(out.html.includes('transform:matrix('));assert(out.html.includes(semantic?'1.2246468525851679e-16':'matrix(-1,0,0,1,12,0)'));
+   if(semantic)assert(inline?out.html.includes('color:#c9cdd4'):out.css.includes('--probe-affine-paint-size')&&out.css.includes('--probe-affine-paint-color'));
+  }
+  const data=createFigmaEngine({tokens:values,icons:new Map()}).compileComponentData(parent,contracts);
+  for(const row of data.variants){const host=row.spec.children![0],instance=host.children![0];assert(host.affineViewport);assert.deepEqual(instance.instanceAffineAllocation!.localSize,{width:dim,height:dim});
+   if(semantic){assert.equal(instance.instanceSize!.px,14);assert.equal(instance.instanceInk!.varName,'paint/instance');}
+   else{assert.equal(instance.instanceRootOverrides!.width!.px,12);assert.equal(instance.instanceRootOverrides!.height!.px,12);}
+  }
+ }
+});
+
+test('affine composition rejects changed dimensions, a drifting mode, competing channels and runtime escape',()=>{
+ const changes:Array<(x:ReturnType<typeof affineCompositionFixture>)=>void>=[
+  x=>{x.values.primitives.size.instance.$value='15px';},
+  x=>{(x.values.dark as any).size={instance:{$type:'dimension',$value:'15px'}};},
+  x=>{x.parent.anatomy.root.parts!.ink.component!.rootOverrides={width:'{size.instance}',height:'{size.instance}'};},
+  x=>{(x.parent.anatomy.root.parts!.ink.component!.overrides as any).opacity='{size.instance}';},
+  x=>{x.child.bindings.code.runtime={kind:'react',import:'./unsafe'} as any;},
+  x=>{x.child.anatomy.root.literals={'min-width':'15px'};},
+  x=>{x.parent.anatomy.root.parts!.ink.instanceAffineLayout!.rows[1].geometry.localSize.height=15;},
+ ];
+ for(const change of changes){const x=affineCompositionFixture(true);change(x);const contracts=new Map([[x.parent.id,x.parent],[x.child.id,x.child]]),icons=new Map<string,string>();
+  assert.throws(()=>emitReact(x.parent,{contracts,icons,tokens:new Set(['size.main','size.instance','paint.main','paint.instance']),tokenValues:x.values}),/unproven|override|runtime|registered|Unsupported/);
+  assert.throws(()=>emitReactInline(x.parent,{contracts,icons,tokens:x.values}),/unproven|override|runtime|registered|Unsupported/);
+  assert.throws(()=>createFigmaEngine({tokens:x.values,icons}).buildComponentScript(x.parent,contracts),/unproven|override|runtime|registered|Unsupported/);
+ }
+});

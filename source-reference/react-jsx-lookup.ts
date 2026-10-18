@@ -1,3 +1,4 @@
+import {authoredFunctionKey} from './react-authored-functions.js';
 import {readReactCommonJsKernel} from './react-commonjs-kernel.js';
 import ts from 'typescript';
 import {createHash} from 'node:crypto';
@@ -8,6 +9,7 @@ export interface ReactJsxLookupProof {
   qualification:'bundled-esm-binding-reads-only';
   status:'verified';sourceJavascriptSha256:string;javascriptSha256:string;namespaces:number;
   contextTargets?:{reads:number};
+  authoredFunctions?:string[];
   contextExportReads?:string[];
   /** Calls whose emitted callee is a resolved lexical read, optionally inside
    * its independently planned module-binding witness. Other callees stay open. */
@@ -293,6 +295,33 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
     }ts.forEachChild(n,scan);};scan(sf);
     if(registered.size!==planned.size||reads.size!==planned.size)return fail('context-export-coverage-incomplete');for(const [key,value]of registered)if(reads.get(key)?.symbol!==value.symbol)return fail('context-export-source-binding-differs');
   }
+  const authoredFunctions:string[]=[];
+  if(plan.authoredFunctions?.length){
+    const planned=new Map(plan.authoredFunctions.map(p=>[authoredFunctionKey(p),p]));
+    const symbols=new Set<ts.Symbol>();
+    const scan=(node:ts.Node)=>{
+      if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.name.text==='authoredFunctionRegister'){
+        const owner=node.expression.expression;
+        if(!ts.isPropertyAccessExpression(owner)||owner.name.text!=='__DSC_RUNTIME_PROOF'||!ts.isIdentifier(owner.expression)||owner.expression.text!=='globalThis')return;
+        const [key,value,read]=node.arguments;
+        if(node.arguments.length!==3||node.questionDotToken||!key||!ts.isStringLiteral(key)||!planned.has(key.text)||authoredFunctions.includes(key.text))fail('authored-function-registration-unplanned');
+        const actual=binding(value),reader=callback(read),declaration=actual.declaration;
+        if(actual.symbol!==reader.symbol||!(ts.isFunctionDeclaration(declaration)||ts.isVariableDeclaration(declaration)&&declaration.initializer&&(ts.isArrowFunction(unwrap(declaration.initializer))||ts.isFunctionExpression(unwrap(declaration.initializer)))))fail('authored-function-literal-unproved');
+        if(checker.getSymbolAtLocation(owner.expression)?.declarations?.length)fail('authored-function-global-shadowed');
+        symbols.add(actual.symbol);authoredFunctions.push((key as ts.StringLiteral).text);
+      }
+      ts.forEachChild(node,scan);
+    };scan(sf);
+    if(authoredFunctions.length!==planned.size)fail('authored-function-registration-incomplete');
+    const containsBinding=(node:ts.Node):boolean=>ts.isIdentifier(node)&&!!checker.getSymbolAtLocation(node)&&symbols.has(checker.getSymbolAtLocation(node)!)||ts.forEachChild(node,containsBinding)===true;
+    const writes=(node:ts.Node)=>{
+      if(ts.isBinaryExpression(node)&&node.operatorToken.kind>=ts.SyntaxKind.FirstAssignment&&node.operatorToken.kind<=ts.SyntaxKind.LastAssignment&&containsBinding(node.left)||
+         (ts.isPrefixUnaryExpression(node)||ts.isPostfixUnaryExpression(node))&&[ts.SyntaxKind.PlusPlusToken,ts.SyntaxKind.MinusMinusToken].includes(node.operator)&&containsBinding(node.operand)||
+         (ts.isForInStatement(node)||ts.isForOfStatement(node))&&containsBinding(node.initializer))fail('authored-function-binding-written');
+      if(ts.isCallExpression(node)&&ts.isIdentifier(node.expression)&&node.expression.text==='eval')fail('authored-function-eval-unmodeled');
+      ts.forEachChild(node,writes);
+    };writes(sf);
+  }
   const expected=new Map<string,string>();
   for(const model of plan.models)for(const target of model.jsxTargets){
     const key=helperPointKey(target.read),value=helperPointKey(target.binding);
@@ -330,5 +359,5 @@ export function prepareReactJsxLookupBundle(javascript:string,plan:ReactJsxHelpe
   }
   let output=javascript;edits.sort((a,b)=>b.start-a.start);let last=javascript.length;for(const edit of edits){if(edit.end>last)fail('instrumentation-overlap');output=output.slice(0,edit.start)+edit.text+output.slice(edit.end);last=edit.start;}
   const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
-  return {javascript:output,proof:{version:1,acceptedContract:null,effectsVerified:false,qualification:'bundled-esm-binding-reads-only',status:'verified',sourceJavascriptSha256:sha(javascript),javascriptSha256:sha(output),namespaces:namespaces.size,reads:result,...(plan.contextExportReads?.length?{contextExportReads:plan.contextExportReads.map(r=>helperPointKey(r.read))}:{}),...(contextImports?{contextImports}:{}),...(callbackHooks.size?{callbackHookReads}:{}),...(refHooks.size?{refHookReads}:{}),...(effectHooks.size?{effectHookReads}:{}),...(helperHooks.size?{helperHookReads}:{}),...(contextTargets?{contextTargets}:{}),...(plan.contextConsumerCalls?.length?{contextConsumerCallees}:{})}};
+  return {javascript:output,proof:{version:1,acceptedContract:null,effectsVerified:false,qualification:'bundled-esm-binding-reads-only',status:'verified',sourceJavascriptSha256:sha(javascript),javascriptSha256:sha(output),namespaces:namespaces.size,reads:result,...(plan.authoredFunctions?.length?{authoredFunctions}:{}),...(plan.contextExportReads?.length?{contextExportReads:plan.contextExportReads.map(r=>helperPointKey(r.read))}:{}),...(contextImports?{contextImports}:{}),...(callbackHooks.size?{callbackHookReads}:{}),...(refHooks.size?{refHookReads}:{}),...(effectHooks.size?{effectHookReads}:{}),...(helperHooks.size?{helperHookReads}:{}),...(contextTargets?{contextTargets}:{}),...(plan.contextConsumerCalls?.length?{contextConsumerCallees}:{})}};
 }

@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { buildReactLibrary, createReactLibraryService, parseLibraryRequest } from './react-library.js';
 import { readPreparedReactLibrary, retainPreparedReactLibrary } from './react-library-artifact.js';
 import { reactLibraryFamily } from '../src/engine/react-library.js';
+import {REACT_LIBRARY_COMPONENT_LIMIT} from '../react-library-limits.js';
 import { ContractSchema } from '../../scripts/contract-schema.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -29,7 +30,7 @@ test('the download family uses dependency identity and refuses unsafe or incompl
   assert.throws(() => parseLibraryRequest({ ...request(), icons: [['../../escape', '<svg/>']] }), /invalid-icon/);
   assert.throws(() => parseLibraryRequest({ ...request(), tokens: JSON.parse('{"__proto__":{"polluted":true}}') }), /unsafe-data-key/);
   assert.throws(() => parseLibraryRequest({ ...request(), contracts: [parent, child, { ...child, id: 'test.extra', name: 'Unrelated' }] }), /unrelated-components/);
-  assert.throws(() => parseLibraryRequest({ ...request(), contracts: Array.from({ length: 31 }, () => child) }), /family-limit/);
+  assert.throws(() => parseLibraryRequest({ ...request(), contracts: Array.from({ length: REACT_LIBRARY_COMPONENT_LIMIT + 1 }, () => child) }), /family-limit/);
   assert.equal(({} as any).polluted, undefined);
 });
 

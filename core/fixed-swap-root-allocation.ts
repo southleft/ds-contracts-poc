@@ -1,9 +1,12 @@
 import type { DumpNode, DumpPropertyDefinition, DumpSet } from '../extract/figma/types.js';
+import type { Contract } from '../scripts/contract-schema.js';
 
 /** Original component roots, before sanitation or semantic promotion. Duplicate
  * ids remain ambiguous; no arrival-order source can authorize another host. */
 export interface FixedSwapOwnerRoot {
   setKey: string;
+  setNodeId?: string;
+  setType?: DumpSet['type'];
   node: DumpNode;
   propertyDefinitions?: Record<string, DumpPropertyDefinition>;
 }
@@ -12,10 +15,57 @@ export function fixedSwapOwnerRoots(sets: readonly DumpSet[]): ReadonlyMap<strin
   for (const set of sets) for (const node of set.variants) {
     if (!set.key || !node.nodeId) continue;
     const rows = roots.get(node.nodeId) ?? [];
-    rows.push({setKey: set.key, node, propertyDefinitions: set.propertyDefinitions});
+    rows.push({setKey: set.key, setNodeId: set.nodeId, setType: set.type, node, propertyDefinitions: set.propertyDefinitions});
     roots.set(node.nodeId, rows);
   }
   return roots;
+}
+
+/** A component key selects a variant only when the original captured set owns
+ * that exact id/key and supplies every structured axis. Names are not evidence. */
+export function fixedSwapVariantOwner(swap: {id: string; key?: string},
+  roots: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]> | undefined): FixedSwapOwnerRoot | undefined {
+  const rows=roots?.get(swap.id);
+  if(!rows || rows.length!==1 || !Object.hasOwn(rows,0) || !rows[0]) return;
+  const owner=rows[0],node=owner.node;
+  if(owner.setType!=='COMPONENT_SET' || !owner.setNodeId || !owner.setKey ||
+      node.type!=='COMPONENT' || node.nodeId!==swap.id || !swap.key || node.componentKey!==swap.key) return;
+  const axes=Object.entries(owner.propertyDefinitions??{}).filter(([,definition])=>definition.type==='VARIANT');
+  const values=node.variantProperties;
+  if(!axes.length || !values || Object.keys(values).length!==axes.length ||
+      axes.some(([name,definition])=>definition.type!=='VARIANT' || typeof values[name]!=='string' ||
+        !Array.isArray(definition.variantOptions) || !definition.variantOptions.includes(values[name]))) return;
+  return owner;
+}
+
+/** Select canonical typed values from the owning contract's explicit bindings.
+ * A source variant is never treated as a set default or selected by its name. */
+export function qualifyFixedSwapVariantSelection(swap: {id: string; key?: string},
+  roots: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]> | undefined,
+  target: Contract, fileKey: string | undefined): Record<string,string|boolean> | undefined {
+  const owner=fixedSwapVariantOwner(swap,roots),anchor=target.bindings.figma.anchors;
+  if(!owner || !fileKey || anchor.fileKey!==fileKey || anchor.nodeId!==owner.setNodeId ||
+      anchor.componentSetKey!==owner.setKey || target.props.some(p=>p.bindings.figma.kind!=='VARIANT' && p.required && p.default===undefined)) return;
+  const axes=Object.keys(owner.node.variantProperties!),props=target.props.filter(p=>p.bindings.figma.kind==='VARIANT');
+  if(props.length!==axes.length || new Set(props.map(p=>p.bindings.figma.property)).size!==axes.length) return;
+  const selected:Record<string,string|boolean>={};
+  for(const property of axes){
+    const matches=props.filter(p=>p.bindings.figma.property===property);
+    if(matches.length!==1) return;
+    const prop=matches[0],raw=owner.node.variantProperties![property];
+    const mapped=Object.entries(prop.bindings.figma.values??{}).filter(([,value])=>value===raw);
+    if(mapped.length!==1) return;
+    const canonical=mapped[0][0];
+    if(prop.type==='boolean'){
+      if(canonical!=='true' && canonical!=='false') return;
+      selected[prop.name]=canonical==='true';
+    }else if(typeof prop.type==='object' && 'enum' in prop.type && prop.type.enum.includes(canonical)) selected[prop.name]=canonical;
+    else return;
+  }
+  const agrees=(tuple:Record<string,unknown>)=>Object.entries(tuple).every(([key,value])=>Object.hasOwn(selected,key) && selected[key]===value);
+  if(target.bindings.figma.absentVariants?.some(agrees) ||
+      target.bindings.figma.drawnVariants && !target.bindings.figma.drawnVariants.some(agrees)) return;
+  return selected;
 }
 
 const dense = (value: unknown): value is unknown[] => Array.isArray(value) &&
@@ -29,13 +79,72 @@ const size = (value: unknown): value is {width: number; height: number} => !!val
 const sameSize = (a: unknown, b: unknown) => size(a) && size(b) && a.width === b.width && a.height === b.height;
 const propertyName = (name: string) => name.replace(/#.*$/, '');
 
+/** Non-axis selected properties cannot silently borrow another main default. */
+export function capturedSelectedDefaultsMatch(properties:Record<string,string|boolean>,target:Contract,
+ selected:Record<string,unknown>):boolean {
+ if(!properties||typeof properties!=='object'||Array.isArray(properties))return false;
+ for(const[property,value]of Object.entries(properties)){
+  const matched=target.props.filter(p=>p.bindings.figma.property===propertyName(property));
+  if(matched.length!==1)return false;const prop=matched[0],binding=prop.bindings.figma;
+  let canonical:string|boolean;
+  if(binding.kind==='VARIANT'){
+   const values=Object.entries(binding.values??{}).filter(([,raw])=>raw===value);if(values.length!==1)return false;
+   if(prop.type==='boolean'){if(!['false','true'].includes(values[0][0]))return false;canonical=values[0][0]==='true';}
+   else canonical=values[0][0];
+  }else if(binding.kind==='BOOLEAN'&&typeof value==='boolean'||binding.kind==='TEXT'&&typeof value==='string')canonical=value;
+  else return false;
+  if((selected[prop.name]??prop.default)!==canonical)return false;
+ }
+ return true;
+}
+
+/** Direct selected-slot allocation from the current original instance, not
+ * the placeholder main. This bounded door carries the observed cross-axis allocation;
+ * a HUG height stays observational and is never emitted as a fixed input.
+ * It never invents width/height override fields or responsive authority. */
+function qualifyCapturedSelectedRoot(host:DumpNode,property:string,ownerKey:string,targetId:string,targetKey:string,
+ roots:ReadonlyMap<string,readonly FixedSwapOwnerRoot[]>|undefined):
+ {width:number;height:number;sizing:NonNullable<DumpNode['instanceSizing']>;remainingFields:string[];channels?:Array<'width'|'height'>}|{issue:string}{
+ const refuse=(why:string)=>({issue:'selected-root-'+why});
+ const swap=host.fixedSwaps?.[property],rows=swap?.observedInstances,row=rows?.[0],proof=row?.selectedRoot;
+ const authority=host.instanceRootOverrides,g=host.instanceGeometry;
+ if(!host.nodeId||host.type!=='INSTANCE'||!authority||!g||authority.nodeId!==host.nodeId||g.nodeId!==host.nodeId||
+    !authority.componentId||g.componentId!==authority.componentId||!identity(g.transform)||!identity(authority.localTransform)||
+    JSON.stringify(g.transform)!==JSON.stringify(authority.localTransform)||!size(g.localSize)||
+    (authority.localSize!==undefined&&!sameSize(authority.localSize,g.localSize))||
+    (host.instanceSetKey??host.instanceKey)!==ownerKey||authority.componentKey!==host.instanceKey||authority.componentSetKey!==host.instanceSetKey)
+  return refuse('host-identity');
+ const mains=roots?.get(authority.componentId),main=mains?.[0];
+ if(!mains||mains.length!==1||!main||main.setKey!==ownerKey||main.node.nodeId!==authority.componentId||main.node.componentKey!==host.instanceKey||main.node.type!=='COMPONENT')return refuse('host-main');
+ const definitions=Object.entries(main.propertyDefinitions??{}).filter(([key])=>propertyName(key)===property);
+ if(definitions.length!==1||definitions[0][1].type!=='INSTANCE_SWAP')return refuse('host-property');
+ if(!swap||swap.id!==targetId||swap.key!==targetKey||!dense(rows)||rows.length!==1||!row||!proof||proof.kind!=='selected-slot-root-v1'||
+    proof.hostId!==host.nodeId||proof.hostMainId!==authority.componentId||proof.property!==definitions[0][0]||
+    !dense(row.path)||row.path.length!==1||!Number.isSafeInteger(row.path[0])||row.path[0]<0||proof.parentId!==host.nodeId||
+    row.componentId!==targetId||proof.componentKey!==targetKey||proof.inFlow!==true||proof.sizeBound!==false||!identity(row.relativeTransform)||!size(row.size)||!sameSize(row.parentSize,g.localSize))return refuse('observation');
+ const leaf=main.node.children?.[row.path[0]];
+ if(!leaf||leaf.type!=='INSTANCE'||!leaf.nodeId||leaf.propRefs?.mainComponent!==property||row.nodeId!==`I${host.nodeId};${leaf.nodeId}`)return refuse('property-path');
+ const targets=roots?.get(targetId),target=targets?.[0];
+ if(!targets||targets.length!==1||!target||target.node.type!=='COMPONENT'||target.node.nodeId!==targetId||target.node.componentKey!==targetKey||
+    (target.setType==='COMPONENT_SET'?proof.componentSetKey!==target.setKey:proof.componentSetKey!==undefined)||!sameSize(proof.mainSize,target.node.bbox))return refuse('selected-main');
+ const sizing=proof.sizing,layout=proof.parentLayout;
+ if(!sizing||sizing.horizontal!=='FILL'||!['HUG','FIXED'].includes(sizing.vertical??'')||Object.hasOwn(sizing,'width')||
+    (sizing.vertical==='HUG'?Object.hasOwn(sizing,'height'):sizing.height!==row.size.height)||
+    proof.layoutGrow!==0||!layout||layout.mode!=='VERTICAL'||!dense(layout.padding)||layout.padding.length!==4||layout.padding.some(v=>typeof v!=='number'||!Number.isFinite(v)||v<0)||
+    row.size.width!==g.localSize.width-layout.padding[1]-layout.padding[3]||row.relativeTransform[0][2]!==layout.padding[3])return refuse('layout-allocation');
+ if(!dense(proof.fields)||proof.fields.some(field=>typeof field!=='string'||!['counterAxisSizingMode','layoutAlign','primaryAxisSizingMode','height','width','layoutGrow'].includes(field)))return refuse('unmodeled-root-field');
+ return {width:row.size.width,height:row.size.height,sizing,remainingFields:proof.fields.filter(f=>f!=='width'&&f!=='height'),channels:sizing.vertical==='HUG'?['width']:['width','height']};
+}
+
 /** A descendant measurement is not an ordinary instance override. Join it to
  * the exact original owner main and its independently captured root authority.
  * This transports frozen local pixels only, never FILL/HUG or placement. */
 export function qualifyFixedSwapRootAllocation(host: DumpNode, property: string,
   ownerSetKey: string, targetId: string, targetKey: string,
   roots: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]> | undefined):
-  {width: number; height: number; sizing: NonNullable<DumpNode['instanceSizing']>; remainingFields: string[]} | {issue: string} {
+  {width: number; height: number; sizing: NonNullable<DumpNode['instanceSizing']>; remainingFields: string[]; channels?:Array<'width'|'height'>} | {issue: string} {
+  if(host.fixedSwaps?.[property]?.observedInstances?.[0]?.selectedRoot!==undefined)
+    return qualifyCapturedSelectedRoot(host,property,ownerSetKey,targetId,targetKey,roots);
   const refuse = (issue: string) => ({issue});
   const swap = host.fixedSwaps?.[property], rows = swap?.observedInstances;
   const owner = host.instanceRootOverrides, hostGeometry = host.instanceGeometry;

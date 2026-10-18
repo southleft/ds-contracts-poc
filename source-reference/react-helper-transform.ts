@@ -1,3 +1,4 @@
+import {readReactAuthoredFunctions,instrumentReactAuthoredFunctions} from './react-authored-functions.js';
 import {readReactAuthoredClasses,instrumentReactAuthoredClasses} from './react-authored-classes.js';
 import {readReactContextConsumerEffects} from './react-target-effects.js';
 import {planContextExportReads} from './react-context-export-reads.js';
@@ -102,7 +103,7 @@ export function createReactHelperObserver(
   reference: ReactReference,
   plan: ReactEffectInstrumentationPlan,
 ) {
-  if(plan.kind==='jsx-component'&&plan.boundaryOnly&&((!plan.initializers?.length&&!plan.authoredClasses?.length)||plan.models.length||plan.component||plan.targetEffects?.length||plan.callbackPlans?.length||plan.callbackValues?.length))throw Error('wrapper-boundary-plan-invalid');
+  if(plan.kind==='jsx-component'&&plan.boundaryOnly&&((!plan.initializers?.length&&!plan.authoredClasses?.length&&!plan.authoredFunctions?.length)||plan.models.length||plan.component||plan.targetEffects?.length||plan.callbackPlans?.length||plan.callbackValues?.length))throw Error('wrapper-boundary-plan-invalid');
   if(plan.kind==='jsx-component'&&!plan.boundaryOnly&&!plan.component)throw Error('jsx-component-plan-missing');
   if(plan.kind==='jsx-component'&&plan.contextExportReads&&JSON.stringify(planContextExportReads(reference,plan.contextFactories??[]))!==JSON.stringify(plan.contextExportReads))throw Error('context-export-plan-changed');
   if(plan.kind==='jsx-component'&&plan.bodyModels){const expected=(plan.contextImportFunctions??[]).map(r=>readReactContextConsumerEffects(reference,r.initializer,r.invocation,[]));if(JSON.stringify(expected)!==JSON.stringify(plan.bodyModels))throw Error('context-body-model-changed');}
@@ -110,6 +111,11 @@ export function createReactHelperObserver(
     if(!plan.boundaryOnly||plan.models.length||plan.bodyModels?.length||plan.initializers?.length||plan.targets.length)throw Error('authored-class-observation-plan-mixed');
     const expected=readReactAuthoredClasses(reference,plan.authoredClasses.map(p=>p.target));
     if(JSON.stringify(expected)!==JSON.stringify(plan.authoredClasses))throw Error('authored-class-observation-plan-changed');
+  }
+  if(plan.kind==='jsx-component'&&plan.authoredFunctions?.length){
+    if(!plan.boundaryOnly||plan.models.length||plan.bodyModels?.length||plan.initializers?.length||plan.authoredClasses?.length||plan.targets.length)throw Error('authored-function-observation-plan-mixed');
+    const expected=readReactAuthoredFunctions(reference,plan.authoredFunctions.flatMap(p=>p.target?[p.target]:[]),plan.authoredFunctions.map(p=>p.source.file));
+    if(JSON.stringify(expected)!==JSON.stringify(plan.authoredFunctions))throw Error('authored-function-observation-plan-changed');
   }
   const changes: Array<{
     file: string;
@@ -213,7 +219,7 @@ export function createReactHelperObserver(
             `\n${G}.registerRuntime(${adapter.kind === "jsx" ? "exports.jsx,exports.jsxs" : "exports.createElement"});\n${G}.registerFragment(exports.Fragment);\n`+
             (adapter.kind==='create-element'?`${G}.registerForwardRef(exports.forwardRef);\n`+(plan.kind==='jsx-component'&&plan.authoredClasses?.length?`${G}.authoredClassBases(exports.Component,exports.PureComponent);\n`:''):'');
         }
-        contents=instrumentReactContextAdapter(contents,adapter.kind,plan.kind==='jsx-component'&&!!plan.authoredClasses?.length);
+        contents=instrumentReactContextAdapter(contents,adapter.kind,plan.kind==='jsx-component'&&!!plan.authoredClasses?.length,plan.kind==='jsx-component'&&!!plan.authoredFunctions?.length);
         seen.add(adapter.kind);
         changes.push({
           file,
@@ -228,6 +234,7 @@ export function createReactHelperObserver(
         entry ? file : path.relative(reference.sourceRoot, file),
         plan,
       );
+      if(plan.kind==='jsx-component'&&plan.authoredFunctions?.length)registered=instrumentReactAuthoredFunctions(registered,path.relative(reference.sourceRoot,file).split(path.sep).join('/'),plan.authoredFunctions);
       if(plan.kind==='jsx-component'&&plan.authoredClasses?.length)registered=instrumentReactAuthoredClasses(registered,path.relative(reference.sourceRoot,file).split(path.sep).join('/'),plan.authoredClasses);
       // Other JS dependencies may contain assignment patterns and custom factory
       // protocols. They have no modeled literal authority in this observer.

@@ -14,17 +14,36 @@ function simple(node:CapturedNode){
  return s['writing-mode']==='horizontal-tb'&&['static','relative'].includes(s.position)&&s.float==='none'&&(s.zoom??'1')==='1'&&
   ['transform','translate','rotate','scale','perspective'].every(k=>!s[k]||s[k]==='none')&&edges.every(k=>px(s[k])===0);
 }
+/** A padded root may fill this one captured caller without declaring a fixed
+ * reusable width. The style-origin reason is emitted only after own TypedOM
+ * 100% and immediate parent-content-width equality have both been observed. */
+function observedFillRoot(node:CapturedNode):boolean {
+ const s=node.style,padding=['padding-left','padding-right','padding-top','padding-bottom'].map(k=>px(s[k]));
+ const w=px(s.width),h=px(s.height);
+ return s['writing-mode']==='horizontal-tb'&&['static','relative'].includes(s.position)&&s.float==='none'&&s.zoom==='1'&&
+  ['transform','translate','rotate','scale','perspective'].every(k=>s[k]==='none')&&s['box-sizing']==='border-box'&&
+  ['border-left-width','border-right-width','border-top-width','border-bottom-width'].every(k=>px(s[k])===0)&&
+  ['margin-left','margin-right','margin-top','margin-bottom'].every(k=>px(s[k])===0)&&
+  ['min-width','min-height'].every(k=>s[k]==='auto'||px(s[k])===0)&&['max-width','max-height'].every(k=>s[k]==='none')&&
+  s['flex-grow']==='0'&&s['flex-basis']==='auto'&&padding.every(n=>n!==undefined&&n>=0)&&w!==undefined&&h!==undefined&&
+  padding[0]!+padding[1]!<w&&padding[2]!+padding[3]!<=h;
+}
 export interface ObservedAuthoredLayout {
  host:{width:number;height:number};
  rows:Array<{path:string;width?:{kind:'percent';value:number};height?:{kind:'percent';value:number}}>;
 }
 export function readObservedAuthoredLayout(tree:CapturedNode,origin:ReactStyleOrigin,descendants?:ReactDescendantSizes,bounds?:{width:number;height:number}):ObservedAuthoredLayout|undefined{
- const root=origin.roots.find(r=>r.path===''&&r.tag===tree.tag),width=root?.sizes?.find(s=>s.channel==='width');
- if(width?.status!=='auto'||!['block','flex','grid','flow-root'].includes(tree.style.display))return undefined;
+ const roots=origin.roots.filter(r=>r.path===''),root=roots.find(r=>r.tag===tree.tag),width=root?.sizes?.find(s=>s.channel==='width');
+ const fillRoot=width?.status==='unresolved'&&width.authoredValue==='100%'&&width.reason==='declared-fill-width-containing-block-viewport-only';
+ if((!fillRoot&&width?.status!=='auto')||!['block','flex','grid','flow-root'].includes(tree.style.display))return undefined;
  // A preview host carries the measured extent of this case, never a reusable
- // source width declaration. Require an own vertical dimension for this lane.
+ // source width declaration. Keep the existing auto/fixed-height lane separate.
  const height=root?.sizes?.find(s=>s.channel==='height'),w=px(tree.style.width),h=px(tree.style.height);
- if(!simple(tree)||height?.status!=='fixed'||!height.value||px(height.value)!==h||!(w&&w>0&&h&&h>0))fail('root-context-unqualified');
+ if(fillRoot){
+  if(origin.version!==1||roots.length!==1||root?.sizes?.length!==2||new Set(root.sizes.map(s=>s.channel)).size!==2||
+   !width.selectors.length||root.fillWidthContainer!==undefined||height?.status!=='auto'||height.value!=='auto'||
+   !observedFillRoot(tree)||!(w&&w>0&&h&&h>0))fail('root-fill-context-unqualified');
+ }else if(!simple(tree)||height?.status!=='fixed'||!height.value||px(height.value)!==h||!(w&&w>0&&h&&h>0))fail('root-context-unqualified');
  if(!bounds||bounds.width!==w||bounds.height!==h)fail('host-bounds-unqualified');
  if(!descendants||descendants.version!==1||!Array.isArray(descendants.nodes))fail('descendant-evidence-required');
  const nodes=flatten(tree),byPath=new Map(nodes.map(n=>[n.path,n.node]));
@@ -49,7 +68,7 @@ export function readObservedAuthoredLayout(tree:CapturedNode,origin:ReactStyleOr
   }
   if(row.width||row.height)rows.push(row);
  }
- if(!rows.length)fail('percentage-evidence-required');
+ if(!rows.length&&!fillRoot)fail('percentage-evidence-required');
  return {host:{width:w,height:h},rows};
 }
 export function observedLayoutContext(layout:ObservedAuthoredLayout,contractId:string,treeSha256:string,root:NodeSpec,sourcePaths:Array<{sourcePath:string;partName:string;specPath:number[];type:string}>):NativeObservedLayoutContext{
