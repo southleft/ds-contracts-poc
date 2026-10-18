@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { normalizePlan, planHash } from './react-native-replay.js';
+import { normalizePlan, planHash, reactReplayOwnershipCases } from './react-native-replay.js';
 
 test('plan normalization drops only run-derived values', () => {
   const plan = (op: string, run: string, color: string) => ({
@@ -86,4 +86,24 @@ test('a text-only overage is a partial, never a pass; anything else over the lim
   assert.equal(attach([within('white'), within('black')]).verdict.status, 'red', 'no measured texts: unattributed');
   assert.equal(attach([over('white', 'text-only'), over('black', 'beyond-text')], true).verdict.status, 'red', 'every over-limit score must be text-only');
   assert.equal(attach([over('white'), over('black')], true).verdict.status, 'red', 'no text boxes recorded: unclassified');
+});
+
+
+test('state API replay preserves complete ownership observation for its entire workspace group', () => {
+  const cases = ['alert-default', 'alert-destructive', 'state-api:switch-unchecked', 'badge-default', 'badge-secondary'];
+  const before = [...cases];
+  assert.equal(reactReplayOwnershipCases(cases), undefined, 'the real mixed benchmark group uses the unfiltered service default');
+  assert.equal(reactReplayOwnershipCases(['state-api:switch-unchecked']), undefined);
+  assert.equal(reactReplayOwnershipCases(['card-composed', 'state-api:checkbox-checked']), undefined, 'stateful case position and component name do not matter');
+  assert.deepEqual(cases, before, 'source case selection stays unchanged');
+});
+
+test('plain-root replay selects only its requested cases without changing their order or input', () => {
+  const cases = ['card-composed', 'card-content', 'card-composed'];
+  const selected = reactReplayOwnershipCases(cases);
+  assert.deepEqual(selected, ['card-composed', 'card-content']);
+  assert.deepEqual(cases, ['card-composed', 'card-content', 'card-composed']);
+  assert.deepEqual(reactReplayOwnershipCases(['other-root']), ['other-root'], 'selection is not a Card-specific rule');
+  selected!.push('local-only');
+  assert.deepEqual(cases, ['card-composed', 'card-content', 'card-composed'], 'the service receives an independent selection');
 });

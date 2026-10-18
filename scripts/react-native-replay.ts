@@ -76,6 +76,12 @@ export interface ReplayedCase {
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 const safeName = (s: string) => s.replace(/[^A-Za-z0-9._-]+/g, '_');
 
+/** Stateful replay retains the established complete ownership observation.
+ * Only independent plain-root groups use bounded host-selected observation. */
+export function reactReplayOwnershipCases(cases: readonly string[]): string[] | undefined {
+  return cases.some(caseId => caseId.startsWith('state-api:')) ? undefined : [...new Set(cases)];
+}
+
 export async function replayReactNative(options: { workspace: string; cases: string[]; children?: boolean; keep?: string;
   /** Also write every hashed plan, normalized, to <plans>/<case>/<root|instance>.json — the bytes a
    *  platform or run difference can be read from field by field. */
@@ -99,11 +105,12 @@ export async function replayReactNative(options: { workspace: string; cases: str
   const saved = process.env.DS_CONTRACTS_REACT_SOURCE_ROOT;
   process.env.DS_CONTRACTS_REACT_SOURCE_ROOT = realpathSync(options.workspace);
   const { createReferenceService } = await import('../source-reference/service.js');
-  // Preserve the complete reference and denominator. Observe only cases this
-  // replay requests; nested children are derived from their same parent row.
-  const ownershipCaseIds = [...new Set(options.cases.map(caseId =>
-    caseId.startsWith('state-api:') ? caseId.slice('state-api:'.length) : caseId))];
-  const service = createReferenceService(tmp, undefined, undefined, {}, undefined, { ownershipCaseIds });
+  // Preserve the complete reference and denominator. Stateful groups retain
+  // the established full observation; plain roots derive children from the
+  // same selected parent row without observing unrelated top-level cases.
+  const ownershipCaseIds = reactReplayOwnershipCases(options.cases);
+  const service = createReferenceService(tmp, undefined, undefined, {}, undefined,
+    ownershipCaseIds === undefined ? {} : { ownershipCaseIds });
   const server = createServer((req, res) => { void service.handle(req, res); });
   await new Promise<void>(r => server.listen(0, '127.0.0.1', () => r()));
   const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/source-reference/`;
