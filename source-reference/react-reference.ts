@@ -325,6 +325,11 @@ export function readReactComparisonInspection(repoRoot: string, referenceId: str
   }));
 }
 
+/** Trusted host work selection. HTTP requests cannot choose this subset. */
+export interface ReactReferenceServiceOptions {
+  ownershipCaseIds?: readonly string[];
+}
+
 export function createReactReferenceService(
   repoRoot: string,
   sourceRoot = process.env.DS_CONTRACTS_REACT_SOURCE_ROOT ??
@@ -333,7 +338,9 @@ export function createReactReferenceService(
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
   native?: () => ReactNativeRuntime,
+  options: ReactReferenceServiceOptions = {},
 ) {
+  const ownershipCaseIds = options.ownershipCaseIds?.slice();
   let reference: ReactReference | undefined;
   let initialSourceReviewBusy = false;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
@@ -1436,6 +1443,7 @@ export function createReactReferenceService(
               reference,
               realpathSync(sourceRoot),
               path.join(repoRoot, "private/react-source-ownership"),
+              { selectedCaseIds: ownershipCaseIds },
             );
             try { beginReactOwnershipSelection(repoRoot, selectedReference.id, job.state.id); }
             catch (error) { job.close(); throw error; }

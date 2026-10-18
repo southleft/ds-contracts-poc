@@ -99,7 +99,11 @@ export async function replayReactNative(options: { workspace: string; cases: str
   const saved = process.env.DS_CONTRACTS_REACT_SOURCE_ROOT;
   process.env.DS_CONTRACTS_REACT_SOURCE_ROOT = realpathSync(options.workspace);
   const { createReferenceService } = await import('../source-reference/service.js');
-  const service = createReferenceService(tmp);
+  // Preserve the complete reference and denominator. Observe only cases this
+  // replay requests; nested children are derived from their same parent row.
+  const ownershipCaseIds = [...new Set(options.cases.map(caseId =>
+    caseId.startsWith('state-api:') ? caseId.slice('state-api:'.length) : caseId))];
+  const service = createReferenceService(tmp, undefined, undefined, {}, undefined, { ownershipCaseIds });
   const server = createServer((req, res) => { void service.handle(req, res); });
   await new Promise<void>(r => server.listen(0, '127.0.0.1', () => r()));
   const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/source-reference/`;
