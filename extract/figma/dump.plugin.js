@@ -18,6 +18,46 @@ function observeLocalGeometry(nodeId,parentId,transform,width,height,parentWidth
  return {nodeId,parentId,transform:transform.map(row=>[...row]),localSize:{width,height},parentSize:{width:parentWidth,height:parentHeight}};
 }
 
+// BEGIN SHARED REFLECTED HUG GEOMETRY
+function observeReflectedHugGeometry(node, parent) {
+    if (!parent || node.type !== 'FRAME' || parent.type !== 'FRAME' || typeof node.id !== 'string' || !node.id ||
+        typeof parent.id !== 'string' || !parent.id || node.id === parent.id)
+        return;
+    const matrix = (m) => Array.isArray(m) && m.length === 2 && m.every(row => Array.isArray(row) && row.length === 3 &&
+        Array.from({ length: 3 }, (_, i) => Object.hasOwn(row, i) && typeof row[i] === 'number' && Number.isFinite(row[i])).every(Boolean));
+    if (!matrix(node.relativeTransform) || !matrix(parent.relativeTransform))
+        return;
+    // Capture only the relevant reflected context; exact admissibility is below.
+    if (node.relativeTransform[0][0] !== -1 || node.relativeTransform[1][1] !== -1 ||
+        parent.relativeTransform[0][0] !== -1 || parent.relativeTransform[1][1] !== -1)
+        return;
+    const size = (n) => ({ width: n.size?.x ?? n.width, height: n.size?.y ?? n.height });
+    const n = size(node), p = size(parent);
+    if (![n.width, n.height, p.width, p.height].every(v => typeof v === 'number' && Number.isFinite(v) && v >= 0))
+        return;
+    const mode = (n) => typeof n.layoutMode === 'string' ? n.layoutMode : n.layoutMode === undefined ? 'NONE' : undefined;
+    const sizing = (n) => typeof n.layoutSizingHorizontal === 'string' && typeof n.layoutSizingVertical === 'string'
+        ? { horizontal: n.layoutSizingHorizontal, vertical: n.layoutSizingVertical } : undefined;
+    const ns = sizing(node), ps = sizing(parent), nm = mode(node), pm = mode(parent), c = node.constraints;
+    if (!ns || !ps || !nm || !pm || !c || typeof c.horizontal !== 'string' || typeof c.vertical !== 'string')
+        return;
+    if (typeof node.clipsContent !== 'boolean' || typeof parent.clipsContent !== 'boolean')
+        return;
+    const bindings = (n) => n.boundVariables === undefined ? [] :
+        n.boundVariables && typeof n.boundVariables === 'object' && !Array.isArray(n.boundVariables) ? Object.keys(n.boundVariables).sort() : undefined;
+    const limits = (n) => [n.minWidth, n.minHeight, n.maxWidth, n.maxHeight].map(v => v === undefined || v === null ? null : v);
+    const nb = bindings(node), pb = bindings(parent), nl = limits(node), pl = limits(parent);
+    if (!nb || !pb || [...nl, ...pl].some(v => v !== null && (typeof v !== 'number' || !Number.isFinite(v))) ||
+        [node.clipsContent, parent.clipsContent, node.isMask, parent.isMask].some(v => v !== undefined && typeof v !== 'boolean'))
+        return;
+    return { nodeId: node.id, parentId: parent.id, size: n, parentSize: p,
+        transform: node.relativeTransform.map(row => [...row]), parentTransform: parent.relativeTransform.map(row => [...row]),
+        sizing: ns, parentSizing: ps, constraints: { horizontal: c.horizontal, vertical: c.vertical }, layoutMode: nm, parentLayoutMode: pm,
+        boundProperties: nb, parentBoundProperties: pb, limits: nl, parentLimits: pl,
+        clipsContent: node.clipsContent === true, parentClipsContent: parent.clipsContent === true, isMask: node.isMask === true, parentIsMask: parent.isMask === true };
+}
+// END SHARED REFLECTED HUG GEOMETRY
+
 // Some readable standalone definitions have no page parent but report remote=false.
 // Capture only the observed definition, corroborated by an independent ID lookup.
 async function captureDetachedMainSnapshot(node, captureFileKey, lookup) {
@@ -1129,10 +1169,29 @@ async function dumpNestedInstanceProperties(root, node) {
     }
     properties[name] = property;
   }
+  const layout=(()=>{
+    const parent=node.parent,local={x:node.width,y:node.height},parentSize=parent&&{x:parent.width,y:parent.height},matrix=node.relativeTransform;
+    if(typeof parent?.id!=='string'||!parent.id||typeof node.id!=='string'||!node.id||parent.id===node.id||!['HORIZONTAL','VERTICAL'].includes(parent.layoutMode??'')||
+      ![local.x,local.y,parentSize?.x,parentSize?.y].every(value=>typeof value==='number'&&Number.isFinite(value)&&value>0)||
+      !Array.isArray(matrix)||matrix.length!==2||Array.from({length:2},(_,i)=>Object.hasOwn(matrix,i)&&Array.isArray(matrix[i])&&matrix[i].length===3&&Array.from({length:3},(_,j)=>Object.hasOwn(matrix[i],j)&&typeof matrix[i][j]==='number'&&Number.isFinite(matrix[i][j])).every(Boolean)).some(ok=>!ok)||
+      !['FIXED','HUG','FILL'].includes(node.layoutSizingHorizontal??'')||!['FIXED','HUG','FILL'].includes(node.layoutSizingVertical??'')||
+      ![undefined,'AUTO','ABSOLUTE'].includes(node.layoutPositioning)||
+      node.boundVariables!==undefined&&(!node.boundVariables||typeof node.boundVariables!=='object'||Array.isArray(node.boundVariables)))return;
+    const limits=[node.minWidth,node.minHeight,node.maxWidth,node.maxHeight];
+    if(limits.some(value=>value!=null&&(typeof value!=='number'||!Number.isFinite(value)||value<0)))return;
+    const sizing={horizontal:node.layoutSizingHorizontal,vertical:node.layoutSizingVertical};
+    if(sizing.horizontal==='FIXED')sizing.width=local.x;
+    if(sizing.vertical==='FIXED')sizing.height=local.y;
+    const sizeBound=!!node.boundVariables&&['size','width','height','minWidth','minHeight','maxWidth','maxHeight'].some(key=>Object.hasOwn(node.boundVariables,key))||
+      (node.minWidth??0)>0||(node.minHeight??0)>0||node.maxWidth!=null||node.maxHeight!=null||node.targetAspectRatio!=null;
+    return {kind:'nested-instance-layout-v1',nodeId:node.id,componentId:main.id,parentId:parent.id,
+      localSize:{width:local.x,height:local.y},parentSize:{width:parentSize.x,height:parentSize.y},relativeTransform:matrix.map(row=>[...row]),sizing,
+      inFlow:node.layoutPositioning!=='ABSOLUTE',sizeBound};
+  })();
   return {ownerId:root.id,ownerComponentId:owner.id,ownerComponentKey:owner.key,
     nodeId:node.id,componentId:main.id,componentKey:main.key,
     ...(main.parent && main.parent.type === 'COMPONENT_SET' ? {componentSetKey:main.parent.key} : {}),
-    path,properties};
+    path,properties,...(layout?{layout}:{})};
 }
 
 async function dumpSwapInstances(root, property) {
@@ -1430,6 +1489,8 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
   const out = { name: node.name, type: node.type, nodeId: node.id };
   const localGeometry=observeLocalGeometry(node.id,parent && parent.id,node.relativeTransform,node.width,node.height,parent && parent.width,parent && parent.height);
   if(localGeometry)out.localGeometry=localGeometry;
+  const reflectedHugGeometry=observeReflectedHugGeometry(node,parent);
+  if(reflectedHugGeometry)out.reflectedHugGeometry=reflectedHugGeometry;
   if (node.type === 'COMPONENT' && typeof node.key === 'string' && node.key) out.componentKey = node.key;
   const nativeFlowGeometry = dumpNativeFlowGeometry(node);
   if (nativeFlowGeometry) out.nativeFlowGeometry = nativeFlowGeometry;
@@ -2683,7 +2744,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.79',
+    dumpVersion: '1.81',
   },
 };
 dumps._degradations = degradations;

@@ -196,10 +196,12 @@ test('shared caller input occupies exactly its observed slot plane and native ca
 
 import {nativeFixtureHost} from '../source-reference/native-operation-test-fixture.js';
 test('prepared native library writes and independently reads caller content in alternate slot placements',async()=>{
+ for(const inputName of ['children','leading']){
  const host=nativeFixtureHost({instanceVariantSelection:true}),{figma}=host;
  Object.getPrototypeOf(figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string){this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};};
  const run=async(script:string)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma,console},{timeout:5000})));
- const child=routedSlots(),parent=ContractSchema.parse({...structuredClone(child),id:'test.slot-caller',name:'SlotCaller',anatomy:{root:{layout:{display:'flex'},parts:{child:{component:{id:child.id,props:{checked:'{checked}',style:'{style}'}},parts:{payload:{text:'Caller payload',tokens:{color:'{ink}'}}}}}}}});
+ const child=routedSlots();for(const part of Object.values(child.anatomy.root.parts!))part.slot!.name=inputName;
+ const parent=ContractSchema.parse({...structuredClone(child),id:'test.slot-caller',name:'SlotCaller',anatomy:{root:{layout:{display:'flex'},parts:{child:{component:{id:child.id,props:{checked:'{checked}',style:'{style}'},...(inputName==='children'?{}:{contentSlot:inputName})},parts:{payload:{text:'Caller payload',tokens:{color:'{ink}'}}}}}}}});
  const contracts=new Map([[child.id,child],[parent.id,parent]]),tree={...tokens,primitives:{ink:{$type:'color',$value:'#123456'}}};
  const engine=createFigmaEngine({tokens:tree,icons:new Map()});
  const source:NativePreparedLibrarySource={kind:'prepared-contract-library',revision:'sha256:'+'a'.repeat(64),artifactId:'a'.repeat(64),inputSha256:'b'.repeat(64),tarballSha256:'c'.repeat(64),tokensSha256:revisionOf(tree).slice(7)};
@@ -216,6 +218,7 @@ test('prepared native library writes and independently reads caller content in a
  const payloads=receipt.nodes.filter((n:any)=>n.values.characters==='Caller payload');assert.equal(payloads.length,2);
  const bad=structuredClone(receipt);bad.nodes=bad.nodes.filter((n:any)=>n.id!==payloads[0].id);
  assert.equal(verifyNativePreparedLibraryReadback(input,bad).status,'refused');
+ }
 });
 
 test('declared sparse domains require exactly the reachable presence tuples on React and native surfaces',()=>{
@@ -493,4 +496,118 @@ test('Web Components conjoin a complete Boolean presence table with independent 
    assert.equal(content!.includes('Moon'),!checked&&show);
   }
  }finally{await browser.close();fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+
+test('a named caller input follows exclusive physical slot placements on React and native surfaces',()=>{
+ const c=routedSlots();for(const part of Object.values(c.anatomy.root.parts!)){part.slot!.name='leading';part.slot!.bindings={figma:{property:'Leading icon'}};}
+ assert.equal(defaultSlotFamilyIssue(c,'leading'),undefined);
+ const contracts=new Map([[c.id,c]]);
+ for(const tsx of [emitReact(c,{tokens:new Set(),icons:new Map(),contracts}).tsx,emitReactInline(c,{tokens,icons:new Map(),contracts}).tsx]){
+  const C=load(tsx);
+  for(const isChecked of [false,true])for(const appearance of ['solid','raised']){
+   const html=renderToStaticMarkup(React.createElement(C,{isChecked,appearance,leading:'Named payload'}));
+   assert.equal((html.match(/Named payload/g)??[]).length,appearance==='solid'?1:0,html);
+  }
+ }
+ const parent=ContractSchema.parse({...structuredClone(c),id:'test.named-slot-parent',name:'NamedSlotParent',anatomy:{root:{layout:{display:'flex'},parts:{child:{component:{id:c.id,props:{checked:'{checked}',style:'{style}'},contentSlot:'leading'},parts:{payload:{text:'Named payload'}}}}}}});
+ contracts.set(parent.id,parent);
+ const engine=createFigmaEngine({tokens,icons:new Map()}),data=engine.compileComponentData(parent,contracts);
+ for(const v of data.variants){const child=v.spec.children![0];assert.equal(child.children?.length,v.name.includes('Style=Solid')?1:0,v.name);if(child.children?.length)assert.equal(child.children[0].children![0].characters,'Named payload');}
+ for(const fault of ['wrong-input','metadata','optional','overlap','missing-plane'] as const){
+  const bad=structuredClone(c),alternate=bad.anatomy.root.parts!.alternate;
+  if(fault==='wrong-input')alternate.slot!.name='trailing';
+  if(fault==='metadata')alternate.slot!.required=true;
+  if(fault==='optional')alternate.optional=true;
+  if(fault==='overlap')alternate.presenceByCombination=structuredClone(bad.anatomy.root.parts!.mark.presenceByCombination);
+  if(fault==='missing-plane')alternate.presenceByCombination!.rows.pop();
+  if(fault!=='wrong-input')assert(defaultSlotFamilyIssue(bad,'leading'),fault);
+  assert.throws(()=>engine.compileComponentData(bad,new Map([[bad.id,bad]])),/one SLOT property|not in scope|presence|contract violation/i,fault);
+ }
+});
+
+test('exclusive slot placements preserve local defaults while sharing one caller input',()=>{
+ const planes=['reference','sample','anatomy'] as const;
+ const c=ContractSchema.parse({...fixture(),props:[{name:'plane',type:{enum:planes},default:'reference',
+  bindings:{code:{prop:'plane'},figma:{kind:'VARIANT',property:'Plane',values:{reference:'Reference',sample:'Sample',anatomy:'Anatomy'}}}}],
+  anatomy:{root:{layout:{display:'flex'},parts:Object.fromEntries(planes.map(plane=>[plane,{
+   slot:{name:'children',bindings:{figma:{property:'Payload'}},...(plane==='anatomy'
+    ?{renderDefaultAnatomy:true}
+    :{defaultContent:[{id:plane==='reference'?'test.alpha':'test.beta'}],...(plane==='reference'?{renderDefault:true,collapseWhenEmpty:true}:{})})},
+   ...(plane==='anatomy'?{parts:{fallback:{text:'Direct default'}}}:{}),
+   presenceByCombination:{props:['plane'],rows:planes.map(value=>({values:[value],present:value===plane}))},
+  }]))}}});
+ const dependency=(id:string,name:string,text:string):Contract=>ContractSchema.parse({...fixture(),id,name,props:[],
+  anatomy:{root:{parts:{label:{text}}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./'+name,export:name}}}});
+ const alpha=dependency('test.alpha','Alpha','Reference default'),beta=dependency('test.beta','Beta','Sample default');
+ const contracts=new Map([[c.id,c],[alpha.id,alpha],[beta.id,beta]]);
+ assert.equal(defaultSlotFamilyIssue(c),undefined);
+ // Load each emitter's real dependency output, so omission exercises the
+ // local fallback rather than a replacement supplied by the test harness.
+ for(const inline of [false,true]){
+  const sources=new Map([...contracts.values()].map(contract=>[contract.name,inline
+   ?emitReactInline(contract,{tokens,icons:new Map(),contracts}).tsx
+   :emitReact(contract,{tokens:new Set(),icons:new Map(),contracts}).tsx]));
+  const modules=new Map<string,any>(),req=createRequire(import.meta.url);
+  const loadComponent=(name:string):any=>{
+   if(modules.has(name))return modules.get(name);
+   const module={exports:{} as any};modules.set(name,module.exports);
+   vm.runInNewContext(transformSync(sources.get(name)!,{loader:'tsx',format:'cjs',jsx:'automatic'}).code,{module,exports:module.exports,require:(path:string)=>{
+    if(path.endsWith('.css'))return{default:new Proxy({},{get:(_,key)=>String(key)})};
+    const dependencyName=path.split('/').at(-1)!;
+    return sources.has(dependencyName)?loadComponent(dependencyName):req(path);
+   }});
+   modules.set(name,module.exports);return module.exports;
+  };
+  const C=loadComponent(c.name)[c.name];
+  for(const plane of planes){
+   const omitted=renderToStaticMarkup(React.createElement(C,{plane}));
+   assert.equal(omitted.includes('Reference default'),plane==='reference',omitted);
+   assert.equal(omitted.includes('Direct default'),plane==='anatomy',omitted);
+   assert(!omitted.includes('Sample default'),'sample content must not become a React runtime default');
+   const supplied=renderToStaticMarkup(React.createElement(C,{plane},'Caller payload'));
+   assert.equal((supplied.match(/Caller payload/g)??[]).length,1,supplied);
+   assert(!supplied.includes('default'),supplied);
+   for(const cleared of [null,false,'']){
+    const html=renderToStaticMarkup(React.createElement(C,{plane},cleared));
+    assert(!html.includes('default')&&!html.includes('Caller payload'),html);
+   }
+  }
+ }
+ const engine=createFigmaEngine({tokens,icons:new Map()}),compiled=engine.compileComponentData(c,contracts);
+ for(const variant of compiled.variants){
+  assert.equal(variant.spec.children?.length,1,variant.name);
+  const slot=variant.spec.children![0];
+  if(variant.name==='Plane=Anatomy')assert.equal(slot.children?.[0].characters,'Direct default');
+  else assert.deepEqual(slot.slotDefault?.map(item=>item.contractId),[variant.name==='Plane=Reference'?alpha.id:beta.id]);
+  assert.equal(slot.slotCollapseWhenEmpty===true,variant.name==='Plane=Reference');
+ }
+ const parent=ContractSchema.parse({...structuredClone(c),id:'test.local-default-caller',name:'LocalDefaultCaller',
+  anatomy:{root:{layout:{display:'flex'},parts:{child:{component:{id:c.id,props:{plane:'{plane}'}},parts:{payload:{text:'Caller payload'}}}}}}});
+ contracts.set(parent.id,parent);
+ for(const variant of engine.compileComponentData(parent,contracts).variants){
+  const slots=variant.spec.children![0].children!;assert.equal(slots.length,1,variant.name);
+  assert.equal(slots[0].slotDefault,undefined);
+  assert.deepEqual(slots[0].children?.map(part=>part.characters),['Caller payload']);
+ }
+ for(const fault of ['property','accepts','acceptsMode','min','max','required','textTemplate','optional','overlap','incomplete','missing-table','unknown-domain'] as const){
+  const bad=structuredClone(c),part=bad.anatomy.root.parts!.sample;
+  if(fault==='property')part.slot!.bindings!.figma!.property='Other';
+  if(fault==='accepts')part.slot!.accepts=[beta.id];
+  if(fault==='acceptsMode')part.slot!.acceptsMode='restrict';
+  if(fault==='min')part.slot!.min=1;
+  if(fault==='max')part.slot!.max=2;
+  if(fault==='required')part.slot!.required=true;
+  if(fault==='textTemplate')part.slot!.bindings!.figma!.textTemplate=true;
+  if(fault==='optional')part.optional=true;
+  if(fault==='overlap')part.presenceByCombination!.rows[0].present=true;
+  if(fault==='incomplete')part.presenceByCombination!.rows.pop();
+  if(fault==='missing-table')delete part.presenceByCombination;
+  if(fault==='unknown-domain')part.presenceByCombination!.props=['unknown'];
+  assert(defaultSlotFamilyIssue(bad),fault);
+ }
+ const wrongInput=structuredClone(c);wrongInput.anatomy.root.parts!.sample.slot!.name='trailing';
+ assert.throws(()=>engine.compileComponentData(wrongInput,new Map([...contracts,[wrongInput.id,wrongInput]])),/one SLOT property/i);
+ const unknownMetadata=structuredClone(c);(unknownMetadata.anatomy.root.parts!.sample.slot as any).description='Different input';
+ assert.equal(ContractSchema.safeParse(unknownMetadata).success,false,'undeclared slot metadata remains a strict schema refusal');
 });

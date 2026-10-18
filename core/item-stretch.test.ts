@@ -14,7 +14,7 @@ test('per-item stretch preserves an intrinsic sibling and establishes nested fil
  assert.equal(connector.fillH,true);assert.equal(connector.children![1].fillH,true);assert.equal(data.variants[0].spec.children![1].fillH,undefined);assert(!JSON.stringify(data).includes('crossStretch'));
 });
 test('native stretch refuses missing allocation and fixed competing size; unsupported owners refuse before emission',()=>{
- for(const edit of [(c:any)=>delete c.anatomy.root.literals['min-height'],(c:any)=>c.anatomy.root.parts.connector.literals.height='15px']){
+ for(const edit of [(c:any)=>{delete c.anatomy.root.literals['min-height'];delete c.anatomy.root.parts.label;},(c:any)=>c.anatomy.root.parts.connector.literals.height='15px']){
   const c=fixture();edit(c);assert.throws(()=>createFigmaEngine({tokens,icons:new Map()}).compileComponentData(c,new Map([[c.id,c]])),/FIGMA_CROSS_AXIS_STRETCH_UNSUPPORTED/);
  }
  const c=fixture();c.anatomy.root.layout!.alignSelf='stretch';assert.throws(()=>emitReactInline(c,{tokens,icons:new Map(),contracts:new Map([[c.id,c]])}),/cross-axis-stretch-owner-unqualified/);

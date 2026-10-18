@@ -30,9 +30,9 @@ test('source cross-axis fill merges its state map with direction and preserves t
  assert.deepEqual(data.variants.map(v=>v.spec.children![0].fillH),[true,undefined]);
  assert(!JSON.stringify(data).includes('resolvedMinHeight'));
 });
-test('missing floors, wrapped owners, and competing sizes do not infer stretch',()=>{
+test('missing floors without an intrinsic sibling, wrapped owners, and competing sizes do not infer stretch',()=>{
  for(const edit of [
-  (d:DumpSet)=>delete d.variants[0].minHeight,
+  (d:DumpSet)=>{delete d.variants[0].minHeight;d.variants[0].children=d.variants[0].children!.slice(0,1);},
   (d:DumpSet)=>d.variants[0].layout!.wrap=true,
   (d:DumpSet)=>d.variants[0].children![0].fixedSize={height:20},
  ]) {
@@ -59,6 +59,8 @@ test('uniform source fill uses a base item relation; a two-axis split is not gue
 
 test('an unresolved percentage minimum cannot prove native cross-axis allocation',()=>{
  const p=propose(),c=p.contract,tree=structuredClone(p.mintedTokens!.tree);
+ // Isolate the minimum proof: an independent positive sibling now supplies a separate valid allocation.
+ delete c.anatomy.root.parts!.sibling;
  const path=c.anatomy.root.tokens!['min-height'].slice(1,-1).split('.');
  let leaf:any=tree;for(const key of path) leaf=leaf[key];leaf.$value='100%';
  const tokens={primitives:tree,semantic:{},light:{},dark:{},brands:{default:{}}};

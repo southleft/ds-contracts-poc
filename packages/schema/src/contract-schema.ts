@@ -1,3 +1,5 @@
+import {scalarTextSizeInput} from './scalar-text-size-input.js';
+export {scalarTextSizeInput} from './scalar-text-size-input.js';
 import {TextByCombinationSchema,resolveTextByCombination,type TextByCombination} from './text-by-combination.js';
 export * from './text-by-combination.js';
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
@@ -4627,7 +4629,7 @@ export function absentVariantAxes(contract: Contract): AbsentVariantAxis[] {
     .filter(
       (p) =>
         (typeof p.type === "object" && "enum" in p.type &&
-          !(p.bindings.figma.kind === "NONE" && paintInputs.has(p.name))) ||
+          !(p.bindings.figma.kind === "NONE" && (paintInputs.has(p.name)||scalarTextSizeInput(contract,p.name)))) ||
         (p.type === "boolean" && p.bindings.figma.kind === "VARIANT"),
     )
     .map((prop) => {
@@ -4937,6 +4939,17 @@ export function defaultSlotFamilyIssue(contract: Contract, slotName = 'children'
   if(slots.length===1)return;
   const property=slotFigmaProperty(slots[0].slot);
   if(slots.some(w=>slotFigmaProperty(w.slot)!==property || !w.part.presenceByCombination))return 'children-slot-family-unqualified';
+  // One native property serves every physical placement. Shared input
+  // metadata and its optional visibility toggle cannot change by variant.
+  // Default content, fallback rendering and empty collapse belong to each
+  // placement; explicit caller content must not be lost when those differ.
+  const canonical=(value:unknown):unknown=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?
+    Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)).map(([key,entry])=>[key,canonical(entry)])):value;
+  const metadata=(slot:typeof slots[number])=>{
+    const {defaultContent,renderDefault,renderDefaultAnatomy,collapseWhenEmpty,...input}=slot.slot;
+    return JSON.stringify(canonical({slot:input,optional:slot.part.optional===true}));
+  };
+  if(slots.some(slot=>metadata(slot)!==metadata(slots[0])))return 'children-slot-family-metadata-mismatch';
   const names=[...new Set(slots.flatMap(w=>w.part.presenceByCombination!.props))],axes=absentVariantAxes(contract);
   const domains=names.map(name=>axes.find(a=>a.prop.name===name)?.options);
   const drawnKeys=drawnGeometryTupleKeys(contract,names);
