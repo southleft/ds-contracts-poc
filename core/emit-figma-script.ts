@@ -10211,8 +10211,7 @@ function dsDeclaredClipStops(n) {
 function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // Seed an empty synthetic carrier below Figma's 100px birth box. The
   // declared track and parent sizing writes below determine its final size.
-  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}
-  ${hasIntrinsicPlacement ? "if(spec.intrinsicPlacementTarget)node.setSharedPluginData('ds_contracts','intrinsicPlacement',spec.intrinsicPlacementTarget);" : ''}
+  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}${hasIntrinsicPlacement ? "\n  if(spec.intrinsicPlacementTarget)node.setSharedPluginData('ds_contracts','intrinsicPlacement',spec.intrinsicPlacementTarget);" : ''}
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
