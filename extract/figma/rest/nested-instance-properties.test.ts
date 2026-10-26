@@ -73,3 +73,13 @@ test('override index admits the exact node bound and refuses the whole prefix be
   assert.equal(JSON.stringify(f.root),before,mode);
  }
 });
+
+
+test('nested swap capture delegates exact current owner and property without inventing missing geometry',()=>{
+ const f=fixture(),target=f.root.children![1],calls:any[]=[];
+ const row:any={nodeId:'Iusage;day;icon',path:[0],componentId:'selected',size:{width:16,height:16},parentSize:{width:28,height:28},relativeTransform:[[1,0,6],[0,1,6]]};
+ const before=JSON.stringify(f.root),result=nestedInstanceProperties(f.root,target.id,f.components,f.sets,(node,property)=>{calls.push({node,property});return [row];})!;
+ assert.equal(calls.length,1);assert.equal(calls[0].node,target);assert.equal(calls[0].property,'Icon');assert.deepEqual(result.properties.Icon.observedInstances,[row]);assert.equal(JSON.stringify(f.root),before);
+ assert.deepEqual(nestedInstanceProperties(f.root,target.id,f.components,f.sets,()=>[])!.properties.Icon.observedInstances,[]);
+ assert.equal(nestedInstanceProperties(f.root,target.id,f.components,f.sets,()=>undefined)!.properties.Icon.observedInstances,undefined);
+});

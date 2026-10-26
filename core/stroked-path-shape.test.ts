@@ -239,3 +239,43 @@ test('zero-height vector paths retain stretch offsets, width and paint in both R
  assert.ok(strokedPathGeometryIssue({...leaf(c).shape!,height:1}));
  assert.equal(ContractSchema.safeParse({...c,anatomy:{root:{parts:{bad:{shape:{kind:'rect',width:40,height:0}}}}}}).success,false);
 });
+
+
+test('static stroked parent aspect lock must exactly match its fixed shared viewport',()=>{
+ for(const value of ['20 / 16','5 / 4','1.25','1.25 / 1']){
+  const c=contract();parent(c).declared!['aspect-ratio']=value;
+  assert.deepEqual(errorsOf(c),[],value);
+ }
+ const conditional=(c:Contract)=>{
+  c.props.push({...structuredClone(c.props[0]),name:'other',bindings:{code:{prop:'other'},figma:{kind:'VARIANT',property:'Other',values:{cool:'Cool',warm:'Warm'}}}});
+  parent(c).tokensByCombination=[{props:['tone','other'],rows:[{values:['warm','warm'],tokens:{'aspect-ratio':'{ratio}'}}]}];
+ };
+ const mutations:Array<(c:Contract)=>void>=[
+  c=>{parent(c).declared!['aspect-ratio']='4 / 5';},
+  c=>{parent(c).declared!['aspect-ratio']='0 / 16';},
+  c=>{parent(c).declared!['aspect-ratio']='20 / 0';},
+  c=>{parent(c).declared!['aspect-ratio']='-20 / -16';},
+  c=>{parent(c).declared!['aspect-ratio']='Infinity';},
+  c=>{parent(c).declared!['aspect-ratio']='9'.repeat(400);},
+  c=>{parent(c).declared!['aspect-ratio']='calc(5 / 4)';},
+  c=>{parent(c).declared!['aspect-ratio']='auto 5 / 4';},
+  c=>{parent(c).tokens={'aspect-ratio':'{ratio}'};},
+  c=>{parent(c).stylesWhen=[{prop:'tone',equals:'warm',styles:{'aspect-ratio':'5 / 4'}}];},
+  c=>{parent(c).declaredStates={hover:{'aspect-ratio':'5 / 4'}};},
+  c=>{conditional(c);},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';conditional(c);},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';parent(c).literals!['aspect-ratio']='5 / 4';},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';parent(c).declared!.fill='none';},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';parent(c).declared!['overflow-x']='hidden';parent(c).declared!['overflow-y']='visible';},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';parent(c).stylesWhen=[{prop:'tone',equals:'warm',styles:{width:'24px'}}];},
+  c=>{parent(c).declared!['aspect-ratio']='5 / 4';const other=structuredClone(leaf(c));other.shape!.strokePath!.viewport.width=21;parent(c).parts!.other=other;},
+ ];
+ for(const mutate of mutations){const c=contract();mutate(c);assert(errorsOf(c).some(e=>e.includes('stroked-path-parent')),String(mutate));}
+});
+test('matching parent aspect ratio retains existing native dimension and centerline checks',()=>{
+ const c=contract();parent(c).declared!['aspect-ratio']='5 / 4';
+ const engine=createFigmaEngine({tokens,icons:new Map()});assert.doesNotThrow(()=>engine.buildComponentScript(c,new Map([[c.id,c]])));
+ const wrong=structuredClone(c);parent(wrong).literals!.width='21px';assert.throws(()=>engine.buildComponentScript(wrong,new Map([[wrong.id,wrong]])),/stroked-path-parent-basis-mismatch/);
+ const invalid=structuredClone(c);parent(invalid).literals!.width='100%';assert(errorsOf(invalid).some(e=>e.includes('stroked-path-parent-dimension-unsupported')));
+ const changed=structuredClone(c);leaf(changed).shape!.strokePath!.data='M0 0L10 9';assert(errorsOf(changed).some(e=>e.includes('stroked-path-bounds-mismatch')));
+});

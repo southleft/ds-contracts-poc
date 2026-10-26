@@ -307,7 +307,9 @@ export interface DumpHostOverride {
     nodeId:string; componentId:string; componentKey:string; componentSetKey?:string;
     path:number[];
     properties:Record<string,{type:'VARIANT'|'TEXT'|'BOOLEAN'|'INSTANCE_SWAP';value:string|boolean;
-      selected?:{nodeId:string;componentKey:string}}>;
+      selected?:{nodeId:string;componentKey:string};
+      /** Actual current slot roots; undefined is uncaptured, [] is observed absence. */
+      observedInstances?:DumpFixedSwap['observedInstances']}>;
     /** Actual occurrence-to-parent geometry. Optional: missing layout never
      * weakens the independent property/selection identity witness. */
     layout?: {
@@ -392,6 +394,9 @@ export interface DumpFixedSwap {
     parentSize?: { width: number; height: number };
     relativeTransform?: number[][];
     constraints?: { horizontal: string; vertical: string };
+    /** Actual single-stroke straight-edge network, distinct from main defaults. */
+    strokeDrawing?: {nodeId:string;parentId:string;width:number;height:number;relativeTransform:number[][];
+      edges:number[][];cap:'NONE'|'ROUND'|'SQUARE';join:'ROUND'|'BEVEL';strokeWeight:number;color:string};
     /** Current selected instance, captured separately from its slot placeholder.
      * Layout-produced local pixels do not assert authored width/height overrides. */
     selectedRoot?: {

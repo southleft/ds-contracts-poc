@@ -34,7 +34,10 @@
  * recurses into an instance (map.ts: "instance internals belong to the child
  * contract"), so a set referenced only from INSIDE an instance subtree has no
  * reference in the dump to resolve; it is reached through the child's own
- * definition when the child is followed (transitivity), or not at all.
+ * definition when the child is followed (transitivity), or not at all. A
+ * uniquely located nested INSTANCE named by an explicit componentProperties
+ * override is the exception: the mapper captures that actual current selection,
+ * so its main and applied swap targets must also join the closure.
  * Applied INSTANCE_SWAP properties are additional references on each mapped
  * instance: the host may select content absent from the child's defaults.
  * Follow those exact targets, never TEXT values that resemble node IDs or the
@@ -58,6 +61,7 @@
  * Browser-pure: no node builtins; the fetch is injected.
  */
 import type { RestNode, RestNodesResponse } from "./map.js";
+import { nestedPropertyTarget } from "./nested-instance-properties.js";
 
 /** At most this many sets are PULLED by closure (requested sets not counted).
  *  A reference whose set would exceed it stays a stub, named `cap-exceeded`
@@ -139,6 +143,7 @@ export type FetchNodesBatch = (ids: string[]) => Promise<RestNodesResponse>;
 interface InstanceRef {
   componentId: string | undefined;
   nodePath: string;
+  appliedSwap?: true;
 }
 
 /** Mapped instance mains and their applied swaps; never inherited descendants.
@@ -160,7 +165,36 @@ export function mappedInstanceRefs(doc: RestNode): InstanceRef[] {
               ? value.value
               : undefined,
           nodePath: `${nodePath}/componentProperties[${JSON.stringify(key)}]`,
+          appliedSwap: true,
         });
+      }
+      // Only explicit, unique nested property edits are mapped from inherited
+      // internals. Their actual selected mains may be absent from child defaults.
+      const edits = (node.overrides ?? []).filter(
+        (row) =>
+          row.overriddenFields.includes("componentProperties") &&
+          row.id !== node.id,
+      );
+      for (const edit of edits) {
+        if (edits.filter((row) => row.id === edit.id).length !== 1) continue;
+        const target = nestedPropertyTarget(node, edit.id);
+        if (!target) continue;
+        const location = `${nodePath}/nestedInstance[${JSON.stringify(target.node.id)}]`;
+        out.push({ componentId: target.node.componentId, nodePath: location });
+        for (const key of Object.keys(
+          target.node.componentProperties ?? {},
+        ).sort()) {
+          const value = target.node.componentProperties![key]!;
+          if (value.type === "INSTANCE_SWAP")
+            out.push({
+              componentId:
+                typeof value.value === "string" && value.value !== ""
+                  ? value.value
+                  : undefined,
+              nodePath: `${location}/componentProperties[${JSON.stringify(key)}]`,
+              appliedSwap: true,
+            });
+        }
       }
       return;
     }
@@ -255,8 +289,58 @@ export async function followInstances(
   let frontier = [...requested.map((r) => r.nodeId)];
   let round = 0;
   let pulledCount = 0;
+  const lookupAttempted = new Set<string>(),
+    locatedSwaps = new Map<string, Entry>();
   while (frontier.length > 0) {
     round += 1;
+    // An applied swap may have no instance in the returned tree, so Figma can
+    // omit its metadata. A bounded same-file lookup must prove the exact main,
+    // its stable key and (when present) owning set; menu preferences never enter.
+    const missing = [
+      ...new Set(
+        frontier.flatMap((id) =>
+          mappedInstanceRefs(entries.get(id)!.document)
+            .filter(
+              (ref) =>
+                ref.appliedSwap &&
+                ref.componentId &&
+                /^\d+:\d+$/.test(ref.componentId) &&
+                !entries.get(id)!.components?.[ref.componentId] &&
+                !lookupAttempted.has(ref.componentId),
+            )
+            .map((ref) => ref.componentId!),
+        ),
+      ),
+    ]
+      .sort(byString)
+      .slice(0, Math.max(0, cap - lookupAttempted.size));
+    for (let offset = 0; offset < missing.length; offset += perRequest) {
+      const ids = missing.slice(offset, offset + perRequest);
+      for (const id of ids) lookupAttempted.add(id);
+      let found: RestNodesResponse | undefined;
+      try {
+        found = await fetchBatch(ids);
+      } catch {
+        /* Existing named not-found refusal remains. */
+      }
+      for (const id of ids) {
+        const entry = found?.nodes[id],
+          meta = entry?.components?.[id],
+          setId = meta?.componentSetId;
+        if (
+          entry?.document.id !== id ||
+          entry.document.type !== "COMPONENT" ||
+          typeof meta?.key !== "string" ||
+          !meta.key ||
+          meta.remote === true ||
+          (setId &&
+            (!entry.componentSets?.[setId]?.key ||
+              entry.componentSets[setId].remote === true))
+        )
+          continue;
+        locatedSwaps.set(id, entry);
+      }
+    }
     // target id → the references that point at it this round
     const pending = new Map<
       string,
@@ -273,7 +357,8 @@ export async function followInstances(
       for (const ref of mappedInstanceRefs(entry.document)) {
         const cid = ref.componentId ?? "(absent)";
         const meta = ref.componentId
-          ? entry.components?.[ref.componentId]
+          ? (entry.components?.[ref.componentId] ??
+            locatedSwaps.get(ref.componentId)?.components?.[ref.componentId])
           : undefined;
         if (!meta) {
           noteUnresolved(
@@ -287,7 +372,8 @@ export async function followInstances(
           continue;
         }
         const setMeta = meta.componentSetId
-          ? (entry.componentSets?.[meta.componentSetId] as
+          ? ((entry.componentSets?.[meta.componentSetId] ??
+              locatedSwaps.get(cid)?.componentSets?.[meta.componentSetId]) as
               { name?: string; remote?: boolean } | undefined)
           : undefined;
         const targetId = meta.componentSetId ?? cid;
@@ -369,7 +455,20 @@ export async function followInstances(
       let response: RestNodesResponse | undefined;
       let error: string | undefined;
       try {
-        response = await fetchBatch(batch);
+        const cached = batch.filter((id) => locatedSwaps.has(id)),
+          needed = batch.filter((id) => !locatedSwaps.has(id));
+        const fetched = needed.length
+          ? await fetchBatch(needed)
+          : { nodes: {} };
+        response = {
+          ...fetched,
+          nodes: {
+            ...fetched.nodes,
+            ...Object.fromEntries(
+              cached.map((id) => [id, locatedSwaps.get(id)!]),
+            ),
+          },
+        };
       } catch (e) {
         error = e instanceof Error ? e.message : String(e);
       }
@@ -446,7 +545,8 @@ export async function followInstances(
         const fromEntry = entries.get(id)!;
         for (const ref of mappedInstanceRefs(fromEntry.document)) {
           const meta = ref.componentId
-            ? fromEntry.components?.[ref.componentId]
+            ? (fromEntry.components?.[ref.componentId] ??
+              locatedSwaps.get(ref.componentId)?.components?.[ref.componentId])
             : undefined;
           if (!meta || (meta.componentSetId ?? ref.componentId) !== target)
             continue;
@@ -476,7 +576,42 @@ export async function followInstances(
   for (const r of requested) visit(r.nodeId);
 
   const nodes: RestNodesResponse["nodes"] = {};
-  for (const id of order) nodes[id] = entries.get(id)!;
+  for (const id of order) {
+    const entry = entries.get(id)!;
+    const recovered = mappedInstanceRefs(entry.document).flatMap((ref) => {
+      const found = ref.componentId
+        ? locatedSwaps.get(ref.componentId)
+        : undefined;
+      return ref.componentId && found && !entry.components?.[ref.componentId]
+        ? [{ id: ref.componentId, found }]
+        : [];
+    });
+    // Each mapper context is per response entry. Carry the validated lookup's
+    // metadata into the referring copy as well as the fetched dependency;
+    // never mutate caller-owned responses or replace their existing identity.
+    nodes[id] = recovered.length
+      ? {
+          ...entry,
+          components: {
+            ...entry.components,
+            ...Object.fromEntries(
+              recovered.map(({ id, found }) => [id, found.components![id]]),
+            ),
+          },
+          componentSets: {
+            ...Object.fromEntries(
+              recovered.flatMap(({ found, id }) => {
+                const sid = found.components![id].componentSetId;
+                return sid && !entry.componentSets?.[sid]
+                  ? [[sid, found.componentSets![sid]]]
+                  : [];
+              }),
+            ),
+            ...entry.componentSets,
+          },
+        }
+      : entry;
+  }
   // Requested ids that were not sets (or null) keep their slot so the mapper
   // still names them exactly as it does without closure.
   for (const id of requestedIds)
