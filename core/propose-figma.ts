@@ -1,3 +1,4 @@
+import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
 import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
@@ -7,6 +8,7 @@ import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextApp
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
 import {sourceImageInput,type SourceImageInput,type SourceImageBinding} from './source-image-input.js';
 import {settleNestedPropertyInputs,nestedPropertySourceNodes,type SourceInstancePart} from './nested-property-inputs.js';
+import {settleNestedTextSizes,type SourceTextPart} from './nested-text-size-inputs.js';
 import {cssDecimal} from './css-decimal.js';
 import {hasRotatedLocalFrame,projectLocalFramePlane} from './local-frame-plane.js';
 import {normalizeHiddenComponentPresence} from './hidden-component-presence.js';
@@ -37,6 +39,7 @@ import {SolidFillCompositionSchema, SolidFillCompositionTableSchema, tokensByPro
 import {solidFillCompositionRules} from '../packages/core/src/css.js';
 import {inspectDraftPaintChild} from './draft-paint-child.js';
 import {AbsoluteGeometrySchema, normalizeAbsoluteGeometry, absoluteGeometryVisibleDomains, VisibleWhenSchema, type Part} from '@ds-contracts/schema';
+import {reflectedHugPlacement} from '../extract/figma/reflected-hug-geometry.js';
 import {nativeLineIssue, filledPathsIssue} from '../scripts/contract-schema.js';
 import { allocateFigmaPropertyNames, canonicalPropName as sharedCanonicalPropName } from './figma-names.js';
 import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
@@ -1977,6 +1980,7 @@ export interface UnboundValue {
 
 export interface FigmaProposalResult {
   sourceInstanceParts?:SourceInstancePart[];
+  sourceTextParts?:SourceTextPart[];
   characterBindings?:CharacterBinding[];
   visibilityBindings?: VisibilityBinding[];
   imageBindings?:SourceImageBinding[];
@@ -2554,7 +2558,18 @@ interface MintCapture {
   refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string>; property?: 'rootOverrides'; fixedSwapDimensions?: string; fixedSwapChannels?:Array<'width'|'height'> }>;
 }
 
+/** Read-only lookup prepared while registering this exact source child.
+ * This is token context only: it never opts into instanceOverrides behavior. */
+interface ChildIntrinsicContext {
+  contractRevision: string;
+  sourceFileKey: string;
+  sourceKey: string;
+  sourceNodeId: string;
+  values: Readonly<Record<string,string>>;
+}
+
 interface Ctx {
+  childIntrinsicContexts?: ReadonlyMap<string,ChildIntrinsicContext>;
   /** Partial drawing paint settles after shared size/root targets, so an
    * unpainted occurrence keeps the exact original child input. */
   partialDrawingInk?: Array<{component:Record<string,unknown>;target:Record<string,string>;painted:NonNullable<Part['presenceByCombination']>;inherited:NonNullable<Part['presenceByCombination']>;where:string;selfKey:string}>;
@@ -2568,6 +2583,7 @@ interface Ctx {
   repeatNonScalarApplied?: WeakMap<DumpNode, ReadonlySet<string>>;
   nestedPropertyNodeIds?:ReadonlySet<string>;
   sourceInstanceParts?:SourceInstancePart[];
+  sourceTextParts?:SourceTextPart[];
   rootInputUses?: Array<{merged:Merged;component:Record<string,unknown>;where:string}>;
   rootPaintBindings?: Array<ReturnType<typeof qualifySolidFillColorBinding>>;
   inspectBoundDraftChildren?: boolean;
@@ -5992,6 +6008,32 @@ function carryAbsPlacement(
     return false;
   };
   const withBox = boxes.filter((b) => b.box !== undefined);
+  // A paired half-turn makes local LEFT physical RIGHT. Preserve the source's
+  // unbound content sizing instead of freezing the default text's rectangle.
+  if(opts.size===true&&!opts.text&&m.occ.some(o=>o.node.reflectedHugGeometry)) {
+    const placements=m.occ.map(o=>{
+      const g=o.node.reflectedHugGeometry,box=absBoxOf(o.node),parent=o.parent?.node;
+      if(!g||!box||!parent||o.node.type!=='FRAME'||g.nodeId!==o.node.nodeId||g.parentId!==parent.nodeId||
+        parent.fillHeight!==true||parent.layout!==undefined||o.node.layout?.mode!==g.layoutMode||g.clipsContent!==(o.node.clipsContent===true)||parent.clipsContent===true||o.node.fillWidth||o.node.fillHeight||o.node.mask||parent.mask||
+        (o.node as {__synthetic?:boolean}).__synthetic||o.node.layout?.primarySizing!=='AUTO'||o.node.layout?.counterSizing!=='AUTO'||
+        ['width','height','size','minWidth','minHeight','maxWidth','maxHeight'].some(k=>o.node.bound?.[k]||parent.bound?.[k]))return;
+      if(Object.values(parentCssBorderInsets(o,ctx)).some(value=>value!==0))return;
+      const placement=reflectedHugPlacement(g),rounded=(v:number)=>Math.round(v*100)/100;
+      if(!placement||box.x!==rounded(g.parentSize.width-g.transform[0][2])||box.y!==rounded(g.parentSize.height-g.transform[1][2])||
+        box.width!==rounded(g.size.width)||box.height!==rounded(g.size.height)||box.right!==rounded(placement.right)||
+        box.bottom!==rounded(g.transform[1][2]-g.size.height)||box.constraints?.horizontal!=='LEFT'||box.constraints?.vertical!=='CENTER')return;
+      return placement;
+    });
+    const dimensions=['left','right','top','bottom','width','height','translate-x','translate-y'];
+    if(placements.some(p=>!p)||new Set(placements.map(p=>p!.right)).size!==1||
+      dimensions.some(k=>tokens[k]!==undefined||(part.literals as Record<string,string>|undefined)?.[k]!==undefined)||
+      ['transform','translate','rotate','scale'].some(k=>(part.declared as Record<string,string>|undefined)?.[k]!==undefined))
+      return ledger('reflected-HUG source identity, sizing, transform or placement is unqualified');
+    part.literals={...(part.literals as Record<string,string>|undefined),width:'fit-content',height:'fit-content',right:`${placements[0]!.right}px`,top:'50%'};
+    part.declared={...(part.declared as Record<string,string>|undefined),position:'absolute',translate:'0px -50%'};
+    ctx.notes.push(`${where}: paired reflected frames compose upright; explicit HUG width/height, source right inset and vertical center are retained without fixing the default content size`);
+    return true;
+  }
   if (withBox.length !== boxes.length) {
     // A mixed slot usage keeps its caller-sized in-flow box. Only captured
     // absolute observations receive offsets; an in-flow plane gets no size.
@@ -7874,6 +7916,50 @@ function layoutPresenceContext(ctx: Ctx, presence?: Record<string, unknown>): Ct
     ? {...axis, values:axis.values.filter(value => allowed.includes(axisValue(axis,value)))} : axis)};
 }
 
+/** Positive cross-size supplied by another in-flow child, independently of
+ * the item that fills it. A measured box alone is not an allocation: ordinary
+ * frames need supported intrinsic content and instances need explicit HUG,
+ * local geometry and a key-resolved child contract. No size is copied out. */
+function independentHugRowHeight(node: DumpNode, ctx: Ctx, depth = 0): boolean {
+  if (depth > 32 || node.hidden || node.abs || node.fillHeight ||
+      node.instanceSizing?.vertical === 'FILL' || node.bound?.height ||
+      node.targetAspectRatio || node.layout?.wrap || node.layout?.mode === 'GRID') return false;
+  const matrix = node.localGeometry?.transform ?? node.instanceGeometry?.transform;
+  if (matrix && (Math.abs(matrix[0][0] - 1) > 1e-6 || Math.abs(matrix[0][1]) > 1e-6 ||
+      Math.abs(matrix[1][0]) > 1e-6 || Math.abs(matrix[1][1] - 1) > 1e-6)) return false;
+  if (node.fixedSize?.height !== undefined) return node.fixedSize.height > 0;
+  if (node.type === 'INSTANCE') {
+    const resolution = resolveChildContract(node.instanceOf ?? node.name, nodeInstanceKeys(node), ctx);
+    const parsed = ContractSchema.safeParse(resolution.id && ctx.contractsById?.get(resolution.id));
+    if (node.instanceSizing?.vertical !== 'HUG' || !node.localGeometry ||
+        node.localGeometry.localSize.height <= 0 || resolution.mechanism !== 'key' || !parsed.success ||
+        node.hostOverrides?.length) return false;
+    const context = ctx.childIntrinsicContexts?.get(parsed.data.id), anchor = parsed.data.bindings.figma.anchors;
+    if (!context || context.contractRevision !== revisionOf(parsed.data) || context.sourceFileKey !== ctx.fileKey ||
+        context.sourceFileKey !== anchor.fileKey || context.sourceKey !== anchor.componentSetKey ||
+        context.sourceKey !== (node.instanceSetKey ?? node.instanceKey) || context.sourceNodeId !== anchor.nodeId) return false;
+    const applied = canonicalizeInstanceProps(node.instanceOf ?? node.name, node.componentProperties ?? {},
+      parsed.data.id, ctx, 'intrinsic sibling', true, nodeInstanceKeys(node));
+    if (Object.keys(node.componentProperties ?? {}).some(property => {
+      const bare = property.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
+      const matching = parsed.data.props.filter(prop => prop.bindings.figma.property === bare);
+      return matching.length !== 1 || applied[matching[0].name] === undefined;
+    })) return false;
+    const values = Object.fromEntries(Object.entries(applied).flatMap(([name,value]) =>
+      typeof value === 'string' || typeof value === 'boolean' ? [[name,String(value)]] : []));
+    // The certificate never traverses a component or slot. Fixed swaps can
+    // replace those subtrees, but cannot remove the separate pure branch that
+    // establishes this positive height under the selected scalar properties.
+    return independentIntrinsicHeight(parsed.data, values, path =>
+      context.values[path] ?? ctx.capturedValues?.get(path) ?? ctx.corpus.resolveLiteral(path));
+  }
+  if (node.shape) return !node.shape.rotation && node.shape.height > 0;
+  if (node.type === 'TEXT') return !!node.text && /\S/u.test(node.text.characters ?? '') &&
+    typeof node.text.lineHeight === 'number' && node.text.lineHeight > 0;
+  return node.type === 'FRAME' && !!node.layout &&
+    node.children?.some(child => independentHugRowHeight(child, ctx, depth + 1)) === true;
+}
+
 function carryObservedItemStretch(m: Merged, parent: ParentModes | null,
   part: Record<string, unknown>, ctx: Ctx, where: string, presence?: Record<string, unknown>): boolean {
   if (!parent?.nodesByVariant || parent.stretchCross || !m.occ.length ||
@@ -7888,9 +7974,12 @@ function carryObservedItemStretch(m: Merged, parent: ParentModes | null,
        (owner.layout?.counterSizing==='FIXED' && Number.isFinite(owner.bbox?.[dim]) && (owner.bbox?.[dim]??0)>0));
     const minimumFloor = mode==='HORIZONTAL' && owner?.layout?.counterSizing === 'AUTO' && Number.isFinite(owner.minHeight) &&
       (owner.minHeight ?? 0)>0 && !owner.bound?.minHeight;
+    const siblingAllocation = fills && !capturedFixed && !minimumFloor && mode === 'HORIZONTAL' && owner?.layout?.counterSizing === 'AUTO' && !owner.layout.wrap &&
+      !owner.bound?.height && owner.children?.some(child => child !== o.node &&
+        (o.node.nodeId === undefined || child.nodeId !== o.node.nodeId) && independentHugRowHeight(child, ctx)) === true;
     const supported = owner && !owner.layout?.wrap && (mode === 'HORIZONTAL' || mode === 'VERTICAL') &&
-      (!fills || (o.node.type === 'FRAME' && (capturedFixed || minimumFloor) && o.node.fixedSize?.[dim] === undefined && o.node.bound?.[dim] === undefined));
-    return {variant:o.variant, value:fills ? 'stretch' : 'auto', supported};
+      (!fills || (o.node.type === 'FRAME' && (capturedFixed || minimumFloor || siblingAllocation) && o.node.fixedSize?.[dim] === undefined && o.node.bound?.[dim] === undefined));
+    return {variant:o.variant, value:fills ? 'stretch' : 'auto', supported, siblingAllocation};
   });
   // Internal multi-axis alignment and the item's relation to its parent are
   // independent channels; a layout table must not suppress captured FILL.
@@ -7909,7 +7998,7 @@ function carryObservedItemStretch(m: Merged, parent: ParentModes | null,
     }
     part.layoutByProp = {prop:fit.axis.propName,map};
   }
-  ctx.notes.push(`${where}: observed cross-axis FILL with a captured fixed allocation or positive minimum carried as per-item alignSelf; non-filling planes retain auto alignment`);
+  ctx.notes.push(`${where}: observed cross-axis FILL with ${rows.some(row => row.siblingAllocation) ? 'an independent positive HUG-row sibling' : 'a captured fixed allocation or positive minimum'} carried as per-item alignSelf; non-filling planes retain auto alignment`);
   return true;
 }
 
@@ -13217,6 +13306,7 @@ function buildPart(
     part.textColorOverrideProp=prop;ctx.textColorAuthored!.push({prop,demands:inkDemands});
     for(const o of m.occ)if(o.node.nodeId)ctx.textColorNodes?.delete(o.node.nodeId);
   }
+  if(part&&part===sourcePart&&m.type==='TEXT'&&!part.component&&!part.slot&&!part.repeat&&!part.parts)for(const o of m.occ)if(o.node.nodeId)ctx.sourceTextParts?.push({nodeId:o.node.nodeId,partKey:selfKey});
   if(part&&part===sourcePart&&part.component&&!part.slot&&!part.repeat&&m.type==='INSTANCE')for(const o of m.occ)if(o.node.nodeId)ctx.sourceInstanceParts?.push({nodeId:o.node.nodeId,partKey:selfKey,childId:(part.component as {id:string}).id});
   const characterDemands=m.occ.flatMap(o=>o.node.nodeId?ctx.characterNodes?.get(o.node.nodeId)??[]:[]);
   if(characterDemands.some(d=>d.forwardTarget)){
@@ -16959,6 +17049,9 @@ function proposeFromDumpFencedImpl(
      *  rendering the REAL vector glyph instead of witness geometry. Absent →
      *  the classic geometry-stub behavior, byte-identical. */
     iconAssets?: ReadonlyMap<string, StubIconAsset>;
+    /** Internal batch context for an exact registered child's minted tokens.
+     * Missing or stale context cannot authorize intrinsic sibling allocation. */
+    childIntrinsicContexts?: ReadonlyMap<string,ChildIntrinsicContext>;
     /** ROUND 2 ITERATION 9 — per-instance overrides: the accumulated
      *  minted-value ledger from EARLIER proposals in this session (leaf
      *  dot-path → resolved literal, e.g. "imported.avatar.root.width.xs" →
@@ -17647,6 +17740,7 @@ function proposeFromDumpFencedImpl(
     sourcePartMatrixVerified: sourceProjection.status === 'source-matrix-verified',
     ...(designerStateAxis !== null && statePromo ? {presenceAbsentVariants: contractAbsentVariants ?? []} : {}),
     corpus: opts.corpus,
+    childIntrinsicContexts: opts.childIntrinsicContexts,
     contractIdByName: opts.contractIdByName,
     contractsById: opts.contractsById,
     repeatNonScalarApplied,
@@ -17687,7 +17781,7 @@ function proposeFromDumpFencedImpl(
     visibilityAuthored: [],
     characterNodes:opts.characterDemands?demandedCharacterNodes(set,opts.fileKey,opts.characterDemands):undefined,
     nestedCharacterRoutes:opts.nestedCharacterRoutes,
-    nestedPropertyNodeIds:opts.nestedPropertyNodeIds,sourceInstanceParts:[],characterAuthored:[],characterBindingsByContract:opts.characterBindingsByContract,
+    nestedPropertyNodeIds:opts.nestedPropertyNodeIds,sourceInstanceParts:[],sourceTextParts:[],characterAuthored:[],characterBindingsByContract:opts.characterBindingsByContract,
     imageBindingsByContract:opts.imageBindingsByContract,
     textAppearanceBindingsByContract:opts.textAppearanceBindingsByContract,
     textAppearanceNodes:opts.textAppearanceDemands?demandedTextAppearanceNodes(set,opts.fileKey,opts.textAppearanceDemands):undefined,textAppearanceAuthored:[],
@@ -19610,6 +19704,7 @@ function proposeFromDumpFencedImpl(
   const visibilityBindings=[...new Map((ctx.visibilityAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract)}))).map(b=>[canonicalJson(b),b])).values()];
   return {
     ...(ctx.sourceInstanceParts?.length?{sourceInstanceParts:ctx.sourceInstanceParts}:{}),
+    ...(ctx.sourceTextParts?.length?{sourceTextParts:ctx.sourceTextParts}:{}),
     ...(draftPaintQualification?{draftPaintQualification}:{}),
     ...(visibilityBindings.length?{visibilityBindings}:{}),
     ...(imageBindings.length?{imageBindings}:{}),
@@ -19785,6 +19880,7 @@ function proposeBatchFromDumpInternal(
   // against a child that is BOOLEAN and generateTsx refuses (Eventz/CBDS).
   const contractIdByName = new Map(opts.contractIdByName);
   const contractsById = new Map(opts.contractsById ?? []);
+  const childIntrinsicContexts = new Map<string,ChildIntrinsicContext>(opts.childIntrinsicContexts ?? []);
   const contractIdByKey = new Map(opts.contractIdByKey ?? []);
   const capturedMainIdsByKey=new Map<string,ReadonlySet<string>>(opts.capturedMainIdsByKey??[]);
   for(const value of Object.values(dump))if(isDumpSet(value)&&value.remoteSnapshot?.kind==='remote-main-snapshot'&&
@@ -19925,6 +20021,7 @@ function proposeBatchFromDumpInternal(
     imageAssets:opts.imageAssets??(dump as import('../extract/figma/types.js').DumpFile)._imageAssets,
     contractIdByName,
     contractsById,
+    childIntrinsicContexts,
     contractIdByKey,
     capturedMainIdsByKey,
     sessionClaimedIds,
@@ -20121,6 +20218,26 @@ function proposeBatchFromDumpInternal(
       if(proposal.shapeFillBindings?.length){for(const b of proposal.shapeFillBindings)b.contractRevision=revisionOf(proposal.contract);shapeFillBindingsByContract.set(String(proposal.contract.id),proposal.shapeFillBindings);}
       if(proposal.visibilityBindings?.length){for(const b of proposal.visibilityBindings)b.contractRevision=revisionOf(proposal.contract);visibilityBindingsByContract.set(String(proposal.contract.id),proposal.visibilityBindings);}
       registerSession(proposal.contract as Record<string, unknown>, name);
+      // Register only the token tree emitted for this exact source child.
+      // Names, caller token tables and a prior contract with the same id do
+      // not authorize the context. Conflicting leaves refuse the whole map.
+      if (typeof proposal.contract.id === 'string' && value.key && value.nodeId && opts.fileKey) {
+        const parsed = ContractSchema.safeParse(proposal.contract), values = new Map<string,string>();
+        let complete = true;
+        for (const entry of proposal.mintedTokens?.entries ?? []) {
+          const path = entry.ref.slice(1,-1);
+          let leaf: unknown = proposal.mintedTokens?.tree;
+          for (const segment of path.split('.')) leaf = leaf && typeof leaf === 'object' ? (leaf as Record<string,unknown>)[segment] : undefined;
+          if (!leaf || typeof leaf !== 'object' || (leaf as Record<string,unknown>).$value !== entry.value ||
+              values.has(path) && values.get(path) !== entry.value) { complete = false; break; }
+          values.set(path,entry.value);
+        }
+        if (parsed.success && complete && parsed.data.bindings.figma.anchors.fileKey === opts.fileKey &&
+            parsed.data.bindings.figma.anchors.componentSetKey === value.key && parsed.data.bindings.figma.anchors.nodeId === value.nodeId)
+          childIntrinsicContexts.set(parsed.data.id,{contractRevision:revisionOf(parsed.data),sourceFileKey:opts.fileKey,
+            sourceKey:value.key,sourceNodeId:value.nodeId,values:Object.freeze(Object.fromEntries(values))});
+        else childIntrinsicContexts.delete(String(proposal.contract.id));
+      }
       for (const stub of proposal.childStubs ?? []) {
         const id = stub.id;
         const fresh = typeof id === 'string' && !contractsById.has(id);
@@ -20188,6 +20305,7 @@ function proposeBatchFromDumpInternal(
   }
   settleNestedSlotSelections(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
   settleNestedPropertyInputs(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
+  settleNestedTextSizes(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
   // Order-free semantic passes over the whole batch (see their blocks).
   settleInteractiveContent(proposals, contractsById);
   for (const p of proposals) {

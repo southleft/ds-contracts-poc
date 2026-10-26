@@ -1,4 +1,5 @@
 import {nativeLiteralTextBox} from './native-text-box.js';
+import {nativeIntrinsicPlacementMatches,nativeIntrinsicHugBoxMatches} from './native-intrinsic-placement.js';
 import {nativeSlotIdentityRuntime} from './native-slot-identity.js';
 import {nativeScalarFaceWeight} from './native-text-appearance.js';
 import {nativeFontNameExact,nativeFontDefaultProfileRequired} from './native-font-profile.js';
@@ -305,6 +306,10 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if(isContractDraft(input)&&observedVariants.some(v=>hasImageControl(v.spec)))extra.push('imageOverride');
   const hasTextAppearance=(spec:NodeSpec):boolean=>!!spec.textAppearanceTarget||!!spec.instanceTextAppearances||!!spec.children?.some(hasTextAppearance);
   if(isContractDraft(input)&&observedVariants.some(v=>hasTextAppearance(v.spec)))extra.push('textAppearanceOverride');
+  const hasTextSize=(spec:NodeSpec):boolean=>!!spec.textSizeTarget||!!spec.instanceTextSizes||!!spec.slotDefault?.some(item=>item.instanceTextSizes)||!!spec.children?.some(hasTextSize);
+  if(isContractDraft(input)&&observedVariants.some(v=>hasTextSize(v.spec)))extra.push('textSizeOverride');
+  const hasIntrinsicPlacement=(spec:NodeSpec):boolean=>!!spec.intrinsicPlacementTarget||!!spec.instanceIntrinsicPlacements||!!spec.slotDefault?.some(item=>item.instanceIntrinsicPlacements)||!!spec.children?.some(hasIntrinsicPlacement);
+  if(isContractDraft(input)&&observedVariants.some(v=>hasIntrinsicPlacement(v.spec)))extra.push('intrinsicPlacement');
   const hasAuthoredTextAppearance=(spec:NodeSpec):boolean=>!!spec.authoredTextAppearance||!!spec.authoredTextAppearanceTarget||!!spec.instanceAuthoredTextAppearance||!!spec.slotDefault?.some(item=>item.instanceAuthoredTextAppearance)||!!spec.children?.some(hasAuthoredTextAppearance);
   if(isContractDraft(input)&&observedVariants.some(v=>hasAuthoredTextAppearance(v.spec)))extra.push('authoredTextAppearance','authoredTextInstance');
   const hasTextColor = (spec:NodeSpec):boolean=>!!spec.textColorTarget||!!spec.instanceTextColors||!!spec.children?.some(hasTextColor);
@@ -317,7 +322,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if (isContractDraft(input) && observedVariants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   const hasMask = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || spec.shape?.kind === 'stroked-path' || !!spec.instanceInsideStroke || !!spec.mask || !!spec.children?.some(hasMask);
-  const hasCapturedGeometry = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || !!spec.capturedAbsoluteGeometry || !!spec.insetOverlay || !!spec.children?.some(hasCapturedGeometry);
+  const hasCapturedGeometry = (spec: NodeSpec): boolean => !!spec.intrinsicAbsolute || spec.shape?.kind==='line' || !!spec.capturedAbsoluteGeometry || !!spec.insetOverlay || !!spec.children?.some(hasCapturedGeometry);
   const hasStrokeLayout = (spec: NodeSpec): boolean => spec.insetRingStroke === true || !!spec.rootSlotFlow ||
     (['root','frame'].includes(spec.type) && !!spec.lits?.strokeColor && typeof spec.lits.strokeWeight === 'number') ||
     !!spec.children?.some(hasStrokeLayout);
@@ -470,6 +475,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "textCase",
     "textDecoration",
     "textStyleId",
+    ...(extraMetadata.includes('textSizeOverride') ? ['paragraphSpacing', 'paragraphIndent'] : []),
     "vectorPaths",
     ...(filledPaths ? ['isMask', 'blendMode', 'constraints'] : []),
     ...(masks ? ['isMask', 'maskType', 'strokeCap', 'strokeJoin', 'strokeMiterLimit', 'dashPattern'] : []),
@@ -864,7 +870,7 @@ function verifyReadback(
   const pathSpecs = new Map<string, NodeSpec>();
   const authoredPathSpecs = new Map<string, NodeSpec | null>();
   const indexPath = (spec: NodeSpec) => {
-    if ((spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.textColorTarget || spec.textAppearanceTarget || spec.imageTarget) && spec.nativeContractPart)
+    if ((spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
       pathSpecs.set(canonicalJson(spec.nativeContractPart), spec);
     spec.children?.forEach(indexPath);
   };
@@ -1125,6 +1131,7 @@ function verifyReadback(
       sourceCase?: NativeSourceCandidateProjection["cases"][number],
       sample?: any,
       root = false,
+      parentSpec?: NodeSpec,
     ) => {
       if (!n || checked.has(n.id)) {
         issue("native-source-observation-node-pairing", n);
@@ -1159,6 +1166,15 @@ function verifyReadback(
               )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'line' ? 'LINE' : spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : spec.nativePathInk || spec.nativeMaskPath || spec.shape?.kind === 'stroked-path' ? 'VECTOR' : undefined : undefined);
       if((n.metadata.imageOverride??'')!==(spec.imageTarget??''))issue('native-image-observation-marker',n);
       if((n.metadata.textAppearanceOverride??'')!==(spec.textAppearanceTarget??''))issue('native-text-appearance-observation-marker',n);
+      if((n.metadata.textSizeOverride??'')!==(spec.textSizeTarget??''))issue('native-text-size-observation-marker',n);
+      if((n.metadata.intrinsicPlacement??'')!==(spec.intrinsicPlacementTarget??''))issue('native-intrinsic-placement-observation-marker',n);
+      if(spec.intrinsicAbsolute){
+        const parent=nodes.get(n.parentId),child=n.childIds.length===1?nodes.get(n.childIds[0]):undefined,a=spec.absolute;
+        if(!parent||!child||!nativeIntrinsicHugBoxMatches(n,child)||!a||a.h!=='MAX'||a.v!=='CENTER'||a.right===undefined||
+          !numeric(v.width,child.values.width)||!numeric(v.height,child.values.height)||
+          !numeric(v.x,parent.values.width-a.right-v.width)||!numeric(v.y,(parent.values.height-v.height)/2)||
+          !same(v.constraints,{horizontal:'MAX',vertical:'CENTER'})||!same(v.relativeTransform,[[1,0,v.x],[0,1,v.y]]))issue('native-intrinsic-placement-observation-geometry',n);
+      }
       if((n.metadata.authoredTextAppearance??'')!==(spec.authoredTextAppearanceTarget??''))issue('native-authored-text-appearance-observation-marker',n);
       if((n.metadata.authoredTextInstance??'')!==(spec.authoredTextInstanceTarget??''))issue('native-authored-text-instance-observation-marker',n);
       if((n.metadata.textColorOverride??'')!==(spec.textColorTarget??''))issue('native-text-color-observation-marker',n);
@@ -1256,6 +1272,45 @@ function verifyReadback(
                 v.layoutMode !== 'NONE' || !same(v.boundVariables,{...main?.values.boundVariables,width:alias,height:alias}))
               issue('native-filled-path-observation-instance-size',n);
           }
+          if(spec.instanceCallerFillWidth){
+            const width=spec.instanceRootOverrides?.width,parent=nodes.get(n.parentId);
+            const value=width&&nativeBoundNumber(width.varName,tokens.receipt.variables,consumingMode);
+            const id=width&&variableByName.get(width.varName);
+            const siblings=parent?.childIds.map((key:string)=>nodes.get(key));
+            // This certificate depends on neutral boxes, not just an equal
+            // current width: a newly wrapped, clamped, padded or bordered box
+            // can retain that width while changing responsive allocation.
+            const neutralWidthBox=(box:Record<string,any>):boolean=>
+              ['paddingLeft','paddingRight','paddingTop','paddingBottom','itemSpacing'].every(key=>numeric(box[key]??0,0))&&
+              (box.minWidth==null||numeric(box.minWidth,0))&&box.maxWidth==null&&box.targetAspectRatio==null&&
+              Array.isArray(box.strokes)&&(!box.strokes.length||
+                ['strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'].every(key=>numeric(box[key]??box.strokeWeight,0)));
+            const widthBindingFields=['minWidth','maxWidth','paddingLeft','paddingRight','paddingTop','paddingBottom','itemSpacing','strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'];
+            const expectedBindings={...main?.values.boundVariables};
+            for(const [channel,override] of Object.entries(spec.instanceRootOverrides??{}))
+              expectedBindings[channel.replace(/-([a-z])/g,(_,letter:string)=>letter.toUpperCase())]={type:'VARIABLE_ALIAS',id:variableByName.get(override.varName)};
+            const neutralBindings=widthBindingFields.every(field=>{
+              const expected=expectedBindings[field];
+              if(!same(v.boundVariables?.[field],expected))return false;
+              if(expected===undefined)return true;
+              const name=[...variableByName].find(([,key])=>key===expected.id)?.[0];
+              return name!==undefined&&nativeBoundNumber(name,tokens.receipt.variables,consumingMode)===0;
+            });
+            const ownParentWidth=parentSpec?.instanceRootOverrides?.width?.px??parentSpec?.fixedWidth?.px??parentSpec?.lits?.width;
+            const parentSizing=parent&&parentSpec&&(parentSpec.fillW
+              ?parent.values.layoutSizingHorizontal==='FILL'
+              :typeof ownParentWidth==='number'&&Number.isFinite(ownParentWidth)&&ownParentWidth>0&&
+                parent.values.layoutSizingHorizontal!=='FILL'&&
+                (parentSpec.layout?.mode==='VERTICAL'?parent.values.counterAxisSizingMode:parent.values.primaryAxisSizingMode)==='FIXED');
+            if(!width||!Number.isFinite(width.px)||width.px<=0||value!==width.px||!id||
+               v.boundVariables?.width!==undefined||!numeric(v.width,width.px)||v.layoutSizingHorizontal!=='FILL'||
+               v.layoutWrap!==(spec.layout?.wrap?'WRAP':'NO_WRAP')||!neutralWidthBox(v)||!neutralBindings||
+               !parent||!parentSpec||!['HORIZONTAL','VERTICAL'].includes(parent.values.layoutMode)||!numeric(parent.values.width,width.px)||
+               parent.values.layoutWrap!=='NO_WRAP'||!neutralWidthBox(parent.values)||
+               !parentSizing||
+               !siblings||siblings.some((sibling:any)=>!sibling||sibling.id!==n.id&&sibling.values.layoutPositioning!=='ABSOLUTE'))
+              issue('native-caller-fill-width-observation',n);
+          }
           if (!same(n.values.reactions ?? [],main?.values.reactions ?? [])) issue('native-library-observation-instance-reactions',n);
           if (n.values.visible !== (spec.visibleProp ? spec.visibleDefault === true : true))
             issue('native-library-observation-instance-visibility',n);
@@ -1278,6 +1333,8 @@ function verifyReadback(
         const imageMatches=new Map<string,number>();
         const textColorMatches=new Map<string,number>();
         const textAppearanceMatches=new Map<string,number>();
+        const textSizeMatches=new Map<string,number>();
+        const intrinsicMatches=new Map<string,number>();
         const nestedAuthoredAuthority = new Map<string,{appearance:boolean;scalar:boolean}>();
         if (library && spec.instanceAuthoredTextAppearance) {
           const seenOwners = new Set<string>();
@@ -1398,6 +1455,13 @@ function verifyReadback(
                 if((child.metadata.authoredTextInstance??'')!==(source.metadata.authoredTextInstance??''))
                   issue('native-authored-text-instance-observation-marker',child);
                 const pathSpec = pathSpecs.get(canonicalJson(meta(source, 'nativeContractPart')));
+                const intrinsicKey=pathSpec?.intrinsicPlacementTarget,placement=textOwner&&intrinsicKey?spec.instanceIntrinsicPlacements?.[intrinsicKey]:undefined;
+                let intrinsicGeometry=false;
+                if((child.metadata.intrinsicPlacement??'')!==(intrinsicKey??''))issue('native-intrinsic-placement-observation-marker',child);
+                if(placement&&intrinsicKey){intrinsicMatches.set(intrinsicKey,1+(intrinsicMatches.get(intrinsicKey)??0));
+                  intrinsicGeometry=nativeIntrinsicPlacementMatches(intrinsicKey,placement,child,source,nodes.get(child.parentId),nodes);
+                  if(!intrinsicGeometry)issue('native-intrinsic-placement-observation-geometry',child);
+                }
                 const imageKey=pathSpec?.imageTarget;
                 const imageOverride=textOwner&&imageKey?spec.instanceImages?.[imageKey]:undefined;
                 if((child.metadata.imageOverride??'')!==(imageKey??''))issue('native-image-observation-marker',child);
@@ -1417,6 +1481,20 @@ function verifyReadback(
                 if(appearance){
                   textAppearanceMatches.set(appearanceKey!,1+(textAppearanceMatches.get(appearanceKey!)??0));
                   if(child.type!=='TEXT'||!nativeTextAppearanceMatches(appearance,child.values.characters,child.values.textAppearanceRuns)){issue('native-text-appearance-observation-ranges',child);if(nativeTextAppearanceDefaultProfileRequired(appearance,child.values.textAppearanceRuns))issue('native-authored-font-default-profile-unverified',child);}
+                }
+                const sizeKey=pathSpec?.textSizeTarget;
+                const textSize=textOwner&&sizeKey?spec.instanceTextSizes?.[sizeKey]:undefined;
+                if((child.metadata.textSizeOverride??'')!==(sizeKey??''))issue('native-text-size-observation-marker',child);
+                if(textSize){
+                  textSizeMatches.set(sizeKey!,1+(textSizeMatches.get(sizeKey!)??0));
+                  const bindings={...source.values.boundVariables};delete bindings.fontSize;delete bindings.lineHeight;
+                  if(child.type!=='TEXT'||source.type!=='TEXT'||source.metadata.textSizeOverride!==sizeKey||
+                     typeof textSize.characters!=='string'||!textSize.characters.length||child.values.characters!==textSize.characters||source.values.characters!==textSize.characters||
+                     !Number.isFinite(textSize.fontSize)||textSize.fontSize<=0||!Number.isFinite(textSize.lineHeight)||textSize.lineHeight<=0||
+                     !numeric(child.values.fontSize,textSize.fontSize)||!same(child.values.lineHeight,{unit:'PIXELS',value:textSize.lineHeight})||
+                     !same(child.values.boundVariables??{},bindings)||
+                     ['fontName','fontWeight','letterSpacing','textCase','textDecoration','paragraphSpacing','paragraphIndent','textAlignHorizontal','textAutoResize','textStyleId','fills'].some(field=>!same(child.values[field],source.values[field])))
+                    issue('native-text-size-observation-value',child);
                 }
                 const authoredSourceSpec = textOwner ? authoredSpecForSource(source) : undefined;
                 const authoredKey = authoredSourceSpec?.authoredTextAppearanceTarget;
@@ -1498,7 +1576,9 @@ function verifyReadback(
                     if (pathSpec.nativePathInk && !nativeFilledPathResizeMatches(b.vectorPaths,a.vectorPaths,a.width/b.width,a.height/b.height))
                       issue('native-filled-path-observation-inherited-vectorPaths',child);
                   } else for (const field of ['relativeTransform','width','height',...(pathSpec.nativePathInk?['vectorPaths']:[])]) {
+                    if(intrinsicGeometry&&['relativeTransform','width','height'].includes(field))continue;
                     if (field==='width' && nativeTextOverrideOwnsWidth(pathSpec,child,source,properties)) continue;
+                    if ((field==='width'||field==='height') && textSize && nativeTextSizeOwnsIntrinsicGeometry(pathSpec,child,source,textSize)) continue;
                     if (!same(child.values[field],source.values[field]))
                       issue('native-filled-path-observation-inherited-' + field,child);
                   }
@@ -1515,6 +1595,7 @@ function verifyReadback(
                   'strokeAlign','strokeCap','strokeJoin','strokeMiterLimit','dashPattern']) {
                   if((appearance||authoredOwnsAppearance||nestedAuthority?.appearance)&&['fills','fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration'].includes(field))continue;
                   if((authoredScalarReplacement||nestedAuthority?.scalar)&&field==='boundVariables')continue;
+                  if(textSize&&['fontSize','lineHeight','boundVariables'].includes(field))continue;
                   if ((inkOverride||textColor!==undefined||imageOverride) && (field === 'fills' || field === 'boundVariables')) continue;
                   if (insideStroke && ['strokes','strokeWeight','strokeAlign','strokeCap','strokeJoin','strokeMiterLimit','dashPattern'].includes(field))continue;
                   const key = source.values.componentPropertyReferences?.[field];
@@ -1528,6 +1609,8 @@ function verifyReadback(
         };
         descend(n,nodes.get(n.mainId));
         for(const key of Object.keys(spec.instanceTextAppearances??{}))if(textAppearanceMatches.get(key)!==1)issue('native-text-appearance-observation-target',n);
+        for(const key of Object.keys(spec.instanceTextSizes??{}))if(textSizeMatches.get(key)!==1)issue('native-text-size-observation-target',n);
+        for(const key of Object.keys(spec.instanceIntrinsicPlacements??{}))if(intrinsicMatches.get(key)!==1)issue('native-intrinsic-placement-observation-target',n);
         for(const key of Object.keys(spec.instanceImages??{}))if(imageMatches.get(key)!==1)issue('native-image-observation-target',n);
         for(const key of Object.keys(spec.instanceTextColors??{}))if(textColorMatches.get(key)!==1)issue('native-text-color-observation-target',n);
         for (const row of descendants) if (borrowedIds.has(row.id)) checked.add(row.id);
@@ -1578,7 +1661,7 @@ function verifyReadback(
           if (slots.length !== 1 || slots[0].childIds.length !== (slotSpec.children ?? []).length) {
             issue('native-contract-observation-instance-caller-slot', n); continue;
           }
-          (slotSpec.children ?? []).forEach((child, index) => visit(child, nodes.get(slots[0].childIds[index])));
+          (slotSpec.children ?? []).forEach((child, index) => visit(child, nodes.get(slots[0].childIds[index]), undefined, undefined, false, slotSpec));
         }
         return;
       }
@@ -1962,7 +2045,7 @@ function verifyReadback(
         const defaults:NodeSpec[] = library ? (spec.slotDefault ?? []).map(item=>({type:'instance',name:item.dep,
           dep:item.dep,depContractId:item.depContractId ?? item.contractId,depProps:item.props,nativeContractPart:item.nativeContractPart,
           instanceAuthoredTextAppearance:item.instanceAuthoredTextAppearance,instanceAuthoredTextRecipes:item.instanceAuthoredTextRecipes,
-          instanceTextAppearances:item.instanceTextAppearances,authoredTextInstanceTarget:item.authoredTextInstanceTarget})) : [];
+          instanceTextAppearances:item.instanceTextAppearances,instanceTextSizes:item.instanceTextSizes,instanceIntrinsicPlacements:item.instanceIntrinsicPlacements,authoredTextInstanceTarget:item.authoredTextInstanceTarget})) : [];
         const specs = isContractDraft(input) ? [...defaults,...(spec.children ?? [])] : sourceSample?.specs ?? [];
         if (n.childIds.length !== specs.length)
           issue("native-source-observation-slot-content", n);
@@ -1975,7 +2058,7 @@ function verifyReadback(
             sampleRevision: sourceSample!.sampleRevision,
             specRevision: sourceSample!.specRevision,
             specPath: [i],
-          }),
+          }, false, spec),
         );
         return;
       }
@@ -1995,6 +2078,7 @@ function verifyReadback(
           nodes.get(contentIds[i]),
           sourceCase,
           sample ? { ...sample, specPath: [...sample.specPath, i] } : undefined,
+          false, spec,
         ),
       );
     };
@@ -2107,6 +2191,20 @@ export function nativeTextOverrideOwnsWidth(spec: NodeSpec, child: Record<string
   return [a,b].every(v=>v.textAutoResize==='WIDTH_AND_HEIGHT' && v.layoutSizingHorizontal==='HUG' &&
     v.layoutSizingVertical==='HUG' && typeof v.characters==='string' && !/[\r\n]/.test(v.characters) &&
     Number.isFinite(v.width) && v.width>0 && Number.isFinite(v.height) && v.height>0);
+}
+
+/** A uniform scalar input owns only its exact single-line intrinsic TEXT box.
+ * Ancestors, positions, fixed extents and Fill allocations retain their checks. */
+export function nativeTextSizeOwnsIntrinsicGeometry(spec:NodeSpec,child:Record<string,any>,source:Record<string,any>,size:NonNullable<NodeSpec['instanceTextSizes']>[string]):boolean {
+ const a=child.values,b=source.values;
+ if(spec.type!=='text'||!spec.textSizeTarget||child.metadata?.textSizeOverride!==spec.textSizeTarget||source.metadata?.textSizeOverride!==spec.textSizeTarget||
+    spec.fixedWidth||spec.fixedHeight||spec.bindings?.width!==undefined||spec.bindings?.height!==undefined||spec.fillW||spec.fillH||
+    child.type!=='TEXT'||source.type!=='TEXT'||typeof size.characters!=='string'||!size.characters.length||/[\r\n]/.test(size.characters)||
+    a?.characters!==size.characters||b?.characters!==size.characters||!Number.isFinite(size.fontSize)||size.fontSize<=0||!Number.isFinite(size.lineHeight)||size.lineHeight<=0||
+    !numeric(a.fontSize,size.fontSize)||!same(a.lineHeight,{unit:'PIXELS',value:size.lineHeight})||!numeric(a.height,size.lineHeight))return false;
+ return [a,b].every(v=>v.textAutoResize==='WIDTH_AND_HEIGHT'&&v.layoutSizingHorizontal==='HUG'&&v.layoutSizingVertical==='HUG'&&
+   v.boundVariables?.width===undefined&&v.boundVariables?.height===undefined&&Number.isFinite(v.width)&&v.width>0&&Number.isFinite(v.height)&&v.height>0)&&
+   ['fontName','fontWeight','letterSpacing','textCase','textDecoration','textAlignHorizontal','paragraphSpacing','paragraphIndent'].every(field=>same(a[field],b[field]));
 }
 
 /** Literal opaque INSIDE stroke carrier; independently observed fields must all agree. */

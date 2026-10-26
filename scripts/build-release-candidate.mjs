@@ -73,6 +73,8 @@ const PACKAGES = [
       "dist/native-line.js",
       "dist/stroked-path.d.ts",
       "dist/stroked-path.js",
+      "dist/scalar-text-size-input.d.ts",
+      "dist/scalar-text-size-input.js",
       "dist/text-appearance.d.ts",
       "dist/text-appearance.js",
       "dist/text-by-combination.d.ts",

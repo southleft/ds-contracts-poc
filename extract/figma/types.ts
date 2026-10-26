@@ -4,7 +4,7 @@ import type { StrokedPath, Part } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.79';
+export const PLUGIN_DUMP_VERSION = '1.81';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -290,6 +290,13 @@ export interface DumpReaction {
  *  solid when "fills" is among them (so the note can say WHICH colour).
  *  Character overrides keep their own channel (textOverrides, dump v1.10). */
 export interface DumpHostOverride {
+  /** Uniform scalar typography on an exact descendant. The range index and
+   * table are original REST evidence; mixed/ranged text is not this channel. */
+  textSizeOverride?: {
+    kind:'scalar-text-size-v1';ownerId:string;ownerComponentId:string;ownerComponentKey:string;
+    target:NonNullable<DumpHostOverride['solidFillTarget']>;
+    text:DumpText;lineHeightUnit:'PIXELS';characterStyleOverrides:number[];styleOverrideTable:Record<string,unknown>;
+  };
   /** Observed fills: [] on the identity-qualified shape or vector target. Missing paint
    * data and invisible paint entries are not an empty list. */
   sourceEmptyFill?: true;
@@ -301,6 +308,16 @@ export interface DumpHostOverride {
     path:number[];
     properties:Record<string,{type:'VARIANT'|'TEXT'|'BOOLEAN'|'INSTANCE_SWAP';value:string|boolean;
       selected?:{nodeId:string;componentKey:string}}>;
+    /** Actual occurrence-to-parent geometry. Optional: missing layout never
+     * weakens the independent property/selection identity witness. */
+    layout?: {
+      kind:'nested-instance-layout-v1';nodeId:string;componentId:string;parentId:string;
+      localSize:{width:number;height:number};parentSize:{width:number;height:number};
+      relativeTransform:number[][];sizing:NonNullable<DumpNode['instanceSizing']>;
+      inFlow:boolean;
+      /** True for size bindings, non-default min/max bounds or an aspect lock. */
+      sizeBound:boolean;
+    };
   };
   /** Original solid vector or shape paint plus the exact consuming binding
    * and alias chain. Never inferred from the variable table or style name. */
@@ -468,6 +485,9 @@ export interface DumpVariableConsumer {
 }
 
 export interface DumpNode {
+  /** REST v1.70 / plugin v1.81: original paired-frame coordinates, including
+   * a zero-width parent that ordinary positive localGeometry cannot carry. */
+  reflectedHugGeometry?: import('./reflected-hug-geometry.js').ReflectedHugGeometry;
   /** Raw node-to-parent affine observation. Bounds are never substituted for
    * local dimensions. Capturing this does not qualify a rendering transform. */
   localGeometry?: {

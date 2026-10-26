@@ -35,3 +35,41 @@ test('partial identities, ambiguous targets and unsupported values never produce
   assert.equal(nestedInstanceProperties(f.root,mode==='self'?f.root.id:n.id,f.components,f.sets),undefined,mode);
  }
 });
+
+test('complete override indexing retains a selected instance beyond 200 descendants',()=>{
+ const f=fixture(),target=f.root.children![1];
+ f.root.children=[...Array.from({length:211},(_,i):RestNode=>({id:`filler-${i}`,name:`Filler ${i}`,type:'FRAME'})),target];
+ const before=JSON.stringify(f.root);
+ const mapped=mapRestToDump({name:'Test',nodes:{source:{document:{id:'source',name:'Source',type:'COMPONENT',children:[f.root]},components:Object.fromEntries([...f.components].map(([k,v])=>[k,{...v,name:k}])),componentSets:{days:{name:'Days',key:'days-key'}}}}});
+ const usage=(mapped.dump.Source as DumpSet).variants[0].children![0];
+ assert.deepEqual(usage.hostOverrides![0].fields,['componentProperties']);
+ assert.deepEqual(usage.hostOverrides![0].instanceProperties,nestedInstanceProperties(f.root,target.id,f.components,f.sets));
+ assert.deepEqual(usage.hostOverrides![0].instanceProperties!.path,[211]);
+ assert.equal(usage.hostOverrides![0].instanceProperties!.properties.Disabled.value,'true');
+ assert(!mapped.report.degradations.some(d=>d.code==='host-override-unlocated'||d.code==='host-override-index-incomplete'));
+ assert.equal(JSON.stringify(f.root),before);
+});
+
+test('override index admits the exact node bound and refuses the whole prefix beyond either bound',()=>{
+ for(const mode of ['exact','nodes','depth'] as const){
+  const f=fixture(),target=f.root.children![1];
+  f.root.children=[target,...Array.from({length:mode==='exact'?998:mode==='nodes'?999:0},(_,i):RestNode=>({id:`filler-${i}`,name:`Filler ${i}`,type:'FRAME'}))];
+  if(mode==='depth'){
+   const branch:RestNode={id:'depth-0',name:'Deep',type:'FRAME'};f.root.children.push(branch);
+   let leaf=branch;
+   for(let i=1;i<33;i++){const child:RestNode={id:`depth-${i}`,name:'Deep',type:'FRAME'};leaf.children=[child];leaf=child;}
+  }
+  const before=JSON.stringify(f.root);
+  const mapped=mapRestToDump({name:'Test',nodes:{source:{document:{id:'source',name:'Source',type:'COMPONENT',children:[f.root]},components:Object.fromEntries([...f.components].map(([k,v])=>[k,{...v,name:k}])),componentSets:{days:{name:'Days',key:'days-key'}}}}});
+  const usage=(mapped.dump.Source as DumpSet).variants[0].children![0];
+  if(mode==='exact'){
+   assert.equal(usage.hostOverrides![0].instanceProperties!.nodeId,target.id);
+   assert(!mapped.report.degradations.some(d=>d.code==='host-override-index-incomplete'));
+  }else{
+   assert.equal(usage.hostOverrides,undefined,`${mode}: early target must not survive a partial index`);
+   assert.equal(usage.textOverrides,undefined);
+   assert.equal(mapped.report.degradations.filter(d=>d.code==='host-override-index-incomplete').length,1);
+  }
+  assert.equal(JSON.stringify(f.root),before,mode);
+ }
+});

@@ -1,3 +1,4 @@
+import {scalarTextSizeInput} from '@ds-contracts/schema';
 import {affineInstanceComposition} from './instance-affine-composition.js';
 import {solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
 import {textStateTarget} from './text-state-target.js';
@@ -1710,7 +1711,7 @@ export function validateContract(
       if (Object.keys(p.type.arrayOf).length === 0) {
         errors.push(`${contract.id}: arrayOf prop "${p.name}" must declare at least one field`);
       }
-    } else if (p.bindings.figma.kind === 'NONE' && walkAnatomy(contract).some(w=>w.part.textAppearanceOverride?.prop===p.name || w.part.imageOverride?.prop===p.name || w.part.textColorOverrideProp===p.name || w.part.shapeFillOverrideProp===p.name || w.part.vectorStrokeOverride?.prop===p.name || p.type === 'boolean' && w.part.visibilityOverrideProp===p.name)) {
+    } else if (p.bindings.figma.kind === 'NONE' && walkAnatomy(contract).some(w=>w.part.textAppearanceOverride?.prop===p.name || w.part.imageOverride?.prop===p.name || w.part.textColorOverrideProp===p.name || w.part.shapeFillOverrideProp===p.name || w.part.vectorStrokeOverride?.prop===p.name || p.type === 'boolean' && w.part.visibilityOverrideProp===p.name) || p.bindings.figma.kind === 'NONE' && scalarTextSizeInput(contract,p.name)) {
       // Explicit child-owned node control; no shared native component property.
     } else if (p.bindings.figma.kind === 'NONE' && p.type !== 'text') {
       errors.push(`${contract.id}: prop "${p.name}" binds figma kind "NONE" but is neither an arrayOf prop nor a text prop — every other scalar prop has a canvas manifestation`);

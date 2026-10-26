@@ -1,6 +1,7 @@
 import {restTextAppearance} from './text-appearance.js';
 import {nestedInstanceProperties} from './nested-instance-properties.js';
 import {observeLocalGeometry} from '../local-geometry.js';
+import {observeReflectedHugGeometry} from '../reflected-hug-geometry.js';
 import { restImagePaints } from './image-assets.js';
 import {observeInstanceGeometry} from '../instance-geometry.js';
 import {observeInstanceComposition} from './observed-composition.js';
@@ -548,6 +549,7 @@ export type MapDegradationCode =
   // hidden branch REST elided) — the host override is not captured.
   | 'host-instance-properties-unavailable'
   | 'host-override-unlocated'
+  | 'host-override-index-incomplete'
   | 'instance-root-override-ambiguous'
   // Two overridden TEXT descendants share one name path — both character
   // overrides refused (the plugin dump's own code, dump v1.10).
@@ -1941,30 +1943,40 @@ function mapReactions(node: RestNode, ctx: Ctx, nodePath: string): DumpReaction[
   return out.length > 0 ? out : undefined;
 }
 
-/** Walk a REST subtree collecting id → { node, name path } (dump v1.31
- *  hostOverrides / dump v1.10 textOverrides on the REST route). Capped like
- *  the plugin's findAll walk so a huge instance cannot stall the mapper. */
-function indexSubtree(root: RestNode, cap = 200): Map<string, { node: RestNode; path: string[] }> {
+/** Bound work without treating a truncated prefix as a complete source index.
+ * The node budget matches nestedInstanceProperties; the depth budget matches
+ * the existing paint-target walk. Neither budget grants target authority. */
+function indexSubtree(root: RestNode): {
+  byId: Map<string, { node: RestNode; path: string[] }>;
+  complete: boolean;
+} {
   const byId = new Map<string, { node: RestNode; path: string[] }>();
+  let visited = 1;
+  let complete = true;
   const walk = (n: RestNode, path: string[]): void => {
     for (const child of n.children ?? []) {
-      if (byId.size >= cap) return;
+      if (!complete) return;
+      if (++visited > 1000 || path.length >= 32) {
+        complete = false;
+        return;
+      }
       const p = [...path, child.name];
       byId.set(child.id, { node: child, path: p });
       walk(child, p);
     }
   };
   walk(root, []);
-  return byId;
+  if (!complete) byId.clear();
+  return { byId, complete };
 }
 
 /** A display path is useful for notes, but cannot authorize a paint override.
  * Follow source identities and reset the numeric path at each instance. */
-function solidFillTarget(root: RestNode, targetId: string, plane: 'fill' | 'stroke' | 'visibility' | 'text-fill' | 'text-characters' | 'shape-fill' = 'fill'): DumpHostOverride['solidFillTarget'] {
+function solidFillTarget(root: RestNode, targetId: string, plane: 'fill' | 'stroke' | 'visibility' | 'text-fill' | 'text-characters' | 'shape-fill' = 'fill', limit = 200): DumpHostOverride['solidFillTarget'] {
   let count = 0, incomplete = false;
   const matches: NonNullable<DumpHostOverride['solidFillTarget']>[] = [];
   const visit = (node: RestNode, owner: RestNode, path: number[], depth: number, instancePath: number[], absolutePath: number[]) => {
-    if (++count > 200 || depth > 32) { incomplete = true; return; }
+    if (++count > limit || depth > 32) { incomplete = true; return; }
     if (node.id === targetId) {
       const paints = (plane === 'fill' || plane === 'text-fill' || plane === 'shape-fill' ? node.fills : node.strokes)?.filter(p => p.visible !== false);
       if ((plane === 'text-characters' ? node.type === 'TEXT' && typeof node.characters === 'string' : plane === 'visibility' ? node.visible===undefined||typeof node.visible === 'boolean' :
@@ -1995,6 +2007,8 @@ function mapNode(
   const out: RestDumpNode = { name: node.name, type: node.type, nodeId: node.id };
   const localGeometry=observeLocalGeometry(node.id,parent?.id,node.relativeTransform,node.size?.x,node.size?.y,parent?.size?.x,parent?.size?.y);
   if(localGeometry)out.localGeometry=localGeometry;
+  const reflectedHugGeometry=observeReflectedHugGeometry(node,parent);
+  if(reflectedHugGeometry)out.reflectedHugGeometry=reflectedHugGeometry;
   const imagePaints = restImagePaints(node.fills);
   if (imagePaints) { out.imagePaints = imagePaints; out.imageFill = true; }
   if (node.isMask === true) out.mask = typeof node.maskType === 'string'
@@ -2412,14 +2426,21 @@ function mapNode(
         message:'multiple root override rows — no unique root override authority captured'});
     }
     if (overrides.length > 0) {
-      const byId = indexSubtree(node);
+      const { byId, complete } = indexSubtree(node);
       const textOverrides: Record<string, string> = {};
       const textOverrideTargets: NonNullable<DumpNode['textOverrideTargets']> = {};
       const ambiguous = new Set<string>();
       const hostOverrides: DumpHostOverride[] = [];
       let unlocated = 0;
       let selfRows = 0;
-      for (const o of overrides) {
+      if (!complete) {
+        ctx.report.degradations.push({
+          code: 'host-override-index-incomplete',
+          nodePath,
+          message: 'instance subtree exceeds the 1000-node or 32-level override index bound — no descendant host/text overrides captured from a partial index',
+        });
+      }
+      for (const o of complete ? overrides : []) {
         // The instance's OWN id appears in overrides[] when the host changed
         // the instance root itself (measured on the exam kit: every Button
         // "Icon Before" lists {id: <self>, overriddenFields: [boundVariables,
@@ -2474,6 +2495,14 @@ function mapNode(
             else ctx.report.degradations.push({code:'host-instance-properties-unavailable',nodePath,
               message:'nested property values lack unique complete owner, target or selection identity'});
           }
+          if(hit.node.type==='TEXT'&&fields.some(f=>['inheritTextStyleId','text','fontSize','lineHeight'].includes(f))&&
+             overrides.filter(row=>row.id===o.id).length===1&&node.componentId&&out.instanceKey&&
+             Array.isArray(hit.node.characterStyleOverrides)&&hit.node.characterStyleOverrides.every(v=>v===0)&&
+             hit.node.styleOverrideTable&&Object.keys(hit.node.styleOverrideTable).length===0){
+            const target=solidFillTarget(node,o.id,'text-characters',1000);
+            if(target&&hit.node.style?.lineHeightUnit==='PIXELS')h.textSizeOverride={kind:'scalar-text-size-v1',ownerId:node.id,ownerComponentId:node.componentId,ownerComponentKey:out.instanceKey,
+              target,lineHeightUnit:'PIXELS',text:mapText(hit.node,ctx,`${nodePath}/${path}`),characterStyleOverrides:[...hit.node.characterStyleOverrides],styleOverrideTable:{...hit.node.styleOverrideTable}};
+          }
           if (fields.includes('visible') && (hit.node.visible===undefined||typeof hit.node.visible === 'boolean')) {
             const target=solidFillTarget(node,o.id,'visibility');
             if(target)h.visibilityTarget={...target,visible:hit.node.visible!==false};
@@ -2516,7 +2545,7 @@ function mapNode(
         ctx.report.degradations.push({
           code: 'host-override-unlocated',
           nodePath,
-          message: `${unlocated} of ${overrides.length - selfRows} override(s) reported by overrides[] name an id the returned instance subtree does not contain (hidden branch elided by REST, or past the ${200}-node index cap) — not captured (dump v1.31)`,
+          message: `${unlocated} of ${overrides.length - selfRows} override(s) reported by overrides[] name an id the complete returned instance subtree does not contain — not captured (dump v1.31)`,
         });
       }
     }
@@ -2627,7 +2656,7 @@ function mapNode(
 // 1.64: provisional literal projection of qualified NORMAL solid fill stacks.
 // 1.65: source-qualified rectangular stroke-pattern tuple observations.
 // 1.66: current selected-slot root identity and auto-layout allocation witness.
-export const REST_DUMP_VERSION = '1.66';
+export const REST_DUMP_VERSION = '1.70';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin

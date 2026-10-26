@@ -1,3 +1,6 @@
+import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
+import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
+import {nativeTextSizeTarget,mapNativeTextSizes,NATIVE_SCALAR_TEXT_SIZE_FUNCTION,type NativeTextSize} from './native-scalar-text-size.js';
 import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
@@ -18,7 +21,7 @@ import {instanceInsideStrokeTokenErrors,resolvedInstanceInsideStroke} from '../p
 import {resolveBooleanArguments} from './component-boolean-arguments.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {allocateInstanceAffine,type InstanceAffineAllocation} from '../scripts/contract-schema.js';
-import {resolvePresence, defaultSlotFamilyIssue} from '../scripts/contract-schema.js';
+import {resolvePresence, defaultSlotFamilyIssue, slotsOf} from '../scripts/contract-schema.js';
 import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
 import {planSolidFillBindingTokens} from './solid-fill-binding-tokens.js';
 import {SOLID_FILL_COMPOSITION_NATIVE_RUNTIME,BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME} from './solid-fill-composition-native.js';
@@ -115,6 +118,7 @@ import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
 import { canonicalJson, revisionOf } from './contract-provenance.js';
+import {intrinsicAbsoluteRight,mapNativeIntrinsicPlacements,nativeIntrinsicPlacementTarget,NATIVE_INTRINSIC_PLACEMENT_RUNTIME,type NativeIntrinsicPlacements} from './native-intrinsic-placement.js';
 import {
   resolveNativeSourceProjection,
   type NativeSourcePartIdentity,
@@ -172,6 +176,10 @@ export interface LayoutSpec {
 type ResolvedShape<T> = T extends unknown ? Omit<T, 'pathsByProp' | 'arcByCombination'> : never;
 
 export interface NodeSpec {
+  /** Compiler-derived intrinsic anchor and identity; coordinates never come from metadata. */
+  intrinsicAbsolute?: true;
+  intrinsicPlacementTarget?: string;
+  instanceIntrinsicPlacements?: NativeIntrinsicPlacements;
   /** Native responsive ratio, seeded from an independently known width. */
   nativeAspectRatio?: number;
   /** Draft resolved per-fill paint; public writing remains refused. */
@@ -202,6 +210,9 @@ export interface NodeSpec {
   scalablePathParent?: true;
   instanceSize?: { px: number; varName: string };
   instanceRootOverrides?: Record<string,{px:number;varName:string}>;
+  /** Exact caller width replacing a borrowed dependency default under a
+   * proved parent Fill allocation; independently checked on readback. */
+  instanceCallerFillWidth?: true;
   instanceRootFill?: {varName:string};
   instanceRootStroke?: {color:string;width:string;px:number};
   instanceInk?: { varName: string; writeProtocol: 'attached-v1'; paintKind?: 'stroke' };
@@ -309,6 +320,8 @@ export interface NodeSpec {
   instanceVisibility?: Record<string,boolean>;
   literalTextBox?:{width:number;height?:number};
   textAppearanceTarget?:string;
+  textSizeTarget?:string;
+  instanceTextSizes?:Record<string,NativeTextSize>;
   authoredTextAppearance?:QualifiedTextAppearance;
   authoredTextAppearanceTarget?:string;
   authoredTextScalar?:NativeScalarTextRecipe;
@@ -616,7 +629,7 @@ export interface NodeSpec {
    *  main component (instances inherit it; `resetSlot()` returns to it). Any
    *  number of items carries: a native slot holds a child SEQUENCE, so the
    *  old one-instance INSTANCE_SWAP ceiling is gone. */
-  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity; authoredTextInstanceTarget?:string } & Partial<NativeAuthoredTextInstanceRecipe>>;
+  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity; authoredTextInstanceTarget?:string } & Partial<NativeAuthoredTextInstanceRecipe> & {instanceTextSizes?:Record<string,NativeTextSize>;instanceIntrinsicPlacements?:NativeIntrinsicPlacements}>;
   children?: NodeSpec[];
 }
 
@@ -1084,8 +1097,8 @@ function componentHasJointPropertyReferences(component: ComponentData): boolean 
 }
 
 function componentHasTextAppearanceFinalization(component:ComponentData):boolean {
-  const visit=(s:NodeSpec):boolean=>Boolean(s.authoredTextAppearance||s.instanceAuthoredTextAppearance||s.textAppearanceTarget||s.instanceTextAppearances)||
-    Boolean(s.slotDefault?.some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances))||(s.children??[]).some(visit);
+  const visit=(s:NodeSpec):boolean=>Boolean(s.authoredTextAppearance||s.instanceAuthoredTextAppearance||s.textAppearanceTarget||s.instanceTextAppearances||s.textSizeTarget||s.instanceTextSizes||s.instanceIntrinsicPlacements)||
+    Boolean(s.slotDefault?.some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances||item.instanceTextSizes||item.instanceIntrinsicPlacements))||(s.children??[]).some(visit);
   return [...component.variants,...(component.stateVariants??[])].some(v=>visit(v.spec));
 }
 
@@ -1164,6 +1177,41 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   // post-hoc layer-name walk cannot establish this identity (names can repeat,
   // and layout lowering may reorder or expand nodes).
   const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  // Proof-only state: native channel misses must not turn a collapsing CSS
+  // height ceiling into a positive sibling allocation. Resolve at the exact
+  // source lowering site while this variant's substitutions are available.
+  const nativePositiveHeightCeiling = new WeakMap<NodeSpec, boolean>();
+  const borrowedCallerWidths = new WeakMap<NodeSpec,{fixed?:NodeSpec['fixedWidth'];literal?:number;rootNeutral:boolean}>();
+  const nativeWidthFacts = new WeakMap<NodeSpec,{neutralBox:boolean;zeroOwn:boolean;noOwnWidth:boolean}>();
+  const recordNativePartOrigin = (spec:NodeSpec, part:Part, subst:Record<string,string>):void => {
+    nativePartOrigins.set(spec,part);
+    const refs=resolveTokens(part,subst),literals={...resolveLiterals(part,subst),...part.declared};
+    const widthValue=(channel:string):unknown=>{
+      const token=refs[channel];if(token===undefined)return literals[channel];
+      try{return resolveLiteral(token.slice(1,-1).replace(/\{([^}]+)\}/g,(_,name:string)=>subst[name]??`{${name}}`));}catch{return undefined;}
+    };
+    const absent=(channel:string)=>refs[channel]===undefined&&literals[channel]===undefined;
+    const zero=(channel:string)=>absent(channel)||widthValue(channel)===0||widthValue(channel)==='0px';
+    const constraints=['min-width','min-inline-size','padding','padding-inline','padding-block','padding-left','padding-right','padding-top','padding-bottom','margin','margin-inline','margin-block','margin-left','margin-right','margin-top','margin-bottom','border-width','border-left-width','border-right-width','border-top-width','border-bottom-width','gap','column-gap','row-gap'];
+    const display=absent('display')?part.layout?.display:widthValue('display');
+    const widthOwningDisplay=absent('display')&&display===undefined||['block','inline-block','flex','inline-flex','grid','inline-grid','flow-root'].includes(String(display));
+    const neutralBox=widthOwningDisplay&&!part.stylesWhen?.length&&!part.states&&!part.statesByProp&&absent('aspect-ratio')&&constraints.every(zero)&&
+      ['border-style','border-left-style','border-right-style','border-top-style','border-bottom-style'].every(channel=>absent(channel)||['none','hidden'].includes(String(widthValue(channel))))&&
+      ['max-width','max-inline-size'].every(channel=>absent(channel)||widthValue(channel)==='none');
+    nativeWidthFacts.set(spec,{neutralBox,
+      zeroOwn:neutralBox&&['width','inline-size'].every(channel=>zero(channel)||['auto','fit-content','min-content','max-content'].includes(String(widthValue(channel)))),
+      noOwnWidth:['width','inline-size','min-width','max-width','min-inline-size','max-inline-size','flex-basis','flex'].every(absent)});
+    const ref=refs['max-height'];
+    let value:unknown=literals['max-height'];
+    if(ref!==undefined){
+      const path=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,name:string)=>subst[name]??`{${name}}`);
+      try{value=resolveLiteral(path);}catch{value=undefined;}
+    }
+    const absentMaximum=ref===undefined&&literals['max-height']===undefined;
+    const positive=typeof value==='number'?Number.isFinite(value)&&value>0:
+      typeof value==='string'&&/^(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value)&&parseFloat(value)>0;
+    nativePositiveHeightCeiling.set(spec,absentMaximum||value==='none'||positive);
+  };
   // This new carrier alone gets complete side initialization; outline previews
   // and the older inward stroke paths retain their existing compilation.
   const outsideBorderSpecs = new WeakSet<NodeSpec>();
@@ -4277,7 +4325,7 @@ function mapDepProps(
   parent?: Contract,
   /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
   statePreview?: ComponentRef['statePreview'],
-  visibilityConsumed:boolean|{textAppearances:ReadonlySet<string>} = false,
+  visibilityConsumed:boolean|{textAppearances:ReadonlySet<string>;textSizes?:ReadonlySet<string>} = false,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4285,6 +4333,7 @@ function mapDepProps(
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
     if (depProp.bindings.figma.kind === 'NONE') {
+      if(scalarTextSizeInput(dep,propName)){if(visibilityConsumed!==true&&!(typeof visibilityConsumed==='object'&&visibilityConsumed.textSizes?.has(propName)))throw Error('scalar-text-size-context-unqualified');continue;}
       const controls=walkAnatomy(dep).filter(w=>w.part.visibilityOverrideProp===propName||w.part.textColorOverrideProp===propName||w.part.shapeFillOverrideProp===propName||w.part.imageOverride?.prop===propName||w.part.textAppearanceOverride?.prop===propName);
       if(controls.length){
         // Ordinary references retain their existing complete-consumption flag.
@@ -4587,6 +4636,7 @@ function mapDepInitialProps(dep: Contract, initial: Record<string, string>,
 function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract, subst: Record<string,string>): void {
   if(part.shapeFillOverrideProp)spec.shapeFillTarget=contract.id+':'+part.shapeFillOverrideProp;
   if(part.textAppearanceOverride)spec.textAppearanceTarget=contract.id+':'+part.textAppearanceOverride.prop;
+  if(spec.type==='text'){const target=nativeTextSizeTarget(contract,part);if(target!==undefined)spec.textSizeTarget=target;}
   if(part.imageOverride)spec.imageTarget=contract.id+':'+part.imageOverride.prop;
   if(part.textColorOverrideProp)spec.textColorTarget=contract.id+':'+part.textColorOverrideProp;
   if (part.visibilityOverrideProp) {
@@ -4747,7 +4797,13 @@ function absolutePartPlacement(
   const right = num('right');
   const top = num('top');
   const bottom = num('bottom');
-  if (left === undefined && right === undefined && top === undefined && bottom === undefined) return null;
+  // Existing percentage + independent translate grammar, with an exact
+  // vertical-center spelling. Do not parse arbitrary percentages/transforms.
+  const centerY=lits.top==='50%'&&lits.bottom===undefined&&tokens.top===undefined&&tokens.bottom===undefined&&
+    part.declared?.translate==='0px -50%'&&
+    ['transform','rotate','scale'].every(k=>part.declared?.[k]===undefined)&&
+    ['translate-x','translate-y'].every(k=>tokens[k]===undefined&&lits[k]===undefined);
+  if (left === undefined && right === undefined && top === undefined && bottom === undefined&&!centerY) return null;
   // Per-axis translate rides the SYNTHETIC channels (minted planes resolve
   // per combo); a uniform declared identity matrix is the fallback spelling.
   const tm = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/.exec(part.declared?.['transform'] ?? '');
@@ -4758,7 +4814,8 @@ function absolutePartPlacement(
   else if (left !== undefined) { a.h = 'MIN'; a.left = left + tx; }
   else if (right !== undefined) { a.h = 'MAX'; a.right = right - tx; }
   else { a.h = 'MIN'; a.left = tx; }
-  if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = top + ty; a.bottom = bottom - ty; }
+  if (centerY) a.v='CENTER';
+  else if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = top + ty; a.bottom = bottom - ty; }
   else if (top !== undefined) { a.v = 'MIN'; a.top = top + ty; }
   else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = bottom - ty; }
   else { a.v = 'MIN'; a.top = ty; }
@@ -5281,9 +5338,14 @@ function partToSpec(
   const paintTable=part.solidFillCompositionByCombination;
   if(paintTable?.rows.some(row=>row.empty && paintTable.props.every((prop,i)=>subst[prop]===row.values[i])))
     spec.lits={...spec.lits,fillClear:true};
-  nativePartOrigins.set(spec, part);
+  recordNativePartOrigin(spec, part, subst);
   spec.growBasis = resolveLayout(part, subst)?.growBasis;
   if (resolveLayout(part, subst)?.alignSelf === 'stretch') spec.crossStretch = true;
+  if(intrinsicAbsoluteRight(part,subst)!==undefined){
+    if(spec.type!=='frame'||spec.children?.length!==1||spec.children[0].type!=='text')throw Error('intrinsic-placement-native-children-unqualified:'+name);
+    spec.intrinsicAbsolute=true;
+    spec.intrinsicPlacementTarget=nativeIntrinsicPlacementTarget(contract,part,subst);
+  }
   return spec;
 }
 
@@ -5581,6 +5643,8 @@ function partToSpecInner(
       instanceInsideStroke: resolvedInstanceInsideStroke(part.component,subst),
       instanceVisibility: mapInstanceVisibility(dep,resolveBooleanArguments(dep,part.component,subst),subst,contract),
       instanceTextAppearances:mapNativeTextAppearances(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceTextSizes:mapNativeTextSizes(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceIntrinsicPlacements:mapNativeIntrinsicPlacements(dep,resolveBooleanArguments(dep,part.component,subst),subst),
       ...nativeAuthoredInstanceFields(dep,byId),
       instanceImages: mapNativeImageArguments(dep,resolveBooleanArguments(dep,part.component,subst),subst),
       instanceTextColors: mapInstanceTextColors(dep,resolveBooleanArguments(dep,part.component,subst),subst),
@@ -5597,6 +5661,7 @@ function partToSpecInner(
       spec.layout = structuredClone(caller.root.layout);
       if (caller.root.fixedWidth) spec.fixedWidth = structuredClone(caller.root.fixedWidth);
       if (caller.root.lits?.width !== undefined) spec.lits = { width: caller.root.lits.width };
+      if(spec.fixedWidth||spec.lits?.width!==undefined)borrowedCallerWidths.set(spec,{fixed:spec.fixedWidth,literal:spec.lits?.width,rootNeutral:nativeWidthFacts.get(caller.root)?.neutralBox===true});
       if (caller.root.rootFillWidth) spec.callerRootFillWidth = true;
     }
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
@@ -5708,14 +5773,19 @@ function partToSpecInner(
         // The same finite mapper validates present appearance arguments and
         // preserves absent lookup rows as omission before consumption is granted.
         const appearances=authored.instanceAuthoredTextAppearance?mapNativeTextAppearances(dep,item.props??{},subst):undefined;
+        const textSizes=mapNativeTextSizes(dep,item.props??{},subst);
+        const intrinsicPlacements=mapNativeIntrinsicPlacements(dep,item.props??{},subst);
+        const consumedTextSizes=new Set(Object.keys(item.props??{}).filter(name=>scalarTextSizeInput(dep,name)!==undefined));
         const consumedAppearances=new Set(authored.instanceAuthoredTextAppearance?walkAnatomy(dep).flatMap(({part})=>
           part.textAppearanceOverride&&Object.hasOwn(item.props??{},part.textAppearanceOverride.prop)?[part.textAppearanceOverride.prop]:[]):[]);
         return {
           dep: dep.name,
           contractId: dep.id,
           ...(dep.bindings.figma.anchors.componentSetKey ? { anchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-          props: mapDepProps(dep, item.props ?? {}, subst, item.text,undefined,contract,undefined,{textAppearances:consumedAppearances}),
+          props: mapDepProps(dep, item.props ?? {}, subst, item.text,undefined,contract,undefined,{textAppearances:consumedAppearances,textSizes:consumedTextSizes}),
           ...(authored.instanceAuthoredTextAppearance?{depContractId:dep.id,...authored,instanceTextAppearances:appearances}:{}),
+          ...(textSizes?{instanceTextSizes:textSizes}:{}),
+          ...(intrinsicPlacements?{instanceIntrinsicPlacements:intrinsicPlacements}:{}),
         };
       });
     }
@@ -5760,6 +5830,7 @@ function partToSpecInner(
     Object.assign(textSpec, textExtras(textCtx));
     attachNativeAuthoredTextAppearance(textSpec,part,contract,subst);
     if(part.textAppearanceByCombination&&frame.textAppearanceTarget){textSpec.textAppearanceTarget=frame.textAppearanceTarget;delete frame.textAppearanceTarget;}
+    const textSizeTarget=nativeTextSizeTarget(contract,part);if(textSizeTarget!==undefined)textSpec.textSizeTarget=textSizeTarget;
     // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
     // the box that sizes itself to its text, so the fact rides the text spec.
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
@@ -6153,8 +6224,9 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
     byProperty.set(key, [...(byProperty.get(key) ?? []), name]);
   }
   for (const [property, names] of byProperty) {
-    const qualifiedFamily=defaultSlotFamilyIssue(contract)===undefined && walkAnatomy(contract)
-      .filter(w=>w.part.slot && slotFigmaProperty(w.part.slot)===property).every(w=>w.part.slot!.name==='children');
+    const members=walkAnatomy(contract).filter(w=>w.part.slot && slotFigmaProperty(w.part.slot)===property);
+    const inputs=new Set(members.map(w=>w.part.slot!.name));
+    const qualifiedFamily=inputs.size===1 && defaultSlotFamilyIssue(contract,members[0].part.slot!.name)===undefined;
     if (names.length > 1 && !qualifiedFamily) {
       errors.push(
         `${contract.id}: slot parts "${names.join('", "')}" all resolve to the Figma property "${property}" — one SLOT property cannot serve two areas (set slot.bindings.figma.property to disambiguate)`,
@@ -6213,7 +6285,7 @@ function applyFilledPathParent(spec: NodeSpec): void {
   spec.scalablePathParent = true;
 }
 
-function annotateFillW(rootSpec: NodeSpec, context: string): void {
+function annotateFillW(rootSpec: NodeSpec, context: string, byId: Map<string, Contract>): void {
   applyFilledPathParent(rootSpec);
   const inFlow = (s: NodeSpec): boolean => !s.overlay && !s.insetOverlay && !s.absolute;
   const hasOwnWidth = (s: NodeSpec): boolean =>
@@ -6226,8 +6298,95 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
     return (s.children ?? []).filter(inFlow).some(canHug);
   };
   const hasOwnHeight = (s: NodeSpec): boolean => s.fixedHeight !== undefined || s.lits?.height !== undefined;
-  const walk = (s: NodeSpec, established: boolean, establishedHeight: boolean): void => {
+  const independentHeight = (s: NodeSpec, depth = 0): boolean => {
+    const origin = nativePartOrigins.get(s);
+    if(nativePositiveHeightCeiling.get(s)===false)return false;
+    if (origin?.absolutePlacement || origin?.absolutePlacementByCombination ||
+        origin?.declared?.position === 'absolute' || origin?.declared?.position === 'fixed' ||
+        origin?.declared?.display === 'none' || origin?.stylesWhen?.length) return false;
+    if (depth > 32 || !inFlow(s) || s.fillH || s.crossStretch || s.nativeSourceVisible === false ||
+        s.visibleDefault === false || s.visibilityTarget?.visible === false || s.rotation || s.shape?.rotation || s.affineViewport ||
+        s.instanceAffineAllocation || s.layout?.wrap || s.layout?.mode === 'GRID') return false;
+    if (hasOwnHeight(s)) return (s.fixedHeight?.px ?? s.lits?.height ?? 0) > 0;
+    if (s.type === 'text') {
+      const line = typeof s.lineHeight === 'number' ? s.lineHeight
+        : s.lineHeight?.unit === 'PIXELS' ? s.lineHeight.value
+        : (s.fontSize ?? 0) * (s.lineHeight?.value ?? 0) / 100;
+      return /\S/u.test(s.characters ?? '') && line > 0;
+    }
+    if (s.shape) return s.shape.height > 0;
+    if (s.type === 'svg') return (s.iconSize ?? 0) > 0;
+    if (s.type === 'instance') {
+      const dep = s.depContractId && byId.get(s.depContractId);
+      if (!dep || s.instanceVisibility || s.instanceTextAppearances || s.instanceAuthoredTextAppearance || s.depInitialProps) return false;
+      const height=s.instanceRootOverrides?.height;
+      if(height && (!Number.isFinite(height.px)||height.px<=0||!height.varName))return false;
+      const values: Record<string,string> = {};
+      for (const prop of dep.props) {
+        const wanted = s.depProps?.[prop.bindings.figma.property!];
+        if (wanted === undefined) continue;
+        if (prop.bindings.figma.kind === 'VARIANT') {
+          const selected = orderedVariantValues(prop).filter(value => axisLabel(prop,value) === String(wanted));
+          if (selected.length !== 1 || selected[0] === null) return false;
+          values[prop.name] = selected[0];
+        } else if (prop.bindings.figma.kind === 'BOOLEAN' || prop.bindings.figma.kind === 'TEXT') {
+          values[prop.name] = String(wanted);
+        } else return false;
+      }
+      if (s.depProps?.[STATE_PREVIEW_PROPERTY] !== undefined) return false;
+      if(s.children?.length){
+        // Only callerSlotSpec's already-qualified projections may accompany
+        // the instance. Their payloads never contribute to this certificate:
+        // the independent owned branch below cannot cross a slot boundary.
+        if(origin?.component?.id!==dep.id)return false;
+        let groups:ReturnType<typeof callerContentGroups>;
+        try{groups=callerContentGroups(origin);}catch{return false;}
+        const seen=new Set<string>();
+        for(const child of s.children){
+          if(child.type!=='slot'||!child.callerSlotProperty||child.callerSlotProperty!==child.slotProperty||seen.has(child.slotProperty))return false;
+          seen.add(child.slotProperty);
+          const family=slotsOf(dep).filter(w=>slotFigmaProperty(w.slot)===child.slotProperty);
+          const names=new Set(family.map(w=>w.slot.name));
+          if(names.size!==1||!groups.some(group=>group.slot===family[0].slot.name)||defaultSlotFamilyIssue(dep,family[0].slot.name)!==undefined)return false;
+          try{if(family.filter(w=>resolvePresence(w.part,values)).length!==1)return false;}catch{return false;}
+        }
+      }
+      return independentIntrinsicHeight(dep,values,resolveLiteral);
+    }
+    return !!s.layout && (s.children ?? []).some(child => independentHeight(child, depth + 1));
+  };
+  const zeroFlowWidth=(s:NodeSpec,depth=0):boolean=>{
+    if(!inFlow(s))return true;
+    if(depth>32||!['frame','root'].includes(s.type)||!nativeWidthFacts.get(s)?.zeroOwn||s.grow||s.fillW||s.pct!=null||s.hugCeiling||s.rotation||s.instanceAffineAllocation||s.affineViewport||s.layout?.wrap||s.layout?.mode==='GRID')return false;
+    if(s.fixedWidth&&s.fixedWidth.px!==0||s.lits?.width!==undefined&&s.lits.width!==0)return false;
+    return (s.children??[]).every(child=>zeroFlowWidth(child,depth+1));
+  };
+  const ownNumericWidth=(s:NodeSpec):number|undefined=>{
+    const value=s.instanceRootOverrides?.width?.px??s.fixedWidth?.px??s.lits?.width;
+    return typeof value==='number'&&Number.isFinite(value)&&value>0?value:undefined;
+  };
+  const walk = (s: NodeSpec, established: boolean, establishedHeight: boolean, allocatedWidth?:number): void => {
     const kids = s.children ?? [];
+    const knownWidth=allocatedWidth??ownNumericWidth(s);
+    const innerWidth=nativeWidthFacts.get(s)?.neutralBox&&!s.rotation&&!s.instanceAffineAllocation&&!s.affineViewport?knownWidth:undefined;
+    const fullAllocation=(child:NodeSpec):number|undefined=>
+      s.layout&&!s.layout.wrap&&s.layout.mode!=='GRID'&&innerWidth!==undefined&&
+      (s.layout.mode==='VERTICAL'||kids.every(other=>other===child||zeroFlowWidth(other)))?innerWidth:undefined;
+    for(const child of kids){
+      const borrowed=borrowedCallerWidths.get(child),origin=nativePartOrigins.get(child),width=child.instanceRootOverrides?.width;
+      const allocation=fullAllocation(child),dep=child.depContractId&&byId.get(child.depContractId);
+      if(!borrowed||!borrowed.rootNeutral||child.type!=='instance'||!inFlow(child)||!child.grow||child.growBasis!=='zero'||!width||
+         !Number.isFinite(width.px)||width.px<=0||!width.varName||allocation!==width.px||kids.filter(inFlow).length!==1||
+         !dep||origin?.component?.id!==dep.id||!dep.anatomy.root.instanceRootInputs?.includes('width')||
+         !origin.component.rootOverrides?.width||!nativeWidthFacts.get(child)?.noOwnWidth||!nativeWidthFacts.get(child)?.neutralBox||
+         child.instanceAffineAllocation||child.pct!=null||child.hugCeiling||
+         child.fixedWidth!==borrowed.fixed||child.lits?.width!==borrowed.literal)continue;
+      // Only the copied dependency default is retired. The caller's bound
+      // width remains in instanceRootOverrides and must equal this allocation.
+      delete child.fixedWidth;
+      if(child.lits)delete child.lits.width;
+      child.instanceCallerFillWidth=true;
+    }
     // CSS truth (Phase B live-in-mock finding, 2026-07-22): an EXPLICIT
     // width — token-bound OR literal — beats align-items:stretch. The first
     // gate only excluded fixedWidth (token) children; a lits.width child
@@ -6312,7 +6471,10 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
       const crossHeight = c.crossStretch === true && s.layout?.mode === 'HORIZONTAL';
       // A positive observed minimum establishes a nonzero cross-axis floor
       // without turning a HUG parent into a fixed-size box.
-      const crossHeightReady = establishedHeight || (s.lits?.minHeight ?? s.resolvedMinHeight ?? 0) > 0;
+      const minimumHeight = (s.lits?.minHeight ?? s.resolvedMinHeight ?? 0) > 0;
+      const siblingHeight = crossHeight && !establishedHeight && !minimumHeight && !s.layout?.wrap &&
+        kids.some(sibling => sibling !== c && independentHeight(sibling));
+      const crossHeightReady = establishedHeight || minimumHeight || siblingHeight;
       if (c.crossStretch && (!inFlow(c) || gridParent ||
           (crossWidth && (!ready || hasOwnWidth(c))) ||
           (crossHeight && (!crossHeightReady || hasOwnHeight(c))) || (!crossWidth && !crossHeight)))
@@ -6352,7 +6514,8 @@ function annotateFillW(rootSpec: NodeSpec, context: string): void {
       // cannot participate in its parent's flex layout.
       walk(c, fills || hasOwnWidth(c) || (c.absolute?.h === 'STRETCH' && established) || (c.rootSlotContent === true && established) ||
         (gridParent && c.cell?.hAlign === undefined),
-        fillsHeight || hasOwnHeight(c) || (c.absolute?.v === 'STRETCH' && establishedHeight) || (c.rootSlotContent === true && establishedHeight));
+        fillsHeight || hasOwnHeight(c) || (c.absolute?.v === 'STRETCH' && establishedHeight) || (c.rootSlotContent === true && establishedHeight),
+        fills?fullAllocation(c):undefined);
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec), hasOwnHeight(rootSpec));
@@ -6602,7 +6765,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
     if (resolvedRootPaint) rootSpec.solidFillComposition=solidFillCompositionPaint(resolvedRootPaint);
     const selectedRootPaintToken=resolveSolidFillToken(root,subst);
     if(selectedRootPaintToken!==undefined)rootSpec.solidFillCompositionToken=selectedRootPaintToken;
-    nativePartOrigins.set(rootSpec, root);
+    recordNativePartOrigin(rootSpec, root, subst);
     // resolveTokens, not root.tokens: the root's tokensByProp overrides (v10
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
@@ -7212,8 +7375,8 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   for (const v of [...variants, ...stateVariants]) lowerInsetRing(v.spec);
   // FILL is a compile-time decision (see annotateFillW) — runs LAST so it
   // sees the final spec shape (after margin lowering / miss stripping).
-  for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`);
-  for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`);
+  for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
+  for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
   // runtime's applyMarginBox returns without a word when the child is
   // FILL-sized, grows, or is out of flow (overlay / inset / absolute): a
@@ -8681,7 +8844,7 @@ const insetOverlayCall = (has: boolean, args: string): string =>
  *  FINAL box after the whole subtree is appended is idempotent: for a parent
  *  whose box was already established the numbers are identical, so every
  *  prior contract's canvas is unchanged. */
-const outOfFlowResizeRuntime = (has: boolean, hasCapturedGeometry = false): string =>
+const outOfFlowResizeRuntime = (has: boolean, hasCapturedGeometry = false, hasIntrinsicAbsolute = false): string =>
   has
     ? `
 const outOfFlowBuiltChildren = new WeakMap();
@@ -8690,7 +8853,7 @@ function resizeOutOfFlow(parent, built) {
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
-      ${hasCapturedGeometry ? `if (childSpec.capturedAbsoluteGeometry) {
+      ${hasIntrinsicAbsolute ? `if (childSpec.intrinsicAbsolute) { applyShapeAbsolute(parent,childNode,childSpec); } else ` : ''}${hasCapturedGeometry ? `if (childSpec.capturedAbsoluteGeometry) {
         applyCapturedAbsolute(parent,childNode,childSpec);
       } else ` : ''}if (childSpec.insetOverlay) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
@@ -9341,8 +9504,12 @@ function buildSyncScript(
   ) || authoredTextScalars.some(s=>s.fontFamily!==undefined||s.letterSpacing!==undefined||s.textCase!==undefined||s.textDecoration!==undefined);
 
   const hasAuthoredTextAppearance=featureDatas.some(d=>dataSome(d,s=>!!s.authoredTextAppearance||!!s.instanceAuthoredTextAppearance||!!s.slotDefault?.some(item=>item.instanceAuthoredTextAppearance)));
-  const hasTextAppearanceWriter=featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances||!!s.slotDefault?.some(item=>item.instanceTextAppearances)));
-  const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter;
+  const hasSlotDefaultTextSizes=featureDatas.some(d=>dataSome(d,s=>!!s.slotDefault?.some(item=>item.instanceTextSizes)));
+  const hasIntrinsicAbsolute=featureDatas.some(d=>dataSome(d,s=>!!s.intrinsicAbsolute));
+  const hasIntrinsicPlacement=featureDatas.some(d=>dataSome(d,s=>!!s.intrinsicPlacementTarget||!!s.instanceIntrinsicPlacements||!!s.slotDefault?.some(item=>item.instanceIntrinsicPlacements)));
+  const hasScalarTextSize=hasSlotDefaultTextSizes||featureDatas.some(d=>dataSome(d,s=>!!s.textSizeTarget||!!s.instanceTextSizes));
+  const hasTextAppearanceWriter=hasScalarTextSize||featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances||!!s.slotDefault?.some(item=>item.instanceTextAppearances)));
+  const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
   if(hasAuthoredTextAppearance&&opts.nativeSource){
     const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
       const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
@@ -9508,6 +9675,8 @@ ${opts.nativeSource ? `    if ((spec.nativeContractPart || spec.nativeWeightBind
 }
 ${NATIVE_AUTHORED_TEXT_APPEARANCE_FUNCTIONS}`:'';
   const finalTextAppearanceRuntime=hasFinalTextAppearances?`
+${hasIntrinsicPlacement?NATIVE_INTRINSIC_PLACEMENT_RUNTIME:''}
+${hasScalarTextSize?NATIVE_SCALAR_TEXT_SIZE_FUNCTION:''}
 ${!hasAuthoredTextAppearance?`async function replayExplicitFinalTextAppearance(node,spec) {
 ${NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME.slice(NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME.indexOf('  if(spec.instanceTextAppearances)'))}
 }`:''}
@@ -9515,9 +9684,11 @@ async function replayFinalTextAppearances(registry) {
  const records=registry.finalTextAppearances||[];
  ${hasAuthoredTextAppearance?`await preflightAuthoredText(records.filter(record=>record.node.type==='TEXT').map(({node,spec})=>({target:node,appearance:spec.authoredTextAppearance,scalar:spec.authoredTextScalar})));`:''}
  for(const {node,spec} of records){
+  ${hasScalarTextSize?'await applyInstanceTextSizes(node,spec);':''}
   if(node.removed)throw Error('text-appearance-final-target-removed');
   ${hasAuthoredTextAppearance?`if(node.type==='TEXT')await applyAuthoredTextPlan(node,spec.authoredTextAppearance,spec.authoredTextScalar,spec.authoredTextAppearanceTarget);
   else {await applyInstanceAuthoredText(node,spec);await replayExplicitAuthoredTextAppearance(node,spec);}`:`await replayExplicitFinalTextAppearance(node,spec);`}
+  ${hasIntrinsicPlacement?'if(spec.instanceIntrinsicPlacements)reflowInstanceIntrinsicPlacements(node,spec);':''}
  }
 }
 ` : '';
@@ -10040,7 +10211,7 @@ function dsDeclaredClipStops(n) {
 function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // Seed an empty synthetic carrier below Figma's 100px birth box. The
   // declared track and parent sizing writes below determine its final size.
-  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}
+  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}${hasIntrinsicPlacement ? "\n  if(spec.intrinsicPlacementTarget)node.setSharedPluginData('ds_contracts','intrinsicPlacement',spec.intrinsicPlacementTarget);" : ''}
   const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
@@ -10225,7 +10396,7 @@ function applyNativeLine(parent, node, spec) {
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry, hasIntrinsicAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
@@ -10271,7 +10442,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
@@ -10379,8 +10550,8 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       );
       const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
       const inst = main.createInstance();${opts.nativeGraphVerification === 2 ? '\n      nativeInit(inst, {type: \'instance\', nativeContractPart:item.nativeContractPart});' : ''}
-      if (item.props) setInstanceProps(inst, item.props, target);${hasAuthoredTextAppearance ? "\n      if(item.authoredTextInstanceTarget)inst.setSharedPluginData('ds_contracts','authoredTextInstance',item.authoredTextInstanceTarget);\n      await applyInstanceAuthoredText(inst,item);\n      if(item.instanceAuthoredTextAppearance)await replayExplicitAuthoredTextAppearance(inst,item);" : ''}${hasFinalTextAppearances ? '\n      if(item.instanceAuthoredTextAppearance||item.instanceTextAppearances)(registry.finalTextAppearances||=[]).push({node:inst,spec:item});' : ''}
-      node.appendChild(inst);
+      if (item.props) setInstanceProps(inst, item.props, target);${hasAuthoredTextAppearance ? "\n      if(item.authoredTextInstanceTarget)inst.setSharedPluginData('ds_contracts','authoredTextInstance',item.authoredTextInstanceTarget);\n      await applyInstanceAuthoredText(inst,item);\n      if(item.instanceAuthoredTextAppearance)await replayExplicitAuthoredTextAppearance(inst,item);" : ''}${hasFinalTextAppearances ? '\n      if(item.instanceAuthoredTextAppearance||item.instanceTextAppearances'+(hasSlotDefaultTextSizes?'||item.instanceTextSizes':'')+(hasIntrinsicPlacement?'||item.instanceIntrinsicPlacements':'')+')(registry.finalTextAppearances||=[]).push({node:inst,spec:item});' : ''}
+${hasSlotDefaultTextSizes?'      await applyInstanceTextSizes(inst,item);\n':''}      node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
         try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
@@ -10423,7 +10594,8 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     node.setBoundVariable('strokeWeight',need(spec.instanceRootStroke.width));
   }
 ` : ''}${hasInstanceRootFill ? `  if(spec.instanceRootFill)node.fills=[boundPaint(spec.instanceRootFill.varName,node)];
-` : ''}${hasTextAppearanceWriter ? (hasAuthoredTextAppearance?NATIVE_AUTHORED_TEXT_OVERRIDE_RUNTIME.replace('if(spec.textAppearanceTarget)','if(spec.textAppearanceTarget&&(!spec.authoredTextAppearance||node.type===\'TEXT\'))'):NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME) : ''}${hasFinalTextAppearances ? "  if(node.type==='INSTANCE'&&(spec.instanceAuthoredTextAppearance||spec.instanceTextAppearances))(registry.finalTextAppearances||=[]).push({node,spec});\n" : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.imageTarget||!!s.instanceImages)) ? NATIVE_IMAGE_CONTROL_RUNTIME : ''}${hasVisibilityOverrides ? `  if(spec.textColorTarget)node.setSharedPluginData('ds_contracts','textColorOverride',spec.textColorTarget);
+` : ''}${hasScalarTextSize ? `  await applyInstanceTextSizes(node,spec);
+` : ''}${hasTextAppearanceWriter ? (hasAuthoredTextAppearance?NATIVE_AUTHORED_TEXT_OVERRIDE_RUNTIME.replace('if(spec.textAppearanceTarget)','if(spec.textAppearanceTarget&&(!spec.authoredTextAppearance||node.type===\'TEXT\'))'):NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME) : ''}${hasFinalTextAppearances ? "  if(node.type==='INSTANCE'&&(spec.instanceAuthoredTextAppearance||spec.instanceTextAppearances||spec.instanceTextSizes||spec.instanceIntrinsicPlacements))(registry.finalTextAppearances||=[]).push({node,spec});\n" : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.imageTarget||!!s.instanceImages)) ? NATIVE_IMAGE_CONTROL_RUNTIME : ''}${hasVisibilityOverrides ? `  if(spec.textColorTarget)node.setSharedPluginData('ds_contracts','textColorOverride',spec.textColorTarget);
   if(spec.shapeFillTarget)node.setSharedPluginData('ds_contracts','shapeFillOverride',spec.shapeFillTarget);
   if(spec.instanceShapeFills){
     const previousSkip=figma.skipInvisibleInstanceChildren;figma.skipInvisibleInstanceChildren=false;
@@ -10534,10 +10706,21 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-${hasFillH ? `\n    if (child.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+${hasFillH ? `\n    if (child.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {${featureDatas.some(d=>dataSome(d,s=>s.instanceCallerFillWidth===true)) ? `
+      if (child.instanceCallerFillWidth) {
+        // Native FILL clears a width binding. Make that ownership explicit;
+        // readback requires FILL, no width binding, and the same allocation.
+        childNode.setBoundVariable('width', null);
+      }` : ''}
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasNativeAspectRatio ? '\n  applyNativeAspectRatio(node, spec);' : ''}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${featureDatas.some(d=>dataSome(d,s=>s.instanceCallerFillWidth===true)) ? `
+  if (spec.type === 'slot') {
+    const caller = (spec.children || []).find(child => child.instanceCallerFillWidth);
+    // A zero-born SLOT retains zero even after native FILL. Initialize only
+    // the proved allocation, after the HUG birth-box pass can zero its width.
+    if (caller) node.resizeWithoutConstraints(caller.instanceRootOverrides.width.px, node.height);
+  }` : ''}${hasNativeAspectRatio ? '\n  applyNativeAspectRatio(node, spec);' : ''}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -10607,8 +10790,8 @@ ${hasJointPropertyReferences ? `function hasJointPropertyReferences(spec) {
     (spec.children || []).some(hasJointPropertyReferences);
 }
 ` : ''}${hasFinalTextAppearances ? `function hasTextAppearanceFinalization(spec) {
-  return Boolean(spec.authoredTextAppearance||spec.instanceAuthoredTextAppearance||spec.textAppearanceTarget||spec.instanceTextAppearances)||
-    (spec.slotDefault||[]).some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances)||(spec.children||[]).some(hasTextAppearanceFinalization);
+  return Boolean(spec.authoredTextAppearance||spec.instanceAuthoredTextAppearance||spec.textAppearanceTarget||spec.instanceTextAppearances||spec.textSizeTarget||spec.instanceTextSizes||spec.instanceIntrinsicPlacements)||
+    (spec.slotDefault||[]).some(item=>item.instanceAuthoredTextAppearance||item.instanceTextAppearances${hasSlotDefaultTextSizes?'||item.instanceTextSizes':''}${hasIntrinsicPlacement?'||item.instanceIntrinsicPlacements':''})||(spec.children||[]).some(hasTextAppearanceFinalization);
 }
 ` : ''}function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV${hasJointPropertyReferences ? ` +
