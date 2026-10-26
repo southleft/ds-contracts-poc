@@ -1414,6 +1414,47 @@ function dumpNativeContainerPlane(node) {
     containerAbsoluteTransform: matrix(container.absoluteTransform),
     ...(node.constraints !== undefined ? { constraints: { ...node.constraints } } : {}) };
 }
+// BEGIN SHARED FILL STACK OBSERVATION
+function cloneFillStackValue(value) {
+  if (Array.isArray(value)) return Array.from(value, cloneFillStackValue);
+  if (value && typeof value === 'object')
+    return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, cloneFillStackValue(child)]));
+  return value;
+}
+function observeFillStack(input, transport = 'native') {
+  if (!Array.isArray(input)) return undefined;
+  const paints = Array.from(input, (raw, index) => {
+    let paint = cloneFillStackValue(raw);
+    if (transport === 'rest' && paint && typeof paint === 'object' && !Array.isArray(paint) &&
+        Object.hasOwn(paint, 'imageRef') && !Object.hasOwn(paint, 'imageHash')) {
+      paint = Object.fromEntries(Object.entries(paint).map(([key, value]) => [key === 'imageRef' ? 'imageHash' : key, value]));
+    }
+    return { index, paint };
+  });
+  return { version: 1, order: 'bottom-to-top', complete: true, paints };
+}
+function fillStackVariableIds(stack) {
+  const ids = new Set();
+  const bindings = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (!Array.isArray(value)) {
+      const alias = value;
+      if (alias.type === 'VARIABLE_ALIAS' && typeof alias.id === 'string' && alias.id) ids.add(alias.id);
+    }
+    for (const child of Object.values(value)) bindings(child);
+  };
+  const visit = (value) => {
+    if (!value || typeof value !== 'object') return;
+    for (const [key, child] of Object.entries(value)) {
+      if (key === 'boundVariables') bindings(child);
+      else visit(child);
+    }
+  };
+  for (const { paint } of stack.paints) visit(paint);
+  return [...ids];
+}
+// END SHARED FILL STACK OBSERVATION
+
 // Capture every visible IMAGE paint at its original stack index. CROP/FIT/TILE
 // facts are not FILL/cover; no image bytes or CSS equivalence are implied.
 function dumpNativeImagePaints(node) {
@@ -1459,6 +1500,18 @@ async function captureNativeImageAsset(hash) {
   nativeImageAssetPromises.set(hash, pending);
   return pending;
 }
+// A complete source stack is evidence only. Preserve hidden layers and ask the
+// same variable/image readers used by visible paints for each observed identity.
+async function captureSourceFillStack(node) {
+  const stack = observeFillStack('fills' in node ? node.fills : undefined);
+  if (!stack) return;
+  for (const id of fillStackVariableIds(stack)) await varNameById(id, node);
+  for (const {paint} of stack.paints) {
+    if (paint && typeof paint === 'object' && paint.type === 'IMAGE')
+      await captureNativeImageAsset(paint.imageHash);
+  }
+  return stack;
+}
 // --- NATIVE GROUP AND IMAGE FACTS (end) ------------------------------------
 
 function observeRectStrokePattern(node, pattern) {
@@ -1501,6 +1554,11 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
     out.imagePaints = imagePaints;
     for (const paint of imagePaints) await captureNativeImageAsset(paint.imageHash);
   }
+  const sourceStrokeStack = observeFillStack('strokes' in node ? node.strokes : undefined);
+  if (sourceStrokeStack) out.sourceStrokeStack = sourceStrokeStack;
+  if (Array.isArray(node.dashPattern)) out.sourceStrokePattern = {version:1,complete:true,dashes:Array.from(node.dashPattern)};
+  const sourceFillStack = await captureSourceFillStack(node);
+  if (sourceFillStack) out.sourceFillStack = sourceFillStack;
   if (node.isMask === true) out.mask = typeof node.maskType === 'string'
     ? { type: node.maskType, ...(dumpInsideMaskStroke(node) ? {stroke:dumpInsideMaskStroke(node)} : {}) } : {};
   const selectionIdentity = node.getSharedPluginData('ds_contracts', 'selectionIdentity');
@@ -2411,6 +2469,8 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
             } catch (_) { degrade('host-override-visibility-target-unavailable', nodePath, 'the overridden visibility owner identity could not be read'); }
           }
           if (h.fields.indexOf('fills') >= 0 && 'fills' in n && Array.isArray(n.fills)) {
+            const sourceFillStack = await captureSourceFillStack(n);
+            if (sourceFillStack) h.sourceFillStack = sourceFillStack;
             if (n.fills.length === 0) {
               const target = await dumpSolidFillTarget(node,n,'shape-fill');
               if (target) { h.shapeFillTarget = target; h.sourceEmptyFill = true; }
@@ -2744,7 +2804,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.81',
+    dumpVersion: '1.83',
   },
 };
 dumps._degradations = degradations;

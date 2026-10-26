@@ -1,6 +1,7 @@
+import {revisionOf} from './contract-provenance.js';
 import {scalarTextSizeInput} from '@ds-contracts/schema';
 import {affineInstanceComposition} from './instance-affine-composition.js';
-import {solidFillPartBindingPlan} from './solid-fill-binding-tokens.js';
+import {solidFillPartBindingPlan,solidFillPartTokenError} from './solid-fill-binding-tokens.js';
 import {textStateTarget} from './text-state-target.js';
 import {resolveLayout} from '@ds-contracts/schema';
 import {instanceInsideStrokeChildIssue} from './instance-inside-stroke.js';
@@ -16,6 +17,7 @@ import {solidFillCompositionRules} from './css.js';
  * Pure; imports @ds-contracts/schema only.
  */
 import {
+  ContractSchema,
   PropSchema,
   TextArgumentTableSchema,
   absentVariantAxes,
@@ -184,6 +186,15 @@ export function validateContract(
   surface?: { drawnVariants: 'react-runtime' | 'figma-domain' },
   tokenValues?: unknown,
 ) {
+  if(walkAnatomy(contract).some(({part})=>part.fillStack||part.fillStackByCombination)){const parsed=ContractSchema.safeParse(contract);if(!parsed.success)errors.push(contract.id+': fill-stack-schema:'+parsed.error.message);}
+  for(const {part} of walkAnatomy(contract))if(part.fillStack||part.fillStackByCombination){
+   for(const stack of part.fillStack?[part.fillStack]:(part.fillStackByCombination?.rows.map(r=>r.stack)??[]))for(const paint of stack.paints)if(paint.type==='SOLID'&&paint.token&&paint.sourceBinding){
+    const error=solidFillPartTokenError({solidFillComposition:{color:{r:paint.color.r,g:paint.color.g,b:paint.color.b},opacity:paint.opacity,blendMode:paint.blendMode},solidFillCompositionToken:paint.token,solidFillCompositionSourceBinding:[paint.sourceBinding]},tokenValues);if(error)errors.push(contract.id+': '+error);
+   }
+   if(part.component){const child=byId.get(part.component.id),proof=part.fillStackSource;
+    if(!child?.anatomy.root||!proof||proof.fileKey!==contract.bindings.figma.anchors.fileKey||proof.fileKey!==child.bindings.figma.anchors.fileKey||proof.setKey!==child.bindings.figma.anchors.componentSetKey||proof.contractRevision!==revisionOf(child))errors.push(contract.id+': fill-stack-reference-owner-unqualified');
+   }
+  }
   try { solidFillCompositionRules(contract,undefined,undefined,byId,false,tokenValues); } catch (error) { errors.push(`${contract.id}: ${error instanceof Error ? error.message : String(error)}`); }
   try { childPaintOrderPlans(contract,byId); } catch(error) { errors.push(`${contract.id}: ${error instanceof Error?error.message:String(error)}`); }
   errors.push(...jointTokenTableErrors(contract));
@@ -341,7 +352,7 @@ export function validateContract(
         // The component-grow check below independently qualifies that same root.
       }
       const stroke = part.component.rootOverrides;
-      if (!!stroke?.['outline-color'] !== !!stroke?.['outline-width'])
+      if (!!stroke?.['outline-color'] !== !!stroke?.['outline-width'] || !!stroke?.['border-color'] !== !!stroke?.['border-width'] || stroke?.['outline-color'] && stroke?.['border-color'])
         errors.push(`${contract.id}: instance-root-stroke requires both color and width`);
       for (const channel of Object.keys(part.component.rootOverrides ?? {})) {
         if (dep && !dep.anatomy.root?.instanceRootInputs?.includes(channel as never))
@@ -374,12 +385,13 @@ export function validateContract(
       }
     }
     if (part.instanceRootInputs) {
-      if(part.instanceRootInputs.some(channel=>channel.startsWith('outline-'))) {
+      if(part.instanceRootInputs.some(channel=>channel.startsWith('outline-')||channel==='border-color'||channel==='border-width')) {
         const maps=[part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{}),
           ...(part.statesByProp??[]).flatMap(e=>Object.values(e.map)),...tokensByPropEntries(part).flatMap(e=>Object.values(e.map)),
           ...(part.tokensByCombination??[]).flatMap(e=>e.rows.map(r=>r.tokens)),...(part.literalsByProp??[]).flatMap(e=>Object.values(e.map)),
           ...literalsByCombinationRecords(part),...(part.stylesWhen??[]).map(e=>e.styles)];
-        if(!part.instanceRootInputs.includes('outline-color')||!part.instanceRootInputs.includes('outline-width')||
+        const inside=part.instanceRootInputs.includes('border-color')||part.instanceRootInputs.includes('border-width');
+        if(!(inside ? part.instanceRootInputs.includes('border-color')&&part.instanceRootInputs.includes('border-width')&&!part.instanceRootInputs.some(c=>c.startsWith('outline-')) : part.instanceRootInputs.includes('outline-color')&&part.instanceRootInputs.includes('outline-width'))||
            part.shape||part.icon||part.text!==undefined||part.content||part.slot||part.repeat||part.meter||
            maps.some(map=>map&&Object.keys(map).some(k=>k.startsWith('outline')||k.startsWith('border')&&!k.includes('radius'))))
           errors.push(`${contract.id}: instance-root-stroke requires an unstroked container root and paired inputs`);

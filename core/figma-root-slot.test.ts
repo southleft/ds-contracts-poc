@@ -15,10 +15,45 @@ import {proposeFromDump} from './propose-figma.js';
 import {flattenTokens} from './tokens.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {validateContract} from '../packages/core/src/validate.js';
+import {readRootContent} from './figma-root-content.js';
 
 import {primitives,tokens,rootSlotSeed as seed} from './figma-root-slot.fixture.js';
 const engine=createFigmaEngine({tokens,icons:new Map()});
 const compile=(c:Contract)=>engine.compileComponentData(c,new Map([[c.id,c]]));
+
+test('neutral root carriers require complete empty paint and stroke observations',async()=>{
+ for(const display of ['flex','grid'] as const){
+  const c=seed();
+  if(display==='grid')c.anatomy.root.layout={display:'grid',columns:[{fr:1}],rows:[{fit:true}],flow:'row'};
+  else c.anatomy.root.literals={};
+  const {figma,root}=createFigmaMock({consumerVariableModes:true});
+  const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
+  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(c,new Map([[c.id,c]])));
+  const comp=root.findOne((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id)!;
+  const source=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
+  const dump=JSON.parse(JSON.stringify((await run(source))[comp.name])) as DumpSet;
+  assert.ok(readRootContent(dump));
+  const targets=display==='grid'?[0,1]:[0];
+  const target=(d:any,depth:number)=>depth?d.variants[0].children[0].children[0]:d.variants[0].children[0];
+  for(const depth of targets){
+   const legacy=structuredClone(dump);for(const field of ['sourceFillStack','sourceStrokeStack','sourceStrokePattern'])delete target(legacy,depth)[field];
+   assert.ok(readRootContent(legacy));
+   for(const field of ['sourceFillStack','sourceStrokeStack'])for(const value of [
+    null,{version:1,order:'bottom-to-top',complete:false,paints:[]},
+    {version:1,order:'top-to-bottom',complete:true,paints:[]},
+    {version:1,order:'bottom-to-top',complete:true,paints:[],unknown:true},
+    {version:1,order:'bottom-to-top',complete:true,paints:[{index:0,paint:{type:'SOLID',visible:false}}]},
+    {version:1,order:'bottom-to-top',complete:true,paints:[{index:0,paint:{type:'IMAGE',opacity:0}}]},
+    {version:1,order:'bottom-to-top',complete:true,paints:{}},
+   ]){const altered=structuredClone(dump);target(altered,depth)[field]=value;assert.throws(()=>readRootContent(altered),/FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED/);}
+   for(const value of [null,{version:1,complete:false,dashes:[]},{version:1,complete:true,dashes:[1]},
+    {version:1,complete:true,dashes:[],defaulted:false},{version:1,complete:true,dashes:[],unknown:true}]){
+    const altered=structuredClone(dump);target(altered,depth).sourceStrokePattern=value;assert.throws(()=>readRootContent(altered),/FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED/);
+   }
+  }
+ }
+});
 
 test('an explicit nested slot host styles its own wrapper on both React surfaces and native SLOT',async()=>{
  const c=seed();delete c.anatomy.root.slot;

@@ -6,6 +6,8 @@
 
 Use macOS or Linux, npm and Node 20.19+ on the 20.x line or 22.12+. You need the supplied CLI archive, a Figma component-set URL you can read, authentic local fonts, and **FIGMA_TOKEN** set privately in your environment with File content: read access. npm/Figma network access is required. npm's `latest` 0.4.0 and `next` 0.5.0-rc.1 do not supply this candidate's command; install the supplied 0.5.0-rc.3 archive.
 
+A connected Figma Desktop Bridge does not authenticate the CLI's REST requests. If URL import reports `403` with `Invalid token`, replace the personal access token in `FIGMA_TOKEN`; reopening the bridge will not renew it. If you also use Figma Console MCP, update its separate `FIGMA_ACCESS_TOKEN` configuration. Keep both values out of source control and shared reports.
+
 Start in an empty directory. Replace these three input paths/values; keep the URL's `node-id` from Figma's **Copy link to selection**.
 
 ```bash

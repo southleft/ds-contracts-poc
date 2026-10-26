@@ -1,3 +1,5 @@
+import {compileNativeFillStack,NATIVE_FILL_STACK_RUNTIME,type NativeFillStack} from './native-fill-stack.js';
+import {resolveFillStack} from '../packages/schema/src/fill-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
 import {nativeTextSizeTarget,mapNativeTextSizes,NATIVE_SCALAR_TEXT_SIZE_FUNCTION,type NativeTextSize} from './native-scalar-text-size.js';
@@ -214,7 +216,8 @@ export interface NodeSpec {
    * proved parent Fill allocation; independently checked on readback. */
   instanceCallerFillWidth?: true;
   instanceRootFill?: {varName:string};
-  instanceRootStroke?: {color:string;width:string;px:number};
+  instanceRootStroke?: {color:string;width:string;px:number;align?:'INSIDE';paint?:{r:number;g:number;b:number;a?:number}};
+  instanceRootStrokeInput?: 'INSIDE';
   instanceInk?: { varName: string; writeProtocol: 'attached-v1'; paintKind?: 'stroke' };
   instanceStrokeWeight?: { px: number; varName: string };
   instanceInsideStroke?: NonNullable<NonNullable<Part['component']>['sameInkInsideStroke']>['rows'][number]['stroke'];
@@ -396,6 +399,7 @@ export interface NodeSpec {
    *  named description limit by compileComponentData and STRIPPED before the
    *  spec JSON is emitted — never a silent drop, never emitted noise. */
   gradientMiss?: string;
+  fillStack?: NativeFillStack;
   imagePaint?: NativeImageFill;
   /** Compile-only full original data URL, finalized after declared sizing. */
   imageCandidate?: string;
@@ -5086,6 +5090,7 @@ function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, 
 }
 
 function applyInstanceRootInputs(spec: NodeSpec, name: string, part: Part, dep: Contract, contract: Contract, subst: Record<string, string>): void {
+    if(dep.anatomy.root.instanceRootInputs?.includes('border-color')&&dep.anatomy.root.instanceRootInputs.includes('border-width'))spec.instanceRootStrokeInput='INSIDE';
     for(const [channel,ref] of Object.entries(part.component!.rootOverrides??{})) {
       if(!dep.anatomy.root.instanceRootInputs?.includes(channel as never))throw Error(`instance-root-input-undeclared:${name}:${channel}`);
       const tokenPath=ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>{
@@ -5102,6 +5107,12 @@ function applyInstanceRootInputs(spec: NodeSpec, name: string, part: Part, dep: 
         if(channel==='outline-color')instanceRootColor(value);
         const stroke=(spec.instanceRootStroke??={color:'',width:'',px:0});
         if(channel==='outline-color')stroke.color=tokenPath.replaceAll('.','/');
+        else {stroke.width=tokenPath.replaceAll('.','/');stroke.px=instanceRootValue(channel,value);}
+        continue;
+      }
+      if(channel==='border-color'||channel==='border-width') {
+        const stroke=(spec.instanceRootStroke??={color:'',width:'',px:0,align:'INSIDE'});
+        if(channel==='border-color') {instanceRootColor(value);const paint=parseCssColor(String(value));if(!paint)throw Error('instance-inside-stroke-color-unqualified');stroke.paint=paint;stroke.color=tokenPath.replaceAll('.','/');}
         else {stroke.width=tokenPath.replaceAll('.','/');stroke.px=instanceRootValue(channel,value);}
         continue;
       }
@@ -5334,6 +5345,13 @@ function partToSpec(
   // requires an auto-layout parent).
   if (part.overlay) spec.overlay = part.overlay;
   applyStylesWhenOpacity(spec, part, contract, subst);
+  const stack=resolveFillStack(part,subst);
+  if(stack){
+   if(part.component){const child=byId.get(part.component.id),proof=part.fillStackSource;
+    if(!child?.anatomy.root||!proof||proof.fileKey!==contract.bindings.figma.anchors.fileKey||proof.fileKey!==child.bindings.figma.anchors.fileKey||proof.setKey!==child.bindings.figma.anchors.componentSetKey||proof.contractRevision!==revisionOf(child))throw Error('fill-stack-reference-owner-unqualified');
+   }
+   spec.fillStack=compileNativeFillStack(stack,path=>parseCssColor(String(resolveLiteral(path))));
+  }
   const resolvedPaint=resolveSolidFillComposition(part,subst);
   if (resolvedPaint) spec.solidFillComposition=solidFillCompositionPaint(resolvedPaint);
   const selectedPaintToken=resolveSolidFillToken(part,subst);
@@ -6765,6 +6783,8 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
       name: nameParts.join(', ') || contract.name,
       layout: layoutSpec(root, true, subst),
     };
+    const rootStack=resolveFillStack(root,subst);
+    if(rootStack)rootSpec.fillStack=compileNativeFillStack(rootStack,path=>parseCssColor(String(resolveLiteral(path))));
     const resolvedRootPaint=resolveSolidFillComposition(root,subst);
     if (resolvedRootPaint) rootSpec.solidFillComposition=solidFillCompositionPaint(resolvedRootPaint);
     const selectedRootPaintToken=resolveSolidFillToken(root,subst);
@@ -9029,7 +9049,7 @@ function buildComponentScript(
   const refereeErrors: string[] = [];
   const validationContract=draftPaint?structuredClone(contract):contract;
   if(draftPaint)for(const {part} of walkAnatomy(validationContract)){delete part.solidFillComposition;delete part.solidFillCompositionByCombination;delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
-  validateContract(validationContract, byId, refereeErrors, input.icons, { drawnVariants: 'figma-domain' });
+  validateContract(validationContract, byId, refereeErrors, input.icons, { drawnVariants: 'figma-domain' },input.tokens);
   refereeErrors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
   refereeErrors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (refereeErrors.length > 0) {
@@ -9143,7 +9163,7 @@ function compileNativeContractDraft(
   source: NativeContractDraftSource,
 ) {
   const errors: string[] = [];
-  validateContract(contract, byId, errors, input.icons);
+  validateContract(contract, byId, errors, input.icons,undefined,input.tokens);
   errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
   errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (errors.length) throw Error('NATIVE_CONTRACT_DRAFT_INVALID: ' + errors.join('; '));
@@ -9313,7 +9333,7 @@ function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contra
   const compiled = ordered.map(contract => {
     const validation=permit===boundPaintPermit?structuredClone(contract):contract;
     if(permit===boundPaintPermit)for(const {part}of walkAnatomy(validation)){delete part.solidFillCompositionSourceBinding;delete part.solidFillCompositionToken;}
-    const errors:string[]=[]; validateContract(validation, byId, errors, input.icons, { drawnVariants: 'figma-domain' });
+    const errors:string[]=[]; validateContract(validation, byId, errors, input.icons, { drawnVariants: 'figma-domain' },input.tokens);
   errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
   errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
     if (errors.length) throw Error('NATIVE_PREPARED_LIBRARY_INVALID: ' + errors.join('; '));
@@ -9345,7 +9365,7 @@ function buildNativePreparedLibraryScript(parent: Contract, byId: Map<string, Co
 function buildNativeContractComparisonScript(contract: Contract, byId: Map<string, Contract>,
   source: NativeContractDraftSource, context: NativeSourceWriteContext, comparison: NativeContractComparisonInput): string {
   const errors: string[] = [];
-  validateContract(contract, byId, errors, input.icons);
+  validateContract(contract, byId, errors, input.icons,undefined,input.tokens);
   errors.push(...instanceAffineTokenErrors(contract,byId,input.tokens));
   errors.push(...instanceInsideStrokeTokenErrors(contract,byId,input.tokens));
   if (errors.length) throw Error('NATIVE_CONTRACT_COMPARISON_INVALID: ' + errors.join('; '));
@@ -9393,6 +9413,12 @@ function buildSyncScript(
     for(const item of s.slotDefault??[])if(item.instanceAuthoredTextRecipes)collectAuthoredScalars(item.instanceAuthoredTextRecipes);
     return false;
   });
+  const hasFillStack=featureDatas.some(d=>dataSome(d,s=>s.fillStack!==undefined));
+  const fillStackImages:string[]=[];
+  if(hasFillStack)for(const d of featureDatas)dataSome(d,s=>{for(const p of s.fillStack?.paints??[])if(p.type==='IMAGE'&&!fillStackImages.includes(p.base64))fillStackImages.push(p.base64);return false;});
+  let componentSource=JSON.stringify(datas,null,2);
+  if(hasFillStack)for(const [i,bytes]of fillStackImages.entries())componentSource=componentSource.split(JSON.stringify(bytes)).join(`FILL_STACK_IMAGES[${i}]`);
+  const fillStackAssetSource=hasFillStack?`const FILL_STACK_IMAGES = ${JSON.stringify(fillStackImages)};\n`:'';
   const hasSolidFillComposition = featureDatas.some(d=>dataSome(d,s=>s.solidFillComposition!==undefined));
   const hasBoundSolidFill=featureDatas.some(d=>dataSome(d,s=>s.solidFillCompositionToken!==undefined));
   const hasInstanceRootFill = featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootFill));
@@ -9697,8 +9723,8 @@ async function replayFinalTextAppearances(registry) {
 }
 ` : '';
   return `${opts.header}
-const COMPONENTS = ${JSON.stringify(datas, null, 2)};${opts.propertyAmends ? '\nconst INSTANCE_PROPERTY_AMENDS = '+JSON.stringify(opts.propertyAmends)+';\n'+INSTANCE_PROPERTY_AMEND_RUNTIME : ''}
-const ROW_H = 240, PAD = 40;${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
+${fillStackAssetSource}const COMPONENTS = ${componentSource};${opts.propertyAmends ? '\nconst INSTANCE_PROPERTY_AMENDS = '+JSON.stringify(opts.propertyAmends)+';\n'+INSTANCE_PROPERTY_AMEND_RUNTIME : ''}
+const ROW_H = 240, PAD = 40;${hasFillStack ? '\n'+NATIVE_FILL_STACK_RUNTIME : ''}${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
 
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
@@ -10593,9 +10619,16 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
   // in native Figma. Frames carrying such instances must also be built in place.
   if (parent && !spec.callerSlotProperty) parent.appendChild(node);
 ` : ''}${featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootStroke)) ? `  if(spec.instanceRootStroke) {
-    node.strokes=[boundPaint(spec.instanceRootStroke.color,node)];
-    node.strokeAlign='OUTSIDE';node.strokeWeight=spec.instanceRootStroke.px;
-    node.setBoundVariable('strokeWeight',need(spec.instanceRootStroke.width));
+    if(spec.instanceRootStroke.align==='INSIDE') {
+      const paint=spec.instanceRootStroke.paint;if(!paint)throw new Error('instance-inside-stroke-color-unqualified');
+      node.strokes=[{type:'SOLID',blendMode:'NORMAL',color:{r:paint.r,g:paint.g,b:paint.b},opacity:paint.a===undefined?1:paint.a}];
+      node.strokeAlign='INSIDE';node.strokeWeight=spec.instanceRootStroke.px;node.strokesIncludedInLayout=false;node.dashPattern=[];
+      for(const field of ['strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'])node.setBoundVariable(field,null);
+    } else {
+      node.strokes=[boundPaint(spec.instanceRootStroke.color,node)];
+      node.strokeAlign='OUTSIDE';node.strokeWeight=spec.instanceRootStroke.px;
+      node.setBoundVariable('strokeWeight',need(spec.instanceRootStroke.width));
+    }
   }
 ` : ''}${hasInstanceRootFill ? `  if(spec.instanceRootFill)node.fills=[boundPaint(spec.instanceRootFill.varName,node)];
 ` : ''}${hasScalarTextSize ? `  await applyInstanceTextSizes(node,spec);
@@ -10670,7 +10703,7 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     // authenticates them through this owned instance and its owned main.` : ''}
     // The dependency already owns its layout and private descendants. Do not
     // position the inherited slot as a new direct child of this instance.
-    return node;
+${hasFillStack ? `    applyFillStack(node,spec,token=>need(token.split('.').join('/')));\n` : ''}    return node;
   }
 ` : ''}  const built = [];
   for (const child of spec.children || []) {
@@ -10751,7 +10784,7 @@ ${hasSlotTextTemplate ? `  if (spec.type === 'slot' && spec.children?.some(child
     if ((spec.visibleProp || spec.callerSlotVisibleProp) && !populated) throw Error('SLOT_COLLAPSE_LIVE_CONTENT_EMPTY:' + spec.name);
     if (!spec.callerSlotVisibleProp) node.visible = populated;
   }
-` : ''}${hasBoundSolidFill ? `  if(spec.solidFillCompositionToken)applyBoundSolidFillLayer(node,spec,need(spec.solidFillCompositionToken.split('.').join('/'))${opts.nativeSource?',nativeOwn':''});\n` : ''}  return node;
+` : ''}${hasBoundSolidFill ? `  if(spec.solidFillCompositionToken)applyBoundSolidFillLayer(node,spec,need(spec.solidFillCompositionToken.split('.').join('/'))${opts.nativeSource?',nativeOwn':''});\n` : ''}${hasFillStack ? `  applyFillStack(node,spec,token=>need(token.split('.').join('/')));\n` : ''}  return node;
 }
 
 

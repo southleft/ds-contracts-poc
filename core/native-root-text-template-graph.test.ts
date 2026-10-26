@@ -550,6 +550,12 @@ test('graph inverse restores original source references from the complete raw ro
   const sourceInk = h.variables.find(v => v.name === 'ink/v1')!;
   sourceInk.setValueForMode(Object.keys(sourceInk.valuesByMode)[0], { r: 1, g: 0, b: 0, a: 1 });
   const edited = await h.run(captureProgram(h.contract.name));
+  const templateNodes = (value: any) => value[h.contract.name].variants.map((v: any) => v.children[0].children[0]);
+  assert.deepEqual(templateNodes(edited).map((n: any) => n.sourceFillStack), templateNodes(dump).map((n: any) => n.sourceFillStack),
+    'a bound paint retains its literal fallback when its variable changes');
+  assert.ok(templateNodes(edited).some((n: any) => Object.values<any>(n.variableConsumers).some(c =>
+    c.name === n.text.fillVar && c.value.r === 1 && c.value.g === 0 && c.value.b === 0)),
+    'the exact bound consumer observes the changed red value');
   const updated = projectRootTextTemplateAliases(edited[h.contract.name])!;
   assert.equal(updated.tokens.find(t => t.name === 'ink/v1')!.value, '#ff0000');
   assert.deepEqual(edited[h.contract.name].templateVariableGraph.variables.filter((v: any) => v.name.startsWith('dsc-native-template/')),

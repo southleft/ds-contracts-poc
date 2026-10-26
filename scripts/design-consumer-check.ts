@@ -462,7 +462,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), CONSUMER_VITE_CONFIG);
-  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
+  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
@@ -790,6 +790,12 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     try {
       const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 1 });
       const errors: string[] = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+      // Diagnostics only: retain the original runtime errors and verdicts.
+      // Strip query/hash/userinfo so failure logs cannot expose request secrets.
+      page.on('response', response => { if (response.status() >= 400) {
+        const url = new URL(response.url());
+        console.error('[consumer-resource-failure]', response.status(), url.origin + url.pathname);
+      } });
       await page.goto(origin + '/index.html');
       try { await page.waitForSelector('[data-cell]', { timeout: 15000 }); }
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }

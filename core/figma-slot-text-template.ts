@@ -3,6 +3,7 @@ import type { TokenCorpus } from './token-corpus.js';
 import { canonicalJson } from './contract-provenance.js';
 import { px } from './tokens.js';
 import { projectRootTextTemplateAliases } from './figma-template-aliases.js';
+import { sourcePaintEvidenceFields } from './figma-source-paint-evidence.js';
 
 /** Bound typography requires corroborated consuming values. The reserved
  * compiler carrier projection additionally validates every selected edge. */
@@ -10,7 +11,7 @@ export function validateRootTextTemplates(set: DumpSet, corpus: TokenCorpus, cap
   const projection = projectRootTextTemplateAliases(set);
   if (projection) set = projection.set;
   const fail = (why: string): never => { throw Error(`FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED: ${why}`); };
-  const fields = new Set(['name', 'type', 'nodeId', 'hidden', 'text', 'fill', 'variableConsumers']);
+  const fields = new Set(['name', 'type', 'nodeId', 'hidden', 'text', 'fill', 'variableConsumers', ...sourcePaintEvidenceFields]);
   const textFields = new Set(['characters', 'fontSize', 'fontWeight', 'fontStyle', 'fontFamily', 'lineHeight', 'letterSpacing',
     'textAutoResize', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar', 'fillVar', 'textCase', 'textAlign']);
   const byName = new Map<string, string>(), modes = new Map<string, string>();

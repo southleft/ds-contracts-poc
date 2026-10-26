@@ -16,6 +16,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/tailwind/figma/alert.figma.js (amend-capable: reconciles set 1:2098 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.alert --note "re-applied from 968958cd"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:2098` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:2807707271 (grammar 1.73), file version 2405851147168680026
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:4113850498 (grammar 1.71), file version 2405851147168680026
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:4113850498 (grammar 1.70), file version 2405851147168680026
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:4113850498 (grammar 1.66), file version 2405851147168680026
@@ -24,6 +25,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ### `flowbite.toggleswitch`
 
@@ -33,6 +35,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/tailwind/figma/toggle-switch.figma.js (amend-capable: reconciles set 1:2296 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.toggleswitch --note "re-applied from 968958cd"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:2296` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:1465842450 (grammar 1.73), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:599410563 (grammar 1.71), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:599410563 (grammar 1.70), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:599410563 (grammar 1.66), file version 2405851147168680026
@@ -41,6 +44,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ### `mui.slider`
 
@@ -50,6 +54,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `Figma desktop → open file 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/slider.figma.js (amend-capable: reconciles set 21:509 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt mui.slider --note "re-applied from 01aa5243"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `21:509` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:1361682181 (grammar 1.73), file version 2389961688576685812
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2465776599 (grammar 1.71), file version 2389961688576685812
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2465776599 (grammar 1.70), file version 2389961688576685812
   - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2465776599 (grammar 1.66), file version 2389961688576685812
@@ -58,6 +63,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ## Pending restamp — the set lost its v6 stamp; re-run its sync script (Figma write) (1)
 
@@ -69,6 +75,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/altitude/figma/avatar.figma.js (amend-capable: reconciles set 1:10498 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt altitude.avatar --note "restamped 2026-08-23"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:10498` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:944712607 (grammar 1.73), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:1218572680 (grammar 1.71), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:1218572680 (grammar 1.70), file version 2405851147168680026
   - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:1218572680 (grammar 1.66), file version 2405851147168680026
@@ -77,6 +84,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ## Pending reconcile — both halves moved; a human chooses which wins (2)
 
@@ -88,6 +96,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.fab --note "canvas wins: 08-17 review fix kept"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/fab.figma.js (amends set 84:1743 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.fab --note "re-applied from 16889547"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `84:1743` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:559627692 (grammar 1.73), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:2778190974 (grammar 1.71), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:2778190974 (grammar 1.70), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:2778190974 (grammar 1.66), file version 2389961688576685812
@@ -96,6 +105,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ### `mui.link`
 
@@ -105,6 +115,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 - **command**: `CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.link --note "canvas wins: 08-17 review fix kept"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/link.figma.js (amends set 84:1832 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.link --note "re-applied from 16889547"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `84:1832` — not the scratch file; a human runs it
 - **evidence**:
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3275143638 (grammar 1.73), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3629614192 (grammar 1.71), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3629614192 (grammar 1.70), file version 2389961688576685812
   - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:3629614192 (grammar 1.66), file version 2389961688576685812
@@ -113,6 +124,7 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
   - Grammar-only remeasurement 1.65 to 1.66: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.66 to 1.70: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
   - Grammar-only remeasurement 1.70 to 1.71: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
+  - Grammar-only remeasurement 1.71 to 1.73: fresh version-stable GET; old projection, stamp and contract hash reproduced. Original action remains pending; no owner choice, adoption or Figma write.
 
 ## Adopted (53) — canvas taken as the truth, row in-sync by construction
 

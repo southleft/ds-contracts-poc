@@ -1,3 +1,4 @@
+import {nativeFillStackMatches} from './native-fill-stack.js';
 import {nativeLiteralTextBox} from './native-text-box.js';
 import {nativeIntrinsicPlacementMatches,nativeIntrinsicHugBoxMatches} from './native-intrinsic-placement.js';
 import {nativeSlotIdentityRuntime} from './native-slot-identity.js';
@@ -302,7 +303,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
   const extra = observedVariants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
   if (isContractDraft(input) && input.observedLayout) extra.push('nativeObservedLayoutHost','nativeObservedLayoutPart');
-  const hasImageControl=(spec:NodeSpec):boolean=>!!spec.imagePaint||!!spec.imageTarget||!!spec.instanceImages||!!spec.children?.some(hasImageControl);
+  const hasImageControl=(spec:NodeSpec):boolean=>!!spec.fillStack?.paints.some(p=>p.type==='IMAGE')||!!spec.imagePaint||!!spec.imageTarget||!!spec.instanceImages||!!spec.children?.some(hasImageControl);
   if(isContractDraft(input)&&observedVariants.some(v=>hasImageControl(v.spec)))extra.push('imageOverride');
   const hasTextAppearance=(spec:NodeSpec):boolean=>!!spec.textAppearanceTarget||!!spec.instanceTextAppearances||!!spec.children?.some(hasTextAppearance);
   if(isContractDraft(input)&&observedVariants.some(v=>hasTextAppearance(v.spec)))extra.push('textAppearanceOverride');
@@ -314,6 +315,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if(isContractDraft(input)&&observedVariants.some(v=>hasAuthoredTextAppearance(v.spec)))extra.push('authoredTextAppearance','authoredTextInstance');
   const hasTextColor = (spec:NodeSpec):boolean=>!!spec.textColorTarget||!!spec.instanceTextColors||!!spec.children?.some(hasTextColor);
   if(isContractDraft(input)&&observedVariants.some(v=>hasTextColor(v.spec)))extra.push('textColorOverride');
+  const hasShapeFill=(spec:NodeSpec):boolean=>!!spec.shapeFillTarget||!!spec.instanceShapeFills||!!spec.children?.some(hasShapeFill);
+  if(isContractDraft(input)&&observedVariants.some(v=>hasShapeFill(v.spec)))extra.push('shapeFillOverride');
   // Saved plans authenticate program bytes. New fields belong only to specs
   // that require them; the general inventory API still reads the full set.
   const hasArcCap = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || !!spec.shape?.arc?.cap || !!spec.children?.some(hasArcCap);
@@ -323,7 +326,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   const hasMask = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || spec.shape?.kind === 'stroked-path' || !!spec.instanceInsideStroke || !!spec.mask || !!spec.children?.some(hasMask);
   const hasCapturedGeometry = (spec: NodeSpec): boolean => !!spec.intrinsicAbsolute || spec.shape?.kind==='line' || !!spec.capturedAbsoluteGeometry || !!spec.insetOverlay || !!spec.children?.some(hasCapturedGeometry);
-  const hasStrokeLayout = (spec: NodeSpec): boolean => spec.insetRingStroke === true || !!spec.rootSlotFlow ||
+  const hasStrokeLayout = (spec: NodeSpec): boolean => spec.instanceRootStrokeInput === 'INSIDE' || spec.insetRingStroke === true || !!spec.rootSlotFlow ||
     (['root','frame'].includes(spec.type) && !!spec.lits?.strokeColor && typeof spec.lits.strokeWeight === 'number') ||
     !!spec.children?.some(hasStrokeLayout);
   const hasPathInk = (spec: NodeSpec): boolean => spec.shape?.kind === 'stroked-path' || spec.nativePathInk === true || spec.nativeMaskPath === true || !!spec.children?.some(hasPathInk);
@@ -870,7 +873,7 @@ function verifyReadback(
   const pathSpecs = new Map<string, NodeSpec>();
   const authoredPathSpecs = new Map<string, NodeSpec | null>();
   const indexPath = (spec: NodeSpec) => {
-    if ((spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
+    if ((spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.shapeFillTarget || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
       pathSpecs.set(canonicalJson(spec.nativeContractPart), spec);
     spec.children?.forEach(indexPath);
   };
@@ -1178,6 +1181,7 @@ function verifyReadback(
       if((n.metadata.authoredTextAppearance??'')!==(spec.authoredTextAppearanceTarget??''))issue('native-authored-text-appearance-observation-marker',n);
       if((n.metadata.authoredTextInstance??'')!==(spec.authoredTextInstanceTarget??''))issue('native-authored-text-instance-observation-marker',n);
       if((n.metadata.textColorOverride??'')!==(spec.textColorTarget??''))issue('native-text-color-observation-marker',n);
+      if((n.metadata.shapeFillOverride??'')!==(spec.shapeFillTarget??''))issue('native-shape-fill-observation-marker',n);
       if (!expectedType || n.type !== expectedType)
         issue("native-source-observation-node-type", n);
       let consumingMode = mode;
@@ -1236,7 +1240,24 @@ function verifyReadback(
         issue('native-library-observation-fill-width', n);
       if (library && spec.fillH && v.layoutSizingVertical !== 'FILL')
         issue('native-library-observation-fill-height', n);
+      const stackMatches=(target:Record<string,any>,stack:NonNullable<NodeSpec['fillStack']>):boolean=>{
+        const bindingsByToken=Object.fromEntries(stack.paints.flatMap(p=>p.type==='SOLID'&&p.token?[[p.token,nativeBoundPaintColor(p.token.split('.').join('/'),tokens.receipt.variables,consumingMode,input.tokenIdentity.collection.id)]]:[]));
+        if(!nativeFillStackMatches(stack,target.values.fills,{imageBase64ByHash:target.imageAssets,bindingsByToken}))return false;
+        const aggregate=target.values.boundVariables?.fills;
+        const expected=stack.paints.flatMap(p=>p.type==='SOLID'&&p.token&&bindingsByToken[p.token]?[{type:'VARIABLE_ALIAS',id:bindingsByToken[p.token]!.id}]:[]);
+        return aggregate===undefined||Array.isArray(aggregate)&&same(aggregate,expected);
+      };
       if (isContractDraft(input) && spec.type === 'instance') {
+        if(spec.instanceRootStroke?.align==='INSIDE') {
+          const expected=spec.instanceRootStroke,paint=expected.paint,actual=Array.isArray(v.strokes)&&v.strokes.length===1?v.strokes[0]:undefined;
+          if(!paint||!actual||actual.type!=='SOLID'||actual.visible===false||actual.blendMode!=='NORMAL'||actual.boundVariables&&Object.keys(actual.boundVariables).length||
+            !['r','g','b'].every(key=>numeric(actual.color?.[key],paint[key as 'r'|'g'|'b']))||!numeric(actual.opacity??1,paint.a??1)||
+            v.strokeAlign!=='INSIDE'||!numeric(v.strokeWeight,expected.px)||v.strokesIncludedInLayout!==false||!Array.isArray(v.dashPattern)||v.dashPattern.length!==0||
+            ['strokes','strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'].some(key=>v.boundVariables?.[key]!==undefined))
+            issue('native-instance-inside-stroke-observation',n);
+        }
+        const suppliedStackVerified=spec.fillStack!==undefined&&stackMatches(n,spec.fillStack);
+        if(spec.fillStack&&!suppliedStackVerified)issue('native-fill-stack-observation',n);
         // A declared left/top offset is an observable contract fact even when
         // the instance's inherited layout remains outside geometry qualification.
         // Check it before the instance branch returns past ordinary leaf checks.
@@ -1259,13 +1280,20 @@ function verifyReadback(
         }
         if (library && depTarget) {
           const main = nodes.get(n.mainId);
-          if(spec.instanceRootFill) {
+          if(suppliedStackVerified) {
+            // Only the independently matched whole-array input supersedes inherited fills.
+          } else if(spec.instanceRootFill) {
             const name=spec.instanceRootFill.varName;
             const bound=nativeBoundPaintColor(name,tokens.receipt.variables,consumingMode,input.tokenIdentity.collection.id);
             if(!nativePaintStackMatches({type:'frame',name:'instance root fill',fill:name},v.fills,bound,v.boundVariables?.fills))
               issue('native-instance-root-fill-observation',n);
           } else if(!same(v.fills,main?.values.fills)||!same(v.boundVariables?.fills,main?.values.boundVariables?.fills))
             issue('native-instance-root-fill-inherited',n);
+          if(spec.instanceRootStrokeInput==='INSIDE'&&!spec.instanceRootStroke) {
+            const fields=['strokes','strokeAlign','strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight','strokesIncludedInLayout','dashPattern'];
+            if(fields.some(key=>!same(v[key],main?.values[key])||!same(v.boundVariables?.[key],main?.values.boundVariables?.[key])))
+              issue('native-instance-inside-stroke-omitted-default',n);
+          }
           if (spec.instanceSize) {
             const alias = {type:'VARIABLE_ALIAS', id:variableByName.get(spec.instanceSize.varName)};
             if (!alias.id || !numeric(v.width,spec.instanceSize.px) || !numeric(v.height,spec.instanceSize.px) ||
@@ -1332,6 +1360,7 @@ function verifyReadback(
         }
         const imageMatches=new Map<string,number>();
         const textColorMatches=new Map<string,number>();
+        const shapeFillMatches=new Map<string,number>();
         const textAppearanceMatches=new Map<string,number>();
         const textSizeMatches=new Map<string,number>();
         const intrinsicMatches=new Map<string,number>();
@@ -1455,6 +1484,8 @@ function verifyReadback(
                 if((child.metadata.authoredTextInstance??'')!==(source.metadata.authoredTextInstance??''))
                   issue('native-authored-text-instance-observation-marker',child);
                 const pathSpec = pathSpecs.get(canonicalJson(meta(source, 'nativeContractPart')));
+                const observedShapeKey=child.metadata.shapeFillOverride;
+                if(textOwner&&typeof observedShapeKey==='string'&&Object.hasOwn(spec.instanceShapeFills??{},observedShapeKey))shapeFillMatches.set(observedShapeKey,1+(shapeFillMatches.get(observedShapeKey)??0));
                 const intrinsicKey=pathSpec?.intrinsicPlacementTarget,placement=textOwner&&intrinsicKey?spec.instanceIntrinsicPlacements?.[intrinsicKey]:undefined;
                 let intrinsicGeometry=false;
                 if((child.metadata.intrinsicPlacement??'')!==(intrinsicKey??''))issue('native-intrinsic-placement-observation-marker',child);
@@ -1521,6 +1552,17 @@ function verifyReadback(
                       if (!authoredScalarReplacement) issue('native-authored-text-scalar-observation',child);
                     }
                   }
+                }
+                const shapeKey=pathSpec?.shapeFillTarget;
+                const shapeFill=textOwner&&shapeKey?spec.instanceShapeFills?.[shapeKey]:undefined;
+                if((child.metadata.shapeFillOverride??'')!==(shapeKey??''))issue('native-shape-fill-observation-marker',child);
+                let shapeFillVerified=false;
+                if(shapeFill!==undefined){
+                  const expectedBindings={...source.values.boundVariables};delete expectedBindings.fills;
+                  shapeFillVerified=observedShapeKey===shapeKey&&['FRAME','RECTANGLE','ELLIPSE'].includes(child.type)&&
+                    nativePaintStackMatches({type:'frame',name:'whole-fill override',lits:{fillColor:shapeFill}},child.values.fills,undefined,child.values.boundVariables?.fills)&&
+                    same(child.values.boundVariables??{},expectedBindings);
+                  if(!shapeFillVerified)issue('native-shape-fill-observation-paint',child);
                 }
                 const textKey=pathSpec?.textColorTarget;
                 const textColor=textOwner&&textKey?spec.instanceTextColors?.[textKey]:undefined;
@@ -1596,7 +1638,7 @@ function verifyReadback(
                   if((appearance||authoredOwnsAppearance||nestedAuthority?.appearance)&&['fills','fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration'].includes(field))continue;
                   if((authoredScalarReplacement||nestedAuthority?.scalar)&&field==='boundVariables')continue;
                   if(textSize&&['fontSize','lineHeight','boundVariables'].includes(field))continue;
-                  if ((inkOverride||textColor!==undefined||imageOverride) && (field === 'fills' || field === 'boundVariables')) continue;
+                  if ((inkOverride||textColor!==undefined||imageOverride||shapeFillVerified) && (field === 'fills' || field === 'boundVariables')) continue;
                   if (insideStroke && ['strokes','strokeWeight','strokeAlign','strokeCap','strokeJoin','strokeMiterLimit','dashPattern'].includes(field))continue;
                   const key = source.values.componentPropertyReferences?.[field];
                   const expected = key && properties[key] ? properties[key].value : source.values[field];
@@ -1613,6 +1655,7 @@ function verifyReadback(
         for(const key of Object.keys(spec.instanceIntrinsicPlacements??{}))if(intrinsicMatches.get(key)!==1)issue('native-intrinsic-placement-observation-target',n);
         for(const key of Object.keys(spec.instanceImages??{}))if(imageMatches.get(key)!==1)issue('native-image-observation-target',n);
         for(const key of Object.keys(spec.instanceTextColors??{}))if(textColorMatches.get(key)!==1)issue('native-text-color-observation-target',n);
+        for(const key of Object.keys(spec.instanceShapeFills??{}))if(shapeFillMatches.get(key)!==1)issue('native-shape-fill-observation-target',n);
         for (const row of descendants) if (borrowedIds.has(row.id)) checked.add(row.id);
         // Inherited slots the parent leaves unfilled are the only place a canvas
         // edit can add content inside an instance. They must mirror the main's
@@ -1781,6 +1824,8 @@ function verifyReadback(
           if (field === 'fill' ? !Array.isArray(paints) || paints.length !== 0
               : !nativeMaskStrokeMatches(spec.mask.stroke, v))
             issue('native-mask-stroke-observation-changed', n);
+        } else if(field==='fill'&&spec.fillStack){
+          if(!stackMatches(n,spec.fillStack))issue('native-fill-stack-observation',n);
         } else if (field === 'fill' && spec.imagePaint) {
           const images=Array.isArray(paints)?paints.filter((p:any)=>p.type==='IMAGE'):[];
           const bound=name?nativeBoundPaintColor(name,tokens.receipt.variables,consumingMode,input.tokenIdentity.collection.id):undefined;

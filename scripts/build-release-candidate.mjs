@@ -44,6 +44,8 @@ const PACKAGES = [
     // require its runtime module and declaration alongside contract-schema.
     // Reviewed 2026-10-15: contract-schema imports the complete text-tuple
     // validator; installed consumers need its runtime and declaration.
+    // Reviewed 2026-10-26: contract-schema imports/re-exports the ordered
+    // fill-stack schema and helpers; installed validation requires both files.
     expected: [
       "README.md",
       "contract.schema.json",
@@ -55,6 +57,8 @@ const PACKAGES = [
       "dist/contract-schema.js",
       "dist/filled-path.d.ts",
       "dist/filled-path.js",
+      "dist/fill-stack.d.ts",
+      "dist/fill-stack.js",
       "dist/index.d.ts",
       "dist/index.js",
       "dist/instance-affine.d.ts",

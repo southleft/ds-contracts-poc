@@ -2,7 +2,7 @@ import {type Contract, type Part} from '../scripts/contract-schema.js';
 
 /** Root-only usage styles. Never scale a child subtree or mutate its defaults. */
 export function reactInstanceRootStyle(contract: Contract, part: Part,
- resolve: (path:string,channel:string)=>string|number, codePropOf:(name:string)=>string): string {
+ resolve: (path:string,channel:string)=>string|number, codePropOf:(name:string)=>string, ringVariables = false): string {
  const entries=Object.entries(part.component?.rootOverrides??{});
  const styles = [...(part.component?.rootFill??[]).map(channel=>`${JSON.stringify(channel)}: "100%"`), ...entries.map(([channel,ref])=>{
   const path=ref.slice(1,-1), axes=[...new Set([...path.matchAll(/\{([^}]+)\}/g)].map(m=>m[1]))];
@@ -15,7 +15,7 @@ export function reactInstanceRootStyle(contract: Contract, part: Part,
    return {prop,values};
   });
   const expand=(i:number,resolved:string):string=>{
-   if(i===domains.length)return JSON.stringify(resolve(resolved,channel==='outline-color'?'background-color':channel));
+   if(i===domains.length)return JSON.stringify(resolve(resolved,channel==='outline-color'||channel==='border-color'?'background-color':channel));
    const {prop,values}=domains[i];
    // Visibility wrappers can narrow this axis before the style is evaluated.
    // A lookup keeps every declared input without emitting impossible equality
@@ -25,7 +25,8 @@ export function reactInstanceRootStyle(contract: Contract, part: Part,
    const keys=values.map(value=>JSON.stringify(String(value))).join(' | ');
    return `(${input} == null ? undefined : ({${entries}})[String(${input}) as ${keys}])`;
   };
-  return `${JSON.stringify(channel.replace(/-([a-z])/g,(_,c:string)=>c.toUpperCase()))}: ${expand(0,path)}`;
+  const key=ringVariables&&channel==='border-width'?'--_stroke-width':ringVariables&&channel==='border-color'?'--_stroke-color':channel.replace(/-([a-z])/g,(_,c:string)=>c.toUpperCase());
+  return `${JSON.stringify(key)}: ${expand(0,path)}`;
  })].join(', ');
  return part.component?.rootOverrides?.['outline-color'] ? [styles, 'outlineStyle: "solid", outlineOffset: 0'].join(', ') : styles;
 }

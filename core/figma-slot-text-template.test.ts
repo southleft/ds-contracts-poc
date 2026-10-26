@@ -163,6 +163,17 @@ test('canonical capture restores reusable root typography and refuses unsupporte
     (d: any) => { Object.values<any>(d.variants[0].children[0].children[0].variableConsumers)[0].selectedValue = { type:'VARIABLE_ALIAS',id:'unproven' }; },
     (d: any) => { Object.values<any>(d.variants[1].children[0].children[0].variableConsumers).forEach(v => { v.modeId = 'other'; }); },
     (d: any) => { d.variants[0].children[0].children[0].opacity = 0.5; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.complete = false; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints.push({index:1,paint:{type:'IMAGE',visible:false}}); },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.opacity = 0.5; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.blendMode = 'MULTIPLY'; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.color.r = -1; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.color.a = null; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.opacity = null; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.blendMode = null; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceFillStack.paints[0].paint.boundVariables.color.id = 'unproven'; },
+    (d: any) => { d.variants[0].children[0].children[0].sourceStrokeStack.paints.push({index:0,paint:{type:'SOLID',visible:false}}); },
+    (d: any) => { d.variants[0].children[0].children[0].sourceStrokePattern.dashes = [1]; },
     (d: any) => { d.variants[1].children[0].children[0].text.fontFamily = 'Other'; },
   ]) {
     const altered = structuredClone(captured); mutate(altered);

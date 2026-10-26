@@ -63,12 +63,12 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
  const root=page.locator(selector),instrument=page.locator(instrumentSelector);
  const dx=Math.max(0,-Math.floor(paint.x)),dy=Math.max(0,-Math.floor(paint.y));
  if(!dx&&!dy){
-  // A blending subtree must also survive removal of unrelated neighboring
-  // paint. Compare actual composited pixels, not just unchanged CSS values.
+  // A blending or qualified negative-stack subtree must also survive removal
+  // of unrelated neighboring paint. Prove its complete composited raster.
   const clip=enclosingFrame(paint),scroll=await page.evaluate(()=>({x:scrollX,y:scrollY}));
-  const before=initial.observation.blendRasterVerified?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled',clip:{...clip,x:clip.x-scroll.x,y:clip.y-scroll.y}})):undefined;
+  const before=initial.observation.blendRasterVerified||initial.observation.negativeStackRasterVerified?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled',clip:{...clip,x:clip.x-scroll.x,y:clip.y-scroll.y}})):undefined;
   const capture=await captureIsolatedRegion(page,root,region(paint,layout));if('refused'in capture)return capture;
-  if(before){const after=PNG.sync.read(capture.bytes);if(before.width!==after.width||before.height!==after.height||!before.data.equals(after.data))return {refused:'capture-blend-isolation-changed-raster'};}
+  if(before){const after=PNG.sync.read(capture.bytes);if(before.width!==after.width||before.height!==after.height||!before.data.equals(after.data))return {refused:initial.observation.negativeStackRasterVerified?'capture-negative-stack-isolation-changed-raster':'capture-blend-isolation-changed-raster'};}
   return {...capture,paint};
  }
  if(await instrument.count()!==1)return {refused:'capture-translation-instrument-not-unique'};

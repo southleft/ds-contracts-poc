@@ -1708,6 +1708,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
       if (w.part.component?.sameInkInsideStroke) throw new Error('WEB_COMPONENT_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
       if (w.part.component?.booleanPropsByCombination) throw new Error('WEB_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
       if (w.part.component?.enumPropsByCombination) throw new Error('WEB_COMPONENT_ENUM_ARGUMENTS_UNSUPPORTED');
+      if(w.part.fillStack||w.part.fillStackByCombination)throw Error('WEB_COMPONENT_FILL_STACK_UNSUPPORTED');
       if (w.part.component?.textPropsByCombination) throw new Error('WEB_COMPONENT_TEXT_ARGUMENTS_UNSUPPORTED');
       if (w.part.shapeFillOverrideProp) throw new Error('WEB_COMPONENT_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
       if (w.part.textColorOverrideProp) throw new Error('WEB_COMPONENT_TEXT_COLOR_OVERRIDE_UNSUPPORTED');

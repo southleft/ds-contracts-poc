@@ -882,6 +882,1856 @@
     "__schema0": {
       "type": "object",
       "properties": {
+        "fillStackSource": {
+          "type": "object",
+          "properties": {
+            "fileKey": {
+              "type": "string",
+              "minLength": 1
+            },
+            "setKey": {
+              "type": "string",
+              "minLength": 1
+            },
+            "contractRevision": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "fileKey",
+            "setKey",
+            "contractRevision"
+          ],
+          "additionalProperties": false
+        },
+        "fillStack": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "number",
+              "const": 1
+            },
+            "order": {
+              "type": "string",
+              "const": "bottom-to-top"
+            },
+            "paints": {
+              "maxItems": 64,
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "index": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "blendMode": {
+                        "type": "string",
+                        "const": "NORMAL"
+                      },
+                      "type": {
+                        "type": "string",
+                        "const": "SOLID"
+                      },
+                      "color": {
+                        "type": "object",
+                        "properties": {
+                          "r": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          "g": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          "b": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          "a": {
+                            "type": "number",
+                            "const": 1
+                          }
+                        },
+                        "required": [
+                          "r",
+                          "g",
+                          "b"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "token": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceBinding": {
+                        "type": "object",
+                        "properties": {
+                          "owner": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "nodeName": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "variantName": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "binding": {
+                            "type": "object",
+                            "properties": {
+                              "variableId": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "paint": {
+                                "type": "object",
+                                "properties": {
+                                  "color": {
+                                    "type": "object",
+                                    "properties": {
+                                      "r": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      },
+                                      "g": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      },
+                                      "b": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "r",
+                                      "g",
+                                      "b"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "opacity": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  },
+                                  "blendMode": {
+                                    "type": "string",
+                                    "enum": [
+                                      "NORMAL",
+                                      "MULTIPLY"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "color",
+                                  "opacity",
+                                  "blendMode"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "consumer": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "collectionId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "modeId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "modeName": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "resolvedType": {
+                                    "type": "string",
+                                    "const": "COLOR"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "properties": {
+                                      "r": {
+                                        "type": "number"
+                                      },
+                                      "g": {
+                                        "type": "number"
+                                      },
+                                      "b": {
+                                        "type": "number"
+                                      },
+                                      "a": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "r",
+                                      "g",
+                                      "b"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "selectedValue": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "r": {
+                                            "type": "number"
+                                          },
+                                          "g": {
+                                            "type": "number"
+                                          },
+                                          "b": {
+                                            "type": "number"
+                                          },
+                                          "a": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "r",
+                                          "g",
+                                          "b"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "type": "string",
+                                            "const": "VARIABLE_ALIAS"
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          }
+                                        },
+                                        "required": [
+                                          "type",
+                                          "id"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    ]
+                                  },
+                                  "aliasChain": {
+                                    "maxItems": 16,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "collectionId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "modeId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "modeName": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "resolvedType": {
+                                          "type": "string",
+                                          "const": "COLOR"
+                                        },
+                                        "value": {
+                                          "type": "object",
+                                          "properties": {
+                                            "r": {
+                                              "type": "number"
+                                            },
+                                            "g": {
+                                              "type": "number"
+                                            },
+                                            "b": {
+                                              "type": "number"
+                                            },
+                                            "a": {
+                                              "type": "number"
+                                            }
+                                          },
+                                          "required": [
+                                            "r",
+                                            "g",
+                                            "b"
+                                          ],
+                                          "additionalProperties": false
+                                        },
+                                        "selectedValue": {
+                                          "anyOf": [
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number"
+                                                },
+                                                "g": {
+                                                  "type": "number"
+                                                },
+                                                "b": {
+                                                  "type": "number"
+                                                },
+                                                "a": {
+                                                  "type": "number"
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "const": "VARIABLE_ALIAS"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "minLength": 1
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "id"
+                                              ],
+                                              "additionalProperties": false
+                                            }
+                                          ]
+                                        },
+                                        "id": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "collectionId",
+                                        "modeId",
+                                        "modeName",
+                                        "resolvedType",
+                                        "value",
+                                        "selectedValue",
+                                        "id"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "collectionId",
+                                  "modeId",
+                                  "modeName",
+                                  "resolvedType",
+                                  "value",
+                                  "selectedValue"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "variableId",
+                              "paint",
+                              "consumer"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "required": [
+                          "owner",
+                          "nodeName",
+                          "variantName",
+                          "binding"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "observedBinding": {
+                        "type": "object",
+                        "properties": {
+                          "owner": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "nodeName": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "variantName": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "observedPaint": {
+                            "type": "object",
+                            "properties": {
+                              "color": {
+                                "type": "object",
+                                "properties": {
+                                  "r": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  },
+                                  "g": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  },
+                                  "b": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  }
+                                },
+                                "required": [
+                                  "r",
+                                  "g",
+                                  "b"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "opacity": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              "blendMode": {
+                                "type": "string",
+                                "enum": [
+                                  "NORMAL",
+                                  "MULTIPLY"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "color",
+                              "opacity",
+                              "blendMode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "resolvedBinding": {
+                            "type": "object",
+                            "properties": {
+                              "variableId": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "paint": {
+                                "type": "object",
+                                "properties": {
+                                  "color": {
+                                    "type": "object",
+                                    "properties": {
+                                      "r": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      },
+                                      "g": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      },
+                                      "b": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "r",
+                                      "g",
+                                      "b"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "opacity": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                  },
+                                  "blendMode": {
+                                    "type": "string",
+                                    "enum": [
+                                      "NORMAL",
+                                      "MULTIPLY"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "color",
+                                  "opacity",
+                                  "blendMode"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "consumer": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "collectionId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "modeId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "modeName": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "resolvedType": {
+                                    "type": "string",
+                                    "const": "COLOR"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "properties": {
+                                      "r": {
+                                        "type": "number"
+                                      },
+                                      "g": {
+                                        "type": "number"
+                                      },
+                                      "b": {
+                                        "type": "number"
+                                      },
+                                      "a": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "r",
+                                      "g",
+                                      "b"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "selectedValue": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "r": {
+                                            "type": "number"
+                                          },
+                                          "g": {
+                                            "type": "number"
+                                          },
+                                          "b": {
+                                            "type": "number"
+                                          },
+                                          "a": {
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "r",
+                                          "g",
+                                          "b"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "type": "string",
+                                            "const": "VARIABLE_ALIAS"
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          }
+                                        },
+                                        "required": [
+                                          "type",
+                                          "id"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    ]
+                                  },
+                                  "aliasChain": {
+                                    "maxItems": 16,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "collectionId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "modeId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "modeName": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "resolvedType": {
+                                          "type": "string",
+                                          "const": "COLOR"
+                                        },
+                                        "value": {
+                                          "type": "object",
+                                          "properties": {
+                                            "r": {
+                                              "type": "number"
+                                            },
+                                            "g": {
+                                              "type": "number"
+                                            },
+                                            "b": {
+                                              "type": "number"
+                                            },
+                                            "a": {
+                                              "type": "number"
+                                            }
+                                          },
+                                          "required": [
+                                            "r",
+                                            "g",
+                                            "b"
+                                          ],
+                                          "additionalProperties": false
+                                        },
+                                        "selectedValue": {
+                                          "anyOf": [
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number"
+                                                },
+                                                "g": {
+                                                  "type": "number"
+                                                },
+                                                "b": {
+                                                  "type": "number"
+                                                },
+                                                "a": {
+                                                  "type": "number"
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "const": "VARIABLE_ALIAS"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "minLength": 1
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "id"
+                                              ],
+                                              "additionalProperties": false
+                                            }
+                                          ]
+                                        },
+                                        "id": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "collectionId",
+                                        "modeId",
+                                        "modeName",
+                                        "resolvedType",
+                                        "value",
+                                        "selectedValue",
+                                        "id"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "collectionId",
+                                  "modeId",
+                                  "modeName",
+                                  "resolvedType",
+                                  "value",
+                                  "selectedValue"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "variableId",
+                              "paint",
+                              "consumer"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "bindingRecreated": {
+                            "type": "boolean",
+                            "const": false
+                          }
+                        },
+                        "required": [
+                          "owner",
+                          "nodeName",
+                          "variantName",
+                          "observedPaint",
+                          "resolvedBinding",
+                          "bindingRecreated"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "unresolvedBinding": {
+                        "type": "object",
+                        "properties": {
+                          "variableId": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "reason": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "bindingRecreated": {
+                            "type": "boolean",
+                            "const": false
+                          }
+                        },
+                        "required": [
+                          "variableId",
+                          "reason",
+                          "bindingRecreated"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "index",
+                      "visible",
+                      "opacity",
+                      "blendMode",
+                      "type",
+                      "color"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "index": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "blendMode": {
+                        "type": "string",
+                        "const": "NORMAL"
+                      },
+                      "type": {
+                        "type": "string",
+                        "const": "IMAGE"
+                      },
+                      "imageHash": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "image": {
+                        "type": "string",
+                        "pattern": "^url\\(['\"]?data:image\\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}['\"]?\\)$"
+                      },
+                      "scaleMode": {
+                        "type": "string",
+                        "enum": [
+                          "FILL",
+                          "FIT",
+                          "CROP",
+                          "STRETCH"
+                        ]
+                      },
+                      "imageTransform": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "additionalItems": false,
+                            "minItems": 3,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "additionalItems": false,
+                            "minItems": 3,
+                            "maxItems": 3
+                          }
+                        ],
+                        "additionalItems": false,
+                        "minItems": 2,
+                        "maxItems": 2
+                      },
+                      "rotation": {
+                        "type": "number",
+                        "const": 0
+                      },
+                      "scalingFactor": {
+                        "type": "number",
+                        "const": 1
+                      },
+                      "filters": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {
+                          "type": "number",
+                          "const": 0
+                        }
+                      }
+                    },
+                    "required": [
+                      "index",
+                      "visible",
+                      "opacity",
+                      "blendMode",
+                      "type",
+                      "imageHash",
+                      "image",
+                      "scaleMode"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "version",
+            "order",
+            "paints"
+          ],
+          "additionalProperties": false
+        },
+        "fillStackByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "stack": {
+                    "type": "object",
+                    "properties": {
+                      "version": {
+                        "type": "number",
+                        "const": 1
+                      },
+                      "order": {
+                        "type": "string",
+                        "const": "bottom-to-top"
+                      },
+                      "paints": {
+                        "maxItems": 64,
+                        "type": "array",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "index": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 9007199254740991
+                                },
+                                "visible": {
+                                  "type": "boolean"
+                                },
+                                "opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1
+                                },
+                                "blendMode": {
+                                  "type": "string",
+                                  "const": "NORMAL"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "SOLID"
+                                },
+                                "color": {
+                                  "type": "object",
+                                  "properties": {
+                                    "r": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    },
+                                    "g": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    },
+                                    "b": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    },
+                                    "a": {
+                                      "type": "number",
+                                      "const": 1
+                                    }
+                                  },
+                                  "required": [
+                                    "r",
+                                    "g",
+                                    "b"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "token": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sourceBinding": {
+                                  "type": "object",
+                                  "properties": {
+                                    "owner": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "nodeName": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "variantName": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "binding": {
+                                      "type": "object",
+                                      "properties": {
+                                        "variableId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "paint": {
+                                          "type": "object",
+                                          "properties": {
+                                            "color": {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                },
+                                                "g": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                },
+                                                "b": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            "opacity": {
+                                              "type": "number",
+                                              "minimum": 0,
+                                              "maximum": 1
+                                            },
+                                            "blendMode": {
+                                              "type": "string",
+                                              "enum": [
+                                                "NORMAL",
+                                                "MULTIPLY"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "color",
+                                            "opacity",
+                                            "blendMode"
+                                          ],
+                                          "additionalProperties": false
+                                        },
+                                        "consumer": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "collectionId": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "modeId": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "modeName": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "resolvedType": {
+                                              "type": "string",
+                                              "const": "COLOR"
+                                            },
+                                            "value": {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number"
+                                                },
+                                                "g": {
+                                                  "type": "number"
+                                                },
+                                                "b": {
+                                                  "type": "number"
+                                                },
+                                                "a": {
+                                                  "type": "number"
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            "selectedValue": {
+                                              "anyOf": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "r": {
+                                                      "type": "number"
+                                                    },
+                                                    "g": {
+                                                      "type": "number"
+                                                    },
+                                                    "b": {
+                                                      "type": "number"
+                                                    },
+                                                    "a": {
+                                                      "type": "number"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "r",
+                                                    "g",
+                                                    "b"
+                                                  ],
+                                                  "additionalProperties": false
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "type": "string",
+                                                      "const": "VARIABLE_ALIAS"
+                                                    },
+                                                    "id": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "type",
+                                                    "id"
+                                                  ],
+                                                  "additionalProperties": false
+                                                }
+                                              ]
+                                            },
+                                            "aliasChain": {
+                                              "maxItems": 16,
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "collectionId": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "modeId": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "modeName": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "resolvedType": {
+                                                    "type": "string",
+                                                    "const": "COLOR"
+                                                  },
+                                                  "value": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "r": {
+                                                        "type": "number"
+                                                      },
+                                                      "g": {
+                                                        "type": "number"
+                                                      },
+                                                      "b": {
+                                                        "type": "number"
+                                                      },
+                                                      "a": {
+                                                        "type": "number"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "r",
+                                                      "g",
+                                                      "b"
+                                                    ],
+                                                    "additionalProperties": false
+                                                  },
+                                                  "selectedValue": {
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "r": {
+                                                            "type": "number"
+                                                          },
+                                                          "g": {
+                                                            "type": "number"
+                                                          },
+                                                          "b": {
+                                                            "type": "number"
+                                                          },
+                                                          "a": {
+                                                            "type": "number"
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "r",
+                                                          "g",
+                                                          "b"
+                                                        ],
+                                                        "additionalProperties": false
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "type": {
+                                                            "type": "string",
+                                                            "const": "VARIABLE_ALIAS"
+                                                          },
+                                                          "id": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "type",
+                                                          "id"
+                                                        ],
+                                                        "additionalProperties": false
+                                                      }
+                                                    ]
+                                                  },
+                                                  "id": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                },
+                                                "required": [
+                                                  "name",
+                                                  "collectionId",
+                                                  "modeId",
+                                                  "modeName",
+                                                  "resolvedType",
+                                                  "value",
+                                                  "selectedValue",
+                                                  "id"
+                                                ],
+                                                "additionalProperties": false
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "name",
+                                            "collectionId",
+                                            "modeId",
+                                            "modeName",
+                                            "resolvedType",
+                                            "value",
+                                            "selectedValue"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "variableId",
+                                        "paint",
+                                        "consumer"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "required": [
+                                    "owner",
+                                    "nodeName",
+                                    "variantName",
+                                    "binding"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "observedBinding": {
+                                  "type": "object",
+                                  "properties": {
+                                    "owner": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "nodeName": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "variantName": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "observedPaint": {
+                                      "type": "object",
+                                      "properties": {
+                                        "color": {
+                                          "type": "object",
+                                          "properties": {
+                                            "r": {
+                                              "type": "number",
+                                              "minimum": 0,
+                                              "maximum": 1
+                                            },
+                                            "g": {
+                                              "type": "number",
+                                              "minimum": 0,
+                                              "maximum": 1
+                                            },
+                                            "b": {
+                                              "type": "number",
+                                              "minimum": 0,
+                                              "maximum": 1
+                                            }
+                                          },
+                                          "required": [
+                                            "r",
+                                            "g",
+                                            "b"
+                                          ],
+                                          "additionalProperties": false
+                                        },
+                                        "opacity": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1
+                                        },
+                                        "blendMode": {
+                                          "type": "string",
+                                          "enum": [
+                                            "NORMAL",
+                                            "MULTIPLY"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "color",
+                                        "opacity",
+                                        "blendMode"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    "resolvedBinding": {
+                                      "type": "object",
+                                      "properties": {
+                                        "variableId": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "paint": {
+                                          "type": "object",
+                                          "properties": {
+                                            "color": {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                },
+                                                "g": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                },
+                                                "b": {
+                                                  "type": "number",
+                                                  "minimum": 0,
+                                                  "maximum": 1
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            "opacity": {
+                                              "type": "number",
+                                              "minimum": 0,
+                                              "maximum": 1
+                                            },
+                                            "blendMode": {
+                                              "type": "string",
+                                              "enum": [
+                                                "NORMAL",
+                                                "MULTIPLY"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "color",
+                                            "opacity",
+                                            "blendMode"
+                                          ],
+                                          "additionalProperties": false
+                                        },
+                                        "consumer": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "collectionId": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "modeId": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "modeName": {
+                                              "type": "string",
+                                              "minLength": 1
+                                            },
+                                            "resolvedType": {
+                                              "type": "string",
+                                              "const": "COLOR"
+                                            },
+                                            "value": {
+                                              "type": "object",
+                                              "properties": {
+                                                "r": {
+                                                  "type": "number"
+                                                },
+                                                "g": {
+                                                  "type": "number"
+                                                },
+                                                "b": {
+                                                  "type": "number"
+                                                },
+                                                "a": {
+                                                  "type": "number"
+                                                }
+                                              },
+                                              "required": [
+                                                "r",
+                                                "g",
+                                                "b"
+                                              ],
+                                              "additionalProperties": false
+                                            },
+                                            "selectedValue": {
+                                              "anyOf": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "r": {
+                                                      "type": "number"
+                                                    },
+                                                    "g": {
+                                                      "type": "number"
+                                                    },
+                                                    "b": {
+                                                      "type": "number"
+                                                    },
+                                                    "a": {
+                                                      "type": "number"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "r",
+                                                    "g",
+                                                    "b"
+                                                  ],
+                                                  "additionalProperties": false
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "type": "string",
+                                                      "const": "VARIABLE_ALIAS"
+                                                    },
+                                                    "id": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "type",
+                                                    "id"
+                                                  ],
+                                                  "additionalProperties": false
+                                                }
+                                              ]
+                                            },
+                                            "aliasChain": {
+                                              "maxItems": 16,
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "collectionId": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "modeId": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "modeName": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "resolvedType": {
+                                                    "type": "string",
+                                                    "const": "COLOR"
+                                                  },
+                                                  "value": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "r": {
+                                                        "type": "number"
+                                                      },
+                                                      "g": {
+                                                        "type": "number"
+                                                      },
+                                                      "b": {
+                                                        "type": "number"
+                                                      },
+                                                      "a": {
+                                                        "type": "number"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "r",
+                                                      "g",
+                                                      "b"
+                                                    ],
+                                                    "additionalProperties": false
+                                                  },
+                                                  "selectedValue": {
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "r": {
+                                                            "type": "number"
+                                                          },
+                                                          "g": {
+                                                            "type": "number"
+                                                          },
+                                                          "b": {
+                                                            "type": "number"
+                                                          },
+                                                          "a": {
+                                                            "type": "number"
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "r",
+                                                          "g",
+                                                          "b"
+                                                        ],
+                                                        "additionalProperties": false
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "type": {
+                                                            "type": "string",
+                                                            "const": "VARIABLE_ALIAS"
+                                                          },
+                                                          "id": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "type",
+                                                          "id"
+                                                        ],
+                                                        "additionalProperties": false
+                                                      }
+                                                    ]
+                                                  },
+                                                  "id": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                },
+                                                "required": [
+                                                  "name",
+                                                  "collectionId",
+                                                  "modeId",
+                                                  "modeName",
+                                                  "resolvedType",
+                                                  "value",
+                                                  "selectedValue",
+                                                  "id"
+                                                ],
+                                                "additionalProperties": false
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "name",
+                                            "collectionId",
+                                            "modeId",
+                                            "modeName",
+                                            "resolvedType",
+                                            "value",
+                                            "selectedValue"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "variableId",
+                                        "paint",
+                                        "consumer"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    "bindingRecreated": {
+                                      "type": "boolean",
+                                      "const": false
+                                    }
+                                  },
+                                  "required": [
+                                    "owner",
+                                    "nodeName",
+                                    "variantName",
+                                    "observedPaint",
+                                    "resolvedBinding",
+                                    "bindingRecreated"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "unresolvedBinding": {
+                                  "type": "object",
+                                  "properties": {
+                                    "variableId": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "reason": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "bindingRecreated": {
+                                      "type": "boolean",
+                                      "const": false
+                                    }
+                                  },
+                                  "required": [
+                                    "variableId",
+                                    "reason",
+                                    "bindingRecreated"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "index",
+                                "visible",
+                                "opacity",
+                                "blendMode",
+                                "type",
+                                "color"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "index": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 9007199254740991
+                                },
+                                "visible": {
+                                  "type": "boolean"
+                                },
+                                "opacity": {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1
+                                },
+                                "blendMode": {
+                                  "type": "string",
+                                  "const": "NORMAL"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "IMAGE"
+                                },
+                                "imageHash": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "pattern": "^url\\(['\"]?data:image\\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}['\"]?\\)$"
+                                },
+                                "scaleMode": {
+                                  "type": "string",
+                                  "enum": [
+                                    "FILL",
+                                    "FIT",
+                                    "CROP",
+                                    "STRETCH"
+                                  ]
+                                },
+                                "imageTransform": {
+                                  "type": "array",
+                                  "items": [
+                                    {
+                                      "type": "array",
+                                      "items": [
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "number"
+                                        }
+                                      ],
+                                      "additionalItems": false,
+                                      "minItems": 3,
+                                      "maxItems": 3
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": [
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "number"
+                                        }
+                                      ],
+                                      "additionalItems": false,
+                                      "minItems": 3,
+                                      "maxItems": 3
+                                    }
+                                  ],
+                                  "additionalItems": false,
+                                  "minItems": 2,
+                                  "maxItems": 2
+                                },
+                                "rotation": {
+                                  "type": "number",
+                                  "const": 0
+                                },
+                                "scalingFactor": {
+                                  "type": "number",
+                                  "const": 1
+                                },
+                                "filters": {
+                                  "type": "object",
+                                  "propertyNames": {
+                                    "type": "string"
+                                  },
+                                  "additionalProperties": {
+                                    "type": "number",
+                                    "const": 0
+                                  }
+                                }
+                              },
+                              "required": [
+                                "index",
+                                "visible",
+                                "opacity",
+                                "blendMode",
+                                "type",
+                                "imageHash",
+                                "image",
+                                "scaleMode"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "version",
+                      "order",
+                      "paints"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "values",
+                  "stack"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "solidFillComposition": {
           "type": "object",
           "properties": {
@@ -6144,7 +7994,9 @@
                   "opacity",
                   "background-color",
                   "outline-color",
-                  "outline-width"
+                  "outline-width",
+                  "border-color",
+                  "border-width"
                 ]
               },
               "additionalProperties": {
@@ -6218,7 +8070,9 @@
               "opacity",
               "background-color",
               "outline-color",
-              "outline-width"
+              "outline-width",
+              "border-color",
+              "border-width"
             ]
           }
         },

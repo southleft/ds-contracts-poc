@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
+import {createFigmaMock} from '../../scripts/plugin-engine-mock-figma.mjs';
+import {mapRestToDump,REST_DUMP_VERSION} from './rest/map.js';
+import {PLUGIN_DUMP_VERSION,type DumpSet} from './types.js';
+import {insideRootStrokeObservation} from './root-stroke-observation.js';
+import {observeFillStack} from './fill-stack-observation.js';
+const paint={type:'SOLID',color:{r:.2,g:.4,b:.6,a:.75},opacity:.5,blendMode:'NORMAL',visible:true,boundVariables:{color:{type:'VARIABLE_ALIAS',id:'unresolved-original'}}};
+const plain=<T>(v:T):T=>JSON.parse(JSON.stringify(v));
+test('both canonical readers preserve original stroke entries, pattern and unresolved aliases on instances',async()=>{
+ const component={id:'main',name:'Child',key:'child-key',type:'COMPONENT',children:[]};
+ const instance:any={id:'use',name:'Use',type:'INSTANCE',componentId:'main',layoutMode:'HORIZONTAL',strokeAlign:'INSIDE',strokeWeight:3,strokes:[paint],strokeDashes:[],absoluteBoundingBox:{x:0,y:0,width:24,height:24},children:[]};
+ const root={id:'root',name:'Probe',type:'COMPONENT',children:[instance]},raw:any={name:'Source',nodes:{root:{document:root},main:{document:component}},components:{main:{key:'child-key',name:'Child'}}};
+ const before=JSON.stringify(raw),rest=mapRestToDump(raw);assert.equal(JSON.stringify(raw),before);assert.equal(rest.dump._provenance?.dumpVersion,REST_DUMP_VERSION);
+ const node=(rest.dump.Probe as DumpSet).variants[0].children![0];assert.deepEqual(node.sourceStrokeStack,observeFillStack([paint]));assert.deepEqual(node.sourceStrokePattern,{version:1,complete:true,dashes:[]});assert.deepEqual(insideRootStrokeObservation(node),{color:'rgba(51,102,153,0.375)',weight:3,variableId:'unresolved-original'});
+ instance.strokes.push({...paint,visible:false});instance.strokeDashes=[2,3];const mutated=(mapRestToDump(raw).dump.Probe as DumpSet).variants[0].children![0];assert.equal(mutated.sourceStrokeStack?.paints.length,2);assert.deepEqual(mutated.sourceStrokePattern?.dashes,[2,3]);assert.equal(insideRootStrokeObservation(mutated),undefined);
+ delete instance.strokeDashes;const omitted=(mapRestToDump(raw).dump.Probe as DumpSet).variants[0].children![0];assert.deepEqual(omitted.sourceStrokePattern,{version:1,complete:true,dashes:[],defaulted:true});
+ instance.strokeDashes=null;assert.equal((mapRestToDump(raw).dump.Probe as DumpSet).variants[0].children![0].sourceStrokePattern,undefined);
+ const {figma:mock}=createFigmaMock();const figma:any=mock;const main=figma.createComponent();main.name='Child';const use=main.createInstance();use.name='Use';use.strokes=plain([paint]) as any;use.layoutMode='HORIZONTAL';use.strokeAlign='INSIDE';use.strokeWeight=3;(use as any).strokesIncludedInLayout=false;(use as any).dashPattern=[];
+ const parent=figma.createComponent();parent.name='Probe';parent.appendChild(use);figma.currentPage.appendChild(parent);
+ const source=readFileSync(new URL('./dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,'const TARGET_SETS = ["Probe"];');
+ const read=async()=>plain(await vm.runInNewContext('(async()=>{'+source+'\n})()',{figma,console:{log(){},warn(){},error(){}}},{timeout:20000}));
+ const plugin:any=await read();assert.equal(plugin._provenance.dumpVersion,PLUGIN_DUMP_VERSION);const native=plugin.Probe.variants[0].children[0];assert.deepEqual(native.sourceStrokeStack,node.sourceStrokeStack);assert.deepEqual(native.sourceStrokePattern,node.sourceStrokePattern);assert.deepEqual(insideRootStrokeObservation(native),insideRootStrokeObservation(node));
+ (use as any).dashPattern=[1,2];const dashed:any=await read();assert.equal(insideRootStrokeObservation(dashed.Probe.variants[0].children[0]),undefined);
+ delete (use as any).dashPattern;const missing:any=await read();assert.equal(missing.Probe.variants[0].children[0].sourceStrokePattern,undefined);
+});

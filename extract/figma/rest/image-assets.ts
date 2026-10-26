@@ -28,6 +28,10 @@ export async function collectRestImageAssets(dump: DumpFile,
     if (!value || typeof value !== 'object') return;
     const node = value as DumpNode;
     for (const paint of node.imagePaints ?? []) if (typeof paint.imageHash === 'string') hashes.add(paint.imageHash);
+    for (const {paint} of node.sourceFillStack?.paints ?? []) {
+      if (paint && typeof paint === 'object' && 'type' in paint && paint.type === 'IMAGE' &&
+          'imageHash' in paint && typeof paint.imageHash === 'string') hashes.add(paint.imageHash);
+    }
     for (const [key, child] of Object.entries(value)) if (key !== '_imageAssets') visit(child);
   };
   visit(dump);

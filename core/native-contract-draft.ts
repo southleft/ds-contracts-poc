@@ -220,6 +220,7 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
     for (const name of [spec.instanceRootStroke?.color, spec.instanceRootStroke?.width])
       if (name) boundNames.add(name);
     if(spec.solidFillCompositionToken)boundNames.add(spec.solidFillCompositionToken.split('.').join('/'));
+    for(const paint of spec.fillStack?.paints??[])if(paint.type==='SOLID'&&paint.token)boundNames.add(paint.token.split('.').join('/'));
     for (const name of [spec.fill, spec.stroke, spec.instanceRootFill?.varName, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.instanceSize?.varName, spec.instanceInk?.varName, spec.svgPaintVar,
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
       if (name) boundNames.add(name);

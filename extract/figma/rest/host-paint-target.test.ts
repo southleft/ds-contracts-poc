@@ -5,6 +5,9 @@ import {readFileSync} from 'node:fs';
 import {mapRestToDump,type RestNode} from './map.js';
 import type {DumpSet,DumpHostOverride} from '../types.js';
 const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8');
+// These spliced harnesses assert only legacy override channels. Full production
+// source-stack capture (including bindings/assets) runs in fill-stack-observation.test.ts.
+const legacySourceStackStub='const captureSourceFillStack=async()=>undefined;';
 const readPlugin=vm.runInNewContext(source.slice(source.indexOf('async function dumpSolidFillTarget('),source.indexOf('async function dumpNode('))+';dumpSolidFillTarget') as (root:any,target:any,plane?:'stroke'|'text-fill'|'text-characters'|'shape-fill')=>Promise<DumpHostOverride['solidFillTarget']>;
 const vector=(id:string):RestNode=>({id,name:'Same name',type:'VECTOR',fills:[{type:'SOLID',color:{r:.5,g:.25,b:0,a:1}}]});
 const fixture=():RestNode=>({id:'1:1',name:'Host',type:'INSTANCE',componentId:'main:host',children:[
@@ -89,7 +92,7 @@ test('character overrides retain exact owners independently of text paint, inclu
  // Execute the production plugin capture block, not only its identity helper.
  const begin=source.indexOf("      if (overriddenCount > 0 && typeof node.findAll === 'function')");
  const end=source.indexOf('    } catch (e)',begin);
- const capture=vm.runInNewContext('(async function(node,overridden,dumpSolidFillTarget){const out={},nodePath="fixture",overriddenCount=Object.keys(overridden).length;const degrade=()=>{};'+source.slice(begin,end)+';return out;})');
+ const capture=vm.runInNewContext('(async function(node,overridden,dumpSolidFillTarget){const out={},nodePath="fixture",overriddenCount=Object.keys(overridden).length;const degrade=()=>{};'+legacySourceStackStub+source.slice(begin,end)+';return out;})');
  for(const input of [r,duplicate,missing]){
   const root=pluginTree(input);root.findAll=(pred:any)=>{const all:any[]=[];const walk=(n:any)=>{for(const c of n.children){if(pred(c))all.push(c);walk(c);}};walk(root);return all;};
   const actual=plain(await capture(root,Object.fromEntries(input.overrides!.map(o=>[o.id,true])),readPlugin));
@@ -113,7 +116,7 @@ test('empty stroke proof requires an explicit empty array and qualified fill own
 test('production plugin host capture matches REST empty-stroke evidence',async()=>{
  const begin=source.indexOf("      if (hostCount > 0 && typeof node.findAll === 'function')");
  const end=source.indexOf("      if (overriddenCount > 0",begin);
- const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map(),SolidFillCapture={observeSolidFillComposition:()=>undefined};const dumpPaint=async(p)=>p.length?{hex:"804000"}:undefined;'+source.slice(begin,end)+';return out.hostOverrides;})');
+ const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map(),SolidFillCapture={observeSolidFillComposition:()=>undefined};const dumpPaint=async(p)=>p.length?{hex:"804000"}:undefined;'+legacySourceStackStub+source.slice(begin,end)+';return out.hostOverrides;})');
  for(const strokes of [undefined,[],[{type:'SOLID',color:{r:.5,g:.25,b:0,a:1}}]]){
   const input=fixture();if(strokes)input.children![0].strokes=strokes;
   const root=pluginTree(input);root.findAll=(pred:any)=>{const all:any[]=[];const walk=(n:any)=>{for(const c of n.children){if(pred(c))all.push(c);walk(c);}};walk(root);return all;};
@@ -166,7 +169,7 @@ test('production plugin override block retains shape paint precision and matches
  const {observeSolidFillComposition}=await import('../solid-fill-observation.js');
  const begin=source.indexOf("      if (hostCount > 0"),end=source.indexOf("      if (overriddenCount > 0",begin);
  assert(begin>=0&&end>begin);
- const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget,SolidFillCapture){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map();const dumpPaint=async(p)=>p.length?{hex:"804000",alpha:p[0].opacity}:undefined;'+source.slice(begin,end)+';return out.hostOverrides;})');
+ const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget,SolidFillCapture){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map();const dumpPaint=async(p)=>p.length?{hex:"804000",alpha:p[0].opacity}:undefined;'+legacySourceStackStub+source.slice(begin,end)+';return out.hostOverrides;})');
  for(const type of ['FRAME','RECTANGLE','ELLIPSE']){
   const input=fixture();input.children![0].type=type;input.children![0].fills![0].opacity=Math.fround(.1);
   const root=pluginTree(input);root.findAll=(pred:any)=>{const all:any[]=[];const walk=(n:any)=>{for(const c of n.children){if(pred(c))all.push(c);walk(c);}};walk(root);return all;};
@@ -225,7 +228,7 @@ test('an explicit nested character edit retains its actual nearest-owner propert
 
 test('empty shape fill overrides preserve explicit emptiness in both production readers',async()=>{
  const begin=source.indexOf('      if (hostCount > 0'),end=source.indexOf('      if (overriddenCount > 0',begin);
- const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map(),SolidFillCapture={observeSolidFillComposition:()=>undefined};const dumpPaint=async()=>undefined;'+source.slice(begin,end)+';return out.hostOverrides;})');
+ const capture=vm.runInNewContext('(async function(node,hostFieldsById,dumpSolidFillTarget){const out={},nodePath="fixture",hostCount=Object.keys(hostFieldsById).length;const degrade=()=>{},capturedVariableConsumers=new Map(),SolidFillCapture={observeSolidFillComposition:()=>undefined};const dumpPaint=async()=>undefined;'+legacySourceStackStub+source.slice(begin,end)+';return out.hostOverrides;})');
  for(const type of ['FRAME','RECTANGLE','ELLIPSE','VECTOR','TEXT'])for(const fills of [undefined,[],[{type:'SOLID',visible:false}]]){
   const input=fixture();input.children![0].type=type;input.children![0].fills=fills;
   const root=pluginTree(input);root.findAll=(pred:any)=>{const all:any[]=[];const walk=(n:any)=>{for(const c of n.children){if(pred(c))all.push(c);walk(c);}};walk(root);return all;};

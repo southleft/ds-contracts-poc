@@ -1,3 +1,5 @@
+import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
+import {sourceFillStack} from './ordered-paint-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
@@ -2566,6 +2568,64 @@ interface ChildIntrinsicContext {
   sourceKey: string;
   sourceNodeId: string;
   values: Readonly<Record<string,string>>;
+  /** Exact captured main roots, not names or reconstructed token values. */
+  rootPaints?: ReadonlyMap<string,Pick<DumpNode,'name'|'type'|'nodeId'|'componentKey'|'sourceFillStack'>>;
+}
+
+function sameCapturedSingleImage(m:Merged,ref:{id?:string},ctx:Ctx,where:string):boolean {
+ const child=ContractSchema.safeParse(ctx.contractsById?.get(ref.id!)),source=ctx.childIntrinsicContexts?.get(ref.id!);
+ if(!child.success||!source?.rootPaints||source.contractRevision!==revisionOf(child.data)||source.sourceFileKey!==ctx.fileKey||
+    source.sourceFileKey!==child.data.bindings.figma.anchors.fileKey||
+    source.sourceKey!==child.data.bindings.figma.anchors.componentSetKey||source.sourceNodeId!==child.data.bindings.figma.anchors.nodeId)return false;
+ for(const {node,variant}of m.occ){
+  const geometry=node.instanceGeometry,main=geometry&&source.rootPaints.get(geometry.componentId);
+  if(!node.nodeId||geometry?.nodeId!==node.nodeId||!main||main.nodeId!==geometry?.componentId||
+     !node.instanceKey||main.componentKey!==node.instanceKey||node.instanceSetKey!==source.sourceKey)return false;
+  // A missing or unsupported main witness cannot grant no-op permission.
+  try{sourceFillStack(main,ctx.imageAssets,where,variant);}catch{return false;}
+  sourceFillStack(node,ctx.imageAssets,where,variant);
+  if(canonicalJson(node.sourceFillStack)!==canonicalJson(main.sourceFillStack))return false;
+ }
+ return true;
+}
+
+function carryOrderedFillStack(m:Merged,part:Record<string,unknown>,ctx:Ctx,where:string):void {
+ const multiple=m.occ.some(o=>(o.node.sourceFillStack?.paints.length??0)>1);
+ const ref=part.component as {id?:string}|undefined;
+ const singleImage=!!ref&&m.occ.some(({node})=>{
+  const paint=node.sourceFillStack?.paints?.[0]?.paint;
+  return node.imagePaints?.length===1||node.sourceFillStack?.paints?.length===1&&
+   !!paint&&typeof paint==='object'&&!Array.isArray(paint)&&'type' in paint&&paint.type==='IMAGE';
+ });
+ if(!multiple){
+  if(!singleImage)return;
+  if(!m.occ.every(({node})=>node.sourceFillStack?.version===1&&node.sourceFillStack.complete===true&&
+    node.sourceFillStack.order==='bottom-to-top'&&Array.isArray(node.sourceFillStack.paints))){
+   ctx.notes.push(where+': per-instance single image has no complete source fill stack; legacy child paint path retained without a new override; review.');
+   return;
+  }
+  if(sameCapturedSingleImage(m,ref!,ctx,where))return;
+ }
+ if(!['FRAME','RECTANGLE','ELLIPSE','COMPONENT','INSTANCE'].includes(m.type))throw Error('fill-stack-owner-unqualified:'+where);
+ const rows=m.occ.map(o=>({variant:o.variant,stack:sourceFillStack(o.node,ctx.imageAssets,where,o.variant)}));
+ for(const row of rows)for(const paint of row.stack.paints)if(paint.type==='SOLID'&&paint.sourceBinding)(ctx.rootPaintBindings??=[]).push(paint.sourceBinding.binding);
+ if(ref){
+  const child=ContractSchema.safeParse(ctx.contractsById?.get(ref.id!));
+  if(!child.success||!ctx.fileKey||child.data.bindings.figma.anchors.fileKey!==ctx.fileKey||!child.data.bindings.figma.anchors.componentSetKey||m.occ.some(o=>o.node.instanceSetKey!==child.data.bindings.figma.anchors.componentSetKey))throw Error('fill-stack-reference-owner-unqualified:'+where);
+  part.fillStackSource={fileKey:ctx.fileKey,setKey:child.data.bindings.figma.anchors.componentSetKey,contractRevision:revisionOf(child.data)};
+ }
+ const unique=new Set(rows.map(r=>canonicalJson(r.stack)));
+ if(unique.size===1)part.fillStack=rows[0].stack;
+ else {
+  if(!ctx.axes.length)throw Error('fill-stack-changing-without-axis:'+where);
+  part.fillStackByCombination={props:ctx.axes.map(a=>a.propName),rows:rows.map(r=>({values:ctx.axes.map(a=>{const v=axisValuesOf(r.variant)[a.property];if(v===undefined)throw Error('fill-stack-source-tuple-missing:'+where);return axisValue(a,v);}),stack:r.stack}))};
+ }
+ const strip=(record:unknown)=>{if(record&&typeof record==='object')for(const key of Object.keys(record))if(key.startsWith('background'))delete (record as Record<string,unknown>)[key];};
+ for(const record of [part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{})])strip(record);
+ for(const name of ['tokensByProp','literalsByProp','statesByProp'])for(const table of Array.isArray(part[name])?part[name] as any[]:part[name]?[part[name] as any]:[])for(const record of Object.values(table.map??{}))strip(record);
+ for(const name of ['tokensByCombination','literalsByCombination'])for(const table of (part[name] as any[])??[])for(const row of table.rows??[])strip(row.tokens??row.literals);
+ for(const field of ['solidFillComposition','solidFillCompositionByCombination','solidFillCompositionToken','solidFillCompositionSourceBinding','solidFillCompositionObservedBinding'])delete part[field];
+ ctx.notes.push(where+': complete ordered source fills preserved; hidden, zero-alpha and covered paints retain their original indices.');
 }
 
 interface Ctx {
@@ -11551,6 +11611,21 @@ function carryInstanceRootInputs(m:Merged,component:Record<string,unknown>,ctx:C
    ctx.notes.push(`${where}: captured outside instance stroke queued for the linked child's paired root inputs`);
   } else ctx.notes.push(`${where}: instance-root-stroke-not-carried — every occurrence requires an explicit keyed outside solid stroke and paired child inputs`);
  }
+ if(channels==='all'&&m.occ.some(o=>o.node.strokeAlign==='INSIDE'&&o.node.stroke)) {
+  const observations=m.occ.map(({node:n})=>{
+   const w=n.instanceRootOverrides,resolution=resolveChildContract(n.instanceOf??n.name,nodeInstanceKeys(n),ctx),observation=insideRootStrokeObservation(n);
+   return child?.anatomy.root.instanceRootInputs?.includes('border-color')&&child.anatomy.root.instanceRootInputs.includes('border-width')&&
+    anchor?.fileKey===ctx.fileKey&&!!anchor?.componentSetKey&&resolution.id===id&&resolution.mechanism==='key'&&
+    !!w?.nodeId&&w.nodeId===n.nodeId&&!!w.componentId&&w.componentKey===n.instanceKey&&w.componentSetKey===n.instanceSetKey&&
+    w.componentSetKey===anchor.componentSetKey&&n.instanceGeometry?.nodeId===n.nodeId&&n.instanceGeometry.componentId===w.componentId&&['strokes','strokeWeight'].every(field=>w.fields.includes(field))?observation:undefined;
+  });
+  if(observations.every(value=>value!==undefined)) {
+   for(const [channel,kind]of [['border-color','color-alias'],['border-width','px']]as const)
+    ctx.mint.observations.push({nodePath:where,part:partPathOf(where),cssProperty:channel,kind,booleanAxes:true,target,source:`${where}|instance-root-inside-stroke`,
+     occurrences:m.occ.map((o,i)=>({variant:o.variant,value:channel==='border-color'?observations[i]!.color:observations[i]!.weight,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)??{}}))});
+   ctx.notes.push(`${where}: complete single NORMAL solid INSIDE root stroke retained as paired non-layout usage inputs; source alias identities remain unqualified for native binding`);
+  } else ctx.notes.push(`${where}: instance-inside-stroke-not-carried — complete single original NORMAL stroke, non-layout alignment, keyed root authority and paired child inputs required`);
+ }
  ctx.mint.refOverrides.push({component,target,property:'rootOverrides'});
  const remaining=[...new Set(m.occ.flatMap(o=>o.node.instanceRootOverrides?.fields??[]))].filter(field=>field!=='fills'&&!inputs.some(([,known])=>known===field));
  if(remaining.length)ctx.notes.push(`${where}: instance root override fields not modeled by root inputs: ${remaining.join(', ')}; review`);
@@ -12373,7 +12448,7 @@ function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,whe
   if(m.type==='INSTANCE' || m.occ.some(o=>!o.node.layout || o.node.layout.mode==='GRID'))throw Error(`child-paint-order-owner-unqualified:${where}`);
   // Hidden instances may still be retained for captured paint or caller
   // visibility. Their emitted owners remain part of the stacking domain.
-  const renderedChildren=m.children.filter(c=>!isUnboundHiddenInstance(c) ||
+  const renderedChildren=m.children.filter(c=>!isUnboundHiddenInstance(c) || c.occ.some(o=>(o.node.sourceFillStack?.paints.length??0)>1) ||
     c.occ.some(o=>o.node.nodeId && ctx.sourcePartsByNodeId?.has(o.node.nodeId)));
   const byNode=new Map(renderedChildren.flatMap(c=>c.occ.map(o=>[o.node,c.name] as const)));
   const merged=renderedChildren.map(c=>c.name);
@@ -13005,7 +13080,7 @@ function buildPart(
   // Captured composed paint still needs an owner, even when its instance is
   // permanently hidden. Retain that part through normal qualification and
   // the display:none projection below instead of losing its source witness.
-  const ownsCapturedPaint = ctx.draftPaintOrigins && m.occ.some(o=>o.node.sourceFillComposition!==undefined);
+  const ownsCapturedPaint = ctx.draftPaintOrigins && m.occ.some(o=>o.node.sourceFillComposition!==undefined) || m.occ.some(o=>(o.node.sourceFillStack?.paints.length??0)>1);
   // A captured caller can reveal an otherwise hidden instance. Keep the
   // identity-qualified owner so the visibility control below can be authored.
   const ownsVisibilityDemand = m.occ.some(o=>o.node.nodeId && ctx.visibilityNodes?.has(o.node.nodeId));
@@ -13059,6 +13134,7 @@ function buildPart(
     }
   }
   if(part)(ctx.partialMinMaxOrigins??=[]).push({part,merged:m,where});
+  if(part)carryOrderedFillStack(m,part,ctx,where);
   if(part && presenceMatrix && ctx.mint){
     const present=new Set(m.occ.map(o=>o.variant));
     const absent=ctx.totalVariants.filter(v=>!present.has(v)).map(v=>ctx.mint!.axisValuesByVariant.get(v));
@@ -13340,7 +13416,7 @@ function buildPart(
   }
   const shapeDemands=m.occ.flatMap(o=>o.node.nodeId?ctx.shapeFillNodes?.get(o.node.nodeId)??[]:[]);
   if(shapeDemands.length){
-    if(!part||part!==sourcePart||part.component||part.slot||part.repeat||!['FRAME','RECTANGLE','ELLIPSE'].includes(m.type)||m.occ.some(o=>o.node.sourceEmptyFill===true ? !!o.node.fill||!!o.node.sourceNormalFillComposition : !o.node.sourceNormalFillComposition||!('paint' in o.node.sourceNormalFillComposition)||o.node.sourceNormalFillComposition.paint.blendMode!=='NORMAL'))throw Error('shape-fill-demand-owned-part-unqualified:'+where);
+    if(!part||part!==sourcePart||part.component||part.slot||part.repeat||!['FRAME','RECTANGLE','ELLIPSE'].includes(m.type)||m.occ.some(o=>o.node.sourceFillStack ? (sourceFillStack(o.node,ctx.imageAssets,where,o.variant),false) : o.node.sourceEmptyFill===true ? !!o.node.fill||!!o.node.sourceNormalFillComposition : !o.node.sourceNormalFillComposition||!('paint' in o.node.sourceNormalFillComposition)||o.node.sourceNormalFillComposition.paint.blendMode!=='NORMAL'))throw Error('shape-fill-demand-owned-part-unqualified:'+where);
     const taken=new Set([...ctx.axes.map(a=>a.propName),...ctx.boolProps.map(p=>p.name),...ctx.textProps.map(p=>p.name),...ctx.shapeFillAuthored!.map(p=>p.prop),...ctx.textColorAuthored!.map(p=>p.prop)]);
     const base='shape'+pascal(selfKey)+'FillOverride';let prop=base,index=2;while(taken.has(prop))prop=base+index++;
     part.shapeFillOverrideProp=prop;ctx.shapeFillAuthored!.push({prop,demands:shapeDemands});
@@ -18020,6 +18096,8 @@ function proposeFromDumpFencedImpl(
     if (merged.occ.some((o) => typeof o.node.imageFill === 'string'||nativeImageProjection(o.node))) declareImageFillCover(root,merged.occ.map(o=>o.node));
   }
 
+  carryOrderedFillStack(merged,root,ctx,where);
+
   // Generator artifact: a root whose only child is the auto-injected `label`
   // text node (contracts with a `children` text prop and no parts). The node
   // is not a part — its text tokens hoist to the root.
@@ -19423,6 +19501,7 @@ function proposeFromDumpFencedImpl(
     const consumed=new Set<DumpNode>();
     const sourceBindings:NonNullable<FigmaProposalResult['draftPaintQualification']>['sourceBindings']=[];
     for(const origin of ctx.draftPaintOrigins){
+      if((origin.part as Part).fillStack||(origin.part as Part).fillStackByCombination)continue;
       if(!actualParts.has(origin.part as Part))throw Error(`solid-fill-composition-source-owner-detached:${origin.where}`);
       const paints=origin.merged.occ.map(o=>o.node.sourceFillComposition!==undefined?o.node.sourceFillComposition:o.node.sourceNormalFillComposition??(o.node.sourceEmptyFill?{paint:{color:{r:0,g:0,b:0},opacity:0,blendMode:'NORMAL' as const}}:undefined));
       if(paints.some(p=>!p || 'issue' in p))throw Error(`solid-fill-composition-source-occurrence-unqualified:${origin.where}`);
@@ -19596,6 +19675,13 @@ function proposeFromDumpFencedImpl(
   if (drawnDeclaration !== undefined) {
     compactDrawnLayoutConstants(contract as unknown as Contract, ctx.notes);
     if (validationContract !== contract) compactDrawnLayoutConstants(validationContract as unknown as Contract, ctx.notes);
+  }
+  for(const holder of [contract,validationContract])for(const {part}of walkAnatomy(holder as unknown as Contract))if(part.fillStack||part.fillStackByCombination){
+    const strip=(record:unknown)=>{if(record&&typeof record==='object')for(const key of Object.keys(record))if(key.startsWith('background'))delete (record as Record<string,unknown>)[key];};
+    for(const record of [part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{})])strip(record);
+    for(const table of [...(Array.isArray(part.tokensByProp)?part.tokensByProp:part.tokensByProp?[part.tokensByProp]:[]),...(part.literalsByProp??[]),...(part.statesByProp??[])])for(const record of Object.values(table.map))strip(record);
+    for(const table of part.tokensByCombination??[])for(const row of table.rows)strip(row.tokens);
+    for(const table of part.literalsByCombination??[])for(const row of table.rows)strip(row.literals);
   }
   const parsedContract = ContractSchema.parse(validationContract);
   const jointErrors = jointTokenTableErrors(parsedContract);
@@ -20268,6 +20354,16 @@ function proposeBatchFromDumpInternal(
             }
           }
 
+          const needsInsideStroke=(node:DumpNode):boolean=>node.type==='INSTANCE'
+            ? node.instanceSetKey===value.key&&insideRootStrokeObservation(node)!==undefined
+            : (node.children??[]).some(needsInsideStroke);
+          if(Object.values(dump).some(entry=>entry&&typeof entry==='object'&&'variants'in entry&&Array.isArray(entry.variants)&&entry.variants.some(needsInsideStroke))) {
+            const candidate=ContractSchema.parse(proposal.contract),before:string[]=[],after:string[]=[];
+            candidate.anatomy.root.instanceRootInputs!.push('border-color','border-width');
+            validateContract(ContractSchema.parse(proposal.contract),new Map(),before,new EveryIcon());validateContract(candidate,new Map(),after,new EveryIcon());
+            if(after.every(error=>before.includes(error))){(proposal.contract.anatomy as Contract['anatomy']).root.instanceRootInputs!.push('border-color','border-width');proposal.notes.push(`${name}: fresh unstroked root declares paired inside-stroke inputs for complete captured usages; omission retains the main`);}
+          }
+
           // The generated root already forwards style backgroundColor. Grant
           // this API only when it introduces no structural validation errors;
           // source paint and caller identity are qualified independently.
@@ -20309,7 +20405,9 @@ function proposeBatchFromDumpInternal(
         if (parsed.success && complete && parsed.data.bindings.figma.anchors.fileKey === opts.fileKey &&
             parsed.data.bindings.figma.anchors.componentSetKey === value.key && parsed.data.bindings.figma.anchors.nodeId === value.nodeId)
           childIntrinsicContexts.set(parsed.data.id,{contractRevision:revisionOf(parsed.data),sourceFileKey:opts.fileKey,
-            sourceKey:value.key,sourceNodeId:value.nodeId,values:Object.freeze(Object.fromEntries(values))});
+            sourceKey:value.key,sourceNodeId:value.nodeId,values:Object.freeze(Object.fromEntries(values)),
+            rootPaints:new Map(value.variants.filter(v=>v.nodeId && value.variants.filter(other=>other.nodeId===v.nodeId).length===1)
+              .map(v=>[v.nodeId!,structuredClone({name:v.name,type:v.type,nodeId:v.nodeId,componentKey:v.componentKey,sourceFillStack:v.sourceFillStack})]))});
         else childIntrinsicContexts.delete(String(proposal.contract.id));
       }
       for (const stub of proposal.childStubs ?? []) {

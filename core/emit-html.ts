@@ -1550,6 +1550,7 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
       if (w.part.component?.sameInkInsideStroke) throw new Error('HTML_INSTANCE_INSIDE_STROKE_UNSUPPORTED');
       if (w.part.component?.booleanPropsByCombination) throw new Error('HTML_COMPONENT_BOOLEAN_ARGUMENTS_UNSUPPORTED');
       if (w.part.component?.enumPropsByCombination) throw new Error('HTML_ENUM_ARGUMENTS_UNSUPPORTED');
+      if(w.part.fillStack||w.part.fillStackByCombination)throw Error('HTML_FILL_STACK_UNSUPPORTED');
       if (w.part.component?.textPropsByCombination) throw new Error('HTML_TEXT_ARGUMENTS_UNSUPPORTED');
       if (w.part.shapeFillOverrideProp) throw new Error('HTML_SHAPE_FILL_OVERRIDE_UNSUPPORTED');
       if (w.part.textColorOverrideProp) throw new Error('HTML_TEXT_COLOR_OVERRIDE_UNSUPPORTED');

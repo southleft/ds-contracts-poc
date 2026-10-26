@@ -941,3 +941,24 @@ export const branchLink = (key: string): string | undefined => {
 reg("layout", "absolute-component-placement", ["part.instanceAffineByProp", "part.instanceAffineByProp.prop", "part.instanceAffineByProp.map"]);
 
 reg("layout", "absolute-component-placement", ["part.instanceAffineLayout", "part.instanceAffineLayout.props", "part.instanceAffineLayout.rows", "part.instanceAffineLayout.rows.values", "part.instanceAffineLayout.rows.geometry", "part.instanceAffineLayout.rows.geometry.localSize", "part.instanceAffineLayout.rows.geometry.localSize.width", "part.instanceAffineLayout.rows.geometry.localSize.height", "part.instanceAffineLayout.rows.geometry.transform", "part.instanceAffineLayout.rows.fill", "part.instanceAffineLayout.rows.fill.width", "part.instanceAffineLayout.rows.fill.height"]);
+
+reg("anatomy", "fill-stack", [
+  "part.fillStack",
+  "part.fillStack.order",
+  "part.fillStack.paints",
+  "part.fillStack.paints.index",
+  "part.fillStack.version",
+  "part.fillStackByCombination",
+  "part.fillStackByCombination.props",
+  "part.fillStackByCombination.rows",
+  "part.fillStackByCombination.rows.stack",
+  "part.fillStackByCombination.rows.stack.order",
+  "part.fillStackByCombination.rows.stack.paints",
+  "part.fillStackByCombination.rows.stack.paints.index",
+  "part.fillStackByCombination.rows.stack.version",
+  "part.fillStackByCombination.rows.values",
+  "part.fillStackSource",
+  "part.fillStackSource.contractRevision",
+  "part.fillStackSource.fileKey",
+  "part.fillStackSource.setKey"
+]);
