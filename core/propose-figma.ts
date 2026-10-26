@@ -29,7 +29,7 @@ import {demandedVisibilityNodes,visibilityBindingMatches,visibilityDemandsFromDu
 import {outsideStrokeIssues, resolveLayout} from '../scripts/contract-schema.js';
 import {allocateInstanceAffine} from '../scripts/contract-schema.js';
 import {inferPresenceByCombination} from './infer-presence.js';
-import {resolvePresence, defaultSlotFamilyIssue} from '../scripts/contract-schema.js';
+import {resolvePresence, defaultSlotFamilyIssue, callerContentGroups} from '../scripts/contract-schema.js';
 import type {DumpHostOverride} from '../extract/figma/types.js';
 import {projectNativeImagePaints,nativeImageProjection} from './native-image-paint.js';
 import {projectNativeGroupPlanes} from './native-group-plane.js';
@@ -12707,6 +12707,38 @@ function carryAuthoredTextAppearance(m: Merged, part: Record<string, unknown>, c
   ctx.notes.push(`${where}: complete source-owned authored text appearance retained for ${table.rows.length} source-present combinations; optional caller overrides remain independent`);
 }
 
+/** A source-present component may own caller slot parts. Wrapping that whole
+ * usage preserves their scope; never infer ownership from a display name. */
+function qualifiedPresenceCallerContent(part:Record<string,unknown>,m:Merged,ctx:Ctx):boolean {
+  if(part.parts===undefined)return true;
+  const usage=part as Part,ref=usage.component,source=ctx.structuralAvailabilitySource;
+  if(!ref||source?.type!=='COMPONENT_SET'||!source.key||!source.nodeId||!ctx.fileKey||usage.slot||usage.repeat||usage.content||usage.text!==undefined||ref.text!==undefined||
+    source.variants.some(v=>!v.nodeId)||new Set(source.variants.map(v=>v.nodeId)).size!==source.variants.length)return false;
+  const parsed=ContractSchema.safeParse(ctx.contractsById?.get(ref.id));if(!parsed.success)return false;
+  const child=parsed.data,anchor=child.bindings.figma.anchors;
+  if(anchor.fileKey!==ctx.fileKey||!anchor.componentSetKey)return false;
+  const ids=new Set<string>();
+  for(const occurrence of m.occ){
+    const node=occurrence.node;if(!node.nodeId||ids.has(node.nodeId)||node.type!=='INSTANCE'||
+      (node.instanceSetKey??node.instanceKey)!==anchor.componentSetKey)return false;
+    ids.add(node.nodeId);
+    const mains=source.variants.filter(v=>v.name===occurrence.variant);if(mains.length!==1||!mains[0].nodeId)return false;
+    const matches:DumpNode[]=[];
+    const visit=(n:DumpNode)=>{if(n.nodeId===node.nodeId)matches.push(n);if(n.type!=='INSTANCE')for(const c of n.children??[])visit(c);};visit(mains[0]);
+    if(matches.length!==1||canonicalJson(matches[0])!==canonicalJson(node))return false;
+  }
+  try{
+    const groups=callerContentGroups(usage);if(!groups.length)return false;
+    return groups.every(group=>{
+      if(defaultSlotFamilyIssue(child,group.slot))return false;
+      const slots=walkAnatomy(child).filter(row=>row.part.slot?.name===group.slot).map(row=>row.part.slot!);
+      if(!slots.length||slots.some(slot=>slot.acceptsMode==='restrict'||slot.required||slot.min!==undefined||slot.max!==undefined))return false;
+      const prop=child.props.find(p=>p.bindings.code.prop===group.slot);
+      return !prop||!Object.hasOwn(ref.props??{},prop.name);
+    });
+  }catch{return false;}
+}
+
 /** Share the same complete presence proof before and after keyed identity splitting. */
 function observedPartPresence(m:Merged,ctx:Ctx,where:string) {
   const presenceNoteStart=ctx.notes.length;
@@ -13209,7 +13241,7 @@ function buildPart(
       // A component's paint remains child-owned. Conjoin its source presence
       // with the live Boolean using a structural visibility host, rather than
       // restyling its root or erasing either independent condition.
-      else if (!part.layout && !part.layoutByProp && !part.parts && !part.repeat && !part.placement && !part.overlay && !part.mask &&
+      else if (!part.layout && !part.layoutByProp && qualifiedPresenceCallerContent(part,m,ctx) && !part.repeat && !part.placement && !part.overlay && !part.mask &&
           !part.absolutePlacement && !part.absolutePlacementByCombination &&
           !m.occ.some(o=>absBoxOf(o.node))) {
         applyVisibleBinding(part, visibilityRef, ctx, where, m);
@@ -13307,7 +13339,13 @@ function buildPart(
     for(const o of m.occ)if(o.node.nodeId)ctx.textColorNodes?.delete(o.node.nodeId);
   }
   if(part&&part===sourcePart&&m.type==='TEXT'&&!part.component&&!part.slot&&!part.repeat&&!part.parts)for(const o of m.occ)if(o.node.nodeId)ctx.sourceTextParts?.push({nodeId:o.node.nodeId,partKey:selfKey});
-  if(part&&part===sourcePart&&part.component&&!part.slot&&!part.repeat&&m.type==='INSTANCE')for(const o of m.occ)if(o.node.nodeId)ctx.sourceInstanceParts?.push({nodeId:o.node.nodeId,partKey:selfKey,childId:(part.component as {id:string}).id});
+  // Record the actual component part when layout lowering inserted a wrapper.
+  // Object identity and a unique direct child are required; names are not evidence.
+  const wrappedInstances=part!==sourcePart&&sourcePart?.component&&!sourcePart.slot&&!sourcePart.repeat
+    ?Object.entries(part?.parts??{}).filter(([,child])=>child===sourcePart):[];
+  const recordedInstance=part===sourcePart&&part?.component&&!part.slot&&!part.repeat?{key:selfKey,id:(part.component as {id:string}).id}
+    :wrappedInstances.length===1&&sourcePart?.component?{key:wrappedInstances[0][0],id:(sourcePart.component as {id:string}).id}:undefined;
+  if(recordedInstance&&m.type==='INSTANCE')for(const o of m.occ)if(o.node.nodeId)ctx.sourceInstanceParts?.push({nodeId:o.node.nodeId,partKey:recordedInstance.key,childId:recordedInstance.id});
   const characterDemands=m.occ.flatMap(o=>o.node.nodeId?ctx.characterNodes?.get(o.node.nodeId)??[]:[]);
   if(characterDemands.some(d=>d.forwardTarget)){
     if(characterDemands.some(d=>!d.forwardTarget)||!part||part!==sourcePart||!part.component||part.slot||part.repeat||m.type!=='INSTANCE'||m.occ.length!==ctx.totalVariants.length){

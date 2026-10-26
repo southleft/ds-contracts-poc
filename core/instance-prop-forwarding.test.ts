@@ -2044,3 +2044,54 @@ test('root FILL proposal requires captured cross-axis allocation and independent
   (f:ReturnType<typeof make>)=>{f.child.anatomy.root.instanceRootInputs=['height']},
  ]){const bad=make();change(bad);assert.equal(bad.run().ref.rootFill,undefined);}
 });
+
+function contentPresenceFixture(){
+ const f=fixedContentFixture('leading');
+ f.set.key='housing-key';f.set.nodeId='housing-set';
+ f.set.propertyDefinitions!['Show lamp']={type:'BOOLEAN',defaultValue:true};
+ f.set.propertyDefinitions!.Power={type:'VARIANT',defaultValue:'Low',variantOptions:['Low','High']};
+ for(const [index,variant]of f.set.variants.entries()){
+  variant.name='Power='+(['Low','High'][index]);variant.variantProperties!.Power=['Low','High'][index];
+  variant.nodeId='housing-main-'+index;
+  if(index===0)variant.children=[];
+  else {variant.children![0].nodeId='lamp-'+index;variant.children![0].propRefs={visible:'Show lamp'};}
+ }
+ const propose=()=>proposeFromDump(f.set,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Indicator',f.child.id]]),contractIdByKey:new Map([['indicator-key',f.child.id],['selected-key',f.target.id],['sample-key',f.sample.id]]),contractsById:new Map([...f.scope].map(([id,c])=>[id,asMinimalChildContract(c)]))});
+ return {...f,propose};
+}
+test('content-bearing instance preserves caller subtree while source presence and Boolean are conjoined',()=>{
+ const f=contentPresenceFixture(),before=JSON.stringify(f.set),defaults=JSON.stringify([...f.scope]);
+ for(const reverse of [false,true]){
+  if(reverse)f.set.variants.reverse();const result=f.propose(),c=ContractSchema.parse(result.contract),rows=walkAnatomy(c);
+  const usage=rows.find(row=>row.part.component?.id===f.child.id)!;assert(usage);const host=rows.find(row=>row.path.join('/')===usage.path.slice(0,-1).join('/'))!;
+  assert(host.part.presenceByCombination);assert.equal(host.part.visibleWhen!.prop,'showLamp');assert.equal(usage.part.visibleWhen!.prop,'showLamp');
+  assert.equal(usage.part.component!.contentSlot,'leading');assert.deepEqual(usage.part.parts,{selectedContent:{component:{id:f.target.id}}});
+  assert.equal(result.sourceInstanceParts?.find(row=>row.nodeId==='lamp-1')?.partKey,usage.name);
+  assert.equal(JSON.stringify([...f.scope]),defaults);
+ }
+ f.set.variants.reverse();assert.equal(JSON.stringify(f.set),before);
+});
+test('content-bearing presence refuses ambiguous source identity and incompatible slot ownership',()=>{
+ const mutations:Array<(f:ReturnType<typeof contentPresenceFixture>)=>void>=[
+  f=>{delete f.set.variants[1].children![0].nodeId;},
+  f=>{f.set.variants[1].children![0].instanceSetKey='foreign-key';},
+  f=>{f.set.variants[0].nodeId=f.set.variants[1].nodeId;},
+  f=>{f.child.bindings.figma.anchors.fileKey='other-file';},
+   ];
+ for(const mutate of mutations){const f=contentPresenceFixture();mutate(f);const r=f.propose();const c=ContractSchema.parse(r.contract);assert(!walkAnatomy(c).some(row=>row.part.presenceByCombination&&Object.values(row.part.parts??{}).some(child=>child.component?.id===f.child.id)),String(mutate));}
+ const constrained=contentPresenceFixture();constrained.child.anatomy.root.parts!.region.parts!.well.slot!.max=1;
+ const refused=constrained.propose(),rc=ContractSchema.parse(refused.contract);
+ assert(!walkAnatomy(rc).some(row=>row.part.component?.id===constrained.target.id),'constrained content stays refused while the bare component keeps ordinary presence');
+});
+test('content-bearing source presence works across mixed axes without losing selected slot content',async t=>{
+ const f=contentPresenceFixture();f.set.propertyDefinitions!.Tone={type:'VARIANT',defaultValue:'A',variantOptions:['A','B']};
+ f.set.variants=f.set.variants.flatMap((v,i)=>['A','B'].map((tone,j)=>{const row=structuredClone(v);row.name+=`, Tone=${tone}`;row.nodeId+='-'+tone;row.variantProperties={...row.variantProperties,Tone:tone};if(row.children?.[0])row.children[0].nodeId='lamp-'+i+'-'+j;return row;}));
+ const r=f.propose(),c=ContractSchema.parse(r.contract),scope=new Map([...f.scope,[c.id,c]]);const power=c.props.find(p=>p.bindings.figma.property==='Power')!,shown=c.props.find(p=>p.bindings.figma.property==='Show lamp')!,tone=c.props.find(p=>p.bindings.figma.property==='Tone')!;
+ const values=Object.fromEntries(Object.entries(power.bindings.figma.values!).map(([key,value])=>[value,key]));
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const emitter of [reactEmitter,reactInlineEmitter]){const ctx={contracts:scope,tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map<string,string>()};const all=Object.fromEntries([...scope.values()].map(contract=>{const files=emitter.emit(contract,ctx);return[contract.name,{tsx:files[0].contents,css:files.find(file=>file.path.endsWith('.css'))?.contents}];}));
+  const page=await browser.newPage();try{const own=all[c.name];const render=await mountGenerated(page,c.name,own.tsx,own.css,all);
+   for(const [label,show,other]of [['Low',true,'a'],['High',true,'b'],['High',false,'a'],['Low',false,'b'],['High',true,'a']]as const){await render({[power.bindings.code.prop]:values[label],[shown.bindings.code.prop]:show,[tone.bindings.code.prop]:other});assert.equal(await page.getByText('Selected content',{exact:true}).count(),Number(label==='High'&&show));assert.equal(await page.getByText('Sample only',{exact:true}).count(),0);assert.equal(await page.locator('#root > * > *').count(),Number(label==='High'&&show));}
+  }finally{await page.close();}
+ }
+});

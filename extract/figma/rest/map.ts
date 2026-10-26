@@ -1,5 +1,6 @@
 import {restTextAppearance} from './text-appearance.js';
 import {nestedInstanceProperties} from './nested-instance-properties.js';
+import {selectedStrokeDrawing} from './selected-stroke.js';
 import {observeLocalGeometry} from '../local-geometry.js';
 import {observeReflectedHugGeometry} from '../reflected-hug-geometry.js';
 import { restImagePaints } from './image-assets.js';
@@ -413,13 +414,14 @@ export interface RestNodesResponse {
           name: string;
           componentSetId?: string;
           key?: string;
+          remote?: boolean;
           description?: string;
           documentationLinks?: Array<{ uri?: string }>;
         }
       >;
       componentSets?: Record<
         string,
-        { name: string; key?: string; description?: string; documentationLinks?: Array<{ uri?: string }> }
+        { name: string; key?: string; remote?: boolean; description?: string; documentationLinks?: Array<{ uri?: string }> }
       >;
       styles?: Record<string, { name: string; key?: string; styleType?: string }>;
     } | null
@@ -1430,6 +1432,7 @@ function mapSwapInstances(root: RestNode, property: string, ctx: Ctx): DumpFixed
       const next = [...path, index];
       if (node.type === 'INSTANCE' && node.componentPropertyReferences?.mainComponent === property) {
         const row: NonNullable<DumpFixedSwap['observedInstances']>[number] = { nodeId: node.id, path: next };
+        const drawing=selectedStrokeDrawing(node);if(drawing)row.strokeDrawing=drawing;
         if (node.componentId) row.componentId = node.componentId;
         const localSize = size(node), parentSize = size(parent), matrix = node.relativeTransform;
         if (localSize) row.size = localSize;
@@ -2483,14 +2486,14 @@ function mapNode(
         const textTarget = hit.node.type === 'TEXT' && o.overriddenFields.includes('characters') &&
           overrides.filter(row => row.id === o.id).length === 1 ? solidFillTarget(node, o.id, 'text-characters') : undefined;
         const textOwner = textTarget?.instancePath.length
-          ? nestedInstanceProperties(node, textTarget.instanceId, ctx.components, ctx.componentSets) : undefined;
+          ? nestedInstanceProperties(node, textTarget.instanceId, ctx.components, ctx.componentSets,(root,property)=>mapSwapInstances(root,property,ctx)) : undefined;
         const fields = o.overriddenFields.filter((f) => f !== 'characters');
         if (fields.length > 0 || textOwner) {
           const h: DumpHostOverride = { path, fields };
           if (textOwner) h.instanceProperties = textOwner;
           if(fields.includes('componentProperties')){
             const observed=overrides.filter(row=>row.id===o.id&&row.overriddenFields.includes('componentProperties')).length===1
-              ? nestedInstanceProperties(node,o.id,ctx.components,ctx.componentSets) : undefined;
+              ? nestedInstanceProperties(node,o.id,ctx.components,ctx.componentSets,(root,property)=>mapSwapInstances(root,property,ctx)) : undefined;
             if(observed)h.instanceProperties=observed;
             else ctx.report.degradations.push({code:'host-instance-properties-unavailable',nodePath,
               message:'nested property values lack unique complete owner, target or selection identity'});
@@ -2656,7 +2659,8 @@ function mapNode(
 // 1.64: provisional literal projection of qualified NORMAL solid fill stacks.
 // 1.65: source-qualified rectangular stroke-pattern tuple observations.
 // 1.66: current selected-slot root identity and auto-layout allocation witness.
-export const REST_DUMP_VERSION = '1.70';
+// 1.71: complete nested selected-property identity, fixed-root stroke geometry and metadata recovery.
+export const REST_DUMP_VERSION = '1.71';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin

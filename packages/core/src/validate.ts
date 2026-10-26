@@ -163,6 +163,17 @@ function insetAllocatedRootFill(contract: Contract, path: string[], dimension: '
     related(key)&&key!=='position'&&!sides.includes(key)));
 }
 
+/** An authored aspect lock is redundant only for the same fixed stroke
+ * viewport. Admit one static declaration, never a token or state-dependent
+ * sizing rule. Width, height and shared-basis validation still apply. */
+function strokeParentRatioMatches(value:string,viewport:{width:number;height:number}|undefined):boolean {
+  const match=value.match(/^(\d+(?:\.\d+)?)(?: \/ (\d+(?:\.\d+)?))?$/);
+  if(!match||!viewport)return false;
+  const numerator=Number(match[1]),denominator=match[2]===undefined?1:Number(match[2]);
+  const ratio=numerator/denominator,expected=viewport.width/viewport.height;
+  return [numerator,denominator,viewport.width,viewport.height,ratio,expected].every(n=>Number.isFinite(n)&&n>0)&&ratio===expected;
+}
+
 export function validateContract(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -1371,8 +1382,13 @@ export function validateContract(
             if (map && ('overflow-x' in map || 'overflow-y' in map) && map['overflow-x'] !== map['overflow-y'])
               errors.push(`${contract.id}: ${name}: stroked-path-parent-clip-axes-unqualified`);
           }
+          const combinationRatios=(parent.tokensByCombination??[]).flatMap(table=>table.rows.map(row=>row.tokens)).filter(map=>map&&Object.hasOwn(map,'aspect-ratio'));
+          if(combinationRatios.length)errors.push(`${contract.id}: ${name}: stroked-path-parent-channel-unsupported:aspect-ratio`);
+          const aspectDeclarations=[...baseMaps,...dynamicMaps,...combinationRatios].filter(map=>map&&Object.hasOwn(map,'aspect-ratio'));
           for (const map of [...baseMaps, ...dynamicMaps]) for (const [key, value] of Object.entries(map ?? {})) {
-            if (!['width', 'height', 'opacity', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y', 'color', 'stroke-width'].includes(key) ||
+            const staticMatchingRatio=key==='aspect-ratio'&&aspectDeclarations.length===1&&
+              (map===parent.literals||map===parent.declared)&&strokeParentRatioMatches(value,shape.strokePath?.viewport);
+            if ((!['width', 'height', 'opacity', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y', 'color', 'stroke-width'].includes(key)&&!staticMatchingRatio) ||
                 ['overflow', 'overflow-x', 'overflow-y'].includes(key) && !['visible', 'hidden'].includes(value) ||
                 key === 'position' && value !== 'relative' || key === 'display' && !['block', 'none'].includes(value) ||
                 map && dynamicMaps.includes(map) && ['width', 'height'].includes(key))

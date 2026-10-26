@@ -5,7 +5,7 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {chromium} from 'playwright-core';
 import {proposeBatchFromDump} from './propose-figma.js';import {tokenCorpusFromJson} from './token-corpus.js';
 import {ContractSchema,walkAnatomy} from '../scripts/contract-schema.js';import {reactEmitter,reactInlineEmitter} from './emitter.js';import {mountGenerated} from './react-test-runtime.js';
-import {settleNestedPropertyInputs,nestedPropertySourceNodes} from './nested-property-inputs.js';
+import {settleNestedPropertyInputs,nestedPropertySourceNodes,scopedCaller} from './nested-property-inputs.js';
 const opts={fileKey:'file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map<string,string>(),mintUnbound:true};
 function fixture(){
  const layout={mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'};
@@ -359,4 +359,253 @@ test('selected nested HUG height authority refuses missing stale fixed bound and
   assert.equal(input.component!.props!.p8,'large');assert.equal(input.component!.rootOverrides!.height,'{existing.height.vertical}',String(mutate));
   assert(f.proposals[3].notes.some((n:string)=>n.includes('nested-property-size-not-carried')),String(mutate));
  }
+});
+
+function ordinaryBoundaryFixture(){
+ const f=selectedBoundaryFixture();
+ delete f.host.fixedSwaps;
+ const source=f.dump.Carrier.variants[0].children[0];delete source.propRefs;source.instanceGeometry={componentId:'item-vertical'};source.componentProperties={Layout:'vertical'};
+ f.carrier.props.push({name:'state',type:{enum:['vertical','horizontal']},default:'vertical',bindings:{code:{prop:'state'},figma:{kind:'NONE'}}});
+ f.carrier.anatomy.root.parts={item:{component:{id:f.item.id,props:{p2:'{state}',p1:false},rootOverrides:{width:'{height}'}}}};
+ f.parent.anatomy.root.parts={host:{component:{id:f.carrier.id,props:{state:'vertical'}}}};
+ f.proposals[2].sourceInstanceParts=[{nodeId:'slot-node',partKey:'item',childId:f.item.id}];
+ return f;
+}
+test('ordinary two-boundary forwarding preserves scoped fallbacks and token names',()=>{
+ const f=ordinaryBoundaryFixture(),before=JSON.stringify(f.dump),hostBefore=structuredClone(f.carrier.anatomy.root.parts!.item),leafBefore=structuredClone(f.item.anatomy.root.parts!.input);
+ assert(nestedPropertySourceNodes(f.dump).has('inner-input'));
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+ const parent=ContractSchema.parse(f.proposals[3].contract),wrapper=ContractSchema.parse(f.proposals[2].contract),owner=ContractSchema.parse(f.proposals[1].contract);
+ const group=walkAnatomy(parent).find(row=>row.part.component?.id===f.item.id)?.part;
+ assert(group,JSON.stringify(f.proposals[3].notes));assert.equal(group.component!.props!.p2,'vertical');assert.equal(group.component!.rootOverrides!.width,'{height}');
+ const leaf=Object.values(group.parts??{}).find(part=>part.component?.id===f.input.id);assert(leaf);assert.equal(leaf.component!.props!.p8,'large');
+ assert.deepEqual(leaf.component!.rootOverrides,{width:'{existing.width}',height:'{existing.height.vertical}'});
+ assert.deepEqual(wrapper.anatomy.root.parts!.item.parts!.nestedDefaultitem,hostBefore);
+ assert.deepEqual(owner.anatomy.root.parts!.input.parts!.nestedDefaultinput,leafBefore);
+ assert.equal(JSON.stringify(f.dump),before);
+});
+test('ordinary two-boundary forwarding refuses ambiguous identities mappings and conflicting witnesses',()=>{
+ const mutations:Array<(f:ReturnType<typeof ordinaryBoundaryFixture>)=>void>=[
+  f=>{f.dump.Carrier.variants[0].children[0].instanceKey='wrong';},
+  f=>{f.dump.Carrier.variants[0].children[0].instanceGeometry.componentId='wrong';},
+  f=>{f.dump.Item.variants.push(structuredClone(f.dump.Item.variants[0]));},
+  f=>{f.proposals[2].sourceInstanceParts.push({...f.proposals[2].sourceInstanceParts[0]});},
+  f=>{f.carrier.anatomy.root.parts!.item.component!.props!.p2='{unknown}';},
+  f=>{f.item.anatomy.root.parts!.input.component!.rootOverrides!.height='{size.{unknown}}';},
+  f=>{const row=structuredClone(f.host.hostOverrides[0]);row.instanceProperties.properties.Size.value='medium';f.host.hostOverrides.push(row);},
+ ];
+ for(const mutate of mutations){const f=ordinaryBoundaryFixture();mutate(f);const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(mutate));}
+});
+test('ordinary forwarding uses globally unique caller names despite part-name collisions',()=>{
+ const f=ordinaryBoundaryFixture();f.parent.anatomy.root.parts!.nestedOwnerUsage0={text:'collision'};f.parent.anatomy.root.parts!.nestedUsage0_0={text:'leaf collision'};
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());const parent=ContractSchema.parse(f.proposals[3].contract),parts=walkAnatomy(parent);
+ assert.equal(new Set(parts.map(p=>p.name)).size,parts.length);assert.equal(parent.anatomy.root.parts!.nestedOwnerUsage0.text,'collision');assert.equal(parent.anatomy.root.parts!.nestedUsage0_0.text,'leaf collision');assert(parts.some(p=>p.part.component?.id==='ds.input'));
+});
+
+test('ordinary forwarding retains dynamic and lookup fallbacks verbatim',()=>{
+ const f=ordinaryBoundaryFixture();
+ f.item.props.push({name:'value',type:'text',default:'owner default',bindings:{code:{prop:'value'},figma:{kind:'TEXT',property:'Value'}}});
+ f.input.props.push({name:'value',type:'text',default:'child default',bindings:{code:{prop:'value'},figma:{kind:'TEXT',property:'Value'}}});
+ f.item.anatomy.root.parts!.input.component!.props!.value='{value}';
+ f.item.anatomy.root.parts!.input.component!.props!.p8={prop:'p2',map:{vertical:'medium'}};
+ f.host.hostOverrides[0].instanceProperties.properties.Value={type:'TEXT',value:'captured'};
+ const before=structuredClone(f.item.anatomy.root.parts!.input);
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+ const owner=ContractSchema.parse(f.proposals[1].contract),parent=ContractSchema.parse(f.proposals[3].contract);
+ assert.deepEqual(owner.anatomy.root.parts!.input.parts!.nestedDefaultinput,before);
+ const leaf=walkAnatomy(parent).find(row=>row.part.component?.id===f.input.id)!.part;
+ assert.equal(leaf.component!.props!.value,'captured');assert.equal(leaf.component!.props!.p8,'large');
+});
+test('ordinary forwarding admits only a unique false optional slot at its captured off default',()=>{
+ for(const mode of ['false','true','ambiguous','wrong-default','visible-default']){
+  const f=ordinaryBoundaryFixture();f.input.anatomy.root.parts={left:{optional:true,slot:{name:'left',bindings:{figma:{property:'Left Icon'}}}}};
+  f.dump.Input.propertyDefinitions['Show Left Icon#1:3']={type:'BOOLEAN',defaultValue:mode==='wrong-default'};
+  f.host.hostOverrides[0].instanceProperties.properties['Show Left Icon#1:3']={type:'BOOLEAN',value:mode==='true'};
+  if(mode==='visible-default'){f.input.anatomy.root.parts.left.slot!.renderDefaultAnatomy=true;f.input.anatomy.root.parts.left.parts={visibleDefault:{text:'visible'}};}
+  if(mode==='ambiguous')f.input.anatomy.root.parts.right={optional:true,slot:{name:'right',bindings:{figma:{property:'Left Icon'}}}};
+  const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+  if(mode==='false')assert(walkAnatomy(ContractSchema.parse(f.proposals[3].contract)).some(p=>p.part.component?.id==='ds.input'));
+  else assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,mode);
+ }
+});
+test('ordinary forwarding is observation-order independent and refuses property spelling conflicts',()=>{
+ const make=()=>{const f=ordinaryBoundaryFixture(),second=structuredClone(f.dump.Item.variants[0].children[0]);second.nodeId='second-input';f.dump.Item.variants[0].children.push(second);
+  f.item.anatomy.root.parts!.input2=structuredClone(f.item.anatomy.root.parts!.input);f.proposals[1].sourceInstanceParts.push({nodeId:'second-input',partKey:'input2',childId:'ds.input'});
+  const observation=structuredClone(f.host.hostOverrides[0]);observation.instanceProperties.path=[0,1];observation.instanceProperties.nodeId='Icarrier-use;slot-node;second-input';f.host.hostOverrides.push(observation);return f;};
+ const values=[];for(const reverse of [false,true]){const f=make();if(reverse)f.host.hostOverrides.reverse();settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+  values.push(walkAnatomy(ContractSchema.parse(f.proposals[3].contract)).filter(p=>p.part.component?.id==='ds.input').map(p=>p.part.component!.props!.p8).sort());}
+ assert.deepEqual(values,[['large','large'],['large','large']]);
+ const f=ordinaryBoundaryFixture();f.host.hostOverrides[0].instanceProperties.properties['Size#1:9']={type:'VARIANT',value:'medium'};
+ const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before);
+});
+test('ordinary forwarding preserves React caller replacement and standalone dynamic defaults',async t=>{
+ const f=ordinaryBoundaryFixture();
+ f.item.props=f.item.props.filter(p=>p.name!=='p1');delete f.carrier.anatomy.root.parts!.item.component!.props!.p1;
+ f.carrier.props=[];f.carrier.anatomy.root.parts!.item.component!.props!.p2='vertical';delete f.parent.anatomy.root.parts!.host.component!.props!.state;
+ f.input.props.push({name:'value',type:'text',default:'child default',bindings:{code:{prop:'value'},figma:{kind:'TEXT',property:'Value'}}});
+ delete f.input.anatomy.root.tokens;f.input.anatomy.root.parts={value:{content:{prop:'value'}}};
+ f.item.props.push({name:'value',type:'text',default:'owner default',bindings:{code:{prop:'value'},figma:{kind:'TEXT',property:'Value'}}});
+ f.item.anatomy.root.parts!.input.component!.props!.value='{value}';delete f.item.anatomy.root.parts!.input.component!.rootOverrides;
+ f.carrier.props.push({name:'value',type:'text',default:'wrapper default',bindings:{code:{prop:'value'},figma:{kind:'TEXT',property:'Value'}}});
+ f.carrier.anatomy.root.parts!.item.component!.props!.value='{value}';delete f.carrier.anatomy.root.parts!.item.component!.rootOverrides;
+ f.host.hostOverrides[0].instanceProperties.properties.Value={type:'TEXT',value:'captured'};
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+ const contracts=new Map(f.proposals.map(p=>{const c=ContractSchema.parse(p.contract);return[c.id,c]as const;}));
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ for(const emitter of [reactEmitter,reactInlineEmitter]){const dependencies=Object.fromEntries([...contracts.values()].map(c=>{const files=emitter.emit(c,{contracts,icons:new Map(),tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}}});return[c.name,{tsx:files[0].contents,css:files.find(f=>f.path.endsWith('.css'))?.contents}];}));
+  const page=await browser.newPage();try{
+   for(const [name,expected]of [['Parent','captured'],['Carrier','wrapper default'],['Item','owner default']]as const){const code=dependencies[name];const render=await mountGenerated(page,name,code.tsx,code.css,dependencies);assert.equal(await page.locator('#root').innerText(),expected);
+    if(name!=='Parent'){await render({value:'edited default'});assert.equal(await page.locator('#root').innerText(),'edited default');}}
+  }finally{await page.close();}
+ }
+});
+
+test('ordinary relocation refuses references to mutable owner state',()=>{
+ for(const initial of [false,true]){
+  const f=ordinaryBoundaryFixture();f.carrier.props[0].bindings.figma={kind:'VARIANT',property:'State',values:{vertical:'Vertical',horizontal:'Horizontal'}};
+  f.carrier.events=[{name:'change',trigger:'root',bindings:{code:{prop:'onStateChange'}},toggles:{prop:'state',between:['vertical','horizontal']}}];
+  if(initial)f.carrier.props[0].bindings.code.initial={prop:'defaultState',default:'vertical'};
+  const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before);
+ }
+});
+
+
+function directScopedFixture(){
+ const f=selectedBoundaryFixture();delete f.host.fixedSwaps;
+ const target=structuredClone(f.dump.Item.variants[0].children[0]);
+ f.dump.Carrier.variants[0].children=[target];
+ const mode:any={name:'mode',type:{enum:['compact','other']},default:'compact',bindings:{code:{prop:'mode'},figma:{kind:'NONE'}}};
+ f.carrier.props=[mode];
+ f.carrier.anatomy.root.parts={input:{component:{id:f.input.id,props:{p8:{prop:'mode',map:{compact:'medium',other:'medium'}}},rootOverrides:{width:'{old.width.{mode}}',height:'{old.height}'}}}};
+ f.parent.anatomy.root.parts={host:{component:{id:f.carrier.id,props:{mode:'compact'}}}};
+ f.proposals[2].sourceInstanceParts=[{nodeId:'inner-input',partKey:'input',childId:f.input.id}];
+ const w=f.host.hostOverrides[0].instanceProperties;w.path=[0];w.nodeId='Icarrier-use;inner-input';
+ w.layout={kind:'nested-instance-layout-v1',nodeId:w.nodeId,componentId:'input-large',parentId:'carrier-use',localSize:{width:28,height:28},parentSize:{width:40,height:40},relativeTransform:[[1,0,0],[0,1,0]],sizing:{horizontal:'FIXED',vertical:'FIXED',width:28,height:28},inFlow:true,sizeBound:true};
+ for(const [i,main]of f.dump.Input.variants.entries()){main.bbox={width:i?28:55,height:i?28:24};main.layout={mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'};}
+ f.input.anatomy.root={instanceRootInputs:['width','height'],literalsByProp:[{prop:'p8',map:{medium:{width:'55px',height:'24px'},large:{width:'28px',height:'28px'}}}]};
+ return f;
+}
+test('direct nested caller localizes immutable mappings and retires only independently proven fixed clamps',()=>{
+ const f=directScopedFixture(),before=structuredClone(f.carrier.anatomy.root.parts!.input),source=JSON.stringify(f.dump);
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+ const parent=ContractSchema.parse(f.proposals[3].contract),carrier=ContractSchema.parse(f.proposals[2].contract);
+ const supplied=walkAnatomy(parent).find(p=>p.part.component?.id===f.input.id)?.part;assert(supplied,JSON.stringify(f.proposals[3].notes));
+ assert.equal(supplied.component!.props!.p8,'large');assert.equal(supplied.component!.rootOverrides,undefined);
+ assert.deepEqual(carrier.anatomy.root.parts!.input.parts!.nestedDefaultinput,before);assert.equal(JSON.stringify(f.dump),source);
+});
+test('direct nested caller refuses unresolved mutable or geometrically contradictory copies atomically',()=>{
+ const mutations:Array<(f:ReturnType<typeof directScopedFixture>)=>void>=[
+  f=>{delete f.parent.anatomy.root.parts!.host.component!.props!.mode;},
+  f=>{f.carrier.props[0].bindings.code.initial={prop:'defaultMode',default:'compact'};f.carrier.events=[{name:'change',trigger:'root',bindings:{code:{prop:'onModeChange'}},toggles:{prop:'mode',between:['compact','other']}}];},
+  f=>{(f.carrier.anatomy.root.parts!.input.component!.props!.p8 as any).map={other:'medium'};},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.nodeId='wrong';},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.parentId='wrong';},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.relativeTransform[0][1]=1;},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.sizeBound=false;},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.sizing.horizontal='HUG';},
+  f=>{f.host.hostOverrides[0].instanceProperties.layout!.localSize.width=29;},
+  f=>{f.dump.Input.variants[1].bbox!.height=29;},
+  f=>{f.input.anatomy.root.literalsByProp![0].map.large.height='29px';},
+  f=>{delete f.input.anatomy.root.literalsByProp![0].map.large.width;},
+  f=>{f.carrier.anatomy.root.parts!.input.component!.rootFill=['width'];},
+  f=>{f.carrier.anatomy.root.parts!.input.layout={grow:true};},
+  f=>{f.input.anatomy.root.stylesWhen=[{prop:'p8',equals:'large',styles:{width:'29px'}}];},
+ ];
+ for(const mutate of mutations){const f=directScopedFixture();mutate(f);for(const p of f.proposals){const parsed=ContractSchema.safeParse(p.contract);assert(parsed.success,JSON.stringify({mutation:String(mutate),set:p.setName,errors:parsed.success?[]:parsed.error.issues}));}const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(mutate));}
+});
+function directSlotFixture(){
+ const f=directScopedFixture(),layout=f.dump.Input.variants[1].layout;
+ const mark=(name:string)=>({setName:name,type:'COMPONENT',nodeId:name+'-main',key:name+'-key',variants:[{name,type:'COMPONENT',nodeId:name+'-main',componentKey:name+'-key',layout}]});
+ const makeMark=(name:string)=>ContractSchema.parse({id:'ds.'+name.toLowerCase(),name,description:'Direct slot marker',version:'0.1.0',status:'draft',semantics:{element:'div'},states:[],props:[],bindings:{code:{anchors:{importPath:'./'+name,export:name}},figma:{anchors:{fileKey:'file',componentSetKey:name+'-key',nodeId:name+'-main'}}},anatomy:{root:{text:name}}});
+ for(const name of ['DefaultMark','ChosenMark']){(f.dump as any)[name]=mark(name);f.proposals.push({setName:name,contract:makeMark(name),notes:[],unbound:[],sourceInstanceParts:[]});}
+ for(const [name,property]of [['left','Left Icon'],['right','Right Icon']]){(f.dump.Input.propertyDefinitions as any)['Show '+property]={type:'BOOLEAN',defaultValue:false};(f.dump.Input.propertyDefinitions as any)[property]={type:'INSTANCE_SWAP',defaultValue:'DefaultMark-main'};}
+ const slot=(name:string,property:string)=>({slot:{name,bindings:{figma:{property}},defaultContent:[{id:'ds.defaultmark'}],renderDefault:true},optional:true});
+ f.input.anatomy.root.parts={left:slot('left','Left Icon') as any,right:{...slot('right','Right Icon'),presenceByCombination:{props:['p8'],rows:[{values:['medium'],present:true},{values:['large'],present:false}]}} as any};
+ f.dump.Input.variants[1].children=[{name:'DefaultMark',type:'INSTANCE',nodeId:'large-left',instanceOf:'DefaultMark',instanceKey:'DefaultMark-key',propRefs:{mainComponent:'Left Icon'}}] as any;
+ const original=f.carrier.anatomy.root.parts!.input;original.component!.contentSlots={left:['leftContent'],right:['rightContent']};original.parts={leftContent:{component:{id:'ds.defaultmark',overrides:{size:'{marker.size}'}}},rightContent:{component:{id:'ds.defaultmark'},presenceByCombination:{props:['mode'],rows:[{values:['compact'],present:true},{values:['other'],present:false}]}}};
+ const w=f.host.hostOverrides[0].instanceProperties;
+ for(const property of ['Left Icon','Right Icon'])w.properties[property]={type:'INSTANCE_SWAP',value:'ChosenMark-main',selected:{nodeId:'ChosenMark-main',componentKey:'ChosenMark-key'}};
+ for(const property of ['Show Left Icon','Show Right Icon'])w.properties[property]={type:'BOOLEAN',value:false};
+ return f;
+}
+test('direct selected-main slots keep unbound visible content and omit absent slots despite inactive false Booleans',()=>{
+ const f=directSlotFixture(),before=structuredClone(f.carrier.anatomy.root.parts!.input);
+ for(const p of f.proposals){const parsed=ContractSchema.safeParse(p.contract);assert(parsed.success,JSON.stringify({name:p.setName,errors:parsed.success?[]:parsed.error.issues}));}
+ // Marker tokens remain pure aliases, not looked up as caller props.
+ settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());
+ const parent=ContractSchema.parse(f.proposals[3].contract),carrier=ContractSchema.parse(f.proposals[2].contract);
+ const leaf=walkAnatomy(parent).find(p=>p.part.component?.id===f.input.id)?.part;assert(leaf,JSON.stringify(f.proposals[3].notes));
+ assert.equal(leaf.component!.props!.p8,'large');assert.equal(leaf.component!.contentSlots!.right.length,0);
+ const left=leaf.component!.contentSlots!.left;assert.equal(left.length,1);assert.equal(leaf.parts![left[0]].component!.id,'ds.chosenmark');
+ assert.deepEqual(carrier.anatomy.root.parts!.input.parts!.nestedDefaultinput,before);
+});
+
+
+test('direct fixed geometry is generic and requires resolved nonconflicting token values',()=>{
+ const make=()=>{const f=directScopedFixture();const root=f.input.anatomy.root;delete root.literalsByProp![0].map.large.width;root.tokens={width:'{measure.width.{p8}}'};f.proposals[0].mintedTokens={tree:{measure:{width:{large:{$value:'{measure.actual}',$type:'dimension'}},actual:{$value:'28px',$type:'dimension'}}}};return f;};
+ const good=make();settleNestedPropertyInputs(good.dump,'file',good.proposals,new Set());assert(walkAnatomy(ContractSchema.parse(good.proposals[3].contract)).some(p=>p.part.component?.id===good.input.id));
+ for(const change of [
+  (f:ReturnType<typeof make>)=>{f.proposals[0].mintedTokens.tree.measure.actual.$value='29px';},
+  (f:ReturnType<typeof make>)=>{f.proposals[0].mintedTokens.tree.measure.actual.$value='{measure.width.large}';},
+  (f:ReturnType<typeof make>)=>{delete f.proposals[0].mintedTokens.tree.measure.actual;},
+  (f:ReturnType<typeof make>)=>{f.proposals[1].mintedTokens={tree:{measure:{actual:{$value:'29px',$type:'dimension'}}}};},
+  (f:ReturnType<typeof make>)=>{f.input.anatomy.root.literalsByProp![0].map.large['min-width']='29px';},
+ ]){const f=make();change(f);const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(change));}
+ const other=directScopedFixture(),w=other.host.hostOverrides[0].instanceProperties;
+ w.layout!.localSize={width:37,height:19};w.layout!.sizing={horizontal:'FIXED',vertical:'FIXED',width:37,height:19};other.dump.Input.variants[1].bbox={width:37,height:19};other.input.anatomy.root.literalsByProp![0].map.large={width:'37px',height:'19px'};
+ settleNestedPropertyInputs(other.dump,'file',other.proposals,new Set());const leaf=walkAnatomy(ContractSchema.parse(other.proposals[3].contract)).find(p=>p.part.component?.id===other.input.id)?.part;assert(leaf);assert.equal(leaf.component!.rootOverrides,undefined);
+});
+test('direct slot copy refuses hidden or controlled selected content and unauthenticated swaps',()=>{
+ for(const change of [
+  (f:ReturnType<typeof directSlotFixture>)=>{f.dump.Input.variants[1].children![0].hidden=true;},
+  (f:ReturnType<typeof directSlotFixture>)=>{f.dump.Input.variants[1].children![0].propRefs!.visible='Show Left Icon';},
+  (f:ReturnType<typeof directSlotFixture>)=>{f.host.hostOverrides[0].instanceProperties.properties['Left Icon'].selected!.componentKey='foreign';},
+  (f:ReturnType<typeof directSlotFixture>)=>{f.dump.Input.variants[1].children!.push(structuredClone(f.dump.Input.variants[1].children![0]));},
+ ]){const f=directSlotFixture();change(f);const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(change));}
+});
+
+
+test('scoped caller preserves typed Boolean equality while filtering only proven inactive children',()=>{
+ const f=directScopedFixture();f.carrier.props.push({name:'flag',type:'boolean',default:true,bindings:{code:{prop:'flag'},figma:{kind:'NONE'}}});
+ const part:any={component:{id:'ds.input',contentSlots:{body:['on','off']}},parts:{on:{component:{id:'ds.input'},visibleWhen:{prop:'flag',equals:true}},off:{component:{id:'ds.input'},visibleWhen:{prop:'flag',equals:false}}}};
+ const before=structuredClone(part),yes=scopedCaller(part,f.carrier,{mode:'compact',flag:true},true),no=scopedCaller(part,f.carrier,{mode:'compact',flag:false},true);
+ assert.deepEqual(Object.keys(yes!.parts!),['on']);assert.deepEqual(yes!.component!.contentSlots!.body,['on']);assert.deepEqual(Object.keys(no!.parts!),['off']);assert.deepEqual(no!.component!.contentSlots!.body,['off']);assert.deepEqual(part,before);
+ assert.equal(scopedCaller(part,f.carrier,{mode:'compact'},true),undefined);
+});
+test('fixed clamp retirement refuses state sizing and resolved layout growth modifiers',()=>{
+ const changes:Array<(f:ReturnType<typeof directScopedFixture>)=>void>=[
+  f=>{f.input.states=['hover'];f.input.anatomy.root.statesByProp=[{prop:'p8',state:'hover',map:{large:{width:'{other.width}'}}}];},
+  f=>{f.input.states=['hover'];f.input.anatomy.root.declaredStates={hover:{'box-sizing':'content-box'}};},
+  f=>{f.input.anatomy.root.tokens={'flex-grow':'{other.grow}'};},
+  f=>{f.input.anatomy.root.layout={grow:true};},
+  f=>{f.input.anatomy.root.layoutByProp={prop:'p8',map:{large:{grow:true}}};},
+  f=>{f.input.anatomy.root.layoutByCombination={props:['p8'],rows:[{values:['medium'],layout:{grow:false}},{values:['large'],layout:{grow:true}}]};},
+  f=>{f.input.anatomy.root.declared={transform:'scale(2)'};},
+  f=>{f.input.anatomy.root.tokensByProp={prop:'p8',map:{large:{width:'{bad.width}'}}};f.proposals[0].mintedTokens={tree:{bad:{width:{$value:'29px',$type:'dimension'}}}};},
+  f=>{f.input.props.push({name:'tone',type:{enum:['a','b']},default:'a',bindings:{code:{prop:'tone'},figma:{kind:'NONE'}}});f.input.anatomy.root.tokens={width:'{dim.{tone}.{p8}}'};f.input.anatomy.root.tokensByProp={prop:'p8',map:{large:{width:'{dim.fixed}'}}};f.proposals[0].mintedTokens={tree:{dim:{a:{large:{$value:'29px',$type:'dimension'}},fixed:{$value:'28px',$type:'dimension'}}}};},
+ ];
+ for(const change of changes){const f=directScopedFixture();change(f);for(const p of f.proposals){const parsed=ContractSchema.safeParse(p.contract);assert(parsed.success,JSON.stringify({change:String(change),set:p.setName,errors:parsed.success?[]:parsed.error.issues}));}const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(change));}
+ const absent=directSlotFixture();absent.input.anatomy.root.parts!.right.presenceByCombination!.rows[1].present=true;const before=JSON.stringify(absent.proposals.map(p=>p.contract));settleNestedPropertyInputs(absent.dump,'file',absent.proposals,new Set());assert.equal(JSON.stringify(absent.proposals.map(p=>p.contract)),before);
+});
+
+test('fixed clamp retirement refuses a CSS padding floor wider than the captured fixed box',()=>{
+ const f=directScopedFixture();f.input.anatomy.root.tokens={'padding-inline':'{spacing.fixed}'};f.proposals[0].mintedTokens={tree:{spacing:{fixed:{$value:'16px',$type:'dimension'}}}};
+ const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,'28px width cannot establish a28px border box with32px padding');
+});
+
+test('fixed clamp retirement refuses real or unresolved borders even when padding alone fits',()=>{
+ const changes:Array<(f:ReturnType<typeof directScopedFixture>)=>void>=[
+  f=>{f.input.anatomy.root.literals={...f.input.anatomy.root.literals,'padding-inline':'12px','padding-block':'12px','border-width':'4px'};f.input.anatomy.root.declared={'border-style':'solid'};},
+  f=>{f.input.anatomy.root.tokens={'border-width':'{stroke.actual}'};f.proposals[0].mintedTokens={tree:{stroke:{actual:{$value:'4px',$type:'dimension'}}}};},
+  f=>{f.input.anatomy.root.declared={'border-style':'solid'};},
+  f=>{f.input.anatomy.root.declared={'border-width':'4px','border-style':'solid'};},
+  f=>{f.input.states=['hover'];f.input.anatomy.root.declaredStates={hover:{'border-width':'4px'}};},
+  f=>{f.input.states=['hover'];f.input.anatomy.root.declared={'border-style':'solid'};f.input.anatomy.root.declaredStates={hover:{'border-width':'0px'}};},
+  f=>{f.input.anatomy.root.tokens={'border-width':'{missing.width}'};},
+ ];
+ for(const change of changes){const f=directScopedFixture();change(f);for(const p of f.proposals){const parsed=ContractSchema.safeParse(p.contract);assert(parsed.success,JSON.stringify({change:String(change),errors:parsed.success?[]:parsed.error.issues}));}const before=JSON.stringify(f.proposals.map(p=>p.contract));settleNestedPropertyInputs(f.dump,'file',f.proposals,new Set());assert.equal(JSON.stringify(f.proposals.map(p=>p.contract)),before,String(change));}
+ const clear=directScopedFixture();clear.input.anatomy.root.literals={'border-width':'0px'};clear.input.anatomy.root.declared={'border-style':'solid'};
+ settleNestedPropertyInputs(clear.dump,'file',clear.proposals,new Set());
+ const leaf=walkAnatomy(ContractSchema.parse(clear.proposals[3].contract)).find(p=>p.part.component?.id===clear.input.id)?.part;
+ assert(leaf);assert.equal(leaf.component!.rootOverrides,undefined,'explicit zero border keeps the qualified path');
 });

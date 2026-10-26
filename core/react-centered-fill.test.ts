@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {chromium} from 'playwright-core';
-import {ContractSchema} from '../scripts/contract-schema.js';import {reactEmitter,reactInlineEmitter} from './emitter.js';import {mountGenerated} from './react-test-runtime.js';import {lowerCenteredFillPadding} from './react-centered-fill.js';import {mintedTokenCss} from './mint-tokens.js';
+import {ContractSchema} from '../scripts/contract-schema.js';import {reactEmitter,reactInlineEmitter} from './emitter.js';import {mountGenerated} from './react-test-runtime.js';import {lowerCenteredFillPadding,centeredFixedPaddingProjections} from './react-centered-fill.js';import {mintedTokenCss} from './mint-tokens.js';
 function parse(v:unknown){const r=ContractSchema.safeParse(v);if(!r.success)throw Error(JSON.stringify(r.error.issues));return r.data}
 function fixture(column=false){return parse({id:'test.equal-fill',name:'EqualFill',version:'0.1.0',status:'draft',description:'Centered fill geometry',semantics:{element:'div'},props:[],states:[],anatomy:{root:{layout:{display:'flex',direction:column?'column':'row'},literals:{width:column?'32px':'64px',height:column?'64px':'32px','padding-inline':'2px','padding-block':'2px',gap:'2px'},parts:{indicator:{layout:{display:'flex',direction:column?'column':'row',align:'center',justify:'center',grow:true,growBasis:'zero',alignSelf:'stretch'},tokens:{[column?'padding-block':'padding-inline']:'{pad}'},parts:{glyph:{shape:{kind:'path',width:12,height:12,paths:[{data:'M0 0L12 0L12 12L0 12Z',windingRule:'NONZERO'}]},literals:{'background-color':'#000000'}}}},handle:{layout:{grow:true,growBasis:'zero',alignSelf:'stretch'},literals:{'background-color':'#ffffff'}}}}},bindings:{code:{anchors:{importPath:'./EqualFill',export:'EqualFill'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}})}
 const tokens={primitives:{pad:{$type:'dimension',$value:'13px'},shrink:{$type:'number',$value:0}},semantic:{},light:{},dark:{},brands:{default:{}}};
@@ -61,6 +61,8 @@ test('fixed centered padding retains unresolved dimensions, asymmetric padding a
   (c:any)=>c.anatomy.root.parts.child.literals.width='auto',
   (c:any)=>c.anatomy.root.parts.child.literals['margin-left']='1px',
   (c:any)=>c.anatomy.root.parts.other={text:'extra'},
+  (c:any)=>c.anatomy.root.parts.child.component={id:'other.child'},
+  (c:any)=>c.anatomy.root.parts.child.literals['padding-inline']='16px',
  ]){const c=fixedBox();change(c);assert.equal(lowerCenteredFillPadding(c,fixedTokens),c);}
 });
 
@@ -130,4 +132,155 @@ test('joint-table admission retains cross-axis, grid, wrap and content guards',(
   (c:any)=>c.anatomy.root.parts.indicator.literals={'padding-left':'2px'},
   (c:any)=>c.anatomy.root.parts.indicator.parts.glyph.layout={grow:true},
  ]){const c=jointFixture();change(c);assert.equal(lowerCenteredFillPadding(c,tokens),c);}
+});
+
+
+function conditionalFixedBox(){
+ const c=fixedBox();
+ c.props.push({name:'alignment',type:{enum:['center','start']},default:'center',bindings:{code:{prop:'alignment'},figma:{kind:'VARIANT',property:'Alignment',values:{center:'Center',start:'Start'}}}},
+  {name:'disabled',type:'boolean',default:false,bindings:{code:{prop:'disabled'},figma:{kind:'BOOLEAN',property:'Disabled'}}});
+ const root=c.anatomy.root;
+ root.layout={display:'flex',direction:'row',align:'center',justify:'center'};
+ root.layoutByCombination={props:['alignment','size'],rows:['center','start'].flatMap(alignment=>['small','large'].map(size=>({values:[alignment,size],layout:{direction:'row' as const,align:'center' as const,justify:alignment as 'center'|'start'}})))};
+ root.tokensByProp={prop:'size',map:{small:{'min-width':'{box.small}','max-width':'{box.small}','min-height':'{box.small}','max-height':'{box.small}'},large:{'min-width':'{box.large}','max-width':'{box.large}','min-height':'{box.large}','max-height':'{box.large}'}}};
+ root.stylesWhen=[{prop:'disabled',equals:'true',styles:{'justify-content':'start'}}];
+ return parse(c);
+}
+
+test('complete fixed tuples share one proof and retain unsafe selectors without changing source or native data',async t=>{
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ const {createFigmaEngine}=await import('./emit-figma-script.js');
+ const c=conditionalFixedBox(),before=JSON.stringify(c),scope=new Map([[c.id,c]]),engine=createFigmaEngine({tokens:fixedTokens,icons:new Map()}),native=JSON.stringify(engine.compileComponentData(c,scope));
+ const proof=centeredFixedPaddingProjections(c,fixedTokens);
+ assert.equal(proof.length,1);assert.deepEqual(proof[0].path,['root']);assert.deepEqual(proof[0].props,['alignment','disabled','size']);
+ assert.deepEqual(proof[0].rows.map(r=>r.values),[['center','false','small'],['center','false','large']]);
+ const lowered=lowerCenteredFillPadding(c,fixedTokens);
+ assert.deepEqual(lowered.anatomy.root.tokens,c.anatomy.root.tokens);
+ assert.deepEqual(lowered.anatomy.root.literalsByCombination?.at(-1)?.rows,proof[0].rows);
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  const files=emitter.emit(c,{tokens:fixedTokens,contracts:scope,icons:new Map<string,string>()}),page=await browser.newPage();
+  try{
+   const render=await mountGenerated(page,c.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents);await page.addStyleTag({content:mintedTokenCss(fixedTokens.primitives)});
+   for(const props of [{size:'small',alignment:'center',disabled:false},{size:'large',alignment:'center',disabled:false},{size:'small',alignment:'start',disabled:false},{size:'small',alignment:'center',disabled:true},{size:'small',alignment:'center',disabled:false}]){
+    await render(props);const actual=await page.locator('#root > *').evaluate(n=>{const a=n.getBoundingClientRect(),b=n.children[0].getBoundingClientRect(),s=getComputedStyle(n);return{width:a.width,height:a.height,x:b.x-a.x,y:b.y-a.y,padding:s.paddingInlineStart}});
+    const qualifies=props.alignment==='center'&&!props.disabled,edge=props.size==='small'?28:48;
+    if(qualifies)assert.deepEqual(actual,{width:edge,height:edge,x:(edge-12)/2,y:(edge-12)/2,padding:'0px'});
+    else assert.deepEqual(actual,{width:32,height:32,x:16,y:10,padding:'16px'});
+   }
+  }finally{await page.close();}
+ }
+ assert.equal(JSON.stringify(c),before);assert.equal(JSON.stringify(engine.compileComponentData(c,scope)),native);
+});
+
+test('fixed tuple projection refuses incomplete domains, conflicting clamps, selector ambiguity and a growing child',()=>{
+ for(const change of [
+  (c:any)=>c.anatomy.root.layoutByCombination.rows.pop(),
+  (c:any)=>c.anatomy.root.layoutByCombination.rows.push(c.anatomy.root.layoutByCombination.rows[0]),
+  (c:any)=>c.anatomy.root.layoutByCombination.rows[0].values[0]='missing',
+  (c:any)=>c.anatomy.root.tokensByProp.map.small['max-width']='{box.large}',
+  (c:any)=>c.anatomy.root.parts.child.tokens['flex-shrink']='{pad}',
+  (c:any)=>c.anatomy.root.parts.child.layout={grow:true},
+  (c:any)=>c.anatomy.root.parts.child.literals['box-sizing']='content-box',
+  (c:any)=>c.anatomy.root.states={hover:{width:'{box.large}'}},
+  (c:any)=>c.anatomy.root.literals={'padding-left':'1px'},
+  (c:any)=>c.anatomy.root.tokensByCombination=[{props:['size'],rows:[{values:['small'],tokens:{width:'{box.large}'}},{values:['large'],tokens:{width:'{box.large}'}}]}],
+  (c:any)=>{c.anatomy.root.layoutByProp={prop:'alignment',map:{center:{justify:'start'},start:{justify:'start'}}};},
+  (c:any)=>{delete c.props[0].default;},
+  (c:any)=>{c.props.push({name:'extra',type:{enum:Array.from({length:300},(_,i)=>String(i))},default:'0',bindings:{code:{prop:'extra'},figma:{kind:'VARIANT',property:'Extra'}}});c.anatomy.root.tokensByProp={prop:'extra',map:Object.fromEntries(c.props.at(-1).type.enum.map((x:string)=>[x,{}]))};},
+ ]){
+  const c=conditionalFixedBox();change(c);const proof=centeredFixedPaddingProjections(c,fixedTokens);
+  assert(!proof.some(p=>p.rows.some(r=>r.values[p.props.indexOf('size')]==='small')));
+ }
+});
+
+
+function fixedSlotBox(){
+ const c=conditionalFixedBox(),root=c.anatomy.root;
+ root.parts={host:{slot:{name:'content',renderDefaultAnatomy:true,collapseWhenEmpty:true},literals:{width:'16px',height:'16px'},tokens:{'flex-shrink':'{shrink}'},parts:{mark:{shape:{kind:'path',width:36,height:7,paths:[{data:'M0 0L36 0L36 7L0 7Z',windingRule:'NONZERO'}]},literals:{'background-color':'#000000'}}}},
+  label:{text:'Only in large',visibleWhen:{prop:'size',equals:'large'},literalsByProp:[{prop:'size',map:{large:{width:'12px',height:'12px'}}}],tokens:{'flex-shrink':'{shrink}'}}};
+ return parse(c);
+}
+test('a fixed styled slot host retains its real box with oversized content and an exactly absent sparse sibling',async t=>{
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ const c=fixedSlotBox(),before=JSON.stringify(c),proof=centeredFixedPaddingProjections(c,fixedTokens);
+ assert.deepEqual(proof.flatMap(p=>p.rows.map(r=>r.values)),[['center','false','small']]);
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  const files=emitter.emit(c,{tokens:fixedTokens,contracts:new Map([[c.id,c]]),icons:new Map<string,string>()}),page=await browser.newPage();
+  try{
+   const render=await mountGenerated(page,c.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents);await page.addStyleTag({content:mintedTokenCss(fixedTokens.primitives)});
+   for(const props of [{size:'small',alignment:'center',disabled:false},{size:'large',alignment:'center',disabled:false},{size:'small',alignment:'center',disabled:false}]){
+    await render(props);const actual=await page.locator('#root > *').evaluate(n=>{const a=n.getBoundingClientRect(),host=n.firstElementChild!,b=host.getBoundingClientRect(),inner=host.firstElementChild!.getBoundingClientRect();return{width:a.width,height:a.height,x:b.x-a.x,y:b.y-a.y,host:[b.width,b.height],inner:inner.width,padding:getComputedStyle(n).paddingInlineStart};});
+    if(props.size==='small')assert.deepEqual(actual,{width:28,height:28,x:6,y:6,host:[16,16],inner:36,padding:'0px'});
+    else assert.equal(actual.padding,'16px');
+   }
+   await render({size:'small',alignment:'center',disabled:false,content:null});
+   assert.deepEqual(await page.locator('#root > *').evaluate(n=>[n.getBoundingClientRect().width,n.children.length]),[28,0]);
+  }finally{await page.close();}
+ }
+ assert.equal(JSON.stringify(c),before);
+});
+
+test('slot host projection refuses contents, flexible boxes and missing rows on visible sparse children',()=>{
+ for(const change of [
+  (c:any)=>c.anatomy.root.parts.host.declared={display:'contents'},
+  (c:any)=>c.anatomy.root.parts.host.tokens['flex-shrink']='{pad}',
+  (c:any)=>c.anatomy.root.parts.host.literals['padding-inline']='16px',
+  (c:any)=>c.anatomy.root.parts.host.literals.width='100%',
+  (c:any)=>c.anatomy.root.parts.label.visibleWhen.equals='small',
+ ]){const c=fixedSlotBox();change(c);assert(!centeredFixedPaddingProjections(c,fixedTokens).some(p=>p.rows.some(r=>r.values[p.props.indexOf('size')]==='small')));}
+});
+
+test('fixed centered background longhands retain their paint and intended outer box on both React surfaces',async t=>{
+ const browser=await chromium.launch();t.after(()=>browser.close());
+ const c=fixedBox();c.anatomy.root.literals={'background-image':'linear-gradient(180deg, #ff0000 0%, #0000ff 100%)'};c.anatomy.root.declared={'background-position':'center','background-size':'cover','background-repeat':'no-repeat'};
+ const before=JSON.stringify(c),scope=new Map([[c.id,c]]);
+ for(const emitter of [reactEmitter,reactInlineEmitter]){
+  const files=emitter.emit(c,{tokens:fixedTokens,contracts:scope,icons:new Map<string,string>()}),page=await browser.newPage();
+  try{await mountGenerated(page,c.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents);await page.addStyleTag({content:mintedTokenCss(fixedTokens.primitives)});
+   const measured=await page.locator('#root > *').evaluate(root=>{const box=root.getBoundingClientRect(),css=getComputedStyle(root);return {width:box.width,height:box.height,image:css.backgroundImage,position:css.backgroundPosition,size:css.backgroundSize,repeat:css.backgroundRepeat};});
+   assert.deepEqual(measured,{width:28,height:28,image:'linear-gradient(rgb(255, 0, 0) 0%, rgb(0, 0, 255) 100%)',position:'50% 50%',size:'cover',repeat:'no-repeat'});
+  }finally{await page.close();}
+ }
+ assert.equal(JSON.stringify(c),before);
+});
+
+test('real parent borders and padding-dependent paint cannot acquire fixed centered authority',()=>{
+ for(const change of [
+  (c:any)=>c.anatomy.root.tokens['border-width']='{pad}',
+  (c:any)=>{c.anatomy.root.tokens['border-width']='{pad}';c.anatomy.root.strokesIncludedInLayout=false;},
+  (c:any)=>c.anatomy.root.literals={'border-left-width':'30px'},
+  (c:any)=>c.anatomy.root.declared={background:'red content-box'},
+  (c:any)=>c.anatomy.root.declared={'background-origin':'content-box'},
+  (c:any)=>c.anatomy.root.declared={'border-style':'solid'},
+  (c:any)=>c.anatomy.root.declaredStates={hover:{'background-size':'contain'}},
+  (c:any)=>c.anatomy.root.declaredStates={hover:{border:'20px solid red'}},
+  (c:any)=>c.anatomy.root.declaredStates={hover:{'box-sizing':'content-box'}},
+  (c:any)=>c.anatomy.root.states={hover:{'border-width':'{pad}'}},
+  (c:any)=>c.anatomy.root.declaredStates={hover:{background:'red content-box'}},
+  (c:any)=>c.anatomy.root.literalsByCombination=[{props:['size'],rows:[{values:['small'],literals:{background:'red content-box'}},{values:['large'],literals:{background:'red content-box'}}]}],
+ ]){const c=conditionalFixedBox();change(c);assert.equal(centeredFixedPaddingProjections(c,fixedTokens).length,0);}
+ const c=conditionalFixedBox();c.anatomy.root.tokensByProp={prop:'size',map:{small:{'border-width':'{pad}'},large:{'border-width':'0px'}}};
+ assert(centeredFixedPaddingProjections(c,fixedTokens).every(p=>p.rows.every(r=>r.values[p.props.indexOf('size')]==='large')));
+});
+
+test('only explicitly absent root tuples may be omitted from otherwise complete tables',()=>{
+ const c=fixedBox();c.anatomy.root.layoutByCombination={props:['size'],rows:[{values:['small'],layout:{direction:'row',align:'center',justify:'center'}}]};
+ assert.equal(centeredFixedPaddingProjections(c,fixedTokens).length,0);
+ c.bindings.figma.absentVariants=[{size:'large'}];
+ assert.deepEqual(centeredFixedPaddingProjections(c,fixedTokens).flatMap(p=>p.rows.map(r=>r.values)),[['small']]);
+});
+
+
+test('child pseudo-state box geometry cannot bypass fixed slot-host proof',()=>{
+ for(const geometry of [{'padding-inline':'20px'},{padding:'20px'},{border:'20px solid red'},{display:'contents'},{'box-sizing':'content-box'}])
+  for(const channel of ['states','declaredStates','statesByProp']){
+   const c=fixedSlotBox(),host=c.anatomy.root.parts!.host;
+   if(channel==='states')host.states={hover:geometry} as any;
+   if(channel==='declaredStates')host.declaredStates={hover:geometry} as any;
+   if(channel==='statesByProp')host.statesByProp=[{prop:'size',state:'hover',map:{small:geometry,large:geometry}}] as any;
+   const before=JSON.stringify(c);
+   assert.equal(centeredFixedPaddingProjections(c,fixedTokens).length,0,channel+':'+Object.keys(geometry)[0]);
+   assert.equal(lowerCenteredFillPadding(c,fixedTokens),c);
+   assert.equal(JSON.stringify(c),before);
+  }
 });

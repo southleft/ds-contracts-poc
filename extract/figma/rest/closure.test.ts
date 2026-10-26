@@ -151,7 +151,12 @@ test("--no-closure (the library default) is the mapper on the requested response
 // Synthetic REST-shaped responses
 // ---------------------------------------------------------------------------
 
-type Meta = { name: string; componentSetId?: string; remote?: boolean };
+type Meta = {
+  name: string;
+  componentSetId?: string;
+  remote?: boolean;
+  key?: string;
+};
 const inst = (
   name: string,
   componentId: string,
@@ -182,7 +187,10 @@ const set = (
 const entry = (
   doc: RestNode,
   components: Record<string, Meta> = {},
-  componentSets: Record<string, { name: string; remote?: boolean }> = {},
+  componentSets: Record<
+    string,
+    { name: string; remote?: boolean; key?: string }
+  > = {},
 ) => ({
   document: doc,
   components,
@@ -294,7 +302,7 @@ test("swap targets retain remote, missing and cap refusals, with property-specif
     batches({ "2:0": entry(set("2:0", "Child", [[]])) }, calls),
     { cap: 1 },
   );
-  assert.deepEqual(calls, [["2:0"]]);
+  assert.deepEqual(calls, [["9:1"], ["2:0"]]);
   assert.deepEqual(
     closure.unresolved.map((row) => [row.targetId, row.reason]),
     [
@@ -1095,4 +1103,204 @@ test("Slot is excluded only from broad discovery, not explicit targets or identi
   assert(
     !followed.closure.unresolved.some((x) => x.reason === "utility-slot-set"),
   );
+});
+
+test("explicit nested property edits join closure while inherited defaults stay opaque", async () => {
+  const nested = inst("nested", "3:1", [inst("unobserved", "8:1")]);
+  nested.id = "Iouter;nested";
+  nested.componentProperties = {
+    Icon: { type: "INSTANCE_SWAP", value: "4:1" },
+    Label: { type: "TEXT", value: "8:1" },
+    Off: { type: "BOOLEAN", value: false },
+  };
+  const outer = inst("outer", "2:1", [nested, inst("opaque", "9:1")]);
+  outer.overrides = [
+    { id: nested.id, overriddenFields: ["componentProperties"] },
+  ];
+  const parent = entry(set("1:0", "Parent", [[outer]]), {
+    "2:1": { name: "Outer", componentSetId: "2:0" },
+    "3:1": { name: "Nested", componentSetId: "3:0" },
+    "4:1": { name: "Chosen", componentSetId: "4:0" },
+    "8:1": { name: "Hidden" },
+    "9:1": { name: "Opaque" },
+  });
+  const before = JSON.stringify(parent),
+    calls: string[][] = [];
+  const result = await followInstances(
+    resp("1:0", parent),
+    ["1:0"],
+    batches(
+      Object.fromEntries(
+        ["2", "3", "4"].map((n) => [
+          n + ":0",
+          entry(set(n + ":0", "Set" + n, [[]])),
+        ]),
+      ),
+      calls,
+    ),
+  );
+  assert.deepEqual(calls, [["2:0", "3:0", "4:0"]]);
+  assert.deepEqual(result.closure.unresolved, []);
+  assert.deepEqual(
+    mappedInstanceRefs(parent.document).map((x) => x.componentId),
+    ["2:1", "3:1", "4:1"],
+  );
+  assert.equal(JSON.stringify(parent), before);
+});
+
+test("nested closure refuses ambiguous incomplete or unselected property observations", () => {
+  for (const mode of [
+    "not-edited",
+    "duplicate-edit",
+    "duplicate-target",
+    "wrong-type",
+    "unsupported",
+    "depth",
+    "nodes",
+  ] as const) {
+    const nested = inst("nested", "3:1");
+    nested.id = "Iouter;nested";
+    nested.componentProperties = {
+      Icon: { type: "INSTANCE_SWAP", value: "4:1" },
+    };
+    const outer = inst("outer", "2:1", [nested]);
+    outer.overrides = [
+      { id: nested.id, overriddenFields: ["componentProperties"] },
+    ];
+    if (mode === "not-edited") outer.overrides = [];
+    if (mode === "duplicate-edit")
+      outer.overrides.push(structuredClone(outer.overrides[0]));
+    if (mode === "duplicate-target")
+      outer.children!.push(structuredClone(nested));
+    if (mode === "wrong-type") nested.type = "FRAME";
+    if (mode === "unsupported")
+      nested.componentProperties.Bad = {
+        type: "SLOT",
+        value: { guid: "arbitrary" },
+      };
+    if (mode === "nodes")
+      outer.children!.push(
+        ...Array.from({ length: 999 }, (_, i): RestNode => ({
+          id: "f" + i,
+          type: "FRAME",
+          name: "F",
+        })),
+      );
+    if (mode === "depth") {
+      let top: RestNode = { id: "deep", type: "FRAME", name: "D" },
+        at = top;
+      outer.children!.push(top);
+      for (let i = 0; i < 9; i++) {
+        at.children = [{ id: "d" + i, type: "FRAME", name: "D" }];
+        at = at.children[0];
+      }
+    }
+    assert.deepEqual(
+      mappedInstanceRefs(set("1:0", "Parent", [[outer]])).map(
+        (x) => x.componentId,
+      ),
+      ["2:1"],
+      mode,
+    );
+  }
+});
+
+test("missing applied swap metadata is recovered only from an exact keyed same-file main", async () => {
+  const child = inst("outer", "2:1");
+  child.componentProperties = {
+    Chosen: { type: "INSTANCE_SWAP", value: "3:1" },
+    Text: { type: "TEXT", value: "8:1" },
+  };
+  const first = entry(set("1:0", "Parent", [[child]]), {
+    "2:1": { name: "Wrapper", componentSetId: "2:0" },
+  });
+  const calls: string[][] = [],
+    chosen = entry(
+      { id: "3:1", name: "Chosen", type: "COMPONENT", children: [] },
+      { "3:1": { name: "Chosen", key: "chosen-key", remote: false } },
+    );
+  const before = JSON.stringify(first);
+  const result = await followInstances(
+    resp("1:0", first),
+    ["1:0"],
+    batches(
+      { "2:0": entry(set("2:0", "Wrapper", [[]])), "3:1": chosen },
+      calls,
+    ),
+  );
+  assert.deepEqual(calls, [["3:1"], ["2:0"]]);
+  assert.deepEqual(result.closure.unresolved, []);
+  assert.deepEqual(result.closure.pulled.map((x) => x.nodeId).sort(), [
+    "2:0",
+    "3:1",
+  ]);
+  assert.equal(JSON.stringify(first), before);
+  for (const mode of [
+    "wrong-id",
+    "wrong-type",
+    "missing-key",
+    "remote",
+    "set-key",
+  ] as const) {
+    const bad = structuredClone(chosen);
+    if (mode === "wrong-id") bad.document.id = "other";
+    if (mode === "wrong-type") bad.document.type = "FRAME";
+    if (mode === "missing-key") delete bad.components!["3:1"].key;
+    if (mode === "remote") bad.components!["3:1"].remote = true;
+    if (mode === "set-key") bad.components!["3:1"].componentSetId = "3:0";
+    const out = await followInstances(
+      resp("1:0", first),
+      ["1:0"],
+      batches({ "2:0": entry(set("2:0", "Wrapper", [[]])), "3:1": bad }),
+    );
+    assert(
+      out.closure.unresolved.some(
+        (x) => x.targetId === "3:1" && x.reason === "not-found",
+      ),
+      mode,
+    );
+  }
+});
+
+test("recovered nested swap identity reaches its referring mapper context without input mutation", async () => {
+  const nested = inst("nested", "3:1");
+  nested.id = "Iouter;nested";
+  nested.componentProperties = {
+    Chosen: { type: "INSTANCE_SWAP", value: "4:1" },
+  };
+  const outer = inst("outer", "2:1", [nested]);
+  outer.overrides = [
+    { id: nested.id, overriddenFields: ["componentProperties"] },
+  ];
+  const first = entry(set("1:0", "Parent", [[outer]]), {
+    "2:1": { name: "Outer", key: "outer-key", componentSetId: "2:0" },
+    "3:1": { name: "Nested", key: "nested-key", componentSetId: "3:0" },
+  });
+  first.componentSets = {
+    "2:0": { name: "Outer", key: "outer-set" },
+    "3:0": { name: "Nested", key: "nested-set" },
+  };
+  const before = JSON.stringify(first),
+    chosen = entry(
+      { id: "4:1", name: "Chosen", type: "COMPONENT", children: [] },
+      { "4:1": { name: "Chosen", key: "chosen-key", remote: false } },
+    );
+  const { response, closure } = await followInstances(
+    resp("1:0", first),
+    ["1:0"],
+    batches({
+      "2:0": entry(set("2:0", "Outer", [[]])),
+      "3:0": entry(set("3:0", "Nested", [[]])),
+      "4:1": chosen,
+    }),
+  );
+  const mapped = mapRestToDump(response, { closure, fileKey: "file" }).dump;
+  const usage = (mapped.Parent as any).variants[0].children[0];
+  assert.equal(
+    usage.hostOverrides[0].instanceProperties.properties.Chosen.selected
+      .componentKey,
+    "chosen-key",
+  );
+  assert.equal(usage.hostOverrides[0].instanceProperties.nodeId, nested.id);
+  assert.equal(JSON.stringify(first), before);
 });
