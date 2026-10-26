@@ -1251,10 +1251,12 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   const figmaName = (dotPath: string) => dotPath.split('.').join('/');
   const cssVarName = (dotPath: string) => `var(--${dotPath.split('.').join('-')})`;
 
+  // Token entries and selected context are fixed for this engine instance.
+  const all = new Map([...primitives, ...brandModes.get(brand)!, ...semantic, ...(mode === 'dark' ? dark : light)]);
+
   function resolveLiteral(dotPath: string): unknown {
     // All compile-time scalar lowering shares the host-selected context;
     // native variable binding/mode selection remains a separate operation.
-    const all = new Map([...primitives, ...brandModes.get(brand)!, ...semantic, ...(mode === 'dark' ? dark : light)]);
     let entry = all.get(dotPath);
     let guard = 0;
     while (entry && guard++ < 10) {
