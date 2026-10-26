@@ -37,6 +37,7 @@ export const reactRuntimeAdapters = [
     hashes: [
       "aea3404ac4d87323ff72f8ee176454d94bcd13a4a4947c5288dca174dbbd17db",
       "a5a052eac47e030dc93231e9226defb5e44980eb014961a504c241285966910e",
+      "2d9afa5ada426157ecb2c89984f89d7a3981095615af0a71dfe4ba809998f826",
     ],
     kind: "create-element",
   },
@@ -45,6 +46,7 @@ export const reactRuntimeAdapters = [
     hashes: [
       "dd50fd0db2fba44e0eee66243a45c81cfa3774cf41e4e6c0c080a601815c694d",
       "dd50fd0db2fba44e0eee66243a45c81cfa3774cf41e4e6c0c080a601815c694d",
+      "706e324b21fcd94fb728da71b374694d0727d0baee4126011cea583f54e09106",
     ],
     kind: "jsx",
   },
@@ -53,6 +55,7 @@ export const reactRuntimeAdapters = [
     hashes: [
       "2ab293af6af1c03e785d764ff70f0f9a851238c791b5adffd5ec183e85bb0796",
       "638fcb800207eaf4c5b2427f13fb82362b8e06df51e65d92fa350fbfeaa8fd89",
+      "f6b7e0de965d24a560efa784ef8a63706dea79fa551bee15a37acd015d995106",
     ],
     kind: "forward-ref",
   },
@@ -66,7 +69,7 @@ export function selectReactRuntimeAdapters(reference: Pick<ReactReference, 'file
     /^react\/jsx(?:-dev)?-runtime(?:\.js)?$/.test(edge.specifier));
   const active = reactRuntimeAdapters.filter(adapter => adapter.kind !== 'jsx' || requiresJsx ||
     Object.keys(reference.files).some(file => file.endsWith(adapter.suffix)));
-  const version = [0, 1].find(index => active.every(adapter => {
+  const version = [0, 1, 2].find(index => active.every(adapter => {
     const matches = Object.entries(reference.files).filter(([file]) => file.endsWith(adapter.suffix));
     return matches.length === 1 && matches[0][1] === adapter.hashes[index];
   }));

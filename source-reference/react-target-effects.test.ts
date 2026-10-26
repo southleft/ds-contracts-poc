@@ -148,6 +148,20 @@ test('unknown context effects, writes, opaque inspection, callback writes and gu
   },'Container',imports);
 });
 
+test('a sequence in the key argument mutates local props before the original factory copies them',()=>{
+  fixture(`const config={id:'before'};return make('button',config,(config.id='after','key'));`,f=>{
+    const model=readReactTargetEffects(f.reference,f.initializer,f.invocation({}));
+    assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+    const compiled=ts.transpileModule(f.text,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+    const env={exports:{} as any,require:createRequire(import.meta.url)};
+    runInNewContext(compiled,env);
+    const actual=env.exports[f.name].render({},{});
+    assert.equal(actual.props.id,'after');assert.equal(actual.key,'key');
+    check(model.output,actual,{},undefined,undefined);
+    assert.equal(model.acceptedContract,null);assert.equal(model.runtimeVerified,false);
+  });
+});
+
 test('source-model observations are assumptions and cannot authenticate changed initializer, input provenance, source or callback dependencies',()=>{
   fixture(`const {children,...rest}=props;return make(Provider,{render:()=>untrusted(rest,children,ref)});`,f=>{
     const input=f.invocation({children:{},id:'value'}),model=readReactTargetEffects(f.reference,f.initializer,input);

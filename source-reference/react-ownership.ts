@@ -173,7 +173,7 @@ export const reactOwnershipRead = (selector: string, renderGraph = false) => `((
   values.set(entry.value,entry.identity);
  }
  out.rendererVersions=[...state.renderers.values()].map(r=>r.version);
- if(out.rendererVersions.length!==1||!['19.2.4','19.2.7'].includes(out.rendererVersions[0]))return fail('react-ownership-renderer-unsupported');
+ if(out.rendererVersions.length!==1||!['19.2.4','19.2.7','19.3.1'].includes(out.rendererVersions[0]))return fail('react-ownership-renderer-unsupported');
  const committed=[...state.roots.values()].filter(r=>r.root.current?.child);
  if(committed.length!==1||committed[0].didError)return fail('react-ownership-root-ambiguous-or-failed');
  const selected=document.querySelector(${JSON.stringify(selector)});
