@@ -2,7 +2,7 @@ import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
 import {qualifyDirectPartAvailability, qualifyOwnedComponentAvailability, qualifyOwnedTextAvailability, qualifyOwnedComponentCallerRows} from './source-part-availability.js';
-import {qualifyAuthoredTextAppearanceTable,qualifyAuthoredLiteralTextTable} from './source-authored-text-appearance.js';
+import {qualifyAuthoredTextAppearanceTable,qualifyAuthoredLiteralTextTable,qualifyScopedAuthoredLiteralTextTable} from './source-authored-text-appearance.js';
 import {fixedSwapOwnerRoots, fixedSwapVariantOwner, qualifyFixedSwapVariantSelection, capturedSelectedDefaultsMatch, qualifyFixedSwapRootAllocation, type FixedSwapOwnerRoot} from './fixed-swap-root-allocation.js';
 import {demandedTextAppearanceNodes,textAppearanceDemandsFromDumps,sourceTextAppearanceInput,inspectTextAppearance,type SourceTextAppearanceDemand,type SourceTextAppearanceInput,type SourceTextAppearanceBinding} from './source-text-appearance-control.js';
 import {demandedImageNodes,imageDemandsFromDumps,type SourceImageDemand} from './source-image-control.js';
@@ -2574,6 +2574,7 @@ interface Ctx {
    * unpainted occurrence keeps the exact original child input. */
   partialDrawingInk?: Array<{component:Record<string,unknown>;target:Record<string,string>;painted:NonNullable<Part['presenceByCombination']>;inherited:NonNullable<Part['presenceByCombination']>;where:string;selfKey:string}>;
   structuralAvailabilitySource?: DumpSet;
+  deferredLiteralText?: Array<{merged:Merged;part:Record<string,unknown>;where:string}>;
   guardedDrawnPartDomain?: boolean;
   sourcePartMatrixVerified?: boolean;
   fixedSwapOwnerRoots?: ReadonlyMap<string, readonly FixedSwapOwnerRoot[]>;
@@ -12678,7 +12679,7 @@ function carryAuthoredLiteralText(m:Merged,part:Record<string,unknown>,ctx:Ctx,w
  }
  const table=qualifyAuthoredLiteralTextTable(source,ctx.fileKey,m.occ,ctx.axes.map(axis=>({property:axis.property,prop:axis.propName,boolean:isBooleanAxis(axis),values:axis.values,
   map:Object.fromEntries(axis.values.map(raw=>[raw,axis.omitted?.unsetValue===raw?null:axisValue(axis,raw)]))})),domain,qualified,part as Part);
- if(!table)return;
+ if(!table){(ctx.deferredLiteralText??=[]).push({merged:m,part,where});return;}
  part.textByCombination=table;
  ctx.notes=ctx.notes.filter(note=>!note.startsWith(where+': drawn characters vary across variants'));
  ctx.notes.push(where+': literal source characters retained for '+table.rows.length+' complete source-present variant tuples');
@@ -19392,6 +19393,24 @@ function proposeFromDumpFencedImpl(
     });
     c.bindings.figma.drawnVariants = domain;
     ctx.notes.unshift('declared-drawn-source-candidate: every source variant axis is preserved; only frozen declared combinations are reachable. Candidate inspection is not accepted import, original behavior or visual fidelity.');
+  }
+  // Final ancestor gates are available only after the complete anatomy and
+  // its finite source domain have been built. Failed early literal proofs may
+  // now qualify against that whole chain, never against a guessed parent.
+  for(const {merged,part,where} of ctx.deferredLiteralText??[]){
+    const source=ctx.structuralAvailabilitySource;if(!source)continue;
+    let domain=declaredPresenceDomain(ctx),qualified=ctx.guardedDrawnPartDomain===true;
+    if(!domain&&ctx.sourcePartMatrixVerified&&ctx.axes.length&&ctx.axes.every(axis=>!axis.omitted)){
+      const values=ctx.axes.map(axis=>axis.values.map(value=>axisValue(axis,value)));
+      if(values.reduce((n,v)=>n*v.length,1)>4096)continue;
+      domain=values.reduce<Array<Array<string|null>>>((rows,values)=>rows.flatMap(row=>values.map(value=>[...row,value])),[[]]);qualified=true;
+    }
+    const table=qualifyScopedAuthoredLiteralTextTable(source,ctx.fileKey,merged.occ,ctx.axes.map(axis=>({property:axis.property,prop:axis.propName,boolean:isBooleanAxis(axis),values:axis.values,
+      map:Object.fromEntries(axis.values.map(raw=>[raw,axis.omitted?.unsetValue===raw?null:axisValue(axis,raw)]))})),domain,qualified,part as Part,contract as unknown as Contract);
+    if(!table)continue;
+    part.textByCombination=table;
+    ctx.notes=ctx.notes.filter(note=>!note.startsWith(where+': drawn characters vary across variants'));
+    ctx.notes.push(where+': literal source characters retained for '+table.rows.length+' complete source-visible tuples under authenticated ancestor gates');
   }
   let draftPaintQualification:FigmaProposalResult['draftPaintQualification'];
   // Parent-dependent growth and deferred token bindings now own their final
