@@ -28,6 +28,28 @@ constraints or interaction behavior. Static HTML and Web Components refuse this
 placement model by name. This additive optional field leaves existing contract
 behavior unchanged; live stateful conversion remains subject to the V1 ledger.
 
+## Conditional child text inputs
+
+A nested reference can carry `component.textPropsByCombination`, keyed by the
+child's canonical text prop name. Each value is `{props, rows}`: `props` names
+the ordered parent VARIANT axes, and each row has their canonical `values` and
+a literal string `value`. Every reachable tuple must appear exactly once.
+Tables support up to eight axes, 4096 rows, and 65,536 characters per value.
+Duplicate, missing, unknown, or conflicting inputs refuse.
+
+`null` omits the child input and preserves its existing default behavior; `""`
+is an explicit empty edit. A string such as `"{label}"` remains literal text,
+not a link to a parent prop. Fixed inputs, other argument tables, and caller
+content cannot also supply the same input. Required child inputs cannot be
+omitted.
+
+Both React emitters use the child's public code alias, including `children`,
+without duplicating the child component. Native compilation sets an existing
+TEXT property on that same child instance. A NONE-only input retains its named
+native limitation. HTML and Web Components refuse this table. Automatic
+proposal requires matching source ownership and complete observed tuples;
+the field alone does not establish source fidelity or live Figma verification.
+
 ## Top-level fields
 
 | Field | Type | Purpose |

@@ -148,11 +148,12 @@ test('Boolean character lookup refuses a missing or stale explicit target instea
   assert(r.parent?.notes.some(n=>n.includes('character-override-not-carried')&&n.includes('identity'))||r.result.skipped.length>0,defect);
  }
 });
-test('Boolean character lookup refuses text depending on a joint condition rather than pinning a group label',()=>{
+test('Boolean character lookup retains jointly varying text in a complete TEXT argument table',()=>{
  const f=booleanCharacterFixture();f.parent.variants[3].children[0].textOverrides.Duplicate='Different';
  const r=proposedBooleanCharacterInput(f);assert(r.prop&&r.parent);
  assert.equal(r.ref?.props?.[r.prop],undefined);
- assert(r.parent.notes.some(n=>n.includes('character-override-not-carried')&&n.includes('no complete text mapping')));
+ assert(r.ref?.textPropsByCombination?.[r.prop]);
+ assert.equal(r.ref.textPropsByCombination[r.prop].rows.length,4);
 });
 test('Boolean character lookup retains duplicate, unknown and ambiguous source-domain refusals',()=>{
  for(const defect of ['duplicate','unknown','ambiguous']){
@@ -206,7 +207,7 @@ test('omitted and explicit values at the same axis value cannot be collapsed int
  const result=proposeBatchFromDump({SourceParent:parent,SourceChild:child},opts);assert.deepEqual(result.skipped,[]);
  const c=result.proposals.find(p=>p.setName==='SourceChild')!,p=result.proposals.find(p=>p.setName==='SourceParent')!,prop=c.characterBindings![0].prop;
  assert(!walkAnatomy(ContractSchema.parse(p.contract)).some(w=>w.part.component?.props?.[prop]!==undefined));
- assert(p.notes.some(n=>n.includes('no complete text mapping')));
+ assert(walkAnatomy(ContractSchema.parse(p.contract)).some(w=>w.part.component?.textPropsByCombination?.[prop]));
 });
 
 function nestedCharacters(){
@@ -490,4 +491,18 @@ test('slot default text ink follows parent variants and explicit content bypasse
  for(const [value,color]of [['one','rgb(17, 34, 51)'],['two','rgb(68, 85, 102)'],['one','rgb(17, 34, 51)']]){await render({caseProp:value});assert.equal(await page.getByText('Underline',{exact:true}).evaluate(n=>(n as HTMLElement).style.color),color);}
  await render({caseProp:'two',[slot.slot!.name]:'Caller supplied'});assert.equal(await page.getByText('Underline',{exact:true}).count(),0);assert.equal(await page.getByText('Caller supplied',{exact:true}).count(),1);
  }finally{await browser.close();}
+});
+
+
+test('joint nested caller text retains one selected child reference and its original slot route',()=>{
+ const f=nestedCharacters(),base=f.Caller.variants[0];
+ f.Caller.propertyDefinitions={Case:{type:'VARIANT',defaultValue:'One',variantOptions:['One','Two']},Grouped:{type:'VARIANT',defaultValue:'false',variantOptions:['false','true']}};
+ f.Caller.variants=['One','Two'].flatMap((which,i)=>['false','true'].map((grouped,j)=>{
+  const v=structuredClone(base),id=`joint-usage-${i}-${j}`;v.nodeId=`joint-parent-${i}-${j}`;v.name=`Case=${which}, Grouped=${grouped}`;v.variantProperties={Case:which,Grouped:grouped};v.children[0].nodeId=id;
+  v.children[0].textOverrides={'Content/label':['A','B','C','D'][i*2+j]};v.children[0].textOverrideTargets={'Content/label':{nodeId:`I${id};inner;leaf-text`,instanceId:`I${id};inner`,componentId:'leaf-main',instancePath:[0],childPath:[0]}};return v;
+ }));
+ const result=proposeBatchFromDump(f,{...opts,drawnVariantSurface:'react-runtime'});assert.deepEqual(result.skipped,[]);
+ const caller=ContractSchema.parse(result.proposals.find(p=>p.setName==='Caller')!.contract),leaf=ContractSchema.parse(result.proposals.find(p=>p.setName==='Leaf')!.contract);
+ const selected=walkAnatomy(caller).filter(w=>w.part.component?.id===leaf.id);
+ assert.equal(selected.length,1,'joint input does not duplicate caller components');assert.equal(Object.values(selected[0].part.component!.textPropsByCombination??{})[0]?.rows.length,4);
 });
