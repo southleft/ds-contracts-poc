@@ -583,6 +583,7 @@ reg("layout", "observed-presence", [
   "componentRef.paintPropsByCombination",
   "componentRef.booleanPropsByCombination",
   "componentRef.enumPropsByCombination",
+  "componentRef.textPropsByCombination",
   "componentRef.sameInkInsideStroke", "componentRef.sameInkInsideStroke.props",
   "componentRef.sameInkInsideStroke.rows", "componentRef.sameInkInsideStroke.rows.values",
   "componentRef.sameInkInsideStroke.rows.stroke", "componentRef.sameInkInsideStroke.rows.stroke.weight",

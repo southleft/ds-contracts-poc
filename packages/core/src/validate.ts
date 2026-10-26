@@ -17,6 +17,8 @@ import {solidFillCompositionRules} from './css.js';
  */
 import {
   PropSchema,
+  TextArgumentTableSchema,
+  absentVariantAxes,
   textByCombinationIssues,
   outsideStrokeIssues,
   callerContentGroups,
@@ -233,6 +235,18 @@ export function validateContract(
           }
         }
       }
+      for(const [propName,table] of Object.entries(part.component.textPropsByCombination??{})){
+        if(!TextArgumentTableSchema.safeParse(table).success){errors.push(`${contract.id}: part "${name}" component-text-argument-invalid:${propName}`);continue;}
+        const axes=absentVariantAxes(contract),domains=table.props.map(name=>axes.find(a=>a.prop.name===name)?.options.map(v=>v===null?null:String(v)));
+        const drawn=reachableVariantTupleKeys(contract,table.props);
+        if(p.length===1||part.repeat||domains.some(domain=>!domain)||table.rows.some(row=>row.values.some((value,i)=>!domains[i]?.includes(value)))||
+            (drawn!==null?table.rows.length!==drawn.size||table.rows.some(row=>!drawn.has(JSON.stringify(row.values))):table.rows.length!==domains.reduce((n,domain)=>n*(domain?.length??0),1)))errors.push(`${contract.id}: part "${name}" component-text-argument-domain-incomplete:${propName}`);
+        const prop=dep?.props.find(p=>p.name===propName);
+        if(dep&&prop?.type!=='text')errors.push(`${contract.id}: part "${name}" component-text-argument-child-unqualified:${propName}`);
+        if(prop?.required&&table.rows.some(row=>row.value===null))errors.push(`${contract.id}: part "${name}" component-argument-required-child-cannot-be-omitted:${propName}`);
+        if([part.component.props,part.component.booleanPropsByCombination,part.component.paintPropsByCombination,part.component.enumPropsByCombination].some(values=>Object.hasOwn(values??{},propName)))errors.push(`${contract.id}: part "${name}" component-argument-conflicting-fixed-value:${propName}`);
+        if(prop?.bindings.code.prop==='children'&&part.component.text!==undefined)errors.push(`${contract.id}: part "${name}" component-text-argument-conflicting-content:${propName}`);
+      }
       if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(`${contract.id}: part "${name}" sets text but ${dep.id} has no children text prop`);
       }
@@ -287,7 +301,7 @@ export function validateContract(
           if (slots.some(slot => slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined))
             errors.push(`${contract.id}: part "${name}" supplies caller parts to a constrained ${contentSlot} slot; constraint projection is unsupported`);
           const childrenProp = dep?.props.find(p => p.bindings.code.prop === contentSlot);
-          if (part.component.text !== undefined || (childrenProp && Object.hasOwn(part.component.props ?? {}, childrenProp.name)) ||
+          if (part.component.text !== undefined || (childrenProp && (Object.hasOwn(part.component.props ?? {}, childrenProp.name)||Object.hasOwn(part.component.textPropsByCombination??{},childrenProp.name))) ||
               part.repeat || part.slot || part.content || part.text !== undefined || part.icon || part.meter)
             errors.push(`${contract.id}: part "${name}" has conflicting component caller content`);
           if (p.length === 1)

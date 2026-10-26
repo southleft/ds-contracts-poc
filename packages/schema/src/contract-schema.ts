@@ -2451,6 +2451,21 @@ export const PaintArgumentTableSchema = z.strictObject({
   }
 });
 
+/** Exact literal TEXT input selection. Null omits the argument; an empty
+ * string is an explicit edit. Text values never encode parent-property links. */
+export const TextArgumentTableSchema = z.strictObject({
+  props: z.array(z.string().min(1)).min(1).max(8),
+  rows: z.array(z.strictObject({values:z.array(z.string().nullable()),value:z.string().max(65536).nullable()})).min(1).max(4096),
+}).superRefine((table,ctx)=>{
+  if(new Set(table.props).size!==table.props.length)ctx.addIssue({code:'custom',message:'component-argument-axis-duplicate'});
+  const keys=new Set<string>();
+  for(const row of table.rows){const key=JSON.stringify(row.values);
+    if(row.values.length!==table.props.length)ctx.addIssue({code:'custom',message:'component-argument-row-arity'});
+    if(keys.has(key))ctx.addIssue({code:'custom',message:'component-argument-row-duplicate'});
+    keys.add(key);
+  }
+});
+
 export const SameInkInsideStrokeSchema = z.strictObject({
   weight:z.number().positive(),cap:z.enum(['NONE','ROUND','SQUARE']),
   join:z.enum(['MITER','ROUND','BEVEL']),miterLimit:z.number().min(1).max(1000),
@@ -2494,6 +2509,7 @@ export const ComponentRefSchema = z.strictObject({
   booleanPropsByCombination: z.record(z.string(),BooleanArgumentTableSchema).optional(),
   paintPropsByCombination: z.record(z.string(),PaintArgumentTableSchema).optional(),
   enumPropsByCombination: z.record(z.string(),PaintArgumentTableSchema).optional(),
+  textPropsByCombination: z.record(z.string(),TextArgumentTableSchema).optional(),
   /** React mount-only inputs, keyed by canonical child enum property.
    *  Targets bindings.code.initial.prop instead of the controlled prop.
    *  Values are canonical literals or {parentEnum} references. */
@@ -3822,6 +3838,17 @@ export const ContractSchema = z.strictObject({
       const axes=absentVariantAxes(c),domains=table.props.map(name=>axes.find(a=>a.prop.name===name)?.options.map(v=>v===null?null:String(v)));
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'component','enumPropsByCombination',name],message});
       if(!nested || part.repeat || Object.hasOwn(part.component?.props??{},name)||Object.hasOwn(part.component?.booleanPropsByCombination??{},name)||Object.hasOwn(part.component?.paintPropsByCombination??{},name))issue('component-argument-context-or-conflict');
+      if(domains.some(d=>!d))issue('component-argument-axis-requires-finite-variant-property');
+      else {
+        if(table.rows.some(r=>r.values.some((v,i)=>!domains[i]?.includes(v))))issue('component-argument-axis-value-unqualified');
+        const drawnKeys=reachableVariantTupleKeys(c,table.props);
+        if(drawnKeys!==null ? table.rows.length!==drawnKeys.size || table.rows.some(row=>!drawnKeys.has(JSON.stringify(row.values))) : table.rows.length!==domains.reduce((n,d)=>n*d!.length,1))issue('component-argument-domain-incomplete');
+      }
+    }
+    for(const [name,table] of Object.entries(part.component?.textPropsByCombination??{})){
+      const axes=absentVariantAxes(c),domains=table.props.map(name=>axes.find(a=>a.prop.name===name)?.options.map(v=>v===null?null:String(v)));
+      const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'component','textPropsByCombination',name],message});
+      if(!nested || part.repeat || [part.component?.props,part.component?.booleanPropsByCombination,part.component?.paintPropsByCombination,part.component?.enumPropsByCombination].some(values=>Object.hasOwn(values??{},name)))issue('component-argument-context-or-conflict');
       if(domains.some(d=>!d))issue('component-argument-axis-requires-finite-variant-property');
       else {
         if(table.rows.some(r=>r.values.some((v,i)=>!domains[i]?.includes(v))))issue('component-argument-axis-value-unqualified');

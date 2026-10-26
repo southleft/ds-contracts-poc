@@ -4283,7 +4283,7 @@ function mapInstanceShapeFills(dep:Contract,props:NonNullable<ComponentRef['prop
  return Object.keys(out).length?out:undefined;
 }
 
-function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>,parent:Contract):Record<string,boolean>|undefined {
+function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['props']>,subst:Record<string,string>,parent:Contract,literalProps?:ReadonlySet<string>):Record<string,boolean>|undefined {
   validateStructuralAvailability(dep);
   const out:Record<string,boolean>={};
   for(const {part} of walkAnatomy(dep)) {
@@ -4300,7 +4300,7 @@ function mapInstanceVisibility(dep:Contract,props:NonNullable<ComponentRef['prop
     if(part.availabilityByCombination){
       // Use the same child variant/default selection and full drawn-domain
       // refusal as ordinary native composition before the projected table.
-      const mapped=mapDepProps(dep,props,subst,undefined,undefined,parent,undefined,true);
+      const mapped=mapDepProps(dep,props,subst,undefined,undefined,parent,undefined,true,literalProps);
       const childTuple:Record<string,unknown>={};
       for(const {prop} of absentVariantAxes(dep)){
         const wired=mapped[prop.bindings.figma.property!];
@@ -4328,6 +4328,7 @@ function mapDepProps(
   /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
   statePreview?: ComponentRef['statePreview'],
   visibilityConsumed:boolean|{textAppearances:ReadonlySet<string>;textSizes?:ReadonlySet<string>} = false,
+  literalProps?:ReadonlySet<string>,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4371,7 +4372,7 @@ function mapDepProps(
       value = rawValue;
     }
     if (typeof value === 'string') {
-      const parentRef = value.match(PARENT_PROP_REF);
+      const parentRef = literalProps?.has(propName) ? null : value.match(PARENT_PROP_REF);
       if (parentRef) {
         const parentProp = parent?.props.find(p => p.name === parentRef[1]);
         if (parentProp?.type === 'text') {
@@ -5633,6 +5634,7 @@ function partToSpecInner(
       ? mapDepInitialProps(dep, part.component.initialProps, subst, contract) : undefined;
 
     const depLedger: CodeOnlyFactSeed[] = [];
+    const resolvedArguments=resolveBooleanArguments(dep,part.component,subst,contract);
     const spec: NodeSpec = {
       type: 'instance',
       grow: resolveLayout(part, subst)?.grow || undefined,
@@ -5643,15 +5645,15 @@ function partToSpecInner(
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
       instanceInsideStroke: resolvedInstanceInsideStroke(part.component,subst),
-      instanceVisibility: mapInstanceVisibility(dep,resolveBooleanArguments(dep,part.component,subst),subst,contract),
-      instanceTextAppearances:mapNativeTextAppearances(dep,resolveBooleanArguments(dep,part.component,subst),subst),
-      instanceTextSizes:mapNativeTextSizes(dep,resolveBooleanArguments(dep,part.component,subst),subst),
-      instanceIntrinsicPlacements:mapNativeIntrinsicPlacements(dep,resolveBooleanArguments(dep,part.component,subst),subst),
+      instanceVisibility: mapInstanceVisibility(dep,resolvedArguments,subst,contract,new Set(Object.keys(part.component.textPropsByCombination??{}))),
+      instanceTextAppearances:mapNativeTextAppearances(dep,resolvedArguments,subst),
+      instanceTextSizes:mapNativeTextSizes(dep,resolvedArguments,subst),
+      instanceIntrinsicPlacements:mapNativeIntrinsicPlacements(dep,resolvedArguments,subst),
       ...nativeAuthoredInstanceFields(dep,byId),
-      instanceImages: mapNativeImageArguments(dep,resolveBooleanArguments(dep,part.component,subst),subst),
-      instanceTextColors: mapInstanceTextColors(dep,resolveBooleanArguments(dep,part.component,subst),subst),
-      instanceShapeFills: mapInstanceShapeFills(dep,resolveBooleanArguments(dep,part.component,subst),subst),
-      depProps: { ...initialProps, ...mapDepProps(dep, resolveBooleanArguments(dep,part.component,subst), subst, part.component.text, depLedger, contract, part.component.statePreview, true) },
+      instanceImages: mapNativeImageArguments(dep,resolvedArguments,subst),
+      instanceTextColors: mapInstanceTextColors(dep,resolvedArguments,subst),
+      instanceShapeFills: mapInstanceShapeFills(dep,resolvedArguments,subst),
+      depProps: { ...initialProps, ...mapDepProps(dep, resolvedArguments, subst, part.component.text, depLedger, contract, part.component.statePreview, true, new Set(Object.keys(part.component.textPropsByCombination??{}))) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
     const placement = resolveComponentPlacement(part, subst);

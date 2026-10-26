@@ -10211,7 +10211,7 @@ function carryTextOverrides(
       // omitted; only explicit values with matching child identity may be sent.
       if(rows.some(r=>r.value!==undefined&&(typeof r.value!=='string'||!r.prop))||names.size!==1){ctx.notes.push(where+': character-override-not-carried '+path+' — incomplete or stale child identity binding');continue;}
       const prop=[...names][0]!,applied=(component.props??{}) as Record<string,unknown>;
-      if(applied[prop]!==undefined){ctx.notes.push(where+': character-override-not-carried '+path+' — drawn property already applies '+prop);continue;}
+      if(applied[prop]!==undefined || [component.booleanPropsByCombination,component.paintPropsByCombination,component.enumPropsByCombination,component.textPropsByCombination].some(values=>Object.hasOwn((values??{}) as object,prop))){ctx.notes.push(where+': character-override-not-carried '+path+' — drawn property already applies '+prop);continue;}
       const distinct=[...new Set(rows.map(r=>r.value!))];
       if(distinct.length===1)applied[prop]=distinct[0];
       else {
@@ -10230,6 +10230,22 @@ function carryTextOverrides(
             const map=Object.fromEntries([...readings].filter((entry):entry is [string,string]=>entry[1]!==undefined));
             applied[prop]={prop:axis.propName,map};break;
           }
+        }
+      }
+      if(applied[prop]===undefined && ctx.axes.length>0 && ctx.axes.length<=8){
+        const byVariant=new Map(rows.map(row=>[row.variant,row.value??null]));
+        const complete=rows.length===ctx.totalVariants.length&&ctx.totalVariants.every(variant=>byVariant.has(variant));
+        const qualified=complete||qualifiedComponentCallerRows(m,ctx);
+        const tableRows=ctx.totalVariants.map(variant=>({values:ctx.axes.map(axis=>{
+          const raw=axisValuesOf(variant)[axis.property];
+          return raw===undefined||!axis.values.includes(raw)?undefined:axis.omitted?.unsetValue===raw?null:axisValue(axis,raw);
+        }),value:byVariant.get(variant)??null}));
+        if(qualified && byVariant.size===rows.length && rows.every(row=>ctx.totalVariants.includes(row.variant)) && tableRows.length<=4096 &&
+            tableRows.every(row=>row.values.every(value=>value!==undefined)) && new Set(tableRows.map(row=>JSON.stringify(row.values))).size===tableRows.length){
+          fenceSparseInference(ctx.axes,`character-override-${prop}@${where}`,rows);
+          ((component.textPropsByCombination??={}) as Record<string,unknown>)[prop]={props:ctx.axes.map(axis=>axis.propName),rows:tableRows};
+          ctx.notes.push(where+': identity-qualified character override '+path+' retained through complete TEXT argument table; explicit omissions keep the child default');
+          continue;
         }
       }
       if(applied[prop]===undefined){ctx.notes.push(where+': character-override-not-carried '+path+' — no complete text mapping');continue;}
@@ -11981,7 +11997,8 @@ function carryNestedCharacterCaller(m:Merged,part:Record<string,unknown>,compone
     const gate=part.visibleWhen as {prop:string;equals?:string|string[]}|undefined;
     const textCtx=gate&&gate.equals!==undefined?{...ctx,axes:ctx.axes.map(a=>a.propName!==gate.prop?a:{...a,values:a.values.filter(v=>(Array.isArray(gate.equals)?gate.equals:[gate.equals]).includes(axisValue(a,v)))})}:ctx;
     carryTextOverrides(observed,selected,targetId!,target.data.name,textCtx,where+'/callerText');
-    if(owned&&JSON.stringify(prior?.props??{})===JSON.stringify(selected.props??{})){
+    const characterInputs=(ref:Record<string,unknown>|undefined)=>JSON.stringify({props:ref?.props??{},text:ref?.textPropsByCombination??{}});
+    if(owned&&characterInputs(prior)===characterInputs(selected)){
       const values=observed.occ.map(o=>o.node.textOverrides?.[path]);
       const distinct=[...new Set(values)];
       if(distinct.length>1&&values.every(v=>typeof v==='string')&&new Set(observed.occ.map(o=>o.variant)).size===observed.occ.length){
@@ -12008,9 +12025,9 @@ function carryNestedCharacterCaller(m:Merged,part:Record<string,unknown>,compone
         }
       }
     }
-    if(!selected.props||!Object.keys(selected.props).length)continue;
+    if(!Object.keys((selected.props??{}) as object).length&&!Object.keys((selected.textPropsByCombination??{}) as object).length)continue;
     if(owned){
-      if(JSON.stringify(prior?.props??{})===JSON.stringify(selected.props))continue;
+      if(characterInputs(prior)===characterInputs(selected))continue;
       owned.component=selected;
       ctx.notes.push(where+': nested source characters carried through identity-qualified existing caller content in slot '+names[0]);
       continue;

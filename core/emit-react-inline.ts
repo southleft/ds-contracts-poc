@@ -1211,7 +1211,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.
-      const childrenApplied = depChildren !== undefined && part.component.props?.[depChildren.name] !== undefined;
+      const childrenApplied = depChildren !== undefined && (part.component.props?.[depChildren.name] !== undefined || Object.hasOwn(part.component.textPropsByCombination??{},depChildren.name));
       const depSelfDefaults = depChildren?.bindings.figma.kind === 'NONE';
       const text =
         part.component.text ??

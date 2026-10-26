@@ -789,7 +789,7 @@ export function generateTsx(
       // `children` attribute, so the default would silently win and the
       // host's observed label would never render. No applied children prop →
       // byte-identical to the default-echoing behavior.
-      const childrenApplied = depChildren !== undefined && part.component.props?.[depChildren.name] !== undefined;
+      const childrenApplied = depChildren !== undefined && (part.component.props?.[depChildren.name] !== undefined || Object.hasOwn(part.component.textPropsByCombination??{},depChildren.name));
       // …and a dep whose children prop binds kind NONE already defaults
       // ITSELF in its own signature (the promoted-override class), so
       // echoing the default here would only add redundant JSX children.
