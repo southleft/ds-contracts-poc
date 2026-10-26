@@ -40,10 +40,24 @@ export interface ReactElementLineage {
 }
 const sha=(text:string)=>createHash('sha256').update(text).digest('hex');
 const runtimeSuffix='/node_modules/react/cjs/react-jsx-runtime.development.js';
-// Both supported React development versions have these identical factory bytes.
-const runtimeSha='dd50fd0db2fba44e0eee66243a45c81cfa3774cf41e4e6c0c080a601815c694d';
 const G='globalThis.__DSC_ELEMENT_CREATION';
 const reactCallNeedle='            return Component(props, secondArg);';
+
+/** The pinned renderer tuple determines the local that holds the already-read
+ * ref. Do not reread the fiber or borrow a same-named global. */
+export function instrumentReactElementForwardRef(text:string,version:number):string{
+  const refName=version===0||version===1?'ref':version===2?'resolvedRender':undefined;
+  if(!refName)throw Error('element-forward-runtime-version-unsupported');
+  const signature='    function updateForwardRef(\n      current,\n      workInProgress,\n      Component,\n      nextProps,\n      renderLanes\n    ) {';
+  if(text.split(signature).length!==2)throw Error('element-forward-function-unmatched');
+  const start=text.indexOf(signature),next=text.indexOf('\n    function ',start+signature.length),body=text.slice(start,next<0?text.length:next);
+  const assignment=version===2?'      resolvedRender = workInProgress.ref;':'      var ref = workInProgress.ref;';
+  const declaration=version===2?'      var resolvedRender = resolveTypeForHotReloading(Component);':assignment;
+  const call=reactForwardCopyNeedle+'\n        '+refName+',\n        renderLanes\n      );';
+  if(body.split(declaration).length!==2||body.split(assignment).length!==2||body.split(call).length!==2||body.indexOf(declaration)>body.indexOf(assignment)||body.indexOf(assignment)>body.indexOf(call)||text.split(call).length!==2)
+    throw Error('element-forward-copy-binding-unmatched');
+  return text.replace(call,`      ${G}.forward(nextProps,propsWithoutRef,${refName});\n`+call);
+}
 
 /** The binder distinguishes a JSX-runtime import from a same-named local.
  * This is an invocation location, not an interpretation of its containing body,
@@ -223,7 +237,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
   const targets=[...new Map(targetResolutions.flatMap(result=>result.status==='resolved'
     ?[[JSON.stringify([result.definition.module,result.definition.sourceSha256,result.definition.span]),result.definition] as const]:[])).values()];
   const runtime=Object.keys(reference.files).filter(f=>f.endsWith(runtimeSuffix));
-  if(runtime.length>1||runtime.length===1&&reference.files[runtime[0]]!==runtimeSha)throw Error('element-creation-react-runtime-unsupported');
+  if(runtime.length>1||runtime.length===1&&!reactRuntimeAdapters[1].hashes.some(hash=>hash===reference.files[runtime[0]]))throw Error('element-creation-react-runtime-unsupported');
   const selectedRuntime=selectReactRuntimeAdapters(reference);
   // Preserve the existing JSX-only source-link mode without granting props
   // provenance. A classic bundle, or any present core/renderer, needs a fully
@@ -355,8 +369,7 @@ export function createReactElementCreationObserver(reference:Pick<ReactReference
       let contents=text;
       if(file===runtime[0])contents+=`\n${G}.register(exports.jsx,exports.jsxs);\n`;
       else if(file===forwardRuntime){
-        if(text.split(reactForwardCopyNeedle).length!==2)throw Error('element-forward-copy-site-unmatched');
-        contents=text.replace(reactForwardCopyNeedle,`      ${G}.forward(nextProps,propsWithoutRef,ref);\n`+reactForwardCopyNeedle);
+        contents=instrumentReactElementForwardRef(text,version!);
         if(text.split(reactCallNeedle).length!==2)throw Error('element-react-call-site-unmatched');
         contents=contents.replace(reactCallNeedle,`            return ${G}.reactCall(Component,props,secondArg);`);
       }

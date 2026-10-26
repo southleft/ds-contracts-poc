@@ -209,6 +209,20 @@ test('a measured conditional host branch carries caller content without qualifyi
  }finally{rmSync(f.root,{recursive:true,force:true})}
 });
 
+test('qualified renderer versions share source anatomy while future and multiple renderers refuse',()=>{
+ const f=fixture();try{
+  const expected=linkReactSourceAnatomy(f.program,f.ownership,f.tree);assert.equal(expected.status,'linked');
+  for(const version of ['19.2.4','19.2.7','19.3.1']){
+   const ownership={...f.ownership,rendererVersions:[version]};
+   assert.deepEqual(linkReactSourceAnatomy(f.program,ownership,f.tree),expected);
+  }
+  for(const rendererVersions of [['19.3.2'],['19.2.7','19.3.1'],[]]){
+   const refused=linkReactSourceAnatomy(f.program,{...f.ownership,rendererVersions},f.tree);
+   assert.equal(refused.status,'refused');assert.deepEqual(refused.instances,[]);assert.deepEqual(refused.problems,['react-anatomy-renderer-unsupported']);
+  }
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
+
 test('changed identity, missing owners, contradictory roots and cyclic parents refuse without a partial anatomy',()=>{
  const f=fixture();try{
   for(const change of [

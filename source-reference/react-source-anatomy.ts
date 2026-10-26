@@ -110,7 +110,7 @@ export function linkReactSourceAnatomy(
     const contextual=new Map(verifiedReactContextualContent(contentContext,program,ownership,tree).map(fact=>[fact.instanceId,fact]));
     if (program.version !== 1 || ownership.version !== 1 || program.problems.length || ownership.problems.length)
       fail('react-anatomy-source-or-observation-unresolved');
-    if (ownership.rendererVersions.length !== 1 || !['19.2.4', '19.2.7'].includes(ownership.rendererVersions[0]))
+    if (ownership.rendererVersions.length !== 1 || !['19.2.4', '19.2.7', '19.3.1'].includes(ownership.rendererVersions[0]))
       fail('react-anatomy-renderer-unsupported');
     if (!reactOwnershipMatchesTree(ownership, tree)) fail('react-anatomy-captured-paths-differ');
     const definitions = new Map(program.components.map(component => [identity(component), component]));

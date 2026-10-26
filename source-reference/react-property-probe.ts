@@ -86,7 +86,7 @@ export async function probeReactProperties<T>(
   const roots=state&&[...state.roots.values()].filter(r=>r.root.current?.child);
   if(!roots||roots.length!==1||roots[0].didError)throw Error('react-property-probe-root-unqualified');
   const root=roots[0],revision=root.revision;if(typeof root.revision!=='number')throw Error('react-property-probe-commit-observer-missing');const renderer=state.renderers.get(root.id);
-  if(!['19.2.4','19.2.7'].includes(renderer?.version)||typeof renderer.overrideProps!=='function'||typeof renderer.overridePropsDeletePath!=='function')throw Error('react-property-probe-renderer-unsupported');
+  if(!['19.2.4','19.2.7','19.3.1'].includes(renderer?.version)||typeof renderer.overrideProps!=='function'||typeof renderer.overridePropsDeletePath!=='function')throw Error('react-property-probe-renderer-unsupported');
   const registry=window.__DSC_REACT_EXPORTS||[],values=new Map(registry.map(x=>[x.value,x.identity]));
   let sequence=0,target;
   const walk=fiber=>{for(let n=fiber;n;n=n.sibling){const identity=values.get(n.elementType)||values.get(n.type);if(identity){const id='instance-'+sequence++;if(id===${JSON.stringify(instanceId)})target={fiber:n,identity};}if(n.child)walk(n.child);}};walk(root.root.current);
@@ -161,7 +161,7 @@ export async function probeReactInitialProperties<T>(page:Page,selector:string,p
   const roots=state&&[...state.roots.values()].filter(r=>r.root.current?.child);
   if(!roots||roots.length!==1||roots[0].didError||typeof clone!=='function')throw Error('react-initial-probe-root-unqualified');
   const root=roots[0],renderer=state.renderers.get(root.id),revision=root.revision;
-  if(!['19.2.4','19.2.7'].includes(renderer?.version)||typeof renderer.scheduleRoot!=='function'||typeof revision!=='number')throw Error('react-initial-probe-renderer-unsupported');
+  if(!['19.2.4','19.2.7','19.3.1'].includes(renderer?.version)||typeof renderer.scheduleRoot!=='function'||typeof revision!=='number')throw Error('react-initial-probe-renderer-unsupported');
   const key=${JSON.stringify(token)};state.propertyProbes??=new Map();
   if(${restore}){
    const saved=state.propertyProbes.get(key);if(!saved||saved.kind!=='initial')throw Error('react-initial-probe-restore-missing');

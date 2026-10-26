@@ -1,12 +1,13 @@
 import test from 'node:test';
+import {runInNewContext} from 'node:vm';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
-import {createReactElementCreationObserver} from './react-element-creation.js';
-import {createReactHelperObserver,reactRuntimeAdapters,selectReactRuntimeAdapters} from './react-helper-transform.js';
+import {createReactElementCreationObserver,instrumentReactElementForwardRef} from './react-element-creation.js';
+import {createReactHelperObserver,reactRuntimeAdapters,selectReactRuntimeAdapters,reactForwardCopyNeedle} from './react-helper-transform.js';
 import {reactOwnershipHook,reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
 import {reactHelperRuntimeHook,reactHelperRuntimeRead,type ReactHelperRuntimeReport} from './react-helper-runtime.js';
 import {readReactAuthoredClasses} from './react-authored-classes.js';
@@ -16,8 +17,33 @@ const point={file:'not-a-source.mjs',sha256:'0'.repeat(64),start:0,end:1};
 const helperPlan={models:[],call:point,helper:point,metadata:[]};
 function runtimeFiles(index:number,jsx:boolean){return Object.fromEntries(reactRuntimeAdapters.filter(a=>jsx||a.kind!=='jsx').map(a=>['/fixture'+a.suffix,a.hashes[index]]));}
 
+
+test('forward ref observer uses the pinned local once and refuses changed binding or invocation shapes',()=>{
+  const signature='    function updateForwardRef(\n      current,\n      workInProgress,\n      Component,\n      nextProps,\n      renderLanes\n    ) {';
+  for(const version of [0,1,2]){
+    const local=version===2?'resolvedRender':'ref';
+    const assignment=version===2?'      var resolvedRender = resolveTypeForHotReloading(Component);\n      resolvedRender = workInProgress.ref;':'      var ref = workInProgress.ref;';
+    const source=signature+'\n'+assignment+'\n'+reactForwardCopyNeedle+'\n        '+local+',\n        renderLanes\n      );\n      return nextProps;\n    }';
+    const output=instrumentReactElementForwardRef(source,version);
+    if(version<2)assert.equal(output,source.replace(reactForwardCopyNeedle,'      globalThis.__DSC_ELEMENT_CREATION.forward(nextProps,propsWithoutRef,ref);\n'+reactForwardCopyNeedle));
+    let reads=0;const marker={},props={},without={},calls:unknown[][]=[];
+    const sandbox={globalThis:{__DSC_ELEMENT_CREATION:{forward:(...args:unknown[])=>calls.push(args)}},prepareToReadContext:()=>{},resolveTypeForHotReloading:(value:unknown)=>value,renderWithHooks:(...args:unknown[])=>{assert.equal(args[4],marker);return props;},work:{get ref(){reads++;return marker;}},props,propsWithoutRef:without,result:undefined};
+    Object.defineProperty(sandbox,'ref',{get(){throw Error('foreign global ref read');}});
+    runInNewContext(output+'\nresult=updateForwardRef(null,work,null,props,1);',sandbox);
+    assert.equal(sandbox.result,props);assert.equal(reads,1);assert.deepEqual(calls,[[props,without,marker]]);
+    for(const changed of [
+      source.replace('workInProgress.ref','workInProgress.otherRef'),
+      source.replace(version===2?'var resolvedRender':'var ref',version===2?'resolvedRender':'ref'),
+      source.replace('        '+local+',','        workInProgress.ref,'),
+      source.replace('      renderLanes\n    )','      changedLanes\n    )'),
+      source+'\n'+source,
+    ])assert.throws(()=>instrumentReactElementForwardRef(changed,version),/element-forward-(?:function|copy-binding)-unmatched/);
+  }
+  assert.throws(()=>instrumentReactElementForwardRef('',3),/element-forward-runtime-version-unsupported/);
+});
+
 test('classic runtime admission retains coherent version, cardinality and hash requirements',()=>{
-  for(const version of [0,1])for(const jsx of [false,true]){
+  for(const version of [0,1,2])for(const jsx of [false,true]){
     const result=selectReactRuntimeAdapters({files:runtimeFiles(version,jsx)});
     assert.equal(result?.version,version);assert.deepEqual(result?.adapters.map(a=>a.kind),jsx?['create-element','jsx','forward-ref']:['create-element','forward-ref']);
   }
@@ -28,6 +54,9 @@ test('classic runtime admission retains coherent version, cardinality and hash r
     unknownCore:{...base,['/fixture'+core.suffix]:'0'.repeat(64)},
     unknownRenderer:{...base,['/fixture'+renderer.suffix]:'0'.repeat(64)},
     mixed:{...base,['/fixture'+renderer.suffix]:renderer.hashes[0]},
+    mixedNewCore:{...base,['/fixture'+core.suffix]:core.hashes[2]},
+    mixedNewRenderer:{...base,['/fixture'+renderer.suffix]:renderer.hashes[2]},
+    mixedNewJsx:{...base,['/fixture'+jsx.suffix]:jsx.hashes[2]},
     duplicateCore:{...base,['/another'+core.suffix]:core.hashes[1]},
     duplicateRenderer:{...base,['/another'+renderer.suffix]:renderer.hashes[1]},
     unknownPresentJsx:{...base,['/fixture'+jsx.suffix]:'0'.repeat(64)},
@@ -38,6 +67,23 @@ test('classic runtime admission retains coherent version, cardinality and hash r
     assert.throws(()=>createReactHelperObserver({files} as ReactReference,helperPlan),/helper-react-runtime-unsupported/,name);
   }
   assert.equal(selectReactRuntimeAdapters({files:base,runtimeImports:[{importer:'/fixture/source.js',specifier:'react/jsx-runtime',file:'/missing.js'}]}),undefined);
+});
+
+test('JSX-only source links require exact registered bytes and never acquire full entry authority',()=>{
+  const suffix=reactRuntimeAdapters[1].suffix;
+  for(const hash of new Set(reactRuntimeAdapters[1].hashes)){
+    const reference={sourceRoot:'/fixture',files:{['/fixture'+suffix]:hash},runtimeImports:[]};
+    const observer=createReactElementCreationObserver(reference);
+    assert.deepEqual(observer.sites,[]);observer.complete();
+    assert.throws(()=>createReactElementCreationObserver(reference,''),/reference-entry-react-runtime-unsupported/);
+  }
+  const invalid=[
+    {['/fixture'+suffix]:'0'.repeat(64)},
+    {['/fixture'+suffix]:reactRuntimeAdapters[1].hashes[2],['/duplicate'+suffix]:reactRuntimeAdapters[1].hashes[2]},
+    {['/fixture'+suffix]:reactRuntimeAdapters[1].hashes[2],['/fixture'+reactRuntimeAdapters[0].suffix]:reactRuntimeAdapters[0].hashes[1]},
+    {['/fixture'+suffix]:reactRuntimeAdapters[1].hashes[2],['/fixture'+reactRuntimeAdapters[0].suffix]:reactRuntimeAdapters[0].hashes[2],['/fixture'+reactRuntimeAdapters[2].suffix]:reactRuntimeAdapters[2].hashes[1]},
+  ];
+  for(const files of invalid)assert.throws(()=>createReactElementCreationObserver({sourceRoot:'/fixture',files,runtimeImports:[]}),/element-creation-react-runtime-unsupported/);
 });
 
 function fixture(t:test.TestContext,source=`import React from 'react';

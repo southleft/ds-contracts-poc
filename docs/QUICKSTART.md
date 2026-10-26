@@ -42,7 +42,7 @@ A written package or zero exit alone is not a fidelity pass. Variable names requ
 
 ## Install in your app, or make a clean consumer
 
-In an existing React 18+ app with CSS Modules support, install the archive path printed above. Import its actual named export from `@your-team/figma-component`, using the archive README and installed declarations for its props. The root import supplies tokens/CSS and generated dependencies; load your authentic fonts separately.
+In an existing React 18+ app with CSS Modules support, install the archive path printed above. Import its actual named export from `@your-team/figma-component`, using the archive README and installed declarations for its props. The root import supplies tokens/CSS, generated dependencies and any fonts supplied with `--fonts`. Load only additional fonts separately.
 
 ```bash
 npm install /absolute/path/to/your-generated-package.tgz
@@ -53,10 +53,8 @@ npm install /absolute/path/to/your-generated-package.tgz
 ```bash
 node --input-type=module <<'JS'
 import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
 const result=JSON.parse(fs.readFileSync('out/result.json','utf8'));
-const dir='consumer'; fs.mkdirSync(dir); fs.mkdirSync(`${dir}/public/fonts`,{recursive:true});
+const dir='consumer'; fs.mkdirSync(dir);
 const write=(file,text)=>fs.writeFileSync(`${dir}/${file}`,text);
 write('package.json',JSON.stringify({name:'private-test-consumer',private:true,type:'module',scripts:{build:'tsc --noEmit && vite build',preview:'vite preview --host 127.0.0.1 --port 18775 --strictPort'},dependencies:{react:'19.2.7','react-dom':'19.2.7','@your-team/figma-component':`file:../out/${result.tarball}`},devDependencies:{'@types/react':'19.2.17','@types/react-dom':'19.2.3',typescript:'6.0.3',vite:'8.3.0'}}));
 write('tsconfig.json',JSON.stringify({compilerOptions:{target:'ES2022',lib:['ES2022','DOM','DOM.Iterable'],module:'ESNext',moduleResolution:'Bundler',jsx:'react-jsx',types:['vite/client'],strict:true,noEmit:true,skipLibCheck:true},include:['main.tsx']}));
@@ -66,15 +64,7 @@ import { ${result.component} as Generated } from '@your-team/figma-component';
 import './consumer.css';
 createRoot(document.getElementById('root')!).render(<main><Generated /></main>);
 `);
-const manifest=path.resolve(process.env.FONT_MANIFEST);
-const fonts=JSON.parse(fs.readFileSync(manifest,'utf8')).fonts;
-const faces=fonts.map((font,i)=>{
-  const bytes=fs.readFileSync(path.resolve(path.dirname(manifest),font.file));
-  if(crypto.createHash('sha256').update(bytes).digest('hex')!==font.sha256) throw Error('Font hash changed');
-  const file=`${i}${path.extname(font.file)}`; fs.writeFileSync(`${dir}/public/fonts/${file}`,bytes);
-  return `@font-face { font-family: ${JSON.stringify(font.family)}; font-weight: ${font.weight}; font-style: ${font.style}; src: url('/fonts/${file}'); }`;
-});
-write('consumer.css',`${faces.join(String.fromCharCode(10))}
+write('consumer.css',`
 body { margin: 0; background: white; }
 main { padding: 32px; }
 `);

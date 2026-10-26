@@ -33,6 +33,17 @@ test('real React property experiments preserve context and distinguish delivered
   const id=(name:string)=>ownership.components.find(c=>c.source.exportName===name)!.id;
   const observe=()=>page.locator(selector).evaluate(n=>({padding:getComputedStyle(n).padding,inputs:[...n.querySelectorAll('input')].map(n=>n.checked),text:n.textContent}));
   const baseline=await observe();
+  // Exact supported versions still require the actual renderer mutation API.
+  for(const [method,initial] of [['overrideProps',false],['overridePropsDeletePath',false],['scheduleRoot',true]] as const){
+   await page.evaluate(method=>{const state=(window as any).__DSC_REACT_OWNERSHIP,renderer=[...state.renderers.values()][0] as any;state.savedProbeApi=renderer[method];renderer[method]=undefined;},method);
+   try{
+    const attempt=initial?probeReactInitialProperties(page,selector,program,id('Initial'),{defaultChecked:{kind:'set',value:true}},observe):probeReactProperty(page,selector,program,id('Toggle'),'checked',{kind:'set',value:true},observe);
+    await assert.rejects(attempt,/react-(?:property|initial)-probe-renderer-unsupported/);
+   }finally{await page.evaluate(method=>{const state=(window as any).__DSC_REACT_OWNERSHIP,renderer=[...state.renderers.values()][0] as any;renderer[method]=state.savedProbeApi;delete state.savedProbeApi;},method);}
+   assert.deepEqual(await observe(),baseline);
+   assert.equal(await page.evaluate(()=>(window as any).__DSC_REACT_OWNERSHIP.propertyProbes?.size??0),0);
+  }
+
   // Selecting a nested source component records its surrounding Surface but
   // must still update/remount only the selected export and restore both.
   const scopedSelector='input[aria-label="controlled"]';
