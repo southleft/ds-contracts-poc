@@ -1,3 +1,6 @@
+import {hasInsideRootStroke} from './react-instance-inside-stroke.js';
+import {cssIdentifier} from '../packages/core/src/css-identifier.js';
+import {wrapReactFillStack,finalizeFillStackTsx,fillStackPositionParts} from './react-fill-stack.js';
 import {reactLiteralTextExpression} from './react-literal-text.js';
 import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
@@ -165,8 +168,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // SVG arcs need authored fractional widths; computed CSS border widths are
   // snapped to device pixels. Mirror declarations so every state/axis keeps
   // the same cascade, including token changes. Only the arc runtime reads it.
-  return walkAnatomy(input).some(({part})=>part.shape?.arc?.cap)
-    ? css.replace(/(^|\n)([ \t]*)border-width: ([^;\n]+);/g,'$1$2border-width: $3;\n$2--dsc-arc-stroke-width: $3;') : css;
+  const stackPositions=fillStackPositionParts(input,contracts,tokenValues).map(name=>':where(.'+cssIdentifier(name)+') { position: relative; }').join('\n');
+  return (stackPositions?'\n'+stackPositions+'\n':'') + (walkAnatomy(input).some(({part})=>part.shape?.arc?.cap)
+    ? css.replace(/(^|\n)([ \t]*)border-width: ([^;\n]+);/g,'$1$2border-width: $3;\n$2--dsc-arc-stroke-width: $3;') : css);
 }
 export { ELEMENT_META } from '../packages/core/src/elements.js';
 
@@ -382,9 +386,9 @@ export function generateTsx(
   };
 
   const instanceRootAttrs = (part:Part) => {
-    const style=reactInstanceRootStyle(contract,part,path=>`var(--${path.replaceAll('.', '-')})`,codePropOf);
+    const style=reactInstanceRootStyle(contract,part,path=>`var(--${path.replaceAll('.', '-')})`,codePropOf,true);
     const fill=instanceFillExpression(part,codePropOf,byId);
-    return style || fill ? ` style={{ ${[style,fill&&`...(${fill})`].filter(Boolean).join(', ')} }}` : '';
+    return style || fill ? ` style={{ ${[style,fill&&`...(${fill})`].filter(Boolean).join(', ')} }${part.component?.rootOverrides?.['border-color'] ? ' as import("react").CSSProperties' : ''}}` : '';
   };
 
   const events = contract.events ?? [];
@@ -687,6 +691,7 @@ export function generateTsx(
     jsx = wrapReactTextAppearance(part, jsx, codePropOf, undefined, textValueOf);
     jsx = wrapReactImage(part, jsx, codePropOf);
     jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
+    jsx = wrapReactFillStack(part,jsx,codePropOf,contract);
     const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
     if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
@@ -960,7 +965,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     .join('\n');
   const sr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, usesChildren, meta);
 
-  return `/**
+  return finalizeFillStackTsx(`/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate${sr.omittedNote}
@@ -985,7 +990,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}${undrawnNote}
     </${el}>${contract.anatomy.root?.layout?.overlap && contract.anatomy.root?.tokens?.gap ? '</__DscOverlap>' : ''}
   );
 });
-`;
+`,contract,byId,codePropOf,{className:'className',children:usesChildren?'children':undefined,mode:'module',...(hasInsideRootStroke(contract.anatomy.root)?{style:'rest.style',allowRestStyle:true}:{})},tokenValues);
 }
 
 /** A component whose JSX never renders `children` must not accept them: a
@@ -1314,6 +1319,7 @@ export function emitReactDraftPaintQualification(contract: Contract, ctx: EmitCt
 }
 
 function emitReactImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): EmitReactResult {
+  fillStackPositionParts(contract,ctx.contracts,ctx.tokenValues);
   validateStructuralAvailability(contract);
   validateReactInitialBindings(contract);
   const errors: string[] = [];

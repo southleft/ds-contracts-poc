@@ -1,10 +1,11 @@
 import type {SourceFillComposition} from './solid-fill-observation.js';
+import type {SourceFillStack} from './fill-stack-observation.js';
 import type { StrokedPath, Part } from '../../scripts/contract-schema.js';
 
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.81';
+export const PLUGIN_DUMP_VERSION = '1.83';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -290,6 +291,8 @@ export interface DumpReaction {
  *  solid when "fills" is among them (so the note can say WHICH colour).
  *  Character overrides keep their own channel (textOverrides, dump v1.10). */
 export interface DumpHostOverride {
+  /** Complete source paint array, including empty and hidden/unsupported layers. */
+  sourceFillStack?: SourceFillStack;
   /** Uniform scalar typography on an exact descendant. The range index and
    * table are original REST evidence; mixed/ranged text is not this channel. */
   textSizeOverride?: {
@@ -524,6 +527,13 @@ export interface DumpNode {
   imagePaints?: Array<{index: number; imageHash?: unknown; scaleMode?: unknown;
     imageTransform?: unknown; rotation?: unknown; scalingFactor?: unknown;
     opacity?: unknown; blendMode?: unknown; filters?: unknown}>;
+  /** REST v1.72 / plugin v1.82: complete raw paint array in source order.
+   * This observation does not itself qualify any rendering or mutation. */
+  sourceFillStack?: SourceFillStack;
+  /** REST v1.73 / plugin v1.83: complete original stroke array, including hidden entries and unresolved aliases; absence is unobserved. */
+  sourceStrokeStack?: SourceFillStack;
+  /** Positive stroke pattern read; REST's documented omitted empty default is normalized only by that reader. */
+  sourceStrokePattern?: {version:1;complete:true;dashes:unknown[];defaulted?:true};
   /** Explicit mask ownership. Sibling order scopes the mask; absence is not
    * evidence that a legacy reader observed this channel. Unknown/missing types
    * remain unknown instead of being defaulted to ALPHA. */

@@ -1,8 +1,10 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-10-18 · V1 is not complete.**
+**Public project status · updated 2026-10-26 · V1 is not complete.**
 
 The latest retained fixed 40-set installed-CLI comparison measures **731 passing, 64 failing and 84 unverified variants out of 879 (83.16% passing)**; 18 complete sets pass. The capture follow-up at `8ef391d6` preserves all 879 original identities and adds two previously unverified Primer ToggleSwitch passes, with no lost pass, failure becoming unverified, or new failing set problem. Original reference images, all 32 consumer font faces and checker rules are unchanged. The loading indicator in one recovered case still has a visible center-fill difference within the unchanged image threshold. This preserves the earlier 16 Primer ToggleSwitch gains and 44 Radix Blockquote gains. These are known-corpus results, not a fresh 204-set run or unseen-kit qualification.
+
+A follow-up on the original 16 Arco Avatar.Group variants now measures **13 passing, zero failing and three unverified**, compared with zero passing, 14 failing and two unverified before the repair. Complete ordered image paints preserve each referenced avatar's own picture; source-recorded inside strokes retain the white outlines without changing layout size. The 13 available generated images were reviewed against the original images on white and black. The three remaining cases refuse the unchanged raster-framing proof, and an unresolved resource 404 still makes the overall set fail. This is a repaired known sample, not new first-pass credit or beta qualification.
 
 The remaining 64 failures and 84 unverified variants stay in the denominator. Twenty-seven original cases still lack reference evidence, and three sets retain unqualified historical source versions. The completed original React → Figma run at `e3c115ebe` passes all 36 cases against the listed content, font, color, image and size criteria. Those 36 cases cover variants of one Radix Themes Badge family, not 36 different components. These are known cohorts; never-seen kits in both directions remain unqualified.
 

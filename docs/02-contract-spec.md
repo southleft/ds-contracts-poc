@@ -384,3 +384,33 @@ Nothing was loosened or tightened: the same fields are required, optional and ty
 ## Schema evolution
 
 The schema itself will grow (composition/nesting, layout block, behavior/events, multi-placeholder substitution are known gaps — see [architecture doc](01-architecture.md)). Schema changes happen in `packages/schema/src/contract-schema.ts` (the repo's `scripts/contract-schema.ts` is a re-export shim), are reflected by `npm run schema && npm --prefix packages/schema run build` (`npm run schema:fresh` refuses a stale projection), and follow the schema's own semver: an added optional field is a minor; removing, renaming or repurposing a field is a **major**, and a major ships three things together — the old spelling refused *by name* with the new spelling in the message, a codemod (`ds-contracts migrate`) that rewrites every committed contract, and a `BREAKING` entry in the CHANGELOG. Schema 17 (the `bindings` hoist above) is the first such major; the seven schema bumps of July 2026 (v9 → v16) were additive.
+
+
+### Qualified caller INSIDE strokes
+
+A generated native root may declare paired `border-color` and `border-width`
+`instanceRootInputs`. `component.rootOverrides` must provide both token refs
+together. They paint an INSIDE foreground ring on the same host, preserving
+layout dimensions, padding, descendant identity and default omission. They do
+not imply a layout border or reuse OUTSIDE outline semantics. Exact finite
+caller contexts, source ownership, positioning and foreground ordering must be
+qualified; arbitrary caller styles remain refused. HTML and Web Components
+continue to refuse this root-input API.
+
+REST dump 1.73 and plugin dump 1.83 add `sourceStrokeStack`, the unfiltered
+original paint array with original indices, visibility, float color/alpha and
+alias IDs, plus `sourceStrokePattern`. The inside path requires one visible
+NORMAL SOLID entry and a positively observed empty dash pattern, INSIDE
+alignment and non-layout sizing. The REST reader applies the API's empty-array
+default for omitted `strokeDashes` at the typed read boundary and records
+`defaulted: true`; null or malformed patterns remain unknown. The native
+reader requires the actual `dashPattern` array. Neither a missing dump field
+nor a representative hex color qualifies historical captures.
+
+Both React emitters use the existing foreground stroke-ring lowering. With
+neither input supplied, no ring, position or isolation is added. Native writes
+set INSIDE, the exact width, non-layout sizing and an empty dash pattern, and
+independent readback verifies paint count, color, alpha, alignment, sizing,
+pattern and absence of invented aliases. Unresolved source aliases stay
+explicitly unqualified for native binding; literal write/readback is not a
+claim of source binding fidelity.

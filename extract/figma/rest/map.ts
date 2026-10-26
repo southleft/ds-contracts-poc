@@ -4,6 +4,7 @@ import {selectedStrokeDrawing} from './selected-stroke.js';
 import {observeLocalGeometry} from '../local-geometry.js';
 import {observeReflectedHugGeometry} from '../reflected-hug-geometry.js';
 import { restImagePaints } from './image-assets.js';
+import {observeFillStack,fillStackVariableIds} from '../fill-stack-observation.js';
 import {observeInstanceGeometry} from '../instance-geometry.js';
 import {observeInstanceComposition} from './observed-composition.js';
 import {observeRectStrokePattern} from '../rect-stroke-pattern.js';
@@ -700,6 +701,8 @@ function normalizeConstraints(
 }
 
 interface Ctx {
+  /** Per-node legacy observations; the additive raw-stack pass fills only gaps. */
+  observedVariableIds?: Set<string>;
   inspectInstanceCompositions?: boolean;
   mainSizeById: Map<string, {width:number; height:number}>;
   mainPaddingById: Map<string, [number,number,number,number]>;
@@ -751,6 +754,7 @@ const variableUnresolvedMessage = (id: string, ctx: Ctx): string => {
 };
 
 function resolveVarName(ctx: Ctx, alias: RestVariableAlias, nodePath: string, field: string): string | undefined {
+  ctx.observedVariableIds?.add(alias.id);
   const name = ctx.varNameById.get(alias.id);
   if (name !== undefined) {
     captureVariable(ctx, alias.id, name);
@@ -763,6 +767,14 @@ function resolveVarName(ctx: Ctx, alias: RestVariableAlias, nodePath: string, fi
     message: variableUnresolvedMessage(alias.id, ctx),
   });
   return undefined;
+}
+
+/** Run after legacy projections so their diagnostic fields/counts retain
+ * precedence. Only newly observed hidden/unsupported layer bindings are added. */
+function captureUnseenFillStackVariables(stack: DumpNode['sourceFillStack'],ctx: Ctx,nodePath: string): void {
+  if(!stack)return;
+  for(const id of fillStackVariableIds(stack))if(!ctx.observedVariableIds?.has(id))
+    resolveVarName(ctx,{type:'VARIABLE_ALIAS',id},nodePath,'fills');
 }
 
 // ---------------------------------------------------------------------------
@@ -2007,6 +2019,7 @@ function mapNode(
    *  layoutMode/gridItemsPositioning, not just its box. Null at the root. */
   parent: RestNode | null = null,
 ): RestDumpNode {
+  ctx = {...ctx,observedVariableIds:new Set<string>()};
   const out: RestDumpNode = { name: node.name, type: node.type, nodeId: node.id };
   const localGeometry=observeLocalGeometry(node.id,parent?.id,node.relativeTransform,node.size?.x,node.size?.y,parent?.size?.x,parent?.size?.y);
   if(localGeometry)out.localGeometry=localGeometry;
@@ -2014,6 +2027,14 @@ function mapNode(
   if(reflectedHugGeometry)out.reflectedHugGeometry=reflectedHugGeometry;
   const imagePaints = restImagePaints(node.fills);
   if (imagePaints) { out.imagePaints = imagePaints; out.imageFill = true; }
+  const sourceStrokeStack = observeFillStack(node.strokes, 'rest');
+  if(sourceStrokeStack)out.sourceStrokeStack=sourceStrokeStack;
+  if(Array.isArray(node.strokeDashes))out.sourceStrokePattern={version:1,complete:true,dashes:[...node.strokeDashes]};
+  else if(node.strokeDashes===undefined)out.sourceStrokePattern={version:1,complete:true,dashes:[],defaulted:true};
+  const sourceFillStack = observeFillStack(node.fills, 'rest');
+  if (sourceFillStack) {
+    out.sourceFillStack = sourceFillStack;
+  }
   if (node.isMask === true) out.mask = typeof node.maskType === 'string'
     ? { type: node.maskType, ...(insideMaskStroke(node,ctx)?{stroke:insideMaskStroke(node,ctx)}:insidePaintedMaskStroke(node)?{paintedStroke:insidePaintedMaskStroke(node)}:{}) } : {};
   if (node.type === 'FRAME' && parent && (node.isMask === true ||
@@ -2462,6 +2483,7 @@ function mapNode(
           continue;
         }
         const path = hit.path.join('/');
+        const hostCtx = {...ctx,observedVariableIds:new Set<string>()};
         if (o.overriddenFields.includes('characters') && hit.node.type === 'TEXT' && typeof hit.node.characters === 'string') {
           if (path in textOverrides || ambiguous.has(path)) {
             ambiguous.add(path);
@@ -2504,7 +2526,7 @@ function mapNode(
              hit.node.styleOverrideTable&&Object.keys(hit.node.styleOverrideTable).length===0){
             const target=solidFillTarget(node,o.id,'text-characters',1000);
             if(target&&hit.node.style?.lineHeightUnit==='PIXELS')h.textSizeOverride={kind:'scalar-text-size-v1',ownerId:node.id,ownerComponentId:node.componentId,ownerComponentKey:out.instanceKey,
-              target,lineHeightUnit:'PIXELS',text:mapText(hit.node,ctx,`${nodePath}/${path}`),characterStyleOverrides:[...hit.node.characterStyleOverrides],styleOverrideTable:{...hit.node.styleOverrideTable}};
+              target,lineHeightUnit:'PIXELS',text:mapText(hit.node,hostCtx,`${nodePath}/${path}`),characterStyleOverrides:[...hit.node.characterStyleOverrides],styleOverrideTable:{...hit.node.styleOverrideTable}};
           }
           if (fields.includes('visible') && (hit.node.visible===undefined||typeof hit.node.visible === 'boolean')) {
             const target=solidFillTarget(node,o.id,'visibility');
@@ -2513,13 +2535,17 @@ function mapNode(
           // A text fill-style override resolves to fills in the REST node,
           // but Figma may name only inheritFillStyleId in overrides[].
           if (fields.includes('fills') || (hit.node.type === 'TEXT' && fields.includes('inheritFillStyleId'))) {
+            const sourceFillStack = observeFillStack(hit.node.fills, 'rest');
+            if (sourceFillStack) {
+              h.sourceFillStack = sourceFillStack;
+            }
             if (Array.isArray(hit.node.fills) && hit.node.fills.length === 0) {
               const target = solidFillTarget(node,o.id,'shape-fill');
               if (target) { h.shapeFillTarget = target; h.sourceEmptyFill = true; }
               const vectorTarget = solidFillTarget(node,o.id);
               if (vectorTarget) { h.solidFillTarget = vectorTarget; h.sourceEmptyFill = true; }
             }
-            const fill = mapPaint(hit.node.fills, ctx, `${nodePath}/${path}`, 'fill');
+            const fill = mapPaint(hit.node.fills, hostCtx, `${nodePath}/${path}`, 'fill');
             if (fill) {
               h.fill = fill;
               const target = solidFillTarget(node,o.id);
@@ -2534,10 +2560,11 @@ function mapNode(
             }
           }
           if (fields.includes('strokes')) {
-            const stroke = mapPaint(hit.node.strokes, ctx, `${nodePath}/${path}`, 'stroke');
+            const stroke = mapPaint(hit.node.strokes, hostCtx, `${nodePath}/${path}`, 'stroke');
             if (stroke) { h.stroke = stroke; const target = solidFillTarget(node, o.id, 'stroke'); if (target) h.solidStrokeTarget = target; }
           }
           if (fields.includes('strokeWeight') && Number.isFinite(hit.node.strokeWeight) && hit.node.strokeWeight! > 0) h.strokeWeight = hit.node.strokeWeight;
+          captureUnseenFillStackVariables(h.sourceFillStack,hostCtx,`${nodePath}/${path}`);
           hostOverrides.push(h);
         }
       }
@@ -2607,6 +2634,7 @@ function mapNode(
           root:mapNode(snapshot,ctx,`${nodePath}/[observed composition]`,parentBox,parent)};
       }
     }
+    captureUnseenFillStackVariables(out.sourceFillStack,ctx,nodePath);
     return out; // referenced identity and observed content remain separate
   }
 
@@ -2615,6 +2643,7 @@ function mapNode(
       mapNode(child, ctx, `${nodePath}/${child.name}`, node.absoluteBoundingBox ?? null, node),
     );
   }
+  captureUnseenFillStackVariables(out.sourceFillStack,ctx,nodePath);
   const straight = ctx.inspectStraightVectorNetworks && mapStraightVector(node,parent,out);
   if(straight){
     ctx.report.degradations=ctx.report.degradations.filter(d=>d.nodePath!==nodePath||d.code!=='vector-geometry-unsupported');
@@ -2660,7 +2689,8 @@ function mapNode(
 // 1.65: source-qualified rectangular stroke-pattern tuple observations.
 // 1.66: current selected-slot root identity and auto-layout allocation witness.
 // 1.71: complete nested selected-property identity, fixed-root stroke geometry and metadata recovery.
-export const REST_DUMP_VERSION = '1.71';
+// 1.72: complete raw fill arrays, including empty/hidden paints and their assets/bindings.
+export const REST_DUMP_VERSION = '1.73';
 // 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
 //       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
 //       shape placement in free parents, constraints normalized to the plugin

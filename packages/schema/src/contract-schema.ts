@@ -44,6 +44,8 @@ export * from './native-line.js';
  *      child's definition.
  */
 import {SolidFillCompositionSchema,SolidFillCompositionTableSchema,type SolidFillComposition} from './solid-fill-composition.js';
+export {FillStackSchema, FillStackTableSchema, resolveFillStack, fillStackPaintCss, type FillStack, type FillStackPaint, type FillStackTable} from './fill-stack.js';
+import {FillStackSchema, FillStackTableSchema, type FillStack, type FillStackTable} from './fill-stack.js';
 export {SolidFillCompositionSchema, solidFillCompositionCss, solidFillCompositionTokenCss, solidFillCompositionPaint, SolidFillCompositionTableSchema, resolveSolidFillComposition, resolveSolidFillToken, type SolidFillCompositionTable, type SolidFillComposition} from './solid-fill-composition.js';
 import { filledPathMask, filledPathsIssue } from './filled-path.js';
 export { filledPathIssue, filledPathsIssue, filledPathMask, type FilledPath } from './filled-path.js';
@@ -1873,7 +1875,7 @@ export const refOverrideVar = (contractId: string, channel: string): string =>
 
 /** Opt-in instance root usage API. Dimensions affect only the root;
  * opacity composites the whole usage without changing descendant paint or identity. */
-export const INSTANCE_ROOT_CHANNELS = ['width', 'height', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'opacity', 'background-color', 'outline-color', 'outline-width'] as const;
+export const INSTANCE_ROOT_CHANNELS = ['width', 'height', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'opacity', 'background-color', 'outline-color', 'outline-width', 'border-color', 'border-width'] as const;
 /** A root paint input replaces one NORMAL solid fill, never an arbitrary CSS background. */
 export function instanceRootColor(value:unknown):string {
  if(typeof value!=='string')throw Error('instance-root-input-color-unsupported');
@@ -2595,6 +2597,9 @@ export interface Part {
    * checked by the shared emitter referee. On a component reference this is
    * a usage override of the child's existing root paint layer, never a new
    * wrapper or a change to the main component's defaults. */
+  fillStackSource?: {fileKey:string;setKey:string;contractRevision:string};
+  fillStack?: FillStack;
+  fillStackByCombination?: FillStackTable;
   solidFillComposition?: SolidFillComposition;
   solidFillCompositionByCombination?: import('./solid-fill-composition.js').SolidFillCompositionTable;
   /** Selected source binding evidence, validated with the emitted alias graph. */
@@ -3154,6 +3159,33 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
   }
 }
 
+/** Every styling channel that can compete with an ordered paint owner or
+ * change whether its descendants need the surrounding backdrop. */
+export function fillStackStyleRecords(part: Part): Array<Record<string, unknown> | undefined> {
+  return [part.tokens, part.literals, part.declared,
+    ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+    ...tokensByPropEntries(part).flatMap(t => Object.values(t.map)),
+    ...(part.literalsByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.tokensByCombination ?? []).flatMap(t => t.rows.map(r => r.tokens)),
+    ...(part.literalsByCombination ?? []).flatMap(t => t.rows.map(r => r.literals)),
+    ...(part.statesByProp ?? []).flatMap(t => Object.values(t.map)),
+    ...(part.stylesWhen ?? []).map(t => t.styles)];
+}
+
+/** Conservative counterpart of the exterior-stroke ownership guard. A
+ * referenced component or caller-supplied subtree has no local backdrop proof. */
+export function fillStackBackdropDependent(part: Part): boolean {
+  return !!part.component || !!part.slot || !!part.repeat ||
+    !!part.solidFillComposition || !!part.solidFillCompositionByCombination ||
+    !!part.solidFillCompositionToken || !!part.solidFillCompositionSourceBinding ||
+    !!part.solidFillCompositionObservedBinding ||
+    [part.fillStack, ...(part.fillStackByCombination?.rows.map(r => r.stack) ?? [])].some(stack =>
+      stack?.paints.some(p => p.type === 'SOLID' && !!(p.sourceBinding || p.observedBinding || p.unresolvedBinding))) ||
+    fillStackStyleRecords(part).some(record => Object.entries(record ?? {}).some(([key, value]) =>
+      key === 'mix-blend-mode' && value !== 'normal' || key === 'backdrop-filter' && value !== 'none')) ||
+    Object.values(part.parts ?? {}).some(fillStackBackdropDependent);
+}
+
 /** Square exterior bands have no rounded-corner or self-clipping approximation.
  * Shared by schema parsing and direct emitter calls that receive typed objects. */
 export function outsideStrokeIssues(part: Part): string[] {
@@ -3221,6 +3253,9 @@ export function outsideStrokeIssues(part: Part): string[] {
 
 export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   z.strictObject({
+    fillStackSource: z.strictObject({fileKey:z.string().min(1),setKey:z.string().min(1),contractRevision:z.string().min(1)}).optional(),
+    fillStack: FillStackSchema.optional(),
+    fillStackByCombination: FillStackTableSchema.optional(),
     solidFillComposition: SolidFillCompositionSchema.optional(),
     solidFillCompositionSourceBinding: SolidFillSourceBindingsSchema.optional(),
     solidFillCompositionObservedBinding: z.array(SolidFillObservedBindingSchema).min(1).optional(),
@@ -3891,6 +3926,38 @@ export const ContractSchema = z.strictObject({
       const paints=[part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{}),...tokensByPropEntries(part).flatMap(t=>Object.values(t.map)),...(part.literalsByProp??[]).flatMap(t=>Object.values(t.map)),...(part.tokensByCombination??[]).flatMap(t=>t.rows.map(r=>r.tokens)),...(part.literalsByCombination??[]).flatMap(t=>t.rows.map(r=>r.literals)),...(part.stylesWhen??[]).map(r=>r.styles)];
       if(paints.some(p=>Object.keys(p??{}).some(k=>/^(?:border|outline|background|mask|stroke|fill|box-shadow)/.test(k))))issue('vector-stroke-competing-paint');
     }else if(part.vectorStrokeOverride)ctx.addIssue({code:'custom',path,message:'vector-stroke-input-without-geometry'});
+    if(part.fillStack || part.fillStackByCombination){
+      const bad=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'fillStack'],message});
+      if(!!part.component!==!!part.fillStackSource)bad('fill-stack-reference-proof-required');
+      if(part.fillStack && part.fillStackByCombination || part.solidFillComposition || part.solidFillCompositionByCombination || part.solidFillCompositionToken || part.solidFillCompositionSourceBinding || part.imageOverride)bad('fill-stack-competing-paint-owner');
+      if(part.component?.rootOverrides?.['background-color'])bad('fill-stack-competing-root-paint-input');
+      if(part.text!==undefined||part.content||part.icon||part.mask||part.slot||part.repeat||part.meter||part.shape)bad('fill-stack-structural-owner-required');
+      const records=fillStackStyleRecords(part);
+      if(records.some(r=>Object.keys(r??{}).some(k=>k.startsWith('background')||['filter','mix-blend-mode','isolation'].includes(k))))bad('fill-stack-competing-paint');
+      if(Object.values(part.parts??{}).some(fillStackBackdropDependent))bad('fill-stack-backdrop-dependent-child');
+      if(!nested && (c.a11y?.minHitArea??0)>0)bad('fill-stack-min-hit-area-unqualified');
+      const table=part.fillStackByCombination;
+      if(table){
+       const axes=table.props.map(name=>c.props.find(p=>p.name===name));
+       const domains=axes.map(p=>p?.type==='boolean'?['true','false']:p&&typeof p.type==='object'&&'enum'in p.type?p.type.enum:[]);
+       if(domains.some(d=>!d.length))bad('fill-stack-axis-unqualified');
+       let reachable:Set<string>|null=null;
+       if(c.bindings.figma.drawnVariants!==undefined){
+        // The positive domain is already bounded and validated. Never expand
+        // a potentially enormous Cartesian product merely to filter it back.
+        reachable=drawnGeometryTupleKeys(c as Contract,table.props);
+        if(!reachable||reachable.size>4096)bad('fill-stack-drawn-domain-unqualified');
+       }else{
+        const count=domains.reduce((n,domain)=>!domain.length||n>4096/domain.length?Infinity:n*domain.length,1);
+        if(count>4096)bad('fill-stack-domain-too-large');
+        else{
+         const tuples:string[][]=[[]];for(const domain of domains){const prior=tuples.splice(0);for(const v of prior)for(const item of domain)tuples.push([...v,item]);}
+         reachable=new Set(tuples.filter(tuple=>!c.bindings.figma.absentVariants?.some(absent=>table.props.every((p,i)=>String((absent as Record<string,unknown>)[p])===tuple[i]))).map(tuple=>JSON.stringify(tuple)));
+        }
+       }
+       if(reachable&&(reachable.size!==table.rows.length||table.rows.some(row=>!reachable!.has(JSON.stringify(row.values)))))bad('fill-stack-complete-reachable-domain-required');
+      }
+    }
     const presenceIssuesBefore=ctx.issues.length;
     if (part.shapeFillOverrideProp) {
       const prop=c.props.find(p=>p.name===part.shapeFillOverrideProp);

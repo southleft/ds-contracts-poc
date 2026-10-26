@@ -43,7 +43,7 @@ export function paintLayerDocumentBox(layer:PaintLayer,layers:PaintLayer[],scrol
  return {x,y,width:Math.max(...points.map(p=>p.x))-x,height:Math.max(...points.map(p=>p.y))-y};
 }
 export async function observeConsumerPaintExtent(page:Page,selector:string):Promise<
- {observation:{layout:FrameBox;paint:FrameBox;layers:PaintLayer[];boxes:FrameBox[];blendRasterVerified?:true}}|{refused:string}> {
+ {observation:{layout:FrameBox;paint:FrameBox;layers:PaintLayer[];boxes:FrameBox[];blendRasterVerified?:true;negativeStackRasterVerified?:true}}|{refused:string}> {
  const root=page.locator(selector);if(await root.count()!==1)return {refused:'paint-extent-subject-not-unique'};
  const initial=await root.evaluate(el=>({style:el.getAttribute('style'),value:(el as HTMLElement).style.getPropertyValue('will-change'),priority:(el as HTMLElement).style.getPropertyPriority('will-change')}));
  const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
@@ -51,12 +51,27 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
   return {box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles};
  }))}));
  const effects=await root.evaluate(el=>{
-  let blend=false;
+  let blend=false,negativeStack=false;
   for(const n of [el,...el.querySelectorAll('*')])for(const pseudo of [null,'::before','::after']){const s=getComputedStyle(n,pseudo);
-   if(s.filter!=='none'||s.backdropFilter!=='none')return {unsupported:'filter',blend};
+   if(s.filter!=='none'||s.backdropFilter!=='none')return {unsupported:'filter',blend,negativeStack};
    if(s.mixBlendMode!=='normal')blend=true;
-   if(Number(s.zIndex)<0)return {unsupported:'negative-stacking',blend};
-  }return {unsupported:null,blend};
+   if(Number(s.zIndex)>=0||!Number.isFinite(Number(s.zIndex)))continue;
+   negativeStack=true;
+   // A subject's own negative stacking cannot borrow an outside owner's
+   // compositing context. A pseudo may use its originating element; an
+   // element requires a strict ancestor, all within the measured subject.
+   if(n===el&&pseudo===null)return {unsupported:'negative-stacking-root',blend,negativeStack};
+   let owner:Element|null=pseudo?n:n.parentElement;
+   for(;owner&&el.contains(owner);owner=owner.parentElement){const style=getComputedStyle(owner);
+    if(['relative','absolute','fixed','sticky'].includes(style.position)&&style.isolation==='isolate')break;
+   }
+   if(!owner||!el.contains(owner))return {unsupported:'negative-stacking-unisolated',blend,negativeStack};
+   // Exact raster proofs below qualify ordinary clipping, overflow and rounded
+   // borders. They do not interpret transform, mask or filter semantics.
+   if(['transform','perspective','translate','rotate','scale','clip-path','mask-image','-webkit-mask-image','filter','backdrop-filter'].some(key=>(s.getPropertyValue(key)||'none')!=='none'))return {unsupported:'negative-stacking-effect',blend,negativeStack};
+   for(let ancestor:Element|null=n;ancestor;ancestor=ancestor.parentElement)
+    if(['transform','perspective','translate','rotate','scale','clip-path','mask-image','-webkit-mask-image','filter','backdrop-filter'].some(key=>(getComputedStyle(ancestor!).getPropertyValue(key)||'none')!=='none'))return {unsupported:'negative-stacking-effect',blend,negativeStack};
+  }return {unsupported:null,blend,negativeStack};
  });
  if(effects.unsupported)return {refused:'paint-extent-compositor-effect-unqualified:'+effects.unsupported};
  const viewport=await page.evaluate(()=>({width:innerWidth,height:innerHeight,scale:devicePixelRatio,scrollX,scrollY}));
@@ -64,7 +79,7 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
  let before:SnapshotHandle|undefined;let cdp:CDPSession|undefined;let layers:PaintLayer[]=[];
  try{
   before=await observe();
-  const originalRaster=effects.blend?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled'})):undefined;
+  const originalRaster=effects.blend||effects.negativeStack?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled'})):undefined;
   cdp=await page.context().newCDPSession(page);
   cdp.on('LayerTree.layerTreeDidChange',(event:{layers?:PaintLayer[]})=>{layers=event.layers??[];});
   await cdp.send('DOM.enable');await cdp.send('LayerTree.enable');
@@ -91,10 +106,11 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
   const boxes:FrameBox[]=[];for(const layer of selected){const box=paintLayerDocumentBox(layer,layers,{x:viewport.scrollX,y:viewport.scrollY});if(!box)return {refused:'paint-extent-transform-unqualified'};boxes.push(box);}
   const layout=await before.evaluate((s:{snapshot:string})=>(JSON.parse(s.snapshot) as Array<{box:FrameBox}>)[0].box),all=[layout,...boxes],x=Math.min(...all.map(b=>b.x)),y=Math.min(...all.map(b=>b.y));
   const paint={x,y,width:Math.max(...all.map(b=>b.x+b.width))-x,height:Math.max(...all.map(b=>b.y+b.height))-y};
-  // Raster equality only proves the viewport actually observed. A distant
-  // blend or shadow cannot borrow this proof for pixels outside that raster.
-  if(effects.blend && (paint.x<viewport.scrollX||paint.y<viewport.scrollY||paint.x+paint.width>viewport.scrollX+viewport.width||paint.y+paint.height>viewport.scrollY+viewport.height))
-   return {refused:'paint-extent-blend-outside-observed-viewport'};
+  // Raster equality only proves the viewport actually observed. Distant paint
+  // cannot borrow either compositing proof for unobserved pixels.
+  const proof=effects.negativeStack?'negative-stack':'blend';
+  if((effects.blend||effects.negativeStack) && (paint.x<viewport.scrollX||paint.y<viewport.scrollY||paint.x+paint.width>viewport.scrollX+viewport.width||paint.y+paint.height>viewport.scrollY+viewport.height))
+   return {refused:`paint-extent-${proof}-outside-observed-viewport`};
   if(originalRaster){
    const promoted=PNG.sync.read(promotedBytes);
    const clip=enclosingFrame({...paint,x:paint.x-viewport.scrollX,y:paint.y-viewport.scrollY});
@@ -104,14 +120,14 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
    // The viewport guard above prevents any unobserved pixels borrowing proof.
    if(promoted.width!==originalRaster.width||promoted.height!==originalRaster.height||
       clip.x<0||clip.y<0||clip.x+clip.width>promoted.width||clip.y+clip.height>promoted.height)
-    return {refused:'paint-extent-blend-promotion-changed-raster'};
+    return {refused:`paint-extent-${proof}-promotion-changed-raster`};
    for(let y=clip.y;y<clip.y+clip.height;y++){
     const start=(y*promoted.width+clip.x)*4,end=start+clip.width*4;
     if(!promoted.data.subarray(start,end).equals(originalRaster.data.subarray(start,end)))
-     return {refused:'paint-extent-blend-promotion-changed-raster'};
+     return {refused:`paint-extent-${proof}-promotion-changed-raster`};
    }
   }
-  return {observation:{layout,paint,layers:selected,boxes,...(effects.blend?{blendRasterVerified:true as const}:{})}};
+  return {observation:{layout,paint,layers:selected,boxes,...(effects.blend?{blendRasterVerified:true as const}:{}),...(effects.negativeStack?{negativeStackRasterVerified:true as const}:{})}};
  }finally{
   try{await root.evaluate((el,original)=>{if(original.style===null)el.removeAttribute('style');else el.setAttribute('style',original.style);},initial);}
   finally{try{await before?.dispose();}finally{await cdp?.detach();}}

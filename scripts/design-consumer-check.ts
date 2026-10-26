@@ -790,6 +790,12 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     try {
       const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 1 });
       const errors: string[] = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+      // Diagnostics only: retain the original runtime errors and verdicts.
+      // Strip query/hash/userinfo so failure logs cannot expose request secrets.
+      page.on('response', response => { if (response.status() >= 400) {
+        const url = new URL(response.url());
+        console.error('[consumer-resource-failure]', response.status(), url.origin + url.pathname);
+      } });
       await page.goto(origin + '/index.html');
       try { await page.waitForSelector('[data-cell]', { timeout: 15000 }); }
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }

@@ -11,7 +11,7 @@ export function projectNativeImagePaints(input:DumpSet,assets:Record<string,Dump
  const visit=(node:ImageNode,path:string)=>{
   delete node.__nativeImageProjection;
   const paints=node.imagePaints;
-  if(paints?.length){
+  if(paints?.length && !((node.sourceFillStack?.paints.length??0)>1)){
    const paint=paints[0],hash=paint.imageHash,asset=typeof hash==='string'?assets?.[hash]:undefined;
    if(asset&&'base64'in asset){
     const refuse=(reason:string):never=>{throw Error(`native-image-paint-unqualified:${path}:${reason}`)};

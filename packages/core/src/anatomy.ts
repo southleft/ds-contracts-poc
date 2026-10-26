@@ -432,7 +432,7 @@ export const drawsStrokeRing = (part: Part): boolean =>
 /** Container strokes paint above their children on the canvas. Void and
  * reference hosts keep their existing leaf ring; they cannot own an overlay. */
 export const drawsForegroundStroke = (part: Part, element = part.element ?? 'div'): boolean =>
-  drawsStrokeRing(part) && (part.strokeAlign === 'OUTSIDE' || Object.keys(part.parts ?? {}).length > 0 || !!part.solidFillComposition || !!part.solidFillCompositionByCombination) && !part.component && !part.shape &&
+  drawsStrokeRing(part) && (part.strokeAlign === 'OUTSIDE' || Object.keys(part.parts ?? {}).length > 0 || !!part.solidFillComposition || !!part.solidFillCompositionByCombination || !!part.fillStack || !!part.fillStackByCombination) && !part.component && !part.shape &&
   !['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'].includes(element);
 
 /** A normal-flow box (including text and slot wrappers) or unrotated filled path may paint above its parent's independent fill without
@@ -481,7 +481,7 @@ export function composedFillReferenceChild(part: Part, contracts?: ReadonlyMap<s
 
 export function composedFillForegroundParts(contract: Contract, contracts?: ReadonlyMap<string, Contract>): Set<Part> {
   const result=new Set<Part>();
-  for(const {part} of walkAnatomy(contract))if(part.solidFillComposition || part.solidFillCompositionByCombination)
+  for(const {part} of walkAnatomy(contract))if(part.solidFillComposition || part.solidFillCompositionByCombination || part.fillStack || part.fillStackByCombination)
     for(const child of Object.values(part.parts??{}))if(composedFillFlowChild(child)||composedFillReferenceChild(child,contracts))result.add(child);
   return result;
 }
@@ -801,7 +801,7 @@ export function textBoxStaticRefusals(contract: Contract, part: Part, path: stri
 }
 /** Resolve a token path to its VALUE in every mode the DTCG trees carry
  *  (light and dark over primitives + brand + semantic), as CSS text. */
-function tokenModeValues(tokens: unknown, path: string): Array<string | undefined> {
+export function tokenModeValues(tokens: unknown, path: string): Array<string | undefined> {
   const t = tokens as Partial<TokenTreeInput> | undefined;
   if (!t || typeof t !== 'object' || !t.primitives) return [];
   const flat = (tree: Record<string, unknown> | undefined) => (tree ? flattenTokens(tree) : new Map());
@@ -1042,7 +1042,7 @@ export function instanceRootInputTokenRefusals(contract:Contract,tokens:unknown)
    paths=paths.flatMap(path=>values.map(value=>path.replaceAll(`{${axis}}`,value)));
   }
   for(const leaf of paths){const values=tokenModeValues(tokens,leaf);
-   if(channel==='background-color'||channel==='outline-color') {
+   if(channel==='background-color'||channel==='outline-color'||channel==='border-color') {
     try {if(!values.length)throw Error('missing');for(const value of values)instanceRootColor(value);}
     catch {errors.push(`instance-root-input-color-unsupported:${name}:{${leaf}}`);}
     continue;

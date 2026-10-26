@@ -1,3 +1,5 @@
+import {STROKE_RING_RUNTIME} from './react-stroke-ring-runtime.js';
+import {wrapReactFillStack,finalizeFillStackTsx,fillStackPositionParts} from './react-fill-stack.js';
 import {reactLiteralTextExpression} from './react-literal-text.js';
 import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
@@ -205,30 +207,7 @@ type StyleRecord = Record<string, string | number>;
  *  flagged part has NO boundary in Windows High Contrast on this surface.
  *
  *  Emitted only when a part is flagged. */
-const STROKE_RING_RUNTIME = `/** strokesIncludedInLayout: false — this part's stroke takes no layout space, so it
- *  is painted as an inset ring (over the padding, following the radius) instead
- *  of a border; a real box-shadow is kept after it. A caller's borderColor /
- *  borderWidth restyle the ring and a caller's boxShadow follows it. */
-const strokeRing = ({
-  border, borderStyle: _style, borderTopStyle: _top, borderRightStyle: _right, borderBottomStyle: _bottom, borderLeftStyle: _left,
-  borderWidth: w = 0, borderColor: c = 'currentColor',
-  borderTopWidth: t = w, borderRightWidth: r = w, borderBottomWidth: b = w, borderLeftWidth: l = w,
-  boxShadow, ...rest
-}: CSSProperties, foreground = false, isolate = true, patterned = false): CSSProperties => {
-  const px = (v: string | number) => (typeof v === 'number' || /^[-+]?0*\\.?0+$/.test(v) ? \`\${Number(v)}px\` : v);
-  if(patterned)return {...rest,position:rest.position??'relative',isolation:'isolate',border:border??0,boxShadow, '--_stroke-width':px(w), '--_stroke-color':c} as CSSProperties;
-  const ring = t === r && r === b && b === l
-    ? [\`inset 0 0 0 \${px(t)} \${c}\`]
-    : [\`inset 0 \${px(t)} 0 0 \${c}\`, \`inset 0 calc(-1 * \${px(b)}) 0 0 \${c}\`, \`inset \${px(l)} 0 0 0 \${c}\`, \`inset calc(-1 * \${px(r)}) 0 0 0 \${c}\`];
-  return { ...rest, ...(foreground ? {position: rest.position ?? 'relative',...(isolate?{isolation:'isolate' as const}:{})} : {}), border: border ?? 0, boxShadow: foreground ? boxShadow : [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
-};
-const strokeRingOverlay = (source: CSSProperties, layer: number): CSSProperties => ({
-  display:'block', position:'absolute', inset:0, pointerEvents:'none',
-  borderRadius:'inherit', background:'transparent', zIndex:layer,
-  boxShadow:strokeRing({...source, boxShadow:undefined}).boxShadow,
-});
 
-`;
 
 /** Only injected for explicit square OUTSIDE strokes. Resolved widths also
  * include the caller's ordinary inline border-width overrides. */
@@ -257,6 +236,7 @@ export function emitReactInlineDraftPaintQualification(contract: Contract, ctx: 
 }
 
 function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftPaint: boolean): EmitReactInlineResult {
+  fillStackPositionParts(contract,ctx.contracts,ctx.tokens);
   validateStructuralAvailability(contract);
   reactMaskChildPaths(contract,ctx.tokens);
   validateReactInitialBindings(contract);
@@ -775,6 +755,8 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     baseStyles[wrapped] = s;
   }
 
+  for(const partName of fillStackPositionParts(contract,ctx.contracts,ctx.tokens))baseStyles[partName]={...baseStyles[partName],position:baseStyles[partName]?.position??'relative'};
+
   // Disabled-state tokens apply via the disabled prop (the one interaction
   // state a static style CAN honestly render). Non-substituted decls only.
   const disabledStyle: StyleRecord = {};
@@ -1014,6 +996,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     jsx = wrapReactTextAppearance(part, jsx, codePropOf, resolveValue, textValueOf);
     jsx = wrapReactImage(part, jsx, codePropOf);
     jsx = wrapReactShapeFill(part, wrapReactTextColor(part, wrapReactOverlap(part, wrapReactArc(part, jsx, codePropOf)), codePropOf, contract.id), codePropOf, contract);
+    jsx = wrapReactFillStack(part,jsx,codePropOf,contract);
     const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
     if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
@@ -1542,5 +1525,5 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
   );
 });
 `;
-  return { tsx };
+  return { tsx:finalizeFillStackTsx(tsx,contract,ctx.contracts,codePropOf,{style:callerStyleAvailable?'style':undefined,children:declaredChildren?undefined:'children',mode:'inline',hasRingRuntime:strokeRingParts.size>0},ctx.tokens) };
 }

@@ -16,6 +16,7 @@
     "prep:core": "npm run prep:schema && npm --prefix packages/core run build",
     "lint": "oxlint --deny-warnings -A no-unused-vars -A unicorn/no-new-array -A no-unsafe-optional-chaining -A unicorn/prefer-string-starts-ends-with -A no-unreachable .github/scripts packages/cli/src packages/cli/test packages/schema/src packages/core/src packages/emitter-web-components/src workers/assist/src workers/assist/test playground/src dashboard/src site/src",
     "format:check": "prettier --check .github/scripts/lane-coverage.ts .github/scripts/lane-map.ts package.json packages/cli/package.json packages/schema/package.json packages/core/package.json packages/emitter-web-components/package.json playground/tsconfig.json dashboard/tsconfig.json site/tsconfig.json accuracy/*.json core/exact-projection.ts core/figma-names.ts core/exact-proposal-check.ts extract/figma/exact-projection.ts extract/figma/exact-projection-check.ts extract/figma/rest/structured-axis-check.ts extract/figma/rest/closure.ts extract/figma/rest/closure.test.ts scripts/accuracy-contract-check.mjs scripts/accuracy-contract-check.test.mjs scripts/roundtrip-uui-fresh.mjs scripts/fidelity-uui-fresh.mjs scripts/figma-propose-atomic-check.ts site/src/what-works.ts site/src/pages/what-works.ts scripts/canvas-census-check.ts scripts/canvas-usable-check.ts extract/figma/census/usable.ts extract/figma/census/usable-record.ts extract/figma/census/corpus.ts extract/figma/census/render.ts extract/figma/census/first-pass.ts extract/figma/census/first-pass-run.ts extract/figma/census/first-pass-mint.ts scripts/first-pass-exam.ts scripts/first-pass-check.ts scripts/corpus-reproducible-check.ts",
+    "test:fill-stack": "node --import tsx --test --test-concurrency=1 extract/figma/fill-stack-observation.test.ts core/native-fill-stack.test.ts core/ordered-paint-stack.test.ts core/native-fill-stack-observation.test.ts core/react-fill-stack-review.test.ts core/react-fill-stack-context.test.ts",
     "test:cli": "npm --prefix packages/cli run test",
     "coverage:cli": "npm --prefix packages/cli run coverage",
     "test:worker": "npm --prefix workers/assist run test",
@@ -543,7 +544,7 @@
     "recipe:table:tail-census:format": "prettier --write recipe/evidence/table-tail-census-v1.json",
     "test:audit-classify": "node --test scripts/audit-classify.test.mjs",
     "design:consumer:check": "tsx scripts/design-consumer-check.ts",
-    "design:consumer:test": "node --import tsx --test scripts/design-consumer-check.test.ts scripts/design-consumer-domain.test.ts scripts/design-consumer-content.test.ts scripts/design-consumer-fonts.test.ts scripts/design-consumer-render-export.test.ts scripts/design-consumer-render-anchor.test.ts scripts/design-consumer-isolated-capture.test.ts scripts/design-consumer-paint-extent.test.ts scripts/design-consumer-observed-capture.test.ts scripts/design-consumer-capture-cleanup.test.ts scripts/design-consumer-scroll-capture.test.ts scripts/design-consumer-tiled-capture.test.ts scripts/design-consumer-network.test.ts scripts/design-consumer-slots.test.ts scripts/design-consumer-children.test.ts scripts/design-consumer-text-controls.test.ts extract/computed/base-literal-fallback.test.ts",
+    "design:consumer:test": "node --import tsx --test scripts/design-consumer-check.test.ts scripts/design-consumer-domain.test.ts scripts/design-consumer-content.test.ts scripts/design-consumer-fonts.test.ts scripts/design-consumer-render-export.test.ts scripts/design-consumer-render-anchor.test.ts scripts/design-consumer-isolated-capture.test.ts scripts/design-consumer-paint-extent.test.ts scripts/design-consumer-negative-stack.test.ts scripts/design-consumer-observed-capture.test.ts scripts/design-consumer-capture-cleanup.test.ts scripts/design-consumer-scroll-capture.test.ts scripts/design-consumer-tiled-capture.test.ts scripts/design-consumer-network.test.ts scripts/design-consumer-slots.test.ts scripts/design-consumer-children.test.ts scripts/design-consumer-text-controls.test.ts extract/computed/base-literal-fallback.test.ts",
     "react:native:fidelity:check": "tsx scripts/react-native-fidelity-check.ts && node --import tsx --test scripts/react-native-fidelity-check.test.ts",
     "react:native:fidelity:record": "tsx scripts/react-native-fidelity-record.ts",
     "react:native:declared:record": "tsx scripts/react-native-declared-record.ts",
@@ -554,7 +555,8 @@
     "benchmark:test": "node --import tsx --test scripts/benchmark-replay.test.ts scripts/figma-to-react.test.ts scripts/react-native-replay.test.ts scripts/benchmark-source-framing.test.ts",
     "benchmark:doc": "tsx scripts/benchmark-doc.ts",
     "benchmark:doc:check": "tsx scripts/benchmark-doc.ts --check",
-    "test:joint-text": "node --import tsx --test core/component-text-arguments.test.ts"
+    "test:joint-text": "node --import tsx --test core/component-text-arguments.test.ts",
+    "test:inside-stroke": "node --import tsx --test --test-concurrency=1 core/instance-inside-stroke.test.ts core/instance-inside-stroke-native.test.ts core/instance-inside-stroke-propose.test.ts extract/figma/root-stroke-observation.test.ts"
   },
   "engines": {
     "node": ">=20"
