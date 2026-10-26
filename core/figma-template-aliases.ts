@@ -4,6 +4,7 @@ import { canonicalJson } from './contract-provenance.js';
 export type { TemplateSourceToken } from './figma-template-values.js';
 import { fail, object, equivalent, edge, pathOf, spell, type TemplateSourceToken } from './figma-template-values.js';
 import { projectRootTextTemplateGraphAliases } from './figma-template-graph-aliases.js';
+import { templateSourcePaintMatches } from './figma-source-paint-evidence.js';
 
 /** Invert only the compiler's four reserved carrier aliases on an explicit
  * empty root template. Every selected edge is independently corroborated.
@@ -14,6 +15,10 @@ export function projectRootTextTemplateAliases(set: DumpSet): {
   set: DumpSet; tokens: TemplateSourceToken[]; syntheticNames: string[];
 } | undefined {
   if (!object(set.rootSlot) || set.rootSlot.textTemplate !== 1) return undefined;
+  for (const root of set.variants) {
+    const node = root.children?.[0]?.children?.[0];
+    if (node && !templateSourcePaintMatches(node)) fail('template source paint disagrees with raw consuming evidence');
+  }
   const fields = { fontSizeVar: 'font-size', lineHeightVar: 'line-height', fontWeightVar: 'font-weight', fillVar: 'fill' } as const;
   const reserved = set.variants.some(root => Object.keys(fields).some(field => {
     const name = root.children?.[0]?.children?.[0]?.text?.[field as keyof typeof fields];

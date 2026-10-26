@@ -1,4 +1,12 @@
-import type { DumpSet } from '../extract/figma/types.js';
+import type { DumpNode, DumpSet } from '../extract/figma/types.js';
+import { emptySourcePaintStack, emptySourceStrokePattern, sourcePaintEvidenceFields } from './figma-source-paint-evidence.js';
+
+/** Empty complete observations add evidence, not styling. A nonempty stack,
+ * including invisible paint, cannot qualify a neutral compiler container. */
+function neutralPaintEvidence(node: DumpNode): boolean {
+  return emptySourcePaintStack(node.sourceFillStack) && emptySourcePaintStack(node.sourceStrokeStack) &&
+    emptySourceStrokePattern(node.sourceStrokePattern);
+}
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
@@ -45,9 +53,10 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       const carrier = slot.children?.[0], grid = carrier?.layout;
       // Consumer records describe existing bindings; they are capture evidence,
       // not another style/layout channel or authority to relax these guards.
-      const slotFields = new Set(['name', 'type', 'nodeId', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers']);
-      const frameFields = new Set(['name', 'type', 'nodeId', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound', 'sourceEmptyFill', 'variableConsumers']);
+      const slotFields = new Set(['name', 'type', 'nodeId', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers', ...sourcePaintEvidenceFields]);
+      const frameFields = new Set(['name', 'type', 'nodeId', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound', 'sourceEmptyFill', 'variableConsumers', ...sourcePaintEvidenceFields]);
       if (Object.keys(slot).some(key => !slotFields.has(key)) ||
+          !neutralPaintEvidence(slot) || (carrier !== undefined && !neutralPaintEvidence(carrier)) ||
           (slot.sourceEmptyFill !== undefined && slot.sourceEmptyFill !== true) ||
           (carrier?.sourceEmptyFill !== undefined && carrier.sourceEmptyFill !== true) ||
           Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
@@ -100,8 +109,9 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
         outer.counter !== 'MIN' || outer.spacing !== 0 || outer.primarySizing !== 'AUTO' || root.bound?.itemSpacing))
       return fail(`${root.name}: block content requires intrinsic vertical flow without flex distribution`);
     // Node identity is capture evidence, not an independent visual channel.
-    const allowed = new Set(['name', 'type', 'nodeId', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers']);
+    const allowed = new Set(['name', 'type', 'nodeId', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'sourceEmptyFill', 'variableConsumers', ...sourcePaintEvidenceFields]);
     if (Object.keys(slot).some(key => !allowed.has(key)) ||
+        !neutralPaintEvidence(slot) ||
         (slot.sourceEmptyFill !== undefined && slot.sourceEmptyFill !== true) ||
         Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
         Object.keys(slot.bound ?? {}).some(key => key !== 'itemSpacing')) return fail(`${root.name}: content container has independent styling or behavior`);

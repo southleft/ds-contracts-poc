@@ -178,6 +178,14 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run lint
 
+      - name: ordered source paint stacks
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:fill-stack
+
+      - name: instance inside strokes
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:inside-stroke
+
       - name: prettier check (hand-maintained source only)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run format:check

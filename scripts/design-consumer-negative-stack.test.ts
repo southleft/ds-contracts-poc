@@ -14,7 +14,9 @@ async function restored(page:Page,before:Awaited<ReturnType<typeof state>>){cons
 
 test('isolated negative planes preserve order, alpha, clipping and exact subject pixels',async()=>{
  const browser=await chromium.launch();try{
-  const page=await browser.newPage({viewport:{width:320,height:240}});await page.setContent(fixture());const before=await state(page);
+  // 60% is exactly representable as an 8-bit alpha (153/255), avoiding the
+  // platform-dependent one-channel rounding of a half-transparent plane.
+  const page=await browser.newPage({viewport:{width:320,height:240}});await page.setContent(fixture('.front{opacity:.6}'));const before=await state(page);
   const expected=PNG.sync.read(await page.locator('#subject').screenshot({omitBackground:true}));
   const extent=await observeConsumerPaintExtent(page,'#subject');assert('observation'in extent,JSON.stringify(extent));
   assert.equal(extent.observation.negativeStackRasterVerified,true);assert.equal(extent.observation.blendRasterVerified,undefined);
@@ -22,7 +24,7 @@ test('isolated negative planes preserve order, alpha, clipping and exact subject
   const shot=await captureObservedSubject(page,'#subject','#cell');assert('bytes'in shot,JSON.stringify(shot));
   const actual=PNG.sync.read(shot.bytes);assert.deepEqual(actual.data,expected.data);
   const pixel=(x:number,y:number)=>[...actual.data.subarray((y*actual.width+x)*4,(y*actual.width+x)*4+4)];
-  assert.deepEqual(pixel(10,20),[0,0,255,255]);assert.deepEqual(pixel(30,20),[128,0,128,255]);assert.equal(pixel(0,0)[3],255);
+  assert.deepEqual(pixel(10,20),[0,0,255,255]);assert.deepEqual(pixel(30,20),[153,0,102,255]);assert.equal(pixel(0,0)[3],255);
   await restored(page,before);
  }finally{await browser.close();}
 });
@@ -94,9 +96,16 @@ test('rounded borders qualify only when their full promoted raster is exactly un
   await page.setContent(fixture('#subject{border-radius:12px;will-change:transform}'));
   const before=await state(page),expected=PNG.sync.read(await page.locator('#subject').screenshot({omitBackground:true}));
   const result=await captureObservedSubject(page,'#subject','#cell');assert('bytes'in result,JSON.stringify(result));assert.deepEqual(PNG.sync.read(result.bytes).data,expected.data);assert.equal(expected.data[3],0);await restored(page,before);
-  // On this pinned Chromium, fresh promotion rerasterizes the overlapping
-  // rounded alpha edges. Geometric eligibility cannot waive pixel equality.
+  // Promotion can rerasterize rounded alpha edges differently across render
+  // backends. Independently observe whether it changes this exact fixture;
+  // the production proof must refuse every change, without a pixel tolerance.
   await page.setContent(fixture('#subject{border-radius:12px}'));const original=await state(page);
-  assert.deepEqual(await observeConsumerPaintExtent(page,'#subject'),{refused:'paint-extent-negative-stack-promotion-changed-raster'});await restored(page,original);
+  await page.locator('#subject').evaluate(el=>(el as HTMLElement).style.setProperty('will-change','transform','important'));
+  const promoted=await state(page);
+  await page.locator('#subject').evaluate(el=>el.removeAttribute('style'));await restored(page,original);
+  const observation=await observeConsumerPaintExtent(page,'#subject');
+  if (!original.raster.equals(promoted.raster)) assert.deepEqual(observation,{refused:'paint-extent-negative-stack-promotion-changed-raster'});
+  else {assert('observation' in observation,JSON.stringify(observation));assert.equal(observation.observation.negativeStackRasterVerified,true);}
+  await restored(page,original);
  }finally{await browser.close();}
 });

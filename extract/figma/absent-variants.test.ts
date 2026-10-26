@@ -459,7 +459,7 @@ test('stamps observable is a POSITIVE reader fact: the plugin reader always, RES
   assert.equal(told._provenance.stampsObservable, true);
   const { stampsObservable: _dropped, ...rest } = told._provenance;
   assert.deepEqual(rest, bare._provenance, 'the one key is the only difference');
-  assert.equal(bare._provenance.dumpVersion, '1.72', 'current REST producer carries inherited instance padding as well as explicitly empty fills');
+  assert.equal(bare._provenance.dumpVersion, '1.73', 'current REST producer carries complete fill and stroke observations');
 });
 
 test('the SAME pipeline-written set that lost a variant refuses whether or not the REST response carried sharedPluginData', () => {
