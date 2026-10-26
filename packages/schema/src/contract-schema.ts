@@ -5006,6 +5006,32 @@ export function callerContentGroups(part:Part):Array<{slot:string;parts:Record<s
 
 /** Shared by parsed contracts and direct emitters. Literal tuple text never
  * replaces an explicit TEXT property or borrows absence from missing rows. */
+/** An owned literal may omit rows only behind independently evaluable finite
+ * ancestor gates. Caller-owned and mutable ancestry supplies no such proof. */
+export function ownedLiteralTextDomain(contract:Contract,target:Part):{props:string[];all:Record<string,string|boolean|null>[];visible:Record<string,string|boolean|null>[]} | undefined {
+ // Selection runtimes keep inactive panels mounted; their visibleWhen is not an evaluation boundary.
+ if(contract.selection)return;
+ const paths:Part[][]=[];let visited=0;
+ const visit=(part:Part,ancestors:Part[])=>{if(++visited>4096)return;const chain=[...ancestors,part];if(part===target)paths.push(chain);for(const child of Object.values(part.parts??{}))visit(child,chain);};
+ for(const part of Object.values(contract.anatomy))visit(part,[]);
+ if(visited>4096||paths.length!==1)return;
+ const chain=paths[0],axes=absentVariantAxes(contract),props=axes.map(a=>a.prop.name);
+ const mutable=(part:Part)=>part.component||part.slot||part.repeat||part.content||part.icon||part.shape||part.mask||part.visibilityOverrideProp||part.presenceByState||
+  Object.keys(part.states??{}).length||Object.keys(part.declaredStates??{}).length||part.statesByProp?.length||part.stylesWhen?.length||part.animation||part.optional;
+ const visibilityPaint=(part:Part)=>[part.declared,part.literals,part.tokens,...Object.values(part.layoutByProp?.map??{}),
+  ...(part.literalsByProp??[]).flatMap(t=>Object.values(t.map)),...tokensByPropEntries(part).flatMap(t=>Object.values(t.map)),
+  ...(part.literalsByCombination??[]).flatMap(t=>t.rows.map(r=>r.literals)),...(part.tokensByCombination??[]).flatMap(t=>t.rows.map(r=>r.tokens)),...(part.layoutByCombination?.rows??[]).map(r=>r.layout)]
+  .some(map=>Object.keys(map??{}).some(k=>['display','visibility','opacity','content-visibility'].includes(k)));
+ const typedGate=(part:Part)=>{const w=part.visibleWhen;if(!w)return true;const axis=axes.find(a=>a.prop.name===w.prop);if(!axis)return false;const eq=w.equals;if(eq===undefined)return axis.prop.type==='boolean';if(axis.prop.type==='boolean')return typeof eq==='boolean';return (Array.isArray(eq)?eq:[eq]).every(value=>typeof value==='string'&&axis.options.includes(value));};
+ if(chain.some(part=>mutable(part)||visibilityPaint(part)||!typedGate(part)||
+  [...(part.presenceByCombination?.props??[]),...(part.availabilityByCombination?.props??[])].some(p=>!props.includes(p))))return;
+ if(axes.reduce((n,a)=>n*a.options.length,1)>4096)return;
+ let all:Record<string,string|boolean|null>[];
+ if(contract.bindings.figma.drawnVariants!==undefined){if(drawnVariantIssues(contract).length)return;all=contract.bindings.figma.drawnVariants.map(t=>({...t}));}
+ else {if(absentVariantIssues(contract).length)return;all=[{}];for(const a of axes)all=all.flatMap(t=>a.options.map(v=>({...t,[a.prop.name]:v})));all=all.filter(t=>!(contract.bindings.figma.absentVariants??[]).some(row=>Object.entries(row).every(([k,v])=>t[k]===v)));}
+ try {const visible=all.filter(t=>chain.every(part=>{if(!resolvePresence(part,t)||!resolveAvailability(part,t))return false;const w=part.visibleWhen;if(!w)return true;if(!Object.hasOwn(t,w.prop))throw Error('unbound ancestor');return w.equals===undefined?t[w.prop]===true:(Array.isArray(w.equals)?w.equals:[w.equals]).some(value=>value===t[w.prop]);}));return {props,all,visible};}catch{return;}
+}
+
 export function textByCombinationIssues(contract:Contract,part:Part,nested:boolean):string[]{
  const table=part.textByCombination;if(table===undefined)return [];
  const issues:string[]=[];
@@ -5014,7 +5040,13 @@ export function textByCombinationIssues(contract:Contract,part:Part,nested:boole
  const axes=absentVariantAxes(contract),selected=axes.filter(axis=>table.props.includes(axis.prop.name));
  if(selected.length!==table.props.length||selected.some((axis,i)=>axis.prop.name!==table.props[i]))issues.push('literal-text-combination-axis-domain-unqualified');
  if(table.rows.some(row=>row.values.some((value,i)=>!selected[i]?.options.some(option=>(option===null?null:String(option))===value))))issues.push('literal-text-combination-value-unqualified');
+ const matches=(keys:Set<string>|null|undefined)=>!!keys&&keys.size===table.rows.length&&table.rows.every(row=>keys.has(JSON.stringify(row.values)));
  const expected=reachablePresenceTupleKeys(contract,table.props,part);
- if(!expected||expected.size!==table.rows.length||table.rows.some(row=>!expected.has(JSON.stringify(row.values))))issues.push('literal-text-combination-source-domain-incomplete');
+ // Preserve the existing complete local domain. A smaller domain must prove
+ // every omitted row unreachable through the full owned ancestor chain.
+ if(!matches(expected)){
+  const scope=ownedLiteralTextDomain(contract,part),scoped=scope&&new Set(scope.visible.map(t=>JSON.stringify(table.props.map(p=>t[p]===null?null:String(t[p])))));
+  if(!matches(scoped))issues.push('literal-text-combination-source-domain-incomplete');
+ }
  return issues;
 }

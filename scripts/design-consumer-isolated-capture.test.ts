@@ -4,6 +4,12 @@ import {chromium} from 'playwright-core';
 import {PNG} from 'pngjs';
 import {readFileSync} from 'node:fs';
 import {captureIsolatedRegion} from './design-consumer-isolated-capture.js';
+const currentSnapshot=()=>{
+ const source=readFileSync(new URL('./design-consumer-isolated-capture.ts',import.meta.url),'utf8');
+ const marker="const exactSnapshot = new Function('el','before', `",begin=source.indexOf(marker)+marker.length,end=source.indexOf('\n`);',begin);
+ assert(begin>=marker.length&&end>begin);
+ return new Function('el','before',source.slice(begin,end));
+};
 const count=(bytes:Buffer,r:number,g:number,b:number)=>{const p=PNG.sync.read(bytes);let n=0;for(let i=0;i<p.data.length;i+=4)if(p.data[i]===r&&p.data[i+1]===g&&p.data[i+2]===b&&p.data[i+3]===255)n++;return n;};
 test('expanded isolated capture retains overflow, excludes neighbors, preserves clipping and restores styles',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:200,height:150},deviceScaleFactor:1});
@@ -52,7 +58,7 @@ test('scrolling past non-rendering SVG definitions preserves paint and still rej
  const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:200,height:150},deviceScaleFactor:1});
  const html='<style>body{margin:0;min-height:600px}#subject{position:absolute;left:30px;top:300px;width:20px;height:20px;background:red}#zero{position:absolute;left:0;top:0;width:0;height:0}</style><div id="subject"><span id="zero"></span><svg width="20" height="20"><defs><clipPath id="clip"><path id="clip-shape" d="M0 0H10V20H0Z"/></clipPath></defs><path d="M0 0H20V20H0Z" clip-path="url(#clip)" fill="blue"/></svg></div>';
  for(const mutation of ['',"document.querySelector('defs').style.setProperty('--guard','changed')","document.querySelector('#zero').style.left='1px'","document.querySelector('#clip-shape').setAttribute('d','M0 0H15V20H0Z')"]){
-  await page.setContent(html);await page.evaluate(()=>scrollTo(0,0));
+  await page.goto('about:blank');await page.setContent(html);await page.evaluate(()=>scrollTo(0,0));
   const root=page.locator('#subject'),before=await page.content();
   assert.equal(await page.locator('defs').evaluate(n=>n.getClientRects().length),0);
   assert.equal(await page.locator('#zero').evaluate(n=>n.getClientRects().length),1);
@@ -148,6 +154,39 @@ test('the direct comparator agrees with the previous serialized snapshot across 
    assert.equal(await root.evaluate(direct as (el:Element,before:unknown)=>boolean,expected),oldEqual,mutate);
    assert.deepEqual(await expected.jsonValue(),baseline,'comparison cannot mutate its detached baseline');
   }finally{await expected.dispose();}
+ }
+ }finally{await browser.close();}
+});
+
+test('an unrendered identity SVG path survives scroll while its path and styles remain guarded',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:200,height:150},deviceScaleFactor:1});
+ const html='<style>body{margin:0;min-height:600px}#subject{position:absolute;left:30px;top:300px;width:20px;height:20px;background:blue}#zero{position:absolute;left:0;top:0;width:0;height:0}</style><div id="subject"><span id="zero"></span><div style="display:none"><svg width="0" height="0"><defs><clipPath id="hiddenClip"><path id="hiddenPath" d="M0 0H10V10H0Z"/></clipPath></defs></svg></div></div>';
+ for(const mutation of ['',"document.querySelector('#hiddenPath').setAttribute('d','M0 0H15V10H0Z')","document.querySelector('#hiddenPath').style.setProperty('--owned','changed')","document.querySelector('#zero').style.left='1px'"]){
+  await page.goto('about:blank');await page.setContent(html);await page.evaluate(()=>scrollTo(0,0));
+  const root=page.locator('#subject'),before=await page.content();
+  const facts=await page.locator('#hiddenPath').evaluate(n=>{const b=n.getBoundingClientRect(),p=n as SVGPathElement,l=p.getBBox(),m=p.getScreenCTM()!;return{rect:[b.x,b.y,b.width,b.height],local:[l.x,l.y,l.width,l.height],matrix:[m.a,m.b,m.c,m.d,m.e,m.f],rects:n.getClientRects().length};});
+  assert.deepEqual(facts,{rect:[0,0,0,0],local:[0,0,0,0],matrix:[1,0,0,1,0,0],rects:0});
+  if(mutation)await page.evaluate(code=>window.addEventListener('scroll',()=>new Function(code)(),{once:true}),mutation);
+  const result=await captureIsolatedRegion(page,root,{x:0,y:0,width:20,height:20});
+  if(mutation)assert.deepEqual(result,{refused:'isolated-capture-scroll-changed-subject'},mutation);
+  else{assert('bytes'in result,JSON.stringify(result));assert.equal(count(result.bytes,0,0,255),400);assert.equal(await page.content(),before);}
+  assert.deepEqual(await page.evaluate(()=>({x:scrollX,y:scrollY})),{x:0,y:0});
+ }
+ }finally{await browser.close();}
+});
+
+test('unrendered identity-path handling excludes rendered zero paths, nonidentity matrices and nonzero local boxes',async()=>{
+ const reader=currentSnapshot(),browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:200,height:150},deviceScaleFactor:1});
+ await page.setContent('<style>body{margin:0;min-height:600px}#subject{position:absolute;left:30px;top:300px}</style><div id="subject"><div style="display:none"><svg width="0" height="0"><path id="hidden" d="M0 0H10V10H0Z"/></svg></div><svg width="20" height="20"><path id="renderedZero" d="M0 0"/><g transform="translate(2 3)"><path id="transformedZero" d="M0 0"/></g><defs><clipPath id="clip"><path id="nonzeroLocal" d="M0 0H10V10H0Z"/></clipPath></defs></svg></div>');
+ await page.evaluate(()=>scrollTo(0,150));
+ for(const id of ['hidden','renderedZero','transformedZero','nonzeroLocal']){
+  const path=page.locator('#'+id),observation=await path.evaluate(reader as (el:Element)=>Array<{geometry:Record<string,unknown>}>);
+  const facts=await path.evaluate(n=>{const p=n as SVGPathElement,l=p.getBBox(),m=p.getScreenCTM()!;return{rects:p.getClientRects().length,local:[l.x,l.y,l.width,l.height],matrix:[m.a,m.b,m.c,m.d,m.e,m.f],scroll:scrollY};});
+  if(id==='hidden'){assert.equal(observation[0].geometry.unrenderedIdentityPath,true);assert.deepEqual(observation[0].geometry.transform,[1,0,0,1,0,0]);}
+  else{assert.equal(observation[0].geometry.unrenderedIdentityPath,undefined,id);assert.deepEqual(observation[0].geometry.transform,[...facts.matrix.slice(0,5),facts.matrix[5]+facts.scroll],id);}
+  if(id==='renderedZero'){assert(facts.rects>0);assert.deepEqual(facts.local,[0,0,0,0]);}
+  if(id==='transformedZero')assert.notDeepEqual(facts.matrix,[1,0,0,1,0,0]);
+  if(id==='nonzeroLocal')assert.deepEqual(facts.local,[0,0,10,10]);
  }
  }finally{await browser.close();}
 });

@@ -24,10 +24,17 @@ const exactSnapshot = new Function('el','before', `
   const emptyUnrendered = !hasClientRect && b.x === 0 && b.y === 0 && b.width === 0 && b.height === 0;
   const matrix = n instanceof SVGPathElement ? n.getScreenCTM() : null;
   const local = n instanceof SVGPathElement && matrix ? n.getBBox() : null;
+  // A hidden path can report a zero local/client box and an identity screen
+  // matrix. That identity has no viewport position; adding scroll invents
+  // movement. Keep its full path/style witness and distinguish this one case.
+  const unrenderedIdentityPath = emptyUnrendered && local && matrix &&
+   local.x === 0 && local.y === 0 && local.width === 0 && local.height === 0 &&
+   matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1 && matrix.e === 0 && matrix.f === 0;
   const geometry = local && matrix ? {
    local: [local.x,local.y,local.width,local.height],
-   transform: [matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+scrollX,matrix.f+scrollY],
-   path: n.getAttribute('d')
+   transform: [matrix.a,matrix.b,matrix.c,matrix.d,matrix.e+(unrenderedIdentityPath?0:scrollX),matrix.f+(unrenderedIdentityPath?0:scrollY)],
+   path: n.getAttribute('d'),
+   ...(unrenderedIdentityPath ? {unrenderedIdentityPath:true} : {})
   } : {box:emptyUnrendered ? [0,0,0,0] : [b.x+scrollX,b.y+scrollY,b.width,b.height],hasClientRect};
   const previous = before === undefined ? undefined : before[index];
   // Retain the original JSON number/key semantics for the small geometry

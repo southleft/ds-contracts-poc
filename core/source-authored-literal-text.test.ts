@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {transformSync} from 'esbuild';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {ContractSchema,walkAnatomy,resolveTextByCombination,type Contract} from '../scripts/contract-schema.js';
+import {ContractSchema,walkAnatomy,resolveTextByCombination,ownedLiteralTextDomain,textByCombinationIssues,type Contract} from '../scripts/contract-schema.js';
 import {proposeFromDump} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {emitReact} from './emit-react.js';
@@ -13,7 +13,7 @@ import {emitReactInline} from './emit-react-inline.js';
 import {emitWebComponent} from '../packages/emitter-web-components/src/emit-wc.js';
 import {flattenTokens} from './tokens.js';
 import {createFigmaEngine} from './emit-figma-script.js';
-import {qualifyAuthoredLiteralTextTable,type AuthoredTextAppearanceAxis} from './source-authored-text-appearance.js';
+import {qualifyAuthoredLiteralTextTable,qualifyScopedAuthoredLiteralTextTable,type AuthoredTextAppearanceAxis} from './source-authored-text-appearance.js';
 import {observeTextAppearance} from '../extract/figma/text-appearance-observation.js';
 import {defaultFontFamilyParts} from '../packages/core/src/anatomy.js';
 import type {DumpNode,DumpSet} from '../extract/figma/types.js';
@@ -187,4 +187,71 @@ test('contract grammar refuses missing, duplicate, unknown and explicit-input hy
   const c=structuredClone(contract),p=walkAnatomy(c).find(w=>w.part.textByCombination)!.part;mutate(p);assert.equal(ContractSchema.safeParse(c).success,false);
  }
  assert(part.textByCombination);
+});
+
+function ancestorFixture(hiddenCaptured=true){
+ const f=fixture(),original=structuredClone(f.source.variants);
+ f.source.propertyDefinitions!.Shown={type:'VARIANT',defaultValue:'false',variantOptions:['false','true']};
+ f.source.propertyDefinitions!.Location={type:'VARIANT',defaultValue:'Outer',variantOptions:['Outer','Inner']};
+ f.source.variants=['Outer','Inner'].flatMap(location=>['false','true'].flatMap(shown=>original.map((row,i)=>{
+  const main=structuredClone(row),label=main.children![0],stable=main.children![1];
+  main.name+=',Shown='+shown+',Location='+location;main.variantProperties={...main.variantProperties,Shown:shown,Location:location};
+  main.children=location==='Inner'?[{name:'Body',type:'FRAME',layout:structuredClone(main.layout),hidden:shown==='false',children:[label]},stable]:[stable];
+  let count=0;const ids=(n:DumpNode)=>{n.nodeId=location+'-'+shown+'-'+i+'-'+count++;for(const ch of n.children??[])ids(ch);};ids(main);return main;
+ })));
+ return {...f,propose:()=>proposeFromDump(f.source,{fileKey:'file',corpus,contractIdByName:new Map(),mintUnbound:true,hiddenCaptured})};
+}
+
+test('owned ancestor Boolean and structural gates preserve joint literal text in React and native',()=>{
+ const f=ancestorFixture(),before=JSON.stringify(f.source),{proposal,contract,part}=compiled(f);
+ assert.equal(part.textByCombination!.rows.length,4);
+ assert(proposal.notes.some(n=>n.includes('authenticated ancestor gates')));
+ const native=createFigmaEngine({tokens:{primitives:proposal.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(contract,new Map([[contract.id,contract]]));
+ const texts=(n:any):string[]=>[...(n.type==='text'?[n.characters]:[]),...(n.children??[]).flatMap(texts)];
+ for(const location of ['outer','inner'])for(const shown of [false,true])for(const mode of ['first','second'])for(const state of ['cold','warm']){
+  const expected=mode[0].toUpperCase()+mode.slice(1)+':'+state[0].toUpperCase()+state.slice(1),present=location==='inner'&&shown;
+  for(const inline of [false,true]){const html=render(contract,proposal.mintedTokens!.tree,{location,shown,mode,state},inline);assert.equal(html.includes(expected),present,JSON.stringify({location,shown,mode,state,inline}));assert(html.includes('Keep'));}
+ }
+ for(const v of native.variants){const present=v.name.includes('Location=Inner')&&v.name.includes('Shown=true');assert.equal(texts(v.spec).some(t=>t.includes(':')),present,v.name);}
+ assert.equal(JSON.stringify(f.source),before);
+});
+
+test('scoped literal tables refuse incomplete, extra and independently mutable ancestor domains',()=>{
+ const {contract}=compiled(ancestorFixture());
+ for(const mutate of [(c:Contract,p:any)=>p.textByCombination.rows.pop(),(c:Contract,p:any)=>{const row=structuredClone(p.textByCombination.rows[0]);row.values[p.textByCombination.props.indexOf('shown')]='false';p.textByCombination.rows.push(row);},
+  (c:Contract,p:any)=>{c.props.push({name:'independent',type:'boolean',default:false,bindings:{code:{prop:'independent'},figma:{kind:'BOOLEAN',property:'Independent'}}});const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.visibleWhen={prop:'independent'};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;delete body.visibleWhen;delete body.presenceByCombination;},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.component={id:'external'};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.slot={name:'children'};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.repeat={itemsProp:'items',sample:[]};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.declared={display:'none'};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.statesByProp=[{prop:'mode',state:'hover',map:{first:{opacity:'{fade}'},second:{opacity:'{fade}'}}}];},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;body.visibleWhen={prop:'shown',equals:'true'};},
+  (c:Contract,p:any)=>{const body=walkAnatomy(c).find(w=>w.part.parts&&Object.values(w.part.parts).includes(p))!.part;const shown=c.props.find(x=>x.name==='shown')!;shown.type={enum:['false','true']};shown.default='false';body.visibleWhen={prop:'shown',equals:true};},
+
+ ]){const c=structuredClone(contract),p=walkAnatomy(c).find(w=>w.part.textByCombination)!.part;mutate(c,p);assert.equal(ContractSchema.safeParse(c).success,false);}
+});
+
+test('scoped literal proof refuses hidden source disagreement and broken original ownership',()=>{
+ for(const mutate of [
+  (f:ReturnType<typeof ancestorFixture>)=>{f.propose=()=>proposeFromDump(f.source,{fileKey:'file',corpus,contractIdByName:new Map(),mintUnbound:true,hiddenCaptured:false});},
+  (f:ReturnType<typeof ancestorFixture>)=>{f.source.variants.find(v=>v.variantProperties!.Location==='Inner')!.children![0].propRefs={visible:'Independent'};},
+  (f:ReturnType<typeof ancestorFixture>)=>{f.source.variants.find(v=>v.variantProperties!.Location==='Inner')!.children![0].type='INSTANCE';},
+ ]){const f=ancestorFixture();mutate(f);const p=f.propose();assert(!walkAnatomy(p.contract as Contract).some(w=>w.part.textByCombination),'unqualified ancestor must not grant a table');}
+});
+
+
+test('state-dependent roots and mounted selection panels cannot authorize sparse literal rows',()=>{
+ const f=ancestorFixture(),{contract}=compiled(f);
+ for(const stateful of [true,false]){
+  const c=structuredClone(contract),part=walkAnatomy(c).find(w=>w.part.textByCombination)!.part;
+  if(stateful){c.states=['hover'];c.anatomy.root.statesByProp=[{prop:'mode',state:'hover',map:{first:{opacity:'{fade}'},second:{opacity:'{fade}'}}}];}
+  else c.selection={pattern:'tabs',valueProp:'mode',listPart:'Stable',itemPart:'Stable',selected:{prop:'selected',on:'true',off:'false'},panels:[{value:'first',part:'Body',focusable:false}],orientation:'horizontal',direction:'ltr',activation:'automatic',bindings:{code:{prop:'onSelect'}}};
+  assert.equal(ownedLiteralTextDomain(c,part),undefined);
+  assert(textByCombinationIssues(c,part,true).includes('literal-text-combination-source-domain-incomplete'));
+  const axes:AuthoredTextAppearanceAxis[]=c.props.filter(p=>p.bindings.figma.kind==='VARIANT').map(p=>{const values=p.bindings.figma.values!;return{property:p.bindings.figma.property!,prop:p.name,boolean:p.type==='boolean',values:Object.values(values),map:Object.fromEntries(Object.entries(values).map(([k,v])=>[v,k]))};});
+  const domain=f.source.variants.map(v=>axes.map(a=>a.map[v.variantProperties![a.property]]));
+  const occurrences=f.source.variants.flatMap(v=>v.children?.find(n=>n.name==='Body')?.children?.map(node=>({variant:v.name,node}))??[]);
+  assert.equal(qualifyScopedAuthoredLiteralTextTable(f.source,'file',occurrences,axes,domain,true,part,c),undefined,'proposer carrier shares the runtime reachability refusal');
+ }
 });

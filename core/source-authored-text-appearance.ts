@@ -1,6 +1,6 @@
 import type {DumpNode, DumpSet} from '../extract/figma/types.js';
 import {canonicalJson} from './contract-provenance.js';
-import {PresenceByCombinationSchema, VisibleWhenSchema, resolvePresence, resolveAvailability, type Part} from '../scripts/contract-schema.js';
+import {PresenceByCombinationSchema, VisibleWhenSchema, resolvePresence, resolveAvailability, ownedLiteralTextDomain, type Contract, type Part} from '../scripts/contract-schema.js';
 import {inspectAuthoredTextAppearance, type QualifiedTextAppearance} from './source-text-appearance-control.js';
 
 export interface AuthoredTextAppearanceAxis {
@@ -48,7 +48,10 @@ function qualifyAuthoredTextRows(
   qualifiedDomain: boolean,
   part: Pick<Part, 'visibleWhen' | 'presenceByCombination' | 'availabilityByCombination'>,
  charactersOnly=false,
+ contract?:Contract,
 ): {props:string[];rows:Array<{values:Array<string|null>;characters:string;appearance?:QualifiedTextAppearance}>}|undefined {
+  const scope=contract&&charactersOnly?ownedLiteralTextDomain(contract,part as Part):undefined;
+  if(contract&&!scope)return;
   if (!fileKey || source.type !== 'COMPONENT_SET' || !source.key || !source.nodeId ||
       source.contractId || source.remoteSnapshot || source.detachedSnapshot || source.captureAlias ||
       !qualifiedDomain || !declaredDomain || !dense(declaredDomain) ||
@@ -68,7 +71,7 @@ function qualifyAuthoredTextRows(
           a.map[raw] !== null && typeof a.map[raw] !== 'string') ||
         new Set(a.values.map(raw => a.map[raw])).size !== a.values.length)) return;
 
-  const safe = (n: DumpNode) => (n.hidden === undefined || n.hidden === false) &&
+  const safe = (n: DumpNode) => (n.hidden === undefined || n.hidden === false || !!scope&&n.hidden===true) &&
     n.propRefs?.visible === undefined && n.bound?.visible === undefined &&
     n.propRefs?.mainComponent === undefined;
   type Segment = {name: string; type: string; ordinal: number};
@@ -78,7 +81,7 @@ function qualifyAuthoredTextRows(
   const originalTuples = new Set<string>();
   for (const main of source.variants) {
     if (main.type !== 'COMPONENT' || !main.nodeId || !main.name || indexed.has(main.name) ||
-        !safe(main) || !object(main.variantProperties) ||
+        !safe(main) || main.hidden===true || !object(main.variantProperties) ||
         Object.keys(main.variantProperties).length !== axes.length ||
         axes.some(a => !Object.hasOwn(main.variantProperties!, a.property) ||
           !a.values.includes(main.variantProperties![a.property]))) return;
@@ -117,6 +120,9 @@ function qualifyAuthoredTextRows(
     declared.add(tuple);
   }
   if (declared.size !== originalTuples.size) return;
+  const scopeKeys=scope&&new Set(scope.all.map(t=>canonicalJson(axes.map(a=>t[a.prop]===null?null:String(t[a.prop])))));
+  const visibleKeys=scope&&new Set(scope.visible.map(t=>canonicalJson(axes.map(a=>t[a.prop]===null?null:String(t[a.prop])))));
+  if(scope&&(scope.props.length!==axes.length||scope.props.some(p=>!axes.some(a=>a.prop===p))||scopeKeys!.size!==declared.size||[...scopeKeys!].some(k=>!declared.has(k))))return;
 
   const joined = new Set<string>();
   const rows:Array<{values:Array<string|null>;characters:string;appearance?:QualifiedTextAppearance}>=[];
@@ -146,9 +152,9 @@ function qualifyAuthoredTextRows(
       positivelyLossy ||= authoredTextAppearanceNeedsCarrier(appearance);
     }
     joined.add(occurrence.variant);
-    rows.push({values:[...main.values],characters:text.characters,...(appearance?{appearance:structuredClone(appearance)}:{})});
+    if(!scope||!hit.node.hidden&&!hit.ancestors.some(n=>n.hidden))rows.push({values:[...main.values],characters:text.characters,...(appearance?{appearance:structuredClone(appearance)}:{})});
   }
-  if ((!charactersOnly&&!positivelyLossy) || !path || !rows.length || rows.length !== joined.size) return;
+  if ((!charactersOnly&&!positivelyLossy) || !path || !rows.length || !scope&&rows.length !== joined.size) return;
   if(charactersOnly&&(new Set(rows.map(row=>row.characters)).size<2||occurrences.some(o=>o.node.propRefs?.characters!==undefined)))return;
   // Predicate tables must cover their exact projection of the complete owner
   // domain. They already exist on this physical part; no new absence is authored.
@@ -169,8 +175,8 @@ function qualifyAuthoredTextRows(
   // Missing a named/ordinal member from an authenticated dense original child
   // list proves this physical path absent. A changed type or INSTANCE boundary
   // is ambiguous ownership and is refused, never converted into an absent row.
-  const originalMember = (root: DumpNode): 'present' | 'absent' | 'unqualified' => {
-    let node = root;
+  const originalMember = (root: DumpNode): 'present' | 'hidden' | 'absent' | 'unqualified' => {
+    let node = root,hidden=false;
     for (const [index, segment] of path!.entries()) {
       if (node.type === 'INSTANCE') return 'unqualified';
       const matches = (node.children ?? []).filter(child => child.name === segment.name);
@@ -179,8 +185,9 @@ function qualifyAuthoredTextRows(
       if (selected.type !== segment.type || !safe(selected) ||
           index < path!.length - 1 && !['FRAME', 'GROUP'].includes(selected.type)) return 'unqualified';
       node = selected;
+      hidden ||= node.hidden===true;
     }
-    return node.type === 'TEXT' && !node.children?.length ? 'present' : 'unqualified';
+    return node.type === 'TEXT' && !node.children?.length ? scope&&hidden?'hidden':'present' : 'unqualified';
   };
   let presentCount = 0;
   for (const [name, main] of indexed) {
@@ -197,7 +204,13 @@ function qualifyAuthoredTextRows(
       predicatePresent = visible && resolvePresence(part, subst);
       available = resolveAvailability(part, subst);
     } catch { return; }
-    const physicallyPresent = membership === 'present';
+    const physicallyPresent = membership === 'present'||membership==='hidden';
+    if(scope){
+      const sourceVisible=membership==='present',emittedVisible=visibleKeys!.has(canonicalJson(main.values));
+      if(sourceVisible!==emittedVisible||joined.has(name)!==physicallyPresent)return;
+      if(sourceVisible)presentCount++;
+      continue;
+    }
     if (predicatePresent !== physicallyPresent || joined.has(name) !== physicallyPresent ||
         physicallyPresent && !available) return;
     // Availability never supplies an additional row-omission waiver. The
@@ -232,6 +245,13 @@ export function qualifyAuthoredTextAppearanceTable(...args:AuthoredTextArguments
 }
 export function qualifyAuthoredLiteralTextTable(...args:AuthoredTextArguments):import('../packages/schema/src/text-by-combination.js').TextByCombination|undefined {
  const table=qualifyAuthoredTextRows(...args,true);
+ return table&&table.props.length?{props:table.props,rows:table.rows.map(row=>({values:row.values,text:row.characters}))}:undefined;
+}
+/** Deferred proof: final owned ancestor gates and original source visibility
+ * must agree on every complete tuple before any hidden row may be omitted. */
+export function qualifyScopedAuthoredLiteralTextTable(...args:[...AuthoredTextArguments,Contract]):import('../packages/schema/src/text-by-combination.js').TextByCombination|undefined {
+ const [source,fileKey,occurrences,axes,domain,qualified,part,contract]=args;
+ const table=qualifyAuthoredTextRows(source,fileKey,occurrences,axes,domain,qualified,part,true,contract);
  return table&&table.props.length?{props:table.props,rows:table.rows.map(row=>({values:row.values,text:row.characters}))}:undefined;
 }
 type AuthoredTextArguments=[DumpSet,string|null,readonly {variant:string;node:DumpNode}[],readonly AuthoredTextAppearanceAxis[],readonly (readonly (string|null)[])[]|undefined,boolean,Pick<Part,'visibleWhen'|'presenceByCombination'|'availabilityByCombination'>];
