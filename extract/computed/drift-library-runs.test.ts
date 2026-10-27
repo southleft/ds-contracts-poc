@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, watch, writeFileSync} from 'node:fs';
+import {existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {
@@ -27,11 +27,11 @@ if (mode === 'barrier') {
   const finish = () => {
     if (done || !fs.existsSync(release)) return;
     done = true;
-    watcher.close();
+    clearInterval(poller);
     fs.writeFileSync(path.join(root, 'result'), name);
     event('end');
   };
-  const watcher = fs.watch(control, finish);
+  const poller = setInterval(finish, 10);
   finish();
 } else if (mode === 'exit') {
   fs.writeFileSync(path.join(root, 'result'), name);
@@ -73,15 +73,17 @@ function fixture() {
   return {root, control, scratch, job, close: () => rmSync(root, {recursive:true, force:true})};
 }
 
-function waitFor(directory: string, ready: () => boolean): Promise<void> {
+function waitFor(ready: () => boolean): Promise<void> {
   if (ready()) return Promise.resolve();
   return new Promise((resolve, reject) => {
-    let watcher: ReturnType<typeof watch>;
-    const stop = () => { clearTimeout(watchdog); watcher.close(); };
-    const check = () => { if (ready()) { stop(); resolve(); } };
+    const stop = () => { clearTimeout(watchdog); clearInterval(poller); };
+    const check = () => {
+      try { if (ready()) { stop(); resolve(); } }
+      catch (error) { stop(); reject(error); }
+    };
     // A deadlock watchdog, not a required runtime or performance assertion.
     const watchdog = setTimeout(() => { stop(); reject(Error('child coordination did not complete')); }, 15000);
-    watcher = watch(directory, check);
+    const poller = setInterval(check, 10);
     check();
   });
 }
@@ -90,7 +92,7 @@ for (const workers of [1, 2] as const) {
   test(`actual children respect ${workers} worker(s), complete every job, and retain input order`, {timeout:25000}, async () => {
     const f = fixture();
     const jobs = ['a','b','c','d'].map(name => f.job(name, 'barrier'));
-    // Watch one common directory; each child also records its own output ownership.
+    // Coordinate through real files; each child records its own output ownership.
     const events = () => existsSync(path.join(f.control,'events'))
       ? readFileSync(path.join(f.control,'events'),'utf8').trim().split('\n').filter(Boolean).map(line => JSON.parse(line) as {type:string; name:string}) : [];
     const started = (name:string) => events().some(event => event.type === 'start' && event.name === name);
@@ -113,13 +115,13 @@ for (const workers of [1, 2] as const) {
     });
     try {
       if (workers === 2) {
-        await waitFor(f.control, () => started('a') && started('b'));
+        await waitFor(() => started('a') && started('b'));
         // Hold a while the other worker executes b, c, d, forcing completion
         // order to differ from the returned configuration order.
         for (const name of ['b','c','d']) {
-          await waitFor(f.control, () => started(name));
+          await waitFor(() => started(name));
           release(name);
-          await waitFor(f.control, () => ended(name));
+          await waitFor(() => ended(name));
           // The child marker precedes process close; wait for the scheduler's
           // completion callback before releasing another child.
           await completion[jobs.findIndex(job => job.name === name)].promise;
@@ -127,9 +129,9 @@ for (const workers of [1, 2] as const) {
         release('a');
       } else {
         for (const name of ['a','b','c','d']) {
-          await waitFor(f.control, () => started(name));
+          await waitFor(() => started(name));
           release(name);
-          await waitFor(f.control, () => ended(name));
+          await waitFor(() => ended(name));
           // The child marker precedes process close; wait for the scheduler's
           // completion callback before releasing another child.
           await completion[jobs.findIndex(job => job.name === name)].promise;
