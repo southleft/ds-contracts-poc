@@ -91,7 +91,7 @@ export function strokedPathGeometryIssue(shape: { width: number; height: number;
   if (!viewport || [shape.width, viewport.width, viewport.height].some(value => !Number.isFinite(value) || value <= 0 || value > 1e6) ||
       [viewport.x, viewport.y].some(value => !Number.isFinite(value) || Math.abs(value) > 1e6))
     return 'stroked-path-viewport';
-  const bounds = strokedPathBounds(path.data);
+  const bounds = sourcePathBounds(path.data);
   const same = (a: number, b: number) => a === b || Math.fround(a) === Math.fround(b);
   // Figma stores vertices and extents in float32. Reconstructing a cubic's
   // extrema from those vertices can leave a nonzero local origin even in
@@ -108,9 +108,9 @@ export function strokedPathGeometryIssue(shape: { width: number; height: number;
 }
 
 /** Exact polynomial extrema, not a control-point hull or sampled curve.
- * Called only after the grammar check; the declared box must match the
- * centerline in Figma's local origin, allowing only float32 representation. */
-function strokedPathBounds(data: string) {
+ * The caller must first validate the supported path grammar. Both stroked
+ * centerlines and the closed filled-path subset retain source double bounds. */
+export function sourcePathBounds(data: string) {
   const tokens = data.match(/[MLCQHVZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!;
   let x = 0, y = 0, startX = 0, startY = 0, minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   const include = (px: number, py: number) => { minX = Math.min(minX, px); minY = Math.min(minY, py); maxX = Math.max(maxX, px); maxY = Math.max(maxY, py); };

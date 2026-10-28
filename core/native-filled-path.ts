@@ -1,10 +1,11 @@
 import { filledPathIssue, filledPathsIssue } from '../scripts/contract-schema.js';
+import { sourcePathBounds } from '../packages/schema/src/stroked-path.js';
 import type { NodeSpec } from './emit-figma-script.js';
 
 /** Figma stores endpoints and relative cubic handles as float32. Path strings
  * serialize their sums as doubles. Comparing rounded absolute controls loses
  * that distinction. No epsilon or bounding-box approximation is used here. */
-function segments(data: string, x = 0, y = 0) {
+function segments(data: string, x = 0, y = 0, exactSourceOffset = false) {
   if (filledPathIssue(data) || !Number.isFinite(x) || !Number.isFinite(y)) return null;
   const tokens = data.match(/[MLCQZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)!;
   type Point = [number, number];
@@ -13,7 +14,7 @@ function segments(data: string, x = 0, y = 0) {
   // can otherwise invent a tiny nonzero coordinate. Only the identical
   // float32 origin gets this treatment; other endpoints retain exact checks.
   const coordinate = (value: number, offset: number) =>
-    offset !== 0 && Math.fround(value) === Math.fround(-offset) ? 0 : Math.fround(value + offset);
+    !exactSourceOffset && offset !== 0 && Math.fround(value) === Math.fround(-offset) ? 0 : Math.fround(value + offset);
   const point = (p: Point) => [coordinate(p[0], x), coordinate(p[1], y)];
   const delta = (a: Point, b: Point) => [Math.fround(a[0] - b[0]), Math.fround(a[1] - b[1])];
   const paths: number[][][] = [];
@@ -44,18 +45,34 @@ function segments(data: string, x = 0, y = 0) {
   return paths;
 }
 
-export function nativeFilledPathMatches(expected: NodeSpec['shape'], observed: unknown, x: unknown, y: unknown): boolean {
+export function nativeFilledPathMatches(expected: NodeSpec['shape'], observed: unknown, x: unknown, y: unknown,
+  width?: unknown, height?: unknown): boolean {
   if (expected?.kind !== 'path' || !expected.paths?.length || expected.paths.length > 32 ||
       filledPathsIssue(expected.paths) || !Array.isArray(observed) || observed.length !== expected.paths.length ||
       typeof x !== 'number' || typeof y !== 'number') return false;
-  return expected.paths.every((a, index) => {
+  const paths = expected.paths;
+  const matchesAt = (dx: number, dy: number, exactSourceOffset = false) => paths.every((a, index) => {
     const b = observed[index];
     if (!b || b.windingRule !== a.windingRule || typeof b.data !== 'string') return false;
     // Each ordered region is compared in the independently observed native
     // frame, preserving exact float32 endpoints and relative curve handles.
-    const wanted = segments(a.data, -x, -y), actual = segments(b.data);
+    const wanted = segments(a.data, dx, dy, exactSourceOffset), actual = segments(b.data);
     return wanted !== null && actual !== null && JSON.stringify(wanted) === JSON.stringify(actual);
   });
+  if (matchesAt(-x, -y)) return true;
+  // Native vector creation normalizes the source's tight curve bounds before
+  // storing float32 points. Its independently rounded node origin is not the
+  // original translation. Keep the unrounded source minimum for endpoints;
+  // certify the observed origin and extent separately, without a tolerance.
+  if (typeof width !== 'number' || typeof height !== 'number') return false;
+  const boxes = paths.map(p => sourcePathBounds(p.data));
+  const left = Math.min(...boxes.map(b => b.x)), top = Math.min(...boxes.map(b => b.y));
+  const w = Math.max(...boxes.map(b => b.x + b.width)) - left;
+  const h = Math.max(...boxes.map(b => b.y + b.height)) - top;
+  return [left, top, w, h].every(Number.isFinite) && w > 0 && h > 0 &&
+    x === Math.fround(left) && y === Math.fround(top) &&
+    width === Math.fround(w) && height === Math.fround(h) &&
+    matchesAt(-left, -top, true);
 }
 
 /** Compare every ordered native region against its verified main. */
