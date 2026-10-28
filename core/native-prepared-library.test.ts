@@ -16,7 +16,7 @@ import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 import {nativeBoundPaintColor} from './native-paint-observation.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false) {
+async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string}) {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
@@ -199,6 +199,7 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     const assets=new Map<string,Uint8Array>();
     Object.assign(host.figma,{base64Decode:(s:string)=>new Uint8Array(Buffer.from(s,'base64')),base64Encode:(b:Uint8Array)=>Buffer.from(b).toString('base64'),createImage:(bytes:Uint8Array)=>{const hash=createHash('sha1').update(bytes).digest('hex');assets.set(hash,new Uint8Array(bytes));return{hash};},getImageByHash:(hash:string)=>assets.has(hash)?{getBytesAsync:async()=>new Uint8Array(assets.get(hash)!)}:null});
   }
+  if(mixedStroke){tokens.primitives.edge.$value=mixedStroke.width;delete leaf.anatomy.root.tokens!['border-color'];leaf.anatomy.root.literals={'border-color':mixedStroke.color};}
   const outer=ContractSchema.parse({...parent,id:'test.library-outer',name:'Outer',
     anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}},
       ...(composed==='repeated'?{secondPanel:{component:{id:parent.id}}}:{})}}}});
@@ -227,7 +228,7 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     graphComponents:compiled.components,graphVerification:2,projection:compiled.projection,tokenInput,tokenIdentity:allocated.creationIdentity,creation};
   // The mock lacks Figma's uniform edge mirrors on frames; reproduce the
   // independently captured native API fields before exercising readback.
-  if(literalPaint) for(const born of creation.nodes) {
+  if(literalPaint||mixedStroke) for(const born of creation.nodes) {
     const n=await host.figma.getNodeByIdAsync(born.id);
     if(n && ['COMPONENT','FRAME'].includes(n.type) && n.strokes?.length) {
       for(const field of ['strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight']) n[field]=n.strokeWeight;
@@ -891,4 +892,46 @@ test('prepared library independently verifies appearance ranges and refuses corr
  for(const row of f.receipt.nodes.filter((n:any)=>n.type==='TEXT'&&n.id!==selected.id)){
   const bad=structuredClone(f.receipt);bad.nodes.find((n:any)=>n.id===row.id).values.fills=[{type:'SOLID',color:{r:0,g:0,b:1}}];assert.equal(verify(bad).status,'refused','unchosen source '+row.id);
  }
+});
+
+
+// Mixed literal border color with a separately bound width.
+const mixedStrokeCases=[{width:0,color:'#00000000'},{width:1,color:'#123456'},{width:2,color:'#abcdef80'}];
+async function mixedStrokeFixture(row:typeof mixedStrokeCases[number]){return fixture(false,'Inter',false,undefined,false,false,false,false,false,false,false,false,false,false,false,false,row);}
+function mixedStrokeRoot(f:any,r=f.receipt){return r.nodes.find((n:any)=>n.id===f.input.creation.variants[0].id);}
+test('literal stroke color and verified uniform bound widths retain exact native semantics',async()=>{
+ for(const row of mixedStrokeCases){const f=await mixedStrokeFixture(row),n=mixedStrokeRoot(f);assert.equal(n.values.strokeWeight,row.width);assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed',JSON.stringify(row));}
+});
+test('mixed stroke checks refuse wrong paints, opacity, bindings, edges and widths even at zero width',async()=>{
+ const changes=[
+  (n:any)=>n.values.strokes[0].color.r=.731,
+  (n:any)=>n.values.strokes[0].opacity=.371,
+  (n:any)=>n.values.strokes[0].visible=false,
+  (n:any)=>n.values.strokes.push(structuredClone(n.values.strokes[0])),
+  (n:any)=>n.values.strokes[0].boundVariables={color:{type:'VARIABLE_ALIAS',id:'foreign'}},
+  (n:any)=>n.values.strokeAlign='OUTSIDE',
+  (n:any)=>n.values.dashPattern=[2,2],
+  (n:any)=>{for(const k of ['strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'])n.values[k]+=1;},
+  (n:any)=>n.values.strokeTopWeight+=1,
+  (n:any)=>{for(const k of ['strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'])n.values.boundVariables[k]={type:'VARIABLE_ALIAS',id:'foreign'};},
+  (n:any)=>{n.values.boundVariables.strokeWeight={type:'VARIABLE_ALIAS',id:'foreign'};},
+  (n:any)=>{for(const k of ['strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'])delete n.values.boundVariables[k];},
+ ];
+ for(const row of mixedStrokeCases){const f=await mixedStrokeFixture(row);for(const change of changes){const r=structuredClone(f.receipt);change(mixedStrokeRoot(f,r));assert.equal(verifyNativePreparedLibraryReadback(f.input,r).status,'refused',String(change)+' / '+JSON.stringify(row));}}
+});
+test('an undeclared root stroke is still refused',async()=>{
+ const f=await fixture('nested'),r=structuredClone(f.receipt),n=mixedStrokeRoot(f,r);assert.equal(n.values.strokes.length,0);
+ n.values.strokes=[{type:'SOLID',color:{r:0,g:0,b:0},opacity:1,visible:true,blendMode:'NORMAL',boundVariables:{}}];
+ assert.equal(verifyNativePreparedLibraryReadback(f.input,r).status,'refused');
+});
+
+test('mixed stroke entry requests stroke layout and dash facts in the emitted readback',async()=>{
+ for(const row of mixedStrokeCases){const f=await mixedStrokeFixture(row),script=emitNativePreparedLibraryReadbackScript(f.input);const match=script.match(/^const FIELDS = (\[[^\n]+\]);$/m);assert(match);const fields=JSON.parse(match[1]);assert(fields.includes('strokesIncludedInLayout'));assert(fields.includes('dashPattern'));assert.deepEqual(mixedStrokeRoot(f).values.dashPattern,[]);}
+});
+
+test('unresolvable declared mixed-stroke width and wrong token mode refuse',async()=>{
+ const f=await mixedStrokeFixture({width:1,color:'#123456'});
+ const input=structuredClone(f.input);input.graphComponents!.at(-1)!.variants[0].spec.bindings!.strokeWeight='missing/stroke-width';
+ const unresolved=verifyNativePreparedLibraryReadback(input,f.receipt);assert.equal(unresolved.status,'refused');assert(unresolved.problems.some((p:string)=>p.startsWith('native-library-observation-literal-stroke')));
+ const wrongMode=structuredClone(f.input);wrongMode.tokenIdentity.modes[0].modeId='missing-mode';assert.equal(verifyNativePreparedLibraryReadback(wrongMode,f.receipt).status,'refused');
 });
