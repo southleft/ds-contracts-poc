@@ -10,7 +10,15 @@ export function nativeImageOverrideMatches(expected:NativeImageFill,observed:unk
    p.opacity!==undefined&&p.opacity!==1||p.blendMode!==undefined&&p.blendMode!=='NORMAL'||
    p.rotation!==undefined&&p.rotation!==0||p.scalingFactor!==undefined&&p.scalingFactor!==1||
    Object.keys(p.boundVariables??{}).length||Object.values(p.filters??{}).some(v=>v!==0))return false;
- if(expected.scaleMode!=='CROP')return p.imageTransform===undefined;
+ if(expected.scaleMode!=='CROP') {
+  if(p.imageTransform===undefined)return true;
+  // FILL/FIT readback may spell the absence of a crop as exact identity.
+  // Check all indexed entries: sparse arrays are not matrix evidence.
+  const matrix=p.imageTransform,identity=[[1,0,0],[0,1,0]];
+  return Array.isArray(matrix)&&matrix.length===2&&[0,1].every(i=>
+   Array.isArray(matrix[i])&&matrix[i].length===3&&[0,1,2].every(j=>
+    typeof matrix[i][j]==='number'&&matrix[i][j]===identity[i][j]));
+ }
  const matrix=p.imageTransform;
  return Array.isArray(matrix)&&matrix.length===2&&matrix.every((row:any,i:number)=>Array.isArray(row)&&row.length===3&&row.every((v:unknown,j:number)=>typeof v==='number'&&Number.isFinite(v)&&Math.abs(v-expected.imageTransform![i][j])<=1e-6));
 }

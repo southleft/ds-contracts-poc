@@ -16,7 +16,7 @@ import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 import {nativeBoundPaintColor} from './native-paint-observation.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string}) {
+async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
@@ -200,6 +200,20 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     Object.assign(host.figma,{base64Decode:(s:string)=>new Uint8Array(Buffer.from(s,'base64')),base64Encode:(b:Uint8Array)=>Buffer.from(b).toString('base64'),createImage:(bytes:Uint8Array)=>{const hash=createHash('sha1').update(bytes).digest('hex');assets.set(hash,new Uint8Array(bytes));return{hash};},getImageByHash:(hash:string)=>assets.has(hash)?{getBytesAsync:async()=>new Uint8Array(assets.get(hash)!)}:null});
   }
   if(mixedStroke){tokens.primitives.edge.$value=mixedStroke.width;delete leaf.anatomy.root.tokens!['border-color'];leaf.anatomy.root.literals={'border-color':mixedStroke.color};}
+  if(visibility){
+    leaf.props=[];leaf.states=[];delete leaf.bindings.figma.statePreviews;
+    leaf.anatomy.root={layout:{display:'flex'},literals:{width:'16px',height:'16px'}};
+    parent.props=[
+      {name:'hidden',type:'boolean',bindings:{code:{prop:'hidden'},figma:{kind:'NONE'}}},
+      {name:'shown',type:'boolean',bindings:{code:{prop:'shown'},figma:{kind:'NONE'}}},
+      {name:'boundShown',type:'boolean',default:false,bindings:{code:{prop:'boundShown'},figma:{kind:'BOOLEAN',property:'Bound'}}},
+    ];
+    parent.anatomy.root={layout:{display:'flex'},parts:{
+      hidden:{component:{id:leaf.id},visibilityOverrideProp:'hidden',visibilityOverrideDefault:false},
+      shown:{component:{id:leaf.id},visibilityOverrideProp:'shown',visibilityOverrideDefault:true},
+      bound:{component:{id:leaf.id},visibleWhen:{prop:'boundShown'}},
+    }};
+  }
   const outer=ContractSchema.parse({...parent,id:'test.library-outer',name:'Outer',
     anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}},
       ...(composed==='repeated'?{secondPanel:{component:{id:parent.id}}}:{})}}}});
@@ -934,4 +948,54 @@ test('unresolvable declared mixed-stroke width and wrong token mode refuse',asyn
  const input=structuredClone(f.input);input.graphComponents!.at(-1)!.variants[0].spec.bindings!.strokeWeight='missing/stroke-width';
  const unresolved=verifyNativePreparedLibraryReadback(input,f.receipt);assert.equal(unresolved.status,'refused');assert(unresolved.problems.some((p:string)=>p.startsWith('native-library-observation-literal-stroke')));
  const wrongMode=structuredClone(f.input);wrongMode.tokenIdentity.modes[0].modeId='missing-mode';assert.equal(verifyNativePreparedLibraryReadback(wrongMode,f.receipt).status,'refused');
+});
+
+const visibilityFixture=()=>fixture(true,'Inter',false,undefined,false,false,false,false,false,false,false,false,false,false,false,false,undefined,true);
+function visibilitySpecs(input:any){
+ const specs:any[]=[];const visit=(s:any)=>{specs.push(s);s.children?.forEach(visit);};
+ for(const c of input.graphComponents)for(const v of c.variants)visit(v.spec);
+ return specs;
+}
+function visibilityNode(receipt:any,spec:any){
+ const part=JSON.stringify(spec.nativeContractPart);
+ return receipt.nodes.find((n:any)=>n.metadata.nativeContractPart===part);
+}
+
+test('prepared visibility targets preserve source false and true plus Boolean property defaults',async()=>{
+ const f=await visibilityFixture(),specs=visibilitySpecs(f.input);
+ assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed');
+ const targets=specs.filter(s=>s.visibilityTarget);
+ assert.equal(targets.length,2);
+ for(const spec of targets){const n=visibilityNode(f.receipt,spec);assert(n);assert.equal(n.values.visible,spec.visibilityTarget.visible);assert.equal(n.metadata.visibilityOverride,spec.visibilityTarget.key);}
+ const bound=specs.find(s=>s.visibleProp);assert(bound);assert.equal(visibilityNode(f.receipt,bound).values.visible,false);
+});
+
+test('prepared visibility targets reject wrong visibility and missing or wrong source target metadata',async()=>{
+ const f=await visibilityFixture(),targets=visibilitySpecs(f.input).filter(s=>s.visibilityTarget);
+ for(const spec of targets)for(const change of ['visible','missing-marker','wrong-marker','json-marker']){
+  const receipt=structuredClone(f.receipt),n=visibilityNode(receipt,spec);
+  if(change==='visible')n.values.visible=!spec.visibilityTarget.visible;
+  else if(change==='missing-marker')delete n.metadata.visibilityOverride;
+  else if(change==='json-marker')n.metadata.visibilityOverride=JSON.stringify(spec.visibilityTarget.key);
+  else n.metadata.visibilityOverride='wrong-source-target';
+  const result=verifyNativePreparedLibraryReadback(f.input,receipt);
+  assert.equal(result.status,'refused',change);assert(JSON.stringify(result).includes('native-library-observation-instance-visibility'));
+ }
+});
+
+test('prepared visibility target keeps existing visibleProp precedence for an explicit mixed-flag control',async()=>{
+ const f=await visibilityFixture(),input=structuredClone(f.input),receipt=structuredClone(f.receipt);
+ const spec=visibilitySpecs(input).find(s=>s.visibleProp);assert(spec);assert.equal(spec.visibleDefault,false);
+ // Real source compilation keeps these flags exclusive. This constructed
+ // control checks the existing writer's later Boolean-property precedence.
+ const target={key:'mixed-visibility-control',visible:true};
+ spec.visibilityTarget=target;
+ const sync=(s:any)=>{if(JSON.stringify(s.nativeContractPart)===JSON.stringify(spec.nativeContractPart))s.visibilityTarget=target;s.children?.forEach(sync);};
+ input.component.variants.forEach((v:any)=>sync(v.spec));
+ const node=visibilityNode(receipt,spec);node.metadata.visibilityOverride=target.key;
+ assert.equal(node.values.visible,false);
+ assert.equal(verifyNativePreparedLibraryReadback(input,receipt).status,'supported-structure-observed');
+ node.values.visible=true;
+ const result=verifyNativePreparedLibraryReadback(input,receipt);
+ assert.equal(result.status,'refused');assert(JSON.stringify(result).includes('native-library-observation-instance-visibility'));
 });

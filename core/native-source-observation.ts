@@ -317,6 +317,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if(isContractDraft(input)&&observedVariants.some(v=>hasTextColor(v.spec)))extra.push('textColorOverride');
   const hasShapeFill=(spec:NodeSpec):boolean=>!!spec.shapeFillTarget||!!spec.instanceShapeFills||!!spec.children?.some(hasShapeFill);
   if(isContractDraft(input)&&observedVariants.some(v=>hasShapeFill(v.spec)))extra.push('shapeFillOverride');
+  const hasVisibilityTarget=(spec:NodeSpec):boolean=>!!spec.visibilityTarget||!!spec.children?.some(hasVisibilityTarget);
+  if(isContractDraft(input)&&observedVariants.some(v=>hasVisibilityTarget(v.spec)))extra.push('visibilityOverride');
   // Saved plans authenticate program bytes. New fields belong only to specs
   // that require them; the general inventory API still reads the full set.
   const hasArcCap = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || !!spec.shape?.arc?.cap || !!spec.children?.some(hasArcCap);
@@ -1341,7 +1343,8 @@ function verifyReadback(
               issue('native-caller-fill-width-observation',n);
           }
           if (!same(n.values.reactions ?? [],main?.values.reactions ?? [])) issue('native-library-observation-instance-reactions',n);
-          if (n.values.visible !== (spec.visibleProp ? spec.visibleDefault === true : true))
+          if (n.values.visible !== (spec.visibleProp ? spec.visibleDefault === true : spec.visibilityTarget?.visible ?? true) ||
+              spec.visibilityTarget && n.metadata.visibilityOverride !== spec.visibilityTarget.key)
             issue('native-library-observation-instance-visibility',n);
           const definitions = depTarget.definitions ?? {}, properties = n.componentProperties ?? {};
           if (!same(Object.keys(properties).filter(key=>properties[key].type !== 'SLOT').sort(), Object.keys(definitions).filter(key=>definitions[key].type !== 'SLOT').sort()) ||
