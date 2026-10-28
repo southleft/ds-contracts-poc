@@ -15,11 +15,14 @@ export interface PreparedLibraryNativeRequest {
   brand:string;
   operation:{id:string;fileKey:string};
 }
-function reopen(repoRoot:string,request:PreparedLibraryNativeRequest) {
+function readRetained(repoRoot:string,request:PreparedLibraryNativeRequest) {
   if (!request || !/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(request.operation?.id) ||
       !/^[A-Za-z0-9]{10,80}$/.test(request.operation?.fileKey) || !['light','dark'].includes(request.mode))
     throw Error('react-library-native-request-invalid');
-  const artifact=readPreparedReactLibrary(repoRoot,request.artifactId), {input,receipt}=artifact;
+  return readPreparedReactLibrary(repoRoot,request.artifactId);
+}
+function compileRetained(artifact:ReturnType<typeof readRetained>,request:PreparedLibraryNativeRequest) {
+  const {input,receipt}=artifact;
   const routed=layeredNativeTokenModes(input.tokens,[{sourceMode:request.mode,brand:request.brand,nativeModeName:'Selected'}]);
   const source:NativePreparedLibrarySource={kind:'prepared-contract-library',revision:'sha256:'+artifact.id,
     artifactId:artifact.id,inputSha256:receipt.inputSha256,tarballSha256:receipt.tarballSha256,tokensSha256:routed.tokensSha256};
@@ -41,6 +44,36 @@ function reopen(repoRoot:string,request:PreparedLibraryNativeRequest) {
     limitations:['native-visual-fidelity-unverified','react-behavior-not-qualified','application-dispatch-not-authorized-by-plan']};
   return {artifact,engine,contracts,source,plan,revision:revisionOf(plan)};
 }
+function reopen(repoRoot:string,request:PreparedLibraryNativeRequest) {
+  return compileRetained(readRetained(repoRoot,request),request);
+}
+
+/** One successful plan per adapter lifetime. This never caches an authentication
+ * verdict: every access first reopens and verifies receipt, original input and
+ * archive. The compiler implementation is the fixed module captured by this
+ * factory; creating another adapter or loading another module starts empty. */
+export function createReactLibraryNativePlanPreparer(repoRoot:string) {
+  let cached: {key:string;value:ReturnType<typeof prepareReactLibraryNativePlan>} | undefined;
+  return (request:PreparedLibraryNativeRequest):ReturnType<typeof prepareReactLibraryNativePlan> => {
+    try {
+      const artifact=readRetained(repoRoot,request);
+      const key=canonicalJson({artifactId:artifact.id,inputSha256:artifact.receipt.inputSha256,
+        tarballSha256:artifact.receipt.tarballSha256,operation:request.operation,
+        mode:request.mode,brand:request.brand});
+      if(cached?.key===key)return structuredClone(cached.value);
+      // A different context or failed read/compile must not keep the previous
+      // entry alive. No errors, engine handles or caller-owned objects escape.
+      cached=undefined;
+      const {plan,revision}=compileRetained(artifact,request);
+      cached={key,value:structuredClone({plan,revision})};
+      return structuredClone(cached.value);
+    } catch(error) {
+      cached=undefined;
+      throw error;
+    }
+  };
+}
+
 export function prepareReactLibraryNativePlan(repoRoot:string,request:PreparedLibraryNativeRequest) {
   const {plan,revision}=reopen(repoRoot,request);return {plan,revision};
 }
