@@ -2016,7 +2016,7 @@ function verifyReadback(
             issue('native-mask-path-observation-geometry', n);
         }
         if (spec.nativePathInk) {
-          if (!nativeFilledPathMatches(spec.shape, v.vectorPaths, v.x, v.y) || v.isMask !== Boolean(spec.mask) ||
+          if (!nativeFilledPathMatches(spec.shape, v.vectorPaths, v.x, v.y, v.width, v.height) || v.isMask !== Boolean(spec.mask) ||
               v.blendMode !== 'PASS_THROUGH' || !same(v.constraints, spec.nativePathScale
                 ? {horizontal:'SCALE',vertical:'SCALE'} : {horizontal:'MIN',vertical:'MIN'}) ||
               !same(v.relativeTransform, [[1,0,v.x],[0,1,v.y]]) ||
