@@ -327,7 +327,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasMask = (spec: NodeSpec): boolean => spec.shape?.kind==='line' || spec.shape?.kind === 'stroked-path' || !!spec.instanceInsideStroke || !!spec.mask || !!spec.children?.some(hasMask);
   const hasCapturedGeometry = (spec: NodeSpec): boolean => !!spec.intrinsicAbsolute || spec.shape?.kind==='line' || !!spec.capturedAbsoluteGeometry || !!spec.insetOverlay || !!spec.children?.some(hasCapturedGeometry);
   const hasStrokeLayout = (spec: NodeSpec): boolean => spec.instanceRootStrokeInput === 'INSIDE' || spec.insetRingStroke === true || !!spec.rootSlotFlow ||
-    (['root','frame'].includes(spec.type) && !!spec.lits?.strokeColor && typeof spec.lits.strokeWeight === 'number') ||
+    (['root','frame'].includes(spec.type) && !!spec.lits?.strokeColor && (typeof spec.lits.strokeWeight === 'number' ||
+      !spec.lits.strokeSides && spec.lits.strokeWeight === undefined && typeof spec.bindings?.strokeWeight === 'string')) ||
     !!spec.children?.some(hasStrokeLayout);
   const hasPathInk = (spec: NodeSpec): boolean => spec.shape?.kind === 'stroked-path' || spec.nativePathInk === true || spec.nativeMaskPath === true || !!spec.children?.some(hasPathInk);
   const hasBoundPaint = (spec:NodeSpec):boolean=>!!spec.solidFillCompositionToken||!!spec.children?.some(hasBoundPaint);
@@ -1860,9 +1861,12 @@ function verifyReadback(
               !['strokeWeight','strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'].every(field=>numeric(v[field],weight)))
             issue('native-inset-ring-observation-paint',n);
         } else if (field === 'stroke' && library && ['root','frame'].includes(spec.type) && spec.lits?.strokeColor &&
-            typeof spec.lits.strokeWeight === 'number' && !spec.lits.strokeSides) {
-          const color=spec.lits.strokeColor,weight=spec.lits.strokeWeight;
-          if (!Number.isFinite(weight) || weight < 0 || !Array.isArray(paints) || paints.length!==1 ||
+            !spec.lits.strokeSides && (typeof spec.lits.strokeWeight === 'number' ||
+              spec.lits.strokeWeight === undefined && typeof bindings.strokeWeight === 'string')) {
+          const color=spec.lits.strokeColor,weight=spec.lits.strokeWeight === undefined
+            ? nativeBoundNumber(bindings.strokeWeight,[...tokens.receipt.variables,...(graph ? receipt.templateGraph!.receipt.routes : [])],consumingMode)
+            : spec.lits.strokeWeight;
+          if (typeof weight !== 'number' || !Number.isFinite(weight) || weight < 0 || !Array.isArray(paints) || paints.length!==1 ||
               paints[0].type!=='SOLID' || paints[0].visible===false || (paints[0].blendMode??'NORMAL')!=='NORMAL' ||
               !paint(paints[0].color,color) || !numeric(paints[0].opacity??1,color.a??1) ||
               Object.keys(paints[0].boundVariables??{}).length ||
