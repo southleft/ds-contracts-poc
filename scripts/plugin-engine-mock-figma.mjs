@@ -57,6 +57,14 @@
 let nextId = 1;
 const newId = () => `${nextId++}:${nextId}`;
 
+// Figma refuses a plugin-data value over 100 kB with this exact message. The
+// unit Figma counts is unpublished; 100,000 UTF-8 bytes is the stricter reading.
+const pluginDataEntry = (method, value) => {
+  if (Buffer.byteLength(String(value), 'utf8') > 100000)
+    throw new Error(`in ${method}: This pluginData entry exceeds 100 kB per entry limit.`);
+  return value;
+};
+
 /** @param {{ modeLimit?: number | null }} [options] — `modeLimit` makes
  *  `VariableCollection.addMode` throw past N modes, the way a Figma Starter
  *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
@@ -984,7 +992,7 @@ export function createFigmaMock(options = {}) {
     }
 
     setSharedPluginData(namespace, key, value) {
-      this._shared.set(`${namespace}/${key}`, value);
+      this._shared.set(`${namespace}/${key}`, pluginDataEntry('setSharedPluginData', value));
     }
 
     getSharedPluginData(namespace, key) {
@@ -995,7 +1003,7 @@ export function createFigmaMock(options = {}) {
     // stamps the fraction on the fill node and re-applies it once the tree
     // has laid out; the real API has it, so the mock does too.
     setPluginData(key, value) {
-      this._shared.set(`\u0000/${key}`, value);
+      this._shared.set(`\u0000/${key}`, pluginDataEntry('setPluginData', value));
     }
 
     getPluginData(key) {
@@ -1377,7 +1385,7 @@ export function createFigmaMock(options = {}) {
       this._shared = new Map();
     }
     setSharedPluginData(ns, key, value) {
-      this._shared.set(`${ns}/${key}`, value);
+      this._shared.set(`${ns}/${key}`, pluginDataEntry('setSharedPluginData', value));
     }
     getSharedPluginData(ns, key) {
       return this._shared.get(`${ns}/${key}`) ?? '';
@@ -1401,7 +1409,7 @@ export function createFigmaMock(options = {}) {
     // Variables carry plugin data in the real API (PluginDataMixin) — the
     // token apply records what it wrote per mode here (ds_contracts/appliedValues).
     setSharedPluginData(ns, key, value) {
-      this._shared.set(`${ns}/${key}`, value);
+      this._shared.set(`${ns}/${key}`, pluginDataEntry('setSharedPluginData', value));
     }
     getSharedPluginData(ns, key) {
       return this._shared.get(`${ns}/${key}`) ?? '';
@@ -1437,7 +1445,7 @@ export function createFigmaMock(options = {}) {
       this._shared = new Map();
     }
     setSharedPluginData(ns, key, value) {
-      this._shared.set(`${ns}/${key}`, value);
+      this._shared.set(`${ns}/${key}`, pluginDataEntry('setSharedPluginData', value));
     }
     getSharedPluginData(ns, key) {
       return this._shared.get(`${ns}/${key}`) ?? '';

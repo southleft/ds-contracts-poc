@@ -87,6 +87,7 @@ import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import { FINGERPRINT_SRC } from '../core/canvas-fingerprint.js';
+import { SNAPSHOT_STORAGE_SRC } from '../core/canvas-snapshot-storage.js';
 import { compileMockCanvas, variantNodesOf, type FigmaNodeLike, type MockCanvas } from './variant-drift.js';
 
 const ROOT = process.cwd();
@@ -94,6 +95,8 @@ const PLUGIN = path.join(ROOT, 'parity', 'extract-figma.plugin.js');
 const FIXTURES = path.join(ROOT, 'parity', 'fixtures', 'variant-drift');
 const BEGIN = '// >>> BEGIN FINGERPRINT_SRC (generated from core/canvas-fingerprint.ts — do not edit)';
 const END = '// <<< END FINGERPRINT_SRC';
+const STORAGE_BEGIN = '// >>> BEGIN SNAPSHOT_STORAGE_SRC (generated from core/canvas-snapshot-storage.ts — do not edit)';
+const STORAGE_END = '// <<< END SNAPSHOT_STORAGE_SRC';
 
 /** The three sets the fixtures carry. AccordionItem is the subject: its
  *  State=Closed variant has a nested `trigger` FRAME with a real auto-layout
@@ -122,7 +125,11 @@ const embed = (): void => {
   const start = src.indexOf(BEGIN);
   const end = src.indexOf(END);
   if (start < 0 || end < 0) fail('parity/extract-figma.plugin.js has no FINGERPRINT_SRC marker block');
-  const next = `${src.slice(0, start + BEGIN.length)}\n${FINGERPRINT_SRC.trim()}\n${src.slice(end)}`;
+  const withFingerprint = `${src.slice(0, start + BEGIN.length)}\n${FINGERPRINT_SRC.trim()}\n${src.slice(end)}`;
+  const storageStart = withFingerprint.indexOf(STORAGE_BEGIN);
+  const storageEnd = withFingerprint.indexOf(STORAGE_END);
+  if (storageStart < 0 || storageEnd < storageStart) fail('parity extractor has no SNAPSHOT_STORAGE_SRC marker block');
+  const next = `${withFingerprint.slice(0, storageStart + STORAGE_BEGIN.length)}\n${SNAPSHOT_STORAGE_SRC.trim()}\n${withFingerprint.slice(storageEnd)}`;
   if (next === src) {
     console.log('  §0 embed — already byte-identical, nothing to do.');
     return;
@@ -141,6 +148,9 @@ const checkEmbed = (): void => {
     block === FINGERPRINT_SRC.trim(),
     `§0 the inlined copy is BYTE-IDENTICAL to core/canvas-fingerprint.ts's FINGERPRINT_SRC — a private twin is how the transport starts computing a different hash than the stamp it compares against (embedded ${block.length} chars, module ${FINGERPRINT_SRC.trim().length}; run: npx tsx parity/variant-drift-check.ts --embed)`,
   );
+  const storageStart = src.indexOf(STORAGE_BEGIN);
+  const storageEnd = src.indexOf(STORAGE_END);
+  assert(storageStart >= 0 && storageEnd > storageStart && src.slice(storageStart + STORAGE_BEGIN.length, storageEnd).trim() === SNAPSHOT_STORAGE_SRC.trim(), '§0 snapshot storage runtime is byte-identical to the shared source');
   // Extraction performs its own preload because dsLoadVarNames deliberately
   // swallows lookup errors for generation compatibility. Evidence collection
   // must retain that failure instead of blessing an empty map as loaded.
@@ -152,7 +162,7 @@ const checkEmbed = (): void => {
   );
   assert(
     src.includes("getSharedPluginData('ds_contracts', 'canvasFingerprint')") &&
-      src.includes("getSharedPluginData('ds_contracts', 'canvasSnapshot')"),
+      src.includes("dsReadCanvasSnapshot(node, 'canvasSnapshot')"),
     '§0 the plugin reads BOTH stamps back off the canvas (this was `grep -c getSharedPluginData` = 0 before this round)',
   );
   assert(
