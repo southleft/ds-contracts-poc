@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeAuthoredInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, nativeProgressRoutes, readCurrentNativeInspection } from './native-inspection-poll.js';
 
 const connection = {paired:true, started:true, finished:false};
 const root = {operation:{id:'root-id', phase:'awaiting-native-result'}, connection};
@@ -183,4 +183,25 @@ test('a compact parent completing after active reference or ownership changed ca
   let active={...requested};active={...requested,ownershipId:otherOwner};
   const duringPublication=nativeInspectionScopeMatches(requested,active)?mergeNativeComparisonInspection(original,checked):original;
   assert.equal(duringPublication,original,'the state updater rechecks scope after parsing');
+});
+
+test('compact authored preparation keeps unrelated rows and rejects stale scope or foreign identity',async()=>{
+  const authored={...preparedRoot,kind:'authored',authoredSourceReviewIdentity:{requestRevision:'retained'}};
+  const checked=nativeAuthoredInspectionFromResponse<typeof authored>({operations:[authored]},'large',rootOwner);
+  assert.equal(checked,authored);
+  const unrelated={...preparedRoot,operation:{...preparedRoot.operation,id:'20000000-0000-4000-8000-000000000003'}};
+  const requested={referenceId:'a'.repeat(64),ownershipId:rootOwner};
+  let revision=0;let finish!:(value:typeof authored[])=>void;
+  const old=readCurrentNativeInspection(()=>new Promise<typeof authored[]>(resolve=>{finish=resolve;}),()=>revision);
+  revision++;let displayed=mergeNativeComparisonInspection([unrelated],checked);finish([]);
+  assert.equal(await old,undefined);assert.deepEqual(displayed,[unrelated,authored]);
+  const refused={...authored,operation:{...authored.operation,sourceCurrent:false,problems:['source-changed']}};
+  const stale=nativeAuthoredInspectionFromResponse<typeof authored>({operations:[refused]},'large',rootOwner);
+  displayed=mergeNativeComparisonInspection(displayed,stale);assert.equal(displayed.length,2);assert.equal(displayed[1].operation.sourceCurrent,false);
+  for(const active of [{...requested,referenceId:'b'.repeat(64)},{...requested,ownershipId:'20000000-0000-4000-8000-000000000004'}])assert.equal(nativeInspectionScopeMatches(requested,active),false);
+  for(const value of [null,{}, {operation:authored},{operations:[]},{operations:[authored,authored]},
+    {operations:[{...authored,kind:'root'}]},{operations:[{...authored,caseId:'other'}]},
+    {operations:[{...authored,ownershipId:'20000000-0000-4000-8000-000000000004'}]},
+    {operations:[{...authored,operation:{...authored.operation,sourceCurrent:undefined}}]}])
+    assert.throws(()=>nativeAuthoredInspectionFromResponse(value,'large',rootOwner),/authored response unavailable/);
 });

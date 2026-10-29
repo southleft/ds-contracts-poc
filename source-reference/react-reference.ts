@@ -1159,7 +1159,19 @@ export function createReactReferenceService(
           } else if (authoredNativeRoute) {
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');
-            jobs.prepare(selectReactAuthoredNativeRequest(repoRoot,job.report(),authoredNativeRoute[2]));
+            const request = selectReactAuthoredNativeRequest(repoRoot,job.report(),authoredNativeRoute[2]);
+            const prepared = jobs.prepare(request);
+            if (req.headers.prefer === 'return=minimal') {
+              const operation = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
+                const rows = jobs.listReact(reference!.id, undefined, undefined, {operationId:prepared.id});
+                if (rows.length !== 1 || rows[0].kind !== 'authored' || rows[0].caseId !== request.caseId ||
+                    rows[0].ownershipId !== request.ownership.id || rows[0].operation.id !== prepared.id)
+                  throw Error('react-native-inspection-ambiguous');
+                return readNativeInspectionRow(rows[0],Date.now());
+              }));
+              res.setHeader('Preference-Applied','return=minimal');
+              json(res,200,{operations:[operation]});return;
+            }
           } else if (nativeRoute?.[2]) {
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');

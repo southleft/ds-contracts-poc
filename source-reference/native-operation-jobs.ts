@@ -1,3 +1,4 @@
+import {createNativeJournalReplayMemo} from './native-journal-replay-memo.js';
 import {withObservedFamilyPreparation,withObservedFamilyCommandPreparation,assertOutsideObservedFamilyCommandPreparation} from './react-observed-family.js';
 import {isReactObservedFamilyNativeRequest,reactObservedFamilyReservation,prepareReactObservedFamilyNativePlan,type ReactObservedFamilyNativeRequest} from './react-observed-family-native.js';
 import {isReactAuthoredOperationRequest as isReactAuthoredNativeRequest,reactAuthoredNativeReservation,type ReactAuthoredStateApiNativeRequest,
@@ -1073,7 +1074,10 @@ export function createNativeOperationJobs(
     if (!readSnapshot) return evidenceReadOnce(evidenceReadScope,key,read);
     return readSnapshotValue(readSnapshot,key,read);
   }
-  const loadFresh = (id: string, baselineRevision?: string) => {
+  type LoadedJournal = {header:Header;plan:Plan;script:string;state:State;events:Event[];previous:string;fingerprint:string};
+  const journalReplayMemo=createNativeJournalReplayMemo<LoadedJournal>();
+  const loadFresh = (id: string, baselineRevision?: string):LoadedJournal => {
+   try {
     if (baselineRevision !== undefined && !HASH.test(baselineRevision)) fail('baseline-revision-invalid');
     directories();
     ensure(dir(id));
@@ -1104,14 +1108,6 @@ export function createNativeOperationJobs(
       sha(scriptBytes) !== header.tokenScriptSha256
     )
       fail("artifact-changed");
-    const plan = JSON.parse(planBytes.toString()) as Plan;
-    validatePlan(
-      { ...evidencePins(header), plan },
-      id,
-      header.request,
-      header.policy.fileKey,
-    );
-    if (plan.revision !== header.planRevision) fail("compiled-plan-changed");
     // Historical commands are immutable evidence. Recompiling them with a new
     // writer must not prevent retention of a delayed native acknowledgement.
     // Fresh compilation is mandatory before any new creation is dispatched.
@@ -1120,24 +1116,48 @@ export function createNativeOperationJobs(
     const claimPath = path.join(dir(id), "creation.json");
     const claimBytes = present(claimPath) ? bytes(claimPath) : null;
     if (!!claimBytes !== !!entries.length) fail("creation-journal-incomplete");
-    const claim = claimBytes ? JSON.parse(claimBytes.toString()) : null;
     const componentClaimPath = path.join(dir(id), "component-creation.json");
     const componentClaimBytes = present(componentClaimPath)
       ? bytes(componentClaimPath)
       : null;
-    const componentClaim = componentClaimBytes
-      ? JSON.parse(componentClaimBytes.toString())
-      : null;
     const recoveryClaimPath=path.join(dir(id),"comparison-recovery.json");
-    const recoveryClaim=present(recoveryClaimPath)?JSON.parse(bytes(recoveryClaimPath).toString()):null;
+    const recoveryClaimBytes=present(recoveryClaimPath)?bytes(recoveryClaimPath):null;
     const libraryReplacementClaimPath=path.join(dir(id),'library-replacement.json');
-    const libraryReplacementClaim=present(libraryReplacementClaimPath)?JSON.parse(bytes(libraryReplacementClaimPath).toString()):null;
-    const laterLibraryClaims=Object.fromEntries(readdirSync(dir(id)).filter(n=>/^library-replacement-[a-f0-9]{64}\.json$/.test(n))
-      .map(n=>['sha256:'+n.slice('library-replacement-'.length,-5),JSON.parse(bytes(path.join(dir(id),n)).toString())]));
+    const libraryReplacementClaimBytes=present(libraryReplacementClaimPath)?bytes(libraryReplacementClaimPath):null;
+    const directoryEntries=readdirSync(dir(id));
+    const laterLibraryClaimBytes=directoryEntries.filter(n=>/^library-replacement-[a-f0-9]{64}\.json$/.test(n))
+      .map(n=>[n,bytes(path.join(dir(id),n))] as const);
     const repairClaimPath=path.join(dir(id),"comparison-repair.json");
-    const repairClaim=present(repairClaimPath)?JSON.parse(bytes(repairClaimPath).toString()):null;
-    const revisionRepairClaims=Object.fromEntries(readdirSync(dir(id)).filter(name=>/^comparison-repair-[a-f0-9]{64}\.json$/.test(name)).sort()
-      .map(name=>['sha256:'+name.slice(18,-5),JSON.parse(bytes(path.join(dir(id),name)).toString())]));
+    const repairClaimBytes=present(repairClaimPath)?bytes(repairClaimPath):null;
+    const revisionRepairClaimBytes=directoryEntries.filter(n=>/^comparison-repair-[a-f0-9]{64}\.json$/.test(n)).sort()
+      .map(n=>[n,bytes(path.join(dir(id),n))] as const);
+    // Reopen and hash ALL bytes on every call. No mtime/inode or previous
+    // freshness verdict authorizes reuse; renamed/extra event files change key.
+    const eventBytes=entries.map(file=>({file,data:bytes(path.join(dir(id),"events",file))}));
+    const replayKey=id+':'+sha(encode({directoryEntries,header:sha(headerBytes),plan:sha(planBytes),script:sha(scriptBytes),
+      claim:claimBytes?sha(claimBytes):null,componentClaim:componentClaimBytes?sha(componentClaimBytes):null,
+      recovery:recoveryClaimBytes?sha(recoveryClaimBytes):null,replacement:libraryReplacementClaimBytes?sha(libraryReplacementClaimBytes):null,
+      repair:repairClaimBytes?sha(repairClaimBytes):null,
+      later:laterLibraryClaimBytes.map(([name,data])=>[name,sha(data)]),
+      revisions:revisionRepairClaimBytes.map(([name,data])=>[name,sha(data)]),
+      events:eventBytes.map(({file,data})=>[file,sha(data)])}));
+    if(baselineRevision===undefined) {const saved=journalReplayMemo.get(replayKey);if(saved)return saved;}
+    journalReplayMemo.clear();
+    const plan = JSON.parse(planBytes.toString()) as Plan;
+    validatePlan(
+      { ...evidencePins(header), plan },
+      id,
+      header.request,
+      header.policy.fileKey,
+    );
+    if (plan.revision !== header.planRevision) fail("compiled-plan-changed");
+    const claim = claimBytes ? JSON.parse(claimBytes.toString()) : null;
+    const componentClaim = componentClaimBytes ? JSON.parse(componentClaimBytes.toString()) : null;
+    const recoveryClaim=recoveryClaimBytes?JSON.parse(recoveryClaimBytes.toString()):null;
+    const libraryReplacementClaim=libraryReplacementClaimBytes?JSON.parse(libraryReplacementClaimBytes.toString()):null;
+    const laterLibraryClaims=Object.fromEntries(laterLibraryClaimBytes.map(([name,data])=>['sha256:'+name.slice('library-replacement-'.length,-5),JSON.parse(data.toString())]));
+    const repairClaim=repairClaimBytes?JSON.parse(repairClaimBytes.toString()):null;
+    const revisionRepairClaims=Object.fromEntries(revisionRepairClaimBytes.map(([name,data])=>['sha256:'+name.slice(18,-5),JSON.parse(data.toString())]));
     const events: Event[] = [];
     const digests: string[] = [];
     const fingerprintOf = () => sha(encode({
@@ -1164,7 +1184,7 @@ export function createNativeOperationJobs(
     for (const [sequence, file] of entries.entries()) {
       if (file !== `${String(sequence).padStart(8, "0")}.json`)
         fail("journal-sequence-invalid");
-      const data = bytes(path.join(dir(id), "events", file));
+      const data = eventBytes[sequence].data;
       const event = JSON.parse(data.toString()) as Event;
       if (
         !object(event) ||
@@ -1433,7 +1453,14 @@ export function createNativeOperationJobs(
       return {header, plan, script, state: pinned.state, events: events.slice(0,pinned.count),
         previous: pinned.previous, fingerprint: baselineRevision};
     }
-    return { header, plan, script, state, events, previous, fingerprint };
+    const result={ header, plan, script, state, events, previous, fingerprint };
+    if(baselineRevision===undefined)journalReplayMemo.put(replayKey,result,
+      headerBytes.length+planBytes.length+scriptBytes.length+(claimBytes?.length??0)+(componentClaimBytes?.length??0)+
+      (recoveryClaimBytes?.length??0)+(libraryReplacementClaimBytes?.length??0)+(repairClaimBytes?.length??0)+
+      laterLibraryClaimBytes.reduce((n,[,b])=>n+b.length,0)+revisionRepairClaimBytes.reduce((n,[,b])=>n+b.length,0)+
+      eventBytes.reduce((n,e)=>n+e.data.length,0));
+    return result;
+   }catch(error){journalReplayMemo.clear();throw error;}
   };
   type Loaded = ReturnType<typeof loadFresh>;
   const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));

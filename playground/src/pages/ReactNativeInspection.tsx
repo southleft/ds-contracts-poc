@@ -3,7 +3,7 @@ import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
+import { mergeNativeComparisonInspection, nativeComparisonInspectionFromResponse, nativeInspectionScopeMatches, nativeRootInspectionFromResponse, nativeAuthoredInspectionFromResponse, nativeDeliveryPendingFromAcknowledgement, nativePollNeedsRefresh, readCurrentNativeInspection } from './native-inspection-poll';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -254,16 +254,19 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     const compact = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/(start|retry-observation)$/.exec(route);
     const compactComparison = /^native-operation\/([a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})\/compare-case\/([a-z-]+)$/.exec(route);
     const compactRoot = /^native\/([a-z-]+)$/.exec(route);
+    const compactAuthored = /^native-authored\/([a-z-]+)$/.exec(route);
     const requestedScope = {referenceId,ownershipId:ownership?.id};
     try {
       if (compactRoot && !requestedScope.ownershipId) throw Error('Native root response unavailable. Refresh the saved inspection.');
-      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact || compactComparison || compactRoot ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
-      if (compactRoot && !nativeInspectionScopeMatches(requestedScope,activeScope.current)) return;
+      if (compactAuthored && !requestedScope.ownershipId) throw Error('Native authored response unavailable. Refresh the saved inspection.');
+      const response = await fetch(`${root}/${route}`, { method: 'POST', ...(compact || compactComparison || compactRoot || compactAuthored ? {headers:{Prefer:'return=minimal'}} : {}) }), result = await readSourceResponse(response);
+      if ((compactRoot || compactAuthored) && !nativeInspectionScopeMatches(requestedScope,activeScope.current)) return;
       if (!response.ok) throw Error(['native-update-caller-context-unavailable-before-refresh','react-authored-native-action-unqualified'].includes(result.reason)
         ? updateProblem(result.reason) : result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
-      if (compactRoot) {
-        const prepared = nativeRootInspectionFromResponse<Operation>(result,compactRoot[1],requestedScope.ownershipId);
-        // Keep unrelated saved operations; an older full read must not erase this root.
+      if (compactRoot || compactAuthored) {
+        const prepared = compactRoot ? nativeRootInspectionFromResponse<Operation>(result,compactRoot[1],requestedScope.ownershipId)
+          : nativeAuthoredInspectionFromResponse<Operation>(result,compactAuthored![1],requestedScope.ownershipId);
+        // Keep unrelated saved operations; an older full read must not erase this prepared row.
         deliveryRevision.current++;
         setRows(old => nativeInspectionScopeMatches(requestedScope,activeScope.current)
           ? mergeNativeComparisonInspection(old,prepared) : old);
@@ -310,7 +313,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         setInspectionSources(result.inspectionSources ?? {});
       }
     } catch (e) {
-      if (!compactRoot || nativeInspectionScopeMatches(requestedScope,activeScope.current)) setError(e instanceof Error ? e.message : String(e));
+      if (!(compactRoot || compactAuthored) || nativeInspectionScopeMatches(requestedScope,activeScope.current)) setError(e instanceof Error ? e.message : String(e));
     }
     finally { setBusy(false); }
   }
