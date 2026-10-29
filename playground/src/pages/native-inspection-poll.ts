@@ -76,6 +76,23 @@ export function nativeRootInspectionFromResponse<T extends ComparisonInspection>
   return row as unknown as T;
 }
 
+/** Keep one host-checked authored row without replacing unrelated inspections. */
+export function nativeAuthoredInspectionFromResponse<T extends ComparisonInspection>(value: unknown, caseId: string, ownershipId: string | undefined): T {
+  const record = (input: unknown): input is Record<string, unknown> => !!input && typeof input === 'object' && !Array.isArray(input);
+  const uuid = (input: unknown) => typeof input === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input);
+  const unavailable = () => Error('Native authored response unavailable. Refresh the saved inspection.');
+  if (!uuid(ownershipId) || !record(value) || Object.keys(value).join(',') !== 'operations' ||
+      !Array.isArray(value.operations) || value.operations.length !== 1 || !record(value.operations[0])) throw unavailable();
+  const row = value.operations[0];
+  if (row.kind !== 'authored' || row.caseId !== caseId || row.ownershipId !== ownershipId ||
+      row.parentOperationId !== undefined || row.sourceOperationId !== undefined ||
+      typeof row.fileKey !== 'string' || !row.fileKey || !record(row.operation) || !uuid(row.operation.id) ||
+      typeof row.operation.phase !== 'string' || !row.operation.phase || typeof row.operation.sourceCurrent !== 'boolean' ||
+      !Array.isArray(row.operation.problems) || !row.operation.problems.every(problem => typeof problem === 'string') ||
+      !record(row.connection) || ['paired','connected','started','finished'].some(key => typeof (row.connection as Record<string, unknown>)[key] !== 'boolean')) throw unavailable();
+  return row as unknown as T;
+}
+
 /** Replace only this checked child; keep unrelated rows and avoid duplicate entries on retry. */
 export function mergeNativeComparisonInspection<T extends {operation:{id:string}}>(rows: T[], comparison: T): T[] {
   return rows.some(row => row.operation.id === comparison.operation.id)
