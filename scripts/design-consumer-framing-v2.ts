@@ -16,7 +16,7 @@ export interface FrameBox {
   height: number;
 }
 import type {RenderExportProof} from "./design-consumer-render-export.js";
-import {validateNativeAnchorProof, type NativeAnchorProof} from "./design-consumer-render-anchor.js";
+import {validateNativeAnchorProof, isSourceAnchorKind, type SourceAnchorProof} from "./design-consumer-render-anchor.js";
 
 export interface ConsumerFrame {
   raster?: {kind:"browser-paint-extent-v1";paint:FrameBox};
@@ -32,7 +32,7 @@ export interface FigmaFrame {
   pngSha256: string;
   /** Only attached by a producer that explicitly requested full node bounds.
    * Earlier receipts retain their original absolute-span interpretation. */
-  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 } | {kind:"figma-rest-paired-render-v1";scale:1;proof:RenderExportProof} | {kind:"figma-rest-source-opaque-anchor-v1";scale:1;proof:NativeAnchorProof};
+  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 } | {kind:"figma-rest-paired-render-v1";scale:1;proof:RenderExportProof} | {kind:SourceAnchorProof['kind'];scale:1;proof:SourceAnchorProof};
 }
 export const FIGMA_REST_FULL_BOUNDS = {
   kind: "figma-rest-full-bounds-v1",
@@ -182,13 +182,13 @@ export function alignRecordedFrames(
   if(figma.refused)return {refused:figma.refused};
   const expanded=consumer.raster?.kind==="browser-paint-extent-v1";
   if(consumer.raster&&(!expanded||!validBox(consumer.raster.paint)))return {refused:"consumer-raster-model-unsupported"};
-  const anchored=figma.raster?.kind==="figma-rest-source-opaque-anchor-v1";
+  const anchored=isSourceAnchorKind(figma.raster?.kind);
   const paired=figma.raster?.kind==="figma-rest-paired-render-v1"||anchored;
   if(figma.raster?.kind==="figma-rest-paired-render-v1"){const proof=figma.raster!.kind==="figma-rest-paired-render-v1"?figma.raster!.proof:null;
     if(!proof||!proof.version||!proof.nodeId||!validBox(proof.layout)||!validBox(proof.render)||!proof.layoutInRender||!sameBox(proof.layout,figma.layout)||!sameBox(proof.render,figma.render)||proof.renderSha256!==figma.pngSha256||!/^([a-f0-9]{64})$/.test(proof.layoutSha256)||proof.layoutInRender.x!==figma.layout.x-figma.render.x||proof.layoutInRender.y!==figma.layout.y-figma.render.y||!Number.isInteger(proof.paintedOverlapPixels)||proof.paintedOverlapPixels<=0||!Number.isInteger(proof.overlapPixels)||proof.overlapPixels<proof.paintedOverlapPixels)
       return {refused:"figma-render-origin-proof-mismatch"};
   }
-  if(anchored&&figma.raster?.kind==="figma-rest-source-opaque-anchor-v1"&&!validateNativeAnchorProof(figma.raster.proof,figmaBytes,figma.layout,figma.render))
+  if(figma.raster&&isSourceAnchorKind(figma.raster.kind)&&(!("proof" in figma.raster)||!figma.raster.proof||typeof figma.raster.proof!=="object"||!("kind" in figma.raster.proof)||figma.raster.proof.kind!==figma.raster.kind||!validateNativeAnchorProof(figma.raster.proof,figmaBytes,figma.layout,figma.render)))
     return {refused:"figma-render-anchor-proof-mismatch"};
   if (consumer.deviceScaleFactor !== 1)
     return { refused: "consumer-scale-not-one" };

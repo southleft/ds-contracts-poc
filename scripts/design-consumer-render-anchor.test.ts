@@ -29,7 +29,7 @@ function synthetic(two=false){
 }
 function proofFor(s:ReturnType<typeof synthetic>,layout=s.layout,render=s.render):NativeAnchorProof{
  const q=qualifySourceRenderBoundsExport(s.source,structuredClone(s.source),'root',layout,render,s.requests);
- assert('proof'in q,JSON.stringify(q));assert('kind'in q.proof);return q.proof;
+ assert('proof'in q,JSON.stringify(q));assert('kind'in q.proof);assert(q.proof.kind==='figma-rest-source-opaque-anchor-v1');return q.proof;
 }
 function edit(bytes:Buffer,fn:(p:PNG)=>void){const p=PNG.sync.read(bytes);fn(p);return PNG.sync.write(p);}
 function shifted(bytes:Buffer,dx:number,dy:number){const p=PNG.sync.read(bytes);return png(p.width,p.height,(x,y)=>{
@@ -323,5 +323,124 @@ test('source anchor change preserves equivalent legacy absent-raster and full-bo
  for(const raster of [undefined,{kind:'figma-rest-full-bounds-v1' as const,scale:1 as const}]){
   const f=equivalentAnchorFixture();f.frames.one.raster=raster;f.frames.two.raster=raster;
   assert.equal(f.inspect().length,1);
+ }
+});
+
+/** Root-owned export, positioned off the global 1/64 lattice while every
+ * relative source shape and the recorded export offset stay exact. */
+function rootSynthetic(x=37+1/8192,y=91+1/8192){
+ const s=synthetic();s.doc.fills=[structuredClone(paint)];s.doc.background=structuredClone(s.doc.fills);
+ s.doc.clipsContent=true;s.doc.cornerRadius=2;
+ s.doc.effects=structuredClone(s.doc.children[0].effects);s.doc.children[0].effects=[];
+ for(const n of [s.doc,...s.doc.children])for(const k of ['absoluteBoundingBox','absoluteRenderBounds']){
+  n[k].x+=x;n[k].y+=y;
+ }
+ return s;
+}
+function rootProof(s=rootSynthetic()){
+ const q=qualifySourceRenderBoundsExport(s.source,structuredClone(s.source),'root',s.layout,s.render,s.requests);
+ assert('proof'in q,JSON.stringify(q));assert('kind'in q.proof&&q.proof.kind==='figma-rest-source-root-opaque-anchor-v1');
+ return q.proof;
+}
+
+test('root-owned opaque proof preserves exact origin-relative lattice and original source',()=>{
+ const s=rootSynthetic(),before=structuredClone(s.source),p=rootProof(s);
+ assert.deepEqual(s.source,before);assert.deepEqual(p.sourceDocument,s.doc);
+ assert.deepEqual(p.coordinateBasis,{kind:'exact-layout-origin-v1',x:s.doc.absoluteBoundingBox.x,y:s.doc.absoluteBoundingBox.y});
+ assert.equal(p.anchor.ownerNodeId,'root');assert.equal(p.anchor.selectionRule,'root-opaque-round-rect-closed-cells-v1');
+ assert.deepEqual(p.layoutInRender,{x:1,y:1});assert(validateNativeAnchorProof(p,s.render,p.layout,p.render));
+ // Translating the entire source without snapping preserves selected cells.
+ const other=rootProof(rootSynthetic(1/4096,-100+1/8192));
+ assert.equal(other.anchor.coordinateSha256,p.anchor.coordinateSha256);
+ assert.equal(other.anchor.rgbaSha256,p.anchor.rgbaSha256);
+});
+
+test('root route refuses unsupported paint, masks, transforms, clipping and inexact local geometry',()=>{
+ const mutations:((s:ReturnType<typeof rootSynthetic>)=>void)[]=[
+  s=>s.doc.clipsContent=false,s=>s.doc.opacity=0.5,s=>s.doc.isMask=true,
+  s=>s.doc.strokes=[structuredClone(paint)],s=>s.doc.fills.push(structuredClone(paint)),
+  s=>s.doc.background[0].color.r=0,s=>s.doc.fills[0].opacity=0.99,
+  s=>s.doc.fills[0].blendMode='MULTIPLY',s=>s.doc.cornerRadius=0.1,
+  s=>s.doc.children[0].isMask=true,s=>s.doc.children[0].maskType='ALPHA',
+  s=>s.doc.children[0].effects=[{type:'LAYER_BLUR',radius:1}],
+  s=>s.doc.children[0].relativeTransform=[[1,0.1,0],[0,1,0]],
+  s=>s.doc.children[0].absoluteRenderBounds.x-=10,
+  s=>s.doc.effects[0].type='INNER_SHADOW',s=>s.doc.effects[0].spread=NaN,
+  s=>s.doc.absoluteBoundingBox.width+=1/8192,
+  s=>s.doc.children.push(structuredClone(s.doc.children[0])),
+ ];
+ for(const mutate of mutations){const s=rootSynthetic();mutate(s);const q=qualifySourceRenderBoundsExport(s.source,structuredClone(s.source),'root',s.layout,s.render,s.requests);assert('refused'in q,JSON.stringify(mutate));}
+ const s=rootSynthetic();s.doc.children[0].absoluteTransform=[[1,0,s.doc.children[0].absoluteBoundingBox.x],[0,1,s.doc.children[0].absoluteBoundingBox.y]];
+ s.doc.children[0].relativeTransform=[[1,0,0],[0,1,0]];assert(rootProof(s));
+ s.doc.children[0].relativeTransform[0][2]=1/8192;refuse(s,'render-anchor-source-unsupported');
+});
+
+test('root proof replays kind, exact basis, full source and every original render byte',()=>{
+ const s=rootSynthetic(),p=rootProof(s);
+ const changes:((p:any)=>void)[]=[
+  p=>p.kind='figma-rest-source-opaque-anchor-v1',p=>delete p.coordinateBasis,
+  p=>p.coordinateBasis.kind='rounded',p=>p.coordinateBasis.x+=1/8192,
+  p=>p.coordinateBasis.y=Math.round(p.coordinateBasis.y),p=>p.anchor.selectionRule='opaque-round-rect-closed-cells-v1',
+  p=>p.anchor.ownerNodeId='a',p=>p.anchor.pixels--,p=>p.requests.layout.version='other',
+  p=>p.sourceDocument.children[0].effects.push({type:'LAYER_BLUR',radius:1}),
+ ];
+ for(const change of changes){const q=structuredClone(p);change(q);assert.equal(validateNativeAnchorProof(q,s.render,p.layout,p.render),false);}
+ const bad=edit(s.render,bytes=>bytes.data[0]^=1);assert.equal(validateNativeAnchorProof(p,bad,p.layout,p.render),false);
+ const badInterior=edit(s.render,bytes=>bytes.data[(6*bytes.width+5)*4]^=1);
+ assert.deepEqual(qualifySourceRenderBoundsExport(s.source,s.source,'root',s.layout,badInterior,s.requests),{refused:'render-anchor-pixel-mismatch'});
+ const shiftedRender=shifted(s.render,1,0);assert('refused'in qualifySourceRenderBoundsExport(s.source,s.source,'root',s.layout,shiftedRender,s.requests));
+});
+
+test('root proof retains complete unmasked raster scoring including exterior shadow pixels',()=>{
+ const s=rootSynthetic(),p=rootProof(s),bytes=s.render;
+ const consumer:ConsumerFrame={layout:{x:1,y:1,width:12,height:12},capture:{x:0,y:0,width:14,height:14},deviceScaleFactor:1,pngSha256:imageSha256(bytes),raster:{kind:'browser-paint-extent-v1',paint:{x:0,y:0,width:14,height:14}}};
+ const figma:FigmaFrame={layout:p.layout,render:p.render,pngSha256:p.renderSha256,raster:{kind:p.kind,scale:1,proof:p}};
+ const missing=edit(bytes,png=>{for(let y=0;y<14;y++)for(let x=0;x<14;x++)if(x===0||y===0||x===13||y===13)png.data.fill(0,(y*14+x)*4,(y*14+x)*4+4);});
+ for(const bg of [0,255] as const){
+  const exact=alignRecordedFrames(bytes,bytes,consumer,figma,bg);assert('aligned'in exact);assert.equal(diffPair(exact.aligned,[]).unmaskedPct,0);
+  const pair=alignRecordedFrames(missing,bytes,{...consumer,pngSha256:imageSha256(missing)},figma,bg);
+  assert('aligned'in pair);assert(diffPair(pair.aligned,[]).unmaskedPct>5);
+ }
+ assert.deepEqual(alignRecordedFrames(bytes,bytes,consumer,{...figma,raster:{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof:p}},0),{refused:'figma-render-anchor-proof-mismatch'});
+});
+
+test('root source equivalence independently replays exact kind, node identity and full exports',()=>{
+ const entries=['one','two'].map((id,i)=>{
+  const s=rootSynthetic(10+i*100+1/8192,20+i*100+1/8192);s.doc.id=id;s.doc.children[0].id=id+':child';
+  const source={version:'fixed',nodes:{[id]:{document:s.doc}}};
+  const q=qualifySourceRenderBoundsExport(source,structuredClone(source),id,s.layout,s.render,requests(id));
+  assert('proof'in q&&'kind'in q.proof&&q.proof.kind==='figma-rest-source-root-opaque-anchor-v1');
+  return {id,s,p:q.proof};
+ });
+ const cases=entries.map(({id},i)=>({key:i?'on':'off',nodeId:id,interaction:'none',props:{selected:!!i}}));
+ const images=Object.fromEntries(entries.map(({id,s})=>[id,s.render]));
+ const frames:Record<string,FigmaFrame>=Object.fromEntries(entries.map(({id,p})=>[id,{layout:p.layout,render:p.render,pngSha256:p.renderSha256,raster:{kind:p.kind,scale:1,proof:p}}]));
+ const inspect=()=>sourceEquivalentTransitions(cases,'selected',true,['off'],images,frames);
+ assert.equal(inspect().length,1);
+ const original=structuredClone(frames.two);frames.two.raster!.kind='figma-rest-source-opaque-anchor-v1';assert.deepEqual(inspect(),[]);frames.two=original;
+ const p=(frames.two.raster as any).proof;p.coordinateBasis.x+=1/8192;assert.deepEqual(inspect(),[]);p.coordinateBasis.x-=1/8192;
+ const changed=edit(images.two,png=>png.data[0]^=1);images.two=changed;frames.two.pngSha256=imageSha256(changed);assert.deepEqual(inspect(),[]);
+});
+
+
+test('root route preserves complete hidden descendant ID and structural inventory guards',()=>{
+ const hidden=()=>({id:'hidden',type:'FRAME',visible:false,children:[{id:'hidden-child',type:'FRAME',children:[]}]});
+ const good=rootSynthetic();good.doc.children.push(hidden());assert(rootProof(good));
+ for(const mutate of [
+  (n:any)=>n.children[0].id='a',
+  (n:any)=>n.children[0].children='missing-array',
+  (n:any)=>delete n.children[0].children,
+  (n:any)=>n.children.push({id:'hidden-child'}),
+ ]){const s=rootSynthetic(),n=hidden();mutate(n);s.doc.children.push(n);refuse(s,'render-anchor-source-unsupported');}
+});
+
+
+test('anchor consumers refuse null and primitive proof payloads without throwing',()=>{
+ const s=rootSynthetic(),p=rootProof(s),bytes=s.render;
+ const consumer:ConsumerFrame={layout:{x:1,y:1,width:12,height:12},capture:{x:0,y:0,width:14,height:14},deviceScaleFactor:1,pngSha256:imageSha256(bytes),raster:{kind:'browser-paint-extent-v1',paint:{x:0,y:0,width:14,height:14}}};
+ for(const kind of ['figma-rest-source-opaque-anchor-v1','figma-rest-source-root-opaque-anchor-v1'])for(const proof of [null,'proof',1,true,undefined]){
+  const frame={layout:p.layout,render:p.render,pngSha256:p.renderSha256,raster:{kind,scale:1,proof}} as any;
+  assert.deepEqual(alignRecordedFrames(bytes,bytes,consumer,frame,0),{refused:'figma-render-anchor-proof-mismatch'});
+  const f=equivalentAnchorFixture();(f.frames.one.raster as any).proof=proof;assert.deepEqual(f.inspect(),[]);
  }
 });
