@@ -4782,6 +4782,22 @@
           ],
           "additionalProperties": false
         },
+        "instanceAffineFill": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "boolean"
+            },
+            "height": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height"
+          ],
+          "additionalProperties": false
+        },
         "instanceAffineByProp": {
           "type": "object",
           "properties": {
@@ -6371,6 +6387,10 @@
                       "type": "number",
                       "exclusiveMinimum": 0
                     },
+                    "fillWidth": {
+                      "type": "boolean",
+                      "const": true
+                    },
                     "transform": {
                       "type": "array",
                       "items": [
@@ -6461,6 +6481,10 @@
                           },
                           "variantName": {
                             "type": "string"
+                          },
+                          "length": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
                           },
                           "transform": {
                             "type": "array",

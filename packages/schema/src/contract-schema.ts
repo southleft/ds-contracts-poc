@@ -2067,6 +2067,7 @@ const NonLineShapeSchema = z.strictObject({
 
 const NativeLineSchema = z.strictObject({
   length: z.number().positive(),
+  fillWidth: z.literal(true).optional(),
   transform: z.tuple([
     z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
     z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
@@ -2076,6 +2077,7 @@ const NativeLineSchema = z.strictObject({
   source: z.strictObject({ nodeId: z.string().min(1), parentId: z.string().min(1).optional() }).optional(),
   observedSources: z.array(z.strictObject({
     nodeId: z.string().min(1), parentId: z.string().min(1).optional(), variantName: z.string(),
+    length: z.number().positive().optional(),
     transform: z.tuple([z.tuple([z.number().finite(),z.number().finite(),z.number().finite()]),z.tuple([z.number().finite(),z.number().finite(),z.number().finite()])]),
   })).optional(),
 }).superRefine((line, ctx) => {
@@ -2238,6 +2240,7 @@ export function borderStyleDecls(
 export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
   if (shape.kind === 'line') {
     const box=nativeLineFootprint(shape.line);
+    if(shape.line.fillWidth)return ['width: 100%', 'height: 0px', 'display: block', 'overflow: visible', 'flex-shrink: 0', 'align-self: stretch'];
     return [`width: ${box.width}px`, `height: ${box.height}px`, 'display: block', 'overflow: visible', 'flex-shrink: 0'];
   }
   if (shape.kind === 'stroked-path') return [
@@ -2628,6 +2631,8 @@ export interface Part {
   /** Exact rigid flow allocation for a referenced component or a proven fixed
    * owned frame. Owned frames currently require invariant literal dimensions. */
   instanceAffine?: z.infer<typeof InstanceAffineSchema>;
+  /** Parent-owned live extent on an invariant, owned local frame. */
+  instanceAffineFill?: {width:boolean;height:boolean};
   instanceAffineByProp?: z.infer<typeof InstanceAffineByPropSchema>;
   instanceAffineLayout?: z.infer<typeof InstanceAffineLayoutSchema>;
   absolutePlacement?: { left: number; top: number };
@@ -3270,6 +3275,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** A2 grid (G2) — see the Part interface + validateGridPart. */
     placement: GridPlacementSchema.optional(),
     instanceAffine: InstanceAffineSchema.optional(),
+    instanceAffineFill: z.strictObject({width:z.boolean(),height:z.boolean()}).optional(),
     instanceAffineByProp: InstanceAffineByPropSchema.optional(),
     instanceAffineLayout: InstanceAffineLayoutSchema.optional(),
     absolutePlacement: z.strictObject({left: z.number().finite(), top: z.number().finite()}).optional(),
@@ -3802,6 +3808,12 @@ export const ContractSchema = z.strictObject({
   // Placement tables describe every plane of their named finite axes. A
   // missing row cannot inherit a different rectangle or an explicit false.
   const visitGeometry = (part: Part, path: Array<string | number>, nested: boolean) => {
+    if(part.instanceAffineFill){
+      const m=part.instanceAffine?.transform,fill=part.instanceAffineFill;
+      if(!nested||!m||part.component||part.instanceAffineByProp||part.instanceAffineLayout||part.shape||part.slot||part.repeat||
+        (!fill.width&&!fill.height)||m.some(row=>row.slice(0,2).some(v=>Math.abs(v-Math.round(v))>1e-6)))
+        ctx.addIssue({code:'custom',path:[...path,'instanceAffineFill'],message:'owned-affine-fill-unqualified'});
+    }
     if(part.instanceAffineLayout){
       const table=part.instanceAffineLayout,axes=absentVariantAxes(c);
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'instanceAffineLayout'],message});

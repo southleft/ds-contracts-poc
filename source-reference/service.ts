@@ -1066,6 +1066,13 @@ export function createReferenceService(
         }
         const request = {version:1,kind:'prepared-library-native',artifactId:preparedLibraryRoute[1],mode:selection.mode,brand:selection.brand};
         if (!isPreparedLibraryNativeRequest(request)) { json(res,400,{error:'Invalid library selection.'}); return; }
+        if (req.method === 'POST' && preparedLibraryRoute[2] === 'connection') {
+          if (active || candidateJobs.running || bindingJobs.running) throw Error('library-native-other-operation-running');
+          if (host.port !== '5181') throw Error('library-native-pairing-requires-port-5181');
+          const id = nativeJobs.preparedLibraryPairingOperation(request);
+          if (!id) throw Error('library-native-operation-unavailable');
+          json(res,200,{connection:nativeTransport.pair(id)}); return;
+        }
         const observedAt = Date.now();
         let operation = nativeJobs.forBaseline(preparedLibraryNativeReservation(request));
         if (req.method === 'POST') {
@@ -1074,10 +1081,6 @@ export function createReferenceService(
           else {
             if (!operation || operation.phase === 'evidence-unavailable' || operation.preparedLibrary?.artifactId !== request.artifactId)
               throw Error('library-native-operation-unavailable');
-            if (preparedLibraryRoute[2] === 'connection') {
-              if (host.port !== '5181') throw Error('library-native-pairing-requires-port-5181');
-              json(res,200,{connection:nativeTransport.pair(operation.id)}); return;
-            }
             if (preparedLibraryRoute[2] === 'start') nativeTransport.start(operation.id);
             else if(preparedLibraryRoute[2]==='review-replacement')nativeTransport.reviewLibraryReplacement(operation.id);
             else if(applying)nativeTransport.applyLibraryReplacement(operation.id,selection.reviewRevision as string);

@@ -210,6 +210,12 @@ export function validateContract(
     dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
   const seen = new Set<string>();
   for (const { name, path: p, part } of walkAnatomy(contract)) {
+    if(part.shape?.kind==='line'&&part.shape.line.fillWidth){
+      const parent=p.slice(1,-1).reduce<Part|undefined>((node,key)=>node?.parts?.[key],contract.anatomy[p[0]]);
+      if(!parent?.layout||parent.layout.direction!=='column'||!['flex','inline-flex'].includes(parent.layout.display??'flex')||parent.layoutByProp||parent.layoutByCombination||parent.component||part.layout||part.layoutByProp||part.layoutByCombination||part.absoluteGeometry||part.absoluteGeometryByCombination||part.absolutePlacement||part.placement||part.overlay||part.component||part.slot)
+        errors.push(`${contract.id}: part "${name}" horizontal-fill-line-parent-unqualified`);
+    }
+
     errors.push(...textByCombinationIssues(contract,part,p.length>1).map(issue=>`${contract.id}: part "${name}" ${issue}`));
     errors.push(...outsideStrokeIssues(part).map(issue => `${contract.id}: part "${name}" ${issue}`));
     if (part.strokeAlign === 'OUTSIDE' && (p.length === 1 ? rootElementsOf(contract) : [part.element ?? 'div']).some(element => VOID_ELEMENTS.has(element)))
@@ -759,11 +765,24 @@ export function validateContract(
       const competing=(h:Record<string,unknown>|undefined)=>Object.keys(h??{}).some(k=>dimensions.includes(k)||/^(min-|max-)?(inline-size|block-size)$|^margin|^padding|^border-(width|top-width|right-width|bottom-width|left-width)$/.test(k));
       const fixed=(['width','height'] as const).every(axis=>part.literals?.[axis]===`${size[axis]}px`);
       const restLiterals=Object.fromEntries(Object.entries(part.literals??{}).filter(([key])=>!['width','height'].includes(key)));
+      const fill=part.instanceAffineFill;
+      const horizontal=(parent?.layout?.direction??'row').startsWith('row');
+      const mainFill=fill&&(horizontal?fill.width:fill.height),crossFill=fill&&(horizontal?fill.height:fill.width);
+      if(fill&&((part.layout?.grow===true)!==!!mainFill||(part.layout?.alignSelf==='stretch')!==!!crossFill))
+        errors.push(`${contract.id}: part "${name}" owned-affine-fill-flow-unproven`);
+      // The shared FILL wrapper carries the flow class on both layers. Until
+      // paint is separated from that class, only neutral owned roots qualify;
+      // descendants keep their ordinary paint and opacity without duplication.
+      const neutralFillKeys=new Set(['element','description','layout','parts','tokens','literals','declared','states','declaredStates','visibleWhen','presenceByCombination','instanceAffine','instanceAffineFill']);
+      if(fill&&(Object.keys(part).some(key=>!neutralFillKeys.has(key))||
+        [part.tokens,part.literals,part.declared,...Object.values(part.states??{}),...Object.values(part.declaredStates??{})]
+        .some(record=>Object.entries(record??{}).some(([key,value])=>!['width','height','flex-shrink'].includes(key)&&!(key==='position'&&value==='relative')))))
+        errors.push(`${contract.id}: part "${name}" owned-affine-fill-paint-unqualified`);
       if(p.length===1 || !parent?.layout || !['flex','inline-flex'].includes(parent.layout.display??'flex') || parent.component ||
           !fixed || (part.element && !['div','span'].includes(part.element)) || (part.element==='span' && !part.layout) || competing(part.tokens) || competing(restLiterals) || competing(Object.fromEntries(Object.entries(part.declared??{}).filter(([k,v])=>k!=='position'||v!=='relative'))) ||
           part.tokensByProp || part.tokensByCombination || part.literalsByProp || part.literalsByCombination || part.stylesWhen ||
           Object.values(part.states??{}).some(competing) || Object.values(part.declaredStates??{}).some(competing) ||
-          part.instanceAffineByProp || part.instanceAffineLayout || part.layoutByProp || part.layoutByCombination || part.layout?.grow || part.layout?.alignSelf ||
+          part.instanceAffineByProp || part.instanceAffineLayout || part.layoutByProp || part.layoutByCombination || (!fill&&(part.layout?.grow || part.layout?.alignSelf)) ||
           part.slot || part.icon || part.text!==undefined || part.content || part.shape || part.mask || part.repeat || part.meter ||
           part.absoluteGeometry || part.absolutePlacement || part.absolutePlacementByCombination || part.placement || part.overlay)
         errors.push(`${contract.id}: part "${name}" owned-affine-host-unproven — needs a fixed local frame in ordinary flow with no competing geometry`);

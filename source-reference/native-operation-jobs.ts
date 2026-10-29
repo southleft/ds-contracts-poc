@@ -1804,6 +1804,23 @@ export function createNativeOperationJobs(
       };
     }
   };
+  /** Pairing can recover a retained operation after source drift. Authenticate
+   * its complete journal and exact reserved request, without a source verdict.
+   * The transport rechecks the journal; start and dispatch still require fresh
+   * source authentication before any native write. */
+  const preparedLibraryPairingOperation = (request: PreparedLibraryNativeRequest): string | null => {
+    if (!isPreparedLibraryNativeRequest(request)) fail('request-invalid');
+    if (!present(root)) return null;
+    directories();
+    const target = pointer(preparedLibraryNativeReservation(request));
+    if (!present(target)) return null;
+    const header = JSON.parse(bytes(target).toString()) as Header;
+    if (!object(header) || !UUID.test(header.id)) fail('header-invalid');
+    const loaded = load(header.id);
+    if (!same(loaded.header, header) || !isPreparedLibraryNativeRequest(loaded.header.request) ||
+        !same(loaded.header.request, request)) fail('prepared-library-pairing-request-mismatch');
+    return loaded.header.id;
+  };
   const dispatch = (
     id: string,
     phase: NativeOperationPhase,
@@ -2061,6 +2078,7 @@ export function createNativeOperationJobs(
     prepare,
     get,
     forBaseline,
+    preparedLibraryPairingOperation,
     dispatch: (id: string, phase: NativeOperationPhase) => dispatch(id, phase),
     reviewLibraryReplacement:(id:string)=>dispatch(id,'library-replacement-readback'),
     applyLibraryReplacement:(id:string,revision:string)=>dispatch(id,'library-replacement-apply',false,revision),

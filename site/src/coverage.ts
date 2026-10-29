@@ -836,10 +836,10 @@ reg("shape", "stroked-paths", [
 ]);
 
 reg("shape", "native-lines", [
-  "shape.line", "shape.line.length", "shape.line.transform", "shape.line.cap", "shape.line.align",
+  "shape.line", "shape.line.length", "shape.line.transform", "shape.line.cap", "shape.line.align", "shape.line.fillWidth",
   "shape.line.source", "shape.line.source.nodeId", "shape.line.source.parentId",
   "shape.line.observedSources", "shape.line.observedSources.nodeId", "shape.line.observedSources.parentId",
-  "shape.line.observedSources.variantName", "shape.line.observedSources.transform",
+  "shape.line.observedSources.variantName", "shape.line.observedSources.transform", "shape.line.observedSources.length",
 ]);
 
 // --- Composition -----------------------------------------------------------
@@ -940,6 +940,7 @@ export const branchLink = (key: string): string | undefined => {
 
 reg("layout", "absolute-component-placement", ["part.instanceAffineByProp", "part.instanceAffineByProp.prop", "part.instanceAffineByProp.map"]);
 
+reg("layout", "absolute-component-placement", ["part.instanceAffineFill", "part.instanceAffineFill.width", "part.instanceAffineFill.height"]);
 reg("layout", "absolute-component-placement", ["part.instanceAffineLayout", "part.instanceAffineLayout.props", "part.instanceAffineLayout.rows", "part.instanceAffineLayout.rows.values", "part.instanceAffineLayout.rows.geometry", "part.instanceAffineLayout.rows.geometry.localSize", "part.instanceAffineLayout.rows.geometry.localSize.width", "part.instanceAffineLayout.rows.geometry.localSize.height", "part.instanceAffineLayout.rows.geometry.transform", "part.instanceAffineLayout.rows.fill", "part.instanceAffineLayout.rows.fill.width", "part.instanceAffineLayout.rows.fill.height"]);
 
 reg("anatomy", "fill-stack", [

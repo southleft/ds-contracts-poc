@@ -1,3 +1,4 @@
+import {axisReflectedFilledPath} from '../../../packages/schema/src/axis-reflected-filled-path.js';
 import {restTextAppearance} from './text-appearance.js';
 import {nestedInstanceProperties} from './nested-instance-properties.js';
 import {selectedStrokeDrawing} from './selected-stroke.js';
@@ -16,6 +17,7 @@ import { mapStraightVector } from './straight-vector.js';
 import { mapPaintedOutline } from './painted-outline.js';
 import { observeInstanceVector } from './observed-vector.js';
 import { nativeLineIssue, type NativeLineGeometry } from '../../../packages/schema/src/native-line.js';
+import { filledPathRigidRotation } from '../../../packages/schema/src/rigid-filled-path.js';
 import { filledPathIssue } from '../../../scripts/contract-schema.js';
 /**
  * REST → dump v1: map a Figma REST API nodes response onto the Plugin-API
@@ -1620,7 +1622,14 @@ function mapShape(
       return undefined;
     }
     const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
-    return { kind: 'line', width: width!, height: 0, ...(constraints ? { constraints } : {}), line: { ...line,
+    const padding:[number,number,number,number]=[parent?.paddingTop??0,parent?.paddingRight??0,parent?.paddingBottom??0,parent?.paddingLeft??0];
+    const flow=parent?.layoutMode==='VERTICAL'&&node.layoutSizingHorizontal==='FILL'&&node.layoutPositioning!=='ABSOLUTE'&&line.cap==='NONE'&&line.align==='CENTER'&&
+      parent.size&&Number.isFinite(parent.size.x)&&parent.size.x>0&&Number.isFinite(parent.size.y)&&parent.size.y>=0&&
+      padding.every(v=>Number.isFinite(v)&&v>=0)&&line.transform[0][0]===1&&line.transform[0][1]===0&&line.transform[1][0]===0&&line.transform[1][1]===1&&
+      line.transform[0][2]===padding[3]&&Math.fround(width!)===Math.fround(parent.size.x-padding[1]-padding[3])&&
+      !node.isMask&&!(node.effects??[]).some(e=>e.visible!==false)&&!(parent.strokes??[]).some(p=>p.visible!==false)&&parent.clipsContent!==true
+      ? {kind:'horizontal-fill-line-v1' as const,nodeId:node.id,parentId:parent.id,parentWidth:parent.size.x,parentHeight:parent.size.y,padding,length:width!,transform:line.transform.map(r=>[...r])}:undefined;
+    return { kind: 'line', width: width!, height: 0, ...(flow?{lineFlow:flow}:{}), ...(constraints ? { constraints } : {}), line: { ...line,
       transform: line.transform.map(row => [...row]) as NativeLineGeometry['transform'],
       source: { nodeId: node.id, ...(parent ? { parentId: parent.id } : {}) } } };
   }
@@ -1629,10 +1638,11 @@ function mapShape(
     ['UNION','INTERSECT','SUBTRACT','EXCLUDE'].includes(node.booleanOperation ?? '');
   if (node.type === 'VECTOR' || combinedBooleanMask) {
     const svg = ctx.strokeSvgSources?.[node.id];
+    let strokeIssue: string | undefined;
     if (svg || node.vectorNetwork) {
       const captured = mapStrokeSvgShape(node, parent, svg);
       if ('shape' in captured) return captured.shape;
-      ctx.report.degradations.push({ code: 'vector-geometry-unsupported', nodePath, message: captured.issue });
+      strokeIssue = captured.issue;
     }
     let paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
     const witness=ctx.nativeMaskPathWitnesses?.[node.id];
@@ -1652,24 +1662,49 @@ function mapShape(
     const maskStroke=insideMaskStroke(node,ctx) ?? insidePaintedMaskStroke(node);
     const t = node.relativeTransform;
     const width = node.size?.x, height = node.size?.y;
+    const identity = t?.length === 2 && t.every(row => row.length === 3 && row.every(Number.isFinite)) &&
+      t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1;
+    // Filled local paths retain their own dimensions. A proper rigid rotation
+    // is representable by the existing shape rotation/placement channels;
+    // masks and in-flow rotated allocations require separate ownership proof.
+    const rotation = !identity && node.type === 'VECTOR' && !node.isMask && !maskStroke &&
+      parent && ['FRAME','COMPONENT'].includes(parent.type) &&
+      parent.size && [parent.size.x,parent.size.y].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) &&
+      (node.layoutPositioning === 'ABSOLUTE' || !parent.layoutMode || parent.layoutMode === 'NONE') &&
+      typeof width === 'number' && width <= 1e6 && typeof height === 'number' && height <= 1e6
+      ? filledPathRigidRotation(t,node.rotation) : undefined;
+    const reflection = rotation === undefined && !identity && node.type === 'VECTOR' && !node.isMask && !maskStroke &&
+      parent && ['FRAME','COMPONENT'].includes(parent.type) && parent.size &&
+      [parent.size.x,parent.size.y].every(n=>Number.isFinite(n)&&n>0&&n<=1e6) &&
+      (node.layoutPositioning === 'ABSOLUTE' || !parent.layoutMode || parent.layoutMode === 'NONE') &&
+      axisReflectedFilledPath(t,node.rotation);
     const readable = (node.isMask === undefined || node.isMask === false ||
       node.isMask===true && ['ALPHA','VECTOR'].includes(node.maskType ?? '')) &&
       typeof width === 'number' && Number.isFinite(width) && width > 0 &&
       typeof height === 'number' && Number.isFinite(height) && height > 0 &&
       paths && paths.length > 0 && paths.length <= 32 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
-      t?.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
-      t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1 &&
+      (identity || rotation !== undefined || reflection) &&
       (maskStroke || fills.length === 1 && fills[0]!.type === 'SOLID') &&
       (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
       (node.cornerRadius === undefined || node.cornerRadius === 0) &&
       (maskStroke || !(node.strokes ?? []).some((p) => p.visible !== false)) &&
       !(node.effects ?? []).some((p) => p.visible !== false) && (!node.children?.length || combinedBooleanMask);
-    if (!readable) return undefined;
+    if (!readable) {
+      if (strokeIssue) ctx.report.degradations.push({ code: 'vector-geometry-unsupported', nodePath, message: strokeIssue });
+      return undefined;
+    }
     const shape: DumpShape = { kind: 'path', width, height, paths };
-    if (parentBox && (node.layoutPositioning === 'ABSOLUTE' || !parent || !parent.layoutMode || parent.layoutMode === 'NONE')) {
-      shape.x = t[0]![2]!; shape.y = t[1]![2]!;
-      shape.right = parentBox.width - shape.x - width;
-      shape.bottom = parentBox.height - shape.y - height;
+    if (rotation !== undefined && rotation !== 0) shape.rotation = rotation;
+    if (reflection) shape.affineTransform = t!.map(row=>[...row]);
+    if ((parentBox || rotation !== undefined || reflection) && (node.layoutPositioning === 'ABSOLUTE' || !parent || !parent.layoutMode || parent.layoutMode === 'NONE')) {
+      // CSS rotates about the intrinsic center. Translate that center from
+      // the captured local origin; world axis-aligned bounds cannot supply it.
+      shape.x = rotation === undefined && !reflection ? t![0]![2]! : t![0]![2]! + t![0]![0]! * width/2 + t![0]![1]! * height/2 - width/2;
+      shape.y = rotation === undefined && !reflection ? t![1]![2]! : t![1]![2]! + t![1]![0]! * width/2 + t![1]![1]! * height/2 - height/2;
+      const parentWidth = rotation === undefined && !reflection ? parentBox!.width : parent!.size!.x;
+      const parentHeight = rotation === undefined && !reflection ? parentBox!.height : parent!.size!.y;
+      shape.right = parentWidth - shape.x - width;
+      shape.bottom = parentHeight - shape.y - height;
       const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
       if (constraints) shape.constraints = constraints;
     }

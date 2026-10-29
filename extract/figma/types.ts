@@ -432,6 +432,8 @@ export interface DumpShape {
   kind: 'polygon' | 'ellipse' | 'rect' | 'path' | 'stroked-path' | 'line';
   /** Native zero-height LINE, exact unit-axis affine transform and identity. */
   line?: import('../../packages/schema/src/native-line.js').NativeLineGeometry & { source?: { nodeId: string; parentId?: string } };
+  /** Independent current parent allocation for a horizontal zero-height FILL line. */
+  lineFlow?: {kind:'horizontal-fill-line-v1';nodeId:string;parentId:string;parentWidth:number;parentHeight:number;padding:[number,number,number,number];length:number;transform:number[][]};
   /** Plugin capture only: original open centerline and SCALE parent basis. */
   strokePath?: StrokedPath;
   paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' | 'NONE' }>;

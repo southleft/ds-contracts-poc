@@ -1,3 +1,4 @@
+import {reflectedScaledPath} from './scalable-path-source-plane.js';
 import {projectAffineFilledPath} from './affine-filled-path.js';
 import type {DumpNode,DumpSet} from '../extract/figma/types.js';
 
@@ -16,6 +17,8 @@ export function projectNativeGroupPlanes(input:DumpSet):{set:DumpSet;notes:strin
  const visit=(node:ProjectedNode,parent:DumpNode|undefined,path:string):void=>{
   delete node.__nativeGroupCoordinateOwner;
   const proof=node.nativeContainerPlane;
+  const freePath=reflectedScaledPath(node,parent);
+  if(freePath){node.shape=freePath;notes.push(`${path}: exact signed-axis path reflection projected into the verified free SCALE parent; source paths and matrix retained in input`);}
   if(node.shape?.affineTransform && (parent?.type!=='GROUP'||!parent.nativeContainerPlane))throw Error(`native-group-plane-unqualified:${path}:affine-path-owner-missing`);
   if(node.type!=='GROUP'||!proof){for(const child of node.children??[])visit(child,node,`${path}/${child.name}`);return;}
   const refuse=(reason:string):never=>{throw Error(`native-group-plane-unqualified:${path}:${reason}`);};

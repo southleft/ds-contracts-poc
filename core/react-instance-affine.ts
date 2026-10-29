@@ -2,6 +2,9 @@ import {instanceAffineCss} from './instance-affine-css.js';
 import {type Part} from '../scripts/contract-schema.js';
 /** A flow allocation host and an origin-zero local transform, shared by both React emitters. */
 export function wrapReactInstanceAffine(part:Part,jsx:string,codePropOf:(name:string)=>string=name=>name):string {
+ if(part.instanceAffine&&part.instanceAffineFill){
+  return `<__DscAffineLayout plan={${JSON.stringify(instanceAffineCss(part.instanceAffine,part.instanceAffineFill))}}>${jsx}</__DscAffineLayout>`;
+ }
  if(part.instanceAffineLayout){
   const table=part.instanceAffineLayout,styles=Object.fromEntries(table.rows.map(row=>[JSON.stringify(row.values),instanceAffineCss(row.geometry,row.fill)]));
   const key=`JSON.stringify([${table.props.map(name=>`String(${codePropOf(name)})`).join(',')}])`;
