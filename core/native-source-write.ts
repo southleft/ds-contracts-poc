@@ -1,3 +1,4 @@
+import {nativePreparedTargetRegistryRuntime} from './native-prepared-target-registry.js';
 import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
 import {checkNativeObservedLayout, nativeObservedLayoutWrite, type NativeObservedLayoutContext} from './native-observed-layout.js';
 import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
@@ -209,7 +210,9 @@ export function wrapNativeSourceWrite(
   render: string,
   draftFonts: Array<{ family: string; styles: string[] }> = [],
   placeGraphTargets = false,
+  preparedGraphIds?: readonly string[],
 ): string {
+  const usePreparedRegistry = preparedGraphIds !== undefined && !prepared.descriptor.recovery;
   return `// GENERATED scoped source-candidate inspection. Fresh objects only.
 const NATIVE = ${JSON.stringify(prepared.descriptor)};
 const NATIVE_RESULT = { version: 1, status: 'refused', acceptedContract: null,
@@ -228,17 +231,28 @@ function nativeRefuse(code) { throw Error('native-source-write-' + code); }
 function nativeFileGuard() {
   if (figma.fileKey !== NATIVE.operation.fileKey) nativeRefuse('file-mismatch');
 }
-// Retain owned live handles: freshly derived slot IDs can require a remote
+${'kind' in prepared.descriptor.projection && prepared.descriptor.projection.kind === 'prepared-contract-library' ? `// Yield before the next build/allocation, after prior returned handles were retained.
+let nativeBuildBudget = 0;
+function nativeBeforeBuild() {
+  if (++nativeBuildBudget < 32) return;
+  nativeBuildBudget = 0;
+  if (typeof setTimeout !== 'function') nativeRefuse('yield-api-unavailable');
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+` : ''}// Retain owned live handles: freshly derived slot IDs can require a remote
 // lookup even while their parent instance is already loaded.
 const nativeOwnedNodes = new Map();
+const nativeRetainedIds = new Set();
 const nativeOwner = JSON.stringify({ version: 1, operationId: NATIVE.operation.id,
   sourceContractId: NATIVE.sourceContractId, sourceContractRevision: NATIVE.sourceContractRevision,
   tokenPreparationRevision: NATIVE.tokenPreparationRevision, acceptedContract: null });
 function nativeRetain(node) {
   // Retain returned identity BEFORE metadata/mode APIs that may throw.
-  if (NATIVE_RESULT.nodes.some(entry => entry.id === node.id)) return;
-  const identity = { id: node.id, type: node.type };
+  const id = node.id;
+  if (nativeRetainedIds.has(id)) return;
+  const identity = { id, type: node.type };
   NATIVE_RESULT.nodes.push(identity);
+  nativeRetainedIds.add(id);
   if (node.key) identity.key = node.key;
 }
 function nativeOwn(node) {
@@ -285,7 +299,7 @@ function nativeInit(node, spec) {
     child.setSharedPluginData('ds_contracts', key, JSON.stringify(spec.nativeContractPart || spec.nativeSourcePart || spec.nativeContractSample || spec.nativeSourceSample));
   }
   if (spec.nativeSourceVisible === false) node.visible = false;
-}
+}${usePreparedRegistry ? nativePreparedTargetRegistryRuntime(preparedGraphIds!) : ''}
 async function nativeReadTokens() {
   return await (async () => {
 ${prepared.readbackScript}
@@ -361,7 +375,7 @@ ${prepared.comparisonParentReadbackScript}
     }
   }
   ${prepared.descriptor.contractComparison && !prepared.descriptor.contractComparison.textTemplate?.modeVector ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
-  ${prepared.descriptor.recovery ? `NATIVE_PAGE = await figma.getNodeByIdAsync(NATIVE.recovery.creation.pageId); nativeFileGuard();
+  ${usePreparedRegistry ? 'nativePreparedAudit(false);\n  ' : ''}${prepared.descriptor.recovery ? `NATIVE_PAGE = await figma.getNodeByIdAsync(NATIVE.recovery.creation.pageId); nativeFileGuard();
   const recoveryObserved = await (async()=>{${prepared.recoveryReadbackScript}})();
   nativeFileGuard();
   if (nativeCanonical(recoveryObserved) !== nativeCanonical(NATIVE.recovery.observation)) nativeRefuse('recovery-preflight-changed');
@@ -370,7 +384,7 @@ ${prepared.comparisonParentReadbackScript}
   // retained and cannot reuse this preflight or be automatically replayed.
   NATIVE_PAGE.setSharedPluginData('ds_contracts','nativeComparisonRecoveryClaim',NATIVE.recovery.revision);
   NATIVE_RESULT.allocationAttempted = true;
-  for (const identity of NATIVE.recovery.creation.nodes) NATIVE_RESULT.nodes.push(identity);` : `NATIVE_RESULT.allocationAttempted = true;
+  for (const identity of NATIVE.recovery.creation.nodes) { NATIVE_RESULT.nodes.push(identity); nativeRetainedIds.add(identity.id); }` : `NATIVE_RESULT.allocationAttempted = true;
   NATIVE_PAGE = figma.createPage();`}
   NATIVE_RESULT.pageId = NATIVE_PAGE.id;
   nativeOwn(NATIVE_PAGE);
@@ -422,7 +436,7 @@ ${prepared.descriptor.observedLayout ? nativeObservedLayoutWrite(prepared.descri
     }
   }
   NATIVE_RESULT.applied = applied;
-  NATIVE_RESULT.status = 'created-candidate';
+  ${usePreparedRegistry ? 'nativePreparedAudit(true);\n  ' : ''}NATIVE_RESULT.status = 'created-candidate';
 } catch (error) {
   NATIVE_RESULT.status = NATIVE_RESULT.allocationAttempted ? 'partial-or-unknown-allocation' : 'refused';
   NATIVE_RESULT.problems = [error && typeof error.message === 'string' ? error.message : 'native-source-write-api-failed'];
