@@ -116,7 +116,8 @@ import {
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime, okColorToRgba } from './token-set.js';
 import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
-import { FINGERPRINT_SRC, FINGERPRINT_VERSION, SNAPSHOT_STORE_SRC } from './canvas-fingerprint.js';
+import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
+import { SNAPSHOT_STORAGE_SRC } from './canvas-snapshot-storage.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -1091,7 +1092,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt22-preserve-pending-fill-birth-box';
+export const RUNTIME_EMIT_REV = 'rt23-lossless-canvas-snapshot-storage';
 
 function componentHasJointPropertyReferences(component: ComponentData): boolean {
   const visit = (spec: NodeSpec): boolean =>
@@ -9422,9 +9423,6 @@ function buildSyncScript(
   const fillStackAssetSource=hasFillStack?`const FILL_STACK_IMAGES = ${JSON.stringify(fillStackImages)};\n`:'';
   const hasSolidFillComposition = featureDatas.some(d=>dataSome(d,s=>s.solidFillComposition!==undefined));
   const hasBoundSolidFill=featureDatas.some(d=>dataSome(d,s=>s.solidFillCompositionToken!==undefined));
-  const storeSnapshot=(node:string,key:string,lines:string)=>opts.nativeSource
-    ? `dsWriteSnapshot(${node}, '${key}', ${lines});`
-    : `${node}.setSharedPluginData('ds_contracts', '${key}', JSON.stringify(${lines}));`;
   const hasInstanceRootFill = featureDatas.some(d=>dataSome(d,s=>!!s.instanceRootFill));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
@@ -10794,7 +10792,8 @@ ${hasSlotTextTemplate ? `  if (spec.type === 'slot' && spec.children?.some(child
 
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
-${FINGERPRINT_SRC}${opts.nativeSource ? SNAPSHOT_STORE_SRC : ''}
+${FINGERPRINT_SRC}
+${SNAPSHOT_STORAGE_SRC}
 // v6: bindings are fingerprinted by variable NAME, and every Figma variable
 // API that survives dynamic-page loading is async — so the id→name map is
 // filled ONCE here, from the emitted script's top-level await, and the sync
@@ -10811,14 +10810,14 @@ function dsStampFingerprints(node) {${hasBoundSolidFill ? '\n  settleBoundSolidF
   // Drift can say WHAT changed, not just that something did. Each variant
   // node owns its own pluginData quota — the set never carries the bulk.
   if (node.type === 'COMPONENT_SET') {
-    ${storeSnapshot('node', 'canvasSetSnapshot', 'dsCanvasSetSnapshot(node)')}
+    dsWriteCanvasSnapshot(node, 'canvasSetSnapshot', dsCanvasSetSnapshot(node));
     for (const child of node.children) {
       child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
-      ${storeSnapshot('child', 'canvasSnapshot', 'dsCanvasSnapshot(child)')}
+      dsWriteCanvasSnapshot(child, 'canvasSnapshot', dsCanvasSnapshot(child));
     }
   } else {
-    ${storeSnapshot('node', 'canvasSetSnapshot', 'dsCanvasSetSnapshot(node)')}
-    ${storeSnapshot('node', 'canvasSnapshot', 'dsCanvasSnapshot(node)')}
+    dsWriteCanvasSnapshot(node, 'canvasSetSnapshot', dsCanvasSetSnapshot(node));
+    dsWriteCanvasSnapshot(node, 'canvasSnapshot', dsCanvasSnapshot(node));
   }
 }
 
