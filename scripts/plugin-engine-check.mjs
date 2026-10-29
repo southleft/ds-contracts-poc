@@ -1092,6 +1092,9 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     read('figma-sync/plugin/code.js').includes(srcMatch[1]),
     'drift gate: figma-sync/plugin/code.js carries FINGERPRINT_SRC BYTE-IDENTICALLY (module ≡ plugin copy)',
   );
+  const storeMatch = fpModule.match(/SNAPSHOT_STORE_SRC: string = `([\s\S]*?)`;/);
+  assert(storeMatch && read('figma-sync/plugin/code.js').includes(storeMatch[1]),
+    'drift gate: figma-sync/plugin/code.js carries SNAPSHOT_STORE_SRC BYTE-IDENTICALLY (module ≡ plugin copy)');
   const sets = root.findAll((n) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId'));
   assert(sets.length > 0, 'drift gate: generated sets exist on the mock canvas');
   const withStamp = sets.filter((n) => n.getSharedPluginData('ds_contracts', 'canvasFingerprint'));

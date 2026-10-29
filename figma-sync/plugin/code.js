@@ -743,14 +743,14 @@ figma.ui.onmessage = async (msg) => {
           let setChanges = [];
           if (status === 'canvas-edited') {
             try {
-              const setSnap = JSON.parse(node.getSharedPluginData('ds_contracts', 'canvasSetSnapshot') || '[]');
+              const setSnap = dsReadSnapshot(node, 'canvasSetSnapshot');
               setChanges = diffSnapshots(setSnap, dsCanvasSetSnapshot(node)).slice(0, 6);
             } catch (e) { /* pre-v4 — no set snapshot */ }
           }
           const pushEditedSnapshot = function (target) {
             let changes = [];
             try {
-              const snap = JSON.parse(target.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
+              const snap = dsReadSnapshot(target, 'canvasSnapshot');
               changes = diffSnapshots(snap, dsCanvasSnapshot(target)).slice(0, 6);
             } catch (e) { /* snapshot unreadable — variant still listed */ }
             editedVariants.push({ nodeId: target.id, name: target.name, changes: changes });
@@ -1132,4 +1132,55 @@ function dsCanvasFingerprint(root) {
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return 'v6:' + String(h);
+}
+
+// SNAPSHOT STORE — byte-identical copy of core/canvas-fingerprint.ts
+// SNAPSHOT_STORE_SRC. The plugin-engine gate pins it by substring.
+
+var DS_SNAPSHOT_PIECE_UNITS = 32000;
+function dsSnapshotHeader(raw) {
+  if (!raw || raw.charAt(0) !== '{') return null;
+  var h = JSON.parse(raw);
+  if (!h || typeof h.dsSnapshotPieces !== 'number' || typeof h.length !== 'number' ||
+      h.dsSnapshotPieces !== Math.floor(h.dsSnapshotPieces) || h.dsSnapshotPieces < 2 || h.dsSnapshotPieces > 4096 ||
+      h.length !== Math.floor(h.length) || h.length < 1) throw new Error('DS_SNAPSHOT_PIECES_INVALID: header');
+  return h;
+}
+function dsWriteSnapshot(node, key, lines) {
+  var text = JSON.stringify(lines);
+  var prior = null;
+  try { prior = dsSnapshotHeader(node.getSharedPluginData('ds_contracts', key)); } catch (e) { prior = null; }
+  var count = 0;
+  if (text.length <= DS_SNAPSHOT_PIECE_UNITS) {
+    node.setSharedPluginData('ds_contracts', key, text);
+  } else {
+    for (var at = 0; at < text.length; count++) {
+      var end = Math.min(at + DS_SNAPSHOT_PIECE_UNITS, text.length);
+      var unit = text.charCodeAt(end - 1);
+      if (end < text.length && unit >= 0xD800 && unit <= 0xDBFF) end--;
+      node.setSharedPluginData('ds_contracts', key + '/' + count, text.slice(at, end));
+      at = end;
+    }
+    node.setSharedPluginData('ds_contracts', key, JSON.stringify({ dsSnapshotPieces: count, length: text.length }));
+  }
+  if (prior) for (var stale = count; stale < prior.dsSnapshotPieces; stale++) node.setSharedPluginData('ds_contracts', key + '/' + stale, '');
+}
+function dsReadSnapshot(node, key) {
+  var raw = node.getSharedPluginData('ds_contracts', key);
+  if (!raw) return [];
+  var header = dsSnapshotHeader(raw);
+  var text = raw;
+  if (header) {
+    text = '';
+    for (var i = 0; i < header.dsSnapshotPieces; i++) {
+      var piece = node.getSharedPluginData('ds_contracts', key + '/' + i);
+      if (!piece) throw new Error('DS_SNAPSHOT_PIECES_INVALID: missing ' + key + '/' + i);
+      text += piece;
+    }
+    if (text.length !== header.length) throw new Error('DS_SNAPSHOT_PIECES_INVALID: length');
+  }
+  var lines = JSON.parse(text);
+  if (Object.prototype.toString.call(lines) !== '[object Array]') throw new Error('DS_SNAPSHOT_PIECES_INVALID: not a line list');
+  for (var j = 0; j < lines.length; j++) if (typeof lines[j] !== 'string') throw new Error('DS_SNAPSHOT_PIECES_INVALID: not a line list');
+  return lines;
 }

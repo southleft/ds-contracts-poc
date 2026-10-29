@@ -86,7 +86,7 @@ import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symli
 import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
-import { FINGERPRINT_SRC } from '../core/canvas-fingerprint.js';
+import { FINGERPRINT_SRC, SNAPSHOT_STORE_SRC } from '../core/canvas-fingerprint.js';
 import { compileMockCanvas, variantNodesOf, type FigmaNodeLike, type MockCanvas } from './variant-drift.js';
 
 const ROOT = process.cwd();
@@ -94,6 +94,12 @@ const PLUGIN = path.join(ROOT, 'parity', 'extract-figma.plugin.js');
 const FIXTURES = path.join(ROOT, 'parity', 'fixtures', 'variant-drift');
 const BEGIN = '// >>> BEGIN FINGERPRINT_SRC (generated from core/canvas-fingerprint.ts — do not edit)';
 const END = '// <<< END FINGERPRINT_SRC';
+const STORE_BEGIN = '// >>> BEGIN SNAPSHOT_STORE_SRC (generated from core/canvas-fingerprint.ts — do not edit)';
+const STORE_END = '// <<< END SNAPSHOT_STORE_SRC';
+const BLOCKS = [
+  { name: 'FINGERPRINT_SRC', begin: BEGIN, end: END, source: FINGERPRINT_SRC },
+  { name: 'SNAPSHOT_STORE_SRC', begin: STORE_BEGIN, end: STORE_END, source: SNAPSHOT_STORE_SRC },
+];
 
 /** The three sets the fixtures carry. AccordionItem is the subject: its
  *  State=Closed variant has a nested `trigger` FRAME with a real auto-layout
@@ -118,29 +124,36 @@ const assert = (cond: unknown, what: string): void => {
 // ---------------------------------------------------------------------------
 
 const embed = (): void => {
-  const src = readFileSync(PLUGIN, 'utf8');
-  const start = src.indexOf(BEGIN);
-  const end = src.indexOf(END);
-  if (start < 0 || end < 0) fail('parity/extract-figma.plugin.js has no FINGERPRINT_SRC marker block');
-  const next = `${src.slice(0, start + BEGIN.length)}\n${FINGERPRINT_SRC.trim()}\n${src.slice(end)}`;
-  if (next === src) {
+  const original = readFileSync(PLUGIN, 'utf8');
+  let src = original;
+  for (const b of BLOCKS) {
+    const start = src.indexOf(b.begin);
+    const end = src.indexOf(b.end);
+    if (start < 0 || end < 0) fail(`parity/extract-figma.plugin.js has no ${b.name} marker block`);
+    src = `${src.slice(0, start + b.begin.length)}\n${b.source.trim()}\n${src.slice(end)}`;
+  }
+  if (src === original) {
     console.log('  §0 embed — already byte-identical, nothing to do.');
     return;
   }
-  writeFileSync(PLUGIN, next, 'utf8');
-  console.log(`  §0 embed — re-embedded FINGERPRINT_SRC (${FINGERPRINT_SRC.trim().length} chars) into parity/extract-figma.plugin.js`);
+  writeFileSync(PLUGIN, src, 'utf8');
+  console.log(`  §0 embed — re-embedded ${BLOCKS.map((b) => `${b.name} (${b.source.trim().length} chars)`).join(' and ')} into parity/extract-figma.plugin.js`);
 };
 
 const checkEmbed = (): void => {
   const src = readFileSync(PLUGIN, 'utf8');
+  for (const b of BLOCKS) {
+    const start = src.indexOf(b.begin);
+    const end = src.indexOf(b.end);
+    assert(start >= 0 && end > start, `§0 parity/extract-figma.plugin.js carries the ${b.name} marker block`);
+    const inlined = src.slice(start + b.begin.length, end).trim();
+    assert(
+      inlined === b.source.trim(),
+      `§0 the inlined copy is BYTE-IDENTICAL to core/canvas-fingerprint.ts's ${b.name} — a private twin is how the transport starts computing a different hash than the stamp it compares against (embedded ${inlined.length} chars, module ${b.source.trim().length}; run: npx tsx parity/variant-drift-check.ts --embed)`,
+    );
+  }
   const start = src.indexOf(BEGIN);
-  const end = src.indexOf(END);
-  assert(start >= 0 && end > start, '§0 parity/extract-figma.plugin.js carries the FINGERPRINT_SRC marker block');
-  const block = src.slice(start + BEGIN.length, end).trim();
-  assert(
-    block === FINGERPRINT_SRC.trim(),
-    `§0 the inlined copy is BYTE-IDENTICAL to core/canvas-fingerprint.ts's FINGERPRINT_SRC — a private twin is how the transport starts computing a different hash than the stamp it compares against (embedded ${block.length} chars, module ${FINGERPRINT_SRC.trim().length}; run: npx tsx parity/variant-drift-check.ts --embed)`,
-  );
+  const block = src.slice(start + BEGIN.length, src.indexOf(END)).trim();
   // Extraction performs its own preload because dsLoadVarNames deliberately
   // swallows lookup errors for generation compatibility. Evidence collection
   // must retain that failure instead of blessing an empty map as loaded.
@@ -152,7 +165,7 @@ const checkEmbed = (): void => {
   );
   assert(
     src.includes("getSharedPluginData('ds_contracts', 'canvasFingerprint')") &&
-      src.includes("getSharedPluginData('ds_contracts', 'canvasSnapshot')"),
+      src.includes("dsReadSnapshot(node, 'canvasSnapshot')"),
     '§0 the plugin reads BOTH stamps back off the canvas (this was `grep -c getSharedPluginData` = 0 before this round)',
   );
   assert(

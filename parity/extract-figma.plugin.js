@@ -218,6 +218,56 @@ function dsCanvasFingerprint(root) {
 }
 // <<< END FINGERPRINT_SRC
 
+// >>> BEGIN SNAPSHOT_STORE_SRC (generated from core/canvas-fingerprint.ts — do not edit)
+var DS_SNAPSHOT_PIECE_UNITS = 32000;
+function dsSnapshotHeader(raw) {
+  if (!raw || raw.charAt(0) !== '{') return null;
+  var h = JSON.parse(raw);
+  if (!h || typeof h.dsSnapshotPieces !== 'number' || typeof h.length !== 'number' ||
+      h.dsSnapshotPieces !== Math.floor(h.dsSnapshotPieces) || h.dsSnapshotPieces < 2 || h.dsSnapshotPieces > 4096 ||
+      h.length !== Math.floor(h.length) || h.length < 1) throw new Error('DS_SNAPSHOT_PIECES_INVALID: header');
+  return h;
+}
+function dsWriteSnapshot(node, key, lines) {
+  var text = JSON.stringify(lines);
+  var prior = null;
+  try { prior = dsSnapshotHeader(node.getSharedPluginData('ds_contracts', key)); } catch (e) { prior = null; }
+  var count = 0;
+  if (text.length <= DS_SNAPSHOT_PIECE_UNITS) {
+    node.setSharedPluginData('ds_contracts', key, text);
+  } else {
+    for (var at = 0; at < text.length; count++) {
+      var end = Math.min(at + DS_SNAPSHOT_PIECE_UNITS, text.length);
+      var unit = text.charCodeAt(end - 1);
+      if (end < text.length && unit >= 0xD800 && unit <= 0xDBFF) end--;
+      node.setSharedPluginData('ds_contracts', key + '/' + count, text.slice(at, end));
+      at = end;
+    }
+    node.setSharedPluginData('ds_contracts', key, JSON.stringify({ dsSnapshotPieces: count, length: text.length }));
+  }
+  if (prior) for (var stale = count; stale < prior.dsSnapshotPieces; stale++) node.setSharedPluginData('ds_contracts', key + '/' + stale, '');
+}
+function dsReadSnapshot(node, key) {
+  var raw = node.getSharedPluginData('ds_contracts', key);
+  if (!raw) return [];
+  var header = dsSnapshotHeader(raw);
+  var text = raw;
+  if (header) {
+    text = '';
+    for (var i = 0; i < header.dsSnapshotPieces; i++) {
+      var piece = node.getSharedPluginData('ds_contracts', key + '/' + i);
+      if (!piece) throw new Error('DS_SNAPSHOT_PIECES_INVALID: missing ' + key + '/' + i);
+      text += piece;
+    }
+    if (text.length !== header.length) throw new Error('DS_SNAPSHOT_PIECES_INVALID: length');
+  }
+  var lines = JSON.parse(text);
+  if (Object.prototype.toString.call(lines) !== '[object Array]') throw new Error('DS_SNAPSHOT_PIECES_INVALID: not a line list');
+  for (var j = 0; j < lines.length; j++) if (typeof lines[j] !== 'string') throw new Error('DS_SNAPSHOT_PIECES_INVALID: not a line list');
+  return lines;
+}
+// <<< END SNAPSHOT_STORE_SRC
+
 await figma.loadAllPagesAsync();
 // v6 REQUIRES THIS. The v6 snapshot spells bindings by NAME
 // (`|bound:paddingLeft|space/inset-x/sm`) through an id→name map that only an
@@ -259,13 +309,15 @@ const fingerprintRow = (node) => {
   try {
     fingerprint = node.getSharedPluginData('ds_contracts', 'canvasFingerprint') || null;
   } catch (e) { /* unstamped */ }
+  let snapshotError = null;
   try {
-    const raw = node.getSharedPluginData('ds_contracts', 'canvasSnapshot');
-    if (raw) snapshot = JSON.parse(raw);
-  } catch (e) { /* pre-v3 stamp — no snapshot stored */ }
+    if (node.getSharedPluginData('ds_contracts', 'canvasSnapshot')) snapshot = dsReadSnapshot(node, 'canvasSnapshot');
+  } catch (e) {
+    snapshotError = `stored snapshot could not be read for ${node.name}: ${measurementErrorText(e)}`;
+  }
   let live = null;
   let liveSnapshot = null;
-  let measurementError = variableNameLoadError;
+  let measurementError = variableNameLoadError || snapshotError;
   try {
     if (!measurementError) {
       liveSnapshot = dsCanvasSnapshot(node);
@@ -296,8 +348,7 @@ const setFingerprintRow = (node) => {
   const base = fingerprintRow(node);
   let snapshot = null;
   try {
-    const raw = node.getSharedPluginData('ds_contracts', 'canvasSetSnapshot');
-    if (raw) snapshot = JSON.parse(raw);
+    if (node.getSharedPluginData('ds_contracts', 'canvasSetSnapshot')) snapshot = dsReadSnapshot(node, 'canvasSetSnapshot');
     else if (base.fingerprint) {
       base.measurementError = 'stored component-set snapshot is absent; set metadata cannot be compared';
     }
