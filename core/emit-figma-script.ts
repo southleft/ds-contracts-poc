@@ -9356,8 +9356,8 @@ function buildNativePreparedLibraryScript(parent: Contract, byId: Map<string, Co
   const prepared = prepareNativeSourceWrite(graph.projection,context,graph.boundNames);
   return wrapNativeSourceWrite(prepared,buildSyncScript(graph.components,context.operation.fileKey,{
     header:'// Shared renderer: operation-scoped retained contract library.',
-    preamble:'',nativeSource:true,nativeGraphVerification:2,
-  }),graph.fonts);
+    preamble:'',nativeSource:true,nativePreparedLibrary:true,nativeGraphVerification:2,
+  }),graph.fonts,false,graph.components.map(component=>component.contractId));
 }
 
 /** Create comparison instances referencing existing observed mains. The content
@@ -9391,7 +9391,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { propertyAmends?: InstancePropertyAmend[]; header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { propertyAmends?: InstancePropertyAmend[]; header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativePreparedLibrary?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -9399,6 +9399,7 @@ function buildSyncScript(
     ...datas[0], stateVariants: undefined,
     variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
   }] : datas;
+  const hasPreparedTargetRegistry = opts.nativeSource === true && opts.nativePreparedLibrary === true && opts.nativeGraphVerification === 2;
   const callerPropertyBlockers = featureDatas.flatMap(data => nativeCallerPropertyBlockers(data)
     .map(blocker => `${data.contractId}:${blocker.property}:${blocker.nodeName}`));
   if (callerPropertyBlockers.length)
@@ -10001,7 +10002,7 @@ function allSyncTargets() {
 // One resolver for nested instances, slot defaults/preferred values, and
 // top-level amend targets. Semantic identity wins; names are admitted only
 // for explicit pre-contractId generated nodes.
-function resolveComponentIdentity(ref, purpose, allowMissing) {
+function resolveComponentIdentity(ref, purpose, allowMissing) {${hasPreparedTargetRegistry ? '\n  if (!NATIVE.recovery && nativePreparedExpectedIds.has(ref.contractId)) return nativePreparedResolve(ref);' : ''}
   const targets = allSyncTargets();
   const exact = targets.filter(
     (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
@@ -10448,7 +10449,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   return instance.children.some(hasReference);
 }
 ` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
-  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
+  let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
     const main = await caller.getMainComponentAsync();
@@ -10575,7 +10576,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
     // solid-white fill is Figma's, not the contract's — the part's own styling
     // (usually nothing) is the truth.
     if (!spec.fill) node.fills = [];
-    for (const item of spec.slotDefault || []) {
+    for (const item of spec.slotDefault || []) {${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n      const nativePause = nativeBeforeBuild();\n      if (nativePause) await nativePause;\n      nativeFileGuard();' : ''}
       const target = resolveComponentIdentity(
         { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
         'Slot "' + spec.name + '" default',
@@ -11523,7 +11524,7 @@ ${hasSelection ? `  target.setSharedPluginData('ds_contracts', 'selectionApi', C
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
-  ${opts.nativeSource ? `NATIVE_RESULT.propertyDefinitions = JSON.parse(JSON.stringify(target.componentPropertyDefinitions));
+  ${hasPreparedTargetRegistry ? 'if (!NATIVE.recovery) nativePreparedRegister(C, target);\n  ' : ''}${opts.nativeSource ? `NATIVE_RESULT.propertyDefinitions = JSON.parse(JSON.stringify(target.componentPropertyDefinitions));
   NATIVE_RESULT.variants = built.map(b => ({ id: b.comp.id, key: b.comp.key, name: b.v.name }));` : 'ensureHostSection(compPage, target, displayName);'}
 ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : ''}
   return {
