@@ -597,7 +597,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     writeFileSync(files[id],renderImages[id]);
     frame.pngSha256=imageSha256(renderImages[id]);
     frame.raster='kind'in result.proof
-      ?{kind:'figma-rest-source-opaque-anchor-v1',scale:1,proof:result.proof}
+      ?{kind:result.proof.kind,scale:1,proof:result.proof}
       :{kind:'figma-rest-paired-render-v1',scale:1,proof:result.proof};
     renderProofs[id]={...result,layoutFile,renderFile:path.basename(files[id])};
   }

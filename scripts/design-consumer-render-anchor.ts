@@ -27,6 +27,14 @@ export interface NativeAnchorProof {
   wholeOverlapRefusal:'render-export-overlap-mismatch';
   evidence:'producer-verified-exact-rgba-at-metadata-offset'; anchor:Anchor;
 }
+export interface RootNativeAnchorProof extends Omit<NativeAnchorProof,'kind'|'anchor'> {
+  kind:'figma-rest-source-root-opaque-anchor-v1';
+  coordinateBasis:{kind:'exact-layout-origin-v1';x:number;y:number};
+  anchor:Omit<Anchor,'selectionRule'>&{selectionRule:'root-opaque-round-rect-closed-cells-v1'};
+}
+export type SourceAnchorProof=NativeAnchorProof|RootNativeAnchorProof;
+export const isSourceAnchorKind=(kind:unknown):kind is SourceAnchorProof['kind']=>
+  kind==='figma-rest-source-opaque-anchor-v1'||kind==='figma-rest-source-root-opaque-anchor-v1';
 interface Row {y:number;x0:number;x1:number}
 interface Selection {owner:any;radius:number;rows:Row[];pixels:number;coordinateSha256:string}
 const sha=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
@@ -175,6 +183,94 @@ function selectSource(document:any,layout:FrameBox,render:FrameBox):Selection|nu
   for(const row of picked.rows)for(let x=row.x0;x<row.x1;x++){word.writeUInt32BE(x,0);word.writeUInt32BE(row.y,4);coordinates.update(word);}
   return {owner:picked.entry.node,radius:picked.radius,rows:picked.rows,pixels:picked.pixels,coordinateSha256:coordinates.digest('hex')};
 }
+/** A separately versioned root-owned route. All coordinates are translated by
+ * the recorded layout origin exactly; neither the source nor its PNGs are
+ * rounded. The opaque clipped root, rather than a union of child paint, owns
+ * the render bounds and its supported external shadows. */
+function selectRoot(document:any,layout:FrameBox,render:FrameBox):Selection|null {
+  try { return selectRootSource(document,layout,render); }
+  catch(error) { if(error instanceof TypeError||error instanceof RangeError)return null;throw error; }
+}
+function selectRootSource(document:any,layout:FrameBox,render:FrameBox):Selection|null {
+  if(!context(document)||!['FRAME','COMPONENT'].includes(document.type)||!visible(document)||
+     (document.opacity??1)!==1||document.clipsContent!==true||!Array.isArray(document.children)||
+     !sameBox(document.absoluteBoundingBox,layout)||!sameBox(document.absoluteRenderBounds,render)||
+     !Array.isArray(document.fills)||document.fills.filter((p:any)=>p.visible!==false).length!==1||
+     painted(document.strokes)||painted(document.background)&&!isDeepStrictEqual(document.background,document.fills))return null;
+  const fill=document.fills.find((p:any)=>p.visible!==false);
+  if(fill.type!=='SOLID'||(fill.opacity??1)!==1||(fill.color?.a??1)!==1||
+     (fill.blendMode??'NORMAL')!=='NORMAL'||!fill.color||
+     ['r','g','b'].some(k=>!unit(fill.color[k])))return null;
+  const es=effects(document);
+  if(!es||es.some((e:any)=>e.type!=='DROP_SHADOW'||(e.blendMode??'NORMAL')!=='NORMAL'||
+     !nonnegative(e.radius)||!Number.isFinite(e.offset?.x)||!Number.isFinite(e.offset?.y)||
+     !optional(e,'spread',v=>typeof v==='number'&&Number.isFinite(v))||
+     !optional(e,'showShadowBehindNode',boolean)))return null;
+  const origin={x:layout.x,y:layout.y};
+  const translate=(b:FrameBox):FrameBox|null=>{
+    if(!box(b))return null;
+    const x=b.x-origin.x,y=b.y-origin.y;
+    // Preserve both endpoints, not just a rounded local width or origin.
+    if(origin.x+x!==b.x||origin.y+y!==b.y||
+       b.x+b.width-origin.x!==x+b.width||b.y+b.height-origin.y!==y+b.height||
+       origin.x+(x+b.width)!==b.x+b.width||origin.y+(y+b.height)!==b.y+b.height)return null;
+    return {x,y,width:b.width,height:b.height};
+  };
+  const localLayout=translate(layout),localRender=translate(render);
+  if(!localLayout||!localRender||!gridBox(localLayout)||!gridBox(localRender)||
+     localRender.x>0||localRender.y>0||localRender.x+localRender.width<layout.width||
+     localRender.y+localRender.height<layout.height)return null;
+  const ids=new Set<string>();let valid=true;
+  const visit=(n:any,parent?:any,showing=true):any=>{
+    if(!n||typeof n.id!=='string'||ids.has(n.id)){valid=false;return null;}ids.add(n.id);
+    showing=showing&&visible(n);
+    if(n.children!==undefined&&!Array.isArray(n.children)){valid=false;return null;}
+    if(['FRAME','COMPONENT','INSTANCE','GROUP','SECTION'].includes(n.type)&&!Array.isArray(n.children)){valid=false;return null;}
+    if(!showing){for(const child of n.children??[])visit(child,n,false);return n;}
+    if(!context(n,parent)||n!==document&&(!effects(n)||effects(n)!.length)){valid=false;return null;}
+    const b=translate(n.absoluteBoundingBox);if(!b){valid=false;return null;}
+    const clone={...n,absoluteBoundingBox:b};
+    if(n.absoluteRenderBounds!==undefined){
+      const rb=translate(n.absoluteRenderBounds);if(!rb){valid=false;return null;}clone.absoluteRenderBounds=rb;
+    }
+    if(n.absoluteTransform!==undefined){
+      const m=n.absoluteTransform,x=m[0][2]-origin.x,y=m[1][2]-origin.y;
+      if(origin.x+x!==m[0][2]||origin.y+y!==m[1][2]){valid=false;return null;}
+      clone.absoluteTransform=[[...m[0]],[...m[1]]];clone.absoluteTransform[0][2]=x;clone.absoluteTransform[1][2]=y;
+    }
+    if(n.children!==undefined)clone.children=n.children.map((child:any)=>visit(child,n,showing));
+    return clone;
+  };
+  const local=visit(document);if(!valid||!local)return null;
+  // Recheck transform/box correlation in the new basis without relaxing it.
+  const checkLocal=(n:any,parent?:any,showing=true)=>{
+    showing=showing&&visible(n);if(!showing)return;
+    if(!context(n,parent))valid=false;
+    for(const c of n.children??[])checkLocal(c,n,showing);
+  };
+  checkLocal(local);if(!valid)return null;
+  const direct=local.children.filter(visible);
+  if(direct.some((n:any)=>!box(n.absoluteRenderBounds)||n.absoluteRenderBounds.x<localRender.x||
+     n.absoluteRenderBounds.y<localRender.y||n.absoluteRenderBounds.x+n.absoluteRenderBounds.width>localRender.x+localRender.width||
+     n.absoluteRenderBounds.y+n.absoluteRenderBounds.height>localRender.y+localRender.height))return null;
+  const r=radius(local);if(r===null)return null;
+  const boundary=shape(localLayout,r),rows:Row[]=[];let pixels=0;
+  for(let y=0;y<Math.floor(localLayout.height);y++){
+    let start=-1,end=-1;
+    for(let x=0;x<Math.floor(localLayout.width);x++){
+      const px=BigInt(x)*64n,py=BigInt(y)*64n;
+      if(inside(boundary,px,py)&&inside(boundary,px+64n,py)&&
+         inside(boundary,px,py+64n)&&inside(boundary,px+64n,py+64n)){
+        if(start<0)start=x;end=x+1;
+      }
+    }
+    if(start>=0){rows.push({y,x0:start,x1:end});pixels+=end-start;}
+  }
+  if(!pixels)return null;
+  const coordinates=createHash('sha256'),word=Buffer.alloc(8);
+  for(const row of rows)for(let x=row.x0;x<row.x1;x++){word.writeUInt32BE(x,0);word.writeUInt32BE(row.y,4);coordinates.update(word);}
+  return {owner:document,radius:r,rows,pixels,coordinateSha256:coordinates.digest('hex')};
+}
 function observe(png:PNG,selection:Selection,offset:{x:number;y:number}) {
   const rgba=createHash('sha256');let horizontalChanges=0,verticalChanges=0,prior:Row|undefined;
   const equal=(a:number,b:number)=>[0,1,2,3].every(c=>png.data[a+c]===png.data[b+c]);
@@ -193,12 +289,12 @@ function observe(png:PNG,selection:Selection,offset:{x:number;y:number}) {
 }
 
 export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:string,layoutBytes:Buffer,renderBytes:Buffer,requests:SourceRenderRequests):
- {proof:RenderExportProof|NativeAnchorProof}|{refused:string} {
+ {proof:RenderExportProof|SourceAnchorProof}|{refused:string} {
   const old=qualifyRenderBoundsExport(before,after,nodeId,layoutBytes,renderBytes);
   if(!('refused'in old)||old.refused!=='render-export-overlap-mismatch')return old;
   if(!requestsMatch(requests,nodeId,before.version))return {refused:'render-anchor-request-mismatch'};
   const document=before.nodes[nodeId].document,layout=document.absoluteBoundingBox,render=document.absoluteRenderBounds;
-  const selection=select(document,layout,render);
+  const legacy=select(document,layout,render),selection=legacy??selectRoot(document,layout,render);
   if(!selection)return {refused:'render-anchor-source-unsupported'};
   // The choice above sees metadata only. There is no retry with another owner.
   const a=PNG.sync.read(layoutBytes),b=PNG.sync.read(renderBytes),offset={x:layout.x-render.x,y:layout.y-render.y};
@@ -209,13 +305,13 @@ export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:stri
     if([0,1,2,3].some(c=>a.data[ai+c]!==b.data[bi+c]))return {refused:'render-anchor-pixel-mismatch'};
   }
   if(!aa.horizontalChanges||!aa.verticalChanges)return {refused:'render-anchor-origin-unobservable'};
-  return {proof:{kind:'figma-rest-source-opaque-anchor-v1',fileKey:requests.layout.fileKey,nodeId,version:before.version,
+  return {proof:{...(legacy?{kind:'figma-rest-source-opaque-anchor-v1' as const}:{kind:'figma-rest-source-root-opaque-anchor-v1' as const,coordinateBasis:{kind:'exact-layout-origin-v1' as const,x:layout.x,y:layout.y}}),fileKey:requests.layout.fileKey,nodeId,version:before.version,
     layout:{...layout},render:{...render},layoutInRender:offset,layoutSha256:imageSha256(layoutBytes),renderSha256:imageSha256(renderBytes),
     layoutSpan:{width:a.width,height:a.height},renderSpan:{width:b.width,height:b.height},requests:structuredClone(requests),
     sourceDocument:structuredClone(document),sourceBeforeNodeSha256:sha(document),sourceAfterNodeSha256:sha(after.nodes[nodeId].document),
     wholeOverlapRefusal:old.refused,evidence:'producer-verified-exact-rgba-at-metadata-offset',
     anchor:{ownerNodeId:selection.owner.id,ownerBox:{...selection.owner.absoluteBoundingBox},cornerRadius:selection.radius,
-      selectionRule:'opaque-round-rect-closed-cells-v1',coordinateSha256:selection.coordinateSha256,pixels:selection.pixels,...aa}}};
+      selectionRule:legacy?'opaque-round-rect-closed-cells-v1':'root-opaque-round-rect-closed-cells-v1',coordinateSha256:selection.coordinateSha256,pixels:selection.pixels,...aa} } as SourceAnchorProof};
 }
 
 /** Replays source geometry and render evidence. Equality to the absent original
@@ -223,7 +319,7 @@ export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:stri
  * this validator does not claim a new read or comparison of those absent bytes. */
 export function validateNativeAnchorProof(p:any,renderBytes:Buffer,layout:FrameBox,render:FrameBox):boolean {
   try {
-    if(!p||p.kind!=='figma-rest-source-opaque-anchor-v1'||typeof p.fileKey!=='string'||!p.fileKey||typeof p.version!=='string'||!p.version||
+    if(!p||!isSourceAnchorKind(p.kind)||typeof p.fileKey!=='string'||!p.fileKey||typeof p.version!=='string'||!p.version||
        typeof p.nodeId!=='string'||!p.nodeId||!box(p.layout)||!box(p.render)||!sameBox(p.layout,layout)||!sameBox(p.render,render)||
        p.wholeOverlapRefusal!=='render-export-overlap-mismatch'||p.evidence!=='producer-verified-exact-rgba-at-metadata-offset'||
        !requestsMatch(p.requests,p.nodeId,p.version,p.fileKey)||!hash(p.layoutSha256)||p.renderSha256!==imageSha256(renderBytes)||
@@ -233,8 +329,12 @@ export function validateNativeAnchorProof(p:any,renderBytes:Buffer,layout:FrameB
        !Number.isInteger(p.layoutInRender.x)||!Number.isInteger(p.layoutInRender.y))return false;
     const png=PNG.sync.read(renderBytes),span=(s:any,b:FrameBox)=>s&&s.width===Math.ceil(b.width)&&s.height===Math.ceil(b.height);
     if(!span(p.layoutSpan,layout)||!span(p.renderSpan,render)||png.width!==p.renderSpan.width||png.height!==p.renderSpan.height)return false;
-    const s=select(p.sourceDocument,layout,render),a=p.anchor;
-    if(!s||!a||a.selectionRule!=='opaque-round-rect-closed-cells-v1'||a.ownerNodeId!==s.owner.id||
+    const root=p.kind==='figma-rest-source-root-opaque-anchor-v1';
+    if(root&&(!p.coordinateBasis||p.coordinateBasis.kind!=='exact-layout-origin-v1'||
+       p.coordinateBasis.x!==layout.x||p.coordinateBasis.y!==layout.y||select(p.sourceDocument,layout,render)))return false;
+    if(!root&&p.coordinateBasis!==undefined)return false;
+    const s=root?selectRoot(p.sourceDocument,layout,render):select(p.sourceDocument,layout,render),a=p.anchor;
+    if(!s||!a||a.selectionRule!==(root?'root-opaque-round-rect-closed-cells-v1':'opaque-round-rect-closed-cells-v1')||a.ownerNodeId!==s.owner.id||
        !sameBox(a.ownerBox,s.owner.absoluteBoundingBox)||a.cornerRadius!==s.radius||a.coordinateSha256!==s.coordinateSha256||a.pixels!==s.pixels||
        !hash(a.rgbaSha256)||!Number.isSafeInteger(a.horizontalChanges)||a.horizontalChanges<=0||!Number.isSafeInteger(a.verticalChanges)||a.verticalChanges<=0)return false;
     const observed=observe(png,s,p.layoutInRender);
