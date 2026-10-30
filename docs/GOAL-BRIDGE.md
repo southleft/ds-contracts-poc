@@ -1,8 +1,9 @@
 # Goal: prove the bidirectional contract (canvas ↔ code)
 
 Owner decision, 2026-09-29. This extends [docs/GOAL.md](GOAL.md) (Beta 1).
-Current state, evidence and every rule are in
-[docs/HANDOFF-2026-09-29.md](HANDOFF-2026-09-29.md); read it first.
+Current state and evidence are in [docs/CURRENT.md](CURRENT.md). The owner's
+2026-09-29 handoff, which holds the full rule list, is kept outside the
+repository because it names local machine paths.
 
 ## The thesis
 

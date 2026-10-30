@@ -5,7 +5,10 @@
 **The active goal is [docs/GOAL.md](docs/GOAL.md) (owner-approved 2026-09-28):
 Beta 1 on real Figma files and real codebases.** Read it before choosing any
 work. It freezes the six V1 criteria, new benchmark cells, update channels and
-plan documents, and caps work at two lanes with one PR each. Every task cites a
+plan documents, and caps work at two lanes with one PR each.
+[docs/GOAL-BRIDGE.md](docs/GOAL-BRIDGE.md) (owner-approved 2026-09-29) extends
+it with the finish line: at least 80% first-pass success on never-seen kits in
+both directions. Every task cites a
 smoke-gate failure, a cold-start blocker, a real-design-system miss or an
 outside user's report. Write American English.
 
