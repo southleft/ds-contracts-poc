@@ -209,6 +209,21 @@ export function selectedCaller(caller:Part,wrapper:Contract,target:Contract,rout
  if(hop.row.selectedRoot&&!capturedSelectedDefaultsMatch(hop.row.selectedRoot.properties,target,selected.component!.props??{}))return;
  return selected;
 }
+/** A copied root override may name an axis of the component it came from.
+ *  The destination contract cannot select on that axis, so the override stays
+ *  behind and the child keeps its own size. */
+function dropForeignRootOverrides(part:Part,props:ReadonlySet<string>,dropped:string[]=[]):string[]{
+ const overrides=part.component?.rootOverrides;
+ if(overrides){
+  for(const [key,value] of Object.entries(overrides)){
+   const names=[...String(value).matchAll(/\{([^{}]+)\}/g)].map(match=>match[1]);
+   if(names.some(name=>!name.includes('.')&&!props.has(name))){delete overrides[key as keyof typeof overrides];dropped.push(key);}
+  }
+  if(!Object.keys(overrides).length)delete part.component!.rootOverrides;
+ }
+ for(const child of Object.values(part.parts??{}))dropForeignRootOverrides(child,props,dropped);
+ return dropped;
+}
 /** Expand only the selected owner's literal inputs before copying its root
  * token references into a different caller scope. Unknown expressions refuse. */
 function localizeRootOverrides(part:Part,ownerInputs:Record<string,unknown>,callerGate:Part['presenceByCombination']):boolean{
@@ -532,6 +547,12 @@ export function settleNestedPropertyInputs(dump:Record<string,unknown>,fileKey:s
      content.contentSlots=routes;delete content.contentSlot;
     }
     if(!valid)break;
+    // A copy that no scoped caller localized may still name an axis of the
+    // component it came from; that axis cannot select on the destination.
+    if(!route.plain&&!directScoped){
+     const dropped=dropForeignRootOverrides(suppliedPart,new Set((route.hop?parent:child).props.map(prop=>prop.name)));
+     if(dropped.length)limitations.push(`${parentProposal.setName}: nested-property-root-override-not-carried — ${w.nodeId} keeps the child's own ${[...new Set(dropped)].join(', ')}; the copied override named an axis the destination cannot select`);
+    }
     if((route.hop||route.plain)&&!rekeyCallerChildren(suppliedPart,callerKey,occupied)){valid=false;break;}
     destination.parts={...destination.parts,[callerKey]:suppliedPart};
     destination.component.contentSlots={...(destination.component.contentSlots??(previous.length?{[destination.component.contentSlot??'children']:previous}:{})),[slot]:[callerKey]};delete destination.component.contentSlot;

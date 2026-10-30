@@ -14,11 +14,11 @@
  *   not-found                 no metadata for the componentId in the response,
  *                             or /nodes answered null for the target id
  *   not-a-component           the target id is not a COMPONENT_SET/COMPONENT
- * A set named "Slot" remains eligible when reached through a component ID;
- * utility-name filtering belongs only to broad discovery, not dependencies.
- *
- *   set-name-collision        another set already in the dump has the same
- *                             name (the dump is keyed by set name)
+ * A repeated set name is kept. The dump is keyed by set name, so the mapper
+ * stores the later set as "name #nodeId" and both component keys stay
+ * addressable. A set named "Slot" remains eligible when reached through a
+ * component ID; utility-name filtering belongs only to broad discovery, not
+ * dependencies.
  *   unreadable                the /nodes request for the target failed
  *   cap-exceeded              following it would pull more than
  *                             CLOSURE_SET_CAP sets
@@ -76,7 +76,6 @@ export type ClosureUnresolvedReason =
   | "not-found"
   | "not-a-component"
   | "utility-slot-set"
-  | "set-name-collision"
   | "unreadable"
   | "cap-exceeded"
   | "set-name-integer-like"
@@ -147,7 +146,9 @@ interface InstanceRef {
 }
 
 /** Mapped instance mains and their applied swaps; never inherited descendants.
- *  Swap locations extend the node path with the exact property key. */
+ *  Swap locations extend the node path with the exact property key. A swap
+ *  on an overridden nested instance is followed too: the child's own defaults
+ *  do not name a host-selected icon. */
 export function mappedInstanceRefs(doc: RestNode): InstanceRef[] {
   const out: InstanceRef[] = [];
   const walk = (node: RestNode, nodePath: string) => {
@@ -230,7 +231,6 @@ export async function followInstances(
 
   const entries = new Map<string, Entry>(); // id → entry of every set in the dump
   const origin = new Map<string, number>(); // id → round (0 = requested)
-  const nameOwner = new Map<string, string>(); // set name → id
   const edges = new Map<string, Set<string>>(); // set id → target set ids in the dump
   const referencedBy = new Map<string, Set<string>>(); // target id → referencing set names
   const failed = new Map<
@@ -245,8 +245,6 @@ export async function followInstances(
     if (!entry || !isSetDoc(entry.document) || entries.has(id)) continue;
     entries.set(id, entry);
     origin.set(id, 0);
-    if (!nameOwner.has(entry.document.name))
-      nameOwner.set(entry.document.name, id);
     requested.push({
       nodeId: id,
       name: entry.document.name,
@@ -489,9 +487,6 @@ export async function followInstances(
         } else if (integerLikeSetName(entry.document.name)) {
           reason = "set-name-integer-like";
           detail = `${id}: ${integerDetail(entry.document.name)}`;
-        } else if (nameOwner.has(entry.document.name)) {
-          reason = "set-name-collision";
-          detail = `${id} "${entry.document.name}" has the same name as set ${nameOwner.get(entry.document.name)} already in this dump (the dump is keyed by set name)`;
         }
         if (reason) {
           failed.set(id, { reason, detail });
@@ -508,7 +503,6 @@ export async function followInstances(
         }
         entries.set(id, entry!);
         origin.set(id, round);
-        nameOwner.set(entry!.document.name, id);
         pulledCount += 1;
         next.push(id);
         for (const r of refs) {

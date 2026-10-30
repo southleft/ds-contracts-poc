@@ -25,29 +25,35 @@
 .item1 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .item2 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .item3 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .item4 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .item5 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .item6 {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }

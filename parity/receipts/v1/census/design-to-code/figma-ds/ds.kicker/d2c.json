@@ -156,7 +156,7 @@
     }
   ],
   "generatedFiles": {
-    "react/Kicker/Kicker.module.css": "b36daf80b23499574ba473ce18854748f6b617c462bcb6fc1609f0b6b4f14c44",
+    "react/Kicker/Kicker.module.css": "15fd7a4eb13c0dd5870487a036fb3a55b3dfadd0b73f3dd3f01d85ddb7541dcf",
     "react/Kicker/Kicker.stories.tsx": "9cfd466cae4713698bc5c4bdca3502b8b7509c83c48f076807d0206b597ee092",
     "react/Kicker/Kicker.tsx": "be94714c64606a21f49a27744bed7d2f2558ad3e8cf95c6077f0114067fb9e78",
     "react/Kicker/index.ts": "117e14dd493d055f90de6b5502720c6dd185d3c571381ba71e662708a3a182e8",

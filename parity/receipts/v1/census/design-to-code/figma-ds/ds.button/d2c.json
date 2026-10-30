@@ -360,7 +360,7 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "8a5e7379142f516f9a98317f18de6c4f1efa1299e9057bab118ab1434ec2ecb1",
+    "react/Button/Button.module.css": "9cd350d0e854c63bfb9a65d3e6d7b58669b34380c547b00281d6dd30cbab55d7",
     "react/Button/Button.stories.tsx": "89116f45c629db0ee76ce94f0e37c64cde5fc43da2f4d4cb9afb3e48237fafd4",
     "react/Button/Button.tsx": "9c8a45fc94275a5bf0241405cafa46fefbb819be460ba11e03aa6badf3d359a5",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",

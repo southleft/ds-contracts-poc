@@ -512,6 +512,15 @@ test('owned leaf defaults stay on direct terminal text and yield to authored ren
   nested.anatomy.root!.parts!.wrapper = { parts: { nested: nested.anatomy.root!.parts!.caption! } };
   delete nested.anatomy.root!.parts!.caption;
   assert.equal(nativeTextRenderingLeafParts(nested).size, 0, 'a deeper wrapper does not acquire the direct-leaf proof');
+  const policySibling = flagged();
+  policySibling.anatomy.root!.parts!.external = { slot: { name: 'children' } };
+  policySibling.anatomy.root!.parts!.title = { text: 'Title', declared: { 'text-rendering': 'geometricprecision' } };
+  assert.deepEqual([...nativeTextRenderingLeafParts(policySibling)], [policySibling.anatomy.root!.parts!.caption], 'the HEIGHT paint policy does not suppress a sibling auto-width leaf');
+  assert.match(rule(modules(policySibling).css, '.caption'), /text-rendering: geometricPrecision/);
+  const authoredSibling = flagged();
+  authoredSibling.anatomy.root!.parts!.external = { slot: { name: 'children' } };
+  authoredSibling.anatomy.root!.parts!.title = { text: 'Title', declared: { 'text-rendering': 'auto' } };
+  assert.equal(nativeTextRenderingLeafParts(authoredSibling).size, 0, 'an authored rendering value still suppresses the sibling leaf');
   const authored = structuredClone(c);
   authored.states = ['hover'];
   authored.anatomy.root!.parts!.external.declaredStates = { hover: { 'text-rendering': 'optimizelegibility' } };

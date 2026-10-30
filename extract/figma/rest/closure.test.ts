@@ -36,6 +36,7 @@ import {
   type FetchLike,
 } from "./fetch.js";
 import { mapRestToDump, type RestNode, type RestNodesResponse } from "./map.js";
+import type { DumpSet } from "../types.js";
 
 const TOKENS = [
   "tokens/primitives.tokens.json",
@@ -281,6 +282,52 @@ test("applied swap targets join the dependency walk without treating text or pre
     mappedInstanceRefs(parent.document).map((ref) => ref.componentId),
     ["2:1", "3:1", "2:1", "3:1"],
   );
+});
+
+test("an overridden nested swap is followed even when its main is absent from the components map", async () => {
+  const nested = inst("button", "2:1");
+  nested.id = "Iusage;button";
+  nested.componentProperties = {
+    "Left Icon#1:2": { type: "INSTANCE_SWAP", value: "5:1" },
+    "Right Icon#1:3": { type: "INSTANCE_SWAP", value: "6:1" },
+  };
+  const usage = inst("row", "2:1", [nested]);
+  usage.overrides = [
+    { id: nested.id, overriddenFields: ["componentProperties"] },
+  ];
+  const parent = entry(set("1:0", "Parent", [[usage]]), {
+    "2:1": { name: "Button", componentSetId: "2:0" },
+    "5:1": { name: "Icon / ArrowUp" },
+  });
+  const calls: string[][] = [];
+  const { closure } = await followInstances(
+    resp("1:0", parent),
+    ["1:0"],
+    batches(
+      {
+        "2:0": entry(set("2:0", "Button", [[]])),
+        "5:1": entry({
+          id: "5:1",
+          type: "COMPONENT",
+          name: "Icon / ArrowUp",
+          children: [],
+        }),
+        "6:1": entry(
+          { id: "6:1", type: "COMPONENT", name: "Icon / Circle", children: [] },
+          { "6:1": { name: "Icon / Circle", key: "circle-key" } },
+        ),
+      },
+      calls,
+    ),
+  );
+  // The absent swap main is located and proven before the dependency batch.
+  assert.deepEqual(calls, [["6:1"], ["2:0", "5:1"]]);
+  assert.deepEqual(closure.unresolved, []);
+  assert.deepEqual(closure.pulled.map((row) => row.name).sort(), [
+    "Button",
+    "Icon / ArrowUp",
+    "Icon / Circle",
+  ]);
 });
 
 test("swap targets retain remote, missing and cap refusals, with property-specific locations", async () => {
@@ -551,8 +598,47 @@ test("null answers, non-components, a name collision and a failed request stay n
     [
       ["2:0", "not-found"],
       ["3:0", "not-a-component"],
-      ["5:0", "set-name-collision"],
     ],
+  );
+  assert(
+    closure.pulled.some((node) => node.nodeId === "5:0" && node.name === "W"),
+  );
+  const mapped = mapRestToDump({
+    nodes: {
+      "1:4083": {
+        document: {
+          id: "1:4083",
+          name: "Icon / Settings2",
+          type: "COMPONENT",
+          children: [],
+        } as RestNode,
+      },
+      "5197:3287": {
+        document: {
+          id: "5197:3287",
+          name: "Icon / Settings2",
+          type: "COMPONENT",
+          children: [
+            { id: "5197:3288", name: "Vector", type: "VECTOR" } as RestNode,
+          ],
+        } as RestNode,
+      },
+    },
+  });
+  assert.equal((mapped.dump["Icon / Settings2"] as DumpSet).nodeId, "1:4083");
+  assert.equal(
+    (mapped.dump["Icon / Settings2 #5197:3287"] as DumpSet).nodeId,
+    "5197:3287",
+  );
+  assert.equal(
+    (mapped.dump["Icon / Settings2 #5197:3287"] as DumpSet).variants[0].children
+      ?.length,
+    1,
+  );
+  assert.ok(
+    mapped.report.degradations.some(
+      (row) => row.code === "set-name-disambiguated",
+    ),
   );
   assert(
     closure.pulled.some(

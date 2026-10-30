@@ -20,28 +20,28 @@
     }
   },
   "generatedSha256": {
-    "CheckSquare/CheckSquare.module.css": "9049a391f705fff7da910e6097d3cba188e1473c7618476f3ebd7720a3ee8784",
+    "CheckSquare/CheckSquare.module.css": "94f0597b2449913445468e8b43da025a16a2f6a23e8a5e28f7ec047dde4f633f",
     "CheckSquare/CheckSquare.tsx": "8ceaa5aeb7f77a360288ffbf76cc9fbe1b32f5b0594b91b86a4c4ff3bf2ad829",
     "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
-    "Checkbox/Checkbox.module.css": "a5405ddd8425efbe9989078f73c19fad543b5e227eda3a60eda47d3492828cea",
+    "Checkbox/Checkbox.module.css": "d4cecceba037628bd48f4bdce02df6442d46455afa120815e8aa35b00f529116",
     "Checkbox/Checkbox.tsx": "bd14475631b66a04f9b1d3cd03a65d02b77b30a74bbd06591b71548233346fbf",
     "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
-    "CheckboxIcon/CheckboxIcon.module.css": "c1d05d4a401c2a16e79355256bac61aa57ae429a71edcd123766dfc5e4b54386",
-    "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
+    "CheckboxIcon/CheckboxIcon.module.css": "a19c8ad6626708d3b1fade99c02775e3f1cb861891a4e98096396fbe03ba244a",
+    "CheckboxIcon/CheckboxIcon.tsx": "d1e8b5053c1d1fc00edd0bd913b913b1e5efb5c2b224e1274975be80b28af95e",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
-    "Icon/Icon.module.css": "9a1f41e10f47ebd3208f922617ed3dbb74f168eeacb15ffefd51711c7305cff8",
+    "Icon/Icon.module.css": "bdd3c7a55a627a5b45b3816efce896283510af7c063d119b9b4cc283fddebb24",
     "Icon/Icon.tsx": "1a216ed26641d93f8e84eae6e0c22376a70fc0aed89d7e06510e26c48ab8caf1",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "MinusSquare/MinusSquare.module.css": "6d83b085b834a78eecd1debba4b3bbc232552efa64294896c01613b1cd68f746",
+    "MinusSquare/MinusSquare.module.css": "1f4ac6844560e2a99f1984901226b4df86f4552962387ab2cc2c1cda9cac2174",
     "MinusSquare/MinusSquare.tsx": "fb8936d3d39d2c024bf9b49e33f174fb4dd66bc1cbc3e3690ecc3c7fa0fede8e",
     "MinusSquare/index.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
-    "Placeholder/Placeholder.module.css": "916940b6aac42d63d3f12490d0b8523637b4ba9f621ac7069cddcf7eff71c84f",
+    "Placeholder/Placeholder.module.css": "088f85e742416593cff28da0368d897ee89a81244804e6c110000de67a9a2fe6",
     "Placeholder/Placeholder.tsx": "b3305bfb76ef875be460c0e4b6cbb1407618ba04635fc3e3f55c9c812dc56453",
     "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
-    "Square/Square.module.css": "3c1cff768f8533b1b31193542c35e0dca49c8d30be17a813335e9bcfb157aaf5",
+    "Square/Square.module.css": "a0167fd9c5116c0055a790827ead3dbbb45ffac0eaac570f8f1db8c100499b4e",
     "Square/Square.tsx": "7215c439252b4bcdccf90ef458919d63c498554f4c6de276670e06df339a40f8",
     "Square/index.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
-    "WarningCircle/WarningCircle.module.css": "747d2b3a4c5eec8a25ea101a9faaa69d9e81959e462e03b463c82270eca0d0bb",
+    "WarningCircle/WarningCircle.module.css": "5d71ec88e2d980065038ae98620757f4cfa68307525d028602255706d741df4e",
     "WarningCircle/WarningCircle.tsx": "42590d2702cd35b6a158c989adaa9f414d68a831cb7a432595e6dfb8ce9bc634",
     "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
     "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
@@ -130,13 +130,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 56,
+          "y": 52,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 56,
+          "y": 52,
           "width": 16,
           "height": 16
         },
@@ -146,7 +146,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 56,
+            "y": 52,
             "width": 16,
             "height": 16
           }
@@ -189,13 +189,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 92,
+          "y": 86,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 92,
+          "y": 86,
           "width": 24,
           "height": 24
         },
@@ -205,7 +205,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 92,
+            "y": 86,
             "width": 24,
             "height": 24
           }
@@ -248,13 +248,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 136,
+          "y": 126,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 136,
+          "y": 126,
           "width": 16,
           "height": 16
         },
@@ -264,7 +264,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 136,
+            "y": 126,
             "width": 16,
             "height": 16
           }
@@ -309,13 +309,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 172,
+          "y": 160,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 172,
+          "y": 160,
           "width": 24,
           "height": 24
         },
@@ -325,7 +325,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 172,
+            "y": 160,
             "width": 24,
             "height": 24
           }
@@ -370,13 +370,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 216,
+          "y": 200,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 216,
+          "y": 200,
           "width": 16,
           "height": 16
         },
@@ -386,7 +386,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 216,
+            "y": 200,
             "width": 16,
             "height": 16
           }
@@ -431,13 +431,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 252,
+          "y": 234,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 252,
+          "y": 234,
           "width": 24,
           "height": 24
         },
@@ -447,7 +447,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 252,
+            "y": 234,
             "width": 24,
             "height": 24
           }
@@ -492,13 +492,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 296,
+          "y": 274,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 296,
+          "y": 274,
           "width": 16,
           "height": 16
         },
@@ -508,7 +508,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 296,
+            "y": 274,
             "width": 16,
             "height": 16
           }
@@ -553,25 +553,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 332,
+          "y": 308,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 332,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 304,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "4e16dc82777bfde1caa1b82ce28c3cc95e233c1dac70b2083fc7b20631b8fc94",
+        "pngSha256": "53a8ef50a8238b6487105529b9937cbbcf264dba8a39d8b8321bf0cfe6f69115",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 332,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 304,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -614,25 +614,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 376,
+          "y": 348,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 376,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 344,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "079f6585faddd2975af063c9d9e7b407af9fbf40f8634daaa972356ba5e0e90d",
+        "pngSha256": "28448ff8095d1451dde8856ed4285ef6640a1f971e0b548403f9c1a45c898bed",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 376,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 344,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -675,25 +675,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 412,
+          "y": 382,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 412,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 378,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "1e777a2b8dbf77d0403210935fd9c22ce43d4c05d9062e1f68524c46e11d7218",
+        "pngSha256": "8285906da3fcb7f7b10e87ff7e17e977cf4cd5f6b48bc42d0eab038dbb221b1f",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 412,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 378,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -736,25 +736,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 456,
+          "y": 422,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 456,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 418,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "28a42c31190e0cd6b095e7548aa171ad1310ecc44e61366be95242630a89f463",
+        "pngSha256": "f4f7044bcfa293c332c7c33311f2ab82f2a9a220adcf1e392ca6357d9767ad9f",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 456,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 418,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -798,13 +798,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 492,
+          "y": 456,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 492,
+          "y": 456,
           "width": 24,
           "height": 24
         },
@@ -814,7 +814,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 492,
+            "y": 456,
             "width": 24,
             "height": 24
           }
@@ -860,13 +860,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 536,
+          "y": 496,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 536,
+          "y": 496,
           "width": 16,
           "height": 16
         },
@@ -876,7 +876,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 536,
+            "y": 496,
             "width": 16,
             "height": 16
           }
@@ -919,13 +919,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 572,
+          "y": 530,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 572,
+          "y": 530,
           "width": 24,
           "height": 24
         },
@@ -935,7 +935,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 572,
+            "y": 530,
             "width": 24,
             "height": 24
           }
@@ -978,13 +978,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 616,
+          "y": 570,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 616,
+          "y": 570,
           "width": 16,
           "height": 16
         },
@@ -994,7 +994,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 616,
+            "y": 570,
             "width": 16,
             "height": 16
           }
@@ -1037,13 +1037,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 652,
+          "y": 604,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 652,
+          "y": 604,
           "width": 24,
           "height": 24
         },
@@ -1053,7 +1053,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 652,
+            "y": 604,
             "width": 24,
             "height": 24
           }
@@ -1096,13 +1096,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 696,
+          "y": 644,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 696,
+          "y": 644,
           "width": 16,
           "height": 16
         },
@@ -1112,7 +1112,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 696,
+            "y": 644,
             "width": 16,
             "height": 16
           }
@@ -1157,13 +1157,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 732,
+          "y": 678,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 732,
+          "y": 678,
           "width": 24,
           "height": 24
         },
@@ -1173,7 +1173,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 732,
+            "y": 678,
             "width": 24,
             "height": 24
           }
@@ -1218,13 +1218,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 776,
+          "y": 718,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 776,
+          "y": 718,
           "width": 16,
           "height": 16
         },
@@ -1234,7 +1234,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 776,
+            "y": 718,
             "width": 16,
             "height": 16
           }
@@ -1279,23 +1279,23 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 812,
+          "y": 752,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 812,
+          "y": 752,
           "width": 24,
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3ba981fae93e16f1c6f74b2b3ec232ee106b4b4acd6f48c07075007121725f57",
+        "pngSha256": "b72075bc09fdbe085752f6405d677b5f6d130e0bc52606903ff2de0cd741ae79",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 812,
+            "y": 752,
             "width": 24,
             "height": 24
           }
@@ -1340,13 +1340,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 856,
+          "y": 792,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 856,
+          "y": 792,
           "width": 16,
           "height": 16
         },
@@ -1356,7 +1356,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 856,
+            "y": 792,
             "width": 16,
             "height": 16
           }
@@ -1401,25 +1401,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 892,
+          "y": 826,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 892,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 822,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "7b901e4fdd4479aec2cd3c69f285a38f18a465f67fa86b14902ffcc2301bef15",
+        "pngSha256": "2805dd4719afc3f91d39885988d49db2f88a7349359efa34ec6add667aab5881",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 892,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 822,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -1462,25 +1462,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 936,
+          "y": 866,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 936,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 862,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c412593b19be8b2697c31f907d62753981bf8147d05a73ad1fd30b3c047b6595",
+        "pngSha256": "29c3acacdf8bbde565e398d05433b1f21610c2b0717e3ae63acead2be1d8e642",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 936,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 862,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -1523,25 +1523,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 972,
+          "y": 900,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 972,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 896,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "bd540ac0a1b883b614c0cf6960a5b6bc5114d13bbf931895d699e2b285cb9caf",
+        "pngSha256": "1e4c7b47be9a00be3ab119060f4c2f05af13b61ec809b773d5b0fc92abbf1bfa",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 972,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 896,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -1584,25 +1584,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1016,
+          "y": 940,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 1016,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 936,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "784064001ec8439cac91478b15a593b6c131d346c52051cf2557311271d1280c",
+        "pngSha256": "89b7d92e183a6832c4956457aa648ac6bc8c43fa3f65352040e82a23b18a2274",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 1016,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 936,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -1646,13 +1646,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1052,
+          "y": 974,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1052,
+          "y": 974,
           "width": 24,
           "height": 24
         },
@@ -1662,7 +1662,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1052,
+            "y": 974,
             "width": 24,
             "height": 24
           }
@@ -1708,13 +1708,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1096,
+          "y": 1014,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1096,
+          "y": 1014,
           "width": 16,
           "height": 16
         },
@@ -1724,7 +1724,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1096,
+            "y": 1014,
             "width": 16,
             "height": 16
           }
@@ -1767,13 +1767,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1132,
+          "y": 1048,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1132,
+          "y": 1048,
           "width": 24,
           "height": 24
         },
@@ -1783,7 +1783,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1132,
+            "y": 1048,
             "width": 24,
             "height": 24
           }
@@ -1826,13 +1826,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1176,
+          "y": 1088,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1176,
+          "y": 1088,
           "width": 16,
           "height": 16
         },
@@ -1842,7 +1842,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1176,
+            "y": 1088,
             "width": 16,
             "height": 16
           }
@@ -1885,13 +1885,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1212,
+          "y": 1122,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1212,
+          "y": 1122,
           "width": 24,
           "height": 24
         },
@@ -1901,7 +1901,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1212,
+            "y": 1122,
             "width": 24,
             "height": 24
           }
@@ -1944,13 +1944,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1256,
+          "y": 1162,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1256,
+          "y": 1162,
           "width": 16,
           "height": 16
         },
@@ -1960,7 +1960,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1256,
+            "y": 1162,
             "width": 16,
             "height": 16
           }
@@ -2006,13 +2006,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1292,
+          "y": 1196,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1292,
+          "y": 1196,
           "width": 24,
           "height": 24
         },
@@ -2022,7 +2022,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1292,
+            "y": 1196,
             "width": 24,
             "height": 24
           }
@@ -2068,13 +2068,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1336,
+          "y": 1236,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1336,
+          "y": 1236,
           "width": 16,
           "height": 16
         },
@@ -2084,7 +2084,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1336,
+            "y": 1236,
             "width": 16,
             "height": 16
           }
@@ -2129,25 +2129,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1372,
+          "y": 1270,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 1372,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 1266,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "908c72b09a2e14964d3e4d781cdc0a0733217cb79ff12bb4f4a083ecbed15ccd",
+        "pngSha256": "41b6eace8c59b804499f3a989d2f02c22cca5a5ca7f55eee64a75bea35cfa26e",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 1372,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 1266,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -2190,25 +2190,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1416,
+          "y": 1310,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 1416,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 1306,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b471b8dd287ad0cca81f63504a81d747e62300486b1cbbb6fd55d712acd6c0df",
+        "pngSha256": "3601f1fa0bd8e3b939a47f1adfe4df4356ab304deaf70a2e136700959a7a9d26",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 1416,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 1306,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -2251,25 +2251,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1452,
+          "y": 1344,
           "width": 24,
           "height": 24
         },
         "capture": {
-          "x": 12,
-          "y": 1452,
-          "width": 24,
-          "height": 24
+          "x": 8,
+          "y": 1340,
+          "width": 32,
+          "height": 32
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "130b4a7e560bb77ac743e849379595d4d9a510b2e27553532001a773a75ac9e7",
+        "pngSha256": "ab95c905a5bf23214e366aa97dccf057ff05594174dd8460469398972f59c225",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 1452,
-            "width": 24,
-            "height": 24
+            "x": 8,
+            "y": 1340,
+            "width": 32,
+            "height": 32
           }
         }
       },
@@ -2312,25 +2312,25 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1496,
+          "y": 1384,
           "width": 16,
           "height": 16
         },
         "capture": {
-          "x": 12,
-          "y": 1496,
-          "width": 16,
-          "height": 16
+          "x": 8,
+          "y": 1380,
+          "width": 24,
+          "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "0f6337592704d6ea5c9eaeaa2125b958d3f58467d8ae86dcaae3fba928a82a51",
+        "pngSha256": "cdd7b323043db4466c83a671d04db853df1c542a28082ab8a3a64818151a4c0e",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
-            "x": 12,
-            "y": 1496,
-            "width": 16,
-            "height": 16
+            "x": 8,
+            "y": 1380,
+            "width": 24,
+            "height": 24
           }
         }
       },
@@ -2373,13 +2373,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1532,
+          "y": 1418,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1532,
+          "y": 1418,
           "width": 24,
           "height": 24
         },
@@ -2389,7 +2389,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1532,
+            "y": 1418,
             "width": 24,
             "height": 24
           }
@@ -2434,13 +2434,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1576,
+          "y": 1458,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1576,
+          "y": 1458,
           "width": 16,
           "height": 16
         },
@@ -2450,7 +2450,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1576,
+            "y": 1458,
             "width": 16,
             "height": 16
           }
@@ -2495,13 +2495,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1612,
+          "y": 1492,
           "width": 24,
           "height": 24
         },
         "capture": {
           "x": 12,
-          "y": 1612,
+          "y": 1492,
           "width": 24,
           "height": 24
         },
@@ -2511,7 +2511,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1612,
+            "y": 1492,
             "width": 24,
             "height": 24
           }
@@ -2556,13 +2556,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1656,
+          "y": 1532,
           "width": 16,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1656,
+          "y": 1532,
           "width": 16,
           "height": 16
         },
@@ -2572,7 +2572,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1656,
+            "y": 1532,
             "width": 16,
             "height": 16
           }
@@ -2627,29 +2627,29 @@
         "key": "selection-unchecked_size-large_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-unchecked_size-small_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-unchecked_size-large_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-unchecked_size-small_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-checked_size-large_error-false_state-hover",
@@ -2683,57 +2683,57 @@
         "key": "selection-checked_size-large_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-checked_size-small_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-checked_size-large_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-checked_size-small_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-indeterminate_size-large_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-indeterminate_size-small_error-false_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-indeterminate_size-large_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-indeterminate_size-small_error-true_state-focus-visible",
         "state": "focus-visible",
         "reachedBy": "keyboard-modality focus",
-        "reached": false,
-        "paintChanged": false
+        "reached": true,
+        "paintChanged": true
       },
       {
         "key": "selection-indeterminate_size-large_error-false_state-hover",
@@ -3072,7 +3072,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2402777548310810334",
+      "version": "2415628455515675420",
       "export": {
         "format": "png",
         "scale": 1,
@@ -3090,8 +3090,71 @@
         "useAbsoluteBounds": false,
         "proofs": "figma-render-export-proofs.json"
       },
-      "beforeSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989",
-      "afterSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989"
+      "exportRequests": {
+        "layout": {
+          "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+          "version": "2415628455515675420",
+          "nodeIds": [
+            "271:2238",
+            "271:2378",
+            "271:2297",
+            "271:2447",
+            "271:2248",
+            "271:2380",
+            "271:2299",
+            "271:2449",
+            "271:2254",
+            "271:2382",
+            "271:2301",
+            "271:2451",
+            "271:2260",
+            "271:2385",
+            "271:2239",
+            "271:2387",
+            "271:2306",
+            "271:2454",
+            "271:2276",
+            "271:2389",
+            "271:2308",
+            "271:2456",
+            "271:2279",
+            "271:2391",
+            "271:2310",
+            "271:2458",
+            "271:2282",
+            "271:2394",
+            "271:2240",
+            "271:2396",
+            "271:2315",
+            "271:2461",
+            "271:2294",
+            "271:2398",
+            "271:2290",
+            "271:2400",
+            "271:2319",
+            "271:2463",
+            "271:2287",
+            "271:2403",
+            "271:2322",
+            "271:2466"
+          ],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": true
+        },
+        "render": {
+          "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+          "version": "2415628455515675420",
+          "nodeIds": [],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": false
+        }
+      },
+      "beforeSha256": "b92ec1f52ef43c89926186635c0685c3c57ec7c61c16272cf4836e10f63cb34e",
+      "afterSha256": "b92ec1f52ef43c89926186635c0685c3c57ec7c61c16272cf4836e10f63cb34e"
     },
     "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -3150,6 +3213,24 @@
         "inkCoveragePercent": {
           "consumer": 22.22,
           "figma": 22.22
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -3227,6 +3308,24 @@
           "consumer": 17.19,
           "figma": 17.19
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -3302,6 +3401,24 @@
         "inkCoveragePercent": {
           "consumer": 22.22,
           "figma": 22.22
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -3379,6 +3496,24 @@
           "consumer": 17.19,
           "figma": 17.19
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -3454,6 +3589,24 @@
         "inkCoveragePercent": {
           "consumer": 22.22,
           "figma": 22.22
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -3531,6 +3684,24 @@
           "consumer": 17.19,
           "figma": 17.19
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -3606,6 +3777,24 @@
         "inkCoveragePercent": {
           "consumer": 22.22,
           "figma": 22.22
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -3683,6 +3872,24 @@
           "consumer": 17.19,
           "figma": 17.19
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -3707,13 +3914,13 @@
       {
         "key": "selection-unchecked_size-large_error-false_state-focus-visible",
         "figmaImage": "figma-271_2254.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -3721,17 +3928,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -3753,17 +3960,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 22.22,
+          "consumer": 35.94,
           "figma": 50
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -3772,8 +3997,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -3784,13 +4009,13 @@
       {
         "key": "selection-unchecked_size-small_error-false_state-focus-visible",
         "figmaImage": "figma-271_2382.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -3798,17 +4023,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -3830,17 +4055,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 17.19,
+          "consumer": 38.19,
           "figma": 60.94
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -3849,8 +4092,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -3861,13 +4104,13 @@
       {
         "key": "selection-unchecked_size-large_error-true_state-focus-visible",
         "figmaImage": "figma-271_2301.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -3875,17 +4118,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -3907,17 +4150,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 22.22,
+          "consumer": 35.94,
           "figma": 50
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -3926,8 +4187,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -3938,13 +4199,13 @@
       {
         "key": "selection-unchecked_size-small_error-true_state-focus-visible",
         "figmaImage": "figma-271_2451.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -3952,17 +4213,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -3984,17 +4245,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 17.19,
+          "consumer": 38.19,
           "figma": 60.94
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -4003,8 +4282,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -4066,6 +4345,24 @@
         "inkCoveragePercent": {
           "consumer": 22.22,
           "figma": 22.22
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -4143,6 +4440,24 @@
           "consumer": 17.19,
           "figma": 17.19
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -4218,6 +4533,24 @@
         "inkCoveragePercent": {
           "consumer": 56.08,
           "figma": 56.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -4295,6 +4628,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -4370,6 +4721,24 @@
         "inkCoveragePercent": {
           "consumer": 56.08,
           "figma": 56.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -4447,6 +4816,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -4522,6 +4909,24 @@
         "inkCoveragePercent": {
           "consumer": 56.08,
           "figma": 56.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -4599,6 +5004,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -4674,6 +5097,24 @@
         "inkCoveragePercent": {
           "consumer": 56.08,
           "figma": 56.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -4751,6 +5192,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -4775,13 +5234,13 @@
       {
         "key": "selection-checked_size-large_error-false_state-focus-visible",
         "figmaImage": "figma-271_2279.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -4789,17 +5248,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -4821,17 +5280,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.08,
+          "consumer": 54.98,
           "figma": 83.85
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -4840,8 +5317,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -4852,13 +5329,13 @@
       {
         "key": "selection-checked_size-small_error-false_state-focus-visible",
         "figmaImage": "figma-271_2391.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -4866,17 +5343,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -4898,17 +5375,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.56,
           "figma": 100
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -4917,8 +5412,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -4929,13 +5424,13 @@
       {
         "key": "selection-checked_size-large_error-true_state-focus-visible",
         "figmaImage": "figma-271_2310.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -4943,17 +5438,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -4975,17 +5470,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.08,
+          "consumer": 54.98,
           "figma": 83.85
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -4994,8 +5507,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -5006,13 +5519,13 @@
       {
         "key": "selection-checked_size-small_error-true_state-focus-visible",
         "figmaImage": "figma-271_2458.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -5020,17 +5533,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -5052,17 +5565,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.56,
           "figma": 100
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -5071,8 +5602,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -5134,6 +5665,24 @@
         "inkCoveragePercent": {
           "consumer": 56.08,
           "figma": 56.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -5211,6 +5760,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -5286,6 +5853,24 @@
         "inkCoveragePercent": {
           "consumer": 56.25,
           "figma": 56.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -5363,6 +5948,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -5438,6 +6041,24 @@
         "inkCoveragePercent": {
           "consumer": 56.25,
           "figma": 56.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -5515,6 +6136,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -5590,6 +6229,24 @@
         "inkCoveragePercent": {
           "consumer": 56.25,
           "figma": 56.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -5667,6 +6324,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -5691,13 +6366,13 @@
       {
         "key": "selection-indeterminate_size-large_error-false_state-focus-visible",
         "figmaImage": "figma-271_2290.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -5705,17 +6380,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -5737,17 +6412,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.08,
           "figma": 84.03
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -5756,8 +6449,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -5768,13 +6461,13 @@
       {
         "key": "selection-indeterminate_size-small_error-false_state-focus-visible",
         "figmaImage": "figma-271_2400.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -5782,17 +6475,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -5814,17 +6507,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.56,
           "figma": 100
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -5833,8 +6544,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -5845,13 +6556,13 @@
       {
         "key": "selection-indeterminate_size-large_error-true_state-focus-visible",
         "figmaImage": "figma-271_2319.png",
-        "mismatchPercent": 31.40495867768595,
-        "blackMismatchPercent": 31.40495867768595,
+        "mismatchPercent": 37.890625,
+        "blackMismatchPercent": 37.890625,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 31.40495867768595,
-          "blackMismatchPercent": 31.40495867768595,
+          "whiteMismatchPercent": 37.890625,
+          "blackMismatchPercent": 37.890625,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -5859,17 +6570,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
-              "x": 1,
-              "y": 1,
-              "width": 22,
-              "height": 22
+              "x": 0,
+              "y": 0,
+              "width": 32,
+              "height": 32
             }
           },
-          "pixelsCompared": 484
+          "pixelsCompared": 1024
         },
         "figmaFrame": {
           "layout": {
@@ -5891,17 +6602,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 31.40495867768595,
+        "textMaskedPercent": 37.890625,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.08,
           "figma": 84.03
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 32,
+            "height": 32
+          },
+          "figma": {
+            "width": 22,
+            "height": 22
+          },
+          "delta": {
+            "width": 10,
+            "height": 10
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 18,
-            "height": 18
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 22,
@@ -5910,8 +6639,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 24,
-            "height": 24
+            "width": 32,
+            "height": 32
           },
           "figma": {
             "width": 24,
@@ -5922,13 +6651,13 @@
       {
         "key": "selection-indeterminate_size-small_error-true_state-focus-visible",
         "figmaImage": "figma-271_2463.png",
-        "mismatchPercent": 40.625,
-        "blackMismatchPercent": 40.625,
+        "mismatchPercent": 47.91666666666667,
+        "blackMismatchPercent": 47.91666666666667,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 40.625,
-          "blackMismatchPercent": 40.625,
+          "whiteMismatchPercent": 47.91666666666667,
+          "blackMismatchPercent": 47.91666666666667,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -5936,17 +6665,17 @@
               "y": 0
             },
             "figma": {
-              "x": 0,
-              "y": 0
+              "x": 4,
+              "y": 4
             },
             "commonCrop": {
               "x": 0,
               "y": 0,
-              "width": 16,
-              "height": 16
+              "width": 24,
+              "height": 24
             }
           },
-          "pixelsCompared": 256
+          "pixelsCompared": 576
         },
         "figmaFrame": {
           "layout": {
@@ -5968,17 +6697,35 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 40.625,
+        "textMaskedPercent": 47.91666666666667,
         "textMaskCoveragePercent": 0,
         "residual": "no-text",
         "inkCoveragePercent": {
-          "consumer": 56.25,
+          "consumer": 55.56,
           "figma": 100
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 24,
+            "height": 24
+          },
+          "figma": {
+            "width": 16,
+            "height": 16
+          },
+          "delta": {
+            "width": 8,
+            "height": 8
+          },
+          "limitPx": 2,
+          "withinLimit": false
         },
         "contentSize": {
           "consumer": {
-            "width": 12,
-            "height": 12
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -5987,8 +6734,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 16,
-            "height": 16
+            "width": 24,
+            "height": 24
           },
           "figma": {
             "width": 16,
@@ -6050,6 +6797,24 @@
         "inkCoveragePercent": {
           "consumer": 56.25,
           "figma": 56.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6127,6 +6892,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -6202,6 +6985,24 @@
         "inkCoveragePercent": {
           "consumer": 56.25,
           "figma": 56.25
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 18,
+            "height": 18
+          },
+          "figma": {
+            "width": 18,
+            "height": 18
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6279,6 +7080,24 @@
           "consumer": 56.25,
           "figma": 56.25
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 12,
+            "height": 12
+          },
+          "figma": {
+            "width": 12,
+            "height": 12
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 12,
@@ -6303,54 +7122,42 @@
     ]
   },
   "problems": [
-    "state-unreachable:focus-visible:selection-unchecked_size-large_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-unchecked_size-small_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-unchecked_size-large_error-true_state-focus-visible",
-    "state-unreachable:focus-visible:selection-unchecked_size-small_error-true_state-focus-visible",
-    "state-unreachable:focus-visible:selection-checked_size-large_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-checked_size-small_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-checked_size-large_error-true_state-focus-visible",
-    "state-unreachable:focus-visible:selection-checked_size-small_error-true_state-focus-visible",
-    "state-unreachable:focus-visible:selection-indeterminate_size-large_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-indeterminate_size-small_error-false_state-focus-visible",
-    "state-unreachable:focus-visible:selection-indeterminate_size-large_error-true_state-focus-visible",
-    "state-unreachable:focus-visible:selection-indeterminate_size-small_error-true_state-focus-visible",
-    "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-unchecked_size-small_error-false_state-focus-visible:12x12 vs 16x16",
-    "layout-image-difference-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-unchecked_size-large_error-true_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-unchecked_size-small_error-true_state-focus-visible:12x12 vs 16x16",
-    "layout-image-difference-above-limit:selection-checked_size-large_error-false_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-false_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-checked_size-large_error-false_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-checked_size-small_error-false_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-false_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-checked_size-small_error-false_state-focus-visible:12x12 vs 16x16",
-    "layout-image-difference-above-limit:selection-checked_size-large_error-true_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-true_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-checked_size-large_error-true_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-checked_size-small_error-true_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-true_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-checked_size-small_error-true_state-focus-visible:12x12 vs 16x16",
-    "layout-image-difference-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-indeterminate_size-large_error-false_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-indeterminate_size-small_error-false_state-focus-visible:12x12 vs 16x16",
-    "layout-image-difference-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:31.40%",
-    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:31.40%",
-    "content-size-mismatch:selection-indeterminate_size-large_error-true_state-focus-visible:18x18 vs 22x22",
-    "layout-image-difference-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:40.63%",
-    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:40.63%",
-    "content-size-mismatch:selection-indeterminate_size-small_error-true_state-focus-visible:12x12 vs 16x16"
+    "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-unchecked_size-small_error-false_state-focus-visible:24x24 vs 16x16",
+    "layout-image-difference-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-unchecked_size-large_error-true_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-unchecked_size-small_error-true_state-focus-visible:24x24 vs 16x16",
+    "layout-image-difference-above-limit:selection-checked_size-large_error-false_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-false_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-checked_size-large_error-false_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-checked_size-small_error-false_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-false_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-checked_size-small_error-false_state-focus-visible:24x24 vs 16x16",
+    "layout-image-difference-above-limit:selection-checked_size-large_error-true_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-true_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-checked_size-large_error-true_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-checked_size-small_error-true_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-true_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-checked_size-small_error-true_state-focus-visible:24x24 vs 16x16",
+    "layout-image-difference-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-indeterminate_size-large_error-false_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-indeterminate_size-small_error-false_state-focus-visible:24x24 vs 16x16",
+    "layout-image-difference-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:37.89%",
+    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:37.89%",
+    "content-size-mismatch:selection-indeterminate_size-large_error-true_state-focus-visible:32x32 vs 22x22",
+    "layout-image-difference-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:47.92%",
+    "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:47.92%",
+    "content-size-mismatch:selection-indeterminate_size-small_error-true_state-focus-visible:24x24 vs 16x16"
   ],
   "limitations": [
     "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
@@ -6412,7 +7219,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/checkboxicon",
-    "tarballSha256": "031e9b23803165d55660ba1bb87c51c269b9521a0912c135933621a78fea2e94",
+    "tarballSha256": "fb9495fcceb83f2b82cecfc3ceba2ef3e97db3fc8ff856a88489ff443aa4d42c",
     "distFiles": [
       "CheckSquare",
       "CheckSquare/CheckSquare.d.ts",
@@ -6470,7 +7277,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "cfa1ac1a75b6e2c4c5c87ac2e37b03d63357e1fb3271b65f5145e5a6cf8ac6b5",
+    "lockfileSha256": "8e62cf62d212cf02ef1499509b399cbb2c6cbc09ecd0bcc681a7f5e456b157a6",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -6501,7 +7308,7 @@
       ]
     },
     "builtCss": {
-      "bytes": 19215,
+      "bytes": 19307,
       "tokenDefinitions": 98,
       "tokenDefinitionsExpected": 98
     },
@@ -6515,8 +7322,8 @@
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
     "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
-    "figmaVersion": "2402777548310810334",
-    "responseSha256": "727043bec43314bd90989a4f1b1759ed79e44dfcfb66fdf6aca4c8b990a66989",
+    "figmaVersion": "2415628455515675420",
+    "responseSha256": "b92ec1f52ef43c89926186635c0685c3c57ec7c61c16272cf4836e10f63cb34e",
     "evidence": "figma-content.json",
     "cases": [
       {
@@ -7220,8 +8027,8 @@
         "figmaName": "selection=unchecked, size=large, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7232,10 +8039,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-unchecked_size-large_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-false_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-unchecked_size-large_error-false_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7243,8 +8049,8 @@
         "figmaName": "selection=unchecked, size=small, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7255,10 +8061,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-unchecked_size-small_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-unchecked_size-small_error-false_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-false_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-unchecked_size-small_error-false_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {
@@ -7266,8 +8071,8 @@
         "figmaName": "selection=unchecked, size=large, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7278,10 +8083,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-unchecked_size-large_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-unchecked_size-large_error-true_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-unchecked_size-large_error-true_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-unchecked_size-large_error-true_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7289,8 +8093,8 @@
         "figmaName": "selection=unchecked, size=small, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7301,10 +8105,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-unchecked_size-small_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-unchecked_size-small_error-true_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-unchecked_size-small_error-true_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-unchecked_size-small_error-true_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {
@@ -7492,8 +8295,8 @@
         "figmaName": "selection=checked, size=large, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7504,10 +8307,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-checked_size-large_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-checked_size-large_error-false_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-false_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-checked_size-large_error-false_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-checked_size-large_error-false_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-false_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-checked_size-large_error-false_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7515,8 +8317,8 @@
         "figmaName": "selection=checked, size=small, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7527,10 +8329,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-checked_size-small_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-checked_size-small_error-false_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-false_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-checked_size-small_error-false_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-checked_size-small_error-false_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-false_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-checked_size-small_error-false_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {
@@ -7538,8 +8339,8 @@
         "figmaName": "selection=checked, size=large, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7550,10 +8351,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-checked_size-large_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-checked_size-large_error-true_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-true_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-checked_size-large_error-true_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-checked_size-large_error-true_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-checked_size-large_error-true_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-checked_size-large_error-true_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7561,8 +8361,8 @@
         "figmaName": "selection=checked, size=small, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7573,10 +8373,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-checked_size-small_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-checked_size-small_error-true_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-true_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-checked_size-small_error-true_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-checked_size-small_error-true_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-checked_size-small_error-true_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-checked_size-small_error-true_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {
@@ -7728,8 +8527,8 @@
         "figmaName": "selection=indeterminate, size=large, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7740,10 +8539,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-indeterminate_size-large_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-indeterminate_size-large_error-false_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-false_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-indeterminate_size-large_error-false_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7751,8 +8549,8 @@
         "figmaName": "selection=indeterminate, size=small, state=focus, error=false",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7763,10 +8561,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-indeterminate_size-small_error-false_state-focus-visible",
-          "layout-image-difference-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-indeterminate_size-small_error-false_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-false_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-indeterminate_size-small_error-false_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {
@@ -7774,8 +8571,8 @@
         "figmaName": "selection=indeterminate, size=large, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 31.40495867768595,
-          "black": 31.40495867768595,
+          "white": 37.890625,
+          "black": 37.890625,
           "withinLimit": false
         },
         "content": {
@@ -7786,10 +8583,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-indeterminate_size-large_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:31.40%",
-          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:31.40%",
-          "content-size-mismatch:selection-indeterminate_size-large_error-true_state-focus-visible:18x18 vs 22x22"
+          "layout-image-difference-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:37.89%",
+          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-large_error-true_state-focus-visible:37.89%",
+          "content-size-mismatch:selection-indeterminate_size-large_error-true_state-focus-visible:32x32 vs 22x22"
         ]
       },
       {
@@ -7797,8 +8593,8 @@
         "figmaName": "selection=indeterminate, size=small, state=focus, error=true",
         "verdict": "fail",
         "image": {
-          "white": 40.625,
-          "black": 40.625,
+          "white": 47.91666666666667,
+          "black": 47.91666666666667,
           "withinLimit": false
         },
         "content": {
@@ -7809,10 +8605,9 @@
           "partsMissing": 0
         },
         "reasons": [
-          "state-unreachable:focus-visible:selection-indeterminate_size-small_error-true_state-focus-visible",
-          "layout-image-difference-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:40.63%",
-          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:40.63%",
-          "content-size-mismatch:selection-indeterminate_size-small_error-true_state-focus-visible:12x12 vs 16x16"
+          "layout-image-difference-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:47.92%",
+          "layout-image-difference-on-black-above-limit:selection-indeterminate_size-small_error-true_state-focus-visible:47.92%",
+          "content-size-mismatch:selection-indeterminate_size-small_error-true_state-focus-visible:24x24 vs 16x16"
         ]
       },
       {

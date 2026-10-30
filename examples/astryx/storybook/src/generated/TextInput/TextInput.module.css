@@ -23,6 +23,8 @@
 }
 
 .label {
+  display: flex;
+  align-items: center;
   color: var(--imported-text-input-label-color);
   column-gap: var(--imported-shared-size-4);
   font-size: var(--imported-text-input-label-font-size);
@@ -44,6 +46,7 @@
 .part-1 {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   color: var(--imported-shared-color-171717);
   isolation: isolate;
 }
@@ -51,6 +54,7 @@
 .text-input {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   background-color: var(--imported-text-input-text-input-background-color);
   border-bottom-color: var(--imported-shared-color-d4d4d4);
   border-bottom-left-radius: var(--imported-shared-size-10);

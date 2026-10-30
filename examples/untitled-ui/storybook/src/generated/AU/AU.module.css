@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   width: var(--ds-au-size, var(--imported-stub-au-root-width));
   height: var(--ds-au-size, var(--imported-stub-au-root-height));

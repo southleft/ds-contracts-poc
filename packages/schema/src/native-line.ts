@@ -7,6 +7,10 @@ export interface NativeLineGeometry {
   transform: NativeLineTransform;
   cap: 'NONE' | 'ROUND' | 'SQUARE';
   align: 'INSIDE' | 'CENTER' | 'OUTSIDE';
+  /** Captured dash lengths, in path pixels. Absent on a solid line. */
+  dashes?: number[];
+  /** Captured stroke outline. Dash caps are not reconstructed from the lengths alone. */
+  painted?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
 }
 export interface NativeLineFootprint {
   width: number;
@@ -56,19 +60,73 @@ export function nativeLinePaint(line: NativeLineGeometry, weight: number): {
 }
 /** SVG basis in a layout wrapper. Native translation remains in the contract;
  * the wrapper's placement channel applies it, never an ink-bounds substitute. */
+/** SVG and CSS lengths reject scientific notation; a near-zero basis is a right angle. */
+function svgNumber(value: number): string {
+  if (!Number.isFinite(value) || Object.is(value, -0) || Math.abs(value) < 1e-6) return '0';
+  const text = String(value);
+  if (!/[eE]/.test(text)) return text;
+  return value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
+}
 export function nativeLineWrapperMatrix(line: NativeLineGeometry): string {
   const footprint = nativeLineFootprint(line);
   const [[a, c], [b, d]] = line.transform;
-  return `matrix(${a} ${b} ${c} ${d} ${footprint.originX} ${footprint.originY})`;
+  return `matrix(${svgNumber(a)} ${svgNumber(b)} ${svgNumber(c)} ${svgNumber(d)} ${svgNumber(footprint.originX)} ${svgNumber(footprint.originY)})`;
 }
 
 /** Shared paint projection; dynamic stroke weight keeps native endpoint rules.
  * The outer shape box carries layout and clipping, never an ink-derived box. */
+interface ObservedLineSource {
+  variantName: string;
+  transform: NativeLineTransform;
+  length?: number;
+  cap?: NativeLineGeometry['cap'];
+  align?: NativeLineGeometry['align'];
+  dashes?: number[];
+  painted?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
+}
+/** One drawing per distinct captured geometry, with the variants that draw it.
+ *  A single geometry is the shared line. A variant without a captured length
+ *  draws the shared line. */
+export function nativeLineDrawings(shape: {line: NativeLineGeometry & {observedSources?: ObservedLineSource[]}}): Array<{line: NativeLineGeometry; variantNames?: string[]}> {
+  const base = shape.line;
+  const geometryOf = (source: ObservedLineSource): NativeLineGeometry => source.length === undefined ? base : {
+    length: source.length, transform: source.transform, cap: source.cap ?? base.cap, align: source.align ?? base.align,
+    ...(source.dashes ? {dashes: source.dashes} : {}),
+    ...(source.painted ? {painted: source.painted} : {}),
+  };
+  const groups = new Map<string, {line: NativeLineGeometry; variantNames: string[]}>();
+  for (const source of base.observedSources ?? []) {
+    const line = geometryOf(source);
+    const key = JSON.stringify([line.length, line.cap, line.align, line.dashes ?? [], line.painted ?? [], line.transform]);
+    const group = groups.get(key) ?? {line, variantNames: []};
+    if (!group.variantNames.includes(source.variantName)) group.variantNames.push(source.variantName);
+    groups.set(key, group);
+  }
+  if (groups.size <= 1) return [{line: base}];
+  return [...groups.values()];
+}
 export function nativeLineSvg(shape: {line:NativeLineGeometry}): string {
   const line=shape.line, footprint=nativeLineFootprint(line);
   if(line.fillWidth)return `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="1" fill="none" style="display:block;overflow:visible"><g style="transform:translateY(calc(var(--native-line-stroke-width, 0px) * -0.5))"><line x1="0" y1="0" x2="100%" y2="0" stroke-linecap="butt" style="stroke:inherit;stroke-width:var(--native-line-stroke-width, 0px)"/></g></svg>`;
+  const axis=(value:number)=>svgNumber(value>=1?value:1);
+  if (line.painted?.length) {
+    const [[a, c], [b, d]] = line.transform;
+    const points = line.painted.flatMap(path => {
+      const nums = path.data.match(/[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g)?.map(Number) ?? [];
+      const out: Array<[number, number]> = [];
+      for (let i = 0; i + 1 < nums.length; i += 2) out.push([a * nums[i]! + c * nums[i + 1]!, b * nums[i]! + d * nums[i + 1]!]);
+      return out;
+    });
+    const xs = points.map(point => point[0]), ys = points.map(point => point[1]);
+    const tidy = (n: number) => Math.round(n * 1000) / 1000;
+    const minX = tidy(Math.min(...xs)), minY = tidy(Math.min(...ys));
+    const width = Math.max(tidy(Math.max(...xs) - minX), 1), height = Math.max(tidy(Math.max(...ys) - minY), 1);
+    const paths=line.painted.map(path=>`<path d="${path.data}" fill-rule="${path.windingRule==='EVENODD'?'evenodd':'nonzero'}" style="fill:inherit;stroke:none"/>`).join('');
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgNumber(width)}" height="${svgNumber(height)}" viewBox="${svgNumber(minX)} ${svgNumber(minY)} ${svgNumber(width)} ${svgNumber(height)}" style="display:block;overflow:visible;width:${svgNumber(width)}px;height:${svgNumber(height)}px;margin-left:${svgNumber(minX)}px;margin-top:${svgNumber(minY)}px"><g transform="${nativeLineWrapperMatrix(line)}">${paths}</g></svg>`;
+  }
   const capped=line.cap!=='NONE';
-  const dash=capped ? `stroke-dasharray:calc(${line.length}px - var(--native-line-stroke-width, 0px)) calc(${line.length}px + var(--native-line-stroke-width, 0px));stroke-dashoffset:calc(var(--native-line-stroke-width, 0px) * -0.5);` : '';
+  const dash=line.dashes?.length ? `stroke-dasharray:${line.dashes.map(n => `${n}px`).join(' ')};`
+    : capped ? `stroke-dasharray:calc(${line.length}px - var(--native-line-stroke-width, 0px)) calc(${line.length}px + var(--native-line-stroke-width, 0px));stroke-dashoffset:calc(var(--native-line-stroke-width, 0px) * -0.5);` : '';
   const cap=line.cap==='NONE'?'butt':line.cap==='ROUND'?'round':'square';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${footprint.width||1}" height="${footprint.height||1}" fill="none" style="display:block;overflow:visible"><g transform="${nativeLineWrapperMatrix(line)}"><g style="transform:translateY(calc(var(--native-line-stroke-width, 0px) * -0.5))"><line x1="0" y1="0" x2="${line.length}" y2="0" stroke-linecap="${cap}" style="stroke:inherit;stroke-width:var(--native-line-stroke-width, 0px);${dash}"/></g></g></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${axis(footprint.width)}" height="${axis(footprint.height)}" fill="none" style="display:block;overflow:visible"><g transform="${nativeLineWrapperMatrix(line)}"><g style="transform:translateY(calc(var(--native-line-stroke-width, 0px) * -0.5))"><line x1="0" y1="0" x2="${svgNumber(line.length)}" y2="0" stroke-linecap="${cap}" style="stroke:inherit;stroke-width:var(--native-line-stroke-width, 0px);${dash}"/></g></g></svg>`;
 }

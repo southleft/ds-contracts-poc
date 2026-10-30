@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--space-gap-control);
   padding-inline: var(--space-inset-x-md);
   padding-block: var(--space-inset-y-md);
@@ -44,6 +45,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  flex-shrink: 0;
   gap: var(--space-gap-control);
   padding-inline: var(--space-inset-x-md);
   padding-block: var(--space-inset-y-md);
@@ -57,6 +59,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  flex-shrink: 0;
   gap: var(--space-gap-control);
   padding-inline: var(--space-inset-x-md);
   padding-block: var(--space-inset-y-md);

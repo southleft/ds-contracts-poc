@@ -1,4 +1,4 @@
-import { filledPathIssue, strokedPathGeometryIssue, type StrokedPath } from '../../../scripts/contract-schema.js';
+import { filledPathIssue, sourcePathBounds, strokedPathGeometryIssue, type StrokedPath } from '../../../scripts/contract-schema.js';
 
 /** Figma's version-pinned SVG export is an additional source observation.
  * Admit only a single centerline path whose exported basis and paint agree
@@ -86,6 +86,22 @@ export function paintedStrokeSvgObservation(svg: string, observed: PaintedStroke
   } } };
 }
 
+/** Shift an absolute centerline without changing its shape. H and V keep their axes. */
+function translateAbsolutePath(data: string, dx: number, dy: number): string {
+  if (dx === 0 && dy === 0) return data;
+  const tokens = data.match(/[MLCQHVZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g);
+  if (!tokens) return data;
+  let command = '';
+  let ordinate = 0;
+  return tokens.map((token) => {
+    if (/^[MLCQHVZ]$/.test(token)) { command = token; ordinate = 0; return token; }
+    const value = Number(token);
+    const moved = command === 'H' ? value + dx : command === 'V' ? value + dy : value + (ordinate % 2 === 0 ? dx : dy);
+    ordinate += 1;
+    return String(moved);
+  }).join(' ');
+}
+
 export function strokeSvgGeometry(svg: string, observed: StrokeSvgObservation):
   { shape: { kind: 'stroked-path'; width: number; height: number; strokePath: StrokedPath } } | { issue: string } {
   if (typeof svg !== 'string' || svg.length > 70000) return { issue: 'stroke-svg-size' };
@@ -93,18 +109,34 @@ export function strokeSvgGeometry(svg: string, observed: StrokeSvgObservation):
   if (!tags) return { issue: 'stroke-svg-structure-unqualified' };
   const root = attributes(tags[1]!, ['width', 'height', 'viewBox', 'fill', 'xmlns']);
   const path = attributes(tags[2]!, ['data-node-id', 'd', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit']);
-  if (!root || !path || root.xmlns !== 'http://www.w3.org/2000/svg' || root.fill !== 'none')
+  if (!root || !path || !path.d || root.xmlns !== 'http://www.w3.org/2000/svg' || root.fill !== 'none')
     return { issue: 'stroke-svg-attributes-unqualified' };
   if (path['data-node-id'] !== observed.nodeId) return { issue: 'stroke-svg-source-identity-mismatch' };
-  if (Number(root.width) !== observed.width || Number(root.height) !== observed.height ||
-      root.viewBox !== `0 0 ${root.width} ${root.height}`)
-    return { issue: 'stroke-svg-export-basis-mismatch' };
+  const exportedWidth = Number(root.width), exportedHeight = Number(root.height);
+  const exactBasis = exportedWidth === observed.width && exportedHeight === observed.height &&
+    root.viewBox === `0 0 ${root.width} ${root.height}`;
+  // Absolute SVG bounds include the centered stroke, so the viewBox can be
+  // larger than the node. The centerline itself still has to sit on that node.
+  const bounds = sourcePathBounds(path.d!);
+  const widthGap = Math.abs(exportedWidth - observed.width), heightGap = Math.abs(exportedHeight - observed.height);
+  const nearNode = (delta: number) => Math.abs(delta) <= 0.05;
+  // A rounded viewBox (20 vs 20.000006) stays refused. A viewBox enlarged by
+  // the centered stroke is admitted only when the centerline still lies on the node.
+  const centerlineOnNode = !!bounds && nearNode(bounds.x) && nearNode(bounds.y) &&
+    nearNode(bounds.width - observed.width) && nearNode(bounds.height - observed.height) &&
+    Math.max(widthGap, heightGap) > 0.05 &&
+    widthGap <= observed.strokeWeight && heightGap <= observed.strokeWeight &&
+    root.viewBox === `0 0 ${root.width} ${root.height}`;
+  if (!exactBasis && !centerlineOnNode) return { issue: 'stroke-svg-export-basis-mismatch' };
   const cap = observed.cap === 'NONE' ? 'butt' : observed.cap.toLowerCase();
-  if (Number(path['stroke-width']) !== observed.strokeWeight || opaqueExportColor(path.stroke) === undefined || opaqueExportColor(path.stroke) !== opaqueExportColor(observed.strokeColor) ||
+  if (Math.abs(Number(path['stroke-width']) - observed.strokeWeight) > 1e-4 || opaqueExportColor(path.stroke) === undefined || opaqueExportColor(path.stroke) !== opaqueExportColor(observed.strokeColor) ||
       path['stroke-linecap'] !== cap || path['stroke-linejoin'] !== observed.join.toLowerCase())
     return { issue: 'stroke-svg-export-paint-mismatch' };
-  const shape = { kind: 'stroked-path' as const, width: observed.width, height: observed.height, strokePath: {
-    data: path.d!, cap: observed.cap, join: observed.join,
+  const data = exactBasis || !bounds ? path.d! : translateAbsolutePath(path.d!, -bounds.x, -bounds.y);
+  const width = exactBasis || !bounds ? observed.width : bounds.width;
+  const height = exactBasis || !bounds ? observed.height : bounds.height;
+  const shape = { kind: 'stroked-path' as const, width, height, strokePath: {
+    data, cap: observed.cap, join: observed.join,
     // SVG's default. With ROUND/BEVEL this limit has no painting effect.
     miterLimit: Number(path['stroke-miterlimit'] ?? 4), viewport: observed.viewport,
   } };

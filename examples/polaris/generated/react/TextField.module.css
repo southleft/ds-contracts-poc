@@ -36,6 +36,7 @@
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
+  flex-shrink: 0;
   color: var(--imported-shared-color-303030);
   margin-bottom: var(--imported-shared-size-4);
   min-height: var(--imported-shared-size-0);
@@ -136,6 +137,7 @@
 .textfield {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   bottom: var(--imported-shared-size-0);
   color: var(--imported-shared-color-303030);
   left: var(--imported-shared-size-0);
@@ -408,8 +410,16 @@
   outline-style: solid;
 }
 
+.root:hover:not([data-disabled]) .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-hover);
+}
+
 .root:active:not([data-disabled]) .backdrop {
   background-color: var(--imported-text-field-backdrop-background-color-state-active);
+}
+
+.root:focus-visible .backdrop {
+  background-color: var(--imported-text-field-backdrop-background-color-state-focus-visible);
 }
 
 .root[data-disabled] .backdrop {
@@ -418,12 +428,4 @@
 
 .root[data-disabled] .backdrop {
   color: var(--imported-shared-color-b5b5b5);
-}
-
-.root:focus-visible .backdrop {
-  background-color: var(--imported-text-field-backdrop-background-color-state-focus-visible);
-}
-
-.root:hover:not([data-disabled]) .backdrop {
-  background-color: var(--imported-text-field-backdrop-background-color-state-hover);
 }

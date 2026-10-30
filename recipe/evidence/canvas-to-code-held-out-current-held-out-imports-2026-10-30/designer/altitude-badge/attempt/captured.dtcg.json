@@ -1,0 +1,89 @@
+{
+  "theme": {
+    "border": {
+      "radius": {
+        "pill": {
+          "$value": "999px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "color": {
+      "background": {
+        "danger-weak": {
+          "$value": "#38191c",
+          "$type": "color"
+        },
+        "info-weak": {
+          "$value": "#2b3a63",
+          "$type": "color"
+        },
+        "neutral-bold": {
+          "$value": "#797469",
+          "$type": "color"
+        },
+        "success-weak": {
+          "$value": "#14301f",
+          "$type": "color"
+        },
+        "warning-weak": {
+          "$value": "#2f2610",
+          "$type": "color"
+        }
+      },
+      "content": {
+        "danger-default": {
+          "$value": "#ff6d76",
+          "$type": "color"
+        },
+        "info-default": {
+          "$value": "#a3b5ff",
+          "$type": "color"
+        },
+        "neutral-default": {
+          "$value": "#f1f0ea",
+          "$type": "color"
+        },
+        "success-default": {
+          "$value": "#4cd98a",
+          "$type": "color"
+        },
+        "warning-default": {
+          "$value": "#f5b942",
+          "$type": "color"
+        }
+      }
+    },
+    "space": {
+      "xs": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "xxs": {
+        "$value": "4px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "typography": {
+    "font-size": {
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      }
+    },
+    "line-height": {
+      "20": {
+        "$value": "20px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 15,
+      "skipped": []
+    }
+  }
+}

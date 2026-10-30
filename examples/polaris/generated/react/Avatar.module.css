@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   background: var(--p-color-avatar-one-bg-fill);
   color: var(--p-color-avatar-one-text-on-bg-fill);
@@ -76,6 +77,8 @@
 }
 
 .initials {
+  display: flex;
+  align-items: center;
   font-size: var(--p-font-size-325);
   font-weight: var(--p-font-weight-regular);
   bottom: var(--imported-shared-size-0);

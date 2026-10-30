@@ -22,11 +22,12 @@ import {instanceFillExpression,hasBoundPaintUsage} from '../packages/core/src/in
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {reactAvailabilityGuards, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {reactAvailabilityGuards, stringVisibilityEquals, stringVisibilityKnown, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride, type StringVisibilityKnown} from './react-presence.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
 import {hasComponentGrow,hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
+import { nativeLineDrawings } from '../packages/schema/src/native-line.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies, REACT_SLOT_CONTENT_RUNTIME } from './react-slot-inputs.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
@@ -686,6 +687,9 @@ export function generateTsx(
   const stylesRef = (cls: string): string =>
     JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
 
+  // Ancestor enum narrowing. A descendant compared with === against a value
+  // the ancestor already excluded is TS2367 and the package never builds.
+  let visibilityKnown: StringVisibilityKnown = new Map();
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     jsx = wrapReactFilledPath(part, jsx, codePropOf);
     jsx = wrapReactTextAppearance(part, jsx, codePropOf, undefined, textValueOf);
@@ -695,9 +699,11 @@ export function generateTsx(
     const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
     if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
+    const narrowed = stringVisibilityEquals(part, visibilityKnown);
+    if (narrowed === 'impossible') return wrapReactPresence(part, '{null}', codePropOf);
     if (!part.visibleWhen) return wrapReactPresence(part,jsx,codePropOf);
     const codeName = codePropOf(part.visibleWhen.prop);
-    const eq = part.visibleWhen.equals;
+    const eq = narrowed ?? part.visibleWhen.equals;
     // A hidden ancestor can narrow this prop to the opposite boolean. Keep
     // exact boolean equality without making retained descendant JSX a TS2367.
     const cond =
@@ -725,17 +731,70 @@ export function generateTsx(
 
   const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
+  const lineVariantTerms = (variantName: string): Map<string, string> | undefined => {
+    const terms = new Map<string, string>();
+    for (const clause of variantName.split(',')) {
+      const eq = clause.indexOf('=');
+      if (eq < 0) return;
+      const property = clause.slice(0, eq).trim();
+      const figmaValue = clause.slice(eq + 1).trim();
+      const prop = contract.props.find(item => item.bindings.figma.property === property);
+      if (!prop) return;
+      const code = codePropOf(prop.name);
+      if (prop.type === 'boolean') terms.set(property, `globalThis.Object.is(${code}, ${figmaValue === 'True' || figmaValue === 'true'})`);
+      else if (typeof prop.type === 'object' && prop.type && 'enum' in prop.type) {
+        const codeValue = Object.entries(prop.bindings.figma.values ?? {}).find(([, raw]) => raw === figmaValue)?.[0] ?? figmaValue;
+        terms.set(property, `${code} === ${JSON.stringify(codeValue)}`);
+      } else return;
+    }
+    return terms;
+  };
+  /** Each drawing's condition over the fewest variant axes that decide its geometry. */
+  const lineDrawingConditions = (partName: string, groups: string[][]): string[] => {
+    const parsed = groups.map(names => names.map(name => {
+      const terms = lineVariantTerms(name);
+      if (!terms) throw Error(`react-variant-line-condition-unqualified:${partName}:${name}`);
+      return terms;
+    }));
+    const axes = [...new Set(parsed.flat().flatMap(terms => [...terms.keys()]))].sort();
+    if (parsed.flat().some(terms => axes.some(axis => !terms.has(axis)))) throw Error(`react-variant-line-condition-unqualified:${partName}`);
+    const subsets = Array.from({length: 2 ** axes.length - 1}, (_, mask) => axes.filter((_, i) => (mask + 1) & (1 << i)))
+      .sort((x, y) => x.length - y.length);
+    const decides = (subset: string[]) => {
+      const owner = new Map<string, number>();
+      return parsed.every((variants, group) => variants.every(terms => {
+        const key = subset.map(axis => terms.get(axis)).join('&&');
+        if (owner.has(key) && owner.get(key) !== group) return false;
+        owner.set(key, group);
+        return true;
+      }));
+    };
+    const subset = subsets.find(decides) ?? axes;
+    return parsed.map(variants => [...new Set(variants.map(terms => subset.map(axis => terms.get(axis)!).join(' && ')))]
+      .map(term => subset.length > 1 ? `(${term})` : term).join(' || '));
+  };
   const boundPaintChild=(part:Part)=>part.solidFillCompositionToken || part.solidFillCompositionByCombination?.rows.some(row=>row.token!==undefined) || part===contract.anatomy.root && !!(part.solidFillComposition || part.solidFillCompositionByCombination) && hasBoundPaintUsage(contract,byId)
     ? '<svg aria-hidden="true" focusable="false" data-dsc-paint-layer=""><rect width="100%" height="100%" /></svg>' : '';
-  const renderPart = (partName: string, part: Part): string => {
+  const renderPart = (partName: string, part: Part, known: StringVisibilityKnown = new Map()): string => {
+    const previousKnown = visibilityKnown;
+    visibilityKnown = known;
+    const renderChild = (name: string, child: Part) => renderPart(name, child, selection ? known : stringVisibilityKnown(part, known));
+    try {
     for (const value of Object.values(part.component?.props ?? {})) {
       const parentName = typeof value === 'string' ? value.match(/^\{([a-zA-Z][\w-]*)\}$/)?.[1]
         : value && typeof value === 'object' && 'prop' in value ? value.prop : undefined;
       if (typeof parentName === 'string') codePropOf(parentName);
     }
     if(part.vectorStrokeByCombination)return wrapVisibleWhen(part,reactVectorStroke(part,`className={${stylesRef(partName)}}`,codePropOf));
-    if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
-      `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
+    if (part.shape?.kind === 'line') {
+      const lineSpan = (line: Parameters<typeof nativeLineSvg>[0]['line']) =>
+        `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg({line}))} }} />`;
+      const drawings = nativeLineDrawings(part.shape);
+      const conditions = drawings.length === 1 ? [] : lineDrawingConditions(partName, drawings.map(drawing => drawing.variantNames!));
+      const body = drawings.length === 1 ? lineSpan(drawings[0].line)
+        : drawings.map((drawing, i) => `{${conditions[i]} ? (${lineSpan(drawing.line)}) : null}`).join('\n');
+      return wrapVisibleWhen(part, body);
+    }
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
       `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
     if (part.icon) {
@@ -810,11 +869,11 @@ export function generateTsx(
       // visibleWhen-on-component-parts).
       const instance =
         part.component.contentSlots !== undefined
-          ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderPart,undefined,codePropOf).join('\n')}\n</>}`).join('')} />`
+          ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderChild,undefined,codePropOf).join('\n')}\n</>}`).join('')} />`
           : part.parts !== undefined
           ? (part.component.contentSlot && part.component.contentSlot !== 'children'
-            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('\n')}\n</>} />`
-            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('\n')}\n</></${dep.name}>`)
+            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderChild, undefined, codePropOf).join('\n')}\n</>} />`
+            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderChild, undefined, codePropOf).join('\n')}\n</></${dep.name}>`)
           : text !== undefined
           ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
           : `<${dep.name}${attrs} />`;
@@ -835,7 +894,7 @@ export function generateTsx(
       if (part.slot.name === 'children') usesChildren = true;
       const el = part.element ?? 'div';
       const expr = (part.slot.renderDefault || part.slot.renderDefaultAnatomy) && part.parts
-        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, undefined, codePropOf).join('')}</> : ${part.slot.name}`
+        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderChild, undefined, codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, byId, depAttrString);
       const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${reactSlotPaintForeground(part,expr)}</${el}>`;
       if (part.slot.collapseWhenEmpty) {
@@ -886,13 +945,16 @@ export function generateTsx(
     // so the grid's shape is visible with nothing in it.
     const inner = [
       ...(boundPaintChild(part)?[boundPaintChild(part)]:[]),
-      ...reactMaskChildren(part.parts, renderPart, undefined, codePropOf),
+      ...reactMaskChildren(part.parts, renderChild, undefined, codePropOf),
       ...(gridPlaceholderJsx(partName) ? [gridPlaceholderJsx(partName)] : []),
     ].join('\n');
     return wrapVisibleWhen(
       part,
       wrapReactInstanceAffine(part, `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`, codePropOf),
     );
+    } finally {
+      visibilityKnown = previousKnown;
+    }
   };
 
   // MULTI-ROOT composite (advanced composition). A captured composite (Modal =

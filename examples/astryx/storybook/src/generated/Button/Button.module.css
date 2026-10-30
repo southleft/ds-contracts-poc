@@ -48,7 +48,6 @@
 
 .root:focus-visible {
   outline-style: solid;
-  outline-offset: 2px;
 }
 
 .size-lg {
@@ -137,6 +136,7 @@
 
 .part-0 {
   display: flex;
+  flex-shrink: 0;
   font-size: var(--imported-shared-size-14);
   font-weight: var(--imported-shared-num-500);
   line-height: var(--imported-shared-size-20-0004);

@@ -63,9 +63,9 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.section-header` | Section Header | 2 | 38 | 26 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; GRID-CELL-NAMED |
 | figma-ds | `ds.section-footer` | Section Footer | 1 | 21 | 15 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
-| figma-ds | `ds.card` | Card | 2 | 42 | 71 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
+| figma-ds | `ds.card` | Card | 2 | 44 | 69 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 25 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **3135** | **3939** | **0** | | |
+| **all** | | 23 sets | | **3137** | **3937** | **0** | | |
 
 ## Renders
 

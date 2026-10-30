@@ -23,7 +23,7 @@ import {INSTANCE_FILL_RESET,instanceFillExpression,rootFillLayerCss,hasBoundPain
 import { reactComposedPath } from './react-composed-path.js';
 import {instanceAffineTokenErrors} from '../packages/core/src/instance-affine-tokens.js';
 import {wrapReactInstanceAffine,REACT_AFFINE_LAYOUT_RUNTIME} from './react-instance-affine.js';
-import {reactAvailabilityGuards, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride} from './react-presence.js';
+import {reactAvailabilityGuards, stringVisibilityEquals, stringVisibilityKnown, wrapReactAvailability, wrapReactPresence, wrapReactVisibilityOverride, type StringVisibilityKnown} from './react-presence.js';
 import {instanceRootValue,instanceRootColor} from '../scripts/contract-schema.js';
 import {reactInstanceRootStyle} from './react-instance-root.js';
 import {solidFillCompositionRules} from '../packages/core/src/css.js';
@@ -33,6 +33,7 @@ import {solidFillCompositionCss,solidFillCompositionTokenCss} from '@ds-contract
 import {reactMaskChildren, reactMaskChildPaths} from './react-mask-scopes.js';
 import {normalizeAbsoluteGeometry} from '@ds-contracts/schema';
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
+import { nativeLineDrawings } from '../packages/schema/src/native-line.js';
 import { lowerFilledEllipseVariants, lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg, nativeLineSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactSlotInputs, reactSlotExpression, reactDefaultSlotDependencies, REACT_SLOT_CONTENT_RUNTIME } from './react-slot-inputs.js';
@@ -152,6 +153,11 @@ const stripBraces = (ref: string) => ref.slice(1, -1);
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 const camel = (cssProp: string) => cssProp.startsWith('--') ? cssProp : cssProp.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+/** Contracts spell text-rendering keywords in lowercase; React's style type
+ *  accepts only the camel-cased CSS spellings. */
+const TEXT_RENDERING_KEYWORDS: Record<string, string> = { auto: 'auto', optimizespeed: 'optimizeSpeed', optimizelegibility: 'optimizeLegibility', geometricprecision: 'geometricPrecision' };
+const declaredStyleValue = (cssProp: string, value: string) =>
+  cssProp === 'text-rendering' ? TEXT_RENDERING_KEYWORDS[value.toLowerCase()] ?? value : value;
 /** FC-BORDER-STYLE-NOT-SYNTHESISED — the shared border-style rule, lowered to
  *  this surface's camelCase StyleRecord. `borderStyleDecls` states the rule
  *  once (schema package) so the three CSS surfaces cannot fork on it again. */
@@ -651,7 +657,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     // only the disabled plane renders on this surface (see disabledStyle
     // below) — hover/active/focus stay the surface's declared limit.
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
-      s[camel(cssProp)] = value;
+      s[camel(cssProp)] = declaredStyleValue(cssProp, value);
     }
     if (part.solidFillComposition || part.solidFillCompositionByCombination) {
       if(isRoot)Object.assign(s,INSTANCE_FILL_RESET);
@@ -780,7 +786,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     for (const [cssProp, value] of Object.entries(
       contract.anatomy.root?.declaredStates?.disabled ?? {},
     )) {
-      if (!cssProp.startsWith('outline')) disabledStyle[camel(cssProp)] = value;
+      if (!cssProp.startsWith('outline')) disabledStyle[camel(cssProp)] = declaredStyleValue(cssProp, value);
     }
   }
 
@@ -991,6 +997,9 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     return out;
   };
 
+  // Ancestor enum narrowing. A descendant compared with === against a value
+  // the ancestor already excluded is TS2367 and the package never builds.
+  let visibilityKnown: StringVisibilityKnown = new Map();
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     jsx = wrapReactFilledPath(part, jsx, codePropOf);
     jsx = wrapReactTextAppearance(part, jsx, codePropOf, resolveValue, textValueOf);
@@ -1000,9 +1009,11 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     const fallback = (() => {
     const panel = selection?.wrap(part, jsx);
     if (panel !== undefined) return wrapReactPresence(part,panel,codePropOf);
+    const narrowed = stringVisibilityEquals(part, visibilityKnown);
+    if (narrowed === 'impossible') return wrapReactPresence(part, '{null}', codePropOf);
     if (!part.visibleWhen) return wrapReactPresence(part,jsx,codePropOf);
     const codeName = codePropOf(part.visibleWhen.prop);
-    const eq = part.visibleWhen.equals;
+    const eq = narrowed ?? part.visibleWhen.equals;
     // A hidden ancestor can narrow this prop to the opposite boolean. Keep
     // exact boolean equality without making retained descendant JSX a TS2367.
     const cond =
@@ -1119,8 +1130,14 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }).join('');
     return bound?`<svg aria-hidden="true" focusable="false" data-dsc-paint-layer="" style={(${cases}undefined)}><rect width="100%" height="100%" /></svg>`:`<span aria-hidden="true" data-dsc-paint-layer="" style={(${cases}undefined)} />`;
   };
-  const renderPart = (partName: string, part: Part): string => {
+  const renderPart = (partName: string, part: Part, known: StringVisibilityKnown = new Map()): string => {
+    const previousKnown = visibilityKnown;
+    visibilityKnown = known;
+    const renderChild = (name: string, child: Part) => renderPart(name, child, selection ? known : stringVisibilityKnown(part, known));
+    try {
     if(part.vectorStrokeByCombination)return wrapVisibleWhen(part,reactVectorStroke(part,`style=${styleExpr(partName, false, stylesWhenExprs(part))}`,codePropOf));
+    if (part.shape?.kind === 'line' && nativeLineDrawings(part.shape).length > 1)
+      throw Error(`react-inline-variant-line-unqualified:${partName}`);
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
       `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(nativeLineSvg(part.shape))} }} />`);
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
@@ -1202,11 +1219,11 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
           ? depChildren.default
           : undefined);
       const instance = part.component.contentSlots !== undefined
-        ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderPart,path=>resolveValue(path),codePropOf).join('\n')}\n</>}`).join('')} />`
+        ? `<${dep.name}${attrs}${callerContentGroups(part).map(g=>` ${g.slot}={<>\n${reactMaskChildren(g.parts,renderChild,path=>resolveValue(path),codePropOf).join('\n')}\n</>}`).join('')} />`
         : part.parts !== undefined
         ? (part.component.contentSlot && part.component.contentSlot !== 'children'
-            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('\n')}\n</>} />`
-            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('\n')}\n</></${dep.name}>`)
+            ? `<${dep.name}${attrs} ${part.component.contentSlot}={<>\n${reactMaskChildren(part.parts, renderChild, path=>resolveValue(path), codePropOf).join('\n')}\n</>} />`
+            : `<${dep.name}${attrs}><>\n${reactMaskChildren(part.parts, renderChild, path=>resolveValue(path), codePropOf).join('\n')}\n</></${dep.name}>`)
         : text !== undefined
         ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
@@ -1219,7 +1236,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = (part.slot.renderDefault || part.slot.renderDefaultAnatomy) && part.parts
-        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf).join('')}</> : ${part.slot.name}`
+        ? `${part.slot.name} === undefined ? <>${reactMaskChildren(part.parts, renderChild, path=>resolveValue(path), codePropOf).join('')}</> : ${part.slot.name}`
         : reactSlotExpression(part.slot, ctx.contracts, depAttrString);
       const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${paintChild(part)}${reactSlotPaintForeground(part,expr)}</${el}>`;
       if (part.slot.collapseWhenEmpty) {
@@ -1267,7 +1284,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     // after the declared children (their styles carry the placement).
     const inner = [
       ...((part.solidFillComposition || part.solidFillCompositionByCombination) ? [paintChild(part)] : []),
-      ...reactMaskChildren(part.parts, renderPart, path=>resolveValue(path), codePropOf),
+      ...reactMaskChildren(part.parts, renderChild, path=>resolveValue(path), codePropOf),
       ...(gridPlan.placeholders.get(partName) ?? []).map(
         (area) => `<div style=${styleExpr(area, false, [])} />`,
       ),
@@ -1277,6 +1294,9 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
       part,
       wrapReactInstanceAffine(part, `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`, codePropOf),
     );
+    } finally {
+      visibilityKnown = previousKnown;
+    }
   };
 
   // `root` is undefined for a multi-root composite; the single-root tail below

@@ -218,6 +218,8 @@ export interface DumpText {
    *  older dumps means not captured (their captures receipted the channel as
    *  text-channel-unsupported). */
   textAlign?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
+  /** Observed REST textAlignVertical. Absence stays uncaptured. */
+  verticalAlign?: 'TOP' | 'CENTER' | 'BOTTOM';
   /** How the text box sizes itself (dump v1.36, additive) — Figma's
    *  `textAutoResize`, verbatim, on EVERY text node: WIDTH_AND_HEIGHT (the
    *  box hugs its text on both axes), HEIGHT (fixed width, auto height),

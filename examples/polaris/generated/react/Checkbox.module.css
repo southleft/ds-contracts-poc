@@ -193,6 +193,7 @@
 
 .icon-3 {
   display: flex;
+  flex-shrink: 0;
   color: var(--imported-shared-color-303030);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);

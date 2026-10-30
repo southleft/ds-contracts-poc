@@ -840,6 +840,9 @@ reg("shape", "native-lines", [
   "shape.line.source", "shape.line.source.nodeId", "shape.line.source.parentId",
   "shape.line.observedSources", "shape.line.observedSources.nodeId", "shape.line.observedSources.parentId",
   "shape.line.observedSources.variantName", "shape.line.observedSources.transform", "shape.line.observedSources.length",
+  "shape.line.observedSources.cap", "shape.line.observedSources.align", "shape.line.observedSources.dashes",
+  "shape.line.observedSources.painted", "shape.line.observedSources.painted.data", "shape.line.observedSources.painted.windingRule",
+  "shape.line.dashes", "shape.line.painted", "shape.line.painted.data", "shape.line.painted.windingRule",
 ]);
 
 // --- Composition -----------------------------------------------------------

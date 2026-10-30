@@ -23,6 +23,7 @@
 .inputWithLabel {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--imported-input-field-base-input-with-label-gap);
 }
 
@@ -38,6 +39,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
   background-color: var(--imported-input-field-base-input-with-label-input-background-color);
   border-radius: var(--imported-shared-size-8);
   border-width: var(--imported-input-field-base-input-with-label-input-border-width);
@@ -148,12 +150,14 @@
 .type-trailingDropdown .Input {
   flex-direction: row-reverse;
   align-items: flex-start;
+  min-width: max-content;
 }
 
 .addOn {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
   padding-left: var(--imported-shared-size-14);
   padding-right: var(--imported-input-field-base-input-with-label-input-add-on-padding-right);
   padding-block: var(--imported-input-field-base-input-with-label-input-add-on-padding-block);
@@ -172,6 +176,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
   gap: var(--imported-input-field-base-input-with-label-input-dropdown-gap);
   padding-left: var(--imported-shared-size-14);
   padding-block: var(--imported-input-field-base-input-with-label-input-dropdown-padding-block);

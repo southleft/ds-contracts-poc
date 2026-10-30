@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {runCanvasToCode} from './canvas-to-code.js';
 import {prepareRecording} from './canvas-to-code-held-out-current.js';
 
-export const CURRENT_CANVAS_TO_CODE_ROOT = 'recipe/evidence/canvas-to-code-current-global-error-2026-10-06';
+export const CURRENT_CANVAS_TO_CODE_ROOT = 'recipe/evidence/canvas-to-code-current-held-out-imports-2026-10-30';
 
 export async function recordCurrentCanvasToCode(root: string) {
   prepareRecording(root);

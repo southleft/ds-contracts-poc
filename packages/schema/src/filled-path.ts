@@ -61,6 +61,70 @@ export function filledPathIssue(data: string): string | undefined {
   return undefined;
 }
 
+/** Figma fills an open subpath. The stored contour is that fill, closed. */
+export function closeFilledSubpaths(data: string): string | undefined {
+  const token = /[MLCQZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  let at = 0;
+  const tokens: string[] = [];
+  while (at < data.length) {
+    if (/\s/.test(data[at]!)) { at++; continue; }
+    if (data[at] === ',') {
+      if (!tokens.length || !Number.isFinite(Number(tokens[tokens.length - 1]))) return;
+      at++;
+      while (at < data.length && /\s/.test(data[at]!)) at++;
+      if (at === data.length || !/[-+.0-9]/.test(data[at]!)) return;
+      continue;
+    }
+    token.lastIndex = at;
+    const match = token.exec(data);
+    if (!match) return;
+    tokens.push(match[0]);
+    if (tokens.length > 16384) return;
+    at = token.lastIndex;
+  }
+  const out: string[] = [];
+  let open = false;
+  let drawn = false;
+  for (let i = 0; i < tokens.length;) {
+    const command = tokens[i++]!;
+    if (!/^[MLCQZ]$/.test(command)) return;
+    if (command === 'Z') {
+      if (!open || !drawn) return;
+      out.push('Z');
+      open = false;
+      continue;
+    }
+    if (command === 'M' && open) {
+      if (!drawn) return;
+      out.push('Z');
+      open = false;
+      drawn = false;
+    }
+    const arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    const nums: string[] = [];
+    while (i < tokens.length && !/^[MLCQZ]$/.test(tokens[i]!)) {
+      const n = Number(tokens[i]);
+      if (!Number.isFinite(n) || Math.abs(n) > 1e6) return;
+      nums.push(tokens[i++]!);
+    }
+    if (nums.length === 0 || nums.length % arity !== 0) return;
+    if (command === 'M') {
+      open = true;
+      if (nums.length > 2) drawn = true;
+    } else {
+      if (!open) return;
+      drawn = true;
+    }
+    out.push(command, ...nums);
+  }
+  if (open) {
+    if (!drawn) return;
+    out.push('Z');
+  }
+  const closed = out.join(' ');
+  return filledPathIssue(closed) ? undefined : closed;
+}
+
 /** NONE is carried only for one convex, closed straight-sided contour.
  * Figma fills this contour even with no vector regions; all fill rules agree
  * on its interior. Preserve NONE for native creation and exact readback.

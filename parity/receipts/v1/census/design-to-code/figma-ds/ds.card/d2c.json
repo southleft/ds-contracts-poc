@@ -5,10 +5,10 @@
   "nodeId": "53:1777",
   "mode": "reviewable-inversion",
   "variantCount": 2,
-  "contractSha256": "b4e927d1b6896299ef62c42c990ae47923e7fc8f6f6de1d4410c7fb060daa84c",
+  "contractSha256": "659d922fc286461a55952b14cbe38ccc7e6dfbd9504ac1a6af372f24002399bf",
   "carriage": {
-    "carried": 42,
-    "named": 71,
+    "carried": 44,
+    "named": 69,
     "silent": 0
   },
   "silentRows": [],
@@ -174,13 +174,13 @@
       0
     ],
     "layoutSizingVertical=FILL": [
-      0,
       1,
+      0,
       0
     ],
     "layoutSizingHorizontal=FIXED (child)": [
-      0,
       1,
+      0,
       0
     ]
   },
@@ -235,14 +235,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Card/Card.module.css": "2e50e812e404d52171dd262990ea271f8be371747e3d8e301402c87318d94a19",
+    "react/Card/Card.module.css": "119db387c0dc4dca564246ae1caa94f5dd7785500551b5bf9aa394fa3a799e5b",
     "react/Card/Card.stories.tsx": "7793d9d29ace5ce73651a465c4d9a1f8fa98bb76122cb361a29c79b79b825782",
     "react/Card/Card.tsx": "1148d71f20c2a0bb786ac39dea54fd744b77c1d9e90c7a3ddf01910272ef75e5",
     "react/Card/index.ts": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
     "wc/ds-card.ts": "2cd6ccfa711e9697ce9b5e6a54cd258a78fc4eb205a63658a96a372586f97aeb",
-    "wc/ds-card.css.ts": "28c82684f32665182ffcb3d1be35ea4b8545bc51b603dd40d3cf29b4d162238a",
+    "wc/ds-card.css.ts": "0691340107c95c54a4226ba23f1cad9016c365d068c3a9d81cee51faf4a169c2",
     "wc/ds-card.demo.html": "5dd5ee96c8e414429f515caf26b688f88b1326693312653276cda8a4bb3c93a8",
     "wc/ds-card.custom-elements.json": "93666bb281297a06bc710caf2fd09785f06259288777ed76ed17872955b4928d"
   },
-  "notesCount": 176
+  "notesCount": 177
 }

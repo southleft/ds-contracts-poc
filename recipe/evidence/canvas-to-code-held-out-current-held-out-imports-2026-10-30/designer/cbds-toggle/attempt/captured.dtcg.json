@@ -1,0 +1,43 @@
+{
+  "body": {
+    "font-large": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "font-medium": {
+      "$value": "14px",
+      "$type": "dimension"
+    },
+    "line-height-large": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "line-height-medium": {
+      "$value": "20px",
+      "$type": "dimension"
+    }
+  },
+  "spacing": {
+    "100": {
+      "$value": "8px",
+      "$type": "dimension"
+    }
+  },
+  "text": {
+    "disabled": {
+      "$value": "#556275",
+      "$type": "color"
+    },
+    "primary": {
+      "$value": "#050a0f",
+      "$type": "color"
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 7,
+      "skipped": []
+    }
+  }
+}

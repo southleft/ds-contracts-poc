@@ -1,4 +1,36 @@
 import {walkAnatomy,type Contract,type Part} from '../scripts/contract-schema.js';
+
+/** Enum values already proven by an ancestor `visibleWhen`. */
+export type StringVisibilityKnown = ReadonlyMap<string, ReadonlySet<string>>;
+
+function stringVisibilityAuthored(part: Part): string[] | undefined {
+  const equals = part.visibleWhen?.equals;
+  if (equals === undefined || typeof equals === 'boolean') return;
+  return Array.isArray(equals) ? equals : [equals];
+}
+
+/** Tighten the ancestor set by this part's string `visibleWhen`. */
+export function stringVisibilityKnown(part: Part, known: StringVisibilityKnown): StringVisibilityKnown {
+  const authored = stringVisibilityAuthored(part);
+  if (!authored || !part.visibleWhen) return known;
+  const prior = known.get(part.visibleWhen.prop);
+  const next = new Map(known);
+  next.set(part.visibleWhen.prop, prior ? new Set(authored.filter(value => prior.has(value))) : new Set(authored));
+  return next;
+}
+
+/** A descendant comparison TypeScript would reject after an ancestor narrowed
+ * the same enum. `undefined` means the authored condition is already safe. */
+export function stringVisibilityEquals(part: Part, known: StringVisibilityKnown): string | string[] | 'impossible' | undefined {
+  const authored = stringVisibilityAuthored(part);
+  if (!authored || !part.visibleWhen) return;
+  const prior = known.get(part.visibleWhen.prop);
+  if (!prior) return;
+  const kept = authored.filter(value => prior.has(value));
+  if (kept.length === 0) return 'impossible';
+  if (kept.length === authored.length) return;
+  return kept.length === 1 ? kept[0] : kept;
+}
 /** Both React emitters use the same exact table and public prop aliases. */
 export function wrapReactPresence(part:Part,jsx:string,codePropOf:(name:string)=>string):string {
   const t=part.presenceByCombination;if(!t)return jsx;

@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   color: var(--imported-spinner-root-color);
   display: block;

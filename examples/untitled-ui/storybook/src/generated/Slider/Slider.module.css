@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   border-radius: var(--imported-shared-size-8);
   width: var(--ds-slider-size, var(--imported-slider-root-width));

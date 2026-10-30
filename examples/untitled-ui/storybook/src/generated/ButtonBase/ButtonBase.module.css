@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border-style: solid;
   background-color: var(--imported-button-base-root-background-color);
   border-color: var(--imported-button-base-root-border-color);
@@ -154,6 +155,7 @@
 
 .icon-trailing {
   flex-direction: row-reverse;
+  min-width: max-content;
 }
 
 .Dot {

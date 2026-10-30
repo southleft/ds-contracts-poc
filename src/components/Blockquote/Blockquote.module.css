@@ -28,9 +28,11 @@
 .quote {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .citation {
   display: flex;
+  flex-shrink: 0;
   font-size: var(--font-control-size-sm);
 }

@@ -140,6 +140,15 @@ test('unsupported path paints cannot enter through conditional or state channels
     const c = contract(); Object.assign(c.anatomy.root!.parts!.mark!, patch);
     assert.ok(errorsOf(c).some((e) => e.includes('filled-path-unsupported-paint-or-mask')), JSON.stringify(patch));
   }
+  const ramp = contract();
+  ramp.anatomy.root!.parts!.mark!.literals = { 'background-image': 'linear-gradient(180deg, #2aabee 0%, #229ed9 100%)' };
+  assert.equal(errorsOf(ramp).some((e) => e.includes('filled-path-unsupported-paint-or-mask')), false);
+  const image = contract();
+  image.anatomy.root!.parts!.mark!.literals = { 'background-image': 'url(mark.png)' };
+  assert.ok(errorsOf(image).some((e) => e.includes('filled-path-unsupported-paint-or-mask')));
+  const axis = contract();
+  axis.anatomy.root!.parts!.mark!.tokens = { 'background-image': '{imported.mark.background-image.{name}}' };
+  assert.equal(errorsOf(axis).some((e) => e.includes('filled-path-unsupported-paint-or-mask')), false);
   assert.equal(ContractSchema.safeParse({ ...contract(), anatomy: { root: { parts: { mark: { shape: { kind: 'path', width: 12, height: 10, paths: Array.from({length:33},()=>triangle) } } } } } }).success, false);
 });
 

@@ -680,6 +680,16 @@ function textHolders(part: Part): { base: Holder[]; perValue: Holder[] } {
 }
 const holds = (hs: Holder[], channel: string | RegExp) =>
   hs.some((h) => h !== undefined && Object.keys(h).some((k) => (typeof channel === 'string' ? k === channel : channel.test(k))));
+/** `geometricprecision` is this file's own HEIGHT-text paint policy. A sibling
+ *  auto-width leaf still wants that same policy. Any other text-rendering
+ *  value is an authored plane and suppresses inference for the whole root. */
+function authoredTextRendering(part: Part): boolean {
+  const { base, perValue } = textHolders(part);
+  return [...base, ...perValue].some((holder) => {
+    const value = holder?.['text-rendering'];
+    return value !== undefined && !(typeof value === 'string' && value.trim().toLowerCase() === 'geometricprecision');
+  });
+}
 /** A tracking value that is only a zero adds nothing after the last glyph. */
 const ZERO_LENGTH = /^[-+]?(0+\.?0*|\.0+)(px|em|rem)?$/;
 /** A tracking LENGTH `size - x` can subtract: px / em / rem. */
@@ -931,7 +941,7 @@ export function nativeTextRenderingLeafParts(contract: Contract): Set<Part> {
   for (const [name, root] of Object.entries(contract.anatomy)) {
     if (roots.has(root) || root.component || root.slot || root.repeat) continue;
     const tree = anatomy.filter(entry => entry.path[0] === name);
-    if (tree.some(({ part }) => { const { base, perValue } = textHolders(part); return holds([...base, ...perValue], 'text-rendering'); })) continue;
+    if (tree.some(({ part }) => authoredTextRendering(part))) continue;
     for (const part of Object.values(root.parts ?? {})) {
       if (!drawsWholePixelTextBox(part) || part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.meter || part.attrs?.style) continue;
       const scalarText = part.content && contract.props.some(prop => prop.type === 'text' && prop.bindings.code.prop === part.content!.prop);
@@ -1004,6 +1014,15 @@ export function layoutOverrideDecls(o: {
     if (minima?.tokens?.['min-width'] === undefined && minima?.literals?.['min-width'] === undefined) d.push(`min-width: ${grow ? '0' : 'auto'}`);
     if (zero && minima?.tokens?.['min-height'] === undefined && minima?.literals?.['min-height'] === undefined) d.push(`min-height: ${grow ? '0' : 'auto'}`);
   }
+  // A reversed hug line overflows toward the start. A container one pixel
+  // narrower than max-content then slides every child backward. The floor
+  // keeps the line at its content size. A growing line still uses its flex floor.
+  // A designed width or height already limits the line, and max-content on top
+  // of it stops text from wrapping inside that box.
+  const grows = (o.grow ?? base?.grow) === true;
+  const keyword = (value: string | undefined) => value === undefined || ['auto','fit-content','max-content','min-content'].includes(value);
+  if (!grows && o.direction === 'row-reverse' && keyword(minima?.tokens?.width ?? minima?.literals?.width)) d.push('min-width: max-content');
+  if (!grows && o.direction === 'column-reverse' && keyword(minima?.tokens?.height ?? minima?.literals?.height)) d.push('min-height: max-content');
   return d;
 }
 

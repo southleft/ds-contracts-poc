@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   padding-inline: var(--space-inset-x-sm);
   padding-block: var(--space-inset-y-sm);

@@ -20,7 +20,7 @@
     }
   },
   "generatedSha256": {
-    "Badge/Badge.module.css": "3b9c41944e230560fa9261770bc713fdeb54eee40b5221b0df331d58a9898fa7",
+    "Badge/Badge.module.css": "94d430256f2b0bae71778f6863b61415d93082adc660ea743db51657fdfce649",
     "Badge/Badge.tsx": "3e0ef56d997f4f54576a7481c05453fce339b498d7a2087835ef10ad137783eb",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
@@ -424,13 +424,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 198,
+          "y": 192,
           "width": 8,
           "height": 8
         },
         "capture": {
           "x": 12,
-          "y": 198,
+          "y": 192,
           "width": 8,
           "height": 8
         },
@@ -440,7 +440,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 198,
+            "y": 192,
             "width": 8,
             "height": 8
           }
@@ -482,13 +482,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 232,
+          "y": 226,
           "width": 8,
           "height": 8
         },
         "capture": {
           "x": 12,
-          "y": 232,
+          "y": 226,
           "width": 8,
           "height": 8
         },
@@ -498,7 +498,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 232,
+            "y": 226,
             "width": 8,
             "height": 8
           }
@@ -540,13 +540,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 266,
+          "y": 260,
           "width": 8,
           "height": 8
         },
         "capture": {
           "x": 12,
-          "y": 266,
+          "y": 260,
           "width": 8,
           "height": 8
         },
@@ -556,7 +556,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 266,
+            "y": 260,
             "width": 8,
             "height": 8
           }
@@ -598,13 +598,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 300,
+          "y": 294,
           "width": 8,
           "height": 8
         },
         "capture": {
           "x": 12,
-          "y": 300,
+          "y": 294,
           "width": 8,
           "height": 8
         },
@@ -614,7 +614,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 300,
+            "y": 294,
             "width": 8,
             "height": 8
           }
@@ -656,13 +656,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 334,
+          "y": 328,
           "width": 8,
           "height": 8
         },
         "capture": {
           "x": 12,
-          "y": 334,
+          "y": 328,
           "width": 8,
           "height": 8
         },
@@ -672,7 +672,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 334,
+            "y": 328,
             "width": 8,
             "height": 8
           }
@@ -793,7 +793,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2406162359972981894",
+      "version": "2408215415010641279",
       "export": {
         "format": "png",
         "scale": 1,
@@ -811,8 +811,39 @@
         "useAbsoluteBounds": false,
         "proofs": "figma-render-export-proofs.json"
       },
-      "beforeSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c",
-      "afterSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c"
+      "exportRequests": {
+        "layout": {
+          "fileKey": "y83n4o9LOGs74oAoguFcGS",
+          "version": "2408215415010641279",
+          "nodeIds": [
+            "3538:35762",
+            "3538:35764",
+            "3538:35766",
+            "3538:35768",
+            "3538:35770",
+            "3625:17418",
+            "3625:17420",
+            "3625:17422",
+            "3625:17424",
+            "3625:17426"
+          ],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": true
+        },
+        "render": {
+          "fileKey": "y83n4o9LOGs74oAoguFcGS",
+          "version": "2408215415010641279",
+          "nodeIds": [],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": false
+        }
+      },
+      "beforeSha256": "ae51a155e1075e7196beaacb85e7efd112efcbe1f3c8cbbcb987502a244c7add",
+      "afterSha256": "ae51a155e1075e7196beaacb85e7efd112efcbe1f3c8cbbcb987502a244c7add"
     },
     "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -871,6 +902,24 @@
         "inkCoveragePercent": {
           "consumer": 94.21,
           "figma": 94.39
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 57,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -948,6 +997,24 @@
           "consumer": 94.21,
           "figma": 94.39
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 57,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 57,
@@ -1023,6 +1090,24 @@
         "inkCoveragePercent": {
           "consumer": 94.21,
           "figma": 94.39
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 57,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -1100,6 +1185,24 @@
           "consumer": 94.21,
           "figma": 94.39
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 57,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 57,
@@ -1175,6 +1278,24 @@
         "inkCoveragePercent": {
           "consumer": 94.21,
           "figma": 94.39
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 57,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -1252,6 +1373,24 @@
           "consumer": 93.75,
           "figma": 93.75
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 8,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 8,
@@ -1327,6 +1466,24 @@
         "inkCoveragePercent": {
           "consumer": 93.75,
           "figma": 93.75
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 8,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -1404,6 +1561,24 @@
           "consumer": 93.75,
           "figma": 93.75
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 8,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 8,
@@ -1479,6 +1654,24 @@
         "inkCoveragePercent": {
           "consumer": 93.75,
           "figma": 93.75
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 8,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -1556,6 +1749,24 @@
           "consumer": 93.75,
           "figma": 93.75
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 8,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 8,
@@ -1605,7 +1816,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "878aa678f7092cdb254092492273ec441dd8ac0a4d042b1bc8587da0582c0e30",
+    "tarballSha256": "3c833c68925d24507f658d0a38b73d70b5ef9b6fe683a8394c2135e693b73416",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -1621,7 +1832,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "d80179f7273fdcc2d2e10a6f6bb81ee1ca95d053a08e672ea3b7c0980cd6a77c",
+    "lockfileSha256": "4a7679782338e0c2c57e5e635487ba7cd67112d540b99784430feab7c348f91f",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -1652,7 +1863,7 @@
       ]
     },
     "builtCss": {
-      "bytes": 4740,
+      "bytes": 4763,
       "tokenDefinitions": 21,
       "tokenDefinitionsExpected": 21
     },
@@ -1666,8 +1877,8 @@
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
     "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
-    "figmaVersion": "2406162359972981894",
-    "responseSha256": "acab65fac333dae27e32a6fe19158ca675bb3462cde7e99a4561a38ab120976c",
+    "figmaVersion": "2408215415010641279",
+    "responseSha256": "ae51a155e1075e7196beaacb85e7efd112efcbe1f3c8cbbcb987502a244c7add",
     "evidence": "figma-content.json",
     "cases": [
       {

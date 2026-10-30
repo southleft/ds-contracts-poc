@@ -4993,7 +4993,7 @@ reason), so the proposer attaches it to the parent set's notes exactly like ever
 other capture receipt. The reasons: `remote-library-component` (`remote: true` on
 the component or its set), `not-found` (no metadata, or `/nodes` answered null),
 `not-a-component`, `utility-slot-set` (a set named `Slot`, which the mapper never
-maps), `set-name-collision` (the dump is keyed by set name), `unreadable` (the
+maps), `unreadable` (the
 request failed), `cap-exceeded`, `set-name-integer-like` (below) and `cycle-cut`
 (below). The CLI prints each on stderr; `extract:figma`
 prints a "Dependency closure" section in `figma-proposals.md`; the clean-consumer

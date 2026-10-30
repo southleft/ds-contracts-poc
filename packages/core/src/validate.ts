@@ -1433,9 +1433,11 @@ export function validateContract(
           for (const map of [...baseMaps, ...dynamicMaps]) for (const [key, value] of Object.entries(map ?? {})) {
             const staticMatchingRatio=key==='aspect-ratio'&&aspectDeclarations.length===1&&
               (map===parent.literals||map===parent.declared)&&strokeParentRatioMatches(value,shape.strokePath?.viewport);
-            if ((!['width', 'height', 'opacity', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y', 'color', 'stroke-width'].includes(key)&&!staticMatchingRatio) ||
+            if ((!['width', 'height', 'opacity', 'position', 'display', 'overflow', 'overflow-x', 'overflow-y', 'color', 'stroke-width', 'fill'].includes(key)&&!staticMatchingRatio) ||
                 ['overflow', 'overflow-x', 'overflow-y'].includes(key) && !['visible', 'hidden'].includes(value) ||
                 key === 'position' && value !== 'relative' || key === 'display' && !['block', 'none'].includes(value) ||
+                key === 'aspect-ratio' && !/^\d+(?:\.\d+)?(?: \/ \d+(?:\.\d+)?)?$/.test(value) ||
+                key === 'fill' && !value.startsWith('{') ||
                 map && dynamicMaps.includes(map) && ['width', 'height'].includes(key))
               errors.push(`${contract.id}: ${name}: stroked-path-parent-channel-unsupported:${key}`);
             if (['width', 'height'].includes(key) && !value.startsWith('{') && !strokedPathDimensionOk(value))
@@ -1507,7 +1509,9 @@ export function validateContract(
           ...(part.stylesWhen ?? []).map((rule) => rule.styles),
           ...(part.literalsByProp ?? []).flatMap((entry) => Object.values(entry.map)),
           ...literalsByCombinationRecords(part)];
-        if (paintMaps.some((map) => Object.keys(map ?? {}).some((key) => /^(border|box-shadow|background-image|clip-path|mask)/.test(key))))
+        if (paintMaps.some((map) => Object.entries(map ?? {}).some(([key, value]) =>
+          /^(border|box-shadow|clip-path|mask)/.test(key) ||
+          key === 'background-image' && value !== 'none' && !/^linear-gradient\(/.test(value) && !/^\{(?:[^{}]+|\{[A-Za-z0-9]+\})+\}$/.test(value))))
           errors.push(`${contract.id}: ${name}: filled-path-unsupported-paint-or-mask`);
         const geometries = [shape, ...Object.values(shape.pathsByProp?.map ?? {})];
         if (geometries.some(geometry => !!geometry.parentViewport !== !!shape.parentViewport))

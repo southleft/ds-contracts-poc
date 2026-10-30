@@ -1,0 +1,37 @@
+{
+  "theme": {
+    "border": {
+      "radius": {
+        "-u40-": {
+          "$value": "6px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "color": {
+      "background": {
+        "neutral-default": {
+          "$value": "#1d1d1a",
+          "$type": "color"
+        },
+        "transparent-default": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      }
+    },
+    "space": {
+      "xxs": {
+        "$value": "4px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 4,
+      "skipped": []
+    }
+  }
+}

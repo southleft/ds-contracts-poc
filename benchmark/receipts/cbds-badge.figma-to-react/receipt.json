@@ -20,13 +20,13 @@
     }
   },
   "generatedSha256": {
-    "Badge/Badge.module.css": "8936817c26892b237b2f651333f264269a9dbcf1ccc587c238a7b0e0fe2f28d0",
+    "Badge/Badge.module.css": "232dad92af36426d8697ab49ebcfb9b01b8e91842e8a40b66e8623ec7917e35b",
     "Badge/Badge.tsx": "7d5451e27c97e3e8671f6842d91a972b78289883f3940c54bbd0896ab8c544b8",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
-    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.module.css": "e2fd833e4e2d0e131da7c61191873b9df9093c3cc25674d249fd367d2e84c6f2",
     "Icon/Icon.tsx": "dc738a7c3745423b48fa5331c6fee5595c8283e4162dd973f8aab086dab0a40a",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
+    "Placeholder/Placeholder.module.css": "8a5fb51d0b7042161cef55cdd5004922688efeba3a5920ab1d43b1928717182b",
     "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
     "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
     "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
@@ -216,13 +216,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 94,
+          "y": 92,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 94,
+          "y": 92,
           "width": 48,
           "height": 16
         },
@@ -232,7 +232,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 94,
+            "y": 92,
             "width": 48,
             "height": 16
           }
@@ -293,13 +293,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 128,
+          "y": 126,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 128,
+          "y": 126,
           "width": 48,
           "height": 16
         },
@@ -309,7 +309,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 128,
+            "y": 126,
             "width": 48,
             "height": 16
           }
@@ -524,23 +524,23 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 242,
+          "y": 240,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 242,
+          "y": 240,
           "width": 48,
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "d2f1831ba2dfd17f6cb6c055f9f2b5ff6568ccc42e318602845ad2854116baea",
+        "pngSha256": "56f6e7b38fdc80a5279398f4f8cc79041915f60b63ae2f4a02c6e226d29af777",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 242,
+            "y": 240,
             "width": 48,
             "height": 16
           }
@@ -601,13 +601,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 276,
+          "y": 274,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 276,
+          "y": 274,
           "width": 48,
           "height": 16
         },
@@ -617,7 +617,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 276,
+            "y": 274,
             "width": 48,
             "height": 16
           }
@@ -832,13 +832,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 390,
+          "y": 388,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 390,
+          "y": 388,
           "width": 48,
           "height": 16
         },
@@ -848,7 +848,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 390,
+            "y": 388,
             "width": 48,
             "height": 16
           }
@@ -909,13 +909,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 424,
+          "y": 422,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 424,
+          "y": 422,
           "width": 48,
           "height": 16
         },
@@ -925,7 +925,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 424,
+            "y": 422,
             "width": 48,
             "height": 16
           }
@@ -1140,13 +1140,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 538,
+          "y": 536,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 538,
+          "y": 536,
           "width": 48,
           "height": 16
         },
@@ -1156,7 +1156,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 538,
+            "y": 536,
             "width": 48,
             "height": 16
           }
@@ -1217,13 +1217,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 572,
+          "y": 570,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 572,
+          "y": 570,
           "width": 48,
           "height": 16
         },
@@ -1233,7 +1233,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 572,
+            "y": 570,
             "width": 48,
             "height": 16
           }
@@ -1448,13 +1448,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 686,
+          "y": 684,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 686,
+          "y": 684,
           "width": 48,
           "height": 16
         },
@@ -1464,7 +1464,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 686,
+            "y": 684,
             "width": 48,
             "height": 16
           }
@@ -1525,13 +1525,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 720,
+          "y": 718,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 720,
+          "y": 718,
           "width": 48,
           "height": 16
         },
@@ -1541,7 +1541,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 720,
+            "y": 718,
             "width": 48,
             "height": 16
           }
@@ -1756,13 +1756,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 834,
+          "y": 832,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 834,
+          "y": 832,
           "width": 48,
           "height": 16
         },
@@ -1772,7 +1772,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 834,
+            "y": 832,
             "width": 48,
             "height": 16
           }
@@ -1833,13 +1833,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 868,
+          "y": 866,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 868,
+          "y": 866,
           "width": 48,
           "height": 16
         },
@@ -1849,7 +1849,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 868,
+            "y": 866,
             "width": 48,
             "height": 16
           }
@@ -2064,13 +2064,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 982,
+          "y": 980,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 982,
+          "y": 980,
           "width": 48,
           "height": 16
         },
@@ -2080,7 +2080,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 982,
+            "y": 980,
             "width": 48,
             "height": 16
           }
@@ -2141,23 +2141,23 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1016,
+          "y": 1014,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1016,
+          "y": 1014,
           "width": 48,
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9f3a60eda0ef2b90093edb5ad4fa6e546b6872ca3d903c6f67cdb1a896c04643",
+        "pngSha256": "c1a4eec081d10e55c4b098746f100f44bf9675b4f27e990fe56f5da3e5ffbc59",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1016,
+            "y": 1014,
             "width": 48,
             "height": 16
           }
@@ -2372,13 +2372,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1130,
+          "y": 1128,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1130,
+          "y": 1128,
           "width": 48,
           "height": 16
         },
@@ -2388,7 +2388,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1130,
+            "y": 1128,
             "width": 48,
             "height": 16
           }
@@ -2449,13 +2449,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1164,
+          "y": 1162,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1164,
+          "y": 1162,
           "width": 48,
           "height": 16
         },
@@ -2465,7 +2465,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1164,
+            "y": 1162,
             "width": 48,
             "height": 16
           }
@@ -2680,13 +2680,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1278,
+          "y": 1276,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1278,
+          "y": 1276,
           "width": 48,
           "height": 16
         },
@@ -2696,7 +2696,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1278,
+            "y": 1276,
             "width": 48,
             "height": 16
           }
@@ -2757,13 +2757,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1312,
+          "y": 1310,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1312,
+          "y": 1310,
           "width": 48,
           "height": 16
         },
@@ -2773,7 +2773,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1312,
+            "y": 1310,
             "width": 48,
             "height": 16
           }
@@ -2988,13 +2988,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1426,
+          "y": 1424,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1426,
+          "y": 1424,
           "width": 48,
           "height": 16
         },
@@ -3004,7 +3004,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1426,
+            "y": 1424,
             "width": 48,
             "height": 16
           }
@@ -3065,13 +3065,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1460,
+          "y": 1458,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1460,
+          "y": 1458,
           "width": 48,
           "height": 16
         },
@@ -3081,7 +3081,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1460,
+            "y": 1458,
             "width": 48,
             "height": 16
           }
@@ -3296,13 +3296,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1574,
+          "y": 1572,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1574,
+          "y": 1572,
           "width": 48,
           "height": 16
         },
@@ -3312,7 +3312,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1574,
+            "y": 1572,
             "width": 48,
             "height": 16
           }
@@ -3373,13 +3373,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1608,
+          "y": 1606,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1608,
+          "y": 1606,
           "width": 48,
           "height": 16
         },
@@ -3389,7 +3389,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1608,
+            "y": 1606,
             "width": 48,
             "height": 16
           }
@@ -3604,13 +3604,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1722,
+          "y": 1720,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1722,
+          "y": 1720,
           "width": 48,
           "height": 16
         },
@@ -3620,7 +3620,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1722,
+            "y": 1720,
             "width": 48,
             "height": 16
           }
@@ -3681,13 +3681,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1756,
+          "y": 1754,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1756,
+          "y": 1754,
           "width": 48,
           "height": 16
         },
@@ -3697,7 +3697,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1756,
+            "y": 1754,
             "width": 48,
             "height": 16
           }
@@ -3912,13 +3912,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1870,
+          "y": 1868,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1870,
+          "y": 1868,
           "width": 48,
           "height": 16
         },
@@ -3928,7 +3928,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1870,
+            "y": 1868,
             "width": 48,
             "height": 16
           }
@@ -3989,13 +3989,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 1904,
+          "y": 1902,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 1904,
+          "y": 1902,
           "width": 48,
           "height": 16
         },
@@ -4005,7 +4005,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 1904,
+            "y": 1902,
             "width": 48,
             "height": 16
           }
@@ -4220,23 +4220,23 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2018,
+          "y": 2016,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2018,
+          "y": 2016,
           "width": 48,
           "height": 16
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "be1401f60767776e62d9702187b7723f06c424505bbd4b1a9985d66c48f75302",
+        "pngSha256": "15e53f4451b27cec14316c9fa12a09a5d4ea1337e67a8b710cf619e4a9e8939b",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2018,
+            "y": 2016,
             "width": 48,
             "height": 16
           }
@@ -4297,13 +4297,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2052,
+          "y": 2050,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2052,
+          "y": 2050,
           "width": 48,
           "height": 16
         },
@@ -4313,7 +4313,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2052,
+            "y": 2050,
             "width": 48,
             "height": 16
           }
@@ -4528,13 +4528,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2166,
+          "y": 2164,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2166,
+          "y": 2164,
           "width": 48,
           "height": 16
         },
@@ -4544,7 +4544,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2166,
+            "y": 2164,
             "width": 48,
             "height": 16
           }
@@ -4605,13 +4605,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2200,
+          "y": 2198,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2200,
+          "y": 2198,
           "width": 48,
           "height": 16
         },
@@ -4621,7 +4621,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2200,
+            "y": 2198,
             "width": 48,
             "height": 16
           }
@@ -4836,13 +4836,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2314,
+          "y": 2312,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2314,
+          "y": 2312,
           "width": 48,
           "height": 16
         },
@@ -4852,7 +4852,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2314,
+            "y": 2312,
             "width": 48,
             "height": 16
           }
@@ -4913,13 +4913,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2348,
+          "y": 2346,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2348,
+          "y": 2346,
           "width": 48,
           "height": 16
         },
@@ -4929,7 +4929,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2348,
+            "y": 2346,
             "width": 48,
             "height": 16
           }
@@ -5144,13 +5144,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2462,
+          "y": 2460,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2462,
+          "y": 2460,
           "width": 48,
           "height": 16
         },
@@ -5160,7 +5160,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2462,
+            "y": 2460,
             "width": 48,
             "height": 16
           }
@@ -5221,13 +5221,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2496,
+          "y": 2494,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2496,
+          "y": 2494,
           "width": 48,
           "height": 16
         },
@@ -5237,7 +5237,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2496,
+            "y": 2494,
             "width": 48,
             "height": 16
           }
@@ -5452,13 +5452,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2610,
+          "y": 2608,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2610,
+          "y": 2608,
           "width": 48,
           "height": 16
         },
@@ -5468,7 +5468,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2610,
+            "y": 2608,
             "width": 48,
             "height": 16
           }
@@ -5529,13 +5529,13 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 2644,
+          "y": 2642,
           "width": 48,
           "height": 16
         },
         "capture": {
           "x": 12,
-          "y": 2644,
+          "y": 2642,
           "width": 48,
           "height": 16
         },
@@ -5545,7 +5545,7 @@
           "kind": "browser-paint-extent-v1",
           "paint": {
             "x": 12,
-            "y": 2644,
+            "y": 2642,
             "width": 48,
             "height": 16
           }
@@ -6339,7 +6339,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2402777548310810334",
+      "version": "2415628455515675420",
       "export": {
         "format": "png",
         "scale": 1,
@@ -6357,8 +6357,101 @@
         "useAbsoluteBounds": false,
         "proofs": "figma-render-export-proofs.json"
       },
-      "beforeSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468",
-      "afterSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468"
+      "exportRequests": {
+        "layout": {
+          "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+          "version": "2415628455515675420",
+          "nodeIds": [
+            "277:861",
+            "277:917",
+            "277:825",
+            "277:919",
+            "277:863",
+            "277:921",
+            "277:827",
+            "277:923",
+            "277:865",
+            "277:829",
+            "277:1011",
+            "277:1013",
+            "277:867",
+            "277:1047",
+            "277:831",
+            "277:1049",
+            "277:869",
+            "277:833",
+            "277:1065",
+            "277:1067",
+            "277:871",
+            "277:1081",
+            "277:1083",
+            "277:835",
+            "277:873",
+            "277:1145",
+            "277:837",
+            "277:1147",
+            "277:875",
+            "277:1149",
+            "277:839",
+            "277:1151",
+            "277:877",
+            "277:841",
+            "277:1153",
+            "277:1155",
+            "277:879",
+            "277:1157",
+            "277:843",
+            "277:1159",
+            "277:881",
+            "277:845",
+            "277:1161",
+            "277:1163",
+            "277:883",
+            "277:847",
+            "277:1165",
+            "277:1167",
+            "277:885",
+            "277:1169",
+            "277:849",
+            "277:1171",
+            "277:887",
+            "277:851",
+            "277:1173",
+            "277:1175",
+            "277:889",
+            "277:853",
+            "277:1177",
+            "277:1179",
+            "277:891",
+            "277:1181",
+            "277:855",
+            "277:1183",
+            "277:893",
+            "277:857",
+            "277:1185",
+            "277:1187",
+            "277:895",
+            "277:859",
+            "277:1189",
+            "277:1191"
+          ],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": true
+        },
+        "render": {
+          "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+          "version": "2415628455515675420",
+          "nodeIds": [],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": false
+        }
+      },
+      "beforeSha256": "a79de43b0ea653c3c9650c04aa5ec53c94fa40af2c5f4400c00800cbad167df9",
+      "afterSha256": "a79de43b0ea653c3c9650c04aa5ec53c94fa40af2c5f4400c00800cbad167df9"
     },
     "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -6417,6 +6510,24 @@
         "inkCoveragePercent": {
           "consumer": 96.17,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6494,6 +6605,24 @@
           "consumer": 90.16,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -6569,6 +6698,24 @@
         "inkCoveragePercent": {
           "consumer": 94.53,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6646,6 +6793,24 @@
           "consumer": 90.1,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -6721,6 +6886,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6798,6 +6981,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -6873,6 +7074,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -6950,6 +7169,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -7025,6 +7262,24 @@
         "inkCoveragePercent": {
           "consumer": 39.34,
           "figma": 37.77
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7102,6 +7357,24 @@
           "consumer": 41.39,
           "figma": 38.87
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -7177,6 +7450,24 @@
         "inkCoveragePercent": {
           "consumer": 56.9,
           "figma": 56.38
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7254,6 +7545,24 @@
           "consumer": 58.72,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -7329,6 +7638,24 @@
         "inkCoveragePercent": {
           "consumer": 96.17,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7406,6 +7733,24 @@
           "consumer": 90.16,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -7481,6 +7826,24 @@
         "inkCoveragePercent": {
           "consumer": 94.53,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7558,6 +7921,24 @@
           "consumer": 90.1,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -7633,6 +8014,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7710,6 +8109,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -7785,6 +8202,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -7862,6 +8297,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -7937,6 +8390,24 @@
         "inkCoveragePercent": {
           "consumer": 39.34,
           "figma": 37.77
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8014,6 +8485,24 @@
           "consumer": 41.39,
           "figma": 38.87
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -8089,6 +8578,24 @@
         "inkCoveragePercent": {
           "consumer": 56.9,
           "figma": 56.38
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8166,6 +8673,24 @@
           "consumer": 58.72,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -8241,6 +8766,24 @@
         "inkCoveragePercent": {
           "consumer": 95.36,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8318,6 +8861,24 @@
           "consumer": 89.34,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -8393,6 +8954,24 @@
         "inkCoveragePercent": {
           "consumer": 94.27,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8470,6 +9049,24 @@
           "consumer": 89.84,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -8545,6 +9142,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8622,6 +9237,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -8697,6 +9330,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8774,6 +9425,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -8849,6 +9518,24 @@
         "inkCoveragePercent": {
           "consumer": 39.07,
           "figma": 37.77
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -8926,6 +9613,24 @@
           "consumer": 41.05,
           "figma": 38.87
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -9001,6 +9706,24 @@
         "inkCoveragePercent": {
           "consumer": 55.73,
           "figma": 56.38
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9078,6 +9801,24 @@
           "consumer": 57.55,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -9153,6 +9894,24 @@
         "inkCoveragePercent": {
           "consumer": 95.49,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9230,6 +9989,24 @@
           "consumer": 89.48,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -9305,6 +10082,24 @@
         "inkCoveragePercent": {
           "consumer": 94.53,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9382,6 +10177,24 @@
           "consumer": 90.1,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -9457,6 +10270,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9534,6 +10365,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -9609,6 +10458,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9686,6 +10553,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -9761,6 +10646,24 @@
         "inkCoveragePercent": {
           "consumer": 39.14,
           "figma": 37.77
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9838,6 +10741,24 @@
           "consumer": 41.19,
           "figma": 38.87
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -9913,6 +10834,24 @@
         "inkCoveragePercent": {
           "consumer": 55.99,
           "figma": 56.38
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -9990,6 +10929,24 @@
           "consumer": 57.81,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -10065,6 +11022,24 @@
         "inkCoveragePercent": {
           "consumer": 95.49,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10142,6 +11117,24 @@
           "consumer": 89.48,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -10217,6 +11210,24 @@
         "inkCoveragePercent": {
           "consumer": 94.53,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10294,6 +11305,24 @@
           "consumer": 90.1,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -10369,6 +11398,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10446,6 +11493,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -10521,6 +11586,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10598,6 +11681,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -10673,6 +11774,24 @@
         "inkCoveragePercent": {
           "consumer": 39.28,
           "figma": 37.5
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10750,6 +11869,24 @@
           "consumer": 40.92,
           "figma": 38.59
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -10825,6 +11962,24 @@
         "inkCoveragePercent": {
           "consumer": 56.51,
           "figma": 55.86
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -10902,6 +12057,24 @@
           "consumer": 58.2,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -10977,6 +12150,24 @@
         "inkCoveragePercent": {
           "consumer": 95.49,
           "figma": 95.08
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11054,6 +12245,24 @@
           "consumer": 89.34,
           "figma": 89.07
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -11129,6 +12338,24 @@
         "inkCoveragePercent": {
           "consumer": 94.53,
           "figma": 95.18
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11206,6 +12433,24 @@
           "consumer": 90.1,
           "figma": 91.54
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -11281,6 +12526,24 @@
         "inkCoveragePercent": {
           "consumer": 99.73,
           "figma": 99.73
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11358,6 +12621,24 @@
           "consumer": 93.72,
           "figma": 93.72
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -11433,6 +12714,24 @@
         "inkCoveragePercent": {
           "consumer": 99.48,
           "figma": 99.48
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11510,6 +12809,24 @@
           "consumer": 95.05,
           "figma": 95.83
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -11585,6 +12902,24 @@
         "inkCoveragePercent": {
           "consumer": 39.28,
           "figma": 37.77
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11662,6 +12997,24 @@
           "consumer": 41.33,
           "figma": 38.87
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 61,
@@ -11737,6 +13090,24 @@
         "inkCoveragePercent": {
           "consumer": 56.51,
           "figma": 56.38
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -11814,6 +13185,24 @@
           "consumer": 58.33,
           "figma": 57.42
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 48,
@@ -11882,7 +13271,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "ecd2f2482451a2b30d9de00e54e8d13ba99f498608157ddfdae93f72fb4578c1",
+    "tarballSha256": "1e0ca196440dcfe2853cb52691c2200922b29c2482cf96434b8abc4dca154a60",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -11910,7 +13299,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "f714f8f957539dd4eebae47dde7d002e6f823a44bd30ad16f675ebc14531c95c",
+    "lockfileSha256": "517d2c37ff0546caa4f424d998468295ce8bbded1b349ab8217fda374bd63a10",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -11941,7 +13330,7 @@
       ]
     },
     "builtCss": {
-      "bytes": 16137,
+      "bytes": 16231,
       "tokenDefinitions": 84,
       "tokenDefinitionsExpected": 84
     },
@@ -11955,8 +13344,8 @@
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
     "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
-    "figmaVersion": "2402777548310810334",
-    "responseSha256": "964255e65b36db46cd56d37f5d93c1eee40e785b07dace3999ec86c84d8d9468",
+    "figmaVersion": "2415628455515675420",
+    "responseSha256": "a79de43b0ea653c3c9650c04aa5ec53c94fa40af2c5f4400c00800cbad167df9",
     "evidence": "figma-content.json",
     "cases": [
       {

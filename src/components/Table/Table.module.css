@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
   background-color: var(--color-surface-sunken);
 }
 
@@ -35,4 +36,5 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  flex-shrink: 0;
 }

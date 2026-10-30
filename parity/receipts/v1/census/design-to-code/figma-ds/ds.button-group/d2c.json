@@ -118,7 +118,7 @@
     }
   ],
   "generatedFiles": {
-    "react/ButtonGroup/ButtonGroup.module.css": "952344c8575dc45dde16dc23f26abbb0281b2d3c241f539ab4f93cd888aeb3d4",
+    "react/ButtonGroup/ButtonGroup.module.css": "1ab005e81312ddb3912dbefc7de9cc1cc008a92f21577679c4d37c1cbb8fa5a5",
     "react/ButtonGroup/ButtonGroup.stories.tsx": "6ae6166c0b4d6774bf90d8d8cffa74e99ce64ba64265d071cb17d7d97c53d934",
     "react/ButtonGroup/ButtonGroup.tsx": "ff256af9349ca0a1cc9f60972f4f06496c86d65e2358a2e67d45e40a67ca340c",
     "react/ButtonGroup/index.ts": "ed87204c5ce6d251e5518c6940a660e3cddbe815379b367a5088d5a64534e992",

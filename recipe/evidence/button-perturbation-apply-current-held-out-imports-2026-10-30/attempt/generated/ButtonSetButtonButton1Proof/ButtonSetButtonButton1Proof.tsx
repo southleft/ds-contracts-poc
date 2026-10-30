@@ -1,0 +1,87 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-set-button-button-1-proof.contract.json (ds.button-set-button-button-1-proof v0.1.0)
+ * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
+ */
+import { forwardRef } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import { ButtonHelperLoadingSpinner1 } from '../ButtonHelperLoadingSpinner1';
+import { ButtonHelperLeadingIcon1 } from '../ButtonHelperLeadingIcon1';
+import styles from './ButtonSetButtonButton1Proof.module.css';
+
+export interface ButtonSetButtonButton1ProofProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
+  variant?: 'secondary' | 'primary';
+  size?: 'medium' | 'small' | 'large';
+  state?: 'default' | 'hover' | 'pressed' | 'focusVisible' | 'disabled' | 'loading';
+  icons?: 'none' | 'leading' | 'trailing' | 'both';
+}
+
+/** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
+export const ButtonSetButtonButton1Proof = forwardRef<
+  HTMLButtonElement,
+  ButtonSetButtonButton1ProofProps
+>(function ButtonSetButtonButton1Proof(
+  { variant = 'secondary', size = 'medium', state = 'default', icons = 'none', className, ...rest },
+  ref,
+) {
+  const classes = [
+    styles.root,
+    styles[`variant-${variant}`],
+    styles[`size-${size}`],
+    styles[`state-${state}`],
+    styles[`icons-${icons}`],
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <button ref={ref} className={classes} {...rest}>
+      {state === 'loading' ? <ButtonHelperLoadingSpinner1 /> : null}
+      {((table: { values: (string | null)[]; present: boolean }[], values: (string | null)[]) => {
+        const row = table.find((r) => r.values.every((v, i) => v === values[i]));
+        if (!row) throw new globalThis.Error('presence-combination-unavailable');
+        return row.present;
+      })(
+        [
+          { values: ['default', 'both'], present: true },
+          { values: ['default', 'leading'], present: true },
+          { values: ['default', 'none'], present: false },
+          { values: ['default', 'trailing'], present: false },
+          { values: ['disabled', 'both'], present: true },
+          { values: ['disabled', 'leading'], present: true },
+          { values: ['disabled', 'none'], present: false },
+          { values: ['disabled', 'trailing'], present: false },
+          { values: ['focusVisible', 'both'], present: true },
+          { values: ['focusVisible', 'leading'], present: true },
+          { values: ['focusVisible', 'none'], present: false },
+          { values: ['focusVisible', 'trailing'], present: false },
+          { values: ['hover', 'both'], present: true },
+          { values: ['hover', 'leading'], present: true },
+          { values: ['hover', 'none'], present: false },
+          { values: ['hover', 'trailing'], present: false },
+          { values: ['loading', 'both'], present: false },
+          { values: ['loading', 'leading'], present: false },
+          { values: ['loading', 'none'], present: false },
+          { values: ['loading', 'trailing'], present: false },
+          { values: ['pressed', 'both'], present: true },
+          { values: ['pressed', 'leading'], present: true },
+          { values: ['pressed', 'none'], present: false },
+          { values: ['pressed', 'trailing'], present: false },
+        ],
+        [state == null ? null : String(state), icons == null ? null : String(icons)],
+      ) ? (
+        <>
+          <ButtonHelperLeadingIcon1 />
+        </>
+      ) : null}
+      <span className={styles.buttonlabelLabel}>Button</span>
+      {icons === 'trailing' || icons === 'both' ? <ButtonHelperLeadingIcon1 /> : null}
+    </button>
+  );
+});

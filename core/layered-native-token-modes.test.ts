@@ -3,7 +3,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
 import { layeredNativeTokenModes, type LayeredNativeTokenMode } from './layered-native-token-modes.js';
-import { prepareNativeTokenContext, verifyNativeTokenContextReceipt, type NativeTokenContextInput } from './native-token-context.js';
+import { assertNativeTokenTree, prepareNativeTokenContext, verifyNativeTokenContextReceipt, type NativeTokenContextInput } from './native-token-context.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from './token-set.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
@@ -137,4 +137,36 @@ test('existing scoped allocation preserves foreign variables and reads aliases b
   assert.deepEqual(mock.variables.map((v: any) => v.id), identities);
   assert.equal(JSON.stringify(mock.variables), beforeRepeat, 'a direct create replay cannot allocate duplicates or change values');
   assert.equal(prep.variables.length, identity.variables.length);
+});
+
+test('Unicode source path segments retain exact spelling, aliases and independent variable readback',async()=>{
+ const layers:TokenTreeInput={primitives:{},semantic:{imported:{'form-item':{slider:{height:{'水平':leaf('dimension','32px')}}}},'别名':leaf('dimension','{imported.form-item.slider.height.水平}'),
+  'é':leaf('number',1),'e\u0301':leaf('number',2)},light:{},dark:{},brands:{default:{}}};
+ const before=structuredClone(layers),routed=layeredNativeTokenModes(layers,[{sourceMode:'light',brand:'default',nativeModeName:'Selected'}]);
+ const input:NativeTokenContextInput={fileKey:'mock-file',scopeId:'unicode-paths',writeProtocol:'explicit-modes-v1',source:{revision:'test-source',sourceProgramSha256:'a'.repeat(64),tokensSha256:routed.tokensSha256},tokenPaths:['别名','é','e\u0301'],modes:routed.modes};
+ const prep=prepareNativeTokenContext(input);assert.deepEqual(layers,before);
+ const imported=prep.variables.find(v=>v.tokenPath==='imported.form-item.slider.height.水平');assert(imported);assert.equal(imported.name,'imported/form-item/slider/height/水平');
+ assert(prep.variables.some(v=>v.tokenPath==='é'));assert(prep.variables.some(v=>v.tokenPath==='e\u0301'));
+ const mock=nativeFixtureHost(),run=(script:string)=>vm.runInNewContext('(async()=>{'+script+'\n})()',{figma:mock.figma,console});mock.figma.fileKey=input.fileKey;
+ const made=await run(emitNativeTokenContextScript(input).script);assert.equal(made.status,'created-candidate',JSON.stringify(made));
+ const observed=await run(emitNativeTokenContextReadbackScript(input,made.creationIdentity));
+ const verify=(receipt:any)=>verifyNativeTokenContextReceipt({input,expectedIdentity:made.creationIdentity,receipt:plain(receipt)});
+ assert.equal(verify(observed.receipt).status,'native-token-context-observed');
+ const target=made.creationIdentity.variables.find((v:any)=>v.tokenPath==='imported.form-item.slider.height.水平');
+ const alias=made.creationIdentity.variables.find((v:any)=>v.tokenPath==='别名');const variable=observed.receipt.variables.find((v:any)=>v.id===alias.id);
+ assert.equal(variable.valuesByMode[made.creationIdentity.modes[0].modeId].id,target.id);
+ const bad=plain(observed.receipt);bad.variables.find((v:any)=>v.id===target.id).name='imported/form-item/slider/height/垂直';assert.equal(verify(bad).status,'refused');
+});
+
+test('Unicode path support retains separator, control, alias and normalized-dot collision refusals',()=>{
+ for(const key of ['a/b','a..b','.a','a.','white space','a\n','a\u0000','a\u200f','a{b}','🙂']){
+  assert.throws(()=>assertNativeTokenTree({[key]:leaf('dimension','1px')}),/token-path/,JSON.stringify(key));
+ }
+ assert.throws(()=>assertNativeTokenTree({'状态.色':leaf('color','#000000'),'状态':{'色':leaf('color','#ffffff')}}),/token-path-ambiguous/);
+ const layers:TokenTreeInput={primitives:{},semantic:{'状态':leaf('dimension','{未知.路径}')},light:{},dark:{},brands:{default:{}}};
+ const routed=layeredNativeTokenModes(layers,[{sourceMode:'light',brand:'default',nativeModeName:'Selected'}]);
+ const input:NativeTokenContextInput={fileKey:'mock-file',scopeId:'unicode-missing',source:{revision:'test-source',sourceProgramSha256:'a'.repeat(64),tokensSha256:routed.tokensSha256},tokenPaths:['状态'],modes:routed.modes};
+ assert.throws(()=>prepareNativeTokenContext(input),/token-missing/);
+ layers.semantic['状态']=leaf('dimension','{a/b}');const invalid=layeredNativeTokenModes(layers,[{sourceMode:'light',brand:'default',nativeModeName:'Selected'}]);
+ assert.throws(()=>prepareNativeTokenContext({...input,source:{...input.source,tokensSha256:invalid.tokensSha256},modes:invalid.modes}),/alias-path/);
 });

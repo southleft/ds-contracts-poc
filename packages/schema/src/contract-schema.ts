@@ -12,6 +12,7 @@ export * from './state-presence.js';
 import {allocateInstanceAffine} from './instance-affine.js';
 export * from './instance-affine.js';
 import {nativeLineIssue,nativeLineFootprint} from './native-line.js';
+export {nativeLineFootprint};
 import {normalizeAbsoluteGeometry} from './absolute-geometry.js';
 export * from './native-line.js';
 /**
@@ -48,9 +49,9 @@ export {FillStackSchema, FillStackTableSchema, resolveFillStack, fillStackPaintC
 import {FillStackSchema, FillStackTableSchema, type FillStack, type FillStackTable} from './fill-stack.js';
 export {SolidFillCompositionSchema, solidFillCompositionCss, solidFillCompositionTokenCss, solidFillCompositionPaint, SolidFillCompositionTableSchema, resolveSolidFillComposition, resolveSolidFillToken, type SolidFillCompositionTable, type SolidFillComposition} from './solid-fill-composition.js';
 import { filledPathMask, filledPathsIssue } from './filled-path.js';
-export { filledPathIssue, filledPathsIssue, filledPathMask, type FilledPath } from './filled-path.js';
+export { closeFilledSubpaths, filledPathIssue, filledPathsIssue, filledPathMask, type FilledPath } from './filled-path.js';
 import { strokedPathGeometryIssue } from './stroked-path.js';
-export { strokedPathIssue, strokedPathGeometryIssue, strokedPathDimensionOk, strokedPathSvg, type StrokedPath } from './stroked-path.js';
+export { strokedPathIssue, strokedPathGeometryIssue, sourcePathBounds, strokedPathDimensionOk, strokedPathSvg, type StrokedPath } from './stroked-path.js';
 import * as z from "zod";
 import { DECLARABLE_ARCHETYPES } from "./archetype.js";
 
@@ -954,12 +955,15 @@ const shadowLayerOk = (layer: string): boolean => {
 /** Channel-specific structured values: shadow stacks and one linear gradient.
  * Other channels retain their scalar grammar. */
 export const literalValueOk = (channel: string, value: string): boolean => {
+  if (channel === 'text-decoration') return /^(?:none|underline|line-through)$/.test(value);
+  if (channel === 'text-underline-position') return value === 'under';
   if (channel === 'font-weight') {
     return /^(?:[1-9]\d*(?:\.\d+)?|0\.\d+)$/.test(value) &&
       Number(value) >= 1 && Number(value) <= 1000;
   }
   if (channel === 'background-image') {
     if (value === 'none') return true;
+    if (/^url\("data:image\/png;base64,[A-Za-z0-9+/]+={0,2}"\)$/.test(value) && value.length <= 20000) return true;
     const match = /^linear-gradient\((.*)\)$/.exec(value);
     if (!match) return false;
     const args = splitShadowLayers(match[1]);
@@ -1052,7 +1056,7 @@ export const LITERAL_CHANNELS = new Set([
  *  as its token case does. Kept apart from LITERAL_CHANNELS on purpose: that
  *  set is also the historical vocabulary of recorded source-reference
  *  evidence, which must reproduce byte for byte. */
-export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity", "font-weight", "outline-width", "outline-color"]);
+export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity", "font-weight", "outline-width", "outline-color", "text-decoration", "text-underline-position"]);
 
 /** A literals record with channel-aware scalar, shadow and gradient grammars. */
 export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
@@ -1861,6 +1865,10 @@ export const REF_OVERRIDE_CHANNELS: Record<
     note: "per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.",
   },
   "stroke-width": { css: ["stroke-width"], note: "Observed uniform centerline weight on an identity-qualified single-stroke drawing instance." },
+  fill: {
+    css: ["fill"],
+    note: "per-instance fill of a stroked drawing whose host fill is the same solid as its stroke. The child defaults to none, so an unfilled stroke stays a stroke.",
+  },
   color: {
     css: ["color"],
     note: "per-instance GLYPH INK (gap-closing round 8; dump v1.7 instancePrimaryFill, stroke- or fill-shaped, observed on the nested instance node). The twin of background-color for a vector child: an exported glyph whose whole drawing is ONE ink draws `currentColor`, its own contract binds that ink as `color`, and a host that draws the same glyph in its own ink sets this channel. A glyph with two or more distinct inks is refused by the single-ink test (examples/untitled-ui/glyph-ink.mts) and never reaches this channel — one custom property cannot honestly serve two paints.",
@@ -2074,11 +2082,23 @@ const NativeLineSchema = z.strictObject({
   ]),
   cap: z.enum(['NONE', 'ROUND', 'SQUARE']),
   align: z.enum(['INSIDE', 'CENTER', 'OUTSIDE']),
+  dashes: z.array(z.number().positive().max(1e6)).min(1).max(8).optional(),
+  painted: z.array(z.strictObject({
+    data: z.string().min(1).max(65536).regex(/^[MLCQZ0-9eE+.,\s-]+$/),
+    windingRule: z.enum(['NONZERO', 'EVENODD']),
+  })).min(1).max(8).optional(),
   source: z.strictObject({ nodeId: z.string().min(1), parentId: z.string().min(1).optional() }).optional(),
   observedSources: z.array(z.strictObject({
     nodeId: z.string().min(1), parentId: z.string().min(1).optional(), variantName: z.string(),
     length: z.number().positive().optional(),
     transform: z.tuple([z.tuple([z.number().finite(),z.number().finite(),z.number().finite()]),z.tuple([z.number().finite(),z.number().finite(),z.number().finite()])]),
+    cap: z.enum(['NONE', 'ROUND', 'SQUARE']).optional(),
+    align: z.enum(['INSIDE', 'CENTER', 'OUTSIDE']).optional(),
+    dashes: z.array(z.number().positive().max(1e6)).min(1).max(8).optional(),
+    painted: z.array(z.strictObject({
+      data: z.string().min(1).max(65536).regex(/^[MLCQZ0-9eE+.,\s-]+$/),
+      windingRule: z.enum(['NONZERO', 'EVENODD']),
+    })).min(1).max(8).optional(),
   })).optional(),
 }).superRefine((line, ctx) => {
   const issue = nativeLineIssue(line);
@@ -2241,7 +2261,8 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
   if (shape.kind === 'line') {
     const box=nativeLineFootprint(shape.line);
     if(shape.line.fillWidth)return ['width: 100%', 'height: 0px', 'display: block', 'overflow: visible', 'flex-shrink: 0', 'align-self: stretch'];
-    return [`width: ${box.width}px`, `height: ${box.height}px`, 'display: block', 'overflow: visible', 'flex-shrink: 0'];
+    const size=(n:number)=>`${!Number.isFinite(n)||Math.abs(n)<1e-6?0:n}px`;
+    return [`width: ${size(box.width)}`, `height: ${size(box.height)}`, 'display: block', 'overflow: visible', 'flex-shrink: 0'];
   }
   if (shape.kind === 'stroked-path') return [
     'position: absolute', 'left: 0', 'top: 0', 'width: 100%', 'height: 100%',
@@ -5009,13 +5030,18 @@ export function lowerFilledPathVariants(contract: Contract): Contract {
  * identities; an SVG stroke paints those channels without a CSS border box. */
 export function lowerStrokedPathPaint(contract: Contract): Contract {
   let changed = false;
-  const project = (map: Record<string, string>, line: boolean) => Object.fromEntries(Object.entries(map).flatMap(([key, value]) =>
-    key === 'border-style' ? [] : [[key === 'border-color' ? 'stroke' : key === 'border-width' ? (line ? '--native-line-stroke-width' : 'stroke-width') : key, value]]));
+  const project = (map: Record<string, string>, line: boolean, painted: boolean) => Object.fromEntries(Object.entries(map).flatMap(([key, value]) => {
+    if (key === 'border-style') return [];
+    if (key === 'border-color') return line && painted ? [['stroke', value], ['fill', value]] : [['stroke', value]];
+    return [[key === 'border-width' ? (line ? '--native-line-stroke-width' : 'stroke-width') : key, value]];
+  }));
   const visit = (part: Part): Part => {
     const children = part.parts && Object.fromEntries(Object.entries(part.parts).map(([key, value]) => [key, visit(value)]));
     if (part.shape?.kind !== 'stroked-path' && part.shape?.kind !== 'line') return children ? { ...part, parts: children } : part;
     changed = true;
-    const paint = (map: Record<string,string>) => project(map, part.shape!.kind === 'line');
+    const line = part.shape.kind === 'line';
+    const painted = part.shape.kind === 'line' && !!(part.shape.line.painted || part.shape.line.observedSources?.some(source => source.painted));
+    const paint = (map: Record<string,string>) => project(map, line, painted);
     const maps = (map: Record<string,Record<string,string>>) => Object.fromEntries(Object.entries(map).map(([key,value])=>[key,paint(value)]));
     const by = part.tokensByProp;
     return { ...part, ...(children ? { parts: children } : {}),

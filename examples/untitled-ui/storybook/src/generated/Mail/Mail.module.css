@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   width: var(--ds-mail-size, var(--imported-stub-mail-root-width));
   height: var(--ds-mail-size, var(--imported-stub-mail-root-height));

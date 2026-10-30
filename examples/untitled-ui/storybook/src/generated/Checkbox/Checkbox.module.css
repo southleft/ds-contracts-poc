@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   width: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-width));
   height: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-height));

@@ -333,6 +333,7 @@
 
 .part-0-0-0-0-1-0-0 {
   display: flex;
+  flex-shrink: 0;
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;

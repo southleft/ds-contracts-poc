@@ -735,6 +735,7 @@
 
 .icon {
   display: flex;
+  flex-shrink: 0;
   margin-bottom: var(--imported-button-icon-margin-bottom);
   margin-top: var(--imported-button-icon-margin-top);
   display: block;

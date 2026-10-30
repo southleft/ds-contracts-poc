@@ -4333,10 +4333,11 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
     // reader mentioned either property, so a designer's centred label or
     // authored ellipsis vanished on the return leg with no receipt. Since
     // dump v1.31 textAlignHorizontal is CARRIED (text.textAlign below; the
-    // REST twin copies style.textAlignHorizontal) — the vertical alignment
-    // and truncation stay named receipts.
-    if (node.textAlignVertical && node.textAlignVertical !== 'TOP') {
-      channels.push('textAlignVertical ' + node.textAlignVertical + ' (no CSS text-align twin — vertical placement of the text inside its own box; CSS vertical-align is inline baseline alignment, a different fact)');
+    // REST twin copies style.textAlignHorizontal). CENTER and BOTTOM are
+    // captured as text.verticalAlign and centered inside the text box.
+    // Truncation stays a named receipt.
+    if (node.textAlignVertical && node.textAlignVertical !== 'TOP' && node.textAlignVertical !== 'CENTER' && node.textAlignVertical !== 'BOTTOM') {
+      channels.push('textAlignVertical ' + node.textAlignVertical + ' (only TOP, CENTER and BOTTOM have a box alignment)');
     }
     if (node.textTruncation && node.textTruncation !== 'DISABLED') {
       channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : '') + ' (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back)');
@@ -4368,6 +4369,9 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
     // text-align inherits and button user-agent styles may center it.
     if (node.textAlignHorizontal === 'LEFT' || node.textAlignHorizontal === 'CENTER' || node.textAlignHorizontal === 'RIGHT' || node.textAlignHorizontal === 'JUSTIFIED') {
       text.textAlign = node.textAlignHorizontal;
+    }
+    if (node.textAlignVertical === 'TOP' || node.textAlignVertical === 'CENTER' || node.textAlignVertical === 'BOTTOM') {
+      text.verticalAlign = node.textAlignVertical;
     }
     // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — node.textAutoResize,
     // verbatim. A box that sizes itself to its text (WIDTH_AND_HEIGHT) is a

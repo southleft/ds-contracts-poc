@@ -26,6 +26,15 @@ test('centered FILL padding lowering preserves asymmetric, conditional, unresolv
  ]){const c=fixture();mutate(c);assert.equal(lowerCenteredFillPadding(c,tokens),c)}
 });
 
+test('a reversed hug keeps a content floor so a one-pixel-short container cannot slide the line backward', async () => {
+  const { layoutOverrideDecls } = await import('../packages/core/src/anatomy.js');
+  assert.deepEqual(layoutOverrideDecls({ direction: 'row-reverse', align: 'start', justify: 'start' }), [
+    'flex-direction: row-reverse', 'align-items: flex-start', 'justify-content: flex-start', 'min-width: max-content',
+  ]);
+  assert.equal(layoutOverrideDecls({ direction: 'row-reverse', grow: true }).includes('min-width: max-content'), false);
+  assert.equal(layoutOverrideDecls({ direction: 'row-reverse' }, undefined, { tokens: { width: '{size}' } }).includes('min-width: max-content'), false, 'a designed width keeps wrapping');
+  assert.ok(layoutOverrideDecls({ direction: 'column-reverse' }).includes('min-height: max-content'));
+});
 test('parent row reversal preserves the axis while the split public CSS generator uses the same lowering',async()=>{
  const c=fixture();c.anatomy.root.layoutByProp={prop:'unused',map:{off:{direction:'row-reverse'}}};assert.notEqual(lowerCenteredFillPadding(c,tokens),c);
  const {generateCss}=await import('./emit-react.js');const {tokenInventoryFromJson}=await import('./tokens.js');const errors:string[]=[];const css=generateCss(fixture(),tokenInventoryFromJson([tokens.primitives]),errors,tokens);assert.deepEqual(errors,[]);assert(!css.includes('padding-inline: var(--pad)'));

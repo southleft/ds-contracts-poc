@@ -1,6 +1,8 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-10-29 · V1 is not complete.**
+**Public project status · updated 2026-10-30 · V1 is not complete.**
+
+A fresh CollegeTown re-run over the same 111 previously attempted component sets, file version and Inter 3.019 fonts measures **443 passing, 106 failing and 186 unverified of 735 checked variants**, compared with 257 / 320 / 156 of 733 on the preceding main. 185 variants move from failing to passing and one from unverified to passing; no passing variant is lost. Refused or errored sets fall from 26 to 25. The gain comes from carrying the held-out import fixes that were checkpointed on 2026-10-25 but never merged: nested component inputs, selected icon content, line feeds in fixed text boxes, focus rings and native text boxes. CollegeTown is a known kit with prior follow-ups, so this is a repaired-sample result, not unseen-kit first-pass credit. The fixed 40-set regression on freshly generated packages measures 740 / 64 / 75, with nine new passes and no lost pass.
 
 The latest retained fixed 40-set comparison measures **740 passing, 64 failing and 75 unverified variants out of 879 (84.19% passing)**. The source-root framing follow-up adds eight Material 3 chip passes to the preceding 732 / 64 / 83 result, with no lost pass or other verdict change. All 851 retained React/Figma image pairs reproduce their previous framing, image and size results before applying the reviewed change; the same captures, fonts and content evidence are retained. One unavailable capture and 27 cases without original reference evidence retain their prior outcomes. This is a comparison of existing captures, not a fresh browser capture, 204-set run or unseen-kit qualification.
 

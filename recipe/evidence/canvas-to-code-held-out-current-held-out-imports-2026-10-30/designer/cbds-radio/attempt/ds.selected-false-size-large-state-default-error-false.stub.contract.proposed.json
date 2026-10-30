@@ -1,0 +1,115 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.selected-false-size-large-state-default-error-false",
+  "name": "SelectedFalseSizeLargeStateDefaultErrorFalse",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"selected=false, size=large, state=default, error=false\" instances of Radio button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "error",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "error"
+        },
+        "code": {
+          "prop": "error"
+        }
+      }
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "selected"
+        },
+        "code": {
+          "prop": "selected"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "disabled",
+          "hover",
+          "focus"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "state",
+          "values": {
+            "default": "default",
+            "disabled": "disabled",
+            "hover": "hover",
+            "focus": "focus"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-selected-false-size-large-state-default-error-false.root.width.{size}}",
+        "height": "{imported.stub-selected-false-size-large-state-default-error-false.root.height.{size}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/SelectedFalseSizeLargeStateDefaultErrorFalse",
+        "export": "SelectedFalseSizeLargeStateDefaultErrorFalse"
+      }
+    }
+  }
+}

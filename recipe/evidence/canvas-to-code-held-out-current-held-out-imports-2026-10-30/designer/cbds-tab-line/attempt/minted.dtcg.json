@@ -1,0 +1,49 @@
+{
+  "imported": {
+    "tab-line": {
+      "root": {
+        "width": {
+          "horizontal": {
+            "$value": "fit-content"
+          },
+          "verticalRight": {
+            "$value": "160px",
+            "$type": "dimension"
+          },
+          "verticalLeft": {
+            "$value": "160px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
+    "stub-selected-false-state-default-size-small": {
+      "root": {
+        "height": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "48px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
+    "stub-selected-true-state-default-size-small": {
+      "root": {
+        "height": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "48px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tab-line",
+  "name": "TabLine",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "large"
+        ]
+      },
+      "default": "small",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "small": "small",
+            "large": "large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "horizontal",
+          "verticalRight",
+          "verticalLeft"
+        ]
+      },
+      "default": "horizontal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "type",
+          "values": {
+            "horizontal": "horizontal",
+            "verticalRight": "vertical-right",
+            "verticalLeft": "vertical-left"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "layoutByProp": {
+        "prop": "type",
+        "map": {
+          "verticalRight": {
+            "direction": "column",
+            "justify": "center",
+            "align": "end"
+          },
+          "verticalLeft": {
+            "direction": "column",
+            "justify": "center",
+            "align": "end"
+          }
+        }
+      },
+      "parts": {
+        "TabItemVerticalLeft": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalLeft2": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalLeft3": {
+          "component": {
+            "id": "ds.selected-true-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "true",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalLeft4": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalLeft5": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalLeft6": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalLeft"
+          }
+        },
+        "TabItemVerticalRight": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItemVerticalRight2": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItemVerticalRight3": {
+          "component": {
+            "id": "ds.selected-true-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "true",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItemVerticalRight4": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItemVerticalRight5": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItemVerticalRight6": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "verticalRight"
+          }
+        },
+        "TabItem": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        },
+        "TabItem2": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        },
+        "TabItem3": {
+          "component": {
+            "id": "ds.selected-true-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "true",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        },
+        "TabItem4": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        },
+        "TabItem5": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        },
+        "TabItem6": {
+          "component": {
+            "id": "ds.selected-false-state-default-size-small",
+            "props": {
+              "badgeNotification": false,
+              "iconLeft": false,
+              "iconRight": false,
+              "label": true,
+              "selected": "false",
+              "size": "{size}",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "type",
+            "equals": "horizontal"
+          }
+        }
+      },
+      "literals": {
+        "height": "fit-content"
+      },
+      "tokensByProp": {
+        "prop": "type",
+        "map": {
+          "verticalRight": {
+            "gap": "{spacing.050}"
+          },
+          "verticalLeft": {
+            "gap": "{spacing.050}"
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{spacing.100}",
+        "width": "{imported.tab-line.root.width.{type}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/TabLine",
+        "export": "TabLine"
+      }
+    }
+  }
+}

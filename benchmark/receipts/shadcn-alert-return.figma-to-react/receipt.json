@@ -11,7 +11,8 @@
       "white",
       "black"
     ],
-    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "framing": "observed-paint-extents-paired-render-origins-v4",
+    "figmaBoundsUnitPx": 0.015625,
     "deviceScaleFactor": 1,
     "nativeRaster": {
       "kind": "figma-rest-full-bounds-v1",
@@ -19,7 +20,7 @@
     }
   },
   "generatedSha256": {
-    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.module.css": "d871c78514b826746d4c9d9cf2f360bc222250ce3312044fcae5d457eebb5f27",
+    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.module.css": "e6571dee638d2c041f0f1fcfcd11003f92589c2bfd3b970c2bc0e90e25369a7c",
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.tsx": "51ad732b570ed9def286f669ba0893505c22de3048fa81fa804b8ad7cbaa19b5",
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.ts": "ff6158ff1c5d91d7bd70a181cb8953a6dd77bc6a548a65feec993cfa00e290c2",
     "index.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
@@ -56,13 +57,23 @@
           "height": 26
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 12,
+            "width": 100,
+            "height": 26
+          }
+        }
       },
       "content": {
         "key": "default",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -92,24 +103,34 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 58,
+          "y": 54,
           "width": 100,
           "height": 26
         },
         "capture": {
           "x": 12,
-          "y": 58,
+          "y": 54,
           "width": 100,
           "height": 26
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "cee1ecdc9034065f84a909fffa62ab648f30120005b2177cb1580755d504ca4f"
+        "pngSha256": "cee1ecdc9034065f84a909fffa62ab648f30120005b2177cb1580755d504ca4f",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 54,
+            "width": 100,
+            "height": 26
+          }
+        }
       },
       "content": {
         "key": "variant-null",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -139,24 +160,34 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 104,
+          "y": 96,
           "width": 100,
           "height": 26
         },
         "capture": {
           "x": 12,
-          "y": 104,
+          "y": 96,
           "width": 100,
           "height": 26
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 96,
+            "width": 100,
+            "height": 26
+          }
+        }
       },
       "content": {
         "key": "variant-default",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -186,24 +217,34 @@
       "frame": {
         "layout": {
           "x": 12,
-          "y": 150,
+          "y": 138,
           "width": 100,
           "height": 26
         },
         "capture": {
           "x": 12,
-          "y": 150,
+          "y": 138,
           "width": 100,
           "height": 26
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d",
+        "raster": {
+          "kind": "browser-paint-extent-v1",
+          "paint": {
+            "x": 12,
+            "y": 138,
+            "width": 100,
+            "height": 26
+          }
+        }
       },
       "content": {
         "key": "variant-destructive",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -225,6 +266,7 @@
       "renderedAtRuntime": true,
       "refusedByType": false
     },
+    "namedSlots": [],
     "variants": [
       {
         "prop": "variant",
@@ -253,7 +295,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2404031653537691694",
+      "version": "2409867955187136111",
       "export": {
         "format": "png",
         "scale": 1,
@@ -264,10 +306,42 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "176897cc1864fcfe127ab4334c74899d683cbc20c9155a3b34119b7c3091a1ee",
-      "afterSha256": "176897cc1864fcfe127ab4334c74899d683cbc20c9155a3b34119b7c3091a1ee"
+      "overflowExport": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": false,
+        "proofs": "figma-render-export-proofs.json"
+      },
+      "exportRequests": {
+        "layout": {
+          "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+          "version": "2409867955187136111",
+          "nodeIds": [
+            "253:5935",
+            "253:5938",
+            "253:5941",
+            "253:5944"
+          ],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": true
+        },
+        "render": {
+          "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+          "version": "2409867955187136111",
+          "nodeIds": [],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": false
+        }
+      },
+      "beforeSha256": "231ea259e973268923099e237ec0688fc1918d186b063910e4762efb5f7310e3",
+      "afterSha256": "231ea259e973268923099e237ec0688fc1918d186b063910e4762efb5f7310e3"
     },
-    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
     "cases": [
       {
@@ -324,6 +398,24 @@
         "inkCoveragePercent": {
           "consumer": 9.69,
           "figma": 10
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 26
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -401,6 +493,24 @@
           "consumer": 10.62,
           "figma": 10.92
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 26
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 100,
@@ -476,6 +586,24 @@
         "inkCoveragePercent": {
           "consumer": 9.69,
           "figma": 10
+        },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 26
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
         },
         "contentSize": {
           "consumer": {
@@ -553,6 +681,24 @@
           "consumer": 9.69,
           "figma": 10
         },
+        "size": {
+          "status": "measured",
+          "basis": "qualified-alpha-content",
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 26
+          },
+          "delta": {
+            "width": 0,
+            "height": 0
+          },
+          "limitPx": 2,
+          "withinLimit": true
+        },
         "contentSize": {
           "consumer": {
             "width": 100,
@@ -602,7 +748,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/rootmatrix16c39fdef03e8d42sourcenativebbbf2381a2024928a570177a3eb284eaobservedreactmatrix16c39fdef03e8d42",
-    "tarballSha256": "d34cc2033f72e9565eb5b111fb3c83acd9e5af357ae28774eef5cf788dbf5532",
+    "tarballSha256": "e4519c555c9676684a091b761cd75153b349049c637894737a4adf19ee123d8a",
     "distFiles": [
       "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42",
       "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.d.ts",
@@ -618,7 +764,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "d0258993c53268443cfa34e05b3d5c0d544c67d12add6079cb5564331d05374e",
+    "lockfileSha256": "28fcb06a90fecee2bf4ef98b37e131fe8ce55b05cd67f8a723f35719fed2593d",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -629,7 +775,7 @@
       "loaded": []
     },
     "builtCss": {
-      "bytes": 4930,
+      "bytes": 4953,
       "tokenDefinitions": 9,
       "tokenDefinitionsExpected": 9
     },
@@ -647,15 +793,17 @@
   "content": {
     "status": "collected",
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
-    "figmaVersion": "2404031653537691694",
-    "responseSha256": "d533d27a0668b5f5ff94a1d35a582f03219ea8968c79e6a50b79175f0857ba2c",
+    "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
+    "figmaVersion": "2409867955187136111",
+    "responseSha256": "231ea259e973268923099e237ec0688fc1918d186b063910e4762efb5f7310e3",
     "evidence": "figma-content.json",
     "cases": [
       {
         "key": "default",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -667,7 +815,8 @@
         "key": "variant-null",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -679,7 +828,8 @@
         "key": "variant-default",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -691,7 +841,8 @@
         "key": "variant-destructive",
         "texts": {
           "figma": 0,
-          "missing": []
+          "missing": [],
+          "styles": []
         },
         "parts": {
           "figma": 0,
@@ -717,6 +868,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -734,6 +886,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -751,6 +904,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },
@@ -768,6 +922,7 @@
         "content": {
           "texts": 0,
           "textsMissing": 0,
+          "textStyleMismatches": 0,
           "parts": 0,
           "partsMissing": 0
         },

@@ -129,6 +129,23 @@ function capturedLineProposal(node:any=structuredClone(capturedLineNumbers)) {
  const part=walkAnatomy(contract).find(({part})=>part.text===node.text.characters)!.part;
  return {result,contract,part};
 }
+test('a fixed text box keeps an authored line feed', () => {
+  const result = proposeFromDump({
+    setName: 'Note', type: 'COMPONENT',
+    variants: [{
+      name: 'Note', type: 'COMPONENT', bbox: { width: 341, height: 80 },
+      layout: { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', spacing: 0, padding: [0, 0, 0, 0], primarySizing: 'FIXED', counterSizing: 'FIXED' },
+      children: [{
+        name: 'Body', type: 'TEXT', fill: { hex: '71717a' },
+        text: { characters: 'Drag and drop\nAccepts files', fontSize: 14, lineHeight: 20, fontFamily: 'Inter', fontWeight: 400, textAlign: 'CENTER', textAutoResize: 'TRUNCATE' },
+      }],
+    }],
+  } as never, { corpus, mintUnbound: true, contractIdByName: new Map(), projectionMode: 'reviewable-inversion' });
+  const part = walkAnatomy(ContractSchema.parse(result.contract)).find((row) => row.part.text?.includes('\n'))!.part;
+  assert.equal(part.declared?.['white-space'], 'pre-wrap');
+  assert.equal(part.textAutoResize, undefined);
+});
+
 test('captured HUG LF text preserves line breaks without making incomplete appearance complete',()=>{
  const {result,part}=capturedLineProposal();
  assert.equal(part.textAutoResize,'WIDTH_AND_HEIGHT');
@@ -141,15 +158,15 @@ test('captured HUG LF text preserves line breaks without making incomplete appea
  const absent=structuredClone(capturedLineNumbers);delete (absent.text as any).sourceAppearance;
  assert.equal(capturedLineProposal(absent).part.declared?.['white-space'],'pre-wrap','LF does not need authored range data');
 });
-test('captured HUG LF rule leaves one-line, unknown, filled, HEIGHT and NONE evidence unchanged',()=>{
+test('captured LF text keeps its line breaks in unknown, HEIGHT and NONE boxes without claiming auto-width',()=>{
  for(const mode of [undefined,'HEIGHT','NONE']){
   const node:any=structuredClone(capturedLineNumbers);delete node.text.textAutoResize;if(mode)node.text.textAutoResize=mode;
-  const {part}=capturedLineProposal(node);assert.equal(part.textAutoResize,undefined,String(mode));assert.equal(part.declared?.['white-space'],undefined,String(mode));
+  const {part}=capturedLineProposal(node);assert.equal(part.textAutoResize,undefined,String(mode));assert.equal(part.declared?.['white-space'],'pre-wrap',String(mode));
  }
  const oneLine=structuredClone(capturedLineNumbers);oneLine.text.characters='30';
  const one=capturedLineProposal(oneLine).part;assert.equal(one.textAutoResize,'WIDTH_AND_HEIGHT');assert.equal(one.declared?.['white-space'],undefined);
  const filled:any=structuredClone(capturedLineNumbers);filled.fillWidth=true;
- const fill=capturedLineProposal(filled);assert.equal(fill.part.textAutoResize,undefined);assert.equal(fill.part.declared?.['white-space'],undefined);assert(fill.result.notes.some(note=>note.includes('contradict')));
+ const fill=capturedLineProposal(filled);assert.equal(fill.part.textAutoResize,undefined);assert.equal(fill.part.declared?.['white-space'],'pre-wrap');assert(fill.result.notes.some(note=>note.includes('contradict')));
  const fixed:any=structuredClone(capturedLineNumbers);fixed.text.textAutoResize='NONE';fixed.fixedSize={width:17,height:40};
  const none=capturedLineProposal(fixed).part;assert.equal(none.declared?.['white-space'],'pre-wrap');assert.equal(none.declared?.['overflow-y'],'hidden');assert.equal(none.textAutoResize,undefined);
  const mixed=capturedLineFixture();mixed.propertyDefinitions.Mode={type:'VARIANT',defaultValue:'Known',variantOptions:['Known','Unknown']};
@@ -157,7 +174,7 @@ test('captured HUG LF rule leaves one-line, unknown, filled, HEIGHT and NONE evi
  delete mixed.variants[1].children[0].text.textAutoResize;
  const proposal=proposeFromDump(mixed,{corpus,mintUnbound:true,hiddenCaptured:true,contractIdByName:new Map()});
  const textParts=walkAnatomy(ContractSchema.parse(proposal.contract)).filter(({part})=>part.text===capturedLineNumbers.text.characters);
- assert(textParts.length>0);assert(textParts.every(({part})=>part.textAutoResize===undefined&&part.declared?.['white-space']===undefined),'an unknown source cell does not authorize whitespace or HUG');
+ assert(textParts.length>0);assert(textParts.every(({part})=>part.textAutoResize===undefined&&part.declared?.['white-space']==='pre-wrap'),'an unknown source cell does not authorize HUG; its line feeds still break');
 });
 test('captured HUG LF geometry uses thirty line boxes and longest-line width in both React emitters',async t=>{
  const {chromium}=await import('playwright-core');

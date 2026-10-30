@@ -242,7 +242,7 @@
     }
   ],
   "generatedFiles": {
-    "react/ButtonContract/ButtonContract.module.css": "33981c3d20ab2c9ce3ba6209087f7011fdd904e1ea91d52e9d514fc0ed0bc42b",
+    "react/ButtonContract/ButtonContract.module.css": "244ccccd6c1e57b8f0fe64f31fc5588218620536645c777fa478b14f14a13e64",
     "react/ButtonContract/ButtonContract.stories.tsx": "6662845bfb03a4ccd3eb862aa070d75f6f910fd29ad5a53f9aec511a4fce09a2",
     "react/ButtonContract/ButtonContract.tsx": "43f175d573ce8e19a814e4719c7bedf06695ec1e7c03e75f1fd66694a50c334c",
     "react/ButtonContract/index.ts": "325759cf96ce5e3b27a155e03e3725749102e5b3034830a9b17e1b9c2d4bb1ee",

@@ -161,6 +161,7 @@
 
 .arrow-topCenter {
   flex-direction: column-reverse;
+  min-height: max-content;
 }
 
 .arrow-bottomLeft {
@@ -183,6 +184,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  flex-shrink: 0;
   padding-inline: var(--imported-shared-size-12);
   border-radius: var(--imported-tooltip-content-border-radius);
   padding-block: 12px;
@@ -199,6 +201,7 @@
 .textAndSupportingText {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--imported-tooltip-content-text-and-supporting-text-gap);
 }
 

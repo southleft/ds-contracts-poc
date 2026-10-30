@@ -1,4 +1,4 @@
-import {nativeLiteralTextBox} from './native-text-box.js';
+import {nativeLiteralTextBox,nativeTokenTextBox} from './native-text-box.js';
 import {rootSlotFlowSpecValid} from './figma-background-clip.js';
 import {ShapeSchema,strokedPathGeometryIssue} from '../scripts/contract-schema.js';
 import {nativePaintSpecSupported} from './native-paint-observation.js';
@@ -138,8 +138,16 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
     // and readback; never substitute for an explicit or malformed family.
     if (libraryDefaultFamily && spec.type === 'text' && spec.fontFamily === undefined)
       spec.fontFamily = DEFAULT_FONT_FAMILY;
+    let tokenTextBox: ReturnType<typeof nativeTokenTextBox>;
+    if (library && spec.type === 'text' && spec.fixedWidth) {
+      try { tokenTextBox = nativeTokenTextBox(spec); }
+      catch (error) {
+        if (!(error instanceof Error) || error.message !== 'native-token-text-box-unqualified') throw error;
+      }
+    }
+    if (tokenTextBox) spec.tokenTextBox = tokenTextBox;
     if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
-        spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
+        spec.fill || (!tokenTextBox && (spec.fixedWidth || spec.fixedHeight)) || spec.bindings || spec.absolute || spec.overlay ||
         spec.pct !== undefined || spec.rotation || spec.layout ||
         spec.lits && (!spec.literalTextBox || Object.keys(spec.lits).some(k=>!['width','height'].includes(k)) || JSON.stringify(spec.literalTextBox)!==JSON.stringify(nativeLiteralTextBox(spec))) ||
         typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))

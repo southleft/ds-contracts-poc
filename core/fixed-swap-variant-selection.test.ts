@@ -51,6 +51,81 @@ test('ordinary proposer emits the selected owning contract with exact values and
  assert.deepEqual(Object.values(caller.parts!).map(p=>p.component),[{id:f.target.id,props:{layout:'vertical',enabled:true}}]);
  assert.equal(JSON.stringify([...f.scope]),before);assert.equal(f.child.anatomy.root.parts!.content.slot!.defaultContent![0].id,'test.sample');
 });
+test('a swapped label that differs from the child default is passed on the caller',()=>{
+ const f=callerFixture();
+ f.target.props.push({name:'label',type:'text',default:'Button',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Button Text'}}});
+ for(const variant of f.sourceCaller.variants)variant.children![0].fixedSwaps!.Payload.observedInstances=[{selectedRoot:{properties:{'Show Icon#1:2':false,'Button Text#37:10':'Action'}}} as never];
+ const c=ContractSchema.parse(f.propose().contract),host=walkAnatomy(c).find(w=>w.part.component?.id===f.child.id)!.part;
+ assert.deepEqual(Object.values(host.parts!).map(p=>p.component!.props),[{layout:'vertical',enabled:true,label:'Action'}]);
+ const changed=callerFixture();
+ changed.target.props.push({name:'label',type:'text',default:'Button',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Button Text'}}});
+ changed.sourceCaller.variants[0].children![0].fixedSwaps!.Payload.observedInstances=[{selectedRoot:{properties:{'Button Text#37:10':'Action'}}} as never];
+ changed.sourceCaller.variants[1].children![0].fixedSwaps!.Payload.observedInstances=[{selectedRoot:{properties:{'Button Text#37:10':'Other'}}} as never];
+ const mixed=ContractSchema.parse(changed.propose().contract);
+ assert.equal(Object.values(walkAnatomy(mixed).find(w=>w.part.component?.id===changed.child.id)!.part.parts!).some(part=>part.component?.props?.label!==undefined),false);
+});
+test('a false show-slot still carries the glyph its selected variant draws',()=>{
+ const icon=ContractSchema.parse({...base,id:'test.icon',name:'Icon',props:[],anatomy:{root:{text:'glyph',overridable:['size']}},bindings:anchors('icon-key','icon-main','Icon')});
+ const iconSet:DumpSet={setName:'Icon',type:'COMPONENT',key:'icon-key',nodeId:'icon-main',variants:[{name:'Icon',type:'COMPONENT',nodeId:'icon-main',componentKey:'icon-key'}]};
+ const propose=(f:ReturnType<typeof callerFixture>,hidden:boolean)=>{
+  f.target.anatomy.root={parts:{leftIcon:{slot:{name:'leftIcon',bindings:{figma:{property:'Left Icon'}},defaultContent:[{id:'test.circle'}]}}}};
+  const selected=f.source.variants.find(variant=>variant.nodeId==='main-1-1')!;
+  selected.children=[{name:'Icon',type:'INSTANCE',nodeId:'icon-child',hidden,propRefs:{mainComponent:'Left Icon'},instanceGeometry:{localSize:{width:16,height:16}} as never}];
+  for(const variant of f.sourceCaller.variants)variant.children![0].fixedSwaps!.Payload.observedInstances=[{selectedRoot:{properties:{'Show Left Icon#37:11':false,'Left Icon#46:0':'icon-main',Layout:'Vertical',Enabled:'True'}}} as never];
+  const scope=new Map([...f.scope].map(([id,contract])=>[id,asMinimalChildContract(contract)]));
+  scope.set(icon.id,asMinimalChildContract(icon));
+  return proposeFromDump(f.sourceCaller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Host',f.child.id]]),contractIdByKey:new Map([['host-key',f.child.id],['sample-key','test.sample'],['selected-set-key',f.target.id],['icon-key',icon.id]]),contractsById:scope,fixedSwapOwnerRoots:fixedSwapOwnerRoots([f.source,iconSet])});
+ };
+ const drawn=propose(callerFixture(),false),c=ContractSchema.parse(drawn.contract);
+ const selected=walkAnatomy(c).find(part=>part.part.component?.id==='test.selected')!.part;
+ assert.deepEqual(selected.component!.contentSlots,{leftIcon:['selectedGlyph']});
+ assert.equal(selected.parts!.selectedGlyph.component!.id,'test.icon');
+ assert.match(String(selected.parts!.selectedGlyph.component!.overrides?.size),/^\{imported\..+\}$/);
+ assert(drawn.notes.some(note=>note.includes('still draws leftIcon')));
+ const hidden=propose(callerFixture(),true),hiddenContract=ContractSchema.parse(hidden.contract);
+ const hiddenSelected=walkAnatomy(hiddenContract).find(part=>part.part.component?.id==='test.selected')!.part;
+ assert.equal(hiddenSelected.component!.contentSlots,undefined);
+ assert.equal(hiddenSelected.parts,undefined);
+});
+test('a conditional swap keeps the glyph only on the variant that still draws it',()=>{
+ const f=callerFixture();
+ const icon=ContractSchema.parse({...base,id:'test.icon',name:'Icon',props:[],anatomy:{root:{text:'glyph'}},bindings:anchors('icon-key','icon-main','Icon')});
+ const buttons:DumpSet={setName:'Buttons',type:'COMPONENT_SET',key:'btn-set',nodeId:'btn-set',propertyDefinitions:{Size:{type:'VARIANT',defaultValue:'Icon',variantOptions:['Icon','Text']}},variants:[
+  {name:'Size=Icon',type:'COMPONENT',nodeId:'btn-icon',componentKey:'btn-icon-key',variantProperties:{Size:'Icon'},children:[{name:'Glyph',type:'INSTANCE',hidden:false,propRefs:{mainComponent:'Payload'}}]},
+  {name:'Size=Text',type:'COMPONENT',nodeId:'btn-text',componentKey:'btn-text-key',variantProperties:{Size:'Text'},children:[{name:'Glyph',type:'INSTANCE',hidden:true,propRefs:{mainComponent:'Payload'}}]},
+ ]};
+ const hosts=f.sourceCaller.variants.map(variant=>variant.children![0]);
+ hosts[0].instanceGeometry={componentId:'btn-icon'} as never;
+ hosts[0].componentProperties={'Show Payload#1:2':false};
+ hosts[0].fixedSwaps!.Payload={id:'icon-main',key:'icon-key'};
+ hosts[1].instanceGeometry={componentId:'btn-text'} as never;
+ hosts[1].componentProperties={'Show Payload#1:2':false};
+ const scope=new Map([...f.scope].map(([id,contract])=>[id,asMinimalChildContract(contract)]));
+ scope.set(icon.id,asMinimalChildContract(icon));
+ const proposal=proposeFromDump(f.sourceCaller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Host',f.child.id]]),contractIdByKey:new Map([['host-key',f.child.id],['sample-key','test.sample'],['selected-set-key',f.target.id],['icon-key',icon.id]]),contractsById:scope,fixedSwapOwnerRoots:fixedSwapOwnerRoots([f.source,buttons,{setName:'Icon',type:'COMPONENT',key:'icon-key',nodeId:'icon-main',variants:[{name:'Icon',type:'COMPONENT',nodeId:'icon-main',componentKey:'icon-key'}]}])});
+ const c=ContractSchema.parse(proposal.contract);
+ const selected=Object.values(walkAnatomy(c).find(part=>part.part.component?.id===f.child.id)!.part.parts!);
+ assert.equal(selected.length,1);
+ assert.equal(selected[0].component!.id,'test.icon');
+ assert.equal(selected[0].presenceByCombination!.rows.filter(row=>row.present).length,1);
+ assert(proposal.notes.some(note=>note.includes('conditional occurrence')));
+});
+test('a true show-slot does not invent an icon the selected variant omits',()=>{
+ const f=callerFixture();
+ const icon=ContractSchema.parse({...base,id:'test.icon',name:'Icon',props:[],anatomy:{root:{text:'glyph'}},bindings:anchors('icon-key','icon-main','Icon')});
+ const buttons:DumpSet={setName:'Buttons',type:'COMPONENT',key:'btn-key',nodeId:'btn-main',variants:[{name:'Icon size',type:'COMPONENT',nodeId:'btn-main',componentKey:'btn-key',children:[{name:'Label',type:'TEXT'}]}]};
+ for(const host of f.sourceCaller.variants.map(variant=>variant.children![0])){
+  host.instanceGeometry={componentId:'btn-main'} as never;
+  host.componentProperties={'Show Payload#1:2':true};
+  host.fixedSwaps!.Payload={id:'icon-main',key:'icon-key'};
+ }
+ const scope=new Map([...f.scope].map(([id,contract])=>[id,asMinimalChildContract(contract)]));
+ scope.set(icon.id,asMinimalChildContract(icon));
+ const proposal=proposeFromDump(f.sourceCaller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Host',f.child.id]]),contractIdByKey:new Map([['host-key',f.child.id],['sample-key','test.sample'],['selected-set-key',f.target.id],['icon-key',icon.id]]),contractsById:scope,fixedSwapOwnerRoots:fixedSwapOwnerRoots([f.source,buttons,{setName:'Icon',type:'COMPONENT',key:'icon-key',nodeId:'icon-main',variants:[{name:'Icon',type:'COMPONENT',nodeId:'icon-main',componentKey:'icon-key'}]}])});
+ const c=ContractSchema.parse(proposal.contract);
+ assert.equal(walkAnatomy(c).find(part=>part.part.component?.id===f.child.id)!.part.parts,undefined);
+ assert(proposal.notes.some(note=>note.includes('hidden by its show-slot boolean')));
+});
 test('conditional selections retain two exact branches while missing source identity carries neither',()=>{
  const f=callerFixture();f.sourceCaller.variants[0].children![0].fixedSwaps!.Payload={id:'main-0-0',key:'main-key-0-0'};
  const c=ContractSchema.parse(f.propose().contract),host=walkAnatomy(c).find(w=>w.part.component?.id===f.child.id)!.part;

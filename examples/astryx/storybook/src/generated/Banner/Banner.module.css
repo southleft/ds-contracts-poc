@@ -21,6 +21,7 @@
 .banner {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
   column-gap: var(--imported-banner-banner-column-gap);
   padding-bottom: var(--imported-shared-size-12);
   padding-left: var(--imported-banner-banner-padding-left);
@@ -80,6 +81,7 @@
 .banner-icon {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   flex-shrink: var(--imported-banner-banner-icon-flex-shrink);
 }
 
@@ -153,6 +155,7 @@
 .part-0-1 {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   column-gap: var(--imported-shared-size-0);
   flex-grow: var(--imported-banner-part-0-1-flex-grow);
   min-width: var(--imported-shared-size-0);

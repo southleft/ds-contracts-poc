@@ -18,7 +18,7 @@ import { mapPaintedOutline } from './painted-outline.js';
 import { observeInstanceVector } from './observed-vector.js';
 import { nativeLineIssue, type NativeLineGeometry } from '../../../packages/schema/src/native-line.js';
 import { filledPathRigidRotation } from '../../../packages/schema/src/rigid-filled-path.js';
-import { filledPathIssue } from '../../../scripts/contract-schema.js';
+import { closeFilledSubpaths, filledPathIssue } from '../../../scripts/contract-schema.js';
 /**
  * REST → dump v1: map a Figma REST API nodes response onto the Plugin-API
  * dump format (extract/figma/types.ts) that extract/figma/propose.ts consumes.
@@ -160,7 +160,8 @@ export interface RestPaint {
   color?: { r: number; g: number; b: number; a: number };
   boundVariables?: { color?: RestVariableAlias };
   /** GradientPaint (dump v1.16): [0] = ramp start, [1] = ramp end, [2] =
-   *  width handle (unused), all normalized object space. */
+   *  width handle (unused). Normalized object space, except some REST
+   *  vectors that report the same handles as percentages. */
   gradientHandlePositions?: Array<{ x: number; y: number }>;
   gradientStops?: Array<{
     position: number;
@@ -191,6 +192,8 @@ export interface RestTypeStyle {
   lineHeightPercentFontSize?: number;
   /** dump v1.31: LEFT | CENTER | RIGHT | JUSTIFIED → text.textAlign. */
   textAlignHorizontal?: string;
+  /** TOP | CENTER | BOTTOM → text.verticalAlign. Glyphs inside a fixed box. */
+  textAlignVertical?: string;
   /** dump v1.36: NONE | HEIGHT | WIDTH_AND_HEIGHT | TRUNCATE → text.textAutoResize. */
   textAutoResize?: string;
 }
@@ -499,6 +502,7 @@ export const VARIABLES_SCOPE_FIX = 'regenerate the token with file_variables:rea
 
 export type MapDegradationCode =
   | 'variable-unresolved'
+  | 'set-name-disambiguated'
   | 'text-style-unresolved'
   | 'instance-main-unresolved'
   | 'variant-tuple-unverified'
@@ -929,7 +933,12 @@ function mapPaint(
  *  value under the standing variable-unresolved receipt. A ramp with < 2
  *  stops or missing handles is refused by name. */
 function mapGradient(p: RestPaint, ctx: Ctx, nodePath: string): DumpGradient | undefined {
-  const h = p.gradientHandlePositions;
+  let h = p.gradientHandlePositions;
+  if (Array.isArray(h) && h.length >= 2) {
+    const span = Math.max(...h.slice(0, 2).flatMap((point) => [Math.abs(point?.x ?? 0), Math.abs(point?.y ?? 0)]));
+    // A ramp authored in percentages (0–100) is still normalized object space.
+    if (span > 10 && span <= 200) h = h.map((point) => ({ x: point.x / 100, y: point.y / 100 }));
+  }
   if (!Array.isArray(h) || h.length < 2) {
     ctx.report.degradations.push({
       code: 'paint-unsupported',
@@ -1351,6 +1360,9 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   if (s.textAlignHorizontal === 'LEFT' || s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
     text.textAlign = s.textAlignHorizontal;
   }
+  if (s.textAlignVertical === 'TOP' || s.textAlignVertical === 'CENTER' || s.textAlignVertical === 'BOTTOM') {
+    text.verticalAlign = s.textAlignVertical;
+  }
   // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — style.textAutoResize,
   // verbatim, on every text node. A Figma text box that sizes itself to its
   // text (WIDTH_AND_HEIGHT) is a WHOLE number of pixels wide, the glyph
@@ -1601,6 +1613,55 @@ function mapStrokeSvgShape(node: RestNode, parent: RestNode | null | undefined, 
       x: node.relativeTransform![0]![2]!, y: node.relativeTransform![1]![2]! } });
 }
 
+/** A filled VECTOR whose transform is a pure rotation. The path stays in the
+ * node's own size box; placement is the pre-rotation top-left that puts that
+ * box's center on the transformed center. */
+function rotatedFilledVector(
+  node: RestNode,
+  parentBox: { x: number; y: number; width: number; height: number } | null,
+): DumpShape | undefined {
+  const t = node.relativeTransform;
+  const width = node.size?.x, height = node.size?.y;
+  if (!parentBox || node.layoutPositioning !== 'ABSOLUTE' || node.isMask || !t || t.length !== 2 ||
+      t.some((row) => row.length !== 3 || row.some((n) => !Number.isFinite(n))) ||
+      typeof width !== 'number' || typeof height !== 'number' || !(width > 0) || !(height > 0) ||
+      typeof node.rotation !== 'number') return undefined;
+  const [a, b, tx] = t[0] as [number, number, number];
+  const [c, d, ty] = t[1] as [number, number, number];
+  if (a === 1 && b === 0 && c === 0 && d === 1) return undefined;
+  const len0 = Math.hypot(a, c), len1 = Math.hypot(b, d), dot = a * b + c * d, det = a * d - b * c;
+  if (Math.abs(len0 - 1) > 1e-3 || Math.abs(len1 - 1) > 1e-3 || Math.abs(dot) > 1e-3 || Math.abs(det - 1) > 1e-3) return undefined;
+  const rotation = restRotationToCssDeg(node.rotation);
+  if (rotation === 0 || Math.abs(rotation - restRotationToCssDeg(Math.atan2(c, a))) > 0.05) return undefined;
+  const paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
+  const fills = node.fills?.filter((p) => p.visible !== false) ?? [];
+  if (!paths || paths.length === 0 || paths.length > 32 || paths.some((p) => filledPathIssue(p.data) || !['NONZERO', 'EVENODD'].includes(p.windingRule)) ||
+      fills.length !== 1 || fills[0]!.type !== 'SOLID' ||
+      (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') ||
+      (node.cornerRadius !== undefined && node.cornerRadius !== 0) ||
+      (node.strokes ?? []).some((p) => p.visible !== false) ||
+      (node.effects ?? []).some((p) => p.visible !== false) ||
+      (node.children?.length ?? 0) > 0) return undefined;
+  const cx = a * (width / 2) + b * (height / 2) + tx;
+  const cy = c * (width / 2) + d * (height / 2) + ty;
+  const shape: DumpShape = {
+    kind: 'path', width, height, paths, rotation,
+    x: round2(cx - width / 2), y: round2(cy - height / 2),
+    right: round2(parentBox.width - cx - width / 2),
+    bottom: round2(parentBox.height - cy - height / 2),
+  };
+  return shape;
+}
+
+/** Figma fill geometry may leave a subpath open. The fill still closes it;
+ *  a stroke or mask outline drawn from the same path would gain an edge. */
+function admittedFillPath(path: string, windingRule: string, fillOnly: boolean): { data: string; windingRule: 'NONZERO' | 'EVENODD' } | undefined {
+  if (windingRule !== 'NONZERO' && windingRule !== 'EVENODD') return;
+  const closed = fillOnly && filledPathIssue(path) === 'filled-path-open-subpath' ? closeFilledSubpaths(path) : path;
+  if (!closed || filledPathIssue(closed)) return;
+  return { data: closed, windingRule };
+}
+
 function mapShape(
   node: RestNode,
   ctx: Ctx,
@@ -1615,7 +1676,23 @@ function mapShape(
     if (!issue && height !== 0) issue = 'native-line-logical-height-invalid';
     if (!issue && (parent?.type === 'GROUP' || parent?.type === 'BOOLEAN_OPERATION')) issue = 'native-line-parent-basis-unresolved';
     if (!issue && node.isMask) issue = 'native-line-mask-unsupported';
-    if (!issue && node.strokeDashes?.length) issue = 'native-line-dashes-unsupported';
+    const dashPattern = node.strokeDashes?.length && node.strokeDashes.length <= 8 &&
+      node.strokeDashes.every(n => typeof n === 'number' && Number.isFinite(n) && n > 0 && n <= 1e6)
+      ? [...node.strokeDashes] : undefined;
+    let paintedPaths: NativeLineGeometry['painted'];
+    if (!issue && node.strokeDashes?.length) {
+      const geometry = (node as RestNode & {strokeGeometry?: Array<{path?: string; windingRule?: string}>}).strokeGeometry;
+      const paths = (geometry ?? []).flatMap(entry => {
+        const rule = entry?.windingRule;
+        if (!entry?.path || (rule !== 'NONZERO' && rule !== 'EVENODD') || filledPathIssue(entry.path)) return [];
+        return [{ data: entry.path, windingRule: rule as 'NONZERO' | 'EVENODD' }];
+      });
+      ctx.report.degradations.push({ code: 'native-line-unsupported', nodePath, message: 'native-line-dashes-unsupported' });
+      // Dash caps stay ambiguous from the other REST fields. The captured
+      // stroke outline keeps the line; without that outline it stays unnamed.
+      if (!dashPattern || paths.length === 0 || paths.length > 8) return undefined;
+      paintedPaths = paths;
+    }
     if (!issue && line.cap !== 'NONE' && typeof node.strokeWeight === 'number' && node.strokeWeight > line.length) issue = 'native-line-short-cap-unqualified';
     if (issue) {
       ctx.report.degradations.push({ code: 'native-line-unsupported', nodePath, message: issue });
@@ -1630,6 +1707,8 @@ function mapShape(
       !node.isMask&&!(node.effects??[]).some(e=>e.visible!==false)&&!(parent.strokes??[]).some(p=>p.visible!==false)&&parent.clipsContent!==true
       ? {kind:'horizontal-fill-line-v1' as const,nodeId:node.id,parentId:parent.id,parentWidth:parent.size.x,parentHeight:parent.size.y,padding,length:width!,transform:line.transform.map(r=>[...r])}:undefined;
     return { kind: 'line', width: width!, height: 0, ...(flow?{lineFlow:flow}:{}), ...(constraints ? { constraints } : {}), line: { ...line,
+      ...(dashPattern ? { dashes: dashPattern } : {}),
+      ...(paintedPaths ? { painted: paintedPaths } : {}),
       transform: line.transform.map(row => [...row]) as NativeLineGeometry['transform'],
       source: { nodeId: node.id, ...(parent ? { parentId: parent.id } : {}) } } };
   }
@@ -1637,6 +1716,12 @@ function mapShape(
     ['ALPHA','VECTOR'].includes(node.maskType ?? '') &&
     ['UNION','INTERSECT','SUBTRACT','EXCLUDE'].includes(node.booleanOperation ?? '');
   if (node.type === 'VECTOR' || combinedBooleanMask) {
+    const rotated = node.type === 'VECTOR' ? rotatedFilledVector(node, parentBox) : undefined;
+    if (rotated) {
+      const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
+      if (constraints) rotated.constraints = constraints;
+      return rotated;
+    }
     const svg = ctx.strokeSvgSources?.[node.id];
     let strokeIssue: string | undefined;
     if (svg || node.vectorNetwork) {
@@ -1644,7 +1729,12 @@ function mapShape(
       if ('shape' in captured) return captured.shape;
       strokeIssue = captured.issue;
     }
-    let paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
+    const fillOnly = !node.isMask && !(node.strokes ?? []).some((stroke) => stroke.visible !== false);
+    let paths = node.fillGeometry?.flatMap((p) => {
+      const admitted = admittedFillPath(p.path, p.windingRule, fillOnly);
+      return admitted ? [admitted] : [];
+    });
+    if (node.fillGeometry && paths && paths.length !== node.fillGeometry.length) paths = undefined;
     const witness=ctx.nativeMaskPathWitnesses?.[node.id];
     if(witness){
       if(!insideMaskStroke(node,ctx) || witness.width!==node.size?.x || witness.height!==node.size?.y ||
@@ -1684,7 +1774,9 @@ function mapShape(
       typeof height === 'number' && Number.isFinite(height) && height > 0 &&
       paths && paths.length > 0 && paths.length <= 32 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
       (identity || rotation !== undefined || reflection) &&
-      (maskStroke || fills.length === 1 && fills[0]!.type === 'SOLID') &&
+      (maskStroke || fills.length === 1 && (fills[0]!.type === 'SOLID' || fills[0]!.type === 'GRADIENT_LINEAR' &&
+        Array.isArray(fills[0]!.gradientHandlePositions) && fills[0]!.gradientHandlePositions.length >= 2 &&
+        (fills[0]!.gradientStops?.filter((stop) => stop.color).length ?? 0) >= 2)) &&
       (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
       (node.cornerRadius === undefined || node.cornerRadius === 0) &&
       (maskStroke || !(node.strokes ?? []).some((p) => p.visible !== false)) &&
@@ -2882,6 +2974,13 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   for (const id of conflictingMainSizes) mainSizeById.delete(id);
   for (const id of conflictingMainPadding) mainPaddingById.delete(id);
 
+  const sharedComponents = new Map<string, NonNullable<NonNullable<RestNodesResponse['nodes'][string]>['components']>[string]>();
+  const sharedSets = new Map<string, NonNullable<NonNullable<RestNodesResponse['nodes'][string]>['componentSets']>[string]>();
+  for (const shared of Object.values(nodesResponse.nodes ?? {})) {
+    if (!shared) continue;
+    for (const [id, meta] of Object.entries(shared.components ?? {})) if (!sharedComponents.has(id)) sharedComponents.set(id, meta);
+    for (const [id, meta] of Object.entries(shared.componentSets ?? {})) if (!sharedSets.has(id)) sharedSets.set(id, meta);
+  }
   for (const entry of Object.values(nodesResponse.nodes ?? {})) {
     if (!entry) continue; // REST returns null for ids not in the file
     const doc = entry.document;
@@ -2927,8 +3026,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(variablesUnavailable ? { variablesUnavailable } : {}),
       captured,
       styleById,
-      components: new Map(Object.entries(entry.components ?? {})),
-      componentSets: new Map(Object.entries(entry.componentSets ?? {})),
+      components: new Map([...sharedComponents, ...Object.entries(entry.components ?? {})]),
+      componentSets: new Map([...sharedSets, ...Object.entries(entry.componentSets ?? {})]),
       nodeNameById,
       report,
       ...(options.closure?.cycles.some((c) => c.fromNodeId === doc.id)
@@ -3131,8 +3230,16 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
         }
       }
     }
+    const dumpName = Object.prototype.hasOwnProperty.call(dump, doc.name) ? `${doc.name} #${doc.id}` : doc.name;
+    if (dumpName !== doc.name) {
+      report.degradations.push({
+        code: 'set-name-disambiguated',
+        nodePath: `${doc.name}:${doc.id}`,
+        message: `"${doc.name}" (${doc.id}) shares its name with set ${(dump[doc.name] as DumpSet).nodeId} already in this dump — stored as "${dumpName}" so both component keys stay addressable`,
+      });
+    }
     const set: DumpSet = {
-      setName: doc.name,
+      setName: dumpName,
       type: doc.type,
       nodeId: doc.id,
       ...(key ? { key } : {}),
@@ -3155,8 +3262,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(Object.keys(boolDefaults).length > 0 ? { boolDefaults } : {}),
       variants,
     };
-    dump[doc.name] = set;
-    report.sets.push(doc.name);
+    dump[dumpName] = set;
+    report.sets.push(dumpName);
   }
 
   if (report.sets.length === 0) {

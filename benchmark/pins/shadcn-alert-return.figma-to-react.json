@@ -5,13 +5,13 @@
   "requestSha256": "40f518ddf09279d9131dbb857ef09bd44f70bd49d763d881afc920514113bc6b",
   "rootId": "ds.root-matrix16c39fdef03e8d42-source-native-bbbf2381-a202-4928-a570-177a3eb284ea-observed-react-matrix-16c39fdef03e8d42",
   "generated": {
-    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.module.css": "d871c78514b826746d4c9d9cf2f360bc222250ce3312044fcae5d457eebb5f27",
+    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.module.css": "e6571dee638d2c041f0f1fcfcd11003f92589c2bfd3b970c2bc0e90e25369a7c",
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.tsx": "51ad732b570ed9def286f669ba0893505c22de3048fa81fa804b8ad7cbaa19b5",
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.ts": "ff6158ff1c5d91d7bd70a181cb8953a6dd77bc6a548a65feec993cfa00e290c2",
     "index.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
     "tokens.css": "ac7f6f416d8fcccf5a396183d03228746162964c9d2681c690bff2ad36143b3d"
   },
-  "generatedSha256": "9aa3f38b6bf2819e849b41ec8270e2803f800f86a5bbdea573b0493e3a8b61c0",
+  "generatedSha256": "af7cba4dbddaddce7686778fec3f5227feb0323eff94cae6cab2ef6c5dc65a6c",
   "entries": {
     "package/dist/index.d.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
     "package/dist/index.js": "7b641ca4414cff6145ea892086e66fa2a97fa612e66b1bd77d20c74fc69e391a",
@@ -26,11 +26,11 @@
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-alert-return.figma-to-react/receipt.json",
-    "receiptSha256": "1daf0b80851bb9f9a9b75d8e281d9b84457c57e49f292081ebb15d08b645029b",
-    "generatedSha256": "9aa3f38b6bf2819e849b41ec8270e2803f800f86a5bbdea573b0493e3a8b61c0",
+    "receiptSha256": "239ab5ef62f1ecf738cd7522d3cc12b8765870857806e1701a1b8d6218c8ec76",
+    "generatedSha256": "af7cba4dbddaddce7686778fec3f5227feb0323eff94cae6cab2ef6c5dc65a6c",
     "component": "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-28",
+    "measuredAt": "2026-10-30",
     "cases": [
       {
         "key": "default",

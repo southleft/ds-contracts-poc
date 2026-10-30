@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   width: var(--ds-circle-size, var(--imported-stub-circle-root-width));
   height: var(--ds-circle-size, var(--imported-stub-circle-root-height));

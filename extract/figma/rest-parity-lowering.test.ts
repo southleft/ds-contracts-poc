@@ -73,7 +73,7 @@ test('a decoration that is a function of one enum axis carries per value as styl
   assert.match(css, /text-decoration: line-through/);
 });
 
-test('a decoration on the TRUE side of a boolean axis carries; on the FALSE side, or uncorrelated, it is named', () => {
+test('a decoration on the TRUE side of a boolean axis carries; the FALSE side is named; exact enum cells carry; a hidden deciding axis is named', () => {
   const truthy = propose(labelSet([{ name: 'Linked=true', decoration: 'UNDERLINE' }, { name: 'Linked=false' }], { Linked: ['true', 'false'] }));
   assert.match(JSON.stringify(anatomyOf(truthy)), /"stylesWhen":\[\{"prop":"linked","styles":\{"text-decoration":"underline"\}\}\]/);
   const falsy = propose(labelSet([{ name: 'Plain=true' }, { name: 'Plain=false', decoration: 'UNDERLINE' }], { Plain: ['true', 'false'] }));
@@ -82,8 +82,12 @@ test('a decoration on the TRUE side of a boolean axis carries; on the FALSE side
   const mixed = propose(labelSet([
     { name: 'A=1, B=1', decoration: 'UNDERLINE' }, { name: 'A=1, B=2' }, { name: 'A=2, B=1' }, { name: 'A=2, B=2', decoration: 'UNDERLINE' },
   ], { A: ['1', '2'], B: ['1', '2'] }));
-  assert.doesNotMatch(JSON.stringify(anatomyOf(mixed)), /text-decoration/);
-  assert.ok(mixed.notes.some((n) => /without correlating to one variant axis .* NAMED, not proposed/.test(n)), mixed.notes.join('\n'));
+  assert.match(JSON.stringify(anatomyOf(mixed)), /"literalsByCombination":\[\{"props":\["a","b"\],"rows":\[\{"values":\["1","1"\],"literals":\{"text-decoration":"underline","text-underline-position":"under"\}\},\{"values":\["2","2"\]/);
+  const hidden = propose(labelSet([
+    { name: 'A=1, On=true', decoration: 'UNDERLINE' }, { name: 'A=1, On=false' }, { name: 'A=2, On=true' }, { name: 'A=2, On=false' },
+  ], { A: ['1', '2'], On: ['true', 'false'] }));
+  assert.doesNotMatch(JSON.stringify(anatomyOf(hidden)), /text-decoration/);
+  assert.ok(hidden.notes.some((n) => /without correlating to one variant axis .* NAMED, not proposed/.test(n)), hidden.notes.join('\n'));
 });
 
 test('a PERCENT line height reaches the contract as the drawn pixels', () => {

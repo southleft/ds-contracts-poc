@@ -2,6 +2,7 @@ import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
+import { rgbaPngDataUrl } from './png-data-url.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {qualifyNativeVectorStrokeCapture,assertQualifiedVectorStrokeCapture,vectorStrokeChoice,vectorStrokeBindingMatches,type NativeVectorStrokeCapture,type QualifiedVectorStrokeCapture,type VectorStrokeBinding} from './source-vector-stroke.js';
@@ -45,7 +46,7 @@ import {solidFillCompositionRules} from '../packages/core/src/css.js';
 import {inspectDraftPaintChild} from './draft-paint-child.js';
 import {AbsoluteGeometrySchema, normalizeAbsoluteGeometry, absoluteGeometryVisibleDomains, VisibleWhenSchema, type Part} from '@ds-contracts/schema';
 import {reflectedHugPlacement} from '../extract/figma/reflected-hug-geometry.js';
-import {nativeLineIssue, filledPathsIssue} from '../scripts/contract-schema.js';
+import {nativeLineIssue, nativeLineFootprint, filledPathsIssue} from '../scripts/contract-schema.js';
 import { allocateFigmaPropertyNames, canonicalPropName as sharedCanonicalPropName } from './figma-names.js';
 import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
 import {canonicalJson, revisionOf} from './contract-provenance.js';
@@ -1005,7 +1006,14 @@ export function inferSemantics(setName: string, axes: Axis[], interactive: boole
     }
     return null; // "title"/"heading" without a level axis is too ambiguous
   }
-  if (/\b(switch|toggle)\b/i.test(setName)) {
+  if (/\bswitch\b/i.test(setName)) {
+    return { element: 'input', role: 'switch', note: review('element "input" + role "switch"') };
+  }
+  if (/\btoggle\b/i.test(setName)) {
+    // A drawn toggle with platform states is a toggle button: icon and label
+    // mount inside it, and an <input> cannot hold them. A nameless switch
+    // stays on the input row above.
+    if (interactive) return { element: 'button', note: review('element "button" ("toggle" with interaction states; an input cannot mount the drawn parts)') };
     return { element: 'input', role: 'switch', note: review('element "input" + role "switch"') };
   }
   if (/\bcheckbox\b/i.test(setName)) {
@@ -1086,6 +1094,25 @@ const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled 
  *  once per proposal, never mutated; read by the batch post-pass. */
 type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
 const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
+
+/** The element decision is stored on the contract object. Passes that replace
+ * that object must carry the decision across, or a structural button that
+ * contains a button stays a button. */
+export function semanticsOriginSnapshot(proposals: ReadonlyArray<{ contract: unknown }>): Map<object, { origin: SemanticsOrigin; note: string | null }> {
+  const saved = new Map<object, { origin: SemanticsOrigin; note: string | null }>();
+  for (const proposal of proposals) {
+    const origin = semanticsOriginOf.get(proposal.contract as object);
+    if (origin) saved.set(proposal, origin);
+  }
+  return saved;
+}
+
+export function restoreSemanticsOrigins(proposals: ReadonlyArray<{ contract: unknown }>, saved: ReadonlyMap<object, { origin: SemanticsOrigin; note: string | null }>): void {
+  for (const proposal of proposals) {
+    const origin = saved.get(proposal);
+    if (origin && !semanticsOriginOf.has(proposal.contract as object)) semanticsOriginOf.set(proposal.contract as object, origin);
+  }
+}
 // Observation-only provenance: generated identifiers flatten namespace separators.
 const stubObservedNames = new WeakMap<object, string[]>();
 
@@ -1126,7 +1153,7 @@ export function interactivePartFact(root: unknown, skipRootElement = false): str
     }
     const role = p.attrs?.role;
     if (typeof role === 'string' && INTERACTIVE_ROLES.has(role)) return `part "${name}" carries role "${role}"`;
-    if (p.attrs && 'tabindex' in p.attrs) return `part "${name}" carries tabindex`;
+    if (p.attrs && ('tabindex' in p.attrs || 'tabIndex' in p.attrs)) return `part "${name}" carries tabindex`;
     for (const [k, child] of Object.entries(p.parts ?? {})) {
       const hit = visit(child, k, false);
       if (hit) return hit;
@@ -1250,6 +1277,17 @@ export function settleInteractiveContent(
     const at = prior?.note ? proposal.notes.indexOf(prior.note) : -1;
     if (at >= 0) proposal.notes[at] = note;
     else proposal.notes.unshift(note);
+    // The focus ring stays on this div. A plain div is not in the tab order, so
+    // the ring the state axis draws can never be reached.
+    const root = (contract as { anatomy?: { root?: { states?: Record<string, unknown>; attrs?: Record<string, string> } } }).anatomy?.root;
+    if (root?.states && Object.prototype.hasOwnProperty.call(root.states, 'focus-visible')) {
+      const attrs = root.attrs ?? {};
+      if (attrs.tabIndex === undefined) {
+        attrs.tabIndex = '0';
+        root.attrs = attrs;
+        proposal.notes.push('root: tabIndex 0 — the withheld button is a div that still draws focus-visible, and a plain div is not in the tab order');
+      }
+    }
   }
   // 4. Never nest silently — read the state AFTER step 3 (the snapshot minus
   //    the withheld guesses), which is itself a function of the snapshot.
@@ -2703,6 +2741,9 @@ interface Ctx {
   hiddenCaptured?: boolean;
   /** Positive reader evidence for omitted visible effect stacks. */
   effectsCaptured?: boolean;
+  /** Component key → the captured main. A focus instance can show that
+   * main's outside stroke even when the instance node only carries the fill. */
+  componentMainsByKey?: ReadonlyMap<string, DumpNode>;
   /** Captured-variable resolved values (dump v1.4 `_variables`), dot-path →
    *  CSS value ("bg.brand.default" → "#0e61ba") — the default/consuming
    *  mode's values, exactly the captured-token layer's entries. Also checks
@@ -4417,6 +4458,18 @@ function invertNodeOpacity(
   }
 }
 
+/** A zero-blur spread on a fully transparent fill does not rasterize in Figma.
+ *  CSS box-shadow would still draw a ring around the empty border box. A
+ *  blurred shadow on that same transparent fill still paints and stays. */
+function cssShadowEffects(node: DumpNode): DumpEffect[] | undefined {
+  const effects = node.effects;
+  if (!effects?.length) return effects;
+  if (node.fill !== undefined && node.fill.alpha !== 0) return effects;
+  return effects.filter(e => !(e.type === 'DROP_SHADOW' && (e.radius ?? 0) === 0 && (e.spread ?? 0) > 0));
+}
+const droppedUnpaintedHardSpread = (node: DumpNode): boolean =>
+  (node.effects?.length ?? 0) > (cssShadowEffects(node)?.length ?? 0);
+
 /** One DROP_SHADOW as a CSS box-shadow value: "0px 4px 8px [2px] #0000001a"
  *  — the same literal-fidelity single-string discipline as 8-digit hex. */
 const shadowCss = (e: DumpEffect): string => {
@@ -4446,7 +4499,7 @@ const observedShadowStack = (effects: DumpEffect[] | undefined): string | undefi
 };
 
 const observedShadowChanged = (node: DumpNode, base: DumpNode): boolean => {
-  const next = observedShadowStack(node.effects), previous = observedShadowStack(base.effects);
+  const next = observedShadowStack(cssShadowEffects(node)), previous = observedShadowStack(cssShadowEffects(base));
   return next !== previous || (next === undefined &&
     JSON.stringify(node.effects ?? []) !== JSON.stringify(base.effects ?? []));
 };
@@ -4657,11 +4710,97 @@ function nameEffectProvenance(m: Merged, ctx: Ctx, where: string): void {
   }
 }
 
-function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+function blurredDiskUrl(diameter: number, sigma: number, pad: number, rgb: [number, number, number]): string {
+  const size = diameter + pad * 2;
+  const src = new Float32Array(size * size);
+  const radius = diameter / 2;
+  const center = size / 2;
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++)
+    src[y * size + x] = Math.hypot(x + 0.5 - center, y + 0.5 - center) <= radius ? 1 : 0;
+  const kernelRadius = Math.ceil(sigma * 3);
+  const kernel: number[] = [];
+  let weight = 0;
+  for (let i = -kernelRadius; i <= kernelRadius; i++) {
+    const sample = Math.exp(-(i * i) / (2 * sigma * sigma));
+    kernel.push(sample);
+    weight += sample;
+  }
+  for (let i = 0; i < kernel.length; i++) kernel[i] /= weight;
+  const blurAxis = (input: Float32Array, horizontal: boolean) => {
+    const out = new Float32Array(input.length);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      let value = 0;
+      for (let i = -kernelRadius; i <= kernelRadius; i++) {
+        const sx = horizontal ? Math.min(size - 1, Math.max(0, x + i)) : x;
+        const sy = horizontal ? y : Math.min(size - 1, Math.max(0, y + i));
+        value += input[sy * size + sx] * kernel[i + kernelRadius]!;
+      }
+      out[y * size + x] = value;
+    }
+    return out;
+  };
+  const alpha = blurAxis(blurAxis(src, true), false);
+  const pixels = new Uint8Array(size * size * 4);
+  for (let i = 0; i < alpha.length; i++) {
+    pixels[i * 4] = rgb[0];
+    pixels[i * 4 + 1] = rgb[1];
+    pixels[i * 4 + 2] = rgb[2];
+    pixels[i * 4 + 3] = Math.max(0, Math.min(255, Math.round(alpha[i]! * 255)));
+  }
+  return rgbaPngDataUrl(size, size, pixels);
+}
+/** Radius 4 on a filled circle matched a gaussian of standard deviation 1.5px. */
+const LAYER_BLUR_SIGMA = 3 / 8;
+function projectCircleLayerBlur(m: Merged, holder: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string): boolean {
+  const rows = m.occ.map(o => {
+    const effects = o.node.effects ?? [];
+    if (effects.length !== 1 || effects[0]!.type !== 'LAYER_BLUR') return;
+    const radius = effects[0]!.radius;
+    if (typeof radius !== 'number' || !Number.isFinite(radius) || radius <= 0 || radius > 32) return;
+    if (effects[0]!.bound && Object.keys(effects[0]!.bound).length > 0) return;
+    const shape = o.node.shape;
+    if (!shape || shape.kind !== 'ellipse' || shape.width !== shape.height || !Number.isFinite(shape.width) || shape.width < 2 || shape.width > 48) return;
+    if (Math.abs(shape.width - Math.round(shape.width)) > 0.01) return;
+    const hex = o.node.fill?.hex;
+    if (!hex || !/^[\da-f]{6}$/i.test(hex) || (o.node.fill?.alpha ?? 1) !== 1) return;
+    return { radius, diameter: Math.round(shape.width), hex: hex.toLowerCase() };
+  });
+  if (!rows.length || rows.some(row => !row) || new Set(rows.map(row => JSON.stringify(row))).size !== 1) return false;
+  const row = rows[0]!;
+  const sigma = row.radius * LAYER_BLUR_SIGMA;
+  const pad = Math.max(1, Math.round(sigma));
+  const size = row.diameter + pad * 2;
+  if (size > 64 || holder.parts || holder.shape === undefined) return false;
+  delete holder.shape;
+  const literals = { ...((holder.literals ?? {}) as Record<string, string>) };
+  literals.width = `${row.diameter}px`;
+  literals.height = `${row.diameter}px`;
+  literals['background-image'] = rgbaPngDataUrl(1, 1, new Uint8Array(4));
+  holder.literals = literals;
+  delete tokens['background-color'];
+  if (ctx.mint) ctx.mint.observations = ctx.mint.observations.filter(obs => !(obs.nodePath === where && obs.cssProperty === 'background-color'));
+  const rgb = [0, 2, 4].map(offset => Number.parseInt(row.hex.slice(offset, offset + 2), 16)) as [number, number, number];
+  holder.parts = {
+    Disk: {
+      declared: { position: 'absolute' },
+      literals: {
+        left: `${-pad}px`,
+        top: `${-pad}px`,
+        width: `${size}px`,
+        height: `${size}px`,
+        'background-image': blurredDiskUrl(row.diameter, sigma, pad, rgb),
+      },
+    },
+  };
+  ctx.notes.push(`${where}: captured LAYER_BLUR radius ${row.radius} on a filled circle carried as a gaussian disk (standard deviation ${sigma}px) behind the circle — the coded component paints that disk and does not use a CSS filter`);
+  return true;
+}
+function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string, holder?: Record<string, unknown>) {
   nameEffectProvenance(m, ctx, where); // dump v1.31 — style identity + channel bindings, never silent
   if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
   const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
-  const shadowStackEverywhere = m.occ.every(o => observedShadowStack(o.node.effects) !== undefined);
+  if (holder && projectCircleLayerBlur(m, holder, tokens, ctx, where)) return;
+  const shadowStackEverywhere = m.occ.every(o => observedShadowStack(cssShadowEffects(o.node)) !== undefined);
   if (!shadowStackEverywhere) {
     // State-preview DROP_SHADOW (Button Active / Focus Visible) is a
     // default-bare / state-drawn stack — the same split hover fill uses.
@@ -4699,7 +4838,10 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
     }
     ctx.notes.push(`${where}: the reader captured visible effects; ${withoutFx.length}/${m.occ.length} observed empty stack(s) carried as box-shadow none, not inferred from an unknown reader`);
   }
-  const occ = m.occ.map(o => ({ variant: o.variant, value: observedShadowStack(o.node.effects) ?? 'none' }));
+  if (m.occ.some(o => droppedUnpaintedHardSpread(o.node))) {
+    ctx.notes.push(`${where}: a zero-blur spread shadow on a transparent fill is not in Figma's raster — it is not carried as a box-shadow ring around the empty box`);
+  }
+  const occ = m.occ.map(o => ({ variant: o.variant, value: observedShadowStack(cssShadowEffects(o.node)) ?? 'none' }));
   const depth = Math.max(...m.occ.map((o) => (o.node.effects ?? []).length));
   reportUnbound(ctx, where, 'effects', occ[0].value);
   const authoredShadow = authoredPartAt(ctx, partPathOf(where))?.tokens?.['box-shadow'];
@@ -4903,7 +5045,26 @@ function liftUnboundTextPaintsToLiterals(
  *  is false (Tooltip pointer=false), or visible for exactly one enum value,
  *  becomes visibleWhen. Anything else is a NAMED note. */
 function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
-  if (part.visibleWhen !== undefined && (!ctx.hiddenCaptured ||
+  const when = part.visibleWhen as { prop?: string; equals?: string | boolean | string[] } | undefined;
+  // A structural gate (the icon exists except while loading) can still hide
+  // that icon on some of those values (text sizes). A Show-prop on the same
+  // node does not explain that second split.
+  const hiddenStillSplits = (() => {
+    if (!when?.prop) return false;
+    const axis = ctx.axes.find(candidate => candidate.propName === when.prop);
+    if (!axis) return false;
+    const shown = m.occ.filter(o => {
+      const raw = axisValuesOf(o.variant)[axis.property];
+      if (raw === undefined) return false;
+      const value = axisValue(axis, raw);
+      if (when.equals === undefined) return raw.trim().toLowerCase() === 'true';
+      if (Array.isArray(when.equals)) return when.equals.includes(value);
+      if (when.equals === false) return raw.trim().toLowerCase() === 'false';
+      return when.equals === value;
+    });
+    return shown.some(o => o.node.hidden === true) && shown.some(o => o.node.hidden !== true);
+  })();
+  if (!hiddenStillSplits && part.visibleWhen !== undefined && (!ctx.hiddenCaptured ||
       !ctx.axes.some(axis=>axis.propName===(part.visibleWhen as {prop?:string}).prop) ||
       m.occ.some(o=>o.node.propRefs?.visible))) return;
   if (m.occ.every((o) => o.node.hidden !== true)) return;
@@ -5116,9 +5277,9 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       return;
     }
     const signature = (sh: typeof first) => sh.line && JSON.stringify({ length: sh.line.length,
-      basis: sh.line.transform.map(row => row.slice(0,2)), cap: sh.line.cap, align: sh.line.align });
-    if (shapes.some(s => !s.sh.line || nativeLineIssue(s.sh.line) || s.sh.height !== 0 || s.sh.width !== s.sh.line.length) ||
-        new Set(shapes.map(s => signature(s.sh))).size !== 1) {
+      basis: sh.line.transform.map(row => row.slice(0,2)), cap: sh.line.cap, align: sh.line.align, dashes: sh.line.dashes ?? [],
+      painted: (sh.line.painted ?? []).map(path => path.data) });
+    if (shapes.some(s => !s.sh.line || nativeLineIssue(s.sh.line) || s.sh.height !== 0 || s.sh.width !== s.sh.line.length)) {
       ctx.notes.push(`${where}: native-line-incomplete-or-varying-geometry — original capture retained in dump; no geometry frozen across incompatible variants`);
       return;
     }
@@ -5126,10 +5287,53 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       ctx.notes.push(`${where}: native-line-short-cap-unqualified — capped stroke is longer than the native line; observed geometry retained without inventing a paint rule`);
       return;
     }
+    const varying = new Set(shapes.map(s => signature(s.sh))).size !== 1;
     const observedSources = shapes.flatMap(s => s.sh.line!.source ? [{ ...s.sh.line!.source,
-      variantName: s.variant, transform: s.sh.line!.transform }] : []);
+      variantName: s.variant, transform: s.sh.line!.transform, length: s.sh.line!.length, cap: s.sh.line!.cap, align: s.sh.line!.align,
+      ...(s.sh.line!.dashes ? { dashes: s.sh.line!.dashes } : {}),
+      ...(s.sh.line!.painted ? { painted: s.sh.line!.painted } : {}) }] : []);
     part.shape = { kind: 'line', width: first.width, height: 0, line: { ...first.line!, observedSources } };
-    ctx.notes.push(`${where}: native zero-height LINE and complete affine basis carried; original source identities and each captured placement retained`);
+    // A line in auto-layout flow keeps its flow position; only a free-positioned
+    // line takes its captured offsets.
+    const positioned = m.occ.every(o => !!o.node.abs);
+    const placed = !positioned ? [] : shapes.flatMap(s => {
+      if (!s.sh.line) return [];
+      const box = nativeLineFootprint(s.sh.line);
+      const px = (n: number) => `${Object.is(n, -0) || Math.abs(n) < 1e-6 ? 0 : Math.round(n * 1000) / 1000}px`;
+      return [{ variant: s.variant, literals: {
+        left: px(s.sh.line.transform[0][2] - box.originX),
+        top: px(s.sh.line.transform[1][2] - box.originY),
+        width: px(box.width),
+        height: px(box.height),
+      } }];
+    });
+    const declared = (part.declared ?? {}) as Record<string, string>;
+    if (positioned && !declared.position) part.declared = { ...declared, position: 'absolute' };
+    const sameBox = new Set(placed.map(p => JSON.stringify(p.literals))).size <= 1;
+    if (sameBox && placed[0]) {
+      const literals = (part.literals ?? {}) as Record<string, string>;
+      part.literals = { ...literals, ...(literals.left === undefined ? { left: placed[0].literals.left } : {}), ...(literals.top === undefined ? { top: placed[0].literals.top } : {}) };
+    } else if (placed.length) {
+      const grouped = new Map<string, { prop: string; map: Record<string, Record<string, string>> }>();
+      let complete = true;
+      for (const row of placed) {
+        const values = axisValuesOf(row.variant);
+        const keys = Object.keys(values);
+        if (keys.length !== 1) { complete = false; break; }
+        const axis = ctx.axes.find(item => item.property === keys[0]);
+        if (!axis) { complete = false; break; }
+        const code = axisValue(axis, values[keys[0]]!);
+        const table = grouped.get(axis.propName) ?? { prop: axis.propName, map: {} };
+        const previous = table.map[code];
+        if (previous && JSON.stringify(previous) !== JSON.stringify(row.literals)) { complete = false; break; }
+        table.map[code] = row.literals;
+        grouped.set(axis.propName, table);
+      }
+      if (complete && grouped.size === 1) part.literalsByProp = [...((part.literalsByProp as unknown[]) ?? []), ...grouped.values()];
+    }
+    ctx.notes.push(varying
+      ? `${where}: native zero-height LINE carried per variant; length and basis differ, and each captured placement is retained`
+      : `${where}: native zero-height LINE and complete affine basis carried; original source identities and each captured placement retained`);
     return;
   }
   if (first.kind === 'stroked-path') {
@@ -5481,6 +5685,13 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       part.stylesWhen = stylesWhen;
       ctx.notes.push(
         `${where}: uniform absolute placement carried as stylesWhen on the part's own visibility boolean \`${vw.prop}\` (the part only renders when it holds) — dump v1.3, #42`,
+      );
+    } else if (styles && vw && typeof vw.equals === 'string') {
+      const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+      stylesWhen.push({ prop: vw.prop, equals: vw.equals, styles });
+      part.stylesWhen = stylesWhen;
+      ctx.notes.push(
+        `${where}: uniform absolute placement carried as stylesWhen on \`${vw.prop}=${vw.equals}\` (${Object.entries(styles).map(([k, v]) => `${k}: ${v}`).join(', ')}) — the part is already conditional, so centered and translated offsets stay in the conditional style vocabulary`,
       );
     } else if (styles) {
       // Overlay-flattened class (round 2 iteration 2): UNCONDITIONAL uniform
@@ -6749,7 +6960,37 @@ function mintPadding(
   const fallback = (chan: string, value: number) => {
     if (part && value !== 0) ctx.mint!.absFallbacks.push({ part, tokens: target, chan, value, where });
   };
-  const pad = (n: DumpNode): readonly number[] => n.layout?.padding ?? [0, 0, 0, 0];
+  const pad = (n: DumpNode): readonly number[] => {
+    const raw = n.layout?.padding ?? [0, 0, 0, 0];
+    const box = n.bbox, layout = n.layout;
+    if (!box || !layout || layout.mode === 'GRID' || (layout.mode as string) === 'NONE') return raw;
+    let [top, right, bottom, left] = raw;
+    const widthFixed = (layout.mode === 'HORIZONTAL' ? layout.primarySizing : layout.counterSizing) === 'FIXED';
+    const heightFixed = (layout.mode === 'HORIZONTAL' ? layout.counterSizing : layout.primarySizing) === 'FIXED';
+    let clamped = false;
+    if (widthFixed && left + right > box.width && left + right > 0) {
+      const scale = box.width / (left + right);
+      left *= scale; right *= scale; clamped = true;
+    }
+    if (heightFixed && top + bottom > box.height && top + bottom > 0) {
+      const scale = box.height / (top + bottom);
+      top *= scale; bottom *= scale; clamped = true;
+    }
+    // A hugged icon button can report a box smaller than its padding plus the
+    // icon. CSS would grow the hug; the captured box is the border box.
+    const huggedIcon = !heightFixed && layout.mode === 'HORIZONTAL'
+      ? (n.children ?? []).filter(child => child.hidden !== true && child.type === 'INSTANCE' && child.bbox)
+      : [];
+    const huggedText = (n.children ?? []).some(child => child.hidden !== true && child.type === 'TEXT');
+    if (huggedIcon.length === 1 && !huggedText && top + bottom + huggedIcon[0].bbox!.height > box.height + 0.5 && top + bottom > 0) {
+      const budget = Math.max(0, box.height - huggedIcon[0].bbox!.height);
+      const scale = budget / (top + bottom);
+      top *= scale; bottom *= scale; clamped = true;
+    }
+    if (clamped && !ctx.notes.some(note => note.startsWith(`${where}: padding clamped`)))
+      ctx.notes.push(`${where}: padding clamped to the captured border box so CSS padding cannot enlarge it`);
+    return [top, right, bottom, left];
+  };
   const uniformDrawn = (idx: number): number | undefined => {
     const values = m.occ.map((o) => pad(o.node)[idx]);
     const distinct = [...new Set(values)];
@@ -7128,9 +7369,52 @@ function carryTextDecoration(m: Merged, holder: Record<string, unknown>, ctx: Ct
     );
     return;
   }
+  // One axis cannot name the decorated cells. A sparse combination table can:
+  // only the cells that draw a line get a rule, so the others stay plain.
+  const enumAxes = ctx.axes.filter((axis) => !isBooleanAxis(axis));
+  const decorated = new Map<string, { values: string[]; line: string }>();
+  let conflict = enumAxes.length === 0;
+  for (const row of rows) {
+    if (row.value === 'none') continue;
+    const values = enumAxes.map((axis) => {
+      const raw = axisValuesOf(row.variant)[axis.property];
+      return raw === undefined ? undefined : axisValue(axis, raw);
+    });
+    if (values.some((value) => value === undefined)) { conflict = true; break; }
+    const key = JSON.stringify(values);
+    const previous = decorated.get(key);
+    if (previous && previous.line !== row.value) { conflict = true; break; }
+    decorated.set(key, { values: values as string[], line: row.value });
+  }
+  // A plain cell with the same enum values means another axis decides the line.
+  for (const row of conflict ? [] : rows) {
+    if (row.value !== 'none') continue;
+    const key = JSON.stringify(enumAxes.map((axis) => {
+      const raw = axisValuesOf(row.variant)[axis.property];
+      return raw === undefined ? undefined : axisValue(axis, raw);
+    }));
+    if (decorated.has(key)) { conflict = true; break; }
+  }
+  if (!conflict && decorated.size > 0 && !literalTableCarries(holder, 'text-decoration')) {
+    const tables = (holder.literalsByCombination as LiteralTableField | undefined) ?? [];
+    tables.push({
+      props: enumAxes.map((axis) => axis.propName),
+      rows: [...decorated.values()].map((row) => ({
+        values: row.values,
+        // Figma draws an underline under the glyphs. CSS `auto` sits on the
+        // alphabetic baseline, which paints the line above the one Figma drew.
+        literals: row.line === 'underline'
+          ? { 'text-decoration': row.line, 'text-underline-position': 'under' }
+          : { 'text-decoration': row.line } as Record<string, string>,
+      })),
+    });
+    holder.literalsByCombination = tables;
+    ctx.notes.push(`${where}: text decoration carried on ${decorated.size} observed combination(s); the other combinations stay plain`);
+    return;
+  }
   // @door propose.text-decoration-uncorrelated-refused
   ctx.notes.push(
-    `${where}: text decoration differs across variants (${distinct.join(', ')}) without correlating to one variant axis — text-decoration-line has no per-combination vocabulary; NAMED, not proposed (review)`,
+    `${where}: text decoration differs across variants (${distinct.join(', ')}) without correlating to one variant axis or a combination table — NAMED, not proposed (review)`,
   );
 }
 
@@ -7505,6 +7789,54 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   );
 }
 
+/** Glyphs centered or sunk in a text box. TOP is the CSS initial. A content
+ *  part is not a flex container until it names this alignment, so the line
+ *  stays at the top of a stretched box unless the capture says otherwise. */
+function carryTextVerticalAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const values = textOcc.map((o) => o.node.text!.verticalAlign);
+  if (values.some((value) => value === undefined)) return;
+  const alignOf = (value: string) => value === 'CENTER' ? 'center' : value === 'BOTTOM' ? 'end' : undefined;
+  const distinct = [...new Set(values)];
+  if (distinct.length === 1 && distinct[0] === 'TOP') return;
+  // Alignment moves glyphs only inside a box taller than its text.
+  const taller = (o: (typeof textOcc)[number]) => {
+    if (o.node.fillHeight === true) return true;
+    const height = o.node.bbox?.height, line = o.node.text!.lineHeight;
+    const lines = (o.node.text!.characters.match(/\n/g)?.length ?? 0) + 1;
+    return typeof height === 'number' && typeof line === 'number' && height > line * lines + 0.5;
+  };
+  if (!textOcc.every(taller)) return;
+  if (distinct.length === 1 && alignOf(distinct[0]!) !== undefined) {
+    const layout = { ...((holder.layout as Record<string, unknown> | undefined) ?? {}) };
+    const align = alignOf(distinct[0]!)!;
+    if (layout.align !== undefined && layout.align !== align) {
+      ctx.notes.push(`${where}: textAlignVertical ${distinct[0]} competes with an existing cross alignment — NAMED, not proposed`);
+      return;
+    }
+    layout.align = align;
+    holder.layout = layout;
+    ctx.notes.push(`${where}: textAlignVertical ${distinct[0]} carried as alignment of the glyphs inside the text box`);
+    return;
+  }
+  ctx.notes.push(`${where}: textAlignVertical differs across variants (${distinct.join(', ')}) — NAMED, not proposed`);
+}
+
+/** Figma draws HEIGHT text from the font outline. Browser hinting makes the
+ *  same face heavier and pushes a white-background comparison over the limit
+ *  while black stays clean. WIDTH_AND_HEIGHT already gets this hint through
+ *  the whole-pixel text box. */
+function carryHeightTextRaster(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0 || !textOcc.every((o) => o.node.text!.textAutoResize === 'HEIGHT')) return;
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['text-rendering'] !== undefined) return;
+  declared['text-rendering'] = 'geometricprecision';
+  holder.declared = declared;
+  ctx.notes.push(`${where}: textAutoResize HEIGHT — text-rendering geometricPrecision, so the glyphs follow the font outline instead of browser hinting`);
+}
+
 /** dump v1.36 — A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF
  *  PIXELS WIDE. Found by the design-led consumer check on a designer's Badge:
  *  26 of the 48 × 16 px `size=small` variants missed the 5 % limit at
@@ -7537,6 +7869,22 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
  *  validateContract refuses the flag wherever it would be wrong or inert
  *  (anatomy.ts textBoxStaticRefusals); settleTextAutoResize withdraws, by
  *  name, a flag the finished contract could not honour. */
+/** An authored line feed is a line break. CSS collapses it to a space unless
+ * the part keeps pre-wrap, whether the box hugs its text or is a fixed width. */
+function carryTextLineFeeds(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text?.characters?.includes('\n'));
+  if (textOcc.length === 0) return;
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['white-space'] !== undefined && declared['white-space'] !== 'pre-wrap') {
+    ctx.notes.push(`${where}: captured text contains line feeds, and white-space is already ${declared['white-space']} — NAMED, not proposed`);
+    return;
+  }
+  if (declared['white-space'] === 'pre-wrap') return;
+  declared['white-space'] = 'pre-wrap';
+  holder.declared = declared;
+  ctx.notes.push(`${where}: captured text contains line feeds — preserved with white-space: pre-wrap`);
+}
+
 function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   const captured = textOcc.filter((o) => o.node.text!.textAutoResize !== undefined);
@@ -7568,10 +7916,7 @@ function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ct
   // Auto-width preserves authored line feeds; max-content alone collapses
   // them to spaces in CSS. Keep ordinary one-line text unchanged, and allow
   // an independently authored max-width to wrap this text when present.
-  if (textOcc.some((o) => o.node.text?.characters?.includes('\n'))) {
-    holder.declared = { ...(holder.declared as Record<string, string> | undefined), 'white-space': 'pre-wrap' };
-    ctx.notes.push(`${where}: captured auto-width text contains line feeds — preserved with white-space: pre-wrap; no clipping or parent-width ceiling inferred`);
-  }
+  carryTextLineFeeds(m, holder, ctx, where);
   ctx.notes.push(
     `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round its intrinsic max-content inline size where calc-size() is supported and prevent flex shrinking, without inventing a parent-width ceiling; authored bounds remain authoritative, and the writer sets the field back on the node`,
   );
@@ -7983,7 +8328,15 @@ function stretchEvidence(m: Merged): boolean {
     return (n.type === 'FRAME' || n.type === 'TEXT') && !n.bound?.[dim];
   });
   if (eligible.length === 0) return false;
-  return eligible.every((c) => c.occ.every((o) => o.node[fillField] === true));
+  if (!eligible.every((c) => c.occ.every((o) => o.node[fillField] === true))) return false;
+  // A fixed sibling is not stretched by the parent's counter alignment.
+  // Promoting stretch onto the parent would pin that sibling to the start.
+  const siblingHoldsItsSize = m.children.some((c) => c.occ.some((o) => {
+    const n = o.node;
+    if (n.abs || n.hidden) return false;
+    return n[fillField] !== true;
+  }));
+  return !siblingHoldsItsSize;
 }
 
 /** The alignment actually emitted by invertLayout, rather than evidence
@@ -8068,8 +8421,8 @@ function carryObservedItemStretch(m: Merged, parent: ParentModes | null,
     const siblingAllocation = fills && !capturedFixed && !minimumFloor && mode === 'HORIZONTAL' && owner?.layout?.counterSizing === 'AUTO' && !owner.layout.wrap &&
       !owner.bound?.height && owner.children?.some(child => child !== o.node &&
         (o.node.nodeId === undefined || child.nodeId !== o.node.nodeId) && independentHugRowHeight(child, ctx)) === true;
-    const supported = owner && !owner.layout?.wrap && (mode === 'HORIZONTAL' || mode === 'VERTICAL') &&
-      (!fills || (o.node.type === 'FRAME' && (capturedFixed || minimumFloor || siblingAllocation) && o.node.fixedSize?.[dim] === undefined && o.node.bound?.[dim] === undefined));
+    const canStretch = o.node.type === 'FRAME' && (capturedFixed || minimumFloor || siblingAllocation) && o.node.fixedSize?.[dim] === undefined && o.node.bound?.[dim] === undefined;
+    const supported = !!owner && !owner.layout?.wrap && (mode === 'HORIZONTAL' || mode === 'VERTICAL') && (!fills || canStretch);
     return {variant:o.variant, value:fills ? 'stretch' : 'auto', supported, siblingAllocation};
   });
   // Internal multi-axis alignment and the item's relation to its parent are
@@ -8123,6 +8476,7 @@ function carryCrossAxisFill(
   if (modes.some(mode => mode !== base)) {
     // crossAxisFillByProp owns complete correlated planes. Account for
     // remaining mixed-axis fills before looking at any one default axis.
+    carryMixedModeCrossAxisFill(m, parentModes, part, ctx, where);
     nameCrossAxisFillByVariant(m, parentModes, part, ctx, where);
     return;
   }
@@ -8443,6 +8797,68 @@ function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: 
   ctx.notes.push(`${where}: primary-axis FILL carried as layoutByProp.grow on \`${fit.axis.propName}\`; the parent places the item and the child keeps its internal layout`);
 }
 
+function crossAxisLiteralClaims(part: Record<string, unknown>, ctx: Ctx, variant: string, dim: string): boolean {
+  const tables = part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined;
+  if (!tables) return false;
+  const raw = axisValuesOf(variant);
+  return tables.some((entry) => {
+    const axis = ctx.axes.find((item) => item.propName === entry.prop);
+    if (!axis) return false;
+    const label = raw[axis.property];
+    return label !== undefined && entry.map[axisValue(axis, label)]?.[dim] === '100%';
+  });
+}
+
+/** A parent that is a row in some variants and a column in others still has
+ * a cross-axis FILL on the variants where that axis is definite. `width:
+ * 100%` on those values gives the child a containing block; the parent's
+ * alignment stays put so its other children are not stretched. */
+function carryMixedModeCrossAxisFill(
+  m: Merged,
+  parentModes: ParentModes,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  for (const dim of ['width', 'height'] as const) {
+    const fillField = dim === 'width' ? 'fillWidth' : 'fillHeight';
+    const rows: Array<{ variant: string; value: string }> = [];
+    let blocked = false;
+    for (const o of m.occ) {
+      const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
+      if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') { blocked = true; break; }
+      const cross = mode === 'HORIZONTAL' ? 'height' : 'width';
+      if (cross !== dim || o.node[fillField] !== true) {
+        rows.push({ variant: o.variant, value: NOT_FILLING });
+        continue;
+      }
+      if (parentModes.crossDefiniteByVariant?.get(o.variant) !== true || o.node.bound?.[dim] !== undefined) {
+        blocked = true;
+        break;
+      }
+      rows.push({ variant: o.variant, value: '100%' });
+    }
+    if (blocked || !rows.some((row) => row.value === '100%')) continue;
+    const fit = fitLiteralAxis(ctx, rows, `${dim}-fill@${where}`);
+    if (!fit) continue;
+    const lbp = (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+    if (lbp.some((entry) => entry.prop !== fit.axis.propName && Object.values(entry.map).some((value) => dim in value))) continue;
+    const entry = lbp.find((item) => item.prop === fit.axis.propName) ?? { prop: fit.axis.propName, map: {} };
+    const stretched: string[] = [];
+    for (const value of fit.axis.values) {
+      if (fit.byValue.get(value) !== '100%') continue;
+      const key = axisValue(fit.axis, value);
+      if (entry.map[key]?.[dim] !== undefined) continue;
+      (entry.map[key] ??= {})[dim] = '100%';
+      stretched.push(key);
+    }
+    if (stretched.length === 0) continue;
+    if (!lbp.includes(entry)) lbp.push(entry);
+    part.literalsByProp = lbp;
+    ctx.notes.push(`${where}: FILL-${dim} under a parent whose direction changes by variant — carried as ${dim}: 100% through literalsByProp on \`${fit.axis.propName}\` (${stretched.join(', ')}) where that parent has a definite ${dim}`);
+  }
+}
+
 /** PER-VARIANT accounting for the cross-axis FILL under a parent whose
  *  direction differs by variant (canvas conformance layout-fill-height-
  *  parent-mode-by-variant; Phase 2 exam: Card:Variant=Inline/Container/Image
@@ -8476,6 +8892,7 @@ function nameCrossAxisFillByVariant(
     if (o.node[fillField] !== true) continue;
     if (dim === 'width' ? everyWidth : everyHeight) continue; // crossAxisFillByProp's plane
     if (o.node.bound?.[dim] !== undefined || tokens?.[dim] !== undefined) continue; // a carrier exists
+    if (crossAxisLiteralClaims(part, ctx, o.variant, dim)) continue;
     const definite = parentModes.crossDefiniteByVariant?.get(o.variant) === true;
     facts.push(
       `${o.variant}: FILL-${dim} under a ${mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent that ${definite ? `has a DEFINITE ${dim}` : `HUGS its ${dim}`}`,
@@ -9336,7 +9753,16 @@ const ALIGN_LITERAL: Record<string, string> = {
 /** Attach whichever spelling the split resolved to (absent = no-op). */
 function applyLayoutSplit(holder: Record<string, unknown>, split: LayoutSplit | undefined): void {
   if (!split) return;
-  if (split.kind === 'byCombination') { holder.layoutByCombination = split.table; return; }
+  if (split.kind === 'byCombination') {
+    holder.layoutByCombination = split.table;
+    const rows = (split.table as {rows?: Array<{layout?: Record<string, unknown>}>}).rows ?? [];
+    const flexChannels = rows.some(row => row.layout && ['direction','justify','align','wrap'].some(key => key in row.layout!));
+    const layout = holder.layout as {display?: string} | undefined;
+    // Combination rows override flex channels. They still need a flex base;
+    // a missing layout object is block in CSS and the library validator refuses it.
+    if (flexChannels && !layout) holder.layout = {display:'flex'};
+    return;
+  }
   if (split.kind === 'byProp') { holder.layoutByProp = split.byProp; return; }
   const existing = (holder.stylesWhen as Array<{ prop: string; styles: Record<string, string> }> | undefined) ?? [];
   holder.stylesWhen = [...existing, ...split.stylesWhen];
@@ -10172,7 +10598,14 @@ function threadInstanceProps(
         }
       }
       if (!pure || byValue.size <= 1) continue;
-      if ((booleanChild || booleanParent) && (byValue.size !== a.values.length || !a.values.every(value => byValue.has(value)))) continue;
+      const missingAreAbsent = a.values.every(value => byValue.has(value) ||
+        !perOccurrence.some(o => axisValuesOf(o.variant)[a.property] === value));
+      if ((booleanChild || booleanParent) && (byValue.size !== a.values.length || !a.values.every(value => byValue.has(value)))) {
+        // The instance is not drawn on the missing axis values, so those
+        // values are not a captured false. Keep the lookup for the values
+        // that are drawn.
+        if (!(booleanChild && !booleanParent && missingAreAbsent)) continue;
+      }
       const map: Record<string, string> = {};
       for (const value of a.values) {
         const hit = byValue.get(value);
@@ -11378,6 +11811,35 @@ function directDrawingChild(node: DumpNode, childId: string, ctx: Ctx) {
   return {child, anchor, path: paths[0], viewport: paths[0].shape!.kind === 'stroked-path' ? paths[0].shape!.strokePath!.viewport : paths[0].shape!.parentViewport!};
 }
 
+/** A stroked icon paints `vector-effect: non-scaling-stroke`, so a smaller
+ * instance keeps the main's pixel weight unless the declared stroke-width
+ * override is scaled with the box. The weight comes from this child's own
+ * minted token, never from another family's corpus. */
+function scaledNonScalingStroke(node: DumpNode, childId: string, observed: number, main: number, ctx: Ctx): number | undefined {
+  if (!(observed > 0) || !(main > 0) || observed === main) return undefined;
+  const drawing = directDrawingChild(node, childId, ctx);
+  const strokeRef = drawing?.child.anatomy.root.tokens?.['stroke-width'];
+  if (!drawing || typeof strokeRef !== 'string' || !strokeRef.startsWith('{') || !strokeRef.endsWith('}') ||
+      !drawing.child.anatomy.root.overridable?.includes('stroke-width') ||
+      drawing.path.literals?.['border-width'] !== 'inherit') return undefined;
+  const context = ctx.childIntrinsicContexts?.get(drawing.child.id);
+  const anchor = drawing.anchor;
+  if (!context || context.contractRevision !== revisionOf(drawing.child) || context.sourceFileKey !== ctx.fileKey ||
+      context.sourceFileKey !== anchor.fileKey || context.sourceKey !== anchor.componentSetKey ||
+      context.sourceNodeId !== anchor.nodeId) return undefined;
+  const parsed = /^(-?\d+(?:\.\d+)?)px$/.exec(String(context.values[strokeRef.slice(1, -1)] ?? '').trim());
+  const weight = parsed ? Number(parsed[1]) : undefined;
+  return weight !== undefined && weight > 0 ? weight * observed / main : undefined;
+}
+
+function carryScaledInstanceStroke(m: Merged, target: Record<string, string>, childId: string, sizes: Array<{ observed: number; main: number } | undefined>, ctx: Ctx, where: string) {
+  if (!ctx.mint || !sizes.length || sizes.some(size => !size)) return;
+  const weights = m.occ.map((o, i) => scaledNonScalingStroke(o.node, childId, sizes[i]!.observed, sizes[i]!.main, ctx));
+  if (!weights.every((weight): weight is number => weight !== undefined)) return;
+  mintObservation(ctx, target, where, 'stroke-width', 'px', m.occ.map((o, i) => ({ variant: o.variant, value: weights[i]! })));
+  ctx.notes.push(`${where}: non-scaling stroke scaled with the instance box`);
+}
+
 /** Provisional drawing shared only after the complete identity census agrees.
  * Paint remains a usage fact and is never taken from the first host. */
 function observedVectorDrawing(node: DumpNode, ctx: Ctx) {
@@ -11713,9 +12175,17 @@ function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx, allowInsid
   const emptyStroke = !!h?.emptyStrokeTarget && !!h.solidFillTarget && !h.stroke &&
     !!node.nodeId && h.emptyStrokeTarget.instanceId === node.nodeId &&
     canonicalJson(h.emptyStrokeTarget) === canonicalJson(h.solidFillTarget);
+  // A stroked drawing lists `fills` when the host clears the fill, or when
+  // the fill is the same solid as the stroke. A different fill is a second
+  // ink and still refuses here.
+  const sameSolid = !!h?.fill?.hex && !!h.stroke?.hex && h.fill.hex.toLowerCase() === h.stroke.hex.toLowerCase() && (h.fill.alpha ?? 1) === (h.stroke.alpha ?? 1) && !h.sourceNormalFillComposition;
+  // boundVariables records that the stroke was variable-bound. The resolved
+  // hex is the paint; the unresolved name is not a second ink.
+  const strokedFieldsOk = !!h && h.fields.includes('strokes') && h.fields.every(f =>
+    f === 'strokes' || f === 'strokeWeight' || f === 'boundVariables' || f === 'name' || (f === 'fills' && (!h.fill || sameSolid)));
   if (!d || !d.child.anatomy.root.overridable?.includes('color') ||
       d.path.literals?.[stroked ? 'border-color' : 'background-color'] !== 'currentColor' ||
-      !h || (stroked ? h.fields.some(f => !['strokes','strokeWeight'].includes(f)) || !h.fields.includes('strokes') : !directFilledPaintFields(h.fields,!!boundInk,emptyStroke) && !(allowInsideStroke && directInstanceInsideStroke(node,childId,ctx))) || !paint?.hex || !target ||
+      !h || (stroked ? !strokedFieldsOk : !directFilledPaintFields(h.fields,!!boundInk,emptyStroke) && !(allowInsideStroke && directInstanceInsideStroke(node,childId,ctx))) || !paint?.hex || !target ||
       target.componentId !== d.anchor.nodeId || target.instancePath.length !== 0 ||
       JSON.stringify(target.childPath) !== '[0]') return undefined;
   return paint;
@@ -11724,8 +12194,12 @@ function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx, allowInsid
 function directInstanceStrokeWidth(node: DumpNode, childId: string, ctx: Ctx) {
   const d = directDrawingChild(node, childId, ctx), h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
   if (!d || d.path.shape?.kind !== 'stroked-path' || !d.child.anatomy.root.overridable?.includes('stroke-width') ||
-      d.path.literals?.['border-width'] !== 'inherit' || !directInstanceInk(node, childId, ctx) ||
+      d.path.literals?.['border-width'] !== 'inherit' ||
       !h?.fields.includes('strokeWeight') || !Number.isFinite(h.strokeWeight) || h.strokeWeight! <= 0) return undefined;
+  // Weight alone is the host's stroke. A color override still has to qualify
+  // before its weight is trusted; an empty fills field is not a second ink.
+  const weightOnly = h.fields.every(f => f === 'strokeWeight' || (f === 'fills' && !h.fill && !h.sourceNormalFillComposition));
+  if (!weightOnly && !directInstanceInk(node, childId, ctx)) return undefined;
   return h.strokeWeight;
 }
 
@@ -11912,6 +12386,15 @@ function carrySlotDefaultDrawingInk(m: Merged, part: Record<string,unknown>, slo
   if (!ctx.mint || !slot.renderDefault || part.parts || items?.length !== 1) return;
   const item=items[0], paints=m.occ.map(o=>directInstanceInk(o.node,item.id,ctx,true));
   if (!paints.every(Boolean)) {
+    const weights=m.occ.map(o=>directInstanceStrokeWidth(o.node,item.id,ctx));
+    if (weights.length && weights.every(w=>w!==undefined)) {
+      const component:Record<string,unknown>={...item}, target:Record<string,string>={};
+      mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
+      ctx.mint.refOverrides.push({component,target});
+      part.parts={[partKey('defaultContent',ctx,`${where}/defaultContent`,selfKey)]:{component}};
+      ctx.notes.push(`${where}: identity-qualified omitted-slot stroke weights carried without a color override`);
+      return;
+    }
     const component:Record<string,unknown>={...item};
     const exact=m.occ.map((o,i)=>{
       const drawing=directDrawingChild(o.node,item.id,ctx),h=o.node.hostOverrides?.length===1?o.node.hostOverrides[0]:undefined,t=h?.solidFillTarget;
@@ -11929,6 +12412,11 @@ function carrySlotDefaultDrawingInk(m: Merged, part: Record<string,unknown>, slo
   }
   const component:Record<string,unknown>={...item}, target:Record<string,string>={};
   mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
+  const weights=m.occ.map(o=>directInstanceStrokeWidth(o.node,item.id,ctx));
+  if (weights.every(w=>w!==undefined)) {
+    mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
+    ctx.notes.push(`${where}: identity-qualified omitted-slot stroke weights carried without deriving them from the box resize`);
+  }
   const strokes=m.occ.map(o=>directInstanceInsideStroke(o.node,item.id,ctx));
   if(strokes.some(Boolean)){
     const props=ctx.mint.axes.map(a=>a.propName),byVariant=new Map(m.occ.map((o,i)=>[o.variant,strokes[i]??null]));
@@ -11959,6 +12447,7 @@ function carrySlotDefaultSize(m: Merged, part: Record<string,unknown>, slot: Rec
   const existing=ctx.mint.refOverrides.filter(row=>!row.property).find(row=>row.component===component);
   const target=existing?.target ?? {};
   mintObservation(ctx,target,where,'size','px',m.occ.map((o,index)=>({variant:o.variant,value:sizes[index]!.observed})));
+  carryScaledInstanceStroke(m, target, item.id, sizes, ctx, where);
   if (!existing) ctx.mint.refOverrides.push({component,target});
   parts[key]=fallback;part.parts=parts;
   ctx.notes.push(`${where}: omitted instance-swap default carries its identity-qualified observed square drawing size; explicit caller input and shared main are unchanged`);
@@ -11998,11 +12487,15 @@ function carryWrappedSlotDefault(wrapper: Merged, content: Merged, part: Record<
   const key = Object.keys(parts)[0] ?? partKey('defaultContent', ctx, `${where}/defaultContent`, selfKey);
   const fallback = parts[key] ?? {component: {...item}};
   if (gate) fallback.visibleWhen = gate;
-  if (sized && ctx.mint) {
+  // A bare swap carries its box through root dimensions and skips the size
+  // channel. The non-scaling stroke still has to follow that box.
+  const strokeScaled = ctx.mint !== undefined && sizes.length > 0 && sizes.every(Boolean) && sizes.some(s => s!.observed !== s!.main);
+  if ((sized || strokeScaled) && ctx.mint) {
     const component = fallback.component as Record<string, unknown>;
     const existing = ctx.mint.refOverrides.filter(row=>!row.property).find(r => r.component === component);
     const target = existing?.target ?? {};
-    mintObservation(ctx, target, `${where}/${content.name}`, 'size', 'px', content.occ.map((o, i) => ({variant: o.variant, value: sizes[i]!.observed})));
+    if (sized) mintObservation(ctx, target, `${where}/${content.name}`, 'size', 'px', content.occ.map((o, i) => ({variant: o.variant, value: sizes[i]!.observed})));
+    if (strokeScaled) carryScaledInstanceStroke(content, target, item.id, sizes, ctx, `${where}/${content.name}`);
     if (!existing) ctx.mint.refOverrides.push({component, target});
   }
   const observationsBeforeRoot = ctx.mint?.observations.length;
@@ -12164,6 +12657,119 @@ function fixedSwapTarget(swap: {id:string;key?:string},ctx:Ctx): {id:string;cont
   return {id,contract:parsed.data};
 }
 
+/** A swapped instance can carry a label that is not the child's sample.
+ *  Only a text binding that is the same on every occurrence is copied. */
+function uniformSelectedText(swaps: ReadonlyArray<{ observedInstances?: ReadonlyArray<{ selectedRoot?: { properties?: Record<string, string | boolean> } }> } | undefined>, target: Contract): Record<string, string> | undefined {
+  const rows = swaps.map(swap => swap?.observedInstances?.[0]?.selectedRoot?.properties);
+  if (!rows.length || rows.some(row => !row || typeof row !== 'object' || Array.isArray(row))) return;
+  const first = rows[0]!;
+  const extra: Record<string, string> = {};
+  for (const [property, value] of Object.entries(first)) {
+    if (typeof value !== 'string') continue;
+    const bare = property.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
+    const matches = target.props.filter(prop => prop.bindings.figma.property === bare && prop.bindings.figma.kind === 'TEXT' && prop.type === 'text');
+    if (matches.length !== 1 || rows.some(row => row![property] !== value) || matches[0].default === value) continue;
+    extra[matches[0].name] = value;
+  }
+  return extra;
+}
+
+/** "Show <slot>" false means that swap is not drawn, even when Figma still records it. */
+/** The selected main still paints this swap even when "Show <slot>" is false.
+ * Icon-sized buttons hide the boolean and keep the glyph. A text button's
+ * hidden icon stays hidden. */
+function selectedMainDrawsSlot(componentId: string, property: string, ctx: Ctx): boolean {
+  const rows = ctx.fixedSwapOwnerRoots?.get(componentId);
+  if (!rows || rows.length !== 1 || !rows[0]) return false;
+  return (rows[0].node.children ?? []).some((child) => !child.hidden && child.propRefs?.mainComponent === property);
+}
+
+function variantDrawsSwapSlot(node: DumpNode, property: string, ctx: Ctx): boolean {
+  const id = node.instanceGeometry?.componentId;
+  if (!id) return false;
+  return selectedMainDrawsSlot(id, property, ctx);
+}
+
+/** A show-slot boolean only reveals a child that variant actually has.
+ * Icon-sized buttons omit the opposite icon, so a true show boolean must
+ * not invent it. A hidden child bound to the boolean still follows that boolean. */
+function swapDrawsOnInstance(node: DumpNode, property: string, ctx: Ctx): boolean {
+  const id = node.instanceGeometry?.componentId;
+  const rows = id ? ctx.fixedSwapOwnerRoots?.get(id) : undefined;
+  if (!id || !rows || rows.length !== 1 || !rows[0]) return showSlotDraws(node, property);
+  const children: DumpNode[] = [];
+  const visit = (n: DumpNode) => {
+    if (n.propRefs?.mainComponent === property) children.push(n);
+    else for (const child of n.children ?? []) visit(child);
+  };
+  for (const child of rows[0].node.children ?? []) visit(child);
+  if (children.some((child) => !child.hidden)) return true;
+  if (children.some((child) => child.hidden && child.propRefs?.visible === `Show ${property}`)) return showSlotDraws(node, property);
+  return false;
+}
+
+/** The visible slot child is the box the swapped glyph is drawn in. */
+function selectedSlotGlyphSize(componentId: string, property: string, ctx: Ctx): number | undefined {
+  const rows = ctx.fixedSwapOwnerRoots?.get(componentId);
+  if (!rows || rows.length !== 1 || !rows[0]) return;
+  const children = (rows[0].node.children ?? []).filter((child) => !child.hidden && child.propRefs?.mainComponent === property);
+  if (children.length !== 1) return;
+  const box = children[0].instanceGeometry?.localSize ?? children[0].localGeometry?.localSize ?? children[0].bbox;
+  if (!box || box.width !== box.height || !(box.width > 0)) return;
+  return box.width;
+}
+
+/** A selected instance can name a glyph the variant still paints after its
+ * show-slot boolean is false. The value has to be the same qualified
+ * component on every occurrence, and it has to differ from the slot default.
+ * A hidden child stays hidden: caller content would bypass that presence. */
+function uniformSelectedGlyphs(
+  swaps: ReadonlyArray<{ id?: string; observedInstances?: ReadonlyArray<{ selectedRoot?: { properties?: Record<string, string | boolean> } }> } | undefined>,
+  target: Contract,
+  ctx: Ctx,
+): Array<{ slot: string; size?: number; component: Record<string, unknown> }> {
+  const rows = swaps.map(swap => swap?.observedInstances?.[0]?.selectedRoot?.properties);
+  if (!rows.length || rows.some(row => !row || typeof row !== 'object' || Array.isArray(row))) return [];
+  const componentId = swaps[0]?.id;
+  if (!componentId || swaps.some(swap => swap?.id !== componentId)) return [];
+  const first = rows[0]!;
+  const bareOf = (property: string) => property.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '');
+  const glyphs: Array<{ slot: string; component: Record<string, unknown> }> = [];
+  const seen = new Set<string>();
+  for (const [property, value] of Object.entries(first)) {
+    if (typeof value !== 'string') continue;
+    const bare = bareOf(property);
+    if (bare.startsWith('Show ') || seen.has(bare) || rows.some(row => row![property] !== value)) continue;
+    const showKey = Object.keys(first).find(key => bareOf(key) === `Show ${bare}`);
+    if (!showKey || rows.some(row => row![showKey] !== false) || !selectedMainDrawsSlot(componentId, bare, ctx)) continue;
+    const slots = slotsOf(target).filter(slot => slotFigmaProperty(slot.slot) === bare);
+    const names = [...new Set(slots.map(slot => slot.slot.name))];
+    if (names.length !== 1 || defaultSlotFamilyIssue(target, names[0])) continue;
+    if (slots.some(slot => slot.slot.acceptsMode === 'restrict' || slot.slot.required || slot.slot.min !== undefined || slot.slot.max !== undefined)) continue;
+    const defaults = slots[0].slot.defaultContent ?? [];
+    if (defaults.length !== 1 || !defaults[0]?.id) continue;
+    const owners = ctx.fixedSwapOwnerRoots?.get(value);
+    const key = owners?.length === 1 ? owners[0]?.node.componentKey : undefined;
+    if (!key) continue;
+    const resolved = fixedSwapTarget({ id: value, key }, ctx);
+    if (!resolved || resolved.id === defaults[0].id || resolved.id === target.id || resolved.id === ctx.selfId) continue;
+    seen.add(bare);
+    const size = resolved.contract.anatomy.root.overridable?.includes('size') ? selectedSlotGlyphSize(componentId, bare, ctx) : undefined;
+    glyphs.push({ slot: names[0], ...(size !== undefined ? { size } : {}), component: { id: resolved.id, ...(resolved.props ? { props: resolved.props } : {}) } });
+  }
+  return glyphs;
+}
+
+function showSlotDraws(node: DumpNode, property: string): boolean {
+  const props = node.componentProperties;
+  if (!props) return true;
+  for (const [name, value] of Object.entries(props)) {
+    if (name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') !== `Show ${property}`) continue;
+    return value !== false;
+  }
+  return true;
+}
+
 /** Fixed content belongs to the caller, not to the child's sample defaults.
  * Reuse the existing component + parts representation for a unique default
  * slot. Every occurrence must prove both identities; names alone cannot
@@ -12243,13 +12849,18 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     for(const [key,occ] of [...groups].sort(([a],[b])=>a.localeCompare(b))){
       const swap=occ[0].node.fixedSwaps![property],target=fixedSwapTarget(swap,ctx);
       if(!target||target.id===ctx.selfId||target.id===child.id)return decline('conditional selected content is unresolved or self-referential');
-      const present=new Set(occ.map(o=>o.variant));
+      const kept=occ.filter(o=>swapDrawsOnInstance(o.node, property, ctx));
+      if(!kept.length)continue;
+      if(kept.every(o=>!showSlotDraws(o.node, property)))
+        ctx.notes.push(`${where}: show-slot boolean is false, but the selected variant still draws "${property}" on ${kept.length} conditional occurrence(s)`);
+      const present=new Set(kept.map(o=>o.variant));
       const gate=inferPresenceByCombination(ctx.axes.map(a=>({prop:a.propName,values:a.values.map(v=>a.omitted?.unsetValue===v?null:axisValue(a,v))})),
         ctx.totalVariants.map(variant=>({values:ctx.axes.map(a=>{const raw=axisValuesOf(variant)[a.property];return a.omitted?.unsetValue===raw?null:axisValue(a,raw)}),present:present.has(variant)})),1,
         sparseFence?.drawn?.map(tuple=>ctx.axes.map(a=>a.omitted?.unsetValue===tuple[a.property]?null:axisValue(a,tuple[a.property]))));
       if(!gate)return decline('conditional selected content has no complete presence table');
-      branches.push({key,occ,gate});
+      branches.push({key,occ:kept,gate});
     }
+    if(!branches.length)return decline('selected content is hidden by its show-slot boolean');
     const parts:Record<string,unknown>={};
     for(const [index,branch] of branches.entries()){
       const branchPart:Record<string,unknown>={},branchComponent={...component};
@@ -12269,6 +12880,13 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     carried.add(property);ctx.notes.push(`${where}: conditional INSTANCE_SWAP "${property}" retained as ${branches.length} key-qualified caller branches with complete source presence`);
     return carried;
   }
+  if (!m.occ.some(o => swapDrawsOnInstance(o.node, property, ctx)))
+    return decline('selected content is hidden by its show-slot boolean');
+  if (m.occ.every(o => !showSlotDraws(o.node, property))) {
+    const drawnByVariant = swaps.every((swap, index) => swap && variantDrawsSwapSlot(m.occ[index].node, property, ctx));
+    if (!drawnByVariant) return decline('selected content is hidden by its show-slot boolean');
+    ctx.notes.push(`${where}: show-slot boolean is false, but the selected variant still draws "${property}" — the swap replaces that visible glyph`);
+  }
   const firstSwap = swaps[0];
   if (!firstSwap?.key || swaps.some(s => !s || s.id !== firstSwap.id || s.key !== firstSwap.key))
     return decline('selected content is missing, unkeyed or varies across occurrences');
@@ -12277,9 +12895,31 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     return decline('the selected content is unresolved, not exactly qualified or self-referential');
   const target = {data:resolved.contract};
   const selected: Record<string, unknown> = { id: targetId, ...(resolved.props?{props:resolved.props}:{}) };
+  const selectedText = uniformSelectedText(swaps, target.data);
+  if (selectedText && Object.keys(selectedText).length)
+    selected.props = { ...((selected.props as Record<string, string | boolean> | undefined) ?? {}), ...selectedText };
+  const glyphs = uniformSelectedGlyphs(swaps, target.data, ctx);
   // Part names are contract-wide identity: a second caller of the same child
   // allocates its own key through the shared rule instead of a fixed spelling.
-  part.parts = { [partKey('selectedContent', ctx, `${where}/selectedContent`, selfKey)]: { component: selected } };
+  const selectedKey = partKey('selectedContent', ctx, `${where}/selectedContent`, selfKey);
+  if (glyphs.length) {
+    const glyphParts: Record<string, unknown> = {};
+    const routes: Record<string, string[]> = {};
+    for (const glyph of glyphs) {
+      const key = partKey('selectedGlyph', ctx, `${where}/selectedGlyph/${glyph.slot}`, selfKey);
+      if (glyph.size !== undefined && ctx.mint) {
+        const overrides: Record<string, string> = {};
+        mintObservation(ctx, overrides, `${where}.selectedGlyph.${glyph.slot}`, 'size', 'px',
+          m.occ.map(occurrence => ({ variant: occurrence.variant, value: glyph.size! })));
+        ctx.mint.refOverrides.push({ component: glyph.component, target: overrides });
+      }
+      glyphParts[key] = { component: glyph.component };
+      routes[glyph.slot] = [key];
+    }
+    selected.contentSlots = routes;
+    part.parts = { [selectedKey]: { component: selected, parts: glyphParts } };
+    ctx.notes.push(`${where}: show-slot boolean is false, but the selected variant still draws ${glyphs.map(glyph => glyph.slot).join(', ')} — the captured glyph replaces that visible slot`);
+  } else part.parts = { [selectedKey]: { component: selected } };
   const observations = swaps.map(s => s?.observedInstances);
   const sizes = observations.map(rows => rows?.length === 1 ? rows[0] : undefined);
   // A missing drawing is not a missing measurement when the child's own
@@ -12397,6 +13037,46 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
           Array.isArray(observed.path)&&observed.path.length>0&&observed.path.length<=8&&observed.path.every(index=>Number.isSafeInteger(index)&&index>=0);
       });
       queuePartialDrawingInk(m,selected,rows,inherited,ctx,`${where}.selectedContent`,selfKey);
+    }
+  }
+  const stroked = inkParts.length === 1 && inkParts[0].shape?.kind === 'stroked-path' ? inkParts[0] : undefined;
+  if (ctx.mint && stroked?.literals?.['border-color'] === 'currentColor' && stroked.literals?.['border-width'] === 'inherit' &&
+      target.data.anatomy.root.overridable?.includes('color') && target.data.anatomy.root.overridable?.includes('stroke-width')) {
+    const paints = m.occ.map((o, i) => {
+      const observed = sizes[i];
+      const hits = (o.node.hostOverrides ?? []).filter(h => {
+        const strokeTarget = h.solidStrokeTarget;
+        return !!observed && !!strokeTarget && !!h.stroke?.hex && h.fields.includes('strokes') &&
+          h.fields.every(field => field === 'strokes' || field === 'boundVariables' || field === 'strokeWeight') &&
+          strokeTarget.componentId === firstSwap.id && strokeTarget.instanceId === observed.nodeId &&
+          JSON.stringify(strokeTarget.instancePath) === JSON.stringify(observed.path) &&
+          JSON.stringify(strokeTarget.childPath) === '[0]';
+      });
+      return hits.length === 1 ? hits[0]!.stroke : undefined;
+    });
+    const context = ctx.childIntrinsicContexts?.get(targetId!);
+    const anchor = target.data.bindings.figma.anchors;
+    const strokeRef = target.data.anatomy.root.tokens?.['stroke-width'];
+    const widthRef = target.data.anatomy.root.tokens?.width;
+    const strokePath = typeof strokeRef === 'string' && strokeRef.startsWith('{') && strokeRef.endsWith('}') ? strokeRef.slice(1, -1) : undefined;
+    const widthPath = typeof widthRef === 'string' && widthRef.startsWith('{') && widthRef.endsWith('}') ? widthRef.slice(1, -1) : undefined;
+    const qualifiedContext = context && context.contractRevision === revisionOf(target.data) && context.sourceFileKey === ctx.fileKey &&
+      context.sourceFileKey === anchor.fileKey && context.sourceKey === anchor.componentSetKey && context.sourceNodeId === anchor.nodeId;
+    const mainStroke = qualifiedContext && strokePath ? /^(-?\d+(?:\.\d+)?)px$/.exec(String(context.values[strokePath] ?? '').trim()) : undefined;
+    const mainWidth = qualifiedContext && widthPath ? /^(-?\d+(?:\.\d+)?)px$/.exec(String(context.values[widthPath] ?? '').trim()) : undefined;
+    const weights = sizes.map(row => {
+      if (!row?.size || !mainStroke || !mainWidth) return undefined;
+      const stroke = Number(mainStroke[1]), width = Number(mainWidth[1]);
+      return stroke > 0 && width > 0 && row.size.width !== width ? stroke * row.size.width / width : undefined;
+    });
+    if (paints.every(Boolean) || weights.every(weight => weight !== undefined)) {
+      const prior = ctx.mint.refOverrides.filter(row => !row.property).find(row => row.component === selected);
+      const ink: Record<string, string> = prior?.target ?? {};
+      if (paints.every(Boolean)) mintObservation(ctx, ink, `${where}.selectedContent`, 'color', 'color', m.occ.map((o, i) => ({ variant: o.variant, value: paintCssHex(paints[i]!) })));
+      if (weights.every(weight => weight !== undefined)) mintObservation(ctx, ink, `${where}.selectedContent`, 'stroke-width', 'px', m.occ.map((o, i) => ({ variant: o.variant, value: weights[i]! })));
+      if (!prior && Object.keys(ink).length) ctx.mint.refOverrides.push({ component: selected, target: ink });
+      if (paints.every(Boolean)) ctx.notes = ctx.notes.filter(note => !note.startsWith(`${where}: host override(s)`));
+      ctx.notes.push(`${where}: identity-qualified caller stroke carried through the child's declared ink; the non-scaling weight follows the captured box`);
     }
   }
   if (contentSlot !== 'children') component.contentSlot = contentSlot;
@@ -13381,7 +14061,26 @@ function buildPart(
     const axis = presence && ctx.axes.find(a => a.propName === presence.prop && !isBooleanAxis(a));
     if (!presence || presence.prop === bindingName) applyVisibleBinding(part, visibilityRef, ctx, where, m);
     else if (axis && presence.equals !== undefined && typeof presence.equals !== 'boolean' && part.component) {
-      if ((part.absoluteGeometry || part.absoluteGeometryByCombination) && !part.presenceByCombination) {
+      const definitionDefault = ctx.boolDefaults?.[visibilityRef];
+      const unboundVisible = m.occ.some(o => o.node.propRefs?.visible !== visibilityRef && o.node.hidden !== true);
+      const hostable = !part.layout && !part.layoutByProp && !part.parts && !part.repeat && !part.placement && !part.overlay && !part.mask &&
+        !part.absolutePlacement && !part.absolutePlacementByCombination && !m.occ.some(o => absBoxOf(o.node));
+      // A boolean that defaults off must not hide an occurrence the file draws
+      // with no visibility binding. Bound occurrences stay on the boolean gate
+      // only when they were actually hidden; a drawn unbound occurrence is
+      // resting content and is not listed under that boolean.
+      if (definitionDefault === false && unboundVisible && hostable) {
+        delete part.visibleWhen;
+        const shown = new Set(axis.values.filter(value => m.occ.some(o =>
+          axisValuesOf(o.variant)[axis.property] === value &&
+          o.node.propRefs?.visible !== visibilityRef && o.node.hidden !== true)).map(value => axisValue(axis, value)));
+        const content = partKey('presenceContent', ctx, `${where}/presenceContent`, selfKey);
+        part = {element: 'div', layout: {display: 'flex', direction: 'row'},
+          presenceByCombination: {props: [presence.prop], rows: axis.values.map(value => ({
+            values: [axisValue(axis, value)], present: shown.has(axisValue(axis, value)),
+          }))}, parts: {[content]: part}};
+        ctx.notes.push(`${where}: a drawn occurrence with no "${visibilityRef}" binding stays visible when that boolean defaults off; hidden bound occurrences are not resting content`);
+      } else if ((part.absoluteGeometry || part.absoluteGeometryByCombination) && !part.presenceByCombination) {
         const allowed = Array.isArray(presence.equals) ? presence.equals : [presence.equals];
         part.presenceByCombination = {props:[presence.prop],rows:axis.values.map(value=>({
           values:[axisValue(axis,value)],present:allowed.includes(axisValue(axis,value)),
@@ -13704,7 +14403,10 @@ function buildPartFromEvidence(
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where, tokens);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
+    carryTextVerticalAlign(m, part, ctx, where);
+    carryHeightTextRaster(m, part, ctx, where);
     carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
+    carryTextLineFeeds(m, part, ctx, where);
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     nameEffectProvenance(m, ctx, where); // dump v1.31
@@ -13919,7 +14621,7 @@ function buildPartFromEvidence(
     crossAxisFillByProp(m, parentMode, part, ctx, where);
     carryCrossAxisFill(m, parentMode, part, ctx, where);
     invertNodeOpacity(m, part, slotTokens, ctx, where);
-    invertNodeEffects(m, slotTokens, ctx, where);
+    invertNodeEffects(m, slotTokens, ctx, where, part);
     nameFixedChildGeometry(m, ctx, where, { tokens: slotTokens, part }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     attachTokens(ctx, part, slotTokens);
     // Same visibility conventions as every other slot path: the "Show X"
@@ -13928,7 +14630,11 @@ function buildPartFromEvidence(
     const slotVisibleRef = unifiedPropRef(m, 'visible', ctx, where);
     const slotOptional = slotVisibleRef === `Show ${m.name}`;
     if (slotOptional) part.optional = true;
-    else if (slotVisibleRef) applyVisibleBinding(part, slotVisibleRef, ctx, where, m);
+    // "Show <slot>" marks the slot optional. When that boolean defaults to
+    // false and every captured instance is hidden, the omitted caller must
+    // not paint the design-time icon. The boolean still reveals it.
+    if (slotVisibleRef && (!slotOptional || (ctx.boolDefaults?.[slotVisibleRef] === false && m.occ.every(o => o.node.hidden === true))))
+      applyVisibleBinding(part, slotVisibleRef, ctx, where, m);
     ctx.notes.push(
       `${where}: NATIVE Figma slot node "${m.name}" (Schema 2025) — proposed as slot part; regeneration reproduces a native slot, never an INSTANCE_SWAP placeholder`,
     );
@@ -14010,7 +14716,22 @@ function buildPartFromEvidence(
       const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
       const optional = visibleRef === `Show ${swapProperty}`;
       if (optional) part.optional = true;
-      else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
+      // "Show <slot>" marks the slot optional. When that boolean defaults to
+      // false and every captured instance is hidden, the omitted caller must
+      // not paint the design-time icon. The boolean still reveals it.
+      // Omitting a Show-slot hides nothing once the slot paints its own default.
+      // A boolean that defaults on is then the only hide switch, so it stays
+      // a real prop. A default-off slot keeps the optional-slot convention.
+      const hidesShownDefault = optional && carriesDefault && ctx.boolDefaults?.[visibleRef] === true;
+      if (visibleRef && (!optional || (ctx.boolDefaults?.[visibleRef] === false && m.occ.every(o => o.node.hidden === true)) || hidesShownDefault))
+        applyVisibleBinding(part, visibleRef, ctx, where, m);
+      // A Show-slot boolean that is on in some variants and off in others is
+      // still the captured hidden pattern. Keep it off the prop list. The
+      // table gates the sample icon; content the caller passes still renders.
+      else if (optional && ctx.hiddenCaptured && m.occ.some(o => o.node.hidden === true) && m.occ.some(o => o.node.hidden !== true)) {
+        const fallbacks = Object.values((part.parts ?? {}) as Record<string, Record<string, unknown>>);
+        invertHiddenVisibility(m, carriesDefault && fallbacks.length === 1 ? fallbacks[0] : part, ctx, where);
+      }
       ctx.slots.push({ part, variants:m.occ.map(o=>o.variant), property: swapProperty, optional: optional || visibleRef !== undefined });
       if (visibleWhen && !part.visibleWhen && !carriesDefault) part.visibleWhen = visibleWhen;
       // A direct swap has a real usage box even though its contents are
@@ -14026,8 +14747,37 @@ function buildPartFromEvidence(
       if (!refusal) {
         Object.assign(part, capturedHost);
         ctx.notes.push(`${where}: direct swap slot retains its default and replacement API inside an explicit host with captured absolute geometry; SCALE constraints and measured parent basis are preserved`);
-      } else carryInstanceSlotSizing(m, part, slotTokens, ctx, where);
+      } else {
+        carryInstanceSlotSizing(m, part, slotTokens, ctx, where);
+        if (m.occ.some(o => absBoxOf(o.node))) carryAbsPlacement(m, part, slotTokens, ctx, where, { size: false });
+      }
       attachTokens(ctx, part, slotTokens);
+      // A swap host can be rotated while its slot stays in flow. A square
+      // spun about its center is a transform on that host; the child contract
+      // still owns the unrotated glyph.
+      const spins = m.occ.map(o => inPlaceSpinDegrees(o.node));
+      const turned = m.occ.some(o => {
+        const linear = o.node.instanceGeometry?.transform;
+        return !!linear && (linear[0][0] !== 1 || linear[0][1] !== 0 || linear[1][0] !== 0 || linear[1][1] !== 1);
+      });
+      if (turned && spins.some(spin => spin === undefined)) {
+        ctx.notes.push(`${where}: instance rotation is not an in-place spin of a square — NAMED, not proposed`);
+      } else if (spins.every(spin => spin !== undefined) && spins.some(spin => spin !== 0)) {
+        const fit = fitLiteralAxis(ctx, m.occ.map((o, index) => ({ variant: o.variant, value: String(spins[index]) })), `spin@${where}`);
+        const occupied = part.stylesWhen !== undefined ||
+          (part.declared as Record<string, string> | undefined)?.transform !== undefined ||
+          (part.literals as Record<string, string> | undefined)?.transform !== undefined;
+        if (!fit) ctx.notes.push(`${where}: in-place instance spin does not follow one enum axis — NAMED, not proposed`);
+        else if (occupied) ctx.notes.push(`${where}: in-place instance spin competes with an existing transform — NAMED, not proposed`);
+        else {
+          part.stylesWhen = fit.axis.values.filter(value => fit.byValue.get(value) !== '0').map(value => ({
+            prop: fit.axis.propName,
+            equals: axisValue(fit.axis, value),
+            styles: { transform: `rotate(${fit.byValue.get(value)}deg)` },
+          }));
+          ctx.notes.push(`${where}: in-place rigid spin carried as transform on ${fit.axis.propName}`);
+        }
+      }
       return part;
     }
     const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
@@ -14469,6 +15219,7 @@ function buildPartFromEvidence(
         const target: Record<string,string> = {};
         mintObservation(ctx,target,where,'size','px',m.occ.map((o,i)=>({variant:o.variant,value:sizes[i]!.observed})));
         ctx.mint.refOverrides.push({component,target});
+        carryScaledInstanceStroke(m, target, id, sizes, ctx, where);
         ctx.notes.push(`${where}: identity-qualified direct instance of a SCALE/SCALE drawing carries its observed square box (${[...new Set(sizes.map(s=>s!.observed))].join('/')}px; main ${sizes[0]!.main}px) through the child's declared size channel`);
       } else if (m.occ.some(o=>directDrawingChild(o.node,id,ctx)) && m.occ.some(o=>o.node.bbox && directDrawingChild(o.node,id,ctx) &&
           o.node.bbox.width !== directDrawingChild(o.node,id,ctx)!.viewport.width)) {
@@ -14485,10 +15236,33 @@ function buildPartFromEvidence(
         if (!prior) ctx.mint.refOverrides.push({component,target});
         ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
         ctx.notes.push(`${where}: identity-qualified direct-instance ink carried through the child's declared color override`);
+        const fillsMatchStroke = m.occ.every(o => {
+          const host = o.node.hostOverrides?.length === 1 ? o.node.hostOverrides[0] : undefined;
+          return !!host?.fill?.hex && !!host.stroke?.hex && host.fill.hex.toLowerCase() === host.stroke.hex.toLowerCase() && (host.fill.alpha ?? 1) === (host.stroke.alpha ?? 1);
+        });
+        if (fillsMatchStroke) {
+          ctx.mint.observations.push({
+            nodePath: where, part: partPathOf(where), cssProperty: 'fill', kind: 'color', booleanAxes: true, compoundRefs: true, target,
+            source: `${where}|instance fill`,
+            occurrences: m.occ.map(o => ({ variant: o.variant, value: paintCssHex(o.node.hostOverrides![0].fill!), axisValues: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {} })),
+          });
+          ctx.notes.push(`${where}: host fill matches the stroke on every occurrence, so the stroked drawing fills with that ink`);
+        }
         const weights = m.occ.map(o=>directInstanceStrokeWidth(o.node,inkId,ctx));
         if (weights.every(w=>w!==undefined)) {
           mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
           ctx.notes.push(`${where}: identity-qualified direct-instance stroke weights carried without deriving them from the box resize`);
+        } else if (m.occ.some(o=>o.node.hostOverrides?.some(h=>h.fields.includes('strokeWeight')))) {
+          ctx.notes.push(`${where}: direct-instance-stroke-weight-not-carried — every observed owner and uniform weight must be qualified; review`);
+        }
+      } else {
+        const weights = m.occ.map(o=>directInstanceStrokeWidth(o.node,inkId,ctx));
+        if (weights.length && weights.every(w=>w!==undefined)) {
+          const prior = ctx.mint.refOverrides.filter(row=>!row.property).find(r=>r.component===component);
+          const target = prior?.target ?? {};
+          mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
+          if (!prior) ctx.mint.refOverrides.push({component,target});
+          ctx.notes.push(`${where}: identity-qualified direct-instance stroke weights carried without a color override`);
         } else if (m.occ.some(o=>o.node.hostOverrides?.some(h=>h.fields.includes('strokeWeight')))) {
           ctx.notes.push(`${where}: direct-instance-stroke-weight-not-carried — every observed owner and uniform weight must be qualified; review`);
         }
@@ -14628,7 +15402,7 @@ function buildPartFromEvidence(
       liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where);
     }
     invertNodeOpacity(m, part, tokens, ctx, where);
-    invertNodeEffects(m, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where, part);
     attachTokens(ctx, part, tokens);
     return part;
   }
@@ -14641,7 +15415,7 @@ function buildPartFromEvidence(
     if (layout) part.layout = layout;
     applyLayoutSplit(part, invertLayoutByProp(m, ctx, where, part));
     invertNodeOpacity(m, part, tokens, ctx, where);
-    invertNodeEffects(m, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where, part);
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
     nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt
@@ -14669,7 +15443,7 @@ function buildPartFromEvidence(
   if (isWrapArtifact(m)) {
     invertNodeOpacity(m, part, tokens, ctx, where);
     carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
-    invertNodeEffects(m, tokens, ctx, where);
+    invertNodeEffects(m, tokens, ctx, where, part);
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true, visibleWhen: geometryVisibility });
     carryCrossAxisFill(m, parentMode, part, ctx, where); // dump v1.31
     carryAspectRatio(m, part, ctx, where); // dump v1.31
@@ -14692,7 +15466,7 @@ function buildPartFromEvidence(
   carryAspectRatio(m, part, ctx, where); // dump v1.31 targetAspectRatio → declared aspect-ratio
   invertNodeOpacity(m, part, tokens, ctx, where);
   carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
-  invertNodeEffects(m, tokens, ctx, where);
+  invertNodeEffects(m, tokens, ctx, where, part);
   // Overlay-flattened class: a FRAME/GROUP with a captured abs box becomes a
   // positioned box (position: absolute + minted offsets/size).
   carryAbsPlacement(m, part, tokens, ctx, where, { size: true, visibleWhen: geometryVisibility });
@@ -15964,8 +16738,17 @@ const paintKey = (p?: { var?: string; hex?: string; alpha?: number }): string =>
  *  whole hover plane AND (through UNBOUND) its base background. TEXT fills
  *  keep the undefined reading (an ink-less text node is a capture gap). */
 const TRANSPARENT_FILL: { hex: string; alpha: number } = { hex: '000000', alpha: 0 };
-const boxFillOf = (n: DumpNode): { var?: string; hex?: string; alpha?: number } | undefined =>
-  n.type === 'TEXT' ? undefined : (n.fill ?? TRANSPARENT_FILL);
+const boxFillOf = (n: DumpNode): { var?: string; hex?: string; alpha?: number } | undefined => {
+  if (n.type === 'TEXT') return undefined;
+  if (n.fill) return n.fill;
+  // A focus wrapper can hold the resting fill while the root records an empty
+  // fill. That is the same paint, not a transparent replacement.
+  if (n.sourceEmptyFill) {
+    const frame = (n.children ?? []).find((child) => child.type === 'FRAME' && child.fill?.hex);
+    if (frame?.fill) return frame.fill;
+  }
+  return TRANSPARENT_FILL;
+};
 
 /** Push a mint observation for a STATE override — same machinery as base
  *  observations (ONE mintTokens call dedupes/claims across both), with the
@@ -16024,6 +16807,71 @@ export interface PartStateTarget {
  *  no per-state base to deviate FROM, so every observed value is carried. */
 type StateByPropCollector = Record<string, Record<string, Record<string, string>>>;
 
+function componentMainsFromDump(dump: Record<string, unknown>): ReadonlyMap<string, DumpNode> {
+  const mains = new Map<string, DumpNode>();
+  for (const value of Object.values(dump)) {
+    if (!isDumpSet(value)) continue;
+    for (const variant of value.variants) {
+      if (variant.componentKey && !mains.has(variant.componentKey)) mains.set(variant.componentKey, variant);
+    }
+    if (value.type === 'COMPONENT' && value.key && value.variants[0] && !mains.has(value.key)) mains.set(value.key, value.variants[0]);
+  }
+  return mains;
+}
+
+/** An absolutely positioned focus instance often paints only its own fill.
+ * The visible outer pixel is the linked main's empty child with an OUTSIDE
+ * stroke. A captured stroke override replaces that color; a missing override
+ * color does not invent one. */
+function focusOutsetStroke(node: DumpNode, mains: Ctx['componentMainsByKey']): { weight: number; color: string } | undefined {
+  const main = node.type === 'INSTANCE' && node.instanceKey ? mains?.get(node.instanceKey) : undefined;
+  const children = (main?.children ?? []).filter((child) => child.hidden !== true);
+  if (children.length !== 1) return;
+  const child = children[0]!;
+  if (child.strokeAlign !== 'OUTSIDE' || !child.stroke?.hex || child.stroke.var !== undefined) return;
+  if (child.fill?.hex !== undefined && child.fill.alpha !== 0) return;
+  const override = (node.hostOverrides ?? []).find((row) => row.path === child.name);
+  if (override?.emptyStrokeTarget) return;
+  if (override?.fields.includes('strokes') && !override.stroke?.hex) return;
+  const stroke = override?.stroke?.hex ? override.stroke : child.stroke;
+  if (!stroke.hex || stroke.var !== undefined) return;
+  const weight = override?.strokeWeight ?? child.strokeWeight;
+  if (typeof weight !== 'number' || weight <= 0) return;
+  return { weight, color: paintCssHex({ hex: stroke.hex, alpha: (node.opacity ?? 1) * (stroke.alpha ?? 1) }) };
+}
+
+function sizingFixed(node: DumpNode, dim: 'width' | 'height'): boolean {
+  const layout = node.layout;
+  if (!layout) return true;
+  const alongPrimary = layout.mode === 'GRID' ? dim === 'width' : (layout.mode === 'HORIZONTAL') === (dim === 'width');
+  return (alongPrimary ? layout.primarySizing : layout.counterSizing) === 'FIXED';
+}
+
+/** Degrees of a rigid spin whose transformed box stays on the flow origin.
+ *  A square rotated about its center is `rotate(Ndeg)`. Anything translated,
+ *  reflected, or non-square is refused so a center rotation cannot move it. */
+function inPlaceSpinDegrees(node: DumpNode): number | undefined {
+  const geometry = node.instanceGeometry;
+  if (!geometry) return undefined;
+  const result = allocateInstanceAffine(geometry);
+  if ('issue' in result) return undefined;
+  const placed = result.allocation;
+  const box = placed.allocation;
+  const { localSize } = placed;
+  const [[a, c], [b, d]] = placed.normalizedTransform;
+  if ([box.left, box.top].some(value => Math.abs(value) > 0.5)) return undefined;
+  if (Math.abs(box.width - localSize.width) > 0.5 || Math.abs(box.height - localSize.height) > 0.5) return undefined;
+  if (Math.abs(localSize.width - localSize.height) > 0.5) return undefined;
+  let degrees = Math.atan2(b, a) * 180 / Math.PI;
+  if (degrees < 0) degrees += 360;
+  const whole = Math.round(degrees);
+  degrees = Math.abs(degrees - whole) < 0.05 ? whole % 360 : Math.round(degrees * 1000) / 1000;
+  const radians = degrees * Math.PI / 180;
+  const cos = Math.cos(radians), sin = Math.sin(radians);
+  if ([a - cos, b - sin, c - (-sin), d - cos].some(delta => Math.abs(delta) > 1e-3)) return undefined;
+  return degrees;
+}
+
 /** Diff ONE promoted state's (flattened) variants against the matching
  *  default-state variants and propose root `states` overrides: bound facts as
  *  (substituted) refs, raw literals as mint observations, everything the
@@ -16060,6 +16908,8 @@ function proposeStateDiffs(
   concurrentHoverByName?: ReadonlyMap<string, DumpNode>,
   /** Captured solid strokes that replace a per-side base with one width. */
   uniformStateStrokeStyles?: Set<string>,
+  /** A state's uniform text decoration line, declared on the root by the caller. */
+  stateTextDecorations?: Map<string, string>,
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -16228,6 +17078,88 @@ function proposeStateDiffs(
     }
   };
 
+  /** An outside stroke on a centered instance is a ring around that instance,
+   *  not around the root. The root outline is inset by half the leftover box. */
+  const centeredInstanceOutline = (rows: Array<{ variant: string; node: DumpNode }>): boolean => {
+    if (!ctx.mint || !rootByProp) return false;
+    if (!rows.every((row) => row.node.stroke?.hex && row.node.stroke.var === undefined &&
+        row.node.strokeAlign === 'OUTSIDE' && typeof row.node.strokeWeight === 'number' &&
+        row.node.strokeWeight > 0 && row.node.strokesIncludedInLayout !== true)) return false;
+    const weight = rows[0].node.strokeWeight!;
+    const color = rows[0].node.stroke!.hex!;
+    if (!rows.every((row) => row.node.strokeWeight === weight && row.node.stroke!.hex === color)) return false;
+    const placed = rows.map((row) => {
+      const root = occs.find((item) => item.variant === row.variant)?.node;
+      const box = row.node.bbox;
+      if (!root?.bbox || !box || root.layout?.primary !== 'CENTER' || root.layout.counter !== 'CENTER') return undefined;
+      if ((root.children ?? []).filter((child) => child.hidden !== true).length !== 1) return undefined;
+      const insetX = (root.bbox.width - box.width) / 2;
+      const insetY = (root.bbox.height - box.height) / 2;
+      if (!(insetX > 0) || Math.abs(insetX - insetY) > 0.5) return undefined;
+      return insetX;
+    });
+    if (placed.some((inset) => inset === undefined) || new Set(placed).size !== 1) return false;
+    const inset = placed[0]!;
+    for (const axis of ctx.axes.filter((candidate) => !isBooleanAxis(candidate))) {
+      const labels = rows.map((row) => axisValuesOf(row.variant)[axis.property]);
+      if (labels.some((label) => label === undefined) || new Set(labels).size !== 1) continue;
+      const scoped = ((rootByProp[axis.propName] ??= {})[axisValue(axis, labels[0]!)] ??= {});
+      mintStateObservation(ctx, scoped, state, 'outline-color', 'color',
+        rows.map((row) => ({ variant: row.variant, value: paintCssHex(row.node.stroke!) })),
+        `${where} (state ${state})|centered-outline`);
+      mintStateObservation(ctx, scoped, state, 'outline-width', 'px',
+        rows.map((row) => ({ variant: row.variant, value: weight })),
+        `${where} (state ${state})|centered-outline-width`);
+      mintStateObservation(ctx, scoped, state, 'outline-offset', 'px',
+        rows.map((row) => ({ variant: row.variant, value: -inset })),
+        `${where} (state ${state})|centered-outline-offset`);
+      ctx.notes.push(`${where}: outside stroke on a centered instance in state "${state}" carried as a root outline inset ${inset}px on ${labels[0]}`);
+      return true;
+    }
+    return false;
+  };
+
+  /** One INSIDE side that does not take layout space. Variants that draw it
+   *  share one inset rule; variants with no stroke stay untouched. An undrawn
+   *  axis value is not filled in. */
+  const insetSideRule = (): boolean => {
+    if (!ctx.mint || !rootByProp) return false;
+    const ruleOf = (node: DumpNode): string | undefined => {
+      if (node.stroke?.hex === undefined || node.stroke.var !== undefined || node.strokeWeights === undefined) return undefined;
+      if (node.strokeAlign !== 'INSIDE' || node.strokesIncludedInLayout !== false) return undefined;
+      if (STROKE_WEIGHT_BOUND_FIELDS.some((field) => node.bound?.[field] !== undefined)) return undefined;
+      const weights = STROKE_SIDE_CHANNELS.map(([, side]) => node.strokeWeights![side]);
+      if (weights.some((weight) => typeof weight !== 'number' || !Number.isFinite(weight) || weight < 0)) return undefined;
+      const drawn = weights.flatMap((weight, index) => weight > 0 ? [index] : []);
+      if (drawn.length !== 1) return undefined;
+      const index = drawn[0]!;
+      const amount = `${weights[index]}px`;
+      const offset = ['0px AMOUNT 0px 0px', '-AMOUNT 0px 0px 0px', '0px -AMOUNT 0px 0px', 'AMOUNT 0px 0px 0px'][index]!.replace('AMOUNT', amount);
+      return `inset ${offset} ${paintCssHex(node.stroke)}`;
+    };
+    if (!occs.some((row) => ruleOf(row.node) !== undefined)) return false;
+    if (occs.some((row) => ruleOf(row.node) === undefined && (row.node.stroke !== undefined || row.node.strokeWeights !== undefined))) return false;
+    for (const axis of ctx.axes.filter((candidate) => !isBooleanAxis(candidate))) {
+      const buckets = axis.values.map((value) => ({
+        value,
+        rows: occs.filter((row) => axisValuesOf(row.variant)[axis.property] === value),
+      })).filter((bucket) => bucket.rows.length > 0);
+      if (buckets.length === 0 || buckets.some((bucket) => new Set(bucket.rows.map((row) => ruleOf(row.node) ?? '')).size !== 1)) continue;
+      const painted = buckets.filter((bucket) => ruleOf(bucket.rows[0].node) !== undefined);
+      if (painted.length === 0) continue;
+      for (const bucket of painted) {
+        const shadow = ruleOf(bucket.rows[0].node)!;
+        const scoped = ((rootByProp[axis.propName] ??= {})[axisValue(axis, bucket.value)] ??= {});
+        mintStateObservation(ctx, scoped, state, 'box-shadow', 'shadow',
+          bucket.rows.map((row) => ({ variant: row.variant, value: shadow })),
+          `${where} (state ${state})|side-rule|${axis.propName}=${bucket.value}`);
+      }
+      ctx.notes.push(`${where}: state "${state}" draws one inside side that takes no layout space — carried as an inset rule on ${painted.map((bucket) => bucket.value).join(', ')}; variants with no stroke are unchanged`);
+      return true;
+    }
+    return false;
+  };
+
   paintChannel('background-color', 'fill', boxFillOf);
   paintChannel('border-color', 'stroke', (n) => n.stroke);
   // dump v1.34: where a state plane or its base draws PER-SIDE literal weights
@@ -16263,6 +17195,8 @@ function proposeStateDiffs(
           `${where} (state ${state})|strokeWeight`);
         uniformStateStrokeStyles.add(state);
         ctx.notes.push(`${where}: state "${state}" replaces captured per-side resting widths with a uniform ${occs[0].node.strokeWeight}px INSIDE stroke included in layout — carried as border-width with its solid border style`);
+      } else if (insetSideRule()) {
+        /* A single inside side, drawn on some variant values only, is an inset rule on those values. */
       } else {
         perSideWidthRefused = true;
         ctx.notes.push(
@@ -16273,7 +17207,11 @@ function proposeStateDiffs(
   } else {
     numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, [...STROKE_WEIGHT_BOUND_FIELDS]);
   }
-  numberChannel('border-radius', 'cornerRadius', 'px', (n) => n.cornerRadius, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
+  numberChannel('border-radius', 'cornerRadius', 'px', (n) => {
+    if (n.cornerRadius !== undefined) return n.cornerRadius;
+    const frame = (n.children ?? []).find((child) => child.type === 'FRAME' && child.cornerRadius !== undefined);
+    return frame?.cornerRadius;
+  }, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
   numberChannel('opacity', 'opacity', 'number', (n) => n.opacity, 1, ['opacity']);
 
   // Auto-layout padding is part of each interaction drawing, not just rest.
@@ -16282,14 +17220,22 @@ function proposeStateDiffs(
     [0,'padding-top','paddingTop'], [1,'padding-right','paddingRight'],
     [2,'padding-bottom','paddingBottom'], [3,'padding-left','paddingLeft'],
   ] as const) {
-    const padding = (node: DumpNode) => node.layout?.padding[index];
+    const padding = (node: DumpNode, base?: DumpNode) => {
+      const own = node.layout?.padding[index];
+      // A focus wrapper can hold the resting padding while the root records 0.
+      if (base?.layout && own === 0) {
+        const held = (node.children ?? []).find((child) => child.type === 'FRAME' && child.layout?.padding[index] === base.layout!.padding[index]);
+        if (held) return base.layout.padding[index];
+      }
+      return own;
+    };
     const resetHover = state === 'active' && ctx.axes.length <= 1 && concurrentHoverByName &&
       occs.every(o => concurrentHoverByName.has(o.variant)) &&
       occs.some(o => padding(o.node) !== padding(concurrentHoverByName.get(o.variant)!));
-    if (!resetHover && !occs.some(o => padding(o.node) !== padding(o.base))) continue;
+    if (!resetHover && !occs.some(o => padding(o.node, o.base) !== padding(o.base))) continue;
     if (occs.some(o => !o.node.layout || !o.base.layout ||
         o.node.layout.mode === 'GRID' || o.base.layout.mode === 'GRID' ||
-        !Number.isFinite(padding(o.node)) || !Number.isFinite(padding(o.base)))) {
+        !Number.isFinite(padding(o.node, o.base)) || !Number.isFinite(padding(o.base)))) {
       ctx.notes.push(`${where}: ${channel} in state "${state}" has incomplete flex-layout observations; NAMED, not carried`);
       continue;
     }
@@ -16302,7 +17248,7 @@ function proposeStateDiffs(
           ((rootByProp[unified.perValue.propName] ??= {})[value] ??= {})[channel] = ref;
       } else ctx.notes.push(`${where}: ${channel} bindings in state "${state}" cannot be represented by a state token; NAMED, not carried`);
     } else if (refs.every(ref => ref === undefined)) {
-      mintStateObservation(ctx,target,state,channel,'px',occs.map(o => ({variant:o.variant,value:padding(o.node)!})),`${where} (state ${state})|${field}`);
+      mintStateObservation(ctx,target,state,channel,'px',occs.map(o => ({variant:o.variant,value:padding(o.node, o.base)!})),`${where} (state ${state})|${field}`);
       if (!ctx.mint) ctx.notes.push(`${where}: ${channel} in state "${state}" requires mintUnbound; NAMED, not carried`);
     } else ctx.notes.push(`${where}: ${channel} in state "${state}" mixes bound and raw values; NAMED, not carried`);
   }
@@ -16314,7 +17260,10 @@ function proposeStateDiffs(
   // stack is a state override, same as hover fill. Canvas did not bind a
   // variable — mint the observed CSS stack, never invent a corpus name.
   {
-    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(n.effects);
+    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(cssShadowEffects(n));
+    if (occs.some(o => droppedUnpaintedHardSpread(o.node))) {
+      ctx.notes.push(`${where}: a zero-blur spread shadow on a transparent fill is not in Figma's raster — it is not carried as a box-shadow ring around the empty box`);
+    }
     if (occs.some(o => observedShadowChanged(o.node, o.base))) {
       const stacks = occs.map((o) => ({ variant: o.variant, value: stackOf(o.node) }));
       if (stacks.some((s) => s.value === undefined)) {
@@ -16453,6 +17402,40 @@ function proposeStateDiffs(
     );
   }
 
+  // A resting FIXED height stays on the variant. A state that hugs a taller
+  // border box has to say so, or the fixed height keeps clipping it.
+  if (ctx.mint && occs.every((o) => typeof o.node.bbox?.height === 'number' && o.node.bbox.height > 0 && typeof o.base.bbox?.height === 'number')) {
+    const released = occs.some((o) => sizingFixed(o.base, 'height') && !sizingFixed(o.node, 'height') && o.node.bbox!.height !== o.base.bbox!.height);
+    if (released && occs.every((o) => !sizingFixed(o.node, 'height'))) {
+      mintStateObservation(
+        ctx, target, state, 'height', 'px',
+        occs.map((o) => ({ variant: o.variant, value: o.node.bbox!.height! })),
+        `${where} (state ${state})|height`,
+      );
+      ctx.notes.push(`${where}: state "${state}" releases a fixed height and hugs its measured border box (${[...new Set(occs.map((o) => o.node.bbox!.height))].join('/')}px)`);
+    }
+  }
+
+  // A FIXED width is a designed measure, not a hug of the resting text. The
+  // rest plane is minted from the resting variants only, so a focus box that
+  // is a few pixels narrower never reached the contract and the text stayed
+  // on one line. Carry the state's own border box when every paired plane is
+  // still FIXED, unfilled, and unbound. A hug or a fill stays unnamed here:
+  // its drawn width is a measurement of content, not a second design width.
+  if (ctx.mint && occs.every((o) => typeof o.node.bbox?.width === 'number' && o.node.bbox.width > 0 && typeof o.base.bbox?.width === 'number')) {
+    const fixedWidth = (node: DumpNode) => sizingFixed(node, 'width') && node.fillWidth !== true && node.bound?.width === undefined;
+    const widths = occs.map((o) => Math.round(o.node.bbox!.width * 100) / 100);
+    const bases = occs.map((o) => Math.round(o.base.bbox!.width * 100) / 100);
+    if (widths.some((width, index) => width !== bases[index]) && occs.every((o) => fixedWidth(o.node) && fixedWidth(o.base))) {
+      mintStateObservation(
+        ctx, target, state, 'width', 'px',
+        occs.map((o, index) => ({ variant: o.variant, value: widths[index]! })),
+        `${where} (state ${state})|width`,
+      );
+      ctx.notes.push(`${where}: root width is DRAWN FIXED and differs in state "${state}" (${[...new Set(widths)].join('/')}px against the rest ${[...new Set(bases)].join('/')}px) — carried as a state width`);
+    }
+  }
+
   // Children drawn ONLY in this state's variants (kept with their variant).
   const extras = new Map<string, Array<{ variant: string; node: DumpNode }>>();
   for (const o of occs) {
@@ -16501,6 +17484,31 @@ function proposeStateDiffs(
       );
       continue;
     }
+    const outset = nodes.map((node) => {
+      const abs = node.abs;
+      const inset = abs ? [abs.x, abs.y, abs.right, abs.bottom] : [];
+      if (!abs?.constraints || inset.length !== 4 || !inset.every((value) => typeof value === 'number' && value === inset[0] && value < 0) || !node.fill?.hex) return;
+      const alpha = (node.opacity ?? 1) * (node.fill.alpha ?? 1);
+      return { spread: -inset[0]!, color: paintCssHex({ hex: node.fill.hex, alpha }) };
+    });
+    if (state === 'focus-visible' && outset.every((ring) => ring !== undefined)) {
+      const strokes = found.map((row) => focusOutsetStroke(row.node, ctx.componentMainsByKey));
+      mintStateObservation(
+        ctx, target, state, 'box-shadow', 'shadow',
+        found.map((row, index) => ({ variant: row.variant, value: `0px 0px 0px ${outset[index]!.spread}px ${outset[index]!.color}` })),
+        `${at} (state ${state})|outset-fill`,
+      );
+      // A second translucent shadow composites over the first, so the inner
+      // pixel is no longer the fill. The outside stroke is an outline just
+      // beyond the fill ring.
+      if (strokes.every((stroke) => stroke !== undefined)) {
+        mintStateObservation(ctx, target, state, 'outline-color', 'color', found.map((row, index) => ({ variant: row.variant, value: strokes[index]!.color })), `${at} (state ${state})|outset-stroke`);
+        mintStateObservation(ctx, target, state, 'outline-width', 'px', found.map((row, index) => ({ variant: row.variant, value: strokes[index]!.weight })), `${at} (state ${state})|outset-stroke-width`);
+        mintStateObservation(ctx, target, state, 'outline-offset', 'px', found.map((row, index) => ({ variant: row.variant, value: outset[index]!.spread })), `${at} (state ${state})|outset-stroke-offset`);
+      }
+      ctx.notes.push(`${at}: focus-only outset fill carried as a box-shadow ring (${outset[0]!.spread}px outside the resting box)${strokes.every((stroke) => stroke !== undefined) ? `; its outside stroke is an outline beyond that ring` : ''}`);
+      continue;
+    }
     ctx.notes.push(
       `${at}: present only in state "${state}" variants — per-state anatomy has no contract vocabulary; NAMED, not proposed (review)`,
     );
@@ -16542,9 +17550,38 @@ function proposeStateDiffs(
     const byKey=new Map(siblingKeys(resting,semanticNames).map((key,index)=>[key,resting[index]]));
     return siblingKeys(drawn,semanticNames).flatMap((key,index)=>{
       const child=drawn[index], original=byKey.get(key);
-      return original&&!refused.has(child.name)?[{node:child,base:original}]:[];
+      return original && original.type === child.type && !refused.has(child.name)?[{node:child,base:original}]:[];
     });
   };
+  // A hover underline lives on a text node. text-decoration inherits, so the
+  // root state can carry it. Missing drawings in this state stay undecorated.
+  if (ctx.mint) {
+    const decorationLine = (node: DumpNode): string => {
+      let line = 'none';
+      const walk = (current: DumpNode) => {
+        const mapped = current.text?.textDecoration ? TEXT_DECORATION_LINE[current.text.textDecoration] : undefined;
+        if (mapped) line = mapped;
+        for (const child of current.children ?? []) walk(child);
+      };
+      walk(node);
+      return line;
+    };
+    if (occs.some((row) => decorationLine(row.node) !== decorationLine(row.base))) {
+      const occurrences = occs.map((row) => ({
+        variant: row.variant,
+        axisValues: ctx.mint!.axisValuesByVariant.get(row.variant) ?? {},
+        value: decorationLine(row.node),
+      }));
+      const lines = new Set(occurrences.map((row) => row.value));
+      if (stateTextDecorations && lines.size === 1 && !lines.has('none')) {
+        stateTextDecorations.set(state, [...lines][0]!);
+        ctx.notes.push(`${where}: text decoration ${[...lines][0]} in state "${state}" carried as a declared root state`);
+      } else if (occurrences.some((row) => row.value !== 'none')) {
+        ctx.notes.push(`${where}: text decoration in state "${state}" differs across variants (${[...lines].join(', ')}) — no per-combination declared state vocabulary; NAMED, not proposed (review)`);
+      }
+    }
+  }
+
   const childOccByName = new Map<string, Array<{ variant: string; node: DumpNode; base: DumpNode }>>();
   for (const o of occs) {
     for (const {node:c,base:bc} of stateSiblingPairs(o.node,o.base)) {
@@ -16655,7 +17692,21 @@ function proposeStateDiffs(
             { cssProp: 'border-color', paintName: 'stroke', pick: (n) => n.stroke },
           ];
     for (const ch of channels) {
-      if (!childOccs.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
+      // A pointer press matches :hover. When the pressed ink equals rest but
+      // the hover ink does not, the active rule still has to restate rest or
+      // the hover color stays on screen.
+      const hoverPaintOf = (variant: string) => {
+        const hoverRoot = concurrentHoverByName?.get(variant);
+        const hoverChild = hoverRoot?.children?.find((child) => child.name === childName);
+        return hoverChild ? ch.pick(hoverChild) : undefined;
+      };
+      const resetsHover = state === 'active' && concurrentHoverByName !== undefined &&
+        childOccs.every((x) => concurrentHoverByName.has(x.variant)) &&
+        childOccs.some((x) => {
+          const hover = hoverPaintOf(x.variant);
+          return hover !== undefined && paintKey(ch.pick(x.node)) !== paintKey(hover);
+        });
+      if (!resetsHover && !childOccs.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
       const at = `${where}/${childName}`;
       const { partRec, resolvedKey } = resolveChildPart(childName, 1,childOccs.map(o=>o.base));
       if (!partRec || !partStates) {
@@ -16721,6 +17772,7 @@ function proposeStateDiffs(
         continue;
       }
       if (partRec.component !== undefined || partRec.slot !== undefined || partRec.repeat !== undefined) {
+        if (ch.paintName === 'stroke' && partRec.component !== undefined && centeredInstanceOutline(childOccs)) continue;
         ctx.notes.push(
           `${at}: ${ch.paintName} differs in state "${state}" on a ${partRec.slot !== undefined ? 'slot' : 'component-ref'} part — the child contract owns its styling (part-level state overrides carry on text/icon/box parts only, v13); NAMED, not proposed (review)`,
         );
@@ -16826,7 +17878,7 @@ function proposeStateDiffs(
     collect(occs.map((o) => ({ variant: o.variant, node: o.node, base: o.base })), '', 1);
 
     type Obs = { variant: string; ref?: string; value?: string | number };
-    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(n.effects);
+    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(cssShadowEffects(n));
     const effectKinds = (n: DumpNode): string => (n.effects ?? []).map((e) => e.type).join('+') || 'none';
     const uniformBound = (n: DumpNode, fields: string[]): string | undefined => {
       const b = n.bound ?? {};
@@ -17238,6 +18290,8 @@ function proposeFromDumpFencedImpl(
     draftDrawingReadbacks?: ReadonlyMap<string,DraftDrawingReadback>;
     /** The producer read visible effects; omission means an empty stack. */
     effectsCaptured?: boolean;
+    /** Batch-owned component mains, keyed by component key. */
+    componentMainsByKey?: ReadonlyMap<string, DumpNode>;
     /** Captured-variable resolved values, dot-path → CSS value — build from
      *  the dump's `_variables` via capturedTokensFromDump (the batch entry
      *  does this automatically). A known negative carried gap must qualify
@@ -17976,6 +19030,7 @@ function proposeFromDumpFencedImpl(
     })() : undefined,
     hiddenCaptured: opts.hiddenCaptured,
     effectsCaptured: opts.effectsCaptured,
+    componentMainsByKey: opts.componentMainsByKey,
     capturedValues: opts.capturedValues,
     capturedPaintModeConflicts: opts.capturedPaintModeConflicts,
     imageAssets:opts.imageAssets,
@@ -18242,6 +19297,7 @@ function proposeFromDumpFencedImpl(
       root.declared = { ...(root.declared as Record<string, string> | undefined), 'font-family': templateFamily! };
       carryLetterSpacing(template, root, ctx, path, rootTokens);
       carryTextAlign(template, root, ctx, path);
+      carryTextVerticalAlign(template, root, ctx, path);
       if (ctx.mint) for (const o of ctx.mint.observations) if (o.target === textTokens) o.target = rootTokens;
       ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
     }
@@ -18258,6 +19314,7 @@ function proposeFromDumpFencedImpl(
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`, rootTokens);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    carryTextVerticalAlign(only, root, ctx, `${where}/label`);
     // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
     // the text element's own box; the root's box is padding plus content and
     // already hugs through its own vocabulary, so a root-level flag would
@@ -18317,7 +19374,7 @@ function proposeFromDumpFencedImpl(
   }
   carryChildPaintOrder(merged, root, ctx, where, true);
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
-  invertNodeEffects(merged, rootTokens, ctx, where);
+  invertNodeEffects(merged, rootTokens, ctx, where, root);
   invertRootFixedSize(merged, root, rootTokens, ctx, where, rootContent?.fillWidth);
   // G8: a grid ROOT states each axis too. Runs AFTER invertRootFixedSize so an
   // axis that door already made definite (px mint, or its own 'fit-content'
@@ -18374,6 +19431,7 @@ function proposeFromDumpFencedImpl(
    *  state bindings (see StateByPropCollector). */
   const stateByProp: Record<string, StateByPropCollector> = {};
   const uniformStateStrokeStyles = new Set<string>();
+  const stateTextDecorations = new Map<string, string>();
   const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
@@ -18396,6 +19454,7 @@ function proposeFromDumpFencedImpl(
         byProp,
         state === 'active' ? concurrentHoverByName : undefined,
         uniformStateStrokeStyles,
+        stateTextDecorations,
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
@@ -18763,6 +19822,20 @@ function proposeFromDumpFencedImpl(
             `Proposed as container element "div" instead${inferredRaw.role ? `; the inferred role "${inferredRaw.role}" is NOT carried (it belongs on the native control, not the container)` : ''} — REVIEW: re-root before adoption by mounting the native <${inferredRaw.element}> control as a child part inside this container`,
         }
       : inferredRaw;
+  // A re-rooted checkbox or switch is a div, so the keyboard never reaches the
+  // focus ring the state axis draws. tabIndex 0 puts that host in the tab order
+  // without turning it into a button, which would discard its text props, and
+  // without putting role="switch" on the container.
+  const reRootedControl = inferred?.element === 'div' && inferredRaw !== null && inferredRaw.element !== 'div' &&
+    (VOID_ELEMENTS.has(inferredRaw.element) || inferredRaw.element === 'textarea' || inferredRaw.element === 'select');
+  if (reRootedControl && stateGroups.has('focus-visible')) {
+    const attrs = (root.attrs as Record<string, string> | undefined) ?? {};
+    if (attrs.tabIndex === undefined) {
+      attrs.tabIndex = '0';
+      root.attrs = attrs;
+      ctx.notes.push('root: tabIndex 0 — the re-rooted control draws focus-visible, and a plain div is not in the tab order');
+    }
+  }
   // dump v1.32 — the set's own description + documentation links. An
   // UNSTAMPED set's description is the DESIGNER'S words and carries
   // VERBATIM; a STAMPED set's description is this pipeline's own emit
@@ -18958,6 +20031,9 @@ function proposeFromDumpFencedImpl(
         if(!resolvePresence(part as Part,tuple))return false;
         const when=part.visibleWhen as Part['visibleWhen'];
         if(!when)return true;
+        // A boolean caller input is not a variant axis. The state plane already
+        // observed this part, so an absent tuple entry is not absence.
+        if(!(when.prop in tuple))return true;
         if(when.equals!==undefined)return [when.equals].flat().map(String).includes(String(tuple[when.prop]));
         return tuple[when.prop]==='true';
       };
@@ -19258,6 +20334,20 @@ function proposeFromDumpFencedImpl(
     if (typeof rt['width'] === 'string' && typeof rt['height'] === 'string') declaredOv.push('size');
     if ((singleInkPart?.literals?.['background-color'] === 'currentColor' || singleInkPart?.literals?.['border-color'] === 'currentColor') && typeof rt.color === 'string') declaredOv.push('color');
     if (singleInkPart?.literals?.['border-width'] === 'inherit' && typeof rt['stroke-width'] === 'string') declaredOv.push('stroke-width');
+    if (singleInkPart?.shape?.kind === 'stroked-path' && singleInkPart.literals?.['border-color'] === 'currentColor') {
+      const slug = ctx.selfId.replace(/^ds\./, '');
+      const fillRef = `{imported.${slug}.root.fill}`;
+      ((root.tokens ??= {}) as Record<string, string>).fill = fillRef;
+      declaredOv.push('fill');
+      if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
+      const leaf = slug.split('.').concat('root', 'fill').reduce<Record<string, unknown>>((node, key, index, keys) => {
+        if (index === keys.length - 1) { node[key] = { $value: 'none' }; return node; }
+        return (node[key] ??= {}) as Record<string, unknown>;
+      }, (mintedTokens.tree.imported ??= {}) as Record<string, unknown>);
+      void leaf;
+      mintedTokens.entries.push({ ref: fillRef, value: 'none', usageSites: [`${ctx.setName}: stroked drawing default fill`] });
+      mintedTokens.count += 1;
+    }
     if (declaredOv.length > 0) {
       root.overridable = declaredOv;
       ctx.notes.push(
@@ -19365,6 +20455,17 @@ function proposeFromDumpFencedImpl(
         if (!present.includes(state) || !widthCarried) continue;
         const declaredStates = (root.declaredStates as Record<string, Record<string, string>> | undefined) ?? {};
         (declaredStates[state] ??= {})['border-style'] = 'solid';
+        root.declaredStates = declaredStates;
+      }
+      for (const [state, line] of stateTextDecorations) {
+        // Figma state previews do not draw declared facts; a decoration alone
+        // cannot make a state preview differ from Default.
+        if (!present.includes(state)) {
+          ctx.notes.push(`${ctx.setName}:root: text decoration ${line} in state "${state}" not carried — the state has no drawable override; NAMED, not proposed (review)`);
+          continue;
+        }
+        const declaredStates = (root.declaredStates as Record<string, Record<string, string>> | undefined) ?? {};
+        (declaredStates[state] ??= {})['text-decoration-line'] = line;
         root.declaredStates = declaredStates;
       }
       // v17 — the root's per-enum-value state bindings, in declared state
@@ -19584,15 +20685,25 @@ function proposeFromDumpFencedImpl(
       const paints=origin.merged.occ.map(o=>o.node.sourceFillComposition!==undefined?o.node.sourceFillComposition:o.node.sourceNormalFillComposition??(o.node.sourceEmptyFill?{paint:{color:{r:0,g:0,b:0},opacity:0,blendMode:'NORMAL' as const}}:undefined));
       if(paints.some(p=>!p || 'issue' in p))throw Error(`solid-fill-composition-source-occurrence-unqualified:${origin.where}`);
       const observedBindings=new Map<number,SolidFillObservedBinding>();
+      const literalPaint=new Set<number>();
       for(const [index,paint] of paints.entries())if(paint && 'paint' in paint && paint.variableId!==undefined){
         const occurrence=origin.merged.occ[index];
         const inspected=(()=>{
           try{return {kind:'matched' as const,binding:qualifySolidFillColorBinding(paint,occurrence.node.variableConsumers)};}
           catch(error){
-            if(opts.drawnVariantSurface!=='react-runtime' || draftPaint || !String(error).includes('paint-consumer-disagreement'))throw error;
-            return inspectSolidFillColorBinding(paint,occurrence.node.variableConsumers);
+            const message=String(error);
+            if(opts.drawnVariantSurface!=='react-runtime' || draftPaint)throw error;
+            if(message.includes('paint-consumer-disagreement'))return inspectSolidFillColorBinding(paint,occurrence.node.variableConsumers);
+            // A cited variable with no captured consumer cannot be recreated.
+            // The rendered paint still belongs to this component.
+            if(message.includes(':consumer-missing')){
+              ctx.notes.push(`${origin.where}: ${occurrence.variant}: observed literal paint retained; captured variable ${paint.variableId} has no consumer record and its binding is not recreated`);
+              return {kind:'literal-paint' as const};
+            }
+            throw error;
           }
         })();
+        if(inspected?.kind==='literal-paint'){literalPaint.add(index);continue;}
         if(inspected?.kind==='observed-paint-disagreement'){
           observedBindings.set(index,SolidFillObservedBindingSchema.parse({owner:origin.where,nodeName:occurrence.node.name,variantName:occurrence.variant,
             observedPaint:inspected.observedPaint,resolvedBinding:inspected.resolvedBinding,bindingRecreated:false}));
@@ -19616,7 +20727,7 @@ function proposeFromDumpFencedImpl(
           }),paint:resolved[index],
           ...(occ.node.sourceEmptyFill && !occ.node.sourceFillComposition && !occ.node.sourceNormalFillComposition?{empty:true as const}:{}),
           ...(observedBindings.has(index)?{observedBinding:observedBindings.get(index)}:{}),
-          ...(!observedBindings.has(index) && !draftPaint && paints[index] && 'variableId' in paints[index]! && paints[index]!.variableId!==undefined ? (()=>{
+          ...(!observedBindings.has(index) && !literalPaint.has(index) && !draftPaint && paints[index] && 'variableId' in paints[index]! && paints[index]!.variableId!==undefined ? (()=>{
             const binding=qualifySolidFillColorBinding(paints[index]!,occ.node.variableConsumers);
             return {token:planSolidFillBindingTokens([binding]).requestedTokenPaths[0],sourceBinding:{owner:origin.where,nodeName:occ.node.name,variantName:occ.variant,binding}};
           })():{}),
@@ -19664,10 +20775,15 @@ function proposeFromDumpFencedImpl(
         ...(part.tokensByCombination??[]).flatMap(e=>e.rows.map(row=>row.tokens)),
         ...(part.literalsByProp??[]).flatMap(e=>Object.values(e.map)),
         ...(part.literalsByCombination??[]).flatMap(e=>e.rows.map(row=>row.literals))];
-      for(const record of records)if(record)delete record['background-color'];
-      if(!inheritedBinding){
-        if(paintTable)part.solidFillCompositionByCombination=paintTable;
-        else part.solidFillComposition=resolved[0];
+      // An instance whose cited variable has no consumer is not a paint root.
+      // Keep the projected color so the child component can still be proposed.
+      const retainProjectedPaint=!!part.component && bindings.length===0 && observedBindings.size===0 && literalPaint.size>0;
+      if(!retainProjectedPaint){
+        for(const record of records)if(record)delete record['background-color'];
+        if(!inheritedBinding){
+          if(paintTable)part.solidFillCompositionByCombination=paintTable;
+          else part.solidFillComposition=resolved[0];
+        }
       }
       origin.merged.occ.forEach(o=>consumed.add(o.node));
       ctx.notes.push(inheritedBinding
@@ -20253,6 +21369,7 @@ function proposeBatchFromDumpInternal(
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     effectsCaptured: opts.effectsCaptured ?? dumpCapturesEffects((dump as { _provenance?: Parameters<typeof dumpCapturesEffects>[0] })._provenance),
+    componentMainsByKey: componentMainsFromDump(dump),
     capturedValues,
     capturedVariablePaths: capturedLayer?.variablePaths ?? opts.capturedVariablePaths,
     capturedPaintModeConflicts,
@@ -20553,9 +21670,15 @@ function proposeBatchFromDumpInternal(
     });
     if(supplied)protectedNestedApis.add(String(p.contract.id));
   }
+  // These passes replace a proposal's contract object. The element decision
+  // lives on the object, so copy it onto the replacement before the
+  // interactive-content pass reads it. A replaced object with no decision
+  // keeps a structural button that should have become a div.
+  const semanticsOrigins = semanticsOriginSnapshot(proposals);
   settleNestedSlotSelections(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
   settleNestedPropertyInputs(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
   settleNestedTextSizes(dump,opts.fileKey??undefined,proposals,protectedNestedApis);
+  restoreSemanticsOrigins(proposals, semanticsOrigins);
   // Order-free semantic passes over the whole batch (see their blocks).
   settleInteractiveContent(proposals, contractsById);
   for (const p of proposals) {

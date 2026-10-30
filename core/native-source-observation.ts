@@ -1,5 +1,5 @@
 import {nativeFillStackMatches} from './native-fill-stack.js';
-import {nativeLiteralTextBox} from './native-text-box.js';
+import {nativeLiteralTextBox,nativeTokenTextBoxMatches} from './native-text-box.js';
 import {nativeIntrinsicPlacementMatches,nativeIntrinsicHugBoxMatches} from './native-intrinsic-placement.js';
 import {nativeSlotIdentityRuntime} from './native-slot-identity.js';
 import {nativeScalarFaceWeight} from './native-text-appearance.js';
@@ -311,6 +311,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if(isContractDraft(input)&&observedVariants.some(v=>hasTextSize(v.spec)))extra.push('textSizeOverride');
   const hasIntrinsicPlacement=(spec:NodeSpec):boolean=>!!spec.intrinsicPlacementTarget||!!spec.instanceIntrinsicPlacements||!!spec.slotDefault?.some(item=>item.instanceIntrinsicPlacements)||!!spec.children?.some(hasIntrinsicPlacement);
   if(isContractDraft(input)&&observedVariants.some(v=>hasIntrinsicPlacement(v.spec)))extra.push('intrinsicPlacement');
+  const hasTokenTextBox=(spec:NodeSpec):boolean=>!!spec.tokenTextBox||!!spec.children?.some(hasTokenTextBox);
+  if(isContractDraft(input)&&observedVariants.some(v=>hasTokenTextBox(v.spec)))extra.push('tokenTextBox');
   const hasAuthoredTextAppearance=(spec:NodeSpec):boolean=>!!spec.authoredTextAppearance||!!spec.authoredTextAppearanceTarget||!!spec.instanceAuthoredTextAppearance||!!spec.slotDefault?.some(item=>item.instanceAuthoredTextAppearance)||!!spec.children?.some(hasAuthoredTextAppearance);
   if(isContractDraft(input)&&observedVariants.some(v=>hasAuthoredTextAppearance(v.spec)))extra.push('authoredTextAppearance','authoredTextInstance');
   const hasTextColor = (spec:NodeSpec):boolean=>!!spec.textColorTarget||!!spec.instanceTextColors||!!spec.children?.some(hasTextColor);
@@ -477,6 +479,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "fontSize",
     "lineHeight",
     "textAlignHorizontal",
+    ...(extraMetadata.includes('tokenTextBox') ? ['textAlignVertical'] : []),
     "letterSpacing",
     "textCase",
     "textDecoration",
@@ -876,7 +879,7 @@ function verifyReadback(
   const pathSpecs = new Map<string, NodeSpec>();
   const authoredPathSpecs = new Map<string, NodeSpec | null>();
   const indexPath = (spec: NodeSpec) => {
-    if ((spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.shapeFillTarget || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
+    if ((spec.tokenTextBox || spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.shapeFillTarget || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
       pathSpecs.set(canonicalJson(spec.nativeContractPart), spec);
     spec.children?.forEach(indexPath);
   };
@@ -1490,6 +1493,7 @@ function verifyReadback(
                 const pathSpec = pathSpecs.get(canonicalJson(meta(source, 'nativeContractPart')));
                 const observedShapeKey=child.metadata.shapeFillOverride;
                 if(textOwner&&typeof observedShapeKey==='string'&&Object.hasOwn(spec.instanceShapeFills??{},observedShapeKey))shapeFillMatches.set(observedShapeKey,1+(shapeFillMatches.get(observedShapeKey)??0));
+                if(pathSpec?.tokenTextBox&&!nativeTokenTextBoxMatches(pathSpec,child.values))issue('native-token-text-box-observation',child);
                 const intrinsicKey=pathSpec?.intrinsicPlacementTarget,placement=textOwner&&intrinsicKey?spec.instanceIntrinsicPlacements?.[intrinsicKey]:undefined;
                 let intrinsicGeometry=false;
                 if((child.metadata.intrinsicPlacement??'')!==(intrinsicKey??''))issue('native-intrinsic-placement-observation-marker',child);
@@ -1911,6 +1915,7 @@ function verifyReadback(
       if (spec.layout && v.clipsContent !== (spec.clipsContent === true))
         issue("native-source-observation-clipping", n);
       if (spec.type === "text") {
+        if(spec.tokenTextBox&&(!library||!nativeTokenTextBoxMatches(spec,v)))issue('native-token-text-box-observation',n);
         const literalBox=nativeLiteralTextBox(spec);
         if(literalBox&&(!numeric(v.width,literalBox.width)||v.textAutoResize!==(literalBox.height===undefined?'HEIGHT':'NONE')||literalBox.height!==undefined&&!numeric(v.height,literalBox.height)))issue('native-literal-text-box-observation',n);
         const authoredRangeAuthority = !!spec.authoredTextAppearance && v.characters === spec.characters &&

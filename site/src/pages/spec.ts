@@ -1339,7 +1339,9 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           cap: "NONE, ROUND or SQUARE. Capped paint with a stroke weight greater than the line length refuses.",
           align: "INSIDE, CENTER or OUTSIDE, retained from native capture.",
           source: "Original node ID and optional parent ID, when captured.",
-          observedSources: "Original node/parent IDs, variant names, optional logical lengths and transforms for the complete observed geometry census.",
+          observedSources: "Original node/parent IDs, variant names, optional logical lengths, transforms, caps, alignments, dash lengths and stroke outlines for the complete observed geometry census. When captured geometry differs by variant, the CSS Modules React emitter draws each distinct line under the fewest variant axes that decide it; the inline React emitter and native generation refuse it by name.",
+          dashes: "Optional one to eight positive dash lengths, in path pixels, from the source dash pattern. Absent on a solid line.",
+          painted: "Optional captured stroke outline: one to eight closed path strings with a NONZERO or EVENODD winding rule. A dashed line is admitted only with this outline, because dash caps cannot be rebuilt from the lengths alone. React fills the outline; native generation refuses dashed, outlined and per-variant lines by name.",
         }) +
         `<p>Paint uses the existing border-color and pixel border-width channels. Code renders SVG paint inside the transformed layout footprint; native generation creates an editable LINE with its original cap, alignment and affine basis. Paint bounds remain separate from layout dimensions. Rotation, paths, arcs, parentViewport and other competing geometry fields refuse on a line. Source IDs document captured observations and do not qualify an unseen variant.</p>` +
         illustrativeExample(PartSchema, {

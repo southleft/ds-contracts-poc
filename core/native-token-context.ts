@@ -162,7 +162,8 @@ export interface NativeTokenContextVerification {
   problems: string[];
 }
 
-const pathPattern = /^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*$/;
+// Preserve exact source spelling; do not normalize Unicode identities.
+const pathPattern = /^[\p{L}\p{M}\p{N}_-]+(?:\.[\p{L}\p{M}\p{N}_-]+)*$/u;
 const hashPattern = /^[0-9a-f]{64}$/;
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;

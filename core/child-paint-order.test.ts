@@ -10,7 +10,8 @@ import {mountGenerated} from './react-test-runtime.js';
 import {createFigmaEngine} from './emit-figma-script.js';
 import {ContractSchema,resolveLayout} from '../scripts/contract-schema.js';
 import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
-import {proposeBatchFromDump} from './propose-figma.js';
+import {proposeBatchFromDump,proposeFromDump} from './propose-figma.js';
+import {validateContract} from '../packages/core/src/validate.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 
 function linkedPaintFixture(){
@@ -329,6 +330,17 @@ test('normal source order remains explicit when absolute and flow siblings overl
  assert.equal(childPaintOrderPlans(c).length,1);
 });
 
+
+test('a multi-axis flex table keeps an explicit flex base layout',()=>{
+ const source=mixedFlowPermutationFixture();
+ const result=proposeFromDump(source,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map()});
+ const contract=ContractSchema.parse(result.contract);
+ assert.equal(contract.anatomy.root.layout?.display,'flex');
+ assert.ok(contract.anatomy.root.layoutByCombination);
+ const errors:string[]=[];
+ validateContract(contract,new Map([[contract.id,contract]]),errors,new Map());
+ assert.equal(errors.filter(error=>error.includes('flex base')).join(';'),'');
+});
 
 function mixedFlowPermutationFixture():any {
  const choices=[['a','x','VERTICAL',['A','B','C']],['a','y','HORIZONTAL',['B','A','C']],['b','x','HORIZONTAL',['C','B','A']],['b','y','HORIZONTAL',['A','C','B']]] as const;

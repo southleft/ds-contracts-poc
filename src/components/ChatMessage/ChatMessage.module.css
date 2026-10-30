@@ -24,12 +24,14 @@
 
 .sender-user {
   flex-direction: row-reverse;
+  min-width: max-content;
 }
 
 .avatarSlot {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .body {
@@ -55,6 +57,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  flex-shrink: 0;
   border-radius: var(--radius-card);
   gap: var(--space-inset-y-sm);
   padding-inline: var(--space-inset-x-sm);
@@ -90,4 +93,5 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
 }

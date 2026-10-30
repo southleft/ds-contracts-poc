@@ -14,6 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: top;
   border: 0;
   cursor: pointer;
   background-color: var(--comp-button-primary-color-background-default);
@@ -88,6 +89,7 @@
 
 .startIcon {
   display: flex;
+  flex-shrink: 0;
 }
 
 .Label {
@@ -144,4 +146,5 @@
 
 .endIcon {
   display: flex;
+  flex-shrink: 0;
 }

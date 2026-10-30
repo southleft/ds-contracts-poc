@@ -174,7 +174,7 @@ test('both React consumers honor independently observed instance color, weight a
   const proposal = proposeFromDump(mapped.dump.zap as any, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
     contractIdByName: new Map(), projectionMode: 'reviewable-inversion', mintUnbound: true });
   const c = ContractSchema.parse(proposal.contract);
-  assert.deepEqual(c.anatomy.root.overridable, ['size', 'color', 'stroke-width']);
+  assert.deepEqual(c.anatomy.root.overridable, ['size', 'color', 'stroke-width', 'fill']);
   const tokens = { primitives: proposal.mintedTokens!.tree, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
   const browser = await chromium.launch();
   try {

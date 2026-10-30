@@ -314,7 +314,7 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "4bcaed9a732d9c50f5add0fbe099a519832b1135fdccf3b29059aa32e7719863",
+    "react/Button/Button.module.css": "424f32de6cc7e16327d1988898dd54a9e99cc82536a263a365725331d9843a3e",
     "react/Button/Button.stories.tsx": "391a96a111fe2c1cad8fc7db929d1e25c5dcf0dd7367189810a21b5ec5befd30",
     "react/Button/Button.tsx": "eb2f1789ddcd6cb6f287c3c797e95ddb7169d4d3928fa3887d7c5f1a4f5d4824",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",

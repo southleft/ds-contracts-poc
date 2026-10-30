@@ -26,28 +26,33 @@
   display: flex;
   align-items: flex-start;
   grid-area: header;
+  flex-shrink: 0;
 }
 
 .sidebar {
   display: flex;
   align-items: flex-start;
   grid-area: sidebar;
+  flex-shrink: 0;
 }
 
 .main {
   display: flex;
   align-items: flex-start;
   grid-area: main;
+  flex-shrink: 0;
 }
 
 .rail {
   display: flex;
   align-items: flex-start;
   grid-area: rail;
+  flex-shrink: 0;
 }
 
 .footer {
   display: flex;
   align-items: flex-start;
   grid-area: footer;
+  flex-shrink: 0;
 }

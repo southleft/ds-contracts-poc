@@ -1,0 +1,70 @@
+{
+  "imported": {
+    "chip": {
+      "root": {
+        "border-color": {
+          "bare": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "primary": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "tertiary": {
+            "$value": "#3c3c35",
+            "$type": "color"
+          },
+          "secondary": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "#00000000",
+            "$type": "color"
+          }
+        },
+        "border-width": {
+          "bare": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "primary": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "tertiary": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "secondary": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "neutral": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "label": {
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        }
+      }
+    },
+    "stub-icon": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

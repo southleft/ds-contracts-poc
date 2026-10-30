@@ -18,7 +18,8 @@ export function projectNativeImagePaints(input:DumpSet,assets:Record<string,Dump
     const mime=asset.mimeType,encoded=asset.base64;
     const prefixes={'image/png':'iVBORw0KGgo','image/jpeg':'/9j/','image/gif':'R0lGOD','image/webp':'UklGR'};
     if(asset.imageHash!==hash||!Object.hasOwn(prefixes,mime)||typeof encoded!=='string'||!encoded.startsWith(prefixes[mime])||asset.byteLength>8*1024*1024||encoded.length>11184812||encoded.length%4!==0||! /^[A-Za-z0-9+/]*={0,2}$/.test(encoded)||asset.byteLength!==encoded.length/4*3-(encoded.endsWith('==')?2:encoded.endsWith('=')?1:0))refuse('original-asset-integrity');
-    if(paints.length!==1||paint.index!==0||paint.opacity!==undefined&&paint.opacity!==1||paint.blendMode!==undefined&&paint.blendMode!=='NORMAL'||paint.filters&&Object.values(paint.filters as object).some(v=>v!==0))refuse('paint-stack-blend-opacity-or-filter');
+    const onSolidFill=paint.index===1 && !!node.fill?.hex && (node.fill.alpha??1)===1;
+    if(paints.length!==1||(paint.index!==0 && !onSolidFill)||paint.opacity!==undefined&&paint.opacity!==1||paint.blendMode!==undefined&&paint.blendMode!=='NORMAL'||paint.filters&&Object.values(paint.filters as object).some(v=>v!==0))refuse('paint-stack-blend-opacity-or-filter');
     const declared:Record<string,string>={'background-repeat':'no-repeat'};
     if(paint.scaleMode==='FILL'||paint.scaleMode==='FIT'){
      if(paint.rotation!==undefined&&paint.rotation!==0)refuse('image-rotation');

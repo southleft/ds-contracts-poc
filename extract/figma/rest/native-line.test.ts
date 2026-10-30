@@ -40,7 +40,7 @@ test('both routes refuse scale, arrow decoration, dashes, masks and nonzero nati
   [{relativeTransform:[[2,0,0],[0,1,0]]},{relativeTransform:[[2,0,0],[0,1,0]]}],
   [{strokeCap:'ARROW_LINES'},{strokeCap:'ARROW_LINES'}],
   [{strokeCap:'ROUND',strokeWeight:100},{strokeCap:'ROUND',strokeWeight:100}],
-  [{strokeDashes:[2,2]},{dashPattern:[2,2]}],
+  [{strokeDashes:[2,2],strokeGeometry:[]},{dashPattern:[2,2]}],
   [{isMask:true},{isMask:true}],
   [{size:{x:58,y:1}},{height:1}],
  ] as any[]){
@@ -51,6 +51,13 @@ test('both routes refuse scale, arrow decoration, dashes, masks and nonzero nati
  }
 });
 
+test('a dashed line with a captured stroke path keeps its centerline and dash lengths',()=>{
+ const result=capture([{...frame.children[0],strokeDashes:[2,4],strokeCap:'ROUND',strokeGeometry:[{path:'M0 0L2 0L2 1Z',windingRule:'NONZERO'}]}]);
+ assert.equal(result.children[0].shape?.kind,'line');
+ assert.deepEqual(result.children[0].shape?.line?.dashes,[2,4]);
+ assert.equal(result.children[0].shape?.line?.painted?.[0].data,'M0 0L2 0L2 1Z');
+ assert(result.report.degradations.some(d=>d.message==='native-line-dashes-unsupported'));
+});
 test('live dashed vectors with identical cap and network metadata can have different painted outlines',async()=>{
  const {PNG}=await import('pngjs');const {createHash}=await import('node:crypto');
  const fixture=JSON.parse(readFileSync(new URL('../fixtures/native-line/dash-cap-ambiguity.json',import.meta.url),'utf8'));

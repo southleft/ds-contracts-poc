@@ -188,3 +188,20 @@ test('React import retains contradictory observed fill literally without recreat
   (r:any)=>{r.solidFillCompositionObservedBinding[0].resolvedBinding.consumer.selectedValue.a=1;},
  ]){const invalid=structuredClone(child);mutate(invalid.anatomy.root);assert.equal(ContractSchema.safeParse(invalid).success,false);}
 });
+test('a fill variable with no captured consumer keeps the nested proposal and its projected paint',()=>{
+ const dump=fixture();
+ const walk=(node:any)=>{
+  if(!node||typeof node!=='object')return;
+  const id=node.sourceFillComposition?.variableId;
+  if(id&&node.variableConsumers)delete node.variableConsumers[id];
+  for(const child of node.children??[])walk(child);
+  for(const variant of node.variants??[])walk(variant);
+ };
+ for(const value of Object.values(dump))walk(value);
+ const before=JSON.stringify(dump);
+ const result=proposeBatchFromDump(dump,opts);
+ assert.equal(JSON.stringify(dump),before);
+ assert.deepEqual(result.skipped,[]);
+ assert(result.proposals.some(p=>p.setName==='Resizer'));
+ assert(result.proposals.some(p=>p.notes.some(n=>n.includes('no consumer record')&&n.includes('binding is not recreated'))));
+});

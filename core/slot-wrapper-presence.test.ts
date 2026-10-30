@@ -223,6 +223,28 @@ test('statically hidden instances do not render, while live visibility and swap 
  }
 });
 
+test('a Show-slot boolean that defaults off does not paint a hidden design-time icon', () => {
+  const f = fixture();
+  f.set.boolDefaults = { 'Show Icon': false };
+  f.set.propertyDefinitions!['Show Icon'] = { type: 'BOOLEAN', defaultValue: false };
+  for (const v of f.set.variants) v.children = [{
+    name: 'Mark', type: 'INSTANCE', instanceOf: 'Mark', instanceKey: 'mark-key', hidden: true,
+    propRefs: { visible: 'Show Icon', mainComponent: 'Icon' }, bbox: { width: 16, height: 16 },
+  }];
+  const proposal = proposeFromDump(f.set, {
+    corpus, mintUnbound: true, fileKey: 'fixture', projectionMode: 'exact',
+    contractIdByName: new Map([['Mark', f.child.id]]), contractIdByKey: new Map([['mark-key', f.child.id]]),
+    contractsById: new Map([[f.child.id, asMinimalChildContract(f.child)]]),
+  });
+  const c = ContractSchema.parse(proposal.contract);
+  const slot = walkAnatomy(c).find(p => p.part.slot);
+  assert(slot);
+  assert.equal(slot.part.optional, true);
+  assert.deepEqual(slot.part.visibleWhen, { prop: 'showIcon' });
+  const tsx = generateTsx(c, new Map([[c.id, c], [f.child.id, f.child]]), new Map());
+  assert.match(tsx, /showIcon/);
+});
+
 test('native populated collapsing slot retains its own Boolean but refuses unknown or dynamic content', async()=>{
  const f=fixture();delete f.child.anatomy.root.parts;
  for(const shown of [true,false]){

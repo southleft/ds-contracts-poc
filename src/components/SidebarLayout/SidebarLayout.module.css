@@ -26,6 +26,7 @@
   align-items: flex-start;
   grid-row: 1;
   grid-column: 1;
+  flex-shrink: 0;
 }
 
 .main {
@@ -33,4 +34,5 @@
   align-items: flex-start;
   grid-row: 1;
   grid-column: 2;
+  flex-shrink: 0;
 }

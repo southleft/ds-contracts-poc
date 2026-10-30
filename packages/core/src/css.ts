@@ -80,6 +80,18 @@ import { gridCellPlan, gridChildCrossAxisDecls, gridParentDecls } from './grid.j
 // CSS generation
 // ---------------------------------------------------------------------------
 
+/** A stretched text run becomes a flex box so its glyphs can sit in the
+ * middle or at the end. Flex lays the line out on the main axis, so the
+ * horizontal alignment has to be restated or centered text slides to the start. */
+function contentGlyphDecls(part: Part): string[] {
+  if (!part.content || !part.layout?.align) return [];
+  const decls = ['display: flex', `align-items: ${ALIGN_CSS[part.layout.align]}`];
+  const horizontal = part.declared?.['text-align'];
+  if (horizontal === 'center') decls.push('justify-content: center');
+  else if (horizontal === 'right' || horizontal === 'end') decls.push('justify-content: flex-end');
+  return decls;
+}
+
 /** The selector the React surfaces' ROOT takes for its disabled state — the
  *  attribute the generated component renders for the `disabled` prop.
  *  emit-react / emit-react-inline render the NATIVE `disabled` attribute only
@@ -250,6 +262,17 @@ export function solidFillCompositionRules(contract: Contract, childScope?: (path
   return lines;
 }
 
+/** A DTCG leaf whose value is a zero length. Missing trees are not zero. */
+function tokenLeafIsZero(tree: unknown, path: string): boolean {
+  let node: unknown = tree;
+  for (const segment of path.split('.')) {
+    if (!node || typeof node !== 'object') return false;
+    node = (node as Record<string, unknown>)[segment];
+  }
+  const value = node && typeof node === 'object' && '$value' in node ? (node as { $value: unknown }).$value : undefined;
+  return value === 0 || value === '0' || value === '0px';
+}
+
 export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown,
   childScope?: (path: readonly string[]) => string, contracts?: ReadonlyMap<string, Contract>, boundPaintSvg=false, patternedStrokeSvg=false): string {
   // `strokesIncludedInLayout: false` — a stroke that takes no layout space is
@@ -401,6 +424,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
           if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
         }
       }
+      // A text run is not a flex container. Glyph alignment inside that run
+      // is the one reason it becomes one: the line centers in the stretched box.
+      decls.push(...contentGlyphDecls(part));
       decls.push(...(gridPlan.cells.get(name) ?? []));
       if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}, undefined, part));
       if (part.layout?.alignSelf) decls.push(`align-self: ${part.layout.alignSelf}`);
@@ -482,7 +508,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       if (root.layout.justify) rootDecls.push(`justify-content: ${JUSTIFY_CSS[root.layout.justify]}`);
     }
   } else {
-    rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');
+    // Top alignment keeps a taller state on the same pixel as the resting
+    // box. Baseline alignment splits the growth and lands the border box on
+    // a half pixel.
+    rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center', 'vertical-align: top');
   }
   const rootTokens = root.tokens ?? {};
   // Round 2 iteration 9 — per-instance override CONSUMPTION (root
@@ -924,7 +953,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     for (const [sp, sv] of combo) if (!boolNames.has(sp) && !enumRules.has(`${sp}-${sv}`)) enumRules.set(`${sp}-${sv}`, new Map());
     const cls = literalComboCls(combo);
     if (!enumRules.has(cls)) enumRules.set(cls, new Map());
-    for (const decl of layoutOverrideDecls(row.layout)) { const [p, v] = splitDecl(decl); enumRules.get(cls)!.set(p, v); }
+    for (const decl of layoutOverrideDecls(row.layout, root.layout, root)) { const [p, v] = splitDecl(decl); enumRules.get(cls)!.set(p, v); }
   }
   // Beta spike — literalsByCombination on the root: one compound rule per
   // row on the root's own prop classes / attributes, with base specificity.
@@ -1004,21 +1033,42 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       ...(focusRoot.statesByProp ?? []).filter(entry => entry.state === 'focus-visible').flatMap(entry => Object.values(entry.map)),
       ...(focusRoot.stylesWhen ?? []).map(rule => rule.styles)];
     const explicitOutline = focusMaps.some(map => Object.keys(map ?? {}).some(key => key === 'outline' || key.startsWith('outline-')));
-    const authoredShadow = focusRoot.states?.['focus-visible']?.['box-shadow'] !== undefined || focusRoot.declaredStates?.['focus-visible']?.['box-shadow'] !== undefined;
+    const authoredShadow = focusRoot.states?.['focus-visible']?.['box-shadow'] !== undefined
+      || focusRoot.declaredStates?.['focus-visible']?.['box-shadow'] !== undefined
+      || (focusRoot.statesByProp ?? []).some(entry => entry.state === 'focus-visible'
+        && Object.values(entry.map).some(overrides => overrides['box-shadow'] !== undefined));
     const authoredStroke = focusRoot.strokesIncludedInLayout === false &&
       ['border-width', 'border-color'].some(key => {
         const focused = focusRoot.states?.['focus-visible']?.[key] ?? focusRoot.declaredStates?.['focus-visible']?.[key];
         const resting = focusRoot.tokens?.[key] ?? focusRoot.literals?.[key] ?? focusRoot.declared?.[key];
         return focused !== undefined && focused !== resting;
       });
-    if ((authoredShadow || authoredStroke) && !explicitOutline) {
+    // A descendant focus shadow is emitted as `.root:focus-visible .part`.
+    // It is already the indicator. A second outline on the root paints outside
+    // the layout box (CollegeTown checkbox: 260×72 became 266×78).
+    const descendantFocusShadow = walkAnatomy(input).some(({ path, part }) => path.length > 0 && (
+      part.states?.['focus-visible']?.['box-shadow'] !== undefined
+      || part.declaredStates?.['focus-visible']?.['box-shadow'] !== undefined
+      || (part.statesByProp ?? []).some(entry => entry.state === 'focus-visible'
+        && Object.values(entry.map).some(overrides => overrides['box-shadow'] !== undefined))));
+    if ((authoredShadow || authoredStroke || descendantFocusShadow) && !explicitOutline) {
       // The declared focus shadow or inset stroke owns the normal-color indicator. Do not add
       // an unrelated browser outline; shadows disappear in forced colors.
       lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: none;', '}',
         '@media (forced-colors: active) {', `  .root${STATE_SELECTORS['focus-visible']} {`,
         '    outline: 2px solid Highlight;', '    outline-offset: 2px;', '  }', '}');
     } else {
-      lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: solid;', '  outline-offset: 2px;', '}');
+      const focusBorders = [focusRoot.states?.['focus-visible'], focusRoot.declaredStates?.['focus-visible'],
+        ...(focusRoot.statesByProp ?? []).filter(entry => entry.state === 'focus-visible').flatMap(entry => Object.values(entry.map))];
+      const focusBorder = focusBorders.some(map => {
+        const width = map?.['border-width'];
+        return width !== undefined && width !== '0' && width !== '0px';
+      });
+      // A captured focus border already places the ring. The generic 2px
+      // offset paints 2px outside that box (breadcrumb link focus: 87×26
+      // against 83×22). The width may be a per-variant token on the state.
+      const offsetOwned = focusBorder || focusMaps.some(map => map?.['outline-offset'] !== undefined || map?.outline !== undefined);
+      lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: solid;', ...(offsetOwned ? [] : ['  outline-offset: 2px;']), '}');
     }
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
@@ -1050,7 +1100,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // so the override wins at equal specificity).
   if (root.layoutByProp) {
     for (const [value, override] of Object.entries(root.layoutByProp.map)) {
-      const decls = layoutOverrideDecls(override, root.layout);
+      const decls = layoutOverrideDecls(override, root.layout, root);
       if (decls.length === 0) continue;
       lines.push('', `.${root.layoutByProp.prop}-${value} {`);
       for (const d of decls) lines.push(`  ${d};`);
@@ -1095,7 +1145,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
         if (!checkToken(refPath, `anatomy.root.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
-        stateRules.push({ state: entry.state, css: `\n.${entry.prop}-${value}${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}` });
+        // A captured focus border of 0 is the absence of a ring. The generic
+        // outline still wraps the whole root; this variant turns that outline off.
+        const zeroFocusBorder = entry.state === 'focus-visible' && cssProp === 'border-width' && tokenLeafIsZero(tokenValues, refPath);
+        stateRules.push({ state: entry.state, css: `\n.${entry.prop}-${value}${sel} {\n  ${cssProp}: ${cssVar(refPath)};${zeroFocusBorder ? '\n  outline-style: none;' : ''}\n}` });
       }
     }
   }
@@ -1154,7 +1207,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         const combo = table.props.map((prop,i) => [prop,row.values[i]] as [string,string]);
         for (const [prop,value] of combo) if (!boolNames.has(prop) && !enumRules.has(`${prop}-${value}`)) enumRules.set(`${prop}-${value}`,new Map());
         lines.push('', `.${literalComboCls(combo)} .${cssIdentifier(name)} {`,
-          ...layoutOverrideDecls(row.layout,part.layout).map(decl => `  ${decl};`), '}');
+          ...layoutOverrideDecls(row.layout,part.layout,part).map(decl => `  ${decl};`), '}');
       }
 
       // Round 2 iteration 9 — per-instance overrides: the ref part becomes a
@@ -1252,6 +1305,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
       }
     }
+    // A text run is not a flex container. Glyph alignment inside that run
+    // is the one reason it becomes one: the line centers in the stretched box.
+    decls.push(...contentGlyphDecls(part));
     // A2 grid (G2/G4): this part's cell under its grid parent — grid-area
     // for area-anchored names, grid-row/grid-column (+ self aligns) for
     // explicit placement. Sizing stays UNSPELLED: stretch is the CSS grid
@@ -1259,6 +1315,12 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     decls.push(...(gridPlan.cells.get(name) ?? []));
     if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}, undefined, part));
       if (part.layout?.alignSelf) decls.push(`align-self: ${part.layout.alignSelf}`);
+    // A hug frame has no width of its own. Shrinking it in a fit-content row
+    // wraps its text below the width Figma already drew.
+    const sized = ['width', 'inline-size', 'flex-basis'].some(key =>
+      part.tokens?.[key] !== undefined || part.literals?.[key] !== undefined || part.declared?.[key] !== undefined);
+    if (isStructural(part) && part.layout?.display !== 'grid' && !part.layout?.grow && !sized && !part.overlay)
+      decls.push('flex-shrink: 0');
     // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
     // part would leak UA margins the real component resets — same discipline
     // as the root rule; captured nonzero margins arrive as minted overrides.
@@ -1324,6 +1386,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       }
     }
     const nestedSubRules: string[] = [];
+    if (part.shape?.kind === 'stroked-path' && contract.anatomy.root.tokens?.fill) {
+      nestedSubRules.push(`\n.${cssIdentifier(name)} svg {\n  fill: inherit;\n}`);
+    }
     if (part.animation) {
       decls.push(
         part.animation === 'spin'
@@ -1508,6 +1573,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // rendered [data-disabled]; hover/active gated on it). The ROOT's element
     // decides, never the part's own. Single-placeholder refs expand per enum value
     // on the root's enum class, exactly like the root's own state rules.
+    const nestedStateRules: Array<{ state: string; css: string }> = [];
     for (const [state, overrides] of Object.entries(part.states ?? {})) {
       const sel = STATE_SELECTORS[state];
       if (!sel) continue; // refused by validateContract
@@ -1516,7 +1582,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         const phs = placeholdersIn(refPath);
         if (phs.length === 0) {
           if (checkToken(refPath, `anatomy.${name}.states.${state}.${cssProp}`)) {
-            nestedSubRules.push(`\n.root${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+            nestedStateRules.push({ state, css: `\n.root${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}` });
           }
           continue;
         }
@@ -1524,7 +1590,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         // level down (.variant-danger[data-loading]:hover .label).
         for (const { combo, resolved } of expandRef(`anatomy.${name}.states.${state}.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${comboCls(combo)}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          nestedStateRules.push({ state, css: `\n.${comboCls(combo)}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}` });
         }
       }
     }
@@ -1537,10 +1603,15 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         for (const [cssProp, ref] of Object.entries(overrides)) {
           const refPath = stripBraces(ref);
           if (!checkToken(refPath, `anatomy.${name}.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${entry.prop}-${value}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+          nestedStateRules.push({ state: entry.state, css: `\n.${entry.prop}-${value}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}` });
         }
       }
     }
+    // Same interaction order as the root. A uniform active reset must follow
+    // a per-value hover rule: a pointer press matches both, and equal
+    // specificity would otherwise keep the hover ink.
+    nestedStateRules.sort((a, b) => stateOrder.indexOf(a.state) - stateOrder.indexOf(b.state));
+    nestedSubRules.push(...nestedStateRules.map((rule) => rule.css));
     // v7 layoutByProp on a nested part: descendant rule under the root's
     // enum class — exactly the nested-token-substitution rule shape.
     if (part.layoutByProp) {

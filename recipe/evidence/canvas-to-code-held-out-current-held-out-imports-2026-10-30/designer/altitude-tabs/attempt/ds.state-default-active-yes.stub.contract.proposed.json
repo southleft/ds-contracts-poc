@@ -1,0 +1,98 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.state-default-active-yes",
+  "name": "StateDefaultActiveYes",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"State=Default, Active=Yes\" instances of Tabs — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "active",
+      "type": {
+        "enum": [
+          "yes"
+        ]
+      },
+      "default": "yes",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Active",
+          "values": {
+            "yes": "Yes"
+          }
+        },
+        "code": {
+          "prop": "active"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Tab label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "text": {
+          "content": {
+            "prop": "text"
+          }
+        }
+      },
+      "tokens": {
+        "height": "{imported.stub-state-default-active-yes.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/StateDefaultActiveYes",
+        "export": "StateDefaultActiveYes"
+      }
+    }
+  }
+}

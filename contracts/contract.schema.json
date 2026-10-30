@@ -6449,6 +6449,44 @@
                         "OUTSIDE"
                       ]
                     },
+                    "dashes": {
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 1000000
+                      }
+                    },
+                    "painted": {
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 65536,
+                            "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                          },
+                          "windingRule": {
+                            "type": "string",
+                            "enum": [
+                              "NONZERO",
+                              "EVENODD"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "data",
+                          "windingRule"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
                     "source": {
                       "type": "object",
                       "properties": {
@@ -6527,6 +6565,60 @@
                             "additionalItems": false,
                             "minItems": 2,
                             "maxItems": 2
+                          },
+                          "cap": {
+                            "type": "string",
+                            "enum": [
+                              "NONE",
+                              "ROUND",
+                              "SQUARE"
+                            ]
+                          },
+                          "align": {
+                            "type": "string",
+                            "enum": [
+                              "INSIDE",
+                              "CENTER",
+                              "OUTSIDE"
+                            ]
+                          },
+                          "dashes": {
+                            "minItems": 1,
+                            "maxItems": 8,
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "exclusiveMinimum": 0,
+                              "maximum": 1000000
+                            }
+                          },
+                          "painted": {
+                            "minItems": 1,
+                            "maxItems": 8,
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 65536,
+                                  "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                                },
+                                "windingRule": {
+                                  "type": "string",
+                                  "enum": [
+                                    "NONZERO",
+                                    "EVENODD"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "data",
+                                "windingRule"
+                              ],
+                              "additionalProperties": false
+                            }
                           }
                         },
                         "required": [

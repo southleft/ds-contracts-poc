@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .stack {
@@ -33,6 +34,8 @@
 }
 
 .overflowText {
+  display: flex;
+  align-items: center;
   width: var(--size-avatar-md);
   height: var(--size-avatar-md);
   background-color: var(--color-action-secondary-background);

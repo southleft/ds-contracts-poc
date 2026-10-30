@@ -292,7 +292,7 @@
     }
   ],
   "generatedFiles": {
-    "react/ToggleSwitch/ToggleSwitch.module.css": "1019918ca29eb51b5e6c81783cc851bf508353fe930b621d8711e63e4a1b1d62",
+    "react/ToggleSwitch/ToggleSwitch.module.css": "c21fffa1b317c71c3d430db9940c79140369ea8a041007c634db26db69b01057",
     "react/ToggleSwitch/ToggleSwitch.stories.tsx": "afc9eef96d1359d299eddfbeadac8e1d6fcc487c7eb24ac6276879305a613f17",
     "react/ToggleSwitch/ToggleSwitch.tsx": "8a9fe182de42e91e3d27eab388397201e9bc2a844fb3ab8f4d457d520f54402c",
     "react/ToggleSwitch/index.ts": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",

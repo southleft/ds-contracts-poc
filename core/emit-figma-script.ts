@@ -7,7 +7,8 @@ import {resolveTextByCombination} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
-import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME} from './native-text-box.js';
+import {nativeLineDrawings} from '../packages/schema/src/native-line.js';
+import {nativeLiteralTextBox,NATIVE_LITERAL_TEXT_BOX_RUNTIME,NATIVE_TOKEN_TEXT_BOX_RUNTIME} from './native-text-box.js';
 import {NATIVE_FONT_NAME_EXACT_RUNTIME} from './native-font-profile.js';
 import {mapNativeTextAppearances,attachNativeAuthoredTextAppearance,NATIVE_EXPLICIT_TEXT_AXIS_RUNTIME,NATIVE_AUTHORED_TEXT_OVERRIDE_RUNTIME,NATIVE_AUTHORED_TEXT_APPEARANCE_FUNCTIONS,type NativeScalarTextRecipe,type NativeAuthoredTextRecipes,type NativeAuthoredTextInstanceRecipe} from './native-text-appearance.js';
 import type {QualifiedTextAppearance} from './source-text-appearance-control.js';
@@ -323,6 +324,8 @@ export interface NodeSpec {
   visibilityTarget?: {key:string; visible:boolean};
   instanceVisibility?: Record<string,boolean>;
   literalTextBox?:{width:number;height?:number};
+  /** Prepared-library-only derived scalar token box; never caller authority. */
+  tokenTextBox?:{width:number;height?:number;lineHeight?:number};
   textAppearanceTarget?:string;
   textSizeTarget?:string;
   instanceTextSizes?:Record<string,NativeTextSize>;
@@ -5548,6 +5551,10 @@ function partToSpecInner(
     let selected = baseShape;
     if (baseShape.kind === 'line') {
       if(baseShape.line.fillWidth)throw Error('native-horizontal-fill-line-unqualified:'+name);
+      // Dash lengths, captured stroke outlines and per-variant drawings reach
+      // the React surfaces only; a native LINE from the shared fields would be solid.
+      if(baseShape.line.dashes?.length||baseShape.line.painted?.length||nativeLineDrawings(baseShape).length>1)
+        throw Error('native-dashed-or-variant-line-unqualified:'+name);
       // Capture identities stay in the contract and receipts, not in every
       // native variant's paint spec. Repeating all observedSources on every
       // node would multiply the full source inventory by the variant count.
@@ -9528,6 +9535,7 @@ function buildSyncScript(
   const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout !== undefined));
   // dump v1.36: same discipline — a contract with no whole-pixel text box
   // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
+  const hasTokenTextBox=featureDatas.some(d=>dataSome(d,s=>!!s.tokenTextBox));
   const hasLiteralTextBox=featureDatas.some(d=>dataSome(d,s=>!!s.literalTextBox));
   const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
@@ -10488,13 +10496,13 @@ ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characte
       await applyAuthoredTextPlan(node,spec.authoredTextAppearance,spec.authoredTextScalar,spec.authoredTextAppearanceTarget);
       (registry.finalTextAppearances||=[]).push({node,spec});
     }
-` : scalarTextInitialization+'\n'}${hasLiteralTextBox ? NATIVE_LITERAL_TEXT_BOX_RUNTIME : ''}    if (spec.contentProp) {
+` : scalarTextInitialization+'\n'}${hasLiteralTextBox ? NATIVE_LITERAL_TEXT_BOX_RUNTIME : ''}${hasTokenTextBox ? NATIVE_TOKEN_TEXT_BOX_RUNTIME : ''}    if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }${hasCallerContent ? `
     if (spec.callerContentProp) {
       node.setSharedPluginData('ds_contracts', 'callerContentProperty', spec.callerContentProp);
     }` : ''}
-    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
+    if (${hasTokenTextBox ? '!spec.tokenTextBox && (' : ''}spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings${hasTokenTextBox ? ')' : ''}) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
       //

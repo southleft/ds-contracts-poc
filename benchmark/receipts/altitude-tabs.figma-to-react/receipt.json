@@ -20,29 +20,29 @@
     }
   },
   "generatedSha256": {
-    "ArrowArcLeft/ArrowArcLeft.module.css": "373b2d58cb5a9cc8fd61d1232b628ae7d4b210a01c3f3f7aeb4acd39200dcf7f",
+    "ArrowArcLeft/ArrowArcLeft.module.css": "22761bcc19e6b3cb957f6ec554822e77586aba8b7caedb5a34489f4093b6a48e",
     "ArrowArcLeft/ArrowArcLeft.tsx": "39597f11d55b2b53db37ba9c9ea4462b0dda22170120a99665859d0322bf4453",
     "ArrowArcLeft/index.ts": "021f109a0fd7f2c7dd65788a99fbabd22294650592315f389ad6c3e32ee09119",
-    "Button/Button.module.css": "9f87f69ceb0b738991d7daf5ecdd6854c8e81119042f5b22e4ec8b58232ab751",
+    "Button/Button.module.css": "5d8da62c8d57449ead1011a90432d93b60f1b7e2a2d826fab6899eec5e8819f5",
     "Button/Button.tsx": "40c7e5898fb0a0f51e4381cec5b8824634194de40a77396e6ac1e5b38e2fb590",
     "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
-    "Icon/Icon.module.css": "0daf05ba000f8015e09b8381d36b5e15fecc66384984e91956a74914df534e60",
+    "Icon/Icon.module.css": "81c97ade9c960b63f64df901c2b204aaa7d3f6a1fe7d120dfd0d2fc9554b8d05",
     "Icon/Icon.tsx": "2738f4f1a179a62cc18872e1ccdfbd77d81dcc0872672933c56eadf0b6607d1a",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "Tab/Tab.module.css": "958ea9cabddc8b13bfd872130b8208efe58f391ee7242ada98e30abf49a4d4e8",
+    "Tab/Tab.module.css": "3eb4bc9a27f36f81a7b4354e579944f97da0d390a13e709a0b19a22de5d4bad7",
     "Tab/Tab.tsx": "d222bb064e2b9e8e0fa0c4a826f3a302deef6b3777cd4b814e94674dabf24f89",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
-    "TabPanel/TabPanel.module.css": "6d7ef8addb055ba50cba8f717e150eec5b7743712e256b5a1de9757e8fe5602e",
-    "TabPanel/TabPanel.tsx": "d14e75b47a31470895f96f4c3d815c59c1d27cac96a0798d92d9a90d00ac978e",
+    "TabPanel/TabPanel.module.css": "2761b39c751da668f46c8771251290b558dfc6d4ac1addbd2328d75328f96483",
+    "TabPanel/TabPanel.tsx": "6bcab2f228832f045298b179aaca3f06f8a565e15fd4afb1fc0ab707de83a0b5",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
-    "Tabs/Tabs.module.css": "e67e204f6e8dddd6b48d3769afd3a501c3dcced0ffdab60ff3aaaf2b79143111",
+    "Tabs/Tabs.module.css": "2b6bc5128620de88bb6b31e2005050c1945dcd6e7fdf5641717ba84abe0cfc39",
     "Tabs/Tabs.tsx": "ddd3122a1e9f2ba2c3c801a148504b91ef2b84ce096af3ba3b2da9ec08c92ac9",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
-    "TextPassage/TextPassage.module.css": "f414ff703840d73f51d990865e4ec9dc48310c66a4350d02c5be185795231fb2",
+    "TextPassage/TextPassage.module.css": "0d9c5d3194bea0852ae69283ce7ac6b38d2ae417dee4beb8ad5e6977abaaedee",
     "TextPassage/TextPassage.tsx": "b91dece789f139106b13b6babcbc03fa210cb85fd8dc12aecc4227d1573fae12",
     "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
     "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
-    "tokens.css": "f20cdafec4d24a1beea7be492ef3ab1d09a333da2a7a7979f59a8a418e2bb4b9"
+    "tokens.css": "24f75ee23adfb5156cc04ad6221967761447be9bb65a0638c23c7b6be76b656a"
   },
   "cases": [
     {
@@ -96,7 +96,7 @@
           "height": 176
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "b4400e83b81f286cc21bd15d934c6fdad32209a7f1e09fa79b3b9c109f57a23e",
+        "pngSha256": "1276e15adec3d90696c4179527fb554143c7219dbf899d90c01cb7c015f45d5c",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
@@ -239,7 +239,7 @@
           "height": 176
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "c3c14207ffec27b8ec67e3581ebd3d292108742de714631842100d8cb57e3946",
+        "pngSha256": "244eaed0ce1c920ff6d178676c822b28b6535355daa97252b7f5ecae95da924a",
         "raster": {
           "kind": "browser-paint-extent-v1",
           "paint": {
@@ -398,8 +398,31 @@
         "useAbsoluteBounds": false,
         "proofs": "figma-render-export-proofs.json"
       },
-      "beforeSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9",
-      "afterSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9"
+      "exportRequests": {
+        "layout": {
+          "fileKey": "y83n4o9LOGs74oAoguFcGS",
+          "version": "2408215415010641279",
+          "nodeIds": [
+            "3558:61901",
+            "3558:61928"
+          ],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": true
+        },
+        "render": {
+          "fileKey": "y83n4o9LOGs74oAoguFcGS",
+          "version": "2408215415010641279",
+          "nodeIds": [],
+          "format": "png",
+          "scale": 1,
+          "contentsOnly": true,
+          "useAbsoluteBounds": false
+        }
+      },
+      "beforeSha256": "0d487c0d068c3727351cd589e0158cc2f15bd2a672734e4e58f5b6a344e500a7",
+      "afterSha256": "0d487c0d068c3727351cd589e0158cc2f15bd2a672734e4e58f5b6a344e500a7"
     },
     "scorer": "Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -408,12 +431,12 @@
         "key": "variant-default",
         "figmaImage": "figma-3558_61901.png",
         "mismatchPercent": 0.015566625155666251,
-        "blackMismatchPercent": 3.2171025321710256,
+        "blackMismatchPercent": 3.2326691573266917,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
           "whiteMismatchPercent": 0.015566625155666251,
-          "blackMismatchPercent": 3.2171025321710256,
+          "blackMismatchPercent": 3.2326691573266917,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -502,12 +525,12 @@
         "key": "variant-stretch",
         "figmaImage": "figma-3558_61928.png",
         "mismatchPercent": 0.015531165872851522,
-        "blackMismatchPercent": 3.1877717954027744,
+        "blackMismatchPercent": 3.200714433630151,
         "historicalWithinLimit": true,
         "layoutAligned": {
           "status": "measured",
           "whiteMismatchPercent": 0.015531165872851522,
-          "blackMismatchPercent": 3.1877717954027744,
+          "blackMismatchPercent": 3.200714433630151,
           "withinLimit": true,
           "placement": {
             "consumer": {
@@ -677,7 +700,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "e974b4773afa2954d2558828983c314129e7d7a1d69bddda55781ede5c52be51",
+    "tarballSha256": "78a802a6d8c168b34e33bf9a47c63355ac0e689811630d98a5378ad765d8d3fc",
     "distFiles": [
       "ArrowArcLeft",
       "ArrowArcLeft/ArrowArcLeft.d.ts",
@@ -721,12 +744,6 @@
       "TextPassage/TextPassage.module.css",
       "TextPassage/index.d.ts",
       "TextPassage/index.js",
-      "fonts",
-      "fonts/604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
-      "fonts/e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
-      "fonts/f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
-      "fonts/fonts.css",
-      "fonts/manifest.json",
       "index.d.ts",
       "index.js",
       "tokens.css"
@@ -735,70 +752,20 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "57d297f5e780657bd2bee55938c0937d2baa041f1476d7c61c334c661d43753c",
+    "lockfileSha256": "10b8455db4b0f73d31622c1376443c41199645ca4e6aeb4b54da298a8ba25b3d",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
-      "kind": "package-assets",
-      "manifest": {
-        "version": 1,
-        "fonts": [
-          {
-            "family": "Public Sans",
-            "weight": "600",
-            "style": "normal",
-            "file": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
-            "sha256": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d"
-          },
-          {
-            "family": "Public Sans",
-            "weight": "500",
-            "style": "normal",
-            "file": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
-            "sha256": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9"
-          },
-          {
-            "family": "Public Sans",
-            "weight": "400",
-            "style": "normal",
-            "file": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
-            "sha256": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134"
-          }
-        ]
-      },
+      "kind": "environment-fonts",
+      "manifest": null,
       "sourceFontByteIdentity": "unverified",
       "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
-      "loaded": [
-        {
-          "family": "Public Sans",
-          "weight": "600",
-          "style": "normal",
-          "file": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
-          "sha256": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d",
-          "status": "loaded"
-        },
-        {
-          "family": "Public Sans",
-          "weight": "500",
-          "style": "normal",
-          "file": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
-          "sha256": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9",
-          "status": "loaded"
-        },
-        {
-          "family": "Public Sans",
-          "weight": "400",
-          "style": "normal",
-          "file": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
-          "sha256": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134",
-          "status": "loaded"
-        }
-      ]
+      "loaded": []
     },
     "builtCss": {
-      "bytes": 18308,
-      "tokenDefinitions": 76,
-      "tokenDefinitionsExpected": 76
+      "bytes": 18959,
+      "tokenDefinitions": 81,
+      "tokenDefinitionsExpected": 81
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -811,7 +778,7 @@
     "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
     "textStyleRule": "Every drawn TEXT, located in the rendered text runs, must be drawn character by character in its Figma fill color (SOLID paints composited, times paint and layer opacity) within one 8-bit step (1/255) per channel and alpha of the rendered DECLARED computed color (text-fill color or SVG fill, times CSS opacity; never pixels), and in its Figma font family and numeric weight as REQUESTED by the first family of the computed font-family stack, exactly (an unavailable family is font-unavailable-in-consumer, not this). A non-solid Figma paint or a non-sRGB rendered color is text-style-unmeasured, never a pass.",
     "figmaVersion": "2408215415010641279",
-    "responseSha256": "f1bbbe21ee0747cebfb2b585b0b2dd64481f0428b6d9da8cc491e67b1f1c38c9",
+    "responseSha256": "0d487c0d068c3727351cd589e0158cc2f15bd2a672734e4e58f5b6a344e500a7",
     "evidence": "figma-content.json",
     "cases": [
       {
@@ -986,7 +953,7 @@
         "verdict": "pass",
         "image": {
           "white": 0.015566625155666251,
-          "black": 3.2171025321710256,
+          "black": 3.2326691573266917,
           "withinLimit": true
         },
         "content": {
@@ -1004,7 +971,7 @@
         "verdict": "pass",
         "image": {
           "white": 0.015531165872851522,
-          "black": 3.1877717954027744,
+          "black": 3.200714433630151,
           "withinLimit": true
         },
         "content": {
