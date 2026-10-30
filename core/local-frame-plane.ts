@@ -1,5 +1,6 @@
 import type {DumpNode} from '../extract/figma/types.js';
 import {allocateInstanceAffine} from '../packages/schema/src/instance-affine.js';
+import {hasLocalLayout,projectLocalLayoutPlane} from './local-layout-plane.js';
 
 const identity = (m: number[][]) => Array.isArray(m) && m.length === 2 && m.every(row => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)) && m[0][0] === 1 && m[0][1] === 0 && m[1][0] === 0 && m[1][1] === 1;
 export function hasRotatedLocalFrame(node: DumpNode): boolean {
@@ -10,6 +11,7 @@ export function hasRotatedLocalFrame(node: DumpNode): boolean {
  * parent planes. World bounding boxes are never inverse-rotated or guessed.
  * The caller owns the outer allocation and the frame's affine transform. */
 export function projectLocalFramePlane(node: DumpNode, parentId: string | undefined, parentSize?: {width:number;height:number}) {
+  if(hasLocalLayout(node))return projectLocalLayoutPlane(node,parentId,parentSize);
   const refuse = (reason: string): never => { throw Error(`local-frame-plane-unqualified:${reason}`); };
   if (node.type !== 'FRAME') refuse('owner-kind');
   if (node.propRefs?.visible || node.bound?.visible) refuse('live-owner-visibility');

@@ -131,3 +131,20 @@ test('partial caller paint preserves the clean-base sparse visibility ownership 
     /visibility-demand-owned-part-unqualified:/);
   assert.equal(JSON.stringify({set:f.set,contracts:[...f.contracts]}),before,'a refused sparse caller cannot gain paint or source ownership');
 });
+
+
+test('complete fixed-slot ink keeps Boolean-selected colors on the existing instance ink path',()=>{
+ const f=fixture(true);f.set.variants=f.set.variants.slice(0,4);
+ f.set.propertyDefinitions.Tone={type:'VARIANT',defaultValue:'false',variantOptions:['false','true']};
+ for(const [index,v] of f.set.variants.entries()){
+  const selected=index>=2;v.name=`Tone=${selected}, Size=${index%2?'Large':'Small'}`;
+  v.variantProperties={Tone:String(selected),Size:index%2?'Large':'Small'};
+  const node=v.children[0],observation=node.fixedSwaps.Icon.observedInstances[0];
+  node.hostOverrides=[{path:'Name does not grant ownership',fields:['fills','inheritFillStyleId'],fill:{hex:selected?'dc2626':'111111'},solidFillTarget:{nodeId:observation.nodeId+';50:2',instanceId:observation.nodeId,componentId:'50:1',instancePath:[0],childPath:[0]}}];
+ }
+ const before=JSON.stringify(f.set),{contract,result}=f.read();
+ assert(refs(contract).every(p=>p.component!.overrides?.color));
+ assert(result.mintedTokens!.entries.some(e=>e.value==='#dc2626'));
+ assert(result.mintedTokens!.entries.some(e=>e.value==='#111111'));
+ assert.equal(JSON.stringify(f.set),before);
+});

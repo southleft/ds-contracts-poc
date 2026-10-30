@@ -21,6 +21,9 @@ export function instanceAffineCss(observation:InstanceAffineObservation,fill:{wi
  // Growth stays on the allocation host, never on the rotated child. The
  // caller supplies the source's parent-owned grow/stretch class to this host.
  delete outer.flex;outer.containerType='size';outer.flexShrink=0;
+ // The allocation inherits the caller's grow/stretch rules. A fixed inline
+ // size would defeat cross-axis stretch even when the source requested FILL.
+ if(fill.width)outer.width='auto';if(fill.height)outer.height='auto';
  inner.width=localWidth;inner.height=localHeight;
  inner.transform=`translate(${shift(a0,c)},${shift(b,d)}) matrix(${m[0][0]},${m[1][0]},${m[0][1]},${m[1][1]},0,0)`;
  return {outer,inner,child:{flex:'none',width:'100%',height:'100%'}};

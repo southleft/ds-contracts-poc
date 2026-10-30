@@ -46,6 +46,9 @@ const PACKAGES = [
     // validator; installed consumers need its runtime and declaration.
     // Reviewed 2026-10-26: contract-schema imports/re-exports the ordered
     // fill-stack schema and helpers; installed validation requires both files.
+    // Reviewed 2026-10-29: the schema package also builds the pure rigid and
+    // axis-reflected path predicates shared by REST import and source-plane
+    // lowering. Include their runtime modules and matching declarations.
     expected: [
       "README.md",
       "contract.schema.json",
@@ -53,6 +56,8 @@ const PACKAGES = [
       "dist/absolute-geometry.js",
       "dist/archetype.d.ts",
       "dist/archetype.js",
+      "dist/axis-reflected-filled-path.d.ts",
+      "dist/axis-reflected-filled-path.js",
       "dist/contract-schema.d.ts",
       "dist/contract-schema.js",
       "dist/filled-path.d.ts",
@@ -63,6 +68,8 @@ const PACKAGES = [
       "dist/index.js",
       "dist/instance-affine.d.ts",
       "dist/instance-affine.js",
+      "dist/rigid-filled-path.d.ts",
+      "dist/rigid-filled-path.js",
       "dist/solid-fill-binding.d.ts",
       "dist/solid-fill-binding.js",
       "dist/solid-fill-composition.d.ts",

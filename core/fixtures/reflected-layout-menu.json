@@ -1,0 +1,471 @@
+{
+  "variantId": "118262:160591",
+  "parentSize": {
+    "width": 200,
+    "height": 40
+  },
+  "parentId": "118262:160591",
+  "node": {
+    "name": "flyout-wrapper",
+    "type": "FRAME",
+    "nodeId": "118262:160958",
+    "localGeometry": {
+      "nodeId": "118262:160958",
+      "parentId": "118262:160591",
+      "transform": [
+        [
+          -1,
+          0,
+          200
+        ],
+        [
+          0,
+          1,
+          19.999500274658203
+        ]
+      ],
+      "localSize": {
+        "width": 0.0010000000474974513,
+        "height": 0.0010000000474974513
+      },
+      "parentSize": {
+        "width": 200,
+        "height": 40
+      }
+    },
+    "fixedSize": {
+      "width": 0.0010000000474974513,
+      "height": 0.0010000000474974513
+    },
+    "children": [
+      {
+        "name": "submenu",
+        "type": "FRAME",
+        "nodeId": "118262:161711",
+        "localGeometry": {
+          "nodeId": "118262:161711",
+          "parentId": "118262:160958",
+          "transform": [
+            [
+              -1,
+              0,
+              -7.9990234375
+            ],
+            [
+              0,
+              1,
+              -19.99951171875
+            ]
+          ],
+          "localSize": {
+            "width": 214,
+            "height": 40
+          },
+          "parentSize": {
+            "width": 0.0010000000474974513,
+            "height": 0.0010000000474974513
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "sourceEmptyFill": true,
+        "abs": {
+          "x": 8,
+          "y": -20,
+          "right": -222,
+          "bottom": -20,
+          "width": 214,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "color": {
+              "hex": "000000",
+              "alpha": 0.1
+            },
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "radius": 10
+          }
+        ],
+        "effectStyle": "shadow/\u4e00\u7ea7\u4e0b\u62c9\u83dc\u5355",
+        "effectStyleKey": "169fea23038fef641f30d3e87e864cd037226ef1",
+        "children": [
+          {
+            "name": "arrow-position-scrubber",
+            "type": "FRAME",
+            "nodeId": "118262:161712",
+            "localGeometry": {
+              "nodeId": "118262:161712",
+              "parentId": "118262:161711",
+              "transform": [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ]
+              ],
+              "localSize": {
+                "width": 8,
+                "height": 40
+              },
+              "parentSize": {
+                "width": 214,
+                "height": 40
+              }
+            },
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MAX",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "sourceEmptyFill": true,
+            "fixedSize": {
+              "height": 40
+            },
+            "children": [
+              {
+                "name": "Arrow-Wrapper",
+                "type": "FRAME",
+                "nodeId": "118262:161713",
+                "localGeometry": {
+                  "nodeId": "118262:161713",
+                  "parentId": "118262:161712",
+                  "transform": [
+                    [
+                      -1,
+                      0,
+                      8
+                    ],
+                    [
+                      0,
+                      -1,
+                      40
+                    ]
+                  ],
+                  "localSize": {
+                    "width": 8,
+                    "height": 40
+                  },
+                  "parentSize": {
+                    "width": 8,
+                    "height": 40
+                  }
+                },
+                "fillHeight": true,
+                "children": [
+                  {
+                    "name": "arrow",
+                    "type": "VECTOR",
+                    "nodeId": "118262:161714",
+                    "localGeometry": {
+                      "nodeId": "118262:161714",
+                      "parentId": "118262:161713",
+                      "transform": [
+                        [
+                          4.371139183945161e-08,
+                          -1,
+                          7.071068286895752
+                        ],
+                        [
+                          1,
+                          4.371138473402425e-08,
+                          13
+                        ]
+                      ],
+                      "localSize": {
+                        "width": 14.142135620117188,
+                        "height": 7.071067810058594
+                      },
+                      "parentSize": {
+                        "width": 8,
+                        "height": 40
+                      }
+                    },
+                    "sourceNormalFillComposition": {
+                      "paint": {
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1
+                        },
+                        "opacity": 1,
+                        "blendMode": "NORMAL"
+                      },
+                      "variableId": "VariableID:308115:497"
+                    },
+                    "fill": {
+                      "hex": "ffffff"
+                    },
+                    "abs": {
+                      "x": 0.93,
+                      "y": 12.86,
+                      "right": 0,
+                      "bottom": 13,
+                      "width": 7.07,
+                      "height": 14.14,
+                      "constraints": {
+                        "horizontal": "CENTER",
+                        "vertical": "CENTER"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "submenu-open",
+            "type": "FRAME",
+            "nodeId": "118262:161715",
+            "localGeometry": {
+              "nodeId": "118262:161715",
+              "parentId": "118262:161711",
+              "transform": [
+                [
+                  1,
+                  0,
+                  8
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ]
+              ],
+              "localSize": {
+                "width": 206,
+                "height": 40
+              },
+              "parentSize": {
+                "width": 214,
+                "height": 40
+              }
+            },
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 4,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "cornerRadius": 2,
+            "sourceNormalFillComposition": {
+              "paint": {
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "opacity": 1,
+                "blendMode": "NORMAL"
+              },
+              "variableId": "VariableID:308115:497"
+            },
+            "fill": {
+              "hex": "ffffff"
+            },
+            "children": [
+              {
+                "name": "pop-menu-item/2nd-level",
+                "type": "INSTANCE",
+                "nodeId": "118262:161716",
+                "localGeometry": {
+                  "nodeId": "118262:161716",
+                  "parentId": "118262:161715",
+                  "transform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0
+                    ]
+                  ],
+                  "localSize": {
+                    "width": 206,
+                    "height": 40
+                  },
+                  "parentSize": {
+                    "width": 206,
+                    "height": 40
+                  }
+                },
+                "clipsContent": true,
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    9,
+                    12,
+                    9,
+                    12
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "cornerRadius": 2,
+                "sourceEmptyFill": true,
+                "instanceSizing": {
+                  "horizontal": "HUG",
+                  "vertical": "HUG"
+                },
+                "reactions": [
+                  {
+                    "trigger": "ON_HOVER",
+                    "action": "CHANGE_TO",
+                    "destination": "118262:160506",
+                    "transition": "SMART_ANIMATE",
+                    "duration": 250
+                  }
+                ],
+                "instanceOf": "pop-menu-item/2nd-level",
+                "instanceKey": "08daaff79ee8e13a8f566566a53c825572d49834",
+                "instanceSetKey": "f88e0fbaf46c96fb4a7276293dd00ce43c124a69",
+                "componentProperties": {
+                  "\u66ff\u6362\u6587\u672c#150450:108": "Menu 1",
+                  "\u9009\u4e2d": "false",
+                  "\u60ac\u505c": "false",
+                  "\u5206\u7ec4": "false",
+                  "\u2b11\u6570\u91cf": "0"
+                },
+                "instanceGeometry": {
+                  "nodeId": "118262:161716",
+                  "componentId": "118262:160497",
+                  "transform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0
+                    ]
+                  ],
+                  "localSize": {
+                    "width": 206,
+                    "height": 40
+                  }
+                },
+                "instanceRootOverrides": {
+                  "nodeId": "118262:161716",
+                  "componentId": "118262:160497",
+                  "fields": [
+                    "counterAxisSizingMode",
+                    "height",
+                    "primaryAxisSizingMode",
+                    "width"
+                  ],
+                  "mainPadding": [
+                    9,
+                    12,
+                    9,
+                    12
+                  ],
+                  "mainSize": {
+                    "width": 206,
+                    "height": 40
+                  },
+                  "componentKey": "08daaff79ee8e13a8f566566a53c825572d49834",
+                  "componentSetKey": "f88e0fbaf46c96fb4a7276293dd00ce43c124a69",
+                  "localTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0
+                    ]
+                  ],
+                  "localSize": {
+                    "width": 206,
+                    "height": 40
+                  }
+                },
+                "textOverrides": {
+                  "title": "Menu 1"
+                },
+                "textOverrideTargets": {
+                  "title": {
+                    "nodeId": "I118262:161716;118262:160500",
+                    "instanceId": "118262:161716",
+                    "componentId": "118262:160497",
+                    "instancePath": [],
+                    "childPath": [
+                      0
+                    ]
+                  }
+                },
+                "hostOverrides": [
+                  {
+                    "path": "title",
+                    "fields": [
+                      "characterStyleOverrides",
+                      "lineIndentations",
+                      "lineTypes",
+                      "styleOverrideTable"
+                    ]
+                  }
+                ],
+                "bbox": {
+                  "width": 206,
+                  "height": 40
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

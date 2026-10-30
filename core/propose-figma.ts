@@ -1,3 +1,5 @@
+import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
+import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
@@ -13,6 +15,7 @@ import {settleNestedPropertyInputs,nestedPropertySourceNodes,type SourceInstance
 import {settleNestedTextSizes,type SourceTextPart} from './nested-text-size-inputs.js';
 import {cssDecimal} from './css-decimal.js';
 import {hasRotatedLocalFrame,projectLocalFramePlane} from './local-frame-plane.js';
+import {projectedLocalLayoutPlane} from './local-layout-plane.js';
 import {normalizeHiddenComponentPresence} from './hidden-component-presence.js';
 import {rotatedFlowRatio} from './rotated-flow-ratio.js';
 import {settleNestedSlotSelections} from './nested-slot-control.js';
@@ -5090,7 +5093,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     invertNodeShape(sub, part, ctx, where);
     return;
   }
-  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: {...o.node.shape!, ...(o.node.shape?.arc?.cap && o.node.strokeAlign ? {arc:{...o.node.shape.arc,align:o.node.strokeAlign}} : {})}, insets: o.node.shape!.x !== undefined && o.node.shape!.y !== undefined ? parentCssBorderInsets(o, ctx) : zeroInsets() }));
+  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: {...(halfTurnScaledPath(o.node,o.parent?.node) ?? o.node.shape!), ...(o.node.shape?.arc?.cap && o.node.strokeAlign ? {arc:{...o.node.shape.arc,align:o.node.strokeAlign}} : {})}, insets: o.node.shape!.x !== undefined && o.node.shape!.y !== undefined ? parentCssBorderInsets(o, ctx) : zeroInsets() }));
   const kinds = [...new Set(shapes.map((s) => s.sh.kind))];
   if (kinds.length > 1) {
     ctx.notes.push(`${where}: shape kind differs across variants (${kinds.join(', ')}) — shape not carried; review`);
@@ -5098,6 +5101,20 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   }
   const first = shapes[0].sh;
   if (first.kind === 'line') {
+    const horizontalFill=m.occ.every(o=>{
+      const n=o.node,sh=n.shape!,line=sh.line,flow=sh.lineFlow,parent=o.parent?.node;
+      return n.fillWidth===true&&!n.fillHeight&&!n.abs&&!n.mask&&!n.effects?.length&&!!line&&!nativeLineIssue(line)&&line.cap==='NONE'&&line.align==='CENTER'&&sh.height===0&&sh.width===line.length&&
+        line.transform[0][0]===1&&line.transform[0][1]===0&&line.transform[1][0]===0&&line.transform[1][1]===1&&
+        flow?.kind==='horizontal-fill-line-v1'&&Array.isArray(flow.padding)&&flow.padding.length===4&&flow.padding.every(v=>Number.isFinite(v)&&v>=0)&&flow.nodeId===n.nodeId&&flow.parentId===parent?.nodeId&&line.source?.nodeId===n.nodeId&&line.source.parentId===flow.parentId&&
+        flow.length===line.length&&canonicalJson(flow.transform)===canonicalJson(line.transform)&&parent?.layout?.mode==='VERTICAL'&&
+        canonicalJson(parent.layout.padding)===canonicalJson(flow.padding)&&Number.isFinite(flow.parentWidth)&&flow.parentWidth>0&&Number.isFinite(flow.parentHeight)&&flow.parentHeight>=0&&
+        line.transform[0][2]===flow.padding[3]&&Math.fround(line.length)===Math.fround(flow.parentWidth-flow.padding[1]-flow.padding[3]);
+    });
+    if(horizontalFill){
+      part.shape={kind:'line',width:first.width,height:0,line:{...first.line!,transform:[[1,0,0],[0,1,0]],fillWidth:true,observedSources:shapes.map(s=>({...s.sh.line!.source!,variantName:s.variant,length:s.sh.line!.length,transform:s.sh.line!.transform}))}};
+      ctx.notes.push(`${where}: complete source horizontal FILL LINE allocation retained with zero logical height; original per-variant lengths and parents remain witnessed`);
+      return;
+    }
     const signature = (sh: typeof first) => sh.line && JSON.stringify({ length: sh.line.length,
       basis: sh.line.transform.map(row => row.slice(0,2)), cap: sh.line.cap, align: sh.line.align });
     if (shapes.some(s => !s.sh.line || nativeLineIssue(s.sh.line) || s.sh.height !== 0 || s.sh.width !== s.sh.line.length) ||
@@ -5199,18 +5216,9 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     }
     shape.paths = first.paths;
     // Source identity metadata does not alter the free parent's coordinate plane.
-    const scaled = m.occ.map(o => {
-      const sh = o.node.shape!, parent = o.parent?.node, box = parent?.bbox;
-      if (!parent || !box || !Number.isFinite(box.width) || !Number.isFinite(box.height) || box.width <= 0 || box.height <= 0 ||
-          Object.keys(parent).some(key => !['name', 'type', 'nodeId', 'componentKey', 'bbox', 'children', 'hidden', 'clipsContent', 'fixedSize', 'targetAspectRatio', 'sourceEmptyFill', 'fill', 'sourceFillComposition', 'sourceNormalFillComposition', 'variableConsumers'].includes(key)) ||
-          (parent.fixedSize !== undefined && (parent.fixedSize.width !== box.width || parent.fixedSize.height !== box.height)) ||
-          (parent.sourceEmptyFill !== undefined && (parent.sourceEmptyFill !== true || !!parent.fill || !!parent.sourceNormalFillComposition || !!parent.sourceFillComposition)) ||
-          (parent.targetAspectRatio !== undefined && (!Number.isFinite(parent.targetAspectRatio.x) || !Number.isFinite(parent.targetAspectRatio.y) ||
-            parent.targetAspectRatio.x <= 0 || parent.targetAspectRatio.y <= 0 ||
-            Math.abs(parent.targetAspectRatio.x / parent.targetAspectRatio.y - box.width / box.height) > 1e-6)) ||
-          (parent.clipsContent !== undefined && typeof parent.clipsContent !== 'boolean') ||
-          !parent.children?.length || parent.children.some(child => child.shape?.kind !== 'path' ||
-            child.shape.constraints?.horizontal !== 'SCALE' || child.shape.constraints?.vertical !== 'SCALE') ||
+    const scaled = m.occ.map((o,index) => {
+      const sh = shapes[index].sh, parent = o.parent?.node, box = freePathViewport(parent);
+      if (!box ||
           sh.constraints?.horizontal !== 'SCALE' || sh.constraints?.vertical !== 'SCALE' || sh.rotation ||
           !Number.isFinite(sh.x) || !Number.isFinite(sh.y)) return undefined;
       return { width: box.width, height: box.height, x: sh.x!, y: sh.y! };
@@ -5220,7 +5228,9 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       shape.parentViewport = scaled[0];
       part.shape = shape;
       part.declared = { ...(part.declared as Record<string, string> | undefined), position: 'absolute' };
-      ctx.notes.push(`${where}: captured SCALE/SCALE relationship carried against the exact free-parent viewport; path bytes and main dimensions are unchanged`);
+      ctx.notes.push(m.occ.some((o,i)=>o.node.shape?.rotation && !shapes[i].sh.rotation)
+        ? `${where}: captured half-turn lowered through its exact source matrix into the SCALE/SCALE parent plane; original path bytes and matrix remain in source evidence`
+        : `${where}: captured SCALE/SCALE relationship carried against the exact free-parent viewport; path bytes and main dimensions are unchanged`);
       return;
     }
     const scaledVariants = scaled.every(Boolean);
@@ -6432,6 +6442,26 @@ function wrapPositionedRefPart(
   if (!carryAbsPlacement(m, wrapper, wTokens, ctx, where,
       { size: !mixedRef, mixedRef, visibleWhen: built.visibleWhen as Part['visibleWhen'] })) return built;
   attachTokens(ctx, wrapper, wTokens);
+  // A positioned source has two owners: this already-qualified outer box
+  // and the linked child's local rigid transform. Never give both to one
+  // part, or reuse the outer translation inside the child.
+  if (!mixedRef && component && child?.anatomy.root.instanceRootInputs?.includes('width') &&
+      child.anatomy.root.instanceRootInputs.includes('height') && !built.instanceAffine &&
+      !built.instanceAffineByProp && !built.instanceAffineLayout &&
+      m.occ.every(({node}) => {
+        const g=node.instanceGeometry,w=node.instanceRootOverrides,box=absBoxOf(node);
+        if(!g||!w||!box||node.fillWidth||node.fillHeight||g.nodeId!==node.nodeId||w.nodeId!==node.nodeId||
+           g.componentId!==w.componentId||canonicalJson(g.transform)!==canonicalJson(w.localTransform)||
+           !w.fields.includes('width')||!w.fields.includes('height')||
+           w.localSize?.width!==g.localSize.width||w.localSize?.height!==g.localSize.height)return false;
+        const allocated=allocateInstanceAffine(g);if('issue'in allocated)return false;
+        const r=allocated.allocation.allocation;
+        return [r.left-box.x,r.top-box.y,r.width-box.width,r.height-box.height].every(v=>Math.abs(v)<=1e-9);
+      })) {
+    const local: Merged={...m,occ:m.occ.map(o=>({...o,node:{...o.node,abs:undefined}}))};
+    carryInstanceAffine(local,built,component as Record<string,unknown>,ctx,where);
+    if(built.instanceAffine || built.instanceAffineByProp || built.instanceAffineLayout) wrapper.layout={display:'flex',direction:'row'};
+  }
   if (built.visibleWhen !== undefined) {
     wrapper.visibleWhen = built.visibleWhen;
     delete built.visibleWhen;
@@ -12341,10 +12371,13 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
   if (ctx.mint && target.data.anatomy.root?.overridable?.includes('color') && inkParts.length === 1 &&
       inkParts[0].shape?.kind === 'path' && inkParts[0].shape.parentViewport && inkParts[0].literals?.['background-color'] === 'currentColor') {
     const rows = m.occ.map((o,i) => {
-      const overrides = o.node.hostOverrides;
-      const h = overrides?.length === 1 ? overrides[0] : undefined;
-      const t = h?.solidFillTarget, observed = sizes[i];
-      return h && t && observed && h.fields.length === 1 && h.fields[0] === 'fills' &&
+      const overrides = o.node.hostOverrides, observed = sizes[i];
+      const sourceMains=ctx.fixedSwapOwnerRoots?.get(firstSwap.id);
+      const sourceMain=sourceMains?.length===1?sourceMains[0].node:undefined;
+      const h = overrides?.length === 1 ? overrides[0] : selectedDrawingInkOverride(o.node,observed,sourceMain,firstSwap.key!);
+      const t = h?.solidFillTarget;
+      const emptyStroke=!!h?.emptyStrokeTarget&&canonicalJson(h.emptyStrokeTarget)===canonicalJson(t)&&!h.stroke;
+      return h && t && observed && directFilledPaintFields(h.fields,!!qualifiedHostInk(h),emptyStroke) &&
         t.componentId === firstSwap.id && t.instanceId === observed.nodeId &&
         JSON.stringify(t.instancePath) === JSON.stringify(observed.path) &&
         JSON.stringify(t.childPath) === '[0]' && h.fill?.hex ? h.fill : undefined;
@@ -12352,7 +12385,7 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
     if (rows.every(Boolean)) {
       const prior = ctx.mint.refOverrides.filter(row=>!row.property).find(r=>r.component===selected);
       const ink: Record<string,string> = prior?.target ?? {};
-      mintObservation(ctx,ink,`${where}.selectedContent`,'color','color',
+      mintInstanceInk(ctx,ink,`${where}.selectedContent`,
         m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(rows[i]!)})));
       if (!prior) ctx.mint.refOverrides.push({component:selected,target:ink});
       ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
@@ -12937,19 +12970,36 @@ function keyedInstanceReplacement(m:Merged,parentMode:ParentModes|null,ctx:Ctx,w
 /** An affine frame owns its local children; its parent owns the transformed
  * allocation. Distinct local sizes/matrices require distinct presence branches,
  * never a first-occurrence transform applied to every variant. */
-function carryLocalFramePlane(m:Merged,ctx:Ctx,where:string,selfKey:string):Record<string,unknown> {
-  const rows=m.occ.map(o=>({o,plane:projectLocalFramePlane(o.node,o.parent?.node.nodeId,o.parent?.node.localGeometry?.localSize)}));
+function carryLocalFramePlane(m:Merged,ctx:Ctx,where:string,selfKey:string,parentMode:ParentModes|null):Record<string,unknown> {
+  const rows=m.occ.map(o=>({o,plane:projectedLocalLayoutPlane(o.node)??projectLocalFramePlane(o.node,o.parent?.node.nodeId,o.parent?.node.localGeometry?.localSize)}));
   const outer=observedPartPresence(m,ctx,where);
   if(outer.observedPresence===OMIT_PART)throw Error(`local-frame-plane-unqualified:${where}:owner-presence`);
   const holder:Record<string,unknown>={element:'div',layout:{display:'flex',direction:'row'},
     ...(outer.observedPresence?{visibleWhen:outer.observedPresence}:{}),
     ...(outer.presenceMatrix?{presenceByCombination:outer.presenceMatrix}:{}),parts:{}};
+  if(rows.some(row=>!!row.plane.box!==!!rows[0].plane.box))throw Error(`local-frame-plane-unqualified:${where}:mixed-flow-allocation`);
+  if(!rows[0].plane.box)carryCrossAxisFill(m,parentMode,holder,ctx,where);
+  if(!rows[0].plane.box && rows.some(row=>row.o.node.fillWidth||row.o.node.fillHeight)){
+    const modes=m.occ.map(o=>parentMode?.byVariant.get(o.variant)??parentMode?.base);
+    if(!['HORIZONTAL','VERTICAL'].includes(modes[0]??'')||modes.some(mode=>mode!==modes[0])||
+      m.occ.some(o=>!!o.node.fillWidth!==!!m.occ[0].node.fillWidth||!!o.node.fillHeight!==!!m.occ[0].node.fillHeight))
+      throw Error(`local-frame-plane-unqualified:${where}:fill-parent-layout`);
+    const horizontal=modes[0]==='HORIZONTAL',first=m.occ[0].node;
+    if(horizontal?first.fillWidth:first.fillHeight)throw Error(`local-frame-plane-unqualified:${where}:main-axis-fill`);
+    // The extra allocation wrapper must re-establish the same source cross
+    // axis, even if the original parent's alignment already absorbed it.
+    // A positive bbox by itself cannot authorize Fill in a hugging cycle.
+    if(!parentMode||!carryObservedItemStretch(m,{...parentMode,stretchCross:false},holder,ctx,where))
+      throw Error(`local-frame-plane-unqualified:${where}:cross-axis-allocation`);
+  }
+  if(rows[0].plane.box){
   const allocation=mergeOcc(m.name,rows.map(({o,plane})=>({...o,node:{...o.node,abs:plane.box},
     parent:{...o.parent!,node:{...o.parent!.node,bbox:{...o.node.localGeometry!.parentSize}}}})),ctx.notes,where,ctx.axes);
   const allocationTokens:Record<string,string>={};
   if(!carryAbsPlacement(allocation,holder,allocationTokens,ctx,where,{size:true,visibleWhen:(holder as Part).visibleWhen}))
     throw Error(`local-frame-plane-unqualified:${where}:allocation`);
   attachTokens(ctx,holder,allocationTokens);
+  }
   const groups=new Map<string,typeof rows>();
   for(const row of rows){
     const {children:_children,nodeId:_nodeId,name:_name,localGeometry:_geometry,abs:_abs,bbox:_bbox,fixedSize:_fixed,...appearance}=row.plane.node;
@@ -12974,6 +13024,12 @@ function carryLocalFramePlane(m:Merged,ctx:Ctx,where:string,selfKey:string):Reco
         if(ctx.mint)ctx.mint.observations=ctx.mint.observations.filter(o=>!(o.target===tokens&&['width','height'].includes(o.cssProperty)));
       }
       part.instanceAffine=group[0].plane.affine;
+      const fill='fill'in group[0].plane?group[0].plane.fill:undefined;
+      if(fill&&(fill.width||fill.height)){
+        if(group.some(row=>!('fill'in row.plane)||canonicalJson(row.plane.fill)!==canonicalJson(fill)))throw Error(`local-frame-plane-unqualified:${where}:mixed-fill`);
+        part.instanceAffineFill=fill;
+        part.layout={...(part.layout as object??{}),...(fill.width?{grow:true}:{}),...(fill.height?{alignSelf:'stretch'}:{})};
+      }
       part.literals={...(part.literals as object??{}),width:`${group[0].plane.affine.localSize.width}px`,height:`${group[0].plane.affine.localSize.height}px`};
       (holder.parts as Record<string,unknown>)[key]=part;
       if(ctx.mint){
@@ -13004,8 +13060,9 @@ function buildPart(
     const dynamic=m.occ.filter(o=>o.node.propRefs?.visible);
     if(dynamic.length<m.occ.length)return buildPart({...m,occ:dynamic},parentMode,ctx,where,selfKey,localPlaneProjected);
   }
-  if(!localPlaneProjected && m.type==='FRAME' && m.occ.some(o=>hasRotatedLocalFrame(o.node)&&o.node.abs!==undefined))
-    return carryLocalFramePlane(m,ctx,where,selfKey);
+  if(!localPlaneProjected && (m.occ.some(o=>projectedLocalLayoutPlane(o.node)?.transformed) ||
+      m.type==='FRAME' && m.occ.some(o=>hasRotatedLocalFrame(o.node)&&o.node.abs!==undefined)))
+    return carryLocalFramePlane(m,ctx,where,selfKey,parentMode);
   if(m.type==='INSTANCE' && m.occ.some(o=>o.node.instanceComposition)){
     const instanceOf=first(m.occ,n=>n.instanceOf)??m.name;
     const resolution=resolveChildContract(instanceOf,instanceKeysOf(m),ctx);

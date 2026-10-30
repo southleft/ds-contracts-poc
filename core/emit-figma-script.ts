@@ -5547,6 +5547,7 @@ function partToSpecInner(
     const { pathsByProp, arcByCombination, ...baseShape } = part.shape;
     let selected = baseShape;
     if (baseShape.kind === 'line') {
+      if(baseShape.line.fillWidth)throw Error('native-horizontal-fill-line-unqualified:'+name);
       // Capture identities stay in the contract and receipts, not in every
       // native variant's paint spec. Repeating all observedSources on every
       // node would multiply the full source inventory by the variant count.
@@ -6029,8 +6030,12 @@ function partToSpecInner(
     if('issue' in result)throw Error(result.issue);
     const a=result.allocation;
     spec.instanceAffineAllocation=a;
+    if(part.instanceAffineFill){spec.instanceAffineFill=part.instanceAffineFill;delete spec.grow;delete spec.fillW;delete spec.fillH;}
     spec.absolute={h:'MIN',v:'MIN',left:0,top:0};
-    const host:NodeSpec={type:'frame',name,affineViewport:true,lits:{width:a.allocation.width,height:a.allocation.height},children:[spec]};
+    const host:NodeSpec={type:'frame',name,affineViewport:true,lits:{width:a.allocation.width,height:a.allocation.height},children:[spec],
+      ...(part.instanceAffineFill?{fillW:part.instanceAffineFill.width||undefined,fillH:part.instanceAffineFill.height||undefined}:{})};
+    if(part.instanceAffineFill?.width)delete host.lits!.width;
+    if(part.instanceAffineFill?.height)delete host.lits!.height;
     applyVisibleWhen(host,part,contract,subst);
     return host;
   }
