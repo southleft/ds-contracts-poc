@@ -48,8 +48,8 @@ any agent's saved memory or notes.
 15. **Weekly note.** [docs/STATUS.md](docs/STATUS.md), overwritten each week: five
     lines (what reached users; outside users; the four numbers per direction;
     spend against the cap; the top three named misses) and the current step's
-    checklist. Read GOAL.md, then STATUS.md, before choosing work. American
-    English, plain words.
+    checklist. Read GOAL.md, then STATUS.md, before choosing work (in Claude Code,
+    run `/next`). American English, plain words.
 
 ## Repository instructions
 
