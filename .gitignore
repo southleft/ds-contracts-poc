@@ -9,7 +9,8 @@ extract/pilots/eventz/.src/
 dashboard/dist/
 .runner-result.json
 private/
-.claude/
+.claude/*
+!.claude/commands/
 .agents/
 .env.figma
 .env.local

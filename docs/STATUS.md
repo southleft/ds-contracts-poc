@@ -26,22 +26,27 @@ then this page, then choose work. It is written for any agent or provider.
 ## Step 1 checklist (2026-11-02 to 2026-11-06)
 
 Owner:
-- [ ] End the Codex bridge goal before it resumes on 2026-11-04 at 05:10.
+- [x] Choose one provider: Claude Code (2026-10-31). Codex is not used; ending its
+      paused bridge goal in the Codex app keeps it from restarting.
 - [ ] Get Figma's written go-ahead and settle the IP position.
-- [ ] Merge PR #287 (this goal, the rules and this page).
+- [x] Merge PR #287 (the goal, the rules and this page).
 - [ ] Compile the candidate list, commit the salted hashes, and draw A0.
-- [ ] Delete `~/Sites/ds-contracts-poc-delivery`. Its commits are in this repository
-      as `archive/delivery/*` branches, and its evidence is in
-      `~/ds-contracts-archive-2026-10-31`.
+- [x] Delete the extra checkouts. `~/Sites/ds-contracts-poc` is the only one. Old
+      commits are in this repository as `archive/*` branches and tags, and old
+      evidence is in `~/ds-contracts-archive-2026-10-31`.
 
-Agent, one lane, in this order after #287 merges:
-- [ ] Close PR #286 (23,725 lines, too big to review, red benchmark). Keep its branch.
+Agent, one lane, in this order:
+- [x] Close PR #286 (23,725 lines, too big to review, red benchmark). Its branch is kept.
+- [x] Retire the old Cursor and Claude mailbox loop (its stop hook and mailbox are
+      archived) and add the `/next` command.
 - [ ] Shrink the repository with delete-only PRs (owner request, 2026-10-31): the
       frozen Recipe-IR lineages and their gates, folders nothing imports, npm
       scripts nothing calls, and scheduled workflows that are always red. Each PR
       proves the engine unchanged by byte-identical replay of the known cells.
-- [ ] Classify the existing never-seen results by cause and against the grammar,
-      and publish the numbers here.
+- [ ] Classify the existing never-seen results by cause (missing font, image
+      framing, refused as an ambiguous choice between known options, refused as
+      unsupported, real conversion miss) and against the grammar, and publish the
+      numbers here.
 - [ ] Run today's engine once on A0 in both directions, and publish the numbers here.
 
 ## Where things live
@@ -53,3 +58,16 @@ Agent, one lane, in this order after #287 merges:
 - Sample React workspaces (git-ignored): `private/workspaces`.
 - Archive outside the repository: `~/ds-contracts-archive-2026-10-31` (git bundles,
   experiment edits, compressed receipts).
+- In Claude Code, `/next` (`.claude/commands/next.md`) does the next unchecked agent
+  item above and nothing else.
+
+## Open question for Decision 1 (2026-11-09)
+
+The owner asked whether a small decision model (TypeSafe's Jev, already used in
+Southleft's Disposition and Component Charades) could help where pure rules stall.
+In that role, deterministic code would list the candidate answers. Jev would only
+pick among them, behind a confidence gate. Each decision would be frozen into the
+contract and reported in GOAL.md's separate "assisted" column. Step 1's count of
+"refused as an ambiguous choice" says how much it could help. Fonts, image framing
+and geometry gaps would not change. Adding it before 2026-12-23 needs a signed entry
+in GOAL.md.
