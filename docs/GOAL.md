@@ -212,3 +212,15 @@ repository never reads that folder, and it received only these hashes and kit A0
   when it is drawn.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-10-31.
+
+### 2026-10-31: Figma's go-ahead is not needed
+
+The owner, in chat: their employment agreement with Figma, negotiated when Figma
+hired them, allows projects like this one and lets them keep all of their IP. Figma
+knows about the project and supports it. So Step 1's item "Get Figma's written
+go-ahead and settle the IP position" is closed with nothing to obtain, and "Until it
+is in hand, nothing is published" no longer applies. Step 2's release to npm under
+`next` waits only on the owner running it (AGENTS.md rule 13). Agents do not raise
+Figma permission or IP again.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-10-31.
