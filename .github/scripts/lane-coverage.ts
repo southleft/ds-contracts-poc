@@ -194,8 +194,7 @@ const EXCLUDED: Record<string, string> = {
 };
 
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */
-const TEST_EXCLUDED: Record<string, string> = {
-};
+const TEST_EXCLUDED: Record<string, string> = {};
 
 // Everything below reads the lane map lane-map.ts derives from the workflow
 // files; scripts/v1-readiness.ts reads the same map to cite lanes.

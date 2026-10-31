@@ -226,7 +226,7 @@ Then prove the loop to yourself. Steps 1–4 are the loop. Step 5 re-runs the wh
    "Status", figma: "Badge"`` and the fix, beside the same `snapshot-stale` finding a fresh
    clone always carries. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval:carried:check` — 230 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds. Expect **225 of 230**: five are red, and this gate passes only because every
+5. `npm run eval:carried:check` — 229 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds. Expect **225 of 230**: five are red, and this gate passes only because every
    one of them is named in `parity/receipts/v1/eval-reds.json` with a measured cause and a
    stated closing condition. An unnamed red fails it. `npm run eval` runs the same suite and
    exits non-zero on any red at all.

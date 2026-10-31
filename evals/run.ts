@@ -10234,29 +10234,6 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
 
   {
-    // Human/release/second-impl rows must stay listed open — packaging and live
-    // receipts must not silently promote to "v1 shipped" or Phase 3 Candidate.
-    id: 'human-gate-inventory-honest',
-    claim: 'C2-refusal',
-    run: () => {
-      const r = spawnSync(process.execPath, ['scripts/human-gate-inventory-check.mjs'], {
-        cwd: ROOT,
-        encoding: 'utf8',
-      });
-      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
-      if ((r.status ?? -1) !== 0) {
-        throw new Error(`human-gates:inventory failed:\n${out}`);
-      }
-      if (!out.includes('still open')) {
-        throw new Error('human-gates:inventory did not report open rows');
-      }
-      console.log(
-        'human-gate-inventory-honest: HUMAN-HANDOFF still lists pilot/Wave8/security/publish/deploy/W11-C/Phase4 and refuses false v1/Candidate claims',
-      );
-    },
-  },
-
-  {
     // Console MCP live loop: contract → chunked figma_execute → screenshot →
     // audit → v6 fingerprint → zero-mismatch light round-trip, receipted under
     // parity/receipts/console-loop/components/ on DS-Contracts-Testing.

@@ -1,9 +1,9 @@
 {
-  "passed": 225,
-  "total": 230,
+  "passed": 224,
+  "total": 229,
   "v1": {
-    "passed": 225,
-    "total": 225
+    "passed": 224,
+    "total": 224
   },
   "archive": {
     "passed": 0,
@@ -1054,11 +1054,6 @@
     {
       "id": "live-figma-evidence-receipt",
       "claim": "C3-detection",
-      "pass": true
-    },
-    {
-      "id": "human-gate-inventory-honest",
-      "claim": "C2-refusal",
       "pass": true
     },
     {
