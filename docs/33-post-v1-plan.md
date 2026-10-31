@@ -148,7 +148,7 @@ mismatch with Select docs was the wrong official page. Do not remint
 Combobox now. Do not invent a new visual grade of v42.
 
 The open-fork evidence file stays historical:
-[`recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`](../recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json).
+[`recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`](https://github.com/southleft/ds-contracts-poc/blob/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json).
 The close lives here and in [docs/34](34-boilerplate-v1-plan.md).
 
 ---

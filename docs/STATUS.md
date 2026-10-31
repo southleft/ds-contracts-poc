@@ -62,12 +62,12 @@ Decision 1 needs them):
       framing, refused as an ambiguous choice between known options, refused as
       unsupported, real conversion miss) and against the grammar, and publish the
       numbers here.
-- [ ] Shrink the repository with delete-only PRs (owner request, 2026-10-31): the
-      frozen Recipe-IR lineages and their gates, folders nothing imports, npm
-      scripts nothing calls, and scheduled workflows that are always red. Each PR
-      proves the engine unchanged by byte-identical replay of the known cells.
-      First PR done: dead folders, the three LEGACY.md files and the two
-      always-red schedules. Next: Recipe-IR.
+- [x] Shrink the repository with delete-only PRs (owner request, 2026-10-31).
+      First PR: dead folders, the three LEGACY.md files and the two always-red
+      schedules. Second PR: the frozen Recipe-IR lineage (18,276 files, 261 npm
+      scripts, 73 fast-lane steps and the recipe-history job). The six recipe
+      files the engine uses, their tests and the evidence that live gates read
+      stay. Further shrinking continues under AGENTS.md rule 11.
 
 ## Where things live
 
