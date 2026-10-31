@@ -1,26 +1,53 @@
 # AGENTS.md
 
-## Current product direction
+## Operating rules (owner, 2026-10-31)
 
-**The active goal is [docs/GOAL.md](docs/GOAL.md) (owner-approved 2026-09-28):
-Beta 1 on real Figma files and real codebases.** Read it before choosing any
-work. It freezes the six V1 criteria, new benchmark cells, update channels and
-plan documents, and caps work at two lanes with one PR each. Every task cites a
-smoke-gate failure, a cold-start blocker, a real-design-system miss or an
-outside user's report. Write American English.
+These rules override anything older in this file, in `docs/`, in handoffs, or in
+any agent's saved memory or notes.
 
-[docs/CURRENT.md](docs/CURRENT.md) remains the record of the V1 architecture,
-benchmark and regression gates; it is no longer the work order. It is shared by
-the playground and documentation site. Numbered plans and handoffs are historical context,
-not competing current instructions. Preserve signed evidence and owner-only
-grades; do not equate a rendering draft or a green internal gate with a complete
-autonomous journey. Verify the actual checkout, source revision and PR state.
-
-V1 targets React ↔ contracts ↔ Figma, including composed components and
-two-way repair. Lit/Web Components integration is paused for planned V1.1;
-preserve its implementation and evidence, but do not expand it as a V1
-prerequisite. Prioritize shared conversion rules and complete user journeys
-over component-specific converters. Existing regression gates remain required.
+1. **One goal.** [docs/GOAL.md](docs/GOAL.md) is the only work order. Everything
+   else in `docs/` is history. Never edit `docs/GOAL.md`; only the owner changes it,
+   in a signed entry.
+2. **One folder.** Work only in `/Users/tjpitre/Sites/ds-contracts-poc`. Never
+   create clones, copies or worktrees, and never copy the repository into
+   `private/` for a run. Never run `git stash`.
+3. **One lane.** One agent session and one open PR at a time, with the provider
+   named on GOAL.md's signature line. One read-only reviewer session is allowed.
+   Multi-agent runs need the owner's written approval.
+4. **Every PR has a reason.** It cites a GOAL.md step, a named miss on a practice
+   kit, a stop-rule item, an install failure or an outside user's report. Work on
+   GOAL.md's out-of-scope list is refused.
+5. **Never touch sealed kits.** Do not search for, fetch, open or study any
+   candidate kit. Only the owner draws kits. No code changes between a draw and
+   its run.
+6. **The ruler is frozen.** From 2026-11-20, never change thresholds, scorers,
+   denominators, reference images, the grammar classifier or the variant matrix
+   rule. A PR that touches both the checker and the converter is reverted.
+7. **Only sealed runs count.** The fixed 40-set, the 204 corpus and every
+   practice kit are regression only. Never report them as progress, and never call
+   a repaired sample a first pass.
+8. **No overfitting.** A fix must also help a practice kit other than the one that
+   motivated it and break no known cell. No component or kit names, per-set gates or
+   new "-qualified" codes in conversion code.
+9. **Fonts are inputs.** A missing font is refused up front by name and reported
+   in its own column. It is never a pass and never a conversion failure.
+10. **Deterministic only.** No model call in capture, contract, emitters, writer or
+    checker. Same input, byte-identical output.
+11. **Shrink, don't grow.** At most 300 net added lines per PR. The net count of
+    npm scripts and CI jobs must fall. Evidence is never committed; final scoreboard
+    inputs and outputs are attached to a GitHub release.
+12. **Disk.** Runs reuse this checkout and the shared npm cache, delete their
+    working files when the result is sealed, refuse to start with less than 50 GB
+    free, and never write evidence to `/tmp`.
+13. **Owner-only actions.** npm publish, tags, releases, sealed draws, deleting
+    branches or folders outside the repository, and Figma writes outside the files
+    the owner names. Load the Figma token only in a subshell and never print it.
+14. **Verify before you claim.** Run the CI-invoked gate, read the commit and dirty
+    state from the result file, and check every reported number against its
+    receipt. Lead every report with what is broken.
+15. **Weekly note.** Five lines: what reached users; outside users; the four numbers
+    per direction; spend against the cap; the top three named misses. American
+    English, plain words.
 
 ## Repository instructions
 
