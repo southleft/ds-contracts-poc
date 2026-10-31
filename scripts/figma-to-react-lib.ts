@@ -35,6 +35,7 @@ import type { NativeVectorStrokeCapture } from '../core/source-vector-stroke.js'
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
 import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
+import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
@@ -220,6 +221,19 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
     for (const r of fetched.refusals) error('variables: ' + r);
     dumpPath = path.join(run.out, 'dump.json'); source = 'figma';
   }
+  // Fonts are inputs (AGENTS.md rule 9): a face the design draws and no manifest
+  // supplies is refused by name before anything is packaged or checked.
+  const preflight = fontPreflight(JSON.parse(readFileSync(dumpPath, 'utf8')), faces);
+  if (preflight.missing.length) {
+    mkdirSync(run.out, { recursive: true });
+    writeFileSync(path.join(run.out, 'font-preflight.json'), JSON.stringify({ version: 1, ...preflight,
+      supplied: faces.map(({ family, weight, style }) => ({ family, weight, style })) }, null, 2) + '\n');
+    for (const f of preflight.missing)
+      error(`✖ font-preflight: ${f.family} ${f.weight} ${f.style} is not supplied (${f.variants.length} variant(s), first ${f.variants[0]})`);
+    error(`  Fonts are inputs: supply every face the design draws with --fonts <manifest.json>. Nothing was packaged or checked; see ${path.join(run.out, 'font-preflight.json')}.`);
+    return 3;
+  }
+  if (preflight.required.length) log(`font preflight: ${preflight.required.length} face(s) drawn, all supplied`);
   let nativeVectorStrokeCapture: NativeVectorStrokeCapture | undefined;
   if (run.nativeStrokes) {
     const receipt=suppliedReceipt?.kind === 'native-vector-stroke-capture'

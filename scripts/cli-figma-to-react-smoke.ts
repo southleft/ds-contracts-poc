@@ -19,9 +19,10 @@
  *      variants and never a green check (no token means no Figma images);
  *   5. require that no absolute path of this repository appears in any file
  *      under out/;
- *   6. control: without fonts, and with PLAYWRIGHT_BROWSERS_PATH pointing at an
- *      empty directory, require the entire original pinned archive unchanged,
- *      NOT CHECKED, the install command, and exit 0.
+ *   6. control: with PLAYWRIGHT_BROWSERS_PATH pointing at an empty directory,
+ *      require the pinned archive (beside the font assets), NOT CHECKED, the
+ *      install command, and exit 0; without fonts, require the font preflight
+ *      to refuse Public Sans by name before writing a package (exit 3).
  *   7. --fonts must reach the real consumer, record its faces, and reject a
  *      mismatched family before writing output from the installed artifact.
  *   8. build the Sync Runner plugin zip using its existing dump-source and
@@ -111,6 +112,10 @@ export async function smoke(keep = false): Promise<string[]> {
     writeFileSync(path.join(project, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, file: fontFile,
       license: { ...fontFace.license, file: 'PublicSans-OFL.txt' } }] }));
 
+    const fontChanges = new Set(['package/dist/index.js', 'package/package.json', 'package/README.md',
+      'package/dist/fonts/fonts.css', 'package/dist/fonts/manifest.json',
+      `package/dist/fonts/${fontFace.sha256}.ttf`, `package/dist/fonts/${licenseSha256}.txt`]);
+    const withoutFontChanges = (tree: Record<string, string>) => Object.fromEntries(Object.entries(tree).filter(([file]) => !fontChanges.has(file)));
     console.log('running figma-to-react from the installed CLI with local fonts (no FIGMA_TOKEN)…');
     const run = runCli(project, './out', userEnv(), ['--fonts', './fonts.json']);
     process.stdout.write(run.stdout.split('\n').map(l => '  | ' + l).join('\n') + '\n');
@@ -137,10 +142,6 @@ export async function smoke(keep = false): Promise<string[]> {
         expect(drift.length === 0, `generated-files-differ: ${drift.join(', ')}`);
       }
       const entries = tarballEntries(readFileSync(path.join(out, result.tarball)));
-      const fontChanges = new Set(['package/dist/index.js', 'package/package.json', 'package/README.md',
-        'package/dist/fonts/fonts.css', 'package/dist/fonts/manifest.json',
-        `package/dist/fonts/${fontFace.sha256}.ttf`, `package/dist/fonts/${licenseSha256}.txt`]);
-      const withoutFontChanges = (tree: Record<string, string>) => Object.fromEntries(Object.entries(tree).filter(([file]) => !fontChanges.has(file)));
       const entryDrift = firstDiff(withoutFontChanges(entries), withoutFontChanges(pin.entries));
       expect(entryDrift.length === 0, `tarball-entries-differ: ${entryDrift.join(', ')}`);
       expect(entries[`package/dist/fonts/${fontFace.sha256}.ttf`] === fontFace.sha256, 'packed-font: the supplied font bytes did not travel');
@@ -162,7 +163,7 @@ export async function smoke(keep = false): Promise<string[]> {
     console.log('control: the same run with no Chromium (PLAYWRIGHT_BROWSERS_PATH is an empty directory)…');
     const empty = path.join(work, 'no-browsers');
     mkdirSync(empty);
-    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }));
+    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }), ['--fonts', './fonts.json']);
     process.stdout.write(control.stdout.split('\n').map(l => '  | ' + l).join('\n') + '\n');
     expect(control.status === 0, `control-exit-code: expected 0, got ${control.status}`);
     expect(/^◌ figma-to-react Badge: NOT CHECKED — no Chromium for the consumer check/m.test(control.stdout), 'control-not-checked: no NOT CHECKED line');
@@ -172,11 +173,17 @@ export async function smoke(keep = false): Promise<string[]> {
     if (existsSync(path.join(project, 'out-control', 'result.json'))) {
       const controlResult = JSON.parse(readFileSync(path.join(project, 'out-control', 'result.json'), 'utf8'));
       expect(controlResult.check?.status === 'not-checked', 'control-result: check.status is not "not-checked"');
-      expect(controlResult.check?.fonts === null, 'control-font-receipt: a run without fonts recorded a face');
+      expect(JSON.stringify(controlResult.check?.fonts) === JSON.stringify([fontFace]), 'control-font-receipt: the supplied face was not recorded');
       const controlEntries = tarballEntries(readFileSync(path.join(project, 'out-control', controlResult.tarball)));
-      expect(firstDiff(controlEntries, pin.entries).length === 0, 'no-font-tarball: the original benchmark package changed');
+      expect(firstDiff(withoutFontChanges(controlEntries), withoutFontChanges(pin.entries)).length === 0, 'control-tarball: the benchmark package changed');
     }
     else problems.push('control-result: out-control/result.json missing');
+    console.log('control: without fonts, the font preflight must refuse Public Sans by name before packaging…');
+    const noFonts = runCli(project, './out-no-fonts', userEnv());
+    expect(noFonts.status === 3, `no-fonts-exit-code: expected 3, got ${noFonts.status}`);
+    expect(/font-preflight: Public Sans 600 normal is not supplied/.test(noFonts.stderr), 'no-fonts-refusal: Public Sans was not named');
+    expect(existsSync(path.join(project, 'out-no-fonts', 'font-preflight.json')), 'no-fonts-receipt: font-preflight.json missing');
+    expect(!existsSync(path.join(project, 'out-no-fonts', 'result.json')), 'no-fonts-package: a package was written without fonts');
     console.log('control: a font file named as another family must refuse before output…');
     writeFileSync(path.join(project, 'wrong-family.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, family: 'SF Pro', file: fontFile }] }));
     const wrongFamily = runCli(project, './out-wrong-family', userEnv(), ['--fonts', './wrong-family.json']);
@@ -200,6 +207,6 @@ if (process.argv[1] && /(^|[\\/])cli-figma-to-react-smoke\.(m?[tj]s)$/.test(path
       console.error(`✘ cli:figma-to-react:smoke:check — the installed CLI does not reproduce the pinned in-repo result:\n  - ${found.join('\n  - ')}`);
       process.exit(1);
     }
-    console.log('✔ cli:figma-to-react:smoke:check — the packed CLI, installed with no repository, reproduces the altitude-badge pin; the check reports all 10 variants UNVERIFIED without a token and NOT CHECKED without a Chromium; the Sync Runner zip passes its dump and engine guards');
+    console.log('✔ cli:figma-to-react:smoke:check — the packed CLI, installed with no repository, reproduces the altitude-badge pin; the check reports all 10 variants UNVERIFIED without a token and NOT CHECKED without a Chromium; without fonts the preflight refuses Public Sans by name; the Sync Runner zip passes its dump and engine guards');
   }).catch(e => { console.error('✘ cli:figma-to-react:smoke:check — ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });
 }
