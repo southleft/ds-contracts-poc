@@ -50,12 +50,11 @@
 # publish the sha it uploaded and compare against that instead.
 name: deploy-check
 
+# The daily schedule was removed on 2026-10-31 (docs/GOAL.md: a scheduled check
+# that stays red is fixed or deleted). It failed all 88 runs because nothing had
+# been deployed since August. Run it by hand after `npm run deploy`.
 on:
   workflow_dispatch:
-  schedule:
-    # 13:00 UTC daily. Cron on GitHub is best-effort and can be delayed under
-    # load; that is fine for a freshness question measured in days.
-    - cron: '0 13 * * *'
 
 permissions:
   contents: read

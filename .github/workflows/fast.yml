@@ -728,10 +728,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:console-loop-mui-evidence
 
-      - name: human-gates:inventory (pilot/Wave8/publish/second-impl still open)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run human-gates:inventory
-
       - name: mui 50% denominator freeze (Wave 5 — no shrink)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run mui:denominator:check

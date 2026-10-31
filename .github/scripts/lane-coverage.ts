@@ -152,7 +152,7 @@ const EXCLUDED: Record<string, string> = {
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +
     "recorded human decision' (decided drift is a warning; a crash is a distinct red), never 'this " +
-    "commit is wrong'. It runs on the scheduled sync-spine.yml lane (invoked via tsx there, so " +
+    "commit is wrong'. It runs on the on-demand sync-spine.yml lane (invoked via tsx there, so " +
     "this entry stays true) and degrades to a NAMED skip when the secret is absent. The committed twin " +
     "is the fixture-mode eval sync-spine-drift (eval lane) + sync:ledger:check (fast lane), which pin " +
     "the same plan/pull/cursor/decision arithmetic over the committed fixture canvas and keep " +

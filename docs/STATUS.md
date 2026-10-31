@@ -43,6 +43,8 @@ Agent, one lane, in this order:
       frozen Recipe-IR lineages and their gates, folders nothing imports, npm
       scripts nothing calls, and scheduled workflows that are always red. Each PR
       proves the engine unchanged by byte-identical replay of the known cells.
+      First PR done: dead folders, the three LEGACY.md files and the two
+      always-red schedules. Next: Recipe-IR.
 - [ ] Classify the existing never-seen results by cause (missing font, image
       framing, refused as an ambiguous choice between known options, refused as
       unsupported, real conversion miss) and against the grammar, and publish the
