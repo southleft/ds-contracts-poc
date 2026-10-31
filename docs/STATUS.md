@@ -30,26 +30,30 @@ Owner:
       paused bridge goal in the Codex app keeps it from restarting.
 - [ ] Get Figma's written go-ahead and settle the IP position.
 - [x] Merge PR #287 (the goal, the rules and this page).
-- [ ] Compile the candidate list, commit the salted hashes, and draw A0.
+- [x] Compile the candidate list, commit the salted hashes, and draw A0. A
+      sealing agent did this at the owner's request on 2026-10-31 (see the
+      signed entry in GOAL.md). A0 is Sanity UI v2 (Figma) and the Agriculture
+      Design System (React).
 - [x] Delete the extra checkouts. `~/Sites/ds-contracts-poc` is the only one. Old
       commits are in this repository as `archive/*` branches and tags, and old
       evidence is in `~/ds-contracts-archive-2026-10-31`.
 
-Agent, one lane, in this order:
+Agent, one lane, in this order (A0 and the classification come first because
+Decision 1 needs them):
 - [x] Close PR #286 (23,725 lines, too big to review, red benchmark). Its branch is kept.
 - [x] Retire the old Cursor and Claude mailbox loop (its stop hook and mailbox are
       archived) and add the `/next` command.
+- [ ] Run today's engine once on A0 in both directions, and publish the numbers here.
+- [ ] Classify the existing never-seen results by cause (missing font, image
+      framing, refused as an ambiguous choice between known options, refused as
+      unsupported, real conversion miss) and against the grammar, and publish the
+      numbers here.
 - [ ] Shrink the repository with delete-only PRs (owner request, 2026-10-31): the
       frozen Recipe-IR lineages and their gates, folders nothing imports, npm
       scripts nothing calls, and scheduled workflows that are always red. Each PR
       proves the engine unchanged by byte-identical replay of the known cells.
       First PR done: dead folders, the three LEGACY.md files and the two
       always-red schedules. Next: Recipe-IR.
-- [ ] Classify the existing never-seen results by cause (missing font, image
-      framing, refused as an ambiguous choice between known options, refused as
-      unsupported, real conversion miss) and against the grammar, and publish the
-      numbers here.
-- [ ] Run today's engine once on A0 in both directions, and publish the numbers here.
 
 ## Where things live
 
@@ -58,6 +62,8 @@ Agent, one lane, in this order:
   `hill-climb-set.json` and the 204-set references in `full204-1159`.
 - Never-seen results (git-ignored): `private/held-out-intake-*`.
 - Sample React workspaces (git-ignored): `private/workspaces`.
+- Sealed kit pool, outside the repository: `~/ds-contracts-sealed`. Agents never read
+  it; only the owner or a sealing agent reveals a slot at its draw.
 - Archive outside the repository: `~/ds-contracts-archive-2026-10-31` (git bundles,
   experiment edits, compressed receipts).
 - In Claude Code, `/next` (`.claude/commands/next.md`) does the next unchecked agent
