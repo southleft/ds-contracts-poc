@@ -224,3 +224,18 @@ is in hand, nothing is published" no longer applies. Step 2's release to npm und
 Figma permission or IP again.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-10-31.
+
+### 2026-10-31: Decision 1, continue to Step 2 now
+
+The owner, in chat, after reading Step 1's numbers (A0: Figma to React headline
+8.8%, raw 8 of 287 variants, 1 of 18 sets whole; React to Figma 0 of 127; the
+earlier 1,344 variants classified by cause and against the grammar): continue to
+Step 2. The decision is taken early, on 2026-10-31 instead of 2026-11-09, so Step 2
+starts now. This is the deliberate reset this page describes: zero outside users and
+$2,400 of AI spend through 2026-12-23. Every other date and every stop rule is
+unchanged. The checker, the grammar classifier and the variant matrix rule freeze on
+2026-11-20 and A1 is drawn after that freeze. A2 is drawn on 2026-12-04, code is
+tagged on 2026-12-11, and B is drawn on 2026-12-14. No decision model is added
+before 2026-12-23.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-10-31.
