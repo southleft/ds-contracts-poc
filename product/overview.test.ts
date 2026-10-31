@@ -115,7 +115,6 @@ test("the implementation map names real source files and current entry points do
     assert.ok(existsSync(file), `Missing implementation: ${file}`);
   for (const file of [
     "README.md",
-    "AGENTS.md",
     "docs/01-architecture.md",
     "docs/35-two-journey-v1-plan.md",
   ]) {
@@ -125,6 +124,12 @@ test("the implementation map names real source files and current entry points do
       `No active direction link in ${file}`,
     );
   }
+  // The owner-signed work order (2026-10-31) is docs/GOAL.md; agents start there.
+  assert.match(
+    read("AGENTS.md"),
+    /\]\(docs\/GOAL\.md\)/,
+    "No active direction link in AGENTS.md",
+  );
   for (const file of [
     "home",
     "how",
