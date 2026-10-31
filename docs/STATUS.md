@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (A0 measured, earlier kits classified). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (Step 1 closed, Decision 1: continue, Step 2 started). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -25,7 +25,9 @@ then this page, then choose work. It is written for any agent or provider.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. Inside the grammar, where it can be checked (13 of 24
-     sets): headline 24.6%, raw 19 of 79. The classification is below.
+     sets): headline 24.6%, raw 19 of 79. The full breakdown is in this page's
+     2026-10-31 Step 1 version (git history) and in
+     `private/never-seen-classification-20261031`.
 4. **Spend against the cap:** nothing recorded since signing. The cap is $2,400
    through 2026-12-23, read from the provider's usage page.
 5. **Top three named misses** on A0, after a labeled rerun with Inter 3.19 gave
@@ -38,56 +40,55 @@ then this page, then choose work. It is written for any agent or provider.
    - Seven of 18 sets were refused before measurement, and React to Figma has
      no library reader.
 
-## Step 1 checklist (2026-11-02 to 2026-11-06)
+## Step 2 checklist (2026-10-31 to 2026-12-11)
+
+Step 1 closed on 2026-10-31: A0 measured both ways, the earlier 1,344 variants
+classified, and Decision 1 taken early by the owner (continue; signed entry in
+GOAL.md). Git history keeps the Step 1 checklist.
 
 Owner:
-- [x] Choose one provider: Claude Code (2026-10-31). Codex is not used; ending its
-      paused bridge goal in the Codex app keeps it from restarting.
-- [x] Figma's go-ahead: not needed. The owner's contract allows this work and keeps
-      the IP with them, and Figma knows about it (signed entry in GOAL.md, 2026-10-31).
-- [x] Merge PR #287 (the goal, the rules and this page).
-- [x] Compile the candidate list, commit the salted hashes, and draw A0. A
-      sealing agent did this at the owner's request on 2026-10-31 (see the
-      signed entry in GOAL.md). A0 is Sanity UI v2 (Figma) and the Agriculture
-      Design System (React).
-- [x] Delete the extra checkouts. `~/Sites/ds-contracts-poc` is the only one. Old
-      commits are in this repository as `archive/*` branches and tags, and old
-      evidence is in `~/ds-contracts-archive-2026-10-31`.
+- [x] Decision 1: continue (2026-10-31, signed entry in GOAL.md).
+- [ ] Duplicate each drawn Figma kit into drafts, for plugin captures.
+- [ ] Draw A1 after the 2026-11-20 freeze (a sealing agent can do it at the owner's
+      request), and A2 on 2026-12-04.
+- [ ] Run `npm publish` for the CLI under `next` when the agent says it is ready. No
+      outside approval is needed.
+- [ ] Recruit 5 to 8 outside testers. Paste weekly AI spend into this page.
 
-Agent, one lane, in this order (A0 and the classification come first because
-Decision 1 needs them):
-- [x] Close PR #286 (23,725 lines, too big to review, red benchmark). Its branch is kept.
-- [x] Retire the old Cursor and Claude mailbox loop (its stop hook and mailbox are
-      archived) and add the `/next` command.
-- [x] Run today's engine once on A0 in both directions, and publish the numbers here.
-      Results are above; receipts are in `private/a0-20261031` (git-ignored).
-- [x] Classify the existing never-seen results by cause (missing font, image
-      framing, refused as an ambiguous choice between known options, refused as
-      unsupported, real conversion miss) and against the grammar, and publish the
-      numbers here. Receipts and rules are in `private/never-seen-classification-20261031`
-      (git-ignored). The 1,344 variants in 56 sets are Semi 848, Arco 127 plus a
-      second Arco sample of 212, CollegeTown 96 and Orbit 61.
-      - By cause: 177 pass, 57 missing font (Orbit's Circular), 39 image framing,
-        88 refused as unsupported (paint stacks, a mask, instance identity, an
-        affine host, a per-variant layout), 0 refused as an ambiguous choice, and
-        150 real conversion misses. 833 have no recorded cause: the per-variant
-        ledgers for Semi and the first Arco sample were in `/private/tmp` and are
-        gone, and CollegeTown's Alert has no first-pass receipt.
-      - Against the grammar: a provisional check of the engine's own dump (the
-        Step 2 classifier does not exist yet) covers the 24 sets whose dump was
-        kept. 13 are in grammar (54%). 11 are out, most often for absolutely
-        placed children (7 sets); 2 are out only because an icon sits in a box
-        without auto layout.
-      - Top named misses on measured variants: size mismatch (149), image
-        difference on black (144), missing text or icons (130). Inside the
-        grammar: image difference (28 on black, 26 on white), missing font (23)
-        and size mismatch (22).
-- [x] Shrink the repository with delete-only PRs (owner request, 2026-10-31).
-      First PR: dead folders, the three LEGACY.md files and the two always-red
-      schedules. Second PR: the frozen Recipe-IR lineage (18,276 files, 261 npm
-      scripts, 73 fast-lane steps and the recipe-history job). The six recipe
-      files the engine uses, their tests and the evidence that live gates read
-      stay. Further shrinking continues under AGENTS.md rule 11.
+Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
+(AGENTS.md rule 6; never put a checker change and a converter change in the same PR):
+- [ ] Grammar classifier (ACG-1), deterministic. It marks each Figma component set
+      and each story in or out of the grammar, with a named reason, and replaces the
+      provisional check used in the classification. Publish coverage for A0 and the
+      earlier kits.
+- [ ] Font preflight: refuse missing fonts by name before work starts, reported in
+      their own column, both directions.
+- [ ] Variant matrix rule: the cartesian product of enumerated story arguments,
+      capped at 64 per set.
+- [ ] Plugin capture: a PNG per variant at whole-pixel bounds, SVG for icons and
+      vectors, the font list and variables, all from a draft the owner duplicated.
+      REST dumps stay a frozen input format.
+- [ ] Storybook reader: read story arguments, render with the package's own fonts in
+      pinned Chromium, and write `ds-contracts.react.json` with no hand-written
+      declaration. Widen the React pin to a tested 18.3 and 19.x range.
+- [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
+      classifier and the variant matrix rule.
+
+Agent, climb (practice kits only, one named miss class per PR, shared rules only).
+Rule 8: each fix must also help a practice kit other than the one that motivated it
+and break no known cell. A0 is now practice and regression only.
+- [ ] Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`, the CSS
+      `text-box-trim` equivalent): all 183 A0 size misses. Before writing code,
+      check which other practice kits use it. Semi and Orbit use none, so rule 8
+      needs a second kit. If none qualifies, say so and do not ship it as an
+      A0-only fix.
+- [ ] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
+      variants.
+- [ ] A0's refusals that are plain defects, not grammar: Chip's generated
+      TypeScript does not compile, and TextInput's layout table is over its size
+      limit.
+- [ ] Carry each variant's observed values (a full default plus per-variant
+      differences) instead of refusing them.
 
 ## Where things live
 
@@ -103,16 +104,3 @@ Decision 1 needs them):
   experiment edits, compressed receipts).
 - In Claude Code, `/next` (`.claude/commands/next.md`) does the next unchecked agent
   item above and nothing else.
-
-## Open question for Decision 1 (2026-11-09)
-
-The owner asked whether a small decision model (TypeSafe's Jev, already used in
-Southleft's Disposition and Component Charades) could help where pure rules stall.
-In that role, deterministic code would list the candidate answers. Jev would only
-pick among them, behind a confidence gate. Each decision would be frozen into the
-contract and reported in GOAL.md's separate "assisted" column. Step 1 counted the
-refusals that name an ambiguous choice: 6 of A0's 287 variants (the "scheme" axis)
-and 0 of the earlier 1,344. One earlier refusal (Arco menu, 50 variants) reads
-"unlinked-or-conflicting-owner" and may be one. Fonts, image framing and geometry
-gaps would not change. Adding it before 2026-12-23 needs a signed entry
-in GOAL.md.
