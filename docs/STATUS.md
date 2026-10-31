@@ -26,10 +26,15 @@ then this page, then choose work. It is written for any agent or provider.
      React 177 to 180 of 1,344 variants (about 13%).
 4. **Spend against the cap:** nothing recorded since signing. The cap is $2,400
    through 2026-12-23, read from the provider's usage page.
-5. **Top three named misses:** in the 223 measured A0 variants, image
-   differences (205 on black, 189 on white) and size mismatches (183), which may
-   partly come from Google's Inter 4 against Figma's own Inter; refusals before
-   measurement (7 of 18 sets); and React to Figma has no library reader.
+5. **Top three named misses** on A0, after a labeled rerun with Inter 3.19 gave
+   identical results (so the font version is not the cause):
+   - Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`) is never read, so
+     single-line text boxes render 10 to 12 px too tall. This one missing fact
+     explains all 183 size mismatches (Button, Badge, Select, MenuItem).
+   - Icons inside components are missing from the output (checkmark, spinner,
+     close, select chevron): 36 variants.
+   - Seven of 18 sets were refused before measurement, and React to Figma has
+     no library reader.
 
 ## Step 1 checklist (2026-11-02 to 2026-11-06)
 
