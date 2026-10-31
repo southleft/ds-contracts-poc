@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (Step 1 closed, Decision 1: continue, Step 2 started). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (Step 2 started; grammar classifier in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -14,8 +14,8 @@ then this page, then choose work. It is written for any agent or provider.
    2026-10-31 with fonts supplied and no edits):
    - Figma to React, Sanity UI v2 (18 sets, 287 variants): headline 8.8% (mean
      of per-set pass rates); raw 8 of 287 variants (2.8%); 1 of 18 sets whole
-     (TextArea); 0 font-blocked. Coverage waits for the grammar classifier in
-     Step 2. Seven sets (64 variants) were refused before measurement: masks
+     (TextArea); 0 font-blocked. Coverage 10 of 18 sets (55.6%); inside the
+     grammar, headline 13.3% and raw 3 of 198. Seven sets (64 variants) were refused before measurement: masks
      (Popover, Tooltip), a "scheme" axis that could be a variant or a theme mode
      (KBD, Radio, Autocomplete), a layout table over its size limit (TextInput)
      and generated TypeScript that does not compile (Chip).
@@ -24,8 +24,9 @@ then this page, then choose work. It is written for any agent or provider.
      needs a hand-written declaration, which first pass does not allow.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
-     57 font-blocked. Inside the grammar, where it can be checked (13 of 24
-     sets): headline 24.6%, raw 19 of 79. The full breakdown is in this page's
+     57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
+     (66.7%); inside the grammar, headline 22.1% and raw 20 of 119 (Orbit's 28
+     in-grammar variants are all font-blocked). The full breakdown is in this page's
      2026-10-31 Step 1 version (git history) and in
      `private/never-seen-classification-20261031`.
 4. **Spend against the cap:** nothing recorded since signing. The cap is $2,400
@@ -57,10 +58,13 @@ Owner:
 
 Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 (AGENTS.md rule 6; never put a checker change and a converter change in the same PR):
-- [ ] Grammar classifier (ACG-1), deterministic. It marks each Figma component set
+- [x] Grammar classifier (ACG-1), deterministic. It marks each Figma component set
       and each story in or out of the grammar, with a named reason, and replaces the
       provisional check used in the classification. Publish coverage for A0 and the
-      earlier kits.
+      earlier kits. `extract/figma/grammar.ts`; coverage is in the five lines above,
+      receipts in `private/grammar-coverage-20261031` (git-ignored). The most common
+      reason out is an absolutely placed child (6 A0 sets, 4 earlier). A subtree with
+      no text and no auto layout counts as a drawing (SVG) wherever it sits.
 - [ ] Font preflight: refuse missing fonts by name before work starts, reported in
       their own column, both directions.
 - [ ] Variant matrix rule: the cartesian product of enumerated story arguments,
