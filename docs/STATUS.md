@@ -43,7 +43,8 @@ then this page, then choose work. It is written for any agent or provider.
 Owner:
 - [x] Choose one provider: Claude Code (2026-10-31). Codex is not used; ending its
       paused bridge goal in the Codex app keeps it from restarting.
-- [ ] Get Figma's written go-ahead and settle the IP position.
+- [x] Figma's go-ahead: not needed. The owner's contract allows this work and keeps
+      the IP with them, and Figma knows about it (signed entry in GOAL.md, 2026-10-31).
 - [x] Merge PR #287 (the goal, the rules and this page).
 - [x] Compile the candidate list, commit the salted hashes, and draw A0. A
       sealing agent did this at the owner's request on 2026-10-31 (see the
