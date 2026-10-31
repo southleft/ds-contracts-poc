@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (A0 measured). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (A0 measured, earlier kits classified). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -22,8 +22,10 @@ then this page, then choose work. It is written for any agent or provider.
    - React to Figma, Agriculture Design System (648 stories, 127 components):
      0 of 127. The engine has no reader for a library's stories; every case
      needs a hand-written declaration, which first pass does not allow.
-   - Earlier fresh-kit readings (2026-10-14 to 10-19, before GOAL.md): Figma to
-     React 177 to 180 of 1,344 variants (about 13%).
+   - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
+     headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
+     57 font-blocked. Inside the grammar, where it can be checked (13 of 24
+     sets): headline 24.6%, raw 19 of 79. The classification is below.
 4. **Spend against the cap:** nothing recorded since signing. The cap is $2,400
    through 2026-12-23, read from the provider's usage page.
 5. **Top three named misses** on A0, after a labeled rerun with Inter 3.19 gave
@@ -58,10 +60,27 @@ Decision 1 needs them):
       archived) and add the `/next` command.
 - [x] Run today's engine once on A0 in both directions, and publish the numbers here.
       Results are above; receipts are in `private/a0-20261031` (git-ignored).
-- [ ] Classify the existing never-seen results by cause (missing font, image
+- [x] Classify the existing never-seen results by cause (missing font, image
       framing, refused as an ambiguous choice between known options, refused as
       unsupported, real conversion miss) and against the grammar, and publish the
-      numbers here.
+      numbers here. Receipts and rules are in `private/never-seen-classification-20261031`
+      (git-ignored). The 1,344 variants in 56 sets are Semi 848, Arco 127 plus a
+      second Arco sample of 212, CollegeTown 96 and Orbit 61.
+      - By cause: 177 pass, 57 missing font (Orbit's Circular), 39 image framing,
+        88 refused as unsupported (paint stacks, a mask, instance identity, an
+        affine host, a per-variant layout), 0 refused as an ambiguous choice, and
+        150 real conversion misses. 833 have no recorded cause: the per-variant
+        ledgers for Semi and the first Arco sample were in `/private/tmp` and are
+        gone, and CollegeTown's Alert has no first-pass receipt.
+      - Against the grammar: a provisional check of the engine's own dump (the
+        Step 2 classifier does not exist yet) covers the 24 sets whose dump was
+        kept. 13 are in grammar (54%). 11 are out, most often for absolutely
+        placed children (7 sets); 2 are out only because an icon sits in a box
+        without auto layout.
+      - Top named misses on measured variants: size mismatch (149), image
+        difference on black (144), missing text or icons (130). Inside the
+        grammar: image difference (28 on black, 26 on white), missing font (23)
+        and size mismatch (22).
 - [x] Shrink the repository with delete-only PRs (owner request, 2026-10-31).
       First PR: dead folders, the three LEGACY.md files and the two always-red
       schedules. Second PR: the frozen Recipe-IR lineage (18,276 files, 261 npm
@@ -74,7 +93,8 @@ Decision 1 needs them):
 - The one project: `/Users/tjpitre/Sites/ds-contracts-poc`.
 - Scoreboard inputs (git-ignored): `private/beta-kits`, including
   `hill-climb-set.json` and the 204-set references in `full204-1159`.
-- Never-seen results (git-ignored): `private/held-out-intake-*`.
+- Never-seen results (git-ignored): `private/held-out-intake-*`, classified in
+  `private/never-seen-classification-20261031`.
 - Sample React workspaces (git-ignored): `private/workspaces`.
 - Sealed kit pool, outside the repository: `~/ds-contracts-sealed`. Agents never read
   it; only the owner or a sealing agent reveals a slot at its draw.
@@ -89,7 +109,9 @@ The owner asked whether a small decision model (TypeSafe's Jev, already used in
 Southleft's Disposition and Component Charades) could help where pure rules stall.
 In that role, deterministic code would list the candidate answers. Jev would only
 pick among them, behind a confidence gate. Each decision would be frozen into the
-contract and reported in GOAL.md's separate "assisted" column. Step 1's count of
-"refused as an ambiguous choice" says how much it could help. Fonts, image framing
-and geometry gaps would not change. Adding it before 2026-12-23 needs a signed entry
+contract and reported in GOAL.md's separate "assisted" column. Step 1 counted the
+refusals that name an ambiguous choice: 6 of A0's 287 variants (the "scheme" axis)
+and 0 of the earlier 1,344. One earlier refusal (Arco menu, 50 variants) reads
+"unlinked-or-conflicting-owner" and may be one. Fonts, image framing and geometry
+gaps would not change. Adding it before 2026-12-23 needs a signed entry
 in GOAL.md.
