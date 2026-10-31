@@ -113,7 +113,7 @@ record says otherwise. The playground runs the checked-out engine; its
 demonstrations do not qualify the complete conversion or repair journeys.
 
 The held-out canvas-to-code gates preserve their frozen v1/v2 examinations and
-compare current engine output with a separate [machine replay baseline](recipe/evidence/canvas-to-code-held-out-current/README.md).
+compare current engine output with a separate [machine replay baseline](https://github.com/southleft/ds-contracts-poc/blob/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/canvas-to-code-held-out-current/README.md).
 Keep every subject, refusal and historical file hash. Record candidates into a
 new directory using the documented runner, then review the complete changes;
 never use the historical runners' `--write` commands to refresh frozen evidence.

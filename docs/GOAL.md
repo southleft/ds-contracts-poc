@@ -189,3 +189,26 @@ that update in place is the gap this project exists to fill.
 Only the owner changes this page, in a dated, signed entry appended below.
 Thresholds, the checker and the stop rules are never loosened. Changing the AI
 provider never changes this page.
+
+## Signed entries
+
+### 2026-10-31: the sealed pool is compiled by a separate sealing agent
+
+The owner delegated compiling the candidate list and drawing the kits, in chat:
+"just search the web and find the 20 that you think are best". A separate sealing
+agent compiled the pool, checked every candidate against the kits this project
+had already used, and drew the slots. The full list and the salt are in
+`~/ds-contracts-sealed`, outside the repository. The agent working in this
+repository never reads that folder, and it received only these hashes and kit A0.
+
+- Pool: 22 React libraries and 20 Figma kits, all with open fonts. There are
+  7 picks per side, in slots A0, A1, A2, B1, B2, B3 and R.
+- SHA-256(salt + sorted eligible ids): `d5c50da1465d3412d56c33147329ac2d7691aa0251acbfbe2edbd299ca92294c`
+- SHA-256(salt + picks): `52a5ba31c56b5d8d8dc35274c71e98debaf34005521578334e9184d69f54eb30`
+- A0, revealed now on purpose: the Figma kit Sanity UI v2 (the owner's draft copy,
+  file `gjBNQEgO5YWvl2G9BPHJQ4`), and the React library Agriculture Design System
+  (`@ag.ds-next/react`).
+- Every Figma pick is a Community file. The owner duplicates each one into drafts
+  when it is drawn.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-10-31.

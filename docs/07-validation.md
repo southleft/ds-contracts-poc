@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 230 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **227 of 230 deterministic evals pass** (`evals/results.json`); the three reds are named with their measurements in [docs/23 §B.38](23-known-limitations.md) — the three the census/stack-to-main merge measured and refused to re-record green (`astryx-reanchor-minted`, `minted-leaves-bind-to-something`, `console-loop-canvas-drift-probe`). All live checks pass. This section is written to be lifted into a PRD.
+This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 229 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **227 of 229 deterministic evals pass** (`evals/results.json`); the three reds are named with their measurements in [docs/23 §B.38](23-known-limitations.md) — the three the census/stack-to-main merge measured and refused to re-record green (`astryx-reanchor-minted`, `minted-leaves-bind-to-something`, `console-loop-canvas-drift-probe`). All live checks pass. This section is written to be lifted into a PRD.
 
 The suite tags every case with the claim it defends, so the rollup below is derived from `evals/results.json`, not asserted:
 
@@ -197,7 +197,7 @@ Harness design:
 ```bash
 npm install
 npm run build     # C1/C2 gates run here too
-npm run eval      # 230 deterministic evals → evals/results.json
+npm run eval      # 229 deterministic evals → evals/results.json
 npm run docs:check # cheap: re-derive every number this page quotes (no browser, no eval run)
 npm run parity    # current three-surface drift report
 ```

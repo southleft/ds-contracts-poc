@@ -10,8 +10,10 @@ re-plan, or start anything that is not on that list.
 2. Check the real state: `git status`, the current branch, and open PRs
    (`gh pr list --state open`). If STATUS.md disagrees with what you find (a PR it
    lists as open has merged, a date has passed), say so before doing anything.
-3. If a PR is open, the only allowed work is finishing that PR: its failing checks,
-   its review comments, or merging it once it is green. Do not start another.
+3. If a PR is open, finishing it comes first: its failing checks, its review
+   comments, or merging it once it is green. Never open a second PR. While its CI
+   runs with nothing failing, you may prepare the next item locally: read-only
+   analysis or a branch stacked on the open one, opened only after it merges.
 4. Otherwise take the first unchecked item in STATUS.md's agent checklist. If it
    waits on an owner item, stop and name exactly what the owner must do.
 5. Before writing code, state in two lines which item you are doing and which

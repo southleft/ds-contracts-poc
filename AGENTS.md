@@ -18,8 +18,9 @@ any agent's saved memory or notes.
    kit, a stop-rule item, an install failure or an outside user's report. Work on
    GOAL.md's out-of-scope list is refused.
 5. **Never touch sealed kits.** Do not search for, fetch, open or study any
-   candidate kit. Only the owner draws kits. No code changes between a draw and
-   its run.
+   candidate kit, and never read `~/ds-contracts-sealed`. Only the owner draws
+   kits, or a separate sealing agent the owner asks to. No code changes between
+   a draw and its run.
 6. **The ruler is frozen.** From 2026-11-20, never change thresholds, scorers,
    denominators, reference images, the grammar classifier or the variant matrix
    rule. A PR that touches both the checker and the converter is reverted.

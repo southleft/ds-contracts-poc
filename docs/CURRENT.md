@@ -567,7 +567,7 @@ path origins, and the checkbox child remains empty. Color delivery and partial
 page recovery are demonstrated; complete fidelity and V1 remain unqualified.
 Evidence: `private/host-paint-target-v252/` and
 `private/partial-slot-recovery-v253/`.
-See the [current replay limits](../recipe/evidence/canvas-to-code-held-out-current/README.md).
+See the [current replay limits](https://github.com/southleft/ds-contracts-poc/blob/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/canvas-to-code-held-out-current/README.md).
 Evidence is in `private/held-out-integration-v238/` and
 `private/conditional-cross-fill-v240/`. The earlier full fast lane passed all
 201 gates before these latest repairs; that result does not qualify the changed

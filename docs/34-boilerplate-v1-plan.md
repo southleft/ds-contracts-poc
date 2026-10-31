@@ -140,7 +140,7 @@ packages (`@mui/material@9.2.0`, `antd@5.29.3`,
 (MUI `Switch.js` is present — earlier “missing” was a glob false
 negative). Computed CSS of those packages is a separate pipeline
 (`extract/computed`) used for signed Input, not for boilerplate compile.
-Evidence: [`recipe/evidence/compile-source-of-truth-v1.md`](../recipe/evidence/compile-source-of-truth-v1.md).
+Evidence: [`recipe/evidence/compile-source-of-truth-v1.md`](https://github.com/southleft/ds-contracts-poc/blob/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/compile-source-of-truth-v1.md).
 Does not remint. Does not invent Polar. Does not flip `overallSuccess`.
 Product v1 stays INCOMPLETE.
 

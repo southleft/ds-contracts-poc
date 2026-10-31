@@ -55,9 +55,10 @@
 # sync-spine) plus sync:ledger:check in the fast lane.
 name: sync-spine
 
+# The two-hourly schedule was removed on 2026-10-31 (docs/GOAL.md: a scheduled
+# check that stays red is fixed or deleted). It had failed every run since
+# 2026-08-25. Drift work returns after 2026-12-23; run it by hand until then.
 on:
-  schedule:
-    - cron: '23 */2 * * *'
   workflow_dispatch:
 
 permissions:

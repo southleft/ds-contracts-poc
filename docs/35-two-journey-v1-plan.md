@@ -68,13 +68,13 @@
 > Phases **1–3f / 4 prep** are done with **named blockers**, not a green
 > release bar. Phase **5** labeling + soft-archive of superseded Scratch
 > stays are done. Reader covers 13×3 boilerplate subjects
-> ([`boilerplate-review-package-v1`](../recipe/evidence/boilerplate-review-package-v1/));
+> ([`boilerplate-review-package-v1`](https://github.com/southleft/ds-contracts-poc/tree/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/boilerplate-review-package-v1));
 > Astryx theme capture is often `capture-theme-unavailable`; AntD Checkbox
 > dash height stays named-refused. Canvas→code Button apply-step + held-out
 > AntD Card exam ran with silent=0; the
 > [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
 > 2026-08-31** (owner). F1 was **capture-only** (react-day-picker
-> double-run is green — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/)).
+> double-run is green — [`f1-held-out-v1`](https://github.com/southleft/ds-contracts-poc/tree/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/f1-held-out-v1)).
 > The mechanical calendar@1 compile was recorded as **attempted and refused**
 > (5 week rows, blank outside labels, selected is a border not a fill — see
 > `compile-gaps.json`). Superseded by the 2026-09-05 update above: those gaps
