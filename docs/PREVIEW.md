@@ -114,18 +114,18 @@ What that means for your own components:
    them; children are refused by type when the design has no slot. The
    package's root import includes its token stylesheet. Supply the design's
    font files with `--fonts` to include them in the package and load them
-   automatically (see [Check with your fonts](#check-with-your-fonts)). Without
-   that option, your app must load the fonts itself.
+   automatically (see [Check with your fonts](#check-with-your-fonts)). Every
+   face the design's text draws must be supplied, or the command stops first.
 
 A saved capture works the same way: `npm run figma:to-react -- --dump
 <dump.json> --out ./out`.
 
 ## Check with your fonts
 
-The check renders the package in a fresh Vite app, which has only the fonts
-installed on your machine. When your design uses a font you do not have
-installed (the check names it: `font-unavailable-in-consumer:…`), give the
-check the font files with `--fonts`:
+Fonts are inputs. Before anything is packaged, the command lists every face
+the design's text draws (family, weight, style) and stops with exit 3,
+naming each face no `--fonts` manifest supplies (`font-preflight: …`, also
+in `<out>/font-preflight.json`). Give it the font files with `--fonts`:
 
 ```bash
 npm run figma:to-react -- --url "<the copied link>" --out ./out --fonts ./fonts.json

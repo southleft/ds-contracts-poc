@@ -9,13 +9,15 @@
 import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CliUsageError } from '../src/lib.js';
 import { figmaToReactCommand, nodeSupported, parseFigmaToReactArgs } from '../src/commands/figma-to-react.js';
 import { viteEngine } from '../../../scripts/figma-to-react.js';
+import { faceOf, fontPreflight } from '../../../scripts/font-preflight.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const dump = path.join(repoRoot, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
@@ -82,6 +84,42 @@ function sandbox(t: test.TestContext, token?: string) {
   return { out, log, errors, restore };
 }
 
+/** A sha256-pinned manifest for one variable font file from extract/computed/fonts. */
+function fontManifest(t: test.TestContext, family: string, file: string): string {
+  const dir = mkdtempSync(path.join(tmpdir(), 'cli-fonts-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const source = path.join(repoRoot, 'extract', 'computed', 'fonts', file);
+  copyFileSync(source, path.join(dir, path.basename(file)));
+  const sha256 = createHash('sha256').update(readFileSync(source)).digest('hex');
+  writeFileSync(path.join(dir, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ family, weight: '100 900', style: 'normal', file: path.basename(file), sha256 }] }));
+  return path.join(dir, 'fonts.json');
+}
+
+test('the font preflight reads each drawn face and names the ones no supplied face covers', () => {
+  assert.deepEqual(faceOf({ fontFamily: 'Public Sans', fontStyle: 'Semi Bold' }), { family: 'Public Sans', weight: 600, style: 'normal' });
+  assert.deepEqual(faceOf({ fontFamily: 'Circular20', fontStyle: 'Book', fontWeight: 450 }), { family: 'Circular20', weight: 450, style: 'normal' });
+  assert.deepEqual(faceOf({ fontFamily: 'Inter', fontStyle: 'Extra Light Italic' }), { family: 'Inter', weight: 200, style: 'italic' });
+  const text = (fontFamily: string | undefined, fontStyle: string) => ({ name: 't', type: 'TEXT', text: { characters: 'x', fontSize: 12, fontStyle, ...(fontFamily ? { fontFamily } : {}) } });
+  const file = { Tag: { setName: 'Tag', type: 'COMPONENT_SET', variants: [
+    { name: 'Size=sm', type: 'COMPONENT', children: [text('Inter', 'Regular'), text('Inter', 'Italic')] },
+    { name: 'Size=md', type: 'COMPONENT', children: [text('inter', 'Bold'), text(undefined, 'Regular')] }] }, _degradations: [] };
+  const { required, missing } = fontPreflight(file as never, [{ family: 'Inter', weight: '100 900', style: 'normal' }]);
+  assert.equal(required.length, 4);
+  assert.deepEqual(missing.map(f => [f.family, f.weight, f.style, f.variants]), [
+    ['(family not recorded)', 400, 'normal', ['Tag / Size=md']], ['Inter', 400, 'italic', ['Tag / Size=sm']]]);
+});
+
+test('without the design\'s fonts the run refuses each missing face by name, packages nothing and exits 3', async t => {
+  const { out, errors, restore } = sandbox(t);
+  const code = await figmaToReactCommand(['--dump', dump, '--out', out], supported, viteEngine);
+  restore();
+  assert.equal(code, 3);
+  assert.ok(errors.some(l => /^✖ font-preflight: Public Sans 600 normal is not supplied \(\d+ variant\(s\)/.test(l)), errors.join('\n'));
+  const receipt = JSON.parse(readFileSync(path.join(out, 'font-preflight.json'), 'utf8'));
+  assert.deepEqual(receipt.missing.map((f: { family: string }) => f.family), ['Public Sans']);
+  assert.equal(existsSync(path.join(out, 'result.json')), false);
+});
+
 test('an invalid --fonts manifest refuses before a URL fetch, engine load or output write', async t => {
   const { out, restore } = sandbox(t, 'test-token-not-a-secret');
   const manifest = path.join(out, 'fonts.json'), target = path.join(out, 'run');
@@ -110,7 +148,8 @@ test('--url imports through the app\'s own URL import with the token from the en
     if (url.includes('/nodes?ids=')) return new Response(nodes, { status: 200 });
     return new Response(JSON.stringify({ err: 'not served by the test fixture' }), { status: 404 });
   }) as typeof fetch;
-  const code = await figmaToReactCommand(['--url', 'https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=101-1', '--out', out], supported, viteEngine);
+  const fonts = fontManifest(t, 'Inter', path.join('inter', 'inter-latin-wght-normal.woff2'));
+  const code = await figmaToReactCommand(['--url', 'https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=101-1', '--out', out, '--fonts', fonts], supported, viteEngine);
   restore();
   assert.equal(code, 0);
   assert.ok(requests.length > 0 && requests.every(r => r.url.startsWith('https://api.figma.com/') && r.token === 'test-token-not-a-secret'), JSON.stringify(requests));
@@ -122,7 +161,8 @@ test('--url imports through the app\'s own URL import with the token from the en
 
 test('a run packages the dump, and without a Chromium says NOT CHECKED and exits 0', async t => {
   const { out, log, restore } = sandbox(t);
-  const code = await figmaToReactCommand(['--dump', dump, '--out', out], supported, viteEngine);
+  const fonts = fontManifest(t, 'Public Sans', path.join('public-sans', 'PublicSans-VariableFont_wght.ttf'));
+  const code = await figmaToReactCommand(['--dump', dump, '--out', out, '--fonts', fonts], supported, viteEngine);
   restore();
   assert.equal(code, 0);
   const result = JSON.parse(readFileSync(path.join(out, 'result.json'), 'utf8'));

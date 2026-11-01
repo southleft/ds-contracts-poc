@@ -32,7 +32,8 @@ Commands:
           [--fonts <manifest.json>]          installed package in a clean Vite app and reported
           [--allow-failures]                  PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
                                               from the environment. Any FAIL exits 1 unless
-                                              --allow-failures. --fonts supplies local font files.
+                                              --allow-failures. --fonts supplies the design's
+                                              font files; a face it lacks is refused by name (exit 3).
                                               The check needs a Chromium:
                                               npx playwright-core install chromium. Node 20.19+ (20.x) or 22.12+,
                                               macOS and Linux.
@@ -167,6 +168,8 @@ or UNVERIFIED (not measurable: without FIGMA_TOKEN there are no Figma images).
 Any FAIL exits 1 unless --allow-failures; the package is written either way.
 --fonts provides local font files in a sha256-pinned manifest. The files are
 authenticated before any fetch or output, and the faces are recorded in result.json.
+Every face the design's text draws must be supplied: a missing face is refused by
+name before anything is packaged or checked (exit 3, <out>/font-preflight.json).
 A green check is printed only when every variant passed.
 
   FIGMA_TOKEN   a Figma personal access token (file read). Required for --url;

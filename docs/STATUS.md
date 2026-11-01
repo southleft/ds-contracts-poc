@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (Step 2 started; grammar classifier in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (Step 2 started; grammar classifier and Figma to React font preflight in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -65,8 +65,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       receipts in `private/grammar-coverage-20261031` (git-ignored). The most common
       reason out is an absolutely placed child (6 A0 sets, 4 earlier). A subtree with
       no text and no auto layout counts as a drawing (SVG) wherever it sits.
-- [ ] Font preflight: refuse missing fonts by name before work starts, reported in
-      their own column, both directions.
+- [x] Font preflight, Figma to React: `scripts/font-preflight.ts` lists every face
+      the design's text draws and refuses, by name and before anything is packaged,
+      each one `--fonts` does not supply (exit 3, `<out>/font-preflight.json` with the
+      variants for the font-blocked column).
+- [ ] Font preflight, React to Figma: hold the faces a story renders with against
+      Figma's font list using the same comparison, once the Storybook reader and the
+      plugin capture supply them.
 - [ ] Variant matrix rule: the cartesian product of enumerated story arguments,
       capped at 64 per set.
 - [ ] Plugin capture: a PNG per variant at whole-pixel bounds, SVG for icons and
