@@ -113,6 +113,9 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       faces it renders with, and widen the React pin to a tested 18.3 and 19.x range.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
+- [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
+      only on the fast, catalog and smaller lanes. Run it by hand on the frozen
+      commit and before any sealed run.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule and the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization

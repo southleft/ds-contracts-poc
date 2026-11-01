@@ -110,10 +110,15 @@
 # than this machine, and the headroom is deliberate.
 name: full
 
+# Nightly against main, plus by hand (owner, 2026-11-01; GOAL.md "Budget and
+# reporting": at most 15 minutes of waiting on a PR's critical path, the full
+# regression set nightly). Run it by hand on the commit before the 2026-11-20
+# freeze and before any sealed run, and cite that run. A red nightly run is
+# fixed first, or this workflow is deleted.
 on:
-  pull_request:
-  push:
-    branches: [main]
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: read
