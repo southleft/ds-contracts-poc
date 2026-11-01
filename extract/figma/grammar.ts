@@ -136,7 +136,7 @@ export interface StoryArgType {
   options?: unknown[];
   type?: { name?: string; value?: unknown } | string;
 }
-const OPTION_CONTROLS = new Set(['select', 'radio', 'inline-radio']);
+export const OPTION_CONTROLS = new Set(['select', 'radio', 'inline-radio']);
 export function classifyStoryArgs(argTypes: Record<string, StoryArgType>): GrammarVerdict {
   const reasons = new Set<string>();
   for (const a of Object.values(argTypes)) {

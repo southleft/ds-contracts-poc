@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (Step 2 started; grammar classifier and Figma to React font preflight in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (Step 2 started; grammar classifier, Figma to React font preflight and variant matrix rule in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -72,8 +72,11 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [ ] Font preflight, React to Figma: hold the faces a story renders with against
       Figma's font list using the same comparison, once the Storybook reader and the
       plugin capture supply them.
-- [ ] Variant matrix rule: the cartesian product of enumerated story arguments,
-      capped at 64 per set.
+- [x] Variant matrix rule: the cartesian product of enumerated story arguments,
+      capped at 64 per set. `extract/figma/variant-matrix.ts`: option-list arguments
+      are the axes (true/false and text arguments are properties, not axes); a product
+      over 64 or a repeated option is refused by name, never cut; `matchesMatrix`
+      names every missing or extra axis, option and variant in a set read back from Figma.
 - [ ] Plugin capture: a PNG per variant at whole-pixel bounds, SVG for icons and
       vectors, the font list and variables, all from a draft the owner duplicated.
       REST dumps stay a frozen input format.
