@@ -6,8 +6,10 @@
  * Chromium through Storybook's own preview API, groups stories by component
  * title, and holds each component's first story (index order) against the
  * grammar classifier, and holds all of its stories against the variant matrix
- * rule, where each story is one variant (owner, 2026-11-01) and a story with
- * its own render is named, not counted.
+ * rule, where each story is one variant (owner, 2026-11-01). Own render is
+ * decided from the rendered page: each story is rendered through Storybook's
+ * own channel and React's tree is held against rendersOneInstance; a story that
+ * fails to render is named as its own render, never counted.
  * Deterministic for one Storybook build; no model call.
  *
  * Run: npx tsx scripts/storybook-reader.ts --storybook <https://…/storybook/> --out <dir>
@@ -15,7 +17,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
-import { storyVariantMatrix } from '../extract/figma/variant-matrix.js';
+import { rendersOneInstance, storyVariantMatrix, type RenderedNode } from '../extract/figma/variant-matrix.js';
 
 export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
   /** The story, or its file's meta, supplies its own render (a grid, a composed example). */
@@ -54,19 +56,46 @@ async function loadStorybook(storybook: string): Promise<LoadedStory[]> {
     await page.goto(new URL(`iframe.html?id=${encodeURIComponent(ids[0]!)}&viewMode=story`, base).href, { waitUntil: 'load', timeout: 60_000 });
     await page.waitForFunction(() => (window as any).__STORYBOOK_PREVIEW__?.storyStoreValue, null, { timeout: 60_000 });
     // A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
-    return await page.evaluate(`(async (storyIds) => {
+    const stories = await page.evaluate(`(async (storyIds) => {
       const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
       // Functions (actions, component types inside elements) keep a named marker, so two stories differ when they do.
       const plain = (v) => { try { return JSON.parse(JSON.stringify(v ?? null, (k, x) => typeof x === 'function' ? '[function ' + (x.displayName || x.name || '') + ']' : x)); } catch { return null; } };
       const out = [];
       for (const id of storyIds) {
-        const s = await store.loadStory({ storyId: id }), csf = await store.loadCSFFileByStoryId(id);
-        const own = typeof s.moduleExport === 'function' || typeof s.moduleExport?.render === 'function' || typeof csf.meta?.render === 'function';
-        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: own,
+        const s = await store.loadStory({ storyId: id });
+        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: true,
           argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined }])) });
       }
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
+    // Own render from the rendered page: render each story through Storybook's own channel and
+    // compact React's tree (instances of the story's component by type; DOM elements and text).
+    const trees = await page.evaluate(`(async (storyIds) => {
+      const store = window.__STORYBOOK_PREVIEW__.storyStoreValue, channel = window.__STORYBOOK_ADDONS_CHANNEL__;
+      const root = document.getElementById('storybook-root'), out = {};
+      for (const id of storyIds) {
+        const outcome = await new Promise((resolve) => {
+          const finish = (r) => { channel.off('storyRendered', ok); channel.off('storyErrored', bad); channel.off('storyThrewException', bad); resolve(r); };
+          const ok = (sid) => { if (sid === id) finish('rendered'); }, bad = () => finish('failed');
+          channel.on('storyRendered', ok); channel.on('storyErrored', bad); channel.on('storyThrewException', bad);
+          setTimeout(() => finish('failed'), 20000);
+          channel.emit('setCurrentStory', { storyId: id, viewMode: 'story' });
+        });
+        await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+        const component = (await store.loadCSFFileByStoryId(id)).meta.component;
+        const same = (t) => !!t && !!component && (t === component || t.type === component || t.render === component || t === component.type || t === component.render);
+        const build = (f) => { const nodes = []; for (let c = f; c; c = c.sibling) { const kids = build(c.child);
+          if (same(c.type) || same(c.elementType)) nodes.push({ i: true });
+          else if (typeof c.type === 'string' || c.tag === 6) nodes.push(kids.length ? { h: true, c: kids } : { h: true });
+          else nodes.push(...kids); } return nodes; };
+        const key = Object.keys(root).find((k) => k.startsWith('__reactContainer$'));
+        const live = key ? (root[key].stateNode?.current ?? root[key]) : null;
+        out[id] = outcome === 'rendered' && live ? { c: build(live.child) } : null;
+      }
+      return out;
+    })(${JSON.stringify(ids)})`) as Record<string, RenderedNode | null>;
+    for (const s of stories) s.ownRender = !trees[s.id] || !rendersOneInstance(trees[s.id]!);
+    return stories;
   } finally { await browser.close(); }
 }
 

@@ -86,6 +86,28 @@ export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixR
   return { status: 'ok', matrix: { axes, variants: fixed.flatMap((f) => listed.matrix.variants.map((v) => ({ ...f, ...v }))) }, ownRender };
 }
 
+/** A rendered story, compacted by the Storybook reader from React's tree: `i`
+ *  marks an instance of the story's component (by React component type), `h` a
+ *  DOM element or text; other React nodes are flattened into their parent. */
+export interface RenderedNode { i?: true; h?: true; c?: RenderedNode[] }
+
+/** Own render, decided from the rendered page (owner condition, 2026-11-01): a
+ *  story is one variant only when its root renders exactly one instance of the
+ *  component and nothing beside it. Elements that contain the instance
+ *  (decorators, theme providers) are allowed; any other element or text is
+ *  content beside it. A component nested inside the instance is its own content. */
+export function rendersOneInstance(root: RenderedNode): boolean {
+  let instances = 0, beside = 0;
+  const holdsInstance = (n: RenderedNode): boolean => {
+    if (n.i) { instances++; return true; }
+    const holds = (n.c ?? []).map(holdsInstance).some(Boolean);
+    if (n.h && !holds) beside++;
+    return holds;
+  };
+  holdsInstance(root);
+  return instances === 1 && beside === 0;
+}
+
 const tuple = (v: Record<string, string>, names: string[]) => names.map((n) => `${n}=${v[n] ?? ''}`).join(', ');
 
 /** Problems, sorted; none means the set is the matrix exactly. */

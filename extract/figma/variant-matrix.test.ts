@@ -60,3 +60,13 @@ test('a repeated story, only own-render stories, or more than 64 variants are re
   const many = Array.from({length:65},(_,i)=>s(`v${i}`,{tone:`t${i}`}));
   assert.equal((storyVariantMatrix(many) as {reason:string}).reason,'variant-matrix-over-cap:65>64');
 });
+
+import {rendersOneInstance} from './variant-matrix.js';
+test('own render from the rendered page: exactly one instance, wrappers allowed, nothing beside it', () => {
+  const one = {i: true as const, c: [{h: true as const}]};
+  assert.equal(rendersOneInstance({h: true, c: [{h: true, c: [one]}]}), true, 'decorator and theme wrappers around the instance');
+  assert.equal(rendersOneInstance({h: true, c: [one, {...one}]}), false, 'a grid of two instances');
+  assert.equal(rendersOneInstance({h: true, c: [one, {h: true}]}), false, 'other content beside the instance');
+  assert.equal(rendersOneInstance({h: true, c: [{h: true}]}), false, 'no instance at all');
+  assert.equal(rendersOneInstance({c: [{i: true, c: [{i: true}]}]}), true, 'the component nested inside its own instance is its content');
+});
