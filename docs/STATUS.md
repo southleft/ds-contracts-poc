@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b, the pinned reference environment and both font preflights in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1 to 2c, the pinned reference environment and both font preflights in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -65,9 +65,8 @@ Owner:
       render, with no hand-written witnesses (owner, 2026-10-31). The witnessed
       source-reference intake is regression only.
 - [ ] Duplicate each drawn Figma kit into drafts, for plugin captures.
-- [ ] Install Liberation Sans, Serif and Mono (free) where Figma runs, or say to
-      pin a different font set, before React to Figma can measure A0 (fonts are
-      inputs; the agent adds no font aliases).
+- [x] A0's text renders in Liberation, which Figma lacks: swap the pinned image's
+      fonts to Arimo, Tinos and Cousine (owner, 2026-11-01: "Yes, swap the fonts").
 - [ ] Draw A1 after the 2026-11-20 freeze (a sealing agent can do it at the owner's
       request), and A2 on 2026-12-04.
 - [ ] Run `npm publish` for the CLI under `next` when the agent says it is ready. No
@@ -108,10 +107,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [x] Plugin capture, part 2a: the check reads `<set>.capture.json` (`--capture`)
       instead of Figma's REST images, through the same framing proofs, for both
       directions (`scripts/design-consumer-capture.ts`).
-- [ ] Plugin capture, part 2b: SVG for icons and vectors. On the A0 draft the first
-      SVG export of a session took 61 s and a whole-variant export did not return;
-      exporting each icon's main component once (Button: 300 slots, 1 icon, 37 ms)
-      is the next try.
+- [ ] Plugin capture, part 2b: SVG for icons and vectors, built from `fillGeometry`
+      and `strokeGeometry` with no export call (parent session's route, 2026-11-01).
+      Measured on the A0 draft: the same icon's SVG export took 1 ms, then 152 s, and
+      the export blocks the plugin, so no time limit can hold. One SVG per main
+      component (A0: 18 sets, about 6 SVGs). Masks, gradients, image paints, effects,
+      other blend modes and text are refused by name. Before trusting it, compare the
+      built paths with the REST dump's and draw each SVG against the plugin's PNG.
 - [x] Storybook reader, part 1: `scripts/storybook-reader.ts` reads every story's
       arguments through Storybook's own preview API in pinned Chromium and holds
       each component against the grammar and the variant matrix rule.
@@ -138,8 +140,19 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       to Liberation Sans, Serif and Mono, which the font preflight holds like any face.
       Two runs were byte-identical (431 PNGs). The image's arm64 build drew 2 of them a
       few pixels one level apart, so the architecture is part of the pin.
-- [ ] Storybook reader, part 2c: widen the React pin to a tested 18.3 and 19.x range
-      (the observer accepts React DOM 19.2.4 and 19.2.7 only; A0 uses 18.3).
+- [x] Storybook reader, part 2c: the reader records the React renderer the Storybook
+      loads and refuses one outside the tested 18.3 and 19.x range by name. Tested on
+      A0 (its Storybook ships React DOM `18.3.0-canary-178c267a4e-20241218`; images
+      unchanged) and on this repository's Storybook 10.6.3 with React DOM 19.3.1 (201
+      variants, 193 references, two runs byte-identical; 8 empty layouts named
+      `reference-empty`). The witnessed source-reference observer keeps its pin; it is
+      regression only.
+- [ ] Swap the pinned image's fonts (owner, 2026-11-01): drop Liberation Sans, Serif
+      and Mono for Arimo, Tinos and Cousine from a pinned, SHA-256-checked source, built
+      locally from a committed Dockerfile and never pushed, with fontconfig's own metric
+      aliases only. Report the face each A0 stack resolves to, and stop if `system-ui`
+      or `sans-serif` falls elsewhere: today the image's default sans is WenQuanYi Zen
+      Hei, which this repository's Storybook already falls back to.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
@@ -155,9 +168,10 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       PRs over splitting jobs (rule 11: the job count must fall). Report the before
       and after critical path, measured on the PR itself.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
-      classifier, the variant matrix rule and the Storybook reader
+      classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
-      and grouping decide the React to Figma denominator.
+      and grouping decide the React to Figma denominator, its pinned image, and the
+      plugin capture with its SVG builder.
 
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it

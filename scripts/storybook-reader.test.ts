@@ -37,3 +37,9 @@ test('React to Figma font preflight: each face a variant is drawn with is held a
   assert.equal(storyFontPreflight(components, [{family: 'Liberation Sans', style: 'Bold'}, {family: 'liberation sans', style: 'Regular'}, {family: 'Liberation Sans', style: 'Italic'}]).missing.length, 0);
 });
 
+
+import {REACT_TESTED} from './storybook-reader.js';
+test('the reader runs only on React lines it has been tested on, prereleases of those lines included', () => {
+  for (const v of ['18.3.1', '18.3.0-canary-178c267a4e-20241218', '19.2.7', '19.3.1']) assert.ok(REACT_TESTED.test(v), v);
+  for (const v of ['18.2.0', '17.0.2', '20.0.0', '19']) assert.ok(!REACT_TESTED.test(v), v);
+});
