@@ -30,9 +30,8 @@ then this page, then choose work. It is written for any agent or provider.
      64. Named, not counted: 159 own-render stories, 35 repeats of an earlier
      story's arguments, 0 the reader could not render. Each of the 431 variants
      has a reference image, drawn in the pinned environment and byte-identical over
-     two runs; its text is drawn in Liberation Sans, Serif and Mono. Font-blocked:
-     405 of 431, because this machine's Figma lists none of those faces (9,618 faces;
-     it has the metric twins Arimo, Tinos and Cousine, which are not the same face).
+     two runs; its text is drawn in Arimo, Tinos and Cousine, which Figma lists.
+     Font-blocked: 0 of 431 (405 while the image drew Liberation, which it does not).
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -91,8 +90,8 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       reader saw each variant drawn with against Figma's font list, which the plugin
       capture now records whole (`figmaFonts`; it belongs to the machine, not the
       draft), and refuses each missing face by name with its variants (exit 3,
-      `font-preflight.json`). On A0: 6 faces, all missing, 405 of 431 variants
-      blocked, nothing written to Figma.
+      `font-preflight.json`). On A0: 6 faces; all were missing while the image drew
+      Liberation (405 of 431 variants blocked), none are with Croscore (0 of 431).
 - [x] Variant matrix rule: the cartesian product of enumerated story arguments,
       capped at 64 per set. `extract/figma/variant-matrix.ts`: option-list arguments
       are the axes (true/false and text arguments are properties, not axes); a product
@@ -147,12 +146,17 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       variants, 193 references, two runs byte-identical; 8 empty layouts named
       `reference-empty`). The witnessed source-reference observer keeps its pin; it is
       regression only.
-- [ ] Swap the pinned image's fonts (owner, 2026-11-01): drop Liberation Sans, Serif
-      and Mono for Arimo, Tinos and Cousine from a pinned, SHA-256-checked source, built
-      locally from a committed Dockerfile and never pushed, with fontconfig's own metric
-      aliases only. Report the face each A0 stack resolves to, and stop if `system-ui`
-      or `sans-serif` falls elsewhere: today the image's default sans is WenQuanYi Zen
-      Hei, which this repository's Storybook already falls back to.
+- [x] Swap the pinned image's fonts (owner, 2026-11-01): `scripts/storybook-reader.Dockerfile`
+      removes Liberation and adds Arimo, Tinos and Cousine from google/fonts at a pinned
+      commit, each file checked by SHA-256; the reader builds it locally (tagged by the
+      Dockerfile's hash, never pushed) and records the base digest, Dockerfile hash,
+      image ID and font list. Fontconfig's own metric aliases pick the faces: on A0,
+      `-apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif` resolves at
+      Helvetica to Arimo, and Prose's serif and code text to Tinos and Cousine.
+- [ ] Generic families still fall to a CJK face: fontconfig resolves `system-ui`,
+      `sans-serif`, `serif` and `monospace` to WenQuanYi Zen Hei, so this repository's
+      Storybook (`Inter, system-ui, …` with Inter not loaded) draws in it. A0 never
+      reaches a generic. No rule was added; the parent session decides.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
