@@ -74,18 +74,20 @@ function flag(name: string): string | undefined {
 
 // Filename-matched, as scripts/generate-components.ts does, so a bundle can never trigger it.
 if (process.argv[1] && /(^|[\\/])figma-to-react\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) {
-  const dump = flag('--dump'), url = flag('--url'), out = flag('--out'), fonts = flag('--fonts'), nativeStrokes = flag('--native-strokes');
-  if ((!dump && !url) || (dump && url) || !out || (process.argv.includes('--fonts') && (!fonts || fonts.startsWith('--'))) || (process.argv.includes('--native-strokes') && (!nativeStrokes || nativeStrokes.startsWith('--')))) {
-    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--allow-failures]\n'
+  const dump = flag('--dump'), url = flag('--url'), out = flag('--out'), fonts = flag('--fonts'), nativeStrokes = flag('--native-strokes'), capture = flag('--capture');
+  if ((!dump && !url) || (dump && url) || !out || (process.argv.includes('--fonts') && (!fonts || fonts.startsWith('--'))) || (process.argv.includes('--native-strokes') && (!nativeStrokes || nativeStrokes.startsWith('--')))
+    || (process.argv.includes('--capture') && (!capture || capture.startsWith('--')))) {
+    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--capture <set.capture.json>] [--allow-failures]\n'
       + '  --url reads FIGMA_TOKEN from the environment (never from the command line).\n'
       + '  --fonts bundles your design\'s font files for the package and check (a sha256-pinned manifest; see docs/PREVIEW.md).\n'
       + '  Every face the design\'s text draws must be supplied; a missing face is refused by name (exit 3).\n'
+      + '  --capture checks against the Sync Runner\'s reference capture instead of Figma\'s REST images.\n'
       + '  After packaging, the generated package is checked against the design (design:consumer:check) and each\n'
       + '  variant is reported pass / FAIL / unverified; any FAIL exits 1 unless --allow-failures is given.\n'
       + '  Outside this repository: npx @ds-contracts/cli figma-to-react (same flags but --expect-request).');
     process.exit(2);
   }
-  lib.runFigmaToReact({ dump, url, out: out!, name: flag('--name'), expectRequest: flag('--expect-request'), fonts, nativeStrokes, allowFailures: process.argv.includes('--allow-failures') },
+  lib.runFigmaToReact({ dump, url, out: out!, name: flag('--name'), expectRequest: flag('--expect-request'), fonts, nativeStrokes, ...(capture ? { capture } : {}), allowFailures: process.argv.includes('--allow-failures') },
     { loadEngine: viteEngine, label: 'figma:to-react' })
     .then(code => process.exit(code))
     .catch(e => { console.error('✖ ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });

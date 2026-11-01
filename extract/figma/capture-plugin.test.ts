@@ -31,12 +31,14 @@ const decode = (b64: string) => Buffer.from(b64, 'base64').toString();
 
 test('each variant gets its layout-box PNG, a painted-extent PNG only when paint reaches past the box, and the fonts it draws', async () => {
   const cap = await run('Badge', fakeFigma());
-  assert.equal(cap.kind, 'ds-contracts-plugin-capture');
+  assert.deepEqual([cap.kind, cap.version], ['ds-contracts-plugin-capture', 2]);
   assert.deepEqual([cap.set, cap.nodeId, cap.fileKey], ['Badge', '1:1', 'draft']);
   const [a, b] = cap.variants;
   assert.deepEqual([a.box.wholePixel, decode(a.box.png), a.paint], [true, '1:2:box', undefined]);
   assert.deepEqual([b.box.wholePixel, decode(b.box.png)], [false, '1:3:box']);
   assert.deepEqual([b.paint.offset, decode(b.paint.png)], [{x: -1, y: -1}, '1:3:paint']);
+  // Both boxes are read again after the exports, for the check's moved-during-export refusal.
+  assert.deepEqual(b.after, {layout: b.box.bounds, render: b.paint.bounds});
   // Hidden text is listed too (a true/false property can show it), sorted by family.
   assert.deepEqual(cap.fonts, [
     {family: 'Circular20', style: 'Book', weight: 450, available: false},

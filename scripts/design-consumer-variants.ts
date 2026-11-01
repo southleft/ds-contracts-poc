@@ -69,7 +69,7 @@ export function sourceEquivalentStateTransitions(
     const to = targets[0];
     // This new adjudication requires explicitly collected full-bounds images;
     // old receipts do not acquire stronger evidence by being reinterpreted.
-    if ([from, to].some(c => frames[c.nodeId]?.raster?.kind !== 'figma-rest-full-bounds-v1' || frames[c.nodeId]?.raster?.scale !== 1)) continue;
+    if ([from, to].some(c => !['figma-rest-full-bounds-v1', 'figma-plugin-layout-box-v1'].includes(frames[c.nodeId]?.raster?.kind ?? '') || frames[c.nodeId]?.raster?.scale !== 1)) continue;
     const pair = equivalentSourcePair(from, to, images, frames);
     if (pair) out.push(pair);
   }

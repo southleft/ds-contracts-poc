@@ -50,6 +50,9 @@ GOAL.md). Git history keeps the Step 1 checklist.
 
 Owner:
 - [x] Decision 1: continue (2026-10-31, signed entry in GOAL.md).
+- [x] React to Figma is judged only by GOAL.md's checks against the library's own
+      render, with no hand-written witnesses (owner, 2026-10-31). The witnessed
+      source-reference intake is regression only.
 - [ ] Duplicate each drawn Figma kit into drafts, for plugin captures.
 - [ ] Draw A1 after the 2026-11-20 freeze (a sealing agent can do it at the owner's
       request), and A2 on 2026-12-04.
@@ -84,10 +87,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       duplicated. `extract/figma/capture.plugin.js`, run by the Sync Runner's
       "Capture reference images" button. Live on the A0 draft: Button's 150 variants
       in 0.7 s. REST dumps stay a frozen input format.
-- [ ] Plugin capture, part 2: SVG for icons and vectors (one icon's SVG export took
-      61 s on the A0 draft, so it needs a faster path), and the check reading
-      `<set>.capture.json` instead of REST images (a checker change, its own PR,
-      before the 2026-11-20 freeze).
+- [x] Plugin capture, part 2a: the check reads `<set>.capture.json` (`--capture`)
+      instead of Figma's REST images, through the same framing proofs, for both
+      directions (`scripts/design-consumer-capture.ts`).
+- [ ] Plugin capture, part 2b: SVG for icons and vectors. On the A0 draft the first
+      SVG export of a session took 61 s and a whole-variant export did not return;
+      exporting each icon's main component once (Button: 300 slots, 1 icon, 37 ms)
+      is the next try.
 - [ ] Storybook reader: read story arguments, render with the package's own fonts in
       pinned Chromium, and write `ds-contracts.react.json` with no hand-written
       declaration. Widen the React pin to a tested 18.3 and 19.x range.

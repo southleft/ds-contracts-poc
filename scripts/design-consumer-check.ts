@@ -74,6 +74,7 @@ import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from '.
 import { alignRecordedFrames, recordedLayoutSize, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
 import {qualifySourceRenderBoundsExport, type SourceRenderRequests} from './design-consumer-render-anchor.js';
+import { figmaImagesFromCapture } from './design-consumer-capture.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -148,6 +149,8 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
 }
 
 type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean; fonts?: string;
+  /** A plugin capture (<set>.capture.json): its PNGs are the reference images instead of Figma's REST exports. */
+  capture?: string;
   /** The just-generated archive. When present, check these bytes without repackaging. */
   package?: { name: string; tarball: string; tarballSha256: string };
   /** the Chromium to launch; playwright-core's own when absent */ chromiumPath?: string };
@@ -165,6 +168,7 @@ function parseArgs(argv: string[]): Args {
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
     out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), fonts: argv.includes('--fonts') ? required('--fonts') : undefined,
+    capture: argv.includes('--capture') ? required('--capture') : undefined,
     token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
@@ -1023,7 +1027,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // Compare with Figma's own renders.
     const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
     const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
-    const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: unresolved }
+    const figma = args.capture ? figmaImagesFromCapture(JSON.parse(readFileSync(args.capture, 'utf8')), { fileKey, setNodeId }, cases.map(c => c.nodeId), args.out)
+      : unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: unresolved }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
     const sourceImages: Record<string, Buffer> = Object.fromEntries(Object.entries(figma.files).map(([id, file]) => [id, readFileSync(file)]));
