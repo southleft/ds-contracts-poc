@@ -52,12 +52,24 @@ test('an option list spans its whole list inside each story; stories that differ
   const argTypes = {size:{control:'select',options:['sm','md']}};
   const r = storyVariantMatrix([s('a',{size:'sm',tone:'info'},{argTypes}),s('b',{size:'md',tone:'info'},{argTypes}),s('c',{size:'sm',tone:'error'},{argTypes})]);
   assert.deepEqual((r as {matrix:VariantMatrix}).matrix.variants,[{tone:'info',size:'sm'},{tone:'info',size:'md'},{tone:'error',size:'sm'},{tone:'error',size:'md'}]);
+  // Each variant is drawn from the first story showing its story axes, with the listed option set to its own value.
+  assert.deepEqual(r.renders,[{storyId:'a',args:{size:'sm'}},{storyId:'a',args:{size:'md'}},{storyId:'c',args:{size:'sm'}},{storyId:'c',args:{size:'md'}}]);
+  const n = storyVariantMatrix([s('a',{n:1},{argTypes:{n:{options:[1,2]}}})]);
+  assert.deepEqual(n.renders.map(x=>x.args.n),[1,2],'option values stay as the story declares them, not as text');
+});
+
+test('each story spans its own option list; stories listing different option arguments are refused by name', () => {
+  const r = storyVariantMatrix([s('ok',{tone:'okHigh'},{argTypes:{tone:{options:['okHigh','okLow']}}}),s('bad',{tone:'badHigh'},{argTypes:{tone:{options:['badHigh']}}})]);
+  assert.deepEqual((r as {matrix:VariantMatrix}).matrix,{axes:[{name:'tone',options:['okHigh','okLow','badHigh']}],variants:[{tone:'okHigh'},{tone:'okLow'},{tone:'badHigh'}]});
+  assert.deepEqual(r.renders,[{storyId:'ok',args:{tone:'okHigh'}},{storyId:'ok',args:{tone:'okLow'}},{storyId:'bad',args:{tone:'badHigh'}}]);
+  const differ = storyVariantMatrix([s('a',{k:1},{argTypes:{tone:{options:['x']}}}),s('b',{k:2},{argTypes:{size:{options:['y']}}})]);
+  assert.equal((differ as {reason:string}).reason,'variant-matrix-option-axes-differ');
 });
 
 test('a repeat counts once and is named; only own-render or unrendered stories, or more than 64 variants, are refused', () => {
   const r = storyVariantMatrix([s('a',{tone:'x'}),s('b',{tone:'x'}),s('c',{tone:'y'}),s('broken',{tone:'z'},{renderFailed:true})]);
   assert.deepEqual([r.status,(r as {matrix:VariantMatrix}).matrix.variants.length,r.repeats,r.renderFailed],['ok',2,['b'],['broken']]);
-  assert.deepEqual(storyVariantMatrix([s('grid',{},{ownRender:true})]),{status:'refused',reason:'variant-matrix-no-story-variants',count:0,ownRender:['grid'],repeats:[],renderFailed:[]});
+  assert.deepEqual(storyVariantMatrix([s('grid',{},{ownRender:true})]),{status:'refused',reason:'variant-matrix-no-story-variants',count:0,ownRender:['grid'],repeats:[],renderFailed:[],renders:[]});
   const many = Array.from({length:65},(_,i)=>s(`v${i}`,{tone:`t${i}`}));
   assert.equal((storyVariantMatrix(many) as {reason:string}).reason,'variant-matrix-over-cap:65>64');
 });

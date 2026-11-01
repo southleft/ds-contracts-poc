@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader part 1 in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -23,11 +23,14 @@ then this page, then choose work. It is written for any agent or provider.
      0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
      coverage 85 of 127 components (66.9%); out for object (33, often
      `children`), color (8) and number (6) arguments. Counted under the
-     stories-as-variants rule, own render decided from the rendered page: 101 of
-     127 components, 400 expected variants (a denominator change, not progress;
-     140 in 126 under the first rule). Refused: 25 whose every story draws its
-     own render, 1 over 64. Named, not counted: 159 own-render stories, 35
-     repeats of an earlier story's arguments, 1 story the reader could not render.
+     stories-as-variants rule, own render decided from the rendered page: 102 of
+     127 components, 431 expected variants (denominator changes, not progress:
+     101 and 400 before two fixes in the reader and the rule, 140 in 126 under
+     the first rule). Refused: 24 whose every story draws its own render, 1 over
+     64. Named, not counted: 159 own-render stories, 35 repeats of an earlier
+     story's arguments, 0 the reader could not render. Each of the 431 variants
+     has a reference image, byte-identical over two runs; its text is drawn in
+     the macOS system font `.SF NS` (from `-apple-system`), Menlo and Times New Roman.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -79,9 +82,10 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       the design's text draws and refuses, by name and before anything is packaged,
       each one `--fonts` does not supply (exit 3, `<out>/font-preflight.json` with the
       variants for the font-blocked column).
-- [ ] Font preflight, React to Figma: hold the faces a story renders with against
-      Figma's font list using the same comparison, once the Storybook reader and the
-      plugin capture supply them.
+- [ ] Font preflight, React to Figma: hold the faces each variant is drawn with
+      (`faces` in the reader's `stories.json`) against Figma's font list (the plugin
+      capture's) with the same comparison. On A0 that is `.SF NS`, which Figma does
+      not list by that name: a font input to refuse by name, not a conversion failure.
 - [x] Variant matrix rule: the cartesian product of enumerated story arguments,
       capped at 64 per set. `extract/figma/variant-matrix.ts`: option-list arguments
       are the axes (true/false and text arguments are properties, not axes); a product
@@ -108,9 +112,21 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       instance of the component, found by its React component type, and nothing
       beside it. Stories with identical arguments count once (the first in index
       order); a story the reader cannot render is named apart, never counted.
-- [ ] Storybook reader, part 2b: render each variant with the package's own fonts in
-      pinned Chromium (the reference image, never through the engine), record the
-      faces it renders with, and widen the React pin to a tested 18.3 and 19.x range.
+- [x] Storybook reader, part 2b: each expected variant is rendered in pinned Chromium
+      (its story, with listed options set through Storybook's own args channel) and
+      its single instance kept as a PNG reference image, never through the engine,
+      with every platform font Chromium drew its text with (fallbacks included).
+      References depend on the machine's fonts: a sealed run renders and checks on
+      one machine. Two fixes moved the denominator: the first story in index order
+      timed out because Storybook reports re-selecting the loaded story as
+      "unchanged" (AGBranding now counts), and each story now spans its own option
+      list, as the signed rule says, not the first story's (SectionAlert's stories
+      narrow `tone` to their group: 21 to 51 variants). Stories that list different
+      option arguments are refused by name (`variant-matrix-option-axes-differ`; none on A0).
+- [ ] Storybook reader, part 2c: widen the React pin to a tested 18.3 and 19.x range
+      (the observer accepts React DOM 19.2.4 and 19.2.7 only; A0 uses 18.3).
+- [ ] CI: shorten the PR critical path (25.4 min on #300). Fast core gates (24.8 min)
+      and benchmark replay (16.4 min) are over 15 minutes; the number of jobs must not grow.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait

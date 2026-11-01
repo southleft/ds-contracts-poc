@@ -47,8 +47,11 @@ export function variantMatrix(argTypes: Record<string, StoryArgType>): MatrixRes
 export interface StoryInput { id: string; args: Record<string, unknown>; argTypes: Record<string, StoryArgType>; ownRender: boolean;
   /** The reader could not render the story: an instrument fault, never a grammar reason. */
   renderFailed?: boolean }
-/** Named, never counted: own-render stories, repeats of an earlier story's state, and stories the reader could not render. */
-export type StoryMatrixResult = MatrixResult & { ownRender: string[]; repeats: string[]; renderFailed: string[] };
+/** One expected variant as Storybook draws it: its story, with every listed option argument set to the variant's value. */
+export interface VariantRender { storyId: string; args: Record<string, unknown> }
+/** Named, never counted: own-render stories, repeats of an earlier story's state, and stories the reader could not render.
+ *  `renders` lines up with the matrix's variants (empty when refused). */
+export type StoryMatrixResult = MatrixResult & { ownRender: string[]; repeats: string[]; renderFailed: string[]; renders: VariantRender[] };
 
 const stable = (v: unknown): string =>
   Array.isArray(v) ? `[${v.map(stable).join(',')}]`
@@ -60,7 +63,9 @@ const shown = (v: unknown) => (v === undefined ? '(default)' : String(v));
 /** Variants shown as separate stories (owner, 2026-11-01, signed entry in GOAL.md):
  *  each story is one variant. Arguments whose plain values differ across the
  *  stories become axes with the values the stories use; option-list arguments
- *  still span their whole list inside each story, and nothing else is combined.
+ *  still span their whole list inside each story (that story's own list; every
+ *  story must list the same arguments, or the component is refused by name),
+ *  and nothing else is combined.
  *  A story with its own render is not a variant and is named. Stories with
  *  identical arguments show one state: the first in index order counts and the
  *  others are named as repeats (a wrapper is a theme or mode, not a variant).
@@ -75,22 +80,31 @@ export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixR
     if (seen.has(key)) repeats.push(s.id); else { seen.add(key); drawn.push(s); }
   }
   repeats.sort();
-  const named = { ownRender, repeats, renderFailed };
+  const named = { ownRender, repeats, renderFailed, renders: [] as VariantRender[] };
   if (!drawn.length) return { status: 'refused', reason: 'variant-matrix-no-story-variants', count: 0, ...named };
-  const listed = variantMatrix(drawn[0]!.argTypes);
-  if (listed.status === 'refused') return { ...listed, ...named };
-  const listedNames = new Set(listed.matrix.axes.map((a) => a.name));
-  const names = [...new Set(drawn.flatMap((s) => Object.keys(s.args)))].filter((n) => !listedNames.has(n)
+  // Each story's own option lists: a story may narrow an argument's list to the values it shows.
+  const lists: VariantMatrix[] = [];
+  for (const s of drawn) { const l = variantMatrix(s.argTypes); if (l.status === 'refused') return { ...l, ...named }; lists.push(l.matrix); }
+  const listedNames = lists[0]!.axes.map((a) => a.name);
+  if (lists.some((l) => stable(l.axes.map((a) => a.name)) !== stable(listedNames)))
+    return { status: 'refused', reason: 'variant-matrix-option-axes-differ', count: 0, ...named };
+  const names = [...new Set(drawn.flatMap((s) => Object.keys(s.args)))].filter((n) => !listedNames.includes(n)
     && drawn.every((s) => isPlain(s.args[n])) && new Set(drawn.map((s) => shown(s.args[n]))).size > 1).sort();
-  const fixed = [...new Map(drawn.map((s) => {
+  // A variant is drawn from the first story that shows it, with its listed options set to the variant's values.
+  const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], shownOnce = new Set<string>();
+  drawn.forEach((s, i) => {
     const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])]));
-    return [stable(t), t] as const;
-  })).values()];
-  const count = fixed.length * listed.matrix.variants.length;
+    for (const v of lists[i]!.variants) {
+      if (shownOnce.has(stable({ ...t, ...v }))) continue;
+      shownOnce.add(stable({ ...t, ...v })); variants.push({ ...t, ...v });
+      renders.push({ storyId: s.id, args: Object.fromEntries(Object.entries(v).map(([n, o]) => [n, optionsOf(s.argTypes[n]!)!.find((x) => String(x) === o)])) });
+    }
+  });
+  const count = variants.length;
   if (count > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${count}>${VARIANT_CAP}`, count, ...named };
-  const axes = [...listed.matrix.axes, ...names.map((name) => ({ name, options: [...new Set(drawn.map((s) => shown(s.args[name])))] }))]
-    .sort((a, b) => a.name.localeCompare(b.name));
-  return { status: 'ok', matrix: { axes, variants: fixed.flatMap((f) => listed.matrix.variants.map((v) => ({ ...f, ...v }))) }, ...named };
+  const axes = [...listedNames.map((name) => ({ name, options: [...new Set(lists.flatMap((l) => l.axes.find((a) => a.name === name)!.options))] })),
+    ...names.map((name) => ({ name, options: [...new Set(drawn.map((s) => shown(s.args[name])))] }))].sort((a, b) => a.name.localeCompare(b.name));
+  return { status: 'ok', matrix: { axes, variants }, ...named, renders };
 }
 
 /** A rendered story, compacted by the Storybook reader from React's tree: `i`
