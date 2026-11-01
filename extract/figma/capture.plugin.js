@@ -10,11 +10,14 @@
 //    fractional box is named, never rounded here.
 //  - paint: when paint reaches past the layout box (outside strokes, shadows),
 //    a second PNG of the painted extent and its offset from the box.
+//  - after: both boxes read again once the exports are done, so the check can
+//    refuse a capture whose node moved while it was being exported.
 //  - fonts: every family and style the set's text draws, hidden layers included
 //    (a true/false property can show them), and whether this Figma can load it.
-// Not yet: SVG for icons and vectors. On the A0 draft (2026-11-01) one icon
-// instance's SVG export took 61 s against about 30 ms for a PNG, so it stays a
-// named gap rather than a capture that stalls the plugin.
+// Not yet: SVG for icons and vectors. On the A0 draft (2026-11-01) the first SVG
+// export of a session took 61 s (later ones 1-10 ms), and exporting a whole
+// variant root as SVG did not return; it stays a named gap until it is measured
+// per node rather than a capture that stalls the plugin.
 // Deterministic: the same draft gives the same bytes (two exports compared equal).
 const CAPTURE_SET = '';
 
@@ -40,6 +43,7 @@ for (const variant of variants) {
   if (render && !sameBox(render, layout)) {
     entry.paint = { bounds: render, offset: { x: render.x - layout.x, y: render.y - layout.y }, png: await png(variant, false) };
   }
+  entry.after = { layout: box(variant.absoluteBoundingBox), render: box(variant.absoluteRenderBounds) };
   const visit = async (n) => {
     if (n.type === 'TEXT') {
       const segments = typeof n.getStyledTextSegments === 'function' ? n.getStyledTextSegments(['fontName', 'fontWeight']) : [];
@@ -54,4 +58,4 @@ for (const variant of variants) {
 const available = new Set((await figma.listAvailableFontsAsync()).map((f) => f.fontName.family + '\u0000' + f.fontName.style));
 const fonts = [...faces.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([key, f]) => ({ ...f, available: available.has(key) }));
 
-return { kind: 'ds-contracts-plugin-capture', version: 1, fileKey: figma.fileKey || null, set: set.name, nodeId: set.id, variants: captured, fonts };
+return { kind: 'ds-contracts-plugin-capture', version: 2, fileKey: figma.fileKey || null, set: set.name, nodeId: set.id, variants: captured, fonts };

@@ -30,8 +30,8 @@ Commands:
           | --dump <dump.json>                package (<out>/<name>.tgz), then CHECKED against
           --out <dir> [--name <npm name>]     the design: each variant is mounted from the
           [--fonts <manifest.json>]          installed package in a clean Vite app and reported
-          [--allow-failures]                  PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
-                                              from the environment. Any FAIL exits 1 unless
+          [--capture <set.capture.json>]      PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
+          [--allow-failures]                  from the environment. Any FAIL exits 1 unless
                                               --allow-failures. --fonts supplies the design's
                                               font files; a face it lacks is refused by name (exit 3).
                                               The check needs a Chromium:
@@ -170,6 +170,8 @@ Any FAIL exits 1 unless --allow-failures; the package is written either way.
 authenticated before any fetch or output, and the faces are recorded in result.json.
 Every face the design's text draws must be supplied: a missing face is refused by
 name before anything is packaged or checked (exit 3, <out>/font-preflight.json).
+--capture takes the Sync Runner's <set>.capture.json as the reference images instead of
+Figma's REST exports (a token is still used for the text and icon check).
 A green check is printed only when every variant passed.
 
   FIGMA_TOKEN   a Figma personal access token (file read). Required for --url;

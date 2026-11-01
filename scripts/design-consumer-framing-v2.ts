@@ -32,12 +32,16 @@ export interface FigmaFrame {
   pngSha256: string;
   /** Only attached by a producer that explicitly requested full node bounds.
    * Earlier receipts retain their original absolute-span interpretation. */
-  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 } | {kind:"figma-rest-paired-render-v1";scale:1;proof:RenderExportProof} | {kind:SourceAnchorProof['kind'];scale:1;proof:SourceAnchorProof};
+  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 } | {kind:"figma-rest-paired-render-v1";scale:1;proof:RenderExportProof} | {kind:SourceAnchorProof['kind'];scale:1;proof:SourceAnchorProof}
+    /** The plugin capture's exports (scripts/design-consumer-capture.ts): the same layout-box and painted-extent semantics. */
+    | { kind: "figma-plugin-layout-box-v1"; scale: 1 } | {kind:"figma-plugin-paired-render-v1";scale:1;proof:RenderExportProof};
 }
 export const FIGMA_REST_FULL_BOUNDS = {
   kind: "figma-rest-full-bounds-v1",
   scale: 1,
 } as const;
+export const FIGMA_PLUGIN_LAYOUT_BOX = { kind: "figma-plugin-layout-box-v1", scale: 1 } as const;
+const PAIRED_KINDS = new Set(["figma-rest-paired-render-v1", "figma-plugin-paired-render-v1"]);
 export interface FramePlacement {
   consumer: { x: number; y: number };
   figma: { x: number; y: number };
@@ -183,8 +187,8 @@ export function alignRecordedFrames(
   const expanded=consumer.raster?.kind==="browser-paint-extent-v1";
   if(consumer.raster&&(!expanded||!validBox(consumer.raster.paint)))return {refused:"consumer-raster-model-unsupported"};
   const anchored=isSourceAnchorKind(figma.raster?.kind);
-  const paired=figma.raster?.kind==="figma-rest-paired-render-v1"||anchored;
-  if(figma.raster?.kind==="figma-rest-paired-render-v1"){const proof=figma.raster!.kind==="figma-rest-paired-render-v1"?figma.raster!.proof:null;
+  const paired=PAIRED_KINDS.has(figma.raster?.kind ?? "")||anchored;
+  if(PAIRED_KINDS.has(figma.raster?.kind ?? "")){const proof=figma.raster&&"proof" in figma.raster&&!isSourceAnchorKind(figma.raster.kind)?figma.raster.proof as RenderExportProof:null;
     if(!proof||!proof.version||!proof.nodeId||!validBox(proof.layout)||!validBox(proof.render)||!proof.layoutInRender||!sameBox(proof.layout,figma.layout)||!sameBox(proof.render,figma.render)||proof.renderSha256!==figma.pngSha256||!/^([a-f0-9]{64})$/.test(proof.layoutSha256)||proof.layoutInRender.x!==figma.layout.x-figma.render.x||proof.layoutInRender.y!==figma.layout.y-figma.render.y||!Number.isInteger(proof.paintedOverlapPixels)||proof.paintedOverlapPixels<=0||!Number.isInteger(proof.overlapPixels)||proof.overlapPixels<proof.paintedOverlapPixels)
       return {refused:"figma-render-origin-proof-mismatch"};
   }
@@ -201,7 +205,7 @@ export function alignRecordedFrames(
     theirs = PNG.sync.read(figmaBytes);
   if (
     figma.raster &&
-    ((figma.raster.kind !== FIGMA_REST_FULL_BOUNDS.kind && !paired) ||
+    ((figma.raster.kind !== FIGMA_REST_FULL_BOUNDS.kind && figma.raster.kind !== FIGMA_PLUGIN_LAYOUT_BOX.kind && !paired) ||
       figma.raster.scale !== 1)
   )
     return { refused: "figma-raster-model-unsupported" };
