@@ -23,10 +23,11 @@ then this page, then choose work. It is written for any agent or provider.
      0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
      coverage 85 of 127 components (66.9%); out for object (33, often
      `children`), color (8) and number (6) arguments. Counted under the
-     stories-as-variants rule: 50 of 127 components (provisional, errs low),
-     195 expected variants against 140 in 126 before (a denominator change, not
-     progress). 73 are refused for now because every story defines a render
-     function; part 2 decides own render from the rendered page.
+     stories-as-variants rule, own render decided from the rendered page: 101 of
+     127 components, 400 expected variants (a denominator change, not progress;
+     140 in 126 under the first rule). Refused: 25 whose every story draws its
+     own render, 1 over 64. Named, not counted: 159 own-render stories, 35
+     repeats of an earlier story's arguments, 1 story the reader could not render.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -102,12 +103,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [x] Storybook reader, part 1: `scripts/storybook-reader.ts` reads every story's
       arguments through Storybook's own preview API in pinned Chromium and holds
       each component against the grammar and the variant matrix rule.
-- [ ] Storybook reader, part 2: render each variant with the package's own fonts in
-      pinned Chromium (the reference image, never through the engine), write the
-      cases with no hand-written declaration, and widen the React pin to a tested
-      18.3 and 19.x range. Own render, decided from the rendered page: a story is one
-      variant when its root renders exactly one instance of the component, found by
-      its React component type, and nothing beside it; otherwise it is its own render.
+- [x] Storybook reader, part 2a: own render decided from the rendered page
+      (`rendersOneInstance`): a story is one variant when its root renders exactly one
+      instance of the component, found by its React component type, and nothing
+      beside it. Stories with identical arguments count once (the first in index
+      order); a story the reader cannot render is named apart, never counted.
+- [ ] Storybook reader, part 2b: render each variant with the package's own fonts in
+      pinned Chromium (the reference image, never through the engine), record the
+      faces it renders with, and widen the React pin to a tested 18.3 and 19.x range.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
