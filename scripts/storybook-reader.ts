@@ -14,13 +14,20 @@
  * set through Storybook's own args channel) and keeps a PNG of the single
  * instance as the reference image (the library's own render, never the
  * engine's), plus every platform font Chromium drew its text with, for the
- * React to Figma font preflight. Deterministic for one Storybook build and one
- * machine's fonts; no model call.
+ * React to Figma font preflight. Every page is rendered in one pinned
+ * environment (PINNED, run through Docker) and the receipt records it, so the
+ * references reproduce on any machine. Deterministic for one Storybook build;
+ * no model call.
  *
  * Run: npx tsx scripts/storybook-reader.ts --storybook <https://…/storybook/> --out <dir>
+ * Needs a running Docker; the pinned image is pulled on first use. An arm64
+ * machine emulates amd64: the image's native arm64 build draws a few pixels one
+ * level apart (2 of A0's 431 references), so the architecture is pinned too.
  */
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
@@ -117,14 +124,42 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
   return faces;
 }
 
-/** Every story in the Storybook's index, loaded through its preview API in Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ stories: LoadedStory[]; components: StoryComponent[] }> {
+/** The one environment the reader renders in (owner condition, 2026-11-01): Playwright's image for this
+ *  checkout's playwright-core, by digest, on CI's architecture. A library that ships no fonts leaves the
+ *  face to the platform, so the platform is pinned; the face it picks is the font input the preflight holds. */
+export const PINNED = { image: 'mcr.microsoft.com/playwright:v1.61.1-noble@sha256:cf0daee9b994042e011bc29f20cdff1a9f682a039b43fcd738f7d8a9d3bcd9d6', platform: 'linux/amd64' };
+export interface RenderEnvironment { image: string; platform: string; os: string; chromium: string; fonts: string[] }
+
+/** Start the pinned image with a browser server from this checkout's own playwright-core, mounted read-only. */
+async function pinnedBrowser() {
+  const core = path.dirname(createRequire(import.meta.url).resolve('playwright-core/package.json'));
+  const version = (JSON.parse(readFileSync(path.join(core, 'package.json'), 'utf8')) as { version: string }).version;
+  if (!PINNED.image.includes(`:v${version}-`)) throw Error(`storybook-reader: playwright-core ${version} is not the pinned image's; re-pin both together`);
+  const docker = (...args: string[]) => execFileSync('docker', args, { encoding: 'utf8' }).trim();
+  const id = docker('run', '-d', '--rm', '--init', '--ipc=host', '--platform', PINNED.platform, '-p', '127.0.0.1::3000', '-v', `${core}:/playwright-core:ro`,
+    PINNED.image, 'node', '/playwright-core/cli.js', 'run-server', '--port', '3000', '--host', '0.0.0.0');
+  const stop = () => { docker('stop', id); };
+  try {
+    const port = docker('port', id, '3000').split('\n')[0]!.split(':').pop();
+    const { chromium } = await import('playwright-core');
+    for (let tries = 0; ; tries++) {
+      try {
+        const browser = await chromium.connect(`ws://127.0.0.1:${port}/`);
+        const environment: RenderEnvironment = { ...PINNED, os: docker('exec', id, 'sh', '-c', '. /etc/os-release && echo "$PRETTY_NAME"'), chromium: browser.version(),
+          fonts: [...new Set(docker('exec', id, 'fc-list', '--format', '%{family[0]} | %{style[0]} | %{fontversion}\\n').split('\n'))].sort() };
+        return { browser, environment, stop };
+      } catch (e) { if (tries >= 60) throw e; await new Promise((r) => setTimeout(r, 1000)); }
+    }
+  } catch (e) { stop(); throw e; }
+}
+
+/** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
+async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   const index = await (await fetch(new URL('index.json', base))).json() as { entries: Record<string, { type: string; id: string }> };
   const ids = Object.values(index.entries).filter((e) => e.type === 'story').map((e) => e.id);
   if (!ids.length) throw Error('storybook-reader: index.json lists no stories');
-  const { chromium } = await import('playwright-core');
-  const browser = await chromium.launch();
+  const { browser, environment, stop } = await pinnedBrowser();
   try {
     const page = await browser.newPage();
     await page.goto(new URL(`iframe.html?id=${encodeURIComponent(ids[0]!)}&viewMode=story`, base).href, { waitUntil: 'load', timeout: 60_000 });
@@ -160,8 +195,8 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ st
       }
       c.faces = [...faces.values()].sort((a, b) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style));
     }
-    return { stories, components };
-  } finally { await browser.close(); }
+    return { environment, stories, components };
+  } finally { await browser.close(); stop(); }
 }
 
 if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
@@ -169,8 +204,8 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   const storybook = flag('--storybook'), out = flag('--out');
   if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir>'); process.exit(2); }
   mkdirSync(path.join(out, 'references'), { recursive: true });
-  loadStorybook(storybook, path.join(out, 'references')).then(({ stories, components }) => {
-    writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, stories: stories.length, components }, null, 2) + '\n');
+  loadStorybook(storybook, path.join(out, 'references')).then(({ environment, stories, components }) => {
+    writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length;
     console.log(`${components.length} component(s), ${stories.length} stories: ${inGrammar} in grammar; ` +
       `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with more than one variant, ` +

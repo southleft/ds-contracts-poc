@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b and the pinned reference environment in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -29,8 +29,8 @@ then this page, then choose work. It is written for any agent or provider.
      the first rule). Refused: 24 whose every story draws its own render, 1 over
      64. Named, not counted: 159 own-render stories, 35 repeats of an earlier
      story's arguments, 0 the reader could not render. Each of the 431 variants
-     has a reference image, byte-identical over two runs; its text is drawn in
-     the macOS system font `.SF NS` (from `-apple-system`), Menlo and Times New Roman.
+     has a reference image, drawn in the pinned environment and byte-identical over
+     two runs; its text is drawn in Liberation Sans, Serif and Mono.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -84,8 +84,9 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       variants for the font-blocked column).
 - [ ] Font preflight, React to Figma: hold the faces each variant is drawn with
       (`faces` in the reader's `stories.json`) against Figma's font list (the plugin
-      capture's) with the same comparison. On A0 that is `.SF NS`, which Figma does
-      not list by that name: a font input to refuse by name, not a conversion failure.
+      capture's) with the same comparison. On A0 that is Liberation Sans, Serif and
+      Mono: free faces Figma loads only when installed where it runs, so they are a
+      font input to refuse by name, never a conversion failure.
 - [x] Variant matrix rule: the cartesian product of enumerated story arguments,
       capped at 64 per set. `extract/figma/variant-matrix.ts`: option-list arguments
       are the axes (true/false and text arguments are properties, not axes); a product
@@ -116,22 +117,36 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       (its story, with listed options set through Storybook's own args channel) and
       its single instance kept as a PNG reference image, never through the engine,
       with every platform font Chromium drew its text with (fallbacks included).
-      References depend on the machine's fonts: a sealed run renders and checks on
-      one machine. Two fixes moved the denominator: the first story in index order
+      Two fixes moved the denominator: the first story in index order
       timed out because Storybook reports re-selecting the loaded story as
       "unchanged" (AGBranding now counts), and each story now spans its own option
       list, as the signed rule says, not the first story's (SectionAlert's stories
       narrow `tone` to their group: 21 to 51 variants). Stories that list different
       option arguments are refused by name (`variant-matrix-option-axes-differ`; none on A0).
+- [x] Pin the reference environment (owner condition, 2026-11-01): a library that
+      ships no fonts leaves the face to the platform, so the reader renders only in
+      Playwright's image for this playwright-core, by its linux/amd64 digest (`PINNED`
+      in the reader, run through Docker), and records the image, OS, Chromium version
+      and installed font list in `stories.json`. On A0 the system stack now resolves
+      to Liberation Sans, Serif and Mono, which the font preflight holds like any face.
+      Two runs were byte-identical (431 PNGs). The image's arm64 build drew 2 of them a
+      few pixels one level apart, so the architecture is part of the pin.
 - [ ] Storybook reader, part 2c: widen the React pin to a tested 18.3 and 19.x range
       (the observer accepts React DOM 19.2.4 and 19.2.7 only; A0 uses 18.3).
-- [ ] CI: shorten the PR critical path (25.4 min on #300). Fast core gates (24.8 min)
-      and benchmark replay (16.4 min) are over 15 minutes; the number of jobs must not grow.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
       only on the fast, catalog and smaller lanes. Run it by hand on the frozen
       commit and before any sealed run.
+- [ ] Cut a PR's CI wait to 15 minutes or less (owner, 2026-11-01: "Yes, queue it";
+      GOAL.md, Budget and reporting). Do it after the last ruler build item above and
+      before the freeze date, not held for the freeze. Measured 25.4 minutes on #300:
+      fast core gates 24.8, benchmark replay 16.4. CI configuration only (no checker
+      code, thresholds or reference images, rule 6); no test or gate deleted. A slow
+      suite may move to the nightly full lane only if that run keeps it, named in the
+      PR. Prefer caching, removing repeated builds and installs, and running less on
+      PRs over splitting jobs (rule 11: the job count must fall). Report the before
+      and after critical path, measured on the PR itself.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule and the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
