@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (Step 2 started; grammar classifier, Figma to React font preflight and variant matrix rule in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-10-31 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule and plugin capture part 1 in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -29,8 +29,9 @@ then this page, then choose work. It is written for any agent or provider.
      in-grammar variants are all font-blocked). The full breakdown is in this page's
      2026-10-31 Step 1 version (git history) and in
      `private/never-seen-classification-20261031`.
-4. **Spend against the cap:** nothing recorded since signing. The cap is $2,400
-   through 2026-12-23, read from the provider's usage page.
+4. **Spend against the cap:** $0 extra usage; the Claude Code plan showed 4% of its
+   weekly limit used on 2026-11-01. The cap is $2,400 through 2026-12-23, read from
+   the provider's usage page.
 5. **Top three named misses** on A0, after a labeled rerun with Inter 3.19 gave
    identical results (so the font version is not the cause):
    - Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`) is never read, so
@@ -77,9 +78,16 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       are the axes (true/false and text arguments are properties, not axes); a product
       over 64 or a repeated option is refused by name, never cut; `matchesMatrix`
       names every missing or extra axis, option and variant in a set read back from Figma.
-- [ ] Plugin capture: a PNG per variant at whole-pixel bounds, SVG for icons and
-      vectors, the font list and variables, all from a draft the owner duplicated.
-      REST dumps stay a frozen input format.
+- [x] Plugin capture, part 1: a PNG per variant at its whole-pixel layout box (and
+      the painted extent when paint reaches past it), the font list with what this
+      Figma can load, and variables (already in the dump), from a draft the owner
+      duplicated. `extract/figma/capture.plugin.js`, run by the Sync Runner's
+      "Capture reference images" button. Live on the A0 draft: Button's 150 variants
+      in 0.7 s. REST dumps stay a frozen input format.
+- [ ] Plugin capture, part 2: SVG for icons and vectors (one icon's SVG export took
+      61 s on the A0 draft, so it needs a faster path), and the check reading
+      `<set>.capture.json` instead of REST images (a checker change, its own PR,
+      before the 2026-11-20 freeze).
 - [ ] Storybook reader: read story arguments, render with the package's own fonts in
       pinned Chromium, and write `ds-contracts.react.json` with no hand-written
       declaration. Widen the React pin to a tested 18.3 and 19.x range.
