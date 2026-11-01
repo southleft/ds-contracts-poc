@@ -14,11 +14,14 @@
 //    refuse a capture whose node moved while it was being exported.
 //  - fonts: every family and style the set's text draws, hidden layers included
 //    (a true/false property can show them), and whether this Figma can load it.
+//  - figmaFonts: every family and style this Figma can load. The list belongs to
+//    the machine, not the draft: React to Figma holds a library's rendered faces
+//    against it before anything is written (scripts/font-preflight.ts).
 // Not yet: SVG for icons and vectors. On the A0 draft (2026-11-01) the first SVG
 // export of a session took 61 s (later ones 1-10 ms), and exporting a whole
 // variant root as SVG did not return; it stays a named gap until it is measured
 // per node rather than a capture that stalls the plugin.
-// Deterministic: the same draft gives the same bytes (two exports compared equal).
+// Deterministic: the same draft on the same machine gives the same bytes (two exports compared equal).
 const CAPTURE_SET = '';
 
 if (!CAPTURE_SET) throw Error('CAPTURE_SET_MISSING: the plugin sets the component set name before running');
@@ -55,7 +58,9 @@ for (const variant of variants) {
   await visit(variant);
   captured.push(entry);
 }
-const available = new Set((await figma.listAvailableFontsAsync()).map((f) => f.fontName.family + '\u0000' + f.fontName.style));
-const fonts = [...faces.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([key, f]) => ({ ...f, available: available.has(key) }));
+const byKey = ([a], [b]) => (a < b ? -1 : a > b ? 1 : 0);
+const loadable = new Map((await figma.listAvailableFontsAsync()).map((f) => [f.fontName.family + '\u0000' + f.fontName.style, { family: f.fontName.family, style: f.fontName.style }]));
+const fonts = [...faces.entries()].sort(byKey).map(([key, f]) => ({ ...f, available: loadable.has(key) }));
+const figmaFonts = [...loadable.entries()].sort(byKey).map(([, f]) => f);
 
-return { kind: 'ds-contracts-plugin-capture', version: 2, fileKey: figma.fileKey || null, set: set.name, nodeId: set.id, variants: captured, fonts };
+return { kind: 'ds-contracts-plugin-capture', version: 2, fileKey: figma.fileKey || null, set: set.name, nodeId: set.id, variants: captured, fonts, figmaFonts };

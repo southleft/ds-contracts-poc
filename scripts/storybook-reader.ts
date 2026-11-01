@@ -40,7 +40,7 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
   /** The reader could not render the story (an instrument fault, named apart). */
   renderFailed: boolean }
 /** One expected variant's reference: the story and arguments it renders from, then its PNG and box, or why it has none. */
-export interface VariantReference extends VariantRender { png?: string; sha256?: string; box?: Box;
+export interface VariantReference extends VariantRender { png?: string; sha256?: string; box?: Box; faces?: FontFace[];
   problem?: 'reference-render-failed' | 'reference-not-one-instance' }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
@@ -110,7 +110,8 @@ const SHOW = `(async ([id, args]) => {
   return { tree, box: { x, y, width: Math.ceil(Math.max(...rects.map((r) => r.right)) + scrollX) - x, height: Math.ceil(Math.max(...rects.map((r) => r.bottom)) + scrollY) - y } };
 })`;
 
-/** The platform fonts Chromium drew the marked text with (fallbacks included): the faces Figma must also have. */
+const byFace = (a: FontFace, b: FontFace) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style);
+/** The platform fonts Chromium drew the marked text with (fallbacks included), once each: the faces Figma must also have. */
 async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
   const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
   const { nodeIds } = await cdp.send('DOM.querySelectorAll', { nodeId: root.nodeId, selector: '[data-ds-reader-text]' });
@@ -121,7 +122,7 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
     for (const f of (await cdp.send('CSS.getPlatformFontsForNode', { nodeId })).fonts)
       faces.push({ family: f.familyName, weight: Number(weight), style: style === 'italic' ? 'italic' : 'normal' });
   }
-  return faces;
+  return [...new Map(faces.map((f) => [JSON.stringify(f), f])).values()].sort(byFace);
 }
 
 /** The one environment the reader renders in (owner condition, 2026-11-01): Playwright's image for this
@@ -191,9 +192,10 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
         const png = await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
         ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(png).digest('hex');
         if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), png);
-        for (const f of await drawnFaces(cdp)) faces.set(JSON.stringify(f), f);
+        ref.faces = await drawnFaces(cdp);
+        for (const f of ref.faces) faces.set(JSON.stringify(f), f);
       }
-      c.faces = [...faces.values()].sort((a, b) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style));
+      c.faces = [...faces.values()].sort(byFace);
     }
     return { environment, stories, components };
   } finally { await browser.close(); stop(); }
