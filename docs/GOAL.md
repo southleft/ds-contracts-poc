@@ -239,3 +239,15 @@ tagged on 2026-12-11, and B is drawn on 2026-12-14. No decision model is added
 before 2026-12-23.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-10-31.
+
+### 2026-11-01: Variants shown as separate stories count
+
+The owner, in chat: when a library shows a component's variants as separate
+stories, each story is one variant. The set's variant properties are the arguments
+whose values differ across that component's stories, and the expected Figma set is
+exactly those stories, with no combinations added, capped at 64 variants per set.
+Option lists in a story's controls still form axes as before. This widens the React
+to Figma counting rule ("the cartesian product of enumerated arguments") and freezes
+with the variant matrix rule on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-01.

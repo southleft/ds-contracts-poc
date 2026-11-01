@@ -5,9 +5,9 @@
  * library's own render. This part reads every story's arguments in pinned
  * Chromium through Storybook's own preview API, groups stories by component
  * title, and holds each component's first story (index order) against the
- * grammar classifier and the variant matrix rule. It also lists the arguments
- * whose values differ across a component's stories, because some libraries
- * express variants as stories rather than as enumerated options.
+ * grammar classifier, and holds all of its stories against the variant matrix
+ * rule, where each story is one variant (owner, 2026-11-01) and a story with
+ * its own render is named, not counted.
  * Deterministic for one Storybook build; no model call.
  *
  * Run: npx tsx scripts/storybook-reader.ts --storybook <https://…/storybook/> --out <dir>
@@ -15,14 +15,17 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
-import { variantMatrix } from '../extract/figma/variant-matrix.js';
+import { storyVariantMatrix } from '../extract/figma/variant-matrix.js';
 
-export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown> }
+export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
+  /** The story, or its file's meta, supplies its own render (a grid, a composed example). */
+  ownRender: boolean }
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
+  /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
   matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
-  /** Arguments that take more than one plain value across this component's stories. */
-  variesAcrossStories: string[];
+  /** Stories with their own render: named, never counted as variants. */
+  ownRender: string[];
 }
 
 export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
@@ -31,13 +34,10 @@ export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
   return [...byTitle].map(([title, list]) => {
     const first = list[0]!;
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
-    const m = variantMatrix(argTypes);
-    const values = new Map<string, Set<string>>();
-    for (const s of list) for (const [k, v] of Object.entries(s.args ?? {}))
-      if (['string', 'boolean', 'number'].includes(typeof v)) (values.get(k) ?? values.set(k, new Set()).get(k)!).add(String(v));
+    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender })));
     return { title, stories: list.length, storyId: first.id, grammar: classifyStoryArgs(argTypes),
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      variesAcrossStories: [...values].filter(([, v]) => v.size > 1).map(([k]) => k).sort() };
+      ownRender: m.ownRender };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
 
@@ -56,11 +56,13 @@ async function loadStorybook(storybook: string): Promise<LoadedStory[]> {
     // A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
     return await page.evaluate(`(async (storyIds) => {
       const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
-      const plain = (v) => { try { return JSON.parse(JSON.stringify(v ?? null)); } catch { return null; } };
+      // Functions (actions, component types inside elements) keep a named marker, so two stories differ when they do.
+      const plain = (v) => { try { return JSON.parse(JSON.stringify(v ?? null, (k, x) => typeof x === 'function' ? '[function ' + (x.displayName || x.name || '') + ']' : x)); } catch { return null; } };
       const out = [];
       for (const id of storyIds) {
-        const s = await store.loadStory({ storyId: id });
-        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {},
+        const s = await store.loadStory({ storyId: id }), csf = await store.loadCSFFileByStoryId(id);
+        const own = typeof s.moduleExport === 'function' || typeof s.moduleExport?.render === 'function' || typeof csf.meta?.render === 'function';
+        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: own,
           argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined }])) });
       }
       return out;
@@ -78,7 +80,8 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
     writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, stories: stories.length, components }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length;
     console.log(`${components.length} component(s), ${stories.length} stories: ${inGrammar} in grammar; ` +
-      `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with an enumerated variant axis; ` +
-      `${components.filter((c) => c.variesAcrossStories.length).length} vary arguments across stories → ${path.join(out, 'stories.json')}`);
+      `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with more than one variant, ` +
+      `${components.reduce((n, c) => n + (c.matrix.status === 'ok' ? c.matrix.variants : 0), 0)} variants, ` +
+      `${components.filter((c) => c.matrix.status === 'refused').length} refused → ${path.join(out, 'stories.json')}`);
   }).catch((e) => { console.error('✖ ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });
 }

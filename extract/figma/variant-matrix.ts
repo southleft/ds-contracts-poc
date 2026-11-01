@@ -42,6 +42,50 @@ export function variantMatrix(argTypes: Record<string, StoryArgType>): MatrixRes
   return { status: 'ok', matrix: { axes, variants } };
 }
 
+/** One story of a component, as the Storybook reader loads it. `ownRender`: the
+ *  story (or its file) supplies its own render, such as a grid of every value. */
+export interface StoryInput { id: string; args: Record<string, unknown>; argTypes: Record<string, StoryArgType>; ownRender: boolean }
+export type StoryMatrixResult = MatrixResult & { ownRender: string[] };
+
+const stable = (v: unknown): string =>
+  Array.isArray(v) ? `[${v.map(stable).join(',')}]`
+    : v && typeof v === 'object' ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stable((v as Record<string, unknown>)[k])}`).join(',')}}`
+    : JSON.stringify(v) ?? 'undefined';
+const isPlain = (v: unknown) => v === undefined || ['string', 'number', 'boolean'].includes(typeof v);
+const shown = (v: unknown) => (v === undefined ? '(default)' : String(v));
+
+/** Variants shown as separate stories (owner, 2026-11-01, signed entry in GOAL.md):
+ *  each story is one variant. Arguments whose plain values differ across the
+ *  stories become axes with the values the stories use; option-list arguments
+ *  still span their whole list inside each story, and nothing else is combined.
+ *  A story with its own render is not a variant and is named; two stories with
+ *  identical arguments are a repeat and refuse the set; the cap stays 64. */
+export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixResult {
+  const ownRender = stories.filter((s) => s.ownRender).map((s) => s.id).sort();
+  const drawn = stories.filter((s) => !s.ownRender);
+  if (!drawn.length) return { status: 'refused', reason: 'variant-matrix-no-story-variants', count: 0, ownRender };
+  const seen = new Map<string, string>();
+  for (const s of drawn) {
+    const key = stable(s.args);
+    if (seen.has(key)) return { status: 'refused', reason: `variant-matrix-repeated-story:${seen.get(key)}=${s.id}`, count: 0, ownRender };
+    seen.set(key, s.id);
+  }
+  const listed = variantMatrix(drawn[0]!.argTypes);
+  if (listed.status === 'refused') return { ...listed, ownRender };
+  const listedNames = new Set(listed.matrix.axes.map((a) => a.name));
+  const names = [...new Set(drawn.flatMap((s) => Object.keys(s.args)))].filter((n) => !listedNames.has(n)
+    && drawn.every((s) => isPlain(s.args[n])) && new Set(drawn.map((s) => shown(s.args[n]))).size > 1).sort();
+  const fixed = [...new Map(drawn.map((s) => {
+    const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])]));
+    return [stable(t), t] as const;
+  })).values()];
+  const count = fixed.length * listed.matrix.variants.length;
+  if (count > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${count}>${VARIANT_CAP}`, count, ownRender };
+  const axes = [...listed.matrix.axes, ...names.map((name) => ({ name, options: [...new Set(drawn.map((s) => shown(s.args[name])))] }))]
+    .sort((a, b) => a.name.localeCompare(b.name));
+  return { status: 'ok', matrix: { axes, variants: fixed.flatMap((f) => listed.matrix.variants.map((v) => ({ ...f, ...v }))) }, ownRender };
+}
+
 const tuple = (v: Record<string, string>, names: string[]) => names.map((n) => `${n}=${v[n] ?? ''}`).join(', ');
 
 /** Problems, sorted; none means the set is the matrix exactly. */

@@ -22,8 +22,11 @@ then this page, then choose work. It is written for any agent or provider.
    - React to Figma, Agriculture Design System (648 stories, 127 components):
      0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
      coverage 85 of 127 components (66.9%); out for object (33, often
-     `children`), color (8) and number (6) arguments. Only 4 enumerate a
-     variant axis; 41 show variants as separate stories instead.
+     `children`), color (8) and number (6) arguments. Expected variants under
+     the stories-as-variants rule (a denominator change, not progress): 195 in
+     50 components, against 140 in 126 before. 73 components are refused for
+     now because every story defines its own render; part 2 decides that from
+     the rendered page instead.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -102,8 +105,10 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [ ] Storybook reader, part 2: render each variant with the package's own fonts in
       pinned Chromium (the reference image, never through the engine), write the
       cases with no hand-written declaration, and widen the React pin to a tested
-      18.3 and 19.x range. Owner call first: do variants shown as separate stories
-      count toward the matrix?
+      18.3 and 19.x range. Decide "own render" from the rendered page (more than one
+      instance, or other content), not from a story defining a render function.
+- [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
+      GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier and the variant matrix rule.
 
