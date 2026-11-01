@@ -41,7 +41,7 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
   renderFailed: boolean }
 /** One expected variant's reference: the story and arguments it renders from, then its PNG and box, or why it has none. */
 export interface VariantReference extends VariantRender { png?: string; sha256?: string; box?: Box; faces?: FontFace[];
-  problem?: 'reference-render-failed' | 'reference-not-one-instance' }
+  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty' }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
@@ -129,7 +129,13 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
  *  checkout's playwright-core, by digest, on CI's architecture. A library that ships no fonts leaves the
  *  face to the platform, so the platform is pinned; the face it picks is the font input the preflight holds. */
 export const PINNED = { image: 'mcr.microsoft.com/playwright:v1.61.1-noble@sha256:cf0daee9b994042e011bc29f20cdff1a9f682a039b43fcd738f7d8a9d3bcd9d6', platform: 'linux/amd64' };
-export interface RenderEnvironment { image: string; platform: string; os: string; chromium: string; fonts: string[] }
+export interface RenderEnvironment { image: string; platform: string; os: string; chromium: string; fonts: string[];
+  /** The React renderer the Storybook loaded, e.g. "react-dom 18.3.1". */
+  react?: string }
+/** React versions the reader has been run on (React's tree is read through internals that differ by version):
+ *  18.3 on the Agriculture Design System, whose Storybook ships a canary build "18.3.0-canary-…", and 19.2 on
+ *  this repository's own Storybook. A prerelease of a tested line counts as that line. */
+export const REACT_TESTED = /^(18\.3|19\.\d+)\.\d+(-[0-9A-Za-z.-]+)?$/;
 
 /** Start the pinned image with a browser server from this checkout's own playwright-core, mounted read-only. */
 async function pinnedBrowser() {
@@ -137,7 +143,7 @@ async function pinnedBrowser() {
   const version = (JSON.parse(readFileSync(path.join(core, 'package.json'), 'utf8')) as { version: string }).version;
   if (!PINNED.image.includes(`:v${version}-`)) throw Error(`storybook-reader: playwright-core ${version} is not the pinned image's; re-pin both together`);
   const docker = (...args: string[]) => execFileSync('docker', args, { encoding: 'utf8' }).trim();
-  const id = docker('run', '-d', '--rm', '--init', '--ipc=host', '--platform', PINNED.platform, '-p', '127.0.0.1::3000', '-v', `${core}:/playwright-core:ro`,
+  const id = docker('run', '-d', '--rm', '--init', '--ipc=host', '--platform', PINNED.platform, '-p', '127.0.0.1::3000', '--add-host=host.docker.internal:host-gateway', '-v', `${core}:/playwright-core:ro`,
     PINNED.image, 'node', '/playwright-core/cli.js', 'run-server', '--port', '3000', '--host', '0.0.0.0');
   const stop = () => { docker('stop', id); };
   try {
@@ -157,13 +163,19 @@ async function pinnedBrowser() {
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
 async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
+  // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
+  const shown = new URL(base);
+  if (['localhost', '127.0.0.1', '[::1]'].includes(shown.hostname)) shown.hostname = 'host.docker.internal';
   const index = await (await fetch(new URL('index.json', base))).json() as { entries: Record<string, { type: string; id: string }> };
   const ids = Object.values(index.entries).filter((e) => e.type === 'story').map((e) => e.id);
   if (!ids.length) throw Error('storybook-reader: index.json lists no stories');
   const { browser, environment, stop } = await pinnedBrowser();
   try {
     const page = await browser.newPage();
-    await page.goto(new URL(`iframe.html?id=${encodeURIComponent(ids[0]!)}&viewMode=story`, base).href, { waitUntil: 'load', timeout: 60_000 });
+    // A do-nothing DevTools hook, so React names its renderer version when it loads; it changes no rendering.
+    await page.addInitScript(`window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { renderers: new Map(), supportsFiber: true, checkDCE() {},
+      inject(r) { this.renderers.set(this.renderers.size + 1, r); return this.renderers.size; }, onScheduleFiberRoot() {}, onCommitFiberRoot() {}, onCommitFiberUnmount() {}, onPostCommitFiberRoot() {} };`);
+    await page.goto(new URL(`iframe.html?id=${encodeURIComponent(ids[0]!)}&viewMode=story`, shown).href, { waitUntil: 'load', timeout: 60_000 });
     await page.waitForFunction(() => (window as any).__STORYBOOK_PREVIEW__?.storyStoreValue, null, { timeout: 60_000 });
     const stories = await page.evaluate(`(async (storyIds) => {
       const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
@@ -181,6 +193,10 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
     const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
     for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree; s.ownRender = !!tree && !rendersOneInstance(tree); }
+    const renderers = await page.evaluate(`[...new Set([...window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.values()].map((r) => r.rendererPackageName + ' ' + r.version))]`) as string[];
+    if (renderers.length !== 1 || !REACT_TESTED.test(renderers[0]!.split(' ')[1] ?? ''))
+      throw Error(`storybook-reader: React renderer ${renderers.join(', ') || 'not found'} is outside the tested 18.3 and 19.x range`);
+    environment.react = renderers[0];
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     const components = readStories(stories), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
@@ -188,7 +204,9 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
       const faces = new Map<string, FontFace>();
       for (const [i, ref] of c.references.entries()) {
         const { tree, box } = await show(ref.storyId, ref.args);
-        if (!tree || !box || !rendersOneInstance(tree)) { ref.problem = tree ? 'reference-not-one-instance' : 'reference-render-failed'; continue; }
+        // An instance that draws nothing (an empty layout, zero size) has no image to compare; it is named apart.
+        const problem = !tree ? 'reference-render-failed' : !rendersOneInstance(tree) ? 'reference-not-one-instance' : !box ? 'reference-empty' : undefined;
+        if (problem) { ref.problem = problem; continue; }
         const png = await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
         ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(png).digest('hex');
         if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), png);
