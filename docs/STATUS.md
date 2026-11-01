@@ -23,10 +23,11 @@ then this page, then choose work. It is written for any agent or provider.
      0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
      coverage 85 of 127 components (66.9%); out for object (33, often
      `children`), color (8) and number (6) arguments. Counted under the
-     stories-as-variants rule, own render decided from the rendered page: 85 of
-     127 components, 340 expected variants (a denominator change, not progress;
+     stories-as-variants rule, own render decided from the rendered page: 101 of
+     127 components, 400 expected variants (a denominator change, not progress;
      140 in 126 under the first rule). Refused: 25 whose every story draws its
-     own render, 16 with two stories of identical arguments, 1 over 64.
+     own render, 1 over 64. Named, not counted: 159 own-render stories, 35
+     repeats of an earlier story's arguments, 1 story the reader could not render.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -105,7 +106,8 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [x] Storybook reader, part 2a: own render decided from the rendered page
       (`rendersOneInstance`): a story is one variant when its root renders exactly one
       instance of the component, found by its React component type, and nothing
-      beside it. On A0, 160 of 648 stories draw their own render.
+      beside it. Stories with identical arguments count once (the first in index
+      order); a story the reader cannot render is named apart, never counted.
 - [ ] Storybook reader, part 2b: render each variant with the package's own fonts in
       pinned Chromium (the reference image, never through the engine), record the
       faces it renders with, and widen the React pin to a tested 18.3 and 19.x range.

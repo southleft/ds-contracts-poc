@@ -9,7 +9,7 @@
  * rule, where each story is one variant (owner, 2026-11-01). Own render is
  * decided from the rendered page: each story is rendered through Storybook's
  * own channel and React's tree is held against rendersOneInstance; a story that
- * fails to render is named as its own render, never counted.
+ * fails to render is named apart (an instrument fault) and never counted.
  * Deterministic for one Storybook build; no model call.
  *
  * Run: npx tsx scripts/storybook-reader.ts --storybook <https://…/storybook/> --out <dir>
@@ -20,14 +20,16 @@ import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../ex
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode } from '../extract/figma/variant-matrix.js';
 
 export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
-  /** The story, or its file's meta, supplies its own render (a grid, a composed example). */
-  ownRender: boolean }
+  /** The rendered story shows more than one instance of its component, or content beside it. */
+  ownRender: boolean;
+  /** The reader could not render the story (an instrument fault, named apart). */
+  renderFailed: boolean }
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
   /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
   matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
-  /** Stories with their own render: named, never counted as variants. */
-  ownRender: string[];
+  /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render. */
+  ownRender: string[]; repeats: string[]; renderFailed: string[];
 }
 
 export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
@@ -36,10 +38,10 @@ export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
   return [...byTitle].map(([title, list]) => {
     const first = list[0]!;
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
-    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender })));
+    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })));
     return { title, stories: list.length, storyId: first.id, grammar: classifyStoryArgs(argTypes),
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender };
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
 
@@ -63,7 +65,7 @@ async function loadStorybook(storybook: string): Promise<LoadedStory[]> {
       const out = [];
       for (const id of storyIds) {
         const s = await store.loadStory({ storyId: id });
-        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: true,
+        out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: true, renderFailed: false,
           argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined }])) });
       }
       return out;
@@ -94,7 +96,7 @@ async function loadStorybook(storybook: string): Promise<LoadedStory[]> {
       }
       return out;
     })(${JSON.stringify(ids)})`) as Record<string, RenderedNode | null>;
-    for (const s of stories) s.ownRender = !trees[s.id] || !rendersOneInstance(trees[s.id]!);
+    for (const s of stories) { s.renderFailed = !trees[s.id]; s.ownRender = !s.renderFailed && !rendersOneInstance(trees[s.id]!); }
     return stories;
   } finally { await browser.close(); }
 }
