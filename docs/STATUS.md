@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b and the pinned reference environment in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1, 2a and 2b, the pinned reference environment and both font preflights in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -30,7 +30,9 @@ then this page, then choose work. It is written for any agent or provider.
      64. Named, not counted: 159 own-render stories, 35 repeats of an earlier
      story's arguments, 0 the reader could not render. Each of the 431 variants
      has a reference image, drawn in the pinned environment and byte-identical over
-     two runs; its text is drawn in Liberation Sans, Serif and Mono.
+     two runs; its text is drawn in Liberation Sans, Serif and Mono. Font-blocked:
+     405 of 431, because this machine's Figma lists none of those faces (9,618 faces;
+     it has the metric twins Arimo, Tinos and Cousine, which are not the same face).
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -63,6 +65,9 @@ Owner:
       render, with no hand-written witnesses (owner, 2026-10-31). The witnessed
       source-reference intake is regression only.
 - [ ] Duplicate each drawn Figma kit into drafts, for plugin captures.
+- [ ] Install Liberation Sans, Serif and Mono (free) where Figma runs, or say to
+      pin a different font set, before React to Figma can measure A0 (fonts are
+      inputs; the agent adds no font aliases).
 - [ ] Draw A1 after the 2026-11-20 freeze (a sealing agent can do it at the owner's
       request), and A2 on 2026-12-04.
 - [ ] Run `npm publish` for the CLI under `next` when the agent says it is ready. No
@@ -82,11 +87,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       the design's text draws and refuses, by name and before anything is packaged,
       each one `--fonts` does not supply (exit 3, `<out>/font-preflight.json` with the
       variants for the font-blocked column).
-- [ ] Font preflight, React to Figma: hold the faces each variant is drawn with
-      (`faces` in the reader's `stories.json`) against Figma's font list (the plugin
-      capture's) with the same comparison. On A0 that is Liberation Sans, Serif and
-      Mono: free faces Figma loads only when installed where it runs, so they are a
-      font input to refuse by name, never a conversion failure.
+- [x] Font preflight, React to Figma: `npx tsx scripts/font-preflight.ts --stories
+      <stories.json> --capture <any set>.capture.json --out <dir>` holds the faces the
+      reader saw each variant drawn with against Figma's font list, which the plugin
+      capture now records whole (`figmaFonts`; it belongs to the machine, not the
+      draft), and refuses each missing face by name with its variants (exit 3,
+      `font-preflight.json`). On A0: 6 faces, all missing, 405 of 431 variants
+      blocked, nothing written to Figma.
 - [x] Variant matrix rule: the cartesian product of enumerated story arguments,
       capped at 64 per set. `extract/figma/variant-matrix.ts`: option-list arguments
       are the axes (true/false and text arguments are properties, not axes); a product

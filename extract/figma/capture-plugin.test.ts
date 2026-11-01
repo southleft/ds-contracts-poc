@@ -23,7 +23,7 @@ function fakeFigma() {
   const nested = {...(set.children[0] as object), name: 'Badge', parent: set};
   return {
     fileKey: 'draft', loadAllPagesAsync: async () => {}, base64Encode: (b: Uint8Array) => Buffer.from(b).toString('base64'),
-    listAvailableFontsAsync: async () => [{fontName: {family: 'Inter', style: 'Medium'}}],
+    listAvailableFontsAsync: async () => [{fontName: {family: 'Inter', style: 'Medium'}}, {fontName: {family: 'Arimo', style: 'Bold'}}, {fontName: {family: 'Inter', style: 'Medium'}}],
     root: {findAllWithCriteria: () => [set, nested]},
   };
 }
@@ -44,6 +44,8 @@ test('each variant gets its layout-box PNG, a painted-extent PNG only when paint
     {family: 'Circular20', style: 'Book', weight: 450, available: false},
     {family: 'Inter', style: 'Medium', weight: 500, available: true},
   ]);
+  // Every face this Figma can load, once each and sorted, for the React to Figma font preflight.
+  assert.deepEqual(cap.figmaFonts, [{family: 'Arimo', style: 'Bold'}, {family: 'Inter', style: 'Medium'}]);
 });
 
 test('a missing, unknown or ambiguous set name is refused by name', async () => {

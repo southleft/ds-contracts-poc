@@ -23,3 +23,17 @@ test('stories group by title; the first story is classified; every story is held
   assert.deepEqual(box!.grammar, {grammar: 'out', reasons: ['arg-color', 'arg-object']});
   assert.deepEqual(box!.ownRender, ['box--grid']);
 });
+
+import {storyFontPreflight} from './font-preflight.js';
+test('React to Figma font preflight: each face a variant is drawn with is held against Figma\'s font list, by name', () => {
+  const sans = (weight: number, style: 'normal' | 'italic' = 'normal') => ({family: 'Liberation Sans', weight, style});
+  const components = [
+    {title: 'Content/Badge', references: [{faces: [sans(400)]}, {faces: [sans(400), sans(700)]}]},
+    {title: 'Content/Prose', references: [{faces: [sans(400, 'italic')]}, {}]},
+  ];
+  const {required, missing} = storyFontPreflight(components, [{family: 'Liberation Sans', style: 'Regular'}, {family: 'Liberation Sans', style: 'Italic'}]);
+  assert.deepEqual(required.map(f => [f.weight, f.style, f.variants]), [[400, 'italic', ['Content/Prose / 0']], [400, 'normal', ['Content/Badge / 0', 'Content/Badge / 1']], [700, 'normal', ['Content/Badge / 1']]]);
+  assert.deepEqual(missing.map(f => `${f.family} ${f.weight} ${f.style}: ${f.variants.join(', ')}`), ['Liberation Sans 700 normal: Content/Badge / 1']);
+  assert.equal(storyFontPreflight(components, [{family: 'Liberation Sans', style: 'Bold'}, {family: 'liberation sans', style: 'Regular'}, {family: 'Liberation Sans', style: 'Italic'}]).missing.length, 0);
+});
+
