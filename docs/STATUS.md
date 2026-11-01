@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-31 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule and plugin capture part 1 in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader part 1 in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -20,8 +20,10 @@ then this page, then choose work. It is written for any agent or provider.
      (KBD, Radio, Autocomplete), a layout table over its size limit (TextInput)
      and generated TypeScript that does not compile (Chip).
    - React to Figma, Agriculture Design System (648 stories, 127 components):
-     0 of 127. The engine has no reader for a library's stories; every case
-     needs a hand-written declaration, which first pass does not allow.
+     0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
+     coverage 85 of 127 components (66.9%); out for object (33, often
+     `children`), color (8) and number (6) arguments. Only 4 enumerate a
+     variant axis; 41 show variants as separate stories instead.
    - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
      headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
      57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
@@ -94,9 +96,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       SVG export of a session took 61 s and a whole-variant export did not return;
       exporting each icon's main component once (Button: 300 slots, 1 icon, 37 ms)
       is the next try.
-- [ ] Storybook reader: read story arguments, render with the package's own fonts in
-      pinned Chromium, and write `ds-contracts.react.json` with no hand-written
-      declaration. Widen the React pin to a tested 18.3 and 19.x range.
+- [x] Storybook reader, part 1: `scripts/storybook-reader.ts` reads every story's
+      arguments through Storybook's own preview API in pinned Chromium and holds
+      each component against the grammar and the variant matrix rule.
+- [ ] Storybook reader, part 2: render each variant with the package's own fonts in
+      pinned Chromium (the reference image, never through the engine), write the
+      cases with no hand-written declaration, and widen the React pin to a tested
+      18.3 and 19.x range. Owner call first: do variants shown as separate stories
+      count toward the matrix?
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier and the variant matrix rule.
 
