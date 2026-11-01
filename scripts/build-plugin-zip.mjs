@@ -5,10 +5,10 @@
  * and stands alone as `node scripts/build-plugin-zip.mjs`.
  *
  * Three jobs:
- *   1. DRIFT GUARD (dump) — ui.html embeds extract/figma/dump.plugin.js
- *      verbatim (the Send tab runs it through the same
- *      runScript path as the paste box). This build REFUSES to package when
- *      the embedded copy differs from the repo file.
+ *   1. DRIFT GUARD (dump, capture) — ui.html embeds extract/figma/dump.plugin.js
+ *      and extract/figma/capture.plugin.js verbatim (the Send tab runs them
+ *      through the same runScript path as the paste box). This build REFUSES
+ *      to package when either embedded copy differs from its repo file.
  *   2. ENGINE BUNDLE + DRIFT GUARD (engine) — esbuild bundles the plugin
  *      engine entry (figma-sync/plugin/engine/entry.ts → the core barrel)
  *      with the repo's tokens, contracts and icons baked in, and injects it
@@ -30,6 +30,7 @@ import { fileURLToPath } from 'node:url';
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PLUGIN_DIR = join(repoRoot, 'figma-sync', 'plugin');
 const DUMP_SOURCE = join(repoRoot, 'extract', 'figma', 'dump.plugin.js');
+const CAPTURE_SOURCE = join(repoRoot, 'extract', 'figma', 'capture.plugin.js');
 const ENGINE_ENTRY = join(PLUGIN_DIR, 'engine', 'entry.ts');
 const ENGINE_RECEIPT = join(PLUGIN_DIR, 'engine.receipt.json');
 export const ZIP_BASENAME = 'ds-contracts-sync-runner-plugin.zip';
@@ -273,21 +274,21 @@ export function injectEngine(uiHtml, engineCode) {
 // ---------------------------------------------------------------------------
 export async function verifyEmbeddedDumpSource() {
   const ui = await readFile(join(PLUGIN_DIR, 'ui.html'), 'utf8');
-  const openTag = '<script type="text/plain" id="dump-source">';
-  const start = ui.indexOf(openTag);
-  if (start < 0) {
-    throw new Error(
-      'plugin-zip: figma-sync/plugin/ui.html has no #dump-source block — the Send tab has nothing to dump',
-    );
-  }
-  const end = ui.indexOf('</script>', start);
-  const embedded = ui.slice(start + openTag.length, end).trim();
-  const canonical = (await readFile(DUMP_SOURCE, 'utf8')).trim();
-  if (embedded !== canonical) {
-    throw new Error(
-      'plugin-zip: the dump script embedded in figma-sync/plugin/ui.html differs from extract/figma/dump.plugin.js — ' +
-        're-embed the canonical file (the block is verbatim by contract; see the comment above it). Refusing to package a drifted copy.',
-    );
+  // Both read-only scripts are embedded verbatim: the dump and the reference capture.
+  for (const [id, file, role] of [['dump-source', DUMP_SOURCE, 'the Send tab has nothing to dump'],
+    ['capture-source', CAPTURE_SOURCE, 'the capture button has nothing to run']]) {
+    const openTag = `<script type="text/plain" id="${id}">`;
+    const start = ui.indexOf(openTag);
+    if (start < 0) throw new Error(`plugin-zip: figma-sync/plugin/ui.html has no #${id} block — ${role}`);
+    const end = ui.indexOf('</script>', start);
+    const embedded = ui.slice(start + openTag.length, end).trim();
+    const canonical = (await readFile(file, 'utf8')).trim();
+    if (embedded !== canonical) {
+      throw new Error(
+        `plugin-zip: the script embedded as #${id} in figma-sync/plugin/ui.html differs from ${relative(repoRoot, file)} — ` +
+          're-embed the canonical file (the block is verbatim by contract; see the comment above it). Refusing to package a drifted copy.',
+      );
+    }
   }
 }
 
