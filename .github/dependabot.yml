@@ -9,6 +9,12 @@ updates:
       timezone: America/Chicago
     open-pull-requests-limit: 5
     versioning-strategy: increase-if-necessary
+    ignore:
+      # Held until after 2026-12-23: Chromium is part of the Storybook reader's pinned render,
+      # so a bump changes every reference and breaks the 2026-11-20 freeze (AGENTS.md rule 6).
+      # Re-pin only together with scripts/storybook-reader-image/.
+      - dependency-name: playwright-core
+      - dependency-name: playwright
 
   - package-ecosystem: github-actions
     directory: /

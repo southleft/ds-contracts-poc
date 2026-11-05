@@ -133,7 +133,13 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
  *  the face it picks is the font input the preflight holds. The image is tagged by the folder's hash and
  *  never pushed. */
 export const PINNED = { source: new URL('./storybook-reader-image/', import.meta.url), platform: 'linux/amd64' };
+/** Every input a page can read from the machine, pinned (parent session, 2026-11-05): calendars and date
+ *  pickers draw today's month, so the clock is fixed at an instant that reproduces the first pinned
+ *  references; Math.random is seeded, since a story may draw random content. Timers keep running. */
+export const PAGE = { clock: '2026-11-01T12:00:00.000Z', timezoneId: 'UTC', locale: 'en-US', viewport: { width: 1280, height: 720 },
+  deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference', randomSeed: 1 } as const;
 export interface RenderEnvironment { image: string; imageSource: string; imageId: string; platform: string; os: string; chromium: string; fonts: string[];
+  page?: typeof PAGE;
   /** The React renderer the Storybook loaded, e.g. "react-dom 18.3.1". */
   react?: string }
 /** React versions the reader has been run on (React's tree is read through internals that differ by version):
@@ -153,7 +159,7 @@ async function pinnedBrowser() {
   for (const f of files) sum.update(`${f}\0`).update(readFileSync(path.join(source, f))).update('\0');
   const hash = sum.digest('hex'), tag = `ds-contracts-reader:${hash.slice(0, 16)}`;
   let imageId: string;
-  try { imageId = docker('image', 'inspect', '--format', '{{.Id}}', tag); } catch {
+  try { imageId = execFileSync('docker', ['image', 'inspect', '--format', '{{.Id}}', tag], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch {
     execFileSync('docker', ['build', '--platform', PINNED.platform, '-t', tag, source], { stdio: ['ignore', 'ignore', 'inherit'] });
     imageId = docker('image', 'inspect', '--format', '{{.Id}}', tag);
   }
@@ -186,7 +192,12 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
   if (!ids.length) throw Error('storybook-reader: index.json lists no stories');
   const { browser, environment, stop } = await pinnedBrowser();
   try {
-    const page = await browser.newPage();
+    const { clock, randomSeed, ...context } = PAGE;
+    const page = await (await browser.newContext(context)).newPage();
+    await page.clock.setFixedTime(new Date(clock));
+    await page.addInitScript(`{ let s = ${randomSeed} >>> 0; Math.random = () => { s = (s + 0x6d2b79f5) >>> 0; let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }`);
+    environment.page = PAGE;
     // A do-nothing DevTools hook, so React names its renderer version when it loads; it changes no rendering.
     await page.addInitScript(`window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { renderers: new Map(), supportsFiber: true, checkDCE() {},
       inject(r) { this.renderers.set(this.renderers.size + 1, r); return this.renderers.size; }, onScheduleFiberRoot() {}, onCommitFiberRoot() {}, onCommitFiberUnmount() {}, onPostCommitFiberRoot() {} };`);
