@@ -26,9 +26,10 @@
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
 import type { CDPSession } from 'playwright-core';
@@ -126,12 +127,13 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
 }
 
 /** The one environment the reader renders in (owner conditions, 2026-11-01): an image built locally from
- *  storybook-reader.Dockerfile (Playwright's image for this checkout's playwright-core, by digest, with the
- *  Croscore faces Figma lists in place of Liberation), on CI's architecture. A library that ships no fonts
- *  leaves the face to the platform, so the platform is pinned; the face it picks is the font input the
- *  preflight holds. The image is tagged by the Dockerfile's hash and never pushed. */
-export const PINNED = { dockerfile: new URL('./storybook-reader.Dockerfile', import.meta.url), platform: 'linux/amd64' };
-export interface RenderEnvironment { image: string; dockerfile: string; imageId: string; platform: string; os: string; chromium: string; fonts: string[];
+ *  storybook-reader-image/ (Playwright's image for this checkout's playwright-core, by digest, with the
+ *  Croscore faces Figma lists in place of Liberation and the generic families set to them), on CI's
+ *  architecture. A library that ships no fonts leaves the face to the platform, so the platform is pinned;
+ *  the face it picks is the font input the preflight holds. The image is tagged by the folder's hash and
+ *  never pushed. */
+export const PINNED = { source: new URL('./storybook-reader-image/', import.meta.url), platform: 'linux/amd64' };
+export interface RenderEnvironment { image: string; imageSource: string; imageId: string; platform: string; os: string; chromium: string; fonts: string[];
   /** The React renderer the Storybook loaded, e.g. "react-dom 18.3.1". */
   react?: string }
 /** React versions the reader has been run on (React's tree is read through internals that differ by version):
@@ -143,13 +145,16 @@ export const REACT_TESTED = /^(18\.3|19\.\d+)\.\d+(-[0-9A-Za-z.-]+)?$/;
 async function pinnedBrowser() {
   const core = path.dirname(createRequire(import.meta.url).resolve('playwright-core/package.json'));
   const version = (JSON.parse(readFileSync(path.join(core, 'package.json'), 'utf8')) as { version: string }).version;
-  const dockerfile = readFileSync(PINNED.dockerfile, 'utf8'), image = /^FROM (\S+)/m.exec(dockerfile)?.[1] ?? '';
+  const source = fileURLToPath(PINNED.source), files = readdirSync(source).sort();
+  const dockerfile = readFileSync(path.join(source, 'Dockerfile'), 'utf8'), image = /^FROM (\S+)/m.exec(dockerfile)?.[1] ?? '';
   if (!image.includes(`:v${version}-`)) throw Error(`storybook-reader: playwright-core ${version} is not the pinned image's; re-pin both together`);
   const docker = (...args: string[]) => execFileSync('docker', args, { encoding: 'utf8' }).trim();
-  const hash = createHash('sha256').update(dockerfile).digest('hex'), tag = `ds-contracts-reader:${hash.slice(0, 16)}`;
+  const sum = createHash('sha256');
+  for (const f of files) sum.update(`${f}\0`).update(readFileSync(path.join(source, f))).update('\0');
+  const hash = sum.digest('hex'), tag = `ds-contracts-reader:${hash.slice(0, 16)}`;
   let imageId: string;
   try { imageId = docker('image', 'inspect', '--format', '{{.Id}}', tag); } catch {
-    execFileSync('docker', ['build', '--platform', PINNED.platform, '-t', tag, '-'], { input: dockerfile, stdio: ['pipe', 'ignore', 'inherit'] });
+    execFileSync('docker', ['build', '--platform', PINNED.platform, '-t', tag, source], { stdio: ['ignore', 'ignore', 'inherit'] });
     imageId = docker('image', 'inspect', '--format', '{{.Id}}', tag);
   }
   const id = docker('run', '-d', '--rm', '--init', '--ipc=host', '--platform', PINNED.platform, '-p', '127.0.0.1::3000', '--add-host=host.docker.internal:host-gateway', '-v', `${core}:/playwright-core:ro`,
@@ -161,7 +166,7 @@ async function pinnedBrowser() {
     for (let tries = 0; ; tries++) {
       try {
         const browser = await chromium.connect(`ws://127.0.0.1:${port}/`);
-        const environment: RenderEnvironment = { image, dockerfile: hash, imageId, platform: PINNED.platform,
+        const environment: RenderEnvironment = { image, imageSource: hash, imageId, platform: PINNED.platform,
           os: docker('exec', id, 'sh', '-c', '. /etc/os-release && echo "$PRETTY_NAME"'), chromium: browser.version(),
           fonts: [...new Set(docker('exec', id, 'fc-list', '--format', '%{family[0]} | %{style[0]} | %{fontversion}\\n').split('\n'))].sort() };
         return { browser, environment, stop };

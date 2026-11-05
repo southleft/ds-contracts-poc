@@ -146,17 +146,26 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       variants, 193 references, two runs byte-identical; 8 empty layouts named
       `reference-empty`). The witnessed source-reference observer keeps its pin; it is
       regression only.
-- [x] Swap the pinned image's fonts (owner, 2026-11-01): `scripts/storybook-reader.Dockerfile`
+- [x] Swap the pinned image's fonts (owner, 2026-11-01): `scripts/storybook-reader-image/Dockerfile`
       removes Liberation and adds Arimo, Tinos and Cousine from google/fonts at a pinned
       commit, each file checked by SHA-256; the reader builds it locally (tagged by the
       Dockerfile's hash, never pushed) and records the base digest, Dockerfile hash,
       image ID and font list. Fontconfig's own metric aliases pick the faces: on A0,
       `-apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif` resolves at
       Helvetica to Arimo, and Prose's serif and code text to Tinos and Cousine.
-- [ ] Generic families still fall to a CJK face: fontconfig resolves `system-ui`,
-      `sans-serif`, `serif` and `monospace` to WenQuanYi Zen Hei, so this repository's
-      Storybook (`Inter, system-ui, …` with Inter not loaded) draws in it. A0 never
-      reaches a generic. No rule was added; the parent session decides.
+- [x] Generic families (parent session, 2026-11-01): they resolve to the free,
+      metric-compatible equivalents of the macOS and Windows defaults, so `sans-serif`
+      and `system-ui` go to Arimo, `serif` to Tinos and `monospace` to Cousine
+      (`scripts/storybook-reader-image/fonts.conf`, prefer rules only). Before, a stack
+      that reached `system-ui` or `monospace` drew a CJK face. `ui-*`, `-apple-system`
+      and `BlinkMacSystemFont` are unknown to Chromium on Linux and skipped. A0 is
+      unchanged under a fixed page clock (0 of 431).
+- [ ] Pin the reader's clock, timezone and locale (parent session, 2026-11-05): 48 of
+      A0's references are date pickers and calendars that draw today's month, so a run
+      on another day draws different references. Fix the page clock at
+      2026-11-01T12:00:00Z (it reproduces #305's references), UTC and en-US; list every
+      pinned page input in `environment`; prove it with two runs at different
+      wall-clock times. Hold playwright in Dependabot until after 2026-12-23.
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
@@ -174,7 +183,8 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
-      and grouping decide the React to Figma denominator, its pinned image, and the
+      and grouping decide the React to Figma denominator, its pinned image
+      (`scripts/storybook-reader-image/`), clock, timezone and locale, and the
       plugin capture with its SVG builder.
 
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
