@@ -108,10 +108,10 @@ test('without a Chromium the command says NOT CHECKED, exits 0 and never prints 
 });
 
 test('the report: a failing variant is named with its reasons and exits 1; --allow-failures exits 0 but still says FAIL', () => {
-  const variant = (key: string, verdict: 'pass' | 'fail' | 'unverified', reasons: string[] = []) => ({ key, figmaName: `Footer=${key}`, verdict, reasons,
+  const variant = (key: string, verdict: Verdicts['verdict'], reasons: string[] = []) => ({ key, figmaName: `Footer=${key}`, verdict, reasons,
     image: verdict === 'unverified' ? null : { white: 0.6, black: 0.8, withinLimit: true }, content: { texts: 2, textsMissing: reasons.length, textStyleMismatches: 0, parts: 1, partsMissing: 0 } });
   const verdicts = (variants: ReturnType<typeof variant>[], verdict: Verdicts['verdict'], setProblems: string[] = []): CheckOutcome => ({ status: verdict, receipt: 'check/receipt.json',
-    verdicts: { verdict, variants, setProblems, counts: { pass: variants.filter(v => v.verdict === 'pass').length, fail: variants.filter(v => v.verdict === 'fail').length, unverified: variants.filter(v => v.verdict === 'unverified').length } } });
+    verdicts: { verdict, variants, setProblems, counts: { pass: variants.filter(v => v.verdict === 'pass').length, fail: variants.filter(v => v.verdict === 'fail').length, unverified: variants.filter(v => v.verdict === 'unverified').length, 'font-blocked': variants.filter(v => v.verdict === 'font-blocked').length } } });
   const r = { component: 'Dialog', setName: 'Dialog', tarball: 'dialog.tgz', notes: new Array(125).fill('note') };
   const fail = verdicts([variant('No', 'fail', ['content-missing:No:text:"Dialog heading"']), variant('Yes', 'pass')], 'fail');
   const failed = reportCheck(r, 'out', fail);
@@ -131,6 +131,11 @@ test('the report: a failing variant is named with its reasons and exits 1; --all
   assert.equal(unverified.exitCode, 0);
   assert.ok(unverified.lines.some(l => l.startsWith('◌ figma:to-react Dialog: NOT VERIFIED')));
   assert.equal(unverified.lines.some(l => l.startsWith('✔')), false);
+  // Fonts are inputs (rule 9): a face nobody supplied is its own class and exit, never a pass or a FAIL.
+  const blocked = reportCheck(r, 'out', verdicts([variant('No', 'font-blocked', ['font-unavailable-in-consumer:No:Inter']), variant('Yes', 'pass')], 'font-blocked'), true);
+  assert.equal(blocked.exitCode, 3);
+  assert.ok(blocked.lines.some(l => /Footer=No +NO FONT /.test(l)));
+  assert.ok(blocked.lines.some(l => l.startsWith('✖ figma:to-react Dialog: FONT-BLOCKED — 1 of 2 variant(s)')));
   const passed = reportCheck(r, 'out', verdicts([variant('No', 'pass'), variant('Yes', 'pass')], 'pass'));
   assert.equal(passed.exitCode, 0);
   assert.ok(passed.lines.some(l => l.startsWith('✔ figma:to-react Dialog: all 2 variant(s) pass the consumer check')));
