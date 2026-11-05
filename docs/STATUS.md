@@ -213,12 +213,29 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       production). The consumer's commands now run without `NODE_ENV` and name the
       tarball relative to the consumer: two runs give identical lockfiles and builds.
       On the Mac practice baseline no variant changed class or score (944).
+- [x] Figma to React checks paint in the pinned image (parent session, 2026-11-05):
+      `figma:to-react --pinned` starts Chromium with the Storybook reader's own
+      `pinnedBrowser()`, so both directions render in one Chromium with one font set.
+      The page reaches only the consumer server; any other request is refused and
+      named. The receipt records the image (base digest, Dockerfile hash, image ID,
+      OS, Chromium, fonts), Node and npm, the date the consumer's dependencies resolve
+      as of (`npm --before 2026-11-01`), its lockfile's SHA-256 and the SHA-256 of
+      every file the browser loaded. Four A0 sets (41 variants), fetched fresh from
+      Figma: two runs on this Mac (Docker Desktop, amd64 under emulation) and one on
+      GitHub's ubuntu runner gave byte-identical screenshots (41 of 41), served files,
+      lockfiles, packages and verdicts. Only the image ID differs: each machine builds
+      the image itself and the ID covers layer timestamps; the base digest, Dockerfile
+      hash, OS, Chromium and fonts match.
+- [ ] Rerun the practice baseline and A0 in the pinned image, the comparison base for
+      later climb PRs, and report A0 on the Mac against the image by variant (a note,
+      not progress).
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its pinned image
-      (`scripts/storybook-reader-image/`), clock, timezone and locale, and the
-      plugin capture with its SVG builder.
+      (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
+      capture with its SVG builder, and the pinned Figma to React runner
+      (`--pinned`), its `npm --before` date and the image's base digest.
 
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it
