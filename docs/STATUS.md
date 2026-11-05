@@ -160,12 +160,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       that reached `system-ui` or `monospace` drew a CJK face. `ui-*`, `-apple-system`
       and `BlinkMacSystemFont` are unknown to Chromium on Linux and skipped. A0 is
       unchanged under a fixed page clock (0 of 431).
-- [ ] Pin the reader's clock, timezone and locale (parent session, 2026-11-05): 48 of
-      A0's references are date pickers and calendars that draw today's month, so a run
-      on another day draws different references. Fix the page clock at
-      2026-11-01T12:00:00Z (it reproduces #305's references), UTC and en-US; list every
-      pinned page input in `environment`; prove it with two runs at different
-      wall-clock times. Hold playwright in Dependabot until after 2026-12-23.
+- [x] Pin the reader's clock, timezone and locale (parent session, 2026-11-05): 48 of
+      A0's references are date pickers and calendars that draw today's month. `PAGE` in
+      the reader fixes the page clock at 2026-11-01T12:00:00Z (timers keep running),
+      timezone UTC, locale en-US, viewport 1280x720 at scale 1, light color scheme, no
+      reduced motion and a seeded `Math.random`, and `environment.page` records them.
+      A0 on Nov 5 reproduces #305's Nov 1 references byte for byte, as does a run with
+      the container in UTC+14 and German. Dependabot holds playwright until after
+      2026-12-23 (Chromium is part of the pinned render).
 - [x] Variants shown as separate stories count (owner, 2026-11-01, signed entry in
       GOAL.md): `storyVariantMatrix` in `extract/figma/variant-matrix.ts`.
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
