@@ -153,7 +153,13 @@ type Args = { dump: string; contract: string; generated: string; component: stri
   capture?: string;
   /** The just-generated archive. When present, check these bytes without repackaging. */
   package?: { name: string; tarball: string; tarballSha256: string };
-  /** the Chromium to launch; playwright-core's own when absent */ chromiumPath?: string };
+  /** the Chromium to launch; playwright-core's own when absent */ chromiumPath?: string;
+  /** Paint in the Storybook reader's pinned image (its pinnedBrowser), so both directions render in one
+   *  Chromium with one font set (parent session, 2026-11-05). Needs Docker. */ pinned?: boolean };
+
+/** The instant the clean consumer's dependencies resolve as of (npm --before), so one input installs the
+ *  same bytes on any day (parent session, 2026-11-05). Frozen with the checker. */
+export const CONSUMER_RESOLVED_AS_OF = '2026-11-01T00:00:00.000Z';
 
 declare const __DS_CONTRACTS_REACT_RANGE__: string | undefined;
 /** The React range the clean consumer installs: this repository's own React.
@@ -168,7 +174,7 @@ function parseArgs(argv: string[]): Args {
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
     out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), fonts: argv.includes('--fonts') ? required('--fonts') : undefined,
-    capture: argv.includes('--capture') ? required('--capture') : undefined,
+    capture: argv.includes('--capture') ? required('--capture') : undefined, pinned: argv.includes('--pinned'),
     token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
@@ -744,7 +750,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // A delivered archive must supply its own fonts. Standalone generated-dir
     // checks keep their explicit consumer inputs for backwards compatibility.
     const consumer = writeConsumer(work, lib, args.component, cases, consumerReactRange(), args.package ? [] : fonts);
-    run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], consumer);
+    run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error', '--before', CONSUMER_RESOLVED_AS_OF], consumer);
     // The consumer must not resolve anything from this repository.
     const lockfile = readFileSync(path.join(consumer, 'package-lock.json'), 'utf8');
     const installedDir = path.join(consumer, 'node_modules', ...lib.name.split('/'));
@@ -784,19 +790,37 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // ES module scripts are refused over file://; serve the built app on loopback.
     const dist = path.join(consumer, 'dist');
     const types: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
+    // Every file the browser receives, by its SHA-256: the bytes it painted (parent session, 2026-11-05).
+    const served = new Map<string, string>();
     const server = createServer((req, res) => {
       const file = path.join(dist, decodeURIComponent((req.url ?? '/').split('?')[0]).replace(/\/$/, '/index.html'));
       if (!file.startsWith(dist) || !existsSync(file) || statSync(file).isDirectory()) { res.statusCode = 404; res.end(); return; }
-      res.setHeader('content-type', types[path.extname(file)] ?? 'application/octet-stream'); res.end(readFileSync(file));
+      const bytes = readFileSync(file); served.set(path.relative(dist, file), sha256(bytes));
+      res.setHeader('content-type', types[path.extname(file)] ?? 'application/octet-stream'); res.end(bytes);
     });
-    await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
-    const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    // The pinned browser runs in Docker and reaches this server as host.docker.internal: Docker Desktop
+    // forwards that to loopback; on Linux it is the bridge gateway, so the server listens there.
+    const host = args.pinned && process.platform === 'linux'
+      ? execFileSync('docker', ['network', 'inspect', 'bridge', '-f', '{{(index .IPAM.Config 0).Gateway}}'], { encoding: 'utf8' }).trim() : '127.0.0.1';
+    await new Promise<void>(resolve => server.listen(0, host, resolve));
+    const port = (server.address() as AddressInfo).port;
+    const origin = `http://${args.pinned ? 'host.docker.internal' : '127.0.0.1'}:${port}`;
     // Loaded here, not at the top: an installed CLI carries playwright-core as
     // an optional dependency, and a missing one must not break the other verbs.
     const { chromium } = await import('playwright-core');
-    const browser = await chromium.launch(args.chromiumPath ? { executablePath: args.chromiumPath } : undefined);
+    const pinned = args.pinned ? await (await import('./storybook-reader.js')).pinnedBrowser() : null;
+    const browser = pinned?.browser ?? await chromium.launch(args.chromiumPath ? { executablePath: args.chromiumPath } : undefined);
+    receipt.consumer.render = { ...(pinned?.environment ?? { os: `${process.platform} ${process.arch}`, chromium: browser.version() }),
+      node: process.version, npm: run('npm', ['--version'], consumer).trim(), resolvedAsOf: CONSUMER_RESOLVED_AS_OF };
+    const blocked = new Set<string>();
     try {
       const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 1 });
+      // The page reaches only the consumer server: anything else is refused and named in the receipt.
+      await page.route('**/*', route => {
+        const url = new URL(route.request().url());
+        if (url.origin === origin) return route.continue();
+        blocked.add(url.origin + url.pathname); return route.abort('blockedbyclient');
+      });
       // Which supplied file each web font the page loads is, by its bytes (served from dist or a data: URL).
       const cdp = await page.context().newCDPSession(page);
       const webFonts = await watchWebFonts(cdp, src => {
@@ -1033,7 +1057,11 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       }
       }
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
-    } finally { await browser.close(); server.close(); }
+    } finally {
+      await browser.close(); pinned?.stop(); server.close();
+      receipt.consumer.served = Object.fromEntries([...served].sort(([a], [b]) => a.localeCompare(b)));
+      receipt.consumer.blocked = [...blocked].sort();
+    }
     // Compare with Figma's own renders.
     const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
     const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);

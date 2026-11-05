@@ -148,7 +148,7 @@ export interface RenderEnvironment { image: string; imageSource: string; imageId
 export const REACT_TESTED = /^(18\.3|19\.\d+)\.\d+(-[0-9A-Za-z.-]+)?$/;
 
 /** Start the pinned image with a browser server from this checkout's own playwright-core, mounted read-only. */
-async function pinnedBrowser() {
+export async function pinnedBrowser() {
   const core = path.dirname(createRequire(import.meta.url).resolve('playwright-core/package.json'));
   const version = (JSON.parse(readFileSync(path.join(core, 'package.json'), 'utf8')) as { version: string }).version;
   const source = fileURLToPath(PINNED.source), files = readdirSync(source).sort();

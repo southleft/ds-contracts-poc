@@ -143,7 +143,7 @@ async function playwright(): Promise<{ chromium: typeof import('playwright-core'
  *  Chromium; without one it says it did not check. The verdict is written into
  *  <out>/result.json under `check`, the receipt and images into <out>/check. */
 export async function checkGenerated(r: FigmaToReactResult, dumpPath: string,
-  options: { token?: string; chromiumPath?: string; fonts?: string; capture?: string;
+  options: { token?: string; chromiumPath?: string; fonts?: string; capture?: string; pinned?: boolean;
     /** The check itself; injected only by tests. */
     runCheck?: (args: import('./design-consumer-check.js').ConsumerCheckArgs) => Promise<any> } = {}): Promise<CheckOutcome> {
   const fonts = options.fonts ? consumerFontManifest(readConsumerFonts(path.resolve(options.fonts))).fonts.map(({ file: _file, ...face }) => face) : null;
@@ -162,7 +162,7 @@ export async function checkGenerated(r: FigmaToReactResult, dumpPath: string,
       package: { name: r.packageName, tarball: path.join(r.outDir, r.tarball), tarballSha256: r.tarballSha256 },
       ...(options.chromiumPath ? { chromiumPath: options.chromiumPath } : {}),
       ...(options.fonts ? { fonts: path.resolve(options.fonts) } : {}),
-      ...(options.capture ? { capture: path.resolve(options.capture) } : {}) });
+      ...(options.capture ? { capture: path.resolve(options.capture) } : {}), ...(options.pinned ? { pinned: true } : {}) });
     outcome = { status: receipt.verdict.verdict, receipt: path.relative(r.outDir, path.join(out, 'receipt.json')), verdicts: receipt.verdict };
   }
   const resultFile = path.join(r.outDir, 'result.json');
@@ -206,6 +206,8 @@ export interface FigmaToReactRun {
   dump?: string; url?: string; out: string; name?: string; expectRequest?: string; fonts?: string; nativeStrokes?: string; allowFailures?: boolean;
   /** The Sync Runner's <set>.capture.json: reference images for the check instead of Figma's REST exports. */
   capture?: string;
+  /** Paint the check in the Storybook reader's pinned image (design:consumer:check --pinned). */
+  pinned?: boolean;
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -276,7 +278,7 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   if (r.skipped.length) log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
   log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; duration depends on variant count)…`);
   const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined, ...(run.fonts ? { fonts: run.fonts } : {}),
-    ...(run.capture ? { capture: run.capture } : {}) });
+    ...(run.capture ? { capture: run.capture } : {}), ...(run.pinned ? { pinned: true } : {}) });
   const report = reportCheck(r, run.out, outcome, run.allowFailures === true, deps.label);
   for (const line of report.lines) log(line);
   if (report.exitCode === 0) log(`  install: npm install ${path.resolve(run.out, r.tarball)}`);
