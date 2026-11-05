@@ -191,6 +191,19 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       cached per runner image (5 of 24 installs had stalled 8 to 10 minutes on the
       Ubuntu mirror). The same tests vary by about a third between runs (exact-proposal
       560 to 741 s), so a single run can still pass 15.
+- [x] A font counts only as painted (parent session, 2026-11-05): the consumer check
+      called a family available when text set in it measured wider or narrower than a
+      generic family, so a face installed on the machine passed (this Mac has Inter,
+      Public Sans and Atlassian Sans). Each text now counts only when Chromium painted
+      it (`CSS.getPlatformFontsForNode`) with a web font whose bytes are a supplied
+      file, loaded under the text's own family as a supplied face of its style.
+      Anything else is font-blocked, its own class and exit (3): never a pass, never a
+      conversion failure. On the Mac practice baseline (the fixed 40 and A0: 58 cells,
+      944 measured variants) no variant changed class or score: the font preflight
+      already refuses every set that draws Atlassian Sans, and the manifest supplies
+      Inter and Public Sans as web fonts. Checked with no fonts supplied, Base UI's
+      Select trigger gives 5 unverified variants before (installed Inter counted) and
+      5 font-blocked after.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
@@ -210,9 +223,14 @@ and break no known cell. A0 is now practice and regression only.
       `private/leading-trim-20261105` (git-ignored).
 - [ ] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
       variants.
-- [ ] A0's refusals that are plain defects, not grammar: Chip's generated
-      TypeScript does not compile, and TextInput's layout table is over its size
-      limit.
+- [x] A0's refusals that are plain defects, not grammar: Chip's generated
+      TypeScript does not compile (TS2322, an option list forwarded to a part that
+      lacks one of its values), and TextInput's layout table is over its 4,096-tuple
+      limit. Not shipped (rule 8): today's engine packages 169 of the 204 corpus sets
+      and refuses 35 by name, and neither defect appears on another kit. A different
+      compile failure appears once, Atlassian's Shortcut (TS2367: a nested condition
+      that can never hold inside its parent's). Receipts in
+      `private/practice-compile-20261105` (git-ignored).
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 
@@ -224,6 +242,11 @@ and break no known cell. A0 is now practice and regression only.
 - Never-seen results (git-ignored): `private/held-out-intake-*`, classified in
   `private/never-seen-classification-20261031`.
 - Sample React workspaces (git-ignored): `private/workspaces`.
+- Practice fonts (git-ignored): `private/beta-kits/practice-fonts-20261105`, 8 public
+  faces from pinned sources, each with its SHA-256 and license. Rebuilt on 2026-11-05:
+  the September manifest lived in `/tmp` and was lost (rule 12).
+- Practice baseline on this Mac, regression only (git-ignored):
+  `private/beta-kits/baseline-20261105`, and `-b` with the painted-font check.
 - Sealed kit pool, outside the repository: `~/ds-contracts-sealed`. Agents never read
   it; only the owner or a sealing agent reveals a slot at its draw.
 - Archive outside the repository: `~/ds-contracts-archive-2026-10-31` (git bundles,
