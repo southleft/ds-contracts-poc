@@ -8,8 +8,11 @@
  *               in its Figma color and font, and no problem names the variant
  *   fail        at least one problem names the variant (a missing text or
  *               icon, a text in another color or font, an image over the
- *               limit, a zero-size render, an inert or unreachable state, an
- *               unavailable font…)
+ *               limit, a zero-size render, an inert or unreachable state…)
+ *   font-blocked a text was painted with a face nobody supplied
+ *               (font-unavailable-in-consumer). Fonts are inputs (AGENTS.md
+ *               rule 9): never a pass, never a conversion failure, and it
+ *               outranks the variant's other reasons, which it may cause.
  *   unverified  nothing failed, but something could not be measured (no Figma
  *               token, an image Figma did not export, framing refused). Never
  *               shown as a pass.
@@ -33,7 +36,7 @@ export function checkFailureProblem(message: string): string {
     ? 'figma-images-unavailable: ' + message : 'check-failed: ' + message;
 }
 
-export type Verdict = 'pass' | 'fail' | 'unverified';
+export type Verdict = 'pass' | 'fail' | 'unverified' | 'font-blocked';
 export interface VariantVerdict {
   key: string; figmaName: string; verdict: Verdict;
   image: { white: number; black: number; withinLimit: boolean } | null;
@@ -72,7 +75,8 @@ export function variantVerdicts(receipt: any, cases: ReadonlyArray<{ key: string
     const image = row?.layoutAligned?.status === 'measured'
       ? { white: row.layoutAligned.whiteMismatchPercent, black: row.layoutAligned.blackMismatchPercent, withinLimit: row.layoutAligned.withinLimit === true } : null;
     const failing = reasons.filter(r => !UNMEASURED.test(r));
-    const verdict: Verdict = failing.length || (image && !image.withinLimit) ? 'fail'
+    const verdict: Verdict = reasons.some(r => r.startsWith('font-unavailable-in-consumer:')) ? 'font-blocked'
+      : failing.length || (image && !image.withinLimit) ? 'fail'
       : !image || !content || reasons.length ? 'unverified' : 'pass';
     return { key: c.key, figmaName: c.figmaName, verdict, image,
       content: content ? { texts: content.texts.figma, textsMissing: content.texts.missing.length,
@@ -81,16 +85,16 @@ export function variantVerdicts(receipt: any, cases: ReadonlyArray<{ key: string
       reasons };
   });
   const setFailing = setProblems.filter(p => !UNMEASURED.test(p));
-  const counts = { pass: 0, fail: 0, unverified: 0 } as Record<Verdict, number>;
+  const counts = { pass: 0, fail: 0, unverified: 0, 'font-blocked': 0 } as Record<Verdict, number>;
   for (const v of variants) counts[v.verdict]++;
-  const verdict: Verdict = counts.fail || setFailing.length ? 'fail'
+  const verdict: Verdict = counts.fail || setFailing.length ? 'fail' : counts['font-blocked'] ? 'font-blocked'
     : counts.unverified || setProblems.length || variants.length === 0 ? 'unverified' : 'pass';
   return { verdict, variants, setProblems, counts };
 }
 
 /** The per-variant table, one line per variant plus its reasons. */
 export function formatVerdictTable(v: Verdicts): string[] {
-  const label: Record<Verdict, string> = { pass: 'PASS', fail: 'FAIL', unverified: 'UNVERIFIED' };
+  const label: Record<Verdict, string> = { pass: 'PASS', fail: 'FAIL', unverified: 'UNVERIFIED', 'font-blocked': 'NO FONT' };
   const width = Math.min(48, Math.max(8, ...v.variants.map(r => r.figmaName.length)));
   const lines = [`  ${'variant'.padEnd(width)}  result      image white/black   content (missing or wrong / drawn)`];
   for (const r of v.variants) {

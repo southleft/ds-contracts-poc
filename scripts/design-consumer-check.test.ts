@@ -445,8 +445,10 @@ test('qualified alpha-content size defects and unrelated product failures remain
   assert.match(result.problems[0], /^content-size-mismatch:k:71x37 vs 67x32$/);
   assert.equal(sizeVerdict(result.problems, true).verdict, 'fail');
   for (const problem of ['text-missing:k:Label', 'icon-missing:k:brand', 'text-color-mismatch:k:Label',
-    'text-font-mismatch:k:Label', 'font-unavailable-in-consumer:k:Roboto', 'state-unreachable:hover:k'])
+    'text-font-mismatch:k:Label', 'state-unreachable:hover:k'])
     assert.equal(sizeVerdict([], false, 0, 0, [problem]).verdict, 'fail');
+  // A face nobody supplied is font-blocked (rule 9), even beside another failure it may have caused.
+  assert.equal(sizeVerdict([], false, 0, 0, ['font-unavailable-in-consumer:k:Roboto', 'text-font-mismatch:k:Label']).verdict, 'font-blocked');
 });
 
 test('unchanged pixel operators keep either-background paint losses red and a measured control green', () => {

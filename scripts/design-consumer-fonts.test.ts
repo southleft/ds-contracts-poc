@@ -10,7 +10,7 @@ import test from 'node:test';
 import { chromium } from 'playwright-core';
 import { deflateSync } from 'node:zlib';
 import { packageReactLibrary, resolveToolchain } from './package-react-library.js';
-import { consumerFontManifest, fontFamilyNames, loadConsumerFonts, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
+import { MARK_TEXT, consumerFontManifest, fontFamilyNames, loadConsumerFonts, readConsumerFonts, unsuppliedText, watchWebFonts, writeConsumerFonts } from './design-consumer-fonts.js';
 
 const fixtureBytes = readFileSync(new URL('../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -106,6 +106,40 @@ test('browser loads the isolated asset, preserves authored text rendering and re
     assert.ok(painted.fonts.every(f => f.familyName === 'IBM Plex Sans'));
     await page.evaluate(() => { document.fonts.clear(); document.fonts.add(new FontFace('Broken Probe', new Uint8Array([119,79,70,50,0,0,0,0]).buffer, { weight: '400', style: 'normal' })); });
     await assert.rejects(loadConsumerFonts(page, [{ ...fonts[0]!, family: 'Broken Probe' }]), /could not be loaded|Invalid font|NetworkError|SyntaxError/i);
+  } finally {
+    await browser.close();
+    await new Promise<void>(resolve => server.close(() => resolve()));
+  }
+});
+
+test('a text counts as supplied only when a supplied web font of its family and style painted it', async t => {
+  const { file } = fixture(t);
+  const fonts = readConsumerFonts(file);
+  // The same bytes under a second family, the supplied face slanted into italic, and a family nobody
+  // supplied (painted by whatever the machine has): none of them is the supplied face.
+  const html = `<style>@font-face{font-family:"IBM Plex Sans";font-weight:400;src:url(/a.woff2)}@font-face{font-family:"Copied";font-weight:400;src:url(/b.woff2)}</style>
+    <div id=supplied><span style="font-family:'IBM Plex Sans'">AV office 012</span></div>
+    <div id=italic><span style="font-family:'IBM Plex Sans';font-style:italic">AV office 012</span></div>
+    <div id=renamed><span style="font-family:Copied">AV office 012</span></div>
+    <div id=absent><span style="font-family:'No Such Family'">AV office 012</span></div>`;
+  const server = createServer((req, res) => { if (req.url === '/') { res.setHeader('content-type', 'text/html'); res.end(html); } else res.end(fixtureBytes); });
+  await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+  const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(), cdp = await page.context().newCDPSession(page);
+    const loaded = await watchWebFonts(cdp, src => src.startsWith(origin) ? fixtureBytes : null);
+    await page.goto(origin + '/');
+    await page.evaluate(async () => { for (const face of document.fonts) await face.load(); });
+    const check = async (id: string) => {
+      await page.locator('#' + id).evaluate(new Function('el', MARK_TEXT) as (el: Element) => unknown);
+      return unsuppliedText(cdp, fonts, loaded, `#${id} [data-ds-text]`);
+    };
+    assert.deepEqual(await check('supplied'), []);
+    assert.deepEqual(await check('italic'), [{ family: 'IBM Plex Sans', painted: 'IBM Plex Sans', webFont: true }]);
+    assert.deepEqual(await check('renamed'), [{ family: 'Copied', painted: 'IBM Plex Sans', webFont: true }]);
+    const absent = await check('absent');
+    assert.deepEqual(absent.map(a => [a.family, a.webFont]), [['No Such Family', false]]);
   } finally {
     await browser.close();
     await new Promise<void>(resolve => server.close(() => resolve()));

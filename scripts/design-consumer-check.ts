@@ -69,7 +69,7 @@ import {domainTransitionGroups} from './design-consumer-domain.js';
  * consumer; the receipt retains them. It never changes generated component CSS.
  */
 import { packageReactLibrary, PACKAGE_NAME } from './package-react-library.js';
-import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
+import { MARK_TEXT, consumerFontManifest, loadConsumerFonts, readConsumerFonts, unsuppliedText, watchWebFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, recordedLayoutSize, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
@@ -793,6 +793,13 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     const browser = await chromium.launch(args.chromiumPath ? { executablePath: args.chromiumPath } : undefined);
     try {
       const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 1 });
+      // Which supplied file each web font the page loads is, by its bytes (served from dist or a data: URL).
+      const cdp = await page.context().newCDPSession(page);
+      const webFonts = await watchWebFonts(cdp, src => {
+        if (src.startsWith('data:')) return Buffer.from(src.slice(src.indexOf(',') + 1), 'base64');
+        const url = new URL(src), file = path.join(dist, decodeURIComponent(url.pathname));
+        return url.origin === origin && file.startsWith(dist) && existsSync(file) ? readFileSync(file) : null;
+      });
       const errors: string[] = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
       // Diagnostics only: retain the original runtime errors and verdicts.
       // Strip query/hash/userinfo so failure logs cannot expose request secrets.
@@ -860,20 +867,19 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         const root = cell.locator(':scope > *').first();
         const entered = await enterState(page, cell, c.interaction);
         const style = await root.evaluate(el => { const s = getComputedStyle(el); return { backgroundColor: s.backgroundColor, color: s.color, width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height, tag: el.tagName.toLowerCase(), role: el.getAttribute('role') }; });
-        // Fonts: the family the generated CSS asks for on text, and whether the
-        // clean consumer could actually satisfy it. An unavailable family is a
-        // named substrate gap; it never excuses the image score.
+        // Fonts: the family the generated CSS asks for on text, and whether every text was PAINTED with a
+        // supplied face (unsuppliedText). An installed font of the same name no longer counts: an
+        // unavailable face is font-blocked (rule 9), never a pass and never a conversion failure.
         // Serialized as text: tsx would otherwise inject its __name helper into the page.
-        const font = await cell.evaluate(new Function('el', `
-          const texts = [...el.querySelectorAll('*')].filter(n => [...n.childNodes].some(c => c.nodeType === 3 && c.textContent.trim()));
-          if (!texts.length) return null;
-          const s = getComputedStyle(texts[0]);
-          const family = s.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
-          const probe = (stack) => { const span = document.createElement('span'); span.textContent = 'mmmmmmmmmmlli0123456789'; span.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:64px;font-weight:' + s.fontWeight + ';font-family:' + stack; document.body.appendChild(span); const w = span.getBoundingClientRect().width; span.remove(); return w; };
-          const available = ['monospace', 'serif', 'sans-serif'].some(generic => probe('"' + family + '", ' + generic) !== probe(generic));
-          return { family: s.fontFamily, weight: s.fontWeight, size: s.fontSize, available };
-        `) as (el: Element) => unknown) as { family: string; weight: string; size: string; available: boolean } | null;
-        if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
+        const font = await cell.evaluate(new Function('el', MARK_TEXT) as (el: Element) => unknown) as
+          { family: string; weight: string; size: string; available?: boolean; unsupplied?: unknown[] } | null;
+        if (font) {
+          const unsupplied = await unsuppliedText(cdp, fonts, webFonts, `[data-cell="${c.key}"] [data-ds-text]`);
+          await cell.evaluate(new Function('el', "for (const t of el.querySelectorAll('[data-ds-text]')) t.removeAttribute('data-ds-text');") as (el: Element) => unknown);
+          font.available = !unsupplied.length;
+          if (unsupplied.length) font.unsupplied = unsupplied;
+          for (const family of new Set(unsupplied.map(u => u.family))) problems.push(`font-unavailable-in-consumer:${c.key}:${family}`);
+        }
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
         // The instrument page has a transparent substrate. The scorer applies

@@ -192,6 +192,10 @@ export function reportCheck(r: { component: string; setName: string; tarball: st
     lines.push(`◌ ${label} ${name}: NOT VERIFIED — ${counts.pass} of ${total} variant(s) pass, ${counts.unverified} could not be measured${setProblems.length ? `, ${setProblems.length} set problem(s)` : ''}; nothing failed → ${tgz}`);
     return { exitCode: 0, lines: [...lines, `  ${notes}`] };
   }
+  if (outcome.status === 'font-blocked') {
+    lines.push(`✖ ${label} ${name}: FONT-BLOCKED — ${counts['font-blocked']} of ${total} variant(s) drew text in a face that was not supplied; fonts are inputs, so this is neither a pass nor a conversion failure → ${tgz}`);
+    return { exitCode: 3, lines: [...lines, `  ${notes}`] };
+  }
   lines.push(`✖ ${label} ${name}: FAIL — ${counts.fail} of ${total} variant(s) fail${setProblems.length ? `, ${setProblems.length} set problem(s)` : ''}; the package was written but does not match the design → ${tgz}`);
   lines.push(`  ${notes}`);
   if (allowFailures) lines.push('  --allow-failures: exiting 0; the result is still FAIL');

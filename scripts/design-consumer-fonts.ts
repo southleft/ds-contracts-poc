@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { brotliDecompressSync, inflateSync } from 'node:zlib';
-import type { Page } from 'playwright-core';
+import type { CDPSession, Page } from 'playwright-core';
 
 export interface ConsumerFont {
   family: string;
@@ -243,4 +243,54 @@ export async function loadConsumerFonts(page: Page, fonts: readonly ConsumerFont
     await document.fonts.ready;
     return rows;
   }, consumerFontManifest(fonts).fonts);
+}
+
+/** RULE 9 AT PAINT TIME (parent session, 2026-11-05). Every web font the page loads: the family the
+ * platform reads from its bytes, its @font-face family, and the SHA-256 of its bytes (null for a source
+ * outside the consumer; `bytesOf` decides). Start it before the page loads. */
+export type LoadedWebFont = { platform: string; family: string; sha256: string | null };
+export async function watchWebFonts(cdp: CDPSession, bytesOf: (src: string) => Buffer | null): Promise<LoadedWebFont[]> {
+  const loaded: LoadedWebFont[] = [];
+  await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+  cdp.on('CSS.fontsUpdated', ({ font }) => {
+    if (!font) return;
+    const bytes = bytesOf(font.src);
+    loaded.push({ platform: font.platformFontFamily, family: font.fontFamily.replace(/^["']|["']$/g, ''),
+      sha256: bytes && createHash('sha256').update(bytes).digest('hex') });
+  });
+  return loaded;
+}
+
+/** Page-side source (run as `new Function('el', MARK_TEXT)`): marks every element of `el` that holds text
+ * with `data-ds-text="<first requested family>|<normal|italic>"` and returns the first one's computed
+ * font, or null when `el` draws no text. */
+export const MARK_TEXT = `
+  const texts = [...el.querySelectorAll('*')].filter(n => [...n.childNodes].some(c => c.nodeType === 3 && c.textContent.trim()));
+  if (!texts.length) return null;
+  for (const t of texts) { const s = getComputedStyle(t);
+    t.setAttribute('data-ds-text', s.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '') + '|' + (/italic|oblique/.test(s.fontStyle) ? 'italic' : 'normal')); }
+  const s = getComputedStyle(texts[0]);
+  return { family: s.fontFamily, weight: s.fontWeight, size: s.fontSize };`;
+
+/** A text is available only when every face Chromium painted it with (CSS.getPlatformFontsForNode) is a
+ * web font whose bytes are a supplied file, loaded under the text's requested family as a supplied face
+ * of its style. An installed font of the same name, a glyph fallback, a web font from anywhere else, and
+ * a supplied face slanted into italic are not. Returns the failures among the marked elements under
+ * `selector`, each with the face that was painted. */
+export async function unsuppliedText(cdp: CDPSession, fonts: readonly ConsumerFont[], loaded: readonly LoadedWebFont[], selector: string) {
+  const supplied = (sha: string | null, family?: string, style?: string) =>
+    fonts.some(f => f.sha256 === sha && (family === undefined || (f.family === family && f.style === style)));
+  const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
+  const { nodeIds } = await cdp.send('DOM.querySelectorAll', { nodeId: root.nodeId, selector });
+  const out = new Map<string, { family: string; painted: string; webFont: boolean }>();
+  for (const nodeId of nodeIds) {
+    const { attributes } = await cdp.send('DOM.getAttributes', { nodeId });
+    const [family, style] = attributes[attributes.indexOf('data-ds-text') + 1]!.split('|') as [string, string];
+    for (const f of (await cdp.send('CSS.getPlatformFontsForNode', { nodeId })).fonts) {
+      const from = loaded.filter(l => l.platform === f.familyName);
+      if (f.isCustomFont && from.length && from.every(l => supplied(l.sha256)) && from.some(l => l.family === family && supplied(l.sha256, family, style))) continue;
+      out.set(family + '|' + f.familyName, { family, painted: f.familyName, webFont: f.isCustomFont });
+    }
+  }
+  return [...out.values()];
 }
