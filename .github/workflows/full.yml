@@ -743,6 +743,12 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/emitter-web-components run build
+      # Moved from the PR lane on 2026-11-05 to keep a PR's wait at 15 minutes
+      # or less: the witnessed source-reference intake is regression only
+      # (owner, 2026-10-31), so it runs here every night instead.
+      - name: Source reference validity (real browser negative controls)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run source:reference:check
       - name: build library for readiness
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }

@@ -8,10 +8,16 @@ name: benchmark
 # scripts/benchmark-replay.ts and docs/CURRENT.md ("V1 scope and benchmark
 # scoreboard"). Its own workflow so the 40-minute fast job is untouched.
 
+# A PR WAITS 15 MINUTES OR LESS (owner, 2026-11-01): the React → Figma cells
+# replay the witnessed source-reference intake, regression only since
+# 2026-10-31, so a pull request replays only the Figma → React cells; the
+# React → Figma cells replay on every push to main, nightly, and by hand.
 on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "30 7 * * *"
   workflow_dispatch:
 
 permissions:
@@ -42,11 +48,13 @@ jobs:
         run: npm run prep:core
 
       - name: install the vendored React workspaces (React → Figma cells)
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           npm ci --prefix benchmark/react-family --no-audit --no-fund
           npm ci --prefix benchmark/shadcn-cohort --no-audit --no-fund
 
       - name: cache playwright browsers
+        if: ${{ github.event_name != 'pull_request' }}
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
@@ -54,6 +62,7 @@ jobs:
           restore-keys: ${{ runner.os }}-ms-playwright-
 
       - name: install chromium (the React source is observed headlessly)
+        if: ${{ github.event_name != 'pull_request' }}
         run: npx playwright-core install --with-deps chromium
 
       - name: benchmark:test (the gate's own controls)
@@ -68,7 +77,7 @@ jobs:
         run: npm run benchmark:check -- --kind figma-to-react --json benchmark-verdicts-figma-to-react.json
 
       - name: benchmark:check — React → Figma cells (replay the vendored workspaces)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         # A separate process: the React source service and Chromium never share
         # memory with the Figma cells' Vite servers (the combined replay ran a
         # runner low on memory intermittently).

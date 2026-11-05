@@ -606,9 +606,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-projection:check
 
-      - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run exact-proposal:check
       # THE CHANNEL TABLE (docs/30). Every CSS computed property the capture
       # can observe is classified exactly once (spec/channel-table.json); this
       # refuses on an unclassified observed property, a ghost CARRIED anchor,
@@ -869,8 +866,13 @@ jobs:
           path: coverage/cli/coverage-final.json
           if-no-files-found: warn
 
-  source-reference:
-    name: source-reference gates
+  # A PR WAITS 15 MINUTES OR LESS (owner, 2026-11-01; GOAL.md, Budget and
+  # reporting). exact-proposal:check, the longest gate, runs here beside the
+  # core gates instead of after them. The witnessed source-reference intake
+  # (source:reference:check), regression only since 2026-10-31, runs nightly in
+  # full.yml; its core and extract tests moved into exact-proposal:check.
+  proposal:
+    name: exact proposal gates
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -952,13 +954,13 @@ jobs:
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/emitter-web-components run build
 
-      - name: Source reference validity (real browser negative controls)
+      - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run source:reference:check
+        run: npm run exact-proposal:check
 
   fast:
     name: fast gates
-    needs: [gates, source-reference]
+    needs: [gates, proposal]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
