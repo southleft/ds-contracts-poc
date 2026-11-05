@@ -173,8 +173,11 @@ function parseArgs(argv: string[]): Args {
 }
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+// The consumer builds as a plain production `vite build` whoever calls the check: an inherited NODE_ENV
+// (figma:to-react's in-process Vite sets "development") built React's dev JSX, which embeds each run's
+// temp path, and NODE_ENV=production would make npm skip vite, a devDependency.
 const run = (cmd: string, args: string[], cwd: string) => {
-  try { return execFileSync(cmd, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', env: { ...Object.fromEntries(Object.entries(process.env).filter(([k]) => k !== 'FIGMA_TOKEN')), npm_config_update_notifier: 'false' } }); }
+  try { return execFileSync(cmd, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', env: { ...Object.fromEntries(Object.entries(process.env).filter(([k]) => k !== 'FIGMA_TOKEN' && k !== 'NODE_ENV')), npm_config_update_notifier: 'false' } }); }
   catch (error: any) { throw new Error(`${path.basename(cmd)} ${args.slice(0, 2).join(' ')} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`); }
 };
 
@@ -464,7 +467,8 @@ const unmapped = new Set<string>();
 function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string, fonts: readonly ConsumerFont[] = []) {
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
-    dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
+    // Relative, so the lockfile never names this run's temp folder.
+    dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${path.relative(consumer, lib.tarball)}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), CONSUMER_VITE_CONFIG);
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
