@@ -116,6 +116,12 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       Checked, not scored: every path is numerically identical to REST's
       `geometry=paths` for the same nodes, and each SVG drawn in the pinned Chromium
       differs from Figma's PNG of it only in anti-aliased edge pixels.
+- [x] Capture instrument bug (parent session, 2026-11-05): an instance's SVG was built
+      from its main component, so it drew the main's ink, not the instance's (A0's
+      Checkbox check: dark in the SVG, white in Figma). Each drawing is now built from
+      the drawn node and identical SVGs are stored once by their bytes. On A0, visible
+      drawings that differ from Figma's PNG of the same node: 30 before, 0 after; every
+      other captured field byte-identical; two captures byte-identical.
 - [x] Storybook reader, part 1: `scripts/storybook-reader.ts` reads every story's
       arguments through Storybook's own preview API in pinned Chromium and holds
       each component against the grammar and the variant matrix rule.
