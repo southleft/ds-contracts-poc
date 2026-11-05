@@ -204,6 +204,15 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       Inter and Public Sans as web fonts. Checked with no fonts supplied, Base UI's
       Select trigger gives 5 unverified variants before (installed Inter counted) and
       5 font-blocked after.
+- [x] The clean consumer builds the same bytes on every run (instrument bug, found
+      2026-11-05 while proving the pinned browser): `figma:to-react` runs Vite
+      in-process, which sets `NODE_ENV=development`, and the consumer's `vite build`
+      inherited it. React's development JSX then wrote each run's temp folder into the
+      bundle, and the lockfile named the tarball by its temp path, so one input served
+      different JavaScript every run (`design:consumer:check` alone built for
+      production). The consumer's commands now run without `NODE_ENV` and name the
+      tarball relative to the consumer: two runs give identical lockfiles and builds.
+      On the Mac practice baseline no variant changed class or score (944).
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
