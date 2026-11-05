@@ -226,9 +226,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       lockfiles, packages and verdicts. Only the image ID differs: each machine builds
       the image itself and the ID covers layer timestamps; the base digest, Dockerfile
       hash, OS, Chromium and fonts match.
-- [ ] Rerun the practice baseline and A0 in the pinned image, the comparison base for
-      later climb PRs, and report A0 on the Mac against the image by variant (a note,
-      not progress).
+- [x] Rerun the practice baseline and A0 in the pinned image, the comparison base for
+      later climb PRs (`01b5d070`, regression only): 58 cells, 10 font-blocked, 9
+      refused, 944 variants, 628 pass (672 in the Mac's own Chromium). Mac against
+      image, a note: A0 keeps every class (8 of 223 pass both ways; its median image
+      difference rises 1.3 points). 44 variants on five other kits pass on the Mac and
+      fail in the image, all in text-heavy sets (Material 3 20, Base UI 11, Spectrum 5,
+      Ant 5, Obra 3); none moves the other way. Receipts in
+      `private/beta-kits/baseline-20261105-image` (git-ignored).
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
