@@ -195,11 +195,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it
 and break no known cell. A0 is now practice and regression only.
-- [ ] Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`, the CSS
-      `text-box-trim` equivalent): all 183 A0 size misses. Before writing code,
-      check which other practice kits use it. Semi and Orbit use none, so rule 8
-      needs a second kit. If none qualifies, say so and do not ship it as an
-      A0-only fix.
+- [x] Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`, the CSS
+      `text-box-trim` equivalent): all 183 A0 size misses. Not shipped (rule 8): no
+      second practice kit uses it. Figma's REST API, read 2026-11-05, reports it on
+      A0 but on none of the 204 corpus sets (15,650 text layers in all 17 files,
+      the fixed 40-set included); Semi and Orbit use none. It stays a named miss,
+      to revisit if a practice kit or a drawn kit uses it. Receipts in
+      `private/leading-trim-20261105` (git-ignored).
 - [ ] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
       variants.
 - [ ] A0's refusals that are plain defects, not grammar: Chip's generated
