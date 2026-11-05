@@ -56,3 +56,35 @@ test('a missing, unknown or ambiguous set name is refused by name', async () => 
   figma.root.findAllWithCriteria = () => [...twice, {type: 'COMPONENT_SET', id: '9:9', name: 'Badge', children: []}];
   await assert.rejects(run('Badge', figma), /CAPTURE_SET_AMBIGUOUS/);
 });
+
+// A drawing: an icon instance (built once, from its main component), a hidden plain drawing (skipped), and a refusal.
+const at = (x: number, y: number) => [[1, 0, x], [0, 1, y]];
+const solid = (r: number, g: number, b: number, opacity?: number) => ({type: 'SOLID', visible: true, color: {r, g, b}, ...(opacity === undefined ? {} : {opacity})});
+const node = (type: string, id: string, over: object = {}) => ({type, id, name: id, visible: true, opacity: 1, effects: [], blendMode: 'PASS_THROUGH', fills: [], strokes: [],
+  fillGeometry: [], strokeGeometry: [], absoluteTransform: at(0, 0), absoluteBoundingBox: {x: 0, y: 0, width: 20, height: 20}, absoluteRenderBounds: {x: 0, y: 0, width: 20, height: 20}, ...over});
+function drawingFigma() {
+  const icon = node('COMPONENT', '9:1', {name: 'close', width: 20, height: 20, clipsContent: true, absoluteTransform: at(100, 200),
+    children: [node('VECTOR', '9:2', {absoluteTransform: at(102, 203), fills: [solid(1, 0, 0)], fillGeometry: [{data: 'M 0 0 L 4 0 L 4 4 Z', windingRule: 'NONZERO'}],
+      strokes: [solid(0, 0, 1, 0.5)], strokeGeometry: [{data: 'M 0 0 L 1 1', windingRule: 'EVENODD'}]})]});
+  const instance = (id: string) => node('INSTANCE', id, {getMainComponentAsync: async () => icon, children: [node('VECTOR', id + '-v')]});
+  const hidden = node('FRAME', '1:9', {visible: false, children: [node('VECTOR', '1:10', {fills: [solid(0, 0, 0)], fillGeometry: [{data: 'M 0 0', windingRule: 'NONZERO'}]})]});
+  const gradient = node('VECTOR', '1:11', {fills: [{type: 'GRADIENT_LINEAR', visible: true}], fillGeometry: [{data: 'M 0 0', windingRule: 'NONZERO'}]});
+  const figma = fakeFigma();
+  const [set] = figma.root.findAllWithCriteria() as Array<{children: Array<{children: object[]}>}>;
+  set!.children[0]!.children.push(instance('1:5'), hidden);
+  set!.children[1]!.children.push(instance('1:6'), gradient);
+  return figma;
+}
+
+test('a drawing is built as SVG from its geometry, once per main component, in the drawing\'s coordinates; what it cannot express is refused by name', async () => {
+  const cap = await run('Badge', drawingFigma());
+  assert.deepEqual(cap.variants.map((v: {drawings: unknown}) => v.drawings),
+    [[{nodeId: '1:5', svg: 'main:9:1'}], [{nodeId: '1:6', svg: 'main:9:1'}, {nodeId: '1:11', svg: 'node:1:11'}]]);
+  assert.deepEqual(cap.svgs, [
+    {key: 'main:9:1', nodeId: '9:1', name: 'close', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">' +
+      '<g transform="matrix(1 0 0 1 2 3)"><path d="M 0 0 L 4 0 L 4 4 Z" fill="#ff0000" fill-rule="nonzero"/>' +
+      '<path d="M 0 0 L 1 1" fill="#0000ff" fill-opacity="0.5" fill-rule="evenodd"/></g></svg>'},
+    {key: 'node:1:11', nodeId: '1:11', name: '1:11', refused: 'svg-gradient'},
+  ]);
+});
+
