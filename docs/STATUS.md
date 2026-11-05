@@ -106,13 +106,16 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [x] Plugin capture, part 2a: the check reads `<set>.capture.json` (`--capture`)
       instead of Figma's REST images, through the same framing proofs, for both
       directions (`scripts/design-consumer-capture.ts`).
-- [ ] Plugin capture, part 2b: SVG for icons and vectors, built from `fillGeometry`
-      and `strokeGeometry` with no export call (parent session's route, 2026-11-01).
-      Measured on the A0 draft: the same icon's SVG export took 1 ms, then 152 s, and
-      the export blocks the plugin, so no time limit can hold. One SVG per main
-      component (A0: 18 sets, about 6 SVGs). Masks, gradients, image paints, effects,
-      other blend modes and text are refused by name. Before trusting it, compare the
-      built paths with the REST dump's and draw each SVG against the plugin's PNG.
+- [x] Plugin capture, part 2b: SVG for icons and vectors, built from `fillGeometry`
+      and `strokeGeometry` with no export call (parent session's route, 2026-11-01;
+      an export of one icon took 1 ms, then 152 s, and blocks the plugin). One SVG per
+      main component; hidden plain drawings skipped; masks, gradients, image paints,
+      effects, other blend modes, group opacity and clipped overflow refused by name.
+      On the A0 draft: 18 sets, 527 drawing slots, 12 drawings in 0.5 s, 10 built, 2
+      refused (the Popover and Tooltip arrows, `svg-mask`), two runs byte-identical.
+      Checked, not scored: every path is numerically identical to REST's
+      `geometry=paths` for the same nodes, and each SVG drawn in the pinned Chromium
+      differs from Figma's PNG of it only in anti-aliased edge pixels.
 - [x] Storybook reader, part 1: `scripts/storybook-reader.ts` reads every story's
       arguments through Storybook's own preview API in pinned Chromium and holds
       each component against the grammar and the variant matrix rule.
