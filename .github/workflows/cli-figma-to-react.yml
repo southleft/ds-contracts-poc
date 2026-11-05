@@ -48,19 +48,10 @@ jobs:
       - name: build @ds-contracts/schema and @ds-contracts/core (the smoke reads the benchmark helpers)
         run: npm run prep:core
 
-      - name: cache playwright browsers
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: |
-            ~/.cache/ms-playwright
-            ~/Library/Caches/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
-
       # The installed CLI pins the same playwright-core, so this is the browser
       # its check launches; the smoke's own install step then finds it cached.
       - name: install chromium and its system libraries
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       - name: cli:figma-to-react:smoke:check (pack, install with no repository, compare with the pin)
         run: npm run cli:figma-to-react:smoke:check

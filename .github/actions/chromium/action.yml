@@ -1,0 +1,41 @@
+# THE PINNED CHROMIUM, WITHOUT WAITING ON THE UBUNTU MIRROR.
+# `playwright-core install --with-deps chromium` apt-installs the browser's
+# system packages (fonts and X libraries the runner image lacks, about 21 MB)
+# on every run. In November 2026, 5 of 24 PR-lane installs stalled 8 to 10
+# minutes downloading them from the runner's Ubuntu mirror. The packages are
+# now cached per runner image, so apt installs them from disk; the browser is
+# cached per lockfile as before. A cache miss behaves as the plain install did.
+name: chromium
+description: Install the Chromium revision playwright-core pins, with its system packages.
+runs:
+  using: composite
+  steps:
+    - name: cache playwright browsers
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          ~/.cache/ms-playwright
+          ~/Library/Caches/ms-playwright
+        key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+        restore-keys: ${{ runner.os }}-ms-playwright-
+    - name: name the runner image
+      id: image
+      shell: bash
+      run: echo "id=${ImageOS:-unknown}-${ImageVersion:-unknown}" >> "$GITHUB_OUTPUT"
+    - name: cache chromium's system packages
+      if: ${{ runner.os == 'Linux' }}
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.cache/playwright-debs
+        key: ${{ runner.os }}-${{ steps.image.outputs.id }}-playwright-debs-${{ hashFiles('package-lock.json') }}
+    - name: install chromium (playwright-core ships no browser)
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" = Linux ] && compgen -G "$HOME/.cache/playwright-debs/*.deb" > /dev/null; then
+          sudo cp "$HOME"/.cache/playwright-debs/*.deb /var/cache/apt/archives/
+        fi
+        npx playwright-core install --with-deps chromium
+        if [ "$RUNNER_OS" = Linux ]; then
+          mkdir -p "$HOME/.cache/playwright-debs"
+          cp /var/cache/apt/archives/*.deb "$HOME/.cache/playwright-debs/" 2>/dev/null || true
+        fi

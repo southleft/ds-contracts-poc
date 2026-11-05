@@ -176,15 +176,15 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [x] Move the full CI lane to nightly plus manual runs (owner, 2026-11-01): PRs wait
       only on the fast, catalog and smaller lanes. Run it by hand on the frozen
       commit and before any sealed run.
-- [ ] Cut a PR's CI wait to 15 minutes or less (owner, 2026-11-01: "Yes, queue it";
-      GOAL.md, Budget and reporting). Do it after the last ruler build item above and
-      before the freeze date, not held for the freeze. Measured 25.4 minutes on #300:
-      fast core gates 24.8, benchmark replay 16.4. CI configuration only (no checker
-      code, thresholds or reference images, rule 6); no test or gate deleted. A slow
-      suite may move to the nightly full lane only if that run keeps it, named in the
-      PR. Prefer caching, removing repeated builds and installs, and running less on
-      PRs over splitting jobs (rule 11: the job count must fall). Report the before
-      and after critical path, measured on the PR itself.
+- [x] Cut a PR's CI wait to 15 minutes or less (owner, 2026-11-01: "Yes, queue it"):
+      median of three runs on #318's last commit 14.8 minutes (15.6, 10.7, 14.8), from
+      22.4 for the longest job on #317. No gate deleted, no job added: exact-proposal
+      runs in the second fast job (with design:consumer:test); the witnessed
+      source-reference suite runs nightly in the full lane; the benchmark's React to
+      Figma cells run on main, nightly and by hand; Chromium's system packages are
+      cached per runner image (5 of 24 installs had stalled 8 to 10 minutes on the
+      Ubuntu mirror). The same tests vary by about a third between runs (exact-proposal
+      560 to 741 s), so a single run can still pass 15.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization

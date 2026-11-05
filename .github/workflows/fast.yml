@@ -107,17 +107,10 @@ jobs:
       # `restore-keys` can restore a cache that predates a lockfile bump and
       # therefore lacks the pinned revision — the install repairs that instead of
       # the resolver quietly using whatever else the cache happens to hold.
-      - name: cache playwright browsers
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
       - name: install chromium (playwright-core ships no browser)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build
@@ -233,9 +226,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:playground
 
-      - name: Retained runtime identity and React adapter (no native reconstruction)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run runtime:check
 
       # The recipe/IR pivot's Phase 0 surface (docs/32-recipe-ir-pivot.md): the
       # primitive Figma IR, canonical envelope, normalization, and hashing.
@@ -264,6 +254,10 @@ jobs:
       # shrink-only ratchet, every sha256 and the generated REPORT.md. Measured, not
       # graded. Re-recording needs the private operation archive and is a separate
       # local step (npm run react:native:fidelity:record).
+      - name: Retained runtime identity and React adapter (no native reconstruction)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run runtime:check
+
       - name: react:native:fidelity:check (React originals vs native Figma exports - three numbers per variant recomputed from committed bytes; ratchet and tamper tests)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run react:native:fidelity:check
@@ -606,9 +600,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-projection:check
 
-      - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run exact-proposal:check
       # THE CHANNEL TABLE (docs/30). Every CSS computed property the capture
       # can observe is classified exactly once (spec/channel-table.json); this
       # refuses on an unclassified observed property, a ghost CARRIED anchor,
@@ -642,9 +633,6 @@ jobs:
       - name: flowbite-dump-propose:check (maintain — the fixture Flowbite dumps still propose the recorded contracts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run flowbite-dump-propose:check
-      - name: design:consumer:test (maintain — the clean-consumer check mounts each Figma variant with correctly typed props)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run design:consumer:test
       - name: host-placement:check (maintain — a minted host section never collides with a sibling, a designer's hand-moved section survives an amend, and placement is a fixed point across two runs)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run host-placement:check
@@ -869,8 +857,13 @@ jobs:
           path: coverage/cli/coverage-final.json
           if-no-files-found: warn
 
-  source-reference:
-    name: source-reference gates
+  # A PR WAITS 15 MINUTES OR LESS (owner, 2026-11-01; GOAL.md, Budget and
+  # reporting). exact-proposal:check, the longest gate, runs here beside the
+  # core gates instead of after them. The witnessed source-reference intake
+  # (source:reference:check), regression only since 2026-10-31, runs nightly in
+  # full.yml; its core and extract tests moved into exact-proposal:check.
+  proposal:
+    name: exact proposal gates
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -913,17 +906,10 @@ jobs:
       # `restore-keys` can restore a cache that predates a lockfile bump and
       # therefore lacks the pinned revision — the install repairs that instead of
       # the resolver quietly using whatever else the cache happens to hold.
-      - name: cache playwright browsers
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
       - name: install chromium (playwright-core ships no browser)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build
@@ -952,13 +938,19 @@ jobs:
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/emitter-web-components run build
 
-      - name: Source reference validity (real browser negative controls)
+      # All four of the runner's cores: Node's default leaves one idle.
+      - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run source:reference:check
+        env: { TEST_CONCURRENCY: 4 }
+        run: npm run exact-proposal:check
+      # Moved from fast core gates (2026-11-05) to keep both jobs under 15 minutes.
+      - name: design:consumer:test (maintain — the clean-consumer check mounts each Figma variant with correctly typed props)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run design:consumer:test
 
   fast:
     name: fast gates
-    needs: [gates, source-reference]
+    needs: [gates, proposal]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
