@@ -79,18 +79,10 @@ jobs:
       # which shots.ts imports) resolves PLAYWRIGHT_CHROMIUM_PATH, then this
       # cache, then a system Chrome. A cache hit makes the install a no-op; a
       # corrupt cache gets repaired rather than hidden.
-      - name: cache playwright browsers
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
-
       - name: install chromium (playwright-core ships no browser)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       # Inter is the one input this gate needs that is NOT in the repository or the
       # lockfile. Both surfaces request `Inter, system-ui, sans-serif`, and measured,

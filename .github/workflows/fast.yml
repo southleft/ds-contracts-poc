@@ -107,17 +107,10 @@ jobs:
       # `restore-keys` can restore a cache that predates a lockfile bump and
       # therefore lacks the pinned revision — the install repairs that instead of
       # the resolver quietly using whatever else the cache happens to hold.
-      - name: cache playwright browsers
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
       - name: install chromium (playwright-core ships no browser)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build
@@ -915,17 +908,10 @@ jobs:
       # `restore-keys` can restore a cache that predates a lockfile bump and
       # therefore lacks the pinned revision — the install repairs that instead of
       # the resolver quietly using whatever else the cache happens to hold.
-      - name: cache playwright browsers
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
       - name: install chromium (playwright-core ships no browser)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build

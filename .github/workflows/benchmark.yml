@@ -53,17 +53,9 @@ jobs:
           npm ci --prefix benchmark/react-family --no-audit --no-fund
           npm ci --prefix benchmark/shadcn-cohort --no-audit --no-fund
 
-      - name: cache playwright browsers
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
-
       - name: install chromium (the React source is observed headlessly)
         if: ${{ github.event_name != 'pull_request' }}
-        run: npx playwright-core install --with-deps chromium
+        uses: ./.github/actions/chromium
 
       - name: benchmark:test (the gate's own controls)
         run: npm run benchmark:test
