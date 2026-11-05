@@ -57,34 +57,40 @@ test('a missing, unknown or ambiguous set name is refused by name', async () => 
   await assert.rejects(run('Badge', figma), /CAPTURE_SET_AMBIGUOUS/);
 });
 
-// A drawing: an icon instance (built once, from its main component), a hidden plain drawing (skipped), and a refusal.
+// Drawings: icon instances built from the drawn node (its own ink), identical SVGs stored once, a hidden plain drawing skipped, a refusal.
 const at = (x: number, y: number) => [[1, 0, x], [0, 1, y]];
 const solid = (r: number, g: number, b: number, opacity?: number) => ({type: 'SOLID', visible: true, color: {r, g, b}, ...(opacity === undefined ? {} : {opacity})});
 const node = (type: string, id: string, over: object = {}) => ({type, id, name: id, visible: true, opacity: 1, effects: [], blendMode: 'PASS_THROUGH', fills: [], strokes: [],
   fillGeometry: [], strokeGeometry: [], absoluteTransform: at(0, 0), absoluteBoundingBox: {x: 0, y: 0, width: 20, height: 20}, absoluteRenderBounds: {x: 0, y: 0, width: 20, height: 20}, ...over});
+const glyph = (id: string, x: number, ink: object, over: object = {}) => node('VECTOR', id, {absoluteTransform: at(x + 2, 3), fills: [ink],
+  fillGeometry: [{data: 'M 0 0 L 4 0 L 4 4 Z', windingRule: 'NONZERO'}], strokes: [solid(0, 0, 1, 0.5)], strokeGeometry: [{data: 'M 0 0 L 1 1', windingRule: 'EVENODD'}], ...over});
 function drawingFigma() {
-  const icon = node('COMPONENT', '9:1', {name: 'close', width: 20, height: 20, clipsContent: true, absoluteTransform: at(100, 200),
-    children: [node('VECTOR', '9:2', {absoluteTransform: at(102, 203), fills: [solid(1, 0, 0)], fillGeometry: [{data: 'M 0 0 L 4 0 L 4 4 Z', windingRule: 'NONZERO'}],
-      strokes: [solid(0, 0, 1, 0.5)], strokeGeometry: [{data: 'M 0 0 L 1 1', windingRule: 'EVENODD'}]})]});
-  const instance = (id: string) => node('INSTANCE', id, {getMainComponentAsync: async () => icon, children: [node('VECTOR', id + '-v')]});
+  const main = node('COMPONENT', '9:1', {name: 'close'});
+  const instance = (id: string, x: number, ink: object) => node('INSTANCE', id, {width: 20, height: 20, clipsContent: true, absoluteTransform: at(x, 0),
+    absoluteBoundingBox: {x, y: 0, width: 20, height: 20}, absoluteRenderBounds: {x, y: 0, width: 20, height: 20},
+    getMainComponentAsync: async () => main, children: [glyph(id + '-v', x, ink)]});
   const hidden = node('FRAME', '1:9', {visible: false, children: [node('VECTOR', '1:10', {fills: [solid(0, 0, 0)], fillGeometry: [{data: 'M 0 0', windingRule: 'NONZERO'}]})]});
   const gradient = node('VECTOR', '1:11', {fills: [{type: 'GRADIENT_LINEAR', visible: true}], fillGeometry: [{data: 'M 0 0', windingRule: 'NONZERO'}]});
   const figma = fakeFigma();
   const [set] = figma.root.findAllWithCriteria() as Array<{children: Array<{children: object[]}>}>;
-  set!.children[0]!.children.push(instance('1:5'), hidden);
-  set!.children[1]!.children.push(instance('1:6'), gradient);
+  set!.children[0]!.children.push(instance('1:5', 100, solid(1, 0, 0)), hidden);
+  set!.children[1]!.children.push(instance('1:6', 200, solid(1, 0, 0)), instance('1:7', 300, solid(1, 1, 1)), gradient);
   return figma;
 }
+const drawn = (ink: string) => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">' +
+  `<g transform="matrix(1 0 0 1 2 3)"><path d="M 0 0 L 4 0 L 4 4 Z" fill="${ink}" fill-rule="nonzero"/>` +
+  '<path d="M 0 0 L 1 1" fill="#0000ff" fill-opacity="0.5" fill-rule="evenodd"/></g></svg>';
 
-test('a drawing is built as SVG from its geometry, once per main component, in the drawing\'s coordinates; what it cannot express is refused by name', async () => {
+test('each drawing is built from the drawn node, so an instance draws its own ink; identical SVGs are stored once; what cannot be expressed is refused by name', async () => {
   const cap = await run('Badge', drawingFigma());
-  assert.deepEqual(cap.variants.map((v: {drawings: unknown}) => v.drawings),
-    [[{nodeId: '1:5', svg: 'main:9:1'}], [{nodeId: '1:6', svg: 'main:9:1'}, {nodeId: '1:11', svg: 'node:1:11'}]]);
-  assert.deepEqual(cap.svgs, [
-    {key: 'main:9:1', nodeId: '9:1', name: 'close', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">' +
-      '<g transform="matrix(1 0 0 1 2 3)"><path d="M 0 0 L 4 0 L 4 4 Z" fill="#ff0000" fill-rule="nonzero"/>' +
-      '<path d="M 0 0 L 1 1" fill="#0000ff" fill-opacity="0.5" fill-rule="evenodd"/></g></svg>'},
-    {key: 'node:1:11', nodeId: '1:11', name: '1:11', refused: 'svg-gradient'},
-  ]);
+  const [[red], [red2, white, refused]] = cap.variants.map((v: {drawings: Array<{nodeId: string; svg: string}>}) => v.drawings);
+  assert.deepEqual([red.nodeId, red2.nodeId, white.nodeId, refused.nodeId], ['1:5', '1:6', '1:7', '1:11']);
+  assert.equal(red.svg, red2.svg, 'two instances drawing the same bytes share one SVG');
+  assert.notEqual(red.svg, white.svg, 'an instance whose ink is overridden draws its own SVG');
+  assert.match(red.svg, /^svg:[0-9a-f]{8}$/);
+  assert.deepEqual(cap.svgs.map((s: {key: string}) => s.key).sort(), [red.svg, white.svg, 'refused:svg-gradient:1:11'].sort());
+  const byKey = new Map(cap.svgs.map((s: {key: string}) => [s.key, s]));
+  assert.deepEqual(byKey.get(red.svg), {key: red.svg, nodeId: '1:5', name: 'close', svg: drawn('#ff0000')});
+  assert.deepEqual(byKey.get(white.svg), {key: white.svg, nodeId: '1:7', name: 'close', svg: drawn('#ffffff')});
+  assert.deepEqual(byKey.get('refused:svg-gradient:1:11'), {key: 'refused:svg-gradient:1:11', nodeId: '1:11', name: '1:11', refused: 'svg-gradient'});
 });
-

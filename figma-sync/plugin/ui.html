@@ -5329,8 +5329,10 @@ figma.skipInvisibleInstanceChildren = previousInvisibleChildFlag;
 //  - svgs and each variant's drawings: a drawing (no text, no auto layout, at
 //    least one arbitrary-path vector) is built as SVG from its fillGeometry and
 //    strokeGeometry, never exported: on the A0 draft (2026-11-01) one icon's SVG
-//    export took 1 ms, then 152 s, and blocks the plugin. An instance is built
-//    once from its main component; a hidden plain drawing is skipped. Each drawn
+//    export took 1 ms, then 152 s, and blocks the plugin. Each drawing is built
+//    from the drawn node itself, so an instance's overrides (its ink, what it
+//    hides) are what the SVG draws; identical SVGs are stored once, keyed by a
+//    hash of their bytes. A hidden plain drawing is skipped. Each drawn
 //    node is a <g> with its transform into the drawing's coordinates, in tree
 //    order (bottom to top), and each paint a <path> per geometry path. What it
 //    cannot express is refused by name: masks, gradients, image paints, effects,
@@ -5373,7 +5375,7 @@ function buildSvg(root) {
   });
   const drawn = (n) => n.visible !== false && (n.type === 'BOOLEAN_OPERATION' || !kids(n).length ? 1 : 0) + (n.type === 'BOOLEAN_OPERATION' ? 0 : kids(n).reduce((t, c) => t + drawn(c), 0));
   const walk = (n, isRoot) => {
-    if (n.visible === false) return;
+    if (!isRoot && n.visible === false) return;
     if (n.isMask) refuse('svg-mask');
     if ((n.effects || []).some((e) => e.visible !== false)) refuse('svg-effect');
     if (n.blendMode && !['NORMAL', 'PASS_THROUGH'].includes(n.blendMode)) refuse('svg-blend-mode');
@@ -5395,16 +5397,19 @@ function buildSvg(root) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none">` +
     (whole ? `<g opacity="${num(root.opacity)}">${body.join('')}</g>` : body.join('')) + '</svg>';
 }
+// FNV-1a over the SVG's characters: a stable key for identical bytes (a different SVG on the same hash takes a suffix).
+const fnv = (text) => { let h = 0x811c9dc5; for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 0x01000193) >>> 0; return h.toString(16).padStart(8, '0'); };
 const svgs = new Map();
 const drawingsOf = async (n, top, out) => {
   if (!top && drawingOf(n) && holdsVector(n)) {
     const main = n.type === 'INSTANCE' ? await n.getMainComponentAsync() : null;
     if (!main && n.visible === false) return;
-    const target = main || n, key = (main ? 'main:' : 'node:') + target.id;
-    if (!svgs.has(key)) {
-      try { svgs.set(key, { key, nodeId: target.id, name: target.name, svg: buildSvg(target) }); }
-      catch (e) { if (!e.refusal) throw e; svgs.set(key, { key, nodeId: target.id, name: target.name, refused: e.refusal }); }
-    }
+    const name = (main || n).name;
+    let svg = null, refused = null;
+    try { svg = buildSvg(n); } catch (e) { if (!e.refusal) throw e; refused = e.refusal; }
+    let key = refused ? 'refused:' + refused + ':' + (main || n).id : 'svg:' + fnv(svg);
+    for (let k = 2; !refused && svgs.has(key) && svgs.get(key).svg !== svg; k++) key = 'svg:' + fnv(svg) + '-' + k;
+    if (!svgs.has(key)) svgs.set(key, refused ? { key, nodeId: n.id, name, refused } : { key, nodeId: n.id, name, svg });
     out.push({ nodeId: n.id, svg: key });
     return;
   }
