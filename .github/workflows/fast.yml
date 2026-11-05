@@ -226,9 +226,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:playground
 
-      - name: Retained runtime identity and React adapter (no native reconstruction)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run runtime:check
 
       # The recipe/IR pivot's Phase 0 surface (docs/32-recipe-ir-pivot.md): the
       # primitive Figma IR, canonical envelope, normalization, and hashing.
@@ -632,9 +629,6 @@ jobs:
       - name: flowbite-dump-propose:check (maintain — the fixture Flowbite dumps still propose the recorded contracts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run flowbite-dump-propose:check
-      - name: design:consumer:test (maintain — the clean-consumer check mounts each Figma variant with correctly typed props)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run design:consumer:test
       - name: host-placement:check (maintain — a minted host section never collides with a sibling, a designer's hand-moved section survives an amend, and placement is a fixed point across two runs)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run host-placement:check
@@ -943,6 +937,13 @@ jobs:
       - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-proposal:check
+      # Moved from fast core gates (2026-11-05) to keep both jobs under 15 minutes.
+      - name: Retained runtime identity and React adapter (no native reconstruction)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run runtime:check
+      - name: design:consumer:test (maintain — the clean-consumer check mounts each Figma variant with correctly typed props)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run design:consumer:test
 
   fast:
     name: fast gates
