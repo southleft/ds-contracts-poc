@@ -235,7 +235,9 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       and grouping decide the React to Figma denominator, its pinned image
       (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
       capture with its SVG builder, and the pinned Figma to React runner
-      (`--pinned`), its `npm --before` date and the image's base digest.
+      (`--pinned`), its `npm --before` date and the image's base digest. A sealed
+      Figma to React run (A1, A2, B) counts only with `--pinned`; a run in the
+      machine's own Chromium does not.
 
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it
@@ -247,8 +249,14 @@ and break no known cell. A0 is now practice and regression only.
       the fixed 40-set included); Semi and Orbit use none. It stays a named miss,
       to revisit if a practice kit or a drawn kit uses it. Receipts in
       `private/leading-trim-20261105` (git-ignored).
-- [ ] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
-      variants.
+- [x] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
+      variants. Not shipped (rule 8): the climb draws a glyph only for an icon whose
+      component the dump lacks (a remote library icon, as on A0); on Base UI and shadcn
+      Obra the icons are local components and already render. All 19 of their
+      icon-bearing sets, captured read-only on 2026-11-05, package byte-identically with
+      and without the captures, so no variant moves. The work stays on the local branch
+      `claude/climb-remote-icons-2026-11-05`; captures in
+      `private/icon-captures-20261105` (git-ignored).
 - [x] A0's refusals that are plain defects, not grammar: Chip's generated
       TypeScript does not compile (TS2322, an option list forwarded to a part that
       lacks one of its values), and TextInput's layout table is over its 4,096-tuple
