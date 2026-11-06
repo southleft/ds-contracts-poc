@@ -98,7 +98,8 @@ export const MARK_SUBJECT = `(() => { for (const e of document.querySelectorAll(
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
 // its box, outward to whole pixels; its text elements are marked with their weight and style for the font
 // lookup. A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
-const SHOW = `(async ([id, args]) => {
+// Exported so the React to Figma converter renders each story exactly as the reader does.
+export const SHOW = `(async ([id, args]) => {
   const store = window.__STORYBOOK_PREVIEW__.storyStoreValue, channel = window.__STORYBOOK_ADDONS_CHANNEL__;
   const wait = (event, emit) => new Promise((resolve) => {
     const handlers = [[event, (p) => { if ((p?.storyId ?? p) === id) done('rendered'); }], ['storyUnchanged', (p) => { if (p === id) done('rendered'); }],
