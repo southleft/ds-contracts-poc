@@ -283,6 +283,12 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       5% on white and on black, size within 2 px, every text and icon present, and matching text
       color and font. The share of visible solid paints bound to variables is reported, never
       gating.
+      - Part 1, the set rule, in (`scripts/react-to-figma-check.ts`). It calls `matchesMatrix`
+        on the matrix rebuilt from the references, the grammar classifier's own layout reasons
+        (`classifyDump`; drawings exempt as there), and `missingTexts` on the paired variant's
+        TEXT characters. A reference it cannot read (no render, no content) leaves only its own
+        variant unverified. Negative control: A0's StatusBadge references against Sanity UI's
+        written Badge set fail by name (25 problems, 17 of 17 variants failed).
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
