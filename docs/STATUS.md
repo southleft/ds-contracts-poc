@@ -234,13 +234,27 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       fail in the image, all in text-heavy sets (Material 3 20, Base UI 11, Spectrum 5,
       Ant 5, Obra 3); none moves the other way. Receipts in
       `private/beta-kits/baseline-20261105-image` (git-ignored).
+- [x] Text is set at the font's design advances in the pinned image (parent session,
+      2026-11-05): headless Chromium's default font hinting also turned off subpixel
+      positioning, so every web-font glyph landed on a whole pixel, up to 15.7 px off the
+      design over 39 characters (macOS and Figma set the design advances). The container
+      now launches Chromium itself with `--font-render-hinting=none`, and every run first
+      sets a probe in the image's Arimo, loaded as a web font, and refuses by name if
+      every glyph lands on a whole pixel. Practice baseline in the image: 656 of 944
+      pass (628 before); 28 variants move to pass (Material 3 19, Ant 5, Obra 3,
+      Spectrum 1) and none to fail; 38 scores get worse without changing class (SDS's
+      TextContentHeading by up to 5.5 points, A0's Avatar by up to 1.1). A0's 431 reader
+      references are unchanged: its text uses installed faces, which fontconfig already
+      positioned fractionally. The 41-variant replay stays byte-identical on this Mac
+      and on ubuntu.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its pinned image
       (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
       capture with its SVG builder, and the pinned Figma to React runner
-      (`--pinned`), its `npm --before` date and the image's base digest. A sealed
+      (`--pinned`), its `npm --before` date, the image's base digest, and the pinned
+      browser's launch args with its text-layout probe. A sealed
       Figma to React run (A1, A2, B) counts only with `--pinned`; a run in the
       machine's own Chromium does not.
 
