@@ -310,6 +310,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         TEXT characters. A reference it cannot read (no render, no content) leaves only its own
         variant unverified. Negative control: A0's StatusBadge references against Sanity UI's
         written Badge set fail by name (25 problems, 17 of 17 variants failed).
+      - Part 2, each variant, in: images on white and black (`alignRecordedFrames` on the
+        reference's paint-extent frame and the plugin capture's, the one `IMAGE_LIMIT_PERCENT`),
+        size within 2 px (`consumerSizeCheck`), every graphic the reference draws present
+        (`matchParts`, now generic), every text in its color and font (`compareTextStyles`); a
+        face Figma lacks is font-blocked (`storyFontPreflight` on the capture's font list).
+        Figma to React practice baseline on this commit: 944 of 944 variants identical to
+        `baseline-20261105-image-d`. Proven on fixtures only: no set written from a library
+        exists yet (writable Figma file pending with the owner).
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization

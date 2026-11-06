@@ -197,8 +197,9 @@ export function missingTexts(figmaTexts: readonly string[], renderedText: string
 }
 
 const within = (figma: number, dom: number) => Math.abs(figma - dom) <= Math.max(3, 0.35 * figma);
-/** One-to-one size matching of Figma parts to rendered graphics (see the header). */
-export function matchParts(parts: readonly FigmaPart[], graphics: readonly DomGraphic[]): { matched: number; missing: FigmaPart[] } {
+/** One-to-one size matching of expected parts to drawn graphics (see the header): here Figma's parts to the
+ *  rendered graphics; in the React to Figma check, a reference's graphics to the written set's parts. */
+export function matchParts<P extends { box: Box; members?: Box[] }>(parts: readonly P[], graphics: readonly { box: Box; members?: Box[] }[]): { matched: number; missing: P[] } {
   // An SVG viewport and its drawn shapes are alternative representations of
   // the same paint. Consuming either reserves its resources so the viewport
   // cannot stand in for another missing icon after a child was matched.
@@ -213,7 +214,7 @@ export function matchParts(parts: readonly FigmaPart[], graphics: readonly DomGr
   const used = new Set<string>();
   const center = (b: Box) => [b.x + b.width / 2, b.y + b.height / 2];
   const order = [...parts].sort((a, b) => b.box.width * b.box.height - a.box.width * a.box.height);
-  const missing: FigmaPart[] = [];
+  const missing: P[] = [];
   let matched = 0;
   for (const part of order) {
     const reserved=new Set<string>();

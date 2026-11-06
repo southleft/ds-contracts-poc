@@ -95,7 +95,7 @@ import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 /** No animation or transition on a measured page: a Figma design is one still frame. Shared with the Storybook reader. */
 export const NO_MOTION = '*,*::before,*::after{animation:none!important;transition:none!important}';
-const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
+export const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // unchanged size limit; unqualified paint cannot supply size
 type SizePair = { consumer: { width: number; height: number }; figma: { width: number; height: number } };
 /** Keep the existing painted-size guard for a qualified pixel pair. Refused
