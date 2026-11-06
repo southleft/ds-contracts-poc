@@ -5,7 +5,15 @@ export const nativeImageProjection=(node:DumpNode|undefined)=> (node as ImageNod
 /** Preserve raw paint facts; derive a separate deterministic CSS projection.
  * CROP maps the layer's normalized viewport into original image coordinates.
  * Original bytes remain original; no node PNG is baked into the contract. */
-export function projectNativeImagePaints(input:DumpSet,assets:Record<string,DumpImageAsset>|undefined){
+/** Image-over-solid stacks a REST dump proves: its degradation names exactly two visible fills, a SOLID under
+ * the IMAGE. The solid is the node's captured `fill` (background-color); the image becomes the background-image
+ * above it, as for a single image paint. Keys are the degradation's `set:variant/…` node paths. */
+export function imageOverSolidPaths(dump:object):Set<string>{
+ const rows=(dump as {_degradations?:unknown})._degradations;
+ return new Set((Array.isArray(rows)?rows:[]).filter((d:any)=>d?.code==='paint-stack-truncated'&&typeof d.nodePath==='string'
+  &&/^fill: 2 visible fill paints \(SOLID, IMAGE\) /.test(String(d.message))).map((d:any)=>d.nodePath as string));
+}
+export function projectNativeImagePaints(input:DumpSet,assets:Record<string,DumpImageAsset>|undefined,imageOverSolid?:ReadonlySet<string>){
  const clone=(v:any):any=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,value])=>[k,clone(value)])):v;
  const set=clone(input) as DumpSet,notes:string[]=[];
  const visit=(node:ImageNode,path:string)=>{
@@ -18,7 +26,9 @@ export function projectNativeImagePaints(input:DumpSet,assets:Record<string,Dump
     const mime=asset.mimeType,encoded=asset.base64;
     const prefixes={'image/png':'iVBORw0KGgo','image/jpeg':'/9j/','image/gif':'R0lGOD','image/webp':'UklGR'};
     if(asset.imageHash!==hash||!Object.hasOwn(prefixes,mime)||typeof encoded!=='string'||!encoded.startsWith(prefixes[mime])||asset.byteLength>8*1024*1024||encoded.length>11184812||encoded.length%4!==0||! /^[A-Za-z0-9+/]*={0,2}$/.test(encoded)||asset.byteLength!==encoded.length/4*3-(encoded.endsWith('==')?2:encoded.endsWith('=')?1:0))refuse('original-asset-integrity');
-    if(paints.length!==1||paint.index!==0||paint.opacity!==undefined&&paint.opacity!==1||paint.blendMode!==undefined&&paint.blendMode!=='NORMAL'||paint.filters&&Object.values(paint.filters as object).some(v=>v!==0))refuse('paint-stack-blend-opacity-or-filter');
+    const overSolid=paint.index!==0&&node.fill!==undefined&&imageOverSolid?.has(`${set.setName}:${path.slice(set.setName.length+1)}`)===true;
+    if(paints.length!==1||paint.index!==0&&!overSolid)refuse('paint-stack-below-image-unproven');
+    if(paint.opacity!==undefined&&paint.opacity!==1||paint.blendMode!==undefined&&paint.blendMode!=='NORMAL'||paint.filters&&Object.values(paint.filters as object).some(v=>v!==0))refuse('paint-stack-blend-opacity-or-filter');
     const declared:Record<string,string>={'background-repeat':'no-repeat'};
     if(paint.scaleMode==='FILL'||paint.scaleMode==='FIT'){
      if(paint.rotation!==undefined&&paint.rotation!==0)refuse('image-rotation');
