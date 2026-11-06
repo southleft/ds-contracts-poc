@@ -116,3 +116,14 @@ test('blend promotion proof still rejects changed pixels in overflow outside the
  assert.equal(await page.locator('body').innerHTML(),original);
  }finally{await browser.close();}
 });
+test('an out-of-flow descendant that paints nothing may move under promotion; a painted one may not',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ const subject=(child:string,text='label')=>`<style>body{margin:0}#subject{margin:40px;width:20px;height:20px;background:blue}#child{position:absolute;left:0;bottom:0;width:1px;height:1px;${child}}</style><div id="subject"><span id="child">${text}</span></div>`;
+ for(const [hidden,text] of [['overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%)','label'],['visibility:hidden','label'],['width:0;height:0;background:red','']]){
+  await page.setContent(subject(hidden,text));const result=await observeConsumerPaintExtent(page,'#subject');
+  assert('observation'in result,hidden+' '+JSON.stringify(result));assert.deepEqual(result.observation.layout,{x:40,y:40,width:20,height:20});
+ }
+ for(const painted of [['background:red','label'],['width:0;height:0;box-shadow:0 0 0 4px red','']]){await page.setContent(subject(painted[0]!,painted[1]));
+ assert.deepEqual(await observeConsumerPaintExtent(page,'#subject'),{refused:'paint-extent-promotion-changed-subject'});}
+ }finally{await browser.close();}
+});

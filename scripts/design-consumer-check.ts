@@ -93,6 +93,8 @@ import { retryConsumerRead } from './design-consumer-network.js';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+/** No animation or transition on a measured page: a Figma design is one still frame. Shared with the Storybook reader. */
+export const NO_MOTION = '*,*::before,*::after{animation:none!important;transition:none!important}';
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // unchanged size limit; unqualified paint cannot supply size
 type SizePair = { consumer: { width: number; height: number }; figma: { width: number; height: number } };
@@ -476,7 +478,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
     // Relative, so the lockfile never names this run's temp folder.
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${path.relative(consumer, lib.tarball)}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), CONSUMER_VITE_CONFIG);
-  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
+  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}' + NO_MOTION + '</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';

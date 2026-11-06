@@ -42,14 +42,28 @@ export function paintLayerDocumentBox(layer:PaintLayer,layers:PaintLayer[],scrol
  const x=Math.min(...points.map(p=>p.x)),y=Math.min(...points.map(p=>p.y));
  return {x,y,width:Math.max(...points.map(p=>p.x))-x,height:Math.max(...points.map(p=>p.y))-y};
 }
+/** In-page source: an element that paints nothing and holds nothing (zero area, no child nodes, no shadow, outline
+ *  or generated content). Shared with the Storybook reader, which leaves such top elements (focus guards) aside. */
+export const EMPTY_BOX = `((n) => { const s = getComputedStyle(n), b = n.getBoundingClientRect(); return !n.childNodes.length && !(b.width * b.height) &&
+  s.boxShadow === 'none' && (s.outlineStyle === 'none' || !parseFloat(s.outlineWidth)) && ['::before', '::after'].every((p) => ['none', 'normal'].includes(getComputedStyle(n, p).content)); })`;
 export async function observeConsumerPaintExtent(page:Page,selector:string):Promise<
  {observation:{layout:FrameBox;paint:FrameBox;layers:PaintLayer[];boxes:FrameBox[];blendRasterVerified?:true;negativeStackRasterVerified?:true}}|{refused:string}> {
  const root=page.locator(selector);if(await root.count()!==1)return {refused:'paint-extent-subject-not-unique'};
  const initial=await root.evaluate(el=>({style:el.getAttribute('style'),value:(el as HTMLElement).style.getPropertyValue('will-change'),priority:(el as HTMLElement).style.getPropertyPriority('will-change')}));
- const observe=()=>root.evaluateHandle(el=>({snapshot:JSON.stringify([el,...el.querySelectorAll('*')].map(n=>{
+ // Promotion makes the subject the containing block of its out-of-flow descendants. One that paints nothing
+ // (clipped to no area; hidden with all it holds; or an empty box) cannot change the raster wherever it resolves,
+ // so only its place in the snapshot is kept; every other node is compared exactly. Serialized as text, as
+ // EMPTY_BOX is shared with the page.
+ const observe=()=>root.evaluateHandle(new Function('el',`const empty=${EMPTY_BOX},nodes=[el,...el.querySelectorAll('*')],unpainted=new Set();
+  for(const n of nodes){const s=getComputedStyle(n),subtree=[n,...n.querySelectorAll('*')];
+   if(n===el||unpainted.has(n)||!['absolute','fixed'].includes(s.position)||subtree.slice(1).some(d=>getComputedStyle(d).position==='fixed'))continue;
+   if(empty(n)||s.clipPath==='inset(50%)'||/^rect\\(0px,? 0px,? 0px,? 0px\\)$/.test(s.clip)||subtree.every(d=>[null,'::before','::after'].every(p=>getComputedStyle(d,p).visibility!=='visible')))
+    for(const d of subtree)unpainted.add(d);
+  }
+  return {snapshot:JSON.stringify(nodes.map(n=>{if(unpainted.has(n))return {unpainted:true};
   const b=n.getBoundingClientRect();const styles=[null,'::before','::after'].map(p=>{const s=getComputedStyle(n,p);return [...s].filter(k=>!(n===el&&p===null&&k==='will-change')).map(k=>[k,s.getPropertyValue(k)]);});
   return {box:{x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height},styles};
- }))}));
+ }))};`) as (el:Element)=>{snapshot:string});
  const effects=await root.evaluate(el=>{
   let blend=false,negativeStack=false;
   for(const n of [el,...el.querySelectorAll('*')])for(const pseudo of [null,'::before','::after']){const s=getComputedStyle(n,pseudo);

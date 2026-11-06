@@ -64,3 +64,32 @@ test('a reference\'s content is read inside the instance\'s own container, never
     assert.deepEqual(content.runs!.map(r => [r.text, r.color]), [['Save', 'rgb(18, 52, 86)']]);
   } finally { await browser.close(); }
 });
+
+import {PNG} from 'pngjs';
+import {captureSubjectWithoutBackdrop} from './design-consumer-observed-capture.js';
+import {MARK_SUBJECT} from './storybook-reader.js';
+test('a reference is the instance alone: page and decorator backgrounds cleared then restored, its painted extent kept', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({viewport: {width: 400, height: 300}});
+    await page.setContent(`<style>html, body {background: #fff; margin: 0}</style><div id="theme" style="background: #fff; padding: 16px">
+      <button id="b" style="all: unset; display: inline-block; width: 40px; height: 20px; background: #123456; box-shadow: 4px 4px 0 #000"></button></div>`);
+    await page.evaluate(`window.__dsReaderTops = [document.getElementById('b')]`);
+    assert.equal(await page.evaluate(MARK_SUBJECT), true);
+    const captured = await captureSubjectWithoutBackdrop(page, '[data-ds-reader-subject]', '[data-ds-reader-cell]');
+    assert.ok(!('refused' in captured), JSON.stringify(captured));
+    const png = PNG.sync.read(captured.bytes), alpha = (x: number, y: number) => png.data[(y * png.width + x) * 4 + 3];
+    // The shadow past the 40 x 20 box is kept; beside it, where the decorator painted white, is transparent.
+    assert.deepEqual([png.width, png.height, alpha(42, 10), alpha(42, 1), alpha(1, 22)], [44, 24, 255, 0, 0]);
+    for (const id of ['theme']) assert.equal(await page.evaluate(`getComputedStyle(document.getElementById('${id}')).backgroundColor`), 'rgb(255, 255, 255)');
+    assert.equal(await page.evaluate(`getComputedStyle(document.body).backgroundColor`), 'rgb(255, 255, 255)');
+    // Focus guards (empty boxes) beside it are left aside; two painting top elements have no single subject.
+    await page.evaluate(`(() => { for (const at of ['beforebegin', 'afterend']) document.getElementById('b').insertAdjacentHTML(at, '<div data-focus-guard style="position: fixed; width: 1px; height: 0"></div>');
+      window.__dsReaderTops = [...document.querySelectorAll('[data-focus-guard], #b')]; })()`);
+    assert.equal(await page.evaluate(MARK_SUBJECT), true);
+    assert.equal(await page.locator('#b[data-ds-reader-subject]').count(), 1);
+    await page.evaluate(`window.__dsReaderTops = [document.getElementById('b'), document.getElementById('theme')]`);
+    assert.equal(await page.evaluate(MARK_SUBJECT), false);
+    assert.equal(await page.locator('[data-ds-reader-subject], [data-ds-reader-cell]').count(), 0);
+  } finally { await browser.close(); }
+});
