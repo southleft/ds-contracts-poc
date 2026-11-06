@@ -290,10 +290,18 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       (inside a painted ancestor), Text and TextLink 3 (inline, no layer), Details 3 (it opens
       during the capture in Storybook's channel render, also after a 1 s wait), LoadingDots 1
       (paints nothing when still). Restoration proof: after every capture, a shot by the old
-      method equals the 2026-11-05 image, 431 of 431. Two runs byte-identical; counts, grammar,
+      method equals the 2026-11-05 image, 431 of 431. Two runs byte-identical (by chance: see
+      part 3c); counts, grammar,
       matrix and fonts unchanged. Figma to React practice baseline on this commit: 944 of 944
       variants identical to `baseline-20261105-image-d` (one cell rerun after Figma's REST
       answered HTTP 500).
+- [x] Storybook reader, part 3c (parent session, 2026-11-06): still throughout pass 2. Part 3b
+      turned motion off for the capture only, so each reference's box and text marks were read
+      before it and its faces and content after it, while animations ran. LoadingDots' content
+      then depended on the dots' fade at the moment of reading: part 3b's two runs happened to
+      read the same phase, and a third run did not. The rule (`NO_MOTION`) now covers the whole of
+      pass 2; pass 1 reads only React's tree. Three A0 runs byte-identical; against part 3b's run,
+      no image or box changed, only LoadingDots' content.
 - [ ] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
       Figma set written from a library against the reader's references by GOAL.md's checks,
       with the Figma to React check's comparison code and its one image limit. A set counts

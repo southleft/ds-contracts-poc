@@ -288,6 +288,10 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     const components = readStories(stories), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+    // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
+    // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
+    // two runs differ. Pass 1 reads only React's tree.
+    await page.evaluate(`(() => { const s = document.createElement('style'); s.id = 'ds-reader-still'; s.textContent = ${JSON.stringify(NO_MOTION)}; document.head.appendChild(s); })()`);
     for (const c of components) {
       const faces = new Map<string, FontFace>();
       for (const [i, ref] of c.references.entries()) {
@@ -296,14 +300,11 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
         const problem = !tree ? 'reference-render-failed' : !rendersOneInstance(tree) ? 'reference-not-one-instance' : !box ? 'reference-empty' : undefined;
         if (problem) { ref.problem = problem; continue; }
         // The instance alone, captured as the Figma to React check captures its own side: ancestor background
-        // colors cleared and restored, the image clipped to the paint extent Chromium's layers report.
-        // Still, as the Figma to React page is (its own rule), for the capture only. Playwright hides the caret by
-        // setting and clearing each input's caret color, which leaves an empty style attribute; one screenshot first
-        // lets the capture's before-and-after checks start from that state.
-        await page.evaluate(`(() => { const s = document.createElement('style'); s.id = 'ds-reader-still'; s.textContent = ${JSON.stringify(NO_MOTION)}; document.head.appendChild(s); })()`);
+        // colors cleared and restored, the image clipped to the paint extent Chromium's layers report. Playwright
+        // hides the caret by setting and clearing each input's caret color, which leaves an empty style attribute;
+        // one screenshot first lets the capture's before-and-after checks start from that state.
         await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
         const captured = await page.evaluate(MARK_SUBJECT) ? await captureSubjectWithoutBackdrop(page, '[data-ds-reader-subject]', '[data-ds-reader-cell]') : { refused: 'reference-not-one-element' };
-        await page.evaluate(`document.getElementById('ds-reader-still').remove()`);
         if ('refused' in captured) { ref.problem = 'reference-capture-unqualified'; ref.captureRefused = captured.refused; }
         else {
           ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(captured.bytes).digest('hex');
