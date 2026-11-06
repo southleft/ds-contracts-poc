@@ -59,3 +59,40 @@ test('a reference the rule cannot read leaves only its own variant unverified', 
   const refused = { ...component(), matrix: { status: 'refused' as const, reason: 'variant-matrix-over-cap:72>64' }, references: [] };
   assert.deepEqual(setRule(refused, dump([]), 'Badge').problems, ['story-matrix-refused:variant-matrix-over-cap:72>64']);
 });
+
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { PNG } from 'pngjs';
+import type { FigmaContentResult } from './design-consumer-content.js';
+import { imageSha256 } from './design-consumer-framing-v2.js';
+import { judgeVariants } from './react-to-figma-check.js';
+const png = (rgb: number[]) => { const p = new PNG({ width: 20, height: 10 }); for (let i = 0; i < 200; i++) p.data.set([...rgb, 255], i * 4); return PNG.sync.write(p); };
+const judge = (o: { figma?: number[]; graphics?: Array<{ tag: string; box: { x: number; y: number; width: number; height: number } }>; ink?: number; fonts?: string[]; content?: false } = {}) => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'react-to-figma-')), ref = png([0, 0, 255]), drawn = png(o.figma ?? [0, 0, 255]), box = { x: 16, y: 16, width: 20, height: 10 };
+  writeFileSync(path.join(dir, 'success.png'), ref);
+  const c = component(['success'], { png: 'success.png', faces: [{ family: 'Arimo', weight: 400, style: 'normal' }],
+    frame: { layout: box, capture: box, deviceScaleFactor: 1, pngSha256: imageSha256(ref), raster: { kind: 'browser-paint-extent-v1', paint: box } },
+    content: { text: 'success', graphics: o.graphics ?? [], runs: [run('success')] } });
+  const file = dump([{ ...variant('success'), nodeId: '1:2' }], ['success']);
+  (file.Badge as { nodeId?: string }).nodeId = '1:1';
+  const layout = { x: 100, y: 200, width: 20, height: 10 };
+  const capture = { kind: 'ds-contracts-plugin-capture', version: 2, fileKey: 'f', set: 'Badge', nodeId: '1:1', figmaFonts: (o.fonts ?? ['Regular']).map((style) => ({ family: 'Arimo', style })),
+    variants: [{ nodeId: '1:2', box: { bounds: layout, png: drawn.toString('base64') }, after: { layout, render: layout } }] };
+  const content: FigmaContentResult = o.content === false ? { status: 'unavailable', reason: 'no token' } : { status: 'collected', version: null, responseSha256: 'x', byNodeId: { '1:2': {
+    texts: ['success'], textStyles: [[{ start: 0, end: 7, color: { r: o.ink ?? 0, g: 0, b: 0, a: 1 }, family: 'Arimo', weight: 400 }]], parts: [] } } };
+  const set = Object.values(file)[0] as Parameters<typeof judgeVariants>[2];
+  return judgeVariants(c, setRule(c, file, 'Badge'), set, dir, capture, content, dir)[0]!;
+};
+
+test('each variant of a set that counts is judged by the Figma to React check\'s own code and limits, the reference as the rendered side', () => {
+  assert.deepEqual([judge().verdict, judge().reasons, judge().image], ['pass', [], { white: 0, black: 0 }]);
+  const recolored = judge({ figma: [255, 0, 0] });
+  assert.equal(recolored.verdict, 'fail');
+  assert.deepEqual(recolored.reasons.map((r) => r.split(':').slice(0, 2).join(':')), ['layout-image-difference-above-limit:tone=success', 'layout-image-difference-on-black-above-limit:tone=success']);
+  // An icon the reference draws and the written variant lacks; a text drawn in another color.
+  assert.deepEqual(judge({ graphics: [{ tag: 'svg', box: { x: 2, y: 1, width: 8, height: 8 } }] }).reasons, ['content-missing:tone=success:part:svg@2,1']);
+  assert.match(judge({ ink: 1 }).reasons.join(), /^text-color-mismatch:tone=success:"success":figma #ff0000 vs rendered #000000/);
+  // A face Figma cannot load is font-blocked, never a pass or a failure; content not read is unverified.
+  assert.deepEqual([judge({ fonts: ['Bold'] }).verdict, judge({ content: false }).verdict], ['font-blocked', 'unverified']);
+});
