@@ -247,6 +247,23 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       references are unchanged: its text uses installed faces, which fontconfig already
       positioned fractionally. The 41-variant replay stays byte-identical on this Mac
       and on ubuntu.
+- [x] Text is antialiased by coverage alone in the pinned image (parent session,
+      2026-11-05): the image's Ubuntu fontconfig asked for RGB subpixel (LCD) text, a
+      property of a display, so text over an opaque background came out with color
+      fringes (88 levels on Base UI's) and a horizontal smear, 7% more ink than the
+      outlines' area. The fixed launch args add `--disable-lcd-text`, and the probe also
+      refuses any gray-on-white probe pixel whose channels spread over 2 levels.
+      Practice baseline in the image: 662 of 944 pass (656 before); 6 move to pass
+      (Base UI's Select trigger 5, Material 3 1) and none to fail, and the 28 from the
+      hinting fix all still pass; 216 scores get better, 2 worse (A0's disabled
+      MenuItem, by up to 0.66 points, still failing). 403 of A0's 431 reader
+      references change (this applies to installed faces too); the reader's counts and
+      fonts do not. The 41-variant replay stays byte-identical on this Mac and on
+      ubuntu. Left as a property of the ruler: Spectrum's 4 breadcrumb variants, light
+      text on transparent, carry 3.7% more ink than the outlines' area (the Mac −0.7%),
+      because Skia's Linux text gamma and contrast are fixed at build time with no
+      runtime switch. Base UI's Field (6) still fails by 0.2 to 0.5 points, not
+      diagnosed.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
@@ -254,7 +271,7 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
       capture with its SVG builder, and the pinned Figma to React runner
       (`--pinned`), its `npm --before` date, the image's base digest, and the pinned
-      browser's launch args with its text-layout probe. A sealed
+      browser's launch args with its text-layout and color-fringe probe. A sealed
       Figma to React run (A1, A2, B) counts only with `--pinned`; a run in the
       machine's own Chromium does not.
 
