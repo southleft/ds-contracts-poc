@@ -345,10 +345,16 @@ and break no known cell. A0 is now practice and regression only.
       Single kit since: source instance identity (Material 3's menu swaps to a local
       density variant the converter does not link; Atlassian's and Carbon's swaps are
       remote).
-- [ ] Measure the inferred `text-rendering: geometricPrecision` policy in both
-      launches (hinting off and full), with and without it, widths and vertical
-      position against Figma, before deciding on it (it costs 1 px of vertical
-      position on Linux; parent session, 2026-11-05).
+- [x] Measure the inferred `text-rendering: geometricPrecision` policy (parent session,
+      2026-11-05): 43 Figma text boxes in 5 practice cells (Base UI's Field, Spectrum's
+      Breadcrumb, SDS's Text Price, HeroUI's Slider, Ant's Heading), run with the policy
+      on and off, under the pinned launch (hinting off) and with full hinting (as an
+      unpinned Linux user sees it). With full hinting the policy keeps every text width
+      within 1 px of Figma's; without it 8 drift by up to 4 px. Its cost: 18 of 43 boxes
+      sit 1 px higher than Figma in both launches (2 without it). Under the pinned
+      ruler, where hinting is off, it buys nothing (widths within 1 px either way). Kept;
+      the 1 px is its named cost. Open: a narrower scope that keeps both. Receipts in
+      `private/gp-measure-20261106` (git-ignored).
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 
