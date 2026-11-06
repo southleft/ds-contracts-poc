@@ -264,8 +264,27 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       because Skia's Linux text gamma and contrast are fixed at build time with no
       runtime switch. Base UI's Field (6) still fails by 0.2 to 0.5 points, not
       diagnosed.
+- [x] Storybook reader, part 3 (parent session, 2026-11-06): each reference also keeps what
+      its instance draws (its text, text runs with declared color, family, weight and
+      opacity, and its graphics), read after the screenshot by the Figma to React check's own
+      collector (`domContentOf`) inside the instance's own DOM container, and its value on each
+      axis of the matrix rule, which pairs it with a written variant. On A0: 424 of 431
+      references; the 7 of AppLayoutSidebar are named `reference-content-not-one-container`
+      (its top elements are not the children of one element). The 431 images are
+      byte-identical to the 2026-11-05 run, two runs give byte-identical `stories.json`, and
+      without the new fields it equals the 2026-11-05 one.
+- [ ] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
+      Figma set written from a library against the reader's references by GOAL.md's checks,
+      with the Figma to React check's comparison code and its one image limit. A set counts
+      only when it is a real component set: its variant properties match the story matrix
+      (`matchesMatrix`, capped at 64), it uses auto layout outside drawings as the grammar
+      classifier defines them, and every text the reference draws is editable TEXT. A set that
+      fails this counts every expected variant as failed. Each variant then needs images within
+      5% on white and on black, size within 2 px, every text and icon present, and matching text
+      color and font. The share of visible solid paints bound to variables is reported, never
+      gating.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
-      classifier, the variant matrix rule, the Storybook reader
+      classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its pinned image
       (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
@@ -355,6 +374,19 @@ and break no known cell. A0 is now practice and regression only.
       ruler, where hinting is off, it buys nothing (widths within 1 px either way). Kept;
       the 1 px is its named cost. Open: a narrower scope that keeps both. Receipts in
       `private/gp-measure-20261106` (git-ignored).
+- [x] Character demand on a text node split by its binding (parent session, 2026-11-06):
+      single kit, no code (rule 8). Ant's Button (one Figma text node bound to Title in 148
+      variants and fixed in 3) becomes proposable with an 8-line change to the owned-text
+      presence check, which then reads a node at the same path with another binding as the
+      sibling part. chakra's Input stays refused before that: its text sits under a frame
+      bound to the `.label?` visibility Boolean in all 315 variants, and in 9 of them the
+      required "*" is renamed `Label`, a second layer of that name. No other practice set
+      hits this refusal.
+- [ ] The code side writes `ds-contracts.react.json` itself from the reader's
+      `stories.json` (GOAL.md Step 2), in its own module outside the frozen reader, after the
+      React to Figma check. Its route (the source-reference engine on a generated workspace, or
+      the story's own rendered page) is decided by a probe of about 5 Agriculture components
+      against the reader's references.
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 

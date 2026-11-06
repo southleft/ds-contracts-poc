@@ -14,7 +14,8 @@
  * set through Storybook's own args channel) and keeps a PNG of the single
  * instance as the reference image (the library's own render, never the
  * engine's), plus every platform font Chromium drew its text with, for the
- * React to Figma font preflight. Every page is rendered in one pinned
+ * React to Figma font preflight, and what it draws (text, text runs, graphics), read
+ * after the screenshot by the Figma to React check's own collector. Every page is rendered in one pinned
  * environment (PINNED, run through Docker) and the receipt records it, so the
  * references reproduce on any machine. Deterministic for one Storybook build;
  * no model call.
@@ -32,9 +33,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
-import type { Browser, CDPSession } from 'playwright-core';
+import type { Browser, CDPSession, JSHandle } from 'playwright-core';
 import { PNG } from 'pngjs';
 import type { FontFace } from './font-preflight.js';
+import { domContentOf, type DomContent } from './design-consumer-content.js';
 
 export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
   /** The rendered story shows more than one instance of its component, or content beside it. */
@@ -42,8 +44,12 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
   /** The reader could not render the story (an instrument fault, named apart). */
   renderFailed: boolean }
 /** One expected variant's reference: the story and arguments it renders from, then its PNG and box, or why it has none. */
-export interface VariantReference extends VariantRender { png?: string; sha256?: string; box?: Box; faces?: FontFace[];
-  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty' }
+export interface VariantReference extends VariantRender {
+  /** The variant's value on each axis of the matrix rule: what a written Figma variant is paired by. */
+  variant: Record<string, string>; png?: string; sha256?: string; box?: Box; faces?: FontFace[];
+  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty';
+  /** What the instance draws (its text, text runs and graphics), read by the Figma to React check's own collector. */
+  content?: DomContent; contentProblem?: 'reference-content-not-one-container' }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
@@ -64,9 +70,15 @@ export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
     const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })));
     return { title, stories: list.length, storyId: first.id, grammar: classifyStoryArgs(argTypes),
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, references: m.renders.map((r) => ({ ...r })), faces: [] };
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
+
+/** The instance's own DOM container: the one element whose element children are exactly the instance's top
+ *  elements (decorators may wrap it; nothing may sit beside it), or null. The collector reads text inside it and
+ *  frames boxes on its first element child, as the Figma to React check does with its cell. */
+export const INSTANCE_CONTAINER = `((elements) => { const parent = elements[0]?.parentElement;
+  return parent && elements.every((e) => e.parentElement === parent) && parent.children.length === elements.length ? parent : null; })`;
 
 // Render one story through Storybook's own channel (`args` over its listed options), compact React's tree
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
@@ -82,6 +94,7 @@ const SHOW = `(async ([id, args]) => {
     setTimeout(() => done('failed'), 20000);
     emit();
   });
+  window.__dsReaderContainer = null;
   let outcome = await wait('storyRendered', () => channel.emit('setCurrentStory', { storyId: id, viewMode: 'story' }));
   if (outcome === 'rendered' && Object.keys(args).length) outcome = await wait('storyArgsUpdated', () => channel.emit('updateStoryArgs', { storyId: id, updatedArgs: args }));
   await document.fonts.ready;
@@ -102,6 +115,7 @@ const SHOW = `(async ([id, args]) => {
   const tree = { c: build(live.child) };
   const elements = [], top = (f) => { for (let c = f; c; c = c.sibling) { if (c.stateNode instanceof Element) elements.push(c.stateNode); else top(c.child); } };
   if (instance) top(instance.child);
+  window.__dsReaderContainer = ${INSTANCE_CONTAINER}(elements);
   const rects = elements.map((e) => e.getBoundingClientRect()).filter((r) => r.width && r.height);
   if (!rects.length) return { tree };
   for (const old of document.querySelectorAll('[data-ds-reader-text]')) old.removeAttribute('data-ds-reader-text');
@@ -271,6 +285,10 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
         ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(png).digest('hex');
         if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), png);
         ref.faces = await drawnFaces(cdp);
+        // Read after the screenshot, so the image is never touched.
+        const container = (await page.evaluateHandle('window.__dsReaderContainer') as JSHandle<Element | null>).asElement();
+        if (container) ref.content = await container.evaluate(domContentOf);
+        else ref.contentProblem = 'reference-content-not-one-container';
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
       }
       c.faces = [...faces.values()].sort(byFace);
