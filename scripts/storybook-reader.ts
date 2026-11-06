@@ -33,6 +33,7 @@ import { fileURLToPath } from 'node:url';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
 import type { Browser, CDPSession } from 'playwright-core';
+import { PNG } from 'pngjs';
 import type { FontFace } from './font-preflight.js';
 
 export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
@@ -139,7 +140,7 @@ export const PINNED = { source: new URL('./storybook-reader-image/', import.meta
 export const PAGE = { clock: '2026-11-01T12:00:00.000Z', timezoneId: 'UTC', locale: 'en-US', viewport: { width: 1280, height: 720 },
   deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference', randomSeed: 1 } as const;
 export interface RenderEnvironment { image: string; imageSource: string; imageId: string; platform: string; os: string; chromium: string; fonts: string[];
-  page?: typeof PAGE; args?: readonly string[]; textLayout?: { face: string; size: number; fractional: string };
+  page?: typeof PAGE; args?: readonly string[]; textLayout?: { face: string; size: number; fractional: string; fringePixels: number };
   /** The React renderer the Storybook loaded, e.g. "react-dom 18.3.1". */
   react?: string }
 /** React versions the reader has been run on (React's tree is read through internals that differ by version):
@@ -149,26 +150,33 @@ export const REACT_TESTED = /^(18\.3|19\.\d+)\.\d+(-[0-9A-Za-z.-]+)?$/;
 
 /** Text is set at the font's design advances (parent session, 2026-11-05): headless Chromium's default "full"
  *  hinting also turns off subpixel positioning, so every glyph landed on a whole pixel, up to 15.7 px off the
- *  design over 39 characters. The container launches the browser itself with these args; no client sets them. */
-export const PINNED_ARGS = ['--font-render-hinting=none'] as const;
+ *  design over 39 characters. Text is antialiased by coverage alone, as macOS and Figma do: the image's Ubuntu
+ *  fontconfig asked for RGB subpixel (LCD) text, a property of a display, which smeared glyphs sideways in
+ *  color (fringe 88 levels on Base UI's text). The container launches the browser itself with these args. */
+export const PINNED_ARGS = ['--font-render-hinting=none', '--disable-lcd-text'] as const;
 const LAUNCH = `require('/playwright-core').chromium.launchServer({ port: 3000, host: '0.0.0.0', wsPath: '/pinned', args: ${JSON.stringify(PINNED_ARGS)} })`;
 
 /** Every run proves it: a probe in Arimo (always in the image), loaded as a web font as the checks load theirs
  *  (fontconfig positions installed faces differently), at 13 px, whose design advances are fractional, must not
- *  land every glyph on a whole pixel, or the run is refused by name. A Playwright or image bump that drops the
- *  args fails here, never silently. */
+ *  land every glyph on a whole pixel, and, drawn gray on opaque white, must have no pixel whose channels
+ *  spread over 2 levels (a color fringe), or the run is refused by name. A Playwright or image bump that drops
+ *  the args fails here, never silently. */
 export async function textLayoutProbe(browser: Browser, arimo: Buffer): Promise<NonNullable<RenderEnvironment['textLayout']>> {
   const page = await browser.newPage();
   try {
     await page.setContent(`<style>@font-face{font-family:probe;src:url(data:font/ttf;base64,${arimo.toString('base64')})}</style>`
-      + '<span style="font:13px probe;white-space:pre">Hamburgefonstiv 0123456789</span>');
+      + '<span style="font:13px probe;white-space:pre;color:#737373;background:#fff">Hamburgefonstiv 0123456789</span>');
     await page.evaluate('document.fonts.ready');
     const xs = (await page.evaluate(`(() => { const s = document.querySelector('span'), t = s.firstChild, x0 = s.getBoundingClientRect().left, xs = [];
       for (let i = 1; i < t.length; i++) { const r = document.createRange(); r.setStart(t, i); r.setEnd(t, i + 1); xs.push(r.getBoundingClientRect().left - x0); }
       return xs; })()`)) as number[];
     const fractional = xs.filter((x) => Math.abs(x - Math.round(x)) > 0.001).length;
     if (!fractional) throw Error(`pinned-browser-text-on-whole-pixels: every probe glyph landed on a whole pixel (expected args: ${PINNED_ARGS.join(' ')})`);
-    return { face: 'Arimo', size: 13, fractional: `${fractional}/${xs.length}` };
+    const { data } = PNG.sync.read(await page.locator('span').screenshot());
+    let fringePixels = 0;
+    for (let i = 0; i < data.length; i += 4) if (Math.max(data[i]!, data[i + 1]!, data[i + 2]!) - Math.min(data[i]!, data[i + 1]!, data[i + 2]!) > 2) fringePixels++;
+    if (fringePixels) throw Error(`pinned-browser-text-color-fringe: ${fringePixels} probe pixel(s) spread over 2 levels across channels (expected args: ${PINNED_ARGS.join(' ')})`);
+    return { face: 'Arimo', size: 13, fractional: `${fractional}/${xs.length}`, fringePixels };
   } finally { await page.close(); }
 }
 
