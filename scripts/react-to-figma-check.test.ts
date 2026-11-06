@@ -6,7 +6,7 @@ import type { DumpFile } from '../extract/figma/types.js';
 import { setRule } from './react-to-figma-check.js';
 import type { StoryComponent } from './storybook-reader.js';
 
-const run = (text: string, opacity = 1) => ({ text, color: 'rgb(0, 0, 0)', family: 'Arimo', weight: '400', opacity });
+const run = (text: string, opacity = 1, painted = ['Arimo']) => ({ text, color: 'rgb(0, 0, 0)', family: '-apple-system, sans-serif', weight: '400', opacity, painted });
 const component = (tones = ['success', 'error'], extra: Partial<StoryComponent['references'][number]> = {}): StoryComponent => ({
   title: 'Content/Badge', stories: tones.length, storyId: 'badge--success', grammar: { grammar: 'in', reasons: [] },
   matrix: { status: 'ok', axes: ['tone'], variants: tones.length }, ownRender: [], repeats: [], renderFailed: [], faces: [],
@@ -68,12 +68,12 @@ import type { FigmaContentResult } from './design-consumer-content.js';
 import { imageSha256 } from './design-consumer-framing-v2.js';
 import { judgeVariants } from './react-to-figma-check.js';
 const png = (rgb: number[]) => { const p = new PNG({ width: 20, height: 10 }); for (let i = 0; i < 200; i++) p.data.set([...rgb, 255], i * 4); return PNG.sync.write(p); };
-const judge = (o: { figma?: number[]; graphics?: Array<{ tag: string; box: { x: number; y: number; width: number; height: number } }>; ink?: number; fonts?: string[]; content?: false } = {}) => {
+const judge = (o: { figma?: number[]; graphics?: Array<{ tag: string; box: { x: number; y: number; width: number; height: number } }>; ink?: number; fonts?: string[]; content?: false; runs?: ReturnType<typeof run>[] } = {}) => {
   const dir = mkdtempSync(path.join(tmpdir(), 'react-to-figma-')), ref = png([0, 0, 255]), drawn = png(o.figma ?? [0, 0, 255]), box = { x: 16, y: 16, width: 20, height: 10 };
   writeFileSync(path.join(dir, 'success.png'), ref);
   const c = component(['success'], { png: 'success.png', faces: [{ family: 'Arimo', weight: 400, style: 'normal' }],
     frame: { layout: box, capture: box, deviceScaleFactor: 1, pngSha256: imageSha256(ref), raster: { kind: 'browser-paint-extent-v1', paint: box } },
-    content: { text: 'success', graphics: o.graphics ?? [], runs: [run('success')] } });
+    content: { text: 'success', graphics: o.graphics ?? [], runs: o.runs ?? [run('success')] } });
   const file = dump([{ ...variant('success'), nodeId: '1:2' }], ['success']);
   (file.Badge as { nodeId?: string }).nodeId = '1:1';
   const layout = { x: 100, y: 200, width: 20, height: 10 };
@@ -95,4 +95,16 @@ test('each variant of a set that counts is judged by the Figma to React check\'s
   assert.match(judge({ ink: 1 }).reasons.join(), /^text-color-mismatch:tone=success:"success":figma #ff0000 vs rendered #000000/);
   // A face Figma cannot load is font-blocked, never a pass or a failure; content not read is unverified.
   assert.deepEqual([judge({ fonts: ['Bold'] }).verdict, judge({ content: false }).verdict], ['font-blocked', 'unverified']);
+  // The reference's font is the face it was painted with, never its declared stack; a run painted by two families is
+  // unmeasured, by name.
+  const twoFaces = judge({ runs: [run('success', 1, ['Arimo', 'Noto Color Emoji'])] });
+  assert.equal(twoFaces.verdict, 'unverified');
+  assert.match(twoFaces.reasons.join(), /text-style-unmeasured:tone=success:"success":painted by several families \(Arimo, Noto Color Emoji\)/);
+  assert.match(judge({ runs: [run('success', 1, ['Tinos'])] }).reasons.join(), /text-font-mismatch:tone=success:"success":figma "Arimo" 400 vs rendered "Tinos" 400/);
+  // A run Chromium painted with no font (a checkbox's value) is not drawn: the written set need not draw it. A run
+  // whose paint was not read is unmeasured, never taken as not drawn.
+  assert.deepEqual([judge({ runs: [run('success'), run('on', 1, [])] }).verdict, judge({ runs: [run('success'), run('on', 1, [])] }).reasons], ['pass', []]);
+  const unread = judge({ runs: [{ ...run('success'), painted: undefined }] as unknown as ReturnType<typeof run>[] });
+  assert.equal(unread.verdict, 'unverified');
+  assert.match(unread.reasons.join(), /text-style-unmeasured:tone=success:"success":paint not read/);
 });

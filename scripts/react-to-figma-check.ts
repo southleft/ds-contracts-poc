@@ -20,7 +20,8 @@
  * side's role: images within the limit on white and on black (alignRecordedFrames on
  * the reference's paint-extent frame and the plugin capture's), size within 2 px
  * (consumerSizeCheck), every graphic the reference draws present (matchParts), and
- * every text in its color and font (compareTextStyles). A face Figma lacks makes the
+ * every text in its color and font (compareTextStyles; the font is the face Chromium
+ * painted, recorded by the reader per run). A face Figma lacks makes the
  * variant font-blocked (storyFontPreflight); a measurement not made is unverified.
  * Deterministic, no model call; frozen with the checker on 2026-11-20 (AGENTS.md rule 6).
  *
@@ -84,11 +85,12 @@ export function boundColors(set: DumpSet): { solid: number; bound: number } {
   return { solid, bound };
 }
 
-/** Text drawn by the reference (opacity above zero), or why it cannot be read. */
+/** Text drawn by the reference (opacity above zero, and not a run Chromium painted with no font: not drawn), or why it
+ *  cannot be read. */
 function drawnTexts(r: VariantReference): string[] | string {
   if (r.problem) return r.problem;
   if (!r.content) return r.contentProblem ?? 'reference-content-missing';
-  return (r.content.runs ?? []).filter((run) => run.opacity > 0).map((run) => run.text);
+  return (r.content.runs ?? []).filter((run) => run.opacity > 0 && run.painted?.length !== 0).map((run) => run.text);
 }
 
 export function setRule(component: StoryComponent, file: DumpFile, setName: string): SetRule {
@@ -154,7 +156,14 @@ export function judgeVariants(component: StoryComponent, rule: SetRule, set: Dum
     else {
       const figma = content.byNodeId[id]!;
       for (const g of matchParts(r.content.graphics, figma.parts).missing) problems.push(`content-missing:${key}:part:${g.tag}@${Math.round(g.box.x)},${Math.round(g.box.y)}`);
-      problems.push(...compareTextStyles(key, figma, r.content).problems);
+      // Figma text has one family and no fallback stack, so the reference's family is the face Chromium painted
+      // each run with, not the stack it declared. A run painted with no font is not drawn and left out; one painted by
+      // several families, or whose paint was not read, is unmeasured, by name.
+      const drawnRuns = (r.content.runs ?? []).filter((run) => run.painted?.length !== 0);
+      const runs = drawnRuns.map((run) => ({ ...run, family: run.painted?.length === 1 ? JSON.stringify(run.painted[0]) : '' }));
+      for (const run of drawnRuns) if (run.opacity > 0 && run.painted?.length !== 1)
+        problems.push(`text-style-unmeasured:${key}:${JSON.stringify(run.text.trim())}:${run.painted ? `painted by several families (${run.painted.join(', ')})` : 'paint not read'}`);
+      problems.push(...compareTextStyles(key, figma, { ...r.content, runs }).problems);
     }
     const verdict = !problems.length ? 'pass' as const : problems.every((p) => UNMEASURED.test(p)) ? 'unverified' as const : 'fail' as const;
     return { ...v, verdict, reasons: problems, ...(image ? { image } : {}) };
