@@ -301,6 +301,34 @@ and break no known cell. A0 is now practice and regression only.
       compile failure appears once, Atlassian's Shortcut (TS2367: a nested condition
       that can never hold inside its parent's). Receipts in
       `private/practice-compile-20261105` (git-ignored).
+- [x] Rank the practice failures by cause against the pinned-image baseline (662 of
+      944, regression only), measured on rendered output, never on flags. Receipts in
+      `private/climb-diagnosis-20261105` and `private/practice-compile-20261105`.
+      - Next converter class: geometry the dump lacks, drawn from the capture's SVG
+        (vector paths and boolean operations: HeroUI 1, Untitled 2; A0's remote icons
+        36 through the same path). It needs captures of HeroUI, Untitled and Material
+        3, which the owner is opening.
+      - Refusal families across the 204 corpus, by kits then sets: native image paint
+        (5, 10), structured property evidence missing (4, 7; a dump input gap),
+        visibility demand on owned parts (4, 7), source instance identity (4, 4),
+        contract schema misfits (3, 5), child paint order (3, 3). A refused nested
+        component becomes an empty stub in its parent (12 sets on 8 kits, Carbon's
+        Slot among them).
+      - Named limit: a remote library instance's contents are not in the dump. Only
+        drawings come back, through the capture's SVG; text and layout do not (MUI's
+        card header, 2). REST dumps stay frozen.
+      - Ruler properties, not converter: text gamma on light or transparent text
+        (Spectrum 6, Base UI's Field 6) and antialiased edges of small shapes (chakra's
+        Spinner 8, Spectrum's folder icon 3). Open: text sits 1 px
+        higher in the image than on the Mac and in Figma (Base UI, Spectrum, SDS); a
+        probe rules out the fonts' metrics.
+      - Not measured: 19 variants whose REST render export overflows the layout box
+        (Material 3 12, Untitled 6, Obra 1). A practice set with a capture uses it as
+        the reference for every variant.
+      - Single kit, no code (rule 8): Ant's avatar photo 8, Obra's per-variant nested
+        fills and sizes 4, SDS's text row drift 4, HeroUI's disabled slider 1, A0's
+        text trim 170 (Button 150, Badge 5, Avatar 15: text 2 to 6 px lower than
+        Figma's), Switch knob 3 and Card 6.
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 
