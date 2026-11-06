@@ -273,6 +273,27 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       (its top elements are not the children of one element). The 431 images are
       byte-identical to the 2026-11-05 run, two runs give byte-identical `stories.json`, and
       without the new fields it equals the 2026-11-05 one.
+- [x] Storybook reader, part 3b (parent session, 2026-11-06): each reference is the instance
+      alone, captured as the Figma to React check captures its own side
+      (`captureSubjectWithoutBackdrop`): ancestor background colors cleared and restored,
+      motion off (`NO_MOTION`, the consumer page's own rule), the image clipped to the paint
+      extent Chromium's layers report, and its frame recorded (`browser-paint-extent-v1`).
+      Before, all 431 of A0's references were opaque (the page and its theme decorator painted
+      white into them), so "on black" could not be measured. One screenshot first absorbs the
+      empty style attribute Playwright's caret hiding leaves on inputs. The paint-extent
+      promotion check now sets aside an out-of-flow node that paints nothing (clipped to no
+      area, hidden with all it holds, or an empty box); A0's visually hidden labels and a
+      closed dropdown panel had refused 115 references. Focus guards (empty boxes) are not top
+      elements. On A0: 411 of 431 captured alone (362 with transparency, 86 wider than the
+      layout box); 20 refused by name and counted unverified: AppLayoutSidebar 7 (a second top
+      element, a portal holding content), Combobox list primitives 5 and LoadingBlanket 1
+      (inside a painted ancestor), Text and TextLink 3 (inline, no layer), Details 3 (it opens
+      during the capture in Storybook's channel render, also after a 1 s wait), LoadingDots 1
+      (paints nothing when still). Restoration proof: after every capture, a shot by the old
+      method equals the 2026-11-05 image, 431 of 431. Two runs byte-identical; counts, grammar,
+      matrix and fonts unchanged. Figma to React practice baseline on this commit: 944 of 944
+      variants identical to `baseline-20261105-image-d` (one cell rerun after Figma's REST
+      answered HTTP 500).
 - [ ] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
       Figma set written from a library against the reader's references by GOAL.md's checks,
       with the Figma to React check's comparison code and its one image limit. A set counts
@@ -292,7 +313,9 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
-      and grouping decide the React to Figma denominator, its pinned image
+      and grouping decide the React to Figma denominator, its capture of each reference
+      alone at its paint extent (`captureSubjectWithoutBackdrop`, `observeConsumerPaintExtent`,
+      `NO_MOTION`), its pinned image
       (`scripts/storybook-reader-image/`), clock, timezone and locale, the plugin
       capture with its SVG builder, and the pinned Figma to React runner
       (`--pinned`), its `npm --before` date, the image's base digest, and the pinned

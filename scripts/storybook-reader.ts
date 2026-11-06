@@ -12,7 +12,7 @@
  * fails to render is named apart (an instrument fault) and never counted.
  * Part 2b then renders every expected variant (its story, with listed options
  * set through Storybook's own args channel) and keeps a PNG of the single
- * instance as the reference image (the library's own render, never the
+ * instance, alone (ancestor backgrounds cleared, its painted extent), as the reference image (the library's own render, never the
  * engine's), plus every platform font Chromium drew its text with, for the
  * React to Figma font preflight, and what it draws (text, text runs, graphics), read
  * after the screenshot by the Figma to React check's own collector. Every page is rendered in one pinned
@@ -37,6 +37,10 @@ import type { Browser, CDPSession, JSHandle } from 'playwright-core';
 import { PNG } from 'pngjs';
 import type { FontFace } from './font-preflight.js';
 import { domContentOf, type DomContent } from './design-consumer-content.js';
+import type { ConsumerFrame } from './design-consumer-framing-v2.js';
+import { captureSubjectWithoutBackdrop } from './design-consumer-observed-capture.js';
+import { EMPTY_BOX } from './design-consumer-paint-extent.js';
+import { NO_MOTION } from './design-consumer-check.js';
 
 export interface LoadedStory { id: string; title: string; name: string; argTypes: Record<string, StoryArgType>; args: Record<string, unknown>;
   /** The rendered story shows more than one instance of its component, or content beside it. */
@@ -47,7 +51,11 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
 export interface VariantReference extends VariantRender {
   /** The variant's value on each axis of the matrix rule: what a written Figma variant is paired by. */
   variant: Record<string, string>; png?: string; sha256?: string; box?: Box; faces?: FontFace[];
-  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty';
+  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty' | 'reference-capture-unqualified';
+  /** Why the instance could not be captured alone (the Figma to React check's own capture refusal, or not one element). */
+  captureRefused?: string;
+  /** The image's frame, recorded as the Figma to React check records its own side: layout box, capture box, painted extent. */
+  frame?: ConsumerFrame;
   /** What the instance draws (its text, text runs and graphics), read by the Figma to React check's own collector. */
   content?: DomContent; contentProblem?: 'reference-content-not-one-container' }
 type Box = { x: number; y: number; width: number; height: number };
@@ -80,6 +88,12 @@ export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
 export const INSTANCE_CONTAINER = `((elements) => { const parent = elements[0]?.parentElement;
   return parent && elements.every((e) => e.parentElement === parent) && parent.children.length === elements.length ? parent : null; })`;
 
+/** Mark the instance's one top element as the capture's subject and its parent as the capture's cell (cleared
+ *  first); false when the instance has more than one top element that is not an empty box (a focus guard). */
+export const MARK_SUBJECT = `(() => { for (const e of document.querySelectorAll('[data-ds-reader-subject], [data-ds-reader-cell]')) { e.removeAttribute('data-ds-reader-subject'); e.removeAttribute('data-ds-reader-cell'); }
+  const tops = (window.__dsReaderTops ?? []).filter((n) => !${EMPTY_BOX}(n)); if (tops.length !== 1 || !tops[0].parentElement) return false;
+  tops[0].setAttribute('data-ds-reader-subject', ''); tops[0].parentElement.setAttribute('data-ds-reader-cell', ''); return true; })()`;
+
 // Render one story through Storybook's own channel (`args` over its listed options), compact React's tree
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
 // its box, outward to whole pixels; its text elements are marked with their weight and style for the font
@@ -94,7 +108,7 @@ const SHOW = `(async ([id, args]) => {
     setTimeout(() => done('failed'), 20000);
     emit();
   });
-  window.__dsReaderContainer = null;
+  window.__dsReaderContainer = null; window.__dsReaderTops = [];
   let outcome = await wait('storyRendered', () => channel.emit('setCurrentStory', { storyId: id, viewMode: 'story' }));
   if (outcome === 'rendered' && Object.keys(args).length) outcome = await wait('storyArgsUpdated', () => channel.emit('updateStoryArgs', { storyId: id, updatedArgs: args }));
   await document.fonts.ready;
@@ -115,7 +129,7 @@ const SHOW = `(async ([id, args]) => {
   const tree = { c: build(live.child) };
   const elements = [], top = (f) => { for (let c = f; c; c = c.sibling) { if (c.stateNode instanceof Element) elements.push(c.stateNode); else top(c.child); } };
   if (instance) top(instance.child);
-  window.__dsReaderContainer = ${INSTANCE_CONTAINER}(elements);
+  window.__dsReaderContainer = ${INSTANCE_CONTAINER}(elements); window.__dsReaderTops = elements;
   const rects = elements.map((e) => e.getBoundingClientRect()).filter((r) => r.width && r.height);
   if (!rects.length) return { tree };
   for (const old of document.querySelectorAll('[data-ds-reader-text]')) old.removeAttribute('data-ds-reader-text');
@@ -281,11 +295,23 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
         // An instance that draws nothing (an empty layout, zero size) has no image to compare; it is named apart.
         const problem = !tree ? 'reference-render-failed' : !rendersOneInstance(tree) ? 'reference-not-one-instance' : !box ? 'reference-empty' : undefined;
         if (problem) { ref.problem = problem; continue; }
-        const png = await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
-        ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(png).digest('hex');
-        if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), png);
+        // The instance alone, captured as the Figma to React check captures its own side: ancestor background
+        // colors cleared and restored, the image clipped to the paint extent Chromium's layers report.
+        // Still, as the Figma to React page is (its own rule), for the capture only. Playwright hides the caret by
+        // setting and clearing each input's caret color, which leaves an empty style attribute; one screenshot first
+        // lets the capture's before-and-after checks start from that state.
+        await page.evaluate(`(() => { const s = document.createElement('style'); s.id = 'ds-reader-still'; s.textContent = ${JSON.stringify(NO_MOTION)}; document.head.appendChild(s); })()`);
+        await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
+        const captured = await page.evaluate(MARK_SUBJECT) ? await captureSubjectWithoutBackdrop(page, '[data-ds-reader-subject]', '[data-ds-reader-cell]') : { refused: 'reference-not-one-element' };
+        await page.evaluate(`document.getElementById('ds-reader-still').remove()`);
+        if ('refused' in captured) { ref.problem = 'reference-capture-unqualified'; ref.captureRefused = captured.refused; }
+        else {
+          ref.png = `${c.storyId}.${i}.png`; ref.box = box; ref.sha256 = createHash('sha256').update(captured.bytes).digest('hex');
+          ref.frame = { ...captured.frame, raster: { kind: 'browser-paint-extent-v1', paint: captured.paint } };
+          if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), captured.bytes);
+        }
         ref.faces = await drawnFaces(cdp);
-        // Read after the screenshot, so the image is never touched.
+        // Read after the capture, so the image is never touched.
         const container = (await page.evaluateHandle('window.__dsReaderContainer') as JSHandle<Element | null>).asElement();
         if (container) ref.content = await container.evaluate(domContentOf);
         else ref.contentProblem = 'reference-content-not-one-container';
