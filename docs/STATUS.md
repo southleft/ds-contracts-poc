@@ -329,6 +329,26 @@ and break no known cell. A0 is now practice and regression only.
         fills and sizes 4, SDS's text row drift 4, HeroUI's disabled slider 1, A0's
         text trim 170 (Button 150, Badge 5, Avatar 15: text 2 to 6 px lower than
         Figma's), Switch knob 3 and Card 6.
+- [x] Climb, image paint over a solid fill (the top family on measurable kits; parent
+      session, 2026-11-05): where the dump proves a node's visible fills are exactly a
+      SOLID under the IMAGE, the image becomes the background-image over the solid's
+      background-color, as a single image paint already did. The bytes were already in
+      the dumps (all 59 image paints match their Figma hash). An unproven stack is
+      refused by name (`paint-stack-below-image-unproven`: chakra), and image opacity
+      stays refused (SDS). Help, measured in the pinned image: Radix's Aspect Ratio 3
+      of 3 refused → pass, Ant's Heading 8 refused → pass. Named fails, not help: Ant's
+      avatar collapses (it is sized by rotated frames the dump cannot carry) 8. Ant's
+      legacy Page Header now draws the Avatar and Heading it stubbed (not measured
+      before): 1 pass, 7 fail, 8 font-blocked. 204 corpus: 196 packages
+      byte-identical, 2 sets newly proposed, 1 changed, 0 newly refused; practice
+      baseline unchanged (944 of 944).
+      Single kit since: source instance identity (Material 3's menu swaps to a local
+      density variant the converter does not link; Atlassian's and Carbon's swaps are
+      remote).
+- [ ] Measure the inferred `text-rendering: geometricPrecision` policy in both
+      launches (hinting off and full), with and without it, widths and vertical
+      position against Figma, before deciding on it (it costs 1 px of vertical
+      position on Linux; parent session, 2026-11-05).
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 
