@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFileSync} from 'node:fs';
-import {projectNativeImagePaints,nativeImageProjection} from './native-image-paint.js';
+import {projectNativeImagePaints,nativeImageProjection,imageOverSolidPaths} from './native-image-paint.js';
 import {proposeFromDump} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import {ContractSchema} from '../scripts/contract-schema.js';
@@ -27,6 +27,19 @@ test('unsupported original asset and affine/paint ownership refuse by name inste
  }
  assert.equal(projectNativeImagePaints(fixture(),undefined).notes.length,0,'older captures keep legacy semantics');
  assert(projectNativeImagePaints(fixture(),{original:{imageHash:'original',refused:'native-image-unavailable'}}).notes.some(n=>n.includes('not visual equivalence')));
+});
+test('an image over a solid fill is carried only where the dump proves the stack (SOLID, IMAGE)',()=>{
+ const over=():DumpSet=>{const s=fixture('FILL');Object.assign(s.variants[0],{fill:{hex:'ffffff'}});s.variants[0].imagePaints![0].index=1;return s;};
+ const proven=imageOverSolidPaths({_degradations:[{code:'paint-stack-truncated',nodePath:'CroppedBitmap:CroppedBitmap',message:'fill: 2 visible fill paints (SOLID, IMAGE) — dump v1.16 carries the first SOLID plus a GRADIENT_LINEAR above it only'},
+  {code:'paint-stack-truncated',nodePath:'Other:Other',message:'fill: 3 visible fill paints (SOLID, GRADIENT_LINEAR, IMAGE) — …'}]});
+ assert.deepEqual([...proven],['CroppedBitmap:CroppedBitmap']);
+ const r=projectNativeImagePaints(over(),assets,proven);
+ assert.equal(nativeImageProjection(r.set.variants[0])?.image,`url('data:image/png;base64,${bytes.toString('base64')}')`);
+ assert.throws(()=>projectNativeImagePaints(over(),assets),/native-image-paint-unqualified:.*:paint-stack-below-image-unproven/,'no proof');
+ const bare=over();delete (bare.variants[0] as {fill?:unknown}).fill;
+ assert.throws(()=>projectNativeImagePaints(bare,assets,proven),/paint-stack-below-image-unproven/,'no captured solid');
+ const faded=over();faded.variants[0].imagePaints![0].opacity=.2;
+ assert.throws(()=>projectNativeImagePaints(faded,assets,proven),/paint-stack-blend-opacity-or-filter/,'image opacity stays refused');
 });
 test('both generated React surfaces load original bytes and apply observed CROP through shipped tokens',async t=>{
  const {chromium}=await import('playwright-core'),{PNG}=await import('pngjs'),{mountGenerated}=await import('./react-test-runtime.js'),{emitReact}=await import('./emit-react.js'),{emitReactInline}=await import('./emit-react-inline.js'),{tokenInventoryFromJson}=await import('./tokens.js');

@@ -36,7 +36,7 @@ import {allocateInstanceAffine} from '../scripts/contract-schema.js';
 import {inferPresenceByCombination} from './infer-presence.js';
 import {resolvePresence, defaultSlotFamilyIssue, callerContentGroups} from '../scripts/contract-schema.js';
 import type {DumpHostOverride} from '../extract/figma/types.js';
-import {projectNativeImagePaints,nativeImageProjection} from './native-image-paint.js';
+import {projectNativeImagePaints,nativeImageProjection,imageOverSolidPaths} from './native-image-paint.js';
 import {projectNativeGroupPlanes} from './native-group-plane.js';
 import {qualifySolidFillColorBinding} from '../extract/figma/solid-fill-binding.js';
 import {inspectSolidFillColorBinding,SolidFillObservedBindingSchema,type SolidFillObservedBinding} from '../packages/schema/src/solid-fill-binding.js';
@@ -17252,6 +17252,8 @@ function proposeFromDumpFencedImpl(
      *  A set-only caller must supply known mode conflicts with its corpus. */
     capturedPaintModeConflicts?: ReadonlySet<string>;
     imageAssets?: Record<string,import('../extract/figma/types.js').DumpImageAsset>;
+    /** Image-over-solid stacks the dump proves (native-image-paint imageOverSolidPaths). */
+    imageOverSolid?: ReadonlySet<string>;
     /** ITERATION 8 — stub glyph carriage: instanceKey → exported SVG asset
      *  (assets/icons/<asset>.svg, exported at 1x from the stub source's MAIN
      *  component; the caller loads the export manifest). When every observed
@@ -17380,7 +17382,7 @@ function proposeFromDumpFencedImpl(
     if (mask) throw Error(`figma-mask-composition-unqualified:${mask}`);
   }
   const nativeGroupProjection=projectNativeGroupPlanes(set);
-  const nativeImagePaintProjection=projectNativeImagePaints(nativeGroupProjection.set,opts.imageAssets);
+  const nativeImagePaintProjection=projectNativeImagePaints(nativeGroupProjection.set,opts.imageAssets,opts.imageOverSolid);
   set=nativeImagePaintProjection.set;
   const retainedSelection = readFigmaSelectionApi(set);
   if (retainedSelection) set = retainedSelection.normalized;
@@ -20257,6 +20259,7 @@ function proposeBatchFromDumpInternal(
     capturedVariablePaths: capturedLayer?.variablePaths ?? opts.capturedVariablePaths,
     capturedPaintModeConflicts,
     imageAssets:opts.imageAssets??(dump as import('../extract/figma/types.js').DumpFile)._imageAssets,
+    imageOverSolid:imageOverSolidPaths(dump),
     contractIdByName,
     contractsById,
     childIntrinsicContexts,
