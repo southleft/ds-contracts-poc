@@ -93,3 +93,29 @@ test('a reference is the instance alone: page and decorator backgrounds cleared 
     assert.equal(await page.locator('[data-ds-reader-subject], [data-ds-reader-cell]').count(), 0);
   } finally { await browser.close(); }
 });
+
+import {paintRuns} from './storybook-reader.js';
+test('each content run keeps the families Chromium painted it with; the marks are removed, and the Figma to React collector marks nothing', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<div id="c"><p style="font-family: monospace">Ab<span style="font-family: serif">cd</span></p></div>`);
+    assert.deepEqual((await page.locator('#c').evaluate(domContentOf)).runs!.map(r => r.painted), [undefined, undefined]);
+    assert.equal(await page.locator('[data-ds-run]').count(), 0);
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+    const content = await page.locator('#c').evaluate(domContentOf, true);
+    assert.deepEqual(await page.locator('[data-ds-run]').evaluateAll(es => es.map(e => e.getAttribute('data-ds-run'))), ['0', '1']);
+    await paintRuns(cdp, content);
+    assert.equal(await page.locator('[data-ds-run]').count(), 0);
+    // A monospace and a serif run: one family each, and not the same one.
+    const [mono, serif] = content.runs!.map(r => r.painted!);
+    assert.deepEqual([mono!.length, serif!.length, mono![0] === serif![0]], [1, 1, false]);
+    // Form fields draw their text in a user-agent shadow root; generated content is its own node; a checkbox never
+    // draws its value, so it reads as painted with no font.
+    await page.setContent(`<style>.b::before{content:"Before"}</style><div id="f"><input value="Value" disabled><textarea>Area</textarea><input placeholder="Hint"><input type="checkbox"><span class="b"></span></div>`);
+    const fields = await page.locator('#f').evaluate(domContentOf, true);
+    await paintRuns(cdp, fields);
+    assert.deepEqual(fields.runs!.map(r => [r.text, r.painted!.length]), [['Value', 1], ['Area', 1], ['Hint', 1], ['on', 0], ['Before', 1]]);
+  } finally { await browser.close(); }
+});

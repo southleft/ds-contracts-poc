@@ -82,7 +82,9 @@ export interface FigmaPart { name: string; kind: 'icon' | 'vector'; box: Box; me
 export interface FigmaContent { texts: string[]; textStyles: FigmaTextRun[][]; parts: FigmaPart[] }
 export interface DomGraphic { tag: string; box: Box; members?: Box[] }
 /** A rendered text run as the page reports it: raw computed strings, parsed here. */
-export interface DomTextRun { text: string; color: string; family: string; weight: string; opacity: number }
+export interface DomTextRun { text: string; color: string; family: string; weight: string; opacity: number;
+  /** The platform families Chromium painted the run with (the Storybook reader; React to Figma compares these). */
+  painted?: string[] }
 export interface DomContent { text: string; graphics: DomGraphic[]; runs?: DomTextRun[] }
 export interface TextStyleRow { text: string; figma: string[]; rendered: string[]; color: 'match' | 'mismatch' | 'unmeasured'; font: 'match' | 'mismatch' | 'unmeasured' }
 export interface CaseContent {
@@ -387,9 +389,10 @@ export function caseContent(key: string, figma: FigmaContent, dom: DomContent): 
 
 /** What a cell renders, read in the page. `el` is the `[data-cell]` wrapper; boxes
  *  are relative to its first element child (the component root, which the
- *  screenshot frames). Serialized as text: tsx would otherwise inject its
- *  __name helper into the page. */
-export const domContentOf = new Function('el', `
+ *  screenshot frames). With `mark`, each run's owner element is left marked
+ *  `data-ds-run` (its run indices) for a caller that reads its painted faces.
+ *  Serialized as text: tsx would otherwise inject its __name helper into the page. */
+export const domContentOf = new Function('el', 'mark', `
   const root = el.firstElementChild || el;
   const origin = root.getBoundingClientRect();
   const texts = [el.innerText || ''];
@@ -442,7 +445,11 @@ export const domContentOf = new Function('el', `
   const runs = [];
   const opacityOf = (n) => { let a = 1; for (let e = n; e && e !== el; e = e.parentElement) { const o = parseFloat(getComputedStyle(e).opacity); if (o >= 0) a *= o; } return a; };
   const shows = (n) => typeof n.checkVisibility === 'function' ? n.checkVisibility({ visibilityProperty: true }) : true;
-  const push = (text, s, owner, svg, ownOpacity) => runs.push({ text, color: svg ? s.fill : (s.webkitTextFillColor || s.color), family: s.fontFamily, weight: s.fontWeight, opacity: opacityOf(owner) * ownOpacity });
+  const push = (text, s, owner, svg, ownOpacity) => {
+    runs.push({ text, color: svg ? s.fill : (s.webkitTextFillColor || s.color), family: s.fontFamily, weight: s.fontWeight, opacity: opacityOf(owner) * ownOpacity });
+    // On request, each run's owner is marked with its index, so the caller can read the faces it was painted with.
+    if (mark) owner.setAttribute('data-ds-run', ((owner.getAttribute('data-ds-run') || '') + ' ' + (runs.length - 1)).trim());
+  };
   const visit = (n) => {
     if (n.nodeType === 3) {
       const owner = n.parentElement;
@@ -465,7 +472,7 @@ export const domContentOf = new Function('el', `
   };
   visit(el);
   return { text: texts.join('\\n'), graphics, runs };
-`) as (el: Element) => DomContent;
+`) as (el: Element, mark?: unknown) => DomContent;
 
 export type FigmaContentResult =
   | { status: 'collected'; version: string | null; responseSha256: string; byNodeId: Record<string, FigmaContent> }

@@ -156,6 +156,44 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
   return [...new Map(faces.map((f) => [JSON.stringify(f), f])).values()].sort(byFace);
 }
 
+/** The platform families Chromium painted each content run with (Figma text has one family and no fallback stack,
+ *  so this, not the declared stack, is what React to Figma compares). Each owner the collector marked is read once,
+ *  then unmarked. A run is read from the node that draws it: a direct text child; a form field's text in its
+ *  user-agent shadow root (its light-DOM text, a textarea's default, is never drawn); generated content as its own
+ *  ::before or ::after node, matched by its computed content. A checkbox or radio never draws its value, so the
+ *  element's report is that run's paint. Any other run whose node is not reached keeps no `painted`: unread. */
+type CdpNode = { nodeType: number; nodeName: string; nodeValue: string; backendNodeId: number; pseudoType?: string;
+  attributes?: string[]; children?: CdpNode[]; shadowRoots?: CdpNode[]; pseudoElements?: CdpNode[] };
+export async function paintRuns(cdp: CDPSession, content: DomContent): Promise<void> {
+  const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
+  const { nodeIds } = await cdp.send('DOM.querySelectorAll', { nodeId: root.nodeId, selector: '[data-ds-run]' });
+  const families = async (id: number) => [...new Set((await cdp.send('CSS.getPlatformFontsForNode', { nodeId: id })).fonts.map((f) => f.familyName))].sort();
+  const texts = (n: CdpNode): CdpNode[] => [...(n.nodeType === 3 ? [n] : []), ...(n.children ?? []).flatMap(texts), ...(n.shadowRoots ?? []).flatMap(texts)];
+  for (const nodeId of nodeIds) {
+    const { attributes } = await cdp.send('DOM.getAttributes', { nodeId });
+    const node = (await cdp.send('DOM.describeNode', { nodeId, depth: -1, pierce: true })).node as unknown as CdpNode;
+    const field = node.nodeName === 'INPUT' || node.nodeName === 'TEXTAREA';
+    const textNodes = field ? (node.shadowRoots ?? []).flatMap(texts) : (node.children ?? []).filter((c) => c.nodeType === 3);
+    const pseudo = (node.pseudoElements ?? []).filter((p) => p.pseudoType === 'before' || p.pseudoType === 'after');
+    const ids = textNodes.length + pseudo.length
+      ? (await cdp.send('DOM.pushNodesByBackendIdsToFrontend', { backendNodeIds: [...textNodes, ...pseudo].map((n) => n.backendNodeId) })).nodeIds : [];
+    const drawn = textNodes.map((t, j) => ({ text: t.nodeValue, id: ids[j]! }));
+    for (const j of pseudo.keys()) {
+      const id = ids[textNodes.length + j]!, value = (await cdp.send('CSS.getComputedStyleForNode', { nodeId: id })).computedStyle.find((c) => c.name === 'content')?.value ?? '';
+      if (/^["']/.test(value)) drawn.push({ text: value.slice(1, -1), id });
+    }
+    const pairs = node.attributes ?? [], at = pairs.findIndex((a, k) => k % 2 === 0 && a === 'type');
+    const type = node.nodeName === 'INPUT' && at >= 0 ? pairs[at + 1]!.toLowerCase() : '';
+    const used = new Set<number>();
+    for (const i of attributes[attributes.indexOf('data-ds-run') + 1]!.split(' ')) {
+      const run = content.runs![Number(i)]!, k = drawn.findIndex((d, j) => !used.has(j) && d.text === run.text);
+      if (k >= 0) { used.add(k); run.painted = await families(drawn[k]!.id); }
+      else if (type === 'checkbox' || type === 'radio') run.painted = await families(nodeId);
+    }
+    await cdp.send('DOM.removeAttribute', { nodeId, name: 'data-ds-run' });
+  }
+}
+
 /** The one environment the reader renders in (owner conditions, 2026-11-01): an image built locally from
  *  storybook-reader-image/ (Playwright's image for this checkout's playwright-core, by digest, with the
  *  Croscore faces Figma lists in place of Liberation and the generic families set to them), on CI's
@@ -315,7 +353,7 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
         ref.faces = await drawnFaces(cdp);
         // Read after the capture, so the image is never touched.
         const container = (await page.evaluateHandle('window.__dsReaderContainer') as JSHandle<Element | null>).asElement();
-        if (container) ref.content = await container.evaluate(domContentOf);
+        if (container) { ref.content = await container.evaluate(domContentOf, true); await paintRuns(cdp, ref.content); }
         else ref.contentProblem = 'reference-content-not-one-container';
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
       }

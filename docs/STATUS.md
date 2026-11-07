@@ -302,6 +302,17 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       read the same phase, and a third run did not. The rule (`NO_MOTION`) now covers the whole of
       pass 2; pass 1 reads only React's tree. Three A0 runs byte-identical; against part 3b's run,
       no image or box changed, only LoadingDots' content.
+- [x] Storybook reader, part 3d, and the React to Figma text font (parent session, 2026-11-06):
+      Figma text has one family and no fallback stack, so a reference's family is the face
+      Chromium painted each run with, not the stack it declared. A0 declares `-apple-system` and
+      paints Arimo, and the first live write compared the two. The reader records each run's
+      painted families from the node that draws it: its text node, a form field's user-agent
+      shadow text, or generated content's own node. A checkbox or radio value never draws. The
+      check compares that face. A run painted with no font is not drawn and left out; one painted
+      by several families, or unread, is unmeasured by name. Figma to React's first-declared-family
+      comparison is unchanged. A0: 2,166 runs, 2,124 with one painted face (Arimo 2,103, Tinos 14,
+      Cousine 7), 42 not drawn (checkbox, radio and switch values; 1 visible, Switch's "on"),
+      0 painted by several faces, 0 unread.
 - [ ] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
       Figma set written from a library against the reader's references by GOAL.md's checks,
       with the Figma to React check's comparison code and its one image limit. A set counts
