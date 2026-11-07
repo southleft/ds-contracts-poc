@@ -133,7 +133,7 @@ test('native runtime collapses an empty bare slot but preserves an independently
   const {contract,result}=f.read(),scope=new Map([[contract.id,contract],[f.child.id,f.child]]);
   const engine=createFigmaEngine({tokens:{primitives:{mark:{size:{$type:'dimension',$value:'24px'}},...result.mintedTokens?.tree},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
   assert.equal(Boolean(engine.compileComponentData(contract,scope).codeOnlyFacts?.some(fact=>fact.channel==='slot.collapseWhenEmpty')),bare);
-  const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+  const {figma,root}=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
   const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
   await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));await run(engine.buildComponentScript(contract,scope));
   const holder=root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===contract.id)!;assert(holder);
@@ -228,7 +228,7 @@ test('native populated collapsing slot retains its own Boolean but refuses unkno
  for(const shown of [true,false]){
   const contract=ContractSchema.parse({id:'ds.gated-slot',name:'GatedSlot',version:'0.1.0',status:'draft',description:'Populated gated slot',semantics:{element:'div'},props:[{name:'show',type:'boolean',default:shown,bindings:{figma:{kind:'BOOLEAN',property:'Show icon'},code:{prop:'show'}}}],states:[],anatomy:{root:{parts:{icon:{slot:{name:'children',collapseWhenEmpty:true,renderDefault:true,defaultContent:[{id:f.child.id}]},visibleWhen:{prop:'show'}}}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./GatedSlot',export:'GatedSlot'}}}});
   const scope=new Map([[contract.id,contract],[f.child.id,f.child]]),engine=createFigmaEngine({tokens:{primitives:{mark:{size:{$type:'dimension',$value:'24px'}}},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
-  const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+  const {figma,root}=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
   const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
   await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));await run(engine.buildComponentScript(contract,scope));
   const owner=root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===contract.id)!;

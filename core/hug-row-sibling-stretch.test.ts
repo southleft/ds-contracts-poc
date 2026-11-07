@@ -50,7 +50,7 @@ test('an independently sized sibling drives a zero-width label host on both Reac
  }
  const engine=createFigmaEngine({tokens:p.tokens,icons:new Map()}),data=engine.compileComponentData(p.contract,p.contracts);
  for(const v of data.variants){assert.equal(v.spec.children![0].fillH,true);assert.equal(v.spec.children![1].fillH,undefined);}
- const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+ const {figma,root}=createFigmaMock({fileKey:'fixture-file'}),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context,{timeout:20000});
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(p.contract,p.contracts));
  const set=root.findOne((n:any)=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===p.contract.id);assert(set);

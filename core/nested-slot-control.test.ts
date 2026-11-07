@@ -51,7 +51,7 @@ test('native generation carries selected nested content and preserves the shared
  const f=fixture();f.proposals[0].contract.anatomy.root.text='Default glyph';f.proposals[1].contract.anatomy.root.text='Selected glyph';f.run();
  const scope=new Map(f.proposals.map(p=>[p.contract.id,ContractSchema.parse(p.contract)]));
  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
- const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const host=createFigmaMock({fileKey:'file'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  for(const p of f.proposals)await run(engine.buildComponentScript(ContractSchema.parse(p.contract),scope));
  const owner=host.root.findOne(n=>['COMPONENT','COMPONENT_SET'].includes(n.type)&&n.getSharedPluginData('ds_contracts','contractId')==='ds.owner')!;

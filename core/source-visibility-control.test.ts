@@ -48,7 +48,7 @@ test('captured character identity creates an editable child text control and pre
  assert(cc.variants.every(v=>descendants(v.spec).some(n=>n.characters==='Underline'&&n.contentProp===text.bindings.figma.property)));
  assert(pc.variants.every(v=>descendants(v.spec).some(n=>n.depProps?.[text.bindings.figma.property!]==='optional')));
  const vm=await import('node:vm'),{createFigmaMock}=await import('../scripts/plugin-engine-mock-figma.mjs');
- const mock=createFigmaMock(),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext('(async()=>{'+script+'\n})()',context);
+ const mock=createFigmaMock({fileKey:'file'}),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext('(async()=>{'+script+'\n})()',context);
  await run(native.buildTokensScript(null));await run(native.buildComponentScript(child,scope));await run(native.buildComponentScript(parent,scope));
  const hostSet=mock.root.findOne(n=>(n.type==='COMPONENT_SET'||n.type==='COMPONENT')&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
  const instance=hostSet.findOne(n=>n.type==='INSTANCE')!;assert(instance);
@@ -111,7 +111,7 @@ for(const isSet of [false,true])test(`guarded instance-property amendments prese
  const merge=(a:any,b:any)=>{for(const [k,v]of Object.entries(b??{})){if(v&&typeof v==='object'&&!Array.isArray(v))a[k]=merge(a[k]??{},v);else a[k]=v;}return a;};
  const tokens={primitives:r.proposals.reduce((a,p)=>merge(a,p.mintedTokens?.tree),{}),semantic:{},light:{},dark:{},brands:{default:{}}},scope=new Map(contracts.map(c=>[c.id,c]));
  const {createFigmaEngine}=await import('./emit-figma-script.js'),{createFigmaMock}=await import('../scripts/plugin-engine-mock-figma.mjs'),vm=await import('node:vm');
- const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(s:string)=>vm.runInContext('(async()=>{'+s+'\n})()',context);
+ const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock({fileKey:'file'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(s:string)=>vm.runInContext('(async()=>{'+s+'\n})()',context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(child,scope));await run(engine.buildComponentScript(parent,scope));
  const owner=host.root.findOne(n=>n.type===(isSet?'COMPONENT_SET':'COMPONENT')&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!,inst=owner.findOne(n=>n.type==='INSTANCE')!;
  const ids=owner.findAll().map(n=>n.id),definitions=JSON.stringify(owner.componentPropertyDefinitions),before=engine.compileComponentData(parent,scope),next=engine.compileComponentData(after,scope),script=engine.buildBatchScript([next],null,[before]);

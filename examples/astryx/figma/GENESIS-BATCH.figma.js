@@ -722,8 +722,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -3632,8 +3632,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -6739,8 +6739,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -9371,8 +9371,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -11979,8 +11979,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -14468,8 +14468,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -18364,8 +18364,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -21635,8 +21635,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -25253,8 +25253,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -28872,8 +28872,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -30809,8 +30809,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -32801,8 +32801,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();
@@ -35136,8 +35136,8 @@ const COMPONENTS = [
 const ROW_H = 240, PAD = 40;
 
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();

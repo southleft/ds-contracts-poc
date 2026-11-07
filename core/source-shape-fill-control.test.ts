@@ -32,7 +32,7 @@ for(const sourceType of ['RECTANGLE','ELLIPSE','FRAME'])test(`source ${sourceTyp
    for(const [value,count] of [['one',1],['two',0],['one',1]] as const){await render({caseProp:value});assert.equal(await page.locator('#root').evaluate(n=>Array.from(n.querySelectorAll('*')).filter(x=>(x as HTMLElement).style.backgroundColor==='rgba(0, 128, 64, 0.5)').length),count);}
   }finally{await page.close();}
  }}finally{await browser.close();}
- const engine=createFigmaEngine(ctx),mock=createFigmaMock(),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext('(async()=>{'+script+'\n})()',context);
+ const engine=createFigmaEngine(ctx),mock=createFigmaMock({fileKey:'file'}),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext('(async()=>{'+script+'\n})()',context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(cc,contracts));await run(engine.buildComponentScript(pc,contracts));
  const host=mock.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===pc.id)!;
  const instances=host.findAll(n=>n.type==='INSTANCE');assert.equal(instances.length,2);

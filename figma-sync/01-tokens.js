@@ -14,10 +14,10 @@ const SEMANTIC = [{"name":"space/inset-x/sm","type":"FLOAT","light":"space/150",
 const TEXT_STYLES = [{"name":"avatar/md","tokenPath":"font.avatar.size.md","fontSize":14,"fontStyle":"Medium"},{"name":"avatar/sm","tokenPath":"font.avatar.size.sm","fontSize":12,"fontStyle":"Medium"},{"name":"badge","tokenPath":"font.badge.size","fontSize":12,"fontStyle":"Medium"},{"name":"control/lg","tokenPath":"font.control.size.lg","fontSize":18,"fontStyle":"Medium"},{"name":"control/md","tokenPath":"font.control.size.md","fontSize":16,"fontStyle":"Medium"},{"name":"control/sm","tokenPath":"font.control.size.sm","fontSize":14,"fontStyle":"Medium"},{"name":"title","tokenPath":"font.title.size","fontSize":16,"fontStyle":"Semi Bold"}];
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
-// file — never write without verifying the target.
+// file — never write without verifying the target, nor when Figma names none.
 const EXPECTED_FILE_KEY = "8nim1d0IPnehMxA7B7SYxC";
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 function hexToRgb(value) {

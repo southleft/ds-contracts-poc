@@ -75,6 +75,8 @@ export interface MockOptions {
   modeLimit?: number | null;
   /** Opt in to native setProperties re-selecting the instance's main variant. */
   instanceVariantSelection?: boolean;
+  /** The key `figma.fileKey` reports; omitted = null, a file Figma gives no key for. */
+  fileKey?: string | null;
 }
 
 export declare function createFigmaMock(options?: MockOptions): {

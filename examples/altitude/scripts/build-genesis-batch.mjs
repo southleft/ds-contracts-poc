@@ -44,7 +44,7 @@ figma.notify('Altitude genesis complete: tokens + ${componentScripts.length} com
 `;
 
 // refuse-to-write proof: the EXACT output must run headlessly end to end
-const mock = createFigmaMock();
+const mock = createFigmaMock({ fileKey: /const EXPECTED_FILE_KEY = "([^"]+)"/.exec(out)?.[1] ?? null }); // the file the scripts name
 const ctx = vm.createContext({ figma: mock.figma, console: { log() {}, warn() {}, error() {} } });
 await vm.runInContext(`(async () => {\n${out}\n})()`, ctx, { timeout: 300_000 });
 // A component with no enum axes (Tabs) builds as a STANDALONE COMPONENT, not

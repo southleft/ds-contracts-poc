@@ -1476,7 +1476,7 @@ export function createFigmaMock(options = {}) {
 
   const figma = {
     mixed,
-    fileKey: null,
+    fileKey: options.fileKey ?? null,
     skipInvisibleInstanceChildren: false,
     root,
     currentPage: firstPage,
