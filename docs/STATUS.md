@@ -337,6 +337,17 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         Figma to React practice baseline on this commit: 944 of 944 variants identical to
         `baseline-20261105-image-d`. Proven on fixtures only: no set written from a library
         exists yet (writable Figma file pending with the owner).
+      - Part 3, a plugin capture's painted extent, in. The plugin's layout export is clipped to
+        the box, so where paint reaches past a side, the box's outer pixel row or column there
+        is composited differently. On the live write, Card's shadow variant differed on 6
+        pixels, all on that ring, and was refused (`render-export-overlap-mismatch`). For a
+        plugin capture only, and only after the exact comparison is refused, that row or
+        column is left out on each side paint reaches past and named in the proof
+        (`edgeRing`). A shifted interior is still refused, with no value tolerance. REST
+        exports are unchanged. Live write: Card's shadow variant is now measured (5.92% on
+        white, 20.93% on black, so it still fails); no other variant changed.
+      - Next, rule 10: one Figma to React render (`untitled-ui-free/1102-5338`, success on a
+        dark circle) alternates between two PNGs. No verdict moves.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
