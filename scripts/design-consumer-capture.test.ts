@@ -44,6 +44,12 @@ test('a node that moved during the export, another set, another file or an old c
   assert.equal(run(t,capture(c=>{c.version=1;})).reason,'capture-kind-unsupported');
 });
 
+test('a capture applies the edge-ring rule: only the box\'s outer column on a side paint reaches past differs',t=>{
+  const ringed=png(11,6,(x,y)=>x<3?[200,20,30,128]:x===3?[200,20,30,40]:ink(x-3,y));
+  const r=run(t,capture(c=>{c.variants[1]!.paint!.png=b64(ringed);}));
+  assert.deepEqual((r.frames['1:3']!.raster as {proof:{edgeRing?:unknown}}).proof.edgeRing,{sides:['left'],pixels:6});
+});
+
 test('a fractional painted-extent offset stays unqualified, as it does for REST exports',t=>{
   const r=run(t,capture(c=>{c.variants[1]!.paint!.bounds.x=7.5;c.variants[1]!.after.render.x=7.5;}));
   assert.equal(r.frames['1:3']!.refused,'render-export-fractional-origin');

@@ -8,7 +8,8 @@
  * qualifyRenderBoundsExport proves a painted extent against its layout box
  * exactly as it does for REST. Raster kinds name the plugin as the source.
  * Not here (named, not guessed): the REST-only source-anchor rescue for an
- * overlap mismatch, which needs the node's full document.
+ * overlap mismatch, which needs the node's full document. Here instead, and
+ * only after an exact comparison is refused: the edge-ring rule (`ring`).
  */
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -46,7 +47,7 @@ export function figmaImagesFromCapture(capture: PluginCapture, expected: { fileK
   const verified = figmaFramesFromSnapshots(before, after, layouts, FIGMA_PLUGIN_LAYOUT_BOX);
   if (!verified.refused) for (const id of Object.keys(paints)) {
     const frame = verified.frames[id]!;
-    const result = qualifyRenderBoundsExport(before, after, id, layouts[id]!, paints[id]!);
+    const result = qualifyRenderBoundsExport(before, after, id, layouts[id]!, paints[id]!, true);
     if ('refused' in result) { frame.refused = result.refused; continue; }
     writeFileSync(files[id]!, paints[id]!);
     frame.pngSha256 = imageSha256(paints[id]!);

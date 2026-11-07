@@ -25,6 +25,16 @@ test('wrong origin, missing ink, wrong cell and truncated exports are refused',(
  assert.deepEqual(qualifyRenderBoundsExport(snapshot,snapshot,'1:1',layout,png(10,6,ink)),{refused:'render-export-span-mismatch'});
  assert.deepEqual(qualifyRenderBoundsExport(snapshot,snapshot,'1:1',png(7,6,ink),outside),{refused:'layout-export-span-mismatch'});
 });
+test('with the edge-ring rule, only the outer row or column on a side paint reaches past may differ',()=>{
+ const ringed=png(11,6,(x,y)=>x<3?[200,20,30,128]:x===3?[200,20,30,40]:ink(x-3,y));
+ assert.deepEqual(qualifyRenderBoundsExport(snapshot,snapshot,'1:1',layout,ringed),{refused:'render-export-overlap-mismatch'},'without it (REST), exact');
+ const result=qualifyRenderBoundsExport(snapshot,snapshot,'1:1',layout,ringed,true);
+ assert('proof'in result);assert.deepEqual([result.proof.edgeRing,result.proof.overlapPixels,result.proof.paintedOverlapPixels],[{sides:['left'],pixels:6},42,1]);
+ // An exact pair keeps its exact proof. A 1 px content shift, or a ring difference on a side paint stays inside, is refused.
+ const exact=qualifyRenderBoundsExport(snapshot,snapshot,'1:1',layout,outside,true);assert('proof'in exact&&exact.proof.edgeRing===undefined);
+ const shifted=png(11,6,(x,y)=>x<3?[200,20,30,128]:ink(x-4,y)),right=png(11,6,(x,y)=>x<3?[200,20,30,128]:x===10?[1,2,3,4]:ink(x-3,y));
+ for(const image of [shifted,right])assert.deepEqual(qualifyRenderBoundsExport(snapshot,snapshot,'1:1',layout,image,true),{refused:'render-export-overlap-mismatch'});
+});
 test('unobservable origins, changed source and fractional translations stay unqualified',()=>{
  const s=frame({x:0,y:0,width:8,height:6},{x:0,y:0,width:8,height:6});
  for(const color of [[0,0,0,0],[20,30,40,255]]){const p=png(8,6,()=>color);assert.deepEqual(qualifyRenderBoundsExport(s,s,'1:1',p,p),{refused:'render-export-origin-unobservable'});}
