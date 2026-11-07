@@ -35,7 +35,7 @@ test('compiler writes a proven bound receiver after content and refuses missing 
     assert.throws(()=>engine.compileComponentData(f.c,f.contracts));
     assert.throws(()=>engine.buildComponentScript(f.c,f.contracts));
     part.solidFillCompositionSourceBinding=proof;
-    const {figma}:any=createFigmaMock();
+    const {figma}:any=createFigmaMock({fileKey:'BMjUA2ue5CaZXU4kufxL0z'});
     const script=engine.buildComponentScriptDraftPaintQualification(f.c,f.contracts,figma.fileKey,f.tokens.primitives);
     const result=await vm.runInNewContext('(async()=>{'+script+'})()', {figma,console:{log(){},warn(){},error(){}}});
     assert.equal(result.createdNodeIds.length,1);
@@ -76,7 +76,7 @@ test('compiler-generated live receiver independently verifies',()=>{
 test('post-layout sizing repairs fractional receivers only in the stamped subtree',async()=>{
   const {BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME}=await import('./solid-fill-composition-native.js');
   const {createFigmaMock}=await import('../scripts/plugin-engine-mock-figma.mjs');
-  const figma:any=createFigmaMock().figma;
+  const figma:any=createFigmaMock({fileKey:'BMjUA2ue5CaZXU4kufxL0z'}).figma;
   const {apply,settle}=new Function('figma',BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME+';return {apply:applyBoundSolidFillLayer,settle:settleBoundSolidFillLayers};')(figma);
   const collection=figma.variables.createVariableCollection('Fractional paint');
   const variable=figma.variables.createVariable('paint',collection,'COLOR');

@@ -63,7 +63,7 @@ figma.notify('MUI genesis complete: tokens + ${expectedSets} component sets + ${
 `;
 
 // refuse-to-write proof: the EXACT output must run headlessly end to end
-const mock = createFigmaMock();
+const mock = createFigmaMock({ fileKey: /const EXPECTED_FILE_KEY = "([^"]+)"/.exec(out)?.[1] ?? null }); // the file the scripts name
 const ctx = vm.createContext({ figma: mock.figma, console: { log() {}, warn() {}, error() {} } });
 await vm.runInContext(`(async () => {\n${out}\n})()`, ctx, { timeout: 300_000 });
 const sets = mock.root.findAll((n) => n.type === 'COMPONENT_SET');

@@ -1610,10 +1610,10 @@ const SEMANTIC = ${JSON.stringify(sem)};
 const TEXT_STYLES = ${JSON.stringify(derivedTextStyles)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
-// file — never write without verifying the target.
+// file — never write without verifying the target, nor when Figma names none.
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 function hexToRgb(value) {
@@ -9734,8 +9734,8 @@ ${fillStackAssetSource}const COMPONENTS = ${componentSource};${opts.propertyAmen
 const ROW_H = 240, PAD = 40;${hasFillStack ? '\n'+NATIVE_FILL_STACK_RUNTIME : ''}${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
 
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 await figma.loadAllPagesAsync();

@@ -169,7 +169,7 @@ test('native imported fixed content is linked inside the slot without changing i
   const f = fixedContentFixture(), parent = ContractSchema.parse(f.propose().contract);
   f.scope.set(parent.id, parent);
   const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const host = createFigmaMock(), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+  const host = createFigmaMock({fileKey:'fixture'}), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
   const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
   await run(engine.buildTokensScript(null));
   for (const dependency of [f.sample, f.target, f.child]) await run(engine.buildComponentScript(dependency, f.scope));
@@ -215,7 +215,7 @@ test('native named-slot fixed content is linked inside the slot without changing
   const parent = ContractSchema.parse(f.propose().contract);
   f.scope.set(parent.id, parent);
   const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const host = createFigmaMock(), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+  const host = createFigmaMock({fileKey:'fixture'}), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
   const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
   await run(engine.buildTokensScript(null));
   for (const dependency of [f.sample, f.target, f.child]) await run(engine.buildComponentScript(dependency, f.scope));
@@ -372,7 +372,7 @@ test('native enum lookups respect BOOLEAN controls, boolean VARIANT labels and s
       const child = variant.spec.children!.find(n => n.name === 'lamp')!;
       assert.equal(child.depProps!.Powered, expected(variant.name === 'Mode=Alert'), kind);
     }
-    const host = createFigmaMock();
+    const host = createFigmaMock({fileKey:'fixture'});
     const context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
     const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
     await run(engine.buildTokensScript(null));
@@ -804,7 +804,7 @@ test('boolean parent lookup refuses absent and contradictory child values', () =
 test('boolean parent lookup selects the captured child enum on the Figma writer', async () => {
   const f = booleanToEnumFixture(), {contract} = propose(f), scope = new Map([[contract.id, contract], [f.child.id, f.child]]);
   const engine = createFigmaEngine({tokens: {primitives: {}, semantic: {}, light: {}, dark: {}, brands: {default: {}}}, icons: new Map()});
-  const host = createFigmaMock(), context = vm.createContext({figma: host.figma, console: {log() {}, warn() {}, error() {}}});
+  const host = createFigmaMock({fileKey:'fixture'}), context = vm.createContext({figma: host.figma, console: {log() {}, warn() {}, error() {}}});
   const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
   await run(engine.buildTokensScript(null));
   await run(engine.buildComponentScript(f.child, scope));
@@ -960,7 +960,7 @@ test('root inputs refuse undeclared APIs, style collisions and competing subtree
 });
 
 test('native root inputs preserve child main geometry and resolve variant usage independently',async()=>{
- const f=instanceRootInputFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const f=instanceRootInputFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,f.scope));
  const main=host.root.findOne(n=>['COMPONENT_SET','COMPONENT'].includes(n.type)&&n.getSharedPluginData('ds_contracts','contractId')===f.child.id)!;
@@ -972,7 +972,7 @@ test('native root inputs preserve child main geometry and resolve variant usage 
 });
 
 test('indexed native identity lookup preserves ambiguity checks and sees changes between calls',()=>{
- const f=instanceRootInputFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock();
+ const f=instanceRootInputFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'});
  const script=engine.buildComponentScript(f.parent,f.scope);
  const source=script.slice(script.indexOf('function isSyncTarget('),script.indexOf('function setInstanceProps('));
  const page=host.figma.currentPage as any,find=page.findAllWithCriteria.bind(page);let indexedCalls=0;
@@ -997,7 +997,7 @@ test('native instance root opacity uses unit values without percent-scaled varia
  const f=instanceRootInputFixture();f.child.anatomy.root.instanceRootInputs!.push('opacity');
  f.parent.anatomy.root.parts!.usage.component!.rootOverrides!.opacity='{usage.opacity}';
  const values=f.tokens.primitives.usage as Record<string,unknown>;
- const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  for(const opacity of [0,0.7,1]){
   values.opacity={$type:'number',$value:opacity};
@@ -1146,7 +1146,7 @@ test('keyed child replacements refuse unlinked identities and unsupported placem
 });
 
 test('native keyed replacement branches select the correct child identity in each source plane',async()=>{
- const f=keyedIdentitySwapFixture(),parent=ContractSchema.parse(f.run().contract),scope=new Map([parent,f.child,f.second].map(c=>[c.id,c])),engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const f=keyedIdentitySwapFixture(),parent=ContractSchema.parse(f.run().contract),scope=new Map([parent,f.child,f.second].map(c=>[c.id,c])),engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context);
  await run(engine.buildComponentScript(f.child,scope));await run(engine.buildComponentScript(f.second,scope));await run(engine.buildComponentScript(parent,scope));
  const set=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
@@ -1175,7 +1175,7 @@ test('source-qualified caller opacity uses unitless tokens and preserves child d
    await mountGenerated(page,f.child.name,c[0].contents,c.find(x=>x.path.endsWith('.css'))?.contents);await page.addStyleTag({content:mintedTokenCss(tokens.primitives)});assert.equal(await page.locator('#root > *').evaluate(n=>getComputedStyle(n).opacity),'0.8');
   }finally{await page.close()}
  }
- const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(s:string)=>vm.runInContext(`(async()=>{${s}\n})()`,context);
+ const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(s:string)=>vm.runInContext(`(async()=>{${s}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));await run(engine.buildComponentScript(parent,scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
  for(const variant of owner.children!){const use=variant.findOne(n=>n.type==='INSTANCE')!;assert.equal(use.opacity,variant.name.toLowerCase().includes('true')?.38:1);}
@@ -1220,7 +1220,7 @@ test('fresh batch declares generated opacity before resolving callers on both Re
    await mountGenerated(page,child.name,c[0].contents,c.find(f=>f.path.endsWith('.css'))?.contents);await page.addStyleTag({content:mintedTokenCss(primitives)});assert.equal(await page.locator('#root > *').evaluate(n=>getComputedStyle(n).opacity),'0.8');
   }finally{await page.close()}
  }
- const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
+ const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(child,scope));
  const main=host.root.findOne(n=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===child.id)!;assert.equal(main.opacity,.8);
  await run(engine.buildComponentScript(parent,scope));const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
@@ -1485,7 +1485,7 @@ test('multiple caller slots preserve both React payloads and native linked conte
  f.scope.set(parent.id,parent);const ctx={contracts:f.scope,tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map<string,string>()};
  const browser=await chromium.launch();t.after(()=>browser.close());
  for(const emitter of [reactEmitter,reactInlineEmitter]){const files=emitter.emit(parent,ctx),deps=Object.fromEntries([...f.scope.values()].filter(c=>c.id!==parent.id).map(c=>{const fs=emitter.emit(c,ctx);return[c.name,{tsx:fs[0].contents,css:fs.find(f=>f.path.endsWith('.css'))?.contents}];}));const page=await browser.newPage();try{const render=await mountGenerated(page,parent.name,files[0].contents,files.find(f=>f.path.endsWith('.css'))?.contents,deps);for(const power of [false,true,false]){await render({power});assert.equal(await page.getByText('Actual label',{exact:true}).count(),1);assert.equal(await page.getByText('Selected content',{exact:true}).count(),1);assert.equal(await page.getByText('Sample only',{exact:true}).count(),0);}}finally{await page.close();}}
- const engine=createFigmaEngine(ctx),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
+ const engine=createFigmaEngine(ctx),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  await run(engine.buildTokensScript(null));for(const c of [f.sample,f.target,f.child])await run(engine.buildComponentScript(c,f.scope));
  const main=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===f.child.id)!;const before=main.findAll().map(n=>[n.id,n.type,n.name,n.characters]);
  await run(engine.buildComponentScript(parent,f.scope));assert.deepEqual(main.findAll().map(n=>[n.id,n.type,n.name,n.characters]),before);
@@ -1524,7 +1524,7 @@ test('outside stroke updates only the selected usage in both React surfaces and 
     assert.equal(values[0].stroke,density?'4px':'2px');assert.equal(values[0].color,'rgb(255, 255, 255)');assert.equal(values[0].width,24);assert.equal(values[0].height,24);assert.notEqual(values[1].color,'rgb(255, 255, 255)');}
   }finally{await page.close();}
  }
- const engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,f.scope));await run(engine.buildComponentScript(f.parent,f.scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===f.parent.id)!;
@@ -1604,7 +1604,7 @@ test('joint Boolean child arguments preserve two-axis values, source identity an
         }
       } finally { await page.close(); }
     }
-    const engine = createFigmaEngine({ tokens, icons: new Map() }), host = createFigmaMock();
+    const engine = createFigmaEngine({ tokens, icons: new Map() }), host = createFigmaMock({fileKey:'fixture'});
     const context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
     const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
     await run(engine.buildTokensScript(null)); await run(engine.buildComponentScript(f.child, scope));
@@ -1684,7 +1684,7 @@ test('joint enum child selection preserves three-axis observations and refuses i
    }
   }finally{await page.close();}
  }
- const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));await run(engine.buildComponentScript(result.contract,scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===result.contract.id)!;
@@ -1706,7 +1706,7 @@ test('conditional fixed swaps select caller content on both React surfaces and n
    for(const power of [false,true,false]){await render({[parent.props.find(p=>p.bindings.figma.kind==='VARIANT')!.bindings.code.prop]:power});assert.equal(await page.getByText('Selected content',{exact:true}).count(),power?0:1);assert.equal(await page.getByText('Sample only',{exact:true}).count(),power?1:0);}
   }finally{await page.close();}
  }
- const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const engine=createFigmaEngine({tokens,icons:new Map()}),host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(s:string)=>vm.runInContext(`(async()=>{${s}\n})()`,context);await run(engine.buildTokensScript(null));
  for(const c of [f.sample,f.target,f.child,parent])await run(engine.buildComponentScript(c,f.scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;
@@ -1912,7 +1912,7 @@ test('cross-axis root fill follows parent resizing on both React surfaces and co
  }
  const native=createFigmaEngine({tokens:f.tokens,icons:new Map()}).compileComponentData(f.parent,f.scope);
  for(const v of native.variants){assert.equal(v.spec.children![0].fillW,true);assert.equal(v.spec.children![0].fillH,undefined);}
- const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()});
+ const host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}}),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()});
  const run=async(script:string)=>vm.runInContext(`(async()=>{${script}})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,f.scope));await run(engine.buildComponentScript(f.parent,f.scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===f.parent.id)!;
@@ -1976,7 +1976,7 @@ test('root fill follows an absolute wrapper with opposing insets and a definite 
   assert.equal(wrapper.insetOverlay,undefined);assert.equal(wrapper.layout!.primary,'MIN');
   assert.equal(usage.fillW,true);assert.equal(usage.fillH,true);
  }
- const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=async(script:string)=>vm.runInContext(`(async()=>{${script}})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,f.scope));await run(engine.buildComponentScript(f.parent,f.scope));
  const owner=host.root.findOne(n=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===f.parent.id)!;

@@ -74,7 +74,7 @@ test('repeated same-name nested instances forward independent labels and variant
    assert.equal(await page.locator('[data-disabled="true"]').count(),0);
   }finally{await page.close();}
  }}finally{await browser.close();}
- const engine=createFigmaEngine(ctx),mock=createFigmaMock(),sandbox=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}});
+ const engine=createFigmaEngine(ctx),mock=createFigmaMock({fileKey:'file'}),sandbox=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext('(async()=>{'+code+'\n})()',sandbox);
  await run(engine.buildTokensScript(null));
  for(const c of contracts.values())await run(engine.buildComponentScript(c,contracts));

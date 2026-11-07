@@ -1005,10 +1005,10 @@ const WANTS_DARK = ${JSON.stringify(wantsDark)};
 const MODE0_NAME = ${JSON.stringify(mode0Name)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
-// file — never write without verifying the target.
+// file — never write without verifying the target, nor when Figma names none.
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();

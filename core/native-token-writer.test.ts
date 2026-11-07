@@ -242,9 +242,10 @@ test("legacy writer bytes stay unchanged after shared-loop extraction", () => {
     },
     "historical-file",
   );
+  // Re-pinned 2026-11-07: only the file guard's three lines changed (a missing key is refused).
   assert.equal(
     sha(script),
-    "57a7166bcb2f7bdfd77e91e5c8882bce4bb847e6691b71229e868c362b49fbeb",
+    "d1155bbdba8438d23ca4d8a50cdb48d9a9c0bc120e1a846bdb72f2973657702c",
   );
 });
 

@@ -318,7 +318,7 @@ test('native component membership keeps dependency identity and one visibility t
  for(const v of data.variants){const target=v.spec.children?.find(n=>n.name==='mark');assert.equal(!!target,v.name!=='A=X, B=Q');if(target){assert.equal(target.type,'instance');assert.equal(target.visibilityTarget?.key,c.id+':show');}}
  for(const show of [true,false])assert.throws(()=>native(host(c,{a:'x',b:'q',show}),[leaf,c]),/structural-availability-target-unavailable/);
  assert.doesNotThrow(()=>native(host(c,{a:'x',b:'q'}),[leaf,c]));
- const mock=createFigmaMock({instanceVariantSelection:true}),engine=createFigmaEngine({tokens,icons:new Map()}),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}});
+ const mock=createFigmaMock({fileKey:'file', instanceVariantSelection:true}),engine=createFigmaEngine({tokens,icons:new Map()}),context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext('(async()=>{'+script+'\n})()',context),contracts=new Map([leaf,c].map(c=>[c.id,c]));
  await run(engine.buildTokensScript(null));for(const contract of [leaf,c])await run(engine.buildComponentScript(contract,contracts));
  for(const [i,props]of [{a:'x',b:'p'},{a:'x',b:'p',show:false},{a:'x',b:'p',show:true},{a:'x',b:'q'}].entries()){

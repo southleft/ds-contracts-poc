@@ -244,7 +244,7 @@ test('native state previews carry the merged child ink while the child main is u
   parent.bindings.figma.statePreviews = true;
   const scope = new Map<string, Contract>([[child.id, child], [parent.id, parent]]);
   const engine = createFigmaEngine({ tokens: { primitives, semantic: aliased, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const host = createFigmaMock(), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+  const host = createFigmaMock({fileKey:'fixture'}), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
   (host.figma as unknown as { createVector: () => unknown }).createVector = () => {
     const node = (host.figma as unknown as { createRectangle: () => Record<string, unknown> }).createRectangle();
     Object.assign(node, { type: 'VECTOR', isMask: false, blendMode: 'PASS_THROUGH', vectorPaths: [] });
@@ -300,7 +300,7 @@ test('a parent-set BOOLEAN state selects the child State preview on its pins and
   const scope = new Map<string, Contract>([[child.id, child], [parent.id, parent]]);
   const errors: string[] = []; validateContract(parent, scope, errors, new Map()); assert.deepEqual(errors, []);
   const engine = createFigmaEngine({ tokens, icons: new Map() });
-  const host = createFigmaMock({ instanceVariantSelection: true }), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+  const host = createFigmaMock({ fileKey:'fixture', instanceVariantSelection: true }), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
   const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
   await run(engine.buildTokensScript(null));
   await run(engine.buildComponentScript(child, scope));
@@ -350,7 +350,7 @@ test('typed vector ink follows slot fallback anatomy, caller clearing and native
  const all=(n:any):any[]=>[n,...(n.children??[]).flatMap(all)];
  for(const v of data.variants){const slotSpec=all(v.spec).find(n=>n.type==='slot');assert.equal(slotSpec.slotDefault,undefined,'fallback anatomy is not duplicated as a native sample');assert.equal(slotSpec.children.length,1);assert.equal(slotSpec.children[0].instanceInk.writeProtocol,'attached-v1');}
  const script=engine.buildComponentScript(parent,scope);assert(script.indexOf('if (parent && !spec.callerSlotProperty) parent.appendChild(node)')<script.indexOf('if (spec.instanceInk || spec.instanceStrokeWeight)'));
- const host=createFigmaMock(),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const host=createFigmaMock({fileKey:'fixture'}),context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  (host.figma as unknown as {createVector:()=>unknown}).createVector=()=>{const node=(host.figma as unknown as {createRectangle:()=>Record<string,unknown>}).createRectangle();Object.assign(node,{type:'VECTOR',isMask:false,blendMode:'PASS_THROUGH',vectorPaths:[]});return node;};
  const run=(source:string)=>vm.runInContext(`(async()=>{${source}\n})()`,context);
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(f.child,scope));

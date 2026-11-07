@@ -14,10 +14,10 @@ const SEMANTIC = [{"name":"font/body-lg/size","type":"FLOAT","light":"p/text-bod
 const TEXT_STYLES = [{"name":"body-lg","tokenPath":"font.body-lg.size","fontSize":14,"fontStyle":"Medium"},{"name":"body-md","tokenPath":"font.body-md.size","fontSize":13,"fontStyle":"Medium"},{"name":"body-sm","tokenPath":"font.body-sm.size","fontSize":12,"fontStyle":"Medium"},{"name":"body-xs","tokenPath":"font.body-xs.size","fontSize":11,"fontStyle":"Medium"},{"name":"heading-2xl","tokenPath":"font.heading-2xl.size","fontSize":30,"fontStyle":"Bold"},{"name":"heading-3xl","tokenPath":"font.heading-3xl.size","fontSize":36,"fontStyle":"Bold"},{"name":"heading-lg","tokenPath":"font.heading-lg.size","fontSize":20,"fontStyle":"Medium"},{"name":"heading-md","tokenPath":"font.heading-md.size","fontSize":14,"fontStyle":"Medium"},{"name":"heading-sm","tokenPath":"font.heading-sm.size","fontSize":13,"fontStyle":"Medium"},{"name":"heading-xl","tokenPath":"font.heading-xl.size","fontSize":24,"fontStyle":"Bold"},{"name":"heading-xs","tokenPath":"font.heading-xs.size","fontSize":12,"fontStyle":"Medium"}];
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
-// file — never write without verifying the target.
+// file — never write without verifying the target, nor when Figma names none.
 const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + (figma.fileKey || 'no file key from Figma'));
 }
 
 function hexToRgb(value) {

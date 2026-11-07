@@ -129,7 +129,7 @@ test('padded and runtime-boxed native text retain markers on actual TEXT nodes',
   if(kind==='padding')part.literals!['padding-bottom']='2px';else part.literals!.width='80px';
   f.proposals[0].contract=owner;
   const contracts=new Map(f.proposals.map(p=>[p.contract.id,p.contract]));
-  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}),mock=createFigmaMock();
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}),mock=createFigmaMock({fileKey:'file'});
   const sandbox=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),run=(code:string)=>vm.runInContext('(async()=>{'+code+'\n})()',sandbox);
   await run(engine.buildTokensScript(null));for(const c of contracts.values())await run(engine.buildComponentScript(c,contracts));
   const node=mock.root.findOne((n:any)=>n.getSharedPluginData('ds_contracts','contractId')===parent.id)!;assert(node);
@@ -163,7 +163,7 @@ test('ordinary slot default maps scalar size, preserves omission, and refuses un
 
 test('ordinary slot defaults apply and finalize scalar size on the cloned owned text',async()=>{
  const {createFigmaMock}=await import('../scripts/plugin-engine-mock-figma.mjs');
- const f=slotSizeFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),mock=createFigmaMock();
+ const f=slotSizeFixture(),engine=createFigmaEngine({tokens:f.tokens,icons:new Map()}),mock=createFigmaMock({fileKey:'file'});
  // Model a native refresh on append: finalization must restore the selected
  // scalar after the newly created instance joins its slot.
  const createComponent=(mock.figma as any).createComponent.bind(mock.figma);let refreshes=0;

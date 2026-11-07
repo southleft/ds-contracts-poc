@@ -129,7 +129,7 @@ test('native compilation retains exactly the corresponding direct defaults and n
 
 test('native instance caller replacement and explicit empty parts replace the direct omitted default', async () => {
   const {contract,scope,tokens,part} = fixture().read(),engine = createFigmaEngine({tokens,icons:new Map()});
-  const {figma,root} = createFigmaMock(),context = vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+  const {figma,root} = createFigmaMock({fileKey:'fixture-file'}),context = vm.createContext({figma,console:{log(){},warn(){},error(){}}});
   const run = (script:string) => vm.runInContext(`(async()=>{${script}\n})()`,context);
   await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(contract,scope));
   for (const supplied of [false,true]) for (const empty of [false,true]) {

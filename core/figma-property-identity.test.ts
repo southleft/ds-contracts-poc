@@ -24,7 +24,7 @@ test('REST and plugin preserve hash-bearing property references and six distinct
  const component:any={id:'1:1',name:'Rows',type:'COMPONENT',componentPropertyDefinitions:definitions,layoutMode:'VERTICAL',itemSpacing:0,primaryAxisSizingMode:'AUTO',counterAxisSizingMode:'AUTO',children:keys.map((key,i)=>({id:`1:${i+2}`,name:`Row${i+1}`,type:'TEXT',visible:i<4,characters:`Row${i+1}`,style:{fontFamily:'Arial',fontSize:12,fontWeight:400},componentPropertyReferences:{visible:key}}))};
  const rest:any=mapRestToDump({name:'Fixture',nodes:{'1:1':{document:component}}} as never).dump.Rows;
  assert.deepEqual(rest.boolDefaults,expected);assert.deepEqual(rest.variants[0].children.map((c:any)=>c.propRefs.visible),Object.keys(expected));
- const {figma}:any=createFigmaMock();const c=figma.createComponent();c.name='Rows';figma.currentPage.appendChild(c);c.layoutMode='VERTICAL';
+ const {figma}:any=createFigmaMock({fileKey:'fixture'});const c=figma.createComponent();c.name='Rows';figma.currentPage.appendChild(c);c.layoutMode='VERTICAL';
  for(let i=0;i<6;i++){const key=c.addComponentProperty(`item #${i+1}`,'BOOLEAN',i<4);const n=figma.createText();n.characters=`Row${i+1}`;n.name=n.characters;c.appendChild(n);n.componentPropertyReferences={visible:key};n.visible=i<4;}
  const source=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,"const TARGET_SETS = ['Rows'];");
  const plugin:any=JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${source}})()`,{figma,console:{log(){},warn(){},error(){}}})));
@@ -34,7 +34,7 @@ test('REST and plugin preserve hash-bearing property references and six distinct
  assert.deepEqual(contract.props.map(p=>[p.name,p.default]),keys.map((_,i)=>[`item${i+1}`,i<4]));
  const compiled=createFigmaEngine({tokens,icons}).compileComponentData(contract,contracts);
  assert.deepEqual(compiled.boolProps.map((p:any)=>[p.property,p.default]),Object.entries(expected));
- const host=createFigmaMock();const context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
+ const host=createFigmaMock({fileKey:'fixture'});const context=vm.createContext({figma:host.figma,console:{log(){},warn(){},error(){}}});
  const run=(script:string)=>vm.runInContext(`(async()=>{${script}\n})()`,context);
  const engine=createFigmaEngine({tokens,icons});await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(contract,contracts));
  const native:any=host.root.findOne((n:any)=>n.getSharedPluginData('ds_contracts','contractId')===contract.id);

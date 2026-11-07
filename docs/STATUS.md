@@ -346,8 +346,12 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         (`edgeRing`). A shifted interior is still refused, with no value tolerance. REST
         exports are unchanged. Live write: Card's shadow variant is now measured (5.92% on
         white, 20.93% on black, so it still fails); no other variant changed.
-      - Next, rule 10: one Figma to React render (`untitled-ui-free/1102-5338`, success on a
-        dark circle) alternates between two PNGs. No verdict moves.
+      - Rule 10, a named residual (parent session, 2026-11-07; no ruler code changed). In one
+        Figma to React cell (`untitled-ui-free/1102-5338`), three 24 px renders each come out
+        as one of two PNGs, 5 pixels in one row: success on a dark circle, on a light circle
+        and on a light circle outline. Blink's display list is identical every time; the
+        pixels differ in Chromium's raster, more often under Rosetta. No verdict moves. Every
+        baseline comparison names it.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check, the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
@@ -360,6 +364,10 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       browser's launch args with its text-layout and color-fringe probe. A sealed
       Figma to React run (A1, A2, B) counts only with `--pinned`; a run in the
       machine's own Chromium does not.
+- [ ] Every sealed Figma to React run (A1, A2, B) runs twice on the same commit (parent
+      session, 2026-11-07). The report names every render whose bytes differ between the
+      two runs. A verdict that differs between them is reported to the owner by name, as
+      broken, before any number is claimed. This is run protocol, not checker code.
 
 Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it
@@ -449,6 +457,15 @@ and break no known cell. A0 is now practice and regression only.
       bound to the `.label?` visibility Boolean in all 315 variants, and in 9 of them the
       required "*" is renamed `Label`, a second layer of that name. No other practice set
       hits this refusal.
+- [x] A generated Figma script refuses a file whose key Figma does not give (parent session,
+      2026-11-07). The file guard (`EXPECTED_FILE_KEY`) checked the key only when Figma gave
+      one, so a script tied to Scratch Contracts would have written into a file reporting none.
+      It now refuses by name ("no file key from Figma"). The live write is unchanged: the
+      plugin read `ewm0gLcgAUjbxlfLf95RSc`, and all 13 scripts ran. A script tied to no file
+      checks nothing, as before. Regenerated, guard lines only: `figma-sync/` (60 scripts),
+      the examples' scripts and GENESIS batches, the golden manifest, the plugin's engine
+      receipt and docs/24. The test mock and the GENESIS builders now open the file the
+      scripts name, where they had run them in a file with no key.
 - [ ] The code side writes `ds-contracts.react.json` itself from the reader's
       `stories.json` (GOAL.md Step 2), in its own module outside the frozen reader, after the
       React to Figma check. Its route (the source-reference engine on a generated workspace, or

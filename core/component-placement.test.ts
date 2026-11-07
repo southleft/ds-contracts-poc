@@ -181,3 +181,17 @@ test('unknown hosts, competing geometry and mixed placement refuse by name',()=>
  const html=fixture();assert.throws(()=>htmlEmitter.emit(html.parent,html.ctx),/HTML_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED/);
  const c=fixture().parent;for(const value of [NaN,Infinity,-Infinity]){c.anatomy.root.parts!.marker.absolutePlacement!.left=value;assert.equal(ContractSchema.safeParse(c).success,false);}
 });
+
+test('a script written for one Figma file refuses another file, and a file whose key Figma does not give',()=>{
+ const f=fixture();
+ for(const script of [f.engine.buildTokensScript('file-a'),f.engine.buildComponentScript(f.child,f.ctx.contracts,'file-a')]){
+  const at=script.indexOf('const EXPECTED_FILE_KEY'),guard=script.slice(at,script.indexOf('\n}\n',at)+2);
+  const run=(figma:object)=>vm.runInNewContext(guard,{figma});
+  assert.doesNotThrow(()=>run({fileKey:'file-a'}));
+  assert.throws(()=>run({fileKey:'file-b'}),/^Error: WRONG FILE: expected file-a, got file-b$/);
+  assert.throws(()=>run({}),/^Error: WRONG FILE: expected file-a, got no file key from Figma$/);
+ }
+ // A script tied to no file checks nothing.
+ const free=f.engine.buildTokensScript(null),at=free.indexOf('const EXPECTED_FILE_KEY');
+ assert.doesNotThrow(()=>vm.runInNewContext(free.slice(at,free.indexOf('\n}\n',at)+2),{figma:{}}));
+});
