@@ -15,11 +15,11 @@ then this page, then choose work. It is written for any agent or provider.
    pass. Receipts and the full report are in `private/a0-ai-test-20261109`.
    - Figma to React, Sanity UI v2 (18 sets, 287 variants): coverage 10 of 18 sets
      (55.6%), 198 in-grammar variants. The engine alone: in-grammar headline 13.3%,
-     raw 8 of 287. With AI fixing the checker's named misses for 3 rounds: in-grammar
-     headline 60.3% to 76.9% (engine's code plus repairs 60.3% and 70.0% over two
-     runs; AI with only the contract's prop map 70.3%, 76.9% keeping each set's best
-     round). 0 font-blocked. Seven sets can't be judged today: four have no contract
-     and three are refused on framing.
+     raw 3 of 198 (8 of 287 over all 18 sets). With AI fixing the checker's named
+     misses for 3 rounds: in-grammar headline 60.3% to 76.9% (engine's code plus
+     repairs 60.3% and 70.0% over two runs; AI with only the contract's prop map 70.3%,
+     76.9% keeping each set's best round). 0 font-blocked. Seven sets can't be judged
+     today: four have no contract and three are refused on framing.
    - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
      variants): the engine converts none. AI with the reader's measurements: 27.3%
      after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
