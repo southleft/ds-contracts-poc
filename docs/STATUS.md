@@ -346,6 +346,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         (`edgeRing`). A shifted interior is still refused, with no value tolerance. REST
         exports are unchanged. Live write: Card's shadow variant is now measured (5.92% on
         white, 20.93% on black, so it still fails); no other variant changed.
+      - Part 4, a component with no options, in (owner, 2026-11-08, GOAL.md). Its matrix has no
+        axis, and Figma gives every component set a variant property ("Property 1"), so it
+        could never count. It now counts as one main COMPONENT outside any set; a set written
+        for it fails by name (`no-options-written-as-component-set`, beside `axis-extra`). Every
+        other branch of the set rule is unchanged. A0: 26 of 62 in-grammar components could never
+        count before, 0 after. The 6 written sets on record (11-06 live write, both reader runs)
+        give byte-identical results on main and on this rule.
       - Rule 10, a named residual (parent session, 2026-11-07; no ruler code changed). In one
         Figma to React cell (`untitled-ui-free/1102-5338`), three 24 px renders each come out
         as one of two PNGs, 5 pixels in one row: success on a dark circle, on a light circle
@@ -353,7 +360,8 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         pixels differ in Chromium's raster, more often under Rosetta. No verdict moves. Every
         baseline comparison names it.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
-      classifier, the variant matrix rule, the React to Figma check, the Storybook reader
+      classifier, the variant matrix rule, the React to Figma check (with its no-options
+      rule of 2026-11-08), the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its capture of each reference
       alone at its paint extent (`captureSubjectWithoutBackdrop`, `observeConsumerPaintExtent`,
