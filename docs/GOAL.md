@@ -266,3 +266,16 @@ This widens React to Figma's counting rule ("counts only a real component set") 
 freezes with the variant matrix rule on 2026-11-20.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-08.
+
+### 2026-11-08: Paid work stops after the no-option fix
+
+The owner, in chat: "Stop after the fix", choosing between stopping paid work after
+the no-option fix and testing a Figma to React only version. The capped A0 AI test
+(practice kit, decision input only, $39.67) found React to Figma at 27.3% after three
+rounds with AI and the contract, under the 40% line set before the test, so the
+approach is not worth funding as defined. Once the PR that carries this entry
+merges, agents start no new work on this plan: no converter or checker changes, no
+freeze, no draws and no sealed runs. The Step 2 checklist is on hold. Work resumes
+only on a new signed entry. Owner-only actions are unchanged.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-08.
