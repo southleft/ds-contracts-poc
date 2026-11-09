@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
-import { declare, seed } from './storybook-contracts.js';
+import { carryVariantText, declare, seed } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -34,4 +34,23 @@ test('the seed contract names each option by a token-safe slug that its VARIANT 
   assert.deepEqual([drawn, combos.length], [[{ tone: 'default' }, { tone: 'low-emphasis' }, { tone: 'low-emphasis-2' }], 3]);
   const [lone] = declare({ storybook: 'x', components: [component('content/Divider', { references: [ref('d--a', {})] })] }).components;
   assert.deepEqual([seed(lone!).contract.props, seed(lone!).drawn], [[], [{}]]);
+});
+
+test('a nested part whose text differs between variants carries each variant\'s text; a table the schema refuses is named', () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Badge', { axes: ['tone'],
+    references: [ref('b--a', { tone: 'success' }), ref('b--a', { tone: 'error' }, { tone: 'error' })] })] }).components;
+  const built = () => { const s = seed(c!); s.contract.anatomy.root.parts = { label: { text: 'Success' }, mark: { text: '!' } } as never; return s; };
+  const texts: Record<string, Record<string, string>> = { label: { success: 'Success', error: 'Error' }, mark: { success: '!', error: '!' } };
+  const { contract, combos } = built();
+  const at = (key: string, part: string) => texts[part]?.[combos.find((k) => k.key === key)!.axisValues.tone!] ?? null;
+  assert.deepEqual(carryVariantText(contract, c!.axes, combos, at), []);
+  const parts = contract.anatomy.root.parts as Record<string, { textByCombination?: unknown }>;
+  assert.deepEqual(parts.label!.textByCombination, { props: ['tone'], rows: [{ values: ['success'], text: 'Success' }, { values: ['error'], text: 'Error' }] });
+  assert.equal(parts.mark!.textByCombination, undefined); // the same text in every variant stays one literal
+  // A row for a variant the part is not drawn in: the schema refuses the table, so the literal stays and is named.
+  const off = built();
+  const refused = carryVariantText(off.contract, c!.axes, [...off.combos, { key: 'x', axisValues: { tone: 'warning' } }], (key, part) => key === 'x' ? 'Warn' : at(key, part));
+  assert.match(refused.join(), /^per-variant-text-unqualified: label: literal-text-combination-/);
+  assert.equal((off.contract.anatomy.root.parts as Record<string, { textByCombination?: unknown }>).label!.textByCombination, undefined);
+  assert.deepEqual(carryVariantText(seed({ ...c!, axes: [] }).contract, [], off.combos, at), []); // no options: nothing to carry
 });
