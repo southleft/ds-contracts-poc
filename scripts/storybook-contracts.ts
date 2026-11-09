@@ -232,13 +232,15 @@ async function main() {
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
         const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });
         const data = engine.compileComponentData(contract, new Map([[contract.id, contract]])) as { setName: string; isSet: boolean; variants?: unknown[] };
-        Object.assign(row, { contract: contract.id, setName: data.setName, isSet: data.isSet, variants: data.variants?.length ?? null });
-        if (fileKey) { // each script refuses any other file
+        if (fileKey) { // each script refuses any other file; both are built before either is written
+          const tokensScript = engine.buildTokensScript(fileKey), componentScript = engine.buildComponentScript(contract, new Map([[contract.id, contract]]), fileKey);
           mkdirSync(path.join(out, 'figma'), { recursive: true });
-          writeFileSync(path.join(out, 'figma', `${file}.1-variables.js`), engine.buildTokensScript(fileKey));
-          writeFileSync(path.join(out, 'figma', `${file}.2-component.js`), engine.buildComponentScript(contract, new Map([[contract.id, contract]]), fileKey));
+          writeFileSync(path.join(out, 'figma', `${file}.1-variables.js`), tokensScript);
+          writeFileSync(path.join(out, 'figma', `${file}.2-component.js`), componentScript);
         }
-      } catch (e) { const m = String(e instanceof Error ? e.message : e); refusals.push('error: ' + (m.startsWith('[') ? m.replace(/\s+/g, ' ').slice(0, 600) : m.split('\n')[0])); }
+        // Named only once its scripts are built: a contract the Figma build refuses reaches no Figma file.
+        Object.assign(row, { contract: contract.id, setName: data.setName, isSet: data.isSet, variants: data.variants?.length ?? null });
+      } catch (e) { const m = String(e instanceof Error ? e.message : e); refusals.push('error: ' + (m.startsWith('[') ? m.replace(/\s+/g, ' ').slice(0, 600) : m.split('\n').filter(Boolean).slice(0, 3).join(' / '))); }
       console.log(JSON.stringify(row));
     }
   } finally { await browser.close(); stop(); }

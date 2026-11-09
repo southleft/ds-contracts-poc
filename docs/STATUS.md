@@ -497,7 +497,9 @@ and break no known cell. A0 is now practice and regression only.
       A0's Storybook wraps every story in its theme provider, which a component mounted outside
       Storybook never sees; its observer runs only React 19.x (A0 runs 18.3); and it needs a witness
       per case (regression only). Emotion's `css-<hash>` classes are not part names (a random blob
-      URL changed them run to run). Contracts: A0 62 of 62 in-grammar components, this repository's
+      URL changed them run to run). Contracts: A0 62 of 62 in-grammar components, of which 60 build to
+      Figma (Cards and Table are refused by name: duplicate anatomy part names; corrected 2026-11-09, the
+      report had credited both), this repository's
       Storybook 23 of 25 (Inline and Stack, `not-one-element`); two runs byte-identical on each. Seven
       A0 components written into Scratch Contracts and checked: 4 count as sets, 0 of 35 variants
       pass. Named misses, the climb's next classes: text written in Figma's fallback (Inter), not the
