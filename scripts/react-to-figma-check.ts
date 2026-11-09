@@ -20,7 +20,8 @@
  * React check's own code and its one image limit, the reference in the rendered
  * side's role: images within the limit on white and on black (alignRecordedFrames on
  * the reference's paint-extent frame and the plugin capture's), size within 2 px
- * (consumerSizeCheck), every graphic the reference draws present (matchParts), and
+ * (consumerSizeCheck), every graphic the reference draws present (matchParts: an SVG
+ * by a vector part, an empty painted box also by a painted box, paintedBoxes), and
  * every text in its color and font (compareTextStyles; the font is the face Chromium
  * painted, recorded by the reader per run). A face Figma lacks makes the
  * variant font-blocked (storyFontPreflight); a measurement not made is unverified.
@@ -39,7 +40,7 @@ import { matchesMatrix, type VariantMatrix } from '../extract/figma/variant-matr
 import { alignPair, diffPair, readPng } from '../extract/figma/visual-parity/img.js';
 import { figmaImagesFromCapture, type PluginCapture } from './design-consumer-capture.js';
 import { consumerSizeCheck, IMAGE_LIMIT_PERCENT } from './design-consumer-check.js';
-import { compareTextStyles, fetchFigmaContent, matchParts, missingTexts, type FigmaContentResult } from './design-consumer-content.js';
+import { compareTextStyles, fetchFigmaContent, matchParts, missingTexts, paintedBoxes, type FigmaContentResult } from './design-consumer-content.js';
 import { alignRecordedFrames } from './design-consumer-framing-v2.js';
 import { UNMEASURED } from './design-consumer-verdict.js';
 import { storyFontPreflight } from './font-preflight.js';
@@ -160,7 +161,11 @@ export function judgeVariants(component: StoryComponent, rule: SetRule, set: Dum
     else if (!r.content || !content.byNodeId[id]) problems.push(`content-unmeasured:${key}:${r.contentProblem ?? 'no-content'}`);
     else {
       const figma = content.byNodeId[id]!;
-      for (const g of matchParts(r.content.graphics, figma.parts).missing) problems.push(`content-missing:${key}:part:${g.tag}@${Math.round(g.box.x)},${Math.round(g.box.y)}`);
+      // A reference's empty painted box (a divider, a dot, a skeleton block) may be drawn as a painted box in Figma;
+      // an SVG icon needs a vector part, as before.
+      const parts = [...figma.parts, ...(content.documents?.[id] ? paintedBoxes(content.documents[id]!).map((box) => ({ box })) : [])];
+      for (const g of matchParts(r.content.graphics, parts, (g, i) => i < figma.parts.length || g.tag !== 'svg').missing)
+        problems.push(`content-missing:${key}:part:${g.tag}@${Math.round(g.box.x)},${Math.round(g.box.y)}`);
       // Figma text has one family and no fallback stack, so the reference's family is the face Chromium painted
       // each run with, not the stack it declared. A run painted with no font is not drawn and left out; one painted by
       // several families, or whose paint was not read, is unmeasured, by name.

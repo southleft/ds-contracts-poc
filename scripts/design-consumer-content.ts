@@ -70,7 +70,7 @@ interface RestTypeStyle { fontFamily?: string; fontWeight?: number; fills?: Rest
 export interface RestNode {
   id?: string; name?: string; type: string; visible?: boolean; opacity?: number; characters?: string;
   absoluteBoundingBox?: Box | null; absoluteRenderBounds?: Box | null;
-  fills?: RestPaint[]; strokes?: RestPaint[]; children?: RestNode[];
+  fills?: RestPaint[]; strokes?: RestPaint[]; strokeWeight?: number; effects?: { type: string; visible?: boolean }[]; children?: RestNode[];
   style?: RestTypeStyle; characterStyleOverrides?: number[]; styleOverrideTable?: Record<string, RestTypeStyle>;
 }
 /** How a run of characters is drawn. `color` null = not comparable, `unmeasured` says why. */
@@ -175,6 +175,25 @@ export function figmaContent(variant: RestNode): FigmaContent {
   return { texts, textStyles, parts };
 }
 
+/** React to Figma only: the boxes a written variant paints with nothing drawn inside them, the variant itself
+ *  included. A shown, rendered node of a box type with no shown children and a visible fill, stroke or shadow. The
+ *  Storybook reader counts an empty element that paints a background, border or shadow as a graphic (a divider, a
+ *  dot, a skeleton block); in Figma that is a rectangle or a frame, never a vector. */
+export function paintedBoxes(variant: RestNode): Box[] {
+  const origin = variant.absoluteBoundingBox ?? { x: 0, y: 0, width: 0, height: 0 }, boxes: Box[] = [];
+  const walk = (n: RestNode) => {
+    if (!shown(n) || !rendered(n) || n.type === 'TEXT' || VECTOR_TYPES.has(n.type)) return;
+    const kids = (n.children ?? []).filter(shown);
+    const stroked = paints(n.strokes) && (n.strokeWeight ?? 1) > 0, shadowed = (n.effects ?? []).some(e => e.visible !== false && /SHADOW/.test(e.type));
+    if (!kids.length && (paints(n.fills) || stroked || shadowed) && n.absoluteBoundingBox) {
+      const b = n.absoluteBoundingBox; boxes.push({ x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height });
+    }
+    for (const child of kids) walk(child);
+  };
+  walk(variant);
+  return boxes;
+}
+
 /** Case- and whitespace-insensitive spelling used for every text comparison. */
 export const squashText = (text: string) => text.normalize('NFC').toLocaleLowerCase('en-US').replace(/\s+/g, '');
 
@@ -200,18 +219,20 @@ export function missingTexts(figmaTexts: readonly string[], renderedText: string
 
 const within = (figma: number, dom: number) => Math.abs(figma - dom) <= Math.max(3, 0.35 * figma);
 /** One-to-one size matching of expected parts to drawn graphics (see the header): here Figma's parts to the
- *  rendered graphics; in the React to Figma check, a reference's graphics to the written set's parts. */
-export function matchParts<P extends { box: Box; members?: Box[] }>(parts: readonly P[], graphics: readonly { box: Box; members?: Box[] }[]): { matched: number; missing: P[] } {
+ *  rendered graphics; in the React to Figma check, a reference's graphics to the written set's parts.
+ *  `eligible`, when given, says which graphics (by index) may stand for a part; the Figma to React check passes none. */
+export function matchParts<P extends { box: Box; members?: Box[] }>(parts: readonly P[], graphics: readonly { box: Box; members?: Box[] }[],
+  eligible?: (part: P, graphic: number) => boolean): { matched: number; missing: P[] } {
   // An SVG viewport and its drawn shapes are alternative representations of
   // the same paint. Consuming either reserves its resources so the viewport
   // cannot stand in for another missing icon after a child was matched.
   const candidates = graphics.flatMap((g, i) => {
-    if (!g.members) return [{box:g.box, resources:[`${i}`]}];
+    if (!g.members) return [{box:g.box, resources:[`${i}`], graphic:i}];
     if (!g.members.length) return [];
     const resources=g.members.map((_,j)=>`${i}:${j}`);
     const x=Math.min(...g.members.map(b=>b.x)),y=Math.min(...g.members.map(b=>b.y));
     const painted={x,y,width:Math.max(...g.members.map(b=>b.x+b.width))-x,height:Math.max(...g.members.map(b=>b.y+b.height))-y};
-    return [{box:g.box,resources}, {box:painted,resources}, ...g.members.map((box,j)=>({box,resources:[resources[j]]}))];
+    return [{box:g.box,resources,graphic:i}, {box:painted,resources,graphic:i}, ...g.members.map((box,j)=>({box,resources:[resources[j]],graphic:i}))];
   });
   const used = new Set<string>();
   const center = (b: Box) => [b.x + b.width / 2, b.y + b.height / 2];
@@ -225,7 +246,7 @@ export function matchParts<P extends { box: Box; members?: Box[] }>(parts: reado
     for (const box of required) {
       let best = -1, bestScore: [number, number] = [Infinity, Infinity];
       for (const [i,candidate] of candidates.entries()) {
-        if (candidate.resources.some(r=>used.has(r)||reserved.has(r))) continue;
+        if (candidate.resources.some(r=>used.has(r)||reserved.has(r)) || (eligible && !eligible(part, candidate.graphic))) continue;
         const g = candidate.box;
         if (!within(box.width, g.width) || !within(box.height, g.height)) continue;
         const [px, py] = center(box), [gx, gy] = center(g);
@@ -475,7 +496,9 @@ export const domContentOf = new Function('el', 'mark', `
 `) as (el: Element, mark?: unknown) => DomContent;
 
 export type FigmaContentResult =
-  | { status: 'collected'; version: string | null; responseSha256: string; byNodeId: Record<string, FigmaContent> }
+  | { status: 'collected'; version: string | null; responseSha256: string; byNodeId: Record<string, FigmaContent>;
+      /** The variant nodes as returned, for the React to Figma check; never written to figma-content.json. */
+      documents?: Record<string, RestNode> }
   | { status: 'unavailable'; reason: string };
 
 /** Read what each variant draws: one read-only GET of the variant nodes at full
@@ -490,13 +513,13 @@ export async function fetchFigmaContent(fileKey: string, ids: string[], token: s
   if (!response.ok) return { status: 'unavailable', reason: `HTTP ${response.status}` };
   const bytes = Buffer.from(await response.arrayBuffer());
   const body = JSON.parse(bytes.toString('utf8')) as { version?: string; nodes?: Record<string, { document?: RestNode } | null> };
-  const byNodeId: Record<string, FigmaContent> = {};
+  const byNodeId: Record<string, FigmaContent> = {}, documents: Record<string, RestNode> = {};
   for (const id of ids) {
     const node = body.nodes?.[id]?.document;
     if (!node) return { status: 'unavailable', reason: `node ${id} not returned` };
-    byNodeId[id] = figmaContent(node);
+    byNodeId[id] = figmaContent(node); documents[id] = node;
   }
   const result = { status: 'collected' as const, version: body.version ?? null, responseSha256: createHash('sha256').update(bytes).digest('hex'), byNodeId };
   writeFileSync(path.join(out, 'figma-content.json'), JSON.stringify(result, null, 2) + '\n');
-  return result;
+  return { ...result, documents };
 }
