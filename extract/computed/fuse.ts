@@ -1039,6 +1039,12 @@ export function styledChannels(
         receipts.push(`token-named-geometry-admitted: ${a.partNames[pi]}.${p} — the library's own stylesheet binds it to ${name} (${value}) at \`${rule}\`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)`);
       }
     }
+    // STORYBOOK ROUTE (captureJs `authoredSize`, opt-in): a width/height the stylesheet SETS to a fixed length (AG's
+    // StatusBadge `height: 2rem`) is a design value, not a measurement of the harness. Absent unless captured.
+    // @door fuse.authored-geometry-admitted
+    const authoredNamed = (p: string): boolean => (p === 'width' || p === 'height') && !inTableBox && a.baseFlat[pi].node.asize?.[p] !== undefined;
+    for (const p of ['width', 'height'] as const) if (authoredNamed(p) && !tokenNamed(p) && !vpRefused?.has(p))
+      receipts.push(`authored-geometry-admitted: ${a.partNames[pi]}.${p} — the stylesheet sets it to ${a.baseFlat[pi].node.asize![p]}; a set size is a design value, not a measurement`);
     const admit = (p: string): boolean =>
       !vpRefused?.has(p) &&
       // @door fuse.webkit-blanket-refusal
@@ -1048,7 +1054,7 @@ export function styledChannels(
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
         textFill.admit.get(pi)?.has(p) === true ||
-        tokenNamed(p));
+        tokenNamed(p) || authoredNamed(p));
     // @door fuse.control-fallback
     const tag = a.baseFlat[pi].node.tag;
     const pageCtrl = controls[tag] ?? controls['span'];

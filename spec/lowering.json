@@ -1625,8 +1625,8 @@
       "stage": "fuse",
       "status": "implemented",
       "file": "extract/computed/fuse.ts",
-      "line": 1950,
-      "ruleLine": 1951,
+      "line": 1956,
+      "ruleLine": 1957,
       "ruleText": "if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;",
       "css": {
         "construct": "flex-direction / align-items / justify-content on any container",
@@ -1662,8 +1662,8 @@
       "stage": "fuse",
       "status": "implemented",
       "file": "extract/computed/fuse.ts",
-      "line": 2064,
-      "ruleLine": 2065,
+      "line": 2070,
+      "ruleLine": 2071,
       "ruleText": "if (canonical === undefined) {",
       "css": {
         "construct": "any layout value outside a 4-property, 12-pair vocabulary",
@@ -1695,7 +1695,7 @@
       "stage": "fuse",
       "status": "proposed",
       "file": "extract/computed/fuse.ts",
-      "ruleLine": 2540,
+      "ruleLine": 2546,
       "ruleText": "'padding-block', 'padding-inline', 'gap',",
       "css": {
         "construct": "an uncorrelated row-gap / column-gap that should take the base-plane or set-plane literal fallback",
@@ -1723,7 +1723,7 @@
       "stage": "fuse",
       "status": "proposed",
       "file": "extract/computed/fuse.ts",
-      "ruleLine": 1878,
+      "ruleLine": 1884,
       "ruleText": "const LAYOUT_CHANNEL_TO_FIELD: Record<",
       "css": {
         "construct": "row-gap / column-gap on a flex container",
@@ -1762,8 +1762,8 @@
       "stage": "fuse",
       "status": "implemented",
       "file": "extract/computed/fuse.ts",
-      "line": 1046,
-      "ruleLine": 1047,
+      "line": 1052,
+      "ruleLine": 1053,
       "ruleText": "(GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||",
       "css": {
         "construct": "width / height and the inset quartet on any part",
@@ -1796,8 +1796,8 @@
       "stage": "fuse",
       "status": "implemented",
       "file": "extract/computed/fuse.ts",
-      "line": 1691,
-      "ruleLine": 1692,
+      "line": 1697,
+      "ruleLine": 1698,
       "ruleText": "out.hugs.set(partName, [...verdicts][0]);",
       "css": {
         "construct": "the relationship between a part’s used width and its max-width",

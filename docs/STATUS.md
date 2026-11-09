@@ -22,7 +22,7 @@ then this page, then choose work. It is written for any agent or provider.
      today: four have no contract and three are refused on framing.
    - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
      variants): the engine converted none at the test. Since then it writes a contract for each
-     in-grammar component; of 7 written and checked, 5 count as sets, 2 of 35 variants pass
+     in-grammar component; of 7 written and checked, 5 count as sets, 9 of 35 variants pass
      (2026-11-09). AI with the reader's measurements: 27.3%
      after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
      6; AI without them 8.6%. 0 font-blocked. 26 of A0's 62 in-grammar components have
@@ -520,6 +520,14 @@ and break no known cell. A0 is now practice and regression only.
         overwrote the other (61 files for 62 contracts). A name now takes as many parent segments as it
         needs: DatePickerCalendar and DatePickerNextCalendar. Every other name and contract unchanged
         on both libraries; 62 distinct contracts on A0, two runs byte-identical.
+      - Set sizes (2026-11-09): a width or height the stylesheet sets to a fixed length (AG's
+        StatusBadge `height: 2rem`) is carried as a fixed size; the engine had dropped every size as a
+        measurement, so Figma hugged the content. Opt-in for this route only (`captureJs`
+        `authoredSize`, door `fuse.authored-geometry-admitted`); every other capture is byte-identical.
+        Contracts change only by the added sizes (and token renames to the same value): A0 24 of 62,
+        this repository 8 of 23. Live, A0: StatusBadge 0 to 7 of 17, size misses 21 to 4, 9 of 35
+        pass. This repository: Skeleton 0 to 3 of 3 and StatusDot 0 to 5 of 5. No verdict got worse.
+        Receipts in `private/authored-size-20261109` (git-ignored).
 
 ## Where things live
 
