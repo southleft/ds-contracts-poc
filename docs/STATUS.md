@@ -22,7 +22,7 @@ then this page, then choose work. It is written for any agent or provider.
      today: four have no contract and three are refused on framing.
    - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
      variants): the engine converted none at the test. Since then it writes a contract for each
-     in-grammar component; of 7 written and checked, 5 count as sets, 0 of 35 variants pass
+     in-grammar component; of 7 written and checked, 5 count as sets, 2 of 35 variants pass
      (2026-11-09). AI with the reader's measurements: 27.3%
      after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
      6; AI without them 8.6%. 0 font-blocked. 26 of A0's 62 in-grammar components have
@@ -502,6 +502,15 @@ and break no known cell. A0 is now practice and regression only.
         variants pass. This repository's Storybook: Citation now counts (2 variants font-blocked),
         AccordionItem and Pagination unchanged. Every other contract byte-identical; two runs
         byte-identical. Receipts in `private/r2f-variant-text-20261109` (git-ignored).
+      - The painted face (2026-11-09): each font stack is written with the face the pinned browser
+        paints it with first (`CSS.getPlatformFontsForNode`, the reader's own signal). The Figma
+        engine takes a stack's first entry, so a stack opening with `-apple-system` gave Figma its
+        fallback (Inter). Every contract on both libraries changes only there (Arimo, Tinos,
+        Cousine). Live, A0: text-font misses 27 to 0, and the first passes, Heading (0.2% on white)
+        and 1 of Card's 3 variants: 2 of 35. This repository: Pagination's one text-font miss is
+        gone; it still fails on its icons (image 17.3% to 17.9%); no verdict moves. Broken, next PR:
+        A0's two components titled Calendar share one contract name, so one overwrites the other.
+        Receipts in `private/r2f-painted-face-20261109` (git-ignored).
 
 ## Where things live
 

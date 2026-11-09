@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
-import { carryVariantText, declare, seed } from './storybook-contracts.js';
+import { carryVariantText, declare, paintedFirst, seed } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -53,4 +53,15 @@ test('a nested part whose text differs between variants carries each variant\'s 
   assert.match(refused.join(), /^per-variant-text-unqualified: label: literal-text-combination-/);
   assert.equal((off.contract.anatomy.root.parts as Record<string, { textByCombination?: unknown }>).label!.textByCombination, undefined);
   assert.deepEqual(carryVariantText(seed({ ...c!, axes: [] }).contract, [], off.combos, at), []); // no options: nothing to carry
+});
+
+test('each font stack is written with the face the pinned browser painted it with first; the rest of the stack stays', () => {
+  const stack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
+  const anatomy = { root: { declared: { 'font-family': stack }, parts: { label: { declared: { 'font-family': 'serif' },
+    stylesWhen: [{ prop: 'tone', equals: 'x', styles: { 'font-family': stack } }] }, token: { tokens: { 'font-family': '{a.b}' } } } } };
+  paintedFirst(anatomy, new Map([[stack, 'Arimo']]));
+  assert.equal(anatomy.root.declared['font-family'], `"Arimo", ${stack}`);
+  assert.equal(anatomy.root.parts.label.stylesWhen[0]!.styles['font-family'], `"Arimo", ${stack}`);
+  assert.equal(anatomy.root.parts.label.declared['font-family'], 'serif'); // no painted face probed: unchanged
+  assert.equal(anatomy.root.parts.token.tokens['font-family'], '{a.b}');
 });
