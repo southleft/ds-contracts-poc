@@ -376,6 +376,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       Chromium draws the field pixel-identical to U+2022 bullets. Figma to React collector unchanged. A0
       re-read: 411 of 411 images identical, one run changed, nothing else; this repository: no change. Check on
       PasswordInput, same Figma state: only that demand changes, no verdict moves.
+- [x] An inline subject is measured (2026-11-09). The paint extent promotes the subject to its own compositor
+      layer with `will-change: transform`, which does not apply to an inline box, so a component whose root is
+      inline (a link, a run of text) got no layer and its reference was refused (`paint-extent-subject-layer-
+      missing`): A0's Text, TextLink and TextLinkExternal could never pass. An inline subject is now promoted by
+      opacity, which applies to every box; the pinned Chromium gives it a layer. A0 re-read: those 3 references
+      now exist; 411 of 411 other images identical, nothing else changed; this repository: no change. Check on
+      the written TextLink sets, same Figma state: unverified to fail (image 33%), nothing to pass.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
       and painted-box rules of 2026-11-08), the Storybook reader

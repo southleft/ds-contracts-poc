@@ -102,7 +102,9 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
   if(!found.nodeId)return {refused:'paint-extent-subject-not-found'};
   const description=await cdp.send('DOM.describeNode',{nodeId:found.nodeId,depth:-1,pierce:true});
   const ids=new Set<number>();const visit=(n:any)=>{if(typeof n.backendNodeId==='number')ids.add(n.backendNodeId);for(const key of ['children','shadowRoots','pseudoElements'])for(const child of n[key]??[])visit(child);};visit(description.node);
-  await root.evaluate(el=>(el as HTMLElement).style.setProperty('will-change','transform','important'));
+  // A transform does not apply to an inline box, so an inline subject (a link, a run of text) gets no layer from it
+  // and was refused; it is promoted by opacity, which applies to every box.
+  await root.evaluate(el=>(el as HTMLElement).style.setProperty('will-change',getComputedStyle(el).display==='inline'?'opacity':'transform','important'));
   // Flush the compositor and wait for a tree containing this subject, rather
   // than accepting an earlier unrelated layer-tree event.
   const promotedBytes=await page.screenshot({omitBackground:true,animations:'disabled'});

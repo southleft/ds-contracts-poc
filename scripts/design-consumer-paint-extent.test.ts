@@ -15,6 +15,16 @@ test('paint extent maps scrolling back to document coordinates',async()=>{
  const result=await observeConsumerPaintExtent(page,'#subject');assert('observation'in result,JSON.stringify(result));assert.deepEqual(result.observation.paint,{x:65,y:500,width:4055,height:20});
  }finally{await browser.close();}
 });
+test('an inline subject (a link in running text) is measured, not refused; restoration is exact',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:400,height:200}});
+ await page.setContent('<p style="margin:20px;font:16px sans-serif">Read the <a id="subject" href="#" style="box-shadow:0 0 0 3px red">terms</a> today.</p>');
+ const before=await page.locator('body').innerHTML(),rect=await page.locator('#subject').evaluate(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};});
+ const result=await observeConsumerPaintExtent(page,'#subject');assert('observation'in result,JSON.stringify(result));
+ assert.deepEqual(result.observation.layout,rect);const p=result.observation.paint; // the 3px ring reaches past the layout box
+ assert(p.x<=rect.x-3&&p.y<=rect.y-3&&p.x+p.width>=rect.x+rect.width+3&&p.y+p.height>=rect.y+rect.height+3,JSON.stringify(p));
+ assert.equal(await page.locator('body').innerHTML(),before);
+ }finally{await browser.close();}
+});
 test('promotion cannot silently change fixed descendants or selector-dependent pseudo styles',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage();
  for(const content of ['<style>#subject{position:absolute;left:100px;width:20px;height:20px;background:blue}#child{position:fixed;left:0;width:5px;height:5px;background:red}</style><div id="subject"><div id="child"></div></div>', '<style>#subject{width:20px;height:20px;background:blue}#subject::before{content:"";width:5px;height:5px;display:block}#subject[style]::before{width:10px}</style><div id="subject"></div>']){
