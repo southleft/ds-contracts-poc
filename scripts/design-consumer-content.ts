@@ -426,10 +426,14 @@ export const domContentOf = new Function('el', 'mark', `
   const paintsBox = (s) => alpha(s.backgroundColor) > 0 || s.boxShadow !== 'none' ||
     ['Top', 'Right', 'Bottom', 'Left'].some(side => parseFloat(s['border' + side + 'Width']) > 0 && s['border' + side + 'Style'] !== 'none' && alpha(s['border' + side + 'Color']) > 0);
   const visible = (n) => typeof n.checkVisibility === 'function' ? n.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : true;
+  // The reader's call (mark): a field drawn masked (-webkit-text-security, which the browser sets on a password input)
+  // draws one mask glyph per character (Blink's disc, circle and square), not its value.
+  const MASK = { disc: '\\u2022', circle: '\\u25e6', square: '\\u25a0' };
+  const drawnValue = (n) => { const m = mark && MASK[getComputedStyle(n).getPropertyValue('-webkit-text-security')]; return m ? m.repeat([...n.value].length) : n.value; };
   const graphics = [];
   for (const n of el.querySelectorAll('*')) {
     if ((n instanceof HTMLInputElement || n instanceof HTMLTextAreaElement) && visible(n)) {
-      if (n.value) texts.push(n.value);
+      if (n.value) texts.push(drawnValue(n));
       if (n.placeholder && !n.value) texts.push(n.placeholder);
     }
     if (n.localName === 'text' && n.closest('svg') && visible(n)) texts.push(n.textContent || '');
@@ -492,7 +496,7 @@ export const domContentOf = new Function('el', 'mark', `
     };
     pseudo('::before');
     if ((n instanceof HTMLInputElement || n instanceof HTMLTextAreaElement) && shows(n)) {
-      if (n.value) push(n.value, getComputedStyle(n), n, false, 1);
+      if (n.value) push(drawnValue(n), getComputedStyle(n), n, false, 1);
       else if (n.placeholder) { const s = getComputedStyle(n, '::placeholder'), o = parseFloat(s.opacity); push(n.placeholder, s, n, false, o >= 0 ? o : 1); }
     }
     if (!(n instanceof HTMLTextAreaElement)) for (const child of n.childNodes) visit(child);
