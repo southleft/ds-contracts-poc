@@ -42,7 +42,13 @@ const IDENTITY_CLASSES = '^(?!css-[0-9a-z]+(-|$))';
 const IMAGES_SETTLED = `Promise.race([Promise.all([...document.images].map((i) => i.complete ? null : new Promise((r) => {
   i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))).then(() => new Promise((r) =>
   requestAnimationFrame(() => requestAnimationFrame(() => r(true))))), new Promise((r) => setTimeout(() => r(false), 20000))])`;
-const pascal = (t: string) => t.split('/').at(-1)!.replace(/[^A-Za-z0-9]+(.)?/g, (_, c) => (c ?? '').toUpperCase()).replace(/^./, (c) => c.toUpperCase());
+const pascal = (t: string) => t.replace(/[^A-Za-z0-9]+(.)?/g, (_, c) => (c ?? '').toUpperCase()).replace(/^./, (c) => c.toUpperCase());
+/** A component's name: its title's last segment, with as many parent segments as it takes to differ from every other
+ * declared component's (A0 has two titles ending in Calendar, which wrote one contract over the other). */
+const uniqueName = (title: string, titles: readonly string[]) => {
+  const tail = (t: string, k: number) => pascal(t.split('/').slice(-k).join(' '));
+  for (let k = 1; ; k++) if (k >= title.split('/').length || titles.filter((t) => tail(t, k) === tail(title, k)).length === 1) return tail(title, k);
+};
 const kebab = (s: string) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
 /** `ds-contracts.react.json`: one case per variant the matrix rule counts, in the reader's order. */
@@ -55,8 +61,9 @@ export function declare(stories: ReaderOutput, storybook = stories.storybook): S
     const seen = new Map<string, number>();
     const cases = c.references.map((r) => { const n = seen.get(r.storyId) ?? 0; seen.set(r.storyId, n + 1);
       return { id: `${r.storyId}.${n}`, story: { id: r.storyId, args: r.args }, variant: r.variant }; });
-    components.push({ subject: c.title, name: pascal(c.title), axes: [...c.matrix.axes], cases });
+    components.push({ subject: c.title, name: '', axes: [...c.matrix.axes], cases });
   }
+  for (const c of components) c.name = uniqueName(c.subject, components.map((x) => x.subject));
   return { version: 2, source: 'storybook', storybook, react: stories.environment?.react ?? null, components, refused };
 }
 

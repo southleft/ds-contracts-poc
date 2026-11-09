@@ -514,9 +514,12 @@ and break no known cell. A0 is now practice and regression only.
         fallback (Inter). Every contract on both libraries changes only there (Arimo, Tinos,
         Cousine). Live, A0: text-font misses 27 to 0, and the first passes, Heading (0.2% on white)
         and 1 of Card's 3 variants: 2 of 35. This repository: Pagination's one text-font miss is
-        gone; it still fails on its icons (image 17.3% to 17.9%); no verdict moves. Broken, next PR:
-        A0's two components titled Calendar share one contract name, so one overwrites the other.
-        Receipts in `private/r2f-painted-face-20261109` (git-ignored).
+        gone; it still fails on its icons (image 17.3% to 17.9%); no verdict moves. Receipts in
+        `private/r2f-painted-face-20261109` (git-ignored).
+      - Unique names (2026-11-09): A0's two components titled Calendar shared one contract name, so one
+        overwrote the other (61 files for 62 contracts). A name now takes as many parent segments as it
+        needs: DatePickerCalendar and DatePickerNextCalendar. Every other name and contract unchanged
+        on both libraries; 62 distinct contracts on A0, two runs byte-identical.
 
 ## Where things live
 
