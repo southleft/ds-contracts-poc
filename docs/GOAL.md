@@ -279,3 +279,19 @@ freeze, no draws and no sealed runs. The Step 2 checklist is on hold. Work resum
 only on a new signed entry. Owner-only actions are unchanged.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-08.
+
+### 2026-11-08: The climb resumes
+
+The owner, in chat, after the no-option fix merged (PR #340): "I left caffeinate on
+because I wanted my laptop to not go to sleep, so that way you can continue
+hillclimbing on this project, which is what I would still like to continue doing."
+The hold in "Paid work stops after the no-option fix" ends. The Step 2 checklist is
+back in force as written: the React to Figma check merges by 2026-11-18; the
+checker, the grammar classifier and the variant matrix rule freeze on 2026-11-20; A1
+is drawn after that freeze; A2 is drawn on 2026-12-04 under stop rule 2; code is
+tagged on 2026-12-11; and B is drawn on 2026-12-14. The conversion stays
+deterministic, and AI is never part of it. The capped A0 AI test was decision input
+on a practice kit and changes nothing on this page. Every other rule, date and stop
+rule is unchanged, and spend counts against the same $2,400 cap.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-08.
