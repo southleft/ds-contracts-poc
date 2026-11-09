@@ -95,10 +95,12 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
  try{
    before=await observation();
    const ancestorPaint=await root.evaluate(el=>{
+     // A border or outline paints only in a visible color (a transparent one keeps its width and paints nothing).
+     const none=['transparent','rgba(0, 0, 0, 0)'];
      for(let p=el.parentElement;p;p=p.parentElement){const s=getComputedStyle(p);
-       if(!['transparent','rgba(0, 0, 0, 0)'].includes(s.backgroundColor)||s.backgroundImage!=='none'||s.boxShadow!=='none'||
-         ['Top','Right','Bottom','Left'].some(side=>parseFloat(s.getPropertyValue('border-'+side.toLowerCase()+'-width'))>0)||
-         (s.outlineStyle!=='none'&&parseFloat(s.outlineWidth)>0))return p.localName;
+       if(!none.includes(s.backgroundColor)||s.backgroundImage!=='none'||s.boxShadow!=='none'||s.borderImageSource!=='none'||
+         ['top','right','bottom','left'].some(side=>parseFloat(s.getPropertyValue('border-'+side+'-width'))>0&&!none.includes(s.getPropertyValue('border-'+side+'-color')))||
+         (s.outlineStyle!=='none'&&parseFloat(s.outlineWidth)>0&&!none.includes(s.outlineColor)))return p.localName;
        for(const pseudo of ['::before','::after'])if(!['none','normal'].includes(getComputedStyle(p,pseudo).content))return p.localName+pseudo;
      }return null;
    });

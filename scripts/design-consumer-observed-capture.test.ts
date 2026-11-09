@@ -11,6 +11,16 @@ test('external backdrop removal preserves subject alpha, inherited color and ori
  assert.equal(await page.content(),before);assert.deepEqual(await page.screenshot(),original);
  }finally{await browser.close();}
 });
+test('the container a story draws the subject in (border, shadow, outline) is not captured; geometry and page are unchanged',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240}});
+ await page.setContent('<style>body{margin:0}#cell{padding:30px}ul{margin:0;padding:0;list-style:none;border:4px solid red;box-shadow:0 8px 16px rgba(0,0,0,.5);outline:2px solid lime;background:white}#subject{width:20px;height:20px;background:blue;box-shadow:0 0 0 6px rgb(0,0,255)}</style><div id="cell"><ul><li id="subject"></li></ul></div>');
+ const before=await page.content(),original=await page.screenshot();
+ const result=await captureSubjectWithoutBackdrop(page,'#subject','#cell');assert('bytes'in result,JSON.stringify(result));
+ const png=PNG.sync.read(result.bytes);assert.deepEqual([png.width,png.height],[32,32]); // the subject and its own 6px ring
+ for(let i=0;i<png.data.length;i+=4)assert.deepEqual([...png.data.subarray(i,i+4)],[0,0,255,255],`pixel ${i/4} is not the subject's own blue`);
+ assert.equal(await page.content(),before);assert.deepEqual(await page.screenshot(),original);
+ }finally{await browser.close();}
+});
 test('backdrop acquisition refuses selector changes and ancestor blending, restoring styles',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage();
  await page.setContent('<style>#cell{background:white}#subject{width:20px;height:20px;background:blue}#cell[style] #subject::before{content:"changed"}</style><div id="cell"><div id="subject"></div></div>');
