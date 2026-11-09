@@ -114,6 +114,22 @@ export function carryVariantText(contract: Contract, axes: readonly string[], co
   return refused;
 }
 
+/** Each font stack with the face the pinned browser paints it with put first. A Figma text has one family and no
+ * fallback, and the Figma engine takes a stack's first entry; a stack that opens with a system keyword
+ * (`-apple-system`) gave none, so Figma drew its fallback (Inter). The face comes from the same signal the reader
+ * records per run (CSS.getPlatformFontsForNode, the face with the most glyphs); the rest of the stack stays. */
+export function paintedFirst(node: unknown, faces: ReadonlyMap<string, string>): void {
+  if (!node || typeof node !== 'object') return;
+  for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
+    if (k === 'font-family' && typeof v === 'string' && faces.has(v)) (node as Record<string, unknown>)[k] = `${JSON.stringify(faces.get(v))}, ${v}`;
+    else paintedFirst(v, faces);
+  }
+}
+const stacksIn = (node: unknown, out = new Set<string>()): Set<string> => {
+  if (node && typeof node === 'object') for (const [k, v] of Object.entries(node)) k === 'font-family' && typeof v === 'string' ? out.add(v) : stacksIn(v, out);
+  return out;
+};
+
 async function main() {
   const flag = (n: string) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : undefined; };
   const out = flag('--out'), storiesPath = flag('--stories'), fileKey = flag('--file-key'), titles = flag('--titles')?.split('|');
@@ -145,6 +161,16 @@ async function main() {
     }
     const allProps = chosen.length ? await page.evaluate(listAll) as string[] : [];
     await page.addStyleTag({ content: NO_MOTION });
+    const cdp = await page.context().newCDPSession(page), faces = new Map<string, string>();
+    await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+    const paintedFace = async (stack: string): Promise<string | undefined> => {
+      await page.evaluate(`(async () => { const e = document.createElement('span'); e.id = 'ds-face-probe'; e.style.fontFamily = ${JSON.stringify(stack)};
+        e.textContent = 'Hamburgefonstiv 0123'; document.body.appendChild(e); await document.fonts.ready; })()`);
+      const { root } = await cdp.send('DOM.getDocument', { depth: 0 }), { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '#ds-face-probe' });
+      const { fonts } = await cdp.send('CSS.getPlatformFontsForNode', { nodeId });
+      await page.evaluate(`document.getElementById('ds-face-probe')?.remove()`);
+      return [...fonts].sort((a, b) => b.glyphCount - a.glyphCount)[0]?.familyName;
+    };
     for (const c of chosen) {
       const row: Record<string, unknown> = { subject: c.subject, refusals: [] as string[] }, refusals = row.refusals as string[];
       report.push(row);
@@ -193,6 +219,8 @@ async function main() {
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return el ? textOf(el.node as never) : null; }));
+        for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
+        paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
         const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });
