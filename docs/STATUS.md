@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-08 (paid work stops after the no-option fix: owner, 2026-11-08, signed entry in GOAL.md; both checklists below are on hold until a new signed entry). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-08 (the climb resumed: owner, 2026-11-08, signed entry in GOAL.md; both checklists below are back in force as written). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -38,9 +38,6 @@ then this page, then choose work. It is written for any agent or provider.
      pass on a mostly empty image.
 
 ## Step 2 checklist (2026-10-31 to 2026-12-11)
-
-**On hold** (owner, 2026-11-08: "Stop after the fix", signed entry in GOAL.md): no new work on
-this plan until a new signed entry. Owner-only actions are unchanged.
 
 Step 1 closed on 2026-10-31: A0 measured both ways, the earlier 1,344 variants
 classified, and Decision 1 taken early by the owner (continue; signed entry in
@@ -364,8 +361,7 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       two runs. A verdict that differs between them is reported to the owner by name, as
       broken, before any number is claimed. This is run protocol, not checker code.
 
-Agent, climb (practice kits only, one named miss class per PR, shared rules only). **On hold**
-(owner, 2026-11-08), as above.
+Agent, climb (practice kits only, one named miss class per PR, shared rules only).
 Rule 8: each fix must also help a practice kit other than the one that motivated it
 and break no known cell. A0 is now practice and regression only.
 - [x] Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`, the CSS
