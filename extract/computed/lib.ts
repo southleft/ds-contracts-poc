@@ -65,6 +65,8 @@ export interface CapturedNode {
   /** Opt-in (captureJs `authoredSize`): a width/height the stylesheet or inline style SETS to a fixed length,
    *  as authored (`2rem`, `var(--x)` resolving to one). Absent everywhere else, so committed captures do not move. */
   asize?: Partial<Record<'width' | 'height', string>>;
+  /** Opt-in (captureJs `fieldText`): what a text field draws — its value (masked as drawn) and its placeholder. */
+  field?: { value: string; placeholder: string };
   /** SILENT-LOSS ROUND (task #33, fix 1): property → var names for source
    *  declarations that are SHORTHANDS carrying a var(). Chromium stores such a
    *  declaration as a pending-substitution value and enumerates its longhands
@@ -450,6 +452,7 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
       ? { vrefs: Object.fromEntries(Object.keys(n.vrefs).sort().map((k) => [k, n.vrefs![k]])) }
       : {}),
     ...(n.asize !== undefined ? { asize: { ...n.asize } } : {}),
+    ...(n.field !== undefined ? { field: { ...n.field } } : {}),
     // DEFECT FOUND WHILE CLOSING R5 — `vshorthands` was NEVER preserved here.
     // normalizeNode builds a fresh object, and the task-#33 shorthand-ceiling
     // field was not on the list, so `el.node.vshorthands` was `undefined` on

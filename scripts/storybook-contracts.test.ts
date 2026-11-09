@@ -55,6 +55,28 @@ test('a nested part whose text differs between variants carries each variant\'s 
   assert.deepEqual(carryVariantText(seed({ ...c!, axes: [] }).contract, [], off.combos, at), []); // no options: nothing to carry
 });
 
+test('a text field carries the text it draws: one placeholder as attrs.placeholder, values per variant, drawn by the Figma engine', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['tone'],
+    references: [ref('f--a', { tone: 'success' }), ref('f--a', { tone: 'error' }, { tone: 'error' })] })] }).components;
+  const { contract, combos } = seed(c!);
+  contract.anatomy.root.parts = { box: { element: 'textarea' }, plain: { element: 'input' }, mixed: { element: 'input' } } as never;
+  const tone = (key: string) => combos.find((k) => k.key === key)!.axisValues.tone!;
+  const fields: Record<string, Record<string, { value: string; placeholder: string }>> = {
+    box: { success: { value: '', placeholder: 'Write…' }, error: { value: 'Oops', placeholder: 'Write…' } },
+    plain: { success: { value: '', placeholder: 'Search' }, error: { value: '', placeholder: 'Search' } },
+    mixed: { success: { value: '', placeholder: 'A' }, error: { value: '', placeholder: 'B' } } };
+  assert.deepEqual(carryVariantText(contract, c!.axes, combos, () => null, (key, part) => fields[part]![tone(key)]!), ['field-placeholder-per-variant: mixed']);
+  const parts = contract.anatomy.root.parts as Record<string, { attrs?: unknown; textByCombination?: unknown }>;
+  assert.deepEqual([parts.box!.attrs, parts.box!.textByCombination], [{ placeholder: 'Write…' }, { props: ['tone'], rows: [{ values: ['success'], text: '' }, { values: ['error'], text: 'Oops' }] }]);
+  assert.deepEqual([parts.plain!.attrs, parts.plain!.textByCombination, parts.mixed!.attrs], [{ placeholder: 'Search' }, undefined, undefined]);
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map() });
+  type Spec = { name?: string; characters?: string; children?: Spec[] };
+  const texts = (s: Spec): string[] => [...(s.characters !== undefined ? [`${s.name}:${s.characters}`] : []), ...(s.children ?? []).flatMap(texts)];
+  const drawn = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.map((v) => texts(v.spec));
+  assert.deepEqual(drawn, [['placeholder:Write…', 'placeholder:Search', 'placeholder:'], ['value:Oops', 'placeholder:Search', 'placeholder:']]);
+});
+
 test('each font stack is written with the face the pinned browser painted it with first; the rest of the stack stays', () => {
   const stack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
   const anatomy = { root: { declared: { 'font-family': stack }, parts: { label: { declared: { 'font-family': 'serif' },
@@ -80,4 +102,7 @@ test('a set width or height is read only when the converter asks, and survives t
   const node = { tag: 'span', classes: [], nodes: [], style: {}, pseudo: {} };
   assert.deepEqual(normalizeNode({ ...node, asize: { height: '2rem' } }).asize, { height: '2rem' });
   assert.equal('asize' in normalizeNode(node), false);
+  assert.equal(captureJs('[x]', undefined, undefined, undefined, true).includes('out.field'), false); // field text: its own opt-in
+  assert.equal(captureJs('[x]', undefined, undefined, undefined, false, true).includes('out.field = '), true);
+  assert.deepEqual(normalizeNode({ ...node, field: { value: '', placeholder: 'Search' } }).field, { value: '', placeholder: 'Search' });
 });

@@ -1443,7 +1443,7 @@ export function preScriptTag(cfg: CaptureConfig): string {
 // @door capture.text-node-admission
 // @door capture.unreadable-sheet-skip
 // @door capture.varprefix-off-switch
-export const captureJs = (selector: string, classAllow?: string, varPrefix?: string, rootPath?: readonly string[], authoredSize = false) => `(() => {
+export const captureJs = (selector: string, classAllow?: string, varPrefix?: string, rootPath?: readonly string[], authoredSize = false, fieldText = false) => `(() => {
   ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
@@ -1903,6 +1903,12 @@ ${authoredSize ? `  // AUTHORED SIZE (opt-in, the Storybook converter): a width/
     };
     if (vr) out.vrefs = vr;
 ${authoredSize ? `    { const az = asizeOf(el); if (az) out.asize = az; }
+` : ''}${fieldText ? `    // FIELD TEXT (opt-in, the Storybook converter): the text a text field draws is an attribute, not DOM text — its
+    // value (a masked field draws one mask glyph per character), else its placeholder.
+    if (el instanceof HTMLTextAreaElement || (el instanceof HTMLInputElement && ['text', 'search', 'email', 'password', 'tel', 'url', 'number'].includes(el.type))) {
+      const mask = { disc: '\\u2022', circle: '\\u25e6', square: '\\u25a0' }[ecs.getPropertyValue('-webkit-text-security')];
+      out.field = { value: mask ? mask.repeat([...el.value].length) : el.value, placeholder: el.placeholder };
+    }
 ` : ''}    if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
     if (vrPair.calcs) out.vcalcs = vrPair.calcs;
     // A2 GRID — declared-track read, grid containers only (see gdeclOf).

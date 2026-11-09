@@ -546,6 +546,15 @@ and break no known cell. A0 is now practice and regression only.
         this repository 8 of 23. Live, A0: StatusBadge 0 to 7 of 17, size misses 21 to 4, 9 of 35
         pass. This repository: Skeleton 0 to 3 of 3 and StatusDot 0 to 5 of 5. No verdict got worse.
         Receipts in `private/authored-size-20261109` (git-ignored).
+      - Form-field text (2026-11-09): a text field's text is an attribute the capture did not read. It now
+        reads it for this route only (`captureJs` `fieldText`): the value (masked as drawn), else the
+        placeholder, as the reader does. A placeholder every empty variant draws alike is the field's
+        `attrs.placeholder`; values are carried per variant (`textByCombination` on the field, drawn in its own
+        ink). Contracts change only there: A0 5 of 62, this repository 2 of 23; two runs byte-identical. Live,
+        same Figma state, main's scripts then these: A0 loses 4 `text-not-editable` problems (PasswordInput,
+        SearchInput, Textarea) and TimeInput draws "21:30" (13.2% to 12.1% on white); no verdict moves, the
+        sets fail on layout. This repository: TextArea and TextField now count as sets; their 6 variants are
+        font-blocked (Arimo 500/600). Receipts in `private/form-field-text-20261109` (git-ignored).
 
 ## Where things live
 

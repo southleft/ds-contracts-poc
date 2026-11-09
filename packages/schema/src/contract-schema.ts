@@ -5115,7 +5115,9 @@ export function textByCombinationIssues(contract:Contract,part:Part,nested:boole
  const table=part.textByCombination;if(table===undefined)return [];
  const issues:string[]=[];
  if(!TextByCombinationSchema.safeParse(table).success)return ['literal-text-combination-invalid'];
- if(!nested||typeof part.text!=='string'||part.content||part.textByProp||part.component||part.parts||part.slot||part.repeat||part.icon||part.shape||part.mask||part.visibilityOverrideProp)issues.push('literal-text-combination-requires-owned-literal');
+ // A text field owns the text it draws (its value), which is an attribute, not literal text it contains.
+ const field=(part.element==='input'||part.element==='textarea')&&part.text===undefined;
+ if(!nested||(typeof part.text!=='string'&&!field)||part.content||part.textByProp||part.component||part.parts||part.slot||part.repeat||part.icon||part.shape||part.mask||part.visibilityOverrideProp)issues.push('literal-text-combination-requires-owned-literal');
  const axes=absentVariantAxes(contract),selected=axes.filter(axis=>table.props.includes(axis.prop.name));
  if(selected.length!==table.props.length||selected.some((axis,i)=>axis.prop.name!==table.props[i]))issues.push('literal-text-combination-axis-domain-unqualified');
  if(table.rows.some(row=>row.values.some((value,i)=>!selected[i]?.options.some(option=>(option===null?null:String(option))===value))))issues.push('literal-text-combination-value-unqualified');
