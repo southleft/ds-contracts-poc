@@ -38,11 +38,19 @@ export async function captureSubjectWithoutBackdrop(page:Page,selector:string,in
  let result:Awaited<ReturnType<typeof captureSubjectWithoutBackdrop>>={refused:'backdrop-capture-incomplete'};
  try{
   const unsafe=await ancestors.evaluate(rs=>rs.some(({node})=>{
-   const s=getComputedStyle(node);return s.backgroundImage!=='none'||s.filter!=='none'||s.backdropFilter!=='none'||s.mixBlendMode!=='normal'||s.opacity!=='1';
+   const s=getComputedStyle(node);return s.backgroundImage!=='none'||s.borderImageSource!=='none'||s.filter!=='none'||s.backdropFilter!=='none'||s.mixBlendMode!=='normal'||s.opacity!=='1';
   }));
   if(unsafe)return {refused:'backdrop-capture-ancestor-compositing-unsupported'};
   const ancestorBackgrounds=await ancestors.evaluate(rs=>rs.filter(r=>!['transparent','rgba(0, 0, 0, 0)'].includes(r.background)).map(r=>({tag:r.node.tagName,background:r.background})));
-  await ancestors.evaluate(rs=>rs.forEach(r=>{if(!['transparent','rgba(0, 0, 0, 0)'].includes(r.background))r.node.style.setProperty('background-color','transparent','important');}));
+  // The container a story draws the subject in is not the subject: its background, border and outline colors go
+  // transparent (their widths stay, so geometry does not move) and its shadow goes; the snapshot below proves the subject unchanged.
+  await ancestors.evaluate(rs=>rs.forEach(r=>{const s=getComputedStyle(r.node),none=['transparent','rgba(0, 0, 0, 0)'];
+   const border=['top','right','bottom','left'].some(side=>parseFloat(s.getPropertyValue('border-'+side+'-width'))>0&&!none.includes(s.getPropertyValue('border-'+side+'-color')));
+   const outline=s.outlineStyle!=='none'&&parseFloat(s.outlineWidth)>0&&!none.includes(s.outlineColor),shadow=s.boxShadow!=='none';
+   if(!none.includes(r.background))r.node.style.setProperty('background-color','transparent','important');
+   if(border)r.node.style.setProperty('border-color','transparent','important');
+   if(outline)r.node.style.setProperty('outline-color','transparent','important');
+   if(shadow)r.node.style.setProperty('box-shadow','none','important');}));
   if(await snapshot()!==before)result={refused:'backdrop-capture-subject-changed'};
   else{
    const captured=await captureObservedSubject(page,selector,instrumentSelector);

@@ -383,6 +383,14 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       opacity, which applies to every box; the pinned Chromium gives it a layer. A0 re-read: those 3 references
       now exist; 411 of 411 other images identical, nothing else changed; this repository: no change. Check on
       the written TextLink sets, same Figma state: unverified to fail (image 33%), nothing to pass.
+- [x] The container a story draws the subject in is not the subject (2026-11-09; STATUS named "ComboboxRenderItem's
+      references are unreadable"). The reader clears an ancestor's background color before capturing but refused
+      any ancestor border, shadow or outline (`isolated-capture-painted-ancestor`), so a component a story draws in
+      a bordered list or panel never got a reference. Their colors now go transparent (widths stay, so geometry
+      does not move) and their shadows go; a border image still refuses, and the subject's own styles and boxes
+      must not change. A0 re-read: 6 references now exist (ComboboxRenderItem 2, the 3 Combobox list states,
+      LoadingBlanket); 414 of 414 other images identical, nothing else changed; this repository: no change. Check
+      on the 5 written sets, same Figma state: 6 variants unverified to fail (image 6% to 16%), nothing to pass.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
       and painted-box rules of 2026-11-08), the Storybook reader
