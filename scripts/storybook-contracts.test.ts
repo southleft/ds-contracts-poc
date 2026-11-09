@@ -65,3 +65,10 @@ test('each font stack is written with the face the pinned browser painted it wit
   assert.equal(anatomy.root.parts.label.declared['font-family'], 'serif'); // no painted face probed: unchanged
   assert.equal(anatomy.root.parts.token.tokens['font-family'], '{a.b}');
 });
+
+test('two components whose titles end alike take as many parent segments as it takes to differ', () => {
+  const d = declare({ storybook: 'x', components: [component('forms/DatePicker/Calendar', { references: [ref('a--a', {})] }),
+    component('forms/DatePickerNext/Calendar', { references: [ref('b--a', {})] }), component('content/status-badge', { references: [ref('c--a', {})] })] });
+  assert.deepEqual(d.components.map((c) => c.name), ['DatePickerCalendar', 'DatePickerNextCalendar', 'StatusBadge']);
+  assert.deepEqual(d.components.map((c) => seed(c).contract.id), ['storybook.date-picker-calendar', 'storybook.date-picker-next-calendar', 'storybook.status-badge']);
+});
