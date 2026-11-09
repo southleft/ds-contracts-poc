@@ -4141,6 +4141,14 @@ function formControlSpec(
     grow: resolveLayout(part, subst)?.grow || undefined,
   };
   const childCtx = applyStyling(spec, part, subst, ctx);
+  // A field that draws a value in this variant (`textByCombination`: the value it was observed drawing, '' for none)
+  // draws it in its own ink, the value ink; an empty value leaves the placeholder below.
+  const value = part.textByCombination ? resolveTextByCombination(part.textByCombination, subst) : '';
+  if (value) {
+    spec.children = [{ type: 'text', name: 'value', characters: value, fontSize: childCtx.fontSize ?? 16, fontStyle: figmaFaceStyle(childCtx),
+      ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}), ...textExtras(childCtx), ...textIdentity(childCtx), textFill: childCtx.textFill }];
+    return spec;
+  }
   // RC7: the placeholder CONCEPT decides everything below — whether there is
   // a string to draw, whether an empty one is a LOSS, and whether the ink
   // fallback is worth naming. A control with no placeholder (every checkbox,

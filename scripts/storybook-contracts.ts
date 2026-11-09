@@ -95,14 +95,22 @@ export function seed(c: DeclaredComponent) {
 /** Each variant's own text (GOAL.md Step 2: a full default plus per-variant differences). A nested part whose literal
  * text differs between variants carries the text each variant drew (`textByCombination`, over the variant axes). A table
  * the schema refuses (a root part, a domain that does not match where the part is drawn) leaves the first variant's
- * text and is named. */
+ * text and is named. A text field's text is an attribute, read as the reader reads it: its value, else its placeholder.
+ * A placeholder every variant without a value draws alike is the field's `attrs.placeholder`; values are carried per
+ * variant like literal text ('' where the field draws none). */
 export function carryVariantText(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
-  textAt: (comboKey: string, part: string) => string | null): string[] {
+  textAt: (comboKey: string, part: string) => string | null, fieldAt: (comboKey: string, part: string) => { value: string; placeholder: string } | null = () => null): string[] {
   const refused: string[] = [];
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
-    if (axes.length && typeof part.text === 'string') {
-      const drawn = combos.flatMap((k) => { const text = textAt(k.key, name); return text === null ? [] : [{ v: k.axisValues, text }]; });
-      if (new Set(drawn.map((r) => r.text)).size > 1) {
+    const field = (part.element === 'input' || part.element === 'textarea') && part.text === undefined;
+    const fields = field ? combos.flatMap((k) => { const f = fieldAt(k.key, name); return f ? [{ v: k.axisValues, ...f }] : []; }) : [];
+    const holders = [...new Set(fields.filter((f) => !f.value).map((f) => f.placeholder))];
+    if (holders.length === 1 && holders[0] && part.attrs?.placeholder === undefined) part.attrs = { ...part.attrs, placeholder: holders[0] };
+    else if (holders.length > 1) refused.push(`field-placeholder-per-variant: ${name}`);
+    if (axes.length && (typeof part.text === 'string' || field)) {
+      const drawn = field ? fields.map((f) => ({ v: f.v, text: f.value }))
+        : combos.flatMap((k) => { const text = textAt(k.key, name); return text === null ? [] : [{ v: k.axisValues, text }]; });
+      if (field ? drawn.some((r) => r.text) : new Set(drawn.map((r) => r.text)).size > 1) {
         // Axes that tell the texts apart (a table names at most 8), added most decisive first, kept in axis order.
         const clash = (props: string[]) => { const seen = new Map<string, string>(); let n = 0;
           for (const r of drawn) { const k = JSON.stringify(props.map((a) => r.v[a])); if (seen.has(k) && seen.get(k) !== r.text) n++; seen.set(k, r.text); } return n; };
@@ -190,7 +198,7 @@ async function main() {
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
           if (!await page.evaluate(IMAGES_SETTLED)) { refusals.push(`image-not-settled:${k.id}`); continue; }
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
-          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true)); // the stage's first rendered child, with set sizes
+          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true, true)); // the stage's first rendered child, with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root: normalizeNode(raw as any) });
         }
@@ -225,7 +233,9 @@ async function main() {
         const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return el ? textOf(el.node as never) : null; }));
+          return el ? textOf(el.node as never) : null; }, (key, part) => {
+          const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
+          return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
