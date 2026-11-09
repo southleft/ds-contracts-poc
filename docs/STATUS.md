@@ -21,7 +21,9 @@ then this page, then choose work. It is written for any agent or provider.
      76.9% keeping each set's best round). 0 font-blocked. Seven sets can't be judged
      today: four have no contract and three are refused on framing.
    - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
-     variants): the engine converts none. AI with the reader's measurements: 27.3%
+     variants): the engine converted none at the test. Since then it writes a contract for each
+     in-grammar component; of 7 written and checked, 4 count as sets, 0 of 35 variants pass
+     (2026-11-09). AI with the reader's measurements: 27.3%
      after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
      6; AI without them 8.6%. 0 font-blocked. 26 of A0's 62 in-grammar components have
      no options and could never count before the no-option fix.
@@ -473,11 +475,22 @@ and break no known cell. A0 is now practice and regression only.
       the examples' scripts and GENESIS batches, the golden manifest, the plugin's engine
       receipt and docs/24. The test mock and the GENESIS builders now open the file the
       scripts name, where they had run them in a file with no key.
-- [ ] The code side writes `ds-contracts.react.json` itself from the reader's
-      `stories.json` (GOAL.md Step 2), in its own module outside the frozen reader, after the
-      React to Figma check. Its route (the source-reference engine on a generated workspace, or
-      the story's own rendered page) is decided by a probe of about 5 Agriculture components
-      against the reader's references.
+- [x] The code side writes `ds-contracts.react.json` itself from the reader's `stories.json`
+      (GOAL.md Step 2): `scripts/storybook-contracts.ts`, outside the frozen reader, with a contract
+      and the Figma scripts for each in-grammar component (2026-11-09). Route: the story's own page,
+      through the reader's `SHOW` in its pinned browser. The source-reference engine was ruled out:
+      A0's Storybook wraps every story in its theme provider, which a component mounted outside
+      Storybook never sees; its observer runs only React 19.x (A0 runs 18.3); and it needs a witness
+      per case (regression only). Emotion's `css-<hash>` classes are not part names (a random blob
+      URL changed them run to run). Contracts: A0 62 of 62 in-grammar components, this repository's
+      Storybook 23 of 25 (Inline and Stack, `not-one-element`); two runs byte-identical on each. Seven
+      A0 components written into Scratch Contracts and checked: 4 count as sets, 0 of 35 variants
+      pass. Named misses, the climb's next classes: text written in Figma's fallback (Inter), not the
+      face the page painted (10 runs); each variant's text written as the first variant's
+      (StatusBadge, DirectionLink and Checkbox fail the editable-text rule); Checkbox's inset overlays
+      placed absolutely; borders dropped (Avatar, Divider); a full-width divider at 0 width; Card's
+      heights short. Receipts in `private/storybook-contracts-20261109` and
+      `private/r2f-route-b-20261108` (git-ignored).
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
 
