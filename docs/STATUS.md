@@ -350,9 +350,17 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       for it fails by name (`no-options-written-as-component-set`). Every other branch of the
       set rule is unchanged. A0: 26 of 62 in-grammar components could never count, 0 after.
       The 6 written sets on record give byte-identical results on main and on this rule.
+- [x] An empty painted box may be drawn as a painted box (2026-11-08; found by the A0 AI test). The reader
+      counts an empty element that paints a background, border or shadow as a graphic (a divider, a dot, a
+      skeleton block). The check wanted a Figma vector for it, so a rectangle or frame of that size never counted:
+      SkeletonBox's 200px variant scored 0.00% on white and black and failed only there, in every round. Such a
+      graphic may now be matched by a Figma box with nothing inside that paints a fill, stroke or shadow
+      (`paintedBoxes`); an SVG still needs a vector, and the image and size checks still decide. Practice baseline:
+      944 of 944 Figma to React variants identical. Main's check against this one on 105 written sets (582
+      variants): 18 change, all SkeletonBox, each only losing that miss; 11 move to pass, 0 to fail.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
-      rule of 2026-11-08), the Storybook reader
+      and painted-box rules of 2026-11-08), the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its capture of each reference
       alone at its paint extent (`captureSubjectWithoutBackdrop`, `observeConsumerPaintExtent`,
