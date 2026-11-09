@@ -24,7 +24,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type EnumAxisSpec } from '../extract/computed/lib.js';
-import { ContractSchema, type Contract } from './contract-schema.js';
+import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, SHOW, type StoryComponent } from './storybook-reader.js';
 
@@ -83,6 +83,35 @@ export function seed(c: DeclaredComponent) {
     enumeration: { policy: 'full-cartesian', cartesianSize: axes.reduce((n, a) => n * a.values.length, 1), combos, receipts: [] },
     baseComboKey: combos[0]!.key, baseAxisValues: combos[0]!.axisValues, heldFixed: [] };
   return { contract, drawn, combos, space };
+}
+
+/** Each variant's own text (GOAL.md Step 2: a full default plus per-variant differences). A nested part whose literal
+ * text differs between variants carries the text each variant drew (`textByCombination`, over the variant axes). A table
+ * the schema refuses (a root part, a domain that does not match where the part is drawn) leaves the first variant's
+ * text and is named. */
+export function carryVariantText(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  textAt: (comboKey: string, part: string) => string | null): string[] {
+  const refused: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    if (axes.length && typeof part.text === 'string') {
+      const drawn = combos.flatMap((k) => { const text = textAt(k.key, name); return text === null ? [] : [{ v: k.axisValues, text }]; });
+      if (new Set(drawn.map((r) => r.text)).size > 1) {
+        // Axes that tell the texts apart (a table names at most 8), added most decisive first, kept in axis order.
+        const clash = (props: string[]) => { const seen = new Map<string, string>(); let n = 0;
+          for (const r of drawn) { const k = JSON.stringify(props.map((a) => r.v[a])); if (seen.has(k) && seen.get(k) !== r.text) n++; seen.set(k, r.text); } return n; };
+        const props: string[] = [];
+        while (clash(props) && props.length < axes.length) props.push(axes.filter((a) => !props.includes(a)).sort((a, b) => clash([...props, a]) - clash([...props, b]))[0]!);
+        props.sort((a, b) => axes.indexOf(a) - axes.indexOf(b));
+        const rows = [...new Map(drawn.map((r) => { const values = props.map((a) => r.v[a]!); return [JSON.stringify(values), { values, text: r.text }]; })).values()];
+        part.textByCombination = { props, rows };
+        const issues = textByCombinationIssues(contract, part, true);
+        if (issues.length) { delete part.textByCombination; refused.push(`per-variant-text-unqualified: ${name}: ${issues.join(',')}`); }
+      }
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return refused;
 }
 
 async function main() {
@@ -160,6 +189,10 @@ async function main() {
         row.notes = [...receipts, ...enrichmentNotes].length;
         // A component with no options has no variant to list: it is written as one main component (GOAL.md, 2026-11-08).
         if (c.axes.length) (enriched as Contract).bindings.figma.drawnVariants = drawn;
+        const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();
+        refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
+          const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
+          return el ? textOf(el.node as never) : null; }));
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
         const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });

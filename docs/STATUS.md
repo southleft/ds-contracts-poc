@@ -22,7 +22,7 @@ then this page, then choose work. It is written for any agent or provider.
      today: four have no contract and three are refused on framing.
    - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
      variants): the engine converted none at the test. Since then it writes a contract for each
-     in-grammar component; of 7 written and checked, 4 count as sets, 0 of 35 variants pass
+     in-grammar component; of 7 written and checked, 5 count as sets, 0 of 35 variants pass
      (2026-11-09). AI with the reader's measurements: 27.3%
      after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
      6; AI without them 8.6%. 0 font-blocked. 26 of A0's 62 in-grammar components have
@@ -493,6 +493,15 @@ and break no known cell. A0 is now practice and regression only.
       `private/r2f-route-b-20261108` (git-ignored).
 - [ ] Carry each variant's observed values (a full default plus per-variant
       differences) instead of refusing them.
+      - Per-variant text (2026-11-09): a nested part whose text differs between variants carries
+        each variant's text (`textByCombination`, keyed by axes that tell the texts apart, added
+        most decisive first); a table the schema refuses keeps the first variant's text and is named. A0: 14 of 62
+        contracts gain it, 13 tables refused (`source-domain-incomplete`, 3 also `requires-owned-
+        literal`; DirectionLink's text is on its root). Live: StatusBadge now counts as a set and
+        Checkbox loses its 6 editable-text problems (its overlays remain): 5 of 7 count, 0 of 35
+        variants pass. This repository's Storybook: Citation now counts (2 variants font-blocked),
+        AccordionItem and Pagination unchanged. Every other contract byte-identical; two runs
+        byte-identical. Receipts in `private/r2f-variant-text-20261109` (git-ignored).
 
 ## Where things live
 
