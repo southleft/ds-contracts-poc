@@ -369,6 +369,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       identical, 340 runs dropped, nothing else; this repository's Storybook: no change. React to Figma on 60
       written A0 sets, same Figma state: 29 to 31 count, 3 variants change, 0 to pass, 0 to fail. Practice
       baseline: 944 of 944 Figma to React variants identical.
+- [x] A masked field draws its mask (2026-11-09; found scoping form-field text). The reader took a password
+      input's value as drawn text, so A0's disabled PasswordInput demanded "Disabled" as editable Figma text
+      while its image draws eight bullets. A field drawn masked (`-webkit-text-security`, which Chromium sets
+      on a password input) now reads as one mask glyph per character (disc •, circle ◦, square ■); the pinned
+      Chromium draws the field pixel-identical to U+2022 bullets. Figma to React collector unchanged. A0
+      re-read: 411 of 411 images identical, one run changed, nothing else; this repository: no change. Check on
+      PasswordInput, same Figma state: only that demand changes, no verdict moves.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
       and painted-box rules of 2026-11-08), the Storybook reader

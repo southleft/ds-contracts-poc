@@ -420,3 +420,14 @@ test('in the page: the reader keeps only drawn text; text clipped away (a visual
     assert.deepEqual(await texts(true), ['Label']);
   } finally { await browser.close(); }
 });
+
+test('in the page: the reader takes a masked field (a password input) as the mask glyphs it draws, not its value', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<div data-cell><div><input type="password" value="secret"><input value="Typed"><input value="ab" style="-webkit-text-security: square"></div></div>`);
+    const texts = async (mark?: boolean) => (await page.locator('[data-cell]').evaluate(domContentOf, mark)).runs!.map((r) => r.text);
+    assert.deepEqual(await texts(), ['secret', 'Typed', 'ab']); // the Figma to React call: unchanged
+    assert.deepEqual(await texts(true), ['•'.repeat(6), 'Typed', '■■']);
+  } finally { await browser.close(); }
+});
