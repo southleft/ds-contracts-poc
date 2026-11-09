@@ -298,7 +298,7 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       comparison is unchanged. A0: 2,166 runs, 2,124 with one painted face (Arimo 2,103, Tinos 14,
       Cousine 7), 42 not drawn (checkbox, radio and switch values; 1 visible, Switch's "on"),
       0 painted by several faces, 0 unread.
-- [ ] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
+- [x] React to Figma check, merged by 2026-11-18 (parent session, 2026-11-06): it judges a
       Figma set written from a library against the reader's references by GOAL.md's checks,
       with the Figma to React check's comparison code and its one image limit. A set counts
       only when it is a real component set: its variant properties match the story matrix
@@ -337,6 +337,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         and on a light circle outline. Blink's display list is identical every time; the
         pixels differ in Chromium's raster, more often under Rosetta. No verdict moves. Every
         baseline comparison names it.
+      - Live proof of the no-option rule (2026-11-08; hand-written to test the instrument, never
+        progress). A0's Heading and Divider were written into Scratch Contracts as one main
+        component each. The plugin dump reads each as type COMPONENT, with itself as its one
+        variant and no variant properties, as the fixtures assumed. Both count, and both variants
+        pass (Heading 0.25% on white and 0.12% on black, Divider 0.00%). Main's check from before
+        the rule fails both (`not-a-component-set`). Two check runs give byte-identical results.
+        Receipts are in `private/no-option-live-20261108` (git-ignored).
 - [x] A component with no options counts as one main component (owner, 2026-11-08, GOAL.md).
       Its matrix has no axis, and Figma gives every component set a variant property, so it
       could never count. It now counts as one main COMPONENT outside any set; a set written
