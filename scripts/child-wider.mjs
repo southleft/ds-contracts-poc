@@ -41,7 +41,7 @@ import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { createFigmaMock } from './plugin-engine-mock-figma.mjs';
+import { createFigmaMock, scriptFileKey } from './plugin-engine-mock-figma.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -103,7 +103,7 @@ export async function measureLibrary(lib) {
   const scripts = readdirSync(lib.dir)
     .filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js')
     .sort();
-  const mock = createFigmaMock();
+  const mock = createFigmaMock({ fileKey: scripts.map((f) => scriptFileKey(readFileSync(path.join(lib.dir, f), 'utf8'))).find(Boolean) ?? null });
   const tokens = path.join(lib.dir, '00-tokens.figma.js');
   if (existsSync(tokens)) await runIn(mock, readFileSync(tokens, 'utf8'));
   for (const f of scripts) await runIn(mock, readFileSync(path.join(lib.dir, f), 'utf8'));

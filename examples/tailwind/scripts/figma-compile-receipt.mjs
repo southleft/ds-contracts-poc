@@ -19,7 +19,7 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
+import { createFigmaMock, scriptFileKey } from '../../../scripts/plugin-engine-mock-figma.mjs';
 import { checkHugCeiling } from '../../../scripts/hug-ceiling-pin.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -71,7 +71,7 @@ for (const file of scripts) {
 
   // headless execute: fresh mock file, tokens first, then the component sync
   try {
-    const mock = createFigmaMock();
+    const mock = createFigmaMock({ fileKey: scriptFileKey(src) }); // the file the script names
     const tok = await runScript(mock.figma, TOKENS_SCRIPT);
     if (!tok || typeof tok.total !== 'number') throw new Error('token sync returned no receipt');
     await runScript(mock.figma, src);

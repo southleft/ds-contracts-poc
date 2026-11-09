@@ -41,7 +41,7 @@ import { emitReact } from '../../core/emit-react.js';
 import { emitReactInline } from '../../core/emit-react-inline.js';
 import { tokenInventoryFromJson } from '../../core/tokens.js';
 // @ts-expect-error — plain .mjs mock, no types
-import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
+import { createFigmaMock, scriptFileKey } from '../../scripts/plugin-engine-mock-figma.mjs';
 
 const ROOT = process.cwd();
 const HERE = path.join(ROOT, 'examples', 'depth-composite');
@@ -314,7 +314,9 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
   let parityOk = false;
   let parityNote = '';
   try {
-    const { figma, root } = createFigmaMock();
+    const depScripts = depOrder.map((dep) => emitFigmaScript(dep, { tokens, icons, contracts }));
+    // The file the scripts name (a dependency's contract can carry the anchor the composite does not).
+    const { figma, root } = createFigmaMock({ fileKey: [figmaScript, ...depScripts].map(scriptFileKey).find(Boolean) ?? null });
     const ctx = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     // Component sync scripts BIND token variables (need('radius/avatar')) but do
     // not CREATE them — the real designer flow runs the token-setup script
@@ -330,9 +332,8 @@ writeFileSync(path.join(HERE, `${name}.figma.js`), figmaScript);
     // findComponentByName, …), so wrap each in its OWN async IIFE scope — the
     // declarations are isolated but the mocked `figma` file state is shared, so
     // each synced set persists for the next script to find.
-    for (const dep of depOrder) {
-      const depScript = emitFigmaScript(dep, { tokens, icons, contracts });
-      await vm.runInContext(`(async () => {\n${depScript}\n})()`, ctx, { timeout: 120_000 });
+    for (const [i, dep] of depOrder.entries()) {
+      await vm.runInContext(`(async () => {\n${depScripts[i]}\n})()`, ctx, { timeout: 120_000 });
       syncedDeps.push(dep.name);
     }
     await vm.runInContext(`(async () => {\n${figmaScript}\n})()`, ctx, { timeout: 120_000 });

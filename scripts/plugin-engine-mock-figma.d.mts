@@ -79,6 +79,9 @@ export interface MockOptions {
   fileKey?: string | null;
 }
 
+/** The file a generated script's guard names, or null when it names none. */
+export declare function scriptFileKey(code: string): string | null;
+
 export declare function createFigmaMock(options?: MockOptions): {
   figma: {
     root: MockNode;

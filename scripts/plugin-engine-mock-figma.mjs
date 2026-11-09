@@ -65,6 +65,11 @@ const pluginDataEntry = (method, value) => {
   return value;
 };
 
+/** The file a generated script's guard names (`EXPECTED_FILE_KEY`), or null when it names none. A headless run of a
+ *  keyed script opens that file, as the plugin runs it in the file it was written for (the guard refuses a file
+ *  Figma gives no key for). */
+export const scriptFileKey = (code) => /const EXPECTED_FILE_KEY = "([^"]+)"/.exec(code)?.[1] ?? null;
+
 /** @param {{ modeLimit?: number | null }} [options] — `modeLimit` makes
  *  `VariableCollection.addMode` throw past N modes, the way a Figma Starter
  *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
