@@ -360,6 +360,15 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       (`paintedBoxes`); an SVG still needs a vector, and the image and size checks still decide. Practice baseline:
       944 of 944 Figma to React variants identical. Main's check against this one on 105 written sets (582
       variants): 18 change, all SkeletonBox, each only losing that miss; 11 move to pass, 0 to fail.
+- [x] Text clipped away is not drawn text (2026-11-09; found by a survey of every in-grammar practice
+      contract written to Figma). The reader counted text an element clips away as drawn: AG's 0px-tall
+      measuring pseudo (63 dashes) in its form fields and visually hidden labels ("(current page)", a hidden
+      "Date range (optional)" legend), so the check demanded invisible text as editable Figma text. The reader
+      now leaves out text inside an element clipped to 1px or less with overflow hidden, or by `clip: rect(0 0 0
+      0)` or `clip-path: inset(50%)`; the Figma to React collector is unchanged. A0 re-read: 431 of 431 images
+      identical, 340 runs dropped, nothing else; this repository's Storybook: no change. React to Figma on 60
+      written A0 sets, same Figma state: 29 to 31 count, 3 variants change, 0 to pass, 0 to fail. Practice
+      baseline: 944 of 944 Figma to React variants identical.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
       and painted-box rules of 2026-11-08), the Storybook reader

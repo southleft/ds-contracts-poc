@@ -406,3 +406,17 @@ test('one multi-region vector can use the drawn SVG union without borrowing its 
     assert.equal(matchParts(source.parts,(await collect()).graphics).matched,0);
   }finally{await browser.close();}
 });
+
+test('in the page: the reader keeps only drawn text; text clipped away (a visually hidden label, a 0px measuring pseudo) is no run', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<html><head><style>
+      .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap }
+      .measure { height: 0; overflow: hidden } .measure::after { content: "-----" }
+    </style></head><body><div data-cell><div><span>Label</span><span class="sr">(current page)</span><div class="measure" aria-hidden="true"></div></div></div></body></html>`);
+    const texts = async (mark?: boolean) => (await page.locator('[data-cell]').evaluate(domContentOf, mark)).runs!.map((r) => r.text);
+    assert.deepEqual(await texts(), ['Label', '(current page)', '-----']); // the Figma to React call: unchanged
+    assert.deepEqual(await texts(true), ['Label']);
+  } finally { await browser.close(); }
+});
