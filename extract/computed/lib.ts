@@ -62,6 +62,9 @@ export interface CapturedNode {
    *  has ever carried a hop candidate — normalizes byte-identically, and the
    *  Node side prefers a direct name over a hopped one when both verify. */
   vrefs?: Record<string, Array<[string, string, string] | [string, string, string, 1]>>;
+  /** Opt-in (captureJs `authoredSize`): a width/height the stylesheet or inline style SETS to a fixed length,
+   *  as authored (`2rem`, `var(--x)` resolving to one). Absent everywhere else, so committed captures do not move. */
+  asize?: Partial<Record<'width' | 'height', string>>;
   /** SILENT-LOSS ROUND (task #33, fix 1): property → var names for source
    *  declarations that are SHORTHANDS carrying a var(). Chromium stores such a
    *  declaration as a pending-substitution value and enumerates its longhands
@@ -446,6 +449,7 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     ...(n.vrefs !== undefined
       ? { vrefs: Object.fromEntries(Object.keys(n.vrefs).sort().map((k) => [k, n.vrefs![k]])) }
       : {}),
+    ...(n.asize !== undefined ? { asize: { ...n.asize } } : {}),
     // DEFECT FOUND WHILE CLOSING R5 — `vshorthands` was NEVER preserved here.
     // normalizeNode builds a fresh object, and the task-#33 shorthand-ceiling
     // field was not on the list, so `el.node.vshorthands` was `undefined` on

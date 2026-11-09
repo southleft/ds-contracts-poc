@@ -1443,7 +1443,7 @@ export function preScriptTag(cfg: CaptureConfig): string {
 // @door capture.text-node-admission
 // @door capture.unreadable-sheet-skip
 // @door capture.varprefix-off-switch
-export const captureJs = (selector: string, classAllow?: string, varPrefix?: string, rootPath?: readonly string[]) => `(() => {
+export const captureJs = (selector: string, classAllow?: string, varPrefix?: string, rootPath?: readonly string[], authoredSize = false) => `(() => {
   ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
@@ -1693,7 +1693,16 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
     if (!m[2]) return el === host;
     try { return el.matches(m[2]); } catch { return false; }
   };
-  const vrefsOf = (el) => {
+${authoredSize ? `  // AUTHORED SIZE (opt-in, the Storybook converter): a width/height the inline style or the last matching
+  // rule SETS to a fixed length (px/rem/em/pt, or a var() resolving to one) — a design value, not a measurement.
+  const ASZ_RULES = []; const aszWalk = (rules) => { for (const r of rules) { if (r.selectorText !== undefined) ASZ_RULES.push(r);
+    else if (r.media ? matchMedia(r.media.mediaText).matches : r.conditionText !== undefined && r.constructor.name === 'CSSSupportsRule' ? CSS.supports(r.conditionText) : !!r.cssRules) aszWalk(r.cssRules || []); } };
+  for (const sh of document.styleSheets) { try { aszWalk(sh.cssRules); } catch {} }
+  const aszFixed = (el, v) => { const m = /^var\\((--[^,)]+)/.exec(v); if (m) v = getComputedStyle(el).getPropertyValue(m[1]).trim(); return /^-?[0-9.]+(px|rem|em|pt)$/.test(v) ? v : null; };
+  const asizeOf = (el) => { const out = {}; for (const p of ['width', 'height']) { let v = el.style ? el.style.getPropertyValue(p) : '';
+    if (!v) for (const r of ASZ_RULES) { let hit = false; try { hit = el.matches(r.selectorText); } catch {} if (hit && r.style.getPropertyValue(p)) v = r.style.getPropertyValue(p); }
+    const f = v && aszFixed(el, v.trim()); if (f) out[p] = f; } return Object.keys(out).length ? out : null; };
+` : ''}  const vrefsOf = (el) => {
     if (!vp) return undefined;
     // returns { refs, shorthands } — fix 1 (task #33) adds the second half.
     const root = el.getRootNode();
@@ -1893,7 +1902,8 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
       pseudo: {},
     };
     if (vr) out.vrefs = vr;
-    if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
+${authoredSize ? `    { const az = asizeOf(el); if (az) out.asize = az; }
+` : ''}    if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
     if (vrPair.calcs) out.vcalcs = vrPair.calcs;
     // A2 GRID — declared-track read, grid containers only (see gdeclOf).
     {

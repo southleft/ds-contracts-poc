@@ -72,3 +72,12 @@ test('two components whose titles end alike take as many parent segments as it t
   assert.deepEqual(d.components.map((c) => c.name), ['DatePickerCalendar', 'DatePickerNextCalendar', 'StatusBadge']);
   assert.deepEqual(d.components.map((c) => seed(c).contract.id), ['storybook.date-picker-calendar', 'storybook.date-picker-next-calendar', 'storybook.status-badge']);
 });
+
+test('a set width or height is read only when the converter asks, and survives the read boundary', async () => {
+  const { captureJs } = await import('../extract/computed/capture.js'), { normalizeNode } = await import('../extract/computed/lib.js');
+  assert.equal(captureJs('[x]').includes('asizeOf'), false); // every other pipeline's capture is unchanged
+  assert.equal(captureJs('[x]', undefined, undefined, undefined, true).includes('const asizeOf'), true);
+  const node = { tag: 'span', classes: [], nodes: [], style: {}, pseudo: {} };
+  assert.deepEqual(normalizeNode({ ...node, asize: { height: '2rem' } }).asize, { height: '2rem' });
+  assert.equal('asize' in normalizeNode(node), false);
+});

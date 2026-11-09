@@ -190,7 +190,7 @@ async function main() {
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
           if (!await page.evaluate(IMAGES_SETTLED)) { refusals.push(`image-not-settled:${k.id}`); continue; }
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
-          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES)); // captureJs reads the stage's first rendered child
+          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true)); // the stage's first rendered child, with set sizes
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root: normalizeNode(raw as any) });
         }
