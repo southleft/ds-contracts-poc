@@ -466,7 +466,14 @@ export const domContentOf = new Function('el', 'mark', `
   const runs = [];
   const opacityOf = (n) => { let a = 1; for (let e = n; e && e !== el; e = e.parentElement) { const o = parseFloat(getComputedStyle(e).opacity); if (o >= 0) a *= o; } return a; };
   const shows = (n) => typeof n.checkVisibility === 'function' ? n.checkVisibility({ visibilityProperty: true }) : true;
+  // The reader's call (mark) keeps only text that is drawn: text inside an element that clips its box away (overflow
+  // hidden at 1px or less, clip rect(0 0 0 0), clip-path inset(50%): a visually hidden label, a 0px-tall measuring
+  // pseudo) paints nothing. The Figma to React call (no mark) keeps every run, as before.
+  const clippedAway = (n) => { for (let e = n; e && e !== el; e = e.parentElement) { const s = getComputedStyle(e), r = e.getBoundingClientRect();
+    if ((s.overflowX !== 'visible' || s.overflowY !== 'visible') && (r.width <= 1 || r.height <= 1)) return true;
+    if (s.clip === 'rect(0px, 0px, 0px, 0px)' || s.clipPath === 'inset(50%)') return true; } return false; };
   const push = (text, s, owner, svg, ownOpacity) => {
+    if (mark && clippedAway(owner)) return;
     runs.push({ text, color: svg ? s.fill : (s.webkitTextFillColor || s.color), family: s.fontFamily, weight: s.fontWeight, opacity: opacityOf(owner) * ownOpacity });
     // On request, each run's owner is marked with its index, so the caller can read the faces it was painted with.
     if (mark) owner.setAttribute('data-ds-run', ((owner.getAttribute('data-ds-run') || '') + ' ' + (runs.length - 1)).trim());
