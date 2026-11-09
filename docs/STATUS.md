@@ -570,6 +570,10 @@ and break no known cell. A0 is now practice and regression only.
         SearchInput, Textarea) and TimeInput draws "21:30" (13.2% to 12.1% on white); no verdict moves, the
         sets fail on layout. This repository: TextArea and TextField now count as sets; their 6 variants are
         font-blocked (Arimo 500/600). Receipts in `private/form-field-text-20261109` (git-ignored).
+      - Fill width (2026-11-09; owner: "A: carry the width"): a root that fills its container in every variant is
+        drawn at that width, a plain literal, never a token (A0 23 of 62 contracts, this repository 4 of 23). Live, A0:
+        Divider fail to pass, 4 more sets count; this repository's TableCell is drawn 1248 wide but still fails on its
+        text's antialiasing. Receipts in `private/fill-width-20261109` (git-ignored).
 
 ## Where things live
 

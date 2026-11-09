@@ -42,6 +42,21 @@ const IDENTITY_CLASSES = '^(?!css-[0-9a-z]+(-|$))';
 const IMAGES_SETTLED = `Promise.race([Promise.all([...document.images].map((i) => i.complete ? null : new Promise((r) => {
   i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))).then(() => new Promise((r) =>
   requestAnimationFrame(() => requestAnimationFrame(() => r(true))))), new Promise((r) => setTimeout(() => r(false), 20000))])`;
+/** The subject's width when it fills its container (a block-level box in flow, as wide as its cell's content box), else null. */
+const FILL_WIDTH = `(() => { const e = document.querySelector('[data-ds-reader-subject]'), p = e && e.parentElement; if (!p) return null;
+  const s = getComputedStyle(e), ps = getComputedStyle(p), w = e.getBoundingClientRect().width;
+  if (s.display.startsWith('inline') || ['absolute', 'fixed'].includes(s.position) || s.float !== 'none') return null;
+  return Math.abs(w - (p.clientWidth - parseFloat(ps.paddingLeft) - parseFloat(ps.paddingRight))) < 0.01 ? w : null; })()`;
+/** A root that fills its container in every variant, at one width, is drawn at that width (owner, 2026-11-09: "A: carry
+ * the width"): the reference is the page drawn at that width, and Figma has no container to fill, so it would hug. A plain
+ * literal, never a token; the root keeps a width it already carries (a set size, #349). Returns the width carried, or null. */
+export function carryFillWidth(contract: Contract, widths: ReadonlyArray<number | null>): number | null {
+  const root = contract.anatomy.root, w = widths[0];
+  if (!widths.length || w == null || widths.some((x) => x == null || Math.abs(x - w) > 0.01)) return null;
+  if (root.tokens?.['width'] !== undefined || root.literals?.['width'] !== undefined) return null;
+  root.literals = { ...root.literals, width: `${+w.toFixed(3)}px` };
+  return +w.toFixed(3);
+}
 const pascal = (t: string) => t.replace(/[^A-Za-z0-9]+(.)?/g, (_, c) => (c ?? '').toUpperCase()).replace(/^./, (c) => c.toUpperCase());
 /** A component's name: its title's last segment, with as many parent segments as it takes to differ from every other
  * declared component's (A0 has two titles ending in Calendar, which wrote one contract over the other). */
@@ -192,7 +207,7 @@ async function main() {
       try {
         const { contract: seeded, drawn, combos, space } = seed(c);
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
-        const captures: Capture[] = [];
+        const captures: Capture[] = [], fills: Array<number | null> = [];
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -200,6 +215,7 @@ async function main() {
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
           const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true, true)); // the stage's first rendered child, with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
+          fills.push(await page.evaluate(FILL_WIDTH) as number | null);
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root: normalizeNode(raw as any) });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
@@ -238,6 +254,8 @@ async function main() {
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
+        const fillWidth = carryFillWidth(enriched as Contract, fills);
+        if (fillWidth !== null) row.fillWidth = fillWidth; // named: the root fills its container, drawn at this width
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
         const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
-import { carryVariantText, declare, paintedFirst, seed } from './storybook-contracts.js';
+import { carryFillWidth, carryVariantText, declare, paintedFirst, seed } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -53,6 +53,23 @@ test('a nested part whose text differs between variants carries each variant\'s 
   assert.match(refused.join(), /^per-variant-text-unqualified: label: literal-text-combination-/);
   assert.equal((off.contract.anatomy.root.parts as Record<string, { textByCombination?: unknown }>).label!.textByCombination, undefined);
   assert.deepEqual(carryVariantText(seed({ ...c!, axes: [] }).contract, [], off.combos, at), []); // no options: nothing to carry
+});
+
+test('a root that fills its container in every variant is drawn at that width, as a literal; otherwise nothing changes', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Row', { axes: ['tone'], references: [ref('r--a', { tone: 'a' }), ref('r--a', { tone: 'b' }, { tone: 'b' })] })] }).components;
+  const fresh = () => seed(c!).contract;
+  const filled = fresh();
+  assert.equal(carryFillWidth(filled, [1248, 1248]), 1248);
+  assert.deepEqual(filled.anatomy.root.literals, { width: '1248px' });
+  for (const widths of [[1248, null], [1248, 1200], []] as Array<Array<number | null>>) {
+    const other = fresh(); assert.equal(carryFillWidth(other, widths), null); assert.equal(other.anatomy.root.literals, undefined);
+  }
+  const sized = fresh(); sized.anatomy.root.tokens = { width: '{a.width}' }; // a set size (#349) stays
+  assert.equal(carryFillWidth(sized, [1248, 1248]), null);
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const parsed = ContractSchema.parse(filled), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map() });
+  const variants = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { lits?: { width?: number } } }> }).variants;
+  assert.deepEqual(variants.map((v) => v.spec.lits?.width), [1248, 1248]); // a fixed canvas width in every variant
 });
 
 test('a text field carries the text it draws: one placeholder as attrs.placeholder, values per variant, drawn by the Figma engine', async () => {
