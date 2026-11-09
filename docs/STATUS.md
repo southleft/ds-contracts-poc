@@ -475,6 +475,12 @@ and break no known cell. A0 is now practice and regression only.
       the examples' scripts and GENESIS batches, the golden manifest, the plugin's engine
       receipt and docs/24. The test mock and the GENESIS builders now open the file the
       scripts name, where they had run them in a file with no key.
+- [x] The nightly full lane is red since 11-06 (found 2026-11-09). Since 11-08 its eval step fails on three
+      headless harnesses the guard change above missed: they ran keyed scripts in a file with no key
+      (`depth-composite-child-collection`, `tailwind-figma-genesis`, `child-wider-ratchet-and-script-freshness`).
+      They now open the file their scripts name (`scriptFileKey`); its other 5 reds are carried in the
+      committed record, as before. On 11-06 and 11-07 the gate sweep failed on a CI screenshot error
+      (`Unable to capture screenshot`, a different source-reference test each night; both pass locally).
 - [x] The code side writes `ds-contracts.react.json` itself from the reader's `stories.json`
       (GOAL.md Step 2): `scripts/storybook-contracts.ts`, outside the frozen reader, with a contract
       and the Figma scripts for each in-grammar component (2026-11-09). Route: the story's own page,
