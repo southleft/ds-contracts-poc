@@ -3,7 +3,8 @@
  * Part 1, the set rule. React to Figma counts only a real component set. A Figma set written
  * from a library's component is held against the Storybook reader's references for
  * that component:
- *   - it is a COMPONENT_SET and every variant is a COMPONENT;
+ *   - it is a COMPONENT_SET and every variant is a COMPONENT; a component whose stories list no
+ *     options (no axis) is instead one main COMPONENT outside any set (GOAL.md, 2026-11-08);
  *   - its variant properties are the story matrix exactly (matchesMatrix, capped at
  *     64 by the reader), rebuilt from each reference's value on each axis;
  *   - it uses auto layout outside drawings: none of the grammar classifier's own
@@ -103,7 +104,11 @@ export function setRule(component: StoryComponent, file: DumpFile, setName: stri
   const problems: string[] = [];
   if (!set) problems.push(`set-missing:${setName}`);
   else {
-    if (set.type !== 'COMPONENT_SET' || set.variants.some((v) => v.type !== 'COMPONENT')) problems.push('not-a-component-set');
+    // A component whose stories list no options (one variant, no axis) counts as one main component outside any set
+    // (GOAL.md, 2026-11-08): Figma gives every component set a variant property, so a set written for it fails by name.
+    if (!axes.length && set.type === 'COMPONENT_SET') problems.push('no-options-written-as-component-set');
+    else if (!axes.length) { if (set.type !== 'COMPONENT' || set.variants.length !== 1 || set.variants[0]!.type !== 'COMPONENT') problems.push('not-a-main-component'); }
+    else if (set.type !== 'COMPONENT_SET' || set.variants.some((v) => v.type !== 'COMPONENT')) problems.push('not-a-component-set');
     problems.push(...matchesMatrix(set, matrix));
     const reasons = classifyDump({ [entry![0]]: set } as DumpFile)[entry![0]]?.reasons ?? [];
     problems.push(...reasons.filter((r) => LAYOUT_REASONS.includes(r)).map((r) => `layout:${r}`));

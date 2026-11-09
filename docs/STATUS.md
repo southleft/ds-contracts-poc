@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-01 (Step 2 started; grammar classifier, Figma to React font preflight, variant matrix rule, plugin capture and Storybook reader parts 1 to 2c, the pinned reference environment and both font preflights in). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
+Updated 2026-11-08 (paid work stops after the no-option fix: owner, 2026-11-08, signed entry in GOAL.md; both checklists below are on hold until a new signed entry). This is the weekly note that [docs/GOAL.md](GOAL.md) requires.
 It is overwritten every week; git history keeps the old ones. Read GOAL.md first,
 then this page, then choose work. It is written for any agent or provider.
 
@@ -10,49 +10,37 @@ then this page, then choose work. It is written for any agent or provider.
    2026-08-05, which lacks `figma-to-react`. The hosted plugin zip and sites are
    August builds.
 2. **Outside users:** 0. The repository has never had a GitHub issue.
-3. **The four numbers per direction**, from A0 (today's engine, run once on
-   2026-10-31 with fonts supplied and no edits):
-   - Figma to React, Sanity UI v2 (18 sets, 287 variants): headline 8.8% (mean
-     of per-set pass rates); raw 8 of 287 variants (2.8%); 1 of 18 sets whole
-     (TextArea); 0 font-blocked. Coverage 10 of 18 sets (55.6%); inside the
-     grammar, headline 13.3% and raw 3 of 198. Seven sets (64 variants) were refused before measurement: masks
-     (Popover, Tooltip), a "scheme" axis that could be a variant or a theme mode
-     (KBD, Radio, Autocomplete), a layout table over its size limit (TextInput)
-     and generated TypeScript that does not compile (Chip).
-   - React to Figma, Agriculture Design System (648 stories, 127 components):
-     0 of 127 converted. The Storybook reader (part 1) reads all 648 stories:
-     coverage 85 of 127 components (66.9%); out for object (33, often
-     `children`), color (8) and number (6) arguments. Counted under the
-     stories-as-variants rule, own render decided from the rendered page: 102 of
-     127 components, 431 expected variants (denominator changes, not progress:
-     101 and 400 before two fixes in the reader and the rule, 140 in 126 under
-     the first rule). Refused: 24 whose every story draws its own render, 1 over
-     64. Named, not counted: 159 own-render stories, 35 repeats of an earlier
-     story's arguments, 0 the reader could not render. Each of the 431 variants
-     has a reference image, drawn in the pinned environment and byte-identical over
-     two runs; its text is drawn in Arimo, Tinos and Cousine, which Figma lists.
-     Font-blocked: 0 of 431 (405 while the image drew Liberation, which it does not).
-   - Earlier fresh kits (2026-10-14 to 10-19, before GOAL.md), Figma to React:
-     headline 16.3%; raw 177 of 1,344 variants (13.2%); 5 of 56 sets whole;
-     57 font-blocked. On the 24 sets with a kept dump, coverage 16 of 24
-     (66.7%); inside the grammar, headline 22.1% and raw 20 of 119 (Orbit's 28
-     in-grammar variants are all font-blocked). The full breakdown is in this page's
-     2026-10-31 Step 1 version (git history) and in
-     `private/never-seen-classification-20261031`.
-4. **Spend against the cap:** $0 extra usage; the Claude Code plan showed 4% of its
-   weekly limit used on 2026-11-01. The cap is $2,400 through 2026-12-23, read from
-   the provider's usage page.
-5. **Top three named misses** on A0, after a labeled rerun with Inter 3.19 gave
-   identical results (so the font version is not the cause):
-   - Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`) is never read, so
-     single-line text boxes render 10 to 12 px too tall. This one missing fact
-     explains all 183 size mismatches (Button, Badge, Select, MenuItem).
-   - Icons inside components are missing from the output (checkmark, spinner,
-     close, select chevron): 36 variants.
-   - Seven of 18 sets were refused before measurement, and React to Figma has
-     no library reader.
+3. **The four numbers per direction**, from the capped A0 AI test (2026-11-08). A0 is a
+   practice kit: these numbers are decision input, never progress and never a first
+   pass. Receipts and the full report are in `private/a0-ai-test-20261109`.
+   - Figma to React, Sanity UI v2 (18 sets, 287 variants): coverage 10 of 18 sets
+     (55.6%), 198 in-grammar variants. The engine alone: in-grammar headline 13.3%,
+     raw 3 of 198 (8 of 287 over all 18 sets). With AI fixing the checker's named
+     misses for 3 rounds: in-grammar headline 60.3% to 76.9% (engine's code plus
+     repairs 60.3% and 70.0% over two runs; AI with only the contract's prop map 70.3%,
+     76.9% keeping each set's best round). 0 font-blocked. Seven sets can't be judged
+     today: four have no contract and three are refused on framing.
+   - React to Figma, Agriculture (10 in-grammar components with a variant axis, 52
+     variants): the engine converts none. AI with the reader's measurements: 27.3%
+     after 3 rounds (15 of 52, 1 set whole), 34.0% keeping each set's best round over
+     6; AI without them 8.6%. 0 font-blocked. 26 of A0's 62 in-grammar components have
+     no options and could never count before the no-option fix.
+4. **Spend against the cap:** $39.67 of AI spend for the A0 test (275 calls, plus one
+   stopped call that reported no cost), against the $2,400 cap through 2026-12-23.
+5. **Top three named misses** on A0 after the test:
+   - Figma to React: Button's image differences on white and on black remain in every
+     arm, and repairs broke passing variants (Button 104 to 5 of 150 in one round).
+   - React to Figma: image differences on 8 of 10 components even with the reader's
+     measurements, and content missing on SkeletonBox, StatusBadge and
+     TableHeaderSortable.
+   - The ruler: seven Figma to React sets can't be judged, ComboboxRenderItem's
+     references are unreadable, and the 5% whole-image limit let a thinner border
+     pass on a mostly empty image.
 
 ## Step 2 checklist (2026-10-31 to 2026-12-11)
+
+**On hold** (owner, 2026-11-08: "Stop after the fix", signed entry in GOAL.md): no new work on
+this plan until a new signed entry. Owner-only actions are unchanged.
 
 Step 1 closed on 2026-10-31: A0 measured both ways, the earlier 1,344 variants
 classified, and Decision 1 taken early by the owner (continue; signed entry in
@@ -352,8 +340,15 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
         and on a light circle outline. Blink's display list is identical every time; the
         pixels differ in Chromium's raster, more often under Rosetta. No verdict moves. Every
         baseline comparison names it.
+- [x] A component with no options counts as one main component (owner, 2026-11-08, GOAL.md).
+      Its matrix has no axis, and Figma gives every component set a variant property, so it
+      could never count. It now counts as one main COMPONENT outside any set; a set written
+      for it fails by name (`no-options-written-as-component-set`). Every other branch of the
+      set rule is unchanged. A0: 26 of 62 in-grammar components could never count, 0 after.
+      The 6 written sets on record give byte-identical results on main and on this rule.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
-      classifier, the variant matrix rule, the React to Figma check, the Storybook reader
+      classifier, the variant matrix rule, the React to Figma check (with its no-options
+      rule of 2026-11-08), the Storybook reader
       (`scripts/storybook-reader.ts`), whose own-render test, argument serialization
       and grouping decide the React to Figma denominator, its capture of each reference
       alone at its paint extent (`captureSubjectWithoutBackdrop`, `observeConsumerPaintExtent`,
@@ -369,7 +364,8 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       two runs. A verdict that differs between them is reported to the owner by name, as
       broken, before any number is claimed. This is run protocol, not checker code.
 
-Agent, climb (practice kits only, one named miss class per PR, shared rules only).
+Agent, climb (practice kits only, one named miss class per PR, shared rules only). **On hold**
+(owner, 2026-11-08), as above.
 Rule 8: each fix must also help a practice kit other than the one that motivated it
 and break no known cell. A0 is now practice and regression only.
 - [x] Figma's vertical text trim (`leadingTrim: CAP_HEIGHT`, the CSS

@@ -46,6 +46,25 @@ test('a set that fails the rule counts every expected variant as failed, and eac
   assert.deepEqual(setRule(component(), dump([]), 'Missing').problems, ['set-missing:Missing']);
 });
 
+test('a component with no options counts as one main component; a component set written for it fails by name', () => {
+  const lone = { ...component(['success']), matrix: { status: 'ok' as const, axes: [], variants: 1 } };
+  lone.references[0] = { ...lone.references[0]!, variant: {} };
+  const main = { name: 'Badge', type: 'COMPONENT', layout: { mode: 'HORIZONTAL' }, children: [text('success'), icon] };
+  const asComponent = setRule(lone, { Badge: { setName: 'Badge', type: 'COMPONENT', propertyDefinitions: {}, variants: [main] } } as unknown as DumpFile, 'Badge');
+  assert.deepEqual(asComponent.problems, []);
+  assert.equal(asComponent.counts, true);
+  assert.deepEqual(asComponent.variants.map((v) => [v.key, v.verdict]), [['', 'pending']]);
+  // Figma names a one-variant set's only property "Property 1": still a set, so it fails by name.
+  const asSet = setRule(lone, { Badge: { setName: 'Badge', type: 'COMPONENT_SET', propertyDefinitions: { 'Property 1': { type: 'VARIANT', variantOptions: ['Default'] } },
+    variants: [{ ...main, name: 'Property 1=Default', variantProperties: { 'Property 1': 'Default' } }] } } as unknown as DumpFile, 'Badge');
+  assert.deepEqual(asSet.problems, ['axis-extra:Property 1', 'no-options-written-as-component-set']);
+  assert.deepEqual(asSet.variants.map((v) => v.verdict), ['fail']);
+  // A component with options still needs a real component set (the branch above, unchanged).
+  const plain = dump([variant('success'), variant('error')]);
+  (plain.Badge as { type: string }).type = 'COMPONENT';
+  assert.deepEqual(setRule(component(), plain, 'Badge').problems, ['not-a-component-set']);
+});
+
 test('a reference the rule cannot read leaves only its own variant unverified', () => {
   const unread = component(['success', 'error'], { content: undefined, contentProblem: 'reference-content-not-one-container' });
   unread.references[1] = { ...unread.references[1]!, content: { text: 'error', graphics: [], runs: [run('error')] }, contentProblem: undefined };
