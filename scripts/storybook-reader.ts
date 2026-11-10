@@ -115,7 +115,9 @@ export const SystemProfile = z.object({
   figmaInternal: z.object({ namePrefix: z.string().min(1) }).strict().optional(),
   figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
   excluded: z.array(z.object({ title: z.string(), reason: z.enum(EXCLUDED_REASONS), copies: z.string().optional(), receipt: z.string().optional() })),
-}).strict();
+  /** Each code component's Figma sets (reviewer, 2026-11-10), with the basis: the held-out draw holds out paired units. */
+  pairs: z.array(z.object({ code: z.array(z.string()).min(1), figma: z.array(z.string()).min(1), basis: z.string().min(1) }).strict()).optional(),
+}).strict().refine((p) => (p.pairs ?? []).every((e) => e.code.every((n) => p.components.some((c) => c.name === n))), 'profile-pair-component-unknown');
 export type SystemProfile = z.infer<typeof SystemProfile>;
 export const readProfile = (file: string): SystemProfile => SystemProfile.parse(JSON.parse(readFileSync(file, 'utf8')));
 
