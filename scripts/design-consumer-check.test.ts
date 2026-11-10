@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { readPackagedConsumerFonts, consumerSizeCheck, mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, runConsumerCheck, type Interaction } from './design-consumer-check.js';
+import { pinnedFigmaUrl, pinnedVersionHeld, readPackagedConsumerFonts, consumerSizeCheck, mapExportDownloads, NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, observeVariantPaint, residualClass, stateProblems, variantPropValue, mountProps, runConsumerCheck, type Interaction } from './design-consumer-check.js';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { consumerFontManifest, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
@@ -954,4 +954,13 @@ test('cached consumer CSS modules invalidate changed content and isolate file ca
   assert.equal(generate('missing', '/a/Button.module.css', changed), '_missing_1147x_1');
   assert.equal(generate('foo', '/a/Button.module.css', css), '_foo_x9j1k_1', 'returning to earlier bytes cannot retain a stale content name');
   assert.equal(generate('foo', '/b/Button.module.css', changed), '_foo_1147x_3');
+});
+
+test('pinned Figma reads: the dump\'s version is asked for and held; with none, a read is unchanged', () => {
+  const url = 'https://api.figma.com/v1/files/K/nodes?ids=1:2';
+  assert.equal(pinnedFigmaUrl(url, '240968'), `${url}&version=240968`, 'a recorded version is asked for');
+  assert.doesNotThrow(() => pinnedVersionHeld('240968', '240968'), 'matching version');
+  assert.throws(() => pinnedVersionHeld('999', '240968'), /figma-version-mismatch: asked 240968, Figma answered 999/, 'a mismatched version refuses the cell by name');
+  assert.equal(pinnedFigmaUrl(url, undefined), url, 'no version: the read is unchanged');
+  assert.doesNotThrow(() => pinnedVersionHeld('any', undefined), 'no version: nothing is held');
 });

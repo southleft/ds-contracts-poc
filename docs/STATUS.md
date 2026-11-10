@@ -235,6 +235,10 @@ Agent:
       sensitivity line without the largest paired unit when the reading holds it (from the
       profile's pairs). It reproduces all 380 numbers of the A0 AI test from the same
       receipts (`private/reading-harness-20261110`).
+- [x] The Figma to React check reads at the dump's recorded file version (reviewer,
+      2026-11-10): with `_provenance.version`, its node, bounds and image reads ask for that
+      version and a response at another refuses the cell by name; without one, nothing
+      changes (a stored practice cell is byte-identical).
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
 Next dates: 2026-11-20, the checker, the grammar classifier and the variant matrix
