@@ -225,6 +225,10 @@ Agent:
       AI-drafted; the reviewer session approves it by merging (receipt in
       `private/profile-v02-20261110/pairs.txt`).
 - [x] Commit the tuning list once the owner has drawn the held-out third (above, under the draw).
+- [x] The reader's `--only <file>`, so a tuned run renders reference images for the tuning
+      list only (reviewer, 2026-11-10): pass 1 reads every story as before; a listed name
+      that is not a component refuses the run. On this repository's Storybook, the 5 listed
+      components' entries and 38 reference images are byte-identical to a full run's.
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
 Next dates: 2026-11-20, the checker, the grammar classifier and the variant matrix
