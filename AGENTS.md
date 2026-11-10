@@ -17,19 +17,22 @@ any agent's saved memory or notes.
 4. **Every PR has a reason.** It cites a GOAL.md step, a named miss on a practice
    kit, a stop-rule item, an install failure or an outside user's report. Work on
    GOAL.md's out-of-scope list is refused.
-5. **Never touch sealed kits.** Do not search for, fetch, open or study any
-   candidate kit, and never read `~/ds-contracts-sealed`. Only the owner draws
-   kits, or a separate sealing agent the owner asks to. No code changes between
-   a draw and its run.
+5. **Never touch the held-out list.** Do not search for, fetch, open or study the
+   held-out list or any component on it, and never read `~/ds-contracts-sealed`.
+   Only the owner draws the held-out list, or a separate sealing session the owner
+   asks to. Once the tuning list is committed, work only on components in it.
 6. **The ruler is frozen.** From 2026-11-20, never change thresholds, scorers,
    denominators, reference images, the grammar classifier or the variant matrix
    rule. A PR that touches both the checker and the converter is reverted.
-7. **Only sealed runs count.** The fixed 40-set, the 204 corpus and every
-   practice kit are regression only. Never report them as progress, and never call
-   a repaired sample a first pass.
-8. **No overfitting.** A fix must also help a practice kit other than the one that
-   motivated it and break no known cell. No component or kit names, per-set gates or
-   new "-qualified" codes in conversion code.
+7. **Only the held-out reading counts.** It runs once, on code the owner has
+   tagged. Tuning-list numbers are labeled "tuned"; they, the fixed 40-set, the 204
+   corpus and every practice kit are regression only. Never report them as
+   progress, and never call a repaired sample a first pass.
+8. **No overfitting.** System knowledge goes in the system's profile, or in a
+   general engine rule that a profile switches on. An engine default that applies
+   to every system must also help a practice kit other than the one that motivated
+   it and break no known cell. No system or component names, per-set gates or new
+   "-qualified" codes in conversion code.
 9. **Fonts are inputs.** A missing font is refused up front by name and reported
    in its own column. It is never a pass and never a conversion failure.
 10. **Deterministic only.** No model call in capture, contract, emitters, writer or
