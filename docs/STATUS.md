@@ -391,6 +391,13 @@ Agent, ruler first. All of it must be built and frozen by SHA-256 on 2026-11-20
       must not change. A0 re-read: 6 references now exist (ComboboxRenderItem 2, the 3 Combobox list states,
       LoadingBlanket); 414 of 414 other images identical, nothing else changed; this repository: no change. Check
       on the 5 written sets, same Figma state: 6 variants unverified to fail (image 6% to 16%), nothing to pass.
+- [x] A form field's box holds its text in Figma (2026-11-10; found re-surveying this repository with Arimo
+      installed). In the page an input or textarea has no child nodes (its text is an attribute), so its box is an
+      empty painted box; in Figma the same box holds its placeholder or value as text, and the check accepted only
+      empty Figma boxes, so no correct conversion could match it. A painted Figma box holding only text may now stand
+      for an input or textarea, and for nothing else; geometry and the text checks are unchanged. Stored captures,
+      old ruler against new: A0 202 variants, 8 change (SearchBox fail to pass; Field and TimeInput lose only that
+      miss), this repository 92, 3 change (TextField loses only that miss); 0 move to fail.
 - [ ] Freeze on 2026-11-20: commit the SHA-256 of the checker, the grammar
       classifier, the variant matrix rule, the React to Figma check (with its no-options
       and painted-box rules of 2026-11-08), the Storybook reader
@@ -419,6 +426,16 @@ and break no known cell. A0 is now practice and regression only.
       the fixed 40-set included); Semi and Orbit use none. It stays a named miss,
       to revisit if a practice kit or a drawn kit uses it. Receipts in
       `private/leading-trim-20261105` (git-ignored).
+- [x] Fill-width roots, parked under rule 8 (owner, 2026-11-09: "Close and park it", #356): measured help on A0
+      only (Divider fail to pass, 0 worse); this repository's four fill-width roots are text-only, so the checker
+      can't measure them. Revisit when a second practice library has a fill-width root that paints its own
+      background or border (branch `claude/fill-width-root-2026-11-09`).
+- [x] Text-only image misses are vertical text offsets, not proven edge smoothing (2026-11-10). Text at
+      `line-height: normal` sits about 1.2px lower in Figma on both practice libraries (A0 26 of 352 text parts,
+      this repository 62 of 62); Figma centers glyphs in the line box (Arimo 16px: ink top 2.406 + (line height −
+      16)/2), so it may be expressible with a per-font offset from the font's metric tables; not started. Figma to
+      React: A0's Avatar initials draw about 2px lower in React (a 7px text box under an 11px line height); not
+      traced. The ruler is unchanged by choice.
 - [x] Icons inside components (checkmark, spinner, close, select chevron): 36 A0
       variants. Not shipped (rule 8): the climb draws a glyph only for an icon whose
       component the dump lacks (a remote library icon, as on A0); on Base UI and shadcn
