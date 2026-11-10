@@ -556,3 +556,19 @@ This changes how numbers are counted. It lands before 2026-11-20 and freezes wit
 checker.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-10.
+
+### 2026-11-10: Carbon's Figma kit is its public sets
+
+The owner, in chat: "Public only". Carbon's Figma kit has 196 component sets. Some are
+internal building blocks whose names start with "_", such as `_Accordion content
+skeleton` or `_Menu list item`. A designer places the components they're built into,
+never these sets directly. For the held-out draw and the reading, Carbon's Figma kit is
+its public sets only. The internal sets are left out of coverage, the headline, the raw
+first pass and the draw. Their count is reported beside the reading, so nothing is
+hidden.
+
+The rule that marks a set as internal is data in the system's profile: Carbon's is the
+"_" name prefix. Engine and checker code never name it. It is fixed at the draw, and it
+freezes with the checker on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-10.
