@@ -83,7 +83,7 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   repeats.sort();
   const named = { ownRender, repeats, renderFailed, renders: [] as VariantRender[] };
   if (!drawn.length) return { status: 'refused', reason: 'variant-matrix-no-story-variants', count: 0, ...named };
-  if (declared) return { ...named, ...declaredMatrix(drawn, declared) };
+  if (declared) return { ...named, ...declaredMatrix(drawn, declared, repeats) };
   // Each story's own option lists: a story may narrow an argument's list to the values it shows.
   const lists: VariantMatrix[] = [];
   for (const s of drawn) { const l = variantMatrix(s.argTypes); if (l.status === 'refused') return { ...l, ...named }; lists.push(l.matrix); }
@@ -95,13 +95,16 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   // A variant is drawn from the first story that shows it, with its listed options set to the variant's values.
   const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], shownOnce = new Set<string>();
   drawn.forEach((s, i) => {
-    const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])]));
+    const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])])), before = variants.length;
     for (const v of lists[i]!.variants) {
       if (shownOnce.has(stable({ ...t, ...v }))) continue;
       shownOnce.add(stable({ ...t, ...v })); variants.push({ ...t, ...v });
       renders.push({ storyId: s.id, args: Object.fromEntries(Object.entries(v).map(([n, o]) => [n, optionsOf(s.argTypes[n]!)!.find((x) => String(x) === o)])) });
     }
+    // A story whose differences are all non-plain (an object, an element) adds no variant: named, never dropped silently.
+    if (variants.length === before) repeats.push(s.id);
   });
+  repeats.sort();
   const count = variants.length;
   if (count > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${count}>${VARIANT_CAP}`, count, ...named };
   const axes = [...listedNames.map((name) => ({ name, options: [...new Set(lists.flatMap((l) => l.axes.find((a) => a.name === name)!.options))] })),
@@ -114,22 +117,27 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
  *  undeclared stays at the story's value and makes no variant (a playground control), so two stories that differ only
  *  there show one variant, the first. A declared axis must be one the stories have (an option list, or a value a
  *  story sets); otherwise the component is refused by name. Nothing adds a value no story renders. */
-function declaredMatrix(drawn: StoryInput[], axes: readonly string[]): MatrixResult & { renders: VariantRender[] } {
+function declaredMatrix(drawn: StoryInput[], axes: readonly string[], repeats: readonly string[]): MatrixResult & { renders: VariantRender[]; repeats: string[] } {
   const listed = drawn.map((s) => new Map(axes.flatMap((n) => (s.argTypes[n] && optionsOf(s.argTypes[n]!) ? [[n, optionsOf(s.argTypes[n]!)!]] : []))));
   const unknown = axes.find((n) => !listed.some((l) => l.has(n)) && !drawn.some((s) => n in s.args));
-  if (unknown !== undefined) return { status: 'refused', reason: `declaration-axis-unknown:${unknown}`, count: 0, renders: [] };
-  const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], seen = new Set<string>();
+  if (unknown !== undefined) return { status: 'refused', reason: `declaration-axis-unknown:${unknown}`, count: 0, renders: [], repeats: [...repeats] };
+  // A story that adds no variant (every one of its declared values is already shown) is named as a repeat, so a
+  // difference only in undeclared values (a badge, say) is never dropped without a trace.
+  const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], seen = new Set<string>(), added: string[] = [...repeats];
   drawn.forEach((s, i) => {
     let own: Array<Record<string, string>> = [{}];
     for (const n of axes) own = own.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: shown(o) })));
+    const before = variants.length;
     for (const v of own) {
       if (seen.has(stable(v))) continue;
       seen.add(stable(v)); variants.push(v);
       renders.push({ storyId: s.id, args: Object.fromEntries([...listed[i]!].map(([n, o]) => [n, o.find((x) => String(x) === v[n])])) });
     }
+    if (variants.length === before) added.push(s.id);
   });
-  if (variants.length > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${variants.length}>${VARIANT_CAP}`, count: variants.length, renders: [] };
-  return { status: 'ok', matrix: { axes: [...axes].sort().map((name) => ({ name, options: [...new Set(variants.map((v) => v[name]!))] })), variants }, renders };
+  added.sort();
+  if (variants.length > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${variants.length}>${VARIANT_CAP}`, count: variants.length, renders: [], repeats: added };
+  return { status: 'ok', matrix: { axes: [...axes].sort().map((name) => ({ name, options: [...new Set(variants.map((v) => v[name]!))] })), variants }, renders, repeats: added };
 }
 
 /** A rendered story, compacted by the Storybook reader from React's tree: `i`

@@ -468,7 +468,7 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
     // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
     if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
       stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
-      components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut }) => ({ title, stories: n, grammar, layout, matrix, leftOut,
+      components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut, repeats }) => ({ title, stories: n, grammar, layout, matrix, leftOut, repeats,
         leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })), excluded }, null, 2) + '\n');
     else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components, excluded }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
