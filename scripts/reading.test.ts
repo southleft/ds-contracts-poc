@@ -37,4 +37,5 @@ test('React to Figma: matrix refused has no rate; excluded titles count in cover
   assert.equal(r.length, 1, 'no member of the largest unit, so no sensitivity line');
   assert.throws(() => r2fSets(stories, { Tag: checks.Tag }), /reading-receipt-missing:check:Grid/);
   assert.equal(largestUnit(profile)!.name, 'Table');
+  assert.throws(() => largestUnit({ pairs: [{ code: ['A'], figma: ['1:1'], basis: 'page' }, { code: ['B'], figma: ['2:1'], basis: 'page' }] } as never), /reading-largest-unit-tie:A \| B/);
 });

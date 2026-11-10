@@ -57,7 +57,8 @@ export function r2fSets(stories: any, checks: Record<string, { check?: string; f
   return sets;
 }
 
-/** The largest paired unit in the profile (connected pairs), by member count; its name is its code names' common prefix. */
+/** The largest paired unit in the profile (connected pairs), by member count; its name is its code names' common prefix.
+ *  A tie for largest is refused by name, never broken. */
 export function largestUnit(profile: SystemProfile): { name: string; code: Set<string>; figma: Set<string> } | undefined {
   const units: Array<{ code: Set<string>; figma: Set<string> }> = [];
   for (const e of profile.pairs ?? []) {
@@ -68,6 +69,8 @@ export function largestUnit(profile: SystemProfile): { name: string; code: Set<s
   const size = (u: { code: Set<string>; figma: Set<string> }) => u.code.size + u.figma.size;
   const top = [...units].sort((a, b) => size(b) - size(a))[0];
   if (!top) return undefined;
+  const tied = units.filter((u) => size(u) === size(top));
+  if (tied.length > 1) throw Error(`reading-largest-unit-tie:${tied.map((u) => [...u.code].sort().join('+')).sort().join(' | ')}`);
   const names = [...top.code].sort(), prefix = names.reduce((p, n) => { let i = 0; while (i < p.length && p[i] === n[i]) i++; return p.slice(0, i); });
   return { name: prefix.length >= 3 ? prefix : names[0]!, ...top };
 }
