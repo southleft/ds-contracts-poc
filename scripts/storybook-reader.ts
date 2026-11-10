@@ -63,7 +63,10 @@ export interface VariantReference extends VariantRender {
   /** The image's frame, recorded as the Figma to React check records its own side: layout box, capture box, painted extent. */
   frame?: ConsumerFrame;
   /** What the instance draws (its text, text runs and graphics), read by the Figma to React check's own collector. */
-  content?: DomContent; contentProblem?: 'reference-content-not-one-container' }
+  content?: DomContent; contentProblem?: 'reference-content-not-one-container';
+  /** How many boxes the instance paints, and how many texts it holds outside an SVG (PAINTED): the scoreboard's icon
+   *  and glyph test (2026-11-10). */
+  painted?: number; held?: number }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
@@ -76,6 +79,8 @@ export interface StoryComponent {
   ownRender: string[]; repeats: string[]; renderFailed: string[]; instanceUnreadable?: string[]; leftOut?: Array<{ story: string; reason: string }>;
   /** Set on a title the profile excludes: its reason. Its verdict and matrix are what it would have been. */
   excludedBy?: string;
+  /** Set when the profile marks the component skeleton-only: its results go in their own column (2026-11-10). */
+  skeleton?: true;
   /** In the matrix's variant order; every face the references' text renders with, for the font preflight. */
   references: VariantReference[]; faces: FontFace[];
 }
@@ -85,7 +90,9 @@ export interface StoryComponent {
  *  assigned to that component, never left out; `left-out-variant` (a real option left out, say to fit the cap) is
  *  counted as that component's coverage loss. */
 export const LEFT_OUT_REASONS = ['test', 'playground', 'repeat', 'left-out-variant'] as const;
-export interface ComponentDeclaration { name: string; stories: string[]; axes: string[]; leftOut?: Array<{ story: string; reason: string }> }
+export interface ComponentDeclaration { name: string; stories: string[]; axes: string[]; leftOut?: Array<{ story: string; reason: string }>;
+  /** Skeleton-only (2026-11-10): the component renders a loading placeholder; the reviewer session checks each mark. */
+  skeleton?: true }
 /** A whole title the profile assigns to no component, with a fixed reason (reviewer, 2026-11-10). It stays in the kit's
  *  count, in its own "excluded by profile" column, with what it would have been; nothing hard, failing or out of grammar. */
 export const EXCLUDED_REASONS = ['feature-flag-copy', 'deprecated', 'preview', 'non-visual-utility'] as const;
@@ -99,7 +106,9 @@ export const SystemProfile = z.object({
   tuning: z.object({ why: z.string(), code: z.array(z.string()), figma: z.array(z.object({ id: z.string(), set: z.string() })) }),
   placementLeftOut: z.array(z.object({ component: z.string(), prop: z.string(), values: z.number(), samePixelsClosed: z.boolean(), figmaVariantProperty: z.string(), leftOut: z.boolean() })),
   components: z.array(z.object({ name: z.string(), stories: z.array(z.string()).min(1), axes: z.array(z.string()),
-    leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional() })),
+    leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional(), skeleton: z.literal(true).optional() }).strict()),
+  /** Skeleton-only Figma sets (2026-11-10): the variant value that marks a skeleton, and sets the kit draws as skeletons. */
+  figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
   excluded: z.array(z.object({ title: z.string(), reason: z.enum(EXCLUDED_REASONS), copies: z.string().optional(), receipt: z.string().optional() })),
 }).strict();
 export type SystemProfile = z.infer<typeof SystemProfile>;
@@ -113,7 +122,7 @@ export function readStories(stories: readonly LoadedStory[], declared: readonly 
     off.set(e.title, e.reason);
   }
   // A declaration may only select stories the Storybook has, each for one component; anything else stops the run, by name.
-  const reasons = new Map<string, string>(), leftBy = new Map<string, Array<{ story: string; reason: string }>>();
+  const reasons = new Map<string, string>(), leftBy = new Map<string, Array<{ story: string; reason: string }>>(), skeletons = new Set(declared.filter((d) => d.skeleton).map((d) => d.name));
   for (const d of declared) {
     const list = d.stories.map((id) => stories.find((s) => s.id === id) ?? fail(`profile-story-unknown:${id}`));
     for (const s of list) { if (taken.has(s.id)) fail(`profile-story-twice:${s.id}`); if (off.has(s.title)) fail(`profile-title-excluded-and-declared:${s.title}`); taken.add(s.id); }
@@ -142,7 +151,7 @@ export function readStories(stories: readonly LoadedStory[], declared: readonly 
     const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
     return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length, ...(undocumented.length ? { defaultUndocumented: undocumented } : {}) } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(m.instanceUnreadable.length ? { instanceUnreadable: m.instanceUnreadable } : {}), ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}),
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(m.instanceUnreadable.length ? { instanceUnreadable: m.instanceUnreadable } : {}), ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}), ...(skeletons.has(title) ? { skeleton: true as const } : {}),
       references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
@@ -253,6 +262,17 @@ export const SHOW = `(async ([id, args, own]) => {
   const x = Math.floor(Math.min(...rects.map((r) => r.left)) + scrollX), y = Math.floor(Math.min(...rects.map((r) => r.top)) + scrollY);
   return { tree, box: { x, y, width: Math.ceil(Math.max(...rects.map((r) => r.right)) + scrollX) - x, height: Math.ceil(Math.max(...rects.map((r) => r.bottom)) + scrollY) - y } };
 })`;
+
+/** The boxes the subject paints, its root included: each drawn element outside an SVG with a background color, border,
+ *  shadow or outline; and the texts it holds outside an SVG, shown or hidden. Read for the scoreboard's icon and glyph
+ *  test (reviewer rulings, 2026-11-10). */
+export const PAINTED = `(() => { let n = 0, held = 0; for (const t of window.__dsReaderTops ?? []) for (const e of [t, ...t.querySelectorAll('*')]) {
+  if (!e.closest('svg')) held += [...e.childNodes].filter((c) => c.nodeType === 3 && c.textContent.trim()).length;
+  if (e.closest('svg') || !e.getClientRects().length) continue; const s = getComputedStyle(e);
+  if (s.visibility === 'hidden' || Number(s.opacity) === 0) continue;
+  if (!/^(transparent|rgba\\(0, 0, 0, 0\\))$/.test(s.backgroundColor) || s.boxShadow !== 'none' || (s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0)
+    || ['Top', 'Right', 'Bottom', 'Left'].some((k) => parseFloat(s['border' + k + 'Width']) > 0 && s['border' + k + 'Style'] !== 'none')) n++; }
+  return [n, held]; })()`;
 
 /** Grammar decision 5: make instance `k` of the rendered story the subject (its top elements, container and text
  *  marks, as SHOW does for the first) and return its box, or null when the story draws no such instance. */
@@ -502,6 +522,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
         const single = container ? null : (await page.evaluateHandle('window.__dsReaderTops.length === 1 ? window.__dsReaderTops[0] : null') as JSHandle<Element | null>).asElement();
         if (container ?? single) { ref.content = await (container ?? single)!.evaluate(container ? domContentOf : domContentOfRoot, true); await paintRuns(cdp, ref.content!); }
         else ref.contentProblem = 'reference-content-not-one-container';
+        [ref.painted, ref.held] = await page.evaluate(PAINTED) as [number, number];
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
         } finally { await page.evaluate(`${HIDE_CONTEXT}(false)`); }
       }
@@ -527,7 +548,7 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
     // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
     if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
       stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
-      components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut, repeats }) => ({ title, stories: n, grammar, layout, matrix, leftOut, repeats,
+      components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut, repeats, skeleton }) => ({ title, stories: n, grammar, layout, matrix, leftOut, repeats, ...(skeleton ? { skeleton } : {}),
         leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })), excluded }, null, 2) + '\n');
     else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components, excluded }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
