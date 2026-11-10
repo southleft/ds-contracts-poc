@@ -509,10 +509,18 @@ createRoot(document.getElementById('root')).render(<App />);
 /** Dump v1 variants carry no node IDs; resolve them by variant name from the
  * set's children (read-only nodes endpoint). Names are the only join key
  * Figma offers here, so a duplicate name refuses instead of guessing. */
-async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: string, cases: Case[]) {
-  const response = await fetchFigmaApi(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, token);
+/** Pinned Figma reads (reviewer, 2026-11-10): with the file version the dump records, every node and image read asks
+ *  for that version, and a response at another version refuses the cell by name; with none, reads are unchanged. */
+export const pinnedFigmaUrl = (url: string, version: string | undefined) => (version ? `${url}&version=${encodeURIComponent(version)}` : url);
+export function pinnedVersionHeld(got: string | undefined, pinned: string | undefined): void {
+  if (pinned && got !== pinned) throw new Error(`design:consumer:check — figma-version-mismatch: asked ${pinned}, Figma answered ${got ?? 'no version'}`);
+}
+
+async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: string, cases: Case[], version?: string) {
+  const response = await fetchFigmaApi(pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, version), token);
   if (!response.ok) return `HTTP ${response.status}`;
   const body = await response.json() as any;
+  pinnedVersionHeld(body.version, version);
   const children: Array<{ id: string; name: string; type: string }> = body.nodes?.[setNodeId]?.document?.children ?? [];
   const byName = new Map<string, string[]>();
   for (const child of children) byName.set(child.name, [...(byName.get(child.name) ?? []), child.id]);
@@ -541,12 +549,12 @@ export async function mapExportDownloads<T, R>(items: readonly T[], download: (i
   return results;
 }
 
-async function fetchFigmaImages(fileKey: string, ids: string[], token: string | undefined, out: string) {
+async function fetchFigmaImages(fileKey: string, ids: string[], token: string | undefined, out: string, version?: string) {
   const frames: Record<string,FigmaFrame> = {};
   if (!token) return { status: 'figma-images-unavailable' as const, reason: 'no token', files: {} as Record<string, string>, frames, framingRefusal: 'no token' };
   // Figma recomputes render bounds from the returned subtree. A depth limit
   // can omit overflowing descendants and falsely report only layout bounds.
-  const boundsUrl = `https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`;
+  const boundsUrl = pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`, version);
   const readBounds = async (phase: string) => {
     const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaApi(boundsUrl, token));
     if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
@@ -555,6 +563,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     return JSON.parse(bytes.toString('utf8'));
   };
   const before = await readBounds('before');
+  pinnedVersionHeld(before.version, version);
   const exportRequests:SourceRenderRequests={
     layout:{fileKey,version:before.version,nodeIds:[...ids],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:true},
     render:{fileKey,version:before.version,nodeIds:[],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false},
@@ -598,6 +607,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     }
   }
   const after = await readBounds('after');
+  pinnedVersionHeld(after.version, version);
   const verified = figmaFramesFromSnapshots(before, after, images, FIGMA_REST_FULL_BOUNDS);
   const renderProofs:Record<string,unknown>={};
   if(!verified.refused)for(const id of overflow){const frame=verified.frames[id];if(!frame)continue;
@@ -1066,10 +1076,10 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     }
     // Compare with Figma's own renders.
     const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
-    const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
+    const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases, dump._provenance?.version) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
     const figma = args.capture ? figmaImagesFromCapture(JSON.parse(readFileSync(args.capture, 'utf8')), { fileKey, setNodeId }, cases.map(c => c.nodeId), args.out)
       : unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: unresolved }
-      : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
+      : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out, dump._provenance?.version) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
     const sourceImages: Record<string, Buffer> = Object.fromEntries(Object.entries(figma.files).map(([id, file]) => [id, readFileSync(file)]));
     for (const row of receipt.behavior.states ?? []) {
