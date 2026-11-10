@@ -64,8 +64,9 @@ export interface VariantReference extends VariantRender {
   frame?: ConsumerFrame;
   /** What the instance draws (its text, text runs and graphics), read by the Figma to React check's own collector. */
   content?: DomContent; contentProblem?: 'reference-content-not-one-container';
-  /** How many boxes the instance paints (PAINTED): the scoreboard's icon and glyph test (2026-11-10). */
-  painted?: number }
+  /** How many boxes the instance paints, and how many texts it holds outside an SVG (PAINTED): the scoreboard's icon
+   *  and glyph test (2026-11-10). */
+  painted?: number; held?: number }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
@@ -263,13 +264,15 @@ export const SHOW = `(async ([id, args, own]) => {
 })`;
 
 /** The boxes the subject paints, its root included: each drawn element outside an SVG with a background color, border,
- *  shadow or outline. Read for the scoreboard's icon and glyph test (reviewer ruling, 2026-11-10). */
-export const PAINTED = `(() => { let n = 0; for (const t of window.__dsReaderTops ?? []) for (const e of [t, ...t.querySelectorAll('*')]) {
+ *  shadow or outline; and the texts it holds outside an SVG, shown or hidden. Read for the scoreboard's icon and glyph
+ *  test (reviewer rulings, 2026-11-10). */
+export const PAINTED = `(() => { let n = 0, held = 0; for (const t of window.__dsReaderTops ?? []) for (const e of [t, ...t.querySelectorAll('*')]) {
+  if (!e.closest('svg')) held += [...e.childNodes].filter((c) => c.nodeType === 3 && c.textContent.trim()).length;
   if (e.closest('svg') || !e.getClientRects().length) continue; const s = getComputedStyle(e);
   if (s.visibility === 'hidden' || Number(s.opacity) === 0) continue;
   if (!/^(transparent|rgba\\(0, 0, 0, 0\\))$/.test(s.backgroundColor) || s.boxShadow !== 'none' || (s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0)
     || ['Top', 'Right', 'Bottom', 'Left'].some((k) => parseFloat(s['border' + k + 'Width']) > 0 && s['border' + k + 'Style'] !== 'none')) n++; }
-  return n; })()`;
+  return [n, held]; })()`;
 
 /** Grammar decision 5: make instance `k` of the rendered story the subject (its top elements, container and text
  *  marks, as SHOW does for the first) and return its box, or null when the story draws no such instance. */
@@ -519,7 +522,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
         const single = container ? null : (await page.evaluateHandle('window.__dsReaderTops.length === 1 ? window.__dsReaderTops[0] : null') as JSHandle<Element | null>).asElement();
         if (container ?? single) { ref.content = await (container ?? single)!.evaluate(container ? domContentOf : domContentOfRoot, true); await paintRuns(cdp, ref.content!); }
         else ref.contentProblem = 'reference-content-not-one-container';
-        ref.painted = await page.evaluate(PAINTED) as number;
+        [ref.painted, ref.held] = await page.evaluate(PAINTED) as [number, number];
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
         } finally { await page.evaluate(`${HIDE_CONTEXT}(false)`); }
       }

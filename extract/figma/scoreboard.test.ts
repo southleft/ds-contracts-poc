@@ -35,24 +35,27 @@ test('a failed conversion counts at 0 in the headline; a matrix refused before c
 });
 
 test('icon-only and glyph-only are narrow: a painted box, text beside a graphic or a third character keeps a set in the headline', () => {
-  const icon = { runs: [], graphics: ['vector' as const], painted: 0 };
+  const icon = { runs: [], graphics: ['vector' as const], painted: 0, held: 0 };
   assert.equal(drawnColumn([icon, icon]), 'icon-only');
   assert.equal(drawnColumn([icon, { ...icon, painted: 1 }]), undefined, 'an icon button paints its root');
   assert.equal(drawnColumn([{ ...icon, graphics: ['other'] }]), undefined, 'an image is not a vector');
-  assert.equal(drawnColumn([{ ...icon, runs: ['Go'] }]), undefined);
-  assert.equal(drawnColumn([{ runs: ['A'], graphics: [], painted: 0 }, { runs: ['Zz'], graphics: [], painted: 0 }]), 'glyph-only');
-  assert.equal(drawnColumn([{ runs: ['ABC'], graphics: [], painted: 0 }]), undefined);
-  assert.equal(drawnColumn([{ runs: ['AB'], graphics: [], painted: 1 }]), undefined, 'an avatar paints its circle');
+  assert.equal(drawnColumn([{ ...icon, runs: ['Go'], held: 1 }]), undefined);
+  assert.equal(drawnColumn([{ ...icon, held: 1 }]), undefined, 'a tooltip holds its hidden label: not an icon');
+  assert.equal(drawnColumn([{ runs: ['A'], graphics: [], painted: 0, held: 1 }, { runs: ['Zz'], graphics: [], painted: 0, held: 1 }]), 'glyph-only');
+  assert.equal(drawnColumn([{ runs: ['ABC'], graphics: [], painted: 0, held: 1 }]), undefined);
+  assert.equal(drawnColumn([{ runs: ['AB'], graphics: [], painted: 1, held: 1 }]), undefined, 'an avatar paints its circle');
   assert.equal(drawnColumn([icon, null]), undefined, 'a variant with no reading keeps the set in the headline');
 });
 
 test('both sides read a variant the same way: Figma dump nodes and the reader content', () => {
   const vector = { type: 'VECTOR', name: 'p', fill: { hex: '#000' } } as unknown as DumpNode;
   const root = (kids: unknown[], own: object = {}) => ({ type: 'COMPONENT', name: 'v', ...own, children: kids }) as unknown as DumpNode;
-  assert.deepEqual(dumpDrawing(root([{ type: 'INSTANCE', name: 'i', children: [vector] }])), { runs: [], graphics: ['vector'], painted: 0 });
+  assert.deepEqual(dumpDrawing(root([{ type: 'INSTANCE', name: 'i', children: [vector] }])), { runs: [], graphics: ['vector'], painted: 0, held: 0 });
   assert.deepEqual(dumpDrawing(root([vector, { type: 'TEXT', name: 't', text: { characters: ' 7 ' } }, { type: 'TEXT', name: 'h', hidden: true, text: { characters: 'x' } }], { fill: { hex: '#fff' } })),
-    { runs: ['7'], graphics: ['vector'], painted: 1 });
-  assert.deepEqual(domDrawing({ text: 'A', runs: [{ text: 'A' }], graphics: [{ tag: 'svg' }, { tag: 'img' }] }, 2), { runs: ['A'], graphics: ['vector', 'other'], painted: 2 });
+    { runs: ['7'], graphics: ['vector'], painted: 1, held: 2 }, 'a hidden TEXT node draws nothing but is held');
+  assert.deepEqual(dumpDrawing(root([{ type: 'FRAME', name: 'tip', hidden: true, fill: { hex: '#000' }, children: [{ type: 'TEXT', name: 'l', text: { characters: 'Options' } }] }, vector])),
+    { runs: [], graphics: ['vector'], painted: 0, held: 1 });
+  assert.deepEqual(domDrawing({ text: 'A', runs: [{ text: 'A' }], graphics: [{ tag: 'svg' }, { tag: 'img' }] }, 2, 1), { runs: ['A'], graphics: ['vector', 'other'], painted: 2, held: 1 });
 });
 
 test('a Figma set is skeleton-only when every variant carries the profile value, or when the profile lists it', () => {

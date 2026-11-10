@@ -67,40 +67,45 @@ export function reading(sets: readonly SetResult[]): Reading {
     fontBlocked: { total: all.fontBlocked, perSet: Object.fromEntries(sets.filter((s) => s.fontBlocked).map((s) => [s.set, s.fontBlocked])) }, columns };
 }
 
-/** What one variant draws, as both sides report it: its text runs, its graphics (vector or SVG, or not) and how many
- *  boxes it paints (a fill, border or shadow on any element outside a vector, its root included). */
-export interface VariantDrawing { runs: string[]; graphics: Array<'vector' | 'other'>; painted: number }
+/** What one variant draws, as both sides report it: its text runs, its graphics (vector or SVG, or not), how many
+ *  boxes it paints (a fill, border or shadow on any element outside a vector, its root included) and how many texts it
+ *  holds outside a vector, shown or hidden (a tooltip's label, say). */
+export interface VariantDrawing { runs: string[]; graphics: Array<'vector' | 'other'>; painted: number; held: number }
 /** Strict, so narrow: anything not clearly an icon or a glyph stays in the headline (reviewer ruling, 2026-11-10).
- *  Icon-only: every variant draws no text and one or more graphics, all vector or SVG, and paints no box.
+ *  Icon-only: every variant holds no text outside a vector, shown or hidden, and draws one or more graphics, all
+ *  vector or SVG, and paints no box.
  *  Glyph-only: every variant draws exactly one text run of one or two characters, no graphic and no painted box. */
 export function drawnColumn(variants: ReadonlyArray<VariantDrawing | null>): Column | undefined {
   if (!variants.length || variants.some((v) => !v)) return undefined;
   const v = variants as VariantDrawing[];
-  if (v.every((d) => !d.runs.length && d.graphics.length && d.graphics.every((g) => g === 'vector') && !d.painted)) return 'icon-only';
+  if (v.every((d) => !d.runs.length && !d.held && d.graphics.length && d.graphics.every((g) => g === 'vector') && !d.painted)) return 'icon-only';
   if (v.every((d) => d.runs.length === 1 && [...d.runs[0]!].length <= 2 && !d.graphics.length && !d.painted)) return 'glyph-only';
   return undefined;
 }
 
 const VECTORS = new Set(['VECTOR', 'BOOLEAN_OPERATION', 'ELLIPSE', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE']);
 /** The Figma side, from a dump variant: TEXT nodes, vector nodes and painted boxes (a frame, rectangle, group or
- *  instance with a fill, stroke or shadow). An image paint is a graphic that is not a vector. Hidden nodes draw nothing. */
+ *  instance with a fill, stroke or shadow). An image paint is a graphic that is not a vector. Hidden nodes draw nothing,
+ *  but a hidden TEXT node is still held. */
 export function dumpDrawing(root: DumpNode): VariantDrawing {
-  const d: VariantDrawing = { runs: [], graphics: [], painted: 0 };
-  const walk = (n: DumpNode) => {
-    if (n.hidden || n.opacity === 0) return;
-    if (n.type === 'TEXT') { const t = (n.text?.characters ?? '').trim(); if (t) d.runs.push(t); return; }
+  const d: VariantDrawing = { runs: [], graphics: [], painted: 0, held: 0 };
+  const walk = (n: DumpNode, shown: boolean) => {
+    shown = shown && !n.hidden && n.opacity !== 0;
+    if (n.type === 'TEXT') { const t = (n.text?.characters ?? '').trim(); if (t) { d.held++; if (shown) d.runs.push(t); } return; }
+    if (!shown) { for (const c of n.children ?? []) walk(c, false); return; }
     const image = !!(n.imagePaints?.length || n.imageFill), paints = !!(n.fill || n.gradient || (n.stroke && (n.strokeWeight ?? 1) > 0)
       || n.effects?.some((e) => /SHADOW/.test(e.type) && (e as { visible?: boolean }).visible !== false));
     if (VECTORS.has(n.type)) { if (paints || image) d.graphics.push(image ? 'other' : 'vector'); return; }
     if (image) d.graphics.push('other'); else if (paints) d.painted++;
-    for (const c of n.children ?? []) walk(c);
+    for (const c of n.children ?? []) walk(c, true);
   };
-  walk(root);
+  walk(root, true);
   return d;
 }
-/** The code side, from a reader reference: its text runs, its graphics (an `svg` is a vector) and its painted boxes. */
-export const domDrawing = (c: { text: string; runs?: Array<{ text: string }>; graphics: Array<{ tag: string }> }, painted: number): VariantDrawing =>
-  ({ runs: (c.runs ? c.runs.map((r) => r.text) : c.text.split('\n')).map((t) => t.trim()).filter(Boolean), graphics: c.graphics.map((g) => (g.tag === 'svg' ? 'vector' : 'other')), painted });
+/** The code side, from a reader reference: its text runs, its graphics (an `svg` is a vector), its painted boxes and
+ *  the texts it holds outside an SVG (PAINTED). */
+export const domDrawing = (c: { text: string; runs?: Array<{ text: string }>; graphics: Array<{ tag: string }> }, painted: number, held: number): VariantDrawing =>
+  ({ runs: (c.runs ? c.runs.map((r) => r.text) : c.text.split('\n')).map((t) => t.trim()).filter(Boolean), graphics: c.graphics.map((g) => (g.tag === 'svg' ? 'vector' : 'other')), painted, held });
 
 /** A profile's Figma skeleton data (entry of 2026-11-10): the variant value that marks a skeleton, and sets drawn as
  *  skeletons by the kit. A set is skeleton-only when every variant carries the value, or when the profile lists it. */
