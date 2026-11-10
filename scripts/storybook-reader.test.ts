@@ -54,6 +54,20 @@ test('a profile may exclude a whole title only for a fixed reason; it stays visi
   assert.throws(() => readStories(list, [{name: 'Flag', stories: ['flag--on'], axes: []}], [{title: 'Components/Tag/Feature Flag', reason: 'preview'}]), /profile-title-excluded-and-declared/);
 });
 
+import {readProfile} from './storybook-reader.js';
+test('Carbon profile v0 holds to its schema; every story is used once; a feature-flag copy names a counted title; a utility names its receipt', () => {
+  const p = readProfile(new URL('../examples/carbon/profile.json', import.meta.url).pathname);
+  const used = [...p.components.flatMap(c => c.stories), ...p.components.flatMap(c => (c.leftOut ?? []).map(l => l.story))];
+  assert.equal(new Set(used).size, used.length);
+  const excluded = new Set(p.excluded.map(e => e.title));
+  for (const e of p.excluded) {
+    if (e.reason === 'feature-flag-copy') assert.ok(e.copies && !excluded.has(e.copies), e.title);
+    if (e.reason === 'non-visual-utility') assert.ok(e.receipt, e.title);
+  }
+  for (const l of p.components.flatMap(c => c.leftOut ?? [])) if (l.reason === 'left-out-variant') assert.ok(l.adds, l.story);
+  assert.ok(p.tuning.code.every(n => p.components.some(c => c.name === n)));
+});
+
 import {storyFontPreflight} from './font-preflight.js';
 test('React to Figma font preflight: each face a variant is drawn with is held against Figma\'s font list, by name', () => {
   const sans = (weight: number, style: 'normal' | 'italic' = 'normal') => ({family: 'Arimo', weight, style});
