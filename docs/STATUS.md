@@ -229,6 +229,12 @@ Agent:
       list only (reviewer, 2026-11-10): pass 1 reads every story as before; a listed name
       that is not a component refuses the run. On this repository's Storybook, the 5 listed
       components' entries and 38 reference images are byte-identical to a full run's.
+- [x] The reading harness (`scripts/reading.ts`; reviewer, 2026-11-10), so the Dec 7 reading
+      runs from committed code: each value from its run receipt, never guessed, and a set
+      missing one refused by name; the committed scorer's first line per direction, and the
+      sensitivity line without the largest paired unit when the reading holds it (from the
+      profile's pairs). It reproduces all 380 numbers of the A0 AI test from the same
+      receipts (`private/reading-harness-20261110`).
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
 Next dates: 2026-11-20, the checker, the grammar classifier and the variant matrix
