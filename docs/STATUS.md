@@ -87,9 +87,12 @@ baseline and the fast lane.
       stays out (its icon stories' own option lists are 1,008 and 504) and the feature-flag
       FileUploader gives no variants (own renders); PasswordInput (96) and MultiSelect (96)
       come in. Button comes in at 84 only through a declaration.
-- [ ] A profile's `excluded` titles, with fixed reasons (a feature-flag or alternate copy,
-      deprecated, preview or unreleased, a non-visual utility), kept in the denominator in
-      their own column (reviewer, 2026-11-10). Its own PR before 2026-11-20.
+- [x] A profile's `excluded` titles, with fixed reasons (`feature-flag-copy`, `deprecated`,
+      `preview`, `non-visual-utility`), kept in the denominator in their own column
+      (reviewer, 2026-11-10): the reader refuses any other reason, an unknown title, or a
+      title both excluded and declared, by name; an excluded title never becomes a
+      component and is reported with what it would have been; coverage is printed with
+      it counted (the headline) and without.
 
 ## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
 
