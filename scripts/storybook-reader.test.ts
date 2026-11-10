@@ -54,8 +54,8 @@ test('a profile may exclude a whole title only for a fixed reason; it stays visi
   assert.throws(() => readStories(list, [{name: 'Flag', stories: ['flag--on'], axes: []}], [{title: 'Components/Tag/Feature Flag', reason: 'preview'}]), /profile-title-excluded-and-declared/);
 });
 
-import {readProfile} from './storybook-reader.js';
-test('Carbon profile v0 holds to its schema; every story is used once; a feature-flag copy names a counted title; a utility names its receipt', () => {
+import {readProfile, SystemProfile} from './storybook-reader.js';
+test('Carbon profile v0.1 holds to its schema; every story is used once; a feature-flag copy names a counted title; a utility names its receipt', () => {
   const p = readProfile(new URL('../examples/carbon/profile.json', import.meta.url).pathname);
   const used = [...p.components.flatMap(c => c.stories), ...p.components.flatMap(c => (c.leftOut ?? []).map(l => l.story))];
   assert.equal(new Set(used).size, used.length);
@@ -66,6 +66,9 @@ test('Carbon profile v0 holds to its schema; every story is used once; a feature
   }
   for (const l of p.components.flatMap(c => c.leftOut ?? [])) if (l.reason === 'left-out-variant') assert.ok(l.adds, l.story);
   assert.ok(p.tuning.code.every(n => p.components.some(c => c.name === n)));
+  // A mark is `true` or absent; a misspelled key on a component is refused, never dropped.
+  for (const bad of [{subcomponent: false}, {skeleton: false}, {subcomponents: true}]) assert.throws(() => SystemProfile.parse({...p, components: [{...p.components[0], ...bad}]}));
+  assert.equal(new Set(p.figmaSkeleton!.sets).size, p.figmaSkeleton!.sets!.length);
 });
 
 import {storyFontPreflight} from './font-preflight.js';

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { domDrawing, drawnColumn, dumpDrawing, figmaSkeletonOnly, numbers, reading, type SetResult } from './scoreboard.js';
+import { domDrawing, drawnColumn, dumpDrawing, figmaInternal, figmaSkeletonOnly, numbers, reading, type SetResult } from './scoreboard.js';
 import type { DumpNode, DumpSet } from './types.js';
 
 const set = (name: string, variants: number, pass: number, extra: Partial<SetResult> = {}): SetResult => ({ set: name, grammar: 'in', variants, pass, fontBlocked: 0, ...extra });
@@ -42,6 +42,13 @@ test('an excluded title counts in coverage only, both ways; left-out variants ar
   assert.deepEqual(r.leftOutVariants, { total: 3, perSet: { a: 3 } });
   assert.match(r.firstLine, /coverage 2\/4 with 1 title\(s\) excluded by profile counted \(2\/3 without\), 3 variant\(s\) left out by profile, raw first pass 4\/7/);
   assert.throws(() => reading([set('x', 1, 0, { excluded: 'deprecated', column: 'icon-only' })]), /scoreboard-input-invalid:x/);
+});
+
+test('an internal set is in no number, coverage included, and is counted beside the reading', () => {
+  const r = reading([set('a', 2, 1), set('_part', 3, 3, { internal: true }), set('b', 1, 1)]), plain = reading([set('a', 2, 1), set('b', 1, 1)]);
+  assert.deepEqual([r.coverage, r.headline, r.rawFirstPass, r.internal], [plain.coverage, plain.headline, plain.rawFirstPass, ['_part']]);
+  assert.match(r.firstLine, /; 1 internal set\(s\) left out, in no number$/);
+  assert.deepEqual([figmaInternal('_Menu list item', { namePrefix: '_' }), figmaInternal('Menu', { namePrefix: '_' }), figmaInternal('_Menu', undefined)], [true, false, false]);
 });
 
 test('icon-only and glyph-only are narrow: a painted box, text beside a graphic or a third character keeps a set in the headline', () => {

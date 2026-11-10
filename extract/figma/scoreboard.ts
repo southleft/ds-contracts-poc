@@ -23,13 +23,17 @@ export interface SetResult { set: string; grammar: 'in' | 'out'; variants: numbe
   /** A whole title the profile excludes, with its fixed reason (reviewer, 2026-11-10): in coverage's denominator only. */
   excluded?: string;
   /** The variants the profile leaves out of this set (`left-out-variant`): coverage loss, reported; no rate changes. */
-  leftOutVariants?: number }
+  leftOutVariants?: number;
+  /** A set the profile marks internal (entry of 2026-11-10, `figmaInternal`): in no number, coverage included; counted beside. */
+  internal?: true }
 /** `rated`: the sets with a rate, the ones the headline is the mean over; `noRate`: every other set, by name and why. */
 export interface Numbers { sets: number; rated: number; headline: number | null; pass: number; of: number; whole: number; fontBlocked: number;
   noRate: Array<{ set: string; why: 'font-blocked' | 'matrix-refused' }> }
 export interface Reading {
   /** `sets` counts the excluded titles (the headline figure); `withoutExcluded` is the figure beside it. */
   firstLine: string; coverage: { inGrammar: number; sets: number; withoutExcluded: number; excluded: Record<string, string> };
+  /** The sets left out as internal, by name: never counted, always reported. */
+  internal: string[];
   leftOutVariants: { total: number; perSet: Record<string, number> };
   /** In-grammar sets outside every column; `pass` / `of` is the in-grammar per-variant rate. */
   headline: Numbers;
@@ -42,6 +46,7 @@ export interface Reading {
 
 const counted = (s: SetResult) => s.variants - s.fontBlocked;
 function valid(s: SetResult): void {
+  if (s.internal !== undefined) { if (s.internal !== true || s.excluded !== undefined) throw Error(`scoreboard-input-invalid:${s.set}`); return; }
   if (s.excluded !== undefined) { if (typeof s.excluded !== 'string' || !s.excluded || s.column) throw Error(`scoreboard-input-invalid:${s.set}`); return; }
   if (s.leftOutVariants !== undefined && !(Number.isInteger(s.leftOutVariants) && s.leftOutVariants >= 0)) throw Error(`scoreboard-input-invalid:${s.set}`);
   // A set has one variant or more unless the receipt says why it has none: an unknown count would leave it out of every
@@ -63,8 +68,10 @@ export function numbers(sets: readonly SetResult[]): Numbers {
 
 const pct = (x: number | null) => (x === null ? 'none' : `${(100 * x).toFixed(1)}%`);
 /** One direction's reading. */
-export function reading(sets: readonly SetResult[]): Reading {
-  sets.forEach(valid);
+export function reading(all_: readonly SetResult[]): Reading {
+  all_.forEach(valid);
+  // An internal set is in no number at all; it is named beside the reading.
+  const internal = all_.filter((s) => s.internal).map((s) => s.set).sort(), sets = all_.filter((s) => !s.internal);
   // An excluded title is counted in coverage's denominator and nowhere else.
   const kept = sets.filter((s) => s.excluded === undefined), excluded = Object.fromEntries(sets.filter((s) => s.excluded).map((s) => [s.set, s.excluded!]));
   const main = kept.filter((s) => !s.column), headline = numbers(main.filter((s) => s.grammar === 'in')), raw = numbers(main);
@@ -75,8 +82,8 @@ export function reading(sets: readonly SetResult[]): Reading {
   const blocked = all.fontBlocked ? `${all.fontBlocked} font-blocked variant(s), in no rate; ` : '';
   const none = headline.noRate.length ? `; no rate for ${headline.noRate.map((n) => `${n.set} (${n.why})`).join(', ')}` : '';
   const firstLine = `${blocked}headline ${pct(headline.headline)} over ${headline.rated} in-grammar set(s), coverage ${inGrammar}/${sets.length}${without}${leftOut.total ? `, ${leftOut.total} variant(s) left out by profile` : ''}, `
-    + `raw first pass ${raw.pass}/${raw.of}, whole sets ${headline.whole}/${headline.rated}, font-blocked ${all.fontBlocked}${none}`;
-  return { firstLine, coverage: { inGrammar, sets: sets.length, withoutExcluded: kept.length, excluded }, leftOutVariants: leftOut, headline, rawFirstPass: { pass: raw.pass, of: raw.of },
+    + `raw first pass ${raw.pass}/${raw.of}, whole sets ${headline.whole}/${headline.rated}, font-blocked ${all.fontBlocked}${none}${internal.length ? `; ${internal.length} internal set(s) left out, in no number` : ''}`;
+  return { firstLine, coverage: { inGrammar, sets: sets.length, withoutExcluded: kept.length, excluded }, internal, leftOutVariants: leftOut, headline, rawFirstPass: { pass: raw.pass, of: raw.of },
     fontBlocked: { total: all.fontBlocked, perSet: Object.fromEntries(kept.filter((s) => s.fontBlocked).map((s) => [s.set, s.fontBlocked])) }, columns };
 }
 
@@ -123,6 +130,9 @@ export const domDrawing = (c: { text: string; runs?: Array<{ text: string }>; gr
 
 /** A profile's Figma skeleton data (entry of 2026-11-10): the variant value that marks a skeleton, and sets drawn as
  *  skeletons by the kit. A set is skeleton-only when every variant carries the value, or when the profile lists it. */
+/** A profile's internal-set marker (entry of 2026-11-10): a set whose name starts with the prefix is internal. */
+export interface FigmaInternal { namePrefix: string }
+export const figmaInternal = (setName: string, data: FigmaInternal | undefined): boolean => !!data?.namePrefix && setName.startsWith(data.namePrefix);
 export interface FigmaSkeleton { variant?: { property: string; value: string }; sets?: string[] }
 export function figmaSkeletonOnly(set: DumpSet, data: FigmaSkeleton | undefined): boolean {
   if (!data) return false;
