@@ -2,6 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import {chr
 import {PNG} from 'pngjs';
 import {captureIsolatedRegion} from './design-consumer-isolated-capture.js';
 import {observeConsumerPaintExtent,paintLayerDocumentBox} from './design-consumer-paint-extent.js';
+import {retryCapture,CAPTURE_REFUSED} from './capture-retry.js';
 const html=(top=100)=>`<style>body{margin:0;min-height:800px}#subject{position:absolute;left:100px;top:${top}px;width:20px;height:20px;background:blue;box-shadow:2000px 0 red}#far{position:absolute;left:4000px;top:0;width:20px;height:20px;background:lime;will-change:transform}#left{position:absolute;left:-35px;top:0;width:15px;height:20px;background:orange}</style><div id="subject"><div id="far"></div><div id="left"></div></div>`;
 test('paint extent includes distant shadows and separately composited children; restoration is exact',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240}});await page.setContent(html());const before=await page.locator('body').innerHTML();
@@ -97,9 +98,9 @@ test('blend promotion proof excludes unrelated sibling paint changes while check
  <div id="subject" class="sample"><div id="ink"></div></div>
  <div id="neighbor" class="sample"></div>`);
  const original=await page.locator('body').innerHTML();
- const before=PNG.sync.read(await page.screenshot({omitBackground:true}));
+ const before=PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true})));
  await page.locator('#subject').evaluate(el=>(el as HTMLElement).style.setProperty('will-change','transform','important'));
- const after=PNG.sync.read(await page.screenshot({omitBackground:true}));
+ const after=PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true})));
  await page.locator('#subject').evaluate(el=>el.removeAttribute('style'));
  assert(!before.data.equals(after.data),'fixture must change unrelated sibling pixels');
  const box=await page.locator('#subject').boundingBox(),neighbor=await page.locator('#neighbor').boundingBox();assert(box&&neighbor);
@@ -110,10 +111,10 @@ test('blend promotion proof excludes unrelated sibling paint changes while check
   const start:number=(y*before.width+box.x)*4,end:number=start+box.width*4;
   assert(before.data.subarray(start,end).equals(after.data.subarray(start,end)),'subject pixels remain identical');
  }
- assert(PNG.sync.read(await page.screenshot({omitBackground:true})).data.equals(before.data),'original page raster is restored');
+ assert(PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true}))).data.equals(before.data),'original page raster is restored');
  const observed=await observeConsumerPaintExtent(page,'#subject');assert('observation'in observed,JSON.stringify(observed));
  assert.equal(observed.observation.blendRasterVerified,true);assert.equal(await page.locator('body').innerHTML(),original);
- assert(PNG.sync.read(await page.screenshot({omitBackground:true})).data.equals(before.data),'observer restores the original page raster');
+ assert(PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true}))).data.equals(before.data),'observer restores the original page raster');
  }finally{await browser.close();}
 });
 
@@ -136,4 +137,11 @@ test('an out-of-flow descendant that paints nothing may move under promotion; a 
  for(const painted of [['background:red','label'],['width:0;height:0;box-shadow:0 0 0 4px red','']]){await page.setContent(subject(painted[0]!,painted[1]));
  assert.deepEqual(await observeConsumerPaintExtent(page,'#subject'),{refused:'paint-extent-promotion-changed-subject'});}
  }finally{await browser.close();}
+});
+
+test('a capture is retried once on Chromium\'s capture refusal, and never on any other failure',async()=>{
+ let calls=0;const fail=(message:string,times:number)=>async()=>{if(calls++<times)throw Error(`page.screenshot: ${message}`);return 'png';};
+ assert.equal(await retryCapture(fail(CAPTURE_REFUSED,1)),'png');assert.equal(calls,2);
+ calls=0;await assert.rejects(retryCapture(fail(CAPTURE_REFUSED,2)),/Unable to capture screenshot/);assert.equal(calls,2);
+ calls=0;await assert.rejects(retryCapture(fail('Timeout 30000ms exceeded',1)),/Timeout/);assert.equal(calls,1);
 });

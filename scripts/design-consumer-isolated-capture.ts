@@ -4,6 +4,7 @@
 import {PNG} from 'pngjs';
 import type {JSHandle, Locator, Page} from 'playwright-core';
 import {enclosingFrame,imageSha256,type FrameBox,type ConsumerFrame} from './design-consumer-framing-v2.js';
+import {retryCapture} from './capture-retry.js';
 
 // Keep detached baseline values in Chromium. Compare later readings directly
 // instead of building another complete JSON string (including every inherited
@@ -148,8 +149,8 @@ export async function captureIsolatedRegion(page:Page,root:Locator,relative:Fram
        if(!contains())return {refused:'isolated-capture-scroll-region-unreachable'};
        if(!await sameSnapshot(root,before))return {refused:'isolated-capture-scroll-changed-subject'};
      }
-     const tileBytes=await page.screenshot({omitBackground:true,fullPage:false,
-       clip:{...tile,x:tile.x-scroll.x,y:tile.y-scroll.y},animations:'disabled',timeout:10000});
+     const tileBytes=await retryCapture(()=>page.screenshot({omitBackground:true,fullPage:false,
+       clip:{...tile,x:tile.x-scroll.x,y:tile.y-scroll.y},animations:'disabled',timeout:10000}));
      const png=PNG.sync.read(tileBytes);
      if(png.width!==tile.width||png.height!==tile.height)return {refused:'isolated-capture-image-span-mismatch'};
      if(!await sameSnapshot(root,before)||JSON.stringify(layout)!==JSON.stringify(await bounds())||

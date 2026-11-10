@@ -4,12 +4,13 @@ import {chromium,type Page} from 'playwright-core';
 import {PNG} from 'pngjs';
 import {observeConsumerPaintExtent} from './design-consumer-paint-extent.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
+import {retryCapture} from './capture-retry.js';
 
 const fixture=(css='',inside='<span class="plane back"></span><span class="plane front"></span>',outside='')=>`<style>
  body{margin:0}#cell{position:relative;margin:24px}#subject{position:relative;isolation:isolate;width:40px;height:40px;border-radius:0;overflow:hidden}
  .plane{position:absolute;inset:0;z-index:-1;pointer-events:none}.back{background:blue}.front{left:20px;background:red;opacity:.5}
  ${css}</style><div id="cell"><div id="subject">${inside}</div></div>${outside}`;
-async function state(page:Page){return {dom:await page.locator('html').evaluate(n=>n.outerHTML),view:await page.evaluate(()=>({w:innerWidth,h:innerHeight,x:scrollX,y:scrollY})),raster:PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled'})).data};}
+async function state(page:Page){return {dom:await page.locator('html').evaluate(n=>n.outerHTML),view:await page.evaluate(()=>({w:innerWidth,h:innerHeight,x:scrollX,y:scrollY})),raster:PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true,animations:'disabled'}))).data};}
 async function restored(page:Page,before:Awaited<ReturnType<typeof state>>){const after=await state(page);assert.deepEqual(after,before,'all DOM/style bytes, viewport/scroll and original raster must be restored');}
 
 test('isolated negative planes preserve order, alpha, clipping and exact subject pixels',async()=>{
