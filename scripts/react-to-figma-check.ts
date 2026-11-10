@@ -6,7 +6,7 @@
  *   - it is a COMPONENT_SET and every variant is a COMPONENT; a component whose stories list no
  *     options (no axis) is instead one main COMPONENT outside any set (GOAL.md, 2026-11-08);
  *   - its variant properties are the story matrix exactly (matchesMatrix, capped at
- *     64 by the reader), rebuilt from each reference's value on each axis;
+ *     128 by the reader), rebuilt from each reference's value on each axis;
  *   - it uses auto layout outside drawings: none of the grammar classifier's own
  *     layout reasons (classifyDump), so a drawing is exempt exactly as there;
  *   - every text a reference draws is TEXT characters in its paired variant,
