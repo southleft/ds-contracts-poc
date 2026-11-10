@@ -295,3 +295,172 @@ on a practice kit and changes nothing on this page. Every other rule, date and s
 rule is unchanged, and spend counts against the same $2,400 cap.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-08.
+
+### 2026-11-09: One design system at a time
+
+The owner, in chat: "Yeah, I think we should stop hill climbing on the current plan and
+pivot." The engine stops trying to convert any design system with no setup. It now converts
+one named design system at a time, and the system's own knowledge is written down, not
+guessed. The reason is in this page's own numbers: on kits the engine has been tuned on,
+662 of 944 Figma to React variants pass today (about 70%). On A0, which it had never seen,
+the unchanged engine passed 13.3% one way and converted nothing the other way.
+Generalizing has been the hard part, not converting.
+
+**From today, this entry replaces** the bar, the three steps, "Sealed kits", stop rules 1
+to 3, and the definition of first pass above. The North Star stays as the long-term aim,
+measured but no longer the bar. **Unchanged:** the grammar (ACG-1), the checks and their
+thresholds, how numbers are counted (four numbers per direction), determinism, the $2,400
+spend cap with its $400 weekly limit, budget and reporting, and the owner-only actions.
+
+**One engine, one profile per system.**
+- A profile is a versioned data file, checked against a schema, kept in the system's
+  folder under `examples/`. It holds only what is specific to that system:
+  - component, property and value names on each side;
+  - token maps (Figma variables to CSS custom properties);
+  - fonts, and how the stories are set up (decorators, themes);
+  - which named conventions are on, chosen from a list the engine implements (for
+    example, Figma's text trim to cap height).
+- It grows from what the repository already has: each library's `ds-library.json`
+  manifest and its capture config in `extract/computed/configs/`.
+- Engine code never names a system or a component. A system-specific behavior lives
+  in the engine as a general rule that a profile switches on.
+- A run on a system writes that system's contracts. They are not expected to work for
+  any other system.
+- No model call in capture, contract, emitters, writer or checker. Same input and
+  profile, byte-identical output.
+- A person writes and reviews each profile, and commits it before any run that counts.
+  If AI helps draft one, that is labeled, and AI never runs in a conversion.
+
+**The honest test, inside the system.** Agents on this project once reported tuned results
+as proof that the idea works. This entry must not repeat that.
+- Before any tuning, the owner draws a held-out third of the system's in-grammar
+  component sets in each direction. The draw comes only from components no prior work
+  in this repository has touched: none in `examples/<system>/contracts`, and none in a
+  practice cell. The owner may ask a separate sealing session to make the draw.
+- The tuning list is committed. The held-out list stays outside the repository, and
+  only SHA-256(salt + held-out list) is committed.
+- Agents work only on components in the tuning list. They never run, check or study
+  any other component of the system, and the profile may not name one, until the
+  reading.
+- Climbing happens only on the other two-thirds. Those numbers are labeled "tuned"
+  and are never progress.
+- **The reading:** once, on code the owner has tagged, on the held-out sets, both ways,
+  with the same checks and the four numbers.
+
+**Bar:** at least 80% first pass in both directions on the system's held-out in-grammar
+sets, with at least 25% of the system's sets in-grammar. Users stay a separate outcome:
+one outside user on that system completes a journey from the published quickstart, with
+the output attached to a GitHub issue.
+
+**Plan:**
+- **Step 0 (Nov 9–10).** The universal climb stops.
+  - The Figma snapshot refresh lands, so main stays green.
+  - Two checker fixes found on the old plan apply to any system, and both land before
+    Nov 20 under rule 6: a form field's box holding its text, and the grammar check
+    refusing out-of-grammar components (14 A0 sets).
+  - The A1, A2 and B draws are cancelled. `~/ds-contracts-sealed` stays sealed and
+    unread, kept for a later North Star reading.
+- **Step 1 (Nov 10–14). The first system is Carbon** (owner, in chat: "Approve, with
+  Carbon").
+  - Pin `@carbon/react` to a version, along with its public Storybook and the Carbon
+    Figma kit (the owner's draft copy).
+  - Inventory both sides and run the grammar classifier on both, with no conversion
+    attempts. The ten components in `examples/carbon/contracts` (Accordion, Button,
+    Checkbox, IconButton, InlineNotification, Modal, Tabs, Tag, TextInput, Toggle),
+    and every Carbon set in a practice cell, count as touched. They go in the tuning
+    list.
+  - The owner draws the held-out third and commits its hash.
+  - Write profile v0 and its schema from the system's existing manifest and config.
+  - Take a tuned baseline reading with the unchanged engine.
+- **Nov 20.** The checker, the grammar classifier and the variant matrix rule freeze by
+  SHA-256, as before.
+- **Step 2 (Nov 15 – Dec 4). Climb on the tuning sets.**
+  - One named miss per PR, at most 300 net lines.
+  - A profile change is data and is reviewed like code.
+  - An engine rule that a profile switches on needs no second kit.
+  - An engine change that applies to every system must still break no known cell on
+    the regression set (the fixed 40-set, the 204 corpus, the practice kits and this
+    repository's own components).
+- **Dec 4.** The owner tags the code.
+- **Dec 7. The held-out reading**, once.
+- **Step 3 (Dec 7–21).** The owner publishes the CLI to npm under `next`, and an
+  outside user on that system tries it.
+- **Dec 23. Decide:**
+  - The bar is met both ways: go on to a second system, with a new profile and a new
+    held-out draw.
+  - 60 to 79% both ways: one extension, Jan 4 to Jan 22, 2027, capped at $900.
+  - Under 40% in either direction at the reading: stop engine work and publish the
+    numbers.
+
+**AGENTS.md follows this entry**, in the same PR:
+- **Rule 5:** the held-out list replaces the sealed kits, under the same never-read rule.
+- **Rule 7:** only the held-out reading counts.
+- **Rule 8:** system knowledge goes in the profile, or in a general engine rule that a
+  profile switches on. An engine default that applies to every system still needs a
+  second kit. There are still no system or component names in conversion code.
+
+Every other rule is unchanged.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-09: Grammar decision 1, an argument no story changes makes no variant
+
+The owner, in chat: "Sign all four". On the code side, an argument whose type is outside
+the grammar (an object, function, number, range or unknown type) no longer puts its
+component outside the grammar, as long as no story of that component gives it a different
+value. The component is drawn with the value its stories use, and every variant is judged
+as before. An argument that any story varies still refuses the component, by name. On
+Carbon 1.120.0, this puts 111 of 132 story titles in grammar instead of 38. It widens
+ACG-1 and freezes with the grammar classifier on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-09: Grammar decision 2, a part pinned inside a row or column is in grammar
+
+The owner, in chat: "Sign all four". A child placed absolutely inside a parent laid out in
+a row or a column is now in grammar on both sides:
+- **in Figma,** a child with absolute positioning inside an auto layout frame;
+- **in code,** an absolutely positioned element whose containing block is laid out in a
+  row or a column.
+
+Its place is carried as offsets from the parent's edges. A hidden pinned layer is an
+ordinary part, and a show/hide toggle on it is carried. Grid, wrapping rows, and
+absolutely placed children of a free-form parent stay outside the grammar. "No absolutely
+placed children" in ACG-1 now reads "no absolutely placed children, except a part pinned
+inside a row or a column".
+
+Two things follow from this decision. Step 0's classifier fix shrinks to refusing grid and
+wrapping layouts. The step that turns Figma's data into the classifier's input must mark
+every absolutely placed child; today it misses some, such as TextInput's background and
+borders on Carbon. Both land before Nov 20. This decision freezes with the grammar
+classifier on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-09: Grammar decision 3, at most 128 variants per set
+
+The owner, in chat: "Sign all four". The cap on variants per component set rises from 64 to
+128, in "How numbers are counted" and in the variant matrix rule (including the entry of
+2026-11-01). On Carbon, this brings in Button (84 variants), PasswordInput (96) and the
+feature-flag FileUploader (108). It freezes with the variant matrix rule on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-09: Grammar decision 4, a profile may say which stories make a component and which options are real
+
+The owner, in chat: "Sign all four". A system's profile may assign stories to components,
+for example when one story title holds several components, as Carbon's Tag holds Tag,
+DismissibleTag, OperationalTag, SelectableTag and a skeleton. It may also list a
+component's variant axes, leaving out a playground control that isn't a component
+property, such as Modal's `numberOfButtons`. The variant matrix rule then reads that
+declaration instead of guessing from the stories' controls.
+
+A declaration may only select stories and axes the stories already have. It never adds a
+value that no story renders. For every component of the system, these declarations are
+written from the stories alone, before the held-out draw, with nothing converted. They are
+fixed at the draw. Afterward, only tuning-list components' declarations may change. This
+is the one exception to the pivot entry's rule that the profile may not name a held-out
+component before the reading. This
+decision changes the variant matrix rule and freezes with it on 2026-11-20.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
