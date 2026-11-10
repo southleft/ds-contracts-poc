@@ -487,3 +487,40 @@ So:
   turning auto-merge on as each PR opens. Owner-only actions are unchanged.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-10: Grammar decision 5, each instance a story draws is a variant, and what's beside it is context
+
+The owner, in chat: "Sign decision 5". Many design systems show a component's options
+in one story, side by side, instead of one story per option. Carbon's read-only Tag
+story shows 12 tags, and its RadioButton story shows a group of 3. Under the variant
+matrix rule, such a story is an "own render" and gives no variants. On Carbon
+1.120.0, 47 of the 96 titles in grammar under decisions 1 and 2 therefore have no
+variants at all.
+
+The more common case is a story that draws one instance of its component beside
+something else, such as Modal, Tooltip and Toggletip, each drawn next to its trigger
+button. That story is an "own render" too.
+
+From this entry on, when a story renders one or more instances of its own component,
+alone or beside other content:
+- Its "own component" is the component its stories file declares, or the one decision
+  4 assigns the story to by story id. It is matched by reference, never by React
+  component name, because production builds shorten those names.
+- Each instance is one variant. It is named by the values of that instance's declared
+  axes (decision 4), read from React's own tree and not guessed from the page.
+- Instances with the same axis values are one variant, the first one drawn.
+- An instance whose axis values can't be read refuses the story, by name. So does a
+  story that renders no instance of its own component.
+- Anything the story draws besides those instances, such as a trigger button or a
+  label, is story context. It is not part of any variant, and is never converted or
+  judged.
+- Each variant's reference image is that instance alone, captured the way the reader
+  already captures a story's subject, without its backdrop or neighbors. The image,
+  size and content checks are unchanged.
+- This only selects what a story already renders. It never adds a value that no story
+  shows. The 128-variant cap applies.
+
+This changes the variant matrix rule and the reader's reference capture. Both land
+before 2026-11-20 and freeze with them.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-10.
