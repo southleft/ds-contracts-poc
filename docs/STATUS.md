@@ -115,21 +115,72 @@ baseline and the fast lane.
       committed (`extract/figma/scoreboard.ts`; the readings so far were scored by private
       scripts), with icon-only and glyph-only read from what each set draws, the same test
       on both sides, and font-blocked variants in no rate (reviewer rulings, 2026-11-10).
-
-## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
-
-Owner:
 - [x] Carbon's Figma kit is its public sets, before 2026-11-20 (owner, 2026-11-10, "Public
       only"): the internal marker is profile data (`figmaInternal`, the "_" prefix), never in
       code; an internal set is in no number, coverage included, and is counted beside the
       reading (the scorer, PR #370); the draw takes public sets only.
-- [ ] Draw the held-out third of Carbon's in-grammar component sets in each direction,
+
+## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
+
+Owner:
+- [x] Draw the held-out third of Carbon's in-grammar component sets in each direction,
       from untouched components only (or ask a sealing session to), a third of each
       group separately (the rest, icon-only, glyph-only, skeleton-only; 2026-11-10), from
       Carbon's public Figma sets only (2026-11-10, "Public only"), in paired units (a code
       component and its Figma sets are drawn together; a unit with a touched member is
       tuning on both sides; reviewer, 2026-11-10), and commit SHA-256(salt + held-out
       list), with the Figma scope "public".
+      Drawn 2026-11-10 by the reviewer session at the owner's request, from `eligible.json`
+      (SHA-256 21304c69b70b72e0…cbca12b876) with `draw.py` (6356d95e1a42e2b2…1495761f).
+      SHA-256(salt + held-out list): 5c830b342c9c1727f46ecd6e3508936a6cc0157e829c690fcbdd684fb7992d9e.
+      Figma scope: public (56 internal in-grammar sets left out). Held out:
+      rest 23 of 68 units (28 of 69 code, 30 of 74 Figma members); skeleton-only 3 of 9
+      units (3 of 9 code, 0 of 0 Figma members);
+      icon-only and glyph-only 0 of 0. Touched units, tuning on both sides: 19.
+      If the DataTable unit is held out, the reading also reports "sensitivity: without the
+      DataTable unit" (`private/carbon-draw-20261110/README.md`).
+      The tuning list (63 code components, 70 Figma sets); from this commit on, work
+      only on these (AGENTS.md rule 5):
+      Code: AILabel, AISkeletonIcon, AISkeletonText, Accordion, AccordionSkeleton,
+      AspectRatio, Button, ButtonSkeleton, Checkbox, CheckboxSkeleton, CodeSnippet,
+      ComboButton, ContainedList, CopyButton, DefinitionTooltip, Dropdown, DropdownSkeleton,
+      FileUploaderSkeleton, FluidComboBox, FluidComboBoxSkeleton, FluidDatePicker,
+      FluidDatePickerSkeleton, FluidDropdown, FluidDropdownSkeleton, FluidMultiSelect,
+      FluidMultiSelectSkeleton, FluidNumberInput, FluidNumberInputSkeleton,
+      FluidPasswordInput, FluidSelect, FluidSelectSkeleton, FluidTextArea,
+      FluidTextAreaSkeleton, FluidTimePicker, FluidTimePickerSkeleton, FormLabel, Heading,
+      IconButton, IdPrefix, InlineLoading, Loading, MenuButton, MultiSelect, OrderedList,
+      OverflowMenu, Pagination, PaginationNav, ProgressIndicator, ProgressIndicatorSkeleton,
+      Select, SelectSkeleton, SkeletonIcon, SkeletonPlaceholder, SliderSkeleton,
+      StructuredList, Tag, TextInputSkeleton, Theme, Tile, TimePicker, ToastNotification,
+      TreeView, UnorderedList.
+      Figma: 103045:4335 Badge indicator, 104376:11673 Breadcrumb, 11797:285083 Structured
+      list, 11828:285325 Branch node item, 11948:286738 Tree view, 12652:263145 Icon shell,
+      129078:468147 Status notification, 14032:290635 Dropdown - Default, 14032:291311
+      Dropdown - Multi-select - Default, 14032:291673 Dropdown - Filterable multi-select -
+      Default, 14505:302528 Dropdown - Fluid, 14505:304219 Dropdown - Combo box - Fluid,
+      14530:300220 Dropdown - Multi-select  - Fluid, 148071:8767 Tag - Operational,
+      15784:271032 Text input - Default, 16031:269750 Tag - Read-only, 16193:272726
+      Contained list, 16827:270697 Form modal - Fluid, 17422:270657 Checkbox group,
+      17544:266768 Time picker items - Fluid, 17544:266804 Time picker items - Clock -
+      Fluid, 17544:266925 Time picker items - Timezone - Fluid, 17544:267989 Date picker -
+      Single calendar - Fluid, 17544:268235 Date picker - Range calendar - Fluid,
+      17544:268301 Time picker - Default, 17544:268399 Time picker - Fluid, 1830:2341 Screen
+      + Grid influencers, 1854:1776 Button, 18791:274643 Text area - Fluid, 19893:290998
+      Number input - Default, 19893:291117 Number input - Fluid, 20125:279432 Tile,
+      2133:10716 UI shell - Header actions, 2154:8478 Accordion item, 2213:15047 UI shell -
+      Header menu, 2799:20761 Pagination - Nav, 3038:25739 Toggle, 31131:96397 Menu,
+      31420:317548 Menu button, 31753:68447 Combo button, 3193:29303 Checkbox, 3238:28455
+      Inline loading, 3284:27542 List item, 3284:27553 List, 3673:40574 Slider, 3717:45725
+      Overflow, 3889:50204 Pagination - Table bar, 3890:50605 Tabs, 3925:58667 Progress
+      indicator, 4080:55366 Modal, 41061:1531 Slider - Range, 4120:66497 Slot group – 10,
+      4179:105911 Notification - Inline, 4260:102550 Form modal - Default, 4266:103999 Code
+      snippet - Single line, 4266:104904 Code snippet - Inline, 45988:11486 Dropdown -
+      Filterable multi-select - Fluid, 46254:7550 Tag - Selectable, 49956:2376 Status icon,
+      49975:12573 Status shape, 51447:2035 AI label - Inline, 61653:7458 Structured list -
+      Selectable, 68771:7312 Password input - Fluid, 78017:897920 Loading, 83808:100856 Slot
+      group – 2, 83808:101101 Slot group – 4, 84336:35011 Notification - Toast, 86528:9674
+      Cursor blink animation, 92123:1663 UI shell - Header, 9506:402924 Progress bar.
 
 Reviewer session (owner, 2026-11-09):
 - [ ] Review and commit profile v0 before any run that counts.
@@ -173,7 +224,7 @@ Agent:
       public sets left unpaired and named.
       AI-drafted; the reviewer session approves it by merging (receipt in
       `private/profile-v02-20261110/pairs.txt`).
-- [ ] Commit the tuning list once the owner has drawn the held-out third.
+- [x] Commit the tuning list once the owner has drawn the held-out third (above, under the draw).
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
 Next dates: 2026-11-20, the checker, the grammar classifier and the variant matrix
