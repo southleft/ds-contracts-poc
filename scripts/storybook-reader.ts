@@ -443,7 +443,7 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = []): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
@@ -493,7 +493,11 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     // --grammar-only: the grammar classifier and the matrix rule alone (no reference is rendered or kept).
     if (grammarOnly) return { environment, stories, components: readStories(stories, declared, excluded) };
-    const all = readStories(stories, declared, excluded), components = all.filter((c) => !c.excludedBy), cdp = await page.context().newCDPSession(page);
+    // --only (reviewer, 2026-11-10): pass 2 renders only the listed components, so a held-out one is never rendered; a
+    // name that is not a component the reader knows refuses the run. Pass 1 above read every story, as always.
+    const all = readStories(stories, declared, excluded);
+    for (const n of only ?? []) if (!all.some((c) => c.title === n && !c.excludedBy)) throw Error(`storybook-reader: --only names no component: ${n}`);
+    const components = all.filter((c) => !c.excludedBy && (!only || only.has(c.title))), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
     // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
@@ -542,13 +546,16 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
 if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   const flag = (name: string) => { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : undefined; };
   const storybook = flag('--storybook'), out = flag('--out');
-  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>]'); process.exit(2); }
-  const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile');
+  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>] [--only <components.json>]'); process.exit(2); }
+  const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile'), onlyFile = flag('--only');
+  // --only <file>: a JSON list of component titles; pass 2 renders and writes only those (never with --grammar-only).
+  const only = onlyFile ? new Set(JSON.parse(readFileSync(onlyFile, 'utf8')) as string[]) : undefined;
+  if (only && grammarOnly) { console.error('storybook-reader: --only applies to pass 2; --grammar-only renders nothing'); process.exit(2); }
   // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
   const read = profile ? readProfile(profile) : undefined;
   const declared = read?.components ?? [], excludedTitles = read?.excluded ?? [];
   mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
-  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles).then(({ environment, stories, components: all }) => {
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, stories, components: all }) => {
     // Excluded titles never become components, and are reported apart with what they would have been.
     const components = all.filter((c) => !c.excludedBy), excluded = all.filter((c) => c.excludedBy)
       .map(({ title, stories: n, grammar, matrix, excludedBy }) => ({ title, reason: excludedBy!, stories: n, grammar, matrix }));
