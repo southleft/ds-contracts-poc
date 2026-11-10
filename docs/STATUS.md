@@ -168,8 +168,9 @@ Agent:
 - [x] Profile v0.2, before the draw (reviewer, 2026-11-10): `pairs`, each code component's
       public Figma sets with its basis (the set's page, its name, a State=Skeleton variant;
       an internal part a practice cell touched carries the touch), written from names and
-      structure alone; 69 entries, DataTable split where a set's name names one story
-      component, with 29 code components and 24 public sets left unpaired and named.
+      structure alone; 65 entries, DataTable one unit (every DataTable story title is the
+      same React DataTable, sharing the table's parts), with 28 code components and 24
+      public sets left unpaired and named.
       AI-drafted; the reviewer session approves it by merging (receipt in
       `private/profile-v02-20261110/pairs.txt`).
 - [ ] Commit the tuning list once the owner has drawn the held-out third.
