@@ -42,16 +42,28 @@ export function variantMatrix(argTypes: Record<string, StoryArgType>): MatrixRes
   return { status: 'ok', matrix: { axes, variants } };
 }
 
-/** One story of a component, as the Storybook reader loads it. `ownRender`: the
- *  story (or its file) supplies its own render, such as a grid of every value. */
+/** One story of a component, as the Storybook reader loads it. `ownRender`: the story draws no instance of its own
+ *  component (grammar decision 5), so it is refused by name. `instances`: when it draws two or more, each instance's own
+ *  props read from React's tree (plain values; the names of any others), one per instance, in drawing order. */
 export interface StoryInput { id: string; args: Record<string, unknown>; argTypes: Record<string, StoryArgType>; ownRender: boolean;
   /** The reader could not render the story: an instrument fault, never a grammar reason. */
-  renderFailed?: boolean }
-/** One expected variant as Storybook draws it: its story, with every listed option argument set to the variant's value. */
-export interface VariantRender { storyId: string; args: Record<string, unknown> }
-/** Named, never counted: own-render stories, repeats of an earlier story's state, and stories the reader could not render.
+  renderFailed?: boolean; instances?: Array<{ props: Record<string, string | number | boolean>; nonPlain: string[] }> }
+/** One expected variant as Storybook draws it: its story, with every listed option argument set to the variant's value;
+ *  `instance` picks the instance a story drawing several shows it with (grammar decision 5). */
+export interface VariantRender { storyId: string; args: Record<string, unknown>; instance?: number }
+/** Named, never counted: stories that draw no instance of their own component, repeats of an earlier story's state,
+ *  stories the reader could not render, and stories with an instance whose axis value is not a plain value.
  *  `renders` lines up with the matrix's variants (empty when refused). */
-export type StoryMatrixResult = MatrixResult & { ownRender: string[]; repeats: string[]; renderFailed: string[]; renders: VariantRender[] };
+export type StoryMatrixResult = MatrixResult & { ownRender: string[]; repeats: string[]; renderFailed: string[]; instanceUnreadable: string[]; renders: VariantRender[] };
+
+/** Grammar decision 5: a story drawing several instances gives one variant per instance, named by its own value on each
+ *  axis (an unset prop is the default), never by guessing from the page; a non-plain value can't name one (null). */
+const instanceVariants = (s: StoryInput, axes: readonly string[]): Array<Record<string, string>> | null => {
+  const out: Array<Record<string, string>> = [];
+  for (const i of s.instances!) { if (axes.some((n) => i.nonPlain.includes(n))) return null; out.push(Object.fromEntries(axes.map((n) => [n, shown(i.props[n])]))); }
+  return out;
+};
+const showcase = (s: StoryInput) => (s.instances?.length ?? 0) > 1;
 
 const stable = (v: unknown): string =>
   Array.isArray(v) ? `[${v.map(stable).join(',')}]`
@@ -81,9 +93,9 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
     if (seen.has(key)) repeats.push(s.id); else { seen.add(key); drawn.push(s); }
   }
   repeats.sort();
-  const named = { ownRender, repeats, renderFailed, renders: [] as VariantRender[] };
+  const named = { ownRender, repeats, renderFailed, instanceUnreadable: [] as string[], renders: [] as VariantRender[] };
   if (!drawn.length) return { status: 'refused', reason: 'variant-matrix-no-story-variants', count: 0, ...named };
-  if (declared) return { ...named, ...declaredMatrix(drawn, declared, repeats) };
+  if (declared) return { ...named, ...declaredMatrix(drawn, declared, repeats, named.instanceUnreadable) };
   // Each story's own option lists: a story may narrow an argument's list to the values it shows.
   const lists: VariantMatrix[] = [];
   for (const s of drawn) { const l = variantMatrix(s.argTypes); if (l.status === 'refused') return { ...l, ...named }; lists.push(l.matrix); }
@@ -96,7 +108,11 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], shownOnce = new Set<string>();
   drawn.forEach((s, i) => {
     const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])])), before = variants.length;
-    for (const v of lists[i]!.variants) {
+    if (showcase(s)) {
+      const own = instanceVariants(s, [...listedNames, ...names]);
+      if (!own) { named.instanceUnreadable.push(s.id); return; }
+      own.forEach((v, k) => { if (shownOnce.has(stable(v))) return; shownOnce.add(stable(v)); variants.push(v); renders.push({ storyId: s.id, args: {}, instance: k }); });
+    } else for (const v of lists[i]!.variants) {
       if (shownOnce.has(stable({ ...t, ...v }))) continue;
       shownOnce.add(stable({ ...t, ...v })); variants.push({ ...t, ...v });
       renders.push({ storyId: s.id, args: Object.fromEntries(Object.entries(v).map(([n, o]) => [n, optionsOf(s.argTypes[n]!)!.find((x) => String(x) === o)])) });
@@ -117,22 +133,25 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
  *  undeclared stays at the story's value and makes no variant (a playground control), so two stories that differ only
  *  there show one variant, the first. A declared axis must be one the stories have (an option list, or a value a
  *  story sets); otherwise the component is refused by name. Nothing adds a value no story renders. */
-function declaredMatrix(drawn: StoryInput[], axes: readonly string[], repeats: readonly string[]): MatrixResult & { renders: VariantRender[]; repeats: string[] } {
+function declaredMatrix(drawn: StoryInput[], axes: readonly string[], repeats: readonly string[], unreadable: string[]): MatrixResult & { renders: VariantRender[]; repeats: string[] } {
   const listed = drawn.map((s) => new Map(axes.flatMap((n) => (s.argTypes[n] && optionsOf(s.argTypes[n]!) ? [[n, optionsOf(s.argTypes[n]!)!]] : []))));
-  const unknown = axes.find((n) => !listed.some((l) => l.has(n)) && !drawn.some((s) => n in s.args));
+  const unknown = axes.find((n) => !listed.some((l) => l.has(n)) && !drawn.some((s) => n in s.args || s.instances?.some((i) => n in i.props)));
   if (unknown !== undefined) return { status: 'refused', reason: `declaration-axis-unknown:${unknown}`, count: 0, renders: [], repeats: [...repeats] };
   // A story that adds no variant (every one of its declared values is already shown) is named as a repeat, so a
   // difference only in undeclared values (a badge, say) is never dropped without a trace.
   const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], seen = new Set<string>(), added: string[] = [...repeats];
   drawn.forEach((s, i) => {
-    let own: Array<Record<string, string>> = [{}];
-    for (const n of axes) own = own.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: shown(o) })));
+    let own: Array<Record<string, string>> | null = [{}];
+    if (showcase(s)) own = instanceVariants(s, axes);
+    else for (const n of axes) own = own!.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: shown(o) })));
+    if (!own) { unreadable.push(s.id); return; }
     const before = variants.length;
-    for (const v of own) {
-      if (seen.has(stable(v))) continue;
+    own.forEach((v, k) => {
+      if (seen.has(stable(v))) return;
       seen.add(stable(v)); variants.push(v);
-      renders.push({ storyId: s.id, args: Object.fromEntries([...listed[i]!].map(([n, o]) => [n, o.find((x) => String(x) === v[n])])) });
-    }
+      renders.push(showcase(s) ? { storyId: s.id, args: {}, instance: k }
+        : { storyId: s.id, args: Object.fromEntries([...listed[i]!].map(([n, o]) => [n, o.find((x) => String(x) === v[n])])) });
+    });
     if (variants.length === before) added.push(s.id);
   });
   added.sort();

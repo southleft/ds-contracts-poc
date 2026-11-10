@@ -181,3 +181,23 @@ test('grammar decision 2, code side: grid, wrapping rows and a drawn part placed
     assert.deepEqual(await flags('out'), [['grid-layout', 'div.grid'], ['layout-wrap', 'div.wrap'], ['absolute-child', 'b.box'], ['absolute-child', 'i.loose.box']]);
   } finally { await browser.close(); }
 });
+
+import {HIDE_CONTEXT, SELECT_INSTANCE} from './storybook-reader.js';
+test('grammar decision 5: one instance of several is the subject; other instances and story context are hidden, then restored', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<div id="row" style="display:flex;gap:8px"><button id="trigger" style="visibility:visible">Open</button>
+      <span class="tag" id="a" style="width:40px;height:20px;display:block">Red</span><span class="tag" id="b" style="width:50px;height:20px;display:block">Blue</span></div>`);
+    await page.evaluate(`window.__dsReaderInstances = [{tops: [document.getElementById('a')]}, {tops: [document.getElementById('b')]}]`);
+    const box = await page.evaluate(`${SELECT_INSTANCE}(1)`) as {width: number};
+    assert.ok(box.width >= 50 && box.width <= 51, String(box.width)); // outward to whole pixels, as the reader frames every box
+    assert.equal(await page.evaluate(`${SELECT_INSTANCE}(2)`), null);
+    await page.evaluate(`${SELECT_INSTANCE}(1)`);
+    await page.evaluate(`${HIDE_CONTEXT}(true)`);
+    const vis = (id: string) => page.evaluate(`getComputedStyle(document.getElementById(${JSON.stringify(id)})).visibility`);
+    assert.deepEqual([await vis('a'), await vis('trigger'), await vis('b'), await vis('row')], ['hidden', 'hidden', 'visible', 'visible']);
+    await page.evaluate(`${HIDE_CONTEXT}(false)`);
+    assert.deepEqual([await vis('a'), await vis('trigger'), await page.evaluate(`document.getElementById('trigger').style.visibility`)], ['visible', 'visible', 'visible']);
+  } finally { await browser.close(); }
+});

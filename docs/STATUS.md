@@ -98,7 +98,7 @@ baseline and the fast lane.
       title both excluded and declared, by name; an excluded title never becomes a
       component and is reported with what it would have been; coverage is printed with
       it counted (the headline) and without.
-- [ ] Grammar decision 5 in the variant matrix rule and the reader, before 2026-11-20
+- [x] Grammar decision 5 in the variant matrix rule and the reader, before 2026-11-20
       (owner, 2026-11-10, "Sign decision 5"): each instance a story draws of its own
       component is a variant, named by its declared axes read from React's tree; what
       the story draws beside it is context.

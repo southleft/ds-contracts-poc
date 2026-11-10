@@ -415,8 +415,8 @@ export function caseContent(key: string, figma: FigmaContent, dom: DomContent): 
  *  screenshot frames). With `mark`, each run's owner element is left marked
  *  `data-ds-run` (its run indices) for a caller that reads its painted faces.
  *  Serialized as text: tsx would otherwise inject its __name helper into the page. */
-export const domContentOf = new Function('el', 'mark', `
-  const root = el.firstElementChild || el;
+export const domContentOf = new Function('el', 'mark', 'self', `
+  const root = self ? el : el.firstElementChild || el;
   const origin = root.getBoundingClientRect();
   const texts = [el.innerText || ''];
   const alpha = (color) => {
@@ -507,6 +507,9 @@ export const domContentOf = new Function('el', 'mark', `
   visit(el);
   return { text: texts.join('\\n'), graphics, runs };
 `) as (el: Element, mark?: unknown) => DomContent;
+/** The same collector reading `el` itself as the instance's root: an instance drawn beside context or other instances
+ *  has no container of its own (grammar decision 5). */
+export const domContentOfRoot = new Function('el', 'mark', `return (${domContentOf.toString()})(el, mark, true);`) as typeof domContentOf;
 
 export type FigmaContentResult =
   | { status: 'collected'; version: string | null; responseSha256: string; byNodeId: Record<string, FigmaContent>;
