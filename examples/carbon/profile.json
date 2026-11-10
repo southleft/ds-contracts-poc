@@ -163,6 +163,7 @@
     {"name": "TreeView", "stories": ["components-treeview--default", "components-treeview--with-complex-nesting", "components-treeview--with-controlled-expansion", "components-treeview--with-links"], "axes": ["size", "multiselect"], "leftOut": [{"story": "components-treeview--with-icons", "reason": "left-out-variant", "adds": "the instance draws a different subtree than its closest story: li.cds--tree-leaf-node.cds--tree-node \u2192 li.cds--tree-leaf-node.cds--tree-node.cds--tree-node--with-icon"}]},
     {"name": "UnorderedList", "stories": ["components-unorderedlist--default", "components-unorderedlist--nested"], "axes": ["nested"]}
   ],
+  "figmaInternal": {"namePrefix": "_"},
   "figmaSkeleton": {"variant": {"property": "State", "value": "Skeleton"}, "sets": ["5734:283688", "5734:286365", "5734:283758", "4535:163063", "4535:162705", "3942:52659"]},
   "excluded": [
     {"title": "Components/ClassPrefix", "reason": "non-visual-utility", "receipt": "utility-paint.json: paints nothing at its own box, or renders no element of its own"},

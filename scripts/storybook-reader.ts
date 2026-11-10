@@ -111,6 +111,8 @@ export const SystemProfile = z.object({
   components: z.array(z.object({ name: z.string(), stories: z.array(z.string()).min(1), axes: z.array(z.string()),
     leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional(), skeleton: z.literal(true).optional(), subcomponent: z.literal(true).optional() }).strict()),
   /** Skeleton-only Figma sets (2026-11-10): the variant value that marks a skeleton, and sets the kit draws as skeletons. */
+  /** Internal Figma sets (entry of 2026-11-10): the name prefix that marks one; out of every number, counted beside. */
+  figmaInternal: z.object({ namePrefix: z.string().min(1) }).strict().optional(),
   figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
   excluded: z.array(z.object({ title: z.string(), reason: z.enum(EXCLUDED_REASONS), copies: z.string().optional(), receipt: z.string().optional() })),
 }).strict();

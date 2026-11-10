@@ -150,11 +150,14 @@ Agent:
       approves it by merging.
 - [x] Profile v0.1, before the eligible list is recomputed (reviewer, 2026-11-10): Tag
       `type` and RadioButton `checked`, `disabled` (the axes their showcase instances draw);
-      one layout-flagged story each left out as a left-out variant (Checkbox, RadioButton,
-      Dropdown, ContainedList, now in grammar); the 37 skeleton-only marks and the Figma
-      skeleton data. Read with it: 104 of 164 in grammar, 94 with an accepted matrix (958
-      variants); without the skeleton marks, 68 of 91, 63 (927). AI-drafted; the reviewer
-      session approves it by merging (receipts in `private/profile-v01-20261110`).
+      SelectableTag, DismissibleTag and OperationalTag as their own components, marked
+      `subcomponent` (refused by name: their stories file lists none); one layout-flagged
+      story each left out as a left-out variant (Checkbox, RadioButton, Dropdown,
+      ContainedList and Tag, all in grammar); the 37 skeleton-only marks, the Figma
+      skeleton data and the internal-set marker (`figmaInternal`: the "_" prefix). Read with
+      it: 107 of 167 in grammar, 94 with an accepted matrix (957 variants); without the
+      skeleton marks, 71 of 94, 63 (926). AI-drafted; the reviewer session approves it by
+      merging (receipts in `private/profile-v01-20261110`).
 - [ ] Commit the tuning list once the owner has drawn the held-out third.
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
