@@ -64,13 +64,18 @@ baseline and the fast lane.
       change (SearchBox fail to pass; Field and TimeInput lose only that miss), this
       repository 92, 3 change (TextField loses only that miss); 0 move to fail.
       Grammar and matrix counts are unchanged (no classifier or matrix code).
-- [ ] The Figma data the classifier reads marks every absolutely placed child (decision
-      2; for example TextInput's background and borders on Carbon). Show which sets'
-      grammar verdicts change on Carbon, A0 and the fixed 40-set.
-- [ ] The grammar classifier under decisions 1 and 2: ignore an argument outside the
-      grammar that no story varies; admit a part pinned inside a row or column on both
-      sides; refuse grid, wrapping rows and absolutely placed children of a free-form
-      parent.
+- [x] The Figma data the classifier reads marks every absolutely placed child (decision
+      2): the classifier now reads a shape's own placement (`shape.x`) as well as `abs`,
+      so Carbon TextInput's background and borders count. Landed with the next item.
+- [x] The grammar classifier under decisions 1 and 2: an argument outside the grammar
+      that no story varies refuses nothing; a part pinned inside a row or column is in on
+      both sides (in code, read from each story's render: a drawn absolutely placed
+      element whose containing block is flex or block flow); grid, wrapping rows and a
+      placed child of a free-form parent stay out. In grammar before, then after: Figma
+      Carbon 109 to 156 of 196 sets, the fixed 40-set 98 to 105, A0 24 to 25; code
+      Carbon 38 to 96 of 132 titles, A0 85 to 81 (9 out for wrapping rows, grids and one
+      overlay placed outside the component), this repository 25 to 52. No Figma set leaves
+      the grammar. Receipts in `private/grammar-decisions-20261110` (git-ignored).
 - [ ] The variant matrix rule under decisions 3 and 4: a cap of 128, and the profile's
       declarations of which stories make a component and which axes are real. A
       declaration selects only stories and axes the stories already have.

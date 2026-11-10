@@ -38,7 +38,7 @@ test('each out-of-grammar fact is named, and the reasons come back sorted', () =
     {name:'glow',type:'RECTANGLE',effects:[{type:'LAYER_BLUR',radius:4},{type:'INNER_SHADOW'}]},
   ]));
   assert.deepEqual(verdict({Card:set('Card',[v])} as DumpFile,'Card'),{grammar:'out',reasons:[
-    'absolute-child','dashed-stroke','effect-inner-shadow','effect-layer-blur','gradient-fill','grid-layout','image-fill','layout-wrap','mask','multiple-strokes',
+    'dashed-stroke','effect-inner-shadow','effect-layer-blur','gradient-fill','grid-layout','image-fill','layout-wrap','mask','multiple-strokes',
   ]});
 });
 
@@ -52,7 +52,16 @@ test('a free-form frame holding text is out; a drawing (no text, no auto layout)
   assert.deepEqual(verdict(file,'Field').reasons,['free-form-frame']);
   assert.deepEqual(verdict(file,'Checkbox'),{grammar:'in',reasons:[]});
   assert.deepEqual(verdict(file,'Icon'),{grammar:'in',reasons:[]});
-  assert.deepEqual(verdict(file,'Dot').reasons,['absolute-child']);
+  assert.deepEqual(verdict(file,'Dot'),{grammar:'in',reasons:[]});
+});
+
+test('grammar decision 2: a part pinned inside a row or column is in, by abs or by its shape placement; a placed child of a free-form parent is out', () => {
+  const pinned = {name:'Background',type:'RECTANGLE',fill:{hex:'eeeeee'},shape:{kind:'rect',width:288,height:48,x:0,y:0,right:0,bottom:0}} as DumpNode;
+  const badge = {...text('9'),abs:{x:20,y:0,right:0,bottom:12,width:8,height:8}};
+  const free = {name:'Field',type:'FRAME',children:[text('Label'),{...pinned},{...badge}]} as DumpNode;
+  const file = {Input:set('Input',[variant(row([text('Value'),pinned,badge]))]),Loose:set('Loose',[variant(free)])} as DumpFile;
+  assert.deepEqual(verdict(file,'Input'),{grammar:'in',reasons:[]});
+  assert.deepEqual(verdict(file,'Loose').reasons,['absolute-child','free-form-frame']);
 });
 
 test('degradations count for their own set only, and a rotated vector is part of an SVG', () => {
@@ -87,4 +96,11 @@ test('story arguments: option lists, true/false and text are in; actions are ign
   assert.deepEqual(classifyStoryArgs({
     count:{control:'number'},style:{control:{type:'object'}},children:{type:{name:'other'}},variant:{control:'radio'},
   }).reasons,['arg-number','arg-object','arg-other','arg-radio-without-options']);
+});
+
+test('grammar decision 1: an argument outside the grammar that no story varies makes no refusal; one a story varies still refuses', () => {
+  const argTypes = {tabIndex:{control:'number'},renderIcon:{control:{type:'object'}},maxCount:{control:'number'},size:{control:'select',options:['sm','md']}};
+  const stories = [{args:{size:'sm'}},{args:{size:'md',renderIcon:null}},{args:{maxCount:10}}];
+  assert.deepEqual(classifyStoryArgs(argTypes,stories),{grammar:'out',reasons:['arg-number','arg-object']});
+  assert.deepEqual(classifyStoryArgs(argTypes,[{args:{tabIndex:0}},{args:{tabIndex:0,size:'md'}}]),{grammar:'in',reasons:[]});
 });

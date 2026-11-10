@@ -4,13 +4,13 @@ import {readStories, type LoadedStory} from './storybook-reader.js';
 
 const story = (id: string, title: string, argTypes: LoadedStory['argTypes'], args: Record<string, unknown> = {}, ownRender = false): LoadedStory => ({id, title, name: id, argTypes, args, ownRender, renderFailed: false});
 
-test('stories group by title; the first story is classified; every story is held against the matrix rule, one reference per variant', () => {
+test('stories group by title; the first story\'s arguments are classified against every story\'s values; every story is held against the matrix rule, one reference per variant', () => {
   const components = readStories([
     story('badge--success', 'Content/Badge', {tone: {control: 'text', type: {name: 'string'}}, label: {control: 'text'}}, {tone: 'success', label: 'Done'}),
     story('badge--error', 'Content/Badge', {tone: {control: 'text', type: {name: 'string'}}, label: {control: 'text'}}, {tone: 'error', label: 'Done'}),
     story('button--basic', 'Forms/Button', {size: {control: 'select', options: ['sm', 'md']}, block: {type: {name: 'boolean'}}, onClick: {type: {name: 'function'}}}),
     story('box--basic', 'Foundations/Box', {background: {control: 'color'}, children: {control: 'object'}}),
-    story('box--grid', 'Foundations/Box', {}, {}, true),
+    story('box--grid', 'Foundations/Box', {}, {children: {type: 'grid'}}, true),
   ]);
   assert.deepEqual(components.map(c => c.title), ['Content/Badge', 'Forms/Button', 'Foundations/Box']);
   const [badge, button, box] = components;
@@ -20,7 +20,8 @@ test('stories group by title; the first story is classified; every story is held
   // One reference to render per expected variant, in the matrix's order; the browser pass fills in image and faces.
   assert.deepEqual(badge!.references, [{storyId: 'badge--success', args: {}, variant: {tone: 'success'}}, {storyId: 'badge--error', args: {}, variant: {tone: 'error'}}]);
   assert.deepEqual(button!.references, [{storyId: 'button--basic', args: {size: 'sm'}, variant: {size: 'sm'}}, {storyId: 'button--basic', args: {size: 'md'}, variant: {size: 'md'}}]);
-  assert.deepEqual(box!.grammar, {grammar: 'out', reasons: ['arg-color', 'arg-object']});
+  // Grammar decision 1: no story sets `background`, so it refuses nothing; one story sets `children`, so it still refuses.
+  assert.deepEqual(box!.grammar, {grammar: 'out', reasons: ['arg-object']});
   assert.deepEqual(box!.ownRender, ['box--grid']);
 });
 
@@ -117,5 +118,23 @@ test('each content run keeps the families Chromium painted it with; the marks ar
     const fields = await page.locator('#f').evaluate(domContentOf, true);
     await paintRuns(cdp, fields);
     assert.deepEqual(fields.runs!.map(r => [r.text, r.painted!.length]), [['Value', 1], ['Area', 1], ['Hint', 1], ['on', 0], ['Before', 1]]);
+  } finally { await browser.close(); }
+});
+
+import {LAYOUT_FLAGS} from './storybook-reader.js';
+test('grammar decision 2, code side: grid, wrapping rows and a drawn part placed outside a row or column are flagged; a pinned, hidden or empty part is not', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<style>.box{width:20px;height:20px;background:#123}</style>
+      <label id="in" style="display:flex;position:relative"><span class="box" style="position:absolute;inset:0"></span>
+        <input style="position:absolute;opacity:0;width:20px;height:20px"><span class="sr" style="position:absolute;width:1px;height:1px;clip:rect(0 0 0 0)">x</span>
+        <span id="pin" style="position:relative;display:block;width:20px;height:20px"></span>
+        <span style="position:relative"><span class="empty" style="position:absolute;display:block;width:30px;height:30px"></span></span></label>
+      <div id="out"><div class="grid" style="display:grid"><span>a</span></div><div class="wrap" style="display:flex;flex-wrap:wrap"><span>b</span></div>
+        <span class="inline" style="position:relative"><b class="box" style="position:absolute;display:block"></b></span><i class="loose box" style="position:fixed;display:block"></i></div>`);
+    const flags = (id: string) => page.evaluate(`${LAYOUT_FLAGS}([document.getElementById(${JSON.stringify(id)})])`);
+    assert.deepEqual(await flags('in'), []);
+    assert.deepEqual(await flags('out'), [['grid-layout', 'div.grid'], ['layout-wrap', 'div.wrap'], ['absolute-child', 'b.box'], ['absolute-child', 'i.loose.box']]);
   } finally { await browser.close(); }
 });

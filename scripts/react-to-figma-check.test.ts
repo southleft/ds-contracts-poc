@@ -36,8 +36,11 @@ test('a set that fails the rule counts every expected variant as failed, and eac
   assert.deepEqual(outlined.variants.map((v) => v.verdict), ['fail', 'fail']);
   const freeForm = setRule(component(), dump([variant('success', [text('success'), icon], null), variant('error')]), 'Badge');
   assert.deepEqual(freeForm.problems, ['layout:free-form-frame']);
-  const absolute = setRule(component(), dump([variant('success', [{ ...text('success'), abs: { x: 0, y: 0 } }, icon]), variant('error')]), 'Badge');
-  assert.deepEqual(absolute.problems, ['layout:absolute-child']);
+  // Grammar decision 2: a part pinned inside a row or column counts; a wrapping row does not.
+  const pinned = setRule(component(), dump([variant('success', [{ ...text('success'), abs: { x: 0, y: 0 } }, icon]), variant('error')]), 'Badge');
+  assert.deepEqual(pinned.problems, []);
+  const wrapping = setRule(component(), dump([variant('success', [text('success'), icon], { mode: 'HORIZONTAL', wrap: true }), variant('error')]), 'Badge');
+  assert.deepEqual(wrapping.problems, ['layout:layout-wrap']);
   const short = setRule(component(), dump([variant('success')], ['success']), 'Badge');
   assert.deepEqual(short.problems, ['options-differ:tone', 'variant-missing:tone=error']);
   const plain = dump([variant('success'), variant('error')]);

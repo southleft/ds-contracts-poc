@@ -46,7 +46,9 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
   /** The rendered story shows more than one instance of its component, or content beside it. */
   ownRender: boolean;
   /** The reader could not render the story (an instrument fault, named apart). */
-  renderFailed: boolean }
+  renderFailed: boolean;
+  /** The grammar's layout refusals in the story's own render (LAYOUT_FLAGS): the reason and where it sits. */
+  layout?: Array<[string, string]> }
 /** One expected variant's reference: the story and arguments it renders from, then its PNG and box, or why it has none. */
 export interface VariantReference extends VariantRender {
   /** The variant's value on each axis of the matrix rule: what a written Figma variant is paired by. */
@@ -61,6 +63,8 @@ export interface VariantReference extends VariantRender {
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
+  /** Each layout refusal behind `grammar`: the story, the reason and the element (tag and classes). */
+  layout?: Array<{ story: string; reason: string; at: string }>;
   /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
   matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
   /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render. */
@@ -76,7 +80,9 @@ export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
     const first = list[0]!;
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
     const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })));
-    return { title, stories: list.length, storyId: first.id, grammar: classifyStoryArgs(argTypes),
+    const layout = list.flatMap((s) => (s.layout ?? []).map(([reason, at]) => ({ story: s.id, reason, at })));
+    const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
+    return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
       ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
@@ -93,6 +99,45 @@ export const INSTANCE_CONTAINER = `((elements) => { const parent = elements[0]?.
 export const MARK_SUBJECT = `(() => { for (const e of document.querySelectorAll('[data-ds-reader-subject], [data-ds-reader-cell]')) { e.removeAttribute('data-ds-reader-subject'); e.removeAttribute('data-ds-reader-cell'); }
   const tops = (window.__dsReaderTops ?? []).filter((n) => !${EMPTY_BOX}(n)); if (tops.length !== 1 || !tops[0].parentElement) return false;
   tops[0].setAttribute('data-ds-reader-subject', ''); tops[0].parentElement.setAttribute('data-ds-reader-cell', ''); return true; })()`;
+
+/** Grammar decision 2 on the code side (2026-11-09), read from one rendered instance (its top elements): a grid, a
+ *  wrapping row, and a drawn element or ::before/::after placed absolutely whose containing block is not laid out
+ *  in a row or a column (flex, or block flow, a table cell's included) or lies outside the instance. A hidden, fully transparent, clipped or
+ *  one-pixel element, or one that draws nothing (no box paint, text, image or generated content in it), is an ordinary
+ *  part and refuses nothing. Each flag names its element by tag and classes. */
+export const LAYOUT_FLAGS = `((tops) => {
+  const flags = [], inside = (e) => tops.some((t) => t === e || t.contains(e));
+  const where = (e, pseudo) => e.tagName.toLowerCase() + [...e.classList].map((c) => '.' + c).join('') + pseudo;
+  const seen = (e) => { for (let a = e; a; a = a.parentElement) { const s = getComputedStyle(a);
+    if (s.visibility === 'hidden' || Number(s.opacity) === 0) return false; if (tops.includes(a)) return true; } return true; };
+  const block = (e) => { for (let a = e; a; a = a.parentElement) { const s = getComputedStyle(a);
+    if (s.position !== 'static' || s.transform !== 'none' || s.filter !== 'none') return a; } return null; };
+  const column = (e) => /^(flex|inline-flex|block|flow-root|inline-block|list-item|table-cell)$/.test(getComputedStyle(e).display);
+  const paints = (s) => !/^(transparent|rgba\\(0, 0, 0, 0\\))$/.test(s.backgroundColor) || s.backgroundImage !== 'none' || s.boxShadow !== 'none'
+    || ['Top', 'Right', 'Bottom', 'Left'].some((k) => parseFloat(s['border' + k + 'Width']) > 0 && s['border' + k + 'Style'] !== 'none')
+    || (s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0);
+  const generated = (s) => s.content !== 'none' && s.content !== 'normal' && (paints(s) || !!s.content.replace(/["']/g, '').trim());
+  const own = (e) => /^(img|svg|canvas|video|input|textarea|select)$/i.test(e.tagName) || [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+  // Drawn: the element, or a rendered and visible element inside it, paints a box, text, an image or generated content.
+  const drawn = (e) => [e, ...e.querySelectorAll('*')].some((d) => d.getClientRects().length && seen(d)
+    && (paints(getComputedStyle(d)) || own(d) || generated(getComputedStyle(d, '::before')) || generated(getComputedStyle(d, '::after'))));
+  for (const top of tops) for (const e of [top, ...top.querySelectorAll('*')]) {
+    if (!e.getClientRects().length) continue;
+    const cs = getComputedStyle(e);
+    if (/grid/.test(cs.display)) flags.push(['grid-layout', where(e, '')]);
+    if (/flex/.test(cs.display) && cs.flexWrap !== 'nowrap') flags.push(['layout-wrap', where(e, '')]);
+    for (const pseudo of ['', '::before', '::after']) {
+      const s = pseudo ? getComputedStyle(e, pseudo) : cs;
+      if ((pseudo && (s.content === 'none' || s.content === 'normal')) || (s.position !== 'absolute' && s.position !== 'fixed')) continue;
+      const r = pseudo ? { width: parseFloat(s.width) || 0, height: parseFloat(s.height) || 0 } : e.getBoundingClientRect();
+      if (s.visibility === 'hidden' || Number(s.opacity) === 0 || !seen(e) || r.width * r.height <= 1 || /^rect\\(0/.test(s.clip) || s.clipPath !== 'none'
+        || !(pseudo ? generated(s) : drawn(e))) continue;
+      const cb = s.position === 'fixed' ? null : block(pseudo ? e : e.parentElement);
+      if (!cb || !inside(cb) || !column(cb)) flags.push(['absolute-child', where(e, pseudo)]);
+    }
+  }
+  return [...new Map(flags.map((f) => [f.join(' '), f])).values()];
+})`;
 
 // Render one story through Storybook's own channel (`args` over its listed options), compact React's tree
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
@@ -283,7 +328,7 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
@@ -319,12 +364,15 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
     type Shown = { tree: RenderedNode | null; box?: Box };
     const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
-    for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree; s.ownRender = !!tree && !rendersOneInstance(tree); }
+    for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree; s.ownRender = !!tree && !rendersOneInstance(tree);
+      if (tree && !s.ownRender) s.layout = await page.evaluate(`${LAYOUT_FLAGS}(window.__dsReaderTops)`) as Array<[string, string]>; }
     const renderers = await page.evaluate(`[...new Set([...window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.values()].map((r) => r.rendererPackageName + ' ' + r.version))]`) as string[];
     if (renderers.length !== 1 || !REACT_TESTED.test(renderers[0]!.split(' ')[1] ?? ''))
       throw Error(`storybook-reader: React renderer ${renderers.join(', ') || 'not found'} is outside the tested 18.3 and 19.x range`);
     environment.react = renderers[0];
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
+    // --grammar-only: the grammar classifier and the matrix rule alone (no reference is rendered or kept).
+    if (grammarOnly) return { environment, stories, components: readStories(stories) };
     const components = readStories(stories), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
@@ -366,14 +414,19 @@ async function loadStorybook(storybook: string, shotsDir?: string): Promise<{ en
 if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   const flag = (name: string) => { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : undefined; };
   const storybook = flag('--storybook'), out = flag('--out');
-  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir>'); process.exit(2); }
-  mkdirSync(path.join(out, 'references'), { recursive: true });
-  loadStorybook(storybook, path.join(out, 'references')).then(({ environment, stories, components }) => {
-    writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components }, null, 2) + '\n');
+  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only]'); process.exit(2); }
+  const grammarOnly = process.argv.includes('--grammar-only');
+  mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly).then(({ environment, stories, components }) => {
+    // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
+    if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
+      stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
+      components: components.map(({ title, stories: n, grammar, layout, matrix }) => ({ title, stories: n, grammar, layout, matrix })) }, null, 2) + '\n');
+    else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length;
     console.log(`${components.length} component(s), ${stories.length} stories: ${inGrammar} in grammar; ` +
       `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with more than one variant, ` +
       `${components.reduce((n, c) => n + (c.matrix.status === 'ok' ? c.matrix.variants : 0), 0)} variants, ` +
-      `${components.filter((c) => c.matrix.status === 'refused').length} refused → ${path.join(out, 'stories.json')}`);
+      `${components.filter((c) => c.matrix.status === 'refused').length} refused → ${path.join(out, grammarOnly ? 'grammar.json' : 'stories.json')}`);
   }).catch((e) => { console.error('✖ ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });
 }
