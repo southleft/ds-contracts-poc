@@ -7,7 +7,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
-import { caseContent, COLOR_STEP, colorHex, domContentOf, fetchFigmaContent, figmaContent, figmaFillColor, firstFamily, matchParts, missingTexts, parseCssColor, sameDeclaredColor, type RestNode } from './design-consumer-content.js';
+import { caseContent, COLOR_STEP, colorHex, domContentOf, fetchFigmaContent, figmaContent, figmaFillColor, firstFamily, matchParts, missingTexts, paintedBoxes, parseCssColor, sameDeclaredColor, type RestNode } from './design-consumer-content.js';
 import { deriveCases, duplicateCaseKeys, runConsumerCheck } from './design-consumer-check.js';
 import { checkFailureProblem, formatVerdictTable, problemCase, variantVerdicts } from './design-consumer-verdict.js';
 import { fetchFigmaApi, MAX_429_RETRIES, MAX_RETRY_AFTER_SECONDS } from '../extract/figma/rest/fetch.js';
@@ -60,6 +60,16 @@ test('what a Figma variant draws: texts inside instances, the innermost text-fre
     vector(box(0, 0, 4, 4), { absoluteRenderBounds: null }),
   ]);
   assert.deepEqual(figmaContent(chip), { texts: ['Tag'], textStyles: [[{ ...eee, end: 3 }]], parts: [{ name: 'Chip/Vector', kind: 'vector', box: box(80, 4, 16, 16) }] });
+});
+
+test('painted boxes: an empty one, and one holding only text (marked, to stand for a form field); never one holding other nodes', () => {
+  const fill = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1, a: 1 } }], at = (x: number) => ({ x, y: 0, width: 20, height: 10 });
+  const variant = { type: 'COMPONENT', absoluteBoundingBox: at(0), children: [
+    { type: 'FRAME', name: 'empty', fills: fill, absoluteBoundingBox: at(0) },
+    { type: 'FRAME', name: 'field', fills: fill, absoluteBoundingBox: at(30), children: [{ type: 'TEXT', characters: '' }] },
+    { type: 'FRAME', name: 'card', fills: fill, absoluteBoundingBox: at(60), children: [{ type: 'FRAME', absoluteBoundingBox: at(60) }, { type: 'TEXT', characters: 'x' }] },
+  ] } as unknown as RestNode;
+  assert.deepEqual(paintedBoxes(variant), [{ x: 0, y: 0, width: 20, height: 10 }, { x: 30, y: 0, width: 20, height: 10, textOnly: true }]);
 });
 
 test('text is compared case- and whitespace-insensitively, and counted', () => {

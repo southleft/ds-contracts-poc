@@ -179,14 +179,16 @@ export function figmaContent(variant: RestNode): FigmaContent {
  *  included. A shown, rendered node of a box type with no shown children and a visible fill, stroke or shadow. The
  *  Storybook reader counts an empty element that paints a background, border or shadow as a graphic (a divider, a
  *  dot, a skeleton block); in Figma that is a rectangle or a frame, never a vector. */
-export function paintedBoxes(variant: RestNode): Box[] {
-  const origin = variant.absoluteBoundingBox ?? { x: 0, y: 0, width: 0, height: 0 }, boxes: Box[] = [];
+export function paintedBoxes(variant: RestNode): Array<Box & { textOnly?: true }> {
+  const origin = variant.absoluteBoundingBox ?? { x: 0, y: 0, width: 0, height: 0 }, boxes: Array<Box & { textOnly?: true }> = [];
   const walk = (n: RestNode) => {
     if (!shown(n) || !rendered(n) || n.type === 'TEXT' || VECTOR_TYPES.has(n.type)) return;
     const kids = (n.children ?? []).filter(shown);
     const stroked = paints(n.strokes) && (n.strokeWeight ?? 1) > 0, shadowed = (n.effects ?? []).some(e => e.visible !== false && /SHADOW/.test(e.type));
-    if (!kids.length && (paints(n.fills) || stroked || shadowed) && n.absoluteBoundingBox) {
-      const b = n.absoluteBoundingBox; boxes.push({ x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height });
+    // A box holding only text is marked: it may stand for a form field, whose text is an attribute in the page.
+    const textOnly = kids.length > 0 && kids.every((k) => k.type === 'TEXT');
+    if ((!kids.length || textOnly) && (paints(n.fills) || stroked || shadowed) && n.absoluteBoundingBox) {
+      const b = n.absoluteBoundingBox; boxes.push({ x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height, ...(textOnly ? { textOnly: true as const } : {}) });
     }
     for (const child of kids) walk(child);
   };

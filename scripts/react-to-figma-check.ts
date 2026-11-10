@@ -40,7 +40,7 @@ import { matchesMatrix, type VariantMatrix } from '../extract/figma/variant-matr
 import { alignPair, diffPair, readPng } from '../extract/figma/visual-parity/img.js';
 import { figmaImagesFromCapture, type PluginCapture } from './design-consumer-capture.js';
 import { consumerSizeCheck, IMAGE_LIMIT_PERCENT } from './design-consumer-check.js';
-import { compareTextStyles, fetchFigmaContent, matchParts, missingTexts, paintedBoxes, type FigmaContentResult } from './design-consumer-content.js';
+import { compareTextStyles, fetchFigmaContent, matchParts, missingTexts, paintedBoxes, type Box, type FigmaContentResult } from './design-consumer-content.js';
 import { alignRecordedFrames } from './design-consumer-framing-v2.js';
 import { UNMEASURED } from './design-consumer-verdict.js';
 import { storyFontPreflight } from './font-preflight.js';
@@ -163,8 +163,11 @@ export function judgeVariants(component: StoryComponent, rule: SetRule, set: Dum
       const figma = content.byNodeId[id]!;
       // A reference's empty painted box (a divider, a dot, a skeleton block) may be drawn as a painted box in Figma;
       // an SVG icon needs a vector part, as before.
-      const parts = [...figma.parts, ...(content.documents?.[id] ? paintedBoxes(content.documents[id]!).map((box) => ({ box })) : [])];
-      for (const g of matchParts(r.content.graphics, parts, (g, i) => i < figma.parts.length || g.tag !== 'svg').missing)
+      // A form field's text is an attribute in the page, so its box is empty there; in Figma the same box holds its text:
+      // a painted box holding only text may stand for an input or textarea, and for nothing else.
+      const parts: Array<{ box: Box; textOnly?: boolean }> = [...figma.parts, ...(content.documents?.[id] ? paintedBoxes(content.documents[id]!).map(({ textOnly, ...box }) => ({ box, textOnly })) : [])];
+      const field = (tag: string) => tag === 'input' || tag === 'textarea';
+      for (const g of matchParts(r.content.graphics, parts, (g, i) => i < figma.parts.length || (g.tag !== 'svg' && (!parts[i]!.textOnly || field(g.tag)))).missing)
         problems.push(`content-missing:${key}:part:${g.tag}@${Math.round(g.box.x)},${Math.round(g.box.y)}`);
       // Figma text has one family and no fallback stack, so the reference's family is the face Chromium painted
       // each run with, not the stack it declared. A run painted with no font is not drawn and left out; one painted by
