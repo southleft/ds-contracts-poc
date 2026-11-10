@@ -55,8 +55,15 @@ the before and after grammar and matrix counts on Carbon, A0 and this repository
 nothing in-grammar lost unless a decision says so, plus the Figma to React practice
 baseline and the fast lane.
 - [x] The Figma snapshot refresh lands, so main stays green (#357, 2026-11-10).
-- [ ] The form-field box: a form field's box holds its text in Figma (branch
-      `claude/field-box-parts-2026-11-10`, rebased, with its baseline and replay).
+- [x] The form-field box: a form field's box holds its text in Figma. In the page an
+      input or textarea has no child nodes, so its box is an empty painted box; in
+      Figma the same box holds its placeholder or value as text, and the check
+      accepted only empty Figma boxes. A painted Figma box holding only text may now
+      stand for an input or textarea, and nothing else; geometry and the text checks
+      are unchanged. Stored captures, old check against new: A0 202 variants, 8
+      change (SearchBox fail to pass; Field and TimeInput lose only that miss), this
+      repository 92, 3 change (TextField loses only that miss); 0 move to fail.
+      Grammar and matrix counts are unchanged (no classifier or matrix code).
 - [ ] The Figma data the classifier reads marks every absolutely placed child (decision
       2; for example TextInput's background and borders on Carbon). Show which sets'
       grammar verdicts change on Carbon, A0 and the fixed 40-set.
