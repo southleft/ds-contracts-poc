@@ -67,26 +67,56 @@ export interface StoryComponent {
   layout?: Array<{ story: string; reason: string; at: string }>;
   /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
   matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
-  /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render. */
-  ownRender: string[]; repeats: string[]; renderFailed: string[];
+  /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render,
+   *  and (for a declared component) the stories its declaration leaves out, each with its fixed reason. */
+  ownRender: string[]; repeats: string[]; renderFailed: string[]; leftOut?: Array<{ story: string; reason: string }>;
   /** In the matrix's variant order; every face the references' text renders with, for the font preflight. */
   references: VariantReference[]; faces: FontFace[];
 }
 
-export function readStories(stories: readonly LoadedStory[]): StoryComponent[] {
-  const byTitle = new Map<string, LoadedStory[]>();
-  for (const s of stories) (byTitle.get(s.title) ?? byTitle.set(s.title, []).get(s.title)!).push(s);
+/** A system profile's declaration (grammar decision 4): which stories make a component, its real variant axes, and each
+ *  story of its title it leaves out, with a fixed reason (reviewer, 2026-11-10). A story that draws another component is
+ *  assigned to that component, never left out; `left-out-variant` (a real option left out, say to fit the cap) is
+ *  counted as that component's coverage loss. */
+export const LEFT_OUT_REASONS = ['test', 'playground', 'repeat', 'left-out-variant'] as const;
+export interface ComponentDeclaration { name: string; stories: string[]; axes: string[]; leftOut?: Array<{ story: string; reason: string }> }
+
+export function readStories(stories: readonly LoadedStory[], declared: readonly ComponentDeclaration[] = []): StoryComponent[] {
+  const byTitle = new Map<string, LoadedStory[]>(), axesOf = new Map<string, string[]>(), taken = new Set<string>();
+  // A declaration may only select stories the Storybook has, each for one component; anything else stops the run, by name.
+  const reasons = new Map<string, string>(), leftBy = new Map<string, Array<{ story: string; reason: string }>>();
+  for (const d of declared) {
+    const list = d.stories.map((id) => stories.find((s) => s.id === id) ?? fail(`profile-story-unknown:${id}`));
+    for (const s of list) { if (taken.has(s.id)) fail(`profile-story-twice:${s.id}`); taken.add(s.id); }
+    for (const l of d.leftOut ?? []) {
+      if (!stories.some((s) => s.id === l.story)) fail(`profile-story-unknown:${l.story}`);
+      if (!(LEFT_OUT_REASONS as readonly string[]).includes(l.reason)) fail(`profile-left-out-reason:${l.reason}:${l.story}`);
+      reasons.set(l.story, l.reason);
+    }
+    byTitle.set(d.name, list); axesOf.set(d.name, d.axes); leftBy.set(d.name, d.leftOut ?? []);
+  }
+  // A title the profile declares is the profile's: each of its stories is assigned, or left out with a fixed reason.
+  const owned = new Set(stories.filter((s) => taken.has(s.id)).map((s) => s.title));
+  for (const s of stories) if (!taken.has(s.id)) {
+    if (!owned.has(s.title)) (byTitle.get(s.title) ?? byTitle.set(s.title, []).get(s.title)!).push(s);
+    else if (!reasons.has(s.id)) fail(`profile-story-unaccounted:${s.id}`);
+  }
+  for (const id of reasons.keys()) if (taken.has(id)) fail(`profile-story-twice:${id}`);
   return [...byTitle].map(([title, list]) => {
+    const left = leftBy.get(title) ?? [];
     const first = list[0]!;
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
-    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })));
+    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })), axesOf.get(title));
     const layout = list.flatMap((s) => (s.layout ?? []).map(([reason, at]) => ({ story: s.id, reason, at })));
     const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
     return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(left.length ? { leftOut: left } : {}),
+      references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
+
+const fail = (message: string): never => { throw Error(message); };
 
 /** The instance's own DOM container: the one element whose element children are exactly the instance's top
  *  elements (decorators may wrap it; nothing may sit beside it), or null. The collector reads text inside it and
@@ -328,7 +358,7 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = []): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
@@ -372,8 +402,8 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     environment.react = renderers[0];
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     // --grammar-only: the grammar classifier and the matrix rule alone (no reference is rendered or kept).
-    if (grammarOnly) return { environment, stories, components: readStories(stories) };
-    const components = readStories(stories), cdp = await page.context().newCDPSession(page);
+    if (grammarOnly) return { environment, stories, components: readStories(stories, declared) };
+    const components = readStories(stories, declared), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
     // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
@@ -414,14 +444,17 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
 if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   const flag = (name: string) => { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : undefined; };
   const storybook = flag('--storybook'), out = flag('--out');
-  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only]'); process.exit(2); }
-  const grammarOnly = process.argv.includes('--grammar-only');
+  if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>]'); process.exit(2); }
+  const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile');
+  // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
+  const declared = profile ? (JSON.parse(readFileSync(profile, 'utf8')) as { components?: ComponentDeclaration[] }).components ?? [] : [];
   mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
-  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly).then(({ environment, stories, components }) => {
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared).then(({ environment, stories, components }) => {
     // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
     if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
       stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
-      components: components.map(({ title, stories: n, grammar, layout, matrix }) => ({ title, stories: n, grammar, layout, matrix })) }, null, 2) + '\n');
+      components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut }) => ({ title, stories: n, grammar, layout, matrix, leftOut,
+        leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })) }, null, 2) + '\n');
     else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length;
     console.log(`${components.length} component(s), ${stories.length} stories: ${inGrammar} in grammar; ` +

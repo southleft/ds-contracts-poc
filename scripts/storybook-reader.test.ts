@@ -25,6 +25,25 @@ test('stories group by title; the first story\'s arguments are classified agains
   assert.deepEqual(box!.ownRender, ['box--grid']);
 });
 
+test('grammar decision 4: a profile assigns stories to components and names their axes; it may only select stories that exist, once each', () => {
+  const sizes = {size: {control: 'select', options: ['sm', 'md']}};
+  const tags = [story('tag--read-only', 'Components/Tag', {...sizes, type: {control: 'select', options: ['red', 'blue']}}),
+    story('tag--selectable', 'Components/Tag', sizes), story('tag--snapshot', 'Components/Tag', sizes)];
+  const tag = {name: 'Tag', stories: ['tag--read-only'], axes: ['size', 'type'], leftOut: [{story: 'tag--snapshot', reason: 'test'}]};
+  const components = readStories(tags, [tag, {name: 'SelectableTag', stories: ['tag--selectable'], axes: ['size']}]);
+  // The profile owns the title: every story is assigned, or left out with a fixed reason that is reported.
+  assert.deepEqual(components.map(c => [c.title, c.stories, c.matrix, c.leftOut]), [
+    ['SelectableTag', 1, {status: 'ok', axes: ['size'], variants: 2}, undefined],
+    ['Tag', 1, {status: 'ok', axes: ['size', 'type'], variants: 4}, [{story: 'tag--snapshot', reason: 'test'}]],
+  ]);
+  const selectable = {name: 'SelectableTag', stories: ['tag--selectable'], axes: ['size']};
+  assert.throws(() => readStories(tags, [{...tag, leftOut: []}, selectable]), /profile-story-unaccounted:tag--snapshot/);
+  assert.throws(() => readStories(tags, [{...tag, leftOut: [{story: 'tag--snapshot', reason: 'hard'}]}, selectable]), /profile-left-out-reason:hard:tag--snapshot/);
+  assert.throws(() => readStories(tags, [{...tag, leftOut: [{story: 'tag--snapshot', reason: 'other-component'}]}, selectable]), /profile-left-out-reason:other-component/);
+  assert.throws(() => readStories(tags, [{name: 'Tag', stories: ['tag--missing'], axes: []}]), /profile-story-unknown:tag--missing/);
+  assert.throws(() => readStories(tags, [{name: 'A', stories: ['tag--snapshot'], axes: []}, {name: 'B', stories: ['tag--snapshot'], axes: []}]), /profile-story-twice:tag--snapshot/);
+});
+
 import {storyFontPreflight} from './font-preflight.js';
 test('React to Figma font preflight: each face a variant is drawn with is held against Figma\'s font list, by name', () => {
   const sans = (weight: number, style: 'normal' | 'italic' = 'normal') => ({family: 'Arimo', weight, style});

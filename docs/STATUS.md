@@ -76,9 +76,20 @@ baseline and the fast lane.
       Carbon 38 to 96 of 132 titles, A0 85 to 81 (9 out for wrapping rows, grids and one
       overlay placed outside the component), this repository 25 to 52. No Figma set leaves
       the grammar. Receipts in `private/grammar-decisions-20261110` (git-ignored).
-- [ ] The variant matrix rule under decisions 3 and 4: a cap of 128, and the profile's
-      declarations of which stories make a component and which axes are real. A
-      declaration selects only stories and axes the stories already have.
+- [x] The variant matrix rule under decisions 3 and 4: a cap of 128, and the profile's
+      declarations of which stories make a component and which axes are real. The reader
+      takes a profile (`--profile`, its `components`: name, stories, axes); a declared
+      story must exist and belong to one component, a declared axis must be one the
+      stories have, and an undeclared argument stays at the story's value. In a declared
+      title every story is assigned or left out with a fixed reason (test, playground,
+      repeat, left-out-variant; reviewer, 2026-11-10). Decision 3's signed examples were
+      wrong (the working session's arguments-only inventory): under the cap alone Button
+      stays out (its icon stories' own option lists are 1,008 and 504) and the feature-flag
+      FileUploader gives no variants (own renders); PasswordInput (96) and MultiSelect (96)
+      come in. Button comes in at 84 only through a declaration.
+- [ ] A profile's `excluded` titles, with fixed reasons (a feature-flag or alternate copy,
+      deprecated, preview or unreleased, a non-visual utility), kept in the denominator in
+      their own column (reviewer, 2026-11-10). Its own PR before 2026-11-20.
 
 ## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
 

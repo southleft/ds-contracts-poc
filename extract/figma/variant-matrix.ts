@@ -2,7 +2,7 @@
  *
  *  React to Figma counts only a real component set: its variant properties are
  *  the story's enumerated arguments and its variants are their cartesian
- *  product, capped at 64 per set. Option-list arguments are the axes; true/false
+ *  product, capped at 128 per set (grammar decision 3). Option-list arguments are the axes; true/false
  *  and text arguments become boolean and text properties, never axes. A product
  *  over the cap, or an axis with a repeated option, is refused by name rather
  *  than cut to an arbitrary subset. matchesMatrix holds a set read back from
@@ -12,7 +12,7 @@
 import { OPTION_CONTROLS, type StoryArgType } from './grammar.js';
 import type { DumpSet } from './types.js';
 
-export const VARIANT_CAP = 64;
+export const VARIANT_CAP = 128;
 
 export interface VariantMatrix {
   /** Sorted by name; options in the story's own order. */
@@ -69,8 +69,9 @@ const shown = (v: unknown) => (v === undefined ? '(default)' : String(v));
  *  A story with its own render is not a variant and is named. Stories with
  *  identical arguments show one state: the first in index order counts and the
  *  others are named as repeats (a wrapper is a theme or mode, not a variant).
- *  A story the reader could not render is named apart. The cap stays 64. */
-export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixResult {
+ *  A story the reader could not render is named apart. The cap is 128 (grammar decision 3).
+ *  `declared`, a system profile's declaration (grammar decision 4), names the component's real axes: see declaredMatrix. */
+export function storyVariantMatrix(stories: readonly StoryInput[], declared?: readonly string[]): StoryMatrixResult {
   const renderFailed = stories.filter((s) => s.renderFailed).map((s) => s.id).sort();
   const ownRender = stories.filter((s) => !s.renderFailed && s.ownRender).map((s) => s.id).sort();
   const seen = new Set<string>(), repeats: string[] = [], drawn: StoryInput[] = [];
@@ -82,6 +83,7 @@ export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixR
   repeats.sort();
   const named = { ownRender, repeats, renderFailed, renders: [] as VariantRender[] };
   if (!drawn.length) return { status: 'refused', reason: 'variant-matrix-no-story-variants', count: 0, ...named };
+  if (declared) return { ...named, ...declaredMatrix(drawn, declared) };
   // Each story's own option lists: a story may narrow an argument's list to the values it shows.
   const lists: VariantMatrix[] = [];
   for (const s of drawn) { const l = variantMatrix(s.argTypes); if (l.status === 'refused') return { ...l, ...named }; lists.push(l.matrix); }
@@ -105,6 +107,29 @@ export function storyVariantMatrix(stories: readonly StoryInput[]): StoryMatrixR
   const axes = [...listedNames.map((name) => ({ name, options: [...new Set(lists.flatMap((l) => l.axes.find((a) => a.name === name)!.options))] })),
     ...names.map((name) => ({ name, options: [...new Set(drawn.map((s) => shown(s.args[name])))] }))].sort((a, b) => a.name.localeCompare(b.name));
   return { status: 'ok', matrix: { axes, variants }, ...named, renders };
+}
+
+/** Grammar decision 4 (2026-11-09): the declared axes are the component's variant axes. Each story spans its own
+ *  option list on a declared axis it lists; on a declared axis it does not list, it keeps its own value. Anything
+ *  undeclared stays at the story's value and makes no variant (a playground control), so two stories that differ only
+ *  there show one variant, the first. A declared axis must be one the stories have (an option list, or a value a
+ *  story sets); otherwise the component is refused by name. Nothing adds a value no story renders. */
+function declaredMatrix(drawn: StoryInput[], axes: readonly string[]): MatrixResult & { renders: VariantRender[] } {
+  const listed = drawn.map((s) => new Map(axes.flatMap((n) => (s.argTypes[n] && optionsOf(s.argTypes[n]!) ? [[n, optionsOf(s.argTypes[n]!)!]] : []))));
+  const unknown = axes.find((n) => !listed.some((l) => l.has(n)) && !drawn.some((s) => n in s.args));
+  if (unknown !== undefined) return { status: 'refused', reason: `declaration-axis-unknown:${unknown}`, count: 0, renders: [] };
+  const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], seen = new Set<string>();
+  drawn.forEach((s, i) => {
+    let own: Array<Record<string, string>> = [{}];
+    for (const n of axes) own = own.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: shown(o) })));
+    for (const v of own) {
+      if (seen.has(stable(v))) continue;
+      seen.add(stable(v)); variants.push(v);
+      renders.push({ storyId: s.id, args: Object.fromEntries([...listed[i]!].map(([n, o]) => [n, o.find((x) => String(x) === v[n])])) });
+    }
+  });
+  if (variants.length > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${variants.length}>${VARIANT_CAP}`, count: variants.length, renders: [] };
+  return { status: 'ok', matrix: { axes: [...axes].sort().map((name) => ({ name, options: [...new Set(variants.map((v) => v[name]!))] })), variants }, renders };
 }
 
 /** A rendered story, compacted by the Storybook reader from React's tree: `i`

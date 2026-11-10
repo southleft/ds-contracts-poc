@@ -19,7 +19,9 @@ test('option-list arguments are the axes and their product is the variants; true
 
 test('a product over the cap, or a repeated option, is refused by name instead of cut', () => {
   const four = ['a','b','c','d'];
-  assert.deepEqual(variantMatrix({a:{options:four},b:{options:four},c:{options:[...four,'e']}}),{status:'refused',reason:`variant-matrix-over-cap:80>${VARIANT_CAP}`,count:80});
+  const nine = [...four,'e','f','g','h','i'];
+  assert.equal(VARIANT_CAP,128);
+  assert.deepEqual(variantMatrix({a:{options:four},b:{options:four},c:{options:nine}}),{status:'refused',reason:`variant-matrix-over-cap:144>${VARIANT_CAP}`,count:144});
   assert.equal(ok(variantMatrix({a:{options:four},b:{options:four},c:{options:four}})).variants.length,64);
   assert.deepEqual(variantMatrix({tone:{options:['a','a']}}),{status:'refused',reason:'variant-matrix-repeated-option:tone',count:2});
 });
@@ -66,12 +68,12 @@ test('each story spans its own option list; stories listing different option arg
   assert.equal((differ as {reason:string}).reason,'variant-matrix-option-axes-differ');
 });
 
-test('a repeat counts once and is named; only own-render or unrendered stories, or more than 64 variants, are refused', () => {
+test('a repeat counts once and is named; only own-render or unrendered stories, or more than 128 variants, are refused', () => {
   const r = storyVariantMatrix([s('a',{tone:'x'}),s('b',{tone:'x'}),s('c',{tone:'y'}),s('broken',{tone:'z'},{renderFailed:true})]);
   assert.deepEqual([r.status,(r as {matrix:VariantMatrix}).matrix.variants.length,r.repeats,r.renderFailed],['ok',2,['b'],['broken']]);
   assert.deepEqual(storyVariantMatrix([s('grid',{},{ownRender:true})]),{status:'refused',reason:'variant-matrix-no-story-variants',count:0,ownRender:['grid'],repeats:[],renderFailed:[],renders:[]});
-  const many = Array.from({length:65},(_,i)=>s(`v${i}`,{tone:`t${i}`}));
-  assert.equal((storyVariantMatrix(many) as {reason:string}).reason,'variant-matrix-over-cap:65>64');
+  const many = Array.from({length:129},(_,i)=>s(`v${i}`,{tone:`t${i}`}));
+  assert.equal((storyVariantMatrix(many) as {reason:string}).reason,'variant-matrix-over-cap:129>128');
 });
 
 import {rendersOneInstance} from './variant-matrix.js';
@@ -82,4 +84,17 @@ test('own render from the rendered page: exactly one instance, wrappers allowed,
   assert.equal(rendersOneInstance({h: true, c: [one, {h: true}]}), false, 'other content beside the instance');
   assert.equal(rendersOneInstance({h: true, c: [{h: true}]}), false, 'no instance at all');
   assert.equal(rendersOneInstance({c: [{i: true, c: [{i: true}]}]}), true, 'the component nested inside its own instance is its content');
+});
+
+test('grammar decision 4: declared axes are the variant axes; a playground control stays at its story value; an unknown axis is refused', () => {
+  const full = {size:{options:['sm','lg']},loadingStatus:{options:['inactive','active']},numberOfButtons:{options:[1,2,3]}};
+  const stories = [s('default',{},{argTypes:full}),s('passive',{passive:true},{argTypes:{size:{options:['sm','lg']}}})];
+  assert.equal((storyVariantMatrix(stories) as {reason:string}).reason,'variant-matrix-option-axes-differ');
+  const r = storyVariantMatrix(stories,['loadingStatus','size']);
+  assert.deepEqual((r as {matrix:VariantMatrix}).matrix.axes,[{name:'loadingStatus',options:['inactive','active','(default)']},{name:'size',options:['sm','lg']}]);
+  assert.equal((r as {matrix:VariantMatrix}).matrix.variants.length,6);
+  // numberOfButtons is not declared: it is never spanned, so each render keeps the story's own value.
+  assert.deepEqual(r.renders.slice(0,2),[{storyId:'default',args:{size:'sm',loadingStatus:'inactive'}},{storyId:'default',args:{size:'lg',loadingStatus:'inactive'}}]);
+  assert.deepEqual(r.renders[4],{storyId:'passive',args:{size:'sm'}});
+  assert.equal((storyVariantMatrix(stories,['size','kind']) as {reason:string}).reason,'declaration-axis-unknown:kind');
 });
