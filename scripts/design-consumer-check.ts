@@ -90,6 +90,7 @@ import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
 import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
 import { retryConsumerRead } from './design-consumer-network.js';
+import { retryCapture } from './capture-retry.js';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -402,7 +403,7 @@ export async function observeVariantPaint(cell: import('playwright-core').Locato
   const box = hasSvg ? await cell.boundingBox() : null;
   let pixels: string | null = null;
   if (box && box.width > 0 && box.height > 0) {
-    const png = PNG.sync.read(await cell.screenshot({ animations: 'disabled', caret: 'hide', scale: 'css' }));
+    const png = PNG.sync.read(await retryCapture(() => cell.screenshot({ animations: 'disabled', caret: 'hide', scale: 'css' })));
     pixels = `${png.width}x${png.height}:${sha256(png.data)}`;
   }
   return JSON.stringify([fingerprint, pixels]);

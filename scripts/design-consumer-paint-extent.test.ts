@@ -144,4 +144,5 @@ test('a capture is retried once on Chromium\'s capture refusal, and never on any
  assert.equal(await retryCapture(fail(CAPTURE_REFUSED,1)),'png');assert.equal(calls,2);
  calls=0;await assert.rejects(retryCapture(fail(CAPTURE_REFUSED,2)),/Unable to capture screenshot/);assert.equal(calls,2);
  calls=0;await assert.rejects(retryCapture(fail('Timeout 30000ms exceeded',1)),/Timeout/);assert.equal(calls,1);
+ calls=0;await assert.rejects(retryCapture(fail('Protocol error (Page.captureScreenshot): Target closed',1)),/Target closed/);assert.equal(calls,1);
 });
