@@ -464,3 +464,26 @@ component before the reading. This
 decision changes the variant matrix rule and freezes with it on 2026-11-20.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
+
+### 2026-11-09: AI-drafted profiles count once the reviewer session approves them
+
+The owner was asked in chat whether a profile drafted with AI help counts once it is
+reviewed and committed. Their answer: "No, I trust you to review, approve, and merge them
+going forward." Here "you" is the read-only reviewer session that AGENTS.md rule 3 allows.
+So:
+
+- The working session may draft a profile. The reviewer session checks it against the
+  system's own stories, Figma file and receipts, then approves and merges it. This
+  replaces "a person writes and reviews each profile" in "One design system at a time".
+  The profile's first line says it was AI-drafted and approved by the reviewer session.
+  The drafting session never approves its own profile.
+- The declared and assisted columns in "How numbers are counted" do not apply to a
+  system's profile. A profile merged before the held-out draw is part of the system's
+  setup, and the held-out reading taken with it is the headline.
+- The held-out draw stays with the owner, or a sealing session the owner asks for. It
+  happens after the profile's decision-4 declarations are merged.
+- The working session opens each PR without auto-merge. The reviewer session turns
+  auto-merge on only after its review. This replaces the practice, since 2026-11-08, of
+  turning auto-merge on as each PR opens. Owner-only actions are unchanged.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-09.
