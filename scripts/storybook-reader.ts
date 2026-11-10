@@ -92,7 +92,10 @@ export interface StoryComponent {
 export const LEFT_OUT_REASONS = ['test', 'playground', 'repeat', 'left-out-variant'] as const;
 export interface ComponentDeclaration { name: string; stories: string[]; axes: string[]; leftOut?: Array<{ story: string; reason: string }>;
   /** Skeleton-only (2026-11-10): the component renders a loading placeholder; the reviewer session checks each mark. */
-  skeleton?: true }
+  skeleton?: true;
+  /** The component is one of its stories file's own `subcomponents` (reviewer, 2026-11-10): matched by that entry only,
+   *  never by the file's component, so with no such entry its stories draw no instance of it and are refused by name. */
+  subcomponent?: true }
 /** A whole title the profile assigns to no component, with a fixed reason (reviewer, 2026-11-10). It stays in the kit's
  *  count, in its own "excluded by profile" column, with what it would have been; nothing hard, failing or out of grammar. */
 export const EXCLUDED_REASONS = ['feature-flag-copy', 'deprecated', 'preview', 'non-visual-utility'] as const;
@@ -106,7 +109,7 @@ export const SystemProfile = z.object({
   tuning: z.object({ why: z.string(), code: z.array(z.string()), figma: z.array(z.object({ id: z.string(), set: z.string() })) }),
   placementLeftOut: z.array(z.object({ component: z.string(), prop: z.string(), values: z.number(), samePixelsClosed: z.boolean(), figmaVariantProperty: z.string(), leftOut: z.boolean() })),
   components: z.array(z.object({ name: z.string(), stories: z.array(z.string()).min(1), axes: z.array(z.string()),
-    leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional(), skeleton: z.literal(true).optional() }).strict()),
+    leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional(), skeleton: z.literal(true).optional(), subcomponent: z.literal(true).optional() }).strict()),
   /** Skeleton-only Figma sets (2026-11-10): the variant value that marks a skeleton, and sets the kit draws as skeletons. */
   figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
   excluded: z.array(z.object({ title: z.string(), reason: z.enum(EXCLUDED_REASONS), copies: z.string().optional(), receipt: z.string().optional() })),
@@ -215,8 +218,8 @@ export const LAYOUT_FLAGS = `((tops) => {
 // lookup. A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
 // Exported so the React to Figma converter renders each story exactly as the reader does. `own`, the component a
 // profile assigns the story to (decision 4), names one of the stories file's own `subcomponents`: matched by that
-// reference (grammar decision 5), else by the file's `component`.
-export const SHOW = `(async ([id, args, own]) => {
+// reference (grammar decision 5), else by the file's `component` unless `sub` says it is a subcomponent.
+export const SHOW = `(async ([id, args, own, sub]) => {
   const store = window.__STORYBOOK_PREVIEW__.storyStoreValue, channel = window.__STORYBOOK_ADDONS_CHANNEL__;
   const wait = (event, emit) => new Promise((resolve) => {
     const handlers = [[event, (p) => { if ((p?.storyId ?? p) === id) done('rendered'); }], ['storyUnchanged', (p) => { if (p === id) done('rendered'); }],
@@ -231,7 +234,7 @@ export const SHOW = `(async ([id, args, own]) => {
   if (outcome === 'rendered' && Object.keys(args).length) outcome = await wait('storyArgsUpdated', () => channel.emit('updateStoryArgs', { storyId: id, updatedArgs: args }));
   await document.fonts.ready;
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-  const meta = (await store.loadCSFFileByStoryId(id)).meta, component = (own && meta.subcomponents?.[own]) || meta.component;
+  const meta = (await store.loadCSFFileByStoryId(id)).meta, component = (own && meta.subcomponents?.[own]) || (sub ? null : meta.component);
   const same = (t) => !!t && !!component && (t === component || t.type === component || t.render === component || t === component.type || t === component.render);
   let instance = null; const outermost = [];
   // The outermost instance is the one framed (checked before its children: the component may nest itself). Every
@@ -470,8 +473,8 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
     type Shown = { tree: RenderedNode | null; box?: Box };
-    const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d.name] as const)));
-    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)])})`) as Promise<Shown>;
+    const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d] as const)));
+    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)?.name, !!own.get(id)?.subcomponent])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
     // Grammar decision 5: a story counts when it draws one or more instances of its own component, alone or beside other
     // content; one that draws none is refused by name (`ownRender`). Several instances: each one's own props are kept.
