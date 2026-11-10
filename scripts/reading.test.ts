@@ -3,7 +3,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { f2rSets, largestUnit, r2fSets, report } from './reading.js';
+import { f2rSets, largestUnit, r2fSets, report, systemCoverage } from './reading.js';
 
 const dir = mkdtempSync(path.join(tmpdir(), 'reading-')), put = (name: string, v: unknown) => { const f = path.join(dir, name); writeFileSync(f, JSON.stringify(v)); return f; };
 const variant = (kids: unknown[]) => ({ type: 'COMPONENT', name: 'v', children: kids });
@@ -33,9 +33,19 @@ test('React to Figma: matrix refused has no rate; excluded titles count in cover
     excluded: [{ title: 'Old', reason: 'deprecated', grammar: { grammar: 'in' } }] };
   const checks = { Tag: { check: put('t.json', { counts: { pass: 2, fail: 0, unverified: 0, 'font-blocked': 0 } }) }, Grid: { refused: 'story-matrix-refused' }, Link: { failed: 'contract refused' } };
   const r = report(r2fSets(stories, checks), profile);
-  assert.match(r[0]!, /headline 50\.0% over 2 in-grammar set\(s\), coverage 3\/4 with 1 title\(s\) excluded by profile counted \(3\/3 without\), 1 variant\(s\) left out by profile.*no rate for Grid \(matrix-refused\)/);
+  assert.match(r[0]!, /headline 50\.0% over 2 in-grammar set\(s\), subset coverage 3\/4 with 1 title\(s\) excluded by profile counted \(3\/3 without\), 1 variant\(s\) left out by profile.*no rate for Grid \(matrix-refused\)/);
   assert.equal(r.length, 1, 'no member of the largest unit, so no sensitivity line');
   assert.throws(() => r2fSets(stories, { Tag: checks.Tag }), /reading-receipt-missing:check:Grid/);
   assert.equal(largestUnit(profile)!.name, 'Table');
   assert.throws(() => largestUnit({ pairs: [{ code: ['A'], figma: ['1:1'], basis: 'page' }, { code: ['B'], figma: ['2:1'], basis: 'page' }] } as never), /reading-largest-unit-tie:A \| B/);
+});
+
+test('system coverage comes from the system\'s full grammar reading, never from the run\'s subset; without it, the line says so', () => {
+  const sets = [{ set: 'Tag', grammar: 'in' as const, variants: 2, pass: 1, fontBlocked: 0 }];
+  assert.match(report(sets)[0]!, /, subset coverage 1\/1, .*; system coverage: not given$/);
+  const reader = { components: [{ grammar: { grammar: 'in' } }, { grammar: { grammar: 'in' } }, { grammar: { grammar: 'out' } }], excluded: [{ title: 'Old' }] };
+  assert.match(report(sets, undefined, reader)[0]!, /; system coverage 2\/4 with 1 title\(s\) excluded by profile counted \(2\/3 without\)$/);
+  const figma = { sets: [{ name: 'Button', grammar: 'in' }, { name: 'Tile', grammar: 'out' }, { name: '_Part', grammar: 'in' }] };
+  assert.equal(systemCoverage(figma, profile), '1/2 (1 internal set(s) in no number)');
+  assert.throws(() => systemCoverage({ sets: [{ name: 'X' }] }, profile), /reading-coverage-unreadable:grammar/);
 });

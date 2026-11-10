@@ -7,6 +7,8 @@
  *    check    the check's verdicts ({ counts } or { check: { counts } }), or `failed`: why the conversion stopped.
  *  React to Figma: --r2f <stories.json> --checks <checks.json>, the reader's output and, per component title,
  *    { check } (react-to-figma.json) or { failed } or { refused } (the contracts step's refusal reason).
+ *  --coverage <file> is the system's full grammar reading (the reader's grammar-only output, or a Figma classification
+ *  of every set), for system coverage beside the run's own subset coverage; without it the first line says so.
  *  --profile <profile.json> gives the skeleton and internal markers and the pairs. With pairs, a reading that holds
  *  members of the largest paired unit is also read without them, labeled "sensitivity: without the <unit> unit".
  *  Deterministic; no model call. Frozen with the checker on 2026-11-20.
@@ -75,21 +77,39 @@ export function largestUnit(profile: SystemProfile): { name: string; code: Set<s
   return { name: prefix.length >= 3 ? prefix : names[0]!, ...top };
 }
 
-/** The reading, and the sensitivity reading when the sets hold members of the largest paired unit. */
-export function report(sets: SetResult[], profile?: SystemProfile): string[] {
-  const out = [reading(sets).firstLine], unit = profile && largestUnit(profile);
+/** System coverage (reviewer, 2026-11-10): in-grammar over the whole system, from its full grammar reading, so a run that
+ *  holds a subset never passes the subset's coverage off as the system's. Either the reader's grammar-only output
+ *  (excluded titles counted in the denominator) or a Figma classification `{ sets: [{ name, grammar }] }` (internal
+ *  sets in no number). */
+export function systemCoverage(file: any, profile?: SystemProfile): string {
+  if (Array.isArray(file?.components)) {
+    const inG = file.components.filter((c: any) => c.grammar?.grammar === 'in').length, n = file.components.length, ex = (file.excluded ?? []).length;
+    return `${inG}/${n + ex}${ex ? ` with ${ex} title(s) excluded by profile counted (${inG}/${n} without)` : ''}`;
+  }
+  if (!Array.isArray(file?.sets)) throw Error('reading-coverage-unreadable');
+  const pub = file.sets.filter((s: any) => !figmaInternal(s.name ?? s.set, profile?.figmaInternal));
+  if (pub.some((s: any) => s.grammar !== 'in' && s.grammar !== 'out')) throw Error('reading-coverage-unreadable:grammar');
+  return `${pub.filter((s: any) => s.grammar === 'in').length}/${pub.length}${pub.length < file.sets.length ? ` (${file.sets.length - pub.length} internal set(s) in no number)` : ''}`;
+}
+
+/** The reading, and the sensitivity reading when the sets hold members of the largest paired unit. The scorer's coverage
+ *  is this run's subset; system coverage comes from `coverage` (the system's full grammar reading), or is said missing. */
+export function report(sets: SetResult[], profile?: SystemProfile, coverage?: unknown): string[] {
+  const system = coverage === undefined ? 'system coverage: not given' : `system coverage ${systemCoverage(coverage, profile)}`;
+  const label = (line: string) => `${line.replace(' coverage ', ' subset coverage ')}; ${system}`;
+  const out = [label(reading(sets).firstLine)], unit = profile && largestUnit(profile);
   const inUnit = (s: SetResult) => !!unit && (unit.code.has(s.set) || unit.figma.has(s.set.split(' ')[0]!));
-  if (unit && sets.some(inUnit)) out.push(`sensitivity: without the ${unit.name} unit: ${reading(sets.filter((s) => !inUnit(s))).firstLine}`);
+  if (unit && sets.some(inUnit)) out.push(`sensitivity: without the ${unit.name} unit: ${label(reading(sets.filter((s) => !inUnit(s))).firstLine)}`);
   return out;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const flag = (n: string) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : undefined; };
   const profile = flag('--profile') ? readProfile(flag('--profile')!) : undefined, f2r = flag('--f2r'), r2f = flag('--r2f');
-  if (!f2r === !r2f || (r2f && !flag('--checks'))) { console.error('usage: npx tsx scripts/reading.ts (--f2r <cells.json> | --r2f <stories.json> --checks <checks.json>) [--profile <profile.json>]'); process.exit(2); }
+  if (!f2r === !r2f || (r2f && !flag('--checks'))) { console.error('usage: npx tsx scripts/reading.ts (--f2r <cells.json> | --r2f <stories.json> --checks <checks.json>) [--profile <profile.json>] [--coverage <the system\'s full grammar reading>]'); process.exit(2); }
   const base = path.dirname(path.resolve(f2r ?? flag('--checks')!)), at = (p: string) => path.resolve(base, p);
   const sets = f2r ? f2rSets((json(f2r) as Cell[]).map((c) => ({ ...c, dump: at(c.dump), grammar: at(c.grammar), ...(c.check ? { check: at(c.check) } : {}) })), profile)
     : r2fSets(json(r2f!), Object.fromEntries(Object.entries<any>(json(flag('--checks')!)).map(([t, v]) => [t, v.check ? { ...v, check: at(v.check) } : v])));
-  for (const line of report(sets, profile)) console.log(line);
+  for (const line of report(sets, profile, flag('--coverage') ? json(flag('--coverage')!) : undefined)) console.log(line);
   console.log(JSON.stringify(reading(sets), null, 2));
 }
