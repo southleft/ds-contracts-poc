@@ -126,8 +126,10 @@ Owner:
 - [ ] Draw the held-out third of Carbon's in-grammar component sets in each direction,
       from untouched components only (or ask a sealing session to), a third of each
       group separately (the rest, icon-only, glyph-only, skeleton-only; 2026-11-10), from
-      Carbon's public Figma sets only (2026-11-10, "Public only"), and commit
-      SHA-256(salt + held-out list), with the Figma scope "public".
+      Carbon's public Figma sets only (2026-11-10, "Public only"), in paired units (a code
+      component and its Figma sets are drawn together; a unit with a touched member is
+      tuning on both sides; reviewer, 2026-11-10), and commit SHA-256(salt + held-out
+      list), with the Figma scope "public".
 
 Reviewer session (owner, 2026-11-09):
 - [ ] Review and commit profile v0 before any run that counts.
@@ -163,6 +165,13 @@ Agent:
       it: 107 of 167 in grammar, 94 with an accepted matrix (957 variants); without the
       skeleton marks, 71 of 94, 63 (926). AI-drafted; the reviewer session approves it by
       merging (receipts in `private/profile-v01-20261110`).
+- [x] Profile v0.2, before the draw (reviewer, 2026-11-10): `pairs`, each code component's
+      public Figma sets with its basis (the set's page, its name, a State=Skeleton variant;
+      an internal part a practice cell touched carries the touch), written from names and
+      structure alone; 69 entries, DataTable split where a set's name names one story
+      component, with 29 code components and 24 public sets left unpaired and named.
+      AI-drafted; the reviewer session approves it by merging (receipt in
+      `private/profile-v02-20261110/pairs.txt`).
 - [ ] Commit the tuning list once the owner has drawn the held-out third.
 - [ ] Take a tuned baseline reading with the unchanged engine.
 
