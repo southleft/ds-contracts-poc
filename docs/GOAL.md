@@ -524,3 +524,35 @@ This changes the variant matrix rule and the reader's reference capture. Both la
 before 2026-11-20 and freeze with them.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-10.
+
+### 2026-11-10: Skeleton-only components get their own column
+
+The owner, in chat: "Own column". A skeleton is a design system's gray loading
+placeholder. Under grammar decision 5, Carbon's skeleton stories became components of
+their own, one variant each: 37 of them, such as ButtonSkeleton and SkeletonText. The
+headline weights every component set equally, so these placeholders would make up about
+a quarter of Carbon's drawable sets, and the easiest ones. They also don't pair one to
+one: Carbon's Figma kit draws a skeleton as a `State=Skeleton` variant inside the
+component's own set, not as a set of its own.
+
+From this entry on, skeleton-only components and sets are reported in their own column,
+next to icon-only and glyph-only sets in "How numbers are counted". They are outside the
+headline and never add to first pass:
+- **On the code side,** a skeleton-only component is one whose every variant is drawn by
+  a skeleton story or a skeleton subcomponent, or one that is a skeleton building block.
+  A system's profile marks each one, and the reviewer session checks each mark against
+  what the component renders.
+- **On the Figma side,** a skeleton-only set is a set whose every variant is a skeleton.
+  A skeleton variant inside a set that also has other variants stays part of that set.
+- **Still counted:** these components stay in coverage, which counts in-grammar sets as a
+  share of the kit. Their results are always published in their own column.
+- **The held-out draw** takes a third of each group separately: a third of the other
+  eligible components, and a third of the skeleton-only ones. That way the headline's
+  held-out sample is always a third of the real components.
+- **Limit:** only components that render a loading placeholder may be marked. Marking
+  any other component is refused.
+
+This changes how numbers are counted. It lands before 2026-11-20 and freezes with the
+checker.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-10.

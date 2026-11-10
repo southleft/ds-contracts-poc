@@ -107,12 +107,18 @@ baseline and the fast lane.
       `(default)`, named per component. Read with profile v0: 100 of 164 in grammar, 90
       with an accepted matrix (918 variants), 10 with none; without the 37 skeleton-only
       components, 64 of 91, 59 (887 variants), 5 (receipt in `private/decision-5-20261110`).
+- [ ] Skeleton-only components and sets in their own column, before 2026-11-20 (owner,
+      2026-11-10, "Own column"): a `skeleton` mark in the profile, which the reviewer
+      session checks against what each marked component renders; the reader carries it;
+      Figma sets whose every variant is a skeleton are tagged from data, never a name in
+      code; the headline leaves both out and coverage keeps them.
 
 ## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
 
 Owner:
 - [ ] Draw the held-out third of Carbon's in-grammar component sets in each direction,
-      from untouched components only (or ask a sealing session to), and commit
+      from untouched components only (or ask a sealing session to), a third of the
+      skeleton-only group and a third of the rest separately (2026-11-10), and commit
       SHA-256(salt + held-out list).
 
 Reviewer session (owner, 2026-11-09):
