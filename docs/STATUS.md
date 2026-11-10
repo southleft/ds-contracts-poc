@@ -110,18 +110,26 @@ Reviewer session (owner, 2026-11-09):
 - [ ] Review and commit profile v0 before any run that counts.
 
 Agent:
-- [ ] Pin `@carbon/react` to a version, with its public Storybook and the owner's
-      draft copy of the Carbon Figma kit. Read-only inventory so far: 1.120.0, the
-      Storybook built for it on 2026-11-04, and Figma file version
-      2409684134896101954 (receipts in `private/carbon-step1-20261110`).
-- [ ] Inventory both sides and run the grammar classifier on both, with no conversion
-      attempts. The ten components in `examples/carbon/contracts` (Accordion, Button,
-      Checkbox, IconButton, InlineNotification, Modal, Tabs, Tag, TextInput, Toggle)
-      and every Carbon set in a practice cell count as touched and go in the tuning
-      list.
-- [ ] Write profile v0 and its schema from `examples/carbon/ds-library.json` and
-      `extract/computed/configs/carbon.json`, holding the decision-4 declarations for
-      every component, written from the stories alone before the draw.
+- [x] Pin `@carbon/react` to a version, with its public Storybook and the owner's
+      draft copy of the Carbon Figma kit: 1.120.0, the Storybook built for it on
+      2026-11-04, and Figma file version 2409684134896101954 (`examples/carbon/profile.json`).
+- [x] Inventory both sides and run the grammar classifier on both, with no conversion
+      attempts (grammar-only reader and REST classification; receipts in
+      `private/carbon-step1-20261110`, git-ignored). The ten components in
+      `examples/carbon/contracts` and the 12 Carbon sets in practice cells are touched
+      and form the profile's tuning list.
+- [x] Write profile v0 and its schema (`examples/carbon/profile.json`, checked by
+      `SystemProfile` when the reader loads it), with the decision-4 declarations for
+      every component, written from the stories alone before the draw: 128 components,
+      36 titles excluded with fixed reasons, 85 stories left out with reasons (80 of them
+      left-out variants, each with what it would add: a decoration, icon or other content
+      drawn inside the component, or a value no axis carries). Read with it: 109 of 164
+      in grammar (109 of 128 without the excluded titles), 54 with an accepted matrix
+      (899 variants); 55 in grammar have no variants because every story shows several
+      instances or content beside it. Each of the 11 stories the reader names as a repeat
+      is shown genuine by the instance's own props and its rendered subtree (receipt in
+      `private/profile-v0-20261110`, git-ignored). AI-drafted; the reviewer session
+      approves it by merging.
 - [ ] Commit the tuning list once the owner has drawn the held-out third.
 - [ ] Take a tuned baseline reading with the unchanged engine.
 

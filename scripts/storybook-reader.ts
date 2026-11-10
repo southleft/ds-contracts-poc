@@ -31,6 +31,7 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { z } from 'zod';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
 import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
 import type { Browser, CDPSession, JSHandle } from 'playwright-core';
@@ -86,6 +87,20 @@ export interface ComponentDeclaration { name: string; stories: string[]; axes: s
  *  count, in its own "excluded by profile" column, with what it would have been; nothing hard, failing or out of grammar. */
 export const EXCLUDED_REASONS = ['feature-flag-copy', 'deprecated', 'preview', 'non-visual-utility'] as const;
 export interface ExcludedTitle { title: string; reason: string }
+
+/** A system profile (GOAL.md, 2026-11-09): a versioned data file, checked against this schema when the reader loads it. */
+export const SystemProfile = z.object({
+  provenance: z.string().regex(/^AI-drafted .*approved by the reviewer session/), system: z.string(), version: z.string(),
+  pins: z.object({ package: z.object({ name: z.string(), version: z.string() }), storybook: z.string(), figma: z.object({ fileKey: z.string(), version: z.string() }) }).strict(),
+  setup: z.object({ manifest: z.string(), captureConfig: z.string() }),
+  tuning: z.object({ why: z.string(), code: z.array(z.string()), figma: z.array(z.object({ id: z.string(), set: z.string() })) }),
+  placementLeftOut: z.array(z.object({ component: z.string(), prop: z.string(), values: z.number(), samePixelsClosed: z.boolean(), figmaVariantProperty: z.string(), leftOut: z.boolean() })),
+  components: z.array(z.object({ name: z.string(), stories: z.array(z.string()).min(1), axes: z.array(z.string()),
+    leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional() })),
+  excluded: z.array(z.object({ title: z.string(), reason: z.enum(EXCLUDED_REASONS), copies: z.string().optional(), receipt: z.string().optional() })),
+}).strict();
+export type SystemProfile = z.infer<typeof SystemProfile>;
+export const readProfile = (file: string): SystemProfile => SystemProfile.parse(JSON.parse(readFileSync(file, 'utf8')));
 
 export function readStories(stories: readonly LoadedStory[], declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = []): StoryComponent[] {
   const byTitle = new Map<string, LoadedStory[]>(), axesOf = new Map<string, string[]>(), taken = new Set<string>(), off = new Map<string, string>();
@@ -458,8 +473,8 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>]'); process.exit(2); }
   const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile');
   // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
-  const read = profile ? JSON.parse(readFileSync(profile, 'utf8')) as { components?: ComponentDeclaration[]; excluded?: ExcludedTitle[] } : {};
-  const declared = read.components ?? [], excludedTitles = read.excluded ?? [];
+  const read = profile ? readProfile(profile) : undefined;
+  const declared = read?.components ?? [], excludedTitles = read?.excluded ?? [];
   mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
   loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles).then(({ environment, stories, components: all }) => {
     // Excluded titles never become components, and are reported apart with what they would have been.
