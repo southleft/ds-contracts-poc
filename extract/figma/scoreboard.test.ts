@@ -10,7 +10,7 @@ test('the headline is the mean of per-set rates; raw first pass counts every var
   const r = reading(sets);
   assert.deepEqual([r.headline.headline, r.headline.pass, r.headline.of, r.headline.whole, r.headline.sets], [0.75, 5, 6, 1, 2]);
   assert.deepEqual(r.rawFirstPass, { pass: 5, of: 9 });
-  assert.deepEqual(r.coverage, { inGrammar: 4, sets: 5 });
+  assert.deepEqual(r.coverage, { inGrammar: 4, sets: 5, withoutExcluded: 5, excluded: {} });
   assert.deepEqual([r.columns['icon-only'].headline, r.columns['skeleton-only'].headline, r.columns['glyph-only'].headline], [1, 0, null]);
   // Without columns the numbers are the plain mean the private A0 scorer computed.
   assert.equal(numbers(sets.filter((s) => s.grammar === 'in')).headline, (1 + 0.5 + 1 + 0) / 4);
@@ -30,8 +30,18 @@ test('a font-blocked variant is in no rate and is its own number; a set with eve
 test('a failed conversion counts at 0 in the headline; a matrix refused before conversion has no rate and is named', () => {
   const r = reading([set('ok', 2, 2), set('failed', 3, 0), set('refused', 0, 0, { noVariants: 'matrix-refused' })]);
   assert.deepEqual([r.headline.headline, r.headline.rated, r.headline.sets, r.rawFirstPass], [0.5, 2, 3, { pass: 2, of: 5 }]);
-  assert.deepEqual([r.headline.noRate, r.coverage], [[{ set: 'refused', why: 'matrix-refused' }], { inGrammar: 3, sets: 3 }]);
+  assert.deepEqual([r.headline.noRate, r.coverage], [[{ set: 'refused', why: 'matrix-refused' }], { inGrammar: 3, sets: 3, withoutExcluded: 3, excluded: {} }]);
   assert.match(r.firstLine, /no rate for refused \(matrix-refused\)$/);
+});
+
+test('an excluded title counts in coverage only, both ways; left-out variants are reported and change no rate', () => {
+  const sets = [set('a', 4, 2, { leftOutVariants: 3 }), set('b', 2, 2), set('old', 0, 0, { excluded: 'deprecated' }), set('out', 1, 0, { grammar: 'out' })];
+  const r = reading(sets), plain = reading(sets.filter((s) => !s.excluded).map(({ leftOutVariants: _left, ...s }) => s));
+  assert.deepEqual(r.coverage, { inGrammar: 2, sets: 4, withoutExcluded: 3, excluded: { old: 'deprecated' } });
+  assert.deepEqual([r.headline, r.rawFirstPass, r.columns], [plain.headline, plain.rawFirstPass, plain.columns]);
+  assert.deepEqual(r.leftOutVariants, { total: 3, perSet: { a: 3 } });
+  assert.match(r.firstLine, /coverage 2\/4 with 1 title\(s\) excluded by profile counted \(2\/3 without\), 3 variant\(s\) left out by profile, raw first pass 4\/7/);
+  assert.throws(() => reading([set('x', 1, 0, { excluded: 'deprecated', column: 'icon-only' })]), /scoreboard-input-invalid:x/);
 });
 
 test('icon-only and glyph-only are narrow: a painted box, text beside a graphic or a third character keeps a set in the headline', () => {
@@ -43,6 +53,7 @@ test('icon-only and glyph-only are narrow: a painted box, text beside a graphic 
   assert.equal(drawnColumn([{ ...icon, held: 1 }]), undefined, 'a tooltip holds its hidden label: not an icon');
   assert.equal(drawnColumn([{ runs: ['A'], graphics: [], painted: 0, held: 1 }, { runs: ['Zz'], graphics: [], painted: 0, held: 1 }]), 'glyph-only');
   assert.equal(drawnColumn([{ runs: ['ABC'], graphics: [], painted: 0, held: 1 }]), undefined);
+  assert.equal(drawnColumn([{ runs: ['A'], graphics: [], painted: 0, held: 2 }]), undefined, 'a glyph that holds hidden text too is not glyph-only');
   assert.equal(drawnColumn([{ runs: ['AB'], graphics: [], painted: 1, held: 1 }]), undefined, 'an avatar paints its circle');
   assert.equal(drawnColumn([icon, null]), undefined, 'a variant with no reading keeps the set in the headline');
 });

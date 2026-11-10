@@ -19,12 +19,18 @@ export type Column = typeof COLUMNS[number];
 /** `variants` is every variant the set is expected to have: a set whose conversion failed (a script error, a build
  *  refusal) keeps them and passes none, so it is in the headline at 0. `noVariants` is the receipt's reason a set has
  *  none to score, never guessed: its matrix was refused before conversion. It then has no rate and is named. */
-export interface SetResult { set: string; grammar: 'in' | 'out'; variants: number; pass: number; fontBlocked: number; column?: Column; noVariants?: 'matrix-refused' }
+export interface SetResult { set: string; grammar: 'in' | 'out'; variants: number; pass: number; fontBlocked: number; column?: Column; noVariants?: 'matrix-refused';
+  /** A whole title the profile excludes, with its fixed reason (reviewer, 2026-11-10): in coverage's denominator only. */
+  excluded?: string;
+  /** The variants the profile leaves out of this set (`left-out-variant`): coverage loss, reported; no rate changes. */
+  leftOutVariants?: number }
 /** `rated`: the sets with a rate, the ones the headline is the mean over; `noRate`: every other set, by name and why. */
 export interface Numbers { sets: number; rated: number; headline: number | null; pass: number; of: number; whole: number; fontBlocked: number;
   noRate: Array<{ set: string; why: 'font-blocked' | 'matrix-refused' }> }
 export interface Reading {
-  firstLine: string; coverage: { inGrammar: number; sets: number };
+  /** `sets` counts the excluded titles (the headline figure); `withoutExcluded` is the figure beside it. */
+  firstLine: string; coverage: { inGrammar: number; sets: number; withoutExcluded: number; excluded: Record<string, string> };
+  leftOutVariants: { total: number; perSet: Record<string, number> };
   /** In-grammar sets outside every column; `pass` / `of` is the in-grammar per-variant rate. */
   headline: Numbers;
   /** Every variant of every set outside the columns; an out-of-grammar set's refusals are failures. */
@@ -36,6 +42,8 @@ export interface Reading {
 
 const counted = (s: SetResult) => s.variants - s.fontBlocked;
 function valid(s: SetResult): void {
+  if (s.excluded !== undefined) { if (typeof s.excluded !== 'string' || !s.excluded || s.column) throw Error(`scoreboard-input-invalid:${s.set}`); return; }
+  if (s.leftOutVariants !== undefined && !(Number.isInteger(s.leftOutVariants) && s.leftOutVariants >= 0)) throw Error(`scoreboard-input-invalid:${s.set}`);
   // A set has one variant or more unless the receipt says why it has none: an unknown count would leave it out of every
   // rate without a trace, and a failed conversion must count at 0.
   const whole = [s.variants, s.pass, s.fontBlocked].every((n) => Number.isInteger(n) && n >= 0);
@@ -56,15 +64,20 @@ export function numbers(sets: readonly SetResult[]): Numbers {
 const pct = (x: number | null) => (x === null ? 'none' : `${(100 * x).toFixed(1)}%`);
 /** One direction's reading. */
 export function reading(sets: readonly SetResult[]): Reading {
-  const main = sets.filter((s) => !s.column), headline = numbers(main.filter((s) => s.grammar === 'in')), raw = numbers(main);
-  const all = numbers(sets), inGrammar = sets.filter((s) => s.grammar === 'in').length;
-  const columns = Object.fromEntries(COLUMNS.map((c) => [c, numbers(sets.filter((s) => s.column === c && s.grammar === 'in'))])) as Record<Column, Numbers>;
+  sets.forEach(valid);
+  // An excluded title is counted in coverage's denominator and nowhere else.
+  const kept = sets.filter((s) => s.excluded === undefined), excluded = Object.fromEntries(sets.filter((s) => s.excluded).map((s) => [s.set, s.excluded!]));
+  const main = kept.filter((s) => !s.column), headline = numbers(main.filter((s) => s.grammar === 'in')), raw = numbers(main);
+  const all = numbers(kept), inGrammar = kept.filter((s) => s.grammar === 'in').length, left = kept.filter((s) => s.leftOutVariants);
+  const columns = Object.fromEntries(COLUMNS.map((c) => [c, numbers(kept.filter((s) => s.column === c && s.grammar === 'in'))])) as Record<Column, Numbers>;
+  const leftOut = { total: left.reduce((n, s) => n + s.leftOutVariants!, 0), perSet: Object.fromEntries(left.map((s) => [s.set, s.leftOutVariants!])) };
+  const without = Object.keys(excluded).length ? ` with ${Object.keys(excluded).length} title(s) excluded by profile counted (${inGrammar}/${kept.length} without)` : '';
   const blocked = all.fontBlocked ? `${all.fontBlocked} font-blocked variant(s), in no rate; ` : '';
   const none = headline.noRate.length ? `; no rate for ${headline.noRate.map((n) => `${n.set} (${n.why})`).join(', ')}` : '';
-  const firstLine = `${blocked}headline ${pct(headline.headline)} over ${headline.rated} in-grammar set(s), coverage ${inGrammar}/${sets.length}, `
+  const firstLine = `${blocked}headline ${pct(headline.headline)} over ${headline.rated} in-grammar set(s), coverage ${inGrammar}/${sets.length}${without}${leftOut.total ? `, ${leftOut.total} variant(s) left out by profile` : ''}, `
     + `raw first pass ${raw.pass}/${raw.of}, whole sets ${headline.whole}/${headline.rated}, font-blocked ${all.fontBlocked}${none}`;
-  return { firstLine, coverage: { inGrammar, sets: sets.length }, headline, rawFirstPass: { pass: raw.pass, of: raw.of },
-    fontBlocked: { total: all.fontBlocked, perSet: Object.fromEntries(sets.filter((s) => s.fontBlocked).map((s) => [s.set, s.fontBlocked])) }, columns };
+  return { firstLine, coverage: { inGrammar, sets: sets.length, withoutExcluded: kept.length, excluded }, leftOutVariants: leftOut, headline, rawFirstPass: { pass: raw.pass, of: raw.of },
+    fontBlocked: { total: all.fontBlocked, perSet: Object.fromEntries(kept.filter((s) => s.fontBlocked).map((s) => [s.set, s.fontBlocked])) }, columns };
 }
 
 /** What one variant draws, as both sides report it: its text runs, its graphics (vector or SVG, or not), how many
@@ -74,12 +87,13 @@ export interface VariantDrawing { runs: string[]; graphics: Array<'vector' | 'ot
 /** Strict, so narrow: anything not clearly an icon or a glyph stays in the headline (reviewer ruling, 2026-11-10).
  *  Icon-only: every variant holds no text outside a vector, shown or hidden, and draws one or more graphics, all
  *  vector or SVG, and paints no box.
- *  Glyph-only: every variant draws exactly one text run of one or two characters, no graphic and no painted box. */
+ *  Glyph-only: every variant draws exactly one text run of one or two characters and holds no other text, with no
+ *  graphic and no painted box. */
 export function drawnColumn(variants: ReadonlyArray<VariantDrawing | null>): Column | undefined {
   if (!variants.length || variants.some((v) => !v)) return undefined;
   const v = variants as VariantDrawing[];
   if (v.every((d) => !d.runs.length && !d.held && d.graphics.length && d.graphics.every((g) => g === 'vector') && !d.painted)) return 'icon-only';
-  if (v.every((d) => d.runs.length === 1 && [...d.runs[0]!].length <= 2 && !d.graphics.length && !d.painted)) return 'glyph-only';
+  if (v.every((d) => d.runs.length === 1 && d.held === 1 && [...d.runs[0]!].length <= 2 && !d.graphics.length && !d.painted)) return 'glyph-only';
   return undefined;
 }
 
