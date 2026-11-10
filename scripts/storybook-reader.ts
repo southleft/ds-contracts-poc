@@ -91,7 +91,7 @@ export interface ExcludedTitle { title: string; reason: string }
 /** A system profile (GOAL.md, 2026-11-09): a versioned data file, checked against this schema when the reader loads it. */
 export const SystemProfile = z.object({
   provenance: z.string().regex(/^AI-drafted .*approved by the reviewer session/), system: z.string(), version: z.string(),
-  pins: z.object({ '@carbon/react': z.string().optional(), storybook: z.string(), figma: z.object({ fileKey: z.string(), version: z.string() }) }).passthrough(),
+  pins: z.object({ package: z.object({ name: z.string(), version: z.string() }), storybook: z.string(), figma: z.object({ fileKey: z.string(), version: z.string() }) }).strict(),
   setup: z.object({ manifest: z.string(), captureConfig: z.string() }),
   tuning: z.object({ why: z.string(), code: z.array(z.string()), figma: z.array(z.object({ id: z.string(), set: z.string() })) }),
   placementLeftOut: z.array(z.object({ component: z.string(), prop: z.string(), values: z.number(), samePixelsClosed: z.boolean(), figmaVariantProperty: z.string(), leftOut: z.boolean() })),

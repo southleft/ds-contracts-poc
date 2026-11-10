@@ -121,13 +121,14 @@ Agent:
 - [x] Write profile v0 and its schema (`examples/carbon/profile.json`, checked by
       `SystemProfile` when the reader loads it), with the decision-4 declarations for
       every component, written from the stories alone before the draw: 128 components,
-      36 titles excluded with fixed reasons, 12 stories left out with reasons (7 of them
-      left-out variants, each with what it would add). Read with it: 106 of 164 in
-      grammar (106 of 128 without the excluded titles), 51 with an accepted matrix (860
+      36 titles excluded with fixed reasons, 51 stories left out with reasons (46 of them
+      left-out variants, each with what it would add: a decoration or icon drawn inside
+      the component, or a value no axis carries). Read with it: 107 of 164 in grammar
+      (107 of 128 without the excluded titles), 52 with an accepted matrix (876
       variants); 55 in grammar have no variants because every story shows several
-      instances or content beside it. Every story the reader names as a repeat is sorted
-      by the rendered instance's own props (receipt in `private/profile-v0-20261110`,
-      git-ignored). AI-drafted; the reviewer session
+      instances or content beside it. Every story the reader names as a repeat (45) is
+      shown genuine by the rendered instance's own props (receipt in
+      `private/profile-v0-20261110`, git-ignored). AI-drafted; the reviewer session
       approves it by merging.
 - [ ] Commit the tuning list once the owner has drawn the held-out third.
 - [ ] Take a tuned baseline reading with the unchanged engine.
