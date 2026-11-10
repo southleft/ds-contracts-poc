@@ -97,6 +97,8 @@ Owner:
 - [ ] Draw the held-out third of Carbon's in-grammar component sets in each direction,
       from untouched components only (or ask a sealing session to), and commit
       SHA-256(salt + held-out list).
+
+Reviewer session (owner, 2026-11-09):
 - [ ] Review and commit profile v0 before any run that counts.
 
 Agent:
