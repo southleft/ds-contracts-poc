@@ -31,14 +31,19 @@ const visiblePaints = (stack: DumpNode['sourceFillStack']): string[] =>
 const paintReason = (type: string): string | undefined =>
   type === 'SOLID' ? undefined : type === 'IMAGE' ? 'image-fill' : type.startsWith('GRADIENT') ? 'gradient-fill' : 'non-solid-paint';
 
+/** A box with children and no auto layout that is not a drawing: its children are placed, not laid out. */
+const freeForm = (n: DumpNode): boolean => BOXES.has(n.type) && !n.layout && !!n.children?.length && !drawing(n);
+
 /** Reasons from one node's own facts; `parent` is undefined at a variant root. */
 function nodeReasons(n: DumpNode, parent: DumpNode | undefined, out: Set<string>): void {
   if (n.type === 'SLOT') out.add('slot-property');
   if (n.layout?.mode === 'GRID') out.add('grid-layout');
   if (n.layout?.wrap) out.add('layout-wrap');
-  if (n.abs && parent?.layout) out.add('absolute-child');
-  const kids = n.children ?? [];
-  if (BOXES.has(n.type) && !n.layout && kids.length && !drawing(n)) out.add('free-form-frame');
+  // Grammar decision 2 (2026-11-09): a part pinned inside a row or a column (auto layout) is in grammar; a placed
+  // child of a free-form parent is not. A shape carries its placement in its own channel (`shape.x`), every other
+  // node in `abs`: both are read.
+  if ((n.abs || n.shape?.x !== undefined) && parent && freeForm(parent)) out.add('absolute-child');
+  if (freeForm(n)) out.add('free-form-frame');
   if (n.mask) out.add('mask');
   if (n.imagePaints?.length || n.imageFill) out.add('image-fill');
   if (n.gradient) out.add('gradient-fill');
@@ -49,7 +54,7 @@ function nodeReasons(n: DumpNode, parent: DumpNode | undefined, out: Set<string>
   }
   if (n.sourceStrokePattern?.dashes.length || n.rectStrokePattern?.dashes.length) out.add('dashed-stroke');
   for (const e of n.effects ?? []) if (e.type !== 'DROP_SHADOW') out.add(`effect-${String(e.type).toLowerCase().replace(/_/g, '-')}`);
-  for (const k of kids) nodeReasons(k, n, out);
+  for (const k of n.children ?? []) nodeReasons(k, n, out);
 }
 
 /** The reader's named degradations for channels a dump could not carry. */
@@ -137,9 +142,18 @@ export interface StoryArgType {
   type?: { name?: string; value?: unknown } | string;
 }
 export const OPTION_CONTROLS = new Set(['select', 'radio', 'inline-radio']);
-export function classifyStoryArgs(argTypes: Record<string, StoryArgType>): GrammarVerdict {
+const stable = (v: unknown): string => Array.isArray(v) ? `[${v.map(stable).join(',')}]`
+  : v && typeof v === 'object' ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stable((v as Record<string, unknown>)[k])}`).join(',')}}`
+  : JSON.stringify(v) ?? 'undefined';
+/** Grammar decision 1 (2026-11-09): an argument whose type is outside the grammar (any of them: object, function,
+ *  number, range, array, union, other, unknown, an option control with no options) makes no variant, and so no
+ *  refusal, when no story of the component gives it a different value (an unset argument counts as one value).
+ *  An argument any story varies still refuses the component. Without `stories`, every such argument refuses. */
+export function classifyStoryArgs(argTypes: Record<string, StoryArgType>, stories: ReadonlyArray<{ args: Record<string, unknown> }> = []): GrammarVerdict {
   const reasons = new Set<string>();
-  for (const a of Object.values(argTypes)) {
+  const varies = (name: string) => new Set(stories.map((s) => (name in s.args ? stable(s.args[name]) : '(unset)'))).size > 1;
+  for (const [name, a] of Object.entries(argTypes)) {
+    if (stories.length && !varies(name)) continue;
     const type = typeof a.type === 'string' ? { name: a.type } : (a.type ?? {});
     if (type.name === 'function') continue;
     const options = a.options ?? (type.name === 'enum' && Array.isArray(type.value) ? type.value : []);
