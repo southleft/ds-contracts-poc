@@ -140,6 +140,8 @@ export interface StoryArgType {
   control?: { type?: string } | string | false;
   options?: unknown[];
   type?: { name?: string; value?: unknown } | string;
+  /** The default the stories file documents for the argument (`table.defaultValue.summary`), as written. */
+  defaultValue?: string;
 }
 export const OPTION_CONTROLS = new Set(['select', 'radio', 'inline-radio']);
 const stable = (v: unknown): string => Array.isArray(v) ? `[${v.map(stable).join(',')}]`

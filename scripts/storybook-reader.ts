@@ -8,8 +8,9 @@
  * grammar classifier, and holds all of its stories against the variant matrix
  * rule, where each story is one variant (owner, 2026-11-01). Own render is
  * decided from the rendered page: each story is rendered through Storybook's
- * own channel and React's tree is held against rendersOneInstance; a story that
- * fails to render is named apart (an instrument fault) and never counted.
+ * own channel, and one that draws no instance of its own component in React's
+ * tree is named; each instance it draws is a variant (grammar decision 5). A story
+ * that fails to render is named apart (an instrument fault) and never counted.
  * Part 2b then renders every expected variant (its story, with listed options
  * set through Storybook's own args channel) and keeps a PNG of the single
  * instance, alone (ancestor backgrounds cleared, its painted extent), as the reference image (the library's own render, never the
@@ -33,7 +34,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
-import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
+import { storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
 import type { Browser, CDPSession, JSHandle } from 'playwright-core';
 import { PNG } from 'pngjs';
 import type { FontFace } from './font-preflight.js';
@@ -69,7 +70,7 @@ export interface StoryComponent {
   /** Each layout refusal behind `grammar`: the story, the reason and the element (tag and classes). */
   layout?: Array<{ story: string; reason: string; at: string }>;
   /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
-  matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
+  matrix: { status: 'ok'; axes: string[]; variants: number; defaultUndocumented?: string[] } | { status: 'refused'; reason: string };
   /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render,
    *  and (for a declared component) the stories its declaration leaves out, each with its fixed reason. */
   ownRender: string[]; repeats: string[]; renderFailed: string[]; instanceUnreadable?: string[]; leftOut?: Array<{ story: string; reason: string }>;
@@ -136,9 +137,11 @@ export function readStories(stories: readonly LoadedStory[], declared: readonly 
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
     const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed, instances: s.instances })), axesOf.get(title));
     const layout = list.flatMap((s) => (s.layout ?? []).map(([reason, at]) => ({ story: s.id, reason, at })));
+    // Named, never counted: each axis where an unset value has no documented default and reads `(default)`.
+    const undocumented = m.status === 'ok' ? m.matrix.axes.filter((a) => a.options.includes('(default)')).map((a) => a.name) : [];
     const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
     return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
-      matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
+      matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length, ...(undocumented.length ? { defaultUndocumented: undocumented } : {}) } : { status: 'refused' as const, reason: m.reason },
       ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(m.instanceUnreadable.length ? { instanceUnreadable: m.instanceUnreadable } : {}), ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}),
       references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
@@ -201,8 +204,10 @@ export const LAYOUT_FLAGS = `((tops) => {
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
 // its box, outward to whole pixels; its text elements are marked with their weight and style for the font
 // lookup. A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
-// Exported so the React to Figma converter renders each story exactly as the reader does.
-export const SHOW = `(async ([id, args]) => {
+// Exported so the React to Figma converter renders each story exactly as the reader does. `own`, the component a
+// profile assigns the story to (decision 4), names one of the stories file's own `subcomponents`: matched by that
+// reference (grammar decision 5), else by the file's `component`.
+export const SHOW = `(async ([id, args, own]) => {
   const store = window.__STORYBOOK_PREVIEW__.storyStoreValue, channel = window.__STORYBOOK_ADDONS_CHANNEL__;
   const wait = (event, emit) => new Promise((resolve) => {
     const handlers = [[event, (p) => { if ((p?.storyId ?? p) === id) done('rendered'); }], ['storyUnchanged', (p) => { if (p === id) done('rendered'); }],
@@ -217,7 +222,7 @@ export const SHOW = `(async ([id, args]) => {
   if (outcome === 'rendered' && Object.keys(args).length) outcome = await wait('storyArgsUpdated', () => channel.emit('updateStoryArgs', { storyId: id, updatedArgs: args }));
   await document.fonts.ready;
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-  const component = (await store.loadCSFFileByStoryId(id)).meta.component;
+  const meta = (await store.loadCSFFileByStoryId(id)).meta, component = (own && meta.subcomponents?.[own]) || meta.component;
   const same = (t) => !!t && !!component && (t === component || t.type === component || t.render === component || t === component.type || t === component.render);
   let instance = null; const outermost = [];
   // The outermost instance is the one framed (checked before its children: the component may nest itself). Every
@@ -440,12 +445,13 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       for (const id of storyIds) {
         const s = await store.loadStory({ storyId: id });
         out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: true, renderFailed: false,
-          argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined }])) });
+          argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined, defaultValue: plain(a.table?.defaultValue?.summary) ?? undefined }])) });
       }
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
     type Shown = { tree: RenderedNode | null; box?: Box };
-    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`) as Promise<Shown>;
+    const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d.name] as const)));
+    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
     // Grammar decision 5: a story counts when it draws one or more instances of its own component, alone or beside other
     // content; one that draws none is refused by name (`ownRender`). Several instances: each one's own props are kept.

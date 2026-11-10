@@ -76,16 +76,6 @@ test('a repeat counts once and is named; only stories drawing no instance of the
   assert.equal((storyVariantMatrix(many) as {reason:string}).reason,'variant-matrix-over-cap:129>128');
 });
 
-import {rendersOneInstance} from './variant-matrix.js';
-test('own render from the rendered page: exactly one instance, wrappers allowed, nothing beside it', () => {
-  const one = {i: true as const, c: [{h: true as const}]};
-  assert.equal(rendersOneInstance({h: true, c: [{h: true, c: [one]}]}), true, 'decorator and theme wrappers around the instance');
-  assert.equal(rendersOneInstance({h: true, c: [one, {...one}]}), false, 'a grid of two instances');
-  assert.equal(rendersOneInstance({h: true, c: [one, {h: true}]}), false, 'other content beside the instance');
-  assert.equal(rendersOneInstance({h: true, c: [{h: true}]}), false, 'no instance at all');
-  assert.equal(rendersOneInstance({c: [{i: true, c: [{i: true}]}]}), true, 'the component nested inside its own instance is its content');
-});
-
 test('grammar decision 4: declared axes are the variant axes; a playground control stays at its story value; an unknown axis is refused', () => {
   const full = {size:{options:['sm','lg']},loadingStatus:{options:['inactive','active']},numberOfButtons:{options:[1,2,3]}};
   const stories = [s('default',{},{argTypes:full}),s('passive',{passive:true},{argTypes:{size:{options:['sm','lg']}}})];
@@ -117,4 +107,12 @@ test('grammar decision 5: each instance a story draws is a variant named by its 
   assert.deepEqual((declared as {matrix:VariantMatrix}).matrix.variants,[{type:'red'},{type:'blue'},{type:'gray'}]);
   const unreadable = storyVariantMatrix([s('odd',{},{argTypes,instances:[inst({type:'red'}),inst({},['type'])]}),s('one',{label:'One'},{argTypes})]);
   assert.deepEqual([unreadable.instanceUnreadable,(unreadable as {matrix:VariantMatrix}).matrix.variants.length],[['odd'],6]);
+  // A showcase never makes a later story with the same arguments a repeat; only the variants it adds count.
+  const same = storyVariantMatrix([s('four',{},{argTypes,instances:[inst({type:'red'}),inst({type:'red'})]}),s('one',{},{argTypes}),s('again',{},{argTypes,instances:[inst({type:'red'}),inst({type:'red'})]})],['type','size']);
+  assert.deepEqual([(same as {matrix:VariantMatrix}).matrix.variants.length,same.repeats],[7,['again']]);
+  // An unset axis reads the default the stories file documents; with none documented it stays (default).
+  const documented = {...argTypes,disabled:{defaultValue:'false'},tone:{defaultValue:"'info'"},icon:{defaultValue:'() => null'}};
+  const d = storyVariantMatrix([s('grid',{},{argTypes:documented,instances:[inst({type:'red'}),inst({type:'blue',disabled:true})]}),s('off',{disabled:false,tone:'info',icon:'x'},{argTypes:documented})],['type','disabled','tone','icon']);
+  assert.deepEqual((d as {matrix:VariantMatrix}).matrix.variants.slice(0,2),[{type:'red',disabled:'false',tone:'info',icon:'(default)'},{type:'blue',disabled:'true',tone:'info',icon:'(default)'}]);
+  assert.deepEqual((d as {matrix:VariantMatrix}).matrix.axes.find((a)=>a.name==='icon')!.options,['(default)','x']);
 });

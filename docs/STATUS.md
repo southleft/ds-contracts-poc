@@ -101,7 +101,12 @@ baseline and the fast lane.
 - [x] Grammar decision 5 in the variant matrix rule and the reader, before 2026-11-20
       (owner, 2026-11-10, "Sign decision 5"): each instance a story draws of its own
       component is a variant, named by its declared axes read from React's tree; what
-      the story draws beside it is context.
+      the story draws beside it is context. A story the profile assigns to a component
+      matches the stories file's own `subcomponents` entry by that name, else the file's
+      component; an unset axis reads the default the stories file documents, else
+      `(default)`, named per component. Read with profile v0: 100 of 164 in grammar, 90
+      with an accepted matrix (918 variants), 10 with none; without the 37 skeleton-only
+      components, 64 of 91, 59 (887 variants), 5 (receipt in `private/decision-5-20261110`).
 
 ## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
 

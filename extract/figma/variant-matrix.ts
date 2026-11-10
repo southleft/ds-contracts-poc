@@ -60,7 +60,7 @@ export type StoryMatrixResult = MatrixResult & { ownRender: string[]; repeats: s
  *  axis (an unset prop is the default), never by guessing from the page; a non-plain value can't name one (null). */
 const instanceVariants = (s: StoryInput, axes: readonly string[]): Array<Record<string, string>> | null => {
   const out: Array<Record<string, string>> = [];
-  for (const i of s.instances!) { if (axes.some((n) => i.nonPlain.includes(n))) return null; out.push(Object.fromEntries(axes.map((n) => [n, shown(i.props[n])]))); }
+  for (const i of s.instances!) { if (axes.some((n) => i.nonPlain.includes(n))) return null; out.push(Object.fromEntries(axes.map((n) => [n, valueOf(s, n, i.props[n])]))); }
   return out;
 };
 const showcase = (s: StoryInput) => (s.instances?.length ?? 0) > 1;
@@ -71,6 +71,12 @@ const stable = (v: unknown): string =>
     : JSON.stringify(v) ?? 'undefined';
 const isPlain = (v: unknown) => v === undefined || ['string', 'number', 'boolean'].includes(typeof v);
 const shown = (v: unknown) => (v === undefined ? '(default)' : String(v));
+/** An unset axis reads the default the stories file documents for it (a quoted string, a boolean or a number, as
+ *  `table.defaultValue` writes it); with none documented it stays `(default)`, never guessed. */
+const valueOf = (s: StoryInput, n: string, v: unknown) => {
+  const d = v === undefined ? /^(?:'(.*)'|"(.*)"|(true|false|-?\d+(?:\.\d+)?))$/.exec(s.argTypes[n]?.defaultValue ?? '') : null;
+  return d ? d[1] ?? d[2] ?? d[3]! : shown(v);
+};
 
 /** Variants shown as separate stories (owner, 2026-11-01, signed entry in GOAL.md):
  *  each story is one variant. Arguments whose plain values differ across the
@@ -89,6 +95,8 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   const seen = new Set<string>(), repeats: string[] = [], drawn: StoryInput[] = [];
   for (const s of stories) {
     if (s.renderFailed || s.ownRender) continue;
+    // Grammar decision 5: a story drawing several instances is a repeat only when its instances add no variant.
+    if (showcase(s)) { drawn.push(s); continue; }
     const key = stable(s.args);
     if (seen.has(key)) repeats.push(s.id); else { seen.add(key); drawn.push(s); }
   }
@@ -103,11 +111,11 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   if (lists.some((l) => stable(l.axes.map((a) => a.name)) !== stable(listedNames)))
     return { status: 'refused', reason: 'variant-matrix-option-axes-differ', count: 0, ...named };
   const names = [...new Set(drawn.flatMap((s) => Object.keys(s.args)))].filter((n) => !listedNames.includes(n)
-    && drawn.every((s) => isPlain(s.args[n])) && new Set(drawn.map((s) => shown(s.args[n]))).size > 1).sort();
+    && drawn.every((s) => isPlain(s.args[n])) && new Set(drawn.map((s) => valueOf(s, n, s.args[n]))).size > 1).sort();
   // A variant is drawn from the first story that shows it, with its listed options set to the variant's values.
   const variants: Array<Record<string, string>> = [], renders: VariantRender[] = [], shownOnce = new Set<string>();
   drawn.forEach((s, i) => {
-    const t = Object.fromEntries(names.map((n) => [n, shown(s.args[n])])), before = variants.length;
+    const t = Object.fromEntries(names.map((n) => [n, valueOf(s, n, s.args[n])])), before = variants.length;
     if (showcase(s)) {
       const own = instanceVariants(s, [...listedNames, ...names]);
       if (!own) { named.instanceUnreadable.push(s.id); return; }
@@ -123,8 +131,9 @@ export function storyVariantMatrix(stories: readonly StoryInput[], declared?: re
   repeats.sort();
   const count = variants.length;
   if (count > VARIANT_CAP) return { status: 'refused', reason: `variant-matrix-over-cap:${count}>${VARIANT_CAP}`, count, ...named };
-  const axes = [...listedNames.map((name) => ({ name, options: [...new Set(lists.flatMap((l) => l.axes.find((a) => a.name === name)!.options))] })),
-    ...names.map((name) => ({ name, options: [...new Set(drawn.map((s) => shown(s.args[name])))] }))].sort((a, b) => a.name.localeCompare(b.name));
+  // An axis's options: its listed values, then every value a variant shows (an instance's own, too), in order.
+  const axes = [...listedNames.map((name) => ({ name, options: [...new Set([...lists.flatMap((l) => l.axes.find((a) => a.name === name)!.options), ...variants.map((v) => v[name]!)])] })),
+    ...names.map((name) => ({ name, options: [...new Set(variants.map((v) => v[name]!))] }))].sort((a, b) => a.name.localeCompare(b.name));
   return { status: 'ok', matrix: { axes, variants }, ...named, renders };
 }
 
@@ -143,7 +152,7 @@ function declaredMatrix(drawn: StoryInput[], axes: readonly string[], repeats: r
   drawn.forEach((s, i) => {
     let own: Array<Record<string, string>> | null = [{}];
     if (showcase(s)) own = instanceVariants(s, axes);
-    else for (const n of axes) own = own!.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: shown(o) })));
+    else for (const n of axes) own = own!.flatMap((v) => (listed[i]!.get(n) ?? [s.args[n]]).map((o) => ({ ...v, [n]: valueOf(s, n, o) })));
     if (!own) { unreadable.push(s.id); return; }
     const before = variants.length;
     own.forEach((v, k) => {
@@ -164,22 +173,6 @@ function declaredMatrix(drawn: StoryInput[], axes: readonly string[], repeats: r
  *  DOM element or text; other React nodes are flattened into their parent. */
 export interface RenderedNode { i?: true; h?: true; c?: RenderedNode[] }
 
-/** Own render, decided from the rendered page (owner condition, 2026-11-01): a
- *  story is one variant only when its root renders exactly one instance of the
- *  component and nothing beside it. Elements that contain the instance
- *  (decorators, theme providers) are allowed; any other element or text is
- *  content beside it. A component nested inside the instance is its own content. */
-export function rendersOneInstance(root: RenderedNode): boolean {
-  let instances = 0, beside = 0;
-  const holdsInstance = (n: RenderedNode): boolean => {
-    if (n.i) { instances++; return true; }
-    const holds = (n.c ?? []).map(holdsInstance).some(Boolean);
-    if (n.h && !holds) beside++;
-    return holds;
-  };
-  holdsInstance(root);
-  return instances === 1 && beside === 0;
-}
 
 const tuple = (v: Record<string, string>, names: string[]) => names.map((n) => `${n}=${v[n] ?? ''}`).join(', ');
 
