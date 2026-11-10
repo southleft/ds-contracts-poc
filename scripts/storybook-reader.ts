@@ -8,8 +8,9 @@
  * grammar classifier, and holds all of its stories against the variant matrix
  * rule, where each story is one variant (owner, 2026-11-01). Own render is
  * decided from the rendered page: each story is rendered through Storybook's
- * own channel and React's tree is held against rendersOneInstance; a story that
- * fails to render is named apart (an instrument fault) and never counted.
+ * own channel, and one that draws no instance of its own component in React's
+ * tree is named; each instance it draws is a variant (grammar decision 5). A story
+ * that fails to render is named apart (an instrument fault) and never counted.
  * Part 2b then renders every expected variant (its story, with listed options
  * set through Storybook's own args channel) and keeps a PNG of the single
  * instance, alone (ancestor backgrounds cleared, its painted extent), as the reference image (the library's own render, never the
@@ -33,11 +34,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { classifyStoryArgs, type GrammarVerdict, type StoryArgType } from '../extract/figma/grammar.js';
-import { rendersOneInstance, storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
+import { storyVariantMatrix, type RenderedNode, type VariantRender } from '../extract/figma/variant-matrix.js';
 import type { Browser, CDPSession, JSHandle } from 'playwright-core';
 import { PNG } from 'pngjs';
 import type { FontFace } from './font-preflight.js';
-import { domContentOf, type DomContent } from './design-consumer-content.js';
+import { domContentOf, domContentOfRoot, type DomContent } from './design-consumer-content.js';
 import type { ConsumerFrame } from './design-consumer-framing-v2.js';
 import { captureSubjectWithoutBackdrop } from './design-consumer-observed-capture.js';
 import { EMPTY_BOX } from './design-consumer-paint-extent.js';
@@ -49,12 +50,14 @@ export interface LoadedStory { id: string; title: string; name: string; argTypes
   /** The reader could not render the story (an instrument fault, named apart). */
   renderFailed: boolean;
   /** The grammar's layout refusals in the story's own render (LAYOUT_FLAGS): the reason and where it sits. */
-  layout?: Array<[string, string]> }
+  layout?: Array<[string, string]>;
+  /** Grammar decision 5: when the story draws several instances of its own component, each one's own props. */
+  instances?: Array<{ props: Record<string, string | number | boolean>; nonPlain: string[] }> }
 /** One expected variant's reference: the story and arguments it renders from, then its PNG and box, or why it has none. */
 export interface VariantReference extends VariantRender {
   /** The variant's value on each axis of the matrix rule: what a written Figma variant is paired by. */
   variant: Record<string, string>; png?: string; sha256?: string; box?: Box; faces?: FontFace[];
-  problem?: 'reference-render-failed' | 'reference-not-one-instance' | 'reference-empty' | 'reference-capture-unqualified';
+  problem?: 'reference-render-failed' | 'reference-no-instance' | 'reference-empty' | 'reference-capture-unqualified';
   /** Why the instance could not be captured alone (the Figma to React check's own capture refusal, or not one element). */
   captureRefused?: string;
   /** The image's frame, recorded as the Figma to React check records its own side: layout box, capture box, painted extent. */
@@ -67,10 +70,10 @@ export interface StoryComponent {
   /** Each layout refusal behind `grammar`: the story, the reason and the element (tag and classes). */
   layout?: Array<{ story: string; reason: string; at: string }>;
   /** The variant matrix rule, stories as variants (GOAL.md signed entry of 2026-11-01). */
-  matrix: { status: 'ok'; axes: string[]; variants: number } | { status: 'refused'; reason: string };
+  matrix: { status: 'ok'; axes: string[]; variants: number; defaultUndocumented?: string[] } | { status: 'refused'; reason: string };
   /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render,
    *  and (for a declared component) the stories its declaration leaves out, each with its fixed reason. */
-  ownRender: string[]; repeats: string[]; renderFailed: string[]; leftOut?: Array<{ story: string; reason: string }>;
+  ownRender: string[]; repeats: string[]; renderFailed: string[]; instanceUnreadable?: string[]; leftOut?: Array<{ story: string; reason: string }>;
   /** Set on a title the profile excludes: its reason. Its verdict and matrix are what it would have been. */
   excludedBy?: string;
   /** In the matrix's variant order; every face the references' text renders with, for the font preflight. */
@@ -132,12 +135,14 @@ export function readStories(stories: readonly LoadedStory[], declared: readonly 
     const left = leftBy.get(title) ?? [];
     const first = list[0]!;
     const argTypes = Object.fromEntries(Object.entries(first.argTypes).sort(([a], [b]) => a.localeCompare(b)));
-    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed })), axesOf.get(title));
+    const m = storyVariantMatrix(list.map((s) => ({ id: s.id, args: s.args ?? {}, argTypes: s.argTypes, ownRender: s.ownRender, renderFailed: s.renderFailed, instances: s.instances })), axesOf.get(title));
     const layout = list.flatMap((s) => (s.layout ?? []).map(([reason, at]) => ({ story: s.id, reason, at })));
+    // Named, never counted: each axis where an unset value has no documented default and reads `(default)`.
+    const undocumented = m.status === 'ok' ? m.matrix.axes.filter((a) => a.options.includes('(default)')).map((a) => a.name) : [];
     const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
     return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
-      matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}),
+      matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length, ...(undocumented.length ? { defaultUndocumented: undocumented } : {}) } : { status: 'refused' as const, reason: m.reason },
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(m.instanceUnreadable.length ? { instanceUnreadable: m.instanceUnreadable } : {}), ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}),
       references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
@@ -199,8 +204,10 @@ export const LAYOUT_FLAGS = `((tops) => {
 // (instances of the story's component by type; DOM elements and text), and for a single instance return
 // its box, outward to whole pixels; its text elements are marked with their weight and style for the font
 // lookup. A string, not a function: the TypeScript loader would wrap named helpers in code the page lacks.
-// Exported so the React to Figma converter renders each story exactly as the reader does.
-export const SHOW = `(async ([id, args]) => {
+// Exported so the React to Figma converter renders each story exactly as the reader does. `own`, the component a
+// profile assigns the story to (decision 4), names one of the stories file's own `subcomponents`: matched by that
+// reference (grammar decision 5), else by the file's `component`.
+export const SHOW = `(async ([id, args, own]) => {
   const store = window.__STORYBOOK_PREVIEW__.storyStoreValue, channel = window.__STORYBOOK_ADDONS_CHANNEL__;
   const wait = (event, emit) => new Promise((resolve) => {
     const handlers = [[event, (p) => { if ((p?.storyId ?? p) === id) done('rendered'); }], ['storyUnchanged', (p) => { if (p === id) done('rendered'); }],
@@ -215,22 +222,27 @@ export const SHOW = `(async ([id, args]) => {
   if (outcome === 'rendered' && Object.keys(args).length) outcome = await wait('storyArgsUpdated', () => channel.emit('updateStoryArgs', { storyId: id, updatedArgs: args }));
   await document.fonts.ready;
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-  const component = (await store.loadCSFFileByStoryId(id)).meta.component;
+  const meta = (await store.loadCSFFileByStoryId(id)).meta, component = (own && meta.subcomponents?.[own]) || meta.component;
   const same = (t) => !!t && !!component && (t === component || t.type === component || t.render === component || t === component.type || t === component.render);
-  let instance = null;
-  // The outermost instance is the one framed (checked before its children: the component may nest itself).
-  const build = (f) => { const nodes = []; for (let c = f; c; c = c.sibling) { const hit = same(c.type) || same(c.elementType);
+  let instance = null; const outermost = [];
+  // The outermost instance is the one framed (checked before its children: the component may nest itself). Every
+  // outermost instance is kept, with its own props, for a story that draws several (grammar decision 5).
+  const build = (f, inside) => { const nodes = []; for (let c = f; c; c = c.sibling) { const hit = same(c.type) || same(c.elementType);
     if (hit) instance = instance ?? c;
-    const kids = build(c.child);
+    if (hit && !inside) outermost.push(c);
+    const kids = build(c.child, inside || hit);
     if (hit) nodes.push({ i: true });
     else if (typeof c.type === 'string' || c.tag === 6) nodes.push(kids.length ? { h: true, c: kids } : { h: true });
     else nodes.push(...kids); } return nodes; };
   const root = document.getElementById('storybook-root'), key = Object.keys(root).find((k) => k.startsWith('__reactContainer$'));
   const live = key ? (root[key].stateNode?.current ?? root[key]) : null;
   if (outcome !== 'rendered' || !live) return { tree: null };
-  const tree = { c: build(live.child) };
-  const elements = [], top = (f) => { for (let c = f; c; c = c.sibling) { if (c.stateNode instanceof Element) elements.push(c.stateNode); else top(c.child); } };
-  if (instance) top(instance.child);
+  const tree = { c: build(live.child, false) };
+  const tops = (inst) => { const out = [], top = (f) => { for (let c = f; c; c = c.sibling) { if (c.stateNode instanceof Element) out.push(c.stateNode); else top(c.child); } }; top(inst.child); return out; };
+  const elements = instance ? tops(instance) : [];
+  window.__dsReaderInstances = outermost.map((c) => { const props = {}, nonPlain = [];
+    for (const [k, v] of Object.entries(c.memoizedProps ?? {})) if (v !== undefined) { if (['string', 'number', 'boolean'].includes(typeof v)) props[k] = v; else nonPlain.push(k); }
+    return { tops: tops(c), props, nonPlain }; });
   window.__dsReaderContainer = ${INSTANCE_CONTAINER}(elements); window.__dsReaderTops = elements;
   const rects = elements.map((e) => e.getBoundingClientRect()).filter((r) => r.width && r.height);
   if (!rects.length) return { tree };
@@ -241,6 +253,26 @@ export const SHOW = `(async ([id, args]) => {
   const x = Math.floor(Math.min(...rects.map((r) => r.left)) + scrollX), y = Math.floor(Math.min(...rects.map((r) => r.top)) + scrollY);
   return { tree, box: { x, y, width: Math.ceil(Math.max(...rects.map((r) => r.right)) + scrollX) - x, height: Math.ceil(Math.max(...rects.map((r) => r.bottom)) + scrollY) - y } };
 })`;
+
+/** Grammar decision 5: make instance `k` of the rendered story the subject (its top elements, container and text
+ *  marks, as SHOW does for the first) and return its box, or null when the story draws no such instance. */
+export const SELECT_INSTANCE = `((k) => { const inst = (window.__dsReaderInstances ?? [])[k]; if (!inst) return null;
+  const elements = inst.tops; window.__dsReaderTops = elements; window.__dsReaderContainer = ${INSTANCE_CONTAINER}(elements);
+  for (const old of document.querySelectorAll('[data-ds-reader-text]')) old.removeAttribute('data-ds-reader-text');
+  for (const e of elements) for (const t of [e, ...e.querySelectorAll('*')])
+    if ([...t.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) { const cs = getComputedStyle(t);
+      t.setAttribute('data-ds-reader-text', cs.fontWeight + ' ' + (/italic|oblique/.test(cs.fontStyle) ? 'italic' : 'normal')); }
+  const rects = elements.map((e) => e.getBoundingClientRect()).filter((r) => r.width && r.height); if (!rects.length) return undefined;
+  const x = Math.floor(Math.min(...rects.map((r) => r.left)) + scrollX), y = Math.floor(Math.min(...rects.map((r) => r.top)) + scrollY);
+  return { x, y, width: Math.ceil(Math.max(...rects.map((r) => r.right)) + scrollX) - x, height: Math.ceil(Math.max(...rects.map((r) => r.bottom)) + scrollY) - y }; })`;
+/** Hide (true) or restore (false) everything the story draws besides the subject: other instances and story context
+ *  (a trigger, a label) are never part of a variant. Hidden by visibility, so nothing moves; ancestors stay visible. */
+export const HIDE_CONTEXT = `((on) => { if (!on) { for (const [e, v] of window.__dsReaderHidden ?? []) v === null ? e.style.removeProperty('visibility') : e.style.setProperty('visibility', v[0], v[1]);
+    window.__dsReaderHidden = []; return 0; }
+  const tops = window.__dsReaderTops ?? [], hidden = [];
+  for (const e of document.body.querySelectorAll('*')) if (!tops.some((t) => t === e || t.contains(e) || e.contains(t))) {
+    const v = e.style.getPropertyValue('visibility'); hidden.push([e, v ? [v, e.style.getPropertyPriority('visibility')] : null]); e.style.setProperty('visibility', 'hidden', 'important'); }
+  window.__dsReaderHidden = hidden; return hidden.length; })`;
 
 const byFace = (a: FontFace, b: FontFace) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style);
 /** The platform fonts Chromium drew the marked text with (fallbacks included), once each: the faces Figma must also have. */
@@ -413,15 +445,20 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       for (const id of storyIds) {
         const s = await store.loadStory({ storyId: id });
         out.push({ id, title: s.title, name: s.name, args: plain(s.initialArgs) ?? {}, ownRender: true, renderFailed: false,
-          argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined }])) });
+          argTypes: Object.fromEntries(Object.entries(s.argTypes).map(([k, a]) => [k, { control: plain(a.control) ?? undefined, options: plain(a.options) ?? undefined, type: plain(a.type) ?? undefined, defaultValue: plain(a.table?.defaultValue?.summary) ?? undefined }])) });
       }
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
     type Shown = { tree: RenderedNode | null; box?: Box };
-    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`) as Promise<Shown>;
+    const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d.name] as const)));
+    const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
-    for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree; s.ownRender = !!tree && !rendersOneInstance(tree);
-      if (tree && !s.ownRender) s.layout = await page.evaluate(`${LAYOUT_FLAGS}(window.__dsReaderTops)`) as Array<[string, string]>; }
+    // Grammar decision 5: a story counts when it draws one or more instances of its own component, alone or beside other
+    // content; one that draws none is refused by name (`ownRender`). Several instances: each one's own props are kept.
+    for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree;
+      const n = tree ? await page.evaluate('window.__dsReaderInstances.length') as number : 0; s.ownRender = !!tree && n === 0;
+      if (n > 1) s.instances = await page.evaluate('window.__dsReaderInstances.map(({ props, nonPlain }) => ({ props, nonPlain }))') as LoadedStory['instances'];
+      if (n) s.layout = await page.evaluate(`${LAYOUT_FLAGS}(window.__dsReaderInstances.flatMap((i) => i.tops))`) as Array<[string, string]>; }
     const renderers = await page.evaluate(`[...new Set([...window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.values()].map((r) => r.rendererPackageName + ' ' + r.version))]`) as string[];
     if (renderers.length !== 1 || !REACT_TESTED.test(renderers[0]!.split(' ')[1] ?? ''))
       throw Error(`storybook-reader: React renderer ${renderers.join(', ') || 'not found'} is outside the tested 18.3 and 19.x range`);
@@ -438,10 +475,14 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     for (const c of components) {
       const faces = new Map<string, FontFace>();
       for (const [i, ref] of c.references.entries()) {
-        const { tree, box } = await show(ref.storyId, ref.args);
+        const { tree } = await show(ref.storyId, ref.args);
+        const box = tree ? await page.evaluate(`${SELECT_INSTANCE}(${ref.instance ?? 0})`) as Box | null | undefined : undefined;
         // An instance that draws nothing (an empty layout, zero size) has no image to compare; it is named apart.
-        const problem = !tree ? 'reference-render-failed' : !rendersOneInstance(tree) ? 'reference-not-one-instance' : !box ? 'reference-empty' : undefined;
-        if (problem) { ref.problem = problem; continue; }
+        const problem = !tree ? 'reference-render-failed' : box === null ? 'reference-no-instance' : !box ? 'reference-empty' : undefined;
+        if (problem || !box) { ref.problem = problem; continue; }
+        // Grammar decision 5: the instance alone. Other instances and story context are hidden while it is read.
+        await page.evaluate(`${HIDE_CONTEXT}(true)`);
+        try {
         // The instance alone, captured as the Figma to React check captures its own side: ancestor background
         // colors cleared and restored, the image clipped to the paint extent Chromium's layers report. Playwright
         // hides the caret by setting and clearing each input's caret color, which leaves an empty style attribute;
@@ -455,11 +496,14 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
           if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), captured.bytes);
         }
         ref.faces = await drawnFaces(cdp);
-        // Read after the capture, so the image is never touched.
+        // Read after the capture, so the image is never touched. An instance that shares its parent with context or other
+        // instances is read from its own single top element (its root), as the container would have given it.
         const container = (await page.evaluateHandle('window.__dsReaderContainer') as JSHandle<Element | null>).asElement();
-        if (container) { ref.content = await container.evaluate(domContentOf, true); await paintRuns(cdp, ref.content); }
+        const single = container ? null : (await page.evaluateHandle('window.__dsReaderTops.length === 1 ? window.__dsReaderTops[0] : null') as JSHandle<Element | null>).asElement();
+        if (container ?? single) { ref.content = await (container ?? single)!.evaluate(container ? domContentOf : domContentOfRoot, true); await paintRuns(cdp, ref.content!); }
         else ref.contentProblem = 'reference-content-not-one-container';
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
+        } finally { await page.evaluate(`${HIDE_CONTEXT}(false)`); }
       }
       c.faces = [...faces.values()].sort(byFace);
     }
