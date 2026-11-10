@@ -119,10 +119,15 @@ baseline and the fast lane.
 ## Step 1 checklist (2026-11-10 to 2026-11-14): Carbon
 
 Owner:
+- [x] Carbon's Figma kit is its public sets, before 2026-11-20 (owner, 2026-11-10, "Public
+      only"): the internal marker is profile data (`figmaInternal`, the "_" prefix), never in
+      code; an internal set is in no number, coverage included, and is counted beside the
+      reading (the scorer, PR #370); the draw takes public sets only.
 - [ ] Draw the held-out third of Carbon's in-grammar component sets in each direction,
-      from untouched components only (or ask a sealing session to), a third of the
-      skeleton-only group and a third of the rest separately (2026-11-10), and commit
-      SHA-256(salt + held-out list).
+      from untouched components only (or ask a sealing session to), a third of each
+      group separately (the rest, icon-only, glyph-only, skeleton-only; 2026-11-10), from
+      Carbon's public Figma sets only (2026-11-10, "Public only"), and commit
+      SHA-256(salt + held-out list), with the Figma scope "public".
 
 Reviewer session (owner, 2026-11-09):
 - [ ] Review and commit profile v0 before any run that counts.
