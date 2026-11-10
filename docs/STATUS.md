@@ -87,6 +87,11 @@ baseline and the fast lane.
       stays out (its icon stories' own option lists are 1,008 and 504) and the feature-flag
       FileUploader gives no variants (own renders); PasswordInput (96) and MultiSelect (96)
       come in. Button comes in at 84 only through a declaration.
+- [x] A story that adds no variant is named as a repeat, never dropped silently: under
+      declared axes (it differs only in undeclared values, such as IconButton's badge
+      story) and without them (it differs only in an object argument, such as a
+      with-ai-label story); no verdict or count moves. The grammar-only output lists
+      each component's repeats.
 - [x] A profile's `excluded` titles, with fixed reasons (`feature-flag-copy`, `deprecated`,
       `preview`, `non-visual-utility`), kept in the denominator in their own column
       (reviewer, 2026-11-10): the reader refuses any other reason, an unknown title, or a

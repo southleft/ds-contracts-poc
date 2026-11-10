@@ -97,4 +97,10 @@ test('grammar decision 4: declared axes are the variant axes; a playground contr
   assert.deepEqual(r.renders.slice(0,2),[{storyId:'default',args:{size:'sm',loadingStatus:'inactive'}},{storyId:'default',args:{size:'lg',loadingStatus:'inactive'}}]);
   assert.deepEqual(r.renders[4],{storyId:'passive',args:{size:'sm'}});
   assert.equal((storyVariantMatrix(stories,['size','kind']) as {reason:string}).reason,'declaration-axis-unknown:kind');
+  // A story that differs only in an undeclared value (a badge) adds no variant: it is named, never dropped silently.
+  const badge = storyVariantMatrix([s('plain',{},{argTypes:{size:{options:['sm','lg']}}}),s('badge',{badgeCount:4},{argTypes:{size:{options:['sm','lg']}}})],['size']);
+  assert.deepEqual([(badge as {matrix:VariantMatrix}).matrix.variants.length,badge.repeats],[2,['badge']]);
+  // The same without a declaration: a story that differs only in an object argument is named too.
+  const decorated = storyVariantMatrix([s('plain',{},{argTypes:{size:{options:['sm','lg']}}}),s('ai',{decorator:{type:'AILabel'}},{argTypes:{size:{options:['sm','lg']}}})]);
+  assert.deepEqual([(decorated as {matrix:VariantMatrix}).matrix.variants.length,decorated.repeats],[2,['ai']]);
 });
