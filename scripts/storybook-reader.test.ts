@@ -44,6 +44,16 @@ test('grammar decision 4: a profile assigns stories to components and names thei
   assert.throws(() => readStories(tags, [{name: 'A', stories: ['tag--snapshot'], axes: []}, {name: 'B', stories: ['tag--snapshot'], axes: []}]), /profile-story-twice:tag--snapshot/);
 });
 
+test('a profile may exclude a whole title only for a fixed reason; it stays visible, with what it would have been', () => {
+  const list = [story('box--default', 'Foundations/Box', {}), story('flag--on', 'Components/Tag/Feature Flag', {size: {control: 'select', options: ['sm', 'md']}})];
+  const [flag, box] = readStories(list, [], [{title: 'Components/Tag/Feature Flag', reason: 'feature-flag-copy'}]);
+  assert.equal(box!.excludedBy, undefined);
+  assert.deepEqual([flag!.title, flag!.excludedBy, flag!.matrix], ['Components/Tag/Feature Flag', 'feature-flag-copy', {status: 'ok', axes: ['size'], variants: 2}]);
+  assert.throws(() => readStories(list, [], [{title: 'Components/Tag/Feature Flag', reason: 'too-hard'}]), /profile-excluded-reason:too-hard/);
+  assert.throws(() => readStories(list, [], [{title: 'Components/Nope', reason: 'deprecated'}]), /profile-title-unknown:Components\/Nope/);
+  assert.throws(() => readStories(list, [{name: 'Flag', stories: ['flag--on'], axes: []}], [{title: 'Components/Tag/Feature Flag', reason: 'preview'}]), /profile-title-excluded-and-declared/);
+});
+
 import {storyFontPreflight} from './font-preflight.js';
 test('React to Figma font preflight: each face a variant is drawn with is held against Figma\'s font list, by name', () => {
   const sans = (weight: number, style: 'normal' | 'italic' = 'normal') => ({family: 'Arimo', weight, style});

@@ -70,6 +70,8 @@ export interface StoryComponent {
   /** Named, never counted: own-render stories, repeats of an earlier story's state, stories the reader could not render,
    *  and (for a declared component) the stories its declaration leaves out, each with its fixed reason. */
   ownRender: string[]; repeats: string[]; renderFailed: string[]; leftOut?: Array<{ story: string; reason: string }>;
+  /** Set on a title the profile excludes: its reason. Its verdict and matrix are what it would have been. */
+  excludedBy?: string;
   /** In the matrix's variant order; every face the references' text renders with, for the font preflight. */
   references: VariantReference[]; faces: FontFace[];
 }
@@ -80,14 +82,23 @@ export interface StoryComponent {
  *  counted as that component's coverage loss. */
 export const LEFT_OUT_REASONS = ['test', 'playground', 'repeat', 'left-out-variant'] as const;
 export interface ComponentDeclaration { name: string; stories: string[]; axes: string[]; leftOut?: Array<{ story: string; reason: string }> }
+/** A whole title the profile assigns to no component, with a fixed reason (reviewer, 2026-11-10). It stays in the kit's
+ *  count, in its own "excluded by profile" column, with what it would have been; nothing hard, failing or out of grammar. */
+export const EXCLUDED_REASONS = ['feature-flag-copy', 'deprecated', 'preview', 'non-visual-utility'] as const;
+export interface ExcludedTitle { title: string; reason: string }
 
-export function readStories(stories: readonly LoadedStory[], declared: readonly ComponentDeclaration[] = []): StoryComponent[] {
-  const byTitle = new Map<string, LoadedStory[]>(), axesOf = new Map<string, string[]>(), taken = new Set<string>();
+export function readStories(stories: readonly LoadedStory[], declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = []): StoryComponent[] {
+  const byTitle = new Map<string, LoadedStory[]>(), axesOf = new Map<string, string[]>(), taken = new Set<string>(), off = new Map<string, string>();
+  for (const e of excluded) {
+    if (!stories.some((s) => s.title === e.title)) fail(`profile-title-unknown:${e.title}`);
+    if (!(EXCLUDED_REASONS as readonly string[]).includes(e.reason)) fail(`profile-excluded-reason:${e.reason}:${e.title}`);
+    off.set(e.title, e.reason);
+  }
   // A declaration may only select stories the Storybook has, each for one component; anything else stops the run, by name.
   const reasons = new Map<string, string>(), leftBy = new Map<string, Array<{ story: string; reason: string }>>();
   for (const d of declared) {
     const list = d.stories.map((id) => stories.find((s) => s.id === id) ?? fail(`profile-story-unknown:${id}`));
-    for (const s of list) { if (taken.has(s.id)) fail(`profile-story-twice:${s.id}`); taken.add(s.id); }
+    for (const s of list) { if (taken.has(s.id)) fail(`profile-story-twice:${s.id}`); if (off.has(s.title)) fail(`profile-title-excluded-and-declared:${s.title}`); taken.add(s.id); }
     for (const l of d.leftOut ?? []) {
       if (!stories.some((s) => s.id === l.story)) fail(`profile-story-unknown:${l.story}`);
       if (!(LEFT_OUT_REASONS as readonly string[]).includes(l.reason)) fail(`profile-left-out-reason:${l.reason}:${l.story}`);
@@ -111,7 +122,7 @@ export function readStories(stories: readonly LoadedStory[], declared: readonly 
     const args = classifyStoryArgs(argTypes, list), reasons = [...new Set([...args.reasons, ...layout.map((l) => l.reason)])].sort();
     return { title, stories: list.length, storyId: first.id, grammar: { grammar: reasons.length ? 'out' as const : 'in' as const, reasons }, layout,
       matrix: m.status === 'ok' ? { status: 'ok' as const, axes: m.matrix.axes.map((a) => a.name), variants: m.matrix.variants.length } : { status: 'refused' as const, reason: m.reason },
-      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(left.length ? { leftOut: left } : {}),
+      ownRender: m.ownRender, repeats: m.repeats, renderFailed: m.renderFailed, ...(left.length ? { leftOut: left } : {}), ...(off.has(title) ? { excludedBy: off.get(title)! } : {}),
       references: m.status === 'ok' ? m.renders.map((r, i) => ({ ...r, variant: m.matrix.variants[i]! })) : [], faces: [] };
   }).sort((a, b) => a.title.localeCompare(b.title));
 }
@@ -358,7 +369,7 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = []): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = []): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
@@ -402,8 +413,8 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     environment.react = renderers[0];
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     // --grammar-only: the grammar classifier and the matrix rule alone (no reference is rendered or kept).
-    if (grammarOnly) return { environment, stories, components: readStories(stories, declared) };
-    const components = readStories(stories, declared), cdp = await page.context().newCDPSession(page);
+    if (grammarOnly) return { environment, stories, components: readStories(stories, declared, excluded) };
+    const all = readStories(stories, declared, excluded), components = all.filter((c) => !c.excludedBy), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
     // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
@@ -437,7 +448,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       }
       c.faces = [...faces.values()].sort(byFace);
     }
-    return { environment, stories, components };
+    return { environment, stories, components: [...components, ...all.filter((c) => c.excludedBy)] };
   } finally { await browser.close(); stop(); }
 }
 
@@ -447,17 +458,23 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>]'); process.exit(2); }
   const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile');
   // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
-  const declared = profile ? (JSON.parse(readFileSync(profile, 'utf8')) as { components?: ComponentDeclaration[] }).components ?? [] : [];
+  const read = profile ? JSON.parse(readFileSync(profile, 'utf8')) as { components?: ComponentDeclaration[]; excluded?: ExcludedTitle[] } : {};
+  const declared = read.components ?? [], excludedTitles = read.excluded ?? [];
   mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
-  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared).then(({ environment, stories, components }) => {
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles).then(({ environment, stories, components: all }) => {
+    // Excluded titles never become components, and are reported apart with what they would have been.
+    const components = all.filter((c) => !c.excludedBy), excluded = all.filter((c) => c.excludedBy)
+      .map(({ title, stories: n, grammar, matrix, excludedBy }) => ({ title, reason: excludedBy!, stories: n, grammar, matrix }));
     // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
     if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
       stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
       components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut }) => ({ title, stories: n, grammar, layout, matrix, leftOut,
-        leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })) }, null, 2) + '\n');
-    else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components }, null, 2) + '\n');
-    const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length;
-    console.log(`${components.length} component(s), ${stories.length} stories: ${inGrammar} in grammar; ` +
+        leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })), excluded }, null, 2) + '\n');
+    else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components, excluded }, null, 2) + '\n');
+    const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
+    // Coverage never shrinks the kit: the headline counts excluded titles in the denominator; the other figure does not.
+    if (excluded.length) console.log(`coverage ${inGrammar}/${kit} with the ${excluded.length} title(s) excluded by profile counted (headline), ${inGrammar}/${components.length} without`);
+    console.log(`${components.length} component(s), ${excluded.length} excluded by profile, ${stories.length} stories: ${inGrammar} in grammar; ` +
       `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with more than one variant, ` +
       `${components.reduce((n, c) => n + (c.matrix.status === 'ok' ? c.matrix.variants : 0), 0)} variants, ` +
       `${components.filter((c) => c.matrix.status === 'refused').length} refused → ${path.join(out, grammarOnly ? 'grammar.json' : 'stories.json')}`);
