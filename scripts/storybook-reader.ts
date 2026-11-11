@@ -112,6 +112,11 @@ export const SystemProfile = z.object({
   components: z.array(z.object({ name: z.string(), stories: z.array(z.string()).min(1), axes: z.array(z.string()),
     leftOut: z.array(z.object({ story: z.string(), reason: z.enum(LEFT_OUT_REASONS), adds: z.string().optional() })).optional(), skeleton: z.literal(true).optional(), subcomponent: z.literal(true).optional() }).strict()),
   /** Skeleton-only Figma sets (2026-11-10): the variant value that marks a skeleton, and sets the kit draws as skeletons. */
+  /** Engine conventions this profile switches on (GOAL.md, 2026-11-09: a general engine rule a profile turns on), each named
+   *  for what it does, never for a system or a component. The converter holds the names it knows and refuses an unknown
+   *  one by name, so a new convention lands converter first, then in a profile: never one PR on both sides. Here: well
+   *  formed, each at most once (reviewer message, 2026-11-11). */
+  conventions: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).refine((c) => new Set(c).size === c.length, 'profile-convention-twice').optional(),
   /** Internal Figma sets (entry of 2026-11-10): the name prefix that marks one; out of every number, counted beside. */
   figmaInternal: z.object({ namePrefix: z.string().min(1) }).strict().optional(),
   figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
@@ -456,7 +461,10 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
   // read; nothing else is, excluded titles included. With a profile, the listed declarations' stories (their left-out
   // stories are loaded for their metadata only, never shown); without one, the stories whose title is listed.
   const listed = only && declared.length ? declared.filter((d) => only.has(d.name)) : declared;
-  for (const n of only ?? []) if (declared.length ? !listed.some((d) => d.name === n) : !every.some((e) => e.title === n)) throw Error(`storybook-reader: --only names no component: ${n}`);
+  for (const n of only ?? []) {
+    if (declared.length ? !listed.some((d) => d.name === n) : !every.some((e) => e.title === n)) throw Error(`storybook-reader: --only names no component: ${n}`);
+    if (excluded.some((x) => x.title === n)) throw Error(`profile-title-excluded-and-declared:${n}`);
+  }
   const ids = !only ? every.map((e) => e.id) : declared.length ? listed.flatMap((d) => [...d.stories, ...(d.leftOut ?? []).map((l) => l.story)]) : every.filter((e) => only.has(e.title ?? '')).map((e) => e.id);
   const shownIds = only && new Set(declared.length ? listed.flatMap((d) => d.stories) : ids);
   // Before the page opens, every listed story is checked as the full pass checks it: it is in index.json, and its title
@@ -495,14 +503,18 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     // The page opened on a story, which renders on load. Pass 1 starts once that render has settled: with --only, few
     // stories load, so pass 1 could otherwise ask for that story while it still renders and read it as failed. After a
     // full load the render has long settled, so this returns at once.
-    await page.waitForFunction(() => { const r = (window as any).__STORYBOOK_PREVIEW__?.currentRender;
-      return !r || ['completed', 'finished', 'aborted', 'errored'].includes(r.phase); }, null, { timeout: 60_000 }).catch(() => undefined);
+    // That render is the first story's pass-1 read, so a first story whose render threw, or never settled, is failed.
+    const settled = await page.waitForFunction(() => { const r = (window as any).__STORYBOOK_PREVIEW__?.currentRender;
+      return !r ? 'none' : ['completed', 'finished', 'aborted', 'errored'].includes(r.phase) ? r.phase : false; }, null, { timeout: 60_000 })
+      .then((h) => h.jsonValue() as Promise<string>, () => 'timeout');
+    if (settled === 'timeout') console.error(`storybook-reader: the first story did not settle within 60 s and is read as failed: ${ids[0]}`);
+    const firstFailed = ['errored', 'aborted', 'timeout'].includes(settled);
     const own = new Map(listed.flatMap((d) => d.stories.map((id) => [id, d] as const)));
     const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)?.name, !!own.get(id)?.subcomponent])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
     // Grammar decision 5: a story counts when it draws one or more instances of its own component, alone or beside other
     // content; one that draws none is refused by name (`ownRender`). Several instances: each one's own props are kept.
-    for (const s of stories) { if (shownIds && !shownIds.has(s.id)) continue; const { tree } = await show(s.id); s.renderFailed = !tree;
+    for (const s of stories) { if (shownIds && !shownIds.has(s.id)) continue; const shown = await show(s.id), tree = firstFailed && s.id === ids[0] ? null : shown.tree; s.renderFailed = !tree;
       const n = tree ? await page.evaluate('window.__dsReaderInstances.length') as number : 0; s.ownRender = !!tree && n === 0;
       if (n > 1) s.instances = await page.evaluate('window.__dsReaderInstances.map(({ props, nonPlain }) => ({ props, nonPlain }))') as LoadedStory['instances'];
       if (n) s.layout = await page.evaluate(`${LAYOUT_FLAGS}(window.__dsReaderInstances.flatMap((i) => i.tops))`) as Array<[string, string]>; }
@@ -516,13 +528,13 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     // --only: pass 1 above showed only the listed components' stories, and readStories sees only their declarations, so
     // no other story, excluded title or failure text naming one enters this run.
     const all = readStories(stories, listed, only ? [] : excluded);
-    for (const n of only ?? []) if (!all.some((c) => c.title === n && !c.excludedBy)) throw Error(`storybook-reader: --only names no component: ${n}`);
     const components = all.filter((c) => !c.excludedBy && (!only || only.has(c.title))), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
     // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
     // two runs differ. Pass 1 reads only React's tree.
     await page.evaluate(`(() => { const s = document.createElement('style'); s.id = 'ds-reader-still'; s.textContent = ${JSON.stringify(NO_MOTION)}; document.head.appendChild(s); })()`);
+    if (shotsDir) mkdirSync(shotsDir, { recursive: true });
     for (const c of components) {
       const faces = new Map<string, FontFace>();
       for (const [i, ref] of c.references.entries()) {
@@ -590,8 +602,9 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
   const read = profile ? readProfile(profile) : undefined;
   const declared = read?.components ?? [], excludedTitles = read?.excluded ?? [];
-  mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
+  // The out folder is made only once every refusal has passed: the references folder right before pass 2 writes to it.
   loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, indexSha256, stories, components: all }) => {
+    mkdirSync(out, { recursive: true });
     // Excluded titles never become components, and are reported apart with what they would have been.
     const components = all.filter((c) => !c.excludedBy), excluded = all.filter((c) => c.excludedBy)
       .map(({ title, stories: n, grammar, matrix, excludedBy }) => ({ title, reason: excludedBy!, stories: n, grammar, matrix }));
@@ -608,7 +621,7 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
     // Coverage never shrinks the kit: the headline counts excluded titles in the denominator; the other figure does not.
     if (excluded.length) console.log(`coverage ${inGrammar}/${kit} with the ${excluded.length} title(s) excluded by profile counted (headline), ${inGrammar}/${components.length} without`);
-    console.log(`${components.length} component(s), ${excluded.length} excluded by profile, ${stories.length} stories: ${inGrammar} in grammar; ` +
+    console.log(`${components.length} component(s), ${only ? `${excludedTitles.length} excluded by profile (from the profile; not loaded)` : `${excluded.length} excluded by profile`}, ${stories.length} stories: ${inGrammar} in grammar; ` +
       `${components.filter((c) => c.matrix.status === 'ok' && c.matrix.variants > 1).length} with more than one variant, ` +
       `${components.reduce((n, c) => n + (c.matrix.status === 'ok' ? c.matrix.variants : 0), 0)} variants, ` +
       `${components.filter((c) => c.matrix.status === 'refused').length} refused → ${path.join(out, grammarOnly ? 'grammar.json' : 'stories.json')}`);
