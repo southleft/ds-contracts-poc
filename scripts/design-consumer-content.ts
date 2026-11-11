@@ -10,7 +10,8 @@
  *
  *   text  every TEXT node the Figma variant DRAWS (visible, non-zero opacity,
  *         a rendered box, a visible fill or stroke, non-empty characters) must
- *         appear in the rendered React text: the cell's innerText, input values
+ *         appear in the rendered React text: the cell's innerText (a closed
+ *         native select's drawn label in place of its options), input values
  *         and placeholders, string ::before/::after content and SVG text.
  *         Compared case-insensitively with all whitespace removed (CSS
  *         text-transform and line wrapping change neither), and counted: a
@@ -428,6 +429,10 @@ export const domContentOf = new Function('el', 'mark', 'self', `
   const paintsBox = (s) => alpha(s.backgroundColor) > 0 || s.boxShadow !== 'none' ||
     ['Top', 'Right', 'Bottom', 'Left'].some(side => parseFloat(s['border' + side + 'Width']) > 0 && s['border' + side + 'Style'] !== 'none' && alpha(s['border' + side + 'Color']) > 0);
   const visible = (n) => typeof n.checkVisibility === 'function' ? n.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : true;
+  // A closed native select (one value, not a list box) draws one text in its own box, its selected option's label;
+  // its options are not drawn, though innerText lists every one. That label stands in for them, as text and as a run.
+  const closedSelect = (n) => n instanceof HTMLSelectElement && !n.multiple && n.size <= 1;
+  const drawnLabel = (n) => (n.selectedOptions[0] ? n.selectedOptions[0].label : '');
   // The reader's call (mark): a field drawn masked (-webkit-text-security, which the browser sets on a password input)
   // draws one mask glyph per character (Blink's disc, circle and square), not its value.
   const MASK = { disc: '\\u2022', circle: '\\u25e6', square: '\\u25a0' };
@@ -491,6 +496,7 @@ export const domContentOf = new Function('el', 'mark', 'self', `
       return;
     }
     if (n.nodeType !== 1 || ['style', 'script', 'template', 'noscript'].includes(n.localName)) return;
+    if (closedSelect(n)) { if (drawnLabel(n).trim() && shows(n)) push(drawnLabel(n), getComputedStyle(n), n, false, 1); return; }
     const pseudo = (which) => {
       if (!shows(n)) return;
       const s = getComputedStyle(n, which);
@@ -504,6 +510,8 @@ export const domContentOf = new Function('el', 'mark', 'self', `
     if (!(n instanceof HTMLTextAreaElement)) for (const child of n.childNodes) visit(child);
     pseudo('::after');
   };
+  for (const s of [...(closedSelect(el) ? [el] : []), ...el.querySelectorAll('select')])
+    if (closedSelect(s) && shows(s) && s.innerText && texts[0].includes(s.innerText)) texts[0] = texts[0].replace(s.innerText, () => drawnLabel(s));
   visit(el);
   return { text: texts.join('\\n'), graphics, runs };
 `) as (el: Element, mark?: unknown) => DomContent;
