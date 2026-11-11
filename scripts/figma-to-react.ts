@@ -67,7 +67,9 @@ export function figmaToReact(dumpPath: string, outDirArg: string, expectRequest?
   return lib.figmaToReact(viteEngine, dumpPath, outDirArg, expectRequest, source, options);
 }
 
+const FLAGS = ['--dump', '--url', '--out', '--name', '--expect-request', '--fonts', '--native-strokes', '--capture', '--profile', '--pinned', '--allow-failures'];
 function flag(name: string): string | undefined {
+  if (!FLAGS.includes(name)) throw Error(`figma-to-react-flag-unknown: ${name}`);
   const i = process.argv.indexOf(name);
   return i > -1 ? process.argv[i + 1] : undefined;
 }
@@ -76,8 +78,9 @@ function flag(name: string): string | undefined {
 if (process.argv[1] && /(^|[\\/])figma-to-react\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) {
   const dump = flag('--dump'), url = flag('--url'), out = flag('--out'), fonts = flag('--fonts'), nativeStrokes = flag('--native-strokes'), capture = flag('--capture'), profile = flag('--profile');
   if ((!dump && !url) || (dump && url) || !out || (process.argv.includes('--fonts') && (!fonts || fonts.startsWith('--'))) || (process.argv.includes('--native-strokes') && (!nativeStrokes || nativeStrokes.startsWith('--')))
-    || (process.argv.includes('--capture') && (!capture || capture.startsWith('--'))) || (process.argv.includes('--profile') && (!profile || profile.startsWith('--')))) {
-    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--capture <set.capture.json>] [--pinned] [--allow-failures]\n'
+    || (process.argv.includes('--capture') && (!capture || capture.startsWith('--'))) || (process.argv.includes('--profile') && (!profile || profile.startsWith('--')))
+    || process.argv.slice(2).some((a) => a.startsWith('--') && !FLAGS.includes(a))) {
+    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--capture <set.capture.json>] [--profile <profile.json>] [--pinned] [--allow-failures]\n'
       + '  --url reads FIGMA_TOKEN from the environment (never from the command line).\n'
       + '  --fonts bundles your design\'s font files for the package and check (a sha256-pinned manifest; see docs/PREVIEW.md).\n'
       + '  Every face the design\'s text draws must be supplied; a missing face is refused by name (exit 3).\n'
@@ -86,7 +89,8 @@ if (process.argv[1] && /(^|[\\/])figma-to-react\.(m?[tj]s)$/.test(path.resolve(p
       + '  --profile <profile.json> switches on the engine conventions a system profile names; an unknown one is refused.\n'
       + '  After packaging, the generated package is checked against the design (design:consumer:check) and each\n'
       + '  variant is reported pass / FAIL / unverified; any FAIL exits 1 unless --allow-failures is given.\n'
-      + '  Outside this repository: npx @ds-contracts/cli figma-to-react (same flags but --expect-request).');
+      + '  An unknown flag is refused. Outside this repository: npx @ds-contracts/cli figma-to-react (same flags but\n'
+      + '  --expect-request and --profile: the installed CLI cannot switch a convention on).');
     process.exit(2);
   }
   lib.runFigmaToReact({ dump, url, out: out!, name: flag('--name'), expectRequest: flag('--expect-request'), fonts, nativeStrokes, ...(capture ? { capture } : {}), ...(profile ? { profile } : {}), pinned: process.argv.includes('--pinned'), allowFailures: process.argv.includes('--allow-failures') },
