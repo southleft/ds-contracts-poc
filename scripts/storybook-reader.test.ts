@@ -229,3 +229,36 @@ test('a profile names the conventions it switches on, well formed and once each'
   assert.deepEqual(p.conventions, ['imperceptible-solid-paint-blend-not-carried']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
 });
+
+import {paintedFamilies, webFontFamily, type FontLog, type LoadedFont} from './storybook-reader.js';
+import {compareTextStyles} from './design-consumer-content.js';
+// Made-up families: a web font declared "Quill Grotesk" whose semibold file names its own family "Quill Grotesk Demi".
+const demi = {familyName: 'Quill Grotesk Demi', postScriptName: 'QuillGrotesk-Demi', isCustomFont: true};
+const declared = (o: Partial<LoadedFont> = {}): LoadedFont => ({fontFamily: 'Quill Grotesk', fontWeight: '600', fontStyle: 'normal', fontStretch: 'normal', platformFontFamily: 'Quill Grotesk Demi', ...o});
+test('a web font painted under its file\'s own family is recorded under its declared family only when exactly one declaration meets all six tests', () => {
+  const at = (loaded: LoadedFont[], f = demi, weight = 600, slant: 'normal' | 'italic' = 'normal') => webFontFamily(f, weight, slant, loaded);
+  // Full agreement: P's first D.length characters; a weight range that holds the drawn weight; the same name twice in another case.
+  assert.deepEqual([at([declared()]), at([declared({fontWeight: '100 900', fontStretch: '100%'})]), at([declared(), declared({fontFamily: 'quill grotesk'})]),
+    at([declared({fontStyle: 'oblique 10deg'})], demi, 600, 'italic')], ['Quill Grotesk', 'Quill Grotesk', 'Quill Grotesk', 'Quill Grotesk']);
+  // Each refusal keeps the painted name: not custom (installed); no join (no load with that file family); (2) the declared
+  // name does not start the file's own name; (3) nor its PostScript name (a face added under another name); (4) a
+  // variable width; (5) another weight; (6) another slant; and two candidates.
+  assert.deepEqual([at([declared()], {...demi, isCustomFont: false}), at([declared({platformFontFamily: 'Quill Grotesk Bold'})]),
+    at([declared({fontFamily: 'Quill Grotesk Demi'})], {...demi, postScriptName: 'QuillGroteskDemi-Regular'}), at([declared()], {...demi, postScriptName: 'QGrotesk-Demi'}),
+    at([declared({fontStretch: '75% 125%'})]), at([declared({fontWeight: '700'})]), at([declared({fontStyle: 'italic'})]),
+    at([declared({fontFamily: 'Quill'}), declared({fontFamily: 'Quill -Grotesk'})], {familyName: 'Quill -Grotesk Demi', postScriptName: 'Quill-Grotesk-Demi', isCustomFont: true})],
+    ['Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill Grotesk Demi', 'Quill -Grotesk Demi']);
+});
+
+test('a run\'s families are mapped, then repeats removed, then sorted; each rewrite is logged; the check then finds no family mismatch', () => {
+  const log: FontLog = {loaded: [declared(), declared({fontWeight: '400', platformFontFamily: 'Quill Grotesk'})], rewrites: new Map()};
+  const painted = [demi, {familyName: 'Quill Grotesk', postScriptName: 'QuillGrotesk', isCustomFont: true}, {familyName: 'Arimo', postScriptName: 'Arimo-Regular', isCustomFont: false}];
+  assert.deepEqual(paintedFamilies(painted, 600, 'normal'), ['Arimo', 'Quill Grotesk', 'Quill Grotesk Demi'], 'without the loaded fonts, as before');
+  const mapped = paintedFamilies(painted, 600, 'normal', log);
+  assert.deepEqual([mapped, [...log.rewrites.values()]], [['Arimo', 'Quill Grotesk'], [{platform: 'Quill Grotesk Demi', family: 'Quill Grotesk'}]]);
+  // The check's text comparison, its run family read as react-to-figma-check.ts reads it: the one family it was painted with.
+  const figma = {texts: ['Label'], textStyles: [[{start: 0, end: 5, color: {r: 0, g: 0, b: 0, a: 1}, family: 'Quill Grotesk', weight: 600}]], parts: []};
+  const compare = (family: string) => compareTextStyles('k', figma, {text: 'Label', graphics: [], runs: [{text: 'Label', color: 'rgb(0, 0, 0)', family: JSON.stringify(family), weight: '600', opacity: 1}]}).problems;
+  assert.deepEqual(compare(paintedFamilies([demi], 600, 'normal', log)[0]!), []);
+  assert.match(compare('Quill Grotesk Demi').join(), /text-font-mismatch:k:"Label":figma "Quill Grotesk" 600 vs rendered "Quill Grotesk Demi" 600/);
+});
