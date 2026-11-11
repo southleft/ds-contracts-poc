@@ -89,8 +89,24 @@ jobs:
       # 119 of 195 cells move their painted box without it — so the run would report
       # a corpus-wide regression that is entirely typography. The gate REFUSES when
       # it is absent (exit 2); this step is what stops that refusal from firing.
+      # The runner's apt reads mirror+file:/etc/apt/apt-mirrors.txt; on 2026-11-11
+      # its first mirror (azure.archive.ubuntu.com) stopped resolving and every fetch
+      # failed. The fallback asks the Ubuntu archive directly for the same pinned noble
+      # package, with signature checks on, so the font bytes cannot change.
       - name: install Inter (a load-bearing input the repo cannot carry)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter || sudo apt-get install -y -qq fonts-inter-variable
+        run: |
+          if ! { sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter || sudo apt-get install -y -qq fonts-inter-variable; }; then
+            echo "::warning::runner apt mirror failed; installing fonts-inter 4.0+ds-1 from archive.ubuntu.com directly"
+            list="$RUNNER_TEMP/ubuntu-direct.list" key=/usr/share/keyrings/ubuntu-archive-keyring.gpg
+            printf 'deb [signed-by=%s] %s %s main universe\n' > "$list" \
+              "$key" http://archive.ubuntu.com/ubuntu noble \
+              "$key" http://archive.ubuntu.com/ubuntu noble-updates \
+              "$key" http://security.ubuntu.com/ubuntu noble-security
+            direct=(-o "Dir::Etc::SourceList=$list" -o Dir::Etc::SourceParts=-)
+            sudo apt-get update -qq "${direct[@]}"
+            sudo apt-get install -y -qq "${direct[@]}" fonts-inter=4.0+ds-1
+          fi
+          dpkg-query -W -f='${Package} ${Version} ${db:Status-Abbrev}\n' 'fonts-inter*'
 
       - name: catalog:visual:check
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
