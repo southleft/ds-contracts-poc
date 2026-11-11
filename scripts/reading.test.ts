@@ -49,3 +49,11 @@ test('system coverage comes from the system\'s full grammar reading, never from 
   assert.equal(systemCoverage(figma, profile), '1/2 (1 internal set(s) in no number)');
   assert.throws(() => systemCoverage({ sets: [{ name: 'X' }] }, profile), /reading-coverage-unreadable:grammar/);
 });
+
+test('React to Figma, the check\'s own receipt: counts from `verdicts`, beside `counts` (whether the set counts); a set that does not count and passes a variant is refused', () => {
+  const receipt = (counts: boolean, pass: number) => put(`r2f-${counts}-${pass}.json`, { version: 1, component: 'Tag', set: 'Tag', inputs: { stories: 'a', dump: 'b', capture: 'c' },
+    verdicts: { pass, fail: 2 - pass, unverified: 0, 'font-blocked': 0 }, counts, problems: counts ? [] : ['layout:grid-layout'], boundColors: { solid: 1, bound: 1 }, variants: [] });
+  const read = (f: string) => r2fSets({ components: [{ title: 'Tag', grammar: { grammar: 'in' }, matrix: { status: 'ok', variants: 2 }, references: [] }] }, { Tag: { check: f } })[0]!;
+  assert.deepEqual([read(receipt(true, 1)).pass, read(receipt(true, 2)).pass, read(receipt(false, 0)).pass], [1, 2, 0]);
+  assert.throws(() => read(receipt(false, 1)), /reading-receipt-inconsistent:counts:Tag/);
+});

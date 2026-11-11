@@ -308,16 +308,54 @@ export const HIDE_CONTEXT = `((on) => { if (!on) { for (const [e, v] of window._
   window.__dsReaderHidden = hidden; return hidden.length; })`;
 
 const byFace = (a: FontFace, b: FontFace) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style);
+/** A web font the page loaded, as Chromium reports it (CDP `CSS.fontsUpdated`): as declared, and the family in its file. */
+export type LoadedFont = { fontFamily: string; fontWeight: string; fontStyle: string; fontStretch: string; platformFontFamily: string };
+/** A face Chromium painted text with (CDP `CSS.getPlatformFontsForNode`). */
+export type PaintedFont = { familyName: string; postScriptName?: string; isCustomFont?: boolean };
+/** The run's loaded web fonts (never cleared) and each family it recorded under another name than the painted one. */
+export interface FontLog { loaded: LoadedFont[]; rewrites: Map<string, { platform: string; family: string }> }
+
+/** The family a painted face is recorded under (AGENTS.md rule 9; owner goal, 2026-11-11). Chromium names a web font by
+ *  the family in its own file, and a file whose family carries a style word is painted under a name no font list holds,
+ *  while Figma lists the declared family with that style. A face that is not custom keeps its platform name P. A custom
+ *  one takes a declared family D only when D is the one candidate (in lower case) that meets all six: (1) a loaded web
+ *  font declared as D has `platformFontFamily` exactly P; (2) P starts with D and one space; (3) the face's PostScript
+ *  name starts with D without spaces and a hyphen; (4) that font's stretch is normal or 100%, one value; (5) its weight
+ *  is the drawn weight, or a range that holds it; (6) its style agrees with the drawn slant. It is recorded as P's first
+ *  D.length characters; with none or several, as P, and such a face Figma lacks stays refused by name. */
+export function webFontFamily(f: PaintedFont, weight: number, slant: 'normal' | 'italic', loaded: readonly LoadedFont[]): string {
+  const p = f.familyName, ps = (f.postScriptName ?? '').toLowerCase();
+  if (!f.isCustomFont) return p;
+  const num = (w: string) => (w === 'normal' ? 400 : w === 'bold' ? 700 : Number(w));
+  const fits = loaded.filter((l) => {
+    const d = l.fontFamily.toLowerCase(), [lo, hi = lo] = l.fontWeight.trim().split(/\s+/).map(num), style = l.fontStyle.trim();
+    return l.platformFontFamily === p && p.toLowerCase().startsWith(`${d} `) && ps.startsWith(`${d.replace(/ /g, '')}-`)
+      && /^(normal|100%)$/.test(l.fontStretch.trim()) && lo! <= weight && weight <= hi!
+      && (/^(italic|oblique)\b/.test(style) ? 'italic' : style === 'normal' ? 'normal' : '') === slant;
+  });
+  return new Set(fits.map((l) => l.fontFamily.toLowerCase())).size === 1 ? p.slice(0, fits[0]!.fontFamily.length) : p;
+}
+
+/** Each painted face's recorded family: mapped, then without repeats, then sorted. Each rewrite goes in the log. */
+export function paintedFamilies(fonts: readonly PaintedFont[], weight: number, slant: 'normal' | 'italic', log?: FontLog): string[] {
+  return [...new Set(fonts.map((f) => {
+    const family = log ? webFontFamily(f, weight, slant, log.loaded) : f.familyName;
+    if (family !== f.familyName) log!.rewrites.set(JSON.stringify([f.familyName, family]), { platform: f.familyName, family });
+    return family;
+  }))].sort();
+}
+const slantOf = (style: string) => (/italic|oblique/.test(style) ? 'italic' as const : 'normal' as const);
+
 /** The platform fonts Chromium drew the marked text with (fallbacks included), once each: the faces Figma must also have. */
-async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
+async function drawnFaces(cdp: CDPSession, log: FontLog): Promise<FontFace[]> {
   const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
   const { nodeIds } = await cdp.send('DOM.querySelectorAll', { nodeId: root.nodeId, selector: '[data-ds-reader-text]' });
   const faces: FontFace[] = [];
   for (const nodeId of nodeIds) {
     const { attributes } = await cdp.send('DOM.getAttributes', { nodeId });
     const [weight, style] = attributes[attributes.indexOf('data-ds-reader-text') + 1]!.split(' ');
-    for (const f of (await cdp.send('CSS.getPlatformFontsForNode', { nodeId })).fonts)
-      faces.push({ family: f.familyName, weight: Number(weight), style: style === 'italic' ? 'italic' : 'normal' });
+    for (const family of paintedFamilies((await cdp.send('CSS.getPlatformFontsForNode', { nodeId })).fonts, Number(weight), slantOf(style!), log))
+      faces.push({ family, weight: Number(weight), style: style === 'italic' ? 'italic' : 'normal' });
   }
   return [...new Map(faces.map((f) => [JSON.stringify(f), f])).values()].sort(byFace);
 }
@@ -330,10 +368,15 @@ async function drawnFaces(cdp: CDPSession): Promise<FontFace[]> {
  *  element's report is that run's paint. Any other run whose node is not reached keeps no `painted`: unread. */
 type CdpNode = { nodeType: number; nodeName: string; nodeValue: string; backendNodeId: number; pseudoType?: string;
   attributes?: string[]; children?: CdpNode[]; shadowRoots?: CdpNode[]; pseudoElements?: CdpNode[] };
-export async function paintRuns(cdp: CDPSession, content: DomContent): Promise<void> {
+export async function paintRuns(cdp: CDPSession, content: DomContent, log?: FontLog): Promise<void> {
   const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
   const { nodeIds } = await cdp.send('DOM.querySelectorAll', { nodeId: root.nodeId, selector: '[data-ds-run]' });
-  const families = async (id: number) => [...new Set((await cdp.send('CSS.getPlatformFontsForNode', { nodeId: id })).fonts.map((f) => f.familyName))].sort();
+  // Each family as the faces record it (webFontFamily), at the run's own weight and the slant of the node it is styled by.
+  const families = async (id: number, weight: string, styled: number) => {
+    const fonts = (await cdp.send('CSS.getPlatformFontsForNode', { nodeId: id })).fonts;
+    const slant = log && fonts.some((f) => f.isCustomFont) ? slantOf((await cdp.send('CSS.getComputedStyleForNode', { nodeId: styled })).computedStyle.find((c) => c.name === 'font-style')?.value ?? '') : 'normal';
+    return paintedFamilies(fonts, Number(weight), slant, log);
+  };
   const texts = (n: CdpNode): CdpNode[] => [...(n.nodeType === 3 ? [n] : []), ...(n.children ?? []).flatMap(texts), ...(n.shadowRoots ?? []).flatMap(texts)];
   for (const nodeId of nodeIds) {
     const { attributes } = await cdp.send('DOM.getAttributes', { nodeId });
@@ -343,18 +386,18 @@ export async function paintRuns(cdp: CDPSession, content: DomContent): Promise<v
     const pseudo = (node.pseudoElements ?? []).filter((p) => p.pseudoType === 'before' || p.pseudoType === 'after');
     const ids = textNodes.length + pseudo.length
       ? (await cdp.send('DOM.pushNodesByBackendIdsToFrontend', { backendNodeIds: [...textNodes, ...pseudo].map((n) => n.backendNodeId) })).nodeIds : [];
-    const drawn = textNodes.map((t, j) => ({ text: t.nodeValue, id: ids[j]! }));
+    const drawn = textNodes.map((t, j) => ({ text: t.nodeValue, id: ids[j]!, styled: nodeId }));
     for (const j of pseudo.keys()) {
       const id = ids[textNodes.length + j]!, value = (await cdp.send('CSS.getComputedStyleForNode', { nodeId: id })).computedStyle.find((c) => c.name === 'content')?.value ?? '';
-      if (/^["']/.test(value)) drawn.push({ text: value.slice(1, -1), id });
+      if (/^["']/.test(value)) drawn.push({ text: value.slice(1, -1), id, styled: id });
     }
     const pairs = node.attributes ?? [], at = pairs.findIndex((a, k) => k % 2 === 0 && a === 'type');
     const type = node.nodeName === 'INPUT' && at >= 0 ? pairs[at + 1]!.toLowerCase() : '';
     const used = new Set<number>();
     for (const i of attributes[attributes.indexOf('data-ds-run') + 1]!.split(' ')) {
       const run = content.runs![Number(i)]!, k = drawn.findIndex((d, j) => !used.has(j) && d.text === run.text);
-      if (k >= 0) { used.add(k); run.painted = await families(drawn[k]!.id); }
-      else if (type === 'checkbox' || type === 'radio') run.painted = await families(nodeId);
+      if (k >= 0) { used.add(k); run.painted = await families(drawn[k]!.id, run.weight, drawn[k]!.styled); }
+      else if (type === 'checkbox' || type === 'radio') run.painted = await families(nodeId, run.weight, nodeId);
     }
     await cdp.send('DOM.removeAttribute', { nodeId, name: 'data-ds-run' });
   }
@@ -449,7 +492,7 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; indexSha256: string; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; indexSha256: string; stories: LoadedStory[]; components: StoryComponent[]; fontFamilyRewrites?: Array<{ platform: string; family: string }> }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
@@ -485,6 +528,10 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     // A do-nothing DevTools hook, so React names its renderer version when it loads; it changes no rendering.
     await page.addInitScript(`window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { renderers: new Map(), supportsFiber: true, checkDCE() {},
       inject(r) { this.renderers.set(this.renderers.size + 1, r); return this.renderers.size; }, onScheduleFiberRoot() {}, onCommitFiberRoot() {}, onCommitFiberUnmount() {}, onPostCommitFiberRoot() {} };`);
+    // The page's web fonts as Chromium reports each load (webFontFamily), from before the first load so none is missed.
+    const cdp = await page.context().newCDPSession(page), fonts: FontLog = { loaded: [], rewrites: new Map() };
+    cdp.on('CSS.fontsUpdated', ({ font }) => { if (font) fonts.loaded.push(font); });
+    await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     await page.goto(new URL(`iframe.html?id=${encodeURIComponent(ids[0]!)}&viewMode=story`, shown).href, { waitUntil: 'load', timeout: 60_000 });
     await page.waitForFunction(() => (window as any).__STORYBOOK_PREVIEW__?.storyStoreValue, null, { timeout: 60_000 });
     const stories = await page.evaluate(`(async (storyIds) => {
@@ -528,8 +575,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     // --only: pass 1 above showed only the listed components' stories, and readStories sees only their declarations, so
     // no other story, excluded title or failure text naming one enters this run.
     const all = readStories(stories, listed, only ? [] : excluded);
-    const components = all.filter((c) => !c.excludedBy && (!only || only.has(c.title))), cdp = await page.context().newCDPSession(page);
-    await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+    const components = all.filter((c) => !c.excludedBy && (!only || only.has(c.title)));
     // Still throughout pass 2, as the Figma to React page is (its own rule): every reading of a reference (its box
     // and text marks, the capture, its faces and content) sees the same frame, so a running animation cannot make
     // two runs differ. Pass 1 reads only React's tree.
@@ -558,12 +604,12 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
           ref.frame = { ...captured.frame, raster: { kind: 'browser-paint-extent-v1', paint: captured.paint } };
           if (shotsDir) writeFileSync(path.join(shotsDir, ref.png), captured.bytes);
         }
-        ref.faces = await drawnFaces(cdp);
+        ref.faces = await drawnFaces(cdp, fonts);
         // Read after the capture, so the image is never touched. An instance that shares its parent with context or other
         // instances is read from its own single top element (its root), as the container would have given it.
         const container = (await page.evaluateHandle('window.__dsReaderContainer') as JSHandle<Element | null>).asElement();
         const single = container ? null : (await page.evaluateHandle('window.__dsReaderTops.length === 1 ? window.__dsReaderTops[0] : null') as JSHandle<Element | null>).asElement();
-        if (container ?? single) { ref.content = await (container ?? single)!.evaluate(container ? domContentOf : domContentOfRoot, true); await paintRuns(cdp, ref.content!); }
+        if (container ?? single) { ref.content = await (container ?? single)!.evaluate(container ? domContentOf : domContentOfRoot, true); await paintRuns(cdp, ref.content!, fonts); }
         else ref.contentProblem = 'reference-content-not-one-container';
         [ref.painted, ref.held] = await page.evaluate(PAINTED) as [number, number];
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
@@ -571,7 +617,8 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       }
       c.faces = [...faces.values()].sort(byFace);
     }
-    return { environment, indexSha256, stories, components: [...components, ...all.filter((c) => c.excludedBy)] };
+    const fontFamilyRewrites = [...fonts.rewrites.values()].sort((a, b) => a.platform.localeCompare(b.platform) || a.family.localeCompare(b.family));
+    return { environment, indexSha256, stories, components: [...components, ...all.filter((c) => c.excludedBy)], fontFamilyRewrites };
   } finally { await browser.close(); stop(); }
 }
 
@@ -603,7 +650,7 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
   const read = profile ? readProfile(profile) : undefined;
   const declared = read?.components ?? [], excludedTitles = read?.excluded ?? [];
   // The out folder is made only once every refusal has passed: the references folder right before pass 2 writes to it.
-  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, indexSha256, stories, components: all }) => {
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, indexSha256, stories, components: all, fontFamilyRewrites }) => {
     mkdirSync(out, { recursive: true });
     // Excluded titles never become components, and are reported apart with what they would have been.
     const components = all.filter((c) => !c.excludedBy), excluded = all.filter((c) => c.excludedBy)
@@ -617,7 +664,9 @@ if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
     else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, index: { sha256: indexSha256 },
       ...(only ? { only: { path: onlyFile, sha256: onlySha256 }, profile: profile ? { path: profile, sha256: createHash('sha256').update(readFileSync(profile)).digest('hex') } : null,
         excludedByProfile: excludedTitles.map(({ title, reason }) => ({ title, reason })) } : {}),
-      environment, stories: stories.length, components, excluded }, null, 2) + '\n');
+      environment, stories: stories.length, components, excluded,
+      // Every face recorded under its declared family instead of the painted one (webFontFamily), as sorted pairs.
+      fontFamilyRewrites }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
     // Coverage never shrinks the kit: the headline counts excluded titles in the denominator; the other figure does not.
     if (excluded.length) console.log(`coverage ${inGrammar}/${kit} with the ${excluded.length} title(s) excluded by profile counted (headline), ${inGrammar}/${components.length} without`);
