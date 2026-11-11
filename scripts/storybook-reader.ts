@@ -363,7 +363,8 @@ async function drawnFaces(cdp: CDPSession, log: FontLog): Promise<FontFace[]> {
 /** The platform families Chromium painted each content run with (Figma text has one family and no fallback stack,
  *  so this, not the declared stack, is what React to Figma compares). Each owner the collector marked is read once,
  *  then unmarked. A run is read from the node that draws it: a direct text child; a form field's text in its
- *  user-agent shadow root (its light-DOM text, a textarea's default, is never drawn); generated content as its own
+ *  user-agent shadow root (its light-DOM text, a textarea's default or a closed select's options, is never drawn; a
+ *  closed select draws its selected label there); generated content as its own
  *  ::before or ::after node, matched by its computed content. A checkbox or radio never draws its value, so the
  *  element's report is that run's paint. Any other run whose node is not reached keeps no `painted`: unread. */
 type CdpNode = { nodeType: number; nodeName: string; nodeValue: string; backendNodeId: number; pseudoType?: string;
@@ -381,7 +382,7 @@ export async function paintRuns(cdp: CDPSession, content: DomContent, log?: Font
   for (const nodeId of nodeIds) {
     const { attributes } = await cdp.send('DOM.getAttributes', { nodeId });
     const node = (await cdp.send('DOM.describeNode', { nodeId, depth: -1, pierce: true })).node as unknown as CdpNode;
-    const field = node.nodeName === 'INPUT' || node.nodeName === 'TEXTAREA';
+    const field = node.nodeName === 'INPUT' || node.nodeName === 'TEXTAREA' || node.nodeName === 'SELECT';
     const textNodes = field ? (node.shadowRoots ?? []).flatMap(texts) : (node.children ?? []).filter((c) => c.nodeType === 3);
     const pseudo = (node.pseudoElements ?? []).filter((p) => p.pseudoType === 'before' || p.pseudoType === 'after');
     const ids = textNodes.length + pseudo.length

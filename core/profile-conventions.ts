@@ -4,7 +4,13 @@
  * name is refused here by name, and a new convention lands here first, then in a profile. Every convention is off
  * unless a profile turns it on.
  */
-export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried'] as const;
+/** icon-box-keeps-glyph-size (React to Figma writer): an icon part whose width/height is larger than its glyph, none
+ *  smaller (a wrapper element folded into its icon part), is a box holding the glyph at its own size, laid out as the
+ *  part declares, instead of a glyph stretched to the box. */
+/** svg-rotation-carried (React to Figma contract step): Chromium spells every computed rotation as a matrix, which the
+ *  declared `transform` vocabulary does not read; an svg element whose computed transform is a pure rotation is spelled
+ *  rotate(<n>deg), so its icon part carries the turn the writer draws (FC-SVG-ROTATION). */
+export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
