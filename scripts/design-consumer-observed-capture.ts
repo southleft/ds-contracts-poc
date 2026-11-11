@@ -5,6 +5,7 @@ import type {JSHandle,Page} from 'playwright-core';
 import {observeConsumerPaintExtent} from './design-consumer-paint-extent.js';
 import {captureIsolatedRegion} from './design-consumer-isolated-capture.js';
 import {enclosingFrame,imageSha256,type FrameBox,type ConsumerFrame} from './design-consumer-framing-v2.js';
+import {retryCapture} from './capture-retry.js';
 // Keep all geometry, computed properties and pseudo styles in Chromium. Only
 // exact equality leaves the browser, avoiding deep protocol serialization.
 type SnapshotHandle = JSHandle<{snapshot:string}>;
@@ -74,7 +75,7 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
   // A blending or qualified negative-stack subtree must also survive removal
   // of unrelated neighboring paint. Prove its complete composited raster.
   const clip=enclosingFrame(paint),scroll=await page.evaluate(()=>({x:scrollX,y:scrollY}));
-  const before=initial.observation.blendRasterVerified||initial.observation.negativeStackRasterVerified?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled',clip:{...clip,x:clip.x-scroll.x,y:clip.y-scroll.y}})):undefined;
+  const before=initial.observation.blendRasterVerified||initial.observation.negativeStackRasterVerified?PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true,animations:'disabled',clip:{...clip,x:clip.x-scroll.x,y:clip.y-scroll.y}}))):undefined;
   const capture=await captureIsolatedRegion(page,root,region(paint,layout));if('refused'in capture)return capture;
   if(before){const after=PNG.sync.read(capture.bytes);if(before.width!==after.width||before.height!==after.height||!before.data.equals(after.data))return {refused:initial.observation.negativeStackRasterVerified?'capture-negative-stack-isolation-changed-raster':'capture-blend-isolation-changed-raster'};}
   return {...capture,paint};

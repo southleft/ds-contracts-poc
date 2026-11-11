@@ -4,6 +4,7 @@ import {PNG} from 'pngjs';
  * original composited raster. Unsupported compositor effects remain named. */
 import type {CDPSession, JSHandle, Page} from 'playwright-core';
 import {enclosingFrame,type FrameBox} from './design-consumer-framing-v2.js';
+import {retryCapture} from './capture-retry.js';
 // Keep the complete snapshot in Chromium. Sending these multi-megabyte
 // objects through the protocol dominated capture time. Equality is exact;
 // no computed properties, pseudo styles, or geometry fields are omitted.
@@ -93,7 +94,7 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
  let before:SnapshotHandle|undefined;let cdp:CDPSession|undefined;let layers:PaintLayer[]=[];
  try{
   before=await observe();
-  const originalRaster=effects.blend||effects.negativeStack?PNG.sync.read(await page.screenshot({omitBackground:true,animations:'disabled'})):undefined;
+  const originalRaster=effects.blend||effects.negativeStack?PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true,animations:'disabled'}))):undefined;
   cdp=await page.context().newCDPSession(page);
   cdp.on('LayerTree.layerTreeDidChange',(event:{layers?:PaintLayer[]})=>{layers=event.layers??[];});
   await cdp.send('DOM.enable');await cdp.send('LayerTree.enable');
@@ -107,7 +108,7 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
   await root.evaluate(el=>(el as HTMLElement).style.setProperty('will-change',getComputedStyle(el).display==='inline'?'opacity':'transform','important'));
   // Flush the compositor and wait for a tree containing this subject, rather
   // than accepting an earlier unrelated layer-tree event.
-  const promotedBytes=await page.screenshot({omitBackground:true,animations:'disabled'});
+  const promotedBytes=await retryCapture(()=>page.screenshot({omitBackground:true,animations:'disabled'}));
   for(let attempt=0;attempt<20&&!layers.some(l=>l.backendNodeId===description.node.backendNodeId);attempt++)
    await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>resolve())));
   const current=await cdp.send('DOM.describeNode',{nodeId:found.nodeId,depth:-1,pierce:true});
