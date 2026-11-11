@@ -75,14 +75,15 @@ Its top named misses:
 
 | Miss | Variants | Sets |
 |---|---|---|
-| `text-style-unmeasured`: the check can't find the text run yet | 486 | 3 |
+| `text-style-unmeasured`: under diagnosis by the ruler work | 486 | 3 |
 | `content-size-mismatch` | 209 | 12 |
-| `content-missing`: icon parts not written (#392/#393) | 186 | 8 |
-| Layout image difference | 169 | 11 |
+| `content-missing`: icon parts not written; the icon and rotation fixes (#392–#394) are queued | 186 | 8 |
+| Layout image difference (white / black) | 169 / 164 | 11 |
+| `image-framing-unqualified` (fractional origin 81, fractional translation 10) | 91 | — |
+| Reference capture refused by the reader: a reader item, counted as a failure | 49 | 4 |
 | `text-not-editable` (set problem) | — | 12 |
-| Reference capture refused by the reader (counted apart, not hidden in "unverified") | 49 | 4 |
 
-**Figma to React:** the tuned baseline is 35.8% over 36 in-grammar sets (draw B tuning list, regression only). With the imperceptible-blend convention on (#383), 10 more sets convert (preview at efea33775, repo script only). The baseline's top misses:
+**Figma to React:** 40.7% over 36 in-grammar sets with the imperceptible-blend convention on, at the #383 head. It's from the preview run at efea33775, repo script only. The draw B baseline before it was 35.8%. The baseline's top misses:
 
 | Miss | Variants | Sets |
 |---|---|---|
