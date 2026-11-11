@@ -947,6 +947,8 @@ export interface FigmaEngineInput {
   brand?: string;
   /** Icon asset name → SVG markup (assets/icons/*.svg on the CLI side). */
   icons: Map<string, string>;
+  /** Engine conventions a system profile switches on (core/profile-conventions.ts); each is off when absent. */
+  conventions?: ReadonlySet<string>;
   /** When set, duplicate variable names resolve from this Figma collection
    *  (FC-THEME-ISO: console-loop shares one file across DS bundles). */
   variableCollection?: string;
@@ -5420,7 +5422,8 @@ function partToSpecInner(
   }
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
-    const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
+    const iconBox: NodeSpec = { type: 'frame', name: '_' };
+    const iconCtx = applyTokens(iconBox, resolveTokens(part, subst), subst, ctx);
     const { markup, paintPath, paintHex } = iconSvg(part, subst, iconCtx);
     // R7: a literal ink has no variable to re-bind (svgPaintVar stays unset);
     // the baked hex is the literal itself.
@@ -5460,10 +5463,18 @@ function partToSpecInner(
     // below): a box-carrying icon part becomes FRAME(box) → svg child; a
     // box-less icon part keeps the plain svg lowering BYTE-IDENTICALLY.
     // "Carries a box" = paints one (background / border / shadow) or reserves
-    // space around the glyph (padding). A part whose only geometry is a
-    // width/height equal to the glyph is NOT a box — it stays bare.
+    // space around the glyph (padding; or, under the profile convention
+    // icon-box-keeps-glyph-size, a width/height larger than the glyph and
+    // none smaller: a wrapper box folded into its icon part, whose glyph
+    // keeps its size instead of being stretched to the box). A part whose
+    // only geometry is a width/height equal to the glyph is NOT a box.
+    const glyphSize = part.icon.size, lits = resolveLiterals(part, subst);
+    const sides = [iconBox.fixedWidth?.px ?? parseLitPx(lits.width ?? ''), iconBox.fixedHeight?.px ?? parseLitPx(lits.height ?? '')]
+      .filter((v): v is number => v !== undefined);
     const iconPartHasBox = (): boolean => {
-      const chans = [...Object.keys(resolveTokens(part, subst)), ...Object.keys(resolveLiterals(part, subst))];
+      const chans = [...Object.keys(resolveTokens(part, subst)), ...Object.keys(lits)];
+      if (input.conventions?.has('icon-box-keeps-glyph-size') && glyphSize && sides.some((v) => v > glyphSize + 0.5) &&
+        sides.every((v) => v > glyphSize - 0.5)) return true;
       return chans.some(
         (c) =>
           c === 'background-color' ||
