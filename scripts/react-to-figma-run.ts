@@ -76,7 +76,7 @@ for (const r of rows) {
   const comp = readFileSync(script(r.contract, 2), 'utf8'), tok = readFileSync(script(r.contract, 1), 'utf8');
   const C = JSON.parse(/^const COMPONENTS = (\[[\s\S]*?\n\]);$/m.exec(comp)?.[1] ?? 'null'), ids = new Set(comp.match(/"contractId": "[^"]+"/g) ?? []);
   if (r.contract.split('.').length !== 2 || r.contract.startsWith('archived-') || r.name.includes(' · archived ') || r.name === 'Slot' || /^\d+$/.test(r.name) || reserved.includes(r.name)
-    || !titles.has(r.title) || titles.get(r.title).references.some((x: any) => !existsSync(`${OUT}/reader/references/${x.png}`)) || C?.length !== 1 || C[0].anchorKey != null
+    || !titles.has(r.title) || titles.get(r.title).references.some((x: any) => x.png && !existsSync(`${OUT}/reader/references/${x.png}`)) || C?.length !== 1 || C[0].anchorKey != null
     || [...ids].some((s) => s !== `"contractId": "${r.contract}"`) || comp.includes('retireSlotUtility') || comp.includes("createVariableCollection('Imported (provisional)')")
     || !JSON.parse(/^const BRAND_MODES = (.*);$/m.exec(tok)?.[1] ?? '[]').length) refuse(`step 0c: planned row ${rows.indexOf(r)} fails a file check`);
   for (const v of JSON.parse(/^const PRIMITIVES = (.*);$/m.exec(tok)?.[1] ?? '[]') as any[]) {
