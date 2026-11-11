@@ -41,6 +41,7 @@ import type { FontFace } from './font-preflight.js';
 import { domContentOf, domContentOfRoot, type DomContent } from './design-consumer-content.js';
 import type { ConsumerFrame } from './design-consumer-framing-v2.js';
 import { captureSubjectWithoutBackdrop } from './design-consumer-observed-capture.js';
+import { retryCapture } from './capture-retry.js';
 import { EMPTY_BOX } from './design-consumer-paint-extent.js';
 import { NO_MOTION } from './design-consumer-check.js';
 
@@ -399,7 +400,7 @@ export async function textLayoutProbe(browser: Browser, arimo: Buffer): Promise<
       return xs; })()`)) as number[];
     const fractional = xs.filter((x) => Math.abs(x - Math.round(x)) > 0.001).length;
     if (!fractional) throw Error(`pinned-browser-text-on-whole-pixels: every probe glyph landed on a whole pixel (expected args: ${PINNED_ARGS.join(' ')})`);
-    const { data } = PNG.sync.read(await page.locator('span').screenshot());
+    const { data } = PNG.sync.read(await retryCapture(() => page.locator('span').screenshot()));
     let fringePixels = 0;
     for (let i = 0; i < data.length; i += 4) if (Math.max(data[i]!, data[i + 1]!, data[i + 2]!) - Math.min(data[i]!, data[i + 1]!, data[i + 2]!) > 2) fringePixels++;
     if (fringePixels) throw Error(`pinned-browser-text-color-fringe: ${fringePixels} probe pixel(s) spread over 2 levels across channels (expected args: ${PINNED_ARGS.join(' ')})`);
@@ -518,7 +519,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
         // colors cleared and restored, the image clipped to the paint extent Chromium's layers report. Playwright
         // hides the caret by setting and clearing each input's caret color, which leaves an empty style attribute;
         // one screenshot first lets the capture's before-and-after checks start from that state.
-        await page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true });
+        await retryCapture(() => page.screenshot({ clip: box, fullPage: true, animations: 'disabled', omitBackground: true }));
         const captured = await page.evaluate(MARK_SUBJECT) ? await captureSubjectWithoutBackdrop(page, '[data-ds-reader-subject]', '[data-ds-reader-cell]') : { refused: 'reference-not-one-element' };
         if ('refused' in captured) { ref.problem = 'reference-capture-unqualified'; ref.captureRefused = captured.refused; }
         else {
