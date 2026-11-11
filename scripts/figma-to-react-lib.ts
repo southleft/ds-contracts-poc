@@ -37,6 +37,7 @@ import { formatVerdictTable, type Verdict, type Verdicts } from './design-consum
 import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
+import { conventionSet } from '../core/profile-conventions.js';
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
 /** Loads the playground's headless import engine for one run; `close`
@@ -71,7 +72,7 @@ export async function dumpFromFigmaUrl(url: string, outDirArg: string) {
 }
 
 export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
-  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[]; nativeVectorStrokeCapture?: NativeVectorStrokeCapture } = {}) {
+  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[]; nativeVectorStrokeCapture?: NativeVectorStrokeCapture; conventions?: readonly string[] } = {}) {
   // The packager runs npm from inside the package directory, so a relative
   // --out (as the preview page shows: ./out) must be anchored here first.
   const outDir = path.resolve(outDirArg);
@@ -84,7 +85,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const { engine, close } = await loadEngine();
   let imported;
   try {
-    imported = engine.figmaDumpToLibraryRequest(dump, source);
+    imported = options.conventions?.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.conventions }) : engine.figmaDumpToLibraryRequest(dump, source);
   } finally {
     await close?.();
   }
@@ -113,7 +114,8 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const component = String(request.contracts[rootIndex]?.name ?? '');
   const result = { setName: imported.setName, rootId: imported.request.rootId, component, proposed: imported.proposed,
     skipped: imported.skipped, packageName: library.name, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
-    requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes };
+    requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes,
+    ...(options.conventions?.length ? { conventions: [...options.conventions] } : {}) };
   writeFileSync(path.join(outDir, 'result.json'), JSON.stringify(result, null, 2) + '\n');
   // buildReactLibrary writes contract i of the request to inputs/<i>.contract.json.
   const contractFile = path.join(path.dirname(library.tarball), 'inputs', `${rootIndex}.contract.json`);
@@ -208,6 +210,8 @@ export interface FigmaToReactRun {
   capture?: string;
   /** Paint the check in the Storybook reader's pinned image (design:consumer:check --pinned). */
   pinned?: boolean;
+  /** A system profile: its `conventions` switch on the engine rules it names (core/profile-conventions.ts). */
+  profile?: string;
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -270,8 +274,10 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
       throw Error('native-stroke-supplement-receipt-invalid');
     else throw Error('native-stroke-supplement-receipt-kind-unsupported');
   }
+  // A profile's conventions, read here and refused by name when the converter does not know one.
+  const conventions = run.profile ? [...conventionSet((JSON.parse(readFileSync(run.profile, 'utf8')) as { conventions?: string[] }).conventions)] : [];
   const r = await figmaToReact(deps.loadEngine, dumpPath, run.out, run.expectRequest, source,
-    { ...(run.name ? { packageName: run.name } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
+    { ...(run.name ? { packageName: run.name } : {}), ...(conventions.length ? { conventions } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
       ...(faces.length ? { fonts: faces } : {}),
       ...(nativeVectorStrokeCapture ? {nativeVectorStrokeCapture} : {}) });
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);

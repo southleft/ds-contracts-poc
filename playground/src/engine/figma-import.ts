@@ -64,7 +64,7 @@ export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
  *  validator JSON never leaves the engine as a headline. The isolation loop
  *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
  *  this wrapper only supplies the playground's live corpus and options. */
-export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime'): DumpProposalBatch {
+export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime', conventions?: readonly string[]): DumpProposalBatch {
   // Filled caller occurrences require the host's authenticated lowering path.
   // JSON, REST, bridge and headless callers all stop before main-only fallback.
   if ('_occurrences' in dump) selectFigmaImportRoot(dump, []);
@@ -98,6 +98,8 @@ export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 're
     // Visible-in-default-variant boolean defaults are evidence only when the
     // dump's producer captures `hidden` (dump v1.1+ provenance).
     hiddenCaptured: dumpCapturesHidden(dump._provenance),
+    // A system profile's conventions (core/profile-conventions.ts), from `--profile` on the headless run only.
+    ...(conventions?.length ? { conventions } : {}),
   });
 }
 
