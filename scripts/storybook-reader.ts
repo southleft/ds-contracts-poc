@@ -485,6 +485,11 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
     type Shown = { tree: RenderedNode | null; box?: Box };
+    // The page opened on a story, which renders on load. Pass 1 starts once that render has settled: with --only, few
+    // stories load, so pass 1 could otherwise ask for that story while it still renders and read it as failed. After a
+    // full load the render has long settled, so this returns at once.
+    await page.waitForFunction(() => { const r = (window as any).__STORYBOOK_PREVIEW__?.currentRender;
+      return !r || ['completed', 'finished', 'aborted', 'errored'].includes(r.phase); }, null, { timeout: 60_000 }).catch(() => undefined);
     const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d] as const)));
     const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)?.name, !!own.get(id)?.subcomponent])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
