@@ -4,7 +4,10 @@
 // own prepare step sets every capture-time condition again (background, animations, caret), as any capture does. So a
 // retry changes no measurement, only whether a capture happens.
 export const CAPTURE_REFUSED = 'Protocol error (Page.captureScreenshot): Unable to capture screenshot';
+/** Refusals retried in this process. Each one is also written to stderr, so a run's log shows how often it happened. */
+export const captureRetries = { count: 0 };
 export async function retryCapture<T>(shot: () => Promise<T>): Promise<T> {
   try { return await shot(); } catch (e) { if (!(e instanceof Error) || !e.message.includes(CAPTURE_REFUSED)) throw e; }
+  captureRetries.count++; process.stderr.write(`capture-refused-retried: ${CAPTURE_REFUSED}\n`);
   return shot();
 }

@@ -4,6 +4,7 @@ import {chromium,type Page} from 'playwright-core';
 import {PNG} from 'pngjs';
 import {observeConsumerPaintExtent} from './design-consumer-paint-extent.js';
 import {captureObservedSubject} from './design-consumer-observed-capture.js';
+import {CAPTURE_REFUSED,captureRetries} from './capture-retry.js';
 import {retryCapture} from './capture-retry.js';
 
 const fixture=(css='',inside='<span class="plane back"></span><span class="plane front"></span>',outside='')=>`<style>
@@ -12,6 +13,18 @@ const fixture=(css='',inside='<span class="plane back"></span><span class="plane
  ${css}</style><div id="cell"><div id="subject">${inside}</div></div>${outside}`;
 async function state(page:Page){return {dom:await page.locator('html').evaluate(n=>n.outerHTML),view:await page.evaluate(()=>({w:innerWidth,h:innerHeight,x:scrollX,y:scrollY})),raster:PNG.sync.read(await retryCapture(()=>page.screenshot({omitBackground:true,animations:'disabled'}))).data};}
 async function restored(page:Page,before:Awaited<ReturnType<typeof state>>){const after=await state(page);assert.deepEqual(after,before,'all DOM/style bytes, viewport/scroll and original raster must be restored');}
+
+test('every capture on the check\'s path, refused once by Chromium and retried, gives the bytes a capture never refused gives',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage({viewport:{width:320,height:240}});await page.setContent(fixture('.front{opacity:.6}'));const before=await state(page);
+  const plain=await captureObservedSubject(page,'#subject','#cell');assert('bytes'in plain,JSON.stringify(plain));
+  const real=page.screenshot.bind(page),retried=captureRetries.count;let calls=0;
+  (page as any).screenshot=(o:any)=>calls++%2===0?Promise.reject(Error(`page.screenshot: ${CAPTURE_REFUSED}`)):real(o);
+  const refused=await captureObservedSubject(page,'#subject','#cell');(page as any).screenshot=real;
+  assert(calls>=4&&calls%2===0,`each capture refused once, then taken (${calls} calls)`);assert.equal(captureRetries.count-retried,calls/2);
+  assert.deepEqual(refused,plain);await restored(page,before);
+ }finally{await browser.close();}
+});
 
 test('isolated negative planes preserve order, alpha, clipping and exact subject pixels',async()=>{
  const browser=await chromium.launch();try{
