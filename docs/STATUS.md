@@ -247,8 +247,10 @@ Agent:
       `private/profile-v02-20261110/pairs.txt`).
 - [x] Commit the tuning list once the owner has drawn the held-out third (above, under the draw).
 - [x] The reader's `--only <file>`, so a tuned run renders reference images for the tuning
-      list only (reviewer, 2026-11-10): pass 1 reads every story as before; a listed name
-      that is not a component refuses the run. On this repository's Storybook, the 5 listed
+      list only (reviewer, 2026-11-10). Since 2026-11-11 it loads, shows and reads only the
+      listed components' stories (left-out stories for their metadata only), writes excluded
+      titles from the profile alone, and refuses a missing, unreadable or empty list or a
+      listed name that is not a component. On this repository's Storybook, the 5 listed
       components' entries and 38 reference images are byte-identical to a full run's.
 - [x] The reading harness (`scripts/reading.ts`; reviewer, 2026-11-10), so the Dec 7 reading
       runs from committed code: each value from its run receipt, never guessed, and a set
