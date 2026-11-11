@@ -24,7 +24,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storyFontPreflight } from './font-preflight.js';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), PORT = 9231;
+// The bridge plugin may fetch only localhost:9223-9232, and each figma-console-mcp instance takes the first free port there
+// on ::1; 9232 is taken last. The runner holds it on both ::1 and 127.0.0.1, so nothing else can answer the driver.
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), PORT = 9232;
 const FLAGS = ['--run', '--tag', '--file-key', '--only', '--profile', '--pilot'], argv = process.argv.slice(2);
 const flag = (n: string) => { const i = argv.indexOf(n); return i > -1 && !String(argv[i + 1] ?? '--').startsWith('--') ? argv[i + 1] : undefined; };
 const [RUN, TAG, KEY, ONLY, PROFILE] = [flag('--run'), flag('--tag'), flag('--file-key'), flag('--only'), flag('--profile')];
@@ -95,7 +97,7 @@ for (const p of pages) { walked++; for (const n of p.findAllWithCriteria({ types
   (n.type === 'SECTION' ? sections : n.type === 'COMPONENT' && n.parent && n.parent.type === 'COMPONENT_SET' ? variantsOf : targets).push(n); }
 const vars = await figma.variables.getLocalVariablesAsync(), cols = await figma.variables.getLocalVariableCollectionsAsync(), styles = await figma.getLocalTextStylesAsync();
 const MARK = ${JSON.stringify(MARK)}, PRE = ${JSON.stringify(PRE)}, stamp = (n) => n.getSharedPluginData('ds_contracts', 'contractId');\n`;
-const TOTALS = `${WALK}return { walked, pages: pages.length, firstPage: pages[0].id, targets: targets.length, variantChildren: variantsOf.length, sections: sections.length,
+const TOTALS = `${WALK}return { walked, pages: pages.length, firstPage: pages[0].id, rootName: figma.root.name, targets: targets.length, variantChildren: variantsOf.length, sections: sections.length,
   collections: cols.length, variables: vars.length, textStyles: styles.length, nodes: pages.reduce((a, p) => a + p.findAll(() => true).length, 0),
   tagged: pages.filter((p) => p.name.includes(MARK)).length + targets.filter((n) => n.name.includes(MARK) || stamp(n).startsWith(PRE + '.')).length + vars.filter((v) => v.name.startsWith(PRE)).length + cols.filter((c) => c.name.startsWith(PRE)).length,
   fonts: (await figma.listAvailableFontsAsync()).map((f) => ({ family: f.fontName.family, style: f.fontName.style })) };`;
@@ -172,6 +174,7 @@ async function* attempt(): AsyncGenerator<{ id: string; program: string }, void,
   if (first.timerChainMs > 1000) stop('figma-tab-not-in-front'); if (first.error) stop('totals-failed');
   const { fonts, ...start } = first.value.value; receipt.totalsStart = start;
   if (start.tagged !== 0) stop('tag-already-used');
+  if (!String(start.rootName).includes('Scratch')) stop('file-not-scratch');   // step 1 renames everything in the file: only a Scratch file
   receipt.fontsMissingInFigma = storyFontPreflight(rows.map((r) => titles.get(r.title)), fonts).missing.map((f) => `${f.family} ${f.weight} ${f.style} (${f.variants.length})`);
   const probe = await fetch(`https://api.figma.com/v1/files/${KEY}/nodes?ids=${start.firstPage}&depth=1`, { headers: { 'X-Figma-Token': process.env.FIGMA_TOKEN ?? '' } });
   receipt.restPreflight = probe.status; if (probe.status !== 200 || !(await probe.json()).nodes?.[start.firstPage]?.document) stop(`rest-preflight-${probe.status}`);
@@ -264,7 +267,7 @@ const finish = (why?: string) => {
   setTimeout(() => process.exit(why ? 1 : 0), 2000);
 };
 const advance = (r?: Result) => { pending = gen.next(r as Result); pending.then((it) => { served = it.done ? undefined : it.value; if (it.done) finish(); }, (e) => finish(e instanceof Stop ? e.message : `runner-error:${code(e?.message)}`)); };
-createServer((req, res) => {
+const serve = (req: import('node:http').IncomingMessage, res: import('node:http').ServerResponse) => {
   const send = (v: unknown) => { res.writeHead(200, { 'content-type': 'application/json', 'access-control-allow-origin': '*' }); res.end(JSON.stringify(v)); };
   const u = new URL(req.url ?? '/', 'http://127.0.0.1'), mine = !!session && u.searchParams.get('session') === session;
   if (u.pathname === '/claim') { if (session) return send({ refused: 'a driver already holds this run' }); session = sha(String(Date.now() + Math.random())).slice(0, 16); advance(); return send({ session }); }
@@ -276,5 +279,8 @@ createServer((req, res) => {
     return;
   }
   send({ refused: 'no route' });
-}).listen(PORT, '127.0.0.1', () => console.log(`plan: ${rows.length} set(s), tag ${TAG}. Bring the file's Figma tab to the front and run scripts/react-to-figma-driver.js there through the Desktop Bridge.`));
+};
+let up = 0;
+for (const host of ['127.0.0.1', '::1']) createServer(serve).on('error', (e: NodeJS.ErrnoException) => refuse(`port ${PORT} on ${host}: ${e.code}; another local server holds it`))
+  .listen(PORT, host, () => { if (++up === 2) console.log(`plan: ${rows.length} set(s), tag ${TAG}. Bring the file's Figma tab to the front and run scripts/react-to-figma-driver.js there through the Desktop Bridge.`); });
 process.on('SIGINT', () => finish('interrupted'));   // a driver that died mid-program cannot be shown to have ended: void

@@ -3,7 +3,7 @@
 // runs each program the runner serves (each starts with the file guard and sets every DS_ flag), and posts each return
 // with its wall time, the time of an 8-step timer chain (a hidden tab runs about one step a minute) and the DS_ keys on
 // globalThis before and after. A bridge time-out does not stop it; the runner's log shows its progress.
-const BASE = 'http://localhost:9231';
+const BASE = 'http://localhost:9232';   // the runner's port: the bridge plugin may fetch only localhost:9223-9232
 const claim = await (await fetch(BASE + '/claim', { method: 'POST' })).json();
 if (!claim.session) return claim;
 const ds = () => Object.getOwnPropertyNames(globalThis).filter((k) => k.startsWith('DS_')).sort().map((k) => [k, String(globalThis[k])]);
