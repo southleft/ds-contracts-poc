@@ -487,3 +487,39 @@ test("unsupported targets and generated local collisions refuse explicitly", () 
   for (const inline of [false, true])
     assert.throws(() => output(c, inline), /CODE_VALUE_BINDING_COLLISION/);
 });
+test("an instance lookup under a gate on its own source prop compiles: no narrowed equality (TS2367)", () => {
+  const variant = (name: string, property: string, values: string[]) => ({
+    name, type: { enum: values }, default: values[0],
+    bindings: { code: { prop: name }, figma: { kind: "VARIANT", property, values: Object.fromEntries(values.map((v) => [v, v])) } },
+  });
+  const anchors = (name: string) => ({ code: { anchors: { importPath: `check/${name}`, export: name } }, figma: { anchors: { fileKey: null, componentSetKey: null } } });
+  const child = ContractSchema.parse({
+    id: "check.lookup-child", name: "LookupChild", version: "0.1.0", status: "draft", description: "child",
+    semantics: { element: "span" }, props: [variant("kind", "Kind", ["ghost", "tertiary", "primary"])], states: [],
+    anatomy: { root: { layout: { display: "flex" }, text: "x" } }, bindings: anchors("LookupChild"),
+  });
+  const parent = ContractSchema.parse({
+    id: "check.lookup-parent", name: "LookupParent", version: "0.1.0", status: "draft", description: "parent",
+    semantics: { element: "div" }, states: [], bindings: anchors("LookupParent"),
+    props: [
+      { name: "actionable", type: "boolean", default: false, bindings: { code: { prop: "actionable" }, figma: { kind: "BOOLEAN", property: "Actionable" } } },
+      variant("status", "Status", ["info", "error"]),
+    ],
+    anatomy: { root: { layout: { display: "flex" }, parts: {
+      // The truthy gate narrows `actionable` to true; the enum gate narrows `status` to "info".
+      action: { visibleWhen: { prop: "actionable" }, component: { id: child.id, props: { kind: { prop: "actionable", map: { false: "ghost", true: "tertiary" } } } } },
+      notice: { visibleWhen: { prop: "status", equals: "info" }, component: { id: child.id, props: { kind: { prop: "status", map: { error: "primary", info: "ghost" } } } } },
+      // An ancestor's gate narrows too; an ungated lookup keeps its `===` spelling.
+      group: { layout: { display: "flex" }, visibleWhen: { prop: "actionable" }, parts: {
+        nested: { component: { id: child.id, props: { kind: { prop: "actionable", map: { false: "primary", true: "ghost" } } } } } } },
+      plain: { component: { id: child.id, props: { kind: { prop: "status", map: { error: "primary", info: "tertiary" } } } } },
+    } } },
+  });
+  const all = new Map([[parent.id, parent], [child.id, child]]);
+  for (const inline of [false, true]) {
+    const p = output(parent, inline, all), c = output(child, inline, all);
+    assert.deepEqual(generatedTypeErrors(parent.name, p.tsx, { [child.name]: c.tsx }), [], inline ? "inline" : "css modules");
+    assert.match(p.tsx, /globalThis\.Object\.is\(actionable, false\) \? "primary"/);
+    assert.match(p.tsx, /status === "error" \? "primary" : status === "info" \? "tertiary"/);
+  }
+});
