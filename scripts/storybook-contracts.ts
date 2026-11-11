@@ -48,6 +48,25 @@ export function spellSvgRotation(node: CapturedNode): void {
   for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
 }
 
+/** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
+ * gives its selected option's label, null otherwise) takes that label as its text, when it draws one, and drops its option
+ * and optgroup parts, which a closed select never draws. Returns the parts it changed. */
+export function closedSelectLabels(contract: Contract, label: (part: string) => string | null): string[] {
+  const changed: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = part.element === 'select' ? label(name) : null;
+    if (drawn !== null) {
+      for (const [k, child] of Object.entries(part.parts ?? {})) if (child.element === 'option' || child.element === 'optgroup') delete part.parts![k];
+      if (part.parts && !Object.keys(part.parts).length) delete part.parts;
+      if (drawn) part.text = drawn;
+      changed.push(name);
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return changed;
+}
+
 /** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
  * refused by name if its bytes changed since the reader read it; none when the reader recorded no profile. */
 export function profileConventions(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => Buffer = (file) => readFileSync(file)) {
@@ -254,9 +273,14 @@ async function main() {
         // A component with no options has no variant to list: it is written as one main component (GOAL.md, 2026-11-08).
         if (c.axes.length) (enriched as Contract).bindings.figma.drawnVariants = drawn;
         const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();
+        const nodeAt = (key: string, part: string) => { const i = promotion.partIndex.get(part); return i === undefined ? null : aligned.getAligned(`${key}__default`)[i]?.node as
+          { tag: string; field?: { value: string } } | undefined ?? null; };
+        const selected = (key: string, part: string) => { const n = nodeAt(key, part); return n?.tag === 'select' && n.field ? n.field.value : null; };
+        if (conventions.has('closed-select-draws-selected-label')) // its label where it is first drawn; a part some variants lack is still read
+          closedSelectLabels(enriched as Contract, (part) => combos.map((k) => selected(k.key, part)).find((v) => v !== null) ?? null);
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return el ? textOf(el.node as never) : null; }, (key, part) => {
+          return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }

@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryVariantText, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
+import { carryVariantText, closedSelectLabels, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -131,4 +131,21 @@ test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the de
     assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
     if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
   }
+});
+
+test('closed-select-draws-selected-label: a closed single select draws its selected label, never its options', () => {
+  const option = (text: string) => ({ element: 'option', text, declared: { display: 'block' } });
+  const anatomy = { root: { parts: {
+    pick: { element: 'select', parts: { o1: option('Choose a region'), o2: option('Dallas'), group: { element: 'optgroup', parts: { o3: option('Sydney') } } } },
+    overflow: { element: 'select', parts: { o4: option(''), o5: option('9') } },
+    open: { element: 'select', parts: { o6: option('a'), o7: option('b') } },
+    hint: { text: 'Region' },
+  } } };
+  const contract = { anatomy } as any, labels: Record<string, string | null> = { pick: 'Choose a region', overflow: '', open: null, hint: 'x' };
+  assert.deepEqual(closedSelectLabels(contract, (part) => labels[part] ?? null), ['pick', 'overflow']);
+  const parts = contract.anatomy.root.parts;
+  assert.deepEqual([parts.pick.text, parts.pick.parts], ['Choose a region', undefined]);
+  assert.deepEqual([parts.overflow.text, parts.overflow.parts], [undefined, undefined]);
+  assert.deepEqual(Object.keys(parts.open.parts), ['o6', 'o7'], 'a select the capture did not read as closed and single keeps its options');
+  assert.equal(parts.hint.text, 'Region');
 });
