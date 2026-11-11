@@ -40,10 +40,10 @@ export function reactStatePreviewInput(contract: Contract): { propLine: string; 
 /** The parent side: the JSX attribute that forwards `component.statePreview`
  *  (a literal, or a lookup of one parent enum prop whose unmapped values force
  *  nothing). */
-export function reactStatePreviewAttribute(parent: Contract, ref: ComponentRef): string {
+export function reactStatePreviewAttribute(parent: Contract, ref: ComponentRef, narrowed?: ReadonlySet<string>): string {
   const preview = ref.statePreview;
   if (preview === undefined) return '';
   if (typeof preview === 'string') return ` ${STATE_PREVIEW_CODE_PROP}=${JSON.stringify(preview)}`;
   const parentProp = parent.props.find((p) => p.name === preview.prop);
-  return ` ${STATE_PREVIEW_CODE_PROP}={${componentLookupExpression(undefined, parentProp?.bindings.code.prop ?? preview.prop, preview.map, parentProp)}}`;
+  return ` ${STATE_PREVIEW_CODE_PROP}={${componentLookupExpression(undefined, parentProp?.bindings.code.prop ?? preview.prop, preview.map, parentProp, narrowed?.has(preview.prop))}}`;
 }

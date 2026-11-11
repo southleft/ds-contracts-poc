@@ -41,7 +41,7 @@ import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, narrowedPropsByPart, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
  * zero-infrastructure emitter for orgs without a token pipeline: no CSS
@@ -1055,7 +1055,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     ...reactDefaultSlotDependencies(contract, ctx.contracts),
   ])];
 
-  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
+  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>, narrowed?: ReadonlySet<string>): string => {
     const parts: string[] = [];
     for (const [propName, value] of Object.entries(fixedProps)) {
       const depProp = dep.props.find((p) => p.name === propName);
@@ -1064,7 +1064,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
         // PropByProp lookup (see emit-react depAttrString).
         const parentProp = contract.props.find((p) => p.name === value.prop);
         const expr = parentProp?.bindings.code.prop ?? value.prop;
-        parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp)}}`);
+        parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp, narrowed?.has(value.prop))}}`);
         continue;
       }
       if (typeof value === 'boolean') {
@@ -1119,6 +1119,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }).join('');
     return bound?`<svg aria-hidden="true" focusable="false" data-dsc-paint-layer="" style={(${cases}undefined)}><rect width="100%" height="100%" /></svg>`:`<span aria-hidden="true" data-dsc-paint-layer="" style={(${cases}undefined)} />`;
   };
+  const narrowedProps = narrowedPropsByPart(contract);
   const renderPart = (partName: string, part: Part): string => {
     if(part.vectorStrokeByCombination)return wrapVisibleWhen(part,reactVectorStroke(part,`style=${styleExpr(partName, false, stylesWhenExprs(part))}`,codePropOf));
     if (part.shape?.kind === 'line') return wrapVisibleWhen(part,
@@ -1147,7 +1148,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
             if (prop.bindings.code.prop === 'children') { childrenField = field; return ''; }
             return ` ${prop.bindings.code.prop}={${codeValueExpression(prop, `__dscItem[${JSON.stringify(field)}]`)}}`;
           }).join('');
-        const attrs = depAttrString(dep, part.component.props ?? {}) + reactBooleanArguments(contract,dep,part.component) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+        const attrs = depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
         const key = `__dscItem[${JSON.stringify(part.repeat.keyField)}]`;
         const node = childrenField ? `<${dep.name} key={${key}}${attrs}>{__dscItem[${JSON.stringify(childrenField)}]}</${dep.name}>`
           : `<${dep.name} key={${key}}${attrs} />`;
@@ -1180,7 +1181,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
                 fieldAttrs += ` ${literalAttrJsx(codeName, String(v))}`;
               }
             }
-            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+            const attrs = depAttrString(dep, part.component!.props ?? {}, narrowedProps.get(part)) + fieldAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
               ? `<${dep.name}${attrs}>${literalTextJsx(itemText)}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
@@ -1190,7 +1191,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.

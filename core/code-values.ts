@@ -1,6 +1,6 @@
 /** Explicit typed code values for canonical finite contract axes. No name-
  * based boolean conversion: false, "false", null and omission stay distinct. */
-import type { Contract, Prop } from "../scripts/contract-schema.js";
+import type { Contract, Part, Prop } from "../scripts/contract-schema.js";
 import {
   PropSchema,
   walkAnatomy,
@@ -51,17 +51,37 @@ export function componentLookupValue(
   return canonical === "true";
 }
 
+/** `narrowed`: a visibility gate on this parent prop (the instance's own or an
+ * ancestor's) has narrowed it, so `===` against a key the gate excludes is a
+ * TS2367. Object.is is the same test for these string and boolean keys,
+ * unnarrowed, as the boolean visibleWhen gate itself is written. */
 export function componentLookupExpression(
   child: Prop | undefined,
   parentExpression: string,
   map: Record<string, string>,
   parent?: Pick<Prop, "name" | "type">,
+  narrowed = false,
 ): string {
   const chain = Object.entries(map).map(([key, value]) => {
     const literal = JSON.stringify(componentLookupValue(child, value));
-    return `${parentExpression} === ${JSON.stringify(componentLookupValue(parent, key))} ? ${literal} : `;
+    const k = JSON.stringify(componentLookupValue(parent, key));
+    return `${narrowed ? `globalThis.Object.is(${parentExpression}, ${k})` : `${parentExpression} === ${k}`} ? ${literal} : `;
   }).join("");
   return codeValueExpression(child, chain + "undefined");
+}
+
+/** Per part, the props a visibleWhen gate narrows there: its own and every
+ * ancestor's truthy or enum gate (`{flag ? …}`, `{axis === 'v' ? …}`). */
+export function narrowedPropsByPart(contract: Contract): Map<Part, ReadonlySet<string>> {
+  const out = new Map<Part, ReadonlySet<string>>();
+  const visit = (part: Part, above: ReadonlySet<string>) => {
+    const gate = part.visibleWhen;
+    const here = gate && typeof gate.equals !== "boolean" ? new Set([...above, gate.prop]) : above;
+    out.set(part, here);
+    for (const child of Object.values(part.parts ?? {})) visit(child, here);
+  };
+  for (const part of Object.values(contract.anatomy)) if (part) visit(part, new Set());
+  return out;
 }
 const rawName = (index: number) => `__dscValue${index}`;
 export function mappedPropBinding(

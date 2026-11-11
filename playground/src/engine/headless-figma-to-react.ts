@@ -42,8 +42,8 @@ export interface HeadlessImportResult {
 
 /** `source` is the workspace origin the page records: 'json' for a pasted or
  *  uploaded dump (the JSON tab), 'figma' for a Figma URL import. */
-export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json'): HeadlessImportResult {
-  const batch = proposalsFromDump(dump, 'react-runtime');
+export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json', options: { conventions?: readonly string[] } = {}): HeadlessImportResult {
+  const batch = proposalsFromDump(dump, 'react-runtime', options.conventions);
   if (batch.proposals.length === 0) {
     throw Error(batch.skipped.length > 0
       ? `figma-to-react-nothing-proposed: none of the ${batch.skipped.length} component set(s) could be proposed — `
