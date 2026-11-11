@@ -444,14 +444,28 @@ export async function pinnedBrowser() {
 }
 
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
-async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; stories: LoadedStory[]; components: StoryComponent[] }> {
+async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; indexSha256: string; stories: LoadedStory[]; components: StoryComponent[] }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
   // The browser runs in the pinned container: a Storybook on this machine is reached through Docker's host gateway.
   const shown = new URL(base);
   if (['localhost', '127.0.0.1', '[::1]'].includes(shown.hostname)) shown.hostname = 'host.docker.internal';
-  const index = await (await fetch(new URL('index.json', base))).json() as { entries: Record<string, { type: string; id: string }> };
-  const ids = Object.values(index.entries).filter((e) => e.type === 'story').map((e) => e.id);
-  if (!ids.length) throw Error('storybook-reader: index.json lists no stories');
+  const indexText = await (await fetch(new URL('index.json', base))).text(), indexSha256 = createHash('sha256').update(indexText).digest('hex');
+  const every = Object.values((JSON.parse(indexText) as { entries: Record<string, { type: string; id: string; title?: string }> }).entries).filter((e) => e.type === 'story');
+  if (!every.length) throw Error('storybook-reader: index.json lists no stories');
+  // --only (reviewer messages, 2026-11-10 and 2026-11-11): only the listed components' stories are loaded, shown and
+  // read; nothing else is, excluded titles included. With a profile, the listed declarations' stories (their left-out
+  // stories are loaded for their metadata only, never shown); without one, the stories whose title is listed.
+  const listed = only && declared.length ? declared.filter((d) => only.has(d.name)) : declared;
+  for (const n of only ?? []) if (declared.length ? !listed.some((d) => d.name === n) : !every.some((e) => e.title === n)) throw Error(`storybook-reader: --only names no component: ${n}`);
+  const ids = !only ? every.map((e) => e.id) : declared.length ? listed.flatMap((d) => [...d.stories, ...(d.leftOut ?? []).map((l) => l.story)]) : every.filter((e) => only.has(e.title ?? '')).map((e) => e.id);
+  const shownIds = only && new Set(declared.length ? listed.flatMap((d) => d.stories) : ids);
+  // Before the page opens, every listed story is checked as the full pass checks it: it is in index.json, and its title
+  // is not one the profile excludes. Only a listed declaration's own story is named.
+  if (only && declared.length) for (const id of ids) {
+    const entry = every.find((e) => e.id === id);
+    if (!entry) throw Error(`profile-story-unknown:${id}`);
+    if (excluded.some((x) => x.title === entry.title)) throw Error(`profile-title-excluded-and-declared:${entry.title}`);
+  }
   const { browser, environment, stop } = await pinnedBrowser();
   try {
     const { clock, randomSeed, ...context } = PAGE;
@@ -478,12 +492,17 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       return out;
     })(${JSON.stringify(ids)})`) as LoadedStory[];
     type Shown = { tree: RenderedNode | null; box?: Box };
-    const own = new Map(declared.flatMap((d) => d.stories.map((id) => [id, d] as const)));
+    // The page opened on a story, which renders on load. Pass 1 starts once that render has settled: with --only, few
+    // stories load, so pass 1 could otherwise ask for that story while it still renders and read it as failed. After a
+    // full load the render has long settled, so this returns at once.
+    await page.waitForFunction(() => { const r = (window as any).__STORYBOOK_PREVIEW__?.currentRender;
+      return !r || ['completed', 'finished', 'aborted', 'errored'].includes(r.phase); }, null, { timeout: 60_000 }).catch(() => undefined);
+    const own = new Map(listed.flatMap((d) => d.stories.map((id) => [id, d] as const)));
     const show = (id: string, args: Record<string, unknown> = {}) => page.evaluate(`${SHOW}(${JSON.stringify([id, args, own.get(id)?.name, !!own.get(id)?.subcomponent])})`) as Promise<Shown>;
     // Pass 1, own render from the rendered page: each story at its own arguments.
     // Grammar decision 5: a story counts when it draws one or more instances of its own component, alone or beside other
     // content; one that draws none is refused by name (`ownRender`). Several instances: each one's own props are kept.
-    for (const s of stories) { const { tree } = await show(s.id); s.renderFailed = !tree;
+    for (const s of stories) { if (shownIds && !shownIds.has(s.id)) continue; const { tree } = await show(s.id); s.renderFailed = !tree;
       const n = tree ? await page.evaluate('window.__dsReaderInstances.length') as number : 0; s.ownRender = !!tree && n === 0;
       if (n > 1) s.instances = await page.evaluate('window.__dsReaderInstances.map(({ props, nonPlain }) => ({ props, nonPlain }))') as LoadedStory['instances'];
       if (n) s.layout = await page.evaluate(`${LAYOUT_FLAGS}(window.__dsReaderInstances.flatMap((i) => i.tops))`) as Array<[string, string]>; }
@@ -493,10 +512,10 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     environment.react = renderers[0];
     // Pass 2, a reference image per expected variant, and the faces its text is drawn with.
     // --grammar-only: the grammar classifier and the matrix rule alone (no reference is rendered or kept).
-    if (grammarOnly) return { environment, stories, components: readStories(stories, declared, excluded) };
-    // --only (reviewer, 2026-11-10): pass 2 renders only the listed components, so a held-out one is never rendered; a
-    // name that is not a component the reader knows refuses the run. Pass 1 above read every story, as always.
-    const all = readStories(stories, declared, excluded);
+    if (grammarOnly) return { environment, indexSha256, stories, components: readStories(stories, declared, excluded) };
+    // --only: pass 1 above showed only the listed components' stories, and readStories sees only their declarations, so
+    // no other story, excluded title or failure text naming one enters this run.
+    const all = readStories(stories, listed, only ? [] : excluded);
     for (const n of only ?? []) if (!all.some((c) => c.title === n && !c.excludedBy)) throw Error(`storybook-reader: --only names no component: ${n}`);
     const components = all.filter((c) => !c.excludedBy && (!only || only.has(c.title))), cdp = await page.context().newCDPSession(page);
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
@@ -540,32 +559,52 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       }
       c.faces = [...faces.values()].sort(byFace);
     }
-    return { environment, stories, components: [...components, ...all.filter((c) => c.excludedBy)] };
+    return { environment, indexSha256, stories, components: [...components, ...all.filter((c) => c.excludedBy)] };
   } finally { await browser.close(); stop(); }
 }
 
 if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
+  // Every argument is one of these flags or the value right after a flag that takes one; anything else (an equals form,
+  // another spelling, a repeated flag, a stray word) refuses the run before anything loads.
+  const usage = (why: string): never => { console.error(`storybook-reader: ${why}`); process.exit(2); };
+  const VALUED = ['--storybook', '--out', '--profile', '--only'], args = process.argv.slice(2), seen = new Set<string>();
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i]!;
+    if (!VALUED.includes(a) && a !== '--grammar-only') usage(`unknown argument: ${a}`);
+    if (seen.has(a)) usage(`${a} given twice`); seen.add(a);
+    if (VALUED.includes(a)) { if (!args[i + 1] || args[i + 1]!.startsWith('-')) usage(`${a} needs a value`); i++; }
+  }
   const flag = (name: string) => { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : undefined; };
   const storybook = flag('--storybook'), out = flag('--out');
   if (!storybook || !out) { console.error('usage: npx tsx scripts/storybook-reader.ts --storybook <url> --out <dir> [--grammar-only] [--profile <system profile>] [--only <components.json>]'); process.exit(2); }
   const grammarOnly = process.argv.includes('--grammar-only'), profile = flag('--profile'), onlyFile = flag('--only');
-  // --only <file>: a JSON list of component titles; pass 2 renders and writes only those (never with --grammar-only).
-  const only = onlyFile ? new Set(JSON.parse(readFileSync(onlyFile, 'utf8')) as string[]) : undefined;
+  // --only <file>: a JSON list of one or more component names; only those are loaded, shown, read and written (never
+  // with --grammar-only). A missing, unreadable or empty value refuses the run; it never falls back to every story.
+  let only: Set<string> | undefined, onlySha256 = '';
+  if (onlyFile) try {
+    const bytes = readFileSync(onlyFile), list = JSON.parse(bytes.toString('utf8'));   // read once: parsed and hashed alike
+    if (!Array.isArray(list) || !list.length || list.some((n) => typeof n !== 'string' || !n)) throw Error();
+    only = new Set(list); onlySha256 = createHash('sha256').update(bytes).digest('hex');
+  } catch { usage('--only needs a readable JSON list of one or more component names'); }
   if (only && grammarOnly) { console.error('storybook-reader: --only applies to pass 2; --grammar-only renders nothing'); process.exit(2); }
   // A system profile's decision-4 declarations (its `components`): which stories make each component, and its axes.
   const read = profile ? readProfile(profile) : undefined;
   const declared = read?.components ?? [], excludedTitles = read?.excluded ?? [];
   mkdirSync(path.join(out, grammarOnly ? '' : 'references'), { recursive: true });
-  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, stories, components: all }) => {
+  loadStorybook(storybook, grammarOnly ? undefined : path.join(out, 'references'), grammarOnly, declared, excludedTitles, only).then(({ environment, indexSha256, stories, components: all }) => {
     // Excluded titles never become components, and are reported apart with what they would have been.
     const components = all.filter((c) => !c.excludedBy), excluded = all.filter((c) => c.excludedBy)
       .map(({ title, stories: n, grammar, matrix, excludedBy }) => ({ title, reason: excludedBy!, stories: n, grammar, matrix }));
     // Grammar only: each component's verdict, matrix outcome and layout flags; each story's render outcome. No references.
-    if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, environment,
+    if (grammarOnly) writeFileSync(path.join(out, 'grammar.json'), JSON.stringify({ version: 1, storybook, index: { sha256: indexSha256 }, environment,
       stories: stories.map(({ id, title, ownRender, renderFailed }) => ({ id, title, ownRender, renderFailed })),
       components: components.map(({ title, stories: n, grammar, layout, matrix, leftOut, repeats, skeleton }) => ({ title, stories: n, grammar, layout, matrix, leftOut, repeats, ...(skeleton ? { skeleton } : {}),
         leftOutVariants: leftOut?.filter((l) => l.reason === 'left-out-variant').length })), excluded }, null, 2) + '\n');
-    else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, environment, stories: stories.length, components, excluded }, null, 2) + '\n');
+    // Under --only, an excluded title is never loaded: its title and reason come from the profile alone.
+    else writeFileSync(path.join(out, 'stories.json'), JSON.stringify({ version: 1, storybook, index: { sha256: indexSha256 },
+      ...(only ? { only: { path: onlyFile, sha256: onlySha256 }, profile: profile ? { path: profile, sha256: createHash('sha256').update(readFileSync(profile)).digest('hex') } : null,
+        excludedByProfile: excludedTitles.map(({ title, reason }) => ({ title, reason })) } : {}),
+      environment, stories: stories.length, components, excluded }, null, 2) + '\n');
     const inGrammar = components.filter((c) => c.grammar.grammar === 'in').length, kit = components.length + excluded.length;
     // Coverage never shrinks the kit: the headline counts excluded titles in the denominator; the other figure does not.
     if (excluded.length) console.log(`coverage ${inGrammar}/${kit} with the ${excluded.length} title(s) excluded by profile counted (headline), ${inGrammar}/${components.length} without`);
