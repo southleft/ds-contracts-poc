@@ -455,9 +455,9 @@ export interface NodeSpec {
    *  margins now APPLY on canvas — a uniform positive sibling gap lowers to
    *  the parent's itemSpacing at compile (variable-bound when the margin
    *  rode one token), and every residual margin becomes the child's CSS
-   *  margin box at runtime (a fixed wrapper frame, clipsContent false, child
-   *  placed at (left, top) — negative margins shrink the flow box and let
-   *  the glyph overhang, the exact CSS geometry). The canvas preview keeps
+   *  margin box at runtime (a wrapper frame, clipsContent false: auto layout
+   *  padded by the margins when none is negative; else fixed, the child placed
+   *  at (left, top), so the glyph overhangs as in CSS). The canvas preview keeps
    *  rendering residual margins as CSS margins.
    *  A ROOT spec cannot wrap itself (SET children are the component). Those
    *  margins are named and stripped (FC-EMIT-ROOT-MARGIN-SILENT). */
@@ -7953,18 +7953,18 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
 const strokeAlignJs = (hasOutside: boolean): string =>
   hasOutside ? `spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE')` : `'INSIDE'`;
 
-/** Round 5d: the CSS margin box as a fixed wrapper frame (see
+/** Round 5d: the CSS margin box as a wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
 const marginBoxRuntime = (has: boolean): string =>
   has
     ? `
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
+// margins gets its CSS MARGIN BOX as a wrapper frame (clipsContent false).
+// Margins of zero or more are the box's auto-layout padding, the box hugging
+// the child, so the set stays in auto layout. A negative margin shrinks the
+// flow box and lets the glyph overhang (the Badge pip's -2/-2/-8 keeps the
+// real pill 20px tall): only a fixed box with the child placed at (left, top)
+// draws that. Out-of-flow and FILL-sized children keep their own lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow || childSpec.widthFill) return;
@@ -7973,17 +7973,16 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
+  const placed = t < 0 || r < 0 || b < 0 || l < 0;
   const box = figma.createFrame();
   box.name = childSpec.name + ' (margin box)';
   box.fills = [];
   box.clipsContent = false;
   parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
+  if (placed) box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));
+  else Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', paddingTop: t, paddingRight: r, paddingBottom: b, paddingLeft: l });
   box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
+  if (placed) { childNode.x = l; childNode.y = t; }
   // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
   // must transfer the visible binding to the WRAPPER — hiding only the
   // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
