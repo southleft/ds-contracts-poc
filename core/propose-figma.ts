@@ -1,5 +1,4 @@
-import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
-import {conventionSet,imperceptibleBlendView} from './profile-conventions.js';
+import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js'; import {conventionSet,imperceptibleBlendView} from './profile-conventions.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
@@ -17207,9 +17206,7 @@ function proposeFromDumpFencedImpl(
     contractIdByKey?: Map<string, string>;
     capturedMainIdsByKey?: ReadonlyMap<string, ReadonlySet<string>>;
     /** Fresh batch-owned main with a witnessed composed-paint caller. */
-    retainObservedRootPaint?: boolean;
-    /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door only. */
-    conventions?: readonly string[];
+    retainObservedRootPaint?: boolean; /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door only. */ conventions?: readonly string[];
     prefix?: string;
     fileKey?: string | null;
     /** Mint provisional tokens (core/mint-tokens.ts) from the unbound-value
