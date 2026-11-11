@@ -22,10 +22,13 @@ import { readProfile, type SystemProfile } from './storybook-reader.js';
 type Counts = { pass: number; fail: number; unverified: number; 'font-blocked': number };
 const json = (f: string) => JSON.parse(readFileSync(f, 'utf8'));
 const refuse = (set: string, field: string): never => { throw Error(`reading-receipt-missing:${field}:${set}`); };
-// A check's counts; a check that records a stopped conversion (a status such as `refused` or `build-failed`, with its
-// reason or error) passes none. Anything else without counts is refused by name.
-const countsOf = (f: string, set: string): Counts | null => { const r = json(f), c = r.counts ?? r.check?.counts ?? r.verdicts;
+// A check's counts: the first of `counts`, `check.counts` and `verdicts` that is an object (in the React to Figma
+// receipt `counts` is whether the set counts, and `verdicts` holds the counts). A check that records a stopped
+// conversion (a status such as `refused` or `build-failed`, with its reason or error) passes none. Anything else
+// without counts is refused by name, and so is a set that does not count yet passes a variant.
+const countsOf = (f: string, set: string): Counts | null => { const r = json(f), c = [r.counts, r.check?.counts, r.verdicts].find((v) => v !== null && typeof v === 'object');
   if (!c && r.status && !['pass', 'fail'].includes(r.status) && (r.reason || r.error)) return null;
+  if (r.counts === false && c?.pass > 0) throw Error(`reading-receipt-inconsistent:counts:${set}`);
   return c && typeof c.pass === 'number' ? c : refuse(set, 'counts'); };
 
 export interface Cell { set: string; dump: string; grammar: string; check?: string; failed?: string }
