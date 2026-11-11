@@ -1,4 +1,4 @@
-import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
+import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js'; import {conventionSet,imperceptibleBlendView} from './profile-conventions.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
@@ -17206,7 +17206,7 @@ function proposeFromDumpFencedImpl(
     contractIdByKey?: Map<string, string>;
     capturedMainIdsByKey?: ReadonlyMap<string, ReadonlySet<string>>;
     /** Fresh batch-owned main with a witnessed composed-paint caller. */
-    retainObservedRootPaint?: boolean;
+    retainObservedRootPaint?: boolean; /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door only. */ conventions?: readonly string[];
     prefix?: string;
     fileKey?: string | null;
     /** Mint provisional tokens (core/mint-tokens.ts) from the unbound-value
@@ -20062,7 +20062,13 @@ export function proposeBatchFromDump(
   dump: Record<string, unknown>,
   opts: Parameters<typeof proposeFromDump>[1],
 ): DumpBatchResult {
-  return proposeBatchFromDumpInternal(dump, opts);
+  // A profile's conventions: an unknown name is refused by name, and each is off unless the profile names it. The
+  // imperceptible-blend view is the public path's only: the inspection and draft-paint doors never see it.
+  if (!conventionSet(opts.conventions).has('imperceptible-solid-paint-blend-not-carried')) return proposeBatchFromDumpInternal(dump, opts);
+  const view = imperceptibleBlendView(dump), result = proposeBatchFromDumpInternal(view.dump, opts);
+  for (const proposal of result.proposals) for (const [path, mode] of view.dropped.get(proposal.setName) ?? [])
+    proposal.notes.push(`${path}: imperceptible solid fill (opacity × 255 < 0.5) carried as NORMAL; its ${mode} blend mode cannot change a pixel and is not carried (profile convention imperceptible-solid-paint-blend-not-carried)`);
+  return result;
 }
 
 /** Inspection-only batch door: preserve ordinary dependency ordering, caller

@@ -1105,3 +1105,35 @@ test('normal-flow literal and prop text paint above the fill without altering wr
  const part=c.anatomy.root.parts.label;assert(composedFillFlowChild(part));
  for(const changed of [{...part,declared:{position:'static'}},{...part,literals:{...part.literals,left:'2px'}},{...part,declared:{transform:'translateX(1px)'}}])assert.equal(composedFillFlowChild(changed),false);
 });
+
+test('profile convention imperceptible-solid-paint-blend-not-carried: off by default, unknown names refused, an imperceptible MULTIPLY fill proposes as its NORMAL twin with a note',async()=>{
+ const {mapRestToDump}=await import('../extract/figma/rest/map.js');
+ const {proposeBatchFromDump}=await import('./propose-figma.js');
+ const {conventionSet,imperceptibleBlendView}=await import('./profile-conventions.js');
+ const {tokenCorpusFromJson}=await import('./token-corpus.js');
+ assert.throws(()=>conventionSet(['no-such-convention']),/profile-convention-unknown:no-such-convention/);
+ assert.equal(conventionSet(undefined).size,0);
+ const dumpOf=(blendMode:'MULTIPLY'|'NORMAL',opacity:number)=>{
+  const wrapper={id:'wrapper',name:'Wrapper',type:'FRAME',size:{x:20,y:20},relativeTransform:[[1,0,0],[0,1,0]],absoluteBoundingBox:{x:0,y:0,width:20,height:20},fills:[{type:'SOLID',color:{r:Math.fround(.2),g:Math.fround(.4),b:Math.fround(.6),a:1},opacity,blendMode}],children:[]};
+  const variant={id:'variant',name:'Case=A',type:'COMPONENT',size:{x:20,y:20},relativeTransform:[[1,0,0],[0,1,0]],absoluteBoundingBox:{x:0,y:0,width:20,height:20},fills:[],variantProperties:{Case:'A'},children:[wrapper]};
+  const set={id:'set',name:'PaintProof',type:'COMPONENT_SET',componentPropertyDefinitions:{Case:{type:'VARIANT' as const,defaultValue:'A',variantOptions:['A']}},children:[variant]};
+  return mapRestToDump({name:'Imperceptible blend',nodes:{set:{document:set}}}).dump as Record<string,unknown>;
+ };
+ // Under half an 8-bit step (×255 < 0.5) the blend mode is dropped; at or above it the composition stays.
+ const below=Math.fround(0.0019),above=Math.fround(0.002);
+ const kept=imperceptibleBlendView(dumpOf('MULTIPLY',above));
+ assert.equal(kept.dropped.size,0);
+ const source=dumpOf('MULTIPLY',below),before=JSON.stringify(source),view=imperceptibleBlendView(source);
+ assert.equal(JSON.stringify(source),before,'the dump itself is not changed');
+ assert.deepEqual([...view.dropped.get('PaintProof')!],[['(root)/Wrapper','MULTIPLY']]);
+ const opts={corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true};
+ const on=['imperceptible-solid-paint-blend-not-carried'],shape=(r:any)=>JSON.stringify({proposals:r.proposals.map((p:any)=>({setName:p.setName,contract:p.contract})),skipped:r.skipped});
+ // Off: exactly today's outcome, with or without an empty conventions list.
+ assert.equal(shape(proposeBatchFromDump(source,{...opts,conventions:[]})),shape(proposeBatchFromDump(source,opts)));
+ assert.throws(()=>proposeBatchFromDump(source,{...opts,conventions:['no-such-convention']}),/profile-convention-unknown/);
+ // On: the same proposal the NORMAL twin of that paint gets, and one note naming the dropped blend mode.
+ const carried=proposeBatchFromDump(source,{...opts,conventions:on}),twin=proposeBatchFromDump(dumpOf('NORMAL',below),opts);
+ assert.equal(shape(carried),shape(twin));
+ assert.equal(carried.proposals[0]!.notes.filter((n:string)=>/blend mode cannot change a pixel/.test(n)).length,1);
+ assert.equal(JSON.stringify(source),before,'the batch does not change the dump either');
+});
