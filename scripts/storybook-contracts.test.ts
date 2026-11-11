@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
-import { carryVariantText, declare, paintedFirst, seed } from './storybook-contracts.js';
+import { createHash } from 'node:crypto';
+import { carryVariantText, declare, paintedFirst, profileConventions, seed } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -105,4 +106,14 @@ test('a set width or height is read only when the converter asks, and survives t
   assert.equal(captureJs('[x]', undefined, undefined, undefined, true).includes('out.field'), false); // field text: its own opt-in
   assert.equal(captureJs('[x]', undefined, undefined, undefined, false, true).includes('out.field = '), true);
   assert.deepEqual(normalizeNode({ ...node, field: { value: '', placeholder: 'Search' } }).field, { value: '', placeholder: 'Search' });
+});
+
+test('the contract step switches on the conventions of the profile the reader recorded, refusing changed bytes and unknown names', () => {
+  const profile = (conventions: string[]) => Buffer.from(JSON.stringify({ conventions })), sha = (b: Buffer) => createHash('sha256').update(b).digest('hex');
+  const on = profile(['icon-box-keeps-glyph-size']), read = (bytes: Buffer) => () => bytes;
+  assert.deepEqual([...profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(on))], ['icon-box-keeps-glyph-size']);
+  assert.deepEqual([...profileConventions({ profile: null }), ...profileConventions({})], []);
+  assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(profile([]))), /profile-changed-since-read:p\.json/);
+  const odd = profile(['no-such-convention']);
+  assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(odd) } }, read(odd)), /profile-convention-unknown:no-such-convention/);
 });

@@ -15,10 +15,12 @@
  *   npx tsx scripts/storybook-contracts.ts --stories <stories.json> --out <dir> [--storybook <url>] [--titles "a|b"]
  *     [--file-key <key>]   with a file key, the variables and component scripts for that file only
  */
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
@@ -34,7 +36,16 @@ export interface StoryDeclaration {
   version: 2; source: 'storybook'; storybook: string; react: string | null;
   components: DeclaredComponent[]; refused: { subject: string; reason: string }[];
 }
-interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[] }
+interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[]; profile?: { path: string; sha256: string } | null }
+
+/** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
+ * refused by name if its bytes changed since the reader read it; none when the reader recorded no profile. */
+export function profileConventions(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => Buffer = (file) => readFileSync(file)) {
+  if (!stories.profile) return conventionSet([]);
+  const bytes = read(stories.profile.path);
+  if (createHash('sha256').update(bytes).digest('hex') !== stories.profile.sha256) throw Error(`profile-changed-since-read:${stories.profile.path}`);
+  return conventionSet((JSON.parse(bytes.toString()) as { conventions?: string[] }).conventions);
+}
 
 /** Classes that name an element. Emotion's generated `css-<hash>` names hash the styles (a random blob URL in one gives
  * a new name every run), so they never identify a part; every other class does, as before. */
@@ -149,7 +160,7 @@ async function main() {
   const flag = (n: string) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : undefined; };
   const out = flag('--out'), storiesPath = flag('--stories'), fileKey = flag('--file-key'), titles = flag('--titles')?.split('|');
   if (!out || !storiesPath) throw Error('usage: storybook-contracts.ts --stories <stories.json> --out <dir> [--storybook <url>] [--titles "a|b"] [--file-key <key>]');
-  const all = declare(JSON.parse(readFileSync(storiesPath, 'utf8')) as ReaderOutput, flag('--storybook'));
+  const read = JSON.parse(readFileSync(storiesPath, 'utf8')) as ReaderOutput, all = declare(read, flag('--storybook')), conventions = profileConventions(read);
   mkdirSync(path.join(out, 'contracts'), { recursive: true });
   writeFileSync(path.join(out, 'ds-contracts.react.json'), JSON.stringify(all, null, 2) + '\n');
   const chosen = all.components.filter((c) => !titles || titles.includes(c.subject));
@@ -240,7 +251,7 @@ async function main() {
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
-        const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });
+        const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets, conventions });
         const data = engine.compileComponentData(contract, new Map([[contract.id, contract]])) as { setName: string; isSet: boolean; variants?: unknown[] };
         if (fileKey) { // each script refuses any other file; both are built before either is written
           const tokensScript = engine.buildTokensScript(fileKey), componentScript = engine.buildComponentScript(contract, new Map([[contract.id, contract]]), fileKey);

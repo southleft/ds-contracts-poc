@@ -4,7 +4,10 @@
  * name is refused here by name, and a new convention lands here first, then in a profile. Every convention is off
  * unless a profile turns it on.
  */
-export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried'] as const;
+/** icon-box-keeps-glyph-size (React to Figma writer): an icon part whose width/height is larger than its glyph, none
+ *  smaller (a wrapper element folded into its icon part), is a box holding the glyph at its own size, laid out as the
+ *  part declares, instead of a glyph stretched to the box. */
+export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
