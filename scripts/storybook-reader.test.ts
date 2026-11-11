@@ -262,3 +262,26 @@ test('a run\'s families are mapped, then repeats removed, then sorted; each rewr
   assert.deepEqual(compare(paintedFamilies([demi], 600, 'normal', log)[0]!), []);
   assert.match(compare('Quill Grotesk Demi').join(), /text-font-mismatch:k:"Label":figma "Quill Grotesk" 600 vs rendered "Quill Grotesk Demi" 600/);
 });
+
+test('a closed native select draws one text, its selected label: one run, painted, and the label in place of its options; a list box (size above 1, multiple) reads as before', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(), cdp = await page.context().newCDPSession(page);
+    await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+    const read = async (select: string) => {
+      await page.setContent(`<div id="c"><span>Lead</span>${select}<span>Tail</span></div>`);
+      const content = await page.locator('#c').evaluate(domContentOf, true);
+      await paintRuns(cdp, content);
+      return [content.text, content.runs!.map(r => [r.text, r.painted?.length])];
+    };
+    const options = '<option>Kiwi pale</option><option selected>Plum  deep </option><option>Fig</option>';
+    assert.deepEqual(await read(`<select>${options}</select>`), ['Lead\nPlum deep\nTail', [['Lead', 1], ['Plum deep', 1], ['Tail', 1]]]);
+    assert.deepEqual(await read('<select><option value="" hidden></option><option>9</option></select>'), ['Lead\n\nTail', [['Lead', 1], ['Tail', 1]]], 'an empty label draws nothing');
+    // A list box draws its options, each its own run, read as before (Chromium reports no face for an option's text).
+    const listBox = ['Lead\nKiwi pale\nPlum deep\nFig\nTail', [['Lead', 1], ['Kiwi pale', 0], ['Plum  deep ', 0], ['Fig', 0], ['Tail', 1]]];
+    assert.deepEqual([await read(`<select size="3">${options}</select>`), await read(`<select multiple>${options}</select>`)], [listBox, listBox]);
+    // The Figma to React call (no mark) reads the same text and runs.
+    await page.setContent(`<div id="c"><select>${options}</select></div>`);
+    assert.deepEqual((await page.locator('#c').evaluate(domContentOf)).runs!.map(r => r.text), ['Plum deep']);
+  } finally { await browser.close(); }
+});
