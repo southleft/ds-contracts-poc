@@ -205,3 +205,27 @@ test('grammar decision 5: one instance of several is the subject; other instance
     assert.deepEqual([await vis('a'), await vis('trigger'), await page.evaluate(`document.getElementById('trigger').style.visibility`)], ['visible', 'visible', 'visible']);
   } finally { await browser.close(); }
 });
+
+import {spawnSync} from 'node:child_process';
+import {existsSync, mkdtempSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+test('a bad --only, an equals form, another spelling or a repeated flag refuses the run (exit 2) before anything loads or is written', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'reader-args-')), out = join(dir, 'out'), list = join(dir, 'list.json'), empty = join(dir, 'empty.json');
+  writeFileSync(list, '["Components/Badge"]'); writeFileSync(empty, '[]');
+  const run = (...args: string[]) => spawnSync(process.execPath, ['--import', 'tsx', new URL('./storybook-reader.ts', import.meta.url).pathname,
+    '--storybook', 'http://127.0.0.1:9/', '--out', out, ...args], {encoding: 'utf8'});
+  for (const [args, why] of [[['--only'], '--only needs a value'], [[`--only=${list}`], 'unknown argument'], [['--Only', list], 'unknown argument'],
+    [['--only', list, '--only', list], 'given twice'], [['--only', list, '--profile'], '--profile needs a value'], [['--only', empty], 'readable JSON list'],
+    [['--only', join(dir, 'missing.json')], 'readable JSON list'], [['--only', list, '--grammar-only'], 'applies to pass 2']] as Array<[string[], string]>) {
+    const r = run(...args);
+    assert.equal(r.status, 2, args.join(' ')); assert.match(r.stderr, new RegExp(why));
+  }
+  assert.equal(existsSync(out), false);
+});
+
+test('a profile names the conventions it switches on, well formed and once each', () => {
+  const p = readProfile(new URL('../examples/carbon/profile.json', import.meta.url).pathname);
+  assert.deepEqual(p.conventions, ['imperceptible-solid-paint-blend-not-carried']);
+  for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
+});
