@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
-import { carryVariantText, declare, paintedFirst, profileConventions, seed } from './storybook-contracts.js';
+import { DECLARED_CHANNELS } from './contract-schema.js';
+import { carryVariantText, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -116,4 +117,18 @@ test('the contract step switches on the conventions of the profile the reader re
   assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(profile([]))), /profile-changed-since-read:p\.json/);
   const odd = profile(['no-such-convention']);
   assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(odd) } }, read(odd)), /profile-convention-unknown:no-such-convention/);
+});
+
+test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
+  const el = (tag: string, transform: string, nodes: unknown[] = []) => ({ tag, classes: [], style: { transform }, pseudo: {}, nodes }) as any;
+  const cases: Array<[string, string, string]> = [['svg', 'matrix(0, 1, -1, 0, 0, 0)', 'rotate(90deg)'], ['svg', 'matrix(-1, 0, 0, -1, 0, 0)', 'rotate(180deg)'],
+    ['svg', 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)', 'rotate(-45deg)'], ['svg', 'matrix(1, 0, 0, 1, 0, 0)', 'matrix(1, 0, 0, 1, 0, 0)'],
+    ['svg', 'matrix(0, 1, -1, 0, 4, 0)', 'matrix(0, 1, -1, 0, 4, 0)'], ['svg', 'matrix(0.75, 0, 0, 0.75, 0, 0)', 'matrix(0.75, 0, 0, 0.75, 0, 0)'],
+    ['div', 'matrix(0, 1, -1, 0, 0, 0)', 'matrix(0, 1, -1, 0, 0, 0)'], ['svg', 'none', 'none']];
+  for (const [tag, before, after] of cases) {
+    const root = el('div', 'none', [{ t: 'el', el: el(tag, before) }]);
+    spellSvgRotation(root);
+    assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
+    if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
+  }
 });

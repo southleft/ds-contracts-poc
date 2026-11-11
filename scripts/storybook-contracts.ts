@@ -25,7 +25,7 @@ import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, prepareMint, styledChannels } from '../extract/computed/fuse.js';
-import { comboKey, normalizeNode, type Capture, type EnumAxisSpec } from '../extract/computed/lib.js';
+import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, SHOW, type StoryComponent } from './storybook-reader.js';
@@ -37,6 +37,16 @@ export interface StoryDeclaration {
   components: DeclaredComponent[]; refused: { subject: string; reason: string }[];
 }
 interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[]; profile?: { path: string; sha256: string } | null }
+
+/** Profile convention svg-rotation-carried: an svg element whose computed transform is a pure rotation (matrix(cos θ,
+ * sin θ, −sin θ, cos θ, 0, 0), θ ≠ 0) is spelled rotate(θdeg), in place; every other transform stays as captured. */
+export function spellSvgRotation(node: CapturedNode): void {
+  const m = /^matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+)\)$/.exec(node.style['transform'] ?? '');
+  const [a, b, c, d, e, f] = m ? m.slice(1).map(Number) : [];
+  if (node.tag === 'svg' && m && e === 0 && f === 0 && !(a === 1 && b === 0) && Math.abs(a! - d!) < 1e-4 && Math.abs(b! + c!) < 1e-4 && Math.abs(a! * a! + b! * b! - 1) < 1e-3)
+    node.style['transform'] = `rotate(${+((Math.atan2(b!, a!) * 180) / Math.PI).toFixed(3)}deg)`;
+  for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
+}
 
 /** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
  * refused by name if its bytes changed since the reader read it; none when the reader recorded no profile. */
@@ -211,7 +221,9 @@ async function main() {
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
           const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true, true)); // the stage's first rendered child, with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
-          captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root: normalizeNode(raw as any) });
+          const root = normalizeNode(raw as any);
+          if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
         if (captures.length !== c.cases.length) continue;
