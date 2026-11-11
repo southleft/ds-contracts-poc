@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { projectAffineFilledPath } from './affine-filled-path.js';
+import { retryCapture } from '../scripts/capture-retry.js';
 import vm from 'node:vm';
 import type { DumpSet } from '../extract/figma/types.js';
 import { projectNativeGroupPlanes } from './native-group-plane.js';
@@ -73,7 +74,7 @@ test('captured affine paths survive proposal and both React emitters against nat
         await render({});
         const box = await page.locator('#root > *').first().boundingBox();
         assert.equal(box?.width, 16); assert.equal(box?.height, 16);
-        const actual = PNG.sync.read(await page.screenshot({ omitBackground: true }));
+        const actual = PNG.sync.read(await retryCapture(() => page.screenshot({ omitBackground: true })));
         const expected = PNG.sync.read(readFileSync(new URL('../extract/figma/fixtures/native-affine-filled-path/' + root.screenshot.file, import.meta.url)));
         assert.equal(actual.width, expected.width); assert.equal(actual.height, expected.height);
         for (const bg of [0, 255]) {
@@ -126,7 +127,7 @@ test('projected rotated and reflected chevrons match original native pixels on w
     try {
       assert.equal(component.width, 16); assert.equal(component.height, 16);
       await page.setContent(`<style>body{margin:0}</style><svg width="16" height="16" viewBox="0 0 16 16"><g transform="translate(${shape.x} ${shape.y})" fill="rgb(${color.r * 255},${color.g * 255},${color.b * 255})">${shape.paths.map(p => `<path d="${p.data}" fill-rule="${p.windingRule === 'EVENODD' ? 'evenodd' : 'nonzero'}"/>`).join('')}</g></svg>`);
-      const actual = PNG.sync.read(await page.screenshot({ omitBackground: true }));
+      const actual = PNG.sync.read(await retryCapture(() => page.screenshot({ omitBackground: true })));
       const expected = PNG.sync.read(readFileSync(new URL(root.screenshot.file, dir)));
       assert.equal(actual.width, expected.width); assert.equal(actual.height, expected.height);
       for (const background of [0, 255]) {
