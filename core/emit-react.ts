@@ -33,7 +33,7 @@ import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupValue, componentLookupExpression, mappedPropBinding, mappedPropPrelude, narrowedPropsByPart, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
  *
@@ -184,6 +184,7 @@ function depAttrString(
   dep: Contract,
   fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   parent?: Contract,
+  narrowed?: ReadonlySet<string>,
 ): string {
   const parts: string[] = [];
   for (const [propName, value] of Object.entries(fixedProps)) {
@@ -195,7 +196,7 @@ function depAttrString(
       // undefined applies the child's own default for unmapped values.
       const parentProp = parent?.props.find((p) => p.name === value.prop);
       const expr = parentProp?.bindings.code.prop ?? value.prop;
-      parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp)}}`);
+      parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map, parentProp, narrowed?.has(value.prop))}}`);
       continue;
     }
     if (typeof value === 'boolean') {
@@ -727,6 +728,7 @@ export function generateTsx(
     ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
   const boundPaintChild=(part:Part)=>part.solidFillCompositionToken || part.solidFillCompositionByCombination?.rows.some(row=>row.token!==undefined) || part===contract.anatomy.root && !!(part.solidFillComposition || part.solidFillCompositionByCombination) && hasBoundPaintUsage(contract,byId)
     ? '<svg aria-hidden="true" focusable="false" data-dsc-paint-layer=""><rect width="100%" height="100%" /></svg>' : '';
+  const narrowedProps = narrowedPropsByPart(contract);
   const renderPart = (partName: string, part: Part): string => {
     for (const value of Object.values(part.component?.props ?? {})) {
       const parentName = typeof value === 'string' ? value.match(/^\{([a-zA-Z][\w-]*)\}$/)?.[1]
@@ -761,7 +763,7 @@ export function generateTsx(
       const dep = byId.get(part.component.id)!;
       const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
       const codeName = rp.bindings.code.prop;
-      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract) + reactBooleanArguments(contract,dep,part.component) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '');
+      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '');
       const itemName = selection?.item === part ? '__dscItem' : 'item';
       const itemField = (field: string) => selection?.item === part ? `${itemName}[${JSON.stringify(field)}]` : `${itemName}.${field}`;
       let childrenField: string | null = null;
@@ -786,7 +788,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component, narrowedProps.get(part)) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
