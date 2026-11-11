@@ -75,11 +75,11 @@ Its top named misses:
 
 | Miss | Variants | Sets |
 |---|---|---|
-| `text-style-unmeasured`: under diagnosis by the ruler work | 486 | 3 |
+| `text-style-unmeasured`: 486 lines on 48 variants, in the 3 sets that draw a closed native `<select>`. It changes no verdict today, since all 48 fail on other reasons. The cause is a checker gap (a ruler PR is being built) plus a converter capture that draws every `<option>` (a converter PR is being built). | 48 | 3 |
 | `content-size-mismatch` | 209 | 12 |
-| `content-missing`: icon parts not written; the icon and rotation fixes (#392–#394) are queued | 186 | 8 |
-| Layout image difference (white / black) | 169 / 164 | 11 |
-| `image-framing-unqualified` (fractional origin 81, fractional translation 10) | 91 | — |
+| `content-missing`: icon parts not written (186 lines); the icon and rotation fixes (#392–#394) are queued | 156 | 8 |
+| Layout image difference (white / black) | 169 / 164 | 11 / 16 |
+| `image-framing-unqualified` (fractional origin 81, fractional translation 10) | 91 | 5 |
 | Reference capture refused by the reader: a reader item, counted as a failure | 49 | 4 |
 | `text-not-editable` (set problem) | — | 12 |
 
@@ -92,9 +92,9 @@ Its top named misses:
 | Layout image difference on black | 283 | 16 |
 | `figma-source-instance-identity-refused` | 274 | 6 |
 
-New with the convention on (#388 targets both; not re-measured since):
+New with the convention on:
 
-| Miss | Sets |
-|---|---|
-| tsc `TS2367` in the generated `NotificationToast.tsx` | 1 |
-| `react-library-duplicate-component` | 2 |
+| Miss | Sets | Status |
+|---|---|---|
+| tsc `TS2367` in the generated `NotificationToast.tsx` | 1 | Fixed by #388 (merged) |
+| `react-library-duplicate-component` | 2 | Still open, no PR yet |
