@@ -134,7 +134,7 @@ test('REST selected-root witness separates current FILL/HUG allocation from the 
 });
 
 // A swap property's declared default, drawn by the set at every use, with no linked contract in scope.
-const swapDefaultSet = (main = (i: number) => '3:1', paths = true, conventions = ['observed-swap-default-drawn'], strip = false) => {
+const swapDefaultSet = (main = (i: number) => '3:1', paths: boolean | ((i: number) => boolean) = true, conventions = ['observed-swap-default-drawn'], strip = false) => {
   const swap = 'Glyph slot#1:9';
   const variant = (i: number, size: string, s: number, white: boolean): RestNode => ({ id: `5:${i}`, name: `Size=${size}`, type: 'COMPONENT',
     layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', size: { x: s, y: s }, absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
@@ -144,7 +144,7 @@ const swapDefaultSet = (main = (i: number) => '3:1', paths = true, conventions =
         children: [{ id: `I7:${i};8:1`, name: 'Glyph', type: 'VECTOR', size: { x: s / 2, y: s / 2 }, relativeTransform: [[1, 0, s / 4], [0, 1, s / 4]],
           absoluteBoundingBox: { x: s / 4, y: s / 4, width: s / 2, height: s / 2 }, constraints: { horizontal: 'SCALE', vertical: 'SCALE' },
           fills: [{ type: 'SOLID', color: { r: +white, g: +white, b: 1, a: 1 } }],
-          ...(paths ? { fillGeometry: [{ path: `M0 0L${s / 2} 0L${s / 2} ${s / 2}L0 ${s / 2}Z`, windingRule: 'NONZERO' }] } : {}) }] }] }] } as RestNode);
+          ...((typeof paths === 'function' ? paths(i) : paths) ? { fillGeometry: [{ path: `M0 0L${s / 2} 0L${s / 2} ${s / 2}L0 ${s / 2}Z`, windingRule: 'NONZERO' }] } : {}) }] }] }] } as RestNode);
   const document = { id: '5:0', name: 'GlyphHost', type: 'COMPONENT_SET', componentPropertyDefinitions: {
     Size: { type: 'VARIANT', defaultValue: 'Small', variantOptions: ['Small', 'Large'] }, [swap]: { type: 'INSTANCE_SWAP', defaultValue: '3:1', preferredValues: [] } },
     children: [variant(1, 'Small', 16, true), variant(2, 'Large', 20, false)] };
@@ -191,4 +191,21 @@ test('profile convention off: the recorded drawing is unread, so the proposal is
   assert.equal(off.slot.renderDefaultAnatomy, undefined);
   assert.deepEqual(off.slot.defaultContent?.length, 1);
   assert.equal(JSON.stringify(off.proposed), JSON.stringify(without.proposed));
+});
+
+test('a use without a complete drawing draws nothing in its variant and is named; the other uses keep their own', async () => {
+  const { set, contract, tree, slot, proposed } = swapDefaultSet(undefined, i => i === 1);
+  assert.equal(set.variants[1].children![0].children![0].instanceSwapContent, undefined);
+  assert.equal(slot.renderDefaultAnatomy, true);
+  assert(proposed.notes.some(n => n.includes('observed-swap-default-drawing-missing') && n.includes('1 of 2') && n.includes('Size=Large')));
+  const output = emitReact(contract, { contracts: new Map([[contract.id, contract]]), icons: new Map(), tokens: tokenInventoryFromJson([tree]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(), render = await mountGenerated(page, contract.name, output.tsx, mintedTokenCss(tree) + output.css);
+    const glyph = () => page.locator('#root [class$=_Glyph]');
+    await render({ size: 'small' });
+    assert.equal(await glyph().count(), 1);
+    await render({ size: 'large' });
+    assert.equal(await glyph().count(), 0, 'never another use\'s drawing');
+  } finally { await browser.close(); }
 });
