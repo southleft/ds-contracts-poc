@@ -31,9 +31,12 @@
 /** font-weight-initial-normal (React to Figma writer): a text that no part's font-weight reaches (a field's value or
  *  placeholder, a closed select's label, where the browser's own 400 is not an authored fact) draws at CSS's initial
  *  weight, normal (400, Regular), as the browser renders it. Off, it draws at the writer's fallback face (Medium). */
+/** lost-text-realigns-by-class (React to Figma contract step): elements align across variants by tag and position; where
+ *  that leaves a variant's own text on a part whose base element draws none (two different elements in one slot), the
+ *  set aligns again by the class stems of the prefix the profile's capture config names. Off, position alone. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
-  'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal'] as const;
+  'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

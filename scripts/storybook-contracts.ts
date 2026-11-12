@@ -87,6 +87,19 @@ export function profileConventions(stories: Pick<ReaderOutput, 'profile'>, read:
   return conventionSet((JSON.parse(bytes.toString()) as { conventions?: string[] }).conventions);
 }
 
+/** The class prefix the profile's own capture config names (`setup.captureConfig`, `library.classPrefix`), else ''. */
+export function profileClassPrefix(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => string = (file) => readFileSync(file, 'utf8')): string {
+  const config = stories.profile && (JSON.parse(read(stories.profile.path)) as { setup?: { captureConfig?: string } }).setup?.captureConfig;
+  return config ? String((JSON.parse(read(config)) as { library?: { classPrefix?: string } }).library?.classPrefix ?? '') : '';
+}
+
+/** Whether aligning by position left a variant's own text on a part whose base element draws none: two different
+ *  elements in one slot (a wrapper in one variant, a label in the others), so that text reaches no contract. */
+export function textLostByPosition(aligned: { getAligned: (key: string) => Array<{ node: CapturedNode } | null> }, base: string, keys: readonly string[]): boolean {
+  const own = (n: CapturedNode | undefined) => !!n?.nodes.some((c) => c.t === 'text' && c.v.trim());
+  return aligned.getAligned(`${base}__default`).some((el, i) => !!el && !own(el.node) && keys.some((k) => own(aligned.getAligned(`${k}__default`)[i]?.node)));
+}
+
 /** Classes that name an element. Emotion's generated `css-<hash>` names hash the styles (a random blob URL in one gives
  * a new name every run), so they never identify a part; every other class does, as before. */
 const IDENTITY_CLASSES = '^(?!css-[0-9a-z]+(-|$))';
@@ -215,6 +228,7 @@ async function main() {
   const out = flag('--out'), storiesPath = flag('--stories'), fileKey = flag('--file-key'), titles = flag('--titles')?.split('|');
   if (!out || !storiesPath) throw Error('usage: storybook-contracts.ts --stories <stories.json> --out <dir> [--storybook <url>] [--titles "a|b"] [--file-key <key>]');
   const read = JSON.parse(readFileSync(storiesPath, 'utf8')) as ReaderOutput, all = declare(read, flag('--storybook')), conventions = profileConventions(read);
+  const classPrefix = conventions.has('lost-text-realigns-by-class') ? profileClassPrefix(read) : '';
   mkdirSync(path.join(out, 'contracts'), { recursive: true });
   writeFileSync(path.join(out, 'ds-contracts.react.json'), JSON.stringify(all, null, 2) + '\n');
   const chosen = all.components.filter((c) => !titles || titles.includes(c.subject));
@@ -285,7 +299,12 @@ async function main() {
         const uaControls = await captureUaControls(page.context(), { stage, colorScheme: 'light', channels: allProps, classAllow: IDENTITY_CLASSES });
         const sweep = { captures, controls, uaControls, uaBaselineBrowser: browser.version(), allProps, stylesheetSkips: [], browserVersion: browser.version(),
           fontChecks: {}, quarantined: [], pinnedAnimations: [], shadowHostTrails: {}, textFillFolds: {}, closedShadowSuspects: {} } as unknown as SweepResult;
-        const aligned = alignSweep(sweep, comp, space, '');
+        let aligned = alignSweep(sweep, comp, space, '');
+        // Convention lost-text-realigns-by-class: elements align by tag and position; where that loses a variant's own
+        // text, the set aligns again by the class stems the profile's prefix names, which keep the two elements apart.
+        if (classPrefix && textLostByPosition(aligned, space.baseComboKey, combos.map((k) => k.key))) {
+          aligned = alignSweep(sweep, comp, space, classPrefix); row.alignedBy = 'class-stems';
+        }
         const promotion = promoteAnatomy(space, comp, aligned.union, kebab(c.name));
         row.parts = [...promotion.partIndex.keys()];
         refusals.push(...promotion.refusals.map((x: unknown) => typeof x === 'string' ? x : JSON.stringify(x)));

@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
+import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -181,4 +181,17 @@ test('a root measured hugging beneath its max-width in every combo carries hugsB
     assert.equal(carryRootHugEvidence(c, h), false);
     assert.equal(c.anatomy.root.hugsBelowMaxWidth, undefined);
   }
+});
+
+test('lost-text-realigns-by-class: a variant\'s own text on a part whose base element draws none is named; the prefix is the profile capture config\'s', () => {
+  const el = (texts: string[]) => ({ node: { nodes: texts.map((v) => ({ t: 'text', v })) } as never });
+  const aligned = (rows: Record<string, Array<ReturnType<typeof el> | null>>) => ({ getAligned: (key: string) => rows[key.replace(/__default$/, '')]! });
+  // The base's wrapper (no text of its own) and another variant's label sit in one slot: that label's text is lost.
+  assert.equal(textLostByPosition(aligned({ red: [el([]), el([])], blue: [el(['Tag content']), null] }), 'red', ['red', 'blue']), true);
+  // Text in the base too, or a whitespace-only run, or a slot the other variant does not draw: nothing is lost.
+  assert.equal(textLostByPosition(aligned({ a: [el(['A'])], b: [el(['B'])] }), 'a', ['a', 'b']), false);
+  assert.equal(textLostByPosition(aligned({ a: [el([])], b: [el([' \n'])], c: [null] }), 'a', ['a', 'b', 'c']), false);
+  const files: Record<string, string> = { 'p.json': JSON.stringify({ setup: { captureConfig: 'c.json' } }), 'c.json': JSON.stringify({ library: { classPrefix: 'x--' } }) };
+  assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!), 'x--');
+  assert.equal(profileClassPrefix({ profile: null }), '');
 });
