@@ -4981,25 +4981,18 @@ function variantParts(
       // binding (absent-bool no-op).
       return false;
     }
-    // v9: an enum-conditioned stylesWhen display:none that matches this
-    // combo suppresses the part — the shape-placement spelling for axis
-    // values where the decor is hidden in every drawn variant.
-    for (const sw of p.stylesWhen ?? []) {
-      if (sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] === 'none') {
-        return false;
-      }
-    }
-    // Round 4 base-hidden presence: declared display:none is the BASE state
-    // (sr-only parts, defaultless-axis glyphs); a stylesWhen entry matching
-    // this combo RESTORES the part. Boolean-conditioned entries evaluate at
-    // the drawn cell's boolean defaults (false) — a named canvas limit.
-    if (p.declared?.['display'] === 'none') {
-      const restored = (p.stylesWhen ?? []).some(
-        (sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined && sw.styles['display'] !== 'none',
-      );
-      if (!restored) return false;
-    }
-    return true;
+    // v9: the enum-conditioned stylesWhen display rules that match this combo
+    // apply in order, the later rule winning as in CSS: the last one decides
+    // whether the part draws (display:none suppresses it, the shape-placement
+    // spelling for hidden axis values; any other value shows it, so a rule
+    // hiding the part on one axis can be undone by a later one on another).
+    // With no matching rule, the declared display decides (round 4
+    // base-hidden presence: declared display:none, the sr-only parts and
+    // defaultless-axis glyphs, is the BASE state a matching rule restores).
+    // Boolean-conditioned entries evaluate at the drawn cell's boolean
+    // defaults (false) — a named canvas limit.
+    const last = (p.stylesWhen ?? []).filter((sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined).at(-1);
+    return (last ? last.styles['display'] : p.declared?.['display']) !== 'none';
   });
 }
 
