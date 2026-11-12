@@ -56,9 +56,10 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
  // so only its place in the snapshot is kept; every other node is compared exactly. Serialized as text, as
  // EMPTY_BOX is shared with the page.
  const observe=()=>root.evaluateHandle(new Function('el',`const empty=${EMPTY_BOX},nodes=[el,...el.querySelectorAll('*')],unpainted=new Set();
+  const drawsNothing=(n)=>{const t=getComputedStyle(n);return t.backgroundColor==='rgba(0, 0, 0, 0)'&&t.backgroundImage==='none'&&t.boxShadow==='none'&&(t.outlineStyle==='none'||!parseFloat(t.outlineWidth))&&['Top','Right','Bottom','Left'].every(k=>!parseFloat(t['border'+k+'Width'])||t['border'+k+'Style']==='none')&&['::before','::after'].every(p=>['none','normal'].includes(getComputedStyle(n,p).content))&&![...n.childNodes].some(c=>c.nodeType===3&&c.textContent.trim())&&[...n.querySelectorAll('*')].every(d=>!d.getClientRects().length);};
   for(const n of nodes){const s=getComputedStyle(n),subtree=[n,...n.querySelectorAll('*')];
-   if(n===el||unpainted.has(n)||!['absolute','fixed'].includes(s.position)||subtree.slice(1).some(d=>getComputedStyle(d).position==='fixed'))continue;
-   if(empty(n)||s.clipPath==='inset(50%)'||/^rect\\(0px,? 0px,? 0px,? 0px\\)$/.test(s.clip)||subtree.every(d=>[null,'::before','::after'].every(p=>getComputedStyle(d,p).visibility!=='visible')))
+   if(n===el||unpainted.has(n)||!['absolute','fixed'].includes(s.position)||subtree.slice(1).some(d=>getComputedStyle(d).position==='fixed'&&d.getClientRects().length))continue;
+   if(empty(n)||drawsNothing(n)||s.clipPath==='inset(50%)'||/^rect\\(0px,? 0px,? 0px,? 0px\\)$/.test(s.clip)||subtree.every(d=>[null,'::before','::after'].every(p=>getComputedStyle(d,p).visibility!=='visible')))
     for(const d of subtree)unpainted.add(d);
   }
   return {snapshot:JSON.stringify(nodes.map(n=>{if(unpainted.has(n))return {unpainted:true};
@@ -68,7 +69,7 @@ export async function observeConsumerPaintExtent(page:Page,selector:string):Prom
  const effects=await root.evaluate(el=>{
   let blend=false,negativeStack=false;
   for(const n of [el,...el.querySelectorAll('*')])for(const pseudo of [null,'::before','::after']){const s=getComputedStyle(n,pseudo);
-   if(s.filter!=='none'||s.backdropFilter!=='none')return {unsupported:'filter',blend,negativeStack};
+   if((s.filter!=='none'||s.backdropFilter!=='none')&&n.getClientRects().length)return {unsupported:'filter',blend,negativeStack};
    if(s.mixBlendMode!=='normal')blend=true;
    if(Number(s.zIndex)>=0||!Number.isFinite(Number(s.zIndex)))continue;
    negativeStack=true;
