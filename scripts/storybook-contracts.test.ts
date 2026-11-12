@@ -42,12 +42,14 @@ test('the seed contract names each option by a token-safe slug that its VARIANT 
   assert.deepEqual([seed(lone!).contract.props, seed(lone!).drawn], [[], [{}]]);
 });
 
-test('a root whose own text differs between variants carries it per value of the one axis that decides it; else it is named', () => {
+test('root-text-by-axis: a root whose own text differs between variants carries it per value of the one axis that decides it; else it is named', () => {
   const carry = (axes: string[], refs: Array<[Record<string, string>, string]>) => {
     const [c] = declare({ storybook: 'x', components: [component('a/Link', { axes, references: refs.map(([v], i) => ref(`l--${i}`, v)) })] }).components;
     const { contract, combos } = seed(c!); contract.anatomy.root.text = refs[0]![1];
     const text = new Map(combos.map((k, i) => [k.key, refs[i]![1]]));
-    return { root: contract.anatomy.root, refused: carryVariantText(contract, axes, combos, (key, part) => part === 'root' ? text.get(key)! : null) };
+    const off = structuredClone(contract), offRefused = carryVariantText(off, axes, combos, (key, part) => part === 'root' ? text.get(key)! : null);
+    assert.deepEqual([off.anatomy.root.textByProp, offRefused], [undefined, []], 'off (no root-text-by-axis), the root keeps its first text, unnamed');
+    return { root: contract.anatomy.root, refused: carryVariantText(contract, axes, combos, (key, part) => part === 'root' ? text.get(key)! : null, undefined, true) };
   };
   const one = carry(['size'], [[{ size: 'sm' }, 'Link'], [{ size: 'md' }, 'Link'], [{ size: '(default)' }, 'Lorem ipsum']]);
   assert.deepEqual([one.root.textByProp, one.refused], [{ prop: 'size', map: { sm: 'Link', md: 'Link', default: 'Lorem ipsum' } }, []]);
