@@ -10,13 +10,14 @@ import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CliUsageError } from '../src/lib.js';
 import { figmaToReactCommand, nodeSupported, parseFigmaToReactArgs } from '../src/commands/figma-to-react.js';
 import { viteEngine } from '../../../scripts/figma-to-react.js';
+import { writeInto } from '../../../scripts/figma-to-react-lib.js';
 import { faceOf, fontPreflight } from '../../../scripts/font-preflight.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -48,6 +49,42 @@ test('flags: exactly one of --url and --dump, and --out', () => {
   assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--expect-request', 'r.json']), /Unknown flag "--expect-request"/);
   assert.equal(parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--fonts', 'fonts.json']).fonts, 'fonts.json');
   assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--fonts']), /--fonts/);
+  assert.deepEqual(parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--profile', 'p.json', '--into', 'src/components']),
+    { dump: 'd', out: 'o', name: undefined, profile: 'p.json', into: 'src/components', allowFailures: false });
+  assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--profile']), /--profile needs a value/);
+  assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--into']), /--into needs a value/);
+});
+
+test('--profile is read and an unknown convention refused by name before the engine loads or anything is written', async t => {
+  const { out, restore } = sandbox(t);
+  const profile = path.join(out, 'profile.json'), target = path.join(out, 'run');
+  writeFileSync(profile, JSON.stringify({ conventions: ['no-such-convention'] }));
+  let engineLoads = 0;
+  const loadEngine = async () => { engineLoads++; throw new Error('an unknown convention reached the engine'); };
+  await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', target, '--profile', profile], supported, loadEngine), /profile-convention-unknown:no-such-convention/);
+  await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', target, '--profile', path.join(out, 'none.json')], supported, loadEngine), /profile-missing: /);
+  await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', target, '--into', profile], supported, loadEngine), /figma-to-react-into-not-a-directory: /);
+  restore();
+  assert.equal(engineLoads, 0);
+  assert.equal(existsSync(target), false);
+});
+
+test('--into copies every generated file, leaves identical ones, and refuses a path holding other content by name, writing nothing', t => {
+  const root = mkdtempSync(path.join(tmpdir(), 'cli-into-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const generated = path.join(root, 'generated'), into = path.join(root, 'lib', 'src', 'components');
+  for (const [rel, text] of [['index.ts', "export * from './Badge';\n"], ['tokens.css', ':root {}\n'], ['Badge/Badge.tsx', 'export {};\n'], ['Badge/index.ts', "export * from './Badge';\n"]]) {
+    mkdirSync(path.dirname(path.join(generated, rel)), { recursive: true });
+    writeFileSync(path.join(generated, rel), text);
+  }
+  assert.deepEqual(writeInto(generated, into), { dir: into, written: ['Badge/Badge.tsx', 'Badge/index.ts', 'index.ts', 'tokens.css'], unchanged: [] });
+  assert.deepEqual(writeInto(generated, into).unchanged, ['Badge/Badge.tsx', 'Badge/index.ts', 'index.ts', 'tokens.css']);
+  writeFileSync(path.join(into, 'index.ts'), "export * from './Other';\n");
+  rmSync(path.join(into, 'Badge', 'index.ts'));
+  rmSync(path.join(into, 'tokens.css')); mkdirSync(path.join(into, 'tokens.css'));
+  assert.throws(() => writeInto(generated, into), /^Error: figma-to-react-into-conflict: 2 path\(s\) in .* hold other content and were not overwritten: index\.ts, tokens\.css; nothing was written$/);
+  assert.equal(existsSync(path.join(into, 'Badge', 'index.ts')), false, 'a refusal writes nothing, not even a missing file');
+  assert.equal(readFileSync(path.join(into, 'index.ts'), 'utf8'), "export * from './Other';\n");
 });
 
 test('Windows and Node versions outside the consumer Vite engine range are refused before loading the engine', async () => {
@@ -162,11 +199,16 @@ test('--url imports through the app\'s own URL import with the token from the en
 test('a run packages the dump, and without a Chromium says NOT CHECKED and exits 0', async t => {
   const { out, log, restore } = sandbox(t);
   const fonts = fontManifest(t, 'Public Sans', path.join('public-sans', 'PublicSans-VariableFont_wght.ttf'));
-  const code = await figmaToReactCommand(['--dump', dump, '--out', out, '--fonts', fonts], supported, viteEngine);
+  const profile = path.join(out, 'profile.json'), into = path.join(out, 'library', 'src', 'components');
+  writeFileSync(profile, JSON.stringify({ conventions: ['imperceptible-solid-paint-blend-not-carried'] }));
+  const code = await figmaToReactCommand(['--dump', dump, '--out', path.join(out, 'run'), '--fonts', fonts, '--profile', profile, '--into', into], supported, viteEngine);
   restore();
   assert.equal(code, 0);
-  const result = JSON.parse(readFileSync(path.join(out, 'result.json'), 'utf8'));
+  const result = JSON.parse(readFileSync(path.join(out, 'run', 'result.json'), 'utf8'));
   assert.equal(result.rootId, 'ds.badge');
+  assert.deepEqual(result.profile, { sha256: createHash('sha256').update(readFileSync(profile)).digest('hex'), conventions: ['imperceptible-solid-paint-blend-not-carried'] });
+  assert.ok(readdirSync(into).includes('Badge') && existsSync(path.join(into, 'index.ts')) && existsSync(path.join(into, 'tokens.css')), readdirSync(into).join(', '));
+  assert.ok(log.some(l => new RegExp(`^  into ${into.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}: \\d+ file\\(s\\) written, 0 unchanged$`).test(l)), log.join('\n'));
   assert.equal(result.check.status, 'not-checked');
   assert.ok(log.some(l => /^◌ figma-to-react Badge: NOT CHECKED — no Chromium for the consumer check .*npx playwright-core@\d+\.\d+\.\d+ install chromium/.test(l)), log.join('\n'));
   assert.equal(log.some(l => l.startsWith('✔')), false);

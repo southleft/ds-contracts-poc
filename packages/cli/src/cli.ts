@@ -157,7 +157,8 @@ const COMMAND_HELP: Record<string, string> = {
 
   figma-to-react --url <figma component-set link> --out <dir>
   figma-to-react --dump <dump.json> --out <dir>
-    [--name <npm package name>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--allow-failures]
+    [--name <npm package name>] [--fonts <manifest.json>] [--native-strokes <receipt.json>]
+    [--profile <profile.json>] [--into <dir>] [--allow-failures]
 
 Writes <out>/<name>.tgz (install it with npm install <path>), <out>/request.json
 and <out>/result.json, then checks the package against the design: every Figma
@@ -172,6 +173,11 @@ Every face the design's text draws must be supplied: a missing face is refused b
 name before anything is packaged or checked (exit 3, <out>/font-preflight.json).
 --capture takes the Sync Runner's <set>.capture.json as the reference images instead of
 Figma's REST exports (a token is still used for the text and icon check).
+--profile switches on the engine conventions a system profile names (an unknown
+one is refused by name before any fetch); its sha256 is recorded in result.json.
+--into copies the generated sources (each <Name>/ folder, index.ts, tokens.css)
+into a directory of your library once the run exits 0. A path there that holds
+other content is refused by name and nothing is written.
 A green check is printed only when every variant passed.
 
   FIGMA_TOKEN   a Figma personal access token (file read). Required for --url;

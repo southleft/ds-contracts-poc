@@ -26,6 +26,8 @@ The command is new in `0.5.0-rc.3`. A bare `npx @ds-contracts/cli` installs npm'
 | `--out <dir>` | Where the package and reports go. Required. |
 | `--name <npm name>` | The package name. Default: `@ds-contracts-generated/<component>`. |
 | `--fonts <manifest.json>` | Bundle the design's local font files and supplied notices in the React package. Its root import loads the fonts; the check installs the same archive. Checksums and declared family names are verified before fetching or writing. Required for every face the design's text draws: a missing face is refused by name before packaging (exit 3). See [font manifests](../../docs/PREVIEW.md). |
+| `--profile <profile.json>` | A system profile. Its `conventions` switch on the engine rules it names; an unknown one is refused by name before any fetch. The profile's sha256 is recorded in `result.json`. |
+| `--into <dir>` | Copy the generated sources (each `<Name>/` folder, `index.ts`, `tokens.css`) into a directory of your library once the run exits 0. A path there that holds other content is refused by name and nothing is written; identical files are left as they are. |
 | `--allow-failures` | Exit 0 even when a variant fails; the report still says FAIL. |
 
 It writes `<out>/<name>.tgz` (install it with `npm install <path>`), `<out>/request.json`, `<out>/result.json` and the check's receipt and images in `<out>/check`. It is the same engine, generator and packager as the reference repo's `npm run figma:to-react`; `npm run cli:figma-to-react:smoke:check` proves the installed package reproduces that command's pinned output.
@@ -50,7 +52,8 @@ A green check is printed only when every variant passed.
 ## All commands
 
 ```
-ds-contracts figma-to-react (--url <link> | --dump <file>) --out <dir> [--name <npm name>] [--fonts <manifest.json>] [--allow-failures]
+ds-contracts figma-to-react (--url <link> | --dump <file>) --out <dir> [--name <npm name>] [--fonts <manifest.json>]
+                            [--profile <profile.json>] [--into <dir>] [--allow-failures]
                                                        # Figma component set → checked React package
 ds-contracts init                                      # write ds-contracts.config.json
 ds-contracts onboard <package>                         # detect → draft → stop for review
