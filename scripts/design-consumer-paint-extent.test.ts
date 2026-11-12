@@ -37,6 +37,20 @@ test('compositor effects not represented by paint layer pixels are explicitly un
  const browser=await chromium.launch();try{const page=await browser.newPage();await page.setContent('<div id="subject" style="width:20px;height:20px;filter:blur(5px);background:red"></div>');assert.deepEqual(await observeConsumerPaintExtent(page,'#subject'),{refused:'paint-extent-compositor-effect-unqualified:filter'});
  }finally{await browser.close();}
 });
+test('a node that draws nothing cannot change the raster: measured; the same node drawing anything is still refused',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage();
+ // A transparent wrapper placed against the viewport, holding a fixed bubble that is not displayed (a closed tooltip).
+ const tip=(wrap:string,bubble:string)=>`<style>#subject{display:inline-block;width:20px;height:20px;background:blue}#wrap{position:absolute;inset:0;pointer-events:none;${wrap}}#bubble{position:fixed;left:0;top:0;width:30px;height:10px;background:#333;${bubble}}</style><div id="subject"><span id="wrap"><span id="bubble">Quill tip</span></span></div>`;
+ const read=async(content:string)=>{await page.setContent(content);const before=await page.locator('body').innerHTML(),r=await observeConsumerPaintExtent(page,'#subject');assert.equal(await page.locator('body').innerHTML(),before);
+  return 'refused' in r?r.refused:[r.observation.paint.width,r.observation.paint.height];};
+ assert.deepEqual(await read(tip('','display:none')),[20,20]);
+ assert.equal(await read(tip('background:rgba(0,0,0,0.1)','display:none')),'paint-extent-promotion-changed-subject');
+ assert.equal(await read(tip('','')),'paint-extent-promotion-changed-subject');
+ // A filter on a box that is not rendered changes no pixel; one on a drawn descendant is still unqualified.
+ assert.deepEqual(await read('<div id="subject" style="width:20px;height:20px;background:red"><div style="display:none"><div style="backdrop-filter:blur(8px);width:10px;height:10px"></div></div></div>'),[20,20]);
+ assert.equal(await read('<div id="subject" style="width:20px;height:20px;background:red"><div style="filter:blur(2px);width:10px;height:10px;background:blue"></div></div>'),'paint-extent-compositor-effect-unqualified:filter');
+ }finally{await browser.close();}
+});
 test('layer transforms compose parent offsets and refuse missing parents or 3D ambiguity',()=>{
  const base={offsetX:0,offsetY:0,width:10,height:20,drawsContent:true};const parent={...base,layerId:'p',offsetX:100,offsetY:50};const child={...base,layerId:'c',parentLayerId:'p',transform:[0,1,0,0,-1,0,0,0,0,0,1,0,0,0,0,1]};
  assert.deepEqual(paintLayerDocumentBox(child,[parent,child],{x:0,y:20}),{x:80,y:70,width:20,height:10});assert.equal(paintLayerDocumentBox(child,[child],{x:0,y:0}),null);
