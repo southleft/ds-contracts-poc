@@ -22,23 +22,30 @@ export function conventionSet(names: readonly string[] | undefined): ReadonlySet
   return new Set((names ?? []) as Convention[]);
 }
 
-/** Half an 8-bit alpha step: a solid paint below it composites to the backdrop's own value under every blend mode. */
+/** Half an 8-bit alpha step: a solid paint below it moves each 8-bit channel of the composite by under half a step, under
+ *  NORMAL or MULTIPLY alike (|blend − backdrop| ≤ 1), so an 8-bit render rounds to the backdrop's value. A render kept at
+ *  higher precision can still differ. */
 export const IMPERCEPTIBLE_ALPHA = 0.5 / 255;
 
 type Composed = { paint?: { blendMode: string; opacity: number }; variableId?: string };
 
 /**
- * imperceptible-solid-paint-blend-not-carried: a solid paint whose alpha is under half an 8-bit step (opacity × 255 <
- * 0.5) cannot change a pixel under any blend mode, so its blend mode is not carried; the node reads as the NORMAL peer of
- * the same paint, as the mapper writes one for a NORMAL fill. This is the one node-level view of the composed-fill fact:
- * applied once, to a copy of the dump, at the public batch door, so every read of `sourceFillComposition` and
- * `sourceNormalFillComposition` downstream sees it. The dump itself is not changed. Returns the copy and, per set, each
- * layer path whose blend mode was dropped, with that mode.
+ * imperceptible-solid-paint-blend-not-carried: a solid paint with a non-NORMAL blend mode and alpha under half an 8-bit
+ * step (opacity × 255 < 0.5) moves each 8-bit channel by under half a step, so its blend mode is not carried: the node
+ * reads as the mapper's NORMAL peer of the same paint (a `sourceNormalFillComposition`, none on TEXT, and a one-paint raw
+ * stack reading NORMAL). NORMAL paints, strokes and multi-paint raw stacks are untouched.
+ * Reach: every `sourceFillComposition` in a variant's tree, at any depth (children, instance roots, instance content).
+ * A set whose every composed fill is so read no longer enters the composed-fill pipeline, so it raises none of the
+ * pipeline's 11 `solid-fill-composition-*` throws (packages/core/src/css.ts). A set with any other composed fill still
+ * enters it, with these nodes read as NORMAL.
+ * This is the one node-level view of the composed-fill fact: applied once, to a copy of the dump, at the public batch
+ * door, so every read downstream sees it. The dump itself is not changed. Returns the copy and, per dump key, each layer
+ * path whose blend mode was dropped, with that mode.
  */
 export function imperceptibleBlendView(dump: Record<string, unknown>): { dump: Record<string, unknown>; dropped: Map<string, Map<string, string>> } {
   const copy = structuredClone(dump), dropped = new Map<string, Map<string, string>>();
   for (const [key, value] of Object.entries(copy)) {
-    const set = value as { setName?: string; variants?: unknown[] };
+    const set = value as { variants?: unknown[] };
     if (!Array.isArray(set?.variants)) continue;
     const paths = new Map<string, string>();
     const walk = (node: unknown, path: string): void => {
@@ -46,8 +53,12 @@ export function imperceptibleBlendView(dump: Record<string, unknown>): { dump: R
       if (!node || typeof node !== 'object') return;
       const n = node as Record<string, unknown>, composed = n.sourceFillComposition as Composed | undefined;
       if (composed?.paint && composed.paint.blendMode !== 'NORMAL' && composed.paint.opacity < IMPERCEPTIBLE_ALPHA) {
+        // The mapper's NORMAL peer: none on TEXT (a NORMAL text paint is typography), the NORMAL composition elsewhere,
+        // and a one-paint raw stack reading NORMAL too (extract/figma/rest/map.ts, sourceFillComposition and its peer).
         delete n.sourceFillComposition;
-        n.sourceNormalFillComposition = { paint: { ...composed.paint, blendMode: 'NORMAL' }, ...(composed.variableId !== undefined ? { variableId: composed.variableId } : {}) };
+        if (n.type !== 'TEXT') n.sourceNormalFillComposition = { paint: { ...composed.paint, blendMode: 'NORMAL' }, ...(composed.variableId !== undefined ? { variableId: composed.variableId } : {}) };
+        const stack = n.sourceFillStack as { paints?: Array<{ paint?: { blendMode?: string } }> } | undefined;
+        if (stack?.paints?.length === 1 && stack.paints[0]!.paint) stack.paints[0]!.paint.blendMode = 'NORMAL';
         paths.set(path, composed.paint.blendMode);
       }
       for (const [k, v] of Object.entries(n)) {
@@ -56,7 +67,7 @@ export function imperceptibleBlendView(dump: Record<string, unknown>): { dump: R
       }
     };
     for (const variant of set.variants) walk(variant, '(root)');
-    if (paths.size) dropped.set(set.setName ?? key, paths);
+    if (paths.size) dropped.set(key, paths);
   }
   return { dump: copy, dropped };
 }
