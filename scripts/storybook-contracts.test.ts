@@ -24,6 +24,10 @@ test('ds-contracts.react.json declares one case per counted variant and refuses 
   assert.deepEqual(d.refused, [{ subject: 'layout/Grid', reason: 'grammar-out:absolute-child,grid' }, { subject: 'forms/Picker', reason: 'story-matrix-refused:variant-matrix-cap' },
     { subject: 'content/Empty', reason: 'no-variant' }]);
   assert.equal(declare(stories, 'http://localhost:6006/').storybook, 'http://localhost:6006/');
+  // Grammar decision 5: a reference read from one instance of a story keeps that instance, so the case captures it.
+  const several = declare({ storybook: 'x', components: [component('a/Tag', { axes: ['type'], references: [0, 2].map((i) =>
+    ({ ...ref('tag--a', { type: `t${i}` }), instance: i }) as StoryComponent['references'][number]) })] }).components[0]!.cases;
+  assert.deepEqual(several.map((k) => k.story), [{ id: 'tag--a', args: {}, instance: 0 }, { id: 'tag--a', args: {}, instance: 2 }]);
 });
 
 test('the seed contract names each option by a token-safe slug that its VARIANT binding maps back; no options, no props', () => {
