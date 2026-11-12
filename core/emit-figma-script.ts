@@ -2103,6 +2103,10 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
   const l = resolveLayout(part, subst);
+  // The display this variant draws: a value that varies by an enum value rides stylesWhen (fuse.display-by-axis-carried),
+  // the later matching rule winning as in CSS; `none` hides the variant and leaves the axis as declared.
+  const display = (part.stylesWhen ?? []).reduce((d, rule) => rule.equals !== undefined && subst[rule.prop] === rule.equals &&
+    rule.styles['display'] !== undefined && rule.styles['display'] !== 'none' ? rule.styles['display'] : d, part.declared?.['display']);
   // A2 grid (G1): declared tracks compile to the API's structured spelling;
   // gaps resolve to px at compile time (numbers or token refs). Zero tracks
   // can never reach here — the schema refuses them (P2b silent rewrite).
@@ -2149,7 +2153,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // block-flow VERTICAL rule below, so label sat BESIDE the input (row).
   // CSS block roots still stack; align without direction must not force a row.
   // @lower emit.axis-block-declared-vertical
-  if (l && !l.direction && part.declared?.['display'] === 'block') {
+  if (l && !l.direction && display === 'block') {
     const counter = l.align ? ALIGN_FIGMA[l.align] : 'MIN';
     return {
       mode: 'VERTICAL',
@@ -2163,7 +2167,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
     // root is CSS block flow — children stack vertically from the top-left
     // and block children span the width. The centered default is for
     // control-like roots (Button); centering a Card's content is wrong.
-    if (part.declared?.['display'] === 'block') {
+    if (display === 'block') {
       return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
     }
     return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
@@ -2198,7 +2202,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // block (one LINE), which a flat VERTICAL frame cannot express, so that
   // shape keeps the row default and is named residue rather than guessed at.
   const BLOCK_FLOW_CONTAINER = new Set(['block', 'list-item', 'flow-root', 'inline']);
-  if (!l && !isRoot && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
+  if (!l && !isRoot && BLOCK_FLOW_CONTAINER.has(display ?? '')) {
     const outOfFlow = (k: Part): boolean =>
       Boolean(k.absoluteGeometry || k.absoluteGeometryByCombination) || k.declared?.['position'] === 'absolute' ||
       k.declared?.['position'] === 'fixed' ||

@@ -3197,6 +3197,25 @@ export function prepareMint(
             return false;
           })()) {
             /* carried above as stylesWhen */
+          // @door fuse.display-by-axis-carried
+          } else if (spec && channel === 'display' && declarablePart(partName) && (() => {
+            // A box's display that varies but factors on ONE enum axis (a field wrapper that is block when stacked and an
+            // inline grid when inline) carries each value the declared vocabulary reads as a per-value stylesWhen rule;
+            // `none` (presence, carried elsewhere) and a value outside the vocabulary (a grid or flex display) carry nothing.
+            for (const ax of space.axes) {
+              if (space.presence.has(ax.prop) || space.stateProps.some((sp) => sp.prop === ax.prop)) continue;
+              const byVal = new Map<string, Set<string>>();
+              for (const r of rows) { const av = r.axisValues[ax.prop]; if (av === undefined) { byVal.clear(); break; } (byVal.get(av) ?? byVal.set(av, new Set()).get(av)!).add(r.value); }
+              if (byVal.size < 2 || [...byVal.values()].some((s) => s.size !== 1)) continue;
+              const carried = [...byVal].map(([av, s]) => [av, [...s][0]!] as const).filter(([, v]) => v !== 'none' && spec.value.test(v));
+              if (!carried.length) continue;
+              for (const [av, v] of carried) declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
+              remintReceipts.push(`display-by-axis-carried: ${partName}.display varies by "${ax.prop}" (${[...byVal].map(([k, v]) => `${k}=${[...v][0]}`).join(', ')}) — each value the declared vocabulary reads rides a per-value stylesWhen rule`);
+              return true;
+            }
+            return false;
+          })()) {
+            /* carried above as stylesWhen */
           // @door fuse.declared-varies-across-combos
           } else if (spec) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
