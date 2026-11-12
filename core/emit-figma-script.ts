@@ -4985,18 +4985,20 @@ function variantParts(
       // binding (absent-bool no-op).
       return false;
     }
-    // v9: the enum-conditioned stylesWhen display rules that match this combo
-    // apply in order, the later rule winning as in CSS: the last one decides
-    // whether the part draws (display:none suppresses it, the shape-placement
-    // spelling for hidden axis values; any other value shows it, so a rule
-    // hiding the part on one axis can be undone by a later one on another).
-    // With no matching rule, the declared display decides (round 4
-    // base-hidden presence: declared display:none, the sr-only parts and
-    // defaultless-axis glyphs, is the BASE state a matching rule restores).
-    // Boolean-conditioned entries evaluate at the drawn cell's boolean
-    // defaults (false) — a named canvas limit.
-    const last = (p.stylesWhen ?? []).filter((sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined).at(-1);
-    return (last ? last.styles['display'] : p.declared?.['display']) !== 'none';
+    // v9: an enum-conditioned stylesWhen display:none that matches this combo
+    // suppresses the part (the shape-placement spelling for axis values where
+    // the decor is hidden in every drawn variant); round 4 base-hidden
+    // presence: declared display:none (sr-only parts, defaultless-axis glyphs)
+    // is the BASE state a matching non-none rule restores. Under the profile
+    // convention styles-when-display-last-wins the matching rules apply in
+    // order instead, the later winning as in CSS, so a rule hiding the part on
+    // one axis is undone by a later one showing it on another. Boolean-
+    // conditioned entries evaluate at the drawn cell's boolean defaults
+    // (false) — a named canvas limit.
+    const matching = (p.stylesWhen ?? []).filter((sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined);
+    if (input.conventions?.has('styles-when-display-last-wins')) return (matching.at(-1)?.styles['display'] ?? p.declared?.['display']) !== 'none';
+    if (matching.some((sw) => sw.styles['display'] === 'none')) return false;
+    return p.declared?.['display'] !== 'none' || matching.length > 0;
   });
 }
 

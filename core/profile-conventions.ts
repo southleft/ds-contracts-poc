@@ -13,8 +13,11 @@
 /** closed-select-draws-selected-label (React to Figma contract step): a closed single native select draws one line, its
  *  selected option's label, and its options draw nothing until it opens; the select part takes that label as its text
  *  and its option parts are dropped, instead of every option drawn as a box with its own text. */
+/** styles-when-display-last-wins (React to Figma writer): the stylesWhen display rules that match a variant apply in
+ *  order, the later winning as in CSS, so a part hidden on one axis and shown again on another draws; off, any matching
+ *  display:none hides the part. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
-  'closed-select-draws-selected-label'] as const;
+  'closed-select-draws-selected-label', 'styles-when-display-last-wins'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

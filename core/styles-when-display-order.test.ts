@@ -3,10 +3,11 @@ import test from 'node:test';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
 
-/** The stylesWhen display rules that match a variant apply in order, the later rule winning as in CSS: a rule hiding a
- *  part on one axis is undone by a later one showing it on another (a date field hidden for `range`, shown again for
- *  `md`), and a part whose last matching rule hides it is not drawn. With no matching rule, the declared display decides. */
-test('the last matching stylesWhen display decides whether a part draws', () => {
+/** Profile convention styles-when-display-last-wins: the stylesWhen display rules that match a variant apply in order,
+ *  the later rule winning as in CSS: a rule hiding a part on one axis is undone by a later one showing it on another (a
+ *  date field hidden for `range`, shown again for `md`), and a part whose last matching rule hides it is not drawn. With
+ *  no matching rule, the declared display decides. Off, any matching display:none hides the part, as before. */
+test('with the convention, the last matching stylesWhen display decides whether a part draws; off, any none hides it', () => {
   const values = (name: string, options: string[]) => ({ name, type: { enum: options }, default: options[0],
     bindings: { code: { prop: name }, figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(options.map((o) => [o, o])) } } });
   const contract = ContractSchema.parse({
@@ -18,9 +19,11 @@ test('the last matching stylesWhen display decides whether a part draws', () => 
     } } },
     bindings: { code: { anchors: { importPath: 'test/DisplayOrder', export: 'DisplayOrder' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
   });
-  const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const drawn = (engine.compileComponentData(contract, new Map([[contract.id, contract]])) as any).variants
+  const drawn = (conventions: Set<string>) => (createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
+    icons: new Map(), conventions }).compileComponentData(contract, new Map([[contract.id, contract]])) as any).variants
     .map((v: any) => [v.name, (v.spec.children ?? []).map((c: any) => c.name).join(',')]);
-  assert.deepEqual(drawn, [['type=single, size=sm', 'field'], ['type=single, size=md', 'field,hint'],
+  assert.deepEqual(drawn(new Set(['styles-when-display-last-wins'])), [['type=single, size=sm', 'field'], ['type=single, size=md', 'field,hint'],
     ['type=range, size=sm', ''], ['type=range, size=md', 'field']]);
+  assert.deepEqual(drawn(new Set()), [['type=single, size=sm', 'field'], ['type=single, size=md', 'field,hint'],
+    ['type=range, size=sm', ''], ['type=range, size=md', '']]);
 });
