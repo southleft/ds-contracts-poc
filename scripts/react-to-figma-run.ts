@@ -141,8 +141,11 @@ if (capture.split("const CAPTURE_SET = '';").length !== 2 || dump.split('const T
 // The REST settle (step 7a): two reads of the dump's variant ids, at least 8 s apart, with the same version and documents.
 async function settle(ids: string[], text: string[]): Promise<{ version?: string; fault?: string }> {
   const read = async (): Promise<any> => {
-    for (;;) {
-      const r = await fetch(`https://api.figma.com/v1/files/${KEY}/nodes?ids=${ids.join(',')}`, { headers: { 'X-Figma-Token': process.env.FIGMA_TOKEN ?? '' } });
+    for (let transport = 0; ;) {
+      // A fetch that throws (transport, never an HTTP status) is retried up to 3 times, 5 s apart; each retry is a fault.
+      let r: Response;
+      try { r = await fetch(`https://api.figma.com/v1/files/${KEY}/nodes?ids=${ids.join(',')}`, { headers: { 'X-Figma-Token': process.env.FIGMA_TOKEN ?? '' } }); }
+      catch (e) { if (++transport > 3) throw e; receipt.faults.push({ fault: 'rest-transport-retry', try: transport }); await sleep(5000); continue; }
       if (r.status === 429) { const wait = Number(r.headers.get('retry-after') ?? 60); receipt.faults.push({ fault: 'rest-rate-limited', retryAfter: wait, tier: r.headers.get('x-figma-plan-tier'), type: r.headers.get('x-figma-rate-limit-type') }); if (wait > 300) stop('rest-rate-limited'); await sleep(wait * 1000); continue; }
       if (r.status === 403 || r.status === 404) stop(`rest-${r.status}`);
       return r.status === 200 ? r.json() : undefined;
