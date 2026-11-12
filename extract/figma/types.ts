@@ -899,6 +899,9 @@ export interface DumpNode {
    * main component, its complete API, or evidence of an unobserved variant.
    * Readers must check every observed use before sharing a static fallback. */
   instanceContent?: { root: DumpNode; propertyTypes: Record<string, string> };
+  /** REST drawing of a swap-bound instance at this usage, mapped as a FRAME
+   * (drawing nodes only). A usage fact, never the selected main or its API. */
+  instanceSwapContent?: { root: DumpNode };
   /** Captured caller occurrence; never the remote main or its full API. */
   instanceComposition?: {
     source: {nodeId:string;componentId:string;key:string};

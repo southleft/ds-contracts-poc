@@ -5,6 +5,14 @@ import { readFileSync } from 'node:fs';
 import { mapRestToDump, REST_DUMP_VERSION, type RestNode } from './map.js';
 import type { DumpFixedSwap, DumpSet } from '../types.js';
 import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
+import { chromium } from 'playwright-core';
+import { proposeFromDump } from '../../../core/propose-figma.js';
+import { tokenCorpusFromJson } from '../../../core/token-corpus.js';
+import { tokenInventoryFromJson } from '../../../core/tokens.js';
+import { mintedTokenCss } from '../../../core/mint-tokens.js';
+import { emitReact } from '../../../core/emit-react.js';
+import { mountGenerated } from '../../../core/react-test-runtime.js';
+import { ContractSchema } from '../../../scripts/contract-schema.js';
 
 const plugin = readFileSync(new URL('../dump.plugin.js', import.meta.url), 'utf8');
 const capturePlugin = vm.runInNewContext(`${plugin.slice(plugin.indexOf('async function dumpSwapInstances('), plugin.indexOf('async function dumpNode('))}; dumpSwapInstances`) as
@@ -123,4 +131,55 @@ test('REST selected-root witness separates current FILL/HUG allocation from the 
  assert.equal(result.dump._provenance!.dumpVersion,REST_DUMP_VERSION);assert.equal(JSON.stringify(response),before);
  assert.deepEqual(row.selectedRoot?.sizing,{horizontal:'FILL',vertical:'HUG'});assert.deepEqual(row.selectedRoot?.mainSize,{width:360,height:52});assert.deepEqual(row.selectedRoot?.fields,['layoutAlign','primaryAxisSizingMode']);assert.deepEqual(row.selectedRoot?.properties,{Mode:'Active'});assert.equal(row.selectedRoot?.hostMainId,'2:0');assert.equal(row.selectedRoot?.parentId,'2:1');assert.equal(row.selectedRoot?.layoutGrow,0);assert.equal(row.selectedRoot?.sizeBound,false);
  delete response.nodes.selected;assert.equal((mapRestToDump(response,{fileKey:'fixture'}).dump.Source as DumpSet).variants[0].children![0].fixedSwaps!.Content.observedInstances![0].selectedRoot,undefined,'missing original selected main grants no selected-root authority');
+});
+
+// A swap property's declared default, drawn by the set at every use, with no linked contract in scope.
+const swapDefaultSet = (main = (i: number) => '3:1', paths = true) => {
+  const swap = 'Glyph slot#1:9';
+  const variant = (i: number, size: string, s: number, white: boolean): RestNode => ({ id: `5:${i}`, name: `Size=${size}`, type: 'COMPONENT',
+    layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', size: { x: s, y: s }, absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
+    children: [{ id: `6:${i}`, name: 'Wrapper', type: 'FRAME', layoutSizingHorizontal: 'FIXED', layoutSizingVertical: 'FIXED', size: { x: s, y: s },
+      absoluteBoundingBox: { x: 0, y: 0, width: s, height: s }, relativeTransform: [[1, 0, 0], [0, 1, 0]],
+      children: [{ ...leaf(`7:${i}`, swap), componentId: main(i), size: { x: s, y: s }, relativeTransform: [[1, 0, 0], [0, 1, 0]], absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
+        children: [{ id: `I7:${i};8:1`, name: 'Glyph', type: 'VECTOR', size: { x: s / 2, y: s / 2 }, relativeTransform: [[1, 0, s / 4], [0, 1, s / 4]],
+          absoluteBoundingBox: { x: s / 4, y: s / 4, width: s / 2, height: s / 2 }, constraints: { horizontal: 'SCALE', vertical: 'SCALE' },
+          fills: [{ type: 'SOLID', color: { r: +white, g: +white, b: 1, a: 1 } }],
+          ...(paths ? { fillGeometry: [{ path: `M0 0L${s / 2} 0L${s / 2} ${s / 2}L0 ${s / 2}Z`, windingRule: 'NONZERO' }] } : {}) }] }] }] } as RestNode);
+  const document = { id: '5:0', name: 'GlyphHost', type: 'COMPONENT_SET', componentPropertyDefinitions: {
+    Size: { type: 'VARIANT', defaultValue: 'Small', variantOptions: ['Small', 'Large'] }, [swap]: { type: 'INSTANCE_SWAP', defaultValue: '3:1', preferredValues: [] } },
+    children: [variant(1, 'Small', 16, true), variant(2, 'Large', 20, false)] };
+  const components = { '3:1': { name: 'Selected', key: 'selected-key' }, '3:2': { name: 'Other', key: 'other-key' } };
+  const set = (mapRestToDump({ name: 'Fixture', nodes: { '5:0': { document, components } } } as never).dump as unknown as Record<string, DumpSet>).GlyphHost;
+  const proposed = proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
+  const contract = ContractSchema.parse(proposed.contract);
+  return { set, contract, tree: proposed.mintedTokens!.tree, slot: Object.values(contract.anatomy.root.parts!).find(p => p.slot)!.slot! };
+};
+
+test('a declared swap default drawn at every use is captured and renders as the omitted-caller fallback, with per-use paint and size', async () => {
+  const { set, contract, tree, slot } = swapDefaultSet();
+  for (const v of set.variants) assert.equal(v.children![0].children![0].instanceSwapContent?.root.children?.[0]?.type, 'VECTOR');
+  assert.equal(slot.renderDefaultAnatomy, true);
+  assert.equal(slot.defaultContent, undefined);
+  const output = emitReact(contract, { contracts: new Map([[contract.id, contract]]), icons: new Map(), tokens: tokenInventoryFromJson([tree]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(), render = await mountGenerated(page, contract.name, output.tsx, mintedTokenCss(tree) + output.css);
+    const glyph = () => page.locator('#root [class$=_Glyph]');
+    for (const [size, edge, offset, color] of [['small', 8, 4, 'rgb(255, 255, 255)'], ['large', 10, 5, 'rgb(0, 0, 255)']] as const) {
+      await render({ size });
+      assert.deepEqual(await glyph().evaluate(el => { const r = el.getBoundingClientRect(), o = el.closest('#root > * > *')!.getBoundingClientRect();
+        return [r.width, r.height, r.x - o.x, r.y - o.y, getComputedStyle(el).backgroundColor]; }), [edge, edge, offset, offset, color], size);
+    }
+    await render({ size: 'small', children: 'Caller content' });
+    assert.equal(await glyph().count(), 0);
+    assert.match(await page.locator('#root').innerText(), /Caller content/);
+  } finally { await browser.close(); }
+});
+
+test('a swap use that is not the declared default, or an incomplete drawing, keeps the default as sample content only', () => {
+  assert.equal(swapDefaultSet(i => i === 1 ? '3:1' : '3:2').slot.renderDefaultAnatomy, undefined);
+  const { set, slot } = swapDefaultSet(undefined, false);
+  assert.equal(slot.renderDefaultAnatomy, undefined);
+  assert(set.variants.every(v => v.children![0].children![0].instanceSwapContent === undefined), 'unfetched paths are a lost drawing, not a recorded one');
 });

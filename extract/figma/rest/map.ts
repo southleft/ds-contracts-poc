@@ -2641,6 +2641,25 @@ function mapNode(
         propertyTypes: Object.fromEntries(Object.entries(node.componentProperties ?? {}).map(([key, value]) => [key, value.type])),
       };
     }
+    // What a swap-bound instance draws at this usage is still drawn by this
+    // set: keep it as a usage observation (drawing nodes only; no nested
+    // instance, text or swap authority), never as the selected main's API.
+    // Propose reads it only as an omitted-caller default (observedSwapDefault).
+    count = 1;
+    const drawing = (n: RestNode, depth: number): boolean =>
+      ++count <= 128 && depth <= 8 && ['FRAME', 'GROUP', 'VECTOR', 'BOOLEAN_OPERATION', 'RECTANGLE', 'ELLIPSE'].includes(n.type) &&
+      (n.children ?? []).every(child => drawing(child, depth + 1));
+    if (out.propRefs?.mainComponent !== undefined && (node.children?.length ?? 0) > 0 && node.children!.every(child => drawing(child, 1))) {
+      const before = ctx.report.degradations.length;
+      const root = mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed swap content]`, parentBox, parent);
+      // Only a complete drawing is kept. The dump-wide variables gap
+      // (captureGaps) may remain; any other loss drops the observation.
+      if (ctx.report.degradations.splice(before).every(d => d.code === 'variable-unresolved')) {
+        delete root.abs;
+        delete root.propRefs;
+        out.instanceSwapContent = {root};
+      }
+    }
     if (out.propRefs?.mainComponent === undefined) {
       const observed = observeInstanceVector(node, ctx.components);
       if (observed) {
