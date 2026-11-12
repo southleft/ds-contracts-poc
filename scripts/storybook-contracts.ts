@@ -24,7 +24,7 @@ import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
-import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, prepareMint, styledChannels } from '../extract/computed/fuse.js';
+import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
@@ -46,6 +46,36 @@ export function spellSvgRotation(node: CapturedNode): void {
   if (node.tag === 'svg' && m && e === 0 && f === 0 && !(a === 1 && b === 0) && Math.abs(a! - d!) < 1e-4 && Math.abs(b! + c!) < 1e-4 && Math.abs(a! * a! + b! * b! - 1) < 1e-3)
     node.style['transform'] = `rotate(${+((Math.atan2(b!, a!) * 180) / Math.PI).toFixed(3)}deg)`;
   for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
+}
+
+/** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
+ * gives its selected option's label, null otherwise) takes that label as its text, when it draws one, and drops its option
+ * and optgroup parts, which a closed select never draws. Returns the parts it changed. */
+export function closedSelectLabels(contract: Contract, label: (part: string) => string | null): string[] {
+  const changed: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = part.element === 'select' ? label(name) : null;
+    if (drawn !== null) {
+      for (const [k, child] of Object.entries(part.parts ?? {})) if (child.element === 'option' || child.element === 'optgroup') delete part.parts![k];
+      if (part.parts && !Object.keys(part.parts).length) delete part.parts;
+      if (drawn) part.text = drawn;
+      changed.push(name);
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return changed;
+}
+
+/** The harness's sizing evidence (extract/computed/run.ts, task #37) for the root, on this route too: a root carrying
+ * max-width that the capture measured hugging beneath it in every combo (`hugs`, from fuse's hugEvidence) marks
+ * `hugsBelowMaxWidth`, so the writer binds the cap as a ceiling instead of baking it as the root's fixed width (a part's
+ * max-width is a ceiling already). No measurement, or a root at its cap, changes nothing. */
+export function carryRootHugEvidence(contract: Contract, hugs: ReadonlyMap<string, boolean>): boolean {
+  const root = contract.anatomy.root;
+  if (![root.tokens, root.declared, root.literals].some((m) => m && 'max-width' in m) || hugs.get('root') !== true) return false;
+  root.hugsBelowMaxWidth = true;
+  return true;
 }
 
 /** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
@@ -251,12 +281,18 @@ async function main() {
         const { enriched, enrichmentNotes } = applyMintToContract(promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
           prep.declared, prep.declaredStates, prep.setPlaneLiterals, { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);
         row.notes = [...receipts, ...enrichmentNotes].length;
+        carryRootHugEvidence(enriched as Contract, hugEvidence(aligned, space).hugs);
         // A component with no options has no variant to list: it is written as one main component (GOAL.md, 2026-11-08).
         if (c.axes.length) (enriched as Contract).bindings.figma.drawnVariants = drawn;
         const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();
+        const nodeAt = (key: string, part: string) => { const i = promotion.partIndex.get(part); return i === undefined ? null : aligned.getAligned(`${key}__default`)[i]?.node as
+          { tag: string; field?: { value: string } } | undefined ?? null; };
+        const selected = (key: string, part: string) => { const n = nodeAt(key, part); return n?.tag === 'select' && n.field ? n.field.value : null; };
+        if (conventions.has('closed-select-draws-selected-label')) // its label where it is first drawn; a part some variants lack is still read
+          closedSelectLabels(enriched as Contract, (part) => combos.map((k) => selected(k.key, part)).find((v) => v !== null) ?? null);
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return el ? textOf(el.node as never) : null; }, (key, part) => {
+          return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
