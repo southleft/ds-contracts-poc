@@ -23,7 +23,7 @@
  * written either way; the report still says FAIL). Without a Chromium it says
  * NOT CHECKED. A green check is printed only when every variant passed.
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -227,6 +227,36 @@ export interface FigmaToReactRun {
   pinned?: boolean;
   /** A system profile: its `conventions` switch on the engine rules it names (core/profile-conventions.ts). */
   profile?: string;
+  /** A directory of the user's own library that receives the generated sources once the run exits 0 (writeInto). */
+  into?: string;
+}
+
+/** --into: the generated sources (each <Name>/ folder, the root index.ts and tokens.css) copied into a directory of the
+ *  user's library. Every file is compared before any is written: a path that holds other bytes, or is not a file, is
+ *  refused by name and nothing is written; a file with the same bytes is left as it is. */
+export function writeInto(generatedDir: string, into: string): { dir: string; written: string[]; unchanged: string[] } {
+  const dir = path.resolve(into), files: string[] = [];
+  const walk = (rel: string): void => {
+    for (const entry of readdirSync(path.join(generatedDir, rel), { withFileTypes: true }).sort((a, b) => a.name < b.name ? -1 : 1)) {
+      const child = rel ? `${rel}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) walk(child); else files.push(child);
+    }
+  };
+  walk('');
+  const written: string[] = [], unchanged: string[] = [], conflicts: string[] = [];
+  for (const rel of files) {
+    const target = path.join(dir, rel);
+    if (!existsSync(target)) written.push(rel);
+    else if (statSync(target).isFile() && readFileSync(target).equals(readFileSync(path.join(generatedDir, rel)))) unchanged.push(rel);
+    else conflicts.push(rel);
+  }
+  if (conflicts.length) throw Error(`figma-to-react-into-conflict: ${conflicts.length} path(s) in ${dir} hold other content and were not overwritten: `
+    + `${conflicts.join(', ')}; nothing was written`);
+  for (const rel of written) {
+    mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    copyFileSync(path.join(generatedDir, rel), path.join(dir, rel));
+  }
+  return { dir, written, unchanged };
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -235,6 +265,7 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   log?: (line: string) => void; error?: (line: string) => void }): Promise<number> {
   const log = deps.log ?? ((line: string) => console.log(line)), error = deps.error ?? ((line: string) => console.error(line));
   const profile = run.profile ? profileConventions(run.profile) : undefined;   // read and refused before any fetch
+  if (run.into && existsSync(run.into) && !statSync(run.into).isDirectory()) throw Error(`figma-to-react-into-not-a-directory: ${run.into}`);
   // Both command entrypoints authenticate the manifest before fetching or writing.
   const faces = run.fonts ? readConsumerFonts(path.resolve(run.fonts)) : [];
   if (run.capture && !existsSync(run.capture)) throw Error(`capture-file-missing: ${run.capture}`);
@@ -302,5 +333,9 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   const report = reportCheck(r, run.out, outcome, run.allowFailures === true, deps.label);
   for (const line of report.lines) log(line);
   if (report.exitCode === 0) log(`  install: npm install ${path.resolve(run.out, r.tarball)}`);
+  if (report.exitCode === 0 && run.into) {
+    const into = writeInto(r.generatedDir, run.into);
+    log(`  into ${into.dir}: ${into.written.length} file(s) written, ${into.unchanged.length} unchanged`);
+  }
   return report.exitCode;
 }
