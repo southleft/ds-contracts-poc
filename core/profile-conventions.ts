@@ -13,11 +13,14 @@
 /** closed-select-draws-selected-label (React to Figma contract step): a closed single native select draws one line, its
  *  selected option's label, and its options draw nothing until it opens; the select part takes that label as its text
  *  and its option parts are dropped, instead of every option drawn as a box with its own text. */
+/** styles-when-display-last-wins (React to Figma writer): the stylesWhen display rules that match a variant apply in
+ *  order, the later winning as in CSS, so a part hidden on one axis and shown again on another draws; off, any matching
+ *  display:none hides the part. */
 /** absolute-overhang-whole-pixel (React to Figma writer): an absolute offset past the containing box's edge (an
  *  overhang, a tooltip centered under a narrower anchor) snaps outward to the whole pixel, as the browser's paint extent
  *  spans it; an offset inside the box is kept. Off, every offset is kept as measured (Figma-proposed geometry is exact). */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
-  'closed-select-draws-selected-label', 'absolute-overhang-whole-pixel'] as const;
+  'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
