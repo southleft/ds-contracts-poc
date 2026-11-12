@@ -177,6 +177,19 @@ export function carryVariantText(contract: Contract, axes: readonly string[], co
     visit(part.parts as Record<string, Part> | undefined);
   } };
   visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  // The root's own literal text, where variants differ, is carried per value of the one axis that decides it
+  // (`textByProp`, which the writer and the React emitter read on a root). One that some variant does not draw, or
+  // that no single axis decides, is named.
+  const root = contract.anatomy.root as Part;
+  if (axes.length && typeof root.text === 'string' && !root.textByProp && !root.content) {
+    const drawn = combos.flatMap((k) => { const text = textAt(k.key, 'root'); return text === null ? [] : [{ v: k.axisValues, text }]; });
+    if (new Set(drawn.map((r) => r.text)).size > 1) {
+      const decides = axes.find((a) => drawn.every((r) => drawn.every((o) => o.v[a] !== r.v[a] || o.text === r.text)));
+      if (drawn.some((r) => !r.text)) refused.push('per-variant-text-unqualified: root: not-drawn-in-every-variant');
+      else if (decides) root.textByProp = { prop: decides, map: Object.fromEntries(drawn.map((r) => [r.v[decides]!, r.text])) };
+      else refused.push('per-variant-text-unqualified: root: no-single-axis');
+    }
+  }
   return refused;
 }
 

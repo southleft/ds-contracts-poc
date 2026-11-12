@@ -42,6 +42,21 @@ test('the seed contract names each option by a token-safe slug that its VARIANT 
   assert.deepEqual([seed(lone!).contract.props, seed(lone!).drawn], [[], [{}]]);
 });
 
+test('a root whose own text differs between variants carries it per value of the one axis that decides it; else it is named', () => {
+  const carry = (axes: string[], refs: Array<[Record<string, string>, string]>) => {
+    const [c] = declare({ storybook: 'x', components: [component('a/Link', { axes, references: refs.map(([v], i) => ref(`l--${i}`, v)) })] }).components;
+    const { contract, combos } = seed(c!); contract.anatomy.root.text = refs[0]![1];
+    const text = new Map(combos.map((k, i) => [k.key, refs[i]![1]]));
+    return { root: contract.anatomy.root, refused: carryVariantText(contract, axes, combos, (key, part) => part === 'root' ? text.get(key)! : null) };
+  };
+  const one = carry(['size'], [[{ size: 'sm' }, 'Link'], [{ size: 'md' }, 'Link'], [{ size: '(default)' }, 'Lorem ipsum']]);
+  assert.deepEqual([one.root.textByProp, one.refused], [{ prop: 'size', map: { sm: 'Link', md: 'Link', default: 'Lorem ipsum' } }, []]);
+  const two = carry(['size', 'tone'], [[{ size: 'sm', tone: 'a' }, 'A'], [{ size: 'md', tone: 'a' }, 'B'], [{ size: 'sm', tone: 'b' }, 'B']]);
+  assert.deepEqual([two.root.textByProp, two.refused], [undefined, ['per-variant-text-unqualified: root: no-single-axis']]);
+  const some = carry(['level'], [[{ level: '(default)' }, 'Settings'], [{ level: '0' }, '']]);
+  assert.deepEqual([some.root.textByProp, some.refused], [undefined, ['per-variant-text-unqualified: root: not-drawn-in-every-variant']]);
+});
+
 test('a nested part whose text differs between variants carries each variant\'s text; a table the schema refuses is named', () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Badge', { axes: ['tone'],
     references: [ref('b--a', { tone: 'success' }), ref('b--a', { tone: 'error' }, { tone: 'error' })] })] }).components;
