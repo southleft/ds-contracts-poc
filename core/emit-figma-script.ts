@@ -4985,25 +4985,20 @@ function variantParts(
       // binding (absent-bool no-op).
       return false;
     }
-    // v9: an enum-conditioned stylesWhen display:none that matches this
-    // combo suppresses the part — the shape-placement spelling for axis
-    // values where the decor is hidden in every drawn variant.
-    for (const sw of p.stylesWhen ?? []) {
-      if (sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] === 'none') {
-        return false;
-      }
-    }
-    // Round 4 base-hidden presence: declared display:none is the BASE state
-    // (sr-only parts, defaultless-axis glyphs); a stylesWhen entry matching
-    // this combo RESTORES the part. Boolean-conditioned entries evaluate at
-    // the drawn cell's boolean defaults (false) — a named canvas limit.
-    if (p.declared?.['display'] === 'none') {
-      const restored = (p.stylesWhen ?? []).some(
-        (sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined && sw.styles['display'] !== 'none',
-      );
-      if (!restored) return false;
-    }
-    return true;
+    // v9: an enum-conditioned stylesWhen display:none that matches this combo
+    // suppresses the part (the shape-placement spelling for axis values where
+    // the decor is hidden in every drawn variant); round 4 base-hidden
+    // presence: declared display:none (sr-only parts, defaultless-axis glyphs)
+    // is the BASE state a matching non-none rule restores. Under the profile
+    // convention styles-when-display-last-wins the matching rules apply in
+    // order instead, the later winning as in CSS, so a rule hiding the part on
+    // one axis is undone by a later one showing it on another. Boolean-
+    // conditioned entries evaluate at the drawn cell's boolean defaults
+    // (false) — a named canvas limit.
+    const matching = (p.stylesWhen ?? []).filter((sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined);
+    if (input.conventions?.has('styles-when-display-last-wins')) return (matching.at(-1)?.styles['display'] ?? p.declared?.['display']) !== 'none';
+    if (matching.some((sw) => sw.styles['display'] === 'none')) return false;
+    return p.declared?.['display'] !== 'none' || matching.length > 0;
   });
 }
 
