@@ -24,7 +24,7 @@ import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
-import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, prepareMint, styledChannels } from '../extract/computed/fuse.js';
+import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
@@ -65,6 +65,17 @@ export function closedSelectLabels(contract: Contract, label: (part: string) => 
   } };
   visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
   return changed;
+}
+
+/** The harness's sizing evidence (extract/computed/run.ts, task #37) for the root, on this route too: a root carrying
+ * max-width that the capture measured hugging beneath it in every combo (`hugs`, from fuse's hugEvidence) marks
+ * `hugsBelowMaxWidth`, so the writer binds the cap as a ceiling instead of baking it as the root's fixed width (a part's
+ * max-width is a ceiling already). No measurement, or a root at its cap, changes nothing. */
+export function carryRootHugEvidence(contract: Contract, hugs: ReadonlyMap<string, boolean>): boolean {
+  const root = contract.anatomy.root;
+  if (![root.tokens, root.declared, root.literals].some((m) => m && 'max-width' in m) || hugs.get('root') !== true) return false;
+  root.hugsBelowMaxWidth = true;
+  return true;
 }
 
 /** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
@@ -270,6 +281,7 @@ async function main() {
         const { enriched, enrichmentNotes } = applyMintToContract(promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
           prep.declared, prep.declaredStates, prep.setPlaneLiterals, { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);
         row.notes = [...receipts, ...enrichmentNotes].length;
+        carryRootHugEvidence(enriched as Contract, hugEvidence(aligned, space).hugs);
         // A component with no options has no variant to list: it is written as one main component (GOAL.md, 2026-11-08).
         if (c.axes.length) (enriched as Contract).bindings.figma.drawnVariants = drawn;
         const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();

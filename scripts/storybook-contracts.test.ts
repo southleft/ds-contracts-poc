@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryVariantText, closedSelectLabels, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
+import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -148,4 +148,16 @@ test('closed-select-draws-selected-label: a closed single select draws its selec
   assert.deepEqual([parts.overflow.text, parts.overflow.parts], [undefined, undefined]);
   assert.deepEqual(Object.keys(parts.open.parts), ['o6', 'o7'], 'a select the capture did not read as closed and single keeps its options');
   assert.equal(parts.hint.text, 'Region');
+});
+
+test('a root measured hugging beneath its max-width in every combo carries hugsBelowMaxWidth, as the harness route does', () => {
+  const root = (extra: object) => ({ anatomy: { root: { tokens: { 'max-width': '{w.cap}' }, parts: { label: { tokens: { 'max-width': '{w.cap}' } } }, ...extra } } }) as any;
+  const hugs = (v: boolean) => new Map([['root', v], ['label', true]]);
+  const hugging = root({});
+  assert.equal(carryRootHugEvidence(hugging, hugs(true)), true);
+  assert.deepEqual([hugging.anatomy.root.hugsBelowMaxWidth, hugging.anatomy.root.parts.label.hugsBelowMaxWidth], [true, undefined]);
+  for (const [c, h] of [[root({}), new Map([['label', true]])], [root({}), hugs(false)], [{ anatomy: { root: { tokens: {} } } } as any, hugs(true)]] as const) {
+    assert.equal(carryRootHugEvidence(c, h), false);
+    assert.equal(c.anatomy.root.hugsBelowMaxWidth, undefined);
+  }
 });
