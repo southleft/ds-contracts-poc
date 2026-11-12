@@ -6610,6 +6610,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
 
 function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
   validateStructuralAvailability(contract);
+  // Convention font-weight-initial-normal: a text no part's font-weight reaches draws at CSS's initial weight (normal,
+  // 400: Regular), as the browser does; off, at the writer's fallback face (Medium).
+  const rootTextCtx = (): TextCtx => (input.conventions?.has('font-weight-initial-normal') ? { fontStyle: 'Regular' } : {});
   for (const {part} of walkAnatomy(contract)) {
     const issues = outsideStrokeIssues(part);
     if (issues.length) throw Error(issues.join('; '));
@@ -6793,7 +6796,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
         name: nameParts.join(', ') || contract.name,
         layout: layoutSpec(container, true, subst),
       };
-      const ctx = applyStyling(rootSpec, container, subst, {});
+      const ctx = applyStyling(rootSpec, container, subst, rootTextCtx());
       rootSpec.children = topRoots(contract).flatMap(([childName, child]) =>
         partToSpecs(childName, child, contract, byId, ctx, subst),
       );
@@ -6822,7 +6825,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
     // without tokensByProp (resolveTokens returns the base map unchanged).
-    const ctx = applyStyling(rootSpec, root, subst, {});
+    const ctx = applyStyling(rootSpec, root, subst, rootTextCtx());
     const rootPaintTable=root.solidFillCompositionByCombination;
     if(rootPaintTable?.rows.some(row=>row.empty && rootPaintTable.props.every((prop,i)=>subst[prop]===row.values[i])))
       rootSpec.lits={...rootSpec.lits,fillClear:true};
@@ -6992,7 +6995,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
         };
         // Same resolveTokens rule as the base loop: per-combo tokensByProp
         // overrides apply BEFORE the state overrides layer on top.
-        const baseCtx = applyStyling(rootSpec, root, subst, {});
+        const baseCtx = applyStyling(rootSpec, root, subst, rootTextCtx());
         // v17 — the root's per-enum-value state bindings resolved for THIS
         // preview cell, layered over the single-ref state overrides.
         const byPropState: Record<string, string> = {};
