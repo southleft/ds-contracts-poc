@@ -19,8 +19,11 @@
 /** absolute-overhang-whole-pixel (React to Figma writer): an absolute offset past the containing box's edge (an
  *  overhang, a tooltip centered under a narrower anchor) snaps outward to the whole pixel, as the browser's paint extent
  *  spans it; an offset inside the box is kept. Off, every offset is kept as measured (Figma-proposed geometry is exact). */
+/** observed-swap-default-drawn (Figma to React proposal): a swap property's declared default that the set draws at every
+ *  use, with no linked contract in scope, renders when the caller omits the swap, built from each use's captured drawing
+ *  (instanceSwapContent) with its own paint and size; caller content replaces it. Off, the drawing is recorded and unread. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
-  'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel'] as const;
+  'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

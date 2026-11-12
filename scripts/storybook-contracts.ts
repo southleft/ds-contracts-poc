@@ -28,9 +28,9 @@ import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout,
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
-import { MARK_SUBJECT, PAGE, pinnedBrowser, SHOW, type StoryComponent } from './storybook-reader.js';
+import { MARK_SUBJECT, PAGE, pinnedBrowser, SELECT_INSTANCE, SHOW, type StoryComponent } from './storybook-reader.js';
 
-export interface StoryCase { id: string; story: { id: string; args: Record<string, unknown> }; variant: Record<string, string> }
+export interface StoryCase { id: string; story: { id: string; args: Record<string, unknown>; instance?: number }; variant: Record<string, string> }
 export interface DeclaredComponent { subject: string; name: string; axes: string[]; cases: StoryCase[] }
 export interface StoryDeclaration {
   version: 2; source: 'storybook'; storybook: string; react: string | null;
@@ -111,7 +111,7 @@ export function declare(stories: ReaderOutput, storybook = stories.storybook): S
     if (!c.references.length) { refused.push({ subject: c.title, reason: 'no-variant' }); continue; }
     const seen = new Map<string, number>();
     const cases = c.references.map((r) => { const n = seen.get(r.storyId) ?? 0; seen.set(r.storyId, n + 1);
-      return { id: `${r.storyId}.${n}`, story: { id: r.storyId, args: r.args }, variant: r.variant }; });
+      return { id: `${r.storyId}.${n}`, story: { id: r.storyId, args: r.args, ...(typeof r.instance === 'number' ? { instance: r.instance } : {}) }, variant: r.variant }; });
     components.push({ subject: c.title, name: '', axes: [...c.matrix.axes], cases });
   }
   for (const c of components) c.name = uniqueName(c.subject, components.map((x) => x.subject));
@@ -248,8 +248,13 @@ async function main() {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
           if (!await page.evaluate(IMAGES_SETTLED)) { refusals.push(`image-not-settled:${k.id}`); continue; }
+          // Grammar decision 5: a reference the reader took from one of the instances a story draws is that instance. It is
+          // selected as the reader selected it and read itself, not the cell's first rendered child (another instance, a legend).
+          const own = k.story.instance;
+          if (own !== undefined && !await page.evaluate(`${SELECT_INSTANCE}(${own})`)) { refusals.push(`instance-not-drawn:${k.id}`); continue; }
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
-          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true, true)); // the stage's first rendered child, with set sizes and field text
+          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, own === undefined ? undefined : ['[data-ds-reader-subject]'],
+            true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);

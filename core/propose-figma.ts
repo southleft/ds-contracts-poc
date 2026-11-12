@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14649,7 +14649,7 @@ function buildPartFromEvidence(
     mintFixedSize(m, part, tokens, ctx, where);
     const slot: Record<string, unknown> = { name: allocatedInputName(ctx, soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
-    applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
+    applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where); carryObservedSwapDefault(m, soleChild, parentModesOf(m, ctx.mint !== undefined), part, slot, soleSwap, ctx, where, selfKey);
     const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
     const optional = visibleRef === `Show ${soleSwap}`;
     if (optional) part.optional = true;
@@ -17208,7 +17208,7 @@ function proposeFromDumpFencedImpl(
     capturedMainIdsByKey?: ReadonlyMap<string, ReadonlySet<string>>;
     /** Fresh batch-owned main with a witnessed composed-paint caller. */
     retainObservedRootPaint?: boolean;
-    /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door only. */
+    /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door and as per-set context flags. */
     conventions?: readonly string[];
     prefix?: string;
     fileKey?: string | null;
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions,
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20576,4 +20576,34 @@ function proposeBatchFromDumpInternal(
     if (isDumpSet(set)) settleUaPadding(p, set);
   }
   return { proposals, skipped, notes };
+}
+
+/** Profile convention observed-swap-default-drawn (core/profile-conventions.ts).
+ * A swap property's declared default, drawn at every use, is what this set
+ * shows when the caller supplies nothing. With no linked contract to render it
+ * (a provisional stub), each use's captured drawing (instanceSwapContent)
+ * becomes the omitted-caller fallback anatomy, built like the set's own
+ * drawing, so paint and size stay per use. Caller content replaces it; any
+ * other selection, or a use without its drawing, stays sample content. */
+function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: ParentModes | null, part: Record<string, unknown>,
+  slot: Record<string, unknown>, property: string, ctx: Ctx, where: string, selfKey: string) {
+  if (!ctx.observedSwapDefault || slot.renderDefault === true || part.parts) return;
+  const definition = Object.entries(ctx.propertyDefinitions ?? {}).find(([name]) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === property)?.[1];
+  if (definition?.type !== 'INSTANCE_SWAP' || !content.occ.length || content.occ.some(({node}) => !node.instanceSwapContent ||
+      !node.nodeId || node.instanceGeometry?.nodeId !== node.nodeId || node.instanceGeometry.componentId !== definition.defaultValue)) return;
+  const drawnWhere = `${where}/[observed default]`;
+  const root = mergeOcc(content.name, content.occ.map(o => ({variant: o.variant, node: o.node.instanceSwapContent!.root})), ctx.notes, drawnWhere, ctx.axes);
+  const key = partKey('observedDefault', ctx, drawnWhere, selfKey), previous = ctx.presenceVariants;
+  ctx.presenceVariants = owner.occ.map(o => o.variant);
+  let built: Record<string, unknown> | null;
+  try { built = buildPart(root, parentMode, ctx, drawnWhere, key); }
+  finally { ctx.presenceVariants = previous; }
+  if (!built || root.occ.length !== owner.occ.length && !built.visibleWhen && !built.presenceByCombination) {
+    ctx.notes.push(`${where}: observed-swap-default-not-carried — the drawn default's presence is not exact; sample content retained, review`);
+    return;
+  }
+  delete slot.defaultContent;
+  slot.renderDefaultAnatomy = true;
+  part.parts = {[key]: built};
+  ctx.notes.push(`${where}: declared INSTANCE_SWAP default "${definition.defaultValue}" drawn at every use with no linked contract; its observed usage drawing is the omitted-caller fallback, explicit caller content replaces it`);
 }
