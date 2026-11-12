@@ -134,7 +134,7 @@ test('REST selected-root witness separates current FILL/HUG allocation from the 
 });
 
 // A swap property's declared default, drawn by the set at every use, with no linked contract in scope.
-const swapDefaultSet = (main = (i: number) => '3:1', paths = true) => {
+const swapDefaultSet = (main = (i: number) => '3:1', paths = true, conventions = ['observed-swap-default-drawn'], strip = false) => {
   const swap = 'Glyph slot#1:9';
   const variant = (i: number, size: string, s: number, white: boolean): RestNode => ({ id: `5:${i}`, name: `Size=${size}`, type: 'COMPONENT',
     layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', size: { x: s, y: s }, absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
@@ -150,10 +150,11 @@ const swapDefaultSet = (main = (i: number) => '3:1', paths = true) => {
     children: [variant(1, 'Small', 16, true), variant(2, 'Large', 20, false)] };
   const components = { '3:1': { name: 'Selected', key: 'selected-key' }, '3:2': { name: 'Other', key: 'other-key' } };
   const set = (mapRestToDump({ name: 'Fixture', nodes: { '5:0': { document, components } } } as never).dump as unknown as Record<string, DumpSet>).GlyphHost;
+  if (strip) for (const v of set.variants) delete v.children![0].children![0].instanceSwapContent;
   const proposed = proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
-    contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
+    contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true, conventions });
   const contract = ContractSchema.parse(proposed.contract);
-  return { set, contract, tree: proposed.mintedTokens!.tree, slot: Object.values(contract.anatomy.root.parts!).find(p => p.slot)!.slot! };
+  return { set, contract, proposed, tree: proposed.mintedTokens!.tree, slot: Object.values(contract.anatomy.root.parts!).find(p => p.slot)!.slot! };
 };
 
 test('a declared swap default drawn at every use is captured and renders as the omitted-caller fallback, with per-use paint and size', async () => {
@@ -182,4 +183,12 @@ test('a swap use that is not the declared default, or an incomplete drawing, kee
   const { set, slot } = swapDefaultSet(undefined, false);
   assert.equal(slot.renderDefaultAnatomy, undefined);
   assert(set.variants.every(v => v.children![0].children![0].instanceSwapContent === undefined), 'unfetched paths are a lost drawing, not a recorded one');
+});
+
+test('profile convention off: the recorded drawing is unread, so the proposal is byte-identical to one without it', () => {
+  const off = swapDefaultSet(undefined, true, []), without = swapDefaultSet(undefined, true, [], true);
+  assert(off.set.variants.every(v => v.children![0].children![0].instanceSwapContent), 'capture stays general');
+  assert.equal(off.slot.renderDefaultAnatomy, undefined);
+  assert.deepEqual(off.slot.defaultContent?.length, 1);
+  assert.equal(JSON.stringify(off.proposed), JSON.stringify(without.proposed));
 });

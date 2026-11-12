@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -17208,7 +17208,7 @@ function proposeFromDumpFencedImpl(
     capturedMainIdsByKey?: ReadonlyMap<string, ReadonlySet<string>>;
     /** Fresh batch-owned main with a witnessed composed-paint caller. */
     retainObservedRootPaint?: boolean;
-    /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door only. */
+    /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door and as per-set context flags. */
     conventions?: readonly string[];
     prefix?: string;
     fileKey?: string | null;
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions,
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20578,7 +20578,8 @@ function proposeBatchFromDumpInternal(
   return { proposals, skipped, notes };
 }
 
-/** A swap property's declared default, drawn at every use, is what this set
+/** Profile convention observed-swap-default-drawn (core/profile-conventions.ts).
+ * A swap property's declared default, drawn at every use, is what this set
  * shows when the caller supplies nothing. With no linked contract to render it
  * (a provisional stub), each use's captured drawing (instanceSwapContent)
  * becomes the omitted-caller fallback anatomy, built like the set's own
@@ -20586,7 +20587,7 @@ function proposeBatchFromDumpInternal(
  * other selection, or a use without its drawing, stays sample content. */
 function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: ParentModes | null, part: Record<string, unknown>,
   slot: Record<string, unknown>, property: string, ctx: Ctx, where: string, selfKey: string) {
-  if (slot.renderDefault === true || part.parts) return;
+  if (!ctx.observedSwapDefault || slot.renderDefault === true || part.parts) return;
   const definition = Object.entries(ctx.propertyDefinitions ?? {}).find(([name]) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === property)?.[1];
   if (definition?.type !== 'INSTANCE_SWAP' || !content.occ.length || content.occ.some(({node}) => !node.instanceSwapContent ||
       !node.nodeId || node.instanceGeometry?.nodeId !== node.nodeId || node.instanceGeometry.componentId !== definition.defaultValue)) return;
