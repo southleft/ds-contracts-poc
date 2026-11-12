@@ -227,7 +227,8 @@ test('a bad --only, an equals form, another spelling or a repeated flag refuses 
 test('a profile names the conventions it switches on, well formed and once each', () => {
   const p = readProfile(new URL('../examples/carbon/profile.json', import.meta.url).pathname);
   assert.deepEqual(p.conventions, ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
-    'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn']);
+    'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
+    'negative-sibling-margin-as-gap', 'root-text-by-axis']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
 });
 
