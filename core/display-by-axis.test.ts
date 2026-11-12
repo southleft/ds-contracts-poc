@@ -34,7 +34,9 @@ function byAxis(config: string, name: string, out: string, channel: string): str
 }
 
 test('fuse carries a display or position that varies on one enum axis as per-value rules (committed captures)', () => {
-  assert.deepEqual(byAxis('astryx.json', 'CheckboxInput', 'astryx/checkboxinput', 'display'), ['icon=block@checked=checked', 'part-0-0-1-1=block@checked=indeterminate']);
+  // display none included: each glyph is hidden in the states it does not draw (the check, the indeterminate dash).
+  assert.deepEqual(byAxis('astryx.json', 'CheckboxInput', 'astryx/checkboxinput', 'display'), ['icon=none@checked=unchecked', 'icon=block@checked=checked',
+    'icon=none@checked=indeterminate', 'part-0-0-1-1=none@checked=unchecked', 'part-0-0-1-1=none@checked=checked', 'part-0-0-1-1=block@checked=indeterminate']);
   assert.deepEqual(byAxis('astryx.json', 'Switch', 'astryx/switch', 'position'),
     ['part-0-0=static@labelPosition=start', 'part-0-0=relative@labelPosition=end', 'part-0-1=relative@labelPosition=start', 'part-0-1=static@labelPosition=end']);
 });
