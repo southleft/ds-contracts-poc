@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { checkGenerated, dumpFromFigmaUrl, figmaToReact, reportCheck, type CheckOutcome } from './figma-to-react.js';
 import type { Verdicts } from './design-consumer-verdict.js';
 import { readConsumerFonts } from './design-consumer-fonts.js';
+import { profileConventions, runFigmaToReact } from './figma-to-react-lib.js';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dump = path.join(repo, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
@@ -90,6 +91,31 @@ test('a relative --out (as the preview page shows) packages into that directory'
   process.chdir(cwd);
   const result = await figmaToReact(dump, './out');
   assert.equal(readdirSync(path.join(cwd, 'out')).includes(result.tarball), true);
+});
+
+test('--profile: read and hashed before any fetch, refused by named code, recorded sorted in result.json; an unknown flag is refused', async t => {
+  const out = mkdtempSync(path.join(tmpdir(), 'figma-to-react-profile-'));
+  t.after(() => rmSync(out, { recursive: true, force: true }));
+  const file = (name: string, text: string) => { const f = path.join(out, name); writeFileSync(f, text); return f; };
+  assert.throws(() => profileConventions(path.join(out, 'absent.json')), /^Error: profile-missing: /);
+  const saved = process.env.FIGMA_TOKEN; delete process.env.FIGMA_TOKEN; t.after(() => { if (saved !== undefined) process.env.FIGMA_TOKEN = saved; });
+  await assert.rejects(runFigmaToReact({ url: 'https://www.figma.com/design/AAAAAAAAAAAAAAAAAAAAAA/x?node-id=1-2', out: path.join(out, 'u'), profile: path.join(out, 'absent.json') },
+    { loadEngine: () => { throw Error('engine-not-reached'); }, label: 'test' }), /profile-missing/);   // before the fetch's token check
+  assert.throws(() => profileConventions(file('bad.json', '{')), /^Error: profile-not-json: /);
+  assert.throws(() => profileConventions(file('obj.json', '{"conventions":{}}')), /^Error: profile-conventions-not-array: /);
+  const one = 'imperceptible-solid-paint-blend-not-carried';
+  assert.throws(() => profileConventions(file('dup.json', JSON.stringify({ conventions: [one, one] }))), /profile-convention-duplicate:imperceptible/);
+  assert.throws(() => profileConventions(file('unknown.json', JSON.stringify({ conventions: ['zz-unknown'] }))), /profile-convention-unknown:zz-unknown/);
+  assert.deepEqual(profileConventions(file('none.json', '{}')).conventions, []);
+  const good = file('good.json', JSON.stringify({ system: 'x', conventions: [one] })), profile = profileConventions(good);
+  assert.deepEqual(profile, { conventions: [one], sha256: createHash('sha256').update(readFileSync(good)).digest('hex') });
+  // Recorded in result.json; on a dump with no imperceptible blend the request is byte-identical to the run without it.
+  const plain = await figmaToReact(dump, path.join(out, 'plain')), on = await figmaToReact(dump, path.join(out, 'on'), undefined, 'json', { profile });
+  assert.equal(on.requestSha256, plain.requestSha256);
+  assert.deepEqual(JSON.parse(readFileSync(path.join(out, 'on', 'result.json'), 'utf8')).profile, profile);
+  assert.equal('profile' in JSON.parse(readFileSync(path.join(out, 'plain', 'result.json'), 'utf8')), false);
+  const cli = spawnSync('npx', ['tsx', path.join(repo, 'scripts', 'figma-to-react.ts'), '--dump', dump, '--out', path.join(out, 'x'), '--no-such-flag'], { cwd: repo, encoding: 'utf8' });
+  assert.equal(cli.status, 2); assert.match(cli.stderr, /An unknown flag is refused/);
 });
 
 test('without a Chromium the command says NOT CHECKED, exits 0 and never prints a green check', async t => {
