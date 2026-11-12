@@ -4831,16 +4831,20 @@ function absolutePartPlacement(
   const tm = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/.exec(part.declared?.['transform'] ?? '');
   const tx = num('translate-x') ?? (tm ? parseFloat(tm[1]) : 0);
   const ty = num('translate-y') ?? (tm ? parseFloat(tm[2]) : 0);
+  // Profile convention absolute-overhang-whole-pixel: an offset past the containing box's edge (an overhang, e.g. a
+  // tooltip centered under a narrower anchor at -46.21) snaps outward to the whole pixel, as the browser's paint extent
+  // does (it paints that bubble from -47); an offset inside the box, or any offset with the convention off, is kept.
+  const out = (v: number): number => (v < 0 && input.conventions?.has('absolute-overhang-whole-pixel') ? Math.floor(v) : v);
   const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
-  if (left !== undefined && right !== undefined) { a.h = 'STRETCH'; a.left = left + tx; a.right = right - tx; }
-  else if (left !== undefined) { a.h = 'MIN'; a.left = left + tx; }
-  else if (right !== undefined) { a.h = 'MAX'; a.right = right - tx; }
-  else { a.h = 'MIN'; a.left = tx; }
+  if (left !== undefined && right !== undefined) { a.h = 'STRETCH'; a.left = out(left + tx); a.right = out(right - tx); }
+  else if (left !== undefined) { a.h = 'MIN'; a.left = out(left + tx); }
+  else if (right !== undefined) { a.h = 'MAX'; a.right = out(right - tx); }
+  else { a.h = 'MIN'; a.left = out(tx); }
   if (centerY) a.v='CENTER';
-  else if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = top + ty; a.bottom = bottom - ty; }
-  else if (top !== undefined) { a.v = 'MIN'; a.top = top + ty; }
-  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = bottom - ty; }
-  else { a.v = 'MIN'; a.top = ty; }
+  else if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = out(top + ty); a.bottom = out(bottom - ty); }
+  else if (top !== undefined) { a.v = 'MIN'; a.top = out(top + ty); }
+  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = out(bottom - ty); }
+  else { a.v = 'MIN'; a.top = out(ty); }
   return a;
 }
 
