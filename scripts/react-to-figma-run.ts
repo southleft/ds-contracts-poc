@@ -57,6 +57,7 @@ const storybook = String(json(PROFILE).pins?.storybook ?? '').split(' ')[0]!;
 const tsx = (name: string, args: string[]) => { const r = spawnSync('npx', ['tsx', ...args], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 28 }); writeFileSync(`${OUT}/${name}.log`, `${r.stdout}${r.stderr}`); return r.status; };
 if (tsx('reader', ['scripts/storybook-reader.ts', '--storybook', storybook, '--out', `${OUT}/reader`, '--profile', PROFILE, '--only', ONLY]) !== 0) refuse('the reader did not finish');
 receipt.contractsExit = tsx('contracts', ['scripts/storybook-contracts.ts', '--stories', `${OUT}/reader/stories.json`, '--out', `${OUT}/contracts`, '--storybook', storybook, '--file-key', KEY]);
+if (!existsSync(`${OUT}/contracts/storybook-contracts.json`)) { save(); refuse(`the contract step wrote no report (exit ${receipt.contractsExit})`); }
 const STORIES = `${OUT}/reader/stories.json`, stories = json(STORIES), report = json(`${OUT}/contracts/storybook-contracts.json`), only = new Set<string>(json(ONLY));
 const script = (contract: string, part: 1 | 2) => `${OUT}/contracts/figma/${contract.slice(contract.indexOf('.') + 1)}.${part === 1 ? '1-variables' : '2-component'}.js`;
 type Row = { title: string; contract: string; name: string; isSet: boolean; variants: number };
@@ -76,7 +77,7 @@ for (const r of rows) {
   const comp = readFileSync(script(r.contract, 2), 'utf8'), tok = readFileSync(script(r.contract, 1), 'utf8');
   const C = JSON.parse(/^const COMPONENTS = (\[[\s\S]*?\n\]);$/m.exec(comp)?.[1] ?? 'null'), ids = new Set(comp.match(/"contractId": "[^"]+"/g) ?? []);
   if (r.contract.split('.').length !== 2 || r.contract.startsWith('archived-') || r.name.includes(' · archived ') || r.name === 'Slot' || /^\d+$/.test(r.name) || reserved.includes(r.name)
-    || !titles.has(r.title) || titles.get(r.title).references.some((x: any) => !existsSync(`${OUT}/reader/references/${x.png}`)) || C?.length !== 1 || C[0].anchorKey != null
+    || !titles.has(r.title) || titles.get(r.title).references.some((x: any) => x.png && !existsSync(`${OUT}/reader/references/${x.png}`)) || C?.length !== 1 || C[0].anchorKey != null
     || [...ids].some((s) => s !== `"contractId": "${r.contract}"`) || comp.includes('retireSlotUtility') || comp.includes("createVariableCollection('Imported (provisional)')")
     || !JSON.parse(/^const BRAND_MODES = (.*);$/m.exec(tok)?.[1] ?? '[]').length) refuse(`step 0c: planned row ${rows.indexOf(r)} fails a file check`);
   for (const v of JSON.parse(/^const PRIMITIVES = (.*);$/m.exec(tok)?.[1] ?? '[]') as any[]) {

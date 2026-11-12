@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
-import { carryVariantText, declare, paintedFirst, seed } from './storybook-contracts.js';
+import { createHash } from 'node:crypto';
+import { DECLARED_CHANNELS } from './contract-schema.js';
+import { carryVariantText, closedSelectLabels, declare, paintedFirst, profileConventions, seed, spellSvgRotation } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -105,4 +107,45 @@ test('a set width or height is read only when the converter asks, and survives t
   assert.equal(captureJs('[x]', undefined, undefined, undefined, true).includes('out.field'), false); // field text: its own opt-in
   assert.equal(captureJs('[x]', undefined, undefined, undefined, false, true).includes('out.field = '), true);
   assert.deepEqual(normalizeNode({ ...node, field: { value: '', placeholder: 'Search' } }).field, { value: '', placeholder: 'Search' });
+});
+
+test('the contract step switches on the conventions of the profile the reader recorded, refusing changed bytes and unknown names', () => {
+  const profile = (conventions: string[]) => Buffer.from(JSON.stringify({ conventions })), sha = (b: Buffer) => createHash('sha256').update(b).digest('hex');
+  const on = profile(['icon-box-keeps-glyph-size']), read = (bytes: Buffer) => () => bytes;
+  assert.deepEqual([...profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(on))], ['icon-box-keeps-glyph-size']);
+  assert.deepEqual([...profileConventions({ profile: null }), ...profileConventions({})], []);
+  assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(profile([]))), /profile-changed-since-read:p\.json/);
+  const odd = profile(['no-such-convention']);
+  assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(odd) } }, read(odd)), /profile-convention-unknown:no-such-convention/);
+});
+
+test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
+  const el = (tag: string, transform: string, nodes: unknown[] = []) => ({ tag, classes: [], style: { transform }, pseudo: {}, nodes }) as any;
+  const cases: Array<[string, string, string]> = [['svg', 'matrix(0, 1, -1, 0, 0, 0)', 'rotate(90deg)'], ['svg', 'matrix(-1, 0, 0, -1, 0, 0)', 'rotate(180deg)'],
+    ['svg', 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)', 'rotate(-45deg)'], ['svg', 'matrix(1, 0, 0, 1, 0, 0)', 'matrix(1, 0, 0, 1, 0, 0)'],
+    ['svg', 'matrix(0, 1, -1, 0, 4, 0)', 'matrix(0, 1, -1, 0, 4, 0)'], ['svg', 'matrix(0.75, 0, 0, 0.75, 0, 0)', 'matrix(0.75, 0, 0, 0.75, 0, 0)'],
+    ['div', 'matrix(0, 1, -1, 0, 0, 0)', 'matrix(0, 1, -1, 0, 0, 0)'], ['svg', 'none', 'none']];
+  for (const [tag, before, after] of cases) {
+    const root = el('div', 'none', [{ t: 'el', el: el(tag, before) }]);
+    spellSvgRotation(root);
+    assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
+    if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
+  }
+});
+
+test('closed-select-draws-selected-label: a closed single select draws its selected label, never its options', () => {
+  const option = (text: string) => ({ element: 'option', text, declared: { display: 'block' } });
+  const anatomy = { root: { parts: {
+    pick: { element: 'select', parts: { o1: option('Choose a region'), o2: option('Dallas'), group: { element: 'optgroup', parts: { o3: option('Sydney') } } } },
+    overflow: { element: 'select', parts: { o4: option(''), o5: option('9') } },
+    open: { element: 'select', parts: { o6: option('a'), o7: option('b') } },
+    hint: { text: 'Region' },
+  } } };
+  const contract = { anatomy } as any, labels: Record<string, string | null> = { pick: 'Choose a region', overflow: '', open: null, hint: 'x' };
+  assert.deepEqual(closedSelectLabels(contract, (part) => labels[part] ?? null), ['pick', 'overflow']);
+  const parts = contract.anatomy.root.parts;
+  assert.deepEqual([parts.pick.text, parts.pick.parts], ['Choose a region', undefined]);
+  assert.deepEqual([parts.overflow.text, parts.overflow.parts], [undefined, undefined]);
+  assert.deepEqual(Object.keys(parts.open.parts), ['o6', 'o7'], 'a select the capture did not read as closed and single keeps its options');
+  assert.equal(parts.hint.text, 'Region');
 });

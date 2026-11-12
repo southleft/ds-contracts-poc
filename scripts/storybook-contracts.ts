@@ -15,15 +15,17 @@
  *   npx tsx scripts/storybook-contracts.ts --stories <stories.json> --out <dir> [--storybook <url>] [--titles "a|b"]
  *     [--file-key <key>]   with a file key, the variables and component scripts for that file only
  */
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, prepareMint, styledChannels } from '../extract/computed/fuse.js';
-import { comboKey, normalizeNode, type Capture, type EnumAxisSpec } from '../extract/computed/lib.js';
+import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, SHOW, type StoryComponent } from './storybook-reader.js';
@@ -34,7 +36,45 @@ export interface StoryDeclaration {
   version: 2; source: 'storybook'; storybook: string; react: string | null;
   components: DeclaredComponent[]; refused: { subject: string; reason: string }[];
 }
-interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[] }
+interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[]; profile?: { path: string; sha256: string } | null }
+
+/** Profile convention svg-rotation-carried: an svg element whose computed transform is a pure rotation (matrix(cos θ,
+ * sin θ, −sin θ, cos θ, 0, 0), θ ≠ 0) is spelled rotate(θdeg), in place; every other transform stays as captured. */
+export function spellSvgRotation(node: CapturedNode): void {
+  const m = /^matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+)\)$/.exec(node.style['transform'] ?? '');
+  const [a, b, c, d, e, f] = m ? m.slice(1).map(Number) : [];
+  if (node.tag === 'svg' && m && e === 0 && f === 0 && !(a === 1 && b === 0) && Math.abs(a! - d!) < 1e-4 && Math.abs(b! + c!) < 1e-4 && Math.abs(a! * a! + b! * b! - 1) < 1e-3)
+    node.style['transform'] = `rotate(${+((Math.atan2(b!, a!) * 180) / Math.PI).toFixed(3)}deg)`;
+  for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
+}
+
+/** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
+ * gives its selected option's label, null otherwise) takes that label as its text, when it draws one, and drops its option
+ * and optgroup parts, which a closed select never draws. Returns the parts it changed. */
+export function closedSelectLabels(contract: Contract, label: (part: string) => string | null): string[] {
+  const changed: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = part.element === 'select' ? label(name) : null;
+    if (drawn !== null) {
+      for (const [k, child] of Object.entries(part.parts ?? {})) if (child.element === 'option' || child.element === 'optgroup') delete part.parts![k];
+      if (part.parts && !Object.keys(part.parts).length) delete part.parts;
+      if (drawn) part.text = drawn;
+      changed.push(name);
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return changed;
+}
+
+/** The engine conventions the system's profile switches on (GOAL.md, 2026-11-09), from the profile the reader recorded,
+ * refused by name if its bytes changed since the reader read it; none when the reader recorded no profile. */
+export function profileConventions(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => Buffer = (file) => readFileSync(file)) {
+  if (!stories.profile) return conventionSet([]);
+  const bytes = read(stories.profile.path);
+  if (createHash('sha256').update(bytes).digest('hex') !== stories.profile.sha256) throw Error(`profile-changed-since-read:${stories.profile.path}`);
+  return conventionSet((JSON.parse(bytes.toString()) as { conventions?: string[] }).conventions);
+}
 
 /** Classes that name an element. Emotion's generated `css-<hash>` names hash the styles (a random blob URL in one gives
  * a new name every run), so they never identify a part; every other class does, as before. */
@@ -149,7 +189,7 @@ async function main() {
   const flag = (n: string) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : undefined; };
   const out = flag('--out'), storiesPath = flag('--stories'), fileKey = flag('--file-key'), titles = flag('--titles')?.split('|');
   if (!out || !storiesPath) throw Error('usage: storybook-contracts.ts --stories <stories.json> --out <dir> [--storybook <url>] [--titles "a|b"] [--file-key <key>]');
-  const all = declare(JSON.parse(readFileSync(storiesPath, 'utf8')) as ReaderOutput, flag('--storybook'));
+  const read = JSON.parse(readFileSync(storiesPath, 'utf8')) as ReaderOutput, all = declare(read, flag('--storybook')), conventions = profileConventions(read);
   mkdirSync(path.join(out, 'contracts'), { recursive: true });
   writeFileSync(path.join(out, 'ds-contracts.react.json'), JSON.stringify(all, null, 2) + '\n');
   const chosen = all.components.filter((c) => !titles || titles.includes(c.subject));
@@ -200,7 +240,9 @@ async function main() {
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
           const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, undefined, true, true)); // the stage's first rendered child, with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
-          captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root: normalizeNode(raw as any) });
+          const root = normalizeNode(raw as any);
+          if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
         if (captures.length !== c.cases.length) continue;
@@ -231,16 +273,21 @@ async function main() {
         // A component with no options has no variant to list: it is written as one main component (GOAL.md, 2026-11-08).
         if (c.axes.length) (enriched as Contract).bindings.figma.drawnVariants = drawn;
         const textOf = (n: { nodes: Array<{ t: string; v?: string }> }) => n.nodes.filter((x) => x.t === 'text').map((x) => x.v ?? '').join('').trim();
+        const nodeAt = (key: string, part: string) => { const i = promotion.partIndex.get(part); return i === undefined ? null : aligned.getAligned(`${key}__default`)[i]?.node as
+          { tag: string; field?: { value: string } } | undefined ?? null; };
+        const selected = (key: string, part: string) => { const n = nodeAt(key, part); return n?.tag === 'select' && n.field ? n.field.value : null; };
+        if (conventions.has('closed-select-draws-selected-label')) // its label where it is first drawn; a part some variants lack is still read
+          closedSelectLabels(enriched as Contract, (part) => combos.map((k) => selected(k.key, part)).find((v) => v !== null) ?? null);
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return el ? textOf(el.node as never) : null; }, (key, part) => {
+          return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
         writeFileSync(path.join(out, 'contracts', `${file}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
-        const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets });
+        const engine = createFigmaEngine({ tokens: { primitives: structuredClone(mintBase.tree), semantic: {}, light: {}, dark: {}, brands: { default: {} } } as any, icons: promotion.assets, conventions });
         const data = engine.compileComponentData(contract, new Map([[contract.id, contract]])) as { setName: string; isSet: boolean; variants?: unknown[] };
         if (fileKey) { // each script refuses any other file; both are built before either is written
           const tokensScript = engine.buildTokensScript(fileKey), componentScript = engine.buildComponentScript(contract, new Map([[contract.id, contract]]), fileKey);

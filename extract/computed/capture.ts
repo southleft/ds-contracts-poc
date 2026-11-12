@@ -1908,6 +1908,9 @@ ${authoredSize ? `    { const az = asizeOf(el); if (az) out.asize = az; }
     if (el instanceof HTMLTextAreaElement || (el instanceof HTMLInputElement && ['text', 'search', 'email', 'password', 'tel', 'url', 'number'].includes(el.type))) {
       const mask = { disc: '\\u2022', circle: '\\u25e6', square: '\\u25a0' }[ecs.getPropertyValue('-webkit-text-security')];
       out.field = { value: mask ? mask.repeat([...el.value].length) : el.value, placeholder: el.placeholder };
+    } else if (el instanceof HTMLSelectElement && !el.multiple && el.size <= 1) {
+      // A closed single select draws one line, its selected option's label; its options draw nothing until it opens.
+      out.field = { value: el.selectedIndex < 0 ? '' : el.options[el.selectedIndex].label, placeholder: '' };
     }
 ` : ''}    if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
     if (vrPair.calcs) out.vcalcs = vrPair.calcs;
