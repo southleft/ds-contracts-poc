@@ -20589,10 +20589,13 @@ function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: Pa
   slot: Record<string, unknown>, property: string, ctx: Ctx, where: string, selfKey: string) {
   if (!ctx.observedSwapDefault || slot.renderDefault === true || part.parts) return;
   const definition = Object.entries(ctx.propertyDefinitions ?? {}).find(([name]) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === property)?.[1];
-  if (definition?.type !== 'INSTANCE_SWAP' || !content.occ.length || content.occ.some(({node}) => !node.instanceSwapContent ||
+  if (definition?.type !== 'INSTANCE_SWAP' || !content.occ.length || content.occ.some(({node}) =>
       !node.nodeId || node.instanceGeometry?.nodeId !== node.nodeId || node.instanceGeometry.componentId !== definition.defaultValue)) return;
+  // Each use draws only its own captured drawing: a use without one draws nothing in its variant, never another use's.
+  const drawn = content.occ.filter(o => o.node.instanceSwapContent), undrawn = content.occ.filter(o => !o.node.instanceSwapContent);
+  if (!drawn.length) return;
   const drawnWhere = `${where}/[observed default]`;
-  const root = mergeOcc(content.name, content.occ.map(o => ({variant: o.variant, node: o.node.instanceSwapContent!.root})), ctx.notes, drawnWhere, ctx.axes);
+  const root = mergeOcc(content.name, drawn.map(o => ({variant: o.variant, node: o.node.instanceSwapContent!.root})), ctx.notes, drawnWhere, ctx.axes);
   const key = partKey('observedDefault', ctx, drawnWhere, selfKey), previous = ctx.presenceVariants;
   ctx.presenceVariants = owner.occ.map(o => o.variant);
   let built: Record<string, unknown> | null;
@@ -20606,4 +20609,5 @@ function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: Pa
   slot.renderDefaultAnatomy = true;
   part.parts = {[key]: built};
   ctx.notes.push(`${where}: declared INSTANCE_SWAP default "${definition.defaultValue}" drawn at every use with no linked contract; its observed usage drawing is the omitted-caller fallback, explicit caller content replaces it`);
+  if (undrawn.length) ctx.notes.push(`${where}: observed-swap-default-drawing-missing — ${undrawn.length} of ${content.occ.length} use(s) have no complete captured drawing, so they draw nothing in the slot: ${undrawn.map(o => o.variant).join('; ')}; review`);
 }
