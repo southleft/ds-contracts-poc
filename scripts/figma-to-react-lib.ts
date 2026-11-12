@@ -23,7 +23,7 @@
  * written either way; the report still says FAIL). Without a Chromium it says
  * NOT CHECKED. A green check is printed only when every variant passed.
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -38,6 +38,21 @@ import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './de
 import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
 import { conventionSet } from '../core/profile-conventions.js';
+
+/** A system profile's conventions for one run: sorted, with the sha256 of the profile's bytes. A missing file, non-JSON, a
+ *  `conventions` that is not an array of strings, a duplicate and a name the converter does not know are each refused by
+ *  a named code. Only `conventions` is read. */
+export type ProfileConventions = { conventions: string[]; sha256: string };
+export function profileConventions(file: string): ProfileConventions {
+  if (!existsSync(file)) throw Error(`profile-missing: ${file}`);
+  const bytes = readFileSync(file); let profile: { conventions?: unknown };
+  try { profile = JSON.parse(bytes.toString('utf8')); } catch { throw Error(`profile-not-json: ${file}`); }
+  const list = profile?.conventions ?? [];
+  if (!Array.isArray(list) || list.some((n) => typeof n !== 'string')) throw Error(`profile-conventions-not-array: ${file}`);
+  const twice = list.find((n, i) => list.indexOf(n) !== i);
+  if (twice !== undefined) throw Error(`profile-convention-duplicate:${twice}`);
+  return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex') };
+}
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
 /** Loads the playground's headless import engine for one run; `close`
@@ -72,7 +87,7 @@ export async function dumpFromFigmaUrl(url: string, outDirArg: string) {
 }
 
 export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
-  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[]; nativeVectorStrokeCapture?: NativeVectorStrokeCapture; conventions?: readonly string[] } = {}) {
+  options: { packageName?: string; toolchain?: Toolchain; fonts?: readonly ConsumerFont[]; nativeVectorStrokeCapture?: NativeVectorStrokeCapture; profile?: ProfileConventions } = {}) {
   // The packager runs npm from inside the package directory, so a relative
   // --out (as the preview page shows: ./out) must be anchored here first.
   const outDir = path.resolve(outDirArg);
@@ -85,7 +100,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const { engine, close } = await loadEngine();
   let imported;
   try {
-    imported = options.conventions?.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.conventions }) : engine.figmaDumpToLibraryRequest(dump, source);
+    imported = options.profile?.conventions.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.profile.conventions }) : engine.figmaDumpToLibraryRequest(dump, source);
   } finally {
     await close?.();
   }
@@ -115,7 +130,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const result = { setName: imported.setName, rootId: imported.request.rootId, component, proposed: imported.proposed,
     skipped: imported.skipped, packageName: library.name, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
     requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes,
-    ...(options.conventions?.length ? { conventions: [...options.conventions] } : {}) };
+    ...(options.profile ? { profile: { sha256: options.profile.sha256, conventions: options.profile.conventions } } : {}) };
   writeFileSync(path.join(outDir, 'result.json'), JSON.stringify(result, null, 2) + '\n');
   // buildReactLibrary writes contract i of the request to inputs/<i>.contract.json.
   const contractFile = path.join(path.dirname(library.tarball), 'inputs', `${rootIndex}.contract.json`);
@@ -212,6 +227,36 @@ export interface FigmaToReactRun {
   pinned?: boolean;
   /** A system profile: its `conventions` switch on the engine rules it names (core/profile-conventions.ts). */
   profile?: string;
+  /** A directory of the user's own library that receives the generated sources once the run exits 0 (writeInto). */
+  into?: string;
+}
+
+/** --into: the generated sources (each <Name>/ folder, the root index.ts and tokens.css) copied into a directory of the
+ *  user's library. Every file is compared before any is written: a path that holds other bytes, or is not a file, is
+ *  refused by name and nothing is written; a file with the same bytes is left as it is. */
+export function writeInto(generatedDir: string, into: string): { dir: string; written: string[]; unchanged: string[] } {
+  const dir = path.resolve(into), files: string[] = [];
+  const walk = (rel: string): void => {
+    for (const entry of readdirSync(path.join(generatedDir, rel), { withFileTypes: true }).sort((a, b) => a.name < b.name ? -1 : 1)) {
+      const child = rel ? `${rel}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) walk(child); else files.push(child);
+    }
+  };
+  walk('');
+  const written: string[] = [], unchanged: string[] = [], conflicts: string[] = [];
+  for (const rel of files) {
+    const target = path.join(dir, rel);
+    if (!existsSync(target)) written.push(rel);
+    else if (statSync(target).isFile() && readFileSync(target).equals(readFileSync(path.join(generatedDir, rel)))) unchanged.push(rel);
+    else conflicts.push(rel);
+  }
+  if (conflicts.length) throw Error(`figma-to-react-into-conflict: ${conflicts.length} path(s) in ${dir} hold other content and were not overwritten: `
+    + `${conflicts.join(', ')}; nothing was written`);
+  for (const rel of written) {
+    mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    copyFileSync(path.join(generatedDir, rel), path.join(dir, rel));
+  }
+  return { dir, written, unchanged };
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -219,6 +264,8 @@ export interface FigmaToReactRun {
 export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: EngineLoader; toolchain?: Toolchain; label: string;
   log?: (line: string) => void; error?: (line: string) => void }): Promise<number> {
   const log = deps.log ?? ((line: string) => console.log(line)), error = deps.error ?? ((line: string) => console.error(line));
+  const profile = run.profile ? profileConventions(run.profile) : undefined;   // read and refused before any fetch
+  if (run.into && existsSync(run.into) && !statSync(run.into).isDirectory()) throw Error(`figma-to-react-into-not-a-directory: ${run.into}`);
   // Both command entrypoints authenticate the manifest before fetching or writing.
   const faces = run.fonts ? readConsumerFonts(path.resolve(run.fonts)) : [];
   if (run.capture && !existsSync(run.capture)) throw Error(`capture-file-missing: ${run.capture}`);
@@ -274,10 +321,8 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
       throw Error('native-stroke-supplement-receipt-invalid');
     else throw Error('native-stroke-supplement-receipt-kind-unsupported');
   }
-  // A profile's conventions, read here and refused by name when the converter does not know one.
-  const conventions = run.profile ? [...conventionSet((JSON.parse(readFileSync(run.profile, 'utf8')) as { conventions?: string[] }).conventions)] : [];
   const r = await figmaToReact(deps.loadEngine, dumpPath, run.out, run.expectRequest, source,
-    { ...(run.name ? { packageName: run.name } : {}), ...(conventions.length ? { conventions } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
+    { ...(run.name ? { packageName: run.name } : {}), ...(profile ? { profile } : {}), ...(deps.toolchain ? { toolchain: deps.toolchain } : {}),
       ...(faces.length ? { fonts: faces } : {}),
       ...(nativeVectorStrokeCapture ? {nativeVectorStrokeCapture} : {}) });
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
@@ -288,5 +333,9 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   const report = reportCheck(r, run.out, outcome, run.allowFailures === true, deps.label);
   for (const line of report.lines) log(line);
   if (report.exitCode === 0) log(`  install: npm install ${path.resolve(run.out, r.tarball)}`);
+  if (report.exitCode === 0 && run.into) {
+    const into = writeInto(r.generatedDir, run.into);
+    log(`  into ${into.dir}: ${into.written.length} file(s) written, ${into.unchanged.length} unchanged`);
+  }
   return report.exitCode;
 }
