@@ -9518,6 +9518,9 @@ function buildSyncScript(
   // contract — every other script keeps its bytes.
   const hasAbsentVariants = featureDatas.some((d) => (d.absentVariants?.length ?? 0) > 0);
   const hasDrawnVariants = featureDatas.some(d => d.drawnVariants !== undefined);
+  // Convention variant-grid-whole-pixel: each grid column and row steps by its cell's size rounded up, so a variant
+  // whose own size is fractional (a measured text width) still starts on a whole pixel, as its export does.
+  const cell = (e: string): string => (input.conventions?.has('variant-grid-whole-pixel') ? `Math.ceil(${e})` : e);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
@@ -11171,8 +11174,8 @@ ${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await r
     const sp = specByName.get(child.name);
     if (!sp) continue;
     let x = PAD, y = PAD;
-    for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
-    for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
+    for (let i = 0; i < sp.col; i++) x += ${cell('colWs[i]')} + PAD;
+    for (let i = 0; i < sp.row; i++) y += ${cell('rowHs[i]')} + PAD;
     child.x = x; child.y = y;
   }
   // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
@@ -11182,8 +11185,8 @@ ${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await r
   // Extra (human-owned) variants may sit beyond the grid; never shrink
   // below their extent.
   {
-    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
-    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    let totalW = colWs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (colsN + 1);
+    let totalH = rowHs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (rowsN + 1);
     for (const child of set.children) {
       totalW = Math.max(totalW, child.x + child.width + PAD);
       totalH = Math.max(totalH, child.y + child.height + PAD);
@@ -11535,13 +11538,13 @@ ${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppeara
       const spec = specByName.get(child.name);
       if (!spec) continue;
       let x = PAD, y = PAD;
-      for (let i = 0; i < spec.col; i++) x += colWs[i] + PAD;
-      for (let i = 0; i < spec.row; i++) y += rowHs[i] + PAD;
+      for (let i = 0; i < spec.col; i++) x += ${cell('colWs[i]')} + PAD;
+      for (let i = 0; i < spec.row; i++) y += ${cell('rowHs[i]')} + PAD;
       child.x = x;
       child.y = y;
     }
-    const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
-    const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    const totalW = colWs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (colsN + 1);
+    const totalH = rowHs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (rowsN + 1);
     target.resizeWithoutConstraints(totalW, totalH);
   }
   target.name = displayName;
