@@ -1,7 +1,7 @@
 {
-  "provenance": "AI-drafted by the working session (2026-11-10, v0, v0.1 and v0.2) from Carbon's stories alone, and v0.2's pairs from Carbon's Figma set names and pages; approved by the reviewer session (2026-11-10, v0 in PR #365, v0.1 in PR #370, v0.2 in PR #367; v0.3, the conventions entry, in PR #382, 2026-11-11; v0.4, icon-box-keeps-glyph-size, in PR #393, 2026-11-11; v0.5, svg-rotation-carried, in the PR that adds it, 2026-11-11)",
+  "provenance": "AI-drafted by the working session (2026-11-10, v0, v0.1 and v0.2) from Carbon's stories alone, and v0.2's pairs from Carbon's Figma set names and pages; approved by the reviewer session (2026-11-10, v0 in PR #365, v0.1 in PR #370, v0.2 in PR #367; v0.3, the conventions entry, in PR #382, 2026-11-11; v0.4, icon-box-keeps-glyph-size, in PR #393, 2026-11-11; v0.5, svg-rotation-carried, in PR #396, 2026-11-11; v0.6, closed-select-draws-selected-label, in the PR that adds it, 2026-11-12)",
   "system": "carbon",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "pins": {"package": {"name": "@carbon/react", "version": "1.120.0"}, "storybook": "https://react.carbondesignsystem.com/ (built 2026-11-04 for 1.120.0)", "figma": {"fileKey": "A451UfD58U7XU21FzaqfHL", "version": "2409684134896101954"}},
   "setup": {"manifest": "examples/carbon/ds-library.json", "captureConfig": "extract/computed/configs/carbon.json"},
   "tuning": {
@@ -164,7 +164,7 @@
     {"name": "UnorderedList", "stories": ["components-unorderedlist--default", "components-unorderedlist--nested"], "axes": ["nested"]}
   ],
   "figmaInternal": {"namePrefix": "_"},
-  "conventions": ["imperceptible-solid-paint-blend-not-carried", "icon-box-keeps-glyph-size", "svg-rotation-carried"],
+  "conventions": ["imperceptible-solid-paint-blend-not-carried", "icon-box-keeps-glyph-size", "svg-rotation-carried", "closed-select-draws-selected-label"],
   "figmaSkeleton": {"variant": {"property": "State", "value": "Skeleton"}, "sets": ["5734:283688", "5734:286365", "5734:283758", "4535:163063", "4535:162705", "3942:52659"]},
   "pairs": [
     {"code": ["AILabel"], "figma": ["51447:1916", "51447:2035"], "basis": "page AI label; name"},
