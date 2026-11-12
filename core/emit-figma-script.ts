@@ -3697,7 +3697,10 @@ function applyStyling(
     if (li.height !== undefined) li.height += (li.paddingTop ?? 0) + (li.paddingBottom ?? 0);
     if (li.width !== undefined) li.width += (li.paddingLeft ?? 0) + (li.paddingRight ?? 0);
   }
-  let d = applyDeclared(part.declared, l);
+  // Convention text-align-packs-text-box: a <button>'s user-agent stylesheet centers its text, a value the contract step
+  // drops as the element's own default; a Figma text has no user-agent stylesheet, so the writer supplies it.
+  const centered = input.conventions?.has('text-align-packs-text-box') && part.element === 'button' && part.declared?.['text-align'] === undefined;
+  let d = applyDeclared(centered ? { 'text-align': 'center', ...part.declared } : part.declared, l);
   // Enum-conditioned text alignment inherits through the same text context
   // as a uniform declared alignment. Later matching rules win, as in CSS.
   for (const rule of part.stylesWhen ?? []) {
@@ -5867,6 +5870,10 @@ function partToSpecInner(
       children: [textSpec],
     };
     const textCtx = applyStyling(frame, part, subst, ctx);
+    // Convention text-align-packs-text-box: in CSS a block's text-align places its line inside the box; a box with no
+    // layout of its own hugs its text, so the box packs it the same way (center → CENTER, right/end → MAX).
+    const packed = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'];
+    if (packed && !resolveLayout(part, subst) && input.conventions?.has('text-align-packs-text-box')) frame.layout = { ...frame.layout!, primary: packed };
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
     textSpec.fontStyle = figmaFaceStyle(textCtx);

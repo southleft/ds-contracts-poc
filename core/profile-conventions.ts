@@ -34,9 +34,14 @@
 /** lost-text-realigns-by-class (React to Figma contract step): elements align across variants by tag and position; where
  *  that leaves a variant's own text on a part whose base element draws none (two different elements in one slot), the
  *  set aligns again by the class stems of the prefix the profile's capture config names. Off, position alone. */
+/** text-align-packs-text-box (React to Figma writer): a text part's box with no layout of its own packs its text as its
+ *  text-align places the line in CSS (center → CENTER, right/end → MAX), and a <button> part that declares no text-align
+ *  takes the user-agent stylesheet's center (the contract step drops it as the element's own default). Off, the box
+ *  packs its text at the start. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
-  'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class'] as const;
+  'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
+  'text-align-packs-text-box'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
