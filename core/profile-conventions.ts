@@ -22,12 +22,15 @@
 /** observed-swap-default-drawn (Figma to React proposal): a swap property's declared default that the set draws at every
  *  use, with no linked contract in scope, renders when the caller omits the swap, built from each use's captured drawing
  *  (instanceSwapContent) with its own paint and size; caller content replaces it. Off, the drawing is recorded and unread. */
+/** negative-sibling-margin-as-gap (React to Figma writer): in-flow siblings that every inter-sibling margin pulls
+ *  together by the same negative amount (rows overlapping a neighbor's 1px border) are laid out with that amount as the
+ *  parent's negative itemSpacing, not each in a fixed margin box with its child placed. Off, the margin boxes stay. */
 /** root-text-by-axis (React to Figma contract step): a root whose own literal text differs between variants carries it
  *  per value of the one variant axis that decides it (the root's textByProp); a root text that some variant does not
  *  draw, or that no single axis decides, is refused by name. Off, the root keeps the first variant's text. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
-  'root-text-by-axis'] as const;
+  'negative-sibling-margin-as-gap', 'root-text-by-axis'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

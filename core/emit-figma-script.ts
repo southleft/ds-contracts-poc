@@ -7354,8 +7354,9 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   // Round 5d: sibling-margin → itemSpacing lowering (then marginVars strip —
   // compile-side only, never serialized).
-  for (const v of variants) lowerMarginGaps(v.spec);
-  for (const v of stateVariants) lowerMarginGaps(v.spec);
+  const overlap = input.conventions?.has('negative-sibling-margin-as-gap') ?? false;
+  for (const v of variants) lowerMarginGaps(v.spec, overlap);
+  for (const v of stateVariants) lowerMarginGaps(v.spec, overlap);
   const stripMarginVars = (s: NodeSpec) => {
     delete s.marginVars;
     (s.children ?? []).forEach(stripMarginVars);
@@ -7900,10 +7901,11 @@ const opacityRuntime = (has: boolean): string =>
  *  (the gap fact stays inspectable as a token); mixed sources lower as a
  *  literal. Non-uniform gaps, edge margins (leading margin of the first
  *  child / trailing margin of the last), cross-axis and negative margins
+ *  (an equal negative gap only under negative-sibling-margin-as-gap)
  *  stay on the child spec — the runtime renders those as the CSS margin
  *  box (wrapper frame), the preview as CSS margins. */
-function lowerMarginGaps(spec: NodeSpec): void {
-  for (const child of spec.children ?? []) lowerMarginGaps(child);
+function lowerMarginGaps(spec: NodeSpec, overlap = false): void {
+  for (const child of spec.children ?? []) lowerMarginGaps(child, overlap);
   if (!spec.layout) return;
   if (spec.bindings?.itemSpacing !== undefined || spec.lits?.itemSpacing !== undefined) return;
   const kids = (spec.children ?? []).filter(
@@ -7923,8 +7925,10 @@ function lowerMarginGaps(spec: NodeSpec): void {
     gaps.push({ px: t + l, vars });
   }
   const px = gaps[0].px;
+  // Convention negative-sibling-margin-as-gap: siblings pulled up by one equal negative margin overlap by it, which
+  // is a negative itemSpacing (later siblings drawn over earlier ones, as in CSS).
   // @lower emit.margin-uniform-sibling-to-gap
-  if (px <= 0 || !gaps.every((g) => g.px === px)) return;
+  if (px === 0 || (px < 0 && !overlap) || !gaps.every((g) => g.px === px)) return;
   const sources = new Set(gaps.flatMap((g) => g.vars));
   if (sources.size === 1 && gaps.every((g) => g.vars.length === 1) && !sources.has(null)) {
     spec.bindings = { ...spec.bindings, itemSpacing: [...sources][0] as string };
