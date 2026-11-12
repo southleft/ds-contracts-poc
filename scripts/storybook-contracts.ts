@@ -150,7 +150,8 @@ export function seed(c: DeclaredComponent) {
  * A placeholder every variant without a value draws alike is the field's `attrs.placeholder`; values are carried per
  * variant like literal text ('' where the field draws none). */
 export function carryVariantText(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
-  textAt: (comboKey: string, part: string) => string | null, fieldAt: (comboKey: string, part: string) => { value: string; placeholder: string } | null = () => null): string[] {
+  textAt: (comboKey: string, part: string) => string | null, fieldAt: (comboKey: string, part: string) => { value: string; placeholder: string } | null = () => null,
+  rootTextByAxis = false): string[] {
   const refused: string[] = [];
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
     const field = (part.element === 'input' || part.element === 'textarea') && part.text === undefined;
@@ -177,6 +178,19 @@ export function carryVariantText(contract: Contract, axes: readonly string[], co
     visit(part.parts as Record<string, Part> | undefined);
   } };
   visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  // Convention root-text-by-axis: the root's own literal text, where variants differ, is carried per value of the one
+  // axis that decides it (`textByProp`, which the writer and the React emitter read on a root). One that some variant
+  // does not draw, or that no single axis decides, is named. Off, the root keeps the first variant's text.
+  const root = contract.anatomy.root as Part;
+  if (rootTextByAxis && axes.length && typeof root.text === 'string' && !root.textByProp && !root.content) {
+    const drawn = combos.flatMap((k) => { const text = textAt(k.key, 'root'); return text === null ? [] : [{ v: k.axisValues, text }]; });
+    if (new Set(drawn.map((r) => r.text)).size > 1) {
+      const decides = axes.find((a) => drawn.every((r) => drawn.every((o) => o.v[a] !== r.v[a] || o.text === r.text)));
+      if (drawn.some((r) => !r.text)) refused.push('per-variant-text-unqualified: root: not-drawn-in-every-variant');
+      else if (decides) root.textByProp = { prop: decides, map: Object.fromEntries(drawn.map((r) => [r.v[decides]!, r.text])) };
+      else refused.push('per-variant-text-unqualified: root: no-single-axis');
+    }
+  }
   return refused;
 }
 
@@ -299,7 +313,7 @@ async function main() {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }));
+          return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis')));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);

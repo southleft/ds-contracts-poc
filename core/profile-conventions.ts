@@ -25,12 +25,15 @@
 /** negative-sibling-margin-as-gap (React to Figma writer): in-flow siblings that every inter-sibling margin pulls
  *  together by the same negative amount (rows overlapping a neighbor's 1px border) are laid out with that amount as the
  *  parent's negative itemSpacing, not each in a fixed margin box with its child placed. Off, the margin boxes stay. */
+/** root-text-by-axis (React to Figma contract step): a root whose own literal text differs between variants carries it
+ *  per value of the one variant axis that decides it (the root's textByProp); a root text that some variant does not
+ *  draw, or that no single axis decides, is refused by name. Off, the root keeps the first variant's text. */
 /** font-weight-initial-normal (React to Figma writer): a text that no part's font-weight reaches (a field's value or
  *  placeholder, a closed select's label, where the browser's own 400 is not an authored fact) draws at CSS's initial
  *  weight, normal (400, Regular), as the browser renders it. Off, it draws at the writer's fallback face (Medium). */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
-  'negative-sibling-margin-as-gap', 'font-weight-initial-normal'] as const;
+  'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
