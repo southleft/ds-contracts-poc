@@ -57,6 +57,7 @@ const storybook = String(json(PROFILE).pins?.storybook ?? '').split(' ')[0]!;
 const tsx = (name: string, args: string[]) => { const r = spawnSync('npx', ['tsx', ...args], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 28 }); writeFileSync(`${OUT}/${name}.log`, `${r.stdout}${r.stderr}`); return r.status; };
 if (tsx('reader', ['scripts/storybook-reader.ts', '--storybook', storybook, '--out', `${OUT}/reader`, '--profile', PROFILE, '--only', ONLY]) !== 0) refuse('the reader did not finish');
 receipt.contractsExit = tsx('contracts', ['scripts/storybook-contracts.ts', '--stories', `${OUT}/reader/stories.json`, '--out', `${OUT}/contracts`, '--storybook', storybook, '--file-key', KEY]);
+if (!existsSync(`${OUT}/contracts/storybook-contracts.json`)) { save(); refuse(`the contract step wrote no report (exit ${receipt.contractsExit})`); }
 const STORIES = `${OUT}/reader/stories.json`, stories = json(STORIES), report = json(`${OUT}/contracts/storybook-contracts.json`), only = new Set<string>(json(ONLY));
 const script = (contract: string, part: 1 | 2) => `${OUT}/contracts/figma/${contract.slice(contract.indexOf('.') + 1)}.${part === 1 ? '1-variables' : '2-component'}.js`;
 type Row = { title: string; contract: string; name: string; isSet: boolean; variants: number };
