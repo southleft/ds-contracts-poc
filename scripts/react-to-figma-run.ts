@@ -3,7 +3,10 @@
  * Figma file, one set at a time, reads each back by node id, checks it, and files the receipts scripts/reading.ts reads.
  *
  *   npx tsx scripts/react-to-figma-run.ts --run <new folder> --tag <letters, digits, hyphens> --file-key <key>
- *     --only <titles.json> --profile <profile.json> [--pilot]
+ *     --only <titles.json> --profile <profile.json> [--pilot] [--storybook-dir <library> | --storybook <url>]
+ *
+ * The Storybook read is the profile's pin unless --storybook names another URL, or --storybook-dir names a library whose
+ * own Storybook is built into <run>/storybook-static and served on a local port for the run (scripts/storybook-local.ts).
  *
  * Then bring that file's Figma tab to the front and run scripts/react-to-figma-driver.js in it through the Desktop Bridge
  * (figma_execute). FIGMA_TOKEN comes from the environment (load it in a subshell; never print it). Every program starts
@@ -23,15 +26,16 @@ import { createServer } from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storyFontPreflight } from './font-preflight.js';
+import { buildLocalStorybook, localStorybookPreflight, serveInChild } from './storybook-local.js';
 
 // The bridge plugin may fetch only localhost:9223-9232, and each figma-console-mcp instance takes the first free port there
 // on ::1; 9232 is taken last. The runner holds it on both ::1 and 127.0.0.1, so nothing else can answer the driver.
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), PORT = 9232;
-const FLAGS = ['--run', '--tag', '--file-key', '--only', '--profile', '--pilot'], argv = process.argv.slice(2);
+const FLAGS = ['--run', '--tag', '--file-key', '--only', '--profile', '--pilot', '--storybook-dir', '--storybook'], argv = process.argv.slice(2);
 const flag = (n: string) => { const i = argv.indexOf(n); return i > -1 && !String(argv[i + 1] ?? '--').startsWith('--') ? argv[i + 1] : undefined; };
 const [RUN, TAG, KEY, ONLY, PROFILE] = [flag('--run'), flag('--tag'), flag('--file-key'), flag('--only'), flag('--profile')];
 if (argv.some((a) => a.startsWith('--') && !FLAGS.includes(a)) || !RUN || !TAG || !/^[A-Za-z0-9-]+$/.test(TAG) || !KEY || !/^[A-Za-z0-9]+$/.test(KEY) || !ONLY || !PROFILE) {
-  console.error('usage: npx tsx scripts/react-to-figma-run.ts --run <new folder> --tag <letters, digits, hyphens> --file-key <key> --only <titles.json> --profile <profile.json> [--pilot]\n  An unknown flag is refused.');
+  console.error('usage: npx tsx scripts/react-to-figma-run.ts --run <new folder> --tag <letters, digits, hyphens> --file-key <key> --only <titles.json> --profile <profile.json> [--pilot] [--storybook-dir <library> | --storybook <url>]\n  An unknown flag is refused.');
   process.exit(2);
 }
 const OUT = path.resolve(RUN), MARK = ` · archived ${TAG}`, PRE = `archived-${TAG}`;
@@ -46,6 +50,9 @@ const refuse = (why: string): never => { console.error(`✖ refused before any w
 
 // Step 0, from files.
 if (!OUT.startsWith(ROOT + path.sep)) refuse('the run folder must be inside this checkout');
+const [SB_DIR, SB_URL] = [flag('--storybook-dir'), flag('--storybook')];
+if (SB_DIR && SB_URL) refuse('give --storybook-dir or --storybook, not both');
+if (SB_DIR) try { localStorybookPreflight(SB_DIR); } catch (e) { refuse(e instanceof Error ? e.message : String(e)); }
 if (existsSync(OUT) && readdirSync(OUT).length) refuse('the run folder is not empty');
 const disk = statfsSync(ROOT); if (disk.bavail * disk.bsize < 50e9) refuse('less than 50 GB free');
 const self = [fileURLToPath(import.meta.url), path.join(ROOT, 'scripts/react-to-figma-driver.js')];
@@ -53,7 +60,13 @@ const receipt: Record<string, any> = { tag: TAG, fileKey: KEY, pilot: argv.inclu
   runnerSha256: sha(Buffer.concat(self.map((f) => readFileSync(f)))), profileSha256: sha(readFileSync(PROFILE)), onlySha256: sha(readFileSync(ONLY)), calls: [], sets: {}, faults: [] };
 const save = () => put(`${OUT}/receipt.json`, receipt);
 mkdirSync(OUT, { recursive: true }); save();
-const storybook = String(json(PROFILE).pins?.storybook ?? '').split(' ')[0]!;
+let storybook = SB_URL ?? String(json(PROFILE).pins?.storybook ?? '').split(' ')[0]!, stopStorybook = () => {};
+process.on('exit', () => stopStorybook());
+if (SB_DIR) try {
+  const built = buildLocalStorybook(SB_DIR, `${OUT}/storybook-static`), served = await serveInChild(built.static);
+  receipt.storybookLocal = { dir: path.resolve(SB_DIR), sha256: built.sha256 }; save(); storybook = served.url; stopStorybook = served.stop;
+} catch (e) { save(); refuse(e instanceof Error ? e.message : String(e)); }
+receipt.storybook = storybook;
 const tsx = (name: string, args: string[]) => { const r = spawnSync('npx', ['tsx', ...args], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 28 }); writeFileSync(`${OUT}/${name}.log`, `${r.stdout}${r.stderr}`); return r.status; };
 if (tsx('reader', ['scripts/storybook-reader.ts', '--storybook', storybook, '--out', `${OUT}/reader`, '--profile', PROFILE, '--only', ONLY]) !== 0) refuse('the reader did not finish');
 receipt.contractsExit = tsx('contracts', ['scripts/storybook-contracts.ts', '--stories', `${OUT}/reader/stories.json`, '--out', `${OUT}/contracts`, '--storybook', storybook, '--file-key', KEY]);
