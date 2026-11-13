@@ -3724,7 +3724,9 @@ function applyStyling(
   // beside the other spec-level facts, and not in the stroke cases above.
   const paintLayout=resolveLayout(part,subst);
   if(paintLayout?.reversePaint!==undefined)spec.itemReverseZIndex=paintLayout.reversePaint !== (paintLayout.direction?.endsWith('-reverse')??false);
-  if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
+  // Convention outline-takes-no-layout: a stroke drawn from a CSS outline takes no layout space, as an outline never does
+  // in CSS; counted in layout, its weight would inset the frame's children and push them past its edges.
+  if (part.strokesIncludedInLayout === false || (spec.strokeOutside && input.conventions?.has('outline-takes-no-layout'))) spec.strokesIncludedInLayout = false;
   // A state shorthand replacing literal or bound side widths needs border-box layout
   // on both resting and state frames. Write it explicitly because retained
   // native values may differ; ordinary CSS borders include widths in layout.

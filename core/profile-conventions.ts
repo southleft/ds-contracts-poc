@@ -41,10 +41,13 @@
 /** variant-grid-whole-pixel (React to Figma writer): each column and row of a component set's variant grid steps by its
  *  cell's size rounded up, so a variant whose own size is fractional (a measured text width) still starts on a whole
  *  pixel, as its export does. Off, the grid steps by the exact sizes. */
+/** outline-takes-no-layout (React to Figma writer): a stroke drawn from a CSS outline takes no layout space (the frame's
+ *  strokesIncludedInLayout is false), as an outline never does in CSS. Off, it may inset the frame's children by its
+ *  weight. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
-  'text-align-packs-text-box', 'variant-grid-whole-pixel'] as const;
+  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
