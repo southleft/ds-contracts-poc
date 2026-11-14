@@ -184,12 +184,15 @@ export function alignRecordedFrames(
   )
     return { refused: "layout-origin-not-recorded" };
   if(figma.refused)return {refused:figma.refused};
+  // Figma's REST bounds, read in 1/64 px units (FIGMA_BOUNDS_UNIT_PX above).
+  const figmaLayout = figmaBoundsInLayoutUnits(figma.layout),
+    figmaRender = figmaBoundsInLayoutUnits(figma.render);
   const expanded=consumer.raster?.kind==="browser-paint-extent-v1";
   if(consumer.raster&&(!expanded||!validBox(consumer.raster.paint)))return {refused:"consumer-raster-model-unsupported"};
   const anchored=isSourceAnchorKind(figma.raster?.kind);
   const paired=PAIRED_KINDS.has(figma.raster?.kind ?? "")||anchored;
   if(PAIRED_KINDS.has(figma.raster?.kind ?? "")){const proof=figma.raster&&"proof" in figma.raster&&!isSourceAnchorKind(figma.raster.kind)?figma.raster.proof as RenderExportProof:null;
-    if(!proof||!proof.version||!proof.nodeId||!validBox(proof.layout)||!validBox(proof.render)||!proof.layoutInRender||!sameBox(proof.layout,figma.layout)||!sameBox(proof.render,figma.render)||proof.renderSha256!==figma.pngSha256||!/^([a-f0-9]{64})$/.test(proof.layoutSha256)||proof.layoutInRender.x!==figma.layout.x-figma.render.x||proof.layoutInRender.y!==figma.layout.y-figma.render.y||!Number.isInteger(proof.paintedOverlapPixels)||proof.paintedOverlapPixels<=0||!Number.isInteger(proof.overlapPixels)||proof.overlapPixels<proof.paintedOverlapPixels)
+    if(!proof||!proof.version||!proof.nodeId||!validBox(proof.layout)||!validBox(proof.render)||!proof.layoutInRender||!sameBox(proof.layout,figma.layout)||!sameBox(proof.render,figma.render)||proof.renderSha256!==figma.pngSha256||!/^([a-f0-9]{64})$/.test(proof.layoutSha256)||proof.layoutInRender.x!==figmaLayout.x-figmaRender.x||proof.layoutInRender.y!==figmaLayout.y-figmaRender.y||!Number.isInteger(proof.paintedOverlapPixels)||proof.paintedOverlapPixels<=0||!Number.isInteger(proof.overlapPixels)||proof.overlapPixels<proof.paintedOverlapPixels)
       return {refused:"figma-render-origin-proof-mismatch"};
   }
   if(figma.raster&&isSourceAnchorKind(figma.raster.kind)&&(!("proof" in figma.raster)||!figma.raster.proof||typeof figma.raster.proof!=="object"||!("kind" in figma.raster.proof)||figma.raster.proof.kind!==figma.raster.kind||!validateNativeAnchorProof(figma.raster.proof,figmaBytes,figma.layout,figma.render)))
@@ -209,9 +212,6 @@ export function alignRecordedFrames(
       figma.raster.scale !== 1)
   )
     return { refused: "figma-raster-model-unsupported" };
-  // Figma's REST bounds, read in 1/64 px units (FIGMA_BOUNDS_UNIT_PX above).
-  const figmaLayout = figmaBoundsInLayoutUnits(figma.layout),
-    figmaRender = figmaBoundsInLayoutUnits(figma.render);
   // A full-bounds export spans the layout box from its local origin: its pixel
   // span is the ceiling of the raw or the 1/64 px reading (see above). Legacy
   // receipts (no raster model) keep their original raw render-span reading.
@@ -246,7 +246,7 @@ export function alignRecordedFrames(
   };
   const fa = exported
     ? { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y }
-    : paired ? {x:figma.layout.x-figma.render.x,y:figma.layout.y-figma.render.y} : { x: 0, y: 0 };
+    : paired ? {x:figmaLayout.x-figmaRender.x,y:figmaLayout.y-figmaRender.y} : { x: 0, y: 0 };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };
