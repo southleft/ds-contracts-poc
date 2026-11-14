@@ -134,23 +134,23 @@ test('REST selected-root witness separates current FILL/HUG allocation from the 
 });
 
 // A swap property's declared default, drawn by the set at every use, with no linked contract in scope.
-const swapDefaultSet = (main = (i: number) => '3:1', paths: boolean | ((i: number) => boolean) = true, conventions = ['observed-swap-default-drawn'], strip = false) => {
+const swapDefaultSet = (main = (i: number) => '3:1', paths: boolean | ((i: number) => boolean) = true, conventions = ['observed-swap-default-drawn'], strip = false, bare = false) => {
   const swap = 'Glyph slot#1:9';
   const variant = (i: number, size: string, s: number, white: boolean): RestNode => ({ id: `5:${i}`, name: `Size=${size}`, type: 'COMPONENT',
     layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', size: { x: s, y: s }, absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
-    children: [{ id: `6:${i}`, name: 'Wrapper', type: 'FRAME', layoutSizingHorizontal: 'FIXED', layoutSizingVertical: 'FIXED', size: { x: s, y: s },
+    children: [((inst: RestNode) => bare ? inst : { id: `6:${i}`, name: 'Wrapper', type: 'FRAME', layoutSizingHorizontal: 'FIXED', layoutSizingVertical: 'FIXED', size: { x: s, y: s },
       absoluteBoundingBox: { x: 0, y: 0, width: s, height: s }, relativeTransform: [[1, 0, 0], [0, 1, 0]],
-      children: [{ ...leaf(`7:${i}`, swap), componentId: main(i), size: { x: s, y: s }, relativeTransform: [[1, 0, 0], [0, 1, 0]], absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
+      children: [inst] } as RestNode)({ ...leaf(`7:${i}`, swap), componentId: main(i), size: { x: s, y: s }, relativeTransform: [[1, 0, 0], [0, 1, 0]], absoluteBoundingBox: { x: 0, y: 0, width: s, height: s },
         children: [{ id: `I7:${i};8:1`, name: 'Glyph', type: 'VECTOR', size: { x: s / 2, y: s / 2 }, relativeTransform: [[1, 0, s / 4], [0, 1, s / 4]],
           absoluteBoundingBox: { x: s / 4, y: s / 4, width: s / 2, height: s / 2 }, constraints: { horizontal: 'SCALE', vertical: 'SCALE' },
           fills: [{ type: 'SOLID', color: { r: +white, g: +white, b: 1, a: 1 } }],
-          ...((typeof paths === 'function' ? paths(i) : paths) ? { fillGeometry: [{ path: `M0 0L${s / 2} 0L${s / 2} ${s / 2}L0 ${s / 2}Z`, windingRule: 'NONZERO' }] } : {}) }] }] }] } as RestNode);
+          ...((typeof paths === 'function' ? paths(i) : paths) ? { fillGeometry: [{ path: `M0 0L${s / 2} 0L${s / 2} ${s / 2}L0 ${s / 2}Z`, windingRule: 'NONZERO' }] } : {}) }] })] } as RestNode);
   const document = { id: '5:0', name: 'GlyphHost', type: 'COMPONENT_SET', componentPropertyDefinitions: {
     Size: { type: 'VARIANT', defaultValue: 'Small', variantOptions: ['Small', 'Large'] }, [swap]: { type: 'INSTANCE_SWAP', defaultValue: '3:1', preferredValues: [] } },
     children: [variant(1, 'Small', 16, true), variant(2, 'Large', 20, false)] };
   const components = { '3:1': { name: 'Selected', key: 'selected-key' }, '3:2': { name: 'Other', key: 'other-key' } };
   const set = (mapRestToDump({ name: 'Fixture', nodes: { '5:0': { document, components } } } as never).dump as unknown as Record<string, DumpSet>).GlyphHost;
-  if (strip) for (const v of set.variants) delete v.children![0].children![0].instanceSwapContent;
+  if (strip) for (const v of set.variants) delete (bare ? v.children![0] : v.children![0].children![0]).instanceSwapContent;
   const proposed = proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
     contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true, conventions });
   const contract = ContractSchema.parse(proposed.contract);
@@ -208,4 +208,19 @@ test('a use without a complete drawing draws nothing in its variant and is named
     await render({ size: 'large' });
     assert.equal(await glyph().count(), 0, 'never another use\'s drawing');
   } finally { await browser.close(); }
+});
+
+test('a swap-bound instance with no wrapper frame carries the same omitted-caller fallback (bare slot path)', async () => {
+  const { contract, tree, slot } = swapDefaultSet(undefined, true, undefined, false, true);
+  assert.equal(slot.renderDefaultAnatomy, true);
+  const output = emitReact(contract, { contracts: new Map([[contract.id, contract]]), icons: new Map(), tokens: tokenInventoryFromJson([tree]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(), render = await mountGenerated(page, contract.name, output.tsx, mintedTokenCss(tree) + output.css);
+    for (const [size, edge] of [['small', 8], ['large', 10]] as const) {
+      await render({ size });
+      assert.deepEqual(await page.locator('#root [class$=_Glyph]').evaluate(el => [el.getBoundingClientRect().width, el.getBoundingClientRect().height]), [edge, edge], size);
+    }
+  } finally { await browser.close(); }
+  assert.equal(swapDefaultSet(undefined, true, [], false, true).slot.renderDefaultAnatomy, undefined, 'off without the convention');
 });
