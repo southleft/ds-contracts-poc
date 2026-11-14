@@ -89,21 +89,18 @@ jobs:
       # 119 of 195 cells move their painted box without it — so the run would report
       # a corpus-wide regression that is entirely typography. The gate REFUSES when
       # it is absent (exit 2); this step is what stops that refusal from firing.
-      # On 2026-11-11 no ubuntu.com host resolved on the runners, so apt failed. The
-      # fallback fetches Ubuntu's own build of the same file from Ubuntu mirrors outside
-      # ubuntu.com and installs it only if it matches the SHA256 that the noble universe
-      # Packages index lists for it, so the font bytes cannot change.
+      # It is Ubuntu's own build, fonts-inter 4.0+ds-1, fetched from Ubuntu's archive or
+      # a mirror and installed only if it matches the SHA256 that the noble universe
+      # Packages index lists for it, so the font bytes cannot change: never apt's current
+      # version (on 2026-11-14 apt moved to 4.1+ds-1 and the gate went red on unchanged code).
       - name: install Inter (a load-bearing input the repo cannot carry)
         run: |
-          if ! { sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter || sudo apt-get install -y -qq fonts-inter-variable; }; then
-            echo "::warning::runner apt failed; installing Ubuntu's fonts-inter_4.0+ds-1_all.deb from a mirror outside ubuntu.com"
-            deb="$RUNNER_TEMP/fonts-inter_4.0+ds-1_all.deb"
-            for m in https://mirrors.edge.kernel.org/ubuntu https://mirrors.ocf.berkeley.edu/ubuntu; do
-              curl --fail --retry 3 -sSL -o "$deb" "$m/pool/universe/f/fonts-inter/fonts-inter_4.0+ds-1_all.deb" && break
-            done
-            echo "d1ca9cc3e26c347bd31977d4693bf6c371ee6b81a711e092923c8160c02e88ce  $deb" | sha256sum -c -
-            sudo dpkg -i "$deb"
-          fi
+          deb="$RUNNER_TEMP/fonts-inter_4.0+ds-1_all.deb"
+          for m in http://archive.ubuntu.com/ubuntu https://mirrors.edge.kernel.org/ubuntu https://mirrors.ocf.berkeley.edu/ubuntu; do
+            curl --fail --retry 3 -sSL -o "$deb" "$m/pool/universe/f/fonts-inter/fonts-inter_4.0+ds-1_all.deb" && break
+          done
+          echo "d1ca9cc3e26c347bd31977d4693bf6c371ee6b81a711e092923c8160c02e88ce  $deb" | sha256sum -c -
+          sudo dpkg -i "$deb"
           dpkg-query -W -f='${Package} ${Version} ${db:Status-Abbrev}\n' 'fonts-inter*'
 
       - name: catalog:visual:check

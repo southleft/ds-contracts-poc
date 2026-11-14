@@ -979,7 +979,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       // oracle: bound leaves respond; unbound literals remain unchanged. All
       // original cells remain checked. Other instruments retain their checks.
       try {
-        const sourcePlan = partialSourceTextControlPlan(findDumpSet(dump, contract, args.component));
+        const sourcePlan = partialSourceTextControlPlan(findDumpSet(dump, contract, args.component), dump);
         if (sourcePlan) {
           const textProbe = await probeSourceTextControls(page, sourcePlan, cases, contract.props);
           receipt.behavior.text = {...textProbe, sourceSha256: sha256(readFileSync(args.dump))};
