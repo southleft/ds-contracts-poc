@@ -1461,6 +1461,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         fieldList(ComponentRefSchema as AnySchema, {
           id: "The child contract’s id, e.g. <code>ds.avatar</code>.",
           contentSlot: "Routes caller-owned parts to a declared child ReactNode slot. Omission uses children; this does not rename the child slot.",
+          clearedSlots: "Child slots this instance passes explicitly empty, so a slot's omitted-caller fallback (renderDefaultAnatomy) draws nothing there. A caller sets it when it fixes a different component it cannot carry, rather than let the child's default stand in. React passes null; native Figma refuses by name, since a native instance cannot hold an empty swap.",
           contentSlots: "Routes disjoint caller part keys to multiple named child slots. Every part must be assigned exactly once; omit contentSlot when using this map. React and native Figma preserve each slot independently; HTML and Web Components retain their named caller-content refusals.",
           props:
             'Fixed prop values; <code>"{parentProp}"</code> threads a parent enum through.',

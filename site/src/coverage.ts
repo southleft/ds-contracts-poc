@@ -870,6 +870,7 @@ reg("composition", "component-refs", [
   "componentRef.id",
   "componentRef.contentSlot",
   "componentRef.contentSlots",
+  "componentRef.clearedSlots",
   "componentRef.props",
   "componentRef.initialProps",
   "componentRef.text",
