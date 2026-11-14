@@ -44,6 +44,19 @@ test('unobservable origins, changed source and fractional translations stay unqu
  const changed=structuredClone(snapshot);Object.assign(changed.nodes['1:1'].document,{clipsContent:true});
  assert('refused'in qualifyRenderBoundsExport(snapshot,changed,'1:1',layout,outside));
 });
+test('an offset that is whole in 1/64 px units is read as that whole offset; 1/64 px or more off a whole pixel is still refused',()=>{
+ // Float32 noise of 2^-11 px, as in a recorded 2.99951171875 for 3: the same pixels, the same proof, the same alignment.
+ for(const [dx,dy] of [[2**-11,0],[0,-(2**-11)]]){
+  const noisy=structuredClone(snapshot);Object.assign(noisy.nodes['1:1'].document.absoluteRenderBounds,{x:7.5+dx,y:20.5+dy});
+  const result=qualifyRenderBoundsExport(noisy,noisy,'1:1',layout,outside);
+  assert('proof'in result);assert.deepEqual([result.proof.layoutInRender,result.proof.overlapPixels,result.proof.paintedOverlapPixels],[{x:3,y:0},48,1]);
+  const consumer:ConsumerFrame={layout:{x:3,y:0,width:8,height:6},capture:{x:0,y:0,width:11,height:6},deviceScaleFactor:1,pngSha256:imageSha256(outside),raster:{kind:'browser-paint-extent-v1',paint:{x:0,y:0,width:11,height:6}}};
+  const pair=alignRecordedFrames(outside,outside,consumer,{layout:result.proof.layout,render:result.proof.render,pngSha256:imageSha256(outside),raster:{kind:'figma-rest-paired-render-v1',scale:1,proof:result.proof}},255);
+  assert('aligned'in pair);assert.deepEqual([pair.placement.figma,pair.placement.consumer],[{x:0,y:0},{x:0,y:0}]);assert.deepEqual(pair.aligned.a.data,pair.aligned.b.data);
+ }
+ for(const d of [1/64,0.25]){const off=structuredClone(snapshot);off.nodes['1:1'].document.absoluteRenderBounds.x+=d;
+  assert.deepEqual(qualifyRenderBoundsExport(off,off,'1:1',layout,outside),{refused:'render-export-fractional-origin'});}
+});
 
 test('recorded real Blockquote exports preserve the independently observed 15px outside stroke',()=>{
  const read=(name:string)=>readFileSync(new URL('./fixtures/render-export-blockquote/'+name,import.meta.url));
