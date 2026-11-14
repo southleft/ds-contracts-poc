@@ -394,6 +394,10 @@ export interface FusionEnv {
    *  (a child of <body>, whose content box is the window: the capture page
    *  sets `body { margin: 0 }`). */
   portaled: boolean;
+  /** The content width of the container the root was rendered in, when the harness measured it (the Storybook route's
+   *  preview body, inset by its padding). The root-width doors compare against it instead of the stage; absent, the
+   *  stage's content box. */
+  container?: number;
 }
 
 /** Which axes of a part were laid out against the browser window. */
@@ -913,7 +917,7 @@ export function styledChannels(
     // still refuses a body-wide box.
     // @door fuse.stage-fill-root-admitted
     if (seen > 0 && !block) {
-      const stageContent = env.stage.width - 2 * env.stage.padding;
+      const stageContent = env.container ?? env.stage.width - 2 * env.stage.padding;
       let fills = true;
       for (const combo of space.enumeration.combos) {
         if (!isEnabled(combo)) continue;
@@ -930,7 +934,7 @@ export function styledChannels(
     if (seen > 0 && block) {
       const rootStyle = a.baseFlat[rootPi].node.style;
       const rootW = pxNum(rootStyle['width']);
-      const stageContent = env.stage.width - 2 * env.stage.padding;
+      const stageContent = env.container ?? env.stage.width - 2 * env.stage.padding;
       // (1) out-of-flow root stretched by the window (`inset: 0`) — proven by
       // the axis identity in viewportResolvedParts, already refused above.
       // @door fuse.block-root-width-refused
