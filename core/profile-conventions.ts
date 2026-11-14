@@ -51,11 +51,14 @@
  *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
  *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
  *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
+/** empty-hug-keeps-extent (Figma to React proposal): a root HUG axis whose variant draws no visible children keeps its
+ *  observed extent as that plane's minimum, as a HUG plane with only absolutely placed children already does; Figma
+ *  draws an empty hug frame at its stored size, where CSS content sizing gives 0. Off, the plane renders 0 wide or tall. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar'] as const;
+  'stretched-line-paints-bar', 'empty-hug-keeps-extent'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
