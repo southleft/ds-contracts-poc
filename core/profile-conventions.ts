@@ -51,11 +51,14 @@
  *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
  *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
  *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
+/** mixed-scale-rect-keeps-placement (Figma to React proposal): an absolutely placed plain rect whose uses mix SCALE
+ *  with other constraints keeps each use's captured placement, each with its own constraint, as an all-SCALE rect
+ *  already does. Off, the mixed part is refused SCALE placement and renders in flow. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar'] as const;
+  'stretched-line-paints-bar', 'mixed-scale-rect-keeps-placement'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14613,8 +14613,8 @@ function buildPartFromEvidence(
     invertHiddenVisibility(m, part, ctx, where);
     const rectanglePath=m.occ.every(o=>isExactRectanglePath(o.node));
     if (isPlainRectShape(m) || rectanglePath) {
-      const scalableRect = !rectanglePath && m.occ.every(o =>
-        o.node.shape?.constraints && Object.values(o.node.shape.constraints).includes('SCALE'));
+      const scalableRect = !rectanglePath && (m.occ.every(o =>
+        o.node.shape?.constraints && Object.values(o.node.shape.constraints).includes('SCALE')) || mixedScaleRect(m, ctx, where));
       const capturedGeometry = scalableRect && carryCapturedAbsoluteGeometry(m, part, tokens, ctx,
         {size:true,visibleWhen:visibleWhen as Part['visibleWhen']}) === undefined;
       if (!capturedGeometry) mintPlainRectGeometry(m, part, tokens, ctx, where,rectanglePath);
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20632,4 +20632,16 @@ function carryStretchedLineBar(m: Merged, part: Record<string, unknown>, tokens:
   part.declared = {...(part.declared as Record<string, string> | undefined), position: 'absolute'};
   part.literals = {...(part.literals as Record<string, string> | undefined), left: '0px', top: '0px', bottom: '0px'};
   ctx.notes.push(`${where}: stretched LINE carried as the bar it paints (profile convention stretched-line-paints-bar): top to bottom of its parent at its left edge, stroke weight as width, stroke paint as background`);
+}
+
+/** Profile convention mixed-scale-rect-keeps-placement (core/profile-conventions.ts). An absolutely placed plain rect
+ * (every use carries a DumpShape constraint pair) whose uses mix SCALE with other constraints goes to the same captured
+ * geometry carrier an all-SCALE rect uses; each row keeps its own source constraint (normalizeAbsoluteGeometry spells
+ * LEFT/RIGHT/CENTER/STRETCH as well as SCALE). Off, carryAbsPlacement refuses SCALE without a qualified host and the
+ * part renders in flow. A refusal by the carrier still falls back to that path. */
+function mixedScaleRect(m: Merged, ctx: Ctx, where: string): boolean {
+  if (!ctx.mixedScaleRect || !m.occ.length || !m.occ.every(o => o.node.shape?.constraints && o.node.shape.x !== undefined && o.node.shape.y !== undefined) ||
+    !m.occ.some(o => Object.values(o.node.shape!.constraints!).includes('SCALE'))) return false;
+  ctx.notes.push(`${where}: plain rect whose uses mix SCALE with other constraints offered to the captured-geometry carrier, each use with its own constraint (profile convention mixed-scale-rect-keeps-placement)`);
+  return true;
 }

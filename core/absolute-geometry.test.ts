@@ -583,3 +583,24 @@ test('actual React preserves flat and nested source dimensions through variant s
   }
  }}finally{await browser.close()}
 });
+const mixedScaleFixture=()=>{
+ // A fixed 16×16 auto-layout host draws an ABSOLUTE plain rect (DumpShape x/y): SCALE×SCALE on one plane, LEFT×TOP on the other.
+ const planes=[{value:'Minor',x:6,y:6,constraints:{horizontal:'SCALE' as const,vertical:'SCALE' as const}},{value:'Major',x:6,y:2.5,constraints:{horizontal:'LEFT' as const,vertical:'TOP' as const}}];
+ const set:DumpSet={setName:'Mixed Mark',type:'COMPONENT_SET',propertyDefinitions:{Kind:{type:'VARIANT',defaultValue:'Minor',variantOptions:['Minor','Major']}},variants:planes.map(p=>({name:`Kind=${p.value}`,type:'COMPONENT',bbox:{width:16,height:16},
+  layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',primarySizing:'FIXED',counterSizing:'FIXED',padding:[1,1,1,1]},
+  children:[{name:'Mark',type:'RECTANGLE',fill:{hex:'000000'},shape:{kind:'rect',width:4,height:8,x:p.x,y:p.y,right:6,bottom:16-p.y-8,constraints:p.constraints}}]}))} as DumpSet;
+ return (conventions?: string[])=>proposeFromDump(structuredClone(set),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),fileKey:'fixture',projectionMode:'reviewable-inversion',conventions});
+};
+test('profile convention mixed-scale-rect-keeps-placement: a plain rect mixing SCALE with LEFT/TOP keeps each plane\'s captured placement',()=>{
+ const read=mixedScaleFixture();
+ const off=read();assert(off.notes.some(note=>note.includes('has no carried offset spelling')),JSON.stringify(off.notes));
+ assert.equal(walkAnatomy(ContractSchema.parse(off.contract)).some(row=>row.part.absoluteGeometryByCombination||row.part.absoluteGeometry),false);
+ const on=read(['mixed-scale-rect-keeps-placement']),c=ContractSchema.parse(on.contract);
+ const found=walkAnatomy(c).find(row=>row.part.absoluteGeometryByCombination);assert(found,JSON.stringify(on.notes));
+ const rows=found.part.absoluteGeometryByCombination!.rows;
+ assert.deepEqual(rows.map(row=>[row.values[0],row.geometry.box.constraints.horizontal,row.geometry.box.y]),[['minor','SCALE',6],['major','LEFT',2.5]]);
+ const scope=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,scope,errors,new Map());assert.deepEqual(errors,[]);
+ const primitives=on.mintedTokens?.tree??{},tokens={primitives,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const react=emitReact(c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(primitives).keys()),tokenValues:tokens});
+ assert.match(react.css,/top: 37\.5%/);assert.match(react.css,/top: 2\.5px/);
+});
