@@ -51,11 +51,15 @@
  *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
  *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
  *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
+/** svg-viewbox-carried (React to Figma contract step): each svg's icon asset is drawn in the viewBox its page authored
+ *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
+ *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
+ *  the path reaches past it. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar'] as const;
+  'stretched-line-paints-bar', 'svg-viewbox-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

@@ -3,7 +3,8 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
+import { reconstructSvg } from '../extract/computed/anatomy.js';
+import { carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -152,6 +153,32 @@ test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the de
     assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
     if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
   }
+});
+
+test('svg-viewbox-carried: each svg takes the viewBox its page authored, in tree order, where the reconstruction reads it', () => {
+  const el = (tag: string, style: Record<string, string>, nodes: unknown[] = []) => ({ tag, classes: [], style, pseudo: {}, nodes }) as any;
+  const svg = (size: string, d: string) => el('svg', { width: size, height: size }, [{ t: 'el', el: el('path', { d: `path("${d}")` }) }]);
+  // A 32-unit close glyph (extent 24) drawn on a 16 px svg, and a 16-unit glyph on a 16 px svg, inside a wrapper.
+  const close = 'M 17.4 16 L 24 9.4 L 22.6 8 L 16 14.6 L 9.4 8 L 8 9.4 L 14.6 16 L 8 22.6 L 9.4 24 L 16 17.4 L 22.6 24 L 24 22.6 Z';
+  const tree = () => el('div', {}, [{ t: 'el', el: svg('16px', close) }, { t: 'el', el: el('span', {}, [{ t: 'el', el: svg('16px', 'M 3 3 L 13 13 Z') }]) }]);
+  const svgsOf = (r: any) => [r.nodes[0].el, r.nodes[1].el.nodes[0].el];
+  const viewBoxes = (r: any) => svgsOf(r).map((n: any) => /viewBox="([^"]+)"/.exec(reconstructSvg(n, [], 'icon')!.markup)![1]);
+  // Off: the reconstruction from the computed size bumps the 32-unit glyph to its path extent, a third too large.
+  assert.deepEqual(viewBoxes(tree()), ['0 0 24 24', '0 0 16 16']);
+  // On: the authored viewBox wins.
+  const on = tree();
+  assert.equal(carrySvgViewports(on, [['0 0 32 32', null], ['0 0 16 16', 'xMidYMid meet']]), true);
+  assert.deepEqual(viewBoxes(on), ['0 0 32 32', '0 0 16 16']);
+  // A viewBox the reconstruction cannot read as observed (not square, another aspect mapping, absent) keeps the old one.
+  for (const seen of [['0 0 32 16', null], ['0 0 32 32', 'none'], [null, null]] as const) {
+    const r = tree();
+    assert.equal(carrySvgViewports(r, [seen, ['0 0 16 16', null]]), true);
+    assert.equal(svgsOf(r)[0].svgViewport, undefined, JSON.stringify(seen));
+  }
+  // The page and the capture disagree on how many svgs there are: nothing is attached.
+  const short = tree();
+  assert.equal(carrySvgViewports(short, [['0 0 32 32', null]]), false);
+  assert.deepEqual(svgsOf(short).map((n: any) => n.svgViewport), [undefined, undefined]);
 });
 
 test('closed-select-draws-selected-label: a closed single select draws its selected label, never its options', () => {
