@@ -964,3 +964,36 @@ test('pinned Figma reads: the dump\'s version is asked for and held; with none, 
   assert.equal(pinnedFigmaUrl(url, undefined), url, 'no version: the read is unchanged');
   assert.doesNotThrow(() => pinnedVersionHeld('any', undefined), 'no version: nothing is held');
 });
+
+import { ambiguousOriginMeasure, consumerDrawsNothing, AMBIGUOUS_ORIGIN_LIMIT } from './design-consumer-check.js';
+import { imageSha256 as sha, FIGMA_REST_FULL_BOUNDS as FULL } from './design-consumer-framing-v2.js';
+test('a flat overlap is measured only when every whole origin the pixels allow gives the same verdict and reasons', () => {
+  const flat = (w: number, h: number, on = (_x: number, _y: number) => true) => { const p = new PNG({ width: w, height: h });
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (on(x, y)) p.data.set([232, 232, 232, 255], (y * w + x) * 4); return PNG.sync.write(p); };
+  // Layout one pixel narrower than the render, as recorded on a skeleton: origins x 0 and 1 both match exactly.
+  const run = (w: number) => { const layout = flat(w - 1, 4), render = flat(w, 4), ours = flat(w, 4);
+    const consumer = { layout: { x: 0, y: 0, width: w, height: 4 }, capture: { x: 0, y: 0, width: w, height: 4 }, deviceScaleFactor: 1, pngSha256: sha(ours), raster: { kind: 'browser-paint-extent-v1', paint: { x: 0, y: 0, width: w, height: 4 } } } as any;
+    const frame = { layout: { x: 10, y: 10, width: w - 1, height: 4 }, render: { x: 10, y: 10, width: w, height: 4 }, pngSha256: sha(layout), raster: FULL, refused: 'render-export-origin-unobservable' } as any;
+    return ambiguousOriginMeasure('1:2', 'v1', ours, layout, render, consumer, frame); };
+  const wide = run(60); assert('frame' in wide, JSON.stringify(wide));
+  assert.deepEqual(wide.originsTried.map(o => [o.x, o.y, o.reasons]), [[0, 0, []], [1, 0, []]]);
+  assert.equal(wide.originsTried[0].whiteMismatchPercent, 0); assert(wide.originsTried[1].blackMismatchPercent > 0 && wide.originsTried[1].blackMismatchPercent <= 5);
+  assert.deepEqual([wide.frame.refused, wide.frame.render, (wide.frame.raster as any).proof.layoutInRender, (wide.frame.raster as any).proof.ambiguousOrigin.origins],
+    [undefined, { x: 10, y: 10, width: 60, height: 4 }, { x: 0, y: 0 }, [{ x: 0, y: 0 }, { x: 1, y: 0 }]]);
+  // Seven pixels wide, the second origin is over the limit: the verdict differs, so it stays refused, by name.
+  assert.deepEqual(run(7), { refused: 'render-export-origin-ambiguous-verdict' });
+  const consumer = { layout: { x: 0, y: 0, width: 20, height: 20 }, capture: { x: 0, y: 0, width: 20, height: 20 }, deviceScaleFactor: 1, pngSha256: sha(flat(20, 20)) } as any;
+  const frame = { layout: { x: 9, y: 9, width: 2, height: 2 }, render: { x: 0, y: 0, width: 20, height: 20 }, pngSha256: '', raster: FULL, refused: 'render-export-origin-unobservable' } as any;
+  assert(AMBIGUOUS_ORIGIN_LIMIT < 19 * 19);
+  assert.deepEqual(ambiguousOriginMeasure('1:2', 'v1', flat(20, 20), flat(2, 2), flat(20, 20), consumer, frame), { refused: 'render-export-origin-ambiguous-too-many' });
+  assert.deepEqual(ambiguousOriginMeasure('1:2', 'v1', flat(20, 20), flat(2, 2, () => false), flat(20, 20), consumer, frame), { refused: 'render-export-origin-unobservable' });
+});
+test('our side drawing nothing where Figma draws is a measured failure; both empty stays unmeasured', () => {
+  const img = (n: number) => { const p = new PNG({ width: 8, height: 8 }); for (let i = 0; i < n; i++) p.data.set([1, 2, 3, 200], i * 4); return PNG.sync.write(p); };
+  assert.deepEqual(consumerDrawsNothing('state-enabled', [img(50)]), { problem: 'consumer-draws-nothing:state-enabled:50', figmaPaintedPixels: 50 });
+  assert.deepEqual(consumerDrawsNothing('k', [img(0), img(3)]), { problem: 'consumer-draws-nothing:k:3', figmaPaintedPixels: 3 });
+  assert.equal(consumerDrawsNothing('state-invisible', [img(0)]), null);
+  const verdict = (problems: string[]) => variantVerdicts({ problems, images: { cases: [] }, content: { cases: [{ key: 'state-enabled', texts: { figma: 0, missing: [] }, parts: { figma: 1, missing: [] } }] } }, [{ key: 'state-enabled', figmaName: 'State=Enabled' }]).variants[0].verdict;
+  assert.equal(verdict(['consumer-draws-nothing:state-enabled:50']), 'fail');
+  assert.equal(verdict(['image-framing-unqualified:state-enabled:paint-extent-no-subject-paint']), 'unverified');
+});
