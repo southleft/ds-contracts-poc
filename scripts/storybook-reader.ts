@@ -104,9 +104,15 @@ export interface ComponentDeclaration { name: string; stories: string[]; axes: s
 export const EXCLUDED_REASONS = ['feature-flag-copy', 'deprecated', 'preview', 'non-visual-utility'] as const;
 export interface ExcludedTitle { title: string; reason: string }
 
+/** A profile scripts/profile-draft.ts wrote and no one has reviewed (reviewer, 2026-11-14): the reader reads it for a
+ *  person's own runs, but it never counts anywhere; the scored runner and the reading refuse it by name. */
+export const DRAFTED = /^drafted by ds-contracts init .*; not reviewed$/;
+export function assertReviewed(profile: { provenance?: unknown }): void {
+  if (DRAFTED.test(String(profile?.provenance ?? ''))) throw Error('profile-drafted-not-reviewed: a drafted profile never counts; review it and change its provenance first');
+}
 /** A system profile (GOAL.md, 2026-11-09): a versioned data file, checked against this schema when the reader loads it. */
 export const SystemProfile = z.object({
-  provenance: z.string().regex(/^AI-drafted .*approved by the reviewer session/), system: z.string(), version: z.string(),
+  provenance: z.string().refine((p) => /^AI-drafted .*approved by the reviewer session/.test(p) || DRAFTED.test(p), 'profile-provenance'), system: z.string(), version: z.string(),
   pins: z.object({ package: z.object({ name: z.string(), version: z.string() }), storybook: z.string(), figma: z.object({ fileKey: z.string(), version: z.string() }) }).strict(),
   setup: z.object({ manifest: z.string(), captureConfig: z.string() }),
   tuning: z.object({ why: z.string(), code: z.array(z.string()), figma: z.array(z.object({ id: z.string(), set: z.string() })) }),
