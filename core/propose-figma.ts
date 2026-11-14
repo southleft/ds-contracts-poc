@@ -13966,7 +13966,7 @@ function buildPartFromEvidence(
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
       const bareSlot: Record<string, unknown> = { name: allocatedInputName(ctx, swapProperty) };
       applySlotAccepts(bareSlot, swapProperty, ctx, where);
-      applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where);
+      applySlotDefaultContent(bareSlot, swapProperty, m, ctx, where); carryObservedSwapDefault(m, m, parentMode, part, bareSlot, swapProperty, ctx, where, selfKey);
       part.slot = bareSlot;
       // A merged swap plane may contain fixed selections as well as the bound
       // default. Preserve keyed source branches under caller omission.
