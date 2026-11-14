@@ -288,6 +288,41 @@ function observe(png:PNG,selection:Selection,offset:{x:number;y:number}) {
   return {rgbaSha256:rgba.digest('hex'),horizontalChanges,verticalChanges};
 }
 
+/** With no opaque owner, the metadata offset can still be proved on the overlap outside the render bounds of visible
+ * text: Figma's layout and render exports of one node can rasterize glyph edges differently (a recorded 1 to 3 pixels,
+ * alpha ±16). Every other overlap pixel must match exactly, there must be at least this many painted ones, and the
+ * color must change along both axes. Origin evidence only: scoring still compares every pixel of the original render. */
+export const TEXT_EXCLUDED_ANCHOR_MIN_PIXELS=256;
+function textExcludedProof(document:any,nodeId:string,version:string,layoutBytes:Buffer,renderBytes:Buffer):
+ {proof:RenderExportProof}|{refused:string}|null {
+  const layout=document.absoluteBoundingBox,render=document.absoluteRenderBounds,boxes:{x0:number;y0:number;x1:number;y1:number}[]=[];
+  let valid=true;
+  const walk=(n:any,showing:boolean)=>{
+    if(!n||typeof n!=='object'||(n.children!==undefined&&!Array.isArray(n.children))){valid=false;return;}
+    showing=showing&&visible(n);const b=n.absoluteRenderBounds;
+    if(showing&&n.type==='TEXT'&&box(b))boxes.push({x0:Math.floor(b.x-layout.x),y0:Math.floor(b.y-layout.y),x1:Math.ceil(b.x+b.width-layout.x),y1:Math.ceil(b.y+b.height-layout.y)});
+    for(const c of n.children??[])walk(c,showing);};
+  walk(document,true);if(!valid||!boxes.length)return null;
+  const a=PNG.sync.read(layoutBytes),b=PNG.sync.read(renderBytes),off={x:layout.x-render.x,y:layout.y-render.y};
+  const used=(x:number,y:number)=>x>=0&&y>=0&&x<a.width&&y<a.height&&x+off.x>=0&&y+off.y>=0&&x+off.x<b.width&&y+off.y<b.height&&
+    !boxes.some(t=>x>=t.x0&&x<t.x1&&y>=t.y0&&y<t.y1);
+  const at=(x:number,y:number)=>(y*a.width+x)*4,bt=(x:number,y:number)=>((y+off.y)*b.width+x+off.x)*4;
+  const same=(i:number,j:number)=>[0,1,2,3].every(c=>a.data[i+c]===a.data[j+c]);
+  let compared=0,painted=0,excluded=0,horizontal=0,vertical=0;
+  for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++){
+    if(!used(x,y)){if(x+off.x>=0&&y+off.y>=0&&x+off.x<b.width&&y+off.y<b.height)excluded++;continue;}
+    const i=at(x,y),j=bt(x,y);
+    if(a.data[i+3]!==b.data[j+3]||(a.data[i+3]>0&&[0,1,2].some(c=>a.data[i+c]!==b.data[j+c])))return {refused:'render-anchor-text-excluded-mismatch'};
+    compared++;if(a.data[i+3]>0)painted++;
+    if(used(x-1,y)&&!same(i,at(x-1,y)))horizontal++;if(used(x,y-1)&&!same(i,at(x,y-1)))vertical++;
+  }
+  if(painted<TEXT_EXCLUDED_ANCHOR_MIN_PIXELS)return {refused:'render-anchor-text-excluded-too-few-pixels'};
+  if(!horizontal||!vertical)return {refused:'render-anchor-text-excluded-origin-unobservable'};
+  return {proof:{nodeId,version,layout:{...layout},render:{...render},layoutInRender:off,layoutSha256:imageSha256(layoutBytes),renderSha256:imageSha256(renderBytes),
+    overlapPixels:compared,paintedOverlapPixels:painted,textExcluded:{rule:'visible-text-render-bounds-v1',boxes:boxes.map(t=>({x:t.x0,y:t.y0,width:t.x1-t.x0,height:t.y1-t.y0})),
+      pixels:excluded,minPaintedPixels:TEXT_EXCLUDED_ANCHOR_MIN_PIXELS,horizontalChanges:horizontal,verticalChanges:vertical}}};
+}
+
 export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:string,layoutBytes:Buffer,renderBytes:Buffer,requests:SourceRenderRequests):
  {proof:RenderExportProof|SourceAnchorProof}|{refused:string} {
   const old=qualifyRenderBoundsExport(before,after,nodeId,layoutBytes,renderBytes);
@@ -295,7 +330,7 @@ export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:stri
   if(!requestsMatch(requests,nodeId,before.version))return {refused:'render-anchor-request-mismatch'};
   const document=before.nodes[nodeId].document,layout=document.absoluteBoundingBox,render=document.absoluteRenderBounds;
   const legacy=select(document,layout,render),selection=legacy??selectRoot(document,layout,render);
-  if(!selection)return {refused:'render-anchor-source-unsupported'};
+  if(!selection)return textExcludedProof(document,nodeId,before.version,layoutBytes,renderBytes)??{refused:'render-anchor-source-unsupported'};
   // The choice above sees metadata only. There is no retry with another owner.
   const a=PNG.sync.read(layoutBytes),b=PNG.sync.read(renderBytes),offset={x:layout.x-render.x,y:layout.y-render.y};
   const aa=observe(a,selection,{x:0,y:0}),bb=observe(b,selection,offset);
