@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14626,7 +14626,7 @@ function buildPartFromEvidence(
       if (!capturedGeometry) carryAbsPlacement(m, part, tokens, ctx, where, { size: false });
     } else {
       invertNodeShape(m, part, ctx, where);
-      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where);
+      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where); carryStretchedLineBar(m, part, tokens, ctx, where);
     }
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20610,4 +20610,26 @@ function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: Pa
   part.parts = {[key]: built};
   ctx.notes.push(`${where}: declared INSTANCE_SWAP default "${definition.defaultValue}" drawn at every use with no linked contract; its observed usage drawing is the omitted-caller fallback, explicit caller content replaces it`);
   if (undrawn.length) ctx.notes.push(`${where}: observed-swap-default-drawing-missing — ${undrawn.length} of ${content.occ.length} use(s) have no complete captured drawing, so they draw nothing in the slot: ${undrawn.map(o => o.variant).join('; ')}; review`);
+}
+
+/** Profile convention stretched-line-paints-bar (core/profile-conventions.ts). A capless LINE turned a quarter turn
+ * (basis [[0,-1],[1,0]]) at its parent's top-left edge, vertically stretched, whose length is its parent's height in every
+ * variant, paints x in [0, weight] over that height: native LINE paint is local y in [-weight, 0] for every alignment
+ * (nativeLinePaint). Its varying length refuses the native line; the same strip is carried as an absolutely placed bar,
+ * top 0 to bottom 0 at left 0, with its stroke weight as width and its stroke paint as background. A translation within
+ * 1/1000 px of the edge is the edge (quarter-turn float residue). */
+function carryStretchedLineBar(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  if (!ctx.stretchedLineBar || part.shape || !m.occ.length || !m.occ.every(({node: n, parent}) => {
+    const sh = n.shape, line = sh?.line, t = line?.transform, box = parent?.node.bbox;
+    return n.type === 'LINE' && sh?.kind === 'line' && !!line && !!t && line.cap === 'NONE' && n.hidden !== true && !n.effects?.length &&
+      Math.abs(t[0][0]) < 1e-6 && Math.abs(t[0][1] + 1) < 1e-6 && Math.abs(t[1][0] - 1) < 1e-6 && Math.abs(t[1][1]) < 1e-6 &&
+      Math.abs(t[0][2]) < 1e-3 && t[1][2] === 0 && sh.constraints?.horizontal === 'LEFT' && sh.constraints?.vertical === 'STRETCH' &&
+      typeof n.strokeWeight === 'number' && n.strokeWeight > 0 && !!n.stroke && !!box && line.length === box.height;
+  })) return;
+  const channel: Record<string, string> = {'border-color': 'background-color', 'border-width': 'width'};
+  for (const o of ctx.mint?.observations ?? []) if (o.nodePath === where && channel[o.cssProperty]) o.cssProperty = channel[o.cssProperty]!;
+  for (const [from, to] of Object.entries(channel)) if (tokens[from] !== undefined) { tokens[to] = tokens[from]!; delete tokens[from]; }
+  part.declared = {...(part.declared as Record<string, string> | undefined), position: 'absolute'};
+  part.literals = {...(part.literals as Record<string, string> | undefined), left: '0px', top: '0px', bottom: '0px'};
+  ctx.notes.push(`${where}: stretched LINE carried as the bar it paints (profile convention stretched-line-paints-bar): top to bottom of its parent at its left edge, stroke weight as width, stroke paint as background`);
 }

@@ -47,10 +47,15 @@
 /** stage-from-story-container (React to Figma contract step): the block-root and stage-fill width doors measure a root
  *  against the story page's own container, the viewport inset by the preview body's padding where the story's cell
  *  starts, so a block root that fills it carries that width. Off, they measure against the bare viewport. */
+/** stretched-line-paints-bar (Figma to React proposal): a capless LINE turned a quarter turn at its parent's top-left
+ *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
+ *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
+ *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
-  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container'] as const;
+  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
+  'stretched-line-paints-bar'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
