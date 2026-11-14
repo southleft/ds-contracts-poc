@@ -4,7 +4,7 @@ import {ContractSchema,ShapeSchema} from '../scripts/contract-schema.js';
 import {mapRestToDump} from '../extract/figma/rest/map.js';
 import {proposeFromDump} from './propose-figma.js';import {tokenCorpusFromJson} from './token-corpus.js';
 import {emitReact,validateContract} from './emit-react.js';import {emitReactInline} from './emit-react-inline.js';
-import {createFigmaEngine} from './emit-figma-script.js';import {mountGenerated} from './react-test-runtime.js';
+import {createFigmaEngine} from './emit-figma-script.js';import {mountGenerated} from './react-test-runtime.js';import {tokenInventoryFromJson} from './tokens.js';import {mintedTokenCss} from './mint-tokens.js';
 const tokens={primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}};
 function contract(){return ContractSchema.parse({id:'probe.fill-line',name:'FillLine',version:'1.0.0',description:'Source-qualified FILL line',semantics:{element:'div'},props:[],states:[],bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'./FillLine',export:'FillLine'}}},anatomy:{root:{layout:{display:'flex',direction:'column'},literals:{width:'100px','padding-inline':'12px'},parts:{ink:{shape:{kind:'line',width:76,height:0,line:{length:76,transform:[[1,0,0],[0,1,0]],cap:'NONE',align:'CENTER',fillWidth:true}},literals:{'border-width':'3px','border-color':'#165dff'}}}}}});}
 test('horizontal FILL line keeps zero height, full inner width and upward stroke on both React surfaces',async()=>{
@@ -52,4 +52,22 @@ test('incomplete source FILL allocation cannot bypass the existing varying-line 
  (n:any,p:any)=>n.mask={type:'ALPHA'},
  (n:any,p:any)=>p.layout.mode='HORIZONTAL',
  ]){const d=make(),parent=d.variants[1];mutate(parent.children[0],parent);const before=JSON.stringify(d);if(parent.children[0].mask)assert.throws(()=>read(d),/figma-mask-composition-unqualified/);else assert.notEqual(fill(read(d)),true);assert.equal(JSON.stringify(d),before);}
+});
+
+test('profile convention stretched-line-paints-bar: a vertically stretched quarter-turn LINE is the bar it paints; off, it stays refused',async()=>{
+ const make=():any=>({setName:'BarProof',type:'COMPONENT_SET',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}},variants:[48,68].map((height,i)=>({name:'Mode='+['A','B'][i],variantProperties:{Mode:['A','B'][i]},type:'COMPONENT',nodeId:'p'+i,bbox:{width:120,height},
+  layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,16]},children:[{name:'Body',type:'FRAME',nodeId:'b'+i,fixedSize:{width:40,height}},
+  {name:'Bar',type:'LINE',nodeId:'n'+i,stroke:{hex:['42be65','da1e28'][i]},strokeWeight:3,strokeAlign:'CENTER',shape:{kind:'line',width:height,height:0,constraints:{horizontal:'LEFT',vertical:'STRETCH'},
+   line:{length:height,transform:[[-4.371139183945161e-8,-1,height*4e-8],[1,-4.371139183945161e-8,0]],cap:'NONE',align:'CENTER',source:{nodeId:'n'+i,parentId:'p'+i}}}}]}))});
+ const read=(conventions:string[],d=make())=>{const p=proposeFromDump(d,{corpus:tokenCorpusFromJson({...tokens,brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),conventions});return {p,c:ContractSchema.parse(p.contract)};};
+ const off=read([]).c.anatomy.root.parts!.Bar;assert.equal(off.declared?.position,undefined);assert.equal(off.shape,undefined);
+ const {p,c}=read(['stretched-line-paints-bar']),bar=c.anatomy.root.parts!.Bar;
+ assert.equal(bar.declared?.position,'absolute');assert.deepEqual([bar.literals?.left,bar.literals?.top,bar.literals?.bottom],['0px','0px','0px']);
+ assert(JSON.stringify(bar).includes('background-color')&&!JSON.stringify(bar).includes('border-'));
+ const tree=p.mintedTokens!.tree,out=emitReact(c,{contracts:new Map([[c.id,c]]),icons:new Map(),tokens:tokenInventoryFromJson([tree])}),browser=await chromium.launch();
+ try{const page=await browser.newPage(),render=await mountGenerated(page,c.name,out.tsx,mintedTokenCss(tree)+out.css);
+  for(const [mode,height,color] of [['a',48,'rgb(66, 190, 101)'],['b',68,'rgb(218, 30, 40)']] as const){await render({mode});
+   assert.deepEqual(await page.locator('#root [class$=_Bar]').evaluate(el=>{const r=el.getBoundingClientRect(),o=el.parentElement!.getBoundingClientRect();return [r.x-o.x,r.y-o.y,r.width,r.height,getComputedStyle(el).backgroundColor];}),[0,0,3,height,color],mode);}
+ }finally{await browser.close();}
+ const shifted=make();shifted.variants[1].children[1].shape.line.transform[1][2]=1;assert.equal(read(['stretched-line-paints-bar'],shifted).c.anatomy.root.parts!.Bar.declared?.position,undefined,'off the top edge stays refused');
 });
