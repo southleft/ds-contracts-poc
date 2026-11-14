@@ -214,3 +214,32 @@ test('public native property identities and distinct code inputs cannot borrow a
  assert(result.passed);assert.equal(result.scenarios.length,7);assert(result.scenarios.every(row=>row.rows.length===20));assert.equal(invoked.at(-1),null);
  assert.equal(JSON.stringify(dump),before);
 });
+
+import {expectedSourceText} from './design-consumer-text-controls.js';
+test('an instance whose main component is in the dump adds the text it draws; nothing it cannot read is guessed, and it never makes the oracle refuse',()=>{
+ // Made-up sets: Host draws a bound label and a Slot instance of Part; Part's small variant draws a caption beside a
+ // glyph instance whose main is not in the dump.
+ const make=(slot:Record<string,unknown>={},caption:Record<string,unknown>={},extra:Record<string,unknown>={})=>({
+  Host:{setName:'Host',nodeId:'1:0',propertyDefinitions:{'Label#1:1':{type:'TEXT',defaultValue:'Quill'},'Extra#1:2':{type:'BOOLEAN',defaultValue:true}},
+   variants:[{name:'Kind=A',nodeId:'1:1',type:'COMPONENT',children:[{type:'TEXT',name:'Label',nodeId:'1:2',text:{characters:'Quill'},propRefs:{characters:'Label#1:1'},...extra},
+    {type:'INSTANCE',name:'Slot',nodeId:'1:3',propRefs:{visible:'Extra#1:2'},componentProperties:{'Note#9:1':true},instanceRootOverrides:{componentId:'9:2',fields:['width']},...slot}]}]},
+  Part:{setName:'Part',nodeId:'9:0',propertyDefinitions:{'Note#9:1':{type:'BOOLEAN',defaultValue:false}},variants:[{name:'Size=Small',nodeId:'9:2',type:'COMPONENT',children:[
+   {type:'INSTANCE',name:'Glyph',instanceRootOverrides:{componentId:'404:1',fields:[]}},{type:'TEXT',name:'Caption',text:{characters:'Fern'},propRefs:{visible:'Note#9:1'},...caption}]}]},
+  _degradations:{}} as any);
+ const drawn=(dump:any)=>expectedSourceText(sourceTextControlPlan(dump.Host,dump),'Kind=A');
+ // The main's text at the instance's own properties; an unreadable nested instance adds nothing; without the dump, as before.
+ assert.deepEqual([drawn(make()),expectedSourceText(sourceTextControlPlan(make().Host),'Kind=A')],[['Quill','Fern'],['Quill']]);
+ // Figma's own text override wins; the instance's property hides the caption.
+ assert.deepEqual([drawn(make({textOverrides:{Caption:'Moss'}})),drawn(make({componentProperties:{'Note#9:1':false}}))],[['Quill','Moss'],['Quill']]);
+ // What the dump cannot say adds nothing: a visibility override inside, an override it names as unplaced, no main.
+ const unplaced=make();unplaced._degradations={0:{code:'host-override-unlocated',nodePath:'Host:Kind=A/Slot'}};
+ assert.deepEqual([drawn(make({hostOverrides:[{path:'Caption',fields:['visible']}]})),drawn(unplaced),drawn(make({instanceRootOverrides:{componentId:'404:2',fields:[]}}))],[['Quill'],['Quill'],['Quill']]);
+ // A scenario that toggles the boolean the instance's visibility is bound to leaves its text out; text that would make
+ // the owner ambiguous is left out too, never refused.
+ assert.deepEqual(drawn(make({},{},{propRefs:{characters:'Label#1:1',visible:'Extra#1:2'}})),['Quill']);
+ assert.deepEqual(drawn(make({},{text:{characters:'Quill'}})),['Quill']);
+ // The judge then finds the drawn text in the cell's observation.
+ const plan=sourceTextControlPlan(make().Host,make());
+ assert(judgeSourceTextControls(plan,[{key:'a',figmaName:'Kind=A',nodeId:'1:1'}],{a:'Quill Fern'}).passed);
+ assert(!judgeSourceTextControls(sourceTextControlPlan(make().Host),[{key:'a',figmaName:'Kind=A',nodeId:'1:1'}],{a:'Quill Fern'}).passed);
+});

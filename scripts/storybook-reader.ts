@@ -67,7 +67,9 @@ export interface VariantReference extends VariantRender {
   content?: DomContent; contentProblem?: 'reference-content-not-one-container';
   /** How many boxes the instance paints, and how many texts it holds outside an SVG (PAINTED): the scoreboard's icon
    *  and glyph test (2026-11-10). */
-  painted?: number; held?: number }
+  painted?: number; held?: number;
+  /** Set when the instance was moved onto the pixel grid before capture (SNAP_TO_GRID): the shift, in px. */
+  gridShift?: { x: number; y: number } }
 type Box = { x: number; y: number; width: number; height: number };
 export interface StoryComponent {
   title: string; stories: number; storyId: string; grammar: GrammarVerdict;
@@ -306,6 +308,25 @@ export const HIDE_CONTEXT = `((on) => { if (!on) { for (const [e, v] of window._
   for (const e of document.body.querySelectorAll('*')) if (!tops.some((t) => t === e || t.contains(e) || e.contains(t))) {
     const v = e.style.getPropertyValue('visibility'); hidden.push([e, v ? [v, e.style.getPropertyPriority('visibility')] : null]); e.style.setProperty('visibility', 'hidden', 'important'); }
   window.__dsReaderHidden = hidden; return hidden.length; })`;
+/** The story's context, not the instance, can place an instance off the pixel grid (instances side by side after a
+ *  neighbor of fractional width), while Figma draws every variant from a whole-pixel origin, so the two images could
+ *  never be aligned. The instrument, as the Figma to React page does for its cells: a single top element at a fractional
+ *  origin is moved onto the next whole pixel by its own margin, kept only if that is a pure translation (its size and
+ *  every descendant's place within it unchanged), else restored at once. (true) returns the shift or null; (false)
+ *  restores its style attribute exactly. */
+export const SNAP_TO_GRID = `((on) => { const kept = window.__dsReaderSnap, put = (el, old) => { old === null ? el.removeAttribute('style') : el.setAttribute('style', old); };
+  if (!on) { if (kept) put(kept.el, kept.old); window.__dsReaderSnap = null; return null; }
+  const tops = window.__dsReaderTops ?? [], el = tops[0]; if (tops.length !== 1) return null;
+  const r = el.getBoundingClientRect(), dx = Math.ceil(r.left) - r.left, dy = Math.ceil(r.top) - r.top, s = getComputedStyle(el);
+  const ml = parseFloat(s.marginLeft), mt = parseFloat(s.marginTop); if ((dx < 0.001 && dy < 0.001) || !Number.isFinite(ml) || !Number.isFinite(mt)) return null;
+  const rel = (o) => [el, ...el.querySelectorAll('*')].map((n) => { const b = n.getBoundingClientRect(); return [b.left - o.left, b.top - o.top, b.width, b.height]; });
+  const before = rel(r), old = el.getAttribute('style');
+  if (dx >= 0.001) el.style.setProperty('margin-left', (ml + dx) + 'px', 'important');
+  if (dy >= 0.001) el.style.setProperty('margin-top', (mt + dy) + 'px', 'important');
+  const t = el.getBoundingClientRect(), after = rel(t), near = (a, b) => Math.abs(a - b) < 0.001;
+  if (near(t.left, Math.round(t.left)) && near(t.top, Math.round(t.top)) && near(t.width, r.width) && near(t.height, r.height) && before.every((b, i) => b.every((v, k) => near(v, after[i][k]))))
+  { window.__dsReaderSnap = { el, old }; return { x: t.left - r.left, y: t.top - r.top }; }
+  put(el, old); return null; })`;
 
 const byFace = (a: FontFace, b: FontFace) => a.family.localeCompare(b.family) || a.weight - b.weight || a.style.localeCompare(b.style);
 /** A web font the page loaded, as Chromium reports it (CDP `CSS.fontsUpdated`): as declared, and the family in its file. */
@@ -586,13 +607,17 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
       const faces = new Map<string, FontFace>();
       for (const [i, ref] of c.references.entries()) {
         const { tree } = await show(ref.storyId, ref.args);
-        const box = tree ? await page.evaluate(`${SELECT_INSTANCE}(${ref.instance ?? 0})`) as Box | null | undefined : undefined;
+        const found = tree ? await page.evaluate(`${SELECT_INSTANCE}(${ref.instance ?? 0})`) as Box | null | undefined : undefined;
         // An instance that draws nothing (an empty layout, zero size) has no image to compare; it is named apart.
-        const problem = !tree ? 'reference-render-failed' : box === null ? 'reference-no-instance' : !box ? 'reference-empty' : undefined;
-        if (problem || !box) { ref.problem = problem; continue; }
+        const problem = !tree ? 'reference-render-failed' : found === null ? 'reference-no-instance' : !found ? 'reference-empty' : undefined;
+        if (problem || !found) { ref.problem = problem; continue; }
         // Grammar decision 5: the instance alone. Other instances and story context are hidden while it is read.
         await page.evaluate(`${HIDE_CONTEXT}(true)`);
         try {
+        // On the pixel grid, as Figma draws it (SNAP_TO_GRID); its box is read again only when it moved.
+        const shift = await page.evaluate(`${SNAP_TO_GRID}(true)`) as { x: number; y: number } | null;
+        const box = shift ? await page.evaluate(`${SELECT_INSTANCE}(${ref.instance ?? 0})`) as Box : found;
+        if (shift) ref.gridShift = shift;
         // The instance alone, captured as the Figma to React check captures its own side: ancestor background
         // colors cleared and restored, the image clipped to the paint extent Chromium's layers report. Playwright
         // hides the caret by setting and clearing each input's caret color, which leaves an empty style attribute;
@@ -614,7 +639,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
         else ref.contentProblem = 'reference-content-not-one-container';
         [ref.painted, ref.held] = await page.evaluate(PAINTED) as [number, number];
         for (const f of ref.faces) faces.set(JSON.stringify(f), f);
-        } finally { await page.evaluate(`${HIDE_CONTEXT}(false)`); }
+        } finally { await page.evaluate(`${SNAP_TO_GRID}(false)`); await page.evaluate(`${HIDE_CONTEXT}(false)`); }
       }
       c.faces = [...faces.values()].sort(byFace);
     }
