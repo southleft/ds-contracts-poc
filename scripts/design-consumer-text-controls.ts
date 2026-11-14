@@ -19,10 +19,55 @@ const propertyName = (name: string) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$
 const normalized = (text: string) => text.replace(/\s+/g, ' ').trim();
 function refuse(reason: string): never { throw Error(`source-text-control-unqualified:${reason}`); }
 
+/** The text an instance draws when the dump holds its main component (one variant of a set in the same dump, named by
+ * the instance's own component id) but not its children: the main's visible text, read with the instance's component
+ * properties and Figma's own text overrides (dump `textOverrides`, by name path). Where the dump cannot say exactly what
+ * it draws (a visibility override inside it, an override the dump names as unplaced, a property it cannot read, no main
+ * in the dump), the result is null and nothing is added, as before; a nested instance the dump cannot read adds nothing
+ * and the text around it still counts. The oracle only ever gains text the design draws. None of it is the outer set's
+ * API. */
+const UNPLACED = ['host-override-unlocated', 'text-override-ambiguous-path', 'host-instance-properties-unavailable'];
+class Unknowable extends Error {}
+function instanceText(instance: any, at: string, dump: any, layers: Array<{overrides: Record<string, unknown>; prefix: string}> = [], depth = 0): string[] | null {
+  try { return drawnBy(instance, at, dump, layers, depth); } catch (e) { if (e instanceof Unknowable) return null; throw e; }
+}
+function drawnBy(instance: any, at: string, dump: any, layers: Array<{overrides: Record<string, unknown>; prefix: string}>, depth: number): string[] {
+  const id = instance?.instanceRootOverrides?.componentId;
+  const main = typeof id === 'string' ? Object.values<any>(dump ?? {}).flatMap(set => (Array.isArray(set?.variants) ? set.variants : []).map((v: any) => ({set, v}))).find(({v}) => v.nodeId === id) : undefined;
+  if (!main || depth > 8 || (instance.hostOverrides ?? []).some((o: any) => (o?.fields ?? []).includes('visible'))
+    || Object.values<any>(dump?._degradations ?? {}).some(g => UNPLACED.includes(g?.code) && (g.nodePath === at || String(g.nodePath).startsWith(`${at}/`)))) throw new Unknowable();
+  const props = instance.componentProperties ?? {}, defs = main.set.propertyDefinitions ?? {};
+  const value = (ref: string, kind: 'string' | 'boolean') => {
+    const name = propertyName(ref), key = Object.keys(props).find(k => propertyName(k) === name);
+    const v = key !== undefined ? props[key] : Object.entries<any>(defs).find(([k]) => propertyName(k) === name)?.[1]?.defaultValue;
+    if (typeof v !== kind) throw new Unknowable();
+    return v;
+  };
+  // Overrides apply outermost first: a host's override of a nested text (keyed by its full path) wins over the nested one.
+  const own = [...layers, {overrides: instance.textOverrides ?? {}, prefix: ''}], out: string[] = [];
+  const walk = (n: any, path: string[], hidden: boolean) => {
+    const shown = !hidden && n?.hidden !== true && (n?.propRefs?.visible === undefined || value(n.propRefs.visible, 'boolean'));
+    // A nested instance is read by the same rule; one the dump cannot read adds nothing, as an outer one does today.
+    if (n?.type === 'INSTANCE') {
+      if (shown && !(n.children ?? []).length)
+        out.push(...(instanceText(n, `${at}/${path.join('/')}`, dump, own.map(l => ({overrides: l.overrides, prefix: `${l.prefix}${path.join('/')}/`})), depth + 1) ?? []));
+      return;
+    }
+    if (n?.type === 'TEXT' && shown) {
+      const override = own.map(l => l.overrides[`${l.prefix}${path.join('/')}`]).find(v => typeof v === 'string');
+      if (override === undefined && typeof (n.propRefs?.characters === undefined ? n.text?.characters : '') !== 'string') throw new Unknowable();
+      out.push(typeof override === 'string' ? override : n.propRefs?.characters !== undefined ? value(n.propRefs.characters, 'string') : n.text.characters);
+    }
+    for (const child of n?.children ?? []) walk(child, [...path, child.name], !shown);
+  };
+  for (const child of main.v.children ?? []) walk(child, [child.name], false);
+  return out;
+}
+
 /** The oracle reads the original captured node bindings and definitions only.
  * A set-wide TEXT property never implies a binding on an unbound source leaf.
  * Instance internals belong to their child API, so they cannot claim this API. */
-export function sourceTextControlPlan(set: any): SourceTextControlPlan {
+export function sourceTextControlPlan(set: any, dump?: any): SourceTextControlPlan {
   if (!Array.isArray(set?.variants) || !set.variants.length) refuse('variant-domain-missing');
   const definitions = new Map<string, any>(), definitionNames = new Map<string, string>();
   for (const [raw, definition] of Object.entries(set.propertyDefinitions ?? {})) {
@@ -49,7 +94,7 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
   const variants = set.variants.map((variant: any) => {
     if (typeof variant.name !== 'string' || names.has(variant.name)) refuse('variant-name-ambiguous');
     names.add(variant.name);
-    const leaves: SourceTextLeaf[] = [];
+    const leaves: SourceTextLeaf[] = [], instanceLeaves: Array<{leaf: SourceTextLeaf; at: number; boundBy: string | null}> = [];
     const walk = (node: any, path: string[], ancestorHidden: boolean) => {
       if (node?.nodeId !== undefined) {
         if (typeof node.nodeId !== 'string' || !node.nodeId.trim()) refuse('node-id-malformed');
@@ -59,6 +104,10 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
       if (node?.hidden !== undefined && typeof node.hidden !== 'boolean') refuse('visibility-capture-malformed');
       if (node?.type === 'INSTANCE') {
         if (hasInstanceText(node)) refuse(`instance-text-ownership-unqualified:${variant.name}:${path.join('/')}`);
+        const boundBy = typeof node.propRefs?.visible === 'string' ? propertyName(node.propRefs.visible) : null;
+        for (const text of instanceText(node, `${set.setName}:${variant.name}/${path.join('/')}`, dump) ?? [])
+          instanceLeaves.push({leaf: {path: path.join('/'), nodeId: null, characters: text, charactersProperty: null, visibleProperty: null,
+            visibleAtRest: !ancestorHidden && node.hidden !== true}, at: leaves.length, boundBy});
         return;
       }
       if (node?.type !== 'TEXT' && node?.propRefs?.visible !== undefined && hasOwnedText(node))
@@ -87,18 +136,29 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
       for (const child of node?.children ?? []) walk(child, [...path, child.name], ancestorHidden || node.hidden === true);
     };
     walk(variant, [], false);
+    return {name: variant.name, nodeId: typeof variant.nodeId === 'string' ? variant.nodeId : null, leaves, instanceLeaves};
+  }).map(({name, nodeId, leaves: own, instanceLeaves}: any) => {
+    // An instance's text is read at rest: where a scenario toggles the boolean its visibility is bound to, it is left out.
+    const withInstances: SourceTextLeaf[] = [...own];
+    for (const {leaf, at, boundBy} of [...instanceLeaves].reverse()) if (boundBy === null || !(boundBy in booleanDefaults)) withInstances.splice(at, 0, leaf);
     // Equal drawn text with distinct owners within one cell cannot establish
     // which leaf responded from the cell's full visible text observation.
-    const ownersByText=new Map<string,Set<string>>();
-    for (const leaf of leaves) {
-      const text=normalized(leaf.characters);
-      if (!text) continue;
-      const owners=ownersByText.get(text) ?? new Set<string>();
-      owners.add(JSON.stringify([leaf.charactersProperty,leaf.visibleProperty,leaf.visibleAtRest]));
-      ownersByText.set(text,owners);
-    }
-    if ([...ownersByText.values()].some(owners=>owners.size>1)) refuse(`text-owner-ambiguous:${variant.name}`);
-    return {name: variant.name, nodeId: typeof variant.nodeId === 'string' ? variant.nodeId : null, leaves};
+    const ownersClear = (list: SourceTextLeaf[]) => { const ownersByText=new Map<string,Set<string>>();
+      for (const leaf of list) {
+        const text=normalized(leaf.characters);
+        if (!text) continue;
+        const owners=ownersByText.get(text) ?? new Set<string>();
+        owners.add(JSON.stringify([leaf.charactersProperty,leaf.visibleProperty,leaf.visibleAtRest]));
+        ownersByText.set(text,owners);
+      }
+      return ![...ownersByText.values()].some(owners=>owners.size>1); };
+    // The judge's own test that no candidate text holds another (the probe's markers included).
+    const observable = (list: SourceTextLeaf[]) => { const all = [...new Set([...list.map(leaf => normalized(leaf.characters)), ...[...referencedText].map(p => normalized(`Replaced by consumer: ${p}`))])].filter(Boolean);
+      return !all.some((value, i) => all.some((other, j) => i !== j && other.includes(value))); };
+    // Instance text never makes the oracle refuse where it judged before: a variant whose instance text would, keeps its own.
+    const leaves = ownersClear(withInstances) && (observable(withInstances) || !observable(own)) ? withInstances : own;
+    if (!ownersClear(leaves)) refuse(`text-owner-ambiguous:${name}`);
+    return {name, nodeId, leaves};
   });
   return {rule: 'source-owned-text-controls-v1', textProperties: [...referencedText].sort(),
     propertyIdentities: Object.fromEntries(definitionNames), booleanDefaults, variants};
@@ -107,7 +167,7 @@ export function sourceTextControlPlan(set: any): SourceTextControlPlan {
 /** Bounded correction for observed mixed ownership of the same drawn text.
  * Uniform text-control and instance-override instruments retain their existing
  * checks. This predicate reads source nodes only; it never selects case rows. */
-export function partialSourceTextControlPlan(set: any): SourceTextControlPlan | null {
+export function partialSourceTextControlPlan(set: any, dump?: any): SourceTextControlPlan | null {
   const controlsByText = new Map<string, Set<string | null>>();
   const walk = (node: any) => {
     if (node?.type === 'INSTANCE') return;
@@ -121,7 +181,7 @@ export function partialSourceTextControlPlan(set: any): SourceTextControlPlan | 
   };
   for (const variant of set?.variants ?? []) walk(variant);
   if (![...controlsByText.values()].some(controls => controls.has(null) && controls.size > 1)) return null;
-  return sourceTextControlPlan(set);
+  return sourceTextControlPlan(set, dump);
 }
 
 export function expectedSourceText(plan: SourceTextControlPlan, variantName: string, overrides: Record<string, string | boolean> = {}): string[] {
