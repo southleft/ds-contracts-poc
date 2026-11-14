@@ -296,6 +296,10 @@ async function main() {
         const controls = Object.fromEntries(await Promise.all(CONTROL_TAGS.map(async (t) => [t, normalizeNode(await page.evaluate(captureJs(`[data-combo="__control-${t}"]`)) as any)])));
         await page.evaluate(`document.querySelectorAll('[data-combo^="__control-"]').forEach((e) => e.remove())`);
         const stage = { width: PAGE.viewport.width, height: PAGE.viewport.height, padding: 0 };
+        // Convention stage-from-story-container: the root-width doors measure the root against the story page's own
+        // container, the viewport inset by where the story's cell starts (the preview body's padding), when it spans evenly.
+        const inset = conventions.has('stage-from-story-container') ? await page.evaluate(`(() => { const r = document.querySelector('[data-ds-reader-cell]')?.getBoundingClientRect();
+          return r && Math.abs(r.width - (${PAGE.viewport.width} - 2 * r.left)) < 0.5 ? r.left : 0; })()`) as number : 0;
         const uaControls = await captureUaControls(page.context(), { stage, colorScheme: 'light', channels: allProps, classAllow: IDENTITY_CLASSES });
         const sweep = { captures, controls, uaControls, uaBaselineBrowser: browser.version(), allProps, stylesheetSkips: [], browserVersion: browser.version(),
           fontChecks: {}, quarantined: [], pinnedAnimations: [], shadowHostTrails: {}, textFillFolds: {}, closedShadowSuspects: {} } as unknown as SweepResult;
@@ -309,7 +313,7 @@ async function main() {
         row.parts = [...promotion.partIndex.keys()];
         refusals.push(...promotion.refusals.map((x: unknown) => typeof x === 'string' ? x : JSON.stringify(x)));
         const receipts: string[] = [], styles = (m: Record<string, { style: Record<string, string> }>) => Object.fromEntries(Object.entries(m).map(([t, n]) => [t, n.style]));
-        const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false }, styles(uaControls));
+        const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false, ...(inset ? { container: PAGE.viewport.width - 2 * inset } : {}) }, styles(uaControls));
         const folds = detectFolds(aligned, styled, receipts);
         await boundCheck(aligned, comp, space, async () => '', promotion.contract);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
