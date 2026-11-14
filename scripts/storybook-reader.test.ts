@@ -288,3 +288,28 @@ test('a closed native select draws one text, its selected label: one run, painte
     assert.deepEqual((await page.locator('#c').evaluate(domContentOf)).runs!.map(r => r.text), ['Plum deep']);
   } finally { await browser.close(); }
 });
+
+import {SNAP_TO_GRID} from './storybook-reader.js';
+test('an instance its story places off the pixel grid is moved onto it, only as a pure translation, and restored after', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    // Made-up row: a neighbor of fractional width puts the second box at a fractional x.
+    await page.setContent(`<div style="display:flex;width:400px"><span style="width:10.40625px;flex:none"></span><b id="s" style="display:block;width:30px;height:20px;flex:none;margin-left:2px"><i id="k" style="display:block;margin:3px;width:5px;height:5px"></i></b><em id="g" style="display:block;flex:1 1 auto;height:8px"></em></div>`);
+    const at = (id: string) => page.evaluate(`(() => { const r = document.getElementById(${JSON.stringify(id)}).getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; })()`) as Promise<number[]>;
+    const snap = async (id: string, on: boolean) => { await page.evaluate(`window.__dsReaderTops = [document.getElementById(${JSON.stringify(id)})]`); return page.evaluate(`${SNAP_TO_GRID}(${on})`); };
+    const [before, styleBefore] = [await at('s'), await page.locator('#s').getAttribute('style')];
+    assert.deepEqual(await snap('s', true), {x: 0.59375, y: 0});
+    const [moved, inner] = [await at('s'), await at('k')];
+    assert.deepEqual([moved[0], moved[2], moved[3], inner[0] - moved[0]], [21, 30, 20, 3], 'on a whole pixel, same size, its descendants in the same place');
+    await snap('s', false);
+    assert.deepEqual([await at('s'), await page.locator('#s').getAttribute('style')], [before, styleBefore]);
+    // On the grid already: untouched. A flexible box the margin would resize: left where it is, restored at once.
+    await page.evaluate(`document.querySelector('span').style.width = '10px'`);
+    assert.equal(await snap('s', true), null);
+    await page.evaluate(`document.querySelector('span').style.width = '10.40625px'; document.getElementById('s').style.flex = '1 1 auto'`);
+    const flexible = [await at('s'), await page.locator('#s').getAttribute('style')];
+    assert.equal(await snap('s', true), null);
+    assert.deepEqual([await at('s'), await page.locator('#s').getAttribute('style')], flexible);
+  } finally { await browser.close(); }
+});
