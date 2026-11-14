@@ -329,6 +329,8 @@ export function qualifySourceRenderBoundsExport(before:any,after:any,nodeId:stri
   if(!('refused'in old)||old.refused!=='render-export-overlap-mismatch')return old;
   if(!requestsMatch(requests,nodeId,before.version))return {refused:'render-anchor-request-mismatch'};
   const document=before.nodes[nodeId].document,layout=document.absoluteBoundingBox,render=document.absoluteRenderBounds;
+  // This route reads raw offsets only, so an offset that is whole only in 1/64 px units stays refused here.
+  if(!Number.isInteger(layout.x-render.x)||!Number.isInteger(layout.y-render.y))return {refused:'render-export-fractional-origin'};
   const legacy=select(document,layout,render),selection=legacy??selectRoot(document,layout,render);
   if(!selection)return textExcludedProof(document,nodeId,before.version,layoutBytes,renderBytes)??{refused:'render-anchor-source-unsupported'};
   // The choice above sees metadata only. There is no retry with another owner.
