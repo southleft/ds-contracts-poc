@@ -44,10 +44,14 @@
 /** outline-takes-no-layout (React to Figma writer): a stroke drawn from a CSS outline takes no layout space (the frame's
  *  strokesIncludedInLayout is false), as an outline never does in CSS. Off, it may inset the frame's children by its
  *  weight. */
+/** stretched-line-paints-bar (Figma to React proposal): a capless LINE turned a quarter turn at its parent's top-left
+ *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
+ *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
+ *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
-  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout'] as const;
+  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stretched-line-paints-bar'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
