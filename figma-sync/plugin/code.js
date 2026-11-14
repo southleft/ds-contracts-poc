@@ -973,8 +973,13 @@ async function runLocalRunner() {
 // session, runs each program it serves and posts each result; every program
 // starts with the runner's file-key guard, so a wrong file writes nothing.
 // One driver source, hashed into the runner's receipt; nothing is copied here.
+// PINNED: the plugin runs only the driver whose sha256 is below, so a local
+// process that took port 9232 cannot run its own code in this file; any other
+// bytes are refused by name (r2f-driver-hash-mismatch) before anything runs.
+// scripts/react-to-figma-driver.test.ts fails when this and the driver differ.
 // ---------------------------------------------------------------------------
 const R2F_BASE = 'http://localhost:9232';
+const R2F_DRIVER_SHA256 = '6827b14b001a9f95105a9eebea8078991da4481bd181cea8ccf6da4206b598e6';
 async function runReactToFigma() {
   const done = (ok, summary) => post({ type: 'r2f-done', ok, summary });
   let driver;
@@ -985,6 +990,10 @@ async function runReactToFigma() {
   } catch (e) {
     return done(false, 'React to Figma: ' + String(e && e.message ? e.message : e) + ' — is scripts/react-to-figma-run.ts serving on port 9232?');
   }
+  const got = sha256Hex(driver);
+  if (got !== R2F_DRIVER_SHA256)
+    return done(false, 'r2f-driver-hash-mismatch: the driver on port 9232 has sha256 ' + got.slice(0, 12) + '…, not this plugin\'s pinned ' +
+      R2F_DRIVER_SHA256.slice(0, 12) + '… — nothing was run. Is another process on 9232, or is the plugin older than the runner?');
   post({ type: 'r2f-log', line: 'Connected to the runner; running its programs in "' + figma.root.name + '" (' + (figma.fileKey || 'no file key') + '). Keep this file in front.' });
   figma.notify('React to Figma: running the runner\'s programs…', { timeout: 3000 });
   try {
