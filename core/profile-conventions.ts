@@ -44,10 +44,13 @@
 /** outline-takes-no-layout (React to Figma writer): a stroke drawn from a CSS outline takes no layout space (the frame's
  *  strokesIncludedInLayout is false), as an outline never does in CSS. Off, it may inset the frame's children by its
  *  weight. */
+/** stage-from-story-container (React to Figma contract step): the block-root and stage-fill width doors measure a root
+ *  against the story page's own container, the viewport inset by the preview body's padding where the story's cell
+ *  starts, so a block root that fills it carries that width. Off, they measure against the bare viewport. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
-  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout'] as const;
+  'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
