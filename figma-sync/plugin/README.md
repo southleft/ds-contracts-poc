@@ -80,7 +80,11 @@ repo's tokens, contracts and icons baked in (`window.DSC`, built by
   one unguarded surface). **Local runner** fetches every script in
   `figma-sync/` from `npm run figma:serve` (port 8765) and runs them in
   dependency order, SHA-256-verified against the server manifest, stopping
-  on first failure. **Diagnostics** shows the engine build stamp
+  on first failure. **React to Figma runner** connects to
+  `scripts/react-to-figma-run.ts` (port 9232), runs the runner's own driver
+  in the open file in place of the Desktop Bridge, and reports the run's
+  close or its named stop; every program refuses a file other than the one
+  the runner names. **Diagnostics** shows the engine build stamp
   (`window.DSC_BUILD`, injected at package time — compare it against
   `engine.receipt.json` / the `build-plugin-zip` output to spot a stale dev
   import at a glance) and the file's contract-backed / not-under-contract
@@ -149,7 +153,7 @@ Missing or different file identity refuses the source operation.
   updates reads the standing channel — bundle and proposal deliveries
   answer the plugin's `Origin: null`, and the pairing code / read key is
   the auth), `api.github.com` (ONLY the optional Send PR flow; dry run
-  sends nothing), plus dev-only `localhost:8765/8787`. The plugin talks to
+  sends nothing), plus dev-only `localhost:8765/8787/5181/9232`. The plugin talks to
   nothing else. GitHub tokens live in the window's memory for the session
   and are never persisted; the channel read key is remembered in
   `clientStorage` and can only ever read — a leaked read key can never
