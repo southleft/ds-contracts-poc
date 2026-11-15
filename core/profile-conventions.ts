@@ -62,6 +62,9 @@
  *  layout or paint of its own, which the writer wraps in a box at run time, packs its line along that box as its
  *  text-align places it in CSS (start → MIN, center → CENTER, right/end → MAX). Off, the box centers it, as it does a
  *  drawn chip's glyph. */
+/** bound-visibility-override-is-property (Figma to React proposal): a host's raw `visible` override on a node whose
+ *  visibility is bound to a component BOOLEAN property, where the same host sets that property to the same value, is
+ *  carried by that property and is not an independent visibility demand. Off, it is a demand of its own. */
 /** svg-viewbox-carried (React to Figma contract step): each svg's icon asset is drawn in the viewBox its page authored
  *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
  *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
@@ -71,7 +74,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align',
-  'svg-viewbox-carried'] as const;
+  'bound-visibility-override-is-property', 'svg-viewbox-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
