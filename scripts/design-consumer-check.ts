@@ -118,6 +118,54 @@ export function consumerSizeCheck(key: string, pixelQualified: boolean, historic
     delta, limitPx: SIZE_SLACK_PX, withinLimit },
     problems: withinLimit ? [] : [`content-size-mismatch:${key}:${pair.consumer.width}x${pair.consumer.height} vs ${pair.figma.width}x${pair.figma.height}`] };
 }
+/** B (reviewer ruling, 2026-11-14). `render-export-origin-unobservable`: Figma's layout export matched its render export
+ * exactly at the recorded offset, but the overlap is one flat color, so other whole offsets match too. Every offset at
+ * which each painted layout pixel lands inside the render PNG and the whole overlap matches exactly is tried (at most
+ * AMBIGUOUS_ORIGIN_LIMIT, and the recorded one must be among them). The pair is measured at the recorded offset only
+ * when every origin tried gives the same verdict and the same reason set; the origins tried are recorded. The size
+ * check does not depend on the origin (it trims each image on its own), so it is run once, by the caller. */
+export const AMBIGUOUS_ORIGIN_LIMIT = 16;
+type OriginTried = { x: number; y: number; whiteMismatchPercent: number; blackMismatchPercent: number; reasons: string[] };
+export function ambiguousOriginMeasure(nodeId: string, version: string, consumerBytes: Buffer, layoutBytes: Buffer, renderBytes: Buffer,
+  consumer: ConsumerFrame | undefined, frame: FigmaFrame): { frame: FigmaFrame; originsTried: OriginTried[] } | { refused: string } {
+  const L = PNG.sync.read(layoutBytes), R = PNG.sync.read(renderBytes), recorded = { x: frame.layout.x - frame.render.x, y: frame.layout.y - frame.render.y };
+  let x0 = Infinity, y0 = Infinity, x1 = -1, y1 = -1;
+  for (let y = 0; y < L.height; y++) for (let x = 0; x < L.width; x++) if (L.data[(y * L.width + x) * 4 + 3]) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); }
+  const xs = R.width - 1 - x1 + x0 + 1, ys = R.height - 1 - y1 + y0 + 1;
+  if (x1 < 0 || xs < 1 || ys < 1 || !Number.isInteger(recorded.x) || !Number.isInteger(recorded.y)) return { refused: 'render-export-origin-unobservable' };
+  if (xs * ys > AMBIGUOUS_ORIGIN_LIMIT) return { refused: 'render-export-origin-ambiguous-too-many' };
+  const overlap = (o: { x: number; y: number }) => { let compared = 0, painted = 0;
+    for (let y = 0; y < L.height; y++) for (let x = 0; x < L.width; x++) { const rx = x + o.x, ry = y + o.y; if (rx < 0 || ry < 0 || rx >= R.width || ry >= R.height) continue;
+      const a = (y * L.width + x) * 4, b = (ry * R.width + rx) * 4;
+      if (L.data[a + 3] !== R.data[b + 3] || (L.data[a + 3] > 0 && [0, 1, 2].some(c => L.data[a + c] !== R.data[b + c]))) return null;
+      compared++; if (L.data[a + 3]) painted++; }
+    return { compared, painted }; };
+  const origins: Array<{ x: number; y: number; compared: number; painted: number }> = [];
+  for (let oy = 0 - y0; oy < ys - y0; oy++) for (let ox = 0 - x0; ox < xs - x0; ox++) { const seen = overlap({ x: ox, y: oy }); if (seen) origins.push({ x: ox, y: oy, ...seen }); }
+  if (!origins.some(o => o.x === recorded.x && o.y === recorded.y)) return { refused: 'render-export-origin-unobservable' };
+  const { refused: _refused, ...base } = frame, tried: OriginTried[] = [];
+  const frameAt = (o: typeof origins[number]): FigmaFrame => { const render = { ...frame.render, x: frame.layout.x - o.x, y: frame.layout.y - o.y };
+    return { ...base, render, pngSha256: imageSha256(renderBytes), raster: { kind: 'figma-rest-paired-render-v1', scale: 1, proof: { nodeId, version, layout: frame.layout, render,
+      layoutInRender: { x: o.x, y: o.y }, layoutSha256: imageSha256(layoutBytes), renderSha256: imageSha256(renderBytes), overlapPixels: o.compared, paintedOverlapPixels: o.painted,
+      ambiguousOrigin: { rule: 'same-verdict-at-every-pixel-origin-v1', origins: origins.map(({ x, y }) => ({ x, y })) } } } } as FigmaFrame; };
+  for (const o of origins) {
+    const w = alignRecordedFrames(consumerBytes, renderBytes, consumer, frameAt(o), 255), b = alignRecordedFrames(consumerBytes, renderBytes, consumer, frameAt(o), 0);
+    if ('refused' in w || 'refused' in b) return { refused: 'render-export-origin-ambiguous-unmeasurable' };
+    const white = diffPair(w.aligned, []).unmaskedPct, black = diffPair(b.aligned, []).unmaskedPct;
+    tried.push({ x: o.x, y: o.y, whiteMismatchPercent: white, blackMismatchPercent: black, reasons: [
+      ...(white > IMAGE_LIMIT_PERCENT ? ['layout-image-difference-above-limit'] : []), ...(black > IMAGE_LIMIT_PERCENT ? ['layout-image-difference-on-black-above-limit'] : [])] });
+  }
+  if (new Set(tried.map(t => t.reasons.join(','))).size !== 1) return { refused: 'render-export-origin-ambiguous-verdict' };
+  return { frame: frameAt(origins.find(o => o.x === recorded.x && o.y === recorded.y)!), originsTried: tried };
+}
+/** D (reviewer ruling, 2026-11-14). Our side draws nothing (no subject paint, and a screenshot of its box is fully
+ * transparent) while Figma's export of the variant draws: a measured failure, named. Both sides empty returns null
+ * and stays unverified. */
+export function consumerDrawsNothing(key: string, figmaPngs: Buffer[]): { problem: string; figmaPaintedPixels: number } | null {
+  const painted = Math.max(0, ...figmaPngs.map(bytes => { const p = PNG.sync.read(bytes); let n = 0; for (let i = 3; i < p.data.length; i += 4) if (p.data[i]) n++; return n; }));
+  return painted ? { problem: `consumer-draws-nothing:${key}:${painted}`, figmaPaintedPixels: painted } : null;
+}
+export const transparent = (bytes: Buffer) => { const p = PNG.sync.read(bytes); for (let i = 3; i < p.data.length; i += 4) if (p.data[i]) return false; return true; };
 /** Figma exports node alpha, excluding the editor page. Match that substrate
  *  without changing the component or the page retained for visible review. */
 export const NODE_SCREENSHOT_OPTIONS = {
@@ -932,7 +980,11 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         // (cold-start Progress, 0 px tall). zero-size-render already fails it by name.
         if (style.width > 0 && style.height > 0) {
           const captured=await captureObservedSubject(page,`[data-cell="${c.key}"] > :first-child`,`[data-cell="${c.key}"]`);
-          if('refused'in captured){problems.push(`image-framing-unqualified:${c.key}:${captured.refused}`);}
+          if('refused'in captured){problems.push(`image-framing-unqualified:${c.key}:${captured.refused}`);
+            // D: a subject with no paint is proved empty by a transparent screenshot of its own box (scored below).
+            // A page clip, not an element screenshot: that would wait for a hidden subject to show. A failed proof leaves the variant unverified.
+            if(captured.refused==='paint-extent-no-subject-paint')try{const b=await root.boundingBox();if(b){const clip=enclosingFrame(b),empty=await page.screenshot({...NODE_SCREENSHOT_OPTIONS,animations:'disabled',clip});
+              if(transparent(empty))(receipt.consumer.drawsNothing??={})[c.key]={box:clip,sha256:imageSha256(empty)};}}catch{/* no proof: stays unverified */}}
           else {writeFileSync(shot,captured.bytes);consumerFrames[c.key]={...captured.frame,raster:{kind:'browser-paint-extent-v1',paint:captured.paint}};
             writeFileSync(path.join(args.out,`consumer-capture-${c.key}.json`),JSON.stringify({frame:consumerFrames[c.key],translation:captured.translation??null},null,2)+'\n',{flag:'wx'});
           }
@@ -1105,10 +1157,21 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     }
     receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
-      const file = figma.files[c.nodeId];
+      let file = figma.files[c.nodeId], frame = figma.frames[c.nodeId], originsTried: unknown;
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
-      // No consumer image: the root rendered at zero size (named above as zero-size-render).
-      if (!existsSync(path.join(args.out, `consumer-${c.key}.png`))) { receipt.images.cases.push({ key: c.key, status: 'consumer-image-missing' }); continue; }
+      const stem = c.nodeId.replace(/[^a-z0-9]/gi, '_'), layoutFile = path.join(args.out, `figma-layout-${stem}.png`), renderFile = path.join(args.out, `figma-render-${stem}.png`);
+      // No consumer image: the root rendered at zero size (named above as zero-size-render), or drew nothing (D).
+      if (!existsSync(path.join(args.out, `consumer-${c.key}.png`))) {
+        const empty = receipt.consumer.drawsNothing?.[c.key], drawn = empty ? consumerDrawsNothing(c.key, [file, ...(existsSync(renderFile) ? [renderFile] : [])].map(f => readFileSync(f))) : null;
+        if (drawn) { const at = problems.indexOf(`image-framing-unqualified:${c.key}:paint-extent-no-subject-paint`); if (at >= 0) problems[at] = drawn.problem; else problems.push(drawn.problem);
+          receipt.images.cases.push({ key: c.key, status: 'consumer-draws-nothing', consumer: empty, figmaPaintedPixels: drawn.figmaPaintedPixels }); continue; }
+        receipt.images.cases.push({ key: c.key, status: 'consumer-image-missing' }); continue; }
+      // B: a flat overlap that cannot pin the render export's origin (ambiguousOriginMeasure).
+      if (frame?.refused === 'render-export-origin-unobservable' && existsSync(layoutFile) && existsSync(renderFile) && 'frameEvidence' in figma) {
+        const tried = ambiguousOriginMeasure(c.nodeId, String((figma.frameEvidence as any).version), readFileSync(path.join(args.out, `consumer-${c.key}.png`)),
+          readFileSync(layoutFile), readFileSync(renderFile), consumerFrames[c.key], frame);
+        if ('frame' in tried) { file = renderFile; frame = tried.frame; originsTried = tried.originsTried; } else frame = { ...frame, refused: tried.refused };
+      }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
       const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
@@ -1126,8 +1189,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       // mask covers the whole canvas, so the number would be vacuous.
       const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
       const ourBytes=readFileSync(path.join(args.out,`consumer-${c.key}.png`)),figmaBytes=readFileSync(file);
-      const onWhite=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],figma.frames[c.nodeId],255);
-      const onBlack=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],figma.frames[c.nodeId],0);
+      const onWhite=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],frame,255);
+      const onBlack=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],frame,0);
       let layoutAligned: any;
       if (figma.framingRefusal || 'refused' in onWhite || 'refused' in onBlack) {
         const reason=figma.framingRefusal || ('refused' in onWhite ? onWhite.refused : 'refused' in onBlack ? onBlack.refused : 'unknown');
@@ -1136,7 +1199,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         const white=diffPair(onWhite.aligned,[]),black=diffPair(onBlack.aligned,[]);
         layoutAligned={status:'measured',whiteMismatchPercent:white.unmaskedPct,blackMismatchPercent:black.unmaskedPct,
           withinLimit:white.unmaskedPct<=IMAGE_LIMIT_PERCENT&&black.unmaskedPct<=IMAGE_LIMIT_PERCENT,placement:onWhite.placement,
-          pixelsCompared:onWhite.aligned.width*onWhite.aligned.height};
+          pixelsCompared:onWhite.aligned.width*onWhite.aligned.height,...(originsTried?{originsTried}:{})};
         writeTriptych(path.join(args.out,`triptych-layout-white-${c.key}.png`),onWhite.aligned,white.diff);
         writeTriptych(path.join(args.out,`triptych-layout-black-${c.key}.png`),onBlack.aligned,black.diff);
         if (white.unmaskedPct>IMAGE_LIMIT_PERCENT) problems.push(`layout-image-difference-above-limit:${c.key}:${white.unmaskedPct.toFixed(2)}%`);
@@ -1145,10 +1208,10 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       const size = consumerSizeCheck(c.key, layoutAligned.status === 'measured',
         { consumer: aligned.aContent, figma: aligned.bContent },
         { consumerBytes: ourBytes, figmaBytes, consumer: consumerFrames[c.key],
-          figma: figma.frames[c.nodeId], refusal: figma.framingRefusal });
+          figma: frame, refusal: figma.framingRefusal });
       problems.push(...size.problems);
       receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, historicalWithinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
-        layoutAligned, figmaFrame:figma.frames[c.nodeId]??null, withinLimit:layoutAligned.withinLimit,
+        layoutAligned, figmaFrame:frame??null, withinLimit:layoutAligned.withinLimit,
         textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         size: size.measurement, contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
     } else problems.push('figma-images-unavailable');
