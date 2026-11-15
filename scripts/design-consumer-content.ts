@@ -91,7 +91,8 @@ export interface TextStyleRow { text: string; figma: string[]; rendered: string[
 export interface CaseContent {
   key: string;
   texts: { figma: number; missing: string[]; styles?: TextStyleRow[] };
-  parts: { figma: number; matched: number; missing: string[] };
+  /** `glyphs`: the glyph check of each matched part (design-consumer-check.ts, PART_GLYPH_RULE), where its image pair was measured. */
+  parts: { figma: number; matched: number; missing: string[]; glyphs?: Array<{ name: string; verdict: string; white?: { differing: number; drawn: number } }> };
 }
 
 export const VECTOR_TYPES = new Set(['VECTOR', 'BOOLEAN_OPERATION', 'ELLIPSE', 'STAR', 'POLYGON', 'REGULAR_POLYGON', 'LINE']);
@@ -225,7 +226,7 @@ const within = (figma: number, dom: number) => Math.abs(figma - dom) <= Math.max
  *  rendered graphics; in the React to Figma check, a reference's graphics to the written set's parts.
  *  `eligible`, when given, says which graphics (by index) may stand for a part; the Figma to React check passes none. */
 export function matchParts<P extends { box: Box; members?: Box[] }>(parts: readonly P[], graphics: readonly { box: Box; members?: Box[] }[],
-  eligible?: (part: P, graphic: number) => boolean): { matched: number; missing: P[] } {
+  eligible?: (part: P, graphic: number) => boolean): { matched: number; missing: P[]; pairs: Array<{ part: P; box: Box; graphic: Box }> } {
   // An SVG viewport and its drawn shapes are alternative representations of
   // the same paint. Consuming either reserves its resources so the viewport
   // cannot stand in for another missing icon after a child was matched.
@@ -240,12 +241,12 @@ export function matchParts<P extends { box: Box; members?: Box[] }>(parts: reado
   const used = new Set<string>();
   const center = (b: Box) => [b.x + b.width / 2, b.y + b.height / 2];
   const order = [...parts].sort((a, b) => b.box.width * b.box.height - a.box.width * a.box.height);
-  const missing: P[] = [];
+  const missing: P[] = [], pairs: Array<{ part: P; box: Box; graphic: Box }> = [];
   let matched = 0;
   for (const part of order) {
     const reserved=new Set<string>();
     const required=[...(part.members ?? [part.box])].sort((a,b)=>b.width*b.height-a.width*a.height);
-    let complete=required.length>0;
+    let complete=required.length>0, first: Box | undefined;
     for (const box of required) {
       let best = -1, bestScore: [number, number] = [Infinity, Infinity];
       for (const [i,candidate] of candidates.entries()) {
@@ -258,12 +259,14 @@ export function matchParts<P extends { box: Box; members?: Box[] }>(parts: reado
       }
       if (best < 0) { complete=false; break; }
       for (const resource of candidates[best].resources) reserved.add(resource);
+      first ??= candidates[best].box;
     }
     if (!complete) missing.push(part);
-    else { for (const resource of reserved) used.add(resource); matched++; }
+    // The pair the glyph check reads: the part's largest required box and the graphic box it matched.
+    else { for (const resource of reserved) used.add(resource); matched++; pairs.push({ part, box: required[0], graphic: first! }); }
   }
   // Report in the variant's own drawing order.
-  return { matched, missing: parts.filter(p => missing.includes(p)) };
+  return { matched, missing: parts.filter(p => missing.includes(p)), pairs: parts.flatMap(p => pairs.filter(q => q.part === p)) };
 }
 
 // ---------------------------------------------------------------------------
@@ -401,11 +404,11 @@ export function compareTextStyles(key: string, figma: FigmaContent, dom: DomCont
 }
 
 /** One case's content verdict and its named problems. */
-export function caseContent(key: string, figma: FigmaContent, dom: DomContent): { content: CaseContent; problems: string[] } {
+export function caseContent(key: string, figma: FigmaContent, dom: DomContent): { content: CaseContent; problems: string[]; pairs: ReturnType<typeof matchParts<FigmaPart>>['pairs'] } {
   const texts = missingTexts(figma.texts, dom.text);
   const parts = matchParts(figma.parts, dom.graphics);
   const styles = compareTextStyles(key, figma, dom);
-  return {
+  return { pairs: parts.pairs,
     content: { key, texts: { figma: figma.texts.length, missing: texts, styles: styles.rows }, parts: { figma: figma.parts.length, matched: parts.matched, missing: parts.missing.map(p => p.name) } },
     problems: [...texts.map(t => `content-missing:${key}:text:${JSON.stringify(t)}`), ...styles.problems, ...parts.missing.map(p => `content-missing:${key}:part:${p.name}`)],
   };
