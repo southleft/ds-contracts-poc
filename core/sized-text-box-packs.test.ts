@@ -27,7 +27,7 @@ async function packs(conventions: string[]): Promise<{ wraps: Record<string, str
   const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context, { timeout: 20000 });
   const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]]));
   await run(engine.buildTokensScript(null)); await run(script);
-  const comp = root.findOne((n: any) => n.type === 'COMPONENT');
+  const comp = root.findOne((n: any) => n.type === 'COMPONENT') as any;
   const wraps: Record<string, string> = {};
   for (const name of ['start', 'middle', 'end', 'chip']) wraps[name] = comp.findOne((n: any) => n.name === name && n.type === 'FRAME').primaryAxisAlignItems;
   return { wraps, script };
