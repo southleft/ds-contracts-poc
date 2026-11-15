@@ -306,6 +306,8 @@ export function validateContract(
       }
       if ((part.component.contentSlot !== undefined || part.component.contentSlots !== undefined) && part.parts === undefined)
         errors.push(`${contract.id}: part "${name}" targets a contentSlot without caller parts`);
+      for (const slot of part.component.clearedSlots ?? []) if (dep && (!walkAnatomy(dep).some(w => w.part.slot?.name === slot && w.part.slot.renderDefaultAnatomy === true) || part.component.contentSlot === slot || Object.hasOwn(part.component.contentSlots ?? {}, slot)))
+        errors.push(`${contract.id}: part "${name}" clears ${slot}, which is not an omitted-caller fallback slot of ${dep.id} or is also given caller content`);
       if (part.parts !== undefined) {
         let groups:ReturnType<typeof callerContentGroups>=[];
         try{groups=callerContentGroups(part);}catch(error){errors.push(`${contract.id}: ${String(error)}`);}

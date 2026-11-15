@@ -7694,6 +7694,14 @@
                 }
               }
             },
+            "clearedSlots": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z_$][A-Za-z0-9_$]*$"
+              }
+            },
             "id": {
               "type": "string"
             },
