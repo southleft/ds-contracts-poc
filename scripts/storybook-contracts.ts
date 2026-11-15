@@ -48,6 +48,30 @@ export function spellSvgRotation(node: CapturedNode): void {
   for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
 }
 
+/** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
+ *  block, the nearest ancestor that is positioned or transformed. Where that ancestor is not its parent, the element is
+ *  moved in the captured tree into that ancestor, just after the child it sat under, so it is drawn in the box its insets
+ *  are measured from. It stays put when an ancestor between them hides, clips, fades or filters what it draws, and when
+ *  no ancestor in the captured tree is its containing block. Returns how many elements moved. */
+export function liftToContainingBlock(node: CapturedNode): number {
+  const s = (n: CapturedNode, k: string, d: string) => (n.style[k] ?? d).trim();
+  const contains = (n: CapturedNode) => s(n, 'position', 'static') !== 'static' || ['transform', 'filter', 'perspective', 'translate', 'rotate', 'scale']
+    .some((k) => s(n, k, 'none') !== 'none') || /\b(layout|paint|strict|content)\b/.test(s(n, 'contain', 'none'));
+  const passes = (n: CapturedNode) => s(n, 'display', 'block') !== 'none' && s(n, 'visibility', 'visible') === 'visible' && Number(s(n, 'opacity', '1')) === 1 &&
+    ['overflow-x', 'overflow-y'].every((k) => s(n, k, 'visible') === 'visible') && ['clip-path', 'mask-image', 'backdrop-filter'].every((k) => s(n, k, 'none') === 'none');
+  let moved = 0;
+  if (contains(node)) for (let i = 0; i < node.nodes.length; i++) {
+    const k = node.nodes[i]!, lifted: CapturedNode[] = [];
+    const dive = (p: CapturedNode) => { for (let j = 0; j < p.nodes.length; j++) { const n = p.nodes[j]!; if (n.t !== 'el') continue;
+      if (s(n.el, 'position', 'static') === 'absolute') { lifted.push(n.el); p.nodes.splice(j--, 1); } else if (!contains(n.el) && passes(n.el)) dive(n.el); } };
+    if (k.t === 'el' && !contains(k.el) && passes(k.el)) dive(k.el);
+    node.nodes.splice(i + 1, 0, ...lifted.map((el) => ({ t: 'el' as const, el })));
+    i += lifted.length; moved += lifted.length;
+  }
+  for (const k of node.nodes) if (k.t === 'el') moved += liftToContainingBlock(k.el);
+  return moved;
+}
+
 /** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
  * gives its selected option's label, null otherwise) takes that label as its text, when it draws one, and drops its option
  * and optgroup parts, which a closed select never draws. Returns the parts it changed. */
@@ -286,6 +310,7 @@ async function main() {
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
