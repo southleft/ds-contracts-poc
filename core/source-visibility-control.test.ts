@@ -234,3 +234,13 @@ test('hidden instance retained for caller visibility participates in explicit ch
  assert(c.anatomy.root.layout!.childOrder!.includes(key));
  for(const mode of ['off','on'])assert(resolveLayout(c.anatomy.root,{mode})!.childOrder!.includes(key));
 });
+test('profile convention bound-visibility-override-is-property: an override the host\'s own boolean already carries is not a demand',()=>{
+ const bound=(hostValue:boolean)=>{const f=fixture();f.child.variants[0].children[1].propRefs={visible:'Show'};
+  const usage=f.parent.variants[0].children[0];usage.componentProperties={...usage.componentProperties,'Show#12:3':hostValue};return f;};
+ const same=bound(f0().target.visible),differs=bound(!f0().target.visible);
+ assert.equal(visibilityDemandsFromDumps({parent:same.parent,child:same.child},'file').length,1);
+ assert.deepEqual(visibilityDemandsFromDumps({parent:same.parent,child:same.child},'file',true),[]);
+ assert.equal(visibilityDemandsFromDumps({parent:differs.parent,child:differs.child},'file',true).length,1);
+ const unbound=fixture();assert.equal(visibilityDemandsFromDumps({parent:unbound.parent,child:unbound.child},'file',true).length,1);
+ function f0(){return fixture();}
+});
