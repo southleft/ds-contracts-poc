@@ -654,7 +654,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
   } finally { await browser.close(); stop(); }
 }
 
-if (process.argv[1] && /storybook-reader\.ts$/.test(process.argv[1])) {
+if (process.argv[1] && /storybook-reader\.[jt]s$/.test(process.argv[1])) {   // .js: the CLI's bundle (packages/cli/build.mjs)
   // Every argument is one of these flags or the value right after a flag that takes one; anything else (an equals form,
   // another spelling, a repeated flag, a stray word) refuses the run before anything loads.
   const usage = (why: string): never => { console.error(`storybook-reader: ${why}`); process.exit(2); };
