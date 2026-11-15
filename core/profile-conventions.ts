@@ -58,6 +58,10 @@
 /** empty-hug-keeps-extent (Figma to React proposal): a root HUG axis whose variant draws no visible children keeps its
  *  observed extent as that plane's minimum, as a HUG plane with only absolutely placed children already does; Figma
  *  draws an empty hug frame at its stored size, where CSS content sizing gives 0. Off, the plane renders 0 wide or tall. */
+/** sized-text-box-packs-by-text-align (React to Figma writer): a bare text part with a fixed width or height and no
+ *  layout or paint of its own, which the writer wraps in a box at run time, packs its line along that box as its
+ *  text-align places it in CSS (start → MIN, center → CENTER, right/end → MAX). Off, the box centers it, as it does a
+ *  drawn chip's glyph. */
 /** svg-viewbox-carried (React to Figma contract step): each svg's icon asset is drawn in the viewBox its page authored
  *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
  *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
@@ -66,7 +70,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'svg-viewbox-carried'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align',
+  'svg-viewbox-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
