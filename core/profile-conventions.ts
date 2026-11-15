@@ -58,6 +58,10 @@
 /** empty-hug-keeps-extent (Figma to React proposal): a root HUG axis whose variant draws no visible children keeps its
  *  observed extent as that plane's minimum, as a HUG plane with only absolutely placed children already does; Figma
  *  draws an empty hug frame at its stored size, where CSS content sizing gives 0. Off, the plane renders 0 wide or tall. */
+/** sized-text-box-packs-by-text-align (React to Figma writer): a bare text part with a fixed width or height and no
+ *  layout or paint of its own, which the writer wraps in a box at run time, packs its line along that box as its
+ *  text-align places it in CSS (start → MIN, center → CENTER, right/end → MAX). Off, the box centers it, as it does a
+ *  drawn chip's glyph. */
 /** mixed-scale-rect-keeps-placement (Figma to React proposal): an absolutely placed plain rect whose uses mix SCALE
  *  with other constraints keeps each use's captured placement, each with its own constraint, as an all-SCALE rect
  *  already does. Off, the mixed part is refused SCALE placement and renders in flow. */
@@ -65,7 +69,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'mixed-scale-rect-keeps-placement'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'mixed-scale-rect-keeps-placement'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

@@ -297,6 +297,9 @@ export interface NodeSpec {
    *  text keeps the Carbon Tabs HUG rule (FILL in a snug box truncates
    *  glyph overhang under font substitution). */
   fillText?: true;
+  /** Convention sized-text-box-packs-by-text-align: how the runtime wrapper of a bare text part with a fixed size, no
+   *  layout and no paint of its own packs the line along its row, as the part's text-align places it in CSS. */
+  textBoxPack?: 'MIN' | 'CENTER' | 'MAX';
   /** FC-FIGMA-CLIP-DEFAULT: opt into Figma clipsContent. Default false —
    *  createFrame clips by default but CSS overflow is visible; clipping HUG
    *  text truncates Semi Bold overhang (Carbon Tabs "Settings"). */
@@ -5936,6 +5939,10 @@ function partToSpecInner(
     Object.assign(spec, textExtras(textCtx));
     attachNativeAuthoredTextAppearance(spec,part,contract,subst);
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
+    // Convention sized-text-box-packs-by-text-align: a sized bare text is wrapped in a box at run time; with no layout
+    // or paint of its own the box packs the line as text-align does (start → MIN), not centered as a drawn chip's glyph.
+    if ((spec.fixedWidth || spec.fixedHeight) && !spec.fill && !spec.stroke && !resolveLayout(part, subst) && input.conventions?.has('sized-text-box-packs-by-text-align'))
+      spec.textBoxPack = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'] ?? 'MIN';
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
     return spec;
@@ -9524,6 +9531,7 @@ function buildSyncScript(
   // whose own size is fractional (a measured text width) still starts on a whole pixel, as its export does.
   const cell = (e: string): string => (input.conventions?.has('variant-grid-whole-pixel') ? `Math.ceil(${e})` : e);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
+  const hasTextBoxPack = featureDatas.some(d => dataSome(d, x => x.textBoxPack !== undefined));
   const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootSlotFlow = featureDatas.some((d) => dataSome(d, (x) => !!x.rootSlotFlow));
@@ -10554,7 +10562,7 @@ ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characte
       const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.primaryAxisAlignItems = ${hasTextBoxPack ? "spec.textBoxPack || (boxed ? 'CENTER' : 'MIN')" : "boxed ? 'CENTER' : 'MIN'"};
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
