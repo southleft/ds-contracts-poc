@@ -28,6 +28,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storyFontPreflight } from './font-preflight.js';
 import { buildLocalStorybook, localStorybookPreflight, serveInChild } from './storybook-local.js';
+import { assertReviewed } from './storybook-reader.js';
 
 // The bridge plugin may fetch only localhost:9223-9232, and each figma-console-mcp instance takes the first free port there
 // on ::1; 9232 is taken last. The runner holds it on both ::1 and 127.0.0.1, so nothing else can answer the driver.
@@ -50,6 +51,8 @@ const stop = (why: string): never => { throw new Stop(why); };
 const refuse = (why: string): never => { console.error(`✖ refused before any write: ${why}`); process.exit(2); };
 
 // Step 0, from files.
+// A drafted profile never counts (reviewer, 2026-11-14): refused before anything else.
+try { assertReviewed(JSON.parse(readFileSync(PROFILE, 'utf8'))); } catch (e) { refuse(e instanceof Error ? e.message : String(e)); }
 if (!OUT.startsWith(ROOT + path.sep)) refuse('the run folder must be inside this checkout');
 const [SB_DIR, SB_URL] = [flag('--storybook-dir'), flag('--storybook')];
 if (SB_DIR && SB_URL) refuse('give --storybook-dir or --storybook, not both');
