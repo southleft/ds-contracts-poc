@@ -17,7 +17,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { domDrawing, drawnColumn, dumpDrawing, figmaInternal, figmaSkeletonOnly, reading, type SetResult } from '../extract/figma/scoreboard.js';
-import { readProfile, type SystemProfile } from './storybook-reader.js';
+import { assertReviewed, readProfile, type SystemProfile } from './storybook-reader.js';
 
 type Counts = { pass: number; fail: number; unverified: number; 'font-blocked': number };
 const json = (f: string) => JSON.parse(readFileSync(f, 'utf8'));
@@ -109,6 +109,7 @@ export function report(sets: SetResult[], profile?: SystemProfile, coverage?: un
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const flag = (n: string) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : undefined; };
   const profile = flag('--profile') ? readProfile(flag('--profile')!) : undefined, f2r = flag('--f2r'), r2f = flag('--r2f');
+  if (profile) try { assertReviewed(profile); } catch (e) { console.error(`✖ ${(e as Error).message}`); process.exit(2); }
   if (!f2r === !r2f || (r2f && !flag('--checks'))) { console.error('usage: npx tsx scripts/reading.ts (--f2r <cells.json> | --r2f <stories.json> --checks <checks.json>) [--profile <profile.json>] [--coverage <the system\'s full grammar reading>]'); process.exit(2); }
   const base = path.dirname(path.resolve(f2r ?? flag('--checks')!)), at = (p: string) => path.resolve(base, p);
   const sets = f2r ? f2rSets((json(f2r) as Cell[]).map((c) => ({ ...c, dump: at(c.dump), grammar: at(c.grammar), ...(c.check ? { check: at(c.check) } : {}) })), profile)
