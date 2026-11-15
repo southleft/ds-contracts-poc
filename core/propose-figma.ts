@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -15841,7 +15841,7 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
     const minAxis = dim === 'width' ? 'min-width' : 'min-height';
     const emptyFlowHug = (o: Occ): boolean => {
       const children = (o.node.children ?? []).filter((child) => child.hidden !== true);
-      return !fixedAxis(o, dim) && children.length > 0 && children.every((child) => absBoxOf(child) !== undefined);
+      return !fixedAxis(o, dim) && (children.length > 0 || ctx.emptyHugExtent === true) && children.every((child) => absBoxOf(child) !== undefined);
     };
     if (withBox.some(emptyFlowHug) && rootTokens[minAxis] === undefined &&
         (root.literals as Record<string, string> | undefined)?.[minAxis] === undefined) {
@@ -15849,7 +15849,7 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
         variant: o.variant,
         value: emptyFlowHug(o) ? Math.round(o.node.bbox![dim] * 100) / 100 : 0,
       })));
-      ctx.notes.push(`${where}: ${minAxis} carries the observed extent of HUG planes with exclusively absolute visible children; CSS content sizing excludes those children. HUG remains content-sized and ordinary in-flow planes receive a zero minimum.`);
+      ctx.notes.push(`${where}: ${minAxis} carries the observed extent of HUG planes with exclusively absolute visible children; CSS content sizing excludes those children. HUG remains content-sized and ordinary in-flow planes receive a zero minimum.`); if (ctx.emptyHugExtent) for (const o of withBox) if (!fixedAxis(o, dim) && !(o.node.children ?? []).some((child) => child.hidden !== true)) ctx.notes.push(`${where}: ${o.variant} draws no visible children on a HUG ${dim}; its observed ${o.node.bbox![dim]}px is that plane's ${minAxis} (profile convention empty-hug-keeps-extent: Figma draws an empty hug frame at its stored size)`);
     }
     // GAP-CLOSING ROUND 6 — A HUG AXIS IS A FACT, NOT A NUMBER.
     //
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
