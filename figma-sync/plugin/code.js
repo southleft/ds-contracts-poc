@@ -860,6 +860,10 @@ figma.ui.onmessage = async (msg) => {
     busy = true;
     await runLocalRunner();
     busy = false;
+  } else if (msg.type === 'run-r2f') {
+    busy = true;
+    await runReactToFigma();
+    busy = false;
   }
 };
 
@@ -959,6 +963,47 @@ async function runLocalRunner() {
   done(failed.length === 0, failed.length === 0
     ? 'Sync complete: ' + results.length + ' script(s) ran clean.'
     : 'FAILED at ' + failed[0].script + ': ' + failed[0].error);
+}
+
+// ---------------------------------------------------------------------------
+// React to Figma runner — instead of the Desktop Bridge driver. The runner
+// (scripts/react-to-figma-run.ts, port 9232) serves its own driver,
+// scripts/react-to-figma-driver.js, at /driver; this runs those bytes here, at
+// full write access, in the open file. The driver claims the runner's one
+// session, runs each program it serves and posts each result; every program
+// starts with the runner's file-key guard, so a wrong file writes nothing.
+// One driver source, hashed into the runner's receipt; nothing is copied here.
+// PINNED: the plugin runs only the driver whose sha256 is below, so a local
+// process that took port 9232 cannot run its own code in this file; any other
+// bytes are refused by name (r2f-driver-hash-mismatch) before anything runs.
+// scripts/react-to-figma-driver.test.ts fails when this and the driver differ.
+// ---------------------------------------------------------------------------
+const R2F_BASE = 'http://localhost:9232';
+const R2F_DRIVER_SHA256 = '6827b14b001a9f95105a9eebea8078991da4481bd181cea8ccf6da4206b598e6';
+async function runReactToFigma() {
+  const done = (ok, summary) => post({ type: 'r2f-done', ok, summary });
+  let driver;
+  try {
+    const res = await fetch(R2F_BASE + '/driver');
+    driver = (await res.json()).driver;
+    if (typeof driver !== 'string' || !driver) throw new Error('the runner sent no driver');
+  } catch (e) {
+    return done(false, 'React to Figma: ' + String(e && e.message ? e.message : e) + ' — is scripts/react-to-figma-run.ts serving on port 9232?');
+  }
+  const got = sha256Hex(driver);
+  if (got !== R2F_DRIVER_SHA256)
+    return done(false, 'r2f-driver-hash-mismatch: the driver on port 9232 has sha256 ' + got.slice(0, 12) + '…, not this plugin\'s pinned ' +
+      R2F_DRIVER_SHA256.slice(0, 12) + '… — nothing was run. Is another process on 9232, or is the plugin older than the runner?');
+  post({ type: 'r2f-log', line: 'Connected to the runner; running its programs in "' + figma.root.name + '" (' + (figma.fileKey || 'no file key') + '). Keep this file in front.' });
+  figma.notify('React to Figma: running the runner\'s programs…', { timeout: 3000 });
+  try {
+    const end = await runScript(driver);
+    if (end && end.refused) return done(false, 'React to Figma: the runner refused: ' + end.refused);
+    if (end && end.stop) return done(false, 'React to Figma: the runner stopped: ' + end.stop + ' (see its stop.json)');
+    done(true, 'React to Figma: the runner closed and sealed the run.');
+  } catch (e) {
+    done(false, 'React to Figma: the driver threw: ' + String(e && e.message ? e.message : e));
+  }
 }
 
 // DRIFT ROUND — byte-identical copy of core/canvas-fingerprint.ts

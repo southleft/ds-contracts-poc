@@ -444,3 +444,28 @@ test('anchor consumers refuse null and primitive proof payloads without throwing
   const f=equivalentAnchorFixture();(f.frames.one.raster as any).proof=proof;assert.deepEqual(f.inspect(),[]);
  }
 });
+
+test('with no opaque owner, the overlap outside visible text proves the offset; every other pixel must match and the score keeps them all',()=>{
+ const text=(visible=true)=>({id:'t',type:'TEXT',visible,absoluteBoundingBox:{x:4,y:4,width:7,height:5},absoluteRenderBounds:{x:4.3,y:4.2,width:6.2,height:4.5}});
+ const make=(children:any[])=>({version:'fixed',nodes:{root:{document:{id:'root',type:'COMPONENT',blendMode:'PASS_THROUGH',clipsContent:false,fills:[],strokes:[],effects:[],
+  absoluteBoundingBox:{x:0,y:0,width:24,height:20},absoluteRenderBounds:{x:-2,y:-2,width:28,height:24},
+  children:[{id:'r',type:'RECTANGLE',absoluteBoundingBox:{x:-2,y:-2,width:28,height:24},absoluteRenderBounds:{x:-2,y:-2,width:28,height:24},fills:[structuredClone(paint)]},...children]}}}});
+ const two=(x:number,y:number)=>[x<12?200:0,y<10?50:150,0,255],flat=()=>[200,50,0,255],small=(x:number,y:number)=>x<10&&y<10?two(x,y):[0,0,0,0];
+ const pair=(color:(x:number,y:number)=>number[],at:[number,number])=>({layout:png(24,20,color),
+  render:png(28,24,(x,y)=>x===at[0]+2&&y===at[1]+2?[9,9,9,255]:x<2||y<2||x>=26||y>=22?[0,0,0,255]:color(x-2,y-2))});
+ const q=(s:any,p:{layout:Buffer;render:Buffer})=>qualifySourceRenderBoundsExport(s,structuredClone(s),'root',p.layout,p.render,requests());
+ const glyph=pair(two,[6,6]),s=make([text()]);
+ assert.deepEqual(qualifyRenderBoundsExport(s,s,'root',glyph.layout,glyph.render),{refused:'render-export-overlap-mismatch'});
+ const r=q(s,glyph);assert('proof'in r,JSON.stringify(r));assert(!('kind'in r.proof));
+ const p=r.proof as import('./design-consumer-render-export.js').RenderExportProof;
+ assert.deepEqual([p.layoutInRender,p.overlapPixels,p.paintedOverlapPixels],[{x:2,y:2},445,445]);
+ assert.deepEqual(p.textExcluded,{rule:'visible-text-render-bounds-v1',boxes:[{x:4,y:4,width:7,height:5}],pixels:35,minPaintedPixels:256,horizontalChanges:20,verticalChanges:24});
+ // The score still reads the whole render: the differing glyph pixel is in the aligned Figma image.
+ const consumer:ConsumerFrame={layout:{x:2,y:2,width:24,height:20},capture:{x:0,y:0,width:28,height:24},deviceScaleFactor:1,pngSha256:imageSha256(glyph.render),raster:{kind:'browser-paint-extent-v1',paint:{x:0,y:0,width:28,height:24}}};
+ const aligned=alignRecordedFrames(glyph.render,glyph.render,consumer,{layout:p.layout,render:p.render,pngSha256:imageSha256(glyph.render),raster:{kind:'figma-rest-paired-render-v1',scale:1,proof:p}},255);
+ assert('aligned'in aligned);const B=aligned.aligned.b,i=(8*B.width+8)*4;assert.deepEqual([...B.data.subarray(i,i+4)],[9,9,9,255]);
+ assert.deepEqual(q(s,pair(two,[15,15])),{refused:'render-anchor-text-excluded-mismatch'});
+ assert.deepEqual(q(s,pair(small,[6,6])),{refused:'render-anchor-text-excluded-too-few-pixels'});
+ assert.deepEqual(q(s,pair(flat,[6,6])),{refused:'render-anchor-text-excluded-origin-unobservable'});
+ for(const none of [make([]),make([text(false)])])assert.deepEqual(q(none,glyph),{refused:'render-anchor-source-unsupported'});
+});

@@ -9,7 +9,7 @@ import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-tex
 import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
 import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
 import {wrapReactFilledPath,REACT_FILLED_PATH_RUNTIME} from './react-filled-path.js';
-import {callerContentGroups} from '../scripts/contract-schema.js';
+import {callerContentGroups, clearedSlotAttrs} from '../scripts/contract-schema.js';
 import {wrapReactShapeFill,REACT_SHAPE_FILL_RUNTIME} from './react-shape-fill.js';
 import {lowerCenteredFillPadding} from './react-centered-fill.js';
 import {wrapReactTextColor, REACT_TEXT_COLOR_RUNTIME} from './react-text-color.js';
@@ -788,7 +788,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component, narrowedProps.get(part)) + instanceRootAttrs(part) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component, narrowedProps.get(part)) + instanceRootAttrs(part) + clearedSlotAttrs(part.component) + ((hasComponentHostPlacement(part) || fillForegroundParts.has(part) || rankedPartNames.has(partName)) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
