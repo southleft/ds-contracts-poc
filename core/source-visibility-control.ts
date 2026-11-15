@@ -3,8 +3,15 @@ import {revisionOf} from './contract-provenance.js';
 import {walkAnatomy,type Contract} from '../scripts/contract-schema.js';
 export type VisibilityDemand={fileKey:string;target:NonNullable<DumpHostOverride['visibilityTarget']>};
 export type VisibilityBinding={fileKey:string;setKey:string;componentId:string;childPath:number[];prop:string;contractRevision:string};
-export function visibilityDemandsFromDumps(dump:Record<string,unknown>,fileKey:string):VisibilityDemand[]{
- const out:VisibilityDemand[]=[];const visit=(node:DumpNode)=>{for(const h of node.hostOverrides??[])if(h.visibilityTarget&&!h.visibilityTarget.instancePath.length)out.push({fileKey,target:h.visibilityTarget});for(const child of node.children??[])visit(child);};
+/** boundIsProperty = profile convention bound-visibility-override-is-property (core/profile-conventions.ts): a host's
+ *  `visible` override on a node whose visibility is bound to a component BOOLEAN property (propRefs.visible), where the
+ *  same host sets that property to the same value, is that property's own effect, which the host's property already
+ *  carries; it is not an independent visibility demand. */
+export function visibilityDemandsFromDumps(dump:Record<string,unknown>,fileKey:string,boundIsProperty=false):VisibilityDemand[]{
+ const mains=new Map<string,DumpNode>();for(const value of Object.values(dump))if(value&&typeof value==='object'&&Array.isArray((value as DumpSet).variants))for(const v of (value as DumpSet).variants)if(v.nodeId)mains.set(v.nodeId,v);
+ const propertyCarries=(host:DumpNode,t:NonNullable<DumpHostOverride['visibilityTarget']>):boolean=>{let n:DumpNode|undefined=mains.get(t.componentId);for(const i of t.childPath)n=n?.children?.[i];
+  const name=n?.propRefs?.visible,entry=name===undefined?undefined:Object.entries(host.componentProperties??{}).find(([key])=>key.replace(/#[0-9:]+$/,'')===name);return entry!==undefined&&entry[1]===t.visible;};
+ const out:VisibilityDemand[]=[];const visit=(node:DumpNode)=>{for(const h of node.hostOverrides??[])if(h.visibilityTarget&&!h.visibilityTarget.instancePath.length&&!(boundIsProperty&&propertyCarries(node,h.visibilityTarget)))out.push({fileKey,target:h.visibilityTarget});for(const child of node.children??[])visit(child);};
  for(const value of Object.values(dump))if(value&&typeof value==='object'&&Array.isArray((value as DumpSet).variants))for(const v of (value as DumpSet).variants)visit(v);
  return out;
 }

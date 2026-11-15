@@ -20250,7 +20250,7 @@ function proposeBatchFromDumpInternal(
   const textColorBindingsByContract=new Map(opts.textColorBindingsByContract??[]);
   const vectorStrokeBindingsByContract=new Map(opts.vectorStrokeBindingsByContract??[]);
   const shapeFillBindingsByContract=new Map(opts.shapeFillBindingsByContract??[]);
-  const visibilityDemands=opts.fileKey?visibilityDemandsFromDumps(dump,opts.fileKey):[];
+  const visibilityDemands=opts.fileKey?visibilityDemandsFromDumps(dump,opts.fileKey,conventionSet(opts.conventions).has('bound-visibility-override-is-property')):[];
   const visibilityBindingsByContract=new Map(opts.visibilityBindingsByContract??[]);
   const setOpts = {
     ...opts,vectorStrokeCapture,vectorStrokeBindingsByContract,
