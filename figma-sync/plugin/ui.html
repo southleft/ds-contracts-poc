@@ -485,6 +485,21 @@
     </div>
   </div>
   <div class="section">
+    <div class="section-label">React to Figma runner</div>
+    <div class="meta">Writes the component sets that
+      <span class="mono">scripts/react-to-figma-run.ts</span> serves on
+      <span class="mono">http://localhost:9232</span> into this file, one set at a
+      time, in place of the Desktop Bridge driver. Every program refuses a file
+      other than the one the runner names. Keep this file in front while it runs.</div>
+    <div class="row">
+      <button class="secondary" id="r2f-run" data-busy="Running…">Connect and run</button>
+      <span class="status" id="r2f-status"></span>
+    </div>
+    <div class="result" id="r2f-result" hidden>
+      <div class="headline" id="r2f-headline"></div>
+    </div>
+  </div>
+  <div class="section">
     <div class="section-label">Diagnostics</div>
     <!-- Engine build stamp (injected at package time as window.DSC_BUILD):
          makes a STALE dev import diagnosable at a glance — compare against
@@ -2064,6 +2079,15 @@
     parent.postMessage({ pluginMessage: { type: 'run-runner' } }, '*');
   };
 
+  $('r2f-run').onclick = function () {
+    setBusy(true);
+    $('r2f-status').textContent = 'Connecting…';
+    $('r2f-result').hidden = false;
+    $('r2f-result').className = 'result';
+    $('r2f-headline').textContent = '';
+    parent.postMessage({ pluginMessage: { type: 'run-r2f' } }, '*');
+  };
+
   function appendLog(line, level) {
     var el = document.createElement('div');
     el.className = 'log-line ' + (level || 'info');
@@ -2142,6 +2166,14 @@
         showDriftLastChecked(now);
         parent.postMessage({ pluginMessage: { type: 'ui-state-save', key: DRIFT_STATE_KEY + ':' + currentFileKey, value: now } }, '*');
       }
+    } else if (msg.type === 'r2f-log') {
+      $('r2f-status').textContent = 'Running…';
+      $('r2f-headline').textContent = msg.line;
+    } else if (msg.type === 'r2f-done') {
+      setBusy(false);
+      $('r2f-status').textContent = '';
+      $('r2f-result').className = 'result ' + (msg.ok ? 'ok' : 'err');
+      $('r2f-headline').textContent = msg.summary;
     } else if (msg.type === 'runner-log') {
       appendLog(msg.line, msg.level);
     } else if (msg.type === 'runner-done') {

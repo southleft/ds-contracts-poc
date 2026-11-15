@@ -9,7 +9,7 @@ import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
 import {boundFillSvgCss} from '../packages/core/src/instance-fill-composition.js';
 import {solidFillPartTokenError} from '../packages/core/src/solid-fill-binding-tokens.js';
 import {wrapReactFilledPath,REACT_FILLED_PATH_RUNTIME} from './react-filled-path.js';
-import {callerContentGroups} from '../scripts/contract-schema.js';
+import {callerContentGroups, clearedSlotAttrs} from '../scripts/contract-schema.js';
 import {wrapReactShapeFill,REACT_SHAPE_FILL_RUNTIME} from './react-shape-fill.js';
 import {lowerCenteredFillPadding} from './react-centered-fill.js';
 import {wrapReactTextColor, REACT_TEXT_COLOR_RUNTIME} from './react-text-color.js';
@@ -1148,7 +1148,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
             if (prop.bindings.code.prop === 'children') { childrenField = field; return ''; }
             return ` ${prop.bindings.code.prop}={${codeValueExpression(prop, `__dscItem[${JSON.stringify(field)}]`)}}`;
           }).join('');
-        const attrs = depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+        const attrs = clearedSlotAttrs(part.component) + depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
         const key = `__dscItem[${JSON.stringify(part.repeat.keyField)}]`;
         const node = childrenField ? `<${dep.name} key={${key}}${attrs}>{__dscItem[${JSON.stringify(childrenField)}]}</${dep.name}>`
           : `<${dep.name} key={${key}}${attrs} />`;
@@ -1181,7 +1181,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
                 fieldAttrs += ` ${literalAttrJsx(codeName, String(v))}`;
               }
             }
-            const attrs = depAttrString(dep, part.component!.props ?? {}, narrowedProps.get(part)) + fieldAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+            const attrs = clearedSlotAttrs(part.component!) + depAttrString(dep, part.component!.props ?? {}, narrowedProps.get(part)) + fieldAttrs + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
               ? `<${dep.name}${attrs}>${literalTextJsx(itemText)}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
@@ -1191,7 +1191,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
+      const attrs = clearedSlotAttrs(part.component) + depAttrString(dep, part.component.props ?? {}, narrowedProps.get(part)) + reactBooleanArguments(contract,dep,part.component) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || !!instanceFillExpression(part,codePropOf,ctx.contracts) || fillForegroundParts.has(part) || rankedPartNames.has(partName) || hasScalableOverrides(part) || (Object.keys(part.component?.rootOverrides??{}).length > 0 || !!part.component?.rootFill?.length) ? ` style=${styleExpr(partName, false, [])}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.

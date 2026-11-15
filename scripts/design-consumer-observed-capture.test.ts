@@ -97,3 +97,15 @@ test('translation still refuses real zero-box movement, hidden-box creation, pai
  }
  }finally{await browser.close();}
 });
+
+import {translatedLayoutPixels,CAPTURE_TRANSLATION_TOLERANCE} from './design-consumer-observed-capture.js';
+test('the translated layout pixels may move one 8-bit level per channel, by name, and no more',()=>{
+ const img=(w:number,h:number,edit?:(p:PNG)=>void)=>{const p=new PNG({width:w,height:h});for(let i=0;i<p.data.length;i+=4)p.data.set([175,139,229,255],i);edit?.(p);return p;};
+ assert.deepEqual(CAPTURE_TRANSLATION_TOLERANCE,{name:'capture-translation-layout-pixels-one-level-v1',levelsPerChannel:1});
+ assert.deepEqual(translatedLayoutPixels(img(4,3),img(4,3)),{same:true,pixels:0,maxDelta:0});
+ // The recorded case: one pixel, red and green +1 (af8be5 → b08ce5).
+ assert.deepEqual(translatedLayoutPixels(img(4,3),img(4,3,p=>{p.data[20]++;p.data[21]++;})),{same:true,pixels:1,maxDelta:1});
+ assert.deepEqual(translatedLayoutPixels(img(4,3),img(4,3,p=>{p.data[23]--;p.data[0]++;})),{same:true,pixels:2,maxDelta:1});
+ assert.deepEqual(translatedLayoutPixels(img(4,3),img(4,3,p=>{p.data[20]+=2;})),{same:false,pixels:1,maxDelta:2});
+ assert.equal(translatedLayoutPixels(img(4,3),img(4,4)).same,false);
+});

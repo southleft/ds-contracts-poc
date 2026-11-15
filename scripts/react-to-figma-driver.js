@@ -1,5 +1,6 @@
-// THE REACT TO FIGMA DRIVER: run this file in the target Figma file through the Desktop Bridge (figma_execute), with that
-// file's tab in front, while scripts/react-to-figma-run.ts is serving. It decides nothing: it claims the one session,
+// THE REACT TO FIGMA DRIVER: run this file in the target Figma file, with that file's tab in front, from the repository's
+// plugin (figma-sync/plugin, "React to Figma runner", which fetches these bytes from the runner at /driver) or through the
+// Desktop Bridge (figma_execute), while scripts/react-to-figma-run.ts is serving. It decides nothing: it claims the one session,
 // runs each program the runner serves (each starts with the file guard and sets every DS_ flag), and posts each return
 // with its wall time, the time of an 8-step timer chain (a hidden tab runs about one step a minute) and the DS_ keys on
 // globalThis before and after. A bridge time-out does not stop it; the runner's log shows its progress.
