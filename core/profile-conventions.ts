@@ -51,6 +51,10 @@
  *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
  *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
  *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
+/** absolute-in-containing-block (React to Figma contract step): an absolutely placed element's insets are measured from
+ *  its containing block, the nearest positioned or transformed ancestor; where that is not its parent, the element is
+ *  drawn in that ancestor (moved there in the captured tree, just after the child it sat under), unless an ancestor
+ *  between them hides, clips or fades it. Off, it is drawn in its parent at insets measured from another box. */
 /** bound-visibility-override-is-property (Figma to React proposal): a host's raw `visible` override on a node whose
  *  visibility is bound to a component BOOLEAN property, where the same host sets that property to the same value, is
  *  carried by that property and is not an independent visibility demand. Off, it is a demand of its own. */
@@ -58,7 +62,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'bound-visibility-override-is-property'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'bound-visibility-override-is-property'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
