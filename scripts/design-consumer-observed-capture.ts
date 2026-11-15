@@ -15,6 +15,8 @@ async function sameSnapshot(before:SnapshotHandle,after:SnapshotHandle):Promise<
 }
 export type ObservedCapture = {bytes:Buffer;frame:ConsumerFrame;paint:FrameBox;translation?:{
  x:number;y:number;beforeLayout:FrameBox;afterLayout:FrameBox;beforeLayoutSha256:string;afterLayoutSha256:string;
+ /** Present only where the layout pixels moved within CAPTURE_TRANSLATION_TOLERANCE. */
+ tolerance?:typeof CAPTURE_TRANSLATION_TOLERANCE&{pixels:number;maxDelta:number};
 }}|{refused:string};
 /** Acquire subject pixels without an external canvas color. Only ancestor
  * background colors may change; inherited styles, pseudo styles, markup and
@@ -64,6 +66,16 @@ export async function captureSubjectWithoutBackdrop(page:Page,selector:string,in
  }
  if(await snapshot()!==before)return {refused:'backdrop-capture-restoration-changed-subject'};
  return result;
+}
+/** The one tolerance in this capture, used only by the test below that the layout pixels survive translating the
+ * instrument: re-rasterizing a moved subject can move an antialiased pixel by one 8-bit level per channel (a recorded
+ * 4 px move: 1 pixel, red and green +1). Any channel moving more, or any size change, is still refused. */
+export const CAPTURE_TRANSLATION_TOLERANCE={name:'capture-translation-layout-pixels-one-level-v1',levelsPerChannel:1} as const;
+export function translatedLayoutPixels(a:PNG,b:PNG):{same:boolean;pixels:number;maxDelta:number}{
+ if(a.width!==b.width||a.height!==b.height)return {same:false,pixels:0,maxDelta:Infinity};
+ let pixels=0,maxDelta=0;
+ for(let i=0;i<a.data.length;i+=4){let d=0;for(let c=0;c<4;c++)d=Math.max(d,Math.abs(a.data[i+c]-b.data[i+c]));if(d){pixels++;maxDelta=Math.max(maxDelta,d);}}
+ return {same:maxDelta<=CAPTURE_TRANSLATION_TOLERANCE.levelsPerChannel,pixels,maxDelta};
 }
 export async function captureObservedSubject(page:Page,selector:string,instrumentSelector:string):Promise<ObservedCapture>{
  const initial=await observeConsumerPaintExtent(page,selector);if('refused'in initial)return initial;
@@ -115,11 +127,12 @@ export async function captureObservedSubject(page:Page,selector:string,instrumen
     const sample=await captureIsolatedRegion(page,root,{x:0,y:0,width:layout.width,height:layout.height});
     if('refused'in sample)result=sample;
     else{
-     const a=PNG.sync.read(baseline.bytes),b=PNG.sync.read(sample.bytes);
-     if(a.width!==b.width||a.height!==b.height||!a.data.equals(b.data))result={refused:'capture-translation-changed-layout-pixels'};
+     const moved=translatedLayoutPixels(PNG.sync.read(baseline.bytes),PNG.sync.read(sample.bytes));
+     if(!moved.same)result={refused:'capture-translation-changed-layout-pixels'};
      else{
       const shot=await captureIsolatedRegion(page,root,region(shifted.observation.paint,shifted.observation.layout));
-      result='refused'in shot?shot:{...shot,paint:shifted.observation.paint,translation:{x:dx,y:dy,beforeLayout:layout,afterLayout:shifted.observation.layout,beforeLayoutSha256:imageSha256(baseline.bytes),afterLayoutSha256:imageSha256(sample.bytes)}};
+      result='refused'in shot?shot:{...shot,paint:shifted.observation.paint,translation:{x:dx,y:dy,beforeLayout:layout,afterLayout:shifted.observation.layout,beforeLayoutSha256:imageSha256(baseline.bytes),afterLayoutSha256:imageSha256(sample.bytes),
+       ...(moved.pixels?{tolerance:{...CAPTURE_TRANSLATION_TOLERANCE,pixels:moved.pixels,maxDelta:moved.maxDelta}}:{})}};
      }
     }
    }
