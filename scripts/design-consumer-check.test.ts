@@ -1014,6 +1014,6 @@ test('a matched part is compared with the graphic it matched, each in its own bo
   assert.equal(judge(canvas(chevron(45, 14)), member).verdict, 'same', 'within one pixel of the pair\'s offset');
   assert.equal(judge(canvas([...chevron(44, 13), [50, 20]]), member).verdict, 'same', 'one stray pixel');
   assert.equal(judge(canvas(chevron(44, 13), 160), member).verdict, 'same', 'shape, not color: the same glyph drawn lighter');
-  assert.equal(partGlyph({ a: figma, b: figma } as any, { a: figma, b: figma } as any, { x: 0, y: 0 }, { ...part, width: 0 }, { box: member, graphic: member }).verdict, 'unmeasured');
+  assert.equal(partGlyph({ a: figma, b: figma } as any, { a: figma, b: figma } as any, { x: 0, y: 0 }, { ...part, width: 0.000003 }, { box: member, graphic: member }).verdict, 'unmeasured', 'a line is not compared by its box');
   assert.equal(variantVerdicts({ problems: ['content-wrong-glyph:k:part:Chevron:24 of 28 px'], images: { cases: [] }, content: { cases: [] } }, [{ key: 'k', figmaName: 'K' }]).variants[0].verdict, 'fail');
 });

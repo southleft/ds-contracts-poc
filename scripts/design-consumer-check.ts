@@ -175,13 +175,14 @@ export const transparent = (bytes: Buffer) => { const p = PNG.sync.read(bytes); 
  *  Pixels outside the pair's canvas are its background. Shape, not color, is compared: a side's drawn pixels are those
  *  pixelmatch (the image score's threshold 0.1, antialiasing counted) finds different from the most frequent color on
  *  its own box's outer ring, and `differing` counts the pixels drawn on one side only. The part is the wrong glyph
- *  when, on both backgrounds, they reach `share` of the larger side's drawn pixels, and at least `minPixels`. */
+ *  when, on both backgrounds, they reach `share` of the larger side's drawn pixels, and at least `minPixels`. A part box
+ *  under one pixel wide or tall (a line) is not compared. */
 export const PART_GLYPH_RULE = { name: 'part-glyph-shape-own-box-v1', share: 0.5, minPixels: 8 } as const;
 type GlyphSide = { differing: number; drawn: number };
 export function partGlyph(white: Aligned, black: Aligned, shift: { x: number; y: number }, part: Box, pair: { box: Box; graphic: Box }):
   { verdict: 'same' | 'wrong-glyph'; offset: { x: number; y: number }; white: GlyphSide; black: GlyphSide } | { verdict: 'unmeasured' } {
   const x0 = Math.floor(part.x + shift.x), y0 = Math.floor(part.y + shift.y), w = Math.ceil(part.x + part.width + shift.x) - x0, h = Math.ceil(part.y + part.height + shift.y) - y0;
-  if (!(w > 0 && h > 0)) return { verdict: 'unmeasured' };
+  if (!(part.width >= 1 && part.height >= 1)) return { verdict: 'unmeasured' }; // a line: its stroke, not its box, is what it draws
   const t = { x: Math.round(pair.graphic.x + pair.graphic.width / 2 - pair.box.x - pair.box.width / 2), y: Math.round(pair.graphic.y + pair.graphic.height / 2 - pair.box.y - pair.box.height / 2) };
   const drawn = (png: PNG, ax: number, ay: number, bg: number) => { const img = Buffer.alloc(w * h * 4), seen = new Map<number, number>();
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const sx = ax + x, sy = ay + y, i = (y * w + x) * 4;
