@@ -25,7 +25,7 @@
  * which stays external and optional.
  */
 import { build } from 'esbuild';
-import { chmodSync, readFileSync } from 'node:fs';
+import { chmodSync, cpSync, readFileSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { viteGlobPlugin } from './vite-glob-plugin.mjs';
@@ -98,5 +98,25 @@ await build({
   external: ['playwright-core'],
 });
 
+// react-to-figma's three steps, each its own bundle beside cli.js, run as their own processes exactly as in the
+// repository; the reader's pinned image folder ships beside them (storybook-reader.ts PINNED resolves it there).
+// In a bundle every module shares the bundle's import.meta.url and argv[1], so a module's "am I main?" check would
+// fire inside it (the grammar classifier's CLI ran inside the reader). Only the entry may run as main: in every other
+// source module, process.argv[1] reads as undefined. The repository's files are unchanged; only these bundles are.
+const onlyEntryIsMain = (entry) => ({ name: 'only-entry-is-main', setup(b) {
+  b.onLoad({ filter: /\.(m?ts|m?js)$/ }, (args) => {
+    if (args.path === entry || args.path.includes(`${path.sep}node_modules${path.sep}`)) return undefined;
+    const text = readFileSync(args.path, 'utf8');
+    if (!text.includes('process.argv[1]')) return undefined;
+    return { contents: text.replaceAll('process.argv[1]', 'undefined'), loader: args.path.endsWith('ts') ? 'ts' : 'js', resolveDir: path.dirname(args.path) };
+  });
+} });
+for (const step of ['storybook-local', 'storybook-reader', 'storybook-contracts']) {
+  const entry = path.join(here, '..', '..', 'scripts', `${step}.ts`);
+  await build({ ...shared, plugins: [...shared.plugins, onlyEntryIsMain(entry)], entryPoints: [entry], outfile: path.join(here, 'dist', `${step}.js`), external: ['playwright-core'] });
+}
+rmSync(path.join(here, 'dist', 'storybook-reader-image'), { recursive: true, force: true });
+cpSync(path.join(here, '..', '..', 'scripts', 'storybook-reader-image'), path.join(here, 'dist', 'storybook-reader-image'), { recursive: true });
+
 chmodSync(path.join(here, 'dist', 'cli.js'), 0o755);
-console.log('✔ @ds-contracts/cli built → dist/cli.js (+ lazy dist/computed.js)');
+console.log('✔ @ds-contracts/cli built → dist/cli.js (+ lazy dist/computed.js, react-to-figma steps)');
