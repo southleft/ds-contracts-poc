@@ -29,6 +29,20 @@ test('backdrop acquisition refuses selector changes and ancestor blending, resto
  const composited=await page.content();assert.deepEqual(await captureSubjectWithoutBackdrop(page,'#subject','#cell'),{refused:'backdrop-capture-ancestor-compositing-unsupported'});assert.equal(await page.content(),composited);
  }finally{await browser.close();}
 });
+test('the subject is read once it holds still: a style a library writes a few frames later is waited for, and one that never stops is refused by name',async()=>{
+ const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240}});
+ // A positioning library's answer to a viewport change: two frames and a task later, a hidden menu's style is rewritten.
+ const late='<style>body{margin:0}#cell{background:white;padding:10px}#subject{width:20px;height:20px;background:blue}</style><div id="cell"><div id="subject"><ul id="menu" hidden style="transform: translate(1px, 1px)"></ul></div></div>';
+ await page.setContent(late);
+ await page.evaluate(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>document.getElementById('menu')!.style.transform='translate(9px, 9px)',0))));
+ const result=await captureSubjectWithoutBackdrop(page,'#subject','#cell');assert('bytes'in result,JSON.stringify(result));
+ assert.equal(await page.locator('#menu').getAttribute('style'),'transform: translate(9px, 9px);');
+ // A subject that never holds still.
+ await page.setContent(late);
+ await page.evaluate(`(() => { let n = 0; const tick = () => { document.getElementById('menu').style.left = (n++) + 'px'; requestAnimationFrame(tick); }; requestAnimationFrame(tick); })()`);
+ assert.deepEqual(await captureSubjectWithoutBackdrop(page,'#subject','#cell'),{refused:'backdrop-capture-subject-unsettled'});
+ }finally{await browser.close();}
+});
 test('negative-origin paint is captured after a guarded integer instrument translation and restored',async()=>{
  const browser=await chromium.launch();try{const page=await browser.newPage({viewport:{width:320,height:240}});await page.setContent(html);const before=await page.locator('body').innerHTML();
  const result=await captureObservedSubject(page,'#subject','#cell');assert('bytes'in result,JSON.stringify(result));assert(result.translation);assert.equal(result.translation.x,15);assert.equal(result.translation.y,15);

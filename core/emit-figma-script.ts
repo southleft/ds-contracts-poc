@@ -5879,6 +5879,12 @@ function partToSpecInner(
     // layout of its own hugs its text, so the box packs it the same way (center → CENTER, right/end → MAX).
     const packed = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'];
     if (packed && !resolveLayout(part, subst) && input.conventions?.has('text-align-packs-text-box')) frame.layout = { ...frame.layout!, primary: packed };
+    // Convention text-box-stacks-block-children: the part's own text is an inline run ahead of its child parts, so a
+    // block-flow text part with no layout stacks them as CSS blockification does (a list item's line above its nested list).
+    if (!resolveLayout(part, subst) && Object.keys(part.parts ?? {}).length > 0 && input.conventions?.has('text-box-stacks-block-children')) {
+      const flow = layoutSpec({ ...part, parts: { [`${name}-text`]: { declared: { display: 'inline' } } as Part, ...part.parts } }, false, subst);
+      if (flow.mode === 'VERTICAL') frame.layout = flow;
+    }
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
     textSpec.fontStyle = figmaFaceStyle(textCtx);

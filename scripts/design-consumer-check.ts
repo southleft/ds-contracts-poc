@@ -84,10 +84,11 @@ import { PNG } from 'pngjs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
+import { alignPair, diffPair, readPng, writeTriptych, type Aligned } from '../extract/figma/visual-parity/img.js';
+import pixelmatch from 'pixelmatch';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
-import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
+import { caseContent, domContentOf, fetchFigmaContent, type Box, type CaseContent, type DomContent } from './design-consumer-content.js';
 import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
 import { retryConsumerRead } from './design-consumer-network.js';
 import { retryCapture } from './capture-retry.js';
@@ -166,6 +167,41 @@ export function consumerDrawsNothing(key: string, figmaPngs: Buffer[]): { proble
   return painted ? { problem: `consumer-draws-nothing:${key}:${painted}`, figmaPaintedPixels: painted } : null;
 }
 export const transparent = (bytes: Buffer) => { const p = PNG.sync.read(bytes); for (let i = 3; i < p.data.length; i += 4) if (p.data[i]) return false; return true; };
+/** THE GLYPH CHECK (content, after the size match). matchParts accepts any graphic of about a part's size: in F→R run 5,
+ *  24 variants drew a "+" where Figma draws a chevron and passed under the 5% image limit. Each matched part is compared
+ *  with the graphic it matched, each in its own box, in the layout-aligned pair the image score measured, on white and
+ *  on black: Figma's part box rounded out to whole pixels, and that box moved by the pair's offset (the matched
+ *  graphic's center minus the center of the part's largest box, rounded; the best of the nine moves within one pixel).
+ *  Pixels outside the pair's canvas are its background. Shape, not color, is compared: a side's drawn pixels are those
+ *  pixelmatch (the image score's threshold 0.1, antialiasing counted) finds different from the most frequent color on
+ *  its own box's outer ring, and `differing` counts the pixels drawn on one side only. The part is the wrong glyph
+ *  when, on both backgrounds, they reach `share` of the larger side's drawn pixels, and at least `minPixels`. A part box
+ *  under one pixel wide or tall (a line) is not compared. */
+export const PART_GLYPH_RULE = { name: 'part-glyph-shape-own-box-v1', share: 0.5, minPixels: 8 } as const;
+type GlyphSide = { differing: number; drawn: number };
+export function partGlyph(white: Aligned, black: Aligned, shift: { x: number; y: number }, part: Box, pair: { box: Box; graphic: Box }):
+  { verdict: 'same' | 'wrong-glyph'; offset: { x: number; y: number }; white: GlyphSide; black: GlyphSide } | { verdict: 'unmeasured' } {
+  const x0 = Math.floor(part.x + shift.x), y0 = Math.floor(part.y + shift.y), w = Math.ceil(part.x + part.width + shift.x) - x0, h = Math.ceil(part.y + part.height + shift.y) - y0;
+  if (!(part.width >= 1 && part.height >= 1)) return { verdict: 'unmeasured' }; // a line: its stroke, not its box, is what it draws
+  const t = { x: Math.round(pair.graphic.x + pair.graphic.width / 2 - pair.box.x - pair.box.width / 2), y: Math.round(pair.graphic.y + pair.graphic.height / 2 - pair.box.y - pair.box.height / 2) };
+  const drawn = (png: PNG, ax: number, ay: number, bg: number) => { const img = Buffer.alloc(w * h * 4), seen = new Map<number, number>();
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const sx = ax + x, sy = ay + y, i = (y * w + x) * 4;
+      if (sx >= 0 && sy >= 0 && sx < png.width && sy < png.height) png.data.copy(img, i, (sy * png.width + sx) * 4, (sy * png.width + sx) * 4 + 4); else img.fill(bg, i, i + 3).fill(255, i + 3, i + 4);
+      if (!x || !y || x === w - 1 || y === h - 1) seen.set(img.readUInt32BE(i), (seen.get(img.readUInt32BE(i)) ?? 0) + 1); }
+    const ring = [...seen].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0], flat = Buffer.alloc(w * h * 4), mask = Buffer.alloc(w * h * 4);
+    for (let i = 0; i < w * h; i++) flat.writeUInt32BE(ring, i * 4);
+    pixelmatch(img, flat, mask, w, h, { threshold: 0.1, includeAA: true, diffMask: true });
+    return Array.from({ length: w * h }, (_, i) => mask[i * 4 + 3] > 0); };
+  const figma = [drawn(white.b, x0, y0, 255), drawn(black.b, x0, y0, 0)];
+  let best: { sum: number; offset: { x: number; y: number }; white: GlyphSide; black: GlyphSide } | undefined;
+  for (const dy of [-1, 0, 1]) for (const dx of [-1, 0, 1]) {
+    const [onWhite, onBlack] = ([[white, 255], [black, 0]] as const).map(([pair, bg], k) => { const ours = drawn(pair.a, x0 + t.x + dx, y0 + t.y + dy, bg), f = figma[k];
+      return { differing: f.filter((v, i) => v !== ours[i]).length, drawn: Math.max(f.filter(Boolean).length, ours.filter(Boolean).length) }; });
+    if (!best || onWhite.differing + onBlack.differing < best.sum) best = { sum: onWhite.differing + onBlack.differing, offset: { x: t.x + dx, y: t.y + dy }, white: onWhite, black: onBlack };
+  }
+  const wrong = [best!.white, best!.black].every(s => s.differing >= Math.max(PART_GLYPH_RULE.minPixels, PART_GLYPH_RULE.share * s.drawn));
+  return { verdict: wrong ? 'wrong-glyph' : 'same', offset: best!.offset, white: best!.white, black: best!.black };
+}
 /** Figma exports node alpha, excluding the editor page. Match that substrate
  *  without changing the component or the page retained for visible review. */
 export const NODE_SCREENSHOT_OPTIONS = {
@@ -1156,6 +1192,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         problems.push(row.axisInertLedgered ? `variant-axis-inert-ledgered:${row.prop}` : `variant-prop-discarded:${row.prop}`);
     }
     receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    const measured: Record<string, { file: string; frame: FigmaFrame }> = {}; // the pair each measured image score read, for the glyph check
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       let file = figma.files[c.nodeId], frame = figma.frames[c.nodeId], originsTried: unknown;
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
@@ -1197,6 +1234,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         layoutAligned={status:'refused',reason,withinLimit:false}; problems.push(`image-framing-unqualified:${c.key}:${reason}`);
       } else {
         const white=diffPair(onWhite.aligned,[]),black=diffPair(onBlack.aligned,[]);
+        measured[c.key]={file,frame:frame!};
         layoutAligned={status:'measured',whiteMismatchPercent:white.unmaskedPct,blackMismatchPercent:black.unmaskedPct,
           withinLimit:white.unmaskedPct<=IMAGE_LIMIT_PERCENT&&black.unmaskedPct<=IMAGE_LIMIT_PERCENT,placement:onWhite.placement,
           pixelsCompared:onWhite.aligned.width*onWhite.aligned.height,...(originsTried?{originsTried}:{})};
@@ -1219,12 +1257,22 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // Figma variant draws must render, whatever the pixel score says.
     const content = unresolved ? { status: 'unavailable' as const, reason: unresolved }
       : fileKey ? await fetchFigmaContent(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'unavailable' as const, reason: 'no fileKey in dump' };
-    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, ...(content.status === 'collected'
+    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, glyphRule: PART_GLYPH_RULE, ...(content.status === 'collected'
       ? { figmaVersion: content.version, responseSha256: content.responseSha256, evidence: 'figma-content.json' } : { reason: content.reason }), cases: [] as CaseContent[] };
     if (content.status === 'collected') for (const c of cases) {
       const dom = domContent[c.key];
       if (!dom) { problems.push(`content-unmeasured:${c.key}`); continue; }
-      const judged = caseContent(c.key, content.byNodeId[c.nodeId], dom);
+      const judged = caseContent(c.key, content.byNodeId[c.nodeId], dom), pair = measured[c.key], at = consumerFrames[c.key];
+      if (pair && at && judged.pairs.length) { // PART_GLYPH_RULE, in the pair the image score measured
+        const ours = readFileSync(path.join(args.out, `consumer-${c.key}.png`)), theirs = readFileSync(pair.file);
+        const white = alignRecordedFrames(ours, theirs, at, pair.frame, 255), black = alignRecordedFrames(ours, theirs, at, pair.frame, 0);
+        if (!('refused' in white) && !('refused' in black)) {
+          const p = white.placement, shift = { x: at.layout.x - at.capture.x + p.consumer.x - p.commonCrop.x, y: at.layout.y - at.capture.y + p.consumer.y - p.commonCrop.y };
+          const glyphs = judged.pairs.map(q => ({ name: q.part.name, box: q.box, graphic: q.graphic, ...partGlyph(white.aligned, black.aligned, shift, q.part.box, q) }));
+          judged.content.parts.glyphs = glyphs;
+          for (const g of glyphs) if (g.verdict === 'wrong-glyph') judged.problems.push(`content-wrong-glyph:${c.key}:part:${g.name}:${g.white.differing} of ${g.white.drawn} px`);
+        }
+      }
       receipt.content.cases.push(judged.content);
       problems.push(...judged.problems);
       const row = receipt.cases.find((r: { key: string }) => r.key === c.key);

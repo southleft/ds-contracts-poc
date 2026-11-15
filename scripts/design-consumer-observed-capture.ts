@@ -18,6 +18,18 @@ export type ObservedCapture = {bytes:Buffer;frame:ConsumerFrame;paint:FrameBox;t
  /** Present only where the layout pixels moved within CAPTURE_TRANSLATION_TOLERANCE. */
  tolerance?:typeof CAPTURE_TRANSLATION_TOLERANCE&{pixels:number;maxDelta:number};
 }}|{refused:string};
+/** How long the subject must hold still before it is read: the same snapshot after each of `stillFrames` animation
+ *  frames, each followed by a task turn, within `limitFrames`. Counted in frames and tasks, never in time. */
+export const SUBJECT_SETTLE={name:'subject-still-two-frames-v1',stillFrames:2,limitFrames:30} as const;
+export async function settledSnapshot(page:Page,read:()=>Promise<string>):Promise<string|null>{
+ let last=await read(),still=0;
+ for(let frame=0;frame<SUBJECT_SETTLE.limitFrames;frame++){
+  await page.evaluate(()=>new Promise<void>(done=>requestAnimationFrame(()=>setTimeout(done,0))));
+  const now=await read();
+  if(now!==last){last=now;still=0;}else if(++still>=SUBJECT_SETTLE.stillFrames)return now;
+ }
+ return null;
+}
 /** Acquire subject pixels without an external canvas color. Only ancestor
  * background colors may change; inherited styles, pseudo styles, markup and
  * geometry must remain identical. Painted borders/images/effects still refuse
@@ -31,7 +43,11 @@ export async function captureSubjectWithoutBackdrop(page:Page,selector:string,in
    const s=getComputedStyle(n,p);return [...s].map(k=>[k,s.getPropertyValue(k)]);
   }),
  }))));
- const before=await snapshot();
+ // The subject is read once it holds still (SUBJECT_SETTLE): a story's own pending work lands first. A beyond-viewport
+ // screenshot resizes Chromium's viewport, and a positioning library answers with a style write a frame or more later
+ // (MultiSelect's auto-aligned menu); when that write landed depended on machine load. Every comparison below stays exact.
+ const before=await settledSnapshot(page,snapshot);
+ if(before===null)return {refused:'backdrop-capture-subject-unsettled'};
  const ancestors=await root.evaluateHandle(el=>{
   const records:Array<{node:HTMLElement;style:string|null;background:string}>=[];
   for(let p=el.parentElement;p;p=p.parentElement){const s=getComputedStyle(p);
