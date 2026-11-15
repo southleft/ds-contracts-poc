@@ -117,6 +117,8 @@ for (const step of ['storybook-local', 'storybook-reader', 'storybook-contracts'
 }
 rmSync(path.join(here, 'dist', 'storybook-reader-image'), { recursive: true, force: true });
 cpSync(path.join(here, '..', '..', 'scripts', 'storybook-reader-image'), path.join(here, 'dist', 'storybook-reader-image'), { recursive: true });
+// The plugin runs only the driver whose sha256 it pins (figma-sync/plugin/code.js): --write serves these exact bytes.
+cpSync(path.join(here, '..', '..', 'scripts', 'react-to-figma-driver.js'), path.join(here, 'dist', 'react-to-figma-driver.js'));
 
 chmodSync(path.join(here, 'dist', 'cli.js'), 0o755);
 console.log('✔ @ds-contracts/cli built → dist/cli.js (+ lazy dist/computed.js, react-to-figma steps)');

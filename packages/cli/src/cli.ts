@@ -161,7 +161,7 @@ const COMMAND_HELP: Record<string, string> = {
   'react-to-figma': `ds-contracts react-to-figma — this React library's components → contracts and Figma programs
 
   react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>]
-    [--only <titles.json>] [--file-key <figma file key>]
+    [--only <titles.json>] [--file-key <figma file key> [--write]]
 
 Builds the library's own Storybook (default: the current directory) with its own
 storybook binary and serves it locally; a library without one is refused by name.
@@ -169,7 +169,10 @@ Reads every story in the pinned reader (needs Docker), then writes each componen
 contract and, with --file-key, the Figma programs that write it into that file. One
 line per component: written, with its variants, or refused, with every reason.
 --profile names the system's components, axes and conventions (a drafted one works
-here and counts nowhere). The plugin's "React to Figma runner" writes into Figma.`,
+here and counts nowhere). --write then serves the programs on localhost:9232 until the
+ds-contracts plugin's "React to Figma runner" → "Connect and run" writes them into the open
+file: create-only, nothing archived or renamed, and a file with another key is refused.
+One line per set: written, or the program's error by name.`,
   'figma-to-react': `ds-contracts figma-to-react — a Figma component set → a checked React package
 
   figma-to-react --url <figma component-set link> --out <dir>
