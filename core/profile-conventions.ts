@@ -51,6 +51,10 @@
  *  edge, stretched vertically, whose length is its parent's height in every variant, is carried as the strip it paints
  *  (native LINE paint is local y in [-weight, 0] for every alignment): an absolutely placed bar, top to bottom, as wide as
  *  its stroke weight and filled with its stroke paint. Off, its varying length refuses the native line. */
+/** absolute-in-containing-block (React to Figma contract step): an absolutely placed element's insets are measured from
+ *  its containing block, the nearest positioned or transformed ancestor; where that is not its parent, the element is
+ *  drawn in that ancestor (moved there in the captured tree, just after the child it sat under), unless an ancestor
+ *  between them hides, clips or fades it. Off, it is drawn in its parent at insets measured from another box. */
 /** svg-viewbox-carried (React to Figma contract step): each svg's icon asset is drawn in the viewBox its page authored
  *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
  *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
@@ -59,7 +63,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'svg-viewbox-carried'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'svg-viewbox-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
