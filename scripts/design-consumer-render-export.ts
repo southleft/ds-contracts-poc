@@ -10,6 +10,9 @@ export type RenderExportProof = {
   overlapPixels:number; paintedOverlapPixels:number;
   /** Set only where `ring` left the box's outer pixel row or column out, on each side where paint reaches past it. */
   edgeRing?:{sides:Side[]; pixels:number};
+  /** Set only by the anchor route's text-excluded proof (design-consumer-render-anchor.ts): the overlap pixels inside
+   *  visible text render bounds were left out of the offset proof, never out of the score. */
+  textExcluded?:{rule:'visible-text-render-bounds-v1'; boxes:FrameBox[]; pixels:number; minPaintedPixels:number; horizontalChanges:number; verticalChanges:number};
 };
 type Side='left'|'top'|'right'|'bottom';
 export function qualifyRenderBoundsExport(before:any,after:any,nodeId:string,layoutBytes:Buffer,renderBytes:Buffer,ring=false):
