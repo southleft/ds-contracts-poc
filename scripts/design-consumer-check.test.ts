@@ -1000,8 +1000,8 @@ test('our side drawing nothing where Figma draws is a measured failure; both emp
 
 import { partGlyph, PART_GLYPH_RULE } from './design-consumer-check.js';
 test('a matched part is compared with the graphic it matched, each in its own box: a "+" where Figma draws a chevron is the wrong glyph, the right glyph drawn elsewhere is not', () => {
-  const canvas = (ink: number[][]) => { const p = new PNG({ width: 60, height: 30 }); for (let i = 0; i < p.data.length; i += 4) p.data.set([244, 244, 244, 255], i);
-    for (const [x, y] of ink) p.data.set([22, 22, 22, 255], (y * 60 + x) * 4); return p; };
+  const canvas = (ink: number[][], level = 22) => { const p = new PNG({ width: 60, height: 30 }); for (let i = 0; i < p.data.length; i += 4) p.data.set([244, 244, 244, 255], i);
+    for (const [x, y] of ink) p.data.set([level, level, level, 255], (y * 60 + x) * 4); return p; };
   const chevron = (x: number, y: number) => [0, 1, 2, 3, 4].flatMap(i => [[x + i, y + i], [x + 8 - i, y + i]]), plus = (x: number, y: number) => [0, 1, 2, 3, 4, 5, 6, 7, 8].flatMap(i => [[x + i, y + 4], [x + 4, y + i]]);
   const figma = canvas(chevron(44, 13)), part = { x: 40, y: 8, width: 16, height: 16 }, member = { x: 44, y: 13, width: 9, height: 5 };
   const judge = (ours: PNG, graphic: { x: number; y: number; width: number; height: number }) => { const pair = { a: ours, b: figma, width: 60, height: 30 } as any;
@@ -1013,6 +1013,7 @@ test('a matched part is compared with the graphic it matched, each in its own bo
   assert.deepEqual(judge(canvas(chevron(4, 13)), { x: 4, y: 13, width: 9, height: 5 }), { verdict: 'same', offset: { x: -40, y: 0 }, white: { differing: 0, drawn: 9 }, black: { differing: 0, drawn: 9 } }, 'the right glyph, misplaced, is the pixel score\'s finding');
   assert.equal(judge(canvas(chevron(45, 14)), member).verdict, 'same', 'within one pixel of the pair\'s offset');
   assert.equal(judge(canvas([...chevron(44, 13), [50, 20]]), member).verdict, 'same', 'one stray pixel');
+  assert.equal(judge(canvas(chevron(44, 13), 160), member).verdict, 'same', 'shape, not color: the same glyph drawn lighter');
   assert.equal(partGlyph({ a: figma, b: figma } as any, { a: figma, b: figma } as any, { x: 0, y: 0 }, { ...part, width: 0 }, { box: member, graphic: member }).verdict, 'unmeasured');
-  assert.equal(variantVerdicts({ problems: ['content-wrong-glyph:k:part:Chevron:20/28 px'], images: { cases: [] }, content: { cases: [] } }, [{ key: 'k', figmaName: 'K' }]).variants[0].verdict, 'fail');
+  assert.equal(variantVerdicts({ problems: ['content-wrong-glyph:k:part:Chevron:24 of 28 px'], images: { cases: [] }, content: { cases: [] } }, [{ key: 'k', figmaName: 'K' }]).variants[0].verdict, 'fail');
 });
