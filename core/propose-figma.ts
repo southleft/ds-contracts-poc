@@ -14498,7 +14498,7 @@ function buildPartFromEvidence(
     carryInstanceRootInputs(m,component,ctx,where,'all',parentMode);
     part.component = component;
     carryInstanceAffine(m,part,component,ctx,where);
-    nameFixedSwaps(m, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where, selfKey));
+    nameFixedSwaps(m, ctx, where, clearUncarriedSwapFallback(m, component, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where, selfKey)));
     carryClip(m, part, ctx, where, { carry: false, owner: 'component-ref part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
@@ -20644,4 +20644,32 @@ function mixedScaleRect(m: Merged, ctx: Ctx, where: string): boolean {
     !m.occ.some(o => Object.values(o.node.shape!.constraints!).includes('SCALE'))) return false;
   ctx.notes.push(`${where}: plain rect whose uses mix SCALE with other constraints offered to the captured-geometry carrier, each use with its own constraint (profile convention mixed-scale-rect-keeps-placement)`);
   return true;
+}
+
+/** Profile convention observed-swap-default-drawn, caller side (core/profile-conventions.ts). A child slot that draws
+ * its observed default when the caller omits it (renderDefaultAnatomy) must not draw it where this instance fixes a
+ * DIFFERENT component that the caller path could not carry: the default glyph would stand in for another. The instance
+ * clears that slot (explicit empty content), so it draws nothing there, an honest absence. An uncarried fixed swap to
+ * the declared default (read from the instance main's own set definitions) keeps the fallback; an unreadable default
+ * counts as different. Returns `carried` unchanged. */
+function clearUncarriedSwapFallback(m: Merged, component: Record<string, unknown>, ctx: Ctx, where: string, carried: ReadonlySet<string>): ReadonlySet<string> {
+  const child = ctx.observedSwapDefault ? ContractSchema.safeParse(ctx.contractsById?.get(component.id as string)) : undefined;
+  if (!child?.success) return carried;
+  const cleared = new Set<string>(), different: string[] = [];
+  for (const {slot} of slotsOf(child.data)) {
+    const property = slotFigmaProperty(slot);
+    if (slot.renderDefaultAnatomy !== true || carried.has(property) || cleared.has(slot.name)) continue;
+    const other = m.occ.filter(({node}) => {
+      const swap = node.fixedSwaps?.[property], main = node.instanceGeometry?.componentId ?? node.instanceRootOverrides?.componentId;
+      if (!swap) return false;
+      const definitions = main === undefined ? undefined : ctx.fixedSwapOwnerRoots?.get(main)?.[0]?.propertyDefinitions;
+      const definition = Object.entries(definitions ?? {}).find(([name]) => name.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === property)?.[1];
+      return definition?.type !== 'INSTANCE_SWAP' || definition.defaultValue !== swap.id;
+    });
+    if (other.length) { cleared.add(slot.name); different.push(`${slot.name} in ${other.length}/${m.occ.length} variant(s)`); }
+  }
+  if (!cleared.size) return carried;
+  component.clearedSlots = [...cleared].sort();
+  ctx.notes.push(`${where}: uncarried fixed swap to a component other than the child's declared default — slot cleared so the child's observed default does not stand in for it (${different.join('; ')}); it draws nothing there`);
+  return carried;
 }
