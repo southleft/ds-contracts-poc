@@ -2494,7 +2494,7 @@ export const ComponentRefSchema = z.strictObject({
   sameInkInsideStroke:SameInkInsideStrokeTableSchema.optional(),
   contentSlot: z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/).optional(),
   /** Routes disjoint caller-owned part keys into several named child slots. */
-  contentSlots: z.record(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/), z.array(z.string().min(1))).optional(),
+  contentSlots: z.record(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/), z.array(z.string().min(1))).optional(), /** Child slots this caller passes explicitly empty, so an omitted-caller fallback (renderDefaultAnatomy) does not draw there. */ clearedSlots: z.array(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/)).min(1).optional(),
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
@@ -5070,6 +5070,8 @@ export function defaultSlotFamilyIssue(contract: Contract, slotName = 'children'
 }
 
 /** One owner per caller part; grouping changes destinations, never anatomy. */
+/** React attributes for ComponentRef.clearedSlots: an explicit null is caller content of nothing, not an omitted caller. */
+export const clearedSlotAttrs=(component:{clearedSlots?:string[]}|undefined):string=>(component?.clearedSlots??[]).map(slot=>` ${slot}={null}`).join('');
 export function callerContentGroups(part:Part):Array<{slot:string;parts:Record<string,Part>}> {
  const routes=part.component?.contentSlots;
  if(routes===undefined)return part.parts===undefined?[]:[{slot:part.component?.contentSlot??'children',parts:part.parts}];

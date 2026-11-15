@@ -8,8 +8,9 @@
  * The Storybook read is the profile's pin unless --storybook names another URL, or --storybook-dir names a library whose
  * own Storybook is built into <run>/storybook-static and served on a local port for the run (scripts/storybook-local.ts).
  *
- * Then bring that file's Figma tab to the front and run scripts/react-to-figma-driver.js in it through the Desktop Bridge
- * (figma_execute). FIGMA_TOKEN comes from the environment (load it in a subshell; never print it). Every program starts
+ * Then bring that file's Figma tab to the front and run the driver in it: in the repository's plugin (figma-sync/plugin,
+ * "React to Figma runner", which fetches scripts/react-to-figma-driver.js from this server at /driver), or through the
+ * Desktop Bridge (figma_execute). FIGMA_TOKEN comes from the environment (load it in a subshell; never print it). Every program starts
  * with the file guard and sets every DS_ flag; the driver records the DS_ keys before and after each call.
  *
  * Order: step 0, checks from files (folder, disk, plan, scripts, tokens), a read of the file (the tab in front, no unknown
@@ -287,6 +288,7 @@ const advance = (r?: Result) => { pending = gen.next(r as Result); pending.then(
 const serve = (req: import('node:http').IncomingMessage, res: import('node:http').ServerResponse) => {
   const send = (v: unknown) => { res.writeHead(200, { 'content-type': 'application/json', 'access-control-allow-origin': '*' }); res.end(JSON.stringify(v)); };
   const u = new URL(req.url ?? '/', 'http://127.0.0.1'), mine = !!session && u.searchParams.get('session') === session;
+  if (u.pathname === '/driver') return send({ driver: readFileSync(self[1]!, 'utf8') });   // the plugin runs these same bytes
   if (u.pathname === '/claim') { if (session) return send({ refused: 'a driver already holds this run' }); session = sha(String(Date.now() + Math.random())).slice(0, 16); advance(); return send({ session }); }
   if (!mine) return send({ refused: 'not this run\'s driver' });
   if (u.pathname === '/next') { if (done) return send(done); if (!served || served.sent) return send({ wait: true }); served.sent = true; return send({ id: served.id, program: served.program }); }
@@ -299,5 +301,5 @@ const serve = (req: import('node:http').IncomingMessage, res: import('node:http'
 };
 let up = 0;
 for (const host of ['127.0.0.1', '::1']) createServer(serve).on('error', (e: NodeJS.ErrnoException) => refuse(`port ${PORT} on ${host}: ${e.code}; another local server holds it`))
-  .listen(PORT, host, () => { if (++up === 2) console.log(`plan: ${rows.length} set(s), tag ${TAG}. Bring the file's Figma tab to the front and run scripts/react-to-figma-driver.js there through the Desktop Bridge.`); });
+  .listen(PORT, host, () => { if (++up === 2) console.log(`plan: ${rows.length} set(s), tag ${TAG}. Bring the file's Figma tab to the front and press "Connect and run" in the repository's plugin (React to Figma runner), or run scripts/react-to-figma-driver.js there through the Desktop Bridge.`); });
 process.on('SIGINT', () => finish('interrupted'));   // a driver that died mid-program cannot be shown to have ended: void
