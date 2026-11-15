@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
+import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -152,6 +152,33 @@ test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the de
     assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
     if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
   }
+});
+
+test('absolute-in-containing-block: an absolute element whose parent is not its containing block moves to the ancestor that is', () => {
+  const el = (tag: string, classes: string[], style: Record<string, string>, nodes: unknown[] = []) =>
+    ({ tag, classes, style, pseudo: {}, nodes: nodes.map((n) => (typeof n === 'string' ? { t: 'text', v: n } : { t: 'el', el: n })) }) as any;
+  const names = (n: any): unknown => [n.classes[0] ?? n.tag, ...n.nodes.filter((k: any) => k.t === 'el').map((k: any) => names(k.el))];
+  // A positioned field wrapper: the text box, then a static 0-wide holder whose absolute badge is inset from the wrapper.
+  const tree = (holder: Record<string, string> = {}) => el('div', ['wrapper'], { position: 'relative', display: 'flex' }, [
+    el('textarea', ['field'], { 'flex-grow': '1' }),
+    el('div', ['holder'], { width: '0px', ...holder }, [el('div', ['badge'], { position: 'absolute', left: '1164px', top: '12px', right: '16px' }, [el('span', ['dot'], {})])]),
+    el('div', ['rule'], { position: 'absolute', left: '0px' }),
+  ]);
+  const on = tree();
+  assert.equal(liftToContainingBlock(on), 1);
+  assert.deepEqual(names(on), ['wrapper', ['field'], ['holder'], ['badge', ['dot']], ['rule']]);
+  // An ancestor between them that clips, hides or fades what it draws keeps the element where it is.
+  for (const holder of [{ 'overflow-x': 'hidden' }, { display: 'none' }, { opacity: '0.5' }, { visibility: 'hidden' }] as Record<string, string>[]) {
+    const r = tree(holder);
+    assert.equal(liftToContainingBlock(r), 0, JSON.stringify(holder));
+    assert.deepEqual(names(r), ['wrapper', ['field'], ['holder', ['badge', ['dot']]], ['rule']]);
+  }
+  // A holder that is itself positioned is the containing block; no ancestor in the tree is one: nothing moves.
+  assert.equal(liftToContainingBlock(tree({ position: 'relative' })), 0);
+  const bare = tree();
+  bare.style.position = 'static';
+  assert.equal(liftToContainingBlock(bare), 0);
+  assert.deepEqual(names(bare), ['wrapper', ['field'], ['holder', ['badge', ['dot']]], ['rule']]);
 });
 
 test('closed-select-draws-selected-label: a closed single select draws its selected label, never its options', () => {
