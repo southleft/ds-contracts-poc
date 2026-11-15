@@ -31,3 +31,18 @@ test('mixed FIXED/HUG planes receive a minimum only on the absolute HUG plane',(
  assert.ok(entries?.some(e=>e.value==='0px'));
  assert.ok(!entries?.some(e=>e.value==='12px'));
 });
+
+test('profile convention empty-hug-keeps-extent: a HUG root plane with no visible children keeps its drawn extent as its minimum',()=>{
+ const variant=(state:string,children:unknown[])=>({name:'state='+state,type:'COMPONENT',bbox:{width:124,height:48},fill:{hex:'e8e8e8'},
+  layout:{mode:'VERTICAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},children});
+ const text={name:'Label',type:'TEXT',text:{characters:'Label',fontSize:14,fontWeight:400,lineHeight:18,fontFamily:'Inter',textAutoResize:'WIDTH_AND_HEIGHT'},fill:{hex:'161616'},localGeometry:{transform:[[1,0,0],[0,1,0]],localSize:{width:124,height:48}}};
+ const read=(conventions?:string[])=>proposeFromDump({setName:'EmptyPlane',type:'COMPONENT_SET',propertyDefinitions:{state:{type:'VARIANT',defaultValue:'enabled',variantOptions:['enabled','skeleton']}},
+  variants:[variant('enabled',[text]),variant('skeleton',[])]} as any,{corpus,contractIdByName:new Map(),mintUnbound:true,fileKey:'fixture',projectionMode:'reviewable-inversion',conventions} as any);
+ const minimum=(p:ReturnType<typeof read>,axis:string)=>p.mintedTokens?.entries.filter(e=>e.usageSites.some(site=>site.includes(axis))).map(e=>e.value).sort();
+ const off=read(),offContract=ContractSchema.parse(off.contract);
+ assert.equal(offContract.anatomy.root.tokens?.['min-width'],undefined);assert.equal(offContract.anatomy.root.tokens?.['min-height'],undefined);
+ const on=read(['empty-hug-keeps-extent']),c=ContractSchema.parse(on.contract);
+ assert.equal(c.anatomy.root.literals?.width,'fit-content');assert.equal(c.anatomy.root.literals?.height,'fit-content');
+ assert.deepEqual(minimum(on,'min-width'),['0px','124px']);assert.deepEqual(minimum(on,'min-height'),['0px','48px']);
+ assert.ok(on.notes.some(note=>note.includes('empty-hug-keeps-extent')));
+});
