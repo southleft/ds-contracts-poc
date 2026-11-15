@@ -168,7 +168,7 @@ test('absolute-in-containing-block: an absolute element whose parent is not its 
   assert.equal(liftToContainingBlock(on), 1);
   assert.deepEqual(names(on), ['wrapper', ['field'], ['holder'], ['badge', ['dot']], ['rule']]);
   // An ancestor between them that clips, hides or fades what it draws keeps the element where it is.
-  for (const holder of [{ 'overflow-x': 'hidden' }, { display: 'none' }, { opacity: '0.5' }, { visibility: 'hidden' }]) {
+  for (const holder of [{ 'overflow-x': 'hidden' }, { display: 'none' }, { opacity: '0.5' }, { visibility: 'hidden' }] as Record<string, string>[]) {
     const r = tree(holder);
     assert.equal(liftToContainingBlock(r), 0, JSON.stringify(holder));
     assert.deepEqual(names(r), ['wrapper', ['field'], ['holder', ['badge', ['dot']]], ['rule']]);
