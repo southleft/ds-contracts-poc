@@ -55,11 +55,14 @@
  *  its containing block, the nearest positioned or transformed ancestor; where that is not its parent, the element is
  *  drawn in that ancestor (moved there in the captured tree, just after the child it sat under), unless an ancestor
  *  between them hides, clips or fades it. Off, it is drawn in its parent at insets measured from another box. */
+/** empty-hug-keeps-extent (Figma to React proposal): a root HUG axis whose variant draws no visible children keeps its
+ *  observed extent as that plane's minimum, as a HUG plane with only absolutely placed children already does; Figma
+ *  draws an empty hug frame at its stored size, where CSS content sizing gives 0. Off, the plane renders 0 wide or tall. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'absolute-in-containing-block'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
