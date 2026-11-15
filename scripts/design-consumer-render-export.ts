@@ -10,6 +10,9 @@ export type RenderExportProof = {
   overlapPixels:number; paintedOverlapPixels:number;
   /** Set only where `ring` left the box's outer pixel row or column out, on each side where paint reaches past it. */
   edgeRing?:{sides:Side[]; pixels:number};
+  /** Set only by the anchor route's text-excluded proof (design-consumer-render-anchor.ts): the overlap pixels inside
+   *  visible text render bounds were left out of the offset proof, never out of the score. */
+  textExcluded?:{rule:'visible-text-render-bounds-v1'; boxes:FrameBox[]; pixels:number; minPaintedPixels:number; horizontalChanges:number; verticalChanges:number};
 };
 type Side='left'|'top'|'right'|'bottom';
 export function qualifyRenderBoundsExport(before:any,after:any,nodeId:string,layoutBytes:Buffer,renderBytes:Buffer,ring=false):
@@ -24,7 +27,9 @@ export function qualifyRenderBoundsExport(before:any,after:any,nodeId:string,lay
   };
   if(!spans(layout,frame.layout))return {refused:'layout-export-span-mismatch'};
   if(!spans(render,frame.render))return {refused:'render-export-span-mismatch'};
-  const offset={x:frame.layout.x-frame.render.x,y:frame.layout.y-frame.render.y};
+  // The offset is read in the same 1/64 px unit as the spans above (framing-v2's FIGMA_BOUNDS_UNIT_PX): float32 noise such
+  // as 2.99951171875 for 3 is not a fractional origin. Where the raw offset is a whole number the reading is unchanged.
+  const lu=figmaBoundsInLayoutUnits(frame.layout),ru=figmaBoundsInLayoutUnits(frame.render),offset={x:lu.x-ru.x,y:lu.y-ru.y};
   if(!Number.isInteger(offset.x)||!Number.isInteger(offset.y))return {refused:'render-export-fractional-origin'};
   const left=Math.max(0,-offset.x),top=Math.max(0,-offset.y);
   const right=Math.min(layout.width,render.width-offset.x),bottom=Math.min(layout.height,render.height-offset.y);

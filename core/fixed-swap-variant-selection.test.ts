@@ -111,3 +111,20 @@ test('selected-root allocation rejects wrong identities, paths, parent layout, b
  const mutations:Array<(f:ReturnType<typeof selectedAllocationFixture>)=>void>=[f=>{f.host.instanceRootOverrides.localSize={width:221,height:104};},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.hostId='other';},f=>{f.host.fixedSwaps.Payload.observedInstances[0].path=[1];},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.componentKey='other';},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.parentLayout.padding[1]=1;},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.sizeBound=true;},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.layoutGrow=1;},f=>{f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot.fields.push('fills');},f=>{delete f.host.fixedSwaps.Payload.observedInstances[0].selectedRoot;}];
  for(const mutate of mutations){const f=selectedAllocationFixture();mutate(f);assert('issue'in f.qualify(),String(mutate));}
 });
+test('observed-swap-default-drawn: an uncarried fixed swap to another component clears the child fallback; the declared default keeps it',async()=>{
+ const {emitReact}=await import('./emit-react.js'),{createFigmaEngine}=await import('./emit-figma-script.js');
+ const child=ContractSchema.parse({...base,id:'test.glyph-host',name:'GlyphHost',props:[],anatomy:{root:{parts:{icon:{slot:{name:'glyph',bindings:{figma:{property:'Payload'}},renderDefaultAnatomy:true},parts:{mark:{literals:{width:'8px',height:'8px'}}}}}}},bindings:anchors('glyph-host-key','glyph-host-main','GlyphHost')});
+ const childSet:DumpSet={setName:'GlyphHost',type:'COMPONENT_SET',key:'glyph-host-key',nodeId:'glyph-host-set',propertyDefinitions:{'Payload#1:2':{type:'INSTANCE_SWAP',defaultValue:'default-main'}},variants:[{name:'Default',type:'COMPONENT',nodeId:'glyph-host-main',componentKey:'glyph-host-main-key'}]};
+ const propose=(swapId:string,conventions:string[])=>{const caller:DumpSet={setName:'Caller',type:'COMPONENT_SET',key:'caller-key',nodeId:'caller-set',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'One',variantOptions:['One']}},
+  variants:[{name:'Mode=One',type:'COMPONENT',nodeId:'caller-0',variantProperties:{Mode:'One'},layout:layout as any,children:[{name:'GlyphHost',type:'INSTANCE',nodeId:'use-0',instanceOf:'GlyphHost',instanceKey:'glyph-host-key',
+   instanceGeometry:{nodeId:'use-0',componentId:'glyph-host-main',transform:[[1,0,0],[0,1,0]],localSize:{width:16,height:16}},fixedSwaps:{Payload:{id:swapId,key:swapId+'-key'}}} as any]}]};
+  const p=proposeFromDump(caller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['GlyphHost',child.id]]),contractIdByKey:new Map([['glyph-host-key',child.id]]),contractsById:new Map([[child.id,asMinimalChildContract(child)]]),fixedSwapOwnerRoots:fixedSwapOwnerRoots([childSet]),conventions});
+  const c=ContractSchema.parse(p.contract);return {p,c,use:walkAnatomy(c).find(w=>w.part.component?.id===child.id)!.part};};
+ const other=propose('other-main',['observed-swap-default-drawn']);
+ assert.deepEqual(other.use.component!.clearedSlots,['glyph']);assert(other.p.notes.some(n=>n.includes('slot cleared so the child')));
+ const scope=new Map([[child.id,child],[other.c.id,other.c]]);
+ assert.match(emitReact(other.c,{contracts:scope,icons:new Map(),tokens:new Set()}).tsx,/<GlyphHost[^>]* glyph=\{null\}/);
+ assert.throws(()=>createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(other.c,scope),/FIGMA_COMPONENT_CLEARED_SLOT_UNSUPPORTED/);
+ assert.equal(propose('default-main',['observed-swap-default-drawn']).use.component!.clearedSlots,undefined,'the declared default keeps the fallback');
+ assert.equal(propose('other-main',[]).use.component!.clearedSlots,undefined,'convention off: unchanged');
+});

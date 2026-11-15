@@ -6216,7 +6216,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
   for (const { name, part, path } of walkAnatomy(contract)) {
     if (part.slot?.bindings?.figma?.textTemplate && part !== contract.anatomy.root)
       errors.push('FIGMA_SLOT_TEXT_TEMPLATE_ROOT_REQUIRED');
-    if ((part.component?.contentSlot !== undefined || part.component?.contentSlots !== undefined) && part.parts === undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: contentSlot requires caller parts');
+    if ((part.component?.contentSlot !== undefined || part.component?.contentSlots !== undefined) && part.parts === undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: contentSlot requires caller parts'); if (part.component?.clearedSlots) errors.push(`FIGMA_COMPONENT_CLEARED_SLOT_UNSUPPORTED: ${name} clears ${part.component.clearedSlots.join(', ')}; a native instance cannot hold an empty swap, and drawing the child's default there would substitute another glyph`);
     if (part.component && (path.length === 1 || part.repeat)) {
       if (part.parts !== undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: caller parts require a non-repeated nested instance');
       if (part.component.initialProps) errors.push('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializers require a non-repeated nested instance');
