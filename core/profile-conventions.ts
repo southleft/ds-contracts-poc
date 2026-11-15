@@ -65,6 +65,10 @@
 /** bound-visibility-override-is-property (Figma to React proposal): a host's raw `visible` override on a node whose
  *  visibility is bound to a component BOOLEAN property, where the same host sets that property to the same value, is
  *  carried by that property and is not an independent visibility demand. Off, it is a demand of its own. */
+/** text-box-stacks-block-children (React to Figma writer): a text part with child parts and no layout of its own is a
+ *  CSS block container whose text is an inline run ahead of those parts; where the writer's block-flow rule stacks such
+ *  a box (block-level children, no two inline runs side by side), its line sits above them, as a list item's text sits
+ *  above its nested list. Off, the text and its child parts share one row. */
 /** mixed-scale-rect-keeps-placement (Figma to React proposal): an absolutely placed plain rect whose uses mix SCALE
  *  with other constraints keeps each use's captured placement, each with its own constraint, as an all-SCALE rect
  *  already does. Off, the mixed part is refused SCALE placement and renders in flow. */
@@ -72,7 +76,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
-  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property', 'mixed-scale-rect-keeps-placement'] as const;
+  'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
+  'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

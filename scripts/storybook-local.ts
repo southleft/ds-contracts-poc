@@ -96,7 +96,8 @@ export async function serveStorybook(staticDir: string, port = STORYBOOK_PORT): 
 
 /** The same server in a child process, for a caller whose spawnSync would block its own event loop (the runner). */
 export function serveInChild(staticDir: string): Promise<{ url: string; stop: () => void }> {
-  const child = spawn(process.execPath, ['--import', 'tsx', fileURLToPath(import.meta.url), '--serve', path.resolve(staticDir)], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const self = fileURLToPath(import.meta.url);   // this file under tsx, or its bundle in the installed CLI
+  const child = spawn(process.execPath, [...(self.endsWith('.ts') ? ['--import', 'tsx'] : []), self, '--serve', path.resolve(staticDir)], { stdio: ['ignore', 'pipe', 'pipe'] });
   return new Promise((resolve, reject) => {
     let err = '';
     child.stderr.on('data', (d) => { err += d; });
@@ -105,7 +106,7 @@ export function serveInChild(staticDir: string): Promise<{ url: string; stop: ()
   });
 }
 
-if (process.argv[1] && /storybook-local\.ts$/.test(process.argv[1])) {
+if (process.argv[1] && /storybook-local\.[jt]s$/.test(process.argv[1])) {
   const argv = process.argv.slice(2), flag = (n: string) => { const i = argv.indexOf(n); return i > -1 && argv[i + 1] && !argv[i + 1]!.startsWith('--') ? argv[i + 1] : undefined; };
   const fail = (e: unknown) => { console.error('✖ ' + (e instanceof Error ? e.message : String(e))); process.exit(1); };
   if (flag('--serve') && argv.length === 2) serveStorybook(flag('--serve')!).then((s) => console.log(`serving ${s.url}`), fail);
