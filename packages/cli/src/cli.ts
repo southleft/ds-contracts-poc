@@ -9,6 +9,7 @@
 import { CliUsageError } from './lib.js';
 import { ContractViolationError } from '../../../scripts/generate-components.js';
 import { figmaToReactCommand } from './commands/figma-to-react.js';
+import { reactToFigmaCommand } from './commands/react-to-figma.js';
 import { initCommand } from './commands/init.js';
 import { onboardCommand, promoteCommand } from './commands/onboard.js';
 import { extractCommand } from './commands/extract.js';
@@ -37,6 +38,10 @@ Commands:
                                               The check needs a Chromium:
                                               npx playwright-core install chromium. Node 20.19+ (20.x) or 22.12+,
                                               macOS and Linux.
+  react-to-figma --out <dir>                  this React library's components → contracts and,
+          [--storybook-dir <library>]        with --file-key, Figma programs: builds and serves the
+          [--profile <profile.json>]         library's own Storybook, reads it in the pinned reader
+          [--file-key <key>]                 (Docker), one line per component, refusals named.
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
           [--components a,b,c]                adapter/styling, create or reuse a sandbox (a PATH
           [--workspace <dir>] [--force]       is npm-packed to a tarball so its deps really
@@ -153,6 +158,18 @@ ds-contracts <command> --help prints that command's section from this reference.
 `;
 
 const COMMAND_HELP: Record<string, string> = {
+  'react-to-figma': `ds-contracts react-to-figma — this React library's components → contracts and Figma programs
+
+  react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>]
+    [--only <titles.json>] [--file-key <figma file key>]
+
+Builds the library's own Storybook (default: the current directory) with its own
+storybook binary and serves it locally; a library without one is refused by name.
+Reads every story in the pinned reader (needs Docker), then writes each component's
+contract and, with --file-key, the Figma programs that write it into that file. One
+line per component: written, with its variants, or refused, with every reason.
+--profile names the system's components, axes and conventions (a drafted one works
+here and counts nowhere). The plugin's "React to Figma runner" writes into Figma.`,
   'figma-to-react': `ds-contracts figma-to-react — a Figma component set → a checked React package
 
   figma-to-react --url <figma component-set link> --out <dir>
@@ -320,6 +337,7 @@ async function main(): Promise<number> {
     case 'propose-pr':
     case 'migrate':
     case 'figma-to-react':
+    case 'react-to-figma':
       if (wantsHelp(rest)) {
         console.log(COMMAND_HELP[command] ?? USAGE);
         return 0;
@@ -349,6 +367,8 @@ async function main(): Promise<number> {
       return migrateCommand(rest);
     case 'figma-to-react':
       return figmaToReactCommand(rest);
+    case 'react-to-figma':
+      return reactToFigmaCommand(rest);
     default:
       console.error(`Unknown command "${command}"\n\n${USAGE}`);
       return 2;
