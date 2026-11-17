@@ -61,7 +61,7 @@
 import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
+import { fetchFigmaForCheck } from './design-consumer-network.js';
 
 export interface Box { x: number; y: number; width: number; height: number }
 /** Color channels and alpha, each 0..1. */
@@ -533,7 +533,7 @@ export type FigmaContentResult =
  *  receipt as figma-content.json, with the response's sha256. */
 export async function fetchFigmaContent(fileKey: string, ids: string[], token: string | undefined, out: string,
   get: (url: string, init: { headers: Record<string, string> }) => Promise<{ ok: boolean; status: number; arrayBuffer(): Promise<ArrayBuffer> }> =
-    (url, init) => fetchFigmaApi(url, init.headers['X-Figma-Token'])): Promise<FigmaContentResult> {
+    (url, init) => fetchFigmaForCheck(url, init.headers['X-Figma-Token'])): Promise<FigmaContentResult> {
   if (!token) return { status: 'unavailable', reason: 'no token' };
   if (!ids.length || ids.some(id => !id)) return { status: 'unavailable', reason: 'variant node ids unavailable' };
   const response = await get(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`, { headers: { 'X-Figma-Token': token } });

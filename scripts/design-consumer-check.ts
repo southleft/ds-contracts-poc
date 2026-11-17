@@ -90,9 +90,8 @@ import { readStateAxes, type InteractionState } from '../core/interaction-state-
 import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type Box, type CaseContent, type DomContent } from './design-consumer-content.js';
 import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
-import { retryConsumerRead } from './design-consumer-network.js';
+import { fetchFigmaForCheck, retryConsumerRead } from './design-consumer-network.js';
 import { retryCapture } from './capture-retry.js';
-import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 /** No animation or transition on a measured page: a Figma design is one still frame. Shared with the Storybook reader. */
@@ -602,7 +601,7 @@ export function pinnedVersionHeld(got: string | undefined, pinned: string | unde
 }
 
 async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: string, cases: Case[], version?: string) {
-  const response = await fetchFigmaApi(pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, version), token);
+  const response = await fetchFigmaForCheck(pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, version), token);
   if (!response.ok) return `HTTP ${response.status}`;
   const body = await response.json() as any;
   pinnedVersionHeld(body.version, version);
@@ -641,7 +640,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   // can omit overflowing descendants and falsely report only layout bounds.
   const boundsUrl = pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`, version);
   const readBounds = async (phase: string) => {
-    const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaApi(boundsUrl, token));
+    const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaForCheck(boundsUrl, token));
     if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
     const bytes = Buffer.from(await response.arrayBuffer());
     writeFileSync(path.join(out, `figma-bounds-${phase}.json`), bytes, {flag:'wx'});
@@ -654,7 +653,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     render:{fileKey,version:before.version,nodeIds:[],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false},
   };
   const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true&version=${encodeURIComponent(before.version)}`;
-  const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaApi(url, token));
+  const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaForCheck(url, token));
   if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
   const files: Record<string, string> = {}, images: Record<string,Buffer> = {};
@@ -679,7 +678,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   if(overflow.length){
     exportRequests.render.nodeIds=[...overflow];
     await new Promise(resolve=>setTimeout(resolve,15000));
-    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaApi(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false&version=${encodeURIComponent(before.version)}`,token));
+    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaForCheck(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false&version=${encodeURIComponent(before.version)}`,token));
     if(!renderResponse.ok)for(const id of overflow)renderErrors[id]=`figma-render-export-unavailable:HTTP ${renderResponse.status}`;
     else {const renderBody=await renderResponse.json() as {images:Record<string,string|null>};
       const downloads=await mapExportDownloads(overflow,async id=>{const location=renderBody.images?.[id];if(!location)return {error:'figma-render-export-missing'};
