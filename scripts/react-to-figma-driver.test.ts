@@ -73,6 +73,11 @@ test('a driver whose bytes differ from the pin is refused by name and never run:
   assert.match(posted[0]!.summary!, /^r2f-driver-hash-mismatch: the driver on port 9232 has sha256 [0-9a-f]{12}…, not this plugin's pinned [0-9a-f]{12}… — nothing was run\./);
 });
 
+test('the installed CLI\'s close carries its own summary, and the plugin shows it as it stands', async () => {
+  assert.deepEqual((await run({ claim: { session: 's1' }, steps: [{ done: true, ok: false, summary: '1 of 2 set(s) written; each failure is named in the terminal' }] })).posted.at(-1),
+    { type: 'r2f-done', ok: false, summary: 'React to Figma: 1 of 2 set(s) written; each failure is named in the terminal' });
+});
+
 test('with no runner serving, the plugin says so by name and runs nothing', async () => {
   const posted: Array<{ type: string; ok?: boolean; summary?: string }> = [];
   const server = createServer(); await new Promise<void>((r) => server.listen(0, '127.0.0.1', r));
