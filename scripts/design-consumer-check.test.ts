@@ -1017,3 +1017,15 @@ test('a matched part is compared with the graphic it matched, each in its own bo
   assert.equal(partGlyph({ a: figma, b: figma } as any, { a: figma, b: figma } as any, { x: 0, y: 0 }, { ...part, width: 0.000003 }, { box: member, graphic: member }).verdict, 'unmeasured', 'a line is not compared by its box');
   assert.equal(variantVerdicts({ problems: ['content-wrong-glyph:k:part:Chevron:24 of 28 px'], images: { cases: [] }, content: { cases: [] } }, [{ key: 'k', figmaName: 'K' }]).variants[0].verdict, 'fail');
 });
+
+import { observeVariantCells } from './design-consumer-check.js';
+test('a variant cell that renders no element is observed as such at once, never waited on for a locator timeout', async () => {
+  const browser = await chromium.launch(); try { const page = await browser.newPage();
+    page.setDefaultTimeout(30000);
+    await page.setContent('<div data-cell="drawn"><b style="color:red">x</b></div><div data-cell="empty"></div>');
+    const started = Date.now(), seen = await observeVariantCells(page, ['drawn', 'empty']);
+    assert.equal(seen.empty, 'no-element');
+    assert.notEqual(seen.drawn, 'no-element');
+    assert.ok(Date.now() - started < 10000, 'answered without waiting out a timeout');
+  } finally { await browser.close(); }
+});

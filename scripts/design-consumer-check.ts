@@ -491,9 +491,11 @@ export async function observeVariantPaint(cell: import('playwright-core').Locato
   }
   return JSON.stringify([fingerprint, pixels]);
 }
-async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
+export async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
   const observations: Record<string, string> = {};
-  for (const key of keys) observations[key] = await observeVariantPaint(page.locator(`[data-cell="${key}"] > *`).first());
+  // A cell that renders no element is observed as such at once: a locator would wait its whole timeout for one.
+  for (const key of keys) { const cell = page.locator(`[data-cell="${key}"] > *`).first();
+    observations[key] = await cell.count() ? await observeVariantPaint(cell) : 'no-element'; }
   return observations;
 }
 /** Keyboard-modality focus on the component's own focus target: the root when
@@ -565,7 +567,18 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}' + NO_MOTION + '</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
-  writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
+  // One cell's throw stays in its cell (2026-11-18): the variant probe sets an axis value on every cell, a combination a
+  // presence table has no row for throws, and with no boundary React unmounted every cell, so each later read waited
+  // 30 s for an element that never came back. The boundary adds no DOM; the error is still reported, by cell, through
+  // the console (consumer-runtime-error), and the cell renders again once its props change.
+  writeFileSync(path.join(consumer, 'main.jsx'), `import { Component, useState } from 'react';
+class CellBoundary extends Component {
+  constructor(props) { super(props); this.state = { error: null, reset: props.reset }; }
+  static getDerivedStateFromError(error) { return { error }; }
+  static getDerivedStateFromProps(props, state) { return props.reset === state.reset ? null : { error: null, reset: props.reset }; }
+  componentDidCatch(error) { console.error('consumer-cell-error ' + this.props.cell + ': ' + (error && error.message)); }
+  render() { return this.state.error ? <span data-consumer-cell-error="" /> : this.props.children; }
+}
 import { createRoot } from 'react-dom/client';
 import { ${component} } from ${JSON.stringify(lib.name)};
 ${fonts.length ? "import './fonts/fonts.css';" : ''}
@@ -581,7 +594,7 @@ function App() {
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
       if (scopedVariantOverride?.keys.includes(cell.key)) Object.assign(props, scopedVariantOverride.props);
-      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
+      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><CellBoundary cell={cell.key} reset={JSON.stringify(props)}><${component} {...props} /></CellBoundary></div>;
     })}
   </div>;
 }
