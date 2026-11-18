@@ -1000,6 +1000,7 @@ async function runReactToFigma() {
     const end = await runScript(driver);
     if (end && end.refused) return done(false, 'React to Figma: the runner refused: ' + end.refused);
     if (end && end.stop) return done(false, 'React to Figma: the runner stopped: ' + end.stop + ' (see its stop.json)');
+    if (end && typeof end.summary === 'string') return done(end.ok === true, 'React to Figma: ' + end.summary);   // ds-contracts react-to-figma --write
     done(true, 'React to Figma: the runner closed and sealed the run.');
   } catch (e) {
     done(false, 'React to Figma: the driver threw: ' + String(e && e.message ? e.message : e));

@@ -12,28 +12,32 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { CliUsageError, flagString, parseFlags } from '../lib.js';
+import { servePrograms, type ServedSet, type SetOutcome } from './react-to-figma-serve.js';
 
 export const REACT_TO_FIGMA_USAGE =
-  'react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>] [--only <titles.json>] [--file-key <figma file key>]';
+  'react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>] [--only <titles.json>] [--file-key <figma file key> [--write]]';
 
-export interface ReactToFigmaRun { out: string; storybookDir?: string; storybook?: string; profile?: string; only?: string; fileKey?: string }
+export interface ReactToFigmaRun { out: string; storybookDir?: string; storybook?: string; profile?: string; only?: string; fileKey?: string; write?: true }
 
 export function parseReactToFigmaArgs(argv: string[]): ReactToFigmaRun {
-  const p = parseFlags(argv, { value: ['out', 'storybook-dir', 'storybook', 'profile', 'only', 'file-key'] });
+  const p = parseFlags(argv, { value: ['out', 'storybook-dir', 'storybook', 'profile', 'only', 'file-key'], bool: ['write'] });
   if (p.positionals.length) throw new CliUsageError(`react-to-figma takes no positional arguments (got ${p.positionals.join(' ')}); usage: ${REACT_TO_FIGMA_USAGE}`);
   const out = flagString(p, 'out'), dir = flagString(p, 'storybook-dir'), url = flagString(p, 'storybook');
   if (!out) throw new CliUsageError(`react-to-figma needs --out <dir>; usage: ${REACT_TO_FIGMA_USAGE}`);
   if (dir && url) throw new CliUsageError('react-to-figma takes --storybook-dir or --storybook, not both');
   const fileKey = flagString(p, 'file-key');
   if (fileKey && !/^[A-Za-z0-9]+$/.test(fileKey)) throw new CliUsageError(`--file-key is a Figma file key (letters and digits), got ${fileKey}`);
+  if (p.flags.get('write') && !fileKey) throw new CliUsageError('--write needs --file-key <the Figma file to write into>');
   const pick = (k: string, v: string | undefined) => (v ? { [k]: v } : {});
-  return { out, ...(url ? { storybook: url } : { storybookDir: dir ?? '.' }), ...pick('profile', flagString(p, 'profile')), ...pick('only', flagString(p, 'only')), ...pick('fileKey', fileKey) };
+  return { out, ...(url ? { storybook: url } : { storybookDir: dir ?? '.' }), ...pick('profile', flagString(p, 'profile')), ...pick('only', flagString(p, 'only')), ...pick('fileKey', fileKey), ...(p.flags.get('write') ? { write: true as const } : {}) };
 }
 
 /** What the verb runs: the Storybook build and server, and one bundled step as its own node process. */
 export interface ReactToFigmaSteps {
   storybook(dir: string, out: string): Promise<{ url: string; sha256: string; stop: () => void }>;
   step(script: 'storybook-reader.js' | 'storybook-contracts.js', args: string[]): { status: number | null; output: string };
+  /** --write: serve the programs to the plugin until its driver posts the last result. */
+  serve(sets: ServedSet[], fileKey: string, log: (l: string) => void): Promise<SetOutcome[]>;
 }
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -48,6 +52,7 @@ export const bundledSteps: ReactToFigmaSteps = {
     const r = spawnSync(process.execPath, [bundled(script), ...args], { encoding: 'utf8', maxBuffer: 1 << 28 });
     return { status: r.status, output: `${r.stdout ?? ''}${r.stderr ?? ''}${r.error ? String(r.error) : ''}` };
   },
+  serve: (sets, fileKey, log) => servePrograms(sets, fileKey, readFileSync(bundled('react-to-figma-driver.js'), 'utf8'), { log }),
 };
 
 type Row = { subject: string; refusals?: string[]; captured?: string; setName?: string; variants?: number | null; contract?: string };
@@ -94,6 +99,15 @@ export async function reactToFigmaCommand(argv: string[], steps: ReactToFigmaSte
     if (!existsSync(reportFile)) throw Error(`react-to-figma-contracts-failed: exit ${contracts.status}, no report (log ${path.join(out, 'contracts.log')})`);
     for (const line of reportLines(JSON.parse(readFileSync(reportFile, 'utf8')), run.fileKey)) log(line);
     log(`  contracts: ${path.join(out, 'contracts', 'contracts')}${run.fileKey ? `; programs: ${path.join(out, 'contracts', 'figma')}` : ''}; report: ${reportFile}`);
-    return 0;
+    if (!run.write) return 0;
+    stop(); stop = () => {};   // the Storybook is read; only the programs are served from here
+    const rows = (JSON.parse(readFileSync(reportFile, 'utf8')).components as Array<{ setName?: string; contract?: string }>).filter((c) => c.setName && c.contract);
+    const program = (c: { contract?: string }, part: string) => readFileSync(path.join(out, 'contracts', 'figma', `${c.contract!.slice(c.contract!.indexOf('.') + 1)}.${part}.js`), 'utf8');
+    if (!rows.length) { log('nothing to write: no component was written as a Figma program'); return 1; }
+    const outcomes = await steps.serve(rows.map((c) => ({ name: c.setName!, tokens: program(c, '1-variables'), component: program(c, '2-component') })), run.fileKey!, log);
+    writeFileSync(path.join(out, 'figma-write.json'), JSON.stringify({ fileKey: run.fileKey, sets: outcomes }, null, 2) + '\n');
+    const written = outcomes.filter((o) => o.written).length;
+    log(`${written} of ${outcomes.length} set(s) written into Figma file ${run.fileKey}${written < outcomes.length ? `; ${outcomes.length - written} failed, each named above` : ''}`);
+    return written === outcomes.length ? 0 : 1;
   } finally { stop(); }
 }
