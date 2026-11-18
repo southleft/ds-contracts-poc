@@ -302,6 +302,15 @@ export function variantPropValue(prop: { type?: unknown }, key: string): unknown
  *  their code props and canonical values their declared code values
  *  (bindings.code.values, e.g. canonical "null" → null). Case keys and the
  *  receipt keep the canonical spelling. */
+/** Whether a combination of variant props has a row in every presence table the contract's anatomy carries, compared
+ *  as the generated component compares it (an omitted prop at its declared default, each value as a string, or null). */
+export function withinPresenceTables(contract: { props: any[]; anatomy?: unknown }, props: Record<string, unknown>): boolean {
+  const tables: Array<{ props: string[]; rows: Array<{ values: Array<string | null> }> }> = [];
+  const walk = (node: unknown) => { if (!node || typeof node !== 'object') return; const t = (node as any).presenceByCombination; if (t) tables.push(t); for (const v of Object.values(node)) walk(v); };
+  walk(contract.anatomy);
+  const valueOf = (name: string) => { const v = props[name] !== undefined ? props[name] : contract.props.find(p => p.name === name)?.default; return v == null ? null : String(v); };
+  return tables.every(t => { const values = t.props.map(valueOf); return t.rows.some(r => r.values.every((v, i) => v === values[i])); });
+}
 export function mountProps(contract: { props: any[] }, props: Record<string, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const [name, value] of Object.entries(props)) {
@@ -1159,13 +1168,18 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         const values = variantValues(prop);
         const baseline = await observeVariantCells(page, cases.map(c => c.key));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
-        await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
+        // Inside the contract's presence tables (reviewer, 2026-11-18), as the declared-domain path stays inside its drawn
+        // variants: a combination a table has no row for is no variant the design has, and its refusal measures the probe.
+        const outside = cases.filter(c => !withinPresenceTables(contract, { ...c.props, [prop.name]: target })).map(c => c.key);
+        const override = mountProps(contract, { [prop.name]: target }), inside = cases.filter(c => !outside.includes(c.key)).map(c => c.key);
+        if (outside.length) await page.evaluate(scoped => (window as any).__consumer.setScopedVariantOverride(scoped), { keys: inside, props: override });
+        else await page.evaluate(next => (window as any).__consumer.setVariantOverride(next), override);
         const switched = await observeVariantCells(page, cases.map(c => c.key));
-        await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
-        const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
+        await page.evaluate(scoped => scoped ? (window as any).__consumer.setScopedVariantOverride(null) : (window as any).__consumer.setVariantOverride(null), outside.length > 0);
+        const shouldChange = cases.filter(c => !outside.includes(c.key) && c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
         const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
-        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert });
+        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert, ...(outside.length ? { outsidePresenceTables: outside } : {}) });
         if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
       }
       }
