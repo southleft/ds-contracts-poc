@@ -49,6 +49,24 @@
       },
       {
         "part": "root",
+        "channel": "position",
+        "value": "absolute",
+        "when": {
+          "prop": "modalType",
+          "equals": "modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "absolute",
+        "when": {
+          "prop": "modalType",
+          "equals": "alert"
+        }
+      },
+      {
+        "part": "root",
         "channel": "text-align",
         "value": "left"
       },
@@ -397,8 +415,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 710,
-      "cellsEqual": 672,
-      "pctEqual": 94.64788732394366,
+      "cellsEqual": 674,
+      "pctEqual": 94.92957746478874,
       "rowsFullyEqual": 0,
       "rows": 12
     },
@@ -424,7 +442,7 @@
       "mintedLeavesUnfolded": 98,
       "baseBindings": 184,
       "stateBindings": 0,
-      "codeOnlyChannels": 13,
+      "codeOnlyChannels": 12,
       "overflowBindings": 0,
       "folds": 170
     },
@@ -433,18 +451,18 @@
         "key": "modal__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "alert__default",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
         "key": "non-modal__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 12,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "alert__default",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 12,
@@ -487,10 +505,6 @@
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.position",
-        3
-      ],
       [
         "root.box-sizing",
         2
@@ -546,6 +560,10 @@
       [
         "root.max-width",
         1
+      ],
+      [
+        "root.position",
+        1
       ]
     ],
     "namedLosses": [
@@ -554,7 +572,6 @@
       "code-only: root.box-sizing — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.max-height — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.scale — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -578,7 +595,7 @@
       {
         "key": "modal__default",
         "channelsCompared": 251,
-        "channelsEqual": 238,
+        "channelsEqual": 239,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -588,12 +605,6 @@
             "channel": "box-sizing",
             "ours": "border-box",
             "theirs": "content-box"
-          },
-          {
-            "part": "root",
-            "channel": "position",
-            "ours": "static",
-            "theirs": "absolute"
           },
           {
             "part": "root",
@@ -717,7 +728,7 @@
           {
             "part": "root",
             "channel": "position",
-            "ours": "static",
+            "ours": "relative",
             "theirs": "fixed"
           },
           {
@@ -810,7 +821,7 @@
       {
         "key": "alert__default",
         "channelsCompared": 251,
-        "channelsEqual": 238,
+        "channelsEqual": 239,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -820,12 +831,6 @@
             "channel": "box-sizing",
             "ours": "border-box",
             "theirs": "content-box"
-          },
-          {
-            "part": "root",
-            "channel": "position",
-            "ours": "static",
-            "theirs": "absolute"
           },
           {
             "part": "root",

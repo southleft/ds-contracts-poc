@@ -705,8 +705,10 @@ jobs:
         env: { CI_LANE_STEP: prep }
         run: npx tsx .github/scripts/resolve-browsers.ts
       # Recreate every normal readiness prerequisite from this exact source.
+      # Source reference validity below runs whatever the predecessors did, and typechecks core files that import
+      # @ds-contracts/schema; gating this build on the predecessors left it unbuilt (TS2307) every night they failed.
       - name: build schema for readiness
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' && steps.predecessors.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/schema run build
       - name: build core for readiness
