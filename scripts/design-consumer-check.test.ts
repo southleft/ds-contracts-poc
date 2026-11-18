@@ -1029,3 +1029,16 @@ test('a variant cell that renders no element is observed as such at once, never 
     assert.ok(Date.now() - started < 10000, 'answered without waiting out a timeout');
   } finally { await browser.close(); }
 });
+
+import { withinPresenceTables } from './design-consumer-check.js';
+test('the variant probe asks only for combinations every presence table has a row for, an omitted prop at its default', () => {
+  const contract = { props: [{ name: 'state', default: 'enabled' }, { name: 'textFilled', default: false }, { name: 'size', default: 'md' }],
+    anatomy: { root: { parts: {
+      label: { presenceByCombination: { props: ['state', 'textFilled'], rows: [{ values: ['enabled', 'false'], present: true }, { values: ['enabled', 'true'], present: true }, { values: ['skeleton', 'false'], present: false }] } },
+      hint: { parts: { inner: { presenceByCombination: { props: ['state'], rows: [{ values: ['enabled'], present: true }, { values: ['skeleton'], present: true }] } } } } } } } };
+  assert.equal(withinPresenceTables(contract, { state: 'enabled', textFilled: true }), true);
+  assert.equal(withinPresenceTables(contract, { state: 'skeleton', textFilled: true }), false, 'skeleton is drawn only unfilled');
+  assert.equal(withinPresenceTables(contract, { state: 'skeleton' }), true, 'textFilled omitted: its default, false');
+  assert.equal(withinPresenceTables(contract, { state: 'focus', textFilled: false }), false, 'the nested table has no focus row');
+  assert.equal(withinPresenceTables({ props: [], anatomy: { root: {} } }, { anything: 1 }), true, 'no table: every combination');
+});
