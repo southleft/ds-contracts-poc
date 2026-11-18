@@ -327,7 +327,7 @@ test('a rate limit that outlasts the retries is an unmade measurement, never a f
   assert.equal(variantVerdicts({ ...receipt, problems: [checkFailureProblem('vite build failed')] }, cases).verdict, 'fail');
 });
 
-test('Figma API calls in the check retry 429s the way the importer does', async () => {
+test('the importer-policy Figma GET (fetchFigmaApi; the checks use fetchFigmaForCheck) retries 429s', async () => {
   const waits: number[] = [], seen: string[] = [];
   const answer = (statuses: Array<[number, string | null]>) => {
     let i = 0;

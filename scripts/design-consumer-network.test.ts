@@ -11,3 +11,21 @@ test('HTTP refusals and parsing errors stay failures without retries',async()=>{
 test('exhausted transport retains cause and stage, never supplies successful data',async()=>{
  let calls=0;const error=new TypeError('terminated');await assert.rejects(retryConsumerRead('render:123',async()=>{calls++;throw error;},{sleep:async()=>{},report:()=>{}}),e=>e instanceof Error&&e.message==='render:123:transport-retries-exhausted'&&e.cause===error);assert.equal(calls,3);
 });
+
+import {CHECK_429_POLICY,fetchFigmaForCheck} from './design-consumer-network.js';
+test('the check waits out a 429: Retry-After, never under a doubling floor, at most six retries; a wait over the cap is refused at once',async()=>{
+ const run=async(answers:Array<[number,string|null]>)=>{const waits:number[]=[],tokens:string[]=[];let i=0;
+  const response=await fetchFigmaForCheck('https://api.figma.com/v1/x','tok',{sleep:async ms=>{waits.push(ms/1000);},report:()=>{},
+   fetchImpl:async(_url,init)=>{tokens.push(init.headers['X-Figma-Token']);const [status,after]=answers[Math.min(i++,answers.length-1)];return {status,headers:{get:(n:string)=>n==='retry-after'?after:null}};}});
+  return {status:response.status,waits,calls:tokens.length,tokens};};
+ // F→R run 10: four 429s with a 2 to 4 s Retry-After, then the limit lifts. The importer's three retries gave up here.
+ const lifted=await run([[429,'2'],[429,'4'],[429,'3'],[429,'4'],[200,null]]);
+ assert.deepEqual(lifted,{status:200,waits:[5,10,20,40],calls:5,tokens:['tok','tok','tok','tok','tok']});
+ assert.deepEqual((await run([[429,'30'],[200,null]])).waits,[30],'a longer Retry-After is honored');
+ assert.deepEqual((await run([[429,null],[429,'']  ,[200,null]])).waits,[5,10],'absent or empty: the floor');
+ const exhausted=await run([[429,'1']]);
+ assert.deepEqual([exhausted.status,exhausted.waits],[429,[5,10,20,40,60,60]],'six retries, then the 429 is returned and refused by name');
+ assert.equal(exhausted.waits.length,CHECK_429_POLICY.retries);
+ assert.deepEqual(await run([[429,String(CHECK_429_POLICY.maxWaitSeconds+1)]]),{status:429,waits:[],calls:1,tokens:['tok']},'a wait over the cap is never slept');
+ assert.deepEqual((await run([[500,null]])),{status:500,waits:[],calls:1,tokens:['tok']},'only a 429 is waited out');
+});
