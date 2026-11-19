@@ -74,6 +74,17 @@ export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readon
   return true;
 }
 
+/** Profile convention capture-marked-subject: each case is captured from the element the reader marked as the
+ *  instance's top (`data-ds-reader-subject`), the element its reference was drawn from, as a selected instance already
+ *  is. Off, a case with no selected instance is captured from the cell's first drawn child, which differs from the
+ *  subject when the story draws something else before the instance in the same parent. */
+export function captureRootPath(own: number | undefined, conventions: ReadonlySet<string>): string[] | undefined {
+  return own !== undefined || conventions.has('capture-marked-subject') ? ['[data-ds-reader-subject]'] : undefined;
+}
+/** True when the cell's first drawn child, the root the capture reads without the convention, is not the marked subject. */
+export const SUBJECT_IS_NOT_STAGE_ROOT = `(() => { ${SHADOW_HELPERS_JS}
+  return shStageRoot(document.querySelector('[data-ds-reader-cell]')) !== document.querySelector('[data-ds-reader-subject]'); })()`;
+
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
  *  block, the nearest ancestor that is positioned or transformed. Where that ancestor is not its parent, the element is
  *  moved in the captured tree into that ancestor, just after the child it sat under, so it is drawn in the box its insets
@@ -382,7 +393,7 @@ async function main() {
       try {
         const { contract: seeded, drawn, combos, space } = seed(c);
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
-        const captures: Capture[] = [];
+        const captures: Capture[] = [], rootMoved: string[] = [];
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -392,25 +403,28 @@ async function main() {
           const own = k.story.instance;
           if (own !== undefined && !await page.evaluate(`${SELECT_INSTANCE}(${own})`)) { refusals.push(`instance-not-drawn:${k.id}`); continue; }
           if (!await page.evaluate(MARK_SUBJECT)) { refusals.push(`not-one-element:${k.id}`); continue; }
-          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, own === undefined ? undefined : ['[data-ds-reader-subject]'],
+          const at = captureRootPath(own, conventions);
+          if (own === undefined && at && await page.evaluate(SUBJECT_IS_NOT_STAGE_ROOT)) rootMoved.push(k.id);
+          const raw = await page.evaluate(captureJs('[data-ds-reader-cell]', IDENTITY_CLASSES, undefined, at,
             true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           let generated: (() => void) | null | undefined;
           if (conventions.has('generated-text-carried')) { // read and matched before any element moves
-            const at = own === undefined ? undefined : ['[data-ds-reader-subject]'], tags = await page.evaluate(NUMBER_ELEMENTS(at)) as string[];
+            const tags = await page.evaluate(NUMBER_ELEMENTS(at)) as string[]; // the capture's own root
             generated = carryGeneratedText(root, tags, await generatedText(cdp));
             await page.evaluate(NUMBER_ELEMENTS(at, true));
             if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
           }
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
-          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(own === undefined ? undefined : ['[data-ds-reader-subject]'])) as never))
+          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never))
             refusals.push(`svg-viewbox-unmatched:${k.id}`);
           if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
           generated?.();
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
+        if (rootMoved.length) row.rootMovedToSubject = rootMoved;
         if (captures.length !== c.cases.length) continue;
         // The in-page control elements and the browser's own baseline, as the computed sweep records them.
         await page.evaluate(`(() => { for (const t of ${JSON.stringify(CONTROL_TAGS)}) { const stage = document.createElement('div'), e = document.createElement(t);
