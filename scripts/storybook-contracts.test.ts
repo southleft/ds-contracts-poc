@@ -227,11 +227,11 @@ test('normal-line-height-as-drawn: a one-line text element whose line-height is 
   const label = el({ ...box, height: '16px' }, [text('AI')]);
   const tree = el({ 'line-height': 'normal', 'font-size': '12px', height: '17px' }, [{ t: 'el', el: label },
     { t: 'el', el: el({ ...box, height: '40px' }, [text('Two lines')]) }, { t: 'el', el: el({ ...box, height: 'auto' }, [text('inline')]) },
-    { t: 'el', el: el({ ...box, 'line-height': '20px', height: '20px' }, [text('px')]) }]);
+    { t: 'el', el: el({ ...box, 'line-height': '20px', height: '20px' }, [text('px')]) }, { t: 'el', el: el({ ...box, height: '1px' }, [text('Hidden')]) }]);
   // The label's content box (16 - 1 px padding) is its one line; the wrapper holds elements, the second box two lines,
-  // the third is inline and the fourth already names a px line height: none of them changes.
+  // the third is inline, the fourth already names a px line height and the fifth is a 1 px clipped box: none changes.
   assert.equal(spellNormalLineHeight(tree), 1);
-  assert.deepEqual(tree.nodes.map((k: any) => k.el.style['line-height']), ['15px', 'normal', 'normal', '20px']);
+  assert.deepEqual(tree.nodes.map((k: any) => k.el.style['line-height']), ['15px', 'normal', 'normal', '20px', 'normal']);
   assert.equal(tree.style['line-height'], 'normal');
 });
 

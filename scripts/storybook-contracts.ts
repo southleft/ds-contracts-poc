@@ -88,15 +88,15 @@ export const SUBJECT_IS_NOT_STAGE_ROOT = `(() => { ${SHADOW_HELPERS_JS}
 /** Profile convention normal-line-height-as-drawn: an element whose computed line-height is `normal` (the font's own
  *  spacing, which no px value names, so its text would take an ancestor's px line height) and which holds one line of
  *  its own text and no elements takes the line height Chromium drew, its content-box height, as a px value. An inline box
- *  (no height), one with element children, and one two or more lines tall (content at least twice its font size) stay as
- *  captured. Returns how many elements changed. */
+ *  (no height), one with element children, one two or more lines tall (content at least twice its font size) and one
+ *  shorter than its font size (a clipped, visually hidden box draws no line) stay as captured. Returns how many changed. */
 export function spellNormalLineHeight(node: CapturedNode): number {
   const s = node.style, px = (k: string) => /^-?\d+(\.\d+)?px$/.test(s[k] ?? '') ? Number.parseFloat(s[k]!) : null;
   const own = node.nodes.some((k) => k.t === 'text' && k.v.trim()) && node.nodes.every((k) => k.t === 'text');
   const edges = s['box-sizing'] === 'border-box' ? ['padding-top', 'padding-bottom', 'border-top-width', 'border-bottom-width'].reduce((a, k) => a + (px(k) ?? 0), 0) : 0;
   const line = (px('height') ?? 0) - edges, size = px('font-size') ?? 0;
   let changed = 0;
-  if (s['line-height'] === 'normal' && own && line > 0 && line < 2 * size) { s['line-height'] = `${+line.toFixed(4)}px`; changed++; }
+  if (s['line-height'] === 'normal' && own && line >= size && line < 2 * size) { s['line-height'] = `${+line.toFixed(4)}px`; changed++; }
   for (const k of node.nodes) if (k.t === 'el') changed += spellNormalLineHeight(k.el);
   return changed;
 }
