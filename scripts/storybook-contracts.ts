@@ -29,6 +29,7 @@ import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxis
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, SELECT_INSTANCE, SHOW, type StoryComponent } from './storybook-reader.js';
+import type { CDPSession } from 'playwright-core';
 
 export interface StoryCase { id: string; story: { id: string; args: Record<string, unknown>; instance?: number }; variant: Record<string, string> }
 export interface DeclaredComponent { subject: string; name: string; axes: string[]; cases: StoryCase[] }
@@ -106,6 +107,67 @@ export function liftToContainingBlock(node: CapturedNode): number {
   }
   for (const k of node.nodes) if (k.t === 'el') moved += liftToContainingBlock(k.el);
   return moved;
+}
+
+/** Profile convention generated-text-carried, the page half: each element under the captured root, in the capture's
+ *  order, is numbered (`data-ds-generated`, removed again with `clear`) so the layout snapshot can name the element each
+ *  ::marker, ::before and ::after belongs to. Returns the elements' tags, which the capture must match. */
+export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear = false) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, tags = [];
+  const walk = (el) => { if (${clear}) el.removeAttribute('data-ds-generated'); else el.setAttribute('data-ds-generated', String(tags.length)); tags.push(el.localName);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return tags; })()`;
+
+export type GeneratedText = { pe: '::marker' | '::before' | '::after'; text: string; x: number; y: number };
+/** What each numbered element's ::marker, ::before and ::after draws, read from Chromium's layout snapshot (the computed
+ *  `content` keeps counter() unresolved; the layout holds the text drawn), at the left of its first glyph and the top of
+ *  its own box; and each numbered element's border-box origin. Page coordinates throughout. */
+export async function generatedText(cdp: CDPSession): Promise<{ texts: Map<number, GeneratedText[]>; boxes: Map<number, number[]> }> {
+  const { documents, strings: s } = await cdp.send('DOMSnapshot.captureSnapshot', { computedStyles: [] });
+  const texts = new Map<number, GeneratedText[]>(), boxes = new Map<number, number[]>();
+  for (const { nodes: n, layout: l } of documents) {
+    const box = new Map<number, number[]>(), runs = new Map<number, Array<[string, number[]]>>();
+    l.nodeIndex.forEach((i, k) => { if (l.text[k]! >= 0) runs.set(i, [...runs.get(i) ?? [], [s[l.text[k]!]!, l.bounds[k]!]]); else if (!box.has(i)) box.set(i, l.bounds[k]!); });
+    const numberOf = (i: number) => { const a = n.attributes?.[i] ?? []; for (let k = 0; k < a.length; k += 2) if (s[a[k]!] === 'data-ds-generated') return Number(s[a[k + 1]!]); };
+    box.forEach((b, i) => { const at = numberOf(i); if (at !== undefined) boxes.set(at, b); });
+    n.pseudoType?.index.forEach((i, k) => {
+      const pe = `::${s[n.pseudoType!.value[k]!]}` as GeneratedText['pe'], at = numberOf(n.parentIndex![i]!), r = runs.get(i);
+      if (!['::marker', '::before', '::after'].includes(pe) || at === undefined || !r) return;
+      texts.set(at, [...texts.get(at) ?? [], { pe, text: r.map(([t]) => t).join(''), x: Math.min(...r.map(([, b]) => b[0]!)), y: (box.get(i) ?? r[0]![1])[1]! }]);
+    });
+  }
+  return { texts, boxes };
+}
+
+/** Profile convention generated-text-carried: the text a ::marker, ::before or ::after draws (a list's numbers and
+ *  bullets) becomes a span in its element (first, or last for ::after), placed absolutely where the page drew it and
+ *  styled as the pseudo-element computes, with no margin or padding. Only text the layout holds is carried; `content`
+ *  is never evaluated here. A pseudo-element that paints a box (background, border or shadow), one whose content or list
+ *  marker is an image (url(), a gradient, image-set()), one that draws only spaces and one with no text in the layout
+ *  stay as they are, refused by name as when the convention is off (`pseudo-content-not-canvas-ink`). The page's elements are matched to the capture as read; the returned function adds
+ *  the spans (after any pass that moves elements). Null, and nothing carried, when the page's elements and the capture's
+ *  differ. */
+export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>): (() => void) | null {
+  const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
+  walk(root);
+  if (els.length !== tags.length || els.some((e, i) => e.tag.toLowerCase() !== tags[i]!.toLowerCase())) return null;
+  const image = /\b(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(/;
+  const adds: Array<() => void> = [], order = ['::marker', '::before', '::after'], sides = ['top', 'right', 'bottom', 'left'], px = (v: string | undefined) => Number.parseFloat(v ?? '') || 0;
+  const paints = (st: Record<string, string>) => !/^(transparent|rgba\(\d+, \d+, \d+, 0\))$/.test(st['background-color'] ?? 'transparent') ||
+    (st['background-image'] ?? 'none') !== 'none' || (st['box-shadow'] ?? 'none') !== 'none' || sides.some((s) => px(st[`border-${s}-width`]) > 0 && (st[`border-${s}-style`] ?? 'none') !== 'none');
+  els.forEach((host, i) => {
+    let lead = 0;
+    const origin = drawn.boxes.get(i);
+    for (const g of [...drawn.texts.get(i) ?? []].sort((a, b) => order.indexOf(a.pe) - order.indexOf(b.pe))) {
+      const st = host.pseudo[g.pe];
+      if (!st || !origin || !g.text.trim() || paints(st) || image.test(st['content'] ?? '') || image.test(st['list-style-image'] ?? '')) continue;
+      const style = { ...st, display: 'block', position: 'absolute', left: `${g.x - origin[0]! - px(host.style['border-left-width'])}px`,
+        top: `${g.y - origin[1]! - px(host.style['border-top-width'])}px`, ...Object.fromEntries(['margin', 'padding'].flatMap((b) => sides.map((s) => [`${b}-${s}`, '0px']))) };
+      const span: CapturedNode = { tag: 'span', classes: [], nodes: [{ t: 'text', v: g.text }], style, pseudo: {} }, at = g.pe === '::after' ? -1 : lead++;
+      adds.push(() => { host.nodes.splice(at < 0 ? host.nodes.length : at, 0, { t: 'el', el: span }); delete host.pseudo[g.pe]; });
+    }
+  });
+  return () => adds.forEach((add) => add());
 }
 
 /** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
@@ -347,10 +409,18 @@ async function main() {
             true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
+          let generated: (() => void) | null | undefined;
+          if (conventions.has('generated-text-carried')) { // read and matched before any element moves
+            const tags = await page.evaluate(NUMBER_ELEMENTS(at)) as string[]; // the capture's own root
+            generated = carryGeneratedText(root, tags, await generatedText(cdp));
+            await page.evaluate(NUMBER_ELEMENTS(at, true));
+            if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
+          }
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
           if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never))
             refusals.push(`svg-viewbox-unmatched:${k.id}`);
           if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
+          generated?.();
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;
