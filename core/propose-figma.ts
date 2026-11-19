@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14612,7 +14612,7 @@ function buildPartFromEvidence(
     if (visibleWhen) part.visibleWhen = visibleWhen;
     invertHiddenVisibility(m, part, ctx, where);
     const rectanglePath=m.occ.every(o=>isExactRectanglePath(o.node));
-    if (isPlainRectShape(m) || rectanglePath) {
+    if (rectPlacementByVariant(m, part, ctx, where)) { /* each variant's own placement */ } else if (isPlainRectShape(m) || rectanglePath) {
       const scalableRect = !rectanglePath && (m.occ.every(o =>
         o.node.shape?.constraints && Object.values(o.node.shape.constraints).includes('SCALE')) || mixedScaleRect(m, ctx, where));
       const capturedGeometry = scalableRect && carryCapturedAbsoluteGeometry(m, part, tokens, ctx,
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20672,4 +20672,54 @@ function clearUncarriedSwapFallback(m: Merged, component: Record<string, unknown
   component.clearedSlots = [...cleared].sort();
   ctx.notes.push(`${where}: uncarried fixed swap to a component other than the child's declared default — slot cleared so the child's observed default does not stand in for it (${different.join('; ')}); it draws nothing there`);
   return carried;
+}
+
+/** Profile convention rect-placement-by-variant (core/profile-conventions.ts). A RECTANGLE part placed absolutely in some
+ * variants (DumpShape x/y with constraints) and in flow in others (no shape), where the placement is a complete function
+ * of one declared axis, gets each value's own placement: absolute values `position: absolute` with the captured offsets
+ * (normalizeAbsoluteGeometry, so SCALE stays a share of the parent), in-flow values their flow size; width and height ride
+ * per-value literals. An in-flow use must be its auto-layout parent's only visible child, and a FILL axis needs that
+ * parent FIXED on it, so FILL is exactly the parent's extent. Anything else declines and the shape path runs as before. */
+function rectPlacementByVariant(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): boolean {
+  if (!ctx.rectPlacement || !m.occ.length || !m.occ.every(o => o.node.type === 'RECTANGLE' && !o.node.shape?.rotation)) return false;
+  const placed = (o: Occ) => o.node.shape?.kind === 'rect' && o.node.shape.x !== undefined && o.node.shape.y !== undefined && !!o.node.shape.constraints;
+  if (!m.occ.some(placed) || !m.occ.some(o => !o.node.shape)) return false;
+  const literal = (v: string | undefined) => v !== undefined && literalValueOk('width', v);
+  const boxOf = (o: Occ): {position: boolean; left?: string; top?: string; width: string; height: string} | undefined => {
+    const sh = o.node.shape;
+    if (sh) {
+      if (!placed(o) || sh.right === undefined || sh.bottom === undefined) return undefined;
+      let css: Record<string, string>;
+      try { css = normalizeAbsoluteGeometry({box: {x: sh.x!, y: sh.y!, width: sh.width, height: sh.height, right: sh.right, bottom: sh.bottom, constraints: sh.constraints as never},
+        parent: {width: sh.x! + sh.width + sh.right, height: sh.y! + sh.height + sh.bottom}, border: parentCssBorderInsets(o, ctx)}).css; } catch { return undefined; }
+      return css.right === 'auto' && css.bottom === 'auto' && [css.left, css.top, css.width, css.height].every(literal)
+        ? {position: true, left: css.left, top: css.top, width: css.width!, height: css.height!} : undefined;
+    }
+    const p = o.parent?.node, l = p?.layout;
+    if (!l || l.mode === 'GRID' || (p!.children ?? []).filter(c => c.hidden !== true).length !== 1) return undefined;
+    const fixedOn = (horizontal: boolean) => ((l.mode === 'HORIZONTAL') === horizontal ? l.primarySizing : l.counterSizing) === 'FIXED';
+    const dim = (fill: boolean | undefined, fixed: number | undefined, horizontal: boolean) =>
+      fill ? (fixedOn(horizontal) ? '100%' : undefined) : typeof fixed === 'number' ? `${fixed}px` : undefined;
+    const width = dim(o.node.fillWidth, o.node.fixedSize?.width, true), height = dim(o.node.fillHeight, o.node.fixedSize?.height, false);
+    return literal(width) && literal(height) ? {position: false, width: width!, height: height!} : undefined;
+  };
+  const boxes = m.occ.map(boxOf);
+  if (boxes.some(b => !b)) return false;
+  const axis = ctx.axes.find(a => {
+    const seen = new Map<string, string>();
+    return m.occ.every((o, i) => { const v = axisValuesOf(o.variant)[a.property], key = JSON.stringify(boxes[i]);
+      if (v === undefined || !a.values.includes(v) || seen.has(v) && seen.get(v) !== key) return false; seen.set(v, key); return true; });
+  });
+  if (!axis) return false;
+  const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [], map: Record<string, Record<string, string>> = {};
+  for (const [i, o] of m.occ.entries()) {
+    const value = axisValue(axis, axisValuesOf(o.variant)[axis.property]!), b = boxes[i]!;
+    if (map[value]) continue;
+    map[value] = {width: b.width, height: b.height};
+    if (b.position) stylesWhen.push({prop: axis.propName, equals: value, styles: {position: 'absolute', left: b.left!, top: b.top!}});
+  }
+  if (stylesWhen.length) part.stylesWhen = stylesWhen;
+  part.literalsByProp = [...((part.literalsByProp as unknown[] | undefined) ?? []), {prop: axis.propName, map}];
+  ctx.notes.push(`${where}: absolute in some "${axis.property}" values and in flow in others — each value keeps its own placement and size (profile convention rect-placement-by-variant)`);
+  return true;
 }

@@ -604,3 +604,24 @@ test('profile convention mixed-scale-rect-keeps-placement: a plain rect mixing S
  const react=emitReact(c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(primitives).keys()),tokenValues:tokens});
  assert.match(react.css,/top: 37\.5%/);assert.match(react.css,/top: 2\.5px/);
 });
+test('profile convention rect-placement-by-variant: a fill absolute in one phase and in flow in others keeps each phase\'s placement',async()=>{
+ const fill=(extra:Record<string,unknown>)=>({name:'Fill',type:'RECTANGLE',fill:{hex:'0f62fe'},...extra});
+ const row=(primarySizing:string,counterSizing:string)=>({mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing,counterSizing});
+ const variants=[
+  {name:'Phase=Quarter',type:'COMPONENT',bbox:{width:220,height:8},fill:{hex:'c6c6c6'},children:[fill({shape:{kind:'rect',width:55,height:8,x:0,y:0,right:165,bottom:0,constraints:{horizontal:'SCALE',vertical:'SCALE'}}})]},
+  {name:'Phase=Empty',type:'COMPONENT',bbox:{width:220,height:8},fill:{hex:'c6c6c6'},layout:row('FIXED','AUTO'),children:[fill({fixedSize:{width:0.0001,height:8}})]},
+  {name:'Phase=Full',type:'COMPONENT',bbox:{width:220,height:8},fill:{hex:'c6c6c6'},layout:row('FIXED','FIXED'),children:[fill({fillWidth:true,fillHeight:true})]}];
+ const set={setName:'Fill track',type:'COMPONENT_SET',propertyDefinitions:{Phase:{type:'VARIANT',defaultValue:'Quarter',variantOptions:['Quarter','Empty','Full']}},variants} as unknown as DumpSet;
+ const read=(conventions:string[])=>proposeFromDump(structuredClone(set),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),fileKey:'fixture',projectionMode:'reviewable-inversion',conventions});
+ const part=(p:ReturnType<typeof read>)=>walkAnatomy(ContractSchema.parse(p.contract)).find(w=>w.name==='Fill')!.part;
+ assert.equal(part(read([])).literalsByProp,undefined,'convention off: unchanged');
+ const on=read(['rect-placement-by-variant']),c=ContractSchema.parse(on.contract),fillPart=part(on);
+ assert.deepEqual(fillPart.literalsByProp,[{prop:'phase',map:{quarter:{width:'25%',height:'100%'},empty:{width:'0.0001px',height:'8px'},full:{width:'100%',height:'100%'}}}]);
+ assert.deepEqual(fillPart.stylesWhen,[{prop:'phase',equals:'quarter',styles:{position:'absolute',left:'0%',top:'0%'}}]);
+ const scope=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,scope,errors,new Map());assert.deepEqual(errors,[]);
+ const tree=on.mintedTokens!.tree,output=emitReact(c,{contracts:scope,icons:new Map(),tokens:tokenInventoryFromJson([tree])}),browser=await chromium.launch();
+ try{const page=await browser.newPage(),render=await mountGenerated(page,c.name,output.tsx,mintedTokenCss(tree)+output.css);
+  for(const [phase,box] of [['quarter',[0,0,55,8]],['empty',[0,0,0,8]],['full',[0,0,220,8]]] as const){await render({phase});
+   assert.deepEqual(await page.locator('#root [class$=_Fill]').evaluate(el=>{const r=el.getBoundingClientRect(),o=el.parentElement!.getBoundingClientRect();return [r.x-o.x,r.y-o.y,Math.round(r.width),r.height];}),[...box],phase);}
+ }finally{await browser.close();}
+});

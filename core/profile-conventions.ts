@@ -72,12 +72,17 @@
 /** mixed-scale-rect-keeps-placement (Figma to React proposal): an absolutely placed plain rect whose uses mix SCALE
  *  with other constraints keeps each use's captured placement, each with its own constraint, as an all-SCALE rect
  *  already does. Off, the mixed part is refused SCALE placement and renders in flow. */
+/** rect-placement-by-variant (Figma to React proposal): a rectangle placed absolutely in some variants and in flow in
+ *  others, where which one is a function of one declared axis, takes each variant's own placement: absolute values get
+ *  position absolute with their captured geometry (SCALE stays proportional), in-flow values their flow size. Off, the
+ *  first absolute variant's box stands in for every variant. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
-  'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement'] as const;
+  'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
+  'rect-placement-by-variant'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
