@@ -302,8 +302,10 @@ export function seed(c: DeclaredComponent) {
  * variant like literal text ('' where the field draws none). */
 export function carryVariantText(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
   textAt: (comboKey: string, part: string) => string | null, fieldAt: (comboKey: string, part: string) => { value: string; placeholder: string } | null = () => null,
-  rootTextByAxis = false): string[] {
-  const refused: string[] = [];
+  rootTextByAxis = false, textOwnsPart = false): string[] {
+  const refused: string[] = [], names = new Set<string>();
+  const named = (parts: Record<string, Part> | undefined): void => { for (const [n, p] of Object.entries(parts ?? {})) { names.add(n); named(p.parts as never); } };
+  named(contract.anatomy.root.parts as Record<string, Part> | undefined);
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
     const field = (part.element === 'input' || part.element === 'textarea') && part.text === undefined;
     const fields = field ? combos.flatMap((k) => { const f = fieldAt(k.key, name); return f ? [{ v: k.axisValues, ...f }] : []; }) : [];
@@ -322,7 +324,19 @@ export function carryVariantText(contract: Contract, axes: readonly string[], co
         props.sort((a, b) => axes.indexOf(a) - axes.indexOf(b));
         const rows = [...new Map(drawn.map((r) => { const values = props.map((a) => r.v[a]!); return [JSON.stringify(values), { values, text: r.text }]; })).values()];
         part.textByCombination = { props, rows };
-        const issues = textByCombinationIssues(contract, part, true);
+        let issues = textByCombinationIssues(contract, part, true);
+        // Convention variant-text-owns-its-part: a part whose own text varies, refused only because it also holds child
+        // parts, gives that text to a new first child part (an inline run, as CSS draws it ahead of the children), which
+        // owns the literal and inherits the part's text style. Off, or when that child is refused too, it stays refused.
+        const plain = ['content', 'textByProp', 'component', 'slot', 'repeat', 'icon', 'shape', 'mask', 'visibilityOverrideProp'].every((k) => (part as Record<string, unknown>)[k] === undefined);
+        if (textOwnsPart && !field && plain && issues.join() === 'literal-text-combination-requires-owned-literal' && Object.keys(part.parts ?? {}).length) {
+          let child = `${name}-text`;
+          while (names.has(child)) child += '-run';
+          const run = { text: part.text, textByCombination: part.textByCombination, declared: { display: 'inline' } } as Part, rest = part.parts, text = part.text;
+          part.parts = { [child]: run, ...rest }; delete part.text; delete part.textByCombination;
+          issues = textByCombinationIssues(contract, run, true);
+          if (issues.length) { part.parts = rest; part.text = text; } else names.add(child);
+        }
         if (issues.length) { delete part.textByCombination; refused.push(`per-variant-text-unqualified: ${name}: ${issues.join(',')}`); }
       }
     }
@@ -489,7 +503,8 @@ async function main() {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
-          return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis')));
+          return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis'),
+          conventions.has('variant-text-owns-its-part')));
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
