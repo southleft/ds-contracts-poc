@@ -1436,7 +1436,7 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
 
 /** Instance internals otherwise stay opaque. Retain only the geometry of
  * selected content whose property identity the parent actually controls. */
-function mapSwapInstances(root: RestNode, property: string, ctx: Ctx): DumpFixedSwap['observedInstances'] {
+function mapSwapInstances(root: RestNode, property: string, ctx: Ctx, nodePath = '', drawings?: Array<{path: number[]; root: DumpNode}>): DumpFixedSwap['observedInstances'] {
   if (!root.children) return undefined;
   const found: NonNullable<DumpFixedSwap['observedInstances']> = [];
   const size = (n: RestNode) => n.size && Number.isFinite(n.size.x) && Number.isFinite(n.size.y)
@@ -1447,6 +1447,7 @@ function mapSwapInstances(root: RestNode, property: string, ctx: Ctx): DumpFixed
       if (node.type === 'INSTANCE' && node.componentPropertyReferences?.mainComponent === property) {
         const row: NonNullable<DumpFixedSwap['observedInstances']>[number] = { nodeId: node.id, path: next };
         const drawing=selectedStrokeDrawing(node);if(drawing)row.strokeDrawing=drawing;
+        const drawn=drawings&&observedDrawing(node,ctx,`${nodePath}/[observed fixed swap ${next.join('.')}]`,parent.absoluteBoundingBox??null,parent);if(drawn)drawings!.push({path:next,root:drawn.root});
         if (node.componentId) row.componentId = node.componentId;
         const localSize = size(node), parentSize = size(parent), matrix = node.relativeTransform;
         if (localSize) row.size = localSize;
@@ -2410,7 +2411,8 @@ function mapNode(
         if (typeof def.value === 'string' && def.value !== '') {
           const target = ctx.components.get(def.value);
           const swap: DumpFixedSwap = { id: def.value };
-          const observedInstances = mapSwapInstances(node, key, ctx);
+          const drawn: Array<{path: number[]; root: DumpNode}> = [], observedInstances = mapSwapInstances(node, key, ctx, nodePath, drawn);
+          if (drawn.length) (out.fixedSwapDrawings ??= {})[key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '')] = drawn;
           if (observedInstances !== undefined) swap.observedInstances = observedInstances;
           if (target) {
             swap.name = target.name;
@@ -2645,21 +2647,8 @@ function mapNode(
     // set: keep it as a usage observation (drawing nodes only; no nested
     // instance, text or swap authority), never as the selected main's API.
     // Propose reads it only as an omitted-caller default (observedSwapDefault).
-    count = 1;
-    const drawing = (n: RestNode, depth: number): boolean =>
-      ++count <= 128 && depth <= 8 && ['FRAME', 'GROUP', 'VECTOR', 'BOOLEAN_OPERATION', 'RECTANGLE', 'ELLIPSE'].includes(n.type) &&
-      (n.children ?? []).every(child => drawing(child, depth + 1));
-    if (out.propRefs?.mainComponent !== undefined && (node.children?.length ?? 0) > 0 && node.children!.every(child => drawing(child, 1))) {
-      const before = ctx.report.degradations.length;
-      const root = mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed swap content]`, parentBox, parent);
-      // Only a complete drawing is kept. The dump-wide variables gap
-      // (captureGaps) may remain; any other loss drops the observation.
-      if (ctx.report.degradations.splice(before).every(d => d.code === 'variable-unresolved')) {
-        delete root.abs;
-        delete root.propRefs;
-        out.instanceSwapContent = {root};
-      }
-    }
+    const swapContent = out.propRefs?.mainComponent === undefined ? undefined : observedDrawing(node, ctx, `${nodePath}/[observed swap content]`, parentBox, parent);
+    if (swapContent) out.instanceSwapContent = swapContent;
     if (out.propRefs?.mainComponent === undefined) {
       const observed = observeInstanceVector(node, ctx.components);
       if (observed) {
@@ -3227,4 +3216,23 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   // which happened).
   if (Object.keys(captured).length > 0) dump._variables = captured;
   return { dump, report };
+}
+
+/** What a selected instance draws at this usage (a swap-bound instance of this set, or the instance a host fixes into a
+ * nested child's swap property) is still drawn by the requested set's own response: keep it as a usage observation,
+ * never as the selected main's API. Drawing nodes only (no nested instance, text or swap authority), at most 128 nodes
+ * and 8 levels, and only a complete drawing: the dump-wide variables gap (captureGaps) may remain, any other loss drops
+ * the observation and its degradation rows. */
+function observedDrawing(node: RestNode, ctx: Ctx, nodePath: string, parentBox: {x:number;y:number;width:number;height:number} | null, parent: RestNode | null): {root: DumpNode} | undefined {
+  let count = 1;
+  const drawing = (n: RestNode, depth: number): boolean =>
+    ++count <= 128 && depth <= 8 && ['FRAME', 'GROUP', 'VECTOR', 'BOOLEAN_OPERATION', 'RECTANGLE', 'ELLIPSE'].includes(n.type) &&
+    (n.children ?? []).every(child => drawing(child, depth + 1));
+  if (!(node.children?.length) || !node.children.every(child => drawing(child, 1))) return undefined;
+  const before = ctx.report.degradations.length;
+  const root = mapNode({...node, type: 'FRAME'}, ctx, nodePath, parentBox, parent);
+  if (!ctx.report.degradations.splice(before).every(d => d.code === 'variable-unresolved')) return undefined;
+  delete root.abs;
+  delete root.propRefs;
+  return {root};
 }

@@ -224,3 +224,22 @@ test('a swap-bound instance with no wrapper frame carries the same omitted-calle
   } finally { await browser.close(); }
   assert.equal(swapDefaultSet(undefined, true, [], false, true).slot.renderDefaultAnatomy, undefined, 'off without the convention');
 });
+
+test('a host-fixed swap keeps what its selected instance draws here, beside fixedSwaps: a complete drawing only', () => {
+  const glyph = (id: string, extra: Partial<RestNode> = {}): RestNode => ({ id, name: 'Glyph', type: 'VECTOR', size: { x: 8, y: 8 },
+    relativeTransform: [[1, 0, 2], [0, 1, 2]], absoluteBoundingBox: { x: 2, y: 2, width: 8, height: 8 }, constraints: { horizontal: 'SCALE', vertical: 'SCALE' },
+    fills: [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.1, a: 1 }, boundVariables: { color: { type: 'VARIABLE_ALIAS', id: 'VariableID:0123456789abcdef0123456789abcdef01234567/7:8' } } }],
+    fillGeometry: [{ path: 'M0 0L8 0L8 8L0 8Z', windingRule: 'NONZERO' }], ...extra } as RestNode);
+  const host = (children: RestNode[]): RestNode => ({ ...fixture(), absoluteBoundingBox: { x: 0, y: 0, width: 20.25, height: 16.875 },
+    children: [{ ...leaf('4:1'), absoluteBoundingBox: { x: 1, y: 2, width: 12, height: 12 }, children }] });
+  const hostNode = (node: RestNode) => (mapRestToDump({ name: 'Fixture', nodes: { '1:1': { document: { id: '1:1', name: 'Source', type: 'COMPONENT', children: [node] },
+    components: { '2:0': { name: 'Host', key: 'host-key' }, '3:1': { name: 'Selected', key: 'selected-key' } } } } } as never).dump.Source as DumpSet).variants[0].children![0];
+  const drawn = hostNode(host([glyph('I2:1;4:1;5:1')]));
+  const [entry] = drawn.fixedSwapDrawings!.Content;
+  assert.deepEqual(entry.path, [0]); assert.equal(entry.root.type, 'FRAME'); assert.equal(entry.root.children?.[0]?.type, 'VECTOR');
+  assert.equal(entry.root.abs, undefined); assert.equal(entry.root.propRefs, undefined);
+  assert.doesNotMatch(JSON.stringify(drawn.fixedSwaps), /VariableID|"root"/, 'nothing drawn sits inside fixedSwaps');
+  const text: RestNode = { id: 'I2:1;4:1;5:2', name: 'Label', type: 'TEXT', characters: 'x', size: { x: 4, y: 8 } } as RestNode;
+  assert.equal(hostNode(host([glyph('I2:1;4:1;5:1'), text])).fixedSwapDrawings, undefined, 'text makes the drawing incomplete');
+  assert.equal(hostNode(host([])).fixedSwapDrawings, undefined, 'nothing drawn, nothing kept');
+});
