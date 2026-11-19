@@ -85,6 +85,22 @@ export function captureRootPath(own: number | undefined, conventions: ReadonlySe
 export const SUBJECT_IS_NOT_STAGE_ROOT = `(() => { ${SHADOW_HELPERS_JS}
   return shStageRoot(document.querySelector('[data-ds-reader-cell]')) !== document.querySelector('[data-ds-reader-subject]'); })()`;
 
+/** Profile convention normal-line-height-as-drawn: an element whose computed line-height is `normal` (the font's own
+ *  spacing, which no px value names, so its text would take an ancestor's px line height) and which holds one line of
+ *  its own text and no elements takes the line height Chromium drew, its content-box height, as a px value. An inline box
+ *  (no height), one with element children, and one two or more lines tall (content at least twice its font size) stay as
+ *  captured. Returns how many elements changed. */
+export function spellNormalLineHeight(node: CapturedNode): number {
+  const s = node.style, px = (k: string) => /^-?\d+(\.\d+)?px$/.test(s[k] ?? '') ? Number.parseFloat(s[k]!) : null;
+  const own = node.nodes.some((k) => k.t === 'text' && k.v.trim()) && node.nodes.every((k) => k.t === 'text');
+  const edges = s['box-sizing'] === 'border-box' ? ['padding-top', 'padding-bottom', 'border-top-width', 'border-bottom-width'].reduce((a, k) => a + (px(k) ?? 0), 0) : 0;
+  const line = (px('height') ?? 0) - edges, size = px('font-size') ?? 0;
+  let changed = 0;
+  if (s['line-height'] === 'normal' && own && line > 0 && line < 2 * size) { s['line-height'] = `${+line.toFixed(4)}px`; changed++; }
+  for (const k of node.nodes) if (k.t === 'el') changed += spellNormalLineHeight(k.el);
+  return changed;
+}
+
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
  *  block, the nearest ancestor that is positioned or transformed. Where that ancestor is not its parent, the element is
  *  moved in the captured tree into that ancestor, just after the child it sat under, so it is drawn in the box its insets
@@ -417,6 +433,7 @@ async function main() {
             if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
           }
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          if (conventions.has('normal-line-height-as-drawn')) spellNormalLineHeight(root);
           if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never))
             refusals.push(`svg-viewbox-unmatched:${k.id}`);
           if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
