@@ -130,15 +130,17 @@ export async function generatedText(cdp: CDPSession): Promise<{ texts: Map<numbe
 
 /** Profile convention generated-text-carried: the text a ::marker, ::before or ::after draws (a list's numbers and
  *  bullets) becomes a span in its element (first, or last for ::after), placed absolutely where the page drew it and
- *  styled as the pseudo-element computes, with no margin or padding. A pseudo-element that paints a box (background,
- *  border or shadow) and one that draws only spaces stay as they are. Off, generated text is refused by name
- *  (`pseudo-content-not-canvas-ink`). The page's elements are matched to the capture as read; the returned function adds
+ *  styled as the pseudo-element computes, with no margin or padding. Only text the layout holds is carried; `content`
+ *  is never evaluated here. A pseudo-element that paints a box (background, border or shadow), one whose content or list
+ *  marker is an image (url(), a gradient, image-set()), one that draws only spaces and one with no text in the layout
+ *  stay as they are, refused by name as when the convention is off (`pseudo-content-not-canvas-ink`). The page's elements are matched to the capture as read; the returned function adds
  *  the spans (after any pass that moves elements). Null, and nothing carried, when the page's elements and the capture's
  *  differ. */
 export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>): (() => void) | null {
   const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
   walk(root);
   if (els.length !== tags.length || els.some((e, i) => e.tag.toLowerCase() !== tags[i]!.toLowerCase())) return null;
+  const image = /\b(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(/;
   const adds: Array<() => void> = [], order = ['::marker', '::before', '::after'], sides = ['top', 'right', 'bottom', 'left'], px = (v: string | undefined) => Number.parseFloat(v ?? '') || 0;
   const paints = (st: Record<string, string>) => !/^(transparent|rgba\(\d+, \d+, \d+, 0\))$/.test(st['background-color'] ?? 'transparent') ||
     (st['background-image'] ?? 'none') !== 'none' || (st['box-shadow'] ?? 'none') !== 'none' || sides.some((s) => px(st[`border-${s}-width`]) > 0 && (st[`border-${s}-style`] ?? 'none') !== 'none');
@@ -147,7 +149,7 @@ export function carryGeneratedText(root: CapturedNode, tags: readonly string[], 
     const origin = drawn.boxes.get(i);
     for (const g of [...drawn.texts.get(i) ?? []].sort((a, b) => order.indexOf(a.pe) - order.indexOf(b.pe))) {
       const st = host.pseudo[g.pe];
-      if (!st || !origin || !g.text.trim() || paints(st)) continue;
+      if (!st || !origin || !g.text.trim() || paints(st) || image.test(st['content'] ?? '') || image.test(st['list-style-image'] ?? '')) continue;
       const style = { ...st, display: 'block', position: 'absolute', left: `${g.x - origin[0]! - px(host.style['border-left-width'])}px`,
         top: `${g.y - origin[1]! - px(host.style['border-top-width'])}px`, ...Object.fromEntries(['margin', 'padding'].flatMap((b) => sides.map((s) => [`${b}-${s}`, '0px']))) };
       const span: CapturedNode = { tag: 'span', classes: [], nodes: [{ t: 'text', v: g.text }], style, pseudo: {} }, at = g.pe === '::after' ? -1 : lead++;

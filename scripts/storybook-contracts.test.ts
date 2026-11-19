@@ -187,23 +187,26 @@ test('generated-text-carried: the text a ::marker, ::before or ::after draws bec
   const tree = () => ({ tag: 'ol', classes: [], style: {}, pseudo: {}, nodes: [
     { t: 'el', el: li({ '::marker': { ...clear }, '::after': { ...clear, color: 'red' } }) },
     { t: 'el', el: li({ '::before': { ...clear, 'background-color': 'rgb(0, 0, 0)' } }) },
-    { t: 'el', el: li({ '::before': { ...clear } }) }] }) as any;
-  // Page coordinates: each li's border box, and what its pseudo-elements drew (the third draws only a space).
-  const drawn = { boxes: new Map([[0, [42, 42]], [1, [66, 42]], [2, [66, 62]], [3, [66, 82]]]), texts: new Map([
+    { t: 'el', el: li({ '::before': { ...clear } }) },
+    { t: 'el', el: li({ '::before': { ...clear, content: 'url("dot.png") "x"' } }) }, { t: 'el', el: li({ '::before': { ...clear } }) }] }) as any;
+  // Page coordinates: each li's border box, and what its pseudo-elements drew (the third draws only a space, the fourth
+  // an image and then text; the layout holds no text for the fifth).
+  const drawn = { boxes: new Map([[0, [42, 42]], [1, [66, 42]], [2, [66, 62]], [3, [66, 82]], [4, [66, 102]], [5, [66, 122]]]), texts: new Map([
     [1, [{ pe: '::after' as const, text: '*', x: 120, y: 42 }, { pe: '::marker' as const, text: '1. ', x: 50, y: 42 }]],
-    [2, [{ pe: '::before' as const, text: '2.', x: 42, y: 62 }]], [3, [{ pe: '::before' as const, text: ' ', x: 42, y: 82 }]]]) };
-  const on = tree(), add = carryGeneratedText(on, ['ol', 'li', 'li', 'li'], drawn);
+    [2, [{ pe: '::before' as const, text: '2.', x: 42, y: 62 }]], [3, [{ pe: '::before' as const, text: ' ', x: 42, y: 82 }]],
+    [4, [{ pe: '::before' as const, text: 'x', x: 42, y: 102 }]]]), };
+  const on = tree(), add = carryGeneratedText(on, ['ol', 'li', 'li', 'li', 'li', 'li'], drawn);
   assert.ok(add);
   // Matched as captured, added later: an element another pass moves meanwhile keeps its own spans.
-  const [first, painted, blank] = on.nodes.map((k: any) => k.el);
+  const [first, painted, blank, image, unread] = on.nodes.map((k: any) => k.el);
   on.nodes.reverse();
   add();
   assert.deepEqual(first.nodes.map((k: any) => k.t === 'text' ? k.v : [k.el.nodes[0].v, k.el.style.position, k.el.style.left, k.el.style.top, k.el.style['margin-left']]),
     [['1. ', 'absolute', '-17px', '0px', '0px'], 'Item', ['*', 'absolute', '53px', '0px', '0px']]);
   assert.deepEqual(first.pseudo, {});
   assert.equal(first.nodes[2].el.style.color, 'red');
-  // A pseudo-element that paints a box, and one that draws only spaces, stay as captured.
-  for (const kept of [painted, blank]) { assert.equal(kept.nodes.length, 1); assert.ok(kept.pseudo['::before']); }
+  // A pseudo-element that paints a box, draws only spaces, draws an image or has no text in the layout stays as captured.
+  for (const kept of [painted, blank, image, unread]) { assert.equal(kept.nodes.length, 1); assert.ok(kept.pseudo['::before']); }
   // The page's elements and the capture's differ: nothing is carried.
   const off = tree();
   assert.equal(carryGeneratedText(off, ['ol', 'li', 'li'], drawn), null);
