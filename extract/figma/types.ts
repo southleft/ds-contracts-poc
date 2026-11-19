@@ -691,6 +691,10 @@ export interface DumpNode {
   /** FIXED INSTANCE_SWAP values on this INSTANCE (dump v1.31, additive) —
    *  see DumpFixedSwap. INSTANCE nodes only. */
   fixedSwaps?: Record<string, DumpFixedSwap>;
+  /** What each selected instance of a fixedSwaps property draws here, read from the requested set's own response, by the
+   *  property key and the selected instance's `observedInstances` path: a complete drawing only (drawing nodes, no nested
+   *  instance or text). A usage observation, never the selected main's API; kept beside fixedSwaps, not inside it. */
+  fixedSwapDrawings?: Record<string, Array<{ path: number[]; root: DumpNode }>>;
   /** Auto-layout paint order reversed (dump v1.31, additive): Figma's
    *  itemReverseZIndex. Render-inert unless children overlap; no contract
    *  field (z-index is declared-but-inert in the schema) — NAMED. Captured
