@@ -80,6 +80,9 @@
  *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
  *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
  *  the path reaches past it. */
+/** generated-text-carried (React to Figma contract step): the text a ::marker, ::before or ::after draws (a list's
+ *  numbers and bullets) is read from Chromium's layout, where counter() is resolved, and becomes an absolutely placed span
+ *  in its element at the offset the page drew it. Off, generated text is refused by name and not drawn. */
 /** variant-text-owns-its-part (React to Figma contract step): a part whose own text differs by variant and that also
  *  holds child parts (a list item with its nested list) gives that text to a new first child part, an inline run that
  *  owns the per-variant literal and inherits the part's text style. Off, that part keeps the first variant's text. */
@@ -89,7 +92,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
-  'rect-placement-by-variant', 'svg-viewbox-carried', 'variant-text-owns-its-part'] as const;
+  'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'variant-text-owns-its-part'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
