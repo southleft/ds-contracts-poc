@@ -79,6 +79,25 @@ test('a nested part whose text differs between variants carries each variant\'s 
   assert.deepEqual(carryVariantText(seed({ ...c!, axes: [] }).contract, [], off.combos, at), []); // no options: nothing to carry
 });
 
+test('variant-text-owns-its-part: a part whose own text varies and that holds child parts gives the text to its own part', () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/List', { axes: ['nested'],
+    references: [ref('l--a', { nested: 'false' }), ref('l--b', { nested: 'true' })] })] }).components;
+  const built = () => { const s = seed(c!); s.contract.anatomy.root.parts = { item: { text: 'Review', declared: { display: 'list-item' },
+    parts: { 'item-text': { text: '–' }, sub: { declared: { display: 'block' } } } } } as never; return s; };
+  const at = (key: string, part: string) => part === 'item' ? (key.includes('true') ? 'Prepare' : 'Review') : null;
+  // Off: the item keeps the first variant's text, refused as before.
+  const off = built();
+  assert.deepEqual(carryVariantText(off.contract, c!.axes, off.combos, at), ['per-variant-text-unqualified: item: literal-text-combination-requires-owned-literal']);
+  assert.equal((off.contract.anatomy.root.parts as any).item.text, 'Review');
+  // On: the text moves to a new first child part (a free name), which carries each variant's text; the children follow.
+  const on = built();
+  assert.deepEqual(carryVariantText(on.contract, c!.axes, on.combos, at, undefined, false, true), []);
+  const item = (on.contract.anatomy.root.parts as any).item;
+  assert.deepEqual([item.text, item.textByCombination, Object.keys(item.parts)], [undefined, undefined, ['item-text-run', 'item-text', 'sub']]);
+  assert.deepEqual(item.parts['item-text-run'], { text: 'Review', declared: { display: 'inline' },
+    textByCombination: { props: ['nested'], rows: [{ values: ['false'], text: 'Review' }, { values: ['true'], text: 'Prepare' }] } });
+});
+
 test('a text field carries the text it draws: one placeholder as attrs.placeholder, values per variant, drawn by the Figma engine', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['tone'],
     references: [ref('f--a', { tone: 'success' }), ref('f--a', { tone: 'error' }, { tone: 'error' })] })] }).components;
