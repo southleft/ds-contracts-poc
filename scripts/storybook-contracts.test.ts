@@ -4,7 +4,7 @@ import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -230,6 +230,13 @@ test('generated-text-carried: the text a ::marker, ::before or ::after draws bec
   const off = tree();
   assert.equal(carryGeneratedText(off, ['ol', 'li', 'li'], drawn), null);
   assert.deepEqual(off, tree());
+});
+
+test('capture-marked-subject: every case is captured from the marked subject; off, only a selected instance is', () => {
+  const on = new Set(['capture-marked-subject']), subject = ['[data-ds-reader-subject]'];
+  assert.deepEqual([captureRootPath(undefined, on), captureRootPath(2, on)], [subject, subject]);
+  // Off: the cell's first drawn child (no path), unless the reader selected one of the story's instances.
+  assert.deepEqual([captureRootPath(undefined, new Set()), captureRootPath(0, new Set())], [undefined, subject]);
 });
 
 test('absolute-in-containing-block: an absolute element whose parent is not its containing block moves to the ancestor that is', () => {

@@ -83,6 +83,9 @@
 /** generated-text-carried (React to Figma contract step): the text a ::marker, ::before or ::after draws (a list's
  *  numbers and bullets) is read from Chromium's layout, where counter() is resolved, and becomes an absolutely placed span
  *  in its element at the offset the page drew it. Off, generated text is refused by name and not drawn. */
+/** capture-marked-subject (React to Figma contract step): every case is captured from the element the reader marked as
+ *  the instance's top, the element its reference was drawn from. Off, a case with no selected instance is captured from
+ *  the cell's first drawn child, another element when the story draws one before the instance. */
 /** variant-text-owns-its-part (React to Figma contract step): a part whose own text differs by variant and that also
  *  holds child parts (a list item with its nested list) gives that text to a new first child part, an inline run that
  *  owns the per-variant literal and inherits the part's text style. Off, that part keeps the first variant's text. */
@@ -92,7 +95,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
-  'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'variant-text-owns-its-part'] as const;
+  'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
