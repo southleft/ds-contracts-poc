@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
+import { carryGeneratedText, carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -152,6 +152,32 @@ test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the de
     assert.equal(root.nodes[0].el.style.transform, after, `${tag} ${before}`);
     if (after.startsWith('rotate(')) assert.ok(DECLARED_CHANNELS.transform!.value.test(after), after);
   }
+});
+
+test('generated-text-carried: the text a ::marker, ::before or ::after draws becomes an absolute span in its element', () => {
+  const clear = { 'background-color': 'rgba(0, 0, 0, 0)', 'background-image': 'none', 'box-shadow': 'none', 'border-left-width': '0px', 'margin-left': '-24px' };
+  const li = (pseudo: Record<string, Record<string, string>>) => ({ tag: 'LI', classes: [], style: { 'border-left-width': '1px' }, pseudo, nodes: [{ t: 'text', v: 'Item' }] }) as any;
+  const tree = () => ({ tag: 'ol', classes: [], style: {}, pseudo: {}, nodes: [
+    { t: 'el', el: li({ '::marker': { ...clear }, '::after': { ...clear, color: 'red' } }) },
+    { t: 'el', el: li({ '::before': { ...clear, 'background-color': 'rgb(0, 0, 0)' } }) },
+    { t: 'el', el: li({ '::before': { ...clear } }) }] }) as any;
+  // Page coordinates: each li's border box, and what its pseudo-elements drew (the third draws only a space).
+  const drawn = { boxes: new Map([[0, [42, 42]], [1, [66, 42]], [2, [66, 62]], [3, [66, 82]]]), texts: new Map([
+    [1, [{ pe: '::after' as const, text: '*', x: 120, y: 42 }, { pe: '::marker' as const, text: '1. ', x: 50, y: 42 }]],
+    [2, [{ pe: '::before' as const, text: '2.', x: 42, y: 62 }]], [3, [{ pe: '::before' as const, text: ' ', x: 42, y: 82 }]]]) };
+  const on = tree();
+  assert.equal(carryGeneratedText(on, ['ol', 'li', 'li', 'li'], drawn), true);
+  const [first, painted, blank] = on.nodes.map((k: any) => k.el);
+  assert.deepEqual(first.nodes.map((k: any) => k.t === 'text' ? k.v : [k.el.nodes[0].v, k.el.style.position, k.el.style.left, k.el.style.top, k.el.style['margin-left']]),
+    [['1. ', 'absolute', '-17px', '0px', '0px'], 'Item', ['*', 'absolute', '53px', '0px', '0px']]);
+  assert.deepEqual(first.pseudo, {});
+  assert.equal(first.nodes[2].el.style.color, 'red');
+  // A pseudo-element that paints a box, and one that draws only spaces, stay as captured.
+  for (const kept of [painted, blank]) { assert.equal(kept.nodes.length, 1); assert.ok(kept.pseudo['::before']); }
+  // The page's elements and the capture's differ: nothing is carried.
+  const off = tree();
+  assert.equal(carryGeneratedText(off, ['ol', 'li', 'li'], drawn), false);
+  assert.deepEqual(off, tree());
 });
 
 test('absolute-in-containing-block: an absolute element whose parent is not its containing block moves to the ancestor that is', () => {
