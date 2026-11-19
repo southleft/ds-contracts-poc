@@ -59,16 +59,18 @@ export const SVG_VIEWPORTS = (rootPath?: readonly string[]) => `(() => { ${SHADO
 
 /** Profile convention svg-viewbox-carried: each captured svg takes the viewBox its page authored, in tree order, when it
  *  is square on a square svg box under the default aspect mapping (the form the svg reconstruction reads); any other
- *  svg keeps the viewBox reconstructed from its computed size. False, and nothing attached, when the page and the
+ *  svg keeps the viewBox reconstructed from its computed size. With svg-viewbox-meets-oblong-box (`oblong`), a square
+ *  viewBox on an oblong svg box is taken too: the reconstruction centers its glyph square in the box, as `meet` does. False, and nothing attached, when the page and the
  *  capture disagree on how many svgs there are. */
-export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readonly [string | null, string | null]>): boolean {
+export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readonly [string | null, string | null]>, oblong = false): boolean {
   const svgs: CapturedNode[] = [], walk = (n: CapturedNode) => { if (n.tag === 'svg') svgs.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
   walk(root);
   if (svgs.length !== seen.length) return false;
   svgs.forEach((n, i) => {
     const [vb, aspect] = seen[i]!, box = (vb ?? '').trim().split(/[\s,]+/).map(Number);
     if (box.length === 4 && box.every(Number.isFinite) && box[2]! > 0 && box[2] === box[3] && /^\d+(\.\d+)?px$/.test(n.style['width'] ?? '') &&
-        n.style['width'] === n.style['height'] && ['xMidYMid', 'xMidYMid meet'].includes((aspect ?? 'xMidYMid meet').trim().replace(/\s+/g, ' ')))
+        (n.style['width'] === n.style['height'] || (oblong && /^\d+(\.\d+)?px$/.test(n.style['height'] ?? ''))) &&
+        ['xMidYMid', 'xMidYMid meet'].includes((aspect ?? 'xMidYMid meet').trim().replace(/\s+/g, ' ')))
       n.svgViewport = { viewBox: box as [number, number, number, number], preserveAspectRatio: 'xMidYMid meet' };
   });
   return true;
@@ -431,7 +433,8 @@ async function main() {
             if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
           }
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
-          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never))
+          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never,
+            conventions.has('svg-viewbox-meets-oblong-box')))
             refusals.push(`svg-viewbox-unmatched:${k.id}`);
           if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
           generated?.();

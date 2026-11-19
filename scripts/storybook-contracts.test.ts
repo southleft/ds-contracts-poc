@@ -194,6 +194,15 @@ test('svg-viewbox-carried: each svg takes the viewBox its page authored, in tree
     assert.equal(carrySvgViewports(r, [seen, ['0 0 16 16', null]]), true);
     assert.equal(svgsOf(r)[0].svgViewport, undefined, JSON.stringify(seen));
   }
+  // svg-viewbox-meets-oblong-box: a square viewBox on a 16 x 40 svg (a select's chevron, as tall as its field) is taken
+  // only with the convention; its glyph square is centered at the short side, inside the 40 px square asset.
+  const chevron = () => el('div', {}, [{ t: 'el', el: el('svg', { width: '16px', height: '40px' }, [{ t: 'el', el: el('path', { d: 'path("M 3 5.3 L 13 5.3 L 8 11 Z")' }) }]) }]);
+  const tall = chevron(), wide = chevron();
+  assert.equal(carrySvgViewports(tall, [['0 0 16 16', null]]), true);
+  assert.equal(tall.nodes[0].el.svgViewport, undefined);
+  assert.equal(carrySvgViewports(wide, [['0 0 16 16', null]], true), true);
+  const drawn = reconstructSvg(wide.nodes[0].el, [], 'icon')!;
+  assert.deepEqual([/viewBox="([^"]+)"/.exec(drawn.markup)![1], drawn.size], ['-12 -12 40 40', 40]);
   // The page and the capture disagree on how many svgs there are: nothing is attached.
   const short = tree();
   assert.equal(carrySvgViewports(short, [['0 0 32 32', null]]), false);
