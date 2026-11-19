@@ -23,7 +23,7 @@ import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
-import { captureJs, captureUaControls, CONTROL_TAGS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
+import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
@@ -46,6 +46,31 @@ export function spellSvgRotation(node: CapturedNode): void {
   if (node.tag === 'svg' && m && e === 0 && f === 0 && !(a === 1 && b === 0) && Math.abs(a! - d!) < 1e-4 && Math.abs(b! + c!) < 1e-4 && Math.abs(a! * a! + b! * b! - 1) < 1e-3)
     node.style['transform'] = `rotate(${+((Math.atan2(b!, a!) * 180) / Math.PI).toFixed(3)}deg)`;
   for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
+}
+
+/** Profile convention svg-viewbox-carried: the viewBox and preserveAspectRatio attributes of each svg under the captured
+ *  root, in the capture's own tree order (open shadow roots and slots as it walks them, svg metadata skipped). */
+export const SVG_VIEWPORTS = (rootPath?: readonly string[]) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
+  const walk = (el) => { if (el.localName === 'svg') out.push([el.getAttribute('viewBox'), el.getAttribute('preserveAspectRatio')]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
+
+/** Profile convention svg-viewbox-carried: each captured svg takes the viewBox its page authored, in tree order, when it
+ *  is square on a square svg box under the default aspect mapping (the form the svg reconstruction reads); any other
+ *  svg keeps the viewBox reconstructed from its computed size. False, and nothing attached, when the page and the
+ *  capture disagree on how many svgs there are. */
+export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readonly [string | null, string | null]>): boolean {
+  const svgs: CapturedNode[] = [], walk = (n: CapturedNode) => { if (n.tag === 'svg') svgs.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
+  walk(root);
+  if (svgs.length !== seen.length) return false;
+  svgs.forEach((n, i) => {
+    const [vb, aspect] = seen[i]!, box = (vb ?? '').trim().split(/[\s,]+/).map(Number);
+    if (box.length === 4 && box.every(Number.isFinite) && box[2]! > 0 && box[2] === box[3] && /^\d+(\.\d+)?px$/.test(n.style['width'] ?? '') &&
+        n.style['width'] === n.style['height'] && ['xMidYMid', 'xMidYMid meet'].includes((aspect ?? 'xMidYMid meet').trim().replace(/\s+/g, ' ')))
+      n.svgViewport = { viewBox: box as [number, number, number, number], preserveAspectRatio: 'xMidYMid meet' };
+  });
+  return true;
 }
 
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
@@ -310,6 +335,8 @@ async function main() {
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(own === undefined ? undefined : ['[data-ds-reader-subject]'])) as never))
+            refusals.push(`svg-viewbox-unmatched:${k.id}`);
           if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
