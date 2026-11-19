@@ -49,6 +49,31 @@ export function spellSvgRotation(node: CapturedNode): void {
   for (const k of node.nodes) if (k.t === 'el') spellSvgRotation(k.el);
 }
 
+/** Profile convention svg-viewbox-carried: the viewBox and preserveAspectRatio attributes of each svg under the captured
+ *  root, in the capture's own tree order (open shadow roots and slots as it walks them, svg metadata skipped). */
+export const SVG_VIEWPORTS = (rootPath?: readonly string[]) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
+  const walk = (el) => { if (el.localName === 'svg') out.push([el.getAttribute('viewBox'), el.getAttribute('preserveAspectRatio')]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
+
+/** Profile convention svg-viewbox-carried: each captured svg takes the viewBox its page authored, in tree order, when it
+ *  is square on a square svg box under the default aspect mapping (the form the svg reconstruction reads); any other
+ *  svg keeps the viewBox reconstructed from its computed size. False, and nothing attached, when the page and the
+ *  capture disagree on how many svgs there are. */
+export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readonly [string | null, string | null]>): boolean {
+  const svgs: CapturedNode[] = [], walk = (n: CapturedNode) => { if (n.tag === 'svg') svgs.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
+  walk(root);
+  if (svgs.length !== seen.length) return false;
+  svgs.forEach((n, i) => {
+    const [vb, aspect] = seen[i]!, box = (vb ?? '').trim().split(/[\s,]+/).map(Number);
+    if (box.length === 4 && box.every(Number.isFinite) && box[2]! > 0 && box[2] === box[3] && /^\d+(\.\d+)?px$/.test(n.style['width'] ?? '') &&
+        n.style['width'] === n.style['height'] && ['xMidYMid', 'xMidYMid meet'].includes((aspect ?? 'xMidYMid meet').trim().replace(/\s+/g, ' ')))
+      n.svgViewport = { viewBox: box as [number, number, number, number], preserveAspectRatio: 'xMidYMid meet' };
+  });
+  return true;
+}
+
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
  *  block, the nearest ancestor that is positioned or transformed. Where that ancestor is not its parent, the element is
  *  moved in the captured tree into that ancestor, just after the child it sat under, so it is drawn in the box its insets
@@ -107,12 +132,14 @@ export async function generatedText(cdp: CDPSession): Promise<{ texts: Map<numbe
  *  bullets) becomes a span in its element (first, or last for ::after), placed absolutely where the page drew it and
  *  styled as the pseudo-element computes, with no margin or padding. A pseudo-element that paints a box (background,
  *  border or shadow) and one that draws only spaces stay as they are. Off, generated text is refused by name
- *  (`pseudo-content-not-canvas-ink`). False, and nothing carried, when the page's elements and the capture's differ. */
-export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>): boolean {
+ *  (`pseudo-content-not-canvas-ink`). The page's elements are matched to the capture as read; the returned function adds
+ *  the spans (after any pass that moves elements). Null, and nothing carried, when the page's elements and the capture's
+ *  differ. */
+export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>): (() => void) | null {
   const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
   walk(root);
-  if (els.length !== tags.length || els.some((e, i) => e.tag.toLowerCase() !== tags[i]!.toLowerCase())) return false;
-  const order = ['::marker', '::before', '::after'], sides = ['top', 'right', 'bottom', 'left'], px = (v: string | undefined) => Number.parseFloat(v ?? '') || 0;
+  if (els.length !== tags.length || els.some((e, i) => e.tag.toLowerCase() !== tags[i]!.toLowerCase())) return null;
+  const adds: Array<() => void> = [], order = ['::marker', '::before', '::after'], sides = ['top', 'right', 'bottom', 'left'], px = (v: string | undefined) => Number.parseFloat(v ?? '') || 0;
   const paints = (st: Record<string, string>) => !/^(transparent|rgba\(\d+, \d+, \d+, 0\))$/.test(st['background-color'] ?? 'transparent') ||
     (st['background-image'] ?? 'none') !== 'none' || (st['box-shadow'] ?? 'none') !== 'none' || sides.some((s) => px(st[`border-${s}-width`]) > 0 && (st[`border-${s}-style`] ?? 'none') !== 'none');
   els.forEach((host, i) => {
@@ -123,11 +150,11 @@ export function carryGeneratedText(root: CapturedNode, tags: readonly string[], 
       if (!st || !origin || !g.text.trim() || paints(st)) continue;
       const style = { ...st, display: 'block', position: 'absolute', left: `${g.x - origin[0]! - px(host.style['border-left-width'])}px`,
         top: `${g.y - origin[1]! - px(host.style['border-top-width'])}px`, ...Object.fromEntries(['margin', 'padding'].flatMap((b) => sides.map((s) => [`${b}-${s}`, '0px']))) };
-      host.nodes.splice(g.pe === '::after' ? host.nodes.length : lead++, 0, { t: 'el', el: { tag: 'span', classes: [], nodes: [{ t: 'text', v: g.text }], style, pseudo: {} } });
-      delete host.pseudo[g.pe];
+      const span: CapturedNode = { tag: 'span', classes: [], nodes: [{ t: 'text', v: g.text }], style, pseudo: {} }, at = g.pe === '::after' ? -1 : lead++;
+      adds.push(() => { host.nodes.splice(at < 0 ? host.nodes.length : at, 0, { t: 'el', el: span }); delete host.pseudo[g.pe]; });
     }
   });
-  return true;
+  return () => adds.forEach((add) => add());
 }
 
 /** Profile convention closed-select-draws-selected-label: a select part the capture read as a closed single select (`label`
@@ -367,14 +394,18 @@ async function main() {
             true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
-          if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
-          if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
-          if (conventions.has('generated-text-carried')) {
+          let generated: (() => void) | null | undefined;
+          if (conventions.has('generated-text-carried')) { // read and matched before any element moves
             const at = own === undefined ? undefined : ['[data-ds-reader-subject]'], tags = await page.evaluate(NUMBER_ELEMENTS(at)) as string[];
-            const drawn = await generatedText(cdp);
+            generated = carryGeneratedText(root, tags, await generatedText(cdp));
             await page.evaluate(NUMBER_ELEMENTS(at, true));
-            if (!carryGeneratedText(root, tags, drawn)) refusals.push(`generated-text-unmatched:${k.id}`);
+            if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
           }
+          if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
+          if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(own === undefined ? undefined : ['[data-ds-reader-subject]'])) as never))
+            refusals.push(`svg-viewbox-unmatched:${k.id}`);
+          if (conventions.has('absolute-in-containing-block')) liftToContainingBlock(root);
+          generated?.();
           captures.push({ combo: `${c.name}:${combos[i]!.key}`, interaction: 'default', root });
         }
         row.captured = `${captures.length} of ${c.cases.length}`;

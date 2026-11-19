@@ -3,7 +3,8 @@ import test from 'node:test';
 import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
-import { carryGeneratedText, carryRootHugEvidence, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
+import { reconstructSvg } from '../extract/computed/anatomy.js';
+import { carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -154,6 +155,32 @@ test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the de
   }
 });
 
+test('svg-viewbox-carried: each svg takes the viewBox its page authored, in tree order, where the reconstruction reads it', () => {
+  const el = (tag: string, style: Record<string, string>, nodes: unknown[] = []) => ({ tag, classes: [], style, pseudo: {}, nodes }) as any;
+  const svg = (size: string, d: string) => el('svg', { width: size, height: size }, [{ t: 'el', el: el('path', { d: `path("${d}")` }) }]);
+  // A 32-unit close glyph (extent 24) drawn on a 16 px svg, and a 16-unit glyph on a 16 px svg, inside a wrapper.
+  const close = 'M 17.4 16 L 24 9.4 L 22.6 8 L 16 14.6 L 9.4 8 L 8 9.4 L 14.6 16 L 8 22.6 L 9.4 24 L 16 17.4 L 22.6 24 L 24 22.6 Z';
+  const tree = () => el('div', {}, [{ t: 'el', el: svg('16px', close) }, { t: 'el', el: el('span', {}, [{ t: 'el', el: svg('16px', 'M 3 3 L 13 13 Z') }]) }]);
+  const svgsOf = (r: any) => [r.nodes[0].el, r.nodes[1].el.nodes[0].el];
+  const viewBoxes = (r: any) => svgsOf(r).map((n: any) => /viewBox="([^"]+)"/.exec(reconstructSvg(n, [], 'icon')!.markup)![1]);
+  // Off: the reconstruction from the computed size bumps the 32-unit glyph to its path extent, a third too large.
+  assert.deepEqual(viewBoxes(tree()), ['0 0 24 24', '0 0 16 16']);
+  // On: the authored viewBox wins.
+  const on = tree();
+  assert.equal(carrySvgViewports(on, [['0 0 32 32', null], ['0 0 16 16', 'xMidYMid meet']]), true);
+  assert.deepEqual(viewBoxes(on), ['0 0 32 32', '0 0 16 16']);
+  // A viewBox the reconstruction cannot read as observed (not square, another aspect mapping, absent) keeps the old one.
+  for (const seen of [['0 0 32 16', null], ['0 0 32 32', 'none'], [null, null]] as const) {
+    const r = tree();
+    assert.equal(carrySvgViewports(r, [seen, ['0 0 16 16', null]]), true);
+    assert.equal(svgsOf(r)[0].svgViewport, undefined, JSON.stringify(seen));
+  }
+  // The page and the capture disagree on how many svgs there are: nothing is attached.
+  const short = tree();
+  assert.equal(carrySvgViewports(short, [['0 0 32 32', null]]), false);
+  assert.deepEqual(svgsOf(short).map((n: any) => n.svgViewport), [undefined, undefined]);
+});
+
 test('generated-text-carried: the text a ::marker, ::before or ::after draws becomes an absolute span in its element', () => {
   const clear = { 'background-color': 'rgba(0, 0, 0, 0)', 'background-image': 'none', 'box-shadow': 'none', 'border-left-width': '0px', 'margin-left': '-24px' };
   const li = (pseudo: Record<string, Record<string, string>>) => ({ tag: 'LI', classes: [], style: { 'border-left-width': '1px' }, pseudo, nodes: [{ t: 'text', v: 'Item' }] }) as any;
@@ -165,9 +192,12 @@ test('generated-text-carried: the text a ::marker, ::before or ::after draws bec
   const drawn = { boxes: new Map([[0, [42, 42]], [1, [66, 42]], [2, [66, 62]], [3, [66, 82]]]), texts: new Map([
     [1, [{ pe: '::after' as const, text: '*', x: 120, y: 42 }, { pe: '::marker' as const, text: '1. ', x: 50, y: 42 }]],
     [2, [{ pe: '::before' as const, text: '2.', x: 42, y: 62 }]], [3, [{ pe: '::before' as const, text: ' ', x: 42, y: 82 }]]]) };
-  const on = tree();
-  assert.equal(carryGeneratedText(on, ['ol', 'li', 'li', 'li'], drawn), true);
+  const on = tree(), add = carryGeneratedText(on, ['ol', 'li', 'li', 'li'], drawn);
+  assert.ok(add);
+  // Matched as captured, added later: an element another pass moves meanwhile keeps its own spans.
   const [first, painted, blank] = on.nodes.map((k: any) => k.el);
+  on.nodes.reverse();
+  add();
   assert.deepEqual(first.nodes.map((k: any) => k.t === 'text' ? k.v : [k.el.nodes[0].v, k.el.style.position, k.el.style.left, k.el.style.top, k.el.style['margin-left']]),
     [['1. ', 'absolute', '-17px', '0px', '0px'], 'Item', ['*', 'absolute', '53px', '0px', '0px']]);
   assert.deepEqual(first.pseudo, {});
@@ -176,7 +206,7 @@ test('generated-text-carried: the text a ::marker, ::before or ::after draws bec
   for (const kept of [painted, blank]) { assert.equal(kept.nodes.length, 1); assert.ok(kept.pseudo['::before']); }
   // The page's elements and the capture's differ: nothing is carried.
   const off = tree();
-  assert.equal(carryGeneratedText(off, ['ol', 'li', 'li'], drawn), false);
+  assert.equal(carryGeneratedText(off, ['ol', 'li', 'li'], drawn), null);
   assert.deepEqual(off, tree());
 });
 
