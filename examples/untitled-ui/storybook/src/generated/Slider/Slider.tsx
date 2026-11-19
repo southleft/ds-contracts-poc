@@ -44,9 +44,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
                 supportingText={false}
                 theme="light"
                 arrow={
-                  label === 'bottomFloating'
+                  globalThis.Object.is(label, 'bottomFloating')
                     ? 'topCenter'
-                    : label === 'topFloating'
+                    : globalThis.Object.is(label, 'topFloating')
                       ? 'bottomCenter'
                       : undefined
                 }
@@ -84,9 +84,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
                 supportingText={false}
                 theme="light"
                 arrow={
-                  label === 'bottomFloating'
+                  globalThis.Object.is(label, 'bottomFloating')
                     ? 'topCenter'
-                    : label === 'topFloating'
+                    : globalThis.Object.is(label, 'topFloating')
                       ? 'bottomCenter'
                       : undefined
                 }
