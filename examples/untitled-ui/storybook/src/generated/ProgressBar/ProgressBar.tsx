@@ -35,9 +35,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
               supportingText={false}
               theme="light"
               arrow={
-                label === 'topFloating'
+                globalThis.Object.is(label, 'topFloating')
                   ? 'bottomCenter'
-                  : label === 'bottomFloating'
+                  : globalThis.Object.is(label, 'bottomFloating')
                     ? 'topCenter'
                     : undefined
               }
