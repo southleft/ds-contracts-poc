@@ -84,7 +84,8 @@ test('parts match one to one by size, never by position; a part with no graphic 
   const icon = (name: string, x: number, size = 20) => ({ name, kind: 'icon' as const, box: box(x, 0, size, size) });
   const graphic = (x: number, w: number, h = w) => ({ tag: 'svg', box: box(x, 0, w, h) });
   // Arranged differently (a wrong layout direction) but all present.
-  assert.deepEqual(matchParts([icon('a', 0), icon('b', 100)], [graphic(300, 20), graphic(0, 21)]), { matched: 2, missing: [] });
+  const arranged = matchParts([icon('a', 0), icon('b', 100)], [graphic(300, 20), graphic(0, 21)]);
+  assert.deepEqual({ ...arranged, pairs: arranged.pairs.map(p => [p.part.name, p.graphic.x]) }, { matched: 2, missing: [], pairs: [['a', 300], ['b', 0]] }, 'each pair names the graphic it matched');
   // Two icons drawn, one rendered: the one farther from the rendered graphic is missing.
   assert.deepEqual(matchParts([icon('lead', 0), icon('close', 500)], [graphic(2, 20)]).missing.map(p => p.name), ['close']);
   // A graphic far from the part's size does not stand in for it.
@@ -326,7 +327,7 @@ test('a rate limit that outlasts the retries is an unmade measurement, never a f
   assert.equal(variantVerdicts({ ...receipt, problems: [checkFailureProblem('vite build failed')] }, cases).verdict, 'fail');
 });
 
-test('Figma API calls in the check retry 429s the way the importer does', async () => {
+test('the importer-policy Figma GET (fetchFigmaApi; the checks use fetchFigmaForCheck) retries 429s', async () => {
   const waits: number[] = [], seen: string[] = [];
   const answer = (statuses: Array<[number, string | null]>) => {
     let i = 0;

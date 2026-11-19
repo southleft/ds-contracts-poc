@@ -84,14 +84,14 @@ import { PNG } from 'pngjs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
+import { alignPair, diffPair, readPng, writeTriptych, type Aligned } from '../extract/figma/visual-parity/img.js';
+import pixelmatch from 'pixelmatch';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
-import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
+import { caseContent, domContentOf, fetchFigmaContent, type Box, type CaseContent, type DomContent } from './design-consumer-content.js';
 import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
-import { retryConsumerRead } from './design-consumer-network.js';
+import { fetchFigmaForCheck, retryConsumerRead } from './design-consumer-network.js';
 import { retryCapture } from './capture-retry.js';
-import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 /** No animation or transition on a measured page: a Figma design is one still frame. Shared with the Storybook reader. */
@@ -166,6 +166,41 @@ export function consumerDrawsNothing(key: string, figmaPngs: Buffer[]): { proble
   return painted ? { problem: `consumer-draws-nothing:${key}:${painted}`, figmaPaintedPixels: painted } : null;
 }
 export const transparent = (bytes: Buffer) => { const p = PNG.sync.read(bytes); for (let i = 3; i < p.data.length; i += 4) if (p.data[i]) return false; return true; };
+/** THE GLYPH CHECK (content, after the size match). matchParts accepts any graphic of about a part's size: in F→R run 5,
+ *  24 variants drew a "+" where Figma draws a chevron and passed under the 5% image limit. Each matched part is compared
+ *  with the graphic it matched, each in its own box, in the layout-aligned pair the image score measured, on white and
+ *  on black: Figma's part box rounded out to whole pixels, and that box moved by the pair's offset (the matched
+ *  graphic's center minus the center of the part's largest box, rounded; the best of the nine moves within one pixel).
+ *  Pixels outside the pair's canvas are its background. Shape, not color, is compared: a side's drawn pixels are those
+ *  pixelmatch (the image score's threshold 0.1, antialiasing counted) finds different from the most frequent color on
+ *  its own box's outer ring, and `differing` counts the pixels drawn on one side only. The part is the wrong glyph
+ *  when, on both backgrounds, they reach `share` of the larger side's drawn pixels, and at least `minPixels`. A part box
+ *  under one pixel wide or tall (a line) is not compared. */
+export const PART_GLYPH_RULE = { name: 'part-glyph-shape-own-box-v1', share: 0.5, minPixels: 8 } as const;
+type GlyphSide = { differing: number; drawn: number };
+export function partGlyph(white: Aligned, black: Aligned, shift: { x: number; y: number }, part: Box, pair: { box: Box; graphic: Box }):
+  { verdict: 'same' | 'wrong-glyph'; offset: { x: number; y: number }; white: GlyphSide; black: GlyphSide } | { verdict: 'unmeasured' } {
+  const x0 = Math.floor(part.x + shift.x), y0 = Math.floor(part.y + shift.y), w = Math.ceil(part.x + part.width + shift.x) - x0, h = Math.ceil(part.y + part.height + shift.y) - y0;
+  if (!(part.width >= 1 && part.height >= 1)) return { verdict: 'unmeasured' }; // a line: its stroke, not its box, is what it draws
+  const t = { x: Math.round(pair.graphic.x + pair.graphic.width / 2 - pair.box.x - pair.box.width / 2), y: Math.round(pair.graphic.y + pair.graphic.height / 2 - pair.box.y - pair.box.height / 2) };
+  const drawn = (png: PNG, ax: number, ay: number, bg: number) => { const img = Buffer.alloc(w * h * 4), seen = new Map<number, number>();
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const sx = ax + x, sy = ay + y, i = (y * w + x) * 4;
+      if (sx >= 0 && sy >= 0 && sx < png.width && sy < png.height) png.data.copy(img, i, (sy * png.width + sx) * 4, (sy * png.width + sx) * 4 + 4); else img.fill(bg, i, i + 3).fill(255, i + 3, i + 4);
+      if (!x || !y || x === w - 1 || y === h - 1) seen.set(img.readUInt32BE(i), (seen.get(img.readUInt32BE(i)) ?? 0) + 1); }
+    const ring = [...seen].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0], flat = Buffer.alloc(w * h * 4), mask = Buffer.alloc(w * h * 4);
+    for (let i = 0; i < w * h; i++) flat.writeUInt32BE(ring, i * 4);
+    pixelmatch(img, flat, mask, w, h, { threshold: 0.1, includeAA: true, diffMask: true });
+    return Array.from({ length: w * h }, (_, i) => mask[i * 4 + 3] > 0); };
+  const figma = [drawn(white.b, x0, y0, 255), drawn(black.b, x0, y0, 0)];
+  let best: { sum: number; offset: { x: number; y: number }; white: GlyphSide; black: GlyphSide } | undefined;
+  for (const dy of [-1, 0, 1]) for (const dx of [-1, 0, 1]) {
+    const [onWhite, onBlack] = ([[white, 255], [black, 0]] as const).map(([pair, bg], k) => { const ours = drawn(pair.a, x0 + t.x + dx, y0 + t.y + dy, bg), f = figma[k];
+      return { differing: f.filter((v, i) => v !== ours[i]).length, drawn: Math.max(f.filter(Boolean).length, ours.filter(Boolean).length) }; });
+    if (!best || onWhite.differing + onBlack.differing < best.sum) best = { sum: onWhite.differing + onBlack.differing, offset: { x: t.x + dx, y: t.y + dy }, white: onWhite, black: onBlack };
+  }
+  const wrong = [best!.white, best!.black].every(s => s.differing >= Math.max(PART_GLYPH_RULE.minPixels, PART_GLYPH_RULE.share * s.drawn));
+  return { verdict: wrong ? 'wrong-glyph' : 'same', offset: best!.offset, white: best!.white, black: best!.black };
+}
 /** Figma exports node alpha, excluding the editor page. Match that substrate
  *  without changing the component or the page retained for visible review. */
 export const NODE_SCREENSHOT_OPTIONS = {
@@ -267,6 +302,15 @@ export function variantPropValue(prop: { type?: unknown }, key: string): unknown
  *  their code props and canonical values their declared code values
  *  (bindings.code.values, e.g. canonical "null" → null). Case keys and the
  *  receipt keep the canonical spelling. */
+/** Whether a combination of variant props has a row in every presence table the contract's anatomy carries, compared
+ *  as the generated component compares it (an omitted prop at its declared default, each value as a string, or null). */
+export function withinPresenceTables(contract: { props: any[]; anatomy?: unknown }, props: Record<string, unknown>): boolean {
+  const tables: Array<{ props: string[]; rows: Array<{ values: Array<string | null> }> }> = [];
+  const walk = (node: unknown) => { if (!node || typeof node !== 'object') return; const t = (node as any).presenceByCombination; if (t) tables.push(t); for (const v of Object.values(node)) walk(v); };
+  walk(contract.anatomy);
+  const valueOf = (name: string) => { const v = props[name] !== undefined ? props[name] : contract.props.find(p => p.name === name)?.default; return v == null ? null : String(v); };
+  return tables.every(t => { const values = t.props.map(valueOf); return t.rows.some(r => r.values.every((v, i) => v === values[i])); });
+}
 export function mountProps(contract: { props: any[] }, props: Record<string, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const [name, value] of Object.entries(props)) {
@@ -456,9 +500,11 @@ export async function observeVariantPaint(cell: import('playwright-core').Locato
   }
   return JSON.stringify([fingerprint, pixels]);
 }
-async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
+export async function observeVariantCells(page: import('playwright-core').Page, keys: string[]): Promise<Record<string, string>> {
   const observations: Record<string, string> = {};
-  for (const key of keys) observations[key] = await observeVariantPaint(page.locator(`[data-cell="${key}"] > *`).first());
+  // A cell that renders no element is observed as such at once: a locator would wait its whole timeout for one.
+  for (const key of keys) { const cell = page.locator(`[data-cell="${key}"] > *`).first();
+    observations[key] = await cell.count() ? await observeVariantPaint(cell) : 'no-element'; }
   return observations;
 }
 /** Keyboard-modality focus on the component's own focus target: the root when
@@ -530,7 +576,18 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%2F%3E"><style>html{color-scheme:light}body{margin:0;background:transparent}' + NO_MOTION + '</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
-  writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
+  // One cell's throw stays in its cell (2026-11-18): the variant probe sets an axis value on every cell, a combination a
+  // presence table has no row for throws, and with no boundary React unmounted every cell, so each later read waited
+  // 30 s for an element that never came back. The boundary adds no DOM; the error is still reported, by cell, through
+  // the console (consumer-runtime-error), and the cell renders again once its props change.
+  writeFileSync(path.join(consumer, 'main.jsx'), `import { Component, useState } from 'react';
+class CellBoundary extends Component {
+  constructor(props) { super(props); this.state = { error: null, reset: props.reset }; }
+  static getDerivedStateFromError(error) { return { error }; }
+  static getDerivedStateFromProps(props, state) { return props.reset === state.reset ? null : { error: null, reset: props.reset }; }
+  componentDidCatch(error) { console.error('consumer-cell-error ' + this.props.cell + ': ' + (error && error.message)); }
+  render() { return this.state.error ? <span data-consumer-cell-error="" /> : this.props.children; }
+}
 import { createRoot } from 'react-dom/client';
 import { ${component} } from ${JSON.stringify(lib.name)};
 ${fonts.length ? "import './fonts/fonts.css';" : ''}
@@ -546,7 +603,7 @@ function App() {
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
       if (scopedVariantOverride?.keys.includes(cell.key)) Object.assign(props, scopedVariantOverride.props);
-      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
+      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><CellBoundary cell={cell.key} reset={JSON.stringify(props)}><${component} {...props} /></CellBoundary></div>;
     })}
   </div>;
 }
@@ -566,7 +623,7 @@ export function pinnedVersionHeld(got: string | undefined, pinned: string | unde
 }
 
 async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: string, cases: Case[], version?: string) {
-  const response = await fetchFigmaApi(pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, version), token);
+  const response = await fetchFigmaForCheck(pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, version), token);
   if (!response.ok) return `HTTP ${response.status}`;
   const body = await response.json() as any;
   pinnedVersionHeld(body.version, version);
@@ -605,7 +662,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   // can omit overflowing descendants and falsely report only layout bounds.
   const boundsUrl = pinnedFigmaUrl(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}`, version);
   const readBounds = async (phase: string) => {
-    const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaApi(boundsUrl, token));
+    const response = await retryConsumerRead(`figma-bounds:${phase}`,()=>fetchFigmaForCheck(boundsUrl, token));
     if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
     const bytes = Buffer.from(await response.arrayBuffer());
     writeFileSync(path.join(out, `figma-bounds-${phase}.json`), bytes, {flag:'wx'});
@@ -618,7 +675,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
     render:{fileKey,version:before.version,nodeIds:[],format:'png',scale:1,contentsOnly:true,useAbsoluteBounds:false},
   };
   const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true&version=${encodeURIComponent(before.version)}`;
-  const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaApi(url, token));
+  const response = await retryConsumerRead('figma-layout-export',()=>fetchFigmaForCheck(url, token));
   if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
   const files: Record<string, string> = {}, images: Record<string,Buffer> = {};
@@ -643,7 +700,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   if(overflow.length){
     exportRequests.render.nodeIds=[...overflow];
     await new Promise(resolve=>setTimeout(resolve,15000));
-    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaApi(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false&version=${encodeURIComponent(before.version)}`,token));
+    const renderResponse=await retryConsumerRead('figma-render-export',()=>fetchFigmaForCheck(`https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${overflow.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=false&version=${encodeURIComponent(before.version)}`,token));
     if(!renderResponse.ok)for(const id of overflow)renderErrors[id]=`figma-render-export-unavailable:HTTP ${renderResponse.status}`;
     else {const renderBody=await renderResponse.json() as {images:Record<string,string|null>};
       const downloads=await mapExportDownloads(overflow,async id=>{const location=renderBody.images?.[id];if(!location)return {error:'figma-render-export-missing'};
@@ -1111,13 +1168,18 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         const values = variantValues(prop);
         const baseline = await observeVariantCells(page, cases.map(c => c.key));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
-        await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
+        // Inside the contract's presence tables (reviewer, 2026-11-18), as the declared-domain path stays inside its drawn
+        // variants: a combination a table has no row for is no variant the design has, and its refusal measures the probe.
+        const outside = cases.filter(c => !withinPresenceTables(contract, { ...c.props, [prop.name]: target })).map(c => c.key);
+        const override = mountProps(contract, { [prop.name]: target }), inside = cases.filter(c => !outside.includes(c.key)).map(c => c.key);
+        if (outside.length) await page.evaluate(scoped => (window as any).__consumer.setScopedVariantOverride(scoped), { keys: inside, props: override });
+        else await page.evaluate(next => (window as any).__consumer.setVariantOverride(next), override);
         const switched = await observeVariantCells(page, cases.map(c => c.key));
-        await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
-        const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
+        await page.evaluate(scoped => scoped ? (window as any).__consumer.setScopedVariantOverride(null) : (window as any).__consumer.setVariantOverride(null), outside.length > 0);
+        const shouldChange = cases.filter(c => !outside.includes(c.key) && c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
         const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
-        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert });
+        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert, ...(outside.length ? { outsidePresenceTables: outside } : {}) });
         if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
       }
       }
@@ -1156,6 +1218,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         problems.push(row.axisInertLedgered ? `variant-axis-inert-ledgered:${row.prop}` : `variant-prop-discarded:${row.prop}`);
     }
     receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    const measured: Record<string, { file: string; frame: FigmaFrame }> = {}; // the pair each measured image score read, for the glyph check
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       let file = figma.files[c.nodeId], frame = figma.frames[c.nodeId], originsTried: unknown;
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
@@ -1197,6 +1260,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         layoutAligned={status:'refused',reason,withinLimit:false}; problems.push(`image-framing-unqualified:${c.key}:${reason}`);
       } else {
         const white=diffPair(onWhite.aligned,[]),black=diffPair(onBlack.aligned,[]);
+        measured[c.key]={file,frame:frame!};
         layoutAligned={status:'measured',whiteMismatchPercent:white.unmaskedPct,blackMismatchPercent:black.unmaskedPct,
           withinLimit:white.unmaskedPct<=IMAGE_LIMIT_PERCENT&&black.unmaskedPct<=IMAGE_LIMIT_PERCENT,placement:onWhite.placement,
           pixelsCompared:onWhite.aligned.width*onWhite.aligned.height,...(originsTried?{originsTried}:{})};
@@ -1219,12 +1283,22 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // Figma variant draws must render, whatever the pixel score says.
     const content = unresolved ? { status: 'unavailable' as const, reason: unresolved }
       : fileKey ? await fetchFigmaContent(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'unavailable' as const, reason: 'no fileKey in dump' };
-    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, ...(content.status === 'collected'
+    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, glyphRule: PART_GLYPH_RULE, ...(content.status === 'collected'
       ? { figmaVersion: content.version, responseSha256: content.responseSha256, evidence: 'figma-content.json' } : { reason: content.reason }), cases: [] as CaseContent[] };
     if (content.status === 'collected') for (const c of cases) {
       const dom = domContent[c.key];
       if (!dom) { problems.push(`content-unmeasured:${c.key}`); continue; }
-      const judged = caseContent(c.key, content.byNodeId[c.nodeId], dom);
+      const judged = caseContent(c.key, content.byNodeId[c.nodeId], dom), pair = measured[c.key], at = consumerFrames[c.key];
+      if (pair && at && judged.pairs.length) { // PART_GLYPH_RULE, in the pair the image score measured
+        const ours = readFileSync(path.join(args.out, `consumer-${c.key}.png`)), theirs = readFileSync(pair.file);
+        const white = alignRecordedFrames(ours, theirs, at, pair.frame, 255), black = alignRecordedFrames(ours, theirs, at, pair.frame, 0);
+        if (!('refused' in white) && !('refused' in black)) {
+          const p = white.placement, shift = { x: at.layout.x - at.capture.x + p.consumer.x - p.commonCrop.x, y: at.layout.y - at.capture.y + p.consumer.y - p.commonCrop.y };
+          const glyphs = judged.pairs.map(q => ({ name: q.part.name, box: q.box, graphic: q.graphic, ...partGlyph(white.aligned, black.aligned, shift, q.part.box, q) }));
+          judged.content.parts.glyphs = glyphs;
+          for (const g of glyphs) if (g.verdict === 'wrong-glyph') judged.problems.push(`content-wrong-glyph:${c.key}:part:${g.name}:${g.white.differing} of ${g.white.drawn} px`);
+        }
+      }
       receipt.content.cases.push(judged.content);
       problems.push(...judged.problems);
       const row = receipt.cases.find((r: { key: string }) => r.key === c.key);

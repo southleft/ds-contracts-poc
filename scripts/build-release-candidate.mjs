@@ -192,7 +192,20 @@ const PACKAGES = [
   },
   {
     directory: "packages/cli",
-    expected: ["README.md", "dist/cli.js", "dist/computed.js", "package.json"],
+    // react-to-figma's three step bundles, the reader's pinned image folder and the plugin's pinned driver (--write) ship
+    // beside cli.js (packages/cli/build.mjs).
+    expected: [
+      "README.md",
+      "dist/cli.js",
+      "dist/computed.js",
+      "dist/react-to-figma-driver.js",
+      "dist/storybook-contracts.js",
+      "dist/storybook-local.js",
+      "dist/storybook-reader-image/Dockerfile",
+      "dist/storybook-reader-image/fonts.conf",
+      "dist/storybook-reader.js",
+      "package.json",
+    ],
   },
   {
     directory: "packages/emitter-web-components",
