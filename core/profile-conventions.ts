@@ -89,6 +89,9 @@
 /** variant-text-owns-its-part (React to Figma contract step): a part whose own text differs by variant and that also
  *  holds child parts (a list item with its nested list) gives that text to a new first child part, an inline run that
  *  owns the per-variant literal and inherits the part's text style. Off, that part keeps the first variant's text. */
+/** normal-line-height-as-drawn (React to Figma contract step): a one-line text element whose computed line-height is
+ *  `normal` takes the line height Chromium drew (its content-box height) as a px value, so its text keeps it rather than
+ *  an ancestor's px line height (a button resets line-height to normal). Off, it inherits the ancestor's. */
 /** svg-viewbox-meets-oblong-box (React to Figma contract step): with svg-viewbox-carried, a square authored viewBox on an
  *  oblong svg box (a 16 px wide select chevron as tall as its field) is taken too; the glyph square is centered in the box
  *  at the box's short side, as `xMidYMid meet` draws it. Off, that svg's viewBox is rebuilt from its long side and its
@@ -99,7 +102,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
-  'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part', 'svg-viewbox-meets-oblong-box'] as const;
+  'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
+  'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
