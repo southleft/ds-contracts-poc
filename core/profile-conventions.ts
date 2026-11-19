@@ -72,6 +72,10 @@
 /** mixed-scale-rect-keeps-placement (Figma to React proposal): an absolutely placed plain rect whose uses mix SCALE
  *  with other constraints keeps each use's captured placement, each with its own constraint, as an all-SCALE rect
  *  already does. Off, the mixed part is refused SCALE placement and renders in flow. */
+/** rect-placement-by-variant (Figma to React proposal): a rectangle placed absolutely in some variants and in flow in
+ *  others, where which one is a function of one declared axis, takes each variant's own placement: absolute values get
+ *  position absolute with their captured geometry (SCALE stays proportional), in-flow values their flow size. Off, the
+ *  first absolute variant's box stands in for every variant. */
 /** svg-viewbox-carried (React to Figma contract step): each svg's icon asset is drawn in the viewBox its page authored
  *  (read from the DOM in the capture's tree order) when it is square on a square svg box, so a 32-unit glyph on a 16 px
  *  svg keeps its scale. Off, the viewBox is reconstructed from the svg's computed size, bumped to the path extent when
@@ -82,7 +86,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-align-packs-text-box', 'variant-grid-whole-pixel', 'outline-takes-no-layout', 'stage-from-story-container',
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
-  'svg-viewbox-carried'] as const;
+  'rect-placement-by-variant', 'svg-viewbox-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
