@@ -92,6 +92,10 @@
 /** normal-line-height-as-drawn (React to Figma contract step): a one-line text element whose computed line-height is
  *  `normal` takes the line height Chromium drew (its content-box height) as a px value, so its text keeps it rather than
  *  an ancestor's px line height (a button resets line-height to normal). Off, it inherits the ancestor's. */
+/** fixed-swap-drawing-carried (Figma to React proposal): an instance that fixes a nested child's swap to a component the
+ *  converter cannot carry passes the swapped icon's captured drawing (fixedSwapDrawings) as caller content, when every
+ *  child variant the instance selects has exactly one placement of that slot, so the child places it. Off, the slot is
+ *  cleared (observed-swap-default-drawn) or keeps its default. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -99,7 +103,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
-  'normal-line-height-as-drawn'] as const;
+  'normal-line-height-as-drawn', 'fixed-swap-drawing-carried'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

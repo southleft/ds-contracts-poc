@@ -25,6 +25,7 @@ import {
   outsideStrokeIssues,
   callerContentGroups,
   defaultSlotFamilyIssue,
+  slotPlacementsAt,
   filledPathIssue,
   strokedPathGeometryIssue,
   strokedPathDimensionOk,
@@ -315,7 +316,8 @@ export function validateContract(
           // These parts belong to the caller. They enter the declared child
           // ReactNode slot; they are not an override of its private anatomy.
           const slots = dep ? walkAnatomy(dep).filter(w => w.part.slot?.name === contentSlot).map(w => w.part.slot!) : [];
-          if (dep && defaultSlotFamilyIssue(dep, contentSlot))
+          const perUse = part.component.callerSlotSelections;
+          if (dep && defaultSlotFamilyIssue(dep, contentSlot) && !(perUse?.slot === contentSlot && perUse.rows.every(row => slotPlacementsAt(dep, contentSlot, row) === 1)))
             errors.push(`${contract.id}: part "${name}" supplies caller parts but ${dep.id} has no unique ${contentSlot} slot`);
           if (slots.some(slot => slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined))
             errors.push(`${contract.id}: part "${name}" supplies caller parts to a constrained ${contentSlot} slot; constraint projection is unsupported`);

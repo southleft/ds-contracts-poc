@@ -7694,6 +7694,36 @@
                 }
               }
             },
+            "callerSlotSelections": {
+              "type": "object",
+              "properties": {
+                "slot": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z_$][A-Za-z0-9_$]*$"
+                },
+                "rows": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": [
+                        "string",
+                        "boolean"
+                      ]
+                    }
+                  }
+                }
+              },
+              "required": [
+                "slot",
+                "rows"
+              ],
+              "additionalProperties": false
+            },
             "clearedSlots": {
               "minItems": 1,
               "type": "array",
