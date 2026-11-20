@@ -13,6 +13,7 @@
  * interaction behavior is inferred from successful preparation.
  */
 import { dumpClosure } from '../../../extract/figma/rest/closure.js';
+import type { FontVerticalMetrics } from '../../../core/profile-conventions.js';
 import { icons } from './data.js';
 import { recordFigmaClosure } from './figma-import-workspace.js';
 import { capturedTokensFromDump, proposalsFromDump, type FigmaImportResult, type FigmaProposal } from './figma-import.js';
@@ -42,8 +43,8 @@ export interface HeadlessImportResult {
 
 /** `source` is the workspace origin the page records: 'json' for a pasted or
  *  uploaded dump (the JSON tab), 'figma' for a Figma URL import. */
-export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json', options: { conventions?: readonly string[] } = {}): HeadlessImportResult {
-  const batch = proposalsFromDump(dump, 'react-runtime', options.conventions);
+export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json', options: { conventions?: readonly string[]; fontMetrics?: FontVerticalMetrics } = {}): HeadlessImportResult {
+  const batch = proposalsFromDump(dump, 'react-runtime', options.conventions, options.fontMetrics);
   if (batch.proposals.length === 0) {
     throw Error(batch.skipped.length > 0
       ? `figma-to-react-nothing-proposed: none of the ${batch.skipped.length} component set(s) could be proposed — `

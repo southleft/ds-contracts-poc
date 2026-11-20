@@ -121,6 +121,10 @@
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
+/** text-baseline-rounds-like-figma (Figma to React proposal): with the profile's fontMetrics, a single-style TEXT part whose
+ *  baseline Figma rounds to the nearest pixel and Chromium rounds down (ascent and descent rounded, odd leading pixel below;
+ *  under geometricPrecision a rounded-down descent takes a pixel from the ascent) is shifted down by the difference
+ *  (position: relative; top), which moves its glyphs and not its layout. Off, named. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -130,7 +134,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
-  'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width'] as const;
+  'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width',
+  'text-baseline-rounds-like-figma'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
@@ -187,3 +192,6 @@ export function imperceptibleBlendView(dump: Record<string, unknown>): { dump: R
   }
   return { dump: copy, dropped };
 }
+
+/** A profile's font vertical metrics (font units), keyed by the family name the dump carries. */
+export type FontVerticalMetrics = Readonly<Record<string, {unitsPerEm: number; ascender: number; descender: number}>>;

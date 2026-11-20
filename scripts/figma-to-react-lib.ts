@@ -37,12 +37,12 @@ import { formatVerdictTable, type Verdict, type Verdicts } from './design-consum
 import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
-import { conventionSet } from '../core/profile-conventions.js';
+import { conventionSet, type FontVerticalMetrics } from '../core/profile-conventions.js';
 
 /** A system profile's conventions for one run: sorted, with the sha256 of the profile's bytes. A missing file, non-JSON, a
  *  `conventions` that is not an array of strings, a duplicate and a name the converter does not know are each refused by
  *  a named code. Only `conventions` is read. */
-export type ProfileConventions = { conventions: string[]; sha256: string };
+export type ProfileConventions = { conventions: string[]; sha256: string; fontMetrics?: FontVerticalMetrics };
 export function profileConventions(file: string): ProfileConventions {
   if (!existsSync(file)) throw Error(`profile-missing: ${file}`);
   const bytes = readFileSync(file); let profile: { conventions?: unknown };
@@ -51,7 +51,10 @@ export function profileConventions(file: string): ProfileConventions {
   if (!Array.isArray(list) || list.some((n) => typeof n !== 'string')) throw Error(`profile-conventions-not-array: ${file}`);
   const twice = list.find((n, i) => list.indexOf(n) !== i);
   if (twice !== undefined) throw Error(`profile-convention-duplicate:${twice}`);
-  return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex') };
+  const metrics = (profile as { fontMetrics?: unknown }).fontMetrics;
+  if (metrics !== undefined && (typeof metrics !== 'object' || metrics === null || Object.values(metrics).some((m: any) => !(m?.unitsPerEm > 0) || !Number.isFinite(m.ascender) || !(m.descender <= 0))))
+    throw Error(`profile-font-metrics-invalid: ${file}`);
+  return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex'), ...(metrics ? { fontMetrics: metrics as FontVerticalMetrics } : {}) };
 }
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
@@ -100,7 +103,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const { engine, close } = await loadEngine();
   let imported;
   try {
-    imported = options.profile?.conventions.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.profile.conventions }) : engine.figmaDumpToLibraryRequest(dump, source);
+    imported = options.profile?.conventions.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.profile.conventions, ...(options.profile.fontMetrics ? { fontMetrics: options.profile.fontMetrics } : {}) }) : engine.figmaDumpToLibraryRequest(dump, source);
   } finally {
     await close?.();
   }
