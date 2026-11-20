@@ -3,7 +3,7 @@ import {resolveFillStack} from '../packages/schema/src/fill-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
 import {nativeTextSizeTarget,mapNativeTextSizes,NATIVE_SCALAR_TEXT_SIZE_FUNCTION,type NativeTextSize} from './native-scalar-text-size.js';
-import {resolveTextByCombination} from '../scripts/contract-schema.js';
+import {resolveTextBaseline,resolveTextByCombination} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
@@ -517,6 +517,9 @@ export interface NodeSpec {
    *  §D.42). Only this value is ever carried; it is the part's own fact and
    *  is never inherited by a nested text child. */
   textAutoResize?: 'WIDTH_AND_HEIGHT';
+  /** Profile convention text-baseline-as-drawn: the TEXT node draws its line at `line` px, top-aligned in a box kept at
+   *  `height` (the carried line height) and at the width it measured, so its baseline lands where the browser drew it. */
+  baselineBox?: { line: number; height: number };
   /** v14 literals: literal-fidelity channels resolved from component-private
    *  source literals (schema `literals`/`literalsByProp`) — there is no
    *  variable to bind, so the runtime applies plain values. Colors are
@@ -5860,6 +5863,16 @@ function partToSpecInner(
     const chans = [...Object.keys(resolveTokens(part, subst)), ...Object.keys(resolveLiterals(part, subst))];
     return chans.some((c) => c.startsWith('padding'));
   };
+  // Convention text-baseline-as-drawn (Part.textBaseline): Figma sets a line's baseline (L − (a + d)·s)/2 + a·s below
+  // its top, unrounded (a, d: the font's ascent and descent per em); a glyph line of 2·b − (a − d)·s puts it b below the
+  // top, where the browser drew it. The box keeps the carried line height, so nothing around it moves.
+  const drawnBaseline = (spec: NodeSpec): void => {
+    const row = input.conventions?.has('text-baseline-as-drawn') && part.textBaseline ? resolveTextBaseline(part.textBaseline, subst) : undefined;
+    const height = typeof spec.lineHeight === 'number' ? spec.lineHeight : spec.lineHeight?.unit === 'PIXELS' ? spec.lineHeight.value : undefined;
+    if (!row || height === undefined || !spec.fontSize || spec.fixedWidth || spec.fixedHeight || spec.textStyle) return;
+    const line = +(2 * row.px - (row.ascent - row.descent) * spec.fontSize).toFixed(4);
+    if (line > 0 && line !== height) spec.baselineBox = { line, height };
+  };
   const wrapTextInBox = (textSpec: NodeSpec): NodeSpec => {
     // ORGANISM round: the wrapper frame is the PART's box — when the part
     // carries a layout, that layout is the box's layout. The hardcoded
@@ -5898,6 +5911,7 @@ function partToSpecInner(
     // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
     // the box that sizes itself to its text, so the fact rides the text spec.
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
+    drawnBaseline(textSpec);
     // MOLECULE round (Tooltip finding): a text part can CONTAIN parts — the
     // Tooltip bubble's label carries the absolute-positioned arrow span. The
     // old text lowering silently DROPPED child parts; here they compile
@@ -5949,6 +5963,7 @@ function partToSpecInner(
     // or paint of its own the box packs the line as text-align does (start → MIN), not centered as a drawn chip's glyph.
     if ((spec.fixedWidth || spec.fixedHeight) && !spec.fill && !spec.stroke && !resolveLayout(part, subst) && input.conventions?.has('sized-text-box-packs-by-text-align'))
       spec.textBoxPack = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'] ?? 'MIN';
+    drawnBaseline(spec);
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
     return spec;
@@ -9584,6 +9599,11 @@ function buildSyncScript(
   // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
   const hasLiteralTextBox=featureDatas.some(d=>dataSome(d,s=>!!s.literalTextBox));
   const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));
+  const hasBaselineBox = featureDatas.some((d) => dataSome(d, (x) => x.baselineBox !== undefined));
+  // Convention text-baseline-as-drawn: the glyph line, top-aligned in a box held at the carried line height and measured width.
+  const baselineBoxRuntime = hasBaselineBox ? `
+    if (spec.baselineBox) { node.lineHeight = { unit: 'PIXELS', value: spec.baselineBox.line }; const w = node.width;
+      node.textAutoResize = 'NONE'; node.resize(w, spec.baselineBox.height); node.textAlignVertical = 'TOP'; }` : '';
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = featureDatas.some((d) =>
     dataSome(
@@ -9621,7 +9641,7 @@ function buildSyncScript(
     // script with no such spec never names the field (the golden discipline)
     // and reads the same value back; it is written explicitly here so an
     // AMENDED node that had been filled or fixed is put back.
-    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}${baselineBoxRuntime}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -9695,7 +9715,7 @@ async function applyScalarText(node,spec,initialCharacters,reset) {
     // script with no such spec never names the field (the golden discipline)
     // and reads the same value back; it is written explicitly here so an
     // AMENDED node that had been filled or fixed is put back.
-    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}${baselineBoxRuntime}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

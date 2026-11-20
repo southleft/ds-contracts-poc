@@ -470,6 +470,7 @@ reg("anatomy", "solid-fill-composition", [
 reg("anatomy", "content", ["part.content", "part.content.prop", "part.text"]);
 // Per-enum-value text overrides merged over `text` (first-variant-freeze fix).
 reg("anatomy", "text-by-combination", ["part.textByCombination","part.textByCombination.props","part.textByCombination.rows","part.textByCombination.rows.values","part.textByCombination.rows.text"]);
+reg("anatomy", "text-baseline", ["part.textBaseline","part.textBaseline.props","part.textBaseline.rows","part.textBaseline.rows.values","part.textBaseline.rows.px","part.textBaseline.rows.ascent","part.textBaseline.rows.descent"]);
 reg("anatomy", "text-by-prop", [
   "part.textByProp",
   "part.textByProp.prop",

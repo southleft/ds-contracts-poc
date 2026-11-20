@@ -7465,6 +7465,63 @@
           ],
           "additionalProperties": false
         },
+        "textBaseline": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "maxItems": 8,
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "px": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "ascent": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "descent": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "values",
+                  "px",
+                  "ascent",
+                  "descent"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "meter": {
           "type": "object",
           "properties": {

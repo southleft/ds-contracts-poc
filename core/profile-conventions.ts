@@ -115,6 +115,9 @@
 /** swap-drawing-path-box-whole-pixel (Figma to React proposal): a path in a captured fixed-swap drawing whose box sits at a
  *  fractional offset starts its box on the whole pixel and draws the remainder inside its path data, so Chromium does not
  *  snap a half-pixel bar to one row. Off, the fractional offset is named. */
+/** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
+ *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
+ *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -124,7 +127,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
-  'swap-drawing-path-box-whole-pixel'] as const;
+  'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
