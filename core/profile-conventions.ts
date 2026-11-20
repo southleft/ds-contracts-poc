@@ -136,6 +136,9 @@
  *  alone on its line in a block container carries how far that line box reaches above and below its margin box (Part.lineBox,
  *  measured in the page: the parent line's strut and baseline alignment), and the native Figma writer adds that space to the
  *  part's margin box. Off, nothing is measured, and the part is stacked at its margin box as before. */
+/** absolute-only-hug-keeps-extent (Figma to React proposal): a frame below the root that hugs an axis while every visible
+ *  child is absolutely placed keeps, as that axis' minimum, the extent its children witness, where CSS would collapse it to
+ *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
@@ -144,6 +147,7 @@
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
+  'absolute-only-hug-keeps-extent',
   'absolute-overhang-whole-pixel',
   'bound-visibility-override-is-property',
   'capture-marked-subject',
