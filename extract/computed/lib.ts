@@ -31,7 +31,10 @@ export interface CapturedNode {
   style: StyleMap;
   /** Optional independently observed SVG viewport. The computed CSS census
    * does not contain this attribute. Never infer it from path extents. */
-  svgViewport?: { viewBox: [number, number, number, number]; preserveAspectRatio: string };
+  svgViewport?: { viewBox: [number, number, number, number]; preserveAspectRatio: string;
+    /** Set only by the profile convention svg-viewbox-meets-oblong-box, on an oblong svg box: the reconstruction may
+     * then draw the square viewBox centered (`meet`). Any other oblong viewport is refused. */
+    oblong?: true };
   /** Independently observed used boxes, supplied only after source-evidence
    * verification. CSS serialization alone cannot recover these coordinates. */
   pseudoGeometry?: Partial<Record<'::before' | '::after', import('./unpainted-pseudo.js').ObservedPseudoBox>>;
