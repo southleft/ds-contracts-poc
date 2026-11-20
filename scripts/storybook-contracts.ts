@@ -46,13 +46,23 @@ interface ReaderOutput { storybook: string; environment?: { react?: string }; co
  * before its first case: each case is then captured beside the stylesheets its reference was drawn beside, whichever
  * sets run and in what order. A reader output that recorded no index: none, as before. */
 export function readerPreload(stories: Pick<ReaderOutput, 'index' | 'only' | 'profile'>, indexText: string, read: (file: string) => Buffer = (file) => readFileSync(file)): string[] {
-  const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
-  const recorded = (what: string, f: { path: string; sha256: string }) => { const b = read(f.path); if (sha(b) !== f.sha256) throw Error(`${what}-changed-since-read:${f.path}`); return JSON.parse(b.toString()); };
   if (!stories.index) return [];
-  if (sha(indexText) !== stories.index.sha256) throw Error('index-changed-since-read');
+  if (createHash('sha256').update(indexText).digest('hex') !== stories.index.sha256) throw Error('index-changed-since-read');
   const every = Object.values((JSON.parse(indexText) as { entries: Record<string, { type: string; id: string; title?: string }> }).entries).filter((e) => e.type === 'story');
-  return readerStoryIds(every, stories.only && stories.profile ? SystemProfile.parse(recorded('profile', stories.profile)).components : [], stories.only && new Set(recorded('only', stories.only) as string[]));
+  return readerStoryIds(every, stories.only ? profileDeclarations(stories, read) : [], stories.only && new Set(recordedJson('only', stories.only, read) as string[]));
 }
+
+/** A file the reader recorded (its path and sha256), parsed as JSON, refused by name if its bytes changed since. */
+function recordedJson(what: string, f: { path: string; sha256: string }, read: (file: string) => Buffer): unknown {
+  const b = read(f.path);
+  if (createHash('sha256').update(b).digest('hex') !== f.sha256) throw Error(`${what}-changed-since-read:${f.path}`);
+  return JSON.parse(b.toString());
+}
+
+/** The component declarations of the profile the reader recorded, refused by name if its bytes changed since; none
+ *  when it recorded no profile. */
+export const profileDeclarations = (stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => Buffer = (file) => readFileSync(file)) =>
+  stories.profile ? SystemProfile.parse(recordedJson('profile', stories.profile, read)).components : [];
 
 /** Profile convention svg-rotation-carried: an svg element whose computed transform is a pure rotation (matrix(cos θ,
  * sin θ, −sin θ, cos θ, 0, 0), θ ≠ 0) is spelled rotate(θdeg), in place; every other transform stays as captured. */
@@ -156,9 +166,15 @@ export function liftToContainingBlock(node: CapturedNode): number {
   return moved;
 }
 
-/** Profile convention generated-text-carried, the page half: each element under the captured root, in the capture's
- *  order, is numbered (`data-ds-generated`, removed again with `clear`) so the layout snapshot can name the element each
- *  ::marker, ::before and ::after belongs to. Returns the elements' tags, which the capture must match. */
+/** Profile convention show-declared-component: a case's SHOW arguments as the reader passes them, naming the component its
+ *  profile declaration gives that story (a story file's subcomponent, a skeleton), so the same instance is found and
+ *  becomes the subject. The last declaration listing the story wins, as in the reader's map; a story none lists is shown
+ *  as before. */
+export function declaredShow(declarations: ReadonlyArray<{ name: string; stories: readonly string[]; subcomponent?: true }>, id: string, args: unknown): string {
+  const d = [...declarations].reverse().find((x) => x.stories.includes(id));
+  return JSON.stringify(d ? [id, args, d.name, !!d.subcomponent] : [id, args]);
+}
+
 /** Profile convention svg-own-fill-on-host: an element holding nothing but one svg, whose own fill (a rule on the svg, not
  *  one it inherits from the element) differs from the element's, takes that fill as its own. The svg folds into the
  *  element as its icon, and its shapes' fill is read as the host's, so the glyph keeps the fill the browser drew; CSS fill
@@ -172,6 +188,9 @@ export function liftSvgOwnFill(node: CapturedNode): number {
   return n;
 }
 
+/** Profile convention generated-text-carried, the page half: each element under the captured root, in the capture's
+ *  order, is numbered (`data-ds-generated`, removed again with `clear`) so the layout snapshot can name the element each
+ *  ::marker, ::before and ::after belongs to. Returns the elements' tags, which the capture must match. */
 export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, tags = [];
   const walk = (el) => { if (${clear}) el.removeAttribute('data-ds-generated'); else el.setAttribute('data-ds-generated', String(tags.length)); tags.push(el.localName);
@@ -541,11 +560,12 @@ async function main() {
     const listAll = `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`;
     const loadAll = async () => { if (preload.length) await page.evaluate(`(async (ids) => { const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
       for (const id of ids) await store.loadStory({ storyId: id }); })(${JSON.stringify(preload)})`); };
+    const declarations = conventions.has('show-declared-component') ? profileDeclarations(read) : [];
     // A dev-mode Storybook can reload its preview once after load: a render is retried once when that happens.
-    const show = async (id: string, args: unknown) => { try { await page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`); }
+    const show = async (id: string, args: unknown) => { try { await page.evaluate(`${SHOW}(${declaredShow(declarations, id, args)})`); }
       catch (e) { if (!/Execution context was destroyed|storyStoreValue/.test(String(e))) throw e;
         await page.waitForLoadState('load'); await ready(); await loadAll(); await page.addStyleTag({ content: NO_MOTION }); await page.evaluate(listAll);
-        await page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`); } };
+        await page.evaluate(`${SHOW}(${declaredShow(declarations, id, args)})`); } };
     if (chosen.length) {
       // The page opens on the reader's first story, as the reader's did, so the stylesheets load in the reader's order.
       await page.goto(new URL(`iframe.html?id=${encodeURIComponent(preload[0] ?? chosen[0]!.cases[0]!.story.id)}&viewMode=story`, shown).href, { waitUntil: 'load', timeout: 60_000 });

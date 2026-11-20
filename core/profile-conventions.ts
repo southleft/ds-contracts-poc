@@ -141,6 +141,10 @@
  *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
+/** show-declared-component (React to Figma contract step): each case is rendered as the reader rendered it, naming the
+ *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
+ *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
+ *  component is refused as not one element. */
 /** field-value-without-axes (React to Figma contract step): a text field that draws the same value in every variant, or
  *  in a set with no variant axes, carries that value as a per-variant text table with no props, so the writer draws it.
  *  Off, a set with no axes draws the field empty and a set with axes refuses the table by name. */
@@ -174,6 +178,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'rect-placement-by-variant',
   'root-text-by-axis',
+  'show-declared-component',
   'sized-text-box-packs-by-text-align',
   'stage-from-story-container',
   'stretched-line-paints-bar',
