@@ -1,9 +1,11 @@
 import {z} from 'zod';
 
 /** Literal source text selected by a complete observed variant tuple. Missing
- * tuples never fall back to the first sample. Caller text uses `content`. */
+ * tuples never fall back to the first sample. Caller text uses `content`. No
+ * props: one row, every variant (a text field's value under the profile
+ * convention field-value-without-axes). */
 export const TextByCombinationSchema=z.strictObject({
- props:z.array(z.string().min(1)).min(1).max(8),
+ props:z.array(z.string().min(1)).max(8),
  rows:z.array(z.strictObject({values:z.array(z.string().nullable()).max(8),text:z.string().max(65536)})).min(1).max(4096),
 }).superRefine((table,ctx)=>{
  if(new Set(table.props).size!==table.props.length)ctx.addIssue({code:'custom',message:'text-combination-duplicate-axis'});

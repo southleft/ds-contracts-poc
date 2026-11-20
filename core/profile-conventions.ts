@@ -141,6 +141,9 @@
  *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
+/** field-value-without-axes (React to Figma contract step): a text field that draws the same value in every variant, or
+ *  in a set with no variant axes, carries that value as a per-variant text table with no props, so the writer draws it.
+ *  Off, a set with no axes draws the field empty and a set with axes refuses the table by name. */
 /** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
  *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
  *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
@@ -154,6 +157,7 @@ export const CONVENTIONS = [
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
   'empty-hug-keeps-extent',
+  'field-value-without-axes',
   'fixed-swap-drawing-carried',
   'font-weight-initial-normal',
   'generated-text-carried',
