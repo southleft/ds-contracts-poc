@@ -46,13 +46,23 @@ interface ReaderOutput { storybook: string; environment?: { react?: string }; co
  * before its first case: each case is then captured beside the stylesheets its reference was drawn beside, whichever
  * sets run and in what order. A reader output that recorded no index: none, as before. */
 export function readerPreload(stories: Pick<ReaderOutput, 'index' | 'only' | 'profile'>, indexText: string, read: (file: string) => Buffer = (file) => readFileSync(file)): string[] {
-  const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
-  const recorded = (what: string, f: { path: string; sha256: string }) => { const b = read(f.path); if (sha(b) !== f.sha256) throw Error(`${what}-changed-since-read:${f.path}`); return JSON.parse(b.toString()); };
   if (!stories.index) return [];
-  if (sha(indexText) !== stories.index.sha256) throw Error('index-changed-since-read');
+  if (createHash('sha256').update(indexText).digest('hex') !== stories.index.sha256) throw Error('index-changed-since-read');
   const every = Object.values((JSON.parse(indexText) as { entries: Record<string, { type: string; id: string; title?: string }> }).entries).filter((e) => e.type === 'story');
-  return readerStoryIds(every, stories.only && stories.profile ? SystemProfile.parse(recorded('profile', stories.profile)).components : [], stories.only && new Set(recorded('only', stories.only) as string[]));
+  return readerStoryIds(every, stories.only ? profileDeclarations(stories, read) : [], stories.only && new Set(recordedJson('only', stories.only, read) as string[]));
 }
+
+/** A file the reader recorded (its path and sha256), parsed as JSON, refused by name if its bytes changed since. */
+function recordedJson(what: string, f: { path: string; sha256: string }, read: (file: string) => Buffer): unknown {
+  const b = read(f.path);
+  if (createHash('sha256').update(b).digest('hex') !== f.sha256) throw Error(`${what}-changed-since-read:${f.path}`);
+  return JSON.parse(b.toString());
+}
+
+/** The component declarations of the profile the reader recorded, refused by name if its bytes changed since; none
+ *  when it recorded no profile. */
+export const profileDeclarations = (stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => Buffer = (file) => readFileSync(file)) =>
+  stories.profile ? SystemProfile.parse(recordedJson('profile', stories.profile, read)).components : [];
 
 /** Profile convention svg-rotation-carried: an svg element whose computed transform is a pure rotation (matrix(cos θ,
  * sin θ, −sin θ, cos θ, 0, 0), θ ≠ 0) is spelled rotate(θdeg), in place; every other transform stays as captured. */
@@ -535,7 +545,7 @@ async function main() {
     const listAll = `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`;
     const loadAll = async () => { if (preload.length) await page.evaluate(`(async (ids) => { const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
       for (const id of ids) await store.loadStory({ storyId: id }); })(${JSON.stringify(preload)})`); };
-    const declarations = conventions.has('show-declared-component') && read.profile ? SystemProfile.parse(JSON.parse(readFileSync(read.profile.path, 'utf8'))).components : [];
+    const declarations = conventions.has('show-declared-component') ? profileDeclarations(read) : [];
     // A dev-mode Storybook can reload its preview once after load: a render is retried once when that happens.
     const show = async (id: string, args: unknown) => { try { await page.evaluate(`${SHOW}(${declaredShow(declarations, id, args)})`); }
       catch (e) { if (!/Execution context was destroyed|storyStoreValue/.test(String(e))) throw e;
