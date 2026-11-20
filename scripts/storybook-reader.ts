@@ -125,6 +125,9 @@ export const SystemProfile = z.object({
    *  one by name, so a new convention lands converter first, then in a profile: never one PR on both sides. Here: well
    *  formed, each at most once (reviewer message, 2026-11-11). */
   conventions: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).refine((c) => new Set(c).size === c.length, 'profile-convention-twice').optional(),
+  /** Font vertical metrics in font units, by family, for Figma-to-React text placement (text-baseline-rounds-like-figma). The
+   *  reader accepts them so one profile serves both directions, and never reads them. */
+  fontMetrics: z.record(z.string().min(1), z.object({ unitsPerEm: z.number().positive(), ascender: z.number(), descender: z.number().nonpositive() })).optional(),
   /** Internal Figma sets (entry of 2026-11-10): the name prefix that marks one; out of every number, counted beside. */
   figmaInternal: z.object({ namePrefix: z.string().min(1) }).strict().optional(),
   figmaSkeleton: z.object({ variant: z.object({ property: z.string(), value: z.string() }).strict().optional(), sets: z.array(z.string()).optional() }).strict().optional(),
