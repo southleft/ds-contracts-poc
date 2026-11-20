@@ -3,7 +3,7 @@ import {resolveFillStack} from '../packages/schema/src/fill-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
 import {nativeTextSizeTarget,mapNativeTextSizes,NATIVE_SCALAR_TEXT_SIZE_FUNCTION,type NativeTextSize} from './native-scalar-text-size.js';
-import {resolveTextBaseline,resolveTextByCombination} from '../scripts/contract-schema.js';
+import {resolveLineBox,resolveTextBaseline,resolveTextByCombination} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
@@ -3748,6 +3748,11 @@ function applyStyling(
     if (rule.equals !== undefined && subst[rule.prop] === rule.equals && rule.styles['aspect-ratio'] !== undefined)
       aspect = rule.styles['aspect-ratio'];
   applyAspectRatio(spec, aspect);
+  // Convention inline-block-line-box-as-drawn (Part.lineBox): the line box an atomic inline sits alone on reaches above
+  // and below its margin box (the parent line's strut and baseline); that space joins its margin box, which draws nothing.
+  const line = input.conventions?.has('inline-block-line-box-as-drawn') && part.lineBox ? resolveLineBox(part.lineBox, subst) : undefined;
+  if (line && (line.top || line.bottom) && Object.values(spec.margins ?? {}).every((v) => (v ?? 0) >= 0))
+    spec.margins = { ...spec.margins, top: (spec.margins?.top ?? 0) + line.top, bottom: (spec.margins?.bottom ?? 0) + line.bottom };
   return d;
 }
 

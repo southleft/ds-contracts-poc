@@ -36,3 +36,19 @@ export function resolveTextBaseline(table:TextBaseline,subst:Record<string,unkno
  const values=table.props.map(name=>subst[name]==null?null:String(subst[name]));
  return table.rows.find(row=>row.values.every((value,i)=>value===values[i]));
 }
+
+/** Profile convention inline-block-line-box-as-drawn: how far the line box an atomic inline sits alone on reaches above its
+ * margin box (`top`) and below it (`bottom`), in px, measured in the page, per complete variant tuple (no props: every
+ * variant). The native Figma writer reads it under the convention only; the React emitters never do. */
+export const LineBoxSchema=z.strictObject({
+ props:z.array(z.string().min(1)).max(8),
+ rows:z.array(z.strictObject({values:z.array(z.string().nullable()).max(8),top:z.number().finite().nonnegative(),bottom:z.number().finite().nonnegative()})).min(1).max(4096),
+}).superRefine((table,ctx)=>{
+ const seen=new Set<string>();
+ for(const row of table.rows){const key=JSON.stringify(row.values);if(row.values.length!==table.props.length||seen.has(key))ctx.addIssue({code:'custom',message:'line-box-tuple-unqualified'});seen.add(key);}
+});
+export type LineBox=z.infer<typeof LineBoxSchema>;
+export function resolveLineBox(table:LineBox,subst:Record<string,unknown>):LineBox['rows'][number]|undefined {
+ const values=table.props.map(name=>subst[name]==null?null:String(subst[name]));
+ return table.rows.find(row=>row.values.every((value,i)=>value===values[i]));
+}

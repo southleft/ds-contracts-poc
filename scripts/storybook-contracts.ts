@@ -26,7 +26,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
-import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, textBaselineIssues, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
+import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, lineBoxIssues, textBaselineIssues, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, readerStoryIds, SELECT_INSTANCE, SHOW, SystemProfile, type StoryComponent } from './storybook-reader.js';
 import type { CDPSession } from 'playwright-core';
@@ -184,12 +184,40 @@ export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined) => `(
   if (root) walk(root); return out; })()`;
 
 /** The captured elements, in capture order, matched to MEASURE_BASELINES' readings by position and tag; none if they differ. */
-export function drawnBaselines(root: CapturedNode, read: ReadonlyArray<[string, { px: number; ascent: number; descent: number } | null]>):
-  Map<CapturedNode, { px: number; ascent: number; descent: number } | null> | null {
+export function drawnBaselines<T = { px: number; ascent: number; descent: number }>(root: CapturedNode, read: ReadonlyArray<[string, T | null]>): Map<CapturedNode, T | null> | null {
   const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
   walk(root);
   if (els.length !== read.length || els.some((e, i) => e.tag.toLowerCase() !== read[i]![0].toLowerCase())) return null;
   return new Map(els.map((e, i) => [e, read[i]![1]]));
+}
+
+/** A per-variant table's rows: each drawn variant's reading, keyed by the axes that tell the readings apart (the most
+ *  decisive first, then kept in axis order; none when every variant agrees). */
+function variantRows<T extends object>(axes: readonly string[], drawn: ReadonlyArray<{ v: Record<string, string>; m: T }>): { props: string[]; rows: Array<{ values: string[] } & T> } {
+  const clash = (props: string[]) => { const seen = new Map<string, string>(); let n = 0;
+    for (const r of drawn) { const k = JSON.stringify(props.map((a) => r.v[a])), m = JSON.stringify(r.m); if (seen.has(k) && seen.get(k) !== m) n++; seen.set(k, m); } return n; };
+  const props: string[] = [];
+  while (clash(props) && props.length < axes.length) props.push(axes.filter((a) => !props.includes(a)).sort((a, b) => clash([...props, a]) - clash([...props, b]))[0]!);
+  props.sort((a, b) => axes.indexOf(a) - axes.indexOf(b));
+  return { props, rows: [...new Map(drawn.map((r) => { const values = props.map((a) => r.v[a]!); return [JSON.stringify(values), { values, ...r.m }]; })).values()] };
+}
+
+/** Convention inline-block-line-box-as-drawn: a part that sits alone on its line as an atomic inline in some variant carries
+ *  the line box measured in every variant that draws it (`lineBox`; a variant whose box is not on such a line reads 0, 0).
+ *  Returns the parts carried. */
+export function carryLineBox(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  at: (comboKey: string, part: string) => { top: number; bottom: number } | null | undefined): string[] {
+  const carried: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m: m ?? { top: 0, bottom: 0 } }]; });
+    if (drawn.some((r) => r.m.top || r.m.bottom)) {
+      part.lineBox = variantRows(axes, drawn);
+      if (lineBoxIssues(contract, part, true).length) delete part.lineBox; else carried.push(name);
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return carried;
 }
 
 /** Convention text-baseline-as-drawn: a part owning one line of literal text carries the baseline the browser drew in each
@@ -201,13 +229,7 @@ export function carryTextBaseline(contract: Contract, axes: readonly string[], c
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
     const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
     if (drawn.length && drawn.every((r) => r.m)) {
-      const key = (r: (typeof drawn)[number]) => JSON.stringify(r.m), clash = (props: string[]) => { const seen = new Map<string, string>(); let n = 0;
-        for (const r of drawn) { const k = JSON.stringify(props.map((a) => r.v[a])); if (seen.has(k) && seen.get(k) !== key(r)) n++; seen.set(k, key(r)); } return n; };
-      const props: string[] = [];
-      while (clash(props) && props.length < axes.length) props.push(axes.filter((a) => !props.includes(a)).sort((a, b) => clash([...props, a]) - clash([...props, b]))[0]!);
-      props.sort((a, b) => axes.indexOf(a) - axes.indexOf(b));
-      const rows = [...new Map(drawn.map((r) => { const values = props.map((a) => r.v[a]!); return [JSON.stringify(values), { values, ...r.m! }]; })).values()];
-      part.textBaseline = { props, rows };
+      part.textBaseline = variantRows(axes, drawn as Array<{ v: Record<string, string>; m: { px: number; ascent: number; descent: number } }>);
       if (textBaselineIssues(contract, part).length) delete part.textBaseline; else carried.push(name);
     }
     visit(part.parts as Record<string, Part> | undefined);
@@ -215,6 +237,28 @@ export function carryTextBaseline(contract: Contract, axes: readonly string[], c
   visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
   return carried;
 }
+
+/** Convention inline-block-line-box-as-drawn: for each element in capture order (NUMBER_ELEMENTS' walk), how far the line
+ *  box it sits alone on reaches above its margin box and below it, in px, when it is an atomic inline in a block container
+ *  whose nearest in-flow neighbours are blocks or none (zero-size probes at the line's top and bottom, removed at once);
+ *  null otherwise, or when the line box is its margin box. */
+export const MEASURE_LINE_BOXES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
+  const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
+  const flows = (n) => n.nodeType === 3 ? n.data.trim() !== '' : n.nodeType === 1 && getComputedStyle(n).display !== 'none' && !['absolute', 'fixed'].includes(getComputedStyle(n).position);
+  const block = (n) => !n || (n.nodeType === 1 && !/^inline/.test(getComputedStyle(n).display));
+  const walk = (el) => { const cs = getComputedStyle(el), up = el.parentElement; let m = null;
+    if (el !== root && up && /^inline-(block|flex|grid|table)$/.test(cs.display) && cs.position !== 'absolute' && cs.position !== 'fixed' && cs.float === 'none' &&
+      /^(block|list-item|flow-root|inline-block|table-cell)$/.test(getComputedStyle(up).display)) {
+      const flow = [...up.childNodes].filter(flows), i = flow.indexOf(el);
+      if (block(flow[i - 1]) && block(flow[i + 1])) {
+        const t = probe('top'), b = probe('bottom'); el.before(t); el.after(b);
+        const r = el.getBoundingClientRect(), above = r.top - parseFloat(cs.marginTop) - t.getBoundingClientRect().top, below = b.getBoundingClientRect().bottom - r.bottom - parseFloat(cs.marginBottom);
+        t.remove(); b.remove();
+        if (above > 0.001 || below > 0.001) m = { top: +Math.max(0, above).toFixed(4), bottom: +Math.max(0, below).toFixed(4) }; } }
+    out.push([el.localName, m]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
 
 export type GeneratedText = { pe: '::marker' | '::before' | '::after'; text: string; x: number; y: number };
 /** What each numbered element's ::marker, ::before and ::after draws, read from Chromium's layout snapshot (the computed
@@ -512,6 +556,7 @@ async function main() {
         const { contract: seeded, drawn, combos, space } = seed(c);
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
         const captures: Capture[] = [], rootMoved: string[] = [], baselines = new Map<CapturedNode, { px: number; ascent: number; descent: number } | null>();
+        const lineBoxes = new Map<CapturedNode, { top: number; bottom: number } | null>();
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -530,6 +575,10 @@ async function main() {
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
             const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at)) as never);
             if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
+          }
+          if (conventions.has('inline-block-line-box-as-drawn')) { // read before any element moves, matched by capture order
+            const read = drawnBaselines<{ top: number; bottom: number }>(root, await page.evaluate(MEASURE_LINE_BOXES(at)) as never);
+            if (read) for (const [n, m] of read) lineBoxes.set(n, m); else refusals.push(`line-box-unmatched:${k.id}`);
           }
           let generated: (() => void) | null | undefined;
           if (conventions.has('generated-text-carried')) { // read and matched before any element moves
@@ -603,6 +652,8 @@ async function main() {
           conventions.has('variant-text-owns-its-part')));
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; });
+        if (conventions.has('inline-block-line-box-as-drawn')) row.lineBox = carryLineBox(enriched as Contract, c.axes, combos, (key, part) => {
+          const n = nodeAt(key, part); return n ? lineBoxes.get(n as never) ?? null : undefined; });
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);

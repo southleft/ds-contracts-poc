@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -202,6 +202,28 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   };
   assert.deepEqual(boxes(['text-baseline-as-drawn']), [{ line: 15, height: 16 }, { line: 17, height: 16 }]);
   assert.deepEqual(boxes([]), []);
+});
+
+test('inline-block-line-box-as-drawn: an atomic inline alone on its line carries its line box per variant; the writer adds it to the margin box', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
+  const { contract, combos } = seed(c!), inline = (key: string) => combos.find((k) => k.key === key)!.axisValues.type === 'inline';
+  contract.anatomy.root.parts = { label: { text: 'Label', literals: { 'margin-bottom': '8px' } }, field: { declared: { display: 'block' } }, gone: { text: 'x' } } as never;
+  // The label reads (2, 0) where it is inline-block and nothing where it is a block; a part with no reading anywhere is left.
+  const at = (key: string, part: string) => part === 'label' ? (inline(key) ? null : { top: 2, bottom: 0 }) : part === 'gone' && inline(key) ? undefined : null;
+  assert.deepEqual(carryLineBox(contract, c!.axes, combos, at), ['label']);
+  const parts = contract.anatomy.root.parts as Record<string, { lineBox?: unknown }>;
+  assert.deepEqual(parts.label!.lineBox, { props: ['type'], rows: [{ values: ['default'], top: 2, bottom: 0 }, { values: ['inline'], top: 0, bottom: 0 }] });
+  assert.deepEqual([parts.field!.lineBox, parts.gone!.lineBox], [undefined, undefined]);
+  const { ContractSchema, lineBoxIssues } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  assert.deepEqual(lineBoxIssues(contract, { lineBox: parts.label!.lineBox } as never, false), ['line-box-unqualified']);   // never on the root
+  const parsed = ContractSchema.parse(contract), margins = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; margins?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown[] => [...(s.name === 'label' ? [s.margins] : []), ...(s.children ?? []).flatMap(find)];
+    return (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.flatMap((v) => find(v.spec));
+  };
+  assert.deepEqual(margins(['inline-block-line-box-as-drawn']), [{ bottom: 8, top: 2 }, { bottom: 8 }]);
+  assert.deepEqual(margins([]), [{ bottom: 8 }, { bottom: 8 }]);
 });
 
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
