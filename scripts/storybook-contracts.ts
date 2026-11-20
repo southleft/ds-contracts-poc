@@ -104,10 +104,18 @@ export function spellNormalLineHeight(node: CapturedNode): number {
   return changed;
 }
 
-/** A captured channel some registry carries (token, literal or declared). A fact on any other channel would make the
- *  contract's validation refuse the whole set if minted, so it is left out of the mint and named instead. */
+/** A captured channel some registry carries (token, literal or declared). */
 export const carriedChannel = (channel: string): boolean =>
   channel in TOKEN_CHANNELS || LITERAL_CHANNELS.has(channel) || channel in DECLARED_CHANNELS;
+/** Profile convention unregistered-channel-not-minted: a fact on a channel no registry carries, which would make the
+ *  contract's validation refuse the whole set if minted, is left out of the mint and named once per part and channel.
+ *  Off, every observation is minted as before. */
+export function mintedObservations<T extends { part: string; cssProperty: string }>(base: T[], state: T[], on: boolean) {
+  if (!on) return { baseObs: base, stateObs: state, named: [] as string[] };
+  return { baseObs: base.filter((o) => carriedChannel(o.cssProperty)), stateObs: state.filter((o) => carriedChannel(o.cssProperty)),
+    named: [...new Set([...base, ...state].filter((o) => !carriedChannel(o.cssProperty))
+      .map((o) => `channel-unregistered: ${o.part || 'root'} ${o.cssProperty} — no token, literal or declared channel carries it; not minted`))] };
+}
 
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
  *  block, the nearest ancestor that is positioned or transformed. Where that ancestor is not its parent, the element is
@@ -495,9 +503,8 @@ async function main() {
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const svgConsumed = new Set([...promotion.consumed].map((i: number) => aligned.partNames[i]));
         const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
-        const [baseObs, stateObs] = [prep.baseObs, prep.stateObs].map((obs) => obs.filter((o) => carriedChannel(o.cssProperty)));
-        refusals.push(...new Set([...prep.baseObs, ...prep.stateObs].filter((o) => !carriedChannel(o.cssProperty))
-          .map((o) => `channel-unregistered: ${o.part || 'root'} ${o.cssProperty} — no token, literal or declared channel carries it; not minted`)));
+        const minted = mintedObservations(prep.baseObs, prep.stateObs, conventions.has('unregistered-channel-not-minted')), { baseObs, stateObs } = minted;
+        refusals.push(...minted.named);
         const mintBase = mintTokens(c.name, baseObs, prep.axes, { nestedPairs: true }), mintStates = mintTokens(c.name, stateObs, prep.axes, { nestedPairs: true });
         const { enriched, enrichmentNotes } = applyMintToContract(promotion.contract, space, mintBase, baseObs, mintStates, stateObs, layout.enriched,
           prep.declared, prep.declaredStates, prep.setPlaneLiterals, { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);

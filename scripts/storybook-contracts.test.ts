@@ -4,7 +4,7 @@ import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -268,9 +268,16 @@ test('normal-line-height-as-drawn: a one-line text element whose line-height is 
   assert.equal(tree.style['line-height'], 'normal');
 });
 
-test('a channel no registry carries is not minted: its fact would refuse the whole contract', () => {
+test('unregistered-channel-not-minted: a channel no registry carries is not minted; off, everything is', () => {
   // A flex item's `order` has no token, literal or declared channel; registered channels of each kind are minted as before.
   assert.deepEqual(['order', 'z-index', 'flex-grow', 'background-color', 'border-style'].map(carriedChannel), [false, true, true, true, true]);
+  const base = [{ part: 'up-icon', cssProperty: 'order' }, { part: 'up-icon', cssProperty: 'z-index' }, { part: '', cssProperty: '--grid-columns' }];
+  const state = [{ part: 'up-icon', cssProperty: 'order' }];
+  const on = mintedObservations(base, state, true);
+  assert.deepEqual([on.baseObs.map((o) => o.cssProperty), on.stateObs, on.named.map((n) => n.split(' —')[0])],
+    [['z-index'], [], ['channel-unregistered: up-icon order', 'channel-unregistered: root --grid-columns']]);
+  // Off: the old mint, every observation kept and nothing named (validation then refuses as before).
+  assert.deepEqual(mintedObservations(base, state, false), { baseObs: base, stateObs: state, named: [] });
 });
 
 test('absolute-in-containing-block: an absolute element whose parent is not its containing block moves to the ancestor that is', () => {
