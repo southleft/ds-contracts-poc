@@ -238,6 +238,10 @@ test('a profile names the conventions it switches on, well formed and once each'
     'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline', 'swap-drawing-path-box-whole-pixel',
     'centered-text-keeps-drawn-width']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
+  // Font metrics (Figma to React) are accepted in the same shape the converter's loader checks; the reader never reads them.
+  assert.deepEqual(SystemProfile.parse({...p, fontMetrics: {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}}}).fontMetrics, {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}});
+  for (const bad of [{'Probe Sans': {unitsPerEm: 0, ascender: 1025, descender: -275}}, {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: 275}}, {'Probe Sans': {unitsPerEm: 1000, descender: -275}}, 'Probe Sans'])
+    assert.throws(() => SystemProfile.parse({...p, fontMetrics: bad}), JSON.stringify(bad));
 });
 
 import {paintedFamilies, webFontFamily, type FontLog, type LoadedFont} from './storybook-reader.js';
