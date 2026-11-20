@@ -11,8 +11,8 @@
  * Steps, each of which refuses loudly rather than continuing degraded:
  *   0. tree must be CLEAN (a deployed artifact should be reproducible from a
  *      commit; override with --allow-dirty for a deliberate preview)
- *   1. npm run plugin:zip        — inherits build-plugin-zip's own gates
- *                                  (engine-receipt freshness, dump-source drift)
+ *   1. build-plugin-zip --release — the engine must match the release receipt
+ *                                  (re-recorded at release), dump-source drift
  *   2. npm run build:playground  — vite copies the fresh zip from public/
  *   3. npm run site:build
  *   4. wrangler pages deploy playground/dist → ds-contracts-playground
@@ -56,7 +56,7 @@ if (dirty && !process.argv.includes('--allow-dirty')) {
 console.log(`deploying from ${execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim()}${dirty ? ' (+ DIRTY tree, --allow-dirty)' : ''}`);
 
 run('npm run prep:core', '0/6 build @ds-contracts/schema and core (the playground config resolves their dist)');
-run('npm run plugin:zip', '1/6 build the plugin zip (engine-receipt + dump-source gates run here)');
+run('node scripts/build-plugin-zip.mjs --release', '1/6 build the plugin zip (release: the engine must match the release receipt; dump-source gate)');
 run('npm run build:playground', '2/6 build the playground (bundles the fresh zip)');
 run('npm run site:build', '3/6 build the spec site');
 run('npx wrangler pages deploy playground/dist --project-name ds-contracts-playground --branch main --commit-dirty=true', '4/6 publish the playground');

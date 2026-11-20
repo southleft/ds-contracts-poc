@@ -52,7 +52,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { buildEngineBundle, verifyEngineReceipt } from './build-plugin-zip.mjs';
+import { buildEngineBundle, receiptLine, verifyEngineReceipt } from './build-plugin-zip.mjs';
 import { createFigmaMock } from './plugin-engine-mock-figma.mjs';
 
 const ROOT = process.cwd();
@@ -67,11 +67,11 @@ const assert = (cond, what) => {
   if (!cond) fail(`pin failed: ${what}`);
 };
 
-// --- 1. bundle + drift-guard receipt ---------------------------------------
+// --- 1. bundle + release receipt (reported; the release path refuses a moved engine) ---------------
 const bundle = await buildEngineBundle();
-await verifyEngineReceipt(bundle);
+const receipt = await verifyEngineReceipt(bundle);
 console.log(
-  `✔ engine bundle fresh vs committed receipt: ${bundle.minifiedBytes} bytes minified, ${bundle.inputFiles} inputs, hash ${bundle.inputHash.slice(0, 12)}…`,
+  `✔ engine bundle built: ${bundle.minifiedBytes} bytes minified, ${bundle.inputFiles} inputs, hash ${bundle.inputHash.slice(0, 12)}… — ${receiptLine(receipt)}`,
 );
 
 // --- load the bundle in a bare VM (window sandbox, no node globals) --------
