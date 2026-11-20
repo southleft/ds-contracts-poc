@@ -4,7 +4,7 @@ import type { StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, carryGeneratedText, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -266,6 +266,11 @@ test('normal-line-height-as-drawn: a one-line text element whose line-height is 
   assert.equal(spellNormalLineHeight(tree), 1);
   assert.deepEqual(tree.nodes.map((k: any) => k.el.style['line-height']), ['15px', 'normal', 'normal', '20px', 'normal']);
   assert.equal(tree.style['line-height'], 'normal');
+});
+
+test('a channel no registry carries is not minted: its fact would refuse the whole contract', () => {
+  // A flex item's `order` has no token, literal or declared channel; registered channels of each kind are minted as before.
+  assert.deepEqual(['order', 'z-index', 'flex-grow', 'background-color', 'border-style'].map(carriedChannel), [false, true, true, true, true]);
 });
 
 test('absolute-in-containing-block: an absolute element whose parent is not its containing block moves to the ancestor that is', () => {
