@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, liftSvgOwnFill, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -234,6 +234,16 @@ test('absolute-box-from-size-and-margins: a sized absolute box between two inset
   };
   assert.deepEqual(placed(['absolute-box-from-size-and-margins']), { h: 'MIN', v: 'MIN', left: 28.5, top: 4 });
   assert.deepEqual(placed([]), { h: 'STRETCH', v: 'STRETCH', left: 28.5, right: 0, top: 0, bottom: 28 });
+});
+
+test('svg-own-fill-on-host: an element holding only an svg with its own fill takes that fill; text or a shared fill leaves it', () => {
+  const el = (tag: string, style: Record<string, string>, nodes: unknown[] = []) => ({ tag, classes: [], nodes, style, pseudo: {} }) as never as Parameters<typeof liftSvgOwnFill>[0];
+  const svg = (fill: string) => ({ t: 'el', el: el('svg', { fill }) });
+  const button = el('button', { fill: 'rgb(0, 0, 0)', color: 'rgb(15, 98, 254)' }, [svg('rgb(22, 22, 22)')]);
+  const labelled = el('button', { fill: 'rgb(0, 0, 0)' }, [{ t: 'text', v: 'Menu' }, svg('rgb(22, 22, 22)')]);
+  const inherited = el('button', { fill: 'rgb(22, 22, 22)' }, [svg('rgb(22, 22, 22)')]);
+  assert.equal(liftSvgOwnFill(el('div', {}, [{ t: 'el', el: button }, { t: 'el', el: labelled }, { t: 'el', el: inherited }])), 1);
+  assert.deepEqual([button.style.fill, labelled.style.fill, inherited.style.fill], ['rgb(22, 22, 22)', 'rgb(0, 0, 0)', 'rgb(22, 22, 22)']);
 });
 
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
