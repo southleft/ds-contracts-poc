@@ -523,6 +523,10 @@ test('live bound paint evidence preserves consuming aliases and normalized alpha
  assert.throws(()=>nativeEngine.compileComponentData(contract,new Map([[contract.id,contract]])),/bound-paint|Invalid input/,'compiler and batch writer cannot drop unfinished source binding evidence');
  delete dump.variants[0].variableConsumers;
  assert.throws(()=>propose(dump,opts),/consumer-missing/,'REST without variable permission never claims captured native binding evidence');
+ // Profile convention uncaptured-fill-variable-carried-as-paint: the observed paint is carried and no binding is recreated.
+ const carried=propose(dump,{...opts,conventions:['uncaptured-fill-variable-carried-as-paint']}),carriedRoot=(carried.contract as any).anatomy.root;
+ assert.deepEqual(carriedRoot.solidFillComposition,retained[0].binding.paint);assert.equal(carriedRoot.solidFillCompositionSourceBinding,undefined);
+ assert.equal(carried.draftPaintQualification!.sourceBindings,undefined);assert.ok(carried.notes.some((n:string)=>n.includes('1 of 1 source fills name a variable the dump carries no consumer for')));
 });
 
 test('bound source occurrences retain selected provenance through actual proposal and both forward paint renderers',async()=>{

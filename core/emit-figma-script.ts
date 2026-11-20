@@ -465,6 +465,9 @@ export interface NodeSpec {
    *  A ROOT spec cannot wrap itself (SET children are the component). Those
    *  margins are named and stripped (FC-EMIT-ROOT-MARGIN-SILENT). */
   margins?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Convention filled-child-keeps-margin-box: this child grows or fills, so its margin box takes that FILL at run time
+   *  and the child fills the box's content box. */
+  marginBoxFills?: true;
   /** Round 5d: variable names for token-carried margin channels — consumed
    *  by the sibling-gap → itemSpacing lowering (the gap then BINDS the
    *  margin's own variable), stripped before serialization.
@@ -7523,8 +7526,13 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
               : emptyRuntimeSized
                 ? 'an EMPTY in-flow box takes the parent height (layoutSizingVertical FILL, the #60 runtime default) and a FILL-sized child cannot be wrapped'
                 : null;
+        // Convention filled-child-keeps-margin-box: an in-flow child that grows or fills, with no negative margin, keeps
+        // its margin box; the box takes the child's FILL and the child fills it (applyMarginBox, marginBoxFills).
+        const keepsBox = input.conventions?.has('filled-child-keeps-margin-box') && !!why && !(child.overlay || child.insetOverlay || child.absolute) &&
+          !emptyRuntimeSized && sides.every((s) => m[s]! > 0);
+        if (keepsBox) child.marginBoxFills = true;
         // @lower emit.margin-box-skipped-refused
-        if (sides.length > 0 && why) {
+        if (sides.length > 0 && why && !keepsBox) {
           facts.push({
             part: child.name,
             variant,
@@ -8047,7 +8055,7 @@ function packHuggingSpaceBetween(spec: NodeSpec): void {
 
 /** Round 5d: the CSS margin box as a wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
-const marginBoxRuntime = (has: boolean): string =>
+const marginBoxRuntime = (has: boolean, fills = false): string =>
   has
     ? `
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -8059,9 +8067,11 @@ const marginBoxRuntime = (has: boolean): string =>
 // draws that. Out-of-flow and FILL-sized children keep their own lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow || childSpec.widthFill) return;
+  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || ${fills ? '(!childSpec.marginBoxFills && (childSpec.grow || childSpec.widthFill))' : 'childSpec.grow || childSpec.widthFill'}) return;${fills ? `
+  const fill = { Horizontal: false, Vertical: false };` : ''}
   try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
+    ${fills ? `fill.Horizontal = childNode.layoutSizingHorizontal === 'FILL'; fill.Vertical = childNode.layoutSizingVertical === 'FILL';
+    if (!childSpec.marginBoxFills && (fill.Horizontal || fill.Vertical)) return;` : `if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;`}
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
@@ -8074,7 +8084,12 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (placed) box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));
   else Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', paddingTop: t, paddingRight: r, paddingBottom: b, paddingLeft: l });
   box.appendChild(childNode);
-  if (placed) { childNode.x = l; childNode.y = t; }
+  if (placed) { childNode.x = l; childNode.y = t; }${fills ? `
+  // Convention filled-child-keeps-margin-box: the box takes the child's FILL axes, and the child fills the box.
+  if (childSpec.marginBoxFills) for (const axis of ['Horizontal', 'Vertical']) if (fill[axis]) {
+    try { box['layoutSizing' + axis] = 'FILL'; childNode['layoutSizing' + axis] = 'FILL'; }
+    catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the margin box could not take the FILL of its child (layoutSizing' + axis + ')', e); }
+  }` : ''}
   // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
   // must transfer the visible binding to the WRAPPER — hiding only the
   // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
@@ -9625,6 +9640,7 @@ function buildSyncScript(
   // single-paint glyph variable re-binding — all feature-gated so contracts
   // without these facts emit byte-identical scripts (the golden discipline).
   const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
+  const hasMarginBoxFills = featureDatas.some((d) => dataSome(d, (x) => x.marginBoxFills === true));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
   // Include layout writes only for an explicit outside-layout part or a
   // state width replacing literal or bound sides. Other scripts retain their bytes.
@@ -10541,7 +10557,7 @@ function applyNativeLine(parent, node, spec) {
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry, hasIntrinsicAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry, hasIntrinsicAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins, hasMarginBoxFills)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
