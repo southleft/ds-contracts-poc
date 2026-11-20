@@ -128,6 +128,14 @@
 /** hugging-space-between-packs (React to Figma writer): a frame hugging its content on its main axis has no free space,
  *  so CSS space-between packs its items from the start with their gaps; Figma's SPACE_BETWEEN ignores item spacing, so such
  *  a frame with two or more items and a spacing packs at MIN. Off, SPACE_BETWEEN stays and the spacing does not draw. */
+/** absolute-box-from-size-and-margins (React to Figma writer): an absolutely placed part sits a margin in from the inset that
+ *  places it (an inset places the margin edge), and one with its own width or height between two insets keeps that size at
+ *  the start inset (over-constrained in CSS; an auto inset reads back as its used value, so both are carried). Off, two
+ *  insets stretch the part and its margins are not drawn. */
+/** inline-block-line-box-as-drawn (React to Figma contract step and writer): an atomic inline (inline-block and its kin)
+ *  alone on its line in a block container carries how far that line box reaches above and below its margin box (Part.lineBox,
+ *  measured in the page: the parent line's strut and baseline alignment), and the native Figma writer adds that space to the
+ *  part's margin box. Off, nothing is measured, and the part is stacked at its margin box as before. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -138,7 +146,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
   'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width',
-  'text-baseline-rounds-like-figma', 'hugging-space-between-packs'] as const;
+  'text-baseline-rounds-like-figma', 'hugging-space-between-packs', 'absolute-box-from-size-and-margins', 'inline-block-line-box-as-drawn'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
