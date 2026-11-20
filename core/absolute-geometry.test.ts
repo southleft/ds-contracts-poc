@@ -654,3 +654,27 @@ test('profile convention synthetic-wrapper-shown-by-members: a folded flat membe
   }
  }finally{await browser.close()}
 });
+test('profile convention text-baseline-rounds-like-figma: a text line whose baseline Figma rounds up and Chromium rounds down is shifted by the difference',()=>{
+ const text=(fontSize:number,lineHeight:number)=>({name:'Label',type:'TEXT' as const,text:{characters:'AI',fontStyle:'Regular',fontFamily:'Probe Sans',fontSize,lineHeight,fontWeight:400}});
+ const set:DumpSet={setName:'Baseline Probe',type:'COMPONENT_SET',propertyDefinitions:{Size:{type:'VARIANT',defaultValue:'Small',variantOptions:['Small','Medium','Large']}},
+  variants:[['Small',12,16],['Medium',14,18],['Large',20,28]].map(([size,fs,lh])=>({name:`Size=${size}`,type:'COMPONENT',variantProperties:{Size:size as string},bbox:{width:40,height:lh as number},
+   layout:{mode:'HORIZONTAL',primary:'MIN',counter:'CENTER',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},children:[text(fs as number,lh as number)]}))};
+ const fontMetrics={'Probe Sans':{unitsPerEm:1000,ascender:1025,descender:-275}};
+ const read=(o:{fontMetrics?:typeof fontMetrics;conventions?:string[]},s:DumpSet=set)=>{const p=proposeFromDump(structuredClone(s),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),fileKey:'fixture',projectionMode:'exact',...o});
+  return {p,c:ContractSchema.parse(p.contract)};};
+ const none=read({conventions:['text-baseline-rounds-like-figma']});assert.equal(none.c.anatomy.root.parts!.Label.stylesWhen,undefined,'no metrics: unchanged');
+ const off=read({fontMetrics});assert(off.p.notes.some(n=>n.includes('text-baseline-not-rounded-like-figma')),JSON.stringify(off.p.notes));assert.equal(off.c.anatomy.root.parts!.Label.stylesWhen,undefined);
+ const {p,c}=read({fontMetrics,conventions:['text-baseline-rounds-like-figma']}),label=c.anatomy.root.parts!.Label;
+ // 12/16: Figma 13, Chromium 12. 14/18: both 14. 20/28: Figma 22, Chromium 21.
+ assert.deepEqual(label.stylesWhen,[{prop:'size',equals:'small',styles:{position:'relative',top:'1px'}},{prop:'size',equals:'large',styles:{position:'relative',top:'1px'}}]);
+ assert(p.notes.some(n=>n.includes('profile convention text-baseline-rounds-like-figma')),'convention note');
+ const scope=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,scope,errors,new Map());assert.deepEqual(errors,[]);
+ const tokens={primitives:p.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const css=emitReact(c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(tokens.primitives).keys()),tokenValues:tokens}).css;
+ const blocks=css.split('}').map(b=>b.split('{')),shifted=(size:string)=>blocks.some(([sel,body])=>sel!==undefined&&body!==undefined&&sel.includes('size-'+size)&&sel.includes('Label')&&body.includes('position: relative')&&body.includes('top: 1px'));
+ assert(shifted('small')&&shifted('large')&&!shifted('medium'),css.slice(0,400));
+ const native=createFigmaEngine({tokens,icons:new Map()}).compileComponentData(c,scope);assert.equal(native.variants.length,3);
+ // A whole-pixel text box gets geometricPrecision (subpixel positioning), and Linux Chromium moves a pixel from the ascent to a rounded-down descent: 12/16 draws at 11.
+ const wide=structuredClone(set);for(const v of wide.variants)Object.assign((v.children![0] as {text:object}).text,{textAutoResize:'WIDTH_AND_HEIGHT'});
+ assert.deepEqual(read({fontMetrics,conventions:['text-baseline-rounds-like-figma']},wide).c.anatomy.root.parts!.Label.stylesWhen,[{prop:'size',equals:'small',styles:{position:'relative',top:'2px'}},{prop:'size',equals:'large',styles:{position:'relative',top:'1px'}}]);
+});

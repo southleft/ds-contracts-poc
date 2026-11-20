@@ -1,5 +1,5 @@
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
-import {conventionSet,imperceptibleBlendView} from './profile-conventions.js';
+import {conventionSet,imperceptibleBlendView,type FontVerticalMetrics} from './profile-conventions.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
@@ -101,7 +101,7 @@ import {
 } from './exact-projection.js';
 import { jointTokenTableErrors } from '../packages/core/src/joint-tokens.js';
 import { validateContract } from '../packages/core/src/validate.js';
-import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
+import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS, nativeTextRenderingRoots, nativeTextRenderingLeafParts } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -13702,7 +13702,7 @@ function buildPartFromEvidence(
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryTextDecoration(m, part, ctx, where); // REST dump v1.44 / plugin v1.48 — text-decoration-line
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
-    carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
+    carryFontFamily(m, part, ctx, where); carryFigmaBaselineRounding(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where, tokens);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
@@ -17209,7 +17209,7 @@ function proposeFromDumpFencedImpl(
     /** Fresh batch-owned main with a witnessed composed-paint caller. */
     retainObservedRootPaint?: boolean;
     /** A system profile's conventions (core/profile-conventions.ts): read at the public batch door and as per-set context flags. */
-    conventions?: readonly string[];
+    conventions?: readonly string[]; /** A system profile's font vertical metrics (text-baseline-rounds-like-figma). */ fontMetrics?: FontVerticalMetrics;
     prefix?: string;
     fileKey?: string | null;
     /** Mint provisional tokens (core/mint-tokens.ts) from the unbound-value
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -19489,7 +19489,7 @@ function proposeFromDumpFencedImpl(
 
   settlePartialDrawingInk(contract.anatomy as Record<string,unknown>,ctx);
   settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
-  settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); // dump v1.36
+  settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); settleFigmaBaselineRounding(contract as unknown as Contract, ctx); // dump v1.36
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
@@ -20867,4 +20867,50 @@ function shiftPathData(data: string, dx: number, dy: number): string | undefined
     out.push(n(v + (axis === 0 ? dx : dy))); i++;
   }
   return out.join(' ').replace(/ ?([A-Z]) ?/g, '$1');
+}
+
+/** Profile convention text-baseline-rounds-like-figma (core/profile-conventions.ts), with the profile's fontMetrics. For a
+ *  single-line height of L px, Figma puts the baseline at the nearest pixel to (L - A - D) / 2 + A (A and D the font's
+ *  ascent and descent at this size), while Chromium rounds A and D to whole pixels and puts an odd leading pixel below the
+ *  baseline: round(A) + floor((L - round(A) - round(D)) / 2). Under text-rendering: geometricPrecision (subpixel glyph
+ *  positioning, which the emitters give a native-text root or leaf) Linux Chromium also moves a pixel from A to D when D
+ *  rounded down. Where Figma and Chromium differ (12/16 IBM Plex Sans: 13 against 12, or 11 under geometricPrecision) the
+ *  part is shifted down by the difference with position: relative and top, which moves its glyphs and leaves its layout
+ *  as it is. Uniform shifts ride the part; shifts that follow one axis ride stylesWhen on it. Only pixel line heights in
+ *  families the profile measures are read; a placed or positioned part is left alone. Off, it is named. The shift is
+ *  chosen once the contract is whole (settleFigmaBaselineRounding), when the text's rendering mode is known. */
+function carryFigmaBaselineRounding(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const metrics = ctx.fontMetrics;
+  if (!metrics) return;
+  const deltasFor = (subpixel: boolean) => m.occ.map(({node}) => {
+    const t = node.text, f = t?.fontFamily ? metrics[t.fontFamily] : undefined;
+    if (node.type !== 'TEXT' || !t || !f || node.abs || t.lineHeightUnit !== undefined || !Number.isFinite(t.lineHeight) || !Number.isFinite(t.fontSize)) return undefined;
+    const a = f.ascender / f.unitsPerEm * t.fontSize, d = -f.descender / f.unitsPerEm * t.fontSize, l = t.lineHeight!;
+    const lift = subpixel && Math.round(d) < d && Math.round(a) >= 1 ? 1 : 0, ca = Math.round(a) - lift, cd = Math.round(d) + lift;
+    return Math.round((l - a - d) / 2 + a) - (ca + Math.floor((l - ca - cd) / 2));
+  });
+  (ctx.figmaBaselinePlans ??= new Map()).set(part, (subpixel: boolean) => {
+    const deltas = deltasFor(subpixel), rows = (part.stylesWhen as Array<{styles: Record<string, string>}> | undefined) ?? [];
+    if ((part.declared as Record<string, string> | undefined)?.position || rows.some(r => 'position' in r.styles || 'top' in r.styles)) return;
+    if (deltas.some(d => d === undefined) || deltas.every(d => d === 0)) return;
+    if (!ctx.figmaBaseline) { ctx.notes.push(`${where}: text-baseline-not-rounded-like-figma — Figma rounds this text's baseline to the nearest pixel and Chromium rounds it down, so it draws ${Math.max(...deltas as number[])} px higher`); return; }
+    const shift = (d: number) => ({position: 'relative', top: `${d}px`});
+    if (new Set(deltas).size === 1) {
+      part.declared = {...(part.declared as Record<string, string> | undefined), position: 'relative'};
+      part.literals = {...(part.literals as Record<string, string> | undefined), top: `${deltas[0]}px`};
+    } else {
+      const axis = ctx.axes.find(ax => !isBooleanAxis(ax) && m.occ.every((o, i) => m.occ.every((p, j) => axisValuesOf(o.variant)[ax.property] !== axisValuesOf(p.variant)[ax.property] || deltas[i] === deltas[j])));
+      if (!axis) { ctx.notes.push(`${where}: text-baseline-shift-declined — the baseline difference follows no single axis`); return; }
+      const byValue = new Map(m.occ.map((o, i) => [axisValuesOf(o.variant)[axis.property]!, deltas[i]!]));
+      part.stylesWhen = [...rows, ...[...byValue].filter(([, d]) => d !== 0).map(([value, d]) => ({prop: axis.propName, equals: axisValue(axis, value), styles: shift(d)}))];
+    }
+    ctx.notes.push(`${where}: baseline shifted down to where Figma rounds it (${[...new Set(deltas)].join('/')} px${subpixel ? ', geometricPrecision' : ''}; profile convention text-baseline-rounds-like-figma)`);
+  });
+}
+/** Applies each recorded baseline shift for the rendering mode the emitters give its text (anatomy.ts native text rendering). */
+function settleFigmaBaselineRounding(contract: Contract, ctx: Ctx): void {
+  const plans = ctx.figmaBaselinePlans;
+  if (!plans?.size) return;
+  const roots = nativeTextRenderingRoots(contract), leaves = nativeTextRenderingLeafParts(contract);
+  for (const {part, path} of walkAnatomy(contract)) plans.get(part)?.(roots.has(contract.anatomy[path[0]!]!) || leaves.has(part));
 }
