@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { conventionSet } from '../core/profile-conventions.js';
 import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -171,6 +172,36 @@ test('the contract step preloads the stories the reader loaded, in its order, fr
   assert.deepEqual(readerPreload({}, index), []);   // an older reader output records no index: nothing is preloaded
   assert.throws(() => readerPreload(recorded, index.replace('a--one', 'a--new'), (f) => files[f]!), /^Error: index-changed-since-read$/);
   assert.throws(() => readerPreload({ ...recorded, only: { ...recorded.only, sha256: sha('["A"]') } }, index, (f) => files[f]!), /only-changed-since-read:only\.json/);
+});
+
+test('text-baseline-as-drawn: a one-line text part carries the baseline drawn per variant; the Figma writer reads it only with the convention', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Label', { axes: ['size'], references: [ref('b--a', { size: 'sm' }), ref('b--a', { size: 'lg' }, { size: 'lg' })] })] }).components;
+  const { contract, combos } = seed(c!), lit = { 'font-size': '12px', 'line-height': '16px' };
+  contract.anatomy.root.parts = { label: { text: 'AI', literals: lit }, two: { text: 'Two lines', literals: lit }, once: { text: 'x', literals: lit } } as never;
+  const read = (px: number) => ({ px, ascent: 1.025, descent: 0.275 }), lg = (key: string) => combos.find((k) => k.key === key)!.axisValues.size === 'lg';
+  const at = (key: string, part: string) => part === 'label' ? read(lg(key) ? 13 : 12) : part === 'two' ? (lg(key) ? null : read(12)) : lg(key) ? undefined : read(12);
+  // Each variant's reading over the axis that tells them apart; one variant without a reading leaves the part as it was.
+  assert.deepEqual(carryTextBaseline(contract, c!.axes, combos, at), ['label', 'once']);
+  const parts = contract.anatomy.root.parts as Record<string, { textBaseline?: unknown }>;
+  assert.deepEqual(parts.label!.textBaseline, { props: ['size'], rows: [{ values: ['sm'], ...read(12) }, { values: ['lg'], ...read(13) }] });
+  assert.deepEqual([parts.once!.textBaseline, parts.two!.textBaseline], [{ props: [], rows: [{ values: [], ...read(12) }] }, undefined]);
+  // A drawn baseline belongs to one line of literal text only.
+  const { ContractSchema, textBaselineIssues } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  assert.deepEqual(textBaselineIssues(contract, { text: 'a\nb', textBaseline: parts.once!.textBaseline } as never), ['text-baseline-unqualified']);
+  // Captured elements and readings are matched by capture order and tag, or not at all.
+  const node = (tag: string, nodes: unknown[] = []) => ({ tag, classes: [], nodes, style: {}, pseudo: {} }) as never;
+  const root = node('div', [{ t: 'el', el: node('span') }]);
+  assert.equal(drawnBaselines(root, [['div', null], ['span', read(12)]])?.size, 2);
+  assert.equal(drawnBaselines(root, [['div', null], ['p', read(12)]]), null);
+  // The writer draws the glyph line at 2·b − (a − d)·s in a box kept at the line height; off, it does not read the field.
+  const parsed = ContractSchema.parse(contract), boxes = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; baselineBox?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown[] => [...(s.name === 'label' && s.baselineBox ? [s.baselineBox] : []), ...(s.children ?? []).flatMap(find)];
+    return (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.flatMap((v) => find(v.spec));
+  };
+  assert.deepEqual(boxes(['text-baseline-as-drawn']), [{ line: 15, height: 16 }, { line: 17, height: 16 }]);
+  assert.deepEqual(boxes([]), []);
 });
 
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {

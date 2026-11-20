@@ -26,7 +26,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
-import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
+import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, textBaselineIssues, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, readerStoryIds, SELECT_INSTANCE, SHOW, SystemProfile, type StoryComponent } from './storybook-reader.js';
 import type { CDPSession } from 'playwright-core';
@@ -165,6 +165,57 @@ export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear =
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
   if (root) walk(root); return tags; })()`;
 
+/** Convention text-baseline-as-drawn: for each element in capture order (NUMBER_ELEMENTS' walk), where Chromium laid out
+ *  the baseline of its own text, in px below that line box's top, when that text is one line in a block-level or inline
+ *  box (zero-size probes at the line top before its first run and after its last, and at the baseline; removed at once),
+ *  with its font's ascent and descent per em (canvas, at 1000 px); null otherwise. */
+export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
+  const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
+  const walk = (el) => { const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.data.trim()), cs = getComputedStyle(el); let m = null;
+    if (own.length && /^(block|inline|inline-block|list-item|flow-root|table-cell)$/.test(cs.display)) {
+      const first = probe('top'), last = probe('top'), base = probe('baseline'); own[0].before(first); own[0].after(base); own[own.length - 1].after(last);
+      const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top;
+      first.remove(); base.remove(); last.remove();
+      const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
+      if (one) m = { px: +b.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+    out.push([el.localName, m]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
+
+/** The captured elements, in capture order, matched to MEASURE_BASELINES' readings by position and tag; none if they differ. */
+export function drawnBaselines(root: CapturedNode, read: ReadonlyArray<[string, { px: number; ascent: number; descent: number } | null]>):
+  Map<CapturedNode, { px: number; ascent: number; descent: number } | null> | null {
+  const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
+  walk(root);
+  if (els.length !== read.length || els.some((e, i) => e.tag.toLowerCase() !== read[i]![0].toLowerCase())) return null;
+  return new Map(els.map((e, i) => [e, read[i]![1]]));
+}
+
+/** Convention text-baseline-as-drawn: a part owning one line of literal text carries the baseline the browser drew in each
+ *  variant that draws it (`textBaseline`, over the axes that tell the readings apart; none when all agree). A part that
+ *  some drawing variant has no reading for (two lines, a flex or grid box) is left as it was. Returns the parts carried. */
+export function carryTextBaseline(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined): string[] {
+  const carried: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
+    if (drawn.length && drawn.every((r) => r.m)) {
+      const key = (r: (typeof drawn)[number]) => JSON.stringify(r.m), clash = (props: string[]) => { const seen = new Map<string, string>(); let n = 0;
+        for (const r of drawn) { const k = JSON.stringify(props.map((a) => r.v[a])); if (seen.has(k) && seen.get(k) !== key(r)) n++; seen.set(k, key(r)); } return n; };
+      const props: string[] = [];
+      while (clash(props) && props.length < axes.length) props.push(axes.filter((a) => !props.includes(a)).sort((a, b) => clash([...props, a]) - clash([...props, b]))[0]!);
+      props.sort((a, b) => axes.indexOf(a) - axes.indexOf(b));
+      const rows = [...new Map(drawn.map((r) => { const values = props.map((a) => r.v[a]!); return [JSON.stringify(values), { values, ...r.m! }]; })).values()];
+      part.textBaseline = { props, rows };
+      if (textBaselineIssues(contract, part).length) delete part.textBaseline; else carried.push(name);
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return carried;
+}
+
 export type GeneratedText = { pe: '::marker' | '::before' | '::after'; text: string; x: number; y: number };
 /** What each numbered element's ::marker, ::before and ::after draws, read from Chromium's layout snapshot (the computed
  *  `content` keeps counter() unresolved; the layout holds the text drawn), at the left of its first glyph and the top of
@@ -194,7 +245,8 @@ export async function generatedText(cdp: CDPSession): Promise<{ texts: Map<numbe
  *  stay as they are, refused by name as when the convention is off (`pseudo-content-not-canvas-ink`). The page's elements are matched to the capture as read; the returned function adds
  *  the spans (after any pass that moves elements). Null, and nothing carried, when the page's elements and the capture's
  *  differ. */
-export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>): (() => void) | null {
+export function carryGeneratedText(root: CapturedNode, tags: readonly string[], drawn: Awaited<ReturnType<typeof generatedText>>,
+  placed: (host: CapturedNode, span: CapturedNode) => void = () => {}): (() => void) | null {
   const els: CapturedNode[] = [], walk = (n: CapturedNode) => { els.push(n); for (const k of n.nodes) if (k.t === 'el') walk(k.el); };
   walk(root);
   if (els.length !== tags.length || els.some((e, i) => e.tag.toLowerCase() !== tags[i]!.toLowerCase())) return null;
@@ -211,7 +263,7 @@ export function carryGeneratedText(root: CapturedNode, tags: readonly string[], 
       const style = { ...st, display: 'block', position: 'absolute', left: `${g.x - origin[0]! - px(host.style['border-left-width'])}px`,
         top: `${g.y - origin[1]! - px(host.style['border-top-width'])}px`, ...Object.fromEntries(['margin', 'padding'].flatMap((b) => sides.map((s) => [`${b}-${s}`, '0px']))) };
       const span: CapturedNode = { tag: 'span', classes: [], nodes: [{ t: 'text', v: g.text }], style, pseudo: {} }, at = g.pe === '::after' ? -1 : lead++;
-      adds.push(() => { host.nodes.splice(at < 0 ? host.nodes.length : at, 0, { t: 'el', el: span }); delete host.pseudo[g.pe]; });
+      adds.push(() => { host.nodes.splice(at < 0 ? host.nodes.length : at, 0, { t: 'el', el: span }); delete host.pseudo[g.pe]; placed(host, span); });
     }
   });
   return () => adds.forEach((add) => add());
@@ -459,7 +511,7 @@ async function main() {
       try {
         const { contract: seeded, drawn, combos, space } = seed(c);
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
-        const captures: Capture[] = [], rootMoved: string[] = [];
+        const captures: Capture[] = [], rootMoved: string[] = [], baselines = new Map<CapturedNode, { px: number; ascent: number; descent: number } | null>();
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -475,10 +527,15 @@ async function main() {
             true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
+          if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
+            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at)) as never);
+            if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
+          }
           let generated: (() => void) | null | undefined;
           if (conventions.has('generated-text-carried')) { // read and matched before any element moves
             const tags = await page.evaluate(NUMBER_ELEMENTS(at)) as string[]; // the capture's own root
-            generated = carryGeneratedText(root, tags, await generatedText(cdp));
+            generated = carryGeneratedText(root, tags, await generatedText(cdp), (host, span) => { // drawn on its host's line
+              const m = baselines.get(host); if (m) baselines.set(span, m); });
             await page.evaluate(NUMBER_ELEMENTS(at, true));
             if (!generated) refusals.push(`generated-text-unmatched:${k.id}`);
           }
@@ -545,6 +602,8 @@ async function main() {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis'),
           conventions.has('variant-text-owns-its-part')));
+        if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
+          const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; });
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
