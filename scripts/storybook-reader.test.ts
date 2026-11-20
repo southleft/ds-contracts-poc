@@ -317,3 +317,11 @@ test('an instance its story places off the pixel grid is moved onto it, only as 
     assert.deepEqual([await at('s'), await page.locator('#s').getAttribute('style')], flexible);
   } finally { await browser.close(); }
 });
+
+import {readerStoryIds} from './storybook-reader.js';
+test('readerStoryIds: every story; with --only, the listed declarations\' stories and left-out stories, or the listed titles', () => {
+  const every = [{id: 'a--x', title: 'A'}, {id: 'b--y', title: 'B'}];
+  const declared = [{name: 'A', stories: ['a--x'], axes: [], leftOut: [{story: 'a--z', reason: 'test'}]}] as never;
+  assert.deepEqual([readerStoryIds(every, declared), readerStoryIds(every, declared, new Set(['A'])), readerStoryIds(every, [], new Set(['B']))],
+    [['a--x', 'b--y'], ['a--x', 'a--z'], ['b--y']]);
+});
