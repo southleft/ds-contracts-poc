@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14626,7 +14626,7 @@ function buildPartFromEvidence(
       if (!capturedGeometry) carryAbsPlacement(m, part, tokens, ctx, where, { size: false });
     } else {
       invertNodeShape(m, part, ctx, where);
-      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where); carryStretchedLineBar(m, part, tokens, ctx, where);
+      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where); carryStretchedLineBar(m, part, tokens, ctx, where); snapSwapDrawingPathBox(m, part, ctx, where);
     }
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20756,7 +20756,7 @@ function carryFixedSwapDrawing(m: Merged, part: Record<string, unknown>, compone
     if (!rows.some(r => JSON.stringify(r) === JSON.stringify(selection))) rows.push(selection);
   }
   const drawnWhere = `${where}/[fixed swap drawing]`;
-  const root = mergeOcc(m.name, m.occ.map(o => ({variant: o.variant, node: o.node.fixedSwapDrawings![property]![0]!.root})), ctx.notes, drawnWhere, ctx.axes);
+  const root = mergeOcc(m.name, m.occ.map(o => ({variant: o.variant, node: {...o.node.fixedSwapDrawings![property]![0]!.root, [SWAP_DRAWING_ROOT]: true} as DumpNode})), ctx.notes, drawnWhere, ctx.axes);
   const key = partKey('swapDrawing', ctx, drawnWhere, selfKey), previous = ctx.presenceVariants;
   ctx.presenceVariants = m.occ.map(o => o.variant);
   let built: Record<string, unknown> | null;
@@ -20810,4 +20810,45 @@ function carryVerticalFillLine(m: Merged, part: Record<string, unknown>, ctx: Ct
     observedSources: m.occ.map(o => ({...o.node.shape!.line!.source!, variantName: o.variant, length: o.node.shape!.line!.length, transform: o.node.shape!.line!.transform}))}};
   ctx.notes.push(`${where}: quarter-turn LINE stretched across its row carried as a zero-width in-flow line over the row's height (profile convention vertical-fill-line-in-row)`);
   return true;
+}
+
+/** Profile convention swap-drawing-path-box-whole-pixel (core/profile-conventions.ts). A captured fixed-swap drawing
+ *  (fixed-swap-drawing-carried) places each path by its own box, and Chromium paints a box on whole pixels: a 1 px bar at
+ *  y = 7.5 lands on one row where Figma antialiases it over two, which the glyph check reads as another glyph. With the
+ *  convention, a path part directly under a drawing root whose absolute offsets share one fractional remainder (fx, fy)
+ *  starts its box at the whole pixel below each offset, grows it by that remainder (at most 1 px each way) and shifts its
+ *  path data by it, so the remainder is drawn inside the mask. Only absolute M/L/H/V/C/S/Q/T/Z path data is shifted;
+ *  anything else is left as it is. Off, a fractional offset is named. */
+const SWAP_DRAWING_ROOT = Symbol('swap-drawing-root');
+function snapSwapDrawingPathBox(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const shape = part.shape as {kind?: string; width?: number; height?: number; paths?: Array<{data: string}>; parentViewport?: unknown; pathsByProp?: unknown} | undefined;
+  if (shape?.kind !== 'path' || !shape.paths?.length || shape.parentViewport || shape.pathsByProp || part.absoluteGeometry || part.absoluteGeometryByCombination ||
+    !m.occ.length || !m.occ.every(o => (o.parent?.node as unknown as Record<symbol, unknown> | undefined)?.[SWAP_DRAWING_ROOT])) return;
+  const rows = [...((part.stylesWhen as Array<{styles: Record<string, string>}> | undefined) ?? []).map(r => r.styles), ...(part.literals ? [part.literals as Record<string, string>] : [])]
+    .filter(st => st.left !== undefined || st.top !== undefined);
+  const px = (v: string | undefined) => v === undefined ? 0 : /^-?\d+(\.\d+)?px$/.test(v) ? Number(v.slice(0, -2)) : NaN;
+  const fr = (v: number) => Math.round((v - Math.floor(v)) * 1e6) / 1e6;
+  if (!rows.length || rows.some(st => st.right !== undefined || st.bottom !== undefined || st.transform !== undefined || [st.left, st.top].some(v => Number.isNaN(px(v))))) return;
+  const fx = fr(px(rows[0]!.left)), fy = fr(px(rows[0]!.top));
+  if ((fx === 0 && fy === 0) || rows.some(st => fr(px(st.left)) !== fx || fr(px(st.top)) !== fy)) return;
+  if (!ctx.swapDrawingPathSnap) { ctx.notes.push(`${where}: swap-drawing-path-offset-not-snapped — the path's box sits at a fractional offset (+${fx}, +${fy} px), which Chromium paints on whole pixels`); return; }
+  const shifted = shape.paths.map(p => shiftPathData(p.data, fx, fy));
+  if (shifted.some(d => d === undefined)) return;
+  for (const st of rows) { if (st.left !== undefined) st.left = `${Math.floor(px(st.left))}px`; if (st.top !== undefined) st.top = `${Math.floor(px(st.top))}px`; }
+  shape.paths = shape.paths.map((p, i) => ({...p, data: shifted[i]!}));
+  shape.width = Math.ceil(shape.width! + fx - 1e-9); shape.height = Math.ceil(shape.height! + fy - 1e-9);
+  ctx.notes.push(`${where}: path box started on the whole pixel and its fractional offset (+${fx}, +${fy} px) drawn inside the path (profile convention swap-drawing-path-box-whole-pixel)`);
+}
+/** Absolute SVG path data shifted by (dx, dy); undefined for relative or arc commands. */
+function shiftPathData(data: string, dx: number, dy: number): string | undefined {
+  const tokens = data.match(/[A-Za-z]|-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g);
+  if (!tokens || tokens.some(t => /^[a-z]$/.test(t) || t === 'A')) return undefined;
+  const out: string[] = []; let cmd = '', i = 0;
+  const n = (v: number) => String(Math.round(v * 1e6) / 1e6);
+  for (const t of tokens) {
+    if (/^[A-Z]$/.test(t)) { cmd = t; i = 0; out.push(t); continue; }
+    const v = Number(t), axis = cmd === 'H' ? 0 : cmd === 'V' ? 1 : i % 2;
+    out.push(n(v + (axis === 0 ? dx : dy))); i++;
+  }
+  return out.join(' ').replace(/ ?([A-Z]) ?/g, '$1');
 }
