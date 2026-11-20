@@ -112,6 +112,9 @@
 /** inside-outside-stroke-as-outline (Figma to React proposal): a uniform stroke that takes no layout space and is drawn
  *  INSIDE in some variants and OUTSIDE in others is carried as one outline with a per-variant outline-offset (-weight
  *  INSIDE, 0 OUTSIDE), the spelling the CENTER mix already uses. Off, the mix is refused by name and drawn inside. */
+/** swap-drawing-path-box-whole-pixel (Figma to React proposal): a path in a captured fixed-swap drawing whose box sits at a
+ *  fractional offset starts its box on the whole pixel and draws the remainder inside its path data, so Chromium does not
+ *  snap a half-pixel bar to one row. Off, the fractional offset is named. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -120,7 +123,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
-  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline'] as const;
+  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
+  'swap-drawing-path-box-whole-pixel'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

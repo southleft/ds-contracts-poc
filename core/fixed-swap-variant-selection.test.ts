@@ -154,3 +154,26 @@ test('fixed-swap-drawing-carried: a captured drawing reaches the child slot only
  const b=propose('B',['fixed-swap-drawing-carried']);assert.equal(b.use.component!.contentSlot,undefined);assert(b.p.notes.some(n=>n.includes('does not draw exactly one')));
  assert.equal(propose('A',[]).use.component!.contentSlot,undefined,'convention off: unchanged');
 });
+test('swap-drawing-path-box-whole-pixel: a half-pixel path in a captured drawing starts its box on the whole pixel and draws the remainder inside',async()=>{
+ const {emitReact}=await import('./emit-react.js'),{validateContract}=await import('../packages/core/src/validate.js'),{flattenTokens}=await import('./tokens.js');
+ const child=ContractSchema.parse({...base,id:'test.bar-host',name:'BarHost',props:[{name:'mode',type:{enum:['a','b']},default:'a',bindings:{code:{prop:'mode'},figma:{kind:'VARIANT',property:'Mode',values:{a:'A',b:'B'}}}}],
+  anatomy:{root:{parts:{icon:{slot:{name:'glyph',bindings:{figma:{property:'Payload'}}}}}}},bindings:anchors('bar-host-key','bar-host-set','BarHost')});
+ const childSet:DumpSet={setName:'BarHost',type:'COMPONENT_SET',key:'bar-host-key',nodeId:'bar-host-set',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']},'Payload#1:2':{type:'INSTANCE_SWAP',defaultValue:'default-main'}},
+  variants:['A','B'].map(m=>({name:'Mode='+m,type:'COMPONENT',nodeId:'bar-'+m,componentKey:'bar-'+m+'-key',variantProperties:{Mode:m}}))};
+ const drawing={name:'Selected',type:'FRAME',nodeId:'I9;1',fixedSize:{width:16,height:16},clipsContent:true,children:[{name:'Bar',type:'VECTOR',nodeId:'I9;1;2',fill:{hex:'161616'},
+  shape:{kind:'path',width:8,height:1,x:4,y:7.5,constraints:{horizontal:'SCALE',vertical:'SCALE'},paths:[{data:'M8 0L0 0L0 1L8 1L8 0Z',windingRule:'NONZERO'}]}}]};
+ const propose=(conventions:string[])=>{const caller:DumpSet={setName:'Caller',type:'COMPONENT_SET',key:'caller-key',nodeId:'caller-set',propertyDefinitions:{Case:{type:'VARIANT',defaultValue:'One',variantOptions:['One']}},
+  variants:[{name:'Case=One',type:'COMPONENT',nodeId:'caller-0',variantProperties:{Case:'One'},layout:layout as any,children:[{name:'BarHost',type:'INSTANCE',nodeId:'use-0',instanceOf:'BarHost',instanceKey:'bar-A-key',instanceSetKey:'bar-host-key',
+   instanceGeometry:{nodeId:'use-0',componentId:'bar-A',transform:[[1,0,0],[0,1,0]],localSize:{width:16,height:16}},fixedSwaps:{Payload:{id:'other-main',key:'other-key',observedInstances:[{nodeId:'I9;1',path:[0]}]}},
+   fixedSwapDrawings:{Payload:[{path:[0],root:drawing}]}} as any]}]};
+  const p=proposeFromDump(caller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['BarHost',child.id]]),contractIdByKey:new Map([['bar-host-key',child.id]]),contractsById:new Map([[child.id,asMinimalChildContract(child)]]),fixedSwapOwnerRoots:fixedSwapOwnerRoots([childSet]),conventions});
+  const c=ContractSchema.parse(p.contract);return {p,c,bar:walkAnatomy(c).find(w=>w.part.shape?.kind==='path')?.part};};
+ const off=propose(['fixed-swap-drawing-carried']);assert(off.bar?.shape?.kind==='path');assert.deepEqual([off.bar.shape.width,off.bar.shape.height],[8,1]);
+ assert(off.p.notes.some(n=>n.includes('swap-drawing-path-offset-not-snapped')),JSON.stringify(off.p.notes));
+ const on=propose(['fixed-swap-drawing-carried','swap-drawing-path-box-whole-pixel']);assert(on.bar?.shape?.kind==='path');
+ assert.deepEqual([on.bar.shape.width,on.bar.shape.height,on.bar.shape.paths![0]!.data],[8,2,'M8 0.5L0 0.5L0 1.5L8 1.5L8 0.5Z']);
+ assert(!on.p.notes.some(n=>n.includes('swap-drawing-path-offset-not-snapped')));
+ const scope=new Map([[child.id,child],[on.c.id,on.c]]),errors:string[]=[];validateContract(on.c,scope,errors,new Map());assert.deepEqual(errors,[]);
+ const tree=on.p.mintedTokens?.tree??{},css=emitReact(on.c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(tree).keys()),tokenValues:{primitives:tree,semantic:{},light:{},dark:{},brands:{default:{}}}}).css;
+ assert.match(css,/top: 7px/);assert.doesNotMatch(css,/top: 7\.5px/);assert.match(css,/viewBox%3D%220%200%208%202%22/);
+});
