@@ -159,6 +159,19 @@ export function liftToContainingBlock(node: CapturedNode): number {
 /** Profile convention generated-text-carried, the page half: each element under the captured root, in the capture's
  *  order, is numbered (`data-ds-generated`, removed again with `clear`) so the layout snapshot can name the element each
  *  ::marker, ::before and ::after belongs to. Returns the elements' tags, which the capture must match. */
+/** Profile convention svg-own-fill-on-host: an element holding nothing but one svg, whose own fill (a rule on the svg, not
+ *  one it inherits from the element) differs from the element's, takes that fill as its own. The svg folds into the
+ *  element as its icon, and its shapes' fill is read as the host's, so the glyph keeps the fill the browser drew; CSS fill
+ *  inherits, so the svg still draws the same. Returns the elements changed. */
+export function liftSvgOwnFill(node: CapturedNode): number {
+  const kids = node.nodes.flatMap((k) => k.t === 'el' ? [k.el] : []), svg = kids.length === 1 && kids[0]!.tag === 'svg' ? kids[0]! : null;
+  const alone = !node.nodes.some((k) => k.t === 'text' && k.v.trim()), fill = svg?.style['fill'];
+  let n = 0;
+  if (svg && alone && fill && fill !== node.style['fill'] && /^(rgb|#)/.test(fill)) { node.style['fill'] = fill; n++; }
+  for (const k of kids) n += liftSvgOwnFill(k);
+  return n;
+}
+
 export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, tags = [];
   const walk = (el) => { if (${clear}) el.removeAttribute('data-ds-generated'); else el.setAttribute('data-ds-generated', String(tags.length)); tags.push(el.localName);
@@ -590,6 +603,7 @@ async function main() {
           }
           if (conventions.has('svg-rotation-carried')) spellSvgRotation(root);
           if (conventions.has('normal-line-height-as-drawn')) spellNormalLineHeight(root);
+          if (conventions.has('svg-own-fill-on-host')) liftSvgOwnFill(root);
           if (conventions.has('svg-viewbox-carried') && !carrySvgViewports(root, await page.evaluate(SVG_VIEWPORTS(at)) as never,
             conventions.has('svg-viewbox-meets-oblong-box')))
             refusals.push(`svg-viewbox-unmatched:${k.id}`);
