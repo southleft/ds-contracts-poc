@@ -4855,14 +4855,18 @@ function absolutePartPlacement(
   // does (it paints that bubble from -47); an offset inside the box, or any offset with the convention off, is kept.
   const out = (v: number): number => (v < 0 && input.conventions?.has('absolute-overhang-whole-pixel') ? Math.floor(v) : v);
   const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
-  if (left !== undefined && right !== undefined) { a.h = 'STRETCH'; a.left = out(left + tx); a.right = out(right - tx); }
-  else if (left !== undefined) { a.h = 'MIN'; a.left = out(left + tx); }
-  else if (right !== undefined) { a.h = 'MAX'; a.right = out(right - tx); }
+  // Profile convention absolute-box-from-size-and-margins: an inset places the box's MARGIN edge, so the box sits a margin
+  // further in; and a box with its own width (height) between two insets is over-constrained, so it keeps that size at the
+  // start inset (the computed style reports an auto inset's used value, so both are carried). Off, both insets stretch it.
+  const boxed = input.conventions?.has('absolute-box-from-size-and-margins') ?? false, m = (ch: string) => (boxed ? num(ch) ?? 0 : 0);
+  if (left !== undefined && right !== undefined && !(boxed && num('width') !== undefined)) { a.h = 'STRETCH'; a.left = out(left + tx); a.right = out(right - tx); }
+  else if (left !== undefined) { a.h = 'MIN'; a.left = out(left + m('margin-left') + tx); }
+  else if (right !== undefined) { a.h = 'MAX'; a.right = out(right + m('margin-right') - tx); }
   else { a.h = 'MIN'; a.left = out(tx); }
   if (centerY) a.v='CENTER';
-  else if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = out(top + ty); a.bottom = out(bottom - ty); }
-  else if (top !== undefined) { a.v = 'MIN'; a.top = out(top + ty); }
-  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = out(bottom - ty); }
+  else if (top !== undefined && bottom !== undefined && !(boxed && num('height') !== undefined)) { a.v = 'STRETCH'; a.top = out(top + ty); a.bottom = out(bottom - ty); }
+  else if (top !== undefined) { a.v = 'MIN'; a.top = out(top + m('margin-top') + ty); }
+  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = out(bottom + m('margin-bottom') - ty); }
   else { a.v = 'MIN'; a.top = out(ty); }
   return a;
 }

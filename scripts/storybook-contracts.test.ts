@@ -220,6 +220,22 @@ test('hugging-space-between-packs: a row that hugs its items packs them at the s
   assert.deepEqual(primary({ width: '200px' }, ['hugging-space-between-packs']), ['SPACE_BETWEEN', 8]);   // free space to spread
 });
 
+test('absolute-box-from-size-and-margins: a sized absolute box between two insets keeps its size, a margin in from its start inset', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Badge', { references: [ref('b--a', {})] })] }).components;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const placed = (conventions: string[]) => {
+    const { contract } = seed(c!);
+    Object.assign(contract.anatomy.root, { declared: { position: 'relative' }, literals: { width: '48px', height: '48px' }, parts: { badge: { text: '4', declared: { position: 'absolute' },
+      literals: { top: '0px', right: '0px', left: '28.5px', bottom: '28px', width: '15.5px', height: '16px', 'margin-top': '4px', 'margin-right': '4px' } } } });
+    const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; absolute?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown => s.name === 'badge' ? s.absolute : (s.children ?? []).map(find).find(Boolean);
+    return find((engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec);
+  };
+  assert.deepEqual(placed(['absolute-box-from-size-and-margins']), { h: 'MIN', v: 'MIN', left: 28.5, top: 4 });
+  assert.deepEqual(placed([]), { h: 'STRETCH', v: 'STRETCH', left: 28.5, right: 0, top: 0, bottom: 28 });
+});
+
 test('inline-block-line-box-as-drawn: an atomic inline alone on its line carries its line box per variant; the writer adds it to the margin box', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const { contract, combos } = seed(c!), inline = (key: string) => combos.find((k) => k.key === key)!.axisValues.type === 'inline';
