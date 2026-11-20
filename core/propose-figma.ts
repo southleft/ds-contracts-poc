@@ -19586,7 +19586,7 @@ function proposeFromDumpFencedImpl(
     for(const origin of ctx.draftPaintOrigins){
       if((origin.part as Part).fillStack||(origin.part as Part).fillStackByCombination)continue;
       if(!actualParts.has(origin.part as Part))throw Error(`solid-fill-composition-source-owner-detached:${origin.where}`);
-      const paints=origin.merged.occ.map(o=>o.node.sourceFillComposition!==undefined?o.node.sourceFillComposition:o.node.sourceNormalFillComposition??(o.node.sourceEmptyFill?{paint:{color:{r:0,g:0,b:0},opacity:0,blendMode:'NORMAL' as const}}:undefined));
+      const paints=carryUncapturedFillVariable(origin.merged,origin.where,ctx.notes,opts.conventions,origin.merged.occ.map(o=>o.node.sourceFillComposition!==undefined?o.node.sourceFillComposition:o.node.sourceNormalFillComposition??(o.node.sourceEmptyFill?{paint:{color:{r:0,g:0,b:0},opacity:0,blendMode:'NORMAL' as const}}:undefined)));
       if(paints.some(p=>!p || 'issue' in p))throw Error(`solid-fill-composition-source-occurrence-unqualified:${origin.where}`);
       const observedBindings=new Map<number,SolidFillObservedBinding>();
       for(const [index,paint] of paints.entries())if(paint && 'paint' in paint && paint.variableId!==undefined){
@@ -20944,4 +20944,22 @@ function carryAbsoluteOnlyHugExtent(m: Merged, part: Record<string, unknown>, to
     mintObservation(ctx, tokens, where, minAxis, 'px', m.occ.map((o, i) => ({variant: o.variant, value: extent[i]!})), `${where}|absolute-hug-${minAxis}`);
     ctx.notes.push(`${where}: ${minAxis} carries the ${drawn}px its absolutely placed children witness on HUG planes; other planes get a zero minimum (profile convention absolute-only-hug-keeps-extent)`);
   }
+}
+
+/** Profile convention uncaptured-fill-variable-carried-as-paint: a source fill naming a variable the dump carries no consumer
+ *  for (captured without variable access) keeps its observed paint, and the binding it cannot prove is not recreated, as the
+ *  ordered fill stack already does (unresolvedBinding). Off, the owner refuses with consumer-missing, as before. */
+function carryUncapturedFillVariable<T>(m: Merged, where: string, notes: string[], conventions: readonly string[] | undefined, paints: T[]): T[] {
+  if (!conventionSet(conventions).has('uncaptured-fill-variable-carried-as-paint')) return paints;
+  let dropped = 0;
+  const carried = paints.map((p, i) => {
+    const source = p as { paint?: unknown; variableId?: string } | undefined;
+    if (!source || !('paint' in source) || source.variableId === undefined || m.occ[i]?.node.variableConsumers?.[source.variableId]) return p;
+    dropped++;
+    const rest: { paint?: unknown; variableId?: string } = { ...source };
+    delete rest.variableId;
+    return rest as T;
+  });
+  if (dropped) notes.push(`${where}: ${dropped} of ${paints.length} source fills name a variable the dump carries no consumer for (captured without variable access); the observed paint is carried and no binding is recreated (profile convention uncaptured-fill-variable-carried-as-paint)`);
+  return carried;
 }

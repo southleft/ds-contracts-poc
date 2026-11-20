@@ -139,6 +139,8 @@
 /** absolute-only-hug-keeps-extent (Figma to React proposal): a frame below the root that hugs an axis while every visible
  *  child is absolutely placed keeps, as that axis' minimum, the extent its children witness, where CSS would collapse it to
  *  its padding. Off, named. */
+/** uncaptured-fill-variable-carried-as-paint (Figma to React proposal): a source fill that names a variable the dump
+ *  carries no consumer for keeps its observed paint, and no binding is recreated. Off, the owner refuses (consumer-missing). */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -197,6 +199,7 @@ export const CONVENTIONS = [
   'text-baseline-as-drawn',
   'text-baseline-rounds-like-figma',
   'text-box-stacks-block-children',
+  'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',
   'variant-grid-whole-pixel',
   'variant-text-owns-its-part',
