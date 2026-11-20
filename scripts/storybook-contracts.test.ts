@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, liftSvgOwnFill, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, declaredShow, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -256,6 +256,15 @@ test('inline-block-line-box-as-drawn: an atomic inline alone on its line carries
   };
   assert.deepEqual(margins(['inline-block-line-box-as-drawn']), [{ bottom: 8, top: 2 }, { bottom: 8 }]);
   assert.deepEqual(margins([]), [{ bottom: 8 }, { bottom: 8 }]);
+});
+
+test('show-declared-component: a case names the component its profile declares for the story, as the reader does', () => {
+  const decls = [{ name: 'Button', stories: ['b--default'] }, { name: 'ButtonSkeleton', stories: ['b--skeleton'] }, { name: 'Item', stories: ['l--item'], subcomponent: true as const }];
+  assert.equal(declaredShow(decls, 'b--skeleton', { size: 'sm' }), JSON.stringify(['b--skeleton', { size: 'sm' }, 'ButtonSkeleton', false]));
+  assert.equal(declaredShow(decls, 'l--item', {}), JSON.stringify(['l--item', {}, 'Item', true]));
+  assert.equal(declaredShow(decls, 'x--none', {}), JSON.stringify(['x--none', {}]));   // listed by no declaration: as before
+  assert.equal(declaredShow([...decls, { name: 'Later', stories: ['b--default'] }], 'b--default', {}), JSON.stringify(['b--default', {}, 'Later', false]));
+  assert.throws(() => profileDeclarations({ profile: { path: 'p.json', sha256: 'recorded' } }, () => Buffer.from('{}')), /^Error: profile-changed-since-read:p\.json$/);
 });
 
 test('svg-own-fill-on-host: an element holding only an svg with its own fill takes that fill; text or a shared fill leaves it', () => {
