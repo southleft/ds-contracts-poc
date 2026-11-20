@@ -2740,9 +2740,12 @@ function applyTokens(
         }
         break;
       }
-      case 'min-width':
+      case 'min-width': {
         spec.bindings = { ...spec.bindings, minWidth: varName };
+        const minimum = pxOrNull(resolveLiteral(tokenPath));
+        if (minimum !== null) boundMinWidth.set(spec, minimum);
         break;
+      }
       // Round 5 (canvas-gate finding): min-height is NOT redundant chrome —
       // the floor-promoted Button carries min-height {p.height-800} (32px)
       // and the real package's sub-768px bucket (the floor capture's own
@@ -4847,14 +4850,18 @@ function absolutePartPlacement(
   // does (it paints that bubble from -47); an offset inside the box, or any offset with the convention off, is kept.
   const out = (v: number): number => (v < 0 && input.conventions?.has('absolute-overhang-whole-pixel') ? Math.floor(v) : v);
   const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
-  if (left !== undefined && right !== undefined) { a.h = 'STRETCH'; a.left = out(left + tx); a.right = out(right - tx); }
-  else if (left !== undefined) { a.h = 'MIN'; a.left = out(left + tx); }
-  else if (right !== undefined) { a.h = 'MAX'; a.right = out(right - tx); }
+  // Profile convention absolute-box-from-size-and-margins: an inset places the box's MARGIN edge, so the box sits a margin
+  // further in; and a box with its own width (height) between two insets is over-constrained, so it keeps that size at the
+  // start inset (the computed style reports an auto inset's used value, so both are carried). Off, both insets stretch it.
+  const boxed = input.conventions?.has('absolute-box-from-size-and-margins') ?? false, m = (ch: string) => (boxed ? num(ch) ?? 0 : 0);
+  if (left !== undefined && right !== undefined && !(boxed && num('width') !== undefined)) { a.h = 'STRETCH'; a.left = out(left + tx); a.right = out(right - tx); }
+  else if (left !== undefined) { a.h = 'MIN'; a.left = out(left + m('margin-left') + tx); }
+  else if (right !== undefined) { a.h = 'MAX'; a.right = out(right + m('margin-right') - tx); }
   else { a.h = 'MIN'; a.left = out(tx); }
   if (centerY) a.v='CENTER';
-  else if (top !== undefined && bottom !== undefined) { a.v = 'STRETCH'; a.top = out(top + ty); a.bottom = out(bottom - ty); }
-  else if (top !== undefined) { a.v = 'MIN'; a.top = out(top + ty); }
-  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = out(bottom - ty); }
+  else if (top !== undefined && bottom !== undefined && !(boxed && num('height') !== undefined)) { a.v = 'STRETCH'; a.top = out(top + ty); a.bottom = out(bottom - ty); }
+  else if (top !== undefined) { a.v = 'MIN'; a.top = out(top + m('margin-top') + ty); }
+  else if (bottom !== undefined) { a.v = 'MAX'; a.bottom = out(bottom + m('margin-bottom') - ty); }
   else { a.v = 'MIN'; a.top = out(ty); }
   return a;
 }
@@ -7397,6 +7404,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   const overlap = input.conventions?.has('negative-sibling-margin-as-gap') ?? false;
   for (const v of variants) lowerMarginGaps(v.spec, overlap);
   for (const v of stateVariants) lowerMarginGaps(v.spec, overlap);
+  if (input.conventions?.has('hugging-space-between-packs')) for (const v of [...variants, ...stateVariants]) packHuggingSpaceBetween(v.spec);
   const stripMarginVars = (s: NodeSpec) => {
     delete s.marginVars;
     (s.children ?? []).forEach(stripMarginVars);
@@ -8010,6 +8018,22 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
  *  constant is emitted verbatim when no spec carries strokeOutside. */
 const strokeAlignJs = (hasOutside: boolean): string =>
   hasOutside ? `spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE')` : `'INSIDE'`;
+
+/** Convention hugging-space-between-packs: a frame that hugs its content on its main axis has no free space, so CSS
+ *  `space-between` packs its items from the start with their gaps and margins; Figma's SPACE_BETWEEN ignores the item
+ *  spacing, so such a frame with two or more in-flow items and a spacing packs at MIN. A frame sized on that axis (fixed,
+ *  filling, growing, stretched, or with a minimum) keeps SPACE_BETWEEN. */
+const boundMinWidth = new WeakMap<NodeSpec, number>(); // compile-only: a token-bound min-width's resolved px
+function packHuggingSpaceBetween(spec: NodeSpec): void {
+  for (const child of spec.children ?? []) packHuggingSpaceBetween(child);
+  if (spec.layout?.primary !== 'SPACE_BETWEEN' || spec.grow || spec.crossStretch) return;
+  const across = (spec.layout.mode ?? 'HORIZONTAL') === 'HORIZONTAL';
+  const sized = across ? spec.fixedWidth || spec.widthFill || spec.fillW || spec.lits?.width || spec.lits?.minWidth ||
+      (spec.bindings?.minWidth !== undefined && (boundMinWidth.get(spec) ?? 1) > 0)
+    : spec.fixedHeight || spec.fillH || spec.resolvedMinHeight || spec.lits?.height || spec.lits?.minHeight || (spec.bindings?.minHeight !== undefined && spec.resolvedMinHeight === undefined);
+  const flow = (spec.children ?? []).filter((c) => !c.overlay && !c.insetOverlay && !c.absolute);
+  if (!sized && flow.length > 1 && (spec.lits?.itemSpacing || spec.bindings?.itemSpacing !== undefined)) spec.layout = { ...spec.layout, primary: 'MIN' };
+}
 
 /** Round 5d: the CSS margin box as a wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */

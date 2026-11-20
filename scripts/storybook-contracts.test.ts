@@ -204,6 +204,38 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   assert.deepEqual(boxes([]), []);
 });
 
+test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { references: [ref('b--a', {})] })] }).components;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const primary = (rootLiterals: Record<string, string>, conventions: string[]) => {
+    const { contract } = seed(c!);
+    Object.assign(contract.anatomy.root, { layout: { display: 'inline-flex', justify: 'space-between' }, literals: rootLiterals,
+      parts: { label: { text: 'Button' }, icon: { declared: { display: 'block' }, literals: { width: '16px', height: '16px', 'margin-left': '8px' } } } });
+    const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const spec = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { layout?: { primary?: string }; lits?: { itemSpacing?: number } } }> }).variants[0]!.spec;
+    return [spec.layout?.primary, spec.lits?.itemSpacing];
+  };
+  assert.deepEqual(primary({}, ['hugging-space-between-packs']), ['MIN', 8]);
+  assert.deepEqual(primary({}, []), ['SPACE_BETWEEN', 8]);
+  assert.deepEqual(primary({ width: '200px' }, ['hugging-space-between-packs']), ['SPACE_BETWEEN', 8]);   // free space to spread
+});
+
+test('absolute-box-from-size-and-margins: a sized absolute box between two insets keeps its size, a margin in from its start inset', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Badge', { references: [ref('b--a', {})] })] }).components;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const placed = (conventions: string[]) => {
+    const { contract } = seed(c!);
+    Object.assign(contract.anatomy.root, { declared: { position: 'relative' }, literals: { width: '48px', height: '48px' }, parts: { badge: { text: '4', declared: { position: 'absolute' },
+      literals: { top: '0px', right: '0px', left: '28.5px', bottom: '28px', width: '15.5px', height: '16px', 'margin-top': '4px', 'margin-right': '4px' } } } });
+    const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; absolute?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown => s.name === 'badge' ? s.absolute : (s.children ?? []).map(find).find(Boolean);
+    return find((engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec);
+  };
+  assert.deepEqual(placed(['absolute-box-from-size-and-margins']), { h: 'MIN', v: 'MIN', left: 28.5, top: 4 });
+  assert.deepEqual(placed([]), { h: 'STRETCH', v: 'STRETCH', left: 28.5, right: 0, top: 0, bottom: 28 });
+});
+
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
   const el = (tag: string, transform: string, nodes: unknown[] = []) => ({ tag, classes: [], style: { transform }, pseudo: {}, nodes }) as any;
   const cases: Array<[string, string, string]> = [['svg', 'matrix(0, 1, -1, 0, 0, 0)', 'rotate(90deg)'], ['svg', 'matrix(-1, 0, 0, -1, 0, 0)', 'rotate(180deg)'],
