@@ -236,7 +236,7 @@ test('a profile names the conventions it switches on, well formed and once each'
     'capture-marked-subject', 'fixed-swap-drawing-carried', 'variant-text-owns-its-part', 'normal-line-height-as-drawn',
     'svg-viewbox-meets-oblong-box', 'unregistered-channel-not-minted', 'synthetic-wrapper-shown-by-members',
     'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline', 'swap-drawing-path-box-whole-pixel',
-    'centered-text-keeps-drawn-width']);
+    'centered-text-keeps-drawn-width', 'text-baseline-as-drawn', 'inline-block-line-box-as-drawn', 'hugging-space-between-packs']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
 });
 
