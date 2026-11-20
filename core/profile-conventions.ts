@@ -145,6 +145,9 @@
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
  *  component is refused as not one element. */
+/** field-value-without-axes (React to Figma contract step): a text field that draws the same value in every variant, or
+ *  in a set with no variant axes, carries that value as a per-variant text table with no props, so the writer draws it.
+ *  Off, a set with no axes draws the field empty and a set with axes refuses the table by name. */
 /** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
  *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
  *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
@@ -158,6 +161,7 @@ export const CONVENTIONS = [
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
   'empty-hug-keeps-extent',
+  'field-value-without-axes',
   'fixed-swap-drawing-carried',
   'font-weight-initial-normal',
   'generated-text-carried',
