@@ -97,17 +97,17 @@ test('--profile: read and hashed before any fetch, refused by named code, record
   const out = mkdtempSync(path.join(tmpdir(), 'figma-to-react-profile-'));
   t.after(() => rmSync(out, { recursive: true, force: true }));
   const file = (name: string, text: string) => { const f = path.join(out, name); writeFileSync(f, text); return f; };
-  assert.throws(() => profileConventions(path.join(out, 'absent.json')), /^Error: profile-missing: /);
+  await assert.rejects(profileConventions(path.join(out, 'absent.json')), /^Error: profile-missing: /);
   const saved = process.env.FIGMA_TOKEN; delete process.env.FIGMA_TOKEN; t.after(() => { if (saved !== undefined) process.env.FIGMA_TOKEN = saved; });
   await assert.rejects(runFigmaToReact({ url: 'https://www.figma.com/design/AAAAAAAAAAAAAAAAAAAAAA/x?node-id=1-2', out: path.join(out, 'u'), profile: path.join(out, 'absent.json') },
     { loadEngine: () => { throw Error('engine-not-reached'); }, label: 'test' }), /profile-missing/);   // before the fetch's token check
-  assert.throws(() => profileConventions(file('bad.json', '{')), /^Error: profile-not-json: /);
-  assert.throws(() => profileConventions(file('obj.json', '{"conventions":{}}')), /^Error: profile-conventions-not-array: /);
+  await assert.rejects(profileConventions(file('bad.json', '{')), /^Error: profile-not-json: /);
+  await assert.rejects(profileConventions(file('obj.json', '{"conventions":{}}')), /^Error: profile-conventions-not-array: /);
   const one = 'imperceptible-solid-paint-blend-not-carried';
-  assert.throws(() => profileConventions(file('dup.json', JSON.stringify({ conventions: [one, one] }))), /profile-convention-duplicate:imperceptible/);
-  assert.throws(() => profileConventions(file('unknown.json', JSON.stringify({ conventions: ['zz-unknown'] }))), /profile-convention-unknown:zz-unknown/);
-  assert.deepEqual(profileConventions(file('none.json', '{}')).conventions, []);
-  const good = file('good.json', JSON.stringify({ system: 'x', conventions: [one] })), profile = profileConventions(good);
+  await assert.rejects(profileConventions(file('dup.json', JSON.stringify({ conventions: [one, one] }))), /profile-convention-duplicate:imperceptible/);
+  await assert.rejects(profileConventions(file('unknown.json', JSON.stringify({ conventions: ['zz-unknown'] }))), /profile-convention-unknown:zz-unknown/);
+  assert.deepEqual((await profileConventions(file('none.json', '{}'))).conventions, []);
+  const good = file('good.json', JSON.stringify({ system: 'x', conventions: [one] })), profile = await profileConventions(good);
   assert.deepEqual(profile, { conventions: [one], sha256: createHash('sha256').update(readFileSync(good)).digest('hex') });
   // Recorded in result.json; on a dump with no imperceptible blend the request is byte-identical to the run without it.
   const plain = await figmaToReact(dump, path.join(out, 'plain')), on = await figmaToReact(dump, path.join(out, 'on'), undefined, 'json', { profile });
