@@ -296,6 +296,33 @@ test('filled-child-keeps-margin-box: a growing child keeps its margin box, which
   assert.deepEqual([on.box.paddingTop, on.box.layoutSizingVertical, on.box.children[0].layoutSizingVertical, on.script.includes('FC-EMIT-MARGIN-BOX-SKIPPED')], [4, 'FILL', 'FILL', false]);
 });
 
+test('sized-text-baseline-as-drawn: a sized text keeps its box at the carried line height inside its run-time box; off, it is skipped', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const tokens = { primitives: { m: { $type: 'dimension', w: { $value: '66.4062px' }, h: { $value: '24px' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const textBaseline = { props: [], rows: [{ values: [], px: 12, ascent: 1.025, descent: 0.275 }] }, literals = { 'font-size': '12px', 'line-height': '16px' };
+  const contract = ContractSchema.parse({ id: 'test.sized-baseline', name: 'SizedBaseline', version: '0.1.0', status: 'draft', description: 'Sized one-line texts',
+    states: [], semantics: { element: 'div' }, props: [], anatomy: { root: { layout: { display: 'flex', direction: 'row' }, parts: {
+      wide: { text: 'Tag content', literals, tokens: { width: '{m.w}' }, textBaseline }, tall: { text: 'Tall', literals, tokens: { height: '{m.h}' }, textBaseline } } } },
+    bindings: { code: { anchors: { importPath: 'test/SizedBaseline', export: 'SizedBaseline' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const write = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    // The run-time box of each sized text, and the text inside it.
+    const box = (name: string) => { const wrap = root.findOne((n: any) => n.name === name && n.type === 'FRAME') as any, text = wrap.children[0];
+      return { box: [wrap.width, wrap.height, wrap.counterAxisAlignItems], text: [text.textAutoResize, text.lineHeight.value, text.height, text.textAlignVertical] }; };
+    return [box('wide'), box('tall')];
+  };
+  // On: the glyph line is 2·12 − (1.025 − 0.275)·12 = 15, top-aligned in a text box held at the carried 16; the fixed width
+  // box hugs that 16, and the fixed 24-high box centers it as before.
+  assert.deepEqual(await write(['text-baseline-as-drawn', 'sized-text-baseline-as-drawn']), [
+    { box: [66.4062, 16, 'CENTER'], text: ['NONE', 15, 16, 'TOP'] },
+    { box: [29, 24, 'CENTER'], text: ['NONE', 15, 16, 'TOP'] }]);
+  // Off: the line height stays 16 and the text box is never set (it sizes itself, as createText makes it).
+  assert.deepEqual((await write(['text-baseline-as-drawn'])).map((b) => [b.text[0], b.text[1], b.box[2]]), [[undefined, 16, 'CENTER'], [undefined, 16, 'CENTER']]);
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
