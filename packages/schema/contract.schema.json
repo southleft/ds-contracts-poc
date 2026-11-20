@@ -7421,7 +7421,6 @@
           "type": "object",
           "properties": {
             "props": {
-              "minItems": 1,
               "maxItems": 8,
               "type": "array",
               "items": {
