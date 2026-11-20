@@ -119,6 +119,16 @@ test('a text field carries the text it draws: one placeholder as attrs.placehold
   const texts = (s: Spec): string[] => [...(s.characters !== undefined ? [`${s.name}:${s.characters}`] : []), ...(s.children ?? []).flatMap(texts)];
   const drawn = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.map((v) => texts(v.spec));
   assert.deepEqual(drawn, [['placeholder:Write…', 'placeholder:Search', 'placeholder:'], ['value:Oops', 'placeholder:Search', 'placeholder:']]);
+  // Convention field-value-without-axes: a value every variant draws alike, with axes or without, is a table with no props.
+  const same = (on: boolean, axes: string[]) => { const s = seed({ ...c!, axes }); s.contract.anatomy.root.parts = { n: { element: 'input' } } as never;
+    const refused = carryVariantText(s.contract, axes, s.combos, () => null, () => ({ value: '50', placeholder: '' }), false, false, on);
+    return [refused, (s.contract.anatomy.root.parts as Record<string, { textByCombination?: unknown }>).n!.textByCombination, s.contract] as const; };
+  assert.deepEqual(same(false, []).slice(0, 2), [[], undefined]);
+  assert.deepEqual(same(false, c!.axes).slice(0, 2), [['per-variant-text-unqualified: n: literal-text-combination-invalid'], undefined]);
+  const table = { props: [], rows: [{ values: [], text: '50' }] }, [refusedOn, carried, on] = same(true, []);
+  assert.deepEqual([refusedOn, carried, same(true, c!.axes).slice(0, 2)], [[], table, [[], table]]);
+  const one = ContractSchema.parse(on), oneDrawn = engine.compileComponentData(one, new Map([[one.id, one]])) as { variants: Array<{ spec: Spec }> };
+  assert.deepEqual(oneDrawn.variants.map((v) => texts(v.spec)), [['value:50']]);
 });
 
 test('each font stack is written with the face the pinned browser painted it with first; the rest of the stack stays', () => {
@@ -265,6 +275,25 @@ test('show-declared-component: a case names the component its profile declares f
   assert.equal(declaredShow(decls, 'x--none', {}), JSON.stringify(['x--none', {}]));   // listed by no declaration: as before
   assert.equal(declaredShow([...decls, { name: 'Later', stories: ['b--default'] }], 'b--default', {}), JSON.stringify(['b--default', {}, 'Later', false]));
   assert.throws(() => profileDeclarations({ profile: { path: 'p.json', sha256: 'recorded' } }, () => Buffer.from('{}')), /^Error: profile-changed-since-read:p\.json$/);
+});
+
+test('filled-child-keeps-margin-box: a growing child keeps its margin box, which takes its FILL; off, the margin is named', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const tokens = { primitives: { m: { $type: 'dimension', four: { $value: '4px' }, sixty: { $value: '60px' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const contract = ContractSchema.parse({ id: 'test.grow-margin', name: 'GrowMargin', version: '0.1.0', status: 'draft', description: 'A growing child with a margin',
+    states: [], semantics: { element: 'div' }, props: [], anatomy: { root: { layout: { display: 'flex', direction: 'column' }, tokens: { height: '{m.sixty}' }, parts: {
+      help: { text: 'Help', layout: { grow: true }, tokens: { 'margin-top': '{m.four}' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/GrowMargin', export: 'GrowMargin' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const write = async (on: boolean) => {
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(on ? ['filled-child-keeps-margin-box'] : []) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    return { script, box: root.findOne((n: any) => n.name === 'help (margin box)') as any };
+  };
+  const off = await write(false), on = await write(true);
+  assert.deepEqual([off.box, off.script.includes('FC-EMIT-MARGIN-BOX-SKIPPED'), off.script.includes('marginBoxFills')], [null, true, false]);
+  assert.deepEqual([on.box.paddingTop, on.box.layoutSizingVertical, on.box.children[0].layoutSizingVertical, on.script.includes('FC-EMIT-MARGIN-BOX-SKIPPED')], [4, 'FILL', 'FILL', false]);
 });
 
 test('svg-own-fill-on-host: an element holding only an svg with its own fill takes that fill; text or a shared fill leaves it', () => {
