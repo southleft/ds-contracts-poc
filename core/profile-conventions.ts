@@ -145,6 +145,9 @@
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
  *  component is refused as not one element. */
+/** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
+ *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
+ *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -176,6 +179,7 @@ export const CONVENTIONS = [
   'stage-from-story-container',
   'stretched-line-paints-bar',
   'styles-when-display-last-wins',
+  'svg-own-fill-on-host',
   'svg-rotation-carried',
   'svg-viewbox-carried',
   'svg-viewbox-meets-oblong-box',
