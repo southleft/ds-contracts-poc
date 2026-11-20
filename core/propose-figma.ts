@@ -1564,7 +1564,7 @@ function foldWrapperUnion(
       // This holder reconciles anatomy identity; it was never drawn on this
       // plane. The real wrapper's captured size and dimension bindings cannot
       // constrain the flat members. Keep real planes' sizes independent.
-      delete synthetic.fixedSize;
+      delete synthetic.fixedSize; syntheticWrapperShownByMembers(synthetic, w.firstNode, matched, notes, where, wName, o.variant);
       delete synthetic.bbox;
       // A synthetic holder owns no source padding. Neutral allocation keeps
       // each flat plane's real parent padding on that parent; the real wrapper
@@ -17183,10 +17183,10 @@ export function proposeFromDumpDraftPaintQualification(set:DumpSet,opts:Paramete
 
 function proposeFromDumpFenced(set: DumpSet, opts: Parameters<typeof proposeFromDumpFencedImpl>[1],
   draftPaint=false, drawnDeclaration?: Array<Record<string,string>>): FigmaProposalResult {
-  const outer = capturedVariablePaths;
-  capturedVariablePaths = opts.capturedVariablePaths ?? outer;
+  const outer = capturedVariablePaths, outerShown = wrapperShownByMembers;
+  capturedVariablePaths = opts.capturedVariablePaths ?? outer; wrapperShownByMembers = conventionSet(opts.conventions).has('synthetic-wrapper-shown-by-members');
   try { return proposeFromDumpFencedImpl(set, opts, draftPaint, drawnDeclaration); }
-  finally { capturedVariablePaths = outer; }
+  finally { capturedVariablePaths = outer; wrapperShownByMembers = outerShown; }
 }
 
 function proposeFromDumpFencedImpl(
@@ -20767,4 +20767,21 @@ function carryFixedSwapDrawing(m: Merged, part: Record<string, unknown>, compone
   component.callerSlotSelections = {slot, rows};
   ctx.notes.push(`${where}: fixed swap "${property}" carried as the captured drawing of its selected instance into "${slot}"; each use's child variant draws exactly one placement (profile convention fixed-swap-drawing-carried)`);
   return new Set([...carried, property]);
+}
+
+/** Profile convention synthetic-wrapper-shown-by-members (core/profile-conventions.ts). The wrapper-union fold gives a
+ *  flat plane a synthetic copy of a wrapper another plane draws; the copy was never drawn there, so its visibility is its
+ *  folded members': hidden only when every member is hidden. A copy whose visibility is bound to a property keeps it.
+ *  Off, the copy keeps the first real wrapper's hidden flag, and a flat plane whose drawn members it hides is named. */
+let wrapperShownByMembers = false;
+function syntheticWrapperShownByMembers(synthetic: DumpNode, first: DumpNode, matched: DumpNode[], notes: string[],
+  where: string, wrapper: string, variant: string): void {
+  const hidden = matched.every(member => member.hidden === true), drawn = matched.filter(member => member.hidden !== true).map(member => `"${member.name}"`);
+  if (!wrapperShownByMembers) {
+    if (first.hidden === true && drawn.length) notes.push(`${where}: synthetic-wrapper-hides-drawn-members — the synthetic wrapper "${wrapper}" in "${variant}" copies another plane's hidden visibility over drawn ${drawn.join(', ')}, which do not render there`);
+    return;
+  }
+  if (first.propRefs?.visible !== undefined || first.bound?.visible !== undefined || (first.hidden === true) === hidden) return;
+  if (hidden) synthetic.hidden = true; else delete synthetic.hidden;
+  notes.push(`${where}: synthetic wrapper "${wrapper}" in "${variant}" is ${hidden ? 'hidden: every folded member is hidden' : `shown: it holds drawn ${drawn.join(', ')}`} (profile convention synthetic-wrapper-shown-by-members)`);
 }
