@@ -397,7 +397,7 @@ export interface FusionEnv {
   /** The content width of the container the root was rendered in, when the harness measured it (the Storybook route's
    *  preview body, inset by its padding). The root-width doors compare against it instead of the stage; absent, the
    *  stage's content box. */
-  container?: number;
+  container?: number; /** Profile convention centered-text-keeps-drawn-width: see centeredTextParts. */ centeredTextWidth?: true;
 }
 
 /** Which axes of a part were laid out against the browser window. */
@@ -835,7 +835,7 @@ export function styledChannels(
   // viewport refusals, because condition (d) reads them: a fill whose pinned
   // ancestor took its box from the window mints the window one generation
   // down, which is exactly how task #20 re-entered by a new road.
-  const textFill = textFillPinnedAxes(a, space, env, vpDerived.refused, table);
+  const textFill = textFillPinnedAxes(a, space, env, vpDerived.refused, table), centeredText = env.centeredTextWidth ? centeredTextParts(a, space) : new Set<number>();
   receipts.push(...textFill.receipts);
   for (const pi of [...textExcluded].sort((x, y) => x - y)) {
     if (table.lowered.has(pi)) continue;
@@ -1049,6 +1049,8 @@ export function styledChannels(
     const authoredNamed = (p: string): boolean => (p === 'width' || p === 'height') && !inTableBox && a.baseFlat[pi].node.asize?.[p] !== undefined;
     for (const p of ['width', 'height'] as const) if (authoredNamed(p) && !tokenNamed(p) && !vpRefused?.has(p))
       receipts.push(`authored-geometry-admitted: ${a.partNames[pi]}.${p} — the stylesheet sets it to ${a.baseFlat[pi].node.asize![p]}; a set size is a design value, not a measurement`);
+    // @door fuse.centered-text-width-admitted
+    if (centeredText.has(pi) && !vpRefused?.has('width')) receipts.push(`centered-text-width-admitted: ${a.partNames[pi]}.width — its flex row centers it, and a whole-pixel Figma text box would move it by half the rounding; the drawn width is carried (profile convention centered-text-keeps-drawn-width)`);
     const admit = (p: string): boolean =>
       !vpRefused?.has(p) &&
       // @door fuse.webkit-blanket-refusal
@@ -1058,7 +1060,7 @@ export function styledChannels(
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
         textFill.admit.get(pi)?.has(p) === true ||
-        tokenNamed(p) || authoredNamed(p));
+        tokenNamed(p) || authoredNamed(p) || (p === 'width' && centeredText.has(pi)));
     // @door fuse.control-fallback
     const tag = a.baseFlat[pi].node.tag;
     const pageCtrl = controls[tag] ?? controls['span'];
@@ -4358,4 +4360,28 @@ export function pseudoFindings(a: AlignedSweep, classPrefix: string): PseudoFind
     }
   }
   return findings;
+}
+
+/** Profile convention centered-text-keeps-drawn-width: the text-bearing parts that a flex row centers on its main axis
+ *  (the parent justify-content: center, the part neither growing nor absolute) in every enabled combo where both are
+ *  drawn. Figma sizes a text box to its advance rounded up to a whole pixel, so a box hugging that text is up to a pixel
+ *  wider than the browser drew it, and centering moves it by half the rounding; such a part keeps the drawn width. */
+export function centeredTextParts(a: Pick<AlignedSweep, 'baseFlat' | 'getAligned'>, space: Pick<PropSpace, 'enumeration'>): Set<number> {
+  const out = new Set<number>();
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const { path, node } = a.baseFlat[pi], up = path.includes('.') ? path.slice(0, path.lastIndexOf('.')) : '';
+    const qi = path === '' ? -1 : a.baseFlat.findIndex((f) => f.path === up);
+    if (qi < 0 || !node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0)) continue;
+    let seen = 0, centered = true;
+    for (const combo of space.enumeration.combos) {
+      if (!isEnabled(combo)) continue;
+      const row = a.getAligned(`${combo.key}__default`), s = row[pi]?.node.style, ps = row[qi]?.node.style;
+      if (!s || !ps) continue;
+      seen++;
+      if (!['flex', 'inline-flex'].includes(ps['display'] ?? '') || !['row', 'row-reverse'].includes(ps['flex-direction'] ?? 'row') ||
+        ps['justify-content'] !== 'center' || (s['flex-grow'] ?? '0') !== '0' || s['position'] === 'absolute') { centered = false; break; }
+    }
+    if (seen > 0 && centered) out.add(pi);
+  }
+  return out;
 }
