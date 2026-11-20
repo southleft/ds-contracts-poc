@@ -29,6 +29,7 @@ import { fileURLToPath } from 'node:url';
 import { storyFontPreflight } from './font-preflight.js';
 import { buildLocalStorybook, localStorybookPreflight, serveInChild } from './storybook-local.js';
 import { assertReviewed } from './storybook-reader.js';
+import { retryTransport } from './rest-transport-retry.js';
 
 // The bridge plugin may fetch only localhost:9223-9232, and each figma-console-mcp instance takes the first free port there
 // on ::1; 9232 is taken last. The runner holds it on both ::1 and 127.0.0.1, so nothing else can answer the driver.
@@ -145,11 +146,11 @@ if (capture.split("const CAPTURE_SET = '';").length !== 2 || dump.split('const T
 // The REST settle (step 7a): two reads of the dump's variant ids, at least 8 s apart, with the same version and documents.
 async function settle(ids: string[], text: string[]): Promise<{ version?: string; fault?: string }> {
   const read = async (): Promise<any> => {
-    for (let transport = 0; ;) {
-      // A fetch that throws (transport, never an HTTP status) is retried up to 3 times, 5 s apart; each retry is a fault.
-      let r: Response;
-      try { r = await fetch(`https://api.figma.com/v1/files/${KEY}/nodes?ids=${ids.join(',')}`, { headers: { 'X-Figma-Token': process.env.FIGMA_TOKEN ?? '' } }); }
-      catch (e) { if (++transport > 3) throw e; receipt.faults.push({ fault: 'rest-transport-retry', try: transport }); await sleep(5000); continue; }
+    for (;;) {
+      // A fetch that throws a network failure (never an HTTP status) is retried after 5, 15, 45 and 90 s (rest-transport-retry.ts);
+      // each retry is a fault.
+      const r = await retryTransport(() => fetch(`https://api.figma.com/v1/files/${KEY}/nodes?ids=${ids.join(',')}`, { headers: { 'X-Figma-Token': process.env.FIGMA_TOKEN ?? '' } }),
+        (transport) => receipt.faults.push({ fault: 'rest-transport-retry', try: transport }));
       if (r.status === 429) { const wait = Number(r.headers.get('retry-after') ?? 60); receipt.faults.push({ fault: 'rest-rate-limited', retryAfter: wait, tier: r.headers.get('x-figma-plan-tier'), type: r.headers.get('x-figma-rate-limit-type') }); if (wait > 300) stop('rest-rate-limited'); await sleep(wait * 1000); continue; }
       if (r.status === 403 || r.status === 404) stop(`rest-${r.status}`);
       return r.status === 200 ? r.json() : undefined;
