@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14700,7 +14700,7 @@ function buildPartFromEvidence(
   // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
-  nameFixedChildGeometry(m, ctx, where, { tokens, part }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
+  nameFixedChildGeometry(m, ctx, where, { tokens, part }); carryAbsoluteOnlyHugExtent(m, part, tokens, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
   attachTokens(ctx, part, tokens);
   carryGridAxisSizing(m, part, ctx, where, tokens); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20913,4 +20913,35 @@ function settleFigmaBaselineRounding(contract: Contract, ctx: Ctx): void {
   if (!plans?.size) return;
   const roots = nativeTextRenderingRoots(contract), leaves = nativeTextRenderingLeafParts(contract);
   for (const {part, path} of walkAnatomy(contract)) plans.get(part)?.(roots.has(contract.anatomy[path[0]!]!) || leaves.has(part));
+}
+
+/** Profile convention absolute-only-hug-keeps-extent (a part, not the root, which the root sizing step already covers): an
+ *  auto-layout frame that hugs an axis while every visible child is absolutely placed is drawn by Figma at the extent those
+ *  children witness (both dump producers record their far insets against the drawn parent box), while CSS content sizing
+ *  leaves them out and collapses the frame to its padding. The witnessed extent is carried as that axis' minimum; planes with
+ *  in-flow content, a FIXED or FILL axis, or witnesses that disagree get a zero minimum. Off, named. */
+function carryAbsoluteOnlyHugExtent(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string): void {
+  if (!ctx.mint || part.absoluteGeometry || part.absoluteGeometryByCombination) return;
+  for (const dim of ['width', 'height'] as const) {
+    const minAxis = dim === 'width' ? 'min-width' : 'min-height';
+    if (tokens[minAxis] !== undefined || (part.literals as Record<string, string> | undefined)?.[minAxis] !== undefined) continue;
+    const extent = m.occ.map((o) => {
+      const l = o.node.layout, fill = dim === 'width' ? o.node.fillWidth : o.node.fillHeight;
+      if (!o.parent || !l || (l.mode !== 'HORIZONTAL' && l.mode !== 'VERTICAL') || fill || o.node.abs || o.node.bbox ||
+          o.node.bound?.[dim] !== undefined || o.node.fixedSize?.[dim] !== undefined ||
+          ((dim === 'width') === (l.mode === 'HORIZONTAL') ? l.primarySizing : l.counterSizing) !== 'AUTO') return 0;
+      const boxes = (o.node.children ?? []).filter((c) => c.hidden !== true).map((c) => absBoxOf(c));
+      if (!boxes.length || boxes.some((b) => b === undefined)) return 0;
+      const e = boxes.map((b) => dim === 'width' ? b!.x + b!.width + b!.right : b!.y + b!.height + b!.bottom);
+      return e.every((v) => Number.isFinite(v) && v > 0 && Math.abs(v - e[0]!) <= 0.05) ? Math.round(e[0]! * 100) / 100 : 0;
+    });
+    if (extent.every((v) => v === 0)) continue;
+    const drawn = [...new Set(extent.filter((v) => v > 0))].join('/');
+    if (!ctx.absoluteHugExtent) {
+      ctx.notes.push(`${where}: absolute-only-hug-extent-not-carried — this ${dim} hugs only absolutely placed children, which CSS leaves out of content sizing, so it collapses to its padding where Figma draws ${drawn}px`);
+      continue;
+    }
+    mintObservation(ctx, tokens, where, minAxis, 'px', m.occ.map((o, i) => ({variant: o.variant, value: extent[i]!})), `${where}|absolute-hug-${minAxis}`);
+    ctx.notes.push(`${where}: ${minAxis} carries the ${drawn}px its absolutely placed children witness on HUG planes; other planes get a zero minimum (profile convention absolute-only-hug-keeps-extent)`);
+  }
 }

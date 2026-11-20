@@ -46,3 +46,21 @@ test('profile convention empty-hug-keeps-extent: a HUG root plane with no visibl
  assert.deepEqual(minimum(on,'min-width'),['0px','124px']);assert.deepEqual(minimum(on,'min-height'),['0px','48px']);
  assert.ok(on.notes.some(note=>note.includes('empty-hug-keeps-extent')));
 });
+
+test('profile convention absolute-only-hug-keeps-extent: a part that hugs only absolute children keeps the extent they witness',()=>{
+ const glyph=(s:number)=>({name:'Glyph',type:'RECTANGLE',fill:{hex:'161616'},abs:{x:0,y:0,right:0,bottom:0,width:s,height:s,constraints:{horizontal:'SCALE',vertical:'SCALE'}}});
+ const frame=(size:string,s:number,hug:boolean)=>({name:'Icon',type:'FRAME',fixedSize:hug?{width:s}:{width:s,height:s},children:[glyph(s)],
+  layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[4,4,4,4],primarySizing:'FIXED',counterSizing:hug?'AUTO':'FIXED'}});
+ const variant=(size:string,s:number,hug:boolean)=>({name:'size='+size,type:'COMPONENT',bbox:{width:s,height:s},children:[frame(size,s,hug)],
+  layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'}});
+ const read=(conventions?:string[])=>proposeFromDump({setName:'GlyphHolder',type:'COMPONENT_SET',propertyDefinitions:{size:{type:'VARIANT',defaultValue:'small',variantOptions:['small','large']}},
+  variants:[variant('small',16,true),variant('large',20,false)]} as any,{corpus,contractIdByName:new Map(),mintUnbound:true,fileKey:'fixture',projectionMode:'reviewable-inversion',conventions} as any);
+ const minimum=(p:ReturnType<typeof read>)=>p.mintedTokens?.entries.filter(e=>e.usageSites.some(site=>site.includes('Icon')&&site.includes('min-height'))).map(e=>e.value).sort();
+ const off=read();
+ assert.deepEqual(minimum(off),[]);
+ assert.ok(off.notes.some(note=>note.includes('absolute-only-hug-extent-not-carried')&&note.includes('16px')));
+ const on=read(['absolute-only-hug-keeps-extent']),c=ContractSchema.parse(on.contract);
+ assert.ok(c.anatomy.root.parts?.Icon?.tokens?.['min-height']);
+ assert.deepEqual(minimum(on),['0px','16px']);
+ assert.ok(on.notes.some(note=>note.includes('profile convention absolute-only-hug-keeps-extent')));
+});
