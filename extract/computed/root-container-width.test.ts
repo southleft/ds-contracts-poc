@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { alignSweep, styledChannels, uaStyles, type FusionEnv } from './fuse.js';
+import { alignSweep, centeredTextParts, styledChannels, uaStyles, type FusionEnv } from './fuse.js';
 import { loadConfig, propSpaceFor, stageFor, type SweepResult } from './capture.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 
@@ -34,4 +34,18 @@ test('a block root that fills the measured container is admitted; absent, the st
 test('the measured container wins over the stage', () => {
   assert.equal(rootDoor('altitude.json', 'Heading'), 'block-root-width-admitted');
   assert.equal(rootDoor('altitude.json', 'Heading', 999), 'block-root-width-refused (shrink-to-fit)');
+});
+
+test('centered-text-keeps-drawn-width: a text part its flex row centers keeps its width; a packed, growing or textless one does not', () => {
+  const el = (path: string, style: Record<string, string>, text = '') => ({ path, sig: '', partName: '', node: { style, nodes: text ? [{ t: 'text', v: text }] : [] } });
+  const row = { display: 'flex', 'justify-content': 'center' };
+  const flat = [el('', {}), el('0', row), el('0.0', { 'flex-grow': '0' }, 'AI'), el('0.1', { 'flex-grow': '1' }, 'x'), el('0.2', {}),
+    el('1', { ...row, 'flex-direction': 'column' }), el('1.0', {}, 'y'), el('2', { display: 'flex', 'justify-content': 'flex-start' }), el('2.0', {}, 'z')];
+  const space = { enumeration: { combos: [{ key: 'a', stateFlags: {} }, { key: 'b', stateFlags: { hover: true } }] } };
+  const parts = (rows: Record<string, typeof flat>) => [...centeredTextParts({ baseFlat: flat, getAligned: (k: string) => rows[k.replace('__default', '')] ?? [] } as any, space as any)];
+  assert.deepEqual(parts({ a: flat }), [2]);
+  // Every enabled combo must center it; a state combo is not read.
+  const packed = flat.map((f) => f.path === '0' ? el('0', { display: 'flex', 'justify-content': 'space-between' }) : f);
+  assert.deepEqual(parts({ a: flat, b: packed }), [2]);
+  assert.deepEqual(parts({ a: packed }), []);
 });

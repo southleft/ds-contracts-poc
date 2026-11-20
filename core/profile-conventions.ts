@@ -118,6 +118,9 @@
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
+/** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
+ *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
+ *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
 /** inline-block-line-box-as-drawn (React to Figma contract step and writer): an atomic inline (inline-block and its kin)
  *  alone on its line in a block container carries how far that line box reaches above and below its margin box (Part.lineBox,
  *  measured in the page: the parent line's strut and baseline alignment), and the native Figma writer adds that space to the
@@ -131,7 +134,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
-  'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'inline-block-line-box-as-drawn'] as const;
+  'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width', 'inline-block-line-box-as-drawn'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
