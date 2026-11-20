@@ -37,13 +37,14 @@ import { formatVerdictTable, type Verdict, type Verdicts } from './design-consum
 import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
-import { conventionSet, type FontVerticalMetrics } from '../core/profile-conventions.js';
+import type { FontVerticalMetrics } from '../core/profile-conventions.js';
 
 /** A system profile's conventions for one run: sorted, with the sha256 of the profile's bytes. A missing file, non-JSON, a
  *  `conventions` that is not an array of strings, a duplicate and a name the converter does not know are each refused by
- *  a named code. Only `conventions` is read. */
+ *  a named code. Only `conventions` is read. The conventions list is loaded here, not at the top of this file: a check
+ *  loads this file (checkGenerated), and a PR that adds a convention then does not change the files a check loads. */
 export type ProfileConventions = { conventions: string[]; sha256: string; fontMetrics?: FontVerticalMetrics };
-export function profileConventions(file: string): ProfileConventions {
+export async function profileConventions(file: string): Promise<ProfileConventions> {
   if (!existsSync(file)) throw Error(`profile-missing: ${file}`);
   const bytes = readFileSync(file); let profile: { conventions?: unknown };
   try { profile = JSON.parse(bytes.toString('utf8')); } catch { throw Error(`profile-not-json: ${file}`); }
@@ -54,6 +55,7 @@ export function profileConventions(file: string): ProfileConventions {
   const metrics = (profile as { fontMetrics?: unknown }).fontMetrics;
   if (metrics !== undefined && (typeof metrics !== 'object' || metrics === null || Object.values(metrics).some((m: any) => !(m?.unitsPerEm > 0) || !Number.isFinite(m.ascender) || !(m.descender <= 0))))
     throw Error(`profile-font-metrics-invalid: ${file}`);
+  const { conventionSet } = await import('../core/profile-conventions.js');
   return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex'), ...(metrics ? { fontMetrics: metrics as FontVerticalMetrics } : {}) };
 }
 
@@ -267,7 +269,7 @@ export function writeInto(generatedDir: string, into: string): { dir: string; wr
 export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: EngineLoader; toolchain?: Toolchain; label: string;
   log?: (line: string) => void; error?: (line: string) => void }): Promise<number> {
   const log = deps.log ?? ((line: string) => console.log(line)), error = deps.error ?? ((line: string) => console.error(line));
-  const profile = run.profile ? profileConventions(run.profile) : undefined;   // read and refused before any fetch
+  const profile = run.profile ? await profileConventions(run.profile) : undefined;   // read and refused before any fetch
   if (run.into && existsSync(run.into) && !statSync(run.into).isDirectory()) throw Error(`figma-to-react-into-not-a-directory: ${run.into}`);
   // Both command entrypoints authenticate the manifest before fetching or writing.
   const faces = run.fonts ? readConsumerFonts(path.resolve(run.fonts)) : [];
