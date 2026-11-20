@@ -519,6 +519,13 @@ export async function pinnedBrowser() {
   } catch (e) { stop(); throw e; }
 }
 
+/** The stories the reader loads (`every` is index.json's stories): all of them; with --only, the listed declarations'
+ *  stories and their left-out stories (loaded for metadata), or without a profile the stories whose title is listed. */
+export function readerStoryIds(every: ReadonlyArray<{ id: string; title?: string }>, declared: readonly ComponentDeclaration[], only?: ReadonlySet<string>): string[] {
+  const listed = only && declared.length ? declared.filter((d) => only.has(d.name)) : declared;
+  return !only ? every.map((e) => e.id) : declared.length ? listed.flatMap((d) => [...d.stories, ...(d.leftOut ?? []).map((l) => l.story)]) : every.filter((e) => only.has(e.title ?? '')).map((e) => e.id);
+}
+
 /** Every story in the Storybook's index, loaded through its preview API in the pinned Chromium, and its components with references. */
 async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly = false, declared: readonly ComponentDeclaration[] = [], excluded: readonly ExcludedTitle[] = [], only?: ReadonlySet<string>): Promise<{ environment: RenderEnvironment; indexSha256: string; stories: LoadedStory[]; components: StoryComponent[]; fontFamilyRewrites?: Array<{ platform: string; family: string }> }> {
   const base = storybook.endsWith('/') ? storybook : storybook + '/';
@@ -536,7 +543,7 @@ async function loadStorybook(storybook: string, shotsDir?: string, grammarOnly =
     if (declared.length ? !listed.some((d) => d.name === n) : !every.some((e) => e.title === n)) throw Error(`storybook-reader: --only names no component: ${n}`);
     if (excluded.some((x) => x.title === n)) throw Error(`profile-title-excluded-and-declared:${n}`);
   }
-  const ids = !only ? every.map((e) => e.id) : declared.length ? listed.flatMap((d) => [...d.stories, ...(d.leftOut ?? []).map((l) => l.story)]) : every.filter((e) => only.has(e.title ?? '')).map((e) => e.id);
+  const ids = readerStoryIds(every, declared, only);
   const shownIds = only && new Set(declared.length ? listed.flatMap((d) => d.stories) : ids);
   // Before the page opens, every listed story is checked as the full pass checks it: it is in index.json, and its title
   // is not one the profile excludes. Only a listed declaration's own story is named.
