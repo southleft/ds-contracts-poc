@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { StoryComponent } from './storybook-reader.js';
+import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -158,6 +158,19 @@ test('the contract step switches on the conventions of the profile the reader re
   assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(on) } }, read(profile([]))), /profile-changed-since-read:p\.json/);
   const odd = profile(['no-such-convention']);
   assert.throws(() => profileConventions({ profile: { path: 'p.json', sha256: sha(odd) } }, read(odd)), /profile-convention-unknown:no-such-convention/);
+});
+
+test('the contract step preloads the stories the reader loaded, in its order, from the index, profile and list it recorded', () => {
+  const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex'), p = readProfile(new URL('../examples/carbon/profile.json', import.meta.url).pathname);
+  const index = JSON.stringify({ entries: Object.fromEntries(['a--one', 'b--one', 'b--two', 'b--three', 'b--docs'].map((id) => [id, { id, title: id[0], type: id.endsWith('docs') ? 'docs' : 'story' }])) });
+  const files: Record<string, Buffer> = { 'p.json': Buffer.from(JSON.stringify({ ...p, pairs: [], components: [{ name: 'A', stories: ['a--one'], axes: [] },
+    { name: 'B', stories: ['b--one', 'b--two'], axes: [], leftOut: [{ story: 'b--three', reason: 'test' }] }] })), 'only.json': Buffer.from('["B"]') };
+  const recorded = { index: { sha256: sha(index) }, profile: { path: 'p.json', sha256: sha(files['p.json']!) }, only: { path: 'only.json', sha256: sha(files['only.json']!) } };
+  assert.deepEqual(readerPreload(recorded, index, (f) => files[f]!), ['b--one', 'b--two', 'b--three']);
+  assert.deepEqual(readerPreload({ index: recorded.index }, index), ['a--one', 'b--one', 'b--two', 'b--three']);   // no --only: every story
+  assert.deepEqual(readerPreload({}, index), []);   // an older reader output records no index: nothing is preloaded
+  assert.throws(() => readerPreload(recorded, index.replace('a--one', 'a--new'), (f) => files[f]!), /^Error: index-changed-since-read$/);
+  assert.throws(() => readerPreload({ ...recorded, only: { ...recorded.only, sha256: sha('["A"]') } }, index, (f) => files[f]!), /only-changed-since-read:only\.json/);
 });
 
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
