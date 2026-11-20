@@ -141,6 +141,9 @@
  *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
+/** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
+ *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
+ *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -171,6 +174,7 @@ export const CONVENTIONS = [
   'stage-from-story-container',
   'stretched-line-paints-bar',
   'styles-when-display-last-wins',
+  'svg-own-fill-on-host',
   'svg-rotation-carried',
   'svg-viewbox-carried',
   'svg-viewbox-meets-oblong-box',
