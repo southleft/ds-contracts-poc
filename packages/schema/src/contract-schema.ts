@@ -670,6 +670,10 @@ export const VariantLayoutSchema = z.strictObject({
   growBasis: z.literal("zero").optional(),
   /** Parent-owned cross-axis stretch; auto restores inherited alignment. */
   alignSelf: z.enum(["auto", "stretch"]).optional(),
+  /** Profile convention single-row-grid-as-row (the contract step's lowering, not CSS): this value's grid has one non-empty
+   *  row and is drawn as this row, with its column gap and the extent of its empty trailing tracks, in px. */
+  gridAsRow: z.strictObject({ gap: z.number().nonnegative(), paddingRight: z.number().positive().optional(),
+    paddingBottom: z.number().positive().optional() }).optional(),
 });
 
 /** v7: layout driven by an enum prop. `map` values are OVERRIDES merged over
@@ -4198,6 +4202,7 @@ export interface ResolvedLayout {
   grow?: boolean;
   growBasis?: "zero";
   alignSelf?: "auto" | "stretch";
+  gridAsRow?: { gap: number; paddingRight?: number; paddingBottom?: number };
   overlap?: boolean;
   /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */
   wrap?: boolean;

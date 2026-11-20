@@ -657,6 +657,10 @@ export function validateContract(
     }
     if (part.layout?.growBasis !== undefined && part.layout.grow !== true)
       errors.push(`${contract.id}: part "${name}" layout.growBasis requires grow: true`);
+    // Profile convention single-row-grid-as-row: a lowered grid rides only a row override of a part with no base layout.
+    for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {}))
+      if (override.gridAsRow && (override.direction !== 'row' || !['flex', 'inline-flex'].includes(override.display ?? '') || part.layout))
+        errors.push(`${contract.id}: part "${name}" layoutByProp.${value}.gridAsRow requires a row display override on a part with no base layout`);
     for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
       if (override.growBasis !== undefined && (override.grow ?? part.layout?.grow) !== true)
         errors.push(`${contract.id}: part "${name}" layoutByProp.${value}.growBasis requires grow: true`);

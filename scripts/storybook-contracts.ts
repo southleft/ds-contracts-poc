@@ -175,6 +175,53 @@ export function declaredShow(declarations: ReadonlyArray<{ name: string; stories
   return JSON.stringify(d ? [id, args, d.name, !!d.subcomponent] : [id, args]);
 }
 
+/** Profile convention single-row-grid-as-row: a part that is a grid in some values of one variant axis and not in the
+ *  others cannot carry the grid per value (a per-variant grid is refused, P10). Where, in every variant of such a value,
+ *  the grid has one non-empty row (its first), its in-flow children are auto-placed one per column in document order,
+ *  each column is as wide as its child's margin box, every other track is 0, and the grid has no padding, border or
+ *  content distribution, that value draws as a row: a layoutByProp override with the grid's item alignment, and
+ *  `gridAsRow` with the column gap and the extent of the empty trailing tracks. A lowering, not CSS; any other such grid
+ *  is named. Returns the receipts and the refusals. */
+export function lowerSingleRowGrid(contract: Contract, combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  nodeAt: (key: string, part: string) => CapturedNode | null): [string[], string[]] {
+  const receipts: string[] = [], refused: string[] = [], grid = (n: CapturedNode | null) => !!n && /^(inline-)?grid$/.test(n.style['display'] ?? '');
+  const px = (v: string | undefined) => v === 'normal' ? 0 : /^-?\d+(\.\d+)?px$/.test(v ?? '') ? parseFloat(v!) : NaN, list = (v?: string) => (v ?? '').split(' ').map(px);
+  const ALIGN = { center: 'center', start: 'start', 'flex-start': 'start', end: 'end', 'flex-end': 'end' } as Record<string, 'center' | 'start' | 'end'>;
+  const lower = (n: CapturedNode): string | Record<string, unknown> => {
+    const s = n.style, kids = n.nodes.flatMap((k) => k.t === 'el' && !/absolute|fixed/.test(k.el.style['position'] ?? '') && k.el.style['display'] !== 'none' ? [k.el] : []);
+    const rows = list(s['grid-template-rows']), cols = list(s['grid-template-columns']), gap = px(s['column-gap']), rowGap = px(s['row-gap']);
+    const outer = (k: CapturedNode) => ['width', 'margin-left', 'margin-right', ...(k.style['box-sizing'] === 'content-box' ? ['padding-left', 'padding-right', 'border-left-width', 'border-right-width'] : [])].reduce((t, c) => t + px(k.style[c]), 0);
+    if (n.nodes.some((k) => k.t === 'text' && k.v.trim())) return 'text-in-grid';
+    if ([...rows, ...cols, gap, rowGap].some(Number.isNaN) || s['grid-template-areas'] !== 'none' || s['grid-auto-flow'] !== 'row') return 'tracks-not-px-row-flow';
+    if (kids.some((k) => ['grid-row-start', 'grid-row-end', 'grid-column-start', 'grid-column-end'].some((c) => k.style[c] !== 'auto'))) return 'child-placed';
+    if (!(rows[0]! > 0) || rows.slice(1).some((r) => r !== 0)) return 'not-one-row';
+    if (kids.length > cols.length || kids.some((k, i) => Math.abs(outer(k) - cols[i]!) > 0.01) || cols.slice(kids.length).some((c) => c !== 0)) return 'columns-not-children';
+    if (['padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'].some((c) => px(s[c]) !== 0)) return 'grid-box-padded';
+    if (!['normal', 'start', 'flex-start'].includes(s['justify-content'] ?? 'normal') || !['normal', 'start', 'flex-start'].includes(s['align-content'] ?? 'normal') || !ALIGN[s['align-items'] ?? '']) return 'alignment-unmapped';
+    const right = (cols.length - kids.length) * gap, bottom = (rows.length - 1) * rowGap;
+    return { display: s['display'] === 'inline-grid' ? 'inline-flex' : 'flex', direction: 'row', align: ALIGN[s['align-items']!],
+      gridAsRow: { gap, ...(right ? { paddingRight: right } : {}), ...(bottom ? { paddingBottom: bottom } : {}) } };
+  };
+  const visit = (name: string, part: Part) => {
+    for (const [k, p] of Object.entries(part.parts ?? {})) visit(k, p as Part);
+    const seen = combos.map((k) => [k, nodeAt(k.key, name)] as const).filter((x): x is readonly [typeof x[0], CapturedNode] => !!x[1]);
+    if (!seen.some(([, n]) => grid(n)) || seen.every(([, n]) => grid(n))) return;
+    const axis = contract.props.find((p) => Array.isArray((p as { type?: { enum?: unknown } }).type?.enum) &&
+      seen.every(([k, n]) => seen.every(([o, m]) => o.axisValues[p.name] !== k.axisValues[p.name] || grid(n) === grid(m))))?.name;
+    const map: Record<string, unknown> = {}, why: string[] = [];
+    for (const [k, n] of seen) if (axis && grid(n)) {
+      const v = k.axisValues[axis]!, l = lower(n), was = map[v];
+      if (typeof l === 'string') why.push(l); else if (was !== undefined && JSON.stringify(was) !== JSON.stringify(l)) why.push('differs-across-variants'); else map[v] = l;
+    }
+    if (!axis || why.length || part.layout || part.layoutByProp || part.layoutByCombination)
+      return void refused.push(`grid-row-unlowered: ${name}: ${!axis ? 'not-by-one-axis' : why.length ? [...new Set(why)].join(',') : 'part-has-layout'}`);
+    part.layoutByProp = { prop: axis, map } as Part['layoutByProp'];
+    receipts.push(`grid-lowered-to-row: ${name}: ${axis}=${Object.keys(map).join('|')}`);
+  };
+  visit('root', contract.anatomy.root as Part);
+  return [receipts, refused];
+}
+
 /** Profile convention svg-own-fill-on-host: an element holding nothing but one svg, whose own fill (a rule on the svg, not
  *  one it inherits from the element) differs from the element's, takes that fill as its own. The svg folds into the
  *  element as its icon, and its shapes' fill is read as the host's, so the glyph keeps the fill the browser drew; CSS fill
@@ -687,6 +734,10 @@ async function main() {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis'),
           conventions.has('variant-text-owns-its-part'), conventions.has('field-value-without-axes')));
+        if (conventions.has('single-row-grid-as-row')) {
+          const [lowered, named] = lowerSingleRowGrid(enriched as Contract, combos, (key, part) => nodeAt(key, part) as CapturedNode | null);
+          row.gridAsRow = lowered; refusals.push(...named);
+        }
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; });
         if (conventions.has('inline-block-line-box-as-drawn')) row.lineBox = carryLineBox(enriched as Contract, c.axes, combos, (key, part) => {

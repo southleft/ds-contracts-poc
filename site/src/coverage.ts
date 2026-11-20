@@ -694,6 +694,10 @@ reg("layout", "layout-by-prop", [
   "variantLayout.grow",
   "variantLayout.growBasis",
   "variantLayout.alignSelf",
+  "variantLayout.gridAsRow",
+  "variantLayout.gridAsRow.gap",
+  "variantLayout.gridAsRow.paddingRight",
+  "variantLayout.gridAsRow.paddingBottom",
 ]);
 
 // --- Token bindings --------------------------------------------------------

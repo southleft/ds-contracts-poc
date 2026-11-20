@@ -139,11 +139,18 @@
 /** absolute-only-hug-keeps-extent (Figma to React proposal): a frame below the root that hugs an axis while every visible
  *  child is absolutely placed keeps, as that axis' minimum, the extent its children witness, where CSS would collapse it to
  *  its padding. Off, named. */
+/** uncaptured-fill-variable-carried-as-paint (Figma to React proposal): a source fill that names a variable the dump
+ *  carries no consumer for keeps its observed paint, and no binding is recreated. Off, the owner refuses (consumer-missing). */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
  *  keeps its CSS margin box; the box takes the child's FILL and the child fills it, so the margin is drawn. Off, the
  *  margin box is skipped and the margin is named (FC-EMIT-MARGIN-BOX-SKIPPED). */
+/** single-row-grid-as-row (React to Figma contract step): a part that is a grid in some values of one variant axis and not
+ *  in the others, whose grid in every such variant has one non-empty row holding each in-flow child in its own column
+ *  (each column as wide as its child, every other track 0), is drawn as a row in those values: a layoutByProp override
+ *  with the grid's item alignment, its column gap, and its empty trailing tracks as end padding (gridAsRow). Any other
+ *  such grid is named (grid-row-unlowered). Off, those values carry no layout. */
 /** show-declared-component (React to Figma contract step): each case is rendered as the reader rendered it, naming the
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
@@ -183,6 +190,7 @@ export const CONVENTIONS = [
   'rect-placement-by-variant',
   'root-text-by-axis',
   'show-declared-component',
+  'single-row-grid-as-row',
   'sized-text-box-packs-by-text-align',
   'stage-from-story-container',
   'stretched-line-paints-bar',
@@ -197,6 +205,7 @@ export const CONVENTIONS = [
   'text-baseline-as-drawn',
   'text-baseline-rounds-like-figma',
   'text-box-stacks-block-children',
+  'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',
   'variant-grid-whole-pixel',
   'variant-text-owns-its-part',
