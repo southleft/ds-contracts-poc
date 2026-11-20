@@ -5885,11 +5885,13 @@ function partToSpecInner(
   };
   // Convention text-baseline-as-drawn (Part.textBaseline): Figma sets a line's baseline (L − (a + d)·s)/2 + a·s below
   // its top, unrounded (a, d: the font's ascent and descent per em); a glyph line of 2·b − (a − d)·s puts it b below the
-  // top, where the browser drew it. The box keeps the carried line height, so nothing around it moves.
+  // top, where the browser drew it. The box keeps the carried line height, so nothing around it moves. A sized text is
+  // wrapped at run time in a box of its size, its own box inside it; it is drawn so only with sized-text-baseline-as-drawn.
   const drawnBaseline = (spec: NodeSpec): void => {
     const row = input.conventions?.has('text-baseline-as-drawn') && part.textBaseline ? resolveTextBaseline(part.textBaseline, subst) : undefined;
     const height = typeof spec.lineHeight === 'number' ? spec.lineHeight : spec.lineHeight?.unit === 'PIXELS' ? spec.lineHeight.value : undefined;
-    if (!row || height === undefined || !spec.fontSize || spec.fixedWidth || spec.fixedHeight || spec.textStyle) return;
+    const sized = Boolean(spec.fixedWidth || spec.fixedHeight) && !input.conventions?.has('sized-text-baseline-as-drawn');
+    if (!row || height === undefined || !spec.fontSize || sized || spec.textStyle) return;
     const line = +(2 * row.px - (row.ascent - row.descent) * spec.fontSize).toFixed(4);
     if (line > 0 && line !== height) spec.baselineBox = { line, height };
   };
