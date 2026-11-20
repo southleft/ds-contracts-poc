@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **64** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **65** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -648,7 +648,7 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 
 **Why.** A correct and honest wall, and both conformance cases are classified REFUSED to match. Figma has no viewport-anchored or scroll-anchored positioning, so there is nothing to lower to; the registry says so in the one place a reader would look. Registered as the shape a wall should take.
 
-### `grid` — 5 rules (4 implemented, 1 proposed, 0 wall)
+### `grid` — 6 rules (5 implemented, 1 proposed, 0 wall)
 
 Two thirds of the layout conformance kit — 30 of the 45 layout cases — and the **healthiest family in the register**. Nothing in it drops silently: every impossibility is a `throw` or a named refusal. It is also where the schema is now out of date: the prose still says grids lower to nested auto-layout stacks, and the emitter has used Figma's native GRID layout mode for some time.
 
@@ -658,6 +658,7 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 | `anatomy.grid-two-dimensional-refused` | `implemented` | `anatomy.ts:286` | a genuinely two-dimensional grid reaching the FLEX-LOWERING path → nothing — refused by name | a named refusal: a 2D grid has no single-axis spelling | `refusals` | `untested` |
 | `emit.grid-gap-pair-kept` | `implemented` | `emit-figma-script.ts:2135` | row-gap and column-gap on a grid container → rowGap and columnGap on the GRID frame, independently | the independent { row, column } pair | **none** | `round-tripped` |
 | `emit.grid-hug-track-written-bare` | `implemented` | `emit-figma-script.ts:8468` | a fit-content grid track → { type: 'HUG' }, never { type: 'HUG', value: n } | fit-content lowers to a bare HUG track | `emit-facts` | `round-tripped` |
+| `emit.grid-single-row-as-row` | `implemented` | `emit-figma-script.ts:3738` | display: grid / inline-grid in some values of one variant axis and not the others, with one non-empty row → that value's variant as a HORIZONTAL row: itemSpacing = column-gap, the empty trailing tracks as end padding | the row the one-row grid draws | **none** | `untested` |
 | `emit.grid-tracks-to-native-grid` | `implemented` | `emit-figma-script.ts:2109` | grid-template-columns / grid-template-rows → layoutMode 'GRID' with FIXED / FLEX / HUG tracks, plus gridRowCount and gridColumnCount | grid-template-columns / grid-template-rows in the declared spelling | **none** | `round-tripped` |
 
 #### `anatomy.grid-align-fallback-stretch`
@@ -703,6 +704,17 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 - nothing — the asymmetry is in the API and the rule accommodates it
 
 **Why.** Registered because it is a lowering rule that exists ONLY because of an API asymmetry, and it is exactly the kind of thing that gets silently undone by a well-meaning refactor. The Figma API reads a HUG track back with a value attached, and writing that value back reinterprets the track as FIXED at that number — every fit-content track silently became a 1px column. The rule is right, it is named, and now it is gated.
+
+#### `emit.grid-single-row-as-row`
+
+**Context.** profile convention single-row-grid-as-row, decided in the React to Figma contract step: in every variant of such a value the grid has one non-empty row (its first), its in-flow children are auto-placed one per column in document order, each column is as wide as its child's margin box, every other track is 0, and the grid has no padding, border or content distribution; any other such grid is refused by name (`grid-row-unlowered`)
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- the grid itself: tracks, the empty trailing tracks and the row gap are drawn only as the row's spacing and end padding, never as a GRID frame
+- a per-variant GRID frame is refused (P10: a mode switch destroys tracks) and a 0 track cannot be written (P2b), so the native GRID path cannot carry this case
+
+**Why.** Carbon's list-box field wrapper (MultiSelect, Dropdown) is a block stack in its default type and a one-row inline grid in its inline type. The grid never reached the contract, so the canvas centered a gapless row in the fixed box: 56 variants off by a gap and an empty row's extent. A row with the gap and end padding draws the same boxes, exactly in the cases the contract step proves.
 
 #### `emit.grid-tracks-to-native-grid`
 

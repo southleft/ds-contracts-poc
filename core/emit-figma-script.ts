@@ -3732,6 +3732,11 @@ function applyStyling(
   // outline, token or literal, this combo or another), so it is read here,
   // beside the other spec-level facts, and not in the stroke cases above.
   const paintLayout=resolveLayout(part,subst);
+  // Profile convention single-row-grid-as-row (contract step): a one-row grid drawn as a row spaces its items by the
+  // column gap and keeps the extent of its empty trailing tracks as end padding.
+  // @lower emit.grid-single-row-as-row
+  if (paintLayout?.gridAsRow) Object.assign(spec.lits ??= {}, { itemSpacing: paintLayout.gridAsRow.gap },
+    paintLayout.gridAsRow.paddingRight ? { paddingRight: paintLayout.gridAsRow.paddingRight } : {}, paintLayout.gridAsRow.paddingBottom ? { paddingBottom: paintLayout.gridAsRow.paddingBottom } : {});
   if(paintLayout?.reversePaint!==undefined)spec.itemReverseZIndex=paintLayout.reversePaint !== (paintLayout.direction?.endsWith('-reverse')??false);
   // Convention outline-takes-no-layout: a stroke drawn from a CSS outline takes no layout space, as an outline never does
   // in CSS; counted in layout, its weight would inset the frame's children and push them past its edges.

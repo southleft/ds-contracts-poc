@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, declaredShow, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carriedChannel, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -275,6 +275,27 @@ test('show-declared-component: a case names the component its profile declares f
   assert.equal(declaredShow(decls, 'x--none', {}), JSON.stringify(['x--none', {}]));   // listed by no declaration: as before
   assert.equal(declaredShow([...decls, { name: 'Later', stories: ['b--default'] }], 'b--default', {}), JSON.stringify(['b--default', {}, 'Later', false]));
   assert.throws(() => profileDeclarations({ profile: { path: 'p.json', sha256: 'recorded' } }, () => Buffer.from('{}')), /^Error: profile-changed-since-read:p\.json$/);
+});
+
+test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
+  const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
+  const kid = (width: string) => ({ t: 'el', el: el({ width, 'margin-left': '0px', 'margin-right': '0px', 'grid-row-start': 'auto', 'grid-row-end': 'auto', 'grid-column-start': 'auto', 'grid-column-end': 'auto' }) });
+  const box = Object.fromEntries(['padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'].map((k) => [k, '0px']));
+  const inline = (label: string) => el({ ...box, display: 'inline-grid', 'grid-template-columns': '34.8906px 127.297px', 'grid-template-rows': '24px 0px', 'column-gap': '4px', 'row-gap': '4px',
+    'grid-template-areas': 'none', 'grid-auto-flow': 'row', 'align-items': 'center', 'justify-content': 'normal', 'align-content': 'normal' }, [kid(label), kid('127.297px')]);
+  const run = (label: string) => { const { contract, combos } = seed(c!), type = (key: string) => combos.find((k) => k.key === key)!.axisValues.type;
+    contract.anatomy.root.parts = { label: { text: 'Label' }, field: { text: 'Pick' } } as never;
+    return [lowerSingleRowGrid(contract, combos, (key, part) => part === 'root' ? (type(key) === 'inline' ? inline(label) : el({ display: 'block' })) : null), contract] as const; };
+  const [[receipts, refused], contract] = run('34.8906px');
+  assert.deepEqual([receipts, refused], [['grid-lowered-to-row: root: type=inline'], []]);
+  assert.deepEqual(contract.anatomy.root.layoutByProp, { prop: 'type', map: { inline: { display: 'inline-flex', direction: 'row', align: 'center', gridAsRow: { gap: 4, paddingBottom: 4 } } } });
+  assert.deepEqual(run('30px')[0], [[], ['grid-row-unlowered: root: columns-not-children']]);
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map() });
+  const roots = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { layout: unknown; lits?: Record<string, unknown> } }> }).variants.map((v) => [v.spec.layout, v.spec.lits?.itemSpacing, v.spec.lits?.paddingBottom]);
+  assert.deepEqual(roots[1], [{ mode: 'HORIZONTAL', primary: 'MIN', counter: 'CENTER', stretchChildren: undefined }, 4, 4]);
+  assert.notDeepEqual(roots[0]![0], roots[1]![0]);
 });
 
 test('svg-own-fill-on-host: an element holding only an svg with its own fill takes that fill; text or a shared fill leaves it', () => {

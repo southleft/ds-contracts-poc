@@ -141,6 +141,11 @@
  *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
+/** single-row-grid-as-row (React to Figma contract step): a part that is a grid in some values of one variant axis and not
+ *  in the others, whose grid in every such variant has one non-empty row holding each in-flow child in its own column
+ *  (each column as wide as its child, every other track 0), is drawn as a row in those values: a layoutByProp override
+ *  with the grid's item alignment, its column gap, and its empty trailing tracks as end padding (gridAsRow). Any other
+ *  such grid is named (grid-row-unlowered). Off, those values carry no layout. */
 /** show-declared-component (React to Figma contract step): each case is rendered as the reader rendered it, naming the
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
@@ -179,6 +184,7 @@ export const CONVENTIONS = [
   'rect-placement-by-variant',
   'root-text-by-axis',
   'show-declared-component',
+  'single-row-grid-as-row',
   'sized-text-box-packs-by-text-align',
   'stage-from-story-container',
   'stretched-line-paints-bar',
