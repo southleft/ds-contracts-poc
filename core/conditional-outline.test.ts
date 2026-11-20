@@ -257,3 +257,24 @@ test('interaction padding preserves asymmetric sides and active resets in CSS Mo
  for(const variant of planes)for(const side of ['paddingTop','paddingRight','paddingBottom','paddingLeft'])
   assert(variant.spec.bindings?.[side as keyof typeof variant.spec.bindings],`${variant.name} must retain ${side}`);
 });
+
+test('profile convention inside-outside-stroke-as-outline: a non-layout stroke drawn INSIDE in some variants and OUTSIDE in others keeps each band',async()=>{
+ const ring=(mode:string):any=>mode==='Outer'?{stroke:{hex:'0f62fe'},strokeWeight:1,strokeAlign:'OUTSIDE',strokesIncludedInLayout:false}:mode==='Inner'?{stroke:{hex:'ffffff'},strokeWeight:1,strokeAlign:'INSIDE',strokesIncludedInLayout:false}:{};
+ const set:any={setName:'MixedRing',type:'COMPONENT_SET',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'None',variantOptions:['None','Outer','Inner']}},
+  variants:['None','Outer','Inner'].map((mode,i)=>({name:`Mode=${mode}`,type:'COMPONENT',nodeId:'v'+i,variantProperties:{Mode:mode},bbox:{width:40,height:20},fill:{hex:'393939'},
+   layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'FIXED',counterSizing:'FIXED'},fixedSize:{width:40,height:20},...ring(mode),children:[]}))};
+ const read=(conventions?:string[])=>{const r=proposeFromDump(structuredClone(set),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),conventions});
+  return {r,c:ContractSchema.parse(r.contract),tokens:{primitives:r.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}}};};
+ const off=read();assert(off.r.notes.some(n=>n.includes('inside-outside-stroke-outline-not-carried')),JSON.stringify(off.r.notes));assert.equal(off.c.anatomy.root.tokens?.['outline-width'],undefined);
+ const {r,c,tokens}=read(['inside-outside-stroke-as-outline']),contracts=new Map([[c.id,c]]),icons=new Map<string,string>();
+ assert(r.notes.some(n=>n.includes('(profile convention inside-outside-stroke-as-outline)')));assert(!r.notes.some(n=>n.includes('inside-outside-stroke-outline-not-carried')));
+ assert.equal(createFigmaEngine({tokens,icons}).compileComponentData(c,contracts).variants.length,3);
+ const browser=await chromium.launch();
+ try{for(const output of [emitReact(c,{contracts,icons,tokens:tokenInventoryFromJson([tokens.primitives]),tokenValues:tokens}),{...emitReactInline(c,{contracts,icons,tokens}),css:''}]){
+  const page=await browser.newPage();try{const render=await mountGenerated(page,c.name,output.tsx,output.css);await page.addStyleTag({content:emitTokensCss(tokensCssLayers(tokens)).css});
+   for(const [mode,width,offset,color] of [['none','0px',undefined,undefined],['outer','1px','0px','rgb(15, 98, 254)'],['inner','1px','-1px','rgb(255, 255, 255)']] as const){
+    await render({mode});const s=await page.locator('#root > *').evaluate(n=>{const s=getComputedStyle(n),b=n.getBoundingClientRect();return {width:s.outlineWidth,offset:s.outlineOffset,color:s.outlineColor,box:[b.width,b.height]};});
+    assert.equal(s.width,width,mode);if(offset)assert.equal(s.offset,offset,mode);if(color)assert.equal(s.color,color,mode);assert.deepEqual(s.box,[40,20],mode);
+   }}finally{await page.close();}
+ }}finally{await browser.close();}
+});
