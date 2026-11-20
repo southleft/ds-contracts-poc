@@ -128,3 +128,29 @@ test('observed-swap-default-drawn: an uncarried fixed swap to another component 
  assert.equal(propose('default-main',['observed-swap-default-drawn']).use.component!.clearedSlots,undefined,'the declared default keeps the fallback');
  assert.equal(propose('other-main',[]).use.component!.clearedSlots,undefined,'convention off: unchanged');
 });
+test('fixed-swap-drawing-carried: a captured drawing reaches the child slot only for uses whose child variant draws one placement',async()=>{
+ const {emitReact}=await import('./emit-react.js'),{createFigmaEngine}=await import('./emit-figma-script.js'),{validateContract}=await import('../packages/core/src/validate.js');
+ const {defaultSlotFamilyIssue}=await import('../scripts/contract-schema.js');
+ const placement=(a:boolean,b:boolean)=>({slot:{name:'glyph',bindings:{figma:{property:'Payload'}}},presenceByCombination:{props:['mode'],rows:[{values:['a'],present:a},{values:['b'],present:b}]}});
+ const child=ContractSchema.parse({...base,id:'test.glyph-host',name:'GlyphHost',props:[{name:'mode',type:{enum:['a','b']},default:'a',bindings:{code:{prop:'mode'},figma:{kind:'VARIANT',property:'Mode',values:{a:'A',b:'B'}}}}],
+  anatomy:{root:{parts:{one:placement(true,false),two:placement(false,true),three:placement(false,true)}}},bindings:anchors('glyph-host-key','glyph-host-set','GlyphHost')});
+ assert.equal(defaultSlotFamilyIssue(child,'glyph'),'children-slot-placements-overlap','the contract-wide family stays unqualified');
+ const childSet:DumpSet={setName:'GlyphHost',type:'COMPONENT_SET',key:'glyph-host-key',nodeId:'glyph-host-set',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']},'Payload#1:2':{type:'INSTANCE_SWAP',defaultValue:'default-main'}},
+  variants:['A','B'].map(m=>({name:'Mode='+m,type:'COMPONENT',nodeId:'main-'+m,componentKey:'main-'+m+'-key',variantProperties:{Mode:m}}))};
+ const drawing={name:'Selected',type:'FRAME',nodeId:'I9;1',fixedSize:{width:16,height:16},children:[{name:'Mark',type:'RECTANGLE',nodeId:'I9;1;2',fill:{hex:'161616'},fixedSize:{width:8,height:8}}]};
+ const propose=(mode:string,conventions:string[])=>{const caller:DumpSet={setName:'Caller',type:'COMPONENT_SET',key:'caller-key',nodeId:'caller-set',propertyDefinitions:{Case:{type:'VARIANT',defaultValue:'One',variantOptions:['One']}},
+  variants:[{name:'Case=One',type:'COMPONENT',nodeId:'caller-0',variantProperties:{Case:'One'},layout:layout as any,children:[{name:'GlyphHost',type:'INSTANCE',nodeId:'use-0',instanceOf:'GlyphHost',instanceKey:'main-'+mode+'-key',instanceSetKey:'glyph-host-key',
+   instanceGeometry:{nodeId:'use-0',componentId:'main-'+mode,transform:[[1,0,0],[0,1,0]],localSize:{width:16,height:16}},fixedSwaps:{Payload:{id:'other-main',key:'other-key',observedInstances:[{nodeId:'I9;1',path:[0]}]}},
+   fixedSwapDrawings:{Payload:[{path:[0],root:drawing}]}} as any]}]};
+  const p=proposeFromDump(caller,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['GlyphHost',child.id]]),contractIdByKey:new Map([['glyph-host-key',child.id]]),contractsById:new Map([[child.id,asMinimalChildContract(child)]]),fixedSwapOwnerRoots:fixedSwapOwnerRoots([childSet]),conventions});
+  const c=ContractSchema.parse(p.contract);return {p,c,use:walkAnatomy(c).find(w=>w.part.component?.id===child.id)!.part};};
+ const a=propose('A',['fixed-swap-drawing-carried']);
+ assert.equal(a.use.component!.contentSlot,'glyph');assert.deepEqual(a.use.component!.callerSlotSelections,{slot:'glyph',rows:[{mode:'a'}]});assert(a.use.parts);
+ const scope=new Map([[child.id,child],[a.c.id,a.c]]),errors:string[]=[];validateContract(a.c,scope,errors,new Map());assert.deepEqual(errors,[]);
+ const tree=a.p.mintedTokens?.tree??{},tokens={primitives:tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+ const {flattenTokens}=await import('./tokens.js');
+ assert.match(emitReact(a.c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(tree).keys()),tokenValues:tokens}).tsx,/glyph=\{/);
+ assert.throws(()=>createFigmaEngine({tokens,icons:new Map()}).compileComponentData(a.c,scope),/FIGMA_COMPONENT_CALLER_SLOT_SELECTIONS_UNSUPPORTED|qualified glyph slot family/);
+ const b=propose('B',['fixed-swap-drawing-carried']);assert.equal(b.use.component!.contentSlot,undefined);assert(b.p.notes.some(n=>n.includes('does not draw exactly one')));
+ assert.equal(propose('A',[]).use.component!.contentSlot,undefined,'convention off: unchanged');
+});
