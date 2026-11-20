@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -12473,9 +12473,9 @@ function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,whe
       if(!layout || layout.display==='grid' || layout.reversePaint===undefined || layout.childOrder!==undefined)return false;
       const direction=layout.direction??'row';
       return n.layout.mode===(direction.startsWith('column')?'VERTICAL':'HORIZONTAL') &&
-        (n.itemReverseZIndex===true)===(layout.reversePaint!==direction.endsWith('-reverse'));
+        ((n.itemReverseZIndex===true)===(layout.reversePaint!==direction.endsWith('-reverse'))||linkedChildKeepsStacking(ctx,where));
     })) {
-      ctx.notes.push(`${where}: observed child paint order agrees with the key-linked child for every applied variant; the child retains ownership of its internal stacking`);
+      ctx.notes.push(linkedStackingNote(ctx,where)??`${where}: observed child paint order agrees with the key-linked child for every applied variant; the child retains ownership of its internal stacking`);
       return;
     }
   }
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20962,4 +20962,17 @@ function carryUncapturedFillVariable<T>(m: Merged, where: string, notes: string[
   });
   if (dropped) notes.push(`${where}: ${dropped} of ${paints.length} source fills name a variable the dump carries no consumer for (captured without variable access); the observed paint is carried and no binding is recreated (profile convention uncaptured-fill-variable-carried-as-paint)`);
   return carried;
+}
+
+/** Profile convention linked-child-keeps-its-stacking: an instance whose key-linked child agrees with it on layout direction
+ *  but not on canvas stacking ("first on top" overridden on the instance) draws with the child's own stacking. The override
+ *  is not carried: it shows only where the child's children overlap, which neither the contract nor the dump can rule out.
+ *  Off, the owner refuses (child-paint-order-owner-unqualified), as before. */
+function linkedChildKeepsStacking(ctx: Ctx, where: string): boolean {
+  if (!ctx.linkedChildStacking) return false;
+  (ctx.linkedStackingKept ??= new Set()).add(where);
+  return true;
+}
+function linkedStackingNote(ctx: Ctx, where: string): string | undefined {
+  return ctx.linkedStackingKept?.has(where) ? `${where}: the instance's canvas stacking differs from its key-linked child's; the child draws with its own stacking and the instance's override is not carried, which shows only where the child's children overlap (profile convention linked-child-keeps-its-stacking)` : undefined;
 }
