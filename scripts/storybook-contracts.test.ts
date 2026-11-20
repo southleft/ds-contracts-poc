@@ -204,6 +204,22 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   assert.deepEqual(boxes([]), []);
 });
 
+test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { references: [ref('b--a', {})] })] }).components;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const primary = (rootLiterals: Record<string, string>, conventions: string[]) => {
+    const { contract } = seed(c!);
+    Object.assign(contract.anatomy.root, { layout: { display: 'inline-flex', justify: 'space-between' }, literals: rootLiterals,
+      parts: { label: { text: 'Button' }, icon: { declared: { display: 'block' }, literals: { width: '16px', height: '16px', 'margin-left': '8px' } } } });
+    const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const spec = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { layout?: { primary?: string }; lits?: { itemSpacing?: number } } }> }).variants[0]!.spec;
+    return [spec.layout?.primary, spec.lits?.itemSpacing];
+  };
+  assert.deepEqual(primary({}, ['hugging-space-between-packs']), ['MIN', 8]);
+  assert.deepEqual(primary({}, []), ['SPACE_BETWEEN', 8]);
+  assert.deepEqual(primary({ width: '200px' }, ['hugging-space-between-packs']), ['SPACE_BETWEEN', 8]);   // free space to spread
+});
+
 test('inline-block-line-box-as-drawn: an atomic inline alone on its line carries its line box per variant; the writer adds it to the margin box', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const { contract, combos } = seed(c!), inline = (key: string) => combos.find((k) => k.key === key)!.axisValues.type === 'inline';
