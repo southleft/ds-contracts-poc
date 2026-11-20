@@ -4,6 +4,8 @@ export interface NativeLineGeometry {
   length: number;
   /** Source-qualified horizontal in-flow allocation; stroke never changes height. */
   fillWidth?: true;
+  /** Source-qualified vertical in-flow allocation in a row (quarter-turn basis); stroke never changes width. */
+  fillHeight?: true;
   transform: NativeLineTransform;
   cap: 'NONE' | 'ROUND' | 'SQUARE';
   align: 'INSIDE' | 'CENTER' | 'OUTSIDE';
@@ -27,6 +29,7 @@ export function nativeLineIssue(line: NativeLineGeometry): string | undefined {
   if (!['NONE', 'ROUND', 'SQUARE'].includes(line.cap)) return 'native-line-cap-unsupported';
   if (!['INSIDE', 'CENTER', 'OUTSIDE'].includes(line.align)) return 'native-line-alignment-invalid';
   if (line.fillWidth && (line.cap!=='NONE'||line.align!=='CENTER'||a!==1||b!==0||c!==0||d!==1||line.transform[0][2]!==0||line.transform[1][2]!==0)) return 'native-line-fill-basis-unsupported';
+  if (line.fillHeight && (line.fillWidth||line.cap!=='NONE'||line.align!=='CENTER'||a!==0||b!==1||c!==-1||d!==0||line.transform[0][2]!==0||line.transform[1][2]!==0)) return 'native-line-fill-basis-unsupported';
 }
 function checked(line: NativeLineGeometry): void {
   const issue = nativeLineIssue(line);
@@ -66,6 +69,7 @@ export function nativeLineWrapperMatrix(line: NativeLineGeometry): string {
  * The outer shape box carries layout and clipping, never an ink-derived box. */
 export function nativeLineSvg(shape: {line:NativeLineGeometry}): string {
   const line=shape.line, footprint=nativeLineFootprint(line);
+  if(line.fillHeight)return `<svg xmlns="http://www.w3.org/2000/svg" width="1" height="100%" fill="none" style="display:block;position:absolute;left:0;top:0;overflow:visible"><g style="transform:translateX(calc(var(--native-line-stroke-width, 0px) * 0.5))"><line x1="0" y1="0" x2="0" y2="100%" stroke-linecap="butt" style="stroke:inherit;stroke-width:var(--native-line-stroke-width, 0px)"/></g></svg>`;
   if(line.fillWidth)return `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="1" fill="none" style="display:block;overflow:visible"><g style="transform:translateY(calc(var(--native-line-stroke-width, 0px) * -0.5))"><line x1="0" y1="0" x2="100%" y2="0" stroke-linecap="butt" style="stroke:inherit;stroke-width:var(--native-line-stroke-width, 0px)"/></g></svg>`;
   const capped=line.cap!=='NONE';
   const dash=capped ? `stroke-dasharray:calc(${line.length}px - var(--native-line-stroke-width, 0px)) calc(${line.length}px + var(--native-line-stroke-width, 0px));stroke-dashoffset:calc(var(--native-line-stroke-width, 0px) * -0.5);` : '';

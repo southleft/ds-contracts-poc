@@ -836,7 +836,7 @@ reg("shape", "stroked-paths", [
 ]);
 
 reg("shape", "native-lines", [
-  "shape.line", "shape.line.length", "shape.line.transform", "shape.line.cap", "shape.line.align", "shape.line.fillWidth",
+  "shape.line", "shape.line.length", "shape.line.transform", "shape.line.cap", "shape.line.align", "shape.line.fillWidth", "shape.line.fillHeight",
   "shape.line.source", "shape.line.source.nodeId", "shape.line.source.parentId",
   "shape.line.observedSources", "shape.line.observedSources.nodeId", "shape.line.observedSources.parentId",
   "shape.line.observedSources.variantName", "shape.line.observedSources.transform", "shape.line.observedSources.length",

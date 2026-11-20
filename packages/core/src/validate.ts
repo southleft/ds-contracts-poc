@@ -211,10 +211,10 @@ export function validateContract(
     dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
   const seen = new Set<string>();
   for (const { name, path: p, part } of walkAnatomy(contract)) {
-    if(part.shape?.kind==='line'&&part.shape.line.fillWidth){
+    if(part.shape?.kind==='line'&&(part.shape.line.fillWidth||part.shape.line.fillHeight)){
       const parent=p.slice(1,-1).reduce<Part|undefined>((node,key)=>node?.parts?.[key],contract.anatomy[p[0]]);
-      if(!parent?.layout||parent.layout.direction!=='column'||!['flex','inline-flex'].includes(parent.layout.display??'flex')||parent.layoutByProp||parent.layoutByCombination||parent.component||part.layout||part.layoutByProp||part.layoutByCombination||part.absoluteGeometry||part.absoluteGeometryByCombination||part.absolutePlacement||part.placement||part.overlay||part.component||part.slot)
-        errors.push(`${contract.id}: part "${name}" horizontal-fill-line-parent-unqualified`);
+      if(!parent?.layout||parent.layout.direction!==(part.shape.line.fillWidth?'column':'row')||!['flex','inline-flex'].includes(parent.layout.display??'flex')||parent.layoutByProp||parent.layoutByCombination||parent.component||part.layout||part.layoutByProp||part.layoutByCombination||part.absoluteGeometry||part.absoluteGeometryByCombination||part.absolutePlacement||part.placement||part.overlay||part.component||part.slot)
+        errors.push(`${contract.id}: part "${name}" ${part.shape.line.fillWidth?'horizontal':'vertical'}-fill-line-parent-unqualified`);
     }
 
     errors.push(...textByCombinationIssues(contract,part,p.length>1).map(issue=>`${contract.id}: part "${name}" ${issue}`));

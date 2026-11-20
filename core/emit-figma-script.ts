@@ -5577,7 +5577,7 @@ function partToSpecInner(
     const { pathsByProp, arcByCombination, ...baseShape } = part.shape;
     let selected = baseShape;
     if (baseShape.kind === 'line') {
-      if(baseShape.line.fillWidth)throw Error('native-horizontal-fill-line-unqualified:'+name);
+      if(baseShape.line.fillWidth||baseShape.line.fillHeight)throw Error(`native-${baseShape.line.fillWidth?'horizontal':'vertical'}-fill-line-unqualified:`+name);
       // Capture identities stay in the contract and receipts, not in every
       // native variant's paint spec. Repeating all observedSources on every
       // node would multiply the full source inventory by the variant count.

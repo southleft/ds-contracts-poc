@@ -71,3 +71,25 @@ test('profile convention stretched-line-paints-bar: a vertically stretched quart
  }finally{await browser.close();}
  const shifted=make();shifted.variants[1].children[1].shape.line.transform[1][2]=1;assert.equal(read(['stretched-line-paints-bar'],shifted).c.anatomy.root.parts!.Bar.declared?.position,undefined,'off the top edge stays refused');
 });
+
+test('profile convention vertical-fill-line-in-row: a quarter-turn LINE stretched across its row takes no width and paints its bar; off, it is named',async()=>{
+ const make=():any=>({setName:'RowBar',type:'COMPONENT_SET',propertyDefinitions:{Mode:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}},variants:[48,68].map((height,i)=>({name:'Mode='+['A','B'][i],variantProperties:{Mode:['A','B'][i]},type:'COMPONENT',nodeId:'p'+i,bbox:{width:54,height},
+  layout:{mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:14,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'},children:[
+  {name:'Bar',type:'LINE',nodeId:'n'+i,fillHeight:true,stroke:{hex:['42be65','da1e28'][i]},strokeWeight:3,strokeAlign:'CENTER',shape:{kind:'line',width:height,height:0,constraints:{horizontal:'LEFT',vertical:'TOP'},
+   line:{length:height,transform:[[-4.371139183945161e-8,-1,0.000004764541699842084],[1,-4.371139183945161e-8,0]],cap:'NONE',align:'CENTER',source:{nodeId:'n'+i,parentId:'p'+i}}}},
+  {name:'Body',type:'FRAME',nodeId:'b'+i,fixedSize:{width:40,height}}]}))});
+ const read=(conventions:string[],d=make())=>{const p=proposeFromDump(d,{corpus:tokenCorpusFromJson({...tokens,brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),conventions});return {p,c:ContractSchema.parse(p.contract)};};
+ const off=read([]);assert.equal(off.c.anatomy.root.parts!.Bar.shape,undefined);assert(off.p.notes.some(n=>n.includes('vertical-fill-line-not-carried')),JSON.stringify(off.p.notes));
+ const {p,c}=read(['vertical-fill-line-in-row']),shape=c.anatomy.root.parts!.Bar.shape;assert(shape?.kind==='line');assert.equal(shape.line.fillHeight,true);
+ const contracts=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,contracts,errors,new Map());assert.deepEqual(errors,[]);
+ const tree=p.mintedTokens!.tree,browser=await chromium.launch();
+ try{for(const inline of [false,true]){const out=inline?{...emitReactInline(c,{contracts,icons:new Map(),tokens:{...tokens,primitives:tree}}),css:''}:emitReact(c,{contracts,icons:new Map(),tokens:tokenInventoryFromJson([tree])});
+  const page=await browser.newPage(),render=await mountGenerated(page,c.name,out.tsx,mintedTokenCss(tree)+out.css);
+  for(const [mode,height,color] of [['a',48,'rgb(66, 190, 101)'],['b',68,'rgb(218, 30, 40)']] as const){await render({mode});
+   assert.deepEqual(await page.evaluate(()=>{const root=document.querySelector('#root > *')!.getBoundingClientRect(),line=document.querySelector('line')!,l=line.getBoundingClientRect(),bar=line.closest('svg')!.parentElement!.getBoundingClientRect(),
+    body=[...document.querySelectorAll('#root > * > *')].at(-1)!.getBoundingClientRect(),s=getComputedStyle(line);return [bar.width,bar.height,l.x-root.x,l.height,s.strokeWidth,s.stroke,body.x-root.x];}),[0,height,1.5,height,'3px',color,14],JSON.stringify({mode,inline}));}
+ }}finally{await browser.close();}
+ assert.throws(()=>createFigmaEngine({tokens,icons:new Map()}).buildComponentScript(c,contracts),/native-vertical-fill-line-unqualified/);
+ const column=structuredClone(c) as any;column.anatomy.root.layout.direction='column';const bad:string[]=[];validateContract(ContractSchema.parse(column),new Map([[c.id,column]]),bad,new Map());assert(bad.some(x=>x.includes('vertical-fill-line-parent-unqualified')),JSON.stringify(bad));
+ const absolute=make();absolute.variants[1].children[0].abs={x:0,y:0};assert.equal(read(['vertical-fill-line-in-row'],absolute).c.anatomy.root.parts!.Bar.shape,undefined,'an absolutely placed line is not in the row');
+});
