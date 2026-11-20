@@ -625,3 +625,32 @@ test('profile convention rect-placement-by-variant: a fill absolute in one phase
    assert.deepEqual(await page.locator('#root [class$=_Fill]').evaluate(el=>{const r=el.getBoundingClientRect(),o=el.parentElement!.getBoundingClientRect();return [r.x-o.x,r.y-o.y,Math.round(r.width),r.height];}),[...box],phase);}
  }finally{await browser.close();}
 });
+test('profile convention synthetic-wrapper-shown-by-members: a folded flat member shows where its own plane draws it',async()=>{
+ const row={mode:'HORIZONTAL' as const,primary:'MIN' as const,counter:'MIN' as const,spacing:0,padding:[0,0,0,0] as [number,number,number,number],primarySizing:'AUTO' as const,counterSizing:'AUTO' as const};
+ const text=(name:string,characters:string,hidden?:true)=>({name,type:'TEXT' as const,...(hidden?{hidden}:{}),text:{characters,fontStyle:'Regular',fontFamily:'Arial',fontSize:12,lineHeight:16,fontWeight:400}});
+ const variants:DumpSet['variants']=[];
+ for(const kind of ['Nested','Flat'])for(const shown of ['No','Yes']){
+  const hide=shown==='No'?true as const:undefined;
+  variants.push({name:`Kind=${kind}, Shown=${shown}`,type:'COMPONENT',variantProperties:{Kind:kind,Shown:shown},bbox:{width:100,height:16},layout:row,
+   children:[text('Label','Title'),kind==='Flat'?text('Item','Action',hide):{name:'Holder',type:'FRAME',layout:row,...(hide?{hidden:hide}:{}),children:[text('Item','Action')]}]});
+ }
+ const set:DumpSet={setName:'Folded Visibility',type:'COMPONENT_SET',propertyDefinitions:{Kind:{type:'VARIANT',defaultValue:'Nested',variantOptions:['Nested','Flat']},Shown:{type:'VARIANT',defaultValue:'No',variantOptions:['No','Yes']}},variants};
+ const read=(conventions?:string[])=>{const proposal=proposeFromDump(structuredClone(set),{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,contractIdByName:new Map(),fileKey:'fixture',projectionMode:'exact',hiddenCaptured:true,conventions});
+  const c=ContractSchema.parse(proposal.contract),scope=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,scope,errors,new Map());assert.deepEqual(errors,[]);
+  const tokens={primitives:proposal.mintedTokens!.tree,semantic:{},light:{},dark:{},brands:{default:{}}};
+  return{proposal,c,out:emitReact(c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(tokens.primitives).keys()),tokenValues:tokens}),rootVars:`:root {${[...flattenTokens(tokens.primitives)].map(([key,token])=>`--${key.replaceAll('.', '-')}: ${token.value};`).join('\n')}}`};};
+ const off=read(),on=read(['synthetic-wrapper-shown-by-members']);
+ assert(off.proposal.notes.some(note=>note.includes('synthetic-wrapper-hides-drawn-members')),JSON.stringify(off.proposal.notes));
+ assert(on.proposal.notes.some(note=>note.includes('(profile convention synthetic-wrapper-shown-by-members)')),JSON.stringify(on.proposal.notes));
+ assert(!on.proposal.notes.some(note=>note.includes('synthetic-wrapper-hides-drawn-members')));
+ const browser=await chromium.launch();
+ try{const page=await browser.newPage();
+  for(const [label,f,flatShown] of [['off',off,''],['on',on,'Action']] as const){
+   const render=await mountGenerated(page,f.c.name,f.out.tsx,f.rootVars+f.out.css);
+   for(const [kind,shown,expected] of [['Nested','No',''],['Nested','Yes','Action'],['Flat','No',''],['Flat','Yes',flatShown]]){
+    const props=Object.fromEntries(f.c.props.filter(prop=>prop.bindings.figma.kind==='VARIANT').map(prop=>{const label=prop.bindings.figma.property==='Kind'?kind:shown;return[prop.name,Object.entries(prop.bindings.figma.values??{}).find(([,v])=>v===label)![0]];}));
+    await render(props);assert.equal(await page.locator('#root').textContent(),'Title'+expected,JSON.stringify({label,kind,shown}));
+   }
+  }
+ }finally{await browser.close()}
+});
