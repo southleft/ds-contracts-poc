@@ -204,6 +204,22 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   assert.deepEqual(boxes([]), []);
 });
 
+test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { references: [ref('b--a', {})] })] }).components;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const primary = (rootLiterals: Record<string, string>, conventions: string[]) => {
+    const { contract } = seed(c!);
+    Object.assign(contract.anatomy.root, { layout: { display: 'inline-flex', justify: 'space-between' }, literals: rootLiterals,
+      parts: { label: { text: 'Button' }, icon: { declared: { display: 'block' }, literals: { width: '16px', height: '16px', 'margin-left': '8px' } } } });
+    const parsed = ContractSchema.parse(contract), engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const spec = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { layout?: { primary?: string }; lits?: { itemSpacing?: number } } }> }).variants[0]!.spec;
+    return [spec.layout?.primary, spec.lits?.itemSpacing];
+  };
+  assert.deepEqual(primary({}, ['hugging-space-between-packs']), ['MIN', 8]);
+  assert.deepEqual(primary({}, []), ['SPACE_BETWEEN', 8]);
+  assert.deepEqual(primary({ width: '200px' }, ['hugging-space-between-packs']), ['SPACE_BETWEEN', 8]);   // free space to spread
+});
+
 test('svg-rotation-carried spells an svg pure rotation as rotate(<n>deg), the declared form, and leaves every other transform', () => {
   const el = (tag: string, transform: string, nodes: unknown[] = []) => ({ tag, classes: [], style: { transform }, pseudo: {}, nodes }) as any;
   const cases: Array<[string, string, string]> = [['svg', 'matrix(0, 1, -1, 0, 0, 0)', 'rotate(90deg)'], ['svg', 'matrix(-1, 0, 0, -1, 0, 0)', 'rotate(180deg)'],

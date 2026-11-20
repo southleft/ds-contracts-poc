@@ -7397,6 +7397,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   const overlap = input.conventions?.has('negative-sibling-margin-as-gap') ?? false;
   for (const v of variants) lowerMarginGaps(v.spec, overlap);
   for (const v of stateVariants) lowerMarginGaps(v.spec, overlap);
+  if (input.conventions?.has('hugging-space-between-packs')) for (const v of [...variants, ...stateVariants]) packHuggingSpaceBetween(v.spec);
   const stripMarginVars = (s: NodeSpec) => {
     delete s.marginVars;
     (s.children ?? []).forEach(stripMarginVars);
@@ -8010,6 +8011,20 @@ const dataSome = (d: ComponentData, pred: (x: NodeSpec) => boolean): boolean =>
  *  constant is emitted verbatim when no spec carries strokeOutside. */
 const strokeAlignJs = (hasOutside: boolean): string =>
   hasOutside ? `spec.outlineStrokeAlign || (spec.strokeOutside ? 'OUTSIDE' : 'INSIDE')` : `'INSIDE'`;
+
+/** Convention hugging-space-between-packs: a frame that hugs its content on its main axis has no free space, so CSS
+ *  `space-between` packs its items from the start with their gaps and margins; Figma's SPACE_BETWEEN ignores the item
+ *  spacing, so such a frame with two or more in-flow items and a spacing packs at MIN. A frame sized on that axis (fixed,
+ *  filling, growing, stretched, or with a minimum) keeps SPACE_BETWEEN. */
+function packHuggingSpaceBetween(spec: NodeSpec): void {
+  for (const child of spec.children ?? []) packHuggingSpaceBetween(child);
+  if (spec.layout?.primary !== 'SPACE_BETWEEN' || spec.grow || spec.crossStretch) return;
+  const across = (spec.layout.mode ?? 'HORIZONTAL') === 'HORIZONTAL';
+  const sized = across ? spec.fixedWidth || spec.widthFill || spec.fillW || spec.lits?.width || spec.lits?.minWidth || spec.bindings?.minWidth
+    : spec.fixedHeight || spec.fillH || spec.resolvedMinHeight || spec.lits?.height || spec.lits?.minHeight || spec.bindings?.minHeight;
+  const flow = (spec.children ?? []).filter((c) => !c.overlay && !c.insetOverlay && !c.absolute);
+  if (!sized && flow.length > 1 && (spec.lits?.itemSpacing || spec.bindings?.itemSpacing !== undefined)) spec.layout = { ...spec.layout, primary: 'MIN' };
+}
 
 /** Round 5d: the CSS margin box as a wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
