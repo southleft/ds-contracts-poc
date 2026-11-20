@@ -1,6 +1,6 @@
 import {scalarTextSizeInput} from './scalar-text-size-input.js';
 export {scalarTextSizeInput} from './scalar-text-size-input.js';
-import {TextByCombinationSchema,TextBaselineSchema,resolveTextByCombination,type TextBaseline,type TextByCombination} from './text-by-combination.js';
+import {LineBoxSchema,TextByCombinationSchema,TextBaselineSchema,resolveTextByCombination,type LineBox,type TextBaseline,type TextByCombination} from './text-by-combination.js';
 export * from './text-by-combination.js';
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
 export * from './vector-stroke.js';
@@ -2861,6 +2861,8 @@ export interface Part {
   textByCombination?: TextByCombination;
   /** Profile convention text-baseline-as-drawn: the baseline the browser drew for a one-line literal (see TextBaselineSchema). */
   textBaseline?: TextBaseline;
+  /** Profile convention inline-block-line-box-as-drawn: the line box an atomic inline sits alone on (see LineBoxSchema). */
+  lineBox?: LineBox;
   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
    *  parent track. Code computes live; the canvas renders the defaults'
    *  fraction (its honest static state). */
@@ -3356,6 +3358,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     textByProp: PropByPropSchema.optional(),
     textByCombination: TextByCombinationSchema.optional(),
     textBaseline: TextBaselineSchema.optional(),
+    lineBox: LineBoxSchema.optional(),
     meter: z
       .strictObject({ valueProp: z.string(), maxProp: z.string() })
       .optional(),
@@ -5149,6 +5152,11 @@ export function textBaselineIssues(contract:Contract,part:Part):string[]{
  if(typeof part.text!=='string'||texts.some(text=>/[\n\r]/.test(text??''))||part.content||part.slot||part.component||part.repeat||part.icon||part.shape||!TextBaselineSchema.safeParse(part.textBaseline).success||
   part.textBaseline.props.some(prop=>!absentVariantAxes(contract).some(axis=>axis.prop.name===prop)))return ['text-baseline-unqualified'];
  return [];
+}
+/** A measured line box belongs to a nested part, over axes the contract declares; anything else is refused by name. */
+export function lineBoxIssues(contract:Contract,part:Part,nested:boolean):string[]{
+ if(part.lineBox===undefined)return [];
+ return !nested||!LineBoxSchema.safeParse(part.lineBox).success||part.lineBox.props.some(prop=>!absentVariantAxes(contract).some(axis=>axis.prop.name===prop))?['line-box-unqualified']:[];
 }
 export function textByCombinationIssues(contract:Contract,part:Part,nested:boolean):string[]{
  const table=part.textByCombination;if(table===undefined)return [];
