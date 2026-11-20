@@ -2068,6 +2068,7 @@ const NonLineShapeSchema = z.strictObject({
 const NativeLineSchema = z.strictObject({
   length: z.number().positive(),
   fillWidth: z.literal(true).optional(),
+  fillHeight: z.literal(true).optional(),
   transform: z.tuple([
     z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
     z.tuple([z.number().finite(), z.number().finite(), z.number().finite()]),
@@ -2241,6 +2242,7 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
   if (shape.kind === 'line') {
     const box=nativeLineFootprint(shape.line);
     if(shape.line.fillWidth)return ['width: 100%', 'height: 0px', 'display: block', 'overflow: visible', 'flex-shrink: 0', 'align-self: stretch'];
+    if(shape.line.fillHeight)return ['width: 0px', 'display: block', 'position: relative', 'overflow: visible', 'flex-shrink: 0', 'align-self: stretch'];
     return [`width: ${box.width}px`, `height: ${box.height}px`, 'display: block', 'overflow: visible', 'flex-shrink: 0'];
   }
   if (shape.kind === 'stroked-path') return [

@@ -1335,6 +1335,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         fieldList(unwrap(fieldSchema(ShapeSchema, "line")).schema, {
           length: "Positive native line length, pixels; equal to shape.width.",
           fillWidth: "Optional true for a source-qualified horizontal zero-height FILL line in a vertical layout. NONE caps, CENTER alignment and an identity basis are required. Code tracks the parent inner width. Its local transform is identity at zero translation; the parent owns flow placement, while observedSources retain original transforms. Native generation currently refuses this mode.",
+          fillHeight: "Optional true for a source-qualified vertical zero-width FILL line in a horizontal layout (vertical-fill-line-in-row). NONE caps, CENTER alignment and a quarter-turn basis [[0,-1,0],[1,0,0]] are required. Code takes no width in the row and paints the stroke over the parent's height, while observedSources retain original transforms. Native generation currently refuses this mode.",
           transform: "Two rows of three finite numbers. Translation remains source placement; stroke paint does not replace the layout box.",
           cap: "NONE, ROUND or SQUARE. Capped paint with a stroke weight greater than the line length refuses.",
           align: "INSIDE, CENTER or OUTSIDE, retained from native capture.",

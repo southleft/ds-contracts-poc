@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -5101,7 +5101,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   const first = shapes[0].sh;
-  if (first.kind === 'line') {
+  if (first.kind === 'line') { if (carryVerticalFillLine(m, part, ctx, where)) return;
     const horizontalFill=m.occ.every(o=>{
       const n=o.node,sh=n.shape!,line=sh.line,flow=sh.lineFlow,parent=o.parent?.node;
       return n.fillWidth===true&&!n.fillHeight&&!n.abs&&!n.mask&&!n.effects?.length&&!!line&&!nativeLineIssue(line)&&line.cap==='NONE'&&line.align==='CENTER'&&sh.height===0&&sh.width===line.length&&
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20784,4 +20784,30 @@ function syntheticWrapperShownByMembers(synthetic: DumpNode, first: DumpNode, ma
   if (first.propRefs?.visible !== undefined || first.bound?.visible !== undefined || (first.hidden === true) === hidden) return;
   if (hidden) synthetic.hidden = true; else delete synthetic.hidden;
   notes.push(`${where}: synthetic wrapper "${wrapper}" in "${variant}" is ${hidden ? 'hidden: every folded member is hidden' : `shown: it holds drawn ${drawn.join(', ')}`} (profile convention synthetic-wrapper-shown-by-members)`);
+}
+
+/** Profile convention vertical-fill-line-in-row (core/profile-conventions.ts). The vertical twin of the horizontal FILL
+ *  line: a capless, center-aligned LINE turned a quarter turn (basis [[0,-1],[1,0]]) that stretches across its
+ *  HORIZONTAL auto-layout parent (fillHeight), not absolutely placed, whose length is the parent's inner height in every
+ *  variant. It takes no width in the row, so the parent's gap still follows it, and paints x in [0, weight]
+ *  (nativeLinePaint under the quarter turn). It is carried as a zero-width in-flow line shape (fillHeight) the React
+ *  emitters draw as an SVG over the row's height; native Figma refuses it by name. Off, it is named and keeps the
+ *  existing varying-line refusal. */
+function carryVerticalFillLine(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): boolean {
+  if (!m.occ.length || !m.occ.every(({node: n, parent}) => {
+    const sh = n.shape, line = sh?.line, t = line?.transform, box = parent?.node.bbox, pad = parent?.node.layout?.padding;
+    return n.type === 'LINE' && sh?.kind === 'line' && !!line && !!t && !!line.source && !nativeLineIssue(line) && line.cap === 'NONE' && line.align === 'CENTER' &&
+      n.fillHeight === true && !n.fillWidth && !n.abs && !n.mask && !n.effects?.length && sh.x === undefined && sh.height === 0 && sh.width === line.length &&
+      Math.abs(t[0][0]) < 1e-6 && Math.abs(t[0][1] + 1) < 1e-6 && Math.abs(t[1][0] - 1) < 1e-6 && Math.abs(t[1][1]) < 1e-6 && Math.abs(t[0][2]) < 1e-3 && t[1][2] === 0 &&
+      parent?.node.layout?.mode === 'HORIZONTAL' && !!box && !!pad && Math.abs(line.length - (box.height - pad[0] - pad[2])) < 1e-3;
+  })) return false;
+  if (!ctx.verticalFillLine) {
+    ctx.notes.push(`${where}: vertical-fill-line-not-carried — a quarter-turn LINE stretched across its row takes no width and paints a bar over the row's height; it falls back to the varying-line refusal`);
+    return false;
+  }
+  const first = m.occ[0]!.node.shape!;
+  part.shape = {kind: 'line', width: first.width, height: 0, line: {...first.line!, transform: [[0, -1, 0], [1, 0, 0]], fillHeight: true,
+    observedSources: m.occ.map(o => ({...o.node.shape!.line!.source!, variantName: o.variant, length: o.node.shape!.line!.length, transform: o.node.shape!.line!.transform}))}};
+  ctx.notes.push(`${where}: quarter-turn LINE stretched across its row carried as a zero-width in-flow line over the row's height (profile convention vertical-fill-line-in-row)`);
+  return true;
 }
