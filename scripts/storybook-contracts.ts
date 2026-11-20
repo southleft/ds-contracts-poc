@@ -28,7 +28,7 @@ import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout,
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
 import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
-import { MARK_SUBJECT, PAGE, pinnedBrowser, SELECT_INSTANCE, SHOW, type StoryComponent } from './storybook-reader.js';
+import { MARK_SUBJECT, PAGE, pinnedBrowser, readerStoryIds, SELECT_INSTANCE, SHOW, SystemProfile, type StoryComponent } from './storybook-reader.js';
 import type { CDPSession } from 'playwright-core';
 
 export interface StoryCase { id: string; story: { id: string; args: Record<string, unknown>; instance?: number }; variant: Record<string, string> }
@@ -37,7 +37,22 @@ export interface StoryDeclaration {
   version: 2; source: 'storybook'; storybook: string; react: string | null;
   components: DeclaredComponent[]; refused: { subject: string; reason: string }[];
 }
-interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[]; profile?: { path: string; sha256: string } | null }
+interface ReaderOutput { storybook: string; environment?: { react?: string }; components: StoryComponent[]; profile?: { path: string; sha256: string } | null;
+  index?: { sha256: string }; only?: { path: string; sha256: string } }
+
+/** The stories the reader loaded before it drew any reference, in its order: the reader's own readerStoryIds over the
+ * index, profile and --only list it recorded, each refused by name if its bytes changed since the reader read them. A
+ * story module's stylesheets stay on the page once loaded, so the contract step loads the same ones, in the same order,
+ * before its first case: each case is then captured beside the stylesheets its reference was drawn beside, whichever
+ * sets run and in what order. A reader output that recorded no index: none, as before. */
+export function readerPreload(stories: Pick<ReaderOutput, 'index' | 'only' | 'profile'>, indexText: string, read: (file: string) => Buffer = (file) => readFileSync(file)): string[] {
+  const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
+  const recorded = (what: string, f: { path: string; sha256: string }) => { const b = read(f.path); if (sha(b) !== f.sha256) throw Error(`${what}-changed-since-read:${f.path}`); return JSON.parse(b.toString()); };
+  if (!stories.index) return [];
+  if (sha(indexText) !== stories.index.sha256) throw Error('index-changed-since-read');
+  const every = Object.values((JSON.parse(indexText) as { entries: Record<string, { type: string; id: string; title?: string }> }).entries).filter((e) => e.type === 'story');
+  return readerStoryIds(every, stories.only && stories.profile ? SystemProfile.parse(recorded('profile', stories.profile)).components : [], stories.only && new Set(recorded('only', stories.only) as string[]));
+}
 
 /** Profile convention svg-rotation-carried: an svg element whose computed transform is a pure rotation (matrix(cos θ,
  * sin θ, −sin θ, cos θ, 0, 0), θ ≠ 0) is spelled rotate(θdeg), in place; every other transform stays as captured. */
@@ -400,7 +415,8 @@ async function main() {
   mkdirSync(path.join(out, 'contracts'), { recursive: true });
   writeFileSync(path.join(out, 'ds-contracts.react.json'), JSON.stringify(all, null, 2) + '\n');
   const chosen = all.components.filter((c) => !titles || titles.includes(c.subject));
-  const shown = new URL(all.storybook.endsWith('/') ? all.storybook : all.storybook + '/');
+  const base = all.storybook.endsWith('/') ? all.storybook : all.storybook + '/', shown = new URL(base);
+  const preload = chosen.length ? readerPreload(read, await (await fetch(new URL('index.json', base))).text()) : [];
   if (['localhost', '127.0.0.1'].includes(shown.hostname)) shown.hostname = 'host.docker.internal';
   const report: Record<string, unknown>[] = [];
   const { browser, stop } = await pinnedBrowser();
@@ -412,16 +428,20 @@ async function main() {
       t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }`);
     const ready = () => page.waitForFunction(() => (window as any).__STORYBOOK_PREVIEW__?.storyStoreValue, null, { timeout: 60_000 });
     const listAll = `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`;
+    const loadAll = async () => { if (preload.length) await page.evaluate(`(async (ids) => { const store = window.__STORYBOOK_PREVIEW__.storyStoreValue;
+      for (const id of ids) await store.loadStory({ storyId: id }); })(${JSON.stringify(preload)})`); };
     // A dev-mode Storybook can reload its preview once after load: a render is retried once when that happens.
     const show = async (id: string, args: unknown) => { try { await page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`); }
       catch (e) { if (!/Execution context was destroyed|storyStoreValue/.test(String(e))) throw e;
-        await page.waitForLoadState('load'); await ready(); await page.addStyleTag({ content: NO_MOTION }); await page.evaluate(listAll);
+        await page.waitForLoadState('load'); await ready(); await loadAll(); await page.addStyleTag({ content: NO_MOTION }); await page.evaluate(listAll);
         await page.evaluate(`${SHOW}(${JSON.stringify([id, args])})`); } };
     if (chosen.length) {
-      await page.goto(new URL(`iframe.html?id=${encodeURIComponent(chosen[0]!.cases[0]!.story.id)}&viewMode=story`, shown).href, { waitUntil: 'load', timeout: 60_000 });
+      // The page opens on the reader's first story, as the reader's did, so the stylesheets load in the reader's order.
+      await page.goto(new URL(`iframe.html?id=${encodeURIComponent(preload[0] ?? chosen[0]!.cases[0]!.story.id)}&viewMode=story`, shown).href, { waitUntil: 'load', timeout: 60_000 });
       await ready(); await page.waitForLoadState('networkidle');
     }
     const allProps = chosen.length ? await page.evaluate(listAll) as string[] : [];
+    await loadAll();
     await page.addStyleTag({ content: NO_MOTION });
     const cdp = await page.context().newCDPSession(page), faces = new Map<string, string>();
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
