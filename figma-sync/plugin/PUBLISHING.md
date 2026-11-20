@@ -45,6 +45,7 @@ your account through the Figma UI; this is the checklist.
 ## 4. Versioning
 
 Bump nothing in the manifest for content changes; re-publish updates from the same dialog.
-Keep the engine receipt fresh: any core change requires
-`node scripts/build-plugin-zip.mjs --update-engine-receipt` (a reviewed, deliberate step —
-the eval suite refuses a silent drift).
+The engine receipt is the release receipt: at release, after reviewing the engine changes since the last one, run
+`node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit it. PRs do not re-record it. The release build
+(`node scripts/build-plugin-zip.mjs --release`, which `scripts/deploy.mjs` runs) refuses an engine the receipt does not
+record; every other build packages and reports the move.
