@@ -42,7 +42,7 @@ test('centered-text-keeps-drawn-width: a text part its flex row centers keeps it
   const flat = [el('', {}), el('0', row), el('0.0', { 'flex-grow': '0' }, 'AI'), el('0.1', { 'flex-grow': '1' }, 'x'), el('0.2', {}),
     el('1', { ...row, 'flex-direction': 'column' }), el('1.0', {}, 'y'), el('2', { display: 'flex', 'justify-content': 'flex-start' }), el('2.0', {}, 'z')];
   const space = { enumeration: { combos: [{ key: 'a', stateFlags: {} }, { key: 'b', stateFlags: { hover: true } }] } };
-  const parts = (rows: Record<string, typeof flat>) => [...centeredTextParts({ baseFlat: flat, getAligned: (k) => rows[k.replace('__default', '')] ?? [] } as any, space as any)];
+  const parts = (rows: Record<string, typeof flat>) => [...centeredTextParts({ baseFlat: flat, getAligned: (k: string) => rows[k.replace('__default', '')] ?? [] } as any, space as any)];
   assert.deepEqual(parts({ a: flat }), [2]);
   // Every enabled combo must center it; a state combo is not read.
   const packed = flat.map((f) => f.path === '0' ? el('0', { display: 'flex', 'justify-content': 'space-between' }) : f);
