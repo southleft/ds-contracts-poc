@@ -26,7 +26,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
-import { ContractSchema, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
+import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, SELECT_INSTANCE, SHOW, type StoryComponent } from './storybook-reader.js';
 import type { CDPSession } from 'playwright-core';
@@ -102,6 +102,19 @@ export function spellNormalLineHeight(node: CapturedNode): number {
   if (s['line-height'] === 'normal' && own && line >= size && line < 2 * size) { s['line-height'] = `${+line.toFixed(4)}px`; changed++; }
   for (const k of node.nodes) if (k.t === 'el') changed += spellNormalLineHeight(k.el);
   return changed;
+}
+
+/** A captured channel some registry carries (token, literal or declared). */
+export const carriedChannel = (channel: string): boolean =>
+  channel in TOKEN_CHANNELS || LITERAL_CHANNELS.has(channel) || channel in DECLARED_CHANNELS;
+/** Profile convention unregistered-channel-not-minted: a fact on a channel no registry carries, which would make the
+ *  contract's validation refuse the whole set if minted, is left out of the mint and named once per part and channel.
+ *  Off, every observation is minted as before. */
+export function mintedObservations<T extends { part: string; cssProperty: string }>(base: T[], state: T[], on: boolean) {
+  if (!on) return { baseObs: base, stateObs: state, named: [] as string[] };
+  return { baseObs: base.filter((o) => carriedChannel(o.cssProperty)), stateObs: state.filter((o) => carriedChannel(o.cssProperty)),
+    named: [...new Set([...base, ...state].filter((o) => !carriedChannel(o.cssProperty))
+      .map((o) => `channel-unregistered: ${o.part || 'root'} ${o.cssProperty} — no token, literal or declared channel carries it; not minted`))] };
 }
 
 /** Profile convention absolute-in-containing-block: an absolutely placed element measures its insets from its containing
@@ -490,8 +503,10 @@ async function main() {
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const svgConsumed = new Set([...promotion.consumed].map((i: number) => aligned.partNames[i]));
         const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
-        const mintBase = mintTokens(c.name, prep.baseObs, prep.axes, { nestedPairs: true }), mintStates = mintTokens(c.name, prep.stateObs, prep.axes, { nestedPairs: true });
-        const { enriched, enrichmentNotes } = applyMintToContract(promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
+        const minted = mintedObservations(prep.baseObs, prep.stateObs, conventions.has('unregistered-channel-not-minted')), { baseObs, stateObs } = minted;
+        refusals.push(...minted.named);
+        const mintBase = mintTokens(c.name, baseObs, prep.axes, { nestedPairs: true }), mintStates = mintTokens(c.name, stateObs, prep.axes, { nestedPairs: true });
+        const { enriched, enrichmentNotes } = applyMintToContract(promotion.contract, space, mintBase, baseObs, mintStates, stateObs, layout.enriched,
           prep.declared, prep.declaredStates, prep.setPlaneLiterals, { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);
         row.notes = [...receipts, ...enrichmentNotes].length;
         carryRootHugEvidence(enriched as Contract, hugEvidence(aligned, space).hugs);

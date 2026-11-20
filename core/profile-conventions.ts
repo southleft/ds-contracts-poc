@@ -100,6 +100,9 @@
  *  converter cannot carry passes the swapped icon's captured drawing (fixedSwapDrawings) as caller content, when every
  *  child variant the instance selects has exactly one placement of that slot, so the child places it. Off, the slot is
  *  cleared (observed-swap-default-drawn) or keeps its default. */
+/** unregistered-channel-not-minted (React to Figma contract step): a captured fact on a channel no registry carries
+ *  (token, literal or declared: a flex item's `order`, a custom property) is left out of the mint and named, rather than
+ *  minted as a token that makes validation refuse the whole set. Off, it is minted and the set is refused. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -107,7 +110,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'stretched-line-paints-bar', 'absolute-in-containing-block', 'empty-hug-keeps-extent', 'sized-text-box-packs-by-text-align', 'bound-visibility-override-is-property',
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
-  'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried'] as const;
+  'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
