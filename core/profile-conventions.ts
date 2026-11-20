@@ -112,6 +112,9 @@
 /** inside-outside-stroke-as-outline (Figma to React proposal): a uniform stroke that takes no layout space and is drawn
  *  INSIDE in some variants and OUTSIDE in others is carried as one outline with a per-variant outline-offset (-weight
  *  INSIDE, 0 OUTSIDE), the spelling the CENTER mix already uses. Off, the mix is refused by name and drawn inside. */
+/** swap-drawing-path-box-whole-pixel (Figma to React proposal): a path in a captured fixed-swap drawing whose box sits at a
+ *  fractional offset starts its box on the whole pixel and draws the remainder inside its path data, so Chromium does not
+ *  snap a half-pixel bar to one row. Off, the fractional offset is named. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -123,7 +126,8 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
-  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline', 'centered-text-keeps-drawn-width'] as const;
+  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
+  'swap-drawing-path-box-whole-pixel', 'centered-text-keeps-drawn-width'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
