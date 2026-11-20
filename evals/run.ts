@@ -6339,7 +6339,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
       if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
       for (const want of [
-        '✔ engine bundle fresh vs committed receipt',
+        '✔ engine bundle built',
         // The tokenSet modes SHAPE pin (found by the first nested mode input —
         // a captured Figma variable collection). A nested modes tree used to
         // parse and then silently render Dark as Light; every committed bundle
@@ -6365,16 +6365,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
       }
-      // Drift guard: a real core change (a string literal the minifier keeps)
-      // must make the zip build refuse by name until the receipt is
-      // re-recorded deliberately.
+      // Drift guard (the release receipt, 2026-11-20): with the receipt recorded for this tree, a real core change (a
+      // string literal the minifier keeps) must make the RELEASE build refuse by name until the receipt is re-recorded
+      // at release; the default build still packages and reports the move, so no PR re-records a hash line.
+      const recorded = run(process.execPath, ['scripts/build-plugin-zip.mjs', '--update-engine-receipt']);
+      if (recorded.status !== 0) throw new Error(`recording the release receipt failed:\n${recorded.out}`);
       replaceInFile('core/emit-figma-script.ts', "'WRONG FILE: expected '", "'WRONG FILE!! expected '");
-      const stale = run(process.execPath, ['scripts/build-plugin-zip.mjs']);
-      if (stale.status === 0) throw new Error('zip build did NOT refuse after a core mutation — the engine drift guard is dead');
+      const stale = run(process.execPath, ['scripts/build-plugin-zip.mjs', '--release']);
+      if (stale.status === 0) throw new Error('release zip build did NOT refuse after a core mutation — the engine drift guard is dead');
       if (!stale.out.includes('STALE vs core') || !stale.out.includes('--update-engine-receipt')) {
         throw new Error(`stale-engine refusal is not named:\n${stale.out}`);
       }
-      console.log('plugin-engine-bundle: fresh bundle matches the receipt, headless generate green, core mutation → named STALE refusal');
+      const moved = run(process.execPath, ['scripts/build-plugin-zip.mjs']);
+      if (moved.status !== 0 || !moved.out.includes('engine MOVED since the release receipt')) throw new Error(`the default build did not package and report the move:\n${moved.out}`);
+      console.log('plugin-engine-bundle: bundle built, headless generate green, core mutation → named STALE refusal on the release build, reported by the default build');
     },
   },
   {

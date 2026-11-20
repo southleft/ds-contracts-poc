@@ -14,9 +14,12 @@
  *      with the repo's tokens, contracts and icons baked in, and injects it
  *      into the packaged ui.html's #plugin-engine block (window.DSC). The
  *      committed receipt (figma-sync/plugin/engine.receipt.json) records a
- *      hash over every bundle input; when core (or tokens/contracts/icons)
- *      changed and the receipt was not re-recorded, the build REFUSES by
- *      name — run with --update-engine-receipt to record deliberately.
+ *      hash over every bundle input at the last RELEASE. It is re-recorded at
+ *      release time (--update-engine-receipt, the owner's step), never per PR:
+ *      a per-PR hash line made every two open core PRs conflict (2026-11-20).
+ *      With --release (the release path: scripts/deploy.mjs) a bundle the
+ *      receipt does not record REFUSES by name; otherwise the build packages
+ *      and reports that the engine moved since the release receipt.
  *      The receipt also records the bundle size (the zip cost is a number).
  *   3. ZIP — dependency-free STORE-method zip with a fixed timestamp, so
  *      identical inputs produce identical bytes.
@@ -226,11 +229,12 @@ window.DSC = createPluginEngine(__DSC_DATA__);
   return { code, inputHash, minifiedBytes: Buffer.byteLength(code), inputFiles: inputs.length, esbuildVersion };
 }
 
-/** Engine drift guard: the committed receipt must match a fresh build. */
-export async function verifyEngineReceipt(bundle, { update = false } = {}) {
+/** Engine drift guard: the committed receipt is the release receipt. `release` refuses a fresh build it does not record;
+ *  otherwise the state is returned (matches, moved, missing) for the caller to report. */
+export async function verifyEngineReceipt(bundle, { update = false, release = false } = {}) {
   const next = {
     note:
-      'Engine-bundle drift guard — scripts/build-plugin-zip.mjs refuses to package when a fresh bundle of figma-sync/plugin/engine/entry.ts (core barrel + baked tokens/contracts/icons) no longer matches this receipt. Re-record deliberately: node scripts/build-plugin-zip.mjs --update-engine-receipt',
+      'Engine-bundle release receipt — scripts/build-plugin-zip.mjs --release (the release path) refuses to package when a fresh bundle of figma-sync/plugin/engine/entry.ts (core barrel + baked tokens/contracts/icons) no longer matches this receipt; other builds report the move. Re-recorded at release time only: node scripts/build-plugin-zip.mjs --update-engine-receipt',
     inputHash: bundle.inputHash,
     minifiedBytes: bundle.minifiedBytes,
     inputFiles: bundle.inputFiles,
@@ -238,21 +242,24 @@ export async function verifyEngineReceipt(bundle, { update = false } = {}) {
   };
   if (update) {
     await writeFile(ENGINE_RECEIPT, JSON.stringify(next, null, 2) + '\n');
-    return;
+    return { state: 'recorded' };
   }
   let recorded = null;
   try {
     recorded = JSON.parse(await readFile(ENGINE_RECEIPT, 'utf8'));
   } catch {
+    if (!release) return { state: 'missing' };
     throw new Error(
       'plugin-zip: figma-sync/plugin/engine.receipt.json is missing — the engine bundle has no recorded receipt. Run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit the receipt.',
     );
   }
   if (recorded.inputHash !== bundle.inputHash || recorded.minifiedBytes !== bundle.minifiedBytes) {
+    if (!release) return { state: 'moved', recorded };
     throw new Error(
-      `plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes ${bundle.inputHash.slice(0, 12)}… (${bundle.minifiedBytes} bytes) but the committed receipt records ${String(recorded.inputHash).slice(0, 12)}… (${recorded.minifiedBytes} bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run \`node scripts/build-plugin-zip.mjs --update-engine-receipt\` and commit engine.receipt.json.`,
+      `plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes ${bundle.inputHash.slice(0, 12)}… (${bundle.minifiedBytes} bytes) but the release receipt records ${String(recorded.inputHash).slice(0, 12)}… (${recorded.minifiedBytes} bytes). Core (or tokens/contracts/icons) changed since the receipt was recorded. At release, review the change, then run \`node scripts/build-plugin-zip.mjs --update-engine-receipt\` and commit engine.receipt.json.`,
     );
   }
+  return { state: 'matches' };
 }
 
 /** Inject the bundle into ui.html's #plugin-engine block (packaged copy
@@ -292,10 +299,10 @@ export async function verifyEmbeddedDumpSource() {
   }
 }
 
-export async function buildPluginZip(outFile = DEFAULT_OUT, { updateEngineReceipt = false } = {}) {
+export async function buildPluginZip(outFile = DEFAULT_OUT, { updateEngineReceipt = false, release = false } = {}) {
   await verifyEmbeddedDumpSource();
   const engine = await buildEngineBundle();
-  await verifyEngineReceipt(engine, { update: updateEngineReceipt });
+  const receipt = await verifyEngineReceipt(engine, { update: updateEngineReceipt, release });
   // The visible engine stamp (window.DSC_BUILD, shown in the plugin header):
   // a STALE dev import is diagnosable at a glance. Content-derived only — no
   // wall clock — so packaging stays deterministic for identical inputs.
@@ -323,17 +330,22 @@ export async function buildPluginZip(outFile = DEFAULT_OUT, { updateEngineReceip
   for (const e of entries) {
     await writeFile(join(distDir, e.name.slice(ZIP_PREFIX.length)), e.data);
   }
-  return { outFile, distDir, bytes: zip.length, files: FILES.length, engineBytes: engine.minifiedBytes, stamp };
+  return { outFile, distDir, bytes: zip.length, files: FILES.length, engineBytes: engine.minifiedBytes, stamp, receipt };
 }
+/** How a build reports the release receipt. */
+export const receiptLine = (receipt) => receipt.state === 'recorded' ? 'engine receipt RE-RECORDED'
+  : receipt.state === 'matches' ? 'engine matches the release receipt'
+  : receipt.state === 'moved' ? `engine MOVED since the release receipt (${String(receipt.recorded.inputHash).slice(0, 12)}…, ${receipt.recorded.minifiedBytes} bytes) — reported; the release path (--release) refuses until it is re-recorded at release`
+  : 'no release receipt — reported; the release path (--release) refuses';
 
-// CLI: node scripts/build-plugin-zip.mjs [outFile] [--update-engine-receipt]
+// CLI: node scripts/build-plugin-zip.mjs [outFile] [--release] [--update-engine-receipt]
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
-  const updateEngineReceipt = args.includes('--update-engine-receipt');
+  const updateEngineReceipt = args.includes('--update-engine-receipt'), release = args.includes('--release');
   const outArg = args.find((a) => !a.startsWith('--'));
-  const { outFile, distDir, bytes, files, engineBytes, stamp } = await buildPluginZip(outArg ?? DEFAULT_OUT, { updateEngineReceipt });
+  const { outFile, distDir, bytes, files, engineBytes, stamp, receipt } = await buildPluginZip(outArg ?? DEFAULT_OUT, { updateEngineReceipt, release });
   console.log(
-    `plugin-zip: wrote ${outFile} (${files} files, ${bytes} bytes; engine bundle ${(engineBytes / 1024 / 1024).toFixed(2)} MB minified) — dump script verified, engine receipt ${updateEngineReceipt ? 'RE-RECORDED' : 'verified'}`,
+    `plugin-zip: wrote ${outFile} (${files} files, ${bytes} bytes; engine bundle ${(engineBytes / 1024 / 1024).toFixed(2)} MB minified) — dump script verified, ${receiptLine(receipt)}`,
   );
   console.log(`plugin-zip: refreshed dev-import folder ${distDir} — stamp "${stamp}" (shown in the plugin header)`);
 }

@@ -266,10 +266,10 @@ jobs:
       # REAL packaged ui.html from that directory. Without this step the gate
       # cannot find the file it is supposed to be checking.
       #
-      # NOT run with --update-engine-receipt: the default REFUSES when the
-      # committed figma-sync/plugin/engine.receipt.json disagrees with a fresh
-      # engine bundle, and never rewrites it. The refusal path is not
-      # theoretical — it is the same comparison plugin:check flow 1 makes.
+      # figma-sync/plugin/engine.receipt.json is the RELEASE receipt (re-recorded
+      # at release, never per PR): this build reports whether the engine moved
+      # since it. The release path (deploy.mjs, --release) refuses a moved
+      # engine, and the plugin-engine-bundle eval proves that refusal nightly.
       - name: package the Figma plugin (plugin:ui-check prerequisite)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
