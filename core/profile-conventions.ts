@@ -146,6 +146,11 @@
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
  *  keeps its CSS margin box; the box takes the child's FILL and the child fills it, so the margin is drawn. Off, the
  *  margin box is skipped and the margin is named (FC-EMIT-MARGIN-BOX-SKIPPED). */
+/** single-row-grid-as-row (React to Figma contract step): a part that is a grid in some values of one variant axis and not
+ *  in the others, whose grid in every such variant has one non-empty row holding each in-flow child in its own column
+ *  (each column as wide as its child, every other track 0), is drawn as a row in those values: a layoutByProp override
+ *  with the grid's item alignment, its column gap, and its empty trailing tracks as end padding (gridAsRow). Any other
+ *  such grid is named (grid-row-unlowered). Off, those values carry no layout. */
 /** show-declared-component (React to Figma contract step): each case is rendered as the reader rendered it, naming the
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
@@ -185,6 +190,7 @@ export const CONVENTIONS = [
   'rect-placement-by-variant',
   'root-text-by-axis',
   'show-declared-component',
+  'single-row-grid-as-row',
   'sized-text-box-packs-by-text-align',
   'stage-from-story-container',
   'stretched-line-paints-bar',
