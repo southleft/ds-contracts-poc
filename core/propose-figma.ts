@@ -33,7 +33,7 @@ import {nativeFilledPathResizeMatches} from './native-filled-path.js';
 import {draftDrawingReadbackMatches,type DraftDrawingReadback} from './draft-drawing-readback.js';
 import {demandedVisibilityNodes,visibilityBindingMatches,visibilityDemandsFromDumps,type VisibilityDemand,type VisibilityBinding} from './source-visibility-control.js';
 import {outsideStrokeIssues, resolveLayout} from '../scripts/contract-schema.js';
-import {allocateInstanceAffine} from '../scripts/contract-schema.js';
+import {allocateInstanceAffine, slotPlacementsAt} from '../scripts/contract-schema.js';
 import {inferPresenceByCombination} from './infer-presence.js';
 import {resolvePresence, defaultSlotFamilyIssue, callerContentGroups} from '../scripts/contract-schema.js';
 import type {DumpHostOverride} from '../extract/figma/types.js';
@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14498,7 +14498,7 @@ function buildPartFromEvidence(
     carryInstanceRootInputs(m,component,ctx,where,'all',parentMode);
     part.component = component;
     carryInstanceAffine(m,part,component,ctx,where);
-    nameFixedSwaps(m, ctx, where, clearUncarriedSwapFallback(m, component, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where, selfKey)));
+    nameFixedSwaps(m, ctx, where, clearUncarriedSwapFallback(m, component, ctx, where, carryFixedSwapDrawing(m, part, component, ctx, where, selfKey, carryFixedSwapCaller(m, part, component, ctx, where, selfKey))));
     carryClip(m, part, ctx, where, { carry: false, owner: 'component-ref part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20722,4 +20722,49 @@ function rectPlacementByVariant(m: Merged, part: Record<string, unknown>, ctx: C
   part.literalsByProp = [...((part.literalsByProp as unknown[] | undefined) ?? []), {prop: axis.propName, map}];
   ctx.notes.push(`${where}: absolute in some "${axis.property}" values and in flow in others — each value keeps its own placement and size (profile convention rect-placement-by-variant)`);
   return true;
+}
+
+/** Profile convention fixed-swap-drawing-carried (core/profile-conventions.ts). When an instance fixes a nested child's
+ * INSTANCE_SWAP to a component the caller path could not carry, and the requested set's own response drew it
+ * (fixedSwapDrawings, one selected instance per use), the instance passes that drawing as caller content for the
+ * property's slot. A use qualifies only from the child's own data and the instance's fixed props: the child variant its
+ * main selects (qualifyFixedSwapVariantSelection) plus its fixed booleans must draw exactly one placement of the slot
+ * (slotPlacementsAt); the selections are recorded (callerSlotSelections) and re-checked by validation. Anything else
+ * declines and the uncarried swap is handled as before. Returns `carried` plus the carried property. */
+function carryFixedSwapDrawing(m: Merged, part: Record<string, unknown>, component: Record<string, unknown>, ctx: Ctx, where: string, selfKey: string, carried: ReadonlySet<string>): ReadonlySet<string> {
+  const child = ctx.swapDrawingCarried && part.parts === undefined && component.contentSlot === undefined && component.contentSlots === undefined
+    ? ContractSchema.safeParse(ctx.contractsById?.get(component.id as string)) : undefined;
+  if (!child?.success || !ctx.fileKey) return carried;
+  const properties = [...new Set(m.occ.flatMap(o => Object.keys(o.node.fixedSwaps ?? {})))].filter(p => !carried.has(p));
+  const decline = (reason: string) => { ctx.notes.push(`${where}: fixed-swap-drawing-not-carried — ${reason}`); return carried; };
+  if (properties.length !== 1 || !m.occ.every(o => o.node.fixedSwaps?.[properties[0]!])) return properties.length ? decline('every use must fix exactly one uncarried swap property') : carried;
+  const property = properties[0]!, slots = slotsOf(child.data).filter(s => slotFigmaProperty(s.slot) === property), slot = slots[0]?.slot.name;
+  if (!slot || slots.some(s => s.slot.name !== slot) || slots.some(s => s.slot.acceptsMode === 'restrict' || s.slot.required || s.slot.min !== undefined || s.slot.max !== undefined))
+    return decline('the property does not name one unconstrained child slot');
+  const rows: Record<string, string | boolean>[] = [];
+  for (const o of m.occ) {
+    const drawings = o.node.fixedSwapDrawings?.[property], main = o.node.instanceGeometry?.componentId;
+    if (drawings?.length !== 1 || (o.node.fixedSwaps![property]!.observedInstances?.length ?? 0) !== 1 || !main) return decline('a use has no single captured drawing of its selected instance');
+    const variant = qualifyFixedSwapVariantSelection({id: main, key: o.node.instanceKey}, ctx.fixedSwapOwnerRoots, child.data, ctx.fileKey);
+    if (!variant) return decline('a use\'s child variant is not exactly qualified');
+    const selection: Record<string, string | boolean> = {...variant};
+    for (const p of child.data.props) if (p.bindings.figma.kind === 'BOOLEAN') {
+      const fixed = Object.entries(o.node.componentProperties ?? {}).find(([key]) => key.replace(/#[0-9]+:[0-9]+(?::[0-9]+)?$/, '') === p.bindings.figma.property)?.[1];
+      selection[p.name] = typeof fixed === 'boolean' ? fixed : (p.default as boolean | undefined) ?? true;
+    }
+    if (slotPlacementsAt(child.data, slot, selection) !== 1) return decline(`a use selects a child variant that does not draw exactly one "${slot}" placement`);
+    if (!rows.some(r => JSON.stringify(r) === JSON.stringify(selection))) rows.push(selection);
+  }
+  const drawnWhere = `${where}/[fixed swap drawing]`;
+  const root = mergeOcc(m.name, m.occ.map(o => ({variant: o.variant, node: o.node.fixedSwapDrawings![property]![0]!.root})), ctx.notes, drawnWhere, ctx.axes);
+  const key = partKey('swapDrawing', ctx, drawnWhere, selfKey), previous = ctx.presenceVariants;
+  ctx.presenceVariants = m.occ.map(o => o.variant);
+  let built: Record<string, unknown> | null;
+  try { built = buildPart(root, null, ctx, drawnWhere, key); } finally { ctx.presenceVariants = previous; }
+  if (!built) return decline('the captured drawing does not build');
+  part.parts = {[key]: built};
+  component.contentSlot = slot;
+  component.callerSlotSelections = {slot, rows};
+  ctx.notes.push(`${where}: fixed swap "${property}" carried as the captured drawing of its selected instance into "${slot}"; each use's child variant draws exactly one placement (profile convention fixed-swap-drawing-carried)`);
+  return new Set([...carried, property]);
 }
