@@ -125,6 +125,9 @@
  *  baseline Figma rounds to the nearest pixel and Chromium rounds down (ascent and descent rounded, odd leading pixel below;
  *  under geometricPrecision a rounded-down descent takes a pixel from the ascent) is shifted down by the difference
  *  (position: relative; top), which moves its glyphs and not its layout. Off, named. */
+/** hugging-space-between-packs (React to Figma writer): a frame hugging its content on its main axis has no free space,
+ *  so CSS space-between packs its items from the start with their gaps; Figma's SPACE_BETWEEN ignores item spacing, so such
+ *  a frame with two or more items and a spacing packs at MIN. Off, SPACE_BETWEEN stays and the spacing does not draw. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -135,7 +138,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
   'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width',
-  'text-baseline-rounds-like-figma'] as const;
+  'text-baseline-rounds-like-figma', 'hugging-space-between-packs'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
