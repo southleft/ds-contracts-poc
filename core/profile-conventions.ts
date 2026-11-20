@@ -141,6 +141,9 @@
  *  its padding. Off, named. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
+/** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
+ *  keeps its CSS margin box; the box takes the child's FILL and the child fills it, so the margin is drawn. Off, the
+ *  margin box is skipped and the margin is named (FC-EMIT-MARGIN-BOX-SKIPPED). */
 /** show-declared-component (React to Figma contract step): each case is rendered as the reader rendered it, naming the
  *  component the profile declares for that story (a story file's subcomponent, a skeleton), so the instance the reader
  *  framed is found and captured. Off, a case names no component, and a story whose instance is not the file's own
@@ -158,6 +161,7 @@ export const CONVENTIONS = [
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
   'empty-hug-keeps-extent',
+  'filled-child-keeps-margin-box',
   'fixed-swap-drawing-carried',
   'font-weight-initial-normal',
   'generated-text-carried',
