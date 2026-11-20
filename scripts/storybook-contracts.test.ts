@@ -296,6 +296,27 @@ test('filled-child-keeps-margin-box: a growing child keeps its margin box, which
   assert.deepEqual([on.box.paddingTop, on.box.layoutSizingVertical, on.box.children[0].layoutSizingVertical, on.script.includes('FC-EMIT-MARGIN-BOX-SKIPPED')], [4, 'FILL', 'FILL', false]);
 });
 
+test('table-short-row-leaves-columns-empty: a short row takes the columns from the left and keeps the table width; off, the table is refused', async () => {
+  const { tableGeometry } = await import('../extract/computed/fuse.js');
+  // table > header row (2 cells) + body row (3 cells; the third, a 32 px selection cell, is drawn only with selection).
+  const names = ['root', 'head', 'h1', 'h2', 'body', 'b1', 'b2', 'b3'], kids: Record<number, number[]> = { 0: [1, 4], 1: [2, 3], 4: [5, 6, 7] };
+  const display = ['table', 'table-row', 'table-cell', 'table-cell', 'table-row', 'table-cell', 'table-cell', 'table-cell'];
+  const sweep = (headWidth: number) => {
+    const widths: Record<string, Array<number | null>> = { plain: [300, 300, 120, 180, 300, 120, 180, null], selection: [300, headWidth, 100, 168, 300, 100, 168, 32] };
+    return { baseFlat: names.map(() => ({})), partNames: names, union: { entries: names.map((_, i) => ({ id: i, children: (kids[i] ?? []).map((id) => ({ id })) })) },
+      getAligned: (key: string) => widths[key.replace('__default', '')]!.map((w, i) => w === null ? null : { node: { style: { display: display[i]!, width: `${w}px` } } }) } as never;
+  };
+  const space = { enumeration: { combos: ['plain', 'selection'].map((key) => ({ key, stateFlags: {} })) } } as never;
+  const off = tableGeometry(sweep(300), space);
+  assert.deepEqual([off.cellAdmit.size, off.rowAdmit.size, off.refusals[0]?.split(':')[0]], [0, 0, 'table-column-arity-disagreement']);
+  const on = tableGeometry(sweep(300), space, true);
+  assert.deepEqual([[...on.cellAdmit].sort(), [...on.rowAdmit], on.refusals], [[2, 3, 5, 6, 7], [1], []]);
+  assert.match(on.receipts.join('\n'), /table-short-row-spans-table: "head" \(2 of 3 cells\)/);
+  // A short row that does not span the table (268 of 300 where the selection cell is drawn) leaves the table as it was.
+  const shrunk = tableGeometry(sweep(268), space, true);
+  assert.deepEqual([shrunk.cellAdmit.size, shrunk.rowAdmit.size, shrunk.refusals.at(-1)?.split(':')[0]], [0, 0, 'table-short-row-unspanned']);
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;

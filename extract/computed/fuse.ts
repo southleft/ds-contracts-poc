@@ -244,6 +244,8 @@ export interface TableGeometry {
   cellAdmit: Set<number>;
   /** cell part index → its row part index (height is read from the row). */
   rowOfCell: Map<number, number>;
+  /** short row part indices that keep the table's width (table-short-row-leaves-columns-empty). */
+  rowAdmit: Set<number>;
   receipts: string[];
   refusals: string[];
 }
@@ -269,8 +271,11 @@ const outerPx = (style: Record<string, string>, axis: 'width' | 'height'): numbe
   return Math.round(outer * 1000) / 1000;
 };
 
-export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry {
-  const out: TableGeometry = { lowered: new Map(), cellAdmit: new Set(), rowOfCell: new Map(), receipts: [], refusals: [] };
+/** shortRows — profile convention table-short-row-leaves-columns-empty: a row with fewer cells than the widest takes the
+ *  columns from the left, as CSS leaves a short row's trailing cells empty; it keeps the table's width when every
+ *  column is admitted and it measures a full row's width in every combo, or the table is refused as before. */
+export function tableGeometry(a: AlignedSweep, space: PropSpace, shortRows = false): TableGeometry {
+  const out: TableGeometry = { lowered: new Map(), cellAdmit: new Set(), rowOfCell: new Map(), rowAdmit: new Set(), receipts: [], refusals: [] };
   const enabled = space.enumeration.combos.filter(isEnabled);
   // 1. uniform table displays
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
@@ -294,6 +299,7 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
   a.union.entries.forEach((e, i) => idxOf.set(e.id, i));
   const columns = new Map<number, number[]>(); // column index → cell part indices
   let cellCount: number | null = null;
+  const rowCells = new Map<number, number>();
   for (const [pi, d] of out.lowered) {
     if (d !== 'table-row') continue;
     const rowEntry = a.union.entries[pi];
@@ -302,12 +308,14 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
       .filter((ci) => out.lowered.get(ci) === 'table-cell');
     if (cells.length === 0) continue;
     // @door fuse.table-column-arity-disagreement
+    rowCells.set(pi, cells.length);
     if (cellCount === null) cellCount = cells.length;
+    else if (shortRows && cells.length !== cellCount) cellCount = Math.max(cellCount, cells.length);
     else if (cells.length !== cellCount) {
       out.refusals.push(
         `table-column-arity-disagreement: row "${a.partNames[pi]}" has ${cells.length} cells, an earlier row has ${cellCount} — column identity is index-within-row (no colgroup/colspan concept in the anatomy); NO column widths admitted`,
       );
-      return { ...out, cellAdmit: new Set(), rowOfCell: new Map() };
+      return { ...out, cellAdmit: new Set(), rowOfCell: new Map(), rowAdmit: new Set() };
     }
     cells.forEach((ci, col) => {
       (columns.get(col) ?? columns.set(col, []).get(col)!).push(ci);
@@ -356,6 +364,23 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
       `table-column-width-admitted: column ${col} (${cells.map((ci) => a.partNames[ci]).join(', ')}) — every row measures the same OUTER width in every enabled combo (${widths.join(', ') || 'single-row column'}); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)`,
     );
   }
+  // A short row spans the table: every column admitted, and the row as wide as a full row in every combo it is drawn in.
+  const short = [...rowCells].filter(([, n]) => n < cellCount!).map(([pi]) => pi);
+  if (short.length > 0) {
+    const full = [...rowCells].filter(([, n]) => n === cellCount).map(([pi]) => pi);
+    const widthIn = (key: string, pi: number) => { const el = a.getAligned(`${key}__default`)[pi]; return el ? pxNum(el.node.style['width']) : undefined; };
+    const unspanned = [...columns.values()].some((cells) => cells.some((ci) => !out.cellAdmit.has(ci))) ? 'not every column is admitted'
+      : short.find((pi) => enabled.some((combo) => { const w = widthIn(combo.key, pi), f = full.map((fi) => widthIn(combo.key, fi)).find((x) => x != null);
+        return w !== undefined && (w === null || f == null || Math.abs(w - f) > 0.5); })) ?? null;
+    // @door fuse.table-short-row-unspanned
+    if (unspanned !== null) {
+      out.refusals.push(`table-short-row-unspanned: ${typeof unspanned === 'string' ? unspanned : `row "${a.partNames[unspanned]}" is not as wide as a full row in every combo`} — a short row is drawn only at the table's width; NO column widths admitted`);
+      return { ...out, cellAdmit: new Set(), rowOfCell: new Map(), rowAdmit: new Set() };
+    }
+    // @door fuse.table-short-row-spans-table
+    for (const pi of short) out.rowAdmit.add(pi);
+    out.receipts.push(`table-short-row-spans-table: ${short.map((pi) => `"${a.partNames[pi]}" (${rowCells.get(pi)} of ${cellCount} cells)`).join(', ')} — its trailing columns stay empty and its width joins fusion: a full row's width in every combo (profile convention table-short-row-leaves-columns-empty)`);
+  }
   // @door fuse.table-cell-height-from-row
   if (out.cellAdmit.size > 0) {
     out.receipts.push(
@@ -398,6 +423,7 @@ export interface FusionEnv {
    *  preview body, inset by its padding). The root-width doors compare against it instead of the stage; absent, the
    *  stage's content box. */
   container?: number; /** Profile convention centered-text-keeps-drawn-width: see centeredTextParts. */ centeredTextWidth?: true;
+  /** Profile convention table-short-row-leaves-columns-empty: see tableGeometry. */ tableShortRows?: true;
 }
 
 /** Which axes of a part were laid out against the browser window. */
@@ -819,7 +845,7 @@ export function styledChannels(
   // (a cell reports its content height, not its row's). Their sizes come from
   // the lowered flex stack, and admitted cells take width/height from the
   // column rule below.
-  const table = tableGeometry(a, space);
+  const table = tableGeometry(a, space, env.tableShortRows === true);
   receipts.push(...table.receipts, ...table.refusals);
   // VIEWPORT-DERIVED GEOMETRY (task #20): the parts whose boxes were laid out
   // against the capture WINDOW, and the geometry channels they must not mint.
@@ -1057,7 +1083,7 @@ export function styledChannels(
       (isFusable(p) ||
         // @lower fuse.size-geometry-admit-disjunction
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
-        ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
+        ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) || (p === 'width' && table.rowAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
         textFill.admit.get(pi)?.has(p) === true ||
         tokenNamed(p) || authoredNamed(p) || (p === 'width' && centeredText.has(pi)));
@@ -1276,6 +1302,7 @@ export function styledChannels(
     // not deltas from a <span> control baseline.
     // @door fuse.table-cell-always-carries-size
     if (table.cellAdmit.has(pi)) { set.add('width'); set.add('height'); }
+    if (table.rowAdmit.has(pi)) set.add('width');
     // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
     // part whose typography equals the mount context (the provider's 13px/
     // 20px/450 body) looked "unstyled" against the span control and was
@@ -2853,6 +2880,8 @@ export function prepareMint(
    *  (grid-implicit-tracks etc., P9). The refusal lands in codeOnly so the
    *  ledger/extension carry the name; a dead fact never rides as a token. */
   gridMintRefusals?: Map<string, string>,
+  /** Profile convention table-short-row-leaves-columns-empty (see tableGeometry). */
+  tableShortRows = false,
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
@@ -2948,7 +2977,7 @@ export function prepareMint(
   // outer baking (MUI's cells are content-box: 48px content + 4px padding is
   // a 52px canvas frame) — and their HEIGHT value is read from the ROW (a
   // cell's own computed height is its content height; see tableGeometry).
-  const tableGeo = tableGeometry(a, space);
+  const tableGeo = tableGeometry(a, space, tableShortRows);
   const geomOuterParts = (() => {
     const { absAdmit, clusterAdmit } = absClusterParts(a, space);
     const out = new Set([...absAdmit, ...clusterAdmit]);
