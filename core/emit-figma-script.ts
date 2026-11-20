@@ -2740,9 +2740,12 @@ function applyTokens(
         }
         break;
       }
-      case 'min-width':
+      case 'min-width': {
         spec.bindings = { ...spec.bindings, minWidth: varName };
+        const minimum = pxOrNull(resolveLiteral(tokenPath));
+        if (minimum !== null) boundMinWidth.set(spec, minimum);
         break;
+      }
       // Round 5 (canvas-gate finding): min-height is NOT redundant chrome —
       // the floor-promoted Button carries min-height {p.height-800} (32px)
       // and the real package's sub-768px bucket (the floor capture's own
@@ -8016,12 +8019,14 @@ const strokeAlignJs = (hasOutside: boolean): string =>
  *  `space-between` packs its items from the start with their gaps and margins; Figma's SPACE_BETWEEN ignores the item
  *  spacing, so such a frame with two or more in-flow items and a spacing packs at MIN. A frame sized on that axis (fixed,
  *  filling, growing, stretched, or with a minimum) keeps SPACE_BETWEEN. */
+const boundMinWidth = new WeakMap<NodeSpec, number>(); // compile-only: a token-bound min-width's resolved px
 function packHuggingSpaceBetween(spec: NodeSpec): void {
   for (const child of spec.children ?? []) packHuggingSpaceBetween(child);
   if (spec.layout?.primary !== 'SPACE_BETWEEN' || spec.grow || spec.crossStretch) return;
   const across = (spec.layout.mode ?? 'HORIZONTAL') === 'HORIZONTAL';
-  const sized = across ? spec.fixedWidth || spec.widthFill || spec.fillW || spec.lits?.width || spec.lits?.minWidth || spec.bindings?.minWidth
-    : spec.fixedHeight || spec.fillH || spec.resolvedMinHeight || spec.lits?.height || spec.lits?.minHeight || spec.bindings?.minHeight;
+  const sized = across ? spec.fixedWidth || spec.widthFill || spec.fillW || spec.lits?.width || spec.lits?.minWidth ||
+      (spec.bindings?.minWidth !== undefined && (boundMinWidth.get(spec) ?? 1) > 0)
+    : spec.fixedHeight || spec.fillH || spec.resolvedMinHeight || spec.lits?.height || spec.lits?.minHeight || (spec.bindings?.minHeight !== undefined && spec.resolvedMinHeight === undefined);
   const flow = (spec.children ?? []).filter((c) => !c.overlay && !c.insetOverlay && !c.absolute);
   if (!sized && flow.length > 1 && (spec.lits?.itemSpacing || spec.bindings?.itemSpacing !== undefined)) spec.layout = { ...spec.layout, primary: 'MIN' };
 }
