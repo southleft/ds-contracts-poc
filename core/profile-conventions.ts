@@ -109,6 +109,9 @@
 /** vertical-fill-line-in-row (Figma to React proposal): a quarter-turn LINE stretched across its horizontal auto-layout
  *  parent is carried as a zero-width in-flow line over the row's height, so the row's gap still follows it and its stroke
  *  paints the bar Figma draws. Off, it is named and keeps the varying-line refusal (an unsized border box). */
+/** inside-outside-stroke-as-outline (Figma to React proposal): a uniform stroke that takes no layout space and is drawn
+ *  INSIDE in some variants and OUTSIDE in others is carried as one outline with a per-variant outline-offset (-weight
+ *  INSIDE, 0 OUTSIDE), the spelling the CENTER mix already uses. Off, the mix is refused by name and drawn inside. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -117,7 +120,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'text-box-stacks-block-children', 'mixed-scale-rect-keeps-placement',
   'rect-placement-by-variant', 'svg-viewbox-carried', 'generated-text-carried', 'capture-marked-subject', 'variant-text-owns-its-part',
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
-  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row'] as const;
+  'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {

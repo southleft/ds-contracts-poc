@@ -3615,7 +3615,7 @@ function outsidePerSideBox(nodes: readonly DumpNode[]): boolean {
 }
 function centeredStrokeOutline(nodes: readonly DumpNode[]): boolean {
   const drawn = nodes.filter((n) => n.stroke !== undefined);
-  if (!drawn.some((n) => n.strokeAlign === 'CENTER')) return false;
+  if (!drawn.some((n) => n.strokeAlign === 'CENTER') && !insideOutsideMix(drawn)) return false;
   if (nodes.some((n) => n.shape !== undefined || n.type === 'INSTANCE')) return false;
   return drawn.every((n) =>
     n.strokeWeights === undefined &&
@@ -3640,14 +3640,14 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   }
   // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
-  if (ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))) {
+  if (ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))) { insideOutsideOutlineNote(m, ctx, where, true);
     ctx.notes.push(
       `${where}: strokeAlign ${[...aligns].sort().join(' / ')} with the stroke taking no layout space — carried as an outline with a per-variant outline-offset (CENTER −weight/2, INSIDE −weight, OUTSIDE 0), which draws the same band on both sides of the edge and takes no layout space (REST dump v1.44 / plugin dump v1.48); a :focus-visible outline replaces it in that state`,
     );
     return 'outline';
   }
   // @door propose.stroke-align-mixed-refused
-  if (aligns.size > 1) {
+  if (aligns.size > 1) { insideOutsideOutlineNote(m, ctx, where, false);
     ctx.notes.push(
       `${where}: stroke alignment differs across variants [${[...aligns].sort().join(', ')}] — one node lowers to ONE border/outline vocabulary, so the mixed case is REFUSED BY NAME and the stroke carries as an INSIDE border (review)`,
     );
@@ -17183,10 +17183,10 @@ export function proposeFromDumpDraftPaintQualification(set:DumpSet,opts:Paramete
 
 function proposeFromDumpFenced(set: DumpSet, opts: Parameters<typeof proposeFromDumpFencedImpl>[1],
   draftPaint=false, drawnDeclaration?: Array<Record<string,string>>): FigmaProposalResult {
-  const outer = capturedVariablePaths, outerShown = wrapperShownByMembers;
-  capturedVariablePaths = opts.capturedVariablePaths ?? outer; wrapperShownByMembers = conventionSet(opts.conventions).has('synthetic-wrapper-shown-by-members');
+  const outer = capturedVariablePaths, outerShown = wrapperShownByMembers, outerMix = insideOutsideOutline;
+  capturedVariablePaths = opts.capturedVariablePaths ?? outer; wrapperShownByMembers = conventionSet(opts.conventions).has('synthetic-wrapper-shown-by-members'); insideOutsideOutline = conventionSet(opts.conventions).has('inside-outside-stroke-as-outline');
   try { return proposeFromDumpFencedImpl(set, opts, draftPaint, drawnDeclaration); }
-  finally { capturedVariablePaths = outer; wrapperShownByMembers = outerShown; }
+  finally { capturedVariablePaths = outer; wrapperShownByMembers = outerShown; insideOutsideOutline = outerMix; }
 }
 
 function proposeFromDumpFencedImpl(
@@ -20810,4 +20810,20 @@ function carryVerticalFillLine(m: Merged, part: Record<string, unknown>, ctx: Ct
     observedSources: m.occ.map(o => ({...o.node.shape!.line!.source!, variantName: o.variant, length: o.node.shape!.line!.length, transform: o.node.shape!.line!.transform}))}};
   ctx.notes.push(`${where}: quarter-turn LINE stretched across its row carried as a zero-width in-flow line over the row's height (profile convention vertical-fill-line-in-row)`);
   return true;
+}
+
+/** Profile convention inside-outside-stroke-as-outline (core/profile-conventions.ts). A uniform stroke that takes no layout
+ *  space and is drawn INSIDE in some variants and OUTSIDE in others has the same outline spelling the CENTER case uses
+ *  (centeredStrokeOutline): an outline with a per-variant outline-offset, -weight for INSIDE and 0 for OUTSIDE, so each
+ *  variant draws its own band. Off, the mix keeps the named refusal (every variant's ring is drawn as an INSIDE border). */
+let insideOutsideOutline = false;
+const insideOutsideMix = (drawn: readonly DumpNode[]): boolean => insideOutsideOutline &&
+  drawn.some(n => n.strokeAlign === 'INSIDE') && drawn.some(n => n.strokeAlign === 'OUTSIDE') && drawn.every(n => n.strokeAlign === 'INSIDE' || n.strokeAlign === 'OUTSIDE');
+function insideOutsideOutlineNote(m: Merged, ctx: Ctx, where: string, carried: boolean): void {
+  const nodes = m.occ.map(o => o.node), drawn = nodes.filter(n => n.stroke !== undefined);
+  if (drawn.some(n => n.strokeAlign === 'CENTER') || !drawn.some(n => n.strokeAlign === 'INSIDE') || !drawn.some(n => n.strokeAlign === 'OUTSIDE')) return;
+  if (carried) { ctx.notes.push(`${where}: INSIDE and OUTSIDE strokes that take no layout space carried as one outline with a per-variant outline-offset (profile convention inside-outside-stroke-as-outline)`); return; }
+  const outer = insideOutsideOutline; insideOutsideOutline = true;
+  const would = !!ctx.mint && centeredStrokeOutline(nodes); insideOutsideOutline = outer;
+  if (would) ctx.notes.push(`${where}: inside-outside-stroke-outline-not-carried — the OUTSIDE variants' ring is drawn inside the box; an outline with a per-variant offset would draw each variant's own band`);
 }
