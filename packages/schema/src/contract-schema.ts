@@ -2494,7 +2494,7 @@ export const ComponentRefSchema = z.strictObject({
   sameInkInsideStroke:SameInkInsideStrokeTableSchema.optional(),
   contentSlot: z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/).optional(),
   /** Routes disjoint caller-owned part keys into several named child slots. */
-  contentSlots: z.record(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/), z.array(z.string().min(1))).optional(), /** Child slots this caller passes explicitly empty, so an omitted-caller fallback (renderDefaultAnatomy) does not draw there. */ clearedSlots: z.array(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/)).min(1).optional(),
+  contentSlots: z.record(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/), z.array(z.string().min(1))).optional(), /** Per-use qualification of caller content for a slot whose placement family is not qualified contract-wide: every child selection this caller makes (one row per selection), each with exactly one present placement of `slot` (slotPlacementsAt). */ callerSlotSelections: z.strictObject({slot: z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/), rows: z.array(z.record(z.string(), z.union([z.string(), z.boolean()]))).min(1)}).optional(), /** Child slots this caller passes explicitly empty, so an omitted-caller fallback (renderDefaultAnatomy) does not draw there. */ clearedSlots: z.array(z.string().regex(/^[A-Za-z_$][A-Za-z0-9_$]*$/)).min(1).optional(),
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
@@ -4495,6 +4495,29 @@ export function walkAnatomy(contract: Contract): WalkedPart[] {
   for (const [name, part] of Object.entries(contract.anatomy))
     visit(name, part, [name]);
   return out;
+}
+
+/** How many placements of `slotName` a complete child selection draws: every part on a placement's path must be shown
+ *  (visibleWhen) and present (presenceByCombination). Undefined when the selection cannot decide it (a gating prop is
+ *  missing, a presence row is unavailable, or a placement is also gated by availability or conditional display). */
+export function slotPlacementsAt(contract: Contract, slotName: string, selection: Record<string, string | boolean>): number | undefined {
+  const walked = walkAnatomy(contract);
+  let count = 0;
+  for (const w of walked.filter(x => x.part.slot?.name === slotName)) {
+    let shown = true;
+    for (const x of walked.filter(x => x.path.length <= w.path.length && x.path.every((name, i) => w.path[i] === name))) {
+      if (x.part.availabilityByCombination || x.part.stylesWhen?.some(row => 'display' in row.styles)) return undefined;
+      const when = x.part.visibleWhen;
+      if (when) {
+        if (!Object.hasOwn(selection, when.prop)) return undefined;
+        const allowed = when.equals === undefined ? [true] : Array.isArray(when.equals) ? when.equals : [when.equals];
+        if (!allowed.map(String).includes(String(selection[when.prop]))) shown = false;
+      }
+      if (x.part.presenceByCombination) { try { if (!resolvePresence(x.part, selection)) shown = false; } catch { return undefined; } }
+    }
+    if (shown) count++;
+  }
+  return count;
 }
 
 export const slotsOf = (contract: Contract) =>
