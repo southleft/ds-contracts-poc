@@ -132,6 +132,10 @@
  *  places it (an inset places the margin edge), and one with its own width or height between two insets keeps that size at
  *  the start inset (over-constrained in CSS; an auto inset reads back as its used value, so both are carried). Off, two
  *  insets stretch the part and its margins are not drawn. */
+/** inline-block-line-box-as-drawn (React to Figma contract step and writer): an atomic inline (inline-block and its kin)
+ *  alone on its line in a block container carries how far that line box reaches above and below its margin box (Part.lineBox,
+ *  measured in the page: the parent line's strut and baseline alignment), and the native Figma writer adds that space to the
+ *  part's margin box. Off, nothing is measured, and the part is stacked at its margin box as before. */
 /** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
  *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
  *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
@@ -145,7 +149,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
   'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width',
-  'text-baseline-rounds-like-figma', 'hugging-space-between-packs', 'absolute-box-from-size-and-margins', 'svg-own-fill-on-host'] as const;
+  'text-baseline-rounds-like-figma', 'hugging-space-between-packs', 'absolute-box-from-size-and-margins', 'inline-block-line-box-as-drawn', 'svg-own-fill-on-host'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
