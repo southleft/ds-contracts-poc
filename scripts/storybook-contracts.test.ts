@@ -203,6 +203,11 @@ test('svg-viewbox-carried: each svg takes the viewBox its page authored, in tree
   assert.equal(carrySvgViewports(wide, [['0 0 16 16', null]], true), true);
   const drawn = reconstructSvg(wide.nodes[0].el, [], 'icon')!;
   assert.deepEqual([/viewBox="([^"]+)"/.exec(drawn.markup)![1], drawn.size], ['-12 -12 40 40', 40]);
+  // An oblong viewport attached any other way (source-reference evidence carries no mark) is still refused, by name.
+  const unmarked = chevron(), receipts: string[] = [];
+  unmarked.nodes[0].el.svgViewport = { viewBox: [0, 0, 16, 16], preserveAspectRatio: 'xMidYMid meet' };
+  assert.equal(reconstructSvg(unmarked.nodes[0].el, receipts, 'icon'), null);
+  assert.ok(receipts.some((r) => r.startsWith('svg-observed-viewport-unqualified: icon')), receipts.join());
   // The page and the capture disagree on how many svgs there are: nothing is attached.
   const short = tree();
   assert.equal(carrySvgViewports(short, [['0 0 32 32', null]]), false);

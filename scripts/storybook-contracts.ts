@@ -71,7 +71,8 @@ export function carrySvgViewports(root: CapturedNode, seen: ReadonlyArray<readon
     if (box.length === 4 && box.every(Number.isFinite) && box[2]! > 0 && box[2] === box[3] && /^\d+(\.\d+)?px$/.test(n.style['width'] ?? '') &&
         (n.style['width'] === n.style['height'] || (oblong && /^\d+(\.\d+)?px$/.test(n.style['height'] ?? ''))) &&
         ['xMidYMid', 'xMidYMid meet'].includes((aspect ?? 'xMidYMid meet').trim().replace(/\s+/g, ' ')))
-      n.svgViewport = { viewBox: box as [number, number, number, number], preserveAspectRatio: 'xMidYMid meet' };
+      n.svgViewport = { viewBox: box as [number, number, number, number], preserveAspectRatio: 'xMidYMid meet',
+        ...(n.style['width'] !== n.style['height'] ? { oblong: true as const } : {}) };
   });
   return true;
 }

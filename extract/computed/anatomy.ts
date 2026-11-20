@@ -1776,12 +1776,12 @@ export function reconstructSvg(
   if (svgEl.svgViewport) {
     const { viewBox: authored, preserveAspectRatio } = svgEl.svgViewport;
     if (authored.length !== 4 || authored.some(n => !Number.isFinite(n)) || authored[2] <= 0 || authored[3] <= 0 ||
-        authored[2] !== authored[3] || preserveAspectRatio !== 'xMidYMid meet') {
+        authored[2] !== authored[3] || (w !== h && !svgEl.svgViewport.oblong) || preserveAspectRatio !== 'xMidYMid meet') {
       receipts.push(`svg-observed-viewport-unqualified: ${label} — unsupported viewport or aspect-ratio mapping`);
       return null;
     }
-    // An oblong box (only svg-viewbox-meets-oblong-box attaches one) draws the square viewBox, under `meet`, as a glyph
-    // square of the box's short side centered in the box. The asset is the long side's square centered on the box, so
+    // An oblong box marked by svg-viewbox-meets-oblong-box (any other is refused above) draws the square viewBox, under
+    // `meet`, as a glyph square of the box's short side centered in the box. The asset is the long side's square centered on the box, so
     // its viewBox is the authored one widened evenly to that square at the same scale.
     const span = +(authored[2] * Math.max(w, h) / Math.min(w, h)).toFixed(4), d = +((span - authored[2]) / 2).toFixed(4);
     const viewBox = w === h ? authored : [authored[0] - d, authored[1] - d, span, span];
