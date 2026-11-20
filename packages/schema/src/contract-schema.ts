@@ -1,6 +1,6 @@
 import {scalarTextSizeInput} from './scalar-text-size-input.js';
 export {scalarTextSizeInput} from './scalar-text-size-input.js';
-import {TextByCombinationSchema,resolveTextByCombination,type TextByCombination} from './text-by-combination.js';
+import {TextByCombinationSchema,TextBaselineSchema,resolveTextByCombination,type TextBaseline,type TextByCombination} from './text-by-combination.js';
 export * from './text-by-combination.js';
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
 export * from './vector-stroke.js';
@@ -2859,6 +2859,8 @@ export interface Part {
   textByProp?: z.infer<typeof PropByPropSchema>;
   /** Complete source-present variant tuples; never a caller text default. */
   textByCombination?: TextByCombination;
+  /** Profile convention text-baseline-as-drawn: the baseline the browser drew for a one-line literal (see TextBaselineSchema). */
+  textBaseline?: TextBaseline;
   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
    *  parent track. Code computes live; the canvas renders the defaults'
    *  fraction (its honest static state). */
@@ -3353,6 +3355,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** Per-enum-value text overrides merged over `text` (see Part). */
     textByProp: PropByPropSchema.optional(),
     textByCombination: TextByCombinationSchema.optional(),
+    textBaseline: TextBaselineSchema.optional(),
     meter: z
       .strictObject({ valueProp: z.string(), maxProp: z.string() })
       .optional(),
@@ -5138,6 +5141,15 @@ export function ownedLiteralTextDomain(contract:Contract,target:Part):{props:str
  try {const visible=all.filter(t=>chain.every(part=>{if(!resolvePresence(part,t)||!resolveAvailability(part,t))return false;const w=part.visibleWhen;if(!w)return true;if(!Object.hasOwn(t,w.prop))throw Error('unbound ancestor');return w.equals===undefined?t[w.prop]===true:(Array.isArray(w.equals)?w.equals:[w.equals]).some(value=>value===t[w.prop]);}));return {props,all,visible};}catch{return;}
 }
 
+/** A drawn baseline belongs to a part that owns one line of literal text (no line break, no caller content), over axes the
+ *  contract declares; anything else is refused by name. */
+export function textBaselineIssues(contract:Contract,part:Part):string[]{
+ if(part.textBaseline===undefined)return [];
+ const texts=[part.text,...(part.textByCombination?.rows??[]).map(row=>row.text)];
+ if(typeof part.text!=='string'||texts.some(text=>/[\n\r]/.test(text??''))||part.content||part.slot||part.component||part.repeat||part.icon||part.shape||!TextBaselineSchema.safeParse(part.textBaseline).success||
+  part.textBaseline.props.some(prop=>!absentVariantAxes(contract).some(axis=>axis.prop.name===prop)))return ['text-baseline-unqualified'];
+ return [];
+}
 export function textByCombinationIssues(contract:Contract,part:Part,nested:boolean):string[]{
  const table=part.textByCombination;if(table===undefined)return [];
  const issues:string[]=[];
