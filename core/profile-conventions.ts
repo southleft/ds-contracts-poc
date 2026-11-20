@@ -125,6 +125,9 @@
  *  baseline Figma rounds to the nearest pixel and Chromium rounds down (ascent and descent rounded, odd leading pixel below;
  *  under geometricPrecision a rounded-down descent takes a pixel from the ascent) is shifted down by the difference
  *  (position: relative; top), which moves its glyphs and not its layout. Off, named. */
+/** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
+ *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
+ *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
 export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon-box-keeps-glyph-size', 'svg-rotation-carried',
   'closed-select-draws-selected-label', 'styles-when-display-last-wins', 'absolute-overhang-whole-pixel', 'observed-swap-default-drawn',
   'negative-sibling-margin-as-gap', 'root-text-by-axis', 'font-weight-initial-normal', 'lost-text-realigns-by-class',
@@ -135,7 +138,7 @@ export const CONVENTIONS = ['imperceptible-solid-paint-blend-not-carried', 'icon
   'normal-line-height-as-drawn', 'svg-viewbox-meets-oblong-box', 'fixed-swap-drawing-carried', 'unregistered-channel-not-minted',
   'synthetic-wrapper-shown-by-members', 'vertical-fill-line-in-row', 'inside-outside-stroke-as-outline',
   'swap-drawing-path-box-whole-pixel', 'text-baseline-as-drawn', 'centered-text-keeps-drawn-width',
-  'text-baseline-rounds-like-figma'] as const;
+  'text-baseline-rounds-like-figma', 'svg-own-fill-on-host'] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 
 export function conventionSet(names: readonly string[] | undefined): ReadonlySet<Convention> {
