@@ -125,6 +125,10 @@
 /** sized-text-baseline-as-drawn (React to Figma writer, with text-baseline-as-drawn): a text with a fixed width or height
  *  gets the drawn baseline too. The run time wraps a sized text in a box of that size, and the text inside keeps its own
  *  box at the carried line height, so the glyph line moves and nothing around it does. Off, a sized text is skipped. */
+/** align-self-center-in-stretched-box (React to Figma contract step and writer): a flex child the browser centers on its
+ *  parent's cross axis (align-self: center) carries alignSelf: center, and the writer draws it in a box that draws nothing,
+ *  stretches across the parent and centers it, its margins as the box's padding (Figma has no per-child cross-axis
+ *  alignment). Off, nothing is carried and the child takes its parent's alignment. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -173,6 +177,7 @@ export const CONVENTIONS = [
   'absolute-in-containing-block',
   'absolute-only-hug-keeps-extent',
   'absolute-overhang-whole-pixel',
+  'align-self-center-in-stretched-box',
   'bound-visibility-override-is-property',
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',

@@ -265,6 +265,8 @@ export interface NodeSpec {
   /** Compile-only placement fact; checked and removed after fill allocation. */
   growBasis?: 'zero';
   crossStretch?: boolean;
+  /** Convention align-self-center-in-stretched-box: drawn in a box that stretches across its parent and centers it. */
+  crossCenter?: boolean;
   resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
@@ -5366,6 +5368,10 @@ function partToSpec(
     }
     if (Object.keys(defaults).length) subst = {...defaults, ...subst};
   }
+  // Convention align-self-center-in-stretched-box: align-self is the parent's to place, so the part is drawn as it would
+  // be without it, and marked for the centering box (boxCrossCenter).
+  const centerSelf = resolveLayout(part, subst)?.alignSelf === 'center' && input.conventions?.has('align-self-center-in-stretched-box') === true;
+  if (centerSelf) part = withoutCenterSelf(part);
   if(part.mask?.outline) {
     if(part.shape && part.shape.kind!==part.mask.outline)throw Error(`native-mask-outline-conflict:${name}`);
     if(!part.shape) {
@@ -5407,6 +5413,7 @@ function partToSpec(
   recordNativePartOrigin(spec, part, subst);
   spec.growBasis = resolveLayout(part, subst)?.growBasis;
   if (resolveLayout(part, subst)?.alignSelf === 'stretch') spec.crossStretch = true;
+  if (centerSelf) spec.crossCenter = true;
   if(intrinsicAbsoluteRight(part,subst)!==undefined){
     if(spec.type!=='frame'||spec.children?.length!==1||spec.children[0].type!=='text')throw Error('intrinsic-placement-native-children-unqualified:'+name);
     spec.intrinsicAbsolute=true;
@@ -6392,6 +6399,38 @@ function applyFilledPathParent(spec: NodeSpec): void {
   if (children.some(child => !child.pathParentViewport || child.pathParentViewport.width !== width || child.pathParentViewport.height !== height))
     throw new Error(`filled-path-parent-basis-mismatch:${spec.name}`);
   spec.scalablePathParent = true;
+}
+
+/** Convention align-self-center-in-stretched-box: Figma has no per-child cross-axis alignment, so an in-flow child CSS
+ *  centers on its flex parent's cross axis is drawn in a box that draws nothing, stretches across the parent (the cross
+ *  stretch below sizes it) and centers it, its margins as the box's padding. The box needs the parent's own cross size;
+ *  without it the child keeps its parent's alignment and the miss is named. */
+/** The part without its alignSelf: center, on its layout and its per-value overrides (emptied ones dropped). */
+function withoutCenterSelf(part: Part): Part {
+  const out = { ...part } as Part;
+  if (out.layout?.alignSelf === 'center') { const { alignSelf: _, ...rest } = out.layout; if (Object.keys(rest).length) out.layout = rest as Part['layout']; else delete out.layout; }
+  if (out.layoutByProp) {
+    const map = Object.fromEntries(Object.entries(out.layoutByProp.map).flatMap(([v, o]) => { if (o.alignSelf !== 'center') return [[v, o]]; const { alignSelf: _, ...rest } = o; return Object.keys(rest).length ? [[v, rest]] : []; }));
+    if (Object.keys(map).length) out.layoutByProp = { ...out.layoutByProp, map } as Part['layoutByProp']; else delete out.layoutByProp;
+  }
+  return out;
+}
+
+function boxCrossCenter(s: NodeSpec): void {
+  for (const c of s.children ?? []) boxCrossCenter(c);
+  const mode = s.layout?.mode, sized = mode === 'HORIZONTAL' ? s.fixedHeight !== undefined || s.lits?.height !== undefined || (s.lits?.minHeight ?? s.resolvedMinHeight ?? 0) > 0
+    : mode === 'VERTICAL' && (s.fixedWidth !== undefined || s.lits?.width !== undefined);
+  if (s.children) s.children = s.children.map((c) => {
+    if (!c.crossCenter) return c;
+    delete c.crossCenter;
+    if (!sized || c.overlay || c.insetOverlay || c.absolute) { miss(c, 'align-self', 'FC-EMIT-ALIGN-SELF-CENTER-UNBOXED — CSS centers it on its parent\'s cross axis; the parent has no cross size of its own to center it in, so it takes the parent\'s alignment', 'center'); return c; }
+    // @lower emit.align-self-center-stretched-box
+    const m = c.margins ?? {}, v = c.marginVars ?? {}, sides = (['top', 'right', 'bottom', 'left'] as const).filter((k) => m[k]), field = (k: string) => `padding${k[0]!.toUpperCase()}${k.slice(1)}`;
+    const pad = Object.fromEntries(sides.map((k) => [field(k), m[k]])), bound = Object.fromEntries(sides.filter((k) => v[k]).map((k) => [field(k), v[k]]));
+    delete c.margins; delete c.marginVars;
+    return { type: 'frame', name: `${c.name} (center box)`, layout: { mode: mode === 'HORIZONTAL' ? 'VERTICAL' : 'HORIZONTAL', primary: 'CENTER', counter: 'MIN' },
+      crossStretch: true, ...(sides.length ? { lits: pad } : {}), ...(Object.keys(bound).length ? { bindings: bound } : {}), children: [c] } as NodeSpec;
+  });
 }
 
 function annotateFillW(rootSpec: NodeSpec, context: string, byId: Map<string, Contract>): void {
@@ -7491,6 +7530,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   for (const v of [...variants, ...stateVariants]) lowerInsetRing(v.spec);
   // FILL is a compile-time decision (see annotateFillW) — runs LAST so it
   // sees the final spec shape (after margin lowering / miss stripping).
+  for (const v of [...variants, ...stateVariants]) boxCrossCenter(v.spec);
   for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
