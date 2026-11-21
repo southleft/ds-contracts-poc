@@ -733,12 +733,14 @@ async function main() {
         refusals.push(...promotion.refusals.map((x: unknown) => typeof x === 'string' ? x : JSON.stringify(x)));
         const receipts: string[] = [], styles = (m: Record<string, { style: Record<string, string> }>) => Object.fromEntries(Object.entries(m).map(([t, n]) => [t, n.style]));
         const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false, ...(inset ? { container: PAGE.viewport.width - 2 * inset } : {}),
-          ...(conventions.has('centered-text-keeps-drawn-width') ? { centeredTextWidth: true as const } : {}) }, styles(uaControls));
+          ...(conventions.has('centered-text-keeps-drawn-width') ? { centeredTextWidth: true as const } : {}),
+          ...(conventions.has('table-short-row-leaves-columns-empty') ? { tableShortRows: true as const } : {}) }, styles(uaControls));
         const folds = detectFolds(aligned, styled, receipts);
         await boundCheck(aligned, comp, space, async () => '', promotion.contract);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const svgConsumed = new Set([...promotion.consumed].map((i: number) => aligned.partNames[i]));
-        const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
+        const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals,
+          conventions.has('table-short-row-leaves-columns-empty'));
         const minted = mintedObservations(prep.baseObs, prep.stateObs, conventions.has('unregistered-channel-not-minted')), { baseObs, stateObs } = minted;
         refusals.push(...minted.named);
         const mintBase = mintTokens(c.name, baseObs, prep.axes, { nestedPairs: true }), mintStates = mintTokens(c.name, stateObs, prep.axes, { nestedPairs: true });

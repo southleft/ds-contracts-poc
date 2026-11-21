@@ -118,6 +118,10 @@
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
+/** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
+ *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
+ *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
+ *  column widths and its cells hug. */
 /** sized-text-baseline-as-drawn (React to Figma writer, with text-baseline-as-drawn): a text with a fixed width or height
  *  gets the drawn baseline too. The run time wraps a sized text in a box of that size, and the text inside keeps its own
  *  box at the carried line height, so the glyph line moves and nothing around it does. Off, a sized text is skipped. */
@@ -210,6 +214,7 @@ export const CONVENTIONS = [
   'svg-viewbox-meets-oblong-box',
   'swap-drawing-path-box-whole-pixel',
   'synthetic-wrapper-shown-by-members',
+  'table-short-row-leaves-columns-empty',
   'text-align-packs-text-box',
   'text-baseline-as-drawn',
   'text-baseline-rounds-like-figma',
