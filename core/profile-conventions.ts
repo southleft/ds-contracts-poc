@@ -129,6 +129,9 @@
  *  parent's cross axis (align-self: center) carries alignSelf: center, and the writer draws it in a box that draws nothing,
  *  stretches across the parent and centers it, its margins as the box's padding (Figma has no per-child cross-axis
  *  alignment). Off, nothing is carried and the child takes its parent's alignment. */
+/** text-baseline-as-painted (React to Figma contract step, with text-baseline-as-drawn): the carried baseline is where
+ *  Chromium painted it, not where it laid it out: the laid-out baseline rounded half up to the whole pixel, with the subject
+ *  on a whole pixel as the reader draws it. Off, the laid-out baseline is carried. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -217,6 +220,7 @@ export const CONVENTIONS = [
   'table-short-row-leaves-columns-empty',
   'text-align-packs-text-box',
   'text-baseline-as-drawn',
+  'text-baseline-as-painted',
   'text-baseline-rounds-like-figma',
   'text-box-stacks-block-children',
   'uncaptured-fill-variable-carried-as-paint',

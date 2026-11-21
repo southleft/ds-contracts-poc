@@ -274,7 +274,10 @@ export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear =
  *  the baseline of its own text, in px below that line box's top, when that text is one line in a block-level or inline
  *  box (zero-size probes at the line top before its first run and after its last, and at the baseline; removed at once),
  *  with its font's ascent and descent per em (canvas, at 1000 px); null otherwise. */
-export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
+/** Convention text-baseline-as-painted: Chromium paints a line at its laid-out baseline rounded half up to the whole
+ *  pixel; with the subject on a whole pixel, as the reader draws it, that is this px below the line top. */
+export const paintedPx = (rel: number, px: number): number => Math.floor(rel + px + 0.5) - rel;
+export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
   const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
   const walk = (el) => { const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.data.trim()), cs = getComputedStyle(el); let m = null;
@@ -283,7 +286,7 @@ export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined) => `(
       const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top;
       first.remove(); base.remove(); last.remove();
       const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
-      if (one) m = { px: +b.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+      if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
     out.push([el.localName, m]);
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
   if (root) walk(root); return out; })()`;
@@ -681,7 +684,7 @@ async function main() {
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
-            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at)) as never);
+            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'))) as never);
             if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
           }
           if (conventions.has('inline-block-line-box-as-drawn')) { // read before any element moves, matched by capture order
