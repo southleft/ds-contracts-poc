@@ -132,6 +132,9 @@
 /** text-baseline-as-painted (React to Figma contract step, with text-baseline-as-drawn): the carried baseline is where
  *  Chromium painted it, not where it laid it out: the laid-out baseline rounded half up to the whole pixel, with the subject
  *  on a whole pixel as the reader draws it. Off, the laid-out baseline is carried. */
+/** svg-box-snapped-as-painted (React to Figma writer, at run time): Chromium paints an svg at its box snapped to the
+ *  whole pixel, rounded half up; once a component is laid out, each svg's drawing moves onto that pixel, relative to its
+ *  variant, from where Figma's own layout put it. Moves under 0.05 px, and rotated svgs, are left alone. Off, nothing moves. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -211,6 +214,7 @@ export const CONVENTIONS = [
   'stage-from-story-container',
   'stretched-line-paints-bar',
   'styles-when-display-last-wins',
+  'svg-box-snapped-as-painted',
   'svg-own-fill-on-host',
   'svg-rotation-carried',
   'svg-viewbox-carried',

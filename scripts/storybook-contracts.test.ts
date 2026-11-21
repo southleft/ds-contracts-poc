@@ -384,6 +384,27 @@ test('align-self-center-in-stretched-box: a centered flex child carries alignSel
     [null, [plain.layoutMode, plain.primaryAxisAlignItems, plain.counterAxisAlignItems, plain.width, plain.height]]);
 });
 
+test('svg-box-snapped-as-painted: once laid out, an svg off the whole pixel has its drawing moved onto it; under 0.05 px is left', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const icon = (left: string, top: string) => ({ icon: { asset: 'glyph', size: 16 }, declared: { position: 'absolute' }, literals: { left, top } });
+  const contract = ContractSchema.parse({ id: 'test.snap', name: 'Snap', version: '0.1.0', status: 'draft', description: 'Placed icons', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, declared: { position: 'relative' }, literals: { width: '40px', height: '40px' },
+      parts: { half: icon('10.5px', '4.5px'), near: icon('20.03px', '2px') } } },
+    bindings: { code: { anchors: { importPath: 'test/Snap', export: 'Snap' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const moved = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map([['glyph', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 0h16v16H0z"/></svg>']]),
+      conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
+    const f = figma as any, svg = f.createNodeFromSvg; f.createNodeFromSvg = (s: string) => { const n = svg(s); n.appendChild(f.createRectangle()); return n; };   // the mock's svg has no drawing
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    return ['half', 'near'].map((name) => { const n = root.findOne((x: any) => x.name === name) as any; return [n.children[0].x, n.children[0].y]; });
+  };
+  // At (10.5, 4.5) in its variant, Chromium paints the svg at (11, 5): its drawing moves by half a pixel each way.
+  assert.deepEqual(await moved(['svg-box-snapped-as-painted']), [[0.5, 0.5], [0, 0]]);
+  assert.deepEqual(await moved([]), [[0, 0], [0, 0]]);
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
