@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **65** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **66** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -265,12 +265,13 @@ Two facts that must agree, produced by doors that never talk. Fusion never carri
 
 **Why.** A gap is a property of a layout, and this pipeline carries it as a property of a box. The consequence is the axis re-derivation in the emitter: two doors that never talk have to agree about which axis a number belongs to. Grid already carries the pair independently, which is proof the schema can hold it — flex simply was never widened.
 
-### `axis` — 11 rules (6 implemented, 5 proposed, 0 wall)
+### `axis` — 12 rules (7 implemented, 5 proposed, 0 wall)
 
 Where the owner's two visible failures live. **There is no `layoutMode: 'NONE'` anywhere in `core/emit-figma-script.ts`** — 0 occurrences — so no frame is ever lowered to a non-auto-layout frame, and every unclaimed part becomes a horizontal row. Three independent defaults turn "unknown" into "row", and two further construction sites bypass the axis function entirely. Upstream, layout enrichment refuses any container that is not `flex` at its base combo. The two halves compose: fusion carries no direction for a block container, and the emitter invents one.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
+| `emit.align-self-center-stretched-box` | `implemented` | `emit-figma-script.ts:6412` | align-self: center on an in-flow flex child → the child in a frame that draws nothing, stretched across the parent's cross axis and centering it, its margins as padding | the child's margin box centered in its parent's content box on the cross axis | **none** | `untested` |
 | `emit.axis-adjacent-inlines-unnamed` | `proposed` | `emit-figma-script.ts:2215` | two or more adjacent inline siblings inside a block container — one CSS line box → nothing — the container falls through to a horizontal row | a named refusal: an inline formatting context has no auto-layout spelling and should say so | **none** | `untested` |
 | `emit.axis-block-declared-vertical` | `implemented` | `emit-figma-script.ts:2150` | display:block carrying align/justify facts but no flex-direction → layoutMode VERTICAL with stretchChildren, alignment mapped from the carried align/justify | a block-level box lowers to a vertical stack | **none** | `named` |
 | `emit.axis-blockification` | `implemented` | `emit-figma-script.ts:2217` | a block-flow container (block \| list-item \| flow-root \| inline) with no layout fact → layoutMode VERTICAL, MIN/MIN, stretchChildren | a block-level box lowers to a vertical stack | **none** | `named` |
@@ -282,6 +283,17 @@ Where the owner's two visible failures live. **There is no `layoutMode: 'NONE'` 
 | `emit.axis-textbox-bypass` | `proposed` | `emit-figma-script.ts:5843` | a text part carrying a padding channel, whose display is block-flow → layoutMode HORIZONTAL, MIN/MIN | one axis rule for every part | **none** | `untested` |
 | `fuse.axis-flex-only-enrichment` | `implemented` | `fuse.ts:1951` | flex-direction / align-items / justify-content on any container → nothing for a non-flex container: no direction, no align, no justify ever reaches the emitter | layout facts carried for any container that has them, keyed on the combo being measured rather than on the base display | **none** | `named` |
 | `fuse.axis-vocabulary-narrow` | `implemented` | `fuse.ts:2065` | any layout value outside a 4-property, 12-pair vocabulary → nothing — the value stays code-only | a vocabulary at least as wide as the schema enums it feeds | `receipts` | `untested` |
+
+#### `emit.align-self-center-stretched-box`
+
+**Context.** profile convention align-self-center-in-stretched-box, carried by the React to Figma contract step (alignSelf: center, in every variant the child is drawn in or per value of the one enum axis that decides it) and drawn only where the parent has its own cross size; elsewhere the child keeps its parent's alignment and the miss is named (FC-EMIT-ALIGN-SELF-CENTER-UNBOXED)
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- the child's own cross-axis alignment: Figma has no per-child counter-axis alignment in auto layout, so it is drawn as a wrapper's layout, one node deeper than the code
+
+**Why.** Carbon's ghost Button centers its icon (align-self: center) where every other kind does not. The schema had no center value, so the icon was drawn at the top of the xl and 2xl buttons, 9 and 17 px above the reference. A stretched centering box draws the same box exactly where the parent's cross size is its own.
 
 #### `emit.axis-adjacent-inlines-unnamed`
 

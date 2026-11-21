@@ -4439,7 +4439,8 @@
               "type": "string",
               "enum": [
                 "auto",
-                "stretch"
+                "stretch",
+                "center"
               ]
             },
             "overlap": {
@@ -5440,7 +5441,8 @@
                     "type": "string",
                     "enum": [
                       "auto",
-                      "stretch"
+                      "stretch",
+                      "center"
                     ]
                   },
                   "gridAsRow": {

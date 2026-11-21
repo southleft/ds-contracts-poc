@@ -665,7 +665,15 @@ export function validateContract(
       if (override.growBasis !== undefined && (override.grow ?? part.layout?.grow) !== true)
         errors.push(`${contract.id}: part "${name}" layoutByProp.${value}.growBasis requires grow: true`);
     }
-    if (part.layout?.alignSelf || Object.values(part.layoutByProp?.map ?? {}).some(value => value.alignSelf) || part.layoutByCombination?.rows.some(row=>row.layout.alignSelf)) {
+    const selfAligns = [part.layout?.alignSelf, ...Object.values(part.layoutByProp?.map ?? {}).map(value => value.alignSelf), ...(part.layoutByCombination?.rows ?? []).map(row => row.layout.alignSelf)];
+    // align-self center (profile convention align-self-center-in-stretched-box) needs only an in-flow child of a flex parent.
+    if (selfAligns.includes('center')) {
+      const parent = p.length > 1 ? p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]]) : undefined;
+      if (!parent || !['flex', 'inline-flex'].includes(parent.layout?.display ?? '') || part.component || part.slot || part.overlay ||
+          part.absoluteGeometry || part.absoluteGeometryByCombination || part.absolutePlacement || part.absolutePlacementByCombination || part.placement)
+        errors.push(`${contract.id}: part "${name}" align-self-center-unqualified — requires an in-flow child of a flex parent`);
+    }
+    if (selfAligns.some(value => value && value !== 'center')) {
       const parent = p.length > 1
         ? p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]])
         : undefined;

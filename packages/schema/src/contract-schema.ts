@@ -560,8 +560,9 @@ export const LayoutSchema = z
     grow: z.boolean().optional(),
     /** Equal allocation from a zero basis. Omitted preserves legacy content-basis growth. */
     growBasis: z.literal("zero").optional(),
-    /** Parent-owned cross-axis stretch; auto restores inherited alignment. */
-    alignSelf: z.enum(["auto", "stretch"]).optional(),
+    /** Parent-owned cross-axis stretch; auto restores inherited alignment. center: CSS align-self center, carried by the
+     *  React to Figma profile convention align-self-center-in-stretched-box. */
+    alignSelf: z.enum(["auto", "stretch", "center"]).optional(),
     /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
      *  child margin in CSS and as negative itemSpacing on the canvas. */
     overlap: z.boolean().optional(),
@@ -668,8 +669,8 @@ export const VariantLayoutSchema = z.strictObject({
   grow: z.boolean().optional(),
   /** Equal allocation from a zero basis. Omitted preserves legacy content-basis growth. */
   growBasis: z.literal("zero").optional(),
-  /** Parent-owned cross-axis stretch; auto restores inherited alignment. */
-  alignSelf: z.enum(["auto", "stretch"]).optional(),
+  /** Parent-owned cross-axis stretch; auto restores inherited alignment; center as on the part's layout. */
+  alignSelf: z.enum(["auto", "stretch", "center"]).optional(),
   /** Profile convention single-row-grid-as-row (the contract step's lowering, not CSS): this value's grid has one non-empty
    *  row and is drawn as this row, with its column gap and the extent of its empty trailing tracks, in px. */
   gridAsRow: z.strictObject({ gap: z.number().nonnegative(), paddingRight: z.number().positive().optional(),
@@ -4201,7 +4202,7 @@ export interface ResolvedLayout {
   justify?: "start" | "center" | "end" | "space-between";
   grow?: boolean;
   growBasis?: "zero";
-  alignSelf?: "auto" | "stretch";
+  alignSelf?: "auto" | "stretch" | "center";
   gridAsRow?: { gap: number; paddingRight?: number; paddingBottom?: number };
   overlap?: boolean;
   /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */

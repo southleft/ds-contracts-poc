@@ -988,7 +988,7 @@ export function layoutOverrideDecls(o: {
   justify?: string;
   grow?: boolean;
   growBasis?: "zero";
-  alignSelf?: "auto" | "stretch";
+  alignSelf?: "auto" | "stretch" | "center";
 }, base?: {grow?: boolean; growBasis?: "zero"}, minima?: Pick<Part, "tokens" | "literals">): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);

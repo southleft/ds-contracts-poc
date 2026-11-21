@@ -222,6 +222,32 @@ export function lowerSingleRowGrid(contract: Contract, combos: ReadonlyArray<{ k
   return [receipts, refused];
 }
 
+/** Profile convention align-self-center-in-stretched-box: a child of a flex parent that the browser centers on the parent's
+ *  cross axis (align-self: center), in flow, carries alignSelf: center, in every variant it is drawn in or per value of the
+ *  one enum axis that decides it. Anything else is named (align-self-center-uncarried). Returns [receipts, refusals]. */
+export function carryAlignSelfCenter(contract: Contract, combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  nodeAt: (key: string, part: string) => CapturedNode | null): [string[], string[]] {
+  const receipts: string[] = [], refused: string[] = [], centered = (n: CapturedNode) => n.style['align-self'] === 'center';
+  const visit = (name: string, part: Part, parent: string | null) => {
+    for (const [k, p] of Object.entries(part.parts ?? {})) visit(k, p as Part, name);
+    const seen = parent === null ? [] : combos.flatMap((k) => { const n = nodeAt(k.key, name); return n && n.style['display'] !== 'none' ? [[k, n, nodeAt(k.key, parent)] as const] : []; });
+    if (!seen.some(([, n]) => centered(n))) return;
+    const why = seen.some(([, n, up]) => centered(n) && (!up || !/^(inline-)?flex$/.test(up.style['display'] ?? '') || /absolute|fixed/.test(n.style['position'] ?? ''))) ? 'not-an-in-flow-flex-child'
+      : part.layoutByCombination || part.layout?.alignSelf ? 'part-has-layout-table' : '';
+    const axis = seen.every(([, n]) => centered(n)) ? null : contract.props.find((p) => Array.isArray((p as { type?: { enum?: unknown } }).type?.enum) &&
+      seen.every(([k, n]) => seen.every(([o, m]) => o.axisValues[p.name] !== k.axisValues[p.name] || centered(n) === centered(m))))?.name;
+    if (why || axis === undefined || (axis && part.layoutByProp && part.layoutByProp.prop !== axis))
+      return void refused.push(`align-self-center-uncarried: ${name}: ${why || (axis === undefined ? 'not-by-one-axis' : 'part-has-layout-table')}`);
+    if (axis === null) { part.layout = { ...part.layout, alignSelf: 'center' }; return void receipts.push(`align-self-center-carried: ${name}: every variant`); }
+    const map: Record<string, Record<string, unknown>> = { ...(part.layoutByProp?.map as Record<string, Record<string, unknown>> | undefined) };
+    for (const [k, n] of seen) if (centered(n)) map[k.axisValues[axis]!] = { ...map[k.axisValues[axis]!], alignSelf: 'center' };
+    part.layoutByProp = { prop: axis, map } as Part['layoutByProp'];
+    receipts.push(`align-self-center-carried: ${name}: ${axis}=${Object.keys(map).filter((v) => map[v]!.alignSelf === 'center').join('|')}`);
+  };
+  visit('root', contract.anatomy.root as Part, null);
+  return [receipts, refused];
+}
+
 /** Profile convention svg-own-fill-on-host: an element holding nothing but one svg, whose own fill (a rule on the svg, not
  *  one it inherits from the element) differs from the element's, takes that fill as its own. The svg folds into the
  *  element as its icon, and its shapes' fill is read as the host's, so the glyph keeps the fill the browser drew; CSS fill
@@ -737,6 +763,10 @@ async function main() {
         if (conventions.has('single-row-grid-as-row')) {
           const [lowered, named] = lowerSingleRowGrid(enriched as Contract, combos, (key, part) => nodeAt(key, part) as CapturedNode | null);
           row.gridAsRow = lowered; refusals.push(...named);
+        }
+        if (conventions.has('align-self-center-in-stretched-box')) {
+          const [carried, named] = carryAlignSelfCenter(enriched as Contract, combos, (key, part) => nodeAt(key, part) as CapturedNode | null);
+          row.alignSelfCenter = carried; refusals.push(...named);
         }
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; });

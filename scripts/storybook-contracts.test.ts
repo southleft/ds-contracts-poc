@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carriedChannel, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carriedChannel, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -321,6 +321,37 @@ test('sized-text-baseline-as-drawn: a sized text keeps its box at the carried li
     { box: [29, 24, 'CENTER'], text: ['NONE', 15, 16, 'TOP'] }]);
   // Off: the line height stays 16 and the text box is never set (it sizes itself, as createText makes it).
   assert.deepEqual((await write(['text-baseline-as-drawn'])).map((b) => [b.text[0], b.text[1], b.box[2]]), [[undefined, 16, 'CENTER'], [undefined, 16, 'CENTER']]);
+});
+
+test('align-self-center-in-stretched-box: a centered flex child carries alignSelf center and is drawn in a stretched centering box', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { axes: ['kind'], references: [ref('b--a', { kind: 'primary' }), ref('b--a', { kind: 'ghost' }, { kind: 'ghost' })] })] }).components;
+  const el = (style: Record<string, string>) => ({ tag: 'div', classes: [], style, nodes: [], pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
+  const carry = (parentDisplay: string) => { const { contract, combos } = seed(c!), ghost = (key: string) => combos.find((k) => k.key === key)!.axisValues.kind === 'ghost';
+    contract.anatomy.root.parts = { icon: { declared: { display: 'block' } } } as never;
+    return [carryAlignSelfCenter(contract, combos, (key, part) => part === 'root' ? el({ display: parentDisplay })
+      : el(ghost(key) ? { 'align-self': 'center', position: 'static' } : { 'align-self': 'auto', position: 'absolute' })), contract] as const; };
+  const [[receipts, refused], contract] = carry('inline-flex');
+  assert.deepEqual([receipts, refused, (contract.anatomy.root.parts as any).icon.layoutByProp], [['align-self-center-carried: icon: kind=ghost'], [], { prop: 'kind', map: { ghost: { alignSelf: 'center' } } }]);
+  assert.deepEqual(carry('block')[0], [[], ['align-self-center-uncarried: icon: not-an-in-flow-flex-child']]);
+  // The writer: a 64-high row; the 16 px icon with a 1 px top margin is drawn in a box that fills the row's height,
+  // centers it and holds the margin as its padding. Off, the icon sits in the row, its margin as before.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const row = ContractSchema.parse({ id: 'test.center-self', name: 'CenterSelf', version: '0.1.0', status: 'draft', description: 'A centered flex child',
+    states: [], semantics: { element: 'div' }, props: [], anatomy: { root: { layout: { display: 'flex', direction: 'row' }, literals: { height: '64px' }, parts: {
+      icon: { layout: { alignSelf: 'center' }, literals: { width: '16px', height: '16px' }, tokens: { 'margin-top': '{m.one}' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/CenterSelf', export: 'CenterSelf' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const write = async (conventions: string[]) => {
+    const tokens = { primitives: { m: { $type: 'dimension', one: { $value: '1px' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(row, new Map([[row.id, row]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    return root.findOne((n: any) => n.name === 'icon (center box)') as any;
+  };
+  const box = await write(['align-self-center-in-stretched-box']);
+  assert.deepEqual([box.layoutMode, box.primaryAxisAlignItems, box.paddingTop, box.layoutSizingVertical, box.fills.length, box.clipsContent, box.children[0].name, box.children[0].height],
+    ['VERTICAL', 'CENTER', 1, 'FILL', 0, false, 'icon', 16]);
+  assert.equal(await write([]), null);
 });
 
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
