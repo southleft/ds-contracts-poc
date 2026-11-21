@@ -221,6 +221,30 @@ test('text-baseline-as-painted: the carried baseline is the laid-out one rounded
   assert.deepEqual([MEASURE_BASELINES(undefined).includes('px: +b.toFixed(4)'), MEASURE_BASELINES(undefined, true).includes(paintedPx.toString())], [true, true]);
 });
 
+test('root-text-baseline-as-drawn: the one-line text of a root carries its baseline, and the writer draws it on the root label', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { axes: ['size'], references: [ref('b--a', { size: 'xs' }), ref('b--a', { size: 'md' }, { size: 'md' })] })] }).components;
+  const carry = (withRoot: boolean) => { const { contract, combos } = seed(c!);
+    Object.assign(contract.anatomy.root, { layout: { display: 'inline-flex' }, text: 'Button', literals: { 'font-size': '14px', 'line-height': '18px' } });
+    const xs = (key: string) => combos.find((k) => k.key === key)!.axisValues.size === 'xs';
+    return [carryTextBaseline(contract, c!.axes, combos, (key, part) => part === 'root' ? { px: xs(key) ? 14.5 : 14, ascent: 1.025, descent: 0.275 } : undefined, withRoot), contract] as const; };
+  const [on, contract] = carry(true);
+  assert.deepEqual([on, (contract.anatomy.root as any).textBaseline.rows.map((r: { px: number }) => r.px)], [['root'], [14.5, 14]]);
+  assert.deepEqual([carry(false)[0], (carry(false)[1].anatomy.root as any).textBaseline], [[], undefined]);
+  // The probe reads a flex root's own text only with the convention; off, its script is today's.
+  assert.equal(MEASURE_BASELINES(undefined, true, false), MEASURE_BASELINES(undefined, true));
+  assert.ok(MEASURE_BASELINES(undefined, true, true).includes('el === root && own.length === 1'));
+  // The writer: the root's label gets the glyph line 2·14.5 − (1.025 − 0.275)·14 = 18.5 in its 18 px box, only with it on.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const parsed = ContractSchema.parse(contract), boxes = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; baselineBox?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown[] => [...(s.name === 'label' && s.baselineBox ? [s.baselineBox] : []), ...(s.children ?? []).flatMap(find)];
+    return (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.flatMap((v) => find(v.spec));
+  };
+  assert.deepEqual(boxes(['text-baseline-as-drawn', 'root-text-baseline-as-drawn']), [{ line: 18.5, height: 18 }, { line: 17.5, height: 18 }]);
+  assert.deepEqual(boxes(['text-baseline-as-drawn']), []);
+});
+
 test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Btn', { references: [ref('b--a', {})] })] }).components;
   const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');

@@ -5344,8 +5344,10 @@ function rootTextSpecs(
   // and already lists these exact variants.
   if (textOutOfBoxOn(root as Part, subst)) return [];
   if(root.textByCombination)throw Error('literal-text-combination-root-unqualified');
+  // Convention root-text-baseline-as-drawn: the hosted label draws the root's carried baseline.
+  const baseline = root.textBaseline && input.conventions?.has('root-text-baseline-as-drawn') ? { textBaseline: root.textBaseline } : {};
   const hosted: Part = root.text !== undefined
-    ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
+    ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}), ...baseline } as Part)
     : ({ content: root.content } as Part);
   return partToSpecs('label', hosted, contract, byId, ctx, subst);
 }
