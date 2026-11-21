@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, carriedChannel, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -212,6 +212,13 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   };
   assert.deepEqual(boxes(['text-baseline-as-drawn']), [{ line: 15, height: 16 }, { line: 17, height: 16 }]);
   assert.deepEqual(boxes([]), []);
+});
+
+test('text-baseline-as-painted: the carried baseline is the laid-out one rounded half up to the whole pixel; off, the probe is unchanged', () => {
+  // A line top 11.5 below the subject with a baseline 14 below it is painted at 26 (25.5 rounded half up): 14.5 below its top.
+  assert.deepEqual([[11.5, 14], [11, 14], [3.25, 14], [3.75, 14], [2.5, 14]].map(([top, px]) => paintedPx(top!, px!)), [14.5, 14, 13.75, 14.25, 14.5]);
+  assert.equal(MEASURE_BASELINES(undefined), MEASURE_BASELINES(undefined, false));
+  assert.deepEqual([MEASURE_BASELINES(undefined).includes('px: +b.toFixed(4)'), MEASURE_BASELINES(undefined, true).includes(paintedPx.toString())], [true, true]);
 });
 
 test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
