@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **66** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **67** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -858,13 +858,14 @@ The honest half of the story. When the state plane is not drawn, every part×sta
 
 **Why.** Registered because the loss propagates INTO THE INVERSE, which makes it more than a drawing gap. Without an explicit bindings.figma.unsetValue, the legacy canvas projection cannot represent "absent", so the return trip reads the first cell as the default and writes a default the library never declared. An explicit unsetValue now opts into a separate omitted plane with corroborated readback metadata; this rule and its historical untested verdict describe only axes that do not opt in.
 
-### `svg` — 3 rules (2 implemented, 1 proposed, 0 wall)
+### `svg` — 4 rules (3 implemented, 1 proposed, 0 wall)
 
 A sign convention, a first-wins tie-break, and a token binding that stops at one paint.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `anatomy.svg-host-plan-first-wins` | `implemented` | `anatomy.ts:1996` | a second (or third) <svg> under a host element that already has an svg plan → nothing for the later svgs — only the first becomes an icon | one icon per host, chosen deliberately, with the others refused by name | **none** | `untested` |
+| `emit.svg-box-snapped-as-painted` | `implemented` | `emit-figma-script.ts:7536` | an inline svg laid out off the whole pixel → its drawing moved onto the pixel-snapped box (round half up), from Figma's own position | the svg painted where Chromium paints it | **none** | `untested` |
 | `emit.svg-multipaint-token-identity-lost` | `proposed` | `emit-figma-script.ts:5419` | fill / stroke colour on an icon whose markup carries MORE THAN ONE paint → the imported SVG keeps baked hex paints, bound to nothing | each distinct paint bound to the token that produced it, or a named refusal | **none** | `untested` |
 | `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:10480` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
 
@@ -878,6 +879,17 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 - every svg after the first per host — with receipt channel "none", fully silent
 
 **Why.** First-wins is a defensible tie-break; being silent about it is not. A button with a leading and a trailing icon is an ordinary shape, and this rule drops the second one without a word. It is one of the six structure decisions that carry receipt channel "none" — the silent frontier of the forward direction.
+
+#### `emit.svg-box-snapped-as-painted`
+
+**Context.** profile convention svg-box-snapped-as-painted, at run time once the component is laid out: every svg the writer draws, from the position Figma's own layout gives it relative to its variant; moves under 0.05 px and rotated svgs are left alone
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- the svg's layout position stays as laid out; only its drawing moves, so a readback of the frame and of its paths differ by the snap
+
+**Why.** Carbon's MultiSelect inline field centers its 24 px chevron box at y 8.5, so the svg sits at y 12.5; Chromium paints it at 13 and Figma at 12.5, half a pixel high, in all 48 inline variants. The shift is taken from Figma's own position, not from CSS: whole-pixel text boxes put Button's icons on whole pixels in Figma where CSS has them at .5, and the images agree.
 
 #### `emit.svg-multipaint-token-identity-lost`
 

@@ -267,6 +267,8 @@ export interface NodeSpec {
   crossStretch?: boolean;
   /** Convention align-self-center-in-stretched-box: drawn in a box that stretches across its parent and centers it. */
   crossCenter?: boolean;
+  /** Convention svg-box-snapped-as-painted: this svg's drawing is snapped to the whole pixel at run time (snapPaintedSvgs). */
+  paintSnap?: boolean;
   resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
@@ -7531,6 +7533,9 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   // FILL is a compile-time decision (see annotateFillW) — runs LAST so it
   // sees the final spec shape (after margin lowering / miss stripping).
   for (const v of [...variants, ...stateVariants]) boxCrossCenter(v.spec);
+  // @lower emit.svg-box-snapped-as-painted
+  if (input.conventions?.has('svg-box-snapped-as-painted')) { const mark = (s: NodeSpec): void => { if (s.type === 'svg') s.paintSnap = true; (s.children ?? []).forEach(mark); };
+    for (const v of [...variants, ...stateVariants]) mark(v.spec); }
   for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
@@ -9550,6 +9555,22 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 /** The ONE sync runtime (create + in-place amend), shared by the batch
  *  script and (#60 fix 2) every per-component script. `preamble` carries the
  *  minted-variable upsert for playground per-component emissions. */
+/** Convention svg-box-snapped-as-painted: Chromium paints an svg at its box snapped to the whole pixel (rounded half up);
+ *  Figma draws it where its own layout puts it. Once a component is laid out, each svg's drawing (its children) moves by
+ *  the difference, relative to its variant; under 0.05 px is left alone, and so is a rotated svg. */
+const PAINT_SNAP_RUNTIME = `const paintSnapNodes = [];
+function snapPaintedSvgs() {
+  for (const node of paintSnapNodes.splice(0)) {
+    if (node.removed || node.rotation) continue;
+    let variant = node.parent; while (variant && variant.type !== 'COMPONENT') variant = variant.parent;
+    if (!variant) continue;
+    const at = node.absoluteBoundingBox, origin = variant.absoluteBoundingBox, x = at.x - origin.x, y = at.y - origin.y;
+    const dx = Math.floor(x + 0.5) - x, dy = Math.floor(y + 0.5) - y, mx = Math.abs(dx) >= 0.05 ? dx : 0, my = Math.abs(dy) >= 0.05 ? dy : 0;
+    if (mx || my) for (const child of node.children) { child.x += mx; child.y += my; }
+  }
+}
+`;
+
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
@@ -9713,6 +9734,7 @@ function buildSyncScript(
   const hasScalarTextSize=hasSlotDefaultTextSizes||featureDatas.some(d=>dataSome(d,s=>!!s.textSizeTarget||!!s.instanceTextSizes));
   const hasTextAppearanceWriter=hasScalarTextSize||featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances||!!s.slotDefault?.some(item=>item.instanceTextAppearances)));
   const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
+  const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
     const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
       const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
@@ -10617,7 +10639,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10638,7 +10660,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     }
     for (const child of [...node.children]) child.remove();
   } else ` : ''}if (spec.type === 'svg') {
-    node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
+    node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasPaintSnap ? '\n    if (spec.paintSnap) paintSnapNodes.push(node);' : ''}
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);${svgPaintRuntime(hasSvgPaint)}
@@ -11282,7 +11304,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11466,7 +11488,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11649,7 +11671,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;

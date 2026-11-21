@@ -129,6 +129,9 @@
  *  parent's cross axis (align-self: center) carries alignSelf: center, and the writer draws it in a box that draws nothing,
  *  stretches across the parent and centers it, its margins as the box's padding (Figma has no per-child cross-axis
  *  alignment). Off, nothing is carried and the child takes its parent's alignment. */
+/** svg-box-snapped-as-painted (React to Figma writer, at run time): Chromium paints an svg at its box snapped to the
+ *  whole pixel, rounded half up; once a component is laid out, each svg's drawing moves onto that pixel, relative to its
+ *  variant, from where Figma's own layout put it. Moves under 0.05 px, and rotated svgs, are left alone. Off, nothing moves. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -208,6 +211,7 @@ export const CONVENTIONS = [
   'stage-from-story-container',
   'stretched-line-paints-bar',
   'styles-when-display-last-wins',
+  'svg-box-snapped-as-painted',
   'svg-own-fill-on-host',
   'svg-rotation-carried',
   'svg-viewbox-carried',
