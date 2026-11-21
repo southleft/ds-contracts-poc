@@ -5368,6 +5368,10 @@ function partToSpec(
     }
     if (Object.keys(defaults).length) subst = {...defaults, ...subst};
   }
+  // Convention align-self-center-in-stretched-box: align-self is the parent's to place, so the part is drawn as it would
+  // be without it, and marked for the centering box (boxCrossCenter).
+  const centerSelf = resolveLayout(part, subst)?.alignSelf === 'center' && input.conventions?.has('align-self-center-in-stretched-box') === true;
+  if (centerSelf) part = withoutCenterSelf(part);
   if(part.mask?.outline) {
     if(part.shape && part.shape.kind!==part.mask.outline)throw Error(`native-mask-outline-conflict:${name}`);
     if(!part.shape) {
@@ -5409,7 +5413,7 @@ function partToSpec(
   recordNativePartOrigin(spec, part, subst);
   spec.growBasis = resolveLayout(part, subst)?.growBasis;
   if (resolveLayout(part, subst)?.alignSelf === 'stretch') spec.crossStretch = true;
-  if (resolveLayout(part, subst)?.alignSelf === 'center' && input.conventions?.has('align-self-center-in-stretched-box')) spec.crossCenter = true;
+  if (centerSelf) spec.crossCenter = true;
   if(intrinsicAbsoluteRight(part,subst)!==undefined){
     if(spec.type!=='frame'||spec.children?.length!==1||spec.children[0].type!=='text')throw Error('intrinsic-placement-native-children-unqualified:'+name);
     spec.intrinsicAbsolute=true;
@@ -6401,6 +6405,17 @@ function applyFilledPathParent(spec: NodeSpec): void {
  *  centers on its flex parent's cross axis is drawn in a box that draws nothing, stretches across the parent (the cross
  *  stretch below sizes it) and centers it, its margins as the box's padding. The box needs the parent's own cross size;
  *  without it the child keeps its parent's alignment and the miss is named. */
+/** The part without its alignSelf: center, on its layout and its per-value overrides (emptied ones dropped). */
+function withoutCenterSelf(part: Part): Part {
+  const out = { ...part } as Part;
+  if (out.layout?.alignSelf === 'center') { const { alignSelf: _, ...rest } = out.layout; if (Object.keys(rest).length) out.layout = rest as Part['layout']; else delete out.layout; }
+  if (out.layoutByProp) {
+    const map = Object.fromEntries(Object.entries(out.layoutByProp.map).flatMap(([v, o]) => { if (o.alignSelf !== 'center') return [[v, o]]; const { alignSelf: _, ...rest } = o; return Object.keys(rest).length ? [[v, rest]] : []; }));
+    if (Object.keys(map).length) out.layoutByProp = { ...out.layoutByProp, map } as Part['layoutByProp']; else delete out.layoutByProp;
+  }
+  return out;
+}
+
 function boxCrossCenter(s: NodeSpec): void {
   for (const c of s.children ?? []) boxCrossCenter(c);
   const mode = s.layout?.mode, sized = mode === 'HORIZONTAL' ? s.fixedHeight !== undefined || s.lits?.height !== undefined || (s.lits?.minHeight ?? s.resolvedMinHeight ?? 0) > 0

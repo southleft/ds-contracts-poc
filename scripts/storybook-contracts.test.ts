@@ -346,12 +346,14 @@ test('align-self-center-in-stretched-box: a centered flex child carries alignSel
     const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
     const script = engine.buildComponentScript(row, new Map([[row.id, row]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
-    return root.findOne((n: any) => n.name === 'icon (center box)') as any;
+    return [root.findOne((n: any) => n.name === 'icon (center box)') as any, root.findOne((n: any) => n.name === 'icon') as any];
   };
-  const box = await write(['align-self-center-in-stretched-box']);
-  assert.deepEqual([box.layoutMode, box.primaryAxisAlignItems, box.paddingTop, box.layoutSizingVertical, box.fills.length, box.clipsContent, box.children[0].name, box.children[0].height],
-    ['VERTICAL', 'CENTER', 1, 'FILL', 0, false, 'icon', 16]);
-  assert.equal(await write([]), null);
+  const [box, icon] = await write(['align-self-center-in-stretched-box']), [none, plain] = await write([]);
+  assert.deepEqual([box.layoutMode, box.primaryAxisAlignItems, box.paddingTop, box.layoutSizingVertical, box.fills.length, box.clipsContent, icon.parent === box],
+    ['VERTICAL', 'CENTER', 1, 'FILL', 0, false, true]);
+  // The icon itself is drawn as with the convention off: its own layout and size are not the parent's alignment.
+  assert.deepEqual([none, [icon.layoutMode, icon.primaryAxisAlignItems, icon.counterAxisAlignItems, icon.width, icon.height]],
+    [null, [plain.layoutMode, plain.primaryAxisAlignItems, plain.counterAxisAlignItems, plain.width, plain.height]]);
 });
 
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
