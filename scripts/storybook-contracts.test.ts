@@ -405,6 +405,29 @@ test('svg-box-snapped-as-painted: once laid out, an svg off the whole pixel has 
   assert.deepEqual(await moved([]), [[0, 0], [0, 0]]);
 });
 
+test('set-cell-pads-variant-overhang: each edge and gap of the variant grid holds what the variants draw outside themselves', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // A 24 px button whose open tip (117 x 22) sits 47 px to its left, as IconButton's tooltip does at xs.
+  const contract = ContractSchema.parse({ id: 'test.tip', name: 'Tip', version: '0.1.0', status: 'draft', description: 'A tip past its box', states: [], semantics: { element: 'div' },
+    props: [{ name: 'kind', type: { enum: ['a', 'b'] }, default: 'a', bindings: { code: { prop: 'kind' }, figma: { kind: 'VARIANT', property: 'kind', values: { a: 'a', b: 'b' } } } }],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, declared: { position: 'relative' }, literals: { width: '24px', height: '24px' },
+      parts: { tip: { declared: { position: 'absolute' }, literals: { left: '-47px', top: '32px', width: '117px', height: '22px', 'background-color': '#161616' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/Tip', export: 'Tip' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const grid = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const set = root.findOne((n: any) => n.type === 'COMPONENT_SET') as any;
+    return { cells: set.children.map((c: any) => [c.x, c.y]), size: [set.width, set.height] };
+  };
+  const off = await grid([]), on = await grid(['set-cell-pads-variant-overhang']);
+  assert.deepEqual(off, { cells: [[40, 40], [40, 104]], size: [104, 168] });   // one column, a row per value
+  // The column's left edge holds the tip's 47 px and its right edge the tip's 117 - 47 - 24 = 46; the rows keep 40, as the
+  // tip reaches only 32 + 22 - 24 = 30 px below its variant.
+  assert.deepEqual(on, { cells: [[47, 40], [47, 104]], size: [117, 168] });
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
