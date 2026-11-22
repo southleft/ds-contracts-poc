@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, MEASURE_LINE_BOXES, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -762,4 +762,29 @@ test('inset-ring-absent-border-zero: an inset ring on a part with no border fact
   // On, the ring with no border fact becomes a 1 px inside stroke; the part that carries a border color keeps its shadow.
   assert.deepEqual(drawn(['inset-ring-absent-border-zero']), [[true, 1, 0], [false, undefined, 1]]);
   assert.deepEqual(drawn([]), [[false, undefined, 1], [false, undefined, 1]]);
+});
+
+test('relative-offset-drawn: a part positioned relative keeps its flow box and draws shifted by its offset; siblings stay', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // The Fluid skeletons: a 200 x 8 label, position relative at left 16 top 36, above a 10 px dot; a second part offset only
+  // by right/bottom (left and top not carried) draws at (-right, -bottom).
+  const bar = (o: Record<string, string>) => ({ declared: { position: 'relative' }, literals: { width: '200px', height: '8px', 'background-color': '#c6c6c6', ...o } });
+  const contract = ContractSchema.parse({ id: 'test.relative', name: 'Relative', version: '0.1.0', status: 'draft', description: 'Relative offsets', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'column' }, literals: { width: '400px', height: '64px' },
+      parts: { label: bar({ left: '16px', top: '36px' }), dot: { literals: { width: '10px', height: '10px', 'background-color': '#000000' } }, tail: bar({ right: '10px', bottom: '5px' }) } } },
+    bindings: { code: { anchors: { importPath: 'test/Relative', export: 'Relative' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const at = (name: string) => root.findOne((x: any) => x.name === name) as any;
+    return ['label', 'tail'].map((n) => [at(n).parent.name, at(n).x, at(n).y, at(n).parent.width, at(n).parent.height]).concat([[at('dot').parent.type, at('dot').width, at('dot').height]]);
+  };
+  // On: each bar sits in a box of its own flow size, drawn at its offset inside it; the dot keeps its place in the column.
+  assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 16, 36, 200, 8], ['tail (margin box)', -10, -5, 200, 8], ['COMPONENT', 10, 10]]);
+  assert.deepEqual((await run([])).map((r) => r.slice(0, 3)), [['Relative', 0, 0], ['Relative', 0, 0], ['COMPONENT', 10, 10]]);
+  // The line-box probe reads such a part at its flow box only with the convention; off, its text is unchanged.
+  assert.equal(MEASURE_LINE_BOXES(undefined), MEASURE_LINE_BOXES(undefined, false));
+  assert.match(MEASURE_LINE_BOXES(undefined, true), /cs\.position !== 'relative'/);
 });

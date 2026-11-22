@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **68** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **69** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -617,7 +617,7 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 
 **Why.** The premise — "text width is font-metric-dependent" — is true of INTRINSIC width and false of AUTHORED width, and the predicate never asks which. It is a proxy where a measurement is available: hugEvidence in this same file already asks exactly the right question of max-width, and could ask it here. It also over-reaches to height and all four insets. Receipted, which is why it is visible at all — but a receipt does not make a proxy into a measurement.
 
-### `position` — 3 rules (2 implemented, 1 proposed, 0 wall)
+### `position` — 4 rules (3 implemented, 1 proposed, 0 wall)
 
 Strict where strictness is right (a partial inset set genuinely does not determine a stretched box) and silent where it declines. `fixed` and `sticky` are a correct, honest, registry-level wall.
 
@@ -625,6 +625,7 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 |---|---|---|---|---|---|---|
 | `emit.position-inset-overlay-four-sides` | `implemented` | `emit-figma-script.ts:4875` | position:absolute with all four insets carried and every one a px length → an inset overlay — a child with STRETCH constraints on both axes and recorded offsets | a four-sided inset quartet lowers to a stretched overlay; anything less is refused by name | **none** | `round-tripped` |
 | `emit.position-no-inset-falls-in-flow` | `proposed` | `emit-figma-script.ts:4814` | position:absolute with NO inset carried — the static-position case → nothing — the part is drawn as an ordinary in-flow child | out-of-flow is a fact even when the offsets are zero — it should lower to ABSOLUTE positioning at the static position, or be refused by name | **none** | `untested` |
+| `emit.relative-offset-drawn` | `implemented` | `emit-figma-script.ts:3780` | position: relative with a top/left (or bottom/right) offset → the part placed at its offset inside a margin box of its flow size that draws nothing, so the flow keeps the flow box | the part drawn where CSS draws it, its flow box kept for its siblings | **none** | `untested` |
 | `schema.position-fixed-sticky-unspellable` | `implemented` | `contract-schema.ts:1271` | position: fixed and position: sticky → nothing — there is no carried spelling | a named refusal | **none** | `untested` |
 
 #### `emit.position-inset-overlay-four-sides`
@@ -648,6 +649,17 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 - the out-of-flow-ness itself: the part now occupies space in the auto-layout it should have been lifted out of
 
 **Why.** A silent fall-through with a visible consequence. An absolutely-positioned element at its static position still does not participate in flow, so drawing it in flow changes the layout of its siblings, not just of itself. The comment reasoning is that the inset-overlay and parent-bound paths own this case, but neither fires when there are no insets at all.
+
+#### `emit.relative-offset-drawn`
+
+**Context.** profile convention relative-offset-drawn, per variant: a part whose position resolves to relative in that variant (declared, or by its stylesWhen) and whose carried offset is not zero; the line-box probe then reads the part at its flow box
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- the offset reads back as the part's position inside its margin box, not as a CSS offset; a FILL-sized part keeps today's lowering (no box)
+
+**Why.** Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. The line-box probe measured the box where its offset draws it, so FluidDatePickerSkeleton's label took its 16 px offset as line-box space above it.
 
 #### `schema.position-fixed-sticky-unspellable`
 

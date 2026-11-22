@@ -131,6 +131,10 @@
 /** inset-ring-absent-border-zero (React to Figma writer): a zero-blur inset box-shadow ring is drawn as an inside stroke
  *  when every border side is zero; a part that carries no border fact at all (its 0 px widths dropped as the browser's
  *  default) counts as zero too, instead of keeping an inner shadow that Figma may not draw. Off, only explicit zeros count. */
+/** relative-offset-drawn (React to Figma contract step and writer): a part positioned relative keeps its flow box and draws
+ *  shifted by left/top (-right/-bottom where left/top are not carried), placed in its margin box with overflow visible, so
+ *  siblings do not move; the line-box probe measures such a part at its flow box, not where the offset draws it. Off, the
+ *  offset is not drawn. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -237,6 +241,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'overlay-size-not-control-default',
   'rect-placement-by-variant',
+  'relative-offset-drawn',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',

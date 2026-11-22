@@ -269,6 +269,9 @@ export interface NodeSpec {
   crossCenter?: boolean;
   /** Convention svg-box-snapped-as-painted: this svg's drawing is snapped to the whole pixel at run time (snapPaintedSvgs). */
   paintSnap?: boolean;
+  /** Convention relative-offset-drawn: this part is position: relative; its drawing is shifted by (x, y) from the flow box
+   *  it keeps, placed in its margin box (applyMarginBox). */
+  relativeOffset?: { x: number; y: number };
   /** Convention shrunk-text-wraps-at-drawn-width: once laid out, this TEXT takes `px` and grows to its lines (wrapTexts),
    *  where the browser drew `lines`. */
   wrapWidth?: { px: number; lines: number };
@@ -3771,6 +3774,21 @@ function applyStyling(
   const line = input.conventions?.has('inline-block-line-box-as-drawn') && part.lineBox ? resolveLineBox(part.lineBox, subst) : undefined;
   if (line && (line.top || line.bottom) && Object.values(spec.margins ?? {}).every((v) => (v ?? 0) >= 0))
     spec.margins = { ...spec.margins, top: (spec.margins?.top ?? 0) + line.top, bottom: (spec.margins?.bottom ?? 0) + line.bottom };
+  // Convention relative-offset-drawn: a part positioned relative in this variant keeps its flow box and draws shifted by
+  // left/top (-right/-bottom where left/top are not carried), as CSS draws it; siblings do not move.
+  // @lower emit.relative-offset-drawn
+  if (input.conventions?.has('relative-offset-drawn') && !isAbsoluteThisCombo(part, subst)) {
+    let position = part.declared?.['position'];
+    for (const rule of part.stylesWhen ?? [])
+      if (rule.equals !== undefined && subst[rule.prop] === rule.equals && rule.styles['position'] !== undefined) position = rule.styles['position'];
+    const lits = resolveLiterals(part, subst), at = (k: string): number | undefined => {
+      let v: unknown = lits[k];
+      if (tokens[k] !== undefined) { let p = tokens[k].slice(1, -1); for (const [n, val] of Object.entries(subst)) p = p.replaceAll(`{${n}}`, val); v = resolveLiteral(p); }
+      const n = typeof v === 'number' ? v : v === undefined ? undefined : parseLitPx(String(v)); return n !== undefined && Number.isFinite(n) ? n : undefined;
+    };
+    const x = at('left') ?? -(at('right') ?? 0), y = at('top') ?? -(at('bottom') ?? 0);
+    if (position === 'relative' && (Math.abs(x) >= 0.001 || Math.abs(y) >= 0.001)) spec.relativeOffset = { x, y };
+  }
   return d;
 }
 
@@ -8120,7 +8138,7 @@ function packHuggingSpaceBetween(spec: NodeSpec): void {
 
 /** Round 5d: the CSS margin box as a wrapper frame (see
  *  NodeSpec.margins). Emitted only when a spec carries residual margins. */
-const marginBoxRuntime = (has: boolean, fills = false): string =>
+const marginBoxRuntime = (has: boolean, fills = false, relative = false): string =>
   has
     ? `
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -8132,15 +8150,17 @@ const marginBoxRuntime = (has: boolean, fills = false): string =>
 // draws that. Out-of-flow and FILL-sized children keep their own lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || ${fills ? '(!childSpec.marginBoxFills && (childSpec.grow || childSpec.widthFill))' : 'childSpec.grow || childSpec.widthFill'}) return;${fills ? `
+  if (${relative ? '(!m && !childSpec.relativeOffset)' : '!m'} || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || ${fills ? '(!childSpec.marginBoxFills && (childSpec.grow || childSpec.widthFill))' : 'childSpec.grow || childSpec.widthFill'}) return;${fills ? `
   const fill = { Horizontal: false, Vertical: false };` : ''}
   try {
     ${fills ? `fill.Horizontal = childNode.layoutSizingHorizontal === 'FILL'; fill.Vertical = childNode.layoutSizingVertical === 'FILL';
     if (!childSpec.marginBoxFills && (fill.Horizontal || fill.Vertical)) return;` : `if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;`}
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
+${relative ? `  const o = childSpec.relativeOffset, mm = m || {}, t = mm.top || 0, r = mm.right || 0, b = mm.bottom || 0, l = mm.left || 0;
+  if (!t && !r && !b && !l && !o) return;
+  const placed = t < 0 || r < 0 || b < 0 || l < 0 || !!o;` : `  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
-  const placed = t < 0 || r < 0 || b < 0 || l < 0;
+  const placed = t < 0 || r < 0 || b < 0 || l < 0;`}
   const box = figma.createFrame();
   box.name = childSpec.name + ' (margin box)';
   box.fills = [];
@@ -8149,7 +8169,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (placed) box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));
   else Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', paddingTop: t, paddingRight: r, paddingBottom: b, paddingLeft: l });
   box.appendChild(childNode);
-  if (placed) { childNode.x = l; childNode.y = t; }${fills ? `
+  if (placed) { childNode.x = l${relative ? ' + (o ? o.x : 0)' : ''}; childNode.y = t${relative ? ' + (o ? o.y : 0)' : ''}; }${fills ? `
   // Convention filled-child-keeps-margin-box: the box takes the child's FILL axes, and the child fills the box.
   if (childSpec.marginBoxFills) for (const axis of ['Horizontal', 'Vertical']) if (fill[axis]) {
     try { box['layoutSizing' + axis] = 'FILL'; childNode['layoutSizing' + axis] = 'FILL'; }
@@ -9788,7 +9808,8 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   // Round 5d: margin-box wrapper / outline-lowered OUTSIDE strokes /
   // single-paint glyph variable re-binding — all feature-gated so contracts
   // without these facts emit byte-identical scripts (the golden discipline).
-  const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
+  const hasRelativeOffset = featureDatas.some((d) => dataSome(d, (x) => x.relativeOffset !== undefined));
+  const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined)) || hasRelativeOffset;
   const hasMarginBoxFills = featureDatas.some((d) => dataSome(d, (x) => x.marginBoxFills === true));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
   // Include layout writes only for an explicit outside-layout part or a
@@ -10708,7 +10729,7 @@ function applyNativeLine(parent, node, spec) {
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry, hasIntrinsicAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins, hasMarginBoxFills)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry, hasInstanceAffine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry, hasIntrinsicAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins, hasMarginBoxFills, hasRelativeOffset)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
