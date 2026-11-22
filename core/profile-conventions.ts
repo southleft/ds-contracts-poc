@@ -144,6 +144,9 @@
 /** set-cell-pads-variant-overhang (React to Figma writer, at run time): a component set clips its variants, so each edge
  *  and gap of the variant grid holds what the variants draw outside themselves (at least the 40 px padding), measured once
  *  they are laid out. With no overhang the grid is unchanged. Off, the padding is 40 px whatever a variant draws past it. */
+/** root-text-baseline-as-drawn (React to Figma contract step and writer, with text-baseline-as-drawn): the root's own
+ *  one-line text carries its baseline too, read in a flex or grid root by wrapping the text in a span for the probes (only
+ *  where the wrap leaves its box in place), and the writer draws it on the root's label. Off, the root's text is not read. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -230,6 +233,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'overlay-size-not-control-default',
   'rect-placement-by-variant',
+  'root-text-baseline-as-drawn',
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
   'show-declared-component',
