@@ -9663,6 +9663,61 @@ function buildSyncScript(
   // Convention variant-grid-whole-pixel: each grid column and row steps by its cell's size rounded up, so a variant
   // whose own size is fractional (a measured text width) still starts on a whole pixel, as its export does.
   const cell = (e: string): string => (input.conventions?.has('variant-grid-whole-pixel') ? `Math.ceil(${e})` : e);
+  // Convention set-cell-pads-variant-overhang: a component set clips its variants, and Figma's render bounds (the check's
+  // image) stop at its edge, so each edge and gap of the variant grid holds the variants' own overhang (the boxes of what
+  // they draw outside themselves), at least PAD. With no overhang the placement is the grid above, exactly.
+  // @lower emit.placement-cells-hold-overhang
+  const overhangCells = input.conventions?.has('set-cell-pads-variant-overhang') === true;
+  const placeCellsRuntime = overhangCells ? `
+function overhangOf(node) {
+  const o = { l: 0, t: 0, r: 0, b: 0 };
+  if (node.clipsContent) return o;
+  const b = node.absoluteBoundingBox;
+  const shown = (paints) => Array.isArray(paints) && paints.some((p) => p.visible !== false && (p.opacity === undefined || p.opacity > 0));
+  // what a node draws itself: its text, its shape, or its own visible fill, stroke or effect (a box that draws nothing,
+  // such as a floating popover's viewport-sized container, reaches nowhere)
+  const draws = (n) => n.type === 'TEXT' ? n.characters !== '' : ['VECTOR', 'RECTANGLE', 'ELLIPSE', 'LINE', 'POLYGON', 'STAR', 'BOOLEAN_OPERATION'].includes(n.type) ||
+    shown(n.fills) || (shown(n.strokes) && n.strokeWeight > 0) || (Array.isArray(n.effects) && n.effects.some((e) => e.visible !== false));
+  const walk = (n) => { if (n.visible === false || n.opacity === 0) return;
+    if (n !== node && draws(n)) { const a = n.absoluteBoundingBox; if (a) { o.l = Math.max(o.l, b.x - a.x); o.t = Math.max(o.t, b.y - a.y);
+      o.r = Math.max(o.r, a.x + a.width - b.x - b.width); o.b = Math.max(o.b, a.y + a.height - b.y - b.height); } }
+    if ('children' in n && (n === node || !n.clipsContent)) for (const c of n.children) walk(c); };
+  walk(node);
+  for (const k of ['l', 't', 'r', 'b']) o[k] = Math.ceil(o[k] - 1e-6);
+  return o;
+}
+function placeCells(target, specByName, rowsN, colsN, keepExtra) {
+  const colWs = new Array(colsN).fill(0), rowHs = new Array(rowsN).fill(0);
+  const colL = new Array(colsN).fill(0), colR = new Array(colsN).fill(0), rowT = new Array(rowsN).fill(0), rowB = new Array(rowsN).fill(0);
+  for (const child of target.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    colWs[sp.col] = Math.max(colWs[sp.col], child.width);
+    rowHs[sp.row] = Math.max(rowHs[sp.row], child.height);
+    const o = overhangOf(child);
+    colL[sp.col] = Math.max(colL[sp.col], o.l); colR[sp.col] = Math.max(colR[sp.col], o.r);
+    rowT[sp.row] = Math.max(rowT[sp.row], o.t); rowB[sp.row] = Math.max(rowB[sp.row], o.b);
+  }
+  // gap before track i: PAD, or what the tracks on either side of it draw outside themselves
+  const gaps = (n, before, after) => Array.from({ length: n + 1 }, (_, i) => Math.max(PAD, (i > 0 ? after[i - 1] : 0) + (i < n ? before[i] : 0)));
+  const gx = gaps(colsN, colL, colR), gy = gaps(rowsN, rowT, rowB);
+  for (const child of target.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    let x = gx[0], y = gy[0];
+    for (let i = 0; i < sp.col; i++) x += ${cell('colWs[i]')} + gx[i + 1];
+    for (let i = 0; i < sp.row; i++) y += ${cell('rowHs[i]')} + gy[i + 1];
+    child.x = x; child.y = y;
+  }
+  let totalW = colWs.reduce((a, b) => a + ${cell('b')}, 0) + gx.reduce((a, b) => a + b, 0);
+  let totalH = rowHs.reduce((a, b) => a + ${cell('b')}, 0) + gy.reduce((a, b) => a + b, 0);
+  if (keepExtra) for (const child of target.children) {
+    totalW = Math.max(totalW, child.x + child.width + PAD);
+    totalH = Math.max(totalH, child.y + child.height + PAD);
+  }
+  target.resizeWithoutConstraints(totalW, totalH);
+}
+` : '';
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasTextBoxPack = featureDatas.some(d => dataSome(d, x => x.textBoxPack !== undefined));
   const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
@@ -9919,7 +9974,7 @@ async function replayFinalTextAppearances(registry) {
 ` : '';
   return `${opts.header}
 ${fillStackAssetSource}const COMPONENTS = ${componentSource};${opts.propertyAmends ? '\nconst INSTANCE_PROPERTY_AMENDS = '+JSON.stringify(opts.propertyAmends)+';\n'+INSTANCE_PROPERTY_AMEND_RUNTIME : ''}
-const ROW_H = 240, PAD = 40;${hasFillStack ? '\n'+NATIVE_FILL_STACK_RUNTIME : ''}${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
+const ROW_H = 240, PAD = 40;${placeCellsRuntime}${hasFillStack ? '\n'+NATIVE_FILL_STACK_RUNTIME : ''}${hasSolidFillComposition ? '\n'+SOLID_FILL_COMPOSITION_NATIVE_RUNTIME : ''}${hasBoundSolidFill ? '\n'+BOUND_SOLID_FILL_LAYER_NATIVE_RUNTIME : ''}
 
 const EXPECTED_FILE_KEY = ${JSON.stringify(fileKey)};
 if (EXPECTED_FILE_KEY && figma.fileKey !== EXPECTED_FILE_KEY) {
@@ -11312,7 +11367,8 @@ ${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await r
   const specByName = new Map(EV.map((sv) => [sv.name, sv]));
   const rowsN = Math.max(...EV.map((vv) => vv.row)) + 1;
   const colsN = Math.max(...EV.map((vv) => vv.col)) + 1;
-  const colWs = new Array(colsN).fill(0);
+${overhangCells ? `  placeCells(set, specByName, rowsN, colsN, true);
+` : `  const colWs = new Array(colsN).fill(0);
   const rowHs = new Array(rowsN).fill(0);
   for (const child of set.children) {
     const sp = specByName.get(child.name);
@@ -11342,7 +11398,7 @@ ${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await r
       totalH = Math.max(totalH, child.y + child.height + PAD);
     }
     set.resizeWithoutConstraints(totalW, totalH);
-  }
+  }`}
   set.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
@@ -11676,7 +11732,7 @@ ${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppeara
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
     const colsN = Math.max(...EV.map((v) => v.col)) + 1;
-    const colWs = new Array(colsN).fill(0);
+${overhangCells ? `    placeCells(target, specByName, rowsN, colsN, false);` : `    const colWs = new Array(colsN).fill(0);
     const rowHs = new Array(rowsN).fill(0);
     for (const child of target.children) {
       const spec = specByName.get(child.name);
@@ -11695,7 +11751,7 @@ ${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppeara
     }
     const totalW = colWs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (colsN + 1);
     const totalH = rowHs.reduce((a, b) => a + ${cell('b')}, 0) + PAD * (rowsN + 1);
-    target.resizeWithoutConstraints(totalW, totalH);
+    target.resizeWithoutConstraints(totalW, totalH);`}
   }
   target.name = displayName;
   target.description = C.description;

@@ -405,6 +405,31 @@ test('svg-box-snapped-as-painted: once laid out, an svg off the whole pixel has 
   assert.deepEqual(await moved([]), [[0, 0], [0, 0]]);
 });
 
+test('set-cell-pads-variant-overhang: each edge and gap of the variant grid holds what the variants draw outside themselves', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // A 24 px button whose open tip (117 x 22) sits 47 px to its left, as IconButton's tooltip does at xs.
+  const contract = ContractSchema.parse({ id: 'test.tip', name: 'Tip', version: '0.1.0', status: 'draft', description: 'A tip past its box', states: [], semantics: { element: 'div' },
+    props: [{ name: 'kind', type: { enum: ['a', 'b'] }, default: 'a', bindings: { code: { prop: 'kind' }, figma: { kind: 'VARIANT', property: 'kind', values: { a: 'a', b: 'b' } } } }],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, declared: { position: 'relative' }, literals: { width: '24px', height: '24px' },
+      parts: { tip: { declared: { position: 'absolute' }, literals: { left: '-47px', top: '32px', width: '117px', height: '22px', 'background-color': '#161616' } },
+        // a floating layer's viewport-sized container, which draws nothing: it reaches nowhere
+        float: { declared: { position: 'absolute' }, literals: { left: '0px', top: '0px', width: '1280px', height: '720px' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/Tip', export: 'Tip' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const grid = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const set = root.findOne((n: any) => n.type === 'COMPONENT_SET') as any;
+    return { cells: set.children.map((c: any) => [c.x, c.y]), size: [set.width, set.height] };
+  };
+  const off = await grid([]), on = await grid(['set-cell-pads-variant-overhang']);
+  assert.deepEqual(off, { cells: [[40, 40], [40, 104]], size: [104, 168] });   // one column, a row per value
+  // The column's left edge holds the tip's 47 px and its right edge the tip's 117 - 47 - 24 = 46; the rows keep 40, as the
+  // tip reaches only 32 + 22 - 24 = 30 px below its variant.
+  assert.deepEqual(on, { cells: [[47, 40], [47, 104]], size: [117, 168] });
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
@@ -623,4 +648,36 @@ test('lost-text-realigns-by-class: a variant\'s own text on a part whose base el
   const files: Record<string, string> = { 'p.json': JSON.stringify({ setup: { captureConfig: 'c.json' } }), 'c.json': JSON.stringify({ library: { classPrefix: 'x--' } }) };
   assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!), 'x--');
   assert.equal(profileClassPrefix({ profile: null }), '');
+});
+
+test('overlay-size-not-control-default and drawn-border-color-not-folded: a textless circle keeps its 18 px height and its ring color', async () => {
+  const { styledChannels, detectFolds } = await import('../extract/computed/fuse.js');
+  // RadioButton: an absolute input makes an overlay cluster; the 18 px circle draws a 1 px solid ring in its own color,
+  // as tall as the bare span control's probe text. A label holds text; an hr draws the UA inset in its own color.
+  const ink = 'rgb(22, 22, 22)', ring = (style: string, width: string) => Object.fromEntries(['top', 'right', 'bottom', 'left']
+    .flatMap((s) => [[`border-${s}-color`, ink], [`border-${s}-style`, style], [`border-${s}-width`, width]]));
+  const names = ['root', 'input', 'circle', 'label', 'hr'], text = ['', '', '', 'Label', ''];
+  const styles: Record<string, string>[] = [{ display: 'flex' }, { display: 'block', position: 'absolute', width: '1px', height: '1px' },
+    { display: 'block', width: '18px', height: '18px', color: ink, ...ring('solid', '1px') }, { display: 'block', width: '40px', height: '18px', color: ink },
+    { display: 'block', width: '18px', height: '2px', color: ink, ...ring('inset', '1px') }];
+  const flat = names.map((n, i) => ({ path: String(i), sig: '', partName: n, node: { tag: i === 4 ? 'hr' : 'span', style: styles[i]!, nodes: text[i] ? [{ t: 'text', v: text[i] }] : [] } }));
+  const a = { baseFlat: flat, partNames: names, union: { entries: names.map((_, i) => ({ id: i, children: i === 0 ? [1, 2, 3, 4].map((id) => ({ id })) : [] })) },
+    captures: [{ combo: 'a', interaction: 'default' }], getAligned: () => flat } as never;
+  const space = { enumeration: { combos: [{ key: 'a', stateFlags: {} }] }, baseComboKey: 'a' } as never;
+  const control = { display: 'block', width: '63.125px', height: '18px', color: 'rgb(0, 0, 0)', position: 'static', ...ring('none', '0px') };
+  const props = Object.keys({ ...styles[2], position: '' }), env = { viewport: { width: 1280, height: 720 }, stage: { width: 1280, height: 720 }, portaled: false };
+  const styled = (on: boolean, receipts: string[] = []) => styledChannels(a, space, { span: control, hr: control }, props, receipts,
+    { ...env, ...(on ? { overlaySizeKept: true as const } : {}) } as never, { span: control, hr: control });
+  // Off, the circle's height equals the control's and is dropped; on, the textless circle keeps it and the text label does not.
+  assert.deepEqual([styled(false).get('circle')?.has('height'), styled(false).get('circle')?.has('width')], [false, true]);
+  const receipts: string[] = [], on = styled(true, receipts);
+  assert.deepEqual([on.get('circle')?.has('height'), on.get('label')?.has('height')], [true, false]);
+  assert.match(receipts.join('\n'), /overlay-size-not-control-default: circle\.height = 18px/);
+  // Off, every side color equal to the part's own color folds; on, the solid 1 px ring keeps its four colors and the hr's
+  // inset still folds.
+  const folded = (drawn: boolean, notes: string[] = []) => detectFolds(a, on, notes, drawn).filter((f) => /^(circle|hr)$/.test(f.part)).map((f) => `${f.part}.${f.channel}`);
+  assert.deepEqual(folded(false).filter((f) => /^circle\.border-/.test(f)).length, 4);
+  const notes: string[] = [];
+  assert.deepEqual([...new Set(folded(true, notes).filter((f) => f.includes('.border-')).map((f) => f.split('.')[0]))], ['hr']);
+  assert.match(notes.join('\n'), /drawn-border-color-not-folded: circle\.border-top-color/);
 });

@@ -118,6 +118,12 @@
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
+/** overlay-size-not-control-default (React to Figma contract step): the control-equal door drops a channel equal to the
+ *  bare control's as a browser default, but a control's width and height measure its own probe text; a textless part
+ *  the overlay-cluster door admits keeps a px width or height that equals the control's (RadioButton's 18 px circle). */
+/** drawn-border-color-not-folded (React to Figma contract step): a border side color equal to the part's own color folds
+ *  into it, as CSS's currentcolor; a side that draws (solid, wider than 0 on some plane) keeps its color instead, because
+ *  a Figma stroke has no currentColor and the writer strokes only a carried color. Other styles (an hr's inset) still fold. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -135,6 +141,9 @@
 /** svg-box-snapped-as-painted (React to Figma writer, at run time): Chromium paints an svg at its box snapped to the
  *  whole pixel, rounded half up; once a component is laid out, each svg's drawing moves onto that pixel, relative to its
  *  variant, from where Figma's own layout put it. Moves under 0.05 px, and rotated svgs, are left alone. Off, nothing moves. */
+/** set-cell-pads-variant-overhang (React to Figma writer, at run time): a component set clips its variants, so each edge
+ *  and gap of the variant grid holds what the variants draw outside themselves (at least the 40 px padding), measured once
+ *  they are laid out. With no overhang the grid is unchanged. Off, the padding is 40 px whatever a variant draws past it. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -198,6 +207,7 @@ export const CONVENTIONS = [
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
+  'drawn-border-color-not-folded',
   'empty-hug-keeps-extent',
   'enum-presence-keeps-the-gate',
   'field-value-without-axes',
@@ -218,8 +228,10 @@ export const CONVENTIONS = [
   'normal-line-height-as-drawn',
   'observed-swap-default-drawn',
   'outline-takes-no-layout',
+  'overlay-size-not-control-default',
   'rect-placement-by-variant',
   'root-text-by-axis',
+  'set-cell-pads-variant-overhang',
   'show-declared-component',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
