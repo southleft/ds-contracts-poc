@@ -7510,7 +7510,12 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
       const name = spec.bindings?.[field];
       return name !== undefined && zero(resolveLiteral(name.split('/').join('.')));
     };
-    const zeroSides = ['top', 'right', 'bottom', 'left'].every(side => {
+    // Convention inset-ring-absent-border-zero: a part with no border fact at all (its 0 px widths dropped as the browser's
+    // default) has no border for the ring to compete with, so it counts as zero on every side.
+    const noBorder = input.conventions?.has('inset-ring-absent-border-zero') === true && !spec.stroke && spec.lits?.strokeColor === undefined &&
+      spec.lits?.strokeWeight === undefined && spec.lits?.strokeSides === undefined &&
+      !['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'].some(field => spec.bindings?.[field] !== undefined);
+    const zeroSides = noBorder || ['top', 'right', 'bottom', 'left'].every(side => {
       const field = `stroke${side[0].toUpperCase()}${side.slice(1)}Weight`;
       const literal = spec.lits?.strokeSides?.[side as 'top' | 'right' | 'bottom' | 'left'];
       if (literal !== undefined) return literal === 0;
