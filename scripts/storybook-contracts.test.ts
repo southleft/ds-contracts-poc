@@ -412,7 +412,9 @@ test('set-cell-pads-variant-overhang: each edge and gap of the variant grid hold
   const contract = ContractSchema.parse({ id: 'test.tip', name: 'Tip', version: '0.1.0', status: 'draft', description: 'A tip past its box', states: [], semantics: { element: 'div' },
     props: [{ name: 'kind', type: { enum: ['a', 'b'] }, default: 'a', bindings: { code: { prop: 'kind' }, figma: { kind: 'VARIANT', property: 'kind', values: { a: 'a', b: 'b' } } } }],
     anatomy: { root: { layout: { display: 'flex', direction: 'row' }, declared: { position: 'relative' }, literals: { width: '24px', height: '24px' },
-      parts: { tip: { declared: { position: 'absolute' }, literals: { left: '-47px', top: '32px', width: '117px', height: '22px', 'background-color': '#161616' } } } } },
+      parts: { tip: { declared: { position: 'absolute' }, literals: { left: '-47px', top: '32px', width: '117px', height: '22px', 'background-color': '#161616' } },
+        // a floating layer's viewport-sized container, which draws nothing: it reaches nowhere
+        float: { declared: { position: 'absolute' }, literals: { left: '0px', top: '0px', width: '1280px', height: '720px' } } } } },
     bindings: { code: { anchors: { importPath: 'test/Tip', export: 'Tip' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
   const grid = async (conventions: string[]) => {
     const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) }), { figma, root } = createFigmaMock();
