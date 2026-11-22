@@ -1,6 +1,6 @@
 import {scalarTextSizeInput} from './scalar-text-size-input.js';
 export {scalarTextSizeInput} from './scalar-text-size-input.js';
-import {LineBoxSchema,TextByCombinationSchema,TextBaselineSchema,resolveTextByCombination,type LineBox,type TextBaseline,type TextByCombination} from './text-by-combination.js';
+import {LineBoxSchema,TextByCombinationSchema,TextBaselineSchema,TextWrapSchema,resolveTextByCombination,type LineBox,type TextBaseline,type TextByCombination,type TextWrap} from './text-by-combination.js';
 export * from './text-by-combination.js';
 import {VectorStrokeTableSchema,VectorStrokeOverrideSchema} from './vector-stroke.js';
 export * from './vector-stroke.js';
@@ -2868,6 +2868,8 @@ export interface Part {
   textBaseline?: TextBaseline;
   /** Profile convention inline-block-line-box-as-drawn: the line box an atomic inline sits alone on (see LineBoxSchema). */
   lineBox?: LineBox;
+  /** Profile convention shrunk-text-wraps-at-drawn-width: where a flex row shrank the text until it wrapped (see TextWrapSchema). */
+  textWrap?: TextWrap;
   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
    *  parent track. Code computes live; the canvas renders the defaults'
    *  fraction (its honest static state). */
@@ -3364,6 +3366,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     textByCombination: TextByCombinationSchema.optional(),
     textBaseline: TextBaselineSchema.optional(),
     lineBox: LineBoxSchema.optional(),
+    textWrap: TextWrapSchema.optional(),
     meter: z
       .strictObject({ valueProp: z.string(), maxProp: z.string() })
       .optional(),
@@ -5163,6 +5166,12 @@ export function textBaselineIssues(contract:Contract,part:Part):string[]{
 export function lineBoxIssues(contract:Contract,part:Part,nested:boolean):string[]{
  if(part.lineBox===undefined)return [];
  return !nested||!LineBoxSchema.safeParse(part.lineBox).success||part.lineBox.props.some(prop=>!absentVariantAxes(contract).some(axis=>axis.prop.name===prop))?['line-box-unqualified']:[];
+}
+/** A drawn wrap belongs to a part that owns literal text (no caller content), over axes the contract declares. */
+export function textWrapIssues(contract:Contract,part:Part):string[]{
+ if(part.textWrap===undefined)return [];
+ return typeof part.text!=='string'||part.content||part.slot||part.component||part.repeat||part.icon||part.shape||!TextWrapSchema.safeParse(part.textWrap).success||
+  part.textWrap.props.some(prop=>!absentVariantAxes(contract).some(axis=>axis.prop.name===prop))?['text-wrap-unqualified']:[];
 }
 export function textByCombinationIssues(contract:Contract,part:Part,nested:boolean):string[]{
  const table=part.textByCombination;if(table===undefined)return [];

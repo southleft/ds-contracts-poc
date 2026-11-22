@@ -50,6 +50,21 @@ export const LineBoxSchema=z.strictObject({
  for(const row of table.rows){const key=JSON.stringify(row.values);if(row.values.length!==table.props.length||seen.has(key))ctx.addIssue({code:'custom',message:'line-box-tuple-unqualified'});seen.add(key);}
 });
 export type LineBox=z.infer<typeof LineBoxSchema>;
+/** Profile convention shrunk-text-wraps-at-drawn-width: in each variant tuple where a flex row shrank a part's own text
+ * until it wrapped, the width its lines broke at, in px, and how many lines the browser drew (no row: it does not wrap
+ * there). The native Figma writer reads it under the convention only; the React emitters never do. */
+export const TextWrapSchema=z.strictObject({
+ props:z.array(z.string().min(1)).max(8),
+ rows:z.array(z.strictObject({values:z.array(z.string().nullable()).max(8),width:z.number().finite().positive(),lines:z.number().int().min(2)})).min(1).max(4096),
+}).superRefine((table,ctx)=>{
+ const seen=new Set<string>();
+ for(const row of table.rows){const key=JSON.stringify(row.values);if(row.values.length!==table.props.length||seen.has(key))ctx.addIssue({code:'custom',message:'text-wrap-tuple-unqualified'});seen.add(key);}
+});
+export type TextWrap=z.infer<typeof TextWrapSchema>;
+export function resolveTextWrap(table:TextWrap,subst:Record<string,unknown>):TextWrap['rows'][number]|undefined {
+ const values=table.props.map(name=>subst[name]==null?null:String(subst[name]));
+ return table.rows.find(row=>row.values.every((value,i)=>value===values[i]));
+}
 export function resolveLineBox(table:LineBox,subst:Record<string,unknown>):LineBox['rows'][number]|undefined {
  const values=table.props.map(name=>subst[name]==null?null:String(subst[name]));
  return table.rows.find(row=>row.values.every((value,i)=>value===values[i]));
