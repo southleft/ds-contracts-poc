@@ -128,6 +128,9 @@
  *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
  *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
  *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
+/** inset-ring-absent-border-zero (React to Figma writer): a zero-blur inset box-shadow ring is drawn as an inside stroke
+ *  when every border side is zero; a part that carries no border fact at all (its 0 px widths dropped as the browser's
+ *  default) counts as zero too, instead of keeping an inner shadow that Figma may not draw. Off, only explicit zeros count. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -223,6 +226,7 @@ export const CONVENTIONS = [
   'icon-box-keeps-glyph-size',
   'imperceptible-solid-paint-blend-not-carried',
   'inline-block-line-box-as-drawn',
+  'inset-ring-absent-border-zero',
   'inside-outside-stroke-as-outline',
   'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',
