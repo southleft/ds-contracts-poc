@@ -118,6 +118,12 @@
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
+/** overlay-size-not-control-default (React to Figma contract step): the control-equal door drops a channel equal to the
+ *  bare control's as a browser default, but a control's width and height measure its own probe text; a textless part
+ *  the overlay-cluster door admits keeps a px width or height that equals the control's (RadioButton's 18 px circle). */
+/** drawn-border-color-not-folded (React to Figma contract step): a border side color equal to the part's own color folds
+ *  into it, as CSS's currentcolor; a side that draws (solid, wider than 0 on some plane) keeps its color instead, because
+ *  a Figma stroke has no currentColor and the writer strokes only a carried color. Other styles (an hr's inset) still fold. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -201,6 +207,7 @@ export const CONVENTIONS = [
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
+  'drawn-border-color-not-folded',
   'empty-hug-keeps-extent',
   'enum-presence-keeps-the-gate',
   'field-value-without-axes',
@@ -220,6 +227,7 @@ export const CONVENTIONS = [
   'normal-line-height-as-drawn',
   'observed-swap-default-drawn',
   'outline-takes-no-layout',
+  'overlay-size-not-control-default',
   'rect-placement-by-variant',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',

@@ -750,8 +750,9 @@ async function main() {
         const receipts: string[] = [], styles = (m: Record<string, { style: Record<string, string> }>) => Object.fromEntries(Object.entries(m).map(([t, n]) => [t, n.style]));
         const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false, ...(inset ? { container: PAGE.viewport.width - 2 * inset } : {}),
           ...(conventions.has('centered-text-keeps-drawn-width') ? { centeredTextWidth: true as const } : {}),
-          ...(conventions.has('table-short-row-leaves-columns-empty') ? { tableShortRows: true as const } : {}) }, styles(uaControls));
-        const folds = detectFolds(aligned, styled, receipts);
+          ...(conventions.has('table-short-row-leaves-columns-empty') ? { tableShortRows: true as const } : {}),
+          ...(conventions.has('overlay-size-not-control-default') ? { overlaySizeKept: true as const } : {}) }, styles(uaControls));
+        const folds = detectFolds(aligned, styled, receipts, conventions.has('drawn-border-color-not-folded'));
         await boundCheck(aligned, comp, space, async () => '', promotion.contract);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const svgConsumed = new Set([...promotion.consumed].map((i: number) => aligned.partNames[i]));
