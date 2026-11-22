@@ -269,6 +269,8 @@ export interface NodeSpec {
   crossCenter?: boolean;
   /** Convention svg-box-snapped-as-painted: this svg's drawing is snapped to the whole pixel at run time (snapPaintedSvgs). */
   paintSnap?: boolean;
+  /** Convention text-box-snapped-as-painted: this text's baseline box is moved onto the whole pixel at run time (snapTextBoxes). */
+  textBoxSnap?: true;
   /** Convention shrunk-text-wraps-at-drawn-width: once laid out, this TEXT takes `px` and grows to its lines (wrapTexts),
    *  where the browser drew `lines`. */
   wrapWidth?: { px: number; lines: number };
@@ -5908,6 +5910,8 @@ function partToSpecInner(
     if (!row || height === undefined || !spec.fontSize || sized || spec.textStyle) return;
     const line = +(2 * row.px - (row.ascent - row.descent) * spec.fontSize).toFixed(4);
     if (line > 0 && line !== height) spec.baselineBox = { line, height };
+    // @lower emit.text-box-snapped-as-painted
+    if (spec.baselineBox && input.conventions?.has('text-box-snapped-as-painted')) spec.textBoxSnap = true;
   };
   // Convention shrunk-text-wraps-at-drawn-width (Part.textWrap): in a variant where a flex row shrank the text until it
   // wrapped, the TEXT is given the width its lines broke at once laid out (Figma auto layout has no flex-shrink).
@@ -9584,6 +9588,25 @@ function snapPaintedSvgs() {
 }
 `;
 
+/** Convention text-box-snapped-as-painted: Figma draws a text whose box sits off the whole pixel half a row off its carried
+ *  baseline; a box on the whole pixel lands it. Once laid out, a baseline box centered in a horizontal row moves onto the
+ *  whole pixel (round half up, relative to its variant): its height changes by -2d so its top moves by d, and its glyph line
+ *  by -2d so the baseline stays put. A move under 0.05 px is left alone, and the move is undone if the row's size changes. */
+const TEXT_BOX_SNAP_RUNTIME = `const textSnapNodes = [];
+function snapTextBoxes() {
+  for (const [node, box] of textSnapNodes.splice(0)) {
+    const row = node.parent;
+    if (node.removed || !row || row.layoutMode !== 'HORIZONTAL' || row.counterAxisAlignItems !== 'CENTER' || node.layoutPositioning === 'ABSOLUTE') continue;
+    let variant = row; while (variant && variant.type !== 'COMPONENT') variant = variant.parent;
+    if (!variant) continue;
+    const y = node.absoluteBoundingBox.y - variant.absoluteBoundingBox.y, d = Math.floor(y + 0.5) - y, w = row.width, h = row.height;
+    if (Math.abs(d) < 0.05) continue;
+    node.lineHeight = { unit: 'PIXELS', value: box.line - 2 * d }; node.resize(node.width, box.height - 2 * d);
+    if (row.width !== w || row.height !== h) { node.lineHeight = { unit: 'PIXELS', value: box.line }; node.resize(node.width, box.height); }
+  }
+}
+`;
+
 /** Convention shrunk-text-wraps-at-drawn-width: once its final font is set, a wrapping TEXT takes the width the browser's
  *  lines broke at and grows to its lines; a line count other than the browser's is named, not drawn in silence. */
 const WRAP_TEXT_RUNTIME = `const wrapNodes = [];
@@ -9817,6 +9840,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
   const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
   const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
+  const hasTextBoxSnap = featureDatas.some((d) => dataSome(d, (s) => s.textBoxSnap === true));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
     const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
       const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
@@ -10721,7 +10745,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? TEXT_BOX_SNAP_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10749,7 +10773,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasTextBoxSnap ? '\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox]);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
@@ -11386,7 +11410,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11571,7 +11595,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11754,7 +11778,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;

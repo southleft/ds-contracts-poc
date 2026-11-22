@@ -744,3 +744,33 @@ test('shrunk-text-wraps-at-drawn-width: a text its flex row shrank until it wrap
   assert.deepEqual(await drawn(['shrunk-text-wraps-at-drawn-width'], 120), [[[178.547, 48], [178.547, 48]], ['FC-RT-TEXT-WRAP-LINES', 'FC-RT-TEXT-WRAP-LINES']]);
   assert.deepEqual((await drawn([], 178.547))[0], []);
 });
+
+test('text-box-snapped-as-painted: a centered baseline box off the whole pixel moves onto it, baseline kept; a hugging row is left alone', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // MultiSelect inline: an 18 px box (glyph line 18.5) centered in a 41 px row sits at y 11.5. A second, hugging row holds a
+  // text as its tallest child, centered in the same 41 px, so the row sits at 11.5 and its height follows the text.
+  const text = (t: string) => ({ text: t, literals: { 'font-size': '14px', 'line-height': '18px' }, textBaseline: { props: [], rows: [{ values: [], px: 14.5, ascent: 1.025, descent: 0.275 }] } });
+  const dot = { literals: { width: '10px', height: '10px', 'background-color': '#000000' } };
+  const contract = ContractSchema.parse({ id: 'test.snapbox', name: 'SnapBox', version: '0.1.0', status: 'draft', description: 'Centered texts', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row', align: 'center' }, literals: { width: '300px', height: '41px' },
+      parts: { label: text('This is a label'), dot, hug: { layout: { display: 'flex', direction: 'row', align: 'center' }, parts: { tall: text('Tall'), dot2: dot } } } } },
+    bindings: { code: { anchors: { importPath: 'test/SnapBox', export: 'SnapBox' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), f = figma as any;
+    // The mock places no auto-layout child; give a child of a row that centers it Figma's centering, and nothing else.
+    const centered = (make: () => any) => () => { const n = make(); Object.defineProperty(n, 'y', { configurable: true, set() {}, get() {
+      const p = n.parent; return p?.layoutMode === 'HORIZONTAL' && p.counterAxisAlignItems === 'CENTER' ? (p.height - n.height) / 2 : 0; } }); return n; };
+    f.createText = centered(f.createText.bind(f)); f.createFrame = centered(f.createFrame.bind(f));
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const at = (name: string) => root.findOne((x: any) => x.name === name) as any;
+    return { label: [at('label').y, at('label').height, at('label').lineHeight.value], dot: [at('dot').y, at('dot').height], tall: [at('tall').height, at('tall').lineHeight.value], hug: at('hug').height };
+  };
+  // On: the label's box moves 0.5 px down onto y 12 (height and glyph line 1 px less, so its baseline stays at 26); the dot
+  // beside it does not move. The hugging row would shrink with its text, so that text is put back as it was.
+  const on = await run(['text-baseline-as-drawn', 'text-box-snapped-as-painted']), off = await run(['text-baseline-as-drawn']);
+  assert.deepEqual(on, { label: [12, 17, 17.5], dot: [15.5, 10], tall: [18, 18.5], hug: 18 });
+  assert.deepEqual(off, { label: [11.5, 18, 18.5], dot: [15.5, 10], tall: [18, 18.5], hug: 18 });
+});

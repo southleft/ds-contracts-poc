@@ -128,6 +128,10 @@
  *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
  *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
  *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
+/** text-box-snapped-as-painted (React to Figma writer, at run time, with text-baseline-as-drawn): Figma draws a text whose
+ *  box sits off the whole pixel half a row off its carried baseline. Once laid out, a baseline box centered in a horizontal
+ *  row moves onto the whole pixel (round half up), its height and glyph line both changed by -2d so its top moves by d and
+ *  its baseline stays put; under 0.05 px is left alone, and the move is undone if the row's size changes. Off, nothing moves. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -256,6 +260,7 @@ export const CONVENTIONS = [
   'text-baseline-as-drawn',
   'text-baseline-as-painted',
   'text-baseline-rounds-like-figma',
+  'text-box-snapped-as-painted',
   'text-box-stacks-block-children',
   'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',
