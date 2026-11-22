@@ -611,3 +611,21 @@ test('exclusive slot placements preserve local defaults while sharing one caller
  const unknownMetadata=structuredClone(c);(unknownMetadata.anatomy.root.parts!.sample.slot as any).description='Different input';
  assert.equal(ContractSchema.safeParse(unknownMetadata).success,false,'undeclared slot metadata remains a strict schema refusal');
 });
+
+test('an enum-absent part with a bound Boolean keeps its drawn-plane layout table valid under enum-presence-keeps-the-gate',()=>{
+ const flow=(primary:'MIN'|'CENTER')=>({mode:'HORIZONTAL' as const,primary,counter:'MIN' as const,spacing:0,padding:[0,0,0,0] as [number,number,number,number],primarySizing:'FIXED' as const,counterSizing:'FIXED' as const});
+ const dot=(name:string)=>({name,type:'FRAME' as const,bbox:{width:4,height:4},fill:{hex:'ff0000'}});
+ const set:DumpSet={setName:'Gate specimen',type:'COMPONENT_SET',propertyDefinitions:{
+  State:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B','C']},Size:{type:'VARIANT',defaultValue:'Small',variantOptions:['Small','Large']},Shown:{type:'BOOLEAN',defaultValue:true}},
+ variants:['A','B','C'].flatMap(state=>['Small','Large'].map(size=>({name:`State=${state}, Size=${size}`,type:'COMPONENT' as const,variantProperties:{State:state,Size:size},bbox:{width:30,height:10},layout:{...flow('MIN'),primarySizing:'AUTO' as const},
+  children:state==='C'?[]:[{name:'Body',type:'FRAME' as const,propRefs:{visible:'Shown'},bbox:{width:20,height:10},fill:{hex:'00ff00'},layout:flow((state==='A')===(size==='Small')?'MIN':'CENTER'),children:[dot('Dot'),dot('Pip')]},
+   {name:'Tag',type:'FRAME' as const,propRefs:{visible:'Shown'},bbox:{width:8,height:10},fill:{hex:'0000ff'},layout:flow('MIN'),children:[dot('Mark'),dot('Tick')]}]})))};
+ const run=(conventions:string[])=>{const r=proposeFromDump(set,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true,fileKey:'fixture',conventions} as any);
+  const c=ContractSchema.parse(r.contract),errors:string[]=[];validateContract(c,new Map([[c.id,c]]),errors,new Map());return {r,c,errors,body:walkAnatomy(c).find(w=>w.part.layoutByCombination)!.part,tag:walkAnatomy(c).find(w=>w.name==='Tag')!.part};};
+ const off=run([]);assert.equal(off.body.layoutByCombination!.rows.length,4,'the table covers the drawn planes only');
+ assert.deepEqual(off.body.visibleWhen,{prop:'shown'});assert(off.errors.some(e=>e.includes('layoutByCombination requires complete finite coverage')),'off: the coverage refusal stands');
+ // Profile convention enum-presence-keeps-the-gate: the enum presence is the gate; the Boolean hides the part with display: none.
+ const on=run(['enum-presence-keeps-the-gate']);assert.deepEqual(on.errors,[]);assert.deepEqual(on.body.visibleWhen,{prop:'state',equals:['a','b']});
+ assert.deepEqual(on.body.stylesWhen,[{prop:'shown',equals:'false',styles:{display:'none'}}]);assert(on.r.notes.some((n:string)=>n.includes('profile convention enum-presence-keeps-the-gate')));
+ assert.deepEqual(on.tag.visibleWhen,{prop:'shown'},'a part without a drawn-plane table keeps the Boolean gate');assert.deepEqual(on.tag.stylesWhen,[{prop:'state',equals:'c',styles:{display:'none'}}]);
+});

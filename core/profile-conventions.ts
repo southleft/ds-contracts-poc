@@ -164,6 +164,13 @@
  *  its padding. Off, named. */
 /** uncaptured-fill-variable-carried-as-paint (Figma to React proposal): a source fill that names a variable the dump
  *  carries no consumer for keeps its observed paint, and no binding is recreated. Off, the owner refuses (consumer-missing). */
+/** linked-child-keeps-its-stacking (Figma to React proposal): an instance whose key-linked child agrees with it on layout
+ *  direction but not on canvas stacking draws with the child's own stacking, and the instance's override is named as not
+ *  carried. Off, the owner refuses (child-paint-order-owner-unqualified). */
+/** enum-presence-keeps-the-gate (Figma to React proposal): a part absent from some planes of an enum axis, whose visibility
+ *  is also bound to a BOOLEAN and whose layout table covers only its drawn planes, keeps the enum presence as its gate, and
+ *  the BOOLEAN hides it with display: none. Off, the absent planes are display: none styles and the BOOLEAN is the gate, so
+ *  that table fails the contract's coverage rule. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -196,6 +203,7 @@ export const CONVENTIONS = [
   'closed-select-draws-selected-label',
   'drawn-border-color-not-folded',
   'empty-hug-keeps-extent',
+  'enum-presence-keeps-the-gate',
   'field-value-without-axes',
   'filled-child-keeps-margin-box',
   'fixed-swap-drawing-carried',
@@ -206,6 +214,7 @@ export const CONVENTIONS = [
   'imperceptible-solid-paint-blend-not-carried',
   'inline-block-line-box-as-drawn',
   'inside-outside-stroke-as-outline',
+  'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',
   'mixed-scale-rect-keeps-placement',
   'negative-sibling-margin-as-gap',
