@@ -165,6 +165,9 @@
  *  is also bound to a BOOLEAN and whose layout table covers only its drawn planes, keeps the enum presence as its gate, and
  *  the BOOLEAN hides it with display: none. Off, the absent planes are display: none styles and the BOOLEAN is the gate, so
  *  that table fails the contract's coverage rule. */
+/** gated-layout-drops-undrawn-rows (Figma to React proposal): a part whose gate (visibleWhen or presenceByCombination)
+ *  never draws it on some planes, but whose layout table also holds rows for those planes, keeps only the rows its gate
+ *  draws. Off, the table keeps every row and fails the contract's coverage rule for a gated part. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -201,6 +204,7 @@ export const CONVENTIONS = [
   'filled-child-keeps-margin-box',
   'fixed-swap-drawing-carried',
   'font-weight-initial-normal',
+  'gated-layout-drops-undrawn-rows',
   'generated-text-carried',
   'hugging-space-between-packs',
   'icon-box-keeps-glyph-size',
