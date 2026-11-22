@@ -135,6 +135,9 @@
 /** svg-box-snapped-as-painted (React to Figma writer, at run time): Chromium paints an svg at its box snapped to the
  *  whole pixel, rounded half up; once a component is laid out, each svg's drawing moves onto that pixel, relative to its
  *  variant, from where Figma's own layout put it. Moves under 0.05 px, and rotated svgs, are left alone. Off, nothing moves. */
+/** set-cell-pads-variant-overhang (React to Figma writer, at run time): a component set clips its variants, so each edge
+ *  and gap of the variant grid holds what the variants draw outside themselves (at least the 40 px padding), measured once
+ *  they are laid out. With no overhang the grid is unchanged. Off, the padding is 40 px whatever a variant draws past it. */
 /** root-text-baseline-as-drawn (React to Figma contract step and writer, with text-baseline-as-drawn): the root's own
  *  one-line text carries its baseline too, read in a flex or grid root by wrapping the text in a span for the probes (only
  *  where the wrap leaves its box in place), and the writer draws it on the root's label. Off, the root's text is not read. */
@@ -220,6 +223,7 @@ export const CONVENTIONS = [
   'rect-placement-by-variant',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
+  'set-cell-pads-variant-overhang',
   'show-declared-component',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
