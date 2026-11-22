@@ -496,6 +496,7 @@ function anatomyPage(): { route: string; html: string } {
           textByCombination: 'Complete source-present variant tuples select literal text — see <a href="#text-by-combination">text by combination</a>.',
           textBaseline: 'Where the browser drew a one-line literal\u2019s baseline, per variant tuple — see <a href="#text-baseline">text baseline</a>.',
           lineBox: 'The line box an atomic inline sits alone on, per variant tuple — see <a href="#line-box">line box</a>.',
+          textWrap: 'Where a flex row shrank the text until it wrapped, per variant tuple — see <a href="#text-wrap">text wrap</a>.',
           textOutOfBox:
             'MEASURED evidence that the indent evicts the label from its box — see <a href="#text-out-of-box">text out of box</a>.',
           instanceRootInputs:
@@ -616,6 +617,13 @@ function anatomyPage(): { route: string; html: string } {
       ["generated"],
       `<p><code>lineBox: { props, rows }</code> is MEASURED evidence, written by the Storybook contract step only under the profile convention <code>inline-block-line-box-as-drawn</code>: how far the line box that an atomic inline (<code>inline-block</code> and its kin) sits alone on reaches above its margin box (<code>top</code>) and below it (<code>bottom</code>), in px. The parent line's strut and baseline alignment put it there; a variant whose box is not on such a line reads 0, 0. Rows are keyed by variant tuples as in <a href="#text-by-combination">text by combination</a>. The native Figma writer reads it under the same convention and adds that space to the part's margin box, a wrapper that draws nothing; the React emitters never read it.</p>` +
         refusals("Refusals:", ["the root part (<code>validateContract</code>)", "axes the contract does not declare"]),
+    ),
+    section(
+      "text-wrap",
+      "Text wrap",
+      ["generated"],
+      `<p><code>textWrap: { props, rows }</code> is MEASURED evidence, written by the Storybook contract step only under the profile convention <code>shrunk-text-wraps-at-drawn-width</code>: in each variant tuple where a flex row shrank a part's own text until it wrapped, the <code>width</code> its lines broke at, in px, and the <code>lines</code> the browser drew. A tuple with no row does not wrap. The native Figma writer reads it under the same convention: the text takes that width and grows to its lines, and a different line count is named at run time. The React emitters never read it; CSS wraps on its own.</p>` +
+        refusals("Refusals:", ["no literal text, or caller content", "axes the contract does not declare", "a width the deciding axes do not decide (named by the contract step)"]),
     ),
     section(
       "text-baseline",

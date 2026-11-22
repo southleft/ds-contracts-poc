@@ -118,6 +118,10 @@
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
+/** shrunk-text-wraps-at-drawn-width (React to Figma contract step and writer): a part's own text that a flex row shrank
+ *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
+ *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
+ *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -208,6 +212,7 @@ export const CONVENTIONS = [
   'rect-placement-by-variant',
   'root-text-by-axis',
   'show-declared-component',
+  'shrunk-text-wraps-at-drawn-width',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
   'sized-text-box-packs-by-text-align',
