@@ -124,6 +124,10 @@
 /** drawn-border-color-not-folded (React to Figma contract step): a border side color equal to the part's own color folds
  *  into it, as CSS's currentcolor; a side that draws (solid, wider than 0 on some plane) keeps its color instead, because
  *  a Figma stroke has no currentColor and the writer strokes only a carried color. Other styles (an hr's inset) still fold. */
+/** shrunk-text-wraps-at-drawn-width (React to Figma contract step and writer): a part's own text that a flex row shrank
+ *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
+ *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
+ *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -233,6 +237,7 @@ export const CONVENTIONS = [
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
   'show-declared-component',
+  'shrunk-text-wraps-at-drawn-width',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
   'sized-text-box-packs-by-text-align',

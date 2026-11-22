@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -704,4 +704,43 @@ test('overlay-size-not-control-default and drawn-border-color-not-folded: a text
   const notes: string[] = [];
   assert.deepEqual([...new Set(folded(true, notes).filter((f) => f.includes('.border-')).map((f) => f.split('.')[0]))], ['hr']);
   assert.match(notes.join('\n'), /drawn-border-color-not-folded: circle\.border-top-color/);
+});
+
+test('shrunk-text-wraps-at-drawn-width: a text its flex row shrank until it wrapped carries that width and line count; the writer wraps it there', async () => {
+  // Select inline: the helper is an item of a flex row that leaves it 178.547 px; it wraps to 2 lines. Not inline, a block.
+  const st = (o: Record<string, string> = {}) => ({ width: '180.547px', 'box-sizing': 'border-box', 'padding-left': '2px', 'padding-right': '0px', 'border-left-width': '0px',
+    'border-right-width': '0px', ...o }), row = { display: 'flex', 'flex-direction': 'row' };
+  assert.deepEqual(shrunkTextWrap(st(), row, 2), { width: 178.547, lines: 2 });
+  assert.deepEqual([shrunkTextWrap(st(), row, 0), shrunkTextWrap(st(), { display: 'flex', 'flex-direction': 'column' }, 2), shrunkTextWrap(st({ 'flex-grow': '1' }), row, 2),
+    shrunkTextWrap(st({ position: 'absolute' }), row, 2)], [null, null, null, null]);
+  assert.match(MEASURE_TEXT_LINES(undefined), /getClientRects/);
+  const [c] = declare({ storybook: 'x', components: [component('a/Select', { axes: ['inline', 'size'], references: ['false', 'true'].flatMap((inline) => ['sm', 'lg'].map((size) =>
+    ref('s--a', { inline, size }, { inline, size }))) })] }).components;
+  const { contract, combos } = seed(c!), inline = (key: string) => combos.find((k) => k.key === key)!.axisValues.inline === 'true';
+  contract.anatomy.root.layout = { display: 'flex', direction: 'row' } as never;
+  contract.anatomy.root.parts = { helper: { text: 'Select the region where your resources will be hosted.', literals: { 'font-size': '12px', 'line-height': '16px' } },
+    other: { text: 'x' } } as never;
+  // Rows only where it wraps, over the axis that tells wrapping from not; a reading the axes do not decide is named.
+  assert.deepEqual(carryTextWrap(contract, c!.axes, combos, (key, part) => part === 'helper' && inline(key) ? { width: 178.547, lines: 2 } : null), [['helper'], []]);
+  const parts = contract.anatomy.root.parts as Record<string, { textWrap?: unknown }>;
+  assert.deepEqual([parts.helper!.textWrap, parts.other!.textWrap], [{ props: ['inline'], rows: [{ values: ['true'], width: 178.547, lines: 2 }] }, undefined]);
+  const twice = [...combos, { ...combos.at(-1)!, key: 'again' }], [, named] = carryTextWrap(structuredClone(contract), c!.axes, twice, (key, part) =>
+    part === 'helper' && twice.find((k) => k.key === key)!.axisValues.inline === 'true' ? { width: key === 'again' ? 170 : 178.547, lines: 2 } : null);
+  assert.match(named.join('\n'), /^text-wrap-undecided: helper — it wraps at 178\.547 px in \{"inline":"true","size":"lg"\}/);
+  // The writer gives the TEXT that width once laid out and lets it grow; a line count other than the browser's is named.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm'), parsed = ContractSchema.parse(contract);
+  const drawn = async (conventions: string[], lineAt: number) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), f = figma as any, text = f.createText;   // the mock has no font metrics: a line breaks every lineAt px
+    f.createText = () => { const n = text(); const resize = n.resize.bind(n); n.resize = (w: number, h: number) => resize(w, w < 300 ? 16 * Math.ceil(308 / lineAt) : h); return n; };
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    await vm.runInContext(`(async()=>{${engine.buildTokensScript(null)}\n})()`, context);
+    const out = await vm.runInContext(`(async()=>{${engine.buildComponentScript(parsed, new Map([[parsed.id, parsed]]))}\n})()`, context) as { results: Array<{ degradations?: Array<{ code: string }> }> };
+    const helpers = root.findAll((x: any) => x.name === 'helper') as any[];
+    return [helpers.filter((n) => n.textAutoResize === 'HEIGHT').map((n) => [n.width, n.height]), Array.from(out.results.flatMap((r) => r.degradations ?? []), (d) => d.code)];
+  };
+  assert.deepEqual(await drawn(['shrunk-text-wraps-at-drawn-width'], 178.547), [[[178.547, 32], [178.547, 32]], []]);
+  assert.deepEqual(await drawn(['shrunk-text-wraps-at-drawn-width'], 120), [[[178.547, 48], [178.547, 48]], ['FC-RT-TEXT-WRAP-LINES', 'FC-RT-TEXT-WRAP-LINES']]);
+  assert.deepEqual((await drawn([], 178.547))[0], []);
 });

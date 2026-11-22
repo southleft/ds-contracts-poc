@@ -3,7 +3,7 @@ import {resolveFillStack} from '../packages/schema/src/fill-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
 import {nativeTextSizeTarget,mapNativeTextSizes,NATIVE_SCALAR_TEXT_SIZE_FUNCTION,type NativeTextSize} from './native-scalar-text-size.js';
-import {resolveLineBox,resolveTextBaseline,resolveTextByCombination} from '../scripts/contract-schema.js';
+import {resolveLineBox,resolveTextBaseline,resolveTextByCombination,resolveTextWrap} from '../scripts/contract-schema.js';
 import {outsideStrokeIssues} from '../scripts/contract-schema.js';
 import {refuseVectorStrokeSurface} from '../scripts/contract-schema.js';
 import {validateStructuralAvailability, resolveAvailability, assertAvailableVisibilityTarget} from '../scripts/contract-schema.js';
@@ -269,6 +269,9 @@ export interface NodeSpec {
   crossCenter?: boolean;
   /** Convention svg-box-snapped-as-painted: this svg's drawing is snapped to the whole pixel at run time (snapPaintedSvgs). */
   paintSnap?: boolean;
+  /** Convention shrunk-text-wraps-at-drawn-width: once laid out, this TEXT takes `px` and grows to its lines (wrapTexts),
+   *  where the browser drew `lines`. */
+  wrapWidth?: { px: number; lines: number };
   resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
@@ -5906,6 +5909,12 @@ function partToSpecInner(
     const line = +(2 * row.px - (row.ascent - row.descent) * spec.fontSize).toFixed(4);
     if (line > 0 && line !== height) spec.baselineBox = { line, height };
   };
+  // Convention shrunk-text-wraps-at-drawn-width (Part.textWrap): in a variant where a flex row shrank the text until it
+  // wrapped, the TEXT is given the width its lines broke at once laid out (Figma auto layout has no flex-shrink).
+  const drawnWrap = (spec: NodeSpec): void => {
+    const row = input.conventions?.has('shrunk-text-wraps-at-drawn-width') && part.textWrap ? resolveTextWrap(part.textWrap, subst) : undefined;
+    if (row) spec.wrapWidth = { px: row.width, lines: row.lines };
+  };
   const wrapTextInBox = (textSpec: NodeSpec): NodeSpec => {
     // ORGANISM round: the wrapper frame is the PART's box — when the part
     // carries a layout, that layout is the box's layout. The hardcoded
@@ -5945,6 +5954,7 @@ function partToSpecInner(
     // the box that sizes itself to its text, so the fact rides the text spec.
     if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
     drawnBaseline(textSpec);
+    drawnWrap(textSpec);
     // MOLECULE round (Tooltip finding): a text part can CONTAIN parts — the
     // Tooltip bubble's label carries the absolute-positioned arrow span. The
     // old text lowering silently DROPPED child parts; here they compile
@@ -5997,6 +6007,7 @@ function partToSpecInner(
     if ((spec.fixedWidth || spec.fixedHeight) && !spec.fill && !spec.stroke && !resolveLayout(part, subst) && input.conventions?.has('sized-text-box-packs-by-text-align'))
       spec.textBoxPack = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'] ?? 'MIN';
     drawnBaseline(spec);
+    drawnWrap(spec);
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
     return spec;
@@ -9573,6 +9584,19 @@ function snapPaintedSvgs() {
 }
 `;
 
+/** Convention shrunk-text-wraps-at-drawn-width: once its final font is set, a wrapping TEXT takes the width the browser's
+ *  lines broke at and grows to its lines; a line count other than the browser's is named, not drawn in silence. */
+const WRAP_TEXT_RUNTIME = `const wrapNodes = [];
+function wrapTexts() {
+  for (const [node, wrap] of wrapNodes.splice(0)) {
+    if (node.removed) continue;
+    node.resize(wrap.px, node.height); node.textAutoResize = 'HEIGHT';
+    const lh = node.lineHeight && node.lineHeight.unit === 'PIXELS' ? node.lineHeight.value : 0, lines = lh > 0 ? Math.round(node.height / lh) : 0;
+    if (lines !== wrap.lines) degrade('FC-RT-TEXT-WRAP-LINES', node, 'the text breaks into ' + (lines || 'an unread number of') + ' lines at ' + wrap.px + ' px where the browser drew ' + wrap.lines);
+  }
+}
+`;
+
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
@@ -9792,6 +9816,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasTextAppearanceWriter=hasScalarTextSize||featureDatas.some(d=>dataSome(d,s=>!!s.textAppearanceTarget||!!s.instanceTextAppearances||!!s.slotDefault?.some(item=>item.instanceTextAppearances)));
   const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
   const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
+  const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
     const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
       const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
@@ -10696,7 +10721,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10724,7 +10749,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
@@ -11361,7 +11386,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11546,7 +11571,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11729,7 +11754,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
