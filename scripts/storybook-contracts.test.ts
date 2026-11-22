@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, MEASURE_LINE_BOXES, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -784,7 +784,13 @@ test('relative-offset-drawn: a part positioned relative keeps its flow box and d
   // On: each bar sits in a box of its own flow size, drawn at its offset inside it; the dot keeps its place in the column.
   assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 16, 36, 200, 8], ['tail (margin box)', -10, -5, 200, 8], ['COMPONENT', 10, 10]]);
   assert.deepEqual((await run([])).map((r) => r.slice(0, 3)), [['Relative', 0, 0], ['Relative', 0, 0], ['COMPONENT', 10, 10]]);
-  // The line-box probe reads such a part at its flow box only with the convention; off, its text is unchanged.
-  assert.equal(MEASURE_LINE_BOXES(undefined), MEASURE_LINE_BOXES(undefined, false));
-  assert.match(MEASURE_LINE_BOXES(undefined, true), /cs\.position !== 'relative'/);
+  // A part with a measured line box keeps today's lowering (no offset); its line box still joins its margin box.
+  const lined = ContractSchema.parse({ ...contract, anatomy: { root: { ...contract.anatomy.root, parts: { wrap: { parts: { label: { ...bar({ left: '16px', top: '16px' }),
+    lineBox: { props: [], rows: [{ values: [], top: 2, bottom: 0 }] } } } } } } } });
+  const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(),
+    conventions: conventionSet(['relative-offset-drawn', 'inline-block-line-box-as-drawn']) });
+  type Spec = { name?: string; relativeOffset?: unknown; margins?: unknown; children?: Spec[] };
+  const find = (s: Spec): Spec | undefined => s.name === 'label' ? s : (s.children ?? []).map(find).find(Boolean);
+  const label = find((engine.compileComponentData(lined, new Map([[lined.id, lined]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec)!;
+  assert.deepEqual([label.relativeOffset, label.margins], [undefined, { top: 2, bottom: 0 }]);
 });

@@ -407,7 +407,7 @@ export function carryTextBaseline(contract: Contract, axes: readonly string[], c
  *  box it sits alone on reaches above its margin box and below it, in px, when it is an atomic inline in a block container
  *  whose nearest in-flow neighbours are blocks or none (zero-size probes at the line's top and bottom, removed at once);
  *  null otherwise, or when the line box is its margin box. */
-export const MEASURE_LINE_BOXES = (rootPath: readonly string[] | undefined, relativeFlow = false) => `(() => { ${SHADOW_HELPERS_JS}
+export const MEASURE_LINE_BOXES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
   const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
   const flows = (n) => n.nodeType === 3 ? n.data.trim() !== '' : n.nodeType === 1 && getComputedStyle(n).display !== 'none' && !['absolute', 'fixed'].includes(getComputedStyle(n).position);
@@ -418,7 +418,7 @@ export const MEASURE_LINE_BOXES = (rootPath: readonly string[] | undefined, rela
       const flow = [...up.childNodes].filter(flows), i = flow.indexOf(el);
       if (block(flow[i - 1]) && block(flow[i + 1])) {
         const t = probe('top'), b = probe('bottom'); el.before(t); el.after(b);
-        const r = el.getBoundingClientRect()${relativeFlow ? `, dy = cs.position !== 'relative' ? 0 : cs.top !== 'auto' ? parseFloat(cs.top) : cs.bottom !== 'auto' ? -parseFloat(cs.bottom) : 0` : ''}, above = r.top${relativeFlow ? ' - dy' : ''} - parseFloat(cs.marginTop) - t.getBoundingClientRect().top, below = b.getBoundingClientRect().bottom - r.bottom${relativeFlow ? ' + dy' : ''} - parseFloat(cs.marginBottom);
+        const r = el.getBoundingClientRect(), above = r.top - parseFloat(cs.marginTop) - t.getBoundingClientRect().top, below = b.getBoundingClientRect().bottom - r.bottom - parseFloat(cs.marginBottom);
         t.remove(); b.remove();
         if (above > 0.001 || below > 0.001) m = { top: +Math.max(0, above).toFixed(4), bottom: +Math.max(0, below).toFixed(4) }; } }
     out.push([el.localName, m]);
@@ -749,7 +749,7 @@ async function main() {
             if (read) for (const [n, m] of read) textLines.set(n, m); else refusals.push(`text-lines-unmatched:${k.id}`);
           }
           if (conventions.has('inline-block-line-box-as-drawn')) { // read before any element moves, matched by capture order
-            const read = drawnBaselines<{ top: number; bottom: number }>(root, await page.evaluate(MEASURE_LINE_BOXES(at, conventions.has('relative-offset-drawn'))) as never);
+            const read = drawnBaselines<{ top: number; bottom: number }>(root, await page.evaluate(MEASURE_LINE_BOXES(at)) as never);
             if (read) for (const [n, m] of read) lineBoxes.set(n, m); else refusals.push(`line-box-unmatched:${k.id}`);
           }
           let generated: (() => void) | null | undefined;
