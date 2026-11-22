@@ -128,6 +128,9 @@
  *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
  *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
  *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
+/** inset-ring-absent-border-zero (React to Figma writer): a zero-blur inset box-shadow ring is drawn as an inside stroke
+ *  when every border side is zero; a part that carries no border fact at all (its 0 px widths dropped as the browser's
+ *  default) counts as zero too, instead of keeping an inner shadow that Figma may not draw. Off, only explicit zeros count. */
 /** text-box-snapped-as-painted (React to Figma writer, at run time, with text-baseline-as-drawn): Figma draws a text whose
  *  box sits off the whole pixel half a row off its carried baseline. Once laid out, a baseline box centered in a horizontal
  *  row moves onto the whole pixel (round half up), its height and glyph line both changed by -2d so its top moves by d and
@@ -227,6 +230,7 @@ export const CONVENTIONS = [
   'icon-box-keeps-glyph-size',
   'imperceptible-solid-paint-blend-not-carried',
   'inline-block-line-box-as-drawn',
+  'inset-ring-absent-border-zero',
   'inside-outside-stroke-as-outline',
   'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',

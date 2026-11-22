@@ -745,6 +745,25 @@ test('shrunk-text-wraps-at-drawn-width: a text its flex row shrank until it wrap
   assert.deepEqual((await drawn([], 178.547))[0], []);
 });
 
+test('inset-ring-absent-border-zero: an inset ring on a part with no border fact is drawn as an inside stroke; a border keeps its path', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  // Tag outline: the root draws its border as `inset 0 0 0 1px` and carries no border width (0 px is the browser's default).
+  const ring = 'rgba(57, 57, 57, 1) 0px 0px 0px 1px inset';
+  const contract = ContractSchema.parse({ id: 'test.ring', name: 'Ring', version: '0.1.0', status: 'draft', description: 'Inset rings', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, literals: { 'box-shadow': ring, width: '80px', height: '24px' },
+      parts: { bordered: { literals: { 'box-shadow': ring, 'border-color': 'rgba(0, 0, 0, 1)', width: '10px', height: '10px' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/Ring', export: 'Ring' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  type Spec = { name?: string; insetRingStroke?: true; effectStack?: unknown[]; lits?: { strokeWeight?: number }; children?: Spec[] };
+  const drawn = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const root = (engine.compileComponentData(contract, new Map([[contract.id, contract]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec;
+    return [root, root.children!.find((c) => c.name === 'bordered')!].map((s) => [s.insetRingStroke ?? false, s.lits?.strokeWeight, s.effectStack?.length]);
+  };
+  // On, the ring with no border fact becomes a 1 px inside stroke; the part that carries a border color keeps its shadow.
+  assert.deepEqual(drawn(['inset-ring-absent-border-zero']), [[true, 1, 0], [false, undefined, 1]]);
+  assert.deepEqual(drawn([]), [[false, undefined, 1], [false, undefined, 1]]);
+});
+
 test('text-box-snapped-as-painted: a centered baseline box off the whole pixel moves onto it, baseline kept; a hugging row is left alone', async () => {
   const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
   const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
