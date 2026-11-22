@@ -135,6 +135,9 @@
 /** svg-box-snapped-as-painted (React to Figma writer, at run time): Chromium paints an svg at its box snapped to the
  *  whole pixel, rounded half up; once a component is laid out, each svg's drawing moves onto that pixel, relative to its
  *  variant, from where Figma's own layout put it. Moves under 0.05 px, and rotated svgs, are left alone. Off, nothing moves. */
+/** set-cell-pads-variant-overhang (React to Figma writer, at run time): a component set clips its variants, so each edge
+ *  and gap of the variant grid holds what the variants draw outside themselves (at least the 40 px padding), measured once
+ *  they are laid out. With no overhang the grid is unchanged. Off, the padding is 40 px whatever a variant draws past it. */
 /** centered-text-keeps-drawn-width (React to Figma contract step): a part holding its own text that a flex row centers
  *  on its main axis keeps the width the browser drew. Figma sizes a text box to its advance rounded up to a whole pixel,
  *  so a box hugging it would be up to a pixel wider and sit half that far off center. Off, the width is not carried. */
@@ -216,6 +219,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'rect-placement-by-variant',
   'root-text-by-axis',
+  'set-cell-pads-variant-overhang',
   'show-declared-component',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
