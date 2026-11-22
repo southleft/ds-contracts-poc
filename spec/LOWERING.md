@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **67** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **68** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -739,14 +739,26 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 
 **Why.** Worth stating plainly: the schema comment says "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks", and that prose is now OUT OF DATE. Figma shipped a native GRID layout mode with FIXED/FLEX/HUG tracks, this emitter uses it, and four track cases round-trip. The register records the rule the engine actually implements, which is better than the one the schema still describes.
 
-### `placement` — 2 rules (2 implemented, 0 proposed, 0 wall)
+### `placement` — 3 rules (3 implemented, 0 proposed, 0 wall)
 
 Forward-only decisions with no CSS source at all. Two rules that look identical in shape — one is a deliberate, defensible layout of variant cells; the other silently reverts a designer's own repositioning on every amend. Telling them apart is the reason to write both down.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
+| `emit.placement-cells-hold-overhang` | `implemented` | `emit-figma-script.ts:9669` | n/a — a variant drawing outside its own box → each grid edge and gap holds the overhang on either side of it, at least PAD | every variant drawn whole inside its component set | **none** | `untested` |
 | `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:10200` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
 | `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:11141` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
+
+#### `emit.placement-cells-hold-overhang`
+
+**Context.** profile convention set-cell-pads-variant-overhang, at run time once the variants are laid out: each variant's overhang is the union of its visible descendants' boxes outside its own (none if it clips), descending into no clipping frame, rounded up to the whole pixel
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- paint past a box that no node's box reaches (a shadow's blur, an outside stroke) is not counted, as before
+
+**Why.** A component set clips its variants, and Figma's render bounds, which the check exports, stop at its edge. IconButton's xs tooltip (117 wide) sits 47 px left of its 24 px button, 7 px past the 40 px padding, so the check saw a 110 px tooltip in all four defaultOpen xs variants.
 
 #### `emit.placement-host-section-origin-pinned`
 

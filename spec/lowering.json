@@ -500,7 +500,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 10466,
+      "ruleLine": 10521,
       "ruleText": "const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -858,7 +858,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 11473,
+      "ruleLine": 11529,
       "ruleText": "}${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasNativeAspectRatio ? '\\n  applyNativeAspectRatio(comp, v.spec);' : ''}${hasCallerSlots && hasRootSlot ? '\\n  sizeCallerSlots(comp);' : ''}",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1192,12 +1192,41 @@
       "why": "A receipt guarded by the wrong condition. The literal side of the same switch calls literalMiss() in ALL branches including the catch-all else, and has no such hole. This matters beyond padding: it is the general escape through which any unregistered token channel leaves without a word, which is the shape of the tab-size incident that once made validateContract refuse 32 whole components."
     },
     {
+      "id": "emit.placement-cells-hold-overhang",
+      "family": "placement",
+      "stage": "emit",
+      "status": "implemented",
+      "file": "core/emit-figma-script.ts",
+      "line": 9693,
+      "ruleLine": 9694,
+      "ruleText": "const overhangCells = input.conventions?.has('set-cell-pads-variant-overhang') === true;",
+      "css": {
+        "construct": "n/a — a variant whose content reaches outside its own box (an open tooltip or popover beside its trigger)",
+        "context": "profile convention set-cell-pads-variant-overhang, at run time once the variants are laid out: each variant's overhang is the union of its visible descendants' boxes outside its own (none if it clips), descending into no clipping frame, rounded up to the whole pixel"
+      },
+      "figma": {
+        "construct": "each edge and gap of the component set's variant grid is the larger of PAD (40) and the overhang on either side of it; with no overhang the cells sit exactly where emit.placement-variant-cells-gridded puts them"
+      },
+      "inverse": "none",
+      "lost": [
+        "paint past a box that no node's box reaches (a shadow's blur, an outside stroke) is not counted, as before"
+      ],
+      "canonical": "every variant drawn whole inside its component set",
+      "receipt": {
+        "channel": "none"
+      },
+      "roundTrip": "untested",
+      "cases": [],
+      "doors": [],
+      "why": "A component set clips its variants, and Figma's render bounds, which the check exports, stop at its edge. IconButton's xs tooltip (117 wide) sits 47 px left of its 24 px button, 7 px past the 40 px padding, so the check saw a 110 px tooltip in all four defaultOpen xs variants."
+    },
+    {
       "id": "emit.placement-host-section-origin-pinned",
       "family": "placement",
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 10413,
+      "ruleLine": 10468,
       "ruleText": "if (isNewSection) {",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1226,7 +1255,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 11354,
+      "ruleLine": 11410,
       "ruleText": "child.x = x; child.y = y;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1478,7 +1507,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 10794,
+      "ruleLine": 10849,
       "ruleText": "if (!spec.fill) node.fills = [];",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1653,7 +1682,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 10693,
+      "ruleLine": 10748,
       "ruleText": "if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {

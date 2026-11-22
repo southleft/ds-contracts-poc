@@ -37,8 +37,13 @@ test('instance paint-order drift or missing key authority still refuses the pare
  for(const mutation of ['order','key','layout'] as const){
   const dump=linkedPaintFixture();
   for(const v of dump.parent.variants){const n=v.children[0];if(mutation==='order')n.itemReverseZIndex=true;else if(mutation==='key')n.instanceSetKey='other-key';else n.layout={...n.layout,mode:'VERTICAL'};}
-  const result=proposeBatchFromDump(dump as any,{fileKey:'paint-file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true});
+  const opts={fileKey:'paint-file',corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true};
+  const result=proposeBatchFromDump(dump as any,opts);
   assert(result.skipped.some(p=>p.reason.includes('child-paint-order-owner-unqualified')),JSON.stringify({mutation,skipped:result.skipped}));
+  // Profile convention linked-child-keeps-its-stacking: only a stacking override is drawn by the child, and named.
+  const on=proposeBatchFromDump(dump as any,{...opts,conventions:['linked-child-keeps-its-stacking']});
+  if(mutation==='order')assert(!on.skipped.length&&on.proposals.find(p=>(p.contract as any).name==='PaintParent')!.notes.some(n=>n.includes('override is not carried')));
+  else assert(on.skipped.some(p=>p.reason.includes('child-paint-order-owner-unqualified')),mutation);
  }
 });
 
