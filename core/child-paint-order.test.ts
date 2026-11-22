@@ -10,7 +10,8 @@ import {mountGenerated} from './react-test-runtime.js';
 import {createFigmaEngine} from './emit-figma-script.js';
 import {ContractSchema,resolveLayout} from '../scripts/contract-schema.js';
 import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
-import {proposeBatchFromDump} from './propose-figma.js';
+import {proposeBatchFromDump,proposeFromDump,asMinimalChildContract} from './propose-figma.js';
+import {validateContract} from '../packages/core/src/validate.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 
 function linkedPaintFixture(){
@@ -390,3 +391,22 @@ test('mixed-axis order does not qualify missing or grid parent layout',async()=>
     assert(!result.notes.some(n=>n.includes('source-permutation-layout')),kind);
   }
  });
+test('a repeated child with no possible overlap drops the owner\'s reversed stacking under stacking-without-overlap-not-carried',()=>{
+ const entry=ContractSchema.parse({id:'probe.entry',name:'Entry',version:'0.1.0',status:'draft',description:'A repeated entry',semantics:{element:'span'},
+  props:[{name:'text',type:'text',default:'Item',bindings:{figma:{kind:'TEXT',property:'Text'},code:{prop:'children'}}}],states:[],anatomy:{root:{parts:{label:{content:{prop:'children'}}}}},
+  bindings:{figma:{anchors:{fileKey:'paint-file',componentSetKey:'entry-key'}},code:{anchors:{importPath:'./Entry',export:'Entry'}}}});
+ const layout={mode:'HORIZONTAL',primary:'MIN',counter:'MIN',spacing:0,padding:[0,0,0,0],primarySizing:'AUTO',counterSizing:'AUTO'};
+ const set=(kid:Record<string,unknown>={})=>({setName:'Stack owner',type:'COMPONENT_SET',propertyDefinitions:{Density:{type:'VARIANT',defaultValue:'Compact',variantOptions:['Compact','Wide']}},
+  variants:['Compact','Wide'].map(d=>({name:'Density='+d,type:'COMPONENT',variantProperties:{Density:d},layout,itemReverseZIndex:true,
+   children:['One','Two','Three'].map(text=>({type:'INSTANCE',name:'entry',instanceOf:'Entry',instanceSetKey:'entry-key',componentProperties:{'Text#1:0':text},...kid}))}))});
+ const run=(kid:Record<string,unknown>|undefined,conventions:string[]=[])=>{const r=proposeFromDump(set(kid) as any,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),mintUnbound:true,stampsObservable:true,fileKey:'paint-file',
+  contractIdByName:new Map([['Entry',entry.id]]),contractIdByKey:new Map([['entry-key',entry.id]]),contractsById:new Map([[entry.id,asMinimalChildContract(entry)]]),conventions} as any);
+  const c=ContractSchema.parse(r.contract),errors:string[]=[];validateContract(c,new Map([[c.id,c],[entry.id,entry]]),errors,new Map());return {r,c,errors};};
+ const off=run(undefined);assert(Object.values(off.c.anatomy.root.parts??{}).some(p=>p.repeat),'the entries are one repeated child');
+ assert.equal(off.c.anatomy.root.layout?.reversePaint,true);assert(off.errors.some(e=>e.includes('child-paint-order-expanding-child')),'off: the generator refuses');
+ // Profile convention stacking-without-overlap-not-carried: the entries cannot overlap, so the stacking is not carried, and the owner is named.
+ const on=run(undefined,['stacking-without-overlap-not-carried']);assert.deepEqual(on.errors,[]);assert.equal(on.c.anatomy.root.layout?.reversePaint,undefined);
+ assert(on.r.notes.some((n:string)=>n.includes('profile convention stacking-without-overlap-not-carried')));
+ // An entry that can paint outside its box keeps the stacking, and the refusal stands.
+ assert(run({stroke:{hex:'000000'},strokeWeight:1,strokeAlign:'OUTSIDE'},['stacking-without-overlap-not-carried']).errors.some(e=>e.includes('child-paint-order-expanding-child')));
+});

@@ -181,6 +181,10 @@
  *  is also bound to a BOOLEAN and whose layout table covers only its drawn planes, keeps the enum presence as its gate, and
  *  the BOOLEAN hides it with display: none. Off, the absent planes are display: none styles and the BOOLEAN is the gate, so
  *  that table fails the contract's coverage rule. */
+/** stacking-without-overlap-not-carried (Figma to React proposal): an owner whose canvas stacking is reversed ("first on
+ *  top"), whose children cannot overlap (in flow, with a gap of zero or more, no effect, no stroke outside the box, and
+ *  any grandchildren clipped), and which has a child the generator cannot rank (a repeat, or a slot without a div host)
+ *  does not carry that stacking, and the owner is named. Off, the generator refuses it (child-paint-order-expanding-child). */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -241,6 +245,7 @@ export const CONVENTIONS = [
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
   'sized-text-box-packs-by-text-align',
+  'stacking-without-overlap-not-carried',
   'stage-from-story-container',
   'stretched-line-paints-bar',
   'styles-when-display-last-wins',

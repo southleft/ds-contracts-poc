@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention stacking-without-overlap-not-carried. */ stackingNotCarried?: true; invisibleStacks?: Map<Record<string, unknown>, string>; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -12507,7 +12507,7 @@ function carryChildPaintOrder(m:Merged,holder:Record<string,unknown>,ctx:Ctx,whe
   // Root layout omission denotes the generator default. Materializing paint
   // metadata must retain that alignment rather than introducing CSS start.
   const baseLayout = holder.layout ?? (isRoot ? {display:'flex',direction:'row',justify:'center',align:'center'} : {});
-  holder.layout={...(baseLayout as object),reversePaint:rows[0].reversePaint,...(rows[0].childOrder?{childOrder:rows[0].childOrder}:{})};
+  holder.layout={...(baseLayout as object),reversePaint:rows[0].reversePaint,...(rows[0].childOrder?{childOrder:rows[0].childOrder}:{})}; if(values.size===1 && !rows[0].childOrder && stackingWithoutOverlap(m,ctx))(ctx.invisibleStacks ??= new Map()).set(holder,where);
   if(values.size>1) {
     if(!axes.length)throw Error(`child-paint-order-domain-unqualified:${where}`);
     const tableRows=rows.map(row=>({values:axes.map(a=>row.selection[a.propName]),layout:{direction:'row',justify:'start',align:'start',...resolveLayout(holder as Part,row.selection),reversePaint:row.reversePaint,...(row.childOrder?{childOrder:row.childOrder}:{})}}));
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('stacking-without-overlap-not-carried') ? {stackingNotCarried: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -19928,7 +19928,7 @@ function proposeFromDumpFencedImpl(
     projection = sourceProjection;
   }
   settleUaPadding({ contract, notes: ctx.notes }, set);
-  if(ctx.characterNodes?.size)throw Error('character-demand-source-part-not-emitted');
+  if(ctx.characterNodes?.size)throw Error('character-demand-source-part-not-emitted'); invisibleStacksNotCarried(contract as unknown as Contract, ctx);
   const characterBindings:CharacterBinding[]=[...new Map((ctx.characterAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract),...(d.forwardTarget?{forwarded:true}:{})}))).map(b=>[canonicalJson(b),b])).values()];
   if(ctx.textAppearanceNodes?.size)throw Error('text-appearance-demand-source-part-not-emitted');
   for(const binding of characterBindings){
@@ -20987,4 +20987,25 @@ function enumPresenceKeepsGate(part: Record<string, unknown>, presence: NonNulla
   part.visibleWhen = structuredClone(presence);
   part.stylesWhen = [...styles, {prop: live.prop, equals: 'false', styles: {display: 'none'}}];
   return `${where}: captured presence on "${presence.prop}" stays the part's gate, and the live visibility binding hides it with display: none when "${live.prop}" is false (profile convention enum-presence-keeps-the-gate)`;
+}
+
+/** Profile convention stacking-without-overlap-not-carried: an owner whose canvas stacking is reversed ("first on top"),
+ *  whose children cannot overlap, and which has a child the generator cannot rank (a repeat, or a slot without a div
+ *  host), does not carry that stacking. Every occurrence must be a flex row or column with no wrap and a gap of zero or
+ *  more, and every child must be in flow, with no effect, no stroke outside its box, and, if it has children, clipping
+ *  them. Stacking then changes no pixel. Owners the generator can rank keep their stacking. */
+function stackingWithoutOverlap(m: Merged, ctx: Ctx): boolean {
+  if (!ctx.stackingNotCarried) return false;
+  const inside = (n: DumpNode) => n.strokeAlign === 'INSIDE' || (!n.stroke && !n.strokeWeights && !n.sourceStrokeStack?.paints.length);
+  return m.occ.every(o => { const l = o.node.layout; return !!l && l.mode !== 'GRID' && !l.wrap && (l.spacing ?? 0) >= 0 &&
+    (o.node.children ?? []).every(c => c.abs === undefined && !c.effects?.length && inside(c) && (!c.children?.length || c.clipsContent === true)); });
+}
+function invisibleStacksNotCarried(contract: Contract, ctx: Ctx): void {
+  for (const {part} of walkAnatomy(contract)) {
+    const where = ctx.invisibleStacks?.get(part as unknown as Record<string, unknown>);
+    if (!where || part.layout?.reversePaint === undefined || !Object.values(part.parts ?? {}).some(child => child.repeat ||
+        (child.slot && (typeof child.slot !== 'object' || child.element !== undefined && child.element !== 'div')))) continue;
+    delete part.layout.reversePaint;
+    ctx.notes.push(`${where}: the canvas stacking ("first on top") is not carried: a child expands, and no two children can overlap, so stacking changes no pixel (profile convention stacking-without-overlap-not-carried)`);
+  }
 }
