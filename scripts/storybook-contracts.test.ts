@@ -649,3 +649,35 @@ test('lost-text-realigns-by-class: a variant\'s own text on a part whose base el
   assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!), 'x--');
   assert.equal(profileClassPrefix({ profile: null }), '');
 });
+
+test('overlay-size-not-control-default and drawn-border-color-not-folded: a textless circle keeps its 18 px height and its ring color', async () => {
+  const { styledChannels, detectFolds } = await import('../extract/computed/fuse.js');
+  // RadioButton: an absolute input makes an overlay cluster; the 18 px circle draws a 1 px solid ring in its own color,
+  // as tall as the bare span control's probe text. A label holds text; an hr draws the UA inset in its own color.
+  const ink = 'rgb(22, 22, 22)', ring = (style: string, width: string) => Object.fromEntries(['top', 'right', 'bottom', 'left']
+    .flatMap((s) => [[`border-${s}-color`, ink], [`border-${s}-style`, style], [`border-${s}-width`, width]]));
+  const names = ['root', 'input', 'circle', 'label', 'hr'], text = ['', '', '', 'Label', ''];
+  const styles: Record<string, string>[] = [{ display: 'flex' }, { display: 'block', position: 'absolute', width: '1px', height: '1px' },
+    { display: 'block', width: '18px', height: '18px', color: ink, ...ring('solid', '1px') }, { display: 'block', width: '40px', height: '18px', color: ink },
+    { display: 'block', width: '18px', height: '2px', color: ink, ...ring('inset', '1px') }];
+  const flat = names.map((n, i) => ({ path: String(i), sig: '', partName: n, node: { tag: i === 4 ? 'hr' : 'span', style: styles[i]!, nodes: text[i] ? [{ t: 'text', v: text[i] }] : [] } }));
+  const a = { baseFlat: flat, partNames: names, union: { entries: names.map((_, i) => ({ id: i, children: i === 0 ? [1, 2, 3, 4].map((id) => ({ id })) : [] })) },
+    captures: [{ combo: 'a', interaction: 'default' }], getAligned: () => flat } as never;
+  const space = { enumeration: { combos: [{ key: 'a', stateFlags: {} }] }, baseComboKey: 'a' } as never;
+  const control = { display: 'block', width: '63.125px', height: '18px', color: 'rgb(0, 0, 0)', position: 'static', ...ring('none', '0px') };
+  const props = Object.keys({ ...styles[2], position: '' }), env = { viewport: { width: 1280, height: 720 }, stage: { width: 1280, height: 720 }, portaled: false };
+  const styled = (on: boolean, receipts: string[] = []) => styledChannels(a, space, { span: control, hr: control }, props, receipts,
+    { ...env, ...(on ? { overlaySizeKept: true as const } : {}) } as never, { span: control, hr: control });
+  // Off, the circle's height equals the control's and is dropped; on, the textless circle keeps it and the text label does not.
+  assert.deepEqual([styled(false).get('circle')?.has('height'), styled(false).get('circle')?.has('width')], [false, true]);
+  const receipts: string[] = [], on = styled(true, receipts);
+  assert.deepEqual([on.get('circle')?.has('height'), on.get('label')?.has('height')], [true, false]);
+  assert.match(receipts.join('\n'), /overlay-size-not-control-default: circle\.height = 18px/);
+  // Off, every side color equal to the part's own color folds; on, the solid 1 px ring keeps its four colors and the hr's
+  // inset still folds.
+  const folded = (drawn: boolean, notes: string[] = []) => detectFolds(a, on, notes, drawn).filter((f) => /^(circle|hr)$/.test(f.part)).map((f) => `${f.part}.${f.channel}`);
+  assert.deepEqual(folded(false).filter((f) => /^circle\.border-/.test(f)).length, 4);
+  const notes: string[] = [];
+  assert.deepEqual([...new Set(folded(true, notes).filter((f) => f.includes('.border-')).map((f) => f.split('.')[0]))], ['hr']);
+  assert.match(notes.join('\n'), /drawn-border-color-not-folded: circle\.border-top-color/);
+});
