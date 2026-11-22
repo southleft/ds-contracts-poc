@@ -26,7 +26,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
-import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, lineBoxIssues, textBaselineIssues, textByCombinationIssues, type Contract, type Part } from './contract-schema.js';
+import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, TOKEN_CHANNELS, lineBoxIssues, textBaselineIssues, textByCombinationIssues, textWrapIssues, type Contract, type Part } from './contract-schema.js';
 import { NO_MOTION } from './design-consumer-check.js';
 import { MARK_SUBJECT, PAGE, pinnedBrowser, readerStoryIds, SELECT_INSTANCE, SHOW, SystemProfile, type StoryComponent } from './storybook-reader.js';
 import type { CDPSession } from 'playwright-core';
@@ -338,6 +338,50 @@ export function carryLineBox(contract: Contract, axes: readonly string[], combos
   } };
   visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
   return carried;
+}
+
+/** Convention shrunk-text-wraps-at-drawn-width: for each element in capture order, how many lines its own text was drawn on
+ *  (distinct tops of its text's client rects), when two or more; null otherwise. */
+export const MEASURE_TEXT_LINES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
+  const walk = (el) => { const ys = [];
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 3 && c.data.trim()) { const r = document.createRange(); r.selectNodeContents(c); for (const q of r.getClientRects()) if (q.width > 0) ys.push(q.top); }
+    const lines = ys.sort((a, b) => a - b).filter((y, i) => i === 0 || y - ys[i - 1] > 2).length;
+    out.push([el.localName, lines >= 2 ? lines : null]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
+
+/** Convention shrunk-text-wraps-at-drawn-width: an element whose own text was drawn on two or more lines, an item of a flex
+ *  row that does not grow it, was shrunk by the row until it wrapped: its content width and line count; null otherwise. */
+export function shrunkTextWrap(s: Record<string, string>, row: Record<string, string> | undefined, lines: number): { width: number; lines: number } | null {
+  const px = (k: string) => /^-?[\d.]+px$/.test(s[k] ?? '') ? parseFloat(s[k]!) : NaN;
+  const width = +(px('width') - (s['box-sizing'] === 'border-box' ? px('padding-left') + px('padding-right') + px('border-left-width') + px('border-right-width') : 0)).toFixed(4);
+  return row && /^(inline-)?flex$/.test(row['display'] ?? '') && (row['flex-direction'] ?? 'row').startsWith('row') && (s['flex-grow'] ?? '0') === '0' &&
+    !['absolute', 'fixed'].includes(s['position'] ?? '') && lines >= 2 && width > 0 ? { width, lines } : null;
+}
+
+/** Convention shrunk-text-wraps-at-drawn-width: a part owning literal text that a flex row shrank until it wrapped, in some
+ *  variant, carries the width its lines broke at and the lines the browser drew in each variant where it wraps (`textWrap`,
+ *  over the axes that tell wrapping and not wrapping apart). A reading the variant's axes do not decide is named instead.
+ *  Returns the parts carried and the refusals. */
+export function carryTextWrap(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
+  at: (comboKey: string, part: string) => { width: number; lines: number } | null | undefined): [string[], string[]] {
+  const carried: string[] = [], named: string[] = [];
+  const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
+    const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m: m ?? { width: 0, lines: 1 } }]; }) : [];
+    if (drawn.some((r) => r.m.lines >= 2)) {
+      const table = variantRows(axes, drawn), rowOf = (v: Record<string, string>) => table.rows.find((x) => x.values.every((value, i) => value === v[table.props[i]!]))!;
+      const undecided = drawn.find((r) => rowOf(r.v).width !== r.m.width || rowOf(r.v).lines !== r.m.lines);
+      if (undecided) named.push(`text-wrap-undecided: ${name} — it wraps at ${undecided.m.width} px in ${JSON.stringify(undecided.v)}, which no tuple of the variant axes tells apart from another reading`);
+      else {
+        part.textWrap = { props: table.props, rows: table.rows.filter((x) => x.lines >= 2) };
+        if (textWrapIssues(contract, part).length) delete part.textWrap; else carried.push(name);
+      }
+    }
+    visit(part.parts as Record<string, Part> | undefined);
+  } };
+  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  return [carried, named];
 }
 
 /** Convention text-baseline-as-drawn: a part owning one line of literal text carries the baseline the browser drew in each
@@ -680,7 +724,7 @@ async function main() {
         const { contract: seeded, drawn, combos, space } = seed(c);
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
         const captures: Capture[] = [], rootMoved: string[] = [], baselines = new Map<CapturedNode, { px: number; ascent: number; descent: number } | null>();
-        const lineBoxes = new Map<CapturedNode, { top: number; bottom: number } | null>();
+        const lineBoxes = new Map<CapturedNode, { top: number; bottom: number } | null>(), textLines = new Map<CapturedNode, number | null>();
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -699,6 +743,10 @@ async function main() {
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
             const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'))) as never);
             if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
+          }
+          if (conventions.has('shrunk-text-wraps-at-drawn-width')) { // read before any element moves, matched by capture order
+            const read = drawnBaselines<number>(root, await page.evaluate(MEASURE_TEXT_LINES(at)) as never);
+            if (read) for (const [n, m] of read) textLines.set(n, m); else refusals.push(`text-lines-unmatched:${k.id}`);
           }
           if (conventions.has('inline-block-line-box-as-drawn')) { // read before any element moves, matched by capture order
             const read = drawnBaselines<{ top: number; bottom: number }>(root, await page.evaluate(MEASURE_LINE_BOXES(at)) as never);
@@ -789,6 +837,11 @@ async function main() {
         }
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; }, conventions.has('root-text-baseline-as-drawn'));
+        if (conventions.has('shrunk-text-wraps-at-drawn-width')) { const [carried, named] = carryTextWrap(enriched as Contract, c.axes, combos, (key, part) => {
+          const i = promotion.partIndex.get(part), cells = aligned.getAligned(`${key}__default`), el = i === undefined ? null : cells[i], path = i === undefined ? '' : aligned.baseFlat[i]!.path;
+          const up = path.includes('.') ? path.slice(0, path.lastIndexOf('.')) : '', qi = path === '' ? -1 : aligned.baseFlat.findIndex((f) => f.path === up);
+          return el ? shrunkTextWrap(el.node.style, qi < 0 ? undefined : cells[qi]?.node.style, textLines.get(el.node as never) ?? 0) : undefined; });
+          row.textWrap = carried; refusals.push(...named); }
         if (conventions.has('inline-block-line-box-as-drawn')) row.lineBox = carryLineBox(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? lineBoxes.get(n as never) ?? null : undefined; });
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }

@@ -124,6 +124,10 @@
 /** drawn-border-color-not-folded (React to Figma contract step): a border side color equal to the part's own color folds
  *  into it, as CSS's currentcolor; a side that draws (solid, wider than 0 on some plane) keeps its color instead, because
  *  a Figma stroke has no currentColor and the writer strokes only a carried color. Other styles (an hr's inset) still fold. */
+/** shrunk-text-wraps-at-drawn-width (React to Figma contract step and writer): a part's own text that a flex row shrank
+ *  until it wrapped (not growing, white-space normal, two or more lines) carries, per variant where it wraps, the width its
+ *  lines broke at and the lines drawn (Part.textWrap); the writer gives the TEXT that width once laid out, lets it grow to
+ *  its lines, and names a different line count. Figma auto layout has no flex-shrink, so off the text draws on one line. */
 /** inset-ring-absent-border-zero (React to Figma writer): a zero-blur inset box-shadow ring is drawn as an inside stroke
  *  when every border side is zero; a part that carries no border fact at all (its 0 px widths dropped as the browser's
  *  default) counts as zero too, instead of keeping an inner shadow that Figma may not draw. Off, only explicit zeros count. */
@@ -237,6 +241,7 @@ export const CONVENTIONS = [
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
   'show-declared-component',
+  'shrunk-text-wraps-at-drawn-width',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
   'sized-text-box-packs-by-text-align',

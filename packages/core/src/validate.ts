@@ -24,6 +24,7 @@ import {
   textByCombinationIssues,
   textBaselineIssues,
   lineBoxIssues,
+  textWrapIssues,
   outsideStrokeIssues,
   callerContentGroups,
   defaultSlotFamilyIssue,
@@ -222,6 +223,7 @@ export function validateContract(
     errors.push(...textByCombinationIssues(contract,part,p.length>1).map(issue=>`${contract.id}: part "${name}" ${issue}`));
     errors.push(...textBaselineIssues(contract,part).map(issue=>`${contract.id}: part "${name}" ${issue}`));
     errors.push(...lineBoxIssues(contract,part,p.length>1).map(issue=>`${contract.id}: part "${name}" ${issue}`));
+    errors.push(...textWrapIssues(contract,part).map(issue=>`${contract.id}: part "${name}" ${issue}`));
     errors.push(...outsideStrokeIssues(part).map(issue => `${contract.id}: part "${name}" ${issue}`));
     if (part.strokeAlign === 'OUTSIDE' && (p.length === 1 ? rootElementsOf(contract) : [part.element ?? 'div']).some(element => VOID_ELEMENTS.has(element)))
       errors.push(`${contract.id}: part "${name}" outside-stroke-void-element`);
