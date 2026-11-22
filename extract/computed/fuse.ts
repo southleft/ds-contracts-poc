@@ -424,6 +424,7 @@ export interface FusionEnv {
    *  stage's content box. */
   container?: number; /** Profile convention centered-text-keeps-drawn-width: see centeredTextParts. */ centeredTextWidth?: true;
   /** Profile convention table-short-row-leaves-columns-empty: see tableGeometry. */ tableShortRows?: true;
+  /** Profile convention overlay-size-not-control-default: see the control-equal door in styledChannels. */ overlaySizeKept?: true;
 }
 
 /** Which axes of a part were laid out against the browser window. */
@@ -1168,6 +1169,14 @@ export function styledChannels(
         receipts.push(
           `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}, ${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}) and the control's own ${p} (${ctrl[p]}) differs from its \`color\` (${ctrl['color']}) — the UA's border colour is currentcolor, so the control was coloured by the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\`, Tailwind preflight's equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and style ship and the border paints currentcolor on the code surface and NOTHING on the canvas.`,
         );
+      }
+      // Convention overlay-size-not-control-default: the control's box measures its own probe text, not a browser default
+      // the emitted element gets for free, so a textless overlay-cluster part keeps a px width or height that equals it.
+      // @door fuse.overlay-size-not-control-default
+      else if (env.overlaySizeKept && (p === 'width' || p === 'height') && (absAdmit.has(pi) || parentAdmit.has(pi)) && !inTableBox
+        && /^[\d.]+px$/.test(v ?? '') && !a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0)) {
+        set.add(p);
+        receipts.push(`overlay-size-not-control-default: ${a.partNames[pi]}.${p} = ${v} — EQUAL to the <${tag}> control's box, which measures the control's own text; this textless overlay-cluster part keeps it`);
       } else {
         dropped++;
         // A channel the library's own stylesheet DECLARES on this element and
@@ -1572,6 +1581,8 @@ export function detectFolds(
    *  next widening announces itself instead of minting leaves in silence.
    *  Same discipline as the R4 `-webkit` census in `styledChannels`. */
   receipts?: string[],
+  /** Profile convention drawn-border-color-not-folded. */
+  drawnBorderSides = false,
 ): FoldReceipt[] {
   const folds: FoldReceipt[] = [];
   const missingCandidates = new Map<string, Set<string>>(); // channel -> parts
@@ -1592,6 +1603,15 @@ export function detectFolds(
           const el = a.getAligned(`${c.combo}__${c.interaction}`)[pi];
           if (!el) continue;
           if (el.node.style[ch] !== el.node.style['color']) { holds = false; break; }
+        }
+        // Convention drawn-border-color-not-folded: a border side that draws (solid, wider than 0 on some plane) keeps its
+        // color, because a Figma stroke has no currentColor to fall back on.
+        // @door fuse.drawn-border-color-not-folded
+        const side = drawnBorderSides ? /^border-(top|right|bottom|left)-color$/.exec(ch)?.[1] : undefined;
+        if (holds && side && a.captures.some((c) => { const st = a.getAligned(`${c.combo}__${c.interaction}`)[pi]?.node.style;
+          return st?.[`border-${side}-style`] === 'solid' && (pxOf(st[`border-${side}-width`]) ?? 0) > 0; })) {
+          receipts?.push(`drawn-border-color-not-folded: ${part}.${ch} equals its \`color\` on every plane, but the side draws solid; it is carried, not folded`);
+          continue;
         }
         if (holds) { folds.push({ part, channel: ch, foldedInto: 'color', class: 'currentColor' }); continue; }
       // @door fuse.currentcolor-fold-candidate-missing

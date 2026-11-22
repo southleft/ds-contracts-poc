@@ -221,6 +221,30 @@ test('text-baseline-as-painted: the carried baseline is the laid-out one rounded
   assert.deepEqual([MEASURE_BASELINES(undefined).includes('px: +b.toFixed(4)'), MEASURE_BASELINES(undefined, true).includes(paintedPx.toString())], [true, true]);
 });
 
+test('root-text-baseline-as-drawn: the one-line text of a root carries its baseline, and the writer draws it on the root label', async () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/Btn', { axes: ['size'], references: [ref('b--a', { size: 'xs' }), ref('b--a', { size: 'md' }, { size: 'md' })] })] }).components;
+  const carry = (withRoot: boolean) => { const { contract, combos } = seed(c!);
+    Object.assign(contract.anatomy.root, { layout: { display: 'inline-flex' }, text: 'Button', literals: { 'font-size': '14px', 'line-height': '18px' } });
+    const xs = (key: string) => combos.find((k) => k.key === key)!.axisValues.size === 'xs';
+    return [carryTextBaseline(contract, c!.axes, combos, (key, part) => part === 'root' ? { px: xs(key) ? 14.5 : 14, ascent: 1.025, descent: 0.275 } : undefined, withRoot), contract] as const; };
+  const [on, contract] = carry(true);
+  assert.deepEqual([on, (contract.anatomy.root as any).textBaseline.rows.map((r: { px: number }) => r.px)], [['root'], [14.5, 14]]);
+  assert.deepEqual([carry(false)[0], (carry(false)[1].anatomy.root as any).textBaseline], [[], undefined]);
+  // The probe reads a flex root's own text only with the convention; off, its script is today's.
+  assert.equal(MEASURE_BASELINES(undefined, true, false), MEASURE_BASELINES(undefined, true));
+  assert.ok(MEASURE_BASELINES(undefined, true, true).includes('el === root && own.length === 1'));
+  // The writer: the root's label gets the glyph line 2·14.5 − (1.025 − 0.275)·14 = 18.5 in its 18 px box, only with it on.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const parsed = ContractSchema.parse(contract), boxes = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; baselineBox?: unknown; children?: Spec[] };
+    const find = (s: Spec): unknown[] => [...(s.name === 'label' && s.baselineBox ? [s.baselineBox] : []), ...(s.children ?? []).flatMap(find)];
+    return (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.flatMap((v) => find(v.spec));
+  };
+  assert.deepEqual(boxes(['text-baseline-as-drawn', 'root-text-baseline-as-drawn']), [{ line: 18.5, height: 18 }, { line: 17.5, height: 18 }]);
+  assert.deepEqual(boxes(['text-baseline-as-drawn']), []);
+});
+
 test('hugging-space-between-packs: a row that hugs its items packs them at the start with their gap; a sized row keeps space-between', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Btn', { references: [ref('b--a', {})] })] }).components;
   const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
@@ -648,6 +672,38 @@ test('lost-text-realigns-by-class: a variant\'s own text on a part whose base el
   const files: Record<string, string> = { 'p.json': JSON.stringify({ setup: { captureConfig: 'c.json' } }), 'c.json': JSON.stringify({ library: { classPrefix: 'x--' } }) };
   assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!), 'x--');
   assert.equal(profileClassPrefix({ profile: null }), '');
+});
+
+test('overlay-size-not-control-default and drawn-border-color-not-folded: a textless circle keeps its 18 px height and its ring color', async () => {
+  const { styledChannels, detectFolds } = await import('../extract/computed/fuse.js');
+  // RadioButton: an absolute input makes an overlay cluster; the 18 px circle draws a 1 px solid ring in its own color,
+  // as tall as the bare span control's probe text. A label holds text; an hr draws the UA inset in its own color.
+  const ink = 'rgb(22, 22, 22)', ring = (style: string, width: string) => Object.fromEntries(['top', 'right', 'bottom', 'left']
+    .flatMap((s) => [[`border-${s}-color`, ink], [`border-${s}-style`, style], [`border-${s}-width`, width]]));
+  const names = ['root', 'input', 'circle', 'label', 'hr'], text = ['', '', '', 'Label', ''];
+  const styles: Record<string, string>[] = [{ display: 'flex' }, { display: 'block', position: 'absolute', width: '1px', height: '1px' },
+    { display: 'block', width: '18px', height: '18px', color: ink, ...ring('solid', '1px') }, { display: 'block', width: '40px', height: '18px', color: ink },
+    { display: 'block', width: '18px', height: '2px', color: ink, ...ring('inset', '1px') }];
+  const flat = names.map((n, i) => ({ path: String(i), sig: '', partName: n, node: { tag: i === 4 ? 'hr' : 'span', style: styles[i]!, nodes: text[i] ? [{ t: 'text', v: text[i] }] : [] } }));
+  const a = { baseFlat: flat, partNames: names, union: { entries: names.map((_, i) => ({ id: i, children: i === 0 ? [1, 2, 3, 4].map((id) => ({ id })) : [] })) },
+    captures: [{ combo: 'a', interaction: 'default' }], getAligned: () => flat } as never;
+  const space = { enumeration: { combos: [{ key: 'a', stateFlags: {} }] }, baseComboKey: 'a' } as never;
+  const control = { display: 'block', width: '63.125px', height: '18px', color: 'rgb(0, 0, 0)', position: 'static', ...ring('none', '0px') };
+  const props = Object.keys({ ...styles[2], position: '' }), env = { viewport: { width: 1280, height: 720 }, stage: { width: 1280, height: 720 }, portaled: false };
+  const styled = (on: boolean, receipts: string[] = []) => styledChannels(a, space, { span: control, hr: control }, props, receipts,
+    { ...env, ...(on ? { overlaySizeKept: true as const } : {}) } as never, { span: control, hr: control });
+  // Off, the circle's height equals the control's and is dropped; on, the textless circle keeps it and the text label does not.
+  assert.deepEqual([styled(false).get('circle')?.has('height'), styled(false).get('circle')?.has('width')], [false, true]);
+  const receipts: string[] = [], on = styled(true, receipts);
+  assert.deepEqual([on.get('circle')?.has('height'), on.get('label')?.has('height')], [true, false]);
+  assert.match(receipts.join('\n'), /overlay-size-not-control-default: circle\.height = 18px/);
+  // Off, every side color equal to the part's own color folds; on, the solid 1 px ring keeps its four colors and the hr's
+  // inset still folds.
+  const folded = (drawn: boolean, notes: string[] = []) => detectFolds(a, on, notes, drawn).filter((f) => /^(circle|hr)$/.test(f.part)).map((f) => `${f.part}.${f.channel}`);
+  assert.deepEqual(folded(false).filter((f) => /^circle\.border-/.test(f)).length, 4);
+  const notes: string[] = [];
+  assert.deepEqual([...new Set(folded(true, notes).filter((f) => f.includes('.border-')).map((f) => f.split('.')[0]))], ['hr']);
+  assert.match(notes.join('\n'), /drawn-border-color-not-folded: circle\.border-top-color/);
 });
 
 test('shrunk-text-wraps-at-drawn-width: a text its flex row shrank until it wrapped carries that width and line count; the writer wraps it there', async () => {
