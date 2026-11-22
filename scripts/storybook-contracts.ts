@@ -277,7 +277,10 @@ export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear =
 /** Convention text-baseline-as-painted: Chromium paints a line at its laid-out baseline rounded half up to the whole
  *  pixel; with the subject on a whole pixel, as the reader draws it, that is this px below the line top. */
 export const paintedPx = (rel: number, px: number): number => Math.floor(rel + px + 0.5) - rel;
-export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false) => `(() => { ${SHADOW_HELPERS_JS}
+/** rootFlex (convention root-text-baseline-as-drawn): the captured root's own one-line text in a flex or grid container is
+ *  read too. Its text is an anonymous item there, so it is wrapped in a span for the probes, read only if the wrap leaves the
+ *  text's box where it was, and unwrapped at once. */
+export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false, rootFlex = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
   const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
   const walk = (el) => { const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.data.trim()), cs = getComputedStyle(el); let m = null;
@@ -287,7 +290,16 @@ export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, paint
       first.remove(); base.remove(); last.remove();
       const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
       if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
-    out.push([el.localName, m]);
+${rootFlex ? `    if (!m && el === root && own.length === 1 && /^(inline-)?(flex|grid)$/.test(cs.display)) {
+      const t = own[0], box = () => { const g = document.createRange(); g.selectNodeContents(t); const r = g.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, was = box(), s = document.createElement('span');
+      t.before(s); s.appendChild(t);
+      if (box().every((v, i) => Math.abs(v - was[i]) < 0.01)) { const first = probe('top'), last = probe('top'), base = probe('baseline'); t.before(first); t.after(base); base.after(last);
+        const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top;
+        first.remove(); base.remove(); last.remove();
+        const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
+        if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+      s.before(t); s.remove(); }
+` : ''}    out.push([el.localName, m]);
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
   if (root) walk(root); return out; })()`;
 
@@ -332,7 +344,7 @@ export function carryLineBox(contract: Contract, axes: readonly string[], combos
  *  variant that draws it (`textBaseline`, over the axes that tell the readings apart; none when all agree). A part that
  *  some drawing variant has no reading for (two lines, a flex or grid box) is left as it was. Returns the parts carried. */
 export function carryTextBaseline(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
-  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined): string[] {
+  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined, withRoot = false): string[] {
   const carried: string[] = [];
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
     const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
@@ -342,7 +354,8 @@ export function carryTextBaseline(contract: Contract, axes: readonly string[], c
     }
     visit(part.parts as Record<string, Part> | undefined);
   } };
-  visit(contract.anatomy.root.parts as Record<string, Part> | undefined);
+  // Convention root-text-baseline-as-drawn: the root's own text too, read as the part named root.
+  visit((withRoot ? { root: contract.anatomy.root } : contract.anatomy.root.parts) as Record<string, Part> | undefined);
   return carried;
 }
 
@@ -684,7 +697,7 @@ async function main() {
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
-            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'))) as never);
+            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'))) as never);
             if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
           }
           if (conventions.has('inline-block-line-box-as-drawn')) { // read before any element moves, matched by capture order
@@ -775,7 +788,7 @@ async function main() {
           row.alignSelfCenter = carried; refusals.push(...named);
         }
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
-          const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; });
+          const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; }, conventions.has('root-text-baseline-as-drawn'));
         if (conventions.has('inline-block-line-box-as-drawn')) row.lineBox = carryLineBox(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? lineBoxes.get(n as never) ?? null : undefined; });
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
