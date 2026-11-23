@@ -2902,6 +2902,9 @@ export function prepareMint(
   gridMintRefusals?: Map<string, string>,
   /** Profile convention table-short-row-leaves-columns-empty (see tableGeometry). */
   tableShortRows = false,
+  /** Profile conventions read while minting: normal-letter-spacing-is-zero (a `normal` letter spacing is the 0px it
+   *  computes to) and text-decoration-line-by-axis-drawn (a decoration that factors on one enum axis rides stylesWhen). */
+  mintConventions: { normalLetterSpacingZero?: boolean; textDecorationByAxis?: boolean } = {},
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
@@ -3147,6 +3150,12 @@ export function prepareMint(
           const planeV = v === undefined ? planeChannelValue(el.node.style, channel) : v;
           if (planeV === undefined) { unk ??= '<channel absent in this combo>'; continue; }
           v = planeV;
+          // Convention normal-letter-spacing-is-zero: `normal` is the keyword a letter spacing of none computes to (CSS Text 3:
+          // no extra spacing), so a part spaced in some variants and not in others mints its 0px with the rest.
+          // @door fuse.letter-spacing-normal-is-zero
+          if (mintConventions.normalLetterSpacingZero && channel === 'letter-spacing' && v === 'normal') {
+            v = '0px'; remintReceipts.push(`normal-letter-spacing-is-zero: ${partName}.letter-spacing — normal is read as the 0px it computes to, so the channel mints with its spaced variants`);
+          }
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
@@ -3268,6 +3277,26 @@ export function prepareMint(
               if (!carried.length) continue;
               for (const [av, v] of carried) declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
               remintReceipts.push(`display-or-position-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, v]) => `${k}=${[...v][0]}`).join(', ')}) — each value the declared vocabulary reads rides a per-value stylesWhen rule`);
+              return true;
+            }
+            return false;
+          })()) {
+            /* carried above as stylesWhen */
+          // Convention text-decoration-line-by-axis-drawn: a decoration that varies but factors on ONE enum axis (Carbon's
+          // inline link underlined, its sized links not) carries each value that paints a line as a per-value stylesWhen
+          // rule, spelled `text-decoration` as the stylesWhen whitelist names it; `none` carries nothing, as nothing draws a
+          // decoration by default.
+          // @door fuse.text-decoration-by-axis-carried
+          } else if (spec && channel === 'text-decoration-line' && mintConventions.textDecorationByAxis && declarablePart(partName) && (() => {
+            for (const ax of space.axes) {
+              if (space.presence.has(ax.prop) || space.stateProps.some((sp) => sp.prop === ax.prop)) continue;
+              const byVal = new Map<string, Set<string>>();
+              for (const r of rows) { const av = r.axisValues[ax.prop]; if (av === undefined) { byVal.clear(); break; } (byVal.get(av) ?? byVal.set(av, new Set()).get(av)!).add(r.value); }
+              if (byVal.size < 2 || [...byVal.values()].some((s) => s.size !== 1)) continue;
+              const painted = [...byVal].map(([av, s]) => [av, [...s][0]!] as const).filter(([, v]) => v !== 'none' && spec.value.test(v));
+              if (!painted.length) continue;
+              for (const [av, v] of painted) declared.push({ part: partName, channel: 'text-decoration', value: v, when: { prop: ax.prop, equals: av } });
+              remintReceipts.push(`text-decoration-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, v]) => `${k}=${[...v][0]}`).join(', ')}) — each value that paints a line is carried as a per-value stylesWhen text-decoration rule; none carries nothing`);
               return true;
             }
             return false;

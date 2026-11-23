@@ -74,3 +74,49 @@ test('a part absolutely placed in one enum value takes no row space there and st
   assert.ok(glyph('kind=primary').absolute, 'primary: placed out of flow');
   assert.equal(glyph('kind=ghost').absolute, undefined, 'ghost: in flow');
 });
+
+test('normal-letter-spacing-is-zero and text-decoration-line-by-axis-drawn: a spacing and an underline that vary on one axis are carried', () => {
+  // Carbon's Link, replayed on Polaris Tag's committed capture: the root is spaced 0.32px and underlined in the large
+  // size, and computes `normal` and `none` in the other.
+  const cfg = loadConfig(repo, path.join(repo, 'extract/computed/configs/polaris.json')), comp = cfg.components.find((c) => c.name === 'Tag')!;
+  const truth = JSON.parse(readFileSync(path.join(repo, 'extract/computed/out/tag/captured-truth.json'), 'utf8')) as CapturedTruthFile;
+  const space = propSpaceFor(repo, cfg, comp), captures = reconstructCaptures(truth).map((c) => ({ ...c, combo: `Tag:${c.combo}` }));
+  for (const c of captures) c.root = { ...c.root, style: { ...c.root.style, ...(c.combo.startsWith('Tag:large.')
+    ? { 'letter-spacing': '0.32px', 'text-decoration-line': 'underline' } : { 'letter-spacing': 'normal', 'text-decoration-line': 'none' }) } };
+  const sweep = { captures, controls: truth.controls, uaControls: truth.uaControls ?? {}, uaBaselineBrowser: String(truth._provenance.uaBaselineBrowser),
+    allProps: truth._provenance.channels, stylesheetSkips: [], browserVersion: String(truth._provenance.browser), fontChecks: {}, pinnedAnimations: [],
+    shadowHostTrails: {}, textFillFolds: {}, closedShadowSuspects: {}, quarantined: [] } as SweepResult;
+  const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix), promotion = promoteAnatomy(space, comp, aligned.union, 'tag');
+  const styled = styledChannels(aligned, space, Object.fromEntries(Object.entries(truth.controls).map(([tag, n]) => [tag, n.style])), sweep.allProps, [],
+    { viewport: cfg.browser.viewport, stage: stageFor(cfg, comp), portaled: false }, uaStyles(truth));
+  const layout = enrichLayout(aligned, space, styled, promotion.contract);
+  const prep = (on: boolean) => prepareMint(aligned, comp, space, styled, detectFolds(aligned, styled, []), layout.handled, promotion.contract,
+    new Set([...promotion.consumed].map((i) => aligned.partNames[i])), new Set(promotion.partIndex.keys()), promotion.gridMintRefusals, false,
+    { normalLetterSpacingZero: on, textDecorationByAxis: on });
+  const facts = (p: ReturnType<typeof prep>) => ({
+    spacing: p.baseObs.filter((o) => o.part === '' && o.cssProperty === 'letter-spacing').map((o) => [...new Set(o.occurrences.map((x) => `${x.axisValues.size}=${x.value}`))].sort()),
+    underline: p.declared.filter((d) => d.part === 'root' && d.channel === 'text-decoration').map((d) => `${d.value}@${d.when?.prop}=${d.when?.equals}`),
+    codeOnly: p.codeOnly.filter((c) => ['', 'root'].includes(c.part) && /^(letter-spacing|text-decoration-line)$/.test(c.channel)).map((c) => c.channel).sort() });
+  // On: the spacing mints per size, normal as 0; the underline rides one rule for the size that draws it.
+  assert.deepEqual(facts(prep(true)), { spacing: [['large=0.32', 'none=0']], underline: ['underline@size=large'], codeOnly: [] });
+  // Off: both are code-only.
+  assert.deepEqual(facts(prep(false)), { spacing: [], underline: [], codeOnly: ['letter-spacing', 'text-decoration-line'] });
+});
+
+test('text-decoration-line-by-axis-drawn: the writer draws a per-value underline in that value only', () => {
+  const contract = ContractSchema.parse({
+    id: 'test.underline-by-axis', name: 'UnderlineByAxis', version: '0.1.0', status: 'draft', description: 'A link underlined by one prop',
+    states: [], semantics: { element: 'a' },
+    props: [{ name: 'size', type: { enum: ['sm', 'inline'] }, default: 'sm',
+      bindings: { code: { prop: 'size' }, figma: { kind: 'VARIANT', property: 'size', values: { sm: 'sm', inline: 'inline' } } } }],
+    anatomy: { root: { text: 'Link', stylesWhen: [{ prop: 'size', equals: 'inline', styles: { 'text-decoration': 'underline' } }] } },
+    bindings: { code: { anchors: { importPath: 'test/UnderlineByAxis', export: 'UnderlineByAxis' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
+  });
+  const drawn = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map(), conventions: new Set(conventions) as never });
+    const find = (s: any): any => s.type === 'text' ? s : (s.children ?? []).map(find).find(Boolean);
+    return (engine.compileComponentData(contract, new Map([[contract.id, contract]])) as any).variants.map((v: any) => [v.name, find(v.spec)?.textDecoration ?? null]);
+  };
+  assert.deepEqual(drawn(['text-decoration-line-by-axis-drawn']), [['size=sm', null], ['size=inline', 'UNDERLINE']]);
+  assert.deepEqual(drawn([]), [['size=sm', null], ['size=inline', null]]);
+});
