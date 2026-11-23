@@ -216,6 +216,13 @@
  *  draw a half-pixel glyph crisp. It covers path data that varies by one prop (per value, under a fixed-swap drawing or an
  *  observed swap default) and one path for every variant under an observed swap default; a fixed-swap drawing's single
  *  path is swap-drawing-path-box-whole-pixel's. Off, the fractional offset stays, and Chromium paints the box on whole pixels. */
+/** text-align-by-combination (Figma to React proposal): a text whose alignment differs across variants and that no
+ *  single enum axis decides is carried per drawn combination of the fewest axes that do decide it (a literalsByCombination
+ *  text-align table), so each variant's line sits where Figma places it. Off, the mixed alignment is named, not proposed. */
+/** text-box-whole-pixel-beside-fixed-width (Figma to React proposal): a text box that sizes itself to its text in some
+ *  variants and has a fixed width in the rest keeps the whole-pixel box when a literal combination row carries each
+ *  fixed variant's drawn width and no auto-width variant; those rows clamp the box (min-width = max-width), so the
+ *  rounded-up width holds only where Figma sized the box to its text. Off, the mixed case is refused by name. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -292,6 +299,7 @@ export const CONVENTIONS = [
   'swap-drawing-path-box-whole-pixel',
   'synthetic-wrapper-shown-by-members',
   'table-short-row-leaves-columns-empty',
+  'text-align-by-combination',
   'text-align-packs-text-box',
   'text-baseline-as-drawn',
   'text-baseline-as-painted',
@@ -299,6 +307,7 @@ export const CONVENTIONS = [
   'text-box-snapped-as-painted',
   'text-box-snapped-in-placed-box',
   'text-box-stacks-block-children',
+  'text-box-whole-pixel-beside-fixed-width',
   'text-decoration-line-by-axis-drawn',
   'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',
