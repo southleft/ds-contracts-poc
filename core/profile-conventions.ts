@@ -138,6 +138,11 @@
 /** relative-offset-drawn (React to Figma writer): a part positioned relative keeps its flow box and draws shifted by
  *  left/top (-right/-bottom where left/top are not carried), placed in its margin box with overflow visible, so siblings do
  *  not move. A part with a measured line box keeps today's lowering. Off, the offset is not drawn. */
+/** text-box-snapped-in-placed-box (React to Figma writer, at run time, with text-box-snapped-as-painted): a baseline box off
+ *  the whole pixel that its row does not center (Button's label at xs sits at y 2.5, its row aligned to the top by a 1.5 px
+ *  padding and a 1 px border) is held in a box of its own size at its place in the flow and drawn inside it on the whole
+ *  pixel, its glyph line moved so its baseline stays put; a growing, filling, stretched or visibility-bound text is left
+ *  alone, and the box is undone if the row's size changes. Off, such a text is not moved. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -279,6 +284,7 @@ export const CONVENTIONS = [
   'text-baseline-as-painted',
   'text-baseline-rounds-like-figma',
   'text-box-snapped-as-painted',
+  'text-box-snapped-in-placed-box',
   'text-box-stacks-block-children',
   'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',

@@ -271,6 +271,8 @@ export interface NodeSpec {
   paintSnap?: boolean;
   /** Convention text-box-snapped-as-painted: this text's baseline box is moved onto the whole pixel at run time (snapTextBoxes). */
   textBoxSnap?: true;
+  /** Convention text-box-snapped-in-placed-box: a snapped text its row does not center is held in a placed box (snapTextBoxes). */
+  textBoxPlace?: true;
   /** Convention relative-offset-drawn: this part is position: relative; its drawing is shifted by (x, y) from the flow box
    *  it keeps, placed in its margin box (applyMarginBox). */
   relativeOffset?: { x: number; y: number };
@@ -5931,6 +5933,8 @@ function partToSpecInner(
     if (line > 0 && line !== height) spec.baselineBox = { line, height };
     // @lower emit.text-box-snapped-as-painted
     if (spec.baselineBox && input.conventions?.has('text-box-snapped-as-painted')) spec.textBoxSnap = true;
+    // @lower emit.text-box-snapped-in-placed-box
+    if (spec.textBoxSnap && input.conventions?.has('text-box-snapped-in-placed-box')) spec.textBoxPlace = true;
   };
   // Convention shrunk-text-wraps-at-drawn-width (Part.textWrap): in a variant where a flex row shrank the text until it
   // wrapped, the TEXT is given the width its lines broke at once laid out (Figma auto layout has no flex-shrink).
@@ -9618,15 +9622,27 @@ function snapPaintedSvgs() {
  *  baseline; a box on the whole pixel lands it. Once laid out, a baseline box centered in a horizontal row moves onto the
  *  whole pixel (round half up, relative to its variant): its height changes by -2d so its top moves by d, and its glyph line
  *  by -2d so the baseline stays put. A move under 0.05 px is left alone, and the move is undone if the row's size changes. */
-const TEXT_BOX_SNAP_RUNTIME = `const textSnapNodes = [];
+const textBoxSnapRuntime = (placed: boolean): string => `const textSnapNodes = [];
 function snapTextBoxes() {
-  for (const [node, box] of textSnapNodes.splice(0)) {
+  for (const [node, box${placed ? ', place' : ''}] of textSnapNodes.splice(0)) {
     const row = node.parent;
-    if (node.removed || !row || row.layoutMode !== 'HORIZONTAL' || row.counterAxisAlignItems !== 'CENTER' || node.layoutPositioning === 'ABSOLUTE') continue;
+    if (node.removed || !row || ${placed ? "!row.layoutMode || row.layoutMode === 'NONE'" : "row.layoutMode !== 'HORIZONTAL' || row.counterAxisAlignItems !== 'CENTER'"} || node.layoutPositioning === 'ABSOLUTE') continue;
     let variant = row; while (variant && variant.type !== 'COMPONENT') variant = variant.parent;
     if (!variant) continue;
     const y = node.absoluteBoundingBox.y - variant.absoluteBoundingBox.y, d = Math.floor(y + 0.5) - y, w = row.width, h = row.height;
-    if (Math.abs(d) < 0.05) continue;
+    if (Math.abs(d) < 0.05) continue;${placed ? `
+    // Convention text-box-snapped-in-placed-box: a box its row does not center (aligned to its top, say, by a padding) is
+    // held in a box of its own size at its place in the flow, and drawn inside it d lower, its glyph line 2d less.
+    if (row.layoutMode !== 'HORIZONTAL' || row.counterAxisAlignItems !== 'CENTER') {
+      const refs = node.componentPropertyReferences;
+      if (!place || node.visible === false || node.layoutGrow > 0 || node.layoutAlign === 'STRETCH' || node.layoutSizingHorizontal === 'FILL' ||
+        node.layoutSizingVertical === 'FILL' || (refs && refs.visible)) continue;
+      const holder = figma.createFrame(); holder.name = node.name + ' (pixel box)'; holder.fills = []; holder.clipsContent = false;
+      holder.resize(node.width, node.height); row.insertChild(row.children.indexOf(node), holder); holder.appendChild(node);
+      node.x = 0; node.y = d; node.lineHeight = { unit: 'PIXELS', value: box.line - 2 * d };
+      if (row.width !== w || row.height !== h) { row.insertChild(row.children.indexOf(holder), node); holder.remove(); node.lineHeight = { unit: 'PIXELS', value: box.line }; }
+      continue;
+    }` : ''}
     node.lineHeight = { unit: 'PIXELS', value: box.line - 2 * d }; node.resize(node.width, box.height - 2 * d);
     if (row.width !== w || row.height !== h) { node.lineHeight = { unit: 'PIXELS', value: box.line }; node.resize(node.width, box.height); }
   }
@@ -9871,6 +9887,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
   const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
   const hasTextBoxSnap = featureDatas.some((d) => dataSome(d, (s) => s.textBoxSnap === true));
+  const hasTextBoxPlace = featureDatas.some((d) => dataSome(d, (s) => s.textBoxPlace === true));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
     const mark=(s:NodeSpec)=>{if(s.authoredTextScalar)s.authoredTextScalar.nativeWeightBinding=!!(opts.nativeSource&&s.nativeContractPart&&!s.slotTextTemplate&&s.authoredTextScalar.fontWeightVar);
       const markRecipes=(recipes:NativeAuthoredTextRecipes)=>{for(const v of recipes.variants){
@@ -10775,7 +10792,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? TEXT_BOX_SNAP_RUNTIME : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10803,7 +10820,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasTextBoxSnap ? '\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox]);' : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasTextBoxSnap ? `\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox${hasTextBoxPlace ? ', spec.textBoxPlace === true' : ''}]);` : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);

@@ -816,6 +816,45 @@ test('text-box-snapped-as-painted: a centered baseline box off the whole pixel m
   assert.deepEqual(off, { label: [11.5, 18, 18.5], dot: [15.5, 10], tall: [18, 18.5], hug: 18 });
 });
 
+test('text-box-snapped-in-placed-box: a baseline box its top-aligned row puts off the whole pixel is held in a placed box and drawn on it', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // Button at xs: a row aligned to its top by a 2.5 px padding (1.5 px and its border), so its 18 px label box (glyph line
+  // 18.5) sits at y 2.5, beside a 10 px dot. A second such row hugs a text whose held box the mock sizes 1 px taller.
+  const text = (t: string) => ({ text: t, literals: { 'font-size': '14px', 'line-height': '18px' }, textBaseline: { props: [], rows: [{ values: [], px: 14.5, ascent: 1.025, descent: 0.275 }] } });
+  const dot = { literals: { width: '10px', height: '10px', 'background-color': '#000000' } };
+  const row = (parts: Record<string, unknown>) => ({ layout: { display: 'flex', direction: 'row', align: 'start' }, literals: { 'padding-top': '2.5px' }, parts });
+  const contract = ContractSchema.parse({ id: 'test.placed', name: 'Placed', version: '0.1.0', status: 'draft', description: 'Top-aligned texts', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'column' }, literals: { width: '300px' }, parts: { top: row({ label: text('Button'), dot }), forced: row({ wide: text('Wide') }) } } },
+    bindings: { code: { anchors: { importPath: 'test/Placed', export: 'Placed' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), f = figma as any;
+    // The mock places no auto-layout child; give a row's child Figma's place (centered, or at the top padding), and nothing else.
+    const placed = (make: () => any) => () => { const n = make(); let own = 0; Object.defineProperty(n, 'y', { configurable: true, set(v: number) { own = v; }, get() {
+      const p = n.parent; if (p?.layoutMode !== 'HORIZONTAL') return own; return p.counterAxisAlignItems === 'CENTER' ? (p.height - n.height) / 2 : p.paddingTop; } });
+      const resize = n.resize.bind(n); n.resize = (w: number, h: number) => resize(w, n.name === 'wide (pixel box)' ? h + 1 : h); return n; };
+    f.createText = placed(f.createText.bind(f)); f.createFrame = placed(f.createFrame.bind(f));
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const at = (name: string) => root.findOne((x: any) => x.name === name) as any, box = (n: any) => [n.width, n.height];
+    const label = at('label'), wide = at('wide');
+    return { label: [label.parent.name, label.y, label.absoluteBoundingBox.y - at('top').absoluteBoundingBox.y, label.height, label.lineHeight.value],
+      held: label.parent.name === 'top' ? null : [box(label.parent), label.parent.y, label.parent.clipsContent, label.parent.fills.length, label.width],
+      dot: [at('dot').parent.name, at('dot').y], top: box(at('top')), wide: [wide.parent.name, wide.y, wide.lineHeight.value, !!at('wide (pixel box)')], forced: box(at('forced')) };
+  };
+  // On: the label is held in a box of its own size (no fill, overflow visible) at the row's y 2.5, and drawn 0.5 px lower in
+  // it, at 3, its glyph line 1 px less so its baseline stays at 17. The dot and the row do not move or change size. The row
+  // the held box would grow is put back as it was.
+  const on = await run(['text-baseline-as-drawn', 'text-box-snapped-as-painted', 'text-box-snapped-in-placed-box']);
+  const painted = await run(['text-baseline-as-drawn', 'text-box-snapped-as-painted']), off = await run(['text-baseline-as-drawn']);
+  assert.deepEqual(on.label, ['label (pixel box)', 0.5, 3, 18, 17.5]);
+  assert.deepEqual(on.held, [[on.held![4], 18], 2.5, false, 0, on.held![4]]);
+  assert.deepEqual([on.dot, on.top, on.wide, on.forced], [off.dot, off.top, ['forced', 2.5, 18.5, false], off.forced]);
+  // With the centered snap alone, or neither, a top-aligned text is not moved.
+  for (const r of [painted, off]) assert.deepEqual([r.label, r.held, r.wide], [['top', 2.5, 2.5, 18, 18.5], null, ['forced', 2.5, 18.5, false]]);
+});
+
 test('relative-offset-drawn: a part positioned relative keeps its flow box and draws shifted by its offset; siblings stay', async () => {
   const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
   const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
