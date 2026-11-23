@@ -18,7 +18,8 @@
  *  display:none hides the part. */
 /** absolute-overhang-whole-pixel (React to Figma writer): an absolute offset past the containing box's edge (an
  *  overhang, a tooltip centered under a narrower anchor) snaps outward to the whole pixel, as the browser's paint extent
- *  spans it; an offset inside the box is kept. Off, every offset is kept as measured (Figma-proposed geometry is exact). */
+ *  spans it; an offset inside the box is kept, and one that rounds to 0 at the browser's 1/64 px layout unit (a float
+ *  residue) is placed at 0. Off, every offset is kept as measured (Figma-proposed geometry is exact). */
 /** observed-swap-default-drawn (Figma to React proposal): a swap property's declared default that the set draws at every
  *  use, with no linked contract in scope, renders when the caller omits the swap, built from each use's captured drawing
  *  (instanceSwapContent) with its own paint and size; caller content replaces it. Off, the drawing is recorded and unread. */
