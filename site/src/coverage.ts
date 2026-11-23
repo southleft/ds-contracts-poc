@@ -890,6 +890,9 @@ reg("composition", "ref-overrides", [
   "componentRef.overrides",
   "componentRef.rootOverrides",
   "componentRef.rootFill",
+  "componentRef.rootAlignment",
+  "componentRef.rootAlignment.justify",
+  "componentRef.rootAlignment.align",
   "part.instanceRootInputs",
   "part.overridable",
 ]);
