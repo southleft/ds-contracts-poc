@@ -9641,14 +9641,17 @@ function snapTextBoxes() {
     const y = node.absoluteBoundingBox.y - variant.absoluteBoundingBox.y, d = Math.floor(y + 0.5) - y, w = row.width, h = row.height;
     if (Math.abs(d) < 0.05) continue;${placed ? `
     // Convention text-box-snapped-in-placed-box: a box its row does not center (aligned to its top, say, by a padding) is
-    // held in a box of its own size at its place in the flow, and drawn inside it d lower, its glyph line 2d less.
+    // held in an auto-layout box of its own size at its place in the flow, d its padding (top, aligned to the top; or
+    // bottom, aligned to the bottom, when d is negative), so the text is drawn in flow d lower, its glyph line 2d less.
     if (row.layoutMode !== 'HORIZONTAL' || row.counterAxisAlignItems !== 'CENTER') {
       const refs = node.componentPropertyReferences;
       if (!place || node.visible === false || node.layoutGrow > 0 || node.layoutAlign === 'STRETCH' || node.layoutSizingHorizontal === 'FILL' ||
         node.layoutSizingVertical === 'FILL' || (refs && refs.visible)) continue;
       const holder = figma.createFrame(); holder.name = node.name + ' (pixel box)'; holder.fills = []; holder.clipsContent = false;
+      Object.assign(holder, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'FIXED', counterAxisSizingMode: 'FIXED', primaryAxisAlignItems: 'MIN',
+        counterAxisAlignItems: d < 0 ? 'MAX' : 'MIN', paddingTop: Math.max(d, 0), paddingBottom: Math.max(-d, 0) });
       holder.resize(node.width, node.height); row.insertChild(row.children.indexOf(node), holder); holder.appendChild(node);
-      node.x = 0; node.y = d; node.lineHeight = { unit: 'PIXELS', value: box.line - 2 * d };
+      node.lineHeight = { unit: 'PIXELS', value: box.line - 2 * d };
       if (row.width !== w || row.height !== h) { row.insertChild(row.children.indexOf(holder), node); holder.remove(); node.lineHeight = { unit: 'PIXELS', value: box.line }; }
       continue;
     }` : ''}
