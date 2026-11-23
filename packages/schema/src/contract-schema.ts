@@ -959,6 +959,7 @@ const shadowLayerOk = (layer: string): boolean => {
 /** Channel-specific structured values: shadow stacks and one linear gradient.
  * Other channels retain their scalar grammar. */
 export const literalValueOk = (channel: string, value: string): boolean => {
+  if (channel === 'text-align') return /^(left|right|center|justify)$/.test(value);
   if (channel === 'font-weight') {
     return /^(?:[1-9]\d*(?:\.\d+)?|0\.\d+)$/.test(value) &&
       Number(value) >= 1 && Number(value) <= 1000;
@@ -1056,8 +1057,11 @@ export const LITERAL_CHANNELS = new Set([
  *  0.88 on some planes). The canvas sets the node's opacity directly, exactly
  *  as its token case does. Kept apart from LITERAL_CHANNELS on purpose: that
  *  set is also the historical vocabulary of recorded source-reference
- *  evidence, which must reproduce byte for byte. */
-export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity", "font-weight", "outline-width", "outline-color"]);
+ *  evidence, which must reproduce byte for byte.
+ *  `text-align` and `max-width` join for two Figma to React profile conventions (text-align-by-combination,
+ *  text-box-whole-pixel-beside-fixed-width): a text's alignment keyed by the axes that decide it, and a fixed text box
+ *  spelled as min-width = max-width so it clamps a whole-pixel auto-width box instead of contradicting it. */
+export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity", "font-weight", "outline-width", "outline-color", "text-align", "max-width"]);
 
 /** A literals record with channel-aware scalar, shadow and gradient grammars. */
 export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
