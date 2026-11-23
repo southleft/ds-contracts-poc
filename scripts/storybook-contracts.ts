@@ -283,21 +283,27 @@ export const paintedPx = (rel: number, px: number): number => Math.floor(rel + p
 export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false, rootFlex = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
   const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
+  // Every element's box and the probed text's, before the probes and while they are in: a reading whose probes moved any is
+  // named, not carried (a probe is an element, and sibling rules such as :first-child or + can see it).
+  const els = [], all = (e) => { els.push(e); for (const c of shChildNodesOf(e)) if (c.nodeType === 1) all(c); };
+  const boxes = (texts) => [...els, ...texts].map((e) => { let r; if (e.nodeType === 3) { const g = document.createRange(); g.selectNodeContents(e); r = g.getBoundingClientRect(); }
+    else r = e.getBoundingClientRect(); return [r.left, r.top, r.width, r.height].join(); }).join(';');
+  if (root) all(root);
   const walk = (el) => { const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.data.trim()), cs = getComputedStyle(el); let m = null;
     if (own.length && /^(block|inline|inline-block|list-item|flow-root|table-cell)$/.test(cs.display)) {
-      const first = probe('top'), last = probe('top'), base = probe('baseline'); own[0].before(first); own[0].after(base); own[own.length - 1].after(last);
-      const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top;
+      const was = boxes(own), first = probe('top'), last = probe('top'), base = probe('baseline'); own[0].before(first); own[0].after(base); own[own.length - 1].after(last);
+      const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top, moved = boxes(own) !== was;
       first.remove(); base.remove(); last.remove();
       const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
-      if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+      if (moved) m = { disturbed: true }; else if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
 ${rootFlex ? `    if (!m && el === root && own.length === 1 && /^(inline-)?(flex|grid)$/.test(cs.display)) {
-      const t = own[0], box = () => { const g = document.createRange(); g.selectNodeContents(t); const r = g.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, was = box(), s = document.createElement('span');
+      const t = own[0], box = () => { const g = document.createRange(); g.selectNodeContents(t); const r = g.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, was = box(), all0 = boxes(own), s = document.createElement('span');
       t.before(s); s.appendChild(t);
       if (box().every((v, i) => Math.abs(v - was[i]) < 0.01)) { const first = probe('top'), last = probe('top'), base = probe('baseline'); t.before(first); t.after(base); base.after(last);
-        const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top;
+        const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top, moved = boxes(own) !== all0;
         first.remove(); base.remove(); last.remove();
         const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
-        if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+        if (moved) m = { disturbed: true }; else if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
       s.before(t); s.remove(); }
 ` : ''}    out.push([el.localName, m]);
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
@@ -404,22 +410,26 @@ export function carryTextBaseline(contract: Contract, axes: readonly string[], c
 }
 
 /** Convention inline-block-line-box-as-drawn: for each element in capture order (NUMBER_ELEMENTS' walk), how far the line
- *  box it sits alone on reaches above its margin box and below it, in px, when it is an atomic inline in a block container
- *  whose nearest in-flow neighbours are blocks or none (zero-size probes at the line's top and bottom, removed at once);
- *  null otherwise, or when the line box is its margin box. */
+ *  box it sits alone on reaches above its flow margin box and below it, in px, when it is an atomic inline in a block
+ *  container whose nearest in-flow neighbours are blocks or none; null otherwise, when the line box is its margin box, when
+ *  the container's line-height is normal, or in quirks mode (a line with no text has no strut there). An element beside it
+ *  would change the sibling rules that place it (`:has(+ x)`, `:nth-child`), so the line is read from a zero-width text
+ *  node after it, read with a Range and removed at once, which no selector sees. Its leading box is the line's strut, as
+ *  Chromium lays it out (the line-height cut to 1/64 px, the half left over above the content area floored to the whole
+ *  pixel), and the line box is the union of that and the element's flow margin box (its box less a relative offset). */
 export const MEASURE_LINE_BOXES = (rootPath: readonly string[] | undefined) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
-  const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
   const flows = (n) => n.nodeType === 3 ? n.data.trim() !== '' : n.nodeType === 1 && getComputedStyle(n).display !== 'none' && !['absolute', 'fixed'].includes(getComputedStyle(n).position);
   const block = (n) => !n || (n.nodeType === 1 && !/^inline/.test(getComputedStyle(n).display));
   const walk = (el) => { const cs = getComputedStyle(el), up = el.parentElement; let m = null;
     if (el !== root && up && /^inline-(block|flex|grid|table)$/.test(cs.display) && cs.position !== 'absolute' && cs.position !== 'fixed' && cs.float === 'none' &&
       /^(block|list-item|flow-root|inline-block|table-cell)$/.test(getComputedStyle(up).display)) {
-      const flow = [...up.childNodes].filter(flows), i = flow.indexOf(el);
-      if (block(flow[i - 1]) && block(flow[i + 1])) {
-        const t = probe('top'), b = probe('bottom'); el.before(t); el.after(b);
-        const r = el.getBoundingClientRect(), above = r.top - parseFloat(cs.marginTop) - t.getBoundingClientRect().top, below = b.getBoundingClientRect().bottom - r.bottom - parseFloat(cs.marginBottom);
-        t.remove(); b.remove();
+      const flow = [...up.childNodes].filter(flows), i = flow.indexOf(el), line = parseFloat(getComputedStyle(up).lineHeight);
+      if (block(flow[i - 1]) && block(flow[i + 1]) && Number.isFinite(line) && document.compatMode === 'CSS1Compat') {
+        const z = document.createTextNode('\\u200B'), g = document.createRange(); el.after(z); g.selectNodeContents(z); const s = g.getBoundingClientRect(); z.remove();
+        const dy = cs.position !== 'relative' ? 0 : cs.top !== 'auto' ? parseFloat(cs.top) : cs.bottom !== 'auto' ? -parseFloat(cs.bottom) : 0;
+        const lh = Math.floor(line * 64) / 64, top = s.top - Math.floor((lh - s.height) / 2), r = el.getBoundingClientRect();
+        const above = r.top - dy - parseFloat(cs.marginTop) - top, below = top + lh - (r.bottom - dy + parseFloat(cs.marginBottom));
         if (above > 0.001 || below > 0.001) m = { top: +Math.max(0, above).toFixed(4), bottom: +Math.max(0, below).toFixed(4) }; } }
     out.push([el.localName, m]);
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
@@ -742,7 +752,8 @@ async function main() {
           const root = normalizeNode(raw as any);
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
             const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'))) as never);
-            if (read) for (const [n, m] of read) baselines.set(n, m); else refusals.push(`text-baseline-unmatched:${k.id}`);
+            if (read) for (const [n, m] of read) { if (m && 'disturbed' in m) refusals.push(`text-baseline-probe-disturbed:${k.id}:${n.tag}`); baselines.set(n, m && 'disturbed' in m ? null : m); }
+            else refusals.push(`text-baseline-unmatched:${k.id}`);
           }
           if (conventions.has('shrunk-text-wraps-at-drawn-width')) { // read before any element moves, matched by capture order
             const read = drawnBaselines<number>(root, await page.evaluate(MEASURE_TEXT_LINES(at)) as never);

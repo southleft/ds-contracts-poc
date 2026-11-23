@@ -652,14 +652,14 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 
 #### `emit.relative-offset-drawn`
 
-**Context.** profile convention relative-offset-drawn, per variant: a part whose position resolves to relative in that variant (declared, or by its stylesWhen), whose carried offset is not zero, and which carries no measured line box (Part.lineBox)
+**Context.** profile convention relative-offset-drawn, per variant: a part whose position resolves to relative in that variant (declared, or by its stylesWhen), whose carried offset is not zero; a measured line box (Part.lineBox, read without the offset) joins the margin box it is drawn in
 
 **Inverse.** None — this lowering has no return leg.
 
 **Lost.**
 - the offset reads back as its margin box's padding, not as a CSS offset; a FILL-sized part keeps today's lowering (no box), and a part with a negative margin keeps the fixed box with the part placed in it
 
-**Why.** Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. A part with a measured line box keeps today's lowering: the line-box probe inserts siblings, and FluidDatePickerSkeleton's label loses its offset while they are in (its rule depends on its place among its siblings), so its measured line box cannot be combined with the offset.
+**Why.** Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. FluidDatePickerSkeleton's label (left 16, top 16) also carries a measured line box (2 px above it); the line box is read from a text node that no sibling rule sees and without the offset, so the two combine and the label is drawn at (16, 18), as Chromium paints it.
 
 #### `schema.position-fixed-sticky-unspellable`
 
