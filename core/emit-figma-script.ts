@@ -9750,6 +9750,10 @@ function shiftTextBaselines() {
     Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'FIXED', counterAxisSizingMode: 'FIXED', primaryAxisAlignItems: 'MIN',
       counterAxisAlignItems: d < 0 ? 'MAX' : 'MIN', paddingTop: Math.max(d, 0), paddingBottom: Math.max(-d, 0) });
     box.resize(node.width, node.height); row.insertChild(row.children.indexOf(node), box); box.appendChild(node);
+    // The box keeps within its row's cross size: Figma paints an empty frame's whole box, a text only its ink, so a box past
+    // its row would move the painted image's edge where the text alone did not.
+    const across = row.layoutMode === 'HORIZONTAL', cross = across ? row.height - row.paddingTop - row.paddingBottom : row.width - row.paddingLeft - row.paddingRight;
+    if ((across ? box.height : box.width) > cross) box.resize(across ? box.width : cross, across ? cross : box.height);
     if (row.width !== w || row.height !== h) { row.insertChild(row.children.indexOf(box), node); box.remove(); degrade('FC-RT-TEXT-BASELINE-SHIFT-SKIPPED', node, 'the box would change the size of its row; the text stays on the baseline Figma draws'); }
   }
 }
