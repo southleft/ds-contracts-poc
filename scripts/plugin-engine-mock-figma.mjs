@@ -214,6 +214,7 @@ export function createFigmaMock(options = {}) {
         // threw 'Property "fontSize" failed validation'. Same message here.
         this._fontSize = 16;
         Object.defineProperty(this, 'fontSize', {
+          configurable: true, // a test may read it back as figma.mixed (scripts/figma-mixed-reads.test.ts)
           get() { return this._fontSize; },
           set(v) {
             if (!(typeof v === 'number' && v >= 1)) {
@@ -802,7 +803,7 @@ export function createFigmaMock(options = {}) {
     // from a healthy one — the exact class the live composite dialog fell in.
     _measureText(axis) {
       if (this._resized) return axis === 'w' ? this._w : this._h;
-      const size = this.fontSize || 16;
+      const size = this._fontSize ?? this.fontSize ?? 16; // the stored size: a test may read the public one back as figma.mixed
       return axis === 'w'
         ? Math.round(String(this.characters ?? '').length * size * 0.6)
         : Math.round(size * 1.4);
@@ -1221,7 +1222,8 @@ export function createFigmaMock(options = {}) {
       clone._shared = new Map(this._shared);
       if (this.type === 'TEXT') {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
-          clone[field] = this[field];
+          // A field read back as figma.mixed has no one value to set; the clone keeps its own (Figma copies the ranges).
+          if (typeof this[field] !== 'symbol') clone[field] = this[field];
         }
         if (typeof this.fontWeight === 'number') clone.fontWeight = this.fontWeight;
         if (options.consumerVariableModes) {
