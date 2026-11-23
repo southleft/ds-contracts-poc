@@ -99,6 +99,29 @@ test('variant-text-owns-its-part: a part whose own text varies and that holds ch
     textByCombination: { props: ['nested'], rows: [{ values: ['false'], text: 'Review' }, { values: ['true'], text: 'Prepare' }] } });
 });
 
+test('variant-text-owns-its-part: the run keeps its host\'s drawn baseline, the line it is drawn on (text-baseline-as-drawn)', () => {
+  const [c] = declare({ storybook: 'x', components: [component('a/List', { axes: ['nested'],
+    references: [ref('l--a', { nested: 'false' }), ref('l--b', { nested: 'true' })] })] }).components;
+  const built = () => { const s = seed(c!); s.contract.anatomy.root.parts = { item: { text: 'Review', declared: { display: 'list-item' },
+    parts: { marker: { text: '–' }, sub: { declared: { display: 'block' } } } } } as never; return s; };
+  const at = (key: string, part: string) => part === 'item' ? (key.includes('true') ? 'Prepare' : 'Review') : null;
+  // Only the host <li> is an element with a reading (its marker reads none here); the run made from its text has none of its own.
+  const read = (key: string) => ({ px: key.includes('true') ? 14.5 : 14, ascent: 1.025, descent: 0.275 });
+  const baseline = (key: string, part: string) => part === 'item' ? read(key) : undefined;
+  // On: the run reads its host's baseline in each variant.
+  const on = built(), runs = new Map<string, string>();
+  assert.deepEqual(carryVariantText(on.contract, c!.axes, on.combos, at, undefined, false, true, false, runs), []);
+  assert.deepEqual([...runs], [['item-text', 'item']]);
+  assert.deepEqual(carryTextBaseline(on.contract, c!.axes, on.combos, baseline, false, runs), ['item-text']);
+  const keys = on.combos.map((k) => k.key), item = (on.contract.anatomy.root.parts as any).item;
+  assert.deepEqual(item.parts['item-text'].textBaseline, { props: ['nested'], rows: keys.map((k) => ({ values: [k.includes('true') ? 'true' : 'false'], ...read(k) })) });
+  // Off: no run is made; the item keeps the first variant's text, refused per variant, and its own reading, as before.
+  const off = built(), none = new Map<string, string>();
+  carryVariantText(off.contract, c!.axes, off.combos, at, undefined, false, false, false, none);
+  assert.equal(none.size, 0);
+  assert.deepEqual(carryTextBaseline(off.contract, c!.axes, off.combos, baseline), ['item']);
+});
+
 test('a text field carries the text it draws: one placeholder as attrs.placeholder, values per variant, drawn by the Figma engine', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['tone'],
     references: [ref('f--a', { tone: 'success' }), ref('f--a', { tone: 'error' }, { tone: 'error' })] })] }).components;
