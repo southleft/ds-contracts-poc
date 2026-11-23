@@ -68,7 +68,15 @@ export function qualifyOwnedTextAvailability(...args: Parameters<typeof qualifyD
   return qualifyOwnedLeafAvailability('TEXT',...args);
 }
 
-function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT',source: DumpSet,
+/** A FRAME or GROUP part that owns parts takes the same exact original-path
+ * witness: its own node in each source main, by path and bytes, or the source
+ * INSTANCE whose captured caller composition it was projected from. Membership
+ * is its own presence, never its contents; descendants keep their predicates. */
+export function qualifyOwnedContainerAvailability(...args: Parameters<typeof qualifyDirectPartAvailability>): Part['availabilityByCombination'] {
+  return qualifyOwnedLeafAvailability('CONTAINER',...args);
+}
+
+function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT'|'CONTAINER',source: DumpSet,
   occurrences: readonly {variant:string;node:DumpNode}[],
   axes: readonly {property:string;prop:string;values:string[];map:Record<string,string>}[],
   declaredDomain: readonly (readonly (string|null)[])[] | undefined,
@@ -78,12 +86,14 @@ function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT',source: DumpSet,
       new Set(axes.map(a=>a.property)).size!==axes.length||new Set(axes.map(a=>a.prop)).size!==axes.length||
       !dense(source.variants)||!dense(occurrences)||!occurrences.length||occurrences.length>=source.variants.length||
       axes.some(a=>!dense(a.values)||!a.values.length||new Set(a.values).size!==a.values.length||a.values.some(v=>!Object.hasOwn(a.map,v)||typeof a.map[v]!=='string')||new Set(a.values.map(v=>a.map[v])).size!==a.values.length)||
-      occurrences.some(o=>!o.node.nodeId||o.node.type!==kind||!o.node.name||
-        (o.node.children!==undefined&&(!dense(o.node.children)||o.node.children.length!==0)))) return;
+      occurrences.some(o=>!o.node.nodeId||(kind==='CONTAINER'?!['FRAME','GROUP'].includes(o.node.type)||o.node.type!==occurrences[0].node.type:o.node.type!==kind)||!o.node.name||
+        (o.node.children!==undefined&&(!dense(o.node.children)||kind!=='CONTAINER'&&o.node.children.length!==0)))) return;
   const targetKey=occurrences[0].node.instanceSetKey??occurrences[0].node.instanceKey;
   if(kind==='INSTANCE'&&(!targetKey||occurrences.some(o=>(o.node.instanceSetKey??o.node.instanceKey)!==targetKey))) return;
   if(kind==='TEXT'&&occurrences.some(o=>typeof o.node.text?.characters!=='string')) return;
   const safe=(n:DumpNode)=>(n.hidden===undefined||n.hidden===false)&&n.propRefs?.visible===undefined&&n.bound?.visible===undefined&&n.propRefs?.mainComponent===undefined;
+  const same=(src:DumpNode,occ:DumpNode)=>canonicalJson(src)===canonicalJson(occ)||kind==='CONTAINER'&&src.type==='INSTANCE'&&
+    src.instanceComposition?.root.nodeId===src.nodeId&&canonicalJson(src.instanceComposition?.root)===canonicalJson(occ);
   const allIds=new Set<string>([source.nodeId]),mainNames=new Set<string>();
   const indexed=new Map<string,Map<string,{node:DumpNode;path:Segment[]}>>();
   for(const main of source.variants){
@@ -105,7 +115,7 @@ function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT',source: DumpSet,
   for(const occurrence of occurrences){
     if(byMain.has(occurrence.variant)) return;
     const hit=indexed.get(occurrence.variant)?.get(occurrence.node.nodeId!);
-    if(!hit||!hit.path.length||canonicalJson(hit.node)!==canonicalJson(occurrence.node)||
+    if(!hit||!hit.path.length||!same(hit.node,occurrence.node)||
         hit.path.some((s,i)=>!s.name||i<hit.path.length-1&&!['FRAME','GROUP'].includes(s.type))) return;
     if(ownedPath&&canonicalJson(ownedPath)!==canonicalJson(hit.path)) return;
     ownedPath=hit.path;byMain.set(occurrence.variant,occurrence.node);
@@ -129,8 +139,7 @@ function qualifyOwnedLeafAvailability(kind:'INSTANCE'|'TEXT',source: DumpSet,
     }
     const occurrence=byMain.get(main.name);
     if(node){
-      if(!occurrence||!safe(node)||node.type!==kind||node.nodeId!==occurrence.nodeId||
-          canonicalJson(node)!==canonicalJson(occurrence)||kind==='INSTANCE'&&(node.instanceSetKey??node.instanceKey)!==targetKey) return;
+      if(!occurrence||!safe(node)||kind!=='CONTAINER'&&node.type!==kind||node.nodeId!==occurrence.nodeId||!same(node,occurrence)||kind==='INSTANCE'&&(node.instanceSetKey??node.instanceKey)!==targetKey) return;
     }else if(occurrence) return;
     observed.push({values,present:node!==undefined});
   }
