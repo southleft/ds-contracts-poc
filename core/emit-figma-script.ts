@@ -5176,6 +5176,7 @@ function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, 
 }
 
 function applyInstanceRootInputs(spec: NodeSpec, name: string, part: Part, dep: Contract, contract: Contract, subst: Record<string, string>): void {
+    if(part.component!.rootAlignment)throw Error(`instance-root-alignment-not-drawn:${name}`); // code surfaces only (named limit)
     if(dep.anatomy.root.instanceRootInputs?.includes('border-color')&&dep.anatomy.root.instanceRootInputs.includes('border-width'))spec.instanceRootStrokeInput='INSIDE';
     for(const [channel,ref] of Object.entries(part.component!.rootOverrides??{})) {
       if(!dep.anatomy.root.instanceRootInputs?.includes(channel as never))throw Error(`instance-root-input-undeclared:${name}:${channel}`);

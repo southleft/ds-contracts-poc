@@ -374,6 +374,8 @@ export function validateContract(
         if (dep && !dep.anatomy.root?.instanceRootInputs?.includes(channel as never))
           errors.push(`${contract.id}: part "${name}" root override "${channel}" is not declared by ${dep.id}`);
       }
+      if (part.component.rootAlignment && (!dep || !dep.anatomy.root?.instanceRootInputs?.length || !['flex','inline-flex'].includes(dep.anatomy.root.layout?.display ?? (dep.anatomy.root.layout ? 'flex' : ''))))
+        errors.push(`${contract.id}: part "${name}" rootAlignment needs a child whose single flex root forwards root style (instanceRootInputs)`);
       if (part.component.overrides?.size && ['width','height'].some(channel=>Object.hasOwn(part.component!.rootOverrides??{},channel)))
         errors.push(`${contract.id}: part "${name}" mixes subtree size and root dimension overrides`);
     }

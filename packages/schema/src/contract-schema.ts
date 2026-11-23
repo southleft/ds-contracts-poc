@@ -2549,6 +2549,10 @@ export const ComponentRefSchema = z.strictObject({
   /** Parent-owned cross-axis FILL on a declared child root dimension. */
   rootFill: z.array(z.enum(['width','height'])).min(1).max(1).optional(),
   rootOverrides: z.partialRecord(z.enum(INSTANCE_ROOT_CHANNELS), TokenRefSchema).optional(),
+  /** Profile convention instance-root-alignment-carried: the usage's own main- and cross-axis alignment of the child's
+   *  flex root (a Figma instance overriding its main's primary/counter-axis alignment), applied as root style. */
+  rootAlignment: z.strictObject({ justify: z.enum(["start", "center", "end", "space-between"]).optional(),
+    align: z.enum(["start", "center", "end", "baseline"]).optional() }).optional(),
   /** docs/23 §D.164 — the child's DRAWN interaction state this usage shows.
    *  A designer who draws a wrapper's `state=hover` draws its nested child's
    *  Hover cell; the child runs hover as a pseudo-class, which no caller can
