@@ -725,6 +725,27 @@ test('closed-select-draws-selected-label: a closed single select draws its selec
   assert.equal(parts.hint.text, 'Region');
 });
 
+test('closed-select-draws-selected-label: the writer draws the closed select\'s label centered on its box\'s vertical axis; off, at the top', async () => {
+  // Select: the selected label "Choose a region" (14/18) in a 48 px select box; Chromium centers it (line 15–33), Figma drew it at 0.
+  const [c] = declare({ storybook: 'x', components: [component('a/Select', { axes: [], references: [ref('b--a', {})] })] }).components;
+  const { contract } = seed(c!), lit = { height: '48px', 'padding-left': '16px', 'background-color': '#f4f4f4', 'font-size': '14px', 'line-height': '18px' };
+  contract.anatomy.root.parts = { pick: { element: 'select', text: 'Choose a region', layout: { grow: true }, literals: lit },
+    block: { element: 'select', text: 'Choose a region', layout: { grow: true }, declared: { display: 'block' }, literals: lit },
+    open: { element: 'select', layout: { grow: true }, literals: lit, parts: { o1: { element: 'option', text: 'a' } } },
+    hint: { element: 'div', text: 'Region', layout: { grow: true }, literals: lit } } as never;
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js'), parsed = ContractSchema.parse(contract);
+  const layouts = (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const spec = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: { children: Array<{ name: string; layout?: object }> } }> }).variants[0]!.spec;
+    return Object.fromEntries(spec.children.map((k) => [k.name, k.layout]));
+  };
+  const on = layouts(['closed-select-draws-selected-label']), off = layouts([]);
+  // A row box centers it on its counter axis, a block (a column) on its primary axis.
+  assert.deepEqual([on.pick, on.block], [{ ...off.pick, counter: 'CENTER' }, { ...off.block, primary: 'CENTER' }]);
+  assert.deepEqual([(off.pick as { mode?: string }).mode ?? 'HORIZONTAL', (off.block as { mode?: string }).mode], ['HORIZONTAL', 'VERTICAL']);
+  assert.deepEqual([off.pick, on.open, on.hint], [off.hint, off.open, off.hint], 'off, a select with options, or any other text box is unchanged');
+});
+
 test('a root measured hugging beneath its max-width in every combo carries hugsBelowMaxWidth, as the harness route does', () => {
   const root = (extra: object) => ({ anatomy: { root: { tokens: { 'max-width': '{w.cap}' }, parts: { label: { tokens: { 'max-width': '{w.cap}' } } }, ...extra } } }) as any;
   const hugs = (v: boolean) => new Map([['root', v], ['label', true]]);

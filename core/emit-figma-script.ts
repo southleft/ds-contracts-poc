@@ -6009,6 +6009,11 @@ function partToSpecInner(
       const flow = layoutSpec({ ...part, parts: { [`${name}-text`]: { declared: { display: 'inline' } } as Part, ...part.parts } }, false, subst);
       if (flow.mode === 'VERTICAL') frame.layout = flow;
     }
+    // Convention closed-select-draws-selected-label: a closed select (its label as text, its options dropped) draws that one
+    // line centered on its box's vertical axis, as Chromium lays out a menulist, whatever layout the select box carries.
+    if (part.element === 'select' && typeof part.text === 'string' && input.conventions?.has('closed-select-draws-selected-label') &&
+      !Object.values(part.parts ?? {}).some((c) => c.element === 'option' || c.element === 'optgroup'))
+      frame.layout = { ...frame.layout!, ...((frame.layout!.mode ?? 'HORIZONTAL') === 'VERTICAL' ? { primary: 'CENTER' as const } : { counter: 'CENTER' as const }) };
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
     textSpec.fontStyle = figmaFaceStyle(textCtx);
