@@ -223,6 +223,11 @@
  *  variants and has a fixed width in the rest keeps the whole-pixel box when a literal combination row carries each
  *  fixed variant's drawn width and no auto-width variant; those rows clamp the box (min-width = max-width), so the
  *  rounded-up width holds only where Figma sized the box to its text. Off, the mixed case is refused by name. */
+/** gated-part-hidden-by-boolean (Figma to React proposal): a part that already carries a presence gate (visibleWhen or
+ *  presenceByCombination, from the planes where it is absent) and whose captured hidden channel, over the occurrences
+ *  that draw it, is exactly one boolean axis's false (or true) keeps its gate, and that boolean hides it with a stylesWhen
+ *  display: none. Off, the hidden channel is named as uncorrelated and the part draws in those variants. */
+// One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -267,6 +272,7 @@ export const CONVENTIONS = [
   'fixed-swap-drawing-carried',
   'font-weight-initial-normal',
   'gated-layout-drops-undrawn-rows',
+  'gated-part-hidden-by-boolean',
   'generated-text-carried',
   'hugging-space-between-packs',
   'icon-box-keeps-glyph-size',
