@@ -815,3 +815,34 @@ test('text-box-snapped-as-painted: a centered baseline box off the whole pixel m
   assert.deepEqual(on, { label: [12, 17, 17.5], dot: [15.5, 10], tall: [18, 18.5], hug: 18 });
   assert.deepEqual(off, { label: [11.5, 18, 18.5], dot: [15.5, 10], tall: [18, 18.5], hug: 18 });
 });
+
+test('relative-offset-drawn: a part positioned relative keeps its flow box and draws shifted by its offset; siblings stay', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // The Fluid skeletons: a 200 x 8 label, position relative at left 16 top 36, above a 10 px dot; a second part offset only
+  // by right/bottom (left and top not carried) draws at (-right, -bottom).
+  const bar = (o: Record<string, string>) => ({ declared: { position: 'relative' }, literals: { width: '200px', height: '8px', 'background-color': '#c6c6c6', ...o } });
+  const contract = ContractSchema.parse({ id: 'test.relative', name: 'Relative', version: '0.1.0', status: 'draft', description: 'Relative offsets', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'column' }, literals: { width: '400px', height: '64px' },
+      parts: { label: bar({ left: '16px', top: '36px' }), dot: { literals: { width: '10px', height: '10px', 'background-color': '#000000' } }, tail: bar({ right: '10px', bottom: '5px' }) } } },
+    bindings: { code: { anchors: { importPath: 'test/Relative', export: 'Relative' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const at = (name: string) => root.findOne((x: any) => x.name === name) as any;
+    return ['label', 'tail'].map((n) => [at(n).parent.name, at(n).x, at(n).y, at(n).parent.width, at(n).parent.height]).concat([[at('dot').parent.type, at('dot').width, at('dot').height]]);
+  };
+  // On: each bar sits in a box of its own flow size, drawn at its offset inside it; the dot keeps its place in the column.
+  assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 16, 36, 200, 8], ['tail (margin box)', -10, -5, 200, 8], ['COMPONENT', 10, 10]]);
+  assert.deepEqual((await run([])).map((r) => r.slice(0, 3)), [['Relative', 0, 0], ['Relative', 0, 0], ['COMPONENT', 10, 10]]);
+  // A part with a measured line box keeps today's lowering (no offset); its line box still joins its margin box.
+  const lined = ContractSchema.parse({ ...contract, anatomy: { root: { ...contract.anatomy.root, parts: { wrap: { parts: { label: { ...bar({ left: '16px', top: '16px' }),
+    lineBox: { props: [], rows: [{ values: [], top: 2, bottom: 0 }] } } } } } } } });
+  const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(),
+    conventions: conventionSet(['relative-offset-drawn', 'inline-block-line-box-as-drawn']) });
+  type Spec = { name?: string; relativeOffset?: unknown; margins?: unknown; children?: Spec[] };
+  const find = (s: Spec): Spec | undefined => s.name === 'label' ? s : (s.children ?? []).map(find).find(Boolean);
+  const label = find((engine.compileComponentData(lined, new Map([[lined.id, lined]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec)!;
+  assert.deepEqual([label.relativeOffset, label.margins], [undefined, { top: 2, bottom: 0 }]);
+});
