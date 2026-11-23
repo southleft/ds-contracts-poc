@@ -146,7 +146,12 @@ export function createFigmaMock(options = {}) {
       this.y = 0;
       this.fills = [];
       this.strokes = [];
-      this.strokeWeight = 1;
+      this._strokeWeight = 1;
+      // Only frames, components, instances and rectangles carry per-side stroke weights in Figma (an ellipse or a line
+      // throws on them), so only they expose the fields here.
+      if (['FRAME', 'COMPONENT', 'COMPONENT_SET', 'INSTANCE', 'RECTANGLE'].includes(this.type)) for (const side of ['top', 'right', 'bottom', 'left'])
+        Object.defineProperty(this, 'stroke' + side[0].toUpperCase() + side.slice(1) + 'Weight', { configurable: true, enumerable: false,
+          get() { return this._strokeSides?.[side]; }, set(v) { this._strokeSide(side, v); } });
       this.strokeAlign = 'INSIDE';
       this.dashPattern = [];
       this.effects = [];
@@ -503,6 +508,11 @@ export function createFigmaMock(options = {}) {
       }
     }
 
+    // Real Figma: strokeWeight sets every side and reads figma.mixed once per-side weights differ (a25, 2026-11-23: a
+    // comparison on it threw "Cannot convert a Symbol value to a number" in Accordion). The sides stay unset until written.
+    get strokeWeight() { const s = this._strokeSides; return !s || (s.top === s.right && s.top === s.bottom && s.top === s.left) ? (s ? s.top : this._strokeWeight) : mixed; }
+    set strokeWeight(v) { this._strokeWeight = v; if (this._strokeSides) this._strokeSides = { top: v, right: v, bottom: v, left: v }; }
+    _strokeSide(side, v) { const w = this._strokeWeight; this._strokeSides = { top: w, right: w, bottom: w, left: w, ...this._strokeSides, [side]: v }; }
     get layoutMode() {
       return this._layoutMode ?? 'NONE';
     }
@@ -1184,8 +1194,9 @@ export function createFigmaMock(options = {}) {
         // Live 2026-09-26: a slot's exact-zero FILL state reaches every instance of it.
         '_zeroFillW',
       ]) {
-        if (this[field] !== undefined) clone[field] = structuredClone(this[field]);
+        if (this[field] !== undefined && typeof this[field] !== 'symbol') clone[field] = structuredClone(this[field]);
       }
+      if (this._strokeSides) clone._strokeSides = { ...this._strokeSides };
       // Live Scratch probe 2026-09-27: a slot measuring exactly 0 px wide in
       // its main pins every instance's slot at 0 px. FILL, FIXED, resize and
       // resizeWithoutConstraints on the instance all leave it at 0.
@@ -1251,7 +1262,7 @@ export function createFigmaMock(options = {}) {
         'strokeWeight', 'strokeAlign', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
         'opacity', 'visible', 'clipsContent', 'effects', 'minWidth', 'minHeight', '_w', '_h', '_resized',
       ]) {
-        if (this[field] !== undefined) inst[field] = structuredClone(this[field]);
+        if (this[field] !== undefined && typeof this[field] !== 'symbol') inst[field] = structuredClone(this[field]);
       }
       const source = this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
       // REAL-FIGMA QUIRK (live finding 2026-07-22, Desktop Bridge inspection,

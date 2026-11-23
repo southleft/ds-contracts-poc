@@ -9730,8 +9730,11 @@ function overhangOf(node) {
   const shown = (paints) => Array.isArray(paints) && paints.some((p) => p.visible !== false && (p.opacity === undefined || p.opacity > 0));
   // what a node draws itself: its text, its shape, or its own visible fill, stroke or effect (a box that draws nothing,
   // such as a floating popover's viewport-sized container, reaches nowhere)
+  // strokeWeight is figma.mixed on a node with per-side weights; a comparison on the Symbol throws, so read the sides
+  const weighs = (n) => typeof n.strokeWeight === 'number' ? n.strokeWeight > 0
+    : ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'].some((k) => typeof n[k] === 'number' && n[k] > 0);
   const draws = (n) => n.type === 'TEXT' ? n.characters !== '' : ['VECTOR', 'RECTANGLE', 'ELLIPSE', 'LINE', 'POLYGON', 'STAR', 'BOOLEAN_OPERATION'].includes(n.type) ||
-    shown(n.fills) || (shown(n.strokes) && n.strokeWeight > 0) || (Array.isArray(n.effects) && n.effects.some((e) => e.visible !== false));
+    shown(n.fills) || (shown(n.strokes) && weighs(n)) || (Array.isArray(n.effects) && n.effects.some((e) => e.visible !== false));
   const walk = (n) => { if (n.visible === false || n.opacity === 0) return;
     if (n !== node && draws(n)) { const a = n.absoluteBoundingBox; if (a) { o.l = Math.max(o.l, b.x - a.x); o.t = Math.max(o.t, b.y - a.y);
       o.r = Math.max(o.r, a.x + a.width - b.x - b.width); o.b = Math.max(o.b, a.y + a.height - b.y - b.height); } }

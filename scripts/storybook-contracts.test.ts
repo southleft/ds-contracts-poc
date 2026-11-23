@@ -454,6 +454,26 @@ test('set-cell-pads-variant-overhang: each edge and gap of the variant grid hold
   assert.deepEqual(on, { cells: [[47, 40], [47, 104]], size: [117, 168] });
 });
 
+test('set-cell-pads-variant-overhang: a node with per-side stroke weights (figma.mixed) is measured by its sides, not compared as a number', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // a25: Accordion's rows draw top and bottom borders only, so Figma reads their strokeWeight as figma.mixed and `> 0` on it
+  // threw. Such a rule with no fill, 60 px left of a 24 px variant, is drawn by its strokes alone.
+  const contract = ContractSchema.parse({ id: 'test.rule', name: 'Rule', version: '0.1.0', status: 'draft', description: 'A top-bordered rule past its box', states: [], semantics: { element: 'div' },
+    props: [{ name: 'kind', type: { enum: ['a', 'b'] }, default: 'a', bindings: { code: { prop: 'kind' }, figma: { kind: 'VARIANT', property: 'kind', values: { a: 'a', b: 'b' } } } }],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, declared: { position: 'relative' }, literals: { width: '24px', height: '24px' },
+      parts: { rule: { declared: { position: 'absolute', 'border-top-style': 'solid', 'border-bottom-style': 'solid' }, literals: { left: '-60px', top: '0px', width: '24px', height: '8px',
+        'border-color': '#161616', 'border-top-width': '1px', 'border-right-width': '0px', 'border-bottom-width': '1px', 'border-left-width': '0px' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/Rule', export: 'Rule' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(['set-cell-pads-variant-overhang']) });
+  const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+  const rule = root.findOne((n: any) => n.name === 'rule') as any, set = root.findOne((n: any) => n.type === 'COMPONENT_SET') as any;
+  assert.deepEqual([typeof rule.strokeWeight, rule.strokeTopWeight, rule.strokeRightWeight, rule.strokeBottomWeight], ['symbol', 1, 0, 1]);
+  // Its 60 px reach to the left becomes the column's left edge.
+  assert.deepEqual(set.children.map((c: any) => c.x), [60, 60]);
+});
+
 test('single-row-grid-as-row: a one-row grid value draws as a row with its gap and empty trailing row; any other grid is named', async () => {
   const [c] = declare({ storybook: 'x', components: [component('a/Field', { axes: ['type'], references: [ref('f--a', { type: 'default' }), ref('f--a', { type: 'inline' }, { type: 'inline' })] })] }).components;
   const el = (style: Record<string, string>, nodes: unknown[] = []) => ({ tag: 'div', classes: [], style, nodes, pseudo: {} }) as never as import('../extract/computed/lib.js').CapturedNode;
