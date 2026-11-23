@@ -191,6 +191,11 @@
 /** gated-layout-drops-undrawn-rows (Figma to React proposal): a part whose gate (visibleWhen or presenceByCombination)
  *  never draws it on some planes, but whose layout table also holds rows for those planes, keeps only the rows its gate
  *  draws. Off, the table keeps every row and fails the contract's coverage rule for a gated part. */
+/** drawing-path-box-whole-pixel-by-value (Figma to React proposal): a path in a captured drawing whose box sits at a
+ *  fractional offset starts its box on the whole pixel and draws the remainder inside its path data, so Chromium does not
+ *  draw a half-pixel glyph crisp. It covers path data that varies by one prop (per value, under a fixed-swap drawing or an
+ *  observed swap default) and one path for every variant under an observed swap default; a fixed-swap drawing's single
+ *  path is swap-drawing-path-box-whole-pixel's. Off, the fractional offset stays, and Chromium paints the box on whole pixels. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -221,6 +226,7 @@ export const CONVENTIONS = [
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
+  'drawing-path-box-whole-pixel-by-value',
   'drawn-border-color-not-folded',
   'empty-hug-keeps-extent',
   'enum-presence-keeps-the-gate',

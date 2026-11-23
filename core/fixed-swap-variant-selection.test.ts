@@ -177,3 +177,23 @@ test('swap-drawing-path-box-whole-pixel: a half-pixel path in a captured drawing
  const tree=on.p.mintedTokens?.tree??{},css=emitReact(on.c,{contracts:scope,icons:new Map(),tokens:new Set(flattenTokens(tree).keys()),tokenValues:{primitives:tree,semantic:{},light:{},dark:{},brands:{default:{}}}}).css;
  assert.match(css,/top: 7px/);assert.doesNotMatch(css,/top: 7\.5px/);assert.match(css,/viewBox%3D%220%200%208%202%22/);
 });
+test('drawing-path-box-whole-pixel-by-value: an observed default glyph at a half-pixel offset starts its box on the whole pixel, per value or for every variant',async()=>{
+ const {validateContract}=await import('../packages/core/src/validate.js');
+ const use=(v:string,big:boolean)=>{const w=big?20:16,g=big?15:12,at=big?2.5:2;return {name:'Icon',type:'INSTANCE',nodeId:'use-'+v,instanceOf:'Glyph',instanceKey:'glyph-main-key',propRefs:{mainComponent:'Swap icon'},bbox:{width:w,height:w},
+  instanceGeometry:{nodeId:'use-'+v,componentId:'glyph-main',transform:[[1,0,0],[0,1,0]],localSize:{width:w,height:w}},instanceSwapContent:{root:{name:'Glyph',type:'FRAME',nodeId:'I-'+v,fixedSize:{width:w,height:w},clipsContent:true,
+   children:[{name:'Vector',type:'VECTOR',nodeId:'I-'+v+';1',fill:{hex:'161616'},shape:{kind:'path',width:g,height:g,x:at,y:at,constraints:{horizontal:'SCALE',vertical:'SCALE'},paths:[{data:`M0 0L${g} 0L${g} ${g}L0 ${g}L0 0Z`,windingRule:'NONZERO'}]}}]}}};};
+ const propose=(bigA:boolean,conventions:string[])=>{const set={setName:'Glyph cell',type:'COMPONENT_SET',propertyDefinitions:{'Swap icon#1:0':{type:'INSTANCE_SWAP',defaultValue:'glyph-main'},State:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}},
+  variants:['A','B'].map(v=>({name:'State='+v,type:'COMPONENT',nodeId:'cell-'+v,variantProperties:{State:v},bbox:{width:20,height:20},layout,children:[use(v,v==='B'||bigA)]}))};
+  const p=proposeFromDump(set as any,{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map(),conventions}),c=ContractSchema.parse(p.contract),errors:string[]=[];validateContract(c,new Map([[c.id,c]]),errors,new Map());
+  return {p,errors,glyph:walkAnatomy(c).find(w=>w.part.shape?.kind==='path')!.part};};
+ const offsets=(g:any)=>g.stylesWhen.map((r:any)=>r.styles.left);
+ // One path for every variant: off keeps the half-pixel offset; on, the box starts on the whole pixel and the path carries the half pixel.
+ const off=propose(true,['observed-swap-default-drawn']);assert.deepEqual([off.glyph.shape!.width,offsets(off.glyph)],[15,['2.5px','2.5px']]);
+ const on=propose(true,['observed-swap-default-drawn','drawing-path-box-whole-pixel-by-value']);assert.deepEqual(on.errors,[]);
+ assert.deepEqual([on.glyph.shape!.width,on.glyph.shape!.paths![0]!.data,offsets(on.glyph)],[16,'M0.5 0.5L15.5 0.5L15.5 15.5L0.5 15.5L0.5 0.5Z',['2px','2px']]);
+ assert(on.p.notes.some(n=>n.includes('for every variant (+0.5, +0.5 px) (profile convention drawing-path-box-whole-pixel-by-value)')));
+ // Path data by value: only the half-pixel value moves; the whole-pixel value and the base path keep theirs.
+ const byValue=propose(false,['observed-swap-default-drawn','drawing-path-box-whole-pixel-by-value']).glyph;assert.deepEqual(offsets(byValue),['2px','2px']);
+ assert.deepEqual(Object.values(byValue.shape!.pathsByProp!.map).map(b=>[b.width,b.paths[0]!.data]),[[12,'M0 0L12 0L12 12L0 12L0 0Z'],[16,'M0.5 0.5L15.5 0.5L15.5 15.5L0.5 15.5L0.5 0.5Z']]);
+ assert.deepEqual([byValue.shape!.width,byValue.literalsByProp![0]!.map.b],[12,{width:'16px',height:'16px'}]);
+});

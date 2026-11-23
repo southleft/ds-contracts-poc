@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention drawing-path-box-whole-pixel-by-value. */ drawingSnapByValue?: true; observedDrawingRoots?: WeakSet<object>; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -14626,7 +14626,7 @@ function buildPartFromEvidence(
       if (!capturedGeometry) carryAbsPlacement(m, part, tokens, ctx, where, { size: false });
     } else {
       invertNodeShape(m, part, ctx, where);
-      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where); carryStretchedLineBar(m, part, tokens, ctx, where); snapSwapDrawingPathBox(m, part, ctx, where);
+      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where); carryStretchedLineBar(m, part, tokens, ctx, where); snapSwapDrawingPathBox(m, part, ctx, where); snapDrawingPathBoxByValue(m, part, ctx, where);
     }
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('drawing-path-box-whole-pixel-by-value') ? {drawingSnapByValue: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -20595,7 +20595,7 @@ function carryObservedSwapDefault(owner: Merged, content: Merged, parentMode: Pa
   const drawn = content.occ.filter(o => o.node.instanceSwapContent), undrawn = content.occ.filter(o => !o.node.instanceSwapContent);
   if (!drawn.length) return;
   const drawnWhere = `${where}/[observed default]`;
-  const root = mergeOcc(content.name, drawn.map(o => ({variant: o.variant, node: o.node.instanceSwapContent!.root})), ctx.notes, drawnWhere, ctx.axes);
+  const root = mergeOcc(content.name, drawn.map(o => ({variant: o.variant, node: observedDrawingRoot(o.node.instanceSwapContent!.root, ctx)})), ctx.notes, drawnWhere, ctx.axes);
   const key = partKey('observedDefault', ctx, drawnWhere, selfKey), previous = ctx.presenceVariants;
   ctx.presenceVariants = owner.occ.map(o => o.variant);
   let built: Record<string, unknown> | null;
@@ -21005,4 +21005,51 @@ function gatedLayoutDropsUndrawnRows(contract: Contract, ctx: Ctx): void {
     ctx.notes.push(`${name}: layoutByCombination keeps the ${kept.length} rows its gate draws and drops ${table.rows.length - kept.length} for planes where the part is never drawn (profile convention gated-layout-drops-undrawn-rows)`);
     table.rows = kept;
   }
+}
+
+/** Profile convention drawing-path-box-whole-pixel-by-value (core/profile-conventions.ts). A path part directly under a
+ *  captured drawing root is placed by offset rows, and Chromium paints each placed box on whole pixels, so a glyph at a
+ *  2.5 px offset draws crisp where Figma antialiases it across one more pixel. Two cases, each per group of rows that share
+ *  one path box: path data that varies by one prop (shape.pathsByProp, under a fixed-swap drawing or an observed swap
+ *  default), one group per value; and one path for every variant under an observed swap default, one group that must
+ *  place every drawn variant (a fixed-swap drawing's single path is swap-drawing-path-box-whole-pixel's). For a group whose
+ *  offsets share a fractional remainder (fx, fy), the box starts at the whole pixel below, grows by that remainder and
+ *  shifts its path data by it, so the remainder is drawn inside the mask. Only absolute M/L/H/V/C/S/Q/T/Z data is shifted;
+ *  a group with anything else, a right/bottom/transform offset or a size that disagrees with its box is left as it is. */
+function observedDrawingRoot(root: DumpNode, ctx: Ctx): DumpNode {
+  if (ctx.drawingSnapByValue) (ctx.observedDrawingRoots ??= new WeakSet()).add(root);
+  return root;
+}
+function snapDrawingPathBoxByValue(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  type Box = {width: number; height: number; paths: Array<{data: string}>};
+  type Row = {prop?: string; equals?: unknown; styles: Record<string, string>};
+  const shape = part.shape as (Box & {kind?: string; parentViewport?: unknown; pathsByProp?: {prop: string; map: Record<string, Box>}}) | undefined;
+  const table = shape?.pathsByProp, under = (o: Occ, swap: boolean) => { const p = o.parent?.node;
+    return !!p && (!!ctx.observedDrawingRoots?.has(p) || swap && !!(p as unknown as Record<symbol, unknown>)[SWAP_DRAWING_ROOT]); };
+  if (!ctx.drawingSnapByValue || shape?.kind !== 'path' || !shape.paths?.length || shape.parentViewport || part.absoluteGeometry ||
+    part.absoluteGeometryByCombination || !m.occ.length || !m.occ.every(o => under(o, !!table))) return;
+  const px = (v: string | undefined) => v === undefined ? 0 : /^-?\d+(\.\d+)?px$/.test(v) ? Number(v.slice(0, -2)) : NaN;
+  const fr = (v: number) => Math.round((v - Math.floor(v)) * 1e6) / 1e6;
+  const all: Row[] = [...((part.stylesWhen as Row[] | undefined) ?? []), ...(part.literals ? [{styles: part.literals as Record<string, string>}] : [])]
+    .filter(r => r.styles.left !== undefined || r.styles.top !== undefined);
+  const sizes = table && ((part.literalsByProp as Array<{prop: string; map: Record<string, Record<string, string>>}> | undefined) ?? []).find(t => t.prop === table.prop);
+  const groups: Array<{label: string; box: Box; rows: Row[]; size?: Record<string, string>}> = table
+    ? all.flatMap(r => r.prop === table.prop && typeof r.equals === 'string' && table.map[r.equals] ? [{label: `${table.prop} ${r.equals}`, box: table.map[r.equals]!, rows: [r], size: sizes?.map[r.equals]}] : [])
+    : m.occ.every(o => all.some(r => r.prop === undefined || ctx.axes.some(a => a.propName === r.prop && axisValue(a, axisValuesOf(o.variant)[a.property]) === r.equals)))
+      ? [{label: 'every variant', box: shape as Box, rows: all}] : [];
+  const done: string[] = [];
+  for (const {label, box, rows, size} of groups) {
+    if (rows.some(r => r.styles.right !== undefined || r.styles.bottom !== undefined || r.styles.transform !== undefined || Number.isNaN(px(r.styles.left)) || Number.isNaN(px(r.styles.top)))) continue;
+    const fx = fr(px(rows[0]!.styles.left)), fy = fr(px(rows[0]!.styles.top)), shifted = box.paths.map(p => shiftPathData(p.data, fx, fy));
+    if ((fx === 0 && fy === 0) || rows.some(r => fr(px(r.styles.left)) !== fx || fr(px(r.styles.top)) !== fy) || shifted.some(d => d === undefined) ||
+      size && (px(size.width) !== box.width || px(size.height) !== box.height)) continue;
+    const base = !!table && shape.width === box.width && shape.height === box.height && JSON.stringify(shape.paths) === JSON.stringify(box.paths);
+    box.paths = box.paths.map((p, i) => ({...p, data: shifted[i]!}));
+    box.width = Math.ceil(box.width + fx - 1e-9); box.height = Math.ceil(box.height + fy - 1e-9);
+    for (const r of rows) { if (r.styles.left !== undefined) r.styles.left = `${Math.floor(px(r.styles.left))}px`; if (r.styles.top !== undefined) r.styles.top = `${Math.floor(px(r.styles.top))}px`; }
+    if (size) { size.width = `${box.width}px`; size.height = `${box.height}px`; }
+    if (base) { shape.paths = box.paths; shape.width = box.width; shape.height = box.height; }
+    done.push(`${label} (+${fx}, +${fy} px)`);
+  }
+  if (done.length) ctx.notes.push(`${where}: path box started on the whole pixel and its fractional offset drawn inside the path for ${done.join(', ')} (profile convention drawing-path-box-whole-pixel-by-value)`);
 }
