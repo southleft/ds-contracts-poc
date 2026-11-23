@@ -253,12 +253,17 @@
  *  nothing; a <br> that starts the stack or follows another <br> is alone on its line and draws one empty line, a frame
  *  of its line height. Out of flow, or under any other layout, a <br> is drawn as before. Off, every <br> is an empty
  *  frame that fills the stack's height. */
+/** bare-icon-keeps-its-margins (React to Figma writer): an icon part drawn as a bare glyph (no box of its own) keeps the
+ *  margins it declares when it stays in flow and none is negative: a uniform gap between siblings becomes the stack's
+ *  spacing, and the rest is the padding of a hugging auto-layout margin box around the glyph, as for any other child.
+ *  Off, a bare glyph's margins are dropped. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
   'absolute-only-hug-keeps-extent',
   'absolute-overhang-whole-pixel',
   'align-self-center-in-stretched-box',
+  'bare-icon-keeps-its-margins',
   'bound-visibility-override-is-property',
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
