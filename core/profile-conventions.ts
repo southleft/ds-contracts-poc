@@ -115,6 +115,9 @@
 /** swap-drawing-path-box-whole-pixel (Figma to React proposal): a path in a captured fixed-swap drawing whose box sits at a
  *  fractional offset starts its box on the whole pixel and draws the remainder inside its path data, so Chromium does not
  *  snap a half-pixel bar to one row. Off, the fractional offset is named. */
+/** text-decoration-line-by-axis-drawn (React to Figma contract step and writer): a text decoration that varies but
+ *  factors on one enum axis (Carbon's inline Link underlined, its sized links not) is carried as a per-value stylesWhen
+ *  text-decoration rule for each value that paints a line, and the writer draws it in that value. Off, such a decoration is code-only. */
 /** text-baseline-as-drawn (React to Figma contract step and writer): a part owning one line of literal text carries where
  *  the browser drew its baseline (Part.textBaseline, measured in the page), and the native Figma writer sets that text's
  *  glyph line so Figma draws the baseline there, in a box kept at the carried line height. Off, nothing is measured. */
@@ -148,6 +151,9 @@
  *  draws and it spills past the box (Tag's long label: 224 px of text in a 192 px box). Once laid out, such a text two pixels
  *  or more wider than its box takes the box's width, its height fixed; a hugging box or a text that fits is left alone. Off,
  *  the text keeps its own width. */
+/** normal-letter-spacing-is-zero (React to Figma contract step): a part spaced in some variants and computing `normal` in
+ *  others (Carbon's Link: 0.32px small, 0.16px medium, normal large) mints `normal` as the 0px it computes to, so the
+ *  channel mints per variant instead of going code-only and drawing no spacing anywhere. Off, such a channel is code-only. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -259,6 +265,7 @@ export const CONVENTIONS = [
   'lost-text-realigns-by-class',
   'mixed-scale-rect-keeps-placement',
   'negative-sibling-margin-as-gap',
+  'normal-letter-spacing-is-zero',
   'normal-line-height-as-drawn',
   'observed-swap-default-drawn',
   'outline-takes-no-layout',
@@ -291,6 +298,7 @@ export const CONVENTIONS = [
   'text-box-snapped-as-painted',
   'text-box-snapped-in-placed-box',
   'text-box-stacks-block-children',
+  'text-decoration-line-by-axis-drawn',
   'uncaptured-fill-variable-carried-as-paint',
   'unregistered-channel-not-minted',
   'variant-grid-whole-pixel',

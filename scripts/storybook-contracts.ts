@@ -816,7 +816,8 @@ async function main() {
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const svgConsumed = new Set([...promotion.consumed].map((i: number) => aligned.partNames[i]));
         const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals,
-          conventions.has('table-short-row-leaves-columns-empty'));
+          conventions.has('table-short-row-leaves-columns-empty'), { normalLetterSpacingZero: conventions.has('normal-letter-spacing-is-zero'),
+            textDecorationByAxis: conventions.has('text-decoration-line-by-axis-drawn') });
         const minted = mintedObservations(prep.baseObs, prep.stateObs, conventions.has('unregistered-channel-not-minted')), { baseObs, stateObs } = minted;
         refusals.push(...minted.named);
         const mintBase = mintTokens(c.name, baseObs, prep.axes, { nestedPairs: true }), mintStates = mintTokens(c.name, stateObs, prep.axes, { nestedPairs: true });

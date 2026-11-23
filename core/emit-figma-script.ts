@@ -3735,6 +3735,11 @@ function applyStyling(
     const alignment = rule.styles['text-align'];
     if (alignment !== undefined && rule.equals !== undefined && subst[rule.prop] === rule.equals)
       d = applyDeclared({ 'text-align': alignment }, d);
+    // Convention text-decoration-line-by-axis-drawn: a decoration line carried per value of an axis (stylesWhen spells it
+    // text-decoration) draws in that value.
+    const line = rule.styles['text-decoration'];
+    if (line !== undefined && rule.equals !== undefined && subst[rule.prop] === rule.equals && input.conventions?.has('text-decoration-line-by-axis-drawn'))
+      d = applyDeclared({ 'text-decoration-line': line }, d);
   }
   // FC-OVERFLOW-CLIP-LOST: declared overflow hidden/clip draws natively as
   // clipsContent. It is set HERE, beside the other spec-level declared reads,
