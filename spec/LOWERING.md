@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **70** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **71** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -751,7 +751,7 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 
 **Why.** Worth stating plainly: the schema comment says "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks", and that prose is now OUT OF DATE. Figma shipped a native GRID layout mode with FIXED/FLEX/HUG tracks, this emitter uses it, and four track cases round-trip. The register records the rule the engine actually implements, which is better than the one the schema still describes.
 
-### `placement` — 4 rules (4 implemented, 0 proposed, 0 wall)
+### `placement` — 5 rules (5 implemented, 0 proposed, 0 wall)
 
 Forward-only decisions with no CSS source at all. Two rules that look identical in shape — one is a deliberate, defensible layout of variant cells; the other silently reverts a designer's own repositioning on every amend. Telling them apart is the reason to write both down.
 
@@ -761,6 +761,7 @@ Forward-only decisions with no CSS source at all. Two rules that look identical 
 | `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:10200` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
 | `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:11141` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
 | `emit.text-box-snapped-as-painted` | `implemented` | `emit-figma-script.ts:5914` | a one-line text with a carried baseline, its box centered in a flex row and laid out off the whole pixel → the TEXT's height and glyph line both changed by -2d at run time, so its top moves by d onto the whole pixel (round half up) and its baseline stays put | the text drawn where Chromium paints it: its baseline box on the whole pixel | **none** | `untested` |
+| `emit.text-box-snapped-in-placed-box` | `implemented` | `emit-figma-script.ts:5918` | a one-line text with a carried baseline, its box in a flex parent that does not center it and laid out off the whole pixel → the TEXT held in a frame of its own size at its flow place and drawn inside it d lower, its glyph line 2d less, so its top lands on the whole pixel (round half up) and its baseline stays put | the text drawn where Chromium paints it: its baseline box on the whole pixel | **none** | `untested` |
 
 #### `emit.placement-cells-hold-overhang`
 
@@ -805,6 +806,17 @@ Forward-only decisions with no CSS source at all. Two rules that look identical 
 - the text box reads back up to 1 px shorter or taller than the carried line height, by twice the snap
 
 **Why.** Carbon's MultiSelect inline field centers its 18 px field text in a 41 px row, so its box sits at y 11.5. A probe in Figma drew the same glyph line at box y 11.5 half a row lower than the carried baseline and at y 12 (or 11) exactly on it, matching Chromium's rows; the 48 inline variants carry it.
+
+#### `emit.text-box-snapped-in-placed-box`
+
+**Context.** profile convention text-box-snapped-in-placed-box, with text-box-snapped-as-painted, at run time once the component is laid out: every baseline box in an auto-layout parent that is not a centering horizontal row, from the position Figma's own layout gives it relative to its variant; not one that grows, fills, is bound to a visibility property or is absolutely placed; moves under 0.05 px are left alone, and the box is undone if the parent's size changes
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- the text reads back one frame deeper, in a frame named after it, and its glyph line up to 1 px shorter or longer than the carried line height, by twice the snap
+
+**Why.** Carbon's Button aligns its label to the top of its row (root-text-baseline-as-drawn), and at size xs a 1.5 px padding and a 1 px border put the 18 px label box at y 2.5, where Figma draws its glyphs half a row off the carried baseline; the ghost xs variants left the pass list in a25. A row that does not center the text cannot move it by resizing it, so the text is held in a box at its flow place and drawn on the whole pixel inside it.
 
 ### `slot` — 3 rules (3 implemented, 0 proposed, 0 wall)
 
