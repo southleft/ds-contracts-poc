@@ -392,12 +392,16 @@ export function carryTextWrap(contract: Contract, axes: readonly string[], combo
 
 /** Convention text-baseline-as-drawn: a part owning one line of literal text carries the baseline the browser drew in each
  *  variant that draws it (`textBaseline`, over the axes that tell the readings apart; none when all agree). A part that
- *  some drawing variant has no reading for (two lines, a flex or grid box) is left as it was. Returns the parts carried. */
+ *  some drawing variant has no reading for (two lines, a flex or grid box) is left as it was. A run that
+ *  variant-text-owns-its-part made (`runs`, run → host) is its host's own text, drawn on its host's line: it has no element
+ *  of its own and takes its host's reading. Returns the parts carried. */
 export function carryTextBaseline(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
-  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined, withRoot = false): string[] {
+  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined, withRoot = false,
+  runs: ReadonlyMap<string, string> = new Map()): string[] {
   const carried: string[] = [];
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
-    const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = at(k.key, name); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
+    const read = (key: string) => runs.has(name) ? at(key, runs.get(name)!) : at(key, name);
+    const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = read(k.key); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
     if (drawn.length && drawn.every((r) => r.m)) {
       part.textBaseline = variantRows(axes, drawn as Array<{ v: Record<string, string>; m: { px: number; ascent: number; descent: number } }>);
       if (textBaselineIssues(contract, part).length) delete part.textBaseline; else carried.push(name);
@@ -604,7 +608,7 @@ export function seed(c: DeclaredComponent) {
  * variant like literal text ('' where the field draws none). */
 export function carryVariantText(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
   textAt: (comboKey: string, part: string) => string | null, fieldAt: (comboKey: string, part: string) => { value: string; placeholder: string } | null = () => null,
-  rootTextByAxis = false, textOwnsPart = false, fieldValueWithoutAxes = false): string[] {
+  rootTextByAxis = false, textOwnsPart = false, fieldValueWithoutAxes = false, runs?: Map<string, string>): string[] {
   const refused: string[] = [], names = new Set<string>();
   const named = (parts: Record<string, Part> | undefined): void => { for (const [n, p] of Object.entries(parts ?? {})) { names.add(n); named(p.parts as never); } };
   named(contract.anatomy.root.parts as Record<string, Part> | undefined);
@@ -639,7 +643,7 @@ export function carryVariantText(contract: Contract, axes: readonly string[], co
           const run = { text: part.text, textByCombination: part.textByCombination, declared: { display: 'inline' } } as Part, rest = part.parts, text = part.text;
           part.parts = { [child]: run, ...rest }; delete part.text; delete part.textByCombination;
           issues = textByCombinationIssues(contract, run, true);
-          if (issues.length) { part.parts = rest; part.text = text; } else names.add(child);
+          if (issues.length) { part.parts = rest; part.text = text; } else { names.add(child); runs?.set(child, name); }
         }
         if (issues.length) { delete part.textByCombination; refused.push(`per-variant-text-unqualified: ${name}: ${issues.join(',')}`); }
       }
@@ -833,12 +837,13 @@ async function main() {
         const selected = (key: string, part: string) => { const n = nodeAt(key, part); return n?.tag === 'select' && n.field ? n.field.value : null; };
         if (conventions.has('closed-select-draws-selected-label')) // its label where it is first drawn; a part some variants lack is still read
           closedSelectLabels(enriched as Contract, (part) => combos.map((k) => selected(k.key, part)).find((v) => v !== null) ?? null);
+        const runs = new Map<string, string>(); // variant-text-owns-its-part: each text run it makes, run → host
         refusals.push(...carryVariantText(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return !el ? null : conventions.has('closed-select-draws-selected-label') && selected(key, part) !== null ? selected(key, part) : textOf(el.node as never); }, (key, part) => {
           const i = promotion.partIndex.get(part), el = i === undefined ? null : aligned.getAligned(`${key}__default`)[i];
           return (el?.node as { field?: { value: string; placeholder: string } } | undefined)?.field ?? null; }, conventions.has('root-text-by-axis'),
-          conventions.has('variant-text-owns-its-part'), conventions.has('field-value-without-axes')));
+          conventions.has('variant-text-owns-its-part'), conventions.has('field-value-without-axes'), runs));
         if (conventions.has('single-row-grid-as-row')) {
           const [lowered, named] = lowerSingleRowGrid(enriched as Contract, combos, (key, part) => nodeAt(key, part) as CapturedNode | null);
           row.gridAsRow = lowered; refusals.push(...named);
@@ -848,7 +853,7 @@ async function main() {
           row.alignSelfCenter = carried; refusals.push(...named);
         }
         if (conventions.has('text-baseline-as-drawn')) row.textBaseline = carryTextBaseline(enriched as Contract, c.axes, combos, (key, part) => {
-          const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; }, conventions.has('root-text-baseline-as-drawn'));
+          const n = nodeAt(key, part); return n ? baselines.get(n as never) ?? null : undefined; }, conventions.has('root-text-baseline-as-drawn'), runs);
         if (conventions.has('shrunk-text-wraps-at-drawn-width')) { const [carried, named] = carryTextWrap(enriched as Contract, c.axes, combos, (key, part) => {
           const i = promotion.partIndex.get(part), cells = aligned.getAligned(`${key}__default`), el = i === undefined ? null : cells[i], path = i === undefined ? '' : aligned.baseFlat[i]!.path;
           const up = path.includes('.') ? path.slice(0, path.lastIndexOf('.')) : '', qi = path === '' ? -1 : aligned.baseFlat.findIndex((f) => f.path === up);
