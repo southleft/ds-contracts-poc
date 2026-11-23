@@ -143,6 +143,11 @@
  *  padding and a 1 px border) is held in a box of its own size at its place in the flow and drawn inside it on the whole
  *  pixel, its glyph line moved so its baseline stays put; a growing, filling, stretched or visibility-bound text is left
  *  alone, and the box is undone if the row's size changes. Off, such a text is not moved. */
+/** wrapped-text-truncates-at-its-box (React to Figma writer, at run time): a truncating text (text-overflow: ellipsis) the
+ *  writer holds in a styled box (it carries a fill, a size or bindings) keeps its own width inside it, so its ellipsis never
+ *  draws and it spills past the box (Tag's long label: 224 px of text in a 192 px box). Once laid out, such a text two pixels
+ *  or more wider than its box takes the box's width, its height fixed; a hugging box or a text that fits is left alone. Off,
+ *  the text keeps its own width. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -291,6 +296,7 @@ export const CONVENTIONS = [
   'variant-grid-whole-pixel',
   'variant-text-owns-its-part',
   'vertical-fill-line-in-row',
+  'wrapped-text-truncates-at-its-box',
 ] as const;
 export type Convention = (typeof CONVENTIONS)[number];
 

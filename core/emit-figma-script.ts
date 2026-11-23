@@ -279,6 +279,8 @@ export interface NodeSpec {
   /** Convention shrunk-text-wraps-at-drawn-width: once laid out, this TEXT takes `px` and grows to its lines (wrapTexts),
    *  where the browser drew `lines`. */
   wrapWidth?: { px: number; lines: number };
+  /** Convention wrapped-text-truncates-at-its-box: a truncating text held in a styled box fills it once laid out (fillTruncatedTexts). */
+  truncFill?: true;
   resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
@@ -6035,6 +6037,10 @@ function partToSpecInner(
       spec.textBoxPack = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'] ?? 'MIN';
     drawnBaseline(spec);
     drawnWrap(spec);
+    // Convention wrapped-text-truncates-at-its-box: a truncating text (text-overflow: ellipsis) the writer holds in a styled
+    // box at run time (it carries a fill, a size or bindings) takes that box's width once laid out, where its ellipsis draws.
+    // @lower emit.wrapped-text-truncates-at-its-box
+    if (spec.textTruncation && (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) && input.conventions?.has('wrapped-text-truncates-at-its-box')) spec.truncFill = true;
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
     return spec;
@@ -9663,6 +9669,23 @@ function snapTextBoxes() {
 
 /** Convention shrunk-text-wraps-at-drawn-width: once its final font is set, a wrapping TEXT takes the width the browser's
  *  lines broke at and grows to its lines; a line count other than the browser's is named, not drawn in silence. */
+/** Convention wrapped-text-truncates-at-its-box: once its final font is set, a truncating TEXT held in its styled box
+ *  takes the box's width when it is two pixels or more wider than the box (the browser cut it there with its ellipsis),
+ *  its height fixed. A box that hugs it, or a text that fits, is left alone: Figma's own text box is a whole number of
+ *  pixels wide, up to a pixel past the browser's text, and its font can differ by a fraction more. */
+const TRUNCATED_TEXT_FILL_RUNTIME = `const truncFillNodes = [];
+function fillTruncatedTexts() {
+  for (const node of truncFillNodes.splice(0)) {
+    const box = node.parent;
+    if (node.removed || !box || box.type !== 'FRAME' || box.layoutMode !== 'HORIZONTAL') continue;
+    if (box.primaryAxisSizingMode === 'AUTO' && box.layoutSizingHorizontal !== 'FILL') continue; // the box hugs its text
+    if (node.width - (box.width - box.paddingLeft - box.paddingRight) < 2) continue;
+    if (node.textAutoResize !== 'NONE') { const h = node.height; node.textAutoResize = 'NONE'; node.resize(node.width, h); }
+    node.layoutSizingHorizontal = 'FILL';
+  }
+}
+`;
+
 const WRAP_TEXT_RUNTIME = `const wrapNodes = [];
 function wrapTexts() {
   for (const [node, wrap] of wrapNodes.splice(0)) {
@@ -9898,6 +9921,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
   const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
   const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
+  const hasTruncFill = featureDatas.some((d) => dataSome(d, (s) => s.truncFill === true));
   const hasTextBoxSnap = featureDatas.some((d) => dataSome(d, (s) => s.textBoxSnap === true));
   const hasTextBoxPlace = featureDatas.some((d) => dataSome(d, (s) => s.textBoxPlace === true));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
@@ -10804,7 +10828,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasTruncFill ? TRUNCATED_TEXT_FILL_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10881,7 +10905,7 @@ ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characte
       if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = ${strokeAlignJs(hasStrokeOutside)}; }
 ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto-layout box — see applyFrameSpec.
       wrap.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;
-` : ''}      if (spec.characters) wrap.appendChild(node); else node.remove();
+` : ''}      if (spec.characters) wrap.appendChild(node); else node.remove();${hasTruncFill ? "\n      if (spec.truncFill && spec.characters) truncFillNodes.push(node);" : ''}
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
@@ -11469,7 +11493,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11654,7 +11678,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11837,7 +11861,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
