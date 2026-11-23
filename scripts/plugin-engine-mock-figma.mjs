@@ -146,7 +146,7 @@ export function createFigmaMock(options = {}) {
       this.y = 0;
       this.fills = [];
       this.strokes = [];
-      this.strokeWeight = 1;
+      this._strokeWeight = 1;
       this.strokeAlign = 'INSIDE';
       this.dashPattern = [];
       this.effects = [];
@@ -503,6 +503,13 @@ export function createFigmaMock(options = {}) {
       }
     }
 
+    // Real Figma reads strokeWeight as figma.mixed once the per-side weights differ (a25, 2026-11-23: a comparison on it
+    // threw "Cannot convert a Symbol value to a number"). Per-side weights stay plain fields, present only once written.
+    get strokeWeight() {
+      const s = [this.strokeTopWeight, this.strokeRightWeight, this.strokeBottomWeight, this.strokeLeftWeight];
+      return this._strokeWeight !== mixed && s.every((v) => typeof v === 'number') && s.some((v) => v !== s[0]) ? mixed : this._strokeWeight;
+    }
+    set strokeWeight(v) { this._strokeWeight = v; }
     get layoutMode() {
       return this._layoutMode ?? 'NONE';
     }
@@ -1184,7 +1191,7 @@ export function createFigmaMock(options = {}) {
         // Live 2026-09-26: a slot's exact-zero FILL state reaches every instance of it.
         '_zeroFillW',
       ]) {
-        if (this[field] !== undefined) clone[field] = structuredClone(this[field]);
+        if (this[field] !== undefined && typeof this[field] !== 'symbol') clone[field] = structuredClone(this[field]);
       }
       // Live Scratch probe 2026-09-27: a slot measuring exactly 0 px wide in
       // its main pins every instance's slot at 0 px. FILL, FIXED, resize and
@@ -1251,7 +1258,7 @@ export function createFigmaMock(options = {}) {
         'strokeWeight', 'strokeAlign', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
         'opacity', 'visible', 'clipsContent', 'effects', 'minWidth', 'minHeight', '_w', '_h', '_resized',
       ]) {
-        if (this[field] !== undefined) inst[field] = structuredClone(this[field]);
+        if (this[field] !== undefined && typeof this[field] !== 'symbol') inst[field] = structuredClone(this[field]);
       }
       const source = this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
       // REAL-FIGMA QUIRK (live finding 2026-07-22, Desktop Bridge inspection,
