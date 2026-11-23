@@ -953,3 +953,34 @@ test('text-baseline-as-drawn: a baseline whose probes move anything is named, no
     assert.ok(kept[0] === 'p' && kept[1].px > 30, JSON.stringify(kept));
   } finally { await browser.close(); }
 });
+
+test('wrapped-text-truncates-at-its-box: a truncating text held in its styled box takes the box width once laid out; one that fits is left', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // Tag's long label: a block bound to Carbon's min-width: 0 (so the writer holds its text in a box) that truncates with an
+  // ellipsis, in a 200 px column; the mock measures its text 288 px wide. A short label in the same kind of box fits.
+  const tokens = { primitives: { m: { $type: 'dimension', zero: { $value: '0px' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const label = (text: string) => ({ text, literals: { 'font-size': '12px', 'line-height': '15px' }, tokens: { 'min-width': '{m.zero}' },
+    declared: { display: 'block', 'text-overflow': 'ellipsis', 'overflow-x': 'hidden', 'overflow-y': 'hidden', 'text-wrap-mode': 'nowrap' } });
+  const contract = ContractSchema.parse({ id: 'test.trunc', name: 'Trunc', version: '0.1.0', status: 'draft', description: 'Truncating texts', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'column', align: 'stretch' }, literals: { width: '200px' },
+      parts: { long: label('Tag content with a long text description'), short: label('Short') } } },
+    bindings: { code: { anchors: { importPath: 'test/Trunc', export: 'Trunc' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const text = (chars: string) => root.findOne((x: any) => x.type === 'TEXT' && x.characters === chars) as any;
+    // The grammar's layout reasons on the set as the dump plugin reads it: no free-form frame, no placed child.
+    const { classifyDump } = await import('../extract/figma/grammar.js'), { readFileSync } = await import('node:fs');
+    const file = await vm.runInContext(`(async()=>{${readFileSync(new URL('../extract/figma/dump.plugin.js', import.meta.url), 'utf8')}\n})()`, context);
+    assert.deepEqual(Object.values(classifyDump(file)).flatMap((v) => v.reasons).filter((r) => r === 'free-form-frame' || r === 'absolute-child'), []);
+    return ['Tag content with a long text description', 'Short'].map((c) => { const t = text(c);
+      return [t.parent.name, t.parent.width, t.width, t.height, t.layoutSizingHorizontal === 'FILL', t.textAutoResize, t.textTruncation]; });
+  };
+  // On: the long text takes its box's 200 px, its height kept and its ellipsis set; the short one keeps its width.
+  const on = await run(['wrapped-text-truncates-at-its-box']), off = await run([]);
+  assert.deepEqual(on, [['long', 200, 200, 17, true, 'NONE', 'ENDING'], ['short', 200, 36, 17, false, undefined, 'ENDING']]);
+  // Off: the long text keeps its own 288 px and spills past its box.
+  assert.deepEqual(off.map((r) => r.slice(0, 5)), [['long', 200, 288, 17, false], ['short', 200, 36, 17, false]]);
+});

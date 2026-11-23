@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **71** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **72** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -507,7 +507,7 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 
 **Why.** A Figma frame's undeclared padding is 0, but "undeclared" in a PROPOSED contract also means "refused", so an emitter that reads undeclared as 0 zeroes padding the designer drew — the first cut of this rule did exactly that to Eventz Atoms/Tag (6/12 drawn, inline refused). The proposer is the one place that knows which, so it carries the zero as a fact. Held by extract/figma/ua-padding.test.ts, which re-measures the element list in Chromium. docs/23 §D.44.
 
-### `size` — 8 rules (7 implemented, 1 proposed, 0 wall)
+### `size` — 9 rules (8 implemented, 1 proposed, 0 wall)
 
 Contains both the best and the weakest reasoning in the register. `hugEvidence` and the text hug/fill rule ask real measurements and refuse by name when the measurement is not uniform. The text-part geometry exclusion asks presence-of-ink instead — a proxy standing in for a question the same file already knows how to ask.
 
@@ -518,6 +518,7 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2717` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2747` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:6468` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |
+| `emit.wrapped-text-truncates-at-its-box` | `implemented` | `emit-figma-script.ts:6042` | a one-line text with text-overflow: ellipsis whose element draws a box of its own (a fill, a size or a bound min-width), wider than that box → the TEXT takes the box's width (FILL), its height fixed, so its ending truncation draws the ellipsis inside the box | the text cut at its box with an ellipsis, as the browser draws it | **none** | `untested` |
 | `fuse.size-geometry-admit-disjunction` | `implemented` | `fuse.ts:1047` | width / height and the inset quartet on any part → a carried dimension when a door opens; otherwise the box sizes from its content, padding and min/max channels | admit a dimension when it is a library fact, refuse it when it is an environment measurement | `receipts` | `untested` |
 | `fuse.size-hug-evidence` | `implemented` | `fuse.ts:1692` | the relationship between a part’s used width and its max-width → a boolean the max-width lowering consumes to decide ceiling-versus-fixed | a measured, uniform, per-part verdict or no verdict at all | `receipts` | `round-tripped` |
 | `fuse.size-text-part-geometry-excluded` | `proposed` | `fuse.ts:196` | width, height and all four insets on any part carrying a non-empty direct text run → nothing — no geometry reaches the canvas for that part | exclude geometry that is a font-metric artifact, carry geometry the library authored — decided by measurement, not by the presence of ink | `receipts` | `untested` |
@@ -583,6 +584,17 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 - nothing silently — the trade is between two real renderings and the code picks the one that keeps the glyphs where CSS put them
 
 **Why.** One of the best rules in the file and worth defending explicitly, because a register that only listed faults would be read as an attack. It asks a MEASUREMENT (does the packing agree with the text alignment?) rather than a proxy, and it names the outcome with a code. This is the standard the presence-of-ink geometry exclusion below fails to meet.
+
+#### `emit.wrapped-text-truncates-at-its-box`
+
+**Context.** profile convention wrapped-text-truncates-at-its-box, at run time once the final text appearance is set: a truncating text the writer holds in its styled box (the text carries a fill, a fixed size or bindings), when the box does not hug it and the text is two pixels or more wider than the box's content width (Figma's own text box is a whole number of pixels wide, up to a pixel past the browser's text, and its font can differ by a fraction more)
+
+**Inverse.** None — this lowering has no return leg.
+
+**Lost.**
+- where Figma breaks the line before its ellipsis is its own; the browser cuts it mid-word
+
+**Why.** Carbon's Tag type=red holds a long label in a 192 px definition term; the label carries Carbon's min-width: 0, so the writer wraps its text in a box, and the text kept its own 224 px inside the 192 px box. Its ellipsis never drew and the text spilled 23 px past the tag (231 vs 208 wide), failing at 11.2%. A truncating text drawn without a box already takes the FILL its parent grants it.
 
 #### `fuse.size-geometry-admit-disjunction`
 
