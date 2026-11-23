@@ -756,8 +756,12 @@ test('shrunk-text-wraps-at-drawn-width: a text its flex row shrank until it wrap
   const st = (o: Record<string, string> = {}) => ({ width: '180.547px', 'box-sizing': 'border-box', 'padding-left': '2px', 'padding-right': '0px', 'border-left-width': '0px',
     'border-right-width': '0px', ...o }), row = { display: 'flex', 'flex-direction': 'row' };
   assert.deepEqual(shrunkTextWrap(st(), row, 2), { width: 178.547, lines: 2 });
-  assert.deepEqual([shrunkTextWrap(st(), row, 0), shrunkTextWrap(st(), { display: 'flex', 'flex-direction': 'column' }, 2), shrunkTextWrap(st({ 'flex-grow': '1' }), row, 2),
-    shrunkTextWrap(st({ position: 'absolute' }), row, 2)], [null, null, null, null]);
+  assert.deepEqual([shrunkTextWrap(st(), row, 0), shrunkTextWrap(st(), { display: 'flex', 'flex-direction': 'column' }, 2), shrunkTextWrap(st({ 'flex-grow': '1' }), row, 2)],
+    [null, null, null]);
+  // ProgressIndicator's "Example invalid step": absolutely placed, its containing block shrinks it to 104 px; 2 lines, under any parent.
+  const placed = { ...st({ width: '104px', 'padding-left': '0px' }), position: 'absolute' };
+  assert.deepEqual([shrunkTextWrap(placed, undefined, 2), shrunkTextWrap({ ...placed, position: 'fixed' }, { display: 'block' }, 2), shrunkTextWrap(placed, row, 1)],
+    [{ width: 104, lines: 2 }, { width: 104, lines: 2 }, null]);
   assert.match(MEASURE_TEXT_LINES(undefined), /getClientRects/);
   const [c] = declare({ storybook: 'x', components: [component('a/Select', { axes: ['inline', 'size'], references: ['false', 'true'].flatMap((inline) => ['sm', 'lg'].map((size) =>
     ref('s--a', { inline, size }, { inline, size }))) })] }).components;
