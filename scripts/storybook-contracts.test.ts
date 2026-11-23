@@ -466,7 +466,9 @@ test('set-cell-pads-variant-overhang: a node with per-side stroke weights (figma
         'border-color': '#161616', 'border-top-width': '1px', 'border-right-width': '0px', 'border-bottom-width': '1px', 'border-left-width': '0px' } } } } },
     bindings: { code: { anchors: { importPath: 'test/Rule', export: 'Rule' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
   const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(['set-cell-pads-variant-overhang']) });
-  const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const { figma, root } = createFigmaMock(), f = figma as any, frame = f.createFrame.bind(f), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  // Figma's frames carry per-side weights; the mock's carry them only once written, so its frames get them here.
+  f.createFrame = () => Object.assign(frame(), { strokeTopWeight: 1, strokeRightWeight: 1, strokeBottomWeight: 1, strokeLeftWeight: 1 });
   for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
   const rule = root.findOne((n: any) => n.name === 'rule') as any, set = root.findOne((n: any) => n.type === 'COMPONENT_SET') as any;
   assert.deepEqual([typeof rule.strokeWeight, rule.strokeTopWeight, rule.strokeRightWeight, rule.strokeBottomWeight], ['symbol', 1, 0, 1]);
