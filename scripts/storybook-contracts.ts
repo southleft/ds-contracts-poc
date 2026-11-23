@@ -279,8 +279,9 @@ export const NUMBER_ELEMENTS = (rootPath: readonly string[] | undefined, clear =
 export const paintedPx = (rel: number, px: number): number => Math.floor(rel + px + 0.5) - rel;
 /** rootFlex (convention root-text-baseline-as-drawn): the captured root's own one-line text in a flex or grid container is
  *  read too. Its text is an anonymous item there, so it is wrapped in a span for the probes, read only if the wrap leaves the
- *  text's box where it was, and unwrapped at once. */
-export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false, rootFlex = false) => `(() => { ${SHADOW_HELPERS_JS}
+ *  text's box where it was, and unwrapped at once. wrapped (convention wrapped-text-baseline-as-drawn): a text drawn on
+ *  several lines is read too, at its first line (a second pass, both probes before its first run), marked wrapped. */
+export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, painted = false, rootFlex = false, wrapped = false) => `(() => { ${SHADOW_HELPERS_JS}
   const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [];
   const probe = (align) => { const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;margin:0;padding:0;border:0;vertical-align:' + align; return p; };
   // Every element's box and the probed text's, before the probes and while they are in: a reading whose probes moved any is
@@ -295,7 +296,10 @@ export const MEASURE_BASELINES = (rootPath: readonly string[] | undefined, paint
       const top = first.getBoundingClientRect().top, one = top === last.getBoundingClientRect().top, b = base.getBoundingClientRect().top - top, moved = boxes(own) !== was;
       first.remove(); base.remove(); last.remove();
       const c = document.createElement('canvas').getContext('2d'); c.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily; const f = c.measureText('H');
-      if (moved) m = { disturbed: true }; else if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) }; }
+      if (moved) m = { disturbed: true }; else if (one) m = { px: +${painted ? `((${paintedPx.toString()})(top - root.getBoundingClientRect().top, b))` : 'b'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4) };${wrapped ? `
+      else { const t0 = probe('top'), b0 = probe('baseline'); own[0].before(t0); t0.after(b0);
+        const top0 = t0.getBoundingClientRect().top, d0 = b0.getBoundingClientRect().top - top0, moved0 = boxes(own) !== was; t0.remove(); b0.remove();
+        m = moved0 ? { disturbed: true } : { px: +${painted ? `((${paintedPx.toString()})(top0 - root.getBoundingClientRect().top, d0))` : 'd0'}.toFixed(4), ascent: +(f.fontBoundingBoxAscent / 1000).toFixed(4), descent: +(f.fontBoundingBoxDescent / 1000).toFixed(4), wrapped: true }; }` : ''} }
 ${rootFlex ? `    if (!m && el === root && own.length === 1 && /^(inline-)?(flex|grid)$/.test(cs.display)) {
       const t = own[0], box = () => { const g = document.createRange(); g.selectNodeContents(t); const r = g.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, was = box(), all0 = boxes(own), s = document.createElement('span');
       t.before(s); s.appendChild(t);
@@ -394,18 +398,19 @@ export function carryTextWrap(contract: Contract, axes: readonly string[], combo
 
 /** Convention text-baseline-as-drawn: a part owning one line of literal text carries the baseline the browser drew in each
  *  variant that draws it (`textBaseline`, over the axes that tell the readings apart; none when all agree). A part that
- *  some drawing variant has no reading for (two lines, a flex or grid box) is left as it was. A run that
+ *  some drawing variant has no reading for (two lines, unless wrapped-text-baseline-as-drawn reads its first; a flex or
+ *  grid box) is left as it was. A run that
  *  variant-text-owns-its-part made (`runs`, run → host) is its host's own text, drawn on its host's line: it has no element
  *  of its own and takes its host's reading. Returns the parts carried. */
 export function carryTextBaseline(contract: Contract, axes: readonly string[], combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>,
-  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number } | null | undefined, withRoot = false,
+  at: (comboKey: string, part: string) => { px: number; ascent: number; descent: number; wrapped?: true } | null | undefined, withRoot = false,
   runs: ReadonlyMap<string, string> = new Map()): string[] {
   const carried: string[] = [];
   const visit = (parts: Record<string, Part> | undefined) => { for (const [name, part] of Object.entries(parts ?? {})) {
     const read = (key: string) => runs.has(name) ? at(key, runs.get(name)!) : at(key, name);
     const drawn = typeof part.text === 'string' ? combos.flatMap((k) => { const m = read(k.key); return m === undefined ? [] : [{ v: k.axisValues, m }]; }) : [];
     if (drawn.length && drawn.every((r) => r.m)) {
-      part.textBaseline = variantRows(axes, drawn as Array<{ v: Record<string, string>; m: { px: number; ascent: number; descent: number } }>);
+      part.textBaseline = variantRows(axes, drawn as Array<{ v: Record<string, string>; m: { px: number; ascent: number; descent: number; wrapped?: true } }>);
       if (textBaselineIssues(contract, part).length) delete part.textBaseline; else carried.push(name);
     }
     visit(part.parts as Record<string, Part> | undefined);
@@ -757,7 +762,8 @@ async function main() {
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
-            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'))) as never);
+            const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'),
+              conventions.has('wrapped-text-baseline-as-drawn'))) as never);
             if (read) for (const [n, m] of read) { if (m && 'disturbed' in m) refusals.push(`text-baseline-probe-disturbed:${k.id}:${n.tag}`); baselines.set(n, m && 'disturbed' in m ? null : m); }
             else refusals.push(`text-baseline-unmatched:${k.id}`);
           }
