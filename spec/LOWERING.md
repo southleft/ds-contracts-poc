@@ -625,7 +625,7 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 |---|---|---|---|---|---|---|
 | `emit.position-inset-overlay-four-sides` | `implemented` | `emit-figma-script.ts:4875` | position:absolute with all four insets carried and every one a px length → an inset overlay — a child with STRETCH constraints on both axes and recorded offsets | a four-sided inset quartet lowers to a stretched overlay; anything less is refused by name | **none** | `round-tripped` |
 | `emit.position-no-inset-falls-in-flow` | `proposed` | `emit-figma-script.ts:4814` | position:absolute with NO inset carried — the static-position case → nothing — the part is drawn as an ordinary in-flow child | out-of-flow is a fact even when the offsets are zero — it should lower to ABSOLUTE positioning at the static position, or be refused by name | **none** | `untested` |
-| `emit.relative-offset-drawn` | `implemented` | `emit-figma-script.ts:3780` | position: relative with a top/left (or bottom/right) offset → the part placed at its offset inside a margin box of its flow size that draws nothing, so the flow keeps the flow box | the part drawn where CSS draws it, its flow box kept for its siblings | **none** | `untested` |
+| `emit.relative-offset-drawn` | `implemented` | `emit-figma-script.ts:3780` | position: relative with a top/left (or bottom/right) offset → the part in flow inside an auto-layout margin box of its flow size that draws nothing, the offset its padding (the end side for a negative offset), so it is drawn at its offset and the flow keeps the flow box | the part drawn where CSS draws it, its flow box kept for its siblings | **none** | `untested` |
 | `schema.position-fixed-sticky-unspellable` | `implemented` | `contract-schema.ts:1271` | position: fixed and position: sticky → nothing — there is no carried spelling | a named refusal | **none** | `untested` |
 
 #### `emit.position-inset-overlay-four-sides`
@@ -657,7 +657,7 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 **Inverse.** None — this lowering has no return leg.
 
 **Lost.**
-- the offset reads back as the part's position inside its margin box, not as a CSS offset; a FILL-sized part keeps today's lowering (no box)
+- the offset reads back as its margin box's padding, not as a CSS offset; a FILL-sized part keeps today's lowering (no box), and a part with a negative margin keeps the fixed box with the part placed in it
 
 **Why.** Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. A part with a measured line box keeps today's lowering: the line-box probe inserts siblings, and FluidDatePickerSkeleton's label loses its offset while they are in (its rule depends on its place among its siblings), so its measured line box cannot be combined with the offset.
 
