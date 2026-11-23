@@ -135,6 +135,9 @@
  *  box sits off the whole pixel half a row off its carried baseline. Once laid out, a baseline box centered in a horizontal
  *  row moves onto the whole pixel (round half up), its height and glyph line both changed by -2d so its top moves by d and
  *  its baseline stays put; under 0.05 px is left alone, and the move is undone if the row's size changes. Off, nothing moves. */
+/** relative-offset-drawn (React to Figma writer): a part positioned relative keeps its flow box and draws shifted by
+ *  left/top (-right/-bottom where left/top are not carried), placed in its margin box with overflow visible, so siblings do
+ *  not move. A part with a measured line box keeps today's lowering. Off, the offset is not drawn. */
 /** text-box-snapped-in-placed-box (React to Figma writer, at run time, with text-box-snapped-as-painted): a baseline box off
  *  the whole pixel that its row does not center (Button's label at xs sits at y 2.5, its row aligned to the top by a 1.5 px
  *  padding and a 1 px border) is held in a box of its own size at its place in the flow and drawn inside it on the whole
@@ -250,6 +253,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'overlay-size-not-control-default',
   'rect-placement-by-variant',
+  'relative-offset-drawn',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
