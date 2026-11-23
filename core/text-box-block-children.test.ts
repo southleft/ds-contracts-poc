@@ -33,3 +33,29 @@ test('on: a list item\'s text stacks above its nested list; an inline child keep
 test('off: both text boxes are rows', () => {
   assert.deepEqual(boxes([]), { item: 'HORIZONTAL', tagged: 'HORIZONTAL' });
 });
+
+/** Convention line-break-alone-draws-empty-line: "Default tile<br><br><a>Link</a>" is three lines in CSS: the text, an
+ *  empty line (the second <br>, alone on its line, at its line height) and the link. The first <br> ends the text's line
+ *  and draws nothing. Off, both are empty frames, which fill the stack's height at run time. */
+function lineBreaks(conventions: string[]): Array<[string, number | undefined]> {
+  const br = { element: 'br', declared: { display: 'inline' }, literals: { 'line-height': '18px' } };
+  const contract = ContractSchema.parse({
+    id: 'test.breaks', name: 'Breaks', version: '0.1.0', status: 'draft', description: 'Two line breaks between a text and a link',
+    states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { text: 'Default tile', declared: { display: 'block' },
+      parts: { first: br, second: br, link: { text: 'Link', declared: { display: 'inline' } } } } },
+    bindings: { code: { anchors: { importPath: 'test/Breaks', export: 'Breaks' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
+  });
+  const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map(), conventions: new Set(conventions) });
+  const spec = (engine.compileComponentData(contract, new Map([[contract.id, contract]])) as { variants: Array<{ spec: any }> }).variants[0]!.spec;
+  assert.equal(spec.layout?.mode, 'VERTICAL');
+  return spec.children.map((c: any) => [c.name, c.fixedHeight?.px]);
+}
+
+test('line breaks on: the <br> after content draws nothing, the one alone on its line is a line tall', () => {
+  assert.deepEqual(lineBreaks(['line-break-alone-draws-empty-line']), [['label', undefined], ['second', 18], ['link', undefined]]);
+});
+
+test('line breaks off: both <br> stay empty frames with no height of their own', () => {
+  assert.deepEqual(lineBreaks([]), [['label', undefined], ['first', undefined], ['second', undefined], ['link', undefined]]);
+});
