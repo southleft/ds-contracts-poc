@@ -808,7 +808,7 @@ const LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES = 12;
  *  table: nothing can be keyed). Bool axes participate everywhere: every
  *  code surface spells a bool side on the root (data attribute or class). */
 // @door mint.literal-fallback-table
-function literalTable(obs: MintObservation, axes: MintAxis[]): MintedLiteralTable | undefined {
+export function literalTable(obs: MintObservation, axes: MintAxis[]): MintedLiteralTable | undefined {
   if (obs.occurrences.length === 0 || axes.length === 0) return undefined;
   const sizes = axes.length <= LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES
     ? Array.from({ length: axes.length }, (_, i) => i + 1)

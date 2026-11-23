@@ -88,7 +88,7 @@ import type { TokenCorpus } from './token-corpus.js';
 import {aliasTarget, pxOrNull} from './tokens.js';
 import {finitePaintArguments} from './finite-paint-arguments.js';
 import { capturedTokensFromDump, foldVariablePath, assertUnambiguousVariablePaths, ONE_DOT_LEADER } from './captured-tokens.js';
-import { mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
+import { literalTable, mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
   deriveAbsentVariants,
@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention drawing-path-box-whole-pixel-by-value. */ drawingSnapByValue?: true; observedDrawingRoots?: WeakSet<object>; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention drawing-path-box-whole-pixel-by-value. */ drawingSnapByValue?: true; observedDrawingRoots?: WeakSet<object>; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention text-align-by-combination. */ textAlignByCombination?: true; /** Profile convention text-box-whole-pixel-beside-fixed-width: each marked part's variants, with a fixed variant's drawn width. */ textBoxBesideFixed?: WeakMap<object, Array<{ axes: Record<string, string>; width?: number }>>; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -3032,7 +3032,7 @@ function literalTableCarries(part: Record<string, unknown>, channel: string): bo
  *  axis declaration only. */
 function placeLiteralTable(
   mint: MintCapture,
-  obs: Pick<MintObservation, 'cssProperty'> & { target: Record<string, string> },
+  obs: Pick<MintObservation, 'cssProperty'> & { target: Record<string, string>; convention?: true },
   table: MintedLiteralTable,
   unsetProps: ReadonlySet<string>,
   observedHolder?: Record<string, unknown>,
@@ -3041,7 +3041,9 @@ function placeLiteralTable(
   const holder = observedHolder ?? mint.attach.find((a) => a.tokens === obs.target)?.holder;
   if (!holder) return { carried: false, why: 'the channel is not a part\'s base styling (a state plane, an instance override or stub geometry)' };
   if (holder.component !== undefined) return { carried: false, why: 'the part is a component instance (the child contract owns its styling)' };
-  if (!LITERAL_COMBINATION_CHANNELS.has(channel)) return { carried: false, why: `"${channel}" is not a literal channel` };
+  // text-align and max-width rows are written only by their profile conventions (text-align-by-combination,
+  // text-box-whole-pixel-beside-fixed-width); every other carrier keeps refusing them as before.
+  if (!LITERAL_COMBINATION_CHANNELS.has(channel) || ['text-align', 'max-width'].includes(channel) && !obs.convention) return { carried: false, why: `"${channel}" is not a literal channel` };
   const bad = table.rows.find((r) => !literalValueOk(channel, r.value));
   if (bad) return { carried: false, why: `${bad.value} is outside the "${channel}" literal grammar` };
   if (table.props.some((p) => unsetProps.has(p))) return { carried: false, why: 'an omitted-plane axis keys the values' };
@@ -7394,6 +7396,21 @@ function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void
   const c = contract as unknown as Contract;
   for (const { name, part, path } of walkAnatomy(c)) {
     if (part.textAutoResize === undefined) continue;
+    const fixed = ctx.textBoxBesideFixed?.get(part);
+    if (fixed) {
+      const rows = (part.literalsByCombination ?? []).flatMap((t) => t.rows.filter((r) => 'width' in r.literals).map((r) => ({ t, r })));
+      const matching = (axes: Record<string, string>) => rows.filter(({ t, r }) => t.props.every((p, i) => axes[p] === r.values[i]));
+      const clamps = !part.tokens?.['min-width'] && !part.tokens?.['max-width'] && fixed.every((v) => {
+        const m = matching(v.axes);
+        return v.width === undefined ? m.length === 0 : m.length === 1 && parseFloat(m[0]!.r.literals.width!) === v.width && [undefined, m[0]!.r.literals.width].includes(m[0]!.r.literals['min-width']);
+      });
+      if (!clamps) {
+        delete (part as Record<string, unknown>).textAutoResize;
+        ctx.notes.push(`${name}: a fixed variant's drawn width is not carried by one literal combination row of its own, or a width row matches an auto-width variant — the whole-pixel box is WITHDRAWN and the text keeps the browser's fractional advance (profile convention text-box-whole-pixel-beside-fixed-width)`);
+        continue;
+      }
+      for (const { r } of rows) { const { width, ...rest } = r.literals; r.literals = { ...rest, 'min-width': width!, 'max-width': width! }; }
+    }
     const reasons = textBoxStaticRefusals(c, part, path);
     // @door propose.text-box-unhonourable-withdrawn
     if (reasons.length === 0) continue;
@@ -7487,6 +7504,15 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
       ctx.notes.push(`${where}: textAlignHorizontal differs as a complete function of enum axis "${fit.axis.property}" — carried as conditional text-align in code and native variants (review)`);
       return;
     }
+    // Profile convention text-align-by-combination: the fewest axes whose drawn combinations decide the alignment.
+    const table = ctx.textAlignByCombination && ctx.mint ? literalTable({ nodePath: where, part: partPathOf(where), cssProperty: 'text-align', kind: 'number',
+      occurrences: textOcc.map(o => ({ variant: o.variant, axisValues: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {}, value: TEXT_ALIGN_BY_CANVAS[o.node.text!.textAlign!] })) }, ctx.mint.axes) : undefined;
+    const placed = table && placeLiteralTable(ctx.mint!, { cssProperty: 'text-align', target: (holder.tokens as Record<string, string> | undefined) ?? {}, convention: true }, table,
+      new Set(ctx.axes.filter(a => a.omitted).map(a => a.propName)), holder);
+    if (placed?.carried) {
+      ctx.notes.push(`${where}: textAlignHorizontal differs across variants and is a function of ${table!.props.join(' × ')} — carried per drawn combination as literal text-align in ${table!.rows.length} row(s) (profile convention text-align-by-combination; review)`);
+      return;
+    }
   }
   if (aligns.length > 1 || drawn.length !== 1) {
     // @door propose.text-align-mixed-refused
@@ -7546,6 +7572,16 @@ function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ct
   const auto = captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length;
   // @door propose.text-box-not-auto-width-unchanged
   if (auto === 0) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  const fixedOcc = textOcc.filter((o) => o.node.text!.textAutoResize !== 'WIDTH_AND_HEIGHT');
+  // Profile convention text-box-whole-pixel-beside-fixed-width: settleTextAutoResize keeps the box only if a literal
+  // combination row carries each fixed variant's drawn width and none matches an auto-width variant.
+  if (auto < textOcc.length && ctx.textBoxBesideFixed && ctx.mint && !textOcc.some((o) => o.node.fillWidth === true) &&
+      fixedOcc.every((o) => ['HEIGHT', 'NONE'].includes(o.node.text!.textAutoResize!) && drawnAxisOf(o, 'width') !== undefined)) {
+    holder.textAutoResize = 'WIDTH_AND_HEIGHT';
+    ctx.textBoxBesideFixed.set(holder, textOcc.map((o) => ({ axes: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {}, width: fixedOcc.includes(o) ? drawnAxisOf(o, 'width') : undefined })));
+    ctx.notes.push(`${where}: the text box sizes itself to its text in ${auto} of ${textOcc.length} variants and has a fixed width in the rest — carried as textAutoResize: WIDTH_AND_HEIGHT, the fixed variants' width rows clamping the box (profile convention text-box-whole-pixel-beside-fixed-width; review)`);
+    return;
+  }
   // A variant whose text reports NOTHING beside ones that report a value is
   // not evidence of auto-width (REST may omit its default) — it counts as the
   // mixed case, never as agreement (review, PR 132).
@@ -17965,7 +18001,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('drawing-path-box-whole-pixel-by-value') ? {drawingSnapByValue: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('drawing-path-box-whole-pixel-by-value') ? {drawingSnapByValue: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(conventionSet(opts.conventions).has('text-align-by-combination') ? {textAlignByCombination: true as const} : {}), ...(conventionSet(opts.conventions).has('text-box-whole-pixel-beside-fixed-width') ? {textBoxBesideFixed: new WeakMap()} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
