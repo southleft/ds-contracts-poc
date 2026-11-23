@@ -260,6 +260,8 @@ export interface NodeSpec {
   dashPattern?: number[];
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName?: string };
+  /** Convention line-break-alone-draws-empty-line: a <br> part's line height, for lowerLineBreaks (compile only). */
+  lineBreak?: { px: number; varName?: string };
   /** CSS flex-grow follows the parent main axis after append. */
   grow?: boolean;
   /** Compile-only placement fact; checked and removed after fill allocation. */
@@ -5430,6 +5432,14 @@ function partToSpec(
     spec.absolute = {h:'MIN',v:'MIN',left:normalized.native.x,top:normalized.native.y};
     spec.lits = {...spec.lits,width:normalized.native.width,height:normalized.native.height};
   }
+  // Convention line-break-alone-draws-empty-line: an in-flow <br> carries its line height (bound to its token where it has
+  // one) for lowerLineBreaks, which decides from its siblings whether it draws a line.
+  if (part.element === 'br' && !captured && !part.overlay && input.conventions?.has('line-break-alone-draws-empty-line')) {
+    let path = resolveTokens(part, subst)['line-height']?.slice(1, -1);
+    for (const [prop, value] of Object.entries(subst)) path = path?.replaceAll(`{${prop}}`, value);
+    const lh = pxOrNull(path !== undefined ? resolveLiteral(path) : resolveLiterals(part, subst)['line-height']);
+    if (lh !== null && lh > 0) spec.lineBreak = { px: lh, ...(path !== undefined ? { varName: figmaName(path) } : {}) };
+  }
   // v7 overlay: stamped on whatever node kind the part compiled to; the
   // runtime applies it after the node is appended (layoutPositioning
   // requires an auto-layout parent).
@@ -6486,6 +6496,26 @@ function boxCrossCenter(s: NodeSpec): void {
     return { type: 'frame', name: `${c.name} (center box)`, layout: { mode: mode === 'HORIZONTAL' ? 'VERTICAL' : 'HORIZONTAL', primary: 'CENTER', counter: 'MIN' },
       crossStretch: true, ...(sides.length ? { lits: pad } : {}), ...(Object.keys(bound).length ? { bindings: bound } : {}), children: [c] } as NodeSpec;
   });
+}
+
+/** Convention line-break-alone-draws-empty-line: the writer's block flow stacks each in-flow child of a vertical auto
+ *  layout on its own line. A <br> after a line holding content ends that line and draws nothing, so it is dropped; a <br>
+ *  that starts the stack or follows another <br> holds a line alone, which CSS draws at its line height, so it becomes a
+ *  frame of that height. An out-of-flow child takes no line, and a <br> under any other layout is drawn as before. */
+function lowerLineBreaks(s: NodeSpec): void {
+  if (s.layout?.mode === 'VERTICAL' && s.children?.some((c) => c.lineBreak)) {
+    let before: NodeSpec | undefined;
+    s.children = s.children.filter((c) => {
+      if (c.overlay || c.insetOverlay || c.absolute) return true;
+      const prev = before; before = c;
+      if (!c.lineBreak) return true;
+      if (prev && !prev.lineBreak) return false;
+      c.fixedHeight = { ...c.lineBreak };
+      return true;
+    });
+  }
+  delete s.lineBreak;
+  for (const c of s.children ?? []) lowerLineBreaks(c);
 }
 
 function annotateFillW(rootSpec: NodeSpec, context: string, byId: Map<string, Contract>): void {
@@ -7594,6 +7624,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
   // @lower emit.svg-box-snapped-as-painted
   if (input.conventions?.has('svg-box-snapped-as-painted')) { const mark = (s: NodeSpec): void => { if (s.type === 'svg') s.paintSnap = true; (s.children ?? []).forEach(mark); };
     for (const v of [...variants, ...stateVariants]) mark(v.spec); }
+  if (input.conventions?.has('line-break-alone-draws-empty-line')) for (const v of [...variants, ...stateVariants]) lowerLineBreaks(v.spec);
   for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`, byId);
   // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The

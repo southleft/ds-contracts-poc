@@ -243,6 +243,11 @@
 /** svg-own-fill-on-host (React to Figma contract step): an element holding nothing but one svg whose own CSS fill differs
  *  from the element's takes that fill, so when the svg folds into it as its icon the glyph keeps the fill the browser drew
  *  (CSS fill inherits, so the svg draws the same). Off, the folded glyph takes the element's text color. */
+/** line-break-alone-draws-empty-line (React to Figma writer): in a vertical auto-layout stack, where the writer's block
+ *  flow puts each in-flow child on its own line, a <br> that follows a line holding content ends that line and draws
+ *  nothing; a <br> that starts the stack or follows another <br> is alone on its line and draws one empty line, a frame
+ *  of its line height. Out of flow, or under any other layout, a <br> is drawn as before. Off, every <br> is an empty
+ *  frame that fills the stack's height. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -269,6 +274,7 @@ export const CONVENTIONS = [
   'inline-block-line-box-as-drawn',
   'inset-ring-absent-border-zero',
   'inside-outside-stroke-as-outline',
+  'line-break-alone-draws-empty-line',
   'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',
   'mixed-scale-rect-keeps-placement',
