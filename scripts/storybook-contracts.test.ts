@@ -855,7 +855,7 @@ test('text-box-snapped-in-placed-box: a baseline box its top-aligned row puts of
   for (const r of [painted, off]) assert.deepEqual([r.label, r.held, r.wide], [['top', 2.5, 2.5, 18, 18.5], null, ['forced', 2.5, 18.5, false]]);
 });
 
-test('relative-offset-drawn: a part positioned relative keeps its flow box and draws shifted by its offset; siblings stay', async () => {
+test('relative-offset-drawn: a part positioned relative keeps its flow box and draws shifted by its offset, in auto layout; siblings stay', async () => {
   const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
   const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
   // The Fluid skeletons: a 200 x 8 label, position relative at left 16 top 36, above a 10 px dot; a second part offset only
@@ -870,11 +870,20 @@ test('relative-offset-drawn: a part positioned relative keeps its flow box and d
     const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
     const at = (name: string) => root.findOne((x: any) => x.name === name) as any;
-    return ['label', 'tail'].map((n) => [at(n).parent.name, at(n).x, at(n).y, at(n).parent.width, at(n).parent.height]).concat([[at('dot').parent.type, at('dot').width, at('dot').height]]);
+    // Where Figma's auto layout puts the child in its box: at the start padding, or at the end less the end padding.
+    const placed = (n: any) => { const b = n.parent; return b.layoutMode !== 'HORIZONTAL' ? [n.x, n.y] : [
+      b.primaryAxisAlignItems === 'MAX' ? b.width - b.paddingRight - n.width : b.paddingLeft, b.counterAxisAlignItems === 'MAX' ? b.height - b.paddingBottom - n.height : b.paddingTop]; };
+    // The grammar's layout reasons on the set as the dump plugin reads it: no free-form frame, no placed child.
+    const { classifyDump } = await import('../extract/figma/grammar.js'), { readFileSync } = await import('node:fs');
+    const file = await vm.runInContext(`(async()=>{${readFileSync(new URL('../extract/figma/dump.plugin.js', import.meta.url), 'utf8')}\n})()`, context);
+    const reasons = Object.values(classifyDump(file)).flatMap((v) => v.reasons).filter((r) => r === 'free-form-frame' || r === 'absolute-child');
+    return ['label', 'tail'].map((n) => [at(n).parent.name, at(n).parent.layoutMode, at(n).layoutPositioning ?? 'AUTO', ...placed(at(n)), at(n).parent.width, at(n).parent.height])
+      .concat([[at('dot').parent.type, at('dot').width, at('dot').height], reasons]);
   };
-  // On: each bar sits in a box of its own flow size, drawn at its offset inside it; the dot keeps its place in the column.
-  assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 16, 36, 200, 8], ['tail (margin box)', -10, -5, 200, 8], ['COMPONENT', 10, 10]]);
-  assert.deepEqual((await run([])).map((r) => r.slice(0, 3)), [['Relative', 0, 0], ['Relative', 0, 0], ['COMPONENT', 10, 10]]);
+  // On: each bar sits in an auto-layout box of its own flow size, the offset its padding (the end side for a negative one),
+  // so it is drawn at its offset in flow, with no free-form frame or placed child; the dot keeps its place in the column.
+  assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 'HORIZONTAL', 'AUTO', 16, 36, 200, 8], ['tail (margin box)', 'HORIZONTAL', 'AUTO', -10, -5, 200, 8], ['COMPONENT', 10, 10], []]);
+  assert.deepEqual((await run([])).map((r) => r.slice(0, 2)), [['Relative', 'VERTICAL'], ['Relative', 'VERTICAL'], ['COMPONENT', 10], []]);
   // A part with a measured line box keeps today's lowering (no offset); its line box still joins its margin box.
   const lined = ContractSchema.parse({ ...contract, anatomy: { root: { ...contract.anatomy.root, parts: { wrap: { parts: { label: { ...bar({ left: '16px', top: '16px' }),
     lineBox: { props: [], rows: [{ values: [], top: 2, bottom: 0 }] } } } } } } } });
