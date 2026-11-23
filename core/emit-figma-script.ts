@@ -4897,8 +4897,10 @@ function absolutePartPlacement(
   const ty = num('translate-y') ?? (tm ? parseFloat(tm[2]) : 0);
   // Profile convention absolute-overhang-whole-pixel: an offset past the containing box's edge (an overhang, e.g. a
   // tooltip centered under a narrower anchor at -46.21) snaps outward to the whole pixel, as the browser's paint extent
-  // does (it paints that bubble from -47); an offset inside the box, or any offset with the convention off, is kept.
-  const out = (v: number): number => (v < 0 && input.conventions?.has('absolute-overhang-whole-pixel') ? Math.floor(v) : v);
+  // does (it paints that bubble from -47); an offset inside the box, or any offset with the convention off, is kept. An
+  // offset that rounds to 0 at the browser's layout unit (1/64 px), such as a transform's float residue of -0.0002, paints
+  // nothing past the edge: it is placed at 0, where flooring it would move the part a whole pixel out.
+  const out = (v: number): number => (v < 0 && input.conventions?.has('absolute-overhang-whole-pixel') ? (Math.round(v * 64) < 0 ? Math.floor(v) : 0) : v);
   const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
   // Profile convention absolute-box-from-size-and-margins: an inset places the box's MARGIN edge, so the box sits a margin
   // further in; and a box with its own width (height) between two insets is over-constrained, so it keeps that size at the

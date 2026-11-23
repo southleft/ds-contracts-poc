@@ -5,8 +5,9 @@ import { ContractSchema } from '../scripts/contract-schema.js';
 
 /** Profile convention absolute-overhang-whole-pixel: an absolutely placed part that overhangs its containing box's edge
  *  (a tooltip centered under a narrower anchor, a badge over its anchor's corner) is placed at whole pixels outward, as
- *  the browser's paint extent spans it; an offset inside the box stays as measured, and off, every offset is kept. */
-test('with the convention, a negative absolute offset snaps outward to the whole pixel; an in-box offset is kept', () => {
+ *  the browser's paint extent spans it; an offset inside the box stays as measured, a float residue is placed at 0, and
+ *  off, every offset is kept. */
+test('with the convention, a negative absolute offset snaps outward to the whole pixel; an in-box offset is kept, a residue is 0', () => {
   const placed = (literals: Record<string, string>) => ({ declared: { position: 'absolute' },
     literals: { width: '20px', height: '10px', 'background-color': '#000000', ...literals } });
   const contract = ContractSchema.parse({
@@ -16,6 +17,7 @@ test('with the convention, a negative absolute offset snaps outward to the whole
       bubble: placed({ left: '-46.2109px', top: '32px' }),
       badge: placed({ top: '-4.40625px', right: '-4.40625px' }),
       inside: placed({ left: '3.5px', top: '2.25px' }),
+      residue: placed({ left: '-0.0002px', top: '0px' }),
     } } },
     bindings: { code: { anchors: { importPath: 'test/Overhang', export: 'Overhang' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
   });
@@ -28,5 +30,9 @@ test('with the convention, a negative absolute offset snaps outward to the whole
   assert.deepEqual(on('bubble'), { h: 'MIN', v: 'MIN', left: -47, top: 32 });
   assert.deepEqual(on('badge'), { h: 'MAX', v: 'MIN', right: -5, top: -5 });
   assert.deepEqual(on('inside'), { h: 'MIN', v: 'MIN', left: 3.5, top: 2.25 });
-  assert.deepEqual([off('bubble'), off('badge')], [{ h: 'MIN', v: 'MIN', left: -46.2109, top: 32 }, { h: 'MAX', v: 'MIN', right: -4.40625, top: -4.40625 }]);
+  // A float residue (SliderSkeleton's range labels, a transform folded into left at -0.0002) is 0 at the browser's 1/64 px
+  // layout unit and paints nothing past the edge: placed at 0, not floored a whole pixel out.
+  assert.deepEqual(on('residue'), { h: 'MIN', v: 'MIN', left: 0, top: 0 });
+  assert.deepEqual([off('bubble'), off('badge'), off('residue')], [{ h: 'MIN', v: 'MIN', left: -46.2109, top: 32 },
+    { h: 'MAX', v: 'MIN', right: -4.40625, top: -4.40625 }, { h: 'MIN', v: 'MIN', left: -0.0002, top: 0 }]);
 });
