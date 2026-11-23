@@ -629,3 +629,20 @@ test('an enum-absent part with a bound Boolean keeps its drawn-plane layout tabl
  assert.deepEqual(on.body.stylesWhen,[{prop:'shown',equals:'false',styles:{display:'none'}}]);assert(on.r.notes.some((n:string)=>n.includes('profile convention enum-presence-keeps-the-gate')));
  assert.deepEqual(on.tag.visibleWhen,{prop:'shown'},'a part without a drawn-plane table keeps the Boolean gate');assert.deepEqual(on.tag.stylesWhen,[{prop:'state',equals:'c',styles:{display:'none'}}]);
 });
+
+test('a part hidden where a variant Boolean is false keeps only its drawn layout rows under gated-layout-drops-undrawn-rows',()=>{
+ const flow=(primary:'MIN'|'CENTER')=>({mode:'HORIZONTAL' as const,primary,counter:'MIN' as const,spacing:0,padding:[0,0,0,0] as [number,number,number,number],primarySizing:'FIXED' as const,counterSizing:'FIXED' as const});
+ const set:DumpSet={setName:'Gate rows specimen',type:'COMPONENT_SET',propertyDefinitions:{
+  Open:{type:'VARIANT',defaultValue:'False',variantOptions:['False','True']},Size:{type:'VARIANT',defaultValue:'Small',variantOptions:['Small','Large']},Tone:{type:'VARIANT',defaultValue:'A',variantOptions:['A','B']}},
+ variants:['False','True'].flatMap(open=>['Small','Large'].flatMap(size=>['A','B'].map(tone=>({name:`Open=${open}, Size=${size}, Tone=${tone}`,type:'COMPONENT' as const,variantProperties:{Open:open,Size:size,Tone:tone},bbox:{width:30,height:10},layout:{...flow('MIN'),primarySizing:'AUTO' as const},
+  children:[{name:'Menu',type:'FRAME' as const,...(open==='False'?{hidden:true}:{}),bbox:{width:20,height:10},layout:flow(open==='False'||(tone==='A')===(size==='Small')?'MIN':'CENTER'),
+   children:[{name:'Dot',type:'FRAME' as const,bbox:{width:4,height:4},fill:{hex:'ff0000'}}]}]}))))};
+ const run=(conventions:string[])=>{const r=proposeFromDump(set,{corpus:tokenCorpusFromJson({primitives:{},semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true,fileKey:'fixture',hiddenCaptured:true,conventions} as any);
+  const c=ContractSchema.parse(r.contract),errors:string[]=[];validateContract(c,new Map([[c.id,c]]),errors,new Map());return {r,errors,menu:walkAnatomy(c).find(w=>w.name==='Menu')!.part};};
+ const off=run([]);assert.deepEqual(off.menu.visibleWhen,{prop:'open'});assert.equal(off.menu.layoutByCombination!.rows.length,8,'off: rows for the hidden planes remain');
+ assert(off.errors.some(e=>e.includes('layoutByCombination requires exact coverage of the drawn presence domain')),'off: the coverage refusal stands');
+ // Profile convention gated-layout-drops-undrawn-rows: only the rows the gate draws remain.
+ const on=run(['gated-layout-drops-undrawn-rows']);assert.deepEqual(on.errors,[]);assert.deepEqual(on.menu.visibleWhen,{prop:'open'});
+ assert.deepEqual(on.menu.layoutByCombination!.rows.map(row=>row.values),[['true','small','a'],['true','small','b'],['true','large','a'],['true','large','b']]);
+ assert(on.r.notes.some((n:string)=>n.includes('profile convention gated-layout-drops-undrawn-rows')));
+});

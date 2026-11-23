@@ -35,7 +35,7 @@ import {demandedVisibilityNodes,visibilityBindingMatches,visibilityDemandsFromDu
 import {outsideStrokeIssues, resolveLayout} from '../scripts/contract-schema.js';
 import {allocateInstanceAffine, slotPlacementsAt} from '../scripts/contract-schema.js';
 import {inferPresenceByCombination} from './infer-presence.js';
-import {resolvePresence, defaultSlotFamilyIssue, callerContentGroups} from '../scripts/contract-schema.js';
+import {resolvePresence, defaultSlotFamilyIssue, callerContentGroups, reachablePresenceTupleKeys} from '../scripts/contract-schema.js';
 import type {DumpHostOverride} from '../extract/figma/types.js';
 import {projectNativeImagePaints,nativeImageProjection,imageOverSolidPaths} from './native-image-paint.js';
 import {projectNativeGroupPlanes} from './native-group-plane.js';
@@ -2691,7 +2691,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -17965,7 +17965,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
@@ -19927,7 +19927,7 @@ function proposeFromDumpFencedImpl(
   } else {
     projection = sourceProjection;
   }
-  settleUaPadding({ contract, notes: ctx.notes }, set);
+  settleUaPadding({ contract, notes: ctx.notes }, set); gatedLayoutDropsUndrawnRows(contract as unknown as Contract, ctx);
   if(ctx.characterNodes?.size)throw Error('character-demand-source-part-not-emitted');
   const characterBindings:CharacterBinding[]=[...new Map((ctx.characterAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract),...(d.forwardTarget?{forwarded:true}:{})}))).map(b=>[canonicalJson(b),b])).values()];
   if(ctx.textAppearanceNodes?.size)throw Error('text-appearance-demand-source-part-not-emitted');
@@ -20987,4 +20987,22 @@ function enumPresenceKeepsGate(part: Record<string, unknown>, presence: NonNulla
   part.visibleWhen = structuredClone(presence);
   part.stylesWhen = [...styles, {prop: live.prop, equals: 'false', styles: {display: 'none'}}];
   return `${where}: captured presence on "${presence.prop}" stays the part's gate, and the live visibility binding hides it with display: none when "${live.prop}" is false (profile convention enum-presence-keeps-the-gate)`;
+}
+
+/** Profile convention gated-layout-drops-undrawn-rows: a part gated by visibleWhen or presenceByCombination whose layout
+ *  table also holds rows for planes where the gate never draws it keeps only the rows its gate draws. The dropped rows
+ *  style a part that is not drawn, and the contract's coverage rule for a gated part is exact coverage of the drawn
+ *  presence domain. A table that does not cover that whole domain is left as it is. */
+function gatedLayoutDropsUndrawnRows(contract: Contract, ctx: Ctx): void {
+  if (!ctx.gatedLayoutRows) return;
+  for (const {name, part} of walkAnatomy(contract)) {
+    const table = part.layoutByCombination;
+    if (!table || !(part.visibleWhen || part.presenceByCombination) || table.rows.every(row => row.layout.grow !== undefined) ||
+        table.rows.every(row => row.layout.alignSelf !== undefined)) continue;
+    const drawn = reachablePresenceTupleKeys(contract, table.props, part), keys = table.rows.map(row => JSON.stringify(row.values));
+    if (!drawn || keys.every(key => drawn.has(key)) || [...drawn].some(key => !keys.includes(key))) continue;
+    const kept = table.rows.filter((_, i) => drawn.has(keys[i]!));
+    ctx.notes.push(`${name}: layoutByCombination keeps the ${kept.length} rows its gate draws and drops ${table.rows.length - kept.length} for planes where the part is never drawn (profile convention gated-layout-drops-undrawn-rows)`);
+    table.rows = kept;
+  }
 }
