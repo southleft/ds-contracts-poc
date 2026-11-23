@@ -4,7 +4,9 @@ import {type Contract, type Part} from '../scripts/contract-schema.js';
 export function reactInstanceRootStyle(contract: Contract, part: Part,
  resolve: (path:string,channel:string)=>string|number, codePropOf:(name:string)=>string, ringVariables = false): string {
  const entries=Object.entries(part.component?.rootOverrides??{});
- const styles = [...(part.component?.rootFill??[]).map(channel=>`${JSON.stringify(channel)}: "100%"`), ...entries.map(([channel,ref])=>{
+ const flex=(value:string|undefined)=>value==='start'||value==='end'?`flex-${value}`:value, alignment=part.component?.rootAlignment;
+ const styles = [...(alignment?.justify?[`"justifyContent": "${flex(alignment.justify)}"`]:[]), ...(alignment?.align?[`"alignItems": "${flex(alignment.align)}"`]:[]),
+  ...(part.component?.rootFill??[]).map(channel=>`${JSON.stringify(channel)}: "100%"`), ...entries.map(([channel,ref])=>{
   const path=ref.slice(1,-1), axes=[...new Set([...path.matchAll(/\{([^}]+)\}/g)].map(m=>m[1]))];
   let count=1;
   const domains=axes.map(name=>{
