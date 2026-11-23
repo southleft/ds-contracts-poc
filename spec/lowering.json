@@ -1353,10 +1353,10 @@
       "file": "core/emit-figma-script.ts",
       "line": 3784,
       "ruleLine": 3785,
-      "ruleText": "if (input.conventions?.has('relative-offset-drawn') && !isAbsoluteThisCombo(part, subst) && !part.lineBox) {",
+      "ruleText": "if (input.conventions?.has('relative-offset-drawn') && !isAbsoluteThisCombo(part, subst)) {",
       "css": {
         "construct": "position: relative with a top/left offset (or bottom/right where top/left are not set): the box keeps its place in the flow and is drawn shifted by the offset, its siblings unmoved",
-        "context": "profile convention relative-offset-drawn, per variant: a part whose position resolves to relative in that variant (declared, or by its stylesWhen), whose carried offset is not zero, and which carries no measured line box (Part.lineBox)"
+        "context": "profile convention relative-offset-drawn, per variant: a part whose position resolves to relative in that variant (declared, or by its stylesWhen), whose carried offset is not zero; a measured line box (Part.lineBox, read without the offset) joins the margin box it is drawn in"
       },
       "figma": {
         "construct": "the part in flow inside its margin box, a fixed auto-layout frame of its flow size that draws nothing (clipsContent false): the offset is the box's padding on the start side (aligned to its start), or on the end side for a negative offset (aligned to its end), so the part is drawn at its offset, overflowing the box, and the flow keeps the flow box with no free-form frame"
@@ -1372,7 +1372,7 @@
       "roundTrip": "untested",
       "cases": [],
       "doors": [],
-      "why": "Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. A part with a measured line box keeps today's lowering: the line-box probe inserts siblings, and FluidDatePickerSkeleton's label loses its offset while they are in (its rule depends on its place among its siblings), so its measured line box cannot be combined with the offset."
+      "why": "Carbon's Fluid skeletons offset the label bar relative to its flow spot (left 16, top 36): Chromium paints it at (16, 36) and Figma drew it at (0, 0), so FluidNumberInput, FluidSearch and FluidTextInput skeletons each failed at 12.5%. FluidDatePickerSkeleton's label (left 16, top 16) also carries a measured line box (2 px above it); the line box is read from a text node that no sibling rule sees and without the offset, so the two combine and the label is drawn at (16, 18), as Chromium paints it."
     },
     {
       "id": "emit.root-content-parent-width",
