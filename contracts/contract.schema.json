@@ -8254,6 +8254,30 @@
                 "pattern": "^\\{[a-z0-9.{}-]+\\}$"
               }
             },
+            "rootAlignment": {
+              "type": "object",
+              "properties": {
+                "justify": {
+                  "type": "string",
+                  "enum": [
+                    "start",
+                    "center",
+                    "end",
+                    "space-between"
+                  ]
+                },
+                "align": {
+                  "type": "string",
+                  "enum": [
+                    "start",
+                    "center",
+                    "end",
+                    "baseline"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
             "statePreview": {
               "anyOf": [
                 {

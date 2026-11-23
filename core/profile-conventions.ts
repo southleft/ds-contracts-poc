@@ -227,7 +227,10 @@
  *  presenceByCombination, from the planes where it is absent) and whose captured hidden channel, over the occurrences
  *  that draw it, is exactly one boolean axis's false (or true) keeps its gate, and that boolean hides it with a stylesWhen
  *  display: none. Off, the hidden channel is named as uncorrelated and the part draws in those variants. */
-// One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
+/** instance-root-alignment-carried (Figma to React proposal): a key-linked instance that overrides its main's primary- or
+ *  counter-axis alignment (primaryAxisAlignItems / counterAxisAlignItems), with the same value at every use, carries it
+ *  as the component's rootAlignment, which the React surfaces apply to the child's flex root as justify-content /
+ *  align-items. Off, the override is named as not modeled by root inputs and the child keeps its own alignment. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -280,6 +283,7 @@ export const CONVENTIONS = [
   'inline-block-line-box-as-drawn',
   'inset-ring-absent-border-zero',
   'inside-outside-stroke-as-outline',
+  'instance-root-alignment-carried',
   'line-break-alone-draws-empty-line',
   'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',
