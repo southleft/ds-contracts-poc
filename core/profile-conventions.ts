@@ -135,6 +135,9 @@
  *  box sits off the whole pixel half a row off its carried baseline. Once laid out, a baseline box centered in a horizontal
  *  row moves onto the whole pixel (round half up), its height and glyph line both changed by -2d so its top moves by d and
  *  its baseline stays put; under 0.05 px is left alone, and the move is undone if the row's size changes. Off, nothing moves. */
+/** relative-offset-drawn (React to Figma writer): a part positioned relative keeps its flow box and draws shifted by
+ *  left/top (-right/-bottom where left/top are not carried), placed in its margin box with overflow visible, so siblings do
+ *  not move. A part with a measured line box keeps today's lowering. Off, the offset is not drawn. */
 /** table-short-row-leaves-columns-empty (React to Figma contract step): a table row with fewer cells than the widest
  *  takes the columns from the left, as CSS leaves its trailing cells empty, so the column widths are still admitted; the
  *  short row keeps the table's width when it measures a full row's width in every combo. Off, such a table admits no
@@ -245,6 +248,7 @@ export const CONVENTIONS = [
   'outline-takes-no-layout',
   'overlay-size-not-control-default',
   'rect-placement-by-variant',
+  'relative-offset-drawn',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
