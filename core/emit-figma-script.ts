@@ -8167,7 +8167,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
 ${relative ? `  const o = childSpec.relativeOffset, mm = m || {}, t = mm.top || 0, r = mm.right || 0, b = mm.bottom || 0, l = mm.left || 0;
   if (!t && !r && !b && !l && !o) return;
-  const placed = t < 0 || r < 0 || b < 0 || l < 0 || !!o;` : `  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
+  const placed = t < 0 || r < 0 || b < 0 || l < 0;` : `  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const placed = t < 0 || r < 0 || b < 0 || l < 0;`}
   const box = figma.createFrame();
@@ -8175,7 +8175,16 @@ ${relative ? `  const o = childSpec.relativeOffset, mm = m || {}, t = mm.top || 
   box.fills = [];
   box.clipsContent = false;
   parent.insertChild(parent.children.indexOf(childNode), box);
-  if (placed) box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));
+  if (placed) box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));${relative ? `
+  // Convention relative-offset-drawn: the box keeps the flow size and stays in auto layout; the offset is its padding, on
+  // the start side (the box aligned to its start) or, when negative, on the end side (aligned to its end), and the child
+  // is drawn there in flow, overflowing the box as CSS draws it.
+  else if (o) {
+    Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'FIXED', counterAxisSizingMode: 'FIXED',
+      primaryAxisAlignItems: o.x < 0 ? 'MAX' : 'MIN', counterAxisAlignItems: o.y < 0 ? 'MAX' : 'MIN',
+      paddingLeft: l + Math.max(o.x, 0), paddingRight: r + Math.max(-o.x, 0), paddingTop: t + Math.max(o.y, 0), paddingBottom: b + Math.max(-o.y, 0) });
+    box.resize(Math.max(childNode.width + l + r, 0.01), Math.max(childNode.height + t + b, 0.01));
+  }` : ''}
   else Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'AUTO', counterAxisSizingMode: 'AUTO', paddingTop: t, paddingRight: r, paddingBottom: b, paddingLeft: l });
   box.appendChild(childNode);
   if (placed) { childNode.x = l${relative ? ' + (o ? o.x : 0)' : ''}; childNode.y = t${relative ? ' + (o ? o.y : 0)' : ''}; }${fills ? `
