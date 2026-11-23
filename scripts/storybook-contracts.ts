@@ -358,12 +358,14 @@ export const MEASURE_TEXT_LINES = (rootPath: readonly string[] | undefined) => `
   if (root) walk(root); return out; })()`;
 
 /** Convention shrunk-text-wraps-at-drawn-width: an element whose own text was drawn on two or more lines, an item of a flex
- *  row that does not grow it, was shrunk by the row until it wrapped: its content width and line count; null otherwise. */
+ *  row that does not grow it, was shrunk by the row until it wrapped; an absolutely placed one was shrunk to fit by its
+ *  containing block: its content width and line count; null otherwise. */
 export function shrunkTextWrap(s: Record<string, string>, row: Record<string, string> | undefined, lines: number): { width: number; lines: number } | null {
   const px = (k: string) => /^-?[\d.]+px$/.test(s[k] ?? '') ? parseFloat(s[k]!) : NaN;
   const width = +(px('width') - (s['box-sizing'] === 'border-box' ? px('padding-left') + px('padding-right') + px('border-left-width') + px('border-right-width') : 0)).toFixed(4);
-  return row && /^(inline-)?flex$/.test(row['display'] ?? '') && (row['flex-direction'] ?? 'row').startsWith('row') && (s['flex-grow'] ?? '0') === '0' &&
-    !['absolute', 'fixed'].includes(s['position'] ?? '') && lines >= 2 && width > 0 ? { width, lines } : null;
+  const placed = ['absolute', 'fixed'].includes(s['position'] ?? '');
+  return (placed || (row && /^(inline-)?flex$/.test(row['display'] ?? '') && (row['flex-direction'] ?? 'row').startsWith('row') && (s['flex-grow'] ?? '0') === '0')) &&
+    lines >= 2 && width > 0 ? { width, lines } : null;
 }
 
 /** Convention shrunk-text-wraps-at-drawn-width: a part owning literal text that a flex row shrank until it wrapped, in some
