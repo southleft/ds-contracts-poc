@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_LINE_BOXES, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -836,7 +836,8 @@ test('relative-offset-drawn: a part positioned relative keeps its flow box and d
   // On: each bar sits in a box of its own flow size, drawn at its offset inside it; the dot keeps its place in the column.
   assert.deepEqual(await run(['relative-offset-drawn']), [['label (margin box)', 16, 36, 200, 8], ['tail (margin box)', -10, -5, 200, 8], ['COMPONENT', 10, 10]]);
   assert.deepEqual((await run([])).map((r) => r.slice(0, 3)), [['Relative', 0, 0], ['Relative', 0, 0], ['COMPONENT', 10, 10]]);
-  // A part with a measured line box keeps today's lowering (no offset); its line box still joins its margin box.
+  // A part with a measured line box (read without its offset) is drawn at its offset inside the margin box that holds its
+  // line box: FluidDatePickerSkeleton's label, 2 px of line above it, at (16, 18).
   const lined = ContractSchema.parse({ ...contract, anatomy: { root: { ...contract.anatomy.root, parts: { wrap: { parts: { label: { ...bar({ left: '16px', top: '16px' }),
     lineBox: { props: [], rows: [{ values: [], top: 2, bottom: 0 }] } } } } } } } });
   const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(),
@@ -844,5 +845,47 @@ test('relative-offset-drawn: a part positioned relative keeps its flow box and d
   type Spec = { name?: string; relativeOffset?: unknown; margins?: unknown; children?: Spec[] };
   const find = (s: Spec): Spec | undefined => s.name === 'label' ? s : (s.children ?? []).map(find).find(Boolean);
   const label = find((engine.compileComponentData(lined, new Map([[lined.id, lined]])) as { variants: Array<{ spec: Spec }> }).variants[0]!.spec)!;
-  assert.deepEqual([label.relativeOffset, label.margins], [undefined, { top: 2, bottom: 0 }]);
+  assert.deepEqual([label.relativeOffset, label.margins], [{ x: 16, y: 16 }, { top: 2, bottom: 0 }]);
+  const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(lined, new Map([[lined.id, lined]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+  const drawn = root.findOne((x: any) => x.name === 'label') as any;
+  assert.deepEqual([drawn.parent.name, drawn.x, drawn.y, drawn.parent.width, drawn.parent.height], ['label (margin box)', 16, 18, 200, 10]);
+});
+
+test('inline-block-line-box-as-drawn: the line box is read from a text node, which no sibling rule sees, and without a relative offset', async () => {
+  const { chromium } = await import('playwright-core'), browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    // FluidDatePickerSkeleton's label: an 8 px inline-block alone on its line above a block field, positioned relative at
+    // (16, 16) only while the field follows it (:has(+ .field)) and absolute otherwise. A span beside it broke that rule.
+    const read = async (rule: string, doctype = '<!doctype html>') => {
+      await page.setContent(`${doctype}<style>#s { font: 14px/18px sans-serif; width: 300px } .label { display: inline-block; width: 75px; height: 8px; position: absolute }
+        .field { display: block; height: 40px } ${rule}</style><div id="s"><span class="label"></span><div class="field"></div></div>`);
+      return (await page.evaluate(MEASURE_LINE_BOXES(['#s'])) as Array<[string, { top: number; bottom: number } | null]>).find(([tag]) => tag === 'span')![1];
+    };
+    // Its line box where nothing depends on its siblings and it is not offset: the strut reaches above and below the 8 px box.
+    const flow = await read('.label { position: static }');
+    assert.ok(flow && flow.top > 0 && flow.bottom > 0, JSON.stringify(flow));
+    // Placed by the sibling rule and offset, it reads the same line box; the page is left as it was.
+    assert.deepEqual(await read('.label:has(+ .field) { position: relative; top: 16px; left: 16px }'), flow);
+    assert.equal(await page.evaluate(`document.getElementById('s').childNodes.length`), 2);
+    // Quirks mode draws a line with no text without its strut: nothing is read.
+    assert.equal(await read('.label { position: static }', ''), null);
+  } finally { await browser.close(); }
+});
+
+test('text-baseline-as-drawn: a baseline whose probes move anything is named, not carried', async () => {
+  const { chromium } = await import('playwright-core'), browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    // The bold run is 40 px only as the paragraph's first element child; the probes, inserted before the text, take that
+    // place, so the line moves while they are in.
+    const read = async (rule: string) => {
+      await page.setContent(`<!doctype html><style>#p { font: 14px/normal sans-serif; margin: 0 } ${rule}</style><p id="p">Hello <b>big</b></p>`);
+      return (await page.evaluate(MEASURE_BASELINES(['#p'], true)) as Array<[string, unknown]>)[0];
+    };
+    assert.deepEqual(await read('#p > b:first-child { font-size: 40px }'), ['p', { disturbed: true }]);
+    const kept = await read('#p > b { font-size: 40px }') as [string, { px: number }];
+    assert.ok(kept[0] === 'p' && kept[1].px > 30, JSON.stringify(kept));
+  } finally { await browser.close(); }
 });

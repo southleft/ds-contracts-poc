@@ -3777,10 +3777,10 @@ function applyStyling(
   if (line && (line.top || line.bottom) && Object.values(spec.margins ?? {}).every((v) => (v ?? 0) >= 0))
     spec.margins = { ...spec.margins, top: (spec.margins?.top ?? 0) + line.top, bottom: (spec.margins?.bottom ?? 0) + line.bottom };
   // Convention relative-offset-drawn: a part positioned relative in this variant keeps its flow box and draws shifted by
-  // left/top (-right/-bottom where left/top are not carried), as CSS draws it; siblings do not move. A part with a measured
-  // line box keeps today's lowering: the line-box probe inserts siblings, which can change the rules that place it.
+  // left/top (-right/-bottom where left/top are not carried), as CSS draws it; siblings do not move. A measured line box
+  // (read without the offset) joins the margin box it is drawn in.
   // @lower emit.relative-offset-drawn
-  if (input.conventions?.has('relative-offset-drawn') && !isAbsoluteThisCombo(part, subst) && !part.lineBox) {
+  if (input.conventions?.has('relative-offset-drawn') && !isAbsoluteThisCombo(part, subst)) {
     let position = part.declared?.['position'];
     for (const rule of part.stylesWhen ?? [])
       if (rule.equals !== undefined && subst[rule.prop] === rule.equals && rule.styles['position'] !== undefined) position = rule.styles['position'];
