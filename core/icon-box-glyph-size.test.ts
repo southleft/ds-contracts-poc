@@ -50,3 +50,44 @@ test('an icon part whose box is its glyph, or any icon part with the convention 
     assert.deepEqual([node.type, node.width, node.height, node.layoutPositioning], ['FRAME', size, size, 'ABSOLUTE']);
   }
 });
+
+/** Profile convention bare-icon-keeps-its-margins: a bare glyph keeps its declared margins in flow (none negative). */
+async function marginIcon(conventions: Set<string>) {
+  const px = (n: number) => ({ $value: `${n}px` });
+  const tokens = { primitives: { s: { $type: 'dimension', glyph: px(16), ten: px(10), eight: px(8), wide: px(128), row: px(28) } },
+    semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const contract = ContractSchema.parse({
+    id: 'test.step', name: 'Step', version: '0.1.0', status: 'draft', description: 'A glyph beside its label',
+    states: [], semantics: { element: 'button' }, props: [],
+    anatomy: { root: { layout: { display: 'flex' }, tokens: { width: '{s.wide}', height: '{s.row}' }, parts: {
+      glyph: { icon: { asset: 'chev', size: 16 }, tokens: { width: '{s.glyph}', height: '{s.glyph}', 'margin-top': '{s.ten}', 'margin-right': '{s.eight}' } },
+      label: { text: 'First step' },
+    } } },
+    bindings: { code: { anchors: { importPath: 'test/Step', export: 'Step' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
+  });
+  const engine = createFigmaEngine({ tokens, icons, conventions }), byId = new Map([[contract.id, contract]]);
+  const spec = (engine.compileComponentData(contract, byId) as any).variants[0].spec;
+  const { figma, root } = createFigmaMock();
+  const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
+  await run(engine.buildTokensScript(null));
+  await run(engine.buildComponentScript(contract, byId));
+  const node = root.findOne((n: any) => n.name === 'glyph') as any;
+  return { spec, node, box: node.parent, row: node.parent.name === 'glyph (margin box)' ? node.parent.parent : node.parent };
+}
+
+test('bare-icon-keeps-its-margins on: the gap is the row\'s spacing, the top margin a hugging margin box\'s padding', async () => {
+  const { spec, box, row } = await marginIcon(new Set(['bare-icon-keeps-its-margins']));
+  assert.deepEqual(spec.children.map((c: any) => [c.name, c.type, c.margins]), [['glyph', 'svg', { top: 10 }], ['label', 'text', undefined]]);
+  assert.equal(spec.lits?.itemSpacing ?? spec.bindings?.itemSpacing, 's/eight');
+  assert.deepEqual([box.name, box.layoutMode, box.primaryAxisSizingMode, box.counterAxisSizingMode, box.paddingTop, box.paddingLeft],
+    ['glyph (margin box)', 'HORIZONTAL', 'AUTO', 'AUTO', 10, 0]);
+  assert.deepEqual(row.children.map((c: any) => c.name), ['glyph (margin box)', 'label']);
+});
+
+test('bare-icon-keeps-its-margins off: the bare glyph draws with no margins, as before', async () => {
+  const { spec, box } = await marginIcon(new Set());
+  assert.deepEqual(spec.children.map((c: any) => [c.name, c.margins]), [['glyph', undefined], ['label', undefined]]);
+  assert.equal(spec.lits?.itemSpacing ?? spec.bindings?.itemSpacing, undefined);
+  assert.notEqual(box.name, 'glyph (margin box)');
+});

@@ -5618,6 +5618,18 @@ function partToSpecInner(
       } else {
         applyAbsoluteThisCombo(spec, part, subst);
       }
+      // Convention bare-icon-keeps-its-margins: the glyph keeps the margins its own box resolved, in flow and none negative,
+      // so the writer's margin lowering places it (a sibling gap, or the padding of a hugging margin box).
+      if (input.conventions?.has('bare-icon-keeps-its-margins') && !spec.insetOverlay && !isAbsoluteThisCombo(part, subst) && !part.overlay) {
+        const m: NonNullable<NodeSpec['margins']> = {}, v: NonNullable<NodeSpec['marginVars']> = {};
+        for (const side of ['top', 'right', 'bottom', 'left'] as const) {
+          const px = iconBox.margins?.[side] ?? parseLitPx(lits[`margin-${side}`] ?? '');
+          if (px === undefined || px === 0) continue;
+          m[side] = px;
+          if (iconBox.margins?.[side] !== undefined && iconBox.marginVars?.[side]) v[side] = iconBox.marginVars[side];
+        }
+        if (Object.keys(m).length && Object.values(m).every((px) => px > 0)) { spec.margins = m; if (Object.keys(v).length) spec.marginVars = v; }
+      }
       applyVisibleWhen(spec, part, contract, subst);
       return spec;
     }
