@@ -236,6 +236,10 @@
  *  only some variants and is hidden by a host's instance override gets an availability table from the same exact
  *  original-path membership a leaf uses (its own node, by path and bytes, in each source main), so the host's visibility
  *  control cannot target a plane where the part is absent. Off, the demand is refused and the child set is not proposed. */
+/** repeated-wrapper-name-not-folded (Figma to React proposal): a wrapper name that one variant draws on two or more
+ *  sibling containers names several nodes, so the wrapper-union fold does not give the flat variants one synthetic copy
+ *  of it; nested and flat hierarchies are kept, and the presence rule gates each. Off, the name folds as one wrapper
+ *  and its first node's layout holds every flat member (two stacked texts drawn side by side in one row). */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -312,6 +316,7 @@ export const CONVENTIONS = [
   'overlay-size-not-control-default',
   'rect-placement-by-variant',
   'relative-offset-drawn',
+  'repeated-wrapper-name-not-folded',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
   'set-cell-pads-variant-overhang',
