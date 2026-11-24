@@ -16,7 +16,8 @@ export interface NativeLineFootprint {
   originX: number;
   originY: number;
 }
-/** The Plugin API permits skew/reflection but prohibits scaling and collapse. */
+/** The Plugin API permits skew/reflection but prohibits scaling and collapse. A vertical fill line keeps any stored
+ *  alignment: native LINE paint is local y in [-weight, 0] for every alignment (nativeLinePaint). */
 export function nativeLineIssue(line: NativeLineGeometry): string | undefined {
   if (!Number.isFinite(line.length) || line.length <= 0) return 'native-line-length-invalid';
   if (!Array.isArray(line.transform) || line.transform.length !== 2 ||
@@ -29,7 +30,7 @@ export function nativeLineIssue(line: NativeLineGeometry): string | undefined {
   if (!['NONE', 'ROUND', 'SQUARE'].includes(line.cap)) return 'native-line-cap-unsupported';
   if (!['INSIDE', 'CENTER', 'OUTSIDE'].includes(line.align)) return 'native-line-alignment-invalid';
   if (line.fillWidth && (line.cap!=='NONE'||line.align!=='CENTER'||a!==1||b!==0||c!==0||d!==1||line.transform[0][2]!==0||line.transform[1][2]!==0)) return 'native-line-fill-basis-unsupported';
-  if (line.fillHeight && (line.fillWidth||line.cap!=='NONE'||line.align!=='CENTER'||a!==0||b!==1||c!==-1||d!==0||line.transform[0][2]!==0||line.transform[1][2]!==0)) return 'native-line-fill-basis-unsupported';
+  if (line.fillHeight && (line.fillWidth||line.cap!=='NONE'||a!==0||b!==1||c!==-1||d!==0||line.transform[0][2]!==0||line.transform[1][2]!==0)) return 'native-line-fill-basis-unsupported';
 }
 function checked(line: NativeLineGeometry): void {
   const issue = nativeLineIssue(line);

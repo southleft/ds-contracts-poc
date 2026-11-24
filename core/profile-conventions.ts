@@ -256,6 +256,10 @@
  *  explicit child order), whose items the holder flows with a non-negative gap and which each stay in flow, clip their
  *  content and paint nothing past their box, gives every item the repeat's one rank (layout.repeatSharesRank). Off, the
  *  generator refuses the ranked repeat child (child-paint-order-expanding-child). */
+/** turned-line-inset-in-row (Figma to React proposal): a capless quarter-turn LINE in flow in a row, not stretched, whose
+ *  length differs by variant, is carried as the zero-width line stretched across the row (vertical-fill-line-in-row's
+ *  shape) inset by each variant's own margin-top and margin-bottom, keeping its stored alignment. Off, its varying
+ *  length is refused (native-line-incomplete-or-varying-geometry) and it draws nothing. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -390,6 +394,7 @@ export const CONVENTIONS = [
   'text-box-stacks-block-children',
   'text-box-whole-pixel-beside-fixed-width',
   'text-decoration-line-by-axis-drawn',
+  'turned-line-inset-in-row',
   'uncaptured-fill-variable-carried-as-paint',
   'undrawn-border-side-never-votes',
   'unregistered-channel-not-minted',
