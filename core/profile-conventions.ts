@@ -303,6 +303,13 @@
  *  ::after is an empty clearfix (clear: both), is at least that padding tall plus its own vertical padding and borders,
  *  the same in every variant that draws it: the part carries that min-height and the two pseudos are not refused. Any
  *  other shape keeps its flow-pseudo refusals. */
+/** undrawn-border-side-never-votes (React to Figma writer): when a part's border sides disagree in color, a Figma stroke
+ *  takes the color most drawn sides share; a side votes only with a carried width above 0 (a token or a literal). A side
+ *  with no carried width draws nothing in CSS and never votes. Off, such a side counts as drawn and can outvote a drawn
+ *  one (a row's 0-width currentColor sides over its 1px divider). */
+/** table-cell-ignores-max-width (React to Figma contract step): a part every captured node of which is a table row or cell
+ *  is laid out by its table, which does not clamp it by max-width: its max-width is not carried. Outside table layout
+ *  (a flex or block child) max-width stays as it is. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -371,6 +378,7 @@ export const CONVENTIONS = [
   'svg-viewbox-meets-oblong-box',
   'swap-drawing-path-box-whole-pixel',
   'synthetic-wrapper-shown-by-members',
+  'table-cell-ignores-max-width',
   'table-short-row-leaves-columns-empty',
   'text-align-by-combination',
   'text-align-packs-text-box',
@@ -383,6 +391,7 @@ export const CONVENTIONS = [
   'text-box-whole-pixel-beside-fixed-width',
   'text-decoration-line-by-axis-drawn',
   'uncaptured-fill-variable-carried-as-paint',
+  'undrawn-border-side-never-votes',
   'unregistered-channel-not-minted',
   'variant-grid-whole-pixel',
   'variant-text-owns-its-part',

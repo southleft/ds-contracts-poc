@@ -2305,6 +2305,8 @@ function applyTokens(
    *  lowered offsets named as an in-flow drop — a false receipt. Callers
    *  that do not pass it keep the declared-only test byte-identically. */
   absoluteThisCombo?: boolean,
+  /** Convention undrawn-border-side-never-votes: the part's literals, read for a side's width when no token carries it. */
+  voteLiterals?: Record<string, string>,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
   const inFlowInsets = absoluteThisCombo === undefined ? (declared?.position ?? 'static') !== 'absolute' : !absoluteThisCombo;
@@ -2370,6 +2372,9 @@ function applyTokens(
         const w = px(resolveLiteral(wp));
         if (Number.isFinite(w) && w === 0) drawn = false;
       }
+      // Convention undrawn-border-side-never-votes: a side with no carried width (no token, no literal) draws nothing in
+      // CSS, its computed width 0, so it never votes; a literal width votes as a token does, above 0 only.
+      else if (voteLiterals) drawn = (parseLitPx(voteLiterals[`border-${side}-width`] ?? voteLiterals['border-width'] ?? '') ?? 0) > 0;
       return { chn, path: cp, value: String(resolveLiteral(cp)), drawn };
     });
     const drawn = sideInfo.filter((s) => s.drawn);
@@ -3715,7 +3720,8 @@ function applyStyling(
   // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
   // that absolutePartPlacement lowers is never named as an in-flow drop.
   const absolute = isAbsoluteThisCombo(part, subst);
-  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute);
+  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute,
+    input.conventions?.has('undrawn-border-side-never-votes') ? resolveLiterals(part, subst) : undefined);
   // The literal pass also sees the part's own token map (a token on the
   // same channel wins, by name).
   const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static', outlineStyle:part.declared?.['outline-style'] }, tokens);
