@@ -260,6 +260,12 @@
  *  length differs by variant, is carried as the zero-width line stretched across the row (vertical-fill-line-in-row's
  *  shape) inset by each variant's own margin-top and margin-bottom, keeping its stored alignment. Off, its varying
  *  length is refused (native-line-incomplete-or-varying-geometry) and it draws nothing. */
+/** nested-instance-composition-observed (Figma capture and Figma to React proposal): the capture also observes a use
+ *  whose drawn subtree holds nested instances (importFromUrl's observeNestedInstanceCompositions, which the caller turns
+ *  on for a profile listing this name: the capture takes explicit options and never reads the profile), read only from
+ *  that use's own returned subtree, each nested instance drawn as a frame. The proposal draws a key-linked child whose
+ *  contract holds no drawing content (no parts, shape, text, icon or content) from each use's observation, when every
+ *  use carries one. Off, nothing is observed and such a child draws an empty box. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -357,6 +363,7 @@ export const CONVENTIONS = [
   'lost-text-realigns-by-class',
   'mixed-scale-rect-keeps-placement',
   'negative-sibling-margin-as-gap',
+  'nested-instance-composition-observed',
   'normal-letter-spacing-is-zero',
   'normal-line-height-as-drawn',
   'observed-swap-default-drawn',

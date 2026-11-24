@@ -2703,7 +2703,7 @@ interface Ctx {
    *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
    *  empty); a SLOT definition's own preferredValues are read here when the
    *  producer did not fold them into swapPreferredValues (REST map.ts). */
-  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention container-part-availability-by-path. */ containerAvailability?: true; /** Profile convention drawing-path-box-whole-pixel-by-value. */ drawingSnapByValue?: true; observedDrawingRoots?: WeakSet<object>; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention gated-part-hidden-by-boolean. */ gatedHiddenByBoolean?: true; /** Profile convention turned-line-inset-in-row. */ turnedLineInset?: true; /** Profile convention repeat-shares-paint-rank: and each repeat part's sibling run. */ repeatSharesRank?: true; repeatRuns?: WeakMap<object, Merged[]>; /** Profile convention partly-bound-text-visibility-carried. */ partlyBoundTextVisibility?: true; /** Profile convention instance-root-alignment-carried. */ instanceRootAlignment?: true; /** Profile convention text-align-by-combination. */ textAlignByCombination?: true; /** Profile convention text-box-whole-pixel-beside-fixed-width: each marked part's variants, with a fixed variant's drawn width. */ textBoxBesideFixed?: WeakMap<object, Array<{ axes: Record<string, string>; width?: number }>>; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>; /** Profile convention observed-swap-default-drawn. */ observedSwapDefault?: true; /** Profile convention stretched-line-paints-bar. */ stretchedLineBar?: true; /** Profile convention empty-hug-keeps-extent. */ emptyHugExtent?: true; /** Profile convention mixed-scale-rect-keeps-placement. */ mixedScaleRect?: true; /** Profile convention rect-placement-by-variant. */ rectPlacement?: true; /** Profile convention fixed-swap-drawing-carried. */ swapDrawingCarried?: true; /** Profile convention vertical-fill-line-in-row. */ verticalFillLine?: true; /** Profile convention swap-drawing-path-box-whole-pixel. */ swapDrawingPathSnap?: true; /** Profile convention absolute-only-hug-keeps-extent. */ absoluteHugExtent?: true; /** Profile convention linked-child-keeps-its-stacking. */ linkedChildStacking?: true; linkedStackingKept?: Set<string>; /** Profile convention enum-presence-keeps-the-gate. */ enumPresenceGate?: true; /** Profile convention container-part-availability-by-path. */ containerAvailability?: true; /** Profile convention drawing-path-box-whole-pixel-by-value. */ drawingSnapByValue?: true; observedDrawingRoots?: WeakSet<object>; /** Profile convention gated-layout-drops-undrawn-rows. */ gatedLayoutRows?: true; /** Profile convention gated-part-hidden-by-boolean. */ gatedHiddenByBoolean?: true; /** Profile convention nested-instance-composition-observed. */ nestedInstanceComposition?: true; /** Profile convention turned-line-inset-in-row. */ turnedLineInset?: true; /** Profile convention repeat-shares-paint-rank: and each repeat part's sibling run. */ repeatSharesRank?: true; repeatRuns?: WeakMap<object, Merged[]>; /** Profile convention partly-bound-text-visibility-carried. */ partlyBoundTextVisibility?: true; /** Profile convention instance-root-alignment-carried. */ instanceRootAlignment?: true; /** Profile convention text-align-by-combination. */ textAlignByCombination?: true; /** Profile convention text-box-whole-pixel-beside-fixed-width: each marked part's variants, with a fixed variant's drawn width. */ textBoxBesideFixed?: WeakMap<object, Array<{ axes: Record<string, string>; width?: number }>>; /** Profile convention text-baseline-rounds-like-figma, with the profile's metrics. */ figmaBaseline?: boolean; fontMetrics?: FontVerticalMetrics; figmaBaselinePlans?: Map<object, (subpixel: boolean) => void>;
   /** The interaction-state axis this proposal PROMOTED (its Figma property
    *  name), when one was — read by the prototype-reaction receipt so a
    *  CHANGE_TO into a hover variant is described as the state-preview
@@ -13152,6 +13152,50 @@ function carryLocalFramePlane(m:Merged,ctx:Ctx,where:string,selfKey:string,paren
   return holder;
 }
 
+/** The bounded projection of a captured caller composition (see buildPart), read through `read`. Undefined when any
+ *  use's observation is missing, foreign or unbounded. */
+function projectObservedComposition(m:Merged,parentMode:ParentModes|null,ctx:Ctx,where:string,selfKey:string,
+  read:(n:DumpNode)=>DumpNode['instanceComposition']):{part:ReturnType<typeof buildPart>}|undefined{
+  let count=0;
+  const bounded=(n:DumpNode,depth:number):boolean=>++count<=128 && depth<=8 &&
+    ['FRAME','GROUP','RECTANGLE','ELLIPSE','VECTOR'].includes(n.type) &&
+    !n.instanceOf && !n.instanceContent && !n.instanceComposition && !n.mask &&
+    (depth===0 || !n.propRefs) && (n.children??[]).every(c=>bounded(c,depth+1));
+  const qualified=m.occ.length>0 && m.occ.every(({node})=>{
+    const c=read(node);count=0;
+    return !!c && !node.propRefs?.mainComponent && c.source.nodeId===node.nodeId &&
+      c.source.componentId===node.instanceGeometry?.componentId && c.source.key===node.instanceKey &&
+      !!c.source.key && c.root.type==='FRAME' && c.root.nodeId===node.nodeId &&
+      canonicalJson(c.applied)===canonicalJson(node.componentProperties??{}) &&
+      canonicalJson(c.root.propRefs??{})===canonicalJson(node.propRefs??{}) && bounded(c.root,0);
+  });
+  if(qualified){
+    const occ=m.occ.map(o=>({...o,node:structuredClone(read(o.node)!.root)}));
+    ctx.notes.push(`${where}: observed caller composition; source occurrences ${m.occ.map(o=>`${ctx.fileKey}/${o.node.nodeId} key ${o.node.instanceKey}`).join(', ')}; applied child inputs remain source evidence, not a reconstructed remote main API`);
+    const projected=buildPart(mergeOcc(m.name,occ,ctx.notes,where,ctx.axes),parentMode,ctx,where,selfKey);
+    if(projected){
+      const geometries=m.occ.map(o=>o.node.instanceGeometry);
+      const changed=geometries.some(g=>g && (g.transform[0][0]!==1||g.transform[0][1]!==0||g.transform[1][0]!==0||g.transform[1][1]!==1));
+      if(changed){
+        const allocations=geometries.map(g=>g && allocateInstanceAffine(g));
+        const plans=allocations.map(a=>a && !('issue' in a)?{localSize:a.allocation.localSize,transform:a.allocation.normalizedTransform}:undefined);
+        if(plans.some(p=>!p)||new Set(plans.map(p=>canonicalJson(p))).size!==1||m.occ.some(o=>o.node.abs||o.node.fillWidth||o.node.fillHeight||o.node.bound?.width||o.node.bound?.height))
+          throw new Error(`${where}: observed-caller-affine-unqualified`);
+        const plan=plans[0]!;
+        projected.instanceAffine=plan;
+        const tokens=(projected.tokens as Record<string,string>|undefined)??ctx.mint?.attach.find(a=>a.holder===projected)?.tokens;
+        if(tokens){delete tokens.width;delete tokens.height;
+          if(ctx.mint)ctx.mint.observations=ctx.mint.observations.filter(o=>!(o.target===tokens&&['width','height'].includes(o.cssProperty)));
+        }
+        projected.literals={...(projected.literals as object??{}),width:`${plan.localSize.width}px`,height:`${plan.localSize.height}px`};
+      }
+      const sources=m.occ.map(o=>({fileKey:ctx.fileKey,...read(o.node)!.source,applied:read(o.node)!.applied}));
+      const evidence=`Captured caller appearance only; remote main API and unobserved states are not reconstructed. Source occurrences: ${canonicalJson(sources)}`;
+      projected.description=[projected.description,evidence].filter(Boolean).join('\n');
+    }
+    return {part:projected};
+  }
+}
 /** Annotate mint coverage only after the emitted part's own visibility gate is
  * known. Missing capture data is not proof of non-rendering. */
 function buildPart(
@@ -13169,6 +13213,17 @@ function buildPart(
   if(!localPlaneProjected && (m.occ.some(o=>projectedLocalLayoutPlane(o.node)?.transformed) ||
       m.type==='FRAME' && m.occ.some(o=>hasRotatedLocalFrame(o.node)&&o.node.abs!==undefined)))
     return carryLocalFramePlane(m,ctx,where,selfKey,parentMode);
+  // Profile convention nested-instance-composition-observed: a key-linked child whose contract holds no drawing content
+  // draws, at each use, that use's observed nested composition, when every use carries one.
+  if(ctx.nestedInstanceComposition && m.type==='INSTANCE' && m.occ.length>0 && m.occ.every(o=>o.node.instanceNestedComposition)){
+    const resolution=resolveChildContract(first(m.occ,n=>n.instanceOf)??m.name,instanceKeysOf(m),ctx);
+    const root=(resolution.id?ctx.contractsById?.get(resolution.id) as {anatomy?:{root?:Record<string,unknown>}}|undefined:undefined)?.anatomy?.root;
+    if(resolution.mechanism==='key' && root && !Object.keys((root.parts as object|undefined)??{}).length &&
+        ['shape','text','icon','content','component','slot','repeat','meter'].every(k=>root[k]===undefined)){
+      const projected=projectObservedComposition(m,parentMode,ctx,where,selfKey,n=>n.instanceNestedComposition);
+      if(projected){ctx.notes.push(`${where}: the linked child holds no drawing content; each use's observed nested composition is drawn (profile convention nested-instance-composition-observed)`);return projected.part;}
+    }
+  }
   if(m.type==='INSTANCE' && m.occ.some(o=>o.node.instanceComposition)){
     const instanceOf=first(m.occ,n=>n.instanceOf)??m.name;
     const resolution=resolveChildContract(instanceOf,instanceKeysOf(m),ctx);
@@ -13195,45 +13250,8 @@ function buildPart(
         ...(outer.presenceMatrix?{presenceByCombination:outer.presenceMatrix}:{}),parts};
     }
     if(!resolution.id && !isSelfInstance(instanceOf,ctx,instanceKeysOf(m))){
-      let count=0;
-      const bounded=(n:DumpNode,depth:number):boolean=>++count<=128 && depth<=8 &&
-        ['FRAME','GROUP','RECTANGLE','ELLIPSE','VECTOR'].includes(n.type) &&
-        !n.instanceOf && !n.instanceContent && !n.instanceComposition && !n.mask &&
-        (depth===0 || !n.propRefs) && (n.children??[]).every(c=>bounded(c,depth+1));
-      const qualified=m.occ.length>0 && m.occ.every(({node})=>{
-        const c=node.instanceComposition;count=0;
-        return !!c && !node.propRefs?.mainComponent && c.source.nodeId===node.nodeId &&
-          c.source.componentId===node.instanceGeometry?.componentId && c.source.key===node.instanceKey &&
-          !!c.source.key && c.root.type==='FRAME' && c.root.nodeId===node.nodeId &&
-          canonicalJson(c.applied)===canonicalJson(node.componentProperties??{}) &&
-          canonicalJson(c.root.propRefs??{})===canonicalJson(node.propRefs??{}) && bounded(c.root,0);
-      });
-      if(qualified){
-        const occ=m.occ.map(o=>({...o,node:structuredClone(o.node.instanceComposition!.root)}));
-        ctx.notes.push(`${where}: observed caller composition; source occurrences ${m.occ.map(o=>`${ctx.fileKey}/${o.node.nodeId} key ${o.node.instanceKey}`).join(', ')}; applied child inputs remain source evidence, not a reconstructed remote main API`);
-        const projected=buildPart(mergeOcc(m.name,occ,ctx.notes,where,ctx.axes),parentMode,ctx,where,selfKey);
-        if(projected){
-          const geometries=m.occ.map(o=>o.node.instanceGeometry);
-          const changed=geometries.some(g=>g && (g.transform[0][0]!==1||g.transform[0][1]!==0||g.transform[1][0]!==0||g.transform[1][1]!==1));
-          if(changed){
-            const allocations=geometries.map(g=>g && allocateInstanceAffine(g));
-            const plans=allocations.map(a=>a && !('issue' in a)?{localSize:a.allocation.localSize,transform:a.allocation.normalizedTransform}:undefined);
-            if(plans.some(p=>!p)||new Set(plans.map(p=>canonicalJson(p))).size!==1||m.occ.some(o=>o.node.abs||o.node.fillWidth||o.node.fillHeight||o.node.bound?.width||o.node.bound?.height))
-              throw new Error(`${where}: observed-caller-affine-unqualified`);
-            const plan=plans[0]!;
-            projected.instanceAffine=plan;
-            const tokens=(projected.tokens as Record<string,string>|undefined)??ctx.mint?.attach.find(a=>a.holder===projected)?.tokens;
-            if(tokens){delete tokens.width;delete tokens.height;
-              if(ctx.mint)ctx.mint.observations=ctx.mint.observations.filter(o=>!(o.target===tokens&&['width','height'].includes(o.cssProperty)));
-            }
-            projected.literals={...(projected.literals as object??{}),width:`${plan.localSize.width}px`,height:`${plan.localSize.height}px`};
-          }
-          const sources=m.occ.map(o=>({fileKey:ctx.fileKey,...o.node.instanceComposition!.source,applied:o.node.instanceComposition!.applied}));
-          const evidence=`Captured caller appearance only; remote main API and unobserved states are not reconstructed. Source occurrences: ${canonicalJson(sources)}`;
-          projected.description=[projected.description,evidence].filter(Boolean).join('\n');
-        }
-        return projected;
-      }
+      const projected=projectObservedComposition(m,parentMode,ctx,where,selfKey,n=>n.instanceComposition);
+      if(projected)return projected.part;
       ctx.notes.push(`${where}: observed-caller-composition-refused:incomplete-or-conflicting-source — normal unresolved-child handling retained`);
     }
   }
@@ -18102,7 +18120,7 @@ function proposeFromDumpFencedImpl(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
-    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('container-part-availability-by-path') ? {containerAvailability: true as const} : {}), ...(conventionSet(opts.conventions).has('drawing-path-box-whole-pixel-by-value') ? {drawingSnapByValue: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-part-hidden-by-boolean') ? {gatedHiddenByBoolean: true as const} : {}), ...(conventionSet(opts.conventions).has('turned-line-inset-in-row') ? {turnedLineInset: true as const} : {}), ...(conventionSet(opts.conventions).has('repeat-shares-paint-rank') ? {repeatSharesRank: true as const, repeatRuns: new WeakMap<object, Merged[]>()} : {}), ...(conventionSet(opts.conventions).has('partly-bound-text-visibility-carried') ? {partlyBoundTextVisibility: true as const} : {}), ...(conventionSet(opts.conventions).has('instance-root-alignment-carried') ? {instanceRootAlignment: true as const} : {}), ...(conventionSet(opts.conventions).has('text-align-by-combination') ? {textAlignByCombination: true as const} : {}), ...(conventionSet(opts.conventions).has('text-box-whole-pixel-beside-fixed-width') ? {textBoxBesideFixed: new WeakMap()} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
+    propertyDefinitions: set.propertyDefinitions, ...(conventionSet(opts.conventions).has('observed-swap-default-drawn') ? {observedSwapDefault: true as const} : {}), ...(conventionSet(opts.conventions).has('stretched-line-paints-bar') ? {stretchedLineBar: true as const} : {}), ...(conventionSet(opts.conventions).has('empty-hug-keeps-extent') ? {emptyHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('mixed-scale-rect-keeps-placement') ? {mixedScaleRect: true as const} : {}), ...(conventionSet(opts.conventions).has('rect-placement-by-variant') ? {rectPlacement: true as const} : {}), ...(conventionSet(opts.conventions).has('fixed-swap-drawing-carried') ? {swapDrawingCarried: true as const} : {}), ...(conventionSet(opts.conventions).has('vertical-fill-line-in-row') ? {verticalFillLine: true as const} : {}), ...(conventionSet(opts.conventions).has('swap-drawing-path-box-whole-pixel') ? {swapDrawingPathSnap: true as const} : {}), ...(conventionSet(opts.conventions).has('absolute-only-hug-keeps-extent') ? {absoluteHugExtent: true as const} : {}), ...(conventionSet(opts.conventions).has('linked-child-keeps-its-stacking') ? {linkedChildStacking: true as const} : {}), ...(conventionSet(opts.conventions).has('enum-presence-keeps-the-gate') ? {enumPresenceGate: true as const} : {}), ...(conventionSet(opts.conventions).has('container-part-availability-by-path') ? {containerAvailability: true as const} : {}), ...(conventionSet(opts.conventions).has('drawing-path-box-whole-pixel-by-value') ? {drawingSnapByValue: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-layout-drops-undrawn-rows') ? {gatedLayoutRows: true as const} : {}), ...(conventionSet(opts.conventions).has('gated-part-hidden-by-boolean') ? {gatedHiddenByBoolean: true as const} : {}), ...(conventionSet(opts.conventions).has('nested-instance-composition-observed') ? {nestedInstanceComposition: true as const} : {}), ...(conventionSet(opts.conventions).has('turned-line-inset-in-row') ? {turnedLineInset: true as const} : {}), ...(conventionSet(opts.conventions).has('repeat-shares-paint-rank') ? {repeatSharesRank: true as const, repeatRuns: new WeakMap<object, Merged[]>()} : {}), ...(conventionSet(opts.conventions).has('partly-bound-text-visibility-carried') ? {partlyBoundTextVisibility: true as const} : {}), ...(conventionSet(opts.conventions).has('instance-root-alignment-carried') ? {instanceRootAlignment: true as const} : {}), ...(conventionSet(opts.conventions).has('text-align-by-combination') ? {textAlignByCombination: true as const} : {}), ...(conventionSet(opts.conventions).has('text-box-whole-pixel-beside-fixed-width') ? {textBoxBesideFixed: new WeakMap()} : {}), ...(opts.fontMetrics ? {fontMetrics: opts.fontMetrics, figmaBaseline: conventionSet(opts.conventions).has('text-baseline-rounds-like-figma')} : {}),
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     repeatRootInputFilteredOwners: statePromo || modePromo ? (() => {
       const owners = new Set<string>();
