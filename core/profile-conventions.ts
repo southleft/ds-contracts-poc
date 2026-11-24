@@ -243,6 +243,10 @@
 /** imperceptible-outside-stroke-spread-shadow-as-outline (Figma to React proposal): a spread-only drop shadow around an
  *  imperceptible OUTSIDE stroke is drawn as an outline offset by the stroke's weight (spreadShadowOutlineView). Off, the
  *  shadow is a box-shadow from the border box: its ring sits one stroke weight too far in. */
+/** partly-bound-text-visibility-carried (Figma to React proposal): a TEXT node whose visibility some variants bind to a
+ *  BOOLEAN, exactly one boolean axis's true (or false), while the rest draw it unbound, keeps it as drawn where unbound
+ *  and gates it on the BOOLEAN where bound (stylesWhen: hidden on that axis value, shown again where the BOOLEAN is true).
+ *  Off, the binding is not carried and the text draws in every variant. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -322,6 +326,7 @@ export const CONVENTIONS = [
   'observed-swap-default-drawn',
   'outline-takes-no-layout',
   'overlay-size-not-control-default',
+  'partly-bound-text-visibility-carried',
   'rect-placement-by-variant',
   'relative-offset-drawn',
   'repeated-wrapper-name-not-folded',
