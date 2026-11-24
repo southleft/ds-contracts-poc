@@ -1132,3 +1132,28 @@ test('table-cell-ignores-max-width: a table row or cell drops its max-width; a b
   // Near miss: a block child outside table layout keeps its max-width (max-width still clamps a flex or block box).
   assert.deepEqual(on.anatomy.root.parts.child, { tokens: { 'max-width': '{s.cap}' } });
 });
+
+test('truncation-set-after-auto-resize: a truncating text placed by its baseline keeps its ellipsis; off, the NONE write clears it', async () => {
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  // Tag red: a nowrap label with text-overflow: ellipsis, placed by its drawn baseline (a NONE auto-resize after truncation).
+  const label = (t: string, baseline: boolean) => ({ text: t, declared: { 'text-overflow': 'ellipsis', 'white-space': 'nowrap' }, literals: { 'font-size': '14px', 'line-height': '18px' },
+    ...(baseline ? { textBaseline: { props: [], rows: [{ values: [], px: 14.5, ascent: 1.025, descent: 0.275 }] } } : {}) });
+  const contract = ContractSchema.parse({ id: 'test.cut', name: 'Cut', version: '0.1.0', status: 'draft', description: 'Truncating labels', states: [], semantics: { element: 'div' }, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'row' }, parts: { placed: label('Tag content with a long text description', true), plain: label('Plain', false) } } },
+    bindings: { code: { anchors: { importPath: 'test/Cut', export: 'Cut' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const run = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    const { figma, root } = createFigmaMock(), f = figma as any, make = f.createText.bind(f);
+    // Figma clears a text's truncation whenever its auto-resize is set to NONE (live probe, 2026-11-23); the mock does not.
+    f.createText = () => { const n = make(); let mode = n.textAutoResize; Object.defineProperty(n, 'textAutoResize', { configurable: true, get: () => mode,
+      set(v) { mode = v; if (v === 'NONE') n.textTruncation = 'DISABLED'; } }); return n; };
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), engine.buildComponentScript(contract, new Map([[contract.id, contract]]))]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    return ['placed', 'plain'].map((name) => (root.findOne((x: any) => x.name === name && x.type === 'TEXT') as any).textTruncation);
+  };
+  // On, the placed label takes its truncation again last; off, the baseline box's NONE write leaves it cleared.
+  assert.deepEqual(await run(['text-baseline-as-drawn', 'truncation-set-after-auto-resize']), ['ENDING', 'ENDING']);
+  // Near miss, either way: a truncating text no pass sets to NONE keeps the truncation it was given.
+  assert.deepEqual(await run(['text-baseline-as-drawn']), ['DISABLED', 'ENDING']);
+});
