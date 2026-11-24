@@ -247,6 +247,10 @@
  *  BOOLEAN, exactly one boolean axis's true (or false), while the rest draw it unbound, keeps it as drawn where unbound
  *  and gates it on the BOOLEAN where bound (stylesWhen: hidden on that axis value, shown again where the BOOLEAN is true).
  *  Off, the binding is not carried and the text draws in every variant. */
+/** repeat-shares-paint-rank (Figma to React proposal): a repeat child under a ranked stacking (itemReverseZIndex or an
+ *  explicit child order), whose items the holder flows with a non-negative gap and which each stay in flow, clip their
+ *  content and paint nothing past their box, gives every item the repeat's one rank (layout.repeatSharesRank). Off, the
+ *  generator refuses the ranked repeat child (child-paint-order-expanding-child). */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -329,6 +333,7 @@ export const CONVENTIONS = [
   'partly-bound-text-visibility-carried',
   'rect-placement-by-variant',
   'relative-offset-drawn',
+  'repeat-shares-paint-rank',
   'repeated-wrapper-name-not-folded',
   'root-text-baseline-as-drawn',
   'root-text-by-axis',
