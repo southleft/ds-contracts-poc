@@ -1,5 +1,5 @@
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
-import {conventionSet,imperceptibleBlendView,type FontVerticalMetrics} from './profile-conventions.js';
+import {conventionSet,imperceptibleBlendView,spreadShadowOutlineView,type FontVerticalMetrics} from './profile-conventions.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
 import {insideRootStrokeObservation} from '../extract/figma/root-stroke-observation.js';
 import {sourceFillStack} from './ordered-paint-stack.js';
@@ -3881,8 +3881,11 @@ function invertNodeTokens(
   // by its per-variant offset — see centeredStrokeOutline. The offsets are
   // literal px observations derived from the drawn weight (a bound weight's
   // variable is carried on outline-width; its half has no token spelling).
-  if (strokeVocab === 'outline' && centeredStrokeOutline(m.occ.map((o) => o.node))) {
-    mintObservation(ctx, tokens, where, 'outline-offset', 'px', numOccurrences(m, centeredOutlineOffset), `${where}|strokeAlign`);
+  // Profile convention imperceptible-outside-stroke-spread-shadow-as-outline: a node the batch door's view read as a
+  // spread ring takes its old stroke weight as the outline's offset (spreadShadowOutlineView).
+  const ringed = ringOutlineOffsets !== undefined && m.occ.some((o) => ringOutlineOffsets!.has(o.node.nodeId ?? ''));
+  if (strokeVocab === 'outline' && (ringed || centeredStrokeOutline(m.occ.map((o) => o.node)))) {
+    mintObservation(ctx, tokens, where, 'outline-offset', 'px', numOccurrences(m, (n) => ringOutlineOffsets?.get(n.nodeId ?? '') ?? centeredOutlineOffset(n)), `${where}|strokeAlign`);
   }
 
   carry(
@@ -20151,6 +20154,25 @@ export interface DumpBatchResult {
  *  This is the SAME function the playground's receive paths run — receipts
  *  and evals referee the shipping code path. */
 export function proposeBatchFromDump(
+  dump: Record<string, unknown>,
+  opts: Parameters<typeof proposeFromDump>[1],
+): DumpBatchResult {
+  if (!conventionSet(opts.conventions).has('imperceptible-outside-stroke-spread-shadow-as-outline')) return proposeBatchFromDumpBlend(dump, opts);
+  const view = spreadShadowOutlineView(dump), outer = ringOutlineOffsets;
+  ringOutlineOffsets = view.offsets;
+  try {
+    const result = proposeBatchFromDumpBlend(view.dump, opts);
+    for (const proposal of result.proposals) for (const path of view.ringed.get(proposal.setName) ?? [])
+      proposal.notes.push(`${path}: a spread-only drop shadow around an imperceptible OUTSIDE stroke carried as an outline of the shadow's color and spread, offset by the stroke's weight: Figma casts the shadow from the stroke's outer edge and paints nothing between (profile convention imperceptible-outside-stroke-spread-shadow-as-outline)`);
+    return result;
+  } finally { ringOutlineOffsets = outer; }
+}
+
+/** Profile convention imperceptible-outside-stroke-spread-shadow-as-outline: per node id, the outline-offset of a node
+ *  the batch door's view read as a spread ring. Undefined outside that view. */
+let ringOutlineOffsets: Map<string, number> | undefined;
+
+function proposeBatchFromDumpBlend(
   dump: Record<string, unknown>,
   opts: Parameters<typeof proposeFromDump>[1],
 ): DumpBatchResult {

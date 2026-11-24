@@ -240,6 +240,9 @@
  *  sibling containers names several nodes, so the wrapper-union fold does not give the flat variants one synthetic copy
  *  of it; nested and flat hierarchies are kept, and the presence rule gates each. Off, the name folds as one wrapper
  *  and its first node's layout holds every flat member (two stacked texts drawn side by side in one row). */
+/** imperceptible-outside-stroke-spread-shadow-as-outline (Figma to React proposal): a spread-only drop shadow around an
+ *  imperceptible OUTSIDE stroke is drawn as an outline offset by the stroke's weight (spreadShadowOutlineView). Off, the
+ *  shadow is a box-shadow from the border box: its ring sits one stroke weight too far in. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -314,6 +317,7 @@ export const CONVENTIONS = [
   'generated-text-carried',
   'hugging-space-between-packs',
   'icon-box-keeps-glyph-size',
+  'imperceptible-outside-stroke-spread-shadow-as-outline',
   'imperceptible-solid-paint-blend-not-carried',
   'inline-block-line-box-as-drawn',
   'inset-ring-absent-border-zero',
@@ -425,6 +429,61 @@ export function imperceptibleBlendView(dump: Record<string, unknown>): { dump: R
     if (paths.size) dropped.set(key, paths);
   }
   return { dump: copy, dropped };
+}
+
+type Ring = { weight: number; spread: number; color: { hex: string; alpha?: number } };
+/** A node whose one stroke is OUTSIDE, uniform, unbound and imperceptible (alpha × 255 < 0.5), and whose one effect is an
+ *  unbound DROP_SHADOW with no offset, no blur and a positive spread, outside any effect style. */
+function spreadShadowRing(n: Record<string, unknown>): Ring | undefined {
+  const stroke = n.stroke as { alpha?: number } | undefined, effects = n.effects as Array<Record<string, any>> | undefined;
+  if (!stroke || !((stroke.alpha ?? 1) < IMPERCEPTIBLE_ALPHA) || n.strokeAlign !== 'OUTSIDE' || n.strokeWeights !== undefined) return undefined;
+  const weight = n.strokeWeight;
+  if (typeof weight !== 'number' || !Number.isFinite(weight) || !(weight > 0)) return undefined;
+  if (Object.keys((n.bound ?? {}) as object).some(k => /stroke|effect/i.test(k)) || n.effectStyle !== undefined) return undefined;
+  if (!Array.isArray(effects) || effects.length !== 1) return undefined;
+  const [e] = effects;
+  if (e!.type !== 'DROP_SHADOW' || e!.bound !== undefined || (e!.offset?.x ?? 0) !== 0 || (e!.offset?.y ?? 0) !== 0 || (e!.radius ?? 0) !== 0) return undefined;
+  if (typeof e!.spread !== 'number' || !Number.isFinite(e!.spread) || !(e!.spread > 0) || !/^[0-9a-fA-F]{6}$/.test(e!.color?.hex ?? '')) return undefined;
+  return { weight, spread: e!.spread, color: e!.color };
+}
+
+/**
+ * imperceptible-outside-stroke-spread-shadow-as-outline: Figma casts a drop shadow from the node's outer edge, its OUTSIDE
+ * stroke included, and knocks the shadow out under the node and that stroke (Figma's default; showShadowBehindNode is
+ * not captured). So a spread-only shadow around an imperceptible OUTSIDE stroke of weight w is a ring `spread` wide that
+ * starts w outside the box, with nothing painted between. A CSS box-shadow starts at the border box, and widening its
+ * spread by w would paint that band. The view reads such a node as an OUTSIDE stroke of the shadow's color and spread
+ * with no effect, and returns w per node id: the outline-offset its outline takes.
+ * Reach: every node in a variant's tree, at any depth (children, instance roots, instance content), with a node id.
+ * Applied once, to a copy of the dump, at the public batch door. The dump itself is not changed. Returns the copy, the
+ * offsets, and per dump key the layer paths read so.
+ */
+export function spreadShadowOutlineView(dump: Record<string, unknown>): { dump: Record<string, unknown>; offsets: Map<string, number>; ringed: Map<string, Set<string>> } {
+  const copy = structuredClone(dump), offsets = new Map<string, number>(), ringed = new Map<string, Set<string>>();
+  for (const [key, value] of Object.entries(copy)) {
+    const set = value as { variants?: unknown[] };
+    if (!Array.isArray(set?.variants)) continue;
+    const paths = new Set<string>();
+    const walk = (node: unknown, path: string): void => {
+      if (Array.isArray(node)) { for (const item of node) walk(item, path); return; }
+      if (!node || typeof node !== 'object') return;
+      const n = node as Record<string, unknown>, ring = typeof n.nodeId === 'string' ? spreadShadowRing(n) : undefined;
+      if (ring) {
+        n.stroke = { ...ring.color };
+        n.strokeWeight = ring.spread;
+        delete n.effects;
+        offsets.set(n.nodeId as string, ring.weight);
+        paths.add(path);
+      }
+      for (const [k, v] of Object.entries(n)) {
+        if (k === 'children' && Array.isArray(v)) for (const child of v) walk(child, `${path}/${String((child as { name?: unknown })?.name ?? '')}`);
+        else if (v && typeof v === 'object') walk(v, path);
+      }
+    };
+    for (const variant of set.variants) walk(variant, '(root)');
+    if (paths.size) ringed.set(key, paths);
+  }
+  return { dump: copy, offsets, ringed };
 }
 
 /** A profile's font vertical metrics (font units), keyed by the family name the dump carries. */
