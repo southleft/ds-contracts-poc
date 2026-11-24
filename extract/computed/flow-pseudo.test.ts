@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {chromium,type Page} from 'playwright-core';
 import {captureJs} from './capture.js';
 import type {CapturedNode,Combo} from './lib.js';
-import {observedFlowPseudo,observedFlowPseudoDomain} from './flow-pseudo.js';
+import {observedFlowPseudo,observedFlowPseudoDomain,observedRatioStrut} from './flow-pseudo.js';
+import {STRUT_DECLARED,carryRatioStruts,drawnBaselines} from '../../scripts/storybook-contracts.js';
 import {compileObservedContent,compileObservedContentSweep} from '../../source-reference/observed-content.js';
 import {enumerate} from './lib.js';
 import type {PropSpace,SweepResult} from './capture.js';
@@ -165,4 +166,25 @@ test('literal gradients retain separate native paint layers, token priority and 
  const id=component.id;await run(engine.buildComponentScript(c,byId));
  assert.equal(root.findAll((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id).length,1);
  assert.equal(component.id,id);assert.deepEqual(JSON.parse(JSON.stringify(component.fills)),paints);assert.deepEqual(c,before);
+});
+
+test('float-ratio-strut-sets-min-height: a percentage float strut and a clearfix give their block host a min-height; off, or a px strut, or no clearfix, the refusals stay',async t=>{
+ const browser=await chromium.launch();t.after(()=>browser.close());const page=await browser.newPage();
+ const read=async(strut:string,after='content:"";display:table;clear:both')=>{
+  await page.setContent(`<style>body{margin:0}*,::before,::after{box-sizing:border-box}#stage{width:259px}
+   #source{display:block;position:relative;padding:16px;background:#f4f4f4}#source::after{${after}}
+   #source::before{content:"";float:left;width:1px;margin-left:-1px;height:0;padding-block-start:${strut}}</style><div id="stage"><div id="source">Content</div></div>`);
+  const node=await capture(page),declared=drawnBaselines<string[]>(node,await page.evaluate(STRUT_DECLARED(['#source'])) as never)!;
+  const contract={anatomy:{root:{tokens:{'min-height':'{x.size-0}'}}}} as any,refusals=['flow-pseudo-host-layout: root::before','flow-pseudo-box: root::after','channel-unregistered: root'];
+  return {seen:observedRatioStrut(node,declared.get(node)),carried:carryRatioStruts(contract,['k'],()=>node,declared,refusals),root:contract.anatomy.root,refusals};
+ };
+ const on=await read('100%');
+ assert.deepEqual(on.seen,{minHeight:259});
+ assert.deepEqual([on.carried,on.root,on.refusals],[['root'],{tokens:{},literals:{'min-height':'259px'}},['channel-unregistered: root']]);
+ // Off the convention is not run: the contract keeps the row default, and the two refusals stay. A near miss is the same.
+ for(const [strut,after,problem] of [['227px',undefined,'float-ratio-strut-not-percentage'],['100%','content:"";display:block','float-ratio-strut-clearfix']] as const){
+  const miss=await read(strut,after);
+  assert.deepEqual(miss.seen,{problem});
+  assert.deepEqual([miss.carried,miss.root,miss.refusals.length],[[],{tokens:{'min-height':'{x.size-0}'}},3]);
+ }
 });
