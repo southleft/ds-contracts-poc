@@ -245,6 +245,10 @@
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
  *  keeps its CSS margin box; the box takes the child's FILL and the child fills it, so the margin is drawn. Off, the
  *  margin box is skipped and the margin is named (FC-EMIT-MARGIN-BOX-SKIPPED). */
+/** single-block-child-fills-its-box (React to Figma writer): a block-flow part with no layout of its own (not the root)
+ *  whose only in-flow child is block-level stacks it as CSS does, the vertical stretching stack two or more such children
+ *  already get, so the child fills its box's width (Carbon's nested Layer). Off, the box keeps the row default and the
+ *  child hugs its content. */
 /** single-row-grid-as-row (React to Figma contract step): a part that is a grid in some values of one variant axis and not
  *  in the others, whose grid in every such variant has one non-empty row holding each in-flow child in its own column
  *  (each column as wide as its child, every other track 0), is drawn as a row in those values: a layoutByProp override
@@ -322,6 +326,7 @@ export const CONVENTIONS = [
   'set-cell-pads-variant-overhang',
   'show-declared-component',
   'shrunk-text-wraps-at-drawn-width',
+  'single-block-child-fills-its-box',
   'single-row-grid-as-row',
   'sized-text-baseline-as-drawn',
   'sized-text-box-packs-by-text-align',
