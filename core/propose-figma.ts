@@ -1447,6 +1447,12 @@ function wrapperUnionChangesLiteralLineage(
   return false;
 }
 
+/** Profile convention repeated-wrapper-name-not-folded (core/profile-conventions.ts). A wrapper name that one variant
+ *  draws on two or more sibling containers names several nodes, not one, so a flat plane cannot be given a single
+ *  synthetic copy of it: the copy would take the first node's layout over members another node owns. On, that name is
+ *  not folded and both hierarchies are kept for the presence rule. Off, the name folds as one wrapper. */
+let repeatedWrapperNotFolded = false;
+
 /** Wrapper-union identity fold (audit class duplicate-parts-from-wrapper-
  *  union): some variants nest children under a pass-through wrapper FRAME/
  *  GROUP while others draw the same nodes flat at the parent level (field
@@ -1481,14 +1487,16 @@ function foldWrapperUnion(
     present: Set<Occ>;
     painted: boolean;
     positionedMembers: boolean;
+    repeated: boolean;
   }
   const candidates = new Map<string, Candidate>();
   for (const o of occ) {
     for (const c of childrenOf.get(o)!) {
       if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
       let e = candidates.get(c.name);
-      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), memberPlanes: [], present: new Set(), painted: false, positionedMembers: false }));
+      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), memberPlanes: [], present: new Set(), painted: false, positionedMembers: false, repeated: false }));
       e.memberPlanes.push(c.children ?? []);
+      e.repeated ||= e.present.has(o);
       e.present.add(o);
       e.painted ||= c.fill !== undefined || c.stroke !== undefined || c.imageFill !== undefined ||
         (c.opacity !== undefined && c.opacity !== 1) || (c.effects?.length ?? 0) > 0 ||
@@ -1518,6 +1526,10 @@ function foldWrapperUnion(
   }
   for (const [wName, w] of candidates) {
     if (w.present.size === occ.length || w.present.size === 0) continue;
+    if (w.repeated && repeatedWrapperNotFolded) {
+      notes.push(`${where}: wrapper "${wName}" is drawn more than once in one variant — its name names several nodes, so flat members are not folded into one synthetic copy; nested and flat hierarchies are retained (profile convention repeated-wrapper-name-not-folded)`);
+      continue;
+    }
     if (w.positionedMembers) {
       notes.push(`${where}: wrapper "${wName}" has positioned members — retain observed nested and flat hierarchies rather than relocate coordinate planes into a synthetic wrapper`);
       continue;
@@ -17259,10 +17271,11 @@ export function proposeFromDumpDraftPaintQualification(set:DumpSet,opts:Paramete
 
 function proposeFromDumpFenced(set: DumpSet, opts: Parameters<typeof proposeFromDumpFencedImpl>[1],
   draftPaint=false, drawnDeclaration?: Array<Record<string,string>>): FigmaProposalResult {
-  const outer = capturedVariablePaths, outerShown = wrapperShownByMembers, outerMix = insideOutsideOutline;
+  const outer = capturedVariablePaths, outerShown = wrapperShownByMembers, outerMix = insideOutsideOutline, outerRepeated = repeatedWrapperNotFolded;
   capturedVariablePaths = opts.capturedVariablePaths ?? outer; wrapperShownByMembers = conventionSet(opts.conventions).has('synthetic-wrapper-shown-by-members'); insideOutsideOutline = conventionSet(opts.conventions).has('inside-outside-stroke-as-outline');
+  repeatedWrapperNotFolded = conventionSet(opts.conventions).has('repeated-wrapper-name-not-folded');
   try { return proposeFromDumpFencedImpl(set, opts, draftPaint, drawnDeclaration); }
-  finally { capturedVariablePaths = outer; wrapperShownByMembers = outerShown; insideOutsideOutline = outerMix; }
+  finally { capturedVariablePaths = outer; wrapperShownByMembers = outerShown; insideOutsideOutline = outerMix; repeatedWrapperNotFolded = outerRepeated; }
 }
 
 function proposeFromDumpFencedImpl(
