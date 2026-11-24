@@ -867,7 +867,6 @@ async function main() {
         const inset = conventions.has('stage-from-story-container') ? await page.evaluate(`(() => { const r = document.querySelector('[data-ds-reader-cell]')?.getBoundingClientRect();
           return r && Math.abs(r.width - (${PAGE.viewport.width} - 2 * r.left)) < 0.5 ? r.left : 0; })()`) as number : 0;
         const fills = conventions.has('block-root-fills-its-parent') ? parentFillContainer(rootParents) : undefined;
-        if (fills !== undefined && fills !== (inset ? PAGE.viewport.width - 2 * inset : stage.width)) row.rootFillsParent = fills;
         const uaControls = await captureUaControls(page.context(), { stage, colorScheme: 'light', channels: allProps, classAllow: IDENTITY_CLASSES });
         const sweep = { captures, controls, uaControls, uaBaselineBrowser: browser.version(), allProps, stylesheetSkips: [], browserVersion: browser.version(),
           fontChecks: {}, quarantined: [], pinnedAnimations: [], shadowHostTrails: {}, textFillFolds: {}, closedShadowSuspects: {} } as unknown as SweepResult;
@@ -885,6 +884,8 @@ async function main() {
           ...(conventions.has('centered-text-keeps-drawn-width') ? { centeredTextWidth: true as const } : {}),
           ...(conventions.has('table-short-row-leaves-columns-empty') ? { tableShortRows: true as const } : {}),
           ...(conventions.has('overlay-size-not-control-default') ? { overlaySizeKept: true as const } : {}) }, styles(uaControls));
+        if (fills !== undefined && fills !== (inset ? PAGE.viewport.width - 2 * inset : stage.width) && receipts.some((r) => r.startsWith('block-root-width-admitted:')))
+          row.rootFillsParent = fills; // only where the door admitted the root against its parent's box
         const folds = detectFolds(aligned, styled, receipts, conventions.has('drawn-border-color-not-folded'));
         await boundCheck(aligned, comp, space, async () => '', promotion.contract);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
