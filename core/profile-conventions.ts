@@ -314,6 +314,10 @@
 /** table-cell-ignores-max-width (React to Figma contract step): a part every captured node of which is a table row or cell
  *  is laid out by its table, which does not clamp it by max-width: its max-width is not carried. Outside table layout
  *  (a flex or block child) max-width stays as it is. */
+/** truncation-set-after-auto-resize (React to Figma writer): a truncating text (text-overflow: ellipsis) takes its
+ *  truncation again once laid out, after every pass that sets its auto-resize: Figma clears a text's truncation whenever
+ *  its auto-resize is set to NONE, as the baseline box (text-baseline-as-drawn) and the fill pass
+ *  (wrapped-text-truncates-at-its-box) do after it was set. Off, such a text wraps in its box with no ellipsis. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -394,6 +398,7 @@ export const CONVENTIONS = [
   'text-box-stacks-block-children',
   'text-box-whole-pixel-beside-fixed-width',
   'text-decoration-line-by-axis-drawn',
+  'truncation-set-after-auto-resize',
   'turned-line-inset-in-row',
   'uncaptured-fill-variable-carried-as-paint',
   'undrawn-border-side-never-votes',

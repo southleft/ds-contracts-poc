@@ -283,6 +283,8 @@ export interface NodeSpec {
   wrapWidth?: { px: number; lines: number };
   /** Convention wrapped-text-truncates-at-its-box: a truncating text held in a styled box fills it once laid out (fillTruncatedTexts). */
   truncFill?: true;
+  /** Convention truncation-set-after-auto-resize: the text's truncation is set again once laid out (truncateLast). */
+  truncLast?: true;
   resolvedMinHeight?: number;
   /** Literal width:100%, independent of flex main-axis growth. */
   widthFill?: true;
@@ -6105,6 +6107,9 @@ function partToSpecInner(
     // box at run time (it carries a fill, a size or bindings) takes that box's width once laid out, where its ellipsis draws.
     // @lower emit.wrapped-text-truncates-at-its-box
     if (spec.textTruncation && (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) && input.conventions?.has('wrapped-text-truncates-at-its-box')) spec.truncFill = true;
+    // Convention truncation-set-after-auto-resize: Figma clears a text's truncation whenever its auto-resize is set to NONE,
+    // as the baseline box and the fill pass do after it was set; it is set again once the text is laid out, last.
+    if (spec.textTruncation && input.conventions?.has('truncation-set-after-auto-resize')) spec.truncLast = true;
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract, subst);
     return spec;
@@ -9758,6 +9763,14 @@ function snapTextBoxes() {
  *  takes the box's width when it is two pixels or more wider than the box (the browser cut it there with its ellipsis),
  *  its height fixed. A box that hugs it, or a text that fits, is left alone: Figma's own text box is a whole number of
  *  pixels wide, up to a pixel past the browser's text, and its font can differ by a fraction more. */
+/** Convention truncation-set-after-auto-resize: each truncating text takes its truncation again after every pass that sets
+ *  its auto-resize (a NONE write clears truncation in Figma); one the API refuses is named. */
+const TRUNCATE_LAST_RUNTIME = `const truncLastNodes = [];
+function truncateLast() {
+  for (const node of truncLastNodes.splice(0)) { if (node.removed) continue;
+    try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused after layout; the declared ellipsis does not draw', e); } }
+}
+`;
 const TRUNCATED_TEXT_FILL_RUNTIME = `const truncFillNodes = [];
 function fillTruncatedTexts() {
   for (const node of truncFillNodes.splice(0)) {
@@ -10032,6 +10045,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
   const hasBaselineShift = featureDatas.some((d) => dataSome(d, (s) => s.baselineShift !== undefined));
   const hasTruncFill = featureDatas.some((d) => dataSome(d, (s) => s.truncFill === true));
+  const hasTruncLast = featureDatas.some((d) => dataSome(d, (s) => s.truncLast === true));
   const hasTextBoxSnap = featureDatas.some((d) => dataSome(d, (s) => s.textBoxSnap === true));
   const hasTextBoxPlace = featureDatas.some((d) => dataSome(d, (s) => s.textBoxPlace === true));
   if(hasAuthoredTextAppearance&&opts.nativeSource){
@@ -10938,7 +10952,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasTruncFill ? TRUNCATED_TEXT_FILL_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasBaselineShift ? BASELINE_SHIFT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasTruncFill ? TRUNCATED_TEXT_FILL_RUNTIME : ''}${hasTruncLast ? TRUNCATE_LAST_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasBaselineShift ? BASELINE_SHIFT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10966,7 +10980,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasBaselineShift ? '\n    if (spec.baselineShift) baselineShiftNodes.push([node, spec.baselineShift]);' : ''}${hasTextBoxSnap ? `\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox${hasTextBoxPlace ? ', spec.textBoxPlace === true' : ''}]);` : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasTruncLast ? '\n    if (spec.truncLast) truncLastNodes.push(node);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasBaselineShift ? '\n    if (spec.baselineShift) baselineShiftNodes.push([node, spec.baselineShift]);' : ''}${hasTextBoxSnap ? `\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox${hasTextBoxPlace ? ', spec.textBoxPlace === true' : ''}]);` : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
@@ -11603,7 +11617,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}${hasTruncLast ? '  truncateLast();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11788,7 +11802,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}${hasTruncLast ? '  truncateLast();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11971,7 +11985,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}${hasTruncLast ? '  truncateLast();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
