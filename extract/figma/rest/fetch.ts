@@ -378,6 +378,8 @@ export interface ImportOptions extends ClientOptions {
   /** Qualification switches; defaults preserve the measured public importer. */
   inspectPaintedStrokeOutlines?: boolean;
   inspectStraightVectorNetworks?: boolean;
+  /** Opt-in nested-instance composition observation (see MapOptions). */
+  observeNestedInstanceCompositions?: boolean;
   /** Set/component name to map when the URL has no node-id (or to filter). */
   target?: string;
   /**
@@ -467,6 +469,7 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
   const mapOptions: MapOptions = {
     ...(opts.inspectPaintedStrokeOutlines ? {inspectPaintedStrokeOutlines:true} : {}),
     ...(opts.inspectStraightVectorNetworks ? {inspectStraightVectorNetworks:true} : {}),
+    ...(opts.observeNestedInstanceCompositions ? {observeNestedInstanceCompositions:true} : {}),
     ...(variables ? { variables } : {}),
     ...(refusal ? { variablesUnavailable: refusal } : {}),
     ...(opts.target ? { target: opts.target } : {}),

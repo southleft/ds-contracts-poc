@@ -6,7 +6,8 @@ type OutlinedNode = RestNode & {strokeGeometry?: Array<{path:string;windingRule:
 /** Supplemental occurrence evidence, not a reconstructed remote main. The
  * consumer must preserve applied inputs and caller bindings when projecting it.
  * Source main identity and applied values remain separate from the snapshot. */
-export function observeInstanceComposition(root: RestNode, components: ReadonlyMap<string,{key?:string}>) {
+/** `nested` also admits INSTANCE descendants without their own properties, observed only as drawn frames. */
+export function observeInstanceComposition(root: RestNode, components: ReadonlyMap<string,{key?:string}>, nested=false) {
   const key = root.componentId && components.get(root.componentId)?.key;
   if(root.type !== 'INSTANCE' || !root.id || !root.componentId || !key ||
       root.componentPropertyReferences?.mainComponent ||
@@ -18,7 +19,7 @@ export function observeInstanceComposition(root: RestNode, components: ReadonlyM
   const visible=<T extends {visible?:boolean}>(paints?:T[]) => (paints??[]).filter(p=>p.visible!==false);
   const visit=(node:OutlinedNode,depth:number):boolean=>{
     if(++count>128 || depth>8 || !node.id || ids.has(node.id) ||
-        (node!==root && !['FRAME','GROUP','VECTOR','ELLIPSE','RECTANGLE'].includes(node.type)) ||
+        (node!==root && !['FRAME','GROUP','VECTOR','ELLIPSE','RECTANGLE',...(nested?['INSTANCE']:[])].includes(node.type)) ||
         node.isMask || visible(node.effects).length ||
         !['NORMAL','PASS_THROUGH',undefined].includes(node.blendMode) ||
         (node.opacity!==undefined&&(!Number.isFinite(node.opacity)||node.opacity<0||node.opacity>1)) ||

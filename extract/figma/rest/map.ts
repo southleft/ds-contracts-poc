@@ -586,6 +586,9 @@ export interface MapReport {
 export interface MapOptions {
   /** Preserve bounded observed caller geometry; false opts out of the observation. */
   inspectInstanceCompositions?: boolean;
+  /** Opt-in: also observe a use whose drawn subtree holds nested instances (instanceNestedComposition). Ordinary
+   * capture keeps it off; a caller turns it on for a profile that lists nested-instance-composition-observed. */
+  observeNestedInstanceCompositions?: boolean;
   /** Inspection-only candidate pending composed-component and native
    * readback qualification. Never enabled by ordinary URL capture. */
   inspectPaintedStrokeOutlines?: boolean;
@@ -706,6 +709,7 @@ interface Ctx {
   /** Per-node legacy observations; the additive raw-stack pass fills only gaps. */
   observedVariableIds?: Set<string>;
   inspectInstanceCompositions?: boolean;
+  observeNestedInstanceCompositions?: boolean;
   mainSizeById: Map<string, {width:number; height:number}>;
   mainPaddingById: Map<string, [number,number,number,number]>;
   inspectPaintedStrokeOutlines?: boolean;
@@ -2656,26 +2660,33 @@ function mapNode(
         if (paint) out.instanceVectorContent = {source:observed.source,shape:observed.shape,paint};
       }
     }
+    // Every INSTANCE in the snapshot is drawn as a FRAME: an observation, never a nested main or its API.
+    const composition=(observation:NonNullable<ReturnType<typeof observeInstanceComposition>>,label:string,own=ctx)=>{
+      const snapshot=observation.root;
+      const outline=(part:RestNode):void=>{
+        if(part.type==='INSTANCE'){part.type='FRAME';delete part.componentId;delete part.componentProperties;}
+        const paths=observation.strokeOutlines[part.id];
+        if(paths){
+          part.fillGeometry=paths.map(p=>({path:p.path,windingRule:p.windingRule as 'NONZERO'|'EVENODD'}));
+          part.fills=part.strokes;part.strokes=[];delete part.vectorNetwork;
+        }
+        part.children?.forEach(outline);
+      };
+      outline(snapshot);
+      return {source:observation.source,
+        applied:Object.fromEntries(Object.entries(observation.appliedProperties).map(([k,p])=>[k,p.value as string|boolean])),
+        root:mapNode(snapshot,own,`${nodePath}/[${label}]`,parentBox,parent)};
+    };
     if(ctx.inspectInstanceCompositions){
       const observation=observeInstanceComposition(node,ctx.components);
-      if(observation){
-        const snapshot=observation.root;
-        snapshot.type='FRAME';
-        delete snapshot.componentId;
-        delete snapshot.componentProperties;
-        const outline=(part:RestNode):void=>{
-          const paths=observation.strokeOutlines[part.id];
-          if(paths){
-            part.fillGeometry=paths.map(p=>({path:p.path,windingRule:p.windingRule as 'NONZERO'|'EVENODD'}));
-            part.fills=part.strokes;part.strokes=[];delete part.vectorNetwork;
-          }
-          part.children?.forEach(outline);
-        };
-        outline(snapshot);
-        out.instanceComposition={source:observation.source,
-          applied:Object.fromEntries(Object.entries(observation.appliedProperties).map(([k,p])=>[k,p.value as string|boolean])),
-          root:mapNode(snapshot,ctx,`${nodePath}/[observed composition]`,parentBox,parent)};
-      }
+      if(observation)out.instanceComposition=composition(observation,'observed composition');
+    }
+    // Opt-in (profile convention nested-instance-composition-observed, mapped by the caller): the same bounded
+    // observation where the drawn subtree also holds nested instances, read from this use's own returned subtree.
+    if(ctx.observeNestedInstanceCompositions&&!out.instanceComposition){
+      const observation=observeInstanceComposition(node,ctx.components,true);
+      // Its own report: the observation changes only this field, never the dump's degradations or notes.
+      if(observation)out.instanceNestedComposition=composition(observation,'observed nested composition',{...ctx,report:{sets:[],degradations:[],notes:[]}});
     }
     captureUnseenFillStackVariables(out.sourceFillStack,ctx,nodePath);
     return out; // referenced identity and observed content remain separate
@@ -2927,6 +2938,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       mainPaddingById,
       inspectPaintedStrokeOutlines: options.inspectPaintedStrokeOutlines,
       inspectInstanceCompositions: options.inspectInstanceCompositions !== false,
+      ...(options.observeNestedInstanceCompositions ? {observeNestedInstanceCompositions:true} : {}),
       inspectStraightVectorNetworks: options.inspectStraightVectorNetworks,
       varNameById,
       ...(options.nativeMaskStrokeSources && options.nativeMaskStrokeSources.version===nodesResponse.version && options.nativeMaskStrokeSources.fileKey===options.fileKey ? {nativeMaskStrokeSources:options.nativeMaskStrokeSources.miterLimitByNodeId,nativeMaskPathWitnesses:options.nativeMaskStrokeSources.pathWitnessByNodeId,nativeMaskStrokeFacts:options.nativeMaskStrokeSources.strokeByNodeId}:{}),

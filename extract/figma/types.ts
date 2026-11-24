@@ -912,6 +912,8 @@ export interface DumpNode {
     applied: Record<string,string|boolean>;
     root: DumpNode;
   };
+  /** Opt-in: the same captured occurrence where the drawn subtree holds nested instances (each drawn as a FRAME). */
+  instanceNestedComposition?: DumpNode['instanceComposition'];
   /** Fully observed vector appearance at this usage; never a remote main API. */
   instanceVectorContent?: {
     source: Array<{nodeId:string;componentId:string;key:string}>;
