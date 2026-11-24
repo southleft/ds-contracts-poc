@@ -746,6 +746,34 @@ test('closed-select-draws-selected-label: the writer draws the closed select\'s 
   assert.deepEqual([off.pick, on.open, on.hint], [off.hint, off.open, off.hint], 'off, a select with options, or any other text box is unchanged');
 });
 
+test('single-block-child-fills-its-box: a block box whose one in-flow child is block-level stacks it, so the child fills its width; off, the row default', async () => {
+  // Layer: the nested layer (a block div, no layout) holds one gray block box; Chromium drew it 1196 px wide, Figma 173.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const tokens = { primitives: { m: { $type: 'dimension', w: { $value: '400px' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const block = (parts: object) => ({ element: 'div', declared: { display: 'block' }, parts });
+  const gray = { element: 'div', text: 'Workspace settings', declared: { display: 'block' }, literals: { 'background-color': '#f4f4f4', 'padding-top': '16px' } };
+  const contract = ContractSchema.parse({ id: 'test.layer', name: 'Layer', version: '0.1.0', status: 'draft', description: 'A nested layer', states: [],
+    semantics: { element: 'div' }, props: [], anatomy: { root: { declared: { display: 'block' }, tokens: { width: '{m.w}' }, parts: {
+      layer: block({ gray }), pinned: block({ held: gray, dot: { element: 'span', declared: { position: 'absolute' } } }),
+      line: block({ word: { element: 'span', text: 'inline', declared: { display: 'inline' } } }) } } },
+    bindings: { code: { anchors: { importPath: 'test/Layer', export: 'Layer' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const write = async (on: boolean) => {
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(on ? ['single-block-child-fills-its-box'] : []) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const box = (name: string) => root.findOne((n: any) => n.name === name) as any;
+    return Object.fromEntries(['layer', 'pinned', 'line'].map((name) => { const b = box(name), k = b.children[0];
+      return [name, [b.layoutMode, k.layoutSizingHorizontal, b.width, k.width]]; }));
+  };
+  const off = await write(false), on = await write(true);
+  // On, the one block child fills its box, an absolute sibling aside; the box stacks it as two or more such children are stacked.
+  assert.deepEqual([on.layer, on.pinned], [['VERTICAL', 'FILL', 400, 400], ['VERTICAL', 'FILL', 400, 400]]);
+  // Off, the box keeps the row default and the child hugs its text; an inline-level child is unchanged either way.
+  assert.deepEqual([off.layer, off.pinned], [['HORIZONTAL', 'HUG', 400, 151], ['HORIZONTAL', 'HUG', 400, 151]]);
+  assert.deepEqual([on.line, off.line], [['HORIZONTAL', 'HUG', 400, 50], ['HORIZONTAL', 'HUG', 400, 50]]);
+});
+
 test('a root measured hugging beneath its max-width in every combo carries hugsBelowMaxWidth, as the harness route does', () => {
   const root = (extra: object) => ({ anatomy: { root: { tokens: { 'max-width': '{w.cap}' }, parts: { label: { tokens: { 'max-width': '{w.cap}' } } }, ...extra } } }) as any;
   const hugs = (v: boolean) => new Map([['root', v], ['label', true]]);

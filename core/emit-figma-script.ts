@@ -2213,7 +2213,10 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // and stay horizontal. `layout.display` is 'flex' | 'inline-flex' by
   // schema, so the two cases are distinguishable without guessing. A
   // single-child block box is left alone (one child lays out the same in
-  // both modes and the byte-neutrality of every prior contract matters).
+  // both modes and the byte-neutrality of every prior contract matters),
+  // unless `single-block-child-fills-its-box` is on: one child places the
+  // same in both modes, but a block-level child fills its box's width in CSS
+  // and hugs in the row default (Carbon's nested Layer drew 173 of 1196 px).
   //
   // CARBON LIVE-DEFECT ROUND (D3) — the rule was too narrow in TWO ways and
   // both of them drew overlapping children on the live canvas:
@@ -2249,8 +2252,9 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
       return d === 'flex' || d === 'block' || d === 'grid' || d === 'list-item' || d === 'table' || d === 'flow-root';
     };
     const adjacentInlines = kids.some((k, i) => i > 0 && !blockLevel(k) && !blockLevel(kids[i - 1]));
+    const lone = kids.length === 1 && blockLevel(kids[0]) && input.conventions?.has('single-block-child-fills-its-box') === true;
     // @lower emit.axis-blockification
-    if (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines))) {
+    if (lone || (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines)))) {
       return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
     }
   }
