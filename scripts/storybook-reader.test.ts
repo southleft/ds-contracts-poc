@@ -251,7 +251,9 @@ test('a profile names the conventions it switches on, well formed and once each'
     'gated-part-hidden-by-boolean', 'instance-root-alignment-carried', 'bare-icon-keeps-its-margins',
     'container-part-availability-by-path', 'wrapped-text-baseline-as-drawn', 'repeated-wrapper-name-not-folded',
     'single-block-child-fills-its-box', 'imperceptible-outside-stroke-spread-shadow-as-outline',
-    'partly-bound-text-visibility-carried', 'block-root-fills-its-parent', 'float-ratio-strut-sets-min-height']);
+    'partly-bound-text-visibility-carried', 'block-root-fills-its-parent', 'float-ratio-strut-sets-min-height',
+    'repeat-shares-paint-rank', 'turned-line-inset-in-row', 'flex-text-box-packs-by-justify', 'undrawn-border-side-never-votes',
+    'table-cell-ignores-max-width']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
   // Font metrics (Figma to React) are accepted in the same shape the converter's loader checks; the reader never reads them.
   assert.deepEqual(SystemProfile.parse({...p, fontMetrics: {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}}}).fontMetrics, {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}});
