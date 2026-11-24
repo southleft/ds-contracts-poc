@@ -4087,7 +4087,9 @@ export const ContractSchema = z.strictObject({
       const issue=(message:string)=>ctx.addIssue({code:'custom',path:[...path,'availabilityByCombination'],message});
       const componentHybrid=part.component && (part.text!==undefined || part.textByProp || part.content || part.icon || part.shape || part.meter || part.mask ||
         part.instanceAffine || part.instanceAffineByProp || part.instanceAffineLayout);
-      if(!nested || !part.visibilityOverrideProp || componentHybrid || part.slot || part.repeat || part.parts || part.presenceByState || c.bindings.code.runtime)
+      // A part that owns parts qualifies only as a plain container, never as a hybrid owner.
+      const hybridContainer=part.parts && (part.component || part.text!==undefined || part.textByProp || part.content || part.icon || part.shape || part.meter || part.mask);
+      if(!nested || !part.visibilityOverrideProp || componentHybrid || hybridContainer || part.slot || part.repeat || part.presenceByState || c.bindings.code.runtime)
         issue('structural-availability-requires-owned-visibility-leaf');
       if(c.bindings.figma.drawnVariants===undefined || drawnVariantIssues(c as Contract).length)
         issue('structural-availability-requires-valid-drawn-domain');

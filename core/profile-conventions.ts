@@ -232,6 +232,10 @@
  *  counter-axis alignment (primaryAxisAlignItems / counterAxisAlignItems), with the same value at every use, carries it
  *  as the component's rootAlignment, which the React surfaces apply to the child's flex root as justify-content /
  *  align-items. Off, the override is named as not modeled by root inputs and the child keeps its own alignment. */
+/** container-part-availability-by-path (Figma to React proposal): a FRAME or GROUP part that owns parts, is drawn in
+ *  only some variants and is hidden by a host's instance override gets an availability table from the same exact
+ *  original-path membership a leaf uses (its own node, by path and bytes, in each source main), so the host's visibility
+ *  control cannot target a plane where the part is absent. Off, the demand is refused and the child set is not proposed. */
 // One name per line, sorted: two PRs that each add a convention insert at different lines and merge without conflict
 // (2026-11-20). Order carries no meaning: the list is read only as a set (the Convention type and an includes check).
 /** filled-child-keeps-margin-box (React to Figma writer): an in-flow child that grows or fills, with no negative margin,
@@ -277,6 +281,7 @@ export const CONVENTIONS = [
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
   'closed-select-draws-selected-label',
+  'container-part-availability-by-path',
   'drawing-path-box-whole-pixel-by-value',
   'drawn-border-color-not-folded',
   'empty-hug-keeps-extent',
