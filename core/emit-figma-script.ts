@@ -6087,6 +6087,12 @@ function partToSpecInner(
     // or paint of its own the box packs the line as text-align does (start → MIN), not centered as a drawn chip's glyph.
     if ((spec.fixedWidth || spec.fixedHeight) && !spec.fill && !spec.stroke && !resolveLayout(part, subst) && input.conventions?.has('sized-text-box-packs-by-text-align'))
       spec.textBoxPack = ({ CENTER: 'CENTER', RIGHT: 'MAX' } as const)[textCtx.textAlignH as 'CENTER' | 'RIGHT'] ?? 'MIN';
+    // Convention flex-text-box-packs-by-justify: a sized bare text that is itself a one-line flex row is that row's only
+    // item, as wide as its text, so the box packs it where justify-content puts it; a fixed cross axis only when centered.
+    const row = resolveLayout(part, subst);
+    if ((spec.fixedWidth || spec.fixedHeight) && !spec.fill && !spec.stroke && row && /flex$/.test(row.display ?? '') && (row.direction ?? 'row') === 'row'
+      && !row.wrap && (!spec.fixedHeight || row.align === 'center') && input.conventions?.has('flex-text-box-packs-by-justify'))
+      spec.textBoxPack = ({ center: 'CENTER', end: 'MAX' } as const)[row.justify as 'center' | 'end'] ?? 'MIN';
     drawnBaseline(spec);
     drawnWrap(spec);
     // Convention wrapped-text-truncates-at-its-box: a truncating text (text-overflow: ellipsis) the writer holds in a styled
