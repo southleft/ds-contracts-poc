@@ -64,6 +64,11 @@
  *  layout or paint of its own, which the writer wraps in a box at run time, packs its line along that box as its
  *  text-align places it in CSS (start → MIN, center → CENTER, right/end → MAX). Off, the box centers it, as it does a
  *  drawn chip's glyph. */
+/** flex-text-box-packs-by-justify (React to Figma writer): a bare text part with a fixed width or height and no paint,
+ *  which is itself a one-line flex row (no wrap), holds its text as the row's only item, an anonymous box as wide as
+ *  the text: the box the writer wraps it in packs that line where justify-content puts it (start, space-between or none
+ *  → MIN, center → CENTER, end → MAX). With a fixed height it packs only when align-items centers the line, as the box
+ *  already does. A column, a wrapping row or a painted box keeps the centered box. Off, every such box centers it. */
 /** bound-visibility-override-is-property (Figma to React proposal): a host's raw `visible` override on a node whose
  *  visibility is bound to a component BOOLEAN property, where the same host sets that property to the same value, is
  *  carried by that property and is not an independent visibility demand. Off, it is a demand of its own. */
@@ -318,6 +323,7 @@ export const CONVENTIONS = [
   'field-value-without-axes',
   'filled-child-keeps-margin-box',
   'fixed-swap-drawing-carried',
+  'flex-text-box-packs-by-justify',
   'float-ratio-strut-sets-min-height',
   'font-weight-initial-normal',
   'gated-layout-drops-undrawn-rows',
