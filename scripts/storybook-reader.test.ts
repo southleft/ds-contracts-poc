@@ -249,7 +249,8 @@ test('a profile names the conventions it switches on, well formed and once each'
     'wrapped-text-truncates-at-its-box', 'normal-letter-spacing-is-zero', 'text-decoration-line-by-axis-drawn',
     'line-break-alone-draws-empty-line', 'text-align-by-combination', 'text-box-whole-pixel-beside-fixed-width',
     'gated-part-hidden-by-boolean', 'instance-root-alignment-carried', 'bare-icon-keeps-its-margins',
-    'container-part-availability-by-path', 'wrapped-text-baseline-as-drawn']);
+    'container-part-availability-by-path', 'wrapped-text-baseline-as-drawn', 'repeated-wrapper-name-not-folded',
+    'single-block-child-fills-its-box']);
   for (const bad of [['Bad_Name'], ['a-b', 'a-b'], [''], ['-x']]) assert.throws(() => SystemProfile.parse({...p, conventions: bad}), JSON.stringify(bad));
   // Font metrics (Figma to React) are accepted in the same shape the converter's loader checks; the reader never reads them.
   assert.deepEqual(SystemProfile.parse({...p, fontMetrics: {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}}}).fontMetrics, {'Probe Sans': {unitsPerEm: 1000, ascender: 1025, descender: -275}});
