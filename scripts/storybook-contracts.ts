@@ -23,6 +23,7 @@ import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
+import { observedRatioStrut } from '../extract/computed/flow-pseudo.js';
 import { captureJs, captureUaControls, CONTROL_TAGS, SHADOW_HELPERS_JS, type ComponentConfig, type PropSpace, type SweepResult } from '../extract/computed/capture.js';
 import { alignSweep, applyMintToContract, boundCheck, detectFolds, enrichLayout, hugEvidence, prepareMint, styledChannels } from '../extract/computed/fuse.js';
 import { comboKey, normalizeNode, type Capture, type CapturedNode, type EnumAxisSpec } from '../extract/computed/lib.js';
@@ -81,6 +82,59 @@ export const SVG_VIEWPORTS = (rootPath?: readonly string[]) => `(() => { ${SHADO
   const walk = (el) => { if (el.localName === 'svg') out.push([el.getAttribute('viewBox'), el.getAttribute('preserveAspectRatio')]);
     for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
   if (root) walk(root); return out; })()`;
+
+/** Convention block-root-fills-its-parent: the captured root's own box and its parent element's content box. */
+export const ROOT_PARENT_BOX = (rootPath?: readonly string[]) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, p = root && root.parentElement;
+  if (!p) return null; const s = getComputedStyle(root), q = getComputedStyle(p), n = (v) => parseFloat(v) || 0;
+  return { display: s.display, position: s.position, float: s.float, width: n(s.width), parentDisplay: q.display,
+    parentContent: p.getBoundingClientRect().width - n(q.paddingLeft) - n(q.paddingRight) - n(q.borderLeftWidth) - n(q.borderRightWidth) }; })()`;
+
+/** The width a block root fills: its own, when in every case it is an in-flow, unfloated block of that one width filling
+ *  its block-container parent's content box (to the browser's 1/64 px layout unit); otherwise none. */
+export function parentFillContainer(reads: ReadonlyArray<{ display: string; position: string; float: string; width: number; parentDisplay: string; parentContent: number } | null>): number | undefined {
+  const w = reads[0]?.width;
+  return reads.length && reads.every((r) => r && r.display === 'block' && ['static', 'relative'].includes(r.position) && r.float === 'none' &&
+    ['block', 'flow-root', 'list-item', 'inline-block'].includes(r.parentDisplay) && r.width === w && Math.abs(r.width - r.parentContent) < 1 / 64) ? w : undefined;
+}
+
+/** Convention float-ratio-strut-sets-min-height: for each element in capture order whose ::before floats, every
+ *  padding-top / padding-block-start value the page's matching ::before rules declare (light DOM stylesheets, applying
+ *  media); null for the others. */
+export const STRUT_DECLARED = (rootPath?: readonly string[]) => `(() => { ${SHADOW_HELPERS_JS}
+  const root = ${rootPath ? `document.querySelector(${JSON.stringify(rootPath[0])})` : `shStageRoot(document.querySelector('[data-ds-reader-cell]'))`}, out = [], rules = [];
+  const visit = (list) => { for (const r of list) { if (r instanceof CSSStyleRule) rules.push(r);
+    else if (r.cssRules && (!r.media || matchMedia(r.media.mediaText).matches) && (!(r instanceof CSSSupportsRule) || CSS.supports(r.conditionText))) visit(r.cssRules); } };
+  for (const sh of document.styleSheets) { let l; try { l = sh.cssRules; } catch { continue; } visit(l); }
+  const declared = (el) => { const v = []; for (const r of rules) for (const sel of r.selectorText.split(',')) { const m = /^(.*?)::?before$/.exec(sel.trim()); let hit = false;
+    try { hit = !!m && el.matches(m[1] || '*'); } catch {} if (hit) for (const p of ['padding-top', 'padding-block-start']) { const x = r.style.getPropertyValue(p); if (x) v.push(x.trim()); } } return v; };
+  const walk = (el) => { const b = getComputedStyle(el, '::before');
+    out.push([el.localName, b.content !== 'none' && b.content !== 'normal' && b.float !== 'none' ? declared(el) : null]);
+    for (const c of shChildNodesOf(el)) if (c.nodeType === 1 && !(c instanceof SVGElement && ['title', 'desc', 'metadata'].includes(c.localName))) walk(c); };
+  if (root) walk(root); return out; })()`;
+
+/** Convention float-ratio-strut-sets-min-height: a part that, in every variant drawing it, hosts a float ratio strut
+ *  (observedRatioStrut) of one height carries that min-height as a literal, and its two pseudos' flow-pseudo refusals are
+ *  dropped from `refusals`. A part whose min-height varies by axis, or any other shape, is left as it was. Returns the
+ *  parts carried. */
+export function carryRatioStruts(contract: Contract, keys: readonly string[], at: (key: string, part: string) => CapturedNode | null,
+  declared: ReadonlyMap<CapturedNode, string[] | null>, refusals: string[]): string[] {
+  const carried: string[] = [];
+  const visit = (name: string, part: Part) => {
+    const seen = keys.map((k) => at(k, name)).filter((n): n is CapturedNode => !!n)
+      .map((n) => n.pseudo['::before'] && n.pseudo['::before'].float !== 'none' ? observedRatioStrut(n, declared.get(n)) : null);
+    const first = seen[0], byAxis = JSON.stringify([part.tokensByProp, part.literalsByProp]).includes('"min-height"');
+    if (first && 'minHeight' in first && !byAxis && seen.every((r) => r && 'minHeight' in r && r.minHeight === first.minHeight)) {
+      if (part.tokens) delete part.tokens['min-height'];
+      part.literals = { ...part.literals, 'min-height': `${first.minHeight}px` };
+      for (let i = refusals.length - 1; i >= 0; i--) if (/^flow-pseudo-[a-z-]+: /.test(refusals[i]!) && [`${name}::before`, `${name}::after`].includes(refusals[i]!.replace(/^[^:]+: /, ''))) refusals.splice(i, 1);
+      carried.push(name);
+    }
+    for (const [n, p] of Object.entries(part.parts ?? {})) visit(n, p as Part);
+  };
+  visit('root', contract.anatomy.root as Part);
+  return carried;
+}
 
 /** Profile convention svg-viewbox-carried: each captured svg takes the viewBox its page authored, in tree order, when it
  *  is square on a square svg box under the default aspect mapping (the form the svg reconstruction reads); any other
@@ -746,6 +800,7 @@ async function main() {
         const comp = { name: c.name, importName: c.name, contract: '(storybook)', sampleText: '', axes: c.axes } as ComponentConfig;
         const captures: Capture[] = [], rootMoved: string[] = [], baselines = new Map<CapturedNode, { px: number; ascent: number; descent: number } | null>();
         const lineBoxes = new Map<CapturedNode, { top: number; bottom: number } | null>(), textLines = new Map<CapturedNode, number | null>();
+        const rootParents: Parameters<typeof parentFillContainer>[0][number][] = [], struts = new Map<CapturedNode, string[] | null>();
         for (const [i, k] of c.cases.entries()) {
           await show(k.story.id, k.story.args);
           // Read once every image has loaded or failed, as the reader's references were drawn; one still loading is named.
@@ -761,6 +816,11 @@ async function main() {
             true, true)); // the stage's first rendered child (else the selected instance), with set sizes and field text
           if (!raw) { refusals.push(`capture-empty:${k.id}`); continue; }
           const root = normalizeNode(raw as any);
+          if (conventions.has('block-root-fills-its-parent')) rootParents.push(await page.evaluate(ROOT_PARENT_BOX(at)) as never);
+          if (conventions.has('float-ratio-strut-sets-min-height')) { // read before any element moves, matched by capture order
+            const read = drawnBaselines<string[]>(root, await page.evaluate(STRUT_DECLARED(at)) as never);
+            if (read) for (const [n, m] of read) struts.set(n, m); else refusals.push(`float-ratio-strut-unmatched:${k.id}`);
+          }
           if (conventions.has('text-baseline-as-drawn')) { // read before any element moves, matched by capture order
             const read = drawnBaselines(root, await page.evaluate(MEASURE_BASELINES(at, conventions.has('text-baseline-as-painted'), conventions.has('root-text-baseline-as-drawn'),
               conventions.has('wrapped-text-baseline-as-drawn'))) as never);
@@ -806,6 +866,8 @@ async function main() {
         // container, the viewport inset by where the story's cell starts (the preview body's padding), when it spans evenly.
         const inset = conventions.has('stage-from-story-container') ? await page.evaluate(`(() => { const r = document.querySelector('[data-ds-reader-cell]')?.getBoundingClientRect();
           return r && Math.abs(r.width - (${PAGE.viewport.width} - 2 * r.left)) < 0.5 ? r.left : 0; })()`) as number : 0;
+        const fills = conventions.has('block-root-fills-its-parent') ? parentFillContainer(rootParents) : undefined;
+        if (fills !== undefined && fills !== (inset ? PAGE.viewport.width - 2 * inset : stage.width)) row.rootFillsParent = fills;
         const uaControls = await captureUaControls(page.context(), { stage, colorScheme: 'light', channels: allProps, classAllow: IDENTITY_CLASSES });
         const sweep = { captures, controls, uaControls, uaBaselineBrowser: browser.version(), allProps, stylesheetSkips: [], browserVersion: browser.version(),
           fontChecks: {}, quarantined: [], pinnedAnimations: [], shadowHostTrails: {}, textFillFolds: {}, closedShadowSuspects: {} } as unknown as SweepResult;
@@ -819,7 +881,7 @@ async function main() {
         row.parts = [...promotion.partIndex.keys()];
         refusals.push(...promotion.refusals.map((x: unknown) => typeof x === 'string' ? x : JSON.stringify(x)));
         const receipts: string[] = [], styles = (m: Record<string, { style: Record<string, string> }>) => Object.fromEntries(Object.entries(m).map(([t, n]) => [t, n.style]));
-        const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false, ...(inset ? { container: PAGE.viewport.width - 2 * inset } : {}),
+        const styled = styledChannels(aligned, space, styles(controls), allProps, receipts, { viewport: PAGE.viewport, stage, portaled: false, ...(fills !== undefined ? { container: fills } : inset ? { container: PAGE.viewport.width - 2 * inset } : {}),
           ...(conventions.has('centered-text-keeps-drawn-width') ? { centeredTextWidth: true as const } : {}),
           ...(conventions.has('table-short-row-leaves-columns-empty') ? { tableShortRows: true as const } : {}),
           ...(conventions.has('overlay-size-not-control-default') ? { overlaySizeKept: true as const } : {}) }, styles(uaControls));
@@ -869,6 +931,8 @@ async function main() {
           row.textWrap = carried; refusals.push(...named); }
         if (conventions.has('inline-block-line-box-as-drawn')) row.lineBox = carryLineBox(enriched as Contract, c.axes, combos, (key, part) => {
           const n = nodeAt(key, part); return n ? lineBoxes.get(n as never) ?? null : undefined; });
+        if (conventions.has('float-ratio-strut-sets-min-height')) { const carried = carryRatioStruts(enriched as Contract, combos.map((k) => k.key),
+          (key, part) => nodeAt(key, part) as CapturedNode | null, struts, refusals); if (carried.length) row.ratioStrut = carried; }
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);

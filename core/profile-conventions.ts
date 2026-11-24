@@ -278,6 +278,15 @@
  *  writer keeps its line height and moves the text whole, by the difference between that first baseline and the one Figma
  *  draws, in an auto-layout box of the text's own size (padding only), so every line moves together. Off, such a part
  *  carries no baseline and is drawn on Figma's own. */
+/** block-root-fills-its-parent (React to Figma contract step): a display:block root in normal flow (not floated, not
+ *  absolute or fixed) whose used width equals its parent element's content box in every case fills that box, as CSS
+ *  does, so the block-root width door measures it against that box instead of the stage (a story's grid column). A root
+ *  of another width keeps the stage and its named refusal; the stage-fill door (non-block roots) is not touched. */
+/** float-ratio-strut-sets-min-height (React to Figma contract step): a block part (border-box) whose ::before is an empty,
+ *  unpainted float of no width with a percentage top padding (its stylesheet declares nothing else there), and whose
+ *  ::after is an empty clearfix (clear: both), is at least that padding tall plus its own vertical padding and borders,
+ *  the same in every variant that draws it: the part carries that min-height and the two pseudos are not refused. Any
+ *  other shape keeps its flow-pseudo refusals. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -285,6 +294,7 @@ export const CONVENTIONS = [
   'absolute-overhang-whole-pixel',
   'align-self-center-in-stretched-box',
   'bare-icon-keeps-its-margins',
+  'block-root-fills-its-parent',
   'bound-visibility-override-is-property',
   'capture-marked-subject',
   'centered-text-keeps-drawn-width',
@@ -297,6 +307,7 @@ export const CONVENTIONS = [
   'field-value-without-axes',
   'filled-child-keeps-margin-box',
   'fixed-swap-drawing-carried',
+  'float-ratio-strut-sets-min-height',
   'font-weight-initial-normal',
   'gated-layout-drops-undrawn-rows',
   'gated-part-hidden-by-boolean',
