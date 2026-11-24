@@ -71,6 +71,29 @@ export function observedFlowPseudo(node:CapturedNode,pseudo:Pseudo):Result{
   description:'Observed empty in-flow pseudo-element at fixed used size. Paint window and box edges are checked; responsive sizing and interaction remain unqualified.'},...(paint.window?{window:paint.window}:{})};
 }
 
+/** Convention float-ratio-strut-sets-min-height: the height a ratio strut gives its block host. The ::before must be an
+ * empty, unpainted float whose margin box has no width and whose only extent is a top padding its stylesheet declares
+ * as a percentage (`declared`: every padding-top / padding-block-start value the matching ::before rules declare),
+ * resolving against the host's content width; the ::after an empty, unpainted clearfix. The host (border-box) is then
+ * at least that padding plus its own vertical padding and borders. Anything else is named. */
+export function observedRatioStrut(node:CapturedNode,declared:readonly string[]|null|undefined):{minHeight:number}|{problem:string}{
+ const h=node.style,b=node.pseudo['::before'],a=node.pseudo['::after'],fail=(problem:string)=>({problem:'float-ratio-strut-'+problem});
+ const sx=(v:string|undefined)=>/^-?\d+(?:\.\d+)?px$/.test(v??'')?Number.parseFloat(v!):NaN;
+ const unpainted=(s:Record<string,string>)=>['top','right','bottom','left'].every(e=>s[`border-${e}-width`]==='0px')&&(s['background-color']??'rgba(0, 0, 0, 0)')==='rgba(0, 0, 0, 0)'&&
+  (s['background-image']??'none')==='none'&&(s['box-shadow']??'none')==='none'&&s.content==='""'&&s.position==='static';
+ if(h.display!=='block'||h['box-sizing']!=='border-box')return fail('host');
+ const content=(s:Record<string,string>)=>sx(s.height)-(s['box-sizing']==='border-box'?px(s['padding-top'])+px(s['padding-bottom']):0); // its own height is 0
+ if(!b||!unpainted(b)||!['left','right'].includes(b.float)||content(b)!==0||px(b['margin-top'])!==0||px(b['margin-bottom'])!==0||
+    ['right','bottom','left'].some(e=>b['padding-'+e]!=='0px')||sx(b.width)+sx(b['margin-left'])+sx(b['margin-right'])!==0)return fail('box');
+ if(!a||!unpainted(a)||a.clear!=='both'||a.float!=='none'||!['table','block'].includes(a.display)||a.height!=='0px'||
+    ['top','right','bottom','left'].some(e=>a['padding-'+e]!=='0px'))return fail('clearfix');
+ const pct=declared?.length&&declared.every(v=>v===declared[0]&&/^\d+(?:\.\d+)?%$/.test(v))?Number.parseFloat(declared[0]!):NaN;
+ const inline=px(h['padding-left'])+px(h['padding-right'])+px(h['border-left-width'])+px(h['border-right-width']),strut=px(b['padding-top']);
+ if(!Number.isFinite(pct)||!(strut>0)||Math.abs(pct*(px(h.width)-inline)/100-strut)>=1/64)return fail('not-percentage');
+ const minHeight=strut+px(h['padding-top'])+px(h['padding-bottom'])+px(h['border-top-width'])+px(h['border-bottom-width']);
+ return Number.isFinite(minHeight)?{minHeight}:fail('host');
+}
+
 /** Same in-flow box throughout the observed domain. Paint may depend on one
  * declared finite axis, using the contract's existing literal override rules.
  * Omission is a base value, never an invented public enum value. */
