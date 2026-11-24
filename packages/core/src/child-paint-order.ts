@@ -13,12 +13,16 @@ const hasAuthoredRank=(part:Part)=>{
 export function childPaintOrderPlans(contract:Contract,contracts?:ReadonlyMap<string,Contract>) {
  return walkAnatomy(contract).flatMap(({part,name,path})=>{
   const layouts=[part.layout,...Object.values(part.layoutByProp?.map??{}),...(part.layoutByCombination?.rows??[]).map(row=>row.layout)];
-  if(!layouts.some(layout=>layout?.reversePaint!==undefined || layout?.childOrder!==undefined))return [];
+  const ranked=layouts.some(layout=>layout?.reversePaint!==undefined || layout?.childOrder!==undefined);
+  // repeatSharesRank qualifies only a repeat child of a ranked holder; anywhere else it would be dropped.
+  if(part.layout?.repeatSharesRank && (!ranked || !Object.values(part.parts??{}).some(child=>child.repeat)))throw Error('child-paint-order-shared-rank-unqualified:'+name);
+  if(!ranked)return [];
   if(part.component || part.repeat || part.slot || part.content || part.text || part.shape || part.icon || part.mask || part.meter || part.layout?.display==='grid')throw Error('child-paint-order-container-unqualified:'+name);
   const children=Object.entries(part.parts??{});
   // Both React surfaces give slots a div host by default; caller nodes stay inside it.
   // Malformed slots, non-div hosts and repeats have no qualified single host.
-  if(children.some(([,child])=>child.repeat || (child.slot && (typeof child.slot!=='object' || child.element!==undefined && child.element!=='div'))))throw Error('child-paint-order-expanding-child:'+name);
+  // A repeat's items all take its one rank when the holder says they cannot overlap (layout.repeatSharesRank).
+  if(children.some(([,child])=>(child.repeat && !part.layout?.repeatSharesRank) || (child.slot && (typeof child.slot!=='object' || child.element!==undefined && child.element!=='div'))))throw Error('child-paint-order-expanding-child:'+name);
   if(children.some(([,child])=>hasAuthoredRank(child)))throw Error('child-paint-order-authored-rank:'+name);
   for(const [,child] of children)if(child.component){const known=contracts?.get(child.component.id);if(!known || known.bindings.code.runtime || Object.keys(known.anatomy).length!==1 || !known.anatomy.root || hasAuthoredRank(known.anatomy.root))throw Error('child-paint-order-reference-unqualified:'+name);}
   const axes=[...new Set([...(part.layoutByProp?[part.layoutByProp.prop]:[]),...(part.layoutByCombination?.props??[])])];

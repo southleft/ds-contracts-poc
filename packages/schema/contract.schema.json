@@ -4392,6 +4392,10 @@
                 "minLength": 1
               }
             },
+            "repeatSharesRank": {
+              "type": "boolean",
+              "const": true
+            },
             "display": {
               "type": "string",
               "enum": [

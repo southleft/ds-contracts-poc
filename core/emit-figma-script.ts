@@ -3771,6 +3771,9 @@ function applyStyling(
   if (paintLayout?.gridAsRow) Object.assign(spec.lits ??= {}, { itemSpacing: paintLayout.gridAsRow.gap },
     paintLayout.gridAsRow.paddingRight ? { paddingRight: paintLayout.gridAsRow.paddingRight } : {}, paintLayout.gridAsRow.paddingBottom ? { paddingBottom: paintLayout.gridAsRow.paddingBottom } : {});
   if(paintLayout?.reversePaint!==undefined)spec.itemReverseZIndex=paintLayout.reversePaint !== (paintLayout.direction?.endsWith('-reverse')??false);
+  // layout.repeatSharesRank: the canvas stacks each repeat item as its own child under itemReverseZIndex, which draws the
+  // shared rank exactly when the items cannot overlap (the field's condition). Without a stacking it is refused by name.
+  if(part.layout?.repeatSharesRank && paintLayout?.reversePaint===undefined && !paintLayout?.childOrder)throw Error(`repeat-shared-rank-without-stacking:${spec.name}`);
   // Convention outline-takes-no-layout: a stroke drawn from a CSS outline takes no layout space, as an outline never does
   // in CSS; counted in layout, its weight would inset the frame's children and push them past its edges.
   if (part.strokesIncludedInLayout === false || (spec.strokeOutside && input.conventions?.has('outline-takes-no-layout'))) spec.strokesIncludedInLayout = false;

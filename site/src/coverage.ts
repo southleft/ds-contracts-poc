@@ -506,6 +506,7 @@ reg("layout", "layout", [
   "layout.overlap",
   "layout.reversePaint",
   "layout.childOrder",
+  "layout.repeatSharesRank",
   // v15 (S4): flex-wrap — native on both surfaces.
   "layout.wrap",
 ]);

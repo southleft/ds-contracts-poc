@@ -536,6 +536,9 @@ export const LayoutSchema = z
     reversePaint: z.boolean().optional(),
     /** Complete child part order before direction reversal. */
     childOrder: z.array(z.string().min(1)).min(1).optional(),
+    /** Profile convention repeat-shares-paint-rank: a repeat child of this ranked holder gives every item the repeat's
+     *  one paint rank. Written only where the items cannot overlap one another; absent, a repeat child is refused. */
+    repeatSharesRank: z.literal(true).optional(),
     /** "grid" joins the flex spellings (G1) — declared-track grids only. */
     display: z.enum(["flex", "inline-flex", "grid"]).optional(),
     /** The REVERSED spellings are here for the same reason they are in
@@ -4209,6 +4212,7 @@ export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
 export interface ResolvedLayout {
   reversePaint?: boolean;
   childOrder?: string[];
+  repeatSharesRank?: true;
   display?: "flex" | "inline-flex" | "grid";
   direction?: "row" | "column" | "row-reverse" | "column-reverse";
   align?: "start" | "center" | "end" | "stretch" | "baseline";
