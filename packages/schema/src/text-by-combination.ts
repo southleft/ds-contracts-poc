@@ -25,10 +25,11 @@ export function resolveTextByCombination(table:TextByCombination,subst:Record<st
 
 /** Profile convention text-baseline-as-drawn: where the browser drew the baseline of a part's one line of text, in px
  * below that line box's top, with the font's ascent and descent per em, per complete variant tuple (no props: every
- * variant). The native Figma writer reads it under the convention only; the React emitters never do. */
+ * variant). `wrapped` (convention wrapped-text-baseline-as-drawn): the text was drawn on several lines, and the reading is
+ * its first line's. The native Figma writer reads it under the conventions only; the React emitters never do. */
 export const TextBaselineSchema=z.strictObject({
  props:z.array(z.string().min(1)).max(8),
- rows:z.array(z.strictObject({values:z.array(z.string().nullable()).max(8),px:z.number().finite().nonnegative(),ascent:z.number().finite().positive(),descent:z.number().finite().nonnegative()})).min(1).max(4096),
+ rows:z.array(z.strictObject({values:z.array(z.string().nullable()).max(8),px:z.number().finite().nonnegative(),ascent:z.number().finite().positive(),descent:z.number().finite().nonnegative(),wrapped:z.literal(true).optional()})).min(1).max(4096),
 }).superRefine((table,ctx)=>{
  const seen=new Set<string>();
  for(const row of table.rows){const key=JSON.stringify(row.values);if(row.values.length!==table.props.length||seen.has(key))ctx.addIssue({code:'custom',message:'text-baseline-tuple-unqualified'});seen.add(key);}

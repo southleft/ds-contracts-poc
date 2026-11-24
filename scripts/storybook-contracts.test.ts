@@ -237,6 +237,37 @@ test('text-baseline-as-drawn: a one-line text part carries the baseline drawn pe
   assert.deepEqual(boxes([]), []);
 });
 
+test('wrapped-text-baseline-as-drawn: a text drawn on several lines carries its first baseline; the writer moves it whole, its line height kept', async () => {
+  // Select's helper: one line in size sm, two in lg (IBM Plex Sans 12/16; Chromium's baseline 12, Figma's 13).
+  assert.equal(MEASURE_BASELINES(undefined), MEASURE_BASELINES(undefined, false, false, false));
+  assert.deepEqual([MEASURE_BASELINES(undefined).includes('wrapped: true'), MEASURE_BASELINES(undefined, true, false, true).includes('wrapped: true')], [false, true]);
+  const [c] = declare({ storybook: 'x', components: [component('a/Helper', { axes: ['size'], references: [ref('b--a', { size: 'sm' }), ref('b--a', { size: 'lg' }, { size: 'lg' })] })] }).components;
+  const { contract, combos } = seed(c!), read = { px: 12, ascent: 1.025, descent: 0.275 }, lg = (key: string) => combos.find((k) => k.key === key)!.axisValues.size === 'lg';
+  contract.anatomy.root.layout = { display: 'flex', direction: 'row' } as never;
+  contract.anatomy.root.parts = { helper: { text: 'Select the region where your resources will be hosted.', literals: { 'font-size': '12px', 'line-height': '16px' } } } as never;
+  assert.deepEqual(carryTextBaseline(contract, c!.axes, combos, (key) => lg(key) ? { ...read, wrapped: true as const } : read), ['helper']);
+  assert.deepEqual((contract.anatomy.root.parts as Record<string, { textBaseline?: unknown }>).helper!.textBaseline,
+    { props: ['size'], rows: [{ values: ['sm'], ...read }, { values: ['lg'], ...read, wrapped: true }] });
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm'), parsed = ContractSchema.parse(contract);
+  const drawn = async (conventions: string[]) => {
+    const engine = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } as never, icons: new Map(), conventions: conventionSet(conventions) });
+    type Spec = { name?: string; baselineBox?: unknown; baselineShift?: number; children?: Spec[] };
+    const find = (s: Spec): Spec[] => [...(s.name === 'helper' ? [s] : []), ...(s.children ?? []).flatMap(find)];
+    const specs = (engine.compileComponentData(parsed, new Map([[parsed.id, parsed]])) as { variants: Array<{ spec: Spec }> }).variants.flatMap((v) => find(v.spec));
+    const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    await vm.runInContext(`(async()=>{${engine.buildTokensScript(null)}\n})()`, context);
+    await vm.runInContext(`(async()=>{${engine.buildComponentScript(parsed, new Map([[parsed.id, parsed]]))}\n})()`, context);
+    const boxes = (root.findAll((n: any) => n.name === 'helper (baseline box)') as any[]).map((b) => [b.layoutMode, b.counterAxisAlignItems, b.paddingTop, b.paddingBottom,
+      b.width === b.children[0].width && b.height === b.children[0].height]);
+    return [specs.map((x) => [x.baselineBox ?? null, x.baselineShift ?? null]), boxes];
+  };
+  // On: sm keeps the one-line lowering; lg keeps its 16 px lines and moves up 1 px (12 − round(8 + 0.75·12/2)), in a box of its size.
+  assert.deepEqual(await drawn(['text-baseline-as-drawn', 'wrapped-text-baseline-as-drawn']), [[[{ line: 15, height: 16 }, null], [null, -1]], [['HORIZONTAL', 'MAX', 0, 1, true]]]);
+  // Off: the wrapped reading is not drawn at all, and nothing is boxed.
+  assert.deepEqual(await drawn(['text-baseline-as-drawn']), [[[{ line: 15, height: 16 }, null], [null, null]], []]);
+});
+
 test('text-baseline-as-painted: the carried baseline is the laid-out one rounded half up to the whole pixel; off, the probe is unchanged', () => {
   // A line top 11.5 below the subject with a baseline 14 below it is painted at 26 (25.5 rounded half up): 14.5 below its top.
   assert.deepEqual([[11.5, 14], [11, 14], [3.25, 14], [3.75, 14], [2.5, 14]].map(([top, px]) => paintedPx(top!, px!)), [14.5, 14, 13.75, 14.25, 14.5]);

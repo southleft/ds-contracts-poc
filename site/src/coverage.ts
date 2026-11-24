@@ -472,7 +472,7 @@ reg("anatomy", "content", ["part.content", "part.content.prop", "part.text"]);
 reg("anatomy", "text-by-combination", ["part.textByCombination","part.textByCombination.props","part.textByCombination.rows","part.textByCombination.rows.values","part.textByCombination.rows.text"]);
 reg("anatomy", "line-box", ["part.lineBox","part.lineBox.props","part.lineBox.rows","part.lineBox.rows.values","part.lineBox.rows.top","part.lineBox.rows.bottom"]);
 reg("anatomy", "text-wrap", ["part.textWrap","part.textWrap.props","part.textWrap.rows","part.textWrap.rows.values","part.textWrap.rows.width","part.textWrap.rows.lines"]);
-reg("anatomy", "text-baseline", ["part.textBaseline","part.textBaseline.props","part.textBaseline.rows","part.textBaseline.rows.values","part.textBaseline.rows.px","part.textBaseline.rows.ascent","part.textBaseline.rows.descent"]);
+reg("anatomy", "text-baseline", ["part.textBaseline","part.textBaseline.props","part.textBaseline.rows","part.textBaseline.rows.values","part.textBaseline.rows.px","part.textBaseline.rows.ascent","part.textBaseline.rows.descent","part.textBaseline.rows.wrapped"]);
 reg("anatomy", "text-by-prop", [
   "part.textByProp",
   "part.textByProp.prop",

@@ -541,6 +541,9 @@ export interface NodeSpec {
   /** Profile convention text-baseline-as-drawn: the TEXT node draws its line at `line` px, top-aligned in a box kept at
    *  `height` (the carried line height) and at the width it measured, so its baseline lands where the browser drew it. */
   baselineBox?: { line: number; height: number };
+  /** Convention wrapped-text-baseline-as-drawn: a text the browser drew on several lines is moved whole by this many px, its
+   *  line height kept, so its first baseline lands where the browser drew it (shiftTextBaselines). */
+  baselineShift?: number;
   /** v14 literals: literal-fidelity channels resolved from component-private
    *  source literals (schema `literals`/`literalsByProp`) — there is no
    *  variable to bind, so the runtime applies plain values. Colors are
@@ -5961,6 +5964,13 @@ function partToSpecInner(
     const height = typeof spec.lineHeight === 'number' ? spec.lineHeight : spec.lineHeight?.unit === 'PIXELS' ? spec.lineHeight.value : undefined;
     const sized = Boolean(spec.fixedWidth || spec.fixedHeight) && !input.conventions?.has('sized-text-baseline-as-drawn');
     if (!row || height === undefined || !spec.fontSize || sized || spec.textStyle) return;
+    // Convention wrapped-text-baseline-as-drawn: a changed line height would move every later line, so the text keeps it and
+    // is moved whole from Figma's first baseline (half the leading above the ascent, rounded half up) to the drawn one.
+    if (row.wrapped) {
+      const shift = +(row.px - Math.floor(height / 2 + (row.ascent - row.descent) * spec.fontSize / 2 + 0.5)).toFixed(4);
+      if (input.conventions?.has('wrapped-text-baseline-as-drawn') && Math.abs(shift) >= 0.05) spec.baselineShift = shift;
+      return;
+    }
     const line = +(2 * row.px - (row.ascent - row.descent) * spec.fontSize).toFixed(4);
     if (line > 0 && line !== height) spec.baselineBox = { line, height };
     // @lower emit.text-box-snapped-as-painted
@@ -9742,6 +9752,30 @@ function fillTruncatedTexts() {
 }
 `;
 
+/** Convention wrapped-text-baseline-as-drawn: once laid out, a wrapped text is held in an auto-layout box of its own size at
+ *  its place in the flow, the shift its padding (top, aligned to the top; or bottom, aligned to the bottom, when negative), so
+ *  it is drawn that much lower or higher with its line height kept. A text that fills or grows, is out of flow, or whose box
+ *  would change its row's size is left where it is, named. */
+const BASELINE_SHIFT_RUNTIME = `const baselineShiftNodes = [];
+function shiftTextBaselines() {
+  for (const [node, d] of baselineShiftNodes.splice(0)) {
+    const row = node.parent;
+    if (node.removed || !row) continue;
+    if (!row.layoutMode || row.layoutMode === 'NONE' || node.layoutPositioning === 'ABSOLUTE' || node.layoutGrow > 0 || node.layoutAlign === 'STRETCH' ||
+      node.layoutSizingHorizontal === 'FILL' || node.layoutSizingVertical === 'FILL') { degrade('FC-RT-TEXT-BASELINE-SHIFT-SKIPPED', node, 'the wrapped text is not a hugging child of an auto-layout row; it stays on the baseline Figma draws'); continue; }
+    const w = row.width, h = row.height, box = figma.createFrame(); box.name = node.name + ' (baseline box)'; box.fills = []; box.clipsContent = false;
+    Object.assign(box, { layoutMode: 'HORIZONTAL', primaryAxisSizingMode: 'FIXED', counterAxisSizingMode: 'FIXED', primaryAxisAlignItems: 'MIN',
+      counterAxisAlignItems: d < 0 ? 'MAX' : 'MIN', paddingTop: Math.max(d, 0), paddingBottom: Math.max(-d, 0) });
+    box.resize(node.width, node.height); row.insertChild(row.children.indexOf(node), box); box.appendChild(node);
+    // The box keeps within its row's cross size: Figma paints an empty frame's whole box, a text only its ink, so a box past
+    // its row would move the painted image's edge where the text alone did not.
+    const across = row.layoutMode === 'HORIZONTAL', cross = across ? row.height - row.paddingTop - row.paddingBottom : row.width - row.paddingLeft - row.paddingRight;
+    if ((across ? box.height : box.width) > cross) box.resize(across ? box.width : cross, across ? cross : box.height);
+    if (row.width !== w || row.height !== h) { row.insertChild(row.children.indexOf(box), node); box.remove(); degrade('FC-RT-TEXT-BASELINE-SHIFT-SKIPPED', node, 'the box would change the size of its row; the text stays on the baseline Figma draws'); }
+  }
+}
+`;
+
 const WRAP_TEXT_RUNTIME = `const wrapNodes = [];
 function wrapTexts() {
   for (const [node, wrap] of wrapNodes.splice(0)) {
@@ -9977,6 +10011,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
   const hasFinalTextAppearances=hasAuthoredTextAppearance||hasTextAppearanceWriter||hasIntrinsicPlacement;
   const hasPaintSnap = featureDatas.some((d) => dataSome(d, (s) => s.paintSnap === true));
   const hasWrapWidth = featureDatas.some((d) => dataSome(d, (s) => s.wrapWidth !== undefined));
+  const hasBaselineShift = featureDatas.some((d) => dataSome(d, (s) => s.baselineShift !== undefined));
   const hasTruncFill = featureDatas.some((d) => dataSome(d, (s) => s.truncFill === true));
   const hasTextBoxSnap = featureDatas.some((d) => dataSome(d, (s) => s.textBoxSnap === true));
   const hasTextBoxPlace = featureDatas.some((d) => dataSome(d, (s) => s.textBoxPlace === true));
@@ -10884,7 +10919,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   }
   return instance.children.some(hasReference);
 }
-` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasTruncFill ? TRUNCATED_TEXT_FILL_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+` : ''}${authoredScalarTextRuntime}${!hasAuthoredTextAppearance&&hasTextAppearanceWriter?NATIVE_FONT_NAME_EXACT_RUNTIME:''}${finalTextAppearanceRuntime}${hasPaintSnap ? PAINT_SNAP_RUNTIME : ''}${hasTruncFill ? TRUNCATED_TEXT_FILL_RUNTIME : ''}${hasWrapWidth ? WRAP_TEXT_RUNTIME : ''}${hasBaselineShift ? BASELINE_SHIFT_RUNTIME : ''}${hasTextBoxSnap ? textBoxSnapRuntime(hasTextBoxPlace) : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource === true && opts.nativePreparedLibrary === true ? '\n  const nativePause = nativeBeforeBuild();\n  if (nativePause) await nativePause;' : ''}${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -10912,7 +10947,7 @@ ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasTextBoxSnap ? `\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox${hasTextBoxPlace ? ', spec.textBoxPlace === true' : ''}]);` : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}${hasWrapWidth ? '\n    if (spec.wrapWidth) wrapNodes.push([node, spec.wrapWidth]);' : ''}${hasBaselineShift ? '\n    if (spec.baselineShift) baselineShiftNodes.push([node, spec.baselineShift]);' : ''}${hasTextBoxSnap ? `\n    if (spec.textBoxSnap) textSnapNodes.push([node, spec.baselineBox${hasTextBoxPlace ? ', spec.textBoxPlace === true' : ''}]);` : ''}${hasScalarTextSize ? `\n    if(spec.textSizeTarget)node.setSharedPluginData('ds_contracts','textSizeOverride',spec.textSizeTarget);` : ''}
 ${hasAuthoredTextAppearance ? `    await applyScalarText(node,spec,spec.characters || '',false);
     if(spec.authoredTextAppearance){
       node.setSharedPluginData('ds_contracts','authoredTextAppearance',spec.authoredTextAppearanceTarget);
@@ -11549,7 +11584,7 @@ ${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNo
     }
 ${hasFinalTextAppearances ? '    finalTextRegistries.push(registry);\n' : ''}  }
 
-${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
+${hasFinalTextAppearances ? '  for(const registry of finalTextRegistries)await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  // Contract default combo must be the FIRST variant (Figma default = first).
   const first = set.children.find((ch) => ch.name === EV[0].name);
   if (first && set.children[0] !== first) set.insertChild(0, first);
 
@@ -11734,7 +11769,7 @@ ${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) 
     vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
-${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
+${hasFinalTextAppearances ? '  await replayFinalTextAppearances(registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  comp.description = C.description;
   if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
@@ -11917,7 +11952,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     }
   }
 
-${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
+${hasFinalTextAppearances ? '  for(const b of built)await replayFinalTextAppearances(b.registry);\n' : ''}${hasTruncFill ? '  fillTruncatedTexts();\n' : ''}${hasWrapWidth ? '  wrapTexts();\n' : ''}${hasBaselineShift ? '  shiftTextBaselines();\n' : ''}${hasTextBoxSnap ? '  snapTextBoxes();\n' : ''}${hasPaintSnap ? '  snapPaintedSvgs();\n' : ''}  if (C.isSet) {
     // Tight grid: rows = first axis, columns = second; per-track max sizing.
     const specByName = new Map(EV.map((s) => [s.name, s]));
     const rowsN = Math.max(...EV.map((v) => v.row)) + 1;

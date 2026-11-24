@@ -265,6 +265,11 @@
  *  margins it declares when it stays in flow and none is negative: a uniform gap between siblings becomes the stack's
  *  spacing, and the rest is the padding of a hugging auto-layout margin box around the glyph, as for any other child.
  *  Off, a bare glyph's margins are dropped. */
+/** wrapped-text-baseline-as-drawn (React to Figma contract step and writer): a part's literal text the browser drew on
+ *  several lines is read too, at its first line, and marked wrapped (text-baseline-as-drawn reads only one line). The
+ *  writer keeps its line height and moves the text whole, by the difference between that first baseline and the one Figma
+ *  draws, in an auto-layout box of the text's own size (padding only), so every line moves together. Off, such a part
+ *  carries no baseline and is drawn on Figma's own. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -341,6 +346,7 @@ export const CONVENTIONS = [
   'variant-grid-whole-pixel',
   'variant-text-owns-its-part',
   'vertical-fill-line-in-row',
+  'wrapped-text-baseline-as-drawn',
   'wrapped-text-truncates-at-its-box',
 ] as const;
 export type Convention = (typeof CONVENTIONS)[number];
