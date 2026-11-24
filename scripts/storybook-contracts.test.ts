@@ -5,7 +5,7 @@ import { readProfile, type StoryComponent } from './storybook-reader.js';
 import { createHash } from 'node:crypto';
 import { DECLARED_CHANNELS } from './contract-schema.js';
 import { reconstructSvg } from '../extract/computed/anatomy.js';
-import { captureRootPath, carryAlignSelfCenter, carryTextWrap, shrunkTextWrap, MEASURE_LINE_BOXES, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
+import { captureRootPath, carryAlignSelfCenter, carryTableFacts, carryTextWrap, shrunkTextWrap, MEASURE_LINE_BOXES, MEASURE_TEXT_LINES, carriedChannel, MEASURE_BASELINES, paintedPx, declaredShow, lowerSingleRowGrid, profileDeclarations, carryLineBox, carryTextBaseline, drawnBaselines, carryGeneratedText, mintedObservations, carryRootHugEvidence, carrySvgViewports, carryVariantText, closedSelectLabels, declare, liftToContainingBlock, paintedFirst, profileClassPrefix, profileConventions, readerPreload, seed, spellSvgRotation, spellNormalLineHeight, textLostByPosition, liftSvgOwnFill } from './storybook-contracts.js';
 
 const ref = (storyId: string, variant: Record<string, string>, args: Record<string, unknown> = {}) => ({ storyId, args, variant }) as unknown as StoryComponent['references'][number];
 const component = (title: string, o: Partial<StoryComponent> & { axes?: string[] }) => ({ title, stories: 1, storyId: `${title}--a`, grammar: { grammar: 'in', reasons: [] },
@@ -1090,4 +1090,45 @@ test('wrapped-text-truncates-at-its-box: a truncating text held in its styled bo
   assert.deepEqual(on, [['long', 200, 200, 17, true, 'NONE', 'ENDING'], ['short', 200, 36, 17, false, undefined, 'ENDING']]);
   // Off: the long text keeps its own 288 px and spills past its box.
   assert.deepEqual(off.map((r) => r.slice(0, 5)), [['long', 200, 288, 17, false], ['short', 200, 36, 17, false]]);
+});
+
+test('undrawn-border-side-never-votes: a side with no carried width never outvotes a drawn side; sides with widths still vote', async () => {
+  // StructuredList: a row draws a 1px #e0e0e0 top; its other sides are 0-width currentColor (#161616), carried by color only.
+  const { ContractSchema } = await import('./contract-schema.js'), { createFigmaEngine } = await import('../core/emit-figma-script.js');
+  const { createFigmaMock } = await import('./plugin-engine-mock-figma.mjs'), vm = await import('node:vm');
+  const tokens = { primitives: { s: { $type: 'dimension', one: { $value: '1px' } }, c: { $type: 'color', light: { $value: '#e0e0e0' }, dark: { $value: '#161616' } } },
+    semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const sides = (cell: string, widths: string[]) => ({ layout: { display: 'flex' }, parts: { [cell]: { text: 'Cell' } }, tokens: { 'border-top-color': '{c.light}',
+    'border-right-color': '{c.dark}', 'border-bottom-color': '{c.dark}', 'border-left-color': '{c.dark}', ...Object.fromEntries(widths.map((w) => [`border-${w}-width`, '{s.one}'])) } });
+  const contract = ContractSchema.parse({ id: 'test.rows', name: 'Rows', version: '0.1.0', status: 'draft', description: 'Bordered rows', states: [],
+    semantics: { element: 'div' }, props: [], anatomy: { root: { layout: { display: 'flex', direction: 'column' }, parts: {
+      row: sides('row-cell', ['top']), boxed: sides('boxed-cell', ['top', 'right', 'bottom']) } } },
+    bindings: { code: { anchors: { importPath: 'test/Rows', export: 'Rows' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const write = async (on: boolean) => {
+    const engine = createFigmaEngine({ tokens: tokens as never, icons: new Map(), conventions: conventionSet(on ? ['undrawn-border-side-never-votes'] : []) }), { figma, root } = createFigmaMock();
+    const script = engine.buildComponentScript(contract, new Map([[contract.id, contract]])), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    for (const s of [engine.buildTokensScript(null), script]) await vm.runInContext(`(async()=>{${s}\n})()`, context);
+    const hex = (name: string) => { const c = (root.findOne((n: any) => n.name === name) as any).strokes[0]?.color;
+      return c ? '#' + [c.r, c.g, c.b].map((v: number) => Math.round(v * 255).toString(16).padStart(2, '0')).join('') : null; };
+    return [hex('row'), hex('boxed')];
+  };
+  // On, only the drawn top votes, so the row strokes its divider color; off, the three 0-width sides outvote it.
+  assert.deepEqual(await write(true), ['#e0e0e0', '#161616']);
+  // Near miss, either way: right and bottom carry 1px widths, so they vote and #161616 wins two to one.
+  assert.deepEqual(await write(false), ['#161616', '#161616']);
+});
+
+test('table-cell-ignores-max-width: a table row or cell drops its max-width; a block child outside table layout keeps it', () => {
+  const node = (style: Record<string, string>) => ({ tag: 'div', classes: [], nodes: [], style, pseudo: {} }) as never;
+  const styles: Record<string, Record<string, string>> = { root: { display: 'table' }, row: { display: 'table-row' }, cell: { display: 'table-cell' },
+    child: { display: 'block' } };
+  const contract = () => ({ anatomy: { root: { parts: {
+    row: { tokens: { 'border-top-width': '{s.one}' }, parts: { cell: { tokens: { width: '{s.w}', 'max-width': '{s.cap}' }, hugsBelowMaxWidth: true } } },
+    child: { tokens: { 'max-width': '{s.cap}' } } } } } }) as never as { anatomy: { root: { parts: Record<string, any> } } };
+  const at = (_key: string, part: string) => node(styles[part]!);
+  const on = contract();
+  assert.deepEqual(carryTableFacts(on as never, ['a', 'b'], at), ['table-max-width-not-carried: cell']);
+  assert.deepEqual(on.anatomy.root.parts.row, { tokens: { 'border-top-width': '{s.one}' }, parts: { cell: { tokens: { width: '{s.w}' } } } });
+  // Near miss: a block child outside table layout keeps its max-width (max-width still clamps a flex or block box).
+  assert.deepEqual(on.anatomy.root.parts.child, { tokens: { 'max-width': '{s.cap}' } });
 });

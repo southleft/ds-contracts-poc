@@ -136,6 +136,30 @@ export function carryRatioStruts(contract: Contract, keys: readonly string[], at
   return carried;
 }
 
+/** Convention table-cell-ignores-max-width: a part every captured node of which is a table row or cell is laid out by its
+ *  table, which does not clamp it by max-width, so its max-width is not carried. Each part changed is named; every other
+ *  part is untouched. */
+export function carryTableFacts(contract: Contract, keys: readonly string[], at: (key: string, part: string) => CapturedNode | null): string[] {
+  const named: string[] = [];
+  type ByProp = { prop: string; map: Record<string, Record<string, string>> };
+  const byProp = (v: ByProp | ByProp[] | undefined): ByProp[] => (v === undefined ? [] : Array.isArray(v) ? v : [v]);
+  const maps = (p: Part) => [p.tokens, p.literals, ...[...byProp(p.tokensByProp), ...byProp(p.literalsByProp)].flatMap((t) => Object.values(t.map))] as (Record<string, string> | undefined)[];
+  const has = (p: Part, re: RegExp) => maps(p).some((m) => Object.keys(m ?? {}).some((k) => re.test(k)));
+  const visit = (name: string, part: Part) => {
+    const seen = keys.map((k) => at(k, name)).filter((n): n is CapturedNode => !!n);
+    if (seen.length && seen.every((n) => ['table-row', 'table-cell'].includes(n.style.display ?? ''))) {
+      if (has(part, /^max-width$/)) {
+        for (const m of maps(part)) if (m) delete m['max-width'];
+        for (const k of ['tokensByProp', 'literalsByProp'] as const) { const kept = byProp(part[k] as never).filter((t) => Object.values(t.map).some((m) => Object.keys(m).length));
+          if (kept.length === byProp(part[k] as never).length) continue; if (kept.length) part[k] = kept as never; else delete part[k]; }
+        delete part.hugsBelowMaxWidth; named.push(`table-max-width-not-carried: ${name}`); }
+    }
+    for (const [n, p] of Object.entries(part.parts ?? {})) visit(n, p as Part);
+  };
+  visit('root', contract.anatomy.root as Part);
+  return named;
+}
+
 /** Profile convention svg-viewbox-carried: each captured svg takes the viewBox its page authored, in tree order, when it
  *  is square on a square svg box under the default aspect mapping (the form the svg reconstruction reads); any other
  *  svg keeps the viewBox reconstructed from its computed size. With svg-viewbox-meets-oblong-box (`oblong`), a square
@@ -934,6 +958,8 @@ async function main() {
           const n = nodeAt(key, part); return n ? lineBoxes.get(n as never) ?? null : undefined; });
         if (conventions.has('float-ratio-strut-sets-min-height')) { const carried = carryRatioStruts(enriched as Contract, combos.map((k) => k.key),
           (key, part) => nodeAt(key, part) as CapturedNode | null, struts, refusals); if (carried.length) row.ratioStrut = carried; }
+        if (conventions.has('table-cell-ignores-max-width')) { const named = carryTableFacts(enriched as Contract, combos.map((k) => k.key),
+          (key, part) => nodeAt(key, part) as CapturedNode | null); if (named.length) row.tableMaxWidth = named; }
         for (const stack of stacksIn((enriched as Contract).anatomy)) if (!faces.has(stack) && !stack.startsWith('{')) { const face = await paintedFace(stack); if (face) faces.set(stack, face); }
         paintedFirst((enriched as Contract).anatomy, faces);
         const contract = ContractSchema.parse(enriched) as Contract, file = kebab(c.name);
