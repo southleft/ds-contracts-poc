@@ -44,7 +44,7 @@ Two citations carry the honest numbers and neither is optional:
 
 A rehearsed command list for both hops (including dump → React as a
 *recovery* preview) lives at
-[parity/receipts/beta/LIVE-DEMO.md](../parity/receipts/beta/LIVE-DEMO.md).
+parity/receipts/beta/LIVE-DEMO.md.
 That page is not a second product. The guarantees above still win.
 
 ---

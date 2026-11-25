@@ -86,7 +86,7 @@ reproduces on any clone, which is why those are what the eval pins.
 
 - **The zero-finding CODE surface is by construction** — the proposals were extracted from the same manifest they're checked against, so the code half cannot disagree with itself. Its value is mechanical: the referee runs end-to-end on a foreign library. That row is now *verified with the design surface loaded*, which is the only thing that makes it a statement about this config rather than about a stale report file.
 - **The design result is only as fresh as `design.json`.** Nothing in CI can re-dump a Figma file, so `diagnose` reports the dump's age and refuses to call a stale snapshot green (`MAX_SNAPSHOT_AGE_DAYS`, default 14 — the same gate and the same override as `parity/diff.ts`). This dump carries no numeric extraction stamp, so the age falls back to the file's mtime and is labelled `file-mtime` in the report: a floor on its true age, and it reads as 0 days on a fresh clone. Say the number, don't trust it as a measurement of when the Figma file was read.
-- **CEM is trusted input.** The manifest describes Shoelace's API; it is not verified against Shoelace's TypeScript source. (CEM describes, contracts verify — [docs/08](../../../docs/08-composition-and-spec.md).)
+- **CEM is trusted input.** The manifest describes Shoelace's API; it is not verified against Shoelace's TypeScript source. (CEM describes, contracts verify — docs/08.)
 - **`slot`-typed and complex props** are outside declared extraction scope and appear in `out/proposals.md` as review items, not silently dropped.
 
 ## The design half — COMPLETE (2026-07-06)

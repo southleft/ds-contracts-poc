@@ -1,6 +1,6 @@
 # React reference entry point
 
-The local app's `/sources` page now starts with **React originals**. **Load React originals** bundles the original shadcn source sandbox, its prebuilt theme and declared Inter font. It does not invoke the contract emitter or change source files. The fixed cohort is recorded in [React V1 scope](../docs/REACT-V1-SCOPE.md).
+The local app's `/sources` page now starts with **React originals**. **Load React originals** bundles the original shadcn source sandbox, its prebuilt theme and declared Inter font. It does not invoke the contract emitter or change source files. The fixed cohort is recorded in React V1 scope.
 
 Configure `DS_CONTRACTS_REACT_SOURCE_ROOT` on the dev-server process to point to an existing React source workspace with its installed dependencies. A workspace declaration selects its own cases; without one, the built-in preset expects the shadcn source sandbox. The local owner setup defaults to the original `ds-contracts-poc/examples/shadcn/.shadcn-sandbox` sibling checkout. Requests cannot choose a filesystem path or executable. This preset is not automatic onboarding for an arbitrary React repository.
 

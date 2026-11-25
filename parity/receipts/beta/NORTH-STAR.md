@@ -73,7 +73,7 @@ Do not claim v1. Do not open another kit to manufacture coverage.
 |---|---|
 | Dump a set **this pipeline drew** → proposed contract | **done** — all eight demo stems propose; recovers props, host, layout/paint/stroke/type names, Badge/Button State-preview paints, and hoisted Button hover ink; does not invent canvas-absent events; `npm run flowbite-dump-propose:check` |
 | Diff authored vs code-capture vs canvas properties | **done** — Flowbite `npm run parity:flowbite` |
-| First-party both-sides (Switch) | **done** — [SWITCH-BOTH-SIDES.md](./SWITCH-BOTH-SIDES.md) |
+| First-party both-sides (Switch) | **done** — SWITCH-BOTH-SIDES.md |
 | Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; `FC-FONT-SUBSTRATE`. Switch visual-parity now scores the live set (`BMjUA2ue5CaZXU4kufxL0z` / `4:618`); node-lag vs the contract is pinned by `extract:figma:visual:anchors`. The conformance fixture's canvas round trip is at **0 SILENT** (`conformance:roundtrip`, 46 cases, decrease-only) |
 | Held-out kit (not Flowbite — the Phase 2 exam) | **0 SILENT** — the exam's last 2 of 3,556 canvas facts (was 295), both on one Card SLOT, closed 2026-08-23 and hold green in `conformance:canvas` (152 cases · 152 PASS · 0 RED-EXPECTED; docs/23 §D.29); a native SLOT's primary-axis FILL now carries as `layout.grow`, its interior auto-layout is still named not carried (docs/23 §B.24). Button recognisable, Card not, every Card loss named — [FIGMA-DS-EXAM.md](../phase-2/FIGMA-DS-EXAM.md), docs/23 §B.26. Not this lane's ship set; listed so nobody reads the eight stems as the whole story |
 

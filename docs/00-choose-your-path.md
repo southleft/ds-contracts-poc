@@ -313,8 +313,8 @@ artifact that ends the "which one is right" argument — and a CI gate.
 - **What it costs** ([23](23-known-limitations.md)): the arbitration, and it is
   unassisted.
 - **The reconciliation phase has NO tooling.** Stated plainly: there is no
-  merge view, no CLI verb, no accept-left/accept-right surface — [docs/11's
-  phase table](11-brownfield-adoption.md) marks Phase 2 as *NO TOOLING
+  merge view, no CLI verb, no accept-left/accept-right surface — docs/11's
+  phase table marks Phase 2 as *NO TOOLING
   EXISTS*, and it is the phase you hit second. **Today, path C is "run A
   and B where each applies, and reconcile by hand":** a human reads
   `reconciliation.md` and hand-writes each contract from the decisions.
@@ -339,18 +339,18 @@ real cost, it is human, and today it is unassisted.
 ## Where the other documents fit
 
 - [README](../README.md) — the front door; its journey table points here.
-- [docs/00-getting-started](00-getting-started.md) — the five-minute
+- docs/00-getting-started — the five-minute
   orientation.
 - [docs/28 — Beta Tester Runbook](28-beta-runbook.md) — **if you are here to
   test this tool, start there**: all three paths with exact commands, success
   criteria, the named limitations each track will hit, honest time budgets,
   and the structured issue forms for reporting findings.
-- [docs/17 — Run the Gauntlet](17-run-the-gauntlet.md) — paths B and A
+- docs/17 — Run the Gauntlet — paths B and A
   packaged as a runbook for an outside tester.
 - [docs/21 — Bring Your Own Design System](21-bring-your-own-design-system.md)
   — the deep path-B recipe: capture configs, the decision guide, the
   troubleshooting table.
-- [docs/13 — Try It With Your Own System](13-try-it-with-your-system.md) —
+- docs/13 — Try It With Your Own System —
   the path-C walkthrough: extract, reconcile, diagnose.
 - [docs/18 — User Flows](18-user-flows.md) — the same loop cut by
   *persona* (designer / engineer / lead), not by journey.

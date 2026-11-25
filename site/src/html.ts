@@ -153,7 +153,6 @@ export function layout(opts: PageOpts, body: string): string {
         <a href="/what-works/">What works — the measured wins</a>
         <a href="${REPO_URL}/blob/main/docs/23-known-limitations.md">Known limitations — what it costs</a>
         <a href="/contribute/">Contribute</a>
-        <a href="${REPO_URL}/blob/main/MILESTONES.md">Milestones</a>
         <a href="${REPO_URL}/blob/main/CHANGELOG.md">Changelog</a>
       </div>
       <div>
