@@ -15,7 +15,7 @@ tells you exactly what you are supposed to see, names the walls you WILL hit
 before you hit them, and gives you a structured place to file what you find.*
 
 > **How this page relates to the others:** [docs/00 — Choose Your Path](00-choose-your-path.md)
-> is the canonical statement of the three journeys; [docs/17 — Run the Gauntlet](17-run-the-gauntlet.md)
+> is the canonical statement of the three journeys; docs/17 — Run the Gauntlet
 > is the engineer-facing stress-test sequence this page was forked from. If
 > this page disagrees with docs/00 about what a path is, docs/00 wins and the
 > disagreement is a bug — [report it](https://github.com/southleft/ds-contracts-poc/issues/new/choose).
@@ -111,7 +111,7 @@ drawing.
 |---|---|---|
 | a hand-built set produces code with `imported.*` token names | provisional minted tokens — placeholders for your vocabulary; rename them | [docs/00 path A](00-choose-your-path.md) |
 | text widths slightly off; long labels clip or overflow | webfonts load only where the library's capture config declares a `fonts` field (unconfigured libraries render fallback-font widths), and text wrapping is not implemented | [§C.5](23-known-limitations.md) · [§B.3](23-known-limitations.md) |
-| no `useEffect`, keyboard handlers, or business logic in the output | a canvas cannot carry them — the contract holds canvas-expressible facts only | [§A.3](23-known-limitations.md), [docs/16](16-sync-boundary.md) |
+| no `useEffect`, keyboard handlers, or business logic in the output | a canvas cannot carry them — the contract holds canvas-expressible facts only | [§A.3](23-known-limitations.md), docs/16 |
 | the round trip is not lossless | correct — it *closes* (every fact lands in a named bucket); the accounting is public | [docs/24 §6.3](24-what-works.md) |
 | the component renders the design's placeholder text and never changes | measured 2026-09-05: the proposed contract carries the drawn text as literal content and declares **zero slots**, so the text is baked in. Edit it — this is a starting point, not a component to ship | [WHAT-YOU-CAN-DO-TODAY](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) |
 | passing `children` does nothing, with no error | measured 2026-09-05: `children` is destructured in the generated component and never rendered (`grep -c '{children}'` returns 0). Not a bug in your usage | [WHAT-YOU-CAN-DO-TODAY](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) |
@@ -244,7 +244,7 @@ is rendered to score.
 
 | Fact | ID |
 |---|---|
-| The reconciliation phase itself has **no tooling** — no merge view, no accept-left/accept-right. A human reads the report and hand-writes each contract. Measured shape of that work on Shoelace: 236 property decisions across 28 matched components — roughly 8 per component. | [docs/11](11-brownfield-adoption.md) |
+| The reconciliation phase itself has **no tooling** — no merge view, no accept-left/accept-right. A human reads the report and hand-writes each contract. Measured shape of that work on Shoelace: 236 property decisions across 28 matched components — roughly 8 per component. | docs/11 |
 | Reconciliation compares **API surfaces only** — props, variants, defaults. Token and anatomy disagreement is out of scope. | [§B.12](23-known-limitations.md) |
 | **Adopting a hand-built Figma set is not a verb this tool has** — stamping an existing set as contract-backed so future syncs amend it in place does not exist. | [§B.11](23-known-limitations.md) |
 

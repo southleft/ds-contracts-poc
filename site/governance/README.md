@@ -34,5 +34,5 @@ claims rule that governs the rest of the repository
 
 No RFCs predate this index. The schema's v2–v13 history was built before this
 convention existed and is documented as such — in the schema source's own
-commentary, [MILESTONES.md](../../MILESTONES.md), and the spec site's
+commentary, MILESTONES.md, and the spec site's
 versioning page (`/spec/versioning/`) — not retro-fitted into RFC files.

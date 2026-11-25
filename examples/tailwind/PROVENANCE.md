@@ -4,7 +4,7 @@
 component library shipping as a real npm package) on `tailwindcss@4.3.3`,
 pinned in `.tw-sandbox/` with `react@19.2.x`, `esbuild`, `@tailwindcss/cli`.
 The fifth library through the pipeline and the **fourth styling method** —
-completing the tier-1 guarantee ([docs/16](../../docs/16-sync-boundary.md)).
+completing the tier-1 guarantee (docs/16).
 Recreate (git-ignored):
 
 ```bash

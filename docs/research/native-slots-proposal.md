@@ -2,7 +2,7 @@
 
 **Status: IMPLEMENTED 2026-08-08** (native-slots round). Pinned by the
 2026-08-08 slots recon (probe receipts:
-[slots-recon-probes.md](./slots-recon-probes.md)); the engine now emits native
+slots-recon-probes.md); the engine now emits native
 slots and this document is the specification it was built to. What landed,
 against the sections below:
 

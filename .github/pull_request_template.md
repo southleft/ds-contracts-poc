@@ -58,7 +58,7 @@ fix — clearly, by name — is welcome and is not a lesser contribution. -->
 | `figma-sync/plugin/` | `npm run plugin:check`, then `npm run plugin:zip && npm run plugin:ui-check` |
 | `packages/cli/` | `npm --prefix packages/cli run build`, `npm run test:onboarding`, `npm run publish:check`, `npm run eval` |
 | a library's committed `figma/*.figma.js` | `npm run figma:fresh` |
-| `docs/`, `README.md`, `ROADMAP.md`, `CONTRIBUTING.md` | `npm run docs:check`, `npm run capability:fresh`, `npm run plugin:ui-check` (its dead-name sweep reads `docs/*.md`) |
+| `docs/`, `README.md`, `CONTRIBUTING.md` | `npm run docs:check`, `npm run capability:fresh`, `npm run plugin:ui-check` (its dead-name sweep reads `docs/*.md`) |
 | `site/` | `npm run site:build` |
 | a gate script or a workflow | `npm run ci:lanes` |
 

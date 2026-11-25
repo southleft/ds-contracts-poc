@@ -58,7 +58,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   (react-day-picker double-run is green; mechanical calendar@1 compile
   refused — [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/); no live
   mint, no invented pass). docs/26 F-C2C amendment is
-  [adopted 2026-08-31](docs/26-amendment-canvas-to-code.md) as Journey A
+  adopted 2026-08-31 as Journey A
   recipe canvas→code; it does not complete v1.
 - Phase 5 labeling + Figma soft-archive of superseded stays already landed;
   release remains blocked on F1. npm stays deferred.
@@ -528,7 +528,7 @@ There is a second reading worth stating rather than burying: **1.0 also means "s
 
 #### Plugin, drift and IA
 
-- **Plugin IA re-housing** (`87dd943`) — seven implementation-shaped tabs become **Build / Changes / Send** plus an Advanced drawer, per the owner's markup, recorded in [docs/19](docs/19-plugin-ia.md). `code.js` grew 25 lines and the engine receipt was unchanged.
+- **Plugin IA re-housing** (`87dd943`) — seven implementation-shaped tabs become **Build / Changes / Send** plus an Advanced drawer, per the owner's markup, recorded in docs/19. `code.js` grew 25 lines and the engine receipt was unchanged.
 - **The canvas-drift arc** (`c0beeec` → `fc28144`) — `core/canvas-fingerprint.ts` and a Drift tab, then **v2 geometry-free**, then **per-variant fingerprints with click-to-zoom** (closing the owner's *"it says Button was edited; there are 63 buttons"*), then **v3 snapshots (what changed)** and **v4 set-level facts**, then Drift → Propose → PR glue.
 - **G2, G8, G9, G12, G6 and G14 shipped** (`c0aed6f`) — drift-aware update warnings, plain-words style diffs, a sample-library cold start, designer-language narration, `extract --draft-capture-config`, and refusal triage. The [docs/18](docs/18-user-flows.md) status column is verified against the shipped surfaces rather than against commit messages.
 - **[docs/18 — User Flows](docs/18-user-flows.md)** (`8d772d0`) — seven end-to-end flows with every step tagged `[EXISTS—surface]` or `[GAP→Gn]`, and the ranked G0–G14 gap list that drove the build order above.
@@ -645,7 +645,7 @@ There is a second reading worth stating rather than burying: **1.0 also means "s
 
 ## [0.7.0] - 2026-07-20
 
-The showcase-and-shipping arc: the contract schema advanced v13 → v15 (closing a July v9 → v15 arc that moved the vocabulary from drawn shape to declared facts), the computed-capture floor joined extraction as its run-of-record instrument, the first npm packages shipped (`@ds-contracts/schema` 15.0.0, `@ds-contracts/cli` 0.1.0), and the eval suite grew 99 → 129 (60 → 129 across the two July releases). The dated narrative with receipts is [MILESTONES.md](MILESTONES.md). Bookkeeping note: schema v13, the live gauntlet, and the spec site landed inside the v0.6.0 *tag* window but after that entry was written — they are documented here.
+The showcase-and-shipping arc: the contract schema advanced v13 → v15 (closing a July v9 → v15 arc that moved the vocabulary from drawn shape to declared facts), the computed-capture floor joined extraction as its run-of-record instrument, the first npm packages shipped (`@ds-contracts/schema` 15.0.0, `@ds-contracts/cli` 0.1.0), and the eval suite grew 99 → 129 (60 → 129 across the two July releases). The dated narrative with receipts is MILESTONES.md. Bookkeeping note: schema v13, the live gauntlet, and the spec site landed inside the v0.6.0 *tag* window but after that entry was written — they are documented here.
 
 ### Added
 
@@ -681,7 +681,7 @@ The showcase-and-shipping arc: the contract schema advanced v13 → v15 (closing
 
 ## [0.6.0] - 2026-07-12
 
-The July field-test arc: the contract schema advanced v9 → v12, the plugin dump format v1.0 → v1.6, the eval suite 60 → 99, and three standing instruments joined the suite — the whole-kit census, the visual-parity pixel gate, and the enterprise code gauntlet. The dated narrative with receipts is [MILESTONES.md](MILESTONES.md).
+The July field-test arc: the contract schema advanced v9 → v12, the plugin dump format v1.0 → v1.6, the eval suite 60 → 99, and three standing instruments joined the suite — the whole-kit census, the visual-parity pixel gate, and the enterprise code gauntlet. The dated narrative with receipts is MILESTONES.md.
 
 ### Added
 
@@ -791,7 +791,7 @@ The July field-test arc: the contract schema advanced v9 → v12, the plugin dum
 
 ## [0.1.0] - 2026-07-08
 
-First public release: the contract-as-source-of-truth loop, proven end-to-end and running in a public browser playground. The dated evidence log for everything below is [MILESTONES.md](MILESTONES.md).
+First public release: the contract-as-source-of-truth loop, proven end-to-end and running in a public browser playground. The dated evidence log for everything below is MILESTONES.md.
 
 ### Added
 
