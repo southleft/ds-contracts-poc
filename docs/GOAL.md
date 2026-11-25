@@ -572,3 +572,48 @@ The rule that marks a set as internal is data in the system's profile: Carbon's 
 freezes with the checker on 2026-11-20.
 
 Signed: TJ Pitre (approved in chat). Date: 2026-11-10.
+
+### 2026-11-25: Start small with one component, measured both ways, then climb
+
+The owner, in chat: "Then let's go down this route… let's start small. Yeah, sure, with a button. Grab a button from
+Carbon… let's see how this approach might work. Then let's hill climb on that and see if there's anything we can borrow
+from the work that we've already done… let's just get to 10,000 feet, and then 20,000 feet, and then 30,000 feet."
+
+**From today, this entry replaces** the climb on Carbon's tuning list (the 2026-11-09 entry's Step 2). The held-out
+reading stays on hold until the owner decides when to spend the held-out list. **Unchanged:**
+- the North Star;
+- determinism (the same inputs always give the same output, and no model is called);
+- the held-out list's never-read rule (rule 5);
+- the $2,400 spend cap with its $400 weekly limit;
+- the owner-only actions.
+
+**The approach.** Before converting anything, measure one component on both sides and compare them property by
+property.
+
+1. **Figma to code.** Take a Figma component set's JSON and the React component with the same name, and measure both.
+   For every variant, every part (the root, the label text, the icon) and every property (fill, stroke, radius,
+   padding, gap, size, and the text's color, font family, size, weight, line height and letter spacing), the report
+   gives one of three results:
+   - **match:** the same value, or the same token;
+   - **differs:** both values are shown;
+   - **can't compare:** which side lacks the value, and why.
+2. **Code to Figma.** Take the React component and measure what it draws. Build it in Figma with the same structure
+   and styles, every value bound to a variable from the system's token table. Then read the result back and report it
+   the same way.
+
+The report never uses the frozen checker's percentages.
+
+**Altitude.**
+- **10,000 feet:** Carbon Button, the first direction, as a private prototype. The report goes to the reviewer, then
+  to the owner.
+- **20,000 feet:** Button, the second direction, built from the same measurements, after the owner has seen 10,000
+  feet. The report names what it borrows from existing engine work.
+- **30,000 feet:** the owner chooses after 20,000 feet.
+
+**Limits.**
+- Only components on the tuning list, until the owner says otherwise.
+- Each step is built privately first. A tracked PR follows only after the owner has seen that step, one PR at a time,
+  with at most 300 net added lines and no auto-merge; the reviewer reviews and merges.
+- These reports are not first-pass rates. They are never reported as progress against the bar.
+
+Signed: TJ Pitre (approved in chat). Date: 2026-11-25.
