@@ -365,7 +365,7 @@ const GOLDEN_FILES = Object.keys(JSON.parse(readFileSync(path.join(ROOT, 'evals/
 if (COHORT) for (const doc of ['docs/22-generality.md', 'docs/24-what-works.md']) {
   for (const message of coverageTableFailures(readFileSync(path.join(ROOT, doc), 'utf8'), COHORT)) fail(doc, message);
 }
-for (const doc of ['README.md', 'ROADMAP.md', 'docs/00-choose-your-path.md', 'docs/24-what-works.md']) {
+for (const doc of ['README.md', 'docs/00-choose-your-path.md', 'docs/24-what-works.md']) {
   for (const message of captureProseFailures(readFileSync(path.join(ROOT, doc), 'utf8'), {
     measured: REAL_N, libraries: LIB_DIRS.size, knownLibraries: COHORT?.libraries, goldenFiles: GOLDEN_FILES,
     nonempty: REAL_MEASURED, empty: unmeasuredCards.length,
@@ -377,12 +377,11 @@ const REGISTRY = JSON.parse(readFileSync(path.join(ROOT, 'scripts/registry-truth
 
 // ---------------------------------------------------------------------------
 // The documents under gate (working notes and dated logs are NOT gated —
-// MILESTONES.md and CHANGELOG.md are history and must keep their old numbers)
+// CHANGELOG.md is history and must keep its old numbers)
 // ---------------------------------------------------------------------------
 const DOCS = [
   'README.md',
   'CONTRIBUTING.md',
-  'ROADMAP.md',
   ...readdirSync(path.join(ROOT, 'docs'))
     .filter((f) => f.endsWith('.md'))
     .map((f) => path.join('docs', f)),

@@ -49,7 +49,7 @@ The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223
 Known MCP limitations to design around (verified in source):
 
 - `figma_import_tokens` applies **value updates only** — creations, deletions, and alias re-targeting are *reported in its plan but not applied*. Creation must go through `figma_setup_design_tokens` / `figma_batch_create_variables`.
-- The MCP's DTCG dialect is hex-string colors / unit-string dimensions — which is exactly why `tokens/` uses that dialect (see [token pipeline](../03-token-pipeline.md)).
+- The MCP's DTCG dialect is hex-string colors / unit-string dimensions — which is exactly why `tokens/` uses that dialect (see token pipeline).
 
 ### Contracts → component sets
 

@@ -1,7 +1,7 @@
 # 35 · The two-journey v1 plan — mechanical truth in both directions
 
 > **Status: historical plan — adopted 2026-08-31; sequencing superseded 2026-09-15 by [CURRENT.md](CURRENT.md).**
-> This supersedes the *sequencing* of [docs/34](34-boilerplate-v1-plan.md)
+> This supersedes the *sequencing* of docs/34
 > (the boilerplate corpus itself is minted and under owner review) and
 > records the earlier route to v1. Nothing in this document mints a
 > grade or flips `overallSuccess`. Product **v1 remains INCOMPLETE**.
@@ -72,7 +72,7 @@
 > Astryx theme capture is often `capture-theme-unavailable`; AntD Checkbox
 > dash height stays named-refused. Canvas→code Button apply-step + held-out
 > AntD Card exam ran with silent=0; the
-> [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
+> docs/26 F-C2C amendment is **adopted
 > 2026-08-31** (owner). F1 was **capture-only** (react-day-picker
 > double-run is green — [`f1-held-out-v1`](https://github.com/southleft/ds-contracts-poc/tree/5f5c60af73b0260242e55bf012c9d5478845a55f/recipe/evidence/f1-held-out-v1)).
 > The mechanical calendar@1 compile was recorded as **attempted and refused**

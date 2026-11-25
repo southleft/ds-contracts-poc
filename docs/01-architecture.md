@@ -63,7 +63,7 @@ The phase-3 demo that settles the argument: add a prop by hand in `Button.tsx` �
 | Member model (props / slots / parts) | [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest) |
 | Prop/value binding grammar (`"primary"` ↔ `"Primary"`) | Code Connect (the reference design tool's design-to-code binding bridge) |
 | Dual-anchor identity (rename-safe IDs per side) | [DTCG `$extensions`](https://www.designtokens.org/) pattern |
-| Token format | DTCG (see [token pipeline doc](03-token-pipeline.md) for dialect notes) |
+| Token format | DTCG (see token pipeline doc for dialect notes) |
 | Spec taxonomy (anatomy, properties, a11y) | Nathan Curtis's [component specifications](https://medium.com/eightshapes-llc/component-specifications-1492ca4c94c) |
 
 One cautionary datapoint shaped the scope: Specify built a standalone "design API" business between the design tool and Git and sunset. This PoC deliberately proves a **format + generators + linters** — plain files in a repo — not a hosted middleman.

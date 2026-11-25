@@ -113,8 +113,9 @@ test("the implementation map names real source files and current entry points do
   assert.ok(paths.length >= 10);
   for (const file of paths)
     assert.ok(existsSync(file), `Missing implementation: ${file}`);
+  // The root README points at the current direction in docs/STATUS.md (2026-11-25: the Button path).
+  assert.match(read("README.md"), /STATUS\.md/, "No active direction link in README.md");
   for (const file of [
-    "README.md",
     "docs/01-architecture.md",
     "docs/35-two-journey-v1-plan.md",
   ]) {
