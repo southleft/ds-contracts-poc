@@ -12,6 +12,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { CliUsageError, flagString, parseFlags } from '../lib.js';
+import { bundledProfiles, resolveProfileArg } from '../profile-arg.js';
 import { servePrograms, type ServedSet, type SetOutcome } from './react-to-figma-serve.js';
 
 export const REACT_TO_FIGMA_USAGE =
@@ -70,9 +71,12 @@ export function reportLines(report: { refused: Array<{ subject: string; reason: 
 }
 
 export async function reactToFigmaCommand(argv: string[], steps: ReactToFigmaSteps = bundledSteps, log = (l: string) => console.log(l)): Promise<number> {
-  const run = parseReactToFigmaArgs(argv), out = path.resolve(run.out);
+  const parsed = parseReactToFigmaArgs(argv), out = path.resolve(parsed.out);
   if (existsSync(out) && readdirSync(out).length) throw Error(`react-to-figma-out-not-empty: ${out}`);
-  for (const [flag, file] of [['--profile', run.profile], ['--only', run.only]] as const) if (file && !existsSync(file)) throw Error(`react-to-figma-file-missing: ${flag} ${file}`);
+  const profile = parsed.profile && resolveProfileArg(parsed.profile, here);
+  if (parsed.profile && !profile) throw Error(`react-to-figma-file-missing: --profile ${parsed.profile} (bundled: ${bundledProfiles(here).join(', ') || 'none'})`);
+  const run = { ...parsed, ...(profile ? { profile } : {}) };
+  if (run.only && !existsSync(run.only)) throw Error(`react-to-figma-file-missing: --only ${run.only}`);
   mkdirSync(out, { recursive: true });
   // The contract step reads the profile's conventions from the reader's record, which the reader writes under --only:
   // with a profile and no list, the list is every component the profile declares.

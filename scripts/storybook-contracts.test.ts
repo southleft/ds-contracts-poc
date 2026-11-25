@@ -795,8 +795,13 @@ test('lost-text-realigns-by-class: a variant\'s own text on a part whose base el
   assert.equal(textLostByPosition(aligned({ a: [el(['A'])], b: [el(['B'])] }), 'a', ['a', 'b']), false);
   assert.equal(textLostByPosition(aligned({ a: [el([])], b: [el([' \n'])], c: [null] }), 'a', ['a', 'b', 'c']), false);
   const files: Record<string, string> = { 'p.json': JSON.stringify({ setup: { captureConfig: 'c.json' } }), 'c.json': JSON.stringify({ library: { classPrefix: 'x--' } }) };
-  assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!), 'x--');
+  assert.equal(profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!, (f) => f in files), 'x--');
   assert.equal(profileClassPrefix({ profile: null }), '');
+  // The config resolves beside the profile first (a profile shipped with its files), then in the working directory.
+  const shipped: Record<string, string> = { 'dist/p.json': files['p.json']!, 'dist/c.json': JSON.stringify({ library: { classPrefix: 'y--' } }), 'c.json': files['c.json']! };
+  assert.equal(profileClassPrefix({ profile: { path: 'dist/p.json', sha256: '' } }, (f) => shipped[f]!, (f) => f in shipped), 'y--');
+  // Resolving nowhere is a named refusal, never a crash on the read.
+  assert.throws(() => profileClassPrefix({ profile: { path: 'p.json', sha256: '' } }, (f) => files[f]!, () => false), /^Error: profile-setup-file-missing:captureConfig: c\.json /);
 });
 
 test('overlay-size-not-control-default and drawn-border-color-not-folded: a textless circle keeps its 18 px height and its ring color', async () => {

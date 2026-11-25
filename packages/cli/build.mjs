@@ -25,7 +25,7 @@
  * which stays external and optional.
  */
 import { build } from 'esbuild';
-import { chmodSync, cpSync, readFileSync, rmSync } from 'node:fs';
+import { chmodSync, cpSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { viteGlobPlugin } from './vite-glob-plugin.mjs';
@@ -119,6 +119,16 @@ rmSync(path.join(here, 'dist', 'storybook-reader-image'), { recursive: true, for
 cpSync(path.join(here, '..', '..', 'scripts', 'storybook-reader-image'), path.join(here, 'dist', 'storybook-reader-image'), { recursive: true });
 // The plugin runs only the driver whose sha256 it pins (figma-sync/plugin/code.js): --write serves these exact bytes.
 cpSync(path.join(here, '..', '..', 'scripts', 'react-to-figma-driver.js'), path.join(here, 'dist', 'react-to-figma-driver.js'));
+// Profiles for `--profile <name>` (reviewer, 2026-11-25): the committed profile and every file its `setup` names, byte for
+// byte, at the same relative paths beside it, so its setup paths resolve against its own folder (src/profile-arg.ts).
+for (const [name, file] of [['carbon', 'examples/carbon/profile.json']]) {
+  const root = path.join(here, '..', '..'), to = path.join(here, 'dist', 'profiles', name);
+  rmSync(to, { recursive: true, force: true });
+  for (const [from, dest] of [[file, 'profile.json'], ...Object.values(JSON.parse(readFileSync(path.join(root, file), 'utf8')).setup ?? {}).map((rel) => [rel, rel])]) {
+    mkdirSync(path.dirname(path.join(to, dest)), { recursive: true });
+    cpSync(path.join(root, from), path.join(to, dest));
+  }
+}
 
 chmodSync(path.join(here, 'dist', 'cli.js'), 0o755);
 console.log('✔ @ds-contracts/cli built → dist/cli.js (+ lazy dist/computed.js, react-to-figma steps)');

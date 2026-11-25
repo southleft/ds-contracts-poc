@@ -8,6 +8,7 @@ import path from 'node:path';
 import { CliUsageError } from '../src/lib.js';
 import { parseReactToFigmaArgs, reactToFigmaCommand, reportLines, type ReactToFigmaSteps } from '../src/commands/react-to-figma.js';
 import { servePrograms, wrap, type ServedSet } from '../src/commands/react-to-figma-serve.js';
+import { bundledProfiles, resolveProfileArg } from '../src/profile-arg.js';
 
 const report = {
   refused: [{ subject: 'Layout/Grid', reason: 'grammar-out:layout-grid' }],
@@ -62,6 +63,22 @@ function sandbox(t: test.TestContext) {
   };
   return { dir, calls, log, steps, served, stopped: () => stopped };
 }
+
+test('--profile: a bundled name or a file; a setup path resolves beside the profile, then here, or the run is refused before any step', async (t) => {
+  const s = sandbox(t), dist = path.join(s.dir, 'dist'), bundled = path.join(dist, 'profiles', 'demo');
+  mkdirSync(path.join(bundled, 'cfg'), { recursive: true });
+  writeFileSync(path.join(bundled, 'profile.json'), JSON.stringify({ setup: { captureConfig: 'cfg/c.json' }, components: [{ name: 'A' }] }));
+  writeFileSync(path.join(bundled, 'cfg', 'c.json'), '{}');
+  assert.equal(resolveProfileArg('demo', dist), path.join(bundled, 'profile.json'));
+  assert.deepEqual(bundledProfiles(dist), ['demo']);
+  assert.equal(resolveProfileArg('nope', dist), undefined);
+  const broken = path.join(s.dir, 'broken.json');
+  writeFileSync(broken, JSON.stringify({ setup: { captureConfig: 'no/such.json' }, components: [{ name: 'A' }] }));
+  assert.throws(() => resolveProfileArg(broken, dist), /^Error: profile-setup-file-missing:captureConfig: no\/such\.json /);
+  await assert.rejects(reactToFigmaCommand(['--out', path.join(s.dir, 'd'), '--storybook', 'http://localhost:6006/', '--profile', broken], s.steps), /^Error: profile-setup-file-missing:captureConfig: /);
+  assert.equal(s.calls.length, 0, 'refused before any step');
+  assert.equal(existsSync(path.join(s.dir, 'd')), false, 'nothing written');
+});
 
 test('a run builds and serves the library\'s Storybook, reads it, writes contracts and programs, reports, and stops the server', async (t) => {
   const s = sandbox(t), out = path.join(s.dir, 'run'), profile = path.join(s.dir, 'profile.json');

@@ -16,9 +16,10 @@
  *     [--file-key <key>]   with a file key, the variables and component scripts for that file only
  */
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { resolveSetupPath, setupMissing } from './profile-setup.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { conventionSet } from '../core/profile-conventions.js';
 import { mintTokens } from '../core/mint-tokens.js';
@@ -616,10 +617,14 @@ export function profileConventions(stories: Pick<ReaderOutput, 'profile'>, read:
   return conventionSet((JSON.parse(bytes.toString()) as { conventions?: string[] }).conventions);
 }
 
-/** The class prefix the profile's own capture config names (`setup.captureConfig`, `library.classPrefix`), else ''. */
-export function profileClassPrefix(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => string = (file) => readFileSync(file, 'utf8')): string {
+/** The class prefix the profile's own capture config names (`setup.captureConfig`, `library.classPrefix`), else ''. The
+ *  config resolves beside the profile, then in the working directory; resolving nowhere is a named refusal. */
+export function profileClassPrefix(stories: Pick<ReaderOutput, 'profile'>, read: (file: string) => string = (file) => readFileSync(file, 'utf8'),
+  exists: (file: string) => boolean = existsSync): string {
   const config = stories.profile && (JSON.parse(read(stories.profile.path)) as { setup?: { captureConfig?: string } }).setup?.captureConfig;
-  return config ? String((JSON.parse(read(config)) as { library?: { classPrefix?: string } }).library?.classPrefix ?? '') : '';
+  if (!config) return '';
+  const file = resolveSetupPath(stories.profile!.path, config, exists) ?? (() => { throw setupMissing('captureConfig', config); })();
+  return String((JSON.parse(read(file)) as { library?: { classPrefix?: string } }).library?.classPrefix ?? '');
 }
 
 /** Whether aligning by position left a variant's own text on a part whose base element draws none: two different

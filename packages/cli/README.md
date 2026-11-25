@@ -26,7 +26,7 @@ The command is new in `0.5.0-rc.3`. A bare `npx @ds-contracts/cli` installs npm'
 | `--out <dir>` | Where the package and reports go. Required. |
 | `--name <npm name>` | The package name. Default: `@ds-contracts-generated/<component>`. |
 | `--fonts <manifest.json>` | Bundle the design's local font files and supplied notices in the React package. Its root import loads the fonts; the check installs the same archive. Checksums and declared family names are verified before fetching or writing. Required for every face the design's text draws: a missing face is refused by name before packaging (exit 3). See [font manifests](../../docs/PREVIEW.md). |
-| `--profile <profile.json>` | A system profile. Its `conventions` switch on the engine rules it names; an unknown one is refused by name before any fetch. The profile's sha256 is recorded in `result.json`. |
+| `--profile <profile.json \| carbon>` | A system profile file, or `carbon` for the Carbon profile that ships with the CLI. Its `conventions` switch on the engine rules it names; an unknown one is refused by name before any fetch. A `setup` file it names is looked for beside the profile, then in the current folder; one found in neither is refused by name (`profile-setup-file-missing`). The profile's sha256 is recorded in `result.json`. |
 | `--into <dir>` | Copy the generated sources (each `<Name>/` folder, `index.ts`, `tokens.css`) into a directory of your library once the run exits 0. A path there that holds other content is refused by name and nothing is written; identical files are left as they are. |
 | `--allow-failures` | Exit 0 even when a variant fails; the report still says FAIL. |
 
@@ -54,7 +54,7 @@ A green check is printed only when every variant passed.
 From inside your React library (it needs Storybook 7 or later with a React framework, and Docker):
 
 ```sh
-npx @ds-contracts/cli react-to-figma --out ./ds-contracts/r2f --file-key <your Figma file key> [--profile <profile.json>]
+npx @ds-contracts/cli react-to-figma --out ./ds-contracts/r2f --file-key <your Figma file key> [--profile <profile.json | carbon>]
 ```
 
 It builds your library's own Storybook with its own `storybook` binary and serves it on `localhost:6116`, reads every story in the pinned reader (a Playwright image run in Docker, so the references reproduce on any machine), and writes each component's contract and, with `--file-key`, the Figma programs that write it into that file. It prints one line per component: written, with its set and variant count, or refused, with every reason. A library without Storybook, with a renderer that is not React, or whose build fails is refused by name before anything is read. `--storybook <url>` reads a Storybook you already serve instead. Add `--write` to put them into Figma: the command serves the programs on `localhost:9232`; open the file in Figma Desktop and, in the ds-contracts plugin, press **React to Figma runner → Connect and run**. Every program refuses a file whose key is not `--file-key`, writes create-only (a set it already wrote is skipped) and archives or renames nothing. The plugin runs only the driver whose sha256 it pins. One line per set: written, with the nodes it created, or the program's error by name (exit 1 if any set failed; `<out>/figma-write.json` keeps the outcomes).

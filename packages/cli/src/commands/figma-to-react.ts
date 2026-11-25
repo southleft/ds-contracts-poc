@@ -19,9 +19,12 @@
  * demo contracts and tokens are bundled with the engine and still inform name
  * linking and nearest-token matching. macOS and Linux only in this release.
  */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { runFigmaToReact, type EngineLoader, type FigmaToReactRun } from '../../../../scripts/figma-to-react-lib.js';
 import { resolveToolchain } from '../../../../scripts/package-react-library.js';
 import { CliUsageError, flagString, parseFlags } from '../lib.js';
+import { resolveProfileArg } from '../profile-arg.js';
 
 export const FIGMA_TO_REACT_USAGE =
   'figma-to-react (--url <figma component-set link> | --dump <dump.json>) --out <dir> [--name <npm package name>] [--fonts <manifest.json>] [--native-strokes <receipt.json>] [--capture <set.capture.json>] [--profile <profile.json>] [--into <dir>] [--allow-failures]';
@@ -59,5 +62,7 @@ export async function figmaToReactCommand(argv: string[], env: { platform: strin
     throw new Error(`figma-to-react-platform-unsupported: this release runs on macOS and Linux (this is ${env.platform}); use WSL on Windows`);
   if (!nodeSupported(env.node))
     throw new Error(`figma-to-react-node-unsupported: needs Node 20.19+ (20.x) or 22.12+ (the check builds the package with Vite 7); this is ${env.node}`);
-  return runFigmaToReact(run, { loadEngine, toolchain: resolveToolchain(import.meta.url), label: 'figma-to-react' });
+  // A bundled name or a file; one that is neither is left as given, so the engine refuses it as profile-missing.
+  const profile = run.profile && resolveProfileArg(run.profile, path.dirname(fileURLToPath(import.meta.url)));
+  return runFigmaToReact({ ...run, ...(profile ? { profile } : {}) }, { loadEngine, toolchain: resolveToolchain(import.meta.url), label: 'figma-to-react' });
 }
