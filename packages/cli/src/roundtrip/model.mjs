@@ -5,7 +5,22 @@ import { parseTree, findNodeAtLocation } from 'jsonc-parser';
 import { hash, values } from './surface.mjs';
 export const read = (p) => readFileSync(p, 'utf8');
 export function patchJSON(text, path, before, after) {
-  const node = findNodeAtLocation(parseTree(text), path);
+  const errors = [];
+  const tree = parseTree(text, errors);
+  assert(tree && errors.length === 0, 'invalid source JSON');
+  const checkKeys = (node) => {
+    if (node.type === 'object') {
+      const keys = new Set();
+      for (const property of node.children ?? []) {
+        const key = property.children[0].value;
+        assert(!keys.has(key), 'duplicate source key: ' + key);
+        keys.add(key);
+      }
+    }
+    for (const child of node.children ?? []) checkKeys(child);
+  };
+  checkKeys(tree);
+  const node = findNodeAtLocation(tree, path);
   assert(node, 'missing source path');
   assert.deepEqual(JSON.parse(text.slice(node.offset, node.offset + node.length)), before, 'stale source value');
   return text.slice(0, node.offset) + JSON.stringify(after) + text.slice(node.offset + node.length);

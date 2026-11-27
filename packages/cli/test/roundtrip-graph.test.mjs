@@ -77,4 +77,12 @@ test('JSON token edits preserve surrounding text and refuse a stale value', () =
   );
   assert.throws(() => patchJSON(source, ['missing'], 0, 1), /missing source path/);
   assert.throws(() => patchJSON(source, ['semantic'], '{old}', '{replacement}'), /stale source value/);
+  assert.throws(
+    () => patchJSON('{"semantic":"{primitive}","semantic":"{primitive}"}', ['semantic'], '{primitive}', '{replacement}'),
+    /duplicate source key: semantic/,
+  );
+  assert.throws(
+    () => patchJSON('{"semantic":"{primitive}", broken}', ['semantic'], '{primitive}', '{replacement}'),
+    /invalid source JSON/,
+  );
 });
