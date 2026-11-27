@@ -56,7 +56,7 @@ Companion reading: [24 — What Works](24-what-works.md) (the success side) ·
 generality claim, and where it leaks) ·
 [conformance/EXPECTATIONS.md](../conformance/EXPECTATIONS.md) (the measured
 CSS/DOM frontier) · [docs/18 — User Flows](18-user-flows.md) (the ranked gap
-list with a verified status column) · [docs/16 — The Sync Boundary](16-sync-boundary.md)
+list with a verified status column) · docs/16 — The Sync Boundary
 (what is out of scope by decision rather than by unfinished work).
 
 Section numbers changed in this re-cut. The old §N → new §X.N crosswalk is
@@ -175,7 +175,7 @@ carry no end-to-end signature (§B.14).
 ## A.4 Out of scope by decision — not gaps
 
 These will not be fixed, and saying so is the point
-([docs/16](16-sync-boundary.md)):
+(docs/16):
 
 - **Web DOM only.** Every capture is a browser-computed fact from a headless
   Chromium page. Non-DOM renderers — React Native, Flutter, native toolkits —
@@ -342,7 +342,7 @@ and Carbon's checkbox **checkmark** is refused as `pseudo-decor-outside-grammar`
 ## B.6 Shadow DOM: depth-3 nesting is not exercised
 
 Open shadow roots are tier-1 supported (Altitude, library #8). **Depth-2
-shadow nesting is exercised; depth-3 is not** ([docs/16](16-sync-boundary.md)).
+shadow nesting is exercised; depth-3 is not** (docs/16).
 Altitude's `al-alert` family was dropped from the round for exactly that
 reason. (Closed roots are [§A.4](#a4-out-of-scope-by-decision--not-gaps) —
 physics, not backlog.)
@@ -1736,7 +1736,7 @@ the number was taken.** The bounds, cited:
 list, date picker, rich text and charts appear in **zero** committed contracts
 across all six foreign libraries. This repo's own 51 contracts *do* include a
 `table` / `table-row` / `table-cell` family
-([docs/09](09-advanced-components.md)) — but those are hand-authored here, not
+(docs/09) — but those are hand-authored here, not
 captured from a foreign library, and they are not evidence that a foreign data
 grid can be captured.
 

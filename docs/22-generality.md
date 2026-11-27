@@ -10,7 +10,7 @@ the evidence, states the metric that would falsify the claim, and — in the
 honest ledger at the bottom — names the four places where the claim as usually
 stated is **not** true today.*
 
-Companion reading: [docs/16 — The Sync Boundary](16-sync-boundary.md) (what a
+Companion reading: docs/16 — The Sync Boundary (what a
 contract carries and the tier-1 supported set),
 [docs/20 — Regate Drift](20-regate-drift.md) (the instrument this document cites
 for numbers), and [docs/21 — Bring Your Own Design System](21-bring-your-own-design-system.md)
@@ -86,7 +86,7 @@ Five distinct styling architectures — build-time atomic, runtime CSS-in-JS,
 utility-first, precompiled stylesheets, and **shadow DOM** — plus three
 token-delivery shapes (`:root`, class-scoped themes, and `:root` values
 *inherited across a shadow boundary* into constructed stylesheets). The tier-1
-guarantee in [docs/16](16-sync-boundary.md) is exactly this set.
+guarantee in docs/16 is exactly this set.
 
 Library #8 is the one that cost real engine work, and it is worth being precise
 about how much: **one engine file** (`extract/computed/capture.ts`), and every
@@ -634,13 +634,13 @@ captured at all*, and it is the largest qualifier in this document.
 ### 8.2 Scope boundaries by decision
 
 - **Web DOM only.** Every capture is a browser-computed fact from a headless
-  Chromium page. The tier-1 supported set in [docs/16](16-sync-boundary.md) is
+  Chromium page. The tier-1 supported set in docs/16 is
   React and Web Components (CEM) with five styling methods. Non-DOM renderers
   (React Native, Flutter, native toolkits) are outside the computed floor
   entirely — not "not yet", but not on this path.
 - **Behavior, motion, and a11y semantics beyond states** are downstream
   concerns the contract deliberately leaves to the code that owns them
-  ([docs/16](16-sync-boundary.md)).
+  (docs/16).
 - **Overlay state planes do not exist in the captured truth.** `portalSweep`
   mounts and unmounts per combo, so hover / focus-visible / active planes for
   Dialog, Menu and Tooltip are absent, fusion skips them by name, and those
@@ -992,6 +992,6 @@ holds the committed numbers to the committed artifacts in between.
   [docs/18](18-user-flows.md), not a solved problem.
 - That the supported set is "all design systems." It is React + Web Components
   on the web DOM (light DOM and open shadow DOM), five styling methods, per
-  [docs/16](16-sync-boundary.md).
+  docs/16.
   Everything outside degrades gracefully — correct pixels, poorer token names —
   and graduates via a community reader plugin under the open spec.

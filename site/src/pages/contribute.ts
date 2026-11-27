@@ -30,7 +30,7 @@ npx tsc --noEmit  # src, scripts, extract, parity, evals`, 'bash', 'CONTRIBUTING
 <h2 id="rfc">Proposing a schema change — the RFC convention</h2>
 <p>The schema grows by demonstrated need. A proposal starts from a <strong>field case</strong> — a real component in a real system that cannot be expressed honestly today — and must state its projection on <em>all four emitters</em>, its refusal rules, and its receipts plan before any code lands. Proposals live as numbered files under <a href="${REPO_URL}/tree/main/site/governance"><code>site/governance/</code></a>; rejected proposals are kept, with reasons — a rejected proposal is a receipt too.</p>
 <p>The site itself enforces the documentation step: the <a href="/spec/#coverage">coverage guard</a> fails the build when the schema grows a branch this reference doesn't document, so an accepted RFC cannot ship undocumented.</p>
-<p class="section-note">No RFCs predate this convention. The schema's v2–v13 history was built before it existed and is documented as history — in <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a> and the <a href="/spec/versioning/">versioning page</a> — not retro-fitted into RFC files.</p>
+<p class="section-note">No RFCs predate this convention. The schema's v2–v13 history was built before it existed and is documented as history — in the <a href="/spec/versioning/">versioning page</a> — not retro-fitted into RFC files.</p>
 
 <h3>The template</h3>
 <p>Copy <a href="${REPO_URL}/blob/main/site/governance/TEMPLATE.md"><code>site/governance/TEMPLATE.md</code></a> — rendered below from the committed file:</p>

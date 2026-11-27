@@ -15,7 +15,7 @@ this file at `/how-it-works/flow/` with the engine replays beside it; the
 Playground's two guided tours walk the same hops on the same fixtures.
 
 > **Where this sits.** [00 — Choose Your Path](00-choose-your-path.md) tells
-> you which situation is yours. [00 — Getting Started](00-getting-started.md)
+> you which situation is yours. 00 — Getting Started
 > is the five-minute orientation. [01 — Architecture](01-architecture.md)
 > states the model. This page is the *mechanics* of that model: what
 > physically crosses each hop, what is refused, and what is written down.
@@ -174,7 +174,7 @@ Use these five names everywhere. "Sync" is not one of them.
 | hop | verb | reads | writes | refuses by name |
 |---|---|---|---|---|
 | 1 | `ds-contracts extract [config] [--draft-capture-config]` (`packages/cli/src/cli.ts:58-62`) | `ds-contracts.config.json` + source via `react-tsx` \| `cem` | `<out>/code-extraction.json`, `<out>/contracts/*.contract.json` (schema-valid proposals), `<out>/proposals.md`, a DRAFT capture config with `__review:*` markers | every later verb refuses an unreviewed draft config; "there is no flag that skips the gate" (`cli.ts:46-49`) |
-| 1 | `ds-contracts extract --computed --config <capture.json> [--harness <dir>] [--out <dir>]` (`cli.ts:64-65`) | capture config + a sandbox with the library installed + Chromium | `extract/computed/out/<component>/` (capture, fuse, replay, scorecard) + `*.extension.json` — every captured fact the vocabulary refuses, with its reason ([16 — The Sync Boundary](16-sync-boundary.md)) | exit 3 when playwright-core / Chromium is missing; non-carryable transforms refused `pseudo-decor-outside-grammar` (`extract/computed/anatomy.ts:2281`) |
+| 1 | `ds-contracts extract --computed --config <capture.json> [--harness <dir>] [--out <dir>]` (`cli.ts:64-65`) | capture config + a sandbox with the library installed + Chromium | `extract/computed/out/<component>/` (capture, fuse, replay, scorecard) + `*.extension.json` — every captured fact the vocabulary refuses, with its reason (16 — The Sync Boundary) | exit 3 when playwright-core / Chromium is missing; non-carryable transforms refused `pseudo-decor-outside-grammar` (`extract/computed/anatomy.ts:2281`) |
 | 1 | `ds-contracts promote --config <ds-library.json>` (`cli.ts:50-53`) | enriched contracts + minted tree | promoted contracts, `*-minted.dtcg.json` (source-aliased), `*.anchors.json` | the WHOLE promotion if any `{imported.*}` ref or alias fails to resolve (`packages/cli/src/promote.ts:28-29`) |
 | 2 | `ds-contracts figma bundle <contracts..> --out <file> --tokens <base[,minted]> \| <dir> \| slot=file,… [--modes] [--name] [--icons]` | contract files as RAW bytes + token set + icon SVGs | ONE `CONTRACTS-BUNDLE` JSON `{type, version: 1, tokenSet, icons?, contracts, codeOnlyFacts}` (`packages/cli/src/commands/figma.ts:639-646`); stdout lists every code-only fact per contract | missing provenance (`figma.ts:387-391`); drawable-empty anatomy (`:393`); any contract that does not compile against this token set — ONE list, nothing written (`:617-618`, quoted in §4.3) |
 | 2 | plugin **Build** tab (paste) · `figma push <bundle> --code <CODE>` · `figma claim-channel` + `figma publish` → **Changes** tab "Check for updates" → **Apply selected** | bundle | component sets + variable collections; each set stamped `ds_contracts/{contractId, specHash, version, canvasFingerprint, canvasSnapshot, canvasSetSnapshot, codeOnlyFacts, semantics}` — all eight keys written by the compiled script (`core/emit-figma-script.ts`); the drift check at `figma-sync/plugin/code.js:496-611` reads back five of them: `contractId`, `specHash`, `canvasFingerprint`, `canvasSnapshot`, `canvasSetSnapshot` | `planGenerate` validates every contract; all-or-nothing (`entry.ts:922`, quoted in §4.3) |
@@ -265,7 +265,7 @@ mechanically.
 
 The schema is the referee on every door; a fact outside it cannot enter
 silently. Code-side overflow lands in `*.extension.json` with a reason
-([16 — The Sync Boundary](16-sync-boundary.md)); canvas-side overflow lands in
+(16 — The Sync Boundary); canvas-side overflow lands in
 proposal `notes[]` / `unbound[]` / dump `_degradations`.
 
 ### 4.2 The disposition of every fact in a hop

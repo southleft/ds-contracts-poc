@@ -2,7 +2,7 @@
 
 Owner decision, 2026-09-29. This extends [docs/GOAL.md](GOAL.md) (Beta 1).
 Current state, evidence and every rule are in
-[docs/HANDOFF-2026-09-29.md](HANDOFF-2026-09-29.md); read it first.
+docs/HANDOFF-2026-09-29.md; read it first.
 
 ## The thesis
 

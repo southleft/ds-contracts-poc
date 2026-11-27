@@ -1733,7 +1733,7 @@ ${section(
   "current",
   "Current version",
   ["curated"],
-  `<p>The schema is at <strong>${SCHEMA_V}</strong> — one live document, <code>scripts/contract-schema.ts</code>, reflected by <code>npm run schema</code> into the generated JSON Schema (<code>contracts/contract.schema.json</code>) and published as <code>@ds-contracts/schema</code> (its semver major <em>is</em> the spec version; the JSON Schema ships in the package at <code>@ds-contracts/schema/contract.schema.json</code> — point your editor's <code>$schema</code> at it). Every reference page on this site is generated from the same source at build time, so this site always documents the current version. What changed, when, and why is the repository’s history: see the <a href="${REPO_URL}/blob/main/CHANGELOG.md">CHANGELOG</a> and <a href="${REPO_URL}/blob/main/MILESTONES.md">MILESTONES.md</a> on GitHub.</p>`,
+  `<p>The schema is at <strong>${SCHEMA_V}</strong> — one live document, <code>scripts/contract-schema.ts</code>, reflected by <code>npm run schema</code> into the generated JSON Schema (<code>contracts/contract.schema.json</code>) and published as <code>@ds-contracts/schema</code> (its semver major <em>is</em> the spec version; the JSON Schema ships in the package at <code>@ds-contracts/schema/contract.schema.json</code> — point your editor's <code>$schema</code> at it). Every reference page on this site is generated from the same source at build time, so this site always documents the current version. What changed, when, and why is the repository’s history: see the <a href="${REPO_URL}/blob/main/CHANGELOG.md">CHANGELOG</a> on GitHub.</p>`,
 )}
 
 ${section(

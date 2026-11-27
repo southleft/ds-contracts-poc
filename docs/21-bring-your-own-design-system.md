@@ -51,7 +51,7 @@ There are two doors into this repo, and choosing wrong wastes a day.
 
 | Your library ships… | Route | Effort |
 |---|---|---|
-| static CSS (CSS Modules, plain classes) or a Custom Elements Manifest | **the static path** — [docs/13](13-try-it-with-your-system.md), `npx @ds-contracts/cli extract` | minutes; no browser |
+| static CSS (CSS Modules, plain classes) or a Custom Elements Manifest | **the static path** — docs/13, `npx @ds-contracts/cli extract` | minutes; no browser |
 | runtime styling (Emotion, StyleX, Tailwind utilities, compiled-CSS-with-theme-scopes) | **the computed-capture floor** — this page | hours |
 
 The computed floor renders your real package in a pinned headless Chromium and
