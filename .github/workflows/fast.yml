@@ -192,7 +192,7 @@ jobs:
 
       - name: package smoke @ds-contracts/schema
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm --prefix packages/schema run package:smoke
+        run: cd packages/schema && npm pack --dry-run --json
 
       - name: typecheck @ds-contracts/emitter-web-components
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
