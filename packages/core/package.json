@@ -21,8 +21,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "package:smoke": "npm pack --dry-run --json"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@ds-contracts/schema": "^17.0.0-rc.1"
