@@ -8,6 +8,42 @@
 
 `ds-contracts` — contracts as the deterministic bridge between design and code. Every verb is a thin shell over the same engine the reference repo's npm scripts run, esbuild-bundled. Only `figma-to-react` uses the installed dependencies: it packages with the pinned `esbuild`, `typescript` and `@types/react`, and checks with `playwright-core`. `playwright-core` is optional and loaded only when needed, as it is for `extract --computed`.
 
+## Reviewed React ↔ Figma edits: `roundtrip`
+
+This opt-in workflow captures an existing React component with its real stylesheet,
+creates native Figma variants and variables, and writes reviewed color-token edits
+back to the original JSON. It preserves aliases and SVG dependencies; application
+behavior stays in React. Layout edits, arbitrary CSS, responsive states and new
+application behavior are not supported by this workflow. It is not a benchmark result.
+
+Requirements: Node 20.19.4, Docker running, installed project dependencies, a local
+font file also available in Figma, and the matching DS Contracts Sync Runner plugin.
+The shipped [Checkbox profile](examples/roundtrip-checkbox.json) runs from this
+repository's root. Copy it into your own configuration, set its font path and Figma
+file key, create the named page, and choose an empty position. The profile explicitly
+declares source files, token tiers and selectors; it does not infer missing tiers.
+Only use profiles you trust: `capture.build` runs their declared local commands.
+
+```sh
+ds-contracts roundtrip start --profile ./checkbox-profile.json --out ./roundtrip-session
+ds-contracts roundtrip sync --session ./roundtrip-session
+# In the plugin: Advanced → React to Figma runner → Connect and run.
+# Edit a bound color variable or its alias in Figma, then:
+ds-contracts roundtrip sync --session ./roundtrip-session
+# Connect and run again; review the exact JSON edits and digest printed by the CLI.
+ds-contracts roundtrip apply --session ./roundtrip-session --digest <printed-digest>
+ds-contracts roundtrip sync --session ./roundtrip-session
+# Connect and run to verify the return projection.
+```
+
+For code-led token changes, run `refresh`, then `sync`. Use `status` to inspect the
+session and `discard` to cancel an unapplied review. If port 9232 is occupied, add
+`--port 9231` to `sync` and select 9231 in the plugin. Unsupported canvas edits and
+missing dependencies are refused; undo the unsupported edit and retry. A source
+revision conflict requires restoring or reconciling the changed input before retrying.
+`read`, `review --snapshot` and `accept --snapshot` remain available for manual exchange.
+The session retains the contract, source fingerprints, native snapshot and reviewed plan.
+
 ## Figma → React: `figma-to-react`
 
 A Figma component set becomes an installable React package, checked against the design. No clone of the reference repo is needed:

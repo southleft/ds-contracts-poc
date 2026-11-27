@@ -98,6 +98,14 @@ await build({
   external: ['playwright-core'],
 });
 
+await build({
+  ...shared,
+  mainFields: ['module', 'main'],
+  entryPoints: [path.join(here, 'src', 'roundtrip', 'index.mjs')],
+  outfile: path.join(here, 'dist', 'roundtrip.js'),
+  external: ['esbuild', 'playwright-core'],
+});
+
 // react-to-figma's three steps, each its own bundle beside cli.js, run as their own processes exactly as in the
 // repository; the reader's pinned image folder ships beside them (storybook-reader.ts PINNED resolves it there).
 // In a bundle every module shares the bundle's import.meta.url and argv[1], so a module's "am I main?" check would
