@@ -862,7 +862,7 @@ figma.ui.onmessage = async (msg) => {
     busy = false;
   } else if (msg.type === 'run-r2f') {
     busy = true;
-    await runReactToFigma(msg.port);
+    await runReactToFigma();
     busy = false;
   }
 };
@@ -980,13 +980,11 @@ async function runLocalRunner() {
 // ---------------------------------------------------------------------------
 const R2F_BASE = 'http://localhost:9232';
 const R2F_DRIVER_SHA256 = '6827b14b001a9f95105a9eebea8078991da4481bd181cea8ccf6da4206b598e6';
-async function runReactToFigma(port) {
+async function runReactToFigma() {
   const done = (ok, summary) => post({ type: 'r2f-done', ok, summary });
-  if (port != null && ![9231, 9232].includes(port)) return done(false, 'Unsupported runner port');
-  const base = port === 9231 ? R2F_BASE.replace(':9232', ':9231') : R2F_BASE;
   let driver;
   try {
-    const res = await fetch(base + '/driver');
+    const res = await fetch(R2F_BASE + '/driver');
     driver = (await res.json()).driver;
     if (typeof driver !== 'string' || !driver) throw new Error('the runner sent no driver');
   } catch (e) {
@@ -999,7 +997,7 @@ async function runReactToFigma(port) {
   post({ type: 'r2f-log', line: 'Connected to the runner; running its programs in "' + figma.root.name + '" (' + (figma.fileKey || 'no file key') + '). Keep this file in front.' });
   figma.notify('React to Figma: running the runner\'s programs…', { timeout: 3000 });
   try {
-    const end = await runScript(driver.replace(R2F_BASE, base));
+    const end = await runScript(driver);
     if (end && end.refused) return done(false, 'React to Figma: the runner refused: ' + end.refused);
     if (end && end.stop) return done(false, 'React to Figma: the runner stopped: ' + end.stop + ' (see its stop.json)');
     if (end && typeof end.summary === 'string') return done(end.ok === true, 'React to Figma: ' + end.summary);   // ds-contracts react-to-figma --write

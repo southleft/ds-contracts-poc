@@ -18,7 +18,6 @@ import { figmaCommand } from './commands/figma.js';
 import { diffCommand } from './commands/diff.js';
 import { proposePrCommand } from './commands/propose-pr.js';
 import { migrateCommand } from './commands/migrate.js';
-import { roundtripCommand } from './commands/roundtrip.js';
 
 declare const __DS_CONTRACTS_CLI_VERSION__: string;
 const VERSION = typeof __DS_CONTRACTS_CLI_VERSION__ === 'string' ? __DS_CONTRACTS_CLI_VERSION__ : 'dev';
@@ -28,9 +27,6 @@ const USAGE = `ds-contracts ${VERSION} — contracts as the deterministic bridge
 Usage: ds-contracts <command> [options]
 
 Commands:
-  roundtrip start --profile <file> --out <dir>  capture a declared React component and begin a
-  roundtrip <action> --session <dir>           system-aware, reviewed token round trip.
-                                              Actions: sync, accept, read, review, apply, refresh, status, discard.
   figma-to-react --url <component-set link>   a Figma component set → an installable React
           | --dump <dump.json>                package (<out>/<name>.tgz), then CHECKED against
           --out <dir> [--name <npm name>]     the design: each variant is mounted from the
@@ -162,26 +158,6 @@ ds-contracts <command> --help prints that command's section from this reference.
 `;
 
 const COMMAND_HELP: Record<string, string> = {
-  roundtrip: `ds-contracts roundtrip — a declared React component, native Figma and reviewed source edits
-
-  start --profile <profile.json> --out <session> [--root <source root>]
-  sync --session <session> [--port 9232|9231]
-  accept --session <session> --snapshot <Figma result.json>
-  read --session <session>
-  review --session <session> --snapshot <Figma result.json>
-  apply --session <session> --digest <reviewed digest>
-  refresh --session <session>
-  status --session <session>
-  discard --session <session>
-
-Capture uses the source component, stylesheet and supplied font in pinned Chromium (Docker).
-Start, apply and refresh prepare a guarded Figma program. Use sync, then Connect and run
-in the plugin's Advanced tab, to exchange it and verify the result automatically.
-Sync on a ready session reviews canvas changes. Apply requires the reviewed digest.
-Read and accept support a manual JSON handoff. Discard cancels an unapplied review.
-Only source-backed color variable values and aliases can be written back; other canvas
-edits and missing dependencies are refused. Behavior remains in the original React source.
-This opt-in workflow requires an explicit profile. It does not qualify arbitrary components.`,
   'react-to-figma': `ds-contracts react-to-figma — this React library's components → contracts and Figma programs
 
   react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>]
@@ -365,7 +341,6 @@ async function main(): Promise<number> {
     case 'migrate':
     case 'figma-to-react':
     case 'react-to-figma':
-    case 'roundtrip':
       if (wantsHelp(rest)) {
         console.log(COMMAND_HELP[command] ?? USAGE);
         return 0;
@@ -375,8 +350,6 @@ async function main(): Promise<number> {
       break;
   }
   switch (command) {
-    case 'roundtrip':
-      return roundtripCommand(rest);
     case 'onboard':
       return onboardCommand(rest);
     case 'promote':

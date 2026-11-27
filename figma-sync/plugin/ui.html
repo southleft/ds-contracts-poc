@@ -492,8 +492,6 @@
       time, in place of the Desktop Bridge driver. Every program refuses a file
       other than the one the runner names. Keep this file in front while it runs.</div>
     <div class="row">
-      <label for="r2f-port">Runner port</label>
-      <select id="r2f-port"><option value="9232">9232</option><option value="9231">9231</option></select>
       <button class="secondary" id="r2f-run" data-busy="Running…">Connect and run</button>
       <span class="status" id="r2f-status"></span>
     </div>
@@ -2087,7 +2085,7 @@
     $('r2f-result').hidden = false;
     $('r2f-result').className = 'result';
     $('r2f-headline').textContent = '';
-    parent.postMessage({ pluginMessage: { type: 'run-r2f', port: Number($('r2f-port').value) } }, '*');
+    parent.postMessage({ pluginMessage: { type: 'run-r2f' } }, '*');
   };
 
   function appendLog(line, level) {

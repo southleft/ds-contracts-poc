@@ -9,6 +9,6 @@ Current step: the November 25 signed entry starts with a private, property-by-pr
 - [x] Privately verify capture, native projection, review, guarded token-source writeback, and recapture through the installed CLI and product plugin.
 - [x] Preserve actual primitive → semantic → component aliases, the glyph dependency, native identities, authored behavior, and consumer overrides.
 - [x] Refuse missing fonts, missing dependencies, unsupported edits, and stale source; verify deterministic repeat captures.
-- [ ] Land the integration in independently reviewed PRs, each at most 300 net lines. The first contains the contract graph and guarded writeback foundation; the remaining CLI stays a local candidate.
+- [ ] Land the integration in independently reviewed PRs, each at most 300 net lines. The first contains the token and component dependency graph; the remaining CLI stays a local candidate.
 - [ ] Complete package and release qualification. The full eval copies repository folders and was not run under the one-folder rule.
 - [ ] Have an outside user finish the published quickstart. Publication, tags, and releases remain owner-only; no private-beta completion claim yet.
