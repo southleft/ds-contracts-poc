@@ -43,7 +43,10 @@ In Figma Desktop, choose **Plugins → Development → Import plugin from manife
 and select `private/roundtrip-install/ds-contracts-sync-runner/manifest.json`.
 Open your writable Figma test file and run **DS Contracts Sync Runner** from the
 Development menu. This ZIP is the matching plugin build; the npm package alone
-does not install it.
+does not install it. If older development copies share this plugin name, remove
+those registrations in **Manage plugins in development** and run the newly imported
+copy. Keep their source folders. The Advanced tab's Diagnostics build stamp must match
+the one printed by `npm run plugin:zip`; an older stamp means an older copy is running.
 
 Edit `private/roundtrip-profile.json`: set `figma.fileKey` to that file's key from
 its URL and `capture.font.file` to your local Inter font file. Create the page
