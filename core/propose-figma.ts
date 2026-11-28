@@ -20761,7 +20761,7 @@ function proposeBatchFromDumpInternal(
       }
       proposals.push(proposal);
     } catch (e) {
-      if (opts.buttonDeclaration?.nodeId === value.nodeId) throw e;
+      if (opts.buttonDeclaration && opts.buttonDeclaration.nodeId === value.nodeId) throw e;
       const plain = plainWordsProposalError(e);
       skipped.push({
         setName: name,
