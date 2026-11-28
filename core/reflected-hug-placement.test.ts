@@ -104,6 +104,12 @@ async function prepared(p:Pick<ReturnType<typeof propose>,'contract'|'contracts'
  const host=nativeFixtureHost({consumerVariableModes:true});
  const createText=host.figma.createText.bind(host.figma);host.figma.createText=()=>{const node=createText();delete node.clipsContent;return node;};
  const proto=Object.getPrototypeOf(host.figma.currentPage),measure=proto._measureText;
+ const bind=proto.setBoundVariable;
+ proto.setBoundVariable=function(field:string,variable:any){
+  const result=bind.call(this,field,variable);
+  if(field==='lineHeight'&&variable){this.lineHeight={unit:'PIXELS',value:variable.resolveForConsumer(this).value};this.boundVariables.lineHeight=[{type:'VARIABLE_ALIAS',id:variable.id}];}
+  return result;
+ };
  const originalTransform=Object.getOwnPropertyDescriptor(proto,'relativeTransform');
  Object.defineProperty(proto,'relativeTransform',{configurable:true,get(){return [[1,0,this.x],[0,1,this.y]];}});
  proto._measureText=function(axis:string){return axis==='h'&&!this._resized&&this.lineHeight?.unit==='PIXELS'&&!/[\r\n]/.test(this.characters??'')?this.lineHeight.value:measure.call(this,axis);};
@@ -117,26 +123,14 @@ async function prepared(p:Pick<ReturnType<typeof propose>,'contract'|'contracts'
  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
  const input={operation,planRevision:revisionOf(compiled),projection:compiled.projection,component:compiled.component,graphComponents:compiled.components,graphVerification:2 as const,tokenInput,tokenIdentity:allocated.creationIdentity,creation};
  const receipt=await run(emitNativePreparedLibraryReadbackScript(input));
- // These are geometry observations, not proof that the writer binds typography.
- // Keep an explicit unbound refusal and supply only declared, unchanged pixel
- // bindings; caller scalar overrides retain their own literal line height.
- const specs:any[]=[];const visit=(s:any)=>{if(s.type==='text')specs.push(s);(s.children??[]).forEach(visit);};
- for(const c of compiled.components)for(const v of c.variants)visit(v.spec);
- const unbound=structuredClone(receipt);let bound=0;
- for(const n of receipt.nodes){
-  const s=specs.find(s=>JSON.stringify(s.nativeContractPart)===n.metadata.nativeContractPart);
-  if(s?.lineHeightVar&&s.lineHeight?.unit==='PIXELS'&&n.values.lineHeight?.unit==='PIXELS'&&n.values.lineHeight.value===s.lineHeight.value){
-   const variable=allocated.creationIdentity.variables.find((v:any)=>v.tokenPath===s.lineHeightVar.replaceAll('/','.'));assert(variable);
-   n.values.boundVariables.lineHeight=[{type:'VARIABLE_ALIAS',id:variable.id}];
-   delete unbound.nodes.find((r:any)=>r.id===n.id).values.boundVariables.lineHeight;bound++;
-  }
- }
- assert(bound>0);assert.equal(verifyNativePreparedLibraryReadback(input,unbound).status,'refused');
+ // This fixture now verifies actual writer output, including bound typography.
+ const unbound=structuredClone(receipt);for(const n of unbound.nodes)if(n.type==='TEXT')delete n.values.boundVariables.lineHeight;
+ assert.equal(verifyNativePreparedLibraryReadback(input,unbound).status,'refused');
  return {input,receipt};
- }finally{proto._measureText=measure;if(originalTransform)Object.defineProperty(proto,'relativeTransform',originalTransform);else delete proto.relativeTransform;}
+ }finally{proto.setBoundVariable=bind;proto._measureText=measure;if(originalTransform)Object.defineProperty(proto,'relativeTransform',originalTransform);else delete proto.relativeTransform;}
 }
 
-test('independent reader verifies reflected HUG placement with explicit typography bindings',async()=>{
+test('native writer and reader preserve reflected HUG placement and typography bindings',async()=>{
  const {input,receipt}=await prepared(propose()),result=verifyNativePreparedLibraryReadback(input,receipt);
  assert.equal(result.status,'supported-structure-observed',JSON.stringify(result));
  const labels=receipt.nodes.filter((n:any)=>n.name==='label');assert.equal(labels.length,2);
@@ -166,6 +160,7 @@ test('supplied and omitted scalar values reflow cloned HUG owners after final te
   const descendants:any[]=[];const walk=(n:any)=>{for(const id of n.childIds){const child=receipt.nodes.find((x:any)=>x.id===id);assert(child);descendants.push(child);walk(child);}};walk(instance);
   const label=descendants.find(n=>n.metadata.intrinsicPlacement);assert(label);
   const text=receipt.nodes.find((n:any)=>n.id===label.childIds[0]),parent=receipt.nodes.find((n:any)=>n.id===label.parentId);assert(text);assert(parent);
+  if(supplied)assert.equal(text.values.boundVariables.lineHeight,undefined,'explicit scalar override removes the main token binding');
   assert.equal(text.values.fontSize,supplied?12:14);assert.equal(text.values.lineHeight.value,supplied?20:22);
   assert.equal(label.values.width,text.values.width);assert.equal(label.values.height,text.values.height);
   assert.equal(label.values.x,parent.values.width-16-label.values.width);assert.equal(label.values.y,(parent.values.height-label.values.height)/2);

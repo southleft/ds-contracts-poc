@@ -10061,6 +10061,13 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
       for(const child of s.children??[])mark(child);
     };for(const C of featureDatas)for(const v of [...C.variants,...(C.stateVariants??[])])mark(v.spec);
   }
+  const nativePixelLineHeightBinding = opts.nativeSource ? `
+    if (spec.nativeContractPart && !spec.slotTextTemplate && spec.lineHeightVar && spec.lineHeight && spec.lineHeight.unit === 'PIXELS') {
+      const variable = need(spec.lineHeightVar), resolved = variable.resolveForConsumer(node);
+      if (variable.resolvedType !== 'FLOAT' || typeof resolved?.value !== 'number' || !Number.isFinite(resolved.value) ||
+          Math.fround(resolved.value) !== Math.fround(spec.lineHeight.value)) throw new Error('native-line-height-value-mismatch');
+      node.setBoundVariable('lineHeight', variable);
+    }` : '';
   const scalarTextInitialization=`    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}${hasTextBox ? `
@@ -10102,7 +10109,7 @@ function placeCells(target, specByName, rowsN, colsN, keepExtra) {
     // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
 ${opts.nativeSource ? `    if (spec.nativeContractPart && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
-    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${nativePixelLineHeightBinding}${hasSlotTextTemplate ? `
     if (spec.slotTextTemplate) {
       if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
       if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
@@ -10176,7 +10183,7 @@ async function applyScalarText(node,spec,initialCharacters,reset) {
     // variable weights are not reduced to a static face-name fallback.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
 ${opts.nativeSource ? `    if ((spec.nativeContractPart || spec.nativeWeightBinding) && !spec.slotTextTemplate && spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));\n` : ''}
-    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${nativePixelLineHeightBinding}${hasSlotTextTemplate ? `
     if (spec.slotTextTemplate) {
       if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
       if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
