@@ -187,6 +187,11 @@ This opt-in workflow requires an explicit profile. It does not qualify arbitrary
 
   react-to-figma --out <dir> [--storybook-dir <library> | --storybook <url>] [--profile <profile.json>]
     [--only <titles.json>] [--file-key <figma file key> [--write]]
+  react-to-figma (--prepared <checked-output> | --resume) --out <session> --file-key <key>
+    [--mode light|dark] [--brand default] [--write] [--retry-creation]
+
+Prepared libraries use the existing companion's Build → Connect the local source workflow on localhost:5181.
+--resume reopens retained inputs; --retry-creation requires --resume --write and a confirmed refusal. Omit it after an interrupted retry.
 
 Builds the library's own Storybook (default: the current directory) with its own
 storybook binary and serves it locally; a library without one is refused by name.

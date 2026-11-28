@@ -1,12 +1,4 @@
-/**
- * `ds-contracts react-to-figma` — from inside a React library: its own Storybook, built and served
- * (scripts/storybook-local.ts), read in the pinned reader (scripts/storybook-reader.ts, Docker), then each component's
- * contract and, with --file-key, its Figma programs (scripts/storybook-contracts.ts), one row per component with every
- * refusal named. The three steps ship as their own bundles beside dist/cli.js (build.mjs) and run as they do in the
- * repository; this verb only orders them and reads their reports. Writing into Figma is the plugin's (next step).
- *
- *   npx @ds-contracts/cli react-to-figma --out ./ds-contracts/r2f [--storybook-dir .] [--profile p.json] [--file-key <key>]
- */
+/** Storybook capture or a prepared library, through the installed CLI. */
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -70,6 +62,8 @@ export function reportLines(report: { refused: Array<{ subject: string; reason: 
 }
 
 export async function reactToFigmaCommand(argv: string[], steps: ReactToFigmaSteps = bundledSteps, log = (l: string) => console.log(l)): Promise<number> {
+  if (argv.includes('--prepared') || argv.includes('--resume'))
+    return (await import('./prepared-native.js')).preparedNativeCommand(argv, log);
   const run = parseReactToFigmaArgs(argv), out = path.resolve(run.out);
   if (existsSync(out) && readdirSync(out).length) throw Error(`react-to-figma-out-not-empty: ${out}`);
   for (const [flag, file] of [['--profile', run.profile], ['--only', run.only]] as const) if (file && !existsSync(file)) throw Error(`react-to-figma-file-missing: ${flag} ${file}`);

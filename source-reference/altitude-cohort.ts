@@ -1,11 +1,11 @@
-import { readFileSync } from 'node:fs';
+import buttonProfile from './altitude-button.json' with {type:'json'};
 import type { SourceProfile } from './check.js';
 
 /** Selected before measuring; expectations derive from the pinned source's
  * component SCSS, general.scss label mixin and tokens-dark.scss, not screenshots.
  * This is a reference adapter, not automatic organization onboarding. */
 export const altitudeRevision = '0639eccd15bfedc4fa9713d9545a64cef2c0f0a5';
-const button: SourceProfile = JSON.parse(readFileSync(new URL('./altitude-button.json', import.meta.url),'utf8'));
+const button = buttonProfile as SourceProfile;
 const source = `Altitude ${altitudeRevision}: components/{button,checkbox,card}/*, styles/core/mixins/general.scss, styles/dist/scss/theme/tokens-dark.scss; actual Storybook dark provider`;
 const theme = {'--al-theme-color-body-background':'#101010'};
 const checkbox: SourceProfile = {
