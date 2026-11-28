@@ -254,7 +254,7 @@ const GATES = [
   },
   {
     name: "typecheck-cli",
-    command: ["npm", "--prefix", "packages/cli", "run", "typecheck"],
+    command: ["node", "node_modules/typescript/bin/tsc", "-p", "packages/cli/tsconfig.json", "--noEmit"],
   },
   {
     name: "typecheck-schema",
