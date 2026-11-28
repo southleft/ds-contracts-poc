@@ -320,7 +320,16 @@ function semanticsPage(): { route: string; html: string } {
             'See <a href="#role-exception">declared role exceptions</a>.',
           roleByProp: 'See <a href="#role-by-prop">role by prop</a>.',
           elementByProp: 'See <a href="#element-by-prop">element by prop</a>.',
+          button: 'See <a href="#button-behavior">declared button behavior</a>.',
         }),
+    ),
+    section(
+      "button-behavior",
+      "Declared button behavior",
+      ["generated", "curated"],
+      `<p><code>semantics.button</code> explicitly declares a native React button's behavior. Its <code>prop</code> names one finite enum prop with a default; <code>states</code> maps every enum value to required <code>disabled</code> and <code>busy</code> booleans. A busy state must also be disabled. The declaration is never inferred from visual state names.</p>` +
+        `<p>React emits <code>type="button"</code>, native disabled behavior and <code>aria-busy</code>. Click, Space and Enter use the platform's native activation. Callers cannot override the declaration with root attributes; invalid runtime state values throw. Other behavior declarations, dynamic elements and competing root semantics are refused.</p>` +
+        `<p>This bounded policy does not establish full source API equivalence. Native Figma, HTML and Web Component output currently refuse the declaration explicitly.</p>`,
     ),
     section(
       "role-by-prop",
