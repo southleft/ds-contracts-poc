@@ -1,12 +1,76 @@
 # @ds-contracts/cli
 
-> **Not the v1 proof surface.** This package is the **universal-contract**
-> CLI (extract / generate / bundle / onboard). Recipe-IR lives under
-> `recipe/` in the reference repo, is not exported here, and npm publish
-> of a recipe surface is deferred. Product v1 is incomplete (F1). See the
-> repo README and `docs/32-recipe-ir-pivot.md`.
+A CLI for inspecting contracts, generating code, and reviewing supported changes
+between React and Figma. This source candidate is unpublished. Browser-backed
+commands use the installed capture dependencies; the commands below use a locally
+built package, not npm's older `next` release.
 
-`ds-contracts` — contracts as the deterministic bridge between design and code. Every verb is a thin shell over the same engine the reference repo's npm scripts run, esbuild-bundled. Only `figma-to-react` uses the installed dependencies: it packages with the pinned `esbuild`, `typescript` and `@types/react`, and checks with `playwright-core`. `playwright-core` is optional and loaded only when needed, as it is for `extract --computed`.
+## Reviewed React ↔ Figma edits: `roundtrip`
+
+This opt-in workflow captures an existing React component with its real stylesheet,
+creates native Figma variants and variables, and writes reviewed color-token edits
+back to the original JSON. It preserves aliases and SVG dependencies; application
+behavior stays in React. Layout edits, arbitrary CSS, responsive states and new
+application behavior are not supported by this workflow. It is not a benchmark result.
+
+You need Node 20.19.4, Docker running, Figma Desktop, and a local font file for a
+font also installed in Figma. The sample uses this repository's Checkbox source,
+tokens and build script. The npm tarball includes its profile, not those source
+files; run these commands from this source checkout's root after `npm ci`:
+
+```sh
+npm run prep:core
+npm --prefix packages/cli run build
+mkdir -p private/roundtrip-install
+npm pack ./packages/cli --pack-destination private/roundtrip-install
+npm install --prefix private/roundtrip-install ./private/roundtrip-install/ds-contracts-cli-0.5.0-rc.3.tgz
+npm run plugin:zip
+unzip playground/public/ds-contracts-sync-runner-plugin.zip -d private/roundtrip-install
+cp packages/cli/examples/roundtrip-checkbox.json private/roundtrip-profile.json
+DS_CONTRACTS_CLI=./private/roundtrip-install/node_modules/@ds-contracts/cli/dist/cli.js
+node "$DS_CONTRACTS_CLI" roundtrip --help
+```
+
+In Figma Desktop, choose **Plugins → Development → Import plugin from manifest**
+and select `private/roundtrip-install/ds-contracts-sync-runner/manifest.json`.
+Open your writable Figma test file and run **DS Contracts Sync Runner** from the
+Development menu. This ZIP is the matching plugin build; the npm package alone
+does not install it.
+
+Edit `private/roundtrip-profile.json`: set `figma.fileKey` to that file's key from
+its URL and `capture.font.file` to your local Inter font file. Create the page
+named by `figma.page` (the sample uses **Contract roundtrip**) in that Figma file.
+Keep the file open. The profile explicitly declares source files, token tiers,
+selectors and build commands; it does not infer missing tiers. For another
+library, supply a profile for that library's actual sources and stylesheet.
+Only use profiles you trust: `capture.build` runs their declared local commands.
+
+```sh
+node "$DS_CONTRACTS_CLI" roundtrip start --profile private/roundtrip-profile.json --out private/roundtrip-session
+node "$DS_CONTRACTS_CLI" roundtrip sync --session private/roundtrip-session
+# In the plugin: Advanced → React to Figma runner → Connect and run.
+# Edit a bound color variable or its alias in Figma, then:
+node "$DS_CONTRACTS_CLI" roundtrip sync --session private/roundtrip-session
+# Connect and run again; review the exact JSON edits and digest printed by the CLI.
+node "$DS_CONTRACTS_CLI" roundtrip apply --session private/roundtrip-session --digest <printed-digest>
+node "$DS_CONTRACTS_CLI" roundtrip sync --session private/roundtrip-session
+# Connect and run to verify the return projection.
+```
+
+For code-led token changes, run `refresh`, then `sync`. Use `status` to inspect the
+session and `discard` to cancel an unapplied review. If `start` fails before its
+session is committed, correct the issue and repeat it. If the error says
+**session committed**, retry `sync`. If port 9232 is occupied, add
+`--port 9231` to `sync` and select 9231 in the plugin. Unsupported canvas edits and
+missing dependencies are refused; undo the unsupported edit and retry. A source
+revision conflict requires restoring or reconciling the changed input before retrying.
+If a connection drops, press Ctrl-C in the CLI, then repeat `sync` and **Connect and run**; an already completed
+patch is recognized from its exact native state and is not applied again.
+`read`, `review --snapshot` and `accept --snapshot` remain available for manual exchange.
+The session retains the contract, source fingerprints, native snapshot and reviewed plan.
+`comparison.json` reports measured properties on both sides. Intrinsic auto-size
+differences are shown explicitly; synchronization does not claim pixel fidelity.
+Fixed dimensions, styles, variable bindings and unsupported edits remain guarded.
 
 ## Figma → React: `figma-to-react`
 

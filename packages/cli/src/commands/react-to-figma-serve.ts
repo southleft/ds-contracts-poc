@@ -10,7 +10,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 
 export const R2F_PORT = 9232;
 export interface ServedSet { name: string; tokens: string; component: string }
-export type SetOutcome = { name: string; written: true; nodes: number } | { name: string; written: false; error: string };
+export type SetOutcome = { name: string; written: true; nodes: number; result?: unknown } | { name: string; written: false; error: string };
 
 /** The runner's wrapper (scripts/react-to-figma-run.ts `program`): the file guard, the create-only flags, the return. */
 export const wrap = (fileKey: string, body: string) => `if (typeof figma.fileKey !== 'string' || figma.fileKey !== ${JSON.stringify(fileKey)}) throw new Error('GUARD: not the run file');\n`
@@ -19,7 +19,7 @@ export const wrap = (fileKey: string, body: string) => `if (typeof figma.fileKey
 
 /** Serve every set's two programs, one at a time, to the one driver that claims the run; resolve with each set's outcome
  *  once the driver has posted the last result. A failed tokens program skips its set's component program. */
-export function servePrograms(sets: readonly ServedSet[], fileKey: string, driver: string, opts: { port?: number; log?: (l: string) => void } = {}): Promise<SetOutcome[]> {
+export function servePrograms(sets: readonly ServedSet[], fileKey: string, driver: string, opts: { port?: number; result?: boolean; log?: (l: string) => void } = {}): Promise<SetOutcome[]> {
   const log = opts.log ?? ((l: string) => console.log(l)), port = opts.port ?? R2F_PORT;
   const queue = sets.flatMap((s) => [{ id: `tokens:${s.name}`, set: s, program: wrap(fileKey, s.tokens) }, { id: `component:${s.name}`, set: s, program: wrap(fileKey, s.component) }]);
   const outcomes = new Map<string, SetOutcome>();
@@ -31,7 +31,7 @@ export function servePrograms(sets: readonly ServedSet[], fileKey: string, drive
       const send = (v: unknown) => { res.writeHead(200, { 'content-type': 'application/json', 'access-control-allow-origin': '*' }); res.end(JSON.stringify(v)); };
       const u = new URL(req.url ?? '/', 'http://127.0.0.1');
       if (u.pathname === '/driver') return send({ driver });
-      if (u.pathname === '/claim') { if (session) return send({ refused: 'a driver already holds this run' }); session = Math.random().toString(16).slice(2); log('  the plugin connected; writing…'); return send({ session }); }
+      if (u.pathname === '/claim') { if (session) return send({ refused: 'a driver already holds this run' }); session = Math.random().toString(16).slice(2); log(opts.result ? '  the plugin connected; running…' : '  the plugin connected; writing…'); return send({ session }); }
       if (!session || u.searchParams.get('session') !== session) return send({ refused: 'not this run\'s driver' });
       if (u.pathname === '/next') {
         if (inFlight) return send({ wait: true });
@@ -39,7 +39,7 @@ export function servePrograms(sets: readonly ServedSet[], fileKey: string, drive
         if (!queue.length) {
           const all = sets.map((s) => outcomes.get(s.name)!), written = all.filter((o) => o.written).length;
           finished = true; close();
-          send({ done: true, ok: written === all.length, summary: `${written} of ${all.length} set(s) written${written < all.length ? '; each failure is named in the terminal' : ''}` });
+          send({ done: true, ok: written === all.length, summary: `${written} of ${all.length} ${opts.result ? 'program(s) completed' : 'set(s) written'}${written < all.length ? '; each failure is named in the terminal' : ''}` });
           return resolve(all);
         }
         inFlight = queue.shift()!;
@@ -53,7 +53,7 @@ export function servePrograms(sets: readonly ServedSet[], fileKey: string, drive
           const { set } = inFlight; inFlight = undefined;
           if (r.timerChainMs && r.timerChainMs > 1000) log('  ⚠ the Figma tab looks hidden (timers are slow); keep the file in front');
           if (r.error) { outcomes.set(set.name, { name: set.name, written: false, error: r.error }); log(`  ✖ ${set.name}: ${r.error}`); }
-          else if (r.id.startsWith('component:')) { const nodes = r.value?.value?.createdNodeIds?.length ?? 0; outcomes.set(set.name, { name: set.name, written: true, nodes }); log(`  ✔ ${set.name}: written (${nodes} node(s))`); }
+          else if (r.id.startsWith('component:')) { const nodes = r.value?.value?.createdNodeIds?.length ?? 0; outcomes.set(set.name, { name: set.name, written: true, nodes, ...(opts.result ? { result: r.value?.value } : {}) }); log(opts.result ? `  ✔ ${set.name}: completed` : `  ✔ ${set.name}: written (${nodes} node(s))`); }
           send({ ok: true });
         });
         return;

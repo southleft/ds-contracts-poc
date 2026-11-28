@@ -1,0 +1,50 @@
+{
+  "system": {"id": "ds-contracts", "name": "DS Contracts", "version": "1.0.0-rc.1", "mode": "light / default brand"},
+  "source": "src/components/Checkbox/Checkbox.tsx",
+  "stylesheet": "src/components/Checkbox/Checkbox.module.css",
+  "story": "src/components/Checkbox/Checkbox.stories.tsx",
+  "component": {"id": "checkbox-checked", "name": "Checkbox — three tiers", "export": "Checkbox"},
+  "architecture": {"roles": ["primitive", "semantic", "component"], "declaration": "Brand accent selection is semantic; component color tokens are stored in semantic.light.tokens.json."},
+  "tokens": {
+    "color.blue.600": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
+    "color.blue.700": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
+    "color.white": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
+    "color.gray.900": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
+    "color.gray.600": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
+    "brand.accent.600": {"file": "tokens/modes/brand.default.tokens.json", "tier": "semantic", "role": "brand accent selection"},
+    "brand.accent.700": {"file": "tokens/modes/brand.default.tokens.json", "tier": "semantic", "role": "brand accent selection"},
+    "color.checkbox.checked.background": {"file": "tokens/modes/semantic.light.tokens.json", "tier": "component", "scopes": ["FRAME_FILL", "SHAPE_FILL", "STROKE_COLOR"]},
+    "color.checkbox.checked.border": {"file": "tokens/modes/semantic.light.tokens.json", "tier": "component", "scopes": ["FRAME_FILL", "SHAPE_FILL", "STROKE_COLOR"]},
+    "color.checkbox.icon": {"file": "tokens/modes/semantic.light.tokens.json", "tier": "component", "scopes": ["FRAME_FILL", "SHAPE_FILL", "STROKE_COLOR"]},
+    "color.surface.foreground": {"file": "tokens/modes/semantic.light.tokens.json", "tier": "semantic", "scopes": ["TEXT_FILL"]},
+    "color.text.secondary": {"file": "tokens/modes/semantic.light.tokens.json", "tier": "semantic", "scopes": ["TEXT_FILL"]}
+  },
+  "dependencies": {"check-glyph": {"name": "Checkbox check glyph", "source": "src/components/Checkbox/Checkbox.tsx", "selector": "#subject svg"}},
+  "instances": {"glyph": {"component": "check-glyph", "colorToken": "color.checkbox.icon", "paint": "strokes", "width": 12, "height": 12}},
+  "codeOnly": ["React owns input state, keyboard interaction, callbacks, and indeterminate state. The check glyph is an SVG dependency."],
+  "appearance": {
+    "component": {"system": "DS Contracts", "name": "Checkbox — three tiers", "slug": "ds-checkbox-three-tiers"},
+    "axes": [{"name": "Size", "prop": "size", "default": "md", "values": [{"figma": "sm", "code": "sm"}, {"figma": "md", "code": "md"}]}],
+    "props": [{"name": "Label", "figma": "Label", "prop": "label", "type": "text", "default": "Checkbox label"}, {"name": "Description", "figma": "Description", "prop": "description", "type": "text", "default": "Supporting detail for this option."}],
+    "variants": [{"key": "sm", "axes": {"Size": "sm"}, "props": {"size": "sm", "value": "checked"}}, {"key": "md", "axes": {"Size": "md"}, "props": {"size": "md", "value": "checked"}}],
+    "parts": {
+      "root": {"kind": "frame", "parent": null, "order": 0, "element": "label", "selector": "#subject > label", "binds": {}, "sizing": ["fixed", "hug"]},
+      "box": {"kind": "frame", "parent": "root", "order": 0, "element": "div", "selector": "#subject > label > span", "binds": {}, "sizing": ["fixed", "fixed"], "bindings": {"fill": "color.checkbox.checked.background", "stroke": "color.checkbox.checked.border"}},
+      "glyph": {"kind": "frame", "parent": "box", "order": 0, "element": "div", "selector": "#subject > label > span > span", "binds": {}, "sizing": ["fixed", "fixed"]},
+      "textCol": {"kind": "frame", "parent": "root", "order": 1, "element": "div", "selector": "#subject > label > div", "binds": {}, "sizing": ["fill", "hug"]},
+      "label": {"kind": "text", "parent": "textCol", "order": 0, "element": "span", "selector": "#subject > label > div > span:first-child", "binds": {"text": "Label"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.surface.foreground"}},
+      "description": {"kind": "text", "parent": "textCol", "order": 1, "element": "span", "selector": "#subject > label > div > span:last-child", "binds": {"text": "Description"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.text.secondary"}}
+    }
+  },
+  "version": 1,
+  "capture": {
+    "width": 280,
+    "font": {"family": "Inter", "file": "fonts/Inter-Variable.ttf", "styles": {"500": "Medium", "400": "Regular"}},
+    "props": {"label": "Checkbox label"},
+    "build": [{"command": "node", "args": ["scripts/build-tokens.mjs", "--flat", "tokens/primitives.tokens.json,tokens/modes/brand.default.tokens.json,tokens/semantic.tokens.json,tokens/modes/semantic.light.tokens.json", "--out", "$OUT/tokens.css"]}],
+    "styles": ["$OUT/tokens.css"],
+    "inputs": ["scripts/build-tokens.mjs"],
+    "generated": []
+  },
+  "figma": {"fileKey": "YOUR_FILE_KEY", "page": "Contract roundtrip", "prefix": "Checkbox roundtrip", "x": 0, "y": 0}
+}
