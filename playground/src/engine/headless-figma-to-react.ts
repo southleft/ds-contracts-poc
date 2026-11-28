@@ -15,6 +15,7 @@
 import { CAPTURED_ALIAS_LIMIT } from '../../../core/captured-aliases.js';
 import { dumpClosure } from '../../../extract/figma/rest/closure.js';
 import type { FontVerticalMetrics } from '../../../core/profile-conventions.js';
+import type { ButtonProfile } from '../../../core/figma-button-profile.js';
 import { icons } from './data.js';
 import { recordFigmaClosure } from './figma-import-workspace.js';
 import { capturedTokensFromDump, proposalsFromDump, type FigmaImportResult, type FigmaProposal } from './figma-import.js';
@@ -40,12 +41,13 @@ export interface HeadlessImportResult {
   proposed: string[];
   skipped: Array<{ setName: string; reason: string }>;
   notes: string[];
+  buttonDeclaration?: 'system-profile' | 'native-metadata';
 }
 
 /** `source` is the workspace origin the page records: 'json' for a pasted or
  *  uploaded dump (the JSON tab), 'figma' for a Figma URL import. */
-export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json', options: { conventions?: readonly string[]; fontMetrics?: FontVerticalMetrics } = {}): HeadlessImportResult {
-  const batch = proposalsFromDump(dump, 'react-runtime', options.conventions, options.fontMetrics);
+export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json', options: { conventions?: readonly string[]; fontMetrics?: FontVerticalMetrics; figmaButton?: ButtonProfile } = {}): HeadlessImportResult {
+  const batch = proposalsFromDump(dump, 'react-runtime', options.conventions, options.fontMetrics, options.figmaButton);
   if (batch.proposals.length === 0) {
     throw Error(batch.skipped.length > 0
       ? `figma-to-react-nothing-proposed: none of the ${batch.skipped.length} component set(s) could be proposed — `
@@ -93,6 +95,7 @@ export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], sourc
       icons: [...icons],
     },
     setName: proposal.setName,
+    ...(validation.contract.semantics.button ? { buttonDeclaration: options.figmaButton ? 'system-profile' as const : 'native-metadata' as const } : {}),
     proposed: batch.proposals.map(p => p.setName),
     skipped: batch.skipped.map(s => ({ setName: s.setName, reason: s.reason })),
     notes: [...(proposal.notes ?? []).map(String), CAPTURED_ALIAS_LIMIT],

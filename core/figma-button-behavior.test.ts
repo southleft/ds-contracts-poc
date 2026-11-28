@@ -6,7 +6,8 @@ import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { assertCapturedClosure } from './captured-closure.js';
-import { proposeFromDump } from './propose-figma.js';
+import { proposeFromDump, settleInteractiveContent } from './propose-figma.js';
+import { readButtonProfile, resolveButtonProfile } from './figma-button-profile.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { readButtonStamp, buttonStamp } from './figma-button-behavior.js';
 import { mapRestToDump } from '../extract/figma/rest/map.js';
@@ -34,6 +35,82 @@ function propose(set: DumpSet) {
   return ContractSchema.parse(proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
     contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true }).contract);
 }
+
+test('profile declarations preserve capture origin, unrelated inputs and the declared axis', async () => {
+  const c = fixture(), set = await (await native(c)).dump();
+  delete set.semantics; delete set.propNames; delete set.contractId;
+  set.propertyDefinitions!['Owner Label#1:1'] = { type: 'TEXT', defaultValue: 'one' };
+  set.propertyDefinitions!['Owner-Label#2:2'] = { type: 'TEXT', defaultValue: 'two' };
+  for (const variant of set.variants) variant.children = ['Owner Label', 'Owner-Label'].map(name => ({
+    ...structuredClone(variant.children![0]), name, propRefs: { characters: name },
+  }));
+  const dump = { _provenance: { fileKey: 'file', closure: { rule: 'follow-instances', cap: 64,
+    requested: [{ nodeId: set.nodeId, name: set.setName, type: set.type }], pulled: [], unresolved: [], cycles: [] } }, [set.setName]: set };
+  const raw = { fileKey: 'file', nodeId: set.nodeId, prop: c.props[0], states: c.semantics.button!.states };
+  const before = structuredClone(dump), declaration = resolveButtonProfile(dump, raw);
+  const declared = ContractSchema.parse(proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map(), fileKey: 'file', projectionMode: 'exact', mintUnbound: true, buttonDeclaration: declaration }).contract);
+  assert.deepEqual(declared.props.find(p => p.name === 'phase'), c.props[0]);
+  assert.deepEqual(declared.semantics, c.semantics);
+  assert.deepEqual(declared.states, []);
+  const unrelated = (v: Contract) => v.props.filter(p => p.bindings.figma.kind === 'TEXT');
+  assert.equal(unrelated(declared).length, 2);
+  assert.deepEqual(unrelated(declared), unrelated(propose(set)));
+  assert.deepEqual(dump, before);
+  const stamped = structuredClone(dump), target = stamped[set.setName] as DumpSet;
+  target.semantics = { element: 'button', ...declaration.retained.stamp };
+  target.propNames = { State: 'phase' };
+  assert.deepEqual(resolveButtonProfile(stamped, raw).retained, declaration.retained);
+  for (const mutate of [
+    (p: any) => { p.fileKey = 'wrong'; }, (p: any) => { p.nodeId = 'wrong'; },
+    (p: any) => { p.extra = true; }, (p: any) => { delete p.states.pending; },
+    (p: any) => { p.prop.default = 'blocked'; }, (p: any) => { p.prop.type.enum.push('unknown'); },
+    (p: any) => { p.states.ready.busy = true; },
+    (p: any) => { delete p.prop.bindings.figma.values; },
+    ...['type', 'disabled', 'onClick', 'role', 'aria-disabled', 'aria-busy'].map(name => (p: any) => { p.prop.bindings.code.prop = name; }),
+  ]) { const bad = structuredClone(raw); mutate(bad); assert.throws(() => resolveButtonProfile(dump, bad), /FIGMA_BUTTON_PROFILE_INVALID/); }
+  for (const bad of [null, [], {}, false]) assert.throws(() => readButtonProfile(bad), /PROFILE_INVALID/);
+  const conflict = structuredClone(raw); conflict.states.pending.busy = false;
+  assert.throws(() => resolveButtonProfile(stamped, conflict), /conflicting retained/);
+  const stale = structuredClone(dump); (stale[set.setName] as DumpSet).variants.pop();
+  assert.throws(() => resolveButtonProfile(stale, raw), /PROFILE_INVALID/);
+  const missing = structuredClone(dump); delete missing[set.setName];
+  assert.throws(() => resolveButtonProfile(missing, raw), /FIGMA_CAPTURE_CLOSURE_INCOMPLETE/);
+  const collision = structuredClone(dump); (collision[set.setName] as DumpSet).propertyDefinitions!.Flag = { type: 'BOOLEAN', defaultValue: false };
+  for (const key of ['name', 'code'] as const) {
+    const p = structuredClone(raw);
+    if (key === 'name') p.prop.name = 'flag'; else p.prop.bindings.code.prop = 'flag';
+    assert.throws(() => resolveButtonProfile(collision, p), /input identity collides with Flag/);
+  }
+  delete (collision[set.setName] as DumpSet).propertyDefinitions!.Flag;
+  (collision[set.setName] as DumpSet).boolDefaults = { Flag: false };
+  const boolProfile = structuredClone(raw); boolProfile.prop.name = 'flag';
+  assert.throws(() => resolveButtonProfile(collision, boolProfile), /input identity collides with Flag/);
+  (collision[set.setName] as DumpSet).contractId = '!';
+  assert.throws(() => resolveButtonProfile(collision, raw), /malformed native contract identity/);
+});
+
+test('explicit button policies refuse direct, slotted and transitive interactive descendants', () => {
+  const button = fixture(), passive = { id: 'icon', name: 'Icon', semantics: { element: 'span' }, anatomy: { root: {} } };
+  const interactive = { ...passive, id: 'input', name: 'Input', semantics: { element: 'input' } };
+  const wrapper = { ...passive, id: 'wrapper', anatomy: { root: { component: { id: 'input' } } } };
+  const multi = { ...passive, id: 'multi', anatomy: { label: {}, control: { element: 'button' } } };
+  const mapped = { ...passive, id: 'mapped', semantics: { element: 'div', roleByProp: { prop: 'kind', map: { active: 'button' } } } };
+  const map = new Map<string, unknown>([passive, interactive, wrapper, multi, mapped].map(c => [c.id, c]));
+  for (const root of [ { parts: { child: { element: 'button' } } }, { parts: { child: { attrs: { tabindex: '-1' } } } },
+    ...[{ tabIndex: '0' }, { TABINDEX: '0' }, { role: '{kind}' }, { contentEditable: 'true' }].map(attrs => ({ parts: { child: { attrs } } })),
+    ...['input', 'wrapper', 'multi', 'mapped'].map(id => ({ component: { id } })), { slot: { defaultContent: [{ id: 'input' }] } } ]) {
+    const c = { ...button, anatomy: { root } }, before = structuredClone(c);
+    assert.throws(() => settleInteractiveContent([{ setName: 'Action', contract: c, notes: [] }], map), /FIGMA_BUTTON_INTERACTIVE_DESCENDANT/);
+    assert.deepEqual(c, before);
+    const legacy = structuredClone(c); delete (legacy.semantics as Partial<typeof button.semantics>).button;
+    assert.doesNotThrow(() => settleInteractiveContent([{ setName: 'Action', contract: legacy, notes: [] }], map));
+  }
+  const c = { ...button, anatomy: { root: { component: { id: 'icon' } } } };
+  assert.doesNotThrow(() => settleInteractiveContent([{ setName: 'Action', contract: c, notes: [] }], map));
+  assert.throws(() => settleInteractiveContent([{ setName: 'Action', contract: c, notes: [], childStubs: [passive] }], map), /FIGMA_BUTTON_DEPENDENCY_UNRESOLVED/);
+  assert.throws(() => settleInteractiveContent([{ setName: 'Action', contract: c, notes: [] }], new Map()), /FIGMA_BUTTON_DEPENDENCY_UNRESOLVED/);
+});
 test('native round trip retains the explicit policy and complete aliased input without state promotion', async () => {
   const c = fixture(), live = await native(c), set = await live.dump(), before = structuredClone(set), back = propose(set);
   assert.deepEqual(back.semantics.button, c.semantics.button);

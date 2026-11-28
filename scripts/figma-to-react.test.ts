@@ -14,6 +14,32 @@ import { profileConventions, runFigmaToReact } from './figma-to-react-lib.js';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dump = path.join(repo, 'benchmark', 'inputs', 'altitude-badge', 'dump.json');
 
+test('a declaration-only profile reaches generation and reports supplied versus retained behavior honestly', async t => {
+  const out = mkdtempSync(path.join(tmpdir(), 'figma-button-profile-'));
+  t.after(() => rmSync(out, { recursive: true, force: true }));
+  const prop = { name: 'phase', type: { enum: ['ready', 'blocked'] }, default: 'ready',
+    bindings: { code: { prop: 'status' }, figma: { kind: 'VARIANT', property: 'State', values: { ready: 'ready', blocked: 'blocked' } } } };
+  const states = { ready: { disabled: false, busy: false }, blocked: { disabled: true, busy: false } };
+  const input: any = { _provenance: { fileKey: 'file', closure: { rule: 'follow-instances', cap: 64,
+    requested: [{ nodeId: '1:1', name: 'Control', type: 'COMPONENT_SET' }], pulled: [], unresolved: [], cycles: [] } },
+    Control: { setName: 'Control', type: 'COMPONENT_SET', nodeId: '1:1',
+      propertyDefinitions: { State: { type: 'VARIANT', defaultValue: 'ready', variantOptions: ['ready', 'blocked'] } },
+      variants: ['ready', 'blocked'].map(State => ({ name: `State=${State}`, type: 'COMPONENT', variantProperties: { State }, bbox: { width: 20, height: 20 }, children: [] })) } };
+  const source = path.join(out, 'dump.json'), file = path.join(out, 'profile.json');
+  writeFileSync(source, JSON.stringify(input));
+  writeFileSync(file, JSON.stringify({ conventions: [], figmaButton: { fileKey: 'file', nodeId: '1:1', prop, states } }));
+  const before = readFileSync(source), profile = await profileConventions(file);
+  const supplied = await figmaToReact(source, path.join(out, 'supplied'), undefined, 'json', { profile });
+  assert.deepEqual(supplied.behavior, { owner: 'system-profile', status: 'not-established', equivalence: 'not-asserted' });
+  const contract = JSON.parse(readFileSync(supplied.contractFile, 'utf8'));
+  assert.deepEqual(contract.props, [prop]); assert.deepEqual(contract.semantics, { element: 'button', button: { prop: 'phase', states } });
+  assert.deepEqual(readFileSync(source), before);
+  input.Control.semantics = { element: 'button', button: { prop: 'phase', states }, buttonAxis: { version: 1, prop } };
+  input.Control.propNames = { State: 'phase' }; writeFileSync(source, JSON.stringify(input));
+  const retained = await figmaToReact(source, path.join(out, 'retained'));
+  assert.deepEqual(retained.behavior, { owner: 'native-metadata', status: 'not-established', equivalence: 'not-asserted' });
+});
+
 test('the normal React package path carries sparse tuples and rejects every undrawn combination at runtime', async t => {
   const out = mkdtempSync(path.join(tmpdir(), 'figma-sparse-package-'));
   t.after(() => rmSync(out, { recursive: true, force: true }));

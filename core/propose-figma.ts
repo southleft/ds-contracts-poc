@@ -1,4 +1,5 @@
 import { readButtonStamp, restoreButtonStamp } from './figma-button-behavior.js';
+import type { resolveButtonProfile } from './figma-button-profile.js';
 import {promoteNestedDrawingInk,nestedDrawingInkTarget,type DrawingInkOwner} from './nested-drawing-ink.js';
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
 import {conventionSet,imperceptibleBlendView,spreadShadowOutlineView,type FontVerticalMetrics} from './profile-conventions.js';
@@ -1120,7 +1121,7 @@ function renderedRefIds(part: unknown, out: string[] = []): string[] {
 /** An authored interactive fact on a part tree itself (not through refs):
  *  a part's element, its attrs.role, its attrs.tabindex. `skipRootElement`
  *  leaves the root's own element to the caller. */
-export function interactivePartFact(root: unknown, skipRootElement = false): string | null {
+export function interactivePartFact(root: unknown, skipRootElement = false, strict = false): string | null {
   const visit = (part: unknown, name: string, isRoot: boolean): string | null => {
     if (!part || typeof part !== 'object') return null;
     const p = part as { element?: unknown; attrs?: Record<string, unknown>; parts?: Record<string, unknown> };
@@ -1130,6 +1131,9 @@ export function interactivePartFact(root: unknown, skipRootElement = false): str
     const role = p.attrs?.role;
     if (typeof role === 'string' && INTERACTIVE_ROLES.has(role)) return `part "${name}" carries role "${role}"`;
     if (p.attrs && 'tabindex' in p.attrs) return `part "${name}" carries tabindex`;
+    if (strict && p.attrs && (Object.keys(p.attrs).some(key => key.toLowerCase() === 'tabindex') || typeof role === 'string' && role.startsWith('{') ||
+        Object.entries(p.attrs).some(([key, value]) => key.toLowerCase() === 'contenteditable' && !['false', 'inherit'].includes(String(value)))))
+      return `part "${name}" carries a focus or editable input`;
     for (const [k, child] of Object.entries(p.parts ?? {})) {
       const hit = visit(child, k, false);
       if (hit) return hit;
@@ -1142,7 +1146,7 @@ export function interactivePartFact(root: unknown, skipRootElement = false): str
 interface ContractLike {
   id?: unknown;
   name?: unknown;
-  semantics?: { element?: unknown; role?: unknown; elementByProp?: { map?: Record<string, unknown> } };
+  semantics?: { element?: unknown; role?: unknown; button?: unknown; elementByProp?: { map?: Record<string, unknown> }; roleByProp?: { map?: Record<string, unknown> } };
   anatomy?: Record<string, unknown>;
 }
 
@@ -1170,12 +1174,13 @@ function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]
 }
 
 /** Why one contract IS interactive content by itself, or null. */
-function interactiveSelf(c: ContractLike, semantics: { elements: string[]; role?: string }): string | null {
+function interactiveSelf(c: ContractLike, semantics: { elements: string[]; role?: string }, strict = false): string | null {
   const el = semantics.elements.find((e) => INTERACTIVE_CONTENT_ELEMENTS.has(e));
   if (el) return `<${el}>`;
   if (semantics.role !== undefined && INTERACTIVE_ROLES.has(semantics.role)) return `role "${semantics.role}"`;
+  if (strict && Object.values(c.semantics?.roleByProp?.map ?? {}).some(role => typeof role === 'string' && INTERACTIVE_ROLES.has(role))) return 'interactive role by prop';
   for (const root of Object.values(c.anatomy ?? {})) {
-    const fact = interactivePartFact(root, true);
+    const fact = interactivePartFact(root, !strict, strict);
     if (fact) return fact;
   }
   return null;
@@ -1189,8 +1194,9 @@ export function interactiveContentOf(
   contractsById: ReadonlyMap<string, unknown> | undefined,
   semanticsOf: (c: ContractLike) => { elements: string[]; role?: string } = (c) => snapshotSemantics(c, false),
   nameOf: (c: ContractLike, id: string) => string = (c, id) => (typeof c.name === 'string' ? c.name : id),
+  strict = false,
 ): { child: string; what: string } | null {
-  const own = interactivePartFact(root, true);
+  const own = interactivePartFact(root, true, strict);
   if (own) return { child: 'its own anatomy', what: own };
   if (!contractsById) return null;
   const seen = new Set<string>();
@@ -1199,8 +1205,9 @@ export function interactiveContentOf(
       if (seen.has(id)) continue;
       seen.add(id);
       const c = contractsById.get(id) as ContractLike | undefined;
+      if (strict && !c) throw Error(`FIGMA_BUTTON_DEPENDENCY_UNRESOLVED:${id}`);
       if (!c) continue;
-      const what = interactiveSelf(c, semanticsOf(c));
+      const what = interactiveSelf(c, semanticsOf(c), strict);
       if (what) return { child: nameOf(c, id), what };
       const deeper = visit(Object.values(c.anatomy ?? {}).flatMap((r) => renderedRefIds(r)));
       if (deeper) return deeper;
@@ -1231,6 +1238,15 @@ export function settleInteractiveContent(
   for (const c of contractsById.values()) if (c && typeof c === 'object') semanticsOf(c as ContractLike);
   for (const p of proposals) semanticsOf(p.contract as ContractLike);
   const nameOf = (c: ContractLike, id: string) => displayName.get(c as object) ?? (typeof c.name === 'string' ? c.name : id);
+  for (const p of proposals) {
+    const c = p.contract as ContractLike;
+    if (!c.semantics?.button) continue;
+    const hit = interactiveContentOf((c.anatomy ?? {}).root, contractsById, child => {
+      if (stubs.has(child as object)) throw Error(`FIGMA_BUTTON_DEPENDENCY_UNRESOLVED:${String(child.id)}`);
+      return semanticsOf(child);
+    }, nameOf, true);
+    if (hit) throw Error(`FIGMA_BUTTON_INTERACTIVE_DESCENDANT:${p.setName}: ${hit.child}: ${hit.what}`);
+  }
   const decisions: Array<{ proposal: (typeof proposals)[number]; kind: 'withhold'; hit: { child: string; what: string } }> = [];
   // 3. Inferred button guesses with interactive content, by the snapshot.
   for (const p of proposals) {
@@ -17367,6 +17383,7 @@ function proposeFromDumpFencedImpl(
   set: DumpSet,
   opts: {
     corpus: TokenCorpus;
+    buttonDeclaration?: ReturnType<typeof resolveButtonProfile>;
     /** The batch supplies all uses, including those with no captured content.
      * Set-only callers otherwise derive this census from their whole set. */
     instanceContentGroups?: ReadonlyMap<string, readonly DumpNode[]>;
@@ -17601,8 +17618,10 @@ function proposeFromDumpFencedImpl(
     }
   }
   const proposalInputNames = Object.assign(Object.create(null), allocatedPropNames, authoredPropNames) as Record<string, string>;
+  const profileButton = opts.buttonDeclaration && opts.buttonDeclaration.nodeId === set.nodeId ? opts.buttonDeclaration.retained : undefined;
+  if (profileButton) proposalInputNames[profileButton.axis.property] = profileButton.axis.propName;
   const nameOptions = { propertyNames: proposalInputNames };
-  const retainedButton = readButtonStamp(set);
+  const retainedButton = profileButton ?? readButtonStamp(set);
   const typedAxes = [...readCodeValueAxes(set), ...(retainedButton ? [retainedButton.axis] : [])];
   const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
     ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
@@ -18912,7 +18931,7 @@ function proposeFromDumpFencedImpl(
     if (!element && !role) return null;
     return { element, role, roleException };
   })();
-  const stampNote = stampedSemantics
+  const stampNote = profileButton ? 'semantics: native button behavior supplied by the system profile; runtime equivalence remains unestablished' : stampedSemantics
     ? `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`
     : null;
 
@@ -18997,7 +19016,7 @@ function proposeFromDumpFencedImpl(
     // Read only what the contract actually declared (element, role). No stamp
     // → the table runs exactly as before, so a set this pipeline did not draw
     // is unaffected and nothing is invented for it.
-    semantics: stampedSemantics
+    semantics: profileButton ? { element: 'button' } : stampedSemantics
       ? {
           element: stampedSemantics.element ?? 'div',
           ...(stampedSemantics.role ? { role: stampedSemantics.role } : {}),
@@ -20742,6 +20761,7 @@ function proposeBatchFromDumpInternal(
       }
       proposals.push(proposal);
     } catch (e) {
+      if (opts.buttonDeclaration?.nodeId === value.nodeId) throw e;
       const plain = plainWordsProposalError(e);
       skipped.push({
         setName: name,
