@@ -196,7 +196,7 @@ jobs:
 
       - name: typecheck @ds-contracts/emitter-web-components
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm --prefix packages/emitter-web-components run typecheck
+        run: node node_modules/typescript/bin/tsc -p packages/emitter-web-components/tsconfig.json --noEmit
 
       - name: package smoke @ds-contracts/emitter-web-components
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
