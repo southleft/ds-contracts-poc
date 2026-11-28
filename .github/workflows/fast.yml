@@ -405,13 +405,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run visual-truth:check
 
-      - name: test:console-loop-evidence (first-party and live-file receipt gates)
+      - name: test:console-loop-evidence (first-party, live-file, and MUI receipt gates)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:console-loop-evidence
 
-      - name: test:console-loop-mui-evidence (MUI loop gate)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run test:console-loop-mui-evidence
 
       - name: mui 50% denominator freeze (Wave 5 — no shrink)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

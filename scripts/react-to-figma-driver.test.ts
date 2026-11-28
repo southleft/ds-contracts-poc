@@ -85,5 +85,7 @@ test('with no runner serving, the plugin says so by name and runs nothing', asyn
   const body = lift("const R2F_BASE = 'http://localhost:9232';", '\n// DRIFT ROUND').replace("'http://localhost:9232'", JSON.stringify(`http://127.0.0.1:${port}`));
   await (new Function('post', 'figma', `${body}\nreturn runReactToFigma;`)((m: (typeof posted)[number]) => posted.push(m), {}) as () => Promise<void>)();
   assert.equal(posted.length, 1);
-  assert.match(posted[0]!.summary!, /^React to Figma: .* — is scripts\/react-to-figma-run\.ts serving on port 9232\?$/);
+  assert.equal(posted[0]!.ok, false);
+  assert.match(posted[0]!.summary!, /^React to Figma: /);
+  assert(posted[0]!.summary!.endsWith(` — is the CLI serving on http://127.0.0.1:${port}?`));
 });

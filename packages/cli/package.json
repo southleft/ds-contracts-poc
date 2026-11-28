@@ -12,7 +12,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "examples/roundtrip-checkbox.json"
   ],
   "scripts": {
     "build": "node build.mjs",
