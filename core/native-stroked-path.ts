@@ -26,7 +26,13 @@ function edges(data:string,sx:number,sy:number){
  * bindings require independent checks before a native library can qualify. */
 export function nativeStrokedPathGeometryMatches(expected:Geometry,observed:Geometry):boolean{
  try{
-  if(strokedPathGeometryIssue(expected)||strokedPathGeometryIssue(observed))return false;
+  // The contract omits the default SCALE pair; Figma always reports it.
+  // Normalize only that representation for validation, then compare the
+  // original constraints below. The accepted contract grammar is unchanged.
+  const c=observed.strokePath?.constraints;
+  const normalized=!expected.strokePath?.constraints&&c?.horizontal==='SCALE'&&c.vertical==='SCALE'
+    ? {...observed,strokePath:{...observed.strokePath!,constraints:undefined}} : observed;
+  if(strokedPathGeometryIssue(expected)||strokedPathGeometryIssue(normalized))return false;
   const a=expected.strokePath!,b=observed.strokePath!,ac=a.constraints??{horizontal:'SCALE',vertical:'SCALE'},bc=b.constraints??{horizontal:'SCALE',vertical:'SCALE'};
   if(a.cap!==b.cap||a.join!==b.join||a.miterLimit!==b.miterLimit||ac.horizontal!==bc.horizontal||ac.vertical!==bc.vertical)return false;
   const rx=b.viewport.width/a.viewport.width,ry=b.viewport.height/a.viewport.height;

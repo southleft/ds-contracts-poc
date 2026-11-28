@@ -34,11 +34,11 @@ lane (or is excluded by name), so "maintain is green locally" and "the lanes
 are green" are the same set of commands. Its members split by what they need:
 `maintain` itself is token-free and cache-free (its quick checks run in `fast`;
 `functional:flowbite`, which needs Chromium, and `parity:flowbite` run in
-`full`, and `plugin:check` was already there), while `maintain:visual`
+`full`, and `plugin:check` was already there), while `extract:figma:visual:catalog`
 (`extract:figma:visual:catalog`) needs **`FIGMA_TOKEN`** (env or `.env.local`)
 plus the gitignored Figma PNG cache under `extract/figma/visual-parity/out/`,
 so on a clean clone it refuses with `FIGMA_TOKEN not found`. This repository
-has no `FIGMA_TOKEN` Actions secret, so `maintain:visual` stays a local command
+has no `FIGMA_TOKEN` Actions secret, so `extract:figma:visual:catalog` stays a local command
 and is excluded by name; `npm run maintain:all` runs both halves.
 
 Do not copy a gate count from this page. Run `npm run ci:lanes`; it derives the
@@ -190,7 +190,7 @@ that does not exist.
   `schema:fresh`, in the fast lane; determinism itself is covered by the
   `C1-determinism` eval family, which regenerates in a scratch copy and
   byte-compares.
-- **`extract:figma:visual:catalog` / `npm run maintain:visual`** — needs
+- **`extract:figma:visual:catalog` / `npm run extract:figma:visual:catalog`** — needs
   `FIGMA_TOKEN` and the gitignored PNG cache; see the `maintain` paragraph under
   "The lanes" and its `EXCLUDED` entry in `lane-coverage.ts`.
 - **`conformance`, `extract:figma:gauntlet:live*`, `extract:figma:visual`,
