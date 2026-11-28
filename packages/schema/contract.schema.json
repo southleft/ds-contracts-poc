@@ -109,6 +109,42 @@
         "role": {
           "type": "string"
         },
+        "button": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string",
+              "minLength": 1
+            },
+            "states": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "busy": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "disabled",
+                  "busy"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "prop",
+            "states"
+          ],
+          "additionalProperties": false
+        },
         "roleException": {
           "type": "string"
         },

@@ -346,6 +346,7 @@ export function emitCodeConnectReact(contract: Contract): string {
 export const codeConnectTagOf = (contract: Contract): string => contract.id.replace('.', '-');
 
 export function emitCodeConnectHtml(contract: Contract): string {
+  if (contract.semantics.button !== undefined) throw Error('button-behavior-code-connect-html-unsupported');
   if (walkAnatomy(contract).some(w => w.part.slot?.renderDefaultAnatomy))
     throw new Error('SLOT_DIRECT_DEFAULT_ANATOMY_UNSUPPORTED:code-connect-html');
   refuseRetainedRuntime(contract, 'code-connect-html');

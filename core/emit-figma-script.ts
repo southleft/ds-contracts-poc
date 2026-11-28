@@ -6846,6 +6846,16 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
 }
 
 function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
+  const seenButtonPolicy = new Set<string>();
+  const refuseButtonPolicy = (c: Contract): void => {
+    if (seenButtonPolicy.has(c.id)) return;
+    seenButtonPolicy.add(c.id);
+    if (c.semantics.button !== undefined) throw Error('button-behavior-figma-unsupported');
+    for (const { part } of walkAnatomy(c)) for (const id of [part.component?.id, ...(part.slot?.defaultContent ?? []).map(item => item.id)]) {
+      const child = id && byId.get(id); if (child) refuseButtonPolicy(child);
+    }
+  };
+  refuseButtonPolicy(contract);
   validateStructuralAvailability(contract);
   // Convention font-weight-initial-normal: a text no part's font-weight reaches draws at CSS's initial weight (normal,
   // 400: Regular), as the browser does; off, at the writer's fallback face (Medium).

@@ -3721,6 +3721,11 @@ export const ContractSchema = z.strictObject({
       "h6",
     ]),
     role: z.string().optional(),
+    /** Explicit native activation policy; visual state names never imply behavior. */
+    button: z.strictObject({
+      prop: z.string().min(1),
+      states: z.record(z.string(), z.strictObject({ disabled: z.boolean(), busy: z.boolean() })),
+    }).optional(),
     /** v11: DECLARED exception to the native-semantics lint for ROOT-level
      *  role claims (semantics.role, semantics.roleByProp, anatomy.root
      *  attrs.role) — a one-sentence reason why the role rides a non-native
@@ -3789,6 +3794,21 @@ export const ContractSchema = z.strictObject({
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
+  if (c.semantics.button) {
+    const b = c.semantics.button, p = c.props.find(p => p.name === b.prop);
+    const values = p && typeof p.type === 'object' && 'enum' in p.type ? p.type.enum : [];
+    const fail = (message: string) => ctx.addIssue({ code: 'custom', path: ['semantics', 'button'], message: 'button-behavior-' + message });
+    if (c.props.filter(p => p.name === b.prop).length !== 1 || p && omittedCodeBindingConflicts(c, [p.bindings.code.prop]).length) fail('axis-ambiguous');
+    if (!values.length || typeof p?.default !== 'string' || !values.includes(p.default) || p.bindings.code.initial || p.bindings.code.values ||
+        !isSupportedOmittedCodeBinding(p.bindings.code.prop) || p.bindings.figma.kind !== 'VARIANT') fail('axis-invalid');
+    if (new Set(values).size !== values.length || values.length !== Object.keys(b.states).length || values.some(v => !Object.hasOwn(b.states, v))) fail('states-incomplete');
+    if (Object.values(b.states).some(s => s.busy && !s.disabled)) fail('busy-must-disable');
+    if (c.semantics.element !== 'button' || c.semantics.role || c.semantics.roleByProp || c.semantics.elementByProp ||
+        c.bindings.code.runtime || c.selection || c.events?.length || Object.keys(c.anatomy).join() !== 'root' || c.anatomy.root?.element || c.anatomy.root?.repeat ||
+        Object.keys(c.anatomy.root?.attrs ?? {}).length ||
+        [...c.props.map(p => p.bindings.code.prop), ...slotsOf(c as Contract).map(p => p.slot.name)]
+          .some(name => ['type', 'disabled', 'onClick', 'role', 'aria-disabled', 'aria-busy'].includes(name))) fail('ownership-conflict');
+  }
   if(c.bindings.figma.statePreviewRows){
     const fail=(message:string)=>ctx.addIssue({code:'custom',path:['bindings','figma','statePreviewRows'],message:'state-preview-domain-'+message});
     const rows=c.bindings.figma.statePreviewRows,axes=absentVariantAxes(c as Contract),seen=new Set<string>();

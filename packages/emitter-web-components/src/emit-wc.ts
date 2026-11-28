@@ -1693,6 +1693,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   if (contract.props.some(p => p.bindings.code.initial)) throw new Error('WEB_COMPONENT_INITIAL_CODE_BINDING_UNSUPPORTED');
   const checked = new Set<string>();
   const refuseMapped = (c: Contract): void => {
+    if (c.semantics.button !== undefined) throw Error('button-behavior-web-components-unsupported');
     if (checked.has(c.id)) return;
     checked.add(c.id);
     if (c.selection) throw new Error(`WEB_COMPONENT_SELECTION_UNSUPPORTED:${c.id}: selection behavior is implemented for React`);
