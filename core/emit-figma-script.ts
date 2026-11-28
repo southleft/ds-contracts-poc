@@ -1,4 +1,5 @@
 import {compileNativeFillStack,NATIVE_FILL_STACK_RUNTIME,type NativeFillStack} from './native-fill-stack.js';
+import {inheritedNestedDrawingInk} from './nested-drawing-ink.js';
 import {resolveFillStack} from '../packages/schema/src/fill-stack.js';
 import {independentIntrinsicHeight} from './independent-intrinsic-height.js';
 import {scalarTextSizeInput} from '../packages/schema/src/scalar-text-size-input.js';
@@ -5848,11 +5849,12 @@ function partToSpecInner(
       }
       if (channel === 'color' && dep.anatomy.root?.overridable?.includes('color')) {
         const paths = Object.values(dep.anatomy.root.parts ?? {});
-        if (paths.length === 1 && (paths[0].shape?.kind === 'path' && paths[0].literals?.['background-color'] === 'currentColor' ||
-             paths[0].shape?.kind === 'stroked-path' && paths[0].shape.strokePath && paths[0].literals?.['border-color'] === 'currentColor')) {
+        const ink=paths.length === 1 && (paths[0].shape?.kind === 'path' && paths[0].literals?.['background-color'] === 'currentColor' ||
+             paths[0].shape?.kind === 'stroked-path' && paths[0].shape.strokePath && paths[0].literals?.['border-color'] === 'currentColor') ? paths[0] : inheritedNestedDrawingInk(dep.anatomy.root);
+        if (ink) {
           const tokenPath = ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>subst[key] ?? `{${key}}`);
           if (!parseLitColor(String(resolveLiteral(tokenPath)))) throw new Error('filled-path-instance-ink-unsupported:' + name);
-          spec.instanceInk = {varName:tokenPath.replaceAll('.', '/'),writeProtocol:'attached-v1', ...(paths[0].shape?.kind === 'stroked-path' ? {paintKind:'stroke' as const} : {})};
+          spec.instanceInk = {varName:tokenPath.replaceAll('.', '/'),writeProtocol:'attached-v1', ...(ink.shape?.kind === 'stroked-path' ? {paintKind:'stroke' as const} : {})};
           continue;
         }
       }
@@ -11180,11 +11182,15 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
 ` : ''}${hasInstanceInk ? `  // Paint overrides also create private sublayers. Apply after attachment
   // to a caller slot, so moving the instance cannot invalidate those handles.
   if (spec.instanceInk || spec.instanceStrokeWeight) {
-    const viewport = node.children && node.children[0];
-    const direct = viewport && viewport.type === 'VECTOR';
-    const ink = direct ? viewport : viewport && viewport.children && viewport.children[0];
-    if (node.children.length !== 1 || !direct && (viewport.type !== 'FRAME' || viewport.children.length !== 1) || !ink || ink.type !== 'VECTOR')
-      throw new Error('filled-path-instance-ink-tree-mismatch:' + node.id);
+    let ink = node;
+    const previousSkip = figma.skipInvisibleInstanceChildren;
+    try {
+      figma.skipInvisibleInstanceChildren = false;
+      for (let depth = 0; ink.type !== 'VECTOR'; depth++) {
+        if (depth >= 16 || ink !== node && ink.type !== 'FRAME' || !ink.children || ink.children.length !== 1)
+          throw new Error('filled-path-instance-ink-tree-mismatch:' + node.id);
+        ink = ink.children[0];
+      }
     if (spec.instanceInk) {
       if (spec.instanceInk.paintKind === 'stroke') ink.strokes = [boundPaint(spec.instanceInk.varName,ink)];
       else ink.fills = [boundPaint(spec.instanceInk.varName,ink)];
@@ -11196,6 +11202,7 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
       ink.strokeCap=stroke.cap;ink.strokeJoin=stroke.join;ink.strokeMiterLimit=stroke.miterLimit;ink.dashPattern=[];
     }
     if (spec.instanceStrokeWeight) { ink.strokeWeight = spec.instanceStrokeWeight.px; ink.setBoundVariable('strokeWeight',need(spec.instanceStrokeWeight.varName)); }
+    } finally { figma.skipInvisibleInstanceChildren = previousSkip; }
   }
 ` : ''}${hasCallerSlots ? `
   if (spec.type === 'instance' && spec.children) {

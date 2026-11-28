@@ -5,7 +5,7 @@ import { chromium } from 'playwright-core';
 import {PNG} from 'pngjs';
 import { ContractSchema, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import type { DumpSet } from '../extract/figma/types.js';
-import { asMinimalChildContract, proposeFromDump } from './propose-figma.js';
+import { asMinimalChildContract, proposeFromDump, proposeBatchFromDump } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { reactEmitter, reactInlineEmitter } from './emitter.js';
 import { mountGenerated } from './react-test-runtime.js';
@@ -14,12 +14,15 @@ import { createFigmaEngine } from './emit-figma-script.js';
 import { emitHtml } from './emit-html.js';
 import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
+import {promoteNestedDrawingInk,nestedDrawingInkTarget} from './nested-drawing-ink.js';
+import {revisionOf} from './contract-provenance.js';
+import type {CapturedTokenEntry} from './captured-tokens.js';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
 
 /** A keyed standalone SCALE/SCALE drawing (one currentColor path, recorded
  * 24 px main viewport) placed directly in a host at 16 and 24 px. */
-function drawingFixture() {
+function drawingFixture(capturedVariablePaths?:ReadonlyMap<string,string>,capturedTokenEntries?:ReadonlyMap<string,CapturedTokenEntry>) {
   const child = ContractSchema.parse({
     id: 'check.glyph', name: 'Glyph', version: '0.1.0', status: 'draft', description: 'Standalone drawing',
     semantics: { element: 'span' }, props: [], states: [],
@@ -40,7 +43,7 @@ function drawingFixture() {
     })),
   };
   const scope = new Map<string, Contract>([[child.id, child]]);
-  const propose = () => proposeFromDump(set, { corpus, mintUnbound: true, fileKey: 'fixture',
+  const propose = () => proposeFromDump(set, { corpus, mintUnbound: true, fileKey: 'fixture', capturedVariablePaths,capturedTokenEntries,
     contractIdByName: new Map([['Glyph', child.id]]), contractIdByKey: new Map([['glyph-key', child.id]]),
     contractsById: new Map([...scope].map(([id, c]) => [id, asMinimalChildContract(c)])) });
   const read = () => {
@@ -393,8 +396,8 @@ test('slot square drawing size takes precedence over captured root width and hei
  assert.equal(fallback.rootOverrides?.height,undefined);
 });
 
-function boundDrawingFixture(){
- const f=drawingFixture();
+function boundDrawingFixture(paths?:ReadonlyMap<string,string>,entries?:ReadonlyMap<string,CapturedTokenEntry>){
+ const f=drawingFixture(paths,entries);
  for(let i=0;i<2;i++){
   const h=f.mark(i).hostOverrides![0],color={r:i===0?.5:.25,g:i===0?.25:.5,b:.75},id='native-ink-'+i,value={...color,a:1};
   h.fields=['fillStyleId','fills'];h.fill={var:'Theme/Ink'};
@@ -614,4 +617,137 @@ test('WC preserves equivalent ordered slot fallback anatomy and refuses addition
   (p:any)=>{p.parts.two={component:call};},
   (p:any)=>{p.parts.one.component.overrides={color:'#ff0000'};},
  ]){const altered=structuredClone(parent);change(altered.anatomy.root.parts!.body);assert.throws(()=>emitWebComponent(altered,ctx),/SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components/);}
+});
+
+test('allocated native ink preserves same-value alias identity through filled and stroked instance overrides',()=>{
+ for(const stroked of [false,true]){
+  const entries=new Map<string,CapturedTokenEntry>();
+  const f=boundDrawingFixture(new Map([['Theme/Ink','theme.ink'],['Theme/Alternate','theme.alternate']]),entries);
+  const observed=structuredClone(f.mark(0).hostOverrides![0]);
+  if(stroked){
+   f.child.anatomy.root.overridable!.push('stroke-width');f.child.anatomy.root.tokens!['stroke-width']='{drawing.stroke}';
+   f.child.anatomy.root.parts!.ink={literals:{'border-color':'currentColor','border-width':'inherit'},shape:{kind:'stroked-path',width:18,height:18,strokePath:{data:'M0 0L18 18',cap:'ROUND',join:'ROUND',miterLimit:4,viewport:{width:24,height:24,x:3,y:3}}}};
+  }
+  for(let i=0;i<2;i++){
+   const n=f.mark(i),h=n.hostOverrides![0];n.nodeId=h.solidFillTarget!.instanceId;
+   h.sourceNormalFillComposition=structuredClone(observed.sourceNormalFillComposition);
+   h.variableConsumers=structuredClone(observed.variableConsumers);
+   const id='native-ink-'+i,name=i?'Theme/Alternate':'Theme/Ink';h.fill!.var=name;
+   if('paint'in h.sourceNormalFillComposition!)h.sourceNormalFillComposition.variableId=id;
+   h.variableConsumers={[id]:{...observed.variableConsumers!['native-ink-0'],name}};
+   entries.set(name,{name,path:i?'theme.alternate':'theme.ink',value:'rgba(127.5,63.75,191.25,1)',type:'color',source:{variableId:id,collectionId:'theme',modeId:'light',modeName:'Light',scope:'selected-mode',tier:'unspecified'}});
+   if(stroked){h.fields=['strokes'];h.stroke=h.fill;delete h.fill;h.solidStrokeTarget=h.solidFillTarget;delete h.solidFillTarget;h.sourceNormalStrokeComposition=h.sourceNormalFillComposition;delete h.sourceNormalFillComposition;h.strokeWeight=.9;}
+  }
+  const read=f.read();assert(read.overrides?.color);
+  const aliases=read.result.mintedTokens!.entries.map(e=>e.value).filter(v=>String(v).startsWith('{')).sort();
+  assert.deepEqual(aliases,['{theme.alternate}','{theme.ink}']);
+  if(stroked)assert(read.result.mintedTokens!.entries.some(e=>e.value==='0.9px'),'observed resized width needs no explicit strokeWeight override');
+  if(stroked){
+   const tokens={primitives:{drawing:{size:{$type:'dimension',$value:'24px'},ink:{$type:'color',$value:'#123456'},stroke:{$type:'dimension',$value:'1.5px'}},theme:{ink:{$type:'color',$value:'#8040bf'},alternate:{$type:'color',$value:'#8040bf'}},...read.result.mintedTokens!.tree},semantic:{},light:{},dark:{},brands:{default:{}}};
+   const scope=new Map([[f.child.id,f.child],[read.contract.id,read.contract]]),engine=createFigmaEngine({tokens,icons:new Map()});
+   const source={kind:'prepared-contract-library' as const,revision:'sha256:'+'1'.repeat(64),artifactId:'1'.repeat(64),inputSha256:'2'.repeat(64),tarballSha256:'3'.repeat(64),tokensSha256:revisionOf(tokens).slice(7)};
+   const native=engine.compileNativePreparedLibrary(read.contract,scope,source,'70000000-0000-4000-8000-000000000001');
+   const width=read.result.mintedTokens!.entries.find(e=>e.value==='0.9px')!;assert(native.boundNames.includes(width.ref.slice(1,-1).replaceAll('.','/')),'native token scope includes the observed instance stroke width');
+  }
+  f.mark(0).nodeId='wrong-instance';assert.equal(f.read().overrides?.color,undefined);
+ }
+});
+
+function nestedInkFixture(){
+ const f=drawingFixture(),root=f.child.anatomy.root,leaf=root.parts!.ink;
+ delete leaf.shape!.parentViewport;root.overridable=[];delete root.tokens!.color;
+ leaf.tokens={'background-color':'{drawing.ink}'};delete leaf.literals!['background-color'];
+ const group={parts:{'renamed-leaf':leaf},tokens:{},shape:undefined};root.parts={'renamed-group':group};
+ const vector={name:'native leaf',type:'VECTOR',nodeId:'50:3',sourceStrokeStack:{version:1,order:'bottom-to-top',complete:true,paints:[]}};
+ const wrapper={name:'native group',type:'GROUP',nodeId:'50:2',children:[vector]};
+ const set={setName:'Unrelated name',type:'COMPONENT',nodeId:'50:1',variants:[{name:'main',type:'COMPONENT',nodeId:'50:1',children:[wrapper]}]} as DumpSet;
+ const owners=new Map<string,Set<object>>([['50:2',new Set([group])],['50:3',new Set([leaf])]]);
+ return {f,root,leaf,group,set,owners,wrapper,vector};
+}
+test('nested drawing ink follows exact source ownership and keeps the native group structure',()=>{
+ const {f,root,leaf,group,set,owners}=nestedInkFixture(),shape=structuredClone(leaf.shape),source=JSON.stringify(set);
+ const drawingInk=promoteNestedDrawingInk(root,set,owners);assert(drawingInk);
+ assert.deepEqual(drawingInk,{nodeId:'50:3',childPath:[0,0],partPath:['root','renamed-group','renamed-leaf']});
+ assert.equal(root.parts!['renamed-group'],group);assert.deepEqual(leaf.shape,shape);assert.equal(JSON.stringify(set),source);
+ assert.deepEqual(root.overridable,['color']);assert.equal(root.tokens!.color,'{drawing.ink}');assert.equal(leaf.literals!['background-color'],'currentColor');
+ const context={contractRevision:revisionOf(f.child),sourceFileKey:'fixture',sourceKey:'glyph-key',sourceNodeId:'50:1',drawingInk};
+ const node=f.mark(0),h=node.hostOverrides![0];node.nodeId='i';h.solidFillTarget={nodeId:'Ii;50:3',instanceId:'i',componentId:'50:1',instancePath:[],childPath:[0,0]};
+ assert.equal(nestedDrawingInkTarget(node,f.child,context,'fixture'),h);
+ for(const fault of ['revision','file','main','leaf','route','field','duplicate']){
+  const n=structuredClone(node),c=structuredClone(context),target=n.hostOverrides![0].solidFillTarget!;
+  if(fault==='revision')c.contractRevision='stale';if(fault==='file')c.sourceFileKey='other';if(fault==='main')target.componentId='other';
+  if(fault==='leaf')target.nodeId='Ii;50:4';if(fault==='route')target.childPath=[0,1];if(fault==='field')n.hostOverrides![0].fields.push('opacity');
+  if(fault==='duplicate')n.hostOverrides!.push(structuredClone(h));
+  assert.equal(nestedDrawingInkTarget(n,f.child,c,'fixture'),undefined,fault);
+ }
+});
+test('ambiguous or painting nested owners never gain an ink channel or mutate the child',()=>{
+ for(const fault of ['missing','duplicate','foreign-object','branch','paint','text','conditional','stroke','instance','ancestor-color','root-color','group-color','leaf-color','leaf-paint']){
+  const a=nestedInkFixture();
+  if(fault==='missing')a.owners.delete('50:3');if(fault==='duplicate')a.owners.get('50:3')!.add({});
+  if(fault==='foreign-object')a.owners.set('50:3',new Set([structuredClone(a.leaf)]));
+  if(fault==='branch')a.wrapper.children.push({...a.vector});if(fault==='paint')Object.assign(a.wrapper,{fill:{hex:'ff0000'}});
+  if(fault==='text')Object.assign(a.leaf,{text:'hidden paint'});if(fault==='conditional')a.leaf.states={hover:{color:'red'}};
+  if(fault==='stroke')a.vector.sourceStrokeStack.complete=false;if(fault==='instance')a.wrapper.type='INSTANCE';
+  if(fault==='ancestor-color')Object.assign(a.group,{literals:{color:'red'}});
+  if(fault==='root-color')a.root.declared={color:'red'};if(fault==='group-color')Object.assign(a.group,{declared:{color:'red'}});
+  if(fault==='leaf-color')a.leaf.literals={color:'red'};if(fault==='leaf-paint')a.leaf.declared={'background-color':'red'};
+  const before=JSON.stringify(a.root);assert.equal(promoteNestedDrawingInk(a.root,a.set,a.owners),undefined,fault);assert.equal(JSON.stringify(a.root),before,fault);
+ }
+});
+
+test('a token-name allocation alone never collapses different consuming modes',()=>{
+ const f=boundDrawingFixture(new Map([['Theme/Ink','theme.ink']]));
+ for(let i=0;i<2;i++)f.mark(i).nodeId=f.mark(i).hostOverrides![0].solidFillTarget!.instanceId;
+ const values=f.read().result.mintedTokens!.entries.map(e=>e.value).sort();
+ assert.deepEqual(values,['#8040bf','#4080bf','16px','24px'].sort());
+ const batch=proposeBatchFromDump({Holder:f.set,_variables:{'Theme/Ink':{type:'COLOR',value:'#8040bf',modes:{Light:'#8040bf',Dark:'#4080bf'}}}},{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Glyph',f.child.id]]),contractIdByKey:new Map([['glyph-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});
+ assert.deepEqual(batch.skipped,[]);assert.deepEqual(batch.proposals[0].mintedTokens!.entries.map(e=>e.value).sort(),values);
+});
+
+test('native nested drawing ink keeps alias identity and the standalone default without resizing',async()=>{
+ const {child,parent,primitives,aliased}=stateContracts();const leaf=child.anatomy.root.parts!.ink;
+ delete leaf.shape!.parentViewport;leaf.literals={...leaf.literals,left:'3px',top:'3px'};
+ child.anatomy.root.parts={wrapper:{declared:{position:'relative'},literals:{width:'24px',height:'24px'},parts:{leaf}}};
+ child.anatomy.root.overridable=['color'];for(const {part}of walkAnatomy(parent))if(part.component?.overrides)delete part.component.overrides.size;
+ const scope=new Map([[child.id,child],[parent.id,parent]]),tokens={primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}};
+ const engine=createFigmaEngine({tokens,icons:new Map()}),data=engine.compileComponentData(parent,scope);
+ assert(!data.codeOnlyFacts?.some(f=>f.channel==='per-instance override "color"'));
+ const host=createFigmaMock({fileKey:'fixture'}),api=host.figma as any,context=vm.createContext({figma:api,console:{log(){},warn(){},error(){}}});
+ api.createVector=()=>{const n=api.createRectangle();Object.assign(n,{type:'VECTOR',isMask:false,blendMode:'PASS_THROUGH',vectorPaths:[]});return n;};
+ const run=(s:string)=>vm.runInContext(`(async()=>{${s}\n})()`,context);
+ await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(child,scope));
+ const main=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===child.id)!;
+ const snapshot=()=>JSON.stringify(main.findAll().map(n=>({id:n.id,type:n.type,width:n.width,height:n.height,x:n.x,y:n.y,fills:n.fills})));
+ const before=snapshot();await run(engine.buildComponentScript(parent,scope));assert.equal(snapshot(),before);
+ const owner=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===parent.id)!,instance=owner.findOne(n=>n.type==='INSTANCE')!,ink=instance.findOne(n=>n.type==='VECTOR')!;
+ const variables=await api.variables.getLocalVariablesAsync(),bound=variables.find((v:any)=>v.name==='g/base'),primitive=variables.find((v:any)=>v.name==='raw/base');
+ assert.equal((ink.fills as any)[0].boundVariables.color.id,bound.id);assert(Object.values(bound.valuesByMode).some((v:any)=>v.type==='VARIABLE_ALIAS'&&v.id===primitive.id));
+ assert.equal(instance.width,main.width);assert.equal(instance.height,main.height);
+ for(const fault of ['branch','paint','text','conditional','color','root-background','root-text','root-shape']){
+  const changed=structuredClone(child),wrapper=changed.anatomy.root.parts!.wrapper;
+  if(fault==='branch')wrapper.parts!.extra=structuredClone(leaf);if(fault==='paint')wrapper.literals!['background-color']='red';
+  if(fault==='text')wrapper.text='competing text';if(fault==='conditional')wrapper.visibleWhen={prop:'unknown'};
+  if(fault==='color')wrapper.literals!.color='red';
+  if(fault==='root-background')changed.anatomy.root.literals={...changed.anatomy.root.literals,'background-color':'currentColor'};
+  if(fault==='root-text')changed.anatomy.root.text='Competing ink';if(fault==='root-shape')changed.anatomy.root.shape=structuredClone(leaf.shape);
+  const d=engine.compileComponentData(parent,new Map([[child.id,changed],[parent.id,parent]]));
+  assert(d.codeOnlyFacts?.some(f=>f.channel==='per-instance override "color"'),fault);
+ }
+});
+
+test('attached native ink lookup sees hidden branches and rejects nested instances while restoring visibility policy',()=>{
+ const {child,parent,primitives,aliased}=stateContracts(),engine=createFigmaEngine({tokens:{primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}},icons:new Map()});
+ const script=engine.buildComponentScript(parent,new Map([[child.id,child],[parent.id,parent]]));
+ const start=script.indexOf('    let ink = node;'),marker='    } finally { figma.skipInvisibleInstanceChildren = previousSkip; }',end=script.indexOf(marker,start);assert(start>=0&&end>start);
+ const lookup=script.slice(start,end+marker.length)+'; ink;';
+ for(const fault of ['none','hidden','nested','empty','deep','setter']){
+  const figma={skipInvisibleInstanceChildren:true},paint={color:'#fff'},vector={type:'VECTOR',set fills(value:unknown){assert.equal(figma.skipInvisibleInstanceChildren,false);assert(Array.isArray(value));assert.equal(value.length,1);assert.equal(value[0],paint);if(fault==='setter')throw Error('setter-refused');}},extra={type:'FRAME',children:[]};let child:any={type:'FRAME',children:[{type:'FRAME',children:[vector]}]};
+  if(fault==='nested')child.type='INSTANCE';if(fault==='empty')child.children=[];
+  if(fault==='deep')for(let i=0;i<17;i++)child={type:'FRAME',children:[child]};
+  const node={id:'observed',type:'INSTANCE',get children(){return fault==='hidden'&&!figma.skipInvisibleInstanceChildren?[child,extra]:[child];}};
+  const context={figma,node,spec:{instanceInk:{varName:'ink'}},boundPaint(){assert.equal(figma.skipInvisibleInstanceChildren,false);return paint;}};
+  if(fault==='none')assert.equal(vm.runInNewContext(lookup,context),vector);else assert.throws(()=>vm.runInNewContext(lookup,context),fault==='setter'?/setter-refused/:/filled-path-instance-ink-tree-mismatch/,fault);
+  assert.equal(figma.skipInvisibleInstanceChildren,true,fault);
+ }
 });
