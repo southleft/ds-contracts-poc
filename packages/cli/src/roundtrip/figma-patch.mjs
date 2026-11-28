@@ -1,7 +1,11 @@
 export async function patchNative(context) {
-  const { R, figma, B, parent, vars, collections, components, stable, rgb, shot, before } = context;
+  const { R, figma, B, parent, vars, collections, components, stable, rgb, shot, before: initial, tokenValue } = context;
+  let before = initial;
   const intended = JSON.parse(JSON.stringify(R.expected)),
-    color = (id) => (B.system.tokens[id].alias ? color(B.system.tokens[id].alias) : B.system.tokens[id].value);
+    color = (id) =>
+      B.system.tokens[id].alias
+        ? color(B.system.tokens[id].alias)
+        : tokenValue(B.system.tokens[id].type, B.system.tokens[id].value);
   for (const [id, t] of Object.entries(B.system.tokens)) {
     delete intended.tokens[id].alias;
     delete intended.tokens[id].value;
@@ -17,7 +21,10 @@ export async function patchNative(context) {
     }
   }
   if (stable(before) === stable(intended)) return { status: "unchanged", created: 0, snapshot: before };
-  if (stable(before) !== stable(R.expected)) throw Error("native revision conflict");
+  if (stable(before) !== stable(R.expected)) {
+    before = await shot(R.expected.tokens);
+    if (stable(before) !== stable(R.expected)) throw Error("native revision conflict");
+  }
   const undo = [];
   try {
     for (const id of R.plan.tokenOrder) {
@@ -25,9 +32,14 @@ export async function patchNative(context) {
         v = vars[id],
         mode = collections[t.tier].defaultModeId,
         old = v.valuesByMode[mode],
-        next = t.alias ? figma.variables.createVariableAlias(vars[t.alias]) : rgb(t.value);
+        next = t.alias
+          ? figma.variables.createVariableAlias(vars[t.alias])
+          : t.type === "dimension"
+            ? tokenValue(t.type, t.value, "native")
+            : rgb(tokenValue(t.type, t.value));
       undo.push(() => {
-        if (stable(v.valuesByMode[mode]) === stable(next)) v.setValueForMode(mode, old);
+        const current = v.valuesByMode[mode];
+        if (typeof next === "number" ? current === next : stable(current) === stable(next)) v.setValueForMode(mode, old);
       });
       v.setValueForMode(mode, next);
     }

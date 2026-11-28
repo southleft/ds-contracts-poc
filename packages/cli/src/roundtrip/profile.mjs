@@ -1,3 +1,4 @@
+import { bindingType } from "./token-value.mjs";
 import { fileHash } from "./files.mjs";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
@@ -35,7 +36,7 @@ export function inspectProfile(P, root) {
       assert(value, "missing token: " + id);
     }
     type = value.$type ?? value.type ?? type;
-    assert.equal(type, "color", "unsupported token type: " + id);
+    assert(["color", "dimension"].includes(type), "unsupported token type: " + id);
     const field = p.field ?? "$value",
       literal = value[field];
     assert.equal(typeof literal, "string");
@@ -47,10 +48,19 @@ export function inspectProfile(P, root) {
       type,
       scopes: p.scopes ?? [],
       css: p.css ?? "--" + id.replaceAll(".", "-"),
-      ...(alias ? { alias: alias[1] } : { value: literal.toLowerCase() }),
-      source: { file: p.file, path: [...id.split("."), field], sha256: fileHash(local(p.file)) },
+      ...(alias ? { alias: alias[1] } : { value: type === "color" ? literal.toLowerCase() : literal }),
+      source: {
+        file: p.file,
+        path: [...id.split("."), field],
+        sha256: fileHash(local(p.file)),
+      },
     };
   }
+  for (const [part, p] of Object.entries(P.appearance.parts ?? {}))
+    for (const [field, id] of Object.entries(p.bindings ?? {})) {
+      const type = bindingType(p.kind, field);
+      assert(type && tokens[id]?.type === type, "unsupported token binding: " + part + "." + field);
+    }
   const components = {};
   for (const [id, d] of Object.entries(P.dependencies)) {
     assert(d.selector, "missing dependency selector: " + id);

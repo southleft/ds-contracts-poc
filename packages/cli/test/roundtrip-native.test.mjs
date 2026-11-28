@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { tokenValue } from "../src/roundtrip/token-value.mjs";
 import { runtime } from "../src/roundtrip/figma.mjs";
 
 function fixture() {
@@ -19,6 +20,7 @@ function fixture() {
   const variables = ["first", "second"].map((name, i) => ({
     id: "v" + (i + 1),
     name,
+    resolvedType: "COLOR",
     valuesByMode: { m: { r: 0, g: 0, b: 0 } },
     scopes: [],
     codeSyntax: {},
@@ -42,7 +44,7 @@ function fixture() {
       root: "root",
       components: { root: { revision: "r2", instances: {} } },
       system: {
-        tokens: { first: { tier: "primitive", value: "#ff0000" }, second: { tier: "primitive", value: "#00ff00" } },
+        tokens: { first: { type: "color", tier: "primitive", value: "#ff0000" }, second: { type: "color", tier: "primitive", value: "#00ff00" } },
       },
     },
     plan: { status: "ready", tokenOrder: ["first", "second"] },
@@ -159,4 +161,61 @@ test("every dependency vector must keep its declared binding, even with equal co
   await assert.rejects(f.run({ action: "read" }), /native dependency binding changed: glyph/);
   delete vectors[1].fills[0].boundVariables.color;
   await assert.rejects(f.run({ action: "read" }), /native dependency binding changed: glyph/);
+});
+
+for (const fault of ["setter", "readback"]) {
+  test(`decimal native ${fault} failure restores values and revision`, async () => {
+    const f = fixture(), v = f.variables[0], token = f.request.bundle.system.tokens.first;
+    token.type = "dimension";
+    token.value = "14.10px";
+    v.resolvedType = "FLOAT";
+    v.valuesByMode.m = Math.fround(14.1);
+    const expected = await f.run({ action: "read" });
+    assert.equal(expected.tokens.first.value, "14.10px");
+    token.value = "40.1px";
+    let fail = true;
+    v.setValueForMode = function (mode, value) {
+      this.valuesByMode[mode] = Math.fround(value);
+      if (fail) {
+        fail = false;
+        if (fault === "setter") throw Error("setter failed after mutation");
+        f.variables[1].codeSyntax = { WEB: "changed" };
+      }
+    };
+    await assert.rejects(f.run({ action: "patch", expected }),
+      fault === "setter" ? /setter failed/ : /native patch result differs/);
+    assert.equal(v.valuesByMode.m, Math.fround(14.1));
+    assert.equal(f.set.getSharedPluginData("", "contract-revision"), "r1");
+  });
+}
+test("explicit px values must survive native FLOAT storage", () => {
+  for (const value of ["14PX", "1rem", "calc(14px)", "0px", "-1px", "1e2px",
+    "0." + "0".repeat(50) + "1px", "1" + "0".repeat(40) + "px"])
+    assert.throws(() => tokenValue("dimension", value), /unsupported-token-value/);
+  assert.equal(tokenValue("dimension", "14.10px"), 14.1);
+  assert.equal(tokenValue("dimension", "14.10px", "native"), Math.fround(14.1));
+});
+
+test("decimal and spelling-only source patches replay and protect adjacent native edits", async () => {
+  const f = fixture(), v = f.variables[0], token = f.request.bundle.system.tokens.first;
+  token.type = "dimension";
+  token.value = "14.10px";
+  v.resolvedType = "FLOAT";
+  v.valuesByMode.m = Math.fround(14.1);
+  v.setValueForMode = function (mode, value) { this.valuesByMode[mode] = Math.fround(value); };
+  for (const next of ["14.1px", "40.1px"]) {
+    const expected = await f.run({ action: "read" });
+    token.value = next;
+    const result = await f.run({ action: "patch", expected });
+    assert.equal(result.after.tokens.first.value, next);
+    assert.equal((await f.run({ action: "patch", expected })).status, "unchanged");
+  }
+  const expected = await f.run({ action: "read" }), concurrent = Math.fround(14.0000105);
+  token.value = "14.00001px";
+  v.setValueForMode = function (mode) {
+    this.valuesByMode[mode] = concurrent;
+    throw Error("concurrent edit after setter");
+  };
+  await assert.rejects(f.run({ action: "patch", expected }), /concurrent edit/);
+  assert.equal(v.valuesByMode.m, concurrent);
 });

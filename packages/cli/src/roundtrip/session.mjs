@@ -37,9 +37,17 @@ export function policy(P, B, native, root) {
     root,
     contractSha256: hash(B),
     nativeBaselineSha256: hash(native),
-    tokens: Object.values(B.system.tokens).map((t) => ({ id: t.id, file: t.source.file, path: t.source.path })),
+    tokens: Object.values(B.system.tokens).map((t) => ({
+      id: t.id,
+      file: t.source.file,
+      path: t.source.path,
+      ...(t.type === "dimension" ? { type: t.type } : {}),
+    })),
     guards: [...new Set([...inputs, ...Object.values(B.system.tokens).map((t) => t.source.file)])],
-    inputs: [...new Set(inputs)].map((file) => ({ file, sha256: fileHash(path.resolve(root, file)) })),
+    inputs: [...new Set(inputs)].map((file) => ({
+      file,
+      sha256: fileHash(path.resolve(root, file)),
+    })),
   };
 }
 

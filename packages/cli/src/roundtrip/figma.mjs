@@ -1,9 +1,10 @@
+import { tokenValue } from "./token-value.mjs";
 import { readNative } from "./figma-read.mjs";
 import { patchNative } from "./figma-patch.mjs";
 import { canonical } from "./surface.mjs";
 import { makePlan } from "./surface.mjs";
 import { resolveBundle } from "./model.mjs";
-export async function runtime(R, figma, read = readNative, patch = patchNative) {
+export async function runtime(R, figma, read = readNative, patch = patchNative, value = tokenValue) {
   if (figma.fileKey !== R.fileKey) throw Error("wrong target file");
   const B = R.bundle,
     stable = (x) =>
@@ -66,7 +67,7 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
       components[n.getSharedPluginData("ds_contracts_roundtrip_v1", "contract-id")] = n;
   const tokenFor = (a) => (a ? (Object.keys(vars).find((id) => vars[id]?.id === a.id) ?? null) : null);
   const paints = (n) => n.fills?.filter((p) => p.visible !== false && p.type === "SOLID") ?? [];
-  const shot = () => read({ B, parent, board, collections, vars, components, tokenFor, paints, stable, hex });
+  const shot = (sourceTokens = B.system.tokens) => read({ B, parent, board, collections, vars, components, tokenFor, paints, stable, hex, tokenValue: value, sourceTokens });
   const before = await shot();
   if (R.action === "read") return before;
   const applyTokens = () => {
@@ -74,7 +75,11 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
       const t = B.system.tokens[id];
       vars[id].setValueForMode(
         collections[t.tier].defaultModeId,
-        t.alias ? figma.variables.createVariableAlias(vars[t.alias]) : rgb(t.value),
+        t.alias
+          ? figma.variables.createVariableAlias(vars[t.alias])
+          : t.type === "dimension"
+            ? value(t.type, t.value, "native")
+            : rgb(value(t.type, t.value)),
       );
     }
   };
@@ -86,7 +91,7 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
       return { status: "unchanged", created: 0, snapshot: before };
     }
     if (R.action === "patch")
-      return patch({ R, figma, B, parent, vars, collections, components, stable, rgb, shot, before });
+      return patch({ R, figma, B, parent, vars, collections, components, stable, rgb, shot, before, tokenValue: value });
     if (stable(before) !== stable(R.expected)) throw Error("native revision conflict");
     return { status: "unchanged", created: 0, snapshot: before };
   }
@@ -96,7 +101,10 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
   for (const v of R.appearance.variants)
     for (const p of Object.values(v.parts))
       if (p.kind === "text") {
-        const f = { family: p.styles["font-family"], style: p.styles["font-style"] };
+        const f = {
+          family: p.styles["font-family"],
+          style: p.styles["font-style"],
+        };
         if (!fonts.some((x) => x.fontName.family === f.family && x.fontName.style === f.style))
           throw Error("missing font: " + f.family + " / " + f.style);
         await figma.loadFontAsync(f);
@@ -115,7 +123,13 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
     }
     for (const id of R.plan.tokenOrder) {
       const t = B.system.tokens[id],
-        v = track(figma.variables.createVariable(id.replaceAll(".", "/"), collections[t.tier], "COLOR"));
+        v = track(
+          figma.variables.createVariable(
+            id.replaceAll(".", "/"),
+            collections[t.tier],
+            t.type === "dimension" ? "FLOAT" : "COLOR",
+          ),
+        );
       v.scopes = t.scopes;
       v.setVariableCodeSyntax("WEB", "var(" + t.css + ")");
       v.description = t.tier + " token; source: " + t.source.file + "#/" + t.source.path.join("/");
@@ -165,6 +179,7 @@ export async function runtime(R, figma, read = readNative, patch = patchNative) 
         if (p.kind === "text") {
           n.fontName = { family: s["font-family"], style: s["font-style"] };
           n.fontSize = s["font-size"];
+          if (p.tokens["font-size"]) n.setBoundVariable("fontSize", vars[p.tokens["font-size"]]);
           n.lineHeight = { unit: "PIXELS", value: s["line-height"] };
           n.letterSpacing = { unit: "PIXELS", value: s["letter-spacing"] };
           n.characters = s.text;
@@ -272,5 +287,5 @@ export function emitSystem(bundle, options) {
   const plan = resolveBundle(bundle),
     parent = bundle.components[bundle.root];
   if (!options?.fileKey || !options?.page || !options?.prefix) throw Error("missing Figma target");
-  return `return (${runtime.toString()})(${canonical({ action: "create", bundle, plan, appearance: plan.status === "ready" ? makePlan(parent.appearance) : null, ...options })},figma,(${readNative.toString()}),(${patchNative.toString()}));\n`;
+  return `return (${runtime.toString()})(${canonical({ action: "create", bundle, plan, appearance: plan.status === "ready" ? makePlan(parent.appearance) : null, ...options })},figma,(${readNative.toString()}),(${patchNative.toString()}),(${tokenValue.toString()}));\n`;
 }

@@ -117,3 +117,25 @@ for (const fault of ["deleted", "changed", "unwritable"]) {
     assert(names.every((name) => !fs.existsSync(join(policy.root, name + ".ds-contracts-writeback"))));
   });
 }
+
+test("a reviewed dimension edit uses its typed ownership policy", (t) => {
+  const f = fixture(t);
+  f.save("size.json", '{ "size": "14.10px" }\n');
+  f.B.system.tokens.size = { id: "size", type: "dimension", tier: "primitive", value: "14.10px",
+    source: { file: "size.json", path: ["size"], sha256: hash(f.read("size.json")) } };
+  f.before.tokens.size = { id: "size", value: "14.10px" };
+  f.policy.tokens.push({ id: "size", file: "size.json", path: ["size"], type: "dimension" });
+  f.policy.guards.push("size.json");
+  f.policy.contractSha256 = hash(f.B);
+  f.policy.nativeBaselineSha256 = hash(f.before);
+  const after = structuredClone(f.before);
+  after.tokens.size.value = "16px";
+  const plan = planWriteback(f.B, f.before, after, f.policy);
+  applyWriteback(plan, f.policy, plan.digest);
+  assert.equal(f.read("size.json"), '{ "size": "16px" }\n');
+  f.save("size.json", '{ "size": "14.10px" }\n');
+  f.policy.tokens.at(-1).type = "color";
+  const wrongType = planWriteback(f.B, f.before, after, f.policy);
+  assert.throws(() => applyWriteback(wrongType, f.policy, wrongType.digest), /unsupported-token-value/);
+  assert.equal(f.read("size.json"), '{ "size": "14.10px" }\n');
+});
