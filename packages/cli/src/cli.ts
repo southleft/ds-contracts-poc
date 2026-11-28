@@ -179,8 +179,9 @@ Start, apply and refresh prepare a guarded Figma program. Use sync, then Connect
 in the plugin's Advanced tab, to exchange it and verify the result automatically.
 Sync on a ready session reviews canvas changes. Apply requires the reviewed digest.
 Read and accept support a manual JSON handoff. Discard cancels an unapplied review.
-Only source-backed color variable values and aliases can be written back; other canvas
-edits and missing dependencies are refused. Behavior remains in the original React source.
+Only declared source-backed color and positive px font-size values and aliases can be
+written back. Other canvas edits, unmodeled reflow and missing dependencies are refused.
+Behavior remains in the original React source.
 This opt-in workflow requires an explicit profile. It does not qualify arbitrary components.`,
   'react-to-figma': `ds-contracts react-to-figma — this React library's components → contracts and Figma programs
 
