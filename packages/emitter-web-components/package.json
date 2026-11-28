@@ -21,8 +21,7 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "package:smoke": "npm pack --dry-run --json"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
     "node": ">=20"

@@ -200,7 +200,7 @@ jobs:
 
       - name: package smoke @ds-contracts/emitter-web-components
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm --prefix packages/emitter-web-components run package:smoke
+        run: cd packages/emitter-web-components && npm pack --dry-run --json
 
       - name: typecheck playground
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
