@@ -8,18 +8,18 @@ import type { CapturedTokenEntry } from './captured-tokens.js';
 
 export const CAPTURED_ALIAS_LIMIT = 'Captured color aliases preserve native identity and the selected consuming context only; token tiers, other modes and interaction behavior are not inferred. Variables without native alias evidence remain resolved values.';
 
+/** Native records only; projected template consumers are not evidence. */
+export function capturedVariableConsumers(value: unknown): Array<[string, DumpVariableConsumer]> {
+  if (!value || typeof value !== 'object') return [];
+  return Object.entries(value).flatMap(([key, child]) => key === 'variableConsumers'
+    ? Object.entries((child ?? {}) as Record<string, DumpVariableConsumer>) : capturedVariableConsumers(child));
+}
+
 /** Validate native graphs independently of rendered paint equivalence. */
-export function capturedAliasEntries(dump: Record<string, unknown>, pathFor: (name: string) => string): CapturedTokenEntry[] {
-  const consumers: Array<[string, DumpVariableConsumer]> = [];
-  const walk = (value: unknown): void => {
-    if (!value || typeof value !== 'object') return;
-    for (const [key, child] of Object.entries(value)) {
-      if (key === 'variableConsumers') consumers.push(...Object.entries(child as Record<string, DumpVariableConsumer>));
-      else walk(child);
-    }
-  };
-  for (const value of Object.values(dump)) if (isDumpSet(value)) walk(value);
-  const ordinary = consumers.filter(([, c]) => !c.name?.startsWith('dsc-native-template/'));
+export function capturedAliasEntries(dump: Record<string, unknown>, pathFor: (name: string) => string,
+  ignored: ReadonlySet<DumpVariableConsumer> = new Set()): CapturedTokenEntry[] {
+  const ordinary = Object.values(dump).filter(isDumpSet).flatMap(capturedVariableConsumers).filter(([, c]) => !ignored.has(c));
+  if (ordinary.some(([, c]) => !c || typeof c !== 'object')) throw Error('captured-alias-consumer-invalid');
   const aliases = ordinary.filter(([, c]) => (c.selectedValue as {type?: string})?.type === 'VARIABLE_ALIAS' || c.aliasChain?.length);
   if (!aliases.length) return [];
   const qualify = ([id, c]: [string, DumpVariableConsumer]) => {

@@ -39,6 +39,19 @@ test('selected alias graph preserves identity, native precision and edges throug
   assert.deepEqual(capturedTokensFromDump(input),layer);
 });
 
+test('reserved-looking names need validated carrier ownership; invalid templates retain named refusal only', () => {
+  const ordinary=dump();node(ordinary).variableConsumers.c.name='dsc-native-template/user-color';
+  const layer=capturedTokensFromDump(ordinary)!;
+  assert.equal(layer.entries.find(e=>e.name==='dsc-native-template/user-color')!.reference,'{brand.accent.600}');
+  const invalid=dump();invalid.Checkbox.rootSlot={textTemplate:1};
+  node(invalid).children=[{children:[{text:{fillVar:'dsc-native-template/user-color'},variableConsumers:node(invalid).variableConsumers}]}];
+  const refused=capturedTokensFromDump(invalid)!;
+  assert.equal(refused.count,0);assert.equal(refused.skipped.length,1);
+  assert.match(refused.skipped[0].reason,/TEMPLATE/);
+  node(invalid).variableConsumers.c.aliasChain={bad:true};
+  assert.match(capturedTokensFromDump(invalid)!.skipped[0].reason,/TEMPLATE/);
+});
+
 test('supplied incomplete, ambiguous and conflicting graphs refuse instead of becoming literals', () => {
   const cases:Array<[(d:any)=>void,RegExp]>=[
     [d=>delete node(d).variableConsumers.c.aliasChain,/selected-alias-edge/],

@@ -1,6 +1,6 @@
 /** Import-scoped Figma values and verified selected-context color aliases. */
-import { capturedAliasEntries, assertCapturedAliasPaths, CAPTURED_ALIAS_LIMIT } from './captured-aliases.js';
-import { isDumpSet, type DumpNode, type DumpVariable } from '../extract/figma/types.js';
+import { capturedAliasEntries, capturedVariableConsumers, assertCapturedAliasPaths, CAPTURED_ALIAS_LIMIT } from './captured-aliases.js';
+import { isDumpSet, type DumpNode, type DumpVariableConsumer, type DumpVariable } from '../extract/figma/types.js';
 import { projectRootTextTemplateAliases, type TemplateSourceToken } from './figma-template-aliases.js';
 
 export interface CapturedTokenEntry {
@@ -107,23 +107,32 @@ export function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, u
  * the degraded fallback, exactly as before.
  */
 export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedTokenLayer | null {
-  const aliases = capturedAliasEntries(dump, name => foldVariablePath(name).path);
   const rawVars = (dump['_variables'] ?? {}) as Record<string, DumpVariable>;
-  if (!rawVars || typeof rawVars !== 'object' || Array.isArray(rawVars) || Object.keys(rawVars).length === 0 && !aliases.length) {
+  if (!rawVars || typeof rawVars !== 'object' || Array.isArray(rawVars)) {
     return null;
   }
   const vars = { ...rawVars }, sourceTokens: TemplateSourceToken[] = [], templateSkips: CapturedTokenSkip[] = [];
-  for (const value of Object.values(dump)) if (isDumpSet(value)) {
+  const census = { ...dump }, ignored = new Set<DumpVariableConsumer>();
+  for (const [key, value] of Object.entries(dump)) if (isDumpSet(value)) {
     try {
       const projected = projectRootTextTemplateAliases(value);
       if (projected) {
         sourceTokens.push(...projected.tokens);
+        for (const root of value.variants) for (const c of Object.values(root.children?.[0]?.children?.[0]?.variableConsumers ?? {})) ignored.add(c);
         for (const name of projected.syntheticNames) delete vars[name];
       }
     } catch (error) {
       templateSkips.push({ name: value.setName, reason: error instanceof Error ? error.message : String(error) });
+      delete census[key];
+      for (const [, c] of capturedVariableConsumers(value)) for (const row of [c, ...(Array.isArray(c?.aliasChain) ? c.aliasChain : [])])
+        if (row && typeof row.name === 'string') delete vars[row.name];
     }
   }
+
+  const aliases = capturedAliasEntries(census, name => foldVariablePath(name).path, ignored);
+  if (!Object.keys(vars).length && !aliases.length && !sourceTokens.length && !templateSkips.length) return null;
+  for (const alias of aliases) if (sourceTokens.some(t => t.name === alias.name))
+    throw Error('captured-alias-template-source-overlap:' + alias.name);
 
   // Variables bound to opacity or a captured native font weight stay unitless.
   const opacityVars = new Set<string>();
