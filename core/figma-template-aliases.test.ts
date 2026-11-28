@@ -126,6 +126,7 @@ test('captured layer refuses equal-valued different source identities across set
   assert.equal(layer.entries.some(e => e.path === 'font-size.small'), false);
   assert.ok(layer.skipped.some(e => e.name === 'font-size/small' && e.reason.includes('conflicting')));
   const outside = { ...fixture(), rootSlot: undefined };
+  for (const root of outside.variants) root.children![0].children![0].variableConsumers = {};
   const source = structuredClone(first(set).aliasChain[0]);
   outside.variants[0].children![0].children![0].variableConsumers = { 'unrelated-native-id': source };
   const direct = capturedTokensFromDump({ template: set, outside, _variables: { unrelated: { type: 'FLOAT', value: 1 } } })!;
