@@ -874,8 +874,11 @@ function verifyReadback(
       Array.isArray(m)&&m.length===2&&m.every((row:any,i:number)=>Array.isArray(row)&&row.length===3&&row.every((x:any,j:number)=>numeric(x,a.normalizedTransform[i][j])));
   };
   const pathSpecs = new Map<string, NodeSpec>();
+  const pixelLineHeightSpecs = new Map<string, NodeSpec>();
   const authoredPathSpecs = new Map<string, NodeSpec | null>();
   const indexPath = (spec: NodeSpec) => {
+    if (spec.type === 'text' && !spec.slotTextTemplate && spec.lineHeightVar && typeof spec.lineHeight === 'object' && spec.lineHeight.unit === 'PIXELS' && spec.nativeContractPart)
+      pixelLineHeightSpecs.set(canonicalJson(spec.nativeContractPart), spec);
     if ((spec.intrinsicPlacementTarget || spec.shape?.kind==='line' || spec.insetOverlay || spec.nativePathInk || spec.nativePathViewport || spec.shape?.kind==='stroked-path' || spec.instanceAffineAllocation || spec.shapeFillTarget || spec.textColorTarget || spec.textAppearanceTarget || spec.textSizeTarget || spec.imageTarget) && spec.nativeContractPart)
       pathSpecs.set(canonicalJson(spec.nativeContractPart), spec);
     spec.children?.forEach(indexPath);
@@ -1651,6 +1654,16 @@ function verifyReadback(
                       issue('native-filled-path-observation-inherited-' + field,child);
                   }
                 }
+                const lineHeightSpec = pixelLineHeightSpecs.get(canonicalJson(meta(source, 'nativeContractPart')));
+                if (child.type === 'TEXT' && lineHeightSpec &&
+                    !(appearance || authoredOwnsAppearance || nestedAuthority?.appearance || authoredScalarReplacement || nestedAuthority?.scalar || textSize)) {
+                  const value = nativeBoundNumber(lineHeightSpec.lineHeightVar!, tokens.receipt.variables, consumingMode);
+                  if (value === undefined || child.metadata.lineHeightVar !== lineHeightSpec.lineHeightVar ||
+                      child.values.lineHeight?.unit !== 'PIXELS' || !numeric(child.values.lineHeight.value, value) ||
+                      !same(child.values.resolvedVariableModes, consumingMode) || !object(child.values.explicitVariableModes) ||
+                      Object.entries(child.values.explicitVariableModes).some(([id, mode]) => consumingMode[id] !== mode))
+                    issue('native-source-observation-typography', child);
+                }
                 // Instance edits can override inherited content without changing
                 // its main link or allocation stamp. Compare these independently
                 // observed channels, allowing only the declared property value.
@@ -1785,12 +1798,18 @@ function verifyReadback(
         ...spec.bindings,
         ...(isContractDraft(input) && spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}),
         ...(isContractDraft(input) && spec.fontWeightVar ? { fontWeight: spec.fontWeightVar } : {}),
-        ...(isContractDraft(input) && spec.slotTextTemplate && spec.lineHeightVar ? { lineHeight: spec.lineHeightVar } : {}),
+        ...(isContractDraft(input) && spec.lineHeightVar && (spec.slotTextTemplate || typeof spec.lineHeight === 'object' && spec.lineHeight.unit === 'PIXELS') ? { lineHeight: spec.lineHeightVar } : {}),
         ...(spec.fixedWidth ? { width: spec.fixedWidth.varName } : {}),
         ...(spec.fixedHeight?.varName
           ? { height: spec.fixedHeight.varName }
           : {}),
       };
+      if (bindings.lineHeight && !spec.slotTextTemplate) {
+        const value = nativeBoundNumber(bindings.lineHeight,
+          [...tokens.receipt.variables, ...(graph ? receipt.templateGraph!.receipt.routes : [])], consumingMode);
+        if (value === undefined || v.lineHeight?.unit !== 'PIXELS' || !numeric(v.lineHeight?.value, value) ||
+            !same(v.resolvedVariableModes, consumingMode)) issue('native-source-observation-typography', n);
+      }
       const observedBindings = { ...v.boundVariables };
       // Figma exposes a uniform stroke binding through its four edge channels.
       // Accept that API representation only when every edge retains the exact
@@ -1807,7 +1826,7 @@ function verifyReadback(
         observedBindings.fontSize = observedBindings.fontSize[0];
       if (isContractDraft(input) && spec.fontWeightVar && Array.isArray(observedBindings.fontWeight) && observedBindings.fontWeight.length === 1)
         observedBindings.fontWeight = observedBindings.fontWeight[0];
-      if (isContractDraft(input) && spec.slotTextTemplate && Array.isArray(observedBindings.lineHeight) && observedBindings.lineHeight.length === 1)
+      if (isContractDraft(input) && bindings.lineHeight && Array.isArray(observedBindings.lineHeight) && observedBindings.lineHeight.length === 1)
         observedBindings.lineHeight = observedBindings.lineHeight[0];
       if (
         Object.entries(observedBindings).some(
