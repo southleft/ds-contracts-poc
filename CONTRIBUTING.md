@@ -95,7 +95,7 @@ real three-way drift and should block. CI excludes `parity` by name for the same
 reason (`.github/scripts/lane-coverage.ts` carries the exclusion and its
 justification, so the exclusion itself cannot rot silently).
 
-Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:onboarding`.
+Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:cli`.
 
 **Worker (`workers/assist/`).** It is outside the npm workspaces and has its own
 `package.json`. `npm run test:worker` and `npm run typecheck:worker` run from the root

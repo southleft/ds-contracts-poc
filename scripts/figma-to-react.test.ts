@@ -102,6 +102,16 @@ test('--profile: read and hashed before any fetch, refused by named code, record
   await assert.rejects(runFigmaToReact({ url: 'https://www.figma.com/design/AAAAAAAAAAAAAAAAAAAAAA/x?node-id=1-2', out: path.join(out, 'u'), profile: path.join(out, 'absent.json') },
     { loadEngine: () => { throw Error('engine-not-reached'); }, label: 'test' }), /profile-missing/);   // before the fetch's token check
   await assert.rejects(profileConventions(file('bad.json', '{')), /^Error: profile-not-json: /);
+  for (const [i, value] of [null, [], 'profile'].entries())
+    await assert.rejects(profileConventions(file(`shape-${i}.json`, JSON.stringify(value))), /profile-not-object/);
+  for (const [i, value] of [{ behavior: { owner: 'react-source' } }, { behavior: null }, { behavior: 'verified' },
+    { codeOnly: ['keyboard'] }, { source: 'Control.tsx', component: { export: 'Control' }, capture: {} }].entries()) {
+    const target = path.join(out, `ownership-${i}`);
+    await assert.rejects(runFigmaToReact({ url: 'https://www.figma.com/design/AAAAAAAAAAAAAAAAAAAAAA/x?node-id=1-2',
+      out: target, profile: file(`ownership-${i}.json`, JSON.stringify(value)) },
+      { loadEngine: () => { throw Error('engine-not-reached'); }, label: 'test' }), /profile-source-ownership-requires-roundtrip/);
+    assert.equal(existsSync(target), false);
+  }
   await assert.rejects(profileConventions(file('obj.json', '{"conventions":{}}')), /^Error: profile-conventions-not-array: /);
   const one = 'imperceptible-solid-paint-blend-not-carried';
   await assert.rejects(profileConventions(file('dup.json', JSON.stringify({ conventions: [one, one] }))), /profile-convention-duplicate:imperceptible/);
@@ -112,6 +122,8 @@ test('--profile: read and hashed before any fetch, refused by named code, record
   // Recorded in result.json; on a dump with no imperceptible blend the request is byte-identical to the run without it.
   const plain = await figmaToReact(dump, path.join(out, 'plain')), on = await figmaToReact(dump, path.join(out, 'on'), undefined, 'json', { profile });
   assert.equal(on.requestSha256, plain.requestSha256);
+  assert.deepEqual(JSON.parse(readFileSync(path.join(out, 'plain', 'result.json'), 'utf8')).behavior,
+    { owner: 'not-supplied', status: 'not-established', equivalence: 'not-asserted' });
   assert.deepEqual(JSON.parse(readFileSync(path.join(out, 'on', 'result.json'), 'utf8')).profile, profile);
   assert.equal('profile' in JSON.parse(readFileSync(path.join(out, 'plain', 'result.json'), 'utf8')), false);
   const cli = spawnSync('npx', ['tsx', path.join(repo, 'scripts', 'figma-to-react.ts'), '--dump', dump, '--out', path.join(out, 'x'), '--no-such-flag'], { cwd: repo, encoding: 'utf8' });
@@ -131,6 +143,7 @@ test('without a Chromium the command says NOT CHECKED, exits 0 and never prints 
   assert.equal(report.exitCode, 0);
   assert.match(report.lines[0], /^◌ figma:to-react Badge: NOT CHECKED — no Chromium/);
   assert.equal(report.lines.some(l => l.startsWith('✔')), false);
+  assert.ok(report.lines.some(l => l.includes('behavior: NOT ESTABLISHED')));
 });
 
 test('the report: a failing variant is named with its reasons and exits 1; --allow-failures exits 0 but still says FAIL', () => {
@@ -165,6 +178,8 @@ test('the report: a failing variant is named with its reasons and exits 1; --all
   const passed = reportCheck(r, 'out', verdicts([variant('No', 'pass'), variant('Yes', 'pass')], 'pass'));
   assert.equal(passed.exitCode, 0);
   assert.ok(passed.lines.some(l => l.startsWith('✔ figma:to-react Dialog: all 2 variant(s) pass the consumer check')));
+  for (const report of [failed, allowed, unverified, blocked, passed])
+    assert.ok(report.lines.some(l => l.includes('behavior: NOT ESTABLISHED')));
 });
 
 /** A font manifest beside `dir` naming the repository's IBM Plex Sans Regular as `family`. */

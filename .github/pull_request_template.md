@@ -56,7 +56,7 @@ fix — clearly, by name — is welcome and is not a lesser contribution. -->
 | `extract/figma/` | the fifteen `extract:figma:*:check` gates, `npm run closure:check`, `npm run dagger:census` |
 | `extract/computed/` | `npm run extract:computed:ceiling:check`, `npm run eval` |
 | `figma-sync/plugin/` | `npm run plugin:check`, then `npm run plugin:zip && npm run plugin:ui-check` |
-| `packages/cli/` | `npm --prefix packages/cli run build`, `npm run test:onboarding`, `npm run publish:check`, `npm run eval` |
+| `packages/cli/` | `npm --prefix packages/cli run build`, `npm run test:cli`, `npm run publish:check`, `npm run eval` |
 | a library's committed `figma/*.figma.js` | `npm run figma:fresh` |
 | `docs/`, `README.md`, `CONTRIBUTING.md` | `npm run docs:check`, `npm run capability:fresh`, `npm run plugin:ui-check` (its dead-name sweep reads `docs/*.md`) |
 | `site/` | `npm run site:build` |

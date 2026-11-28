@@ -37,6 +37,19 @@ test("a declared profile preserves inherited token types, aliases and dependency
   assert.equal(B.system.tokens.semantic.alias, "primitive");
   assert.deepEqual(B.system.tokens.component.source.path, ["component", "value"]);
   assert.deepEqual(B.components.parent.requires, [{ id: "glyph", revision: B.components.glyph.revision }]);
+  assert.deepEqual(B.components.parent.behavior, {
+    owner: "react-source",
+    source: { ...B.components.parent.source, export: "Control" },
+    equivalence: "not-asserted",
+    tests: "not-recorded",
+  });
+  P.component.export = "OtherControl";
+  assert.notEqual(inspectProfile(P, policy.root).components.parent.revision, B.components.parent.revision);
+  P.behavior = { equivalence: "verified" };
+  assert.throws(() => inspectProfile(P, policy.root), /profile.behavior is unsupported/);
+  delete P.behavior;
+  P.codeOnly = "all interactions";
+  assert.throws(() => inspectProfile(P, policy.root), /invalid codeOnly declarations/);
 });
 test("missing fonts, dependencies and token aliases are named before capture", (t) => {
   const { P, policy } = profile(t),
