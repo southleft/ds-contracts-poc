@@ -159,7 +159,7 @@ jobs:
 
       - name: typecheck packages/cli
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm --prefix packages/cli run typecheck
+        run: node node_modules/typescript/bin/tsc -p packages/cli/tsconfig.json --noEmit
 
       # The root tsconfig's `include` does not name .github, so this directory's
       # TypeScript would otherwise be checked for the first time by CI itself.
