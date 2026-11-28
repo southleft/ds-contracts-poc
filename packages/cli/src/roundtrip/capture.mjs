@@ -1,6 +1,5 @@
 import { fileHash } from "./files.mjs";
 import { inspectProfile } from "./profile.mjs";
-export { inspectProfile } from "./profile.mjs";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -9,9 +8,13 @@ import { build } from "esbuild";
 import { canonical, hash, contractFromCapture } from "./surface.mjs";
 import { resolved, seal } from "./model.mjs";
 
+export const randomScript = (seed) => `{let s=${seed >>> 0};Math.random=()=>{s=(s+0x6d2b79f5)>>>0;
+let t=Math.imul(s^(s>>>15),1|s);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296;};}`;
+
 export function observe({ P, variant }) {
   const num = (s) => parseFloat(s) || 0,
     color = (s) => {
+      if (!/^rgba?\([\d\s.,]+\)$/.test(s)) throw Error("unsupported computed color: " + s);
       const n = s.match(/[\d.]+/g)?.map(Number);
       if (!n || n[3] === 0) return null;
       if (n[3] != null && n[3] !== 1) throw Error("unsupported translucent paint");
@@ -196,7 +199,7 @@ export async function capture(P, root, out, reader, { onGenerated = () => {} } =
     css = built.outputFiles.find((f) => f.path.endsWith(".css"))?.text ?? "",
     font = readFileSync(path.resolve(root, P.capture.font.file)).toString("base64");
   const sheets = (P.capture.styles ?? []).map((p) => read(p.replaceAll("$OUT", out))).join("\n");
-  const html = `<!doctype html><html><head><style>@font-face{font-family:${JSON.stringify(P.capture.font.family)};src:url(data:font/woff2;base64,${font});font-weight:100 900;font-style:normal}body{background:white;padding:40px}#subject{width:${P.capture.width ?? 280}px}${P.capture.contextCSS ?? ""}</style><style>${sheets}\n${css}</style></head><body><div id="subject"></div><script>${js}</script></body></html>`;
+  const html = `<!doctype html><html><head><style>@font-face{font-family:${JSON.stringify(P.capture.font.family)};src:url(data:font/woff2;base64,${font});font-weight:100 900;font-style:normal}body{background:white;padding:40px}#subject{width:${P.capture.width ?? 280}px}${P.capture.contextCSS ?? ""}</style><style>${sheets}\n${css}</style></head><body><div id="subject"></div><script>${randomScript(reader.PAGE.randomSeed)}${js}</script></body></html>`;
   const pinned = await reader.pinnedBrowser();
   try {
     const { clock, randomSeed, ...options } = reader.PAGE,
