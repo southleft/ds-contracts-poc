@@ -185,7 +185,7 @@ jobs:
 
       - name: typecheck @ds-contracts/schema
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm --prefix packages/schema run typecheck
+        run: node node_modules/typescript/bin/tsc -p packages/schema/tsconfig.json --noEmit
       - name: "@ds-contracts/core: typecheck"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm --prefix packages/core run typecheck

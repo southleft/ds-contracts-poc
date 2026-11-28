@@ -22,8 +22,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && node emit-json-schema.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "tsc -p tsconfig.json && node emit-json-schema.mjs"
   },
   "dependencies": {
     "zod": "^4.6.7"
