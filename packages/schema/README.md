@@ -62,3 +62,20 @@ the generated JSON Schema does not encode all cross-field refinements.
 The field constrains preview variants only. It does not alter the rest grid or
 restrict the React runtime's possible prop/state combinations. Absence preserves
 the legacy preview rule. Domain validation is separate from visual acceptance.
+
+## Explicit native button behavior
+
+For a single native button root, `semantics.button` can declare behavior against
+an existing enum VARIANT prop with an explicit default:
+
+```json
+{"prop":"phase","states":{"ready":{"disabled":false,"busy":false},"blocked":{"disabled":true,"busy":false},"pending":{"disabled":true,"busy":true}}}
+```
+
+Every enum value needs exactly one row. Busy requires disabled. Both React
+emitters preserve native `onClick` events, use `type="button"`, and own disabled
+and busy attributes after caller spreads. Unknown runtime states refuse. Other
+behavior owners, root attributes, dynamic elements, and mapped code values refuse.
+This is a declared policy, not inferred behavior or proof of source API equivalence.
+Figma, HTML, and Web Components export currently refuse it; native retention is
+the next slice. Omitting this field preserves existing output.

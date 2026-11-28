@@ -1,3 +1,4 @@
+import {reactButtonBehavior} from './react-button-behavior.js';
 import {STROKE_RING_RUNTIME} from './react-stroke-ring-runtime.js';
 import {wrapReactFillStack,finalizeFillStackTsx,fillStackPositionParts} from './react-fill-stack.js';
 import {reactLiteralTextExpression} from './react-literal-text.js';
@@ -1348,6 +1349,7 @@ function emitReactInlineImpl(contract: Contract, ctx: EmitReactInlineCtx, draftP
     if (aria) elementAttrs.push(aria.trim());
   }
   elementAttrs.push('{...rest}');
+  elementAttrs.push(...reactButtonBehavior(contract, codePropOf));
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
   const paintStyleType = walkAnatomy(contract).some(({part})=>part.solidFillComposition || part.solidFillCompositionByCombination) ? `${nativeLineStyleType} & Partial<Record<'--dsc-instance-fill-color' | '--dsc-instance-fill-blend' | '--dsc-instance-fill-display', string>>` : nativeLineStyleType;

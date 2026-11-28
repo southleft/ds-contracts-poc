@@ -191,6 +191,10 @@ export function validateContract(
   tokenValues?: unknown,
 ) {
   if(walkAnatomy(contract).some(({part})=>part.fillStack||part.fillStackByCombination)){const parsed=ContractSchema.safeParse(contract);if(!parsed.success)errors.push(contract.id+': fill-stack-schema:'+parsed.error.message);}
+  if (contract.semantics.button !== undefined) {
+    const parsed = ContractSchema.safeParse(contract);
+    if (!parsed.success) errors.push(contract.id + ': button-behavior-invalid:' + parsed.error.message);
+  }
   for(const {part} of walkAnatomy(contract))if(part.fillStack||part.fillStackByCombination){
    for(const stack of part.fillStack?[part.fillStack]:(part.fillStackByCombination?.rows.map(r=>r.stack)??[]))for(const paint of stack.paints)if(paint.type==='SOLID'&&paint.token&&paint.sourceBinding){
     const error=solidFillPartTokenError({solidFillComposition:{color:{r:paint.color.r,g:paint.color.g,b:paint.color.b},opacity:paint.opacity,blendMode:paint.blendMode},solidFillCompositionToken:paint.token,solidFillCompositionSourceBinding:[paint.sourceBinding]},tokenValues);if(error)errors.push(contract.id+': '+error);

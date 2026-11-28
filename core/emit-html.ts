@@ -1536,6 +1536,7 @@ function emitHtmlImpl(contract: Contract, ctx: EmitCtx, draftPaint:boolean): Emi
   const cssBlocks: string[] = [];
   const seen = new Set<string>();
   const collectCss = (c: Contract) => {
+    if (c.semantics.button !== undefined) throw Error('button-behavior-html-unsupported');
     if (seen.has(c.id)) return;
     seen.add(c.id);
     if (hasFinitePresence(c) || c.bindings.figma.drawnVariants !== undefined) {

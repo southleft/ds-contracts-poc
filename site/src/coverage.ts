@@ -201,6 +201,9 @@ reg("events", "selection", ["contract.selection", "selection.pattern", "selectio
   "selection.direction", "selection.activation", "selection.bindings", "selection.bindings.code", "selection.bindings.code.prop"]);
 
 // --- Semantics -------------------------------------------------------------
+reg("semantics", "button-behavior", [
+  "contract.semantics.button", "contract.semantics.button.prop", "contract.semantics.button.states",
+]);
 reg("semantics", "semantics", [
   "contract.semantics",
   "contract.semantics.element",

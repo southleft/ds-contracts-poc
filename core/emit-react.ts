@@ -1,10 +1,11 @@
+import {reactButtonBehavior} from './react-button-behavior.js';
 import {hasInsideRootStroke} from './react-instance-inside-stroke.js';
 import {cssIdentifier} from '../packages/core/src/css-identifier.js';
 import {wrapReactFillStack,finalizeFillStackTsx,fillStackPositionParts} from './react-fill-stack.js';
 import {reactLiteralTextExpression} from './react-literal-text.js';
 import {reactRectStrokePattern,REACT_RECT_STROKE_PATTERN_RUNTIME} from './react-rect-stroke-pattern.js';
 import {reactVectorStroke,REACT_VECTOR_STROKE_RUNTIME} from './react-vector-stroke.js';
-import {validateStructuralAvailability} from '../scripts/contract-schema.js';
+import {validateStructuralAvailability, ContractSchema} from '../scripts/contract-schema.js';
 import {wrapReactTextAppearance,REACT_TEXT_APPEARANCE_RUNTIME} from './react-text-appearance.js';
 import {wrapReactImage, REACT_IMAGE_RUNTIME} from './react-image.js';
 import {childPaintOrderPlans} from '../packages/core/src/child-paint-order.js';
@@ -321,6 +322,7 @@ export function generateTsx(
   emittedCss?: string,
   tokenValues?: unknown,
 ): string {
+  if (contract.semantics.button !== undefined) ContractSchema.parse(contract);
   refuseRetainedRuntime(contract, 'direct generateTsx; use emitReact with verified runtime context');
   validateCodeValueConsumers(contract);
   // elementByProp renders a dynamic tag — the ref/attrs generalize to the
@@ -655,6 +657,7 @@ export function generateTsx(
     if (aria) elementAttrs.push(aria.trim());
   }
   elementAttrs.push('{...rest}');
+  elementAttrs.push(...reactButtonBehavior(contract, codePropOf));
 
   // Icon assets this contract needs (fixed names + enum expansions).
   const neededIcons = new Map<string, string>();

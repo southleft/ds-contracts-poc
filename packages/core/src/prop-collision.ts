@@ -93,7 +93,8 @@ export function reactDomCollisions(contract: Contract, meta: ElementMeta): strin
  *  names for the header. Byte-identical to the historical spelling when
  *  nothing collides. */
 export function reactPropsBase(contract: Contract, meta: ElementMeta): { base: string; omitted: string[] } {
-  const omitted = reactDomCollisions(contract, meta);
+  const omitted = [...new Set([...reactDomCollisions(contract, meta),
+    ...(contract.semantics.button ? ['type', 'disabled', 'role', 'aria-disabled', 'aria-busy'] : [])])].sort();
   const plain = `${meta.attrs}<${meta.el}>`;
   return {
     base: omitted.length === 0 ? plain : `Omit<${plain}, ${omitted.map((n) => `'${n}'`).join(' | ')}>`,
