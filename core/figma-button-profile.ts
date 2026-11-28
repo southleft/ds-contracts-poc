@@ -32,7 +32,7 @@ export function resolveButtonProfile(dump: Record<string, unknown>, raw: unknown
   if (set.contractId !== undefined && (typeof set.contractId !== 'string' || !/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/.test(set.contractId.trim()))) return refuse('malformed native contract identity');
   const prop = profile.prop, property = prop.bindings?.figma?.property;
   if (!property) return refuse('variant property required');
-  if (!plain(prop.bindings.figma.values) || !plain(prop.type) || !Array.isArray(prop.type.enum) ||
+  if (!plain(prop.bindings.figma.values) || !plain(prop.type) || !('enum' in prop.type) || !Array.isArray(prop.type.enum) ||
       Object.keys(prop.bindings.figma.values).length !== prop.type.enum.length ||
       prop.type.enum.some(value => !Object.hasOwn(prop.bindings.figma.values!, value))) return refuse('complete native label mapping required');
   if (set.propNames?.[property] !== undefined && set.propNames[property] !== prop.name) return refuse('conflicting native property identity');
