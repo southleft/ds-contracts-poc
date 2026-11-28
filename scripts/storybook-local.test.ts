@@ -6,6 +6,8 @@ import { chmodSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:f
 import { request } from 'node:http';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import fs from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
 import { buildLocalStorybook, localStorybookPreflight, serveStorybook, treeSha256 } from './storybook-local.js';
 
 /** A library folder: .storybook/main.ts, a storybook binary that runs <script>, and package.json naming <framework>. */
@@ -25,7 +27,17 @@ function library(t: test.TestContext, framework: string, script = 'exit 0', part
 test('a library without Storybook, or with a renderer that is not React, is refused by name before anything is built', (t) => {
   assert.throws(() => localStorybookPreflight(path.join(tmpdir(), 'no-such-library-here')), /^Error: storybook-dir-missing: /);
   assert.throws(() => localStorybookPreflight(library(t, '@storybook/react-vite', 'exit 0', { config: false, bin: true })), /^Error: storybook-missing: no \.storybook\/main\.\* in /);
-  assert.throws(() => localStorybookPreflight(library(t, '@storybook/react-vite', 'exit 0', { config: true, bin: false })), /^Error: storybook-missing: no storybook binary in /);
+  const missing = library(t, '@storybook/react-vite', 'exit 0', { config: true, bin: false });
+  const hoisted = path.join(path.dirname(missing), 'node_modules', '.bin', 'storybook');
+  let available = false;
+  const exists = fs.existsSync;
+  const mock = t.mock.method(fs, 'existsSync', (p: fs.PathLike) => String(p).endsWith('/node_modules/.bin/storybook') ? available && String(p) === hoisted : exists(p));
+  syncBuiltinESMExports();
+  try {
+    assert.throws(() => localStorybookPreflight(missing), /^Error: storybook-missing: no storybook binary in /);
+    available = true; assert.equal(localStorybookPreflight(missing).bin, hoisted);
+  }
+  finally { mock.mock.restore(); syncBuiltinESMExports(); }
   assert.throws(() => localStorybookPreflight(library(t, '@storybook/vue3-vite')), /^Error: storybook-renderer-not-react: .* \(@storybook\/vue3-vite\)$/);
   const dir = library(t, '@storybook/nextjs');
   assert.equal(localStorybookPreflight(dir).bin, path.join(dir, 'node_modules', '.bin', 'storybook'));

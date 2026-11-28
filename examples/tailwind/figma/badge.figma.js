@@ -2829,6 +2829,13 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  if (existing) {
+    let prior;
+    try { prior = JSON.parse(existing.getSharedPluginData('ds_contracts', 'semantics') || '{}'); } catch (_) { prior = null; }
+    if (!prior || typeof prior !== 'object' || Array.isArray(prior) ||
+        (('button' in prior || 'buttonAxis' in prior)))
+      throw Error('FIGMA_BUTTON_BEHAVIOR_RETIREMENT_REFUSED: malformed, changed or removed retained inputs require a fresh lineage');
+  }
   // Retiring/renaming an internal omission option must not leave its retained
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.

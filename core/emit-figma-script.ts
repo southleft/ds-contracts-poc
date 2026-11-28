@@ -41,7 +41,7 @@ import { selectedSampleKey, selectionErrors } from '../packages/core/src/selecti
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
-import { buttonStamp, BUTTON_RETIREMENT_GUARD, type ButtonStamp } from './figma-button-behavior.js';
+import { buttonStamp, buttonRetirementGuard, type ButtonStamp } from './figma-button-behavior.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { componentLookupValue } from './code-values.js';
 import { prepareNativePreparedLibraryComponent, type NativePreparedLibrarySource } from './native-prepared-library.js';
@@ -11876,7 +11876,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       key: existing.key,
     };
   }
-${BUTTON_RETIREMENT_GUARD}${opts.propertyAmends ? '  return await amendInstanceProperties(existing,C,INSTANCE_PROPERTY_AMENDS.find(p=>p.before.contractId===C.contractId));\n' : ''}  // Retiring/renaming an internal omission option must not leave its retained
+${buttonRetirementGuard(datas.some(d => !!d.semantics?.button))}${opts.propertyAmends ? '  return await amendInstanceProperties(existing,C,INSTANCE_PROPERTY_AMENDS.find(p=>p.before.contractId===C.contractId));\n' : ''}  // Retiring/renaming an internal omission option must not leave its retained
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {

@@ -11,7 +11,7 @@ export function assertCapturedClosure(dump: Record<string, unknown>): void {
     if (!object(claim) || typeof claim.nodeId !== 'string' || !claim.nodeId.trim() ||
         typeof claim.name !== 'string' || !claim.name.trim() || !['COMPONENT', 'COMPONENT_SET'].includes(String(claim.type)) || seen.has(claim.nodeId)) return fail('invalid or duplicate claim');
     seen.add(claim.nodeId);
-    const matches = Object.entries(dump).filter(([key, value]) => !key.startsWith('_') && object(value) && value.nodeId === claim.nodeId);
+    const matches = Object.entries(dump).filter(([key, value]) => key !== '_provenance' && object(value) && value.nodeId === claim.nodeId);
     if (matches.length !== 1) return fail(claim.name + ': missing or duplicate component payload');
     const [key, value] = matches[0] as [string, Record<string, unknown>];
     if (key !== claim.name || value.setName !== claim.name || value.type !== claim.type || !Array.isArray(value.variants)) return fail(claim.name + ': component identity differs');

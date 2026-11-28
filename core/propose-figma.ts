@@ -1,4 +1,3 @@
-import { assertCapturedClosure } from './captured-closure.js';
 import { readButtonStamp, restoreButtonStamp } from './figma-button-behavior.js';
 import {promoteNestedDrawingInk,nestedDrawingInkTarget,type DrawingInkOwner} from './nested-drawing-ink.js';
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
@@ -20247,7 +20246,6 @@ export function proposeBatchFromDump(
   dump: Record<string, unknown>,
   opts: Parameters<typeof proposeFromDump>[1],
 ): DumpBatchResult {
-  assertCapturedClosure(dump);
   if (!conventionSet(opts.conventions).has('imperceptible-outside-stroke-spread-shadow-as-outline')) return proposeBatchFromDumpBlend(dump, opts);
   const view = spreadShadowOutlineView(dump), outer = ringOutlineOffsets;
   ringOutlineOffsets = view.offsets;

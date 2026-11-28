@@ -52,19 +52,13 @@ export function restoreButtonStamp(contract: Record<string, unknown>, retained: 
   const parsed = ContractSchema.safeParse(contract);
   if (!parsed.success) return fail(parsed.error.message);
 }
-export const BUTTON_RETIREMENT_GUARD = `
-  if (existing) {
-    const raw = existing.getSharedPluginData('ds_contracts', 'semantics');
-    if (raw) {
-      let prior;
-      try { prior = JSON.parse(raw); } catch (_) { throw Error('FIGMA_BUTTON_BEHAVIOR_RETIREMENT_REFUSED: malformed semantics'); }
-      if (!prior || typeof prior !== 'object' || Array.isArray(prior)) throw Error('FIGMA_BUTTON_BEHAVIOR_RETIREMENT_REFUSED: malformed semantics');
-      if ('button' in prior || 'buttonAxis' in prior) {
-        const canonical = value => value && typeof value === 'object'
-          ? Array.isArray(value) ? value.map(canonical) : Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
-        if (!C.semantics || JSON.stringify(canonical(prior)) !== JSON.stringify(canonical(C.semantics)))
-          throw Error('FIGMA_BUTTON_BEHAVIOR_RETIREMENT_REFUSED: changing or removing retained inputs requires a fresh lineage');
-      }
-    }
+export const buttonRetirementGuard = (retaining: boolean): string => `  if (existing) {
+${retaining ? `    const canonical = value => value && typeof value === 'object'
+      ? Array.isArray(value) ? value.map(canonical) : Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+` : ''}    let prior;
+    try { prior = JSON.parse(existing.getSharedPluginData('ds_contracts', 'semantics') || '{}'); } catch (_) { prior = null; }
+    if (!prior || typeof prior !== 'object' || Array.isArray(prior) ||
+        (('button' in prior || 'buttonAxis' in prior)${retaining ? ' && JSON.stringify(canonical(prior)) !== JSON.stringify(canonical(C.semantics))' : ''}))
+      throw Error('FIGMA_BUTTON_BEHAVIOR_RETIREMENT_REFUSED: malformed, changed or removed retained inputs require a fresh lineage');
   }
 `;

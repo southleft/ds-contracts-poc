@@ -111,6 +111,9 @@ test('claimed closure payloads cannot disappear, duplicate or change identity', 
   const claim = { nodeId: '1:2', name: 'Child', type: 'COMPONENT' };
   const dump: any = { _provenance: { closure: { rule: 'follow-instances', cap: 64, requested: [], pulled: [claim], unresolved: [{ targetId: '1:2', reason: 'cycle-cut' }], cycles: [{ toNodeId: '1:2' }] } }, Child: { ...claim, setName: 'Child', variants: [] } };
   assert.doesNotThrow(() => assertCapturedClosure(dump)); assert.doesNotThrow(() => assertCapturedClosure({}));
+  const internal = structuredClone(dump); internal._Child = internal.Child; delete internal.Child;
+  internal._Child.name = internal._Child.setName = internal._provenance.closure.pulled[0].name = '_Child';
+  assert.doesNotThrow(() => assertCapturedClosure(internal));
   for (const mutate of [
     (d: any) => { delete d.Child; }, (d: any) => { d.Other = { ...d.Child }; },
     (d: any) => { d.Child.type = 'FRAME'; }, (d: any) => { d.Child.setName = 'Other'; },
