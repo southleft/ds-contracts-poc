@@ -138,7 +138,6 @@
     "extract:figma:gauntlet:live": "tsx extract/figma/gauntlet/live/gauntlet.ts",
     "extract:figma:gauntlet:live:visual": "tsx extract/figma/gauntlet/live/visual-live.ts",
     "extract:figma:visual": "tsx extract/figma/visual-parity/run.ts",
-    "extract:figma:visual:summary": "tsx extract/figma/visual-parity/run.ts --summary",
     "extract:figma:rest": "tsx extract/figma/rest/cli.ts",
     "extract:figma:rest:roundtrip": "tsx extract/figma/rest/roundtrip-rest.ts",
     "figma:rest:refusal:check": "tsx extract/figma/rest/variables-refusal-check.ts",

@@ -3,7 +3,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { chromium } from 'playwright-core';
 import {PNG} from 'pngjs';
-import { ContractSchema, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
+import { ContractSchema, walkAnatomy, type Contract, type Part } from '../scripts/contract-schema.js';
 import type { DumpSet } from '../extract/figma/types.js';
 import { asMinimalChildContract, proposeFromDump, proposeBatchFromDump } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
@@ -653,22 +653,26 @@ test('allocated native ink preserves same-value alias identity through filled an
  }
 });
 
-function nestedInkFixture(){
+function nestedInkFixture(type:'GROUP'|'FRAME'='GROUP'){
  const f=drawingFixture(),root=f.child.anatomy.root,leaf=root.parts!.ink;
  delete leaf.shape!.parentViewport;root.overridable=[];delete root.tokens!.color;
  leaf.tokens={'background-color':'{drawing.ink}'};delete leaf.literals!['background-color'];
- const group={parts:{'renamed-leaf':leaf},tokens:{},shape:undefined};root.parts={'renamed-group':group};
+ const group:Part={parts:{'renamed-leaf':leaf},tokens:{},shape:undefined};root.parts={'renamed-group':group};
+ if(type==='FRAME')Object.assign(group,{layout:{display:'flex',direction:'row'},tokens:{width:'{drawing.size}',height:'{drawing.size}'},
+  absoluteGeometry:{box:{x:0,y:0,width:24,height:24,right:0,bottom:0,constraints:{horizontal:'LEFT',vertical:'TOP'}},parent:{width:24,height:24},border:{left:0,right:0,top:0,bottom:0}}});
  const vector={name:'native leaf',type:'VECTOR',nodeId:'50:3',sourceStrokeStack:{version:1,order:'bottom-to-top',complete:true,paints:[]}};
- const wrapper={name:'native group',type:'GROUP',nodeId:'50:2',children:[vector]};
+ const wrapper={name:'native group',type,nodeId:'50:2',children:[vector]};
  const set={setName:'Unrelated name',type:'COMPONENT',nodeId:'50:1',variants:[{name:'main',type:'COMPONENT',nodeId:'50:1',children:[wrapper]}]} as DumpSet;
  const owners=new Map<string,Set<object>>([['50:2',new Set([group])],['50:3',new Set([leaf])]]);
  return {f,root,leaf,group,set,owners,wrapper,vector};
 }
-test('nested drawing ink follows exact source ownership and keeps the native group structure',()=>{
- const {f,root,leaf,group,set,owners}=nestedInkFixture(),shape=structuredClone(leaf.shape),source=JSON.stringify(set);
+for(const type of ['GROUP','FRAME'] as const)test(`nested drawing ink follows exact source ownership and keeps ${type} structure`,()=>{
+ const {f,root,leaf,group,set,owners}=nestedInkFixture(type),shape=structuredClone(leaf.shape),source=JSON.stringify(set);
+ const geometry=JSON.stringify([group.layout,group.tokens,group.absoluteGeometry]);
  const drawingInk=promoteNestedDrawingInk(root,set,owners);assert(drawingInk);
  assert.deepEqual(drawingInk,{nodeId:'50:3',childPath:[0,0],partPath:['root','renamed-group','renamed-leaf']});
  assert.equal(root.parts!['renamed-group'],group);assert.deepEqual(leaf.shape,shape);assert.equal(JSON.stringify(set),source);
+ assert.equal(JSON.stringify([group.layout,group.tokens,group.absoluteGeometry]),geometry);
  assert.deepEqual(root.overridable,['color']);assert.equal(root.tokens!.color,'{drawing.ink}');assert.equal(leaf.literals!['background-color'],'currentColor');
  const context={contractRevision:revisionOf(f.child),sourceFileKey:'fixture',sourceKey:'glyph-key',sourceNodeId:'50:1',drawingInk};
  const node=f.mark(0),h=node.hostOverrides![0];node.nodeId='i';h.solidFillTarget={nodeId:'Ii;50:3',instanceId:'i',componentId:'50:1',instancePath:[],childPath:[0,0]};
@@ -681,14 +685,17 @@ test('nested drawing ink follows exact source ownership and keeps the native gro
   assert.equal(nestedDrawingInkTarget(n,f.child,c,'fixture'),undefined,fault);
  }
 });
-test('ambiguous or painting nested owners never gain an ink channel or mutate the child',()=>{
- for(const fault of ['missing','duplicate','foreign-object','branch','paint','text','conditional','stroke','instance','ancestor-color','root-color','group-color','leaf-color','leaf-paint']){
-  const a=nestedInkFixture();
+for(const type of ['GROUP','FRAME'] as const)test(`ambiguous or painting ${type} owners never gain ink authority or mutate the child`,()=>{
+ for(const fault of ['missing','duplicate','foreign-object','branch','paint','text','conditional','stroke','instance','ancestor-color','root-color','group-color','leaf-color','leaf-paint','token-paint','literal-paint','fill-stack','effect','wrapper-state']){
+  const a=nestedInkFixture(type);
   if(fault==='missing')a.owners.delete('50:3');if(fault==='duplicate')a.owners.get('50:3')!.add({});
   if(fault==='foreign-object')a.owners.set('50:3',new Set([structuredClone(a.leaf)]));
   if(fault==='branch')a.wrapper.children.push({...a.vector});if(fault==='paint')Object.assign(a.wrapper,{fill:{hex:'ff0000'}});
   if(fault==='text')Object.assign(a.leaf,{text:'hidden paint'});if(fault==='conditional')a.leaf.states={hover:{color:'red'}};
-  if(fault==='stroke')a.vector.sourceStrokeStack.complete=false;if(fault==='instance')a.wrapper.type='INSTANCE';
+  if(fault==='stroke')a.vector.sourceStrokeStack.complete=false;if(fault==='instance')Object.assign(a.wrapper,{type:'INSTANCE'});
+  if(fault==='token-paint')a.group.tokens!['background-color']='{drawing.ink}';if(fault==='literal-paint')a.group.literals={'background-color':'red'};
+  if(fault==='fill-stack')Object.assign(a.group,{fillStack:{version:1,paints:[]}});if(fault==='effect')a.group.declared={'box-shadow':'0 0 2px red'};
+  if(fault==='wrapper-state')a.group.states={hover:{color:'red'}};
   if(fault==='ancestor-color')Object.assign(a.group,{literals:{color:'red'}});
   if(fault==='root-color')a.root.declared={color:'red'};if(fault==='group-color')Object.assign(a.group,{declared:{color:'red'}});
   if(fault==='leaf-color')a.leaf.literals={color:'red'};if(fault==='leaf-paint')a.leaf.declared={'background-color':'red'};
@@ -705,10 +712,11 @@ test('a token-name allocation alone never collapses different consuming modes',(
  assert.deepEqual(batch.skipped,[]);assert.deepEqual(batch.proposals[0].mintedTokens!.entries.map(e=>e.value).sort(),values);
 });
 
-test('native nested drawing ink keeps alias identity and the standalone default without resizing',async()=>{
+for(const tokenGeometry of [false,true])test(`native nested drawing ink keeps aliases and default without resizing (geometry tokens: ${tokenGeometry})`,async()=>{
  const {child,parent,primitives,aliased}=stateContracts();const leaf=child.anatomy.root.parts!.ink;
  delete leaf.shape!.parentViewport;leaf.literals={...leaf.literals,left:'3px',top:'3px'};
  child.anatomy.root.parts={wrapper:{declared:{position:'relative'},literals:{width:'24px',height:'24px'},parts:{leaf}}};
+ if(tokenGeometry)Object.assign(child.anatomy.root.parts.wrapper,{layout:{display:'flex',direction:'row'},literals:{},tokens:{width:'{g.size}',height:'{g.size}'}});
  child.anatomy.root.overridable=['color'];for(const {part}of walkAnatomy(parent))if(part.component?.overrides)delete part.component.overrides.size;
  const scope=new Map([[child.id,child],[parent.id,parent]]),tokens={primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}};
  const engine=createFigmaEngine({tokens,icons:new Map()}),data=engine.compileComponentData(parent,scope);
