@@ -387,9 +387,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run live-figma:evidence:check
 
-      - name: test:live-figma-evidence (receipt gate refuses forged clean edit)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run test:live-figma-evidence
 
       - name: console-loop:all:evidence:check (first-party + MUI + foreign corpora)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -408,7 +405,7 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run visual-truth:check
 
-      - name: test:console-loop-evidence (first-party loop gate)
+      - name: test:console-loop-evidence (first-party and live-file receipt gates)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:console-loop-evidence
 
