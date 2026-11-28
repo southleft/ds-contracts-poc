@@ -17,7 +17,7 @@ import {annotateNativeContractProjection} from './native-contract-draft.js';
 import {nativeBoundPaintColor} from './native-paint-observation.js';
 
 async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
-  const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
+  const host=nativeFixtureHost({instanceVariantSelection:true,consumerVariableModes:shapes==='stroke'}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
   };

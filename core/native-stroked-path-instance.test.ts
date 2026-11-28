@@ -52,6 +52,10 @@ test('declared centerline color-only, width-only and combined overrides preserve
  assert.equal(vectors.filter((n:any)=>n.values.strokeWeight===1.5).length,3);
  assert.equal(vectors.filter((n:any)=>n.values.strokeWeight===2.5).length,2);
  assert.equal(vectors.filter((n:any)=>n.values.strokes[0].boundVariables.color.id===f.variable('callerInk')).length,2);
+ for(const n of vectors)for(const field of ['explicitVariableModes','resolvedVariableModes']){
+  const r=structuredClone(f.receipt),v=r.nodes.find((row:any)=>row.id===n.id).values;
+  v[field]={[Object.keys(v.resolvedVariableModes)[0]]:'foreign-mode'};assert.equal(f.verify(r).status,'refused',n.id+field);
+ }
  const target=vectors.find((n:any)=>n.values.strokeWeight===2.5&&n.values.strokes[0].boundVariables.color.id===f.variable('callerInk'));
  for(const [label,change]of [
   ['equal-valued color identity',(n:any)=>{n.values.strokes[0].boundVariables.color.id=f.variable('peerInk');n.values.boundVariables.strokes[0].id=f.variable('peerInk');}],

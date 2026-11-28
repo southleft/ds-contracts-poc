@@ -1583,6 +1583,8 @@ function verifyReadback(
                 }
                 const strokeInk=textOwner&&pathSpec?.shape?.kind==='stroked-path'&&spec.instanceInk?.paintKind==='stroke'?spec.instanceInk:undefined;
                 const strokeWidth=textOwner&&pathSpec?.shape?.kind==='stroked-path'?spec.instanceStrokeWeight:undefined;
+                const strokeModeVerified=same(child.values.resolvedVariableModes,consumingMode)&&object(child.values.explicitVariableModes)&&
+                  Object.entries(child.values.explicitVariableModes).every(([id,value])=>consumingMode[id]===value);
                 let strokeOverrideVerified=false;
                 if(pathSpec && (strokeInk||strokeWidth)){
                   strokedOverrideTargets++;
@@ -1593,8 +1595,7 @@ function verifyReadback(
                   const expectedBindings={...source.values.boundVariables};
                   if(strokeInk)expectedBindings.strokes=[{type:'VARIABLE_ALIAS',id:bound?.id}];
                   if(strokeWidth)expectedBindings.strokeWeight={type:'VARIABLE_ALIAS',id:variableByName.get(strokeWidth.varName)};
-                  strokeOverrideVerified=same(child.values.resolvedVariableModes,consumingMode)&&object(child.values.explicitVariableModes)&&
-                    Object.entries(child.values.explicitVariableModes).every(([id,value])=>consumingMode[id]===value)&&
+                  strokeOverrideVerified=strokeModeVerified&&
                     (!strokeInk||strokeInk.writeProtocol==='attached-v1')&&
                     (!strokeWidth||typeof weight==='number'&&(weight===strokeWidth.px||Math.fround(weight)===Math.fround(strokeWidth.px)))&&
                     nativeStrokedPathPaintMatches(paintSpec,child.values,weight,bound)&&same(child.values.boundVariables,expectedBindings);
@@ -1624,6 +1625,7 @@ function verifyReadback(
                   if(!affineMatches(pathSpec,child))issue('native-instance-affine-observation-inherited-geometry',child);
                 } else if(pathSpec?.shape?.kind==='stroked-path'){
                   const owner=nodes.get(child.parentId);
+                  if(textOwner&&!strokeModeVerified)issue('native-stroked-path-observation-mode',child);
                   if(!owner || !nativeStrokedPathNodeMatches(pathSpec.shape,child.values,owner.values) || child.childIds.length)
                     issue('native-stroked-path-observation-inherited-geometry',child);
                 } else if (pathSpec) {
@@ -2031,6 +2033,7 @@ function verifyReadback(
           return;
         }
         if(spec.shape?.kind==='stroked-path'){
+          if(!same(v.resolvedVariableModes,consumingMode))issue('native-stroked-path-observation-mode',n);
           if(!parent || !nativeStrokedPathNodeMatches(spec.shape,v,parent.values) || n.childIds.length)
             issue('native-stroked-path-observation-geometry',n);
           return;
