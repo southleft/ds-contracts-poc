@@ -103,7 +103,7 @@ lost its build step, not that the registry comparison found something.
 | `ledger:fresh` | `LEDGER.md` or `RESIDUALS.md` under `extract/figma/ledger/` drifted from a rebuild. | `npm run ledger:fresh` |
 | `publish:check` | The version in `packages/cli/package.json` **is** on the npm registry and the bytes differ from this tree's build — so `npm i -g @ds-contracts/cli`, the first command in every doc, hands adopters something this repo does not test. Fix by bumping the version, or by reverting the tree. A version that is *not* published yet is a **pass**, and says so. | `npm run publish:check` |
 | `verify:catalog` | The sharded catalog no longer matches `catalog.json`. | `npm run verify:catalog` |
-| `test:onboarding` | The CLI's `node:test` suite (draft-capture-config, accept-candidates, init-detect, library-scorecard, onboard). | `npm run test:onboarding` |
+| `test:cli` | The CLI's `node:test` suite (draft-capture-config, accept-candidates, init-detect, library-scorecard, onboard). | `npm run test:cli` |
 | `test:v1-definition` / `v1:definition:check` | The pinned v1 requirement IDs, evidence commands, exclusions, compatibility floors, and links drifted. | `npm run test:v1-definition && npm run v1:definition:check` |
 | `generation:atomic:check` | A late generation refusal left partial output behind. | `npm run generation:atomic:check` |
 | `provenance:check` | A stale source could overwrite a newer approved contract change, or provenance was not preserved. | `npm run provenance:check` |

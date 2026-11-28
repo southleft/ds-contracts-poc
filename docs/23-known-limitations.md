@@ -481,7 +481,7 @@ live net — see [§D.8](#d8-the-onboard-review-gate-had-never-printed--closed).
    where `onboard` already stops for a human. **This half threw a
    `ReferenceError` on every fresh onboard until 2026-08-03** and therefore
    printed nothing for any adopter. Fixed in `eae868c`; now covered by
-   `npm run test:onboarding` (40/40, run today — case 40 is *"the review gate
+   `npm run test:cli` (40/40, run today — case 40 is *"the review gate
    warns when a queued component can capture its trigger instead of itself"*).
 
 **The gap that remains, stated plainly.** The collision only fires when the
@@ -2610,7 +2610,7 @@ unbuildable sandbox (164 esbuild errors) and is now npm-pack'ed and installed
 as a tarball; a tokens file was promised in `ds-library.json` and never
 written; and `--components` silently dropped unknown names.
 
-**The gate that prevents regression.** `npm run test:onboarding` — **40/40, run
+**The gate that prevents regression.** `npm run test:cli` — **40/40, run
 today**, with case 40 being *"the review gate warns when a queued component can
 capture its trigger instead of itself."* Plus `npm run typecheck`, which had
 been reporting the original defect all along.
@@ -3116,7 +3116,7 @@ npm run dagger:census             # → 104 receipts · 2,321 named facts, no dr
 npm run code-only-facts:check     # → the per-fact receipts ride the bundle, the plugin data and the run report
 
 # the onboard review gate now actually prints, and is pinned (§D.8)
-npm run test:onboarding                          # → 40/40
+npm run test:cli                          # → 40/40
 npm run typecheck                                # → the check that caught D.8 all along
 
 # constraints: all five values read, SCALE refused in flow (§D.7)
