@@ -154,6 +154,14 @@ are refused. The capture stays unchanged. `behavior.owner` reports `system-profi
 or, on reimport of generated native metadata, `native-metadata`; runtime equivalence
 still reads `not-asserted`. Run your own behavior tests before adopting the package.
 
+For a prepared-library native return, use a separate return profile containing
+`{"conventions":["native-operation-public-names"]}` to recover the public exports.
+Omit the original target-bound `figmaButton` entry: retained native metadata supplies
+the button policy. Only an exact matching operation stamp and drawn suffix qualify;
+ambiguous names refuse.
+This does not accept provisional contract IDs or establish behavior equivalence.
+The convention is off by default to preserve existing generated imports.
+
 The check installs the package in a clean Vite app, mounts every Figma variant and prints one line per variant:
 
 - **PASS**: within the 5% image limit on white and on black, and every text and icon Figma draws is rendered.

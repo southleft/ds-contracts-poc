@@ -324,6 +324,9 @@
  *  truncation again once laid out, after every pass that sets its auto-resize: Figma clears a text's truncation whenever
  *  its auto-resize is set to NONE, as the baseline box (text-baseline-as-drawn) and the fill pass
  *  (wrapped-text-truncates-at-its-box) do after it was set. Off, such a text wraps in its box with no ellipsis. */
+/** native-operation-public-names (Figma to React proposal): recover public exports from an exact matching
+ *  native operation stamp/suffix pair. Provisional stamps remain unaccepted as contract IDs; ambiguous names
+ *  refuse before alias registration. Off, preserve the full drawn name and existing session alias behavior. */
 export const CONVENTIONS = [
   'absolute-box-from-size-and-margins',
   'absolute-in-containing-block',
@@ -362,6 +365,7 @@ export const CONVENTIONS = [
   'linked-child-keeps-its-stacking',
   'lost-text-realigns-by-class',
   'mixed-scale-rect-keeps-placement',
+  'native-operation-public-names',
   'negative-sibling-margin-as-gap',
   'nested-instance-composition-observed',
   'normal-letter-spacing-is-zero',
