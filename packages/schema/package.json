@@ -23,8 +23,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node emit-json-schema.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "package:smoke": "npm pack --dry-run --json"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "zod": "^4.6.7"
