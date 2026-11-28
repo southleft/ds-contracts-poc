@@ -5,6 +5,7 @@ import {isReactAuthoredOperationRequest as isReactAuthoredNativeRequest,reactAut
   reactAuthoredOwnershipAnchor,type ReactAuthoredOperationRequest as ReactAuthoredNativeRequest} from './react-authored-native-request.js';
 import type {prepareReactAuthoredNativePlan} from './react-authored-native-plan.js';
 import {isPreparedLibraryNativeRequest, preparedLibraryNativeReservation, type PreparedLibraryNativeRequest} from './prepared-library-native-request.js';
+import {declaredLibraryFontRefusal,preflightLibraryFonts} from './prepared-library-fonts.js';
 import type {prepareReactLibraryNativePlan} from '../playground/server/react-library-native.js';
 import {nativeGraphVariants} from '../core/native-prepared-library.js';
 import {emitNativePartialReadbackScript,verifyNativePartialReadback,type NativePartialObservation} from '../core/native-partial-observation.js';
@@ -637,7 +638,7 @@ export function createNativeOperationJobs(
     const compiled = emitNativeTokenContextScript(plan.plan.tokenInput);
     if (!same(compiled.preparation, plan.plan.tokenPreparation))
       fail("token-preparation-changed");
-    return compiled.script;
+    return isLibraryPlan(plan) ? preflightLibraryFonts(compiled.script,plan.plan.fonts,fileKey,plan.plan.tokenPreparation.revision) : compiled.script;
   };
   const correlate = (
     envelope: NativeOperationResult,
@@ -700,18 +701,22 @@ export function createNativeOperationJobs(
       !Array.isArray(result.allocation.modes)
     )
       return invalid;
-    if (result.status === "refused")
+    if (result.status === "refused") {
+      const fontRefusal=isLibraryPlan(plan) && declaredLibraryFontRefusal(result.problems[0],plan.plan.fonts) &&
+        Object.keys(result).sort().join(',')==='acceptedContract,allocation,nativeQualification,preparationRevision,problems,receiptKind,status,version' &&
+        Object.keys(result.allocation).sort().join(',')==='collection,modes,variables';
       return result.allocation.collection === null &&
         !result.creationIdentity &&
         !result.allocation.variables.length &&
         !result.allocation.modes.length &&
         result.problems.length === 1 &&
-        PREALLOCATION_REFUSALS.has(result.problems[0])
+        (PREALLOCATION_REFUSALS.has(result.problems[0]) || fontRefusal)
         ? {
             phase: "creation-refused",
-            problems: ["native-operation-native-creation-refused"],
+            problems: [fontRefusal ? result.problems[0] : "native-operation-native-creation-refused"],
           }
         : invalid;
+    }
     if (!object(result.allocation.collection)) return invalid;
     const identity = result.creationIdentity;
     if (identity) {
