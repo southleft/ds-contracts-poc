@@ -2171,6 +2171,16 @@ function readStampedContractId(set: { contractId?: unknown }): string | null {
   return CONTRACT_ID_RE.test(id) ? id : null;
 }
 
+/** A provisional operation suffix can name a public export without becoming
+ * an accepted contract ID. Only an exact, well-formed stamp/suffix pair counts. */
+export function nativeInspectionDisplayName(set: {setName:string;contractId?:unknown}): string | null {
+  const stamp=typeof set.contractId==='string'?set.contractId.trim():'';
+  const match=/^source-native:[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}:(.+)$/.exec(stamp);
+  if(!match||!CONTRACT_ID_RE.test(match[1]))return null;
+  const drawn=drawnContractName(set.setName,stamp);
+  return drawn.strippedSuffix?drawn.name:null;
+}
+
 /** dump v1.28 — the emit specHash this pipeline stamped. Digits only; a
  *  malformed stamp reads as absent so a bad marker cannot invent a hash. */
 function readStampedSpecHash(set: { specHash?: unknown }): string | null {
@@ -18132,6 +18142,12 @@ function proposeFromDumpFencedImpl(
     }
   }
 
+  const nativeName = conventionSet(opts.conventions).has('native-operation-public-names') ? nativeInspectionDisplayName(set) : null;
+  if(nativeName&&([...opts.contractIdByName].some(([alias,id])=>id!==selfId&&
+    [nativeName.toLowerCase(),set.setName.toLowerCase()].includes(alias.toLowerCase()))||
+    [...(opts.contractsById?.values()??[])].some(child=>child.id!==selfId&&child.name?.toLowerCase()===nativeName.toLowerCase())))
+    throw Error('NATIVE_PUBLIC_NAME_COLLISION: '+nativeName);
+
   const ctx: Ctx = {
     inspectBoundDraftChildren:draftPaint,
     ...(carryPaint?{draftPaintOrigins:[]}:{}),
@@ -18853,13 +18869,15 @@ function proposeFromDumpFencedImpl(
   // ` (${stampedId})` before PascalCase so "Alert (flowbite.alert)"
   // recovers Alert, not AlertFlowbiteAlert.
   const drawnName = drawnContractName(set.setName, stampedContractId);
-  let componentName = drawnName.name;
+  let componentName = nativeName ?? drawnName.name;
   const usedNames=new Set([...(opts.contractsById?.values() ?? [])]
     .filter(child=>child.id!==selfId && typeof child.name==='string')
     .map(child=>child.name!.toLowerCase()));
   for(let suffix=2;usedNames.has(componentName.toLowerCase());suffix++)componentName=drawnName.name+suffix;
-  if(componentName!==drawnName.name)ctx.notes.push(`contract name: normalized export "${drawnName.name}" is already claimed by a distinct session contract — proposed as "${componentName}"; source set keys and dependency refs remain distinct`);
-  if (drawnName.strippedSuffix) {
+  if(!nativeName&&componentName!==drawnName.name)ctx.notes.push(`contract name: normalized export "${drawnName.name}" is already claimed by a distinct session contract — proposed as "${componentName}"; source set keys and dependency refs remain distinct`);
+  if (nativeName) {
+    ctx.notes.push(`contract name: recovered public export "${nativeName}" from its matching operation suffix; the provisional stamp remains unaccepted as a contract ID`);
+  } else if (drawnName.strippedSuffix) {
     ctx.notes.push(
       `contract name: drawn set name "${set.setName}" carries the emit collision suffix " (${stampedContractId})" — proposed as "${componentName}" (FC-DUMP-PROPOSE-NAME-PARENTHETICAL)`,
     );
@@ -20313,6 +20331,19 @@ function proposeBatchFromDumpInternal(
   opts: Parameters<typeof proposeFromDump>[1],
   declarations?: ReadonlyMap<string, unknown>,
 ): DumpBatchResult {
+  const recoverNativeNames=conventionSet(opts.conventions).has('native-operation-public-names');
+  const displayClaims=Object.values(dump).filter(isDumpSet).map(set=>{
+    const native=recoverNativeNames?nativeInspectionDisplayName(set):null;
+    return {set,native,name:native??drawnContractName(set.setName,readStampedContractId(set)).name};
+  });
+  const nativeNames=new Set(displayClaims.filter(row=>row.native).map(row=>row.name.toLowerCase()));
+  // Refuse before ordering, proposing or linking any family member. A name
+  // collision cannot be made safe by silently choosing a numbered export.
+  for(const row of displayClaims)if(row.native){
+    const name=row.name.toLowerCase();
+    if(displayClaims.some(other=>other!==row&&other.name.toLowerCase()===name))
+      throw Error('NATIVE_PUBLIC_NAME_COLLISION: '+row.name);
+  }
   const proposals: DumpBatchResult['proposals'] = [];
   const skipped: SkippedSet[] = [];
   const notes: string[] = [];
@@ -20436,16 +20467,17 @@ function proposeBatchFromDumpInternal(
   const registerSession = (c: Record<string, unknown>, dumpName?: string, isStub = false) => {
     if (typeof c.id !== 'string') return;
     if (isStub && contractsById.has(c.id)) return;
+    const recovered=recoverNativeNames&&dumpName?nativeInspectionDisplayName(dump[dumpName] as DumpSet):null;
+    const aliases=[...(typeof c.name==='string'?[c.name]:[]),...(dumpName?[dumpName,
+      recovered??drawnContractName(dumpName,readStampedContractId(dump[dumpName] as DumpSet)).name]:[])];
+    for(const alias of aliases)if((recovered||nativeNames.has(alias.toLowerCase()))&&
+      [...contractIdByName].some(([name,id])=>name.toLowerCase()===alias.toLowerCase()&&id!==c.id))
+      throw Error('NATIVE_PUBLIC_NAME_COLLISION: '+alias);
     sessionClaimedIds.add(c.id);
     contractsById.set(c.id, asMinimalChildContract(c));
-    if (typeof c.name === 'string') contractIdByName.set(c.name, c.id);
-    if (dumpName) {
-      contractIdByName.set(dumpName, c.id);
-      // Instances can carry the normalized source name instead of the set's
-      // drawn spelling. Export collision suffixes must not erase this alias:
-      // captured keys still take precedence in resolveChildContract.
-      contractIdByName.set(drawnContractName(dumpName, readStampedContractId(dump[dumpName] as DumpSet)).name, c.id);
-    }
+    // Captured keys retain precedence; a recovered public alias cannot
+    // redirect an earlier keyless dependency to a different session contract.
+    for(const alias of aliases)contractIdByName.set(alias,c.id);
     const key = (c.bindings as { figma?: { anchors?: { componentSetKey?: string | null } } } | undefined)?.figma
       ?.anchors?.componentSetKey;
     if (typeof key === 'string' && key.length > 0) {
@@ -20761,6 +20793,7 @@ function proposeBatchFromDumpInternal(
       }
       proposals.push(proposal);
     } catch (e) {
+      if(e instanceof Error&&e.message.startsWith('NATIVE_PUBLIC_NAME_COLLISION:'))throw e;
       if (opts.buttonDeclaration && opts.buttonDeclaration.nodeId === value.nodeId) throw e;
       const plain = plainWordsProposalError(e);
       skipped.push({
