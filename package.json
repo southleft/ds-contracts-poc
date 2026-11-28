@@ -22,7 +22,7 @@
     "test:playground": "node --import tsx --test playground/src/engine/bridge.test.ts playground/src/engine/styling-detect.test.ts playground/src/engine/code-import-workspace.test.ts playground/src/engine/figma-import-workspace.test.ts playground/src/engine/figma-import-identity.test.ts playground/src/engine/selection-setup.test.ts playground/server/react-library.test.ts playground/server/react-library-capacity.test.ts playground/src/pages/native-review-value.test.ts playground/src/pages/native-inspection-poll.test.ts playground/src/pages/react-authored-source-review.test.ts product/overview.test.ts playground/server/react-library-native.test.ts playground/src/pages/source-response.test.ts scripts/validate-linked-token-scope.test.ts",
     "test:product-overview:browser": "node --import tsx product/browser-check.ts",
     "recipe:fidelity:capture": "node scripts/capture-fidelity-shots.mjs",
-    "test:v1-definition": "node --test scripts/v1-definition-check.test.mjs",
+    "test:v1-definition": "node --test scripts/v1-definition-check.test.mjs scripts/accuracy-contract-check.test.mjs",
     "typecheck:recipe": "node scripts/typecheck-recipe.mjs",
     "typecheck:worker": "npm --prefix workers/assist run typecheck",
     "typecheck:playground": "tsc --noEmit -p playground/tsconfig.json",
