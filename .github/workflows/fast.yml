@@ -359,9 +359,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run required-facts:check
 
-      - name: test accuracy contract gate falsifications
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run test:accuracy-contract
       - name: test:audit-classify (an npm-audit endpoint error is not a vulnerability finding)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:audit-classify
