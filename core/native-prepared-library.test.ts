@@ -16,8 +16,10 @@ import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 import {nativeBoundPaintColor} from './native-paint-observation.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
-  const host=nativeFixtureHost({instanceVariantSelection:true,consumerVariableModes:shapes==='stroke'}); host.figma.fileKey='PreparedLibraryFixture';
+async function fixture(composed:boolean|'nested'|'repeated'|{lineHeight:number;composed:boolean|'nested'|'repeated'}=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
+  const lineHeight = typeof composed === 'object' ? composed.lineHeight : undefined;
+  if (typeof composed === 'object') composed = composed.composed;
+  const host=nativeFixtureHost({instanceVariantSelection:true,consumerVariableModes:shapes==='stroke'||lineHeight!==undefined}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
   };
@@ -33,6 +35,10 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     anatomy:{root:{layout:{display:'inline-flex'},tokens:{'border-width':'{edge}','border-color':'{ink}'},states:{hover:{opacity:'{fade}'}},parts:{
       text:{content:{prop:'label'},visibleWhen:{prop:'shown'},...(family === null ? {} : {declared:{'font-family':family}}),tokens:{color:'{label}','font-weight':'{weight}'}},
     }}},bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}});
+  if (lineHeight !== undefined) {
+    Object.assign(tokens.primitives, {lineHeight:{$type:'dimension',$value:lineHeight+'px'},lineHeightPeer:{$type:'dimension',$value:lineHeight+'px'}});
+    leaf.anatomy.root.parts!.text.tokens!['line-height']='{lineHeight}';
+  }
   if(drawn){
     leaf.states=[];delete leaf.bindings.figma.statePreviews;
     leaf.props.push({name:'tone',type:{enum:['quiet','strong']},default:'quiet',bindings:{code:{prop:'tone'},figma:{kind:'VARIANT',property:'Tone',values:{quiet:'Quiet',strong:'Strong'}}}});
@@ -252,6 +258,38 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
   const receipt=await run(emitNativePreparedLibraryReadbackScript(input));
   return {host,run,source,root,byId,engine,context,compiled,script,creation,input,receipt,tokens};
 }
+
+for (const composed of [false, true, 'nested', 'repeated'] as const) test(`declared pixel line height requires its native binding, including dependency=${composed}`,async()=>{
+  const f=await fixture({lineHeight:24,composed});
+  const unbound=structuredClone(f.receipt);
+  for(const n of unbound.nodes)if(n.type==='TEXT')delete n.values.boundVariables.lineHeight;
+  assert.equal(verifyNativePreparedLibraryReadback(f.input,unbound).status,'refused','unbound legacy output must refuse');
+  const variable=f.input.tokenIdentity.variables.find(v=>v.tokenPath==='lineHeight')!;
+  const peer=f.input.tokenIdentity.variables.find(v=>v.tokenPath==='lineHeightPeer')!;
+  const texts=f.receipt.nodes.filter((n:any)=>n.type==='TEXT');assert.ok(texts.length);
+  // This is an explicitly bound observation fixture, not a writer success test.
+  // Mirror Figma's singleton array and retain its unit-bearing pixel value.
+  for(const row of texts){const n:any=await f.host.figma.getNodeByIdAsync(row.id);
+    n.boundVariables.lineHeight=[{type:'VARIABLE_ALIAS',id:variable.id}];}
+  const bound=await f.run(emitNativePreparedLibraryReadbackScript(f.input));
+  const report=verifyNativePreparedLibraryReadback(f.input,bound);
+  assert.equal(report.status,'supported-structure-observed',JSON.stringify(report.problems));
+  for(const row of texts)for(const [name,mutate]of Object.entries({
+    missing:(n:any)=>{delete n.values.boundVariables.lineHeight;},
+    peer:(n:any)=>{n.values.boundVariables.lineHeight[0].id=peer.id;},
+    value:(n:any)=>{n.values.lineHeight.value++;},
+    unit:(n:any)=>{n.values.lineHeight.unit='PERCENT';},
+    empty:(n:any)=>{n.values.boundVariables.lineHeight=[];},
+    extra:(n:any)=>{n.values.boundVariables.lineHeight.push(n.values.boundVariables.lineHeight[0]);},
+    malformed:(n:any)=>{n.values.boundVariables.lineHeight='bad';},
+    stamp:(n:any)=>{n.metadata.lineHeightVar='wrong';},
+    mode:(n:any)=>{n.values.resolvedVariableModes[f.input.tokenIdentity.collection.id]='wrong';},
+    explicitMode:(n:any)=>{n.values.explicitVariableModes[f.input.tokenIdentity.collection.id]='wrong';},
+  })){
+    const changed=structuredClone(bound);mutate(changed.nodes.find((n:any)=>n.id===row.id));
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,changed).status,'refused',name+' '+row.id);
+  }
+});
 
 test('prepared inventory verifies an explicitly allocated bound receiver and still checks foreground topology',async()=>{
   const f=await fixture(false),input:any=structuredClone(f.input),receipt:any=structuredClone(f.receipt);

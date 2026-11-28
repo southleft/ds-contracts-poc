@@ -116,11 +116,27 @@ async function prepared(p:Pick<ReturnType<typeof propose>,'contract'|'contracts'
  const creation=await run(engine.buildNativePreparedLibraryScript(p.contract,p.contracts,source,{operation,tokens:{input:tokenInput,identity:allocated.creationIdentity,receipt:observed.receipt}}));
  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
  const input={operation,planRevision:revisionOf(compiled),projection:compiled.projection,component:compiled.component,graphComponents:compiled.components,graphVerification:2 as const,tokenInput,tokenIdentity:allocated.creationIdentity,creation};
- const receipt=await run(emitNativePreparedLibraryReadbackScript(input));return {input,receipt};
+ const receipt=await run(emitNativePreparedLibraryReadbackScript(input));
+ // These are geometry observations, not proof that the writer binds typography.
+ // Keep an explicit unbound refusal and supply only declared, unchanged pixel
+ // bindings; caller scalar overrides retain their own literal line height.
+ const specs:any[]=[];const visit=(s:any)=>{if(s.type==='text')specs.push(s);(s.children??[]).forEach(visit);};
+ for(const c of compiled.components)for(const v of c.variants)visit(v.spec);
+ const unbound=structuredClone(receipt);let bound=0;
+ for(const n of receipt.nodes){
+  const s=specs.find(s=>JSON.stringify(s.nativeContractPart)===n.metadata.nativeContractPart);
+  if(s?.lineHeightVar&&s.lineHeight?.unit==='PIXELS'&&n.values.lineHeight?.unit==='PIXELS'&&n.values.lineHeight.value===s.lineHeight.value){
+   const variable=allocated.creationIdentity.variables.find((v:any)=>v.tokenPath===s.lineHeightVar.replaceAll('/','.'));assert(variable);
+   n.values.boundVariables.lineHeight=[{type:'VARIABLE_ALIAS',id:variable.id}];
+   delete unbound.nodes.find((r:any)=>r.id===n.id).values.boundVariables.lineHeight;bound++;
+  }
+ }
+ assert(bound>0);assert.equal(verifyNativePreparedLibraryReadback(input,unbound).status,'refused');
+ return {input,receipt};
  }finally{proto._measureText=measure;if(originalTransform)Object.defineProperty(proto,'relativeTransform',originalTransform);else delete proto.relativeTransform;}
 }
 
-test('native writer and independent reader agree on reflected HUG right and vertical center placement',async()=>{
+test('independent reader verifies reflected HUG placement with explicit typography bindings',async()=>{
  const {input,receipt}=await prepared(propose()),result=verifyNativePreparedLibraryReadback(input,receipt);
  assert.equal(result.status,'supported-structure-observed',JSON.stringify(result));
  const labels=receipt.nodes.filter((n:any)=>n.name==='label');assert.equal(labels.length,2);
