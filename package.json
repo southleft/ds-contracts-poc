@@ -82,7 +82,6 @@
     "extract:figma:visual:anchors": "tsx extract/figma/visual-parity/anchor-check.ts",
     "maintain": "npm run required-facts:check && npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run host-placement:check && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run placeholder-ink:check && npm run first-party-bundle:check && npm run prop-collision:check && npm run code-connect:check && npm run playground:flow-check",
     "maintain:visual": "npm run extract:figma:visual:catalog",
-    "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
     "eval:carried:check": "node scripts/eval-carried-check.mjs",
     "schema:fresh": "tsx scripts/schema-fresh-check.ts && node --import tsx --test site/src/introspect.test.ts",
