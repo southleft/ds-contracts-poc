@@ -2845,6 +2845,8 @@ function strokedPathIssue(data) {
 
 
 function dumpStrokedPath(node, parent) {
+  // Winding does not paint an unfilled region. Preserve the centerline and
+  // let the captured parent retain its own clipping policy.
   const paths = node.vectorPaths, t = node.relativeTransform, network = node.vectorNetwork;
   const paints = value => Array.isArray(value) ? value.filter(p => p.visible !== false) : null;
   const fills = paints(node.fills), strokes = paints(node.strokes), effects = paints(node.effects);
@@ -2854,7 +2856,7 @@ function dumpStrokedPath(node, parent) {
   if (!parent || !['FRAME','COMPONENT'].includes(parent.type) || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
       ![parent.width, parent.height, node.width].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) || !Number.isFinite(node.height) || node.height < 0 || node.height > 1e6 ||
       !anchored && (['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
-      !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false) ||
+      !paints(parent.strokes) || paints(parent.strokes).length || typeof parent.clipsContent !== 'boolean') ||
       !identity(t) || Math.abs(t[0][2]) > 1e6 || Math.abs(t[1][2]) > 1e6 ||
       node.isMask !== false || !fills || fills.length || !effects || effects.length ||
       !strokes || strokes.length !== 1 || strokes[0].type !== 'SOLID' ||
@@ -2867,9 +2869,9 @@ function dumpStrokedPath(node, parent) {
       node.complexStrokeProperties != null && node.complexStrokeProperties.type !== 'BASIC' ||
       Object.keys(node.boundVariables || {}).some(k => !['strokes', 'strokeWeight'].includes(k)) ||
       !anchored && (!node.constraints || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.horizontal) || !['SCALE', ...(node.height === 0 ? ['STRETCH'] : [])].includes(node.constraints.vertical)) ||
-      !Array.isArray(paths) || paths.length !== 1 || paths[0].windingRule !== 'NONE' || strokedPathIssue(paths[0].data) ||
+      !Array.isArray(paths) || paths.length !== 1 || !['NONE','NONZERO','EVENODD'].includes(paths[0].windingRule) || strokedPathIssue(paths[0].data) ||
       !network || !Array.isArray(network.vertices) || !network.vertices.length ||
-      (network.regions || []).length || network.vertices.some(v =>
+      (network.regions || []).some(r => !Array.isArray(r.fills) || r.fills.length || r.fillStyleId !== '') || network.vertices.some(v =>
         v.strokeCap !== undefined && v.strokeCap !== node.strokeCap ||
         v.strokeJoin !== undefined && v.strokeJoin !== node.strokeJoin ||
         v.cornerRadius !== undefined && v.cornerRadius !== 0)) return null;
