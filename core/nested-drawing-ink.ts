@@ -5,25 +5,30 @@ import {canonicalJson,revisionOf} from './contract-provenance.js';
 export type DrawingInkOwner={nodeId:string;childPath:number[];partPath:string[]};
 export type DrawingInkContext={contractRevision:string;sourceFileKey:string;sourceKey:string;sourceNodeId:string;drawingInk?:DrawingInkOwner};
 
+const placement=new Set(['position','left','right','top','bottom','width','height','overflow-x','overflow-y']);
+function passiveInkPart(part:Part,leaf=false):boolean{
+ return !Object.entries(part).some(([k,v])=>v!==undefined&&!(leaf?['shape','tokens','literals','declared','absoluteGeometry']:['parts','layout','tokens','literals','declared','absoluteGeometry']).includes(k))&&
+  Object.keys(part.tokens??{}).every(k=>placement.has(k)||(leaf&&k==='background-color'))&&
+  Object.keys(part.declared??{}).every(k=>placement.has(k))&&
+  Object.keys(part.literals??{}).every(k=>placement.has(k)||(leaf&&k==='background-color'));
+}
+
 /** A declared color input can reach one path through passive containers.
  * This proves only inherited ink, never resize or transform authority. */
 export function inheritedNestedDrawingInk(root:Part):Part|undefined{
  if(root.text!==undefined||root.shape||[root.declared,root.literals,...Object.values(root.states??{})].some(styles=>
     Object.entries(styles??{}).some(([key,value])=>key!=='color'&&/currentcolor/i.test(String(value)))))return;
  let part=root;
- const placement=new Set(['position','left','right','top','bottom','width','height','overflow-x','overflow-y']);
  for(let depth=1;depth<=8;depth++){
   const children=Object.values(part.parts??{});if(children.length!==1)return;
   part=children[0];
   const leaf=part.shape?.kind==='path'&&part.literals?.['background-color']==='currentColor';
-  if(Object.entries(part).some(([key,value])=>value!==undefined&&!(leaf?['shape','tokens','literals','declared','absoluteGeometry']:['parts','tokens','literals','declared','absoluteGeometry']).includes(key))||
-     Object.keys(part.tokens??{}).length||Object.keys(part.declared??{}).some(k=>!placement.has(k))||
-     Object.keys(part.literals??{}).some(k=>!placement.has(k)&&!(leaf&&k==='background-color')))return;
+  if(!passiveInkPart(part,leaf)||leaf&&Object.keys(part.tokens??{}).some(k=>!placement.has(k)))return;
   if(leaf)return depth>1?part:undefined;
  }
 }
 
-/** A single native drawing behind nonpainting GROUP wrappers may expose ink.
+/** A single native drawing behind nonpainting GROUP or FRAME wrappers may expose ink.
  * Source object identity locates the leaf; names and geometry grant no authority.
  * The wrappers remain intact and this never grants a size or transform input. */
 export function promoteNestedDrawingInk(root:Part,set:DumpSet,owners:ReadonlyMap<string,ReadonlySet<object>>|undefined):DrawingInkOwner|undefined{
@@ -36,9 +41,7 @@ export function promoteNestedDrawingInk(root:Part,set:DumpSet,owners:ReadonlyMap
   seen.add(source.nodeId);
   if(part.literals?.color||part.declared?.color)return;
   if(source.type==='VECTOR')break;
-  if(source.type!=='GROUP'||source.fill||source.stroke||source.text||source.imageFill||
-     Object.entries(part).some(([k,v])=>v!==undefined&&!['parts','tokens','literals','declared','absoluteGeometry'].includes(k))||
-     Object.keys(part.tokens??{}).length||part.literals?.color)return;
+  if(!['GROUP','FRAME'].includes(source.type)||source.fill||source.stroke||source.text||source.imageFill||!passiveInkPart(part))return;
  }
  if(childPath.length<2||source.type!=='VECTOR'||source.children?.length||source.stroke||part.shape?.kind!=='path'||
     !source.sourceStrokeStack?.complete||source.sourceStrokeStack.paints.length||
