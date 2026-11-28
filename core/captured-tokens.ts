@@ -1,35 +1,5 @@
-/**
- * CAPTURED TOKENS — the designer's REAL variables as an import-scoped token
- * layer (dump v1.4 `_variables`).
- *
- * The plugin transport resolves bound variable NAMES on any Figma plan, so a
- * proposal binds real refs ({bg.brand.default}, {spacing.200}) — but a
- * playground whose referee knows only the repo token corpus refused every
- * one of them ("does not exist in tokens/") and the designer's tokens had
- * nowhere to register (owner field case: the CBDS Button-Brand Primary
- * bridge send, 9 refusals). Dump v1.4 carries each variable's RESOLVED value
- * for the consuming mode alongside the name; this module turns that channel
- * into a DTCG tree + CSS-value entries the playground registers as an
- * ADDITIONAL token source (the mintedLayer pattern in
- * playground/src/engine/token-source.ts), so the referee resolves the real
- * names and the preview renders the designer's values.
- *
- * Rules (bounded, named, never guessed):
- *   · COLOR → { $value: '#rrggbb[aa]', $type: 'color' }
- *   · FLOAT → '<n>px' / $type dimension — Figma lengths are px — EXCEPT
- *     variables observed on node `opacity` or native `fontWeight`, which stay unitless
- *     ('<n>' / $type number)
- *   · STRING / BOOLEAN → no CSS custom-property projection; SKIPPED by name
- *   · whitespace and U+2024 fold to hyphens through the shared path rule;
- *     ambiguous whitespace folds refuse rather than merging identities
- *   · other names outside the token-ref grammar are SKIPPED by name
- *   · group-prefix variables receive a collision-free child leaf; references
- *     use the same whole-capture allocation and original names are retained
- *   · layering is the CALLER's rule: repo tokens win on name collision —
- *     the playground prunes shadowed paths at registration and receipts them
- *
- * Pure module (no node:* imports) — part of the browser-importable core.
- */
+/** Import-scoped Figma values and verified selected-context color aliases. */
+import { capturedAliasEntries, assertCapturedAliasPaths, CAPTURED_ALIAS_LIMIT } from './captured-aliases.js';
 import { isDumpSet, type DumpNode, type DumpVariable } from '../extract/figma/types.js';
 import { projectRootTextTemplateAliases, type TemplateSourceToken } from './figma-template-aliases.js';
 
@@ -44,6 +14,7 @@ export interface CapturedTokenEntry {
   type: string;
   /** Verified original source alias; value remains its captured CSS literal. */
   reference?: string;
+  source?: { variableId: string; collectionId: string; modeId: string; modeName: string; scope: string; tier: string };
   /** Per-mode CSS-value spellings, keyed by MODE NAME (dump v1.6) — present
    *  only when the variable's collection is multi-mode and the mode value
    *  spells with the entry's own type rule. The §3 channel: a promoted theme
@@ -117,13 +88,14 @@ export function assertUnambiguousVariablePaths(names: Iterable<string>): void {
 }
 
 /** Nested DTCG tree from flat entries (the mint-tokens tree shape). */
-function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown> {
+export function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown> {
   const tree: Record<string, unknown> = {};
   for (const e of entries) {
     const segs = e.path.split('.');
     let node = tree;
     for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
-    node[segs[segs.length - 1]] = { $value: e.reference ?? e.value, $type: e.type };
+    node[segs[segs.length - 1]] = { $value: e.reference ?? e.value, $type: e.type,
+      ...(e.source ? { $extensions: { 'ds-contracts-source': e.source } } : {}) };
   }
   return tree;
 }
@@ -135,8 +107,9 @@ function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown>
  * the degraded fallback, exactly as before.
  */
 export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedTokenLayer | null {
-  const rawVars = dump['_variables'] as Record<string, DumpVariable> | undefined;
-  if (!rawVars || typeof rawVars !== 'object' || Array.isArray(rawVars) || Object.keys(rawVars).length === 0) {
+  const aliases = capturedAliasEntries(dump, name => foldVariablePath(name).path);
+  const rawVars = (dump['_variables'] ?? {}) as Record<string, DumpVariable>;
+  if (!rawVars || typeof rawVars !== 'object' || Array.isArray(rawVars) || Object.keys(rawVars).length === 0 && !aliases.length) {
     return null;
   }
   const vars = { ...rawVars }, sourceTokens: TemplateSourceToken[] = [], templateSkips: CapturedTokenSkip[] = [];
@@ -267,14 +240,22 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     }
   }
 
+  for (const alias of aliases) {
+    const index = entries.findIndex(entry => entry.name === alias.name);
+    if (index >= 0) entries.splice(index, 1);
+    entries.push(alias);
+  }
+
   // Allocate against the complete identity inventory, not just supported values.
-  const variablePaths = allocateCapturedVariablePaths([...Object.keys(vars), ...sourceTokens.map(t => t.name)]);
+  const variablePaths = allocateCapturedVariablePaths([...Object.keys(vars), ...sourceTokens.map(t => t.name), ...aliases.map(t => t.name)]);
   const renamedPaths = new Map([...variablePaths].map(([name, path]) => [foldVariablePath(name).path, path]));
   const registrable = entries.map(entry => ({...entry,
     path: variablePaths.get(entry.name) ?? entry.path,
     ...(entry.reference ? {reference: entry.reference.replace(/\{([^{}]+)\}/g,
       (match, path: string) => renamedPaths.has(path) ? `{${renamedPaths.get(path)}}` : match)} : {}),
   }));
+
+  assertCapturedAliasPaths(registrable.map(e => e.path), registrable.filter(e => e.source).map(e => e.path));
 
   // Per-mode trees (dump v1.6) — the repo tokens/modes/*.tokens.json shape:
   // one tree per mode NAME, carrying the registrable entries that have a
@@ -373,7 +354,7 @@ export function capturedTokensDocument(dump: Record<string, unknown>): CapturedT
     ...layer.tree,
     $extensions: {
       'ds-contracts': {
-        source: 'figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph',
+        source: CAPTURED_ALIAS_LIMIT,
         captured: layer.count,
         ...(modeNames.length > 0 ? { modes } : {}),
         skipped: layer.skipped,
@@ -388,7 +369,7 @@ export function capturedTokensDocument(dump: Record<string, unknown>): CapturedT
       : 'single-mode: no per-mode trees captured)') +
     `; ${layer.skipped.length} skipped by name` +
     (skipNames.length > 0 ? ` (${skipNames.map((n) => `"${n}"`).join(', ')} — see $extensions["ds-contracts"].skipped for each reason)` : '') +
-    '. LIMIT: the dump carries RESOLVED values per mode, not the alias graph — a variable aliasing another lands as the aliased value; aliases are NOT preserved (named, dump v1.4/v1.6).';
+    '. LIMIT: ' + CAPTURED_ALIAS_LIMIT;
   return { document, receipt, layer };
 }
 

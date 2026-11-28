@@ -12,6 +12,7 @@
  * dependencies count toward the package family limit. No visual pass or
  * interaction behavior is inferred from successful preparation.
  */
+import { CAPTURED_ALIAS_LIMIT } from '../../../core/captured-aliases.js';
 import { dumpClosure } from '../../../extract/figma/rest/closure.js';
 import type { FontVerticalMetrics } from '../../../core/profile-conventions.js';
 import { icons } from './data.js';
@@ -94,6 +95,6 @@ export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], sourc
     setName: proposal.setName,
     proposed: batch.proposals.map(p => p.setName),
     skipped: batch.skipped.map(s => ({ setName: s.setName, reason: s.reason })),
-    notes: (proposal.notes ?? []).map(String),
+    notes: [...(proposal.notes ?? []).map(String), CAPTURED_ALIAS_LIMIT],
   };
 }

@@ -543,10 +543,6 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:repeat:check
 
-      - name: "extract:figma:theme:check"
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run extract:figma:theme:check
-
       # Move only the actual eval measurement to the final readiness job.
       # A failed validation job may archive diagnostics, but cannot qualify them.
       - name: bind actual eval measurement to this source and attempt

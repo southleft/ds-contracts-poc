@@ -19,6 +19,8 @@
  * Session-only by design: the pasted text lives in sessionStorage (this tab,
  * gone on close), never anywhere else.
  */
+import { treeFromEntries } from '../../../core/captured-tokens.js';
+import { applyCapturedAliasTrees } from '../../../core/captured-aliases.js';
 import { useSyncExternalStore } from 'react';
 import {
   flattenTokens,
@@ -182,58 +184,37 @@ export interface MintedTokenLayer {
   entries: MintedEntry[];
 }
 
-// ---------------------------------------------------------------------------
-// Captured tokens — the designer's REAL variables (dump v1.4 `_variables`),
-// an ADDITIONAL layer with the same lifecycle as the minted layer: a plugin
-// import that carried resolved variable values registers it (the proposal's
-// real-name refs — {bg.brand.default}, {spacing.200} — resolve and the
-// preview renders HIS values); every other load path clears or replaces it;
-// a workspace entry restores its own. LAYERING RULE: repo/user tokens win
-// on name collision — a captured name that shadows a base token is pruned
-// from the composed source and surfaced by name (capturedShadowedNames),
-// never silently overridden.
-// ---------------------------------------------------------------------------
-
 export type { CapturedTokenLayer };
 
-/** Nested DTCG tree from the layer's entries, `paths` only. */
-function capturedTree(layer: CapturedTokenLayer, paths: Set<string>): Record<string, unknown> {
-  const tree: Record<string, unknown> = {};
-  for (const e of layer.entries) {
-    if (!paths.has(e.path)) continue;
-    const segs = e.path.split('.');
-    let node = tree;
-    for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
-    node[segs[segs.length - 1]] = { $value: e.reference ?? e.value, $type: e.type };
-  }
-  return tree;
-}
-
-/** Compose base + captured: registrable entries join the inventory, the
- *  emitter tree's semantic slot, treesForCode, and the preview stylesheet;
- *  shadowed names (already defined by the base source) are EXCLUDED — the
- *  base value keeps winning everywhere — and reported via
- *  capturedShadowedNames for the receipts rail. */
+/** A captured native graph owns its selected context; legacy literals retain
+ * the existing fallback rule. Explicit user token sources require adjudication. */
 function composeCaptured(
   base: TokenSource,
   captured: CapturedTokenLayer | null,
 ): { source: TokenSource; shadowed: string[] } {
   if (!captured || captured.count === 0) return { source: base, shadowed: [] };
-  const shadowed = captured.entries.filter((e) => base.inventory.has(e.path)).map((e) => e.name);
-  const registered = captured.entries.filter((e) => !base.inventory.has(e.path));
+  if (base.kind !== 'repo' && captured.entries.some(e => e.source && base.inventory.has(e.path)))
+    throw Error('captured-alias-explicit-source-conflict: reconcile the supplied token source before importing');
+  const shadowed = captured.entries.filter((e) => !e.source && base.inventory.has(e.path)).map((e) => e.name);
+  const registered = captured.entries.filter((e) => e.source || !base.inventory.has(e.path));
   if (registered.length === 0) return { source: base, shadowed };
   const paths = new Set(registered.map((e) => e.path));
-  const tree = capturedTree(captured, paths);
-  const semantic = mergeTrees([base.tree.semantic as Record<string, unknown>, tree]);
+  const tree = treeFromEntries(registered);
+  const owned = applyCapturedAliasTrees(base.tree, [tree], base.kind === 'repo');
+  const semantic = mergeTrees([owned.semantic as Record<string, unknown>, tree]);
+  const composed = { ...owned, semantic };
+  const graph = registered.some(e => e.source);
+  const trees = [composed.primitives, composed.semantic, composed.light, composed.dark, ...Object.values(composed.brands)];
   return {
     shadowed,
     source: {
       ...base,
       label: `${base.label} + ${registered.length} captured Figma variable${registered.length === 1 ? '' : 's'}`,
-      tree: { ...base.tree, semantic },
+      tree: composed,
       inventory: new Set([...base.inventory, ...paths]),
-      treesForCode: [...base.treesForCode, tree],
-      stylesheets: {
+      corpus: graph ? tokenCorpusFromJson({ ...composed, brandDefault: composed.brands.default ?? {} }) : base.corpus,
+      treesForCode: graph ? trees : [...base.treesForCode, tree],
+      stylesheets: graph ? { base: emitTokensCss(tokensCssLayers(composed)).css, dark: '', brands: '' } : {
         ...base.stylesheets,
         base: `${base.stylesheets.base}\n/* Captured tokens (from your Figma variables) — ${registered.length} registered; repo tokens win on name collision. */\n${mintedTokenCss(tree)}`,
       },
@@ -246,6 +227,8 @@ function composeCaptured(
  *  no semantic group ever collides by the MINT_NAMESPACE invariant). */
 function composeSource(base: TokenSource, minted: MintedTokenLayer | null): TokenSource {
   if (!minted || minted.count === 0) return base;
+  // Provisional tokens cannot replace or shadow a captured native identity.
+  applyCapturedAliasTrees({ ...base.tree, semantic: minted.tree }, [base.tree.semantic]);
   const semantic = mergeTrees([base.tree.semantic as Record<string, unknown>, minted.tree]);
   return {
     ...base,
@@ -275,7 +258,7 @@ let active: TokenSource = repoTokenSource;
 const listeners = new Set<() => void>();
 const recompose = () => {
   // Layer order: base (repo or user paste) → captured (the designer's real
-  // variables; base wins on collisions) → minted (imported.* — its namespace
+  // variables; verified graphs own their selected context) → minted (imported.* — its namespace
   // never collides by the MINT_NAMESPACE invariant).
   const withCaptured = composeCaptured(retainedSource ?? baseSource, capturedLayer);
   capturedShadowed = withCaptured.shadowed;
@@ -318,6 +301,7 @@ export const capturedShadowedNames = (): string[] => capturedShadowed;
 export function setCapturedTokens(layer: CapturedTokenLayer | null): void {
   const next = layer && layer.count > 0 ? layer : null;
   if (next === capturedLayer && !retainedSource) return;
+  composeSource(composeCaptured(baseSource, next).source, mintedLayer); // Refuse before changing the active session.
   retainedSource = null;
   capturedLayer = next;
   recompose();
@@ -336,6 +320,7 @@ export const activeMintedTokens = (): MintedTokenLayer | null => mintedLayer;
 export function setMintedTokens(layer: MintedTokenLayer | null): void {
   const next = layer && layer.count > 0 ? layer : null;
   if (next === mintedLayer && !retainedSource) return;
+  composeSource(composeCaptured(baseSource, capturedLayer).source, next);
   retainedSource = null;
   mintedLayer = next;
   recompose();
@@ -374,15 +359,15 @@ export function applyMintedRename(
     for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
     node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
   }
-  mintedLayer = {
+  const renamed = {
     tree,
     count: flat.size,
     entries: mintedLayer.entries.map((e) =>
       e.ref === `{${fromPath}}` ? { ...e, ref: `{${toPath}}` } : e,
     ),
   };
-  recompose();
-  notify();
+  try { setMintedTokens(renamed); }
+  catch (error) { return { ok: false, error: String(error) }; }
   return { ok: true, deduped };
 }
 
@@ -399,6 +384,8 @@ export function useTokenSource(): TokenSource {
 export function applyUserTokens(text: string): ApplyTokensResult {
   const result = buildUserTokenSource(text);
   if (result.ok) {
+    try { composeSource(composeCaptured(result.source, capturedLayer).source, mintedLayer); }
+    catch (error) { return { ok: false, errors: [String(error)] }; }
     retainedSource = null;
     baseSource = result.source;
     recompose();
@@ -413,6 +400,7 @@ export function applyUserTokens(text: string): ApplyTokensResult {
 }
 
 export function resetToRepoTokens(): void {
+  composeSource(composeCaptured(repoTokenSource, capturedLayer).source, mintedLayer);
   retainedSource = null;
   baseSource = repoTokenSource;
   recompose();
