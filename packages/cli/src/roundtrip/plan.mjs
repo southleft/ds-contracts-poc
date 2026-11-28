@@ -1,3 +1,4 @@
+import { fileHash } from "./files.mjs";
 import assert from "node:assert/strict";
 import { readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
@@ -46,7 +47,7 @@ function checkGraph(bundle) {
 export function checkGuards(policy, guards) {
   for (const g of guards) {
     if (!policy.guards.includes(g.file)) fail("unowned-source", g.file);
-    if (hash(read(localFile(policy, g.file))) !== g.sha256) fail("source-revision-conflict", g.file);
+    if (fileHash(localFile(policy, g.file)) !== g.sha256) fail("source-revision-conflict", g.file);
   }
 }
 

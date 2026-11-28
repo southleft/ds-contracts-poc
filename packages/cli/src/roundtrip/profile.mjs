@@ -1,7 +1,8 @@
+import { fileHash } from "./files.mjs";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
-import { hash, validateVariants } from "./surface.mjs";
+import { validateVariants } from "./surface.mjs";
 import { resolveBundle, seal } from "./model.mjs";
 
 export function inspectProfile(P, root) {
@@ -39,7 +40,7 @@ export function inspectProfile(P, root) {
       scopes: p.scopes ?? [],
       css: p.css ?? "--" + id.replaceAll(".", "-"),
       ...(alias ? { alias: alias[1] } : { value: literal.toLowerCase() }),
-      source: { file: p.file, path: [...id.split("."), field], sha256: hash(read(p.file)) },
+      source: { file: p.file, path: [...id.split("."), field], sha256: fileHash(local(p.file)) },
     };
   }
   const components = {};
@@ -50,7 +51,7 @@ export function inspectProfile(P, root) {
       id,
       name: d.name,
       kind: "svg",
-      source: { path: d.source, sha256: hash(read(d.source)) },
+      source: { path: d.source, sha256: fileHash(local(d.source)) },
       svg: "",
       viewport: "",
       inputs: { color: "currentColor" },
@@ -61,7 +62,7 @@ export function inspectProfile(P, root) {
     id: P.component.id,
     name: P.component.name,
     kind: "component",
-    source: { path: P.source, sha256: hash(read(P.source)) },
+    source: { path: P.source, sha256: fileHash(local(P.source)) },
     requires: Object.keys(components).map((id) => ({ id, revision: "" })),
     instances: P.instances,
     codeOnly: P.codeOnly ?? [],
