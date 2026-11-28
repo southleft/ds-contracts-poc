@@ -126,6 +126,34 @@ accessibility. A profile containing `behavior`, `codeOnly`, or a complete
 source/component/capture declaration is refused before generation. Use `roundtrip`
 with the existing React source when that source owns behavior.
 
+For a new native button, an optional `figmaButton` profile entry explicitly
+declares its state input. Use the exact file key and sole requested node ID from
+the plugin dump; include its captured dependencies. For example:
+
+```json
+{
+  "conventions": [],
+  "figmaButton": {
+    "fileKey": "YOUR_FILE_KEY", "nodeId": "1:2",
+    "prop": { "name": "state", "type": { "enum": ["default", "disabled", "loading"] }, "default": "default",
+      "bindings": { "code": { "prop": "state" }, "figma": { "kind": "VARIANT", "property": "State",
+        "values": { "default": "default", "disabled": "disabled", "loading": "loading" } } } },
+    "states": { "default": { "disabled": false, "busy": false },
+      "disabled": { "disabled": true, "busy": false }, "loading": { "disabled": true, "busy": true } }
+  }
+}
+```
+
+Run `ds-contracts figma-to-react --dump dump.json --profile profile.json --fonts fonts.json --out out`.
+The complete label map and default must exactly match the capture. List every
+code value and its Figma label in `prop.bindings.figma.values`. This emits a native
+`type="button"` with `onClick`, disabled suppression and loading `aria-busy`;
+the application controls the state prop. It does not infer application behavior.
+Conflicting metadata, stale domains, missing dependencies and interactive descendants
+are refused. The capture stays unchanged. `behavior.owner` reports `system-profile`
+or, on reimport of generated native metadata, `native-metadata`; runtime equivalence
+still reads `not-asserted`. Run your own behavior tests before adopting the package.
+
 The check installs the package in a clean Vite app, mounts every Figma variant and prints one line per variant:
 
 - **PASS**: within the 5% image limit on white and on black, and every text and icon Figma draws is rendered.

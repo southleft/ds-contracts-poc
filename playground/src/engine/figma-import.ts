@@ -11,6 +11,7 @@
  */
 import { importFigmaUrl } from './figma-url-import.js';
 import { assertCapturedClosure } from '../../../core/captured-closure.js';
+import { resolveButtonProfile, type ButtonProfile } from '../../../core/figma-button-profile.js';
 import {selectFigmaImportRoot} from '../../../core/figma-import-selection.js';
 import type { FontVerticalMetrics } from '../../../core/profile-conventions.js';
 import { dumpCapturesHidden, proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
@@ -66,8 +67,9 @@ export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
  *  validator JSON never leaves the engine as a headline. The isolation loop
  *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
  *  this wrapper only supplies the playground's live corpus and options. */
-export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime', conventions?: readonly string[], fontMetrics?: FontVerticalMetrics): DumpProposalBatch {
+export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime', conventions?: readonly string[], fontMetrics?: FontVerticalMetrics, figmaButton?: ButtonProfile): DumpProposalBatch {
   assertCapturedClosure(dump);
+  const buttonDeclaration = figmaButton === undefined ? undefined : resolveButtonProfile(dump, figmaButton);
   // Filled caller occurrences require the host's authenticated lowering path.
   // JSON, REST, bridge and headless callers all stop before main-only fallback.
   if ('_occurrences' in dump) selectFigmaImportRoot(dump, []);
@@ -82,6 +84,7 @@ export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 're
   // fallback; a name match whose keys contradict is refused by name).
   const session = sessionRegistry();
   return proposeBatchFromDump(dump, {
+    buttonDeclaration,
     drawnVariantSurface: surface,
     corpus: activeTokens().corpus,
     contractIdByName: new Map([...contractIdByName, ...session.idByName]),

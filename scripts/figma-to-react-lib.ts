@@ -38,12 +38,13 @@ import { consumerFontManifest, readConsumerFonts, type ConsumerFont } from './de
 import { fontPreflight } from './font-preflight.js';
 import type { Toolchain } from './package-react-library.js';
 import type { FontVerticalMetrics } from '../core/profile-conventions.js';
+import type { ButtonProfile } from '../core/figma-button-profile.js';
 
 /** A system profile's conventions for one run: sorted, with the sha256 of the profile's bytes. A missing file, non-JSON, a
  *  `conventions` that is not an array of strings, a duplicate and a name the converter does not know are each refused by
  *  a named code. Source-owning roundtrip profiles are refused here. The conventions list is loaded here, not at the top of this file: a check
  *  loads this file (checkGenerated), and a PR that adds a convention then does not change the files a check loads. */
-export type ProfileConventions = { conventions: string[]; sha256: string; fontMetrics?: FontVerticalMetrics };
+export type ProfileConventions = { conventions: string[]; sha256: string; fontMetrics?: FontVerticalMetrics; figmaButton?: ButtonProfile };
 export async function profileConventions(file: string): Promise<ProfileConventions> {
   if (!existsSync(file)) throw Error(`profile-missing: ${file}`);
   const bytes = readFileSync(file); let profile: Record<string, unknown>;
@@ -59,7 +60,9 @@ export async function profileConventions(file: string): Promise<ProfileConventio
   if (metrics !== undefined && (typeof metrics !== 'object' || metrics === null || Object.values(metrics).some((m: any) => !(m?.unitsPerEm > 0) || !Number.isFinite(m.ascender) || !(m.descender <= 0))))
     throw Error(`profile-font-metrics-invalid: ${file}`);
   const { conventionSet } = await import('../core/profile-conventions.js');
-  return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex'), ...(metrics ? { fontMetrics: metrics as FontVerticalMetrics } : {}) };
+  const { readButtonProfile } = await import('../core/figma-button-profile.js');
+  return { conventions: [...conventionSet(list)].sort(), sha256: createHash('sha256').update(bytes).digest('hex'), ...(metrics ? { fontMetrics: metrics as FontVerticalMetrics } : {}),
+    ...('figmaButton' in profile ? { figmaButton: readButtonProfile(profile.figmaButton) } : {}) };
 }
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
@@ -108,7 +111,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const { engine, close } = await loadEngine();
   let imported;
   try {
-    imported = options.profile?.conventions.length ? engine.figmaDumpToLibraryRequest(dump, source, { conventions: options.profile.conventions, ...(options.profile.fontMetrics ? { fontMetrics: options.profile.fontMetrics } : {}) }) : engine.figmaDumpToLibraryRequest(dump, source);
+    imported = engine.figmaDumpToLibraryRequest(dump, source, options.profile);
   } finally {
     await close?.();
   }
@@ -136,7 +139,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const rootIndex = request.contracts.findIndex(c => c.id === request.rootId);
   const component = String(request.contracts[rootIndex]?.name ?? '');
   const result = { setName: imported.setName, rootId: imported.request.rootId, component, proposed: imported.proposed,
-    behavior: { owner: 'not-supplied', status: 'not-established', equivalence: 'not-asserted' },
+    behavior: { owner: imported.buttonDeclaration ?? 'not-supplied', status: 'not-established', equivalence: 'not-asserted' },
     skipped: imported.skipped, packageName: library.name, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
     requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes,
     ...(options.profile ? { profile: { sha256: options.profile.sha256, conventions: options.profile.conventions } } : {}) };
