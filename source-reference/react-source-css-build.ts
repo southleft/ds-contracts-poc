@@ -1,8 +1,6 @@
 /** Pinned host compiler for source repair previews. Reads CSS and source text;
  * refuses JavaScript plugins/configuration and never runs project scripts.
  * This does not write the generated stylesheet or the original source. */
-import {compile} from '@tailwindcss/node';
-import {Scanner} from '@tailwindcss/oxide';
 import {createHash} from 'node:crypto';
 import {lstatSync,readFileSync,realpathSync} from 'node:fs';
 import path from 'node:path';
@@ -10,6 +8,7 @@ import path from 'node:path';
 const sha=(bytes:string|Buffer)=>createHash('sha256').update(bytes).digest('hex');
 const fail=(reason:string):never=>{throw Error('react-source-css-'+reason);};
 export async function buildReactSourceCss(root:string,input:string) {
+  const [{compile},{Scanner}]=await Promise.all([import('@tailwindcss/node'),import('@tailwindcss/oxide')]);
   root=realpathSync(root);
   const entry=path.resolve(root,input);
   if(!entry.startsWith(root+path.sep)||path.extname(entry)!=='.css')fail('input-invalid');

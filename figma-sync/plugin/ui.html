@@ -221,9 +221,9 @@
 <div class="panel active" id="panel-build" role="tabpanel">
   <details class="section help">
     <summary>Connect the local source workflow</summary>
-    <p class="meta">In the local app’s Sources page, prepare the candidate and copy its connection.
-      Open the Figma file the app targets, connect here, then choose Create and inspect in the app.
-      Keep this plugin open while it creates and reads back the candidate.</p>
+    <p class="meta">Copy a connection from the local app’s Sources page or the CLI’s <code>react-to-figma --prepared … --write</code> command.
+      Open the target Figma file and connect here. For the app, also choose Create and inspect.
+      Keep this plugin open until inspection finishes, then review the result in the app or terminal.</p>
     <label for="native-connection">Local app connection</label>
     <input id="native-connection" type="password" autocomplete="off" spellcheck="false" placeholder="dscn_…" />
     <div class="row">
@@ -2118,7 +2118,7 @@
       startNativePolling(true);
     } else if (msg.type === 'native-status') {
       $('native-status').textContent = msg.message || msg.status;
-      if (msg.status === 'disconnected' || msg.status === 'resume-complete') {
+      if (msg.status === 'disconnected' || msg.status === 'resume-complete' || (msg.status === 'finished' && msg.stopPolling === true)) {
         if (nativeTimer) clearInterval(nativeTimer);
         nativeTimer = null;
       }

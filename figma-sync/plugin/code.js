@@ -300,7 +300,7 @@ const NATIVE_APP_BASE = 'http://localhost:5181/api/source-reference/native/';
 const NATIVE_UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const NATIVE_PAIR = new RegExp('^dscn_(' + NATIVE_UUID + ')\\.([a-f0-9]{64})$');
 const nativeConnectionKey = () => 'ds_native_connection:' + String(figma.fileKey || '');
-function nativeStatus(status, message) { post({ type: 'native-status', status, message }); }
+function nativeStatus(status, message, stopPolling) { post({ type: 'native-status', status, message, ...(stopPolling === true ? { stopPolling: true } : {}) }); }
 function nativeEnvelope(command, result) {
   return { version: 1, operationId: command.operationId, phase: command.phase,
     attemptId: command.attemptId, nonce: command.nonce, fileKey: command.fileKey,
@@ -381,7 +381,7 @@ async function nativePoll(resumeOnly) {
         finished: 'Inspection stopped or finished. Review the result and remaining checks in the app.',
         'companion-upgrade-required': 'This companion is older than the local app. Close and reopen the plugin.',
       };
-      nativeStatus(delivery.status, messages[delivery.status] || 'Unexpected response from the app.');
+      nativeStatus(delivery.status, messages[delivery.status] || 'Unexpected response from the app.', delivery.status === 'finished' && delivery.stopPolling === true);
       return;
     }
     const command = delivery.command;

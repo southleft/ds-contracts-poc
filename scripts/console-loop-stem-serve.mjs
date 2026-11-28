@@ -27,7 +27,7 @@
  *   await fetch('http://localhost:9223/shot/<lib>/<stem>-cell', { method:'POST', body: bytes });
  *
  * Score (gate-shot / pair cell refs — never pair-- side-by-side receipts):
- *   npm run console-loop:developed-score -- --lib <lib> --stem <stem>
+ *   node --import tsx scripts/console-loop-developed-score.mjs --lib <lib> --stem <stem>
  *
  * Pass bar: compositionOk && pctAAMasked ≤ 5 — the ONE bar. The evidence
  * gates read the scorecard directly; receipts may claim a visual pass only

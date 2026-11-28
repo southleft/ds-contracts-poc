@@ -83,9 +83,10 @@ const shared = {
 
 await build({
   ...shared,
+  plugins: [...shared.plugins, onlyEntryIsMain(path.join(here, 'src', 'cli.ts'))],
   entryPoints: [path.join(here, 'src', 'cli.ts')],
   outfile: path.join(here, 'dist', 'cli.js'),
-  external: ['playwright-core', './computed.js'],
+  external: ['playwright-core', './computed.js', '@tailwindcss/node', '@tailwindcss/oxide'],
   banner: {
     js: `#!/usr/bin/env node\n${shared.banner.js}`,
   },
@@ -111,14 +112,14 @@ await build({
 // In a bundle every module shares the bundle's import.meta.url and argv[1], so a module's "am I main?" check would
 // fire inside it (the grammar classifier's CLI ran inside the reader). Only the entry may run as main: in every other
 // source module, process.argv[1] reads as undefined. The repository's files are unchanged; only these bundles are.
-const onlyEntryIsMain = (entry) => ({ name: 'only-entry-is-main', setup(b) {
+function onlyEntryIsMain(entry) { return { name: 'only-entry-is-main', setup(b) {
   b.onLoad({ filter: /\.(m?ts|m?js)$/ }, (args) => {
     if (args.path === entry || args.path.includes(`${path.sep}node_modules${path.sep}`)) return undefined;
     const text = readFileSync(args.path, 'utf8');
     if (!text.includes('process.argv[1]')) return undefined;
     return { contents: text.replaceAll('process.argv[1]', 'undefined'), loader: args.path.endsWith('ts') ? 'ts' : 'js', resolveDir: path.dirname(args.path) };
   });
-} });
+} }; }
 for (const step of ['storybook-local', 'storybook-reader', 'storybook-contracts']) {
   const entry = path.join(here, '..', '..', 'scripts', `${step}.ts`);
   await build({ ...shared, plugins: [...shared.plugins, onlyEntryIsMain(entry)], entryPoints: [entry], outfile: path.join(here, 'dist', `${step}.js`), external: ['playwright-core'] });
