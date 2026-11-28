@@ -20,8 +20,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "node build.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "node build.mjs"
   },
   "engines": {
     "node": ">=20"

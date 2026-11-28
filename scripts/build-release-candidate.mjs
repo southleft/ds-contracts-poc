@@ -266,13 +266,7 @@ const GATES = [
   },
   {
     name: "typecheck-emitter",
-    command: [
-      "npm",
-      "--prefix",
-      "packages/emitter-web-components",
-      "run",
-      "typecheck",
-    ],
+    command: ["node", "node_modules/typescript/bin/tsc", "-p", "packages/emitter-web-components/tsconfig.json", "--noEmit"],
   },
   {
     name: "typecheck-worker",
