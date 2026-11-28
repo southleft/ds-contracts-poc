@@ -28,6 +28,11 @@ test('scaled curved centerlines retain handles and parent-relative placement',()
  const a={width:10,height:10,strokePath:{data:'M0 0C0 10 10 0 10 10',cap:'ROUND' as const,join:'MITER' as const,miterLimit:4,viewport:{width:20,height:20,x:2,y:3}}};
  const b={width:20,height:30,strokePath:{...a.strokePath,data:'M0 0C0 30 20 0 20 30',viewport:{width:40,height:60,x:4,y:9}}};
  assert(matches(a,b));assert(!matches(a,{...b,strokePath:{...b.strokePath,data:'M0 0C1 30 20 0 20 30'}}));
+ const explicit={...b,strokePath:{...b.strokePath,constraints:{horizontal:'SCALE' as const,vertical:'SCALE' as const}}};
+ assert(matches(a,explicit));
+ assert(!matches(explicit,explicit),'explicit SCALE is not added to the contract grammar');
+ for(const constraints of [{horizontal:'MIN',vertical:'SCALE'},{horizontal:'SCALE',vertical:'MIN'},{horizontal:'MIN',vertical:'MIN'}])
+  assert(!matches(a,{...explicit,strokePath:{...explicit.strokePath,constraints:constraints as any}}));
 });
 
 test('native readback requires unmasked undashed center strokes and an independent free parent',()=>{

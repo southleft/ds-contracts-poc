@@ -143,7 +143,7 @@ After a contract edit, a canvas amend, or a recovery dump, run:
 
 ```bash
 npm run maintain          # token-free; every one of its steps is also a fast- or full-lane step
-npm run maintain:visual   # catalog visual-parity; needs FIGMA_TOKEN and the Figma PNG cache
+npm run extract:figma:visual:catalog   # catalog visual-parity; needs FIGMA_TOKEN and the Figma PNG cache
 ```
 
 `maintain` is the adopter gate and needs nothing but the clone; `npm run
@@ -183,7 +183,7 @@ inputs, and the tour's ToggleSwitch acceptance is pinned — since dump v1.32 th
 referee accepts the stamped proposal, and the pin fails loudly if that
 channel is ever dropped).
 
-`maintain:visual` is the catalog visual-parity gate on Button / Badge /
+`extract:figma:visual:catalog` is the catalog visual-parity gate on Button / Badge /
 Checkbox / Switch / Heading: every row's masked pixel score within ±0.1pp
 of the platform's committed baseline (`baseline.darwin.json` /
 `baseline.linux.json`) AND both content boxes — ours and Figma's — within

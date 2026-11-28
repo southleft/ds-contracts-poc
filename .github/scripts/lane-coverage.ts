@@ -62,7 +62,7 @@ const NAMED_GATES = new Set([
   "parity",
   // the team gate and its Figma-token half — composites, expanded below
   "maintain",
-  "maintain:visual",
+  "extract:figma:visual:catalog",
   // the definition of v1, run end to end — every row of docs/26 on the commit
   "v1:readiness",
 ]);

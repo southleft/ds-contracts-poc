@@ -1463,6 +1463,7 @@ function verifyReadback(
           verifyAuthoredOwner(n,spec,false);
         }
         const descendants: Record<string, any>[] = [];
+        let strokedOverrideTargets=0;
         const inheritedSeen = new Set<string>([n.id]);
         const descend = (row: Record<string, any>, main: Record<string, any> | undefined, inheritedProperties = n.componentProperties ?? {}, textOwner=true) => {
           const properties = row.type === 'INSTANCE' ? row.componentProperties ?? {} : inheritedProperties;
@@ -1580,6 +1581,25 @@ function verifyReadback(
                     !numeric(paints[0].opacity??1,hex.length===8?parseInt(hex.slice(6,8),16)/255:1)||Object.keys(paints[0].boundVariables??{}).length||
                     !same(child.values.boundVariables??{},expectedBindings))issue('native-text-color-observation-paint',child);
                 }
+                const strokeInk=textOwner&&pathSpec?.shape?.kind==='stroked-path'&&spec.instanceInk?.paintKind==='stroke'?spec.instanceInk:undefined;
+                const strokeWidth=textOwner&&pathSpec?.shape?.kind==='stroked-path'?spec.instanceStrokeWeight:undefined;
+                let strokeOverrideVerified=false;
+                if(pathSpec && (strokeInk||strokeWidth)){
+                  strokedOverrideTargets++;
+                  const paintSpec=strokeInk?{...pathSpec,stroke:strokeInk.varName}:pathSpec;
+                  const bound=paintSpec.stroke?nativeBoundPaintColor(paintSpec.stroke,tokens.receipt.variables,consumingMode,input.tokenIdentity.collection.id):undefined;
+                  const weightName=strokeWidth?.varName??pathSpec.bindings?.strokeWeight;
+                  const weight=weightName?nativeBoundNumber(weightName,tokens.receipt.variables,consumingMode):pathSpec.lits?.strokeWeight;
+                  const expectedBindings={...source.values.boundVariables};
+                  if(strokeInk)expectedBindings.strokes=[{type:'VARIABLE_ALIAS',id:bound?.id}];
+                  if(strokeWidth)expectedBindings.strokeWeight={type:'VARIABLE_ALIAS',id:variableByName.get(strokeWidth.varName)};
+                  strokeOverrideVerified=same(child.values.resolvedVariableModes,consumingMode)&&object(child.values.explicitVariableModes)&&
+                    Object.entries(child.values.explicitVariableModes).every(([id,value])=>consumingMode[id]===value)&&
+                    (!strokeInk||strokeInk.writeProtocol==='attached-v1')&&
+                    (!strokeWidth||typeof weight==='number'&&(weight===strokeWidth.px||Math.fround(weight)===Math.fround(strokeWidth.px)))&&
+                    nativeStrokedPathPaintMatches(paintSpec,child.values,weight,bound)&&same(child.values.boundVariables,expectedBindings);
+                  if(!strokeOverrideVerified)issue('native-stroked-path-observation-caller-paint',child);
+                }
                 const inkOverride = pathSpec?.nativePathInk && spec.instanceInk;
                 const insideStroke=inkOverride && spec.instanceInsideStroke;
                 if (inkOverride) {
@@ -1642,6 +1662,7 @@ function verifyReadback(
                   if((appearance||authoredOwnsAppearance||nestedAuthority?.appearance)&&['fills','fontName','fontSize','fontWeight','lineHeight','letterSpacing','textCase','textDecoration'].includes(field))continue;
                   if((authoredScalarReplacement||nestedAuthority?.scalar)&&field==='boundVariables')continue;
                   if(textSize&&['fontSize','lineHeight','boundVariables'].includes(field))continue;
+                  if(strokeOverrideVerified&&['strokes','strokeWeight','boundVariables'].includes(field))continue;
                   if ((inkOverride||textColor!==undefined||imageOverride||shapeFillVerified) && (field === 'fills' || field === 'boundVariables')) continue;
                   if (insideStroke && ['strokes','strokeWeight','strokeAlign','strokeCap','strokeJoin','strokeMiterLimit','dashPattern'].includes(field))continue;
                   const key = source.values.componentPropertyReferences?.[field];
@@ -1654,6 +1675,8 @@ function verifyReadback(
           } }
         };
         descend(n,nodes.get(n.mainId));
+        if((spec.instanceInk?.paintKind==='stroke'||spec.instanceStrokeWeight)&&strokedOverrideTargets!==1)
+          issue('native-stroked-path-observation-caller-target',n);
         for(const key of Object.keys(spec.instanceTextAppearances??{}))if(textAppearanceMatches.get(key)!==1)issue('native-text-appearance-observation-target',n);
         for(const key of Object.keys(spec.instanceTextSizes??{}))if(textSizeMatches.get(key)!==1)issue('native-text-size-observation-target',n);
         for(const key of Object.keys(spec.instanceIntrinsicPlacements??{}))if(intrinsicMatches.get(key)!==1)issue('native-intrinsic-placement-observation-target',n);
