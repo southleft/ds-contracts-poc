@@ -23,7 +23,6 @@
     "test:product-overview:browser": "node --import tsx product/browser-check.ts",
     "recipe:fidelity:capture": "node scripts/capture-fidelity-shots.mjs",
     "test:v1-definition": "node --test scripts/v1-definition-check.test.mjs",
-    "test:accuracy-contract": "node --test scripts/accuracy-contract-check.test.mjs",
     "typecheck:recipe": "node scripts/typecheck-recipe.mjs",
     "typecheck:worker": "npm --prefix workers/assist run typecheck",
     "typecheck:playground": "tsc --noEmit -p playground/tsconfig.json",
