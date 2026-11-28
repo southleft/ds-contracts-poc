@@ -41,13 +41,16 @@ import type { FontVerticalMetrics } from '../core/profile-conventions.js';
 
 /** A system profile's conventions for one run: sorted, with the sha256 of the profile's bytes. A missing file, non-JSON, a
  *  `conventions` that is not an array of strings, a duplicate and a name the converter does not know are each refused by
- *  a named code. Only `conventions` is read. The conventions list is loaded here, not at the top of this file: a check
+ *  a named code. Source-owning roundtrip profiles are refused here. The conventions list is loaded here, not at the top of this file: a check
  *  loads this file (checkGenerated), and a PR that adds a convention then does not change the files a check loads. */
 export type ProfileConventions = { conventions: string[]; sha256: string; fontMetrics?: FontVerticalMetrics };
 export async function profileConventions(file: string): Promise<ProfileConventions> {
   if (!existsSync(file)) throw Error(`profile-missing: ${file}`);
-  const bytes = readFileSync(file); let profile: { conventions?: unknown };
+  const bytes = readFileSync(file); let profile: Record<string, unknown>;
   try { profile = JSON.parse(bytes.toString('utf8')); } catch { throw Error(`profile-not-json: ${file}`); }
+  if (!profile || typeof profile !== 'object' || Array.isArray(profile)) throw Error(`profile-not-object: ${file}`);
+  if ('behavior' in profile || 'codeOnly' in profile || ['source', 'component', 'capture'].every(k => k in profile))
+    throw Error('profile-source-ownership-requires-roundtrip: figma-to-react generates new code; use roundtrip for an existing React source');
   const list = profile?.conventions ?? [];
   if (!Array.isArray(list) || list.some((n) => typeof n !== 'string')) throw Error(`profile-conventions-not-array: ${file}`);
   const twice = list.find((n, i) => list.indexOf(n) !== i);
@@ -133,6 +136,7 @@ export async function figmaToReact(loadEngine: EngineLoader, dumpPath: string, o
   const rootIndex = request.contracts.findIndex(c => c.id === request.rootId);
   const component = String(request.contracts[rootIndex]?.name ?? '');
   const result = { setName: imported.setName, rootId: imported.request.rootId, component, proposed: imported.proposed,
+    behavior: { owner: 'not-supplied', status: 'not-established', equivalence: 'not-asserted' },
     skipped: imported.skipped, packageName: library.name, tarball: path.basename(tarball), tarballSha256: library.tarballSha256,
     requestSha256: createHash('sha256').update(canonicalJson(imported.request)).digest('hex'), notes: imported.notes,
     ...(options.profile ? { profile: { sha256: options.profile.sha256, conventions: options.profile.conventions } } : {}) };
@@ -202,10 +206,11 @@ export function reportCheck(r: { component: string; setName: string; tarball: st
   allowFailures = false, label = 'figma:to-react'): { lines: string[]; exitCode: number } {
   const tgz = path.join(out, r.tarball), name = r.component || r.setName;
   const notes = `${r.notes.length} proposal note(s) in ${path.join(out, 'result.json')}`;
+  const behavior = '  behavior: NOT ESTABLISHED — generated output does not prove authored interactions or accessibility.';
   if (outcome.status === 'not-checked')
-    return { exitCode: 0, lines: [`◌ ${label} ${name}: NOT CHECKED — ${outcome.reason}`, `  package: ${tgz} (written, not verified against the design)`, `  ${notes}`] };
+    return { exitCode: 0, lines: [`◌ ${label} ${name}: NOT CHECKED — ${outcome.reason}`, `  package: ${tgz} (written, not verified against the design)`, behavior, `  ${notes}`] };
   const { counts, setProblems } = outcome.verdicts, total = outcome.verdicts.variants.length;
-  const lines = [`consumer check (receipt: ${path.join(out, outcome.receipt)}):`, ...formatVerdictTable(outcome.verdicts)];
+  const lines = [behavior, `consumer check (receipt: ${path.join(out, outcome.receipt)}):`, ...formatVerdictTable(outcome.verdicts)];
   if (outcome.status === 'pass') {
     lines.push(`✔ ${label} ${name}: all ${total} variant(s) pass the consumer check → ${tgz}`);
     return { exitCode: 0, lines: [...lines, `  ${notes}`] };

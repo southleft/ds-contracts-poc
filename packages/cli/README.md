@@ -13,6 +13,12 @@ back to the original JSON. It preserves aliases and SVG dependencies; applicatio
 behavior stays in React. Layout edits, arbitrary CSS, responsive states and new
 application behavior are not supported by this workflow. It is not a benchmark result.
 
+The captured contract identifies the React source file, its SHA-256 and component
+export as the behavior owner. `codeOnly` lists responsibilities kept in that source.
+Capture does not establish a behavior-test result or equivalence; run the component's own
+interaction and accessibility checks after an edit. A changed source invalidates
+an outstanding review and must be captured again.
+
 You need Node 20.19.4, Docker running, Figma Desktop, and a local font file for a
 font also installed in Figma. The sample uses this repository's Checkbox source,
 tokens and build script. The npm tarball includes its profile, not those source
@@ -95,6 +101,12 @@ The command is new in `0.5.0-rc.3`. A bare `npx @ds-contracts/cli` installs npm'
 | `--allow-failures` | Exit 0 even when a variant fails; the report still says FAIL. |
 
 It writes `<out>/<name>.tgz` (install it with `npm install <path>`), `<out>/request.json`, `<out>/result.json` and the check's receipt and images in `<out>/check`. It is the same engine, generator and packager as the reference repo's `npm run figma:to-react`; `npm run cli:figma-to-react:smoke:check` proves the installed package reproduces that command's pinned output.
+
+This command generates new code. Its report and `result.json` mark behavior as
+not established: a visual PASS does not prove interactions, state management or
+accessibility. A profile containing `behavior`, `codeOnly`, or a complete
+source/component/capture declaration is refused before generation. Use `roundtrip`
+with the existing React source when that source owns behavior.
 
 The check installs the package in a clean Vite app, mounts every Figma variant and prints one line per variant:
 

@@ -178,7 +178,6 @@
     "extract:computed:pseudo-decor-rotate:check": "tsx extract/computed/pseudo-decor-rotate-check.ts",
     "extract:computed:font-slant:check": "tsx extract/computed/font-slant-check.ts",
     "extract:computed:scorecard": "tsx extract/computed/library-scorecard.ts",
-    "test:onboarding": "npm run test:cli",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",

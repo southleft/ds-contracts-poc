@@ -7,6 +7,14 @@ import { resolveBundle, seal } from "./model.mjs";
 
 export function inspectProfile(P, root) {
   assert.equal(P.version, 1, "unsupported roundtrip profile");
+  assert(
+    !Object.hasOwn(P, "behavior"),
+    "profile.behavior is unsupported: behavior ownership is derived from the React source",
+  );
+  assert(
+    P.codeOnly === undefined || (Array.isArray(P.codeOnly) && P.codeOnly.every((value) => typeof value === "string")),
+    "invalid codeOnly declarations",
+  );
   for (const key of ["system", "component", "appearance", "tokens", "dependencies", "instances", "capture", "figma"])
     assert(P[key], "missing profile field: " + key);
   assert(P.appearance.variants.length > 0 && P.appearance.variants.length <= 128, "invalid declared variants");
@@ -66,6 +74,12 @@ export function inspectProfile(P, root) {
     requires: Object.keys(components).map((id) => ({ id, revision: "" })),
     instances: P.instances,
     codeOnly: P.codeOnly ?? [],
+  };
+  parent.behavior = {
+    owner: "react-source",
+    source: { ...parent.source, export: P.component.export },
+    equivalence: "not-asserted",
+    tests: "not-recorded",
   };
   components[parent.id] = parent;
   for (const dep of Object.values(P.instances))

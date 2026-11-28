@@ -837,7 +837,11 @@ async function selfTest(): Promise<void> {
   }
   const map = collectLaneMap(ROOT);
   if (!lanesForCommand(map, 'npm run docs:check').has('fast')) throw new Error('lane map: docs:check should be a fast-lane step');
-  if (!lanesForCommand(map, 'npm run test:onboarding').has('fast')) throw new Error('lane map: test:onboarding should resolve through test:cli to the fast lane');
+  const aliasMap = { ...map, readManifest: (dir: string) => {
+    const manifest = map.readManifest(dir);
+    return dir === ROOT ? { ...manifest, scripts: { ...manifest.scripts, 'self-test:alias': 'npm run test:cli' } } : manifest;
+  } };
+  if (!lanesForCommand(aliasMap, 'npm run self-test:alias').has('fast')) throw new Error('lane map: an alias should resolve through test:cli to the fast lane');
   if (lanesForCommand(map, 'npm run conformance:canvas').size) throw new Error('lane map: conformance:canvas is not a lane step today');
 
   const synthetic = [
