@@ -103,7 +103,8 @@ test('invalid declarations refuse; absent declarations preserve legacy output', 
   parent.anatomy = { root: { parts: { child: { component: { id: contract.id, props: { phase: 'blocked' } } } } } };
   ctx.contracts.set(parent.id, parent);
   for (const subject of [contract, parent]) {
-    assert.throws(() => engine.buildComponentScript(subject, ctx.contracts), /button-behavior-figma-unsupported/);
+    assert.doesNotThrow(() => engine.buildComponentScript(subject, ctx.contracts));
+    assert.deepEqual(engine.compileComponentData(contract, ctx.contracts).semantics?.button, contract.semantics.button);
     assert.throws(() => emitHtml(subject, ctx), /button-behavior-html-unsupported/);
     assert.throws(() => emitWebComponent(subject, ctx), /button-behavior-web-components-unsupported/);
   }

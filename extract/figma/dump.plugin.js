@@ -3068,7 +3068,7 @@ for (const node of captureSets) {
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'semantics');
         if (!raw) return {};
-        try { return { semantics: JSON.parse(raw) }; } catch (e) { return {}; }
+        try { return { semantics: JSON.parse(raw) }; } catch (e) { return { semantics: raw }; }
       })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'statePreviewAxis');

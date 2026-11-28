@@ -77,5 +77,10 @@ emitters preserve native `onClick` events, use `type="button"`, and own disabled
 and busy attributes after caller spreads. Unknown runtime states refuse. Other
 behavior owners, root attributes, dynamic elements, and mapped code values refuse.
 This is a declared policy, not inferred behavior or proof of source API equivalence.
-Figma, HTML, and Web Components export currently refuse it; native retention is
-the next slice. Omitting this field preserves existing output.
+Figma retains the policy and complete controlling prop as non-executable metadata.
+The reader requires matching native options, default and property identity; it
+refuses incomplete metadata or mixed retained axis protocols. Updates cannot
+silently remove or change the policy. Completely erased metadata cannot be
+detected from an isolated capture; verification against the expected contract
+detects that loss. HTML and Web Components exports refuse this policy. Omitting
+the field preserves existing output.
