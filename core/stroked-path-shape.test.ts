@@ -61,10 +61,25 @@ test('capture refuses altered origin, flow, paint, network decoration and outlin
   const patches = [{ isMask: true }, { fills: [{ type: 'SOLID' }] }, { dashPattern: [2, 2] }, { strokeAlign: 'INSIDE' }, { strokeCap: 'ARROW_LINES' },
     { effects: [{ type: 'DROP_SHADOW' }] }, { strokeJoin: Symbol('mixed') }, { cornerRadius: 1 }, { variableWidthStrokeProperties: { widthProfile: 'CUSTOM' } },
     { complexStrokeProperties: { type: 'BRUSH' } }, { vectorNetwork: { vertices: [{ strokeCap: 'SQUARE' }] } }, { boundVariables: { strokeMiterLimit: {} } },
-    { constraints: { horizontal: 'MIN', vertical: 'SCALE' } }, { relativeTransform: [[1, 0.01, 0], [0, 1, 0]] }, { vectorPaths: [{ data: 'M0 0L10 8Z', windingRule: 'NONZERO' }] }];
+    { constraints: { horizontal: 'MIN', vertical: 'SCALE' } }, { relativeTransform: [[1, 0.01, 0], [0, 1, 0]] }, { vectorPaths: [{ data: 'M0 0L10 8Z', windingRule: 'UNKNOWN' }] }];
   for (const patch of patches) assert.equal(reader.shape({ ...nativeNode(), ...patch }, nativeParent()), null, String(Object.keys(patch)));
-  for (const patch of [{ layoutMode: 'HORIZONTAL' }, { paddingLeft: 1 }, { width: 0 }, { clipsContent: true }, { relativeTransform: [[0, 1, 0], [-1, 0, 0]] }])
+  for (const patch of [{ layoutMode: 'HORIZONTAL' }, { paddingLeft: 1 }, { width: 0 }, { clipsContent: undefined }, { relativeTransform: [[0, 1, 0], [-1, 0, 0]] }])
     assert.equal(reader.shape(nativeNode(), { ...nativeParent(), ...patch }), null);
+});
+
+test('unfilled native regions retain their centerline under either viewport clipping policy', () => {
+  for (const windingRule of ['NONE','NONZERO','EVENODD']) for (const clipsContent of [false,true]) {
+    const n=nativeNode(), p={...nativeParent(),clipsContent};
+    n.vectorPaths[0].windingRule=windingRule;
+    const region={windingRule,loops:[[0,1]],fills:[],fillStyleId:''};
+    (n.vectorNetwork.regions as unknown[]).push(region);
+    assert.deepEqual(JSON.parse(JSON.stringify(reader.shape(n,p))),shape());
+    // A region with paint, style authority or missing evidence is not an empty region.
+    for (const patch of [{fills:undefined},{fills:[{type:'SOLID'}]},{fills:[{type:'SOLID',visible:false}]},{fillStyleId:'style'},{fillStyleId:undefined}]) {
+      const changed=structuredClone(n); Object.assign(changed.vectorNetwork.regions[0],patch);
+      assert.equal(reader.shape(changed,p),null);
+    }
+  }
 });
 
 test('all style maps and viewport geometry obey the bounded paint-only grammar', () => {
