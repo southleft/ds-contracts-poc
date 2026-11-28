@@ -642,6 +642,13 @@ test('allocated native ink preserves same-value alias identity through filled an
   const aliases=read.result.mintedTokens!.entries.map(e=>e.value).filter(v=>String(v).startsWith('{')).sort();
   assert.deepEqual(aliases,['{theme.alternate}','{theme.ink}']);
   if(stroked)assert(read.result.mintedTokens!.entries.some(e=>e.value==='0.9px'),'observed resized width needs no explicit strokeWeight override');
+  if(stroked){
+   const tokens={primitives:{drawing:{size:{$type:'dimension',$value:'24px'},ink:{$type:'color',$value:'#123456'},stroke:{$type:'dimension',$value:'1.5px'}},theme:{ink:{$type:'color',$value:'#8040bf'},alternate:{$type:'color',$value:'#8040bf'}},...read.result.mintedTokens!.tree},semantic:{},light:{},dark:{},brands:{default:{}}};
+   const scope=new Map([[f.child.id,f.child],[read.contract.id,read.contract]]),engine=createFigmaEngine({tokens,icons:new Map()});
+   const source={kind:'prepared-contract-library' as const,revision:'sha256:'+'1'.repeat(64),artifactId:'1'.repeat(64),inputSha256:'2'.repeat(64),tarballSha256:'3'.repeat(64),tokensSha256:revisionOf(tokens).slice(7)};
+   const native=engine.compileNativePreparedLibrary(read.contract,scope,source,'70000000-0000-4000-8000-000000000001');
+   const width=read.result.mintedTokens!.entries.find(e=>e.value==='0.9px')!;assert(native.boundNames.includes(width.ref.slice(1,-1).replaceAll('.','/')),'native token scope includes the observed instance stroke width');
+  }
   f.mark(0).nodeId='wrong-instance';assert.equal(f.read().overrides?.color,undefined);
  }
 });
@@ -696,4 +703,51 @@ test('a token-name allocation alone never collapses different consuming modes',(
  assert.deepEqual(values,['#8040bf','#4080bf','16px','24px'].sort());
  const batch=proposeBatchFromDump({Holder:f.set,_variables:{'Theme/Ink':{type:'COLOR',value:'#8040bf',modes:{Light:'#8040bf',Dark:'#4080bf'}}}},{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Glyph',f.child.id]]),contractIdByKey:new Map([['glyph-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});
  assert.deepEqual(batch.skipped,[]);assert.deepEqual(batch.proposals[0].mintedTokens!.entries.map(e=>e.value).sort(),values);
+});
+
+test('native nested drawing ink keeps alias identity and the standalone default without resizing',async()=>{
+ const {child,parent,primitives,aliased}=stateContracts();const leaf=child.anatomy.root.parts!.ink;
+ delete leaf.shape!.parentViewport;leaf.literals={...leaf.literals,left:'3px',top:'3px'};
+ child.anatomy.root.parts={wrapper:{declared:{position:'relative'},literals:{width:'24px',height:'24px'},parts:{leaf}}};
+ child.anatomy.root.overridable=['color'];for(const {part}of walkAnatomy(parent))if(part.component?.overrides)delete part.component.overrides.size;
+ const scope=new Map([[child.id,child],[parent.id,parent]]),tokens={primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}};
+ const engine=createFigmaEngine({tokens,icons:new Map()}),data=engine.compileComponentData(parent,scope);
+ assert(!data.codeOnlyFacts?.some(f=>f.channel==='per-instance override "color"'));
+ const host=createFigmaMock({fileKey:'fixture'}),api=host.figma as any,context=vm.createContext({figma:api,console:{log(){},warn(){},error(){}}});
+ api.createVector=()=>{const n=api.createRectangle();Object.assign(n,{type:'VECTOR',isMask:false,blendMode:'PASS_THROUGH',vectorPaths:[]});return n;};
+ const run=(s:string)=>vm.runInContext(`(async()=>{${s}\n})()`,context);
+ await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(child,scope));
+ const main=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===child.id)!;
+ const snapshot=()=>JSON.stringify(main.findAll().map(n=>({id:n.id,type:n.type,width:n.width,height:n.height,x:n.x,y:n.y,fills:n.fills})));
+ const before=snapshot();await run(engine.buildComponentScript(parent,scope));assert.equal(snapshot(),before);
+ const owner=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===parent.id)!,instance=owner.findOne(n=>n.type==='INSTANCE')!,ink=instance.findOne(n=>n.type==='VECTOR')!;
+ const variables=await api.variables.getLocalVariablesAsync(),bound=variables.find((v:any)=>v.name==='g/base'),primitive=variables.find((v:any)=>v.name==='raw/base');
+ assert.equal((ink.fills as any)[0].boundVariables.color.id,bound.id);assert(Object.values(bound.valuesByMode).some((v:any)=>v.type==='VARIABLE_ALIAS'&&v.id===primitive.id));
+ assert.equal(instance.width,main.width);assert.equal(instance.height,main.height);
+ for(const fault of ['branch','paint','text','conditional','color','root-background','root-text','root-shape']){
+  const changed=structuredClone(child),wrapper=changed.anatomy.root.parts!.wrapper;
+  if(fault==='branch')wrapper.parts!.extra=structuredClone(leaf);if(fault==='paint')wrapper.literals!['background-color']='red';
+  if(fault==='text')wrapper.text='competing text';if(fault==='conditional')wrapper.visibleWhen={prop:'unknown'};
+  if(fault==='color')wrapper.literals!.color='red';
+  if(fault==='root-background')changed.anatomy.root.literals={...changed.anatomy.root.literals,'background-color':'currentColor'};
+  if(fault==='root-text')changed.anatomy.root.text='Competing ink';if(fault==='root-shape')changed.anatomy.root.shape=structuredClone(leaf.shape);
+  const d=engine.compileComponentData(parent,new Map([[child.id,changed],[parent.id,parent]]));
+  assert(d.codeOnlyFacts?.some(f=>f.channel==='per-instance override "color"'),fault);
+ }
+});
+
+test('attached native ink lookup sees hidden branches and rejects nested instances while restoring visibility policy',()=>{
+ const {child,parent,primitives,aliased}=stateContracts(),engine=createFigmaEngine({tokens:{primitives,semantic:aliased,light:{},dark:{},brands:{default:{}}},icons:new Map()});
+ const script=engine.buildComponentScript(parent,new Map([[child.id,child],[parent.id,parent]]));
+ const start=script.indexOf('    let ink = node;'),marker='    } finally { figma.skipInvisibleInstanceChildren = previousSkip; }',end=script.indexOf(marker,start);assert(start>=0&&end>start);
+ const lookup=script.slice(start,end+marker.length)+'; ink;';
+ for(const fault of ['none','hidden','nested','empty','deep','setter']){
+  const figma={skipInvisibleInstanceChildren:true},paint={color:'#fff'},vector={type:'VECTOR',set fills(value:unknown){assert.equal(figma.skipInvisibleInstanceChildren,false);assert(Array.isArray(value));assert.equal(value.length,1);assert.equal(value[0],paint);if(fault==='setter')throw Error('setter-refused');}},extra={type:'FRAME',children:[]};let child:any={type:'FRAME',children:[{type:'FRAME',children:[vector]}]};
+  if(fault==='nested')child.type='INSTANCE';if(fault==='empty')child.children=[];
+  if(fault==='deep')for(let i=0;i<17;i++)child={type:'FRAME',children:[child]};
+  const node={id:'observed',type:'INSTANCE',get children(){return fault==='hidden'&&!figma.skipInvisibleInstanceChildren?[child,extra]:[child];}};
+  const context={figma,node,spec:{instanceInk:{varName:'ink'}},boundPaint(){assert.equal(figma.skipInvisibleInstanceChildren,false);return paint;}};
+  if(fault==='none')assert.equal(vm.runInNewContext(lookup,context),vector);else assert.throws(()=>vm.runInNewContext(lookup,context),fault==='setter'?/setter-refused/:/filled-path-instance-ink-tree-mismatch/,fault);
+  assert.equal(figma.skipInvisibleInstanceChildren,true,fault);
+ }
 });

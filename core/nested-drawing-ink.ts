@@ -5,6 +5,24 @@ import {canonicalJson,revisionOf} from './contract-provenance.js';
 export type DrawingInkOwner={nodeId:string;childPath:number[];partPath:string[]};
 export type DrawingInkContext={contractRevision:string;sourceFileKey:string;sourceKey:string;sourceNodeId:string;drawingInk?:DrawingInkOwner};
 
+/** A declared color input can reach one path through passive containers.
+ * This proves only inherited ink, never resize or transform authority. */
+export function inheritedNestedDrawingInk(root:Part):Part|undefined{
+ if(root.text!==undefined||root.shape||[root.declared,root.literals,...Object.values(root.states??{})].some(styles=>
+    Object.entries(styles??{}).some(([key,value])=>key!=='color'&&/currentcolor/i.test(String(value)))))return;
+ let part=root;
+ const placement=new Set(['position','left','right','top','bottom','width','height','overflow-x','overflow-y']);
+ for(let depth=1;depth<=8;depth++){
+  const children=Object.values(part.parts??{});if(children.length!==1)return;
+  part=children[0];
+  const leaf=part.shape?.kind==='path'&&part.literals?.['background-color']==='currentColor';
+  if(Object.entries(part).some(([key,value])=>value!==undefined&&!(leaf?['shape','tokens','literals','declared','absoluteGeometry']:['parts','tokens','literals','declared','absoluteGeometry']).includes(key))||
+     Object.keys(part.tokens??{}).length||Object.keys(part.declared??{}).some(k=>!placement.has(k))||
+     Object.keys(part.literals??{}).some(k=>!placement.has(k)&&!(leaf&&k==='background-color')))return;
+  if(leaf)return depth>1?part:undefined;
+ }
+}
+
 /** A single native drawing behind nonpainting GROUP wrappers may expose ink.
  * Source object identity locates the leaf; names and geometry grant no authority.
  * The wrappers remain intact and this never grants a size or transform input. */
