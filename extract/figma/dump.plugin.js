@@ -2518,6 +2518,7 @@ async function dumpNode(node, nodePath, parent, captureChildren = true) {
                 const target = await dumpSolidFillTarget(node,n,'stroke');
                 if (target) {
                   h.solidStrokeTarget = target;
+                  if (Number.isFinite(n.strokeWeight) && n.strokeWeight > 0) h.strokeWeight = n.strokeWeight;
                   const normal = SolidFillCapture.observeSolidFillComposition(n.strokes,true);
                   if (normal) h.sourceNormalStrokeComposition = normal;
                   try { h.vectorStrokeGeometry = dumpHostVectorStrokeGeometry(n,target); }

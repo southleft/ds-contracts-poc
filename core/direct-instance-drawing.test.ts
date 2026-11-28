@@ -5,7 +5,7 @@ import { chromium } from 'playwright-core';
 import {PNG} from 'pngjs';
 import { ContractSchema, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import type { DumpSet } from '../extract/figma/types.js';
-import { asMinimalChildContract, proposeFromDump } from './propose-figma.js';
+import { asMinimalChildContract, proposeFromDump, proposeBatchFromDump } from './propose-figma.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { reactEmitter, reactInlineEmitter } from './emitter.js';
 import { mountGenerated } from './react-test-runtime.js';
@@ -14,12 +14,15 @@ import { createFigmaEngine } from './emit-figma-script.js';
 import { emitHtml } from './emit-html.js';
 import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
+import {promoteNestedDrawingInk,nestedDrawingInkTarget} from './nested-drawing-ink.js';
+import {revisionOf} from './contract-provenance.js';
+import type {CapturedTokenEntry} from './captured-tokens.js';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
 
 /** A keyed standalone SCALE/SCALE drawing (one currentColor path, recorded
  * 24 px main viewport) placed directly in a host at 16 and 24 px. */
-function drawingFixture() {
+function drawingFixture(capturedVariablePaths?:ReadonlyMap<string,string>,capturedTokenEntries?:ReadonlyMap<string,CapturedTokenEntry>) {
   const child = ContractSchema.parse({
     id: 'check.glyph', name: 'Glyph', version: '0.1.0', status: 'draft', description: 'Standalone drawing',
     semantics: { element: 'span' }, props: [], states: [],
@@ -40,7 +43,7 @@ function drawingFixture() {
     })),
   };
   const scope = new Map<string, Contract>([[child.id, child]]);
-  const propose = () => proposeFromDump(set, { corpus, mintUnbound: true, fileKey: 'fixture',
+  const propose = () => proposeFromDump(set, { corpus, mintUnbound: true, fileKey: 'fixture', capturedVariablePaths,capturedTokenEntries,
     contractIdByName: new Map([['Glyph', child.id]]), contractIdByKey: new Map([['glyph-key', child.id]]),
     contractsById: new Map([...scope].map(([id, c]) => [id, asMinimalChildContract(c)])) });
   const read = () => {
@@ -393,8 +396,8 @@ test('slot square drawing size takes precedence over captured root width and hei
  assert.equal(fallback.rootOverrides?.height,undefined);
 });
 
-function boundDrawingFixture(){
- const f=drawingFixture();
+function boundDrawingFixture(paths?:ReadonlyMap<string,string>,entries?:ReadonlyMap<string,CapturedTokenEntry>){
+ const f=drawingFixture(paths,entries);
  for(let i=0;i<2;i++){
   const h=f.mark(i).hostOverrides![0],color={r:i===0?.5:.25,g:i===0?.25:.5,b:.75},id='native-ink-'+i,value={...color,a:1};
   h.fields=['fillStyleId','fills'];h.fill={var:'Theme/Ink'};
@@ -614,4 +617,83 @@ test('WC preserves equivalent ordered slot fallback anatomy and refuses addition
   (p:any)=>{p.parts.two={component:call};},
   (p:any)=>{p.parts.one.component.overrides={color:'#ff0000'};},
  ]){const altered=structuredClone(parent);change(altered.anatomy.root.parts!.body);assert.throws(()=>emitWebComponent(altered,ctx),/SLOT_RUNTIME_DEFAULT_ANATOMY_UNSUPPORTED:web-components/);}
+});
+
+test('allocated native ink preserves same-value alias identity through filled and stroked instance overrides',()=>{
+ for(const stroked of [false,true]){
+  const entries=new Map<string,CapturedTokenEntry>();
+  const f=boundDrawingFixture(new Map([['Theme/Ink','theme.ink'],['Theme/Alternate','theme.alternate']]),entries);
+  const observed=structuredClone(f.mark(0).hostOverrides![0]);
+  if(stroked){
+   f.child.anatomy.root.overridable!.push('stroke-width');f.child.anatomy.root.tokens!['stroke-width']='{drawing.stroke}';
+   f.child.anatomy.root.parts!.ink={literals:{'border-color':'currentColor','border-width':'inherit'},shape:{kind:'stroked-path',width:18,height:18,strokePath:{data:'M0 0L18 18',cap:'ROUND',join:'ROUND',miterLimit:4,viewport:{width:24,height:24,x:3,y:3}}}};
+  }
+  for(let i=0;i<2;i++){
+   const n=f.mark(i),h=n.hostOverrides![0];n.nodeId=h.solidFillTarget!.instanceId;
+   h.sourceNormalFillComposition=structuredClone(observed.sourceNormalFillComposition);
+   h.variableConsumers=structuredClone(observed.variableConsumers);
+   const id='native-ink-'+i,name=i?'Theme/Alternate':'Theme/Ink';h.fill!.var=name;
+   if('paint'in h.sourceNormalFillComposition!)h.sourceNormalFillComposition.variableId=id;
+   h.variableConsumers={[id]:{...observed.variableConsumers!['native-ink-0'],name}};
+   entries.set(name,{name,path:i?'theme.alternate':'theme.ink',value:'rgba(127.5,63.75,191.25,1)',type:'color',source:{variableId:id,collectionId:'theme',modeId:'light',modeName:'Light',scope:'selected-mode',tier:'unspecified'}});
+   if(stroked){h.fields=['strokes'];h.stroke=h.fill;delete h.fill;h.solidStrokeTarget=h.solidFillTarget;delete h.solidFillTarget;h.sourceNormalStrokeComposition=h.sourceNormalFillComposition;delete h.sourceNormalFillComposition;h.strokeWeight=.9;}
+  }
+  const read=f.read();assert(read.overrides?.color);
+  const aliases=read.result.mintedTokens!.entries.map(e=>e.value).filter(v=>String(v).startsWith('{')).sort();
+  assert.deepEqual(aliases,['{theme.alternate}','{theme.ink}']);
+  if(stroked)assert(read.result.mintedTokens!.entries.some(e=>e.value==='0.9px'),'observed resized width needs no explicit strokeWeight override');
+  f.mark(0).nodeId='wrong-instance';assert.equal(f.read().overrides?.color,undefined);
+ }
+});
+
+function nestedInkFixture(){
+ const f=drawingFixture(),root=f.child.anatomy.root,leaf=root.parts!.ink;
+ delete leaf.shape!.parentViewport;root.overridable=[];delete root.tokens!.color;
+ leaf.tokens={'background-color':'{drawing.ink}'};delete leaf.literals!['background-color'];
+ const group={parts:{'renamed-leaf':leaf},tokens:{},shape:undefined};root.parts={'renamed-group':group};
+ const vector={name:'native leaf',type:'VECTOR',nodeId:'50:3',sourceStrokeStack:{version:1,order:'bottom-to-top',complete:true,paints:[]}};
+ const wrapper={name:'native group',type:'GROUP',nodeId:'50:2',children:[vector]};
+ const set={setName:'Unrelated name',type:'COMPONENT',nodeId:'50:1',variants:[{name:'main',type:'COMPONENT',nodeId:'50:1',children:[wrapper]}]} as DumpSet;
+ const owners=new Map<string,Set<object>>([['50:2',new Set([group])],['50:3',new Set([leaf])]]);
+ return {f,root,leaf,group,set,owners,wrapper,vector};
+}
+test('nested drawing ink follows exact source ownership and keeps the native group structure',()=>{
+ const {f,root,leaf,group,set,owners}=nestedInkFixture(),shape=structuredClone(leaf.shape),source=JSON.stringify(set);
+ const drawingInk=promoteNestedDrawingInk(root,set,owners);assert(drawingInk);
+ assert.deepEqual(drawingInk,{nodeId:'50:3',childPath:[0,0],partPath:['root','renamed-group','renamed-leaf']});
+ assert.equal(root.parts!['renamed-group'],group);assert.deepEqual(leaf.shape,shape);assert.equal(JSON.stringify(set),source);
+ assert.deepEqual(root.overridable,['color']);assert.equal(root.tokens!.color,'{drawing.ink}');assert.equal(leaf.literals!['background-color'],'currentColor');
+ const context={contractRevision:revisionOf(f.child),sourceFileKey:'fixture',sourceKey:'glyph-key',sourceNodeId:'50:1',drawingInk};
+ const node=f.mark(0),h=node.hostOverrides![0];node.nodeId='i';h.solidFillTarget={nodeId:'Ii;50:3',instanceId:'i',componentId:'50:1',instancePath:[],childPath:[0,0]};
+ assert.equal(nestedDrawingInkTarget(node,f.child,context,'fixture'),h);
+ for(const fault of ['revision','file','main','leaf','route','field','duplicate']){
+  const n=structuredClone(node),c=structuredClone(context),target=n.hostOverrides![0].solidFillTarget!;
+  if(fault==='revision')c.contractRevision='stale';if(fault==='file')c.sourceFileKey='other';if(fault==='main')target.componentId='other';
+  if(fault==='leaf')target.nodeId='Ii;50:4';if(fault==='route')target.childPath=[0,1];if(fault==='field')n.hostOverrides![0].fields.push('opacity');
+  if(fault==='duplicate')n.hostOverrides!.push(structuredClone(h));
+  assert.equal(nestedDrawingInkTarget(n,f.child,c,'fixture'),undefined,fault);
+ }
+});
+test('ambiguous or painting nested owners never gain an ink channel or mutate the child',()=>{
+ for(const fault of ['missing','duplicate','foreign-object','branch','paint','text','conditional','stroke','instance','ancestor-color','root-color','group-color','leaf-color','leaf-paint']){
+  const a=nestedInkFixture();
+  if(fault==='missing')a.owners.delete('50:3');if(fault==='duplicate')a.owners.get('50:3')!.add({});
+  if(fault==='foreign-object')a.owners.set('50:3',new Set([structuredClone(a.leaf)]));
+  if(fault==='branch')a.wrapper.children.push({...a.vector});if(fault==='paint')Object.assign(a.wrapper,{fill:{hex:'ff0000'}});
+  if(fault==='text')Object.assign(a.leaf,{text:'hidden paint'});if(fault==='conditional')a.leaf.states={hover:{color:'red'}};
+  if(fault==='stroke')a.vector.sourceStrokeStack.complete=false;if(fault==='instance')a.wrapper.type='INSTANCE';
+  if(fault==='ancestor-color')Object.assign(a.group,{literals:{color:'red'}});
+  if(fault==='root-color')a.root.declared={color:'red'};if(fault==='group-color')Object.assign(a.group,{declared:{color:'red'}});
+  if(fault==='leaf-color')a.leaf.literals={color:'red'};if(fault==='leaf-paint')a.leaf.declared={'background-color':'red'};
+  const before=JSON.stringify(a.root);assert.equal(promoteNestedDrawingInk(a.root,a.set,a.owners),undefined,fault);assert.equal(JSON.stringify(a.root),before,fault);
+ }
+});
+
+test('a token-name allocation alone never collapses different consuming modes',()=>{
+ const f=boundDrawingFixture(new Map([['Theme/Ink','theme.ink']]));
+ for(let i=0;i<2;i++)f.mark(i).nodeId=f.mark(i).hostOverrides![0].solidFillTarget!.instanceId;
+ const values=f.read().result.mintedTokens!.entries.map(e=>e.value).sort();
+ assert.deepEqual(values,['#8040bf','#4080bf','16px','24px'].sort());
+ const batch=proposeBatchFromDump({Holder:f.set,_variables:{'Theme/Ink':{type:'COLOR',value:'#8040bf',modes:{Light:'#8040bf',Dark:'#4080bf'}}}},{corpus,mintUnbound:true,fileKey:'fixture',contractIdByName:new Map([['Glyph',f.child.id]]),contractIdByKey:new Map([['glyph-key',f.child.id]]),contractsById:new Map([[f.child.id,asMinimalChildContract(f.child)]])});
+ assert.deepEqual(batch.skipped,[]);assert.deepEqual(batch.proposals[0].mintedTokens!.entries.map(e=>e.value).sort(),values);
 });

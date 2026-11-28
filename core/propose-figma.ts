@@ -1,3 +1,4 @@
+import {promoteNestedDrawingInk,nestedDrawingInkTarget,type DrawingInkOwner} from './nested-drawing-ink.js';
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
 import {conventionSet,imperceptibleBlendView,spreadShadowOutlineView,type FontVerticalMetrics} from './profile-conventions.js';
 import {halfTurnScaledPath,freePathViewport} from './scalable-path-source-plane.js';
@@ -87,7 +88,7 @@ import { isDumpSet, type DumpText, type DumpEffect, type DumpNode, type DumpPain
 import type { TokenCorpus } from './token-corpus.js';
 import {aliasTarget, pxOrNull} from './tokens.js';
 import {finitePaintArguments} from './finite-paint-arguments.js';
-import { capturedTokensFromDump, foldVariablePath, assertUnambiguousVariablePaths, ONE_DOT_LEADER } from './captured-tokens.js';
+import { capturedTokensFromDump, foldVariablePath, assertUnambiguousVariablePaths, ONE_DOT_LEADER, type CapturedTokenEntry } from './captured-tokens.js';
 import { literalTable, mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
@@ -1997,6 +1998,7 @@ export interface UnboundValue {
 }
 
 export interface FigmaProposalResult {
+  drawingInk?:DrawingInkOwner;
   sourceInstanceParts?:SourceInstancePart[];
   sourceTextParts?:SourceTextPart[];
   characterBindings?:CharacterBinding[];
@@ -2579,6 +2581,7 @@ interface MintCapture {
 /** Read-only lookup prepared while registering this exact source child.
  * This is token context only: it never opts into instanceOverrides behavior. */
 interface ChildIntrinsicContext {
+  drawingInk?:DrawingInkOwner;
   contractRevision: string;
   sourceFileKey: string;
   sourceKey: string;
@@ -2727,6 +2730,7 @@ interface Ctx {
   capturedValues?: Map<string, string>;
   /** Joint paint cannot recover each consumer mode from the current dump. */
   capturedPaintModeConflicts?: ReadonlySet<string>;
+  capturedTokenEntries?: ReadonlyMap<string,CapturedTokenEntry>;
     imageAssets?: Record<string,import('../extract/figma/types.js').DumpImageAsset>;
   /** instanceKey → exported stub-glyph asset (iteration 8) — see the
    *  proposeFromDump option of the same name. */
@@ -11519,15 +11523,21 @@ function observedVectorDrawing(node: DumpNode, ctx: Ctx) {
  * every live drawing override other than fills remains a refusal. */
 /** Resolve bound usage ink from the original paint and consuming binding,
  * not from a global token lookup. The returned alpha is already normalized. */
-function qualifiedHostInk(h:DumpHostOverride|undefined) {
-  const observation=h?.sourceNormalFillComposition;
-  if(!observation||!('paint'in observation)||!observation.variableId||!h?.fill?.var)return undefined;
+function qualifiedHostInk(h:DumpHostOverride|undefined,stroke=false,entries?:ReadonlyMap<string,CapturedTokenEntry>) {
+  const observation=stroke?h?.sourceNormalStrokeComposition:h?.sourceNormalFillComposition,source=stroke?h?.stroke:h?.fill;
+  if(!h||!observation||!('paint'in observation)||!observation.variableId||!source?.var)return undefined;
   const consumer=h.variableConsumers?.[observation.variableId];
-  if(!consumer||dotPath(consumer.name)!==dotPath(h.fill.var))return undefined;
+  if(!consumer||dotPath(consumer.name)!==dotPath(source.var))return undefined;
   try{
     const qualified=qualifySolidFillColorBinding(observation,h.variableConsumers),paint=qualified.paint;
     const hex=[paint.color.r,paint.color.g,paint.color.b].map(n=>Math.round(n*255).toString(16).padStart(2,'0')).join('');
-    return {hex,alpha:paint.opacity};
+    const entry=entries?.get(source.var),owner=entry?.source;
+    if(owner&&(owner.variableId!==qualified.variableId||owner.collectionId!==consumer.collectionId||
+      owner.modeId!==consumer.modeId||owner.modeName!==consumer.modeName||entry!.path!==dotPath(source.var)||
+      entry!.value!==`rgba(${paint.color.r*255},${paint.color.g*255},${paint.color.b*255},${paint.opacity})`))return undefined;
+    // Only the verified selected-context graph supplies an addressable alias.
+    // A name allocation alone cannot replace the consuming-mode paint.
+    return {hex,alpha:paint.opacity,...(owner?{var:source.var}:{})};
   }catch{return undefined;}
 }
 /** Explicit root usage authority is independent of bbox and HUG/FILL modes.
@@ -11765,6 +11775,9 @@ function directInstanceInsideStroke(node:DumpNode,childId:string,ctx:Ctx) {
 }
 
 function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx, allowInsideStroke=false) {
+  const child=ContractSchema.safeParse(ctx.contractsById?.get(childId));
+  const nested=child.success?nestedDrawingInkTarget(node,child.data,ctx.childIntrinsicContexts?.get(childId),ctx.fileKey):undefined;
+  if(nested)return qualifiedHostInk(nested,false,ctx.capturedTokenEntries)??(!nested.fill?.var?nested.fill:undefined);
   const observed = observedVectorDrawing(node, ctx);
   if (observed) {
     const child = ctx.contractsById?.get(childId) as unknown as {anatomy?:{root?:Record<string,unknown>}} | undefined;
@@ -11791,10 +11804,11 @@ function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx, allowInsid
   const h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
   const stroked = d?.path.shape?.kind === 'stroked-path';
   const target = stroked ? h?.solidStrokeTarget : h?.solidFillTarget;
-  const boundInk=stroked?undefined:qualifiedHostInk(h);
+  const boundInk=qualifiedHostInk(h,stroked,ctx.capturedTokenEntries);
   const emptyFill = h?.sourceEmptyFill === true && !h.fill && !h.sourceNormalFillComposition &&
     h.solidFillTarget?.instanceId === node.nodeId ? {hex:'000000',alpha:0} : undefined;
-  const paint = stroked ? h?.stroke : emptyFill??boundInk??h?.fill;
+  const paint:DumpNode['fill'] = boundInk??(stroked ? h?.stroke : emptyFill??h?.fill);
+  if(paint?.var&&(!boundInk||target?.instanceId!==node.nodeId))return undefined;
   const emptyStroke = !!h?.emptyStrokeTarget && !!h.solidFillTarget && !h.stroke &&
     !!node.nodeId && h.emptyStrokeTarget.instanceId === node.nodeId &&
     canonicalJson(h.emptyStrokeTarget) === canonicalJson(h.solidFillTarget);
@@ -11810,7 +11824,8 @@ function directInstanceStrokeWidth(node: DumpNode, childId: string, ctx: Ctx) {
   const d = directDrawingChild(node, childId, ctx), h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
   if (!d || d.path.shape?.kind !== 'stroked-path' || !d.child.anatomy.root.overridable?.includes('stroke-width') ||
       d.path.literals?.['border-width'] !== 'inherit' || !directInstanceInk(node, childId, ctx) ||
-      !h?.fields.includes('strokeWeight') || !Number.isFinite(h.strokeWeight) || h.strokeWeight! <= 0) return undefined;
+      !h || !h.fields.includes('strokeWeight')&&(!node.nodeId||h.solidStrokeTarget?.instanceId!==node.nodeId) ||
+      !Number.isFinite(h.strokeWeight) || h.strokeWeight! <= 0) return undefined;
   return h.strokeWeight;
 }
 
@@ -11952,7 +11967,7 @@ function queuePartialDrawingInk(m:Merged,component:Record<string,unknown>,paints
   const unpainted=inferPresenceByCombination(axes,rows.map(row=>({values:row.values,present:byVariant.get(row.variant)===false})),1,domain);
   if(!painted||!unpainted)return false;
   const target:Record<string,string>={};
-  mintInstanceInk(ctx,target,where,m.occ.flatMap((o,i)=>paints[i]?[{variant:o.variant,value:paintCssHex(paints[i]!)}]:[]));
+  mintInstanceInk(ctx,target,where,m.occ.flatMap((o,i)=>paints[i]?[{variant:o.variant,value:instanceInkValue(paints[i]!)}]:[]));
   ctx.mint.observations.at(-1)!.partAbsentCombos=ctx.totalVariants.filter(v=>byVariant.get(v)!==true).map(v=>ctx.mint!.axisValuesByVariant.get(v)??{});
   (ctx.partialDrawingInk??=[]).push({component,target,painted,inherited:unpainted,where,selfKey});
   return true;
@@ -12013,7 +12028,9 @@ function carrySlotDefaultDrawingInk(m: Merged, part: Record<string,unknown>, slo
     return;
   }
   const component:Record<string,unknown>={...item}, target:Record<string,string>={};
-  mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
+  mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:instanceInkValue(paints[i]!)})));
+  const weights=m.occ.map(o=>directInstanceStrokeWidth(o.node,item.id,ctx));
+  if(weights.every(w=>w!==undefined))mintObservation(ctx,target,where,'stroke-width','px',m.occ.map((o,i)=>({variant:o.variant,value:weights[i]!})));
   const strokes=m.occ.map(o=>directInstanceInsideStroke(o.node,item.id,ctx));
   if(strokes.some(Boolean)){
     const props=ctx.mint.axes.map(a=>a.propName),byVariant=new Map(m.occ.map((o,i)=>[o.variant,strokes[i]??null]));
@@ -12105,11 +12122,12 @@ function carryWrappedSlotDefault(wrapper: Merged, content: Merged, part: Record<
   ctx.notes.push(`${where}: omitted-slot default keeps observed child presence and identity-qualified drawing size on caller anatomy; explicit slot input and linked main are unchanged`);
 }
 
+const instanceInkValue=(paint:NonNullable<DumpNode['fill']>)=>paint.var?'{'+dotPath(paint.var)+'}':paintCssHex(paint);
 function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
   occ:Array<{variant:string;value:string}>,state?:string,partKey?:string) {
   if(!ctx.mint)return;
   ctx.mint.observations.push({nodePath:where,part:state?`${partKey}/state-${state}`:partPathOf(where),
-    cssProperty:'color',kind:'color',booleanAxes:true,compoundRefs:true,target,source:where+'|instance ink',
+    cssProperty:'color',kind:occ.some(o=>o.value.startsWith('{'))?'color-alias':'color',booleanAxes:true,compoundRefs:true,target,source:where+'|instance ink',
     occurrences:occ.map(o=>({...o,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)??{}}))});
 }
 
@@ -14608,7 +14626,7 @@ function buildPartFromEvidence(
       if (paints.length && paints.every(Boolean)) {
         const prior = ctx.mint.refOverrides.filter(row=>!row.property).find(r=>r.component===component);
         const target = prior?.target ?? {};
-        mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
+        mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:instanceInkValue(paints[i]!)})));
         if (!prior) ctx.mint.refOverrides.push({component,target});
         ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
         ctx.notes.push(`${where}: identity-qualified direct-instance ink carried through the child's declared color override`);
@@ -16796,7 +16814,7 @@ function proposeStateDiffs(
         let rec = partStates.find(r=>r.part===instancePart && r.state===state);
         if (!rec) {rec={part:instancePart!,state,target:{},byProp:{}};partStates.push(rec);}
         mintInstanceInk(ctx,rec.target,`${where}/${childName} (state ${state})`,
-          childOccs.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})),state,instanceKey);
+          childOccs.map((o,i)=>({variant:o.variant,value:instanceInkValue(paints[i]!)})),state,instanceKey);
         ctx.notes=ctx.notes.filter(n=>!n.startsWith(`${where} (state ${state})/${childName}: host override(s)`));
         ctx.notes.push(`${where}/${childName}: identity-qualified instance ink in state "${state}" carried through the child's declared color override`);
       }
@@ -17409,6 +17427,7 @@ function proposeFromDumpFencedImpl(
      *  entry derives these from the raw dump and cannot be overridden away.
      *  A set-only caller must supply known mode conflicts with its corpus. */
     capturedPaintModeConflicts?: ReadonlySet<string>;
+  capturedTokenEntries?: ReadonlyMap<string,CapturedTokenEntry>;
     imageAssets?: Record<string,import('../extract/figma/types.js').DumpImageAsset>;
     /** Image-over-solid stacks the dump proves (native-image-paint imageOverSolidPaths). */
     imageOverSolid?: ReadonlySet<string>;
@@ -18138,6 +18157,7 @@ function proposeFromDumpFencedImpl(
     effectsCaptured: opts.effectsCaptured,
     capturedValues: opts.capturedValues,
     capturedPaintModeConflicts: opts.capturedPaintModeConflicts,
+    capturedTokenEntries: opts.capturedTokenEntries,
     imageAssets:opts.imageAssets,
     iconAssets: opts.iconAssets,
     instanceOverrides: opts.instanceOverrides,
@@ -19426,6 +19446,8 @@ function proposeFromDumpFencedImpl(
     }
   }
 
+  const drawingInk=promoteNestedDrawingInk(root as Part,set,ctx.sourcePartsByNodeId);
+
   // State-axis promotion, final attach — AFTER the mint pass so minted state
   // refs have landed in their records. States whose overrides all refused
   // are dropped BY NAME; the survivors become the contract's `states` + root
@@ -20101,6 +20123,7 @@ function proposeFromDumpFencedImpl(
   if(ctx.visibilityNodes?.size)throw Error('visibility-demand-source-part-not-emitted');
   const visibilityBindings=[...new Map((ctx.visibilityAuthored??[]).flatMap(row=>row.demands.map(d=>({fileKey:d.fileKey,setKey:set.key!,componentId:d.target.componentId,childPath:d.target.childPath,prop:row.prop,contractRevision:revisionOf(contract)}))).map(b=>[canonicalJson(b),b])).values()];
   return {
+    ...(drawingInk?{drawingInk}:{}),
     ...(ctx.sourceInstanceParts?.length?{sourceInstanceParts:ctx.sourceInstanceParts}:{}),
     ...(ctx.sourceTextParts?.length?{sourceTextParts:ctx.sourceTextParts}:{}),
     ...(draftPaintQualification?{draftPaintQualification}:{}),
@@ -20441,6 +20464,7 @@ function proposeBatchFromDumpInternal(
     effectsCaptured: opts.effectsCaptured ?? dumpCapturesEffects((dump as { _provenance?: Parameters<typeof dumpCapturesEffects>[0] })._provenance),
     capturedValues,
     capturedVariablePaths: capturedLayer?.variablePaths ?? opts.capturedVariablePaths,
+    capturedTokenEntries: capturedLayer ? new Map(capturedLayer.entries.map(e=>[e.name,e])) : opts.capturedTokenEntries,
     capturedPaintModeConflicts,
     imageAssets:opts.imageAssets??(dump as import('../extract/figma/types.js').DumpFile)._imageAssets,
     imageOverSolid:imageOverSolidPaths(dump),
@@ -20669,7 +20693,7 @@ function proposeBatchFromDumpInternal(
         }
         if (parsed.success && complete && parsed.data.bindings.figma.anchors.fileKey === opts.fileKey &&
             parsed.data.bindings.figma.anchors.componentSetKey === value.key && parsed.data.bindings.figma.anchors.nodeId === value.nodeId)
-          childIntrinsicContexts.set(parsed.data.id,{contractRevision:revisionOf(parsed.data),sourceFileKey:opts.fileKey,
+          childIntrinsicContexts.set(parsed.data.id,{drawingInk:proposal.drawingInk,contractRevision:revisionOf(parsed.data),sourceFileKey:opts.fileKey,
             sourceKey:value.key,sourceNodeId:value.nodeId,values:Object.freeze(Object.fromEntries(values)),
             rootPaints:new Map(value.variants.filter(v=>v.nodeId && value.variants.filter(other=>other.nodeId===v.nodeId).length===1)
               .map(v=>[v.nodeId!,structuredClone({name:v.name,type:v.type,nodeId:v.nodeId,componentKey:v.componentKey,sourceFillStack:v.sourceFillStack})]))});

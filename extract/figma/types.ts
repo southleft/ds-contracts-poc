@@ -345,6 +345,7 @@ export interface DumpHostOverride {
   fields: string[];
   fill?: DumpPaint;
   stroke?: DumpPaint;
+  /** Observed weight on the identity-qualified stroke target, including resized instances. */
   strokeWeight?: number;
   /** Actual descendant visibility plus the nearest instance owner and numeric paths.
    * A display-name path alone does not authorize a generated-child override. */
