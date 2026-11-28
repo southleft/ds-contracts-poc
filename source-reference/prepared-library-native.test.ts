@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import vm from 'node:vm';
+import {createHash} from 'node:crypto';
 import {mkdtempSync, readFileSync, writeFileSync, rmSync, readdirSync, unlinkSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
@@ -8,6 +10,7 @@ import {createServer,request as httpRequest} from 'node:http';
 import {buildReactLibrary, parseLibraryRequest} from '../playground/server/react-library.js';
 import {retainPreparedReactLibrary} from '../playground/server/react-library-artifact.js';
 import {preparedLibraryNativeAdapter} from './prepared-library-native.js';
+import {declaredLibraryFontRefusal,preflightLibraryFonts} from './prepared-library-fonts.js';
 import {isPreparedLibraryNativeRequest, preparedLibraryNativeReservation, type PreparedLibraryNativeRequest} from './prepared-library-native-request.js';
 import {createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJobsOptions} from './native-operation-jobs.js';
 import {createNativeOperationTransport} from './native-operation-transport.js';
@@ -17,9 +20,10 @@ import {revisionOf} from '../core/contract-provenance.js';
 import {verifyNativePartialReadback,type NativePartialObservationInput} from '../core/native-partial-observation.js';
 import {emitNativeLibraryReplacementReadbackScript,prepareNativeLibraryReplacement,wrapNativeLibraryReplacement} from '../core/native-library-replacement.js';
 import {emitNativeInspectionReadbackScript,verifyNativeInspectionReadback} from '../core/native-source-observation.js';
+import {emitNativeTokenContextScript} from '../core/token-set.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-async function fixture(t: test.TestContext, statefulRoot = false, unsupportedGrowth = false, callerContent=false) {
+async function fixture(t: test.TestContext, statefulRoot = false, unsupportedGrowth = false, callerContent=false, dependencyFont='Inter') {
   const repo = mkdtempSync(path.join(tmpdir(), 'prepared-library-journal-'));
   t.after(() => rmSync(repo, {recursive:true, force:true}));
   const leaf = {id:'test.journal-leaf', name:'Leaf', version:'0.1.0', status:'draft', description:'Journal integration fixture',
@@ -28,7 +32,7 @@ async function fixture(t: test.TestContext, statefulRoot = false, unsupportedGro
       {name:'shown',type:'boolean',default:true,bindings:{code:{prop:'shown'},figma:{kind:'BOOLEAN',property:'Shown'}}},
       {name:'size',type:{enum:['small','large']},default:'small',bindings:{code:{prop:'size'},figma:{kind:'VARIANT',property:'Size',values:{small:'Small',large:'Large'}}}}],
     anatomy:{root:{layout:{display:'inline-flex'},states:{hover:{opacity:'{fade}'}},parts:{
-      text:{content:{prop:'label'},visibleWhen:{prop:'shown'},declared:{'font-family':'Inter'},tokens:{color:'{label}'}}}}},
+      text:{content:{prop:'label'},visibleWhen:{prop:'shown'},declared:{'font-family':dependencyFont},tokens:{color:'{label}'}}}}},
     bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}};
   const panel = {id:'test.journal-panel',name:'Panel',version:'0.1.0',status:'draft',description:'Nested default slot',props:[],states:[],semantics:{element:'div'},
     anatomy:{root:{layout:{display:'flex',direction:'column'},parts:{
@@ -52,6 +56,71 @@ async function fixture(t: test.TestContext, statefulRoot = false, unsupportedGro
   const artifactDir = path.join(repo,'private/react-library-artifacts',artifact.id);
   return {repo,request,reopen,transport,host,artifactDir,options};
 }
+
+test('library font preflight preserves ordered fallback and checks the file before loading or allocating',async()=>{
+  const fonts=[{family:'Face',styles:['Medium','Regular']}],calls:string[]=[];
+  let allocated=0;const figma={fileKey:'ExpectedFile',loadFontAsync:async(f:{style:string})=>{calls.push(f.style);if(f.style==='Medium')throw Error('missing')}};
+  const original='allocate();return "created";',script=preflightLibraryFonts(original,fonts,'ExpectedFile','sha256:revision');
+  assert.ok(script.endsWith(original));
+  const run=async()=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}})()`,{figma,allocate:()=>allocated++})));
+  assert.equal(await run(),'created');assert.deepEqual(calls,['Medium','Regular']);assert.equal(allocated,1);
+  calls.length=0;figma.fileKey='WrongFile';assert.deepEqual((await run()).problems,['native-token-write-file-mismatch']);
+  assert.deepEqual(calls,[]);assert.equal(allocated,1);
+  assert.throws(()=>preflightLibraryFonts(original,undefined,'ExpectedFile','revision'),/font-requirements-invalid/);
+  assert.throws(()=>preflightLibraryFonts(original,[Object.assign([],{family:'Face',styles:['Regular']})],'ExpectedFile','revision'),/font-requirements-invalid/);
+  assert.equal(declaredLibraryFontRefusal('native-font-unavailable:{}',undefined),false,'old plans without font metadata cannot authorize a new font refusal');
+});
+
+test('missing setup or dependency fonts refuse before allocation and a confirmed refusal can retry once',async t=>{
+  for(const missing of ['Inter','Dependency Typeface']){
+    const f=await fixture(t,false,false,false,'Dependency Typeface'),jobs=f.reopen(),first=jobs.prepare(f.request);
+    const load=f.host.figma.loadFontAsync,nodes=f.host.figma.root.findAll(()=>true).map((n:any)=>n.id);
+    f.host.figma.loadFontAsync=async(font:any)=>{if(font.family===missing)throw Error('missing');return load(font)};
+    const command=jobs.dispatch(first.id,'token-create'),result=await f.host.run(command),detail=(result.result as any).problems[0];
+    assert.ok(detail.startsWith('native-font-unavailable:'));assert.equal(JSON.parse(detail.split(':').slice(1).join(':')).family,missing);
+    assert.equal(f.host.collections.length,0);assert.deepEqual(f.host.figma.root.findAll(()=>true).map((n:any)=>n.id),nodes);
+    const refused=jobs.accept(first.id,result);assert.equal(refused.phase,'creation-refused');assert.deepEqual(refused.problems,[detail]);
+    f.host.figma.loadFontAsync=load;const retried=f.reopen().retryCreation(first.id);
+    assert.equal(f.reopen().accept(first.id,await f.host.run(retried)).phase,'tokens-created');assert.equal(f.host.collections.length,1);
+    assert.throws(()=>f.reopen().retryCreation(first.id),/creation-retry-refused/);
+  }
+});
+
+test('off-plan font refusals and claimed allocations cannot authorize creation retry',async t=>{
+  for(const change of ['family','styles','allocation','created','aliased','receipt','creationIdentity']){
+    const f=await fixture(t),jobs=f.reopen(),first=jobs.prepare(f.request);f.host.figma.loadFontAsync=async()=>{throw Error('missing')};
+    const result=await f.host.run(jobs.dispatch(first.id,'token-create')),body=result.result as any;
+    if(change==='allocation')body.allocation.variables.push({id:'made-up'});
+    else if(change==='family'||change==='styles')body.problems=['native-font-unavailable:'+JSON.stringify(change==='family'?{family:'Other',styles:['Medium']}:{family:'Inter',styles:['Other']})];
+    else body[change]=change==='receipt'||change==='creationIdentity'?{}:1;
+    assert.equal(jobs.accept(first.id,result).phase,'creation-invalid');assert.throws(()=>f.reopen().retryCreation(first.id),/creation-retry-refused/);
+  }
+});
+
+test('a fontless historical journal retains delayed allocations and readback but refuses new writes',async t=>{
+  const f=await fixture(t),first=f.reopen().prepare(f.request),command=f.reopen().dispatch(first.id,'token-create');
+  const directory=path.join(f.repo,'private/source-native-app/operations',first.id);
+  const read=(name:string)=>JSON.parse(readFileSync(path.join(directory,name),'utf8'));
+  const save=(name:string,value:unknown)=>writeFileSync(path.join(directory,name),JSON.stringify(value,null,2)+'\n');
+  const sha=(value:string|Buffer)=>createHash('sha256').update(value).digest('hex');
+  // Seed the authenticated plan and script produced before font preflight existed.
+  const plan=read('plan.json');delete plan.plan.fonts;plan.revision=revisionOf(plan.plan);save('plan.json',plan);
+  command.planRevision=plan.revision;command.script=emitNativeTokenContextScript(plan.plan.tokenInput).script;
+  command.scriptSha256=sha(command.script);writeFileSync(path.join(directory,'token-create.js'),command.script);
+  const header=read('operation.json');header.planRevision=plan.revision;header.planSha256=sha(readFileSync(path.join(directory,'plan.json')));
+  header.tokenScriptSha256=command.scriptSha256;save('operation.json',header);save('creation.json',command);
+  const eventName='events/'+readdirSync(path.join(directory,'events'))[0],event=read(eventName);
+  event.command=command;event.previousSha256=sha(readFileSync(path.join(directory,'operation.json')));save(eventName,event);
+  const pinned=new Map(['plan.json','token-create.js','operation.json',eventName].map(name=>[name,readFileSync(path.join(directory,name))]));
+  const birth=await f.host.run(command),ids=f.host.variables.map((v:any)=>v.id);
+  const accepted=f.reopen().accept(first.id,birth);assert.equal(accepted.phase,'tokens-created');assert.equal(accepted.sourceCurrent,false);
+  assert.throws(()=>f.reopen().prepare(f.request),/compiled-script-changed/);
+  const readback=f.reopen().dispatch(first.id,'token-readback');
+  assert.equal(f.reopen().accept(first.id,await f.host.run(readback)).phase,'tokens-observed');
+  assert.throws(()=>f.reopen().dispatch(first.id,'component-create'),/compiled-script-changed/);
+  assert.deepEqual(f.host.variables.map((v:any)=>v.id),ids);assert.ok(ids.length>0);
+  for(const [name,bytes] of pinned)assert.deepEqual(readFileSync(path.join(directory,name)),bytes);
+});
 
 test('unrepresented zero-basis growth refuses before reserving a native operation and preserves the archive',async t=>{
   const f=await fixture(t,false,true),manager=f.reopen();

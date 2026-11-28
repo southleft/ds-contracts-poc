@@ -40,6 +40,7 @@ function compileRetained(artifact:ReturnType<typeof readRetained>,request:Prepar
     acceptedContract:null,nativeQualification:'unqualified' as const,operation:{...request.operation},
     artifactId:artifact.id,projection:compiled.projection,component:compiled.component,componentRevision:revisionOf(compiled.component),
     graphComponents:compiled.components,graphVerification:2 as const,componentRevisions:compiled.componentRevisions,
+    fonts:[{family:'Inter',styles:['Medium']},...compiled.fonts].filter((font,index,all)=>all.findIndex(other=>canonicalJson(other)===canonicalJson(font))===index),
     tokenInput,tokenPreparation:prepareNativeTokenContext(tokenInput),
     limitations:['native-visual-fidelity-unverified','react-behavior-not-qualified','application-dispatch-not-authorized-by-plan']};
   return {artifact,engine,contracts,source,plan,revision:revisionOf(plan)};

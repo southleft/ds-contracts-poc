@@ -65,7 +65,6 @@
     "console-loop:polaris:evidence:check": "node scripts/console-loop-lib-evidence-check.mjs polaris",
     "console-loop:all:evidence:check": "node scripts/console-loop-all-evidence-check.mjs",
     "console-loop:capture-framing": "node scripts/console-loop-capture-framing-check.mjs",
-    "console-loop:canvas-drift": "node scripts/console-loop-canvas-drift-probe.mjs",
     "trap-corpus:check": "node scripts/trap-corpus-check.mjs",
     "console-loop:developed-score": "tsx scripts/console-loop-developed-score.mjs",
     "functional:flowbite": "tsx scripts/flowbite-authored-functional-check.ts",
