@@ -1,3 +1,4 @@
+import { readButtonStamp, restoreButtonStamp } from './figma-button-behavior.js';
 import {promoteNestedDrawingInk,nestedDrawingInkTarget,type DrawingInkOwner} from './nested-drawing-ink.js';
 import {selectedDrawingInkOverride} from './fixed-swap-drawing-ink.js';
 import {conventionSet,imperceptibleBlendView,spreadShadowOutlineView,type FontVerticalMetrics} from './profile-conventions.js';
@@ -17601,7 +17602,8 @@ function proposeFromDumpFencedImpl(
   }
   const proposalInputNames = Object.assign(Object.create(null), allocatedPropNames, authoredPropNames) as Record<string, string>;
   const nameOptions = { propertyNames: proposalInputNames };
-  const typedAxes = readCodeValueAxes(set);
+  const retainedButton = readButtonStamp(set);
+  const typedAxes = [...readCodeValueAxes(set), ...(retainedButton ? [retainedButton.axis] : [])];
   const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
     ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
   const unsetAxes = readUnsetVariantAxes(set);
@@ -19670,6 +19672,7 @@ function proposeFromDumpFencedImpl(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  restoreButtonStamp(contract, retainedButton);
   if (retainedSelection) {
     restoreFigmaSelectionApi(contract, retainedSelection, opts.contractsById);
     ctx.notes.push('retained-selection-api: explicit identities, input aliases and panel relationships recovered from validated non-executable metadata; paint and content come from the capture, not retained source anatomy; native behavior is not certified');

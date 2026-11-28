@@ -3023,7 +3023,10 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const stampedCodeValueAxes = rawCodeValueAxes === undefined ? undefined : (() => {
       try { return JSON.parse(rawCodeValueAxes) as unknown; } catch { return rawCodeValueAxes; }
     })();
-    const stampedSemantics = stampJson<{ element?: string; role?: string }>('semantics');
+    const rawSemantics = stampString('semantics');
+    const stampedSemantics = rawSemantics === undefined ? undefined : (() => {
+      try { return JSON.parse(rawSemantics); } catch { return rawSemantics; }
+    })();
     const stampedStatePreviewAxis = stampJson<NonNullable<DumpSet['statePreviewAxis']>>('statePreviewAxis');
     // dump v1.5: INSTANCE_SWAP preferredValues, keyed by suffix-stripped
     // property name — the component keys resolve downstream into slot
@@ -3167,7 +3170,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedSelectionApi !== undefined ? { selectionApi: stampedSelectionApi } : {}),
       ...(stampedCodeValueAxes !== undefined ? { codeValueAxes: stampedCodeValueAxes } : {}),
       ...(stampedDrawnVariants !== undefined ? { drawnVariants: stampedDrawnVariants } : {}),
-      ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
+      ...(stampedSemantics !== undefined ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),
       ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),

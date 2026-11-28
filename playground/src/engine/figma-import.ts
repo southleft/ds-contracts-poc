@@ -10,6 +10,7 @@
  * what CI referees (roundtrip-rest) is what the demo shows.
  */
 import { importFigmaUrl } from './figma-url-import.js';
+import { assertCapturedClosure } from '../../../core/captured-closure.js';
 import {selectFigmaImportRoot} from '../../../core/figma-import-selection.js';
 import type { FontVerticalMetrics } from '../../../core/profile-conventions.js';
 import { dumpCapturesHidden, proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
@@ -66,6 +67,7 @@ export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
  *  itself is core (proposeBatchFromDump — the code CI's receipts referee);
  *  this wrapper only supplies the playground's live corpus and options. */
 export function proposalsFromDump(dump: FigmaImportResult['dump'], surface?: 'react-runtime', conventions?: readonly string[], fontMetrics?: FontVerticalMetrics): DumpProposalBatch {
+  assertCapturedClosure(dump);
   // Filled caller occurrences require the host's authenticated lowering path.
   // JSON, REST, bridge and headless callers all stop before main-only fallback.
   if ('_occurrences' in dump) selectFigmaImportRoot(dump, []);

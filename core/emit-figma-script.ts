@@ -41,6 +41,7 @@ import { selectedSampleKey, selectionErrors } from '../packages/core/src/selecti
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
+import { buttonStamp, buttonRetirementGuard, type ButtonStamp } from './figma-button-behavior.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { componentLookupValue } from './code-values.js';
 import { prepareNativePreparedLibraryComponent, type NativePreparedLibrarySource } from './native-prepared-library.js';
@@ -879,7 +880,7 @@ export interface ComponentData {
    *  "interactive". A wrong element is worse than a missing one: it changes
    *  what the generated component IS. Omitted when the contract declares no
    *  semantics, so a set drawn elsewhere keeps the inference. */
-  semantics?: { element?: string; role?: string };
+  semantics?: { element?: string; role?: string } & Partial<ButtonStamp>;
   /** Figma property name → the CONTRACT's prop name for it. Figma carries the
    *  design-facing spelling ("Content"), the contract carries the code-facing
    *  one ("children"), and nothing on the canvas relates the two — so the
@@ -6847,15 +6848,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>, p
 
 function compileComponentDataInner(contract: Contract, byId: Map<string, Contract>, permit?:typeof boundPaintPermit): ComponentData {
   const seenButtonPolicy = new Set<string>();
-  const refuseButtonPolicy = (c: Contract): void => {
+  const validateButtonPolicy = (c: Contract): void => {
     if (seenButtonPolicy.has(c.id)) return;
     seenButtonPolicy.add(c.id);
-    if (c.semantics.button !== undefined) throw Error('button-behavior-figma-unsupported');
+    buttonStamp(c);
     for (const { part } of walkAnatomy(c)) for (const id of [part.component?.id, ...(part.slot?.defaultContent ?? []).map(item => item.id)]) {
-      const child = id && byId.get(id); if (child) refuseButtonPolicy(child);
+      const child = id && byId.get(id); if (child) validateButtonPolicy(child);
     }
   };
-  refuseButtonPolicy(contract);
+  validateButtonPolicy(contract);
   validateStructuralAvailability(contract);
   // Convention font-weight-initial-normal: a text no part's font-weight reaches draws at CSS's initial weight (normal,
   // 400: Regular), as the browser does; off, at the writer's fallback face (Medium).
@@ -7993,6 +7994,7 @@ function compileComponentDataInner(contract: Contract, byId: Map<string, Contrac
     ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
       ? {
           semantics: {
+            ...buttonStamp(contract),
             ...(contract.semantics.element ? { element: contract.semantics.element } : {}),
             ...(contract.semantics.role ? { role: contract.semantics.role } : {}),
           },
@@ -11874,7 +11876,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       key: existing.key,
     };
   }
-${opts.propertyAmends ? '  return await amendInstanceProperties(existing,C,INSTANCE_PROPERTY_AMENDS.find(p=>p.before.contractId===C.contractId));\n' : ''}  // Retiring/renaming an internal omission option must not leave its retained
+${buttonRetirementGuard(datas.some(d => !!d.semantics?.button))}${opts.propertyAmends ? '  return await amendInstanceProperties(existing,C,INSTANCE_PROPERTY_AMENDS.find(p=>p.before.contractId===C.contractId));\n' : ''}  // Retiring/renaming an internal omission option must not leave its retained
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
