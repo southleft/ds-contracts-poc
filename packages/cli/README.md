@@ -8,9 +8,9 @@ built package, not npm's older `next` release.
 ## Reviewed React ↔ Figma edits: `roundtrip`
 
 This opt-in workflow captures an existing React component with its real stylesheet,
-creates native Figma variants and variables, and writes reviewed color-token edits
-back to the original JSON. It preserves aliases and SVG dependencies; application
-behavior stays in React. Layout edits, arbitrary CSS, responsive states and new
+creates native Figma variants and variables, and writes reviewed color and declared
+pixel font-size token edits back to the original JSON. It preserves aliases and SVG
+dependencies; application behavior stays in React. Layout edits, arbitrary CSS, responsive states and new
 application behavior are not supported by this workflow. It is not a benchmark result.
 
 The captured contract identifies the React source file, its SHA-256 and component
@@ -19,8 +19,10 @@ Capture does not establish a behavior-test result or equivalence; run the compon
 interaction and accessibility checks after an edit. A changed source invalidates
 an outstanding review and must be captured again.
 
+Run the CLI and Figma Desktop on the same machine; the runner connects over localhost.
 You need Node 20.19.4, Docker running, Figma Desktop, and a local font file for a
-font also installed in Figma. The sample uses this repository's Checkbox source,
+font also installed in Figma. Font versions affect text metrics; a family name alone
+is not a fidelity guarantee. The sample uses this repository's Checkbox source,
 tokens and build script. The npm tarball includes its profile, not those source
 files; run these commands from this source checkout's root after `npm ci`:
 
@@ -41,7 +43,10 @@ In Figma Desktop, choose **Plugins → Development → Import plugin from manife
 and select `private/roundtrip-install/ds-contracts-sync-runner/manifest.json`.
 Open your writable Figma test file and run **DS Contracts Sync Runner** from the
 Development menu. This ZIP is the matching plugin build; the npm package alone
-does not install it.
+does not install it. If older development copies share this plugin name, remove
+those registrations in **Manage plugins in development** and run the newly imported
+copy. Keep their source folders. The Advanced tab's Diagnostics build stamp must match
+the one printed by `npm run plugin:zip`; an older stamp means an older copy is running.
 
 Edit `private/roundtrip-profile.json`: set `figma.fileKey` to that file's key from
 its URL and `capture.font.file` to your local Inter font file. Create the page
@@ -51,11 +56,24 @@ selectors and build commands; it does not infer missing tiers. For another
 library, supply a profile for that library's actual sources and stylesheet.
 Only use profiles you trust: `capture.build` runs their declared local commands.
 
+The sample declares `font.control.size.sm → font.size.200 → 14px` and binds both
+text parts to that semantic token. The primitive is in `tokens/primitives.tokens.json`;
+the semantic alias is in `tokens/semantic.tokens.json`. Each tier is declared in the
+profile; no component-level font token is invented. Font-size literals must be
+positive explicit `px` dimensions. Unitless numbers, `rem`, and expressions are refused.
+A size edit that also causes unmodeled reflow is refused; review its reported property.
+For a first font edit, open the sample's semantic collection in Figma's Variables
+table, right-click `font/control/size/sm`'s value and choose **Clear alias**. It retains `14`.
+Review must propose exactly `{font.size.200}` → `14px` in the semantic JSON.
+Then set that variable back to alias `font/size/200` in the sample's primitive
+collection and repeat the review/apply/sync steps. This exercises alias
+identity without changing text geometry. Run the component's behavior tests afterward.
+
 ```sh
 node "$DS_CONTRACTS_CLI" roundtrip start --profile private/roundtrip-profile.json --out private/roundtrip-session
 node "$DS_CONTRACTS_CLI" roundtrip sync --session private/roundtrip-session
 # In the plugin: Advanced → React to Figma runner → Connect and run.
-# Edit a bound color variable or its alias in Figma, then:
+# Edit a declared color or font-size variable (or its alias) in Figma, then:
 node "$DS_CONTRACTS_CLI" roundtrip sync --session private/roundtrip-session
 # Connect and run again; review the exact JSON edits and digest printed by the CLI.
 node "$DS_CONTRACTS_CLI" roundtrip apply --session private/roundtrip-session --digest <printed-digest>

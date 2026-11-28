@@ -6,6 +6,8 @@
   "component": {"id": "checkbox-checked", "name": "Checkbox — three tiers", "export": "Checkbox"},
   "architecture": {"roles": ["primitive", "semantic", "component"], "declaration": "Brand accent selection is semantic; component color tokens are stored in semantic.light.tokens.json."},
   "tokens": {
+    "font.size.200": {"file": "tokens/primitives.tokens.json", "tier": "primitive", "scopes": ["FONT_SIZE"]},
+    "font.control.size.sm": {"file": "tokens/semantic.tokens.json", "tier": "semantic", "scopes": ["FONT_SIZE"]},
     "color.blue.600": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
     "color.blue.700": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
     "color.white": {"file": "tokens/primitives.tokens.json", "tier": "primitive"},
@@ -32,8 +34,8 @@
       "box": {"kind": "frame", "parent": "root", "order": 0, "element": "div", "selector": "#subject > label > span", "binds": {}, "sizing": ["fixed", "fixed"], "bindings": {"fill": "color.checkbox.checked.background", "stroke": "color.checkbox.checked.border"}},
       "glyph": {"kind": "frame", "parent": "box", "order": 0, "element": "div", "selector": "#subject > label > span > span", "binds": {}, "sizing": ["fixed", "fixed"]},
       "textCol": {"kind": "frame", "parent": "root", "order": 1, "element": "div", "selector": "#subject > label > div", "binds": {}, "sizing": ["fill", "hug"]},
-      "label": {"kind": "text", "parent": "textCol", "order": 0, "element": "span", "selector": "#subject > label > div > span:first-child", "binds": {"text": "Label"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.surface.foreground"}},
-      "description": {"kind": "text", "parent": "textCol", "order": 1, "element": "span", "selector": "#subject > label > div > span:last-child", "binds": {"text": "Description"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.text.secondary"}}
+      "label": {"kind": "text", "parent": "textCol", "order": 0, "element": "span", "selector": "#subject > label > div > span:first-child", "binds": {"text": "Label"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.surface.foreground", "font-size": "font.control.size.sm"}},
+      "description": {"kind": "text", "parent": "textCol", "order": 1, "element": "span", "selector": "#subject > label > div > span:last-child", "binds": {"text": "Description"}, "sizing": ["fill", "hug"], "bindings": {"color": "color.text.secondary", "font-size": "font.control.size.sm"}}
     }
   },
   "version": 1,
