@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { tokenValue } from "./token-value.mjs";
 import { writeFileSync, renameSync, unlinkSync, openSync, closeSync, statSync } from "node:fs";
 import path from "node:path";
 import { hash } from "./surface.mjs";
@@ -23,12 +24,24 @@ export function applyWriteback(plan, policy, expectedDigest) {
     let after = before;
     for (const e of plan.edits.filter((e) => e.file === f.file)) {
       if (!allowed(policy, e.file, e.path)) fail("unowned-token", e.id);
-      if (typeof e.after !== "string" || !/^#[\da-f]{6}$|^\{[\w.-]+\}$/i.test(e.after))
-        fail("unsupported-token-value", e.id);
+      if (typeof e.after !== "string") fail("unsupported-token-value", e.id);
+      if (!/^\{[\w.-]+\}$/.test(e.after)) {
+        const owner = policy.tokens.find((t) => t.file === e.file && JSON.stringify(t.path) === JSON.stringify(e.path));
+        try {
+          tokenValue(owner?.type ?? "color", e.after);
+        } catch {
+          fail("unsupported-token-value", e.id);
+        }
+      }
       after = patchJSON(after, e.path, e.before, e.after);
     }
     assert.equal(hash(after), f.afterSha256, "planned output differs");
-    prepared.push({ file, before, after, temp: file + ".ds-contracts-writeback" });
+    prepared.push({
+      file,
+      before,
+      after,
+      temp: file + ".ds-contracts-writeback",
+    });
   }
   equal(
     [...new Set(plan.edits.map((e) => e.file))].sort(),
@@ -58,7 +71,11 @@ export function applyWriteback(plan, policy, expectedDigest) {
       try {
         if (read(p.file) === p.after) writeFileSync(p.file, p.before);
       } catch (rollback) {
-        failures.push(new Error(`rollback failed for ${p.file}: ${rollback.message}`, { cause: rollback }));
+        failures.push(
+          new Error(`rollback failed for ${p.file}: ${rollback.message}`, {
+            cause: rollback,
+          }),
+        );
       }
     }
     if (failures.length)

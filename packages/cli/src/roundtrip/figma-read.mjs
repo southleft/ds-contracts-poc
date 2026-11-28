@@ -1,5 +1,5 @@
 export async function readNative(context) {
-  const { B, parent, board, collections, vars, components, tokenFor, paints, stable, hex } = context;
+  const { B, parent, board, collections, vars, components, tokenFor, paints, stable, hex, tokenValue, sourceTokens } = context;
   if (!board) return null;
   const set = components[B.root],
     variants = [];
@@ -69,13 +69,25 @@ export async function readNative(context) {
           "letter-spacing": n.letterSpacing.value,
           color: hex(paints(n)[0].color),
           "text-align": n.textAlignHorizontal.toLowerCase(),
-          "text-case": { ORIGINAL: "original", UPPER: "upper", LOWER: "lower", TITLE: "title" }[n.textCase],
+          "text-case": {
+            ORIGINAL: "original",
+            UPPER: "upper",
+            LOWER: "lower",
+            TITLE: "title",
+          }[n.textCase],
           "text-decoration": n.textDecoration.toLowerCase(),
           positioning: "flow",
           "width-sizing": n.layoutSizingHorizontal.toLowerCase(),
           "height-sizing": n.layoutSizingVertical.toLowerCase(),
         });
         tokens.color = tokenFor(paints(n)[0].boundVariables?.color);
+        const size = n.boundVariables?.fontSize;
+        if (size !== undefined) {
+          const aliases = Array.isArray(size) ? size : [size],
+            id = aliases.length === 1 && aliases[0]?.type === "VARIABLE_ALIAS" ? tokenFor(aliases[0]) : null;
+          if (!id || B.system.tokens[id]?.type !== "dimension") throw Error("unsupported native font-size binding");
+          tokens["font-size"] = id;
+        }
       } else
         Object.assign(styles, {
           layout: n.layoutMode === "HORIZONTAL" ? "row" : "column",
@@ -96,7 +108,11 @@ export async function readNative(context) {
         tokens.fill = tokenFor(paints(n)[0]?.boundVariables?.color);
         tokens.stroke = tokenFor(n.strokes[0]?.boundVariables?.color);
       }
-      parts[part] = { id: n.id, styles, tokens: Object.fromEntries(Object.entries(tokens).filter(([, v]) => v)) };
+      parts[part] = {
+        id: n.id,
+        styles,
+        tokens: Object.fromEntries(Object.entries(tokens).filter(([, v]) => v)),
+      };
       if (parent.instances[part]) {
         if (n.children.length !== 1 || n.children[0].type !== "INSTANCE")
           throw Error("missing component instance: " + part);
@@ -146,13 +162,22 @@ export async function readNative(context) {
   for (const [id, v] of Object.entries(vars)) {
     const c = collections[B.system.tokens[id].tier],
       value = v.valuesByMode[c.defaultModeId];
+    const token = B.system.tokens[id];
+    if (v.resolvedType !== (token.type === "dimension" ? "FLOAT" : "COLOR"))
+      throw Error("native variable type changed: " + id);
+    const literal = () => {
+      if (token.type !== "dimension") return hex(value);
+      const original = sourceTokens?.[id]?.value ?? token.value;
+      return original !== undefined && tokenValue(token.type, original, "native") === value
+        ? original : tokenValue(token.type, value, "source");
+    };
     tokens[id] = {
       id: v.id,
       collection: c.id,
       mode: c.defaultModeId,
       scopes: v.scopes,
       codeSyntax: v.codeSyntax,
-      ...(value.type === "VARIABLE_ALIAS" ? { alias: tokenFor(value) } : { value: hex(value) }),
+      ...(value.type === "VARIABLE_ALIAS" ? { alias: tokenFor(value) } : { value: literal() }),
     };
   }
   return JSON.parse(
@@ -162,7 +187,10 @@ export async function readNative(context) {
       components: Object.fromEntries(
         Object.entries(components).map(([id, n]) => [
           id,
-          { id: n.id, revision: n.getSharedPluginData("ds_contracts_roundtrip_v1", "contract-revision") },
+          {
+            id: n.id,
+            revision: n.getSharedPluginData("ds_contracts_roundtrip_v1", "contract-revision"),
+          },
         ]),
       ),
       tokens,

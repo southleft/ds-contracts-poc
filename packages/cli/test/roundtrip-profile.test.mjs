@@ -107,3 +107,20 @@ test("typed axes retain their values but cannot collide after Figma string conve
   assert.doesNotThrow(() => inspectProfile(P, policy.root));
   assert.equal(P.appearance.variants[0].axes.state, false);
 });
+
+test("declared dimensions preserve spelling and cannot enter paint channels", (t) => {
+  const { P, policy, save } = profile(t);
+  save("size.json", { size: { $type: "dimension", $value: "14.10px" },
+    label: { $type: "dimension", $value: "{size}" } });
+  P.tokens.size = { tier: "primitive", file: "size.json" };
+  P.tokens.label = { tier: "semantic", file: "size.json" };
+  P.appearance.parts = { label: { kind: "text", bindings: { "font-size": "label" } } };
+  const B = inspectProfile(P, policy.root);
+  assert.equal(B.system.tokens.size.value, "14.10px");
+  assert.equal(B.system.tokens.label.alias, "size");
+  P.appearance.parts.label.bindings = { color: "label" };
+  assert.throws(() => inspectProfile(P, policy.root), /unsupported token binding/);
+  P.appearance.parts.label.bindings = { "font-size": "label" };
+  P.instances.icon.colorToken = "label";
+  assert.throws(() => inspectProfile(P, policy.root), /token-binding-type-mismatch/);
+});

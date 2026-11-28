@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { tokenValue, bindingType } from './token-value.mjs';
 import { readFileSync } from 'node:fs';
 import { parseTree, findNodeAtLocation } from 'jsonc-parser';
 
@@ -48,7 +49,16 @@ export function resolveBundle(B) {
     if (t.alias) {
       walkToken(t.alias);
       if (B.system.tokens[t.alias]?.type !== t.type) gaps.push({ code: 'token-type-mismatch', id });
-    } else if (!/^#[\da-f]{6}$/i.test(t.value ?? '')) gaps.push({ code: 'unsupported-color', id });
+    } else {
+      try {
+        tokenValue(t.type, t.value);
+      } catch {
+        gaps.push({
+          code: t.type === 'color' ? 'unsupported-color' : 'unsupported-token-value',
+          id,
+        });
+      }
+    }
     active.delete(id);
     seen.add(id);
     tokenOrder.push(id);
@@ -76,30 +86,58 @@ export function resolveBundle(B) {
     for (const d of c.requires ?? []) {
       walkComponent(d.id, id);
       if (B.components[d.id] && B.components[d.id].revision !== d.revision)
-        gaps.push({ code: 'dependency-revision-mismatch', id: d.id, requiredBy: id });
+        gaps.push({
+          code: 'dependency-revision-mismatch',
+          id: d.id,
+          requiredBy: id,
+        });
     }
     for (const s of Object.values(c.instances ?? {})) {
       if (!(c.requires ?? []).some((d) => d.id === s.component))
-        gaps.push({ code: 'undeclared-component-dependency', id: s.component, requiredBy: id });
+        gaps.push({
+          code: 'undeclared-component-dependency',
+          id: s.component,
+          requiredBy: id,
+        });
       walkToken(s.colorToken);
+      if (B.system.tokens[s.colorToken]?.type !== 'color')
+        gaps.push({
+          code: 'token-binding-type-mismatch',
+          id: s.colorToken,
+          requiredBy: id,
+        });
     }
     if (c.appearance)
       for (const p of Object.values(c.appearance.parts))
         for (const v of c.appearance.variants)
-          for (const cell of Object.values(values(p, v.axes))) if (cell.token) walkToken(cell.token);
+          for (const [field, cell] of Object.entries(values(p, v.axes)))
+            if (cell.token) {
+              walkToken(cell.token);
+              if (bindingType(p.kind, field) !== B.system.tokens[cell.token]?.type)
+                gaps.push({
+                  code: 'token-binding-type-mismatch',
+                  id: cell.token,
+                  requiredBy: id,
+                });
+            }
     componentActive.delete(id);
     componentSeen.add(id);
     componentOrder.push(id);
   };
   walkComponent(B.root);
-  return { status: gaps.length ? 'blocked' : 'ready', gaps, tokenOrder, componentOrder };
+  return {
+    status: gaps.length ? 'blocked' : 'ready',
+    gaps,
+    tokenOrder,
+    componentOrder,
+  };
 }
 export function resolved(B, id, seen = new Set()) {
   assert(!seen.has(id), 'token cycle');
   seen.add(id);
   const t = B.system.tokens[id];
   assert(t, 'missing token ' + id);
-  return t.alias ? resolved(B, t.alias, seen) : t.value;
+  return t.alias ? resolved(B, t.alias, seen) : tokenValue(t.type, t.value);
 }
 export function seal(B) {
   B.system.revision = hash({
