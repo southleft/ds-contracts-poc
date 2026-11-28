@@ -2,6 +2,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "nod
 import { resolve, join } from "node:path";
 import { hash, canonical } from "../src/roundtrip/surface.mjs";
 import { seal } from "../src/roundtrip/model.mjs";
+import { planWriteback } from "../src/roundtrip/plan.mjs";
 
 export function fixture(t) {
   const base = resolve(process.cwd().endsWith("/packages/cli") ? "../../private" : "private", "roundtrip-tests");
@@ -71,5 +72,54 @@ export function fixture(t) {
     guards: ["tokens.json", "source.tsx"],
     inputs: [],
   };
-  return { B, before, after, policy, save, read };
+  return { dir, B, before, after, policy, save, read };
+}
+
+export function sessionFixture(t) {
+  const f = fixture(t);
+  f.B.components.parent.appearance = {
+    contract: "0.3",
+    component: { name: "Test", slug: "test" },
+    axes: [],
+    props: [],
+    variants: [{ key: "default", axes: {} }],
+    parts: {
+      root: { kind: "frame", parent: null, order: 0, styles: { layout: { base: { value: "row", token: null } } } },
+    },
+  };
+  seal(f.B);
+  f.policy.contractSha256 = hash(f.B);
+  const plan = planWriteback(f.B, f.before, f.after, f.policy);
+  const state = {
+    version: 1,
+    root: f.dir,
+    profile: {
+      system: { id: "test" },
+      component: { id: "parent" },
+      source: "source.tsx",
+      dependencies: {},
+      capture: { generated: ["generated.css"] },
+      tokens: {},
+      figma: { fileKey: "test-file", page: "Test", prefix: "Test" },
+    },
+    stage: "reviewed",
+    native: f.before,
+    reviewed: f.after,
+    policy: f.policy,
+    inputs: [],
+    bundle: f.B,
+  };
+  f.save("generated.css", "original generated");
+  f.save("bundle.json", f.B);
+  f.save("plan.json", plan);
+  f.save("session.json", state);
+  f.save("figma.js", "pending program");
+  const captureSource = async (_P, _root, out) => {
+    mkdirSync(out, { recursive: true });
+    writeFileSync(join(out, "source-inputs.json"), "[]");
+    const next = structuredClone(f.B);
+    next.system.tokens.primitive.value = "#abcdef";
+    return seal(next);
+  };
+  return { ...f, state, plan, captureSource, args: ["apply", "--session", f.dir, "--digest", plan.digest] };
 }
