@@ -667,18 +667,14 @@ jobs:
       # `file_variables:read`, which the user can fix in a minute — is reported
       # as such and not folded into the same silent degradation as every other
       # refusal, and that the split is narrow enough to refuse a decoy body.
-      - name: figma:rest:refusal:check (the scope 403 is not the plan 403)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run figma:rest:refusal:check
-
       # docs/23 §D.43 — a REST import follows its instances. Recorded CBDS bytes
       # and REST-shaped synthetic responses through an injected transport, no
       # network: transitive, cycle, remote, standalone, cap, deterministic order,
       # the byte-identical opt-out, and the propose CLI turning a refusing
       # closure child into a NAMED stub while a requested refusal still refuses.
-      - name: figma:rest:closure:check (the import follows its instances; what it cannot follow is named)
+      - name: figma:rest:refusal:check (permission refusals and dependency closure)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run figma:rest:closure:check
+        run: npm run figma:rest:refusal:check
 
       # CANVAS CENSUS (docs/23 §C.1.1 vocabulary; the owner's v1 bar, 2026-08-23):
       # the denominator is EVERY committed contract with a Figma script — the

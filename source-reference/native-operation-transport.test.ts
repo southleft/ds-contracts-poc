@@ -10,6 +10,8 @@ import path from "node:path";
 import { tmpdir } from "node:os";
 import vm from "node:vm";
 import test from "node:test";
+import {Readable} from 'node:stream';
+import {handleNativeRequest} from './native-http.js';
 import {
   createNativeOperationJobs,
   SOURCE_NATIVE_FILE_KEY,
@@ -24,6 +26,35 @@ import {
 import { comparisonFixture } from "../core/native-source-writer-test-fixture.js";
 import { prepareNativeTokenContext } from "../core/native-token-context.js";
 import { revisionOf } from "../core/contract-provenance.js";
+
+test('shared native HTTP boundary rejects foreign callers before resolving a journal or reading a body',async()=>{
+  for(const change of [{remote:'203.0.113.1'},{host:'foreign.example'},{origin:'https://foreign.example'},{authorization:'Bearer '+ '0'.repeat(64)}]){
+    let reads=0,resolved=0;const req=Readable.from((function*(){reads++;yield '{}'})());
+    Object.assign(req,{method:'POST',url:'/api/source-reference/native/00000000-0000-4000-8000-000000000001/claim',
+      socket:{remoteAddress:change.remote??'127.0.0.1'},headers:{host:change.host??'localhost:5181',origin:change.origin??'null','content-type':'application/json',authorization:change.authorization??'Bearer '+ 'a'.repeat(64)}});
+    const res={statusCode:0,setHeader(){},end(){}};
+    const context=await handleNativeRequest(req as any,res as any,()=>{resolved++;return {authorize(){throw Error('unauthorized')}} as any});
+    assert.equal(context,null);assert.equal(res.statusCode,403);assert.equal(reads,0);
+    assert.equal(resolved,change.authorization?1:0);
+  }
+});
+
+test('shared native HTTP boundary limits body sizes and keeps CORS restricted to native routes',async()=>{
+  const id='00000000-0000-4000-8000-000000000001';let calls=0;
+  const send=async(route:string,body:string,method='POST',origin='null')=>{
+    const req=Readable.from([body]);Object.assign(req,{method,url:'/api/source-reference/'+route,socket:{remoteAddress:'127.0.0.1'},headers:{host:'localhost:5181',origin,'content-type':'application/json',authorization:'Bearer '+'a'.repeat(64)}});
+    const headers:Record<string,string>={};const res={statusCode:0,setHeader(k:string,v:string){headers[k]=v},end(){}};
+    const context=await handleNativeRequest(req as any,res as any,()=>({authorize(){},claim(){calls++;return {status:'ready'}},begin(){calls++;return {status:'begun'}},acceptDelivery(){calls++;return {status:'result-recorded'}}}) as any);
+    return {context,headers,status:res.statusCode};
+  };
+  assert.equal((await send(`native/${id}/claim`,JSON.stringify({fileKey:'ExpectedFile',protocol:2}))).status,200);assert.equal(calls,1);
+  assert.equal((await send(`native/${id}/claim`,JSON.stringify({fileKey:'x'.repeat(2048)}))).status,409);assert.equal(calls,1);
+  assert.equal((await send(`native/${id}/result`,'x'.repeat(4*1024*1024+1))).status,409);assert.equal(calls,1);
+  assert.equal((await send(`native/${id}/claim`,'{}','GET')).status,405);
+  const preflight=await send(`native/${id}/claim`,'','OPTIONS');assert.equal(preflight.status,204);assert.equal(preflight.headers['Access-Control-Allow-Origin'],'null');
+  const other=await send('prepared-library/anything/native','{}');assert.equal(other.status,403);assert.equal(other.headers['Access-Control-Allow-Origin'],undefined);
+  const local=await send('prepared-library/anything/native','{}','POST','http://localhost:5181');assert.equal(local.context?.route,'prepared-library/anything/native');assert.equal(local.headers['Access-Control-Allow-Origin'],undefined);
+});
 
 const plugin = readFileSync(
   new URL("../figma-sync/plugin/code.js", import.meta.url),
