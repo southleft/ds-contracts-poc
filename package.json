@@ -291,7 +291,6 @@
     "benchmark:test": "node --import tsx --test scripts/benchmark-replay.test.ts scripts/figma-to-react.test.ts scripts/react-native-replay.test.ts scripts/benchmark-source-framing.test.ts",
     "benchmark:doc": "tsx scripts/benchmark-doc.ts",
     "benchmark:doc:check": "tsx scripts/benchmark-doc.ts --check",
-    "test:joint-text": "node --import tsx --test core/component-text-arguments.test.ts",
     "test:inside-stroke": "node --import tsx --test --test-concurrency=1 core/instance-inside-stroke.test.ts core/instance-inside-stroke-native.test.ts core/instance-inside-stroke-propose.test.ts extract/figma/root-stroke-observation.test.ts",
     "test:recipe": "node --import tsx --test recipe/css-box-shadow.test.ts recipe/f1-row-policy.test.ts recipe/figma-ir.test.ts recipe/figma-writer-runtime.test.ts"
   },
