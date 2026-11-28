@@ -16,13 +16,23 @@ import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 import {nativeBoundPaintColor} from './native-paint-observation.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'|{lineHeight:number;composed:boolean|'nested'|'repeated'}=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
+async function fixture(composed:boolean|'nested'|'repeated'|{lineHeight:number;composed:boolean|'nested'|'repeated';resolution?:unknown;authoredSibling?:boolean}=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path'|'stroke'|'affine', literalPaint=false, callerInk=false, callerStroke=false,arc:boolean|'CENTER'|'OUTSIDE'=false,textColor=false,rootPaint=false,ratio=false,drawn=false,inset:false|'stretch'|'fixed'=false,line:false|{cap:'NONE'|'ROUND'|'SQUARE';align:'INSIDE'|'CENTER'|'OUTSIDE'}=false,image=false,textAppearance=false,mixedStroke?:{width:number;color:string},visibility=false) {
+  const authoredSibling = typeof composed === 'object' && composed.authoredSibling;
+  const resolution = typeof composed === 'object' && Object.hasOwn(composed,'resolution') ? {value:composed.resolution} : undefined;
   const lineHeight = typeof composed === 'object' ? composed.lineHeight : undefined;
   if (typeof composed === 'object') composed = composed.composed;
   const host=nativeFixtureHost({instanceVariantSelection:true,consumerVariableModes:shapes==='stroke'||lineHeight!==undefined}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
   };
+  if(lineHeight !== undefined) {
+    const prototype=Object.getPrototypeOf(host.figma.currentPage),bind=prototype.setBoundVariable;
+    prototype.setBoundVariable=function(field:string,variable:any){
+      const result=bind.call(this,field,variable);
+      if(field==='lineHeight'&&variable){this.lineHeight={unit:'PIXELS',value:variable.resolveForConsumer(this).value};this.boundVariables.lineHeight=[{type:'VARIABLE_ALIAS',id:variable.id}];}
+      return result;
+    };
+  }
   const run=async(script:string)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma:host.figma,console},{timeout:5000})));
   const tokens={primitives:{ink:{$type:'color',$value:'#123456'},fade:{$type:'number',$value:0.5},
     weight:{$type:'number',$value:653},edge:{$type:'number',$value:1},otherEdge:{$type:'number',$value:1},...(callerInk?{callerInk:{$type:'color',$value:'#b51833'},drawingSize:{$type:'dimension',$value:'24px'}}:{})},
@@ -154,19 +164,25 @@ async function fixture(composed:boolean|'nested'|'repeated'|{lineHeight:number;c
     leaf.anatomy.root={layout:{display:'flex',direction:'column'},parts:{label:{text:'Label',textColorOverrideProp:'ink',literals:{color:'#aa0000','font-size':'14px'}},other:{text:'Other',literals:{color:'#00aa00','font-size':'14px'}}}};
     parent.anatomy.root={layout:{display:'flex'},parts:{plain:{component:{id:leaf.id}},colored:{component:{id:leaf.id,props:{ink:'#11223380'}}}}};
   }
-  if(textAppearance){
+  if(textAppearance||authoredSibling){
     const characters='Body\nLink';
     const runs=[{start:0,end:5},{start:5,end:9}].map((r,i)=>({...r,fontName:{family:'Inter',style:'Regular'},fontSize:14,fontWeight:400,lineHeight:{unit:'AUTO' as const},letterSpacing:{unit:'PIXELS' as const,value:0},textCase:'ORIGINAL' as const,textDecoration:'NONE' as const,fill:{paint:{color:{r:0,g:0,b:i},opacity:1,blendMode:'NORMAL' as const}}}));
+    if(textAppearance){
     leaf.props=[{name:'appearance',type:{enum:['observed']},bindings:{code:{prop:'appearance'},figma:{kind:'NONE'}}}];leaf.states=[];delete leaf.bindings.figma.statePreviews;
     leaf.anatomy.root={layout:{display:'flex',direction:'column'},parts:{label:{text:characters,literals:{color:'#aa0000','font-size':'14px',width:'232px'},textAppearanceOverride:{prop:'appearance',choices:{observed:{characters,runs}}}}}};
     parent.anatomy.root={layout:{display:'flex'},parts:{plain:{component:{id:leaf.id}},colored:{component:{id:leaf.id,props:{appearance:'observed'}}}}};
+    }else leaf.anatomy.root.parts!.authored={text:characters,declared:{'font-family':'Inter'},literals:{'font-size':'14px'},textAppearanceByCombination:{props:[],rows:[{values:[],appearance:{characters,runs}}]}};
     // The host does not model native styled ranges. Mirror only the measured
     // range APIs here; actual Plugin API behavior has separate live evidence.
     const proto=Object.getPrototypeOf(host.figma.currentPage);
+    if(authoredSibling){
+      (host.figma as any).getFontFamilyVariationAxes=()=>null;
+      Object.defineProperty(proto,'fontWeight',{configurable:true,get(){return this._weight??(this.fontName?.style==='Regular'?400:500);},set(value){this._weight=value;}});
+    }
     const clone=proto._cloneForInstance;proto._cloneForInstance=function(){const n=clone.call(this);if(this.type==='TEXT')n.textAutoResize=this.textAutoResize;return n;};
     for(const name of ['FontName','FontSize','LineHeight','LetterSpacing','TextCase','TextDecoration','Fills'])proto['setRange'+name]=function(start:number,end:number,value:any){
       const rows=this._appearanceRows??(this._appearanceRows=new Map());
-      const row=rows.get(start)??{start,end,characters:this.characters.slice(start,end),fontWeight:400};
+      const row=rows.get(start)??{start,end,characters:this.characters.slice(start,end),fontWeight:400,...Object.fromEntries(['fontName','fontSize','lineHeight','letterSpacing','textCase','textDecoration','fills'].map(field=>[field,this[field]]))};
       row[name[0].toLowerCase()+name.slice(1)]=structuredClone(value);rows.set(start,row);
     };
     proto.getStyledTextSegments=function(this:any,_fields:unknown,start=0,end=this.characters.length){
@@ -241,6 +257,7 @@ async function fixture(composed:boolean|'nested'|'repeated'|{lineHeight:number;c
   assert.equal(allocated.status,'created-candidate',JSON.stringify(allocated));
   const observed=await run(emitNativeTokenContextReadbackScript(tokenInput,allocated.creationIdentity));
   const context={operation,tokens:{input:tokenInput,identity:allocated.creationIdentity,receipt:observed.receipt}};
+  if(resolution){const v:any=await host.figma.variables.getVariableByIdAsync(allocated.creationIdentity.variables.find((v:any)=>v.tokenPath==='lineHeight').id);const resolve=v.resolveForConsumer.bind(v);v.resolveForConsumer=(node:any)=>node?.type==='TEXT'?resolution.value:resolve(node);}
   const script=engine.buildNativePreparedLibraryScript(root,byId,source,context),creation=await run(script);
   assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
   assert.equal(JSON.stringify([...byId.values()]),before,'original anchors and contracts remain exact');
@@ -1036,4 +1053,28 @@ test('prepared visibility target keeps existing visibleProp precedence for an ex
  node.values.visible=true;
  const result=verifyNativePreparedLibraryReadback(input,receipt);
  assert.equal(result.status,'refused');assert(JSON.stringify(result).includes('native-library-observation-instance-visibility'));
+});
+
+test('ordinary text retains its alias beside an authored-range sibling',async()=>{
+  const f=await fixture({lineHeight:24,composed:false,authoredSibling:true});
+  const id=f.input.tokenIdentity.variables.find(v=>v.tokenPath==='lineHeight')!.id;
+  const ordinary=f.receipt.nodes.filter((n:any)=>n.type==='TEXT'&&!n.metadata?.authoredTextAppearance);
+  assert(ordinary.length>0);
+  for(const n of ordinary)assert.deepEqual(n.values.boundVariables.lineHeight,[{type:'VARIABLE_ALIAS',id}]);
+  const styled=f.receipt.nodes.filter((n:any)=>n.type==='TEXT'&&n.metadata?.authoredTextAppearance);
+  assert(styled.length>0,'the authored-range writer path must actually execute');
+  assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed');
+});
+for(const composed of [false,true]) test('writer binds declared pixel line height through dependency='+composed,async()=>{
+  const f=await fixture({lineHeight:24,composed});
+  assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed');
+  const id=f.input.tokenIdentity.variables.find(v=>v.tokenPath==='lineHeight')!.id;
+  for(const n of f.receipt.nodes.filter((n:any)=>n.type==='TEXT')){
+    assert.deepEqual(n.values.boundVariables.lineHeight,[{type:'VARIABLE_ALIAS',id}]);
+    assert.deepEqual(n.values.lineHeight,{unit:'PIXELS',value:24});
+  }
+});
+test('writer refuses unresolved, nonfinite and stale line-height values',async()=>{
+  for(const resolution of [undefined,{value:NaN},{value:Infinity},{value:25},{value:'24'}])
+    await assert.rejects(fixture({lineHeight:24,composed:false,resolution}),/native-line-height-value-mismatch/);
 });
